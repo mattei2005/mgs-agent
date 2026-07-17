@@ -35,13 +35,13 @@ systemctl reset-failed zeus-gateway.service || true
 systemctl start zeus-gateway.service
 sleep 18
 log "SERVICE STATUS"
-systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service \
+systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service \
   -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager
 repo=/root/.hermes/hermes-agent
 head=$(git -C "$repo" rev-parse --short HEAD)
 origin=$(git -C "$repo" rev-parse --short origin/main)
 behind=$(git -C "$repo" rev-list --count HEAD..origin/main)
-services=$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service | paste -sd ',')
+services=$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service | paste -sd ',')
 if [[ "$services" == "active,active,active,active" ]]; then
   status="✅ Hermes update finalizado"
 else

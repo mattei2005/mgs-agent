@@ -45,14 +45,14 @@ log "START post reboot health"
 # Give network/gateways a little time after boot.
 sleep 45
 
-services_raw="$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service cron 2>&1 || true)"
+services_raw="$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service mgs-autocommit.service cron 2>&1 || true)"
 services_csv="$(printf '%s\n' "$services_raw" | paste -sd ',')"
 log "services=$services_csv"
 
 # Allow a second service settle window if any agent is not active yet.
-if [[ "$services_csv" != "active,active,active,active,active,active" ]]; then
+if [[ "$services_csv" != "active,active,active,active,active" ]]; then
   sleep 30
-  services_raw="$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service cron 2>&1 || true)"
+  services_raw="$(systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service mgs-autocommit.service cron 2>&1 || true)"
   services_csv="$(printf '%s\n' "$services_raw" | paste -sd ',')"
   log "services_after_wait=$services_csv"
 fi
@@ -90,7 +90,7 @@ if "$py" -m py_compile \
   py_status="OK"
 fi
 
-if [[ "$services_csv" == "active,active,active,active,active,active" && "$patch_status" == "OK" && "$py_status" == "OK" && "$reboot_required" == "no" ]]; then
+if [[ "$services_csv" == "active,active,active,active,active" && "$patch_status" == "OK" && "$py_status" == "OK" && "$reboot_required" == "no" ]]; then
   title="✅ Reboot VPS concluído e validado"
 else
   title="⚠️ Reboot VPS concluído com pendência"
@@ -100,7 +100,7 @@ body="\`\`\`text
 Boot: $boot_time
 Kernel: $kernel
 Reboot required: $reboot_required
-Serviços zeus/atena/ares/hera/autocommit/cron: $services_csv
+Serviços zeus/atena/ares/autocommit/cron: $services_csv
 Hermes: $hermes_version
 HEAD/origin/behind: $head / $origin / $behind
 Node/npm/Codex/Corepack: $node_version / $npm_version / $codex_version / $corepack_version

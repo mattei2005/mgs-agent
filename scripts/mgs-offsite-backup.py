@@ -49,7 +49,6 @@ GLOBAL_SKIP_DIRS = {
 }
 DATA_SKIP_PREFIXES = {
     "data/generated",
-    "data/hera",
     "data/ares/creative-inventory",
     "data/ares/creative-ops/ready",
     "data/ares/creative-ops/raw",

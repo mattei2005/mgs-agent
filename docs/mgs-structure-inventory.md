@@ -1,6 +1,6 @@
 # Inventário Classificado — MGS OS
 
-> Status: inventário v0.3 — unificação Hera → Ares  
+> Status: inventário v0.4 — Ares unificado  
 > Data original: 2026-06-07 01:28 EDT; atualização: 2026-07-12  
 > Escopo: `/root/mgs-agent`  
 > Regra: este documento classifica a estrutura e registra a migração autorizada; runtime real e manifests vencem para estado técnico.
@@ -15,12 +15,11 @@ Atualização estrutural de 2026-07-12:
 Componente                              Estado atual
 --------------------------------------  ---------------------------------------------------------
 Ares                                    agente ativo unificado Creative Ops + Growth/Media Buying
-Hera                                    inativa; profile/dados/canal/unit preservados para rollback
-data/ares/creative-ops/                  cópia validada dos dados Hera + inventário unificado
+data/ares/creative-ops/                  dados e inventário unificado de Creative Operations
 profiles/ares-skills/growth/             Creative Ops, taxonomia, Meta Library e Campaign Ops
 scripts/ares-meta-library-*              runtime criativo migrado para Ares
 browser-profiles Ares                    Meta Library/YouTube copiados com origem preservada
-authorized-users.json                    7 usuários permanentes no Ares; Hera sem usuários ativos
+authorized-users.json                    7 usuários permanentes no Ares
 ```
 
 O snapshot de contagens abaixo é histórico de 2026-06-07 e não deve ser usado como contagem atual.
@@ -80,7 +79,6 @@ context/routes.md                         canônico      Executive / MGS OS     
 context/sources-of-truth.md               canônico      Executive / MGS OS          auditado      manter
 context/permissions-matrix.md             canônico      Security / Access           auditado      manter
 context/ares-operational-map.md           canônico      Creative + Growth / Ares     ativo         fonte operacional HOT
-context/hera-creative-agent.md            histórico     Creative / Hera              arquivado     rollback/auditoria; não rotear
 context/company.md                        canônico      Empresa                    legado ativo   revisar em bloco conceitual
 context/sites.md                          canônico      Sites / Verticais           legado ativo   revisar em bloco conceitual
 context/team.md                           canônico      Equipe / Access             legado ativo   revisar em bloco conceitual
@@ -107,9 +105,6 @@ profiles/atena-skills/                    skill         Content / Atena         
 profiles/ares-soul.md                     config        Growth / Ares               ativo         revisar quando Ares avançar
 profiles/ares-config.yaml                 config        Growth / Ares               ativo         não tocar sem plano Hermes
 profiles/ares-skills/                     skill         Growth / Ares               ativo         manter
-profiles/hera-soul.md                     config        Creative / Hera             novo/ativo    manter; revisar após testes controlados
-profiles/hera-config.yaml                 config        Creative / Hera             novo/ativo    não tocar sem plano Hermes
-profiles/hera-skills/                     skill         Creative / Hera             novo/ativo    manter; revisar após testes
 profiles/*bak*                            backup        Agents / Hermes             histórico     manter por enquanto
 ```
 
@@ -202,7 +197,7 @@ api/                                      runtime/API   Tech / Content          
 api/generate-rec-api.py                   runtime/API   Content / WordPress         ativo         não tocar agora
 api/usage.db                              runtime       API                         ativo         não tocar
 tools/                                    ferramenta    Tech / Creative             auxiliar      revisar quando necessário
-tools/canva-local-automation/             ferramenta    Creative / Hera             auxiliar      revisar antes de usar
+tools/canva-local-automation/             ferramenta    Creative / Ares             auxiliar      revisar antes de usar
 ```
 
 ---
@@ -279,7 +274,6 @@ Ordem   Bloco                         Motivo
 5       context/processes.md           Consolidar rotas operacionais revisadas.
 6       context/sites.md               Revisar sites/verticais depois do modelo de áreas.
 7       docs/CRONS.md                  Revisar inventário de crons sem alterar crontab.
-8       profiles/hera-*                Revisar depois de teste controlado da Hera.
 9       profiles/ares-*                Revisar quando Ares avançar operacionalmente.
 10      backups/                       Arquivar/limpar só após política aprovada.
 ```

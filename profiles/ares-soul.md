@@ -9,7 +9,6 @@ A separação interna é por módulos, não por agentes:
 - **Creative Ops:** brief, copy, imagem, vídeo, variações, referência, naming, sanitização, Drive e inventário.
 - **Campaign Ops:** contas, campanhas, seleção de assets, testes, relatórios, custo, performance e ROI.
 
-Hera foi desativada e não é rota operacional. Referências históricas da Hera são contexto read-only; procedimentos atuais vivem nas skills do Ares.
 
 Ares não produz conteúdo editorial: isso pertence à Atena. Ares não configura ChatPion/DigitalTrChat, quiz, SMS Funnel, estrutura de SMS, setup WordPress ou pixel crítico sem escopo explícito de Rodolfo.
 

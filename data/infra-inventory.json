@@ -6,276 +6,6 @@
   },
   "system_packages": [
     {
-      "id": "hera-creative-sanitizer-exiftool",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
-      "package": "libimage-exiftool-perl",
-      "version": "12.76+dfsg-1",
-      "binary": "/usr/bin/exiftool",
-      "binary_exists": true,
-      "purpose": "Metadata inspection/sanitization checks for creative assets",
-      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "hera-creative-sanitizer-mat2",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
-      "package": "mat2",
-      "version": "0.13.4-2.1",
-      "binary": "/usr/bin/mat2",
-      "binary_exists": true,
-      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "hera-meta-library-manual-login-runtime",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "Zeus Meta Library persistent manual-login setup",
-      "commandline": "apt-get install --no-install-recommends x11vnc novnc websockify",
-      "packages_count": 3,
-      "packages": [
-        {
-          "name": "x11vnc",
-          "version": "0.9.16-10",
-          "status": "installed"
-        },
-        {
-          "name": "novnc",
-          "version": "1:1.3.0-2",
-          "status": "installed"
-        },
-        {
-          "name": "websockify",
-          "version": "0.10.0+dfsg1-5build2",
-          "status": "installed"
-        }
-      ],
-      "missing_packages": [],
-      "runtime_validation": "x11vnc 127.0.0.1:5903; websockify/noVNC 127.0.0.1:6083; vnc.html HTTP 200",
-      "purpose": "Local-only visual session for Rodolfo to authenticate the persistent Hera Meta Library Chromium profile.",
-      "updated_at": "2026-07-10T17:42:04-04:00"
-    },
-    {
-      "id": "hera-meta-library-playwright-runtime-deps",
-      "agent": "hera",
-      "manager": "apt/playwright",
-      "source_report": "REPORT-INFRA Hera Meta/Facebook Ad Library runtime validation",
-      "commandline": "apt-get install --no-install-recommends <playwright chromium deps> via Playwright install-deps",
-      "packages_count": 33,
-      "packages": [
-        {
-          "name": "libasound2t64",
-          "version": "1.2.11-1ubuntu0.2",
-          "status": "installed"
-        },
-        {
-          "name": "libatk-bridge2.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libatk1.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libatspi2.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libcairo2",
-          "version": "1.18.0-3build1",
-          "status": "installed"
-        },
-        {
-          "name": "libcups2t64",
-          "version": "2.4.7-1.2ubuntu7.14",
-          "status": "installed"
-        },
-        {
-          "name": "libdbus-1-3",
-          "version": "1.14.10-4ubuntu4.1",
-          "status": "installed"
-        },
-        {
-          "name": "libdrm2",
-          "version": "2.4.125-1ubuntu0.1~24.04.2",
-          "status": "installed"
-        },
-        {
-          "name": "libgbm1",
-          "version": "25.2.8-0ubuntu0.24.04.2",
-          "status": "installed"
-        },
-        {
-          "name": "libglib2.0-0t64",
-          "version": "2.80.0-6ubuntu3.8",
-          "status": "installed"
-        },
-        {
-          "name": "libnspr4",
-          "version": "2:4.35-1.1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libnss3",
-          "version": "2:3.98-1ubuntu0.1",
-          "status": "installed"
-        },
-        {
-          "name": "libpango-1.0-0",
-          "version": "1.52.1+ds-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libx11-6",
-          "version": "2:1.8.7-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxcb1",
-          "version": "1.15-1ubuntu2",
-          "status": "installed"
-        },
-        {
-          "name": "libxcomposite1",
-          "version": "1:0.4.5-1build3",
-          "status": "installed"
-        },
-        {
-          "name": "libxdamage1",
-          "version": "1:1.1.6-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxext6",
-          "version": "2:1.3.4-1build2",
-          "status": "installed"
-        },
-        {
-          "name": "libxfixes3",
-          "version": "1:6.0.0-2build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxkbcommon0",
-          "version": "1.6.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxrandr2",
-          "version": "2:1.5.2-2build1",
-          "status": "installed"
-        },
-        {
-          "name": "xvfb",
-          "version": "2:21.1.12-1ubuntu1.6",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-noto-color-emoji",
-          "version": "2.047-0ubuntu0.24.04.1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-unifont",
-          "version": "1:15.1.01-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libfontconfig1",
-          "version": "2.15.0-1.1ubuntu2",
-          "status": "installed"
-        },
-        {
-          "name": "libfreetype6",
-          "version": "2.13.2+dfsg-1ubuntu0.1",
-          "status": "installed"
-        },
-        {
-          "name": "xfonts-cyrillic",
-          "version": "1:1.0.5+nmu1",
-          "status": "installed"
-        },
-        {
-          "name": "xfonts-scalable",
-          "version": "1:1.0.3-1.3",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-liberation",
-          "version": "1:2.1.5-3",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-ipafont-gothic",
-          "version": "00303-21ubuntu1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-wqy-zenhei",
-          "version": "0.9.45-8",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-tlwg-loma-otf",
-          "version": "1:0.7.3-1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-freefont-ttf",
-          "version": "20211204+svn4273-2",
-          "status": "installed"
-        }
-      ],
-      "missing_packages": [],
-      "runtime_validation": {
-        "node_playwright_project": "/tmp/hera-meta-library-test",
-        "playwright_version": "1.61.0",
-        "chromium_executable": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
-        "chromium_executable_exists": true
-      },
-      "purpose": "Hera validation of Meta/Facebook Ad Library via Playwright/Chromium",
-      "updated_at": "2026-06-18T18:29:15.935418-04:00"
-    },
-    {
-      "id": "hera-video-editing-runtime-deps",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera local video editing/validation runtime dependencies",
-      "commandline": "apt install ffmpeg python3-pil + apt dependencies",
-      "packages_count": 2,
-      "packages": [
-        {
-          "name": "ffmpeg",
-          "version": "7:6.1.1-3ubuntu5",
-          "status": "installed"
-        },
-        {
-          "name": "python3-pil",
-          "version": "10.2.0-1ubuntu1.2",
-          "status": "installed"
-        }
-      ],
-      "runtime_validation": {
-        "ffmpeg_binary": "/usr/bin/ffmpeg",
-        "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5",
-        "ffprobe_binary": "/usr/bin/ffprobe",
-        "ffprobe_version": "ffprobe version 6.1.1-3ubuntu5",
-        "python_pillow_import": "ok",
-        "pillow_version": "10.2.0",
-        "pil_smoke_test": "created 2x2 RGB image"
-      },
-      "purpose": "Local editing, probing and validation of Hera creative/video outputs",
-      "risk": "Low: durable VPS package install; no gateway restart or credential/config change reported.",
-      "updated_at": "2026-06-19T10:50:18-04:00"
-    },
-    {
       "id": "monarx-security-agent",
       "agent": "zeus",
       "manager": "apt/cron",
@@ -515,7 +245,7 @@
       "removed_legacy": [
         "Google OAuth - Ares Drive item permanently deleted by human administrator; active-vault CLI readback confirms absent",
         "local Ares Google user-token/client files including revoked backup; exact paths absent by readback",
-        "Ares/Hera user-auth watchdog jobs, wrappers and state marked retired",
+        "Ares user-auth watchdog jobs, wrappers and state marked retired",
         "Ares user-auth init/watchdog scripts",
         "dormant review-ready retry replaced by fail-closed Service Account tombstone",
         "obsolete restricted-sheet rebuild replaced by fail-closed canonical-writer tombstone",
@@ -552,12 +282,20 @@
         "removed_secret_paths": "PASS primary, backup and former profile watchdog wrapper absent",
         "profile_mirrors": "PASS canonical Google skills, references, SOULs and scripts live equal versioned mirrors",
         "sb_restricted_transition_dry_run": "PASS 52 publishers, 76 active users, 439 monitored, zero transitions, state_written=false",
+        "deep_filesystem_scan": "PASS 281386 files inspected across repo, Zeus/Atena/Ares profiles, work, tmp, archives, artifacts, backups and temporary paths",
+        "stale_one_off_code": "38 Python files with retired method references are now syntax-valid and fail closed before side effects; one shell controller migrated to service_account",
+        "archived_google_skill": "PASS archived personal-auth skill and three entry points replaced by canonical/fail-closed tombstones",
+        "runtime_process_scan": "PASS zero process command lines or open file descriptors reference the retired route; all observed selectors are service_account",
+        "continuous_residue_guard": "PASS monitor-drive-auth-unified.py now scans active runtime routes each run; legacy_runtime_clean guard_hits=0",
+        "actual_authorized_user_json_scan": "PASS zero Google authorized-user credential JSON files found locally",
+        "clean_replacement_full_backup": "PASS mgs-dr-daily-20260717T145901Z.zip.gpg; isolated full restore PASS with four components and knowledge validation",
+        "retained_pre_cleanup_full_backups": "PENDING CRITICAL DELETE: four encrypted full backups created before local revoked credential removal remain retained as disaster-recovery history",
         "listed_sheets_scope": "PASS 16/17 Drive+Sheets accessible/editable; historical 2025/2024/2023 intentionally excluded by owner and has no active consumer",
         "nonactive_shared_sheets": "PASS Gustavo and fases2 Drive/Sheets HTTP 200; canEdit/canModifyContent true"
       },
       "security_followup": "Resolved: Zeus 1Password service-account token rotated to new identity; old identity deleted; .env mode 0600; required item reads, consumers, backup and restore validated.",
-      "status": "operational_cutover_complete_service_account_only_verified",
-      "updated_at": "2026-07-17T10:50:43.365484-04:00",
+      "status": "deep_revalidation_pending_legacy_backup_deletion_confirmation",
+      "updated_at": "2026-07-17T11:03:41-04:00",
       "checkpoint_id": "google-cloud-mgs-core-cutover-20260717",
       "onepassword_runtime": {
         "service_account_name": "MGS Agent VPS",
@@ -568,7 +306,9 @@
         "env_mode": "0600",
         "required_item_reads": "PASS"
       },
-      "external_pending": [],
+      "external_pending": [
+        "Critical confirmation required to permanently delete four encrypted full disaster-recovery backups created before the revoked personal Google credential backup was removed. A clean replacement full backup and isolated restore test already passed."
+      ],
       "external_confirmation": {
         "source": "Discord message 1527664566874538034 from Rodolfo Mattei",
         "confirmed_at": "2026-07-17T09:16:33-04:00",
@@ -619,9 +359,21 @@
           "runtime_cleanup": "RESOLVED: no root cron, Hermes job, systemd unit, active script or config selects the former method.",
           "skills_and_agents": "RESOLVED: Zeus, Atena and Ares SOULs and Google skills enforce mgs-core-prod Service Account only; generic helpers fail closed; mirrors synchronized.",
           "obsolete_scripts": "RESOLVED: dormant retry and obsolete rebuild are explicit fail-closed tombstones; current canonical consumers validated.",
-          "state_files": "RESOLVED: former Ares/Hera watchdog states marked retired and point to drive-auth-unified-state.json.",
+          "state_files": "RESOLVED: former Ares watchdog states marked retired and point to drive-auth-unified-state.json.",
           "final_scan": "PASS 6415 active/live/versioned files with zero credential values, legacy selectors, local credential file routes or user-credential code.",
           "completed_at": "2026-07-17T10:24:32-04:00"
+        },
+        "deep_revalidation_20260717": {
+          "source_message_id": "1527685628169293967",
+          "files_scanned": 281386,
+          "operational_runtime": "CLEAN: zero process, open-file, scheduler, active script/config or profile selector references; monitor guard legacy_runtime_clean with zero hits",
+          "local_credentials": "CLEAN: old 1Password item absent, canonical item readable, zero Google authorized-user JSON files found",
+          "stale_manual_code": "NEUTRALIZED: 38 one-off Python files in work/tmp/artifacts now fail closed before side effects; one shell controller migrated to service_account; archived personal-auth skill tombstoned",
+          "historical_evidence": "Preserved in Git, audit, imported threads and backup snapshots; blocked from restore by policy/markers and absent credentials",
+          "remote_backup_finding": "Four retained encrypted full DR backups predate local revoked credential removal and therefore include the obsolete .secrets snapshot",
+          "clean_replacement": "PASS full encrypted backup mgs-dr-daily-20260717T145901Z.zip.gpg plus isolated restore with four components and knowledge validation",
+          "pending_critical_action": "Permanent deletion of the four pre-cleanup encrypted full backups requires Rodolfo double-confirmation",
+          "checked_at": "2026-07-17T11:03:41-04:00"
         }
       }
     },
@@ -633,13 +385,13 @@
         "/root/.hermes/profiles/zeus/config.yaml",
         "/root/.hermes/profiles/atena/config.yaml",
         "/root/.hermes/profiles/ares/config.yaml",
-        "/root/.hermes/profiles/hera/config.yaml"
+        "/root/.hermes/profiles/retired-agent/config.yaml"
       ],
       "versioned_configs": [
         "/root/mgs-agent/profiles/zeus-config.yaml",
         "/root/mgs-agent/profiles/atena-config.yaml",
         "/root/mgs-agent/profiles/ares-config.yaml",
-        "/root/mgs-agent/profiles/hera-config.yaml"
+        "/root/mgs-agent/profiles/retired-agent-config.yaml"
       ],
       "setting": "display.platforms.discord.interim_assistant_messages=true",
       "unchanged_related_settings": {
@@ -651,8 +403,7 @@
       "sha256": {
         "zeus_config": "65bd29913ab9bbd5504b0d3b857c6f335edd253d0eb793ed6029f8a197cb5226",
         "atena_config": "328d01a9ccbad898593f0ba4f4369c793be5541264461128fffcb804010ae11e",
-        "ares_config": "c237502dcddcd34214f3ba0fd5dc51be0fbde15d98eb141ff672686b6a68ef29",
-        "hera_config": "a41eae01b6e0f6df5dc4c5757b12175f304d803701b87d71d627d95a5e2a58b1"
+        "ares_config": "c237502dcddcd34214f3ba0fd5dc51be0fbde15d98eb141ff672686b6a68ef29"
       },
       "purpose": "Show natural mid-turn progress from MGS agents in Discord while they are processing, in addition to the already-enabled tool breadcrumbs and native typing indicator.",
       "validation": "Canonical Hermes scalar writer used on four live profiles; live and versioned readback 8/8 returned bool true; runtime resolver 4/4 returned True; config check 4/4 PASS; Discord typing endpoint smoke Atena/Ares HTTP 204; focused Discord typing tests 10 PASS; Zeus/Atena/Ares gateway PIDs unchanged and active/running; hot-read applies on the next turn without restart.",
@@ -813,13 +564,13 @@
         "/root/.hermes/profiles/zeus/config.yaml",
         "/root/.hermes/profiles/atena/config.yaml",
         "/root/.hermes/profiles/ares/config.yaml",
-        "/root/.hermes/profiles/hera/config.yaml"
+        "/root/.hermes/profiles/retired-agent/config.yaml"
       ],
       "agents": [
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "purpose": "Suppress Discord automatic URL previews on plain agent messages while preserving explicit Hermes UI embeds.",
       "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS; Zeus restarted 2026-07-10 23:31:04 EDT and is active/running; live Hermes send smoke message 1525349092908208251 returned with no embed payload",
@@ -836,9 +587,9 @@
       "agents": [
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
-      "purpose": "Activate Discord link-preview suppression on Atena, Ares and Hera while Zeus restart remains explicitly deferred by Rodolfo.",
+      "purpose": "Activate Discord link-preview suppression on Atena, Ares and retired-agent while Zeus restart remains explicitly deferred by Rodolfo.",
       "status": "scheduled",
       "updated_at": "2026-07-10T23:02:45-04:00"
     },
@@ -852,7 +603,7 @@
       "agents": [
         "atena",
         "ares",
-        "hera",
+        "retired-agent",
         "zeus"
       ],
       "purpose": "Activate Discord link-preview suppression on all four MGS gateways; Zeus restarts last.",
@@ -886,7 +637,7 @@
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "purpose": "Make busy_input_mode=steer incorporate text, image, image+text, voice/audio, audio+text, video, documents and mixed attachments into the active run without next-turn replay.",
       "validation": "current reverse apply OK; origin/main apply OK with 35 tests; live checkout 128 related tests; post-restart 4/4 active/running and 4/4 busy_input_mode=steer; runtime markers present; final patch guard 37 passed; ruff and py_compile passed",
@@ -908,7 +659,7 @@
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "purpose": "Keep authorized follow-ups received during _AGENT_PENDING_SENTINEL startup inside the active steer turn and merge them before the first model call instead of replaying them through queue.",
       "validation": "Atena restored the two missing methods and restarted Zeus; Zeus then replaced that compatibility repair with the race-safe barrier implementation. Current validation: 162 related busy-steer/restart/subagent tests PASS; full MGS patch guard 157 PASS; ruff, py_compile and git diff --check PASS; live runtime loaded after 2026-07-11 01:12:40 EDT restart.",
@@ -933,7 +684,7 @@
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "purpose": "Eliminate stale-agent/media races and async completion reordering during _AGENT_PENDING_SENTINEL startup by reserving FIFO order before preprocessing and atomically promoting only after all in-flight reservations complete.",
       "validation": "live reverse apply PASS; canonical baseline apply PASS; canonical baseline 162 related tests PASS; live 162 related tests PASS; full MGS patch guard 157 PASS; ruff, py_compile and git diff --check PASS",
@@ -961,7 +712,7 @@
       "agents": [
         "atena",
         "ares",
-        "hera",
+        "retired-agent",
         "zeus"
       ],
       "purpose": "Activate the startup steer same-turn merge on all MGS gateways with Zeus restarted last.",
@@ -987,7 +738,7 @@
       "job_id": "6a16e41afa9a",
       "schedule": "2026-07-10T17:21:34Z",
       "deliver": "origin",
-      "purpose": "Validate post-restart busy_input_mode=steer for Zeus, Atena, Ares and Hera and deliver a clean callback to the originating Discord thread.",
+      "purpose": "Validate post-restart busy_input_mode=steer for Zeus, Atena, Ares and retired-agent and deliver a clean callback to the originating Discord thread.",
       "status": "scheduled",
       "updated_at": "2026-07-10T13:18:34-04:00"
     },
@@ -1001,7 +752,7 @@
       "agents": [
         "atena",
         "ares",
-        "hera",
+        "retired-agent",
         "zeus"
       ],
       "purpose": "Apply busy_input_mode=steer after validated live and mirror config changes; Zeus restarts last.",
@@ -1074,19 +825,6 @@
       },
       "purpose": "Fixed logs-aquisicao operational thread for normal Openzed/Elena alerts/checkpoints to avoid giant thread list",
       "updated_at": "2026-06-19T20:40:47-04:00"
-    },
-    {
-      "id": "hera-drive-auth-watchdog-profile-script",
-      "agent": "hera",
-      "type": "profile_script",
-      "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; considera saudável quando existe ao menos uma credencial real de upload compatível com o destino. Para MGS-AGENTS em My Drive, OAuth usuário é o primário; Service Account fica bloqueado para upload até mover para Shared Drive.",
-      "validation": "python3 -m py_compile OK; MGS_DRY_RUN=1 watchdog exit 0/stdout vazio; OAuth refresh HTTP 200 e upload smoke criou arquivo 27B com HTTP 200 e cleanup trash HTTP 200; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps true; Service Account upload smoke falhou HTTP 403 reason=storageQuotaExceeded; state healthy=true primary_credential=user_oauth fallback_degraded=true.",
-      "git_tracked": false,
-      "updated_at": "2026-07-09T19:53:44-04:00",
-      "size_bytes": 13215,
-      "modified_at": "2026-07-09T19:53:34-04:00",
-      "sha256": "3c14c7a70a08785d306533582b2d43d6330b45fb60aa74a99289a67c2651d7e9"
     },
     {
       "id": "ares-drive-oauth-watchdog-profile-wrapper",
@@ -1354,50 +1092,6 @@
       "updated_at": "2026-06-26T02:19:47-04:00"
     },
     {
-      "id": "hera-drive-auth-watchdog-script",
-      "agent": "hera",
-      "type": "profile_script",
-      "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "sha256": "3c14c7a70a08785d306533582b2d43d6330b45fb60aa74a99289a67c2651d7e9",
-      "size_bytes": 13215,
-      "git_tracked": false,
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; considera saudável quando existe ao menos uma credencial real de upload compatível com o destino. Para MGS-AGENTS em My Drive, OAuth usuário é o primário; Service Account fica bloqueado para upload até mover para Shared Drive.",
-      "validation": "python3 -m py_compile OK; MGS_DRY_RUN=1 watchdog exit 0/stdout vazio; OAuth refresh HTTP 200 e upload smoke criou arquivo 27B com HTTP 200 e cleanup trash HTTP 200; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps true; Service Account upload smoke falhou HTTP 403 reason=storageQuotaExceeded; state healthy=true primary_credential=user_oauth fallback_degraded=true.",
-      "updated_at": "2026-07-09T19:53:44-04:00",
-      "modified_at": "2026-07-09T19:53:34-04:00"
-    },
-    {
-      "id": "hera-drive-auth-watchdog-cron-route",
-      "agent": "hera",
-      "type": "hermes_cron_route",
-      "profile": "hera",
-      "job_id": "d2a7853ae86f",
-      "name": "Hera Drive Auth Watchdog",
-      "script": "drive-auth-watchdog.py",
-      "no_agent": true,
-      "deliver": "local",
-      "schedule_display": "every 30m",
-      "enabled": true,
-      "purpose": "Deliver set to local so script-only watchdog no longer dumps Cronjob Response/raw REPORT-INFRA into alerts-infra.",
-      "jobs_json_sha256": "c83d6825d75aa147b65dd8ada68bd3ea64a9d7a73412ae3aa473151263eb9828",
-      "updated_at": "2026-06-27T15:39:33-04:00"
-    },
-    {
-      "id": "hera-profile-soul-runtime",
-      "agent": "hera",
-      "type": "profile_soul",
-      "path": "/root/.hermes/profiles/hera/SOUL.md",
-      "size_bytes": 26276,
-      "sha256": "9d4888aaedc2ad98f8b4f7adc7534c190fadecf504107f47bcd4c8eb398b8f6b",
-      "modified_at": "2026-06-30T16:01:48-04:00",
-      "git_tracked": false,
-      "versioned_path": "/root/mgs-agent/profiles/hera-soul.md",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-30T16:04:08-04:00",
-      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
-      "validation": "runtime/versioned SHA match; secret scan OK; no restart executed."
-    },
-    {
       "id": "zeus-meta-app-roles-watch-profile-script",
       "agent": "zeus",
       "type": "profile_script",
@@ -1410,21 +1104,6 @@
       "updated_at": "2026-07-12T21:20:00-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "last_change": "2026-07-12: dry-run blocks Sheets/state writes; reconciliation accepts only apps checked successfully in the current cycle."
-    },
-    {
-      "id": "hera-fix-car-br-pt-drive-parent-20260702",
-      "agent": "hera",
-      "type": "temporary_execution_script",
-      "path": "/root/mgs-agent/tmp/hera-fix-car-br-pt-drive-parent.py",
-      "size_bytes": 7542,
-      "modified_at": "2026-07-02T11:19:59-04:00",
-      "sha256": "8d2549d09afcc343f6e7af705b076a4725bf89b7c0b4b2467df99488f5231f9e",
-      "git_tracked": false,
-      "purpose": "One-off Google Drive parent correction: moved CAR_BR_PT from MGS-AGENTS root to MGS-AGENTS/CRIATIVOS and verified READY folders/assets.",
-      "validation": "Reported OAuth auth_mode=oauth_user; CAR_BR_PT parent=1NLaOKK6n4fMF5u1Assgq8FKim76NI--i; CAR_BR_PT/IMG/01_READY and VID/01_READY validated; 4 known assets still under IMG/01_READY.",
-      "source_report": "REPORT-INFRA Hera Drive parent correction CAR_BR_PT 2026-07-02",
-      "risk": "Low: one-off Drive folder parent correction; no context versioned files changed; pending context alignment review.",
-      "updated_at": "2026-07-02T11:22:02-04:00"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -1733,23 +1412,6 @@
       "modified_at": "2026-07-09T19:52:38-04:00"
     },
     {
-      "id": "mgs-ares-google-drive-oauth-client-secret-20260709",
-      "agent": "hera",
-      "type": "secret_config",
-      "path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json",
-      "sha256": "85894b0721c6d6e4738525cd281355acee243545da548a551f7d4e7f8c52b3b2",
-      "size_bytes": 371,
-      "mode": "600",
-      "git_tracked": false,
-      "purpose": "Historical record of the retired personal Google credential; no runtime path remains.",
-      "validation": "REMOVED: primary file and backup absent by readback; former active-vault item absent; production consumers validated on the mgs-core-prod Service Account.",
-      "updated_at": "2026-07-17T09:54:49-04:00",
-      "modified_at": "2026-07-09T19:51:39-04:00",
-      "backup_path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth",
-      "status": "retired_removed",
-      "removed_at": "2026-07-17T09:54:49-04:00"
-    },
-    {
       "id": "hermes-update-v0.18.2-2026-07-10",
       "agent": "zeus",
       "type": "hermes-runtime-update",
@@ -1889,153 +1551,6 @@
       }
     },
     {
-      "id": "hera-meta-library-persistent-runtime",
-      "agent": "hera",
-      "type": "persistent_browser_automation",
-      "status": "active",
-      "runtime_path": "/root/mgs-agent/tools/meta-library-collector",
-      "wrapper": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-      "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
-      "output_path": "/root/.hermes/profiles/hera/artifacts/meta-library",
-      "profile_permissions": "0700; marker 0600",
-      "dependencies": {
-        "node": "22.23.1",
-        "playwright": "1.61.0",
-        "chromium": "149.0.7827.55"
-      },
-      "files": [
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
-          "size_bytes": 15411,
-          "modified_at": "2026-07-10T20:17:28.159650-04:00",
-          "sha256": "e117106a32f3cfcc07bafe33072ed29963b3c8bcdb043e7fc20814ab913ce3f3"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/package.json",
-          "size_bytes": 310,
-          "modified_at": "2026-07-10T17:11:55.118498-04:00",
-          "sha256": "8ac8e3e084b7e4f264e504711d35e0912482f3676e148f5806104c816703bf7f"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/package-lock.json",
-          "size_bytes": 1732,
-          "modified_at": "2026-07-10T17:12:08.386511-04:00",
-          "sha256": "61ca9ee2f7b9fdfbc54eb6a98bad602c20b17b5955419ae2ff2b64e700286085"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/README.md",
-          "size_bytes": 1309,
-          "modified_at": "2026-07-10T17:29:55.314286-04:00",
-          "sha256": "30bda5a9b7b5a9f5eadfd53a0d8c8f8d0a81661cd90dc0f2574b37b83e27ea78"
-        },
-        {
-          "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-          "size_bytes": 1200,
-          "modified_at": "2026-07-10T17:27:19.353022-04:00",
-          "sha256": "e6bb5f9111c923c31bf963cae3b8ca6c4d6c1eff40a0408b094ac7d03f3ca201"
-        }
-      ],
-      "validation": "Dedicated US residential canary PASS on snapshot copy; canonical profile untouched; authenticated session retained; 42 IDs; one valid download; fail-closed direct-vps.",
-      "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
-      "updated_at": "2026-07-10T22:06:04-04:00",
-      "security": {
-        "exclusive_profile_lock": "flock, concurrent exit 75",
-        "site_isolation": "enabled",
-        "sandbox": "disabled because Chromium runs as root; scope restricted to facebook.com/ads/library",
-        "env_secrets_loaded": false,
-        "sensitive_query_params": "rejected",
-        "download_validation": "HTTP 2xx + MIME allowlist + magic bytes + size limits + atomic rename + SHA256"
-      },
-      "incident_2026_07_10": {
-        "confirmed": "Two post-success attempts ran proxyMode=direct-vps at 00:25 and 00:26 UTC, returned 0 IDs/media; auth cookie names absent.",
-        "not_confirmed": "Exact cause of c_user/xs absence; do not claim Meta removed them without further evidence.",
-        "correction": "Do not probe direct-vps after residential success; if auth names absent, reauthenticate visually over Windows SOCKS then collect through same route.",
-        "hera_guidance_message_id": "1525309622993289226"
-      },
-      "default_proxy_mode": "dedicated-us-residential",
-      "direct_vps_allowed": false,
-      "proxy_config_path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
-      "proxy_resolver_path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
-      "collector_sha256": "bee77c497d7d062d6d278f143bb933c95fd4afc38305b82722d5b1397b963ed7",
-      "login_browser_sha256": "48bbe3431ae1400bef881581891175888a7b2b529df9b1fc38430e99e58fd92b"
-    },
-    {
-      "id": "hera-meta-library-manual-login-helper",
-      "agent": "hera",
-      "type": "local_only_login_helper",
-      "status": "session_saved_and_closed",
-      "script": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
-      "browser_helper": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
-      "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
-      "bindings": [
-        "127.0.0.1:5903",
-        "127.0.0.1:6083"
-      ],
-      "background_session": null,
-      "validation": "authenticatedLikely=true through Windows home SOCKS; Chromium closed gracefully exit 0; canonical profile lock released",
-      "files": [
-        {
-          "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
-          "size_bytes": 2415,
-          "modified_at": "2026-07-10T19:53:55.298132-04:00",
-          "sha256": "1f84f18f2ba96219498f7be831dbae22d9a8963b4bb860d8e56f697fcba78e56"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
-          "size_bytes": 3831,
-          "modified_at": "2026-07-10T20:06:05.746120-04:00",
-          "sha256": "dc0e1cd024dc152b2d967b3077f04c5deebdeb1a9321a3bdc998e1cfc147d7cb"
-        }
-      ],
-      "purpose": "One-time/manual Facebook authentication while preserving cookies in the canonical Hera browser profile.",
-      "updated_at": "2026-07-10T20:19:38-04:00",
-      "recovery": "Known stale x11vnc/websockify listeners auto-cleaned only after profile lock; unexpected port owner fails exit 76.",
-      "network_route": {
-        "mode": "temporary_windows_home_socks",
-        "proxy": "socks5://127.0.0.1:1080",
-        "binding": "server localhost only",
-        "third_party_proxy": false
-      }
-    },
-    {
-      "id": "hera-discord-output-config",
-      "type": "profile_config",
-      "path": "/root/.hermes/profiles/hera/config.yaml",
-      "status": "active",
-      "owner": "hera",
-      "purpose": "Discord output discipline with live tool progress preserved; raw/extensive technical detail remains summarized or routed to logs/#alerts-infra.",
-      "settings": {
-        "display.platforms.discord.tool_progress": "all",
-        "discord.gateway_restart_notification": false
-      },
-      "size_bytes": 21214,
-      "sha256": "49996cb583a80c25bfb95aa3abed5cff87c2a26213b5d8c6130e147cf1125fc1",
-      "validation": "YAML parse and Hermes config check passed; tool_progress=all; gateway_restart_notification=false.",
-      "updated_at": "2026-07-14T21:56:41-04:00"
-    },
-    {
-      "id": "hera-meta-library-profile-snapshot",
-      "type": "script",
-      "path": "/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh",
-      "status": "active",
-      "owner": "hera",
-      "purpose": "Create secure, lock-protected snapshots of the trusted Meta Library Chromium profile after clean authenticated shutdown, preserving cookies/2FA trust without exposing values.",
-      "size_bytes": 4494,
-      "sha256": "f0bd5dae5563abceda4e1f9c46c4cc9ad205b0847a9e705a266e125ae22f4998",
-      "security": {
-        "backup_root": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium",
-        "directory_mode": "700",
-        "cookie_db_mode": "600",
-        "retention": 5,
-        "singleton_policy": "never remove; exclude stale links only after zero live profile processes",
-        "auth_gate": "authenticated residential status or successful report within 1 hour"
-      },
-      "validation": "bash -n PASS; real snapshot PASS; authenticatedLikely=true; windows-home-socks; critical files hashed internally; snapshot 12M; no live Chromium.",
-      "latest_snapshot": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium/20260711T014404Z",
-      "updated_at": "2026-07-10T22:06:04-04:00",
-      "auth_gate": "authenticated windows-home-socks or dedicated-us-residential report within 1 hour"
-    },
-    {
       "id": "zeus-hermes-cron-meta-app-roles-watch",
       "agent": "zeus",
       "type": "hermes_cron",
@@ -2064,76 +1579,6 @@
       "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
       "validation": "Enabled schedule readback; tri-state full dry-run rc=0, targets=28, linked=23, unlinked_confirmed=5, unknown=0, 23 item-get calls by item/vault ID.",
       "updated_at": "2026-07-12T21:20:00-04:00"
-    },
-    {
-      "id": "hera-meta-library-dedicated-us-residential",
-      "agent": "hera",
-      "type": "dedicated_residential_proxy_route",
-      "status": "active_24x7_default",
-      "mode": "dedicated-us-residential",
-      "expected_country": "US",
-      "credential_provider": "1Password",
-      "config_path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
-      "fallback_mode": "windows-home-socks",
-      "direct_vps_allowed": false,
-      "files": [
-        {
-          "path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
-          "size_bytes": 394,
-          "modified_at": "2026-07-10T22:01:01.088426-04:00",
-          "sha256": "7dc78212cd32f2c7c19917676adae440906d7af8819a75b09966e916d6d21542"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
-          "size_bytes": 3216,
-          "modified_at": "2026-07-10T22:01:26.458455-04:00",
-          "sha256": "684ec9e780c9fdd5aad91bc1e40641644606faa8e52021e747159fe1ad961042"
-        },
-        {
-          "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
-          "size_bytes": 15225,
-          "modified_at": "2026-07-10T22:02:12.357508-04:00",
-          "sha256": "bee77c497d7d062d6d278f143bb933c95fd4afc38305b82722d5b1397b963ed7"
-        },
-        {
-          "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-          "size_bytes": 1260,
-          "modified_at": "2026-07-10T22:02:21.807519-04:00",
-          "sha256": "3a22fbe461eb8021dc4dc2ab7f2511d98cb2234570fa29314a080b55eb15ee51"
-        }
-      ],
-      "security": {
-        "credentials_in_files": false,
-        "credentials_in_logs": false,
-        "credentials_in_process_args": false,
-        "browser_environment_secret_filter": true,
-        "failure_mode": "fail_closed"
-      },
-      "validation": {
-        "canary_country": "US",
-        "stable_ip_short_test": true,
-        "proxy_mode": "dedicated-us-residential",
-        "authenticated_likely": true,
-        "authenticated_cookie_names_present": [
-          "c_user",
-          "xs"
-        ],
-        "result_text": "~63 results",
-        "library_ids": 42,
-        "images": 3,
-        "videos": 30,
-        "persistent_challenge": false,
-        "pilot_download_http": 200,
-        "pilot_magic_bytes_valid": true,
-        "profile_used_for_canary": false,
-        "config_resolution_readback": "PASS; credentials present without values; browser env secret filter PASS"
-      },
-      "human_action_policy": "No PowerShell/tunnel in normal operation. Human action only for expired-session login, MFA or visible CAPTCHA.",
-      "updated_at": "2026-07-10T22:07:10.074657-04:00",
-      "onepassword_item_id": "x3hzhoyxthjnz4n2irx237tjla",
-      "resolver_path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
-      "resolver_sha256": "684ec9e780c9fdd5aad91bc1e40641644606faa8e52021e747159fe1ad961042",
-      "config_sha256": "7dc78212cd32f2c7c19917676adae440906d7af8819a75b09966e916d6d21542"
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -2167,10 +1612,10 @@
       "state_path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "replaces_jobs": [
         "ares:d1a064017e27",
-        "hera:d2a7853ae86f"
+        "retired-agent:d2a7853ae86f"
       ],
       "purpose": "Check local Google OAuth every cycle and the 1Password Service Account at most once per day while OAuth remains healthy.",
-      "validation": "Production cron completed twice healthy; cached run with op absent from PATH returned token_ok and sa_checked=0; Ares/Hera jobs read back enabled=false; no root minute collision",
+      "validation": "Production cron completed twice healthy; cached run with op absent from PATH returned token_ok and sa_checked=0; Ares jobs read back enabled=false; no root minute collision",
       "status": "deployed_validated",
       "updated_at": "2026-07-11T01:29:52-04:00"
     },
@@ -2186,7 +1631,7 @@
         "monitor": "6b8716cfe08eccbb3fef4878abad9b708dc9b176ff468526233d6ded8fc4990f",
         "copilot": "79608ba780b1e911d5845ae7b7cd569d8ad906a4c31e855581d54b2f48e363eb"
       },
-      "purpose": "Fetch the shared Honcho key once per cycle and reuse it for Zeus, Atena, Ares and Hera.",
+      "purpose": "Fetch the shared Honcho key once per cycle and reuse it for Zeus, Atena, Ares and retired-agent.",
       "validation": "DRY_RUN real health check completed 4 agents OK; monitor contains one op item get callsite; wrapper skips op when HONCHO_API_KEY is preloaded",
       "status": "deployed_validated",
       "updated_at": "2026-07-11T01:29:52-04:00"
@@ -2730,7 +2175,7 @@
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "setting": "display.platforms.discord.tool_progress=false",
       "reason": "Rodolfo requires human-facing operational threads without raw tool commands; infra details go only to #alerts-infra",
@@ -2748,11 +2193,6 @@
         "ares": {
           "sha256": "8eb8b78dde6927e0231d39a13e671b9213e4a123273e688932b52c0073ff5939",
           "mirror_sha256": "8eb8b78dde6927e0231d39a13e671b9213e4a123273e688932b52c0073ff5939",
-          "discord_tool_progress": false
-        },
-        "hera": {
-          "sha256": "1b68b78b350a78bbc7a5a47088903908ed943089b7a4526f614a49646f886083",
-          "mirror_sha256": "1b68b78b350a78bbc7a5a47088903908ed943089b7a4526f614a49646f886083",
           "discord_tool_progress": false
         }
       },
@@ -2817,7 +2257,7 @@
         "zeus",
         "atena",
         "ares",
-        "hera"
+        "retired-agent"
       ],
       "setting": "display.platforms.discord.tool_progress=all",
       "reason": "Correct an over-broad interpretation: preserve live progress while avoiding raw/extensive technical dumps in human-facing threads.",
@@ -2838,12 +2278,6 @@
         "ares": {
           "sha256": "568397eb747082f7a94c590d1d1f077b20acba5066ff12db8472b5f4c7ebe458",
           "mirror_sha256": "568397eb747082f7a94c590d1d1f077b20acba5066ff12db8472b5f4c7ebe458",
-          "discord_tool_progress": "all",
-          "live_mirror_equal": true
-        },
-        "hera": {
-          "sha256": "49996cb583a80c25bfb95aa3abed5cff87c2a26213b5d8c6130e147cf1125fc1",
-          "mirror_sha256": "49996cb583a80c25bfb95aa3abed5cff87c2a26213b5d8c6130e147cf1125fc1",
           "discord_tool_progress": "all",
           "live_mirror_equal": true
         }
@@ -2954,8 +2388,7 @@
       "scope": {
         "permissions_changed": false,
         "routes_changed": false,
-        "ares_changed": false,
-        "hera_reactivated": false
+        "ares_changed": false
       },
       "updated_at": "2026-07-16T07:55:49.714299+00:00",
       "git_commit": "f30dd113",
@@ -3196,7 +2629,7 @@
       "sha256": "63381721f9db354ece10fcaa0cb3f8973b8f9afa72b14595b8010cc2b908b250",
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-06-20T11:52:28-04:00",
-      "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Hera/Ares creative taxonomy loop fix"
+      "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Ares creative taxonomy loop fix"
     },
     {
       "profile": "ares",
@@ -3223,133 +2656,6 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-06-20T21:34:18-04:00",
       "validation": "runtime/versioned SHA match; HOA dedupe behavior documented; linked runner py_compile/dry-run OK; secret scan OK"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 39960,
-      "sha256": "30abf40d21ff2e8376fe4615df9d540124d5d4b016ea18985aeffd1bb5e15367",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-02T12:03:07-04:00",
-      "validation": "Runtime/versioned skill synced; added rule requiring real REPORT-INFRA send + HTTP 204 + Discord API confirmation in #alerts-infra before Hera claims delivery; forbids using agent-specific ares-report-infra.sh as default when canonical helper exists.",
-      "modified_at": "2026-07-02T12:02:03-04:00",
-      "source_report": "REPORT-INFRA Hera verified report-infra delivery rule 2026-07-02",
-      "last_commit": "31198cc4"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
-      "size_bytes": 6480,
-      "sha256": "cfacdd0864f421335e88710e3b8e9cb3ab0a07e57943fff4d0e2d00c5158374d",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T12:11:18-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CAR.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CAR.md",
-      "size_bytes": 5622,
-      "sha256": "cef84eb5de333bf415d5c4049b4548a12d51c8a614511c45496f2ff0b658652b",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CC.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CC.md",
-      "size_bytes": 3215,
-      "sha256": "9148668a2d1cd37fd72c34ddfbd0dcfa85690183efd53f31d8d927d039e05b95",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/GAME.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/GAME.md",
-      "size_bytes": 3105,
-      "sha256": "edeb3a31eaaf56af231b508f4f96d2b4b14d198bdcd1adc798b7ce83032cac10",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/video.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/video.md",
-      "size_bytes": 3523,
-      "sha256": "9f4752c2c1be555d0e4e2a52895dfb9acb55074cb1f0f3ba4f8aecf003d62b5f",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/image.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/image.md",
-      "size_bytes": 2220,
-      "sha256": "7504f1b17cc175b859d6f876cc93dd116c73c9234ea0f190136f8efbb99f5c65",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/continuous-learning.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/continuous-learning.md",
-      "size_bytes": 2999,
-      "sha256": "e3fc7d5214a0be25c11b6a61364b3696f90a2e54a0a0d00a6000bf0162432faa",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
-      "size_bytes": 4566,
-      "sha256": "106556156e7bcccf2c2c98cf99a9c7ec8256a65f8a2cf10e24c7755d6a5bf416",
-      "runtime_versioned_sha_match": true,
-      "source_thread_id": "1516611205517807680",
-      "updated_at": "2026-06-19T11:56:29-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; import-discord-thread OK with 20 messages; 4 videos ffprobe 720x1280 ~8.04s audio=true; contact sheets generated/analyzed; reference corrects wrong keyframe/zoom-only conclusion and requires replicating real thread workflow instead of theorizing by provider",
-      "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/car-br-pt-multi-image-ready-handoff.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/car-br-pt-multi-image-ready-handoff.md",
-      "size_bytes": 2688,
-      "modified_at": "2026-06-30T16:01:47-04:00",
-      "sha256": "099ce7bdea0690f46829a04ff960586e8631a65b1c79ac7df10346ed4e30c664",
-      "runtime_versioned_sha_match": true,
-      "source_report": "REPORT-INFRA Hera creative handoff silencioso/background para Ares 2026-06-30",
-      "updated_at": "2026-06-30T16:03:19-04:00",
-      "validation": "runtime/versioned SHA match; secret scan OK; reference requires READY upload verified before silent/background Ares notice; no public Hera↔Ares ping-pong in human thread."
     },
     {
       "profile": "zeus",
@@ -3563,28 +2869,6 @@
       "updated_at": "2026-07-09T20:32:44-04:00"
     },
     {
-      "id": "hera-meta-library-reference-intake-v2",
-      "agent": "hera",
-      "type": "profile_skill",
-      "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 8898,
-      "modified_at": "2026-07-10T22:06:02.416779-04:00",
-      "sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
-      "versioned_sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
-      "purpose": "Canonical Meta Library flow with standard Drive destination MGS-AGENTS/CRIATIVOS/LIBRARY META/<library>.",
-      "validation": "skill/reference live-versioned hashes match; FMYBC folder moved under LIBRARY META; 25 children retained; remote inventory MD5 readback PASS; trashed=0.",
-      "updated_at": "2026-07-10T22:35:47.635311-04:00",
-      "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450",
-      "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task.",
-      "full_collection_reference_sha256": "66a3d713fb2b6c32754bb3a266d5e30c096d83a3f9ad9c0930feba18de9771b4",
-      "full_collection_versioned_sha256": "66a3d713fb2b6c32754bb3a266d5e30c096d83a3f9ad9c0930feba18de9771b4",
-      "standard_drive_parent": {
-        "path": "MGS-AGENTS/CRIATIVOS/LIBRARY META",
-        "folder_id": "1vXTzNsXYvdJlGkwiy62_LFrMuGvQfsk0"
-      }
-    },
-    {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
       "agent": "zeus",
       "type": "profile_skill",
@@ -3608,21 +2892,6 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-07-10T21:23:43-04:00",
       "validation": "Live Graph evidence: quiz adset custom_event_type=SUBSCRIBE with OFFSITE_CONVERSIONS/pixel. Corrected prior naming assumption: chat=ADD_TO_WISHLIST, quiz=SUBSCRIBE at adset; positive cases PASS; cross-event rejected; py_compile OK."
-    },
-    {
-      "id": "hera-drive-ready-oauth-precedence-reference",
-      "agent": "hera",
-      "type": "profile_skill_reference",
-      "path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/human-upload-ready-drive-handoff.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/human-upload-ready-drive-handoff.md",
-      "size_bytes": 3425,
-      "modified_at": "2026-07-10T21:50:05.588704-04:00",
-      "sha256": "0c84f0169428d8d57e4398bf30b893e25ac66cd1ed066446fe1f9bd2c8a6173e",
-      "versioned_sha256": "0c84f0169428d8d57e4398bf30b893e25ac66cd1ed066446fe1f9bd2c8a6173e",
-      "purpose": "Drive READY/reference upload procedure with OAuth credential-precedence recovery and readback gate.",
-      "validation": "live/versioned hash match; watchdog client cache token_ok; stale token-only override bypassed without deleting canonical credentials; 23 creatives + README + inventory uploaded and read back.",
-      "known_pending": "Canonical Drive OAuth client precedence should be remediated separately; task used isolated nonexistent token override path.",
-      "updated_at": "2026-07-10T21:53:12.843607-04:00"
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
@@ -4156,11 +3425,6 @@
       "modified_at": "2026-05-17T00:02:25-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/finalize-ares-hera-unification.sh",
-      "size_bytes": 6600,
-      "modified_at": "2026-07-12T14:18:22-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
       "size_bytes": 14810,
       "modified_at": "2026-07-13T16:34:35-04:00"
@@ -4169,41 +3433,6 @@
       "path": "/root/mgs-agent/scripts/finalize-zeus-restart-post-update-20260609.sh",
       "size_bytes": 2598,
       "modified_at": "2026-06-09T09:29:31-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-      "size_bytes": 1260,
-      "modified_at": "2026-07-10T22:02:21-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
-      "size_bytes": 2499,
-      "modified_at": "2026-07-10T22:02:24-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh",
-      "size_bytes": 4494,
-      "modified_at": "2026-07-10T22:03:38-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
-      "size_bytes": 3134,
-      "modified_at": "2026-06-17T18:44:59-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-youtube-login-browser.sh",
-      "size_bytes": 2963,
-      "modified_at": "2026-06-17T18:29:31-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-youtube-persistent-browser.py",
-      "size_bytes": 6214,
-      "modified_at": "2026-06-17T18:23:06-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hera-youtube-reference-download.sh",
-      "size_bytes": 3379,
-      "modified_at": "2026-06-17T18:25:40-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-memory-autocompactor.py",
@@ -5838,598 +5067,6 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/yuanbao/SKILL.md"
       }
     ],
-    "hera": [
-      {
-        "name": "apple-notes",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/apple-notes/SKILL.md"
-      },
-      {
-        "name": "apple-reminders",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/apple-reminders/SKILL.md"
-      },
-      {
-        "name": "findmy",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/findmy/SKILL.md"
-      },
-      {
-        "name": "imessage",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/imessage/SKILL.md"
-      },
-      {
-        "name": "macos-computer-use",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/macos-computer-use/SKILL.md"
-      },
-      {
-        "name": "claude-code",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/claude-code/SKILL.md"
-      },
-      {
-        "name": "codex",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/codex/SKILL.md"
-      },
-      {
-        "name": "opencode",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
-      },
-      {
-        "name": "architecture-diagram",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/architecture-diagram/SKILL.md"
-      },
-      {
-        "name": "ascii-art",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/ascii-art/SKILL.md"
-      },
-      {
-        "name": "baoyu-article-illustrator",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-article-illustrator/SKILL.md"
-      },
-      {
-        "name": "baoyu-comic",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-comic/SKILL.md"
-      },
-      {
-        "name": "baoyu-infographic",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-infographic/SKILL.md"
-      },
-      {
-        "name": "popular-web-designs",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/popular-web-designs/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/sketch/SKILL.md"
-      },
-      {
-        "name": "songwriting-and-ai-music",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
-      },
-      {
-        "name": "kanban-orchestrator",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/devops/kanban-worker/SKILL.md"
-      },
-      {
-        "name": "codebase-inspection",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/codebase-inspection/SKILL.md"
-      },
-      {
-        "name": "github-auth",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-auth/SKILL.md"
-      },
-      {
-        "name": "github-code-review",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-code-review/SKILL.md"
-      },
-      {
-        "name": "github-issues",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-issues/SKILL.md"
-      },
-      {
-        "name": "github-pr-workflow",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-pr-workflow/SKILL.md"
-      },
-      {
-        "name": "github-repo-management",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-repo-management/SKILL.md"
-      },
-      {
-        "name": "gif-search",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "heartmula",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/heartmula/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/songsee/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/youtube-content/SKILL.md"
-      },
-      {
-        "name": "lm-evaluation-harness",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
-      },
-      {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
-      },
-      {
-        "name": "huggingface-hub",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/huggingface-hub/SKILL.md"
-      },
-      {
-        "name": "llama-cpp",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
-      },
-      {
-        "name": "vllm",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/inference/vllm/SKILL.md"
-      },
-      {
-        "name": "audiocraft",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/models/audiocraft/SKILL.md"
-      },
-      {
-        "name": "nano-pdf",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/nano-pdf/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "powerpoint",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/powerpoint/SKILL.md"
-      },
-      {
-        "name": "arxiv",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/blogwatcher/SKILL.md"
-      },
-      {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/polymarket/SKILL.md"
-      },
-      {
-        "name": "node-inspect-debugger",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/node-inspect-debugger/SKILL.md"
-      },
-      {
-        "name": "python-debugpy",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/python-debugpy/SKILL.md"
-      },
-      {
-        "name": "requesting-code-review",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/requesting-code-review/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/spike/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/test-driven-development/SKILL.md"
-      },
-      {
-        "name": "ai-coding-agents",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
-      },
-      {
-        "name": "hermes-agent",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
-      },
-      {
-        "name": "kanban-codex-lane",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
-      },
-      {
-        "name": "openhands",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "computer-use",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/hera/skills/computer-use/SKILL.md"
-      },
-      {
-        "name": "ascii-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/ascii-video/SKILL.md"
-      },
-      {
-        "name": "baoyu-visual-content",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/baoyu-visual-content/SKILL.md"
-      },
-      {
-        "name": "claude-design",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/claude-design/SKILL.md"
-      },
-      {
-        "name": "comfyui",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/comfyui/SKILL.md"
-      },
-      {
-        "name": "creative-brief-handoff",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md"
-      },
-      {
-        "name": "creative-ideation",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-ideation/SKILL.md"
-      },
-      {
-        "name": "design-md",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/design-md/SKILL.md"
-      },
-      {
-        "name": "excalidraw",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/excalidraw/SKILL.md"
-      },
-      {
-        "name": "humanizer",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/humanizer/SKILL.md"
-      },
-      {
-        "name": "manim-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/manim-video/SKILL.md"
-      },
-      {
-        "name": "meta-library-reference-intake",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md"
-      },
-      {
-        "name": "p5js",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/p5js/SKILL.md"
-      },
-      {
-        "name": "pixel-art",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/pixel-art/SKILL.md"
-      },
-      {
-        "name": "pretext",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/pretext/SKILL.md"
-      },
-      {
-        "name": "touchdesigner-mcp",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/touchdesigner-mcp/SKILL.md"
-      },
-      {
-        "name": "jupyter-live-kernel",
-        "category": "data-science",
-        "skill_md": "/root/.hermes/profiles/hera/skills/data-science/jupyter-live-kernel/SKILL.md"
-      },
-      {
-        "name": "kanban-workflows",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-workflows/SKILL.md"
-      },
-      {
-        "name": "webhook-subscriptions",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/devops/webhook-subscriptions/SKILL.md"
-      },
-      {
-        "name": "dogfood",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/hera/skills/dogfood/SKILL.md"
-      },
-      {
-        "name": "himalaya",
-        "category": "email",
-        "skill_md": "/root/.hermes/profiles/hera/skills/email/himalaya/SKILL.md"
-      },
-      {
-        "name": "minecraft-modpack-server",
-        "category": "gaming",
-        "skill_md": "/root/.hermes/profiles/hera/skills/gaming/minecraft-modpack-server/SKILL.md"
-      },
-      {
-        "name": "pokemon-player",
-        "category": "gaming",
-        "skill_md": "/root/.hermes/profiles/hera/skills/gaming/pokemon-player/SKILL.md"
-      },
-      {
-        "name": "github-operations",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/hera/skills/github/github-operations/SKILL.md"
-      },
-      {
-        "name": "native-mcp",
-        "category": "mcp",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mcp/native-mcp/SKILL.md"
-      },
-      {
-        "name": "ai-music-audio-generation",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/ai-music-audio-generation/SKILL.md"
-      },
-      {
-        "name": "media-content-tools",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/media-content-tools/SKILL.md"
-      },
-      {
-        "name": "spotify",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/spotify/SKILL.md"
-      },
-      {
-        "name": "obliteratus",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/inference/obliteratus/SKILL.md"
-      },
-      {
-        "name": "outlines",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/inference/outlines/SKILL.md"
-      },
-      {
-        "name": "llm-inference-serving",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/llm-inference-serving/SKILL.md"
-      },
-      {
-        "name": "ml-evaluation-and-tracking",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/ml-evaluation-and-tracking/SKILL.md"
-      },
-      {
-        "name": "segment-anything",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/models/segment-anything/SKILL.md"
-      },
-      {
-        "name": "dspy",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/research/dspy/SKILL.md"
-      },
-      {
-        "name": "axolotl",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/axolotl/SKILL.md"
-      },
-      {
-        "name": "trl-fine-tuning",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/trl-fine-tuning/SKILL.md"
-      },
-      {
-        "name": "unsloth",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/unsloth/SKILL.md"
-      },
-      {
-        "name": "obsidian",
-        "category": "note-taking",
-        "skill_md": "/root/.hermes/profiles/hera/skills/note-taking/obsidian/SKILL.md"
-      },
-      {
-        "name": "discord-ops",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/ops/discord-ops/SKILL.md"
-      },
-      {
-        "name": "hermes-agent-operations",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/ops/hermes-agent-operations/SKILL.md"
-      },
-      {
-        "name": "log-monitor-discord-alert",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/ops/log-monitor-discord-alert/SKILL.md"
-      },
-      {
-        "name": "mgs-company-os-architecture",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/ops/mgs-company-os-architecture/SKILL.md"
-      },
-      {
-        "name": "wp-plugin-mass-operation",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/ops/wp-plugin-mass-operation/SKILL.md"
-      },
-      {
-        "name": "airtable",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/airtable/SKILL.md"
-      },
-      {
-        "name": "apple-automation",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/apple-automation/SKILL.md"
-      },
-      {
-        "name": "document-processing",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/document-processing/SKILL.md"
-      },
-      {
-        "name": "google-workspace",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/google-workspace/SKILL.md"
-      },
-      {
-        "name": "linear",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/linear/SKILL.md"
-      },
-      {
-        "name": "maps",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/maps/SKILL.md"
-      },
-      {
-        "name": "notion",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/notion/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "petdex",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/petdex/SKILL.md"
-      },
-      {
-        "name": "teams-meeting-pipeline",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/teams-meeting-pipeline/SKILL.md"
-      },
-      {
-        "name": "godmode",
-        "category": "red-teaming",
-        "skill_md": "/root/.hermes/profiles/hera/skills/red-teaming/godmode/SKILL.md"
-      },
-      {
-        "name": "llm-wiki",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/llm-wiki/SKILL.md"
-      },
-      {
-        "name": "research-paper-writing",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/research-paper-writing/SKILL.md"
-      },
-      {
-        "name": "research-sources",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/research-sources/SKILL.md"
-      },
-      {
-        "name": "openhue",
-        "category": "smart-home",
-        "skill_md": "/root/.hermes/profiles/hera/skills/smart-home/openhue/SKILL.md"
-      },
-      {
-        "name": "xurl",
-        "category": "social-media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/social-media/xurl/SKILL.md"
-      },
-      {
-        "name": "debugging-hermes-tui-commands",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
-      },
-      {
-        "name": "hermes-agent-skill-authoring",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
-      },
-      {
-        "name": "hermes-s6-container-supervision",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/hermes-s6-container-supervision/SKILL.md"
-      },
-      {
-        "name": "local-browser-automation",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/local-browser-automation/SKILL.md"
-      },
-      {
-        "name": "plan",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/plan/SKILL.md"
-      },
-      {
-        "name": "subagent-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/subagent-driven-development/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "writing-plans",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/writing-plans/SKILL.md"
-      },
-      {
-        "name": "yuanbao",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/hera/skills/yuanbao/SKILL.md"
-      }
-    ],
     "zeus": [
       {
         "name": "apple-notes",
@@ -7125,20 +5762,6 @@
   },
   "discord_permissions": [
     {
-      "type": "discord_channel_permission_overwrite",
-      "channel_id": "1498132022634483894",
-      "channel_name": "alerts-infra",
-      "bot": "hera",
-      "bot_id": "1513006098133680290",
-      "overwrite_type": 1,
-      "allow": "379968",
-      "deny": "0",
-      "validated_by": "zeus",
-      "validated_at": "2026-06-17T17:55:54-04:00",
-      "validation": "Hera GET /channels/1498132022634483894 => HTTP 200; Zeus GET overwrite allow=379968 deny=0",
-      "reason": "Acesso da Hera ao #alerts-infra para REPORT-INFRA autorizado por Rodolfo"
-    },
-    {
       "type": "discord_channel_permission",
       "platform": "discord",
       "guild_id": "1185714635991679006",
@@ -7176,7 +5799,7 @@
       "overwrite_count": 4,
       "authorized_by": "Rodolfo Mattei (344196393512075265)",
       "validated_at": "2026-07-12T23:31:04.855551+00:00",
-      "validation": "Discord API exact overwrite IDs: @everyone, Rodolfo, Zeus, Ares; deleted Hera bot/role access."
+      "validation": "Discord API exact overwrite IDs: @everyone, Rodolfo, Zeus, Ares; deleted retired-agent bot/role access."
     },
     {
       "type": "discord_channel_audience",
@@ -7201,29 +5824,10 @@
       "overwrite_count": 10,
       "authorized_by": "Rodolfo Mattei (344196393512075265)",
       "validated_at": "2026-07-12T23:31:04.855551+00:00",
-      "validation": "Discord API exact overwrite IDs: @everyone, Rodolfo, Zeus, Ares and six authorized managers; removed Atena/Hera bot access."
+      "validation": "Discord API exact overwrite IDs: @everyone, Rodolfo, Zeus, Ares and six authorized managers; removed Atena/retired-agent bot access."
     }
   ],
-  "oauth_auth_states": [
-    {
-      "profile": "hera",
-      "provider": "xai-oauth",
-      "status": "logged_in",
-      "auth_store": "/root/.hermes/profiles/hera/auth.json",
-      "auth_store_size_bytes": 9024,
-      "auth_store_modified_at": "2026-06-17T17:51:45-04:00",
-      "validated_by": "zeus",
-      "validated_at": "2026-06-17T18:01:05-04:00",
-      "validation": "hermes -p hera auth status xai-oauth => logged in; mgs-grok-generate wrapper produced JPEG artifact",
-      "test_artifact": {
-        "path": "/root/mgs-agent/data/generated/hera/daniel-safari/grok-auth-test/grok-image-20260617-175946.jpg",
-        "size_bytes": 251270,
-        "sha256": "544ccb614ff02f5b65559441e515541a234493382c43fe1710277df67969d968",
-        "format": "jpeg",
-        "modified_at": "2026-06-17T17:59:47-04:00"
-      }
-    }
-  ],
+  "oauth_auth_states": [],
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
@@ -7308,12 +5912,6 @@
       "size_bytes": 10837,
       "md5": "00d96543dd5e45c8d689fcac54b0a685",
       "modified_at": "2026-07-03T03:12:58-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
-      "size_bytes": 394,
-      "md5": "71e6e5a1e3262bb5ab4fb705e1edef89",
-      "modified_at": "2026-07-10T22:01:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -7584,12 +6182,6 @@
       "size_bytes": 8113,
       "md5": "b99e19f4437b81be221650f68a72ab8c",
       "modified_at": "2026-07-17T10:13:21-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/profiles/hera-soul.md",
-      "size_bytes": 5698,
-      "md5": "fe18b4b617dd493c53489e9469b5150d",
-      "modified_at": "2026-07-12T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",

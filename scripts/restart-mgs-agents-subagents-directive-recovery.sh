@@ -19,11 +19,11 @@ if [ "$state" != "active" ]; then
 fi
 
 printf 'final_states:\n'
-systemctl is-active atena-gateway.service ares-gateway.service hera-gateway.service zeus-gateway.service || true
+systemctl is-active atena-gateway.service ares-gateway.service zeus-gateway.service || true
 
 python3 - <<PY
 import json, datetime, subprocess
-services=["atena-gateway.service","ares-gateway.service","hera-gateway.service","zeus-gateway.service"]
+services=["atena-gateway.service","ares-gateway.service","zeus-gateway.service"]
 states={}
 for s in services:
     p=subprocess.run(["systemctl","is-active",s], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

@@ -15,7 +15,7 @@ Use esta skill quando a tarefa envolver imagem editorial de artigo, especialment
 - comparação/validação de imagem gerada por IA antes de publicar;
 - reparo de composição, artefatos, legibilidade ou identidade visual.
 
-Não use esta skill para criativos de anúncio, variações de campanha, vídeo, Canva/Drive criativo ou handoff de mídia — isso pertence a Creative Operations/Hera.
+Não use esta skill para criativos de anúncio, variações de campanha, vídeo, Canva/Drive criativo ou handoff de mídia — isso pertence ao Ares/Creative Operations.
 
 ## Princípio operacional
 

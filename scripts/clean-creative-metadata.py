@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """MGS creative metadata sanitizer.
 
-Server-side metadata cleaning gate for Hera (Creative Ops) and Ares (Growth).
+Server-side metadata cleaning gate for Ares Creative Operations + Growth.
 Uses ExifTool as the primary remover and mat2 as an optional second pass when available.
 Never prints secrets; audit events are written as JSONL under /root/mgs-agent/logs/.
 """

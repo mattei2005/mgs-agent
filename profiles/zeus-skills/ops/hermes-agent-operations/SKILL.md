@@ -1,7 +1,7 @@
 ---
 name: hermes-agent-operations
 description: "Use when operating, configuring, updating, or troubleshooting Hermes Agent on the MGS VPS: gateways, profiles, providers, OAuth, context, Discord, web tooling, media providers, migrations, Honcho, and Git runtime integration. This file is a lean router; load only the reference matching the current branch."
-tags: [hermes, operations, update, providers, oauth, web-search, gateway, zeus, atena, ares, hera, mgs, context]
+tags: [hermes, operations, update, providers, oauth, web-search, gateway, zeus, atena, ares, mgs, context]
 related_skills: [discord-ops, log-monitor-discord-alert]
 ---
 
@@ -83,7 +83,7 @@ Load an exact supporting playbook only for the requested branch: rollout, reauth
 
 Primary reference: `references/image-video-generation.md`.
 
-Hera owns routine creative production. Zeus audits/configures but does not become the default creative executor unless Rodolfo asks.
+Ares owns routine creative production. Zeus audits/configures but does not become the default creative executor unless Rodolfo asks.
 
 ### Command approvals, busy messages, or continuation after gateway restart
 

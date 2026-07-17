@@ -191,7 +191,7 @@ def main() -> int:
     parser.add_argument(
         "--profile",
         default=None,
-        help="Perfil Hermes preferencial para carregar DISCORD_BOT_TOKEN (ex: zeus, atena, ares, hera)",
+        help="Perfil Hermes preferencial para carregar DISCORD_BOT_TOKEN (ex: zeus, atena, ares)",
     )
     args = parser.parse_args()
 

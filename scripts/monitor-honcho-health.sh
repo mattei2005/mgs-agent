@@ -14,7 +14,7 @@ HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
 # a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
 HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 DRY_RUN="${DRY_RUN:-0}"
-AGENTS=(zeus atena ares hera)
+AGENTS=(zeus atena ares)
 
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
@@ -30,7 +30,7 @@ if [[ ! -f "$STATE_FILE" ]]; then
   cat > "$STATE_FILE" <<'JSON'
 {
   "_meta": {
-    "description": "Estado do monitor Honcho MGS. Monitora provider nativo + copilot para Zeus/Atena/Ares/Hera.",
+    "description": "Estado do monitor Honcho MGS. Monitora provider nativo + copilot para Zeus/Atena/Ares.",
     "threshold": "alert after 2 consecutive non-ok checks by default",
     "anti_spam_hours": 6
   },
@@ -52,7 +52,7 @@ trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload"' EXIT
 
 log "START agents=${AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
-# Uma única leitura da chave compartilhada por ciclo; os quatro copilots reutilizam
+# Uma única leitura da chave compartilhada por ciclo; os três copilots reutilizam
 # HONCHO_API_KEY e não voltam ao 1Password.
 HONCHO_API_KEY="$(op item get 'Honcho API - MGS' \
   --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
@@ -253,7 +253,7 @@ else
   if [[ "$PREV_STATUS" == "fail" && "$ALERT_ACTIVE" == "true" ]]; then
     python3 - <<'PY' > "$TMP_RESULTS.payload"
 import json, sys
-payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares/Hera provider nativo + copilot OK","inline":False}]}]}
+payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares provider nativo + copilot OK","inline":False}]}]}
 json.dump(payload, sys.stdout, ensure_ascii=False)
 PY
     send_discord_payload "$TMP_RESULTS.payload" >/dev/null || log "WARN: Discord resolution failed"

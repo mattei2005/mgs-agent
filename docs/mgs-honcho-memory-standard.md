@@ -27,7 +27,7 @@ Credenciais nunca são memória e permanecem exclusivamente no 1Password.
 
 ## Escopo
 
-A regra cobre Zeus, Atena, Ares, Hera e todo novo agente MGS. Cada agente deve manter peer/perfil isolado e receber apenas o contexto compatível com sua função e seus usuários autorizados.
+A regra cobre Zeus, Atena, Ares e todo novo agente MGS. Cada agente deve manter peer/perfil isolado e receber apenas o contexto compatível com sua função e seus usuários autorizados.
 
 ## Relação com USER/MEMORY
 
@@ -39,7 +39,7 @@ O autocompactor de USER/MEMORY deixa de ser a solução principal. O monitor de 
 
 ## Estado verificado na decisão
 
-Em 2026-07-17, os quatro profiles existentes (`zeus`, `atena`, `ares`, `hera`) estavam com `memory.provider` vazio e sem `honcho.json`. A MGS possuía apenas o wrapper externo `scripts/mgs-memory-copilot`, portanto a integração nativa ainda não estava ativa em nenhum deles.
+Em 2026-07-17, os profiles operacionais (`zeus`, `atena`, `ares`) foram migrados para o provider Honcho nativo após o baseline inicial sem `memory.provider`.
 
 ## Gate de implantação
 

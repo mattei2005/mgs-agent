@@ -9,7 +9,7 @@ LOG="$BASE/logs/hermes-update-all-agents-${STAMP}.log"
 PATCH_DIR="$BASE/patches/hermes"
 BACKUP_PATH="/root/hermes-profiles-backup-${STAMP}.tar.gz"
 LOCAL_PATCH="$PATCH_DIR/mgs-local-preupdate-${STAMP}.patch"
-SERVICES=(zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service)
+SERVICES=(zeus-gateway.service atena-gateway.service ares-gateway.service)
 mkdir -p "$PATCH_DIR" "$(dirname "$LOG")"
 exec > >(tee -a "$LOG") 2>&1
 
@@ -139,7 +139,7 @@ systemctl is-active "${SERVICES[@]}"
 systemctl show "${SERVICES[@]}" -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
 
 log "Recent gateway connection logs"
-for p in zeus atena ares hera; do
+for p in zeus atena ares; do
   echo "--- $p agent.log ---"
   tail -120 "/root/.hermes/profiles/$p/logs/agent.log" 2>/dev/null | grep -E 'Connected as|Gateway running|discord connected|Logged in as|READY|resum' | tail -12 || true
   echo "--- $p errors.log ---"
@@ -149,7 +149,7 @@ done
 log "Codex auth sanitized"
 python3 - <<'PY'
 import json, pathlib
-for name,path in [('root','/root/.hermes/auth.json'),('zeus','/root/.hermes/profiles/zeus/auth.json'),('atena','/root/.hermes/profiles/atena/auth.json'),('ares','/root/.hermes/profiles/ares/auth.json'),('hera','/root/.hermes/profiles/hera/auth.json')]:
+for name,path in [('root','/root/.hermes/auth.json'),('zeus','/root/.hermes/profiles/zeus/auth.json'),('atena','/root/.hermes/profiles/atena/auth.json'),('ares','/root/.hermes/profiles/ares/auth.json')]:
     p=pathlib.Path(path)
     if not p.exists():
         print(f'{name}: auth_missing')
@@ -166,4 +166,4 @@ FINAL_BEHIND="$(git -C "$REPO" rev-list --count HEAD..origin/main)"
 STATUS_SHORT="$(git -C "$REPO" status --short | sed -n '1,30p')"
 DISK="$(df -h / | awk 'NR==2{print $4 " livres / uso " $5}')"
 log "DONE Hermes update all agents"
-send_report "✅ Hermes update MGS concluído" "\`\`\`text\nHEAD:         $FINAL_HEAD\norigin/main:  $FINAL_ORIGIN\nbehind:       $FINAL_BEHIND\nGateways:     Zeus/Atena/Ares/Hera active\nPatch guard:  OK\npy_compile:   OK\nBackup:       $BACKUP_PATH\nDisco:        $DISK\nLog:          $LOG\n\nGit status:\n${STATUS_SHORT:-clean}\n\`\`\`\nValidação final feita no VPS; se esta mensagem chegou, Discord/gateway Zeus também voltou após restart." || true
+send_report "✅ Hermes update MGS concluído" "\`\`\`text\nHEAD:         $FINAL_HEAD\norigin/main:  $FINAL_ORIGIN\nbehind:       $FINAL_BEHIND\nGateways:     Zeus/Atena/Ares active\nPatch guard:  OK\npy_compile:   OK\nBackup:       $BACKUP_PATH\nDisco:        $DISK\nLog:          $LOG\n\nGit status:\n${STATUS_SHORT:-clean}\n\`\`\`\nValidação final feita no VPS; se esta mensagem chegou, Discord/gateway Zeus também voltou após restart." || true

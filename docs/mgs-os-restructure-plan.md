@@ -182,7 +182,6 @@ Atena    Próximo gate recomendado        Ler Content Operations, WordPress edit
                                          REC/P1 e fontes de conteúdo.
 Ares     Ativo e consolidado             Creative Ops + Growth/Campaign Ops conforme
                                          mapa atual e permissões aprovadas.
-Hera     Histórico/rollback              Desativada em 2026-07-12; sem operação nova.
 Futuros  Pendente                        Só nascer com área, dono, fontes, permissões
                                          e escalonamento definidos.
 ```
@@ -240,6 +239,6 @@ Só depois de tudo validado e com aprovação explícita:
 
 ## Próximo passo imediato
 
-A Fase 4 contextual está concluída e Zeus já passou pelo primeiro gate da Fase 5. Ajustes futuros devem seguir o mapa atual: Atena e Ares são agentes ativos; Hera permanece apenas como histórico/rollback e não deve ser recriada como operação nova.
+A Fase 4 contextual está concluída e Zeus já passou pelo primeiro gate da Fase 5. Ajustes futuros devem seguir o mapa atual: Atena e Ares são agentes ativos e agentes legados não devem ser recriados como operação nova.
 
 A nova frente de preservação de contexto está documentada em `docs/mgs-knowledge-continuity-plan.md`. Qualquer mudança de comportamento nos agents continua sendo executada um agente por vez, com gate, rollback e validação próprios.

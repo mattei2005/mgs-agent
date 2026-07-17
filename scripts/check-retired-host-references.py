@@ -20,7 +20,7 @@ REPO_ALLOWLIST_PREFIXES = (
     "backups/",
 )
 
-PROFILE_NAMES = ("zeus", "atena", "ares", "hera")
+PROFILE_NAMES = ("zeus", "atena", "ares")
 PROFILE_OPERATIONAL_NAMES = ("config.yaml", "SOUL.md", "skills", "scripts", "cron")
 SYSTEM_PATHS = (
     Path("/etc/systemd/system"),

@@ -19,10 +19,10 @@ Completion criterion: only the procedure and evidence required for the current a
 ## Operational route packs
 
 - **Referências recentes → Escopo por agente/thread antes de reportar pendências** → `references/route-pack-01.md`
-- **Mentions cross-agent em canal de outro agente → Challenges por IP de datacenter em fluxos Ares/Hera** → `references/route-pack-02.md`
+- **Mentions cross-agent em canal de outro agente → Challenges por IP de datacenter em fluxos Ares** → `references/route-pack-02.md`
   - Cutover de política em sessão nova, sem produção, com readback de `state.db` → `references/cross-agent-session-policy-cutover.md`
 - **Recuperar e consolidar continuidade de thread grande → Novo agente Discord/Hermes — bootstrap de bot, token e service** → `references/route-pack-03.md`
-- **Enviar arquivos grandes/anexos no Discord → Formato REPORT-INFRA (Atena/Ares/Hera → Zeus)** → `references/route-pack-04.md`
+- **Enviar arquivos grandes/anexos no Discord → Formato REPORT-INFRA (Atena/Ares → Zeus)** → `references/route-pack-04.md`
 - **Processamento Zeus de REPORT-INFRA** → `references/route-pack-05.md`
 - **Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile → Alternativa Operacional** → `references/route-pack-06.md`
 - **SEÇÃO C — Hook git post-commit com notificação Discord → Política MGS de tool progress no Discord** → `references/route-pack-07.md`

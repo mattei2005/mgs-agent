@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
-      "next_step": "Nenhuma ação pendente. Manter o monitor canônico; a planilha histórica excluída só entra no escopo se Rodolfo decidir reativá-la no futuro.",
+      "next_step": "Aguardar confirmação crítica de Rodolfo para excluir permanentemente os quatro backups full criptografados pré-limpeza; depois listar/readback zero, manter o novo full validado, fechar inventário/audit e REPORT-INFRA.",
       "objective": "Eliminar integralmente o método Google pessoal legado e normalizar Zeus, Atena e Ares na Service Account canônica mgs-core-prod.",
-      "source": "Discord message 1527688600429269205; live Drive/Sheets readbacks for Gustavo and fases2; monitor-drive-auth-unified.py",
-      "state": "concluído: 14/14 sheets ativas acessíveis/editáveis pela service account canônica. gustavo e fases2, embora não sejam consumidores ativos, foram compartilhadas por rodolfo e passaram em readback drive/sheets http 200 com canedit/canmodifycontent. a planilha histórica mgs - receita dos sites 2025, 2024, 2023 foi excluída intencionalmente do escopo por decisão de rodolfo e não possui consumidor ativo. cobertura da lista: 16/17 acessíveis pelo método novo, com 1 exclusão histórica intencional; zero rota oauth pessoal.",
+      "source": "Discord message 1527685628169293967; runtime/process/cron/systemd/1Password readbacks; data/infra-inventory.json; mgs-offsite-backup full backup and isolated restore",
+      "state": "revalidação profunda: runtime operacional limpo; 281386 arquivos auditados. zero processos, fds, cron/jobs/systemd, configs ou seletores ativos antigos. 38 utilitários one-off em work/tmp/artifacts neutralizados fail-closed; archive google antigo tombstonado; monitor canônico ganhou guard contínuo legacy_runtime_clean. foi criado e restaurado com sucesso um novo backup full limpo. achado remanescente: quatro backups full criptografados anteriores à remoção local ainda preservam o snapshot obsoleto de .secrets.",
       "thread_id": "1527528492391075930",
-      "updated_at": "2026-07-17T14:50:43+00:00"
+      "updated_at": "2026-07-17T15:05:02+00:00"
     },
     {
       "agent": "zeus",
@@ -122,5 +122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:54:11+00:00"
+  "updated_at": "2026-07-17T15:05:02+00:00"
 }

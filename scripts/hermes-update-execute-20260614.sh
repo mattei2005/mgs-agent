@@ -119,11 +119,11 @@ LOG="$1"
 REPO=/root/.hermes/hermes-agent
 {
   printf '[%s] FINALIZER start gateway restart\n' "$(date -Iseconds)"
-  systemctl restart --no-block zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
+  systemctl restart --no-block zeus-gateway.service atena-gateway.service ares-gateway.service
   sleep 25
   printf '[%s] FINALIZER services\n' "$(date -Iseconds)"
-  systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service cron.service || true
-  systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager || true
+  systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service mgs-autocommit.service cron.service || true
+  systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager || true
   printf '[%s] FINALIZER patch guard\n' "$(date -Iseconds)"
   /root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh || true
   printf '[%s] FINALIZER version\n' "$(date -Iseconds)"

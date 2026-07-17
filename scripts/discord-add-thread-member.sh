@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 --profile <zeus|atena|ares|hera> --thread <thread_id> --user <user_id>" >&2
+  echo "Usage: $0 --profile <zeus|atena|ares> --thread <thread_id> --user <user_id>" >&2
 }
 
 PROFILE=""

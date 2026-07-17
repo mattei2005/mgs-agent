@@ -1,6 +1,6 @@
 {
-  "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares, Hera). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-07-12",
+  "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
+  "_updated": "2026-07-17",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -285,59 +285,6 @@
         }
       ],
       "status": "active_unified"
-    },
-    "hera": {
-      "name": "Hera",
-      "type": "Creative Operations Agent",
-      "discord_channel_id": "1513005743954198538",
-      "discord_channel_name": "hera-creative-agent",
-      "authorized_user_discord_ids": [],
-      "allowed_intents": [],
-      "discord_application_id": "1513006098133680290",
-      "discord_bot_id": "1513006098133680290",
-      "discord_permissions_integer": "328565115968",
-      "status": "inactive_archived",
-      "deactivated_at": "2026-07-12T13:29:00-04:00",
-      "deactivated_by": "zeus",
-      "deactivation_reason": "Capabilities consolidated into Ares by Rodolfo authorization.",
-      "_authorized_users_detail_historical": [
-        {
-          "discord_id": "344196393512075265",
-          "discord_username": "rodolfomattei",
-          "name": "Rodolfo Mattei",
-          "discord_role": "Super Admin",
-          "access_level": "full",
-          "added": "2026-06-06",
-          "added_by": "zeus"
-        },
-        {
-          "discord_id": "1496296175014252634",
-          "discord_username": "zeus-bot",
-          "name": "Zeus Bot",
-          "discord_role": "MGS Agent Bot",
-          "access_level": "agent_full",
-          "added": "2026-06-06",
-          "added_by": "rodolfo"
-        },
-        {
-          "discord_id": "1496306920494202950",
-          "discord_username": "atena-bot",
-          "name": "Atena Bot",
-          "discord_role": "MGS Agent Bot",
-          "access_level": "agent_full",
-          "added": "2026-06-06",
-          "added_by": "rodolfo"
-        },
-        {
-          "discord_id": "1508864261504630925",
-          "discord_username": "ares-bot",
-          "name": "Ares Bot",
-          "discord_role": "MGS Agent Bot",
-          "access_level": "agent_full",
-          "added": "2026-06-06",
-          "added_by": "rodolfo"
-        }
-      ]
     }
   },
   "blocklist": [],

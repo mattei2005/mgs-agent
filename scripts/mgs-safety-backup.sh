@@ -100,7 +100,7 @@ fi
 mkdir -p "$TMPDIR/runtime/crontab" "$TMPDIR/runtime/systemd"
 crontab -l > "$TMPDIR/runtime/crontab/root.crontab" 2>/dev/null || true
 find /etc/systemd/system -maxdepth 1 -type f \
-  \( -name 'zeus*.service' -o -name 'atena*.service' -o -name 'ares*.service' -o -name 'hera*.service' -o -name 'mgs*.service' \) \
+  \( -name 'zeus*.service' -o -name 'atena*.service' -o -name 'ares*.service' -o -name 'mgs*.service' \) \
   -exec cp -a {} "$TMPDIR/runtime/systemd/" \; 2>/dev/null || true
 
 # Lista de fontes. Arquivos ausentes são ignorados.

@@ -4,10 +4,10 @@ set -euo pipefail
 # Temporary noVNC session for logging Ares's persistent Chromium profile into YouTube.
 # Security: binds VNC/noVNC to 127.0.0.1 only. Access via SSH tunnel; no public port.
 
-DISPLAY_NUM="${HERA_YT_DISPLAY:-94}"
+DISPLAY_NUM="${ARES_YT_DISPLAY:-94}"
 DISPLAY=":${DISPLAY_NUM}"
-VNC_PORT="${HERA_YT_VNC_PORT:-5901}"
-NOVNC_PORT="${HERA_YT_NOVNC_PORT:-6081}"
+VNC_PORT="${ARES_YT_VNC_PORT:-5901}"
+NOVNC_PORT="${ARES_YT_NOVNC_PORT:-6081}"
 PROFILE_DIR="${ARES_YOUTUBE_PROFILE:-/root/.hermes/profiles/ares/browser-profiles/youtube-chromium}"
 LOG_DIR="/root/mgs-agent/logs"
 STOP_FILE="/tmp/ares-youtube-login-browser.stop"

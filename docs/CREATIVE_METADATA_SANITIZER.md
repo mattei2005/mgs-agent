@@ -19,14 +19,14 @@ Audit log:
 /root/mgs-agent/logs/creative-metadata-sanitizer.jsonl
 ```
 
-## Hera rule
+## Creative Operations rule
 
-Before Hera hands off, saves, or uploads a creative asset to the approved Drive/folder flow, Hera must run the sanitizer and use the cleaned file as the deliverable.
+Before Ares hands off, saves, or uploads a creative asset to the approved Drive/folder flow, Ares must run the sanitizer and use the cleaned file as the deliverable.
 
 Recommended single-file flow:
 
 ```bash
-/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/creative.png --agent hera
+/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/creative.png --agent ares
 /root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/creative.metadata-clean.png
 ```
 
@@ -44,7 +44,7 @@ Recommended gate:
 ## Batch flow
 
 ```bash
-/root/mgs-agent/scripts/clean-creative-metadata.sh batch /path/to/source-dir --out-dir /path/to/clean-dir --agent hera
+/root/mgs-agent/scripts/clean-creative-metadata.sh batch /path/to/source-dir --out-dir /path/to/clean-dir --agent ares
 ```
 
 ## Output and privacy discipline

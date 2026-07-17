@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:41:40Z",
-  "status": "active_with_hera_model_auth_blocker",
+  "updated_at": "2026-07-17T15:05:56Z",
+  "status": "active",
   "authorization": {
     "owner": "Rodolfo Mattei",
     "source": "discord:1527558141397700618#1527677052541599774",
@@ -46,13 +46,6 @@
       "native_profile_read": "pass",
       "full_agent_canary": "pass",
       "gateway_service": "active"
-    },
-    "hera": {
-      "provider_available": true,
-      "ai_peer": "hera",
-      "native_profile_read": "pass",
-      "full_agent_canary": "blocked_invalid_openai_refresh_token",
-      "gateway_service": "absent"
     }
   },
   "builtin_memory": {
@@ -69,10 +62,10 @@
   },
   "validation": {
     "honcho_tests": "26_passed",
-    "monitor": "ok_4_of_4",
-    "config_checks": "pass_4_of_4",
-    "live_mirror_config": "equal_4_of_4",
-    "honcho_json_mode": "0600_4_of_4",
+    "monitor": "ok_3_of_3",
+    "config_checks": "pass_3_of_3",
+    "live_mirror_config": "equal_3_of_3",
+    "honcho_json_mode": "0600_3_of_3",
     "restart_performed": false,
     "existing_session_cutover": "fresh_session_required"
   },

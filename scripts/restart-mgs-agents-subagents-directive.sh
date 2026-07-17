@@ -8,10 +8,10 @@ exec >>"$LOG" 2>&1
 
 echo "ts_start=$(date -u --iso-8601=seconds)"
 echo "reason=subagents_background_directive_runtime_reload"
-echo "services=atena-gateway.service ares-gateway.service hera-gateway.service zeus-gateway.service"
+echo "services=atena-gateway.service ares-gateway.service zeus-gateway.service"
 
 echo "before:"
-systemctl is-active atena-gateway.service ares-gateway.service hera-gateway.service zeus-gateway.service || true
+systemctl is-active atena-gateway.service ares-gateway.service zeus-gateway.service || true
 
 python3 - <<PY
 import json, datetime
@@ -20,7 +20,7 @@ entry={
   "event": "mgs_agents_restart_started",
   "actor": "rodolfo/zeus",
   "reason": "load subagents/background directive in runtime",
-  "services": ["atena-gateway.service","ares-gateway.service","hera-gateway.service","zeus-gateway.service"],
+  "services": ["atena-gateway.service","ares-gateway.service","zeus-gateway.service"],
   "restart_method": "systemd-run external finalizer; zeus last; no credentials touched",
   "log": "$LOG",
 }
@@ -31,7 +31,7 @@ PY
 # Give Zeus a moment to return control before services restart.
 sleep 8
 
-for svc in atena-gateway.service ares-gateway.service hera-gateway.service; do
+for svc in atena-gateway.service ares-gateway.service; do
   echo "restarting=$svc ts=$(date -u --iso-8601=seconds)"
   systemctl restart "$svc"
   sleep 5
@@ -56,7 +56,7 @@ if [ "$zeus_state" != "active" ]; then
 fi
 
 echo "after:"
-systemctl is-active atena-gateway.service ares-gateway.service hera-gateway.service zeus-gateway.service || true
+systemctl is-active atena-gateway.service ares-gateway.service zeus-gateway.service || true
 
 python3 - <<PY
 import json, datetime
@@ -65,7 +65,7 @@ entry={
   "event": "mgs_agents_restart_completed",
   "actor": "zeus",
   "reason": "load subagents/background directive in runtime",
-  "services": ["atena-gateway.service","ares-gateway.service","hera-gateway.service","zeus-gateway.service"],
+  "services": ["atena-gateway.service","ares-gateway.service","zeus-gateway.service"],
   "result": "all_active",
   "credentials_touched": False,
   "log": "$LOG",

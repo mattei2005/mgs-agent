@@ -20,7 +20,7 @@ A solução não é aumentar indefinidamente MEMORY/USER. A solução é manter 
 - Os três payloads estavam preservados; nenhum aprendizado foi silenciosamente perdido.
 - O backup MGS existente era local, com intervalo máximo de três dias, e excluía `.db`, `.sqlite`, logs e profiles Hermes vivos.
 - Não foi encontrada evidência canônica de backup off-site ou restore drill no repositório MGS.
-- `docs/mgs-os-restructure-plan.md` ainda tratava Hera como pendente, em conflito com `context/agent-map.md`, que registra a consolidação no Ares em 2026-07-12.
+- `docs/mgs-os-restructure-plan.md` ainda tinha um agente legado pendente, em conflito com o mapa canônico do Ares.
 
 ## Fase 0 — Estabilização
 
@@ -32,7 +32,7 @@ Preservar conteúdo                         Concluído; payloads intactos
 Consolidar preferência Zeus                Concluído com readback em USER
 Provar cobertura do Ares                    Concluído; fato já está na USER do Ares
 Excluir dead-letters recuperados            Não executado; exclusão exige gate crítico
-Corrigir drift Hera/Ares                    Incluído neste bloco
+Corrigir drift de Creative Operations       Incluído neste bloco
 Mapear cobertura real do backup             Concluído documentalmente
 ```
 
@@ -110,7 +110,7 @@ Ares:
 - consulta registry/checkpoint e depois a fonte canônica antes de pedir repetição de decisão ou retomada;
 - persiste procedimento em skill, estrutura/regra na fonte canônica e estado temporário em checkpoint dentro da autoridade vigente;
 - itens globais, ambíguos ou fora da área continuam escalando para Zeus;
-- não recria Hera como agente ativo e preserva as rotas canônicas do Ares;
+- preserva as rotas canônicas do Ares sem recriar agentes legados;
 - SOUL live e versionado estão byte-identical, config e permissões permaneceram inalteradas;
 - OAuth OpenAI-Codex foi reautenticado com cadeia independente após o preflight revelar refresh inválido;
 - sessão local nova `20260716_094808_1d73e9` consultou registry/checkpoint e contém o marker de continuidade exatamente uma vez no `sessions.system_prompt`;
