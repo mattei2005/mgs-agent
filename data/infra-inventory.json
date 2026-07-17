@@ -3923,7 +3923,9 @@
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
       "size_bytes": 7747,
-      "modified_at": "2026-07-17T10:06:31-04:00"
+      "modified_at": "2026-07-17T10:06:31-04:00",
+      "sha256": "6532053f93d7a640098ee188a6687ea6647bb2603bc1a915a38bc7107831d72a",
+      "validation": "bash -n PASS; exact allowlist accepts only reviewed service-account-token-rotation-bootstrap.md while unrelated token/secret paths remain blocked; mgs-autocommit.service active"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -4298,7 +4300,9 @@
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
       "size_bytes": 13888,
-      "modified_at": "2026-07-17T10:06:31-04:00"
+      "modified_at": "2026-07-17T10:16:24-04:00",
+      "sha256": "eed52e7bb32f8b724835580f50746e310fc9ee5f82c9f8beaf717cb5240036a4",
+      "validation": "bash -n PASS; live guardrail failure suppressed inside 2h anti-spam window; post-fix run reset consecutive_failures to 0 and emitted green recovery"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",

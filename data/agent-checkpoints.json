@@ -93,12 +93,12 @@
     {
       "agent": "zeus",
       "id": "zeus-alerts-infra-red-fix-20260717",
-      "next_step": "Aplicar allowlist exato, corrigir anti-spam, validar, recarregar mgs-autocommit e fechar alerta",
+      "next_step": "Monitorar o próximo ciclo normal; nenhuma ação operacional pendente",
       "objective": "Corrigir bloqueio do auto-commit e spam do monitor de auto-push identificado nos alertas vermelhos de 48h",
       "source": "discord:1527673716488671282#1527677240588898527",
-      "state": "authorized_in_progress",
+      "state": "resolved_validated",
       "thread_id": "1527673716488671282",
-      "updated_at": "2026-07-17T14:06:05+00:00"
+      "updated_at": "2026-07-17T14:18:51+00:00"
     },
     {
       "agent": "zeus",
@@ -112,5 +112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:06:05+00:00"
+  "updated_at": "2026-07-17T14:18:51+00:00"
 }
