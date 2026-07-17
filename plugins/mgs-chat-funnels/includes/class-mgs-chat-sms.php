@@ -10,6 +10,7 @@ final class MGS_Chat_SMS {
     const SMS_OPTION = 'mgs_cf_sms_managers';
     const REST_NS    = 'mgs-chat/v1';
     const MIN_FILL_MS = 3000;
+    const BUSINESS_TIMEZONE = 'America/Sao_Paulo';
 
     public static function boot() {
         add_action( 'plugins_loaded', array( __CLASS__, 'maybe_upgrade' ) );
@@ -62,6 +63,33 @@ final class MGS_Chat_SMS {
     private static function table_name() {
         global $wpdb;
         return $wpdb->prefix . 'mgs_chat_leads';
+    }
+
+    public static function business_timezone() {
+        return new DateTimeZone( self::BUSINESS_TIMEZONE );
+    }
+
+    public static function local_date_bound_to_utc( $date, $next_day = false ) {
+        $date = trim( (string) $date );
+        if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) return '';
+        $local = DateTimeImmutable::createFromFormat( '!Y-m-d', $date, self::business_timezone() );
+        $errors = DateTimeImmutable::getLastErrors();
+        if ( ! $local || ( is_array( $errors ) && ( $errors['warning_count'] || $errors['error_count'] ) ) ) return '';
+        if ( $next_day ) $local = $local->modify( '+1 day' );
+        return $local->setTimezone( new DateTimeZone( 'UTC' ) )->format( 'Y-m-d H:i:s' );
+    }
+
+    public static function format_created_at( $created_at, $format = 'd/m/Y, H:i' ) {
+        try {
+            $utc = new DateTimeImmutable( (string) $created_at, new DateTimeZone( 'UTC' ) );
+            return wp_date( $format, $utc->getTimestamp(), self::business_timezone() );
+        } catch ( Exception $e ) {
+            return (string) $created_at;
+        }
+    }
+
+    private static function local_date_sql( $column = 'created_at' ) {
+        return "DATE(CONVERT_TZ({$column}, '+00:00', '-03:00'))";
     }
 
     private static function default_managers() {
@@ -341,8 +369,14 @@ final class MGS_Chat_SMS {
         global $wpdb;
         $where = ' WHERE 1=1 ';
         if ( $filters['chat_id'] ) { $where .= ' AND chat_id=%s '; $params[] = $filters['chat_id']; }
-        if ( $filters['from'] ) { $where .= ' AND created_at >= %s '; $params[] = $filters['from'] . ' 00:00:00'; }
-        if ( $filters['to'] ) { $where .= ' AND created_at <= %s '; $params[] = $filters['to'] . ' 23:59:59'; }
+        if ( $filters['from'] ) {
+            $from_utc = self::local_date_bound_to_utc( $filters['from'] );
+            if ( $from_utc ) { $where .= ' AND created_at >= %s '; $params[] = $from_utc; }
+        }
+        if ( $filters['to'] ) {
+            $to_utc = self::local_date_bound_to_utc( $filters['to'], true );
+            if ( $to_utc ) { $where .= ' AND created_at < %s '; $params[] = $to_utc; }
+        }
         if ( $filters['manager'] ) { $where .= ' AND manager_code=%s '; $params[] = $filters['manager']; }
         if ( $filters['q'] ) {
             $like = '%' . $wpdb->esc_like( $filters['q'] ) . '%';
@@ -390,7 +424,7 @@ final class MGS_Chat_SMS {
     private static function render_rows_table( $rows ) {
         echo '<table class="widefat striped mgs-cf-lead-table"><thead><tr><th>ID</th><th>Data</th><th>Chat</th><th>Gestor</th><th>Nome</th><th>Telefone</th><th>utm_source</th><th>utm_medium</th><th>Campanha</th><th>SMS</th></tr></thead><tbody>';
         foreach ( (array) $rows as $row ) {
-            echo '<tr><td>' . (int) $row['id'] . '</td><td>' . esc_html( date_i18n( 'd/m/Y, H:i', strtotime( $row['created_at'] ) ) ) . '</td><td>' . esc_html( $row['chat_id'] ) . '</td><td>' . esc_html( $row['manager_code'] ) . '</td><td>' . esc_html( $row['name'] ) . '</td><td>' . esc_html( $row['phone'] ) . '</td><td>' . esc_html( $row['utm_source'] ) . '</td><td>' . esc_html( $row['utm_medium'] ) . '</td><td>' . esc_html( $row['utm_campaign'] ) . '</td><td>' . esc_html( $row['sms_funnel_status'] ) . '</td></tr>';
+            echo '<tr><td>' . (int) $row['id'] . '</td><td>' . esc_html( self::format_created_at( $row['created_at'] ) ) . '</td><td>' . esc_html( $row['chat_id'] ) . '</td><td>' . esc_html( $row['manager_code'] ) . '</td><td>' . esc_html( $row['name'] ) . '</td><td>' . esc_html( $row['phone'] ) . '</td><td>' . esc_html( $row['utm_source'] ) . '</td><td>' . esc_html( $row['utm_medium'] ) . '</td><td>' . esc_html( $row['utm_campaign'] ) . '</td><td>' . esc_html( $row['sms_funnel_status'] ) . '</td></tr>';
         }
         if ( empty( $rows ) ) echo '<tr><td colspan="10">Nenhum lead encontrado.</td></tr>';
         echo '</tbody></table>';
@@ -418,7 +452,8 @@ final class MGS_Chat_SMS {
         $table = self::table_name();
         $unique = (int) $wpdb->get_var( self::prepare_sql( "SELECT COUNT(DISTINCT phone) FROM {$table} {$where}", $params ) );
         $ok = (int) $wpdb->get_var( self::prepare_sql( "SELECT COUNT(*) FROM {$table} {$where} AND sms_funnel_status LIKE 'ok:%'", $params ) );
-        $days = (int) $wpdb->get_var( self::prepare_sql( "SELECT COUNT(DISTINCT DATE(created_at)) FROM {$table} {$where}", $params ) );
+        $local_date_sql = self::local_date_sql();
+        $days = (int) $wpdb->get_var( self::prepare_sql( "SELECT COUNT(DISTINCT {$local_date_sql}) FROM {$table} {$where}", $params ) );
         $avg = $days > 0 ? round( $total / $days, 1 ) : 0;
         echo '<div class="wrap mgs-cf-sms-report"><h1>Relatório SMS</h1><p>Captação dos chats <code>/chat-sms/</code>, entrega ao SMS Funnel e atribuição de campanha.</p>';
         self::report_css(); self::filter_form( $filters, 'mgs-chat-funnels-reports' );
@@ -446,10 +481,13 @@ final class MGS_Chat_SMS {
         $rows = $wpdb->get_results( self::prepare_sql( "SELECT id,created_at,chat_id,route,manager_code,name,phone,utm_source,utm_medium,utm_campaign,utm_term,utm_content,fbclid,gclid,sms_funnel_status FROM {$table} {$where} ORDER BY created_at DESC", $params ), ARRAY_A );
         nocache_headers();
         header( 'Content-Type: text/csv; charset=utf-8' );
-        header( 'Content-Disposition: attachment; filename=mgs-chat-leads-' . gmdate( 'Ymd-His' ) . '.csv' );
+        header( 'Content-Disposition: attachment; filename=mgs-chat-leads-' . wp_date( 'Ymd-His', null, self::business_timezone() ) . '.csv' );
         $out = fopen( 'php://output', 'w' );
         fputcsv( $out, array( 'id','created_at','chat_id','route','manager_code','name','phone','utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid','sms_funnel_status' ) );
-        foreach ( (array) $rows as $row ) fputcsv( $out, $row );
+        foreach ( (array) $rows as $row ) {
+            $row['created_at'] = self::format_created_at( $row['created_at'], 'Y-m-d H:i:s' );
+            fputcsv( $out, $row );
+        }
         fclose( $out );
         exit;
     }

@@ -56,7 +56,10 @@ Treat permission rollout and runtime-auth cutover as separate transactions:
 Service Usage diagnosis must distinguish:
 
 - `ACCESS_TOKEN_SCOPE_INSUFFICIENT` → token scope problem; obtain `cloud-platform` through the approved flow.
-- `PERMISSION_DENIED` / missing `serviceusage.services.enable` with a cloud-platform token → IAM problem; use an authorized GCP administrator or the direct Cloud Console API-library page. Do not churn the refresh token to solve missing IAM.
+- `PERMISSION_DENIED` / missing `serviceusage.services.enable` with a cloud-platform token → IAM problem for API activation; use an authorized GCP administrator or the direct Cloud Console API-library page. Do not churn the refresh token to solve missing IAM.
+- API shown as **Enabled**, but an explicit `x-goog-user-project=<project-number>` probe returns missing `serviceusage.services.use` → caller-consumer IAM is absent. Grant the Service Account least-privilege **Service Usage Consumer** (`roles/serviceusage.serviceUsageConsumer`), allow propagation, and retry `spreadsheets.get`. Do not substitute Service Usage Admin.
+
+The generic Sheets 403 can continue saying “disabled or recently enabled” even after activation when the consumer IAM gate is missing. After a bounded propagation wait, use the explicit quota-project probe once instead of looping on the same error.
 
 ## Transactional move route
 
