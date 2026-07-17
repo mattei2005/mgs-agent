@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-sheets-enterprise-migration-20260716",
-      "next_step": "Cruzar referências ativas em scripts/configs/crons com metadados reais do Google Drive e listar planilhas ativas versus históricas por agente e localização",
+      "next_step": "Rodolfo confere a classificação; após autorização explícita, preparar plano por planilha com backup, dependências IMPORTRANGE, move preservando ID quando possível, Service Account, atualização de rotas, smoke e rollback",
       "objective": "Inventariar e preparar a migração somente das planilhas operacionais usadas por Zeus, Atena e Ares para o Shared Drive empresarial MGS-AGENTS",
-      "source": "discord:message:1527497423952285696",
-      "state": "escopo confirmado por rodolfo: excluir todo conteúdo pessoal não usado pelos agentes; fase atual é inventário read-only para conferência, sem mover arquivos",
+      "source": "discord:message:1527497423952285696; Google Drive API read-only 2026-07-16; scripts/crontab/skills live",
+      "state": "inventário read-only concluído: 18 ids referenciados, 17 google sheets existentes; 9 operacionais no my drive, 5 já no mgs-agents, 3 históricas/para decisão no my drive e 1 referência antiga 404. ares não possui rota ativa direta para google sheets; usa o shared drive para arquivos. nenhum arquivo movido.",
       "thread_id": "1527491546331611238",
-      "updated_at": "2026-07-17T02:10:56+00:00"
+      "updated_at": "2026-07-17T02:16:04+00:00"
     },
     {
       "agent": "zeus",
@@ -72,5 +72,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T02:10:56+00:00"
+  "updated_at": "2026-07-17T02:16:04+00:00"
 }

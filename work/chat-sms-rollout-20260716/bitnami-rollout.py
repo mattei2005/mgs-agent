@@ -65,12 +65,12 @@ def login(site):
 
 
 def editor_page(session, domain, file_name):
-    url = (f'https://{domain}/wp-admin/plugin-editor.php?file={quote(file_name)}'
-           f'&plugin={quote(MAIN_PLUGIN)}')
+    url = (f'https://{domain}/wp-admin/plugin-editor.php?file={quote(file_name, safe="")}'
+           f'&plugin={quote(MAIN_PLUGIN, safe="")}')
     response = session.get(url, timeout=35)
     response.raise_for_status()
     content = re.search(r'<textarea[^>]+id=["\']newcontent["\'][^>]*>(.*?)</textarea>', response.text, re.S | re.I)
-    nonce = re.search(r'name=["\']_ajax_nonce["\'][^>]+value=["\']([^"\']+)', response.text, re.I)
+    nonce = re.search(r'name=["\']nonce["\'][^>]+value=["\']([^"\']+)', response.text, re.I)
     if not content or not nonce:
         raise RuntimeError(f'{domain}: plugin editor unavailable for {file_name}')
     return html.unescape(content.group(1)), html.unescape(nonce.group(1))
@@ -78,21 +78,20 @@ def editor_page(session, domain, file_name):
 
 def editor_write(session, domain, file_name, new_content):
     _, nonce = editor_page(session, domain, file_name)
-    response = session.post(f'https://{domain}/wp-admin/admin-ajax.php', data={
-        'action': 'edit-theme-plugin-file',
-        '_ajax_nonce': nonce,
+    referer = (f'/wp-admin/plugin-editor.php?file={quote(file_name, safe="")}'
+               f'&plugin={quote(MAIN_PLUGIN, safe="")}')
+    response = session.post(f'https://{domain}/wp-admin/plugin-editor.php', data={
+        'nonce': nonce,
+        '_wp_http_referer': referer,
+        'action': 'update',
         'file': file_name,
         'plugin': MAIN_PLUGIN,
         'newcontent': new_content,
-        'docs-list': '',
-    }, headers={'Referer': f'https://{domain}/wp-admin/plugin-editor.php'}, timeout=60)
+        'submit': 'Update File',
+    }, headers={'Referer': f'https://{domain}{referer}'}, timeout=90, allow_redirects=True)
     response.raise_for_status()
-    try:
-        payload = response.json()
-    except Exception as exc:
-        raise RuntimeError(f'{domain}: non-JSON plugin editor response for {file_name}') from exc
-    if not payload.get('success'):
-        raise RuntimeError(f'{domain}: plugin editor rejected {file_name}: {str(payload.get("data"))[:500]}')
+    if 'Unable to communicate back with site' in response.text or 'fatal error' in response.text.lower():
+        raise RuntimeError(f'{domain}: plugin editor rejected {file_name}')
     readback, _ = editor_page(session, domain, file_name)
     if readback != new_content:
         raise RuntimeError(f'{domain}: exact plugin editor readback failed for {file_name}')
@@ -222,7 +221,7 @@ add_action('admin_init', static function () {
     $deleted = $lead_id ? $wpdb->delete($table, array('id'=>$lead_id), array('%d')) : false;
     $after = (int)$wpdb->get_var("SELECT COUNT(*) FROM {$table}");
     $ok = !empty($data['ok']) && $status === 'ok:G006' && $deleted === 1 && $before === $after;
-    wp_send_json(array('ok'=>$ok,'api_ok'=>!empty($data['ok']),'status'=>$status,'row_restored'=>$before===$after,'before'=>$before,'after'=>$after,'mocked_outbound'=>true), $ok ? 200 : 500);
+    wp_send_json(array('ok'=>$ok,'api_ok'=>!empty($data['ok']),'error'=>(string)($data['error'] ?? ''),'status'=>$status,'row_restored'=>$before===$after,'before'=>$before,'after'=>$after,'mocked_outbound'=>true), $ok ? 200 : 500);
 });
 // ZEUS_TRANSACTIONAL_SMS_SMOKE_END
 '''.replace('__KEY__', key)
@@ -263,7 +262,12 @@ def main():
     results = []
     BACKUP_ROOT.mkdir(parents=True, exist_ok=True)
 
-    for site in SITES:
+    selected_domains = {x.strip() for x in os.environ.get('MGS_ROLLOUT_DOMAINS', '').split(',') if x.strip()}
+    rollout_sites = [site for site in SITES if not selected_domains or site['domain'] in selected_domains]
+    if not rollout_sites:
+        raise RuntimeError('no Bitnami rollout sites selected')
+
+    for site in rollout_sites:
         domain = site['domain']
         public_precheck(domain)
         session = login(site)
@@ -300,7 +304,8 @@ def main():
                 smoke_response = session.get(f'https://{domain}/wp-admin/?mgs_sms_smoke={key}', timeout=45)
                 smoke_data = smoke_response.json()
                 if smoke_response.status_code != 200 or not smoke_data.get('ok') or not smoke_data.get('mocked_outbound') or not smoke_data.get('row_restored'):
-                    raise RuntimeError(f'{domain}: transactional smoke failed')
+                    safe_smoke = {k: smoke_data.get(k) for k in ('ok','api_ok','error','status','row_restored','before','after','mocked_outbound')}
+                    raise RuntimeError(f'{domain}: transactional smoke failed: http={smoke_response.status_code} data={safe_smoke}')
             finally:
                 editor_write(session, domain, MAIN_PLUGIN, final_files[MAIN_PLUGIN])
 
