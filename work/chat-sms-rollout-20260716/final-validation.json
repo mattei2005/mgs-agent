@@ -1,0 +1,58 @@
+{
+  "initiative": "chat-sms-canary-eggbev-20260716",
+  "authorized_by": "Rodolfo Mattei",
+  "discord_thread_id": "1527491503084015616",
+  "completed_at": "2026-07-17T02:27:23Z",
+  "scope": {
+    "eligible_sites": [
+      "eggbev.com",
+      "newsoun.com",
+      "finance.topfeed.fun",
+      "wantabrand.com",
+      "zuout.com",
+      "zytiva.com",
+      "openzed.com",
+      "cliquet.com"
+    ],
+    "legacy_route": "/chat/car/br1",
+    "sms_route": "/chat-sms/car/br1",
+    "sms_manager": "G006",
+    "excluded": "All sites without an existing CAR chat; all EMP configs"
+  },
+  "production": {
+    "plugin_version": "0.4.1",
+    "sites_updated": 8,
+    "legacy_routes_updated": 8,
+    "sms_routes_active": 8,
+    "public_routes_validated": 16,
+    "providers_preserved": {
+      "jbf": 6,
+      "m2_pubguru": 1,
+      "actview": 1
+    }
+  },
+  "validation": {
+    "public_matrix_all_ok": true,
+    "http_200": "16/16",
+    "exact_three_offer_copy": "16/16",
+    "own_domain_targets": "48/48",
+    "legacy_without_sms_form": "8/8",
+    "sms_with_name_phone_form": "8/8",
+    "private_sms_urls_absent_from_public_html": "16/16",
+    "utm_hardening_present": "16/16",
+    "transactional_mocked_sms_smoke": "8/8",
+    "real_sms_sent_during_smoke": false,
+    "synthetic_rows_restored": "8/8",
+    "browser_eggbev_legacy_cards_and_utm": true,
+    "browser_eggbev_sms_form_visual": true,
+    "browser_zuout_actview_form_and_pre_submit_class": true,
+    "wantabrand_m2_static_provider_contract": true
+  },
+  "backups": [
+    "/var/backups/mgs-chat-funnels/20260717T021050Z/",
+    "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com/",
+    "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/"
+  ],
+  "known_warning": "Wantabrand WP-CLI continues to emit the pre-existing yoast-rest-meta.php permission warning; plugin/config/public/smoke validations passed.",
+  "outcome": "success"
+}

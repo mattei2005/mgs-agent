@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T22:22:02-04:00",
+    "updated_at": "2026-07-16T22:30:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1107,22 +1107,21 @@
       "type": "wordpress_plugin",
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
-      "version": "0.3.9",
-      "status": "deployed_active_gate_question_2_disabled",
-      "files_count": 7,
-      "size_bytes": 128909,
-      "sha256_manifest": "0282a39f5b8025f40b408a41d6f27ba2576767250dc6b90ae4ee0df16923fd74",
-      "package_path": "/tmp/mgs-chat-funnels-cards.zip",
-      "package_sha256": "c8624b0a649018aca82c82aa28ba84294ae463324234e74e5bb53c5c6cb20113",
-      "modified_at": "2026-07-06T19:03:00.267307+00:00",
+      "version": "0.4.1",
+      "status": "deployed_active_car_generic_offers_and_sms_variant",
+      "files_count": 8,
+      "size_bytes": 199231,
+      "sha256_manifest": "88624cd46aef0e7af153516ef49f2302ef349ddd47046f39689387439f979009",
+      "package_path": "/tmp/mgs-chat-funnels-0.4.1-code-only.tar.gz",
+      "package_sha256": "891ebac9a0423656a522aa8bebbe138f665098b0fbf3b3cd71a771ac62152579",
+      "modified_at": "2026-07-16T22:27:23-04:00",
       "validations": [
-        "local PHP lint OK",
-        "RunCloud remote PHP lint OK",
-        "RunCloud remote JSON validation OK",
-        "WP Admin upload+replace OK on openzed/cliquet",
-        "public gateQuestionCount=1 validation OK on 8 sites",
-        "admin checkbox unchecked validation OK on openzed/cliquet",
-        "browser flow validation OK on eggbev"
+        "local PHP lint, Node syntax and JSON validation OK",
+        "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
+        "Bitnami authenticated plugin-editor exact readback and mocked transactional SMS smoke OK on Openzed and Cliquet",
+        "public 16-route matrix OK: legacy and SMS HTTP 200, exact three offers, own-domain targets, UTM hardening and private SMS URLs absent",
+        "provider matrix OK: JBF, Wantabrand M2/PubGuru and Zuout ActView preserved",
+        "browser Eggbev legacy flow reached all three cards with UTM/fbclid; Eggbev and Zuout SMS forms rendered without CTA provider class before submit"
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1136,10 +1135,16 @@
       ],
       "active_plugin": "mgs-chat-funnels/mgs-chat-funnels",
       "public_routes": [
-        "/chat/car/br1"
+        "/chat/car/br1",
+        "/chat-sms/car/br1"
       ],
-      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels gate question 2 disabled 2026-07-06",
-      "description": "CAR-BR gate question 2 disabled on all sites; question 1 remains mandatory."
+      "backup_paths": [
+        "/var/backups/mgs-chat-funnels/20260717T021050Z/",
+        "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com/",
+        "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/"
+      ],
+      "source_report": "REPORT-INFRA Zeus CAR offers and chat-SMS rollout 2026-07-16",
+      "description": "CAR-BR legacy chats now use the three generic offer cards; a separate G006 SMS capture variant is active only on the same eight sites that already had the CAR chat installed. EMP chats were not changed."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
@@ -2763,17 +2768,32 @@
         "csv_export",
         "sms_status_tracking"
       ],
-      "status": "deployed_canary_mobile_button_fix_validated_awaiting_manager_url_and_rodolfo_validation",
-      "validation": "HTTP 200 new+legacy; SMS form only on chat-sms; mobile 360px answer button rect fully inside chat on both sides with border-box; live cachebuster rect inside; PHP/JS lint; config hashes unchanged",
+      "status": "promoted_to_eight_site_rollout_validated",
+      "validation": "Canary accepted and promoted: Eggbev legacy+SMS routes HTTP 200 with the generic three-card offer, SMS manager G006 configured, browser card/UTM and form visual checks passed, transactional mocked SMS smoke returned ok:G006 and restored lead rows 8→8 without a real send; the same product is validated on eight eligible sites.",
       "rollback_backups": [
         "/home/runcloud/backups/zeus/eggbev/mgs-chat-funnels-0.3.23-20260716-220448.tar.gz",
         "/home/runcloud/backups/zeus/eggbev/eggbev-pre-chat-sms-20260716-220448.sql",
         "/home/runcloud/backups/zeus/eggbev/mgs-chat-funnels-0.4.0-20260716-222248.tar.gz"
       ],
-      "updated_at": "2026-07-16T18:25:56-04:00"
+      "rollout_evidence": "/root/mgs-agent/work/chat-sms-rollout-20260716/final-validation.json",
+      "updated_at": "2026-07-16T22:30:12-04:00"
     }
   ],
   "profile_skill_references": [
+    {
+      "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "skill": "wp-plugin-mass-operation",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/mgs-chat-funnels-car-offer-bulk-update.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/mgs-chat-funnels-car-offer-bulk-update.md",
+      "size_bytes": 8087,
+      "modified_at": "2026-07-16T22:26:38-04:00",
+      "sha256": "4d51761e6dccd8a807e0873fca259760871347abfcd026eeb035b34fa896a82e",
+      "purpose": "Durable procedure for updating only CAR-BR three-card offers and creating a separate SMS variant on sites that already have the CAR chat, with config preservation, provider-aware validation and transactional mocked SMS smoke.",
+      "validation": "Runtime/versioned reference SHA match; procedure exercised on eight sites with 16/16 public routes and 8/8 mocked SMS smokes; Bitnami inline __DIR__ config-path pitfall documented.",
+      "updated_at": "2026-07-16T22:30:12-04:00"
+    },
     {
       "id": "zeus-wp-plugin-ad-inserter-native-code-save-reference",
       "agent": "zeus",
@@ -6885,15 +6905,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 6401,
-      "md5": "2c93d8a628c2c626dd1af10e839c76f8",
-      "modified_at": "2026-07-16T22:16:04-04:00"
+      "size_bytes": 6175,
+      "md5": "c7606a182fc93038d845e222db390737",
+      "modified_at": "2026-07-16T22:28:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 6456,
-      "md5": "f31aafb4b0a0d0a94b872feeb579365f",
-      "modified_at": "2026-07-16T22:22:02-04:00"
+      "md5": "75052cfef5ff85bf959d87a24715bccc",
+      "modified_at": "2026-07-16T22:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6904,8 +6924,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "06dba8ceac7b1eb7618ea73bc3ddafcd",
-      "modified_at": "2026-07-16T22:11:38-04:00"
+      "md5": "81219ed96b659671cfa3f56512064ae6",
+      "modified_at": "2026-07-16T22:26:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6916,8 +6936,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 27127,
-      "md5": "394b1202a2e28538ee201d4fef8d73c4",
-      "modified_at": "2026-07-16T21:28:44-04:00"
+      "md5": "caf35283cc9174994a814f934af641fe",
+      "modified_at": "2026-07-16T22:28:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6982,14 +7002,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27745,
-      "md5": "5690ceef75ca77155159930472288606",
-      "modified_at": "2026-07-16T22:20:02-04:00"
+      "md5": "84a687107417ce1eaaf45cfe0ed9506e",
+      "modified_at": "2026-07-16T22:25:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "eceef21831a48d7b0728c121afcb0918",
-      "modified_at": "2026-07-16T22:22:02-04:00"
+      "size_bytes": 356,
+      "md5": "cf05a5faba2355bbfec4fe9eb10b10aa",
+      "modified_at": "2026-07-16T22:28:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7011,9 +7031,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 311654,
-      "md5": "29ae50aad61f7a31c0d02b602356062d",
-      "modified_at": "2026-07-16T22:21:10-04:00"
+      "size_bytes": 312406,
+      "md5": "42e661d491c43d5fbdb56874c6385b7f",
+      "modified_at": "2026-07-16T22:27:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7066,8 +7086,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 6681,
-      "md5": "0065c3c0c6fcabe93cd025ae8f44e9a0",
-      "modified_at": "2026-07-16T21:25:34-04:00"
+      "md5": "a7de1cc502332947d4716b1af7a32b28",
+      "modified_at": "2026-07-16T22:25:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -7157,7 +7177,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-16T22:21:02-04:00"
+      "modified_at": "2026-07-16T22:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7167,9 +7187,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 2101,
-      "md5": "68e667244a6612514ef4634e1648e866",
-      "modified_at": "2026-07-16T21:24:03-04:00"
+      "size_bytes": 2223,
+      "md5": "427e3a261d821f2ebaf5e3991d28b5d8",
+      "modified_at": "2026-07-16T22:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -7191,9 +7211,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2110,
-      "md5": "f4a18d41c10c9493a859506258a4e95f",
-      "modified_at": "2026-07-16T22:20:03-04:00"
+      "size_bytes": 2112,
+      "md5": "5f765088f4fdbc10868b8aa8b3bb13ce",
+      "modified_at": "2026-07-16T22:25:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

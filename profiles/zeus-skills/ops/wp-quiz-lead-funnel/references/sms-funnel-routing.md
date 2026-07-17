@@ -68,3 +68,12 @@ Use this sequence when Rodolfo asks which WordPress leads from a date are absent
 8. Reconcile duplicate WordPress submissions by unique phone, but preserve row count and timestamps so repeated submissions are not hidden.
 9. Treat WordPress `ok:G00X` plus stored vendor `success:true` as delivery-attempt evidence, not dashboard-membership proof. If the lead is absent after the direct readback, report the inconsistency explicitly.
 10. Delete temporary exports, credentials state, and PII files after producing the validated result.
+
+## Metric distinction: missing dashboard leads vs unsent messages
+
+Do not answer these as the same question:
+
+- **Lead absent from the dashboard:** reconcile current list membership by phone. Unique-phone deduplication is appropriate only for this membership question.
+- **Messages not sent in a day:** compare the total WordPress report rows for that calendar date with the SMS Funnel `/api/daily-sents` outbound-message count for the same date. Under the current business rule of one expected SMS per WordPress report row, calculate `WP total rows - SMS sent`. Do not substitute unique phones.
+
+The aggregate difference answers **how many expected messages were not sent**, but it does not identify the exact WordPress rows responsible. Naming those rows requires per-message/per-lead send-event evidence from SMS Funnel, not list membership alone.

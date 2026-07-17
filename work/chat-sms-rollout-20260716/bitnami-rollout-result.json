@@ -1,6 +1,21 @@
 {
-  "backup_root": "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z",
+  "complete": true,
   "sites": [
+    {
+      "domain": "openzed.com",
+      "ok": true,
+      "version": "0.4.1",
+      "status": "active",
+      "smoke": {
+        "ok": true,
+        "status": "ok:G006",
+        "row_restored": true,
+        "before": 0,
+        "after": 0,
+        "mocked_outbound": true
+      },
+      "backup": "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com"
+    },
     {
       "domain": "cliquet.com",
       "ok": true,
@@ -8,8 +23,6 @@
       "status": "active",
       "smoke": {
         "ok": true,
-        "api_ok": true,
-        "error": "",
         "status": "ok:G006",
         "row_restored": true,
         "before": 0,
