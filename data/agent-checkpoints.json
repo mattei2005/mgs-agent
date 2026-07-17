@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
-      "next_step": "Rodolfo concede Service Usage Consumer à mgsagent no mgs-core-prod, habilita Generative Language API e cria/salva chave Gemini nova; autoriza rotação do token 1Password Zeus. Zeus então executa cron canaries, substitui Gemini, remove OAuth/segredos/jobs/membro antigo, valida segunda varredura, inventário, audit e REPORT-INFRA.",
+      "next_step": "Obter confirmação crítica de Rodolfo para billing Gemini com conta/budget definidos e para rotação do token 1Password Zeus; depois canário de imagem, backup quick/restore readback, exclusão permanente residual/projetos antigos, varredura final, inventário status completed e REPORT-INFRA final.",
       "objective": "Consolidar credenciais Google Cloud/Drive/Sheets/Gemini dos agentes MGS no projeto mgs-core-prod e retirar dependências operacionais antigas com canários e readback.",
-      "source": "Discord thread 1527528492391075930; canary Drive/Sheets 2026-07-17T05:15Z",
-      "state": "migração local em andamento: defaults e consumidores drive/sheets alterados para google service account - mgs agent; oauth removido de monitor, criativos, dtr/sb, financeiro, meta app roles e b011; skills live+versionadas atualizadas; sintaxe validada; inventário ares read-only passou; canário real criou sheet no mgs-agents, escreveu/leu/atualizou com readback exato e apagou http 204. bloqueios: mgsagent não possui roles/serviceusage.serviceusageconsumer; sessão web zeus não autenticada; gemini api key atual tem formato válido mas api retorna 400 api_key_invalid. limpeza destrutiva antiga ainda não executada. diff de ferramenta expôs contexto da .env em trace interno; arquivo segue gitignored, mas token 1password precisa rotação separada.",
+      "source": "Discord thread 1527528492391075930; authorization 1527540826119340163; audit event mgs_google_cloud_cutover_partial_validated",
+      "state": "drive/sheets cutover validated: iam service usage consumer http 200; canary create/write/read/update/delete pass; root monitor, ares preflight, meta app roles/b011 dry-runs and bounded dtr/sb dry-run pass. active legacy refs=0; oauth scripts/local secrets/jobs removed; old 1p oauth item moved to recently deleted; mattei2005 removed from mgs-agents; only support and mgsagent remain managers. gemini auth key/catalog http 200 but image generation blocked resource_exhausted free-tier limit 0. internal trace exposed .env context; gitignored and backup copy removed, but zeus 1password token rotation pending.",
       "thread_id": "1527528492391075930",
-      "updated_at": "2026-07-17T05:21:23+00:00"
+      "updated_at": "2026-07-17T06:20:54+00:00"
     },
     {
       "agent": "zeus",
@@ -82,5 +82,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T05:21:23+00:00"
+  "updated_at": "2026-07-17T06:20:54+00:00"
 }

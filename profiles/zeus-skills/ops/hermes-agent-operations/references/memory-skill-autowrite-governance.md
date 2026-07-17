@@ -351,6 +351,22 @@ For exclusive per-agent OAuth, a legacy global→profiles sync is incompatible e
 9. Back up, apply, validate character counts, and read back every retained invariant.
 10. Verify capacity-monitor recovery and report the write.
 
+### Handle a zero-savings automatic proposal
+
+The MGS capacity monitor deliberately proposes only exact-duplicate removal automatically. A proposal with `savings_chars=0` is therefore not a failed write: verify its metadata and classify it as a no-op snapshot when `before` and `after` hashes match, duplicate count is zero, the source hash still matches, and `semantic_review_required=true`. State plainly that the alert is valid but the automatic proposal is not actionable; never imply that USER/MEMORY changed.
+
+When headroom is still low:
+
+1. Simulate a semantic rewrite in memory only; do not overwrite the monitor proposal or durable store.
+2. Prefer the smallest sufficient diff: keep unaffected entries byte-identical and rewrite only enough long entries to move safely below the alert threshold while preserving every atomic fact.
+3. Report exact before/after characters, percentage, headroom, changed-entry count, and the complete diff for only the changed entries. Do not claim “full diff” if unchanged entries were silently rewritten too.
+4. Treat “continue” after announcing a review step as authorization to present the diff, not authorization to apply it. Apply only after Rodolfo explicitly directs execution of that reviewed scope.
+5. Before applying, create a protected `0700/0600` backup and verify its hash matches the live source.
+6. Apply all reviewed entry replacements atomically in one `memory` tool batch; never perform a sequence that can leave half the compaction committed.
+7. Read back the store and verify exact entry count, exact changed-entry indexes, unchanged-entry count, expected retained semantics, characters, percentage, headroom, file mode, and post-write hash.
+8. Run the capacity monitor in read-only summary mode and require zero capacity warnings/errors. Let the scheduled monitor emit recovery, then verify the exact Discord recovery message by ID, including empty content and the expected embed title; do not repost a duplicate recovery.
+9. Leave stale proposal deletion separate: removing an old proposal or backup is a file deletion and requires its own applicable authorization gate.
+
 ## Pitfalls
 
 - **Canonical-source fallacy** — “it exists in a reference” is not equivalent to “the agent knows it by default.”
