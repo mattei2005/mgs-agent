@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-17T10:46:12-04:00",
+    "updated_at": "2026-07-17T10:54:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -551,11 +551,13 @@
         "scheduler_legacy_scan": "PASS root crontab, 17 Hermes jobs and systemd all zero",
         "removed_secret_paths": "PASS primary, backup and former profile watchdog wrapper absent",
         "profile_mirrors": "PASS canonical Google skills, references, SOULs and scripts live equal versioned mirrors",
-        "sb_restricted_transition_dry_run": "PASS 52 publishers, 76 active users, 439 monitored, zero transitions, state_written=false"
+        "sb_restricted_transition_dry_run": "PASS 52 publishers, 76 active users, 439 monitored, zero transitions, state_written=false",
+        "listed_sheets_scope": "PASS 16/17 Drive+Sheets accessible/editable; historical 2025/2024/2023 intentionally excluded by owner and has no active consumer",
+        "nonactive_shared_sheets": "PASS Gustavo and fases2 Drive/Sheets HTTP 200; canEdit/canModifyContent true"
       },
       "security_followup": "Resolved: Zeus 1Password service-account token rotated to new identity; old identity deleted; .env mode 0600; required item reads, consumers, backup and restore validated.",
       "status": "operational_cutover_complete_service_account_only_verified",
-      "updated_at": "2026-07-17T10:24:32-04:00",
+      "updated_at": "2026-07-17T10:50:43.365484-04:00",
       "checkpoint_id": "google-cloud-mgs-core-cutover-20260717",
       "onepassword_runtime": {
         "service_account_name": "MGS Agent VPS",
@@ -4375,8 +4377,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
-      "size_bytes": 10047,
-      "modified_at": "2026-07-17T01:06:50-04:00"
+      "size_bytes": 12864,
+      "modified_at": "2026-07-17T10:53:33-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
@@ -7225,15 +7227,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 10614,
-      "md5": "b7174984e5bd4f5ba477ca774190af8e",
-      "modified_at": "2026-07-17T10:31:05-04:00"
+      "size_bytes": 11368,
+      "md5": "115c8576b0473e18d62b9839f72cdfb6",
+      "modified_at": "2026-07-17T10:54:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 7209,
-      "md5": "7cea401406eacbb279e34fa47cbb0fea",
-      "modified_at": "2026-07-17T10:42:01-04:00"
+      "md5": "5406e361217ce7a22f5bef0ae4b6242c",
+      "modified_at": "2026-07-17T10:52:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -7280,8 +7282,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 281,
-      "md5": "9ff3bac638884a64f411547d06e13830",
-      "modified_at": "2026-07-17T10:19:02-04:00"
+      "md5": "3f2cef9ebe18afa441dd063c62a18f03",
+      "modified_at": "2026-07-17T10:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -7322,14 +7324,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27874,
-      "md5": "680aafedd436357813f6572e620985e4",
-      "modified_at": "2026-07-17T10:45:01-04:00"
+      "md5": "968d989e178d9d3230f0ef05dee64988",
+      "modified_at": "2026-07-17T10:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "f108001ac98fa9c8cf912fa35ba5b7e1",
-      "modified_at": "2026-07-17T10:46:01-04:00"
+      "md5": "d899f21ecf6336d9b529ed53e19d45df",
+      "modified_at": "2026-07-17T10:54:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7351,15 +7353,15 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
-      "size_bytes": 2778,
-      "md5": "e5212a0ef965d7a1f604343d52c5f4b0",
-      "modified_at": "2026-07-17T10:41:46-04:00"
+      "size_bytes": 2982,
+      "md5": "f88dc07ce64af7e1ec74410db2dda1a5",
+      "modified_at": "2026-07-17T10:53:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 332981,
-      "md5": "d6310de89f62f2420e9eedb926d3f142",
-      "modified_at": "2026-07-17T10:46:11-04:00"
+      "size_bytes": 333267,
+      "md5": "cc380e0b7e560b21d406b08de1704999",
+      "modified_at": "2026-07-17T10:50:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7437,7 +7439,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-17T10:37:03-04:00"
+      "modified_at": "2026-07-17T10:52:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -7503,7 +7505,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "1bfc5656d1e19d859ffba5f57aab1304",
-      "modified_at": "2026-07-17T10:46:01-04:00"
+      "modified_at": "2026-07-17T10:51:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7538,8 +7540,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "e5a0f8b23e56be7b450ff796a874a061",
-      "modified_at": "2026-07-17T10:45:03-04:00"
+      "md5": "c70f05273a40b81f897bbd9180644df5",
+      "modified_at": "2026-07-17T10:50:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

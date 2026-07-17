@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# MGS_GOOGLE_AUTH_RETIRED_GUARD
+raise SystemExit("RETIRED: personal Google authentication was removed. Rebuild this one-off utility on /root/mgs-agent/scripts/mgs_google_workspace_auth.py before any reuse.")
 import json, pathlib, urllib.parse, urllib.request, urllib.error, re, time, datetime, collections, gzip, hashlib
 
 TOKEN_FILE = pathlib.Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')

@@ -62,7 +62,10 @@
     "native_hook_mirrors_user_replace_or_remove": false,
     "native_hook_mirrors_memory": false,
     "autocompactor_role": "residual_only",
-    "capacity_monitor_threshold_percent": 90
+    "capacity_monitor_threshold_percent": 90,
+    "capacity_monitor_active": false,
+    "capacity_monitor_runtime_readback": "no matching root cron, Hermes cron job, or MGS monitor script found on 2026-07-17",
+    "zeus_user_capacity_percent": 89.5
   },
   "validation": {
     "honcho_tests": "26_passed",

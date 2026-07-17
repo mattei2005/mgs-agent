@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
-      "next_step": "Nenhuma ação pendente. Manter monitor-drive-auth-unified.py e aplicar a política security.google-workspace-auth em qualquer consumidor Google futuro.",
+      "next_step": "Nenhuma ação pendente. Manter o monitor canônico; a planilha histórica excluída só entra no escopo se Rodolfo decidir reativá-la no futuro.",
       "objective": "Eliminar integralmente o método Google pessoal legado e normalizar Zeus, Atena e Ares na Service Account canônica mgs-core-prod.",
-      "source": "Discord message 1527676950045397103; context/security-policies.md; data/infra-inventory.json artifact mgs-google-cloud-cutover-20260717; live Drive/Sheets/1Password readbacks",
-      "state": "concluído: 6/6 planilhas financeiras e 14/14 sheets ativas acessíveis/editáveis pela sa canônica; canário write/readback/restore aprovado. arquivos de credencial antigos ausentes, item antigo ausente, schedulers sem referências, scripts antigos fail-closed, estados aposentados, souls/skills/referências dos três agentes atualizados e mirrors sincronizados. varredura final de 6415 arquivos ativos/live/versionados: zero rota, seletor, valor de credencial ou código de autenticação pessoal. sb transition dry-run aprovado sem writes.",
+      "source": "Discord message 1527688600429269205; live Drive/Sheets readbacks for Gustavo and fases2; monitor-drive-auth-unified.py",
+      "state": "concluído: 14/14 sheets ativas acessíveis/editáveis pela service account canônica. gustavo e fases2, embora não sejam consumidores ativos, foram compartilhadas por rodolfo e passaram em readback drive/sheets http 200 com canedit/canmodifycontent. a planilha histórica mgs - receita dos sites 2025, 2024, 2023 foi excluída intencionalmente do escopo por decisão de rodolfo e não possui consumidor ativo. cobertura da lista: 16/17 acessíveis pelo método novo, com 1 exclusão histórica intencional; zero rota oauth pessoal.",
       "thread_id": "1527528492391075930",
-      "updated_at": "2026-07-17T14:26:38+00:00"
+      "updated_at": "2026-07-17T14:50:43+00:00"
     },
     {
       "agent": "zeus",
@@ -49,6 +49,16 @@
       "state": "closed-stable-capacity-policy-90-channel-limites-90",
       "thread_id": "1527004682382479380",
       "updated_at": "2026-07-16T19:53:36+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "mgs-hera-final-archive-20260717",
+      "next_step": "Congelar manifesto, criar arquivo preservado e executar remoção validada",
+      "objective": "Arquivar Hera em /root/hera-desativada e remover toda superfície operacional ativa local/Discord, preservando somente arquivo consultável e histórico Git/audit",
+      "source": "discord:1527673716488671282#1527689061752373359",
+      "state": "critical_confirmed_in_progress",
+      "thread_id": "1527673716488671282",
+      "updated_at": "2026-07-17T14:51:43+00:00"
     },
     {
       "agent": "zeus",
@@ -103,14 +113,14 @@
     {
       "agent": "zeus",
       "id": "zeus-memory-autocompact-90",
-      "next_step": "Zeus monitora capacidade e trata exceções; não ativar o protótipo de autocompação como arquitetura principal.",
+      "next_step": "Pendência real: implementar somente monitor residual read-only de 90% com alerta em #limites-90 e backup. Não ativar autocompactor recorrente como arquitetura principal; compactação segura/atômica só após autorização explícita de Rodolfo.",
       "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
-      "source": "data/honcho-native-rollout.json; docs/mgs-honcho-memory-standard.md",
-      "state": "honcho nativo managed ativo em todos os profiles; autocompactor permanece desconectado e residual. user add é espelhado como conclusão honcho; replace/remove e memory não são sincronizados pelo hook nativo. monitor de 90% permanece.",
+      "source": "data/honcho-native-rollout.json; runtime crontab/Hermes cron/scripts readback 2026-07-17; discord:1527558141397700618#1527688958253994035",
+      "state": "honcho nativo managed ativo em todos os profiles e autocompactor desconectado. readback de runtime em 2026-07-17 encontrou zero cron/job/script ativo para monitorar o limite de 90%. zeus user está em 3222/3600 caracteres (89,5%, 18 caracteres abaixo de 90%); memory em 2576/6400 (40,25%).",
       "thread_id": "1527558141397700618",
-      "updated_at": "2026-07-17T14:31:05+00:00"
+      "updated_at": "2026-07-17T14:54:11+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:31:05+00:00"
+  "updated_at": "2026-07-17T14:54:11+00:00"
 }

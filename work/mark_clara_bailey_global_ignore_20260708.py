@@ -33,7 +33,8 @@ out=BASE/'work/sheet-phase1-update-20260708'/f'backup-before-clara-bailey-ignore
 out.write_text(json.dumps(backup,ensure_ascii=False,indent=2),encoding='utf-8')
 # update Clara row: keep identity columns, mark not operational
 row=['disparosxyvlov@gmail.com','838404979365746','13794','Clara Bailey','United States','Credit card','Facebook','pg_13794','IGNORAR','Removida do DTR / não é página MGS — global ignore','NÃO CADASTRAR','', '', 'GLOBAL_IGNORE_DO_NOT_SCAN']
-api('PUT',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q("'CADASTRO NA DASH'!A94:N94")}?valueInputOption=RAW',{'majorDimension':'ROWS','values':[row]})
+target_range = "'CADASTRO NA DASH'!A94:N94"
+api('PUT',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q(target_range)}?valueInputOption=RAW',{'majorDimension':'ROWS','values':[row]})
 # update summary rows by rewriting concise current Fase 1 summary values
 summary=[
  ['Código técnico','Legenda humana','Valor'],
@@ -48,6 +49,8 @@ summary=[
  ['SB sem DTR não Blocked','Rows na SB sem match no DTR e ainda não Blocked','10'],
  ['Regra final','Global ignore vence match/cadastro/scan/schedule/backfill','ATIVA'],
 ]
-api('POST',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q("'00 Resumo Fase 1'!A1:C30")}:clear',{})
-api('PUT',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q("'00 Resumo Fase 1'!A1")}?valueInputOption=RAW',{'majorDimension':'ROWS','values':summary})
+summary_clear_range = "'00 Resumo Fase 1'!A1:C30"
+summary_write_range = "'00 Resumo Fase 1'!A1"
+api('POST',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q(summary_clear_range)}:clear',{})
+api('PUT',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/{q(summary_write_range)}?valueInputOption=RAW',{'majorDimension':'ROWS','values':summary})
 print(json.dumps({'updated':'Clara Bailey marked IGNORAR and summary adjusted','backup':str(out)},ensure_ascii=False,indent=2))

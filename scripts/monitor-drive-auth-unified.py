@@ -11,6 +11,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import subprocess
 import time
 import urllib.error
@@ -31,6 +32,18 @@ PRIMARY_MODE = os.environ.get("MGS_DRIVE_AUTH_PRIMARY", "service_account").strip
 REMIND_INTERVAL = int(os.environ.get("MGS_DRIVE_ALERT_REPEAT_SECONDS", "21600"))
 CHANNEL_ID = os.environ.get("MGS_DRIVE_ALERT_CHANNEL_ID", "1498132022634483894")
 RODOLFO_ID = "344196393512075265"
+LEGACY_RUNTIME_PATTERN = re.compile(
+    r"(?i)(ares-google-drive-oauth-client|Google OAuth\s*-\s*Ares Drive|"
+    r"ARES_DRIVE_AUTH_MODE\s*=\s*oauth|google_token\.json|"
+    r"google_client_secret\.json|drive-oauth-watchdog|"
+    r"mgsagent@mgs-ares\.iam\.gserviceaccount\.com|poised-team-502702-v8)"
+)
+CANONICAL_SELECTORS = {
+    "ARES_DRIVE_AUTH_MODE": "service_account",
+    "MGS_DRIVE_AUTH_PRIMARY": "service_account",
+    "MGS_GOOGLE_SHEETS_AUTH_MODE": "service_account",
+    "MGS_META_APP_ROLES_GOOGLE_AUTH_MODE": "service_account",
+}
 
 
 def load_env(path: Path) -> None:
@@ -42,6 +55,56 @@ def load_env(path: Path) -> None:
             continue
         key, value = line.split("=", 1)
         os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+def check_legacy_runtime_residue() -> dict[str, Any]:
+    """Fail closed if an active MGS runtime route can select retired Google auth."""
+    load_env(BASE / ".env")
+    selector_conflicts = {
+        key: os.environ.get(key, "").strip().lower()
+        for key, expected in CANONICAL_SELECTORS.items()
+        if os.environ.get(key, "").strip().lower() != expected
+    }
+    roots = [
+        BASE / "scripts",
+        BASE / "config",
+        Path("/root/.hermes/profiles/zeus/skills"),
+        Path("/root/.hermes/profiles/atena/skills"),
+        Path("/root/.hermes/profiles/ares/skills"),
+    ]
+    self_path = Path(__file__).resolve()
+    hits: list[str] = []
+    scanned = 0
+    for root in roots:
+        if not root.exists():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file() or path.resolve() == self_path:
+                continue
+            text_path = str(path)
+            if any(part in path.parts for part in (".archive", ".curator_backups", "__pycache__")):
+                continue
+            if "/skills/" in text_path and "/scripts/" not in text_path:
+                continue
+            if path.suffix.lower() not in {".py", ".sh", ".bash", ".json", ".yaml", ".yml", ".env"}:
+                continue
+            try:
+                if path.stat().st_size > 2_000_000:
+                    continue
+                scanned += 1
+                if LEGACY_RUNTIME_PATTERN.search(path.read_text(errors="ignore")):
+                    hits.append(text_path)
+            except OSError:
+                continue
+    ok = not selector_conflicts and not hits
+    return {
+        "ok": ok,
+        "state": "legacy_runtime_clean" if ok else "legacy_runtime_residue",
+        "scanned": scanned,
+        "hit_count": len(hits),
+        "hits": hits[:20],
+        "selector_conflicts": selector_conflicts,
+    }
 
 
 def http_json(req: urllib.request.Request, timeout: int = 30) -> tuple[int, dict[str, Any]]:
@@ -177,8 +240,8 @@ def send_payload(payload: dict[str, Any], dry_run: bool) -> None:
         raise RuntimeError("discord_bot_post_failed")
 
 
-def payload_for(sa: dict[str, Any], recovered: bool = False) -> dict[str, Any]:
-    title = "Drive auth restabelecida" if recovered else "Drive auth indisponível"
+def payload_for(sa: dict[str, Any], guard: dict[str, Any], recovered: bool = False) -> dict[str, Any]:
+    title = "Drive auth restabelecida" if recovered else "Drive auth ou guardrail indisponível"
     color = 3066993 if recovered else 15158332
     content = "" if recovered else f"<@{RODOLFO_ID}> alerta de autenticação Google Drive"
     return {
@@ -190,7 +253,8 @@ def payload_for(sa: dict[str, Any], recovered: bool = False) -> dict[str, Any]:
                 "color": color,
                 "fields": [
                     {"name": "Service Account", "value": str(sa.get("state", "unknown")), "inline": True},
-                    {"name": "Impacto", "value": "Drive, Sheets e backups MGS ficam bloqueados se a identidade técnica estiver indisponível.", "inline": False},
+                    {"name": "Guardrail legado", "value": str(guard.get("state", "unknown")), "inline": True},
+                    {"name": "Impacto", "value": "Drive, Sheets e backups MGS ficam bloqueados se a identidade técnica ou o guardrail estiverem indisponíveis.", "inline": False},
                 ],
             }
         ],
@@ -213,7 +277,8 @@ def main() -> int:
         last_sa_check = now
     else:
         sa = state.get("sa_result", {"ok": False, "state": "not_checked"})
-    healthy = bool(sa.get("ok"))
+    guard = check_legacy_runtime_residue()
+    healthy = bool(sa.get("ok")) and bool(guard.get("ok"))
     previous_healthy = state.get("healthy")
     last_alert = int(state.get("last_alert_ts") or 0)
     should_alert = not healthy and (previous_healthy is not False or now - last_alert >= REMIND_INTERVAL)
@@ -223,6 +288,7 @@ def main() -> int:
         "last_check_ts": now,
         "healthy": healthy,
         "sa_result": sa,
+        "legacy_runtime_guard": guard,
         "last_sa_check_ts": last_sa_check,
         "last_alert_ts": now if should_alert else last_alert,
         "primary_credential": "service_account" if sa.get("ok") else "none",
@@ -230,14 +296,16 @@ def main() -> int:
     if not args.dry_run:
         save_state(new_state)
     if should_alert:
-        send_payload(payload_for(sa), args.dry_run)
+        send_payload(payload_for(sa, guard), args.dry_run)
     elif should_recover:
-        send_payload(payload_for(sa, recovered=True), args.dry_run)
+        send_payload(payload_for(sa, guard, recovered=True), args.dry_run)
     print(
-        "drive_auth status={} primary={} sa={} sa_checked={} dry_run={}".format(
+        "drive_auth status={} primary={} sa={} guard={} guard_hits={} sa_checked={} dry_run={}".format(
             "ok" if healthy else "fail",
             PRIMARY_MODE,
             sa.get("state", "unknown"),
+            guard.get("state", "unknown"),
+            guard.get("hit_count", -1),
             int(should_check_sa),
             int(args.dry_run),
         )

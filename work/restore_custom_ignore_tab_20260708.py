@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# MGS_GOOGLE_AUTH_RETIRED_GUARD
+raise SystemExit("RETIRED: personal Google authentication was removed. Rebuild this one-off utility on /root/mgs-agent/scripts/mgs_google_workspace_auth.py before any reuse.")
 import csv,json,urllib.parse,urllib.request,urllib.error
 from pathlib import Path
 from datetime import datetime

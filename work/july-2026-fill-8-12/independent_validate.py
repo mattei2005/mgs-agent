@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# MGS_GOOGLE_AUTH_RETIRED_GUARD
+raise SystemExit("RETIRED: personal Google authentication was removed. Rebuild this one-off utility on /root/mgs-agent/scripts/mgs_google_workspace_auth.py before any reuse.")
 import datetime, json, pathlib, re, urllib.parse, urllib.request
 AUDIT_PATH=pathlib.Path('/root/mgs-agent/work/july-2026-fill-8-12/master-fill-audit-20260713-181957.json')
 OUT=AUDIT_PATH.parent
