@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T22:30:12-04:00",
+    "updated_at": "2026-07-16T22:35:24-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1143,7 +1143,7 @@
         "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com/",
         "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/"
       ],
-      "source_report": "REPORT-INFRA Zeus CAR offers and chat-SMS rollout 2026-07-16",
+      "source_report": "REPORT-INFRA Zeus CAR offers and chat-SMS rollout 2026-07-16 — Discord message 1527502930989813761",
       "description": "CAR-BR legacy chats now use the three generic offer cards; a separate G006 SMS capture variant is active only on the same eight sites that already had the CAR chat installed. EMP chats were not changed."
     },
     {
@@ -6905,15 +6905,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 6175,
-      "md5": "c7606a182fc93038d845e222db390737",
-      "modified_at": "2026-07-16T22:28:47-04:00"
+      "size_bytes": 6549,
+      "md5": "2c1d38dd14af1c758f5400c9874612e9",
+      "modified_at": "2026-07-16T22:31:23-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 6456,
-      "md5": "75052cfef5ff85bf959d87a24715bccc",
-      "modified_at": "2026-07-16T22:27:02-04:00"
+      "md5": "1351625e6585bacfa6bb34fb21debaf8",
+      "modified_at": "2026-07-16T22:32:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6948,8 +6948,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "5f6dcc80eb9cd438e97c86d4bf354a9a",
-      "modified_at": "2026-07-16T22:15:03-04:00"
+      "md5": "cb031c1bc7bad1ef94d13a29a3f13b61",
+      "modified_at": "2026-07-16T22:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -7002,14 +7002,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27745,
-      "md5": "84a687107417ce1eaaf45cfe0ed9506e",
-      "modified_at": "2026-07-16T22:25:01-04:00"
+      "md5": "961aa07436997a3d7087734a9d92115e",
+      "modified_at": "2026-07-16T22:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 356,
-      "md5": "cf05a5faba2355bbfec4fe9eb10b10aa",
-      "modified_at": "2026-07-16T22:28:01-04:00"
+      "size_bytes": 357,
+      "md5": "4c62c14bdb192d36f02c9b0c657af1f9",
+      "modified_at": "2026-07-16T22:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7031,9 +7031,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 312406,
-      "md5": "42e661d491c43d5fbdb56874c6385b7f",
-      "modified_at": "2026-07-16T22:27:55-04:00"
+      "size_bytes": 313745,
+      "md5": "cba9a1b54ca1fd29042e3e5386754b84",
+      "modified_at": "2026-07-16T22:35:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7134,8 +7134,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 208550,
-      "md5": "42283fb9420772b3607e5bf5ea730305",
-      "modified_at": "2026-07-16T22:14:17-04:00"
+      "md5": "ade5f1caffe75d14e9bc1df5ace792bf",
+      "modified_at": "2026-07-16T22:29:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -7177,7 +7177,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-16T22:26:02-04:00"
+      "modified_at": "2026-07-16T22:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7212,8 +7212,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "5f765088f4fdbc10868b8aa8b3bb13ce",
-      "modified_at": "2026-07-16T22:25:03-04:00"
+      "md5": "8f1ebf1e82247612dbf4f45b7e546314",
+      "modified_at": "2026-07-16T22:35:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

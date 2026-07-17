@@ -177,6 +177,22 @@ June 2026 validated pattern:
 - Replaced only `Maio 2026` with `Junho 2026` in source-tab formulas.
 - Formula errors after write: 0.
 
+## Shared Drive migration gate for finance workbooks
+
+Do not move the principal finance workbook or a user-named subset of manager workbooks until the **live cross-spreadsheet dependency closure** is known.
+
+Required preflight:
+
+1. Batch-read formulas from the principal, every manager workbook, and historical finance workbooks.
+2. Recursively resolve literal `IMPORTRANGE` IDs. Include old/ignored managers and auxiliary spreadsheets if formulas still reference them.
+3. Separate the current principal workbook from historical storage; do not assume one file contains every year merely because manager workbooks have old monthly tabs.
+4. Record formula counts, current-period error baseline, historical error baseline, tabs, permissions, and the exact dependency graph.
+5. Treat bidirectional principal↔manager references as one transactional cluster. Do not move only six visible files if the graph contains historical or auxiliary sources.
+
+Conservative MGS default: when the goal is to remove personal OAuth, leave the formula-heavy cluster in My Drive, share the complete dependency closure with the approved Service Account, enable Sheets API, and switch only runtime authentication. This avoids formula and `IMPORTRANGE` topology changes.
+
+If Rodolfo later requests organizational ownership in Shared Drive, require a synthetic linked-Sheet move canary and the full transactional cutover procedure in `google-drive-agent-automation/references/shared-drive-google-sheets-cluster-cutover.md`. A move should preserve the same file ID, but completion still requires no new formula/value/error delta, preserved permissions/triggers, current-period parity, and rollback. Never promise absolute zero risk before the canary.
+
 ## Pitfalls
 
 - **Date serial false positives:** Sheets API returns dates as serial numbers in `UNFORMATTED_VALUE` mode. Convert with epoch `1899-12-30` before declaring a mismatch. This applies especially to lower detail tables such as Fincgriffin `Data | Gestor | Gasto | Receita | Lucro | Margem`; numeric serials like `46204` may correctly mean `2026-07-01`.

@@ -204,3 +204,4 @@ Pitfall: a 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` from Service Usage is a scope i
 - `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.
 - `references/google-sheets-balanced-column-distribution.md` — Sheets API pattern for filling/formatting a column while preserving group integrity (e.g. one mailbox per bot/site) and balancing group loads.
 - `references/cross-agent-google-sheets-shared-drive-inventory-and-cutover.md` — inventory only the Sheets actually used by named agents, classify personal/shared/historical/stale, and cut over safely to Service Account + enterprise Shared Drive.
+- `references/shared-drive-google-sheets-cluster-cutover.md` — dependency-graph audit for interdependent Sheets, conservative share+Service Account route, and transactional same-ID move gates for formula-heavy clusters.
