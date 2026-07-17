@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
-      "next_step": "Rodolfo recarrega com cache limpo e confirma o visual; depois preenche URLs SMS, escolhe gestor e testa lead real antes do rollout",
-      "objective": "Criar variante chat-sms com captura SMS, links por gestor e relatórios, validada primeiro no Eggbev",
-      "source": "discord:message:1527439218157158431; https://eggbev.com/chat-sms/car/br1",
-      "state": "canário 0.4.1 no eggbev; corte lateral dos botões corrigido e validado em 360px e live com cachebuster; urls sms/gestor ainda aguardam configuração",
-      "thread_id": "1527428793600315533",
-      "updated_at": "2026-07-16T22:26:24+00:00"
+      "next_step": "Fazer backup por alvo; atualizar somente a cópia das três ofertas em CAR-BR-01 preservando targets/wrappers; implantar 0.4.1 code-only nos sete alvos antigos; criar CAR-BR-01-SMS com G006 e opções SMS privadas; validar rotas legacy/SMS, UTM, provider, schema e readback; inventariar e emitir REPORT-INFRA.",
+      "objective": "Atualizar as três ofertas CAR-BR nos chats sem SMS e replicar a variante chat-sms somente nos oito sites que já possuem o chat CAR instalado",
+      "source": "discord:message:1527493567973425303; discord:message:1527493591591813272; https://eggbev.com/chat-sms/car/br1",
+      "state": "escopo autorizado por rodolfo; auditoria live confirmou oito alvos elegíveis: eggbev.com, newsoun.com, finance.topfeed.fun, wantabrand.com, zuout.com, zytiva.com, openzed.com e cliquet.com. eggbev está em 0.4.1 com variante sms g006; os outros sete ainda requerem upgrade code-only e criação da rota sms. chats emp e demais sites ficam fora.",
+      "thread_id": "1527491503084015616",
+      "updated_at": "2026-07-17T02:02:26+00:00"
     },
     {
       "agent": "zeus",
@@ -62,5 +62,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T00:23:23+00:00"
+  "updated_at": "2026-07-17T02:02:26+00:00"
 }

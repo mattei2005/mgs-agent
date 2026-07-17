@@ -30,6 +30,28 @@ My Drive folder shared to SA  can read/create folders, but file upload may fail
 Real-user OAuth in My Drive   valid if the user account has quota/permission
 ```
 
+## Shared Drive cutover: separate agent health from legacy OAuth consumers
+
+After an operation moves to a canonical Shared Drive, do not infer from a filename or 1Password item such as `ares-google-drive-oauth-client.json` that the owning agent is still using personal OAuth for its primary Drive workflow. First identify the **exact failing consumer** and its credential path.
+
+A common mixed state is:
+
+```text
+Ares creative Drive operations   Service Account + Shared Drive   healthy
+Legacy Google Sheets writers     user OAuth file                   may fail independently
+```
+
+Required checks:
+
+1. Validate the agent's canonical Shared Drive root with its intended Service Account: HTTP 200, `driveId` present, and edit/add capabilities true.
+2. Inspect the exact failing script and credential constant. Report it as a Sheet/report consumer when that is what failed; do not tell Rodolfo that “Ares needs Google authentication” merely because the reused OAuth file carries the Ares name.
+3. Probe the exact spreadsheet with the Service Account on both surfaces:
+   - Drive API metadata (`files.get`) for visibility and capabilities;
+   - Sheets API (`spreadsheets.get`) for real API availability.
+4. Treat Drive HTTP 200 / `canEdit=true` as insufficient proof that Sheets writes will work. If Sheets returns 403 saying `sheets.googleapis.com` is disabled in the Service Account project, the durable correction is to enable the Sheets API in that project and migrate the writer to Service Account auth. Moving the spreadsheet or reauthorizing personal OAuth alone does not enable the API.
+5. Personal OAuth reauthorization may be used as an explicitly authorized short-term recovery when the blocked consumer must run immediately, but describe it as temporary compatibility—not as a requirement of the Shared Drive architecture.
+6. After any auth recovery, rerun the **exact blocked consumer** in this order: credential refresh probe → bounded dry-run → apply → external Sheet/state readback. A healthy generic Drive watchdog is not sufficient evidence that the original cron recovered.
+
 ## Standard diagnostic sequence
 
 For Hera/MGS quick checks, run the profile watchdog before deeper Drive debugging:
