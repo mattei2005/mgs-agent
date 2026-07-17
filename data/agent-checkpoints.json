@@ -53,12 +53,12 @@
     {
       "agent": "zeus",
       "id": "mgs-honcho-all-agents-rollout-20260717",
-      "next_step": "Definir o gate de tratamento de dados (managed sanitizado versus solução compatível com histórico operacional), então executar piloto Zeus com backup, canário e rollback antes do rollout sequencial",
-      "objective": "Integrar o memory provider nativo Honcho em todos os agentes MGS com isolamento, orçamento de contexto e validação por agente",
-      "source": "docs/mgs-honcho-memory-standard.md; discord:1527558141397700618#1527673289781153803",
-      "state": "decisão canônica aprovada e registrada; live audit mostra provider vazio e honcho.json ausente em zeus, atena, ares e hera; somente copilot externo manual existe; nenhuma ativação de provider executada",
+      "next_step": "Operação normal: Zeus monitora provider+copilot. Reautenticação OpenAI da Hera permanece gate crítico separado apenas se Rodolfo quiser reativar o agente completo; sessões Discord já abertas adotam Honcho somente em sessão nova/reset.",
+      "objective": "Integrar o memory provider nativo Honcho managed em todos os agentes MGS com isolamento, contexto limitado e persistência autorizada",
+      "source": "data/honcho-native-rollout.json; docs/mgs-honcho-memory-standard.md; discord:1527558141397700618#1527677052541599774",
+      "state": "provider honcho disponível e configurado em zeus, atena, ares e hera; workspace mgs-agents, peers isolados, user rodolfo compartilhado, savemessages ativo. native profile read 4/4; full hermes canary pass em zeus/atena/ares. hera provider pass, mas full agent canary bloqueado por refresh token openai inválido e gateway ausente. patch shutdown-drain 26 testes pass; monitor provider+copilot 4/4 ok; nenhum restart.",
       "thread_id": "1527558141397700618",
-      "updated_at": "2026-07-17T13:50:26+00:00"
+      "updated_at": "2026-07-17T14:31:05+00:00"
     },
     {
       "agent": "zeus",
@@ -103,14 +103,14 @@
     {
       "agent": "zeus",
       "id": "zeus-memory-autocompact-90",
-      "next_step": "Não evoluir nem ativar o protótipo como arquitetura principal; tratar ocorrências conservadoramente até o piloto Honcho e reavaliar apenas a proteção residual depois do rollout",
-      "objective": "Manter USER/MEMORY abaixo do limite enquanto a integração Honcho não estiver validada",
-      "source": "docs/mgs-honcho-memory-standard.md; discord:1527558141397700618#1527673289781153803",
-      "state": "autocompactor deixou de ser solução principal por decisão de rodolfo; protótipo segue bloqueado e desconectado; monitor de 90% permanece como proteção residual; nenhuma nova ativação executada",
+      "next_step": "Zeus monitora capacidade e trata exceções; não ativar o protótipo de autocompação como arquitetura principal.",
+      "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
+      "source": "data/honcho-native-rollout.json; docs/mgs-honcho-memory-standard.md",
+      "state": "honcho nativo managed ativo em todos os profiles; autocompactor permanece desconectado e residual. user add é espelhado como conclusão honcho; replace/remove e memory não são sincronizados pelo hook nativo. monitor de 90% permanece.",
       "thread_id": "1527558141397700618",
-      "updated_at": "2026-07-17T13:50:26+00:00"
+      "updated_at": "2026-07-17T14:31:05+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:26:38+00:00"
+  "updated_at": "2026-07-17T14:31:05+00:00"
 }

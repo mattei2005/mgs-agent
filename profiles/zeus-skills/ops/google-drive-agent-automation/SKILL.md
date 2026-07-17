@@ -152,6 +152,12 @@ The final state requires:
 - canonical selectors present and read back;
 - exact consumers tested.
 
+## Service Account replacement closure
+
+When a project or Service Account identity changes, do not stop after validating the Shared Drive root. Permissions on individually shared My Drive Sheets belong to the exact old principal and do not transfer to a same-named identity in a new project. Rebuild the active file closure, probe every file with the new identity on Drive and Sheets, repair exact file permissions, run a reversible canary, and only then remove the old credential path.
+
+Use `references/service-account-identity-replacement-permission-closure.md` for the complete cross-agent permission, residue-scan, fail-closed compatibility and evidence checklist.
+
 ## Verification checklist
 
 - [ ] Canonical project and client email match.

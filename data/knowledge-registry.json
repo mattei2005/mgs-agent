@@ -20,6 +20,26 @@
       "updated_at": "2026-07-16T06:32:59+00:00"
     },
     {
+      "canonical_key": "capability.honcho-memory.native",
+      "canonical_source": "data/honcho-native-rollout.json",
+      "consumers": [
+        "ares",
+        "atena",
+        "hera",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "CAP-HONCHO-NATIVE-MGS",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Native managed Honcho memory across MGS agents",
+      "updated_at": "2026-07-17T14:31:05+00:00"
+    },
+    {
       "canonical_key": "capability.knowledge-control",
       "canonical_source": "scripts/mgs-knowledge-control.py",
       "consumers": [
@@ -241,5 +261,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:26:17+00:00"
+  "updated_at": "2026-07-17T14:31:05+00:00"
 }
