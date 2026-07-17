@@ -26,7 +26,7 @@ from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
 BASE = Path("/root/mgs-agent")
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
-DEFAULT_ITEM = os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", "Google Service Account - Ares Drive")
+DEFAULT_ITEM = os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", "Google Service Account - MGS Agent")
 TOKEN_URI = "https://oauth2.googleapis.com/token"
 DRIVE_SCOPE = "https://www.googleapis.com/auth/drive"
 SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets"

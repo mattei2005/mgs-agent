@@ -222,11 +222,12 @@ When replacing an active Shared Drive Service Account, do not treat Cloud projec
 
 A 1Password item being visible is not proof that the current loader can consume it: an attached JSON file may not appear in item `fields`. Validate the storage shape without printing values and place the JSON in a supported concealed field, or explicitly add/test attachment retrieval.
 
-See `references/service-account-shared-drive-replacement-cutover.md` for the complete sequence, safe metadata checks, role-parity rule, direct-cutover exception, and 1Password attachment pitfall.
+See `references/service-account-shared-drive-replacement-cutover.md` for a narrow Shared Drive identity replacement. For a full project/account cutover spanning multiple agents, OAuth consumers, Gemini keys, local secrets, jobs, and destructive cleanup, use `references/google-cloud-service-account-cross-agent-cutover.md`.
 
 ## References
 
-- `references/service-account-shared-drive-replacement-cutover.md` — safe replacement of an active Shared Drive Service Account, including project-ID naming, role parity, credential preflight, rollback, and 1Password attachment compatibility.
+- `references/google-cloud-service-account-cross-agent-cutover.md` — full-project/identity cutover across agents: permanent Project ID, 1Password attachment pitfall, Shared Drive role parity, Service Usage Consumer, OAuth/Gemini separation, exact destructive confirmation, and validated cleanup.
+- `references/service-account-shared-drive-replacement-cutover.md` — narrow replacement of an active Shared Drive Service Account, including project-ID naming, role parity, credential preflight, rollback, and 1Password attachment compatibility.
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
 - `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
 - `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.

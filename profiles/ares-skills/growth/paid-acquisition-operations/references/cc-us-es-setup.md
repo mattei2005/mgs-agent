@@ -48,7 +48,7 @@ Item 1Password criado por Rodolfo:
 
 ```text
 Vault | MGS Conteúdo
-Item  | Google Service Account - Ares Drive
+Item  | Google Service Account - MGS Agent
 ```
 
 Campos esperados no item:

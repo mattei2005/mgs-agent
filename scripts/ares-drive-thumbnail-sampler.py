@@ -22,7 +22,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 from PIL import Image, ImageDraw, ImageFont
 
-OP_ITEM = "Google Service Account - Ares Drive"
+OP_ITEM = os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", "Google Service Account - MGS Agent")
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 SCOPES = "https://www.googleapis.com/auth/drive.readonly"
 

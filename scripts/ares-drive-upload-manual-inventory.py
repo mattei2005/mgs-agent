@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Read-only Google Drive inventory for MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL.
 
-Uses a Google Service Account JSON stored in 1Password item
-"Google Service Account - Ares Drive". Does not print or persist credentials.
+Uses the canonical MGS Google Service Account JSON stored in 1Password item
+"Google Service Account - MGS Agent". Does not print or persist credentials.
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ from cryptography.hazmat.primitives.asymmetric import padding, rsa
 ROOT_FOLDER_ID = "0AEwt4Ye690ocUk9PVA"
 CREATIVES_FOLDER_NAME = "CRIATIVOS"
 UPLOAD_FOLDER_NAME = "UPLOAD MANUAL"
-OP_ITEM = "Google Service Account - Ares Drive"
+OP_ITEM = os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", "Google Service Account - MGS Agent")
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 SCOPES = "https://www.googleapis.com/auth/drive.readonly"
 FOLDER_MIME = "application/vnd.google-apps.folder"
