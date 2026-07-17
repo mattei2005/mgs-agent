@@ -74,6 +74,9 @@ Use this sequence when Rodolfo asks which WordPress leads from a date are absent
 Do not answer these as the same question:
 
 - **Lead absent from the dashboard:** reconcile current list membership by phone. Unique-phone deduplication is appropriate only for this membership question.
-- **Messages not sent in a day:** compare the total WordPress report rows for that calendar date with the SMS Funnel `/api/daily-sents` outbound-message count for the same date. Under the current business rule of one expected SMS per WordPress report row, calculate `WP total rows - SMS sent`. Do not substitute unique phones.
+- **Aggregate sent-volume gap:** compare WordPress report rows with SMS Funnel `/api/daily-sents` only after proving both dashboards use the same timezone, calendar window, account/list scope, and one-expected-SMS-per-row rule. A raw subtraction is not an exact lead cohort.
+- **Exact unsent cohort:** fetch event rows with `GET /api/messages?date=YYYY-MM-DD&page=<n>&per_page=<n>` and include the next send day to catch delayed deliveries. Match each WordPress submission to a sent-message control using the vendor `lead.list_id`, normalized phone, the ingestion timestamp returned in stored `lead.created_at`, and the message control `created_at`. Reconcile timeout rows separately because the vendor may have processed them.
 
-The aggregate difference answers **how many expected messages were not sent**, but it does not identify the exact WordPress rows responsible. Naming those rows requires per-message/per-lead send-event evidence from SMS Funnel, not list membership alone.
+WordPress `created_at` is stored as UTC in the observed quiz table, while SMS Funnel daily/message dates are presented by the São Paulo calendar. Convert the business-day interval before comparing; otherwise the raw dashboards cover different three-hour boundaries. Also separate controls created on a prior day, controls from another source, and messages sent on the next day.
+
+The aggregate difference answers only a net counter gap. It does not identify rows that can safely be exported or imported. A recovery list must be built from event-level unmatched submissions, and SMS Funnel list import will deduplicate repeated submissions down to contact-level phones.

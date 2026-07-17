@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T22:40:53-04:00",
+    "updated_at": "2026-07-16T22:52:36-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1114,14 +1114,15 @@
       "sha256_manifest": "88624cd46aef0e7af153516ef49f2302ef349ddd47046f39689387439f979009",
       "package_path": "/tmp/mgs-chat-funnels-0.4.1-code-only.tar.gz",
       "package_sha256": "891ebac9a0423656a522aa8bebbe138f665098b0fbf3b3cd71a771ac62152579",
-      "modified_at": "2026-07-16T22:27:23-04:00",
+      "modified_at": "2026-07-16T22:49:29-04:00",
       "validations": [
         "local PHP lint, Node syntax and JSON validation OK",
         "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
         "Bitnami authenticated plugin-editor exact readback and mocked transactional SMS smoke OK on Openzed and Cliquet",
         "public 16-route matrix OK: legacy and SMS HTTP 200, exact three offers, own-domain targets, UTM hardening and private SMS URLs absent",
         "provider matrix OK: JBF, Wantabrand M2/PubGuru and Zuout ActView preserved",
-        "browser Eggbev legacy flow reached all three cards with UTM/fbclid; Eggbev and Zuout SMS forms rendered without CTA provider class before submit"
+        "browser Eggbev legacy flow reached all three cards with UTM/fbclid; Eggbev and Zuout SMS forms rendered without CTA provider class before submit",
+        "private six-list SMS catalog exact readback on 8/8 sites; CAR-BR-01-SMS manager map exact on 8/8; mocked transactional status matched assigned G001-G006 on 8/8 with rows restored and no real SMS"
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1138,13 +1139,33 @@
         "/chat/car/br1",
         "/chat-sms/car/br1"
       ],
+      "sms_site_manager_map": {
+        "wantabrand.com": "G001",
+        "zuout.com": "G002",
+        "cliquet.com": "G002",
+        "openzed.com": "G003",
+        "zytiva.com": "G003",
+        "finance.topfeed.fun": "G004",
+        "newsoun.com": "G005",
+        "eggbev.com": "G006"
+      },
+      "sms_catalog_state": "Six private add-lead endpoints configured and exact-read back on every eligible site; endpoint values are intentionally not stored in inventory.",
+      "sms_manager_map_validation": "/root/mgs-agent/work/chat-sms-rollout-20260716/sms-manager-map-validation.json",
+      "validation_script": {
+        "path": "/root/mgs-agent/work/chat-sms-rollout-20260716/runcloud-smoke.php",
+        "sha256": "9b483227952ec87ceafa10b1f378b30838ab88265031bdec18565590b45fd935",
+        "size_bytes": 2620,
+        "manager_parameterized": true
+      },
       "backup_paths": [
         "/var/backups/mgs-chat-funnels/20260717T021050Z/",
         "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com/",
-        "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/"
+        "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/",
+        "/var/backups/mgs-chat-funnels-sms-map/20260717T024612Z/",
+        "/root/mgs-agent-backups/chat-sms-manager-map/20260717T024707Z/"
       ],
-      "source_report": "REPORT-INFRA Zeus CAR offers and chat-SMS rollout 2026-07-16 — Discord message 1527502930989813761",
-      "description": "CAR-BR legacy chats now use the three generic offer cards; a separate G006 SMS capture variant is active only on the same eight sites that already had the CAR chat installed. EMP chats were not changed."
+      "source_report": "REPORT-INFRA rollout 1527502930989813761; SMS manager map 1527508400097988691",
+      "description": "CAR-BR legacy chats use the three generic offer cards; separate SMS variants are active only on the same eight sites that already had the CAR chat installed and are linked to the canonical site-specific G001-G006 map. EMP chats were not changed."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
@@ -4034,6 +4055,11 @@
       "modified_at": "2026-05-24T00:08:01-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/mgs_google_workspace_auth.py",
+      "size_bytes": 8347,
+      "modified_at": "2026-07-16T22:51:37-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
       "size_bytes": 7712,
       "modified_at": "2026-05-14T13:39:05-04:00"
@@ -6905,15 +6931,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 6328,
-      "md5": "a1bb94cfdbf45573a374a48bfac2c286",
-      "modified_at": "2026-07-16T22:40:53-04:00"
+      "size_bytes": 6573,
+      "md5": "ab731d4faa37de70740cd36bc6e8b005",
+      "modified_at": "2026-07-16T22:52:36-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 6456,
-      "md5": "ed33d99745f10031e1cbb5eef3ac80ce",
-      "modified_at": "2026-07-16T22:37:01-04:00"
+      "md5": "5ba4860db799c7aed3e4ca836874aee5",
+      "modified_at": "2026-07-16T22:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6924,8 +6950,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "81219ed96b659671cfa3f56512064ae6",
-      "modified_at": "2026-07-16T22:26:41-04:00"
+      "md5": "594cb268d3143b3c5788f283977ffd88",
+      "modified_at": "2026-07-16T22:41:39-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6948,8 +6974,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "cb031c1bc7bad1ef94d13a29a3f13b61",
-      "modified_at": "2026-07-16T22:30:02-04:00"
+      "md5": "02a364d395236b76efa3b9b6bfe405c8",
+      "modified_at": "2026-07-16T22:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6960,8 +6986,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 348,
-      "md5": "26dd949e6bcf5c93e7e729b69e656d6b",
-      "modified_at": "2026-07-16T22:19:01-04:00"
+      "md5": "5b1f0608468043741db85aa32eaf8798",
+      "modified_at": "2026-07-16T22:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -7002,14 +7028,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27745,
-      "md5": "2136b66be601423d6675ddb5a8c903a8",
-      "modified_at": "2026-07-16T22:40:02-04:00"
+      "md5": "028ec8bb3b796bc834621372b94ea0a4",
+      "modified_at": "2026-07-16T22:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 356,
-      "md5": "66e5b6c0df481ca7eb074c23ed22e60c",
-      "modified_at": "2026-07-16T22:41:01-04:00"
+      "size_bytes": 357,
+      "md5": "4d3bf333904e9fcc3baf86ce119449b4",
+      "modified_at": "2026-07-16T22:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7031,9 +7057,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 313745,
-      "md5": "33fbcb010028b839c4e532939d4c7e13",
-      "modified_at": "2026-07-16T22:35:32-04:00"
+      "size_bytes": 314998,
+      "md5": "522382677d7036155bf2cd2c9d30e5d8",
+      "modified_at": "2026-07-16T22:52:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7111,7 +7137,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3358,
       "md5": "f55191c98883f6902b4e625b27ca8231",
-      "modified_at": "2026-07-16T22:37:02-04:00"
+      "modified_at": "2026-07-16T22:52:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -7134,8 +7160,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 208550,
-      "md5": "ade5f1caffe75d14e9bc1df5ace792bf",
-      "modified_at": "2026-07-16T22:29:16-04:00"
+      "md5": "68295b1eb5fccc99f00c42e50d48501b",
+      "modified_at": "2026-07-16T22:44:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -7177,7 +7203,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-16T22:41:02-04:00"
+      "modified_at": "2026-07-16T22:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7212,8 +7238,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "d73971e032b49b4b6aaf83266204a1c8",
-      "modified_at": "2026-07-16T22:40:03-04:00"
+      "md5": "807fd2faf41c3a2e4addb8ef89d2b5fb",
+      "modified_at": "2026-07-16T22:50:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

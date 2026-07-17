@@ -1,0 +1,43 @@
+{
+  "initiative": "chat-sms-manager-map-20260717",
+  "authorized_by": "Rodolfo Mattei",
+  "source_message_id": "1527506150457872395",
+  "scope": "Update the private six-list SMS catalog on all eight existing CAR chat sites and link each CAR-BR-01-SMS config to its assigned manager code.",
+  "site_manager_map": {
+    "wantabrand.com": "G001",
+    "zuout.com": "G002",
+    "cliquet.com": "G002",
+    "openzed.com": "G003",
+    "zytiva.com": "G003",
+    "finance.topfeed.fun": "G004",
+    "newsoun.com": "G005",
+    "eggbev.com": "G006"
+  },
+  "validation": {
+    "sites_updated": 8,
+    "private_catalog_entries_per_site": 6,
+    "catalog_exact_readback": "8/8",
+    "manager_link_readback": "8/8",
+    "transactional_mocked_sms_smoke": "8/8",
+    "smoke_statuses": [
+      "ok:G001",
+      "ok:G002",
+      "ok:G002",
+      "ok:G003",
+      "ok:G003",
+      "ok:G004",
+      "ok:G005",
+      "ok:G006"
+    ],
+    "synthetic_rows_restored": "8/8",
+    "real_sms_sent_during_smoke": false,
+    "public_routes_http_200_with_form": "8/8",
+    "private_sms_urls_absent_from_public_html": "8/8"
+  },
+  "backups": [
+    "/var/backups/mgs-chat-funnels-sms-map/20260717T024612Z/",
+    "/root/mgs-agent-backups/chat-sms-manager-map/20260717T024707Z/"
+  ],
+  "known_warning": "Wantabrand retains the pre-existing yoast-rest-meta.php WP-CLI permission warning; all config, catalog, smoke and public-route validations passed.",
+  "outcome": "success"
+}

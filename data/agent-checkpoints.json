@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
-      "next_step": "Fazer backups direcionados; atualizar catálogo privado em 8 sites; alterar somente sms_manager_code de CAR-BR-01-SMS conforme o mapa; validar readback, rota pública e smoke transacional mockado sem envio real; atualizar inventário/audit e REPORT-INFRA.",
+      "next_step": "Operação encerrada. Monitorar os primeiros leads reais por site/lista; qualquer troca futura de lista ou expansão para novo site exige novo mapa autorizado.",
       "objective": "Atualizar o catálogo privado das listas SMS dos chats CAR e vincular cada CAR-BR-01-SMS ao código G001-G006 definido por Rodolfo nos oito sites elegíveis",
-      "source": "discord:message:1527506150457872395; /root/mgs-agent/work/chat-sms-rollout-20260716/final-validation.json",
-      "state": "follow-up autorizado por rodolfo: wantabrand g001; zuout e cliquet g002; openzed e zytiva g003; finance.topfeed g004; newsoun g005; eggbev g006. produção anterior está saudável; atualização de opções/configs e smokes mockados ainda em execução.",
+      "source": "/root/mgs-agent/work/chat-sms-rollout-20260716/sms-manager-map-validation.json; discord:message:1527506150457872395",
+      "state": "concluído: catálogo privado das seis listas atualizado com readback exato em 8/8 sites; car-br-01-sms vinculado a wantabrand g001, zuout/cliquet g002, openzed/zytiva g003, finance.topfeed g004, newsoun g005 e eggbev g006; smokes mockados retornaram o código correto em 8/8, restauraram as linhas e não enviaram sms real; rotas públicas 8/8 http 200 com urls privadas ausentes.",
       "thread_id": "1527491503084015616",
-      "updated_at": "2026-07-17T02:45:11+00:00"
+      "updated_at": "2026-07-17T02:52:20+00:00"
     },
     {
       "agent": "zeus",
@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-sheets-enterprise-migration-20260716",
-      "next_step": "Aguardar autorização explícita para habilitar Google Sheets API no projeto da Service Account e trocar, um script por vez, o auth OAuth usuário por Service Account com canário de escrita/readback e rollback; não remover OAuth antes do cutover completo",
+      "next_step": "Rodolfo habilitar sheets.googleapis.com no projeto 910132583650 pela Cloud Console; Zeus então valida Sheets HTTP 200, executa canário write/readback/restore, migra consumidores ativos um por vez, executa smokes e solicita confirmação crítica separada antes de revogar/remover OAuth",
       "objective": "Eliminar a dependência do OAuth pessoal nas planilhas operacionais usadas por Zeus, Atena e Ares sem mover o cluster financeiro interdependente",
-      "source": "discord:message:1527504090001576019; /root/mgs-agent/work/google-sheets-sa-share-20260716/final-validation.json",
-      "state": "compartilhamento aplicado e validado: 10 planilhas do cluster financeiro receberam service account como writer; 18/18 planilhas operacionais/dependências retornam drive http 200 e canedit/canmodifycontent. julho 2026 preservado nas seis financeiras com paridade exata de fórmulas e zero erros. nenhuma planilha movida e nenhuma fórmula editada. sheets api da service account ainda bloqueada por serviço desabilitado http 403.",
+      "source": "discord:message:1527506293655343255; Service Usage API HTTP 403; https://console.cloud.google.com/apis/library/sheets.googleapis.com?project=910132583650",
+      "state": "fase de cutover autorizada por rodolfo. sheets api enable tentou via service account e falhou com http 403 por falta de serviceusage.services.enable; zero mudança gcp aplicada. helper canônico scripts/mgs_google_workspace_auth.py criado e validado em python sistema e sb-venv com drive http 200/canedit. cryptography instalado no sb-venv. consumidores inventariados; nenhum script ativo ainda mudou de oauth para sa e produção segue saudável no oauth como rollback.",
       "thread_id": "1527491546331611238",
-      "updated_at": "2026-07-17T02:40:53+00:00"
+      "updated_at": "2026-07-17T02:52:36+00:00"
     },
     {
       "agent": "zeus",
@@ -72,5 +72,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T02:45:11+00:00"
+  "updated_at": "2026-07-17T02:52:36+00:00"
 }
