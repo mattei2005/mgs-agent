@@ -81,6 +81,19 @@ WordPress `created_at` is stored as UTC in the observed quiz table, while SMS Fu
 
 The aggregate difference answers only a net counter gap. It does not identify rows that can safely be exported or imported. A recovery list must be built from event-level unmatched submissions, and SMS Funnel list import will deduplicate repeated submissions down to contact-level phones.
 
+### Event-preservation rule for Rodolfo's SMS audits
+
+When Rodolfo asks for **envios**, messages, registrations, or a comparison Sheet, preserve occurrence-level cardinality:
+
+- One registration/expected-send occurrence equals one row. If the same person or phone registered three times, keep three rows in source and difference outputs.
+- Never deduplicate by phone unless Rodolfo explicitly asks for unique contacts. Normalizing a phone for matching must not collapse repeated occurrences.
+- Do not suppress, merge, or refuse analytical rows because a future resend could be duplicated. Producing the audit does not authorize a resend; the decision to send belongs to MGS.
+- For a WordPress tab described as “envios registrados no banco,” use only the requested send-attempt semantics (normally `sms_funnel_status LIKE 'ok:%'`) rather than silently substituting all captured leads. Label this as a successful WordPress→SMS Funnel handoff, not proof of outbound SMS.
+- For the SMS Funnel tab, use actual outbound message events from `/api/messages`, preserving every event.
+- Build the difference as a multiset: match/consume at most one SMS event for each WordPress occurrence using normalized phone plus the strongest available list/timestamp evidence, and emit every unmatched WordPress occurrence with its original name and phone. Extra SMS events do not cancel unrelated unmatched WordPress rows.
+
+If source semantics are ambiguous, state the distinction concisely, but do not change the requested occurrence-level scope on Rodolfo's behalf.
+
 ## Execution posture for direct recovery-list requests
 
 When Rodolfo directly instructs creation/import of a recovery list, do not turn the task into a routine approval loop. Reconcile the event-level cohort and platform deduplication first, then execute the exact verified scope without extra confirmation when it matches the request.

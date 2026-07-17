@@ -37,7 +37,7 @@ REPORT_SUMMARY_TAB='Resumo'
 REPORT_LEGACY_TOTAL_TAB='Paginas'
 REPORT_SHEET_LOCK=Path('/var/lock/sb-restricted-sheet-writer.lock')
 GOOGLE_TOKEN_FILE=BASE_DIR/'.secrets/ares-google-drive-oauth-client.json'
-GOOGLE_AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','oauth').strip().lower()
+GOOGLE_AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','service_account').strip().lower()
 GOOGLE_AUTH_HELPER_PATH=BASE_DIR/'scripts/mgs_google_workspace_auth.py'
 GLOBAL_IGNORE_PATH=BASE_DIR/'data/mgs-global-page-ignore-list.json'
 
