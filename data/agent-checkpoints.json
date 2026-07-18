@@ -112,6 +112,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-hermes-news-completeness-watchdog-20260718",
+      "next_step": "Implementar script e testes mockados; aplicar cron com backup; atualizar inventário/audit/docs; executar dry-run real e REPORT-INFRA.",
+      "objective": "Eliminar falhas silenciosas no cron de explicações do Hermes News com watchdog independente, recuperação, fallback determinístico e readback",
+      "source": "discord:1527882017293729876#1528056953035559093; scripts/hermes-news-explainer.py; logs/events-audit.jsonl",
+      "state": "em implementação: incidente e fluxo atual reconciliados; contrato definido para auditoria direta do discord, lock compartilhado, recuperação antes de 10 minutos, fallback e alerta infra somente em exceção.",
+      "thread_id": "1527882017293729876",
+      "updated_at": "2026-07-18T15:18:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-memory-autocompact-90",
       "next_step": "Operação normal automática. Zeus só escala falha fechada, source_unchanged não comprovado, entrega Discord pendente ou store que permaneça >=90% após tentativa.",
       "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
@@ -122,5 +132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T15:53:49+00:00"
+  "updated_at": "2026-07-18T15:18:13+00:00"
 }
