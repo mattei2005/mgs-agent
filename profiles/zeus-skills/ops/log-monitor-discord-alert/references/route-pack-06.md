@@ -91,12 +91,13 @@ Detectar só erros consecutivos não é suficiente. Cloudflare e similares retor
 Lessons learned 2026-04-27 (`check-pending-reports.sh` loop de ~120 msgs) e hardening de 2026-07-14:
 
 1. **Detectar mudança SEM atualizar estado = loop garantido.** Antes do curl, persistir uma intenção/outbox de entrega. Só mover o item para o estado final (`resolved`) após HTTP 2xx; em falha, manter o alerta aberto e registrar a tentativa para retry.
-2. **Separador `:` em arrays shell que carregam `agent:skill_name` causa colisão silenciosa** — usar `|`.
-3. **`declare -A RESOLVED_DEDUP`** para dedup dentro de uma execução.
-4. **Sempre fazer fixture/mock + dry-run manual** após qualquer modificação em monitor com state file. A fixture deve provar transição, retry após falha HTTP e ausência de efeitos no estado produtivo.
-5. **Rotular pelo que é realmente verificado.** Um monitor que compara filesystem com `infra-inventory.json` detecta “skill não inventariada”; ele não pode afirmar “sem REPORT-INFRA” sem consultar uma fonte de registro do report.
-6. **Ausência transitória não vira alerta imediato.** Exigir pelo menos duas leituras/execuções consecutivas ausentes, ou uma confirmação equivalente em snapshot estável, antes do POST. Se o registro reaparecer, limpar o candidato e registrar supressão.
-7. **Evidência Git precisa ser específica do item.** Não usar simplesmente o último commit global que tocou o inventário. Buscar o commit que introduziu/removeu a entrada (`git log -S... -- data/infra-inventory.json`) ou declarar apenas “registro validado” quando não houver commit específico.
+2. **Subprocesso pode produzir o artefato completo e ainda encerrar por sinal/nonzero.** Quando um monitor chama um gerador externo, validar o stdout contra o contrato esperado antes de descartá-lo apenas pelo return code. Se o stdout estiver completo, registrar WARN e continuar; se estiver incompleto, preservar o item como falha retryable com contagem limitada. Nunca avançar o cursor de forma que uma falha fique permanentemente invisível. O dry-run não pode alterar cursor/state produtivo.
+3. **Separador `:` em arrays shell que carregam `agent:skill_name` causa colisão silenciosa** — usar `|`.
+4. **`declare -A RESOLVED_DEDUP`** para dedup dentro de uma execução.
+5. **Sempre fazer fixture/mock + dry-run manual** após qualquer modificação em monitor com state file. A fixture deve provar transição, retry após falha HTTP e ausência de efeitos no estado produtivo.
+6. **Rotular pelo que é realmente verificado.** Um monitor que compara filesystem com `infra-inventory.json` detecta “skill não inventariada”; ele não pode afirmar “sem REPORT-INFRA” sem consultar uma fonte de registro do report.
+7. **Ausência transitória não vira alerta imediato.** Exigir pelo menos duas leituras/execuções consecutivas ausentes, ou uma confirmação equivalente em snapshot estável, antes do POST. Se o registro reaparecer, limpar o candidato e registrar supressão.
+8. **Evidência Git precisa ser específica do item.** Não usar simplesmente o último commit global que tocou o inventário. Buscar o commit que introduziu/removeu a entrada (`git log -S... -- data/infra-inventory.json`) ou declarar apenas “registro validado” quando não houver commit específico.
 
 ---
 ## SEÇÃO F — Cron Control Plane e Smoke Tests
