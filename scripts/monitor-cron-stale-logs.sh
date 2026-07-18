@@ -64,6 +64,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     if script == 'monitor-hermes-memory-capacity.py':
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60
+    if script == 'hermes-news-explainer-watchdog.py':
+        # Watchdog por minuto: cinco ciclos sem sinal já indicam perda de proteção.
+        return 5 * 60
     # Jobs restritos por dia da semana podem ficar vários dias sem executar.
     # O fallback diário de 30h gerava falso STALE (ex.: terça/sexta). Uma
     # janela semanal completa também cobre a primeira execução após mudança

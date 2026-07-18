@@ -67,6 +67,7 @@ run_job "chat-log.sh --rebuild-index" "safe" "${BASE}/scripts/chat-log.sh --rebu
 run_job "sync-codex-oauth.sh --dry-run" "dry-run" "${BASE}/scripts/sync-codex-oauth.sh --dry-run"
 run_job "cron-control-plane.py" "safe" "${BASE}/scripts/cron-control-plane.py --write-doc"
 run_job "monitor-cron-stale-logs.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-cron-stale-logs.sh --dry-run"
+run_job "hermes-news-watchdog.py --dry-run" "dry-run" "${BASE}/scripts/hermes-news-explainer-watchdog.py --dry-run"
 run_job "monitor-gpt55-oauth-cost.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-gpt55-oauth-cost.sh --dry-run"
 run_job "monitor-yoast-health-eggbev.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-yoast-health-eggbev.sh --dry-run"
 run_job "mgs-safety-backup.sh --dry-run" "dry-run" "${BASE}/scripts/mgs-safety-backup.sh --dry-run"
