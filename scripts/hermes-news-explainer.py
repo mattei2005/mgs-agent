@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import unicodedata
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -22,6 +23,7 @@ PROFILE_ENV = pathlib.Path('/root/.hermes/profiles/zeus/.env')
 HERMES_BIN = '/root/.local/bin/hermes'
 USER_AGENT = 'Hermes-Agent (https://github.com/NousResearch/hermes-agent)'
 MAX_MESSAGES_PER_RUN = 5
+MAX_PROCESSING_ATTEMPTS = 3
 API_TIMEOUT_SECONDS = 20
 API_MAX_ATTEMPTS = 3
 
@@ -115,6 +117,13 @@ def extract_message(m: dict) -> str:
     return '\n\n'.join(parts).strip()
 
 
+def is_usable_explanation(text: str) -> bool:
+    content = text.strip()
+    normalized = unicodedata.normalize('NFKD', content).encode('ascii', 'ignore').decode().casefold()
+    required = ('o que mudou', 'impacto', 'exige acao')
+    return len(content) >= 120 and all(marker in normalized for marker in required)
+
+
 def explain(text: str) -> str:
     prompt = f"""
 Você é Zeus, GM da MGS, explicando um anúncio do Hermes Agent para Rodolfo.
@@ -131,12 +140,45 @@ Anúncio bruto:
         capture_output=True,
         timeout=240,
         cwd=str(BASE_DIR),
-        env={**os.environ, 'HERMES_BACKGROUND_NOTIFICATIONS': 'off'},
+        env={
+            **os.environ,
+            'HERMES_BACKGROUND_NOTIFICATIONS': 'off',
+            'PYTHONFAULTHANDLER': '1',
+        },
     )
+    output = (cp.stdout or '').strip()
     if cp.returncode != 0:
+        if is_usable_explanation(output):
+            print(
+                f'{now_iso()} WARN hermes oneshot rc={cp.returncode} '
+                f'but stdout is a complete explanation; continuing',
+                file=sys.stderr,
+            )
+            return output
         err = (cp.stderr or cp.stdout or '').strip()[-1200:]
         raise RuntimeError(f'hermes oneshot failed rc={cp.returncode}: {err}')
-    return (cp.stdout or '').strip()
+    if not is_usable_explanation(output):
+        raise RuntimeError('hermes oneshot returned incomplete explanation')
+    return output
+
+
+def select_candidates(messages: list[dict], state: dict) -> list[dict]:
+    last_seen = int(state.get('last_seen_id') or 0)
+    processed = state.get('processed') or {}
+    candidates = []
+    for message in messages:
+        mid = message['id']
+        previous = processed.get(mid) or {}
+        previous_attempts = int(previous.get('attempts', 1 if previous.get('error') else 0))
+        retryable_failure = (
+            bool(previous.get('error'))
+            and not previous.get('reply_id')
+            and previous_attempts < MAX_PROCESSING_ATTEMPTS
+        )
+        if int(mid) > last_seen or retryable_failure:
+            candidates.append(message)
+    candidates.sort(key=lambda message: int(message['id']))
+    return candidates[:MAX_MESSAGES_PER_RUN]
 
 
 def post_reply(token: str, message_id: str, explanation: str) -> dict:
@@ -165,6 +207,8 @@ def main() -> int:
     token = load_token()
     state = load_state()
     messages = api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit=25')
+    if not isinstance(messages, list):
+        raise RuntimeError('Discord messages endpoint returned a non-list response')
     if not messages:
         print(f'{now_iso()} no messages found')
         return 0
@@ -177,10 +221,7 @@ def main() -> int:
         print(f'{now_iso()} initialized last_seen_id={newest_id}')
         return 0
 
-    last_seen = int(state.get('last_seen_id') or 0)
-    candidates = [m for m in messages if int(m['id']) > last_seen]
-    candidates.sort(key=lambda m: int(m['id']))
-    candidates = candidates[:MAX_MESSAGES_PER_RUN]
+    candidates = select_candidates(messages, state)
 
     processed = state.setdefault('processed', {})
     posted = 0
@@ -192,32 +233,48 @@ def main() -> int:
             (e.get('title') or '').strip() == 'Hermes Agent — update disponível'
             for e in (m.get('embeds') or [])
         )
-        if mid in processed or m.get('type') == 12 or (author.get('id') == ZEUS_BOT_ID and not is_update_alert):
+        previous = processed.get(mid) or {}
+        retrying_failure = bool(previous.get('error')) and not previous.get('reply_id')
+        should_skip = (
+            (mid in processed and not retrying_failure)
+            or m.get('type') == 12
+            or (author.get('id') == ZEUS_BOT_ID and not is_update_alert)
+        )
+        if should_skip:
             skipped += 1
-            state['last_seen_id'] = mid
+            state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
             continue
         raw = extract_message(m)
         if not raw:
             skipped += 1
-            state['last_seen_id'] = mid
+            state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
             continue
         if args.dry_run:
             print(f'{now_iso()} DRY candidate message_id={mid} author={author.get("username")} chars={len(raw)}')
-            state['last_seen_id'] = mid
             continue
         try:
             explanation = explain(raw)
             reply = post_reply(token, mid, explanation)
-            processed[mid] = {'processed_at': now_iso(), 'reply_id': reply.get('id')}
+            processed[mid] = {
+                'processed_at': now_iso(),
+                'reply_id': reply.get('id'),
+                'attempts': int((processed.get(mid) or {}).get('attempts', 1 if (processed.get(mid) or {}).get('error') else 0)) + 1,
+            }
             posted += 1
         except Exception as e:
-            processed[mid] = {'processed_at': now_iso(), 'error': str(e)[:500]}
+            previous = processed.get(mid) or {}
+            processed[mid] = {
+                'processed_at': now_iso(),
+                'error': str(e)[:500],
+                'attempts': int(previous.get('attempts', 1 if previous.get('error') else 0)) + 1,
+            }
             print(f'{now_iso()} ERROR message_id={mid}: {e}', file=sys.stderr)
-        state['last_seen_id'] = mid
+        state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
         save_state(state)
         time.sleep(1)
 
-    save_state(state)
+    if not args.dry_run:
+        save_state(state)
     print(f'{now_iso()} done posted={posted} skipped={skipped} candidates={len(candidates)} last_seen_id={state.get("last_seen_id")}')
     return 0
 
