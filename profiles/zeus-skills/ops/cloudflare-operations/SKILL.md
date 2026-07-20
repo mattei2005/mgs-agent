@@ -63,6 +63,21 @@ Then resolve the item through `op`. Do not print the token. If multiple token-li
 4. **Account-wide or cross-zone changes** — confirm scope clearly, especially when a requested hostname is a subdomain whose Cloudflare zone is the parent domain.
 5. **Billing, ownership, account members, token creation/deletion, or global security settings** — treat as sensitive; require explicit instruction and confirmation.
 
+### Creating Additional API Tokens
+
+Cloudflare's current official flow requires the initial token to be generated from the dashboard template **Create additional tokens**. The `User → API Tokens → Edit` permission (API name: `API Tokens Write`) is not available in other templates or in the Custom Token builder.
+
+For a safe capability smoke test after Rodolfo's Critical Subset confirmation:
+
+1. Verify the initial token is active.
+2. Resolve its exact `com.cloudflare.api.user.<USER_TAG>` resource from the current token policy; do not expose the user tag or token IDs in Discord.
+3. Create a short-lived temporary token with the smallest useful permission (for example, `User Details Read`) and a near-term expiration as a cleanup fallback.
+4. Verify the temporary token through `/user/tokens/verify`.
+5. Delete it immediately with the initial token.
+6. Validate deletion by readback (`GET /user/tokens/{id}` returning not found) and append a secret-free audit event.
+
+`API Tokens Read` alone does not authorize `POST /user/tokens`; creation requires `API Tokens Write`.
+
 ## Zone Resolution
 
 Cloudflare zones are usually apex domains. For a requested hostname:

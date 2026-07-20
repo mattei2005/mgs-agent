@@ -66,7 +66,13 @@ Validation details:
 
 ## Pitfalls
 
-- Run pytest from the Hermes checkout/worktree; a correct suite launched from another cwd fails as “file not found”.
+- Run pytest from the Hermes checkout/worktree; a correct suite launched from another cwd fails as “file not found”. Keep multiline target lists in one shell command or use explicit continuations so a bare `pytest -q` does not accidentally collect the parent filesystem.
 - A static compatibility scan is advisory; `git apply --check`, guard, compile, builds, tests, and real smokes are authoritative.
-- Large profile backups can take minutes and exceed 1 GB. Verify existence/size/checksum and retention; do not mistake quiet tar output for a hang.
+- Large profile backups can take minutes and exceed 1 GB. A nominal precheck may still create a multi-GB backup, so record that side effect, checksum it, and recheck disk/retention before staging.
+- For a large drifted customization surface, make a temporary commit from the exact live tracked + untracked snapshot, cherry-pick it onto the frozen upstream SHA, resolve only semantic conflicts, and require both path-set equality and byte-for-byte equality before promoting the consolidated patch. Generate the canonical patch as `git diff --binary <target>..HEAD`, then test apply and reverse-apply in a second clean checkout.
+- Patch guards must detect the exact broken construct they know how to repair. A broad grep such as any occurrence of `getattr(event, "internal", False)` can match valid upstream code and enter a repair branch whose expected defect is absent. Pair exact predicates with exact post-repair invariants.
+- A successful response string is not a successful CLI smoke when the process exits nonzero afterward. `hermes -z` must drain `shutdown_memory_provider(messages)` before `agent.close()` in a `finally` path; otherwise Honcho writer/sync daemon threads can survive until interpreter finalization and produce `SIGABRT`/exit 134 after the answer was printed. Require expected output **and rc=0**, and add a unit test for cleanup order plus a real one-shot smoke.
+- Build the next Python environment in isolation. After install, compare sorted `pip freeze` and run `uv pip check`; when active and next environments are identical, do not introduce an unnecessary venv swap.
+- `pgrep -af '<pattern>'` can count its own diagnostic command. For zero-process gates such as `gateway run --replace`, inspect `/proc/*/cmdline` or otherwise require the Hermes executable and exact argv tokens.
+- A PID mismatch alone is not a restart finding. Reconcile `MainPID` with `ActiveEnterTimestamp`, `ExecMainStartTimestamp`, process `lstart`, audit, inventory, REPORT-INFRA, Git, and session history before classifying concurrent change. Process start timestamps predating the maintenance prove the staged checkout has not been activated.
 - Do not claim gateways run the new code until the detached restart and post-restart validation complete.
