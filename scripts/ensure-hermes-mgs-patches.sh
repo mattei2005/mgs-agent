@@ -445,6 +445,12 @@ grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
   || fail "missing mandatory background capacity-loss disclosure"
 grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py" \
   || fail "missing background capacity disclosure regression test"
+grep -q "def _close_oneshot_agent" "$REPO/hermes_cli/oneshot.py" \
+  || fail "missing one-shot lifecycle cleanup helper"
+grep -q "_close_oneshot_agent(agent)" "$REPO/hermes_cli/oneshot.py" \
+  || fail "one-shot agent path does not drain lifecycle resources"
+grep -q "test_close_oneshot_agent_drains_memory_before_close" "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
+  || fail "missing one-shot Honcho shutdown regression test"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
@@ -458,6 +464,7 @@ PYBIN="${PYBIN:-$REPO/venv/bin/python}"
   "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py" \
   "$REPO/agent/background_review.py" \
+  "$REPO/hermes_cli/oneshot.py" \
   "$REPO/tools/skills_tool.py" \
   "$REPO/tools/memory_tool.py" \
   "$REPO/tools/write_approval.py" \
@@ -487,6 +494,7 @@ PYBIN="${PYBIN:-$REPO/venv/bin/python}"
   "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
   "$REPO/tests/tools/test_write_approval.py" \
   "$REPO/tests/run_agent/test_background_review_summary.py" \
+  "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
   "$REPO/tests/tools/test_write_trace.py"
 
-log "OK Hermes MGS patches present, py_compile, dead-letter/trace and busy-steer tests passed"
+log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"

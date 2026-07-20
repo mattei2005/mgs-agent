@@ -1815,6 +1815,48 @@ index 03c3017c8..726e48936 100644
  
      async def _handle_memory_command(self, event: MessageEvent) -> str:
          """Handle /memory — review pending memory writes + toggle the approval gate.
+diff --git a/hermes_cli/oneshot.py b/hermes_cli/oneshot.py
+index 0ed1dcd30..5769be3ee 100644
+--- a/hermes_cli/oneshot.py
++++ b/hermes_cli/oneshot.py
+@@ -432,8 +432,35 @@ def _run_agent(
+     agent.stream_delta_callback = None
+     agent.tool_gen_callback = None
+ 
+-    result = agent.run_conversation(prompt)
+-    return (result.get("final_response") or "", result)
++    try:
++        result = agent.run_conversation(prompt)
++        return (result.get("final_response") or "", result)
++    finally:
++        _close_oneshot_agent(agent)
++
++
++def _close_oneshot_agent(agent: object) -> None:
++    """Drain one-shot agent resources before interpreter finalization.
++
++    Short-lived ``hermes -z`` processes bypass the interactive CLI cleanup
++    hook.  Honcho can own async writer/prefetch workers, and leaving those
++    daemon threads alive can abort CPython after the final response has already
++    been printed.  Memory shutdown must run before ``agent.close()`` because
++    close clears the session message list.
++    """
++    messages = list(getattr(agent, "_session_messages", None) or [])
++    try:
++        shutdown_memory = getattr(agent, "shutdown_memory_provider", None)
++        if callable(shutdown_memory):
++            shutdown_memory(messages)
++    except Exception:
++        logging.debug("One-shot memory shutdown failed", exc_info=True)
++    try:
++        close_agent = getattr(agent, "close", None)
++        if callable(close_agent):
++            close_agent()
++    except Exception:
++        logging.debug("One-shot agent close failed", exc_info=True)
+ 
+ 
+ def _oneshot_clarify_callback(question: str, choices=None) -> str:
 diff --git a/plugins/memory/honcho/__init__.py b/plugins/memory/honcho/__init__.py
 index 8ac56aec2..bf98f35cd 100644
 --- a/plugins/memory/honcho/__init__.py
@@ -4775,6 +4817,60 @@ index 74fb8baa3..4f4032d55 100644
 +    )
 +    running_agent.interrupt.assert_not_called()
 +    assert session_key not in runner.adapters[Platform.TELEGRAM]._pending_messages
+diff --git a/tests/hermes_cli/test_oneshot_usage_file.py b/tests/hermes_cli/test_oneshot_usage_file.py
+index 3bee96cbb..eeb0f75e8 100644
+--- a/tests/hermes_cli/test_oneshot_usage_file.py
++++ b/tests/hermes_cli/test_oneshot_usage_file.py
+@@ -2,7 +2,7 @@
+ 
+ import json
+ 
+-from hermes_cli.oneshot import _write_usage_file
++from hermes_cli.oneshot import _close_oneshot_agent, _write_usage_file
+ 
+ 
+ def _result(**overrides):
+@@ -67,3 +67,40 @@ class TestWriteUsageFile:
+         path = tmp_path / "usage.json"
+         _write_usage_file(str(path), _result(failed=True))
+         assert json.loads(path.read_text())["failed"] is True
++
++
++def test_close_oneshot_agent_drains_memory_before_close():
++    calls = []
++
++    class Agent:
++        _session_messages = [{"role": "user", "content": "hello"}]
++
++        def shutdown_memory_provider(self, messages):
++            calls.append(("memory", list(messages)))
++
++        def close(self):
++            calls.append(("close", None))
++
++    _close_oneshot_agent(Agent())
++
++    assert calls == [
++        ("memory", [{"role": "user", "content": "hello"}]),
++        ("close", None),
++    ]
++
++
++def test_close_oneshot_agent_still_closes_when_memory_shutdown_fails():
++    calls = []
++
++    class Agent:
++        _session_messages = []
++
++        def shutdown_memory_provider(self, messages):
++            raise RuntimeError("boom")
++
++        def close(self):
++            calls.append("close")
++
++    _close_oneshot_agent(Agent())
++
++    assert calls == ["close"]
 diff --git a/tests/run_agent/test_background_review_summary.py b/tests/run_agent/test_background_review_summary.py
 index 7401b1eb1..d2068c7b6 100644
 --- a/tests/run_agent/test_background_review_summary.py
