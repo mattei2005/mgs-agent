@@ -31,7 +31,8 @@ Load this skill when:
 7. **Verify live services.** Confirm `active/running`, `ExecMainStatus=0`, and restart counters. Use current runtime evidence, not only the old cron summary.
 8. **Check attribution before calling drift anomalous.** Reconcile audit log → infrastructure inventory → REPORT-INFRA → Git → session/thread history.
 9. **Leave no test residue.** Recheck Git status after guards. Restore any deterministic test-cache marker without touching production config; do not report a clean audit while the verification itself left drift.
-10. **Report conclusion first.** State: intentional changes, preserved personalizations, later drift status, current health, and one residual risk or unrun gate if applicable.
+10. **Verify procedural persistence when asked.** If the user asks whether a lesson was saved for future checks, read back both the live skill and its versioned MGS mirror. State whether the rule was newly written in the current task or already existed and was only confirmed. Separately verify any cron, detector, or announcement generator: a rule in a skill does not prove that an independent script-only automation was changed or even consumes that skill.
+11. **Report conclusion first.** State: intentional changes, preserved personalizations, later drift status, current health, and one residual risk or unrun gate if applicable.
 
 ## Safety and reporting
 
