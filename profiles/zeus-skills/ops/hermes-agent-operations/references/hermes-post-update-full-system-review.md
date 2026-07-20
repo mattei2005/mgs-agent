@@ -30,8 +30,8 @@ npx --yes @openai/codex --version
 corepack --version
 
 # services
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service mgs-autocommit.service
-systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service \
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service mgs-autocommit.service
+systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service \
   -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager
 
 # system
@@ -86,14 +86,14 @@ Verify MGS-specific invariants by name when reporting:
 
 ## Profile/policy review
 
-For Zeus/Atena/Ares/agente legado, summarize without secrets:
+For the active Zeus/Atena/Ares profiles, summarize without secrets:
 
 - `model.provider=openai-codex`
-- `model.default=gpt-5.5`
+- `model.default` equals the current Rodolfo-approved capable GPT pin (currently `gpt-5.6-sol`; do not preserve a stale `gpt-5.5` value by rote)
 - `base_url=https://chatgpt.com/backend-api/codex`
 - `compression.threshold=0.85`
 - channel/free-response/no-thread/thread auto-add settings
-- `image_gen` config, especially agente legado (`openai-codex`, `gpt-image-2-medium`)
+- role-required media/tool configuration only; do not treat retired-agent capabilities as an active baseline
 - auth presence: active provider, auth mode, access token length, refresh token present
 
 Compare live config to mirrored `/root/mgs-agent/profiles/*-config.yaml` when those mirrors exist. If a pre-update snapshot exists, diff it and distinguish normal Hermes config migrations/comments from MGS policy changes.

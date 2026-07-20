@@ -2333,9 +2333,24 @@
         "pending_boot_flag": "absent",
         "monarx": "4.3.50-master active/running, ExecMainStatus=0, dpkg audit clean",
         "gateways": {
-          "ares": {"pid": 684, "status": "active/running", "discord_ready": true, "nrestarts": 0},
-          "atena": {"pid": 685, "status": "active/running", "discord_ready": true, "nrestarts": 0},
-          "zeus": {"pid": 721, "status": "active/running", "discord_ready": true, "nrestarts": 0}
+          "ares": {
+            "pid": 684,
+            "status": "active/running",
+            "discord_ready": true,
+            "nrestarts": 0
+          },
+          "atena": {
+            "pid": 685,
+            "status": "active/running",
+            "discord_ready": true,
+            "nrestarts": 0
+          },
+          "zeus": {
+            "pid": 721,
+            "status": "active/running",
+            "discord_ready": true,
+            "nrestarts": 0
+          }
         },
         "checkout": "HEAD=26480e6c57c3, behind=0, canonical patch reverse-check PASS",
         "guard": "774 passed, 6 subtests passed",
@@ -3232,6 +3247,31 @@
       "skill": "wp-quiz-lead-funnel",
       "source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
       "report_infra_discord_message_id": "1526660645813092363"
+    },
+    {
+      "id": "hermes-post-update-review-active-agent-baseline-20260720",
+      "agent": "zeus",
+      "type": "skill_reference_correction",
+      "owner": "Zeus/Infra",
+      "status": "updated_validated",
+      "path": "profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-post-update-full-system-review.md",
+      "reason": "Remove retired-agent and stale GPT-5.5 assumptions from the canonical post-update audit baseline; keep current active Zeus/Atena/Ares and Rodolfo-approved gpt-5.6-sol policy.",
+      "changes": [
+        "removed retired gateway service from active service checks",
+        "replaced stale GPT-5.5 baseline with current approved model pin",
+        "made media validation role-driven instead of retired-agent-driven"
+      ],
+      "sha256": "8f748058655d151cecbd3bc1f64ca52ea03020189cb992fe29edf9b0d4cbecb1",
+      "readback": "skill_view PASS",
+      "updated_at": "2026-07-20T00:26:04-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1528619149688045569",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "thread_created": false
+      }
     }
   ],
   "systemd_services": [
