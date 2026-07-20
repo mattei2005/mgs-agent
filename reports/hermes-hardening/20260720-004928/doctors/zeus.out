@@ -1,0 +1,126 @@
+
+┌─────────────────────────────────────────────────────────┐
+│                 🩺 Hermes Doctor                        │
+└─────────────────────────────────────────────────────────┘
+
+◆ Security Advisories
+  ✓ No active security advisories
+
+◆ MCP Server Security
+  ✓ No suspicious MCP stdio commands
+
+◆ Python Environment
+  ✓ Python 3.11.15
+  ✓ Virtual environment active
+  ✓ Version files consistent (0.18.2)
+
+◆ SSL / CA Certificates
+  ✓ SSL CA certificate bundle is valid
+
+◆ Required Packages
+  ✓ OpenAI SDK
+  ✓ Rich (terminal UI)
+  ✓ python-dotenv
+  ✓ PyYAML
+  ✓ HTTPX
+  ✓ Croniter (cron expressions) (optional)
+  ✓ python-telegram-bot (optional)
+  ✓ discord.py (optional)
+
+◆ Configuration Files
+  ✓ ~/.hermes/profiles/zeus/.env file exists
+  ✓ API key or custom endpoint configured
+  ✓ ~/.hermes/profiles/zeus/config.yaml exists
+  ✓ Config version up to date (v33)
+  ✓ No deprecated config keys or env vars
+
+◆ xAI Model Retirement (May 15, 2026)
+  ✓ No retired xAI models in config
+
+◆ Auth Providers
+  ⚠ Nous Portal auth (not logged in)
+  ✓ OpenAI Codex auth (logged in)
+  ⚠ MiniMax OAuth (not logged in)
+  ✓ xAI OAuth (logged in)
+
+◆ Directory Structure
+  ✓ ~/.hermes/profiles/zeus directory exists
+  ✓ ~/.hermes/profiles/zeus/cron/ exists
+  ✓ ~/.hermes/profiles/zeus/sessions/ exists
+  ✓ ~/.hermes/profiles/zeus/logs/ exists
+  ✓ ~/.hermes/profiles/zeus/skills/ exists
+  ✓ ~/.hermes/profiles/zeus/memories/ exists
+  ✓ ~/.hermes/profiles/zeus/SOUL.md exists (persona configured)
+  ✓ ~/.hermes/profiles/zeus/memories/ directory exists
+  ✓ MEMORY.md exists (2576 chars)
+  ✓ USER.md exists (3222 chars)
+  ✓ ~/.hermes/profiles/zeus/state.db exists (797 sessions)
+
+◆ Command Installation
+  ✓ Venv entry point exists (venv/bin/hermes)
+  ✓ ~/.local/bin/hermes → correct target
+
+◆ External Tools
+  ✓ git
+  ⚠ ripgrep (rg) not found (file search uses grep fallback)
+    → Install for faster search: sudo apt install ripgrep
+  ⚠ docker not found (optional)
+  ✓ Node.js
+  ✓ agent-browser (Node.js) (browser automation)
+  ✓ Playwright Chromium (browser engine)
+  ✓ Browser tools (agent-browser) deps (no known vulnerabilities)
+  ✓ web workspace deps (no known vulnerabilities)
+  ✓ ui-tui workspace deps (no known vulnerabilities)
+
+◆ API Connectivity
+  Running 29 connectivity checks in parallel…                                                                        ⚠ OpenRouter API (not configured)
+
+◆ Tool Availability
+  ✓ browser
+  ✓ clarify
+  ✓ code_execution
+  ✓ cronjob
+  ✓ delegation
+  ✓ discord
+  ✓ discord_admin
+  ✓ feishu_doc
+  ✓ feishu_drive
+  ✓ file
+  ✓ memory
+  ✓ project
+  ✓ session_search
+  ✓ skills
+  ✓ terminal
+  ✓ todo
+  ✓ tts
+  ✓ video
+  ✓ video_gen
+  ✓ vision
+  ✓ web
+  ✓ x_search
+  ✓ kanban (runtime-gated; loaded only for dispatcher-spawned workers)
+  ⚠ browser-cdp (system dependency not met)
+  ⚠ computer_use (system dependency not met)
+  ⚠ hermes-yuanbao (system dependency not met)
+  ⚠ homeassistant (system dependency not met)
+  ⚠ image_gen (system dependency not met)
+  ⚠ spotify (system dependency not met)
+
+◆ Skills Hub
+  ✓ Skills Hub directory exists
+  ✓ Lock file OK (6 hub-installed skill(s))
+  ⚠ No GITHUB_TOKEN (60 req/hr rate limit — set in ~/.hermes/profiles/zeus/.env for better rates)
+
+◆ Memory Provider
+  ✓ Honcho connected workspace=mgs-agents mode=hybrid freq=async
+
+◆ Profiles
+  ✓ 3 profile(s) found
+  ✓   ares: gateway running, gpt-5.6-sol
+  ✓   atena: gateway running, gpt-5.6-sol
+  ✓   zeus: gateway running, gpt-5.6-sol
+  ⚠ Orphan alias: hera → profile 'hera' no longer exists
+
+────────────────────────────────────────────────────────────
+  All checks passed! 🎉
+

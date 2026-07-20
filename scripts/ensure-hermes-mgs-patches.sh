@@ -451,6 +451,12 @@ grep -q "_close_oneshot_agent(agent)" "$REPO/hermes_cli/oneshot.py" \
   || fail "one-shot agent path does not drain lifecycle resources"
 grep -q "test_close_oneshot_agent_drains_memory_before_close" "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
   || fail "missing one-shot Honcho shutdown regression test"
+grep -q '"group_sessions_per_user"' "$REPO/hermes_cli/config.py" \
+  || fail "group_sessions_per_user missing from known config roots"
+grep -q '"known_plugin_toolsets"' "$REPO/hermes_cli/config.py" \
+  || fail "known_plugin_toolsets missing from known config roots"
+grep -q "test_runtime_persisted_mgs_roots_are_known" "$REPO/tests/hermes_cli/test_config_validation.py" \
+  || fail "missing regression test for runtime-persisted config roots"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
@@ -464,6 +470,7 @@ PYBIN="${PYBIN:-$REPO/venv/bin/python}"
   "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py" \
   "$REPO/agent/background_review.py" \
+  "$REPO/hermes_cli/config.py" \
   "$REPO/hermes_cli/oneshot.py" \
   "$REPO/tools/skills_tool.py" \
   "$REPO/tools/memory_tool.py" \
@@ -495,6 +502,7 @@ PYBIN="${PYBIN:-$REPO/venv/bin/python}"
   "$REPO/tests/tools/test_write_approval.py" \
   "$REPO/tests/run_agent/test_background_review_summary.py" \
   "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
+  "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py"
 
 log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"

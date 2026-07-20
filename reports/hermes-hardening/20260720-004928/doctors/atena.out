@@ -1,0 +1,131 @@
+
+┌─────────────────────────────────────────────────────────┐
+│                 🩺 Hermes Doctor                        │
+└─────────────────────────────────────────────────────────┘
+
+◆ Security Advisories
+  ✓ No active security advisories
+
+◆ MCP Server Security
+  ✓ No suspicious MCP stdio commands
+
+◆ Python Environment
+  ✓ Python 3.11.15
+  ✓ Virtual environment active
+  ✓ Version files consistent (0.18.2)
+
+◆ SSL / CA Certificates
+  ✓ SSL CA certificate bundle is valid
+
+◆ Required Packages
+  ✓ OpenAI SDK
+  ✓ Rich (terminal UI)
+  ✓ python-dotenv
+  ✓ PyYAML
+  ✓ HTTPX
+  ✓ Croniter (cron expressions) (optional)
+  ✓ python-telegram-bot (optional)
+  ✓ discord.py (optional)
+
+◆ Configuration Files
+  ✓ ~/.hermes/profiles/atena/.env file exists
+  ✓ API key or custom endpoint configured
+  ✓ ~/.hermes/profiles/atena/config.yaml exists
+  ✓ Config version up to date (v33)
+  ✓ No deprecated config keys or env vars
+
+◆ xAI Model Retirement (May 15, 2026)
+  ✓ No retired xAI models in config
+
+◆ Auth Providers
+  ⚠ Nous Portal auth (not logged in)
+  ✓ OpenAI Codex auth (logged in)
+  ⚠ MiniMax OAuth (not logged in)
+  ⚠ xAI OAuth (not logged in)
+    → xAI OAuth state is missing access_token. Re-authenticate with `hermes model`.
+
+◆ Directory Structure
+  ✓ ~/.hermes/profiles/atena directory exists
+  ✓ ~/.hermes/profiles/atena/cron/ exists
+  ✓ ~/.hermes/profiles/atena/sessions/ exists
+  ✓ ~/.hermes/profiles/atena/logs/ exists
+  ✓ ~/.hermes/profiles/atena/skills/ exists
+  ✓ ~/.hermes/profiles/atena/memories/ exists
+  ✓ ~/.hermes/profiles/atena/SOUL.md exists (persona configured)
+  ✓ ~/.hermes/profiles/atena/memories/ directory exists
+  ✓ MEMORY.md exists (1981 chars)
+  ✓ USER.md exists (1297 chars)
+  ✓ ~/.hermes/profiles/atena/state.db exists (28 sessions)
+
+◆ Command Installation
+  ✓ Venv entry point exists (venv/bin/hermes)
+  ✓ ~/.local/bin/hermes → correct target
+
+◆ External Tools
+  ✓ git
+  ⚠ ripgrep (rg) not found (file search uses grep fallback)
+    → Install for faster search: sudo apt install ripgrep
+  ⚠ docker not found (optional)
+  ✓ Node.js
+  ✓ agent-browser (Node.js) (browser automation)
+  ✓ Playwright Chromium (browser engine)
+  ✓ Browser tools (agent-browser) deps (no known vulnerabilities)
+  ✓ web workspace deps (no known vulnerabilities)
+  ✓ ui-tui workspace deps (no known vulnerabilities)
+
+◆ API Connectivity
+  Running 29 connectivity checks in parallel…                                                                        ⚠ OpenRouter API (not configured)
+
+◆ Tool Availability
+  ✓ browser
+  ✓ clarify
+  ✓ code_execution
+  ✓ cronjob
+  ✓ delegation
+  ✓ discord
+  ✓ discord_admin
+  ✓ feishu_doc
+  ✓ feishu_drive
+  ✓ file
+  ✓ memory
+  ✓ project
+  ✓ session_search
+  ✓ skills
+  ✓ terminal
+  ✓ todo
+  ✓ tts
+  ✓ video
+  ✓ vision
+  ✓ kanban (runtime-gated; loaded only for dispatcher-spawned workers)
+  ⚠ browser-cdp (system dependency not met)
+  ⚠ computer_use (system dependency not met)
+  ⚠ hermes-yuanbao (system dependency not met)
+  ⚠ homeassistant (system dependency not met)
+  ⚠ image_gen (system dependency not met)
+  ⚠ spotify (system dependency not met)
+  ⚠ video_gen (system dependency not met)
+  ⚠ web (missing EXA_API_KEY, PARALLEL_API_KEY, TAVILY_API_KEY, FIRECRAWL_API_KEY, FIRECRAWL_API_URL, FIRECRAWL_GATEWAY_URL, TOOL_GATEWAY_DOMAIN, TOOL_GATEWAY_SCHEME, TOOL_GATEWAY_USER_TOKEN)
+  ⚠ x_search (missing XAI_API_KEY)
+
+◆ Skills Hub
+  ✓ Skills Hub directory exists
+  ✓ Lock file OK (8 hub-installed skill(s))
+  ⚠ No GITHUB_TOKEN (60 req/hr rate limit — set in ~/.hermes/profiles/atena/.env for better rates)
+
+◆ Memory Provider
+  ✓ Honcho connected workspace=mgs-agents mode=hybrid freq=async
+
+◆ Profiles
+  ✓ 3 profile(s) found
+  ✓   ares: gateway running, gpt-5.6-sol
+  ✓   atena: gateway running, gpt-5.6-sol
+  ✓   zeus: gateway running, gpt-5.6-sol
+  ⚠ Orphan alias: hera → profile 'hera' no longer exists
+
+────────────────────────────────────────────────────────────
+  Found 1 issue(s) to address:
+
+  1. Run 'hermes setup' to configure missing API keys for full tool access
+
+  Tip: run 'hermes doctor --fix' to auto-fix what's possible.
+
