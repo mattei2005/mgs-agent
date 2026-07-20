@@ -42,6 +42,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-post976-hardening-20260720",
+      "next_step": "Preparar config v33 e políticas em cópias temporárias; portar doctor no repositório isolado.",
+      "objective": "Aplicar hardening pós-976 commits a Root, Zeus, Atena e Ares",
+      "source": "Discord thread 1528569634985611264; autorização 1528624264939569242",
+      "state": "snapshot pré-hardening concluído e validado em /root/mgs-agent/reports/hermes-hardening/20260720-004928/pre-hardening.tar.gz, sha256 b9bed82a262a; nenhuma mudança de produção aplicada ainda.",
+      "thread_id": "1528569634985611264",
+      "updated_at": "2026-07-20T04:49:43+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-vps-maintenance-20260719",
       "next_step": "Monitoramento rotineiro; manter backup e stash até a próxima janela de retenção controlada",
       "objective": "Atualizar Hermes preservando customizações MGS e concluir manutenção da VPS",
@@ -142,5 +152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-20T03:45:02+00:00"
+  "updated_at": "2026-07-20T04:49:43+00:00"
 }
