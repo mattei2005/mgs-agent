@@ -2853,6 +2853,74 @@
       },
       "skill_procedure_sha256": "3fb825ee99c06a62ac0f73acdeac894a195483e8c31f6dd53077765e1ee5723c",
       "updated_at": "2026-07-17T14:23:07.854962+00:00"
+    },
+    {
+      "id": "hermes-post976-hardening-20260720",
+      "kind": "hermes_runtime_hardening",
+      "owner": "zeus",
+      "status": "activation_scheduled",
+      "authorization": {
+        "discord_message_id": "1528624264939569242",
+        "text": "Execute."
+      },
+      "scope": {
+        "profiles": [
+          "root",
+          "zeus",
+          "atena",
+          "ares"
+        ],
+        "config_schema": 33,
+        "model": "gpt-5.6-sol",
+        "compression_threshold": 0.85,
+        "guard_tests": 801,
+        "guard_subtests": 6,
+        "post_upstream_tests": 331,
+        "runtime_patch_files": 41
+      },
+      "artifacts": {
+        "backup": "/root/mgs-agent/reports/hermes-hardening/20260720-004928/pre-hardening.tar.gz",
+        "backup_sha256": "b9bed82a262a6e1ba4bfcf0fc9abf40270541c97468bad223c2dbfbd7144b7c6",
+        "runtime_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-19.patch",
+        "runtime_patch_sha256": "91b6c1da7b85c0d3b86425ea526b26b3666f28c665df30506f6722c0048e0bdf",
+        "port_commit": "06b8e5a1b3725e162031a517d4b9c7b288c4deb0",
+        "regression_log": "/root/mgs-agent/reports/hermes-hardening/20260720-004928/post-upstream-regression.log",
+        "guard_log": "/root/mgs-agent/reports/hermes-hardening/20260720-004928/final-guard.log"
+      },
+      "changes": [
+        "config v33 e políticas alinhadas em live/mirrors",
+        "doctor reconhece group_sessions_per_user e known_plugin_toolsets",
+        "skill static-ascii-art-mgs separada do bundled ascii-video",
+        "google-workspace fail-closed preservada; pycache removido",
+        "updater chama pack pós-upstream e helper de reload seguro"
+      ],
+      "validation": {
+        "config_check": "4/4 PASS",
+        "doctor_config_deprecations": "4/4 clear",
+        "smokes": "4/4 PASS",
+        "fresh_patch_apply_reverse": "PASS",
+        "skills_modified_allowlist": {
+          "atena": [
+            "google-workspace"
+          ],
+          "ares": [
+            "google-workspace"
+          ]
+        }
+      },
+      "updated_at": "2026-07-20T05:09:50+00:00",
+      "staging_report_infra_message_id": "1528629204319735942",
+      "staging_report_readback": "PASS",
+      "activation": {
+        "unit": "mgs-gateway-restart-20260720T050907Z-301230",
+        "finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260720T050907Z-301230.log",
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "validator_job_id": "7b949472768e"
+      }
     }
   ],
   "profile_skill_references": [
