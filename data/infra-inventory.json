@@ -2858,7 +2858,7 @@
       "id": "hermes-post976-hardening-20260720",
       "kind": "hermes_runtime_hardening",
       "owner": "zeus",
-      "status": "activation_scheduled",
+      "status": "activated_validated",
       "authorization": {
         "discord_message_id": "1528624264939569242",
         "text": "Execute."
@@ -2897,8 +2897,13 @@
       "validation": {
         "config_check": "4/4 PASS",
         "doctor_config_deprecations": "4/4 clear",
-        "smokes": "4/4 PASS",
+        "smokes": "post-reload 4/4 exact rc=0: ROOT_POST976_OK, ZEUS_POST976_OK, ATENA_POST976_OK, ARES_POST976_OK",
         "fresh_patch_apply_reverse": "PASS",
+        "runtime_port_equivalence": "41/41 patch paths byte-equivalent to validated port; live reverse-check PASS",
+        "profile_mirrors": "19/19 configured source/mirror pairs byte-identical across Zeus, Atena and Ares",
+        "live_gateways": "Ares, Atena and Zeus active/running; Discord connected after current start; ExecMainStatus=0; NRestarts=0",
+        "google_workspace_fail_closed": "PASS: Atena/Ares compatibility scripts returned rc=64; canonical Service Account route preserved",
+        "finalizer": "DONE; systemd Result=success; ExecMainStatus=0; sequential readiness Ares -> Atena -> Zeus",
         "skills_modified_allowlist": {
           "atena": [
             "google-workspace"
@@ -2908,7 +2913,7 @@
           ]
         }
       },
-      "updated_at": "2026-07-20T05:09:50+00:00",
+      "updated_at": "2026-07-20T05:25:44+00:00",
       "staging_report_infra_message_id": "1528629204319735942",
       "staging_report_readback": "PASS",
       "activation": {
@@ -2919,7 +2924,11 @@
           "atena",
           "zeus"
         ],
-        "validator_job_id": "7b949472768e"
+        "validator_job_id": "7b949472768e",
+        "result": "PASS",
+        "validated_at": "2026-07-20T05:24:03+00:00",
+        "final_report_infra_message_id": "1528633908080545943",
+        "final_report_readback": "PASS"
       }
     }
   ],

@@ -43,12 +43,12 @@
     {
       "agent": "zeus",
       "id": "hermes-post976-hardening-20260720",
-      "next_step": "Job 7b949472768e validará finalizer, serviços, smokes, inventário, REPORT-INFRA e Git fora da cadeia ativa.",
-      "objective": "Aplicar hardening pós-976 commits a Root, Zeus, Atena e Ares",
-      "source": "Discord thread 1528569634985611264; autorização 1528624264939569242",
-      "state": "ativação sequencial agendada no finalizador externo mgs-gateway-restart-20260720t050907z-301230; ordem ares→atena→zeus; validação prévia 801+6, 331 e smokes 4/4 pass.",
+      "next_step": "Encerrado; manter os guards 801+6 e pack 331 como baseline e reexecutar apenas se houver drift.",
+      "objective": "Aplicar e validar o hardening Hermes pós-976 em Root, Zeus, Atena e Ares",
+      "source": "Discord thread 1528569634985611264; autorização 1528624264939569242; /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260720T050907Z-301230.log; unit mgs-gateway-restart-20260720T050907Z-301230; live readbacks 2026-07-20T05:24:03Z",
+      "state": "pass: finalizer ares→atena→zeus done e systemd result=success; gateways live/discord/execmainstatus/nrestarts validados; configs v33; mirrors idênticos; patch 41/41; google fail-closed; smokes one-shot 4/4 exatos rc=0; inventário activated_validated.",
       "thread_id": "1528569634985611264",
-      "updated_at": "2026-07-20T05:09:51+00:00"
+      "updated_at": "2026-07-20T05:24:39+00:00"
     },
     {
       "agent": "zeus",
@@ -152,5 +152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-20T05:09:51+00:00"
+  "updated_at": "2026-07-20T05:24:39+00:00"
 }
