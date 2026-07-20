@@ -62,7 +62,7 @@ apply_patch_if_needed() {
       fi
       ;;
     restart-recovery-natural-continuation-*.patch)
-      if grep -q 'getattr(event, "internal", False)' "$REPO/gateway/run.py"; then
+      if grep -Fq '_internal_auto_resume = bool(getattr(event, "internal", False))' "$REPO/gateway/run.py"; then
         /usr/bin/python3 - "$REPO/gateway/run.py" <<'PY'
 from pathlib import Path
 import sys
@@ -83,7 +83,7 @@ PY
         && grep -q 'message.startswith("\[Internal continuation event:")' "$REPO/gateway/run.py" \
         && grep -q "finish every outstanding" "$REPO/gateway/run.py" \
         && grep -q "chronological order" "$REPO/gateway/run.py" \
-        && ! grep -q 'getattr(event, "internal", False)' "$REPO/gateway/run.py"; then
+        && ! grep -Fq '_internal_auto_resume = bool(getattr(event, "internal", False))' "$REPO/gateway/run.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -245,9 +245,10 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for the exact reviewed upstream 2ccfdb2db (2026-07-13).
+# Consolidated port for the exact reviewed upstream 26480e6c5 (2026-07-19).
 # Apply the complete current MGS runtime customization surface first; legacy
 # per-feature patches below remain invariant checks/backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-07-19.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-13.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-07.patch"
 apply_patch_if_needed "memory-dead-letter-structural-trace-2026-07-13.patch"
