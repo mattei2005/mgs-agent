@@ -1,6 +1,16 @@
 {
   "checkpoints": [
     {
+      "agent": "ares",
+      "id": "ARES-META-LIBRARY-FMYBC-BR-CAR-BR-BOT-20260720",
+      "next_step": "Executar coletor canônico pela rota residencial dedicada e validar report, IDs e mídias.",
+      "objective": "Coletar todos os criativos disponíveis da Meta Ad Library da página 688667231000931, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/FMYBC_BR_CAR_BR-BOT.",
+      "source": "discord:thread:1528793694868734042",
+      "state": "authorized_by_rodolfo; collection_pending",
+      "thread_id": "1528793694868734042",
+      "updated_at": "2026-07-20T16:01:53+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
       "next_step": "Operação encerrada. Monitorar os primeiros leads reais por site/lista; qualquer troca futura de lista ou expansão para novo site exige novo mapa autorizado.",
@@ -152,5 +162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-20T05:24:39+00:00"
+  "updated_at": "2026-07-20T16:01:53+00:00"
 }
