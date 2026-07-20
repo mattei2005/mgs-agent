@@ -2321,6 +2321,36 @@
         "embed_count": 1,
         "mention_count": 0,
         "thread_created": false
+      },
+      "post_reboot_validation_success": {
+        "checked_at": "2026-07-20T03:40:51Z",
+        "overall": "PASS",
+        "supersedes_failed_check_at": "2026-07-20T03:23:24.030560Z",
+        "supersession_reason": "Rodolfo completed the host boot after the scheduled validator had already recorded the earlier not-yet-booted state.",
+        "host_boot": "2026-07-19T23:36:34-04:00",
+        "boot_id": "3d0eff28-a817-4a9e-9f62-cdba82e262d5",
+        "kernel": "6.8.0-136-generic",
+        "pending_boot_flag": "absent",
+        "monarx": "4.3.50-master active/running, ExecMainStatus=0, dpkg audit clean",
+        "gateways": {
+          "ares": {"pid": 684, "status": "active/running", "discord_ready": true, "nrestarts": 0},
+          "atena": {"pid": 685, "status": "active/running", "discord_ready": true, "nrestarts": 0},
+          "zeus": {"pid": 721, "status": "active/running", "discord_ready": true, "nrestarts": 0}
+        },
+        "checkout": "HEAD=26480e6c57c3, behind=0, canonical patch reverse-check PASS",
+        "guard": "774 passed, 6 subtests passed",
+        "openai_codex_smokes": "root/Zeus/Atena/Ares 4/4 exact response and rc=0",
+        "failed_units": 0,
+        "gateway_replace_processes": 0,
+        "report_infra_final": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1528608707884093547",
+          "http_status": 200,
+          "content_empty": true,
+          "embed_count": 1,
+          "thread_created": false,
+          "supersedes_message_id": "1528603233319124993"
+        }
       }
     },
     {
@@ -2331,7 +2361,7 @@
       "authorized_by": "344196393512075265",
       "authorization_message_id": "1528594828806455326",
       "host": "srv1767265",
-      "status": "deployed_validated_reboot_pending",
+      "status": "deployed_validated",
       "package": "monarx-agent",
       "version_before": "4.3.47-master",
       "version_after": "4.3.50-master",
@@ -2344,13 +2374,13 @@
         "needrestart": "No services, containers, user sessions or VM guests required restart"
       },
       "reboot": {
-        "required": true,
-        "kernel_running": "6.8.0-134-generic",
+        "required": false,
+        "kernel_running": "6.8.0-136-generic",
         "kernel_target": "6.8.0-136-generic",
-        "execution": "NOT OBSERVED: current host boot is 2026-07-12 19:08:55 EDT and /var/run/reboot-required remains present",
-        "validation_status": "FAIL"
+        "execution": "PASS: host boot 2026-07-19 23:36:34 EDT, boot id 3d0eff28-a817-4a9e-9f62-cdba82e262d5, pending boot indicator absent",
+        "validation_status": "PASS"
       },
-      "updated_at": "2026-07-20T03:24:07.385799Z",
+      "updated_at": "2026-07-20T03:40:51Z",
       "post_reboot_validation": {
         "checked_at": "2026-07-20T03:23:24.030560Z",
         "overall": "FAIL",
@@ -2390,6 +2420,21 @@
         "embed_count": 1,
         "mention_count": 0,
         "thread_created": false
+      },
+      "post_reboot_validation_success": {
+        "checked_at": "2026-07-20T03:40:51Z",
+        "overall": "PASS",
+        "supersedes_failed_check_at": "2026-07-20T03:23:24.030560Z",
+        "host_boot": "2026-07-19T23:36:34-04:00",
+        "boot_id": "3d0eff28-a817-4a9e-9f62-cdba82e262d5",
+        "kernel": "6.8.0-136-generic",
+        "pending_boot_flag": "absent",
+        "version": "4.3.50-master",
+        "service": "active/running",
+        "pid": 722,
+        "exec_main_status": 0,
+        "dpkg_audit": "clean",
+        "report_infra_final_message_id": "1528608707884093547"
       }
     },
     {
