@@ -7,7 +7,7 @@ Use when Rodolfo asks for a broad post-update audit or an operational sweep: "co
 Do not stop at `hermes --version` or service status. Treat the review as four parallel dimensions:
 
 1. **Runtime health** — gateways, crons, logs, disk/memory, reboot-required, pending OS/npm updates.
-2. **MGS invariants** — local Hermes patches, profile configs, GPT-5.5/OpenAI-Codex policy, thread auto-add, free-response/no-thread behavior, MGS OS JSON/context files.
+2. **MGS invariants** — local Hermes patches, profile configs, current OpenAI-Codex/model policy, thread auto-add, free-response/no-thread behavior, MGS OS JSON/context files.
 3. **Functional smoke tests** — selected real probes for capabilities that changed or are critical to the agents.
 4. **Delta vs previous version** — what changed in Hermes/Codex/Node/npm/Corepack/Ubuntu packages, with MGS relevance.
 
@@ -106,7 +106,7 @@ Pick small deterministic probes; do not run full production workflows unless ask
 
 - Web search: use the MGS Brave probe script from this skill.
 - TTS: do **not** generate or send audio to Rodolfo by default. Rodolfo does not find automatic audio useful; only run a tiny MP3 file/header check when he explicitly asks to validate TTS, and do not attach/send the audio unless requested.
-- Image generation: verify **per profile**, not just globally. agente legado is the only MGS agent currently expected to generate creative/image assets; Zeus is GM/admin and **does not need image_gen**. Summarize `image_gen` for Zeus/Atena/Ares/agente legado, but only treat missing/broken config as a functional gap for profiles whose role requires image generation (currently agente legado). Run a tiny `hermes -p <profile> -t image_gen -z ...` only for expected image profiles or when Rodolfo explicitly asks. Do **not** label Zeus image_gen as a failure just because it is unset.
+- Image generation: verify only for active profiles whose current MGS OS role explicitly requires image/creative generation. Zeus is GM/admin and does not need image generation. Do not use a retired agent as an active capability baseline. Run a tiny image smoke only for an active expected image profile or when Rodolfo explicitly asks; never label a role-excluded profile as failed merely because image generation is unset.
 - MGS OS: parse `data/sites.json` and `data/authorized-users.json`; confirm context files exist; report pending approvals count.
 
 ## Backup inventory after cleanup
