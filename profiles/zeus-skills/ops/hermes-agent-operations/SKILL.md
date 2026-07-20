@@ -62,6 +62,7 @@ Primary references:
 
 - Read-only review or standard update workflow → `references/hermes-update-core.md`
 - Large customization port, patch-inventory drift, broad-baseline reconciliation, or staged no-restart preservation proof → `references/hermes-update-preport-baseline-and-patch-coverage.md`
+- Large port where a real `hermes -z` smoke prints the answer but exits abnormally, Honcho workers survive one-shot teardown, or the restart snapshot must expand with the patch → `references/hermes-update-2026-07-19-port-lifecycle.md`
 - Failure, drift, ENOSPC, restart collision, stale cache, rollback, or unusual updater behavior → `references/hermes-update-pitfalls.md`
 - Exact scenario playbook → load only the matching file named by those references or by `references/reference-catalog.md`
 

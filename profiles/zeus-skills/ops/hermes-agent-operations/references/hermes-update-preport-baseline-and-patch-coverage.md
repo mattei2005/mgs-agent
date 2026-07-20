@@ -40,6 +40,8 @@ Do not equate “patch applied” with “nothing was lost.” Build an explicit
 
 This separates three claims that must not be conflated: all original paths were accounted for, the consolidated artifact is reproducible, and the live stage exactly matches the reviewed port.
 
+For the concrete semantic-merge pattern, one-shot Honcho teardown diagnosis, exact guard predicates, OAuth gate, and restart-snapshot expansion discovered during a 976-commit port, load `references/hermes-update-2026-07-19-port-lifecycle.md`.
+
 ## Test isolation and failure classification
 
 - Run compatibility tests with a fresh `HERMES_HOME` and remove profile-specific routing variables such as Discord allowlists. Tests must not inherit production channel scope, bot policy, or session state.

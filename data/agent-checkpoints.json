@@ -43,12 +43,12 @@
     {
       "agent": "zeus",
       "id": "hermes-vps-maintenance-20260719",
-      "next_step": "Registrar inventário/audit/REPORT-INFRA do staging e solicitar confirmação crítica separada para pacote/reboot e ativação dos gateways",
-      "objective": "Atualizar Hermes preservando customizações MGS e preparar manutenção da VPS",
-      "source": "/root/mgs-agent/reports/hermes-updates/20260719-211119, Discord thread 1528569634985611264",
-      "state": "hermes portado e checkout live atualizado sem restart; patch canônico 2026-07-19 em 39 arquivos; guard live 774 passed + 6 subtests; builds web/tui verdes; smokes zeus/atena/ares verdes; gateways ainda executam pids antigos; root codex oauth com refresh inválido; vps package/reboot pendentes de confirmação crítica",
+      "next_step": "Aguardar finalizer e cron de validação; Rodolfo deve executar o ciclo completo da VPS fora do agent terminal para ativar kernel 6.8.0-136; depois validar serviços, kernel e indicador pendente",
+      "objective": "Atualizar Hermes preservando customizações MGS e concluir manutenção da VPS",
+      "source": "/root/mgs-agent/reports/hermes-updates/20260719-211119, Discord thread 1528569634985611264, authorization 1528594828806455326",
+      "state": "oauth root renovado e smoke pass; monarx-agent 4.3.50-master instalado e validado; restart hermes detached agendado em ordem ares/atena/zeus para 180s após 23:00:01 edt, unit mgs-gateway-restart-20260720t030001z-2794617, log /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260720t030001z-2794617.log; validação one-shot cron 2d3d6a8115b9 às 23:08 edt; ciclo completo do host confirmado mas indisponível pela trava incondicional do terminal e não executável pelo agente",
       "thread_id": "1528569634985611264",
-      "updated_at": "2026-07-20T02:38:24+00:00"
+      "updated_at": "2026-07-20T03:00:56+00:00"
     },
     {
       "agent": "zeus",
@@ -142,5 +142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-20T02:38:24+00:00"
+  "updated_at": "2026-07-20T03:00:56+00:00"
 }

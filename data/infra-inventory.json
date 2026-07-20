@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-19T22:48:25-04:00",
+    "updated_at": "2026-07-19T23:04:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2131,7 +2131,7 @@
       "owner": "Zeus/Infra",
       "authorized_by": "344196393512075265",
       "authorization_message_id": "1528581427074039809",
-      "status": "staged_validated_pending_activation_and_root_oauth",
+      "status": "staged_validated_pending_activation",
       "installed_before": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
       "target_sha": "26480e6c57c3558442a73c2dffe313996b19417f",
       "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-19.patch",
@@ -2162,7 +2162,7 @@
         "npm_audit": "0 vulnerabilities",
         "venv": "active/next freeze identical 166/166; uv pip check PASS",
         "openai_codex_profiles": "Zeus/Atena/Ares 3/3 real one-shot smokes PASS with clean exit",
-        "openai_codex_root": "BLOCKED: stored refresh token rejected as invalid; no credential values emitted",
+        "openai_codex_root": "PASS: OAuth renewed through device flow; auth status logged in and real one-shot smoke ROOT_SMOKE_OK exited rc=0; no credential values emitted",
         "oneshot_lifecycle_fix": "PASS: drains memory provider and agent resources; reproducer changed from SIGABRT 134 to clean rc=0",
         "profile_configs_and_souls": "Zeus/Atena/Ares 6/6 byte-identical to pre-update backup",
         "services": "3/3 active/running, zero failed units, zero gateway --replace processes; process start timestamps remain 2026-07-16 so new checkout is not activated",
@@ -2174,8 +2174,8 @@
         "updater": "40ea8351283e027eed1cb33b2bb909683b0a4c4fbff971613ea760e4ef25d98d",
         "pre_port_manifest": "566339618ff4d27fe4a6023b42459ae240b281af198d015750b508f9ff482e54"
       },
-      "activation_gate": "Requires separate Rodolfo confirmation, root OpenAI Codex OAuth repair or explicit exception, and detached safe restart Ares/Atena/Zeus with Zeus last.",
-      "vps_gate": "Monarx package update and host reboot/kernel activation remain separate Critical Subset actions.",
+      "activation_gate": "Rodolfo confirmation message 1528594828806455326 fulfilled the Critical Subset gate; detached safe restart Ares/Atena/Zeus with Zeus last is scheduled separately.",
+      "vps_gate": "Monarx package update completed; host reboot/kernel activation remains confirmed but blocked by the terminal hardline and requires execution outside the agent terminal.",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1528593529327325336",
@@ -2184,7 +2184,35 @@
         "embed_count": 1,
         "thread_created": false
       },
-      "updated_at": "2026-07-19T22:44:57-04:00"
+      "updated_at": "2026-07-19T22:58:34-04:00"
+    },
+    {
+      "id": "vps-monarx-update-20260719",
+      "agent": "zeus",
+      "type": "vps_package_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "344196393512075265",
+      "authorization_message_id": "1528594828806455326",
+      "host": "srv1767265",
+      "status": "deployed_validated_reboot_pending",
+      "package": "monarx-agent",
+      "version_before": "4.3.47-master",
+      "version_after": "4.3.50-master",
+      "apt_result": "1 upgraded, 0 newly installed, 0 removed, 0 held back",
+      "validation": {
+        "dpkg_audit": "clean",
+        "monarx_service": "active",
+        "gateways": "Zeus/Atena/Ares active after package transaction",
+        "failed_units": 0,
+        "needrestart": "No services, containers, user sessions or VM guests required restart"
+      },
+      "reboot": {
+        "required": true,
+        "kernel_running": "6.8.0-134-generic",
+        "kernel_target": "6.8.0-136-generic",
+        "execution": "pending outside agent terminal because reboot is unconditionally blocked by terminal hardline"
+      },
+      "updated_at": "2026-07-19T22:58:34-04:00"
     },
     {
       "id": "vps-openssh-1password-update-20260713",
@@ -3574,8 +3602,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 10686,
-      "modified_at": "2026-07-13T21:48:10-04:00"
+      "size_bytes": 10792,
+      "modified_at": "2026-07-19T22:58:22-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
@@ -4458,6 +4486,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
       },
       {
+        "name": "hermes-desktop-plugins",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/ares/skills/hermes-desktop-plugins/SKILL.md"
+      },
+      {
         "name": "native-mcp",
         "category": "mcp",
         "skill_md": "/root/.hermes/profiles/ares/skills/mcp/native-mcp/SKILL.md"
@@ -4948,6 +4981,11 @@
         "name": "github-workflows",
         "category": "github",
         "skill_md": "/root/.hermes/profiles/atena/skills/github/github-workflows/SKILL.md"
+      },
+      {
+        "name": "hermes-desktop-plugins",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/atena/skills/hermes-desktop-plugins/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -5582,6 +5620,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md"
       },
       {
+        "name": "hermes-desktop-plugins",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/hermes-desktop-plugins/SKILL.md"
+      },
+      {
         "name": "native-mcp",
         "category": "mcp",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
@@ -5909,15 +5952,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 13155,
-      "md5": "b7971eb432a6dd42fcbecac61b5cfc1b",
-      "modified_at": "2026-07-19T22:38:24-04:00"
+      "size_bytes": 13404,
+      "md5": "3360087ff82845afd5b4b5603307a013",
+      "modified_at": "2026-07-19T23:00:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 9259,
-      "md5": "3492829a206b5e93bc60b2a120995b7e",
-      "modified_at": "2026-07-19T22:47:01-04:00"
+      "md5": "b74d596508916b9f6f1f13900d83910b",
+      "modified_at": "2026-07-19T23:02:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5928,8 +5971,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "22f6efd28454cbb372f7287aa8bfbc71",
-      "modified_at": "2026-07-19T22:41:43-04:00"
+      "md5": "ae1c1b0e18014ea44d8efe288e5b654b",
+      "modified_at": "2026-07-19T22:56:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5952,8 +5995,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "289ca63f4a93daa4dc13e0b9bdccbedb",
-      "modified_at": "2026-07-19T22:45:02-04:00"
+      "md5": "96c885aea989777a1a43d1726107cf25",
+      "modified_at": "2026-07-19T23:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5964,8 +6007,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "64a74d5179651e9a3358ae609e6f4f5e",
-      "modified_at": "2026-07-19T22:19:02-04:00"
+      "md5": "2b79f4f976db3fba235b7f82e8cc148f",
+      "modified_at": "2026-07-19T22:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -5994,8 +6037,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1658,
-      "md5": "7bf144993ad12ceca2502c5c11241fda",
-      "modified_at": "2026-07-19T22:44:01-04:00"
+      "md5": "eac36c1c68e4457a09661d9094d7a422",
+      "modified_at": "2026-07-19T23:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6006,20 +6049,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 29374,
-      "md5": "249368b768453021b298748fb334082b",
-      "modified_at": "2026-07-19T22:45:01-04:00"
+      "md5": "cfd13e7f4736b9e6de72e628bba060fc",
+      "modified_at": "2026-07-19T23:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 3935,
-      "md5": "82692829ad6d54e29ac46b3efff25fde",
-      "modified_at": "2026-07-19T22:48:02-04:00"
+      "md5": "fa69d4738b7ef6bc292ae3c815a47f95",
+      "modified_at": "2026-07-19T23:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 355,
-      "md5": "76d341b1a6bd2e58e72a794b35449906",
-      "modified_at": "2026-07-19T22:48:01-04:00"
+      "size_bytes": 356,
+      "md5": "4d5f4ce3556caf748270da36f6f56df5",
+      "modified_at": "2026-07-19T23:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6036,8 +6079,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 440,
-      "md5": "91d2b8210c95f27ce55a38af0bfe641e",
-      "modified_at": "2026-07-19T18:54:31-04:00"
+      "md5": "bf7cbaa13f6197f9f6b53557c51a44ea",
+      "modified_at": "2026-07-19T22:54:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
@@ -6047,9 +6090,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 280387,
-      "md5": "9dee1c8e2b93b5070255f4739bd6a543",
-      "modified_at": "2026-07-19T22:48:10-04:00"
+      "size_bytes": 282154,
+      "md5": "aca093f69ae4663a506cb0c35b33cf8d",
+      "modified_at": "2026-07-19T23:04:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6127,7 +6170,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-19T22:37:03-04:00"
+      "modified_at": "2026-07-19T22:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6150,8 +6193,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 211905,
-      "md5": "75c6d8a814c918b67200d2ec99bd104d",
-      "modified_at": "2026-07-19T22:44:16-04:00"
+      "md5": "0b34594f4bf59e21234b8616b0a9ca48",
+      "modified_at": "2026-07-19T22:59:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6193,7 +6236,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1471,
       "md5": "71d6c06af7db843693c2a3e61ec17a7c",
-      "modified_at": "2026-07-19T22:46:01-04:00"
+      "modified_at": "2026-07-19T23:01:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6227,9 +6270,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2112,
-      "md5": "945fc62ddec14fa27dfafd6d4fb9d3f3",
-      "modified_at": "2026-07-19T22:45:03-04:00"
+      "size_bytes": 2113,
+      "md5": "17bcd7b31e70cedcca15cb5e65c38a78",
+      "modified_at": "2026-07-19T23:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
