@@ -2131,7 +2131,7 @@
       "owner": "Zeus/Infra",
       "authorized_by": "344196393512075265",
       "authorization_message_id": "1528581427074039809",
-      "status": "activated_post_reboot_validation_failed",
+      "status": "activated_validated",
       "installed_before": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
       "target_sha": "26480e6c57c3558442a73c2dffe313996b19417f",
       "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-19.patch",
@@ -2149,9 +2149,9 @@
       "next_venv_activation": "not required; active and next pip freeze are byte-identical and uv pip check passed",
       "restart_performed": true,
       "gateway_pids": {
-        "ares": 2800295,
-        "atena": 2800349,
-        "zeus": 2800394
+        "ares": 684,
+        "atena": 685,
+        "zeus": 721
       },
       "validation": {
         "fresh_checkout_apply_and_reverse_check": "PASS",
@@ -2165,7 +2165,7 @@
         "openai_codex_root": "PASS: OAuth renewed through device flow; auth status logged in and real one-shot smoke ROOT_SMOKE_OK exited rc=0; no credential values emitted",
         "oneshot_lifecycle_fix": "PASS: drains memory provider and agent resources; reproducer changed from SIGABRT 134 to clean rc=0",
         "profile_configs_and_souls": "Zeus/Atena/Ares 6/6 byte-identical to pre-update backup",
-        "services": "3/3 active/running, zero failed units, zero gateway --replace processes; process start timestamps remain 2026-07-16 so new checkout is not activated",
+        "services": "3/3 active/running after host boot at 2026-07-19 23:36:34 EDT; ExecMainStatus=0, NRestarts=0, Discord readiness markers present, zero failed units and zero gateway --replace processes",
         "checkout": "HEAD=origin/main target, behind=0, canonical patch reverse-check PASS"
       },
       "hashes": {
@@ -2174,8 +2174,8 @@
         "updater": "40ea8351283e027eed1cb33b2bb909683b0a4c4fbff971613ea760e4ef25d98d",
         "pre_port_manifest": "566339618ff4d27fe4a6023b42459ae240b281af198d015750b508f9ff482e54"
       },
-      "activation_gate": "Rodolfo confirmation message 1528594828806455326 fulfilled the Critical Subset gate; detached safe restart Ares/Atena/Zeus with Zeus last is scheduled separately.",
-      "vps_gate": "Monarx package update completed; host reboot/kernel activation remains confirmed but blocked by the terminal hardline and requires execution outside the agent terminal.",
+      "activation_gate": "FULFILLED: Rodolfo confirmation message 1528594828806455326; detached safe restart Ares/Atena/Zeus completed with Zeus last; host boot and post-boot validation PASS.",
+      "vps_gate": "FULFILLED: Monarx package update and host boot into kernel 6.8.0-136-generic completed; pending boot indicator absent.",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1528593529327325336",
