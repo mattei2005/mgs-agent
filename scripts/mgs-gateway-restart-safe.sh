@@ -88,6 +88,7 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/gateway/slash_commands.py"
   "/root/.hermes/hermes-agent/gateway/reasoning_router.py"
   "/root/.hermes/hermes-agent/run_agent.py"
+  "/root/.hermes/hermes-agent/hermes_cli/config.py"
   "/root/.hermes/hermes-agent/hermes_cli/oneshot.py"
   "/root/.hermes/hermes-agent/agent/background_review.py"
   "/root/.hermes/hermes-agent/tools/memory_tool.py"
@@ -107,6 +108,8 @@ if printf '%s\n' "${ORDERED_AGENTS[@]}" | grep -qx 'ares'; then
     "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md"
     "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/reference-catalog.md"
     "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-operational-pitfalls.md"
+    "/root/.hermes/profiles/ares/skills/creative/static-ascii-art-mgs/SKILL.md"
+    "/root/.hermes/profiles/ares/skills/creative/static-ascii-art-mgs/references/original-ascii-art.md"
   )
 fi
 : > "$SNAPSHOT"
@@ -135,6 +138,7 @@ fi
 if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
   "\$RUNTIME" \
   /root/.hermes/hermes-agent/gateway/reasoning_router.py \
+  /root/.hermes/hermes-agent/hermes_cli/config.py \
   /root/.hermes/hermes-agent/hermes_cli/oneshot.py \
   /root/.hermes/hermes-agent/agent/background_review.py \
   /root/.hermes/hermes-agent/tools/memory_tool.py \

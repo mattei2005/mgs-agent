@@ -10,6 +10,7 @@ REPO="${REPO:-/root/.hermes/hermes-agent}"
 HERMES_BIN="${HERMES_BIN:-/root/.hermes/profiles/zeus/home/.local/bin/hermes}"
 PATCH_DIR="$BASE/patches/hermes"
 ENSURE_SCRIPT="$BASE/scripts/ensure-hermes-mgs-patches.sh"
+POST_UPSTREAM_REGRESSION_SCRIPT="$BASE/scripts/run-hermes-post-upstream-regression.sh"
 STAMP="${STAMP:-$(date +%Y%m%d-%H%M%S)}"
 REPORT_ROOT="${REPORT_ROOT:-$BASE/reports/hermes-updates}"
 REPORT_DIR="${REPORT_DIR:-$REPORT_ROOT/$STAMP}"
@@ -510,7 +511,7 @@ with tempfile.TemporaryDirectory() as td_s:
                     # profile-regression by itself if the MGS critical operating
                     # invariants survived. Keep the diff as WARN evidence instead of
                     # failing the whole update on harmless schema/default migration.
-                    critical_ok=all(s in live_text for s in ['provider: openai-codex','default: gpt-5.5','threshold: 0.85'])
+                    critical_ok=all(s in live_text for s in ['provider: openai-codex','default: gpt-5.6-sol','threshold: 0.85'])
                     if critical_ok:
                         status='WARN'
                     else:
@@ -625,6 +626,10 @@ post_validate() {
   log "Running MGS patch guard"
   BASE="$BASE" REPO="$REPO" LOG="$REPORT_DIR/patch-guard.log" "$ENSURE_SCRIPT"
 
+  log "Running Hermes post-upstream regression pack"
+  REPO="$REPO" PYBIN="$REPO/venv/bin/python" LOG="$REPORT_DIR/post-upstream-regression.log" \
+    "$POST_UPSTREAM_REGRESSION_SCRIPT"
+
   snapshot_profiles_sanitized post
   compare_profiles_backup_to_live
   readonly_invariant_check post
@@ -650,11 +655,15 @@ restart_if_requested() {
     log "Gateway restart not requested. Set RESTART_GATEWAYS=1 to restart after validation."
     return 0
   fi
-  log "Restarting gateways with --no-block: $GATEWAY_SERVICES"
-  systemctl restart --no-block $GATEWAY_SERVICES
-  sleep 20
-  systemctl is-active $GATEWAY_SERVICES | tee "$REPORT_DIR/post-restart-active.txt"
-  systemctl show $GATEWAY_SERVICES -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager | tee "$REPORT_DIR/post-restart-systemd-show.txt"
+  local safe_restart="$BASE/scripts/mgs-gateway-restart-safe.sh"
+  require_path "$safe_restart"
+  log "Scheduling detached sequential gateway reload through canonical safe helper"
+  "$safe_restart" \
+    --agents "ares atena zeus" \
+    --reason "hermes-controlled-update-$STAMP" \
+    --delay 30 \
+    --execute \
+    | tee "$REPORT_DIR/restart-scheduled.txt"
 }
 
 write_summary() {
@@ -700,6 +709,7 @@ Required evidence files:
     post-python-files.txt
     post-python-files-compare.txt
     patch-guard.log
+    post-upstream-regression.log
     py-compile.log
     post-systemd-active.txt
 EOF
@@ -711,6 +721,7 @@ main() {
   require_path "$REPO/.git"
   require_path "$PATCH_DIR"
   require_path "$ENSURE_SCRIPT"
+  require_path "$POST_UPSTREAM_REGRESSION_SCRIPT"
   log "START MGS controlled Hermes update"
   log "REPORT_DIR=$REPORT_DIR"
   log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT RESTORE_LOCAL_DIFFS=$RESTORE_LOCAL_DIFFS TARGET_REF=$TARGET_REF"
