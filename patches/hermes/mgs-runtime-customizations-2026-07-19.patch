@@ -284,7 +284,7 @@ index 000000000..e47c22362
 +
 +    return _effort_config(default_effort, profile_default)
 diff --git a/gateway/run.py b/gateway/run.py
-index b071e4854..b2cf5a06b 100644
+index b071e4854..89ffa655c 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -71,8 +71,8 @@ _ADAPTER_DISCONNECT_TIMEOUT_SECS_DEFAULT = 5.0
@@ -388,9 +388,9 @@ index b071e4854..b2cf5a06b 100644
 -            "so do NOT emit a 'session restored' acknowledgement "
 -            "or ask questions. Review the conversation history and "
 -            "CONTINUE the interrupted task to completion."
-+            "Silently CONTINUE the interrupted task to completion, finish all "
-+            "outstanding user requests in chronological order, and deliver the "
-+            "normal final answer without announcing recovery or asking what next."
++            "Silently CONTINUE the interrupted task to completion, finish every outstanding user request in "
++            "chronological order, and deliver the normal final answer without "
++            "announcing recovery or asking what next."
          )
          tail_guidance = (
              "Do NOT re-run tool calls whose results already "
@@ -1279,6 +1279,24 @@ index b071e4854..b2cf5a06b 100644
              )
              self._reasoning_config = reasoning_config
              self._service_tier = self._load_service_tier()
+@@ -14950,7 +15480,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+             and bool(getattr(source, "auto_thread_initial_name", None))
+         )
+ 
+-    def _sanitize_discord_thread_title(self, title: str) -> str:
++    def _sanitize_discord_auto_thread_title(self, title: str) -> str:
+         """Return a Discord-safe semantic thread title from a session title.
+ 
+         Discord thread names are capped at 100 characters measured in UTF-16
+@@ -14979,7 +15509,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+         rename_thread = getattr(adapter, "rename_thread", None)
+         if rename_thread is None:
+             return
+-        thread_name = self._sanitize_discord_thread_title(title)
++        thread_name = self._sanitize_discord_auto_thread_title(title)
+         try:
+             await rename_thread(
+                 str(source.thread_id),
 @@ -15170,6 +15700,225 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
  
          future.add_done_callback(_log_rename_failure)
