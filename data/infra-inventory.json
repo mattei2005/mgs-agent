@@ -2125,6 +2125,68 @@
       "updated_at": "2026-07-13T22:18:14-04:00"
     },
     {
+      "id": "hermes-controlled-update-26480e6c-20260719",
+      "agent": "zeus",
+      "type": "hermes_runtime_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "344196393512075265",
+      "authorization_message_id": "1528581427074039809",
+      "status": "staged_validated_pending_activation_and_root_oauth",
+      "installed_before": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
+      "target_sha": "26480e6c57c3558442a73c2dffe313996b19417f",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-19.patch",
+      "patch_scope": {
+        "files": 39,
+        "preexisting_custom_files_preserved": 37,
+        "new_lifecycle_fix_files": 2
+      },
+      "report_dir": "/root/mgs-agent/reports/hermes-updates/20260719-211119",
+      "profile_backup": "/root/mgs-agent/reports/hermes-updates/20260719-211119/hermes-profiles-backup-20260719-211119.tar.gz",
+      "profile_backup_sha256": "2a4f59a0ce745d1d04c16e9c2a251e8a510b7b6417b810f4cbd1a24040746074",
+      "stash_commit": "cad0fe4122cfb00f866e0a684ed433cde7ea7190",
+      "stash_validation": "37/37 manifest hashes PASS including 6 paths from the untracked parent",
+      "next_venv": "/root/.hermes/hermes-agent/venv-next-20260719-26480e6c",
+      "next_venv_activation": "not required; active and next pip freeze are byte-identical and uv pip check passed",
+      "restart_performed": false,
+      "gateway_pids": {
+        "zeus": 3188066,
+        "atena": 3188023,
+        "ares": 3187982
+      },
+      "validation": {
+        "fresh_checkout_apply_and_reverse_check": "PASS",
+        "port_live_byte_compare": "39/39 identical",
+        "live_guard": "774 passed, 6 subtests passed",
+        "web_build": "PASS",
+        "tui_build": "PASS",
+        "npm_audit": "0 vulnerabilities",
+        "venv": "active/next freeze identical 166/166; uv pip check PASS",
+        "openai_codex_profiles": "Zeus/Atena/Ares 3/3 real one-shot smokes PASS with clean exit",
+        "openai_codex_root": "BLOCKED: stored refresh token rejected as invalid; no credential values emitted",
+        "oneshot_lifecycle_fix": "PASS: drains memory provider and agent resources; reproducer changed from SIGABRT 134 to clean rc=0",
+        "profile_configs_and_souls": "Zeus/Atena/Ares 6/6 byte-identical to pre-update backup",
+        "services": "3/3 active/running, zero failed units, zero gateway --replace processes; process start timestamps remain 2026-07-16 so new checkout is not activated",
+        "checkout": "HEAD=origin/main target, behind=0, canonical patch reverse-check PASS"
+      },
+      "hashes": {
+        "patch": "0d2891d9204804c230a8eb5bc608611bf5fcaad0a6f5433cbb2d1be14f04e117",
+        "guard": "c612bbeebe8f2c8bb6c06bd1d0c62d1777853254ad3decdd96cc762cf3235f10",
+        "updater": "40ea8351283e027eed1cb33b2bb909683b0a4c4fbff971613ea760e4ef25d98d",
+        "pre_port_manifest": "566339618ff4d27fe4a6023b42459ae240b281af198d015750b508f9ff482e54"
+      },
+      "activation_gate": "Requires separate Rodolfo confirmation, root OpenAI Codex OAuth repair or explicit exception, and detached safe restart Ares/Atena/Zeus with Zeus last.",
+      "vps_gate": "Monarx package update and host reboot/kernel activation remain separate Critical Subset actions.",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1528593529327325336",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "thread_created": false
+      },
+      "updated_at": "2026-07-19T22:44:57-04:00"
+    },
+    {
       "id": "vps-openssh-1password-update-20260713",
       "agent": "zeus",
       "type": "vps_package_update",
