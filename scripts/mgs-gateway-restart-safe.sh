@@ -88,6 +88,7 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/gateway/slash_commands.py"
   "/root/.hermes/hermes-agent/gateway/reasoning_router.py"
   "/root/.hermes/hermes-agent/run_agent.py"
+  "/root/.hermes/hermes-agent/hermes_cli/oneshot.py"
   "/root/.hermes/hermes-agent/agent/background_review.py"
   "/root/.hermes/hermes-agent/tools/memory_tool.py"
   "/root/.hermes/hermes-agent/tools/write_approval.py"
@@ -134,6 +135,7 @@ fi
 if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
   "\$RUNTIME" \
   /root/.hermes/hermes-agent/gateway/reasoning_router.py \
+  /root/.hermes/hermes-agent/hermes_cli/oneshot.py \
   /root/.hermes/hermes-agent/agent/background_review.py \
   /root/.hermes/hermes-agent/tools/memory_tool.py \
   /root/.hermes/hermes-agent/tools/write_approval.py \
