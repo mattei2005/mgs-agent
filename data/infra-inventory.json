@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-19T23:14:17-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-19T23:24:07-04:00",
+    "generated_by": "infra-discovery.sh + Zeus post-reboot validator"
   },
   "system_packages": [
     {
@@ -2131,7 +2131,7 @@
       "owner": "Zeus/Infra",
       "authorized_by": "344196393512075265",
       "authorization_message_id": "1528581427074039809",
-      "status": "staged_validated_pending_activation",
+      "status": "activated_post_reboot_validation_failed",
       "installed_before": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
       "target_sha": "26480e6c57c3558442a73c2dffe313996b19417f",
       "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-19.patch",
@@ -2147,11 +2147,11 @@
       "stash_validation": "37/37 manifest hashes PASS including 6 paths from the untracked parent",
       "next_venv": "/root/.hermes/hermes-agent/venv-next-20260719-26480e6c",
       "next_venv_activation": "not required; active and next pip freeze are byte-identical and uv pip check passed",
-      "restart_performed": false,
+      "restart_performed": true,
       "gateway_pids": {
-        "zeus": 3188066,
-        "atena": 3188023,
-        "ares": 3187982
+        "ares": 2800295,
+        "atena": 2800349,
+        "zeus": 2800394
       },
       "validation": {
         "fresh_checkout_apply_and_reverse_check": "PASS",
@@ -2184,7 +2184,144 @@
         "embed_count": 1,
         "thread_created": false
       },
-      "updated_at": "2026-07-19T22:58:34-04:00"
+      "updated_at": "2026-07-20T03:24:07.385799Z",
+      "activation_finalizer": {
+        "reason": "hermes-26480e6c-activation-confirmed-1528594828806455326",
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "finished_event": true,
+        "finished_at": "2026-07-20T03:04:23Z",
+        "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260720T030001Z-2794617.log",
+        "status": "PASS"
+      },
+      "post_reboot_validation": {
+        "checked_at": "2026-07-20T03:23:24.030560Z",
+        "overall": "FAIL",
+        "failure_reason": "Required host reboot was not observed; host boot predates 2026-07-19 23:07 EDT, old kernel remains active, and /var/run/reboot-required is present.",
+        "required_boot_after": "2026-07-19T23:07:00-04:00",
+        "host_boot": {
+          "value": "2026-07-12T19:08:55-04:00",
+          "boot_id": "7e1d6b56-3fe6-4025-973c-7f49627f3daf",
+          "status": "FAIL"
+        },
+        "kernel": {
+          "expected": "6.8.0-136-generic",
+          "actual": "6.8.0-134-generic",
+          "status": "FAIL"
+        },
+        "reboot_required_file": {
+          "expected": "absent",
+          "actual": "present",
+          "status": "FAIL"
+        },
+        "monarx": {
+          "version_expected": "4.3.50-master",
+          "version_actual": "4.3.50-master",
+          "service": "active/running",
+          "exec_main_status": 0,
+          "nrestarts": 0,
+          "pid": 2790855,
+          "status": "PASS"
+        },
+        "gateway_finalizer": {
+          "reason": "hermes-26480e6c-activation-confirmed-1528594828806455326",
+          "order": [
+            "ares",
+            "atena",
+            "zeus"
+          ],
+          "finished_event": true,
+          "finished_at": "2026-07-20T03:04:23Z",
+          "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260720T030001Z-2794617.log",
+          "status": "PASS"
+        },
+        "gateways": {
+          "ares": {
+            "service": "ares-gateway.service",
+            "pid": 2800295,
+            "active_state": "active",
+            "sub_state": "running",
+            "exec_main_status": 0,
+            "nrestarts": 0,
+            "discord_ready_at": "2026-07-19T23:03:23-04:00"
+          },
+          "atena": {
+            "service": "atena-gateway.service",
+            "pid": 2800349,
+            "active_state": "active",
+            "sub_state": "running",
+            "exec_main_status": 0,
+            "nrestarts": 0,
+            "discord_ready_at": "2026-07-19T23:03:39-04:00"
+          },
+          "zeus": {
+            "service": "zeus-gateway.service",
+            "pid": 2800394,
+            "active_state": "active",
+            "sub_state": "running",
+            "exec_main_status": 0,
+            "nrestarts": 0,
+            "discord_ready_at": "2026-07-19T23:04:23-04:00"
+          }
+        },
+        "gateway_services_status": "PASS_CURRENT_BOOT_ONLY",
+        "discord_readiness_after_required_boot": "FAIL_REQUIRED_BOOT_NOT_OBSERVED",
+        "checkout": {
+          "head": "26480e6c57c3558442a73c2dffe313996b19417f",
+          "origin_main": "26480e6c57c3558442a73c2dffe313996b19417f",
+          "behind": 0,
+          "status": "PASS"
+        },
+        "canonical_patch_reverse_check": "PASS",
+        "gateway_replace_processes": {
+          "count": 0,
+          "status": "PASS"
+        },
+        "openai_codex_auth": {
+          "default_root": "ready",
+          "zeus": "ready",
+          "atena": "ready",
+          "ares": "ready",
+          "credential_values_printed": false,
+          "status": "PASS"
+        },
+        "oneshot_smokes": {
+          "default_root": {
+            "expected": "ROOT_POSTBOOT_SMOKE_OK",
+            "exact_response": true,
+            "rc": 0
+          },
+          "zeus": {
+            "expected": "ZEUS_POSTBOOT_SMOKE_OK",
+            "exact_response": true,
+            "rc": 0
+          },
+          "atena": {
+            "expected": "ATENA_POSTBOOT_SMOKE_OK",
+            "exact_response": true,
+            "rc": 0
+          },
+          "ares": {
+            "expected": "ARES_POSTBOOT_SMOKE_OK",
+            "exact_response": true,
+            "rc": 0
+          },
+          "status": "PASS"
+        }
+      },
+      "post_reboot_validation_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1528603233319124993",
+        "http_status": 200,
+        "readback_status": "PASS",
+        "content_empty": true,
+        "embed_count": 1,
+        "mention_count": 0,
+        "thread_created": false
+      }
     },
     {
       "id": "vps-monarx-update-20260719",
@@ -2210,9 +2347,50 @@
         "required": true,
         "kernel_running": "6.8.0-134-generic",
         "kernel_target": "6.8.0-136-generic",
-        "execution": "pending outside agent terminal because reboot is unconditionally blocked by terminal hardline"
+        "execution": "NOT OBSERVED: current host boot is 2026-07-12 19:08:55 EDT and /var/run/reboot-required remains present",
+        "validation_status": "FAIL"
       },
-      "updated_at": "2026-07-19T22:58:34-04:00"
+      "updated_at": "2026-07-20T03:24:07.385799Z",
+      "post_reboot_validation": {
+        "checked_at": "2026-07-20T03:23:24.030560Z",
+        "overall": "FAIL",
+        "failure_reason": "Required host reboot was not observed; host boot predates 2026-07-19 23:07 EDT, old kernel remains active, and /var/run/reboot-required is present.",
+        "required_boot_after": "2026-07-19T23:07:00-04:00",
+        "host_boot": {
+          "value": "2026-07-12T19:08:55-04:00",
+          "boot_id": "7e1d6b56-3fe6-4025-973c-7f49627f3daf",
+          "status": "FAIL"
+        },
+        "kernel": {
+          "expected": "6.8.0-136-generic",
+          "actual": "6.8.0-134-generic",
+          "status": "FAIL"
+        },
+        "reboot_required_file": {
+          "expected": "absent",
+          "actual": "present",
+          "status": "FAIL"
+        },
+        "monarx": {
+          "version_expected": "4.3.50-master",
+          "version_actual": "4.3.50-master",
+          "service": "active/running",
+          "exec_main_status": 0,
+          "nrestarts": 0,
+          "pid": 2790855,
+          "status": "PASS"
+        }
+      },
+      "post_reboot_validation_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1528603233319124993",
+        "http_status": 200,
+        "readback_status": "PASS",
+        "content_empty": true,
+        "embed_count": 1,
+        "mention_count": 0,
+        "thread_created": false
+      }
     },
     {
       "id": "vps-openssh-1password-update-20260713",
