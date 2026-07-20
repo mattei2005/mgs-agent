@@ -42,6 +42,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-vps-maintenance-20260719",
+      "next_step": "Congelar upstream, reconciliar superfície local, portar patches MGS e validar em worktree isolada antes de qualquer ativação ou restart",
+      "objective": "Atualizar Hermes preservando customizações MGS e concluir manutenção pendente da VPS com validação e rollback",
+      "source": "discord:1528569634985611264#1528581427074039809; /root/mgs-agent/reports/hermes-updates/20260719-211119/final-report.md",
+      "state": "iniciado: diagnóstico vivo confirmou hermes 976 commits atrás, patch guard com drift em quatro áreas, gateways ativos; ubuntu com monarx-agent pendente e kernel 6.8.0-136 instalado aguardando reboot",
+      "thread_id": "1528569634985611264",
+      "updated_at": "2026-07-20T01:58:02+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "knowledge-continuity-2026",
       "next_step": "Normal monitoring: automatic residual compaction at >=90% to <=85% with backup/readback and metadata-only success/failure embeds in #limites-90; no per-occurrence approval.",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
@@ -132,5 +142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-18T15:27:46+00:00"
+  "updated_at": "2026-07-20T01:58:02+00:00"
 }
