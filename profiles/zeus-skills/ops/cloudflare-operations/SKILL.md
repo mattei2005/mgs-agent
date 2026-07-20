@@ -78,6 +78,8 @@ For a safe capability smoke test after Rodolfo's Critical Subset confirmation:
 
 `API Tokens Read` alone does not authorize `POST /user/tokens`; creation requires `API Tokens Write`.
 
+A token created through the API is a sub-token and cannot itself receive permission to manage other tokens. Cloudflare rejects that recovery-token pattern with error `1001: sub-token is not allowed to have permissions to manage other tokens`. Do not rely on an API-created token as rollback authority for editing the only token-management credential. Require either an independently dashboard-created management credential or a new Critical Subset confirmation for an atomic self-update with manual dashboard rollback if access is lost.
+
 ## Zone Resolution
 
 Cloudflare zones are usually apex domains. For a requested hostname:
