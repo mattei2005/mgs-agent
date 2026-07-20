@@ -23,12 +23,29 @@ Validação de recuperação: consulta SQL real retornou 280 posts; SEO 206 verd
 ## GPT-5.6 OAuth volume
 
 Runtime: `/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh` (nome legado preservado para não quebrar cron)
-Cron: `44 22 * * *` ET
+Cron: `54 11 * * *` ET
 Canal: `1498132022634483894`
 
-O relatório canônico soma chamadas LLM e respostas concluídas na janela móvel de 24h, calcula média por resposta e valida `gpt-5.6-sol` / `openai-codex` nos quatro profiles. Deve exibir separadamente: custo incremental real de US$ 0 via OAuth e custo hipotético pay-per-token. Como os gateways não expõem input/output tokens, a simulação precisa ser explicitamente rotulada e usar as premissas internas preservadas do monitor anterior: 2.000 tokens de entrada + 500 de saída por `api_call`, a US$ 7/US$ 21 por 1M, respectivamente. Chamadas são telemetria real; tokens e custo são estimativas, nunca valores observados.
+O relatório canônico usa os bancos profile-local `state.db`, tabelas `sessions` + `session_model_usage`, nos profiles ativos Zeus/Atena/Ares. Essa fonte inclui Discord, CLI/oneshot, cron, tool e subagent e expõe chamadas, tokens reais, cache, billing mode e custo real; não usar apenas `gateway.run: response ready`, porque isso omite execuções Hermes avulsas e pode produzir falso zero.
 
-Validação: py_compile, dry-run com parse_errors=0 e API Discord mock com autenticação/payload sanitizados.
+Regras:
+
+- janela de 24h por `session_model_usage.last_seen`;
+- somar chamadas e tokens reais por profile e origem;
+- validar `gpt-5.6-sol`, `openai-codex` e `subscription_included`;
+- mostrar gasto real OAuth separado da simulação pay-per-token;
+- calcular a simulação com os tokens reais de entrada/saída e premissas US$ 7/US$ 21 por 1M;
+- detectar sessões com `first_seen` anterior ao cutoff e rotular a cobertura como agregada, nunca silenciosamente exata;
+- falhar fechado se qualquer `state.db` ativo estiver ausente ou ilegível;
+- manter `--as-of` para recuperação/auditoria reproduzível de uma janela histórica.
+
+Oneshots Hermes oferecem `--usage-file`, mas o monitor central não depende de instrumentar cada chamador enquanto `session_model_usage` estiver disponível e validado.
+
+Validação: `py_compile`, fixture SQLite com CLI + Discord, sessão cruzando o cutoff, dry-run histórico/live e API Discord mock com autenticação fora do payload, `content` vazio e token ausente do corpo.
+
+## Resolvedor automático de alertas
+
+Quando `hermes -z` produzir stdout final não vazio e depois abortar no teardown (caso observado: `rc=-6`), o stdout continua sendo a resposta final pelo contrato do oneshot e deve ser entregue como reply. Retorno não zero sem stdout final continua sendo erro. Validar com fixture `CompletedProcess`, embed reply sem mentions e readback Discord; nunca tratar stderr/trace bruto como resposta pública.
 
 ## Housekeeping de backups
 

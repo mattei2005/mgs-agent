@@ -211,13 +211,19 @@ Alerta original: {url}
         timeout=HERMES_TIMEOUT_SECONDS,
         env=env,
     )
-    if cp.returncode != 0:
-        detail = ((cp.stderr or '') + '\n' + (cp.stdout or '')).strip()[-1500:]
-        raise RuntimeError(f'hermes rc={cp.returncode}: {detail}')
     result = (cp.stdout or '').strip()
-    if not result:
-        raise RuntimeError('hermes retornou stdout vazio')
-    return result
+    if result:
+        # Hermes oneshot guarantees that stdout contains only the final answer.
+        # Some native-provider shutdown paths can abort after printing that final
+        # answer (observed rc=-6). Deliver the validated final stdout instead of
+        # discarding a completed remediation solely because teardown failed.
+        if cp.returncode != 0:
+            log(f'WARN hermes rc={cp.returncode} after final stdout; delivering completed response')
+        return result
+    if cp.returncode != 0:
+        detail = (cp.stderr or '').strip()[-1500:]
+        raise RuntimeError(f'hermes rc={cp.returncode} sem resposta final: {detail}')
+    raise RuntimeError('hermes retornou stdout vazio')
 
 
 def build_feedback_payload(message: dict[str, Any], text: str) -> dict[str, Any]:
