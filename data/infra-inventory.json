@@ -1096,14 +1096,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 65108,
-      "modified_at": "2026-07-12T21:01:39-04:00",
-      "sha256": "569c2ded99eb1d3cfdf18164d1ab9df89c2723719907c80bd45a50bdd263139c",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
-      "validation": "2026-07-12: dry-run full rc=0 with 11 item-get calls and unchanged state hash; synthetic sheet update planned without token/write; stale failed-app snapshot preserved; production 21:04 cycle errors=0, apps=11, sheet updated=false.",
-      "updated_at": "2026-07-12T21:20:00-04:00",
-      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "last_change": "2026-07-12: dry-run blocks Sheets/state writes; reconciliation accepts only apps checked successfully in the current cycle."
+      "size_bytes": 64130,
+      "modified_at": "2026-07-21T19:17:27-04:00",
+      "sha256": "16f2a35956e418f7c71de300d2db7df0c3fe55f7ed8440a3d6f1782562f4c841",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables split across Discord-safe messages and cumulative removals deduplicate overlapping Meta ID, normalized name and Sheet profile ID identities.",
+      "validation": "2026-07-21: bash -n OK; isolated add/remove dry-run rc=0 with correct B001/B010 channels and unchanged production/fixture state; all-app delta/routing regression 10/10; B008 cumulative duplicate fixture reduced Ithaa/Michelle from 2 to 1 each; production run rc=0, B001-B010 errors=0, alerts=0, Sheet 232 rows and updated=false.",
+      "updated_at": "2026-07-21T19:20:15-04:00",
+      "source_report": "REPORT-INFRA Zeus meta app cumulative removal dedup 2026-07-21",
+      "last_change": "2026-07-21: merge cumulative removals by any overlapping stable identity, including transitive matches, instead of one arbitrarily selected key."
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
