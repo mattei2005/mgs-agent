@@ -81,6 +81,7 @@ def graph_summary(graph, account_item, page_id, flow_name, builder_url):
     sequence_settings = []
     delays = []
     buttons = []
+    image_click_destinations = []
     texts = []
     postbacks = []
     zero_width_text_nodes = []
@@ -118,6 +119,14 @@ def graph_summary(graph, account_item, page_id, flow_name, builder_url):
                 "destination": value or data.get("text"),
                 "domain": urlparse(value).netloc if value else None,
             })
+        elif node_type == "Generic Template":
+            image_link = data.get("imageClickDestinationLink")
+            if image_link:
+                image_click_destinations.append({
+                    "node_id": node_id,
+                    "destination": image_link,
+                    "domain": urlparse(image_link).netloc,
+                })
         elif node_type == "Text":
             raw_text = data.get("textMessage") or ""
             has_zero_width = any(unicodedata.category(ch) == "Cf" for ch in raw_text)
@@ -155,6 +164,7 @@ def graph_summary(graph, account_item, page_id, flow_name, builder_url):
         "sequence_delays": delays,
         "postbacks": postbacks,
         "buttons": buttons,
+        "image_click_destinations": image_click_destinations,
         "texts": texts,
         "zero_width_text_node_ids": zero_width_text_nodes,
     }

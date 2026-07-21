@@ -58,11 +58,12 @@ Never click `Reset all action button settings to default`, `Install template`, `
 
 ## Surface-specific URL contract
 
-- Use the exact canonical catalog URL for every migrated surface and semantic position.
-- Do not preserve or append legacy `#SUBSCRIBER_ID_REPLACE#` suffixes in Get Started, No Match or other URL fields; Rodolfo confirmed they are unnecessary for this Openzed migration.
+- Use the exact canonical catalog URL as the input for every migrated surface and semantic position.
+- Do not manually preserve or append a legacy `#SUBSCRIBER_ID_REPLACE#`; Rodolfo confirmed it is not required as migration input.
+- DigitalTRChat's normal Get Started and No Match editors may append `&subscriber_id=#SUBSCRIBER_ID_REPLACE#` automatically on save. Accept that platform-enforced suffix only when the canonical base matches exactly; do not bypass the UI merely to remove it.
+- Flow Builder button URLs, Generic Template `imageClickDestinationLink` URLs and Persistent Menu URLs must use the exact canonical string without an invented subscriber suffix.
 - Preserve the literal `#PAGE_ID#` exactly as present in the canonical catalog.
-- Flow Builder, Get Started, No Match and Persistent Menu therefore converge on the same exact catalog representation for M0/NM/M1–M28, according to each surface's semantic position.
-- Do not add any parameter absent from the approved catalog.
+- Do not add any other parameter absent from the approved catalog.
 
 ## `#PAGE_ID#` parser pitfall
 

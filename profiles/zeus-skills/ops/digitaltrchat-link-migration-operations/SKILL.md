@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.1.1
+version: 1.1.2
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -50,7 +50,7 @@ Map existing `utm_content` labels directly:
 
 Do not force an existing M0 flow button to NM because an older baseline expected an initial block to equal No Match. The canonical migration model has separate M0 and NM destinations.
 
-For the Openzed canonical migration, do **not** preserve `#SUBSCRIBER_ID_REPLACE#` from legacy Get Started, No Match or other URL fields. Rodolfo confirmed that this suffix is unnecessary. Replace the full destination with the exact approved catalog URL for its semantic position, while preserving the literal `#PAGE_ID#` already present in the canonical catalog. Never add tracking parameters absent from the approved catalog.
+For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLACE#` from a legacy URL into the target catalog string; Rodolfo confirmed that preserving it is not a requirement. Enter the exact approved catalog destination. The normal DigitalTRChat Get Started and No Match editors may append `&subscriber_id=#SUBSCRIBER_ID_REPLACE#` automatically on save; accept that platform-enforced suffix when the canonical base matches exactly, but do not add it to Flow Builder or Persistent Menu URLs and do not use a lower-level bypass to fight normal UI behavior. Preserve the literal `#PAGE_ID#` from the canonical catalog and never add any other tracking parameter.
 
 ## Eligibility discovery before any write
 

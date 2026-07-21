@@ -24,7 +24,7 @@ For each Page, validate at least:
 - the active `Persistent Menu` default-locale first-level `Web URL` stores the correct M0 URL;
 - `No Match Template` uses the correct site/offer URL;
 - initial Auto Principal Drip block 6 exactly matches the No Match URL;
-- M01–M28 buttons/links belong to the correct site, funnel, vertical and language;
+- M01–M28 button destinations and Generic Template `imageClickDestinationLink` values belong to the correct site, funnel, vertical and language; audit both because an image click can retain a legacy URL after the visible button is corrected;
 - `#PAGE_ID#`/UTM conventions are preserved where required;
 - Auto Principal Drip still has exactly 28 messages and the canonical timing schedule.
 

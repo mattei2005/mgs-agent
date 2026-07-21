@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, inspect Bot flow builder or Saved templates, map a DRIP flow's nodes/messages/buttons/delays/URLs, or prepare a safe narrow change without touching delete/install controls.
-version: 1.3.1
+version: 1.3.2
 author: Hermes Agent
 license: MIT
 metadata:

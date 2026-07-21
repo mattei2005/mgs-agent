@@ -239,6 +239,24 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "procedure.meta.b011-bm-capability-watch",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-04.md",
+      "consumers": [
+        "b011-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-07-21",
+      "id": "PROC-B011-BM-CAPABILITY-WATCH",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B011 BM restriction and Messenger capability detection",
+      "updated_at": "2026-07-21T19:45:35+00:00"
+    },
+    {
       "canonical_key": "dtr.openzed.page-classification-source",
       "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-drip-flow-builder/references/saved-template-lifecycle-and-portfolio-audit.md",
       "consumers": [
@@ -331,5 +349,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T19:16:01+00:00"
+  "updated_at": "2026-07-21T19:45:35+00:00"
 }
