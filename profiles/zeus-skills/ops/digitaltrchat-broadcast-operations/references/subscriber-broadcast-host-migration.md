@@ -62,6 +62,7 @@ Subscriber Broadcast may render the active message through an EmojiOneArea conte
 5. Commit with the visible `Edit campaign` button only after the unsaved value exactly matches the expected host-only delta.
 6. Legacy `Non Promo` campaigns can reopen with the correct page but a blank `Message Tag`. In that state, clicking `Edit campaign` shows `Please select a message tag` and performs no save. Do not choose a tag implicitly: adding `ACCOUNT_UPDATE` or another tag changes an unscoped campaign field and requires Rodolfo's explicit authorization.
 7. Distinguish the real two-step save chain (`subscriber_bulk_broadcast_edit_action` then `subscriber_bulk_broadcast_add_action`) from unrelated background POSTs such as `home/get_broadcast_summary`; only the save endpoints or the explicit `Campaign updated` success UI prove persistence.
+8. A `Completed` campaign's `Campaign report` exposes delivery metrics but not its historical `Message Tag`; the direct edit route can return HTTP 200 with an empty body because only Pending campaigns are editable. Do not infer the old tag from `Non Promo` or delivery success—use an authorized backend database/log source if the exact historical tag is required.
 
 ## Verification and rollback
 
