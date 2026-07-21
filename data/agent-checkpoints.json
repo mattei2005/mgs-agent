@@ -112,6 +112,16 @@
     },
     {
       "agent": "zeus",
+      "id": "openzed-dtr-link-pilot-20260721",
+      "next_step": "Descobrir duas Pages elegíveis por conta e auditar utm_term/flow/templates antes do canário",
+      "objective": "Atualizar e validar links canônicos Openzed em duas Pages elegíveis por cada um de quatro usuários DTR",
+      "source": "discord:message:1529160447159435324",
+      "state": "catálogo de 120 urls validado; escrita ainda não iniciada",
+      "thread_id": "1529141503929094284",
+      "updated_at": "2026-07-21T16:19:29+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "sb-broadcast-templates-23-30-20260716",
       "next_step": "Acompanhar a evolução assíncrona dos status de Approval no monitor read-only; não repetir o rollout sem novo escopo.",
       "objective": "Normalizar templates Messenger Broadcast usando links TXT",
@@ -172,5 +182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T14:29:17+00:00"
+  "updated_at": "2026-07-21T16:19:29+00:00"
 }
