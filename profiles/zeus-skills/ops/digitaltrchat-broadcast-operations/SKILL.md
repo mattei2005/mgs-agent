@@ -37,9 +37,10 @@ Before any URL-host migration or multi-campaign write, load `references/subscrib
 2. Open `Broadcasting > Subscriber Broadcast`.
 3. Confirm the DigitalTRChat user label.
 4. Confirm the current segurador in the top Facebook-account selector.
-5. Set the campaign status filter to exactly `Pending` and use the live campaign table as the source of truth for Facebook page, status and edit action.
-6. Treat the default 10-row view as pagination only, never as the complete eligible set. Traverse table pages `1, 2, 3, ...` through the last page (or until `Next` is disabled), reconciling the displayed range/total and deduplicating by campaign ID.
-7. For portfolio work, inventory every Facebook page represented across all pagination pages before switching segurador. For a pilot scoped to one Facebook page, identify the first eligible row's page name, filter/search that exact page and enumerate every currently eligible campaign for it before writing.
+5. In the table's `Page` filter, choose the generic `Page` option to clear any specific Facebook-page selection and show all pages whenever the filter is blank or already scoped. This is the list filter, not the campaign edit form's `Page` field.
+6. Set the campaign status filter to exactly `Pending` and use the live campaign table as the source of truth for Facebook page, status and edit action.
+7. Treat the default 10-row view as pagination only, never as the complete eligible set. Traverse table pages `1, 2, 3, ...` through the last page (or until `Next` is disabled), reconciling the displayed range/total and deduplicating by campaign ID.
+8. For portfolio work, inventory every Facebook page represented across all pagination pages before switching segurador. For a pilot scoped to one Facebook page, identify the first eligible row's page name, filter/search that exact page and enumerate every currently eligible campaign for it before writing.
 
 ## Write gate
 
@@ -59,7 +60,7 @@ Any eligible-set drift after baseline, including a campaign moving to `Processin
 
 Do not report success until:
 
-- every intended campaign has a successful save response;
+- every intended campaign has successful responses from the actual save chain (`subscriber_bulk_broadcast_edit_action` followed by `subscriber_bulk_broadcast_add_action`) or an explicit `Campaign updated` UI; unrelated background POSTs such as `home/get_broadcast_summary` are not save evidence;
 - every changed field matches the backup-derived expected value after reload;
 - no old scoped hostname remains in the changed campaigns;
 - non-targeted campaign fields are unchanged;

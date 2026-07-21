@@ -7,8 +7,9 @@ Use this procedure for narrow URL-host migrations in scheduled Messenger Subscri
 1. Log into the exact DigitalTRChat user resolved from 1Password.
 2. Open `Broadcasting > Subscriber Broadcast` (`/messenger_bot_enhancers/subscriber_broadcast_campaign`).
 3. The Facebook account selector at the top represents the current **segurador**. Changing it changes the scheduled broadcast list.
-4. For portfolio work, iterate every segurador under each authorized login. Within each segurador, set the status filter to exactly `Pending`, then process every Facebook page represented in the complete paginated result set.
-5. The campaign table displays 10 rows by default. This is only one table page, not the full eligible set. Traverse pagination pages `1, 2, 3, ...` through the last page or until `Next` is disabled; reconcile the displayed range/total on every transition and deduplicate campaigns by immutable campaign ID. Never stop after the first 10 rows.
+4. Before counting or enumerating campaigns, open the list's `Page` filter and choose the generic `Page` option whenever the control is blank or scoped to a specific Facebook page. This clears the page filter and restores all pages; it is not the `Page` field inside the campaign edit form.
+5. For portfolio work, iterate every segurador under each authorized login. Within each segurador, set the status filter to exactly `Pending`, then process every Facebook page represented in the complete filtered result.
+6. The campaign table displays 10 rows by default. This is only one table page, not the full eligible set. Traverse pagination pages `1, 2, 3, ...` through the last page or until `Next` is disabled; reconcile the displayed range/total on every transition and deduplicate campaigns by immutable campaign ID. Never stop after the first 10 rows.
 6. For a pilot scoped to the “first page”, distinguish the first **Facebook page** from the first **table pagination page**: use the Facebook page name in the first eligible campaign row, then filter/search that exact page and enumerate all of its eligible campaigns.
 
 Do not assume the page dropdown fully represents historical/scheduled rows. Reconcile against the live campaign table and its search results.
@@ -59,6 +60,8 @@ Subscriber Broadcast may render the active message through an EmojiOneArea conte
 3. Update through the visible editor or its EmojiOneArea API; verify the underlying form control is synchronized before saving.
 4. A campaign name containing `[postback]` can still use a Text template with an inline web URL. Inspect live fields rather than inferring from the name.
 5. Commit with the visible `Edit campaign` button only after the unsaved value exactly matches the expected host-only delta.
+6. Legacy `Non Promo` campaigns can reopen with the correct page but a blank `Message Tag`. In that state, clicking `Edit campaign` shows `Please select a message tag` and performs no save. Do not choose a tag implicitly: adding `ACCOUNT_UPDATE` or another tag changes an unscoped campaign field and requires Rodolfo's explicit authorization.
+7. Distinguish the real two-step save chain (`subscriber_bulk_broadcast_edit_action` then `subscriber_bulk_broadcast_add_action`) from unrelated background POSTs such as `home/get_broadcast_summary`; only the save endpoints or the explicit `Campaign updated` success UI prove persistence.
 
 ## Verification and rollback
 
