@@ -28,11 +28,12 @@ Load this skill when:
 4. **Diff pre-change versus current safely.** Read archived configs in memory, flatten leaf paths, redact credential-like paths, and enumerate only actual changed keys. Separate intentional migration changes from later drift.
 5. **Resolve runtime values correctly.** Select each profile with its actual `HERMES_HOME`; do not assume `HERMES_PROFILE` changes the config resolver. Run `hermes config get <key> --json` for safe, non-secret keys.
 6. **Verify the customization surface.** Check the canonical patch with reverse-apply validation and run the current MGS guard when authorized. A green patch guard does not replace config-file equality.
-7. **Verify live services.** Confirm `active/running`, `ExecMainStatus=0`, and restart counters. Use current runtime evidence, not only the old cron summary.
-8. **Check attribution before calling drift anomalous.** Reconcile audit log → infrastructure inventory → REPORT-INFRA → Git → session/thread history.
-9. **Leave no test residue.** Recheck Git status after guards. Restore any deterministic test-cache marker without touching production config; do not report a clean audit while the verification itself left drift.
-10. **Verify procedural persistence when asked.** If the user asks whether a lesson was saved for future checks, read back both the live skill and its versioned MGS mirror. State whether the rule was newly written in the current task or already existed and was only confirmed. Separately verify any cron, detector, or announcement generator: a rule in a skill does not prove that an independent script-only automation was changed or even consumes that skill.
-11. **Report conclusion first.** State: intentional changes, preserved personalizations, later drift status, current health, and one residual risk or unrun gate if applicable.
+7. **Interpret update prechecks by evidence, not process exit alone.** A diagnostic `PRECHECK_ONLY` wrapper may return `rc=0` after collecting evidence even when its internal patch/local-diff checks recorded `DRIFT`. Require clean `pre-upstream-patch-check.txt`, `pre-local-diff-upstream-check.txt`, and read-only invariants before calling the update gate green. Report `diagnóstico concluído, update bloqueado` when collection succeeded but drift remains; never promote readiness from `DONE precheck only` or the existence of `final-report.md` alone.
+8. **Verify live services.** Confirm `active/running`, `ExecMainStatus=0`, and restart counters. Use current runtime evidence, not only the old cron summary.
+9. **Check attribution before calling drift anomalous.** Reconcile audit log → infrastructure inventory → REPORT-INFRA → Git → session/thread history.
+10. **Leave no test residue.** Recheck Git status after guards. Restore any deterministic test-cache marker without touching production config; do not report a clean audit while the verification itself left drift.
+11. **Verify procedural persistence when asked.** If the user asks whether a lesson was saved for future checks, read back both the live skill and its versioned MGS mirror. State whether the rule was newly written in the current task or already existed and was only confirmed. Separately verify any cron, detector, or announcement generator: a rule in a skill does not prove that an independent script-only automation was changed or even consumes that skill.
+12. **Report conclusion first.** State: intentional changes, preserved personalizations, later drift status, current health, and one residual risk or unrun gate if applicable.
 
 ## Safety and reporting
 
