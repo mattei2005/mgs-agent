@@ -2935,7 +2935,7 @@
       "id": "hermes-vps-controlled-update-20260721",
       "kind": "hermes_vps_controlled_update",
       "owner": "zeus",
-      "status": "activation_scheduled_pending_external_validation",
+      "status": "activated_validated",
       "authorization": {
         "discord_message_id": "1529120708159082536",
         "text": "ok, vamos comecar"
@@ -2982,9 +2982,23 @@
         "runtime_equivalence": "39/39 live paths byte-identical to validated port; patch reverse-check PASS",
         "rollback": "stash has untracked third parent; 41/41 hashes match pre-port manifest",
         "gateways": "3/3 active; PIDs unchanged; ExecMainStatus=0; NRestarts=0",
-        "npm_audit": "5 dev/build findings (4 high, 1 critical), all traced to Desktop/build/lint dependency surface; Web/TUI builds pass; no gateway runtime dependency affected"
+        "npm_audit": "5 dev/build findings (4 high, 1 critical), all traced to Desktop/build/lint dependency surface; Web/TUI builds pass; no gateway runtime dependency affected",
+        "post_activation": {
+          "gateways": "3/3 active/running; new MainPID; ExecMainStatus=0; NRestarts=0; Discord markers after restart",
+          "vps": "snapd 2.76+ubuntu24.04; dpkg audit clean; snaps current; reboot-required absent",
+          "git": "HEAD ed3c39108b1b5521414cc60a8854cebd7c5af9bf; origin/main d3b0e614294e3f1d4f8c99da377a77981d0a5609; behind 1",
+          "runtime_patch": "sha256 exact; reverse-check PASS; 39/39 live path set exact",
+          "guard": "804 passed + 6 subtests",
+          "post_upstream": "358 passed",
+          "config_check": "root/zeus/atena/ares 4/4 rc=0",
+          "oneshot_smokes": "root/zeus/atena/ares 4/4 rc=0 with exact markers",
+          "mirrors": "Zeus/Atena/Ares config+SOUL byte-identical",
+          "productivity_skills": "DOCX/XLSX/PDF present in all 4 homes",
+          "google_workspace": "Atena/Ares compatibility route fails closed rc=64; canonical Service Account route preserved",
+          "result": "PASS"
+        }
       },
-      "updated_at": "2026-07-21T14:15:14+00:00",
+      "updated_at": "2026-07-21T14:30:09.163267+00:00",
       "staging_report_infra_message_id": "1529126625512394886",
       "staging_report_readback": "PASS",
       "vps_maintenance": {
@@ -2998,7 +3012,43 @@
         "snaps": "all_up_to_date",
         "validated_at": "2026-07-21T14:14:24+00:00"
       },
-      "validator_job_id": "df82b3f3f873"
+      "validator_job_id": "df82b3f3f873",
+      "activation": {
+        "reason": "hermes-v019-ed3c39108-activation-20260721",
+        "unit": "mgs-gateway-restart-20260721T141520Z-2627079.service",
+        "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260721T141520Z-2627079.log",
+        "done": true,
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "previous_pids": {
+          "ares": 348036,
+          "atena": 348078,
+          "zeus": 348121
+        },
+        "pids": {
+          "ares": 2627426,
+          "atena": 2627470,
+          "zeus": 2627513
+        },
+        "systemd_result": "success",
+        "result": "PASS",
+        "validated_at": "2026-07-21T14:29:08.361148+00:00"
+      },
+      "final_report_infra": {
+        "status": "sent_and_readback_confirmed",
+        "channel_id": "1498132022634483894",
+        "message_id": "1529133282988527628",
+        "http_status": 200,
+        "readback": "PASS",
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false,
+        "validated_at": "2026-07-21T14:30:09.163267+00:00"
+      }
     }
   ],
   "profile_skill_references": [

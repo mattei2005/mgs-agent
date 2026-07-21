@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-vps-controlled-update-20260721",
-      "next_step": "Agendar validador externo e finalizer detached Ares, Atena e Zeus; validar pós-reload e concluir inventário, audit e REPORT-INFRA",
+      "next_step": "Monitoramento rotineiro; manter alvo congelado e tratar o commit upstream pendente somente em futura manutenção controlada",
       "objective": "Atualizar VPS e Hermes de forma controlada, preservando patches e invariantes MGS",
-      "source": "/root/mgs-agent/data/infra-inventory.json",
-      "state": "snapd atualizado para 2.76, dpkg limpo, snaps atuais, sem reboot; hermes ed3c39108 staged e validado; gateways ainda nos pids antigos",
+      "source": "/root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260721T141520Z-2627079.log; autorização Discord 1529128667324612699",
+      "state": "completed: snapd 2.76; hermes v0.19.0 no alvo congelado ed3c39108; 1 commit upstream pendente; guard 804+6; regressão 358; smokes/configs 4/4; gateways ares→atena→zeus ativos com pids novos; inventário activated_validated",
       "thread_id": "1529115989092864001",
-      "updated_at": "2026-07-21T14:14:24+00:00"
+      "updated_at": "2026-07-21T14:29:17+00:00"
     },
     {
       "agent": "zeus",
@@ -172,5 +172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T14:14:24+00:00"
+  "updated_at": "2026-07-21T14:29:17+00:00"
 }
