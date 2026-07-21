@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-21T15:54:02-04:00",
+    "updated_at": "2026-07-21T16:07:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1118,21 +1118,21 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 35667,
-      "modified_at": "2026-07-21T15:34:57-04:00",
-      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
+      "size_bytes": 35721,
+      "modified_at": "2026-07-21T16:05:17-04:00",
+      "sha256": "7acd2253596336084428ba676cc46ab5bc6f81e115f57f064758c81905f30acf",
       "owner": "Zeus/Ops",
       "type": "profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads B011 config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B011 app_id, and stores sanitized state. 0 pages does not mean disconnected.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
-      "updated_at": "2026-07-21T15:47:55-04:00",
+      "validation": "bash -n; capability blocked/dedup/recovery fixture PASS; live alert 1529212398907555901 edited and read back without Ciro/canary requirement",
+      "updated_at": "2026-07-21T16:07:19-04:00",
       "source_report": "REPORT-INFRA Zeus B011 same-plan cron alignment 2026-07-04",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
-      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts."
+      "last_change": "Removed Ciro/manual canary requirement from B011 blocked and recovery alerts; functional Meta Graph recovery is sufficient."
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -1158,34 +1158,34 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 35667,
-      "modified_at": "2026-07-21T15:34:57-04:00",
-      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
+      "size_bytes": 35721,
+      "modified_at": "2026-07-21T16:05:17-04:00",
+      "sha256": "7acd2253596336084428ba676cc46ab5bc6f81e115f57f064758c81905f30acf",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
       "type": "profile_script",
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-21T15:47:55-04:00",
-      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
-      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts.",
+      "updated_at": "2026-07-21T16:07:19-04:00",
+      "validation": "bash -n; capability blocked/dedup/recovery fixture PASS; live alert 1529212398907555901 edited and read back without Ciro/canary requirement",
+      "last_change": "Removed Ciro/manual canary requirement from B011 blocked and recovery alerts; functional Meta Graph recovery is sufficient.",
       "schedule": "24 8-23 * * *"
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 35667,
-      "modified_at": "2026-07-21T15:34:57-04:00",
-      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
+      "size_bytes": 35721,
+      "modified_at": "2026-07-21T16:05:17-04:00",
+      "sha256": "7acd2253596336084428ba676cc46ab5bc6f81e115f57f064758c81905f30acf",
       "owner": "Zeus/Ops",
       "type": "hermes_profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads BOT B011 Token, validates account-level OAuth link via Meta /debug_token, treats page count as separate inventory, and alerts channel 1522830283240505385 on anomalies.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
-      "updated_at": "2026-07-21T15:47:55-04:00",
-      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts."
+      "validation": "bash -n; capability blocked/dedup/recovery fixture PASS; live alert 1529212398907555901 edited and read back without Ciro/canary requirement",
+      "updated_at": "2026-07-21T16:07:19-04:00",
+      "last_change": "Removed Ciro/manual canary requirement from B011 blocked and recovery alerts; functional Meta Graph recovery is sufficient."
     },
     {
       "id": "mgs-1password-metadata-cache-20260712",
@@ -6488,8 +6488,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 9724,
-      "md5": "3d6a2e386b7368836aea231b05aa9622",
-      "modified_at": "2026-07-21T15:52:01-04:00"
+      "md5": "6a0c3dc7475952f2a5f21d75569e4a76",
+      "modified_at": "2026-07-21T16:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6500,8 +6500,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "e9ff0a161cb1af0eb6a679fb33b710dc",
-      "modified_at": "2026-07-21T15:41:49-04:00"
+      "md5": "b9f4dd4473b48af43457a093b8e688e1",
+      "modified_at": "2026-07-21T15:56:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6524,8 +6524,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "5aae248ae817f00e5b7977065c2cfb76",
-      "modified_at": "2026-07-21T15:45:02-04:00"
+      "md5": "b402c449b2130c09c87b15fda174e93e",
+      "modified_at": "2026-07-21T16:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6566,8 +6566,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "09e7b608407e1143738e9781406f3e3c",
-      "modified_at": "2026-07-21T15:54:01-04:00"
+      "md5": "ef116eeecda3e36c4c9ec4168293bc9f",
+      "modified_at": "2026-07-21T16:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6578,20 +6578,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 30424,
-      "md5": "ace15cf2a47643ea1267dcde2477f6bb",
-      "modified_at": "2026-07-21T15:50:01-04:00"
+      "md5": "6750710f61930e40eb641126a77a644c",
+      "modified_at": "2026-07-21T16:05:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 6469,
-      "md5": "b4ee5ed4d69971c049f7ac36e5546f43",
-      "modified_at": "2026-07-21T15:54:02-04:00"
+      "md5": "70ede7e7b97168e3806ee68c3a9af186",
+      "modified_at": "2026-07-21T16:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 355,
-      "md5": "fad26c0652aad391095f6f674d5e35c0",
-      "modified_at": "2026-07-21T15:54:01-04:00"
+      "size_bytes": 356,
+      "md5": "85522cd0e891510fadaf86b3efcf1ef9",
+      "modified_at": "2026-07-21T16:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6620,8 +6620,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 302782,
-      "md5": "306f8932618f0b395e2a24fc5cafe8f5",
-      "modified_at": "2026-07-21T15:54:08-04:00"
+      "md5": "ce70e2d66bf1e240953479c9b6f04e15",
+      "modified_at": "2026-07-21T15:54:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6655,9 +6655,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 49187,
-      "md5": "a938dc6490d5b5a6c5f8f2fa8bc61d30",
-      "modified_at": "2026-07-21T15:05:18-04:00"
+      "size_bytes": 49195,
+      "md5": "b9242f5804026f4739395079c4603171",
+      "modified_at": "2026-07-21T16:05:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -6699,7 +6699,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-21T15:52:03-04:00"
+      "modified_at": "2026-07-21T16:07:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6722,8 +6722,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 211872,
-      "md5": "0b04b2ecca589b622fc4d5cbf5c004d8",
-      "modified_at": "2026-07-21T15:44:16-04:00"
+      "md5": "555de538d6632ecb1937aa4537bc7178",
+      "modified_at": "2026-07-21T15:59:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6765,7 +6765,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "4f9100bdf41acc90475aee532078e1df",
-      "modified_at": "2026-07-21T15:51:01-04:00"
+      "modified_at": "2026-07-21T16:06:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6800,8 +6800,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2113,
-      "md5": "521a8b377dda47cdbc8d36a58b3df412",
-      "modified_at": "2026-07-21T15:50:02-04:00"
+      "md5": "17b8693f946e7ce2677bca676223acd5",
+      "modified_at": "2026-07-21T16:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
