@@ -74,6 +74,20 @@ Retrieve credentials only inside the local process. Never print, log, persist, o
 
 Completion criterion: the intended builder opens in a new tab and its title is `Edit flow`; no delete confirmation or save request occurred.
 
+## Persistent Menu — canonical M0 location
+
+Rodolfo confirmed that each Page's active Persistent Menu is also part of the Messenger M0 contract. The first-level `Web URL` stored under the default locale must point to that Page/site/funnel/language's canonical M0 destination; it must not be omitted from audits or future mass link replacements merely because it lives outside `Auto Principal Drip`.
+
+Live inspection route:
+
+1. `Bot manager` → exact Page;
+2. `Persistent Menu` → `Change settings`;
+3. isolate the `default` locale row;
+4. use `Edit persistent menu`, never `Delete persistent menu` or `Remove persistent menu`;
+5. read the first populated menu title, action type and `Web url` field.
+
+Before any future mass write, include Persistent Menu alongside Get Started/M0, No Match, Drip block 6 and M01–M28. Persistent Menu save/publish semantics are not yet validated for automated production writes: first use a backed-up canary, validate Submit/Publish behavior, reload independently and retain rollback. A read-only discrepancy is not authorization to change it.
+
 ## Read-Only Inspection Script
 
 Use the linked script `scripts/inspect_flow.py`.

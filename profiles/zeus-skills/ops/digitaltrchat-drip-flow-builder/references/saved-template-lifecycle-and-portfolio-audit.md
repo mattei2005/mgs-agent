@@ -21,6 +21,7 @@ For each Page, validate at least:
 
 - campaign JSON button uses the canonical Get-started/M0 URL;
 - `Get-started Template` stores the correct M0 URL;
+- the active `Persistent Menu` default-locale first-level `Web URL` stores the correct M0 URL;
 - `No Match Template` uses the correct site/offer URL;
 - initial Auto Principal Drip block 6 exactly matches the No Match URL;
 - M01–M28 buttons/links belong to the correct site, funnel, vertical and language;
@@ -53,6 +54,7 @@ Each audit row should preserve enough identifiers to reconcile the Page globally
 - language;
 - operational status;
 - Get-started/M0 URL;
+- Persistent Menu title/type/URL and M0 match result;
 - No Match URL;
 - Drip block-6 URL;
 - M01–M28 link-set result;

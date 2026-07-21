@@ -64,6 +64,18 @@ Authorized by Rodolfo in Discord message `1527466861019533434` and independently
 
 This remains a legacy partial flow with M01–M17, not a canonical M01–M28 migration. Do not create duplicate M16 or M17 branches.
 
+## Live Persistent Menu finding — 2026-07-21
+
+Read-only inspection under `disparosopenzed@gmail.com` → Page `Hortensia Martínez` (internal Page ID `1084`) found the active default-locale Persistent Menu at `Bot manager > Persistent Menu > Change settings > Edit persistent menu`.
+
+- menu title: `Marcar Implante`;
+- action type: `Web URL`;
+- observed live URL: `https://leilaodemotos.info/tratamentos-dentarios-gratuitos/msg`;
+- Rodolfo's canonical correction: this Persistent Menu location should contain the Page's M0 URL;
+- current action: observation only; Rodolfo explicitly said not to change it yet.
+
+Future Openzed mass URL replacement must include this Persistent Menu field, not only `Auto Principal Drip`, Get Started, No Match and M01–M28. Re-read live state before action and obtain the exact canonical M0 for each Page/site/funnel/language rather than copying this page's M0 blindly.
+
 ## Review findings to re-check live
 
 - **Legacy language mixing is expected:** historically MGS did not separate EN and ES flows/pages consistently. Therefore an account/page labeled `US-CC-EN` may legitimately contain Spanish timed messages or Spanish UTM naming inherited from the older setup. Do not classify this fact alone as an anomaly or current configuration error. Newer operations are separated more carefully, but legacy pages can remain mixed unless Rodolfo explicitly requests a cleanup/migration.
