@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-broadcast-operations
 description: Safely inspect, edit, migrate and verify scheduled DigitalTRChat/ChatPion Subscriber Broadcast campaigns across users, seguradores and pages, with Pending-only gates, exact URL transformations, rollback and independent readback.
-version: 1.0.0
+version: 1.0.1
 author: Hermes Agent
 license: MIT
 metadata:
@@ -30,6 +30,8 @@ Use `digitaltrchat-drip-flow-builder` instead for Bot Flow Builder graphs, Saved
 ## Mandatory reference
 
 Before any URL-host migration or multi-campaign write, load `references/subscriber-broadcast-host-migration.md`.
+
+For B011 broadcasts, also load `meta-app-rate-limit-monitor` and its Operational Symptom Monitor route pack before interpreting a DTR/ChatPion send state as delivery evidence. A DTR action can be accepted while a restricted app-owning Business Manager leaves advanced Messenger permissions inactive and Meta rejects OAuth/no delivery. Require the B011 capability monitor to show Graph pages above zero and confirm a delivered canary with Ciro before resuming normal volume after such an incident.
 
 ## Canonical route
 
