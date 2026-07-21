@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, inspect Bot flow builder or Saved templates, map a DRIP flow's nodes/messages/buttons/delays/URLs, or prepare a safe narrow change without touching delete/install controls.
-version: 1.3.2
+version: 1.4.0
 author: Hermes Agent
 license: MIT
 metadata:
@@ -56,17 +56,18 @@ Retrieve credentials only inside the local process. Never print, log, persist, o
 
 1. Open `https://digitaltrchat.com/messenger_bot/bot_list`.
 2. If redirected to `/home/login`, fill `Email Or FB ID` and `Password`, then click `Login`.
-3. Confirm the account label at top right matches the requested account.
-4. Open `Bot manager`.
-5. Select the exact Facebook page in the left column.
-6. Under `Bot flow builder`, click `Change settings`.
-7. Wait for the flow table to load inside the iframe whose URL contains `flowbuilder_manager`.
-8. Find the exact row by `Reference name`.
-9. Inside that row, accept only the edit action matching all of:
+3. Confirm the DigitalTRChat login label at top right matches the requested login.
+4. A login may contain several imported Facebook accounts/seguradores. Enumerate `a.account_switch[data-id]`, activate the exact segurador with `POST /social_accounts/fb_rx_account_switch`, reload `/messenger_bot/bot_list`, and verify the target DTR Page ID plus Facebook Page ID. Do not assume a direct `flowbuilder_manager/<PAGE_ID>` route is independent of the currently selected account; the wrong account can return an empty table and create a false “no flow” result.
+5. Open `Bot manager`.
+6. Select the exact Facebook page in the left column.
+7. Under `Bot flow builder`, click `Change settings`.
+8. Wait for the flow table to load inside the iframe whose URL contains `flowbuilder_manager`.
+9. Find the exact row by `Reference name`.
+10. Inside that row, accept only the edit action matching all of:
    - `title="Edit"`
    - class contains `btn-outline-warning`
    - href contains `/visual_flow_builder/edit_builder_data/`
-10. Reject and never click any action matching one or more of:
+11. Reject and never click any action matching one or more of:
    - `title="Delete"`
    - class contains `delete_data`
    - class contains `btn-outline-danger`
