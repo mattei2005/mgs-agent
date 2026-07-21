@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-21T09:35:02-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-21T14:03:07+00:00",
+    "generated_by": "zeus-hermes-controlled-update"
   },
   "system_packages": [
     {
@@ -2930,6 +2930,63 @@
         "final_report_infra_message_id": "1528633908080545943",
         "final_report_readback": "PASS"
       }
+    },
+    {
+      "id": "hermes-vps-controlled-update-20260721",
+      "kind": "hermes_vps_controlled_update",
+      "owner": "zeus",
+      "status": "staged_validated_pending_critical_activation",
+      "authorization": {
+        "discord_message_id": "1529120708159082536",
+        "text": "ok, vamos comecar"
+      },
+      "scope": {
+        "installed_from": "26480e6c57c3558442a73c2dffe313996b19417f",
+        "frozen_target": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
+        "current_origin": "d3b0e614294e3f1d4f8c99da377a77981d0a5609",
+        "commits_applied": 266,
+        "commits_pending_after_freeze": 1,
+        "runtime_patch_files": 39,
+        "profiles": [
+          "root",
+          "zeus",
+          "atena",
+          "ares"
+        ]
+      },
+      "artifacts": {
+        "backup": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+        "backup_sha256": "0cac5043d5fda2fb4c069ccf13d6d4bbfa35616256033ea2111a13b309555f72",
+        "runtime_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-21.patch",
+        "runtime_patch_sha256": "4a8f5c540b0eecf462093da431ece2f1563cefdcbdfdeb99aefcb096c4977ad7",
+        "port_commit": "8810ec931610a8b965de9c2e4275d1e38e3dafa2",
+        "rollback_stash": "5d2933efeae7958eadc1e9c400886ccec84cb869",
+        "report_dir": "/root/mgs-agent/reports/hermes-updates/20260721-092208/port-ed3c39108",
+        "next_venv": "/root/.hermes/hermes-agent/venv-next-20260721-ed3c39108"
+      },
+      "changes": [
+        "manual no-restart fast-forward to frozen upstream target",
+        "canonical MGS patch ported from 41 pre-paths to 39 retained paths; 2 lifecycle paths absorbed upstream",
+        "ensure-hermes-mgs-patches.sh promoted to 2026-07-21 patch and accepts stronger upstream one-shot lifecycle",
+        "bundled Office DOCX/XLSX/PDF skills synchronized to root/Zeus/Atena/Ares while preserving google-workspace fail-closed"
+      ],
+      "validation": {
+        "pre_baseline": "801 passed + 6 subtests; post-upstream 331 passed",
+        "fresh_guard": "804 passed + 6 subtests",
+        "fresh_post_upstream": "358 passed",
+        "targeted_overlap": "291 passed",
+        "smokes": "pre-stage next venv 4/4 PASS; staged live 4/4 PASS",
+        "builds": "Web PASS; TUI PASS",
+        "config_check": "4/4 rc=0",
+        "profile_mirrors": "Zeus/Atena/Ares config+SOUL byte-identical",
+        "runtime_equivalence": "39/39 live paths byte-identical to validated port; patch reverse-check PASS",
+        "rollback": "stash has untracked third parent; 41/41 hashes match pre-port manifest",
+        "gateways": "3/3 active; PIDs unchanged; ExecMainStatus=0; NRestarts=0",
+        "npm_audit": "5 dev/build findings (4 high, 1 critical), all traced to Desktop/build/lint dependency surface; Web/TUI builds pass; no gateway runtime dependency affected"
+      },
+      "updated_at": "2026-07-21T14:03:35+00:00",
+      "staging_report_infra_message_id": "1529126625512394886",
+      "staging_report_readback": "PASS"
     }
   ],
   "profile_skill_references": [
