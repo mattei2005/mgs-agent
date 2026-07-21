@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-link-pilot-20260721",
-      "next_step": "Descobrir duas Pages elegíveis por conta e auditar utm_term/flow/templates antes do canário",
-      "objective": "Atualizar e validar links canônicos Openzed em duas Pages elegíveis por cada um de quatro usuários DTR",
+      "next_step": "Aguardar autorização de Rodolfo para reduzir o piloto às três Pages elegíveis, sem instalar flows e sem adicionar M16-M28 ao legado",
+      "objective": "Atualizar e validar links canônicos Openzed em até duas Pages elegíveis por cada um de quatro usuários DTR",
       "source": "discord:message:1529160447159435324",
-      "state": "catálogo de 120 urls validado; escrita ainda não iniciada",
+      "state": "catálogo validado. elegíveis auditadas: hortensia #1084 us-cc-en (29 urls), marlowe #3351 us-cc-en legado m0-m15 (16 urls), luisa #22273 es-cc-es (29 urls). gb #22097 e spain #22094 têm uma page cada e não possuem auto principal drip. nenhuma escrita executada.",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-21T16:19:29+00:00"
+      "updated_at": "2026-07-21T16:42:55+00:00"
     },
     {
       "agent": "zeus",
@@ -182,5 +182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T16:19:29+00:00"
+  "updated_at": "2026-07-21T16:42:55+00:00"
 }
