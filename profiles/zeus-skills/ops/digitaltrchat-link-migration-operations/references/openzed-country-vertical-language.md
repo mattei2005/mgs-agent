@@ -71,6 +71,18 @@ Never click `Reset all action button settings to default`, `Install template`, `
 - Preserve the literal `#PAGE_ID#` exactly as present in the canonical catalog.
 - Do not add any other parameter absent from the approved catalog.
 
+## Transactional batch write and verification
+
+For a multi-Page migration, treat each Page as its own transaction:
+
+1. Materialize a Page-specific manifest from the exact pre-write graph and settings; include DTR/FB identity, flow depth, every scoped field, before/after URLs, and hashes.
+2. Back up Flow Builder, Get Started, No Match, and Persistent Menu before the first mutation on that Page.
+3. Build the expected post-write Rete graph by changing only the manifest's URL fields. Before saving, require the editor dry-run JSON to equal that expected graph exactly.
+4. Save and reload every surface, then open a fresh browser context for independent Page-level readback before advancing to the next Page.
+5. If any surface or identity check fails, stop the batch and roll back only the current Page from its manifest; never stack corrective writes across later Pages.
+6. Validate equal pre/post node count, reachability, connections, schedule, message/button/image data, and scoped URL count. A legacy M0–M15 Page remains M0–M15; absence of M16–M28 is an invariant, not a gap to fill.
+7. In classic action forms, compare active semantic fields. Hidden inactive `*_post_id_*` selectors can expose a different first option after reload as catalog ordering changes; ignore that display-only delta only after proving the active button type remains `web_url` and all non-empty semantic fields are unchanged.
+
 ## `#PAGE_ID#` parser pitfall
 
 `urllib.parse.urlparse` and browser URL parsers treat `#PAGE_ID#` as a fragment delimiter. A naive query validation falsely reports missing `utm_campaign`/`utm_content`.
