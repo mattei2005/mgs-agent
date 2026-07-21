@@ -2935,7 +2935,7 @@
       "id": "hermes-vps-controlled-update-20260721",
       "kind": "hermes_vps_controlled_update",
       "owner": "zeus",
-      "status": "staged_validated_pending_critical_activation",
+      "status": "activation_scheduled_pending_external_validation",
       "authorization": {
         "discord_message_id": "1529120708159082536",
         "text": "ok, vamos comecar"
@@ -2984,9 +2984,21 @@
         "gateways": "3/3 active; PIDs unchanged; ExecMainStatus=0; NRestarts=0",
         "npm_audit": "5 dev/build findings (4 high, 1 critical), all traced to Desktop/build/lint dependency surface; Web/TUI builds pass; no gateway runtime dependency affected"
       },
-      "updated_at": "2026-07-21T14:03:35+00:00",
+      "updated_at": "2026-07-21T14:15:14+00:00",
       "staging_report_infra_message_id": "1529126625512394886",
-      "staging_report_readback": "PASS"
+      "staging_report_readback": "PASS",
+      "vps_maintenance": {
+        "snapd_from": "2.75.2+ubuntu24.04",
+        "snapd_to": "2.76+ubuntu24.04",
+        "apt_new_installed": 0,
+        "apt_removed": 0,
+        "autoremove_executed": false,
+        "dpkg_audit_lines": 0,
+        "reboot_required": false,
+        "snaps": "all_up_to_date",
+        "validated_at": "2026-07-21T14:14:24+00:00"
+      },
+      "validator_job_id": "df82b3f3f873"
     }
   ],
   "profile_skill_references": [

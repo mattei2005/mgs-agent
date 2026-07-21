@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-vps-controlled-update-20260721",
-      "next_step": "Obter confirmação crítica para atualizar snapd em /usr e ativar gateways sequencialmente Ares, Atena e Zeus; validar pós-reload e fechar inventário, audit e REPORT-INFRA",
+      "next_step": "Agendar validador externo e finalizer detached Ares, Atena e Zeus; validar pós-reload e concluir inventário, audit e REPORT-INFRA",
       "objective": "Atualizar VPS e Hermes de forma controlada, preservando patches e invariantes MGS",
-      "source": "/root/mgs-agent/reports/hermes-updates/20260721-092208/port-ed3c39108/post-stage-readback.json",
-      "state": "hermes staged sem restart em ed3c39108; patch 39 caminhos; guard 804+6, regressão 358, smokes live 4/4 e builds pass; gateways ainda nos pids anteriores; 1 commit upstream chegou após o freeze",
+      "source": "/root/mgs-agent/data/infra-inventory.json",
+      "state": "snapd atualizado para 2.76, dpkg limpo, snaps atuais, sem reboot; hermes ed3c39108 staged e validado; gateways ainda nos pids antigos",
       "thread_id": "1529115989092864001",
-      "updated_at": "2026-07-21T14:03:07+00:00"
+      "updated_at": "2026-07-21T14:14:24+00:00"
     },
     {
       "agent": "zeus",
@@ -172,5 +172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T14:03:07+00:00"
+  "updated_at": "2026-07-21T14:14:24+00:00"
 }
