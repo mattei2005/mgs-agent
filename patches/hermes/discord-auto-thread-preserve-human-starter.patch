@@ -1,0 +1,216 @@
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -6721,13 +6721,15 @@
+         return semantic_fallback_title(text)
+ 
+     async def _auto_create_thread(self, message: 'DiscordMessage') -> Optional[Any]:
+-        """Create a thread from a user message for auto-threading.
+-
+-        Returns the created thread object, or ``None`` on failure. Both the
+-        primary ``message.create_thread`` and the seed-message fallback are
+-        retried once after a short backoff so transient connect errors
+-        (e.g. ``Cannot connect to host discord.com:443``) don't immediately
+-        burn through to the caller's failure path (#20243).
++        """Create a thread whose starter is always the human's source message.
++
++        A bot-authored seed fallback hides the user's text and attachments from
++        the resulting thread.  Retry ``message.create_thread`` directly and,
++        after each error, reconcile the thread ID derived from the source
++        message.  Discord uses the starter message snowflake as the thread ID,
++        so this also recovers cleanly when the create request succeeded but the
++        client lost the response.  Persistent failures return ``None`` and the
++        caller reports the routing error in the parent channel (#20243).
+         """
+         content = (message.content or "").strip()
+         base_thread_name = self._auto_thread_name_from_message(content)
+@@ -6736,45 +6738,79 @@
+             getattr(getattr(message, "author", None), "display_name", None),
+         )
+ 
+-        display_name = getattr(getattr(message, "author", None), "display_name", None) or "unknown user"
+-        reason = f"Auto-threaded from mention by {display_name}"
++        async def resolve_source_thread() -> Optional[Any]:
++            message_id = getattr(message, "id", None)
++            try:
++                thread_id = int(message_id)
++            except (TypeError, ValueError):
++                return None
++
++            guild = getattr(message, "guild", None) or getattr(
++                getattr(message, "channel", None), "guild", None
++            )
++            get_thread = getattr(guild, "get_thread", None)
++            if callable(get_thread):
++                with suppress(Exception):
++                    thread = get_thread(thread_id)
++                    if thread is not None:
++                        return thread
++
++            client = getattr(self, "_client", None)
++            get_channel = getattr(client, "get_channel", None)
++            if callable(get_channel):
++                with suppress(Exception):
++                    thread = get_channel(thread_id)
++                    if thread is not None:
++                        return thread
++
++            fetch_channel = getattr(client, "fetch_channel", None)
++            if callable(fetch_channel):
++                with suppress(Exception):
++                    thread = await fetch_channel(thread_id)
++                    if thread is not None:
++                        return thread
++            return None
+ 
+         last_direct_error: Exception | None = None
+-        last_fallback_error: Exception | None = None
+-
+         for attempt in range(2):
+             try:
+-                thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
++                thread = await message.create_thread(
++                    name=thread_name,
++                    auto_archive_duration=1440,
++                )
+                 self._remember_auto_thread_initial_title(thread, thread_name)
+                 return thread
+             except Exception as direct_error:
+                 last_direct_error = direct_error
+-                try:
+-                    seed_msg = await message.channel.send(
+-                        f"\U0001f9f5 Thread created by Hermes: **{thread_name}**",
+-                        **self._plain_message_send_kwargs(),
++                logger.info(
++                    "[%s] Direct auto-thread attempt %d failed for source message=%s channel=%s: %s",
++                    self.name,
++                    attempt + 1,
++                    getattr(message, "id", None),
++                    getattr(getattr(message, "channel", None), "id", None),
++                    direct_error,
++                )
++
++                existing_thread = await resolve_source_thread()
++                if existing_thread is not None:
++                    logger.info(
++                        "[%s] Reconciled existing source-message thread=%s after create error",
++                        self.name,
++                        getattr(existing_thread, "id", None),
+                     )
+-                    thread = await seed_msg.create_thread(
+-                        name=thread_name,
+-                        auto_archive_duration=1440,
+-                        reason=reason,
+-                    )
+-                    self._remember_auto_thread_initial_title(thread, thread_name)
+-                    return thread
+-                except Exception as fallback_error:
+-                    last_fallback_error = fallback_error
+-                    if attempt == 0:
+-                        # Brief backoff before the second attempt — most failures
+-                        # in this path are transient connect errors that recover
+-                        # within a second or two.
+-                        await asyncio.sleep(0.75)
+-                        continue
++                    self._remember_auto_thread_initial_title(existing_thread, thread_name)
++                    return existing_thread
++
++                if attempt == 0:
++                    await asyncio.sleep(0.75)
+ 
+         logger.warning(
+-            "[%s] Auto-thread creation failed after retry. Direct error: %s. Fallback error: %s",
++            "[%s] Auto-thread creation failed after retry for source message=%s channel=%s. "
++            "No bot-authored seed thread was created. Direct error: %s",
+             self.name,
++            getattr(message, "id", None),
++            getattr(getattr(message, "channel", None), "id", None),
+             last_direct_error,
+-            last_fallback_error,
+         )
+         return None
+ 
+--- /dev/null
++++ b/tests/gateway/test_discord_auto_thread_origin.py
+@@ -0,0 +1,82 @@
++"""Auto-threading must preserve the human's Discord message as thread starter."""
++
++from types import SimpleNamespace
++from unittest.mock import AsyncMock, MagicMock
++
++import pytest
++
++from gateway.config import PlatformConfig
++from plugins.platforms.discord.adapter import DiscordAdapter
++
++
++def _adapter(*, existing_thread=None):
++    adapter = DiscordAdapter(PlatformConfig(enabled=True, token="fake-token"))
++    adapter._client = SimpleNamespace(
++        user=SimpleNamespace(id=999),
++        get_channel=MagicMock(return_value=existing_thread),
++        fetch_channel=AsyncMock(
++            return_value=existing_thread,
++            side_effect=None if existing_thread is not None else LookupError("not found"),
++        ),
++    )
++    return adapter
++
++
++def _message(create_thread):
++    channel = SimpleNamespace(
++        id=1516887105543077949,
++        send=AsyncMock(side_effect=AssertionError("must not create an Ares seed message")),
++    )
++    return SimpleNamespace(
++        id=123456789,
++        content="País: BRASIL\nVertical: CAR\nLíngua: PORTUGUÊS",
++        author=SimpleNamespace(id=42, display_name="Nicolas Holanda"),
++        channel=channel,
++        create_thread=create_thread,
++    )
++
++
++@pytest.mark.asyncio
++async def test_auto_thread_retries_original_message_before_giving_up(monkeypatch):
++    """A transient failure must retry message.create_thread, never seed as Ares."""
++    adapter = _adapter()
++    thread = SimpleNamespace(id=123456789, name="CAR Brasil - Nicolas")
++    create_thread = AsyncMock(side_effect=[RuntimeError("transient"), thread])
++    message = _message(create_thread)
++    monkeypatch.setattr("plugins.platforms.discord.adapter.asyncio.sleep", AsyncMock())
++
++    result = await adapter._auto_create_thread(message)
++
++    assert result is thread
++    assert create_thread.await_count == 2
++    message.channel.send.assert_not_awaited()
++
++
++@pytest.mark.asyncio
++async def test_auto_thread_reconciles_thread_created_despite_client_error():
++    """A lost create response must reuse the source-message thread, not duplicate it."""
++    thread = SimpleNamespace(id=123456789, name="CAR Brasil - Nicolas")
++    adapter = _adapter(existing_thread=thread)
++    create_thread = AsyncMock(side_effect=RuntimeError("response lost"))
++    message = _message(create_thread)
++
++    result = await adapter._auto_create_thread(message)
++
++    assert result is thread
++    create_thread.assert_awaited_once()
++    message.channel.send.assert_not_awaited()
++
++
++@pytest.mark.asyncio
++async def test_auto_thread_fails_closed_without_bot_authored_seed(monkeypatch):
++    """Persistent failure must not hide the human message behind an Ares starter."""
++    adapter = _adapter()
++    create_thread = AsyncMock(side_effect=RuntimeError("discord rejected source message"))
++    message = _message(create_thread)
++    monkeypatch.setattr("plugins.platforms.discord.adapter.asyncio.sleep", AsyncMock())
++
++    result = await adapter._auto_create_thread(message)
++
++    assert result is None
++    assert create_thread.await_count == 2
++    message.channel.send.assert_not_awaited()
