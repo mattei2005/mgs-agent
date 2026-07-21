@@ -118,6 +118,7 @@ xvfb-run -a /tmp/dtr-venv/bin/python \
 
 Optional:
 
+- `--account-id <imported_account_id>` activates the exact imported Facebook account/segurador before opening the Page's flow manager. Use it whenever one DigitalTRChat login contains multiple seguradores.
 - `--output /tmp/flow.json` writes the extracted graph JSON.
 - `--screenshot /tmp/flow.png` captures the loaded builder.
 

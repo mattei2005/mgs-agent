@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.2.2
+version: 1.2.3
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -67,7 +67,16 @@ For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLA
 11. Back up the graph, Get Started, No Match, and Persistent Menu values.
 12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
-If fewer Pages are eligible than requested, stop before production writes and obtain authorization for the reduced scope. Do not silently substitute Pages or expand into template installation.
+### Conditional full-flow qualification
+
+Determine the batch's eligibility mode from Rodolfo's current authorization before writing:
+
+- **Existing-position migration:** a partial legacy flow may be migrated in place; update only its existing semantic positions and preserve its depth.
+- **Full-flow-qualified migration:** when Rodolfo says to process only Pages that already have all 28 Drip messages, require one `Auto Principal Drip` plus exactly 28 timed `Sequence Single` branches and semantic coverage through M28. The flow name alone is insufficient. If absent or incomplete, skip the entire Page—including Get Started, No Match and Persistent Menu—and do not install/complete a template.
+
+For the full-flow gate, classify skips precisely as `flow absent` or `incomplete N/28`; do not use total button count as the completeness criterion because M0 and unrelated buttons can inflate it. If Rodolfo preauthorizes “skip ineligible and continue eligible” in the original request, that conditional reduction is already in scope: continue with qualifying Pages without asking again. Otherwise, a discovered reduction still requires the normal scope confirmation.
+
+If fewer Pages are eligible than requested, stop before production writes and obtain authorization for the reduced scope unless the original authorization explicitly preapproved skipping ineligible Pages and continuing with the qualifying subset. Do not silently substitute Pages or expand into template installation.
 
 ## Legacy flow boundary
 

@@ -27,6 +27,7 @@ def parse_args():
     parser.add_argument("--vault", required=True, help="1Password vault name")
     parser.add_argument("--item", required=True, help="1Password login item title")
     parser.add_argument("--page-id", required=True, type=int, help="DigitalTRChat page number, e.g. 1084")
+    parser.add_argument("--account-id", help="Optional imported Facebook account/segurador ID to activate before inspection")
     parser.add_argument("--flow", required=True, help="Exact flow reference name")
     parser.add_argument("--output", help="Optional path for full extracted graph JSON")
     parser.add_argument("--screenshot", help="Optional path for a full-page builder screenshot")
@@ -59,7 +60,7 @@ def normalize_preview(value, limit=180):
     return value[:limit]
 
 
-def graph_summary(graph, account_item, page_id, flow_name, builder_url):
+def graph_summary(graph, account_item, account_id, page_id, flow_name, builder_url):
     nodes = {int(node_id): node for node_id, node in graph.get("nodes", {}).items()}
     counts = Counter(node.get("name", "Unknown") for node in nodes.values())
     adjacency = defaultdict(list)
@@ -152,6 +153,7 @@ def graph_summary(graph, account_item, page_id, flow_name, builder_url):
         "status": "ok",
         "mode": "read-only",
         "account_item": account_item,
+        "account_id": account_id,
         "page_id": page_id,
         "flow": flow_name,
         "builder_url": builder_url,
@@ -197,6 +199,19 @@ def run(args):
                 if "/home/login" in page.url:
                     raise RuntimeError("DigitalTRChat login did not leave the login page")
 
+            if args.account_id:
+                page.goto(BOT_LIST, wait_until="domcontentloaded", timeout=args.timeout_ms)
+                page.evaluate(
+                    """id => new Promise((resolve, reject) => {
+                        if (typeof $ === 'undefined') return reject('jquery missing');
+                        $.post('https://digitaltrchat.com/social_accounts/fb_rx_account_switch', {id:id})
+                          .done(resolve).fail((x,s,e)=>reject(String(s||e)));
+                    })""",
+                    str(args.account_id),
+                )
+                page.reload(wait_until="domcontentloaded", timeout=args.timeout_ms)
+                page.wait_for_timeout(2500)
+
             page.goto(manager_url, wait_until="domcontentloaded", timeout=args.timeout_ms)
             exact_flow = page.get_by_text(args.flow, exact=True)
             exact_flow.wait_for(state="visible", timeout=args.timeout_ms)
@@ -236,7 +251,7 @@ def run(args):
                 screenshot_path.parent.mkdir(parents=True, exist_ok=True)
                 builder.screenshot(path=str(screenshot_path), full_page=True)
 
-            return graph_summary(graph, args.item, args.page_id, args.flow, builder.url)
+            return graph_summary(graph, args.item, args.account_id, args.page_id, args.flow, builder.url)
         finally:
             context.close()
             browser.close()

@@ -15,6 +15,10 @@ A current explicit Rodolfo correction wins. Otherwise, use the exact spreadsheet
 
 When the spreadsheet classification conflicts with a current URL or template, preserve both in the manifest, label the live value as legacy discrepancy, and select the replacement catalog from `vertical + pais + lingua`. If the row is absent, duplicated, ID-mismatched, or internally ambiguous, stop for reconciliation.
 
+### Live spreadsheet schema guard
+
+Do not assume friendly headers such as `Page ID`, `FB Page ID`, or `Page Name`. The live Openzed sheet may expose operational aliases such as `pg` (internal DTR ID), `pg id grande` (Facebook Page ID), `nome da pagina`, `pg_id`, `template`, `vertical`, `pais`, and `lingua`, while login/account columns can have blank headers. Inspect the header row on every run, resolve aliases explicitly, and fail closed if the mapping is ambiguous. Require exact equality—not substring search—and cross-check `pg_id == "pg_" + pg` plus the numeric Facebook Page ID before using positional fallback for blank-header columns.
+
 ## Canonical catalog approved by Rodolfo — 2026-07-21
 
 Every combination has exactly 30 URLs: M0, NM, and M1–M28.
