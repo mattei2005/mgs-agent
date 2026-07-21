@@ -37,8 +37,9 @@ Before any URL-host migration or multi-campaign write, load `references/subscrib
 2. Open `Broadcasting > Subscriber Broadcast`.
 3. Confirm the DigitalTRChat user label.
 4. Confirm the current segurador in the top Facebook-account selector.
-5. Use the live campaign table as the source of truth for page, status and edit action.
-6. Filter the exact page and enumerate every currently eligible campaign before writing.
+5. Set the campaign status filter to exactly `Pending` and use the live campaign table as the source of truth for Facebook page, status and edit action.
+6. Treat the default 10-row view as pagination only, never as the complete eligible set. Traverse table pages `1, 2, 3, ...` through the last page (or until `Next` is disabled), reconciling the displayed range/total and deduplicating by campaign ID.
+7. For portfolio work, inventory every Facebook page represented across all pagination pages before switching segurador. For a pilot scoped to one Facebook page, identify the first eligible row's page name, filter/search that exact page and enumerate every currently eligible campaign for it before writing.
 
 ## Write gate
 
