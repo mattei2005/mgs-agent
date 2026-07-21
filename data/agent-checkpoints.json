@@ -62,6 +62,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-vps-controlled-update-20260721",
+      "next_step": "Capturar superfície local completa, executar baseline pré-port e construir port sem restart em worktree isolada",
+      "objective": "Atualizar VPS e Hermes de forma controlada, preservando patches e invariantes MGS",
+      "source": "/root/mgs-agent/reports/hermes-updates/20260721-092208/final-report.md",
+      "state": "alvo upstream congelado em ed3c39108b1b5521414cc60a8854cebd7c5af9bf; gateways ativos; port isolado ainda não iniciado",
+      "thread_id": "1529115989092864001",
+      "updated_at": "2026-07-21T13:40:25+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-vps-maintenance-20260719",
       "next_step": "Monitoramento rotineiro; manter backup e stash até a próxima janela de retenção controlada",
       "objective": "Atualizar Hermes preservando customizações MGS e concluir manutenção da VPS",
@@ -162,5 +172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-20T16:14:51+00:00"
+  "updated_at": "2026-07-21T13:40:25+00:00"
 }
