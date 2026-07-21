@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, inspect Bot flow builder or Saved templates, map a DRIP flow's nodes/messages/buttons/delays/URLs, or prepare a safe narrow change without touching delete/install controls.
-version: 1.4.0
+version: 1.4.1
 author: Hermes Agent
 license: MIT
 metadata:
@@ -58,6 +58,7 @@ Retrieve credentials only inside the local process. Never print, log, persist, o
 2. If redirected to `/home/login`, fill `Email Or FB ID` and `Password`, then click `Login`.
 3. Confirm the DigitalTRChat login label at top right matches the requested login.
 4. A login may contain several imported Facebook accounts/seguradores. Enumerate `a.account_switch[data-id]`, activate the exact segurador with `POST /social_accounts/fb_rx_account_switch`, reload `/messenger_bot/bot_list`, and verify the target DTR Page ID plus Facebook Page ID. Do not assume a direct `flowbuilder_manager/<PAGE_ID>` route is independent of the currently selected account; the wrong account can return an empty table and create a false “no flow” result.
+   - A Page may exist as a DTR record but remain disconnected from the imported Facebook account. In that state it can be absent from the Page selector and its direct flow-manager route can legitimately show an empty table. Classify it as `disconnected/unavailable`, not `missing from DTR` or an anomaly. Never connect the Page, install a template or create a flow unless Rodolfo explicitly authorizes that separate scope.
 5. Open `Bot manager`.
 6. Select the exact Facebook page in the left column.
 7. Under `Bot flow builder`, click `Change settings`.
