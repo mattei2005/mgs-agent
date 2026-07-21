@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-21T14:03:07+00:00",
-    "generated_by": "zeus-hermes-controlled-update"
+    "updated_at": "2026-07-21T10:07:02-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -3909,8 +3909,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 29649,
-      "modified_at": "2026-07-20T00:55:47-04:00"
+      "size_bytes": 31111,
+      "modified_at": "2026-07-21T09:54:31-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -4998,6 +4998,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/document-and-office-operations/SKILL.md"
       },
       {
+        "name": "docx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/docx/SKILL.md"
+      },
+      {
         "name": "google-workspace",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/google-workspace/SKILL.md"
@@ -5023,6 +5028,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/ocr-and-documents/SKILL.md"
       },
       {
+        "name": "pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/pdf/SKILL.md"
+      },
+      {
         "name": "petdex",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/petdex/SKILL.md"
@@ -5031,6 +5041,11 @@
         "name": "teams-meeting-pipeline",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/teams-meeting-pipeline/SKILL.md"
+      },
+      {
+        "name": "xlsx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/xlsx/SKILL.md"
       },
       {
         "name": "godmode",
@@ -5465,6 +5480,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/discord-thread-communication/SKILL.md"
       },
       {
+        "name": "docx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/atena/skills/productivity/docx/SKILL.md"
+      },
+      {
         "name": "google-workspace",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/google-workspace/SKILL.md"
@@ -5495,6 +5515,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/ocr-and-documents/SKILL.md"
       },
       {
+        "name": "pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/atena/skills/productivity/pdf/SKILL.md"
+      },
+      {
         "name": "petdex",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/petdex/SKILL.md"
@@ -5508,6 +5533,11 @@
         "name": "teams-meeting-pipeline",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/teams-meeting-pipeline/SKILL.md"
+      },
+      {
+        "name": "xlsx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/atena/skills/productivity/xlsx/SKILL.md"
       },
       {
         "name": "godmode",
@@ -6197,6 +6227,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/documents-and-presentations/SKILL.md"
       },
       {
+        "name": "docx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/docx/SKILL.md"
+      },
+      {
         "name": "linear",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/linear/SKILL.md"
@@ -6212,6 +6247,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/ocr-and-documents/SKILL.md"
       },
       {
+        "name": "pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/pdf/SKILL.md"
+      },
+      {
         "name": "petdex",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/petdex/SKILL.md"
@@ -6220,6 +6260,11 @@
         "name": "productivity-workspace-apis",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/productivity-workspace-apis/SKILL.md"
+      },
+      {
+        "name": "xlsx",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/xlsx/SKILL.md"
       },
       {
         "name": "godmode",
@@ -6364,15 +6409,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 14833,
-      "md5": "bec7c516b3e405c5bdf6a0061a5cf2af",
-      "modified_at": "2026-07-20T12:14:51-04:00"
+      "size_bytes": 15640,
+      "md5": "9d65cb74820d70bf0bf2fc2b71a40909",
+      "modified_at": "2026-07-21T10:03:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 9724,
-      "md5": "90caa12f181a61258468ddd34acc67cf",
-      "modified_at": "2026-07-21T09:32:02-04:00"
+      "md5": "26f791601f42def925dabb146d714a43",
+      "modified_at": "2026-07-21T10:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6383,8 +6428,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "b6d6f3c4ff8431c5a796738af1bd0f63",
-      "modified_at": "2026-07-21T09:26:51-04:00"
+      "md5": "99a92d6f4fa54a5f3e84100dec4d7f50",
+      "modified_at": "2026-07-21T09:56:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6407,8 +6452,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "0fb7eb533a1be26e04436bd8f515db05",
-      "modified_at": "2026-07-21T09:30:02-04:00"
+      "md5": "57db42ed0fcf1fc3429177b9222e31f6",
+      "modified_at": "2026-07-21T10:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6419,8 +6464,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "22a106e8e9046f5455f02d9c4b8906c1",
-      "modified_at": "2026-07-21T09:19:02-04:00"
+      "md5": "bb8e0903b46d601c4118253f51e014ee",
+      "modified_at": "2026-07-21T09:49:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -6449,8 +6494,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "53d16811d296c3662422d893c9cd4c6a",
-      "modified_at": "2026-07-21T09:34:02-04:00"
+      "md5": "e1be1a684f53c7a84928172fcdd0dc23",
+      "modified_at": "2026-07-21T10:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6461,20 +6506,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 30124,
-      "md5": "0b357be485288f74f781bc1bee6267f4",
-      "modified_at": "2026-07-21T09:35:02-04:00"
+      "md5": "efe82c7adeb47a721cfb70298ba3d13f",
+      "modified_at": "2026-07-21T10:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 5745,
-      "md5": "29c112fffc53bdb8658aa10466216864",
-      "modified_at": "2026-07-21T09:35:01-04:00"
+      "md5": "bfb57e8e75120956d17a2968d74a81e6",
+      "modified_at": "2026-07-21T10:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "6c3d09bbd4c7d6bb4a237e279d697d2c",
-      "modified_at": "2026-07-21T09:35:01-04:00"
+      "md5": "a7e7cfd233edf52d5e74ac57bf910cbd",
+      "modified_at": "2026-07-21T10:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6502,9 +6547,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 295638,
-      "md5": "783ea2380b7934fe2527819a441a5d62",
-      "modified_at": "2026-07-21T05:00:10-04:00"
+      "size_bytes": 300154,
+      "md5": "b9d828721c85214860395d45b258d775",
+      "modified_at": "2026-07-21T10:06:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6538,9 +6583,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 49187,
-      "md5": "4629b335251514f6f53cc1cd00879a8e",
-      "modified_at": "2026-07-21T09:05:24-04:00"
+      "size_bytes": 49195,
+      "md5": "6db00236af61762bb25f0e41ce20e266",
+      "modified_at": "2026-07-21T10:05:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -6569,8 +6614,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1049,
-      "md5": "9f999ccefc696a5ae1319f6e8262c3bf",
-      "modified_at": "2026-07-21T08:39:02-04:00"
+      "md5": "00e15873b4e43cfa7c9b54d45e1ad6b1",
+      "modified_at": "2026-07-21T09:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -6582,7 +6627,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-21T09:22:03-04:00"
+      "modified_at": "2026-07-21T10:07:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6605,8 +6650,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 211397,
-      "md5": "a0aa84e9d410af2f93b48baa31ddcae6",
-      "modified_at": "2026-07-21T09:29:17-04:00"
+      "md5": "d05d9a82d3a85dc87a5caaab02e2c363",
+      "modified_at": "2026-07-21T09:59:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6648,7 +6693,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "55b471f12dd3cbe7c8440345eebab913",
-      "modified_at": "2026-07-21T09:31:01-04:00"
+      "modified_at": "2026-07-21T10:06:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6683,8 +6728,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "02b6917a5638f16d5f28d29c418b197c",
-      "modified_at": "2026-07-21T09:35:03-04:00"
+      "md5": "ab774f4d352cdecda3f9040471a7a6b1",
+      "modified_at": "2026-07-21T10:05:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
