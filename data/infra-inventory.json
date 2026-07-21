@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-21T15:21:11-04:00",
+    "updated_at": "2026-07-21T15:48:16-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1118,21 +1118,21 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 29997,
-      "modified_at": "2026-07-21T13:46:50-04:00",
-      "sha256": "25babfa555fb5d63df13152698da5731e9d31c6a47f90205f3f09ffaac529ad4",
+      "size_bytes": 35667,
+      "modified_at": "2026-07-21T15:34:57-04:00",
+      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
       "owner": "Zeus/Ops",
       "type": "profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads B011 config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B011 app_id, and stores sanitized state. 0 pages does not mean disconnected.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "2026-07-21: bash -n OK; fixture covers inactive-X filter, cache refresh-on-miss, 6h material-signature anti-spam and recovery reset; live 1Password mapping OK; live sheet excludes 3 inactive rows; real one-target DTR dry-run linked=1 unknown=0 with unchanged production state hash.",
-      "updated_at": "2026-07-21T13:50:47-04:00",
+      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
+      "updated_at": "2026-07-21T15:47:55-04:00",
       "source_report": "REPORT-INFRA Zeus B011 same-plan cron alignment 2026-07-04",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
-      "last_change": "2026-07-21: stale 1Password metadata misses are confirmed by one forced refresh; non-migrated X rows are excluded; unchanged persistent-unknown incidents repeat only after 6h and reset after recovery."
+      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts."
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -1158,34 +1158,34 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 29997,
-      "modified_at": "2026-07-21T13:46:50-04:00",
-      "sha256": "25babfa555fb5d63df13152698da5731e9d31c6a47f90205f3f09ffaac529ad4",
+      "size_bytes": 35667,
+      "modified_at": "2026-07-21T15:34:57-04:00",
+      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
       "type": "profile_script",
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-21T13:50:47-04:00",
-      "validation": "2026-07-21: bash -n OK; fixture covers inactive-X filter, cache refresh-on-miss, 6h material-signature anti-spam and recovery reset; live 1Password mapping OK; live sheet excludes 3 inactive rows; real one-target DTR dry-run linked=1 unknown=0 with unchanged production state hash.",
-      "last_change": "2026-07-21: stale 1Password metadata misses are confirmed by one forced refresh; non-migrated X rows are excluded; unchanged persistent-unknown incidents repeat only after 6h and reset after recovery.",
+      "updated_at": "2026-07-21T15:47:55-04:00",
+      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
+      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts.",
       "schedule": "24 8-23 * * *"
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 29997,
-      "modified_at": "2026-07-21T13:46:50-04:00",
-      "sha256": "25babfa555fb5d63df13152698da5731e9d31c6a47f90205f3f09ffaac529ad4",
+      "size_bytes": 35667,
+      "modified_at": "2026-07-21T15:34:57-04:00",
+      "sha256": "6cca3f65021d705198fa488939b4eb71f3e03a03ddc3b36367f11902c54e799a",
       "owner": "Zeus/Ops",
       "type": "hermes_profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads BOT B011 Token, validates account-level OAuth link via Meta /debug_token, treats page count as separate inventory, and alerts channel 1522830283240505385 on anomalies.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "2026-07-21: bash -n OK; fixture covers inactive-X filter, cache refresh-on-miss, 6h material-signature anti-spam and recovery reset; live 1Password mapping OK; live sheet excludes 3 inactive rows; real one-target DTR dry-run linked=1 unknown=0 with unchanged production state hash.",
-      "updated_at": "2026-07-21T13:50:47-04:00",
-      "last_change": "2026-07-21: stale 1Password metadata misses are confirmed by one forced refresh; non-migrated X rows are excluded; unchanged persistent-unknown incidents repeat only after 6h and reset after recovery."
+      "validation": "bash -n; synthetic blocked/dedup/recovery fixture; full dry-run; full live run; Discord readback message 1529212398907555901",
+      "updated_at": "2026-07-21T15:47:55-04:00",
+      "last_change": "B011 Messenger capability watch: detect DTR pages with zero Graph pages across valid tokens as app-wide advanced-permission/BM restriction failure; critical and recovery alerts."
     },
     {
       "id": "mgs-1password-metadata-cache-20260712",
@@ -6481,15 +6481,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 16735,
-      "md5": "3e7ebaf15d8c1877320c1a35be0d4fda",
-      "modified_at": "2026-07-21T15:16:13-04:00"
+      "size_bytes": 16203,
+      "md5": "9dbb767f7dea54845e6b812465a64590",
+      "modified_at": "2026-07-21T15:47:39-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 9724,
-      "md5": "446132577d7b6bbb4cc496fa34dec7e9",
-      "modified_at": "2026-07-21T15:17:01-04:00"
+      "md5": "2b6ff09533bef2e9fed7db366a29632a",
+      "modified_at": "2026-07-21T15:47:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6500,8 +6500,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a574e1a7dc27ac7805ab82be9e2473b3",
-      "modified_at": "2026-07-21T15:11:42-04:00"
+      "md5": "e9ff0a161cb1af0eb6a679fb33b710dc",
+      "modified_at": "2026-07-21T15:41:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6511,9 +6511,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
-      "size_bytes": 27275,
-      "md5": "c73acd1a6f6b56b867060d365f963ef2",
-      "modified_at": "2026-07-21T14:27:58-04:00"
+      "size_bytes": 28101,
+      "md5": "6666f34f671cba27d82b484f187dec83",
+      "modified_at": "2026-07-21T15:44:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6524,8 +6524,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "6acbce5d47378071b49f26820bd0773c",
-      "modified_at": "2026-07-21T15:15:02-04:00"
+      "md5": "5aae248ae817f00e5b7977065c2cfb76",
+      "modified_at": "2026-07-21T15:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6553,9 +6553,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 334062,
-      "md5": "25a24f28d796d3cdf0cd34fdaab8ce7c",
-      "modified_at": "2026-07-21T07:45:18-04:00"
+      "size_bytes": 335076,
+      "md5": "dc00df5d02244f1ff9f1dac3097d8bc2",
+      "modified_at": "2026-07-21T15:45:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -6566,8 +6566,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "4c35af49a8a04fdaae7b9ab1713a8fc3",
-      "modified_at": "2026-07-21T15:14:01-04:00"
+      "md5": "5bde119ca39824a3493d5ed4359ebeca",
+      "modified_at": "2026-07-21T15:44:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6578,20 +6578,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 30424,
-      "md5": "d4ddbf239670ee5be86b5e72f700734e",
-      "modified_at": "2026-07-21T15:20:01-04:00"
+      "md5": "5c920d5d2dfcdbdd91441ad0c150d7ee",
+      "modified_at": "2026-07-21T15:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 6469,
-      "md5": "2aa73c3687a0f4c2228686c6ceb2fef2",
-      "modified_at": "2026-07-21T15:21:02-04:00"
+      "md5": "710e63db5f90fe9b1d6a445e7d438fca",
+      "modified_at": "2026-07-21T15:48:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "4b5553115aa973b06822d009b87ad35a",
-      "modified_at": "2026-07-21T15:21:01-04:00"
+      "md5": "cdff81163b9a97b587bec1dd5c0a8055",
+      "modified_at": "2026-07-21T15:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6619,15 +6619,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 303322,
-      "md5": "91cc8c65e8c8676a6147084fd3df91bf",
-      "modified_at": "2026-07-21T15:21:10-04:00"
+      "size_bytes": 302782,
+      "md5": "a2978fab5a81af0db50dd6699476d93c",
+      "modified_at": "2026-07-21T15:47:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 10301,
-      "md5": "dbef2ec7af7992c941c2dec236737339",
-      "modified_at": "2026-07-21T15:16:01-04:00"
+      "size_bytes": 12224,
+      "md5": "ae0fc9945795db70aed1f9e75845cc72",
+      "modified_at": "2026-07-21T15:47:33-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -6674,8 +6674,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7167,
-      "md5": "175a10a129937efad68d8dd3b1122195",
-      "modified_at": "2026-07-21T14:25:13-04:00"
+      "md5": "5439578ae9b81d3c3b56b93394191daf",
+      "modified_at": "2026-07-21T15:25:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -6686,8 +6686,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1079,
-      "md5": "f913f653015ea66ca9cca9750ac4b2c1",
-      "modified_at": "2026-07-21T14:39:02-04:00"
+      "md5": "0cea05ebb104ddab62d7babbf6b1e60a",
+      "modified_at": "2026-07-21T15:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -6699,7 +6699,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-21T15:07:03-04:00"
+      "modified_at": "2026-07-21T15:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6722,8 +6722,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 211872,
-      "md5": "9a5c3d871153d143d4ac1879b95aac8c",
-      "modified_at": "2026-07-21T15:14:16-04:00"
+      "md5": "0b04b2ecca589b622fc4d5cbf5c004d8",
+      "modified_at": "2026-07-21T15:44:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6765,7 +6765,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "4f9100bdf41acc90475aee532078e1df",
-      "modified_at": "2026-07-21T15:21:01-04:00"
+      "modified_at": "2026-07-21T15:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6775,9 +6775,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 13024,
-      "md5": "14ff08071e3393af90ecde8bddd3b4ff",
-      "modified_at": "2026-07-21T14:24:04-04:00"
+      "size_bytes": 13146,
+      "md5": "77730828c8cb50f3b69af55d3bf7d298",
+      "modified_at": "2026-07-21T15:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -6799,9 +6799,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2112,
-      "md5": "88f7eb71cdaa2cf7d2f256d7252ea587",
-      "modified_at": "2026-07-21T15:20:02-04:00"
+      "size_bytes": 2113,
+      "md5": "a773ddca31dc921297c7f9ad56795cec",
+      "modified_at": "2026-07-21T15:45:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

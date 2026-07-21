@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-link-pilot-20260721",
-      "next_step": "Refazer a matriz de páginas elegíveis pela planilha, excluir On-hold/Blocked, escolher duas M01-M28 por usuário e executar backup/canário somente após fechar as oito",
-      "objective": "Atualizar e validar links canônicos Openzed em duas Pages com Auto Principal Drip M01-M28 por cada um de quatro usuários DTR",
-      "source": "discord:message:1529204878209974293;google-sheet:180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik",
-      "state": "rodolfo confirmou que utm_term pode conter erro humano e que a planilha openzed é a melhor fonte de classificação. regra persistida na skill v1.3.1 e no registro proc-dtr-openzed-page-classification. classificação operacional: linha exata por dtr page id + fb page id; destino por vertical/pais/lingua; urls e utms atuais são apenas estado legado. nenhuma escrita digitaltrchat executada.",
+      "next_step": "Canário pg_19236 concluído e validado; aguardar autorização explícita de Rodolfo para qualquer página adicional",
+      "objective": "Atualizar e validar links canônicos Openzed em páginas DigitalTRChat classificadas pela planilha",
+      "source": "discord:1529141503929094284",
+      "state": "completed",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-21T19:16:13+00:00"
+      "updated_at": "2026-07-21T19:47:39+00:00"
     },
     {
       "agent": "zeus",
@@ -182,5 +182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T19:16:13+00:00"
+  "updated_at": "2026-07-21T19:47:39+00:00"
 }
