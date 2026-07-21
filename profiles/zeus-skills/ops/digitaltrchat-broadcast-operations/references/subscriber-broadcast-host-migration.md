@@ -10,7 +10,7 @@ Use this procedure for narrow URL-host migrations in scheduled Messenger Subscri
 4. Before counting or enumerating campaigns, open the list's `Page` filter and choose the generic `Page` option whenever the control is blank or scoped to a specific Facebook page. This clears the page filter and restores all pages; it is not the `Page` field inside the campaign edit form.
 5. For portfolio work, iterate every segurador under each authorized login. Within each segurador, set the status filter to exactly `Pending`, then process every Facebook page represented in the complete filtered result.
 6. The campaign table displays 10 rows by default. This is only one table page, not the full eligible set. Traverse pagination pages `1, 2, 3, ...` through the last page or until `Next` is disabled; reconcile the displayed range/total on every transition and deduplicate campaigns by immutable campaign ID. Never stop after the first 10 rows.
-6. For a pilot scoped to the “first page”, distinguish the first **Facebook page** from the first **table pagination page**: use the Facebook page name in the first eligible campaign row, then filter/search that exact page and enumerate all of its eligible campaigns.
+7. For a pilot scoped to the “first page”, distinguish the first **Facebook page** from the first **table pagination page**: use the Facebook page name in the first eligible campaign row, then filter/search that exact page and enumerate all of its eligible campaigns.
 
 Do not assume the page dropdown fully represents historical/scheduled rows. Reconcile against the live campaign table and its search results.
 
