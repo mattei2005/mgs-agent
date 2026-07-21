@@ -3,6 +3,7 @@
 
 import argparse
 import json
+import re
 import sys
 from urllib.parse import parse_qs, urlparse
 
@@ -32,20 +33,20 @@ SCHEMAS = {
 LABELS = ["m0-1", "nm"] + [f"m{i}-1" for i in range(1, 29)]
 
 
-def build_catalog(vertical):
+def build_catalog(vertical, utm_medium="g003-d"):
     schema = SCHEMAS[vertical]
     result = {}
     for label in LABELS:
         result[label] = (
             f"https://{schema['host']}/{schema['path_prefix']}{label}/"
-            f"?utm_source=facebook&utm_medium=g003-d"
+            f"?utm_source=facebook&utm_medium={utm_medium}"
             f"&utm_campaign=pg_#PAGE_ID#"
             f"&utm_content={schema['content_prefix']}{label}"
         )
     return result
 
 
-def validate_catalogs(catalogs):
+def validate_catalogs(catalogs, expected_medium="g003-d"):
     errors = []
     all_urls = []
     for vertical, catalog in catalogs.items():
@@ -68,7 +69,7 @@ def validate_catalogs(catalogs):
                 "host": parsed.netloc == schema["host"],
                 "path": parsed.path == expected_path,
                 "utm_source": query.get("utm_source") == ["facebook"],
-                "utm_medium": query.get("utm_medium") == ["g003-d"],
+                "utm_medium": query.get("utm_medium") == [expected_medium],
                 "utm_campaign": query.get("utm_campaign") == ["pg_PAGE_ID_PLACEHOLDER"],
                 "utm_content": query.get("utm_content") == [expected_content],
                 "utm_term_absent": "utm_term" not in query,
@@ -92,16 +93,22 @@ def validate_catalogs(catalogs):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--vertical", choices=sorted(SCHEMAS))
+    parser.add_argument("--utm-medium", default="g003-d", help="Approved gestor medium, e.g. g003-d or g001-d")
     parser.add_argument("--validate", action="store_true")
     parser.add_argument("--format", choices=("json", "lines"), default="json")
     args = parser.parse_args()
+    if not re.fullmatch(r"g\d{3}-d", args.utm_medium):
+        parser.error("--utm-medium must match gNNN-d")
 
     keys = [args.vertical] if args.vertical else list(SCHEMAS)
-    catalogs = {key: build_catalog(key) for key in keys}
+    catalogs = {key: build_catalog(key, args.utm_medium) for key in keys}
 
     if args.validate:
-        # Global validation always covers all four approved combinations.
-        result = validate_catalogs({key: build_catalog(key) for key in SCHEMAS})
+        # Global validation always covers all four approved combinations with the requested medium.
+        result = validate_catalogs(
+            {key: build_catalog(key, args.utm_medium) for key in SCHEMAS},
+            expected_medium=args.utm_medium,
+        )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result["status"] == "ok" else 1
 

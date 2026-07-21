@@ -30,7 +30,11 @@ For label `X`:
 
 Labels: `m0-1`, `nm`, then `m1-1` through `m28-1`.
 
-Use `scripts/openzed_link_catalog.py` to generate and validate exact destinations. Do not manually interpolate country/language strings in production.
+Use `scripts/openzed_link_catalog.py` to generate and validate exact destinations. Do not manually interpolate country/language strings or mutate query parameters ad hoc in production. The default is `utm_medium=g003-d`; use `--utm-medium g001-d` only for a Page set explicitly mapped by Rodolfo to gestor `g001-d`, and persist that per-Page override in the manifest.
+
+### Explicit Ducapes gestor override — 2026-07-21
+
+Rodolfo confirmed that the following DTR Pages under login `disparosducapesusccen@gmail.com` / segurador `Phong Huynh` belong to gestor `g001-d`: `19236`, `19221`, `8347`, `19193`, `19214`, `13931`, `11037`, and `19235`. Their classification remains `US-CC-EN`; only the catalog medium differs from the global default. Generate all M0/NM/M1–M28 targets for these exact Pages with `utm_medium=g001-d`. Do not generalize the override to other Pages merely because they are Ducapes or share a login label.
 
 ## DTR discovery details
 
