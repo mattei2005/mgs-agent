@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, inspect Bot flow builder or Saved templates, map a DRIP flow's nodes/messages/buttons/delays/URLs, or prepare a safe narrow change without touching delete/install controls.
-version: 1.3.0
+version: 1.3.1
 author: Hermes Agent
 license: MIT
 metadata:
@@ -140,6 +140,19 @@ Expected structure:
 Build the report from live graph JSON, not from a screenshot alone.
 
 ## Interpretation Rules
+
+### Page classification authority
+
+For Openzed link audits and replacements, never use a live or exported `utm_term` as the authority for country, vertical or language. Rodolfo confirmed that `utm_term` values can contain human errors inherited from copied/imported flows. Account/login labels, Page names, current destinations and assigned template strings are also non-authoritative on their own.
+
+Use this precedence:
+
+1. a current explicit correction from Rodolfo;
+2. the exact Page row in Rodolfo's approved classification spreadsheet, matched by internal DTR Page ID and cross-checked by Facebook Page ID;
+3. the row's explicit `vertical`, `pais` and `lingua` fields to select the canonical destination catalog;
+4. if the row is absent, duplicated, ID-mismatched or internally ambiguous, stop and place the Page in reconciliation instead of inferring from legacy URLs.
+
+Treat `utm_term`, `utm_content`, the current template name and existing domains only as legacy-state evidence for locating positions and documenting before/after discrepancies. They must not override the spreadsheet classification.
 
 - `Start Bot Flow` is the entry node.
 - `Text` stores `textMessage`, typing delay and typing-display state.

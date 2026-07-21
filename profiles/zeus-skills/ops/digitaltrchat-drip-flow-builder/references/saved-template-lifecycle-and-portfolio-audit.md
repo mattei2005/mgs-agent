@@ -30,14 +30,13 @@ For each Page, validate at least:
 
 ## Required canonical input from Rodolfo
 
-The audit cannot infer destinations from naming alone. Rodolfo will provide the approved link catalog separated by:
+The audit cannot infer destinations from naming alone. Rodolfo provides the approved link catalog separated by site, funnel, vertical and language, plus the approved Page-classification spreadsheet.
 
-- site;
-- funnel;
-- vertical;
-- language.
+For the Openzed portfolio, the current classification source is spreadsheet `openzed`, ID `180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik`. Resolve each Page by internal DTR Page ID and cross-check the Facebook Page ID, then derive the target catalog from the explicit `vertical`, `pais` and `lingua` columns. The `broad` versus `blocked e on hold` tabs and the row status define the write eligibility gate.
 
-This catalog becomes the comparison source for classifying each Page. Never guess a Page's vertical/language/site from a copied template, mixed legacy language, display name or current destination alone.
+A live/exported `utm_term` is not classification authority: Rodolfo confirmed that it may contain human error. Current URLs, `utm_content`, domains, login/account labels and the assigned `template` text are legacy-state evidence only. When they conflict with the spreadsheet's explicit classification fields, report the discrepancy and use `vertical + pais + lingua`; when the exact spreadsheet row is absent, duplicated, ID-mismatched or internally ambiguous, stop for reconciliation rather than guessing.
+
+The approved link catalog then becomes the destination source for the classified Page. Never guess a Page's vertical/language/site from a copied template, mixed legacy language, display name or current destination alone.
 
 ## Page identity and unresolved mapping
 

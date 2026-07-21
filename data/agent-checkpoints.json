@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-link-pilot-20260721",
-      "next_step": "Recalcular seleção das oito Pages usando a planilha como mapeamento pretendido, excluir Blocked/On-hold e validar as URLs atuais apenas como estado legado a ser corrigido",
+      "next_step": "Refazer a matriz de páginas elegíveis pela planilha, excluir On-hold/Blocked, escolher duas M01-M28 por usuário e executar backup/canário somente após fechar as oito",
       "objective": "Atualizar e validar links canônicos Openzed em duas Pages com Auto Principal Drip M01-M28 por cada um de quatro usuários DTR",
-      "source": "google-sheet:180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik;discord:message:1529200675676749855",
-      "state": "planilha openzed 180vuubqqoojm1oheaj1vbca-oulcfahgz-arnd3cuik lida via service account canônica. a planilha define intenção por vertical/país/língua e revelou divergências com urls atuais: luisa #22273 é us-cc-es na planilha, apesar do utm_term live es-cc-es; paula #22092 é us-cc-es na planilha apesar do template/utm_term es-cc-es; hortensia #1084 está em blocked e on hold como on-hold e deve sair do piloto. nenhuma escrita executada.",
+      "source": "discord:message:1529204878209974293;google-sheet:180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik",
+      "state": "rodolfo confirmou que utm_term pode conter erro humano e que a planilha openzed é a melhor fonte de classificação. regra persistida na skill v1.3.1 e no registro proc-dtr-openzed-page-classification. classificação operacional: linha exata por dtr page id + fb page id; destino por vertical/pais/lingua; urls e utms atuais são apenas estado legado. nenhuma escrita digitaltrchat executada.",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-21T19:03:05+00:00"
+      "updated_at": "2026-07-21T19:16:13+00:00"
     },
     {
       "agent": "zeus",
@@ -182,5 +182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T19:03:05+00:00"
+  "updated_at": "2026-07-21T19:16:13+00:00"
 }
