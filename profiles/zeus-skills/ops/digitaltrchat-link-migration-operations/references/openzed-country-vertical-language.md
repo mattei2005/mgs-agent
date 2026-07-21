@@ -53,10 +53,12 @@ Useful routes:
 
 - Flow manager: `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1`
 - Action settings: trigger `#action_button_settings` on `/messenger_bot/bot_list`
-- Get Started editor: `/messenger_bot/edit_bot/<setting_id>/1/getstart`
-- No Match editor: `/messenger_bot/edit_bot/<setting_id>/1/nomatch`
+- Get Started editor: `/messenger_bot/edit_bot/<setting_id>/1/getstart`; active URL field `#text_with_button_web_url_1_1`; update control `#submit`
+- No Match editor: `/messenger_bot/edit_bot/<setting_id>/1/nomatch`; active URL field `#text_with_button_web_url_1_1`; update control `#submit`
 - Persistent Menu list: `/messenger_bot/persistent_menu_list/<DTR_PAGE_ID>/1`
-- Persistent Menu editor: follow the exact `Edit persistent menu` link; its setting ID differs from the DTR Page ID
+- Persistent Menu editor: follow the exact `/messenger_bot/edit_persistent_menu/<setting_id>/1` link; its setting ID differs from the DTR Page ID; active URL field `#text_with_button_web_url_1`
+
+The classic action editor may reorder options in hidden `*_post_id_*` selectors between loads and expose the first option as their DOM value even when the active button type is `web_url`. Do not classify that display-order delta as a stored postback mutation; validate the active template type and compare semantic, non-empty active fields plus the exact target URL.
 
 Never click `Reset all action button settings to default`, `Install template`, `Delete`, `Remove persistent menu`, or `Publish persistent menu` as part of URL replacement.
 
