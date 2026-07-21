@@ -245,9 +245,10 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for the exact reviewed upstream 26480e6c5 (2026-07-19).
+# Consolidated port for the exact reviewed upstream ed3c39108 (2026-07-21).
 # Apply the complete current MGS runtime customization surface first; legacy
 # per-feature patches below remain invariant checks/backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-07-21.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-19.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-13.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-07.patch"
@@ -445,12 +446,26 @@ grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
   || fail "missing mandatory background capacity-loss disclosure"
 grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py" \
   || fail "missing background capacity disclosure regression test"
-grep -q "def _close_oneshot_agent" "$REPO/hermes_cli/oneshot.py" \
-  || fail "missing one-shot lifecycle cleanup helper"
-grep -q "_close_oneshot_agent(agent)" "$REPO/hermes_cli/oneshot.py" \
-  || fail "one-shot agent path does not drain lifecycle resources"
-grep -q "test_close_oneshot_agent_drains_memory_before_close" "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
-  || fail "missing one-shot Honcho shutdown regression test"
+if grep -q "def _close_oneshot_agent" "$REPO/hermes_cli/oneshot.py"; then
+  grep -q "_close_oneshot_agent(agent)" "$REPO/hermes_cli/oneshot.py" \
+    || fail "one-shot helper exists but is not used by the agent path"
+  grep -q "test_close_oneshot_agent_drains_memory_before_close" "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
+    || fail "missing legacy one-shot Honcho shutdown regression test"
+else
+  # Upstream bfa7a794c/97fc8a4a3 absorbed and strengthened the MGS lifecycle
+  # fix: memory drains before agent.close(), and the session DB is closed even
+  # when construction or conversation fails. Accept only that complete shape.
+  grep -q 'agent.shutdown_memory_provider(session_messages)' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing upstream one-shot memory drain"
+  grep -q 'agent.close()' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing upstream one-shot agent close"
+  grep -q 'session_db.close()' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing upstream one-shot session DB close"
+  grep -q 'test_oneshot_run_agent_closes_agent_after_chat' "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
+    || fail "missing upstream one-shot agent-close regression test"
+  grep -q 'test_oneshot_run_agent_closes_session_db_when_agent_init_raises' "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
+    || fail "missing upstream one-shot init-failure session DB regression test"
+fi
 grep -q '"group_sessions_per_user"' "$REPO/hermes_cli/config.py" \
   || fail "group_sessions_per_user missing from known config roots"
 grep -q '"known_plugin_toolsets"' "$REPO/hermes_cli/config.py" \
@@ -502,6 +517,10 @@ PYBIN="${PYBIN:-$REPO/venv/bin/python}"
   "$REPO/tests/tools/test_write_approval.py" \
   "$REPO/tests/run_agent/test_background_review_summary.py" \
   "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
+  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_after_chat" \
+  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_when_chat_raises" \
+  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db" \
+  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db_when_agent_init_raises" \
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py"
 

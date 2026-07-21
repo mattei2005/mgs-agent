@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-vps-controlled-update-20260721",
-      "next_step": "Capturar superfície local completa, executar baseline pré-port e construir port sem restart em worktree isolada",
+      "next_step": "Congelar fingerprints, criar stash rollback validado e avançar checkout vivo ao alvo ed3c39108 sem restart",
       "objective": "Atualizar VPS e Hermes de forma controlada, preservando patches e invariantes MGS",
-      "source": "/root/mgs-agent/reports/hermes-updates/20260721-092208/final-report.md",
-      "state": "alvo upstream congelado em ed3c39108b1b5521414cc60a8854cebd7c5af9bf; gateways ativos; port isolado ainda não iniciado",
+      "source": "/root/mgs-agent/reports/hermes-updates/20260721-092208/port-ed3c39108/preservation-proof.json",
+      "state": "port ed3c39108 concluído: 39 caminhos retidos, 2 incorporados upstream; guard 804+6, regressão 358, builds web/tui e smokes 4/4 pass; stage vivo ainda não iniciado",
       "thread_id": "1529115989092864001",
-      "updated_at": "2026-07-21T13:40:25+00:00"
+      "updated_at": "2026-07-21T13:56:37+00:00"
     },
     {
       "agent": "zeus",
@@ -172,5 +172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T13:40:25+00:00"
+  "updated_at": "2026-07-21T13:56:37+00:00"
 }
