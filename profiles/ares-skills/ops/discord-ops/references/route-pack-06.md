@@ -14,6 +14,20 @@ Pitfall validado no Ares: alterar só `/root/.hermes/profiles/ares/.env` não ba
 
 Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt/config for simplificado demais, a thread continua sendo criada, mas só ficam o usuário autor + bot/agente.
 
+### Invariante: a mensagem humana deve ser o starter da auto-thread
+
+Em canais com `discord.auto_thread=true`, toda thread criada com sucesso deve nascer de `message.create_thread(...)` aplicado à mensagem humana original. Nunca usar como fallback uma mensagem-semente do bot (`Thread created by Hermes`) e abrir a thread a partir dela: esse caminho faz a thread aparecer como iniciada pelo agente e esconde do histórico interno o texto e os anexos enviados pelo usuário.
+
+Fluxo seguro quando `message.create_thread(...)` falhar:
+
+1. Reconciliar pelo snowflake da mensagem, pois a thread criada a partir de uma mensagem usa o mesmo ID do starter; consultar cache/guild/API antes de repetir.
+2. Se a thread já existir, reutilizá-la e continuar o pedido, evitando duplicata em caso de resposta perdida/race.
+3. Se não existir, repetir somente `message.create_thread(...)` uma vez após backoff curto.
+4. Se persistir a falha, retornar `None`, registrar o erro direto e deixar o caller avisar no canal pai; não criar seed do bot e não executar em uma thread sem a mensagem-fonte.
+5. Testar: retry direto, reconciliação de create com resposta perdida, fail-closed sem `channel.send`, dedup e auto-add.
+
+Regressão coberta no runtime MGS por `tests/gateway/test_discord_auto_thread_origin.py`.
+
 Regra operacional atual: Atena/content threads devem auto-add Raquel (`1496254952501280974`) + Rodolfo (`344196393512075265`). Zeus/admin threads atualmente só exigem Rodolfo. Não adicionar todo mundo do guild/canal; usar política explícita por agente/canal.
 
 Diagnóstico mínimo:
