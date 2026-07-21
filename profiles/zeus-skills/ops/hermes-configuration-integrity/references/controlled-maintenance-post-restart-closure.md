@@ -20,6 +20,15 @@ Do not infer missing values; recover them from audit, inventory, checkpoint, and
 3. Open only the named finalizer log. Require READY in the requested sequential order, systemd+Discord readiness per agent, and terminal `DONE`.
 4. If `DONE` is absent, inspect the named transient systemd unit. Wait only while it is still running. Do not schedule or perform a second restart merely because the validator arrived early.
 
+### Early user check-in while validation is still running
+
+If the user asks whether the update succeeded before the external validator finishes:
+
+1. Verify the finalizer and live gateways first.
+2. Inspect the existing validator job/session rather than launching duplicate guard, regression, or smoke suites concurrently.
+3. Report the narrow truth: activation/reconnection passed, but final closure is still running.
+4. Wait for the existing validator's terminal result, then issue one consolidated report. Do not call the maintenance complete from READY markers alone.
+
 ## 2. Revalidate gateways independently
 
 For every gateway read `ActiveState`, `SubState`, `MainPID`, `ExecMainStatus`, `NRestarts`, and start time. Require:
@@ -96,9 +105,13 @@ Only after all gates pass:
 5. Parse the returned message ID and perform Discord GET readback. Require destination channel, exact message ID, empty content, one embed, zero mentions, and required fields.
 6. Atomically store message ID/readback in inventory and append a dedicated report-readback audit event.
 7. Perform final readback of inventory, checkpoint, Git target/behind count, gateways, and VPS package/reboot state.
+8. Reconcile writes produced during closure. A validator, inventory discovery pass, or self-improvement hook can create new mirror/inventory diffs after an earlier auto-commit. Compare local HEAD with its remote, identify the exact residual paths, and classify them explicitly:
+   - operational drift or missing artifact: block closure;
+   - validated documentation/inventory housekeeping under an auto-versioning policy: report as pending automatic consolidation, not as a runtime failure.
+9. Confirm the one-shot validator has terminated or been removed from the active schedule before saying no background work remains. Never claim a fully clean repository from an earlier status snapshot if a closure fork could still write afterward.
 
 If any gate fails, persist the real failed stage, send one failure REPORT-INFRA, state containment, and do not perform destructive rollback automatically.
 
 ## Executive output
 
-Report only VPS state; Hermes version/target/behind count; patch count/reverse-check; guard/regression totals; config/smoke totals; gateway order and old→new PIDs; inventory/checkpoint closure; and final REPORT-INFRA message ID/readback. Do not include raw traces or credentials.
+Report only VPS state; Hermes version/target/behind count; patch count/reverse-check; guard/regression totals; config/smoke totals; gateway order and old→new PIDs; inventory/checkpoint closure; final REPORT-INFRA message ID/readback; and any bounded residuals. Separate frozen-out upstream commits, development-only dependency advisories, and pending auto-versioning housekeeping from runtime blockers. Do not include raw traces or credentials.
