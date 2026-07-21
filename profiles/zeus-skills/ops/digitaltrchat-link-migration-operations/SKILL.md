@@ -1,7 +1,9 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.0.0
+version: 1.1.1
+tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
+related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
   - DigitalTRChat link migration
   - trocar links Auto Drip
@@ -23,11 +25,13 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 
 ## Non-negotiable model
 
-A DTR login is only a credential/container. It is **not** reliable evidence of a Page's country, vertical, or language. Classify every Page independently from a live pre-write URL.
+A DTR login is only a credential/container. It is **not** reliable evidence of a Page's country, vertical, or language. Current URLs and template assignments are legacy state and may already be wrong.
 
-Primary evidence is `utm_term`; corroborate with `utm_content`. Mixed EN/ES and mixed countries inside one login are expected. If the signals conflict or are missing, stop instead of guessing from the login email, Page name, or hostname alone.
+For Openzed, classify every Page from Rodolfo's approved spreadsheet `openzed` (`180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik`): match the exact row by internal DTR Page ID, cross-check the Facebook Page ID, and select the canonical catalog from the explicit `vertical`, `pais`, and `lingua` fields. A current explicit correction from Rodolfo takes precedence.
 
-The new canonical Openzed URLs intentionally omit `utm_term`. Capture the classification and evidence before replacement because that signal will not exist afterward.
+Never use `utm_term` as classification authority. Rodolfo confirmed that it may contain human error inherited from copied/imported flows. Use `utm_term`, domains, login labels, Page names, and assigned template strings only to document legacy discrepancies. Use `utm_content` only to map each existing URL to its semantic position (M0, NM, or M1–M28), not to decide country/language.
+
+If the spreadsheet row is absent, duplicated, ID-mismatched, or internally ambiguous, stop and reconcile instead of guessing. The new canonical Openzed URLs intentionally omit `utm_term`, so the pre-write manifest must preserve the spreadsheet row identity and the legacy before-state separately.
 
 ## Migration surfaces
 
@@ -46,19 +50,22 @@ Map existing `utm_content` labels directly:
 
 Do not force an existing M0 flow button to NM because an older baseline expected an initial block to equal No Match. The canonical migration model has separate M0 and NM destinations.
 
-If a template field already contains `#SUBSCRIBER_ID_REPLACE#`, preserve it unless Rodolfo explicitly authorizes removal. Preserve literal `#PAGE_ID#` exactly. Never infer or invent tracking parameters absent from both the approved catalog and the existing field.
+For the Openzed canonical migration, do **not** preserve `#SUBSCRIBER_ID_REPLACE#` from legacy Get Started, No Match or other URL fields. Rodolfo confirmed that this suffix is unnecessary. Replace the full destination with the exact approved catalog URL for its semantic position, while preserving the literal `#PAGE_ID#` already present in the canonical catalog. Never add tracking parameters absent from the approved catalog.
 
 ## Eligibility discovery before any write
 
 1. Resolve the exact approved DTR login from 1Password without exposing credentials.
-2. Enumerate every imported Facebook account and Page in that login.
-3. Reconcile the global ignore list and any explicit Page exclusions.
-4. Read back Page name, Facebook Page ID, and DTR Page ID.
-5. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1`.
-6. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
-7. If no flow exists, mark the Page ineligible. A URL-replacement request does **not** authorize installing a saved template or creating a flow.
-8. Back up the graph, Get Started, No Match, and Persistent Menu values.
-9. Inventory existing labels and graph reachability before selecting a catalog.
+2. Read the approved Page-classification spreadsheet through the canonical MGS Service Account; never fall back to personal Google auth.
+3. Match the candidate by internal DTR Page ID and cross-check the Facebook Page ID. Derive the target catalog from `vertical + pais + lingua`.
+4. Apply the spreadsheet status gate: `Blocked` and `On-hold` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit. Do not infer status from the DTR UI alone when the sheet provides it.
+5. Enumerate every imported Facebook account and Page in that login. The Page list can be larger than the first Bot Manager card; inspect the selected segurador's complete Social Accounts/Page inventory and switch segurador when needed.
+6. Reconcile the global ignore list and any explicit Page exclusions.
+7. Read back Page name, Facebook Page ID, and DTR Page ID from the live DTR account.
+8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty.
+9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
+10. If no flow exists, mark the Page ineligible. A URL-replacement request does **not** authorize installing a saved template or creating a flow.
+11. Back up the graph, Get Started, No Match, and Persistent Menu values.
+12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
 If fewer Pages are eligible than requested, stop before production writes and obtain authorization for the reduced scope. Do not silently substitute Pages or expand into template installation.
 
@@ -71,7 +78,7 @@ The expected post-write URL count must equal the pre-write scoped URL count. Nod
 ## Safe execution sequence
 
 1. Run `python3 scripts/openzed_link_catalog.py --validate`.
-2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, classification evidence, existing labels, chosen catalog, and all four surface routes.
+2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, spreadsheet tab/row and `vertical + pais + lingua`, operational status, legacy URL discrepancies, existing semantic labels, chosen catalog, and all four surface routes.
 3. Create timestamped backups and hashes before opening a writable state.
 4. Re-read live values immediately before mutation; abort on drift.
 5. Execute one Page as canary.
@@ -94,7 +101,8 @@ Python and browser URL parsers treat the first `#` in `#PAGE_ID#` as a fragment 
 Report:
 
 - requested versus eligible Pages;
-- classification and evidence per Page;
+- spreadsheet tab/row, DTR/FB identity match, `vertical + pais + lingua`, and operational status per Page;
+- legacy `utm_term`/template/domain discrepancies, explicitly labeled non-authoritative;
 - pre/post URL counts by surface;
 - exact labels migrated;
 - graph node/reachability invariants;

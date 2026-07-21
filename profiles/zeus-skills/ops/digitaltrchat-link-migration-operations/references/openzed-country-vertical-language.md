@@ -2,15 +2,18 @@
 
 ## Page-level classification
 
-Classify from a live pre-write URL's `utm_term` and corroborate with `utm_content`:
+Canonical Openzed Page-classification source:
 
-- `openzed-us-cc-en-dp` → `US-CC-EN`
-- `openzed-card-us-cc-en-funil` → legacy `US-CC-EN`
-- `openzed-gb-cc-en-dp` → `GB-CC-EN`
-- `openzed-us-cc-es-dp` → `US-CC-ES`
-- `openzed-es-cc-es-dp` → `ES-CC-ES`
+- spreadsheet: `openzed`;
+- spreadsheet ID: `180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik`;
+- access: canonical MGS Service Account only;
+- identity match: internal DTR Page ID, cross-checked by Facebook Page ID;
+- destination fields: explicit `vertical`, `pais`, and `lingua`;
+- eligibility fields: tab (`broad` versus `blocked e on hold`) plus row status.
 
-If neither exact term nor an unambiguous equivalent exists, stop. Do not classify from the DTR login. The canonical replacement catalog omits `utm_term`, so save the classification evidence in the pre-write backup.
+A current explicit Rodolfo correction wins. Otherwise, use the exact spreadsheet row. Never classify from the DTR login, Page name, domain, current template assignment, or live/exported `utm_term`: Rodolfo confirmed that `utm_term` can contain human error. `utm_content` remains useful only for mapping a legacy URL to M0, NM, or the same-number M1–M28 position.
+
+When the spreadsheet classification conflicts with a current URL or template, preserve both in the manifest, label the live value as legacy discrepancy, and select the replacement catalog from `vertical + pais + lingua`. If the row is absent, duplicated, ID-mismatched, or internally ambiguous, stop for reconciliation.
 
 ## Canonical catalog approved by Rodolfo — 2026-07-21
 
@@ -53,12 +56,13 @@ Useful routes:
 
 Never click `Reset all action button settings to default`, `Install template`, `Delete`, `Remove persistent menu`, or `Publish persistent menu` as part of URL replacement.
 
-## Surface-specific preservation
+## Surface-specific URL contract
 
-- Flow graph URLs observed in the pilot did not contain `#SUBSCRIBER_ID_REPLACE#`; use the exact canonical catalog string when the pre-write value also lacks it.
-- Get Started and No Match fields observed in the pilot already ended with `&subscriber_id=#SUBSCRIBER_ID_REPLACE#`; preserve that suffix while replacing the canonical base URL.
-- Persistent Menu items observed in the pilot lacked subscriber tracking; use canonical M0 without inventing a suffix.
-- These observations are not universal defaults: preserve each live field's placeholder behavior and validate the submitted readback.
+- Use the exact canonical catalog URL for every migrated surface and semantic position.
+- Do not preserve or append legacy `#SUBSCRIBER_ID_REPLACE#` suffixes in Get Started, No Match or other URL fields; Rodolfo confirmed they are unnecessary for this Openzed migration.
+- Preserve the literal `#PAGE_ID#` exactly as present in the canonical catalog.
+- Flow Builder, Get Started, No Match and Persistent Menu therefore converge on the same exact catalog representation for M0/NM/M1–M28, according to each surface's semantic position.
+- Do not add any parameter absent from the approved catalog.
 
 ## `#PAGE_ID#` parser pitfall
 
@@ -73,14 +77,13 @@ Safe validation:
 
 ## Read-only pilot discovery — 2026-07-21
 
-The requested pilot was up to two Pages in each of four DTR logins. Prerequisite discovery found:
+The requested pilot was two Pages with complete M01–M28 flows in each of four DTR logins. Complete Social Accounts/Page enumeration plus live graph inspection found:
 
-- `Hortensia Martínez`, DTR `1084`: `US-CC-EN`; 147/147 nodes reachable; 29 HTTP destinations, M0 plus M1–M28.
-- `Marlowe Curtis`, DTR `3351`: legacy `US-CC-EN`; 82/82 nodes reachable; 16 HTTP destinations, M0 plus M1–M15.
-- `Luisa Gallardo`, DTR `22273`: `ES-CC-ES` from `utm_term`, despite residing in the US-CC-ES-named DTR login; 147/147 nodes reachable; 29 HTTP destinations.
-- `Rosalind Montague`, DTR `22097`: only Page in the GB login; no Flow Builder rows and no `Auto Principal Drip`.
-- `Lucia Sánchez`, DTR `22094`: only Page in the Spain login; no Flow Builder rows and no `Auto Principal Drip`.
+- GB login: `Emily Watson` DTR `22040` and `Fiona Caldwell` DTR `22026`, both complete M01–M28. Spreadsheet classification: `GB-CC-EN`.
+- Spain login: `Lucía Maldonado` DTR `22093` and `Paula Pacheco` DTR `22092`, both complete M01–M28. Spreadsheet classification is `ES-CC-ES` for Lucía and `US-CC-ES` for Paula; Paula's legacy current template/UTM disagreed with the sheet.
+- mixed US login: `Hortensia Martínez` DTR `1084` had a complete flow but the spreadsheet places it in `blocked e on hold` with status `On-hold`, so it is no-write. `Lily Thompson` DTR `13828` had a complete `US-CC-EN` flow and remained in `broad` as Restricted Broadcast. A replacement for Hortensia still had to be selected.
+- US-ES login: `Luisa Gallardo` DTR `22273` had a complete M01–M28 flow. Spreadsheet classification is `US-CC-ES`; the live legacy `utm_term=openzed-es-cc-es-dp` was a human-error discrepancy and must not drive the replacement catalog. The other eleven Pages under that segurador did not have a complete qualifying Auto Principal Drip at the time of inspection.
 
-The two ineligible Pages demonstrate that missing flow is a prerequisite failure, not permission to install one. The legacy Marlowe flow demonstrates that link replacement must not become a topology migration.
+The discovery also corrected an early false negative: Bot Manager flow tables populate asynchronously, so a 500 ms read can incorrectly report no flow. Wait for the DataTable to settle or the exact flow text before concluding absence. The first visible Page card is not a complete account inventory; enumerate all Pages under the selected segurador and switch segurador when needed.
 
-No production write occurred during this discovery. Rodolfo was asked to authorize the reduced three-Page scope before mutation.
+No production write occurred during this discovery.
