@@ -45,9 +45,9 @@ Execute one canary before the remaining batch. Continue only after a fresh-sessi
 4. In the `Install template` modal, type only the numeric internal DTR Page ID in the searchable Page field.
 5. Select the exact result rendered as `#<DTR_PAGE_ID> <Page name> [<segurador>]`.
 6. Re-verify the selected Page ID, Page name, and segurador against the manifest.
-7. Click `Install` once.
-8. Wait for the `Import status` success result. Capture the main success message and every listed related operation.
-9. Click `OK` to close the result before starting the next Page.
+7. Click `Install` once. This first click runs the import precheck and opens a SweetAlert `Warning!`; it is not yet the production write. Re-read the target identity, then click the warning's confirm button exactly once.
+8. Wait for the `Import status` result. Capture the main message and every listed related operation. Receipt rows are state-dependent: a valid import may list only `Enable get started`, `Persistent menu remove`, and `Enable mark seen`, while another also lists `Visual flow builder` and `Get started button`. Do not require a fixed receipt-row count.
+9. Click the final confirm/`OK` control and wait for the resulting page reload before starting the next Page.
 10. Re-establish the exact segurador before the next Page; do not assume the prior selection persists across Pages or logins.
 
 Never select a Page by display name alone. Numeric Page search narrows the selector, but the selected result must still match the exact identity tuple.
@@ -76,3 +76,25 @@ Open a fresh browser session and verify each installed Page:
 - exact DTR/FB/Page/segurador identity.
 
 The final report must partition the entire authorized list into disjoint outcomes and state actual writes separately from already-correct readbacks. Preserve per-Page success evidence and rollback artifacts; do not infer success from the modal alone.
+
+### DataTable and retry hazards
+
+An imported template can add enough manager rows that `Auto Principal Drip` moves beyond the first ten visible rows. Set the Flow Builder DataTable page length to 100 or paginate before declaring the flow absent. Because the table populates asynchronously, retry/reload the manager before classifying a zero-row result.
+
+Never retry installation merely because the automation missed the final receipt or timed out. Inspect the live Page first: the write may have completed after the local timeout, and a blind retry can duplicate flows/settings. A local result file is not production truth; live independent readback wins.
+
+`Import status` can report a component warning such as `Error validating application. Application has been deleted.` Do not auto-repair or reconnect the application under template-install scope. Perform the full independent readback first. If the final flow and auxiliary settings are complete and canonical, preserve the warning and record a verified recovered outcome; otherwise leave the Page failed and escalate.
+
+### Openzed 21/07 validated signature
+
+For the Openzed US-CC-EN 21/07 Saved Template only, the validated live signature is:
+
+- 147/147 reachable graph nodes;
+- 28 `Sequence Single` messages;
+- 29 external button URLs;
+- 15 Generic Template image-click URLs;
+- canonical Get Started/M0 and No Match destinations;
+- no active Persistent Menu Web URL;
+- exactly one qualifying `Auto Principal Drip`.
+
+These counts are template-specific, not universal DTR rules. Mark the classification Sheet status as `feito` only after this independent readback passes, then read every written cell back through the canonical MGS Service Account. Explicitly ignored Pages must remain unchanged.
