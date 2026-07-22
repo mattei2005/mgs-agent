@@ -133,12 +133,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-link-migration-us-cc-es-20260722",
-      "next_step": "Aplicar manifesto somente em pg_22273; 75 incompletas 15/28, 13 sem flow e pg_4622 desconectada permanecem sem write",
+      "next_step": "Nenhum: pg_22273 concluída; 75 Pages 15/28, 13 sem Auto Principal Drip e pg_4622 desconectada foram puladas e reportadas",
       "objective": "Migrar URLs US-CC-ES em 90 Pages autorizadas, somente quando Auto Principal Drip tiver 28/28",
       "source": "discord:1529141503929094284#1529366183957233765",
-      "state": "qualified_prewrite",
+      "state": "completed",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-22T06:23:47+00:00"
+      "updated_at": "2026-07-22T06:33:53+00:00"
     },
     {
       "agent": "zeus",
@@ -262,5 +262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-22T06:23:47+00:00"
+  "updated_at": "2026-07-22T06:33:53+00:00"
 }
