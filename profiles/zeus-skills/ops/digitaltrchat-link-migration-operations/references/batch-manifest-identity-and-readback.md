@@ -29,6 +29,10 @@ Use this reference for multi-Page URL migrations after the Page list and canonic
 
 Enumerate every `a.account_switch[data-id]`, switch with `/social_accounts/fb_rx_account_switch`, reload Bot Manager, and map each Page to its imported-account ID. A Page absent from that inventory may be disconnected rather than nonexistent. Do not connect it or install a template under URL-migration authorization.
 
+For large batches, preserve the exact authorized Page list as an ordered, deduplicated target artifact before discovery. Reuse one authenticated browser context per DTR login/imported account for **read-only** account mapping and qualification, but preserve Page-level manifests and independent post-write contexts. Read-only session reuse reduces login/UI overhead; it must not weaken Page identity checks, pre-write drift checks, rollback isolation, or readback independence.
+
+Before any production write, build a disjoint disposition partition whose union equals the exact requested set. Typical buckets are `qualified`, `incomplete N/28`, `flow absent`, `ignore-list`, `blocked/on-hold`, `disconnected/not listed live`, and `identity conflict`. Fail closed if a Page appears in more than one bucket or the bucket totals do not exhaust the requested list.
+
 ## 4. Qualify the flow from structure
 
 For a full-flow-qualified batch, require:
@@ -83,4 +87,13 @@ For URL parsing, temporarily replace the complete `#PAGE_ID#` token with a senti
 
 ## 8. Report
 
-Report requested, eligible, applied, skipped, exact skip reasons, URL counts by surface, structural invariants, readback result, classification/identity reconciliations, backup path, and rollback count. Distinguish user-reported manual work from changes Zeus actually verified or executed.
+Report requested, eligible, actually changed, already canonical, skipped, exact skip reasons, URL counts by surface, structural invariants, readback result, classification/identity reconciliations, backup path, and rollback count. Keep these counts distinct:
+
+- **eligible/final-valid** — all Pages that passed qualification and final readback;
+- **actually changed** — Pages and URL occurrences whose before/after values differ;
+- **already canonical** — qualified Pages that required zero writes but were independently validated;
+- **skipped** — a disjoint, exhaustive breakdown whose total reconciles to the requested list.
+
+For a large list, provide the exact changed Page IDs and exact IDs for exceptional skip buckets such as absent, ignored, disconnected, or identity conflict. A large homogeneous remainder such as `incomplete 15/28` may be summarized by count when the original requested list plus the explicit changed/exception lists makes the remainder unambiguous; preserve the full machine-readable disposition artifact in the backup.
+
+Distinguish user-reported manual work from changes Zeus actually verified or executed. Never inflate a zero-diff validation into a write, and never report the final canonical URL count as though every occurrence changed in the current run.

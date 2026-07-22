@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.2.5
+version: 1.2.6
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -110,7 +110,8 @@ Python and browser URL parsers treat the first `#` in `#PAGE_ID#` as a fragment 
 
 Report:
 
-- requested versus eligible Pages;
+- requested versus eligible Pages, with a disjoint disposition partition that exhausts the exact authorized list;
+- actually changed Pages/URL occurrences versus qualified Pages that were already canonical and only validated;
 - spreadsheet tab/row, DTR/FB identity match, `vertical + pais + lingua`, and operational status per Page;
 - legacy `utm_term`/template/domain discrepancies, explicitly labeled non-authoritative;
 - pre/post URL counts by surface;
