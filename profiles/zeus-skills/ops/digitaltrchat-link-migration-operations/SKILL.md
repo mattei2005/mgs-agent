@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
-description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.2.6
+description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
+version: 1.3.0
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -10,6 +10,8 @@ triggers:
   - Openzed country vertical language
   - Get Started No Match Persistent Menu URLs
   - mass URL replacement in ChatPion
+  - install approved Saved Template after incomplete Drip audit
+  - install template by Page ID and segurador
 ---
 
 # DigitalTRChat Link Migration Operations
