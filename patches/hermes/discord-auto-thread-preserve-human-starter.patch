@@ -216,7 +216,7 @@
 +    message.channel.send.assert_not_awaited()
 --- a/tests/gateway/test_discord_slash_commands.py
 +++ b/tests/gateway/test_discord_slash_commands.py
-@@ -665,27 +665,21 @@
+@@ -665,27 +665,22 @@
  
  
  @pytest.mark.asyncio
@@ -232,6 +232,7 @@
 +        channel=SimpleNamespace(id=123, send=AsyncMock()),
          author=SimpleNamespace(display_name="Jezza"),
      )
++    adapter._client.fetch_channel = AsyncMock(side_effect=LookupError("not found"))
 +    monkeypatch.setattr("plugins.platforms.discord.adapter.asyncio.sleep", AsyncMock())
  
      result = await adapter._auto_create_thread(message)
