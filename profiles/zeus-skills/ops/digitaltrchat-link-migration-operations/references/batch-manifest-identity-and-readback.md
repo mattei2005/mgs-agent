@@ -81,7 +81,7 @@ Open a fresh browser context and collect new after-state files. Verification mus
 - host/path, medium, content labels, and placeholders are correct;
 - total verified URLs equal the manifest count.
 
-When comparing HTML control inventories across independent browser sessions, normalize away runtime-only UI artifacts: generated `ajax-upload-id-*` fields, anonymous modal/search controls, selector option-text ordering, visibility, and hydrated display text. Compare stable business fields (`tag`, stable `id`/`name`, `type`, `value`, `checked`, `disabled`) and the authorized URL fields separately. Do not treat browser-generated IDs or hydration order as production drift.
+When comparing HTML control inventories across independent browser sessions, normalize away runtime-only UI artifacts: generated `ajax-upload-id-*` fields, anonymous modal/search controls, selector option-text ordering, visibility, and hydrated display text. Compare stable business fields (`tag`, stable `id`/`name`, `type`, `value`, `checked`, `disabled`) and the authorized URL fields separately. In particular, classic action editors can hydrate hidden inactive controls whose `name` contains `post_id_` with the first dynamically ordered option; after proving the active button type is still `web_url`, exclude those inactive selector values from equality checks. Do not generalize that exclusion to visible/active selectors or other business fields. Do not treat browser-generated IDs or hydration order as production drift.
 
 For URL parsing, temporarily replace the complete `#PAGE_ID#` token with a sentinel before parsing because `#` starts a fragment. Verify the original production string still contains the literal token.
 

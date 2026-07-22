@@ -34,7 +34,11 @@ For label `X`:
 
 Labels: `m0-1`, `nm`, then `m1-1` through `m28-1`.
 
-Use `scripts/openzed_link_catalog.py` to generate and validate exact destinations. Do not manually interpolate country/language strings or mutate query parameters ad hoc in production. The default is `utm_medium=g003-d`; use `--utm-medium g001-d` only for a Page set explicitly mapped by Rodolfo to gestor `g001-d`, and persist that per-Page override in the manifest.
+Use `scripts/openzed_link_catalog.py` to generate and validate exact destinations. Do not manually interpolate country/language strings or mutate query parameters ad hoc in production. The CLI selector is `--vertical` (not `--classification`), for example:
+
+`python3 scripts/openzed_link_catalog.py --vertical US-CC-ES --utm-medium g003-d --format json`
+
+JSON output remains nested under the vertical key (`{"US-CC-ES": {...30 URLs...}}`); select that exact nested object when building a flat per-Page manifest and assert it contains exactly `m0-1`, `nm`, and `m1-1` through `m28-1`. The default is `utm_medium=g003-d`; use `--utm-medium g001-d` only for a Page set explicitly mapped by Rodolfo to gestor `g001-d`, and persist that per-Page override in the manifest.
 
 ### Explicit Ducapes gestor override — 2026-07-21
 

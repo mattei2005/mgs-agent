@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.1
+version: 1.3.2
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -65,7 +65,7 @@ For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLA
 5. Enumerate every imported Facebook account and Page in that login. The Page list can be larger than the first Bot Manager card; inspect the selected segurador's complete Social Accounts/Page inventory and switch segurador when needed.
 6. Reconcile the global ignore list and any explicit Page exclusions.
 7. Read back Page name, Facebook Page ID, and DTR Page ID from the live DTR account.
-8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty.
+8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
 10. If no flow exists, mark the Page ineligible. A URL-replacement request does **not** authorize installing a saved template or creating a flow.
 11. Back up the graph, Get Started, No Match, and Persistent Menu values.
@@ -103,7 +103,8 @@ The expected post-write URL count must equal the exact pre-write scoped URL coun
 7. After each save, reload that surface and read back the exact destination.
 8. Open a fresh independent browser session and validate the complete Page.
 9. Compare against backup: only scoped URL strings may differ.
-10. Continue to remaining Pages only after the canary passes. On mismatch, stop and restore from backup rather than stacking fixes.
+10. If a governed tracking sheet has a completion/status field, write `feito` only for Pages whose independent readback passed. Read the exact target cell immediately before the write, update only that Page's range, and read back the entire authorized target set so skipped Pages are proven unchanged.
+11. Continue to remaining Pages only after the canary passes. On mismatch, stop and restore from backup rather than stacking fixes.
 
 ## Parser hazard: `#PAGE_ID#`
 
@@ -121,6 +122,7 @@ Report:
 - exact labels migrated;
 - graph node/reachability invariants;
 - independent readback method;
+- governed-sheet completion cells actually changed, plus readback proving skipped target rows remained unchanged;
 - Pages skipped and why;
 - whether any legacy flow remained M0–M15;
 - backup/rollback availability;

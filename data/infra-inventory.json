@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-22T01:50:12-04:00",
+    "updated_at": "2026-07-22T02:38:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6520,15 +6520,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 20228,
-      "md5": "957c4be19132bac37040cb8073dd568f",
-      "modified_at": "2026-07-21T23:26:15-04:00"
+      "size_bytes": 20662,
+      "md5": "95306d3b4c29821c77cafd6936597591",
+      "modified_at": "2026-07-22T02:33:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 9975,
-      "md5": "9d366bdf3393b528db0f28668b79711f",
-      "modified_at": "2026-07-22T01:47:01-04:00"
+      "md5": "3feaa3d15bfc26b46aaaa0db5056077a",
+      "modified_at": "2026-07-22T02:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6539,8 +6539,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a45d0e05c036d2b110c8efd80589da21",
-      "modified_at": "2026-07-22T01:41:43-04:00"
+      "md5": "d2ff2f887e9857224902cc0fc4f62c18",
+      "modified_at": "2026-07-22T02:26:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6563,8 +6563,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "cc26c7832e328c3c46fa9c0e129121d5",
-      "modified_at": "2026-07-22T01:45:02-04:00"
+      "md5": "56432a670f4e72e75a21b8a34684fb0f",
+      "modified_at": "2026-07-22T02:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6575,8 +6575,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "dc4c07091cb4b20ff57dfd28a2a96dfb",
-      "modified_at": "2026-07-22T01:49:02-04:00"
+      "md5": "4258a00186d559a81589f0ae74d24dd2",
+      "modified_at": "2026-07-22T02:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -6605,8 +6605,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "eb8568411a0f883e1d2110adcf15d85f",
-      "modified_at": "2026-07-22T01:44:01-04:00"
+      "md5": "357820afa6e4298c97795f387ba5ae2f",
+      "modified_at": "2026-07-22T02:34:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6617,20 +6617,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 30574,
-      "md5": "2da76852741a2773b44e9393cfddb01d",
-      "modified_at": "2026-07-22T01:50:01-04:00"
+      "md5": "40153de1cb1a3d042cb326ac794996cd",
+      "modified_at": "2026-07-22T02:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 6831,
-      "md5": "06b4562c8ebb1e218f4ea7c36641c682",
-      "modified_at": "2026-07-22T01:50:02-04:00"
+      "md5": "c050c45a9d38d33a197d9c1498de8b8f",
+      "modified_at": "2026-07-22T02:38:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "079b36e918b131226556ec7f616bf8b9",
-      "modified_at": "2026-07-22T01:50:01-04:00"
+      "md5": "6257f0f969ce1bfa712a08df6018640e",
+      "modified_at": "2026-07-22T02:38:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6659,8 +6659,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 304846,
-      "md5": "9c2dce8389ba74381234cd24d900ee3a",
-      "modified_at": "2026-07-22T01:50:10-04:00"
+      "md5": "969ca218820f623c46cba43b7836e3b2",
+      "modified_at": "2026-07-22T02:38:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6713,8 +6713,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7167,
-      "md5": "d61a950ae1e47483ed60907d191a0041",
-      "modified_at": "2026-07-22T01:32:06-04:00"
+      "md5": "ad635ed7589da90c63cdec8a35328d50",
+      "modified_at": "2026-07-22T02:25:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -6738,7 +6738,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-22T01:37:03-04:00"
+      "modified_at": "2026-07-22T02:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6761,8 +6761,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 208966,
-      "md5": "3516750d011c47070d3574d47deebc51",
-      "modified_at": "2026-07-22T01:44:19-04:00"
+      "md5": "6733b1a9ccf837c3c66be74f31600a30",
+      "modified_at": "2026-07-22T02:29:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6804,7 +6804,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "0a761f546059f98ad55e1ee0beb3fa43",
-      "modified_at": "2026-07-22T01:46:01-04:00"
+      "modified_at": "2026-07-22T02:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6838,9 +6838,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2273,
-      "md5": "716b50ff95056b04f465d2242ab0add7",
-      "modified_at": "2026-07-22T01:50:07-04:00"
+      "size_bytes": 2112,
+      "md5": "2f9f89b51fad4b3ce6c024ee5afdbb77",
+      "modified_at": "2026-07-22T02:35:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
