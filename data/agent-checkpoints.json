@@ -132,6 +132,16 @@
     },
     {
       "agent": "zeus",
+      "id": "openzed-dtr-link-migration-us-cc-es-20260722",
+      "next_step": "Reconciliar planilha, ignore list, identidade DTR e seguradores; qualificar fluxo completo antes de qualquer write",
+      "objective": "Migrar URLs US-CC-ES em 90 Pages autorizadas, somente quando Auto Principal Drip tiver 28/28",
+      "source": "discord:1529141503929094284#1529366183957233765",
+      "state": "discovery",
+      "thread_id": "1529141503929094284",
+      "updated_at": "2026-07-22T06:03:02+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "openzed-dtr-link-pilot-20260721",
       "next_step": "Canário pg_19236 aprovado 100% por Rodolfo; aguardar autorização explícita para qualquer página adicional",
       "objective": "Atualizar e validar links canônicos Openzed em páginas DigitalTRChat classificadas pela planilha",
@@ -153,12 +163,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-template-install-us-20260721",
-      "next_step": "Reconciliar pg_5223 reconectada, criar backups/readbacks e instalar o template nas 179 Pages.",
-      "objective": "Instalar o Saved Template Openzed US EN/EN de 21/07 com 28 mensagens nas 179 Pages autorizadas, excluindo pg_3082 já instalada e pg_5518 ignorada por Rodolfo, respeitando login e segurador por Page.",
-      "source": "discord:1529328537570382047",
-      "state": "in_progress",
+      "next_step": "Nenhum; lote encerrado com 179 instalações Zeus, 1 instalação manual validada e pg_5518 ignorada",
+      "objective": "Instalar e validar Saved Template Openzed 21/07 no escopo autorizado",
+      "source": "discord:1529141503929094284#1529328537570382047",
+      "state": "completed",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-22T03:26:15+00:00"
+      "updated_at": "2026-07-22T06:01:20+00:00"
     },
     {
       "agent": "zeus",
@@ -252,5 +262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-22T03:26:15+00:00"
+  "updated_at": "2026-07-22T06:03:02+00:00"
 }
