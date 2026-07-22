@@ -274,6 +274,23 @@
       "updated_at": "2026-07-21T19:47:33+00:00"
     },
     {
+      "canonical_key": "dtr.openzed.legacy-m0-structural-inference",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/batch-manifest-identity-and-readback.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "dtr-link-migration",
+      "effective_at": "2026-07-22T02:55:36+00:00",
+      "id": "PROC-DTR-OPENZED-LEGACY-M0-STRUCTURAL-INFERENCE",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Inferência estrutural de M0 quando URL legada aponta para NM",
+      "updated_at": "2026-07-22T02:55:36+00:00"
+    },
+    {
       "canonical_key": "dtr.openzed.page-classification-source",
       "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-drip-flow-builder/references/saved-template-lifecycle-and-portfolio-audit.md",
       "consumers": [
@@ -400,5 +417,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-21T20:54:27+00:00"
+  "updated_at": "2026-07-22T02:55:36+00:00"
 }

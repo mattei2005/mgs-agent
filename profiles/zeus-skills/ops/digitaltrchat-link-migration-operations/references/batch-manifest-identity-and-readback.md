@@ -38,6 +38,8 @@ For a full-flow-qualified batch, require:
 - semantic URL coverage M0 through M28;
 - a fully reachable graph.
 
+Treat current tracking labels as evidence, not infallible structure. A copied legacy flow can have a structurally valid initial M0 CTA whose URL is incorrectly labeled as NM. If M1–M28 are complete and exactly one initial HTTP CTA remains, derive M0 from its graph position between `Start Bot Flow` and the first timed sequence, record that inference in the manifest, and replace it with canonical M0. Never infer M0 from a hardcoded node ID across templates and never use the bad NM URL to reclassify the Page.
+
 Do not hardcode Generic Template image-click counts. Valid copied templates have differed by locale/account (for example, 14 versus 15 `imageClickDestinationLink` values). Inventory every existing HTTP button and image-click URL, map each by `utm_content`, and require post-write URL count to equal the exact pre-write scoped count. Never create a missing image-click destination.
 
 ## 5. Manifest and backup contract
@@ -74,6 +76,8 @@ Open a fresh browser context and collect new after-state files. Verification mus
 - Persistent Menu equals M0 exactly without the suffix;
 - host/path, medium, content labels, and placeholders are correct;
 - total verified URLs equal the manifest count.
+
+When comparing HTML control inventories across independent browser sessions, normalize away runtime-only UI artifacts: generated `ajax-upload-id-*` fields, anonymous modal/search controls, selector option-text ordering, visibility, and hydrated display text. Compare stable business fields (`tag`, stable `id`/`name`, `type`, `value`, `checked`, `disabled`) and the authorized URL fields separately. Do not treat browser-generated IDs or hydration order as production drift.
 
 For URL parsing, temporarily replace the complete `#PAGE_ID#` token with a sentinel before parsing because `#` starts a fragment. Verify the original production string still contains the literal token.
 
