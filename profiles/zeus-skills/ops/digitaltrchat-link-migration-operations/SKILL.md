@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.2
+version: 1.3.3
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -24,7 +24,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 
 - `references/openzed-country-vertical-language.md` — canonical Openzed classification, catalog patterns, DTR route details, and the 2026-07-21 pilot discovery.
 - `references/batch-manifest-identity-and-readback.md` — reusable batch manifest, Unicode/long-ID identity reconciliation, variable image-click coverage, rollback, and independent readback procedure.
-- `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes per-login inventory, segurador selection, side effects, canary, and readback.
+- `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, exact ignore-list identity matching, disconnected-Page handling, side effects, canary, and readback.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
 ## Non-negotiable model
@@ -63,7 +63,7 @@ For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLA
 3. Match the candidate by internal DTR Page ID and cross-check the exact Facebook Page ID. Derive the target catalog from `vertical + pais + lingua`. If a long Facebook Page ID is rendered in scientific notation, preserve the raw cell and reconcile the exact value from the live DTR Page; never reconstruct or round it. Normalize Page names to Unicode NFC only for comparison so composed/decomposed accents do not create a false mismatch.
 4. Apply the spreadsheet status gate: `Blocked` and `On-hold` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit. Do not infer status from the DTR UI alone when the sheet provides it.
 5. Enumerate every imported Facebook account and Page in that login. The Page list can be larger than the first Bot Manager card; inspect the selected segurador's complete Social Accounts/Page inventory and switch segurador when needed.
-6. Reconcile the global ignore list and any explicit Page exclusions.
+6. Reconcile the global ignore list and any explicit Page exclusions. Match an ignore record by exact Facebook Page ID, or by the compound fallback `bot_user + page_id_pg`; never treat `bot_user` alone as a Page-level match.
 7. Read back Page name, Facebook Page ID, and DTR Page ID from the live DTR account.
 8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.

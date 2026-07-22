@@ -15,12 +15,13 @@ Saved Template inventory is scoped to the DigitalTRChat login. A template visibl
 
 Before the first write:
 
-1. Re-read the classification spreadsheet and partition the exact authorized Page IDs by DTR login.
-2. Within each login, map every Page to its imported Facebook account/segurador via `a.account_switch[data-id]` and cross-check DTR Page ID, Facebook Page ID, and Page name.
-3. Open `https://digitaltrchat.com/messenger_bot/saved_templates` under every login in the partition.
-4. Identify the approved template by stable title/description/generation marker supplied by Rodolfo, not merely by card position or “newest” timestamp. A dated label such as `... DRIP - 28 MSGS - IMG - 21/07` is a useful exact discriminator when Rodolfo names it.
-5. Freeze the template card identity and install-control attributes in the batch manifest. If there are zero or multiple matches, stop that login.
-6. Apply the global Page ignore list and status gate before installation.
+1. Re-read the classification spreadsheet and partition the exact authorized Page IDs by the spreadsheet's **actual DTR login field**. Do not derive the login from country/vertical/language or its display label: a US-CC-ES Page can legitimately live in a login whose historical name says US-CC-EN.
+2. Within each login, map every Page to its imported Facebook account/segurador via `a.account_switch[data-id]` and cross-check DTR Page ID, Facebook Page ID, and Page name. Keep `disconnected/not listed live` separate from `template absent`: a disconnected Page cannot be selected for installation, and template-install authorization does not authorize connecting it.
+3. Open `https://digitaltrchat.com/messenger_bot/saved_templates` under **every unique live login** in the authorized partition.
+4. Enumerate the complete Saved Template inventory before searching. Never cap a diagnostic probe to the first N cards or search only the initially visible viewport: an early slice can hide the approved card and produce a false absence. Preserve total card count and the sanitized candidate titles per login.
+5. Identify the approved template by the exact stable title/description/generation marker supplied by Rodolfo, not merely by card position, brand word, language fragment, or “newest” timestamp. A dated label such as `... DRIP - 28 MSGS - IMG - 21/07` is a useful exact discriminator when Rodolfo names it. Explicit `(NÃO USAR)`/`(NAO USAR)` cards are never acceptable substitutes.
+6. Freeze the template card identity, match count, and install-control attributes in the batch manifest. Require exactly one approved match in each login. If the template is available in some logins but absent in another, compute the exact connected/disconnected Page counts by login and stop before all writes unless Rodolfo already authorized a reduced partition.
+7. Apply the global Page ignore list and status gate before installation. Match ignore entries primarily by exact Facebook Page ID; the fallback is the compound identity `bot_user + page_id_pg`. Never match `bot_user` alone, because one login can contain many unrelated Pages and would create portfolio-wide false positives.
 
 ## Backup and canary
 
