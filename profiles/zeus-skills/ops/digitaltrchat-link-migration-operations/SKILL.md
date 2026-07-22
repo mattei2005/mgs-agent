@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, especially when a login contains mixed countries or languages.
-version: 1.2.3
+version: 1.2.4
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -21,6 +21,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 ## Required supporting material
 
 - `references/openzed-country-vertical-language.md` — canonical Openzed classification, catalog patterns, DTR route details, and the 2026-07-21 pilot discovery.
+- `references/batch-manifest-identity-and-readback.md` — reusable batch manifest, Unicode/long-ID identity reconciliation, variable image-click coverage, rollback, and independent readback procedure.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
 ## Non-negotiable model
@@ -56,7 +57,7 @@ For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLA
 
 1. Resolve the exact approved DTR login from 1Password without exposing credentials.
 2. Read the approved Page-classification spreadsheet through the canonical MGS Service Account; never fall back to personal Google auth.
-3. Match the candidate by internal DTR Page ID and cross-check the Facebook Page ID. Derive the target catalog from `vertical + pais + lingua`.
+3. Match the candidate by internal DTR Page ID and cross-check the exact Facebook Page ID. Derive the target catalog from `vertical + pais + lingua`. If a long Facebook Page ID is rendered in scientific notation, preserve the raw cell and reconcile the exact value from the live DTR Page; never reconstruct or round it. Normalize Page names to Unicode NFC only for comparison so composed/decomposed accents do not create a false mismatch.
 4. Apply the spreadsheet status gate: `Blocked` and `On-hold` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit. Do not infer status from the DTR UI alone when the sheet provides it.
 5. Enumerate every imported Facebook account and Page in that login. The Page list can be larger than the first Bot Manager card; inspect the selected segurador's complete Social Accounts/Page inventory and switch segurador when needed.
 6. Reconcile the global ignore list and any explicit Page exclusions.
@@ -82,7 +83,7 @@ If fewer Pages are eligible than requested, stop before production writes and ob
 
 A link migration changes destinations only. If a legacy flow contains M0–M15, update only M0–M15. Never add M16–M28, retime messages, rename postbacks, or alter topology under link-replacement authorization.
 
-The expected post-write URL count must equal the pre-write scoped URL count. Node count, connections, reachability, schedule, messages, button labels/types, and images must remain unchanged.
+The expected post-write URL count must equal the exact pre-write scoped URL count. Do not hardcode the number of `imageClickDestinationLink` fields: copied templates have valid locale/account differences, so inventory and map every existing HTTP image-click destination by semantic label and never create a missing one. Node count, connections, reachability, schedule, messages, button labels/types, and images must remain unchanged.
 
 ## Safe execution sequence
 
