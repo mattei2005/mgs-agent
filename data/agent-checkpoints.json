@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "openzed-dtr-link-es-cc-es-20260721",
-      "next_step": "14 Pages aplicadas e validadas; pg_22094 pulada por fluxo ausente. Rodolfo pode reconciliar broad linhas 29/42 e J28; nenhuma ação de produção pendente do Zeus.",
+      "next_step": "pg_22094 é a única Page do lote sem migração, pois não tinha Auto Principal Drip; planilha agora confirma ES-CC-ES. Qualquer aplicação nela exige novo pedido após o fluxo existir.",
       "objective": "Migrar links canônicos Openzed ES-CC-ES nas 15 Pages autorizadas com gate de Auto Principal Drip completo M0-M28.",
-      "source": "discord:1529267651820519585",
+      "source": "discord:1529297301615677500",
       "state": "completed",
       "thread_id": "1529141503929094284",
-      "updated_at": "2026-07-22T00:18:23+00:00"
+      "updated_at": "2026-07-22T01:23:13+00:00"
     },
     {
       "agent": "zeus",
@@ -139,6 +139,16 @@
       "state": "completed",
       "thread_id": "1529141503929094284",
       "updated_at": "2026-07-21T19:53:42+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "openzed-dtr-link-us-cc-en-20260721",
+      "next_step": "Reconciliar planilha, logins, imported accounts, status, ignore list e elegibilidade dos fluxos antes de qualquer write.",
+      "objective": "Migrar links canônicos Openzed US-CC-EN no lote de 211 Pages e retomar pg_22094 ES-CC-ES após instalação do template, aplicando somente em Auto Principal Drip completo M0-M28.",
+      "source": "discord:1529298037556379728",
+      "state": "in_progress",
+      "thread_id": "1529141503929094284",
+      "updated_at": "2026-07-22T01:27:08+00:00"
     },
     {
       "agent": "zeus",
@@ -232,5 +242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-22T00:18:23+00:00"
+  "updated_at": "2026-07-22T01:27:08+00:00"
 }
