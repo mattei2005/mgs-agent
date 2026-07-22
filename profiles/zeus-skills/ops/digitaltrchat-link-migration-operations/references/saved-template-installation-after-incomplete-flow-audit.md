@@ -8,6 +8,8 @@ Use this reference when a URL-migration audit finds Pages with an absent or inco
 - Require an explicit Page list or an explicit rule that identifies the installation scope.
 - Preserve user-declared exceptions such as “this Page is already installed”; skip its write and verify it independently.
 - If the approved template is unavailable for part of the scope, do not silently reduce the batch or copy/upload/export the template into another login. Report the exact blocked Pages and obtain authorization for the reduced scope or for cross-login template distribution.
+- When multiple blockers were reported, a short reply such as “pronto, já coloquei” resolves only the blocker the operator actually addressed. Re-run every live gate: template availability, Page connection/listing, identity, status, and ignore list. Never infer that a disconnected Page was connected merely because the template now exists.
+- After a blocker was disclosed and Rodolfo resumes the authorized batch, keep the original Page list intact. Execute every still-authorized connected Page, preserve each disconnected Page as an explicit no-write outcome, and report the result as partial rather than silently pretending the disconnected Page left scope.
 
 ## Per-login preflight
 
@@ -37,6 +39,10 @@ Template installation can affect more than the flow. Before installing on each P
 The success dialog may report related operations such as enabling Get Started, removing Persistent Menu, or enabling mark-seen behavior. Treat these as real side effects that must be included in before/after verification, not as decorative UI messages.
 
 Execute one canary before the remaining batch. Continue only after a fresh-session readback proves the intended 28-message flow and approved link catalog.
+
+For large portfolios, make the backup/readback runners resumable per Page: write `flow-before`, `action-before`, and `persistent-before` only after each successful read and skip already complete artifacts on restart. A foreground timeout is not proof that the audit failed; inspect the per-Page artifacts and resume only the missing Pages. Never reuse a stale backup merely because it is convenient.
+
+DigitalTRChat's imported-account selection is login-scoped and can race across browser sessions. Serialize every operation that shares a DTR login, including different seguradores under that login. Independent logins may be processed/read back in parallel after the canary, but each login must remain internally sequential.
 
 ## Rodolfo-taught UI sequence
 
@@ -86,16 +92,14 @@ Never retry installation merely because the automation missed the final receipt 
 
 `Import status` can report a component warning such as `Error validating application. Application has been deleted.` Do not auto-repair or reconnect the application under template-install scope. Perform the full independent readback first. If the final flow and auxiliary settings are complete and canonical, preserve the warning and record a verified recovered outcome; otherwise leave the Page failed and escalate.
 
-### Openzed 21/07 validated signature
+### Openzed 21/07 validated signatures
 
-For the Openzed US-CC-EN 21/07 Saved Template only, the validated live signature is:
+For the Openzed 21/07 Saved Templates, the validated live signatures are template-specific:
 
-- 147/147 reachable graph nodes;
-- 28 `Sequence Single` messages;
-- 29 external button URLs;
-- 15 Generic Template image-click URLs;
-- canonical Get Started/M0 and No Match destinations;
-- no active Persistent Menu Web URL;
-- exactly one qualifying `Auto Principal Drip`.
+- **US-CC-EN:** 147/147 reachable graph nodes, 28 `Sequence Single` messages, 29 external button URLs, and 15 Generic Template image-click URLs.
+- **US-CC-ES:** 147/147 reachable graph nodes, 28 `Sequence Single` messages, 29 external button URLs, and 14 Generic Template image-click URLs.
+- Both require canonical Get Started/M0 and No Match destinations, no active Persistent Menu Web URL, and exactly one qualifying `Auto Principal Drip`.
 
-These counts are template-specific, not universal DTR rules. Mark the classification Sheet status as `feito` only after this independent readback passes, then read every written cell back through the canonical MGS Service Account. Explicitly ignored Pages must remain unchanged.
+Do not generalize either image-click count to another template generation or locale; inventory the approved template and freeze its canary signature before the batch.
+
+For the Openzed classification Sheet, column **I** is the completion/status field. Write `feito` only after independent Page readback passes, then batch-read the full authorized Page set through the canonical MGS Service Account. Installed/validated rows must read `feito`; disconnected, ignored, skipped, or failed rows must remain unchanged (normally blank). A successful DTR modal without Sheet readback is not closure.
