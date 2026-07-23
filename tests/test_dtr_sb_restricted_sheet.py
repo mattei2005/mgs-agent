@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 import importlib.util
+import io
+import json
 import unittest
+import urllib.error
 from datetime import datetime
+from email.message import Message
 from pathlib import Path
+from unittest import mock
 from zoneinfo import ZoneInfo
 
 SCRIPT = Path('/root/mgs-agent/scripts/dtr-sb-page-health-sync.py')
@@ -20,6 +25,37 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
 
     def tearDown(self):
         setattr(sync, 'load_global_ignore_keys', self.original_ignore)
+
+    def test_discord_delivery_retries_rate_limit_using_retry_after(self):
+        class Response:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return json.dumps({'id': 'message-1'}).encode()
+
+        headers = Message()
+        headers['Retry-After'] = '0.01'
+        rate_limited = urllib.error.HTTPError(
+            'https://discord.invalid',
+            429,
+            'Too Many Requests',
+            headers,
+            io.BytesIO(json.dumps({'retry_after': 0.01}).encode()),
+        )
+        with mock.patch.object(sync, 'discord_token', return_value='test-token'), \
+             mock.patch.object(sync.urllib.request, 'urlopen', side_effect=[rate_limited, Response()]) as urlopen, \
+             mock.patch.object(sync.time, 'sleep') as sleep:
+            result = sync.post_discord('fixture', max_attempts=2)
+
+        self.assertEqual(result, {'status': 200, 'message_id': 'message-1', 'attempts': 2})
+        self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(0.25)
 
     @staticmethod
     def raw(page_id, status, date='2026-07-16', site='openzed'):

@@ -11,7 +11,7 @@ Validated workflow:
   blocked/down, or the segurador/Facebook profile can be down while the page
   is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
-import argparse, asyncio, csv, fcntl, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.error, urllib.parse, urllib.request
+import argparse, asyncio, csv, fcntl, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, time, unicodedata, urllib.error, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -611,7 +611,7 @@ def derive_sites(row):
             clean.append(s)
     return ','.join(sorted(clean,key=site_sort_key)) if clean else '?'
 
-def post_discord(content):
+def post_discord(content, max_attempts=5):
     token=discord_token()
     if not token:
         raise RuntimeError('DISCORD_BOT_TOKEN unavailable')
@@ -624,9 +624,25 @@ def post_discord(content):
         headers={'Authorization':f'Bot {token}','Content-Type':'application/json','User-Agent':'MGS-Zeus-DTR-Restricted-Sync/1.0'},
         method='POST',
     )
-    with urllib.request.urlopen(req, timeout=20) as r:
-        payload=json.load(r)
-        return {'status':r.status,'message_id':payload.get('id')}
+    for attempt in range(1, max_attempts + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as r:
+                payload=json.load(r)
+                return {'status':r.status,'message_id':payload.get('id'),'attempts':attempt}
+        except urllib.error.HTTPError as exc:
+            if exc.code != 429 or attempt == max_attempts:
+                raise
+            try:
+                payload=json.loads(exc.read().decode('utf-8', errors='replace'))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                payload={}
+            retry_after=payload.get('retry_after') or exc.headers.get('Retry-After') or 1
+            try:
+                retry_after=float(retry_after)
+            except (TypeError, ValueError):
+                retry_after=1.0
+            time.sleep(max(0.25, min(retry_after, 30.0)))
+    raise RuntimeError('Discord delivery exhausted retry loop')
 
 def restriction_alert_row(row):
     codes=row.get('codes') or row.get('codigos') or ''
