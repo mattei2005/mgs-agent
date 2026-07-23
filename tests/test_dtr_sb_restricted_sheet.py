@@ -57,6 +57,48 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(urlopen.call_count, 2)
         sleep.assert_called_once_with(0.25)
 
+    def test_sheets_api_retries_transient_503(self):
+        class Response:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b'{"sheets": []}'
+
+        unavailable = urllib.error.HTTPError(
+            'https://sheets.googleapis.com/fixture',
+            503,
+            'Service Unavailable',
+            Message(),
+            io.BytesIO(b'{"error":{"status":"UNAVAILABLE"}}'),
+        )
+        with mock.patch.object(sync.urllib.request, 'urlopen', side_effect=[unavailable, Response()]) as urlopen, \
+             mock.patch.object(sync.time, 'sleep') as sleep:
+            result = sync.sheets_api('fixture-token', 'GET', 'https://sheets.googleapis.com/fixture')
+
+        self.assertEqual(result, {'sheets': []})
+        self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(1.0)
+
+    def test_sheets_api_does_not_retry_nontransient_400(self):
+        bad_request = urllib.error.HTTPError(
+            'https://sheets.googleapis.com/fixture',
+            400,
+            'Bad Request',
+            Message(),
+            io.BytesIO(b'{"error":{"status":"INVALID_ARGUMENT"}}'),
+        )
+        with mock.patch.object(sync.urllib.request, 'urlopen', side_effect=bad_request) as urlopen, \
+             mock.patch.object(sync.time, 'sleep') as sleep:
+            with self.assertRaisesRegex(RuntimeError, 'Google Sheets HTTP 400'):
+                sync.sheets_api('fixture-token', 'GET', 'https://sheets.googleapis.com/fixture')
+
+        self.assertEqual(urlopen.call_count, 1)
+        sleep.assert_not_called()
+
     @staticmethod
     def raw(page_id, status, date='2026-07-16', site='openzed'):
         return {

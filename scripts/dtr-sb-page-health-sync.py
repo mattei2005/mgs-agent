@@ -818,7 +818,9 @@ def google_access_token():
         raise RuntimeError(f'unsupported Google Sheets auth mode after MGS cutover: {GOOGLE_AUTH_MODE}')
     return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
 
-def sheets_api(access_token, method, url, data=None):
+def sheets_api(access_token, method, url, data=None, max_attempts=3):
+    if max_attempts<1:
+        raise ValueError('max_attempts must be at least 1')
     body=None
     headers={'Authorization':f'Bearer {access_token}'}
     if GOOGLE_AUTH_MODE=='service_account':
@@ -826,14 +828,24 @@ def sheets_api(access_token, method, url, data=None):
     if data is not None:
         body=json.dumps(data,ensure_ascii=False).encode('utf-8')
         headers['Content-Type']='application/json; charset=UTF-8'
-    req=urllib.request.Request(url,method=method,headers=headers,data=body)
-    try:
-        with urllib.request.urlopen(req,timeout=60) as response:
-            raw=response.read()
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as exc:
-        detail=exc.read().decode('utf-8','replace')[:1200]
-        raise RuntimeError(f'Google Sheets HTTP {exc.code}: {detail}') from exc
+    retryable_statuses={429,500,502,503,504}
+    for attempt in range(1,max_attempts+1):
+        req=urllib.request.Request(url,method=method,headers=headers,data=body)
+        try:
+            with urllib.request.urlopen(req,timeout=60) as response:
+                raw=response.read()
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as exc:
+            detail=exc.read().decode('utf-8','replace')[:1200]
+            if exc.code not in retryable_statuses or attempt>=max_attempts:
+                raise RuntimeError(f'Google Sheets HTTP {exc.code}: {detail}') from exc
+            retry_after=exc.headers.get('Retry-After') if exc.headers else None
+            try:
+                delay=max(0.25,float(retry_after)) if retry_after else float(attempt)
+            except (TypeError,ValueError):
+                delay=float(attempt)
+            time.sleep(min(delay,10.0))
+    raise RuntimeError('Google Sheets request exhausted retries')
 
 def sheet_a1_title(title):
     return "'"+str(title).replace("'","''")+"'"
