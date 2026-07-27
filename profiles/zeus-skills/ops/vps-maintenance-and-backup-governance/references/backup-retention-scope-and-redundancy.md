@@ -113,6 +113,19 @@ Then compare the candidate snapshot's file-content hashes against the canonical 
 
 If unmatched content exists, do not call the snapshot fully redundant. Either preserve it, or—under separate authorization—promote required unique content into the frozen archive, regenerate the manifest, verify every entry, and only then delete the old snapshot.
 
+### 5.1 Explicit retirement override
+
+The owner may explicitly decide that a retired agent's unique state is no longer required. Treat that as an override of the protection classification, not as proof of redundancy:
+
+1. disclose unmatched content by high-level class and exact bytes;
+2. define the deletion scope at dedicated archive/backup-root boundaries;
+3. explicitly state that mixed/shared backups, Git history, audit logs, and shared references remain outside scope;
+4. request the Critical Subset double-confirmation with exact roots, target/file counts, bytes, expected disk result, and irreversible loss;
+5. immediately before execution, verify all targets still exist under allowed roots, are not symlinks or mounts, and still match the confirmed totals;
+6. use an exact target list—never a broad name search or wildcard—and write an audit start boundary before the first removal plus a completion/partial-failure boundary afterward.
+
+Do not surgically remove retired-agent filenames from mixed backup sets merely because their names match the agent. That can corrupt backup-set consistency and silently widen the user's scope.
+
 ## 6. Calculate and verify disk impact
 
 Before action:
@@ -124,9 +137,12 @@ Before action:
 After authorized action:
 
 - verify every target is absent;
-- verify retained archives still exist;
+- verify retained archives still exist and re-run their integrity checks;
+- verify the successor service/agent is active, failed units are zero, and no new critical log boundary appeared;
 - re-run disk measurement;
-- compare projected versus actual reclaimed bytes;
+- report logical file bytes removed separately from the filesystem free-space delta, because allocation overhead and concurrent writes can make them differ;
+- update the infrastructure inventory with authorization IDs, exact scope, validation readback, and status;
+- append audit closure and publish one canonical REPORT-INFRA embed;
 - report any partial failure.
 
 ## 7. Reporting format

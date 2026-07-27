@@ -49,6 +49,9 @@ Load this skill when Rodolfo asks:
 - Never inspect or print secret contents while sizing or hashing backups. Paths may be named only when that does not expose a credential value.
 - Never run `apt autoremove`, delete system-managed `/var/backups`, remove a registered Git worktree with raw `rm`, or shorten backup retention as an incidental part of another cleanup.
 - Preserve patches, manifests, hashes, final reports, and compact logs when deleting only bulky staging clones or redundant archives.
+- For retired-agent cleanup, interpret broad language at the **dedicated operational-set boundary**: remove dedicated archive/backup roots only; preserve references embedded in mixed backups, Git, audit logs, and shared evidence unless the user separately names that wider purge scope.
+- If the owner explicitly chooses to discard a protected snapshot that contains unique state, disclose the unique classes/bytes and require the Critical Subset double-confirmation with exact roots, file count, bytes, irreversible loss, and what historical evidence will remain.
+- Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, is neither a symlink nor a mount, and still matches the confirmed file/byte totals. Use exact paths rather than wildcard deletion, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward.
 - Any resulting script/config/data/skill change requires the applicable inventory, audit, validation, and REPORT-INFRA closure.
 
 ## Executive reporting shape
