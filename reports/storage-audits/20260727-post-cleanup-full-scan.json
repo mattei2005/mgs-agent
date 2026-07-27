@@ -1,0 +1,212 @@
+{
+  "observed_at": "2026-07-27T14:07:34.605195+00:00",
+  "root_device": 2049,
+  "scanned_files": 533249,
+  "scanned_dirs": 57324,
+  "stat_errors": [],
+  "stat_error_count": 0,
+  "archive_like_count": 15949,
+  "archive_like_logical_bytes": 9128304276,
+  "archive_like_allocated_bytes": 9165238272,
+  "archive_categories": {
+    "mgs_backups": [
+      76,
+      5248514572,
+      5248659456
+    ],
+    "mgs_reports": [
+      8,
+      3666616343,
+      3666636800
+    ],
+    "system_or_packages": [
+      11096,
+      115681233,
+      141021184
+    ],
+    "runtime_dependencies": [
+      4601,
+      68698984,
+      79753216
+    ],
+    "curator_backups": [
+      3,
+      10825821,
+      10829824
+    ],
+    "other": [
+      127,
+      9969291,
+      10215424
+    ],
+    "hermes_secure_backups": [
+      2,
+      5980873,
+      5984256
+    ],
+    "os_backups": [
+      36,
+      2017159,
+      2138112
+    ]
+  },
+  "large_file_count": 26,
+  "large_files_top_allocated": [
+    {
+      "path": "/swapfile",
+      "logical": 4294967296,
+      "allocated": 4294971392,
+      "mtime": "2026-07-13T01:18:58.957428+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+      "logical": 3663248938,
+      "allocated": 3663253504,
+      "mtime": "2026-07-21T13:26:40.760651+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260726-034101.tar.gz",
+      "logical": 2902507852,
+      "allocated": 2902515712,
+      "mtime": "2026-07-26T07:42:20.913700+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260722-034101.tar.gz",
+      "logical": 2340876146,
+      "allocated": 2340880384,
+      "mtime": "2026-07-22T07:42:08.740283+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/state.db",
+      "logical": 1773756416,
+      "allocated": 1773756416,
+      "mtime": "2026-07-27T14:06:03.486978+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/.git/objects/pack/pack-162c7d602c39742af22dc85515c553d9990f740d.pack",
+      "logical": 1758961691,
+      "allocated": 1758969856,
+      "mtime": "2026-07-27T09:00:02.667423+00:00"
+    },
+    {
+      "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-small/blobs/3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+      "logical": 483546902,
+      "allocated": 483553280,
+      "mtime": "2026-07-01T18:26:48.541676+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-88e3551539e6a9cb3ed6bbc2ef0462e72f041610.pack",
+      "logical": 403377014,
+      "allocated": 403382272,
+      "mtime": "2026-07-27T03:29:29+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-88e3551539e6a9cb3ed6bbc2ef0462e72f041610.pack",
+      "logical": 403377014,
+      "allocated": 403382272,
+      "mtime": "2026-07-27T03:29:29.436770+00:00"
+    },
+    {
+      "path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "logical": 278568152,
+      "allocated": 278573056,
+      "mtime": "2026-06-18T22:23:33.826843+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/home/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
+      "logical": 273505496,
+      "allocated": 273506304,
+      "mtime": "2026-05-14T18:42:58.942729+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/home/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
+      "logical": 273505496,
+      "allocated": 273506304,
+      "mtime": "2026-05-27T15:52:03.624949+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-ea20a2921d07498a437104b3221916bfddffce7d.pack",
+      "logical": 245347475,
+      "allocated": 245354496,
+      "mtime": "2026-07-27T11:26:03.359068+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-87ab38bd8aaebb4eb411da97ed78848fc71a5cb4.pack",
+      "logical": 245345465,
+      "allocated": 245350400,
+      "mtime": "2026-07-27T11:14:51.200548+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-656914cc5e410446986ddadebe92dcdd576b0650.pack",
+      "logical": 243520115,
+      "allocated": 243527680,
+      "mtime": "2026-07-27T04:20:34.524718+00:00"
+    },
+    {
+      "path": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 189181152,
+      "allocated": 189181952,
+      "mtime": "2026-06-18T22:23:44.644852+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/home/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 185257184,
+      "allocated": 185257984,
+      "mtime": "2026-05-14T18:43:03.305781+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/home/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 185257184,
+      "allocated": 185257984,
+      "mtime": "2026-05-27T15:52:07.205930+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/logs/hermes-structural-write-finalizer.log",
+      "logical": 181774623,
+      "allocated": 181841920,
+      "mtime": "2026-07-27T14:07:19.649161+00:00"
+    },
+    {
+      "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-base/blobs/d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+      "logical": 145217532,
+      "allocated": 145219584,
+      "mtime": "2026-06-19T02:13:38.260072+00:00"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1",
+      "logical": 143545784,
+      "allocated": 143548416,
+      "mtime": "2026-04-21T17:15:47+00:00"
+    },
+    {
+      "path": "/usr/bin/node",
+      "logical": 124835376,
+      "allocated": 124837888,
+      "mtime": "2026-06-23T16:17:23+00:00"
+    },
+    {
+      "path": "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 123459976,
+      "allocated": 123465728,
+      "mtime": "2026-07-11T16:12:03.399163+00:00"
+    },
+    {
+      "path": "/tmp/dtr-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 123459976,
+      "allocated": 123461632,
+      "mtime": "2026-07-21T14:54:44.607585+00:00"
+    },
+    {
+      "path": "/usr/lib/llvm-18/lib/libLLVM.so.1",
+      "logical": 123215144,
+      "allocated": 123215872,
+      "mtime": "2024-05-27T08:26:20+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/state.db",
+      "logical": 118763520,
+      "allocated": 118767616,
+      "mtime": "2026-07-27T13:46:31.868430+00:00"
+    }
+  ]
+}
