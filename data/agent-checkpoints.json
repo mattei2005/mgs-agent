@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Investigar o estágio validator_oneshot_root antes de nova autorização de ativação.",
+      "next_step": "Aguardar autorização explícita de Rodolfo para nova tentativa de ativação/cutover; use one-shot v0.19 sem -q e não repita restart sem autorização.",
       "objective": "Ativar e validar o Hermes b9ba7c78 com rollback controlado.",
-      "source": "discord:1531110503877967952;authorization:1531257169121382501;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z;log:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z/activation-controller.log",
-      "state": "activation failed at validator_oneshot_root; rollback=pass; target b9ba7c78 não ficou ativo",
+      "source": "discord:1531110503877967952;authorization:1531257169121382501;verification:1531269580776013904;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z;failure-report:1531262248297955419;reconciliation-report:1531271310842527930",
+      "state": "not_completed: target b9ba7c78 is fully validated (gateway trial readiness 3/3, config/auth 4/4, guard 850+6, regression 390 and corrected one-shot 4/4), but the prior controller already rolled back to ed3c39108 after the invalid -q validator command. current active guard 804+6, regression 358 and gateways healthy.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T11:29:29+00:00"
+      "updated_at": "2026-07-27T12:07:26+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T11:29:29+00:00"
+  "updated_at": "2026-07-27T12:07:26+00:00"
 }
