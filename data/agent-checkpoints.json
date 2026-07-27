@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Após resposta executiva, agendar um único finalizer externo para cutover Ares→Atena→Zeus; depois exigir dupla confirmação exata antes de deletar os 56 alvos/229182 arquivos.",
+      "next_step": "Consumir final-status e cleanup-result; validar runtime, gateways, espaço, inventário, audit, checkpoint e REPORT-INFRA; não reagendar se unit/final-status já existirem.",
       "objective": "Ativar e validar o Hermes b9ba7c78 e executar limpeza conservadora da VPS.",
-      "source": "discord-thread:1531110503877967952;discord-message:1531287711355244725",
-      "state": "fresh authorization 1531287711355244725 registrada; controller/validator corrigidos; contract branches pass; independent stage preflight pass (850+6, 390, config/auth 4/4, one-shot 4/4); target ainda não ativado; scan vps congelado em c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67 sem deletar.",
+      "source": "discord-thread:1531110503877967952;discord-message:1531294610918211715",
+      "state": "scheduled: autorização 1531287711355244725 e confirmação destrutiva 1531294610918211715 registradas; preflight e cleanup dry-run pass; unit mgs-hermes-b9ba7c78-authorized-20260727t134258z.service executará cutover ares→atena→zeus e somente após activated_validated removerá target-set c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T13:28:44+00:00"
+      "updated_at": "2026-07-27T13:43:16+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T13:28:44+00:00"
+  "updated_at": "2026-07-27T13:43:16+00:00"
 }

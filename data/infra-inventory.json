@@ -3231,10 +3231,10 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_authorized_preflight_pass_awaiting_restart",
+      "status": "activation_and_confirmed_cleanup_scheduled",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T13:41:33.328058+00:00",
+      "updated_at": "2026-07-27T13:43:16.145109+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531287711355244725",
@@ -3333,7 +3333,11 @@
       "preparation_report_infra_message_id": "1531292311554756741",
       "preparation_report_readback": true,
       "cleanup_confirmation_message_id": "1531294610918211715",
-      "cleanup_confirmed_at": "2026-07-27T13:41:33.328058+00:00"
+      "cleanup_confirmed_at": "2026-07-27T13:41:33.328058+00:00",
+      "activation_controller_unit": "mgs-hermes-b9ba7c78-authorized-20260727T134258Z.service",
+      "cleanup_dry_run": "pass",
+      "cleanup_dry_run_files": 229182,
+      "cleanup_dry_run_allocated_bytes": 25860194304
     }
   ],
   "profile_skill_references": [
