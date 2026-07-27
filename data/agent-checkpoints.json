@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Executar cutover atômico e restart seguro Ares→Atena→Zeus; validar 850+6, 390, config/auth 4/4, one-shot 4/4; fechar inventário/audit/REPORT e notificar Rodolfo.",
+      "next_step": "Não repetir ativação agora. Primeiro construir e dry-runar um único controller/validator em ambiente isolado com contrato de arquivos/variáveis validado; pedir nova autorização explícita antes de qualquer novo cutover/restart.",
       "objective": "Ativar e validar o Hermes b9ba7c78 com rollback controlado.",
-      "source": "discord:1531110503877967952;authorization:1531272891835093192;verification:1531277792539443341;activation-final:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z;notification-cron:6b7db95f6bc0",
-      "state": "final_retry_authorized_prepared: second retry stopped safely before cutover because an authorized self-improvement skill changed after freeze; no production change. gate corrected to hash only runtime-critical immutable inputs; auth backed up and validated live; fresh backup/snapshot/controller/notifier prepared.",
+      "source": "discord:1531110503877967952;authorization:1531272891835093192;question:1531282565191696480;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z;rollback-log:/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260727T123843Z-3551936.log",
+      "state": "not_completed/anti_loop_stopped: latest target gateway trial passed 3/3, but validator failed before acceptance tests because activation-context.json was missing; rollback passed to ed3c39108. controller closure also referenced unbound auth_. no further restart is scheduled. cron-origin notifier jobs completed/removed and orphan script deleted.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T12:35:29+00:00"
+      "updated_at": "2026-07-27T12:53:07+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T12:35:29+00:00"
+  "updated_at": "2026-07-27T12:53:07+00:00"
 }

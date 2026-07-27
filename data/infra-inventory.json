@@ -3231,10 +3231,10 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_failed_rolled_back",
+      "status": "activation_retry_loop_stopped_rolled_back",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T12:39:27.862258+00:00",
+      "updated_at": "2026-07-27T12:53:33.773166+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531272891835093192",
@@ -3249,8 +3249,8 @@
       "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z",
       "activation_validation": {
         "status": "failed",
-        "stage": "unexpected_rc_1",
-        "ts": "2026-07-27T12:38:43.513664+00:00"
+        "stage": "validator_missing_activation_context",
+        "detail": "external validator referenced activation-context.json while preparation wrote context.json; acceptance suites did not run in this attempt"
       },
       "activation_report_infra_message_id": "1531274786326446142",
       "activation_report_infra_channel_id": "1498132022634483894",
@@ -3271,10 +3271,9 @@
         "active_sha": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
         "active_metadata_version": "0.18.2",
         "gateways": "ares/atena/zeus active+running and Discord-ready",
-        "active_guard": "PASS 804 + 6 subtests",
-        "active_regression": "PASS 358",
+        "config_auth": "PASS 3/3",
         "failed_units": 0,
-        "validated_at": "2026-07-27T12:04:51.894241+00:00"
+        "validated_at": "2026-07-27T12:53:07.103487+00:00"
       },
       "reconciliation_report_infra_message_id": "1531271310842527930",
       "reconciliation_report_readback": true,
@@ -3293,7 +3292,34 @@
         "removed unsupported -q",
         "mutable self-improvement skills excluded from runtime-blocking snapshot",
         "OAuth auth bytes backed up but validated live rather than immutable-hashed"
-      ]
+      ],
+      "activation_controller_closure_error": "failure path referenced unbound AUTH_ variable, so final-status/report had to be reconciled manually",
+      "activation_target_trial_latest": {
+        "gateway_readiness": "PASS ares/atena/zeus",
+        "snapshot": "PASS 52 runtime-critical files",
+        "validator": "FAILED before acceptance tests: missing activation-context.json"
+      },
+      "activation_retry_loop": {
+        "stopped": true,
+        "reason": "three controller/validator contract failures; anti-loop escalation applied",
+        "attempt_failures": [
+          "unsupported -q",
+          "mutable skill included in blocking snapshot",
+          "activation-context filename mismatch plus unbound AUTH_ closure variable"
+        ],
+        "further_restart_scheduled": false
+      },
+      "notification_cleanup": {
+        "cron_job_ids": [
+          "d8cef7a83fbc",
+          "6b7db95f6bc0"
+        ],
+        "cron_jobs_present_after_list": false,
+        "orphan_profile_script_removed": true,
+        "future_cron_origin_notifiers_prohibited": true
+      },
+      "activation_loop_stop_report_infra_message_id": "1531283404560273409",
+      "activation_loop_stop_report_readback": true
     }
   ],
   "profile_skill_references": [
