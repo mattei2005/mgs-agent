@@ -3231,10 +3231,10 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_failed_rolled_back",
+      "status": "activation_final_authorized_prepared",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T12:19:19.234935+00:00",
+      "updated_at": "2026-07-27T12:35:29.389385+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531272891835093192",
@@ -3284,7 +3284,16 @@
       "activation_retry_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z",
       "activation_retry_backup": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-retry-20260727T121236Z",
       "activation_retry_notification_cron_id": "d8cef7a83fbc",
-      "activation_retry_validator_fix": "unsupported -q removed; exact v0.19 one-shot syntax prevalidated 4/4"
+      "activation_retry_validator_fix": "unsupported -q removed; exact v0.19 one-shot syntax prevalidated 4/4",
+      "activation_final_verification_message_id": "1531277792539443341",
+      "activation_final_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z",
+      "activation_final_backup": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-final-20260727T123251Z",
+      "activation_final_notification_cron_id": "6b7db95f6bc0",
+      "activation_final_gate_fixes": [
+        "removed unsupported -q",
+        "mutable self-improvement skills excluded from runtime-blocking snapshot",
+        "OAuth auth bytes backed up but validated live rather than immutable-hashed"
+      ]
     }
   ],
   "profile_skill_references": [

@@ -47,7 +47,7 @@ Check the exact package/version requested, `dpkg --audit`, snap refresh status, 
 
 ## 4. Validate the frozen target and local patch
 
-Treat Git as authoritative:
+Treat Git as authoritative. The cutover-blocking snapshot must contain only runtime-critical immutable inputs: target code/patch, launchers, managed profile config/SOUL, readiness/finalizer helpers, and the exact execution scripts. Back up profile `auth.json`, but do not use its exact bytes as a cutover blocker because OAuth refresh can legitimately rewrite it during an active conversation; instead require existence, parseability, permission sanity, and live `auth status` in preflight/acceptance. Do not include self-improvement-managed skills, reports, inventory, checkpoints, audit logs, or notifier state in that blocking hash set: authorized closure forks can legitimately update those mutable artifacts after preparation and cause a false pre-cutover drift. Fingerprint mutable artifacts separately for reconciliation and REPORT-INFRA, then read them back after closure; their legitimate mutation is not target-runtime drift.
 
 - exact `HEAD`;
 - local `origin/main` and `HEAD..origin/main` count;
