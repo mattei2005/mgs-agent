@@ -82,9 +82,10 @@ Select profiles with `HERMES_HOME`:
 
 For each profile:
 
-1. `hermes config check` must return rc=0.
-2. Run `hermes -z` with a profile-specific exact marker.
-3. Require both rc=0 and marker presence. Complete stdout with nonzero teardown is not a pass when the closure contract requires rc=0.
+1. Validate the exact candidate CLI invocation during preflight with `hermes --help`; do not add legacy or undocumented quiet flags. In Hermes v0.19.0, `-q` is not accepted, so the validated one-shot form is `hermes -z "..."` plus the profile selector where applicable.
+2. `hermes config check` must return rc=0.
+3. Run `hermes -z` with a profile-specific exact marker.
+4. Require both rc=0 and marker presence. Complete stdout with nonzero teardown is not a pass when the closure contract requires rc=0.
 
 Summarize only rc and marker presence; never print auth material.
 
