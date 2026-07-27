@@ -109,7 +109,18 @@ Run `needrestart -b` after the package work.
 - If that service was not named in the confirmed scope, report it and obtain separate authorization before restart—especially when SSH/user sessions may be affected.
 - Do not call a clean package transaction failed solely because a separate deferred service remains.
 
-## 6. Reconcile canonical services and inventory
+## 6. Close a separately authorized deferred service safely
+
+When Rodolfo separately authorizes a deferred service restart such as `systemd-logind.service`:
+
+1. Freeze the service state/PID, `loginctl list-sessions`, protected gateway/security PIDs, failed units, reboot marker, and current `needrestart -b` output.
+2. Record an audit start boundary with the exact authorization message ID.
+3. Restart only the named service; do not bundle gateways, user managers, logout, or reboot.
+4. Validate the service is active with a new PID, the current administrative session remains usable, Zeus/Atena/Ares and security-service PIDs are unchanged, failed units remain zero, and no warning/critical journal entries appeared.
+5. Re-run `needrestart -b`. Acceptance for the service is **zero `NEEDRESTART-SVC` rows**. Remaining `NEEDRESTART-SESS` rows are stale userspace sessions, not a failed service restart or reboot requirement; they normally clear on logout/reconnection. Do not force logout or restart the root user manager without separate scope.
+6. Clear the deferred-service residual in the existing runtime baseline, preserve the stale-session note, record audit readback, and publish REPORT-INFRA.
+
+## 7. Reconcile canonical services and inventory
 
 Do not guess unit names. Resolve operational services from `data/infra-inventory.json` and live systemd readback; for example, the active MGS auto-commit unit may differ from an assumed name.
 

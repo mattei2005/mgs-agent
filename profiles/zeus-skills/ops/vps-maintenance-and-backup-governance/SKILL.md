@@ -53,6 +53,7 @@ Load this skill when Rodolfo asks:
 - For retired-agent cleanup, interpret broad language at the **dedicated operational-set boundary**: remove dedicated archive/backup roots only; preserve references embedded in mixed backups, Git, audit logs, and shared evidence unless the user separately names that wider purge scope.
 - If the owner explicitly chooses to discard a protected snapshot that contains unique state, disclose the unique classes/bytes and require the Critical Subset double-confirmation with exact roots, file count, bytes, irreversible loss, and what historical evidence will remain.
 - Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, is neither a symlink nor a mount, and still matches the confirmed file/byte totals. Use exact paths rather than wildcard deletion, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward.
+- For a separately authorized deferred-service restart, freeze active sessions and protected service PIDs first. Acceptance requires the named service active, gateway PIDs unchanged, zero `NEEDRESTART-SVC` rows, and no new warning/critical logs. Remaining `NEEDRESTART-SESS` rows normally clear on logout/reconnection and do not justify forced logout, user-manager restart, or reboot.
 - Any resulting script/config/data/skill change requires the applicable inventory, audit, validation, and REPORT-INFRA closure.
 
 ## Executive reporting shape
