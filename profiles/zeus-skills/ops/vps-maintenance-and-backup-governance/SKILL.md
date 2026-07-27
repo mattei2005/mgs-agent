@@ -26,7 +26,8 @@ Load this skill when Rodolfo asks:
 
 1. For Git/release delta, local patches, editable-package version drift, or dry-run portability, load `references/git-update-delta-and-patch-portability.md`.
 2. For backup inventory, retention-scope gaps, archive redundancy, or cleanup classification, load `references/backup-retention-scope-and-redundancy.md`.
-3. If execution is authorized, route the actual update/restart to `hermes-agent-operations` and destructive housekeeping/reporting to the applicable MGS operational skill. Do not duplicate those deployment procedures here.
+3. For an authorized exact APT/vendor package plus npm/Corepack maintenance window, load `references/controlled-package-and-node-tooling-update.md` before touching `/usr`; it defines literal candidate versions, rollback, gate separation, `needrestart` residuals, and inventory closure.
+4. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 
 ## Audit workflow
 

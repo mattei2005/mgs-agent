@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-26T22:24:06-04:00",
+    "updated_at": "2026-07-26T22:48:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -15,24 +15,35 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.47-master",
+          "version": "4.3.51-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect",
-          "version": "5.2.49-master",
+          "version": "5.2.54-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect-autodetect",
-          "version": "5.2.49-master",
+          "version": "5.2.54-master",
           "status": "installed"
         }
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-07-10T00:18:48-04:00",
+      "updated_at": "2026-07-26T22:44:59-04:00",
       "last_maintenance": {
+        "requested_by": "Rodolfo Mattei",
+        "authorization_message_ids": [
+          "1531125821530701946",
+          "1531129017980293294"
+        ],
+        "date": "2026-07-26",
+        "result": "monarx-agent 4.3.50-master -> 4.3.51-master; service active; rollback DEB validated",
+        "log": "/root/mgs-agent/logs/vps-package-maintenance-20260726-224122.log",
+        "rollback": "/root/.hermes/secure-backups/vps-maintenance/20260726-224122/monarx-agent_4.3.50-master_amd64.deb"
+      },
+      "previous_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "date": "2026-07-10",
         "result": "upgraded and service active",
@@ -68,17 +79,17 @@
         },
         {
           "name": "monarx-agent",
-          "version": "4.3.47-master",
+          "version": "4.3.51-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect",
-          "version": "5.2.49-master",
+          "version": "5.2.54-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect-autodetect",
-          "version": "5.2.49-master",
+          "version": "5.2.54-master",
           "status": "installed"
         },
         {
@@ -148,23 +159,56 @@
         },
         {
           "name": "npm",
-          "version": "12.0.0",
+          "version": "12.0.1",
           "status": "installed"
         }
       ],
       "node_runtime": "v22.23.1",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
-      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
+      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260726-224122/npm-corepack-before.tar.gz",
       "validation": {
         "apt_upgradable": 0,
         "npm_outdated_global": 0,
         "dpkg_audit": "clean",
+        "held_packages": 0,
         "failed_systemd_units": 0,
-        "gateway_services": "4/4 active",
+        "gateway_services": "3/3 active with unchanged PIDs",
+        "security_services": "monarx-agent active; mgs-autocommit active; cron active",
         "reboot_required": false,
-        "journal_errors_since_maintenance": 0
+        "journal_errors_since_maintenance": 0,
+        "needrestart_kernel": "current 6.8.0-136-generic",
+        "needrestart_deferred_service": null,
+        "rollback_integrity": "PASS npm/corepack tar + pre-state JSON + Monarx 4.3.50 DEB",
+        "needrestart_sessions": "root session #30131 and root user manager still use older userspace; resolves on logout/reconnect; no service restart or reboot pending",
+        "systemd_logind_restart": {
+          "authorized_by": "344196393512075265",
+          "authorization_message_id": "1531130843572207676",
+          "before_pid": 707,
+          "after_pid": 1302816,
+          "status": "active",
+          "session_30131": "preserved active",
+          "gateway_pids": "unchanged 3/3",
+          "failed_units": 0,
+          "critical_or_warning_logs": 0,
+          "reboot_required": false,
+          "completed_at": "2026-07-26T22:48:39-04:00"
+        }
       },
-      "updated_at": "2026-07-10T00:44:17-04:00"
+      "updated_at": "2026-07-26T22:48:39-04:00",
+      "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
+      "last_maintenance": {
+        "requested_by": "Rodolfo Mattei",
+        "authorization_message_ids": [
+          "1531125821530701946",
+          "1531129017980293294"
+        ],
+        "scope": [
+          "monarx-agent 4.3.50-master -> 4.3.51-master",
+          "npm 12.0.0 -> 12.0.1"
+        ],
+        "result": "PASS",
+        "log": "/root/mgs-agent/logs/vps-package-maintenance-20260726-224122.log"
+      }
     },
     {
       "id": "zeus-sqlite3-article-cost-tracker",
@@ -6581,8 +6625,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 11732,
-      "md5": "e8b9785f90f8165f2dd72b5b41567133",
-      "modified_at": "2026-07-26T22:22:01-04:00"
+      "md5": "6d79e919b5e0380ae9e6b09d627fd357",
+      "modified_at": "2026-07-26T22:47:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6593,8 +6637,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a505ad94cfba3ccd637468f4a47de1e5",
-      "modified_at": "2026-07-26T22:11:47-04:00"
+      "md5": "ff7bfc40186097c5f7ed715dbdedab83",
+      "modified_at": "2026-07-26T22:41:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6605,8 +6649,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 27953,
-      "md5": "0dda40b3dfc144f43d28b59c4b6ce17a",
-      "modified_at": "2026-07-26T21:27:45-04:00"
+      "md5": "1eaf70a7da4637d14f3f025d4eb3d28b",
+      "modified_at": "2026-07-26T22:27:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6617,8 +6661,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "efbcefcefc110e7b214cb5805c6d4ef6",
-      "modified_at": "2026-07-26T22:15:03-04:00"
+      "md5": "a8416954f5fbe673552207f037a769b1",
+      "modified_at": "2026-07-26T22:45:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6659,8 +6703,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "d1e38e38ec461270fdd0151a9c99c968",
-      "modified_at": "2026-07-26T22:24:02-04:00"
+      "md5": "c52bb4bc7c1013b5a0c8d941d05ee676",
+      "modified_at": "2026-07-26T22:44:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -6671,20 +6715,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 33574,
-      "md5": "8694ba2036131205d6f8ff61fbcef004",
-      "modified_at": "2026-07-26T22:20:02-04:00"
+      "md5": "5400e7586b4e69cda935a0a9dba7b0c1",
+      "modified_at": "2026-07-26T22:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 14071,
-      "md5": "488327577de3b4bc9496d5bf1493c0f7",
-      "modified_at": "2026-07-26T22:24:02-04:00"
+      "md5": "26a8f161946455b12681693ced0822b5",
+      "modified_at": "2026-07-26T22:48:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "3b768436913bd3390aeb893125ef3346",
-      "modified_at": "2026-07-26T22:24:02-04:00"
+      "md5": "78f8c7d7a2e6865c0b128ff223329b48",
+      "modified_at": "2026-07-26T22:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6712,9 +6756,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 306881,
-      "md5": "07cbd9cf0d9969a413d470179efe6c0b",
-      "modified_at": "2026-07-26T22:23:17-04:00"
+      "size_bytes": 308372,
+      "md5": "8729438daf88b8255c64728155484adc",
+      "modified_at": "2026-07-26T22:48:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6767,8 +6811,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7237,
-      "md5": "0c5941308024d057193e941a6b5b871c",
-      "modified_at": "2026-07-26T21:25:30-04:00"
+      "md5": "4942d49135c7ee65792ac80118370773",
+      "modified_at": "2026-07-26T22:25:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -6779,8 +6823,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1079,
-      "md5": "65bdc16ca21df3a5fc1c3ce26abd7631",
-      "modified_at": "2026-07-26T21:39:02-04:00"
+      "md5": "ae122bd36b203e0efa38dea68a2ec3e8",
+      "modified_at": "2026-07-26T22:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -6792,7 +6836,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-26T22:22:03-04:00"
+      "modified_at": "2026-07-26T22:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6815,8 +6859,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 197210,
-      "md5": "32ff262b76d6c1bbf083118278547ac6",
-      "modified_at": "2026-07-26T22:14:26-04:00"
+      "md5": "48372ec0215a316aad7c3604d40ad24a",
+      "modified_at": "2026-07-26T22:44:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -6858,7 +6902,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "b15997f8af3a6823fccd6683ad6aa3c7",
-      "modified_at": "2026-07-26T22:21:02-04:00"
+      "modified_at": "2026-07-26T22:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6892,9 +6936,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2113,
-      "md5": "df9ac0eb1bc02698fc0087976b9b7c16",
-      "modified_at": "2026-07-26T22:20:03-04:00"
+      "size_bytes": 2114,
+      "md5": "ea46049985687b74cf52b8c59ce5aba0",
+      "modified_at": "2026-07-26T22:45:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
