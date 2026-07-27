@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Aguardar confirmação explícita para ativação controlada: backup fresco, cutover atômico do wrapper, Ares/Atena primeiro, Zeus por último, smoke e rollback gate.",
-      "objective": "Portar a superfície MGS local do Hermes de ed3c39108 para b9ba7c78, validar e preparar ativação sem restart.",
-      "source": "discord:1531110503877967952;message:1531138923357540514;inventory:hermes-port-b9ba7c78-20260726;report:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "state": "port concluído: patch canônico de 40 caminhos publicado; checkout e venv externos b9ba7c78 validados; live checkout/wrapper/perfis/pids preservados; nenhuma ativação ou restart executado.",
+      "next_step": "Investigar o estágio validator_oneshot_root antes de nova autorização de ativação.",
+      "objective": "Ativar e validar o Hermes b9ba7c78 com rollback controlado.",
+      "source": "discord:1531110503877967952;authorization:1531257169121382501;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z;log:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z/activation-controller.log",
+      "state": "activation failed at validator_oneshot_root; rollback=pass; target b9ba7c78 não ficou ativo",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T04:19:04+00:00"
+      "updated_at": "2026-07-27T11:29:29+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T04:19:04+00:00"
+  "updated_at": "2026-07-27T11:29:29+00:00"
 }

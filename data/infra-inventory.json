@@ -3228,12 +3228,30 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation still requires explicit controlled restart authorization and a fresh backup/readback immediately before wrapper cutover"
       ],
-      "status": "staged_validated_no_restart_activation_pending",
+      "status": "activation_failed_rolled_back",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T00:16:51-04:00",
+      "updated_at": "2026-07-27T11:29:29.795490+00:00",
       "report_infra_message_id": "1531154738043944961",
-      "report_infra_channel_id": "1498132022634483894"
+      "report_infra_channel_id": "1498132022634483894",
+      "activation_authorization_message_id": "1531257169121382501",
+      "activation_order": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "active_runtime_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "active_wrapper_target": "/root/.local/bin/hermes-b9ba7c78",
+      "rollback_runtime_path": "/root/.hermes/hermes-agent",
+      "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z",
+      "activation_validation": {
+        "status": "failed",
+        "stage": "oneshot_root",
+        "ts": "2026-07-27T11:28:50.608542+00:00"
+      },
+      "activation_report_infra_message_id": "1531262248297955419",
+      "activation_report_infra_channel_id": "1498132022634483894",
+      "activation_report_readback": true
     }
   ],
   "profile_skill_references": [
