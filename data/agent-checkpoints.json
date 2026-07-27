@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Não repetir ativação agora. Primeiro construir e dry-runar um único controller/validator em ambiente isolado com contrato de arquivos/variáveis validado; pedir nova autorização explícita antes de qualquer novo cutover/restart.",
-      "objective": "Ativar e validar o Hermes b9ba7c78 com rollback controlado.",
-      "source": "discord:1531110503877967952;authorization:1531272891835093192;question:1531282565191696480;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z;rollback-log:/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260727T123843Z-3551936.log",
-      "state": "not_completed/anti_loop_stopped: latest target gateway trial passed 3/3, but validator failed before acceptance tests because activation-context.json was missing; rollback passed to ed3c39108. controller closure also referenced unbound auth_. no further restart is scheduled. cron-origin notifier jobs completed/removed and orphan script deleted.",
+      "next_step": "Após resposta executiva, agendar um único finalizer externo para cutover Ares→Atena→Zeus; depois exigir dupla confirmação exata antes de deletar os 56 alvos/229182 arquivos.",
+      "objective": "Ativar e validar o Hermes b9ba7c78 e executar limpeza conservadora da VPS.",
+      "source": "discord-thread:1531110503877967952;discord-message:1531287711355244725",
+      "state": "fresh authorization 1531287711355244725 registrada; controller/validator corrigidos; contract branches pass; independent stage preflight pass (850+6, 390, config/auth 4/4, one-shot 4/4); target ainda não ativado; scan vps congelado em c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67 sem deletar.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T12:53:07+00:00"
+      "updated_at": "2026-07-27T13:28:44+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T12:53:07+00:00"
+  "updated_at": "2026-07-27T13:28:44+00:00"
 }

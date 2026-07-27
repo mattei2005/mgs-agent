@@ -3231,13 +3231,13 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_retry_loop_stopped_rolled_back",
+      "status": "activation_authorized_preflight_pass_awaiting_restart",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T12:53:33.773166+00:00",
+      "updated_at": "2026-07-27T13:29:30.997576+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
-      "activation_authorization_message_id": "1531272891835093192",
+      "activation_authorization_message_id": "1531287711355244725",
       "activation_order": [
         "ares",
         "atena",
@@ -3246,7 +3246,7 @@
       "active_runtime_path": "/root/.hermes/hermes-agent",
       "active_wrapper_target": "/root/.hermes/hermes-agent/venv/bin/hermes",
       "rollback_runtime_path": "/root/.hermes/hermes-agent",
-      "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-final-20260727T123251Z",
+      "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-authorized-20260727T131646Z",
       "activation_validation": {
         "status": "failed",
         "stage": "validator_missing_activation_context",
@@ -3319,7 +3319,19 @@
         "future_cron_origin_notifiers_prohibited": true
       },
       "activation_loop_stop_report_infra_message_id": "1531283404560273409",
-      "activation_loop_stop_report_readback": true
+      "activation_loop_stop_report_readback": true,
+      "fresh_backup": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-authorized-20260727T131646Z",
+      "preflight_validation": "preflight_pass",
+      "cleanup_scan": {
+        "manifest": "/root/mgs-agent/reports/storage-audits/20260727-cleanup-candidates.json",
+        "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67",
+        "status": "awaiting_critical_subset_double_confirmation",
+        "estimated_reclaim_bytes": 25860194304,
+        "target_entries": 56,
+        "target_files": 229182
+      },
+      "preparation_report_infra_message_id": "1531292311554756741",
+      "preparation_report_readback": true
     }
   ],
   "profile_skill_references": [

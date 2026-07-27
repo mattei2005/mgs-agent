@@ -1,0 +1,608 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-27T13:27:10.823688+00:00",
+  "authorization_message_id": "1531287711355244725",
+  "status": "awaiting_critical_subset_double_confirmation",
+  "scope": "exact conservative whole-VPS cleanup after successful Hermes activation; no deletion yet",
+  "entries": [
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260706-034101.tar.gz",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 3579642876,
+      "allocated_bytes": 3579650048,
+      "oldest_mtime": "2026-07-06T07:42:40.794094+00:00",
+      "newest_mtime": "2026-07-06T07:42:40.794094+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260706-034101.manifest.txt",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 1465734,
+      "allocated_bytes": 1466368,
+      "oldest_mtime": "2026-07-06T07:43:04.776107+00:00",
+      "newest_mtime": "2026-07-06T07:43:04.776107+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260710-034101.tar.gz",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 3582664637,
+      "allocated_bytes": 3582668800,
+      "oldest_mtime": "2026-07-10T07:42:42.145653+00:00",
+      "newest_mtime": "2026-07-10T07:42:42.145653+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260710-034101.manifest.txt",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 1497337,
+      "allocated_bytes": 1499136,
+      "oldest_mtime": "2026-07-10T07:43:07.381686+00:00",
+      "newest_mtime": "2026-07-10T07:43:07.381686+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260714-034101.tar.gz",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 3970566220,
+      "allocated_bytes": 3970572288,
+      "oldest_mtime": "2026-07-14T07:42:52.318756+00:00",
+      "newest_mtime": "2026-07-14T07:42:52.318756+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260714-034101.manifest.txt",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 1610639,
+      "allocated_bytes": 1613824,
+      "oldest_mtime": "2026-07-14T07:43:19.524836+00:00",
+      "newest_mtime": "2026-07-14T07:43:19.524836+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260718-034101.tar.gz",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 2036555136,
+      "allocated_bytes": 2036559872,
+      "oldest_mtime": "2026-07-18T07:42:00.268604+00:00",
+      "newest_mtime": "2026-07-18T07:42:00.268604+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20260718-034101.manifest.txt",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 1209462,
+      "allocated_bytes": 1212416,
+      "oldest_mtime": "2026-07-18T07:42:13.581623+00:00",
+      "newest_mtime": "2026-07-18T07:42:13.581623+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260719-211119/hermes-profiles-backup-20260719-211119.tar.gz",
+      "kind": "file",
+      "files": 1,
+      "directories": 0,
+      "logical_bytes": 3494257963,
+      "allocated_bytes": 3494264832,
+      "oldest_mtime": "2026-07-20T01:15:42.076140+00:00",
+      "newest_mtime": "2026-07-20T01:15:42.076140+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/state-snapshots/20260707-134456-pre-update",
+      "kind": "directory",
+      "files": 11,
+      "directories": 2,
+      "logical_bytes": 749498005,
+      "allocated_bytes": 749527040,
+      "oldest_mtime": "2026-06-08T01:40:00.732778+00:00",
+      "newest_mtime": "2026-07-07T13:44:58.315328+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/state-snapshots/20260716-053329-mgs-offsite-hourly",
+      "kind": "directory",
+      "files": 11,
+      "directories": 2,
+      "logical_bytes": 1525071300,
+      "allocated_bytes": 1525096448,
+      "oldest_mtime": "2026-06-08T01:40:00.732778+00:00",
+      "newest_mtime": "2026-07-16T05:33:33.010489+00:00"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-20260727T111612Z",
+      "kind": "directory",
+      "files": 18,
+      "directories": 5,
+      "logical_bytes": 114601,
+      "allocated_bytes": 163840,
+      "oldest_mtime": "2026-07-17T14:13:21.126475+00:00",
+      "newest_mtime": "2026-07-27T11:16:12.357590+00:00"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-retry-20260727T121236Z",
+      "kind": "directory",
+      "files": 15,
+      "directories": 5,
+      "logical_bytes": 113752,
+      "allocated_bytes": 151552,
+      "oldest_mtime": "2026-07-17T14:13:21.126475+00:00",
+      "newest_mtime": "2026-07-27T12:13:08.076734+00:00"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-final-20260727T123251Z",
+      "kind": "directory",
+      "files": 15,
+      "directories": 5,
+      "logical_bytes": 113752,
+      "allocated_bytes": 151552,
+      "oldest_mtime": "2026-07-17T14:13:21.126475+00:00",
+      "newest_mtime": "2026-07-27T12:33:21.869627+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-port-2ccfdb2",
+      "kind": "directory",
+      "files": 131773,
+      "directories": 8306,
+      "logical_bytes": 1371902502,
+      "allocated_bytes": 1729826816,
+      "oldest_mtime": "2026-06-20T23:54:48.805984+00:00",
+      "newest_mtime": "2026-07-20T02:10:49.411913+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-upstream-clean-2ccfdb2",
+      "kind": "directory",
+      "files": 7339,
+      "directories": 1008,
+      "logical_bytes": 186224728,
+      "allocated_bytes": 202100736,
+      "oldest_mtime": "2026-07-14T00:00:37.677377+00:00",
+      "newest_mtime": "2026-07-20T02:10:50.847915+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-patch-proof-final-2ccfdb2",
+      "kind": "directory",
+      "files": 6713,
+      "directories": 997,
+      "logical_bytes": 158110338,
+      "allocated_bytes": 172675072,
+      "oldest_mtime": "2026-07-14T00:21:14.530902+00:00",
+      "newest_mtime": "2026-07-20T02:10:48.491912+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-patch-proof-ultimate-2ccfdb2",
+      "kind": "directory",
+      "files": 6711,
+      "directories": 996,
+      "logical_bytes": 158112504,
+      "allocated_bytes": 172666880,
+      "oldest_mtime": "2026-07-14T00:24:19.072130+00:00",
+      "newest_mtime": "2026-07-20T02:10:48.933913+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-patch-proof-2ccfdb2",
+      "kind": "directory",
+      "files": 6710,
+      "directories": 997,
+      "logical_bytes": 158069578,
+      "allocated_bytes": 172621824,
+      "oldest_mtime": "2026-07-14T00:10:16.754076+00:00",
+      "newest_mtime": "2026-07-20T02:10:48.027912+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-upstream-2ccfdb2",
+      "kind": "directory",
+      "files": 6669,
+      "directories": 978,
+      "logical_bytes": 157005754,
+      "allocated_bytes": 171442176,
+      "oldest_mtime": "2026-07-13T23:49:59.303604+00:00",
+      "newest_mtime": "2026-07-20T02:10:50.389914+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hermes-reverify-zIT6Kq",
+      "kind": "directory",
+      "files": 6337,
+      "directories": 897,
+      "logical_bytes": 142033051,
+      "allocated_bytes": 155754496,
+      "oldest_mtime": "2026-07-14T01:27:46.865916+00:00",
+      "newest_mtime": "2026-07-20T02:10:49.879914+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hera-upload-20260712",
+      "kind": "directory",
+      "files": 86,
+      "directories": 4,
+      "logical_bytes": 275703829,
+      "allocated_bytes": 275890176,
+      "oldest_mtime": "2026-07-12T04:11:34.287219+00:00",
+      "newest_mtime": "2026-07-12T04:18:42.910805+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/tmp/hera-cc-es-es-story-upload",
+      "kind": "directory",
+      "files": 15,
+      "directories": 2,
+      "logical_bytes": 21025774,
+      "allocated_bytes": 21057536,
+      "oldest_mtime": "2026-06-20T15:14:55.420013+00:00",
+      "newest_mtime": "2026-07-17T14:50:09.154594+00:00"
+    },
+    {
+      "path": "/tmp/hermes-collect-home-XsH6VR",
+      "kind": "directory",
+      "files": 5,
+      "directories": 11,
+      "logical_bytes": 13084,
+      "allocated_bytes": 24576,
+      "oldest_mtime": "2026-07-20T04:20:30.104795+00:00",
+      "newest_mtime": "2026-07-20T04:20:45.915818+00:00"
+    },
+    {
+      "path": "/tmp/hermes-config-migrate-audit-20260719",
+      "kind": "directory",
+      "files": 24,
+      "directories": 45,
+      "logical_bytes": 171430,
+      "allocated_bytes": 204800,
+      "oldest_mtime": "2026-07-20T04:16:16.991420+00:00",
+      "newest_mtime": "2026-07-20T04:16:18.585422+00:00"
+    },
+    {
+      "path": "/tmp/hermes-doctor-audit-20260719",
+      "kind": "directory",
+      "files": 4,
+      "directories": 1,
+      "logical_bytes": 20810,
+      "allocated_bytes": 32768,
+      "oldest_mtime": "2026-07-20T04:17:43.945551+00:00",
+      "newest_mtime": "2026-07-20T04:19:11.376680+00:00"
+    },
+    {
+      "path": "/tmp/hermes-post976-pack-gqI9gv",
+      "kind": "directory",
+      "files": 1,
+      "directories": 11,
+      "logical_bytes": 513,
+      "allocated_bytes": 4096,
+      "oldest_mtime": "2026-07-20T04:23:03.943016+00:00",
+      "newest_mtime": "2026-07-20T04:23:03.943016+00:00"
+    },
+    {
+      "path": "/tmp/hermes-skill-diffs-20260719",
+      "kind": "directory",
+      "files": 4,
+      "directories": 1,
+      "logical_bytes": 168509,
+      "allocated_bytes": 180224,
+      "oldest_mtime": "2026-07-20T04:15:41.003365+00:00",
+      "newest_mtime": "2026-07-20T04:15:42.121366+00:00"
+    },
+    {
+      "path": "/tmp/hermes_e2e_47967__k_u__nl",
+      "kind": "directory",
+      "files": 2,
+      "directories": 3,
+      "logical_bytes": 929565,
+      "allocated_bytes": 933888,
+      "oldest_mtime": "2026-07-27T03:54:19.190077+00:00",
+      "newest_mtime": "2026-07-27T03:54:20.495079+00:00"
+    },
+    {
+      "path": "/tmp/pytest-of-root",
+      "kind": "directory",
+      "files": 8233,
+      "directories": 87496,
+      "logical_bytes": 148249913,
+      "allocated_bytes": 173301760,
+      "oldest_mtime": "2026-07-27T02:50:33.368107+00:00",
+      "newest_mtime": "2026-07-27T13:24:03.472546+00:00"
+    },
+    {
+      "path": "/root/.cache/pip",
+      "kind": "directory",
+      "files": 611,
+      "directories": 1100,
+      "logical_bytes": 377909014,
+      "allocated_bytes": 379342848,
+      "oldest_mtime": "2026-06-19T07:06:45.998286+00:00",
+      "newest_mtime": "2026-07-27T04:08:48.314288+00:00"
+    },
+    {
+      "path": "/root/.cache/uv",
+      "kind": "directory",
+      "files": 37272,
+      "directories": 3535,
+      "logical_bytes": 596099979,
+      "allocated_bytes": 694566912,
+      "oldest_mtime": "2026-06-18T17:14:01.526208+00:00",
+      "newest_mtime": "2026-07-27T12:05:56.551103+00:00"
+    },
+    {
+      "path": "/root/.cache/electron",
+      "kind": "directory",
+      "files": 1,
+      "directories": 2,
+      "logical_bytes": 115043830,
+      "allocated_bytes": 115044352,
+      "oldest_mtime": "2026-06-20T23:49:45.314746+00:00",
+      "newest_mtime": "2026-06-20T23:49:45.314746+00:00"
+    },
+    {
+      "path": "/root/.cache/node-gyp",
+      "kind": "directory",
+      "files": 2726,
+      "directories": 601,
+      "logical_bytes": 58889430,
+      "allocated_bytes": 65286144,
+      "oldest_mtime": "2026-06-20T23:49:41.921743+00:00",
+      "newest_mtime": "2026-06-20T23:49:42.556743+00:00"
+    },
+    {
+      "path": "/root/.cache/typescript",
+      "kind": "directory",
+      "files": 166,
+      "directories": 26,
+      "logical_bytes": 7110567,
+      "allocated_bytes": 7520256,
+      "oldest_mtime": "2026-06-25T17:42:59.600417+00:00",
+      "newest_mtime": "2026-07-17T15:16:21.085815+00:00"
+    },
+    {
+      "path": "/root/.npm/_cacache",
+      "kind": "directory",
+      "files": 3374,
+      "directories": 3836,
+      "logical_bytes": 914055095,
+      "allocated_bytes": 923090944,
+      "oldest_mtime": "2026-06-18T19:11:24.911362+00:00",
+      "newest_mtime": "2026-07-27T03:59:27.938514+00:00"
+    },
+    {
+      "path": "/root/.npm/_npx",
+      "kind": "directory",
+      "files": 295,
+      "directories": 90,
+      "logical_bytes": 444853621,
+      "allocated_bytes": 445632512,
+      "oldest_mtime": "2026-06-27T01:58:14.228353+00:00",
+      "newest_mtime": "2026-07-27T03:53:31.377007+00:00"
+    },
+    {
+      "path": "/root/.npm/_logs",
+      "kind": "directory",
+      "files": 11,
+      "directories": 1,
+      "logical_bytes": 460454,
+      "allocated_bytes": 491520,
+      "oldest_mtime": "2026-07-27T03:28:43.096712+00:00",
+      "newest_mtime": "2026-07-27T04:00:14.646580+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/home/.npm/_cacache",
+      "kind": "directory",
+      "files": 3171,
+      "directories": 3645,
+      "logical_bytes": 712601373,
+      "allocated_bytes": 721149952,
+      "oldest_mtime": "2026-06-12T00:49:37.404537+00:00",
+      "newest_mtime": "2026-06-14T13:37:01.419320+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/home/.npm/_prebuilds",
+      "kind": "directory",
+      "files": 1,
+      "directories": 1,
+      "logical_bytes": 1087983,
+      "allocated_bytes": 1089536,
+      "oldest_mtime": "2026-05-15T02:02:21.881509+00:00",
+      "newest_mtime": "2026-05-15T02:02:21.881509+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/home/.npm/_logs",
+      "kind": "directory",
+      "files": 11,
+      "directories": 1,
+      "logical_bytes": 869250,
+      "allocated_bytes": 892928,
+      "oldest_mtime": "2026-06-12T12:39:05.384022+00:00",
+      "newest_mtime": "2026-06-14T17:50:53.787168+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/home/.cache/pip",
+      "kind": "directory",
+      "files": 15,
+      "directories": 36,
+      "logical_bytes": 4098753,
+      "allocated_bytes": 4132864,
+      "oldest_mtime": "2026-05-23T22:52:53.722544+00:00",
+      "newest_mtime": "2026-06-13T03:36:32.172533+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/home/.cache/uv",
+      "kind": "directory",
+      "files": 575,
+      "directories": 92,
+      "logical_bytes": 49127852,
+      "allocated_bytes": 50475008,
+      "oldest_mtime": "2026-06-12T00:49:29.909578+00:00",
+      "newest_mtime": "2026-06-14T17:50:44.754211+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/home/.cache/pip",
+      "kind": "directory",
+      "files": 96,
+      "directories": 203,
+      "logical_bytes": 54500681,
+      "allocated_bytes": 54710272,
+      "oldest_mtime": "2026-05-14T18:42:49.055611+00:00",
+      "newest_mtime": "2026-05-16T06:14:30.470712+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/.curator_backups/2026-07-01T20-24-50Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 4110282,
+      "allocated_bytes": 4120576,
+      "oldest_mtime": "2026-07-01T20:24:50.953305+00:00",
+      "newest_mtime": "2026-07-01T20:24:50.963305+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/.curator_backups/2026-06-24T19-54-50Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3902063,
+      "allocated_bytes": 3911680,
+      "oldest_mtime": "2026-06-24T19:54:51.617047+00:00",
+      "newest_mtime": "2026-06-24T19:54:51.628047+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/.curator_backups/2026-06-17T19-30-45Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3837274,
+      "allocated_bytes": 3846144,
+      "oldest_mtime": "2026-06-17T19:30:45.939478+00:00",
+      "newest_mtime": "2026-06-17T19:30:45.953478+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/.curator_backups/2026-06-10T18-33-39Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3249655,
+      "allocated_bytes": 3256320,
+      "oldest_mtime": "2026-06-10T18:33:40.122109+00:00",
+      "newest_mtime": "2026-06-10T18:33:40.128109+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/skills/.curator_backups/2026-07-01T20-19-53Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3321611,
+      "allocated_bytes": 3330048,
+      "oldest_mtime": "2026-07-01T20:19:53.694093+00:00",
+      "newest_mtime": "2026-07-01T20:19:53.706093+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/skills/.curator_backups/2026-06-24T19-47-07Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3306282,
+      "allocated_bytes": 3313664,
+      "oldest_mtime": "2026-06-24T19:47:08.130884+00:00",
+      "newest_mtime": "2026-06-24T19:47:08.141884+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/skills/.curator_backups/2026-06-17T19-28-56Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3306474,
+      "allocated_bytes": 3313664,
+      "oldest_mtime": "2026-06-17T19:28:56.737570+00:00",
+      "newest_mtime": "2026-06-17T19:28:56.745570+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/skills/.curator_backups/2026-06-10T18-29-35Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 2713751,
+      "allocated_bytes": 2719744,
+      "oldest_mtime": "2026-06-10T18:29:35.492640+00:00",
+      "newest_mtime": "2026-06-10T18:29:35.497640+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/.curator_backups/2026-07-01T20-19-47Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3114165,
+      "allocated_bytes": 3121152,
+      "oldest_mtime": "2026-07-01T20:19:47.777088+00:00",
+      "newest_mtime": "2026-07-17T15:15:55.736821+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/.curator_backups/2026-06-24T20-19-29Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3102703,
+      "allocated_bytes": 3108864,
+      "oldest_mtime": "2026-06-24T20:19:29.986274+00:00",
+      "newest_mtime": "2026-07-17T15:15:55.734821+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/.curator_backups/2026-06-17T19-28-56Z",
+      "kind": "directory",
+      "files": 3,
+      "directories": 1,
+      "logical_bytes": 3030774,
+      "allocated_bytes": 3039232,
+      "oldest_mtime": "2026-06-17T19:28:57.299570+00:00",
+      "newest_mtime": "2026-06-17T19:28:57.305569+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/.curator_backups/2026-06-10T18-29-34Z",
+      "kind": "directory",
+      "files": 2,
+      "directories": 1,
+      "logical_bytes": 2987011,
+      "allocated_bytes": 2994176,
+      "oldest_mtime": "2026-06-10T18:29:35.331641+00:00",
+      "newest_mtime": "2026-06-10T18:29:35.336641+00:00"
+    }
+  ],
+  "commands": [
+    {
+      "action": "apt-get clean",
+      "path": "/var/cache/apt/archives",
+      "files": 117,
+      "directories": 2,
+      "logical_bytes": 163140368,
+      "allocated_bytes": 163377152
+    }
+  ],
+  "totals": {
+    "target_entries": 56,
+    "files": 229182,
+    "allocated_bytes": 25860194304,
+    "estimated_gib": 24.084
+  },
+  "retained_protected": [
+    "/root/mgs-agent/backups/safety/mgs-safety-20260722-034101.tar.gz",
+    "/root/mgs-agent/backups/safety/mgs-safety-20260726-034101.tar.gz",
+    "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+    "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-authorized-20260727T131646Z",
+    "/root/.hermes/hermes-agent",
+    "/root/.hermes/hermes-agent-next-b9ba7c78",
+    "/root/.cache/huggingface",
+    "/root/.cache/ms-playwright",
+    "/root/.hermes/profiles/atena/home/.cache/ms-playwright",
+    "/root/.hermes/profiles/ares/home/.cache/ms-playwright",
+    "/root/mgs-agent/backups/dtr-* and other recent operational rollback backups",
+    "/root/mgs-agent/data, logs, audit, reports (except the one listed archive), Git repositories and live profile state"
+  ],
+  "preconditions": [
+    "Hermes b9ba7c78 activated_validated",
+    "final REPORT-INFRA GET readback PASS",
+    "no running process uses any target path",
+    "all exact paths/allocated sizes re-read before deletion",
+    "fresh authorized activation backup remains valid",
+    "latest safety and Hermes profile archives tar-test PASS"
+  ],
+  "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67"
+}
