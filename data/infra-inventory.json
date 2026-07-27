@@ -3385,6 +3385,41 @@
       "cleanup_freed_bytes_readback": 25631178752,
       "cleanup_report_infra_message_id": "1531296835371532389",
       "cleanup_report_readback": true
+    },
+    {
+      "id": "vps-storage-hermes-delta-audit-20260727",
+      "type": "read_only_storage_and_hermes_git_delta_audit",
+      "owner": "zeus",
+      "requested_by": "Rodolfo Mattei",
+      "source_message_id": "1531300662082797589",
+      "observed_at": "2026-07-27T14:17:01.575223+00:00",
+      "status": "audit_complete_no_deletion",
+      "report_path": "/root/mgs-agent/reports/storage-audits/20260727-post-cleanup-full-scan.json",
+      "filesystem_scope": [
+        "/",
+        "/boot",
+        "/boot/efi"
+      ],
+      "root_files_scanned": 533249,
+      "root_dirs_scanned": 57324,
+      "scan_errors": 0,
+      "disk_used_pct": 40.6,
+      "disk_available_bytes": 61089746944,
+      "archive_like_files": 15949,
+      "archive_like_allocated_bytes": 9165238272,
+      "explicit_mgs_backup_bytes": 6731853824,
+      "hermes_update_report_bytes": 3678404608,
+      "immediate_candidate_bytes": 161390592,
+      "conditional_dtr_bytes": 1386991616,
+      "conditional_old_runtime_bytes": 6089564160,
+      "avoidable_future_safety_bytes_estimate": 20971089920,
+      "hermes_commit_delta": 1573,
+      "hermes_delta_classification": "post-v2026.7.20 untagged main delta",
+      "deletions_performed": 0,
+      "report_infra_message_id": "1531304509522051246",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_readback": true,
+      "updated_at": "2026-07-27T14:17:48.236379+00:00"
     }
   ],
   "profile_skill_references": [

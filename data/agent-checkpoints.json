@@ -252,6 +252,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-storage-hermes-delta-review-20260727",
+      "next_step": "Rodolfo decide separadamente sobre política safety latest-two, retenção DTR e remoção futura do runtime rollback após burn-in.",
+      "objective": "Auditar toda a VPS após limpeza, classificar backups/arquivos compactados, estimar capacidade e revisar o delta Hermes útil à MGS.",
+      "source": "discord-thread:1531110503877967952;discord-message:1531300662082797589",
+      "state": "completed: root/boot/efi varridos; 533249 arquivos no root, zero erros; nenhuma exclusão neste turno; filas protegida/condicional registradas; delta ed3c39108..b9ba7c78 confirmado em 1573 commits e classificado.",
+      "thread_id": "1531110503877967952",
+      "updated_at": "2026-07-27T14:17:01+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-alerts-infra-red-fix-20260717",
       "next_step": "Monitorar o próximo ciclo normal; nenhuma ação operacional pendente",
       "objective": "Corrigir bloqueio do auto-commit e spam do monitor de auto-push identificado nos alertas vermelhos de 48h",
@@ -282,5 +292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T13:46:55+00:00"
+  "updated_at": "2026-07-27T14:17:01+00:00"
 }

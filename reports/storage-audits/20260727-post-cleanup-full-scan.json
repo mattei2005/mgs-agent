@@ -208,5 +208,164 @@
       "allocated": 118767616,
       "mtime": "2026-07-27T13:46:31.868430+00:00"
     }
-  ]
+  ],
+  "scope": {
+    "persistent_filesystems_scanned": [
+      "/",
+      "/boot",
+      "/boot/efi"
+    ],
+    "root_scan": {
+      "files": 533249,
+      "dirs": 57324,
+      "errors": 0,
+      "same_filesystem_only": true
+    },
+    "boot_scan": {
+      "files": 583,
+      "dirs": 7,
+      "archive_like": 0,
+      "errors": 0
+    },
+    "efi_scan": {
+      "files": 8,
+      "dirs": 4,
+      "archive_like": 0,
+      "errors": 0
+    },
+    "excluded_by_design": [
+      "/proc",
+      "/sys",
+      "/dev",
+      "/run and tmpfs: virtual or volatile kernel filesystems"
+    ]
+  },
+  "disk": {
+    "total_bytes": 102888095744,
+    "used_bytes": 41781571584,
+    "available_bytes": 61089746944,
+    "used_pct": 40.6,
+    "inode_used_pct": 5.0
+  },
+  "explicit_backup_sets": {
+    "mgs_backups": {
+      "allocated_bytes": 6731853824,
+      "files": 6913
+    },
+    "hermes_update_reports": {
+      "allocated_bytes": 3678404608,
+      "files": 1205
+    },
+    "hermes_secure_backups": {
+      "allocated_bytes": 36270080,
+      "files": 1426
+    },
+    "legacy_mgs_backups": {
+      "allocated_bytes": 11649024,
+      "files": 1050
+    },
+    "os_backups_protected": {
+      "allocated_bytes": 3698688,
+      "files": 42
+    },
+    "dtr_transaction_sets": {
+      "entries": 20,
+      "files": 4606,
+      "allocated_bytes": 1386991616,
+      "classification": "closed/readback evidence plus rollback payload; no active process; retain until policy decision"
+    },
+    "safety_latest_two": {
+      "files": 4,
+      "allocated_bytes": 5245972480,
+      "classification": "validated local safety recovery; current script retention is 30 days/3-day interval"
+    },
+    "hermes_profile_archive_20260721": {
+      "allocated_bytes": 3663253504,
+      "classification": "latest retained local full-profile recovery archive"
+    },
+    "offsite": {
+      "latest_full_created_at": "2026-07-27T08:16:25.421574+00:00",
+      "latest_full_bytes": 911936183,
+      "latest_isolated_restore_test": "PASS 2026-07-26T09:48:13.652640+00:00"
+    }
+  },
+  "queues": {
+    "eligible_after_exact_destructive_confirmation": [
+      {
+        "path": "/tmp/dtr-venv",
+        "allocated_bytes": 161390592,
+        "reason": "temporary virtualenv; no process or script/systemd/cron reference; last modified 2026-07-21"
+      }
+    ],
+    "conditional_policy_or_burnin": [
+      {
+        "set": "DTR transaction rollback payloads",
+        "allocated_bytes": 1386991616,
+        "condition": "preserve compact manifests/readback, define retention, freeze exact child list"
+      },
+      {
+        "set": "old Hermes runtime rollback",
+        "path": "/root/.hermes/hermes-agent",
+        "allocated_bytes": 6089564160,
+        "condition": "retain during b9ba7c78 burn-in; review after 7 days stable"
+      },
+      {
+        "set": "future safety-backup accumulation",
+        "avoidable_future_bytes_estimate": 20971089920,
+        "condition": "change 30-day age retention to count-based latest two; no immediate reclaim because exactly two are currently retained"
+      }
+    ],
+    "protected": [
+      {
+        "set": "active Hermes runtime",
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78"
+      },
+      {
+        "set": "latest local profile archive",
+        "path": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz"
+      },
+      {
+        "set": "latest two safety backups",
+        "path": "/root/mgs-agent/backups/safety"
+      },
+      {
+        "set": "active databases, Git repositories, logs, browser/model assets and /var/backups"
+      }
+    ]
+  },
+  "capacity_forecast": {
+    "evidence": "Discord VPS monitor snapshots: 65.6GB free at 2026-07-10T18:00Z versus 56.9GB current; interval includes one-time Hermes target and profile archive",
+    "raw_upper_growth_gb_per_day": 0.517,
+    "adjusted_recurring_gb_per_day": 0.193,
+    "days_to_75pct_warning_raw_upper": 64,
+    "days_to_75pct_warning_adjusted": 171,
+    "days_to_full_raw_upper": 110,
+    "days_to_full_adjusted": 295,
+    "forecast_risk": "current safety policy can add about 19.5GiB before its 30-day plateau; change to latest-two prevents this future accumulation"
+  },
+  "hermes_delta": {
+    "old_sha": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
+    "target_sha": "b9ba7c78e41b5d187e2c8fb446655c4b71c42aa5",
+    "commits": 1573,
+    "first_parent_commits": 1246,
+    "merge_commits": 101,
+    "files_changed": 2185,
+    "insertions": 265851,
+    "deletions": 21310,
+    "type_counts": {
+      "feat": 199,
+      "fix": 950,
+      "perf": 39,
+      "test": 140,
+      "chore": 85,
+      "docs": 30,
+      "refactor": 36,
+      "other": 94
+    },
+    "public_tag": "v2026.7.20",
+    "tag_to_target_commits": 1649,
+    "classification": "post-release untagged main delta; not 1573 new features"
+  },
+  "status": "audit_complete_no_deletion",
+  "completed_at": "2026-07-27T14:16:41.455608+00:00"
 }
