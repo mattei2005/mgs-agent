@@ -245,9 +245,11 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for the exact reviewed upstream ed3c39108 (2026-07-21).
+# Consolidated port for the exact reviewed upstream b9ba7c78 (2026-07-26).
 # Apply the complete current MGS runtime customization surface first; legacy
-# per-feature patches below remain invariant checks/backward-compatible fallback.
+# composite/per-feature patches below remain invariant checks and
+# backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-07-26.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-21.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-19.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-13.patch"

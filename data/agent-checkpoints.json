@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Cherry-pick do snapshot em clone isolado no alvo b9ba7c78 e resolver semanticamente os conflitos.",
-      "objective": "Portar a superfície MGS local do Hermes de ed3c39108 para o alvo congelado b9ba7c78, validar isoladamente e preparar ativação sem restart.",
-      "source": "discord:1531110503877967952:1531138923357540514",
-      "state": "baseline verde: guard 804+6 e upstream pack 358; snapshot/rollback íntegro dos 40 caminhos, 40/40 byte-idênticos.",
+      "next_step": "Aguardar confirmação explícita para ativação controlada: backup fresco, cutover atômico do wrapper, Ares/Atena primeiro, Zeus por último, smoke e rollback gate.",
+      "objective": "Portar a superfície MGS local do Hermes de ed3c39108 para b9ba7c78, validar e preparar ativação sem restart.",
+      "source": "discord:1531110503877967952;message:1531138923357540514;inventory:hermes-port-b9ba7c78-20260726;report:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
+      "state": "port concluído: patch canônico de 40 caminhos publicado; checkout e venv externos b9ba7c78 validados; live checkout/wrapper/perfis/pids preservados; nenhuma ativação ou restart executado.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T03:29:51+00:00"
+      "updated_at": "2026-07-27T04:19:04+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T03:29:51+00:00"
+  "updated_at": "2026-07-27T04:19:04+00:00"
 }

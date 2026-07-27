@@ -1,11 +1,11 @@
-# Hermes MGS active patch surface — 2026-07-13 consolidated port
+# Hermes MGS active patch surface — 2026-07-26 consolidated port
 
 ## Canonical primary patch
 
-- Artifact: `mgs-runtime-customizations-2026-07-13.patch`
-- Reviewed upstream target: `2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de`
-- SHA-256: `8ce047859605abf2d5929bf0bf098546376bf42c1e22a465905a60a742e1d381`
-- Scope: complete live MGS Hermes customization surface at port time plus eight deterministic compatibility-test updates (34 files total), including restart continuation, busy steering, Discord behavior, auto-reasoning, memory dead-letter, structural write tracing, compact skill view, link-preview suppression and per-channel thread auto-add.
+- Artifact: `mgs-runtime-customizations-2026-07-26.patch`
+- Reviewed upstream target: `b9ba7c78e41b5d187e2c8fb446655c4b71c42aa5`
+- SHA-256: `966a9f6d29cd5ca0bf3716c59b09e88a0150ad90932b8addc677d62839d0dad4`
+- Scope: complete 40-path live MGS Hermes customization surface, including semantic conflict resolution in `gateway/run.py` and `plugins/platforms/discord/adapter.py`, preservation of universal media steering, and test adaptation to upstream curator-ownership policy without weakening its fail-closed guard.
 
 This consolidated patch is the only artifact that `run-hermes-update-controlled.sh` must test independently against a new upstream target. It must apply cleanly to a fresh checkout and reverse-check after application.
 

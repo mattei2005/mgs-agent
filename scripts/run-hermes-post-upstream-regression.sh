@@ -9,10 +9,14 @@ LOG="${LOG:-/tmp/hermes-post-upstream-regression.log}"
 [[ -x "$PYBIN" ]] || { echo "missing python: $PYBIN" >&2; exit 2; }
 mkdir -p "$(dirname "$LOG")"
 
-TEST_HOME="$(mktemp -d /tmp/hermes-post-upstream-regression-XXXXXX)"
-export TEST_HOME
+TEST_ROOT="$(mktemp -d /tmp/hermes-post-upstream-regression-XXXXXX)"
+TEST_HOME="$TEST_ROOT/hermes-home"
+OS_HOME="$TEST_ROOT/os-home"
+mkdir -p "$TEST_HOME" "$OS_HOME"
+export TEST_ROOT TEST_HOME
+export HOME="$OS_HOME"
 cleanup() {
-  python3 -c 'import os, shutil; shutil.rmtree(os.environ["TEST_HOME"], ignore_errors=True)'
+  python3 -c 'import os, shutil; shutil.rmtree(os.environ["TEST_ROOT"], ignore_errors=True)'
 }
 trap cleanup EXIT
 
