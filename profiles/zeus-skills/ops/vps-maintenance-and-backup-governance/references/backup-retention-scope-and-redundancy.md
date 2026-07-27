@@ -161,7 +161,25 @@ After authorized action:
 - append audit closure and publish one canonical REPORT-INFRA embed;
 - report any partial failure.
 
-## 7. Reporting format
+## 7. Forecast capacity from real growth, not free space alone
+
+A whole-VPS audit must prove its coverage before saying “the VPS inteira was scanned”:
+
+1. Enumerate mounts with `findmnt`/`df` and scan each persistent filesystem separately. Use same-device traversal for `/`; scan `/boot` and EFI independently when mounted; exclude `/proc`, `/sys`, `/dev`, `/run`, tmpfs, sockets, and foreign mounts by design. Report file/directory counts, stat errors, and every technical exclusion.
+2. Count archive-like extensions across the filesystem, but split system/runtime compressed dependencies from actual backup/evidence sets. A large filename count is meaningless unless allocated bytes and the largest operational archives are reported separately.
+3. Check suspected temporary environments or staging trees against live process `cwd`/`exe`/open-file references and exact script, cron, and systemd references. “Old mtime” alone does not prove unused.
+
+For disk-life estimates:
+
+1. Recover historical free/used observations from the live monitor’s durable source. If the state file overwrites its previous sample, use retained monitor reports/Discord embeds or audit evidence; do not derive a growth rate from the current `df` alone.
+2. Prefer two rates:
+   - **raw upper bound** between comparable post-clean baselines;
+   - **adjusted recurring rate** after subtracting named one-time artifacts such as a new runtime checkout or full recovery archive.
+3. Inspect the producer policy itself. Compute the future retention plateau as roughly `retention window / creation interval × current snapshot size`; a cleanup that leaves two backups can still recreate the disk problem when the policy allows ten.
+4. Report days to the warning threshold, critical threshold, and full disk as ranges, not false precision. Show the result both under current retention and under the proposed policy. If there is no real historical series, use explicit rate scenarios and label them as scenarios.
+5. Separate **immediate reclaim**, **reclaim after burn-in/retention**, and **future accumulation prevented**. Prevented future bytes are not bytes already freed.
+
+## 8. Reporting format
 
 Use root/set totals for the complete inventory, then list every deletion target exactly. This keeps Discord readable while preserving complete accounting.
 

@@ -93,6 +93,26 @@ python -c 'import package; print(package.__file__)'
 
 If `package.__file__` points to the live checkout but metadata reports an older version, describe it as **metadata drift**, not proof that old code is running. Reinstall/rebuild the editable package during the controlled update and verify both source and metadata afterward.
 
+## Turn a large commit range into an executive capability review
+
+Do not equate commits with features. For a large range, report at least:
+
+- all commits, first-parent commits, and merge commits;
+- diff files/insertions/deletions;
+- subject categories such as `feat`, `fix`, `perf`, `test`, `docs`, and `refactor`;
+- top changed path domains;
+- deduplicated PR titles, using the merge body title when the merge subject is only `Merge pull request ...`.
+
+Check the tag relationship explicitly. A public release tag may already be an ancestor of the installed SHA. In that case, release-note features at the tag are **not new in `installed..target`**, even when the target still prints the same release version. Report `tag..installed`, `installed..target`, and `tag..target`; call the latter post-release untagged development when no newer tag exists.
+
+For business recommendations, classify capabilities into three states:
+
+1. **Active runtime benefit** — fixes or behavior already loaded by the deployed target, such as reconnect supervision, profile isolation, or compaction correctness.
+2. **Available but not operationalized** — commands/configuration that exist but still need MGS policy, credentials, a pilot, or a rollout gate.
+3. **Surface-specific/low priority** — desktop or UI features that do not help a Discord/VPS operation until that surface is adopted.
+
+Tie each recommendation to exact commit subjects or changed code, then rank by company impact: reliability/isolation, cost/context visibility, security/secrets, orchestration, media/channel behavior, and optional UI. A capability present in code is not proof that it is configured, credentialed, or safe to enable. Existing company authorization and Critical Subset rules always outrank upstream “smart approval” or automation features.
+
 ## Final recommendation gate
 
 A direct pull/update is inappropriate when any of these is true:
