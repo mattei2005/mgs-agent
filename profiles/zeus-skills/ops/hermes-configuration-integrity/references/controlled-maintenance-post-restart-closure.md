@@ -69,9 +69,22 @@ A version banner may identify the release correctly while update-status text is 
 
 Never lower the expected patch count based only on tracked diff output.
 
+### Retry preflight: prove the controller contract before another cutover
+
+After a rollback caused by controller/validator procedure rather than target-runtime behavior, do not schedule another restart from `bash -n` alone. Require an isolated contract test first:
+
+1. Read and transform execution scripts from their direct file bytes. Do not reconstruct production shell from a rendered/redacted tool excerpt: secret masking or output compaction can turn an intended variable into a truncated name such as `$AUTH_` or append unrelated text to the same shell word.
+2. Rebuild every authorization/source line from an exact known template. Then scan all uppercase shell-variable references and require each to be assigned globally, declared locally, or explicitly allowlisted as an intentional environment input.
+3. Make producer/consumer filenames a checked contract. If the validator consumes `activation-context.json`, require that exact file to exist and be included in the frozen snapshot; a near-name such as `context.json` is not equivalent.
+4. Run `bash -n`, verify execution-script checksums, and execute a function-only harness under `set -u` with side-effecting functions mocked. Exercise at least runtime-failure/rollback closure and post-acceptance closure-recovery branches; assert the resulting `final-status.json` values and report IDs.
+5. Give the validator an explicit `preflight` mode that skips only facts impossible before cutover—live wrapper pointer and new gateway PIDs/runtime provenance. It must still run the exact candidate snapshot/path checks, version, config/auth, canonical guard, regression, one-shots, mirrors, failed-unit check, and post-validation path-set check. Write a separate `preflight_pass` result; never let it masquerade as live production acceptance.
+6. After any script correction, regenerate both execution checksums and the immutable snapshot entries for those scripts, then validate both again. A green preflight proves the procedure is ready; it does not prove production activation.
+
+Only a fresh authorization after the corrected preflight may reopen the production cutover.
+
 ## 5. Acceptance tests
 
-Run the canonical patch guard and post-upstream regression pack with the live venv and required `BASE`, `REPO`, and `PYBIN`. Require command rc=0 and the operation's expected totals. Keep finite jobs in foreground in Discord operations. The safe-restart exception may run detached only through the canonical finalizer/controller; never attach raw process completion notifications. Do not use `cronjob deliver=origin` as a user-facing restart notifier in MGS Discord: Hermes wraps its stdout with `Cronjob Response`, job ID, separators, and an English management footer, which creates operational noise and is not a normal thread reply. If Rodolfo explicitly asks to be notified, explain before restart that the canonical asynchronous closure is the REPORT-INFRA; send a normal origin reply only when a resumed/active user turn exists, never by cron wrapper or raw background process.
+Run the canonical patch guard and post-upstream regression pack with the live venv and required `BASE`, `REPO`, and `PYBIN`. Require command rc=0 and the operation's expected totals. Keep finite jobs in foreground in Discord operations. The safe-restart exception may run detached only through the canonical finalizer/controller; never attach raw process completion notifications. Do not use `cronjob deliver=origin` as a user-facing restart notifier in MGS Discord: Hermes wraps its stdout with `Cronjob Response`, job ID, separators, and an English management footer, which creates operational noise and is not a normal thread reply. This scheduler wrapper is unrelated to Discord `tool_progress`; do not change the MGS policy `tool_progress: all` to hide cron cards. If Rodolfo explicitly asks to be notified, explain before restart that the canonical asynchronous closure is the REPORT-INFRA; send a normal origin reply only when a resumed/active user turn exists, never by cron wrapper or raw background process.
 
 ## 6. Config checks and exact one-shot smokes
 

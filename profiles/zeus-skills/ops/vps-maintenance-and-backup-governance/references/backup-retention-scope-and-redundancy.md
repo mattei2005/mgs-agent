@@ -76,6 +76,22 @@ Includes:
 - archives the user explicitly retained for future reference;
 - snapshots containing unique databases, logs, state, or credentials metadata.
 
+### 3.1 Freeze a destructive manifest for whole-VPS sweeps
+
+A request to “scan the whole VPS and remove old/unimportant files” may include backups, caches, temporary test trees, staging clones, state snapshots, and package archives. Discovery authorization is not deletion authorization. Before the Critical Subset double-confirmation:
+
+1. Scan metadata only across the whole filesystem while excluding virtual filesystems; do not open secret content. Classify backup-like objects separately from rebuildable caches, active runtime data, OS-managed state, and operational rollback sets.
+2. Build an exact target list with no globs, broad name searches, parent/child overlap, symlink traversal, or mount crossing. Record each target's type, file count, logical bytes, allocated bytes, oldest/newest mtime, and any stat errors.
+3. Use allocated bytes for the projected free-space result. Preserve logical bytes too, because sparse files, directory overhead, and concurrent writes can make the two figures differ.
+4. Record a protected/retained set explicitly: active runtime, frozen target, current rollback runtime, fresh activation backup, latest validated archives, audit/log/report evidence, Git repositories, live profile state, operational browser/model assets, and recent owner-domain backups outside the requested retention change.
+5. Validate every archive that will remain and confirm a current offsite backup plus an isolated restore test before proposing deletion of local state snapshots. Integrity of the replacement must be proven, not assumed from job success.
+6. Add execution preconditions: primary maintenance has already reached `activated_validated`; final REPORT-INFRA GET readback passed; no process uses a target path; all targets still match the confirmed set immediately before deletion; rollback artifacts named as retained still exist.
+7. Canonicalize the exact path/action list and hash it. The confirmation must cite this target-set hash, entry/file counts, allocated bytes, current→projected disk use, retained set, and irreversible effect. Any path, size, or scope change— including a reduction—requires a newly frozen manifest and fresh confirmation.
+
+A housekeeping dry-run that returns no candidates proves only that current filename/retention rules found nothing. It does not authorize an owner override such as “keep only the latest two” or deletion of unique snapshots; those remain Queue B/C until the exact manifest is double-confirmed.
+
+If cleanup is sequenced after an update or cutover, do not delete first. Complete and independently validate the primary maintenance, preserve its minimum rollback route, and only then execute the already confirmed manifest.
+
 ## 4. Validate what remains
 
 Before deleting an old tar archive, validate every archive that will remain:
