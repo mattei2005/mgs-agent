@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Capturar manifest/hash/archive dos 40 caminhos e executar baseline amplo no runtime atual.",
+      "next_step": "Cherry-pick do snapshot em clone isolado no alvo b9ba7c78 e resolver semanticamente os conflitos.",
       "objective": "Portar a superfície MGS local do Hermes de ed3c39108 para o alvo congelado b9ba7c78, validar isoladamente e preparar ativação sem restart.",
       "source": "discord:1531110503877967952:1531138923357540514",
-      "state": "escopo autorizado; head e origin/main congelados; checkout vivo e gateways ainda inalterados.",
+      "state": "baseline verde: guard 804+6 e upstream pack 358; snapshot/rollback íntegro dos 40 caminhos, 40/40 byte-idênticos.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T03:25:43+00:00"
+      "updated_at": "2026-07-27T03:29:51+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T03:25:43+00:00"
+  "updated_at": "2026-07-27T03:29:51+00:00"
 }
