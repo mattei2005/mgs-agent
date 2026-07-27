@@ -3231,13 +3231,13 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_failed_rolled_back",
+      "status": "activation_retry_authorized_prepared",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T12:07:46.522569+00:00",
+      "updated_at": "2026-07-27T12:17:18.187263+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
-      "activation_authorization_message_id": "1531257169121382501",
+      "activation_authorization_message_id": "1531272891835093192",
       "activation_order": [
         "ares",
         "atena",
@@ -3280,7 +3280,11 @@
       "reconciliation_report_readback": true,
       "target_release_gate": "PASS: gateway trial readiness 3/3, config/auth 4/4, guard 850+6, regression 390, corrected one-shot 4/4. Activation remains not completed because the controller already rolled back.",
       "target_revalidation_report_infra_message_id": "1531271881913536513",
-      "target_revalidation_report_readback": true
+      "target_revalidation_report_readback": true,
+      "activation_retry_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z",
+      "activation_retry_backup": "/root/.hermes/secure-backups/hermes-activation-b9ba7c78-retry-20260727T121236Z",
+      "activation_retry_notification_cron_id": "d8cef7a83fbc",
+      "activation_retry_validator_fix": "unsupported -q removed; exact v0.19 one-shot syntax prevalidated 4/4"
     }
   ],
   "profile_skill_references": [
