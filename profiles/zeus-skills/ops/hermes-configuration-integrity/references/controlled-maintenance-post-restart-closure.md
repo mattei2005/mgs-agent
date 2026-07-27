@@ -39,7 +39,7 @@ For every gateway read `ActiveState`, `SubState`, `MainPID`, `ExecMainStatus`, `
 - no restart loop;
 - an agent-log Discord connection marker later than that gateway's restart/start time.
 
-Finalizer READY is evidence, but it does not replace current live readback.
+Finalizer READY is evidence, but it does not replace current live readback. Service names and `hermes --version` banner text are not sufficient runtime provenance: the banner can show a fetched `upstream <sha>` while the wrapper/process still runs an older checkout. Triangulate literal wrapper `readlink`, resolved entrypoint and shebang, service PID command line, active repository `HEAD`, editable import path, and installed metadata version. Any disagreement blocks closure until reconciled.
 
 ## 3. Validate the VPS without widening scope
 
@@ -71,7 +71,7 @@ Never lower the expected patch count based only on tracked diff output.
 
 ## 5. Acceptance tests
 
-Run the canonical patch guard and post-upstream regression pack with the live venv and required `BASE`, `REPO`, and `PYBIN`. Require command rc=0 and the operation's expected totals. Keep finite jobs in foreground in Discord operations; completion notifications can emit raw output after the controlled response.
+Run the canonical patch guard and post-upstream regression pack with the live venv and required `BASE`, `REPO`, and `PYBIN`. Require command rc=0 and the operation's expected totals. Keep finite jobs in foreground in Discord operations. The safe-restart exception may run detached only through the canonical finalizer/controller; never attach raw process completion notifications. If Rodolfo explicitly asks to be notified after the detached restart, use a bounded, purpose-built one-shot notifier that reads a terminal `final-status.json` plus live state and emits only a concise executive success/failure message.
 
 ## 6. Config checks and exact one-shot smokes
 
@@ -111,7 +111,12 @@ Only after all gates pass:
    - validated documentation/inventory housekeeping under an auto-versioning policy: report as pending automatic consolidation, not as a runtime failure.
 9. Confirm the one-shot validator has terminated or been removed from the active schedule before saying no background work remains. Never claim a fully clean repository from an earlier status snapshot if a closure fork could still write afterward.
 
-If any gate fails, persist the real failed stage, send one failure REPORT-INFRA, state containment, and do not perform destructive rollback automatically.
+10. Require every terminal controller path to write a machine-readable `final-status.json`: `activated_validated`, `activation_failed_rolled_back`, `activation_failed_rollback_incomplete`, or `activated_validated_closure_pending`. A notifier must not infer completion from partial logs.
+11. On rollback, atomically restore inventory provenance to the runtime actually active after rollback: checkout path, `HEAD`, metadata version, literal wrapper target, gateway state, rollback result, and timestamp. Preserve the target trial results in a separate field; never leave target paths labeled active after a successful rollback.
+12. A fully green independent stage after rollback proves release readiness, not production activation. Keep checkpoint/inventory state explicitly `not_completed` until a later authorized cutover passes live validation.
+13. When a bounded notifier is explicitly requested, inventory and report its script/job ID, set a finite repeat count, verify that it reads final status and live state rather than raw logs, and confirm the job is completed/disabled or removed after delivery so no stale recurring notifier remains.
+
+If any gate fails, persist the real failed stage and distinguish a validator-invocation defect from a target-runtime defect. Send one failure REPORT-INFRA and state containment. Execute only the reversible pointer/runtime rollback that was explicitly authorized in the maintenance contract; never improvise a destructive rollback. If the bad gate was only an invalid CLI invocation, validate the corrected exact command against the independent stage without restarting, but require fresh authorization before another production cutover.
 
 ## Executive output
 

@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "hermes-update-20260726-b9ba7c78",
-      "next_step": "Executar cutover atômico e restart seguro Ares→Atena→Zeus; validar 850+6, 390, config/auth 4/4, one-shot 4/4; fechar inventário/audit/REPORT e notificar Rodolfo.",
+      "next_step": "Investigar o estágio frozen_snapshot_drift antes de nova autorização de ativação.",
       "objective": "Ativar e validar o Hermes b9ba7c78 com rollback controlado.",
-      "source": "discord:1531110503877967952;authorization:1531272891835093192;activation-retry:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z;notification-cron:d8cef7a83fbc",
-      "state": "retry_authorized_prepared: rodolfo autorizou correção e finalização; -q removido; fresh backup/snapshot e finalizer/validator/notification preparados; runtime ainda ed3c39108 até cutover detached.",
+      "source": "discord:1531110503877967952;authorization:1531272891835093192;activation:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z;log:/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z/activation-controller.log",
+      "state": "activation failed at frozen_snapshot_drift; rollback=not_needed_pre_cutover; target b9ba7c78 não ficou ativo",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-27T12:17:18+00:00"
+      "updated_at": "2026-07-27T12:19:18+00:00"
     },
     {
       "agent": "zeus",
@@ -282,5 +282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T12:17:18+00:00"
+  "updated_at": "2026-07-27T12:19:18+00:00"
 }

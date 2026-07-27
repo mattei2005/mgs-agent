@@ -3231,10 +3231,10 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_retry_authorized_prepared",
+      "status": "activation_failed_rolled_back",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T12:17:18.187263+00:00",
+      "updated_at": "2026-07-27T12:19:19.234935+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531272891835093192",
@@ -3246,13 +3246,13 @@
       "active_runtime_path": "/root/.hermes/hermes-agent",
       "active_wrapper_target": "/root/.hermes/hermes-agent/venv/bin/hermes",
       "rollback_runtime_path": "/root/.hermes/hermes-agent",
-      "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-20260727T111612Z",
+      "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-retry-20260727T121236Z",
       "activation_validation": {
         "status": "failed",
         "stage": "oneshot_root",
         "ts": "2026-07-27T11:28:50.608542+00:00"
       },
-      "activation_report_infra_message_id": "1531262248297955419",
+      "activation_report_infra_message_id": "1531274786326446142",
       "activation_report_infra_channel_id": "1498132022634483894",
       "activation_report_readback": true,
       "active_runtime_sha": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
