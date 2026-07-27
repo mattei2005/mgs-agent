@@ -3234,7 +3234,7 @@
       "status": "activation_authorized_preflight_pass_awaiting_restart",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T13:29:30.997576+00:00",
+      "updated_at": "2026-07-27T13:41:33.328058+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531287711355244725",
@@ -3325,13 +3325,15 @@
       "cleanup_scan": {
         "manifest": "/root/mgs-agent/reports/storage-audits/20260727-cleanup-candidates.json",
         "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67",
-        "status": "awaiting_critical_subset_double_confirmation",
+        "status": "confirmed_pending_activation",
         "estimated_reclaim_bytes": 25860194304,
         "target_entries": 56,
         "target_files": 229182
       },
       "preparation_report_infra_message_id": "1531292311554756741",
-      "preparation_report_readback": true
+      "preparation_report_readback": true,
+      "cleanup_confirmation_message_id": "1531294610918211715",
+      "cleanup_confirmed_at": "2026-07-27T13:41:33.328058+00:00"
     }
   ],
   "profile_skill_references": [

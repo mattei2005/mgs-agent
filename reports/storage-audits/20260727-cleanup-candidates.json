@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_at": "2026-07-27T13:27:10.823688+00:00",
   "authorization_message_id": "1531287711355244725",
-  "status": "awaiting_critical_subset_double_confirmation",
+  "status": "confirmed_pending_activation",
   "scope": "exact conservative whole-VPS cleanup after successful Hermes activation; no deletion yet",
   "entries": [
     {
@@ -604,5 +604,7 @@
     "fresh authorized activation backup remains valid",
     "latest safety and Hermes profile archives tar-test PASS"
   ],
-  "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67"
+  "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67",
+  "confirmation_message_id": "1531294610918211715",
+  "confirmed_at": "2026-07-27T13:41:33.328058+00:00"
 }
