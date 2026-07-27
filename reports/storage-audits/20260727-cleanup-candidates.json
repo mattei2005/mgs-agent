@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_at": "2026-07-27T13:27:10.823688+00:00",
   "authorization_message_id": "1531287711355244725",
-  "status": "confirmed_pending_activation",
+  "status": "completed",
   "scope": "exact conservative whole-VPS cleanup after successful Hermes activation; no deletion yet",
   "entries": [
     {
@@ -606,5 +606,13 @@
   ],
   "target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67",
   "confirmation_message_id": "1531294610918211715",
-  "confirmed_at": "2026-07-27T13:41:33.328058+00:00"
+  "confirmed_at": "2026-07-27T13:41:33.328058+00:00",
+  "completed_at": "2026-07-27T13:46:54.938065+00:00",
+  "result_path": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-authorized-20260727T131646Z/cleanup-result.json",
+  "result_summary": {
+    "entries_removed": 56,
+    "files_removed_estimate": 229199,
+    "allocated_bytes_targeted": 25860296704,
+    "freed_bytes_readback": 25631178752
+  }
 }

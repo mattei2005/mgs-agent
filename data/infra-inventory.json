@@ -3231,10 +3231,10 @@
         "TERMINAL_CWD remains a deprecated Zeus .env setting; config check passes and no config was changed in this scope",
         "Activation was not completed. A retry requires explicit authorization after using the validated v0.19 one-shot syntax without -q."
       ],
-      "status": "activation_and_confirmed_cleanup_scheduled",
+      "status": "activated_validated",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T13:43:16.145109+00:00",
+      "updated_at": "2026-07-27T13:46:56.064009+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531287711355244725",
@@ -3243,20 +3243,59 @@
         "atena",
         "zeus"
       ],
-      "active_runtime_path": "/root/.hermes/hermes-agent",
-      "active_wrapper_target": "/root/.hermes/hermes-agent/venv/bin/hermes",
+      "active_runtime_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "active_wrapper_target": "/root/.local/bin/hermes-b9ba7c78",
       "rollback_runtime_path": "/root/.hermes/hermes-agent",
       "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-authorized-20260727T131646Z",
       "activation_validation": {
-        "status": "failed",
-        "stage": "validator_missing_activation_context",
-        "detail": "external validator referenced activation-context.json while preparation wrote context.json; acceptance suites did not run in this attempt"
+        "status": "pass",
+        "mode": "live",
+        "ts": "2026-07-27T13:46:32.301709+00:00",
+        "target_sha": "b9ba7c78e41b5d187e2c8fb446655c4b71c42aa5",
+        "patch_paths": 40,
+        "guard": "850 passed + 6 subtests",
+        "regression": "390 passed",
+        "config_auth": "4/4",
+        "oneshot": "4/4 rc0+marker",
+        "mirrors": "6/6",
+        "gateways": {
+          "ares": {
+            "MainPID": "3961310",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Mon 2026-07-27 09:44:06 EDT",
+            "ExecMainStatus": "0",
+            "ActiveState": "active",
+            "SubState": "running",
+            "cmdline_target_stage": true,
+            "old_pid": "3552092"
+          },
+          "atena": {
+            "MainPID": "3966342",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Mon 2026-07-27 09:44:16 EDT",
+            "ExecMainStatus": "0",
+            "ActiveState": "active",
+            "SubState": "running",
+            "cmdline_target_stage": true,
+            "old_pid": "3552144"
+          },
+          "zeus": {
+            "MainPID": "3970136",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Mon 2026-07-27 09:44:24 EDT",
+            "ExecMainStatus": "0",
+            "ActiveState": "active",
+            "SubState": "running",
+            "cmdline_target_stage": true,
+            "old_pid": "3552200"
+          }
+        }
       },
-      "activation_report_infra_message_id": "1531274786326446142",
+      "activation_report_infra_message_id": "1531296739112521900",
       "activation_report_infra_channel_id": "1498132022634483894",
       "activation_report_readback": true,
-      "active_runtime_sha": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
-      "active_runtime_metadata_version": "0.18.2",
+      "active_runtime_sha": "b9ba7c78e41b5d187e2c8fb446655c4b71c42aa5",
+      "active_runtime_metadata_version": "0.19.0",
       "activation_failure_root_cause": "External validator invoked Hermes v0.19.0 with removed/unsupported -q flag; CLI rejected the invocation before any one-shot model call. This is a validator-command defect, not evidence of a target runtime defect.",
       "activation_target_trial": {
         "gateway_readiness": "PASS ares/atena/zeus in order",
@@ -3337,7 +3376,15 @@
       "activation_controller_unit": "mgs-hermes-b9ba7c78-authorized-20260727T134258Z.service",
       "cleanup_dry_run": "pass",
       "cleanup_dry_run_files": 229182,
-      "cleanup_dry_run_allocated_bytes": 25860194304
+      "cleanup_dry_run_allocated_bytes": 25860194304,
+      "cleanup_status": "completed",
+      "cleanup_result": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78/activation-authorized-20260727T131646Z/cleanup-result.json",
+      "cleanup_target_set_sha256": "c57c03633ff77ce0d8c4fd3aad80b220b39ed3ff065edafdb470a23dc1ab7c67",
+      "cleanup_entries_removed": 56,
+      "cleanup_files_removed_estimate": 229199,
+      "cleanup_freed_bytes_readback": 25631178752,
+      "cleanup_report_infra_message_id": "1531296835371532389",
+      "cleanup_report_readback": true
     }
   ],
   "profile_skill_references": [
