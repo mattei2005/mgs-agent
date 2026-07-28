@@ -82,6 +82,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-update-monitor-runtime-resolution-20260728",
+      "next_step": "Observar o próximo ciclo regular às 14:37 ET; qualquer novo alerta usará o runtime ativo. Nenhum restart ou mudança de cron é necessária.",
+      "objective": "Corrigir o alerta Hermes que calculava commits pendentes contra checkout legado em vez do runtime ativo.",
+      "source": "discord:thread:1531110503877967952#1531659130912379110; scripts/monitor-hermes-updates.sh; tests/test_monitor_hermes_updates.py; logs/events-audit.jsonl",
+      "state": "completed: monitor resolve /root/.local/bin/hermes para /root/.hermes/hermes-agent-next-b9ba7c78, valida worktree/ancestralidade e possui dry-run isolado; fixture 1 passed e live dry-run retornou b9ba7c78 com 456 commits, zero posts discord e state produtivo intacto.",
+      "thread_id": "1531110503877967952",
+      "updated_at": "2026-07-28T13:52:07+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-vps-controlled-update-20260721",
       "next_step": "Monitoramento rotineiro; manter alvo congelado e tratar o commit upstream pendente somente em futura manutenção controlada",
       "objective": "Atualizar VPS e Hermes de forma controlada, preservando patches e invariantes MGS",
@@ -302,5 +312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-28T12:15:34+00:00"
+  "updated_at": "2026-07-28T13:52:07+00:00"
 }

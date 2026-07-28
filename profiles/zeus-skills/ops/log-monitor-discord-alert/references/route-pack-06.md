@@ -27,6 +27,7 @@ Regras operacionais:
 - Quando Rodolfo pedir um horário “se estiver livre”, expandir também agendas recorrentes (`*/5`, `*/15`, listas e ranges), não apenas procurar uma linha diária exatamente naquele horário. Um minuto como `11:45` pode estar ocupado por vários jobs wildcard mesmo sem existir `45 11 * * *`. Se houver colisão, não alterar silenciosamente: informar o job conflitante e oferecer somente horários próximos já verificados como livres.
 - Para jobs lentos de fontes externas (DTR/ChatPion/browser/API pesada), usar lock próprio e schedule com folga mínima de 2 minutos acima do runtime medido.
 - Após mudar crontab/scripts de cron, rodar `infra-discovery.sh` e registrar em `events-audit.jsonl`.
+- Monitor de update/versionamento baseado em Git deve resolver o checkout **realmente carregado** pelo launcher ou serviço ativo; nunca comparar upstream contra um path legado hardcoded apenas porque ele ainda existe. Validar o diretório resolvido como worktree, exigir ancestralidade antes de calcular `behind` e falhar fechado se a resolução divergir. O dry-run precisa aceitar state/log/output isolados, não carregar credenciais nem publicar no Discord, e provar por fixture que um launcher apontando para o runtime novo vence um checkout legado existente.
 
 ### 1. flock — Proteger contra execuções paralelas
 
