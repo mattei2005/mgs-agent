@@ -39,7 +39,8 @@ DESCRIPTIONS = {
     'cleanup-discord-threads.sh': 'Limpa threads Discord arquivadas antigas nos canais da categoria Agents.',
     'cleanup-zombie-sessions.sh': 'Fecha sessões Hermes zumbis/inativas usando última atividade real, com grace padrão de 180 minutos.',
     'housekeeping-bak-cleanup.sh': 'Remove backups antigos (.bak/.backup/.old/.orig/~) com retenção padrão de 15 dias, preservando sempre o último por família.',
-    'mgs-safety-backup.sh': 'Cria snapshot operacional seguro no máximo a cada 3 dias, excluindo segredos conhecidos e preservando o último backup.',
+    'mgs-safety-backup.sh': 'Cria snapshot operacional seguro no máximo a cada 3 dias, exclui segredos conhecidos e mantém somente os 2 snapshots validados mais recentes.',
+    'hermes-context-cost-audit.py': 'Audita diariamente o orçamento fixo, contexto estimado e uso/custo cumulativo recente dos profiles Zeus, Atena e Ares, sem chamada de modelo.',
     'pendencia-render-md.sh': 'Renderiza docs/PENDENCIAS.md a partir de data/pendencias.db.json.',
     'chat-log.sh': 'Mantém índice Markdown de data/chat-logs/INDEX.md.',
     'sync-codex-oauth.sh': 'Sincroniza tokens OAuth Codex do auth global para profiles Hermes com safety check.',
@@ -70,7 +71,8 @@ RISK = {
     'cleanup-discord-threads.sh': 'alto: deleta threads arquivadas antigas',
     'cleanup-zombie-sessions.sh': 'médio: fecha sessões Hermes inativas',
     'housekeeping-bak-cleanup.sh': 'alto: deleta backups antigos, preservando último por família',
-    'mgs-safety-backup.sh': 'médio: cria tar.gz local, exclui segredos por padrão',
+    'mgs-safety-backup.sh': 'alto: cria snapshot e remove automaticamente safety backups além dos 2 mais recentes',
+    'hermes-context-cost-audit.py': 'baixo: leitura local + escrita atômica de estado agregado sem conteúdo das conversas',
     'pendencia-render-md.sh': 'baixo: re-renderiza docs/PENDENCIAS.md',
     'chat-log.sh': 'baixo: re-renderiza índice',
     'sync-codex-oauth.sh': 'médio: atualiza auth.json dos profiles',
@@ -94,6 +96,7 @@ OWNER = {
     'chat-log.sh': 'Zeus/Ops',
     'monitor-op-rate-limit.py': 'Zeus/Infra',
     'monitor-hermes-memory-capacity.py': 'Zeus/Infra',
+    'hermes-context-cost-audit.py': 'Zeus/Infra',
     'sync-sb-sms-revenue-daily.sh': 'Zeus/Revenue Tech',
 }
 
