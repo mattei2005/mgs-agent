@@ -9,7 +9,7 @@ set -euo pipefail
 REPO="/root/mgs-agent"
 OUT="$REPO/data/infra-inventory.json"
 TMP_OUT="$(mktemp "${OUT}.tmp.XXXXXX")"
-TMP_DIR="$(mktemp -d "${OUT}.parts.XXXXXX")"
+TMP_DIR="$(mktemp -d "/run/mgs-infra-inventory.parts.XXXXXX")"
 trap 'rm -f "$TMP_OUT"; rm -rf "$TMP_DIR"' EXIT
 NOW=$(date -Iseconds)
 
