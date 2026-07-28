@@ -7,16 +7,21 @@
 # Log: /root/mgs-agent/logs/monitor-hermes-updates.log
 
 set -euo pipefail
-set -a
-# shellcheck source=/dev/null
-source /root/mgs-agent/.env 2>/dev/null || true
-set +a
+DRY_RUN="${HERMES_MONITOR_DRY_RUN:-0}"
+if [[ "$DRY_RUN" != "1" ]]; then
+    set -a
+    # shellcheck source=/dev/null
+    source /root/mgs-agent/.env 2>/dev/null || true
+    set +a
+fi
 
-LOG="/root/mgs-agent/logs/monitor-hermes-updates.log"
-STATE="/root/mgs-agent/data/hermes-version-state.json"
-HERMES_DIR="/root/.hermes/hermes-agent"
-TARGET_CHANNEL_ID="1505609056771899644"  # #alerts-hermes-news
-ZEUS_PROFILE_ENV="/root/.hermes/profiles/zeus/.env"
+LOG="${HERMES_MONITOR_LOG:-/root/mgs-agent/logs/monitor-hermes-updates.log}"
+STATE="${HERMES_MONITOR_STATE:-/root/mgs-agent/data/hermes-version-state.json}"
+HERMES_BIN="${HERMES_MONITOR_BIN:-/root/.local/bin/hermes}"
+HERMES_DIR_OVERRIDE="${HERMES_MONITOR_DIR:-}"
+DRY_RUN_OUTPUT="${HERMES_MONITOR_DRY_RUN_OUTPUT:-}"
+TARGET_CHANNEL_ID="${HERMES_MONITOR_CHANNEL_ID:-1505609056771899644}"  # #alerts-hermes-news
+ZEUS_PROFILE_ENV="${HERMES_MONITOR_ZEUS_ENV:-/root/.hermes/profiles/zeus/.env}"
 
 mkdir -p "$(dirname "$LOG")" "$(dirname "$STATE")"
 
@@ -24,19 +29,71 @@ log() {
   echo "[$(date -Iseconds)] $*" >> "$LOG"
 }
 
+resolve_active_hermes_dir() {
+    local launcher shebang candidate="" version_output line
+
+    if [[ -n "$HERMES_DIR_OVERRIDE" ]]; then
+        candidate="$HERMES_DIR_OVERRIDE"
+    else
+        if [[ ! -e "$HERMES_BIN" ]]; then
+            echo "ERROR: Hermes launcher unavailable: $HERMES_BIN" >&2
+            return 1
+        fi
+        launcher=$(readlink -f "$HERMES_BIN")
+        if [[ ! -f "$launcher" ]]; then
+            echo "ERROR: resolved Hermes launcher is not a file: $launcher" >&2
+            return 1
+        fi
+
+        IFS= read -r shebang < "$launcher" || true
+        if [[ "$shebang" =~ ^\#\!(.+)/venv/bin/python([0-9.]*)$ ]]; then
+            candidate="${BASH_REMATCH[1]}"
+        fi
+
+        if [[ -z "$candidate" ]]; then
+            version_output=$("$HERMES_BIN" --version 2>/dev/null || true)
+            while IFS= read -r line; do
+                if [[ "$line" == "Install directory: "* ]]; then
+                    candidate="${line#Install directory: }"
+                    break
+                fi
+            done <<< "$version_output"
+        fi
+    fi
+
+    if [[ -z "$candidate" ]]; then
+        echo "ERROR: unable to resolve active Hermes install directory" >&2
+        return 1
+    fi
+    candidate=$(readlink -f "$candidate")
+    if [[ ! -e "$candidate/.git" ]] || ! git -C "$candidate" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "ERROR: resolved Hermes install is not a Git worktree: $candidate" >&2
+        return 1
+    fi
+    printf '%s\n' "$candidate"
+}
+
+HERMES_DIR=$(resolve_active_hermes_dir) || {
+    log "ERROR: active Hermes install resolution failed launcher=$HERMES_BIN"
+    exit 1
+}
+
 trap 'rc=$?; log "ERROR unexpected_exit rc=$rc line=$LINENO"' ERR
 
-log "START monitor-hermes-updates"
+log "START monitor-hermes-updates runtime_dir=$HERMES_DIR dry_run=$DRY_RUN"
 
 # 1. Buscar token do Zeus Bot para postar no canal Hermes updates
-DISCORD_TOKEN="${DISCORD_BOT_TOKEN:-}"
-if [[ -z "$DISCORD_TOKEN" && -f "$ZEUS_PROFILE_ENV" ]]; then
-  DISCORD_TOKEN=$(grep -E '^DISCORD_BOT_TOKEN=' "$ZEUS_PROFILE_ENV" | head -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//")
-fi
+DISCORD_TOKEN=""
+if [[ "$DRY_RUN" != "1" ]]; then
+    DISCORD_TOKEN="${DISCORD_BOT_TOKEN:-}"
+    if [[ -z "$DISCORD_TOKEN" && -f "$ZEUS_PROFILE_ENV" ]]; then
+      DISCORD_TOKEN=$(grep -E '^DISCORD_BOT_TOKEN=' "$ZEUS_PROFILE_ENV" | head -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//")
+    fi
 
-if [[ -z "$DISCORD_TOKEN" ]]; then
-  log "ERROR: Discord bot token unavailable"
-  exit 1
+    if [[ -z "$DISCORD_TOKEN" ]]; then
+      log "ERROR: Discord bot token unavailable"
+      exit 1
+    fi
 fi
 
 # 2. Validar git repo
@@ -76,9 +133,16 @@ fi
 # 7. Já atualizado
 if [[ "$CURRENT_LOCAL" == "$CURRENT_UPSTREAM" ]]; then
   log "OK already_uptodate local=$LOCAL_SHORT"
-  jq -n --arg u "$CURRENT_UPSTREAM" --arg t "$(date -Iseconds)" \
-    '{last_notified_upstream: $u, last_check: $t, status: "up-to-date"}' > "$STATE"
+  if [[ "$DRY_RUN" != "1" ]]; then
+    jq -n --arg u "$CURRENT_UPSTREAM" --arg t "$(date -Iseconds)" \
+      '{last_notified_upstream: $u, last_check: $t, status: "up-to-date"}' > "$STATE"
+  fi
   exit 0
+fi
+
+if ! git merge-base --is-ancestor "$CURRENT_LOCAL" "$CURRENT_UPSTREAM"; then
+  log "ERROR: active runtime is not an ancestor of upstream local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
+  exit 1
 fi
 
 # 8. Calcular diferenças
@@ -144,6 +208,16 @@ PAYLOAD=$(jq -n \
   --arg diff "$DIFF_URL" \
   --arg releases "$RELEASE_URL" \
   '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream", value:$upstream, inline:true}, {name:"Versão local", value:$local, inline:true}, {name:"Atraso", value:$lag, inline:false}, {name:"Resumo", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```text\n"+.[:900]+"\n```" end), inline:false}, {name:"Top features", value:("```text\n"+$features[:900]+"\n```"), inline:false}, {name:"Top fixes", value:("```text\n"+$fixes[:900]+"\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
+
+if [[ "$DRY_RUN" == "1" ]]; then
+  if [[ -n "$DRY_RUN_OUTPUT" ]]; then
+    printf '%s\n' "$PAYLOAD" > "$DRY_RUN_OUTPUT"
+  fi
+  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
+  printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s behind=%s discord_post=false state_unchanged=true\n' \
+    "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT" "$COMMITS_BEHIND"
+  exit 0
+fi
 
 HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   --max-time 15 \
