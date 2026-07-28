@@ -9,7 +9,8 @@ set -euo pipefail
 REPO="/root/mgs-agent"
 OUT="$REPO/data/infra-inventory.json"
 TMP_OUT="$(mktemp "${OUT}.tmp.XXXXXX")"
-trap 'rm -f "$TMP_OUT"' EXIT
+TMP_DIR="$(mktemp -d "${OUT}.parts.XXXXXX")"
+trap 'rm -f "$TMP_OUT"; rm -rf "$TMP_DIR"' EXIT
 NOW=$(date -Iseconds)
 
 log() { echo "[$(date '+%H:%M:%S')] $*"; }
@@ -133,38 +134,50 @@ if [ -f "$OUT" ]; then
     PROFILE_SKILL_REFERENCES_JSON=$(jq -c '.profile_skill_references // []' "$OUT")
 fi
 
+printf '%s\n' "$SYSTEM_PACKAGES_JSON" > "$TMP_DIR/system_packages.json"
+printf '%s\n' "$RUNTIME_ARTIFACTS_JSON" > "$TMP_DIR/runtime_artifacts.json"
+printf '%s\n' "$PROFILE_SKILL_REFERENCES_JSON" > "$TMP_DIR/profile_skill_references.json"
+printf '%s\n' "$SERVICES_JSON" > "$TMP_DIR/services.json"
+printf '%s\n' "$CRONS_JSON" > "$TMP_DIR/crons.json"
+printf '%s\n' "$SCRIPTS_JSON" > "$TMP_DIR/scripts.json"
+printf '%s\n' "$SKILLS_MGS_JSON" > "$TMP_DIR/skills_mgs.json"
+printf '%s\n' "$SKILLS_HERMES_JSON" > "$TMP_DIR/skills_hermes.json"
+printf '%s\n' "$DATA_JSON" > "$TMP_DIR/data_files.json"
+printf '%s\n' "$DISCORD_PERMISSIONS_JSON" > "$TMP_DIR/discord_permissions.json"
+printf '%s\n' "$OAUTH_AUTH_STATES_JSON" > "$TMP_DIR/oauth_auth_states.json"
+
 jq -n \
     --arg updated_at "$NOW" \
     --arg mu_md5 "$MU_MD5" \
     --argjson mu_lines "$MU_LINES" \
-    --argjson system_packages "$SYSTEM_PACKAGES_JSON" \
-    --argjson runtime_artifacts "$RUNTIME_ARTIFACTS_JSON" \
-    --argjson profile_skill_references "$PROFILE_SKILL_REFERENCES_JSON" \
-    --argjson services "$SERVICES_JSON" \
-    --argjson crons "$CRONS_JSON" \
-    --argjson scripts "$SCRIPTS_JSON" \
-    --argjson skills_mgs "$SKILLS_MGS_JSON" \
-    --argjson skills_hermes "$SKILLS_HERMES_JSON" \
-    --argjson data_files "$DATA_JSON" \
-    --argjson discord_permissions "$DISCORD_PERMISSIONS_JSON" \
-    --argjson oauth_auth_states "$OAUTH_AUTH_STATES_JSON" \
+    --slurpfile system_packages "$TMP_DIR/system_packages.json" \
+    --slurpfile runtime_artifacts "$TMP_DIR/runtime_artifacts.json" \
+    --slurpfile profile_skill_references "$TMP_DIR/profile_skill_references.json" \
+    --slurpfile services "$TMP_DIR/services.json" \
+    --slurpfile crons "$TMP_DIR/crons.json" \
+    --slurpfile scripts "$TMP_DIR/scripts.json" \
+    --slurpfile skills_mgs "$TMP_DIR/skills_mgs.json" \
+    --slurpfile skills_hermes "$TMP_DIR/skills_hermes.json" \
+    --slurpfile data_files "$TMP_DIR/data_files.json" \
+    --slurpfile discord_permissions "$TMP_DIR/discord_permissions.json" \
+    --slurpfile oauth_auth_states "$TMP_DIR/oauth_auth_states.json" \
     '{
         "_meta": {
             "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
             "updated_at": $updated_at,
             "generated_by": "infra-discovery.sh"
         },
-        "system_packages": $system_packages,
-        "runtime_artifacts": $runtime_artifacts,
-        "profile_skill_references": $profile_skill_references,
-        "systemd_services": $services,
-        "crons": $crons,
-        "scripts": $scripts,
-        "skills_mgs": $skills_mgs,
-        "skills_hermes": $skills_hermes,
-        "discord_permissions": $discord_permissions,
-        "oauth_auth_states": $oauth_auth_states,
-        "data_files": $data_files,
+        "system_packages": $system_packages[0],
+        "runtime_artifacts": $runtime_artifacts[0],
+        "profile_skill_references": $profile_skill_references[0],
+        "systemd_services": $services[0],
+        "crons": $crons[0],
+        "scripts": $scripts[0],
+        "skills_mgs": $skills_mgs[0],
+        "skills_hermes": $skills_hermes[0],
+        "discord_permissions": $discord_permissions[0],
+        "oauth_auth_states": $oauth_auth_states[0],
+        "data_files": $data_files[0],
         "mu_plugin_canonical": {
             "path": "scripts/mu-plugins/yoast-rest-meta.php",
             "md5": $mu_md5,
@@ -174,6 +187,7 @@ jq -n \
 
 jq -e . "$TMP_OUT" >/dev/null
 mv "$TMP_OUT" "$OUT"
+rm -rf "$TMP_DIR"
 trap - EXIT
 
 SKILLS_MGS_COUNT=$(echo "$SKILLS_MGS_JSON" | jq 'length')

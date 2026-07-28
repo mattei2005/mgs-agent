@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-27T06:21:03-04:00",
+    "updated_at": "2026-07-27T23:48:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -3982,6 +3982,9 @@
     },
     {
       "entry": "* * * * * flock -n /var/lock/hermes_news_explainer_watchdog.lock /root/mgs-agent/scripts/hermes-news-explainer-watchdog.py >> /root/mgs-agent/logs/hermes-news-explainer-watchdog.log 2>&1"
+    },
+    {
+      "entry": "47 4 * * * flock -n /var/lock/hermes_context_cost_audit.lock /root/mgs-agent/scripts/hermes-context-cost-audit.py >> /root/mgs-agent/logs/hermes-context-cost-audit-cron.log 2>&1"
     }
   ],
   "scripts": [
@@ -4227,8 +4230,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
-      "size_bytes": 15123,
-      "modified_at": "2026-07-18T11:23:40-04:00"
+      "size_bytes": 15535,
+      "modified_at": "2026-07-27T23:42:34-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
@@ -4361,6 +4364,11 @@
       "modified_at": "2026-07-17T11:04:02-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/hermes-context-cost-audit.py",
+      "size_bytes": 11288,
+      "modified_at": "2026-07-27T23:43:49-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/hermes-memory-autocompactor.py",
       "size_bytes": 22253,
       "modified_at": "2026-07-17T03:29:18-04:00"
@@ -4422,8 +4430,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
-      "size_bytes": 8122,
-      "modified_at": "2026-07-12T13:45:38-04:00"
+      "size_bytes": 9100,
+      "modified_at": "2026-07-27T23:47:21-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/map_content_references.py",
@@ -4502,8 +4510,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
-      "size_bytes": 6331,
-      "modified_at": "2026-07-17T11:03:58-04:00"
+      "size_bytes": 6754,
+      "modified_at": "2026-07-27T23:37:16-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-updates.sh",
@@ -5131,6 +5139,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/coding-agent-cli-orchestration/SKILL.md"
       },
       {
+        "name": "computer-use",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/computer-use/SKILL.md"
+      },
+      {
         "name": "hermes-agent",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
@@ -5149,11 +5162,6 @@
         "name": "openhands",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "computer-use",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/ares/skills/computer-use/SKILL.md"
       },
       {
         "name": "ascii-video",
@@ -5256,11 +5264,6 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/devops/webhook-subscriptions/SKILL.md"
       },
       {
-        "name": "dogfood",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/ares/skills/dogfood/SKILL.md"
-      },
-      {
         "name": "himalaya",
         "category": "email",
         "skill_md": "/root/.hermes/profiles/ares/skills/email/himalaya/SKILL.md"
@@ -5336,14 +5339,19 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/mcp/native-mcp/SKILL.md"
       },
       {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/ares/skills/media/heartmula/SKILL.md"
+      },
+      {
         "name": "media-operations",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/ares/skills/media/media-operations/SKILL.md"
       },
       {
-        "name": "lm-evaluation-harness",
+        "name": "evaluating-llms-harness",
         "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/evaluation/evaluating-llms-harness/SKILL.md"
       },
       {
         "name": "obliteratus",
@@ -5356,9 +5364,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/outlines/SKILL.md"
       },
       {
-        "name": "vllm",
+        "name": "serving-llms-vllm",
         "category": "inference",
-        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/vllm/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/serving-llms-vllm/SKILL.md"
       },
       {
         "name": "mlops-model-lifecycle",
@@ -5504,6 +5512,11 @@
         "name": "debugging-hermes-tui-commands",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/ares/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
+      },
+      {
+        "name": "dogfood",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/dogfood/SKILL.md"
       },
       {
         "name": "hermes-agent-skill-authoring",
@@ -5713,14 +5726,14 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/autonomous-coding-agents/SKILL.md"
       },
       {
+        "name": "computer-use",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/computer-use/SKILL.md"
+      },
+      {
         "name": "hermes-agent",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
-      },
-      {
-        "name": "computer-use",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/atena/skills/computer-use/SKILL.md"
       },
       {
         "name": "ascii-media",
@@ -5813,11 +5826,6 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/devops/webhook-subscriptions/SKILL.md"
       },
       {
-        "name": "dogfood",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/atena/skills/dogfood/SKILL.md"
-      },
-      {
         "name": "himalaya",
         "category": "email",
         "skill_md": "/root/.hermes/profiles/atena/skills/email/himalaya/SKILL.md"
@@ -5848,6 +5856,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/mcp/native-mcp/SKILL.md"
       },
       {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/media/heartmula/SKILL.md"
+      },
+      {
         "name": "media-operations",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/atena/skills/media/media-operations/SKILL.md"
@@ -5876,6 +5889,16 @@
         "name": "mlops-inference-serving",
         "category": "mlops",
         "skill_md": "/root/.hermes/profiles/atena/skills/mlops/mlops-inference-serving/SKILL.md"
+      },
+      {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/audiocraft/SKILL.md"
+      },
+      {
+        "name": "segment-anything",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/segment-anything/SKILL.md"
       },
       {
         "name": "dspy",
@@ -5996,6 +6019,11 @@
         "name": "xurl",
         "category": "social-media",
         "skill_md": "/root/.hermes/profiles/atena/skills/social-media/xurl/SKILL.md"
+      },
+      {
+        "name": "dogfood",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/dogfood/SKILL.md"
       },
       {
         "name": "plan",
@@ -6345,6 +6373,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
       },
       {
+        "name": "computer-use",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/computer-use/SKILL.md"
+      },
+      {
         "name": "hermes-agent",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
@@ -6358,11 +6391,6 @@
         "name": "openhands",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "computer-use",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/computer-use/SKILL.md"
       },
       {
         "name": "ascii-video",
@@ -6435,11 +6463,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/devops/webhook-subscriptions/SKILL.md"
       },
       {
-        "name": "dogfood",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/dogfood/SKILL.md"
-      },
-      {
         "name": "minecraft-modpack-server",
         "category": "gaming",
         "skill_md": "/root/.hermes/profiles/zeus/skills/gaming/minecraft-modpack-server/SKILL.md"
@@ -6505,6 +6528,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/ai-music-audio-generation/SKILL.md"
       },
       {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/heartmula/SKILL.md"
+      },
+      {
         "name": "media-content-processing",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/media-content-processing/SKILL.md"
@@ -6533,6 +6561,11 @@
         "name": "mlops-evaluation-and-tracking",
         "category": "mlops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/mlops-evaluation-and-tracking/SKILL.md"
+      },
+      {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/models/audiocraft/SKILL.md"
       },
       {
         "name": "segment-anything",
@@ -6745,6 +6778,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
       },
       {
+        "name": "dogfood",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/dogfood/SKILL.md"
+      },
+      {
         "name": "hermes-agent-skill-authoring",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
@@ -6857,15 +6895,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 22404,
-      "md5": "bcf7885c1cd18f393d86ae2db9b65763",
-      "modified_at": "2026-07-27T00:19:04-04:00"
+      "size_bytes": 23904,
+      "md5": "50ff680e2fe9de2b1e89bb5439e0edfe",
+      "modified_at": "2026-07-27T23:48:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 12197,
-      "md5": "843a69c6dad29abe2aa0addb66ff8b07",
-      "modified_at": "2026-07-27T06:17:01-04:00"
+      "size_bytes": 12448,
+      "md5": "673bc7fdea049593b601361757a8b51e",
+      "modified_at": "2026-07-27T23:47:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6876,8 +6914,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "81d5d1a0af82ae64d399bdc0e23e0f59",
-      "modified_at": "2026-07-27T06:11:45-04:00"
+      "md5": "36fc4a7e0f2a1eae71b4bf8d07712efc",
+      "modified_at": "2026-07-27T23:41:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6888,8 +6926,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 27953,
-      "md5": "12c070858cd005aaf8980f834ed55bdc",
-      "modified_at": "2026-07-26T23:27:46-04:00"
+      "md5": "a156ea4940179d985dedd18e73337111",
+      "modified_at": "2026-07-27T23:28:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6899,21 +6937,21 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 414,
-      "md5": "6226c73529af2d8d2f42578632d38ca4",
-      "modified_at": "2026-07-27T06:20:45-04:00"
+      "size_bytes": 637,
+      "md5": "4c60a23d45fb36a125768746b7d7119f",
+      "modified_at": "2026-07-27T23:45:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 8627,
-      "md5": "6e791c8f13868cec046b52742b56a4f8",
-      "modified_at": "2026-07-26T09:16:02-04:00"
+      "size_bytes": 9001,
+      "md5": "163829a60fd9321b9c1336250954b38b",
+      "modified_at": "2026-07-27T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "3480d95db1ee3bf756dec7e132732e32",
-      "modified_at": "2026-07-27T06:19:02-04:00"
+      "md5": "91ba784cbe279c7359a74771ab1a0fa1",
+      "modified_at": "2026-07-27T23:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -6924,14 +6962,14 @@
     {
       "path": "/root/mgs-agent/data/dtr-sb-daily-match-audit-state.json",
       "size_bytes": 2876,
-      "md5": "fcda3b48156ea4fa7537beb193f7e03f",
-      "modified_at": "2026-07-26T06:54:46-04:00"
+      "md5": "949d6ffb5a0bd0863e3bfb8138418dc3",
+      "modified_at": "2026-07-27T06:54:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 354614,
-      "md5": "479fc6567ccaea6533445f6134a882fd",
-      "modified_at": "2026-07-26T15:45:52-04:00"
+      "size_bytes": 356816,
+      "md5": "173d398b99dc006556177a3ed2d98056",
+      "modified_at": "2026-07-27T15:45:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -6940,34 +6978,40 @@
       "modified_at": "2026-07-03T03:12:58-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/hermes-context-cost-audit-state.json",
+      "size_bytes": 12534,
+      "md5": "abf073155117ae7c2761438f13ca68ee",
+      "modified_at": "2026-07-27T23:44:22-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "e0f8cf2406c5749c93d6dba95099c2fb",
-      "modified_at": "2026-07-27T06:14:02-04:00"
+      "md5": "25ce13cffa4b182b7d83f901691f65e2",
+      "modified_at": "2026-07-27T23:44:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "140645eea35f5ebbec7fcf3289858479",
-      "modified_at": "2026-07-27T05:00:06-04:00"
+      "md5": "08c22ea3153203600154a54ec0eb6303",
+      "modified_at": "2026-07-27T23:03:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 33574,
-      "md5": "90093b3dded41537f8d36666d982d697",
-      "modified_at": "2026-07-27T06:20:02-04:00"
+      "size_bytes": 34024,
+      "md5": "9655d71463a4ca9415794ac29a08e6cb",
+      "modified_at": "2026-07-27T23:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 14071,
-      "md5": "86cbd6af23f5ce9c013c3dce1d2432de",
-      "modified_at": "2026-07-27T06:21:01-04:00"
+      "size_bytes": 15157,
+      "md5": "b41a147e89327c6d6a0fc359f1b7f2d9",
+      "modified_at": "2026-07-27T23:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 356,
-      "md5": "eed1cf95ce40963ffa3eecfcc8f23ac0",
-      "modified_at": "2026-07-27T06:21:01-04:00"
+      "size_bytes": 354,
+      "md5": "8fb6fd8caee5187c39fb4ac746226e2f",
+      "modified_at": "2026-07-27T23:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6977,15 +7021,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 335,
-      "md5": "503ab900b496b6c801472f422be6a828",
-      "modified_at": "2026-07-26T20:37:05-04:00"
+      "size_bytes": 336,
+      "md5": "70ffa3893319abb07b465a10f09f178c",
+      "modified_at": "2026-07-27T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 440,
-      "md5": "04300251f7a2e029482e2038a7c50896",
-      "modified_at": "2026-07-26T22:54:32-04:00"
+      "md5": "5432de9764f38d12f76e3aa6c52287b8",
+      "modified_at": "2026-07-27T22:54:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
@@ -6995,9 +7039,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 312472,
-      "md5": "0a5d59afda749505a862f9d9cb8287f3",
-      "modified_at": "2026-07-27T05:00:11-04:00"
+      "size_bytes": 323549,
+      "md5": "75fe47a70f119a6bf88a26e3f8067d89",
+      "modified_at": "2026-07-27T23:48:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7031,9 +7075,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 52424,
-      "md5": "ad542fe059808a1f4ef88358e17ad98f",
-      "modified_at": "2026-07-26T23:04:46-04:00"
+      "size_bytes": 52184,
+      "md5": "2a10288005027d28cde0c553a280f5b6",
+      "modified_at": "2026-07-27T23:05:59-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -7050,8 +7094,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7235,
-      "md5": "d750e0468342f6ab164d2c415e39546b",
-      "modified_at": "2026-07-27T05:25:38-04:00"
+      "md5": "2cec665a0867e83c45d15f04f7ffba09",
+      "modified_at": "2026-07-27T23:25:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -7061,9 +7105,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1079,
-      "md5": "07c0d9f5b6d49792929860722fe46436",
-      "modified_at": "2026-07-27T05:39:02-04:00"
+      "size_bytes": 1049,
+      "md5": "7d27b25e09f47b58688a78b08cd80919",
+      "modified_at": "2026-07-27T23:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -7075,7 +7119,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-07-27T06:07:03-04:00"
+      "modified_at": "2026-07-27T23:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -7097,15 +7141,15 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 197210,
-      "md5": "09ef89c021dbcd45afab3d3bf9bdaaf6",
-      "modified_at": "2026-07-27T06:20:12-04:00"
+      "size_bytes": 197698,
+      "md5": "3ee00fa0d494c0f3aec2851ed3629051",
+      "modified_at": "2026-07-27T23:44:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
-      "size_bytes": 429256,
-      "md5": "9a7809240d484bffed87fbad257d30fc",
-      "modified_at": "2026-07-26T09:01:15-04:00"
+      "size_bytes": 429260,
+      "md5": "99a523f8b3a55c119fec10709f1cc015",
+      "modified_at": "2026-07-27T09:00:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-all-active-20260702-013833.json",
@@ -7140,8 +7184,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
-      "md5": "950af1d0c157804cc9a99f60464f2c75",
-      "modified_at": "2026-07-27T06:21:01-04:00"
+      "md5": "63cadbc2ce5a1536c7e8614e332d2b8b",
+      "modified_at": "2026-07-27T23:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7151,9 +7195,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17189,
-      "md5": "12bb2f4bed2f7fe9cf2edd2c927d2246",
-      "modified_at": "2026-07-27T01:24:04-04:00"
+      "size_bytes": 17311,
+      "md5": "fc75641c3cdcb90f782e642e9a6ef382",
+      "modified_at": "2026-07-27T23:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -7175,15 +7219,15 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2114,
-      "md5": "7a4c030177d95327ea16e6edb1eeac4a",
-      "modified_at": "2026-07-27T06:20:02-04:00"
+      "size_bytes": 2112,
+      "md5": "c07850241c1936e880977b55b40f9446",
+      "modified_at": "2026-07-27T23:45:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "b146459485cb7eed4c83be27dbafef55",
-      "modified_at": "2026-07-26T20:07:02-04:00"
+      "md5": "45986db646457d661d6d50b153345a2f",
+      "modified_at": "2026-07-27T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -7193,9 +7237,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 27892,
-      "md5": "feaf42ab52e0d1c160969e0fa6bc7f9b",
-      "modified_at": "2026-07-26T10:23:08-04:00"
+      "size_bytes": 28256,
+      "md5": "b4198db7790e5c245121591c7d3589b5",
+      "modified_at": "2026-07-27T10:23:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

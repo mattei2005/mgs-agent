@@ -55,19 +55,24 @@ def atomic_json_write(path: Path, payload: dict[str, Any]) -> None:
 def prompt_size(profile: str) -> dict[str, Any]:
     env = os.environ.copy()
     env["HERMES_HOME"] = f"/root/.hermes/profiles/{profile}"
-    proc = subprocess.run(
-        [str(HERMES), "prompt-size", "--platform", "discord", "--json"],
-        env=env,
-        stdin=subprocess.DEVNULL,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        timeout=90,
-        check=False,
-    )
-    if proc.returncode != 0:
-        raise RuntimeError(f"prompt-size rc={proc.returncode}: {proc.stderr.strip()[:240]}")
-    return json.loads(proc.stdout)
+    last_error = ""
+    for attempt in range(1, 4):
+        proc = subprocess.run(
+            [str(HERMES), "prompt-size", "--platform", "discord", "--json"],
+            env=env,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=90,
+            check=False,
+        )
+        if proc.returncode == 0:
+            return json.loads(proc.stdout)
+        last_error = f"prompt-size rc={proc.returncode}: {proc.stderr.strip()[:240]}"
+        if attempt < 3:
+            time.sleep(attempt * 2)
+    raise RuntimeError(last_error)
 
 
 def context_limit(model: str, provider: str) -> tuple[int, str]:

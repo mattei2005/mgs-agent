@@ -52,6 +52,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-operational-adoption-20260727",
+      "next_step": "Validar artefatos finais, registrar audit/inventário e publicar um único REPORT-INFRA com readback.",
+      "objective": "Executar as quatro prioridades pós-update: retenção safety latest-two, auditoria recorrente de contexto/custo, piloto Kanban privado e auditoria SecretSource/1Password.",
+      "source": "discord:thread:1531110503877967952#1531504870383685813",
+      "state": "closure_in_progress: latest-two e auditoria diária ativos; board privado validado; secretsource auditado sem mudança de regra; inventário e report-infra em fechamento.",
+      "thread_id": "1531110503877967952",
+      "updated_at": "2026-07-28T03:48:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-post976-hardening-20260720",
       "next_step": "Encerrado; manter os guards 801+6 e pack 331 como baseline e reexecutar apenas se houver drift.",
       "objective": "Aplicar e validar o hardening Hermes pós-976 em Root, Zeus, Atena e Ares",
@@ -292,5 +302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-27T14:17:01+00:00"
+  "updated_at": "2026-07-28T03:48:08+00:00"
 }
