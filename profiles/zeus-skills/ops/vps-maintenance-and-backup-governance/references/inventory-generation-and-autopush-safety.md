@@ -56,7 +56,9 @@ Before cleaning a leftover path inside the repository:
 5. If tracked or pushed, **do not continue the original cleanup blindly**. First restore/reconcile any in-flight deletion so auto-push cannot publish a partial cleanup.
 6. Preserve a copy outside the repository and validate file count, bytes, and a deterministic tree hash.
 7. Request the Critical Subset confirmation required for removing tracked files/directories, naming the exact root, count, bytes, operational impact, backup path, and rollback method.
-8. After authorized removal, wait for or validate the canonical auto-push path, then confirm the remote commit no longer contains the artifact.
+8. After authorized removal, validate the canonical auto-commit/auto-push path and confirm the remote commit no longer contains the artifact. Do not treat a short passive wait as proof of failure: inspect the watcher's real batching controls first. A watcher may remain healthy while intentionally waiting for `BATCH_TARGET` or `BATCH_MAX_WAIT_SECONDS` (for example, one batch with a 600-second maximum will not flush during a 120-second poll).
+9. If the authorized changes are already dirty but the watcher is waiting for more batches—or started after those events—use the canonical catch-up pattern instead of committing manually: rewrite an already-authorized dirty file with byte-identical content, separating events by more than `BATCH_QUIET_SECONDS`, until the configured batch target can flush. Re-read the file to prove its content is unchanged, then require service active, clean scoped status, `HEAD == origin/main`, and zero matching paths in the remote tree. Stop if the watcher logs a guardrail or commit error; do not bypass it.
+10. A timeout followed by successful canonical catch-up is a resolved convergence delay, not a persistent auto-push outage. Record the timeout and the final readback honestly, without turning the transient delay into a durable negative claim about the watcher.
 
 ## Verification checklist
 
