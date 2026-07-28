@@ -9,7 +9,8 @@
 #   - Exclui segredos conhecidos (.env, auth.json, token, secret, credential etc.)
 #   - Gera manifest sem conteúdo sensível
 #   - Valida o tar.gz com tar -tzf antes de declarar sucesso
-#   - Mantém sempre o último snapshot, mesmo se acima da retenção
+#   - Mantém exatamente os KEEP_LATEST_BACKUPS snapshots mais recentes (default: 2)
+#   - Só aplica a poda depois que o novo archive foi validado
 #   - --dry-run mostra o que faria sem criar/deletar nada
 # =============================================================================
 
@@ -19,7 +20,7 @@ BASE_DIR=/root/mgs-agent
 BACKUP_DIR="${BACKUP_DIR:-/root/mgs-agent/backups/safety}"
 LOG="${LOG:-/root/mgs-agent/logs/mgs-safety-backup.log}"
 INTERVAL_DAYS="${BACKUP_INTERVAL_DAYS:-3}"
-RETENTION_DAYS="${RETENTION_DAYS:-30}"
+KEEP_LATEST_BACKUPS="${KEEP_LATEST_BACKUPS:-2}"
 DRY_RUN=0
 FORCE=0
 
@@ -55,25 +56,37 @@ should_create_backup() {
 }
 
 cleanup_old_safety_backups() {
-  local latest cutoff
-  latest="$(latest_backup || true)"
-  cutoff=$(( $(date +%s) - RETENTION_DAYS * 86400 ))
-  find "$BACKUP_DIR" -maxdepth 1 -type f \( -name 'mgs-safety-*.tar.gz' -o -name 'mgs-safety-*.manifest.txt' \) -print0 2>/dev/null |
-    while IFS= read -r -d '' f; do
-      [[ -z "$latest" ]] && continue
-      # Preservar sempre o tar.gz mais recente e seu manifest correspondente.
-      if [[ "$f" == "$latest" || "$f" == "${latest%.tar.gz}.manifest.txt" ]]; then
-        continue
+  local -a archives=()
+  local archive manifest
+
+  if ! [[ "$KEEP_LATEST_BACKUPS" =~ ^[1-9][0-9]*$ ]]; then
+    log "ERROR: KEEP_LATEST_BACKUPS deve ser inteiro >= 1; recebido: $KEEP_LATEST_BACKUPS"
+    return 2
+  fi
+
+  mapfile -t archives < <(
+    find "$BACKUP_DIR" -maxdepth 1 -type f -name 'mgs-safety-*.tar.gz' \
+      -printf '%T@\t%p\n' 2>/dev/null | sort -nr | cut -f2-
+  )
+
+  if (( ${#archives[@]} <= KEEP_LATEST_BACKUPS )); then
+    return 0
+  fi
+
+  for archive in "${archives[@]:KEEP_LATEST_BACKUPS}"; do
+    manifest="${archive%.tar.gz}.manifest.txt"
+    if [[ "$DRY_RUN" -eq 1 ]]; then
+      log "DRY-RUN: would rm safety backup beyond latest-${KEEP_LATEST_BACKUPS} $archive"
+      [[ -f "$manifest" ]] && log "DRY-RUN: would rm safety manifest beyond latest-${KEEP_LATEST_BACKUPS} $manifest"
+    else
+      rm -f -- "$archive"
+      log "rm safety backup beyond latest-${KEEP_LATEST_BACKUPS} $archive"
+      if [[ -f "$manifest" ]]; then
+        rm -f -- "$manifest"
+        log "rm safety manifest beyond latest-${KEEP_LATEST_BACKUPS} $manifest"
       fi
-      if (( $(stat -c %Y "$f") < cutoff )); then
-        if [[ "$DRY_RUN" -eq 1 ]]; then
-          log "DRY-RUN: would rm old safety backup $f"
-        else
-          rm -f -- "$f"
-          log "rm old safety backup $f"
-        fi
-      fi
-    done
+    fi
+  done
 }
 
 TS="$(date +%Y%m%d-%H%M%S)"
@@ -89,7 +102,7 @@ if [[ "$FORCE" -eq 0 ]] && ! should_create_backup; then
   exit 0
 fi
 
-log_start="START interval=${INTERVAL_DAYS}d retention=${RETENTION_DAYS}d archive=$ARCHIVE"
+log_start="START interval=${INTERVAL_DAYS}d keep_latest=${KEEP_LATEST_BACKUPS} archive=$ARCHIVE"
 if [[ "$DRY_RUN" -eq 1 ]]; then
   log "DRY-RUN: $log_start"
 else
