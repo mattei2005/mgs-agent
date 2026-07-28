@@ -53,12 +53,12 @@
     {
       "agent": "zeus",
       "id": "hermes-operational-adoption-20260727",
-      "next_step": "Operação normal: observar auditoria diária e manter SecretSource nativo desativado até existir mapeamento específico compatível com as regras MGS.",
+      "next_step": "Após confirmação explícita, remover somente data/infra-inventory.json.parts.6I5YpD/, validar Git/auto-push e encerrar.",
       "objective": "Executar as quatro prioridades pós-update: retenção safety latest-two, auditoria recorrente de contexto/custo, piloto Kanban privado e auditoria SecretSource/1Password.",
       "source": "discord:thread:1531110503877967952#1531504870383685813",
-      "state": "completed_validated: latest-two ativo; auditoria diária 04:47 et ok; board mgs-engineering-pilot validado; secretsource auditado sem mudança; inventário e report-infra 1531509298545557516 validados.",
+      "state": "validated_with_cleanup_gate: execução operacional validada; auto-push concorrente 19a26a0c versionou 11 jsons temporários (282234 bytes) de infra-discovery; conteúdo restaurado e backup hash-validado preservado; remoção aguarda confirmação critical subset.",
       "thread_id": "1531110503877967952",
-      "updated_at": "2026-07-28T03:52:07+00:00"
+      "updated_at": "2026-07-28T03:53:24+00:00"
     },
     {
       "agent": "zeus",
@@ -302,5 +302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-28T03:52:07+00:00"
+  "updated_at": "2026-07-28T03:53:24+00:00"
 }

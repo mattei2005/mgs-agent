@@ -27,7 +27,8 @@ Load this skill when Rodolfo asks:
 1. For Git/release delta, local patches, editable-package version drift, or dry-run portability, load `references/git-update-delta-and-patch-portability.md`.
 2. For backup inventory, retention-scope gaps, archive redundancy, or cleanup classification, load `references/backup-retention-scope-and-redundancy.md`.
 3. For an authorized exact APT/vendor package plus npm/Corepack maintenance window, load `references/controlled-package-and-node-tooling-update.md` before touching `/usr`; it defines literal candidate versions, rollback, gate separation, `needrestart` residuals, and inventory closure.
-4. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
+4. For inventory generators that assemble large JSON, atomic-write design, `jq` argument-size failures, or Git auto-push races involving temporary artifacts, load `references/inventory-generation-and-autopush-safety.md`.
+5. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 
 ## Audit workflow
 
@@ -50,6 +51,8 @@ Load this skill when Rodolfo asks:
 - Never inspect or print secret contents while sizing or hashing backups. Paths may be named only when that does not expose a credential value.
 - Never run `apt autoremove`, delete system-managed `/var/backups`, remove a registered Git worktree with raw `rm`, or shorten backup retention as an incidental part of another cleanup.
 - Preserve patches, manifests, hashes, final reports, and compact logs when deleting only bulky staging clones or redundant archives.
+- Inventory/render generators running inside an auto-versioned repository must create component work directories outside the Git tree (prefer `/run` for short-lived root jobs, otherwise `/tmp`) and place only the final validated file in the repository via atomic rename. Large JSON components must be passed to `jq` through files such as `--slurpfile`, not serialized into many `--argjson` command-line arguments where `ARG_MAX` can fail.
+- After a generator failure, reconcile Git/auto-push before moving or removing temporary artifacts. A concurrent auto-commit can make a formerly untracked temp directory tracked; restore/reconcile first, preserve a hash-validated copy, and apply Critical Subset confirmation before deleting tracked artifacts.
 - For retired-agent cleanup, interpret broad language at the **dedicated operational-set boundary**: remove dedicated archive/backup roots only; preserve references embedded in mixed backups, Git, audit logs, and shared evidence unless the user separately names that wider purge scope.
 - If the owner explicitly chooses to discard a protected snapshot that contains unique state, disclose the unique classes/bytes and require the Critical Subset double-confirmation with exact roots, file count, bytes, irreversible loss, and what historical evidence will remain.
 - Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, is neither a symlink nor a mount, and still matches the confirmed file/byte totals. Use exact paths rather than wildcard deletion, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward.
