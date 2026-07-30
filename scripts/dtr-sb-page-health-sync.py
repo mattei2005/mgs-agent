@@ -436,7 +436,7 @@ def restricted_sheet_rows(sb_rows, active_users, tday):
             'fb page id':fb,
             'page id':norm(row.get('PAGE_ID')),
             'bot user':norm_email(row.get('USER_LOGIN') or row.get('LOGIN')),
-            'segurador':norm(row.get('PROFILE_NAME')),
+            'segurador':derive_segurador(row),
             'sites':derive_sites(row),
             'status sb':norm(row.get('STATUS')),
             'codigos':', '.join(codes),
@@ -614,6 +614,21 @@ def derive_sites(row):
         if s and s not in clean:
             clean.append(s)
     return ','.join(sorted(clean,key=site_sort_key)) if clean else '?'
+
+def derive_segurador(row):
+    """Prefer the SB profile field, then recover the segurador from NOTES.
+
+    Some valid Messenger rows expose LOGIN but return PROFILE_NAME=null. The
+    dashboard NOTES still carries the canonical ``PERFIL SEGURADOR - <name>``
+    segment, so leaving the report cell blank would discard known live data.
+    """
+    row=row or {}
+    profile=norm(row.get('PROFILE_NAME') or row.get('profile_name'))
+    if profile:
+        return profile
+    notes=norm(row.get('NOTES') or row.get('notes'))
+    match=re.search(r'PERFIL\s+SEGURADOR\s*-\s*(.+?)(?:\s+-\s*(?:[A-Z]{2}(?:-[A-Z]{2})?|#\d+|TOKEN|APP_DELETED|PERMISSION|SEM_COMPLETED|OTHER)\b|$)',notes,re.I)
+    return clean(match.group(1)) if match else ''
 
 def post_discord(content, max_attempts=5):
     token=discord_token()
@@ -928,6 +943,53 @@ def dedupe_report_rows(rows):
         ordered.append(row)
     return ordered,exact_duplicates
 
+def enrichment_page_identity(row):
+    bot_user=norm_email(row.get('bot user') or row.get('bot_user'))
+    page_id=norm(row.get('page id') or row.get('page_id') or row.get('dtr_page_id'))
+    if bot_user and page_id:
+        return f'bot-page:{bot_user}|{page_id}'
+    fb_page_id=norm(row.get('fb page id') or row.get('fb_page_id'))
+    return f'fb:{fb_page_id}' if fb_page_id else ''
+
+def merge_report_enrichment(rows, previous_rows=None, dtr_rows=None):
+    """Preserve verified DTR fields across SB-only Sheet rebuilds.
+
+    SB remains authoritative for membership, status and restriction date. DTR
+    remains authoritative for the current segurador/error codes. A transition
+    monitor that only reads SB must preserve already verified DTR values, while
+    a fresh DTR scan explicitly overrides them.
+    """
+    previous={}
+    for row in previous_rows or []:
+        key=enrichment_page_identity(row)
+        if key:
+            previous[key]=row
+    explicit={}
+    for row in dtr_rows or []:
+        key=enrichment_page_identity(row)
+        if key:
+            explicit[key]=row
+    merged=[]
+    for source in rows:
+        row=dict(source)
+        key=enrichment_page_identity(row)
+        old=previous.get(key) or {}
+        fresh=explicit.get(key) or {}
+        if norm(old.get('segurador')):
+            row['segurador']=norm(old.get('segurador'))
+        if norm(old.get('codigos')):
+            row['codigos']=norm(old.get('codigos'))
+        fresh_segurador=norm(fresh.get('segurador') or fresh.get('profile_name') or fresh.get('account_name'))
+        fresh_codes=fresh.get('codes') or fresh.get('codigos')
+        if isinstance(fresh_codes,list):
+            fresh_codes=', '.join(norm(code) for code in fresh_codes if norm(code))
+        if fresh_segurador:
+            row['segurador']=fresh_segurador
+        if norm(fresh_codes):
+            row['codigos']=norm(fresh_codes)
+        merged.append(row)
+    return merged
+
 def read_report_datasets(access_token, titles):
     if not titles:
         return {}
@@ -979,7 +1041,7 @@ def ensure_report_tabs(access_token, required_titles):
         raise RuntimeError('Resumo não ficou imediatamente à esquerda de Paginas Totais')
     return by_title
 
-def write_google_sheet(rows, sheet_stats=None):
+def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
     """Clear and rebuild every managed tab from the desired live dataset."""
     REPORT_SHEET_LOCK.parent.mkdir(parents=True,exist_ok=True)
     with REPORT_SHEET_LOCK.open('a+') as lock_handle:
@@ -1009,6 +1071,13 @@ def write_google_sheet(rows, sheet_stats=None):
 
         old_total_values=existing_datasets.get(REPORT_TOTAL_TAB) or existing_datasets.get(REPORT_LEGACY_TOTAL_TAB) or []
         old_total,existing_duplicates=keyed_rows(old_total_values)
+        previous_rows=[]
+        if old_total_values:
+            old_headers=old_total_values[0]
+            for values_row in old_total_values[1:]:
+                previous_rows.append({header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(old_headers)})
+        unique_rows=merge_report_enrichment(unique_rows,previous_rows,dtr_enrichment)
+        desired_pages=build_report_datasets(unique_rows,page_headers)
         new_total,_=keyed_rows(desired_pages[REPORT_TOTAL_TAB])
         added_keys=set(new_total)-set(old_total)
         removed_keys=set(old_total)-set(new_total)
@@ -1308,7 +1377,7 @@ async def main():
                 _, fresh_sb_rows=await fetch_sb_rows(ctx,h)
                 restricted_rows, sheet_stats=restricted_sheet_rows(fresh_sb_rows,active,tday)
                 summary.update(sheet_stats)
-                summary['sheet_update']=write_google_sheet(restricted_rows,sheet_stats)
+                summary['sheet_update']=write_google_sheet(restricted_rows,sheet_stats,alert_rows)
                 exited_rows=exited_restrictions_from_sheet((summary['sheet_update'] or {}).get('removed_page_rows') or [],fresh_sb_rows,tday)
                 summary['exited_restrictions']=exited_rows
             except Exception as exc:
