@@ -6,8 +6,18 @@ set -euo pipefail
 # Defaults are conservative: no gateway restart unless RESTART_GATEWAYS=1.
 
 BASE="${BASE:-/root/mgs-agent}"
-REPO="${REPO:-/root/.hermes/hermes-agent}"
-HERMES_BIN="${HERMES_BIN:-/root/.hermes/profiles/zeus/home/.local/bin/hermes}"
+HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
+resolve_active_hermes_repo() {
+  local launcher shebang python_path candidate
+  launcher="$(readlink -f "$HERMES_BIN")"
+  [[ -f "$launcher" ]] || return 1
+  shebang="$(head -n 1 "$launcher")"
+  python_path="${shebang#\#!}"
+  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
+  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  printf '%s\n' "$candidate"
+}
+REPO="${REPO:-$(resolve_active_hermes_repo)}"
 PATCH_DIR="$BASE/patches/hermes"
 ENSURE_SCRIPT="$BASE/scripts/ensure-hermes-mgs-patches.sh"
 POST_UPSTREAM_REGRESSION_SCRIPT="$BASE/scripts/run-hermes-post-upstream-regression.sh"

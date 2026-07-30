@@ -2,7 +2,18 @@
 set -euo pipefail
 
 BASE="${BASE:-/root/mgs-agent}"
-REPO="${REPO:-/root/.hermes/hermes-agent}"
+HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
+resolve_active_hermes_repo() {
+  local launcher shebang python_path candidate
+  launcher="$(readlink -f "$HERMES_BIN")"
+  [[ -f "$launcher" ]] || return 1
+  shebang="$(head -n 1 "$launcher")"
+  python_path="${shebang#\#!}"
+  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
+  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  printf '%s\n' "$candidate"
+}
+REPO="${REPO:-$(resolve_active_hermes_repo)}"
 PATCH_DIR="$BASE/patches/hermes"
 LOG="${LOG:-$BASE/logs/ensure-hermes-mgs-patches.log}"
 mkdir -p "$(dirname "$LOG")"
@@ -183,6 +194,14 @@ PY
         return 0
       fi
       ;;
+    mgs-busy-steer-pending-turn-fifo-*.patch)
+      if grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
+        && grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+        && grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-busy-steer-ack-ptbr-*.patch)
       if grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
         && grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py"; then
@@ -280,6 +299,7 @@ apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-reentrant-followup-2026-07-12.patch"
 apply_patch_if_needed "mgs-busy-steer-reentrant-rebuild-2026-07-12.patch"
+apply_patch_if_needed "mgs-busy-steer-pending-turn-fifo-2026-07-30.patch"
 apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
@@ -410,6 +430,12 @@ grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/
   || fail "missing MGS recursive rebuilt-agent ownership transfer"
 grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS rebuilt-agent follow-up regression test"
+grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
+  || fail "missing MGS queued-turn + leftover-steer merge helper"
+grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+  || fail "missing MGS queued-turn + leftover-steer production integration"
+grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py" \
+  || fail "missing MGS queued-turn + leftover-steer regression test"
 grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
   || fail "missing upstream-compatible stale-generation promotion guard"
 grep -q "test_startup_promotion_skips_stale_generation_without_overwrite" "$REPO/tests/gateway/test_busy_session_ack.py" \

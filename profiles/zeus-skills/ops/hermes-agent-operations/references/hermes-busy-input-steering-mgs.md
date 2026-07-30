@@ -210,6 +210,7 @@ Invariantes mínimos do guard:
 - follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` reserva ordem de chegada antes de qualquer preprocessamento assíncrono;
 - o worker aguarda todas as reservas em voo, drena em FIFO e promove o sentinel para o agente real de forma atômica sob a mesma barreira;
 - follow-up recursivo na mesma geração reconhece a promoção já concluída: reutiliza o mesmo `AIAgent` quando a assinatura continua igual e transfere ownership atomicamente para um `AIAgent` reconstruído quando skill/config/session cache mudou entre os dois turnos; essa transferência só é permitida em `_interrupt_depth > 0`, enquanto geração substituída e troca de agente em turno inicial continuam fail-closed;
+- quando um evento anterior já ocupa a fila do próximo turno e o turno atual termina com `result["pending_steer"]`, o leftover steer é anexado, com framing out-of-band, ao evento anterior depois do preprocessamento inbound; nunca pode ser descartado pela presença simultânea de `pending_event`, nem replayado como terceiro turno;
 - chamadas diretas legadas de `_run_agent()` com `run_generation=None` e slot vazio continuam válidas sem enfraquecer o ownership de runs gerenciados;
 - `_try_busy_steer_event()` relê geração e identidade do agente depois de STT/enrichment; resultado atrasado nunca é aplicado a agente encerrado/substituído;
 - `_merge_startup_steer_into_message()` acontece antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
@@ -232,6 +233,7 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 8. Docker/remote: path abre no terminal, vision e transcription.
 9. Role alternation: só último tool result muda; multimodal preservado.
 10. Replay: mesmo ID não baixa/steera duas vezes; cobrir restart/TTL conforme política durável.
+11. Handoff com fila já ocupada: pedido A pendente + complemento B aceito como steer no fim do turno anterior devem chegar juntos ao próximo turno, em ordem, exatamente uma vez.
 
 ## Limites que devem ser explicados
 
@@ -282,6 +284,7 @@ Artefato canônico atual:
 ## Pitfalls
 
 - **Reentrant queued follow-up após promoção:** `_run_agent_inner()` drena uma mensagem pendente chamando `_run_agent()` recursivamente com a mesma geração. Se a assinatura do cache não mudou, `current_agent is agent` significa promoção já concluída. Se skill/config/session cache mudou entre as duas etapas, o follow-up pode reconstruir legitimamente o `AIAgent`; nesse caso, e somente quando `_interrupt_depth > 0` + geração ainda atual, transfira ownership atomicamente para o agente reconstruído. Exigir identidade exata em ambos os casos aborta com `startup agent promotion lost ownership` e o Discord mostra `Sorry, I encountered an unexpected error`. Turno inicial com agente diferente ou qualquer geração substituída permanece fail-closed. Testes canônicos: `test_reentrant_followup_promotion_reuses_current_agent`, `test_reentrant_followup_does_not_mask_replaced_agent`, `test_reentrant_followup_transfers_same_generation_rebuilt_agent` e `test_recursive_run_enables_same_generation_replacement`.
+- **Pending event + leftover steer no mesmo fechamento:** a fila do adapter pode já conter o pedido seguinte enquanto `turn_finalizer` devolve um complemento tardio em `result["pending_steer"]`. O antigo gate `if result and not pending and not pending_event` descartava silenciosamente o complemento. Preserve a ordem anexando o leftover, via `format_steer_marker`, à mensagem preparada do evento anterior antes da recursão. Teste canônico: `test_run_agent_merges_leftover_steer_into_earlier_queued_turn`.
 - Validar apenas texto e declarar multimedia steer pronto.
 - Chamar `queue` de consolidação.
 - Usar `interrupt` para complementos e destruir tool/subagent work.

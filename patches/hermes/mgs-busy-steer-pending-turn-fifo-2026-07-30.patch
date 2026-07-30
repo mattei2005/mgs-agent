@@ -1,0 +1,137 @@
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -6423,6 +6423,21 @@
+             return merged
+         return f"{message}{marker}"
+ 
++    @staticmethod
++    def _merge_leftover_steer_into_pending_turn(message: Any, payload: str) -> Any:
++        """Keep a late steer behind an already queued earlier user message.
++
++        A turn can finish with both an adapter ``pending_event`` and an
++        ``AIAgent`` leftover steer.  The pending event arrived first and owns
++        the next turn; the steer is a later complement that must be framed
++        inside that turn instead of being dropped or replayed separately.
++        """
++        if not payload or not payload.strip():
++            return message
++        if message is None or (isinstance(message, str) and not message.strip()):
++            return payload.strip()
++        return GatewayRunner._merge_startup_steer_into_message(message, payload)
++
+     async def _prepare_busy_steer_payload(
+         self,
+         event: MessageEvent,
+@@ -24093,13 +24108,23 @@
+ 
+             # Leftover /steer: if a steer arrived after the last tool batch
+             # (e.g. during the final API call), the agent couldn't inject it
+-            # and returned it in result["pending_steer"]. Deliver it as the
+-            # next user turn so it isn't silently dropped.
+-            if result and not pending and not pending_event:
+-                _leftover_steer = result.get("pending_steer")
+-                if _leftover_steer:
+-                    pending = _leftover_steer
+-                    logger.debug("Delivering leftover /steer as next turn: '%s...'", pending[:40])
++            # and returned it in result["pending_steer"].  When an earlier
++            # queued event already owns the next turn, merge the later steer
++            # into that turn after inbound preprocessing.  The old mutually
++            # exclusive branch silently discarded the steer whenever both
++            # existed at the same turn boundary.
++            _leftover_steer = result.get("pending_steer") if result else None
++            _merge_leftover_into_pending = bool(
++                _leftover_steer and (pending_event is not None or pending)
++            )
++            if _leftover_steer and not _merge_leftover_into_pending:
++                pending = _leftover_steer
++                logger.debug("Delivering leftover /steer as next turn: '%s...'", pending[:40])
++            elif _merge_leftover_into_pending:
++                logger.debug(
++                    "Merging leftover /steer into earlier queued turn: '%s...'",
++                    _leftover_steer[:40],
++                )
+ 
+             # Safety net: if the pending text is a slash command (e.g. "/stop",
+             # "/new"), discard it — commands should never be passed to the agent
+@@ -24286,6 +24311,12 @@
+                     next_message_id = self._reply_anchor_for_event(pending_event)
+                     next_channel_prompt = getattr(pending_event, "channel_prompt", None)
+ 
++                if _merge_leftover_into_pending:
++                    next_message = self._merge_leftover_steer_into_pending_turn(
++                        next_message,
++                        _leftover_steer,
++                    )
++
+                 # Restart typing indicator so the user sees activity while
+                 # the follow-up turn runs.  The outer _process_message_background
+                 # typing task is still alive but may be stale.
+--- a/tests/gateway/test_run_progress_topics.py
++++ b/tests/gateway/test_run_progress_topics.py
+@@ -821,6 +821,30 @@
+         }
+ 
+ 
++class QueuedWithLeftoverSteerAgent:
++    """Return a late steer while an earlier queued turn is already pending."""
++
++    calls = []
++
++    def __init__(self, **kwargs):
++        self.tools = []
++
++    def run_conversation(self, message, conversation_history=None, task_id=None):
++        type(self).calls.append(message)
++        if len(type(self).calls) == 1:
++            return {
++                "final_response": "previous turn complete",
++                "pending_steer": "e no B006-2 também",
++                "messages": [],
++                "api_calls": 1,
++            }
++        return {
++            "final_response": "combined follow-up processed",
++            "messages": [],
++            "api_calls": 1,
++        }
++
++
+ class BackgroundReviewAgent:
+     def __init__(self, **kwargs):
+         self.background_review_callback = kwargs.get("background_review_callback")
+@@ -1322,6 +1346,35 @@
+ 
+ 
+ @pytest.mark.asyncio
++async def test_run_agent_merges_leftover_steer_into_earlier_queued_turn(
++    monkeypatch, tmp_path,
++):
++    """A late steer must survive when an earlier event already owns next turn."""
++    QueuedWithLeftoverSteerAgent.calls = []
++    adapter, result = await _run_with_agent(
++        monkeypatch,
++        tmp_path,
++        QueuedWithLeftoverSteerAgent,
++        session_id="sess-queued-plus-leftover-steer",
++        pending_text="manda um alerta real então no B003",
++        platform=Platform.DISCORD,
++        chat_id="1532374768597078257",
++        chat_type="group",
++        thread_id="1532374768597078257",
++    )
++
++    assert len(QueuedWithLeftoverSteerAgent.calls) == 2
++    assert QueuedWithLeftoverSteerAgent.calls[0] == "hello"
++    combined = QueuedWithLeftoverSteerAgent.calls[1]
++    assert combined.startswith("manda um alerta real então no B003")
++    assert "[OUT-OF-BAND USER MESSAGE" in combined
++    assert combined.count("e no B006-2 também") == 1
++    assert "[/OUT-OF-BAND USER MESSAGE]" in combined
++    assert result["final_response"] == "combined follow-up processed"
++    assert adapter._pending_messages == {}
++
++
++@pytest.mark.asyncio
+ async def test_run_agent_defers_background_review_notification_until_release(monkeypatch, tmp_path):
+     adapter, result = await _run_with_agent(
+         monkeypatch,

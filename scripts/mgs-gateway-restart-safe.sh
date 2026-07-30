@@ -10,10 +10,26 @@ AGENTS_DEFAULT="ares atena zeus"
 ROOT="/root/mgs-agent"
 LOG_DIR="$ROOT/logs"
 AUDIT="$LOG_DIR/events-audit.jsonl"
+HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
 MODE="schedule"
 AGENTS="$AGENTS_DEFAULT"
 REASON="manual-safe-gateway-restart"
 DELAY_SECONDS=5
+
+resolve_active_hermes_repo() {
+  local launcher shebang python_path candidate
+  launcher="$(readlink -f "$HERMES_BIN")"
+  [[ -f "$launcher" ]] || return 1
+  shebang="$(head -n 1 "$launcher")"
+  python_path="${shebang#\#!}"
+  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
+  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  printf '%s\n' "$candidate"
+}
+
+ACTIVE_LAUNCHER="$(readlink -f "$HERMES_BIN")"
+HERMES_REPO="${HERMES_REPO:-$(resolve_active_hermes_repo)}"
+HERMES_PY="$HERMES_REPO/venv/bin/python"
 
 usage() {
   cat <<'USAGE'
@@ -82,20 +98,21 @@ SNAPSHOT="$ROOT/data/mgs-gateway-restart-snapshot-$(date -u +%Y%m%dT%H%M%SZ)-$$.
 AGENT_LIST="${ORDERED_AGENTS[*]}"
 
 SNAPSHOT_FILES=(
-  "/root/.hermes/hermes-agent/gateway/run.py"
-  "/root/.hermes/hermes-agent/gateway/platforms/base.py"
-  "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py"
-  "/root/.hermes/hermes-agent/gateway/slash_commands.py"
-  "/root/.hermes/hermes-agent/gateway/reasoning_router.py"
-  "/root/.hermes/hermes-agent/run_agent.py"
-  "/root/.hermes/hermes-agent/hermes_cli/config.py"
-  "/root/.hermes/hermes-agent/hermes_cli/oneshot.py"
-  "/root/.hermes/hermes-agent/agent/background_review.py"
-  "/root/.hermes/hermes-agent/tools/memory_tool.py"
-  "/root/.hermes/hermes-agent/tools/write_approval.py"
-  "/root/.hermes/hermes-agent/tools/skill_manager_tool.py"
-  "/root/.hermes/hermes-agent/tools/skills_tool.py"
-  "/root/.hermes/hermes-agent/tools/write_trace.py"
+  "$ACTIVE_LAUNCHER"
+  "$HERMES_REPO/gateway/run.py"
+  "$HERMES_REPO/gateway/platforms/base.py"
+  "$HERMES_REPO/plugins/platforms/discord/adapter.py"
+  "$HERMES_REPO/gateway/slash_commands.py"
+  "$HERMES_REPO/gateway/reasoning_router.py"
+  "$HERMES_REPO/run_agent.py"
+  "$HERMES_REPO/hermes_cli/config.py"
+  "$HERMES_REPO/hermes_cli/oneshot.py"
+  "$HERMES_REPO/agent/background_review.py"
+  "$HERMES_REPO/tools/memory_tool.py"
+  "$HERMES_REPO/tools/write_approval.py"
+  "$HERMES_REPO/tools/skill_manager_tool.py"
+  "$HERMES_REPO/tools/skills_tool.py"
+  "$HERMES_REPO/tools/write_trace.py"
   "/root/mgs-agent/scripts/check-gateway-ready.py"
 )
 for agent in "${ORDERED_AGENTS[@]}"; do
@@ -124,7 +141,11 @@ LOG="$FINAL_LOG"
 AUDIT="$AUDIT"
 REASON="$(printf '%s' "$REASON" | sed "s/'/'\\''/g")"
 SNAPSHOT="$SNAPSHOT"
-RUNTIME="/root/.hermes/hermes-agent/gateway/run.py"
+HERMES_BIN="$HERMES_BIN"
+EXPECTED_LAUNCHER="$ACTIVE_LAUNCHER"
+HERMES_REPO="$HERMES_REPO"
+HERMES_PY="$HERMES_PY"
+RUNTIME="$HERMES_REPO/gateway/run.py"
 exec >>"\$LOG" 2>&1
 log(){ printf '[%s] %s\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$*"; }
 audit(){ printf '{"ts":"%s","event":"%s","actor":"mgs-gateway-restart-finalizer","reason":"%s","detail":"%s"}\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$1" "\$REASON" "\$2" >> "\$AUDIT"; }
@@ -135,23 +156,28 @@ if ! sha256sum -c "\$SNAPSHOT"; then
   audit "gateway_restart_finalizer_aborted" "reason=target_drift snapshot=\$SNAPSHOT log=\$LOG"
   exit 75
 fi
-if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
+if [[ "\$(readlink -f "\$HERMES_BIN")" != "\$EXPECTED_LAUNCHER" ]]; then
+  log "ABORT Hermes launcher target changed after restart preparation"
+  audit "gateway_restart_finalizer_aborted" "reason=launcher_target_drift expected=\$EXPECTED_LAUNCHER actual=\$(readlink -f "\$HERMES_BIN") log=\$LOG"
+  exit 74
+fi
+if ! "\$HERMES_PY" -m py_compile \
   "\$RUNTIME" \
-  /root/.hermes/hermes-agent/gateway/reasoning_router.py \
-  /root/.hermes/hermes-agent/hermes_cli/config.py \
-  /root/.hermes/hermes-agent/hermes_cli/oneshot.py \
-  /root/.hermes/hermes-agent/agent/background_review.py \
-  /root/.hermes/hermes-agent/tools/memory_tool.py \
-  /root/.hermes/hermes-agent/tools/write_approval.py \
-  /root/.hermes/hermes-agent/tools/skill_manager_tool.py \
-  /root/.hermes/hermes-agent/tools/skills_tool.py \
-  /root/.hermes/hermes-agent/tools/write_trace.py \
+  "\$HERMES_REPO/gateway/reasoning_router.py" \
+  "\$HERMES_REPO/hermes_cli/config.py" \
+  "\$HERMES_REPO/hermes_cli/oneshot.py" \
+  "\$HERMES_REPO/agent/background_review.py" \
+  "\$HERMES_REPO/tools/memory_tool.py" \
+  "\$HERMES_REPO/tools/write_approval.py" \
+  "\$HERMES_REPO/tools/skill_manager_tool.py" \
+  "\$HERMES_REPO/tools/skills_tool.py" \
+  "\$HERMES_REPO/tools/write_trace.py" \
   /root/mgs-agent/scripts/check-gateway-ready.py; then
   log "ABORT runtime/dead-letter/trace py_compile failed"
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
 fi
-if ! /root/.hermes/hermes-agent/venv/bin/python -c 'import gateway.reasoning_router, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
+if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"
   audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
   exit 78

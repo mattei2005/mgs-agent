@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="${REPO:-/root/.hermes/hermes-agent}"
+HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
+resolve_active_hermes_repo() {
+  local launcher shebang python_path candidate
+  launcher="$(readlink -f "$HERMES_BIN")"
+  [[ -f "$launcher" ]] || return 1
+  shebang="$(head -n 1 "$launcher")"
+  python_path="${shebang#\#!}"
+  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
+  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  printf '%s\n' "$candidate"
+}
+REPO="${REPO:-$(resolve_active_hermes_repo)}"
 PYBIN="${PYBIN:-$REPO/venv/bin/python}"
 LOG="${LOG:-/tmp/hermes-post-upstream-regression.log}"
 
@@ -30,6 +41,7 @@ printf '[%s] START Hermes post-upstream regression pack\n' "$(date -Iseconds)" |
   tests/gateway/test_delivery_ledger_producer.py \
   tests/gateway/test_turn_lease.py \
   tests/gateway/test_platform_reconnect.py \
+  tests/gateway/test_run_progress_topics.py::test_run_agent_merges_leftover_steer_into_earlier_queued_turn \
   tests/cron/test_execution_ledger.py \
   tests/hermes_cli/test_config.py \
   tests/hermes_cli/test_doctor.py \
