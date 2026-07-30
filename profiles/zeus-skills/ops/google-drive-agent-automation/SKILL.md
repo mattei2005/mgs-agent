@@ -123,6 +123,8 @@ Current critical consumers include:
 
 Generic Google Workspace helper scripts that expect a personal token or local client-secret file are not valid MGS routes and must fail closed in MGS profiles.
 
+For operational Sheet datasets, do not use public `gviz` or CSV export URLs as the source of truth. Those exports can honor an active basic filter and silently return only visible rows while still returning HTTP 200 and valid headers. Read the named canonical tab through Sheets API `spreadsheets.values.get` with the canonical Service Account, validate required headers, require a non-empty operational scope, and then validate the exact consumer. A filtered export is not a safe fallback.
+
 ## Failure handling
 
 ```text
