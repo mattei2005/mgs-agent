@@ -134,6 +134,7 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
             raise RuntimeError("1Password vault ID not returned")
         rows = _op_json(["item", "list", "--vault", vault_id, "--format", "json"])
         items: dict[str, dict[str, str]] = {}
+        duplicate_titles: dict[str, list[dict[str, str]]] = {}
         for row in rows:
             title = str(row.get("title") or "").strip()
             item_id = str(row.get("id") or row.get("uuid") or "").strip()
@@ -141,13 +142,23 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
                 "digitaltrchat" in title.casefold()
                 or (title.startswith("BOT B") and title.endswith(" Token"))
             ):
-                items[title] = {"id": item_id, "title": title}
+                entry = {"id": item_id, "title": title}
+                if title in items:
+                    duplicate_titles[title] = [items.pop(title), entry]
+                elif title in duplicate_titles:
+                    duplicate_titles[title].append(entry)
+                else:
+                    items[title] = entry
         payload = {
             "schema": CACHE_SCHEMA,
             "vault": vault,
             "vault_id": vault_id,
             "updated_at_epoch": int(time.time()),
             "items": items,
+            # Exact duplicate titles are omitted from title resolution. Callers
+            # must pin the intended immutable item ID instead of silently using
+            # whichever duplicate happened to be returned last by 1Password.
+            "duplicate_titles": duplicate_titles,
         }
         _atomic_json(INDEX_PATH, payload)
         return payload
