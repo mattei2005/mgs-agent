@@ -97,7 +97,7 @@ B002 Lola Lilliana
 B003 Siyam Mia
 B004 Mst Lija
 B005/B005-2 Zmii
-B006 Mic Vb
+B006/B006-2 Crislaine Carvalho
 B007 Dek Fiyan
 B008 Phạm Minh Thiện
 B009 Hindawan Pratama
@@ -105,6 +105,8 @@ B010 Lorraynii Criistiinii
 ```
 
 For B005-2, `Wana Hsh` is the retired former owner profile and must be treated as expected owner housekeeping if removed from Meta `/roles`, not as an active segurador incident. `Zmii` is the current owner/admin profile confirmed by Rodolfo and represented in the migration sheet.
+
+For B006-2, `Mic Vb` is the retired owner of the B006 predecessor and must be treated as expected owner housekeeping if removed from Meta `/roles`. `Crislaine Carvalho` is the current B006-2 owner/admin profile confirmed by Rodolfo and represented in the migration sheet. The renamed Discord channel keeps ID `1521252068319297666`, while monitor state/item identity is canonicalized to `B006-2` / `BOT B006-2 Token`.
 
 B009 and B010 owner profiles are also seguradores with one page each; Rodolfo considers them low risk if blocked permanently. For reconciliation, still treat them as owner exceptions when explaining extras.
 
