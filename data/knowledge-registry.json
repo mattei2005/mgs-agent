@@ -397,6 +397,24 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "meta_app_owner.b005-2",
+      "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "#B005-2 app alert channel",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T09:36:55-04:00",
+      "id": "meta-app-owner-b005-2-zmii-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B005-2 current owner/admin profile is Zmii; Wana Hsh is retired",
+      "updated_at": "2026-07-30T13:37:21+00:00"
+    },
+    {
       "canonical_key": "security.google-workspace-auth",
       "canonical_source": "context/security-policies.md",
       "consumers": [
@@ -417,5 +435,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-22T02:55:36+00:00"
+  "updated_at": "2026-07-30T13:37:21+00:00"
 }

@@ -96,13 +96,15 @@ B001 Dale Kuhlman
 B002 Lola Lilliana
 B003 Siyam Mia
 B004 Mst Lija
-B005/B005-2 Wana Hsh
+B005/B005-2 Zmii
 B006 Mic Vb
 B007 Dek Fiyan
 B008 Phạm Minh Thiện
 B009 Hindawan Pratama
 B010 Lorraynii Criistiinii
 ```
+
+For B005-2, `Wana Hsh` is the retired former owner profile and must be treated as expected owner housekeeping if removed from Meta `/roles`, not as an active segurador incident. `Zmii` is the current owner/admin profile confirmed by Rodolfo and represented in the migration sheet.
 
 B009 and B010 owner profiles are also seguradores with one page each; Rodolfo considers them low risk if blocked permanently. For reconciliation, still treat them as owner exceptions when explaining extras.
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T05:00:01-04:00",
+    "updated_at": "2026-07-30T09:38:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1140,14 +1140,15 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 64130,
-      "modified_at": "2026-07-21T19:17:27-04:00",
-      "sha256": "16f2a35956e418f7c71de300d2db7df0c3fe55f7ed8440a3d6f1782562f4c841",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables split across Discord-safe messages and cumulative removals deduplicate overlapping Meta ID, normalized name and Sheet profile ID identities.",
-      "validation": "2026-07-21: bash -n OK; isolated add/remove dry-run rc=0 with correct B001/B010 channels and unchanged production/fixture state; all-app delta/routing regression 10/10; B008 cumulative duplicate fixture reduced Ithaa/Michelle from 2 to 1 each; production run rc=0, B001-B010 errors=0, alerts=0, Sheet 232 rows and updated=false.",
-      "updated_at": "2026-07-21T19:20:15-04:00",
-      "source_report": "REPORT-INFRA Zeus meta app cumulative removal dedup 2026-07-21",
-      "last_change": "2026-07-21: merge cumulative removals by any overlapping stable identity, including transitive matches, instead of one arbitrarily selected key."
+      "size_bytes": 64236,
+      "modified_at": "2026-07-30T09:35:41-04:00",
+      "sha256": "ca15317cf05ef3e7b3c1745f36a559e3384c590d7359fa285ffb11702e573f37",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B005-2 current owner/admin is Zmii and retired former owner Wana Hsh is ignored as expected owner housekeeping on removal.",
+      "validation": "2026-07-30: bash -n PASS; B005-2 dry-run showed ADMIN=Zmii; live Graph checks app_metadata/roles/user_token_me/debug_token all HTTP 200; token valid; 16 roles; live recovery + current-state alert delivered with errors_count=0.",
+      "updated_at": "2026-07-30T09:38:12-04:00",
+      "source_report": "REPORT-INFRA Zeus B005-2 owner/admin update 2026-07-30",
+      "last_change": "2026-07-30: changed B005-2 active owner/admin from disabled Wana Hsh to Zmii and classified Wana Hsh as retired owner housekeeping.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0052-owner-20260730-093531/meta-app-roles-watch.sh"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3486,6 +3487,23 @@
         "readback": true
       },
       "updated_at": "2026-07-28T03:51:10.840000+00:00"
+    },
+    {
+      "id": "zeus-meta-app-rate-limit-route-pack-02",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "size_bytes": 7164,
+      "modified_at": "2026-07-30T09:35:50-04:00",
+      "sha256": "817b79beb7f93a39fd170a5f90acea8305b9a9f467d57f7bf2d7ea37f155ff07",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Operational Meta app owner exceptions and segurador Sheet reconciliation rules; B005-2 active owner is Zmii and Wana Hsh is retired.",
+      "validation": "Runtime and versioned mirror SHA-256 match; owner correction read back in route pack; production B005-2 monitor validation passed.",
+      "updated_at": "2026-07-30T09:38:12-04:00",
+      "source_report": "REPORT-INFRA Zeus B005-2 owner/admin update 2026-07-30"
     }
   ],
   "profile_skill_references": [
@@ -7111,9 +7129,12 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 13579,
-      "md5": "8dec14cedb31ea2c9c545626143d9e46",
-      "modified_at": "2026-07-21T22:55:36-04:00"
+      "size_bytes": 14321,
+      "md5": "656c221271f0caba6361bb1105decd6b",
+      "modified_at": "2026-07-30T09:37:21-04:00",
+      "sha256": "2267731d66ec1dbdaa4f1c1be3c488a8c0c39f0dfcfdf01ab741b443b9eed181",
+      "updated_at": "2026-07-30T09:38:12-04:00",
+      "last_change": "Registered active canonical decision meta_app_owner.b005-2 pointing to the owner-reconciliation route pack."
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
