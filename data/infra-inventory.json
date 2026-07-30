@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T11:37:21-04:00",
+    "updated_at": "2026-07-30T11:58:17-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1140,16 +1140,16 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 65479,
-      "modified_at": "2026-07-30T11:37:05-04:00",
-      "sha256": "0cfab7cca2c3448704964fcbc83b3ce341aaf6027df4a66d0ed8c097fbe2b17c",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B006 is retired in favor of B006-2 on the same Discord channel, active owner/admin is Crislaine Carvalho, retired Mic Vb removals are housekeeping, and owner rendering distinguishes separate profiles that share the same display name across apps.",
-      "validation": "2026-07-30: Rodolfo clarified the B003 and B006-2 Crislaine Carvalho records are different profiles. Readback confirms different Meta role IDs; Sheet B003 row remains unchanged; last B006-2 sheet sync updated=false. Comment/reference corrected; bash -n PASS; runtime/versioned reference hashes match.",
-      "updated_at": "2026-07-30T11:37:21-04:00",
-      "source_report": "REPORT-INFRA Zeus B006-2 same-name profile clarification 2026-07-30",
-      "last_change": "2026-07-30: clarified app-aware rendering protects different Facebook profiles that share the same display name; no B003 data/config change.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-roles-watch.sh",
-      "state_backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-role-monitor-state.json"
+      "size_bytes": 66691,
+      "modified_at": "2026-07-30T11:55:47-04:00",
+      "sha256": "a890a4886cfd3e5d8a66060d16d8efbb8011949ce6ac5024838997ec32b493b4",
+      "description": "Zeus Meta app role/rate-limit monitor with B006-2 cutover, app-aware same-name profile rendering, bounded Discord HTTP 429 retry, and force-live suppression of duplicate automatic delta alerts.",
+      "validation": "2026-07-30: bash -n PASS; first combined B003/B006-2 force-live exposed Discord HTTP 429 partial delivery; patched bounded retry_after handling and force-live/delta dedup; dry-run B006-2 emitted one embed family only; second live combined run exit 0; B003 and B006-2 each delivered complete alert/readback; both tokens valid and all four checks HTTP 200; state persisted.",
+      "updated_at": "2026-07-30T11:58:17-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta live-alert Discord 429 hardening 2026-07-30",
+      "last_change": "2026-07-30: retry Discord 429 with bounded retry_after; force-live no longer emits the automatic delta alert in the same run.",
+      "backup": "/root/mgs-agent/backups/meta-app-discord-429-20260730-115530/meta-app-roles-watch.sh",
+      "state_backup": "/root/mgs-agent/backups/meta-app-discord-429-20260730-115530/meta-app-role-monitor-state.json"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3505,6 +3505,23 @@
       "validation": "Runtime/versioned SHA-256 match; B003 and B006-2 Crislaine profiles confirmed by distinct Meta IDs; B003 Sheet mapping unchanged.",
       "updated_at": "2026-07-30T11:37:21-04:00",
       "source_report": "REPORT-INFRA Zeus B006-2 same-name profile clarification 2026-07-30"
+    },
+    {
+      "id": "zeus-meta-app-rate-limit-route-pack-05",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "size_bytes": 20715,
+      "modified_at": "2026-07-30T11:56:57-04:00",
+      "sha256": "dac6d031c8bd1b828ed23883fa4656627495ed8e18bd65fe2edc7edc0c23cff8",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Production Meta app roles monitor procedure, current B006-2 routing, force-live behavior, Discord 429 retry and delivery-readback requirements.",
+      "validation": "Runtime/versioned SHA-256 match; B006-2 canonical labels read back; post-fix dry/live delivery tests PASS.",
+      "updated_at": "2026-07-30T11:58:17-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta live-alert Discord 429 hardening 2026-07-30"
     }
   ],
   "profile_skill_references": [

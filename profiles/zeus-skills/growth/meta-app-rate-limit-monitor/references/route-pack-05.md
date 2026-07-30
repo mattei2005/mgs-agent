@@ -10,7 +10,7 @@ Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Scope          B001-B010 + B005-2 role/admin monitoring only. B011 is excluded from this script’s /roles alert path and handled by b011-dtr-link-watch.
-Channels       B001 1521251196294135858; B002 1521251220130496723; B003 1521251246860931223; B004 1521251334496456815; B005-2 1521251961662341160; B006 1521252068319297666; B007 1520510823426949313; B008 1521252172929564744; B009 1521252284623884288; B010 1521252369331916902
+Channels       B001 1521251196294135858; B002 1521251220130496723; B003 1521251246860931223; B004 1521251334496456815; B005-2 1521251961662341160; B006-2 1521252068319297666; B007 1520510823426949313; B008 1521252172929564744; B009 1521252284623884288; B010 1521252369331916902
 ```
 
 Use the Meta roles cron for B001–B010/B005-2. B011 remains in the 11-channel operating plan, but uses a separate slower route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`.
@@ -29,7 +29,7 @@ Lock           /var/lock/b011-dtr-link-watch.lock (skip if previous run still ac
 Runtime        Last measured ~5m20s for 25 targets; manter o stagger de 20 minutos e o `flock` não bloqueante.
 ```
 
-Important UX correction: if Rodolfo explicitly says **"manda um alerta no canal Bxxx"** or **"ativa o cron e faz ele mandar um alerta"** for B001–B010/B005-2, use `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`. This forces the same polished 3-message app-roles layout with the current users list: (1) native embed `Meta APP - Bxxx`, (2) `👥 USUÁRIOS ATUAIS` code block, (3) removidos/adicionados/acumulados code block. It uses live Meta Graph + live sheet reconciliation and must not display cached state deltas: forced live alerts show `REMOVIDOS AGORA`/`ADICIONADOS AGORA` as empty unless the same fresh run proves otherwise, and `REMOVIDOS ACUMULADOS` must come from the live sheet X/reconciliation layer, not `state.cumulative_removed`. It does not enable snapshot mode, does not forge a delta, and does not corrupt state. Do **not** hand-build a generic embed.
+Important UX correction: if Rodolfo explicitly says **"manda um alerta no canal Bxxx"** or **"ativa o cron e faz ele mandar um alerta"** for B001–B010/B005-2, use `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`. This forces the same polished 3-message app-roles layout with the current users list: (1) native embed `Meta APP - Bxxx`, (2) `👥 USUÁRIOS ATUAIS` code block, (3) removidos/adicionados/acumulados code block. It uses live Meta Graph + live sheet reconciliation and must not display cached state deltas: forced live alerts show `REMOVIDOS AGORA`/`ADICIONADOS AGORA` as empty unless the same fresh run proves otherwise, and `REMOVIDOS ACUMULADOS` must come from the live sheet X/reconciliation layer, not `state.cumulative_removed`. It does not enable snapshot mode, does not forge a delta, and does not corrupt state. Do **not** hand-build a generic embed. A force-live run must suppress the automatic state-delta alert for that same app/run; otherwise one operator request can emit both alert families, duplicate the message and burst the Discord rate limit. Direct Discord posts must catch HTTP 429, honor `retry_after`/rate-limit headers, and retry with a bounded attempt count before failing closed. Split tables may make the final layout exceed three physical messages; delivery completeness and readback are mandatory.
 
 For B011 alert validation, never use `meta-app-roles-watch.sh`; use:
 
@@ -37,7 +37,7 @@ For B011 alert validation, never use `meta-app-roles-watch.sh`; use:
 MGS_B011_DTR_FORCE_LIVE_ALERT=1 /root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh
 ```
 
-For “todos os 11 canais”, validate the operational set as: B001, B002, B003, B004, B005-2, B006, B007, B008, B009, B010, B011. B011 routes to `#b011-app-rate-limit` / `1522830283240505385`; there must be no stale alternate runtime state, script, sheet label, or alert title.
+For “todos os 11 canais”, validate the operational set as: B001, B002, B003, B004, B005-2, B006-2, B007, B008, B009, B010, B011. B011 routes to `#b011-app-rate-limit` / `1522830283240505385`; there must be no stale alternate runtime state, script, sheet label, or alert title.
 
 B012 is an intentional reserve app, not a twelfth operational segurador channel. Its validated baseline is one app administrator (`Om Gendut`) and zero assigned seguradores; Rodolfo keeps it ready for emergency migration if another app falls. It may remain visible in credential auto-discovery/health state, but exclude it from “todos os 11 canais”, role-to-segurador reconciliation, and routine manager alert fan-out unless Rodolfo explicitly activates it.
 
@@ -98,7 +98,7 @@ Implementation rules:
 - Auto-discover 1Password items matching BOT Bxxx Token when MGS_META_APP_ROLE_ITEMS is unset.
 - Use the 1Password item code (B001/B002/etc.) as the state key; do not trust copied/stale app_name fields. Replacement apps may be named with a suffix like `BOT B005-2 Token`; keep the replacement label visible in alert titles/`App` field/state (`B005-2`), while mapping it to the same operational Discord channel (`#b005-app-rate-limit`). Do not silently display it as `B005`.
 - B011 is the current canonical app name. Use `BOT B011 Token`, `NO APP = B011`, `b011-dtr-link-watch.sh`, and state `/root/mgs-agent/data/b011-dtr-link-monitor-state.json`. Do not create or reference alternate app-label artifacts.
-- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope means exactly `B001`, `B011`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`. If B011 is backed by `BOT B011 Token`, include that item but report/route it as B011.
+- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope means exactly `B001`, `B011`, `B002`, `B003`, `B004`, `B005-2`, `B006-2`, `B007`, `B008`, `B009`, `B010`. If B011 is backed by `BOT B011 Token`, include that item but report/route it as B011.
 - Sheet `NO APP` parsing must preserve alpha suffixes such as `B011`; do not normalize `B011` to `B001`. Hyphen suffixes such as `B005-2` must also remain intact.
 - B011 is an Advanced Access + ChatPion connection app: seguradores are not expected to be app roles/admins. Do not mark B011 sheet rows as removed based on `/roles`; clear/prevent role-based `X` markers for B011. A separate ChatPion/DTR page-token monitor must own B011 connection reconciliation.
 - B011 active-target filtering must ignore rows that are simultaneously `Migrado != TRUE` and already marked `X` in `Removidos acumulado`: these are inactive historical removals, not current DTR targets. Preserve fail-closed monitoring for migrated rows and for pending non-X rows.
@@ -133,7 +133,7 @@ B002  #b002-app-rate-limit   1521251220130496723
 B003  #b003-app-rate-limit  1521251246860931223
 B004  #b004-app-rate-limit  1521251334496456815
 B005-2  #b005-app-rate-limit  1521251961662341160
-B006  #b006-app-rate-limit  1521252068319297666
+B006-2  #b006-app-rate-limit  1521252068319297666
 B007  #b007-app-rate-limit  1520510823426949313
 B008  #b008-app-rate-limit  1521252172929564744
 B009  #b009-app-rate-limit  1521252284623884288
