@@ -123,12 +123,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b0062-role-reconciliation-20260730",
-      "next_step": "Job df1c627f2fb2 executará às 13:50 ET: dry-run, alerta live B006-2 e readback Discord/Meta/Sheet; parar se code 4 persistir.",
+      "next_step": "Nenhum para reconciliação. Pendência separada: App Secret exposto aguarda confirmação crítica para rotação/contenção.",
       "objective": "Corrigir a reconciliação Meta roles x planilha do B006-2 após substituição do B006 restrito, preservando os mesmos 17 seguradores e nova owner Crislaine Carvalho.",
-      "source": "discord-thread:1532374768597078257 message:1532425481641787463",
-      "state": "lógica set-aware fail-closed aplicada. planilha reparada por service account e validada: 18 linhas b006-2, 17 sem x e apenas sydney smith com x. runtime/skill/inventário/audit atualizados. meta ainda http 403 code 4 por quota temporária.",
+      "source": "discord-thread:1532374768597078257 message:1532433135848001626",
+      "state": "concluído: dry/live isolado b006-2 validado. meta 18 roles e quatro checks http 200; reconciliação aplicada; alerta discord mostra 17 seguradores enriquecidos + crislaine owner e somente sydney removida; planilha sa confirma 17 sem x e sydney com x. job de espera removido.",
       "thread_id": "1532374768597078257",
-      "updated_at": "2026-07-30T16:44:12+00:00"
+      "updated_at": "2026-07-30T17:07:47+00:00"
     },
     {
       "agent": "zeus",
@@ -322,5 +322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T16:44:12+00:00"
+  "updated_at": "2026-07-30T17:07:47+00:00"
 }

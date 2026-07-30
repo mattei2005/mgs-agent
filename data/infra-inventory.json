@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T12:43:18-04:00",
+    "updated_at": "2026-07-30T13:07:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1141,14 +1141,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 74279,
-      "modified_at": "2026-07-30T12:37:48-04:00",
-      "sha256": "035834e57081ab8be5404c45b1de33adca17dde821e6e3112a8be42cb4fa7f4e",
+      "size_bytes": 74606,
+      "modified_at": "2026-07-30T13:02:35-04:00",
+      "sha256": "479e5293fe73a0c49eb5d0e9b8280f8a53bc92c458ff1669a9fb57317cd036ad",
       "description": "Zeus Meta app role/rate-limit monitor with B006-2 confirmed predecessor-set reconciliation, exact role-ID fail-closed guard, one-call Graph multi-ID identity lookup, Service Account-only Sheet reads/writes, app-aware same-name rendering and bounded Discord 429 retry.",
-      "validation": "2026-07-30: bash -n PASS; offline exact-set test operational_roles=18, present Sheet rows=17, updates_needed=17; drift test preserved all 18 markers; live Sheet repair via mgs-core-prod Service Account updated A2:A233; readback B006-2=17 blank and 1 X (Sydney Smith). Fresh Meta/live alert deferred because app remained HTTP 403 code 4 after diagnostic quota exhaustion; one-shot job df1c627f2fb2 scheduled after quota window.",
-      "updated_at": "2026-07-30T12:43:18-04:00",
+      "validation": "2026-07-30 final: bash -n PASS; first post-quota dry-run exposed Graph multi-ID returning zero names, including owner; owner recognition corrected to use the Rodolfo-confirmed owner app-scoped ID under the unchanged exact role-ID set. Second dry-run rendered 17 enriched seguradores + Crislaine owner and only Sydney removed. Isolated live run exit 0; state checks app_metadata/roles/user_token_me/debug_token HTTP 200, token valid, roles=18, operational_roles=18, reconciliation applied, errors=0; Discord readback confirmed current-users message 1532433318413340833 and movement message 1532433319164379291; Sheet SA readback 17 blank and only Sydney X.",
+      "updated_at": "2026-07-30T13:07:11-04:00",
       "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30",
-      "last_change": "2026-07-30: B006-2 exact confirmed migration set; Graph identity N+1 removed; Sheet public CSV route retired; fail-closed on role-ID drift.",
+      "last_change": "2026-07-30: confirmed owner role-ID recognition added so zero-name Graph responses still reconcile safely under exact set guard.",
       "backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-roles-watch.sh",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-role-monitor-state.json",
       "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
@@ -3503,15 +3503,15 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 8636,
-      "modified_at": "2026-07-30T12:38:23-04:00",
-      "sha256": "1f574afabf051df410435aadfc710c17436a76a8640adfc83eeaece1af8324a0",
+      "size_bytes": 8848,
+      "modified_at": "2026-07-30T13:06:42-04:00",
+      "sha256": "831371fd6212dfe30a2009115b3b251a656e418ca03f904465409a31105ad4ff",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
       "description": "Operational Meta role/Sheet reconciliation rules including B006-2 confirmed predecessor set, owner separation and exact-ID fail-closed behavior.",
-      "validation": "Runtime/versioned SHA-256 match; B006-2 confirmation recorded; offline exact/drift tests PASS; Service Account Sheet readback 17 present/1 removed.",
-      "updated_at": "2026-07-30T12:43:18-04:00",
+      "validation": "Runtime/versioned SHA-256 match; documents zero-name Graph multi-ID response handling via confirmed owner role ID; final B006-2 dry/live/readbacks PASS.",
+      "updated_at": "2026-07-30T13:07:11-04:00",
       "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30"
     },
     {
@@ -3626,13 +3626,15 @@
       "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
       "schedule": "2026-07-30T13:50:00-04:00",
       "timezone": "America/New_York",
-      "enabled": true,
+      "enabled": false,
       "repeat": "once",
       "deliver": "origin",
       "workdir": "/root/mgs-agent",
       "purpose": "After Meta quota window, dry-run and send/verify the corrected B006-2 live alert and Sheet readback without credential changes.",
-      "validation": "Cron create/readback success; attach_to_session enabled; all toolsets available; explicit stop on persistent code 4.",
-      "updated_at": "2026-07-30T12:43:18-04:00"
+      "validation": "Removed by readback after Rodolfo requested immediate retry and the corrected B006-2 live alert passed before the scheduled 13:50 run.",
+      "updated_at": "2026-07-30T12:43:18-04:00",
+      "state": "removed_after_early_manual_success",
+      "removed_at": "2026-07-30T13:07:11-04:00"
     }
   ],
   "profile_skill_references": [
