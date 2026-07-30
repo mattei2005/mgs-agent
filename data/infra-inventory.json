@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T13:07:11-04:00",
+    "updated_at": "2026-07-30T14:20:54-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1141,16 +1141,16 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 74606,
-      "modified_at": "2026-07-30T13:02:35-04:00",
-      "sha256": "479e5293fe73a0c49eb5d0e9b8280f8a53bc92c458ff1669a9fb57317cd036ad",
-      "description": "Zeus Meta app role/rate-limit monitor with B006-2 confirmed predecessor-set reconciliation, exact role-ID fail-closed guard, one-call Graph multi-ID identity lookup, Service Account-only Sheet reads/writes, app-aware same-name rendering and bounded Discord 429 retry.",
-      "validation": "2026-07-30 final: bash -n PASS; first post-quota dry-run exposed Graph multi-ID returning zero names, including owner; owner recognition corrected to use the Rodolfo-confirmed owner app-scoped ID under the unchanged exact role-ID set. Second dry-run rendered 17 enriched seguradores + Crislaine owner and only Sydney removed. Isolated live run exit 0; state checks app_metadata/roles/user_token_me/debug_token HTTP 200, token valid, roles=18, operational_roles=18, reconciliation applied, errors=0; Discord readback confirmed current-users message 1532433318413340833 and movement message 1532433319164379291; Sheet SA readback 17 blank and only Sydney X.",
-      "updated_at": "2026-07-30T13:07:11-04:00",
-      "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30",
-      "last_change": "2026-07-30: confirmed owner role-ID recognition added so zero-name Graph responses still reconcile safely under exact set guard.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-roles-watch.sh",
-      "state_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-role-monitor-state.json",
+      "size_bytes": 75016,
+      "modified_at": "2026-07-30T14:15:21-04:00",
+      "sha256": "4f85ccf538fcaea62b66a2fe6d5bf3b399889a19d777cc48703f63b1d6f5fdac",
+      "description": "Zeus Meta app role/rate-limit monitor with B006-2 exact-set reconciliation for 17 seguradores, owner-as-seguradora support, Service Account-only Sheet access, Graph multi-ID identity lookup and Discord delivery guards.",
+      "validation": "2026-07-30 owner cutover: updated 1Password token fresh checks app_metadata/roles/user_token_me/debug_token HTTP 200; /me deterministically identified Crislaine Oliveira and role ID; token valid; 17 raw/operational roles; exact-set reconciliation applied; offline render shows owner once with Sheet profile and 12 pages; live alert readback embed 1532452559070036151, users 1532452560370270218, movements 1532452561456726317; Sheet SA readback 17 B006-2 rows, zero X; errors=0. X-App-Usage 98%, so fresh snapshot was reused for delivery to avoid extra Meta calls.",
+      "updated_at": "2026-07-30T14:20:54-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 owner Crislaine Oliveira 2026-07-30",
+      "last_change": "2026-07-30: B006-2 owner changed from Crislaine Carvalho to Crislaine Oliveira; owner is one of the 17 seguradores and retains Sheet pages; exact role-ID set refreshed.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444/meta-app-roles-watch.sh",
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444/meta-app-role-monitor-state.json",
       "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
     },
     {
@@ -3503,16 +3503,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 8848,
-      "modified_at": "2026-07-30T13:06:42-04:00",
-      "sha256": "831371fd6212dfe30a2009115b3b251a656e418ca03f904465409a31105ad4ff",
+      "size_bytes": 8845,
+      "modified_at": "2026-07-30T14:16:20-04:00",
+      "sha256": "30170c4bff80982fee8e0e54aef8f3bf90c2d111d39fcfcffb5d7f97f29d9ab9",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Operational Meta role/Sheet reconciliation rules including B006-2 confirmed predecessor set, owner separation and exact-ID fail-closed behavior.",
-      "validation": "Runtime/versioned SHA-256 match; documents zero-name Graph multi-ID response handling via confirmed owner role ID; final B006-2 dry/live/readbacks PASS.",
-      "updated_at": "2026-07-30T13:07:11-04:00",
-      "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30"
+      "description": "Operational Meta role/Sheet reconciliation rules including B006-2 owner Crislaine Oliveira as an in-set seguradora with pages and exact-ID fail-closed behavior.",
+      "validation": "Runtime/versioned SHA-256 match; owner identity/token live validation and Discord/Sheet readbacks PASS.",
+      "updated_at": "2026-07-30T14:20:54-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 owner Crislaine Oliveira 2026-07-30"
     },
     {
       "id": "zeus-meta-app-rate-limit-route-pack-05",
@@ -3635,6 +3635,20 @@
       "updated_at": "2026-07-30T12:43:18-04:00",
       "state": "removed_after_early_manual_success",
       "removed_at": "2026-07-30T13:07:11-04:00"
+    },
+    {
+      "id": "zeus-meta-app-b0062-owner-crislaine-oliveira-backup-20260730",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444",
+      "artifacts": [
+        "meta-app-roles-watch.sh",
+        "meta-app-role-monitor-state.json",
+        "route-pack-02.md"
+      ],
+      "purpose": "Rollback before changing B006-2 owner and exact role set to Crislaine Oliveira.",
+      "validation": "Backup files created before runtime/skill changes.",
+      "updated_at": "2026-07-30T14:20:54-04:00"
     }
   ],
   "profile_skill_references": [

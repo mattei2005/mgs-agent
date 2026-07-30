@@ -445,10 +445,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-2-crislaine-oliveira-20260730",
+      "title": "B006-2 replaces B006; owner/admin is Crislaine Carvalho and Mic Vb is retired",
+      "updated_at": "2026-07-30T18:20:34+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b006-2",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "#B006-2 app alert channel 1521252068319297666",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T14:11:24-04:00",
+      "id": "meta-app-owner-b006-2-crislaine-oliveira-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B006-2 replaces B006; owner/admin is Crislaine Carvalho and Mic Vb is retired",
-      "updated_at": "2026-07-30T15:08:53+00:00"
+      "title": "B006-2 owner/admin is Crislaine Oliveira, also a seguradora with pages",
+      "updated_at": "2026-07-30T18:20:34+00:00"
     },
     {
       "canonical_key": "security.google-workspace-auth",
@@ -471,5 +489,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T16:42:50+00:00"
+  "updated_at": "2026-07-30T18:20:34+00:00"
 }
