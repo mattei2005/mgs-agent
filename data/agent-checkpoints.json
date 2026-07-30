@@ -122,6 +122,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b0062-role-reconciliation-20260730",
+      "next_step": "Aplicar baseline set-aware fail-closed, reparar X via Service Account, validar e reenviar alerta live.",
+      "objective": "Corrigir a reconciliação Meta roles x planilha do B006-2 após substituição do B006 restrito, preservando os mesmos 17 seguradores e nova owner Crislaine Carvalho.",
+      "source": "discord-thread:1532374768597078257 message:1532425481641787463",
+      "state": "confirmação explícita de rodolfo recebida: b006 foi desativado por restrição; b006-2 é o substituto e mantém os mesmos 17 seguradores. graph retorna 17 asids sem nome e a planilha foi marcada x indevidamente.",
+      "thread_id": "1532374768597078257",
+      "updated_at": "2026-07-30T16:32:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-honcho-all-agents-rollout-20260717",
       "next_step": "Operação normal: Zeus monitora provider + copilot; sessões Discord já abertas adotam Honcho somente em sessão nova/reset.",
       "objective": "Integrar o memory provider nativo Honcho managed nos agentes operacionais MGS com isolamento, contexto limitado e persistência autorizada",
@@ -312,5 +322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-28T13:52:07+00:00"
+  "updated_at": "2026-07-30T16:32:52+00:00"
 }
