@@ -143,12 +143,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b011-to-b012-dtr-cutover-20260730",
-      "next_step": "Backup, pin do item novo por ID, migrar monitor/cron/estado para B012, restaurar/revalidar Sheet com dry-run DTR e confirmar alerta real.",
+      "next_step": "Ially/Ciro deve reconectar os 28 perfis no DTR/ChatPion ao app B012; o cron B012 limpará X e alertará conforme cada conexão validar. Duplicata antiga BOT B012 Token permanece no 1Password, não deletada sem confirmação.",
       "objective": "Aposentar B011, ativar B012 no monitor DTR/ChatPion e manter o mesmo canal Discord renomeado.",
-      "source": "discord-thread:1532374768597078257 message:1532462192761372702",
-      "state": "diagnóstico: item novo b012 é duplicata de título; novo id atualizado às 14:27 e credenciais graph válidas. resolver selecionava o item b012 reserva antigo. cron b011 das 14:24 classificou 22 usuários contra o app aposentado e escreveu 20 x indevidos. cron b011 pausado e execução meta das 15:04 interrompida antes de reconciliar b012 por /roles.",
+      "source": "discord-thread:1532374768597078257 message:1532462192761372702; channel:1522830283240505385 messages:1532468004455977122,1532468005458546869,1532468006695997492,1532468007551373464",
+      "state": "cutover técnico concluído e alerta live b012 confirmado. credencial b012 atual: app metadata/debug_token//me//me/accounts http 200, token válido e app-id consistente. monitor b012 pinado no item novo por id; b012 excluído de /roles; sheet via sa; estado/cron/canal migrados. resultado operacional: 28 alvos, 0 linkados ao b012, 27 não linkados confirmados e 1 inconclusivo; 28 x na sheet.",
       "thread_id": "1532374768597078257",
-      "updated_at": "2026-07-30T19:04:45+00:00"
+      "updated_at": "2026-07-30T19:22:38+00:00"
     },
     {
       "agent": "zeus",
@@ -342,5 +342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T19:04:45+00:00"
+  "updated_at": "2026-07-30T19:22:38+00:00"
 }

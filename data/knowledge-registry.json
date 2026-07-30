@@ -251,10 +251,28 @@
       "kind": "procedure",
       "owner": "Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "PROC-B012-DTR-CAPABILITY-WATCH",
+      "title": "B011 BM restriction and Messenger capability detection",
+      "updated_at": "2026-07-30T19:22:38+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b011-bm-capability-watch",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b012-dtr-cutover-2026-07-30.md",
+      "consumers": [
+        "b012-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-07-30T15:20:43-04:00",
+      "id": "PROC-B012-DTR-CAPABILITY-WATCH",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B011 BM restriction and Messenger capability detection",
-      "updated_at": "2026-07-21T19:45:35+00:00"
+      "title": "B012 DTR OAuth and Messenger capability detection",
+      "updated_at": "2026-07-30T19:22:38+00:00"
     },
     {
       "canonical_key": "dtr.flow.url-audit.image-click",
@@ -507,5 +525,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T19:22:23+00:00"
+  "updated_at": "2026-07-30T19:22:38+00:00"
 }
