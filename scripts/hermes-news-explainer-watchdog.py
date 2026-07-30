@@ -539,6 +539,9 @@ class Watchdog:
 
     def run(self, dry_run: bool = False) -> int:
         current = self.now_fn()
+        # Delimit each cron execution so the stale-log monitor evaluates only
+        # the current run and does not keep a transient error active forever.
+        print(f'{iso(current)} watchdog START dry_run={int(dry_run)}')
         messages = self.fetch_messages()
         replies: dict[str, dict] = {}
         sources: list[dict] = []
