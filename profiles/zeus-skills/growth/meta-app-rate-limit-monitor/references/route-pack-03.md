@@ -1,6 +1,6 @@
 ## Advanced-Access App Without Seguradores as App Admins
 
-Rodolfo clarified for B011 that the app may have Advanced Access permissions in a verified Business Manager and the seguradores will not necessarily be added as app administrators. This is a valid Meta operating model for ChatPion/DigitalTrChat-style integrations: Advanced Access allows non-app-role customers/users to grant the app permissions after App Review, but it does **not** remove page-level access requirements for Graph API reads.
+Rodolfo clarified for B012 that the app may have Advanced Access permissions in a verified Business Manager and the seguradores will not necessarily be added as app administrators. This is a valid Meta operating model for ChatPion/DigitalTrChat-style integrations: Advanced Access allows non-app-role customers/users to grant the app permissions after App Review, but it does **not** remove page-level access requirements for Graph API reads.
 
 Operational implication:
 
@@ -15,19 +15,19 @@ Messenger send/webhook/ChatPion operation Advanced pages_messaging + pages_manag
 Dashboard/lead/subscriber truth           ChatPion/DigitalTrChat source, not app roles.
 ```
 
-For B011-style apps, do not expect the existing app-role monitor to list seguradores via `/roles`. B011 must still follow the same operational plan as B001–B010, but on a slower route: consult the correct runtime source (DTR/ChatPion page-token connection), reconcile the migration sheet X column, and alert in the B011 channel when a connected user becomes disconnected or a disconnected user becomes connected again. Because this route logs into DTR and validates each segurador connection, the production cadence is staggered at ~8 minutes rather than 2 minutes. The source is different; the operating contract is the same. A single app token cannot enumerate all customer pages solely because the app has Advanced Access.
+For B012-style apps, do not expect the app-role monitor to list seguradores via `/roles`. B012 follows the DTR/ChatPion page-token route: reconcile every Sheet row with `NO APP = B012`, including rows already marked `X`, and alert when a valid connection disappears or recovers. Production runs hourly at `:24` from 08:24–23:24 ET, staggered 20 minutes after the Meta roles monitor; keep the non-blocking lock because a full 28-target run takes several minutes. A single app token cannot enumerate all customer pages solely because the app has Advanced Access.
 
-Validated DTR verification route for B011-style connected profiles:
+Validated DTR verification route for B012-style connected profiles:
 
 ```text
-1. Use every sheet row where `NO APP = B011` by default; `Migrado` is informational unless Rodolfo explicitly asks for an active-migrated-only audit.
+1. Use every sheet row where `NO APP = B012` by default; `Migrado` is informational unless Rodolfo explicitly asks for an active-migrated-only audit.
 2. Map each bot user to its `Digitaltrchat - ...` 1Password item.
 3. Login to `https://digitaltrchat.com/social_accounts/index`.
 4. Switch top-bar segurador/account via `.account_switch` / `POST /social_accounts/fb_rx_account_switch`.
 5. Extract the active Facebook user token only inside the script from DTR HTML `graph.facebook.com/me/picture?access_token=...`; never print or store the token.
-6. First validate account-level linkage with Meta `/debug_token` using the B011 app token; if `debug_token.data.app_id == B011 app_id` and `is_valid=true`, the segurador is linked to B011 even if `/me/accounts` returns zero pages.
+6. First validate account-level linkage with Meta `/debug_token` using the B012 app token; if `debug_token.data.app_id == B012 app_id` and `is_valid=true`, the segurador is linked to B012 even if `/me/accounts` returns zero pages.
 7. Then call Meta `/me/accounts?fields=id,name,access_token` with that active connection token only to validate page-level inventory.
-8. For each returned page token, call `/{page_id}/subscribed_apps?fields=id,name` and match by B011 `app_id`.
+8. For each returned page token, call `/{page_id}/subscribed_apps?fields=id,name` and match by B012 `app_id`.
 9. Report two statuses separately: `Account link` and `Page inventory`. Do not mark a segurador unlinked just because it has 0 pages.
 ```
 
@@ -36,11 +36,11 @@ Interpretation rules:
 ```text
 DTR page count > Graph page count       The DTR UI has page rows that the current Meta token does not return; report as discrepancy, not connected.
 Graph OAuth #190 subcode 459/460        Facebook checkpoint/session invalidated; reconnection needed in DTR.
-`Application has been deleted`          Old app connection/token; reconnect the segurador/page to the current B011 app.
-`subscribed_apps` empty for a page       That page is not connected to B011 even if the segurador account itself is connected.
+`Application has been deleted`          Old app connection/token; reconnect the segurador/page to the current B012 app.
+`subscribed_apps` empty for a page       That page is not connected to B012 even if the segurador account itself is connected.
 ```
 
-Validated B011 route when Rodolfo asks “quais seguradores estão conectados nesse app”:
+Validated B012 route when Rodolfo asks “quais seguradores estão conectados nesse app”:
 
 ```text
 DigitalTRChat bot login
@@ -50,14 +50,14 @@ DigitalTRChat bot login
 → Meta `/me/accounts`
 → Page Access Token
 → `/{page_id}/subscribed_apps`
-→ match com B011 `app_id`
+→ match com B012 `app_id`
 ```
 
-- `references/b011-dtr-connection-verification-2026-07-04.md` for the initial validated probe and B011 classification rules.
-- `references/b011-dtr-link-monitor-2026-07-04.md` for the production B011 DTR link monitor: B011 parser fix, `/roles` exclusion, debug_token account-link rule, `Migrado=TRUE` source set, cron/state artifacts, and pitfalls.
-- `references/b011-cache-clean-and-alert-routing-2026-07-04.md` for the correction after B011 accidentally rendered/sent through the B007/Meta-roles path: B011 must use DTR/ChatPion force-live alerts, channel `1522830283240505385`, and cache clean must remove B011/B001A state from the Meta roles monitor.
+- `references/b011-dtr-connection-verification-2026-07-04.md` and `references/b011-dtr-link-monitor-2026-07-04.md` preserve the historical B011 validation model inherited by B012.
+- `references/b012-dtr-cutover-2026-07-30.md` is the active B011→B012 cutover record: credential duplicate-title guard, current item pin, Service Account Sheet route, all-row monitoring, cron/state artifacts and live validation.
+- `references/b011-cache-clean-and-alert-routing-2026-07-04.md` remains historical evidence for why DTR/ChatPion apps must never render through the Meta `/roles` path.
 
-Recommended token scopes for generating the B011 app-health token:
+Recommended token scopes for generating the B012 app-health token:
 
 ```text
 public_profile
