@@ -97,7 +97,7 @@ B002 Lola Lilliana
 B003 Siyam Mia
 B004 Mst Lija
 B005/B005-2 Zmii
-B006/B006-2 Crislaine Carvalho
+B006-2 Crislaine Oliveira (also a seguradora with Sheet pages)
 B007 Dek Fiyan
 B008 Phạm Minh Thiện
 B009 Hindawan Pratama
@@ -106,9 +106,9 @@ B010 Lorraynii Criistiinii
 
 For B005-2, `Wana Hsh` is the retired former owner profile and must be treated as expected owner housekeeping if removed from Meta `/roles`, not as an active segurador incident. `Zmii` is the current owner/admin profile confirmed by Rodolfo and represented in the migration sheet.
 
-For B006-2, `Mic Vb` is the retired owner of the B006 predecessor and must be treated as expected owner housekeeping if removed from Meta `/roles`. `Crislaine Carvalho` is the current B006-2 owner/admin profile confirmed by Rodolfo and represented in the migration sheet. The renamed Discord channel keeps ID `1521252068319297666`, while monitor state/item identity is canonicalized to `B006-2` / `BOT B006-2 Token`.
+For B006-2, `Mic Vb` and `Crislaine Carvalho` are retired former-owner profiles and must be treated as expected owner housekeeping if removed from Meta `/roles`. Rodolfo changed the current owner to `Crislaine Oliveira` on 2026-07-30. Unlike a separate owner-only profile, Crislaine Oliveira is already one of the 17 operational seguradores and has pages in the migration Sheet; render her once using the normal Sheet-enriched BOT EMAIL, profile ID and page count. The renamed Discord channel keeps ID `1521252068319297666`, while monitor state/item identity is canonicalized to `B006-2` / `BOT B006-2 Token`.
 
-Rodolfo confirmed on 2026-07-30 that B006 was disabled after a Meta restriction, B006-2 replaced it, and the new app keeps the exact same 17 seguradores from the last healthy B006 baseline plus the new owner Crislaine Carvalho. Meta currently exposes different app-scoped IDs for those users and may resolve none of the display names in a Graph multi-ID lookup. The confirmed owner app-scoped ID may be used to label Crislaine Carvalho even when Graph returns only IDs; do not require the owner display name from Graph as a precondition. The runtime may use the confirmed predecessor set for display and Sheet reconciliation only while the exact confirmed B006-2 role-ID set remains unchanged. Preserve raw Graph roles separately. Any missing/unexpected ID must fail closed: do not infer who changed and do not rewrite Sheet removal markers until the new set is attributed safely.
+Rodolfo confirmed that B006 was disabled after a Meta restriction, B006-2 replaced it, and the replacement keeps the exact same 17 seguradores from the last healthy B006 baseline. The current owner token `/me` deterministically identifies Crislaine Oliveira. Meta may resolve none of the role display names in a Graph multi-ID lookup; use the confirmed owner app-scoped ID to label Crislaine Oliveira, but only while the exact confirmed 17-ID set remains unchanged. Preserve raw Graph roles separately. Any missing/unexpected ID must fail closed: do not infer who changed and do not rewrite Sheet removal markers until the new set is attributed safely.
 
 Different Facebook profiles can share the same display name. Rendering must therefore be app-aware: when the current app's owner name matches a Sheet row assigned to a different app, treat them as separate identities and show the owner as `owner do app` without borrowing the unrelated BOT EMAIL/pages. Keep the original Sheet mapping intact for its assigned app.
 

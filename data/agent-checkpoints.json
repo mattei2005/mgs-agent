@@ -122,6 +122,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b0062-owner-crislaine-oliveira-20260730",
+      "next_step": "Backup, atualizar owner/exact-set de 17 IDs, validar planilha e enviar alerta real reutilizando o snapshot fresco.",
+      "objective": "Alterar owner do B006-2 para Crislaine Oliveira, preservar suas páginas e validar alerta real com token atualizado.",
+      "source": "discord-thread:1532374768597078257 message:1532450556965294131",
+      "state": "token atualizado validado live: /me http 200 id 2422296368256372 nome crislaine oliveira; app metadata/roles/debug_token http 200; token válido; 17 roles. uso meta 98%, portanto novas consultas serão evitadas e o snapshot fresco será reutilizado para o alerta.",
+      "thread_id": "1532374768597078257",
+      "updated_at": "2026-07-30T18:14:31+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-b0062-role-reconciliation-20260730",
       "next_step": "Nenhum para reconciliação. Pendência separada: App Secret exposto aguarda confirmação crítica para rotação/contenção.",
       "objective": "Corrigir a reconciliação Meta roles x planilha do B006-2 após substituição do B006 restrito, preservando os mesmos 17 seguradores e nova owner Crislaine Carvalho.",
@@ -322,5 +332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T17:07:47+00:00"
+  "updated_at": "2026-07-30T18:14:31+00:00"
 }
