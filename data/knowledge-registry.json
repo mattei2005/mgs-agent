@@ -397,6 +397,24 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "meta-app-b0062-role-set-continuity",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T12:31:00-04:00",
+      "id": "meta-app-b0062-role-set-continuity-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": "2026-10-30",
+      "status": "active",
+      "superseded_by": null,
+      "title": "B006-2 mantém os mesmos 17 seguradores do B006 desativado",
+      "updated_at": "2026-07-30T16:42:50+00:00"
+    },
+    {
       "canonical_key": "meta_app_owner.b005-2",
       "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "consumers": [
@@ -453,5 +471,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T15:08:53+00:00"
+  "updated_at": "2026-07-30T16:42:50+00:00"
 }

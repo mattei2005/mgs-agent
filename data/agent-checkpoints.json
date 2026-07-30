@@ -123,12 +123,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b0062-role-reconciliation-20260730",
-      "next_step": "Aguardar a janela de quota Meta, executar dry-run/live B006-2, validar readback da planilha e do Discord.",
+      "next_step": "Job df1c627f2fb2 executará às 13:50 ET: dry-run, alerta live B006-2 e readback Discord/Meta/Sheet; parar se code 4 persistir.",
       "objective": "Corrigir a reconciliação Meta roles x planilha do B006-2 após substituição do B006 restrito, preservando os mesmos 17 seguradores e nova owner Crislaine Carvalho.",
       "source": "discord-thread:1532374768597078257 message:1532425481641787463",
-      "state": "backup runtime/state e planilha concluído. lógica set-aware fail-closed, graph multi-id e leitura sheets exclusiva por service account aplicadas; testes offline confirmam 17 x a limpar e 1 ausência real. validação live bloqueada temporariamente pelo rate limit meta código 4.",
+      "state": "lógica set-aware fail-closed aplicada. planilha reparada por service account e validada: 18 linhas b006-2, 17 sem x e apenas sydney smith com x. runtime/skill/inventário/audit atualizados. meta ainda http 403 code 4 por quota temporária.",
       "thread_id": "1532374768597078257",
-      "updated_at": "2026-07-30T16:39:49+00:00"
+      "updated_at": "2026-07-30T16:44:12+00:00"
     },
     {
       "agent": "zeus",
@@ -322,5 +322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T16:39:49+00:00"
+  "updated_at": "2026-07-30T16:44:12+00:00"
 }

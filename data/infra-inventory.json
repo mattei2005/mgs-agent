@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T16:14:49.676995+00:00",
+    "updated_at": "2026-07-30T12:43:18-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1141,16 +1141,17 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 66691,
-      "modified_at": "2026-07-30T11:55:47-04:00",
-      "sha256": "a890a4886cfd3e5d8a66060d16d8efbb8011949ce6ac5024838997ec32b493b4",
-      "description": "Zeus Meta app role/rate-limit monitor with B006-2 cutover, app-aware same-name profile rendering, bounded Discord HTTP 429 retry, and force-live suppression of duplicate automatic delta alerts.",
-      "validation": "2026-07-30: bash -n PASS; first combined B003/B006-2 force-live exposed Discord HTTP 429 partial delivery; patched bounded retry_after handling and force-live/delta dedup; dry-run B006-2 emitted one embed family only; second live combined run exit 0; B003 and B006-2 each delivered complete alert/readback; both tokens valid and all four checks HTTP 200; state persisted.",
-      "updated_at": "2026-07-30T11:58:17-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta live-alert Discord 429 hardening 2026-07-30",
-      "last_change": "2026-07-30: retry Discord 429 with bounded retry_after; force-live no longer emits the automatic delta alert in the same run.",
-      "backup": "/root/mgs-agent/backups/meta-app-discord-429-20260730-115530/meta-app-roles-watch.sh",
-      "state_backup": "/root/mgs-agent/backups/meta-app-discord-429-20260730-115530/meta-app-role-monitor-state.json"
+      "size_bytes": 74279,
+      "modified_at": "2026-07-30T12:37:48-04:00",
+      "sha256": "035834e57081ab8be5404c45b1de33adca17dde821e6e3112a8be42cb4fa7f4e",
+      "description": "Zeus Meta app role/rate-limit monitor with B006-2 confirmed predecessor-set reconciliation, exact role-ID fail-closed guard, one-call Graph multi-ID identity lookup, Service Account-only Sheet reads/writes, app-aware same-name rendering and bounded Discord 429 retry.",
+      "validation": "2026-07-30: bash -n PASS; offline exact-set test operational_roles=18, present Sheet rows=17, updates_needed=17; drift test preserved all 18 markers; live Sheet repair via mgs-core-prod Service Account updated A2:A233; readback B006-2=17 blank and 1 X (Sydney Smith). Fresh Meta/live alert deferred because app remained HTTP 403 code 4 after diagnostic quota exhaustion; one-shot job df1c627f2fb2 scheduled after quota window.",
+      "updated_at": "2026-07-30T12:43:18-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30",
+      "last_change": "2026-07-30: B006-2 exact confirmed migration set; Graph identity N+1 removed; Sheet public CSV route retired; fail-closed on role-ID drift.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-roles-watch.sh",
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/meta-app-role-monitor-state.json",
+      "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3502,16 +3503,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 7966,
-      "modified_at": "2026-07-30T11:37:06-04:00",
-      "sha256": "8ca875d1d5164824b81ffd1dda554f5ab6a62ef9288ea9dd9eced580e21831a6",
+      "size_bytes": 8636,
+      "modified_at": "2026-07-30T12:38:23-04:00",
+      "sha256": "1f574afabf051df410435aadfc710c17436a76a8640adfc83eeaece1af8324a0",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Operational Meta app owner exceptions and Sheet reconciliation rules; documents B006-2 cutover and app-aware separation of different profiles sharing a display name.",
-      "validation": "Runtime/versioned SHA-256 match; B003 and B006-2 Crislaine profiles confirmed by distinct Meta IDs; B003 Sheet mapping unchanged.",
-      "updated_at": "2026-07-30T11:37:21-04:00",
-      "source_report": "REPORT-INFRA Zeus B006-2 same-name profile clarification 2026-07-30"
+      "description": "Operational Meta role/Sheet reconciliation rules including B006-2 confirmed predecessor set, owner separation and exact-ID fail-closed behavior.",
+      "validation": "Runtime/versioned SHA-256 match; B006-2 confirmation recorded; offline exact/drift tests PASS; Service Account Sheet readback 17 present/1 removed.",
+      "updated_at": "2026-07-30T12:43:18-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30"
     },
     {
       "id": "zeus-meta-app-rate-limit-route-pack-05",
@@ -3519,16 +3520,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 20715,
-      "modified_at": "2026-07-30T11:56:57-04:00",
-      "sha256": "dac6d031c8bd1b828ed23883fa4656627495ed8e18bd65fe2edc7edc0c23cff8",
+      "size_bytes": 21544,
+      "modified_at": "2026-07-30T12:38:44-04:00",
+      "sha256": "ff086f70f4353fee4873ef139f98d38e36335d4b95438b55d0bd3f7b25fa950b",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Production Meta app roles monitor procedure, current B006-2 routing, force-live behavior, Discord 429 retry and delivery-readback requirements.",
-      "validation": "Runtime/versioned SHA-256 match; B006-2 canonical labels read back; post-fix dry/live delivery tests PASS.",
-      "updated_at": "2026-07-30T11:58:17-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta live-alert Discord 429 hardening 2026-07-30"
+      "description": "Production Meta monitor procedure with Graph multi-ID identity lookup, exact-set migration reconciliation, Service Account-only Sheet access and Discord delivery guards.",
+      "validation": "Runtime/versioned SHA-256 match; B006-2 confirmation recorded; offline exact/drift tests PASS; Service Account Sheet readback 17 present/1 removed.",
+      "updated_at": "2026-07-30T12:43:18-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 confirmed-role reconciliation 2026-07-30"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -3597,6 +3598,41 @@
         "unit": "mgs-gateway-restart-midturn-fifo-20260730T161812Z-558398",
         "delay_seconds": 45
       }
+    },
+    {
+      "id": "zeus-meta-app-b0062-sheet-reconciliation-backup-20260730",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421",
+      "artifacts": [
+        "meta-app-roles-watch.sh",
+        "meta-app-role-monitor-state.json",
+        "sheet-A-Z-before.json"
+      ],
+      "sheet_backup_sha256": "e3ffc96d70c9a56556195a097186c148369a57731cd28aca958b408edacd4f61",
+      "sheet_backup_rows": 232,
+      "sheet_backup_b006_2_rows": 18,
+      "sheet_backup_b006_2_x_count": 18,
+      "purpose": "Rollback for B006-2 set-aware runtime and Sheet marker repair.",
+      "validation": "Files exist; Sheet backup captured before write via canonical Service Account.",
+      "updated_at": "2026-07-30T12:43:18-04:00"
+    },
+    {
+      "id": "zeus-one-shot-b0062-alert-post-rate-limit-20260730",
+      "agent": "zeus",
+      "type": "hermes_cron_one_shot",
+      "job_id": "df1c627f2fb2",
+      "name": "b0062-alerta-live-pos-rate-limit",
+      "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "schedule": "2026-07-30T13:50:00-04:00",
+      "timezone": "America/New_York",
+      "enabled": true,
+      "repeat": "once",
+      "deliver": "origin",
+      "workdir": "/root/mgs-agent",
+      "purpose": "After Meta quota window, dry-run and send/verify the corrected B006-2 live alert and Sheet readback without credential changes.",
+      "validation": "Cron create/readback success; attach_to_session enabled; all toolsets available; explicit stop on persistent code 4.",
+      "updated_at": "2026-07-30T12:43:18-04:00"
     }
   ],
   "profile_skill_references": [
