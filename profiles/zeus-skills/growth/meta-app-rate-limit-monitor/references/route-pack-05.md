@@ -37,6 +37,8 @@ For B012 alert validation, never use `meta-app-roles-watch.sh`; use:
 MGS_B012_DTR_FORCE_LIVE_ALERT=1 /root/.hermes/profiles/zeus/scripts/b012-dtr-link-watch.sh
 ```
 
+If the same B012 run detects material link changes and `FORCE_LIVE_ALERT=1`, the automatic fresh change alert is the single canonical delivery: it already contains current users, added/removed transitions, confirmed removals and unknowns. Suppress the second force-snapshot family for that run. A manual force with no material change still sends one fresh snapshot. After any delivery bug, keep the accurate change alert, delete only the duplicate snapshot messages, verify readback and persist `alerts_sent=1`.
+
 For “todos os 11 canais”, validate the operational set as: B001, B002, B003, B004, B005-2, B006-2, B007, B008, B009, B010, B012. B012 routes to `#b012-app-status` / `1522830283240505385`; there must be no stale alternate runtime state, script, sheet label, or alert title.
 
 On 2026-07-30 Rodolfo activated B012 as the DTR/ChatPion replacement for the retired B011. The former reserve credentials remain as a duplicate-title 1Password item; production must pin the current validated B012 item by immutable ID and title-based resolution must fail closed. B012 is one of the 11 operational channels, not a reserve or a `/roles` app.

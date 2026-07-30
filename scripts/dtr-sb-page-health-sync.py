@@ -627,8 +627,8 @@ def derive_segurador(row):
     if profile:
         return profile
     notes=norm(row.get('NOTES') or row.get('notes'))
-    match=re.search(r'PERFIL\s+SEGURADOR\s*-\s*(.+?)(?:\s+-\s*(?:[A-Z]{2}(?:-[A-Z]{2})?|#\d+|TOKEN|APP_DELETED|PERMISSION|SEM_COMPLETED|OTHER)\b|$)',notes,re.I)
-    return clean(match.group(1)) if match else ''
+    match=re.search(r'PERFIL\s+SEGURADOR\s*-\s*(.+)',notes,re.I)
+    return clean(re.split(r'\s+-\s+',match.group(1),maxsplit=1)[0]) if match else ''
 
 def post_discord(content, max_attempts=5):
     token=discord_token()

@@ -56,7 +56,7 @@ def public_row(raw, daily, sync):
     public = daily.sb_public_from_raw(raw)
     public.update({
         'page_name': daily.norm(raw.get('PAGE_NAME')),
-        'profile_name': daily.derive_segurador(raw),
+        'profile_name': daily.derive_segurador(raw) if hasattr(daily, 'derive_segurador') else daily.norm(raw.get('PROFILE_NAME')),
         'bot_user': daily.low(raw.get('USER_LOGIN') or raw.get('LOGIN')),
         'page_id': daily.norm(raw.get('PAGE_ID')),
         'fb_page_id': daily.norm(raw.get('FB_PAGE_ID')),

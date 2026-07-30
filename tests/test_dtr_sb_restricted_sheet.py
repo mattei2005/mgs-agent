@@ -154,6 +154,36 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(stats['sheet_on_hold_excluded'], 1)
         self.assertEqual(stats['sheet_blocked_excluded'], 1)
 
+    def test_segurador_falls_back_to_structured_notes(self):
+        row = {
+            **self.raw(7, 'Broadcast'),
+            'PROFILE_NAME': None,
+            'NOTES': '09 - PERFIL SEGURADOR - Đoàn Diệu Hồng - ZUOUT - #2022',
+        }
+        report_rows, _ = sync.restricted_sheet_rows([row], {'bot@example.com'}, '2026-07-15')
+        self.assertEqual(report_rows[0]['segurador'], 'Đoàn Diệu Hồng')
+
+    def test_verified_dtr_enrichment_survives_sb_only_rebuild_and_fresh_dtr_wins(self):
+        desired = [{
+            'fb page id': '1', 'page id': '10', 'bot user': 'bot@example.com',
+            'segurador': '', 'codigos': '#2022, APP_DELETED',
+        }]
+        previous = [{
+            'fb page id': '1', 'page id': '10', 'bot user': 'bot@example.com',
+            'segurador': 'Segurador anterior', 'codigos': '#2022',
+        }]
+        preserved = sync.merge_report_enrichment(desired, previous)
+        self.assertEqual(preserved[0]['segurador'], 'Segurador anterior')
+        self.assertEqual(preserved[0]['codigos'], '#2022')
+
+        fresh = [{
+            'fb_page_id': '1', 'page_id': '10', 'bot_user': 'bot@example.com',
+            'segurador': 'Segurador atual', 'codes': ['#2022', '#551'],
+        }]
+        updated = sync.merge_report_enrichment(desired, previous, fresh)
+        self.assertEqual(updated[0]['segurador'], 'Segurador atual')
+        self.assertEqual(updated[0]['codigos'], '#2022, #551')
+
     def test_summary_and_total_tabs_are_canonical_and_complete(self):
         report_rows = [
             {
