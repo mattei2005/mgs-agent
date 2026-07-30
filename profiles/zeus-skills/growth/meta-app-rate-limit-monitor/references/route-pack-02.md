@@ -108,6 +108,8 @@ For B005-2, `Wana Hsh` is the retired former owner profile and must be treated a
 
 For B006-2, `Mic Vb` is the retired owner of the B006 predecessor and must be treated as expected owner housekeeping if removed from Meta `/roles`. `Crislaine Carvalho` is the current B006-2 owner/admin profile confirmed by Rodolfo and represented in the migration sheet. The renamed Discord channel keeps ID `1521252068319297666`, while monitor state/item identity is canonicalized to `B006-2` / `BOT B006-2 Token`.
 
+A person can be a segurador assigned to one app in the Sheet and simultaneously own/create another app. Rendering must therefore be app-aware: when the current app's owner has a Sheet row assigned to a different app, show the identity as `owner do app` without borrowing that unrelated BOT EMAIL/pages into the owner app's alert. Keep the original Sheet mapping intact for its assigned app.
+
 B009 and B010 owner profiles are also seguradores with one page each; Rodolfo considers them low risk if blocked permanently. For reconciliation, still treat them as owner exceptions when explaining extras.
 
 Use the current runtime state file (`/root/mgs-agent/data/meta-app-role-monitor-state.json`) or a fresh monitor run for Meta roles; the sheet is the planning/assignment source, while Meta roles are the runtime truth. See `references/segurador-sheet-reconciliation.md` for source URL, owner exceptions, normalization rules, and test alert pattern.

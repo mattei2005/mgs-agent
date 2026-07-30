@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T09:38:12-04:00",
+    "updated_at": "2026-07-30T11:09:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1140,15 +1140,16 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 64236,
-      "modified_at": "2026-07-30T09:35:41-04:00",
-      "sha256": "ca15317cf05ef3e7b3c1745f36a559e3384c590d7359fa285ffb11702e573f37",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B005-2 current owner/admin is Zmii and retired former owner Wana Hsh is ignored as expected owner housekeeping on removal.",
-      "validation": "2026-07-30: bash -n PASS; B005-2 dry-run showed ADMIN=Zmii; live Graph checks app_metadata/roles/user_token_me/debug_token all HTTP 200; token valid; 16 roles; live recovery + current-state alert delivered with errors_count=0.",
-      "updated_at": "2026-07-30T09:38:12-04:00",
-      "source_report": "REPORT-INFRA Zeus B005-2 owner/admin update 2026-07-30",
-      "last_change": "2026-07-30: changed B005-2 active owner/admin from disabled Wana Hsh to Zmii and classified Wana Hsh as retired owner housekeeping.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0052-owner-20260730-093531/meta-app-roles-watch.sh"
+      "size_bytes": 65477,
+      "modified_at": "2026-07-30T11:07:10-04:00",
+      "sha256": "d73592512e69479406345071ce7fee1dfbf3261cd8b415922d6a6264d81eabd1",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B006 is retired in favor of B006-2 on the same Discord channel, active owner/admin is Crislaine Carvalho, retired Mic Vb removals are housekeeping, and owner rendering is app-aware when the same person is a segurador on another app.",
+      "validation": "2026-07-30: bash -n PASS; canonical resolver auto-discovers BOT B006-2 Token and suppresses BOT B006 Token; live B006-2 Graph checks all HTTP 200, token valid, 10 roles; state contains B006-2 only; corrected live alert delivered with Crislaine Carvalho as owner do app and no unrelated B003 BOT EMAIL/pages; Discord readback PASS.",
+      "updated_at": "2026-07-30T11:09:01-04:00",
+      "source_report": "REPORT-INFRA Zeus B006 to B006-2 cutover 2026-07-30",
+      "last_change": "2026-07-30: cut over B006 monitor identity/item/channel label to B006-2, changed owner Mic Vb -> Crislaine Carvalho, added predecessor suppression/state cleanup, and made owner table rendering app-aware.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-roles-watch.sh",
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-role-monitor-state.json"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3494,16 +3495,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 7164,
-      "modified_at": "2026-07-30T09:35:50-04:00",
-      "sha256": "817b79beb7f93a39fd170a5f90acea8305b9a9f467d57f7bf2d7ea37f155ff07",
+      "size_bytes": 7993,
+      "modified_at": "2026-07-30T11:07:28-04:00",
+      "sha256": "3d6ad3c3ffee221e39af6a3cb65e0380b664c2c61482b76061065abafe842402",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Operational Meta app owner exceptions and segurador Sheet reconciliation rules; B005-2 active owner is Zmii and Wana Hsh is retired.",
-      "validation": "Runtime and versioned mirror SHA-256 match; owner correction read back in route pack; production B005-2 monitor validation passed.",
-      "updated_at": "2026-07-30T09:38:12-04:00",
-      "source_report": "REPORT-INFRA Zeus B005-2 owner/admin update 2026-07-30"
+      "description": "Operational Meta app owner exceptions and Sheet reconciliation rules; documents B006-2 cutover, Crislaine Carvalho ownership, Mic Vb retirement and app-aware owner rendering.",
+      "validation": "Runtime and versioned mirror SHA-256 match; B006-2 dry/live alert rendering and production Graph checks passed.",
+      "updated_at": "2026-07-30T11:09:01-04:00",
+      "source_report": "REPORT-INFRA Zeus B006 to B006-2 cutover 2026-07-30"
     }
   ],
   "profile_skill_references": [
@@ -7129,12 +7130,12 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 14321,
-      "md5": "656c221271f0caba6361bb1105decd6b",
-      "modified_at": "2026-07-30T09:37:21-04:00",
-      "sha256": "2267731d66ec1dbdaa4f1c1be3c488a8c0c39f0dfcfdf01ab741b443b9eed181",
-      "updated_at": "2026-07-30T09:38:12-04:00",
-      "last_change": "Registered active canonical decision meta_app_owner.b005-2 pointing to the owner-reconciliation route pack."
+      "size_bytes": 15102,
+      "md5": "cac2962cd45740431265d52c1e397e98",
+      "modified_at": "2026-07-30T11:08:53-04:00",
+      "sha256": "1157c5304fbc95093384ba9ca5879c432015f53c545a0a46be879072b552c649",
+      "updated_at": "2026-07-30T11:09:01-04:00",
+      "last_change": "Registered active canonical decision meta_app_owner.b006-2 pointing to the B006-2 cutover/owner route pack."
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
