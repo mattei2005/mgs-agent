@@ -152,6 +152,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b012-alert-layout-polish-20260730",
+      "next_step": "Monitor horário segue ativo; reconectar os 6 perfis marcados e revisar o próximo ciclo normal às 17:24 ET.",
+      "objective": "Padronizar o alerta B012 no visual B010, antecipar um ciclo real sem cancelar 16:24 e remover o replay de adicionados.",
+      "source": "discord request 1532481544021606672; alert messages 1532484386061160632,1532484387185361196,1532484388166570158; backup /root/mgs-agent/backups/meta-app-b012-alert-layout-20260730-161557",
+      "state": "concluído: card nativo meta app - b012 com estado/contagem/pendentes/páginas/dtr/meta e descrição alerta live solicitado. force-live real concluiu 16:25: 22/28 linkados, 6 desconectados, zero inconclusivos; yudi anggara desconectou desde o ciclo anterior e recebeu x na sheet. entrega limpa em 3 mensagens, sem nomes em adicionados agora e sem seção inconclusiva vazia. cron 16:24 permaneceu habilitado, encontrou lock do manual ativo e próximo ciclo ficou 17:24.",
+      "thread_id": "1532374768597078257",
+      "updated_at": "2026-07-30T20:30:50+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-b012-reconnect-recheck-20260730",
       "next_step": "Monitor horário B012 permanece ativo. Reconectar Kaio Sousa, Erna Ansary, Ademar Soares Nunes, Barbara Cristina e Hùng Hợp Tiến; o próximo ciclo limpa X automaticamente quando validar.",
       "objective": "Revalidar ao vivo os perfis B012 reconectados por Rodolfo, atualizar Sheet/estado e enviar novo alerta real.",
@@ -352,5 +362,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T20:11:55+00:00"
+  "updated_at": "2026-07-30T20:30:50+00:00"
 }
