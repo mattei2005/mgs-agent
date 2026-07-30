@@ -1575,9 +1575,11 @@
       "enabled": true,
       "purpose": "Full Meta app roles/admin and sheet reconciliation for B001-B010/B005-2.",
       "validation": "Cron readback enabled; production 21:04 ET cycle errors=0, apps=11, sheet updated=false; subsequent full dry-run rc=0, 11 item-get calls and state hash unchanged.",
-      "updated_at": "2026-07-30T15:28:17-04:00",
+      "updated_at": "2026-07-30T16:11:10-04:00",
       "last_observed_status": "error_at_2026-07-30T15:04:37-04:00_reconciled_intentional_termination",
-      "reconciliation": "Zeus intentionally terminated the run after 2 seconds because it started while duplicate-title B012 still resolved to the retired reserve credential. B012 was then excluded from /roles and a targeted B012 dry-run exited 0; next normal cycle is 16:04 ET."
+      "reconciliation": "Temporarily paused at 16:00 ET to avoid collision with the authorized B012 force-live run, then resumed after 16:04. B012 remains excluded from this /roles job.",
+      "state": "scheduled",
+      "next_run_at": "2026-07-30T17:04:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b012-dtr-link-watch",
@@ -1591,8 +1593,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "B012 DTR/ChatPion OAuth link and page connection reconciliation for all Sheet rows NO APP=B012.",
-      "validation": "Cron readback updated and paused during cutover; full dry-run/live 28 targets, 0 linked, 27 unlinked confirmed, 1 unknown; live Discord readback messages 1532468004455977122–1532468007551373464.",
-      "updated_at": "2026-07-30T15:26:32-04:00",
+      "validation": "Manual force-live 16:07 ET PASS; cron remains enabled. 23 linked, 5 unlinked, 0 unknown; next scheduled 16:24 ET.",
+      "updated_at": "2026-07-30T16:11:10-04:00",
       "state": "scheduled",
       "next_run_at": "2026-07-30T16:24:00-04:00"
     },
@@ -3488,16 +3490,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 21465,
-      "modified_at": "2026-07-30T15:15:13-04:00",
-      "sha256": "f20afb42db1960ecd60ea52523877465c7cbdbf998bd90f3a02fdafe818c1af1",
+      "size_bytes": 21978,
+      "modified_at": "2026-07-30T16:09:16-04:00",
+      "sha256": "74cb25b768c8b938bf891e35b40f39a09d7adaf37f639fe6329ab4d47ae229ea",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
       "description": "Production monitor procedure updated for active B012 DTR route, duplicate-title credential guard, all-row X recovery and #b012-app-status routing.",
-      "validation": "Runtime/versioned SHA-256 match; active B012 cutover rules and current cron/script/state names read back.",
-      "updated_at": "2026-07-30T15:22:42-04:00",
-      "source_report": "REPORT-INFRA Zeus B011 to B012 DTR cutover 2026-07-30"
+      "validation": "Runtime/versioned hash match; B012 material-change force suppression documented.",
+      "updated_at": "2026-07-30T16:11:10-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 reconnect recheck 2026-07-30"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -3655,16 +3657,17 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b012-dtr-link-watch.sh",
-      "size_bytes": 37081,
-      "modified_at": "2026-07-30T15:08:14-04:00",
-      "sha256": "0316d3d22d33c272df2ae471e3c97d26d8957864b698e8c5f2322a33fbce2d92",
+      "size_bytes": 37185,
+      "modified_at": "2026-07-30T16:09:07-04:00",
+      "sha256": "cc1a0983ce174790c78b5da8941c4c2fcb151e655af9b2bd446a6ee6923f2de0",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
       "description": "B012 DTR/ChatPion link monitor pinned to the current immutable 1Password item ID; validates account OAuth via debug_token, page inventory separately, reads/writes Sheet through mgs-core-prod Service Account and honors Discord 429 retry_after.",
-      "validation": "bash -n and embedded Python compile PASS; canary 1/1 and full dry-run/live PASS; 28 targets, 0 linked, 27 unlinked confirmed, 1 unknown; live Discord messages read back in channel 1522830283240505385.",
-      "updated_at": "2026-07-30T15:22:42-04:00",
-      "source_report": "REPORT-INFRA Zeus B011 to B012 DTR cutover 2026-07-30",
-      "backup": "/root/mgs-agent/backups/meta-app-b011-to-b012-cutover-20260730-150500/b011-dtr-link-watch.sh"
+      "validation": "Live 2026-07-30 16:07 ET: 28 targets, 23 linked, 5 unlinked, 0 unknown; 23 debug_token valid and /me/accounts HTTP 200; Sheet SA cleared 23 X; one accurate real change alert read back. Duplicate force snapshot cleaned; suppression patch bash/embedded Python PASS and bounded dry canary 1/1 linked.",
+      "updated_at": "2026-07-30T16:11:10-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 reconnect recheck 2026-07-30",
+      "backup": "/root/mgs-agent/backups/meta-app-b012-reconnect-recheck-20260730-160057/b012-dtr-link-watch.before-duplicate-suppression.sh",
+      "last_change": "Suppress duplicate force snapshot when the same B012 run already emitted a material link-change alert."
     },
     {
       "id": "zeus-meta-app-rate-limit-route-pack-03",
@@ -3688,17 +3691,17 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b012-dtr-cutover-2026-07-30.md",
-      "size_bytes": 2957,
-      "modified_at": "2026-07-30T15:16:02-04:00",
-      "sha256": "18c6655e3c9ded4faec664044b9fab3a111ab264cc03a593748ed4de2caec970",
+      "size_bytes": 3952,
+      "modified_at": "2026-07-30T16:09:39-04:00",
+      "sha256": "07b6c97e5d41500dfb59ba52df4c7f8e42645957e77bdf0b9b8b61f8f359cc52",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b012-dtr-cutover-2026-07-30.md",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
       "description": "Canonical B011→B012 cutover, credential duplicate guard and live operational finding.",
-      "validation": "Runtime/versioned SHA-256 match and readback PASS.",
-      "updated_at": "2026-07-30T15:22:42-04:00",
-      "source_report": "REPORT-INFRA Zeus B011 to B012 DTR cutover 2026-07-30"
+      "validation": "Runtime/versioned hash match; current 1Password titles unique and 23/28 live connection baseline recorded.",
+      "updated_at": "2026-07-30T16:11:10-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 reconnect recheck 2026-07-30"
     },
     {
       "id": "zeus-meta-app-b011-to-b012-cutover-backup-20260730",
@@ -3718,6 +3721,23 @@
       "purpose": "Rollback before retiring B011 and activating B012 DTR monitoring.",
       "validation": "Directory and pre-cutover artifacts captured before writes; Sheet snapshot has 28 B012 rows.",
       "updated_at": "2026-07-30T15:22:42-04:00"
+    },
+    {
+      "id": "zeus-meta-app-b012-reconnect-recheck-backup-20260730",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/meta-app-b012-reconnect-recheck-20260730-160057",
+      "artifacts": [
+        "b012-dtr-link-monitor-state.json",
+        "meta-app-role-monitor-state.json",
+        "infra-inventory.json",
+        "b012-dtr-cutover-2026-07-30.md",
+        "b012-sheet-before.json",
+        "b012-dtr-link-watch.before-duplicate-suppression.sh"
+      ],
+      "purpose": "Rollback before B012 reconnect live recheck, Sheet sync and duplicate-delivery suppression patch.",
+      "validation": "Pre-run state and 28-row Sheet snapshot captured with 28 X; script backup captured before patch.",
+      "updated_at": "2026-07-30T16:11:10-04:00"
     }
   ],
   "profile_skill_references": [
@@ -4618,8 +4638,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 83192,
-      "modified_at": "2026-07-30T11:20:32-04:00"
+      "size_bytes": 86285,
+      "modified_at": "2026-07-30T16:08:40-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -5052,8 +5072,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "size_bytes": 14870,
-      "modified_at": "2026-07-16T17:20:03-04:00"
+      "size_bytes": 14941,
+      "modified_at": "2026-07-30T16:09:34-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-set-restricted-until.py",
@@ -7575,13 +7595,13 @@
     },
     {
       "path": "/root/mgs-agent/data/b012-dtr-link-monitor-state.json",
-      "size_bytes": 28314,
-      "modified_at": "2026-07-30T15:20:44-04:00",
-      "sha256": "6a18537d64409a84a7f045cf33ad018816cade7e66314914c2aa5435dbcbbfd0",
+      "size_bytes": 27168,
+      "modified_at": "2026-07-30T16:10:15-04:00",
+      "sha256": "87e582b39ae11709932afbd8f9b32f4ef35a34549a21530fcef4dadc886ac885",
       "owner": "Zeus/Ops",
-      "description": "Active B012 DTR monitor state; sanitized, no tokens or secrets.",
-      "validation": "Readback 28 accounts, 0 linked, 27 unlinked confirmed, 1 unknown; current config item immutable-ID match true; channel 1522830283240505385.",
-      "updated_at": "2026-07-30T15:22:42-04:00"
+      "description": "Active sanitized B012 DTR state: 23 linked, 5 unlinked, 0 unknown; duplicate delivery cleanup recorded.",
+      "validation": "State readback 28 accounts, Sheet SA readback 23 clear/5 X, alerts_sent=1; no secrets.",
+      "updated_at": "2026-07-30T16:11:10-04:00"
     }
   ],
   "mu_plugin_canonical": {

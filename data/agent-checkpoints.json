@@ -153,12 +153,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b012-reconnect-recheck-20260730",
-      "next_step": "Executar force-live completo B012; validar estado, Sheet via SA e readback Discord; retomar cron Meta após a janela.",
+      "next_step": "Monitor horário B012 permanece ativo. Reconectar Kaio Sousa, Erna Ansary, Ademar Soares Nunes, Barbara Cristina e Hùng Hợp Tiến; o próximo ciclo limpa X automaticamente quando validar.",
       "objective": "Revalidar ao vivo os perfis B012 reconectados por Rodolfo, atualizar Sheet/estado e enviar novo alerta real.",
-      "source": "discord message 1532477802547515613; backup /root/mgs-agent/backups/meta-app-b012-reconnect-recheck-20260730-160057",
-      "state": "pré-run: screenshot confirma títulos distintos bot b012 e bot b012 token; alerta anterior tinha 0 atuais, 27 removidos confirmados e 1 inconclusivo. backup criado; monitor meta genérico pausado para evitar colisão às 16:04 et.",
+      "source": "discord message 1532477802547515613; alert messages 1532479752558874697,1532479753506783286,1532479755285299290,1532479756170428516; backup /root/mgs-agent/backups/meta-app-b012-reconnect-recheck-20260730-160057",
+      "state": "concluído: screenshot/1password com títulos distintos bot b012 token e bot b012, 1 item atual exato, zero duplicatas e resolver no id correto. live b012: 28 alvos, 23 linkados, 5 não linkados confirmados, 0 inconclusivos; capacidade saudável; 275 páginas dtr, 273 graph, 269 subscribed. sheet sa limpou 23 x e manteve 5. alerta real de mudança preservado e readback confirmado; snapshot force duplicado removido; runtime corrigido para não duplicar.",
       "thread_id": "1532374768597078257",
-      "updated_at": "2026-07-30T20:01:22+00:00"
+      "updated_at": "2026-07-30T20:11:55+00:00"
     },
     {
       "agent": "zeus",
@@ -352,5 +352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T20:01:22+00:00"
+  "updated_at": "2026-07-30T20:11:55+00:00"
 }
