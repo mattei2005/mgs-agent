@@ -743,9 +743,21 @@
       "sha256": "599c086814abfdd8bec229bd22dc04f052529cf56cb982ecacdbffb57e45a080",
       "purpose": "Resolve the active Hermes checkout from the live launcher, freeze that exact launcher/runtime/config target set, force Zeus last, abort on launcher/hash/compile/helper drift, and require sequential systemd+Discord readiness.",
       "validation": "bash -n PASS; live launcher resolves to hermes-agent-next-b9ba7c78 used by Ares/Atena/Zeus; old /root/.hermes/hermes-agent confirmed rollback-only; helper snapshot/compile/import paths now derive from the active launcher and include launcher-target drift abort.",
-      "status": "validated_pending_safe_restart",
-      "updated_at": "2026-07-30T16:14:49.676995+00:00",
-      "size_bytes": 11763
+      "status": "deployed_validated",
+      "updated_at": "2026-07-30T19:20:22.098334+00:00",
+      "size_bytes": 11763,
+      "last_live_validation": {
+        "reason": "hermes-busy-steer-pending-turn-fifo-20260730",
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "result": "PASS",
+        "completed_at": "2026-07-30T16:20:20Z",
+        "unit_result": "success",
+        "services": "3/3 active_running_discord_connected"
+      }
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
@@ -3564,8 +3576,8 @@
       "purpose": "Preserve chronological mid-turn input when an earlier pending event and a final-turn pending_steer coexist: merge the later steer into the earlier queued turn exactly once instead of silently dropping it.",
       "root_cause": "Gateway consumed pending_event first and only read result[pending_steer] when no pending/pending_event existed; the mutually exclusive gate discarded the acknowledged complement at the turn boundary.",
       "validation": "Production Discord timeline reconciled; new gateway behavior test PASS; targeted 4 PASS; ruff/py_compile/bash -n PASS; reverse apply PASS; clean HEAD + latest consolidated patch + incremental patch PASS; full MGS guard 850 + 6 subtests PASS; post-upstream regression 391 PASS; all 3 profiles resolve busy_input_mode=steer.",
-      "status": "rollout_scheduled_detached",
-      "updated_at": "2026-07-30T16:18:12.983740+00:00",
+      "status": "deployed_validated_3_of_3",
+      "updated_at": "2026-07-30T19:20:22.098334+00:00",
       "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-busy-input-steering-mgs.md",
       "skill_reference_sha256": "1b70c42c8c7c1597d8ff5c0329f0d90187ffade1bf585afc10733c346c1617bb",
       "runtime_mirror_equal": true,
@@ -3594,9 +3606,39 @@
         "rollback_path_hits": 0,
         "active_runtime_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
         "launcher_target": "/root/.local/bin/hermes-b9ba7c78",
-        "state": "scheduled_detached",
+        "state": "completed_validated",
         "unit": "mgs-gateway-restart-midturn-fifo-20260730T161812Z-558398",
-        "delay_seconds": 45
+        "delay_seconds": 45,
+        "systemd_result": "success",
+        "finalizer_exit_status": 0,
+        "completed_at": "2026-07-30T16:20:20Z",
+        "services": {
+          "ares": {
+            "pid": 558460,
+            "active": "active",
+            "sub": "running",
+            "nrestarts": 0,
+            "exec_status": 0,
+            "discord_connected": true
+          },
+          "atena": {
+            "pid": 558529,
+            "active": "active",
+            "sub": "running",
+            "nrestarts": 0,
+            "exec_status": 0,
+            "discord_connected": true
+          },
+          "zeus": {
+            "pid": 558575,
+            "active": "active",
+            "sub": "running",
+            "nrestarts": 0,
+            "exec_status": 0,
+            "discord_connected": true
+          }
+        },
+        "validation": "All snapshot hashes PASS; sequential Ares/Atena/Zeus restart PASS; 3/3 active/running; ExecMainStatus=0; NRestarts=0; fresh Discord connection markers; detached systemd unit Result=success."
       }
     },
     {
