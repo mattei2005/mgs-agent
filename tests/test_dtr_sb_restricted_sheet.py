@@ -26,6 +26,23 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
     def tearDown(self):
         setattr(sync, 'load_global_ignore_keys', self.original_ignore)
 
+    def test_sheet_rows_uses_service_account_api_and_keeps_filtered_out_rows(self):
+        values = [
+            ['Removidos acumulado', 'User', 'Segurador', 'Migrado', 'NO APP'],
+            ['', 'active@example.com', 'Active User', 'TRUE', 'B001'],
+            ['X', 'removed@example.com', 'Removed User', 'TRUE', 'B006-2'],
+        ]
+        with mock.patch.object(sync, 'google_access_token', return_value='fixture-token'), \
+             mock.patch.object(sync, 'sheets_api', return_value={'values': values}) as sheets_api:
+            rows = sync.sheet_rows()
+
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(sync.active_users_from_sheet(rows), ['active@example.com'])
+        args = sheets_api.call_args.args
+        self.assertEqual(args[:2], ('fixture-token', 'GET'))
+        self.assertIn('sheets.googleapis.com/v4/spreadsheets/', args[2])
+        self.assertIn('Migracao%2022%2F06', args[2])
+
     def test_discord_delivery_retries_rate_limit_using_retry_after(self):
         class Response:
             status = 200

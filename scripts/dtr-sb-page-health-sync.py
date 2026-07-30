@@ -20,8 +20,7 @@ from playwright.async_api import async_playwright
 
 BASE_DIR=Path('/root/mgs-agent')
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'
-MIGRATION_GID='562940072'
-MIGRATION_GID_FALLBACKS=['562940072','85508562','136896597']
+MIGRATION_TAB='Migracao 22/06'
 DTR_BASE='https://digitaltrchat.com'
 SB_STATE='/root/.local/share/mgs/smartbidding_state_headed.json'
 NY=ZoneInfo('America/New_York')
@@ -78,18 +77,23 @@ STEP1_ACTIVE_OVERRIDES=[
 ]
 
 def sheet_rows():
-    # Google's `/export?format=csv&gid=...` route intermittently returns 400
-    # and the migration workbook has changed tabs over time. Try the known gids
-    # and use the first tab that returns rows with User + Segurador.
-    last=[]
-    for gid in MIGRATION_GID_FALLBACKS:
-        url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={gid}'
-        data=urllib.request.urlopen(url, timeout=60).read().decode('utf-8-sig')
-        rows=list(csv.DictReader(io.StringIO(data))) if data.strip() else []
-        last=rows
-        if rows and 'User' in rows[0] and 'Segurador' in rows[0]:
-            return rows
-    return last
+    # Public gviz/CSV exports honor the workbook's active basic filter and can
+    # silently return only the visible subset. Read the canonical tab through
+    # the MGS Service Account so operational scope always includes hidden rows.
+    access_token=google_access_token()
+    tab_range=urllib.parse.quote(f"'{MIGRATION_TAB}'!A:X",safe='')
+    url=f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{tab_range}?majorDimension=ROWS'
+    values=sheets_api(access_token,'GET',url).get('values') or []
+    if not values:
+        return []
+    headers=[norm(value) for value in values[0]]
+    if 'User' not in headers or 'Segurador' not in headers:
+        raise RuntimeError(f'migration Sheet schema invalid: {headers!r}')
+    rows=[]
+    for values_row in values[1:]:
+        padded=list(values_row)+['']*max(0,len(headers)-len(values_row))
+        rows.append(dict(zip(headers,padded[:len(headers)])))
+    return rows
 
 def active_users_from_sheet(rows):
     users=[]
