@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T11:58:17-04:00",
+    "updated_at": "2026-07-30T16:14:49.676995+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -740,11 +740,12 @@
       "agent": "zeus",
       "type": "gateway_restart_guardrail",
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "sha256": "a9987ffcb760e1babcf8ae706a7c07423720ed2a67d3eae38812371fe621a1bc",
-      "purpose": "Prevent a detached restart from loading code/config changed after finalizer preparation; preserve the requested non-Zeus order while forcing Zeus last; snapshot every changed runtime module; abort on drift; py_compile/import runtime; and reject startup-steer calls without class method definitions before restarting any gateway.",
-      "validation": "bash -n PASS; requested-order tests PASS for Ares -> Atena -> Zeus and Zeus-last normalization; changed-runtime snapshot coverage PASS with zero missing modules; Ares refactored skill and four current references included in frozen target; py_compile/import smoke PASS",
-      "status": "deployed_validated",
-      "updated_at": "2026-07-13T21:48:25-04:00"
+      "sha256": "599c086814abfdd8bec229bd22dc04f052529cf56cb982ecacdbffb57e45a080",
+      "purpose": "Resolve the active Hermes checkout from the live launcher, freeze that exact launcher/runtime/config target set, force Zeus last, abort on launcher/hash/compile/helper drift, and require sequential systemd+Discord readiness.",
+      "validation": "bash -n PASS; live launcher resolves to hermes-agent-next-b9ba7c78 used by Ares/Atena/Zeus; old /root/.hermes/hermes-agent confirmed rollback-only; helper snapshot/compile/import paths now derive from the active launcher and include launcher-target drift abort.",
+      "status": "validated_pending_safe_restart",
+      "updated_at": "2026-07-30T16:14:49.676995+00:00",
+      "size_bytes": 11763
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
@@ -3236,7 +3237,7 @@
       "status": "activated_validated",
       "activation_requirements": "Explicit controlled restart authorization; fresh pre-cutover backup/readback; atomic active wrapper cutover; Zeus last; per-gateway smoke and rollback gate.",
       "report_dir": "/root/mgs-agent/reports/hermes-updates/20260726-232048-port-b9ba7c78",
-      "updated_at": "2026-07-27T13:46:56.064009+00:00",
+      "updated_at": "2026-07-30T16:14:49.676995+00:00",
       "report_infra_message_id": "1531154738043944961",
       "report_infra_channel_id": "1498132022634483894",
       "activation_authorization_message_id": "1531287711355244725",
@@ -3386,7 +3387,13 @@
       "cleanup_files_removed_estimate": 229199,
       "cleanup_freed_bytes_readback": 25631178752,
       "cleanup_report_infra_message_id": "1531296835371532389",
-      "cleanup_report_readback": true
+      "cleanup_report_readback": true,
+      "runtime_patch_extension": {
+        "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-pending-turn-fifo-2026-07-30.patch",
+        "sha256": "67514edf216cb7c8f0e3cbd38aa650a54171b2efdab12d889b7472d83243cd78",
+        "reason": "mid-turn pending-event + leftover-steer FIFO fix",
+        "validated_at": "2026-07-30T16:14:49.676995+00:00"
+      }
     },
     {
       "id": "vps-storage-hermes-delta-audit-20260727",
@@ -3522,6 +3529,45 @@
       "validation": "Runtime/versioned SHA-256 match; B006-2 canonical labels read back; post-fix dry/live delivery tests PASS.",
       "updated_at": "2026-07-30T11:58:17-04:00",
       "source_report": "REPORT-INFRA Zeus Meta live-alert Discord 429 hardening 2026-07-30"
+    },
+    {
+      "id": "mgs-busy-steer-pending-turn-fifo-20260730",
+      "agent": "zeus",
+      "type": "hermes_runtime_patch",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1532417773815201803",
+      "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-pending-turn-fifo-2026-07-30.patch",
+      "sha256": "67514edf216cb7c8f0e3cbd38aa650a54171b2efdab12d889b7472d83243cd78",
+      "size_bytes": 5878,
+      "active_runtime_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "active_runtime_sha": "b9ba7c78e41b5d187e2c8fb446655c4b71c42aa5",
+      "runtime_file": "/root/.hermes/hermes-agent-next-b9ba7c78/gateway/run.py",
+      "runtime_sha256": "bf006cd6b447520dec51170453a7b440bef0e3a3ffd1e291a7ff9b6bb7885f0d",
+      "test_file": "/root/.hermes/hermes-agent-next-b9ba7c78/tests/gateway/test_run_progress_topics.py",
+      "test_sha256": "94fcd6dcab8bdbc8fa0d99cdfcc82ef401058b2aa1b5bd034527ffb0483325b5",
+      "guard_scripts": [
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+        "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
+        "/root/mgs-agent/scripts/run-hermes-post-upstream-regression.sh"
+      ],
+      "agents": [
+        "zeus",
+        "atena",
+        "ares"
+      ],
+      "profile_modes": {
+        "zeus": "steer",
+        "atena": "steer",
+        "ares": "steer"
+      },
+      "purpose": "Preserve chronological mid-turn input when an earlier pending event and a final-turn pending_steer coexist: merge the later steer into the earlier queued turn exactly once instead of silently dropping it.",
+      "root_cause": "Gateway consumed pending_event first and only read result[pending_steer] when no pending/pending_event existed; the mutually exclusive gate discarded the acknowledged complement at the turn boundary.",
+      "validation": "Production Discord timeline reconciled; new gateway behavior test PASS; targeted 4 PASS; ruff/py_compile/bash -n PASS; reverse apply PASS; clean HEAD + latest consolidated patch + incremental patch PASS; full MGS guard 850 + 6 subtests PASS; post-upstream regression 391 PASS; all 3 profiles resolve busy_input_mode=steer.",
+      "status": "validated_pending_safe_restart",
+      "updated_at": "2026-07-30T16:14:49.676995+00:00",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-busy-input-steering-mgs.md",
+      "skill_reference_sha256": "1b70c42c8c7c1597d8ff5c0329f0d90187ffade1bf585afc10733c346c1617bb",
+      "runtime_mirror_equal": true
     }
   ],
   "profile_skill_references": [
@@ -4447,8 +4493,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 31194,
-      "modified_at": "2026-07-27T00:02:07-04:00"
+      "size_bytes": 32706,
+      "modified_at": "2026-07-30T16:10:00.344654+00:00",
+      "sha256": "b0462653174f5cbf3a5cbce35d1a803b20da4224f68bd11cb8e54091cf82eee7"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -4542,8 +4589,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 11080,
-      "modified_at": "2026-07-20T01:02:05-04:00"
+      "size_bytes": 11763,
+      "modified_at": "2026-07-30T16:10:01.367656+00:00",
+      "sha256": "599c086814abfdd8bec229bd22dc04f052529cf56cb982ecacdbffb57e45a080"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
@@ -4832,8 +4880,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-post-upstream-regression.sh",
-      "size_bytes": 1338,
-      "modified_at": "2026-07-27T00:14:54-04:00"
+      "size_bytes": 1908,
+      "modified_at": "2026-07-30T16:10:01.158655+00:00",
+      "sha256": "609a7e3f8420fecd9025917ba4fdcc2b0042de3d7308143522f2837e764e00d1"
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-all-agents-20260610.sh",
@@ -4842,8 +4891,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 33538,
-      "modified_at": "2026-07-20T00:58:29-04:00"
+      "size_bytes": 33920,
+      "modified_at": "2026-07-30T16:10:00.768655+00:00",
+      "sha256": "fe4a3f7f564b0fd866ecafd3c1dc7cebc922cdcfef73710714d1edc328a546ef"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",

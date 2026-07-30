@@ -179,6 +179,8 @@ hermes -p <agent> config set display.busy_input_mode steer
 6. Atualizar mirror, registrar audit/infra e reiniciar de forma detached se o gateway não recarregar.
 7. Validar serviços e fazer smoke funcional real durante tool call ativa.
 
+Antes do restart, resolver o checkout ativo pelo launcher real (`readlink -f /root/.local/bin/hermes` + shebang do wrapper). Não usar `/root/.hermes/hermes-agent` como constante: após um cutover atômico esse caminho pode ser apenas o rollback enquanto todos os services executam `hermes-agent-next-<sha>`. Snapshot, `py_compile`, imports e hashes do finalizer devem apontar para o checkout efetivamente carregado pelos três processos e abortar se o launcher mudar depois da preparação.
+
 ## Proteção canônica MGS do runtime
 
 A correção não termina no checkout vivo. Os artefatos canônicos são:
