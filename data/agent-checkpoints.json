@@ -142,6 +142,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b011-to-b012-dtr-cutover-20260730",
+      "next_step": "Backup, pin do item novo por ID, migrar monitor/cron/estado para B012, restaurar/revalidar Sheet com dry-run DTR e confirmar alerta real.",
+      "objective": "Aposentar B011, ativar B012 no monitor DTR/ChatPion e manter o mesmo canal Discord renomeado.",
+      "source": "discord-thread:1532374768597078257 message:1532462192761372702",
+      "state": "diagnóstico: item novo b012 é duplicata de título; novo id atualizado às 14:27 e credenciais graph válidas. resolver selecionava o item b012 reserva antigo. cron b011 das 14:24 classificou 22 usuários contra o app aposentado e escreveu 20 x indevidos. cron b011 pausado e execução meta das 15:04 interrompida antes de reconciliar b012 por /roles.",
+      "thread_id": "1532374768597078257",
+      "updated_at": "2026-07-30T19:04:45+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-honcho-all-agents-rollout-20260717",
       "next_step": "Operação normal: Zeus monitora provider + copilot; sessões Discord já abertas adotam Honcho somente em sessão nova/reset.",
       "objective": "Integrar o memory provider nativo Honcho managed nos agentes operacionais MGS com isolamento, contexto limitado e persistência autorizada",
@@ -332,5 +342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T18:20:48+00:00"
+  "updated_at": "2026-07-30T19:04:45+00:00"
 }
