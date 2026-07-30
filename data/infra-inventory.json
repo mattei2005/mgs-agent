@@ -3563,11 +3563,40 @@
       "purpose": "Preserve chronological mid-turn input when an earlier pending event and a final-turn pending_steer coexist: merge the later steer into the earlier queued turn exactly once instead of silently dropping it.",
       "root_cause": "Gateway consumed pending_event first and only read result[pending_steer] when no pending/pending_event existed; the mutually exclusive gate discarded the acknowledged complement at the turn boundary.",
       "validation": "Production Discord timeline reconciled; new gateway behavior test PASS; targeted 4 PASS; ruff/py_compile/bash -n PASS; reverse apply PASS; clean HEAD + latest consolidated patch + incremental patch PASS; full MGS guard 850 + 6 subtests PASS; post-upstream regression 391 PASS; all 3 profiles resolve busy_input_mode=steer.",
-      "status": "validated_pending_safe_restart",
-      "updated_at": "2026-07-30T16:14:49.676995+00:00",
+      "status": "rollout_scheduled_detached",
+      "updated_at": "2026-07-30T16:18:12.983740+00:00",
       "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-busy-input-steering-mgs.md",
       "skill_reference_sha256": "1b70c42c8c7c1597d8ff5c0329f0d90187ffade1bf585afc10733c346c1617bb",
-      "runtime_mirror_equal": true
+      "runtime_mirror_equal": true,
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1532421479357092063",
+        "http": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false,
+        "readback": true
+      },
+      "restart": {
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "finalizer_path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20260730T161631Z-557939.sh",
+        "finalizer_sha256": "8e26772baa97e45c3bb8d1224e8852f84fcabc2860817fa07b0e4de396619a8d",
+        "snapshot_path": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20260730T161631Z-557939.sha256",
+        "snapshot_sha256": "9e8c5f768f72e0f4a02c957b5b8c9764d615de1779f6c4918f1bc6e13dde929a",
+        "snapshot_files": 26,
+        "snapshot_check": "PASS",
+        "rollback_path_hits": 0,
+        "active_runtime_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+        "launcher_target": "/root/.local/bin/hermes-b9ba7c78",
+        "state": "scheduled_detached",
+        "unit": "mgs-gateway-restart-midturn-fifo-20260730T161812Z-558398",
+        "delay_seconds": 45
+      }
     }
   ],
   "profile_skill_references": [
