@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-30T11:25:42-04:00",
+    "updated_at": "2026-07-30T11:37:21-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1140,14 +1140,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 65477,
-      "modified_at": "2026-07-30T11:07:10-04:00",
-      "sha256": "d73592512e69479406345071ce7fee1dfbf3261cd8b415922d6a6264d81eabd1",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B006 is retired in favor of B006-2 on the same Discord channel, active owner/admin is Crislaine Carvalho, retired Mic Vb removals are housekeeping, and owner rendering is app-aware when the same person is a segurador on another app.",
-      "validation": "2026-07-30: bash -n PASS; canonical resolver auto-discovers BOT B006-2 Token and suppresses BOT B006 Token; live B006-2 Graph checks all HTTP 200, token valid, 10 roles; state contains B006-2 only; corrected live alert delivered with Crislaine Carvalho as owner do app and no unrelated B003 BOT EMAIL/pages; Discord readback PASS.",
-      "updated_at": "2026-07-30T11:09:01-04:00",
-      "source_report": "REPORT-INFRA Zeus B006 to B006-2 cutover 2026-07-30",
-      "last_change": "2026-07-30: cut over B006 monitor identity/item/channel label to B006-2, changed owner Mic Vb -> Crislaine Carvalho, added predecessor suppression/state cleanup, and made owner table rendering app-aware.",
+      "size_bytes": 65479,
+      "modified_at": "2026-07-30T11:37:05-04:00",
+      "sha256": "0cfab7cca2c3448704964fcbc83b3ce341aaf6027df4a66d0ed8c097fbe2b17c",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; B006 is retired in favor of B006-2 on the same Discord channel, active owner/admin is Crislaine Carvalho, retired Mic Vb removals are housekeeping, and owner rendering distinguishes separate profiles that share the same display name across apps.",
+      "validation": "2026-07-30: Rodolfo clarified the B003 and B006-2 Crislaine Carvalho records are different profiles. Readback confirms different Meta role IDs; Sheet B003 row remains unchanged; last B006-2 sheet sync updated=false. Comment/reference corrected; bash -n PASS; runtime/versioned reference hashes match.",
+      "updated_at": "2026-07-30T11:37:21-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 same-name profile clarification 2026-07-30",
+      "last_change": "2026-07-30: clarified app-aware rendering protects different Facebook profiles that share the same display name; no B003 data/config change.",
       "backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-roles-watch.sh",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0062-cutover-20260730-110245/meta-app-role-monitor-state.json"
     },
@@ -3495,16 +3495,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 7993,
-      "modified_at": "2026-07-30T11:07:28-04:00",
-      "sha256": "3d6ad3c3ffee221e39af6a3cb65e0380b664c2c61482b76061065abafe842402",
+      "size_bytes": 7966,
+      "modified_at": "2026-07-30T11:37:06-04:00",
+      "sha256": "8ca875d1d5164824b81ffd1dda554f5ab6a62ef9288ea9dd9eced580e21831a6",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Operational Meta app owner exceptions and Sheet reconciliation rules; documents B006-2 cutover, Crislaine Carvalho ownership, Mic Vb retirement and app-aware owner rendering.",
-      "validation": "Runtime and versioned mirror SHA-256 match; B006-2 dry/live alert rendering and production Graph checks passed.",
-      "updated_at": "2026-07-30T11:09:01-04:00",
-      "source_report": "REPORT-INFRA Zeus B006 to B006-2 cutover 2026-07-30"
+      "description": "Operational Meta app owner exceptions and Sheet reconciliation rules; documents B006-2 cutover and app-aware separation of different profiles sharing a display name.",
+      "validation": "Runtime/versioned SHA-256 match; B003 and B006-2 Crislaine profiles confirmed by distinct Meta IDs; B003 Sheet mapping unchanged.",
+      "updated_at": "2026-07-30T11:37:21-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-2 same-name profile clarification 2026-07-30"
     }
   ],
   "profile_skill_references": [
