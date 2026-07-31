@@ -1,11 +1,13 @@
 
 <!doctype html>
-<html lang="{{HTML_LANG}}">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{TITLE}}</title>
-    {{WP_HEAD}}
+    <title>chat sms cards financiamento de carros</title>
+    <!-- Google Tag Manager + Analytics -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!=='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',"GTM-T3NQPQQC");</script>
+<!-- End Google Tag Manager + Analytics -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
@@ -413,10 +415,13 @@
       }
 
     </style>
-    {{ADS_HEAD}}
+    <!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->
+<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>
   </head>
   <body>
-    {{WP_BODY_OPEN}}
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T3NQPQQC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <div id="chat-container">
       <div id="chat-header">
         <img id="bot-avatar" src="" alt="" />
@@ -507,13 +512,13 @@
       }
 
       let questionIndex = -1;
-      const botNames = {{BOT_NAMES_JS}};
+      const botNames = ["Maria","João","Juliana","José","Fernanda","Carlos","Olivia","Lucas","Camilla","Pedro"];
 
-      const femaleNames = {{FEMALE_NAMES_JS}};
-      const maleNames = {{MALE_NAMES_JS}};
+      const femaleNames = ["Maria","Juliana","Fernanda","Olivia","Camilla"];
+      const maleNames = ["João","José","Carlos","Lucas","Pedro"];
 
-      const femalePhotos = {{FEMALE_PHOTOS_JS}};
-      const malePhotos = {{MALE_PHOTOS_JS}};
+      const femalePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"];
+      const malePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"];
 
       let botName = botNames[Math.floor(Math.random() * botNames.length)];
 
@@ -529,10 +534,10 @@
 
       // Header will be set inside window.onload
 
-      const questions = {{QUESTIONS_JS}};
-      const rewardedButtonClass = {{REWARDED_BUTTON_CLASS_JS}};
-      const smsConfig = {{SMS_CONFIG_JS}};
-      const gateConfig = {{GATE_CONFIG_JS}};
+      const questions = [{"question":"Olá! Eu sou {botName}. 🚗 | Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado! | Vamos encontrar a oferta ideal para você?","answers":["✅ Vamos lá!","👀 Quero conhecer as opções"]},{"question":"Quanto você pode pagar por mês?","answers":["Até R$ 500","Entre R$ 500 e R$ 1.000","Acima de R$ 1.000"]},{"question":"Você tem preferência por algum tipo de veículo?","answers":["Sim, já tenho um modelo em mente","Não, estou aberto a sugestões","Ainda estou decidindo"]},{"question":"🔍 Estou pesquisando as melhores condições para você... | 🚗 Encontrei 3 opções que podem combinar com o seu perfil. | Toque na que mais faz sentido para você:","offers":[{"name":"🚗 Financiar sem entrada","subtitle":"Valores com parcelas","bank":"R$157,00 a R$299,00","image":"","url":"https://wantabrand.com/p1-br-car-financiamento-veiculos-sem-entrada-online/"},{"name":"💰 Ver ofertas disponíveis","subtitle":"Bancos com taxas reduzidas","bank":"e facilidade para baixo score.","image":"","url":"https://wantabrand.com/p1-br-car-simulacao-de-financiamento/"},{"name":"🚘 Financiamento com parcela baixa","subtitle":"Consulte se essa condição está disponível para você,","bank":"Oferta por tempo LIMITADO !","image":"","url":"https://wantabrand.com/p1-br-car-financie-seu-carro-em-60-meses/"}]},{"question":""}];
+      const rewardedButtonClass = "pg-rewarded";
+      const smsConfig = {"enabled":true,"endpoint":"https://fixture.local/wp-json/mgs-chat/v1/lead","chatId":"CAR-BR-01-SMS","route":"/chat-sms/car/br1","submitLabel":"VER PARCELAS","optional":true,"consentEnabled":true};
+      const gateConfig = {"skipLoading":true,"loadingMs":0,"geoEnabled":true,"geoFallback":"Analisando ofertas disponíveis na sua região","geoPrefix":"Analisando ofertas de veículos em"};
       const smsFormStartedAt = Date.now();
       let smsLeadCaptured = false;
       let smsLeadSubmitting = false;
@@ -579,7 +584,7 @@
         const safeCloseQuiz = window.mgsCloseQuizAfterReward;
         setTimeout(safeCloseQuiz, 1200);
         if (!rewardedButtonClass) {
-          {{JBF_REWARDED_SHOW_JS}}
+          
         }
       }
 
@@ -1034,10 +1039,10 @@
         // Set header
         document.getElementById("bot-avatar").src = botPhoto;
         document.getElementById("header-name").textContent =
-          botName + " • " + {{PERSONA_ROLE_JS}};
+          botName + " • " + "Especialista em Financiamentos";
 
         // Set random offer on call button
-        const offers = {{OFFER_URLS_JS}};
+        const offers = ["https://wantabrand.com/p1-br-car-financiamento-veiculos-sem-entrada-online/","https://wantabrand.com/p1-br-car-simulacao-de-financiamento/","https://wantabrand.com/p1-br-car-financie-seu-carro-em-60-meses/"];
         const randomOffer = offers[Math.floor(Math.random() * offers.length)];
         const callBtn = document.getElementById("call-btn");
         callBtn.dataset.mgsTargetUrl = randomOffer;
@@ -1120,7 +1125,7 @@
       }
 
       let quizStepLock = false;
-      const gateQuestionCount = {{GATE_QUESTION_COUNT_JS}};
+      const gateQuestionCount = 1;
 
       function showGateFinal() {
         const loadingSlide = document.querySelector(".aq-loading");
@@ -1185,7 +1190,7 @@
         loadGeoIndicator();
 
         if (!rewardedButtonClass) {
-          {{JBF_REWARDED_PRELOAD_JS}}
+          
         }
       }
 
@@ -1251,10 +1256,10 @@
             <div id="quiz-progress-fill" style="width:20%; height:100%; background:#075e54; border-radius:2px; transition:width 0.5s ease;"></div>
           </div>
         </div>
-        {{GEO_INDICATOR_HTML}}
-        {{GATE_IMAGE_HTML}}
+        <div id="mgs-cf-geo-indicator" aria-live="polite"><span aria-hidden="true">🔍</span> <span id="mgs-cf-geo-text">Analisando ofertas disponíveis na sua região</span></div>
+        <div class="mgs-cf-gate-image"><img src="https://fixture.local/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png" alt="Carro disponível para financiamento"></div>
         <div class="aq-slides">
-          {{GATE_SLIDES_HTML}}
+          <div class="aq-slide" data-step="0" style="display:flex; flex-direction:column; align-items:center;"><p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🚗 Qual a faixa de preço do carro que você deseja?</p><div style="display:flex; flex-direction:column; gap:12px; width:100%;"><button class="aq-answer" data-value="30000-45000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 30.000 a R$ 45.000</button><button class="aq-answer" data-value="45000-60000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 45.000 a R$ 60.000</button><button class="aq-answer" data-value="60000-80000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 60.000 a R$ 80.000</button><button class="aq-answer" data-value="80000+" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Acima de R$ 80.000</button></div></div>
           <div class="aq-loading" style="display:none; text-align:center;">
             <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
               <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both;"></span>
@@ -1264,15 +1269,15 @@
             <h2 style="color:#333; margin:0; font-size:20px;">🔍 Buscando a melhor oferta para você...</h2>
           </div>
           <div class="aq-final" style="display:none; text-align:center;">
-            {{GATE_FINAL_HEADER_HTML}}
-            {{SMS_FORM_HTML}}
-            <{{REWARDED_CTA_TAG}} id="aq-cta" class="{{REWARDED_BUTTON_CLASS}}" {{REWARDED_CTA_ATTRS}} style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">{{SMS_CTA_LABEL}}</{{REWARDED_CTA_TAG}}>
-            {{SMS_SKIP_HTML}}
+            <p class="mgs-cf-sms-intro">Preencha seus dados e veja as parcelas:</p>
+            <div class="mgs-cf-sms-form" id="mgs-cf-sms-form"><label for="mgs-cf-sms-name">Nome</label><input id="mgs-cf-sms-name" name="name" type="text" autocomplete="name" maxlength="200" placeholder="Digite seu nome" required><label for="mgs-cf-sms-phone">Telefone</label><input id="mgs-cf-sms-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="20" placeholder="(11) 99999-9999" required><label class="mgs-cf-sms-consent" for="mgs-cf-sms-consent"><input id="mgs-cf-sms-consent" type="checkbox" checked><span>Aceito receber ofertas por SMS.</span></label><input id="mgs-cf-sms-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><p id="mgs-cf-sms-error" class="mgs-cf-sms-error" role="alert" aria-live="polite"></p></div>
+            <button id="aq-cta" class="" type="button" style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">VER PARCELAS</button>
+            <button id="mgs-cf-sms-skip" class="pg-rewarded" type="button">Pular, quero ver as ofertas</button>
             <br/>
             <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
           </div>
         </div>
-        {{LEGAL_FOOTER_HTML}}
+        <nav class="mgs-cf-legal-footer" aria-label="Links legais"><a href="https://wantabrand.com/politica-de-privacidad/" target="_blank" rel="noopener noreferrer">Privacidade</a><span aria-hidden="true">|</span><a href="https://wantabrand.com/terms-of-service/" target="_blank" rel="noopener noreferrer">Termos</a><span aria-hidden="true">|</span><a href="https://wantabrand.com/sobre-nosotros/" target="_blank" rel="noopener noreferrer">Sobre</a></nav>
       </div>
     </div>
     <style>
@@ -1303,7 +1308,7 @@
       .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
       @media(max-width:480px) { #quiz-container > div { padding:14px 15px 28px !important; } #mgs-cf-geo-indicator { margin:-8px 0 7px; } .mgs-cf-gate-image { min-height:72px; margin-bottom:8px; } .mgs-cf-gate-image img { max-height:105px; } .question { font-size:18px !important; margin-bottom:16px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:12px 20px !important; } .mgs-cf-legal-footer { margin-bottom:-18px; } }
     </style>
-{{WP_FOOTER}}
+
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
