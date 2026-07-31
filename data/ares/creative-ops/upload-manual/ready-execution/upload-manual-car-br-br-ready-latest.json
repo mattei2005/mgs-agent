@@ -1,11 +1,14 @@
 {
   "done": true,
-  "generated_at_utc": "2026-07-30T15:47:22.120393+00:00",
+  "generated_at_utc": "2026-07-31T14:54:59.824153+00:00",
   "auth_mode": "service_account",
-  "thread_id": "1532411266491224165",
+  "thread_id": "1532760620393562192",
   "requested_by": "Kelly Nice",
   "operation": "CAR_BR_BR",
-  "source_inventory_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/stability-car-br-br-20260730-kelly-20260730T153651Z/poll-3/upload-manual-inventory-20260730T153727Z.csv",
+  "source_inventory_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/stability-car-br-br-20260731-kelly-20260731T144609Z/poll-7/upload-manual-inventory-20260731T144821Z.csv",
+  "evidence_manifest": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/manifest.json",
+  "inventory_backup": "/root/mgs-agent/backups/ares-creative-ops/assets-before-kelly-car-br-br-20260731T145450Z.jsonl",
+  "lock_path": "/root/mgs-agent/tmp/ares-intake-locks/car_br_br-5082e889085800f50ebd.lock",
   "folders": {
     "UPLOAD_MANUAL": {
       "id": "1ARBvLammWUHuAclNmcriwkkgeedKryBd",
@@ -14,10 +17,6 @@
     "VID_READY": {
       "id": "18cGu-O2BPqaZgBcwJrfhOU2trkgj6h_i",
       "path": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY"
-    },
-    "VID_REJECTED": {
-      "id": "1lbhg5ZvKKBciKPwyAcatA23kFgBig0Ug",
-      "path": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/05_REJECTED"
     },
     "VID_LEGACY": {
       "id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
@@ -28,15 +27,14 @@
     {
       "index": 1,
       "status": "01_READY",
-      "source_drive_id": "16BsO80aFm-fvhgpS4hKXZLQdZqyCa0Jq",
-      "source_filename": "1_mobi #03.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_010.mp4",
-      "destination_drive_id": "1hwJZvfAjzipJ037Orrmih0DWZOs5tPI6",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "26ece428dbcaded6d3dad1e4d84a7c10baa3e8acce4267c482d324e28e8d161b",
-      "clean_sha256": "e7101100bda08d0edd057c36c0c4f183f1e28580a9ee7b1d75f618f8657d7ef3",
-      "drive_md5": "d96b24492860fffb94518716aef08710",
-      "bytes_clean": 7769510,
+      "source_drive_id": "18zVGfZE1aVLn-M5HfPCaiCboJSnKdJGY",
+      "source_filename": "1_story.mp4",
+      "destination_drive_id": "14BL72Hg3n8mGtn5OoNJMaEQxKwVD380-",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_013.mp4",
+      "source_sha256": "e40d68ca5a026a433b6a42f54b10f570a78cade1e95b70dc44ea07946992653c",
+      "clean_sha256": "68c12d8a4b4b3bf510cc4c93227aa56f75bbf13e1c729367000774c146c69cc7",
+      "drive_md5": "61a67bd7e7098d7e9b22e384504734e0",
+      "bytes_clean": 5001972,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
@@ -44,1106 +42,674 @@
       "person": "NO_PERSON",
       "p_orient": "NV",
       "angle": "SUPER_OFERTA",
-      "variant": "010",
-      "claim": "OFERTA DA SEMANA; SEM ENTRADA; R$199/MÊS",
+      "variant": "013",
+      "claim": "SUPER OFERTA; ENTRADA DE 5%; PARCELAS ENTRE R$199 E R$399/MÊS",
       "visual_evidence": {
-        "duration_seconds": 15.07,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/01_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0140000000000002,
+            "pct": 20,
+            "second": 6.0,
             "mean": [
-              191.9385,
-              170.4348,
-              172.7185
+              82.258,
+              56.367,
+              48.986
             ],
             "stddev": [
-              69.4564,
-              87.7839,
-              85.7524
+              97.122,
+              78.232,
+              78.997
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e0f8d8ec6c33"
+            "dhash64": "0b136713894969c4"
           },
           {
-            "pct": 0.5,
-            "second": 7.535,
+            "pct": 50,
+            "second": 15.0,
             "mean": [
-              191.8465,
-              166.3595,
-              168.6106
+              67.36,
+              40.482,
+              35.909
             ],
             "stddev": [
-              64.834,
-              88.3909,
-              85.6417
+              84.92,
+              59.593,
+              60.457
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e4d69c6c4c33"
+            "dhash64": "0635290cdc6949d3"
           },
           {
-            "pct": 0.8,
-            "second": 12.056000000000001,
+            "pct": 80,
+            "second": 24.0,
             "mean": [
-              177.7454,
-              167.1638,
-              169.1528
+              82.075,
+              57.979,
+              50.909
             ],
             "stddev": [
-              78.7901,
-              90.5566,
-              88.4857
+              88.608,
+              73.983,
+              75.459
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e4e6984c6c33"
+            "dhash64": "0637250f9b6969d3"
           }
         ],
-        "perceptual_fingerprint": "dhash64:0907e0f8d8ec6c33/0907e4d69c6c4c33/0907e4e6984c6c33",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-01-ei0lv3hy/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-01-ei0lv3hy/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-01-ei0lv3hy/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:0b136713894969c4/0635290cdc6949d3/0637250f9b6969d3",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1hwJZvfAjzipJ037Orrmih0DWZOs5tPI6/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_010.mp4"
+      "webViewLink": "https://drive.google.com/file/d/14BL72Hg3n8mGtn5OoNJMaEQxKwVD380-/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_013.mp4"
     },
     {
       "index": 2,
       "status": "01_READY",
-      "source_drive_id": "1qW0NB5MKBiTwfSmdli-mPBemj99G603b",
-      "source_filename": "2_mobi #02.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_011.mp4",
-      "destination_drive_id": "1Jq5nSnVaXngttw8AyGhnQJ3HkmasP6Ja",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "bcb25a53ad1c67561b6f10b14758545330891dc2070e78dfe0ad75d53cc0be7a",
-      "clean_sha256": "f494b13e1bc67467e5749757a51ff437f8632fc4866fb5f959cf203c8884aba0",
-      "drive_md5": "54e453bd8102fa930b72f582252d2184",
-      "bytes_clean": 7125533,
+      "source_drive_id": "1CP3b8d8SWCZ9LLAMnu6xx8oxY4KDEyZK",
+      "source_filename": "2_carro #14.mp4",
+      "destination_drive_id": "1UEJkhvAYryH1BZlQbUsxevwU1H6hCZYy",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_037.mp4",
+      "source_sha256": "a324743f04538c4b486001e05e1a7e7676eb75b3485b3226cb541156681fbba1",
+      "clean_sha256": "6cd7350b0724016e4c4e6ad283e803af7e0ac01b8129c19ccf9fc4254b96e186",
+      "drive_md5": "c385f45bcb84316e07dad152e5bb0eed",
+      "bytes_clean": 14781170,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
       "p_orient": "NV",
-      "angle": "SUPER_OFERTA",
-      "variant": "011",
-      "claim": "OFERTA DA SEMANA; SEM ENTRADA; R$299/MÊS",
+      "angle": "SEM_ENTRADA",
+      "variant": "037",
+      "claim": "SEM ENTRADA; PARCELA DE R$299",
       "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/02_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0186,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              189.4605,
-              170.5706,
-              171.8646
+              144.45,
+              124.662,
+              123.179
             ],
             "stddev": [
-              64.6879,
-              87.4672,
-              85.7854
+              69.501,
+              66.338,
+              63.876
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e06098cc4cb3"
+            "dhash64": "9ffcf4eff6fef4c4"
           },
           {
-            "pct": 0.5,
-            "second": 7.5465,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              180.2702,
-              161.3611,
-              164.0184
+              95.922,
+              73.118,
+              72.07
             ],
             "stddev": [
-              79.0927,
-              94.8499,
-              91.9748
+              71.673,
+              66.18,
+              63.081
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e0f2e44c4cb3"
+            "dhash64": "ae869eda191ec073"
           },
           {
-            "pct": 0.8,
-            "second": 12.0744,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              182.3471,
-              164.7352,
-              167.2674
+              92.525,
+              90.373,
+              89.385
             ],
             "stddev": [
-              80.6363,
-              95.0561,
-              92.2515
+              75.87,
+              77.35,
+              73.8
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e0e8e0cc4cbb"
+            "dhash64": "3c3dd6ac3c960327"
           }
         ],
-        "perceptual_fingerprint": "dhash64:0907e06098cc4cb3/0907e0f2e44c4cb3/0907e0e8e0cc4cbb",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-02-antasmio/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-02-antasmio/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-02-antasmio/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:9ffcf4eff6fef4c4/ae869eda191ec073/3c3dd6ac3c960327",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1Jq5nSnVaXngttw8AyGhnQJ3HkmasP6Ja/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_011.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1UEJkhvAYryH1BZlQbUsxevwU1H6hCZYy/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_037.mp4"
     },
     {
       "index": 3,
       "status": "01_READY",
-      "source_drive_id": "1lG08XA_yUj8X1pbUHTRdBlwvUjiBKsV2",
-      "source_filename": "3_story #1#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_005.mp4",
-      "destination_drive_id": "17YmciwBYnXEfuFQzRuH6ipkQE9yZppqX",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "5a70d3b518da6b5d69780a5a62c19af356c48fb3b67c8451375f8b804a01fb3d",
-      "clean_sha256": "634d7321492c70180e2df5a84cd12277e39744ad484578e40f40998f80a6aec7",
-      "drive_md5": "abf603312659a3a418e97c54fe864c21",
-      "bytes_clean": 8258708,
+      "source_drive_id": "1vTMyejNIcn_WfYkrRwxVAdHKfr1-KFQC",
+      "source_filename": "3_carro #04.mp4",
+      "destination_drive_id": "1pTph71kI0XDfgLg8gxmbWHu-BEThMSal",
+      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_006.mp4",
+      "source_sha256": "4b4407b4a414e32eeff507ea0b491b25f993b1c389781c323a24e0df2cd8f366",
+      "clean_sha256": "09429e7358cec7806a7fade672e8b3a69269a2048c6ee431753ca8f70d7473a1",
+      "drive_md5": "14b3450776efb082638a3a5427f88cb1",
+      "bytes_clean": 13680291,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
       "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "variant": "005",
-      "claim": "CARRO ELÉTRICO; SEM ENTRADA; R$299/MÊS",
+      "angle": "PARCELAS_BAIXAS",
+      "variant": "006",
+      "claim": "R$499,00",
       "visual_evidence": {
-        "duration_seconds": 15.708,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/03_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.1416000000000004,
+            "pct": 20,
+            "second": 3.0186,
             "mean": [
-              185.4229,
-              171.2255,
-              168.8546
+              106.855,
+              102.848,
+              99.31
             ],
             "stddev": [
-              84.6784,
-              97.8725,
-              94.3748
+              70.245,
+              68.543,
+              64.096
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e4fde1d1be9ee2"
+            "dhash64": "e8cc1617aae807cd"
           },
           {
-            "pct": 0.5,
-            "second": 7.854,
+            "pct": 50,
+            "second": 7.5465,
             "mean": [
-              161.793,
-              145.9433,
-              147.145
+              102.227,
+              93.885,
+              93.032
             ],
             "stddev": [
-              95.885,
-              104.6608,
-              101.8063
+              78.359,
+              78.213,
+              76.217
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e46c6ccf8e9ae2"
+            "dhash64": "2fbf66577023196e"
           },
           {
-            "pct": 0.8,
-            "second": 12.566400000000002,
+            "pct": 80,
+            "second": 12.0744,
             "mean": [
-              182.6913,
-              167.1206,
-              163.0557
+              111.193,
+              106.751,
+              106.365
             ],
             "stddev": [
-              82.2745,
-              95.5297,
-              93.2061
+              56.033,
+              56.83,
+              55.857
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e4e0e01b989ee2"
+            "dhash64": "00c0fad0f2c3c460"
           }
         ],
-        "perceptual_fingerprint": "dhash64:a6e4fde1d1be9ee2/a6e46c6ccf8e9ae2/a6e4e0e01b989ee2",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-03-vzmm6kqt/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-03-vzmm6kqt/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-03-vzmm6kqt/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:e8cc1617aae807cd/2fbf66577023196e/00c0fad0f2c3c460",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/17YmciwBYnXEfuFQzRuH6ipkQE9yZppqX/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_005.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1pTph71kI0XDfgLg8gxmbWHu-BEThMSal/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_006.mp4"
     },
     {
       "index": 4,
       "status": "01_READY",
-      "source_drive_id": "1JGpq4qYXFIZZihvlpZoNOhgLG2oHCqov",
-      "source_filename": "4_#1#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_033.mp4",
-      "destination_drive_id": "1ZZ6XgbtxlFUz4OvSEI8lI5MFXN9s46Q8",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "6918c477c9068249759891613e13bb9d095982496a1714835746611632deeada",
-      "clean_sha256": "0343e0390830a6715d5dd3a7a71ea126adea0017eefa7029a8e2de9b8775b342",
-      "drive_md5": "08b0bfb9d343ce6d907258d8330130fe",
-      "bytes_clean": 20308203,
+      "source_drive_id": "1gvGy395zs8qQTI7CDqhenIMyDoSpk8cS",
+      "source_filename": "4_carro #13.mp4",
+      "destination_drive_id": "1gEH8u3k1LXHrBleCoUZltyp1ZpBRceyt",
+      "destination_filename": "CAR_BR_BR_VID_ENTRADA_BAIXA_NV_001.mp4",
+      "source_sha256": "4aa757235579f419ae2a24bdcd8f7d5ccf834ffb389c7f78005d2e4c9e53d7ad",
+      "clean_sha256": "93473c932db04eada131e127f12cf917579d2b20d0f08b1b8a4e15808224b541",
+      "drive_md5": "9fb990b342af75766bd374f88581769d",
+      "bytes_clean": 15627748,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
       "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "variant": "033",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "angle": "ENTRADA_BAIXA",
+      "variant": "001",
+      "claim": "SUPER OFERTA; 2% DE ENTRADA; R$299/MÊS",
       "visual_evidence": {
-        "duration_seconds": 17.135,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/04_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.4270000000000005,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              118.185,
-              109.7175,
-              107.292
+              105.53,
+              102.289,
+              97.467
             ],
             "stddev": [
-              69.9544,
-              69.805,
-              66.9144
+              80.552,
+              76.758,
+              70.366
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a614d0e947c387c0"
+            "dhash64": "fff0873931e7f011"
           },
           {
-            "pct": 0.5,
-            "second": 8.5675,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              110.2652,
-              110.2972,
-              109.2598
+              88.359,
+              92.859,
+              94.763
             ],
             "stddev": [
-              78.2909,
-              73.2084,
-              68.3068
+              62.106,
+              56.348,
+              52.257
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "8d822c6424274a24"
+            "dhash64": "fef1336f029edffc"
           },
           {
-            "pct": 0.8,
-            "second": 13.708000000000002,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              100.4037,
-              95.9048,
-              96.0771
+              135.641,
+              136.28,
+              138.809
             ],
             "stddev": [
-              61.7391,
-              61.5698,
-              60.1214
+              81.235,
+              79.736,
+              74.262
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "2ce664b00e99339c"
+            "dhash64": "69e9c0c809c8e808"
           }
         ],
-        "perceptual_fingerprint": "dhash64:a614d0e947c387c0/8d822c6424274a24/2ce664b00e99339c",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-04-bkz0wf15/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-04-bkz0wf15/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-04-bkz0wf15/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:fff0873931e7f011/fef1336f029edffc/69e9c0c809c8e808",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1ZZ6XgbtxlFUz4OvSEI8lI5MFXN9s46Q8/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_033.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1gEH8u3k1LXHrBleCoUZltyp1ZpBRceyt/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_ENTRADA_BAIXA_NV_001.mp4"
     },
     {
       "index": 5,
       "status": "01_READY",
-      "source_drive_id": "1Slg_Y0epsHI7Oa07doosaqV8HU5Ukdrv",
-      "source_filename": "5_carro BR 6.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_016.mp4",
-      "destination_drive_id": "1JhyeFnUgDtqeN7Ova9vgvkC9eSHBqkog",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "94c1e7ff13c0bf618964e52d25f612dca10227367f92248f1ffebb29d1b63601",
-      "clean_sha256": "15fefafdd4aa92f15c2c1dac47d5606254f6d5aef6dff273b40ee5c813e5ad4e",
-      "drive_md5": "a259c0ebe79fa55e7c21dc483c51cbc9",
-      "bytes_clean": 14870044,
+      "source_drive_id": "1OSkPWBI1azKoBrqWHllkpUg8iKyGCLr6",
+      "source_filename": "5_carro #11.mp4",
+      "destination_drive_id": "1fMmNDybQJ48Gx7vV_hAXIUgxLvgMgOC-",
+      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_007.mp4",
+      "source_sha256": "e645ed57f8eed5ae5c8706fabe82ef92140605f75b21ce3a3b525db57c5f48c9",
+      "clean_sha256": "595851a835b3167c0219e5079af629214136da2dd2b1d1033f19749255925b5c",
+      "drive_md5": "a68aa8f02f0d8b6eaa87b9d1cab2cf09",
+      "bytes_clean": 22246991,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
-      "person": "PERSON",
-      "p_orient": "PV",
-      "angle": "SEM_ENTRADA",
-      "variant": "016",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "PARCELAS_BAIXAS",
+      "variant": "007",
+      "claim": "R$199,00",
       "visual_evidence": {
-        "duration_seconds": 15.07,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/05_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0140000000000002,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              129.3301,
-              125.8736,
-              124.4586
+              95.71,
+              90.71,
+              93.444
             ],
             "stddev": [
-              59.6986,
-              62.0928,
-              64.0645
+              63.402,
+              60.614,
+              55.752
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0f44e49297e21b3b"
+            "dhash64": "49e4c8cceec2d2c0"
           },
           {
-            "pct": 0.5,
-            "second": 7.535,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              119.7749,
-              117.736,
-              121.1058
+              112.928,
+              112.475,
+              112.213
             ],
             "stddev": [
-              81.3109,
-              80.2403,
-              78.8985
+              65.218,
+              64.329,
+              60.029
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "3036624abef8737b"
+            "dhash64": "1a25f3f8fe1cfadd"
           },
           {
-            "pct": 0.8,
-            "second": 12.056000000000001,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              106.8129,
-              107.6232,
-              108.0834
+              106.814,
+              97.493,
+              96.172
             ],
             "stddev": [
-              56.3142,
-              52.0773,
-              53.7237
+              63.468,
+              61.349,
+              57.659
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "c98fa707c3c37031"
+            "dhash64": "24ede9a8962e0305"
           }
         ],
-        "perceptual_fingerprint": "dhash64:0f44e49297e21b3b/3036624abef8737b/c98fa707c3c37031",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-05-zfvc1mxk/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-05-zfvc1mxk/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-05-zfvc1mxk/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:49e4c8cceec2d2c0/1a25f3f8fe1cfadd/24ede9a8962e0305",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1JhyeFnUgDtqeN7Ova9vgvkC9eSHBqkog/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_016.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1fMmNDybQJ48Gx7vV_hAXIUgxLvgMgOC-/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_007.mp4"
     },
     {
       "index": 6,
       "status": "01_READY",
-      "source_drive_id": "1DpB79cD1Qccd7hFNqRqAr0oMFUYDP0cw",
-      "source_filename": "6_#3#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_002.mp4",
-      "destination_drive_id": "1uBM9eisQgq3E6V-rmHuEuJ3MMkt3PN0w",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "43c0dd16f486eaefdf4cb16d9ebe1d194583c6604f512794b99b20e78bcfb77b",
-      "clean_sha256": "ad8f7165d0b1adcde7ad5b52b7321ef031cd0b5e9ae9e025cf907311c84a5905",
-      "drive_md5": "e881a7e424f5ac3a9bab143f6f5bb5b0",
-      "bytes_clean": 16036997,
+      "source_drive_id": "1u5mVPgY0Kr42DjewVCRVkx0OHBvX9pzs",
+      "source_filename": "6_carro #7.mp4",
+      "destination_drive_id": "1cA6MAF8Xf64LVizzEgb9Rb16sPouYUYu",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_038.mp4",
+      "source_sha256": "a53c4b09c04d1292eb798a36b3364f5d418951aa4dad342dc6a1d8a708545d54",
+      "clean_sha256": "dd0f781828504e54dde31c451997ba4309872ff3233773b8e981cdf711db17d9",
+      "drive_md5": "ebd1df913804cef5de46d22d1580cfdd",
+      "bytes_clean": 15092071,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
       "p_orient": "NV",
-      "angle": "PARCELAS_BAIXAS",
-      "variant": "002",
-      "claim": "OPORTUNIDADE; COM PARCELA",
+      "angle": "SEM_ENTRADA",
+      "variant": "038",
+      "claim": "SEM ENTRADA",
       "visual_evidence": {
-        "duration_seconds": 17.153,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/06_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.4306,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              139.0697,
-              119.0536,
-              116.136
+              134.723,
+              132.259,
+              131.513
             ],
             "stddev": [
-              62.1959,
-              71.1765,
-              68.3874
+              82.747,
+              79.943,
+              74.467
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "70136070b8c4e0f1"
+            "dhash64": "f0ec8f3beaf0aef1"
           },
           {
-            "pct": 0.5,
-            "second": 8.5765,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              137.8229,
-              101.015,
-              99.0816
+              111.387,
+              99.698,
+              96.902
             ],
             "stddev": [
-              65.0244,
-              74.6564,
-              72.4468
+              79.618,
+              77.124,
+              73.214
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "18e6a68e1c3cff7d"
+            "dhash64": "bbc36448381b36f0"
           },
           {
-            "pct": 0.8,
-            "second": 13.7224,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              141.6389,
-              122.842,
-              120.4554
+              134.889,
+              133.384,
+              128.072
             ],
             "stddev": [
-              61.9051,
-              69.5672,
-              67.9204
+              76.568,
+              75.496,
+              71.307
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "033338f8c0e07047"
+            "dhash64": "847569c1c007f0e0"
           }
         ],
-        "perceptual_fingerprint": "dhash64:70136070b8c4e0f1/18e6a68e1c3cff7d/033338f8c0e07047",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-06-yzf4e_n3/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-06-yzf4e_n3/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-06-yzf4e_n3/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:f0ec8f3beaf0aef1/bbc36448381b36f0/847569c1c007f0e0",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1uBM9eisQgq3E6V-rmHuEuJ3MMkt3PN0w/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_002.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1cA6MAF8Xf64LVizzEgb9Rb16sPouYUYu/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_038.mp4"
     },
     {
       "index": 7,
       "status": "01_READY",
-      "source_drive_id": "18R7PukxQhorRX2BA7g26SDrvggMfrKQj",
-      "source_filename": "7_#2#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_034.mp4",
-      "destination_drive_id": "1QDvx03x9C5IKpnsAfQkU3ZJvTbliit--",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "925e9411c7023ca1a94b287a460f829cf340411e0f2379b67170b2ff0d6cc4a2",
-      "clean_sha256": "308f2282a07ba26ad9161d0be0c9d412da13f83ab4cb3d33bced128414cfaf1d",
-      "drive_md5": "efa9e1b5129b8b41242d19b250d58435",
-      "bytes_clean": 15808472,
+      "source_drive_id": "1i9zMJlh8bsrJs0OqdlPuzTHZqemSgbzo",
+      "source_filename": "7_feed fiat qdd.mp4",
+      "destination_drive_id": "13wVdBkmziyiE5qtqaSN9dBBsoiZqsASg",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NH_002.mp4",
+      "source_sha256": "38c26aad56367e1b0c11b646d6f897b85feb50bd5d0f6c2ec811ec536977ec22",
+      "clean_sha256": "d7da26e54d7b483d6078f8f3387c12897c199911d35d9615ef87c66081182a75",
+      "drive_md5": "abe1a17840959ef8bf1c7406dd34270b",
+      "bytes_clean": 1220317,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
-      "p_orient": "NV",
+      "p_orient": "NH",
       "angle": "SEM_ENTRADA",
-      "variant": "034",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "variant": "002",
+      "claim": "SEU NOVO CARRO AQUI!; SEM ENTRADA; PARCELA DE R$199,00/MÊS",
       "visual_evidence": {
-        "duration_seconds": 17.135,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/07_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.4270000000000005,
+            "pct": 20,
+            "second": 3.2448,
             "mean": [
-              107.7478,
-              89.8977,
-              86.8324
+              160.794,
+              147.747,
+              149.913
             ],
             "stddev": [
-              71.1752,
-              69.075,
-              63.4698
+              84.738,
+              94.323,
+              91.699
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "f00f0b2f0f9e791f"
+            "dhash64": "cec87039c8fa9ee2"
           },
           {
-            "pct": 0.5,
-            "second": 8.5675,
+            "pct": 50,
+            "second": 8.112,
             "mean": [
-              89.6924,
-              76.6226,
-              75.8496
+              160.79,
+              147.749,
+              149.909
             ],
             "stddev": [
-              64.3679,
-              67.431,
-              65.6705
+              84.739,
+              94.322,
+              91.699
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "438323274701717e"
+            "dhash64": "cec87039c8fa9ee2"
           },
           {
-            "pct": 0.8,
-            "second": 13.708000000000002,
+            "pct": 80,
+            "second": 12.9792,
             "mean": [
-              139.1747,
-              115.2635,
-              110.4926
+              160.793,
+              147.745,
+              149.913
             ],
             "stddev": [
-              46.7398,
-              57.8405,
-              57.2023
+              84.735,
+              94.322,
+              91.698
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "279234fc24662e13"
+            "dhash64": "cec87039c8fa9ee2"
           }
         ],
-        "perceptual_fingerprint": "dhash64:f00f0b2f0f9e791f/438323274701717e/279234fc24662e13",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-07-3xjhbyva/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-07-3xjhbyva/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-07-3xjhbyva/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:cec87039c8fa9ee2/cec87039c8fa9ee2/cec87039c8fa9ee2",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1QDvx03x9C5IKpnsAfQkU3ZJvTbliit--/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_034.mp4"
+      "webViewLink": "https://drive.google.com/file/d/13wVdBkmziyiE5qtqaSN9dBBsoiZqsASg/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NH_002.mp4"
     },
     {
       "index": 8,
       "status": "01_READY",
-      "source_drive_id": "1rlqhMCIVnIiA-ppzh2Lhu0R4S57F833L",
-      "source_filename": "8_carro BR 5.mp4",
-      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_005.mp4",
-      "destination_drive_id": "1sg3zHktiPtfXF_s54-MjZEOfVa5jbCyh",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "eb7df058426e544cfaefc68869e9e4500351f65678875fb4970f44bf2811a9d6",
-      "clean_sha256": "810e7a5b95dfd9e414c96fff1dc530c71f08ae2d247321faead2c89e17152825",
-      "drive_md5": "8c8e035cd6f797dea2aafe00d4c575ee",
-      "bytes_clean": 13283206,
+      "source_drive_id": "13wIoGdbLum1x6p09DZNMLIE7PsFFlA4t",
+      "source_filename": "8_carro #8.mp4",
+      "destination_drive_id": "1JMhzt7vLu1Xue3xFOpgVUWjTABCI-XJH",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_SEM_JUROS_NV_001.mp4",
+      "source_sha256": "1f422c306fb71885e3e9030d687fd6acba8b8141905bef2be08a0efa9c238d4b",
+      "clean_sha256": "7d70cfa68c1f7609f0a3f13673397ad5e909908aa1d91ddef0f2d7395f3d055a",
+      "drive_md5": "030c4b082525d0d838847fd54c0e6fab",
+      "bytes_clean": 21401011,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
-      "person": "PERSON",
-      "p_orient": "PV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "variant": "005",
-      "claim": "CARRO ELÉTRICO SUSTENTÁVEL; COM PARCELA",
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "SEM_ENTRADA_SEM_JUROS",
+      "variant": "001",
+      "claim": "SEM ENTRADA; SEM JUROS; R$299,00",
       "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/08_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0186,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              127.2792,
-              121.8697,
-              114.3005
+              115.826,
+              116.83,
+              118.922
             ],
             "stddev": [
-              64.1412,
-              64.0079,
-              63.8681
+              64.205,
+              62.365,
+              58.841
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "e3d3e007dbbb3a31"
+            "dhash64": "6cd9d9163403e33d"
           },
           {
-            "pct": 0.5,
-            "second": 7.5465,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              121.2017,
-              116.2198,
-              105.3197
+              115.114,
+              104.695,
+              104.563
             ],
             "stddev": [
-              55.8292,
-              56.4797,
-              56.3311
+              71.276,
+              74.09,
+              70.685
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "3131b1fff7fb7a31"
+            "dhash64": "9f27e9c7db8c99cf"
           },
           {
-            "pct": 0.8,
-            "second": 12.0744,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              103.4515,
-              95.9642,
-              91.9066
+              102.947,
+              97.556,
+              99.233
             ],
             "stddev": [
-              66.8229,
-              62.7404,
-              61.9785
+              64.72,
+              63.244,
+              59.83
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "53d69283c7fbfb31"
+            "dhash64": "6694f12be1c0fcf8"
           }
         ],
-        "perceptual_fingerprint": "dhash64:e3d3e007dbbb3a31/3131b1fff7fb7a31/53d69283c7fbfb31",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-08-h6c9o3ul/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-08-h6c9o3ul/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-08-h6c9o3ul/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:6cd9d9163403e33d/9f27e9c7db8c99cf/6694f12be1c0fcf8",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1sg3zHktiPtfXF_s54-MjZEOfVa5jbCyh/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_005.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1JMhzt7vLu1Xue3xFOpgVUWjTABCI-XJH/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_SEM_JUROS_NV_001.mp4"
     },
     {
       "index": 9,
       "status": "01_READY",
-      "source_drive_id": "1-P-uqt8CEPfumtnWzduQsBFlbGTgOROC",
-      "source_filename": "9_carro BR 1.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_017.mp4",
-      "destination_drive_id": "1ZEHaV7RmZfukL7-kJt3KjGttA0UdmOeP",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "ca17538fe54977723850be4329ef72f3bb4a67350bc34f64bfcb82103866440b",
-      "clean_sha256": "d5fc4c6fa97225608d181a2cb763b06cdbb7458e73d58420ba1f814775d7a317",
-      "drive_md5": "d335fd794c5f972ab1ce6969527203e0",
-      "bytes_clean": 12940867,
+      "source_drive_id": "1JV281oFKA7VOn0ETYhUY5Zu1HAjVM7kv",
+      "source_filename": "9_carro 007.mp4",
+      "destination_drive_id": "1luTAruN8RS1YzDEsmteV8ebu5I1KNXoS",
+      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_001.mp4",
+      "source_sha256": "cc36444bb6336937e4f9fdd8524099ce5ef32966c0b9e9a1272faa5f91bb2ba4",
+      "clean_sha256": "5881959c8455836120be6d44c7c81f944fdb48e4bb4d534b8deeff2b38c2e5a1",
+      "drive_md5": "36bae4f9382531f4b9d4a2db93115fee",
+      "bytes_clean": 9968538,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "PERSON",
       "p_orient": "PV",
-      "angle": "SEM_ENTRADA",
-      "variant": "017",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "angle": "PARCELAS_BAIXAS",
+      "variant": "001",
+      "claim": "R$209,00",
       "visual_evidence": {
-        "duration_seconds": 15.069,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/09_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0138000000000003,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              119.0548,
-              107.0952,
-              102.3679
+              110.195,
+              107.545,
+              109.148
             ],
             "stddev": [
-              68.0272,
-              63.632,
-              65.5589
+              66.019,
+              63.633,
+              62.528
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "f8e6effee8e81f13"
+            "dhash64": "7f1f1112ef00010f"
           },
           {
-            "pct": 0.5,
+            "pct": 50,
             "second": 7.5345,
             "mean": [
-              105.0064,
-              95.9475,
-              91.2595
+              101.754,
+              93.695,
+              92.308
             ],
             "stddev": [
-              72.9781,
-              71.8761,
-              72.8363
+              58.291,
+              56.523,
+              56.119
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "8eda183bebe81f33"
+            "dhash64": "ccd8e84c4c68f031"
           },
           {
-            "pct": 0.8,
-            "second": 12.055200000000001,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              122.7773,
-              112.9653,
-              107.2961
+              94.309,
+              92.717,
+              95.119
             ],
             "stddev": [
-              75.0974,
-              76.0918,
-              75.9462
+              51.589,
+              51.358,
+              50.786
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0dd4ac1ceae81f13"
+            "dhash64": "ff393d3143cff83c"
           }
         ],
-        "perceptual_fingerprint": "dhash64:f8e6effee8e81f13/8eda183bebe81f33/0dd4ac1ceae81f13",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-09-3xhcrvur/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-09-3xhcrvur/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-09-3xhcrvur/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:7f1f1112ef00010f/ccd8e84c4c68f031/ff393d3143cff83c",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1ZEHaV7RmZfukL7-kJt3KjGttA0UdmOeP/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_017.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1luTAruN8RS1YzDEsmteV8ebu5I1KNXoS/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_001.mp4"
     },
     {
       "index": 10,
       "status": "01_READY",
-      "source_drive_id": "1PvvHp6DXRw2Yd5cs_wiG2GhbzDjLzp1B",
-      "source_filename": "10_car BR @03.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_035.mp4",
-      "destination_drive_id": "1iM-Re6A44unPnMpp5459vfDe4efMUoRR",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "829b9b9e1d1e789f9ff4f85b906b359d1ba5258ca9efb75261db01284981ea3e",
-      "clean_sha256": "fa11d9723855ace762bc37095bfc2cfdf142ed018cd07f2a2688661ec91d73c0",
-      "drive_md5": "a09ff8b57e24fa7872d3efc2b1ecb572",
-      "bytes_clean": 12038110,
+      "source_drive_id": "11PY7CCub8hKH6oceq3oPY6yWUwIptfz-",
+      "source_filename": "10_carro #10.mp4",
+      "destination_drive_id": "1joXkm1_iWV-P2hVbdgm5C-4t7NFWVc7R",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_039.mp4",
+      "source_sha256": "e16cf400494bbf09d21fbd321bff6eeeb42c124586a7e06ba9e2d40d53057351",
+      "clean_sha256": "a9f5a0a04e104f2bbc3baa3e474f8ecf530bbc565621bd1951349e6f278db90e",
+      "drive_md5": "5c2a3031a789076f936876741a2c70c3",
+      "bytes_clean": 15238675,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
@@ -1151,860 +717,149 @@
       "person": "NO_PERSON",
       "p_orient": "NV",
       "angle": "SEM_ENTRADA",
-      "variant": "035",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "variant": "039",
+      "claim": "R$299,00; SEM ENTRADA",
       "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/10_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0186,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              117.4605,
-              116.7452,
-              117.1929
+              95.419,
+              87.516,
+              86.313
             ],
             "stddev": [
-              68.7913,
-              68.3949,
-              65.9353
+              69.006,
+              60.323,
+              56.741
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "18f0c68ecce19e25"
+            "dhash64": "c01c264a4a00800c"
           },
           {
-            "pct": 0.5,
-            "second": 7.5465,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              113.4235,
-              108.6842,
-              109.6478
+              75.811,
+              56.888,
+              54.293
             ],
             "stddev": [
-              68.5707,
-              69.8416,
-              65.4664
+              66.69,
+              46.917,
+              45.703
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0e0fef79f1dc8c89"
+            "dhash64": "31ac0e1e18fb9b32"
           },
           {
-            "pct": 0.8,
-            "second": 12.0744,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              134.1639,
-              128.7756,
-              127.0403
+              87.11,
+              69.802,
+              66.917
             ],
             "stddev": [
-              64.4813,
-              68.5689,
-              63.9975
+              82.169,
+              75.968,
+              72.75
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "267363d2060c0000"
+            "dhash64": "5269233efccd0325"
           }
         ],
-        "perceptual_fingerprint": "dhash64:18f0c68ecce19e25/0e0fef79f1dc8c89/267363d2060c0000",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-10-uop2o80q/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-10-uop2o80q/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-10-uop2o80q/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:c01c264a4a00800c/31ac0e1e18fb9b32/5269233efccd0325",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1iM-Re6A44unPnMpp5459vfDe4efMUoRR/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_035.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1joXkm1_iWV-P2hVbdgm5C-4t7NFWVc7R/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_039.mp4"
     },
     {
       "index": 11,
       "status": "01_READY",
-      "source_drive_id": "1JuuI_SenAkyBT_X6UTEsxl7RQLckLnc4",
-      "source_filename": "11_feed #3#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NH_001.mp4",
-      "destination_drive_id": "16EgTsjTKcSIYuYz3Z7ggIHRTUrvte8eU",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "af9332bba71a5c63264d19ad9f271dd9996b4b80437a53555fe505667a5fe754",
-      "clean_sha256": "f2a5783a088b312e801c294485ad89f49a36ac45f409f04e34bec89e0508f355",
-      "drive_md5": "419c6d6fa7f180a9ba716c65a8a29d25",
-      "bytes_clean": 6105944,
+      "source_drive_id": "1TrGo4gZDHxoFfDBVqNnuKCwzAPWUoC83",
+      "source_filename": "11_carro #15.mp4",
+      "destination_drive_id": "1B189OVIk3PIUajxhZQgTrnj_tCz4dfVB",
+      "destination_filename": "CAR_BR_BR_VID_ENTRADA_BAIXA_NV_002.mp4",
+      "source_sha256": "37e8b16020b9aafbb52108bf0f7613502d9113a432c1310b3ad89153dcd144c1",
+      "clean_sha256": "3cb5970e76f8080ca0e53f2a11b4f72d431bb8524a86aa135d5792a0002f91ee",
+      "drive_md5": "04dd853313fda2a7c5e9cda122d17263",
+      "bytes_clean": 13614647,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
-      "p_orient": "NH",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "variant": "001",
-      "claim": "CARRO ELÉTRICO; SEM ENTRADA; R$299/MÊS",
+      "p_orient": "NV",
+      "angle": "ENTRADA_BAIXA",
+      "variant": "002",
+      "claim": "R$209,00; 5% DE ENTRADA",
       "visual_evidence": {
-        "duration_seconds": 15.75,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/11_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.1500000000000004,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              168.3131,
-              152.2335,
-              147.6854
+              122.249,
+              116.976,
+              108.604
             ],
             "stddev": [
-              88.6185,
-              99.3693,
-              97.5621
+              76.782,
+              73.27,
+              66.78
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a7ccbc19139f9ee2"
+            "dhash64": "5ee1c02e22e0f11f"
           },
           {
-            "pct": 0.5,
-            "second": 7.875,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              166.5188,
-              149.4916,
-              146.9276
+              135.883,
+              126.77,
+              112.948
             ],
             "stddev": [
-              90.8823,
-              100.86,
-              99.3725
+              70.268,
+              72.601,
+              68.595
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a7cccebf93d89ee6"
+            "dhash64": "ffdc7d2fdf23309c"
           },
           {
-            "pct": 0.8,
-            "second": 12.600000000000001,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              158.1387,
-              140.3542,
-              142.7597
+              140.94,
+              120.949,
+              113.497
             ],
             "stddev": [
-              93.7952,
-              102.5111,
-              100.4154
+              64.168,
+              71.078,
+              71.684
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6cc2828d2889ee2"
+            "dhash64": "b99bcc8bc8d2e0f0"
           }
         ],
-        "perceptual_fingerprint": "dhash64:a7ccbc19139f9ee2/a7cccebf93d89ee6/a6cc2828d2889ee2",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-11-pkp2qlcn/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-11-pkp2qlcn/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-11-pkp2qlcn/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:5ee1c02e22e0f11f/ffdc7d2fdf23309c/b99bcc8bc8d2e0f0",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/16EgTsjTKcSIYuYz3Z7ggIHRTUrvte8eU/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NH_001.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1B189OVIk3PIUajxhZQgTrnj_tCz4dfVB/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_ENTRADA_BAIXA_NV_002.mp4"
     },
     {
       "index": 12,
       "status": "01_READY",
-      "source_drive_id": "1Rz7u0wAm69VZI369wLv0DZqWjTeOg6Zf",
-      "source_filename": "12_$6$.mp4",
-      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_003.mp4",
-      "destination_drive_id": "1k3vxrZwx2EGxYDZLrU2AI6xWfErfiQxc",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "fe4c14bc263bc8f165f1192a7734bc963761f5dfef33e7801fea0873be25914e",
-      "clean_sha256": "9069eac4e659474dc39c7924150685f1dcf683f8302776252ad142cd0cd3b454",
-      "drive_md5": "c70b2f65a8acf2b05a5518b8a33e6542",
-      "bytes_clean": 20145087,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NV",
-      "angle": "PARCELAS_BAIXAS",
-      "variant": "003",
-      "claim": "OPORTUNIDADE; R$199/MÊS",
-      "visual_evidence": {
-        "duration_seconds": 17.486,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.4972000000000003,
-            "mean": [
-              108.21,
-              112.788,
-              121.5346
-            ],
-            "stddev": [
-              51.9324,
-              56.6083,
-              64.7166
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "cb0fdff7ec73271c"
-          },
-          {
-            "pct": 0.5,
-            "second": 8.743,
-            "mean": [
-              93.0754,
-              93.9105,
-              98.3801
-            ],
-            "stddev": [
-              63.349,
-              63.3151,
-              59.0689
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0e7ec3bf9c831e9c"
-          },
-          {
-            "pct": 0.8,
-            "second": 13.988800000000001,
-            "mean": [
-              121.2067,
-              118.4927,
-              121.1828
-            ],
-            "stddev": [
-              53.6021,
-              58.4717,
-              63.8548
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0d4d8db9a1871d0f"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:cb0fdff7ec73271c/0e7ec3bf9c831e9c/0d4d8db9a1871d0f",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-12-_rvkexm_/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-12-_rvkexm_/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-12-_rvkexm_/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/1k3vxrZwx2EGxYDZLrU2AI6xWfErfiQxc/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_003.mp4"
-    },
-    {
-      "index": 13,
-      "status": "01_READY",
-      "source_drive_id": "1DDr5Ptjbz1HqLJMYP_MeUT7s6v7raM8v",
-      "source_filename": "13_car BR @01.mp4",
-      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_004.mp4",
-      "destination_drive_id": "1YOxH93JZFg2lwaMDzxQdyFaP7_LGdnsx",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "a0064543bf9dfe631be465e70ba07aa437d5d14bdb6ee23b313d3c9a655e6fd0",
-      "clean_sha256": "894e978ea72f5bf24e18fcd3638645a87b7cd2abf7525e8725c35a81dd0c2855",
-      "drive_md5": "0703f1e685ddad6efaa0816d8b3ab225",
-      "bytes_clean": 14055072,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NV",
-      "angle": "PARCELAS_BAIXAS",
-      "variant": "004",
-      "claim": "OPORTUNIDADE; R$199/MÊS",
-      "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.0186,
-            "mean": [
-              153.9415,
-              154.9972,
-              166.1739
-            ],
-            "stddev": [
-              61.3024,
-              60.1962,
-              54.8806
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "7c7cc297ccdce071"
-          },
-          {
-            "pct": 0.5,
-            "second": 7.5465,
-            "mean": [
-              143.5368,
-              140.1663,
-              149.2127
-            ],
-            "stddev": [
-              63.7402,
-              66.0662,
-              71.7438
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "fd6feaa62eccf8fc"
-          },
-          {
-            "pct": 0.8,
-            "second": 12.0744,
-            "mean": [
-              159.4063,
-              162.5375,
-              174.8368
-            ],
-            "stddev": [
-              56.8367,
-              54.0261,
-              48.9274
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "1fc7c3991cd8c18e"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:7c7cc297ccdce071/fd6feaa62eccf8fc/1fc7c3991cd8c18e",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-13-f1kn87rn/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-13-f1kn87rn/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-13-f1kn87rn/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/1YOxH93JZFg2lwaMDzxQdyFaP7_LGdnsx/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_004.mp4"
-    },
-    {
-      "index": 14,
-      "status": "01_READY",
-      "source_drive_id": "1Rx_Wg9XYojWJ_sFGtZrD_XuFxp_zurhe",
-      "source_filename": "14_feed #2#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NH_001.mp4",
-      "destination_drive_id": "1fHVXd6YIgPGANXYcbVRICEhPnH5eds5P",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "881863b6bcb2a37bc28371aa02deae1f30044ba3af17db057c9ffc5995d3266c",
-      "clean_sha256": "96dcb507129d4321a97b6bb25f371e87a3045a1928329b8fcab03a74e037edb3",
-      "drive_md5": "42abcc5139c745d4f8953d54013f0168",
-      "bytes_clean": 5096190,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NH",
-      "angle": "SEM_ENTRADA",
-      "variant": "001",
-      "claim": "SEM ENTRADA; R$299/MÊS",
-      "visual_evidence": {
-        "duration_seconds": 15.75,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.1500000000000004,
-            "mean": [
-              173.1829,
-              158.7675,
-              162.2845
-            ],
-            "stddev": [
-              85.348,
-              97.0702,
-              95.6502
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6cc8071869c9aca"
-          },
-          {
-            "pct": 0.5,
-            "second": 7.875,
-            "mean": [
-              154.0243,
-              138.6567,
-              141.1527
-            ],
-            "stddev": [
-              92.164,
-              101.0102,
-              99.8116
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a7cc2c66c66c9ee2"
-          },
-          {
-            "pct": 0.8,
-            "second": 12.600000000000001,
-            "mean": [
-              127.9672,
-              112.2067,
-              114.2633
-            ],
-            "stddev": [
-              108.026,
-              112.7588,
-              112.6237
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a7cc62536e7a9ee2"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:a6cc8071869c9aca/a7cc2c66c66c9ee2/a7cc62536e7a9ee2",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-14-z9veqz2t/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-14-z9veqz2t/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-14-z9veqz2t/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/1fHVXd6YIgPGANXYcbVRICEhPnH5eds5P/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_NH_001.mp4"
-    },
-    {
-      "index": 15,
-      "status": "01_READY",
-      "source_drive_id": "1O73fQxCPMv3Ml92Uhh7GCMLtPn3G5l0N",
-      "source_filename": "15_story #3#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_006.mp4",
-      "destination_drive_id": "16Scg1fn0aymdBVttw1KltdqKgj4FXUFB",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "f32dbbe62de668ebc6abbf18494949d9951292f60cf4c78be8fa26dd2157d748",
-      "clean_sha256": "d1bbbcbfba5bc5f40c6cfac638ed7de73f341cf61f9747eae204e3617c5ddc56",
-      "drive_md5": "9e6c4f35eb242df62eac10f200f7489a",
-      "bytes_clean": 8525668,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "variant": "006",
-      "claim": "CARRO ELÉTRICO; SEM ENTRADA; R$299/MÊS",
-      "visual_evidence": {
-        "duration_seconds": 15.708,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.1416000000000004,
-            "mean": [
-              181.2497,
-              166.949,
-              161.8176
-            ],
-            "stddev": [
-              81.8083,
-              94.5893,
-              92.1938
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e4ae3813be9ee2"
-          },
-          {
-            "pct": 0.5,
-            "second": 7.854,
-            "mean": [
-              174.4263,
-              159.6502,
-              156.0986
-            ],
-            "stddev": [
-              87.3725,
-              98.1937,
-              95.8897
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e49f7e3b989ee2"
-          },
-          {
-            "pct": 0.8,
-            "second": 12.566400000000002,
-            "mean": [
-              165.8676,
-              150.191,
-              152.5472
-            ],
-            "stddev": [
-              93.4353,
-              102.8611,
-              99.6357
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6e4ecec899c9ae2"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:a6e4ae3813be9ee2/a6e49f7e3b989ee2/a6e4ecec899c9ae2",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-15-3dh2b_1t/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-15-3dh2b_1t/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-15-3dh2b_1t/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/16Scg1fn0aymdBVttw1KltdqKgj4FXUFB/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_006.mp4"
-    },
-    {
-      "index": 16,
-      "status": "01_READY",
-      "source_drive_id": "1yWwCxjh2oM82k42zDU86F2JhLLDM9aYJ",
-      "source_filename": "16_mobi #01.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_012.mp4",
-      "destination_drive_id": "1MEGn8gjfp0-Rgq5hUMVQ4D8AD-hXLywE",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "8f6d472f8882ad2ee73fc4e286a90c9db31515f86a45e783071fd7fec96c0142",
-      "clean_sha256": "1949cd0d44aa0bc3476d4434716f63f2a79cefe5321a3fb8b16e81f14cd32ba1",
-      "drive_md5": "15e77f1fa3dc8c591accbe6e53d47bdb",
-      "bytes_clean": 7246326,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NV",
-      "angle": "SUPER_OFERTA",
-      "variant": "012",
-      "claim": "OFERTA DA SEMANA; SEM ENTRADA; R$299/MÊS",
-      "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.0186,
-            "mean": [
-              183.7208,
-              173.6483,
-              173.7477
-            ],
-            "stddev": [
-              72.6719,
-              84.7617,
-              84.0582
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e4ceef6c4c33"
-          },
-          {
-            "pct": 0.5,
-            "second": 7.5465,
-            "mean": [
-              187.9897,
-              164.2831,
-              167.5765
-            ],
-            "stddev": [
-              72.4764,
-              93.0554,
-              89.5752
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e4f0b0ec4c33"
-          },
-          {
-            "pct": 0.8,
-            "second": 12.0744,
-            "mean": [
-              192.7029,
-              177.7586,
-              177.882
-            ],
-            "stddev": [
-              60.9345,
-              81.7987,
-              80.4994
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0907e07cf86ccc3b"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:0907e4ceef6c4c33/0907e4f0b0ec4c33/0907e07cf86ccc3b",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-16-jj7yshes/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-16-jj7yshes/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-16-jj7yshes/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/1MEGn8gjfp0-Rgq5hUMVQ4D8AD-hXLywE/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_012.mp4"
-    },
-    {
-      "index": 17,
-      "status": "01_READY",
-      "source_drive_id": "1aNEGm0PJema0eROdk29WKJfhOF_v87If",
-      "source_filename": "17_carro BR 4.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_018.mp4",
-      "destination_drive_id": "1TTqoSPqyDkMuljeMMARTgGWlq55URmLG",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "b08e7d3a50dfc7d2eba69287942470d3f3898800dbbb25596e81e0fe1161849f",
-      "clean_sha256": "67ba0adaee78e39cb0f42d3f643494e0712971102a8fcbadd468d6c3da2766d3",
-      "drive_md5": "cb849299e8d6e05f2bc177b642fb0fe4",
-      "bytes_clean": 13004424,
+      "source_drive_id": "1hMniDBCndZQFmx8ZKHm3CY91VecMd_dJ",
+      "source_filename": "12_carro 0014.mp4",
+      "destination_drive_id": "1Hg0XAGMhSm73MJ4EnzSNEswNpGfJyiCX",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_019.mp4",
+      "source_sha256": "7103407d2852ab66f541cd5492684ccad2e7b1484cafc0f9bfb056ca650c5708",
+      "clean_sha256": "6547526d694933b856b0d721148515d5c242764300dcb670e16e572438361fd7",
+      "drive_md5": "af0e2fb8751d2aa1bd900552471eb1d5",
+      "bytes_clean": 10853846,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
@@ -2012,122 +867,74 @@
       "person": "PERSON",
       "p_orient": "PV",
       "angle": "SEM_ENTRADA",
-      "variant": "018",
-      "claim": "SEM ENTRADA; PARCELA DE R$209",
+      "variant": "019",
+      "claim": "SEM ENTRADA; R$299,00",
       "visual_evidence": {
-        "duration_seconds": 15.07,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/12_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0140000000000002,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              127.1244,
-              117.5727,
-              111.0965
+              105.932,
+              103.532,
+              106.891
             ],
             "stddev": [
-              67.0398,
-              67.9089,
-              71.8241
+              66.985,
+              62.938,
+              57.295
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "0f999ab762c0cce7"
+            "dhash64": "9538f8a8a8e0e0d0"
           },
           {
-            "pct": 0.5,
-            "second": 7.535,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              121.9076,
-              112.2364,
-              104.7013
+              130.14,
+              111.856,
+              106.936
             ],
             "stddev": [
-              64.2703,
-              65.5768,
-              68.1938
+              73.537,
+              77.526,
+              78.77
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "e69687e16040cce7"
+            "dhash64": "0b39ecce822bc6ce"
           },
           {
-            "pct": 0.8,
-            "second": 12.056000000000001,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              82.9698,
-              79.0221,
-              75.4804
+              91.594,
+              90.974,
+              93.244
             ],
             "stddev": [
-              62.9533,
-              62.2096,
-              64.1548
+              40.115,
+              39.406,
+              38.373
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "9c1507ad6240ccf7"
+            "dhash64": "196929c3869e3cdd"
           }
         ],
-        "perceptual_fingerprint": "dhash64:0f999ab762c0cce7/e69687e16040cce7/9c1507ad6240ccf7",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-17-eyug3vol/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-17-eyug3vol/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-17-eyug3vol/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:9538f8a8a8e0e0d0/0b39ecce822bc6ce/196929c3869e3cdd",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1TTqoSPqyDkMuljeMMARTgGWlq55URmLG/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_018.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1Hg0XAGMhSm73MJ4EnzSNEswNpGfJyiCX/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_019.mp4"
     },
     {
-      "index": 18,
+      "index": 13,
       "status": "01_READY",
-      "source_drive_id": "1wT4veiKCGdpWvL6yfP1jTjvQGEkRs_A8",
-      "source_filename": "18_carro br #3#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_036.mp4",
-      "destination_drive_id": "1gFJVlyxpLFz0LxymxCQKXOoy1Er4Jgv9",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "8a4ec29ebe4fc330d1c42ebb5464c5403ebe08588e459ccc5a463050490ea986",
-      "clean_sha256": "4797d0b2b71bacc8489e43330acf3f79ef627dd708529d26a072f72e8ed656b3",
-      "drive_md5": "534ff8adc5ed6e9beb6244d4734f6fe7",
-      "bytes_clean": 14622155,
+      "source_drive_id": "1nIG1A0wqLFF9tjpb92s3wgqXd4fPETGo",
+      "source_filename": "13_carro #4.mp4",
+      "destination_drive_id": "1KAL8FOJqMWAODr8gCI6r2p__GKlkyfln",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_040.mp4",
+      "source_sha256": "0e4046c902a5460329d382540804be4b6936fc88ebc98b709af6b8e3e66e8cdb",
+      "clean_sha256": "7274cc3d5cf231a91277822488c05dc1cda71a3014535776f4828628114e62a6",
+      "drive_md5": "a210417d34e936345eea15b560508470",
+      "bytes_clean": 13613807,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
@@ -2135,373 +942,453 @@
       "person": "NO_PERSON",
       "p_orient": "NV",
       "angle": "SEM_ENTRADA",
-      "variant": "036",
-      "claim": "SEM ENTRADA; R$299/MÊS",
+      "variant": "040",
+      "claim": "SEM ENTRADA",
       "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/13_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.0186,
+            "pct": 20,
+            "second": 3.0138,
             "mean": [
-              97.1909,
-              95.0009,
-              96.0082
+              136.049,
+              134.815,
+              123.347
             ],
             "stddev": [
-              74.5324,
-              74.8846,
-              75.7935
+              67.366,
+              66.662,
+              56.903
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "e138165206fd3ece"
+            "dhash64": "7f00cbff61f8fefe"
           },
           {
-            "pct": 0.5,
-            "second": 7.5465,
+            "pct": 50,
+            "second": 7.5345,
             "mean": [
-              118.3971,
-              104.1054,
-              102.1245
+              125.152,
+              108.225,
+              99.433
             ],
             "stddev": [
-              68.3532,
-              70.909,
-              73.54
+              81.336,
+              83.467,
+              78.942
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "34feffdfe3e70e3e"
+            "dhash64": "ffcca46444617073"
           },
           {
-            "pct": 0.8,
-            "second": 12.0744,
+            "pct": 80,
+            "second": 12.0552,
             "mean": [
-              78.7926,
-              76.1679,
-              80.0862
+              139.565,
+              134.699,
+              125.099
             ],
             "stddev": [
-              61.2825,
-              60.2414,
-              58.8888
+              52.277,
+              53.558,
+              53.152
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "c864e57d6f9770e0"
+            "dhash64": "01cb30b0cce8b81f"
           }
         ],
-        "perceptual_fingerprint": "dhash64:e138165206fd3ece/34feffdfe3e70e3e/c864e57d6f9770e0",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-18-9145ool4/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-18-9145ool4/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-18-9145ool4/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:7f00cbff61f8fefe/ffcca46444617073/01cb30b0cce8b81f",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1gFJVlyxpLFz0LxymxCQKXOoy1Er4Jgv9/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_036.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1KAL8FOJqMWAODr8gCI6r2p__GKlkyfln/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_040.mp4"
     },
     {
-      "index": 19,
+      "index": 14,
       "status": "01_READY",
-      "source_drive_id": "15PFrj3fZKNduht0mrECXVK1Ag_aAHXVw",
-      "source_filename": "19_car BR @02.mp4",
-      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_005.mp4",
-      "destination_drive_id": "1UyDPzSYR5gdlx3pu7WKlwxHTX7jRy1XE",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "34b2153df091caa365dfa0a9349b0e8a6a0c8652154635a525d1f5883652cc6f",
-      "clean_sha256": "01c5c53971eda0e3ff7628ddfd573ed95da99e301fa67b25a28af42616d967c1",
-      "drive_md5": "686bde2a82150a821b68ace30d08e586",
-      "bytes_clean": 18732203,
-      "metadata_clean": true,
-      "harmful_tags_after": null,
-      "drive_readback_verified": true,
-      "sha256_readback_verified": true,
-      "person": "NO_PERSON",
-      "p_orient": "NV",
-      "angle": "PARCELAS_BAIXAS",
-      "variant": "005",
-      "claim": "PARCELA DE R$299",
-      "visual_evidence": {
-        "duration_seconds": 15.093,
-        "samples": [
-          {
-            "pct": 0.2,
-            "second": 3.0186,
-            "mean": [
-              135.1745,
-              91.5641,
-              87.9079
-            ],
-            "stddev": [
-              59.8743,
-              75.0035,
-              71.3681
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "e62e3ace1e3ce0e7"
-          },
-          {
-            "pct": 0.5,
-            "second": 7.5465,
-            "mean": [
-              123.235,
-              98.7021,
-              95.3587
-            ],
-            "stddev": [
-              62.9448,
-              68.1101,
-              65.1208
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "189bb921e8f63c1f"
-          },
-          {
-            "pct": 0.8,
-            "second": 12.0744,
-            "mean": [
-              93.6577,
-              90.7794,
-              87.4837
-            ],
-            "stddev": [
-              59.5877,
-              58.9097,
-              58.9868
-            ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a1c7cc4dee070787"
-          }
-        ],
-        "perceptual_fingerprint": "dhash64:e62e3ace1e3ce0e7/189bb921e8f63c1f/a1c7cc4dee070787",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-19-3p1ltjcl/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-19-3p1ltjcl/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-19-3p1ltjcl/frames/frame-80.jpg"
-        ]
-      },
-      "webViewLink": "https://drive.google.com/file/d/1UyDPzSYR5gdlx3pu7WKlwxHTX7jRy1XE/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_005.mp4"
-    },
-    {
-      "index": 20,
-      "status": "01_READY",
-      "source_drive_id": "1tYau2-a5JbN8hjTccFBgJvCmkSDB8bsT",
-      "source_filename": "20_feed #1#.mp4",
-      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NH_002.mp4",
-      "destination_drive_id": "1w6H-SxIyjhau6LzUdTauVzUBICouMJce",
-      "source_final_parent_id": "14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-      "source_sha256": "43345bfda98f0b78bd2ed08de13138b6b6ba2bb2ecd9172bed620f645c7d25b8",
-      "clean_sha256": "e812a3e2e5659142f787b4cfedb232604dea397ef65b1bd2d335008a1f42d031",
-      "drive_md5": "3e3fbca6c1c4ce264f61bc5e33ba86c9",
-      "bytes_clean": 5617688,
+      "source_drive_id": "1bwfU8i5jRZCe7_I9XPa0VmJPcetGYu9a",
+      "source_filename": "14_feed fiat uno.mp4",
+      "destination_drive_id": "1OZP-jPyWDR3OaMPteGhv0pz7DHMxrU5K",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NH_003.mp4",
+      "source_sha256": "09ff9c541e22dc080be63c843130853626259e8f90fbafe3634cc7ee39c17352",
+      "clean_sha256": "478dff94aa68e63f45b418f818c67e9ee23feb3475d645c40a376ddc541c0844",
+      "drive_md5": "20b4ef6b6182261fdec95a52dac679ec",
+      "bytes_clean": 2043914,
       "metadata_clean": true,
       "harmful_tags_after": null,
       "drive_readback_verified": true,
       "sha256_readback_verified": true,
       "person": "NO_PERSON",
       "p_orient": "NH",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "variant": "002",
-      "claim": "CARRO ELÉTRICO; SEM ENTRADA; R$299/MÊS",
+      "angle": "SEM_ENTRADA",
+      "variant": "003",
+      "claim": "SEU NOVO CARRO AQUI!; SEM ENTRADA; PARCELA DE R$299,00/MÊS",
       "visual_evidence": {
-        "duration_seconds": 15.75,
-        "samples": [
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/14_timeline.jpg",
+        "frame_stats": [
           {
-            "pct": 0.2,
-            "second": 3.1500000000000004,
+            "pct": 20,
+            "second": 3.2834000000000003,
             "mean": [
-              181.5879,
-              165.7596,
-              162.4794
+              165.379,
+              144.386,
+              145.751
             ],
             "stddev": [
-              85.4082,
-              98.5494,
-              95.8439
+              83.099,
+              96.996,
+              94.977
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a7ccec7361f09ee2"
+            "dhash64": "cec87079b0b29ee6"
           },
           {
-            "pct": 0.5,
-            "second": 7.875,
+            "pct": 50,
+            "second": 8.2085,
             "mean": [
-              152.6399,
-              135.2494,
-              136.555
+              165.379,
+              144.386,
+              145.756
             ],
             "stddev": [
-              96.982,
-              104.5705,
-              102.5908
+              83.101,
+              96.995,
+              94.977
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6cc2828c2cc9ee2"
+            "dhash64": "cec87079b0b29ee6"
           },
           {
-            "pct": 0.8,
-            "second": 12.600000000000001,
+            "pct": 80,
+            "second": 13.133600000000001,
             "mean": [
-              177.9275,
-              160.8671,
-              156.5367
+              165.379,
+              144.386,
+              145.753
             ],
             "stddev": [
-              83.8445,
-              96.6321,
-              95.1045
+              83.099,
+              96.996,
+              94.977
             ],
-            "extrema": [
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ],
-              [
-                0,
-                255
-              ]
-            ],
-            "dhash64": "a6cce0709ad89ae2"
+            "dhash64": "cec87079b0b29ee6"
           }
         ],
-        "perceptual_fingerprint": "dhash64:a7ccec7361f09ee2/a6cc2828c2cc9ee2/a6cce0709ad89ae2",
-        "blank_white": false,
-        "frame_paths": [
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-20-8ea1mfxg/frames/frame-20.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-20-8ea1mfxg/frames/frame-50.jpg",
-          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260730-kelly/item-20-8ea1mfxg/frames/frame-80.jpg"
-        ]
+        "perceptual_fingerprint": "dhash64:cec87079b0b29ee6/cec87079b0b29ee6/cec87079b0b29ee6",
+        "blank_white": false
       },
-      "webViewLink": "https://drive.google.com/file/d/1w6H-SxIyjhau6LzUdTauVzUBICouMJce/view?usp=drivesdk",
-      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260730T154714Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NH_002.mp4"
+      "webViewLink": "https://drive.google.com/file/d/1OZP-jPyWDR3OaMPteGhv0pz7DHMxrU5K/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NH_003.mp4"
+    },
+    {
+      "index": 15,
+      "status": "01_READY",
+      "source_drive_id": "1pYa2rTVbaVPSjAR4vR8ej6n06UcE98qS",
+      "source_filename": "15_feed.mp4",
+      "destination_drive_id": "1P6tS_Twmg92c1yOsEyx_U1f18-F4Ra_M",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NH_001.mp4",
+      "source_sha256": "46e1e97016b63cd9cdc5f29be8e13d46a4a5656d1b1c20ec1edb09c40f8268f4",
+      "clean_sha256": "8a4a4a28ba3e564139baf2105907477ff8c3fdbc245203254a918b0496b9b22a",
+      "drive_md5": "d19da796d2fcb3f15d70d1df5b6c8057",
+      "bytes_clean": 3115010,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NH",
+      "angle": "SUPER_OFERTA",
+      "variant": "001",
+      "claim": "SUPER OFERTA; ENTRADA DE 5%; PARCELAS ENTRE R$199 E R$399/MÊS",
+      "visual_evidence": {
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/15_timeline.jpg",
+        "frame_stats": [
+          {
+            "pct": 20,
+            "second": 6.0,
+            "mean": [
+              73.593,
+              51.77,
+              46.084
+            ],
+            "stddev": [
+              92.936,
+              75.889,
+              76.011
+            ],
+            "dhash64": "181b07130bc82bcd"
+          },
+          {
+            "pct": 50,
+            "second": 15.0,
+            "mean": [
+              63.592,
+              35.868,
+              31.986
+            ],
+            "stddev": [
+              81.101,
+              53.799,
+              54.535
+            ],
+            "dhash64": "183b3745062e78cc"
+          },
+          {
+            "pct": 80,
+            "second": 24.0,
+            "mean": [
+              77.171,
+              54.306,
+              48.518
+            ],
+            "stddev": [
+              87.338,
+              72.946,
+              74.387
+            ],
+            "dhash64": "1d3d050f3f35e7ce"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:181b07130bc82bcd/183b3745062e78cc/1d3d050f3f35e7ce",
+        "blank_white": false
+      },
+      "webViewLink": "https://drive.google.com/file/d/1P6tS_Twmg92c1yOsEyx_U1f18-F4Ra_M/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SUPER_OFERTA_NH_001.mp4"
+    },
+    {
+      "index": 16,
+      "status": "01_READY",
+      "source_drive_id": "18wgJsR6n1prFIPiSufOw6zjVeYRn_pKE",
+      "source_filename": "16_carro #6.mp4",
+      "destination_drive_id": "1aYpWvPOVGWX3_fV8G9hNfdUxfVLO9IVI",
+      "destination_filename": "CAR_BR_BR_VID_APRESENTACAO_VEICULO_NV_001.mp4",
+      "source_sha256": "84d12b2040d464fb8c78f70ed221adb98216300c203885d4c6cf864c5d864bf3",
+      "clean_sha256": "f61086cd6c6eff0b2939f74f8dc2cd33848e6cdc74891016611c511e48085f50",
+      "drive_md5": "766f6137713a80cd7561ddc873b1757b",
+      "bytes_clean": 21914219,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "APRESENTACAO_VEICULO",
+      "variant": "001",
+      "claim": "SEM CLAIM/OFERTA VISÍVEL; APRESENTAÇÃO DO VEÍCULO",
+      "visual_evidence": {
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/16_timeline.jpg",
+        "frame_stats": [
+          {
+            "pct": 20,
+            "second": 3.0138,
+            "mean": [
+              97.289,
+              98.207,
+              97.929
+            ],
+            "stddev": [
+              63.832,
+              62.292,
+              58.8
+            ],
+            "dhash64": "93ff79cf8e8cc8c6"
+          },
+          {
+            "pct": 50,
+            "second": 7.5345,
+            "mean": [
+              110.217,
+              109.593,
+              109.649
+            ],
+            "stddev": [
+              66.187,
+              68.37,
+              65.161
+            ],
+            "dhash64": "661f3d37d693e38d"
+          },
+          {
+            "pct": 80,
+            "second": 12.0552,
+            "mean": [
+              86.067,
+              80.474,
+              84.584
+            ],
+            "stddev": [
+              62.151,
+              57.644,
+              53.887
+            ],
+            "dhash64": "1393f686fc8ad8f8"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:93ff79cf8e8cc8c6/661f3d37d693e38d/1393f686fc8ad8f8",
+        "blank_white": false
+      },
+      "webViewLink": "https://drive.google.com/file/d/1aYpWvPOVGWX3_fV8G9hNfdUxfVLO9IVI/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_APRESENTACAO_VEICULO_NV_001.mp4"
+    },
+    {
+      "index": 17,
+      "status": "01_READY",
+      "source_drive_id": "1Bj2gvGQNwsP0ShHqpI4QJD_w_aUI6i6M",
+      "source_filename": "17_story fiat uno.mp4",
+      "destination_drive_id": "1q20h5edSMTgPWkhj9VCKo9MUmZXMoyB6",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_041.mp4",
+      "source_sha256": "a08e35eb7e595c1ad9b1066cac5a712315fa2e048a517b620871ec6dc3485de8",
+      "clean_sha256": "5e329a4ac5f496d4b49419020b75f19e8378d470dc5a0242d47d08f2efe9075d",
+      "drive_md5": "2e064e667380503094f3a36f2fe961d7",
+      "bytes_clean": 2227394,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "SEM_ENTRADA",
+      "variant": "041",
+      "claim": "SEU NOVO CARRO AQUI!; SEM ENTRADA; PARCELA DE R$299,00/MÊS",
+      "visual_evidence": {
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/17_timeline.jpg",
+        "frame_stats": [
+          {
+            "pct": 20,
+            "second": 3.2834000000000003,
+            "mean": [
+              184.31,
+              163.58,
+              164.627
+            ],
+            "stddev": [
+              79.403,
+              97.059,
+              95.635
+            ],
+            "dhash64": "a6e40d3cb0989ee2"
+          },
+          {
+            "pct": 50,
+            "second": 8.2085,
+            "mean": [
+              184.31,
+              163.58,
+              164.626
+            ],
+            "stddev": [
+              79.403,
+              97.059,
+              95.636
+            ],
+            "dhash64": "a6e40d3cb0989ee2"
+          },
+          {
+            "pct": 80,
+            "second": 13.133600000000001,
+            "mean": [
+              184.31,
+              163.581,
+              164.624
+            ],
+            "stddev": [
+              79.403,
+              97.058,
+              95.638
+            ],
+            "dhash64": "a6e40d3cb0989ee2"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:a6e40d3cb0989ee2/a6e40d3cb0989ee2/a6e40d3cb0989ee2",
+        "blank_white": false
+      },
+      "webViewLink": "https://drive.google.com/file/d/1q20h5edSMTgPWkhj9VCKo9MUmZXMoyB6/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_041.mp4"
+    },
+    {
+      "index": 18,
+      "status": "01_READY",
+      "source_drive_id": "1NoWN66Fd5Tc9j2EsxtrhI_ufRxc35OTn",
+      "source_filename": "18_carro #5.mp4",
+      "destination_drive_id": "1UUBNyXpgiiZ4fBmW1TC7qbNVQ0w6hiBK",
+      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_042.mp4",
+      "source_sha256": "a621ed629fc108b1b6549edb89be8aa6dfdf36be9ac86cc5829cb352859b56d4",
+      "clean_sha256": "30c32aeb7c60e2654f72c3856ab2810acd907418b24fd7e377b4599c64cb1143",
+      "drive_md5": "1321b07619d72157a34bf522cf2ca736",
+      "bytes_clean": 21250701,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "SEM_ENTRADA",
+      "variant": "042",
+      "claim": "SEM ENTRADA; R$299,00",
+      "visual_evidence": {
+        "sheet": "/root/mgs-agent/tmp/ares-car-br-br-20260731-evidence/sheets/18_timeline.jpg",
+        "frame_stats": [
+          {
+            "pct": 20,
+            "second": 3.0138,
+            "mean": [
+              97.381,
+              93.948,
+              95.811
+            ],
+            "stddev": [
+              62.26,
+              61.122,
+              59.134
+            ],
+            "dhash64": "cd2ae8e813ccf869"
+          },
+          {
+            "pct": 50,
+            "second": 7.5345,
+            "mean": [
+              91.05,
+              84.062,
+              83.386
+            ],
+            "stddev": [
+              76.308,
+              73.825,
+              69.136
+            ],
+            "dhash64": "32313ab89c989910"
+          },
+          {
+            "pct": 80,
+            "second": 12.0552,
+            "mean": [
+              107.657,
+              97.976,
+              97.031
+            ],
+            "stddev": [
+              75.41,
+              73.827,
+              71.756
+            ],
+            "dhash64": "712f7c7d6766cc18"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:cd2ae8e813ccf869/32313ab89c989910/712f7c7d6766cc18",
+        "blank_white": false
+      },
+      "webViewLink": "https://drive.google.com/file/d/1UUBNyXpgiiZ4fBmW1TC7qbNVQ0w6hiBK/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260731T145450Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_042.mp4"
     }
   ],
-  "report_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260730T154714Z.csv",
-  "report_json": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260730T154714Z.json",
-  "completed_at_utc": "2026-07-30T15:51:17.747129+00:00",
+  "report_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260731T145450Z.csv",
+  "report_json": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260731T145450Z.json",
+  "completed_at_utc": "2026-07-31T14:57:14.879954+00:00",
   "counts": {
-    "total": 20,
-    "ready": 20,
+    "total": 18,
+    "ready": 18,
     "rejected_technical": 0,
-    "clean_true": 20,
-    "drive_readback_verified": 20,
-    "sha256_readback_verified": 20,
-    "sources_archived": 20,
-    "sources_rejected": 0,
+    "clean_true": 18,
+    "drive_readback_verified": 18,
+    "sha256_readback_verified": 18,
+    "sources_archived": 18,
     "upload_pending_after": 0,
-    "inventory_entries": 20
+    "inventory_entries": 18
   },
   "ready_folder_link": "https://drive.google.com/drive/folders/18cGu-O2BPqaZgBcwJrfhOU2trkgj6h_i",
-  "legacy_folder_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
-  "rejected_folder_link": "https://drive.google.com/drive/folders/1lbhg5ZvKKBciKPwyAcatA23kFgBig0Ug"
+  "legacy_folder_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3"
 }
