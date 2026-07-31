@@ -1,468 +1,4 @@
 
-<!doctype html>
-<html lang="{{HTML_LANG}}">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{TITLE}}</title>
-    {{WP_HEAD}}
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-
-      #chat-container,
-      #chat-container *,
-      #chat-container *::before,
-      #chat-container *::after {
-        box-sizing: content-box !important;
-        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
-      }
-
-      #chat-container button,
-      #chat-container a,
-      #chat-container span,
-      #chat-container div,
-      #chat-container p {
-        font-size-adjust: none !important;
-      }
-
-      body {
-        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #dfe5e7;
-        margin: 0;
-        padding: 0;
-        height: calc(100vh - 10px);
-        color: #333;
-      }
-
-      #chat-container {
-        width: calc(100% - 20px);
-        height: calc(100% - 10px);
-        margin: 5px auto;
-        background-color: #e5ddd5;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c3b9b0' fill-opacity='0.18'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        border-radius: 8px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        color: #333;
-        max-width: 780px;
-        font-size: 14.5px !important;
-      }
-
-      /* WhatsApp header */
-      #chat-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background-color: #075e54;
-        color: white;
-        padding: 8px 16px;
-        flex-shrink: 0;
-        min-height: 56px;
-      }
-
-      #chat-header img {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #25d366;
-      }
-
-      #header-info {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.4;
-      }
-
-      #header-name {
-        font-size: 15px !important;
-        font-weight: 500 !important;
-        white-space: nowrap;
-      }
-
-      #header-status {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 12px !important;
-        color: #d9fdd3;
-        white-space: nowrap;
-      }
-
-      #header-status::before {
-        content: "";
-        width: 8px !important;
-        height: 8px !important;
-        min-width: 8px !important;
-        max-width: 8px !important;
-        min-height: 8px !important;
-        max-height: 8px !important;
-        display: inline-block !important;
-        border-radius: 50% !important;
-        background: #25d366 !important;
-        flex: 0 0 8px !important;
-        aspect-ratio: 1 / 1 !important;
-      }
-
-      #chat-box {
-        flex-grow: 1;
-        min-height: 0;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        scroll-behavior: smooth;
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-      }
-
-      #chat-box::-webkit-scrollbar {
-        display: none;
-      }
-
-      .chat-message {
-        padding: 7px 12px 8px;
-        border-radius: 7.5px;
-        margin: 4px 0;
-        font-size: 14.5px !important;
-        max-width: 75%;
-        position: relative;
-        line-height: 1.4;
-        clear: both;
-        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
-        word-wrap: break-word;
-      }
-
-      .bot-message {
-        background-color: #ffffff;
-        color: #303030;
-        align-self: flex-start;
-        border-top-left-radius: 0;
-        margin-left: 18px;
-        margin-right: 50px;
-      }
-
-      /* Bot bubble tail */
-      .bot-message::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -8px;
-        width: 0;
-        height: 0;
-        border-top: 8px solid #ffffff;
-        border-left: 8px solid transparent;
-      }
-
-      .user-message {
-        background-color: #dcf8c6;
-        color: #303030;
-        align-self: flex-end;
-        border-top-right-radius: 0;
-        margin-right: 18px;
-        float: right;
-        text-align: left;
-      }
-
-      /* User bubble tail */
-      .user-message::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: -8px;
-        width: 0;
-        height: 0;
-        border-top: 8px solid #dcf8c6;
-        border-right: 8px solid transparent;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: column;
-        width: calc(75% - 18px) !important;
-        max-width: calc(75% - 18px) !important;
-        margin: 8px 18px 0 18px !important;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        align-self: flex-end !important;
-        align-items: stretch !important;
-        float: none !important;
-        box-sizing: border-box !important;
-        min-width: 0 !important;
-      }
-
-      #chat-container .button-container > button,
-      #chat-container .button-container > a,
-      #chat-container .button-container > a > button {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-      }
-
-      #chat-container button {
-        padding: 9px 16px;
-        background-color: #ffffff;
-        color: #075e54;
-        border: 1.5px solid #25d366;
-        border-radius: 7.5px;
-        cursor: pointer;
-        transition:
-          background-color 0.2s ease,
-          transform 0.1s ease;
-        font-size: 14px !important;
-        line-height: normal !important;
-        font-family: "Roboto", sans-serif !important;
-        font-weight: 500 !important;
-        width: 100% !important;
-        margin: 3px 0;
-        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
-      }
-
-      #chat-container button:hover {
-        background-color: #f0fdf4;
-        transform: translateY(-1px);
-      }
-
-      #chat-container button:active {
-        transform: translateY(0);
-      }
-
-      #chat-container button:disabled {
-        border-color: #ccc;
-        color: #aaa;
-        cursor: not-allowed;
-        background-color: #f9f9f9;
-      }
-
-      /* Wantabrand/M2 can load global ad CSS that changes the quiz gate box
-         model/text casing. Keep this scoped to the popup gate so the PubGuru
-         in-chat top block, scroll pinning, and answer flow are not touched. */
-      #quiz-container > div {
-        box-sizing: content-box !important;
-      }
-
-      #quiz-container .aq-answer {
-        text-transform: none !important;
-      }
-
-      #chat-container a button {
-        background-color: #25d366;
-        color: white;
-        border-color: #25d366;
-      }
-
-      #chat-container a button:hover {
-        background-color: #20c05c;
-      }
-
-      /* Typing indicator */
-      .typing-indicator {
-        display: flex;
-        justify-content: flex-start;
-        margin: 6px 0;
-        margin-left: 18px;
-        margin-top: 8px;
-      }
-
-      /* Wrap dots in a bubble */
-      .typing-indicator::before {
-        display: none;
-      }
-
-      .typing-indicator {
-        background-color: #ffffff;
-        border-radius: 7.5px;
-        border-top-left-radius: 0;
-        padding: 10px 14px;
-        width: fit-content;
-        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
-        position: relative;
-      }
-
-      /* Tail for typing bubble */
-      .typing-indicator::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -8px;
-        width: 0;
-        height: 0;
-        border-top: 8px solid #ffffff;
-        border-left: 8px solid transparent;
-      }
-
-      .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        margin: 0 3px;
-        background-color: #90a4ae;
-        animation: typingDot 1.4s infinite ease-in-out;
-      }
-
-      .dot:nth-child(1) {
-        animation-delay: 0s;
-      }
-      .dot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .dot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      @keyframes typingDot {
-        0%,
-        60%,
-        100% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        30% {
-          transform: scale(1.3);
-          opacity: 1;
-        }
-      }
-
-      .progress-container {
-        width: 60%;
-        height: 6px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 3px;
-        margin: 12px auto;
-        overflow: hidden;
-      }
-
-      .progress-bar {
-        height: 100%;
-        width: 0;
-        background-color: #25d366;
-        border-radius: 3px;
-        transition: width 0.8s ease-in-out;
-      }
-
-      .offers-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin: 8px 18px 16px 18px;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-      }
-
-      .offer-card {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 10px;
-        color: #222;
-        text-decoration: none;
-        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
-        border: 1px solid rgba(7, 94, 84, 0.12);
-      }
-
-      .offer-card-img {
-        width: 74px;
-        height: 54px;
-        object-fit: contain;
-        flex-shrink: 0;
-      }
-
-      .offer-card-info {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .offer-card-title {
-        margin: 0 0 3px;
-        font-weight: 700;
-        font-size: 14px !important;
-        color: #1f2937;
-      }
-
-      .offer-card-subtitle {
-        margin: 0 0 4px;
-        font-size: 12.5px !important;
-        color: #475467;
-        line-height: 1.25;
-      }
-
-      .offer-card-bank {
-        margin: 0;
-        font-size: 12.5px !important;
-        font-weight: 700;
-        color: #128c4a;
-      }
-
-      .offer-card-arrow {
-        color: #075e54;
-        font-weight: 700;
-        font-size: 20px;
-        flex-shrink: 0;
-      }
-
-      .ad {
-        clear: both;
-      }
-
-    </style>
-    {{ADS_HEAD}}
-  </head>
-  <body>
-    {{WP_BODY_OPEN}}
-    <div id="chat-container">
-      <div id="chat-header">
-        <img id="bot-avatar" src="" alt="" />
-        <div id="header-info">
-          <span id="header-name"></span>
-          <span id="header-status">online agora</span>
-        </div>
-        <a
-          id="call-btn"
-          href="#"
-          target="_self"
-          title="Ligar agora"
-          style="
-            margin-left: auto;
-            flex-shrink: 0;
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-          "
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="white"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"
-            />
-          </svg>
-        </a>
-      </div>
-      <div id="chat-box">
-        <!-- Bot's initial message will appear here -->
-      </div>
-    </div>
-
-    <script>
       function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
       }
@@ -507,13 +43,13 @@
       }
 
       let questionIndex = -1;
-      const botNames = {{BOT_NAMES_JS}};
+      const botNames = ["Maria","João","Juliana","José","Fernanda","Carlos","Olivia","Lucas","Camilla","Pedro"];
 
-      const femaleNames = {{FEMALE_NAMES_JS}};
-      const maleNames = {{MALE_NAMES_JS}};
+      const femaleNames = ["Maria","Juliana","Fernanda","Olivia","Camilla"];
+      const maleNames = ["João","José","Carlos","Lucas","Pedro"];
 
-      const femalePhotos = {{FEMALE_PHOTOS_JS}};
-      const malePhotos = {{MALE_PHOTOS_JS}};
+      const femalePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"];
+      const malePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"];
 
       let botName = botNames[Math.floor(Math.random() * botNames.length)];
 
@@ -529,10 +65,10 @@
 
       // Header will be set inside window.onload
 
-      const questions = {{QUESTIONS_JS}};
-      const rewardedButtonClass = {{REWARDED_BUTTON_CLASS_JS}};
-      const smsConfig = {{SMS_CONFIG_JS}};
-      const gateConfig = {{GATE_CONFIG_JS}};
+      const questions = [{"question":"Olá! Eu sou {botName}. 🚗 | Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado! | Vamos encontrar a oferta ideal para você?","answers":["✅ Vamos lá!","👀 Quero conhecer as opções"]},{"question":"Quanto você pode pagar por mês?","answers":["Até R$ 500","Entre R$ 500 e R$ 1.000","Acima de R$ 1.000"]},{"question":"Você tem preferência por algum tipo de veículo?","answers":["Sim, já tenho um modelo em mente","Não, estou aberto a sugestões","Ainda estou decidindo"]},{"question":"🔍 Estou pesquisando as melhores condições para você... | 🚗 Encontrei 3 opções que podem combinar com o seu perfil. | Toque na que mais faz sentido para você:","offers":[{"name":"🚗 Financie sem entrada","subtitle":"Valores com parcelas","bank":"R$157,00 a R$299,00","image":"","url":"https://zuout.com/p1-br-car-financiamento-veiculos-sem-entrada-online/"},{"name":"💳 Ver ofertas disponíveis","subtitle":"Bancos com taxas reduzidas","bank":"e facilidade para baixo score.","image":"","url":"https://zuout.com/p1-br-car-simulacao-de-financiamento/"},{"name":"🔥 Juros reduzidos 0.98% e sem entrada","subtitle":"Consulte se essa condição está disponível para você.","bank":"Oferta por tempo LIMITADO !","image":"","url":"https://zuout.com/p1-br-car-financie-seu-carro-em-60-meses/"}]},{"question":""}];
+      const rewardedButtonClass = "av-rewarded";
+      const smsConfig = {"enabled":true,"endpoint":"https://fixture.local/wp-json/mgs-chat/v1/lead","chatId":"CAR-BR-01-SMS","route":"/chat-sms/car/br1","submitLabel":"VER PARCELAS","optional":true,"consentEnabled":true};
+      const gateConfig = {"skipLoading":true,"loadingMs":0,"geoEnabled":true,"geoFallback":"Analisando ofertas disponíveis na sua região","geoPrefix":"Analisando ofertas de veículos em"};
       const smsFormStartedAt = Date.now();
       let smsLeadCaptured = false;
       let smsLeadSubmitting = false;
@@ -951,7 +487,7 @@
         }
 
         const adBanner = document.createElement("div");
-        adBanner.innerHTML = `<div></div>`;
+        adBanner.innerHTML = `<div id="zout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;"><div><p style="font-size: 10px; text-transform: uppercase; text-align: center;">Anúncios</p><div id="zout_top"></div></div></div>`;
         adBanner.classList.add("ad-unit");
         adBanner.classList.add("ad");
         adBanner.dataset.position = "top";
@@ -1016,10 +552,10 @@
         // Set header
         document.getElementById("bot-avatar").src = botPhoto;
         document.getElementById("header-name").textContent =
-          botName + " • " + {{PERSONA_ROLE_JS}};
+          botName + " • " + "Especialista em Financiamentos";
 
         // Set random offer on call button
-        const offers = {{OFFER_URLS_JS}};
+        const offers = ["https://zuout.com/p1-br-car-financiamento-veiculos-sem-entrada-online/","https://zuout.com/p1-br-car-simulacao-de-financiamento/","https://zuout.com/p1-br-car-financie-seu-carro-em-60-meses/"];
         const randomOffer = offers[Math.floor(Math.random() * offers.length)];
         const callBtn = document.getElementById("call-btn");
         callBtn.dataset.mgsTargetUrl = randomOffer;
@@ -1102,7 +638,7 @@
       }
 
       let quizStepLock = false;
-      const gateQuestionCount = {{GATE_QUESTION_COUNT_JS}};
+      const gateQuestionCount = 1;
 
       function showGateFinal() {
         const loadingSlide = document.querySelector(".aq-loading");
@@ -1167,7 +703,7 @@
         loadGeoIndicator();
 
         if (!rewardedButtonClass) {
-          {{JBF_REWARDED_PRELOAD_JS}}
+          
         }
       }
 
@@ -1215,72 +751,8 @@
           }
 
           if (!rewardedButtonClass) {
-            {{JBF_REWARDED_SHOW_JS}}
+            
           }
         }
       });
-    </script>
-    <!-- QUIZ MODAL -->
-    <div id="quiz-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:2147483647; justify-content:center; align-items:center; font-family:'Roboto',Arial,sans-serif;">
-      <div style="background:#ffffff; border-radius:20px; padding:0 30px 40px 30px; box-shadow:0 8px 32px rgba(0,0,0,0.2); max-width:500px; width:90%; min-width:300px; max-height:calc(100vh - 24px); overflow-y:auto; position:relative;">
-        <div style="margin-bottom:30px; margin-top:0;">
-          <div style="width:100%; height:5px; background:#e0e0e0; border-radius:2px; overflow:hidden;">
-            <div id="quiz-progress-fill" style="width:20%; height:100%; background:#075e54; border-radius:2px; transition:width 0.5s ease;"></div>
-          </div>
-        </div>
-        {{GEO_INDICATOR_HTML}}
-        {{GATE_IMAGE_HTML}}
-        <div class="aq-slides">
-          {{GATE_SLIDES_HTML}}
-          <div class="aq-loading" style="display:none; text-align:center;">
-            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
-              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both;"></span>
-              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.16s;"></span>
-              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.32s;"></span>
-            </div>
-            <h2 style="color:#333; margin:0; font-size:20px;">🔍 Buscando a melhor oferta para você...</h2>
-          </div>
-          <div class="aq-final" style="display:none; text-align:center;">
-            {{GATE_FINAL_HEADER_HTML}}
-            {{SMS_FORM_HTML}}
-            <{{REWARDED_CTA_TAG}} id="aq-cta" class="{{REWARDED_BUTTON_CLASS}}" {{REWARDED_CTA_ATTRS}} style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">{{SMS_CTA_LABEL}}</{{REWARDED_CTA_TAG}}>
-            {{SMS_SKIP_HTML}}
-            <br/>
-            <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
-          </div>
-        </div>
-        {{LEGAL_FOOTER_HTML}}
-      </div>
-    </div>
-    <style>
-      html.modal-locked, body.modal-locked { overflow:hidden !important; touch-action:none; }
-      @keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
-      #aq-cta:hover { background:#333333 !important; transform:translateY(-2px); }
-      #aq-cta:disabled { opacity:.65; cursor:wait; transform:none !important; }
-      #mgs-cf-geo-indicator { margin:-14px 0 10px; color:#667085; font-size:12px; font-weight:600; text-align:center; line-height:1.35; }
-      .mgs-cf-gate-image { display:flex; justify-content:center; align-items:center; min-height:92px; margin:0 0 12px; }
-      .mgs-cf-gate-image img { display:block; width:auto; max-width:100%; height:auto; max-height:130px; object-fit:contain; }
-      .mgs-cf-final-icon { font-size:52px; margin-bottom:10px; }
-      .mgs-cf-final-title { font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2; }
-      .mgs-cf-final-subtitle { font-size:16px; color:#333; margin-bottom:25px; font-weight:500; }
-      .mgs-cf-sms-intro { margin:0 0 14px; color:#344054; font-size:15px; font-weight:700; text-align:left; }
-      .mgs-cf-sms-form { display:grid; gap:7px; margin:0 0 12px; text-align:left; }
-      .mgs-cf-sms-form label { color:#344054; font-size:13px; font-weight:700; }
-      .mgs-cf-sms-form input:not([type="checkbox"]) { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d0d5dd; border-radius:10px; background:#fff; color:#101828; font:500 16px/1.3 'Roboto',Arial,sans-serif; box-sizing:border-box; outline:none; }
-      .mgs-cf-sms-form input:not([type="checkbox"]):focus { border-color:#075e54; box-shadow:0 0 0 3px rgba(7,94,84,.12); }
-      .mgs-cf-sms-consent { display:flex; align-items:flex-start; gap:8px; margin-top:4px; cursor:pointer; font-weight:500 !important; line-height:1.35; }
-      .mgs-cf-sms-consent input { width:16px; height:16px; min-width:16px; margin:1px 0 0; accent-color:#075e54; }
-      #mgs-cf-sms-website { position:absolute !important; left:-9999px !important; width:1px !important; height:1px !important; opacity:0 !important; }
-      .mgs-cf-sms-error { min-height:18px; margin:2px 0 0; color:#b42318; font-size:13px; font-weight:600; text-align:left; }
-      #mgs-cf-sms-skip { display:block; width:100%; margin:9px 0 0; padding:9px 12px; border:0; background:transparent; color:#667085; box-shadow:none; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:2px; cursor:pointer; }
-      #mgs-cf-sms-skip:hover { color:#344054; background:transparent; transform:none; }
-      .mgs-cf-legal-footer { display:flex; justify-content:center; flex-wrap:wrap; gap:5px; margin:14px 0 -24px; color:#98a2b3; font-size:10px; line-height:1.3; }
-      .mgs-cf-legal-footer a { color:#98a2b3; text-decoration:none; opacity:.78; }
-      .mgs-cf-legal-footer a:hover { text-decoration:underline; opacity:1; }
-      .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
-      @media(max-width:480px) { #quiz-container > div { padding:14px 15px 28px !important; } #mgs-cf-geo-indicator { margin:-8px 0 7px; } .mgs-cf-gate-image { min-height:72px; margin-bottom:8px; } .mgs-cf-gate-image img { max-height:105px; } .question { font-size:18px !important; margin-bottom:16px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:12px 20px !important; } .mgs-cf-legal-footer { margin-bottom:-18px; } }
-    </style>
-{{WP_FOOTER}}
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
-</html>
+    

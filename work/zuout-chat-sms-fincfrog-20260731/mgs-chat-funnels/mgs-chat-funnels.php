@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.4.3
+ * Version: 0.4.4
  * Author: MGS Digital Corp
  */
 
@@ -14,7 +14,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/class-mgs-chat-sms.php';
 MGS_Chat_SMS::boot();
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.4.3';
+    const VERSION = '0.4.4';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -151,7 +151,7 @@ final class MGS_Chat_Funnels {
             '{{GATE_FINAL_HEADER_HTML}}' => $this->render_gate_final_header_html($config),
             '{{LEGAL_FOOTER_HTML}}' => $this->render_legal_footer_html($config),
             '{{SMS_FORM_HTML}}' => MGS_Chat_SMS::form_html($config),
-            '{{SMS_SKIP_HTML}}' => MGS_Chat_SMS::skip_html($config),
+            '{{SMS_SKIP_HTML}}' => MGS_Chat_SMS::skip_html($config, $this->ad_provider($config)),
             '{{SMS_CONFIG_JS}}' => MGS_Chat_SMS::template_js_config($config),
             '{{SMS_CTA_LABEL}}' => esc_html($config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →'),
             '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'jbf' ? "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });" : '',

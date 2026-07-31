@@ -579,6 +579,57 @@
         replaySmsCta(document.getElementById("aq-cta"));
       }
 
+      function smsLeadState() {
+        const nameInput = document.getElementById("mgs-cf-sms-name");
+        const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        const consentInput = document.getElementById("mgs-cf-sms-consent");
+        const name = nameInput ? nameInput.value.trim() : "";
+        const phone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+        const consent = !smsConfig.consentEnabled || !consentInput || consentInput.checked;
+        return { name, phone, consent, valid: name.length >= 2 && phone.length >= 10 };
+      }
+
+      function syncSmsActViewReward() {
+        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return;
+        const ctaButton = document.getElementById("aq-cta");
+        if (!ctaButton || smsLeadCaptured || smsLeadSubmitting) return;
+        const state = smsLeadState();
+        const eligible = state.valid || (smsConfig.optional && !state.consent);
+        ctaButton.classList.toggle("av-rewarded", eligible);
+        if (eligible) {
+          ctaButton.setAttribute("onclick", "window.mgsHandleSmsActViewReward && window.mgsHandleSmsActViewReward(this); return false;");
+        } else {
+          ctaButton.removeAttribute("onclick");
+        }
+      }
+
+      window.mgsHandleSmsActViewReward = function (ctaButton) {
+        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return false;
+        const state = smsLeadState();
+        if (!state.valid && !(smsConfig.optional && !state.consent)) {
+          submitSmsLead(ctaButton, false);
+          return false;
+        }
+        window.mgsRewardedClickInProgress = true;
+        if (!state.consent && smsConfig.optional) {
+          smsLeadCaptured = true;
+          smsError("");
+        } else if (!smsLeadCaptured && !smsLeadSubmitting) {
+          submitSmsLead(ctaButton, false);
+        }
+        window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+        return false;
+      };
+
+      window.mgsHandleSmsSkipReward = function () {
+        if (!smsConfig.enabled || !smsConfig.optional) return false;
+        smsLeadCaptured = true;
+        smsError("");
+        window.mgsRewardedClickInProgress = true;
+        window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+        return false;
+      };
+
       function loadGeoIndicator() {
         if (!gateConfig.geoEnabled) return;
         const geoText = document.getElementById("mgs-cf-geo-text");
@@ -597,7 +648,7 @@
         } catch (error) {}
       }
 
-      function submitSmsLead(ctaButton) {
+      function submitSmsLead(ctaButton, replayAfterSuccess = true) {
         if (!smsConfig.enabled || smsLeadCaptured || smsLeadSubmitting) return;
         const nameInput = document.getElementById("mgs-cf-sms-name");
         const phoneInput = document.getElementById("mgs-cf-sms-phone");
@@ -660,7 +711,7 @@
             smsLeadSubmitting = false;
             ctaButton.disabled = false;
             ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
-            replaySmsCta(ctaButton);
+            if (replayAfterSuccess) replaySmsCta(ctaButton);
           })
           .catch((error) => {
             smsLeadSubmitting = false;
@@ -1063,6 +1114,26 @@
           phoneInput.dataset.mgsMaskBound = "1";
           phoneInput.addEventListener("input", function () { this.value = formatSmsPhone(this.value); });
         }
+        const smsInputs = [
+          document.getElementById("mgs-cf-sms-name"),
+          phoneInput,
+          document.getElementById("mgs-cf-sms-consent")
+        ].filter(Boolean);
+        smsInputs.forEach(function (input) {
+          if (input.dataset.mgsRewardSyncBound) return;
+          input.dataset.mgsRewardSyncBound = "1";
+          input.addEventListener("input", syncSmsActViewReward);
+          input.addEventListener("change", syncSmsActViewReward);
+        });
+        const ctaButton = document.getElementById("aq-cta");
+        if (ctaButton && !ctaButton.dataset.mgsRewardPointerBound) {
+          ctaButton.dataset.mgsRewardPointerBound = "1";
+          ctaButton.addEventListener("pointerdown", syncSmsActViewReward);
+          ctaButton.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") syncSmsActViewReward();
+          });
+        }
+        syncSmsActViewReward();
         updateQuizProgress();
       }
 
@@ -1105,6 +1176,7 @@
 
         const skipButton = e.target && e.target.closest ? e.target.closest("#mgs-cf-sms-skip") : null;
         if (skipButton) {
+          if (skipButton.classList.contains("av-rewarded")) return;
           e.preventDefault();
           continueSmsWithoutLead();
           return;

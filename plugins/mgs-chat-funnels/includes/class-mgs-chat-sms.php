@@ -233,9 +233,12 @@ final class MGS_Chat_SMS {
             . '</div>';
     }
 
-    public static function skip_html( $config ) {
+    public static function skip_html( $config, $ad_provider = '' ) {
         if ( empty( $config['sms_enabled'] ) || empty( $config['sms_optional'] ) ) return '';
         $label = sanitize_text_field( $config['sms_skip_label'] ?? 'Pular, quero ver as ofertas' );
+        if ( 'actview' === sanitize_key( (string) $ad_provider ) ) {
+            return '<a id="mgs-cf-sms-skip" class="av-rewarded" role="button" tabindex="0" onclick="window.mgsHandleSmsSkipReward && window.mgsHandleSmsSkipReward(); return false;">' . esc_html( $label ) . '</a>';
+        }
         return '<button id="mgs-cf-sms-skip" type="button">' . esc_html( $label ) . '</button>';
     }
 
