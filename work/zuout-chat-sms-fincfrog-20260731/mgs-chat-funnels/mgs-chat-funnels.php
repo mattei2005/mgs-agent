@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.4.2
+ * Version: 0.4.3
  * Author: MGS Digital Corp
  */
 
@@ -14,7 +14,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/class-mgs-chat-sms.php';
 MGS_Chat_SMS::boot();
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.4.2';
+    const VERSION = '0.4.3';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -129,8 +129,12 @@ final class MGS_Chat_Funnels {
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
             '{{REWARDED_BUTTON_CLASS}}' => esc_attr($sms_enabled ? '' : ($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : ''))),
             '{{REWARDED_BUTTON_CLASS_JS}}' => $this->js_json($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : '')),
-            '{{REWARDED_CTA_TAG}}' => (!$sms_enabled && $ad_provider === 'actview') ? 'a' : 'button',
-            '{{REWARDED_CTA_ATTRS}}' => (!$sms_enabled && $ad_provider === 'actview') ? 'role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;"' : 'type="button"',
+            '{{REWARDED_CTA_TAG}}' => $ad_provider === 'actview' ? 'a' : 'button',
+            '{{REWARDED_CTA_ATTRS}}' => $ad_provider === 'actview'
+                ? ($sms_enabled
+                    ? 'role="button" tabindex="0"'
+                    : 'role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;"')
+                : 'type="button"',
             '{{BOT_NAMES_JS}}' => $this->js_json($persona['names'] ?? array('Maria')),
             '{{FEMALE_NAMES_JS}}' => $this->js_json($persona['female_names'] ?? array()),
             '{{MALE_NAMES_JS}}' => $this->js_json($persona['male_names'] ?? array()),
@@ -141,7 +145,13 @@ final class MGS_Chat_Funnels {
             '{{OFFER_URLS_JS}}' => $this->js_json($this->offer_urls_from_config($config)),
             '{{GATE_SLIDES_HTML}}' => $this->render_gate_slides_html($config),
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
+            '{{GATE_CONFIG_JS}}' => $this->js_json($this->gate_public_config($config)),
+            '{{GEO_INDICATOR_HTML}}' => $this->render_geo_indicator_html($config),
+            '{{GATE_IMAGE_HTML}}' => $this->render_gate_image_html($config),
+            '{{GATE_FINAL_HEADER_HTML}}' => $this->render_gate_final_header_html($config),
+            '{{LEGAL_FOOTER_HTML}}' => $this->render_legal_footer_html($config),
             '{{SMS_FORM_HTML}}' => MGS_Chat_SMS::form_html($config),
+            '{{SMS_SKIP_HTML}}' => MGS_Chat_SMS::skip_html($config),
             '{{SMS_CONFIG_JS}}' => MGS_Chat_SMS::template_js_config($config),
             '{{SMS_CTA_LABEL}}' => esc_html($config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →'),
             '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'jbf' ? "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });" : '',
@@ -409,6 +419,75 @@ final class MGS_Chat_Funnels {
             $html .= '</div></div>';
         }
         return $html;
+    }
+
+    private function gate_public_config($config) {
+        $gate = isset($config['gate']) && is_array($config['gate']) ? $config['gate'] : array();
+        return array(
+            'skipLoading' => !empty($gate['skip_loading']),
+            'loadingMs' => max(0, (int) ($gate['loading_ms'] ?? 2000)),
+            'geoEnabled' => !empty($config['geo_enabled']),
+            'geoFallback' => sanitize_text_field($config['geo_fallback_text'] ?? 'Analisando ofertas disponíveis na sua região'),
+            'geoPrefix' => sanitize_text_field($config['geo_prefix_text'] ?? 'Analisando ofertas de veículos em'),
+        );
+    }
+
+    private function render_geo_indicator_html($config) {
+        if (empty($config['geo_enabled'])) {
+            return '';
+        }
+        $fallback = sanitize_text_field($config['geo_fallback_text'] ?? 'Analisando ofertas disponíveis na sua região');
+        return '<div id="mgs-cf-geo-indicator" aria-live="polite"><span aria-hidden="true">🔍</span> <span id="mgs-cf-geo-text">' . esc_html($fallback) . '</span></div>';
+    }
+
+    private function render_gate_image_html($config) {
+        $image = trim((string) ($config['sms_gate_image'] ?? ''));
+        if ($image === '') {
+            return '';
+        }
+        if ($image === 'default') {
+            $image = plugin_dir_url(__FILE__) . 'assets/car-financing-hero.png';
+        }
+        $image = esc_url($image);
+        if ($image === '') {
+            return '';
+        }
+        $alt = sanitize_text_field($config['sms_gate_image_alt'] ?? 'Financiamento de veículos');
+        return '<div class="mgs-cf-gate-image"><img src="' . $image . '" alt="' . esc_attr($alt) . '"></div>';
+    }
+
+    private function render_gate_final_header_html($config) {
+        if (!empty($config['sms_compact_gate'])) {
+            $intro = sanitize_text_field($config['sms_form_intro'] ?? 'Preencha seus dados e veja as parcelas:');
+            return '<p class="mgs-cf-sms-intro">' . esc_html($intro) . '</p>';
+        }
+        $gate = isset($config['gate']) && is_array($config['gate']) ? $config['gate'] : array();
+        $icon = sanitize_text_field($gate['final_icon'] ?? '🚗');
+        $title = sanitize_text_field($gate['final_title'] ?? 'Oferta encontrada!');
+        $subtitle = sanitize_text_field($gate['final_subtitle'] ?? 'Um especialista foi identificado para te atender agora.');
+        return '<div class="mgs-cf-final-icon">' . esc_html($icon) . '</div>'
+            . '<p class="mgs-cf-final-title">' . esc_html($title) . '</p>'
+            . '<p class="mgs-cf-final-subtitle">' . esc_html($subtitle) . '</p>';
+    }
+
+    private function render_legal_footer_html($config) {
+        $links = isset($config['legal_links']) && is_array($config['legal_links']) ? array_values($config['legal_links']) : array();
+        $items = array();
+        foreach ($links as $link) {
+            if (!is_array($link)) {
+                continue;
+            }
+            $label = sanitize_text_field($link['label'] ?? '');
+            $url = esc_url($link['url'] ?? '');
+            if ($label === '' || $url === '') {
+                continue;
+            }
+            $items[] = '<a href="' . $url . '">' . esc_html($label) . '</a>';
+        }
+        if (empty($items)) {
+            return '';
+        }
+        return '<nav class="mgs-cf-legal-footer" aria-label="Links legais">' . implode('<span aria-hidden="true">|</span>', $items) . '</nav>';
     }
 
     private function offer_urls_from_config($config) {
@@ -745,6 +824,19 @@ final class MGS_Chat_Funnels {
         $config['sms_name_label'] = sanitize_text_field(wp_unslash($_POST['sms_name_label'] ?? 'Nome'));
         $config['sms_phone_label'] = sanitize_text_field(wp_unslash($_POST['sms_phone_label'] ?? 'Telefone'));
         $config['sms_submit_label'] = sanitize_text_field(wp_unslash($_POST['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →'));
+        $config['sms_optional'] = !empty($_POST['sms_optional']);
+        $config['sms_skip_label'] = sanitize_text_field(wp_unslash($_POST['sms_skip_label'] ?? 'Pular, quero ver as ofertas'));
+        $config['sms_consent_enabled'] = !empty($_POST['sms_consent_enabled']);
+        $config['sms_consent_default'] = !empty($_POST['sms_consent_default']);
+        $config['sms_consent_label'] = sanitize_text_field(wp_unslash($_POST['sms_consent_label'] ?? 'Aceito receber ofertas por SMS.'));
+        $config['sms_compact_gate'] = !empty($_POST['sms_compact_gate']);
+        $config['sms_form_intro'] = sanitize_text_field(wp_unslash($_POST['sms_form_intro'] ?? 'Preencha seus dados e veja as parcelas:'));
+        $gate_image = trim((string) wp_unslash($_POST['sms_gate_image'] ?? ''));
+        $config['sms_gate_image'] = $gate_image === 'default' ? 'default' : esc_url_raw($gate_image);
+        $config['sms_gate_image_alt'] = sanitize_text_field(wp_unslash($_POST['sms_gate_image_alt'] ?? 'Financiamento de veículos'));
+        $config['geo_enabled'] = !empty($_POST['geo_enabled']);
+        $config['geo_fallback_text'] = sanitize_text_field(wp_unslash($_POST['geo_fallback_text'] ?? 'Analisando ofertas disponíveis na sua região'));
+        $config['geo_prefix_text'] = sanitize_text_field(wp_unslash($_POST['geo_prefix_text'] ?? 'Analisando ofertas de veículos em'));
         if ($config['sms_enabled'] && !MGS_Chat_SMS::manager_is_configured($config['sms_manager_code'])) {
             return array('type' => 'error', 'message' => 'Configure a URL do gestor no menu SMS antes de ativar a captura neste chat.');
         }
@@ -782,6 +874,7 @@ final class MGS_Chat_Funnels {
         $config['gate'] = array(
             'enabled' => !empty($_POST['gate_enabled']),
             'questions' => $gate_questions,
+            'skip_loading' => !empty($_POST['gate_skip_loading']),
             'loading_text' => sanitize_text_field(wp_unslash($_POST['gate_loading_text'] ?? '')),
             'loading_ms' => max(200, intval($_POST['gate_loading_ms'] ?? 1800)),
             'final_icon' => sanitize_text_field(wp_unslash($_POST['gate_final_icon'] ?? '💬')),
@@ -913,6 +1006,18 @@ final class MGS_Chat_Funnels {
         $this->field_text('Label do campo Nome', 'sms_name_label', $config['sms_name_label'] ?? 'Nome', 'Texto mostrado acima do campo de nome.');
         $this->field_text('Label do campo Telefone', 'sms_phone_label', $config['sms_phone_label'] ?? 'Telefone', 'Texto mostrado acima do campo de telefone.');
         $this->field_text('Texto do botão de envio', 'sms_submit_label', $config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →', 'Depois do envio bem-sucedido, o fluxo atual de anúncio e chat continua normalmente.');
+        $this->field_checkbox('Permitir pular nome e telefone', 'sms_optional', !empty($config['sms_optional']), 'Mostra um botão secundário que continua sem criar lead nem enviar SMS.');
+        $this->field_text('Texto do botão Pular', 'sms_skip_label', $config['sms_skip_label'] ?? 'Pular, quero ver as ofertas', 'Usado somente quando a captura é opcional.');
+        $this->field_checkbox('Mostrar consentimento para SMS', 'sms_consent_enabled', !empty($config['sms_consent_enabled']), 'Exibe o consentimento dentro do formulário.');
+        $this->field_checkbox('Consentimento selecionado por padrão', 'sms_consent_default', !empty($config['sms_consent_default']), 'O visitante ainda pode desmarcar e continuar sem cadastrar o lead.');
+        $this->field_text('Texto do consentimento', 'sms_consent_label', $config['sms_consent_label'] ?? 'Aceito receber ofertas por SMS.', 'Texto ao lado do checkbox.');
+        $this->field_checkbox('Formulário compacto, sem “Oferta encontrada”', 'sms_compact_gate', !empty($config['sms_compact_gate']), 'Vai direto da pergunta inicial para nome/telefone.');
+        $this->field_text('Introdução do formulário', 'sms_form_intro', $config['sms_form_intro'] ?? 'Preencha seus dados e veja as parcelas:', 'Linha acima de Nome e Telefone.');
+        $this->field_text('Imagem do gate/formulário', 'sms_gate_image', $config['sms_gate_image'] ?? '', 'Use default para a imagem padrão do plugin ou informe uma URL HTTPS.');
+        $this->field_text('Texto alternativo da imagem', 'sms_gate_image_alt', $config['sms_gate_image_alt'] ?? 'Financiamento de veículos', 'Descrição acessível da imagem.');
+        $this->field_checkbox('Mostrar região do visitante', 'geo_enabled', !empty($config['geo_enabled']), 'Consulta cidade/região pelo IP; em falha, mantém o texto genérico.');
+        $this->field_text('Texto quando a região não carregar', 'geo_fallback_text', $config['geo_fallback_text'] ?? 'Analisando ofertas disponíveis na sua região', 'Fallback sem inventar cidade ou quantidade.');
+        $this->field_text('Prefixo antes da cidade', 'geo_prefix_text', $config['geo_prefix_text'] ?? 'Analisando ofertas de veículos em', 'Ex.: Analisando ofertas de veículos em Miami, FL.');
         echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>URLs por gestor:</strong> cadastre ou altere em <a href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '-sms')) . '">MGS Chats → SMS</a>. Nenhuma URL é exposta na página pública.</div>';
         echo '</div></section>';
 
@@ -978,6 +1083,7 @@ final class MGS_Chat_Funnels {
         $gate_question_2_enabled = !isset($gate_questions_editor[1]['enabled']) || !empty($gate_questions_editor[1]['enabled']);
         echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Pergunta 1 é obrigatória</strong> e sempre aparece para iniciar o gate. A pergunta 2 pode ser ligada/desligada abaixo.</div>';
         $this->field_checkbox('Mostrar pergunta 2 do gate', 'gate_question_2_enabled', $gate_question_2_enabled, 'Desmarque para pular a segunda pergunta e ir direto para o loading/oferta encontrada.');
+        $this->field_checkbox('Pular loading do gate', 'gate_skip_loading', !empty($gate['skip_loading']), 'Vai direto da última pergunta para o formulário/CTA.');
         $this->field_text('Texto de loading', 'gate_loading_text', $gate['loading_text'] ?? '', 'Ex: Buscando a melhor oferta...');
         $this->field_number('Tempo de loading (ms)', 'gate_loading_ms', $gate['loading_ms'] ?? 1800, 'Tempo antes do CTA.');
         $this->field_text('Ícone final', 'gate_final_icon', $gate['final_icon'] ?? '💬', 'Emoji ou texto curto.');
@@ -1358,6 +1464,18 @@ final class MGS_Chat_Funnels {
             'sms_name_label' => 'Nome',
             'sms_phone_label' => 'Telefone',
             'sms_submit_label' => 'TRANSFERIR PARA ESPECIALISTA →',
+            'sms_optional' => false,
+            'sms_skip_label' => 'Pular, quero ver as ofertas',
+            'sms_consent_enabled' => false,
+            'sms_consent_default' => false,
+            'sms_consent_label' => 'Aceito receber ofertas por SMS.',
+            'sms_compact_gate' => false,
+            'sms_form_intro' => 'Preencha seus dados e veja as parcelas:',
+            'sms_gate_image' => '',
+            'sms_gate_image_alt' => 'Financiamento de veículos',
+            'geo_enabled' => false,
+            'geo_fallback_text' => 'Analisando ofertas disponíveis na sua região',
+            'geo_prefix_text' => 'Analisando ofertas de veículos em',
             'standalone' => false,
             'tracking_mode' => 'gtm',
             'gtm_container_id' => '',
