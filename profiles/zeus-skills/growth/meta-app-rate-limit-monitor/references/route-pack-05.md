@@ -5,10 +5,11 @@ Active Hermes cron job:
 ```text
 Job name       meta-app-roles-watch
 Job ID         0cc7ed1e587e
-Schedule       4 8-23 * * *  (uma vez por hora, das 08:04 às 23:04 ET; minuto isolado após auditoria de colisões)
+Schedule       */3 0,8-23 * * *  (a cada 3 minutos, das 08:00 até 00:59 ET; sem execução entre 01:00 e 07:59)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
+Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
 Scope          B001-B010 + B005-2 role/admin monitoring only. B012 is excluded from this script’s /roles alert path and handled by b012-dtr-link-watch.
 Channels       B001 1521251196294135858; B002 1521251220130496723; B003 1521251246860931223; B004 1521251334496456815; B005-2 1521251961662341160; B006-2 1521252068319297666; B007 1520510823426949313; B008 1521252172929564744; B009 1521252284623884288; B010 1521252369331916902
 ```
@@ -22,11 +23,11 @@ Active B012 Hermes cron job:
 ```text
 Job name       b012-dtr-link-watch
 Job ID         498fb0d95e10
-Schedule       24 8-23 * * *  (uma vez por hora, das 08:24 às 23:24 ET; 20 minutos após meta-app-roles-watch e sem colisão de início no inventário atual)
+Schedule       2-59/9 0,8-23 * * *  (aprox. a cada 9 minutos, offset de 2 minutos para não iniciar junto com o Meta; das 08:00 até 00:59 ET)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/b012-dtr-link-watch.sh
 Lock           /var/lock/b012-dtr-link-watch.lock (skip if previous run still active)
-Runtime        Last measured ~3m35s for 28 targets; manter o stagger de 20 minutos e o `flock` não bloqueante.
+Runtime        Último observado ~6m; manter o `flock` não bloqueante para impedir sobreposição.
 ```
 
 Important UX correction: if Rodolfo explicitly says **"manda um alerta no canal Bxxx"** or **"ativa o cron e faz ele mandar um alerta"** for B001–B010/B005-2, use `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`. This forces the same polished 3-message app-roles layout with the current users list: (1) native embed `Meta APP - Bxxx`, (2) `👥 USUÁRIOS ATUAIS` code block, (3) removidos/adicionados/acumulados code block. It uses live Meta Graph + live sheet reconciliation and must not display cached state deltas: forced live alerts show `REMOVIDOS AGORA`/`ADICIONADOS AGORA` as empty unless the same fresh run proves otherwise, and `REMOVIDOS ACUMULADOS` must come from the live sheet X/reconciliation layer, not `state.cumulative_removed`. It does not enable snapshot mode, does not forge a delta, and does not corrupt state. Do **not** hand-build a generic embed. A force-live run must suppress the automatic state-delta alert for that same app/run; otherwise one operator request can emit both alert families, duplicate the message and burst the Discord rate limit. Direct Discord posts must catch HTTP 429, honor `retry_after`/rate-limit headers, and retry with a bounded attempt count before failing closed. Split tables may make the final layout exceed three physical messages; delivery completeness and readback are mandatory.
@@ -49,14 +50,14 @@ Hard guard implemented in `meta-app-roles-watch.sh`: `MGS_META_APP_ROLES_FORCE_S
 
 The production monitor cadence is:
 
-> Correção canônica de Rodolfo em 2026-07-10: após a auditoria do limite compartilhado do 1Password, os monitores completos passaram a rodar uma vez por hora apenas entre 08h e 23h ET. O stagger oficial é Meta em `:04` e B012 em `:24`; Honcho fica em `:54` nas quatro janelas diárias. Esses minutos foram escolhidos após auditoria de colisões de início nos crons root e Hermes. Não restaurar a cadência antiga de 5/~8 minutos nem remover o stagger sem autorização explícita e novo orçamento de requests validado.
+> Supersessão explícita de Rodolfo em 2026-07-31: a cadência horária de 2026-07-10 foi substituída. B001-B010 agora executam a cada 3 minutos entre 08:00 e 00:59 ET, com stagger interno padrão de 4 segundos entre apps. B012 executa aproximadamente a cada 9 minutos na mesma janela, com offset de 2 minutos e `flock` não bloqueante. Não executar entre 01:00 e 07:59 ET. A regra anterior de Meta em `:04` e B012 em `:24` fica preservada apenas como histórico supersedido.
 
 ```text
 Failure mode                         Alert SLA
 -----------------------------------  -----------------------------------------
-Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo horário entre 08:04 e 23:04 ET
-Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo horário entre 08:04 e 23:04 ET
-B012 DTR/ChatPion link removed       próximo ciclo horário entre 08:24 e 23:24 ET
+Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo de 3 minutos entre 08:00 e 00:59 ET
+Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo de 3 minutos entre 08:00 e 00:59 ET
+B012 DTR/ChatPion link removed       próximo ciclo aproximado de 9 minutos entre 08:00 e 00:59 ET
 X-App-Usage >=70%                    alert on severity increase
 X-App-Usage >=85%                    risk alert; for B007/Openzed act fast
 X-App-Usage >=95%                    critical alert; repeat after cooldown
