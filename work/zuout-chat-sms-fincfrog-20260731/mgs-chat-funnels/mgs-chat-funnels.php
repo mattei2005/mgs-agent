@@ -482,7 +482,7 @@ final class MGS_Chat_Funnels {
             if ($label === '' || $url === '') {
                 continue;
             }
-            $items[] = '<a href="' . $url . '">' . esc_html($label) . '</a>';
+            $items[] = '<a href="' . $url . '" target="_blank" rel="noopener noreferrer">' . esc_html($label) . '</a>';
         }
         if (empty($items)) {
             return '';

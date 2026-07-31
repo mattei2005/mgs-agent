@@ -200,6 +200,11 @@ final class MGS_Chat_SMS {
             $config['sms_name_label'] = sanitize_text_field( $config['sms_name_label'] ?? 'Nome' );
             $config['sms_phone_label'] = sanitize_text_field( $config['sms_phone_label'] ?? 'Telefone' );
             $config['sms_submit_label'] = sanitize_text_field( $config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →' );
+            $config['sms_optional'] = ! empty( $config['sms_optional'] );
+            $config['sms_skip_label'] = sanitize_text_field( $config['sms_skip_label'] ?? 'Pular, quero ver as ofertas' );
+            $config['sms_consent_enabled'] = ! empty( $config['sms_consent_enabled'] );
+            $config['sms_consent_default'] = ! empty( $config['sms_consent_default'] );
+            $config['sms_consent_label'] = sanitize_text_field( $config['sms_consent_label'] ?? 'Aceito receber ofertas por SMS.' );
         }
         unset( $config['sms_manager_code'] );
         return $config;
@@ -209,14 +214,29 @@ final class MGS_Chat_SMS {
         if ( empty( $config['sms_enabled'] ) ) return '';
         $name_label = sanitize_text_field( $config['sms_name_label'] ?? 'Nome' );
         $phone_label = sanitize_text_field( $config['sms_phone_label'] ?? 'Telefone' );
+        $consent = '';
+        if ( ! empty( $config['sms_consent_enabled'] ) ) {
+            $checked = ! empty( $config['sms_consent_default'] ) ? ' checked' : '';
+            $consent_label = sanitize_text_field( $config['sms_consent_label'] ?? 'Aceito receber ofertas por SMS.' );
+            $consent = '<label class="mgs-cf-sms-consent" for="mgs-cf-sms-consent">'
+                . '<input id="mgs-cf-sms-consent" type="checkbox"' . $checked . '>'
+                . '<span>' . esc_html( $consent_label ) . '</span></label>';
+        }
         return '<div class="mgs-cf-sms-form" id="mgs-cf-sms-form">'
             . '<label for="mgs-cf-sms-name">' . esc_html( $name_label ) . '</label>'
             . '<input id="mgs-cf-sms-name" name="name" type="text" autocomplete="name" maxlength="200" placeholder="Digite seu nome" required>'
             . '<label for="mgs-cf-sms-phone">' . esc_html( $phone_label ) . '</label>'
             . '<input id="mgs-cf-sms-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="20" placeholder="(11) 99999-9999" required>'
+            . $consent
             . '<input id="mgs-cf-sms-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">'
             . '<p id="mgs-cf-sms-error" class="mgs-cf-sms-error" role="alert" aria-live="polite"></p>'
             . '</div>';
+    }
+
+    public static function skip_html( $config ) {
+        if ( empty( $config['sms_enabled'] ) || empty( $config['sms_optional'] ) ) return '';
+        $label = sanitize_text_field( $config['sms_skip_label'] ?? 'Pular, quero ver as ofertas' );
+        return '<button id="mgs-cf-sms-skip" type="button">' . esc_html( $label ) . '</button>';
     }
 
     public static function template_js_config( $config ) {
@@ -227,6 +247,8 @@ final class MGS_Chat_SMS {
             'chatId' => $config['id'] ?? '',
             'route' => $config['route'] ?? '',
             'submitLabel' => $public['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →',
+            'optional' => ! empty( $public['sms_optional'] ),
+            'consentEnabled' => ! empty( $public['sms_consent_enabled'] ),
         );
         return wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP );
     }

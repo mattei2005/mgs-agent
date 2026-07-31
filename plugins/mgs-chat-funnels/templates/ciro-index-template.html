@@ -532,6 +532,7 @@
       const questions = {{QUESTIONS_JS}};
       const rewardedButtonClass = {{REWARDED_BUTTON_CLASS_JS}};
       const smsConfig = {{SMS_CONFIG_JS}};
+      const gateConfig = {{GATE_CONFIG_JS}};
       const smsFormStartedAt = Date.now();
       let smsLeadCaptured = false;
       let smsLeadSubmitting = false;
@@ -554,13 +555,54 @@
         return "(" + digits.slice(0, 2) + ") " + digits.slice(2, 7) + "-" + digits.slice(7);
       }
 
+      function continueSmsWithoutLead() {
+        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
+        smsLeadCaptured = true;
+        smsError("");
+        const ctaButton = document.getElementById("aq-cta");
+        if (!ctaButton) {
+          window.mgsCloseQuizAfterReward();
+          return;
+        }
+        applyRewardedButtonClass(ctaButton);
+        ctaButton.click();
+      }
+
+      function loadGeoIndicator() {
+        if (!gateConfig.geoEnabled) return;
+        const geoText = document.getElementById("mgs-cf-geo-text");
+        if (!geoText) return;
+        try {
+          fetch("https://ipapi.co/json/", { mode: "cors" })
+            .then((response) => response.ok ? response.json() : null)
+            .then((data) => {
+              if (!data) return;
+              const city = String(data.city || "").trim();
+              const region = String(data.region_code || data.region || "").trim();
+              const location = [city, region].filter(Boolean).join(", ");
+              if (location) geoText.textContent = gateConfig.geoPrefix + " " + location;
+            })
+            .catch(() => {});
+        } catch (error) {}
+      }
+
       function submitSmsLead(ctaButton) {
         if (!smsConfig.enabled || smsLeadCaptured || smsLeadSubmitting) return;
         const nameInput = document.getElementById("mgs-cf-sms-name");
         const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        const consentInput = document.getElementById("mgs-cf-sms-consent");
         const websiteInput = document.getElementById("mgs-cf-sms-website");
         const name = nameInput ? nameInput.value.trim() : "";
         const phone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+        const consent = !smsConfig.consentEnabled || !consentInput || consentInput.checked;
+        if (!consent && smsConfig.optional) {
+          continueSmsWithoutLead();
+          return;
+        }
+        if (!consent) {
+          smsError("Selecione o consentimento para continuar.");
+          return;
+        }
         if (name.length < 2) {
           smsError("Digite seu nome.");
           if (nameInput) nameInput.focus();
@@ -578,6 +620,7 @@
         const params = new URLSearchParams(window.location.search);
         const extra = {};
         params.forEach((value, key) => { extra[key] = value; });
+        extra.sms_consent = "yes";
         const payload = {
           chat_id: smsConfig.chatId,
           route: smsConfig.route,
@@ -999,6 +1042,19 @@
       let quizStepLock = false;
       const gateQuestionCount = {{GATE_QUESTION_COUNT_JS}};
 
+      function showGateFinal() {
+        const loadingSlide = document.querySelector(".aq-loading");
+        if (loadingSlide) loadingSlide.style.display = "none";
+        const finalSlide = document.querySelector(".aq-final");
+        if (finalSlide) finalSlide.style.display = "block";
+        const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        if (phoneInput && !phoneInput.dataset.mgsMaskBound) {
+          phoneInput.dataset.mgsMaskBound = "1";
+          phoneInput.addEventListener("input", function () { this.value = formatSmsPhone(this.value); });
+        }
+        updateQuizProgress();
+      }
+
       function nextQuizStep() {
         const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
         if (currentSlide) currentSlide.style.display = "none";
@@ -1010,19 +1066,11 @@
           updateQuizProgress();
         } else {
           const loadingSlide = document.querySelector(".aq-loading");
-          if (loadingSlide) {
+          if (gateConfig.skipLoading) {
+            showGateFinal();
+          } else if (loadingSlide) {
             loadingSlide.style.display = "block";
-            setTimeout(function () {
-              loadingSlide.style.display = "none";
-              const finalSlide = document.querySelector(".aq-final");
-              if (finalSlide) finalSlide.style.display = "block";
-              const phoneInput = document.getElementById("mgs-cf-sms-phone");
-              if (phoneInput && !phoneInput.dataset.mgsMaskBound) {
-                phoneInput.dataset.mgsMaskBound = "1";
-                phoneInput.addEventListener("input", function () { this.value = formatSmsPhone(this.value); });
-              }
-              updateQuizProgress();
-            }, 2000);
+            setTimeout(showGateFinal, Math.max(0, gateConfig.loadingMs || 0));
           }
         }
       }
@@ -1034,6 +1082,7 @@
           lockScroll();
           updateQuizProgress();
         }
+        loadGeoIndicator();
 
         if (!rewardedButtonClass) {
           {{JBF_REWARDED_PRELOAD_JS}}
@@ -1042,6 +1091,13 @@
 
       document.addEventListener("click", function (e) {
         if (isQuizClosed) return;
+
+        const skipButton = e.target && e.target.closest ? e.target.closest("#mgs-cf-sms-skip") : null;
+        if (skipButton) {
+          e.preventDefault();
+          continueSmsWithoutLead();
+          return;
+        }
 
         const answerButton = e.target && e.target.closest ? e.target.closest(".aq-answer") : null;
         if (answerButton) {
@@ -1089,6 +1145,8 @@
             <div id="quiz-progress-fill" style="width:20%; height:100%; background:#075e54; border-radius:2px; transition:width 0.5s ease;"></div>
           </div>
         </div>
+        {{GEO_INDICATOR_HTML}}
+        {{GATE_IMAGE_HTML}}
         <div class="aq-slides">
           {{GATE_SLIDES_HTML}}
           <div class="aq-loading" style="display:none; text-align:center;">
@@ -1100,15 +1158,15 @@
             <h2 style="color:#333; margin:0; font-size:20px;">🔍 Buscando a melhor oferta para você...</h2>
           </div>
           <div class="aq-final" style="display:none; text-align:center;">
-            <div style="font-size:52px; margin-bottom:10px;">🚗</div>
-            <p style="font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2;">Oferta encontrada!</p>
-            <p style="font-size:16px; color:#333; margin-bottom:25px; font-weight:500;">Um especialista foi identificado para te atender agora.</p>
+            {{GATE_FINAL_HEADER_HTML}}
             {{SMS_FORM_HTML}}
             <{{REWARDED_CTA_TAG}} id="aq-cta" class="{{REWARDED_BUTTON_CLASS}}" {{REWARDED_CTA_ATTRS}} style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">{{SMS_CTA_LABEL}}</{{REWARDED_CTA_TAG}}>
-            <br/><br/>
+            {{SMS_SKIP_HTML}}
+            <br/>
             <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
           </div>
         </div>
+        {{LEGAL_FOOTER_HTML}}
       </div>
     </div>
     <style>
@@ -1116,14 +1174,28 @@
       @keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
       #aq-cta:hover { background:#333333 !important; transform:translateY(-2px); }
       #aq-cta:disabled { opacity:.65; cursor:wait; transform:none !important; }
-      .mgs-cf-sms-form { display:grid; gap:7px; margin:0 0 16px; text-align:left; }
+      #mgs-cf-geo-indicator { margin:-14px 0 10px; color:#667085; font-size:12px; font-weight:600; text-align:center; line-height:1.35; }
+      .mgs-cf-gate-image { display:flex; justify-content:center; align-items:center; min-height:92px; margin:0 0 12px; }
+      .mgs-cf-gate-image img { display:block; width:auto; max-width:100%; height:auto; max-height:130px; object-fit:contain; }
+      .mgs-cf-final-icon { font-size:52px; margin-bottom:10px; }
+      .mgs-cf-final-title { font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2; }
+      .mgs-cf-final-subtitle { font-size:16px; color:#333; margin-bottom:25px; font-weight:500; }
+      .mgs-cf-sms-intro { margin:0 0 14px; color:#344054; font-size:15px; font-weight:700; text-align:left; }
+      .mgs-cf-sms-form { display:grid; gap:7px; margin:0 0 12px; text-align:left; }
       .mgs-cf-sms-form label { color:#344054; font-size:13px; font-weight:700; }
-      .mgs-cf-sms-form input { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d0d5dd; border-radius:10px; background:#fff; color:#101828; font:500 16px/1.3 'Roboto',Arial,sans-serif; box-sizing:border-box; outline:none; }
-      .mgs-cf-sms-form input:focus { border-color:#075e54; box-shadow:0 0 0 3px rgba(7,94,84,.12); }
+      .mgs-cf-sms-form input:not([type="checkbox"]) { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d0d5dd; border-radius:10px; background:#fff; color:#101828; font:500 16px/1.3 'Roboto',Arial,sans-serif; box-sizing:border-box; outline:none; }
+      .mgs-cf-sms-form input:not([type="checkbox"]):focus { border-color:#075e54; box-shadow:0 0 0 3px rgba(7,94,84,.12); }
+      .mgs-cf-sms-consent { display:flex; align-items:flex-start; gap:8px; margin-top:4px; cursor:pointer; font-weight:500 !important; line-height:1.35; }
+      .mgs-cf-sms-consent input { width:16px; height:16px; min-width:16px; margin:1px 0 0; accent-color:#075e54; }
       #mgs-cf-sms-website { position:absolute !important; left:-9999px !important; width:1px !important; height:1px !important; opacity:0 !important; }
       .mgs-cf-sms-error { min-height:18px; margin:2px 0 0; color:#b42318; font-size:13px; font-weight:600; text-align:left; }
+      #mgs-cf-sms-skip { display:block; width:100%; margin:9px 0 0; padding:9px 12px; border:0; background:transparent; color:#667085; box-shadow:none; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:2px; cursor:pointer; }
+      #mgs-cf-sms-skip:hover { color:#344054; background:transparent; transform:none; }
+      .mgs-cf-legal-footer { display:flex; justify-content:center; flex-wrap:wrap; gap:5px; margin:14px 0 -24px; color:#98a2b3; font-size:10px; line-height:1.3; }
+      .mgs-cf-legal-footer a { color:#98a2b3; text-decoration:none; opacity:.78; }
+      .mgs-cf-legal-footer a:hover { text-decoration:underline; opacity:1; }
       .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
-      @media(max-width:480px) { #quiz-container > div { padding:20px 15px 30px !important; } .question { font-size:18px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:10px 25px !important; } }
+      @media(max-width:480px) { #quiz-container > div { padding:14px 15px 28px !important; } #mgs-cf-geo-indicator { margin:-8px 0 7px; } .mgs-cf-gate-image { min-height:72px; margin-bottom:8px; } .mgs-cf-gate-image img { max-height:105px; } .question { font-size:18px !important; margin-bottom:16px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:12px 20px !important; } .mgs-cf-legal-footer { margin-bottom:-18px; } }
     </style>
 {{WP_FOOTER}}
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
