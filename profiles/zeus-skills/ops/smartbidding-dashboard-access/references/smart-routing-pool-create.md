@@ -78,6 +78,33 @@ Fluxo seguro aplicado:
 
 Se houver falha parcial, reconsultar o estado real antes de repetir. O executor deve ser idempotente: pool existente integralmente correto é preservado; divergência aborta. Não excluir pools para rollback sem a confirmação exigida para deleção.
 
+## Redistribuição customizada com duas URLs
+
+Quando Rodolfo fornecer duas URLs-alvo e pedir dois itens por pool sem uma nova planilha, usar como fonte as identidades `route + utm_content` do readback live atual; não recriar nomes ou conteúdos por inferência.
+
+Ordem semântica confirmada:
+
+- Drip com 30 rotas: `m0`, `nm`, depois `m1–m28`;
+- Broadcast/MCT com 23 rotas: numeração `001–023`;
+- primeira rota de cada par recebe a primeira URL informada;
+- segunda rota recebe a segunda URL;
+- se o total for ímpar, a última rota isolada recebe a primeira URL.
+
+Fluxo seguro:
+
+1. unir todas as identidades dos pools atuais da família e exigir sequência completa, unicidade e campos não vazios;
+2. derivar as duas `jbf_operation` ao vivo separadamente por source (`FACEBOOK` e `MCT`);
+3. criar primeiro os pools de sufixos ainda ausentes;
+4. atualizar os pools existentes preservando IDs e nomes;
+5. validar a união final sem duplicatas, somente as duas URLs, operações não vazias e preservação de pools não relacionados.
+
+Caso validado Fincgriffin US-CAR-EN:
+
+- nomes Drip `fincg-us-car-en-drip-NNN`, 15 pools de duas rotas;
+- nomes MCT `fincg-us-car-en-mct-NNN`, 12 pools com distribuição `2×11 + 1`;
+- URLs-alvo Lightstream primeiro e PenFed Auto Loan segundo;
+- seis pools Drip e três MCT existentes atualizados; dezoito pools novos criados, sem deleção.
+
 ## Contrato live da SB
 
 O bundle da tela define:
