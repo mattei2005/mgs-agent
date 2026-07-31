@@ -560,17 +560,27 @@
         return "(" + digits.slice(0, 2) + ") " + digits.slice(2, 7) + "-" + digits.slice(7);
       }
 
-      function continueSmsWithoutLead() {
-        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
-        smsLeadCaptured = true;
-        smsError("");
-        const ctaButton = document.getElementById("aq-cta");
+      function replaySmsCta(ctaButton) {
         if (!ctaButton) {
           window.mgsCloseQuizAfterReward();
           return;
         }
         applyRewardedButtonClass(ctaButton);
+        if (ctaButton.classList.contains("av-rewarded")) {
+          window.mgsRewardedClickInProgress = true;
+          ctaButton.onclick = function () {
+            window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+            return false;
+          };
+        }
         ctaButton.click();
+      }
+
+      function continueSmsWithoutLead() {
+        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
+        smsLeadCaptured = true;
+        smsError("");
+        replaySmsCta(document.getElementById("aq-cta"));
       }
 
       function loadGeoIndicator() {
@@ -654,7 +664,7 @@
             smsLeadSubmitting = false;
             ctaButton.disabled = false;
             ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
-            ctaButton.click();
+            replaySmsCta(ctaButton);
           })
           .catch((error) => {
             smsLeadSubmitting = false;
