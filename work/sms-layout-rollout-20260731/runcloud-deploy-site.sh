@@ -21,7 +21,19 @@ LEGACY="$PLUGIN/configs/car-br-01.json"
 BACKUP_ROOT="/var/backups/mgs-chat-funnels-sms-layout/$RUN_ID/$SITE"
 STAGE="/tmp/mgs-chat-045-$SITE-$RUN_ID"
 DB_TMP="/tmp/mgs-chat-$SITE-$RUN_ID.sql"
+DEPLOY_STARTED=0
 cleanup(){ sudo rm -rf "$STAGE" "$DB_TMP"; }
+rollback_on_error(){
+  local rc=$?
+  if [ "$DEPLOY_STARTED" = "1" ] && [ -d "$BACKUP_ROOT/mgs-chat-funnels.pre" ]; then
+    sudo rm -rf "$PLUGIN"
+    sudo cp -a "$BACKUP_ROOT/mgs-chat-funnels.pre" "$PLUGIN"
+    sudo chown -R "$OWNER:$OWNER" "$PLUGIN"
+    echo "ROLLBACK|$SITE|plugin_and_configs=restored" >&2
+  fi
+  exit "$rc"
+}
+trap rollback_on_error ERR
 trap cleanup EXIT
 [ -d "$PLUGIN" ] && [ -f "$SMS" ] && [ -f "$LEGACY" ]
 [ -f "$ZIP" ] && [ -f "$MIGRATOR" ]
@@ -34,6 +46,7 @@ assert names and not any('/configs/' in n for n in names)
 assert 'mgs-chat-funnels/mgs-chat-funnels.php' in names
 PY
 sudo mkdir -p "$BACKUP_ROOT"
+[ ! -e "$BACKUP_ROOT/mgs-chat-funnels.pre" ]
 sudo cp -a "$PLUGIN" "$BACKUP_ROOT/mgs-chat-funnels.pre"
 sudo -u "$OWNER" wp --path="$APP" db export "$DB_TMP" --quiet
 sudo mv "$DB_TMP" "$BACKUP_ROOT/database.pre.sql"
@@ -45,6 +58,7 @@ sudo rm -rf "$STAGE" && sudo mkdir -p "$STAGE"
 sudo unzip -q "$ZIP" -d "$STAGE"
 sudo cp -a "$STAGE/mgs-chat-funnels/." "$PLUGIN/"
 sudo chown -R "$OWNER:$OWNER" "$PLUGIN"
+DEPLOY_STARTED=1
 if [ "$MIGRATE_LAYOUT" = "1" ]; then
   sudo -u "$OWNER" python3 "$MIGRATOR" "$SMS" "$SITE" > "$BACKUP_ROOT/migration.json"
 else
