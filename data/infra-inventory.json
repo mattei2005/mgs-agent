@@ -1058,14 +1058,14 @@
       "type": "wordpress_plugin",
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
-      "version": "0.4.2",
-      "status": "deployed_active_sao_paulo_timezone_8_sites",
-      "files_count": 8,
-      "size_bytes": 200923,
-      "sha256_manifest": "76b16dcb801e24656502cb23cc0719708a94e821fba4f1d01e79c925c96215fb",
-      "package_path": "/root/mgs-agent/work/chat-timezone-rollout-20260717/mgs-chat-funnels-0.4.2-code-only.tar.gz",
-      "package_sha256": "abd977bb4352d1a50d5645f945c82a76f9ab5f7addf1424ea14bfad3fedec92d",
-      "modified_at": "2026-07-17T03:37:30.419082+00:00",
+      "version": "0.4.3",
+      "status": "canonical_0.4.3_zuout_sms_canary_active_other_7_sites_0.4.2",
+      "files_count": 9,
+      "size_bytes": 650597,
+      "sha256_manifest": "36006a3646162a735b21a903728b097df09f3215b9d426402f38155bb899ce2e",
+      "package_path": "/root/mgs-agent/work/zuout-chat-sms-fincfrog-20260731/mgs-chat-funnels-0.4.3-code-only-final.zip",
+      "package_sha256": "4968d1082b1db26d2a5a5281087dbe387c82ee22f52bdc75b735d6e75320c3f0",
+      "modified_at": "2026-07-31T18:03:42+00:00",
       "validations": [
         "local PHP lint, Node syntax and JSON validation OK",
         "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
@@ -1077,7 +1077,11 @@
         "Timezone v0.4.2: PHP lint and boundary helper tests OK; UTC storage preserved; filtering/display/CSV use America/Sao_Paulo.",
         "Final runtime readback 8/8: version 0.4.2, exact canonical hashes on 6 RunCloud and exact inline hash on 2 Bitnami; 16/16 legacy+SMS routes HTTP 200.",
         "Mocked transactional smoke 8/8 matched assigned G001-G006, intercepted outbound HTTP, and restored the original lead row count; no real SMS was sent.",
-        "Bitnami inline config-path regression fixed and validated: plugin-root __DIR__/configs lookup."
+        "Bitnami inline config-path regression fixed and validated: plugin-root __DIR__/configs lookup.",
+        "Zuout v0.4.3 canary: price-range gate, IP city/region, vehicle image, no visible loading, prechecked consent, optional skip and discreet legal footer validated in browser.",
+        "Skip and unchecked-consent paths created no REST lead request, registered ActView zout_rewarded and continued to the chat; frontend mocked-success path preserved UTMs/fbclid and sms_consent=yes.",
+        "ActView runtime validated: one scr.actview.net/zuout.js, zero JBF, rewarded CTA class-only anchor after capture/skip, zout_top_wrapper/zout_top inserted, no PubGuru tag on Zuout, offer cards have no av-rewarded class.",
+        "Transactional backend smoke intercepted outbound SMS, produced HTTP 200 ok:G002 with lead count 0→1→0 and no real SMS; legacy /chat/car/br1 config hash remained unchanged."
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1125,16 +1129,27 @@
         "/var/tmp/mgs-production-backups/zuout.com/mgs-chat-funnels-timezone/20260717T032635Z",
         "/var/tmp/mgs-production-backups/zytiva.com/mgs-chat-funnels-timezone/20260717T032639Z",
         "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033002Z/openzed.com",
-        "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com"
+        "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com",
+        "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609"
       ],
-      "source_report": "REPORT-INFRA timezone São Paulo rollout 2026-07-17",
-      "description": "CAR-BR legacy and SMS variants remain active on the same eight sites. v0.4.2 keeps UTC storage and applies America/Sao_Paulo to report filters, day grouping, display and CSV; configs/providers/manager map were preserved.",
+      "source_report": "REPORT-INFRA Zuout optional SMS/geo canary 2026-07-31",
+      "description": "Canonical v0.4.3 adds config-gated optional SMS capture, preselected visible consent, IP city/region social proof, vehicle image, direct gate-to-form transition, discreet legal footer and ActView-safe skip/replay. Deployed only to the Zuout CAR-BR SMS canary; the other seven sites remain on v0.4.2 pending approval.",
       "business_timezone": "America/Sao_Paulo",
       "utc_storage_preserved": true,
       "local_day_utc_example": {
         "local_date": "2026-07-15",
         "start_utc": "2026-07-15 03:00:00",
         "end_utc_exclusive": "2026-07-16 03:00:00"
+      },
+      "deployment_versions": {
+        "zuout.com": "0.4.3",
+        "zytiva.com": "0.4.2",
+        "openzed.com": "0.4.2",
+        "finance.topfeed.fun": "0.4.2",
+        "newsoun.com": "0.4.2",
+        "wantabrand.com": "0.4.2",
+        "cliquet.com": "0.4.2",
+        "eggbev.com": "0.4.2"
       }
     },
     {
@@ -1359,39 +1374,39 @@
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/mgs-chat-funnels.php",
       "type": "wordpress_plugin",
-      "sha256": "752d9951d2abc929fe6bbf284421732d7dd20ab1d99977cff817a0a163fd15ca",
-      "size_bytes": 74794,
+      "sha256": "a39f3c019f484e4cc648336d4ca8e2d4145e2a2d986cc780ca7be57b55acd0c9",
+      "size_bytes": 93230,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Plugin renders ActView rewarded CTA as class-only anchor with no href/data-av and inline callback.",
-      "validation": "PHP lint OK; public HTML has <a id=aq-cta class=av-rewarded role=button tabindex=0 onclick=window.mgsCloseQuizAfterReward...> with no href and no data-av-rewarded. Browser: CTA has no href/prophref, rewarded GAM request present, click keeps URL unchanged and closes quiz via callback when no rewarded fill is ready.",
-      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-rewarded-click-backup-20260709-194004",
-      "updated_at": "2026-07-09T19:45:53-04:00"
+      "purpose": "Zuout MGS Chat Funnels v0.4.3 plugin renderer and admin support for optional SMS/consent, geo, vehicle image, compact gate and legal footer while preserving ActView.",
+      "validation": "PHP lint OK; plugin active v0.4.3; public SMS and legacy routes HTTP 200; admin renderer contains all new controls; exact runtime hash read back.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/mgs-chat-funnels-pre-0.4.3.tgz",
+      "updated_at": "2026-07-31T14:03:42-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-car-br-config",
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01.json",
       "type": "wordpress_plugin_config",
-      "sha256": "d387a4dbb9ccf0bb0601f45e28c1868113757f095a804e4a61734eaf0c156452",
-      "size_bytes": 5268,
+      "sha256": "fb7a7d83afcc11485ed8bd394c7b40435b35ec5392620694b40da75c50f07bb4",
+      "size_bytes": 4783,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout CAR-BR-01 chat config set to ad_provider=actview and ActView script.",
-      "validation": "PHP lint OK; public and origin HTML contain scr.actview.net/zuout.js + zuout_top_wrapper/zuout_top and contain no assets.jbfdigital/window.wrapper_url on /chat/car/br1/. Browser click path created #zuout_top_wrapper with no console JS errors.",
-      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-backup-20260709-194554",
-      "updated_at": "2026-07-09T15:51:19-04:00"
+      "purpose": "Zuout CAR-BR-01 legacy chat config preserved unchanged while the SMS-only canary was revised.",
+      "validation": "Exact pre/post hash unchanged; /chat/car/br1 HTTP 200; original gate and offers preserved; ActView only, no JBF.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/mgs-chat-funnels-pre-0.4.3.tgz",
+      "updated_at": "2026-07-31T14:03:42-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-template",
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/templates/ciro-index-template.html",
       "type": "wordpress_plugin_template",
-      "sha256": "2adbfc95241cce4ad03623b7e67f411bf955f1adca49bb9371697569dbc0915d",
-      "size_bytes": 35297,
+      "sha256": "4f776ad587bbb83250e67d0837e7cb2cbfc1a5b0286bbb8e0b864018d3612d6e",
+      "size_bytes": 45578,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout chat funnel template. ActView rewarded CTA registers rewardedSlotClosed for zout_rewarded and closes underlying quiz after user closes Google rewarded overlay.",
-      "validation": "Public HTML contains rewardedSlotClosed listener, click-in-progress flag, class-only av-rewarded CTA without href/data-av. Browser: rewarded request present, callback function exists, no-fill click closes quiz and URL stays unchanged.",
-      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-rewarded-close-backup-20260709-200245",
-      "updated_at": "2026-07-09T20:04:48-04:00"
+      "purpose": "Config-gated chat template for Zuout v0.4.3, including optional SMS paths and isolated ActView rewarded/top-ad behavior.",
+      "validation": "Node syntax OK; skip and unchecked consent continue without REST submit; mocked lead success replays class-only ActView CTA; zout_top_wrapper/zout_top created; offer cards remain free of av-rewarded; zero browser JS errors.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/ciro-index-template-before-actview-top-20260731135755.html",
+      "updated_at": "2026-07-31T14:03:42-04:00"
     },
     {
       "id": "cliquet-mgs-chat-funnels-no-duplicate-wrapper-20260709",
@@ -3754,6 +3769,19 @@
       "purpose": "Rollback before B012 B010-style alert layout change.",
       "validation": "Script/state/skill captured before edit; source backup present.",
       "updated_at": "2026-07-30T16:30:10-04:00"
+    },
+    {
+      "id": "zuout-mgs-chat-funnels-car-br-sms-config-20260731",
+      "agent": "zeus",
+      "type": "wordpress_plugin_config",
+      "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01-sms.json",
+      "sha256": "7e5e4eeb6a15d023ad4b3a57438a5ed185a83900de61d8de71e45169ff134f53",
+      "size_bytes": 5628,
+      "source": "RunCloud Inc01 zuout.com",
+      "purpose": "ZUOUT CAR-BR-01-SMS canary: price-range gate, geo, default vehicle image, optional confirmed SMS capture, prechecked consent, skip, compact form and legal footer.",
+      "validation": "Config readback exact; G002 preserved; three own-domain P1 targets preserved; browser skip/unchecked paths sent no lead; mocked frontend and backend transaction passed; private SMS endpoint absent from public HTML.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/mgs-chat-funnels-pre-0.4.3.tgz",
+      "updated_at": "2026-07-31T14:03:42-04:00"
     }
   ],
   "profile_skill_references": [
