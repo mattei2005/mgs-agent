@@ -1,0 +1,193 @@
+{
+  "id": "CAR-BR-01-SMS",
+  "vertical": "car",
+  "country": "br",
+  "language": "pt-BR",
+  "route": "/chat-sms/car/br1",
+  "title": "chat sms cards financiamento de carros",
+  "theme": "whatsapp",
+  "mode": "cards",
+  "utm_passthrough": true,
+  "tags": [
+    "br",
+    "car",
+    "rec"
+  ],
+  "persona": {
+    "names": [
+      "Maria",
+      "João",
+      "Juliana",
+      "José",
+      "Fernanda",
+      "Carlos",
+      "Olivia",
+      "Lucas",
+      "Camilla",
+      "Pedro"
+    ],
+    "female_names": [
+      "Maria",
+      "Juliana",
+      "Fernanda",
+      "Olivia",
+      "Camilla"
+    ],
+    "male_names": [
+      "João",
+      "José",
+      "Carlos",
+      "Lucas",
+      "Pedro"
+    ],
+    "female_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"
+    ],
+    "male_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"
+    ],
+    "role": "Especialista em Financiamentos",
+    "status": "🟢 online agora"
+  },
+  "gate": {
+    "enabled": true,
+    "questions": [
+      {
+        "text": "🚗 Qual a faixa de preço do carro que você deseja?",
+        "answers": [
+          {
+            "label": "R$ 30.000 a R$ 45.000",
+            "value": "30000-45000"
+          },
+          {
+            "label": "R$ 45.000 a R$ 60.000",
+            "value": "45000-60000"
+          },
+          {
+            "label": "R$ 60.000 a R$ 80.000",
+            "value": "60000-80000"
+          },
+          {
+            "label": "Acima de R$ 80.000",
+            "value": "80000+"
+          }
+        ],
+        "enabled": true
+      }
+    ],
+    "loading_text": "",
+    "loading_ms": 0,
+    "final_icon": "🚗",
+    "final_title": "Oferta encontrada!",
+    "final_subtitle": "Um especialista foi identificado para te atender agora.",
+    "cta_label": "TRANSFERIR PARA ESPECIALISTA →",
+    "footer_note": "✅ Análise gratuita e sem compromisso",
+    "skip_loading": true
+  },
+  "chat": {
+    "intro": [
+      "Olá! Eu sou {botName}. 🚗",
+      "Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado!",
+      "Vamos encontrar a oferta ideal para você?"
+    ],
+    "start_answers": [
+      "✅ Vamos lá!",
+      "👀 Quero conhecer as opções"
+    ],
+    "questions": [
+      {
+        "text": "Quanto você pode pagar por mês?",
+        "answers": [
+          "Até R$ 500",
+          "Entre R$ 500 e R$ 1.000",
+          "Acima de R$ 1.000"
+        ]
+      },
+      {
+        "text": "Você tem preferência por algum tipo de veículo?",
+        "answers": [
+          "Sim, já tenho um modelo em mente",
+          "Não, estou aberto a sugestões",
+          "Ainda estou decidindo"
+        ]
+      }
+    ],
+    "pre_offer_messages": [
+      "🔍 Estou pesquisando as melhores condições para você..."
+    ],
+    "offer_headline": "🚗 Encontrei 3 opções que podem combinar com o seu perfil. | Toque na que mais faz sentido para você:"
+  },
+  "offers": [
+    {
+      "name": "🚗 Financiar sem entrada",
+      "subtitle": "Valores com parcelas",
+      "bank": "R$157,00 a R$299,00",
+      "image": "",
+      "logo": "",
+      "target": "https://wantabrand.com/p1-br-car-financiamento-veiculos-sem-entrada-online/"
+    },
+    {
+      "name": "💰 Ver ofertas disponíveis",
+      "subtitle": "Bancos com taxas reduzidas",
+      "bank": "e facilidade para baixo score.",
+      "image": "",
+      "logo": "",
+      "target": "https://wantabrand.com/p1-br-car-simulacao-de-financiamento/"
+    },
+    {
+      "name": "🚘 Financiamento com parcela baixa",
+      "subtitle": "Consulte se essa condição está disponível para você,",
+      "bank": "Oferta por tempo LIMITADO !",
+      "image": "",
+      "logo": "",
+      "target": "https://wantabrand.com/p1-br-car-financie-seu-carro-em-60-meses/"
+    }
+  ],
+  "ads_enabled": true,
+  "ad_company": "monetizemore",
+  "ad_domain": "",
+  "ad_provider": "m2",
+  "standalone": true,
+  "tracking_mode": "gtm",
+  "gtm_container_id": "GTM-T3NQPQQC",
+  "ga4_measurement_id": "G-BW81LRMB08",
+  "sms_enabled": true,
+  "sms_manager_code": "G001",
+  "sms_name_label": "Nome",
+  "sms_phone_label": "Telefone",
+  "sms_submit_label": "VER PARCELAS",
+  "sms_optional": true,
+  "sms_compact_gate": true,
+  "sms_form_intro": "Preencha seus dados e veja as parcelas:",
+  "sms_gate_image": "default",
+  "sms_gate_image_alt": "Carro disponível para financiamento",
+  "geo_enabled": true,
+  "geo_prefix_text": "Analisando ofertas de veículos em",
+  "geo_fallback_text": "Analisando ofertas disponíveis na sua região",
+  "sms_consent_enabled": true,
+  "sms_consent_default": true,
+  "sms_consent_label": "Aceito receber ofertas por SMS.",
+  "sms_skip_label": "Pular, quero ver as ofertas",
+  "legal_links": [
+    {
+      "label": "Privacidade",
+      "url": "https://wantabrand.com/politica-de-privacidad/"
+    },
+    {
+      "label": "Termos",
+      "url": "https://wantabrand.com/terms-of-service/"
+    },
+    {
+      "label": "Sobre",
+      "url": "https://wantabrand.com/sobre-nosotros/"
+    }
+  ]
+}

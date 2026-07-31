@@ -1,0 +1,1291 @@
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chat sms cards financiamento de carros</title>
+    <!-- Google Tag Manager + Analytics -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!=='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',"GTM-T3NQPQQC");</script>
+<!-- End Google Tag Manager + Analytics -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+      #chat-container,
+      #chat-container *,
+      #chat-container *::before,
+      #chat-container *::after {
+        box-sizing: content-box !important;
+        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+
+      #chat-container button,
+      #chat-container a,
+      #chat-container span,
+      #chat-container div,
+      #chat-container p {
+        font-size-adjust: none !important;
+      }
+
+      body {
+        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #dfe5e7;
+        margin: 0;
+        padding: 0;
+        height: calc(100vh - 10px);
+        color: #333;
+      }
+
+      #chat-container {
+        width: calc(100% - 20px);
+        height: calc(100% - 10px);
+        margin: 5px auto;
+        background-color: #e5ddd5;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c3b9b0' fill-opacity='0.18'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        max-width: 780px;
+        font-size: 14.5px !important;
+      }
+
+      /* WhatsApp header */
+      #chat-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #075e54;
+        color: white;
+        padding: 8px 16px;
+        flex-shrink: 0;
+        min-height: 56px;
+      }
+
+      #chat-header img {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #25d366;
+      }
+
+      #header-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.4;
+      }
+
+      #header-name {
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        white-space: nowrap;
+      }
+
+      #header-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px !important;
+        color: #d9fdd3;
+        white-space: nowrap;
+      }
+
+      #header-status::before {
+        content: "";
+        width: 8px !important;
+        height: 8px !important;
+        min-width: 8px !important;
+        max-width: 8px !important;
+        min-height: 8px !important;
+        max-height: 8px !important;
+        display: inline-block !important;
+        border-radius: 50% !important;
+        background: #25d366 !important;
+        flex: 0 0 8px !important;
+        aspect-ratio: 1 / 1 !important;
+      }
+
+      #chat-box {
+        flex-grow: 1;
+        min-height: 0;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #chat-box::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-message {
+        padding: 7px 12px 8px;
+        border-radius: 7.5px;
+        margin: 4px 0;
+        font-size: 14.5px !important;
+        max-width: 75%;
+        position: relative;
+        line-height: 1.4;
+        clear: both;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        word-wrap: break-word;
+      }
+
+      .bot-message {
+        background-color: #ffffff;
+        color: #303030;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+        margin-left: 18px;
+        margin-right: 50px;
+      }
+
+      /* Bot bubble tail */
+      .bot-message::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #ffffff;
+        border-left: 8px solid transparent;
+      }
+
+      .user-message {
+        background-color: #dcf8c6;
+        color: #303030;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+        margin-right: 18px;
+        float: right;
+        text-align: left;
+      }
+
+      /* User bubble tail */
+      .user-message::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #dcf8c6;
+        border-right: 8px solid transparent;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        width: calc(75% - 18px) !important;
+        max-width: calc(75% - 18px) !important;
+        margin: 8px 18px 0 18px !important;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        align-self: flex-end !important;
+        align-items: stretch !important;
+        float: none !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+      }
+
+      #chat-container .button-container > button,
+      #chat-container .button-container > a,
+      #chat-container .button-container > a > button {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      #chat-container button {
+        padding: 9px 16px;
+        background-color: #ffffff;
+        color: #075e54;
+        border: 1.5px solid #25d366;
+        border-radius: 7.5px;
+        cursor: pointer;
+        transition:
+          background-color 0.2s ease,
+          transform 0.1s ease;
+        font-size: 14px !important;
+        line-height: normal !important;
+        font-family: "Roboto", sans-serif !important;
+        font-weight: 500 !important;
+        width: 100% !important;
+        margin: 3px 0;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+      }
+
+      #chat-container button:hover {
+        background-color: #f0fdf4;
+        transform: translateY(-1px);
+      }
+
+      #chat-container button:active {
+        transform: translateY(0);
+      }
+
+      #chat-container button:disabled {
+        border-color: #ccc;
+        color: #aaa;
+        cursor: not-allowed;
+        background-color: #f9f9f9;
+      }
+
+      /* Wantabrand/M2 can load global ad CSS that changes the quiz gate box
+         model/text casing. Keep this scoped to the popup gate so the PubGuru
+         in-chat top block, scroll pinning, and answer flow are not touched. */
+      #quiz-container > div {
+        box-sizing: content-box !important;
+      }
+
+      #quiz-container .aq-answer {
+        text-transform: none !important;
+      }
+
+      #chat-container a button {
+        background-color: #25d366;
+        color: white;
+        border-color: #25d366;
+      }
+
+      #chat-container a button:hover {
+        background-color: #20c05c;
+      }
+
+      /* Typing indicator */
+      .typing-indicator {
+        display: flex;
+        justify-content: flex-start;
+        margin: 6px 0;
+        margin-left: 18px;
+        margin-top: 8px;
+      }
+
+      /* Wrap dots in a bubble */
+      .typing-indicator::before {
+        display: none;
+      }
+
+      .typing-indicator {
+        background-color: #ffffff;
+        border-radius: 7.5px;
+        border-top-left-radius: 0;
+        padding: 10px 14px;
+        width: fit-content;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        position: relative;
+      }
+
+      /* Tail for typing bubble */
+      .typing-indicator::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #ffffff;
+        border-left: 8px solid transparent;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin: 0 3px;
+        background-color: #90a4ae;
+        animation: typingDot 1.4s infinite ease-in-out;
+      }
+
+      .dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typingDot {
+        0%,
+        60%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        30% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+
+      .progress-container {
+        width: 60%;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 3px;
+        margin: 12px auto;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background-color: #25d366;
+        border-radius: 3px;
+        transition: width 0.8s ease-in-out;
+      }
+
+      .offers-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 8px 18px 16px 18px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .offer-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 10px;
+        color: #222;
+        text-decoration: none;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        border: 1px solid rgba(7, 94, 84, 0.12);
+      }
+
+      .offer-card-img {
+        width: 74px;
+        height: 54px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      .offer-card-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .offer-card-title {
+        margin: 0 0 3px;
+        font-weight: 700;
+        font-size: 14px !important;
+        color: #1f2937;
+      }
+
+      .offer-card-subtitle {
+        margin: 0 0 4px;
+        font-size: 12.5px !important;
+        color: #475467;
+        line-height: 1.25;
+      }
+
+      .offer-card-bank {
+        margin: 0;
+        font-size: 12.5px !important;
+        font-weight: 700;
+        color: #128c4a;
+      }
+
+      .offer-card-arrow {
+        color: #075e54;
+        font-weight: 700;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+
+      .ad {
+        clear: both;
+      }
+
+    </style>
+    <!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->
+<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T3NQPQQC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <div id="chat-container">
+      <div id="chat-header">
+        <img id="bot-avatar" src="" alt="" />
+        <div id="header-info">
+          <span id="header-name"></span>
+          <span id="header-status">online agora</span>
+        </div>
+        <a
+          id="call-btn"
+          href="#"
+          target="_self"
+          title="Ligar agora"
+          style="
+            margin-left: auto;
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+          "
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"
+            />
+          </svg>
+        </a>
+      </div>
+      <div id="chat-box">
+        <!-- Bot's initial message will appear here -->
+      </div>
+    </div>
+
+    <script>
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      function scrollChatToBottom() {
+        const chatBox = document.getElementById("chat-box");
+        if (!chatBox) return;
+        chatBox.scrollTop = chatBox.scrollHeight;
+        const lastChild = chatBox.lastElementChild;
+        if (lastChild && lastChild.scrollIntoView) {
+          requestAnimationFrame(() => {
+            chatBox.scrollTop = chatBox.scrollHeight;
+            lastChild.scrollIntoView({ block: "end", inline: "nearest" });
+          });
+        }
+      }
+
+      function keepChatPinnedToBottom(durationMs = 3500) {
+        const startedAt = Date.now();
+        scrollChatToBottom();
+        const interval = setInterval(() => {
+          scrollChatToBottom();
+          if (Date.now() - startedAt >= durationMs) {
+            clearInterval(interval);
+          }
+        }, 250);
+      }
+
+      // Copia os parâmetros da URL atual para a URL de destino (sobrescreve existentes)
+      function mergeSourceParams(targetUrl) {
+        try {
+          const url = new URL(targetUrl, window.location.href);
+          const sourceParams = new URLSearchParams(window.location.search);
+          sourceParams.forEach((value, key) => {
+            // Sobrescreve parâmetros para garantir que todos da origem sejam levados
+            url.searchParams.set(key, value);
+          });
+          return url.toString();
+        } catch (e) {
+          return targetUrl;
+        }
+      }
+
+      let questionIndex = -1;
+      const botNames = ["Maria","João","Juliana","José","Fernanda","Carlos","Olivia","Lucas","Camilla","Pedro"];
+
+      const femaleNames = ["Maria","Juliana","Fernanda","Olivia","Camilla"];
+      const maleNames = ["João","José","Carlos","Lucas","Pedro"];
+
+      const femalePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"];
+      const malePhotos = ["https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg","https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"];
+
+      let botName = botNames[Math.floor(Math.random() * botNames.length)];
+
+      // Match photo to gender of chosen name
+      let botPhoto;
+      if (femaleNames.includes(botName)) {
+        const idx = femaleNames.indexOf(botName);
+        botPhoto = femalePhotos[idx];
+      } else {
+        const idx = maleNames.indexOf(botName);
+        botPhoto = malePhotos[idx];
+      }
+
+      // Header will be set inside window.onload
+
+      const questions = [{"question":"Olá! Eu sou {botName}. 🚗 | Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado! | Vamos encontrar a oferta ideal para você?","answers":["✅ Vamos lá!","👀 Quero conhecer as opções"]},{"question":"Quanto você pode pagar por mês?","answers":["Até R$ 500","Entre R$ 500 e R$ 1.000","Acima de R$ 1.000"]},{"question":"Você tem preferência por algum tipo de veículo?","answers":["Sim, já tenho um modelo em mente","Não, estou aberto a sugestões","Ainda estou decidindo"]},{"question":"🔍 Estou pesquisando as melhores condições para você... | 🚗 Encontrei 3 opções que podem combinar com o seu perfil. | Toque na que mais faz sentido para você:","offers":[{"name":"🚗 Financiar sem entrada","subtitle":"Valores com parcelas","bank":"R$157,00 a R$299,00","image":"","url":"https://wantabrand.com/p1-br-car-financiamento-veiculos-sem-entrada-online/"},{"name":"💰 Ver ofertas disponíveis","subtitle":"Bancos com taxas reduzidas","bank":"e facilidade para baixo score.","image":"","url":"https://wantabrand.com/p1-br-car-simulacao-de-financiamento/"},{"name":"🚘 Financiamento com parcela baixa","subtitle":"Consulte se essa condição está disponível para você,","bank":"Oferta por tempo LIMITADO !","image":"","url":"https://wantabrand.com/p1-br-car-financie-seu-carro-em-60-meses/"}]},{"question":""}];
+      const rewardedButtonClass = "pg-rewarded";
+      const smsConfig = {"enabled":true,"endpoint":"https://fixture.local/wp-json/mgs-chat/v1/lead","chatId":"CAR-BR-01-SMS","route":"/chat-sms/car/br1","submitLabel":"VER PARCELAS","optional":true,"consentEnabled":true};
+      const gateConfig = {"skipLoading":true,"loadingMs":0,"geoEnabled":true,"geoFallback":"Analisando ofertas disponíveis na sua região","geoPrefix":"Analisando ofertas de veículos em"};
+      const smsFormStartedAt = Date.now();
+      let smsLeadCaptured = false;
+      let smsLeadSubmitting = false;
+
+      function applyRewardedButtonClass(node) {
+        if (!node || !rewardedButtonClass) return;
+        if (rewardedButtonClass === "av-rewarded" && node.id !== "aq-cta") return;
+        rewardedButtonClass.split(/\s+/).filter(Boolean).forEach((className) => node.classList.add(className));
+      }
+
+      function smsError(message) {
+        const error = document.getElementById("mgs-cf-sms-error");
+        if (error) error.textContent = message || "";
+      }
+
+      function formatSmsPhone(value) {
+        const digits = String(value || "").replace(/\D/g, "").slice(0, 11);
+        if (digits.length <= 2) return digits;
+        if (digits.length <= 6) return "(" + digits.slice(0, 2) + ") " + digits.slice(2);
+        if (digits.length <= 10) return "(" + digits.slice(0, 2) + ") " + digits.slice(2, 6) + "-" + digits.slice(6);
+        return "(" + digits.slice(0, 2) + ") " + digits.slice(2, 7) + "-" + digits.slice(7);
+      }
+
+      function replaySmsCta(ctaButton) {
+        if (!ctaButton) {
+          window.mgsCloseQuizAfterReward();
+          return;
+        }
+        applyRewardedButtonClass(ctaButton);
+        if (ctaButton.classList.contains("av-rewarded")) {
+          window.mgsRewardedClickInProgress = true;
+          ctaButton.onclick = function () {
+            window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+            return false;
+          };
+        }
+        ctaButton.click();
+      }
+
+      function continueSmsWithoutLead() {
+        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
+        smsLeadCaptured = true;
+        smsError("");
+        replaySmsCta(document.getElementById("aq-cta"));
+      }
+
+      function smsLeadState() {
+        const nameInput = document.getElementById("mgs-cf-sms-name");
+        const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        const consentInput = document.getElementById("mgs-cf-sms-consent");
+        const name = nameInput ? nameInput.value.trim() : "";
+        const phone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+        const consent = !smsConfig.consentEnabled || !consentInput || consentInput.checked;
+        return { name, phone, consent, valid: name.length >= 2 && phone.length >= 10 };
+      }
+
+      function syncSmsActViewReward() {
+        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return;
+        const ctaButton = document.getElementById("aq-cta");
+        if (!ctaButton || smsLeadCaptured || smsLeadSubmitting) return;
+        const state = smsLeadState();
+        const eligible = state.valid || (smsConfig.optional && !state.consent);
+        ctaButton.classList.toggle("av-rewarded", eligible);
+        if (eligible) {
+          ctaButton.setAttribute("onclick", "window.mgsHandleSmsActViewReward && window.mgsHandleSmsActViewReward(this); return false;");
+        } else {
+          ctaButton.removeAttribute("onclick");
+        }
+      }
+
+      window.mgsHandleSmsActViewReward = function (ctaButton) {
+        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return false;
+        const state = smsLeadState();
+        if (!state.valid && !(smsConfig.optional && !state.consent)) {
+          submitSmsLead(ctaButton, false);
+          return false;
+        }
+        window.mgsRewardedClickInProgress = true;
+        if (!state.consent && smsConfig.optional) {
+          smsLeadCaptured = true;
+          smsError("");
+        } else if (!smsLeadCaptured && !smsLeadSubmitting) {
+          submitSmsLead(ctaButton, false);
+        }
+        window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+        return false;
+      };
+
+      window.mgsHandleSmsSkipReward = function () {
+        if (!smsConfig.enabled || !smsConfig.optional) return false;
+        smsLeadCaptured = true;
+        smsError("");
+        window.mgsRewardedClickInProgress = true;
+        window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+        return false;
+      };
+
+      function loadGeoIndicator() {
+        if (!gateConfig.geoEnabled) return;
+        const geoText = document.getElementById("mgs-cf-geo-text");
+        if (!geoText) return;
+        try {
+          fetch("https://ipapi.co/json/", { mode: "cors" })
+            .then((response) => response.ok ? response.json() : null)
+            .then((data) => {
+              if (!data) return;
+              const city = String(data.city || "").trim();
+              const region = String(data.region_code || data.region || "").trim();
+              const location = [city, region].filter(Boolean).join(", ");
+              if (location) geoText.textContent = gateConfig.geoPrefix + " " + location;
+            })
+            .catch(() => {});
+        } catch (error) {}
+      }
+
+      function submitSmsLead(ctaButton, replayAfterSuccess = true) {
+        if (!smsConfig.enabled || smsLeadCaptured || smsLeadSubmitting) return;
+        const nameInput = document.getElementById("mgs-cf-sms-name");
+        const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        const consentInput = document.getElementById("mgs-cf-sms-consent");
+        const websiteInput = document.getElementById("mgs-cf-sms-website");
+        const name = nameInput ? nameInput.value.trim() : "";
+        const phone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+        const consent = !smsConfig.consentEnabled || !consentInput || consentInput.checked;
+        if (!consent && smsConfig.optional) {
+          continueSmsWithoutLead();
+          return;
+        }
+        if (!consent) {
+          smsError("Selecione o consentimento para continuar.");
+          return;
+        }
+        if (name.length < 2) {
+          smsError("Digite seu nome.");
+          if (nameInput) nameInput.focus();
+          return;
+        }
+        if (phone.length < 10) {
+          smsError("Digite um telefone válido com DDD.");
+          if (phoneInput) phoneInput.focus();
+          return;
+        }
+        smsError("");
+        smsLeadSubmitting = true;
+        ctaButton.disabled = true;
+        ctaButton.textContent = "ENVIANDO...";
+        const params = new URLSearchParams(window.location.search);
+        const extra = {};
+        params.forEach((value, key) => { extra[key] = value; });
+        extra.sms_consent = "yes";
+        const payload = {
+          chat_id: smsConfig.chatId,
+          route: smsConfig.route,
+          name: name,
+          phone: phone,
+          website: websiteInput ? websiteInput.value : "",
+          ts: smsFormStartedAt,
+          utm_source: params.get("utm_source") || "",
+          utm_medium: params.get("utm_medium") || "",
+          utm_campaign: params.get("utm_campaign") || "",
+          utm_term: params.get("utm_term") || "",
+          utm_content: params.get("utm_content") || "",
+          fbclid: params.get("fbclid") || "",
+          gclid: params.get("gclid") || "",
+          extra: extra
+        };
+        fetch(smsConfig.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify(payload)
+        }).then((response) => response.json().catch(() => ({})).then((data) => ({ response, data })))
+          .then(({ response, data }) => {
+            if (!response.ok || !data.ok) throw new Error(data.error || "Não foi possível enviar. Tente novamente.");
+            smsLeadCaptured = true;
+            smsLeadSubmitting = false;
+            ctaButton.disabled = false;
+            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+            if (replayAfterSuccess) replaySmsCta(ctaButton);
+          })
+          .catch((error) => {
+            smsLeadSubmitting = false;
+            ctaButton.disabled = false;
+            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+            smsError(error && error.message ? error.message : "Não foi possível enviar. Tente novamente.");
+          });
+      }
+
+      function askQuestion(userAnswer) {
+        const chatBox = document.getElementById("chat-box");
+
+        function continueChat() {
+          if (userAnswer !== "") {
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("chat-message", "user-message");
+            userMessage.textContent = userAnswer;
+            chatBox.appendChild(userMessage);
+
+            const buttonContainer = document.querySelector(".button-container");
+            if (buttonContainer) {
+              buttonContainer.remove();
+            }
+          }
+
+          setTimeout(() => {
+            const typingIndicator = document.createElement("div");
+            typingIndicator.classList.add("typing-indicator");
+            typingIndicator.innerHTML =
+              '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatBox.appendChild(typingIndicator);
+            scrollChatToBottom();
+
+            setTimeout(() => {
+              typingIndicator.style.display = "none";
+              questionIndex++;
+
+              if (questionIndex === 2) {
+                showAd();
+              }
+
+              if (questionIndex < questions.length - 1) {
+                showNextQuestion();
+              } else {
+                showNextQuestion();
+                showProgressBar();
+              }
+            }, 2000);
+          }, 500);
+        }
+
+        continueChat();
+      }
+
+      async function showNextQuestion() {
+        const chatBox = document.getElementById("chat-box");
+
+        const questionData = questions[questionIndex];
+
+        let messageCounter = 0;
+        const messages = questionData.question.split("|");
+        for (let message of messages) {
+          messageCounter += 1;
+          const botMessage = document.createElement("div");
+          botMessage.classList.add("chat-message", "bot-message");
+          botMessage.textContent = message.replace(/\{botName\}/g, botName);
+          chatBox.appendChild(botMessage);
+          scrollChatToBottom();
+
+          if (messageCounter < messages.length) {
+            await sleep(Math.random() * (2000 - 1000) + 700);
+          }
+        }
+
+        scrollChatToBottom();
+
+        if (questionData.answers) {
+          const buttonContainer = document.createElement("div");
+          buttonContainer.classList.add("button-container");
+
+          questionData.answers.forEach((answer) => {
+            let answerButton;
+
+            if (answer.includes("→")) {
+              const answerLink = document.createElement("a");
+              answerLink.dataset.mgsTargetUrl = questionData.target;
+              answerLink.href = mergeSourceParams(questionData.target);
+              answerLink.style.textDecoration = "none";
+              answerButton = document.createElement("button");
+              answerButton.textContent = answer;
+              applyRewardedButtonClass(answerButton);
+              applyRewardedButtonClass(answerLink);
+              answerLink.appendChild(answerButton);
+              buttonContainer.appendChild(answerLink);
+            } else {
+              // Create a button otherwise
+              answerButton = document.createElement("button");
+              answerButton.textContent = answer;
+              answerButton.onclick = () => askQuestion(answer);
+              buttonContainer.appendChild(answerButton);
+            }
+          });
+
+          chatBox.appendChild(buttonContainer);
+
+          setTimeout(() => {
+            buttonContainer.style.opacity = 1;
+            scrollChatToBottom();
+            keepChatPinnedToBottom(1500);
+          }, 1000);
+        }
+
+        if (questionData.offers) {
+          const offersContainer = document.createElement("div");
+          offersContainer.classList.add("offers-container");
+
+          questionData.offers.forEach((offer) => {
+            const card = document.createElement("a");
+            card.dataset.mgsTargetUrl = offer.url || offer.target || "#";
+            card.href = mergeSourceParams(card.dataset.mgsTargetUrl);
+            card.classList.add("offer-card");
+            applyRewardedButtonClass(card);
+
+            if (offer.image) {
+              const img = document.createElement("img");
+              img.src = offer.image;
+              img.alt = offer.name || "";
+              img.classList.add("offer-card-img");
+              card.appendChild(img);
+            }
+
+            const info = document.createElement("div");
+            info.classList.add("offer-card-info");
+
+            const title = document.createElement("p");
+            title.classList.add("offer-card-title");
+            title.textContent = offer.name || "Oferta";
+
+            const subtitle = document.createElement("p");
+            subtitle.classList.add("offer-card-subtitle");
+            subtitle.textContent = offer.subtitle || "Ver oferta";
+
+            const bank = document.createElement("p");
+            bank.classList.add("offer-card-bank");
+            bank.textContent = offer.bank || "";
+
+            info.appendChild(title);
+            info.appendChild(subtitle);
+            if (offer.bank) info.appendChild(bank);
+
+            const arrow = document.createElement("span");
+            arrow.classList.add("offer-card-arrow");
+            arrow.textContent = "→";
+
+            card.appendChild(info);
+            card.appendChild(arrow);
+            offersContainer.appendChild(card);
+          });
+
+          chatBox.appendChild(offersContainer);
+
+          setTimeout(() => {
+            offersContainer.style.opacity = 1;
+            scrollChatToBottom();
+            keepChatPinnedToBottom(1500);
+          }, 1000);
+        }
+      }
+
+      function showAd() {
+        const chatBox = document.getElementById("chat-box");
+        if (rewardedButtonClass === "pg-rewarded") {
+          const pubGuruTopSlot = window.matchMedia && window.matchMedia("(min-width: 768px)").matches
+            ? "wantabrand_desk_top"
+            : "wantabrand_mob_top";
+          const adBanner = document.createElement("div");
+          adBanner.classList.add("pubguru-chat-ad", "pubguru-chat-ad-top");
+          // Reserve the slot height before PubGuru fills it. On mobile the ad
+          // iframe can arrive after the next question and otherwise pushes the
+          // question/buttons out of view, making them look like they disappeared.
+          // Mobile native/display creatives can be taller than the initial
+          // placeholder. Reserve the full creative height so the next question
+          // starts below the ad instead of being painted under it.
+          adBanner.style.minHeight = pubGuruTopSlot === "wantabrand_mob_top" ? "420px" : "300px";
+          adBanner.style.display = "flex";
+          adBanner.style.alignItems = "center";
+          adBanner.style.justifyContent = "center";
+          adBanner.style.margin = "28px 0 28px";
+          adBanner.style.position = "relative";
+          adBanner.style.overflow = "hidden";
+          adBanner.style.isolation = "isolate";
+          adBanner.style.width = "100%";
+          adBanner.style.flexShrink = "0";
+          const adSlot = document.createElement("pubguru");
+          adSlot.setAttribute("data-pg-ad", pubGuruTopSlot);
+          adSlot.style.display = "block";
+          adSlot.style.maxWidth = "100%";
+          adBanner.appendChild(adSlot);
+          chatBox.appendChild(adBanner);
+          scrollChatToBottom();
+          // M2/PubGuru: do not fire the legacy infinite-post hook here; it can
+          // trigger the interstitial early. Register only this top-block tag.
+          function registerPubGuruTopBlock(attempt = 0) {
+            try {
+              if (window.pga?.adunitManager?.defineObserveredNode) {
+                window.pga.adunitManager.defineObserveredNode(adSlot);
+                if (adSlot.classList.contains("pg-disabled")) {
+                  adBanner.style.minHeight = "0";
+                  adBanner.style.margin = "0";
+                }
+                keepChatPinnedToBottom(2500);
+                return;
+              }
+            } catch (err) {
+              console.warn('PubGuru top block registration failed', err);
+              return;
+            }
+            if (attempt < 20) {
+              setTimeout(() => registerPubGuruTopBlock(attempt + 1), 250);
+            }
+          }
+          setTimeout(() => registerPubGuruTopBlock(), 0);
+          keepChatPinnedToBottom(7000);
+
+          if (window.ResizeObserver) {
+            const resizeObserver = new ResizeObserver(() => keepChatPinnedToBottom(1000));
+            resizeObserver.observe(adBanner);
+            setTimeout(() => resizeObserver.disconnect(), 6000);
+          }
+
+          if (window.MutationObserver) {
+            const mutationObserver = new MutationObserver(() => keepChatPinnedToBottom(1000));
+            mutationObserver.observe(adBanner, { attributes: true, childList: true, subtree: true });
+            setTimeout(() => mutationObserver.disconnect(), 6000);
+          }
+          return;
+        }
+
+        const adBanner = document.createElement("div");
+        adBanner.innerHTML = `<div></div>`;
+        adBanner.classList.add("ad-unit");
+        adBanner.classList.add("ad");
+        adBanner.dataset.position = "top";
+        chatBox.appendChild(adBanner);
+        scrollChatToBottom();
+        if (window?.onInfinitePostLoaded) {
+          window.onInfinitePostLoaded();
+        }
+
+        // O wrapper/GAM pode aumentar/alterar o bloco top depois da próxima pergunta.
+        // Mantém o chat no fundo para os botões ficarem visíveis quando o top aparecer.
+        keepChatPinnedToBottom(4500);
+
+        if (window.ResizeObserver) {
+          const resizeObserver = new ResizeObserver(() => keepChatPinnedToBottom(1000));
+          resizeObserver.observe(adBanner);
+          setTimeout(() => resizeObserver.disconnect(), 6000);
+        }
+
+        if (window.MutationObserver) {
+          const mutationObserver = new MutationObserver(() => keepChatPinnedToBottom(1000));
+          mutationObserver.observe(adBanner, { attributes: true, childList: true, subtree: true });
+          setTimeout(() => mutationObserver.disconnect(), 6000);
+        }
+      }
+
+      function showProgressBar() {
+        const chatBox = document.getElementById("chat-box");
+
+        const progressContainer = document.createElement("div");
+        progressContainer.classList.add("progress-container");
+
+        const progressBar = document.createElement("div");
+        progressBar.classList.add("progress-bar");
+        progressContainer.appendChild(progressBar);
+
+        chatBox.appendChild(progressContainer);
+        scrollChatToBottom();
+
+        let width = 0;
+        const interval = setInterval(() => {
+          width += Math.random() * 30;
+          if (width >= 100) {
+            width = 100;
+            clearInterval(interval);
+
+            // Show completion message
+            setTimeout(() => {
+              const finalMessage = document.createElement("div");
+              finalMessage.classList.add("chat-message", "bot-message");
+              finalMessage.textContent =
+                "Busca concluída! Clique nas ofertas acima para continuar. 🎉";
+              chatBox.appendChild(finalMessage);
+              scrollChatToBottom();
+            }, 500);
+          }
+          progressBar.style.width = `${width}%`;
+        }, 1000);
+      }
+
+      window.onload = function () {
+        // Set header
+        document.getElementById("bot-avatar").src = botPhoto;
+        document.getElementById("header-name").textContent =
+          botName + " • " + "Especialista em Financiamentos";
+
+        // Set random offer on call button
+        const offers = ["https://wantabrand.com/p1-br-car-financiamento-veiculos-sem-entrada-online/","https://wantabrand.com/p1-br-car-simulacao-de-financiamento/","https://wantabrand.com/p1-br-car-financie-seu-carro-em-60-meses/"];
+        const randomOffer = offers[Math.floor(Math.random() * offers.length)];
+        const callBtn = document.getElementById("call-btn");
+        callBtn.dataset.mgsTargetUrl = randomOffer;
+        callBtn.href = mergeSourceParams(randomOffer);
+
+        // Start quiz
+        initQuiz();
+      };
+
+      function refreshTrackedLinkHref(e) {
+        const link = e.target && e.target.closest ? e.target.closest("a[data-mgs-target-url], a.offer-card, #call-btn") : null;
+        if (!link) return;
+        const targetUrl = link.dataset.mgsTargetUrl || link.getAttribute("href") || "";
+        if (!targetUrl || targetUrl === "#") return;
+        link.href = mergeSourceParams(targetUrl);
+      }
+
+      ["pointerdown", "touchstart", "mousedown", "focus", "click"].forEach((eventName) => {
+        document.addEventListener(eventName, refreshTrackedLinkHref, true);
+      });
+
+      // ─── QUIZ ────────────────────────────────────────────────────────────
+      let quizStep = 0;
+      let isQuizClosed = false;
+      let quizAlreadyClosed = false;
+
+      function unlockScroll() {
+        document.documentElement.classList.remove("modal-locked");
+        document.body.classList.remove("modal-locked");
+      }
+
+      function lockScroll() {
+        document.documentElement.classList.add("modal-locked");
+        document.body.classList.add("modal-locked");
+      }
+
+      function closeQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        if (quizContainer) quizContainer.style.display = "none";
+        isQuizClosed = true;
+        unlockScroll();
+        askQuestion("");
+      }
+
+      window.mgsRewardedClickInProgress = false;
+      window.mgsCloseQuizAfterReward = function () {
+        window.mgsRewardedClickInProgress = false;
+        if (!quizAlreadyClosed) {
+          quizAlreadyClosed = true;
+          closeQuiz();
+        }
+      };
+
+      function registerRewardedCloseCallback(attempt = 0) {
+        if (!window.googletag || !window.googletag.cmd) {
+          if (attempt < 40) setTimeout(() => registerRewardedCloseCallback(attempt + 1), 250);
+          return;
+        }
+
+        window.googletag.cmd.push(function () {
+          try {
+            if (!window.googletag.pubads) return;
+            window.googletag.pubads().addEventListener("rewardedSlotClosed", function (event) {
+              const slotPath = event && event.slot && event.slot.getAdUnitPath ? event.slot.getAdUnitPath() : "";
+              if (window.mgsRewardedClickInProgress && slotPath.indexOf("zout_rewarded") !== -1) {
+                window.mgsCloseQuizAfterReward();
+              }
+            });
+          } catch (err) {
+            console.warn("Rewarded close callback registration failed", err);
+          }
+        });
+      }
+      registerRewardedCloseCallback();
+
+      function updateQuizProgress() {
+        const fill = document.getElementById("quiz-progress-fill");
+        const progress = Math.min(100, Math.max(20, Math.round(((quizStep + 1) / Math.max(1, gateQuestionCount + 1)) * 100)));
+        if (fill) fill.style.width = progress + "%";
+      }
+
+      let quizStepLock = false;
+      const gateQuestionCount = 1;
+
+      function showGateFinal() {
+        const loadingSlide = document.querySelector(".aq-loading");
+        if (loadingSlide) loadingSlide.style.display = "none";
+        const finalSlide = document.querySelector(".aq-final");
+        if (finalSlide) finalSlide.style.display = "block";
+        const phoneInput = document.getElementById("mgs-cf-sms-phone");
+        if (phoneInput && !phoneInput.dataset.mgsMaskBound) {
+          phoneInput.dataset.mgsMaskBound = "1";
+          phoneInput.addEventListener("input", function () { this.value = formatSmsPhone(this.value); });
+        }
+        const smsInputs = [
+          document.getElementById("mgs-cf-sms-name"),
+          phoneInput,
+          document.getElementById("mgs-cf-sms-consent")
+        ].filter(Boolean);
+        smsInputs.forEach(function (input) {
+          if (input.dataset.mgsRewardSyncBound) return;
+          input.dataset.mgsRewardSyncBound = "1";
+          input.addEventListener("input", syncSmsActViewReward);
+          input.addEventListener("change", syncSmsActViewReward);
+        });
+        const ctaButton = document.getElementById("aq-cta");
+        if (ctaButton && !ctaButton.dataset.mgsRewardPointerBound) {
+          ctaButton.dataset.mgsRewardPointerBound = "1";
+          ctaButton.addEventListener("pointerdown", syncSmsActViewReward);
+          ctaButton.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") syncSmsActViewReward();
+          });
+        }
+        syncSmsActViewReward();
+        updateQuizProgress();
+      }
+
+      function nextQuizStep() {
+        const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+        if (currentSlide) currentSlide.style.display = "none";
+        quizStep++;
+
+        if (quizStep < gateQuestionCount) {
+          const nextSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+          if (nextSlide) nextSlide.style.display = "flex";
+          updateQuizProgress();
+        } else {
+          const loadingSlide = document.querySelector(".aq-loading");
+          if (gateConfig.skipLoading) {
+            showGateFinal();
+          } else if (loadingSlide) {
+            loadingSlide.style.display = "block";
+            setTimeout(showGateFinal, Math.max(0, gateConfig.loadingMs || 0));
+          }
+        }
+      }
+
+      function initQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        if (quizContainer) {
+          quizContainer.style.display = "flex";
+          lockScroll();
+          updateQuizProgress();
+        }
+        loadGeoIndicator();
+
+        if (!rewardedButtonClass) {
+          
+        }
+      }
+
+      document.addEventListener("click", function (e) {
+        if (isQuizClosed) return;
+
+        const skipButton = e.target && e.target.closest ? e.target.closest("#mgs-cf-sms-skip") : null;
+        if (skipButton) {
+          if (skipButton.classList.contains("av-rewarded")) return;
+          e.preventDefault();
+          continueSmsWithoutLead();
+          return;
+        }
+
+        const answerButton = e.target && e.target.closest ? e.target.closest(".aq-answer") : null;
+        if (answerButton) {
+          if (quizStepLock) return;
+          quizStepLock = true;
+          answerButton.style.background = "#075e54";
+          answerButton.style.color = "white";
+          const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+          if (currentSlide) {
+            currentSlide.querySelectorAll(".aq-answer").forEach(btn => btn.style.pointerEvents = "none");
+          }
+          setTimeout(function () {
+            nextQuizStep();
+            quizStepLock = false;
+          }, 500);
+        }
+
+        const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
+        if (ctaButton) {
+          e.preventDefault();
+          if (smsConfig.enabled && !smsLeadCaptured) {
+            submitSmsLead(ctaButton);
+            return;
+          }
+          applyRewardedButtonClass(ctaButton);
+          window.mgsRewardedClickInProgress = ctaButton.classList.contains("av-rewarded");
+          if (quizAlreadyClosed) return;
+          const safeCloseQuiz = window.mgsCloseQuizAfterReward;
+
+          if (!ctaButton.classList.contains("av-rewarded")) {
+            setTimeout(safeCloseQuiz, 1200);
+          }
+
+          if (!rewardedButtonClass) {
+            
+          }
+        }
+      });
+    </script>
+    <!-- QUIZ MODAL -->
+    <div id="quiz-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:2147483647; justify-content:center; align-items:center; font-family:'Roboto',Arial,sans-serif;">
+      <div style="background:#ffffff; border-radius:20px; padding:0 30px 40px 30px; box-shadow:0 8px 32px rgba(0,0,0,0.2); max-width:500px; width:90%; min-width:300px; max-height:calc(100vh - 24px); overflow-y:auto; position:relative;">
+        <div style="margin-bottom:30px; margin-top:0;">
+          <div style="width:100%; height:5px; background:#e0e0e0; border-radius:2px; overflow:hidden;">
+            <div id="quiz-progress-fill" style="width:20%; height:100%; background:#075e54; border-radius:2px; transition:width 0.5s ease;"></div>
+          </div>
+        </div>
+        <div id="mgs-cf-geo-indicator" aria-live="polite"><span aria-hidden="true">🔍</span> <span id="mgs-cf-geo-text">Analisando ofertas disponíveis na sua região</span></div>
+        <div class="mgs-cf-gate-image"><img src="https://fixture.local/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png" alt="Carro disponível para financiamento"></div>
+        <div class="aq-slides">
+          <div class="aq-slide" data-step="0" style="display:flex; flex-direction:column; align-items:center;"><p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🚗 Qual a faixa de preço do carro que você deseja?</p><div style="display:flex; flex-direction:column; gap:12px; width:100%;"><button class="aq-answer" data-value="30000-45000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 30.000 a R$ 45.000</button><button class="aq-answer" data-value="45000-60000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 45.000 a R$ 60.000</button><button class="aq-answer" data-value="60000-80000" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">R$ 60.000 a R$ 80.000</button><button class="aq-answer" data-value="80000+" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Acima de R$ 80.000</button></div></div>
+          <div class="aq-loading" style="display:none; text-align:center;">
+            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both;"></span>
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.16s;"></span>
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.32s;"></span>
+            </div>
+            <h2 style="color:#333; margin:0; font-size:20px;">🔍 Buscando a melhor oferta para você...</h2>
+          </div>
+          <div class="aq-final" style="display:none; text-align:center;">
+            <p class="mgs-cf-sms-intro">Preencha seus dados e veja as parcelas:</p>
+            <div class="mgs-cf-sms-form" id="mgs-cf-sms-form"><label for="mgs-cf-sms-name">Nome</label><input id="mgs-cf-sms-name" name="name" type="text" autocomplete="name" maxlength="200" placeholder="Digite seu nome" required><label for="mgs-cf-sms-phone">Telefone</label><input id="mgs-cf-sms-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="20" placeholder="(11) 99999-9999" required><label class="mgs-cf-sms-consent" for="mgs-cf-sms-consent"><input id="mgs-cf-sms-consent" type="checkbox" checked><span>Aceito receber ofertas por SMS.</span></label><input id="mgs-cf-sms-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><p id="mgs-cf-sms-error" class="mgs-cf-sms-error" role="alert" aria-live="polite"></p></div>
+            <button id="aq-cta" class="" type="button" style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">VER PARCELAS</button>
+            <button id="mgs-cf-sms-skip" type="button">Pular, quero ver as ofertas</button>
+            <br/>
+            <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
+          </div>
+        </div>
+        <nav class="mgs-cf-legal-footer" aria-label="Links legais"><a href="https://wantabrand.com/politica-de-privacidad/" target="_blank" rel="noopener noreferrer">Privacidade</a><span aria-hidden="true">|</span><a href="https://wantabrand.com/terms-of-service/" target="_blank" rel="noopener noreferrer">Termos</a><span aria-hidden="true">|</span><a href="https://wantabrand.com/sobre-nosotros/" target="_blank" rel="noopener noreferrer">Sobre</a></nav>
+      </div>
+    </div>
+    <style>
+      html.modal-locked, body.modal-locked { overflow:hidden !important; touch-action:none; }
+      @keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
+      #aq-cta:hover { background:#333333 !important; transform:translateY(-2px); }
+      #aq-cta:disabled { opacity:.65; cursor:wait; transform:none !important; }
+      #mgs-cf-geo-indicator { margin:-14px 0 10px; color:#667085; font-size:12px; font-weight:600; text-align:center; line-height:1.35; }
+      .mgs-cf-gate-image { display:flex; justify-content:center; align-items:center; min-height:92px; margin:0 0 12px; }
+      .mgs-cf-gate-image img { display:block; width:auto; max-width:100%; height:auto; max-height:130px; object-fit:contain; }
+      .mgs-cf-final-icon { font-size:52px; margin-bottom:10px; }
+      .mgs-cf-final-title { font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2; }
+      .mgs-cf-final-subtitle { font-size:16px; color:#333; margin-bottom:25px; font-weight:500; }
+      .mgs-cf-sms-intro { margin:0 0 14px; color:#344054; font-size:15px; font-weight:700; text-align:left; }
+      .mgs-cf-sms-form { display:grid; gap:7px; margin:0 0 12px; text-align:left; }
+      .mgs-cf-sms-form label { color:#344054; font-size:13px; font-weight:700; }
+      .mgs-cf-sms-form input:not([type="checkbox"]) { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d0d5dd; border-radius:10px; background:#fff; color:#101828; font:500 16px/1.3 'Roboto',Arial,sans-serif; box-sizing:border-box; outline:none; }
+      .mgs-cf-sms-form input:not([type="checkbox"]):focus { border-color:#075e54; box-shadow:0 0 0 3px rgba(7,94,84,.12); }
+      .mgs-cf-sms-consent { display:flex; align-items:flex-start; gap:8px; margin-top:4px; cursor:pointer; font-weight:500 !important; line-height:1.35; }
+      .mgs-cf-sms-consent input { width:16px; height:16px; min-width:16px; margin:1px 0 0; accent-color:#075e54; }
+      #mgs-cf-sms-website { position:absolute !important; left:-9999px !important; width:1px !important; height:1px !important; opacity:0 !important; }
+      .mgs-cf-sms-error { min-height:18px; margin:2px 0 0; color:#b42318; font-size:13px; font-weight:600; text-align:left; }
+      #mgs-cf-sms-skip { display:block; width:100%; margin:9px 0 0; padding:9px 12px; border:0; background:transparent; color:#667085; box-shadow:none; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:2px; cursor:pointer; }
+      #mgs-cf-sms-skip:hover { color:#344054; background:transparent; transform:none; }
+      .mgs-cf-legal-footer { display:flex; justify-content:center; flex-wrap:wrap; gap:5px; margin:14px 0 -24px; color:#98a2b3; font-size:10px; line-height:1.3; }
+      .mgs-cf-legal-footer a { color:#98a2b3; text-decoration:none; opacity:.78; }
+      .mgs-cf-legal-footer a:hover { text-decoration:underline; opacity:1; }
+      .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
+      @media(max-width:480px) { #quiz-container > div { padding:14px 15px 28px !important; } #mgs-cf-geo-indicator { margin:-8px 0 7px; } .mgs-cf-gate-image { min-height:72px; margin-bottom:8px; } .mgs-cf-gate-image img { max-height:105px; } .question { font-size:18px !important; margin-bottom:16px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:12px 20px !important; } .mgs-cf-legal-footer { margin-bottom:-18px; } }
+    </style>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
