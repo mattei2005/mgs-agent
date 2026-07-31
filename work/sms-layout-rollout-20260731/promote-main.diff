@@ -1,0 +1,22 @@
+diff --git a/plugins/mgs-chat-funnels/mgs-chat-funnels.php b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/mgs-chat-funnels.php
+index a8174d93..68066515 100644
+--- a/plugins/mgs-chat-funnels/mgs-chat-funnels.php
++++ b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/mgs-chat-funnels.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: MGS Chat Funnels
+  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
+- * Version: 0.4.4
++ * Version: 0.4.5
+  * Author: MGS Digital Corp
+  */
+ 
+@@ -14,7 +14,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/class-mgs-chat-sms.php';
+ MGS_Chat_SMS::boot();
+ 
+ final class MGS_Chat_Funnels {
+-    const VERSION = '0.4.4';
++    const VERSION = '0.4.5';
+     const SHORTCODE = 'mgs_chat_funnel';
+     const MENU_SLUG = 'mgs-chat-funnels';
+ 

@@ -1,0 +1,14 @@
+diff --git a/plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/includes/class-mgs-chat-sms.php
+index e79c3cbe..99414959 100644
+--- a/plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php
++++ b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/includes/class-mgs-chat-sms.php
+@@ -239,6 +239,9 @@ final class MGS_Chat_SMS {
+         if ( 'actview' === sanitize_key( (string) $ad_provider ) ) {
+             return '<a id="mgs-cf-sms-skip" class="av-rewarded" role="button" tabindex="0" onclick="window.mgsHandleSmsSkipReward && window.mgsHandleSmsSkipReward(); return false;">' . esc_html( $label ) . '</a>';
+         }
++        if ( 'm2' === sanitize_key( (string) $ad_provider ) ) {
++            return '<button id="mgs-cf-sms-skip" class="pg-rewarded" type="button">' . esc_html( $label ) . '</button>';
++        }
+         return '<button id="mgs-cf-sms-skip" type="button">' . esc_html( $label ) . '</button>';
+     }
+ 

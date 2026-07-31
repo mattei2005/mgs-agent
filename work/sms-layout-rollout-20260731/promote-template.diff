@@ -1,0 +1,169 @@
+diff --git a/plugins/mgs-chat-funnels/templates/ciro-index-template.html b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/templates/ciro-index-template.html
+index ea9b36e0..13362132 100644
+--- a/plugins/mgs-chat-funnels/templates/ciro-index-template.html
++++ b/work/sms-layout-rollout-20260731/build/mgs-chat-funnels/templates/ciro-index-template.html
+@@ -572,11 +572,22 @@
+         ctaButton.click();
+       }
+ 
+-      function continueSmsWithoutLead() {
++      function triggerTrustedRewarded(rewardControl) {
++        if (!rewardControl) return;
++        applyRewardedButtonClass(rewardControl);
++        if (rewardControl.classList.contains("av-rewarded")) return;
++        const safeCloseQuiz = window.mgsCloseQuizAfterReward;
++        setTimeout(safeCloseQuiz, 1200);
++        if (!rewardedButtonClass) {
++          {{JBF_REWARDED_SHOW_JS}}
++        }
++      }
++
++      function continueSmsWithoutLead(rewardControl) {
+         if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
+         smsLeadCaptured = true;
+         smsError("");
+-        replaySmsCta(document.getElementById("aq-cta"));
++        triggerTrustedRewarded(rewardControl || document.getElementById("aq-cta"));
+       }
+ 
+       function smsLeadState() {
+@@ -589,16 +600,16 @@
+         return { name, phone, consent, valid: name.length >= 2 && phone.length >= 10 };
+       }
+ 
+-      function syncSmsActViewReward() {
+-        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return;
++      function syncSmsRewardControl() {
++        if (!smsConfig.enabled || !smsConfig.optional || !["av-rewarded", "pg-rewarded"].includes(rewardedButtonClass)) return;
+         const ctaButton = document.getElementById("aq-cta");
+         if (!ctaButton || smsLeadCaptured || smsLeadSubmitting) return;
+         const state = smsLeadState();
+         const eligible = state.valid || (smsConfig.optional && !state.consent);
+-        ctaButton.classList.toggle("av-rewarded", eligible);
+-        if (eligible) {
++        ctaButton.classList.toggle(rewardedButtonClass, eligible);
++        if (eligible && rewardedButtonClass === "av-rewarded") {
+           ctaButton.setAttribute("onclick", "window.mgsHandleSmsActViewReward && window.mgsHandleSmsActViewReward(this); return false;");
+-        } else {
++        } else if (rewardedButtonClass === "av-rewarded") {
+           ctaButton.removeAttribute("onclick");
+         }
+       }
+@@ -650,6 +661,7 @@
+ 
+       function submitSmsLead(ctaButton, replayAfterSuccess = true) {
+         if (!smsConfig.enabled || smsLeadCaptured || smsLeadSubmitting) return;
++        const asyncOptional = smsConfig.optional && replayAfterSuccess === false;
+         const nameInput = document.getElementById("mgs-cf-sms-name");
+         const phoneInput = document.getElementById("mgs-cf-sms-phone");
+         const consentInput = document.getElementById("mgs-cf-sms-consent");
+@@ -677,8 +689,10 @@
+         }
+         smsError("");
+         smsLeadSubmitting = true;
+-        ctaButton.disabled = true;
+-        ctaButton.textContent = "ENVIANDO...";
++        if (!asyncOptional) {
++          ctaButton.disabled = true;
++          ctaButton.textContent = "ENVIANDO...";
++        }
+         const params = new URLSearchParams(window.location.search);
+         const extra = {};
+         params.forEach((value, key) => { extra[key] = value; });
+@@ -709,15 +723,19 @@
+             if (!response.ok || !data.ok) throw new Error(data.error || "Não foi possível enviar. Tente novamente.");
+             smsLeadCaptured = true;
+             smsLeadSubmitting = false;
+-            ctaButton.disabled = false;
+-            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
++            if (!asyncOptional) {
++              ctaButton.disabled = false;
++              ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
++            }
+             if (replayAfterSuccess) replaySmsCta(ctaButton);
+           })
+           .catch((error) => {
+             smsLeadSubmitting = false;
+-            ctaButton.disabled = false;
+-            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+-            smsError(error && error.message ? error.message : "Não foi possível enviar. Tente novamente.");
++            if (!asyncOptional) {
++              ctaButton.disabled = false;
++              ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
++              smsError(error && error.message ? error.message : "Não foi possível enviar. Tente novamente.");
++            }
+           });
+       }
+ 
+@@ -1122,18 +1140,18 @@
+         smsInputs.forEach(function (input) {
+           if (input.dataset.mgsRewardSyncBound) return;
+           input.dataset.mgsRewardSyncBound = "1";
+-          input.addEventListener("input", syncSmsActViewReward);
+-          input.addEventListener("change", syncSmsActViewReward);
++          input.addEventListener("input", syncSmsRewardControl);
++          input.addEventListener("change", syncSmsRewardControl);
+         });
+         const ctaButton = document.getElementById("aq-cta");
+         if (ctaButton && !ctaButton.dataset.mgsRewardPointerBound) {
+           ctaButton.dataset.mgsRewardPointerBound = "1";
+-          ctaButton.addEventListener("pointerdown", syncSmsActViewReward);
++          ctaButton.addEventListener("pointerdown", syncSmsRewardControl);
+           ctaButton.addEventListener("keydown", function (event) {
+-            if (event.key === "Enter" || event.key === " ") syncSmsActViewReward();
++            if (event.key === "Enter" || event.key === " ") syncSmsRewardControl();
+           });
+         }
+-        syncSmsActViewReward();
++        syncSmsRewardControl();
+         updateQuizProgress();
+       }
+ 
+@@ -1178,7 +1196,7 @@
+         if (skipButton) {
+           if (skipButton.classList.contains("av-rewarded")) return;
+           e.preventDefault();
+-          continueSmsWithoutLead();
++          continueSmsWithoutLead(skipButton);
+           return;
+         }
+ 
+@@ -1201,22 +1219,27 @@
+         const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
+         if (ctaButton) {
+           e.preventDefault();
++          if (smsConfig.enabled && smsConfig.optional && !smsLeadCaptured) {
++            const state = smsLeadState();
++            if (!state.valid && state.consent) {
++              submitSmsLead(ctaButton, false);
++              return;
++            }
++            if (!state.consent) {
++              smsLeadCaptured = true;
++              smsError("");
++            } else if (!smsLeadSubmitting) {
++              submitSmsLead(ctaButton, false);
++            }
++            triggerTrustedRewarded(ctaButton);
++            return;
++          }
+           if (smsConfig.enabled && !smsLeadCaptured) {
+             submitSmsLead(ctaButton);
+             return;
+           }
+-          applyRewardedButtonClass(ctaButton);
+-          window.mgsRewardedClickInProgress = ctaButton.classList.contains("av-rewarded");
+           if (quizAlreadyClosed) return;
+-          const safeCloseQuiz = window.mgsCloseQuizAfterReward;
+-
+-          if (!ctaButton.classList.contains("av-rewarded")) {
+-            setTimeout(safeCloseQuiz, 1200);
+-          }
+-
+-          if (!rewardedButtonClass) {
+-            {{JBF_REWARDED_SHOW_JS}}
+-          }
++          triggerTrustedRewarded(ctaButton);
+         }
+       });
+     </script>
