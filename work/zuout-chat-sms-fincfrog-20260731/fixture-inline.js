@@ -75,6 +75,7 @@
 
       function applyRewardedButtonClass(node) {
         if (!node || !rewardedButtonClass) return;
+        if (rewardedButtonClass === "av-rewarded" && node.id !== "aq-cta") return;
         rewardedButtonClass.split(/\s+/).filter(Boolean).forEach((className) => node.classList.add(className));
       }
 
@@ -367,7 +368,7 @@
 
       function showAd() {
         const chatBox = document.getElementById("chat-box");
-        if (rewardedButtonClass) {
+        if (rewardedButtonClass === "pg-rewarded") {
           const pubGuruTopSlot = window.matchMedia && window.matchMedia("(min-width: 768px)").matches
             ? "wantabrand_desk_top"
             : "wantabrand_mob_top";

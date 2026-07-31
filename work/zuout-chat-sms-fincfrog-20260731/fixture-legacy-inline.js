@@ -75,6 +75,7 @@
 
       function applyRewardedButtonClass(node) {
         if (!node || !rewardedButtonClass) return;
+        if (rewardedButtonClass === "av-rewarded" && node.id !== "aq-cta") return;
         rewardedButtonClass.split(/\s+/).filter(Boolean).forEach((className) => node.classList.add(className));
       }
 
@@ -91,17 +92,27 @@
         return "(" + digits.slice(0, 2) + ") " + digits.slice(2, 7) + "-" + digits.slice(7);
       }
 
-      function continueSmsWithoutLead() {
-        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
-        smsLeadCaptured = true;
-        smsError("");
-        const ctaButton = document.getElementById("aq-cta");
+      function replaySmsCta(ctaButton) {
         if (!ctaButton) {
           window.mgsCloseQuizAfterReward();
           return;
         }
         applyRewardedButtonClass(ctaButton);
+        if (ctaButton.classList.contains("av-rewarded")) {
+          window.mgsRewardedClickInProgress = true;
+          ctaButton.onclick = function () {
+            window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward();
+            return false;
+          };
+        }
         ctaButton.click();
+      }
+
+      function continueSmsWithoutLead() {
+        if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
+        smsLeadCaptured = true;
+        smsError("");
+        replaySmsCta(document.getElementById("aq-cta"));
       }
 
       function loadGeoIndicator() {
@@ -185,7 +196,7 @@
             smsLeadSubmitting = false;
             ctaButton.disabled = false;
             ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
-            ctaButton.click();
+            replaySmsCta(ctaButton);
           })
           .catch((error) => {
             smsLeadSubmitting = false;
@@ -357,7 +368,7 @@
 
       function showAd() {
         const chatBox = document.getElementById("chat-box");
-        if (rewardedButtonClass) {
+        if (rewardedButtonClass === "pg-rewarded") {
           const pubGuruTopSlot = window.matchMedia && window.matchMedia("(min-width: 768px)").matches
             ? "wantabrand_desk_top"
             : "wantabrand_mob_top";
