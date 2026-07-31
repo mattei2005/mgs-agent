@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "car-br-offer-copy-rollout-20260731",
-      "next_step": "Atualizar os outros 5 RunCloud e 2 Bitnami; depois validar matriz pública 16/16 e smoke visual.",
+      "next_step": "Nenhuma ação pendente; usar os backups inventariados caso Rodolfo peça rollback futuro.",
       "objective": "Replicar nos 8 sites e nas rotas legacy+SMS a copy de três cards CAR-BR mostrada por Rodolfo, preservando URLs, providers e tracking.",
-      "source": "Discord message 1532821383137198151 + runtime Zuout /chat/car/br1 e /chat-sms/car/br1",
-      "state": "canário zuout concluído: backups de 2 configs, alteração restrita a três títulos e pontuação do terceiro subtitle; 2/2 rotas públicas exibem nova copy, removem copy antiga, mantêm actview e utm.",
+      "source": "Discord message 1532821383137198151; inventory mgs-chat-car-br-offer-copy-rollout-20260731; audit mgs_chat_car_br_offer_copy_eight_site_rollout",
+      "state": "completed: 16/16 configs com readback exato; 16/16 rotas http/copy ok; 48/48 targets próprios; providers, utm/fbclid e mapa sms preservados; browser visual passou; backups, canonical, inventário, audit e report-infra 1532825873370321137 concluídos.",
       "thread_id": "1532786405334319145",
-      "updated_at": "2026-07-31T18:50:46+00:00"
+      "updated_at": "2026-07-31T19:03:03+00:00"
     },
     {
       "agent": "zeus",
@@ -372,5 +372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-31T18:50:46+00:00"
+  "updated_at": "2026-07-31T19:03:03+00:00"
 }

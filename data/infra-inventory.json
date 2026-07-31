@@ -1061,11 +1061,11 @@
       "version": "0.4.4",
       "status": "canonical_0.4.4_zuout_sms_canary_active_other_7_sites_0.4.2",
       "files_count": 9,
-      "size_bytes": 654316,
-      "sha256_manifest": "17a5cff4eabf0121b016ec4ccc3879a2000fe28f5a518ad483879e66f9cd500d",
+      "size_bytes": 654311,
+      "sha256_manifest": "937105d077d014913ee3a2753623a4365da0a90154233e21a51f4245a03ea558",
       "package_path": "/root/mgs-agent/work/zuout-chat-sms-fincfrog-20260731/mgs-chat-funnels-0.4.4-code-only.zip",
       "package_sha256": "b2fa4238f48dd23df8c375cab21af87f9b8a3633c46fa842b8553616658104f4",
-      "modified_at": "2026-07-31T18:39:10+00:00",
+      "modified_at": "2026-07-31T19:00:35+00:00",
       "validations": [
         "local PHP lint, Node syntax and JSON validation OK",
         "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
@@ -1082,7 +1082,8 @@
         "Skip and unchecked-consent paths created no REST lead request, registered ActView zout_rewarded and continued to the chat; frontend mocked-success path preserved UTMs/fbclid and sms_consent=yes.",
         "ActView runtime validated: one scr.actview.net/zuout.js, zero JBF, rewarded CTA class-only anchor after capture/skip, zout_top_wrapper/zout_top inserted, no PubGuru tag on Zuout, offer cards have no av-rewarded class.",
         "Transactional backend smoke intercepted outbound SMS, produced HTTP 200 ok:G002 with lead count 0→1→0 and no real SMS; legacy /chat/car/br1 config hash remained unchanged.",
-        "Zuout 0.4.4: pre-change proof showed skip used trusted skip click followed by untrusted programmatic CTA replay and did not print rewarded reliably. Post-change click is trusted directly on av-rewarded; zout_rewarded GPT iframe reached 1280x577 on skip; valid submit registers rewarded without waiting for the WordPress/SMS response; no JS errors."
+        "Zuout 0.4.4: pre-change proof showed skip used trusted skip click followed by untrusted programmatic CTA replay and did not print rewarded reliably. Post-change click is trusted directly on av-rewarded; zout_rewarded GPT iframe reached 1280x577 on skip; valid submit registers rewarded without waiting for the WordPress/SMS response; no JS errors.",
+        "Offer-copy rollout 2026-07-31: 8/8 sites and 16/16 legacy+SMS routes HTTP 200 with exact screenshot copy; 48/48 own-domain targets, UTM/fbclid merge, provider split and private SMS URL absence preserved; browser Eggbev reached three visible cards without overlap and retained UTMs/fbclid."
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1132,9 +1133,12 @@
         "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033002Z/openzed.com",
         "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com",
         "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609",
-        "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047"
+        "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047",
+        "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com",
+        "/var/backups/mgs-chat-funnels-offer-copy/20260731T185100Z",
+        "/root/mgs-agent/backups/car-offer-copy/20260731T185115Z"
       ],
-      "source_report": "REPORT-INFRA Zuout direct trusted-click rewarded correction 2026-07-31",
+      "source_report": "REPORT-INFRA CAR-BR offer-copy 8-site rollout 2026-07-31",
       "description": "Canonical v0.4.4 keeps the optional CAR-BR SMS gate and triggers Zuout ActView rewarded from the original trusted user click while WordPress/SMS submission runs asynchronously. Deployed only to Zuout; the other seven sites remain on v0.4.2.",
       "business_timezone": "America/Sao_Paulo",
       "utc_storage_preserved": true,
@@ -1389,13 +1393,13 @@
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01.json",
       "type": "wordpress_plugin_config",
-      "sha256": "fb7a7d83afcc11485ed8bd394c7b40435b35ec5392620694b40da75c50f07bb4",
-      "size_bytes": 4783,
+      "sha256": "8bd40fd9169cc18e68facccb991ee60aa33108c97e53787069a21538268d24d1",
+      "size_bytes": 4780,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout CAR-BR-01 legacy chat config preserved unchanged while the SMS-only canary was revised.",
-      "validation": "Exact pre/post hash unchanged; /chat/car/br1 HTTP 200; original gate and offers preserved; ActView only, no JBF.",
-      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/mgs-chat-funnels-pre-0.4.3.tgz",
-      "updated_at": "2026-07-31T14:03:42-04:00"
+      "purpose": "Zuout CAR-BR-01 legacy config with the fleet-standard three-card offer copy requested by Rodolfo; own-domain targets and ActView preserved.",
+      "validation": "Exact runtime readback; screenshot copy present; 3/3 targets remain zuout.com; /chat/car/br1 HTTP 200; ActView and UTM/fbclid merge preserved.",
+      "backup_path": "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com/car-br-01.json",
+      "updated_at": "2026-07-31T19:00:35+00:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-template",
@@ -3777,13 +3781,13 @@
       "agent": "zeus",
       "type": "wordpress_plugin_config",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01-sms.json",
-      "sha256": "7e5e4eeb6a15d023ad4b3a57438a5ed185a83900de61d8de71e45169ff134f53",
-      "size_bytes": 5628,
+      "sha256": "7f68cfb031dc352899a296182ca9252d22957d61ef9b9cc3f1ec1e27ad746571",
+      "size_bytes": 5625,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "ZUOUT CAR-BR-01-SMS canary: price-range gate, geo, default vehicle image, optional confirmed SMS capture, prechecked consent, skip, compact form and legal footer.",
-      "validation": "Config readback exact; G002 preserved; three own-domain P1 targets preserved; browser skip/unchecked paths sent no lead; mocked frontend and backend transaction passed; private SMS endpoint absent from public HTML.",
-      "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-20260731134609/mgs-chat-funnels-pre-0.4.3.tgz",
-      "updated_at": "2026-07-31T14:03:42-04:00"
+      "purpose": "Zuout CAR-BR-01-SMS optional lead gate plus fleet-standard three-card offer copy requested by Rodolfo; G002, own-domain targets and ActView preserved.",
+      "validation": "Exact runtime readback; screenshot copy present; G002 and 3/3 zuout.com targets preserved; /chat-sms/car/br1 HTTP 200; trusted-click rewarded code and UTM/fbclid merge preserved.",
+      "backup_path": "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com/car-br-01-sms.json",
+      "updated_at": "2026-07-31T19:00:35+00:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-sms-engine",
@@ -3797,6 +3801,122 @@
       "validation": "PHP lint; remote hash readback; skip remains zero-lead while triggering direct trusted rewarded.",
       "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047/mgs-chat-funnels-pre-0.4.4.tgz",
       "updated_at": "2026-07-31T18:39:10+00:00"
+    },
+    {
+      "id": "mgs-chat-car-br-offer-copy-rollout-20260731",
+      "agent": "zeus",
+      "type": "wordpress_plugin_config_rollout",
+      "authorized_by": "Rodolfo Mattei",
+      "discord_message_id": "1532821383137198151",
+      "status": "completed_validated",
+      "updated_at": "2026-07-31T19:00:35+00:00",
+      "scope": {
+        "sites": [
+          "zuout.com",
+          "zytiva.com",
+          "openzed.com",
+          "finance.topfeed.fun",
+          "newsoun.com",
+          "wantabrand.com",
+          "cliquet.com",
+          "eggbev.com"
+        ],
+        "configs": [
+          "CAR-BR-01",
+          "CAR-BR-01-SMS"
+        ],
+        "routes": [
+          "/chat/car/br1",
+          "/chat-sms/car/br1"
+        ]
+      },
+      "copy": [
+        {
+          "name": "🚗 Financiar sem entrada",
+          "subtitle": "Valores com parcelas",
+          "bank": "R$157,00 a R$299,00"
+        },
+        {
+          "name": "💰 Ver ofertas disponíveis",
+          "subtitle": "Bancos com taxas reduzidas",
+          "bank": "e facilidade para baixo score."
+        },
+        {
+          "name": "🚘 Financiamento com parcela baixa",
+          "subtitle": "Consulte se essa condição está disponível para você,",
+          "bank": "Oferta por tempo LIMITADO !"
+        }
+      ],
+      "changed_runtime_fields": [
+        "offers.0.name",
+        "offers.1.name",
+        "offers.2.name",
+        "offers.2.subtitle"
+      ],
+      "preserved": [
+        "all offer targets/URLs",
+        "site provider split (JBF 6, Wantabrand M2/PubGuru 1, Zuout ActView 1)",
+        "UTM/fbclid merge",
+        "SMS manager mapping and private endpoints",
+        "all non-copy config fields"
+      ],
+      "canonical_config": {
+        "path": "/root/mgs-agent/plugins/mgs-chat-funnels/configs/car-br-01.json",
+        "sha256": "585c80e525d4abed9175cb21eeebf45ed51cf5c6b5380e81412312230d38f4fb",
+        "size_bytes": 5192
+      },
+      "runcloud_config_hashes": {
+        "eggbev.com": {
+          "legacy": "b89b86f679572823cb6a62f4c16a6f976e55fde7f06aa5766f62f16f46c851c2",
+          "sms": "672e91fe0314c9d809c8d2947ad01eadae6c87bb817e022f99cafbfd82578f5c"
+        },
+        "newsoun.com": {
+          "legacy": "ea3bbaa0e4988743181275d9db0a63c6ab0a7240b20532f9345d8a4cf8963529",
+          "sms": "cabd00c01e0127dd0b50e06f449a86b883ab7169b7cca64a5ed19a10386df086"
+        },
+        "finance.topfeed.fun": {
+          "legacy": "9e4a66fe91bc7cb08926a643a6497f13d03eb8c3387b746a2033e9a8fa98e002",
+          "sms": "918947d4f602f50eaad52e7bda91e909056ed4492499e13be017f75d169ed954"
+        },
+        "wantabrand.com": {
+          "legacy": "1c4ffbf43fb0bc75423df58cf879de7abb538c3343c42d2048a6c67622002546",
+          "sms": "a78e3499794896724c72881fcf7305e1ff86b083cec1221a92090be19450f46f"
+        },
+        "zuout.com": {
+          "legacy": "8bd40fd9169cc18e68facccb991ee60aa33108c97e53787069a21538268d24d1",
+          "sms": "7f68cfb031dc352899a296182ca9252d22957d61ef9b9cc3f1ec1e27ad746571"
+        },
+        "zytiva.com": {
+          "legacy": "592627fa50dea36db7d918c855ddebcaf018ba59b8437ff31da811cd531e39ca",
+          "sms": "1118a3b4e7c1250552a59783420bf40ba467892cf1dd5d4f71d8f022f5ecf46e"
+        }
+      },
+      "bitnami_normalized_config_hashes": {
+        "openzed.com": {
+          "legacy": "6e0b031c26c406ec35845a2cdbbba2303c35993ad77163929296848ae0f17448",
+          "sms": "f07bc36d1e39c6b6ce450145e287d21e8172d4bae87b1204ac8699bfcfb3da93"
+        },
+        "cliquet.com": {
+          "legacy": "8709bceae322d70a8c1b90b4a25b0d6fd79d4e1a6e552921439ee70d1ed2f97c",
+          "sms": "83bcb3e6d29ffeda0d5426857888ebd42b0de3a06dc5f82784e47dfda0ed4443"
+        }
+      },
+      "backups": [
+        "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com",
+        "/var/backups/mgs-chat-funnels-offer-copy/20260731T185100Z",
+        "/root/mgs-agent/backups/car-offer-copy/20260731T185115Z"
+      ],
+      "validation": {
+        "exact_config_readback": "16/16",
+        "public_http_200": "16/16",
+        "exact_copy": "16/16",
+        "own_domain_targets": "48/48",
+        "providers_preserved": "8/8",
+        "utm_fbclid_merge": "16/16",
+        "private_sms_urls_absent": "16/16",
+        "browser_visual": "Eggbev legacy: 3 cards visible and legible, no overlap; destination links preserved cb+utm_source+utm_medium+fbclid"
+      },
+      "known_warning": "Wantabrand WP-CLI emitted its pre-existing yoast-rest-meta.php permission warning; mutation, JSON validation, exact config readback and both public routes passed."
     }
   ],
   "profile_skill_references": [
