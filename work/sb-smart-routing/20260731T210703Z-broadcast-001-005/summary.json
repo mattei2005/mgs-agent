@@ -1,0 +1,48 @@
+{
+  "status": "success",
+  "pool001_id": 676,
+  "pool001_update_http": 201,
+  "before_count": 11,
+  "after_count": 15,
+  "created_count": 4,
+  "distribution": {
+    "in-mx-cc-en-mct broadcast 001": 5,
+    "in-mx-cc-en-mct broadcast 002": 5,
+    "in-mx-cc-en-mct broadcast 003": 5,
+    "in-mx-cc-en-mct broadcast 004": 5,
+    "in-mx-cc-en-mct broadcast 005": 3
+  },
+  "created_pools": [
+    {
+      "id": 867,
+      "name": "in-mx-cc-en-mct broadcast 002",
+      "route_count": 5,
+      "action": "created",
+      "http_write": 201
+    },
+    {
+      "id": 868,
+      "name": "in-mx-cc-en-mct broadcast 003",
+      "route_count": 5,
+      "action": "created",
+      "http_write": 201
+    },
+    {
+      "id": 869,
+      "name": "in-mx-cc-en-mct broadcast 004",
+      "route_count": 5,
+      "action": "created",
+      "http_write": 201
+    },
+    {
+      "id": 870,
+      "name": "in-mx-cc-en-mct broadcast 005",
+      "route_count": 3,
+      "action": "created",
+      "http_write": 201
+    }
+  ],
+  "total_unique_routes": 23,
+  "other_existing_pools_unchanged": true,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260731T210703Z-broadcast-001-005"
+}

@@ -44,6 +44,40 @@ Divisão confirmada:
 
 Na planilha, usar a coluna de URL calculada por `REGEXREPLACE(...;"/$";"")`, não a URL com barra final.
 
+## Padrão Infinitynexx — Broadcast MCT MX-CC-ES
+
+Fonte confirmada: mesma planilha/aba, linhas `110–132`. Campos operacionais: coluna A = pool, D = `route`, E = `utm_content`, G = URL calculada sem barra final.
+
+Configuração:
+
+- Nome: `in-mx-cc-en-mct broadcast NNN`
+- `SOURCE=MCT`
+- `COUNTRY=MX`
+- `VERTICAL=CC`
+- `LANGUAGE=ES`
+- `MEDIUM=""` (vazio; não usar `SLOT_D`)
+- `APPEND_PARAMS=false`
+
+Redistribuição confirmada de 23 rotas:
+
+- editar o `001` existente para manter `001–005`;
+- criar `002` com `006–010`;
+- criar `003` com `011–015`;
+- criar `004` com `016–020`;
+- criar `005` com `021–023`.
+
+O pool `001` original pode conter as 23 identidades com destinos antigos diferentes da nova planilha. A planilha é a fonte para a nova distribuição de URLs. Derivar `jbf_operation` ao vivo a partir das rotas atuais que já usam cada URL-alvo; operações MCT são diferentes das operações Drip/Facebook e não podem ser inferidas pelo padrão Drip.
+
+Fluxo seguro aplicado:
+
+1. backup integral do `001` e da lista de pools;
+2. validar as 23 identidades `route + utm_content` contra a planilha;
+3. criar e validar `002–005` sequencialmente;
+4. atualizar o `001` por `POST /routing/{id}` somente após os quatro novos pools passarem no readback;
+5. confirmar união final de 23 identidades únicas, sem perda ou duplicação, e preservar os demais pools.
+
+Se houver falha parcial, reconsultar o estado real antes de repetir. O executor deve ser idempotente: pool existente integralmente correto é preservado; divergência aborta. Não excluir pools para rollback sem a confirmação exigida para deleção.
+
 ## Contrato live da SB
 
 O bundle da tela define:
