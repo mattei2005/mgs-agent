@@ -127,6 +127,8 @@ Nunca imprimir ou persistir o header `Authorization`. Capturá-lo somente em mem
 ## Pitfalls observados
 
 - `POST /routing` com status `201` é consulta, não criação; diferenciar pelo path (`/routing` versus `/routing/0`).
+- A coluna operacional de URL pode apenas replicar a URL-base com `=CONCATENATE(B...)` e manter uma `/` final. Se todas as linhas estiverem consistentes e a operação live existir para a forma sem barra, normalizar somente o payload com remoção da barra final; não alterar a planilha.
+- O pool legado pode existir sem o sufixo `001`. Nesse caso, fazer backup e atualizar o mesmo ID para o nome `... 001` com apenas o primeiro bloco; nunca criar um `001` duplicado.
 - O grid staged pode não renderizar a URL apesar de o modal da rota ter `url` e `jbf_operation` preenchidos. Validar esses valores dentro do modal e no readback final.
 - Toast `Successfully saved!` ao salvar uma rota significa apenas que ela entrou na lista local do modal; não prova criação do pool.
 - Se o Save global não gerar rede, confirmar ausência do pool antes de qualquer retry ou fallback API.
