@@ -146,5 +146,14 @@ def main():
     try:editor_write(s,domain,f,before[f])
     except Exception as e:print(f'ROLLBACK_FAILED|{domain}|{f}|{type(e).__name__}',flush=True)
    raise
- manifest={'run_id':RUN_ID,'backup_root':str(BACKUP_ROOT),'sites':results};(BACKUP_ROOT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'complete':True,'backup_root':str(BACKUP_ROOT),'sites':[x['domain'] for x in results]},ensure_ascii=False),flush=True)
+ manifest_path=BACKUP_ROOT/'manifest.json'
+ previous=[]
+ if manifest_path.exists():
+  try: previous=json.loads(manifest_path.read_text()).get('sites',[])
+  except Exception: previous=[]
+ merged={r['domain']:r for r in previous}
+ merged.update({r['domain']:r for r in results})
+ manifest={'run_id':RUN_ID,'backup_root':str(BACKUP_ROOT),'sites':[merged[k] for k in sorted(merged)]}
+ manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');os.chmod(manifest_path,0o600)
+ print(json.dumps({'complete':True,'backup_root':str(BACKUP_ROOT),'sites':[x['domain'] for x in results]},ensure_ascii=False),flush=True)
 if __name__=='__main__':main()

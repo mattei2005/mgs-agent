@@ -1,0 +1,602 @@
+{
+  "summary": {
+    "routes_pass": 16,
+    "routes_total": 16,
+    "assets_pass": 32,
+    "assets_total": 32,
+    "providers": {
+      "actview": 2,
+      "m2": 2,
+      "jbf": 12
+    }
+  },
+  "routes": [
+    {
+      "site": "zuout.com",
+      "kind": "sms",
+      "provider": "actview",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://zuout.com/privacy-policy/",
+          "https://zuout.com/terms-of-service/",
+          "https://zuout.com/about-us/"
+        ],
+        "hero": "https://zuout.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "zuout.com",
+      "kind": "legacy",
+      "provider": "actview",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "zytiva.com",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://zytiva.com/privacy-policy/",
+          "https://zytiva.com/terms-of-service/",
+          "https://zytiva.com/about-us/"
+        ],
+        "hero": "https://zytiva.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "zytiva.com",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "openzed.com",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://openzed.com/privacy-policy/",
+          "https://openzed.com/terms-of-use/",
+          "https://openzed.com/about/"
+        ],
+        "hero": "https://openzed.com/wp-content/uploads/2026/07/mgs-car-financing-hero-5a78807b0b05-2.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "openzed.com",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "finance.topfeed.fun",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://finance.topfeed.fun/privacy-policy/",
+          "https://finance.topfeed.fun/terms-of-use/",
+          "https://finance.topfeed.fun/about-us/"
+        ],
+        "hero": "https://finance.topfeed.fun/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "finance.topfeed.fun",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "newsoun.com",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://newsoun.com/privacy-policy/",
+          "https://newsoun.com/terms-of-service/",
+          "https://newsoun.com/about-us/"
+        ],
+        "hero": "https://newsoun.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "newsoun.com",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "wantabrand.com",
+      "kind": "sms",
+      "provider": "m2",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://wantabrand.com/politica-de-privacidad/",
+          "https://wantabrand.com/terms-of-service/",
+          "https://wantabrand.com/sobre-nosotros/"
+        ],
+        "hero": "https://wantabrand.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "wantabrand.com",
+      "kind": "legacy",
+      "provider": "m2",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "cliquet.com",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://cliquet.com/privacy-policy/",
+          "https://cliquet.com/terms/",
+          "https://cliquet.com/about/"
+        ],
+        "hero": "https://cliquet.com/wp-content/uploads/2026/07/mgs-car-financing-hero-5a78807b0b05.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "cliquet.com",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    },
+    {
+      "site": "eggbev.com",
+      "kind": "sms",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "layout": true,
+        "skip_loading": true,
+        "optional": true,
+        "legal": true,
+        "direct_reward": true,
+        "provider_direct": true,
+        "hero": true
+      },
+      "extras": {
+        "links": [
+          "https://eggbev.com/privacy-policy/",
+          "https://eggbev.com/terms-of-service/",
+          "https://eggbev.com/about-us/"
+        ],
+        "hero": "https://eggbev.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png"
+      },
+      "pass": true
+    },
+    {
+      "site": "eggbev.com",
+      "kind": "legacy",
+      "provider": "jbf",
+      "checks": {
+        "http": true,
+        "html": true,
+        "code_045": true,
+        "offers": true,
+        "no_loop5": true,
+        "provider": true,
+        "top": true,
+        "foreign": true,
+        "legacy_no_sms": true
+      },
+      "extras": {},
+      "pass": true
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://cliquet.com/about/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://cliquet.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://cliquet.com/terms/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://cliquet.com/wp-content/uploads/2026/07/mgs-car-financing-hero-5a78807b0b05.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://eggbev.com/about-us/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://eggbev.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://eggbev.com/terms-of-service/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://eggbev.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://finance.topfeed.fun/about-us/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://finance.topfeed.fun/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://finance.topfeed.fun/terms-of-use/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://finance.topfeed.fun/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://newsoun.com/about-us/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://newsoun.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://newsoun.com/terms-of-service/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://newsoun.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://openzed.com/about/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://openzed.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://openzed.com/terms-of-use/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://openzed.com/wp-content/uploads/2026/07/mgs-car-financing-hero-5a78807b0b05-2.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://wantabrand.com/politica-de-privacidad/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://wantabrand.com/sobre-nosotros/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://wantabrand.com/terms-of-service/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://wantabrand.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://zuout.com/about-us/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zuout.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zuout.com/terms-of-service/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zuout.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    },
+    {
+      "url": "https://zytiva.com/about-us/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zytiva.com/privacy-policy/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zytiva.com/terms-of-service/",
+      "http": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "pass": true
+    },
+    {
+      "url": "https://zytiva.com/wp-content/plugins/mgs-chat-funnels/assets/car-financing-hero.png",
+      "http": 200,
+      "content_type": "image/png",
+      "pass": true
+    }
+  ],
+  "pass": true
+}
