@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "car-br-offer-copy-rollout-20260731",
+      "next_step": "Extrair configs live, gerar backups e atualizar somente offers[0..2].name em car-br-01.json e car-br-01-sms.json nos 8 sites.",
+      "objective": "Replicar nos 8 sites e nas rotas legacy+SMS a copy de três cards CAR-BR mostrada por Rodolfo, preservando URLs, providers e tracking.",
+      "source": "Discord message 1532821383137198151 + attached image img_9b9ebab60f8e.webp",
+      "state": "preflight: live 16/16 já compartilham subtitles/banks; títulos atuais diferem da imagem nos 3 cards. escopo autorizado pelo rodolfo nesta thread.",
+      "thread_id": "1532786405334319145",
+      "updated_at": "2026-07-31T18:46:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
       "next_step": "Operação encerrada. Monitorar os primeiros leads reais por site/lista; qualquer troca futura de lista ou expansão para novo site exige novo mapa autorizado.",
       "objective": "Atualizar o catálogo privado das listas SMS dos chats CAR e vincular cada CAR-BR-01-SMS ao código G001-G006 definido por Rodolfo nos oito sites elegíveis",
@@ -362,5 +372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T20:30:50+00:00"
+  "updated_at": "2026-07-31T18:46:54+00:00"
 }
