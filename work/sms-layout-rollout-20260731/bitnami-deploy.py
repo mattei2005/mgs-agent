@@ -12,7 +12,6 @@ RUN_ID=os.environ.get('RUN_ID') or datetime.now(timezone.utc).strftime('%Y%m%dT%
 BACKUP_ROOT=ROOT/'backups'/'sms-layout-rollout'/RUN_ID
 MAIN='mgs-chat-funnels/mgs-chat-funnels.php'
 TEXT_FILES=[
- 'mgs-chat-funnels/includes/class-mgs-chat-sms.php',
  'mgs-chat-funnels/templates/ciro-index-template.html',
  'mgs-chat-funnels/assets/chat-funnels.css',
  'mgs-chat-funnels/assets/chat-funnels.js',
@@ -115,7 +114,9 @@ def main():
  selected={x.strip() for x in os.environ.get('MGS_TARGET_DOMAINS','').split(',') if x.strip()};sites=[x for x in SITES if not selected or x['domain'] in selected]
  if not sites:raise RuntimeError('no admin target selected')
  BACKUP_ROOT.mkdir(parents=True,exist_ok=True);os.chmod(BACKUP_ROOT,0o700);results=[]
- desired={f'mgs-chat-funnels/{p.relative_to(BUILD).as_posix()}':p.read_text() for p in sorted(BUILD.rglob('*')) if p.is_file() and p.suffix!='.png' and 'configs' not in p.parts}
+ plugin_build=BUILD
+ desired={f'mgs-chat-funnels/{p.relative_to(plugin_build).as_posix()}':p.read_text() for p in sorted(plugin_build.rglob('*')) if p.is_file() and p.suffix!='.png' and 'configs' not in p.parts}
+ desired[MAIN]=(BUILD.parent/'mgs-chat-funnels-bitnami-inline.php').read_text()
  for site in sites:
   domain=site['domain'];print(f'BEGIN|{domain}',flush=True);s=login(site);auth=api_auth(site);bdir=BACKUP_ROOT/domain;bdir.mkdir(parents=True,exist_ok=True);os.chmod(bdir,0o700)
   before={};changed=[];media_id=None;media_new=False;config_saved=False;sms=None
