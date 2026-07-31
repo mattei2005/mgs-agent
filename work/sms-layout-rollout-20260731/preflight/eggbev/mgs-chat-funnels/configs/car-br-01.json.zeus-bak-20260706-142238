@@ -1,0 +1,165 @@
+{
+  "id": "CAR-BR-01",
+  "vertical": "car",
+  "country": "br",
+  "language": "pt-BR",
+  "route": "/chat/car/br1",
+  "title": "chat cards financiamento de carros",
+  "brand": "Eggbev",
+  "theme": "whatsapp",
+  "mode": "cards",
+  "utm_passthrough": true,
+  "tags": [
+    "br",
+    "car",
+    "rec"
+  ],
+  "persona": {
+    "names": [
+      "Maria",
+      "João",
+      "Juliana",
+      "José",
+      "Fernanda",
+      "Carlos",
+      "Olivia",
+      "Lucas",
+      "Camilla",
+      "Pedro"
+    ],
+    "female_names": [
+      "Maria",
+      "Juliana",
+      "Fernanda",
+      "Olivia",
+      "Camilla"
+    ],
+    "male_names": [
+      "João",
+      "José",
+      "Carlos",
+      "Lucas",
+      "Pedro"
+    ],
+    "female_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"
+    ],
+    "male_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"
+    ],
+    "role": "Especialista em Financiamentos",
+    "status": "🟢 online agora"
+  },
+  "gate": {
+    "enabled": true,
+    "questions": [
+      {
+        "text": "🚗 Você já tem um carro?",
+        "answers": [
+          {
+            "label": "Sim",
+            "value": "sim"
+          },
+          {
+            "label": "Não",
+            "value": "nao"
+          }
+        ]
+      },
+      {
+        "text": "🔍 Qual tipo de veículo você quer financiar?",
+        "answers": [
+          {
+            "label": "Usado",
+            "value": "usado"
+          },
+          {
+            "label": "Seminovo",
+            "value": "seminovo"
+          },
+          {
+            "label": "Zero KM",
+            "value": "zero"
+          }
+        ]
+      }
+    ],
+    "loading_text": "🔍 Buscando a melhor oferta para você...",
+    "loading_ms": 2000,
+    "final_icon": "🚗",
+    "final_title": "Oferta encontrada!",
+    "final_subtitle": "Um especialista foi identificado para te atender agora.",
+    "cta_label": "TRANSFERIR PARA ESPECIALISTA →",
+    "footer_note": "✅ Análise gratuita e sem compromisso"
+  },
+  "chat": {
+    "intro": [
+      "Olá! Eu sou {botName}. 🚗",
+      "Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado!",
+      "Vamos encontrar a oferta ideal para você?"
+    ],
+    "start_answers": [
+      "✅ Vamos lá!",
+      "👀 Quero conhecer as opções"
+    ],
+    "questions": [
+      {
+        "text": "Quanto você pode pagar por mês?",
+        "answers": [
+          "Até R$ 500",
+          "Entre R$ 500 e R$ 1.000",
+          "Acima de R$ 1.000"
+        ]
+      },
+      {
+        "text": "Você tem preferência por algum tipo de veículo?",
+        "answers": [
+          "Sim, já tenho um modelo em mente",
+          "Não, estou aberto a sugestões",
+          "Ainda estou decidindo"
+        ]
+      }
+    ],
+    "pre_offer_messages": [
+      "🔍 Estou pesquisando as melhores condições para você..."
+    ],
+    "offer_headline": "🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:"
+  },
+  "offers": [
+    {
+      "name": "Volkswagen Polo",
+      "subtitle": "Taxa reduzida a partir de 1,29% ao mês",
+      "bank": "Crédito de até R$50.000 em até 60 meses",
+      "image": "https://www.nicepng.com/png/full/90-906789_download-vw-polo-png-and-use-it-wherever.png",
+      "logo": "https://www.nicepng.com/png/full/90-906789_download-vw-polo-png-and-use-it-wherever.png",
+      "target": "https://eggbev.com/financiamento-veiculos-sem-entrada-digital/"
+    },
+    {
+      "name": "Volkswagen T-Cross",
+      "subtitle": "Taxas a partir de 0,98% ao mês",
+      "bank": "Opção de entrada zero e resposta rápida",
+      "image": "https://d10ax2wcinhk08.cloudfront.net/vehicles-catalog/02657614-3538-48e2-bd3f-2649790e1106_volkswagen-tcross-style.png",
+      "logo": "https://d10ax2wcinhk08.cloudfront.net/vehicles-catalog/02657614-3538-48e2-bd3f-2649790e1106_volkswagen-tcross-style.png",
+      "target": "https://eggbev.com/br-seu-carro-novo-com-um-click/"
+    },
+    {
+      "name": "Hyundai HB20",
+      "subtitle": "Entrada facilitada, sujeita à análise",
+      "bank": "Parcelas calculadas com taxa reduzida",
+      "image": "https://production.autoforce.com/uploads/version/profile_image/12803/comprar-limited_ed61048847.png",
+      "logo": "https://production.autoforce.com/uploads/version/profile_image/12803/comprar-limited_ed61048847.png",
+      "target": "https://eggbev.com/br-financiamento-do-carro-agil/"
+    }
+  ],
+  "ads_enabled": true,
+  "ad_company": "digital-trust",
+  "ad_domain": ""
+}

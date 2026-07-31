@@ -1,0 +1,149 @@
+{
+  "id": "EMP-BR-01",
+  "vertical": "emp",
+  "country": "br",
+  "language": "pt-BR",
+  "route": "/chat/emp/br1",
+  "title": "Chatbot Empréstimo Pessoal - MGS",
+  "theme": "whatsapp",
+  "mode": "cards",
+  "utm_passthrough": true,
+  "tags": [
+    "br",
+    "emp",
+    "rec"
+  ],
+  "persona": {
+    "names": [
+      "Maria",
+      "João",
+      "Juliana",
+      "José",
+      "Fernanda",
+      "Carlos",
+      "Olivia",
+      "Lucas",
+      "Camilla",
+      "Pedro"
+    ],
+    "female_names": [
+      "Maria",
+      "Juliana",
+      "Fernanda",
+      "Olivia",
+      "Camilla"
+    ],
+    "male_names": [
+      "João",
+      "José",
+      "Carlos",
+      "Lucas",
+      "Pedro"
+    ],
+    "female_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"
+    ],
+    "male_photos": [
+      "https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg",
+      "https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"
+    ],
+    "role": "Consultor de Empréstimo",
+    "status": "🟢 online agora"
+  },
+  "gate": {
+    "enabled": true,
+    "questions": [
+      {
+        "text": "💰 Qual valor você precisa?",
+        "answers": [
+          {
+            "label": "R$ 500 a R$ 3.000",
+            "value": "500-3000"
+          },
+          {
+            "label": "R$ 3.000 a R$ 10.000",
+            "value": "3000-10000"
+          },
+          {
+            "label": "Acima de R$ 10.000",
+            "value": "10000-plus"
+          }
+        ]
+      }
+    ],
+    "loading_text": "🔍 Buscando a melhor oferta para você...",
+    "loading_ms": 1800,
+    "final_icon": "💰",
+    "final_title": "Oferta encontrada!",
+    "final_subtitle": "Um consultor foi identificado para te atender agora.",
+    "cta_label": "VER OFERTAS DE EMPRÉSTIMO →",
+    "footer_note": "✅ Conteúdo patrocinado — sua oferta em instantes"
+  },
+  "chat": {
+    "intro": [
+      "Olá! Eu sou {botName}. 💰",
+      "Sou consultor de empréstimo pessoal e estou aqui para te ajudar a conseguir o crédito que você precisa com as melhores condições do mercado!",
+      "Vamos encontrar a oferta ideal para você?"
+    ],
+    "start_answers": [
+      "✅ Vamos lá!",
+      "👀 Quero conhecer as opções"
+    ],
+    "questions": [
+      {
+        "text": "Para qual finalidade você precisa do empréstimo?",
+        "answers": [
+          "Quitar dívidas",
+          "Realizar um sonho",
+          "Emergência"
+        ]
+      },
+      {
+        "text": "Você tem nome restrito no SPC/Serasa?",
+        "answers": [
+          "Sim, mas quero tentar mesmo assim",
+          "Não, meu nome está limpo",
+          "Não sei informar"
+        ]
+      }
+    ],
+    "pre_offer_messages": [
+      "🔍 Estou pesquisando as melhores opções para você..."
+    ],
+    "offer_headline": "🎉 Encontrei 3 ofertas exclusivas para você!|Toque na que mais te interessa para ver as condições:"
+  },
+  "offers": [
+    {
+      "name": "Nubank",
+      "logo": "https://cdn.prod.website-files.com/678f67e54f5919b234804989/6845e680dedb8dc8d6fe068b_nubank_result.png",
+      "subtitle": "Ver oferta",
+      "target": "https://fincfrog.com/br-chat-emp-nubank/"
+    },
+    {
+      "name": "C6 Bank",
+      "logo": "https://s3.amazonaws.com/atsprd/ats/201905101118000025-c6bank-positivo-1.png",
+      "subtitle": "Ver oferta",
+      "target": "https://fincfrog.com/br-chat-emp-c6-bank/"
+    },
+    {
+      "name": "Banco BV",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Banco_BV_Logo.svg/1280px-Banco_BV_Logo.svg.png",
+      "subtitle": "Ver oferta",
+      "target": "https://fincfrog.com/br-chat-emp-banco-bv/"
+    }
+  ],
+  "ads_enabled": true,
+  "ad_company": "digital-trust",
+  "ad_domain": "",
+  "standalone": true,
+  "tracking_mode": "gtm",
+  "gtm_container_id": "GTM-TNZXS6W7",
+  "ga4_measurement_id": "G-S6RJRT38DG"
+}

@@ -22,6 +22,16 @@
     },
     {
       "agent": "zeus",
+      "id": "car-br-sms-zuout-layout-seven-site-rollout-20260731",
+      "next_step": "Reconciliar baseline live de rewards/topo e diff código/config; construir pacote code-only e migrador de campos de layout por domínio/provider.",
+      "objective": "Replicar nos outros 7 sites SMS o layout opcional CAR-BR validado no Zuout, preservando estritamente rewarded, bloco do topo, provider, gestores SMS, ofertas, destinos e tracking.",
+      "source": "Discord message 1532829164745265192; inventory mgs-chat-funnels canonical 0.4.4",
+      "state": "preflight iniciado após autorização explícita do rodolfo na mensagem 1532829164745265192; zuout 0.4.4 é a fonte canário, demais sites estão em 0.4.2.",
+      "thread_id": "1532786405334319145",
+      "updated_at": "2026-07-31T19:17:00+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
       "next_step": "Operação encerrada. Monitorar os primeiros leads reais por site/lista; qualquer troca futura de lista ou expansão para novo site exige novo mapa autorizado.",
       "objective": "Atualizar o catálogo privado das listas SMS dos chats CAR e vincular cada CAR-BR-01-SMS ao código G001-G006 definido por Rodolfo nos oito sites elegíveis",
@@ -372,5 +382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-31T19:03:03+00:00"
+  "updated_at": "2026-07-31T19:17:00+00:00"
 }

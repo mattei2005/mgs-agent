@@ -1,0 +1,151 @@
+{
+    "id": "CAR-BR-01",
+    "vertical": "car",
+    "country": "br",
+    "language": "pt-BR",
+    "route": "/chat/car/br1",
+    "title": "chat zap sequencial",
+    "brand": "Eggbev",
+    "theme": "whatsapp",
+    "mode": "sequential",
+    "utm_passthrough": true,
+    "tags": [
+        "br",
+        "car",
+        "rec"
+    ],
+    "persona": {
+        "names": [
+            "Maria",
+            "João",
+            "Juliana",
+            "José",
+            "Fernanda",
+            "Carlos",
+            "Olivia",
+            "Lucas",
+            "Camilla",
+            "Pedro"
+        ],
+        "female_names": [
+            "Maria",
+            "Juliana",
+            "Fernanda",
+            "Olivia",
+            "Camilla"
+        ],
+        "male_names": [
+            "João",
+            "José",
+            "Carlos",
+            "Lucas",
+            "Pedro"
+        ],
+        "female_photos": [
+            "https://fincfrog.com/wp-content/uploads/2026/03/m1.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/m2.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/m3.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/m4.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/m5.jpg"
+        ],
+        "male_photos": [
+            "https://fincfrog.com/wp-content/uploads/2026/03/h1.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/h2.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/h3.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/h4.jpg",
+            "https://fincfrog.com/wp-content/uploads/2026/03/h5.jpg"
+        ],
+        "role": "Especialista em Financiamentos",
+        "status": "🟢 online agora"
+    },
+    "gate": {
+        "enabled": true,
+        "questions": [
+            {
+                "text": "🚗 Você já tem um carro?",
+                "answers": [
+                    "Sim",
+                    "Não"
+                ]
+            },
+            {
+                "text": "🔍 Qual tipo de veículo você quer financiar?",
+                "answers": [
+                    "Usado",
+                    "Seminovo",
+                    "Zero KM"
+                ]
+            }
+        ],
+        "loading_text": "🔍 Buscando a melhor oferta para você...",
+        "loading_ms": 2000,
+        "final_icon": "🚗",
+        "final_title": "Oferta encontrada!",
+        "final_subtitle": "Um especialista foi identificado para te atender agora.",
+        "cta_label": "TRANSFERIR PARA ESPECIALISTA →",
+        "footer_note": "✅ Análise gratuita e sem compromisso"
+    },
+    "chat": {
+        "intro": [
+            "Olá! Eu sou {botName}. 🚗",
+            "Sou especialista em financiamento de veículos e estou aqui para te ajudar a realizar o sonho do seu carro com as melhores condições do mercado!",
+            "Vamos encontrar a oferta ideal para você?"
+        ],
+        "start_answers": [
+            "✅ Vamos lá!",
+            "👀 Quero conhecer as opções"
+        ],
+        "questions": [
+            {
+                "text": "Quanto você pode pagar por mês?",
+                "answers": [
+                    "Até R$ 500",
+                    "Entre R$ 500 e R$ 1.000",
+                    "Acima de R$ 1.000"
+                ]
+            },
+            {
+                "text": "Você tem preferência por algum tipo de veículo?",
+                "answers": [
+                    "Sim, já tenho um modelo em mente",
+                    "Não, estou aberto a sugestões",
+                    "Ainda estou decidindo"
+                ]
+            }
+        ],
+        "pre_offer_messages": [],
+        "offer_headline": ""
+    },
+    "offers": [
+        {
+            "name": "Banco BV",
+            "messages": [
+                "Taxa reduzida a partir de 1,29% ao mês, crédito de até R$50.000 e prazo de até 60 meses para pagar. Quer ver as condições disponíveis para você?"
+            ],
+            "accept_label": "Sim, quero simular →",
+            "reject_label": "Não, mostre outra opção",
+            "target": "https://eggbev.com/financiamento-veiculos-sem-entrada-digital/"
+        },
+        {
+            "name": "Santander Financiamentos",
+            "messages": [
+                "Financiamento com taxas a partir de 0,98% ao mês, opção de entrada zero e até 60 meses para pagar. Em muitos casos, a análise é rápida e a resposta sai em poucas horas."
+            ],
+            "accept_label": "Sim, quero ver as condições →",
+            "reject_label": "Não, mostre outra opção",
+            "target": "https://eggbev.com/br-seu-carro-novo-com-um-click/"
+        },
+        {
+            "name": "Bradesco",
+            "messages": [
+                "Com base no valor da parcela informado, encontrei opções de veículos com entrada facilitada, sujeita à análise de crédito, e parcelas já calculadas com taxa reduzida."
+            ],
+            "accept_label": "Sim, quero conhecer →",
+            "reject_label": "",
+            "target": "https://eggbev.com/br-financiamento-do-carro-agil/"
+        }
+    ],
+    "ads_enabled": true,
+    "ad_company": "digital-trust",
+    "ad_domain": ""
+}
