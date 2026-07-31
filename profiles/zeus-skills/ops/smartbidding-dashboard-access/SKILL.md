@@ -23,6 +23,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
+- **Smart Routing → criar/validar routing pool** → `references/smart-routing-pool-create.md`
 - **Recent operational references** → `references/route-pack-01.md`
 - **Purpose → Messenger Navigation Route** → `references/route-pack-02.md`
 - **Page tab → Cadastrar página Bot/DTR ausente na Smart Bidding** → `references/route-pack-03.md`

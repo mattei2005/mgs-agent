@@ -1,0 +1,51 @@
+{
+  "status": "success",
+  "http_write": 201,
+  "pool_id": 863,
+  "pool_name": "in-mx-cc-en-drip 003",
+  "metadata": {
+    "NAME": "in-mx-cc-en-drip 003",
+    "SOURCE": "FACEBOOK",
+    "COUNTRY": "MX",
+    "VERTICAL": "CC",
+    "LANGUAGE": "ES",
+    "MEDIUM": ".*-d$",
+    "APPEND_PARAMS": false
+  },
+  "routes": [
+    {
+      "route": "in-mx-cc-es-drip-m10-1",
+      "utm_content": "drip_mx_cc_m10-1",
+      "url": "https://infinitynexx.com/rec-tarjeta-de-credito-mx-oro-citibanamex",
+      "jbf_operation": "facebook_mx_cc_oro-citiba-d_rec"
+    },
+    {
+      "route": "in-mx-cc-es-drip-m11-1",
+      "utm_content": "drip_mx_cc_m11-1",
+      "url": "https://infinitynexx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+      "jbf_operation": "facebook_mx_cc_scotia-d_rec"
+    },
+    {
+      "route": "in-mx-cc-es-drip-m12-1",
+      "utm_content": "drip_mx_cc_m12-1",
+      "url": "https://infinitynexx.com/rec-tarjeta-de-credito-mx-nu",
+      "jbf_operation": "facebook_mx_cc_nu-d_rec"
+    },
+    {
+      "route": "in-mx-cc-es-drip-m13-1",
+      "utm_content": "drip_mx_cc_m13-1",
+      "url": "https://infinitynexx.com/rec-tarjeta-de-credito-mx-ideal-scotiabank",
+      "jbf_operation": "facebook_mx_cc_scotiabank-d_rec"
+    },
+    {
+      "route": "in-mx-cc-es-drip-m9-1",
+      "utm_content": "drip_mx_cc_m9-1",
+      "url": "https://infinitynexx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+      "jbf_operation": "facebook_mx_cc_bbva-azul-d_rec"
+    }
+  ],
+  "before_count": 7,
+  "after_count": 8,
+  "existing_pools_unchanged": true,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260731T203714Z-api"
+}
