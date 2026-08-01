@@ -81,7 +81,10 @@ def sheet_rows():
     # silently return only the visible subset. Read the canonical tab through
     # the MGS Service Account so operational scope always includes hidden rows.
     access_token=google_access_token()
-    tab_range=urllib.parse.quote(f"'{MIGRATION_TAB}'!A:X",safe='')
+    # Columns A:M contain every field used by active-user and Step 1 scope
+    # resolution. Avoid N:X: unused columns/formulas can make the Sheets values
+    # endpoint exceed the cron's transport timeout.
+    tab_range=urllib.parse.quote(f"'{MIGRATION_TAB}'!A:M",safe='')
     url=f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{tab_range}?majorDimension=ROWS'
     values=sheets_api(access_token,'GET',url).get('values') or []
     if not values:
