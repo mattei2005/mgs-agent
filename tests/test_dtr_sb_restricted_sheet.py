@@ -42,6 +42,7 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(args[:2], ('fixture-token', 'GET'))
         self.assertIn('sheets.googleapis.com/v4/spreadsheets/', args[2])
         self.assertIn('Migracao%2022%2F06', args[2])
+        self.assertIn('%21A%3AM', args[2])
 
     def test_discord_delivery_retries_rate_limit_using_retry_after(self):
         class Response:
