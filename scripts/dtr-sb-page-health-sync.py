@@ -864,6 +864,10 @@ def sheets_api(access_token, method, url, data=None, max_attempts=3):
             except (TypeError,ValueError):
                 delay=float(attempt)
             time.sleep(min(delay,10.0))
+        except (TimeoutError, urllib.error.URLError) as exc:
+            if attempt>=max_attempts:
+                raise RuntimeError(f'Google Sheets transport error after {attempt} attempts: {exc}') from exc
+            time.sleep(float(attempt))
     raise RuntimeError('Google Sheets request exhausted retries')
 
 def sheet_a1_title(title):

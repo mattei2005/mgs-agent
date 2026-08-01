@@ -100,6 +100,34 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(urlopen.call_count, 2)
         sleep.assert_called_once_with(1.0)
 
+    def test_sheets_api_retries_transport_timeout(self):
+        class Response:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b'{"values": []}'
+
+        with mock.patch.object(sync.urllib.request, 'urlopen', side_effect=[TimeoutError('read timed out'), Response()]) as urlopen, \
+             mock.patch.object(sync.time, 'sleep') as sleep:
+            result = sync.sheets_api('fixture-token', 'GET', 'https://sheets.googleapis.com/fixture')
+
+        self.assertEqual(result, {'values': []})
+        self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(1.0)
+
+    def test_sheets_api_stops_after_transport_retry_budget(self):
+        with mock.patch.object(sync.urllib.request, 'urlopen', side_effect=TimeoutError('read timed out')) as urlopen, \
+             mock.patch.object(sync.time, 'sleep') as sleep:
+            with self.assertRaisesRegex(RuntimeError, 'transport error after 3 attempts'):
+                sync.sheets_api('fixture-token', 'GET', 'https://sheets.googleapis.com/fixture')
+
+        self.assertEqual(urlopen.call_count, 3)
+        self.assertEqual(sleep.call_args_list, [mock.call(1.0), mock.call(2.0)])
+
     def test_sheets_api_does_not_retry_nontransient_400(self):
         bad_request = urllib.error.HTTPError(
             'https://sheets.googleapis.com/fixture',
