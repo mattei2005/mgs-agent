@@ -44,6 +44,18 @@ Load this skill when Rodolfo asks:
 10. **Quantify the decision.** Calculate exact recoverable bytes and projected filesystem usage; after any authorized cleanup, verify path absence and measure actual reclaimed space.
 11. **Report conclusion first.** State whether reboot is required, what can update routinely, what requires a controlled window, exact high-confidence cleanup candidates, protected classes, and the residual governance gap.
 
+## Phase boundary: VPS first, application runtime later
+
+When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard operational boundary, not merely an ordering hint:
+
+1. Complete the VPS phase through package validation, required reboot, and post-boot readback before beginning any Hermes port or deployment work.
+2. Before that closure, Hermes activity is limited to proving the currently active launcher/version is unchanged. Do not create or promote a port patch, install a candidate venv, run application builds/smokes, or modify Hermes deployment/guard scripts.
+3. Distinguish status precisely:
+   - `packages updated; reboot pending` = VPS maintenance is **not complete**;
+   - `new boot validated; reboot marker cleared; services healthy` = VPS phase complete.
+4. If the user asks “deu certo ou não?”, answer the binary state first in one sentence, then name the single pending gate. Do not bury the answer inside a long Hermes/update narrative.
+5. A later request to defer Hermes immediately freezes any staged Hermes artifact as inactive evidence only. Verify the canonical launcher still points to the old runtime and do not activate, clean up, or extend the staged port without a new scope.
+
 ## Safety and authorization
 
 - Read-only discovery, index refresh, `git fetch`, archive listing, hash verification, and temporary apply checks do not authorize install, restart, retention changes, or deletion.

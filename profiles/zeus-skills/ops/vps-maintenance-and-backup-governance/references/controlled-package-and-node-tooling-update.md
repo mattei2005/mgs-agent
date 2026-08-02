@@ -54,6 +54,8 @@ Include:
 - a non-secret pre-state JSON with Node/npm/Corepack, exact package versions, service states/PIDs, reboot marker, and authorization message ID;
 - the exact previous vendor `.deb` downloaded while it is still available.
 
+If the previous `.deb` is no longer published and the installed payload must be archived from `dpkg-query -L`, treat that list as untrusted archive input. It commonly contains directory sentinels such as `/.`; passing the raw list to `tar -C /` can archive the entire root filesystem. Build the payload list programmatically and require every entry to be a regular file or symlink. Explicitly reject blank paths, `.`, `/`, `./`, `../`, and every directory before invoking `tar`. Validate the resulting member list against the package manifest and cap/check expected bytes before accepting it as rollback evidence. If an accidental archive exceeds the expected package footprint, stop immediately, preserve/quarantine it without deletion, re-check disk, and rebuild from a strict allowlist.
+
 Generate hashes in shell, then validate:
 
 ```bash
@@ -74,7 +76,7 @@ Install only the simulated package/version with `--only-upgrade`, `--no-install-
 Immediately validate:
 
 - exact `dpkg-query` version;
-- target service active;
+- role-aware runtime validation: resolve actual unit names from package contents, inventory, and live systemd before asserting service health. A package may be a shared library/PHP extension with no `.service` unit; in that case validate the installed payload, expected INI/module wiring where it is intentionally enabled, and the separate vendor agent service instead of inventing `<package>.service`;
 - empty `dpkg --audit`;
 - zero unexpected APT candidates;
 - Zeus/Atena/Ares active;
