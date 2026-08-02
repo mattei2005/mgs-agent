@@ -227,6 +227,22 @@ for job in parse_crons():
                     detail = f'erro semântico no log: {clean} | age={age//60}min path={log_path}'
                     break
     rows.append((script, status, detail))
+
+# Um mesmo script pode ter várias agendas no root crontab apontando para o
+# mesmo log. O monitor só consegue provar o estado compartilhado do script,
+# não uma falha independente por agenda. Consolidar antes de consultar/mutar
+# state evita quatro alertas idênticos e transições ERROR/RESOLVED conflitantes
+# dentro da mesma execução.
+priority = {'OK': 0, 'STALE': 1, 'ERROR': 2}
+evaluations = {}
+for script, status, detail in rows:
+    if status == 'SKIP':
+        continue
+    current = evaluations.get(script)
+    if current is None or priority.get(status, -1) > priority.get(current[0], -1):
+        evaluations[script] = (status, detail)
+
+for script, (status, detail) in evaluations.items():
     key = script
     if status in ('STALE', 'ERROR'):
         last = int(state['alerts'].get(key, {}).get('last_alert', 0) or 0)

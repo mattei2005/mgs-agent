@@ -116,7 +116,34 @@ def truncate(s, n):
     return s if len(s) <= n else s[:n-1] + '…'
 
 
-def build_report(summary, status_counts, issue_rows, new_keys, resolved_count):
+def canonical_restriction_counts(sb_rows, tday, active_restricted_fn):
+    """Count restrictions with the same inclusive-date rule as the restricted-pages channel.
+
+    ``sb_rows`` is already limited to active users and the global ignore list.
+    Reuse the page-health monitor's ``active_restricted`` function so the daily
+    audit cannot silently drift back to treating any filled historical date as
+    an active restriction.
+    """
+    active_rows = [
+        row for row in sb_rows
+        if active_restricted_fn(
+            {'RESTRICTED_UNTIL': row.get('restricted_until')},
+            tday,
+        )
+    ]
+    by_status = Counter(row.get('status') or '(vazio)' for row in active_rows)
+    known = {'Broadcast', 'Campaign', 'On-hold', 'Blocked'}
+    return {
+        'Broadcast': by_status.get('Broadcast', 0),
+        'Campaign': by_status.get('Campaign', 0),
+        'On-hold': by_status.get('On-hold', 0),
+        'Blocked': by_status.get('Blocked', 0),
+        'Other': sum(value for key, value in by_status.items() if key not in known),
+        'Total': len(active_rows),
+    }
+
+
+def build_report(summary, status_counts, restriction_counts, issue_rows, new_keys, resolved_count):
     lines = []
     lines.append('DTR x Dash — auditoria diária')
     lines.append('')
@@ -138,12 +165,26 @@ def build_report(summary, status_counts, issue_rows, new_keys, resolved_count):
         lines.append(f'{k:<{w}}  {v}')
     lines.append('')
     lines.append('Status Dash SB')
-    for k in ['Broadcast', 'Campaign', 'On-hold', 'Blocked', 'Ready', 'Restricted ativo']:
+    for k in ['Broadcast', 'Campaign', 'On-hold', 'Blocked', 'Ready']:
         lines.append(f'{k:<18} {status_counts.get(k, 0)}')
-    extra = {k: v for k, v in status_counts.items() if k not in {'Broadcast','Campaign','On-hold','Blocked','Ready','Restricted ativo'}}
+    extra = {k: v for k, v in status_counts.items() if k not in {'Broadcast','Campaign','On-hold','Blocked','Ready'}}
     for k, v in sorted(extra.items()):
         if v:
             lines.append(f'{k:<18} {v}')
+    lines.append('')
+    lines.append('Restrições vigentes — mesmo escopo do canal de restritas')
+    lines.append(f"Data inclusiva: RESTRICTED_UNTIL >= {summary['restriction_as_of_date']}")
+    restriction_rows = [
+        ('Broadcast restritas', restriction_counts.get('Broadcast', 0)),
+        ('Campaign restritas', restriction_counts.get('Campaign', 0)),
+        ('On-hold ignoradas', restriction_counts.get('On-hold', 0)),
+        ('Blocked ignoradas', restriction_counts.get('Blocked', 0)),
+        ('Outros status', restriction_counts.get('Other', 0)),
+        ('Total vigente', restriction_counts.get('Total', 0)),
+    ]
+    rw = max(len(k) for k, _ in restriction_rows)
+    for k, v in restriction_rows:
+        lines.append(f'{k:<{rw}}  {v}')
     lines.append('')
     if not issue_rows:
         lines.append('Problemas')
@@ -307,7 +348,12 @@ def main():
         issues.append({'type':'SB_SEM_DTR','diffs':['missing_in_dtr'], 'dtr':{}, 'sb':s})
 
     status_counts = Counter(r['status'] or '(vazio)' for r in sb_rows_f)
-    status_counts['Restricted ativo'] = sum(1 for r in sb_rows_f if r.get('restricted_until'))
+    restriction_as_of_date = datetime.now(NY).strftime('%Y-%m-%d')
+    restriction_counts = canonical_restriction_counts(
+        sb_rows_f,
+        restriction_as_of_date,
+        mod.sync.active_restricted,
+    )
 
     issue_rows = []
     issue_keys = set()
@@ -354,6 +400,10 @@ def main():
         'dtr_only': len(dtr_only),
         'sb_only': len(sb_only),
         'issue_types': dict(Counter(r['type'] for r in issue_rows)),
+        'restriction_as_of_date': restriction_as_of_date,
+        'restriction_scope': 'active users after global ignore; RESTRICTED_UNTIL inclusive; Broadcast headline matches restricted-pages channel',
+        'broadcast_restricted_active': restriction_counts['Broadcast'],
+        'restricted_active_all_statuses': restriction_counts['Total'],
         'errors': errors,
         'missing_1p_users': missing,
         'op_errors': op_errors,
@@ -362,7 +412,7 @@ def main():
     raw_path = REPORT_DIR / f'dtr-sb-daily-match-audit-{stamp}.json'
     csv_path = REPORT_DIR / f'dtr-sb-daily-match-audit-issues-{stamp}.csv'
     if not args.dry_run:
-        raw_path.write_text(json.dumps({'summary':summary,'status_counts':dict(status_counts),'issues':issue_rows,'dtr_scans':dtr_scans}, ensure_ascii=False, indent=2), encoding='utf-8')
+        raw_path.write_text(json.dumps({'summary':summary,'status_counts':dict(status_counts),'restriction_counts':restriction_counts,'issues':issue_rows,'dtr_scans':dtr_scans}, ensure_ascii=False, indent=2), encoding='utf-8')
         with csv_path.open('w', newline='', encoding='utf-8-sig') as f:
             w = csv.DictWriter(f, fieldnames=['type','fb','pg_dtr','pg_sb','status','login_dtr','login_sb','problem'])
             w.writeheader(); w.writerows(issue_rows)
@@ -370,7 +420,7 @@ def main():
     else:
         summary['json'] = None; summary['csv'] = None
 
-    report = build_report(summary, status_counts, issue_rows, new_keys, resolved_count)
+    report = build_report(summary, status_counts, restriction_counts, issue_rows, new_keys, resolved_count)
     if args.dry_run or args.no_post:
         print(report)
     else:
