@@ -122,7 +122,18 @@ When Rodolfo separately authorizes a deferred service restart such as `systemd-l
 5. Re-run `needrestart -b`. Acceptance for the service is **zero `NEEDRESTART-SVC` rows**. Remaining `NEEDRESTART-SESS` rows are stale userspace sessions, not a failed service restart or reboot requirement; they normally clear on logout/reconnection. Do not force logout or restart the root user manager without separate scope.
 6. Clear the deferred-service residual in the existing runtime baseline, preserve the stale-session note, record audit readback, and publish REPORT-INFRA.
 
-## 7. Reconcile canonical services and inventory
+## 7. Close an authorized reboot as a durable phase
+
+When the package gate leaves `/var/run/reboot-required`, the VPS phase remains open until a new boot is proven healthy.
+
+1. Before reboot, record the current boot ID, active Hermes launcher/version, exact package versions, `/tmp` owner/mode, failed units, and gateway states. When Hermes is deferred, assert its launcher will remain unchanged across boot.
+2. Use an external/durable post-reboot validator rather than relying on the active gateway turn to survive its own host reboot. The validator must be self-contained, must not activate deferred application work, and must check the new boot ID against the recorded one.
+3. Post-boot acceptance requires: changed boot ID; absent reboot marker; exact package versions; `root:root 1777` on `/tmp`; zero APT candidates, holds, `dpkg --audit` findings, failed units, and priority 0..3 boot errors; current kernel agreement in `needrestart`; cron/security agent active; Zeus/Atena/Ares active with positive PIDs and fresh Discord-connected log markers; deferred Hermes launcher/version unchanged.
+4. Do not let a scheduled validator become a duplicate asynchronous conclusion. If Rodolfo asks for status before it runs, inspect the live host first, pause/remove the pending validator, complete the checks in foreground, and deliver one canonical result. If it already ran, read its actual output before replying.
+5. Persist a compact validation artifact, update the existing inventory entries rather than duplicating them, close the checkpoint, append audit readback, and send one canonical REPORT-INFRA embed. Remove any one-shot validator after foreground completion.
+6. Communication is binary-first: `sim, VPS concluída` only after all post-boot gates pass; otherwise `não, <single remaining gate>` before details. Never describe `packages updated; reboot pending` as complete maintenance.
+
+## 8. Reconcile canonical services and inventory
 
 Do not guess unit names. Resolve operational services from `data/infra-inventory.json` and live systemd readback; for example, the active MGS auto-commit unit may differ from an assumed name.
 
