@@ -343,12 +343,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
-      "next_step": "Reiniciar a VPS sem alterar o launcher do Hermes; validar boot, pacotes, serviços e Zeus/Atena/Ares; encerrar somente a fase VPS.",
+      "next_step": "Nenhum passo pendente na VPS. Hermes permanece v0.19.0; retomar somente mediante novo pedido de Rodolfo.",
       "objective": "Concluir primeiro a atualização da VPS; manter o Hermes atual ativo e deixar o port v0.19.1 apenas staged para depois.",
-      "source": "discord:1533586372445605980 message:1533615575668883626",
-      "state": "vps_packages_pass_reboot_pending_hermes_deferred",
+      "source": "discord:1533586372445605980 messages:1533615575668883626,1533619511608082622; validation:/root/mgs-agent/reports/vps-maintenance/20260802-post-reboot-validation.json",
+      "state": "vps_phase_complete_hermes_deferred",
       "thread_id": "1533586372445605980",
-      "updated_at": "2026-08-02T23:22:53+00:00"
+      "updated_at": "2026-08-02T23:44:06+00:00"
     },
     {
       "agent": "zeus",
@@ -392,5 +392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-02T23:22:53+00:00"
+  "updated_at": "2026-08-02T23:44:06+00:00"
 }

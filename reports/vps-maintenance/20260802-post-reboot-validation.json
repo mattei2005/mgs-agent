@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-08-02T19:42:25-04:00",
+  "status": "PASS",
+  "scope": "VPS phase only; Hermes deferred",
+  "boot": {
+    "pre_boot_id": "3d0eff28-a817-4a9e-9f62-cdba82e262d5",
+    "post_boot_id": "69de533d-1a40-41ef-a869-af0eae6d98a0",
+    "changed": true,
+    "kernel": "6.8.0-136-generic",
+    "uptime": "up 13 minutes",
+    "last_reboot": "2026-08-02 19:28"
+  },
+  "packages": {
+    "1password-cli": "2.38.1-1",
+    "monarx-agent": "4.3.54-master",
+    "monarx-protect": "5.2.55-master",
+    "monarx-protect-autodetect": "5.2.55-master",
+    "nodejs": "22.23.2-1nodesource1",
+    "npm": "12.0.2",
+    "corepack": "0.35.0"
+  },
+  "expected_packages": {
+    "1password-cli": "2.38.1-1",
+    "monarx-agent": "4.3.54-master",
+    "monarx-protect": "5.2.55-master",
+    "monarx-protect-autodetect": "5.2.55-master",
+    "nodejs": "22.23.2-1nodesource1",
+    "npm": "12.0.2",
+    "corepack": "0.35.0"
+  },
+  "versions_exact": true,
+  "system": {
+    "tmp": "root:root 1777",
+    "reboot_required": false,
+    "apt_upgradable": 0,
+    "holds": 0,
+    "dpkg_audit_lines": 0,
+    "failed_units": 0,
+    "critical_boot_logs": 0,
+    "disk": "60G/96G (63%)"
+  },
+  "services": {
+    "zeus-gateway": {
+      "active": "active",
+      "pid": 720,
+      "restarts": 0
+    },
+    "atena-gateway": {
+      "active": "active",
+      "pid": 684,
+      "restarts": 0
+    },
+    "ares-gateway": {
+      "active": "active",
+      "pid": 683,
+      "restarts": 0
+    },
+    "cron": {
+      "active": "active",
+      "pid": 686,
+      "restarts": 0
+    },
+    "monarx-agent": {
+      "active": "active",
+      "pid": 722,
+      "restarts": 0
+    }
+  },
+  "discord_connected": {
+    "zeus": true,
+    "atena": true,
+    "ares": true
+  },
+  "hermes": {
+    "launcher": "/root/.local/bin/hermes-b9ba7c78",
+    "version": "Hermes Agent v0.19.0 (2026.7.20) · upstream a6defd4f",
+    "candidate_launcher_exists": false,
+    "changed": false
+  },
+  "rollback": "/root/.hermes/secure-backups/vps-maintenance/20260802-174737",
+  "package_log": "/root/mgs-agent/logs/vps-package-maintenance-20260802-174737.log",
+  "deferred": {
+    "hermes_v0191": "staged only; not active",
+    "partial_backup_quarantine": "preserved; deletion not authorized"
+  }
+}
