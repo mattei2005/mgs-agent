@@ -410,6 +410,17 @@ def safe_zip(path: Path) -> None:
                 raise RuntimeError(f"unsafe zip member: {member.filename}")
 
 
+def archive_write_if_present(archive: zipfile.ZipFile, source: Path, arcname: str) -> bool:
+    """Archive a live file, tolerating deletion after inventory enumeration."""
+    try:
+        archive.write(source, arcname)
+    except FileNotFoundError:
+        if not source.exists():
+            return False
+        raise
+    return True
+
+
 QUICK_PROFILE_ENTRIES = (
     "state.db", "config.yaml", ".env", "auth.json", "cron", "channel_directory.json",
     "channel_aliases.json", "pairing", "platforms/pairing", "projects.db",
@@ -467,7 +478,7 @@ def run_hermes_backup(profile: str, mode: str, output: Path) -> dict[str, Any]:
                     finally:
                         snapshot.unlink(missing_ok=True)
                 else:
-                    archive.write(source, rel.as_posix())
+                    archive_write_if_present(archive, source, rel.as_posix())
     if not output.is_file() or output.stat().st_size == 0:
         raise RuntimeError(f"Hermes backup did not create {output}")
     safe_zip(output)
@@ -553,7 +564,7 @@ def add_runtime_metadata(archive: zipfile.ZipFile) -> None:
         units.update(unit_dir.glob(pattern))
     for unit in sorted(units):
         if unit.is_file() and not unit.is_symlink():
-            archive.write(unit, "mgs-agent/runtime/systemd/" + unit.name)
+            archive_write_if_present(archive, unit, "mgs-agent/runtime/systemd/" + unit.name)
 
 
 def build_mgs_zip(mode: str, output: Path, scratch: Path) -> dict[str, Any]:
@@ -568,7 +579,7 @@ def build_mgs_zip(mode: str, output: Path, scratch: Path) -> dict[str, Any]:
                 finally:
                     snapshot.unlink(missing_ok=True)
             else:
-                archive.write(source, arcname.as_posix())
+                archive_write_if_present(archive, source, arcname.as_posix())
         add_runtime_metadata(archive)
         git_head = subprocess.run(
             ["git", "rev-parse", "HEAD"], cwd=REPO, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False

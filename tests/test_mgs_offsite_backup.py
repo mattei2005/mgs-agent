@@ -59,6 +59,19 @@ class OffsiteBackupTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'unsafe zip member'):
                 mod.safe_zip(bad)
 
+    def test_archive_skips_file_deleted_after_inventory(self) -> None:
+        import tempfile
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            vanished = tmp_path / 'vanished.md'
+            output = tmp_path / 'output.zip'
+            vanished.write_text('transient cron output')
+            vanished.unlink()
+            with zipfile.ZipFile(output, 'w') as archive:
+                self.assertFalse(mod.archive_write_if_present(archive, vanished, 'cron/output/vanished.md'))
+            with zipfile.ZipFile(output) as archive:
+                self.assertEqual(archive.namelist(), [])
+
 
 if __name__ == '__main__':
     unittest.main()
