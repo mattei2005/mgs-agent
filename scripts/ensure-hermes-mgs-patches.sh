@@ -187,7 +187,7 @@ PY
       fi
       ;;
     mgs-busy-steer-reentrant-rebuild-*.patch)
-      if grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/run.py" \
+      if grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
         && grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
         && grep -q "test_recursive_run_enables_same_generation_replacement" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
@@ -426,7 +426,7 @@ grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/ga
   || fail "missing MGS startup steer async FIFO/barrier test"
 grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS stale-agent busy steer regression test"
-grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/run.py" \
+grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
   || fail "missing MGS recursive rebuilt-agent ownership transfer"
 grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS rebuilt-agent follow-up regression test"
