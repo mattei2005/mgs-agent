@@ -102,8 +102,11 @@ SNAPSHOT_FILES=(
   "$HERMES_REPO/gateway/run.py"
   "$HERMES_REPO/gateway/platforms/base.py"
   "$HERMES_REPO/plugins/platforms/discord/adapter.py"
+  "$HERMES_REPO/plugins/memory/honcho/__init__.py"
+  "$HERMES_REPO/plugins/memory/honcho/session.py"
   "$HERMES_REPO/gateway/slash_commands.py"
   "$HERMES_REPO/gateway/reasoning_router.py"
+  "$HERMES_REPO/gateway/turn_context.py"
   "$HERMES_REPO/run_agent.py"
   "$HERMES_REPO/hermes_cli/config.py"
   "$HERMES_REPO/hermes_cli/oneshot.py"
@@ -164,6 +167,9 @@ fi
 if ! "\$HERMES_PY" -m py_compile \
   "\$RUNTIME" \
   "\$HERMES_REPO/gateway/reasoning_router.py" \
+  "\$HERMES_REPO/gateway/turn_context.py" \
+  "\$HERMES_REPO/plugins/memory/honcho/__init__.py" \
+  "\$HERMES_REPO/plugins/memory/honcho/session.py" \
   "\$HERMES_REPO/hermes_cli/config.py" \
   "\$HERMES_REPO/hermes_cli/oneshot.py" \
   "\$HERMES_REPO/agent/background_review.py" \
@@ -177,7 +183,7 @@ if ! "\$HERMES_PY" -m py_compile \
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
 fi
-if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
+if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, plugins.memory.honcho.session, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"
   audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
   exit 78
