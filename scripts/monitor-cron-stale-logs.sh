@@ -210,7 +210,7 @@ for job in parse_crons():
             for idx, tline in enumerate(tail_lines):
                 is_start = re.search(r'(start|iniciando|===)', tline, re.I)
                 is_success = re.search(
-                    r'(?:^\[[^\]]+\]\s+(?:OK\b|END\b.*\brc=0\b)|\bstatus=ok\b)',
+                    r'(?:^\[[^\]]+\]\s+(?:OK\b|END\b.*\brc=0\b)|\bstatus=ok\b|["\']status["\']\s*:\s*["\']PASS["\'])',
                     tline,
                     re.I,
                 )
