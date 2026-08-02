@@ -24,7 +24,7 @@ Create/maintain this as an operational monitor, not an infra alert:
 
 ## Report shape Rodolfo approved
 
-Include both match health and SB page status counts:
+Include match health, total SB page statuses, and a separate canonical active-restriction block:
 
 ```text
 DTR x Dash — auditoria diária
@@ -47,11 +47,26 @@ Campaign
 On-hold
 Blocked
 Ready
-Restricted ativo
+
+Restrições vigentes — mesmo escopo do canal de restritas
+Data inclusiva: RESTRICTED_UNTIL >= YYYY-MM-DD
+Broadcast restritas
+Campaign restritas
+On-hold ignoradas
+Blocked ignoradas
+Outros status
+Total vigente
 
 Problemas — primeiras linhas
 FB_PAGE_ID | PG DTR | PG SB | Status SB | Login DTR | Login SB | Problema
 ```
+
+Restriction-count invariant:
+
+- Never label any non-empty historical `RESTRICTED_UNTIL` as active.
+- Reuse `dtr-sb-page-health-sync.py::active_restricted`, where the exit date is inclusive (`RESTRICTED_UNTIL >= today`).
+- `Broadcast restritas` must use the same active-user scope, global ignore list, date rule, and `Status SB = Broadcast` filter as the restricted-pages channel.
+- The two channels may show different values only when their live snapshots were collected at different times and SB changed between those timestamps; the metric definition itself must remain identical.
 
 Silence/verbosity rule: if there is no actionable divergence, post only the compact summary/status block; do not dump long tables.
 
