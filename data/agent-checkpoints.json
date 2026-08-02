@@ -343,12 +343,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
-      "next_step": "Congelar versões, criar rollback, corrigir /tmp, executar atualização VPS e validar antes do reboot.",
-      "objective": "Atualizar a VPS primeiro, reiniciar e validar; depois atualizar Hermes preservando patches e invariantes MGS.",
-      "source": "discord-thread:1533586372445605980; messages:1533587950451953707,1533588276177535037",
-      "state": "started: confirmação crítica recebida nas mensagens 1533587950451953707 e 1533588276177535037; auditoria vps concluída; pré-manutenção em preparação.",
+      "next_step": "Resolver o runtime Hermes ativo, congelar o alvo estável, portar patches MGS em isolamento e testar antes do único reboot final.",
+      "objective": "Atualizar a VPS primeiro, depois Hermes, e realizar um único reboot final com validação completa.",
+      "source": "discord-thread:1533586372445605980; messages:1533587950451953707,1533588276177535037; audit:vps_package_maintenance_stage",
+      "state": "vps package stage pass: /tmp 1777; apt 5/5 atualizado; node 22.23.2, npm 12.0.2, corepack 0.35.0; apt pending 0; gateways ativos com pids preservados; reboot ainda pendente. rollback validado em /root/.hermes/secure-backups/vps-maintenance/20260802-174737.",
       "thread_id": "1533586372445605980",
-      "updated_at": "2026-08-02T21:34:10+00:00"
+      "updated_at": "2026-08-02T21:52:16+00:00"
     },
     {
       "agent": "zeus",
@@ -392,5 +392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-02T21:34:10+00:00"
+  "updated_at": "2026-08-02T21:52:16+00:00"
 }
