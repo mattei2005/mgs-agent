@@ -26,8 +26,8 @@ class DailyAuditRestrictionMetricTest(unittest.TestCase):
         rows = [
             {'status': 'Broadcast', 'restricted_until': '2026-08-01'},
             {'status': 'Broadcast', 'restricted_until': '2026-08-02'},
-            {'status': 'Broadcast', 'restricted_until': '2026-08-03'},
-            {'status': 'Campaign', 'restricted_until': '2026-08-03'},
+            {'status': 'broadcast', 'restricted_until': '2026-08-03'},
+            {'status': 'campaign', 'restricted_until': '2026-08-03'},
             {'status': 'On-hold', 'restricted_until': '2026-08-03'},
             {'status': 'Blocked', 'restricted_until': '2026-08-03'},
             {'status': 'Ready', 'restricted_until': '2026-08-03'},

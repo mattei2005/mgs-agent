@@ -131,13 +131,13 @@ def canonical_restriction_counts(sb_rows, tday, active_restricted_fn):
             tday,
         )
     ]
-    by_status = Counter(row.get('status') or '(vazio)' for row in active_rows)
-    known = {'Broadcast', 'Campaign', 'On-hold', 'Blocked'}
+    by_status = Counter(low(row.get('status')) or '(vazio)' for row in active_rows)
+    known = {'broadcast', 'campaign', 'on-hold', 'blocked'}
     return {
-        'Broadcast': by_status.get('Broadcast', 0),
-        'Campaign': by_status.get('Campaign', 0),
-        'On-hold': by_status.get('On-hold', 0),
-        'Blocked': by_status.get('Blocked', 0),
+        'Broadcast': by_status.get('broadcast', 0),
+        'Campaign': by_status.get('campaign', 0),
+        'On-hold': by_status.get('on-hold', 0),
+        'Blocked': by_status.get('blocked', 0),
         'Other': sum(value for key, value in by_status.items() if key not in known),
         'Total': len(active_rows),
     }
