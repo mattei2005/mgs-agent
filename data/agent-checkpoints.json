@@ -342,6 +342,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-hermes-maintenance-20260802",
+      "next_step": "Congelar versões, criar rollback, corrigir /tmp, executar atualização VPS e validar antes do reboot.",
+      "objective": "Atualizar a VPS primeiro, reiniciar e validar; depois atualizar Hermes preservando patches e invariantes MGS.",
+      "source": "discord-thread:1533586372445605980; messages:1533587950451953707,1533588276177535037",
+      "state": "started: confirmação crítica recebida nas mensagens 1533587950451953707 e 1533588276177535037; auditoria vps concluída; pré-manutenção em preparação.",
+      "thread_id": "1533586372445605980",
+      "updated_at": "2026-08-02T21:34:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-storage-hermes-delta-review-20260727",
       "next_step": "Rodolfo decide separadamente sobre política safety latest-two, retenção DTR e remoção futura do runtime rollback após burn-in.",
       "objective": "Auditar toda a VPS após limpeza, classificar backups/arquivos compactados, estimar capacidade e revisar o delta Hermes útil à MGS.",
@@ -382,5 +392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-31T19:51:10+00:00"
+  "updated_at": "2026-08-02T21:34:10+00:00"
 }
