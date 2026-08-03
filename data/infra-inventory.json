@@ -1060,14 +1060,14 @@
       "type": "wordpress_plugin",
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
-      "version": "0.4.4",
-      "status": "canonical_0.4.4_zuout_sms_canary_active_other_7_sites_0.4.2",
-      "files_count": 9,
-      "size_bytes": 654311,
-      "sha256_manifest": "937105d077d014913ee3a2753623a4365da0a90154233e21a51f4245a03ea558",
-      "package_path": "/root/mgs-agent/work/zuout-chat-sms-fincfrog-20260731/mgs-chat-funnels-0.4.4-code-only.zip",
-      "package_sha256": "b2fa4238f48dd23df8c375cab21af87f9b8a3633c46fa842b8553616658104f4",
-      "modified_at": "2026-07-31T19:00:35+00:00",
+      "version": "0.4.6",
+      "status": "canonical_0.4.6_wantabrand_rewarded_sms_fix_active_other_site_versions_preserved",
+      "files_count": 10,
+      "size_bytes": 662249,
+      "sha256_manifest": "3bc1549f569556cac6cb07e94f3a62885d11bd36576de8771763f8c095077b5f",
+      "package_path": null,
+      "package_sha256": null,
+      "modified_at": "2026-08-03T16:41:28+00:00",
       "validations": [
         "local PHP lint, Node syntax and JSON validation OK",
         "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
@@ -1085,7 +1085,11 @@
         "ActView runtime validated: one scr.actview.net/zuout.js, zero JBF, rewarded CTA class-only anchor after capture/skip, zout_top_wrapper/zout_top inserted, no PubGuru tag on Zuout, offer cards have no av-rewarded class.",
         "Transactional backend smoke intercepted outbound SMS, produced HTTP 200 ok:G002 with lead count 0→1→0 and no real SMS; legacy /chat/car/br1 config hash remained unchanged.",
         "Zuout 0.4.4: pre-change proof showed skip used trusted skip click followed by untrusted programmatic CTA replay and did not print rewarded reliably. Post-change click is trusted directly on av-rewarded; zout_rewarded GPT iframe reached 1280x577 on skip; valid submit registers rewarded without waiting for the WordPress/SMS response; no JS errors.",
-        "Offer-copy rollout 2026-07-31: 8/8 sites and 16/16 legacy+SMS routes HTTP 200 with exact screenshot copy; 48/48 own-domain targets, UTM/fbclid merge, provider split and private SMS URL absence preserved; browser Eggbev reached three visible cards without overlap and retained UTMs/fbclid."
+        "Offer-copy rollout 2026-07-31: 8/8 sites and 16/16 legacy+SMS routes HTTP 200 with exact screenshot copy; 48/48 own-domain targets, UTM/fbclid merge, provider split and private SMS URL absence preserved; browser Eggbev reached three visible cards without overlap and retained UTMs/fbclid.",
+        "Wantabrand v0.4.6: PubGuru loader deferred; main and skip SMS CTAs are static pg-rewarded controls; invalid main click is blocked in capture phase and retains validation.",
+        "M2 readback: rewardedAllowedUrls contains /chat/car/br1 and /chat-sms/car/br1; active Rewarded SMS chat rule published; runtime enabledFeatures includes rewarded and GPT defines pg_rewarded_wantabrand.com.",
+        "Browser canaries: invalid main click produced validation with no rewarded transition; skip reached rewarded lifecycle opened; valid main click reached opened with lead POST intercepted (no test lead stored/sent); legacy /chat/car/br1 reached opened.",
+        "Runtime/local readback: PHP lint, Node syntax and JSON validation OK; canonical active files match Wantabrand runtime hashes."
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1138,10 +1142,11 @@
         "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047",
         "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com",
         "/var/backups/mgs-chat-funnels-offer-copy/20260731T185100Z",
-        "/root/mgs-agent/backups/car-offer-copy/20260731T185115Z"
+        "/root/mgs-agent/backups/car-offer-copy/20260731T185115Z",
+        "/home/zeus/mgs-backups/wantabrand-mgs-chat-funnels-20260803T152713Z.tar.gz"
       ],
-      "source_report": "REPORT-INFRA CAR-BR offer-copy 8-site rollout 2026-07-31",
-      "description": "Canonical v0.4.4 keeps the optional CAR-BR SMS gate and triggers Zuout ActView rewarded from the original trusted user click while WordPress/SMS submission runs asynchronously. Deployed only to Zuout; the other seven sites remain on v0.4.2.",
+      "source_report": "REPORT-INFRA Wantabrand SMS rewarded fix 2026-08-03",
+      "description": "Canonical v0.4.6 preserves per-site provider branches and fixes Wantabrand /chat-sms/car/br1 rewarded eligibility and trusted CTA binding without changing other site runtimes.",
       "business_timezone": "America/Sao_Paulo",
       "utc_storage_preserved": true,
       "local_day_utc_example": {
@@ -1155,10 +1160,16 @@
         "openzed.com": "0.4.2",
         "finance.topfeed.fun": "0.4.2",
         "newsoun.com": "0.4.2",
-        "wantabrand.com": "0.4.2",
+        "wantabrand.com": "0.4.6",
         "cliquet.com": "0.4.2",
         "eggbev.com": "0.4.2"
-      }
+      },
+      "previous_package": {
+        "version": "0.4.4",
+        "path": "/root/mgs-agent/work/zuout-chat-sms-fincfrog-20260731/mgs-chat-funnels-0.4.4-code-only.zip",
+        "sha256": "b2fa4238f48dd23df8c375cab21af87f9b8a3633c46fa842b8553616658104f4"
+      },
+      "manifest_algorithm": "sha256 of sorted lines: <file_sha256><two spaces><relative_path>\\n"
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
@@ -4097,6 +4108,53 @@
       "gateways": "3/3 active",
       "failed_units": 0,
       "validated_at": "2026-08-03T09:03:19.514781-04:00"
+    },
+    {
+      "id": "wantabrand-sms-rewarded-fix-20260803",
+      "agent": "zeus",
+      "type": "external_ad_config+wordpress_plugin",
+      "authorized_by": "Rodolfo Mattei",
+      "discord_message_id": "1533866587440812333",
+      "status": "completed_validated",
+      "updated_at": "2026-08-03T16:41:28+00:00",
+      "scope": {
+        "site": "wantabrand.com",
+        "routes": [
+          "/chat-sms/car/br1",
+          "/chat/car/br1"
+        ],
+        "external_system": "M2/MonetizeMore PubGuru",
+        "plugin_path": "/home/runcloud2/webapps/wantabrand/wp-content/plugins/mgs-chat-funnels/"
+      },
+      "changes": [
+        "M2 active Rewarded Apply rule targets /chat-sms/car/br1",
+        "rewardedAllowedUrls updated to include /chat/car/br1 and /chat-sms/car/br1; domain configs rebuilt",
+        "mgs-chat-funnels bumped to 0.4.6; PubGuru loader async changed to defer",
+        "SMS main CTA rendered with pg-rewarded from initial HTML; capture guard blocks invalid submissions before PubGuru target listener"
+      ],
+      "rollback": {
+        "m2_rewarded_allowed_urls": "[\"/chat/car/br1\"]",
+        "plugin_backup": "/home/zeus/mgs-backups/wantabrand-mgs-chat-funnels-20260803T152713Z.tar.gz",
+        "plugin_backup_sha256": "42263b30763822a40ade6f72a8f233508091a3616591002ec870cda57957b03a"
+      },
+      "hashes": {
+        "mgs-chat-funnels.php": "1dd3df35732fe8bf0feb3ee1a5e7dd183ce56b6ffced8bb3f8b327ac9b62b768",
+        "templates/ciro-index-template.html": "5cf2fbc7c3ccc878b9489e125850c22fa7dbd2eacfe5861fcd5d8327bf5a3236",
+        "canonical_manifest": "3bc1549f569556cac6cb07e94f3a62885d11bd36576de8771763f8c095077b5f"
+      },
+      "validation": {
+        "php_lint": "ok",
+        "node_syntax": "ok",
+        "json": "ok",
+        "m2_rule_readback": "active",
+        "m2_allowlist_readback": "both routes",
+        "sms_invalid_main": "validation only, no rewarded",
+        "sms_skip": "rewarded lifecycle opened",
+        "sms_valid_main": "rewarded lifecycle opened; lead POST intercepted",
+        "legacy_route": "rewarded lifecycle opened",
+        "real_test_lead_sent": false
+      },
+      "known_warning": "WP cache flush succeeded with a pre-existing unreadable Yoast file warning; public cachebuster readback and both route canaries passed."
     }
   ],
   "profile_skill_references": [

@@ -588,9 +588,14 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
             response = await ctx.request.post(post_url, headers=headers, data=json.dumps(payload, ensure_ascii=False))
             if response.status >= 300:
                 raise RuntimeError(f'post_failed_http_{response.status}:{name}')
-            await page.wait_for_timeout(1500)
-            readback_rows = await fetch_rows(ctx, headers)
-            readback = next((candidate_row for candidate_row in readback_rows if row_id(candidate_row) == key), None)
+            readback = None
+            for delay_ms in (1500, 3000, 5000):
+                await page.wait_for_timeout(delay_ms)
+                readback_rows = await fetch_rows(ctx, headers)
+                candidate_readback = next((candidate_row for candidate_row in readback_rows if row_id(candidate_row) == key), None)
+                if candidate_readback and content_hash(parse_messages(candidate_readback)) == item['content_hash_after']:
+                    readback = candidate_readback
+                    break
             if not readback:
                 raise RuntimeError(f'post_readback_template_missing:{name}')
             readback_messages = parse_messages(readback)
@@ -612,6 +617,9 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                     record.setdefault('usage', []).append({'template': name, 'message_id': replacement['message_id'], 'installed_at': now_et().isoformat(timespec='seconds'), 'mode': 'fixed30_red_repair'})
                     record['usage'] = record['usage'][-100:]
             atomic_json(BANK_PATH, bank)
+            # Persist the pending Approval before external notification. A Discord
+            # transport failure must never make the checker lose the live cycle.
+            atomic_json(STATE_PATH, state)
             if notify:
                 item['discord_message_id'] = post_event(state, config, 'started', item, dry_run=dry_notify)
             atomic_json(STATE_PATH, state)
@@ -676,8 +684,13 @@ async def check_due(notify: bool, dry_notify: bool = False) -> dict:
                         item['status'] = 'eligible_next_day'
                         item['next_step'] = 'Uma última rodada poderá ocorrer no próximo dia.'
                     item['action_label'] = 'Contagens não melhoraram após o ETA completo'
+            # Persist the readback decision before notifying so a temporary
+            # Discord failure cannot repeat or erase the state transition.
+            state['updated_at_sp'] = iso_sp()
+            atomic_json(STATE_PATH, state)
             if notify:
                 item['discord_result_message_id'] = post_event(state, config, event, item, dry_run=dry_notify)
+                atomic_json(STATE_PATH, state)
             results.append({'template_id': item['template_id'], 'event': event, 'after': item.get('after'), 'status': item['status']})
             append_log('template_readback', template_id=item['template_id'], template=item.get('template'), cycle=item.get('cycle'), outcome=event, before=item.get('before'), after=item.get('after'))
         if config.get('stage') == 'canary' and len(results) == 1 and positive:

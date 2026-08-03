@@ -127,7 +127,7 @@ class DiscordTransportTest(unittest.TestCase):
         env['MGS_DISCORD_API_URL_OVERRIDE'] = f'http://127.0.0.1:{server.server_port}/messages'
         env['MGS_DISCORD_BOT_TOKEN_OVERRIDE'] = 'fixture-token'
         result = subprocess.run([sys.executable, '/root/mgs-agent/scripts/discord-bot-post.py', '--channel-id', '1522487422510694450'], input=json.dumps(payload), text=True, capture_output=True, env=env, timeout=10)
-        server.shutdown(); thread.join(timeout=2)
+        server.shutdown(); thread.join(timeout=2); server.server_close()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(CaptureHandler.received, payload)
         self.assertIn('http=200', result.stdout)
