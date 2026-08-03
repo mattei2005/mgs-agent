@@ -2,7 +2,7 @@
   "generated_at": "2026-08-02T23:21:59-04:00",
   "actor": "zeus",
   "request_message_id": "1533671582126309617",
-  "overall_status": "partially_completed_waiting_external_and_critical_confirmation",
+  "overall_status": "completed_with_security_and_external_provider_pending",
   "runtime_restart": false,
   "ssh_scope": {
     "host": "srv1767265.hstgr.cloud",
@@ -86,16 +86,7 @@
       ]
     }
   ],
-  "awaiting_critical_confirmation": {
-    "action": "delete one old backup file",
-    "target": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
-    "current_bytes": 3663248938,
-    "inode": 2662264,
-    "new_state": "absent",
-    "expected_reclaimed_bytes": 3663248938,
-    "preserved_current_backup": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
-    "preserved_current_backup_bytes": 3765540839
-  },
+  "awaiting_critical_confirmation": null,
   "validation": {
     "services": [
       "zeus-gateway active",
@@ -106,5 +97,19 @@
     "hermes": "v0.19.1 (2026.7.30)",
     "disk": "53% used, 46G available after adding protected rollback backups",
     "mgs_patch_guard": "440 passed, 6 subtests passed"
+  },
+  "cleanup_result": {
+    "status": "PASS",
+    "confirmation_message_id": "1533820393138425948",
+    "target": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+    "target_absent": true,
+    "logical_bytes_removed": 3663248938,
+    "filesystem_free_delta_bytes": 3627446272,
+    "retained_current_backup_bytes": 3765540839,
+    "retained_archives_tar_listing": "PASS 2/2",
+    "retained_fts_manifest_hashes": "PASS 2/2",
+    "gateways": "3/3 active",
+    "failed_units": 0,
+    "validated_at": "2026-08-03T09:03:19.514781-04:00"
   }
 }

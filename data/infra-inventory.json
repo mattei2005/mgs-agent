@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-03T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-08-03T09:03:19.514781-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_operation": "old-hermes-profile-backup-cleanup-20260803"
   },
   "system_packages": [
     {
@@ -3011,7 +3012,14 @@
         "port_commit": "8810ec931610a8b965de9c2e4275d1e38e3dafa2",
         "rollback_stash": "5d2933efeae7958eadc1e9c400886ccec84cb869",
         "report_dir": "/root/mgs-agent/reports/hermes-updates/20260721-092208/port-ed3c39108",
-        "next_venv": "/root/.hermes/hermes-agent/venv-next-20260721-ed3c39108"
+        "next_venv": "/root/.hermes/hermes-agent/venv-next-20260721-ed3c39108",
+        "backup_retention": {
+          "status": "deleted_authorized_redundant",
+          "deleted_at": "2026-08-03T09:03:19.514781-04:00",
+          "confirmation_message_id": "1533820393138425948",
+          "logical_bytes_removed": 3663248938,
+          "replacement_validated": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz"
+        }
       },
       "changes": [
         "manual no-restart fast-forward to frozen upstream target",
@@ -4021,7 +4029,7 @@
       "id": "full-system-checkup-20260802",
       "agent": "zeus",
       "type": "full_system_health_audit",
-      "status": "remediated_with_two_pending_dependencies",
+      "status": "remediated_with_two_pending_findings",
       "request_message_id": "1533645560840585369",
       "generated_at": "2026-08-02T21:43:10-04:00",
       "report_path": "/root/mgs-agent/reports/system-checkups/20260802-214310-full-system-checkup.json",
@@ -4034,8 +4042,7 @@
       ],
       "pending_finding_ids": [
         "ssh-host-hardening",
-        "web-extract-provider",
-        "storage-cleanup-critical-confirmation"
+        "web-extract-provider"
       ],
       "production_changes": "none",
       "remediation_report_path": "/root/mgs-agent/reports/system-checkups/20260802-232159-remediation.json",
@@ -4046,7 +4053,51 @@
         "uv-update",
         "web-search-provider"
       ],
-      "last_validated_at": "2026-08-02T23:21:59-04:00"
+      "last_validated_at": "2026-08-02T23:21:59-04:00",
+      "cleanup_validation": {
+        "status": "completed_validated",
+        "confirmation_message_id": "1533820393138425948",
+        "target": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+        "target_absent": true,
+        "logical_bytes_removed": 3663248938,
+        "filesystem_free_delta_bytes": 3627446272,
+        "retained_archives_tar_listing": "PASS 2/2",
+        "failed_units": 0,
+        "validated_at": "2026-08-03T09:03:19.514781-04:00"
+      }
+    },
+    {
+      "id": "old-hermes-profile-backup-cleanup-20260803",
+      "agent": "zeus",
+      "type": "backup_archive_retention_cleanup",
+      "owner": "Zeus/Infra",
+      "authorized_by": "344196393512075265",
+      "request_message_id": "1533671582126309617",
+      "confirmation_message_id": "1533820393138425948",
+      "thread_id": "1533586372445605980",
+      "status": "completed_validated",
+      "target": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+      "logical_bytes_removed": 3663248938,
+      "filesystem_free_delta_bytes": 3627446272,
+      "retained_current_backup": {
+        "path": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
+        "bytes": 3765540839,
+        "tar_listing": "PASS"
+      },
+      "retained_activation_backup": {
+        "path": "/root/mgs-agent/reports/hermes-updates/20260802-200300-activation-v0191/profile-config-auth-soul-backup.tar.gz",
+        "bytes": 43300,
+        "tar_listing": "PASS"
+      },
+      "retained_fts_backup": {
+        "path": "/root/.hermes/secure-backups/fts-repair/20260802-2148",
+        "manifest_hashes": "PASS 2/2",
+        "foreign_key_issues": 0,
+        "expected_pre_repair_fts_issue_preserved": true
+      },
+      "gateways": "3/3 active",
+      "failed_units": 0,
+      "validated_at": "2026-08-03T09:03:19.514781-04:00"
     }
   ],
   "profile_skill_references": [
