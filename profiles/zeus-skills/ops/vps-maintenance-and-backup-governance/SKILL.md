@@ -26,7 +26,7 @@ Load this skill when Rodolfo asks:
 
 1. For Git/release delta, local patches, editable-package version drift, or dry-run portability, load `references/git-update-delta-and-patch-portability.md`.
 2. For backup inventory, retention-scope gaps, archive redundancy, or cleanup classification, load `references/backup-retention-scope-and-redundancy.md`.
-3. For an authorized exact APT/vendor package plus npm/Corepack maintenance window, load `references/controlled-package-and-node-tooling-update.md` before touching `/usr`; it defines literal candidate versions, rollback, gate separation, `needrestart` residuals, and inventory closure.
+3. For an authorized exact APT/vendor package plus npm/Corepack maintenance window, required reboot closure, or confirmed retirement of an invalid quarantined backup, load `references/controlled-package-and-node-tooling-update.md` before touching `/usr` or deleting the quarantine; it defines literal candidate versions, rollback, gate separation, durable post-boot validation, exact-target cleanup, and inventory closure.
 4. For inventory generators that assemble large JSON, atomic-write design, `jq` argument-size failures, or Git auto-push races involving temporary artifacts, load `references/inventory-generation-and-autopush-safety.md`.
 5. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 

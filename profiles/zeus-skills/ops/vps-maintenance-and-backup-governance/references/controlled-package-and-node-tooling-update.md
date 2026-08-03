@@ -145,6 +145,19 @@ When Monarx changes:
 
 Update the existing VPS runtime baseline with npm/Corepack, rollback path, validation gates, residuals, and authorization IDs. Finish with audit readback and canonical REPORT-INFRA.
 
+## 9. Retire a quarantined invalid backup only after VPS closure
+
+An interrupted or oversized archive is not rollback evidence. Keep it quarantined until the package transaction, reboot when required, and post-boot gates are all complete. Cleanup is a separate destructive boundary:
+
+1. Obtain the Critical Subset double-confirmation with the exact directory, current file/directory counts, exact bytes, irreversible result, retained valid backup, and projected disk usage.
+2. Immediately before deletion, canonicalize the target and require an exact allowed path; reject symlinks, mounts, parent drift, nested symlinks, or changed counts/bytes. Never use a wildcard or delete the maintenance parent.
+3. Revalidate the retained backup first (`sha256sum -c` for every manifest entry). Record an audit-start event with the confirmation message ID and the frozen target set.
+4. Delete only the frozen directory. On any exception, write a partial/failure audit boundary and stop; never imply full reclamation.
+5. Validate target absence, measure actual reclaimed bytes from filesystem free space, re-run the retained backup hashes, and confirm package/reboot/service health is still green.
+6. Preserve the pre-cleanup validation artifact as historical evidence; write a separate cleanup-result artifact. Update the existing inventory/checkpoint entry with the deletion receipt, then send one canonical REPORT-INFRA embed and validate Discord readback.
+
+Report authorized bytes and actual reclaimed bytes separately: filesystem accounting may differ slightly from logical directory size.
+
 ## Acceptance summary
 
 A successful narrow maintenance reports:
