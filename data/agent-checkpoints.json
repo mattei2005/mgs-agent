@@ -53,12 +53,12 @@
     {
       "agent": "zeus",
       "id": "full-system-checkup-20260802",
-      "next_step": "Aguardar decisão de Rodolfo sobre hardening SSH, rebuild FTS Zeus/Ares, correções dos dois monitores/finalizer e update controlado do uv.",
-      "objective": "Auditar integralmente VPS, Hermes e operação MGS após manutenção e ativação v0.19.1.",
-      "source": "/root/mgs-agent/reports/system-checkups/20260802-214310-full-system-checkup.json",
-      "state": "check-up concluído: plataforma operacional saudável, com 2 achados altos, 2 médios, 2 baixos e 1 candidato informativo registrados sem correção em produção.",
+      "next_step": "Após confirmação de Rodolfo, deletar somente o backup antigo congelado e validar; para web_extract, receber Firecrawl/Tavily/Exa/Parallel corporativo no 1Password ou habilitar Nous Tool Gateway.",
+      "objective": "Auditar e corrigir integralmente VPS, Hermes e operação MGS após manutenção e ativação v0.19.1.",
+      "source": "/root/mgs-agent/reports/system-checkups/20260802-232159-remediation.json",
+      "state": "correções concluídas: fts zeus/ares íntegro, finalizador sem loop e log rotacionado, monitor hermes compatível com runtime customizado, uv 0.12.1, web_search ddgs validado. pendentes: web_extract sem credencial de provider e deleção crítica aguardando segunda confirmação.",
       "thread_id": "1533586372445605980",
-      "updated_at": "2026-08-03T01:44:51+00:00"
+      "updated_at": "2026-08-03T03:23:28+00:00"
     },
     {
       "agent": "zeus",
@@ -402,5 +402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T01:44:51+00:00"
+  "updated_at": "2026-08-03T03:23:28+00:00"
 }

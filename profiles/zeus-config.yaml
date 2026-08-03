@@ -98,7 +98,7 @@ terminal:
   lifetime_seconds: 300
 web:
   backend: ''
-  search_backend: ''
+  search_backend: ddgs
   extract_backend: ''
 browser:
   inactivity_timeout: 120

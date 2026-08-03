@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-08-02T23:21:59-04:00",
+  "actor": "zeus",
+  "request_message_id": "1533671582126309617",
+  "overall_status": "partially_completed_waiting_external_and_critical_confirmation",
+  "runtime_restart": false,
+  "ssh_scope": {
+    "host": "srv1767265.hstgr.cloud",
+    "public_ipv4": "2.25.165.171",
+    "port": "22/TCP",
+    "server_role": "Hostinger VPS running Zeus, Atena, Ares and mgs-agent",
+    "changed": false
+  },
+  "completed": [
+    {
+      "id": "hermes-fts-trigram-integrity",
+      "backup": "/root/.hermes/secure-backups/fts-repair/20260802-2148",
+      "ares": {
+        "before_bytes": 126709760,
+        "after_bytes": 56594432,
+        "integrity": "ok",
+        "messages": 6870,
+        "fts_rows": 6870,
+        "trigram_rows": 2901
+      },
+      "zeus": {
+        "before_bytes": 1699655680,
+        "after_bytes": 814440448,
+        "integrity": "ok",
+        "messages": 123552,
+        "fts_rows": 123552,
+        "trigram_rows": 56551
+      },
+      "foreign_key_issues": 0,
+      "saved_bytes": 955330560,
+      "gateway_errors": 0
+    },
+    {
+      "id": "hermes-structural-finalizer-loop",
+      "script": "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+      "tests": "7 passed; combined remediation suite 9 passed",
+      "receipts": {
+        "closed": 192,
+        "quarantined_live_hash_drift": 52,
+        "current_processed_per_run": 0
+      },
+      "log_before_bytes": 319895171,
+      "log_after_bytes": 984,
+      "compressed_rotation_bytes": 2885108,
+      "max_attempts_frozen": 27805
+    },
+    {
+      "id": "hermes-update-monitor-custom-port",
+      "script": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "tests": "2 passed; live dry-run PASS; live state write PASS",
+      "state": {
+        "status": "up-to-date-custom-runtime",
+        "upstream": "ed3c39108b1b5521414cc60a8854cebd7c5af9bf",
+        "local": "506a8a80e2f619e573a75093a1d6edff1fc12d1d"
+      },
+      "discord_false_alert": false
+    },
+    {
+      "id": "uv-update",
+      "before": "0.11.21",
+      "after": "0.12.1",
+      "backup": "/root/.hermes/secure-backups/tooling/uv-20260802-2318",
+      "smoke": "UV_SMOKE_OK Python 3.11"
+    },
+    {
+      "id": "web-search-provider",
+      "config": "web.search_backend=ddgs",
+      "ddgs_version": "9.14.4",
+      "live_and_mirror_types": "string",
+      "mirror_identical": true,
+      "real_smoke": "web_search returned 3 ranked results"
+    }
+  ],
+  "blocked": [
+    {
+      "id": "web-extract-provider",
+      "reason": "No Firecrawl, Tavily, Exa or Parallel credential exists in the MGS 1Password vault or Zeus environment; Nous managed Tool Gateway is not enabled. Official Hermes docs require one of those extract-capable providers. No credential was invented or added.",
+      "working_fallbacks": [
+        "browser",
+        "terminal HTTP"
+      ]
+    }
+  ],
+  "awaiting_critical_confirmation": {
+    "action": "delete one old backup file",
+    "target": "/root/mgs-agent/reports/hermes-updates/20260721-092208/hermes-profiles-backup-20260721-092208.tar.gz",
+    "current_bytes": 3663248938,
+    "inode": 2662264,
+    "new_state": "absent",
+    "expected_reclaimed_bytes": 3663248938,
+    "preserved_current_backup": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
+    "preserved_current_backup_bytes": 3765540839
+  },
+  "validation": {
+    "services": [
+      "zeus-gateway active",
+      "atena-gateway active",
+      "ares-gateway active"
+    ],
+    "combined_tests": "9 passed",
+    "hermes": "v0.19.1 (2026.7.30)",
+    "disk": "53% used, 46G available after adding protected rollback backups",
+    "mgs_patch_guard": "440 passed, 6 subtests passed"
+  }
+}
