@@ -52,6 +52,16 @@
     },
     {
       "agent": "zeus",
+      "id": "full-system-checkup-20260802",
+      "next_step": "Aguardar decisão de Rodolfo sobre hardening SSH, rebuild FTS Zeus/Ares, correções dos dois monitores/finalizer e update controlado do uv.",
+      "objective": "Auditar integralmente VPS, Hermes e operação MGS após manutenção e ativação v0.19.1.",
+      "source": "/root/mgs-agent/reports/system-checkups/20260802-214310-full-system-checkup.json",
+      "state": "check-up concluído: plataforma operacional saudável, com 2 achados altos, 2 médios, 2 baixos e 1 candidato informativo registrados sem correção em produção.",
+      "thread_id": "1533586372445605980",
+      "updated_at": "2026-08-03T01:44:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
       "next_step": "Nenhuma ação pendente. Manter monitor-drive-auth-unified.py e o guard de resíduos ativos; backups futuros usam somente a Service Account canônica e o estado local atual.",
       "objective": "Eliminar integralmente o método Google pessoal legado e normalizar Zeus, Atena e Ares na Service Account canônica mgs-core-prod.",
@@ -392,5 +402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T00:16:23+00:00"
+  "updated_at": "2026-08-03T01:44:51+00:00"
 }

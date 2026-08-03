@@ -4016,6 +4016,31 @@
         "retention": "preserved; no cleanup in activation job"
       },
       "validated_at": "2026-08-03T00:36:00+00:00"
+    },
+    {
+      "id": "full-system-checkup-20260802",
+      "agent": "zeus",
+      "type": "full_system_health_audit",
+      "status": "attention_required",
+      "request_message_id": "1533645560840585369",
+      "generated_at": "2026-08-02T21:43:10-04:00",
+      "report_path": "/root/mgs-agent/reports/system-checkups/20260802-214310-full-system-checkup.json",
+      "healthy_domains": [
+        "os_packages_kernel_resources",
+        "hermes_runtime_gateways_auth",
+        "crons_monitors_integrations",
+        "backups_restore",
+        "git_and_canonical_json"
+      ],
+      "pending_finding_ids": [
+        "ssh-host-hardening",
+        "hermes-fts-trigram-integrity",
+        "hermes-structural-finalizer-loop",
+        "hermes-update-monitor-custom-port",
+        "uv-update",
+        "firecrawl-unconfigured"
+      ],
+      "production_changes": "none"
     }
   ],
   "profile_skill_references": [

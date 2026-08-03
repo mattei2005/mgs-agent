@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-08-02T21:43:10-04:00",
+  "actor": "zeus",
+  "request_message_id": "1533645560840585369",
+  "scope": "full VPS, Hermes and MGS operations read-only checkup",
+  "overall_status": "attention_required",
+  "production_mutations": "none",
+  "healthy": {
+    "os": "Ubuntu 24.04.3 LTS; apt/snap current; no LTS release upgrade; kernel 6.8.0-136-generic; no reboot pending; dpkg clean; failed units 0",
+    "resources": "root disk 52%, inode 6%, memory available 14.7 GiB, no OOM, filesystem rw, /tmp 1777",
+    "hermes": "v0.19.1 active; latest stable v2026.7.30; Ares/Atena/Zeus active and Discord connected; OpenAI Codex auth 4/4; post-update guard/regressions/smokes passed",
+    "ops": "38 root cron jobs problems=0; enabled Hermes cron jobs last status ok; MGS Git clean and synchronized; Monarx active; Drive SA auth, Honcho, 1Password monitor, DTR/SB/SMS monitors healthy",
+    "backup": "encrypted quick backup PASS at 2026-08-03T01:25:06Z; full backup PASS at 2026-08-02T08:17:51Z; isolated restore drill PASS at 2026-08-02T09:48:06Z",
+    "logs": "system journal/dmesg errors 0; OOM 0; gateway post-connect runtime errors 0 excluding the audit-triggered unavailable Firecrawl request"
+  },
+  "findings": [
+    {
+      "severity": "high",
+      "id": "ssh-host-hardening",
+      "fact": "Public SSH listens on port 22 with UFW inactive, nftables empty, INPUT ACCEPT, fail2ban absent, PermitRootLogin yes and PasswordAuthentication yes; 5 failed-password and 12 invalid-user events since boot; external provider firewall not confirmed.",
+      "impact": "Password brute-force exposure and direct root-login risk.",
+      "recommended_action": "Stage a tested SSH key and second-session canary, then restrict root/password auth and add firewall/rate limiting without risking lockout.",
+      "changed": false
+    },
+    {
+      "severity": "high",
+      "id": "hermes-fts-trigram-integrity",
+      "fact": "PRAGMA integrity_check reports malformed inverted index for messages_fts_trigram in Zeus and Ares; base messages counts match, foreign-key issues=0, Atena and all other audited SQLite DBs pass.",
+      "impact": "CJK/substring session search may be incomplete or unreliable; no evidence of conversation-row loss.",
+      "recommended_action": "Take a fresh protected backup, then run per-profile Hermes sessions optimize-storage/rebuild with readback and integrity check.",
+      "changed": false
+    },
+    {
+      "severity": "medium",
+      "id": "hermes-structural-finalizer-loop",
+      "fact": "Structural-write finalizer reprocesses 244 receipts every minute, including 192 closed and 52 blocked live_hash_drift receipts; maximum attempts 27696. Log is 319895171 bytes, has no dedicated rotation and projects about 22773600 bytes/day growth.",
+      "impact": "Unnecessary CPU/disk writes, repeated exit failures and log growth.",
+      "recommended_action": "Skip closed receipts, terminally quarantine superseded drift receipts after a bounded retry policy, emit summary-only output and add rotation.",
+      "changed": false
+    },
+    {
+      "severity": "medium",
+      "id": "hermes-update-monitor-custom-port",
+      "fact": "monitor-hermes-updates.sh returns an ancestry error on the MGS custom port because it compares local custom HEAD directly with origin/main; latest stable v2026.7.30 is already active and no newer stable release exists.",
+      "impact": "Hermes update monitor is currently a false-negative monitoring blind spot.",
+      "recommended_action": "Compare the recorded upstream/release base of the custom port against latest stable tag/main rather than requiring custom HEAD ancestry.",
+      "changed": false
+    },
+    {
+      "severity": "low",
+      "id": "uv-update",
+      "fact": "uv 0.11.21 is installed; stable 0.12.1 was published 2026-07-31.",
+      "impact": "Tooling is one stable release behind; no current failure observed.",
+      "recommended_action": "Update in a controlled low-risk tooling window and verify Hermes update scripts.",
+      "changed": false
+    },
+    {
+      "severity": "low",
+      "id": "firecrawl-unconfigured",
+      "fact": "A real web_extract request failed because Firecrawl direct config/tool-gateway auth is unavailable; terminal HTTP and browser fallbacks remain available.",
+      "impact": "Firecrawl-backed extraction is unavailable in Zeus.",
+      "recommended_action": "Configure the approved corporate backend only if this capability is desired; do not add ad-hoc personal credentials.",
+      "changed": false
+    },
+    {
+      "severity": "info",
+      "id": "storage-cleanup-candidate",
+      "fact": "Disk remains healthy at 52%; an older Hermes profile backup from 2026-07-21 occupies 3663248938 bytes in addition to current rollback backups.",
+      "impact": "No immediate pressure.",
+      "recommended_action": "Review retention before any deletion; preserve current v0.19.0 rollback and v0.19.1 activation backups.",
+      "changed": false
+    }
+  ],
+  "evidence": {
+    "infra_inventory": "/root/mgs-agent/data/infra-inventory.json",
+    "checkpoint": "full-system-checkup-20260802",
+    "hermes_activation_report": "/root/mgs-agent/reports/hermes-updates/20260802-200300-activation-v0191/final-report.md",
+    "backup_state": "/root/mgs-agent/data/mgs-offsite-backup-state.json"
+  }
+}
