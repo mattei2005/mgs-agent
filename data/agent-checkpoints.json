@@ -343,12 +343,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
-      "next_step": "Nenhuma pendência de atualização na VPS; backup válido 20260802-174737 preservado; Hermes somente em novo pedido.",
-      "objective": "Concluir a manutenção da VPS e remover o backup parcial inválido após confirmação crítica; manter Hermes v0.19.0.",
-      "source": "discord:1533586372445605980 confirmation:1533625264620441742; cleanup:/root/mgs-agent/reports/vps-maintenance/20260802-invalid-backup-cleanup.json",
-      "state": "vps_complete_invalid_backup_removed_hermes_deferred",
+      "next_step": "Executar freeze/guards/smokes finais; promover launcher; restart detached Ares→Atena→Zeus; validar 4/4.",
+      "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
+      "source": "discord:1533586372445605980 authorization:1533629137045159977",
+      "state": "hermes_v0191_activation_authorized_final_gate",
       "thread_id": "1533586372445605980",
-      "updated_at": "2026-08-03T00:00:59+00:00"
+      "updated_at": "2026-08-03T00:16:23+00:00"
     },
     {
       "agent": "zeus",
@@ -392,5 +392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T00:00:59+00:00"
+  "updated_at": "2026-08-03T00:16:23+00:00"
 }
