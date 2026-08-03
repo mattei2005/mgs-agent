@@ -397,6 +397,10 @@ def colors_line(counts: dict) -> str:
     return f"🟢 {counts.get('verde', 0)}   ⚪ {counts.get('cinza', 0)}   🔴 {counts.get('vermelho', 0)}   🟣 {counts.get('roxo', 0)}"
 
 
+def page_label(pages: int) -> str:
+    return f'{pages} página' if int(pages) == 1 else f'{pages} páginas'
+
+
 def discord_embed(event: str, item: dict) -> dict:
     name = compact_template_name(item.get('template') or '')
     palette = {
@@ -420,7 +424,7 @@ def discord_embed(event: str, item: dict) -> dict:
     else:
         title = f'{label} — {name}'
         fields.append({'name': 'Template', 'value': item.get('template') or '-', 'inline': False})
-        fields.append({'name': 'Escopo', 'value': f"{item.get('pages', 0)} páginas • 30 mensagens • {item.get('vertical') or '-'}", 'inline': True})
+        fields.append({'name': 'Escopo', 'value': f"{page_label(int(item.get('pages') or 0))} • 30 mensagens • {item.get('vertical') or '-'}", 'inline': True})
         if item.get('before'):
             fields.append({'name': 'Antes', 'value': colors_line(item['before']), 'inline': False})
         if item.get('after'):
@@ -435,7 +439,7 @@ def discord_embed(event: str, item: dict) -> dict:
             'title': title[:256],
             'color': color,
             'fields': fields[:25],
-            'footer': {'text': f"Template ID {item.get('template_id', '-')} • ciclo {item.get('cycle', '-')} • sem alertas repetidos"},
+            'footer': {'text': f"Ciclo {item.get('cycle', '-')} • ID {str(item.get('template_id', '-'))[:8]}"},
             'timestamp': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
         }],
         'allowed_mentions': {'parse': []},
@@ -570,7 +574,9 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                 'no_progress_cycles': int(old.get('no_progress_cycles') or 0),
             }
             if plan['action'] == 'replace_red_reset':
-                item['action_label'] = f"{len(plan['replaced_slots'])} vermelha(s) substituída(s), reset global e Run Approval"
+                red_count = len(plan['replaced_slots'])
+                noun = 'mensagem vermelha substituída' if red_count == 1 else 'mensagens vermelhas substituídas'
+                item['action_label'] = f"{red_count} {noun}, reset global e Run Approval"
             else:
                 item['action_label'] = 'Conteúdo preservado, reset global do log e Run Approval'
             item['next_step'] = f"Aguardar ETA; readback automático após {due.strftime('%H:%M')} SP."
@@ -593,11 +599,13 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                 await page.wait_for_timeout(delay_ms)
                 readback_rows = await fetch_rows(ctx, headers)
                 candidate_readback = next((candidate_row for candidate_row in readback_rows if row_id(candidate_row) == key), None)
-                if candidate_readback and content_hash(parse_messages(candidate_readback)) == item['content_hash_after']:
-                    readback = candidate_readback
-                    break
+                if candidate_readback:
+                    candidate_messages = parse_messages(candidate_readback)
+                    if content_hash(candidate_messages) == item['content_hash_after'] and counts_for(candidate_messages).get('cinza') == MESSAGE_COUNT:
+                        readback = candidate_readback
+                        break
             if not readback:
-                raise RuntimeError(f'post_readback_template_missing:{name}')
+                raise RuntimeError(f'post_readback_did_not_converge_to_expected_gray_content:{name}')
             readback_messages = parse_messages(readback)
             if len(readback_messages) != MESSAGE_COUNT:
                 raise RuntimeError(f'post_readback_message_count_mismatch:{name}')
