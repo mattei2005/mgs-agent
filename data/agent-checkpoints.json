@@ -353,12 +353,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-red-repair-reset-semantics-20260803",
-      "next_step": "Aguardar autorização de Rodolfo para um canário pequeno em templates com poucas páginas antes de implementar qualquer cron de produção.",
-      "objective": "Desenhar e validar reparo seguro de mensagens vermelhas considerando que qualquer Update + Save reinicia o estado inteiro do Broadcast Template",
-      "source": "discord:1533864214899331263; knowledge-inbox candidate do mesmo turno",
-      "state": "comportamento de reset global informado por rodolfo/ciro e capturado; executor de troca continua inativo. estratégia recomendada: lote por template, trocar todas as vermelhas em uma única edição, update + save uma vez, run approval uma vez, aguardar eta completo e só então reavaliar. roxo exige ramo separado porque resetar o log não corrige a causa.",
+      "next_step": "Confirmar a hora em que o lote de agendamentos da madrugada termina e obter autorização de Rodolfo para um canário pequeno; depois validar pre/post verde/cinza/vermelho/roxo e cutoff antes da próxima 00:00 America/Sao_Paulo.",
+      "objective": "Desenhar e validar reparo seguro de mensagens vermelhas e redução iterativa de roxas por reset/Approval no nível do Broadcast Template",
+      "source": "discord:1533864214899331263; discord:1533868709448388892; knowledge-inbox candidates",
+      "state": "modelo refinado por rodolfo/ciro: verde é sucesso persistido; não é necessário identificar page id por cor. em template com vermelhas, trocar todas em lote, update + save, run approval e comparar contagens agregadas. redução de roxas após reset é progresso. template green-only não deve ser tocado. reparos podem rodar durante o dia após o lote de agendamento iniciado à meia-noite de são paulo; cada página adiciona 6 minutos ao eta de 30 mensagens a 12s.",
       "thread_id": "1533821802525102080",
-      "updated_at": "2026-08-03T15:50:25+00:00"
+      "updated_at": "2026-08-03T16:07:54+00:00"
     },
     {
       "agent": "zeus",
@@ -412,5 +412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T15:50:25+00:00"
+  "updated_at": "2026-08-03T16:07:54+00:00"
 }
