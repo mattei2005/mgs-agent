@@ -353,12 +353,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-red-repair-reset-semantics-20260803",
-      "next_step": "Rodolfo revisar/aprovar o plano completo. Após aprovação, construir executor dedicado novo (não reutilizar legacy 10/20/30), validar fixture/dry-run, escolher canário live de poucas páginas e executar somente o canário com backup e readback.",
+      "next_step": "Rodolfo revisar/aprovar o plano completo. Após aprovação, construir executor dedicado novo, integrar obrigatoriamente o utility-message-bank em cada readback, validar fixture/dry-run, escolher canário live de poucas páginas e executar somente o canário com backup e readback.",
       "objective": "Implantar um reparador diário seguro para Broadcast Templates de 30 mensagens: corrigir vermelhas, reapresentar roxas por reset e maximizar verdes antes da janela de agendamento da meia-noite de São Paulo",
-      "source": "discord:1533864214899331263; discord:1533868709448388892; discord:1533870026816491570; discord:1533871329210536119; knowledge candidates KCI-cd7e2c59694ee6e6,KCI-9ff9bc1519faeab7",
-      "state": "plano proposto, ainda não autorizado/ativado. escopo: digital-trust + digital-trust-2, produção pages>0, exatamente 30 mensagens, excluir teste/nao usar. 08:00 america/sao_paulo: snapshot/backup e classificação por template. green-only sai da fila. com red: trocar todas as vermelhas em lote com copies únicas da mesma língua/vertical, preservar ids/links/páginas/metadados, update+save uma vez, confirmar reset cinza, run approval uma vez. sem red e com purple: reset sem alterar conteúdo, update+save, run approval. gray fica em espera até eta; não há troca automática de gray na v1. persistir lock/estado por template id, hashes, contagens pre/post, approval_at e deadline. readback somente após eta pages*30*12s; progresso = green sobe ou red/purple cai. um ciclo por template/dia na v1; parar em drift, falha, status pior sem progresso ou risco de atravessar cutoff. janela automática normal <=150 páginas às 08:00 com 1h de margem antes de 00:00; >150 páginas fora da automação inicial. canary: 1 template pequeno com red+purple; depois 3 templates; só então rollout elegível. checker read-only a cada 15 min e resumo final no #broadcast-templates; exceção técnica temporária no #cron-temp-templates.",
+      "source": "discord:1533864214899331263; discord:1533868709448388892; discord:1533870026816491570; discord:1533871329210536119; discord:1533873769087762565; skill:meta-utility-template-approval/references/route-pack-05.md",
+      "state": "plano proposto, ainda não autorizado/ativado. escopo: digital-trust + digital-trust-2, produção pages>0, exatamente 30 mensagens, excluir teste/nao usar. 08:00 america/sao_paulo: snapshot/backup e classificação por template. green-only sai da fila. com red: trocar todas as vermelhas em lote com copies únicas da mesma língua/vertical, preservar ids/links/páginas/metadados, update+save uma vez, confirmar reset cinza, run approval uma vez. sem red e com purple: reset sem alterar conteúdo, update+save, run approval. gray fica em espera até eta; não há troca automática de gray na v1. persistir lock/estado por template id, hashes, contagens pre/post, approval_at e deadline. cada readback deve primeiro upsertar data/utility-message-bank.json por hash normalizado text+cta: green incrementa approved_count e first/last_approved_at; histórico ever-green é preservado mesmo após reset posterior para gray/red/purple; mixed history nunca apaga aprovação anterior. estado atual do banco: 553 records, 358 com approved_count>0, último update 2026-07-16 17:44 et; nenhum job ativo o atualiza hoje. readback somente após eta pages*30*12s; progresso = green sobe ou red/purple cai. um ciclo por template/dia na v1; parar em drift, falha, status pior sem progresso ou risco de atravessar cutoff. janela automática normal <=150 páginas às 08:00 com 1h de margem antes de 00:00; >150 páginas fora da automação inicial. canary: 1 template pequeno com red+purple; depois 3 templates; só então rollout elegível. checker read-only a cada 15 min e resumo final no #broadcast-templates; exceção técnica temporária no #cron-temp-templates.",
       "thread_id": "1533821802525102080",
-      "updated_at": "2026-08-03T16:18:26+00:00"
+      "updated_at": "2026-08-03T16:27:51+00:00"
     },
     {
       "agent": "zeus",
@@ -412,5 +412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T16:18:26+00:00"
+  "updated_at": "2026-08-03T16:27:51+00:00"
 }
