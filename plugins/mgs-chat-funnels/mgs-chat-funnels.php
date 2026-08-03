@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.4.4
+ * Version: 0.4.6
  * Author: MGS Digital Corp
  */
 
@@ -14,7 +14,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/class-mgs-chat-sms.php';
 MGS_Chat_SMS::boot();
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.4.4';
+    const VERSION = '0.4.6';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -127,7 +127,10 @@ final class MGS_Chat_Funnels {
             '{{TAGS_SCRIPT}}' => '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>',
             '{{ADS_HEAD}}' => $this->render_ads_head_html($config),
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
-            '{{REWARDED_BUTTON_CLASS}}' => esc_attr($sms_enabled ? '' : ($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : ''))),
+            // PubGuru binds its rewarded click listener by scanning .pg-rewarded once
+            // during startup. Keep the class in the initial SMS markup so the CTA is
+            // registered even though lead eligibility is evaluated later in the gate.
+            '{{REWARDED_BUTTON_CLASS}}' => esc_attr($ad_provider === 'm2' ? 'pg-rewarded' : ($sms_enabled ? '' : ($ad_provider === 'actview' ? 'av-rewarded' : ''))),
             '{{REWARDED_BUTTON_CLASS_JS}}' => $this->js_json($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : '')),
             '{{REWARDED_CTA_TAG}}' => $ad_provider === 'actview' ? 'a' : 'button',
             '{{REWARDED_CTA_ATTRS}}' => $ad_provider === 'actview'
@@ -616,7 +619,9 @@ final class MGS_Chat_Funnels {
             return '';
         }
         if ($this->ad_provider($config) === 'm2') {
-            return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->' . "\n" . '<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>';
+            // PubGuru scans .pg-rewarded controls once during initialization. Defer the
+            // loader until HTML parsing finishes so static SMS and regular CTAs exist.
+            return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->' . "\n" . '<script type="text/javascript" defer src="https://c.pubguru.net/pg.wantabrand.js"></script>';
         }
         if ($this->ad_provider($config) === 'actview') {
             return "<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />" . "\n" . '<script async src="https://scr.actview.net/zuout.js"></script>';

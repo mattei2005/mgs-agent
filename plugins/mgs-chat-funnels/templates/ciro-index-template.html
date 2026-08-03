@@ -572,11 +572,22 @@
         ctaButton.click();
       }
 
-      function continueSmsWithoutLead() {
+      function triggerTrustedRewarded(rewardControl) {
+        if (!rewardControl) return;
+        applyRewardedButtonClass(rewardControl);
+        if (rewardControl.classList.contains("av-rewarded")) return;
+        const safeCloseQuiz = window.mgsCloseQuizAfterReward;
+        setTimeout(safeCloseQuiz, 1200);
+        if (!rewardedButtonClass) {
+          {{JBF_REWARDED_SHOW_JS}}
+        }
+      }
+
+      function continueSmsWithoutLead(rewardControl) {
         if (!smsConfig.enabled || !smsConfig.optional || smsLeadSubmitting) return;
         smsLeadCaptured = true;
         smsError("");
-        replaySmsCta(document.getElementById("aq-cta"));
+        triggerTrustedRewarded(rewardControl || document.getElementById("aq-cta"));
       }
 
       function smsLeadState() {
@@ -589,18 +600,34 @@
         return { name, phone, consent, valid: name.length >= 2 && phone.length >= 10 };
       }
 
-      function syncSmsActViewReward() {
-        if (!smsConfig.enabled || rewardedButtonClass !== "av-rewarded") return;
+      function syncSmsRewardControl() {
+        if (!smsConfig.enabled || !smsConfig.optional || !["av-rewarded", "pg-rewarded"].includes(rewardedButtonClass)) return;
         const ctaButton = document.getElementById("aq-cta");
         if (!ctaButton || smsLeadCaptured || smsLeadSubmitting) return;
         const state = smsLeadState();
         const eligible = state.valid || (smsConfig.optional && !state.consent);
-        ctaButton.classList.toggle("av-rewarded", eligible);
-        if (eligible) {
+        if (rewardedButtonClass === "pg-rewarded") {
+          // PubGuru binds .pg-rewarded only during startup. Never remove the class;
+          // block ineligible clicks in capture phase instead.
+          ctaButton.classList.add("pg-rewarded");
+          ctaButton.dataset.mgsRewardEligible = eligible ? "1" : "0";
+          return;
+        }
+        ctaButton.classList.toggle(rewardedButtonClass, eligible);
+        if (eligible && rewardedButtonClass === "av-rewarded") {
           ctaButton.setAttribute("onclick", "window.mgsHandleSmsActViewReward && window.mgsHandleSmsActViewReward(this); return false;");
-        } else {
+        } else if (rewardedButtonClass === "av-rewarded") {
           ctaButton.removeAttribute("onclick");
         }
+      }
+
+      function guardSmsPubGuruReward(event) {
+        if (!smsConfig.enabled || !smsConfig.optional || rewardedButtonClass !== "pg-rewarded" || smsLeadCaptured) return;
+        const state = smsLeadState();
+        if (state.valid || (smsConfig.optional && !state.consent)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        submitSmsLead(event.currentTarget, false);
       }
 
       window.mgsHandleSmsActViewReward = function (ctaButton) {
@@ -650,6 +677,7 @@
 
       function submitSmsLead(ctaButton, replayAfterSuccess = true) {
         if (!smsConfig.enabled || smsLeadCaptured || smsLeadSubmitting) return;
+        const asyncOptional = smsConfig.optional && replayAfterSuccess === false;
         const nameInput = document.getElementById("mgs-cf-sms-name");
         const phoneInput = document.getElementById("mgs-cf-sms-phone");
         const consentInput = document.getElementById("mgs-cf-sms-consent");
@@ -677,8 +705,10 @@
         }
         smsError("");
         smsLeadSubmitting = true;
-        ctaButton.disabled = true;
-        ctaButton.textContent = "ENVIANDO...";
+        if (!asyncOptional) {
+          ctaButton.disabled = true;
+          ctaButton.textContent = "ENVIANDO...";
+        }
         const params = new URLSearchParams(window.location.search);
         const extra = {};
         params.forEach((value, key) => { extra[key] = value; });
@@ -709,15 +739,19 @@
             if (!response.ok || !data.ok) throw new Error(data.error || "Não foi possível enviar. Tente novamente.");
             smsLeadCaptured = true;
             smsLeadSubmitting = false;
-            ctaButton.disabled = false;
-            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+            if (!asyncOptional) {
+              ctaButton.disabled = false;
+              ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+            }
             if (replayAfterSuccess) replaySmsCta(ctaButton);
           })
           .catch((error) => {
             smsLeadSubmitting = false;
-            ctaButton.disabled = false;
-            ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
-            smsError(error && error.message ? error.message : "Não foi possível enviar. Tente novamente.");
+            if (!asyncOptional) {
+              ctaButton.disabled = false;
+              ctaButton.textContent = smsConfig.submitLabel || "TRANSFERIR PARA ESPECIALISTA →";
+              smsError(error && error.message ? error.message : "Não foi possível enviar. Tente novamente.");
+            }
           });
       }
 
@@ -1122,18 +1156,22 @@
         smsInputs.forEach(function (input) {
           if (input.dataset.mgsRewardSyncBound) return;
           input.dataset.mgsRewardSyncBound = "1";
-          input.addEventListener("input", syncSmsActViewReward);
-          input.addEventListener("change", syncSmsActViewReward);
+          input.addEventListener("input", syncSmsRewardControl);
+          input.addEventListener("change", syncSmsRewardControl);
         });
         const ctaButton = document.getElementById("aq-cta");
+        if (ctaButton && rewardedButtonClass === "pg-rewarded" && !ctaButton.dataset.mgsPgRewardGuardBound) {
+          ctaButton.dataset.mgsPgRewardGuardBound = "1";
+          ctaButton.addEventListener("click", guardSmsPubGuruReward, true);
+        }
         if (ctaButton && !ctaButton.dataset.mgsRewardPointerBound) {
           ctaButton.dataset.mgsRewardPointerBound = "1";
-          ctaButton.addEventListener("pointerdown", syncSmsActViewReward);
+          ctaButton.addEventListener("pointerdown", syncSmsRewardControl);
           ctaButton.addEventListener("keydown", function (event) {
-            if (event.key === "Enter" || event.key === " ") syncSmsActViewReward();
+            if (event.key === "Enter" || event.key === " ") syncSmsRewardControl();
           });
         }
-        syncSmsActViewReward();
+        syncSmsRewardControl();
         updateQuizProgress();
       }
 
@@ -1178,7 +1216,7 @@
         if (skipButton) {
           if (skipButton.classList.contains("av-rewarded")) return;
           e.preventDefault();
-          continueSmsWithoutLead();
+          continueSmsWithoutLead(skipButton);
           return;
         }
 
@@ -1201,22 +1239,27 @@
         const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
         if (ctaButton) {
           e.preventDefault();
+          if (smsConfig.enabled && smsConfig.optional && !smsLeadCaptured) {
+            const state = smsLeadState();
+            if (!state.valid && state.consent) {
+              submitSmsLead(ctaButton, false);
+              return;
+            }
+            if (!state.consent) {
+              smsLeadCaptured = true;
+              smsError("");
+            } else if (!smsLeadSubmitting) {
+              submitSmsLead(ctaButton, false);
+            }
+            triggerTrustedRewarded(ctaButton);
+            return;
+          }
           if (smsConfig.enabled && !smsLeadCaptured) {
             submitSmsLead(ctaButton);
             return;
           }
-          applyRewardedButtonClass(ctaButton);
-          window.mgsRewardedClickInProgress = ctaButton.classList.contains("av-rewarded");
           if (quizAlreadyClosed) return;
-          const safeCloseQuiz = window.mgsCloseQuizAfterReward;
-
-          if (!ctaButton.classList.contains("av-rewarded")) {
-            setTimeout(safeCloseQuiz, 1200);
-          }
-
-          if (!rewardedButtonClass) {
-            {{JBF_REWARDED_SHOW_JS}}
-          }
+          triggerTrustedRewarded(ctaButton);
         }
       });
     </script>

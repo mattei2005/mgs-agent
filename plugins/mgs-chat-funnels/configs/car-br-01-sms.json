@@ -1,10 +1,10 @@
 {
-  "id": "CAR-BR-01",
+  "id": "CAR-BR-01-SMS",
   "vertical": "car",
   "country": "br",
   "language": "pt-BR",
-  "route": "/chat/car/br1",
-  "title": "chat cards financiamento de carros",
+  "route": "/chat-sms/car/br1",
+  "title": "chat sms cards financiamento de carros",
   "theme": "whatsapp",
   "mode": "cards",
   "utm_passthrough": true,
@@ -61,45 +61,36 @@
     "enabled": true,
     "questions": [
       {
-        "text": "🚗 Você já tem um carro?",
+        "text": "🚗 Qual a faixa de preço do carro que você deseja?",
         "answers": [
           {
-            "label": "Sim",
-            "value": "sim"
+            "label": "R$ 30.000 a R$ 45.000",
+            "value": "30000-45000"
           },
           {
-            "label": "Não",
-            "value": "nao"
+            "label": "R$ 45.000 a R$ 60.000",
+            "value": "45000-60000"
+          },
+          {
+            "label": "R$ 60.000 a R$ 80.000",
+            "value": "60000-80000"
+          },
+          {
+            "label": "Acima de R$ 80.000",
+            "value": "80000+"
           }
         ],
         "enabled": true
-      },
-      {
-        "text": "🔍 Qual tipo de veículo você quer financiar?",
-        "answers": [
-          {
-            "label": "Usado",
-            "value": "usado"
-          },
-          {
-            "label": "Seminovo",
-            "value": "seminovo"
-          },
-          {
-            "label": "Zero KM",
-            "value": "zero"
-          }
-        ],
-        "enabled": false
       }
     ],
-    "loading_text": "🔍 Buscando a melhor oferta para você...",
-    "loading_ms": 2000,
+    "loading_text": "",
+    "loading_ms": 0,
     "final_icon": "🚗",
     "final_title": "Oferta encontrada!",
     "final_subtitle": "Um especialista foi identificado para te atender agora.",
     "cta_label": "TRANSFERIR PARA ESPECIALISTA →",
-    "footer_note": "✅ Análise gratuita e sem compromisso"
+    "footer_note": "✅ Análise gratuita e sem compromisso",
+    "skip_loading": true
   },
   "chat": {
     "intro": [
@@ -167,5 +158,36 @@
   "standalone": true,
   "tracking_mode": "gtm",
   "gtm_container_id": "GTM-T3NQPQQC",
-  "ga4_measurement_id": "G-BW81LRMB08"
+  "ga4_measurement_id": "G-BW81LRMB08",
+  "sms_enabled": true,
+  "sms_manager_code": "G001",
+  "sms_name_label": "Nome",
+  "sms_phone_label": "Telefone",
+  "sms_submit_label": "VER PARCELAS",
+  "sms_optional": true,
+  "sms_compact_gate": true,
+  "sms_form_intro": "Preencha seus dados e veja as parcelas:",
+  "sms_gate_image": "default",
+  "sms_gate_image_alt": "Carro disponível para financiamento",
+  "geo_enabled": true,
+  "geo_prefix_text": "Analisando ofertas de veículos em",
+  "geo_fallback_text": "Analisando ofertas disponíveis na sua região",
+  "sms_consent_enabled": true,
+  "sms_consent_default": true,
+  "sms_consent_label": "Aceito receber ofertas por SMS.",
+  "sms_skip_label": "Pular, quero ver as ofertas",
+  "legal_links": [
+    {
+      "label": "Privacidade",
+      "url": "https://wantabrand.com/politica-de-privacidad/"
+    },
+    {
+      "label": "Termos",
+      "url": "https://wantabrand.com/terms-of-service/"
+    },
+    {
+      "label": "Sobre",
+      "url": "https://wantabrand.com/sobre-nosotros/"
+    }
+  ]
 }
