@@ -11,6 +11,16 @@
       "updated_at": "2026-07-20T16:14:51+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-car-br-br-intake-20260803-kelly",
+      "next_step": "Executar lote sob lock com Service Account canônica, validar READY/LEGACY/hash/clean=true, atualizar inventário, emitir REPORT-INFRA e fechar checkpoint.",
+      "objective": "Tratar 15 vídeos CAR_BR_BR enviados por Kelly em UPLOAD MANUAL, sanitizar, nomear, validar em 01_READY, preservar originais em 99_LEGACY e registrar inventário.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/upload-manual/stability-car-br-br-20260803-kelly/poll-20/; /root/mgs-agent/tmp/ares-car-br-br-20260803-evidence/20260803T233950Z/video-frame-sample-manifest.json; discord:thread:1533980723784978624",
+      "state": "batch estabilizado em 15 source ids após polls 18-20; 15/15 baixados e probeados; evidência visual 20/50/80 classificada; nenhum rejeitado técnico; nenhum checksum exato já inventariado.",
+      "thread_id": "1533980723784978624",
+      "updated_at": "2026-08-03T23:42:49+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "car-br-offer-copy-rollout-20260731",
       "next_step": "Nenhuma ação pendente; usar os backups inventariados caso Rodolfo peça rollback futuro.",
@@ -412,5 +422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T16:51:29+00:00"
+  "updated_at": "2026-08-03T23:42:49+00:00"
 }
