@@ -352,6 +352,16 @@
     },
     {
       "agent": "zeus",
+      "id": "sb-template-red-repair-reset-semantics-20260803",
+      "next_step": "Aguardar autorização de Rodolfo para um canário pequeno em templates com poucas páginas antes de implementar qualquer cron de produção.",
+      "objective": "Desenhar e validar reparo seguro de mensagens vermelhas considerando que qualquer Update + Save reinicia o estado inteiro do Broadcast Template",
+      "source": "discord:1533864214899331263; knowledge-inbox candidate do mesmo turno",
+      "state": "comportamento de reset global informado por rodolfo/ciro e capturado; executor de troca continua inativo. estratégia recomendada: lote por template, trocar todas as vermelhas em uma única edição, update + save uma vez, run approval uma vez, aguardar eta completo e só então reavaliar. roxo exige ramo separado porque resetar o log não corrige a causa.",
+      "thread_id": "1533821802525102080",
+      "updated_at": "2026-08-03T15:50:25+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
       "next_step": "Operação normal e burn-in; preservar runtime v0.19.0 e backups para rollback. Qualquer limpeza futura exige escopo e autorização separados.",
       "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
@@ -402,5 +412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T03:23:28+00:00"
+  "updated_at": "2026-08-03T15:50:25+00:00"
 }
