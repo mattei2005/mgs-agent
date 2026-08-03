@@ -20,7 +20,8 @@ Load this skill when Rodolfo asks:
 - for every backup class, disk usage, retention status, or deletion candidates;
 - why housekeeping reports no candidates while disk usage remains high;
 - whether an old pre-update archive, staging checkout, worktree, or retired-agent snapshot is redundant;
-- for a combined maintenance recommendation before authorizing update, restart, retention change, or deletion.
+- whether public SSH can be restricted without breaking legitimate access or outbound MGS workloads;
+- for a combined maintenance recommendation before authorizing update, restart, retention change, deletion, or SSH hardening.
 
 ## Progressive routing
 
@@ -28,7 +29,8 @@ Load this skill when Rodolfo asks:
 2. For backup inventory, retention-scope gaps, archive redundancy, or cleanup classification, load `references/backup-retention-scope-and-redundancy.md`.
 3. For an authorized exact APT/vendor package plus npm/Corepack maintenance window, required reboot closure, or confirmed retirement of an invalid quarantined backup, load `references/controlled-package-and-node-tooling-update.md` before touching `/usr` or deleting the quarantine; it defines literal candidate versions, rollback, gate separation, durable post-boot validation, exact-target cleanup, and inventory closure.
 4. For inventory generators that assemble large JSON, atomic-write design, `jq` argument-size failures, or Git auto-push races involving temporary artifacts, load `references/inventory-generation-and-autopush-safety.md`.
-5. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
+5. For public SSH exposure, missing key-based access, dynamic administrator IPs, provider firewalls, or lockout-safe sequencing, load `references/lockout-safe-ssh-hardening.md` before recommending any authentication or firewall mutation.
+6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 
 ## Audit workflow
 

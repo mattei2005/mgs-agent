@@ -100,6 +100,16 @@ Before deleting an old tar archive, validate every archive that will remain:
 tar -tzf /exact/retained/archive.tar.gz >/dev/null
 ```
 
+Match the validation criterion to the retained artifact's purpose. A **pre-repair rollback snapshot may intentionally preserve the defect being repaired**; do not require it to pass the post-repair integrity gate. Instead:
+
+1. read its manifest/purpose and expected pre-repair signature;
+2. verify every recorded file hash and byte count;
+3. verify unaffected invariants such as foreign keys or schema readability;
+4. confirm that the known defect signature is exactly the expected one, with no additional corruption;
+5. validate the repaired live database separately with the full post-repair integrity gate.
+
+If an over-strict precondition aborts before deletion, confirm from audit and filesystem readback that no side effect occurred, correct only the validation model, then rerun the exact frozen target. Never interpret an expected pre-repair defect as evidence that the rollback artifact is unusable, and never retry a destructive wrapper without first checking whether the target already changed.
+
 Preserve compact evidence—patches, hashes, manifests, final reports, and logs—when only bulky source clones or node_modules-like staging are redundant.
 
 For Git staging paths:
