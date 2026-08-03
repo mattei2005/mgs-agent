@@ -130,24 +130,31 @@ if [[ "$CURRENT_UPSTREAM" == "$LAST_NOTIFIED" ]]; then
   exit 0
 fi
 
-# 7. Já atualizado
-if [[ "$CURRENT_LOCAL" == "$CURRENT_UPSTREAM" ]]; then
-  log "OK already_uptodate local=$LOCAL_SHORT"
+# 7. Já atualizado. Um runtime MGS pode conter origin/main e ainda ter commits
+# locais de port/customização no topo; igualdade de HEAD não é obrigatória.
+if git merge-base --is-ancestor "$CURRENT_UPSTREAM" "$CURRENT_LOCAL"; then
+  log "OK already_contains_upstream local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
   if [[ "$DRY_RUN" != "1" ]]; then
     jq -n --arg u "$CURRENT_UPSTREAM" --arg t "$(date -Iseconds)" \
-      '{last_notified_upstream: $u, last_check: $t, status: "up-to-date"}' > "$STATE"
+      --arg l "$CURRENT_LOCAL" \
+      '{last_notified_upstream: $u, last_local: $l, last_check: $t, status: "up-to-date-custom-runtime"}' > "$STATE"
+  else
+    printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s contains_upstream=true discord_post=false state_unchanged=true\n' \
+      "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT"
   fi
   exit 0
 fi
 
-if ! git merge-base --is-ancestor "$CURRENT_LOCAL" "$CURRENT_UPSTREAM"; then
-  log "ERROR: active runtime is not an ancestor of upstream local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
+COMPARE_BASE=$(git merge-base "$CURRENT_LOCAL" "$CURRENT_UPSTREAM" 2>/dev/null || true)
+if [[ -z "$COMPARE_BASE" ]]; then
+  log "ERROR: active runtime has no common base with upstream local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
   exit 1
 fi
+COMPARE_BASE_SHORT=$(git rev-parse --short "$COMPARE_BASE")
 
 # 8. Calcular diferenças
-COMMITS_BEHIND=$(git rev-list --count "$CURRENT_LOCAL..origin/main" 2>/dev/null || echo "?")
-DAYS_BEHIND=$(( ($(date +%s) - $(git log -1 --format='%ct' "$CURRENT_LOCAL")) / 86400 ))
+COMMITS_BEHIND=$(git rev-list --count "$COMPARE_BASE..origin/main" 2>/dev/null || echo "?")
+DAYS_BEHIND=$(( ($(date +%s) - $(git log -1 --format='%ct' "$COMPARE_BASE")) / 86400 ))
 
 # Tags entre local e upstream
 LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || echo "n/a")
@@ -155,12 +162,12 @@ LATEST_TAG=$(git describe --tags --abbrev=0 origin/main 2>/dev/null || echo "n/a
 
 # Tags intermediárias (até 5)
 LOCAL_BASE_TAG="$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)"
-INTERMEDIATE_TAGS=$(git tag --sort=creatordate --contains "$CURRENT_LOCAL" 2>/dev/null | \
+INTERMEDIATE_TAGS=$(git tag --sort=creatordate --contains "$COMPARE_BASE" 2>/dev/null | \
   { if [[ -n "$LOCAL_BASE_TAG" ]]; then grep -v -- "$LOCAL_BASE_TAG" || true; else cat; fi; } | \
   head -5 | sed 's/^/• /')
 
 # 9. Categorizar commits por tipo (conventional commits)
-COMMIT_RANGE="$CURRENT_LOCAL..origin/main"
+COMMIT_RANGE="$COMPARE_BASE..origin/main"
 
 FEAT_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | wc -l)
 FIX_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^fix" -E 2>/dev/null | wc -l)
@@ -191,7 +198,7 @@ FEATURES_FIELD="${TOP_FEATURES:-nenhuma feature relevante listada}"
 FIXES_FIELD="${TOP_FIXES:-nenhum fix relevante listado}"
 BREAKING_FIELD="${BREAKING_LIST:-nenhum}"
 TAGS_FIELD="${INTERMEDIATE_TAGS:-nenhuma tag intermediária listada}"
-DIFF_URL="https://github.com/NousResearch/hermes-agent/compare/${LOCAL_SHORT}...${UPSTREAM_SHORT}"
+DIFF_URL="https://github.com/NousResearch/hermes-agent/compare/${COMPARE_BASE_SHORT}...${UPSTREAM_SHORT}"
 RELEASE_URL="https://github.com/NousResearch/hermes-agent/releases/tag/${LATEST_TAG}"
 
 PAYLOAD=$(jq -n \
@@ -213,9 +220,9 @@ if [[ "$DRY_RUN" == "1" ]]; then
   if [[ -n "$DRY_RUN_OUTPUT" ]]; then
     printf '%s\n' "$PAYLOAD" > "$DRY_RUN_OUTPUT"
   fi
-  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
-  printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s behind=%s discord_post=false state_unchanged=true\n' \
-    "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT" "$COMMITS_BEHIND"
+  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT compare_base=$COMPARE_BASE_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
+  printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s compare_base=%s behind=%s discord_post=false state_unchanged=true\n' \
+    "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT" "$COMPARE_BASE_SHORT" "$COMMITS_BEHIND"
   exit 0
 fi
 

@@ -184,6 +184,53 @@ def test_hash_drift_fails_closed_before_side_effects(tmp_path):
     assert persisted["last_error"] == "live_hash_drift"
 
 
+def test_repeated_hash_drift_is_quarantined_and_stops_retrying(tmp_path):
+    mod = load_module()
+    profiles = tmp_path / "profiles"
+    repo = tmp_path / "repo"
+    live = profiles / "zeus" / "skills" / "ops" / "demo" / "SKILL.md"
+    live.parent.mkdir(parents=True)
+    live.write_text("drifted")
+    receipt_path = profiles / "zeus" / "pending" / "trace" / "corr123.json"
+    make_receipt(receipt_path, live, "f" * 64)
+    receipt = json.loads(receipt_path.read_text())
+    receipt.update({"status": "blocked", "last_error": "live_hash_drift", "attempts": 3})
+    receipt_path.write_text(json.dumps(receipt))
+
+    result = mod.process_receipt(
+        receipt_path,
+        profiles_root=profiles,
+        repo_root=repo,
+        audit_path=repo / "logs" / "events-audit.jsonl",
+        max_blocked_attempts=3,
+    )
+    repeated = mod.process_receipt(
+        receipt_path,
+        profiles_root=profiles,
+        repo_root=repo,
+        audit_path=repo / "logs" / "events-audit.jsonl",
+        max_blocked_attempts=3,
+    )
+
+    persisted = json.loads(receipt_path.read_text())
+    assert result["status"] == "quarantined"
+    assert repeated["status"] == "already_quarantined"
+    assert persisted["status"] == "quarantined"
+    assert persisted["attempts"] == 3
+    assert persisted["quarantine_reason"] == "live_hash_drift_retry_exhausted"
+
+
+def test_rotates_large_log_and_keeps_bounded_compressed_history(tmp_path):
+    mod = load_module()
+    log = tmp_path / "finalizer.log"
+    log.write_bytes(b"a" * 2048)
+
+    assert mod.rotate_log_if_needed(log, max_bytes=1024, backups=2) is True
+    assert log.read_bytes() == b""
+    assert (tmp_path / "finalizer.log.1.gz").is_file()
+    assert mod.rotate_log_if_needed(log, max_bytes=1024, backups=2) is False
+
+
 def test_unrelated_later_drift_does_not_block_receipt(tmp_path):
     mod = load_module()
     profiles = tmp_path / "profiles"

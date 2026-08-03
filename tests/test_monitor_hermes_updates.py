@@ -96,3 +96,45 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_p
     assert field(payload, "Resumo") == "Features 0 | Fixes 1 | Perf 0 | Security 0 | Breaking 0"
     assert not state.exists(), "dry-run must not mutate the configured state file"
     assert "state_unchanged=true discord_post=false" in log.read_text(encoding="utf-8")
+
+
+def test_custom_runtime_on_top_of_upstream_is_current(tmp_path: Path) -> None:
+    origin = tmp_path / "origin.git"
+    seed = tmp_path / "seed"
+    live = tmp_path / "active-runtime"
+    output = tmp_path / "payload.json"
+    state = tmp_path / "state.json"
+    log = tmp_path / "monitor.log"
+
+    origin.mkdir()
+    git("init", "--bare", "--initial-branch=main", cwd=origin)
+    seed.mkdir()
+    git("init", "--initial-branch=main", cwd=seed)
+    (seed / "marker.txt").write_text("upstream\n", encoding="utf-8")
+    git("add", "marker.txt", cwd=seed)
+    git("commit", "-m", "feat: upstream baseline", cwd=seed)
+    git("remote", "add", "origin", str(origin), cwd=seed)
+    git("push", "-u", "origin", "main", cwd=seed)
+
+    run("git", "clone", str(origin), str(live), cwd=tmp_path)
+    (live / "mgs.txt").write_text("custom port\n", encoding="utf-8")
+    git("add", "mgs.txt", cwd=live)
+    git("commit", "-m", "fix(mgs): custom runtime", cwd=live)
+
+    env = os.environ.copy()
+    env.update(
+        {
+            "HERMES_MONITOR_DRY_RUN": "1",
+            "HERMES_MONITOR_DIR": str(live),
+            "HERMES_MONITOR_LOG": str(log),
+            "HERMES_MONITOR_STATE": str(state),
+            "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),
+        }
+    )
+    proc = run("bash", str(SCRIPT), cwd=ROOT, env=env)
+
+    assert "contains_upstream=true" in proc.stdout
+    assert "discord_post=false" in proc.stdout
+    assert not output.exists(), "an up-to-date custom runtime must not build an alert payload"
+    assert not state.exists(), "dry-run must not mutate the configured state file"
+    assert "OK already_contains_upstream" in log.read_text(encoding="utf-8")

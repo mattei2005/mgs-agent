@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import gzip
 import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import tempfile
 import time
@@ -22,6 +24,10 @@ DEFAULT_REPO_ROOT = Path("/root/mgs-agent")
 DEFAULT_AUDIT = DEFAULT_REPO_ROOT / "logs" / "events-audit.jsonl"
 DEFAULT_CHANNEL = "1498132022634483894"
 DEFAULT_ZEUS_ENV = Path("/root/.hermes/profiles/zeus/.env")
+DEFAULT_LOG = DEFAULT_REPO_ROOT / "logs" / "hermes-structural-write-finalizer.log"
+DEFAULT_MAX_BLOCKED_ATTEMPTS = 3
+DEFAULT_MAX_LOG_BYTES = 50 * 1024 * 1024
+DEFAULT_LOG_BACKUPS = 5
 PROFILES = ("zeus", "atena", "ares")
 ZEUS_SYNCED_GROWTH = {
     "meta-utility-template-approval",
@@ -108,6 +114,40 @@ def _atomic_write_json(path: Path, data: Dict[str, Any]) -> None:
                 os.unlink(temp_name)
             except FileNotFoundError:
                 pass
+
+
+def rotate_log_if_needed(
+    path: Path | str = DEFAULT_LOG,
+    *,
+    max_bytes: int = DEFAULT_MAX_LOG_BYTES,
+    backups: int = DEFAULT_LOG_BACKUPS,
+) -> bool:
+    """Compress and truncate the cron log before it grows without bound.
+
+    The cron shell opens the append target before launching this process. Truncating
+    the same inode therefore keeps stdout valid while reclaiming the old contents.
+    """
+    log_path = Path(path)
+    if backups < 1 or not log_path.is_file() or log_path.stat().st_size <= max_bytes:
+        return False
+    for index in range(backups, 1, -1):
+        older = Path(f"{log_path}.{index - 1}.gz")
+        newer = Path(f"{log_path}.{index}.gz")
+        if older.exists():
+            os.replace(older, newer)
+    target = Path(f"{log_path}.1.gz")
+    temporary = Path(f"{target}.tmp")
+    try:
+        with log_path.open("rb") as source, gzip.open(temporary, "wb", compresslevel=6) as sink:
+            shutil.copyfileobj(source, sink, length=1024 * 1024)
+        os.chmod(temporary, 0o600)
+        os.replace(temporary, target)
+        with log_path.open("wb"):
+            pass
+        os.chmod(log_path, 0o600)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return True
 
 
 def _run_command(command: list[str]) -> str:
@@ -314,6 +354,7 @@ def process_receipt(
     find_report: Callable[[str], Optional[str]] = find_report_by_correlation,
     send_report: Optional[Callable[[Dict[str, Any], list[str]], str]] = None,
     readback_report: Callable[[str, str], bool] = readback_report,
+    max_blocked_attempts: int = DEFAULT_MAX_BLOCKED_ATTEMPTS,
 ) -> Dict[str, Any]:
     path = Path(receipt_path)
     profiles = Path(profiles_root)
@@ -322,10 +363,30 @@ def process_receipt(
     receipt = json.loads(path.read_text(encoding="utf-8"))
     if receipt.get("status") == "closed":
         return {"status": "already_closed", "id": receipt.get("id")}
+    if receipt.get("status") == "quarantined":
+        return {"status": "already_quarantined", "id": receipt.get("id")}
+
+    attempts = int(receipt.get("attempts") or 0)
+    if (
+        receipt.get("status") == "blocked"
+        and receipt.get("last_error") == "live_hash_drift"
+        and attempts >= max_blocked_attempts
+    ):
+        receipt.update({
+            "status": "quarantined",
+            "quarantine_reason": "live_hash_drift_retry_exhausted",
+            "quarantined_at": time.time(),
+        })
+        _atomic_write_json(path, receipt)
+        return {
+            "status": "quarantined",
+            "reason": receipt["quarantine_reason"],
+            "id": receipt.get("correlation_id") or receipt.get("id") or path.stem,
+        }
 
     correlation = str(receipt.get("correlation_id") or receipt.get("id") or path.stem)
     receipt["correlation_id"] = correlation
-    receipt["attempts"] = int(receipt.get("attempts") or 0) + 1
+    receipt["attempts"] = attempts + 1
 
     mapped = [
         map_live_to_mirror(raw, profiles_root=profiles, repo_root=repo)
@@ -395,11 +456,21 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--repo-root", type=Path, default=DEFAULT_REPO_ROOT)
     parser.add_argument("--audit-path", type=Path, default=DEFAULT_AUDIT)
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--log-path", type=Path, default=DEFAULT_LOG)
+    parser.add_argument("--max-blocked-attempts", type=int, default=DEFAULT_MAX_BLOCKED_ATTEMPTS)
+    parser.add_argument("--max-log-bytes", type=int, default=DEFAULT_MAX_LOG_BYTES)
+    parser.add_argument("--log-backups", type=int, default=DEFAULT_LOG_BACKUPS)
+    parser.add_argument("--verbose", action="store_true")
     return parser
 
 
 def main(argv: Optional[list[str]] = None) -> int:
     args = _parser().parse_args(argv)
+    rotated = rotate_log_if_needed(
+        args.log_path,
+        max_bytes=args.max_log_bytes,
+        backups=args.log_backups,
+    )
     if args.receipt:
         paths = [args.receipt]
     else:
@@ -414,10 +485,27 @@ def main(argv: Optional[list[str]] = None) -> int:
             profiles_root=args.profiles_root,
             repo_root=args.repo_root,
             audit_path=args.audit_path,
+            max_blocked_attempts=args.max_blocked_attempts,
         )
         for path in paths
     ]
-    print(json.dumps({"processed": len(results), "results": results}, ensure_ascii=False))
+    status_counts: Dict[str, int] = {}
+    for item in results:
+        status = str(item.get("status") or "unknown")
+        status_counts[status] = status_counts.get(status, 0) + 1
+    summary: Dict[str, Any] = {
+        "scanned": len(paths),
+        "processed": sum(
+            count
+            for status, count in status_counts.items()
+            if status not in {"already_closed", "already_quarantined"}
+        ),
+        "status_counts": status_counts,
+        "log_rotated": rotated,
+    }
+    if args.verbose or args.receipt:
+        summary["results"] = results
+    print(json.dumps(summary, ensure_ascii=False))
     return 1 if any(item.get("status") == "blocked" for item in results) else 0
 
 
