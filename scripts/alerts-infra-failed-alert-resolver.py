@@ -35,6 +35,8 @@ HERMES_BIN = os.environ.get('HERMES_BIN', '/root/.local/bin/hermes')
 USER_AGENT = 'MGS-Zeus-failed-alert-resolver/1.0'
 MAX_CANDIDATES_PER_RUN = int(os.environ.get('MAX_CANDIDATES_PER_RUN', '2'))
 HERMES_TIMEOUT_SECONDS = int(os.environ.get('HERMES_TIMEOUT_SECONDS', '900'))
+FETCH_RETRY_ATTEMPTS = int(os.environ.get('FETCH_RETRY_ATTEMPTS', '3'))
+FETCH_RETRY_BASE_SECONDS = float(os.environ.get('FETCH_RETRY_BASE_SECONDS', '2'))
 
 FAILURE_RE = re.compile(
     r'\b(alerta|falha|falhando|failed|failure|erro|error|critical|crítico|indispon[ií]vel|down|stale|timeout|traceback|exception|restart de serviço detectado)\b',
@@ -176,10 +178,24 @@ def is_candidate(message: dict[str, Any]) -> bool:
 
 
 def fetch_messages(token: str, limit: int = 50) -> list[dict[str, Any]]:
-    status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}')
-    if status != 200:
-        raise RuntimeError(f'GET channel messages HTTP {status}: {data}')
-    return data or []
+    retryable_statuses = {429, 500, 502, 503, 504}
+    attempts = max(1, FETCH_RETRY_ATTEMPTS)
+    status: int | None = None
+    data: Any = None
+    for attempt in range(1, attempts + 1):
+        status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}')
+        if status == 200:
+            return data or []
+        if status not in retryable_statuses or attempt == attempts:
+            break
+        retry_after = data.get('retry_after') if isinstance(data, dict) else None
+        try:
+            delay = max(float(retry_after), 0.0) if retry_after is not None else FETCH_RETRY_BASE_SECONDS * attempt
+        except (TypeError, ValueError):
+            delay = FETCH_RETRY_BASE_SECONDS * attempt
+        log(f'WARN GET channel messages HTTP {status}; retry {attempt}/{attempts} in {delay:g}s')
+        time.sleep(delay)
+    raise RuntimeError(f'GET channel messages HTTP {status} after {attempts} attempt(s): {data}')
 
 
 def run_hermes_resolution(raw_alert: str, url: str) -> str:
