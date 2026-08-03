@@ -51,7 +51,19 @@ Padrão de resposta para o CEO: tabela curta com `Item | Status agora | Decisão
 
 Para alertas Discord com muitos itens comparáveis, o próprio script deve renderizar blocos monoespaçados alinhados. Em volume alto, agregar por entidade sem esconder o estado operacional: uma linha por template, contagens separadas por cor/status e todos os IDs afetados com idade individual (`ID(dias)`). Não despejar uma linha completa por mensagem quando isso gerar dezenas de milhares de caracteres; preservar o detalhe bruto no state/live source e identificar claramente que a tabela é agregada. Dividir em blocos independentes abaixo do limite do Discord, repetindo cabeçalho e delimitadores. Validar o renderer contra o state real: totais por cor, quantidade de registros agregados, presença das três classes, tamanho dos blocos e fechamento dos delimitadores.
 
-No alerta diário de templates SB, o canal operacional canônico é `#broadcast-templates` (ID `1522487422510694450`). Não chamar o canal de “SB Utility”; esse termo pode descrever o processo, mas não é o nome do canal. `#cron-temp-templates` é separado e serve a crons temporários/infra. Considerar somente produção ativa (`PAGES > 0`), excluindo `Teste-*` e `NAO/NÃO USAR`. Reportar imediatamente **roxo** (`INVALID_FORMAT`/`ERROR`) e **vermelho** (`REJECTED`), além do **cinza** persistente por pelo menos 2 dias. Roxo é diagnóstico e nunca troca global automática. Vermelho só pode ser descrito como troca automática ativa após confirmar scheduler `enabled/scheduled` e execução real recente; existência de código red-only ou job pausado não equivale a automação ativa. Enquanto o executor estiver pausado, manter vermelho no relatório como pendência acionável.
+No fluxo fixed-30 ativo desde 2026-08-03, o canal operacional canônico é `#broadcast-templates` (ID `1522487422510694450`). O alerta diário legado de listas grandes (`sb-utility-gray-alerts`) deve permanecer pausado enquanto o executor `sb-broadcast-template-repair` estiver habilitado; não manter dois publishers concorrentes. O executor considera somente produção ativa (`PAGES > 0`), exatamente 30 mensagens, excluindo `Teste-*` e `NAO/NÃO USAR`.
+
+Formato de alertas desse fluxo:
+- transporte direto pelo bot Zeus, `content` vazio, sem mentions e sem criar thread;
+- um embed de início por template realmente tocado;
+- um embed de resultado positivo, concluído, sem progresso ou bloqueado após o ETA;
+- um único digest diário compacto;
+- mostrar template, páginas/vertical, contagens antes/depois por cor, ação, horário do Approval, ETA e próximo passo;
+- não despejar IDs de todas as mensagens, copies completas, motivos repetidos nem paginação em várias mensagens;
+- fingerprint por template ID + ciclo + evento + contagens para suprimir repetição;
+- checker silencioso enquanto o ETA não venceu.
+
+As cores são operacionais: template 30/30 verde é intocável; vermelho entra em troca em lote no nível do template; roxo sem vermelho entra em reset sem alteração visível + novo Approval; cinza aguarda ETA. Essa regra substitui o texto antigo que dizia que roxo era somente diagnóstico e que vermelho não tinha executor ativo. A distinção de atribuição permanece: roxo agregado não identifica a Page causal.
 
 ---
 ## Atualizar infra-inventory.json

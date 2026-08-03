@@ -567,7 +567,7 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
             cycle = int(old.get('cycle') or 0) + 1
             item = {
                 'template_id': key, 'template': name, 'vertical': parse_vertical(name), 'pages': pages,
-                'cycle': cycle, 'before': plan['before'], 'action': plan['action'],
+                'cycle': cycle, 'stage': config.get('stage'), 'before': plan['before'], 'action': plan['action'],
                 'replaced_slots': [slot['message_id'] for slot in plan.get('replaced_slots', [])],
                 'content_hash_before': content_hash(messages_before), 'content_hash_after': content_hash(plan['messages']),
                 'approval_started_at_sp': iso_sp(started), 'due_at_sp': iso_sp(due),
@@ -701,12 +701,19 @@ async def check_due(notify: bool, dry_notify: bool = False) -> dict:
                 atomic_json(STATE_PATH, state)
             results.append({'template_id': item['template_id'], 'event': event, 'after': item.get('after'), 'status': item['status']})
             append_log('template_readback', template_id=item['template_id'], template=item.get('template'), cycle=item.get('cycle'), outcome=event, before=item.get('before'), after=item.get('after'))
-        if config.get('stage') == 'canary' and len(results) == 1 and positive:
+        current_stage = config.get('stage')
+        stage_items = [item for item in state.get('templates', {}).values() if item.get('stage') == current_stage]
+        stage_pending = any(item.get('status') == 'pending' for item in stage_items)
+        stage_positive = bool(stage_items) and all(
+            item.get('status') in {'completed', 'eligible_next_day'} and not int(item.get('no_progress_cycles') or 0)
+            for item in stage_items
+        )
+        if current_stage == 'canary' and len(stage_items) == 1 and not stage_pending and stage_positive:
             state.setdefault('stage_evidence', {})['canary_passed'] = True
             if config.get('auto_promote'):
                 config['stage'] = 'staged'
                 atomic_json(CONFIG_PATH, config)
-        elif config.get('stage') == 'staged' and results and positive:
+        elif current_stage == 'staged' and len(stage_items) >= int(config.get('staged_templates_per_day') or 3) and not stage_pending and stage_positive:
             state.setdefault('stage_evidence', {})['staged_passed'] = True
             if config.get('auto_promote'):
                 config['stage'] = 'full'

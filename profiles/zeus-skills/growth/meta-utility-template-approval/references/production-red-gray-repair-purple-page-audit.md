@@ -4,20 +4,27 @@
 
 Use this reference when Rodolfo asks to keep linked SmartBidding Broadcast Templates at a fixed message count, automatically repair red/gray messages, or identify pages behind purple approval errors.
 
-## Repair policy currently agreed
+## Repair policy currently agreed — superseded 2026-08-03
 
-- Operate only on production templates with `PAGES > 0`.
-- Exclude names beginning with `Teste` or `NAO USAR`.
-- Keep exactly 30 messages; never reuse the obsolete 10/20/30 scaling tracker for this job.
-- Preserve green slots, links, page associations, template metadata, and message count.
-- Red: replace with a unique same-country/vertical/language copy, then run `Run Approval → Update → Save → readback`.
-- Gray: do not act while approval may still be processing. Eligibility ETA is `pages × 30 × 12 seconds`, plus any explicit safety margin. For an eligible stale slot, install a different copy, run approval, wait its new ETA, and allow at most four distinct copies. Persist attempts by immutable template ID + message ID + normalized text hash. Reset on green or verified manual change.
-- After four gray copy failures, stop that slot and report template name, page count, slot/message count, and attempts to `#cron-temp-templates` (`1524188896215171222`). Suppress duplicate alerts.
-- Purple: ignore completely in the fixed-30 repair loop. Do not replace, retry, alert, split templates, or run recurring page-attribution audits for purple while this hold is active. On 2026-07-16 Rodolfo decided to leave purple handling to a future discussion with Ciro because SB does not expose the causal Page ID. Reopen purple diagnostics only on a new explicit instruction from Rodolfo.
+Rodolfo reopened purple handling after confirming the SmartBidding/Ciro reset semantics. The following policy supersedes the 2026-07-16 purple hold for the dedicated fixed-30 executor only:
 
-## Current purple hold — 2026-07-16
+- Operate only on `digital-trust` / `digital-trust-2` production templates with live Broadcast Template `PAGES > 0` and exactly 30 messages.
+- Exclude names beginning with `Teste` and names containing `NAO USAR` / `NÃO USAR`.
+- Treat the immutable Broadcast Template ID as the transaction/lock unit. Never run two rounds for the same template simultaneously.
+- Any `Update + Save`, even without visible content change, resets the whole template version to gray. Therefore a slot-level content edit also clears the status of green, gray, red, and purple slots in that template. Backups can restore content but cannot restore the erased color log.
+- A 30/30 green template is terminal success and must not be touched.
+- Red: replace every red slot in that template in one batch with unique, same-country/vertical/language copies from `data/utility-message-bank.json`; preserve each target slot's IDs, links, media and metadata. Then perform one `Update + Save`, confirm 30 gray on readback, and perform one `Run Approval`.
+- Purple without red: do not change visible copy. Perform a no-op content reset (`Update + Save`), confirm 30 gray, then perform one `Run Approval`. Improvement is measured by aggregate counts; exact causal Page IDs are not required. A reduction such as 50 purple to 30 purple is positive progress.
+- Gray: wait the full Approval ETA. The first executor version does not automatically replace gray-only slots because any edit resets the entire template.
+- Approval ETA is `PAGES × 30 messages × 12 seconds`, plus the configured safety margin. Do not start a round that cannot finish before the next 00:00 America/Sao_Paulo cutoff.
+- Normal dispatch is 08:00 America/Sao_Paulo, initially limited to templates with at most 150 pages and one cycle per template/day. Larger templates require a separately validated window.
+- Every readback must update `data/utility-message-bank.json` before deciding. Preserve `approved_count` / ever-green history after later gray or purple observations; a later red creates mixed history rather than deleting prior approval.
+- Rollout is canary (1 small template) → staged (3/day) → full controlled batch. Halt/pause on drift, write/readback mismatch, missing approved copy, no progress, or transport/runtime failure.
+- Discord lifecycle alerts go directly to `#broadcast-templates` (`1522487422510694450`) as compact embeds: one start and one result/blocked event per touched template, plus one daily digest. Suppress identical fingerprints; never dump every message ID or repeated prose.
 
-The prior purple Excel/audit is retained only as historical evidence. It must not drive automatic action. The operational plan now covers red and eligible stale gray only; purple rows are skipped silently. Ciro may be able to resolve or expose page-level attribution because he created the template/color system.
+## Purple attribution distinction retained
+
+Purple is still an aggregate message/template state and SB does not identify the causal Page ID. The fixed-30 retry flow may reset and re-run Approval without page attribution, but any claim about *which page caused purple* still requires the separate SB→Page→DTR corroboration workflow below. Do not label all linked pages as confirmed purple pages.
 
 ## Do not revive the legacy rollout manager in place
 

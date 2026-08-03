@@ -353,12 +353,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-red-repair-reset-semantics-20260803",
-      "next_step": "Rodolfo revisar/aprovar o plano completo. Após aprovação, construir executor dedicado novo, integrar obrigatoriamente o utility-message-bank em cada readback, validar fixture/dry-run, escolher canário live de poucas páginas e executar somente o canário com backup e readback.",
-      "objective": "Implantar um reparador diário seguro para Broadcast Templates de 30 mensagens: corrigir vermelhas, reapresentar roxas por reset e maximizar verdes antes da janela de agendamento da meia-noite de São Paulo",
-      "source": "discord:1533864214899331263; discord:1533868709448388892; discord:1533870026816491570; discord:1533871329210536119; discord:1533873769087762565; skill:meta-utility-template-approval/references/route-pack-05.md",
-      "state": "plano proposto, ainda não autorizado/ativado. escopo: digital-trust + digital-trust-2, produção pages>0, exatamente 30 mensagens, excluir teste/nao usar. 08:00 america/sao_paulo: snapshot/backup e classificação por template. green-only sai da fila. com red: trocar todas as vermelhas em lote com copies únicas da mesma língua/vertical, preservar ids/links/páginas/metadados, update+save uma vez, confirmar reset cinza, run approval uma vez. sem red e com purple: reset sem alterar conteúdo, update+save, run approval. gray fica em espera até eta; não há troca automática de gray na v1. persistir lock/estado por template id, hashes, contagens pre/post, approval_at e deadline. cada readback deve primeiro upsertar data/utility-message-bank.json por hash normalizado text+cta: green incrementa approved_count e first/last_approved_at; histórico ever-green é preservado mesmo após reset posterior para gray/red/purple; mixed history nunca apaga aprovação anterior. estado atual do banco: 553 records, 358 com approved_count>0, último update 2026-07-16 17:44 et; nenhum job ativo o atualiza hoje. readback somente após eta pages*30*12s; progresso = green sobe ou red/purple cai. um ciclo por template/dia na v1; parar em drift, falha, status pior sem progresso ou risco de atravessar cutoff. janela automática normal <=150 páginas às 08:00 com 1h de margem antes de 00:00; >150 páginas fora da automação inicial. canary: 1 template pequeno com red+purple; depois 3 templates; só então rollout elegível. checker read-only a cada 15 min e resumo final no #broadcast-templates; exceção técnica temporária no #cron-temp-templates.",
+      "next_step": "Checker cron fará readback após 14:52 SP, publicará um único resultado por template e promoverá/pausará automaticamente conforme a evidência. Validar resultado no canal e manter templates >150 páginas fora deste rollout inicial.",
+      "objective": "Operar reparador diário fixed-30 com vermelho em lote, reset de roxo, histórico ever-green e alertas executivos por template",
+      "source": "discord:1533874909451653342; runtime:sb:/broadcast/Messenger; runtime:discord:1522487422510694450/1533878700989485129; data:sb-broadcast-template-repair-state.json",
+      "state": "ativo em canário. executor dedicado scripts/sb-broadcast-template-repair.py criado com config/state próprios, banco utility-message-bank obrigatório, lock por template, backup/readback, eta pages*30*12s+60m, dispatcher 08:00 sp, checker 15m, digest 23:10 sp e embeds diretos no canal 1522487422510694450. alerta legado hermes 500f8f1cff5e pausado. auditoria live 2026-08-03: 108 rows, 44 templates produção exact30, 689 verdes, 51 cinzas, 354 vermelhas, 226 roxas. canário live id 6a222a84-22dc-8811-5de6-3745293fe0c1 fincgriffin us-car-en g001-d, 1 página: antes 19vd/1c/3vm/7rx; slots 22,24,26 trocados; update+save readback 30 cinzas; run approval ok; alerta discord 1533878700989485129; eta+margin 2026-08-03 14:52 sp. stage permanece canary até readback; promoção staged somente após resultado positivo; staged só promove full após 3 resultados positivos e nenhum pending.",
       "thread_id": "1533821802525102080",
-      "updated_at": "2026-08-03T16:27:51+00:00"
+      "updated_at": "2026-08-03T16:51:29+00:00"
     },
     {
       "agent": "zeus",
@@ -412,5 +412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-03T16:27:51+00:00"
+  "updated_at": "2026-08-03T16:51:29+00:00"
 }

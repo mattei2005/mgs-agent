@@ -53,11 +53,11 @@ Rules:
 
 0. Before any template check, replacement, production rollout, or message generation, load `utility-message-bank.json` and use it as the source of operational history.
 1. Every readback of canary/template approval statuses must upsert the message bank before deciding replacements.
-2. Green updates `first_approved_at`/`last_approved_at`, increments `approved_count`, and sets `status=approved`.
+2. Green updates `first_approved_at`/`last_approved_at`, increments `approved_count`, and sets `status=approved` unless the record already has red history, in which case keep `mixed_history`.
 3. Red increments `rejected_count` and updates the same message record; do not create a separate disconnected record for the same `TEXT+CTA`. If a previously approved message later turns red, keep the full history (`approved_count` + `rejected_count`) and mark the record as `mixed_history` / `needs_review` rather than forgetting prior approval.
-4. Gray increments `gray_count` only; do not classify as rejected.
-5. Purple increments `purple_count` and marks `diagnostic` unless separate proof shows copy format failure.
-6. Replacement candidate selection should prefer same vertical/language/country approved-bank messages and must skip `TEXT+CTA` already present in the target template.
+4. Gray increments `gray_count` only and must not erase an approved/mixed status.
+5. Purple increments `purple_count`. If `approved_count > 0` and `rejected_count == 0`, preserve ever-green eligibility as `approved_diagnostic`; otherwise use `diagnostic`. Purple is not proof of copy rejection.
+6. Replacement candidate selection should prefer the same vertical/language/country with `approved_count > 0` and `rejected_count == 0`, including `approved_diagnostic`, and must skip `TEXT+CTA` already present in the target template.
 7. Do not generate or install new messages blindly when the bank already has enough approved candidates for the same vertical/language/country.
 8. Do not reuse a message in a target if the bank says it is rejected for that same vertical/context unless Rodolfo explicitly chooses to retest it.
 9. Record usage history every time a message is installed: template, message slot, page/template context, link slot preserved, timestamp, and whether it was canary or production.
