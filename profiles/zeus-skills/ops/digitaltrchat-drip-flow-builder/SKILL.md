@@ -211,6 +211,20 @@ For every authorized write:
 
 Scope changes require new authorization. Never infer that a changed No Match URL also authorizes changing Drip block 6, or vice versa.
 
+### Validated whole-graph replacement
+
+Use only when Rodolfo explicitly authorizes replacing the entire installed flow with a known-good baseline. This is distinct from narrow node cloning.
+
+1. Prove the source baseline is semantically stable: exact M1–M28 coverage, all nodes reachable, expected edge count, and matching texts/images/buttons/links/postbacks/delays across more than one known-good installation when available.
+2. Freeze and hash the live source graph, then capture a fresh per-Page target backup and abort on live drift.
+3. `editor.clear(); await editor.fromJSON(sourceGraph)` is useful for an **unsaved dry-run**. Require `editor.toJSON()` to equal the source and all nodes to be reachable.
+4. Do not assume this in-memory import will render every Vue node in time for the visual Save handler. The UI handler validates rendered DOM nodes; an immediate button click can silently skip the POST and leave the old graph unchanged.
+5. For an authorized exact replacement, use the same canonical request as the UI's `handleSave`: `POST /visual_flow_builder/flowbuilder_submit` with `page_table_id`, `builder_table_id`, `instagram_bot_addon`, and `flow_data=JSON.stringify(validatedGraph)` sourced from `window.xitFlowBuilderData`. Require the live `page_table_id` to equal the authorized DTR Page ID and reject response `status=0`.
+6. Reload immediately, then open a fresh authenticated context and prove graph equality (excluding only runtime `labelIdTexts`), node/edge totals, M1–M28 coverage, reachability, text/media/button/link/delay equality, and Page identity.
+7. On any mismatch, restore the exact per-Page backup through the same endpoint and independently verify rollback before continuing.
+
+Validated production case: FinanceTopFeed US-CC-EN on 2026-08-04, 18 Pages rebuilt to one 147-node/146-edge baseline with 18/18 independent readback.
+
 ## Common Pitfalls
 
 1. **Clicking by icon position.** The yellow edit and red delete controls are adjacent. Fix: locate the exact row, then enforce title/class/href predicates before clicking.
