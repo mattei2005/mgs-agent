@@ -27,7 +27,10 @@ def reachable(g):
  return len(seen),len(nodes)
 
 async def main():
- R=records();src=R['19211'];tgt=R['13688'];login=tgt['_login'];password=amod.resolve_password(login)
+ R=records();src=R['19211'];tgt=R['13688'];login=tgt['_login']
+ mapped,missing,errors,_=amod.resolver.resolve_dtr_items([login],amod.VAULT)
+ if missing or errors: raise RuntimeError(f'credential resolution failed missing={missing} errors={errors}')
+ item=amod.resolver.get_item_json(mapped[login]['id'],amod.VAULT);password=amod.resolver.field_value(item,'credential','password',required=True)
  RUN.mkdir(parents=True,exist_ok=True)
  async with async_playwright() as pw:
   browser=await pw.chromium.launch(headless=True,args=['--disable-dev-shm-usage','--no-sandbox'])
