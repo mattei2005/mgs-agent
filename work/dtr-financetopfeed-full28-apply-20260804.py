@@ -45,17 +45,23 @@ def diff_counts(a,b):
  return {'added_nodes':len(B-A),'removed_nodes':len(A-B),'changed_common_nodes':sum(an[k]!=bn[k] for k in A&B),'added_ids':sorted(B-A),'removed_ids':sorted(A-B)}
 
 async def replace_graph(ctx,href,new_graph):
- p=await ctx.new_page();responses=[]
- p.on('response',lambda r:responses.append({'method':r.request.method,'url':r.url,'status':r.status}) if r.request.method=='POST' and 'visual_flow_builder' in r.url else None)
+ p=await ctx.new_page()
  try:
   await p.goto(href,wait_until='domcontentloaded',timeout=90000);await p.wait_for_function("typeof window.data==='string' && document.querySelector('.node')",timeout=90000)
   before=json.loads(await p.evaluate('window.data'))
   prepared=await p.evaluate("""async graph=>{const e=document.querySelector('.node').__vue__.editor;await e.clear();await e.fromJSON(graph);return e.toJSON()}""",new_graph)
   if clean(prepared)!=clean(new_graph):raise RuntimeError('unsaved replacement differs from frozen baseline')
+  await p.wait_for_function("n=>document.querySelectorAll('.node').length===n",arg=len(new_graph['nodes']),timeout=60000)
+  await p.wait_for_timeout(2500)
   save=p.locator('.action-button-save')
   if await save.count()!=1 or await p.locator('.action-button-save.btn-outline-danger,.action-button-save.delete_data').count():raise RuntimeError('unsafe save selector')
-  await save.click();await p.wait_for_timeout(5000)
-  return {'before':before,'prepared_equals_baseline':clean(prepared)==clean(new_graph),'responses':responses,'body_signal':(await p.locator('body').inner_text())[-1000:]}
+  async with p.expect_response(lambda r:r.request.method=='POST' and '/visual_flow_builder/flowbuilder_submit' in r.url,timeout=30000) as response_info:
+   await save.click()
+  response=await response_info.value;body=await response.text();await p.wait_for_timeout(2000)
+  try:payload=json.loads(body)
+  except Exception:payload={'raw':body[:1000]}
+  if response.status!=200 or str(payload.get('status'))=='0':raise RuntimeError(f'flow save rejected http={response.status} payload={payload}')
+  return {'before':before,'prepared_equals_baseline':True,'dom_nodes_before_save':await p.locator('.node').count(),'response':{'url':response.url,'status':response.status,'payload':payload},'body_signal':(await p.locator('body').inner_text())[-1000:]}
  finally:await p.close()
 
 async def login_for(browser,login):
@@ -83,16 +89,16 @@ async def one(pw,record,baseline):
  if clean(live)!=clean(qualified_before):raise RuntimeError(f'live drift before structural write page={pid}')
  before_info=qmod.graph_info(live);covered=len(set(before_info.get('semantic_coverage') or [])&set(range(1,29)))
  if covered!=15:raise RuntimeError(f'expected incomplete 15/28 but found {covered}/28 page={pid}')
- browser=await pw.chromium.launch(headless=True,args=['--disable-dev-shm-usage','--no-sandbox']);ctx=None
  try:
-  ctx,main=await login_for(browser,login);await amod.switch_account(main,str(record['action']['account_id']))
-  pre=await amod.graph_read(ctx,record['flow']['edit_href'])
-  if clean(pre)!=clean(live):raise RuntimeError(f'live drift between backup and save page={pid}')
-  wr=await replace_graph(ctx,record['flow']['edit_href'],baseline);result['write']=wr
-  immediate=await amod.graph_read(ctx,record['flow']['edit_href']);(pdir/'flow-after-immediate.json').write_text(json.dumps(immediate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-  if clean(immediate)!=clean(baseline):raise RuntimeError(f'immediate readback mismatch page={pid}')
- finally:await browser.close()
- try:
+  browser=await pw.chromium.launch(headless=True,args=['--disable-dev-shm-usage','--no-sandbox'])
+  try:
+   ctx,main=await login_for(browser,login);await amod.switch_account(main,str(record['action']['account_id']))
+   pre=await amod.graph_read(ctx,record['flow']['edit_href'])
+   if clean(pre)!=clean(live):raise RuntimeError(f'live drift between backup and save page={pid}')
+   wr=await replace_graph(ctx,record['flow']['edit_href'],baseline);result['write']=wr
+   immediate=await amod.graph_read(ctx,record['flow']['edit_href']);(pdir/'flow-after-immediate.json').write_text(json.dumps(immediate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+   if clean(immediate)!=clean(baseline):raise RuntimeError(f'immediate readback mismatch page={pid}')
+  finally:await browser.close()
   independent=await fresh_read(pw,record);(pdir/'flow-after-independent.json').write_text(json.dumps(independent,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
   check=validate_full(independent)
   if clean(independent)!=clean(baseline) or check['nodes']!=147 or check['reachable']!=147 or check['disconnected'] or check['coverage']!=list(range(1,29)):raise RuntimeError(f'independent readback mismatch page={pid}')
