@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.4
+version: 1.3.5
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -46,11 +46,13 @@ Treat these as one consistency unit while preserving their distinct semantic des
 - `No Match Template`: use canonical NM.
 - `Persistent Menu`: locale `default`, first-level Web URL item, use canonical M0.
 
-Map existing `utm_content` labels directly:
+Map canonical `utm_content` labels directly:
 
 - suffix `_m0-1` → M0;
 - suffix `_nm` → NM;
 - suffix `_m1-1`…`_m28-1` → same-number message.
+
+Legacy copied flows may omit the `m` in numbered query labels (`..._1-1`…`..._28-1`) while the destination path still contains `/...-drip-mN-1/`. Accept that legacy form only when the numeric suffix and path number agree; record both signals in the manifest. A path/query number conflict is a structural divergence and makes the Page ineligible. Treat M0 and NM as recognized out-of-scope business URLs when the current authorization covers only M1–M28; do not misclassify them as unmapped HTTP noise.
 
 Do not force an existing M0 flow button to NM because an older baseline expected an initial block to equal No Match. The canonical migration model has separate M0 and NM destinations.
 

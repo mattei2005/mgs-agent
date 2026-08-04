@@ -27,7 +27,15 @@ Use this reference for multi-Page URL migrations after the Page list and canonic
 
 ## 3. Select the real imported account
 
-Enumerate every `a.account_switch[data-id]`, switch with `/social_accounts/fb_rx_account_switch`, reload Bot Manager, and map each Page to its imported-account ID. A Page absent from that inventory may be disconnected rather than nonexistent. Do not connect it or install a template under URL-migration authorization.
+Enumerate every `a.account_switch[data-id]`, switch with `/social_accounts/fb_rx_account_switch`, reload Bot Manager, and map each Page to its imported-account ID. Deduplicate repeated desktop/mobile DOM entries by `(account_id, normalized_name)`, not by display name alone: DTR can contain two distinct imported-account IDs with the same segurador name. A Page absent from that inventory may be disconnected rather than nonexistent. Do not connect it or install a template under URL-migration authorization.
+
+Resolve action settings and Flow Builder independently when duplicate account names exist:
+
+- **Action account:** the Bot Manager Page list must contain exactly one row whose DTR Page ID, Facebook Page ID, and normalized Page name all match the authorized Page.
+- **Flow account:** probe every same-name account for the exact `Auto Principal Drip` edit row. Collapse repeated visibility of one logical flow by `(edit_href, graph_hash)`; two account hits with the same pair are one flow, while different edit records or hashes are a real ambiguity.
+- The action-account ID and flow-account ID may differ in a legacy duplicate-account layout. That alone is not an identity conflict when the Page IDs, direct editor identities, edit URL, and graph hash reconcile. Never choose an account merely because its display name is unique or appears first.
+
+Bot Manager action links are hydrated asynchronously and may be hidden inside collapsed panels. Select the exact `li.page_list_item`, wait for `/messenger_bot/get_page_details`, then extract the direct `/messenger_bot/edit_bot/<id>/1/getstart` and `/nomatch` routes. A hidden edit anchor is not evidence that the editor is absent. Stale anchors from the previously selected Page can survive briefly: open each direct route read-only and require hidden `page_table_id == DTR Page ID` plus `page_id == Facebook Page ID`; on mismatch, reload/reselect and retry before classifying the Page. Never save through a stale editor identity.
 
 For large batches, preserve the exact authorized Page list as an ordered, deduplicated target artifact before discovery. Reuse one authenticated browser context per DTR login/imported account for **read-only** account mapping and qualification, but preserve Page-level manifests and independent post-write contexts. Read-only session reuse reduces login/UI overhead; it must not weaken Page identity checks, pre-write drift checks, rollback isolation, or readback independence.
 
