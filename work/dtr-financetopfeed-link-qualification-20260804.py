@@ -59,18 +59,32 @@ def graph_info(graph):
         n=q.popleft()
         if n in seen: continue
         seen.add(n);q.extend(adjacency.get(n,[]))
-    urls=[]; labels=Counter(); unmapped=[]; replacements=[]
+    urls=[]; labels=Counter(); unmapped=[]; out_of_scope=[]; replacements=[]
     for nid,node in nodes.items():
-        for item in extract_http_paths(node.get('data') or {},('nodes',str(nid),'data')):
-            val=item['value']; rec={'node_id':str(nid),'node_type':node.get('name'),'path':item['path'],'url':val}; urls.append(rec)
-            m=re.search(r'(?:[?&])utm_content=drip_us_cc_m(\d+)-1(?:&|$)',val.replace('#PAGE_ID#','PAGE_ID_PLACEHOLDER'))
-            if m:
-                n=int(m.group(1)); labels[n]+=1
-                if 1<=n<=28:
-                    replacements.append({**rec,'label':f'M{n}','target':TARGET_M[n],'changed':val!=TARGET_M[n]})
+        data=node.get('data') or {}; business=[]
+        if node.get('name')=='Button':
+            for field in ('value','text'):
+                val=data.get(field)
+                if isinstance(val,str) and val.startswith(('http://','https://')): business.append((field,val))
+        elif node.get('name')=='Generic Template':
+            val=data.get('imageClickDestinationLink')
+            if isinstance(val,str) and val.startswith(('http://','https://')): business.append(('imageClickDestinationLink',val))
+        for field,val in business:
+            rec={'node_id':str(nid),'node_type':node.get('name'),'path':['nodes',str(nid),'data',field],'field':field,'url':val};urls.append(rec)
+            safe=val.replace('#PAGE_ID#','PAGE_ID_PLACEHOLDER')
+            query_m=re.search(r'(?:[?&])utm_content=drip_us_cc_(?:m)?(\d+)-1(?:&|$)',safe)
+            path_m=re.search(r'/ftf-us-cc-en-drip-m(\d+)-1/',safe)
+            nums={int(m.group(1)) for m in (query_m,path_m) if m}
+            if len(nums)==1:
+                n=next(iter(nums));labels[n]+=1
+                if 1<=n<=28: replacements.append({**rec,'label':f'M{n}','target':TARGET_M[n],'changed':val!=TARGET_M[n]})
                 else: unmapped.append(rec)
-            elif 'drip_us_cc_m0-1' not in val and 'drip_us_cc_nm' not in val:
-                unmapped.append(rec)
+            elif len(nums)>1:
+                unmapped.append({**rec,'reason':'path/query semantic conflict'})
+            elif re.search(r'(?:drip[-_]m0-1|drip_us_cc_(?:m0-1|nm)|-drip-nm/)',safe):
+                out_of_scope.append(rec)
+            else:
+                unmapped.append({**rec,'reason':'no semantic label'})
     scrub=copy.deepcopy(graph)
     def scrub_urls(v):
         if isinstance(v,dict): return {k:scrub_urls(x) for k,x in v.items()}
@@ -78,7 +92,7 @@ def graph_info(graph):
         if isinstance(v,str) and v.startswith(('http://','https://')): return '<HTTP_URL>'
         return v
     scrub=scrub_urls(scrub)
-    return {'node_count':len(nodes),'reachable_node_count':len(seen),'disconnected_node_ids':sorted(set(map(str,nodes))-seen,key=lambda x:int(x) if x.isdigit() else x),'http_url_count':len(urls),'semantic_counts':{str(i):labels[i] for i in sorted(labels)},'semantic_coverage':sorted(labels),'replacements':replacements,'unmapped_http':unmapped,'non_url_hash':sha(scrub),'graph_hash':sha(graph)}
+    return {'node_count':len(nodes),'reachable_node_count':len(seen),'disconnected_node_ids':sorted(set(map(str,nodes))-seen,key=lambda x:int(x) if x.isdigit() else x),'http_url_count':len(urls),'semantic_counts':{str(i):labels[i] for i in sorted(labels)},'semantic_coverage':sorted(labels),'replacements':replacements,'unmapped_http':unmapped,'out_of_scope_http':out_of_scope,'non_url_hash':sha(scrub),'graph_hash':sha(graph)}
 
 async def resolve_credentials(logins):
     mapped,missing,errors,_=resolver.resolve_dtr_items(logins,VAULT)
