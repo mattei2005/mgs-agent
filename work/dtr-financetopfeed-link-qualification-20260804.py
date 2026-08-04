@@ -78,6 +78,7 @@ def graph_info(graph):
             if len(nums)==1:
                 n=next(iter(nums));labels[n]+=1
                 if 1<=n<=28: replacements.append({**rec,'label':f'M{n}','target':TARGET_M[n],'changed':val!=TARGET_M[n]})
+                elif n==0: out_of_scope.append(rec)
                 else: unmapped.append(rec)
             elif len(nums)>1:
                 unmapped.append({**rec,'reason':'path/query semantic conflict'})
