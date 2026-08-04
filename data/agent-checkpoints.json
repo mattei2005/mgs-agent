@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "dtr-financetopfeed-full28-rebuild-20260804",
-      "next_step": "Capturar baseline live da fonte 19211 e backup live do primeiro alvo; executar dry-run e canário com substituição total do grafo.",
+      "next_step": "Aplicar sequencialmente o baseline nas 17 páginas restantes, alinhar Get Started/No Match e executar readback independente por página.",
       "objective": "Sobrescrever integralmente os 18 Auto Principal Drip incompletos M1-M15 pelo fluxo canônico completo M1-M28 do mesmo template, incluindo textos, imagens, botões, links, postbacks, horários e conexões.",
-      "source": "Discord thread 1534202131236655245; mensagens 1534218474690183319, 1534219350330839252 e 1534220094102573157; backup anterior /root/mgs-agent/backups/dtr-financetopfeed-us-cc-en-20260804T103610-0400",
-      "state": "autorizado por rodolfo na mensagem 1534220094102573157. baseline semanticamente validado em 3 fluxos completos (19218, 19211, 13950); fonte escolhida: page_id 19211. nenhuma escrita estrutural deste novo escopo ainda executada.",
+      "source": "Discord thread 1534202131236655245; autorização 1534220094102573157; backup /root/mgs-agent/backups/dtr-financetopfeed-full28-20260804T112442-0400",
+      "state": "canário page_id 13688 concluído: 82→147 nós, 147/147 alcançáveis, m1-m28 e 146 conexões; get started/no match canônicos; readback independente 1/1 aprovado; zero rollback.",
       "thread_id": "1534202131236655245",
-      "updated_at": "2026-08-04T15:24:36+00:00"
+      "updated_at": "2026-08-04T15:45:47+00:00"
     },
     {
       "agent": "zeus",
@@ -442,5 +442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-04T15:24:36+00:00"
+  "updated_at": "2026-08-04T15:45:47+00:00"
 }
