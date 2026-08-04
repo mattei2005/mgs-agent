@@ -56,6 +56,21 @@ Do not force an existing M0 flow button to NM because an older baseline expected
 
 For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLACE#` from a legacy URL into the target catalog string; Rodolfo confirmed that preserving it is not a requirement. Enter the exact approved catalog destination. The normal DigitalTRChat Get Started and No Match editors may append `&subscriber_id=#SUBSCRIBER_ID_REPLACE#` automatically on save; accept that platform-enforced suffix when the canonical base matches exactly, but do not add it to Flow Builder or Persistent Menu URLs and do not use a lower-level bypass to fight normal UI behavior. Preserve the literal `#PAGE_ID#` from the canonical catalog and never add any other tracking parameter.
 
+## SB-template-driven cross-login scope
+
+When Rodolfo defines a DTR migration population by the template installed in **SB → Accounts → Messenger → Page**, treat live SB Page rows as the population source instead of assuming one DTR login or one spreadsheet login list.
+
+1. Query the live `/campaigns/Messenger` dataset across every authorized active publisher in scope.
+2. Match the requested `BROADCAST_TEMPLATE_NAME` exactly after trimming outer whitespace; do not merge similarly named country/language variants.
+3. Before exclusions, reconcile the baseline count against distinct `ID`, `PAGE_ID`, and `FB_PAGE_ID`. Report duplicate or blank identifiers instead of treating duplicated rows as separate Pages.
+4. Produce a full status partition, including `On-hold`, so Rodolfo can compare the live total with his dashboard view before production work starts.
+5. Apply execution gates only after baseline reconciliation: `On-hold` and `Blocked` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit.
+6. Resolve every distinct `LOGIN`/`USER_LOGIN` represented by eligible rows and operate all corresponding DTR containers. A login requested as an example is not the batch boundary when live SB identifies additional logins.
+7. Reconcile each SB row to the live DTR Page using DTR Page ID plus Facebook Page ID before editing. Blank login, missing Page, identity mismatch, or duplicate identity is a stop/reconciliation condition.
+8. Keep population authority separate from destination authority: SB template membership identifies candidate Pages, while Rodolfo's current explicit URL catalog or the applicable approved classification source determines target URLs.
+9. Under a link-replacement authorization, interpret “install/apply the links” as updating existing scoped URL positions. Do not install a Saved Template, create a missing flow, or extend a partial flow unless Rodolfo explicitly authorizes that separate scope.
+10. Report an exclusion waterfall: exact-template total → `On-hold` → `Blocked` → structurally/identity ineligible → eligible Pages, plus distinct DTR login count. This waterfall must reconcile back to the exact-template total.
+
 ## Eligibility discovery before any write
 
 1. Resolve the exact approved DTR login from 1Password without exposing credentials.
