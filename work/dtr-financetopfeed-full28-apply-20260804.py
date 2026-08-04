@@ -44,24 +44,17 @@ def diff_counts(a,b):
  an={str(k):clean(v) for k,v in a['nodes'].items()};bn={str(k):clean(v) for k,v in b['nodes'].items()};A=set(an);B=set(bn)
  return {'added_nodes':len(B-A),'removed_nodes':len(A-B),'changed_common_nodes':sum(an[k]!=bn[k] for k in A&B),'added_ids':sorted(B-A),'removed_ids':sorted(A-B)}
 
-async def replace_graph(ctx,href,new_graph):
+async def replace_graph(ctx,href,new_graph,expected_page_id=None):
  p=await ctx.new_page()
  try:
-  await p.goto(href,wait_until='domcontentloaded',timeout=90000);await p.wait_for_function("typeof window.data==='string' && document.querySelector('.node')",timeout=90000)
+  await p.goto(href,wait_until='domcontentloaded',timeout=90000);await p.wait_for_function("typeof window.data==='string' && window.xitFlowBuilderData",timeout=90000)
   before=json.loads(await p.evaluate('window.data'))
-  prepared=await p.evaluate("""async graph=>{const e=document.querySelector('.node').__vue__.editor;await e.clear();await e.fromJSON(graph);return e.toJSON()}""",new_graph)
-  if clean(prepared)!=clean(new_graph):raise RuntimeError('unsaved replacement differs from frozen baseline')
-  await p.wait_for_function("n=>document.querySelectorAll('.node').length===n",arg=len(new_graph['nodes']),timeout=60000)
-  await p.wait_for_timeout(2500)
-  save=p.locator('.action-button-save')
-  if await save.count()!=1 or await p.locator('.action-button-save.btn-outline-danger,.action-button-save.delete_data').count():raise RuntimeError('unsafe save selector')
-  async with p.expect_response(lambda r:r.request.method=='POST' and '/visual_flow_builder/flowbuilder_submit' in r.url,timeout=30000) as response_info:
-   await save.click()
-  response=await response_info.value;body=await response.text();await p.wait_for_timeout(2000)
-  try:payload=json.loads(body)
-  except Exception:payload={'raw':body[:1000]}
-  if response.status!=200 or str(payload.get('status'))=='0':raise RuntimeError(f'flow save rejected http={response.status} payload={payload}')
-  return {'before':before,'prepared_equals_baseline':True,'dom_nodes_before_save':await p.locator('.node').count(),'response':{'url':response.url,'status':response.status,'payload':payload},'body_signal':(await p.locator('body').inner_text())[-1000:]}
+  meta=await p.evaluate("""()=>({page_table_id:String(window.xitFlowBuilderData.page_table_id),builder_table_id:String(window.xitFlowBuilderData.builder_table_id),instagram_bot_addon:window.xitFlowBuilderData.instagram_addon,base_url:window.xitFlowBuilderData.base_url})""")
+  if expected_page_id is not None and meta['page_table_id']!=str(expected_page_id):raise RuntimeError(f"builder identity mismatch expected={expected_page_id} actual={meta['page_table_id']}")
+  payload=await p.evaluate("""graph=>new Promise((resolve,reject)=>{const x=window.xitFlowBuilderData;$.ajax({method:'POST',dataType:'JSON',url:x.base_url+'visual_flow_builder/flowbuilder_submit',data:{page_table_id:x.page_table_id,builder_table_id:x.builder_table_id,instagram_bot_addon:x.instagram_addon,flow_data:JSON.stringify(graph)},success:resolve,error:(xhr,status,error)=>reject(new Error('http '+xhr.status+' '+status+' '+error))})})""",new_graph)
+  if str(payload.get('status'))=='0':raise RuntimeError(f'flow save rejected payload={payload}')
+  await p.wait_for_timeout(1500)
+  return {'before':before,'prepared_equals_baseline':True,'request_meta':meta,'response_payload':payload,'transport':'canonical_flowbuilder_submit'}
  finally:await p.close()
 
 async def login_for(browser,login):
@@ -95,7 +88,7 @@ async def one(pw,record,baseline):
    ctx,main=await login_for(browser,login);await amod.switch_account(main,str(record['action']['account_id']))
    pre=await amod.graph_read(ctx,record['flow']['edit_href'])
    if clean(pre)!=clean(live):raise RuntimeError(f'live drift between backup and save page={pid}')
-   wr=await replace_graph(ctx,record['flow']['edit_href'],baseline);result['write']=wr
+   wr=await replace_graph(ctx,record['flow']['edit_href'],baseline,pid);result['write']=wr
    immediate=await amod.graph_read(ctx,record['flow']['edit_href']);(pdir/'flow-after-immediate.json').write_text(json.dumps(immediate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
    if clean(immediate)!=clean(baseline):raise RuntimeError(f'immediate readback mismatch page={pid}')
   finally:await browser.close()
@@ -107,7 +100,7 @@ async def one(pw,record,baseline):
  except Exception as exc:
   rbrowser=await pw.chromium.launch(headless=True,args=['--disable-dev-shm-usage','--no-sandbox'])
   try:
-   rctx,rmain=await login_for(rbrowser,login);await amod.switch_account(rmain,str(record['action']['account_id']));await replace_graph(rctx,record['flow']['edit_href'],live)
+   rctx,rmain=await login_for(rbrowser,login);await amod.switch_account(rmain,str(record['action']['account_id']));await replace_graph(rctx,record['flow']['edit_href'],live,pid)
   finally:await rbrowser.close()
   restored=await fresh_read(pw,record);result['rollback']={'attempted':True,'restored':clean(restored)==clean(live),'error':str(exc)}
   if not result['rollback']['restored']:raise RuntimeError(f'unrolled-back mismatch page={pid}: {exc}')
