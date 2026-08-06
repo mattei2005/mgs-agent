@@ -1,0 +1,193 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 15,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        448,
+        974,
+        975,
+        976,
+        977,
+        978
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "lyzmo.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "ly-us-cc-en-drip 001",
+          "id": 448,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-drip 002",
+          "id": 974,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-drip 003",
+          "id": 975,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-drip 004",
+          "id": 976,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-drip 005",
+          "id": 977,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-drip 006",
+          "id": 978,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        449,
+        979,
+        980,
+        981,
+        982
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "lyzmo.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "ly-us-cc-en-mct broadcast 001",
+          "id": 449,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-mct broadcast 002",
+          "id": 979,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-mct broadcast 003",
+          "id": 980,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-mct broadcast 004",
+          "id": 981,
+          "routes": 5,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance",
+            "https://lyzmo.com/rec-us-cc-milestone-gold-mastercard",
+            "https://lyzmo.com/rec-us-cc-wells-fargo-active-cash"
+          ]
+        },
+        {
+          "name": "ly-us-cc-en-mct broadcast 005",
+          "id": 982,
+          "routes": 3,
+          "urls_in_order": [
+            "https://lyzmo.com/rec-us-cc-bankamericard",
+            "https://lyzmo.com/rec-us-cc-first-digital-nextgen-mastercard",
+            "https://lyzmo.com/rec-us-cc-discover-it-balance"
+          ]
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0
+}
