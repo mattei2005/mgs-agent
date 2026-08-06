@@ -415,6 +415,24 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "meta-app.dtr.current-app",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "consumers": [
+        "meta-app-rate-limit-monitor",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T18:31:00-04:00",
+      "id": "decision-meta-dtr-app-b013-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013 substitui B012 no monitor DTR/ChatPion",
+      "updated_at": "2026-08-06T22:56:55+00:00"
+    },
+    {
       "canonical_key": "meta-app-b0062-role-set-continuity",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "consumers": [
@@ -525,5 +543,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T19:22:38+00:00"
+  "updated_at": "2026-08-06T22:56:55+00:00"
 }
