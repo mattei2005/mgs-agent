@@ -1,0 +1,193 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 50,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        146,
+        942,
+        943,
+        944,
+        945,
+        946
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-ca-cc-en-drip 001",
+          "id": 146,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-drip 002",
+          "id": 942,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-drip 003",
+          "id": 943,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-drip 004",
+          "id": 944,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-drip 005",
+          "id": 945,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-drip 006",
+          "id": 946,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        147,
+        947,
+        948,
+        949,
+        950
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-ca-cc-en-mct broadcast 001",
+          "id": 147,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-mct broadcast 002",
+          "id": 947,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-mct broadcast 003",
+          "id": 948,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-mct broadcast 004",
+          "id": 949,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard",
+            "https://financeadx.com/rec-ca-cc-bmo-eclipse-rise-visa-card",
+            "https://financeadx.com/rec-ca-cc-cibc-adapta-mastercard"
+          ]
+        },
+        {
+          "name": "fax-ca-cc-en-mct broadcast 005",
+          "id": 950,
+          "routes": 3,
+          "urls_in_order": [
+            "https://financeadx.com/rec-ca-cc-scotiabank-passport-visa",
+            "https://financeadx.com/rec-ca-cc-rbc-avion-visa-infinite",
+            "https://financeadx.com/rec-ca-cc-bmo-cashback-world-elite-mastercard"
+          ]
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0
+}
