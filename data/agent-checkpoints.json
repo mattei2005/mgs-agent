@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "app-b013-cutover-20260806",
-      "next_step": "Pausar cron B012, preservar estado/backup, criar runtime B013, atualizar exclusões genéricas e validar dry/live.",
+      "next_step": "Reconciliar inventário, esperar o primeiro ciclo agendado B013 concluir, validar registry/checkpoint e emitir REPORT-INFRA.",
       "objective": "Substituir B012 inativo por B013 no monitor DTR/ChatPion e canal 1522830283240505385 sem expor credenciais.",
-      "source": "discord:1535052661383110759",
-      "state": "preflight confirmado: canal renomeado; item bot b013 token único e graph app metadata http 200/id match. cutover ainda não aplicado.",
+      "source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "state": "cutover aplicado: b012 cron pausado e renomeado, script antigo fail-closed, b013 script/state ativos, live alert b013 validado, cron retomado; resta inventário/audit/report e confirmação do ciclo agendado.",
       "thread_id": "1535016020354273370",
-      "updated_at": "2026-08-06T22:35:17+00:00"
+      "updated_at": "2026-08-06T22:57:57+00:00"
     },
     {
       "agent": "ares",
@@ -452,5 +452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-06T22:35:17+00:00"
+  "updated_at": "2026-08-06T22:57:57+00:00"
 }
