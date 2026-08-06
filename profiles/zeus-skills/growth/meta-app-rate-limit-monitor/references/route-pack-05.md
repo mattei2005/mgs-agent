@@ -18,6 +18,12 @@ Use the Meta roles cron for B001–B010/B005-2. B012 remains in the 11-channel o
 
 Operational close-loop rule for transient Meta API checks: an isolated `user_token_me` HTTP 500/502/503/504 while `app_metadata`, `roles`, and `debug_token` are OK is not enough to classify the app as disconnected. Alert it as `ATENÇÃO` / Meta Graph instability, persist a concrete `last_check_incident_at`/`last_check_incident_kind`, then on the next healthy cycle post `Meta App Health Recuperado — Bxxx` in the same app channel with `RECUPERADO`, checks OK, and `Nenhuma ação operacional necessária pela Ially`. Persist `last_check_recovered_at` so the recovery notice is sent once per incident. Do **not** trigger recovery from historical `alerts.checks.critical` timestamps alone; old alert state without a matching `last_check_incident_at` is not an open incident. Manual operator close-loop after Rodolfo validates an app can use `MGS_META_APP_ROLES_FORCE_RECOVERY_NOTICE=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`.
 
+### Temporary app-scoped notification pause
+
+When Rodolfo asks to pause only the app channels currently notifying him, do not pause the whole `meta-app-roles-watch` cron if unaffected apps must remain monitored. Write `/root/mgs-agent/data/meta-app-role-alert-pause.json` with the exact app keys and an aware ISO `until` timestamp in `America/New_York`. The production script keeps Graph/Sheet checks and state reconciliation running, suppresses only app-channel Discord delivery for those keys, preserves pre-pause cooldown timestamps, and automatically ignores the pause when `now >= until`; no resume job or gateway restart is needed. Infra/Sheets failure alerts remain independent and are not suppressed by an app-channel pause.
+
+Required validation: JSON parse, shell + inline-Python syntax, isolated `post_webhook` gate test proving HTTP delivery is bypassed for one paused app, production state readback showing the exact active app set and expiry, and Discord readback showing no new message in a paused channel. Inventory, audit, backup, and REPORT-INFRA remain mandatory because this touches profile script/data/skill infrastructure.
+
 Active B012 Hermes cron job:
 
 ```text
