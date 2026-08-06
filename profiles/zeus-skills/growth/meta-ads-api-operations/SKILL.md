@@ -248,6 +248,10 @@ Implementation: `/root/mgs-agent/scripts/ares-meta-common.py`.
 
 Detailed incident signature, reproduction boundary, cache contract, and resume checklist: `references/ares-intraday-1password-rate-limit-2026-07-10.md`.
 
+## Meta Business browser writes with a logged Facebook user
+
+When Rodolfo asks to create an ad account or change Business Settings using a Facebook user already logged into the persistent browser profile, preserve that exact identity and use manual passkey/2FA through localhost-only noVNC. Confirm the Business target and current assets before write, read disabled controls/tooltips, and validate the new Ad Account ID plus `Owned by` after creation. Do not silently substitute a different API user/token. Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, new-portfolio limit handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md`.
+
 ## Meta Business Manager inventory / asset access audits
 
 Use this skill not only for campaign operations, but also when Rodolfo asks to inventory a Meta Business Manager: ad accounts, people/users, pixels/datasets, pages, system users, and asset-to-account relationships.
