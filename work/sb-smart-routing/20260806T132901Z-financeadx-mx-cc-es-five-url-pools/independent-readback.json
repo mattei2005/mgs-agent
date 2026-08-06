@@ -1,0 +1,193 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 32,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        284,
+        924,
+        925,
+        926,
+        927,
+        928
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-mx-cc-es-drip 001",
+          "id": 284,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-drip 002",
+          "id": 924,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-drip 003",
+          "id": 925,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-drip 004",
+          "id": 926,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-drip 005",
+          "id": 927,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-drip 006",
+          "id": 928,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        283,
+        929,
+        930,
+        931,
+        932
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-mx-cc-es-mct broadcast 001",
+          "id": 283,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-mct broadcast 002",
+          "id": 929,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-mct broadcast 003",
+          "id": 930,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-mct broadcast 004",
+          "id": 931,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-santander-likeu",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-oro-citibanamex"
+          ]
+        },
+        {
+          "name": "fax-mx-cc-es-mct broadcast 005",
+          "id": 932,
+          "routes": 3,
+          "urls_in_order": [
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-bbva-azul",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-banregio-clasica",
+            "https://financeadx.com/rec-tarjeta-de-credito-mx-scotia-travel-clasica"
+          ]
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0
+}
