@@ -105,9 +105,21 @@ A link migration changes destinations only. If a legacy flow contains M0–M15, 
 
 The expected post-write URL count must equal the exact pre-write scoped URL count. Do not hardcode the number of `imageClickDestinationLink` fields: copied templates have valid locale/account differences, so inventory and map every existing HTTP image-click destination by semantic label and never create a missing one. Node count, connections, reachability, schedule, messages, button labels/types, and images must remain unchanged.
 
+## Zero-diff and direct-catalog protocol
+
+When Rodolfo provides a Google Sheet as the destination catalog rather than as a Page-classification table:
+
+1. Read the exact spreadsheet ID, `gid`/tab title, and authorized row range through the canonical MGS Service Account; validate Drive edit capability and Sheets HTTP 200 even when the task is read-only.
+2. Do not require friendly headers when the range is an ordered link catalog. Validate row labels and cardinality instead: exactly one M0/Get Started row, one NM/No Match row, and the expected numbered Drip rows. Validate every final URL's host, path, tracking parameters, literal `#PAGE_ID#`, uniqueness, and semantic label before comparing it with DTR.
+3. Freeze the source tab, row numbers, catalog hash, Page identity, graph, and action settings in the manifest before any writable step.
+4. If every scoped live value already matches the catalog, perform **zero writes**. Do not submit identical values merely to satisfy the verb “apply”; redundant saves create avoidable production risk and can trigger platform normalization.
+5. Still run a fresh pre-write drift check and an independent new-session readback. Report the Page as `already canonical / validated`, with `actually changed = 0`, rather than claiming the links were applied.
+6. Count URL occurrences, not just semantic destinations: one M-number can legitimately appear in both a Button URL and a Generic Template image-click URL. Preserve that exact occurrence count and require every occurrence to match its semantic target.
+7. Accept the platform-appended subscriber suffix only on Get Started and No Match when the canonical base is exact. Include the suffix state in readback; never copy it into the Sheet catalog or Flow Builder.
+
 ## Safe execution sequence
 
-1. Run `python3 scripts/openzed_link_catalog.py --validate`.
+1. For Openzed catalog migrations, run `python3 scripts/openzed_link_catalog.py --validate`. For a Rodolfo-supplied direct catalog Sheet, use the zero-diff/direct-catalog protocol above instead of forcing the Openzed generator.
 2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, spreadsheet tab/row and `vertical + pais + lingua`, operational status, legacy URL discrepancies, existing semantic labels, chosen catalog, and all four surface routes.
 3. Create timestamped backups and hashes before opening a writable state.
 4. Re-read live values immediately before mutation; abort on drift.
