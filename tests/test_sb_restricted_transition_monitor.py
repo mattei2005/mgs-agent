@@ -41,11 +41,18 @@ class TransitionComparisonTest(unittest.TestCase):
 
         by_page = {item['after']['page_id']: item for item in transitions}
         self.assertEqual(set(by_page), {'1', '2', '4'})
-        self.assertEqual(by_page['1']['kind'], 'renovada/alterada')
+        self.assertEqual(by_page['1']['kind'], 'renovada')
         self.assertEqual(by_page['1']['changed'], ['data'])
+        self.assertEqual(by_page['2']['kind'], 'status alterado')
         self.assertEqual(by_page['2']['changed'], ['status'])
         self.assertEqual(by_page['4']['kind'], 'nova')
         self.assertEqual([item['page_id'] for item in resolved], ['3'])
+
+        lines = monitor.transition_lines(transitions)
+        rendered = '\n'.join(lines)
+        self.assertIn('renovada', rendered)
+        self.assertIn('status alterado', rendered)
+        self.assertNotIn('renovada/…', rendered)
 
     def test_renderer_chunks_without_omission_or_duplicate_link(self):
         transitions = []

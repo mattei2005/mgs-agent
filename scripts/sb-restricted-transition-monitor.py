@@ -178,8 +178,14 @@ def compare_snapshots(previous, current):
         if str(before.get('status') or '').lower() != str(now.get('status') or '').lower():
             changed.append('status')
         if changed:
+            if changed == ['data']:
+                kind = 'renovada'
+            elif changed == ['status']:
+                kind = 'status alterado'
+            else:
+                kind = 'renovada+status'
             transitions.append({
-                'kind': 'renovada/alterada',
+                'kind': kind,
                 'key': key,
                 'changed': changed,
                 'before': before,
@@ -229,13 +235,13 @@ def truncate(value, limit):
 
 
 def transition_lines(transitions):
-    header = 'Tipo       Página             FB Page ID        Page ID  Bot user           Status    Saída'
-    divider = '---------- ------------------ ----------------- -------- ------------------ --------- ----------'
+    header = 'Tipo            Página             FB Page ID        Page ID  Bot user           Status    Saída'
+    divider = '--------------- ------------------ ----------------- -------- ------------------ --------- ----------'
     lines = [header, divider]
     for item in transitions:
         row = item['after']
         lines.append(
-            f"{truncate(item['kind'],10):<10} "
+            f"{truncate(item['kind'],15):<15} "
             f"{truncate(row.get('page_name'),18):<18} "
             f"{truncate(row.get('fb_page_id'),17):<17} "
             f"{truncate(row.get('page_id'),8):<8} "
@@ -254,7 +260,7 @@ def render_blocks(transitions, counts, source_label, now=None):
         'Fonte: Smart Bidding live; agente que escreveu não comprovado',
         f'Comparação: {source_label}',
         '',
-        f"Novas/renovadas: {len(transitions)}",
+        f"Novas/renovadas/alteradas: {len(transitions)}",
         f"Broadcast ativas monitoradas: {counts.get('active_status_broadcast', 0)}",
         f"Campaign ativas monitoradas: {counts.get('active_status_campaign', 0)}",
         f"On-hold ignoradas: {counts.get('excluded_status_on-hold', 0)}",
