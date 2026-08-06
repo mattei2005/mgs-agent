@@ -1,0 +1,138 @@
+{
+  "status": "success",
+  "authorized_message_id": "1534940672405143665",
+  "before_count": 10,
+  "after_count": 17,
+  "created": 7,
+  "updated": 4,
+  "already_correct": 0,
+  "deleted": 0,
+  "results": [
+    {
+      "id": 839,
+      "name": "cq-us-cc-en-mct 001",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 840,
+      "name": "cq-us-cc-en-mct 002",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 966,
+      "name": "cq-us-cc-en-mct 003",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 967,
+      "name": "cq-us-cc-en-mct 004",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 968,
+      "name": "cq-us-cc-en-mct 005",
+      "route_count": 3,
+      "family": "broadcast",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 819,
+      "name": "cq-us-cc-en-drip 001",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 838,
+      "name": "cq-us-cc-en-drip 002",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 962,
+      "name": "cq-us-cc-en-drip 003",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 963,
+      "name": "cq-us-cc-en-drip 004",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 964,
+      "name": "cq-us-cc-en-drip 005",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 965,
+      "name": "cq-us-cc-en-drip 006",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "006",
+      "action": "created",
+      "http": 201
+    }
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://cliquet.com/rec-us-cc-bankamericard",
+    "https://cliquet.com/rec-us-cc-citi-double-cash",
+    "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+    "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+    "https://cliquet.com/rec-us-cc-self-visa-secured"
+  ],
+  "unrelated_pools_unchanged": true,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260806T151522Z-cliquet-us-cc-en-five-url-pools",
+  "manifest_hash": "5f4edd7d77cf3375d03440bec5de7ef5d7e5bd2988008eaa971e6b307cc1337d"
+}
