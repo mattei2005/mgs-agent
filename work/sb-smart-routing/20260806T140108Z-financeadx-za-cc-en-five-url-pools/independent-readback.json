@@ -1,0 +1,193 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 59,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        281,
+        951,
+        952,
+        953,
+        954,
+        955
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-za-cc-en-drip 001",
+          "id": 281,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-drip 002",
+          "id": 951,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-drip 003",
+          "id": 952,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-drip 004",
+          "id": 953,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-drip 005",
+          "id": 954,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-drip 006",
+          "id": 955,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        282,
+        956,
+        957,
+        958,
+        959
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "financeadx.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "fax-za-cc-en-mct broadcast 001",
+          "id": 282,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-mct broadcast 002",
+          "id": 956,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-mct broadcast 003",
+          "id": 957,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-mct broadcast 004",
+          "id": 958,
+          "routes": 5,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec",
+            "https://financeadx.com/rec-za-cc-tymebank-credit-card",
+            "https://financeadx.com/rec-za-cc-standard-bank-gold"
+          ]
+        },
+        {
+          "name": "fax-za-cc-en-mct broadcast 005",
+          "id": 959,
+          "routes": 3,
+          "urls_in_order": [
+            "https://financeadx.com/rec-za-cc-bank-zero",
+            "https://financeadx.com/rec-za-cc-spot-money",
+            "https://financeadx.com/rec-za-cc-capitec"
+          ]
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0
+}
