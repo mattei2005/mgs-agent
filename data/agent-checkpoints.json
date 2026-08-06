@@ -11,6 +11,16 @@
       "updated_at": "2026-07-20T16:14:51+00:00"
     },
     {
+      "agent": "zeus",
+      "id": "app-b013-cutover-20260806",
+      "next_step": "Pausar cron B012, preservar estado/backup, criar runtime B013, atualizar exclusões genéricas e validar dry/live.",
+      "objective": "Substituir B012 inativo por B013 no monitor DTR/ChatPion e canal 1522830283240505385 sem expor credenciais.",
+      "source": "discord:1535052661383110759",
+      "state": "preflight confirmado: canal renomeado; item bot b013 token único e graph app metadata http 200/id match. cutover ainda não aplicado.",
+      "thread_id": "1535016020354273370",
+      "updated_at": "2026-08-06T22:35:17+00:00"
+    },
+    {
       "agent": "ares",
       "id": "ares-car-br-br-intake-20260803-kelly",
       "next_step": "Nenhuma pendência no intake. Assets permanecem RESERVADO_PELO_GESTOR e ares_eligible=false até liberação expressa ou conciliação Meta × Drive.",
@@ -442,5 +452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-04T16:18:28+00:00"
+  "updated_at": "2026-08-06T22:35:17+00:00"
 }
