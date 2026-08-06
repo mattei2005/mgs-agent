@@ -1,0 +1,193 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 17,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        819,
+        838,
+        962,
+        963,
+        964,
+        965
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "cliquet.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "cq-us-cc-en-drip 001",
+          "id": 819,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-drip 002",
+          "id": 838,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-drip 003",
+          "id": 962,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-drip 004",
+          "id": 963,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-drip 005",
+          "id": 964,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-drip 006",
+          "id": 965,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        839,
+        840,
+        966,
+        967,
+        968
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "cliquet.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "cq-us-cc-en-mct 001",
+          "id": 839,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-mct 002",
+          "id": 840,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-mct 003",
+          "id": 966,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-mct 004",
+          "id": 967,
+          "routes": 5,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized",
+            "https://cliquet.com/rec-us-cc-milestone-gold-mastercard",
+            "https://cliquet.com/rec-us-cc-self-visa-secured"
+          ]
+        },
+        {
+          "name": "cq-us-cc-en-mct 005",
+          "id": 968,
+          "routes": 3,
+          "urls_in_order": [
+            "https://cliquet.com/rec-us-cc-bankamericard",
+            "https://cliquet.com/rec-us-cc-citi-double-cash",
+            "https://cliquet.com/rec-us-cc-bank-of-america-customized"
+          ]
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0
+}
