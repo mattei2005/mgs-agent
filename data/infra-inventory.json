@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-05T23:19:01-04:00",
+    "updated_at": "2026-08-05T23:38:15-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -4155,6 +4155,78 @@
         "real_test_lead_sent": false
       },
       "known_warning": "WP cache flush succeeded with a pre-existing unreadable Yoast file warning; public cachebuster readback and both route canaries passed."
+    },
+    {
+      "id": "marevelx-mx-cc-es-smart-routing-helix-pattern-20260805",
+      "agent": "zeus",
+      "type": "external_smart_routing_configuration",
+      "external_system": "SmartBidding Smart Routing",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1534765847518904421",
+      "status": "completed_validated",
+      "publisher": "digital-trust_marevelx",
+      "path": "/root/mgs-agent/work/sb-smart-routing/20260806T033641Z-marevelx-mx-helixpattern",
+      "source_reference": {
+        "publisher": "digital-trust_helixenit",
+        "mode": "read_only",
+        "validation": "structurally unchanged before/after and independent readback"
+      },
+      "configuration": {
+        "country": "MX",
+        "vertical": "CC",
+        "language": "ES",
+        "drip_pools": 6,
+        "drip_distribution": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "broadcast_pools": 5,
+        "broadcast_distribution": [
+          5,
+          5,
+          5,
+          5,
+          3
+        ],
+        "drip_routes": 30,
+        "broadcast_routes": 23,
+        "unique_card_urls": 5,
+        "url_domain": "marevelx.com"
+      },
+      "changes": {
+        "created_pool_ids": [
+          906,
+          907,
+          908,
+          909,
+          910,
+          911,
+          912,
+          913,
+          914
+        ],
+        "updated_pool_ids": [
+          671,
+          672
+        ],
+        "deleted_pool_ids": []
+      },
+      "validation": {
+        "independent_readback": "PASS",
+        "blank_operations": 0,
+        "duplicate_identities": 0,
+        "unrelated_marevelx_pools_unchanged": true,
+        "helixenit_unchanged": true
+      },
+      "evidence_hashes": {
+        "summary_sha256": "87b805c0b7baf8a090ad9504372472b6138e982879e34bac91888ba2d7f1d47b",
+        "independent_readback_sha256": "ffb55fbf42c3a601d91dfc878c78367da809f4c1e0429d61b07d84a873c2944d"
+      },
+      "updated_at": "2026-08-05T23:38:15-04:00"
     }
   ],
   "profile_skill_references": [

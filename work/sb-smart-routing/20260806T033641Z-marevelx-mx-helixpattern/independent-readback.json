@@ -1,0 +1,62 @@
+{
+  "status": "success",
+  "http": {
+    "marevelx": 201,
+    "helixenit": 201
+  },
+  "publisher_pool_count": 17,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        671,
+        906,
+        907,
+        908,
+        909,
+        910
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "marevelx.com"
+      ],
+      "blank_operations": 0
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        672,
+        911,
+        912,
+        913,
+        914
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "marevelx.com"
+      ],
+      "blank_operations": 0
+    }
+  },
+  "helixenit_unchanged": true,
+  "unrelated_marevelx_unchanged": true
+}
