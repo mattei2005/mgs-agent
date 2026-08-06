@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "app-b013-cutover-20260806",
-      "next_step": "Reconciliar inventário, esperar o primeiro ciclo agendado B013 concluir, validar registry/checkpoint e emitir REPORT-INFRA.",
+      "next_step": "Operação reconecta os 34 perfis pendentes ao B013; Zeus monitora ciclos ~9 min e limpa X automaticamente quando cada debug_token B013 ficar válido.",
       "objective": "Substituir B012 inativo por B013 no monitor DTR/ChatPion e canal 1522830283240505385 sem expor credenciais.",
       "source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
-      "state": "cutover aplicado: b012 cron pausado e renomeado, script antigo fail-closed, b013 script/state ativos, live alert b013 validado, cron retomado; resta inventário/audit/report e confirmação do ciclo agendado.",
+      "state": "concluído: b013 live e agendado, b012 fail-closed, canal/cron/state/sheet/skill/inventário/audit/registry validados. estado final 35 alvos: 1 conectado, 33 desconectados confirmados e 1 inconclusivo.",
       "thread_id": "1535016020354273370",
-      "updated_at": "2026-08-06T22:57:57+00:00"
+      "updated_at": "2026-08-06T23:10:29+00:00"
     },
     {
       "agent": "ares",
@@ -452,5 +452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-06T22:57:57+00:00"
+  "updated_at": "2026-08-06T23:10:29+00:00"
 }

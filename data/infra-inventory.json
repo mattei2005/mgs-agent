@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-06T18:57:18-04:00",
+    "updated_at": "2026-08-06T19:13:17-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -284,7 +284,7 @@
         "dtr-sb-page-health-sync.py",
         "sb-restricted-transition-monitor.py",
         "meta-app-roles-watch.sh",
-        "b012-dtr-link-watch.sh",
+        "b013-dtr-link-watch.sh",
         "mgs-offsite-backup.py",
         "audit-featured-image.py"
       ],
@@ -1188,14 +1188,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 77376,
-      "modified_at": "2026-08-06T16:11:21-04:00",
-      "sha256": "b006daa4e2af829258acc2bdf6b454ee5a012f9c3dfa889aabe2f6b335a012fc",
-      "description": "Zeus Meta app role/rate-limit monitor. Supports an app-scoped, time-bounded Discord notification pause while live Graph/Sheet checks and state reconciliation continue. B011/B012 remain excluded from /roles discovery and Sheet reconciliation; B012 is owned by the dedicated DTR/ChatPion monitor.",
-      "validation": "bash -n PASS; embedded Python compile PASS; pause JSON parse PASS; isolated post_webhook gate PASS for B001 with no network delivery; Discord latest-message readback unchanged.",
-      "updated_at": "2026-08-06T16:14:36-04:00",
-      "source_report": "REPORT-INFRA Zeus app-channel notification pause 2026-08-06",
-      "last_change": "2026-08-06: added exact app-scoped Discord notification suppression with aware expiry and automatic resume at midnight ET.",
+      "size_bytes": 77246,
+      "modified_at": "2026-08-06T18:38:30-04:00",
+      "sha256": "b5eeb471199594b8dd6411d0faec538afadce652934190513b6f270353d9148d",
+      "description": "Zeus generic Meta app role/rate-limit monitor. B011/B012/B013 and their DTR-only 1Password items are excluded from /roles discovery and Sheet reconciliation; B013 routes only through the dedicated DTR monitor.",
+      "validation": "bash -n PASS; explicit BOT B013 Token dry invocation rc=0, empty output and no state file; scheduled generic cycles status ok.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06",
+      "last_change": "2026-08-06: replaced B012 channel mapping with B013 and added B013 to DTR-only discovery/reconciliation guards.",
       "backup": "/root/mgs-agent/backups/meta-app-alert-pause-20260806-161025/meta-app-roles-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444/meta-app-role-monitor-state.json",
       "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
@@ -1632,32 +1632,33 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Full Meta app roles/admin and sheet reconciliation for B001-B010/B005-2.",
-      "validation": "Cron readback enabled at */3 for 00:00-00:59 and 08:00-23:59 ET; production cycle completed ok at 16:43 ET with 10 apps, errors_count=0; full dry-run rc=0 in 52s with state unchanged.",
-      "updated_at": "2026-07-31T16:35:27-04:00",
-      "last_observed_status": "ok_at_2026-07-31T16:43:20-04:00",
-      "reconciliation": "Authorized by Rodolfo: 3-minute cadence from 08:00 through 00:59 ET, with 4-second internal stagger; no execution from 01:00 through 07:59 ET. B012 remains excluded from this /roles job.",
+      "purpose": "Full Meta app roles/admin and Sheet reconciliation for B001-B010/B005-2; B011/B012/B013 are DTR-only exclusions.",
+      "validation": "Cron */3 ET window remains scheduled/ok; discovery readback contains only the ten generic-role app items.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "last_observed_status": "ok_at_2026-08-06T19:04:39-04:00",
+      "reconciliation": "B013 replaced B012 as the active dedicated DTR app. B011/B012/B013 remain excluded from this /roles job and its Sheet X writes.",
       "state": "scheduled",
-      "next_run_at": "2026-07-31T16:45:00-04:00"
+      "next_run_at": "2026-08-06T19:09:00-04:00"
     },
     {
-      "id": "zeus-hermes-cron-b012-dtr-link-watch",
+      "id": "zeus-hermes-cron-b013-dtr-link-watch",
       "agent": "zeus",
       "type": "hermes_cron",
       "job_id": "498fb0d95e10",
-      "name": "b012-dtr-link-watch",
+      "name": "b013-dtr-link-watch",
       "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
-      "script": "b012-dtr-link-watch.sh",
+      "script": "b013-dtr-link-watch.sh",
       "schedule": "2-59/9 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "B012 DTR/ChatPion OAuth link and page connection reconciliation for all Sheet rows NO APP=B012.",
-      "validation": "Cron readback enabled at minute 2-59/9 for 00:00-00:59 and 08:00-23:59 ET; patched production cycle completed ok at 17:43 ET with 31 targets; 2-minute offset and non-blocking lock remain active.",
-      "updated_at": "2026-07-31T17:44:20-04:00",
+      "purpose": "B013 DTR/ChatPion OAuth/debug_token/page capability and Sheet reconciliation for every NO APP=B013 row.",
+      "validation": "Cron scheduled/enabled with deliver=local/no_agent; 19:02 ET cycle completed ok at 19:07 ET, state 35 targets / 1 linked / 33 confirmed unlinked / 1 unknown / alerts_sent=0.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
       "state": "scheduled",
-      "next_run_at": "2026-07-31T17:47:00-04:00",
-      "last_run_at": "2026-07-31T17:43:39.601609-04:00",
-      "last_status": "ok"
+      "next_run_at": "2026-08-06T19:11:00-04:00",
+      "last_run_at": "2026-08-06T19:07:16.543387-04:00",
+      "last_status": "ok",
+      "replaces": "b012-dtr-link-watch"
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -3558,16 +3559,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 24569,
-      "modified_at": "2026-08-06T16:14:01-04:00",
-      "sha256": "9e1c99b65f3d8b6952cecc5e4c2ffe4bbc8244ebc9a3b50a6239a4c15314b3ff",
+      "size_bytes": 25238,
+      "modified_at": "2026-08-06T19:00:03-04:00",
+      "sha256": "bff7fea40ea3bd69040aab6577e6dbf28b1214b027714b3f4c1600b2d3e78919",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Production monitor procedure includes exact app-scoped, time-bounded notification pauses that keep Graph/Sheet monitoring active and resume automatically at expiry.",
-      "validation": "Runtime/versioned SHA-256 match; route pack documents pause schema, automatic expiry and required delivery/readback checks.",
-      "updated_at": "2026-08-06T16:14:36-04:00",
-      "source_report": "REPORT-INFRA Zeus app-channel notification pause 2026-08-06"
+      "description": "Canonical procedure routes the eleventh operational app to B013, preserves B011/B012 retired exclusions and requires identity guards beyond immutable item pinning.",
+      "validation": "Runtime/versioned SHA-256 match; B013 route, command, state, channel, cron and fail-closed guard documented.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -3723,19 +3724,17 @@
       "agent": "zeus",
       "type": "profile_script",
       "owner": "Zeus/Ops",
-      "risk": "medium",
+      "risk": "low",
       "path": "/root/.hermes/profiles/zeus/scripts/b012-dtr-link-watch.sh",
-      "size_bytes": 38318,
-      "modified_at": "2026-07-31T17:25:31-04:00",
-      "sha256": "b493a788101574fe974e1cd14dfeb9fba5077c3d6d7920a7224575374a8dc965",
-      "cron_job_id": "498fb0d95e10",
-      "schedule": "2-59/9 0,8-23 * * *",
-      "description": "B012 DTR/ChatPion link monitor pinned to the current immutable 1Password item ID; validates account OAuth via debug_token, page inventory separately, reads/writes Sheet through mgs-core-prod Service Account and honors Discord 429 retry_after.",
-      "validation": "bash -n and embedded Python compile PASS; isolated live-data dry-run rc=0 proved Sad Grill as kind=added and a phantom stale target as kind=removed; missed-event replay rc=0/alerts_sent=1 with Discord readback; patched production cron completed 17:43 ET status ok.",
-      "updated_at": "2026-07-31T17:44:20-04:00",
-      "source_report": "REPORT-INFRA Zeus B012 new-target alert fix 2026-07-31",
-      "backup": "/root/mgs-agent/backups/b012-new-target-alert-20260731-172500",
-      "last_change": "2026-07-31: new B012 target assignments and removals from the B012 target set now generate material alerts instead of being silently absorbed into state."
+      "size_bytes": 38546,
+      "modified_at": "2026-08-06T18:38:56-04:00",
+      "sha256": "aa2b30203c5b4ee862707a2844ffffc22ebe0d6b11807a927187a3b5961b34a9",
+      "status": "retired_fail_closed",
+      "former_cron_job_id": "498fb0d95e10",
+      "description": "Preserved B012 predecessor/rollback artifact. It exits 2 before credential, Sheet or Discord access.",
+      "validation": "bash -n + embedded Python compile PASS; direct execution rc=2 with retired guard.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
     },
     {
       "id": "zeus-meta-app-rate-limit-route-pack-03",
@@ -4820,6 +4819,57 @@
       "summary_sha256": "4f02c116cff4baae26e26da417220033d97622096bf534123ec607805dc8cd35",
       "readback_sha256": "dfe73f3f962422f8b5b981b8f4f9f63e46dfac4a71bb7426b5ea001fe628d319",
       "unrelated_pools_unchanged": true
+    },
+    {
+      "id": "zeus-b013-dtr-link-watch-script",
+      "agent": "zeus",
+      "type": "profile_script",
+      "owner": "Zeus/Ops",
+      "risk": "medium",
+      "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+      "size_bytes": 38681,
+      "modified_at": "2026-08-06T18:59:43-04:00",
+      "sha256": "4457d117c74bcc0cba3b62747d1ac8d90507b04999aeb2d55222c88fa7459bfb",
+      "cron_job_id": "498fb0d95e10",
+      "schedule": "2-59/9 0,8-23 * * *",
+      "description": "B013 DTR/ChatPion monitor pinned by immutable 1Password item ID and fail-closed on app_name/channel drift; Service Account-only Sheet reconciliation and bounded Discord 429 retry.",
+      "validation": "Syntax PASS; unique credential metadata + Graph app HTTP 200/id match; dry/live rc=0; B013 Discord readback; scheduled 19:02 ET cycle ok with 35/1/33/1.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
+    },
+    {
+      "id": "zeus-meta-app-b013-dtr-cutover-reference-20260806",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "size_bytes": 4987,
+      "modified_at": "2026-08-06T19:09:37-04:00",
+      "sha256": "5ced9df4721e00013caf29887d037a4904692b5043b081f68149f4586e924acc",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Canonical B012-retired to B013 cutover, credential-reuse race, fail-closed guard and live validation.",
+      "validation": "Runtime/versioned hash match; registry pointer and live Discord/cron/state readbacks PASS.",
+      "updated_at": "2026-08-06T19:13:17-04:00",
+      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
+    },
+    {
+      "id": "zeus-meta-app-b012-to-b013-cutover-backup-20260806",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/b012-to-b013-cutover-20260806-183659",
+      "artifacts": [
+        "b012-dtr-link-watch.sh",
+        "b012-dtr-link-monitor-state.json",
+        "meta-app-roles-watch.sh",
+        "infra-inventory.json",
+        "route-pack-05.versioned.before.md",
+        "b013-dtr-link-watch.before-identity-guard.sh"
+      ],
+      "purpose": "Rollback/audit snapshot before B012 retirement guard, B013 runtime creation, generic exclusion and documentation cutover.",
+      "validation": "Directory and listed artifacts exist; captured before production writes.",
+      "updated_at": "2026-08-06T19:13:17-04:00"
     }
   ],
   "profile_skill_references": [
@@ -8323,9 +8373,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 39086,
-      "md5": "a3aedd0b006c2e4b77787a86255555cc",
-      "modified_at": "2026-08-06T18:35:17-04:00"
+      "size_bytes": 39259,
+      "md5": "a1cf27096acb83a192c75a73c6c1eb7f",
+      "modified_at": "2026-08-06T19:10:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -8359,9 +8409,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 35620,
-      "md5": "4bff633f7b8bd14c12947fb54a4533b5",
-      "modified_at": "2026-08-06T18:53:15-04:00"
+      "size_bytes": 35631,
+      "md5": "06b132271b28e1ca0080e6a48a185e66",
+      "modified_at": "2026-08-06T19:07:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
