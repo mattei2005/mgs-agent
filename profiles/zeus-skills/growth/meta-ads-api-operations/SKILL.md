@@ -250,7 +250,11 @@ Detailed incident signature, reproduction boundary, cache contract, and resume c
 
 ## Meta Business browser writes with a logged Facebook user
 
-When Rodolfo asks to create an ad account or change Business Settings using a Facebook user already logged into the persistent browser profile, preserve that exact identity and use manual passkey/2FA through localhost-only noVNC. Confirm the Business target and current assets before write, read disabled controls/tooltips, and validate the new Ad Account ID plus `Owned by` after creation. Do not silently substitute a different API user/token. Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, new-portfolio limit handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md`.
+When Rodolfo asks to create ad accounts or change Business Settings using a Facebook user already logged into the persistent browser profile, preserve that exact identity and use manual passkey/2FA through localhost-only noVNC. Confirm the Business target and current assets before write, read disabled controls/tooltips, and validate each new Ad Account ID plus `Owned by` after creation. Do not silently substitute a different API user/token.
+
+For an explicitly authorized batch, checkpoint every account independently and persist unique IDs before continuing. Meta list rows are virtualized, `selected_asset_id` is not necessarily the real Ad Account ID, and an error modal can be ambiguous about whether the write committed. Never retry an ambiguous creation until a before/after asset-ID readback proves that no new account appeared. Do not randomize timing to simulate a human or evade activity controls; use a transparent fixed cadence and stop on any security/restriction gate. Direct person assignment is a separate permission change: if an account is BM-owned but shows `0 people`, report the gap and get the required confirmation before assigning anyone.
+
+Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, BM target correction, batch-safe ID reconciliation, new-portfolio limit handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md`.
 
 ## Meta Business Manager inventory / asset access audits
 
