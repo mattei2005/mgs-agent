@@ -592,8 +592,26 @@
       "superseded_by": null,
       "title": "Google Drive e Sheets MGS somente pela Service Account canônica",
       "updated_at": "2026-07-17T14:26:17+00:00"
+    },
+    {
+      "canonical_key": "sb.utility-template-repair.self-healing",
+      "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-utility-template-approval/references/production-red-gray-repair-purple-page-audit.md",
+      "consumers": [
+        "meta-utility-template-approval",
+        "sb-broadcast-template-repair.py"
+      ],
+      "domain": "smartbidding-broadcast-templates",
+      "effective_at": "2026-08-07",
+      "id": "procedure.sb-utility-template-self-healing-v1",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reparo autoevolutivo de templates Utility",
+      "updated_at": "2026-08-07T15:37:31+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T03:31:50+00:00"
+  "updated_at": "2026-08-07T15:37:31+00:00"
 }
