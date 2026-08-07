@@ -75,11 +75,37 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(repair.content_hash(plan['messages']), repair.content_hash(before))
         self.assertEqual(repair.counts_for(plan['messages'])['cinza'], 30)
 
-    def test_insufficient_bank_blocks(self):
+    def test_insufficient_bank_requests_generation(self):
         row = template(['vermelho'] * 30)
         plan = repair.build_repair(row, {'records': {}})
-        self.assertEqual(plan['action'], 'blocked')
-        self.assertIn('insufficient_approved_bank', plan['reason'])
+        self.assertEqual(plan['action'], 'needs_generation')
+        self.assertEqual(plan['deficit'], 30)
+        self.assertEqual(plan['approved_available'], 0)
+        self.assertEqual(plan['approved_required'], 30)
+
+    def test_duplicate_visible_text_replaces_only_extra_slot(self):
+        row = template(['verde'] * 30)
+        messages = repair.parse_messages(row)
+        messages[10]['TEXT'] = messages[0]['TEXT']
+        row['MESSAGES'] = json.dumps(messages)
+        before_links = repair.link_map(repair.parse_messages(row))
+        plan = repair.build_repair(row, bank_for([row]))
+        self.assertEqual(plan['action'], 'replace_duplicates_reset')
+        self.assertEqual(plan['duplicate_slots'], [11])
+        self.assertEqual([slot['message_id'] for slot in plan['replaced_slots']], [11])
+        texts = [repair.normalized(item['TEXT']) for item in plan['messages']]
+        self.assertEqual(len(texts), len(set(texts)))
+        self.assertEqual(repair.link_map(plan['messages']), before_links)
+
+    def test_duplicate_and_red_share_single_replacement_slot(self):
+        row = template(['verde'] * 29 + ['vermelho'])
+        messages = repair.parse_messages(row)
+        messages[-1]['TEXT'] = messages[0]['TEXT']
+        row['MESSAGES'] = json.dumps(messages)
+        plan = repair.build_repair(row, bank_for([row]))
+        self.assertEqual(plan['action'], 'replace_red_duplicates_reset')
+        self.assertEqual(len(plan['replaced_slots']), 1)
+        self.assertEqual(plan['replaced_slots'][0]['reason'], 'red_and_duplicate')
 
     def test_bank_preserves_ever_green_on_purple(self):
         bank = {'records': {}}

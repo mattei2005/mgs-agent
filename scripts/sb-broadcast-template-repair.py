@@ -305,32 +305,81 @@ def approved_candidates(bank: dict, vertical: str, used_hashes: set[str], used_t
     return candidates
 
 
+def duplicate_replacement_ids(messages: list[dict]) -> set[int]:
+    """Return duplicate slots to replace while preserving the safest occurrence."""
+    groups: dict[str, list[dict]] = {}
+    for message in messages:
+        groups.setdefault(normalized(message.get('TEXT') or ''), []).append(message)
+    rank = {'verde': 0, 'cinza': 1, 'roxo': 2, 'vermelho': 3}
+    replace: set[int] = set()
+    for text, grouped in groups.items():
+        if not text or len(grouped) <= 1:
+            continue
+        keeper = min(
+            grouped,
+            key=lambda item: (
+                rank.get(status_color(item), 9),
+                int(item.get('MESSAGE_ID') or 0),
+            ),
+        )
+        keeper_id = int(keeper.get('MESSAGE_ID') or 0)
+        replace.update(
+            int(item.get('MESSAGE_ID') or 0)
+            for item in grouped
+            if int(item.get('MESSAGE_ID') or 0) != keeper_id
+        )
+    return replace
+
+
 def build_repair(row: dict, bank: dict) -> dict:
     messages = parse_messages(row)
     before = counts_for(messages)
     vertical = parse_vertical(str(row.get('NAME') or ''))
-    red_slots = [m for m in messages if status_color(m) == 'vermelho']
-    purple_slots = [m for m in messages if status_color(m) == 'roxo']
-    if before['verde'] == MESSAGE_COUNT:
-        return {'action': 'skip_green', 'before': before, 'messages': messages, 'replaced_slots': [], 'reason': 'template_100_percent_green'}
-    if not red_slots and not purple_slots:
-        return {'action': 'wait_gray', 'before': before, 'messages': messages, 'replaced_slots': [], 'reason': 'no_red_or_purple'}
+    red_ids = {
+        int(message.get('MESSAGE_ID') or 0)
+        for message in messages
+        if status_color(message) == 'vermelho'
+    }
+    duplicate_ids = duplicate_replacement_ids(messages)
+    target_ids = red_ids | duplicate_ids
+    purple_slots = [message for message in messages if status_color(message) == 'roxo']
+    if before['verde'] == MESSAGE_COUNT and not duplicate_ids:
+        return {
+            'action': 'skip_green', 'before': before, 'messages': messages,
+            'replaced_slots': [], 'duplicate_slots': [], 'deficit': 0,
+            'reason': 'template_100_percent_green_unique',
+        }
+    if not target_ids and not purple_slots:
+        return {
+            'action': 'wait_gray', 'before': before, 'messages': messages,
+            'replaced_slots': [], 'duplicate_slots': [], 'deficit': 0,
+            'reason': 'no_red_purple_or_duplicates',
+        }
     prepared = [strip_status(message) for message in messages]
     replaced_slots = []
-    if red_slots:
-        used_hashes = {text_cta_hash(message) for message in messages}
-        used_texts = {normalized(message.get('TEXT') or '') for message in messages}
+    if target_ids:
+        retained = [
+            message for message in messages
+            if int(message.get('MESSAGE_ID') or 0) not in target_ids
+        ]
+        used_hashes = {text_cta_hash(message) for message in retained}
+        used_texts = {normalized(message.get('TEXT') or '') for message in retained}
         candidates = approved_candidates(bank, vertical, used_hashes, used_texts)
-        if len(candidates) < len(red_slots):
+        required = len(target_ids)
+        if len(candidates) < required:
+            deficit = required - len(candidates)
             return {
-                'action': 'blocked', 'before': before, 'messages': messages, 'replaced_slots': [],
-                'reason': f'insufficient_approved_bank:{len(candidates)}/{len(red_slots)}',
+                'action': 'needs_generation', 'before': before, 'messages': messages,
+                'replaced_slots': [], 'duplicate_slots': sorted(duplicate_ids),
+                'target_slots': sorted(target_ids), 'deficit': deficit,
+                'approved_available': len(candidates), 'approved_required': required,
+                'vertical': vertical,
+                'reason': f'approved_bank_deficit:{len(candidates)}/{required}',
             }
         candidate_iter = iter(candidates)
-        red_ids = {int(m.get('MESSAGE_ID') or 0) for m in red_slots}
-        for index, message in enumerate(prepared):
+        for message in prepared:
             message_id = int(message.get('MESSAGE_ID') or 0)
-            if message_id not in red_ids:
+            if message_id not in target_ids:
                 continue
             candidate = next(candidate_iter)
             message['TEXT'] = candidate['text']
@@ -338,16 +387,38 @@ def build_repair(row: dict, bank: dict) -> dict:
             message.pop('CTA 1', None)
             used_hashes.add(candidate['text_cta_hash'])
             used_texts.add(normalized(candidate['text']))
-            replaced_slots.append({'message_id': message_id, 'text_cta_hash': candidate['text_cta_hash']})
-        action = 'replace_red_reset'
+            replaced_slots.append({
+                'message_id': message_id,
+                'text_cta_hash': candidate['text_cta_hash'],
+                'reason': 'red_and_duplicate' if message_id in red_ids and message_id in duplicate_ids
+                else 'red' if message_id in red_ids else 'duplicate',
+            })
+        if red_ids and duplicate_ids:
+            action = 'replace_red_duplicates_reset'
+        elif red_ids:
+            action = 'replace_red_reset'
+        else:
+            action = 'replace_duplicates_reset'
     else:
         action = 'reset_purple'
     texts = [normalized(message.get('TEXT') or '') for message in prepared]
-    if len(texts) != len(set(texts)):
-        return {'action': 'blocked', 'before': before, 'messages': messages, 'replaced_slots': [], 'reason': 'duplicate_visible_text_guard'}
+    if not all(texts) or len(texts) != len(set(texts)):
+        return {
+            'action': 'blocked', 'before': before, 'messages': messages,
+            'replaced_slots': [], 'duplicate_slots': sorted(duplicate_ids), 'deficit': 0,
+            'reason': 'unique_visible_text_postcondition_failed',
+        }
     if link_map(prepared) != link_map(messages):
-        return {'action': 'blocked', 'before': before, 'messages': messages, 'replaced_slots': [], 'reason': 'link_invariant_guard'}
-    return {'action': action, 'before': before, 'messages': prepared, 'replaced_slots': replaced_slots, 'reason': None}
+        return {
+            'action': 'blocked', 'before': before, 'messages': messages,
+            'replaced_slots': [], 'duplicate_slots': sorted(duplicate_ids), 'deficit': 0,
+            'reason': 'link_invariant_guard',
+        }
+    return {
+        'action': action, 'before': before, 'messages': prepared,
+        'replaced_slots': replaced_slots, 'duplicate_slots': sorted(duplicate_ids),
+        'deficit': 0, 'reason': None,
+    }
 
 
 def next_midnight(value: dt.datetime | None = None) -> dt.datetime:
@@ -384,7 +455,12 @@ def classify_rows(rows: list[dict], bank: dict, config: dict, state: dict) -> li
         if template_state.get('last_started_date') == today:
             continue
         plan = build_repair(row, bank)
-        if plan['action'] not in {'replace_red_reset', 'reset_purple'}:
+        if plan['action'] not in {
+            'replace_red_reset',
+            'replace_red_duplicates_reset',
+            'replace_duplicates_reset',
+            'reset_purple',
+        }:
             continue
         before = plan['before']
         mixed = bool(before['vermelho'] and before['roxo'])
@@ -524,7 +600,20 @@ async def live_audit(notify: bool = False, dry_notify: bool = False) -> dict:
         for row in targets:
             counts = counts_for(parse_messages(row))
             aggregate.update(counts)
-            summaries.append({'id': row_id(row), 'template': row.get('NAME'), 'company': row.get('COMPANY'), 'pages': pages_for(row), 'vertical': parse_vertical(str(row.get('NAME') or '')), 'counts': counts, 'action': build_repair(row, bank)['action'], 'fits_window_now': fits_window(pages_for(row), config)})
+            plan = build_repair(row, bank)
+            summaries.append({
+                'id': row_id(row),
+                'template': row.get('NAME'),
+                'company': row.get('COMPANY'),
+                'pages': pages_for(row),
+                'vertical': parse_vertical(str(row.get('NAME') or '')),
+                'counts': counts,
+                'action': plan['action'],
+                'reason': plan.get('reason'),
+                'deficit': int(plan.get('deficit') or 0),
+                'duplicate_slots': plan.get('duplicate_slots') or [],
+                'fits_window_now': fits_window(pages_for(row), config),
+            })
         result = {'status': 'ok', 'at_sp': iso_sp(), 'rows_received': len(rows), 'targets_exact30': len(targets), 'counts': dict(aggregate), 'bank_sync': sync, 'templates': summaries}
         append_log('live_audit', rows=len(rows), targets=len(targets), counts=dict(aggregate))
         return result
@@ -573,10 +662,17 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                 'approval_started_at_sp': iso_sp(started), 'due_at_sp': iso_sp(due),
                 'no_progress_cycles': int(old.get('no_progress_cycles') or 0),
             }
-            if plan['action'] == 'replace_red_reset':
-                red_count = len(plan['replaced_slots'])
-                noun = 'mensagem vermelha substituída' if red_count == 1 else 'mensagens vermelhas substituídas'
-                item['action_label'] = f"{red_count} {noun}, reset global e Run Approval"
+            if plan['action'] in {'replace_red_reset', 'replace_red_duplicates_reset', 'replace_duplicates_reset'}:
+                red_count = sum(1 for slot in plan['replaced_slots'] if slot.get('reason') in {'red', 'red_and_duplicate'})
+                duplicate_count = sum(1 for slot in plan['replaced_slots'] if slot.get('reason') in {'duplicate', 'red_and_duplicate'})
+                parts = []
+                if red_count:
+                    noun = 'vermelha substituída' if red_count == 1 else 'vermelhas substituídas'
+                    parts.append(f'{red_count} {noun}')
+                if duplicate_count:
+                    noun = 'duplicada substituída' if duplicate_count == 1 else 'duplicadas substituídas'
+                    parts.append(f'{duplicate_count} {noun}')
+                item['action_label'] = ', '.join(parts) + ', reset global e Run Approval'
             else:
                 item['action_label'] = 'Conteúdo preservado, reset global do log e Run Approval'
             item['next_step'] = f"Aguardar ETA; readback automático após {due.strftime('%H:%M')} SP."

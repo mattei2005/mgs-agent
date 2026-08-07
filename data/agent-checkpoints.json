@@ -422,6 +422,16 @@
     },
     {
       "agent": "zeus",
+      "id": "sb-template-self-healing-rollout-20260807",
+      "next_step": "Mapear gerador e canário existentes; implementar estados fail-closed; testar antes de produção.",
+      "objective": "Adaptar o executor fixed-30 para corrigir textos duplicados e gerar/testar novas copies quando o banco aprovado for insuficiente.",
+      "source": "discord:1535306062457081926#1535311753192153139",
+      "state": "authorized_discovery",
+      "thread_id": "1535306062457081926",
+      "updated_at": "2026-08-07T15:41:17+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
       "next_step": "Operação normal e burn-in; preservar runtime v0.19.0 e backups para rollback. Qualquer limpeza futura exige escopo e autorização separados.",
       "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
@@ -472,5 +482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T03:35:13+00:00"
+  "updated_at": "2026-08-07T15:41:17+00:00"
 }
