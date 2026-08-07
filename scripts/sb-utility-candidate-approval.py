@@ -235,6 +235,24 @@ def lifecycle_embed(event: str, item: dict) -> dict:
     }
 
 
+def error_embed(errors: list[str], stage_name: str) -> dict:
+    return {
+        'content': '',
+        'embeds': [{
+            'title': 'GERAÇÃO DE COPIES BLOQUEADA',
+            'color': 0xE74C3C,
+            'fields': [
+                {'name': 'Estágio', 'value': stage_name or '-', 'inline': True},
+                {'name': 'Bloqueios', 'value': '\n'.join(f'• {error}' for error in errors[:8]), 'inline': False},
+                {'name': 'Próximo passo', 'value': 'Repor candidates model-written no catálogo; nenhuma copy não aprovada será instalada em produção.', 'inline': False},
+            ],
+            'footer': {'text': 'Banco aprovado fail-closed'},
+            'timestamp': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
+        }],
+        'allowed_mentions': {'parse': []},
+    }
+
+
 def notify(config: dict, event: str, item: dict, dry_run: bool = False) -> str | None:
     return repair.post_discord(
         lifecycle_embed(event, item),
@@ -369,6 +387,11 @@ async def stage(apply: bool, do_notify: bool, vertical_filter: str = '') -> dict
         state['runs'] = state['runs'][-100:]
         state['updated_at_sp'] = repair.iso_sp()
         atomic_json(STATE_PATH, state)
+        if apply and do_notify and run['errors']:
+            repair.post_discord(
+                error_embed(run['errors'], str(config.get('stage') or '')),
+                str(config.get('channel_id') or repair.DEFAULT_CHANNEL),
+            )
         return run
     finally:
         if browser:

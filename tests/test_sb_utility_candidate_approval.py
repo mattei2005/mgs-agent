@@ -82,6 +82,12 @@ class CandidateApprovalTests(unittest.TestCase):
         self.assertIn('\u200b', formatted['text'])
         self.assertEqual(repair.normalized(formatted['text']), repair.normalized(raw['text']))
 
+    def test_error_embed_is_fail_closed_and_has_no_mentions(self):
+        payload = candidate.error_embed(['GB-CC-EN:catalog_deficit:0/5'], 'staged')
+        self.assertEqual(payload['content'], '')
+        self.assertEqual(payload['allowed_mentions'], {'parse': []})
+        self.assertIn('não aprovada', payload['embeds'][0]['fields'][-1]['value'])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

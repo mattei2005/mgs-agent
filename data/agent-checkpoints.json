@@ -423,12 +423,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Mapear gerador e canário existentes; implementar estados fail-closed; testar antes de produção.",
-      "objective": "Adaptar o executor fixed-30 para corrigir textos duplicados e gerar/testar novas copies quando o banco aprovado for insuficiente.",
-      "source": "discord:1535306062457081926#1535311753192153139",
-      "state": "authorized_discovery",
+      "next_step": "Validar ZA live green, promover para staged e testar GB/MX/US-JOB; depois ativar ciclo completo, inventariar e reportar",
+      "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies quando o banco for insuficiente",
+      "source": "Discord thread 1535306062457081926 / message 1535311753192153139",
+      "state": "implementação e 15 testes concluídos; canário za-cc-en iniciado com 1 copy, backup e approval; aguardando readback após eta",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-07T15:41:17+00:00"
+      "updated_at": "2026-08-07T15:54:58+00:00"
     },
     {
       "agent": "zeus",
@@ -482,5 +482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T15:41:17+00:00"
+  "updated_at": "2026-08-07T15:54:58+00:00"
 }
