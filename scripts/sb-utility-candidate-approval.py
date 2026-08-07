@@ -68,6 +68,7 @@ def default_state() -> dict:
         'created_at_sp': repair.iso_sp(),
         'updated_at_sp': repair.iso_sp(),
         'verticals': {},
+        'retired_candidate_ids': [],
         'runs': [],
         'alerts': {},
     }
@@ -138,7 +139,7 @@ def select_catalog_candidates(
     state: dict,
     retained_texts: set[str],
 ) -> list[dict]:
-    used_ids = {
+    used_ids = set(state.get('retired_candidate_ids') or []) | {
         candidate_id
         for item in state.get('verticals', {}).values()
         for candidate_id in item.get('candidate_ids', [])
@@ -425,6 +426,7 @@ async def check(do_notify: bool) -> dict:
                 messages = repair.parse_messages(row)
                 by_message_id = {int(message.get('MESSAGE_ID') or 0): message for message in messages}
                 candidate_counts = Counter()
+                candidate_results = {}
                 drift = []
                 for placement in item.get('placements', []):
                     message = by_message_id.get(int(placement['message_id']))
@@ -433,6 +435,7 @@ async def check(do_notify: bool) -> dict:
                         continue
                     color = repair.status_color(message)
                     candidate_counts[color] += 1
+                    candidate_results[str(placement['candidate_id'])] = color
                     repair.upsert_bank_observation(
                         bank,
                         str(item.get('template') or ''),
@@ -452,6 +455,7 @@ async def check(do_notify: bool) -> dict:
                         color: int(candidate_counts.get(color, 0))
                         for color in ('verde', 'cinza', 'vermelho', 'roxo')
                     }
+                    item['candidate_results'] = candidate_results
                     if candidate_counts.get('verde', 0) == total:
                         item['status'] = 'completed'
                         item['next_step'] = 'Copies verdes salvas no banco; templates de produção ficam prontos para reparo.'
@@ -468,6 +472,13 @@ async def check(do_notify: bool) -> dict:
                         event = 'partial'
                     else:
                         item['status'] = 'needs_generation'
+                        retired = set(state.get('retired_candidate_ids') or [])
+                        retired.update(
+                            candidate_id
+                            for candidate_id, color in candidate_results.items()
+                            if color != 'verde'
+                        )
+                        state['retired_candidate_ids'] = sorted(retired)
                         item['next_step'] = 'Verdes foram preservadas; copies não aprovadas serão substituídas por novas candidatas.'
                         event = 'partial'
             item['checked_at_sp'] = repair.iso_sp()

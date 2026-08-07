@@ -88,6 +88,13 @@ class CandidateApprovalTests(unittest.TestCase):
         self.assertEqual(payload['allowed_mentions'], {'parse': []})
         self.assertIn('não aprovada', payload['embeds'][0]['fields'][-1]['value'])
 
+    def test_retired_candidate_is_not_selected_again(self):
+        raw = {'candidate_id': 'retired-1', 'text': 'A unique retired copy', 'cta_1': 'OPEN'}
+        catalog = {'candidates': {'GB-CC-EN': [raw]}}
+        state = {'verticals': {}, 'retired_candidate_ids': ['retired-1']}
+        selected = candidate.select_catalog_candidates(catalog, 'GB-CC-EN', 1, {'records': {}}, state, set())
+        self.assertEqual(selected, [])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
