@@ -242,6 +242,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-general-alert-manual-pause-20260806",
+      "next_step": "Reativar B001/B002/B003/B004/B008/B009/B010 somente quando Rodolfo informar a troca dos apps.",
+      "objective": "Enviar alerta geral aos apps operacionais e persistir a pausa manual dos sete apps off conforme correção de Rodolfo.",
+      "source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "concluído: alertas canônicos preservados em b005-2/b006-2/b007/b013; sete apps off sem novas mensagens e em mode=manual; b013 app token/roles saudáveis, 29 linked/5 unlinked/0 unknown; crons retomados; ciclo genérico 23:33 concluído; report-infra 1535128678386638909.",
+      "thread_id": "1535016020354273370",
+      "updated_at": "2026-08-07T03:35:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-sheet-column-n-cutover-20260806",
       "next_step": "Nenhuma ação técnica pendente; acompanhar pelos crons ativos.",
       "objective": "Migrar todos os monitores Meta app da coluna M/NO APP para N/APP PROVISORIO na aba Migracao 22/06.",
@@ -462,5 +472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T02:32:25+00:00"
+  "updated_at": "2026-08-07T03:35:13+00:00"
 }

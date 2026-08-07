@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-06T22:32:25-04:00",
+    "updated_at": "2026-08-06T23:35:13-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1188,14 +1188,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 79999,
-      "modified_at": "2026-08-06T21:37:45-04:00",
-      "sha256": "04d9161ecd402fae058d45af81e689a17973be0a844ab41cedb7b8697f950315",
-      "description": "Generic Meta role/rate-limit monitor. Active Sheet assignment source is N/APP PROVISORIO; M/NO APP is historical. Resolves role IDs in <=50-ID chunks and preserves X fail-closed on unresolved identities.",
-      "validation": "Post-resume scheduled cycle OK at 21:49 ET: B005-2 identity 100/100 in two HTTP-200 chunks, alerts_sent=0, Sheet updated=false, 137 present / 74 X / 8 non-app unknown.",
-      "updated_at": "2026-08-06T22:27:36-04:00",
+      "size_bytes": 80512,
+      "modified_at": "2026-08-06T23:22:24-04:00",
+      "sha256": "e19ce5208ad4815611752ca1cbc1a68fce52e41dd7b232c6d17fdc039c3581f8",
+      "description": "Generic B001-B010 monitor with APP PROVISORIO/N assignment and manual/until app-scoped delivery pause modes.",
+      "validation": "bash -n PASS; manual pause B001 forced-snapshot gate preserved channel last-message ID and recorded one suppressed delivery.",
+      "updated_at": "2026-08-06T23:32:48-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06",
-      "last_change": "2026-08-06: switched all Sheet assignment paths to N/APP PROVISORIO and fixed B005-2 100-ID Graph identity resolution via two bounded chunks.",
+      "last_change": "2026-08-06: added mode=manual pause until Rodolfo explicitly re-enables replaced apps; summary readback exposes mode/reason.",
       "backup": "/root/mgs-agent/backups/meta-app-alert-pause-20260806-161025/meta-app-roles-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444/meta-app-role-monitor-state.json",
       "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
@@ -1205,9 +1205,9 @@
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 407,
-      "modified_at": "2026-08-06T16:10:35-04:00",
-      "sha256": "22419c95445589a29ceb93bd40199519f7e918fc52c55a271e809670772cbd79",
+      "size_bytes": 446,
+      "modified_at": "2026-08-06T23:21:20-04:00",
+      "sha256": "8a5e79fe1fb22601a8abd1c93703f348824f39ee03e25974a32620bf2ad0297d",
       "scope": [
         "B001",
         "B002",
@@ -1221,9 +1221,11 @@
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1535016020354273370",
-      "validation": "JSON parse PASS; production pause loader readback exact; expired state is ignored automatically without deleting the audit artifact.",
-      "updated_at": "2026-08-06T16:14:36-04:00",
-      "source_report": "REPORT-INFRA Zeus app-channel notification pause 2026-08-06"
+      "validation": "JSON parse PASS; live forced B001 delivery suppressed; exact app set and mode=manual read back from production state.",
+      "updated_at": "2026-08-06T23:32:48-04:00",
+      "source_report": "REPORT-INFRA Zeus app-channel notification pause 2026-08-06",
+      "description": "Canonical manual app-channel alert pause for B001/B002/B003/B004/B008/B009/B010 until Rodolfo reports replacement.",
+      "last_change": "2026-08-06: superseded midnight expiry with manual re-enable condition per Rodolfo."
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3559,15 +3561,15 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 26608,
-      "modified_at": "2026-08-06T22:30:16-04:00",
-      "sha256": "cd2f0ef43a7774888f3c16678a73df9e66170e186651ddce75ed8eb0ee82d1fe",
+      "size_bytes": 27159,
+      "modified_at": "2026-08-06T23:22:36-04:00",
+      "sha256": "f9501cd5dfa528f2c023b572692ca23fb2999cef7287821cdf82f18e8e5d5aae",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Canonical route pack now declares N/APP PROVISORIO active, M historical, <=50-ID Graph chunks and all-numeric fail-closed Sheet safety.",
-      "validation": "Runtime/versioned SHA-256 match; includes B013 app-operational alert routing away from alerts-infra.",
-      "updated_at": "2026-08-06T22:31:01-04:00",
+      "description": "Manual/until pause modes and operator override rule documented.",
+      "validation": "Runtime/versioned SHA-256 match.",
+      "updated_at": "2026-08-06T23:32:48-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
@@ -4843,16 +4845,16 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
-      "size_bytes": 5223,
-      "modified_at": "2026-08-06T21:43:48-04:00",
-      "sha256": "0d299576f2ad3dbe188838008763c17017672654985b3aa4bd38917dc5653378",
+      "size_bytes": 5742,
+      "modified_at": "2026-08-06T23:30:13-04:00",
+      "sha256": "f761231db03713ac6ecc36d1d8f96195668c01c8f5d05a94496f7a368e05f5e7",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "B012→B013 cutover reference with explicit later supersession to N/APP PROVISORIO.",
-      "validation": "Runtime/versioned SHA-256 match; final live and scheduled readbacks documented.",
-      "updated_at": "2026-08-06T22:27:36-04:00",
+      "description": "B013 primary/backup admins and current token/link health documented.",
+      "validation": "Runtime/versioned SHA-256 match.",
+      "updated_at": "2026-08-06T23:32:48-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
@@ -4884,9 +4886,9 @@
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Canonical M→N assignment supersession, live Sheet distribution, B005-2 chunked identity fix and rollback.",
-      "validation": "Runtime/versioned SHA-256 match; includes B013 app-operational alert routing away from alerts-infra.",
-      "updated_at": "2026-08-06T22:31:01-04:00",
+      "description": "Column N cutover reference retained and mirrored.",
+      "validation": "Runtime/versioned SHA-256 match.",
+      "updated_at": "2026-08-06T23:32:48-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
@@ -4897,6 +4899,18 @@
       "purpose": "Pre-cutover scripts, states, inventory and skill reference plus isolated dry-run harnesses for M→N assignment and B005-2 identity fix.",
       "validation": "Backup directory and pre-change artifacts read back before production writes.",
       "updated_at": "2026-08-06T21:46:01-04:00"
+    },
+    {
+      "id": "zeus-meta-app-alert-manual-pause-backup-20260806",
+      "type": "backup",
+      "path": "/root/mgs-agent/backups/meta-app-alert-manual-pause-20260806-232050",
+      "description": "Pre-change backup before extending selected app alert pause to manual re-enable mode.",
+      "owner": "zeus",
+      "status": "active",
+      "created_at": "2026-08-06T23:32:48-04:00",
+      "updated_at": "2026-08-06T23:32:48-04:00",
+      "validation": "SHA256SUMS reverse validation PASS.",
+      "last_change": "2026-08-06: created before manual pause support/config update."
     }
   ],
   "profile_skill_references": [
@@ -8400,9 +8414,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 40019,
-      "md5": "f5e2fc01297f9fa478ca2d1fb4b68578",
-      "modified_at": "2026-08-06T22:32:25-04:00"
+      "size_bytes": 40856,
+      "md5": "84257e4d191ca13cac43449d8ba184ca",
+      "modified_at": "2026-08-06T23:35:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -8436,9 +8450,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 34466,
-      "md5": "b2d9102364a290bd655f9548cc3d0cd5",
-      "modified_at": "2026-08-06T22:25:10-04:00"
+      "size_bytes": 31675,
+      "md5": "359dba8ccb3ab3db65fdadeded9fed7f",
+      "modified_at": "2026-08-06T23:29:38-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -8556,9 +8570,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 19309,
-      "md5": "4ebadaf701c41a6dd149507bdaa3cfcb",
-      "modified_at": "2026-08-06T21:45:06-04:00"
+      "size_bytes": 20529,
+      "md5": "02aff2a27eb117dc8d34a26f42f03d84",
+      "modified_at": "2026-08-06T23:31:50-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -8580,9 +8594,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 407,
-      "md5": "93f46bc139fc59e7a747ce517bb56f37",
-      "modified_at": "2026-08-06T16:10:35-04:00"
+      "size_bytes": 446,
+      "md5": "eda66120d34ceadd0f094db1ff88da65",
+      "modified_at": "2026-08-06T23:21:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-b011-clean-20260704-071749.json",
@@ -8592,9 +8606,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 107339,
-      "md5": "008cf483a46c327b977ab77ac9822a02",
-      "modified_at": "2026-08-06T22:31:44-04:00"
+      "size_bytes": 107512,
+      "md5": "8d892333b8dfc63bc4ddf549e4b9f341",
+      "modified_at": "2026-08-06T23:34:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",

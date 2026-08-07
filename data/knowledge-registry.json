@@ -415,6 +415,40 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "meta-app.b013.admin-recovery-roles",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T23:29:37-04:00",
+      "id": "decision-b013-primary-backup-admins-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013 primary and backup administrator profiles",
+      "updated_at": "2026-08-07T03:31:50+00:00"
+    },
+    {
+      "canonical_key": "meta-app.alert-pause.manual-replacement-set",
+      "canonical_source": "data/meta-app-role-alert-pause.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T23:20:50-04:00",
+      "id": "decision-meta-app-manual-pause-until-replacements-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Meta app alerts manual pause until replacements",
+      "updated_at": "2026-08-07T03:31:50+00:00"
+    },
+    {
       "canonical_key": "meta-app.sheet.assignment-column",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
       "consumers": [
@@ -561,5 +595,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T01:45:06+00:00"
+  "updated_at": "2026-08-07T03:31:50+00:00"
 }
