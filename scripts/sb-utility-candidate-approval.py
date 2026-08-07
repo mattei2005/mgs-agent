@@ -262,6 +262,31 @@ def notify(config: dict, event: str, item: dict, dry_run: bool = False) -> str |
     )
 
 
+def safe_notify(config: dict, event: str, item: dict) -> str | None:
+    try:
+        return notify(config, event, item)
+    except Exception as exc:
+        item['notify_error'] = f'{type(exc).__name__}:{str(exc)[:300]}'
+        append_log('candidate_notify_failed', vertical=item.get('vertical'), event_name=event, error=item['notify_error'])
+        return None
+
+
+def promote_stage_if_complete(config: dict, state: dict) -> bool:
+    current_stage = config.get('stage')
+    stage_items = [item for item in state.get('verticals', {}).values() if item.get('stage') == current_stage]
+    if not config.get('auto_promote') or not stage_items or not all(item.get('status') == 'completed' for item in stage_items):
+        return False
+    if current_stage == 'canary':
+        config['stage'] = 'staged'
+    elif current_stage == 'staged':
+        config['stage'] = 'full'
+    else:
+        return False
+    atomic_json(CONFIG_PATH, config)
+    append_log('candidate_stage_promoted', from_stage=current_stage, to_stage=config['stage'])
+    return True
+
+
 async def plan() -> dict:
     bank = load_json(repair.BANK_PATH, {'version': 1, 'records': {}})
     p = browser = None
@@ -380,7 +405,7 @@ async def stage(apply: bool, do_notify: bool, vertical_filter: str = '') -> dict
             state['updated_at_sp'] = repair.iso_sp()
             atomic_json(STATE_PATH, state)
             if do_notify:
-                item['discord_message_id'] = notify(config, 'started', item)
+                item['discord_message_id'] = safe_notify(config, 'started', item)
                 atomic_json(STATE_PATH, state)
             run['items'].append(item)
             append_log('candidate_stage_started', vertical=vertical, template=item['template'], candidate_ids=item['candidate_ids'], due_at_sp=item['due_at_sp'])
@@ -389,10 +414,13 @@ async def stage(apply: bool, do_notify: bool, vertical_filter: str = '') -> dict
         state['updated_at_sp'] = repair.iso_sp()
         atomic_json(STATE_PATH, state)
         if apply and do_notify and run['errors']:
-            repair.post_discord(
-                error_embed(run['errors'], str(config.get('stage') or '')),
-                str(config.get('channel_id') or repair.DEFAULT_CHANNEL),
-            )
+            try:
+                repair.post_discord(
+                    error_embed(run['errors'], str(config.get('stage') or '')),
+                    str(config.get('channel_id') or repair.DEFAULT_CHANNEL),
+                )
+            except Exception as exc:
+                append_log('candidate_error_notify_failed', error=f'{type(exc).__name__}:{str(exc)[:300]}')
         return run
     finally:
         if browser:
@@ -410,7 +438,8 @@ async def check(do_notify: bool) -> dict:
         if item.get('status') == 'pending' and dt.datetime.fromisoformat(item['due_at_sp']) <= repair.now_sp()
     ]
     if not pending:
-        return {'status': 'ok', 'checked': 0, 'reason': 'nothing_due'}
+        promoted = promote_stage_if_complete(config, state)
+        return {'status': 'ok', 'checked': 0, 'reason': 'nothing_due', 'stage': config.get('stage'), 'promoted': promoted}
     p = browser = None
     results = []
     try:
@@ -486,19 +515,11 @@ async def check(do_notify: bool) -> dict:
             state['updated_at_sp'] = repair.iso_sp()
             atomic_json(STATE_PATH, state)
             if do_notify:
-                item['discord_result_message_id'] = notify(config, event, item)
+                item['discord_result_message_id'] = safe_notify(config, event, item)
                 atomic_json(STATE_PATH, state)
             results.append({'vertical': item.get('vertical'), 'status': item.get('status'), 'candidate_counts': item.get('candidate_counts')})
             append_log('candidate_readback', vertical=item.get('vertical'), status=item.get('status'), candidate_counts=item.get('candidate_counts'))
-        current_stage = config.get('stage')
-        stage_items = [item for item in state.get('verticals', {}).values() if item.get('stage') == current_stage]
-        if stage_items and all(item.get('status') == 'completed' for item in stage_items) and config.get('auto_promote'):
-            if current_stage == 'canary':
-                config['stage'] = 'staged'
-                atomic_json(CONFIG_PATH, config)
-            elif current_stage == 'staged':
-                config['stage'] = 'full'
-                atomic_json(CONFIG_PATH, config)
+        promote_stage_if_complete(config, state)
         state['updated_at_sp'] = repair.iso_sp()
         atomic_json(STATE_PATH, state)
         atomic_json(repair.BANK_PATH, bank)
