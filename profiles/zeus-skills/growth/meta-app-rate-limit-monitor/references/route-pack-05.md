@@ -20,7 +20,12 @@ Operational close-loop rule for transient Meta API checks: an isolated `user_tok
 
 ### Temporary app-scoped notification pause
 
-When Rodolfo asks to pause only the app channels currently notifying him, do not pause the whole `meta-app-roles-watch` cron if unaffected apps must remain monitored. Write `/root/mgs-agent/data/meta-app-role-alert-pause.json` with the exact app keys and an aware ISO `until` timestamp in `America/New_York`. The production script keeps Graph/Sheet checks and state reconciliation running, suppresses only app-channel Discord delivery for those keys, preserves pre-pause cooldown timestamps, and automatically ignores the pause when `now >= until`; no resume job or gateway restart is needed. Infra/Sheets failure alerts remain independent and are not suppressed by an app-channel pause.
+When Rodolfo asks to pause only selected app channels, do not pause the whole `meta-app-roles-watch` cron if unaffected apps must remain monitored. Write `/root/mgs-agent/data/meta-app-role-alert-pause.json` with the exact app keys and one of two explicit modes:
+
+- `mode=until`: include an aware ISO `until` timestamp in `America/New_York`; the pause expires automatically when `now >= until`.
+- `mode=manual`: omit `until`; keep the selected app-channel deliveries suppressed until Rodolfo explicitly reports that the apps were replaced/recovered and asks to re-enable them.
+
+The production script keeps Graph/Sheet checks and state reconciliation running, suppresses only app-channel Discord delivery for those keys, preserves cooldown timestamps, and reports the active pause mode in `_last_run_summary.active_alert_pause`. No resume cron or gateway restart is needed. Infra/Sheets failure alerts remain independent and are not suppressed by an app-channel pause. A force-live operator run must not bypass a manual pause unless Rodolfo explicitly requests an alert for that paused app in the same current instruction; use an isolated override path only for that one foreground run and never mutate the canonical pause unintentionally.
 
 Required validation: JSON parse, shell + inline-Python syntax, isolated `post_webhook` gate test proving HTTP delivery is bypassed for one paused app, production state readback showing the exact active app set and expiry, and Discord readback showing no new message in a paused channel. Inventory, audit, backup, and REPORT-INFRA remain mandatory because this touches profile script/data/skill infrastructure.
 
