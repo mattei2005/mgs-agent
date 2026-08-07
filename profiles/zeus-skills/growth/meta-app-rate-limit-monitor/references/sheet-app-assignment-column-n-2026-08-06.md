@@ -31,6 +31,7 @@ The retired/deleted apps B001, B002, B003, B004, B008, B009 and B010 had their o
 - Both scripts fail closed if required headers are missing.
 - B013 live readback selected 34 N rows and reconciled 1 linked / 33 confirmed unlinked / 0 unknown with zero pending Sheet delta.
 - During scheduled validation, transient code-190 invalid-signature responses were preserved as unknown without Sheet writes. A separate explicit Graph code-100 App_id/View-App mismatch was classified as confirmed unlinked (`token_app_mismatch`) rather than unknown. The controlled live run and the following scheduled cron cycle both converged to 1 linked / 33 confirmed unlinked / 0 unknown; the scheduled cycle sent zero alerts and made zero Sheet updates.
+- Three transient B013 unknown embeds had been routed to `#alerts-infra` by the historical implementation. They were deleted after recovery. Persistent B013 unknowns now post only to the dedicated B013 app-status channel; `#alerts-infra` remains REPORT-INFRA-only.
 
 ## B005-2 identity rendering incident and fix
 

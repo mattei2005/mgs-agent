@@ -243,12 +243,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-sheet-column-n-cutover-20260806",
-      "next_step": "Nenhuma ação técnica pendente. Operação segue pelos crons ativos; sete apps deletados continuam sem ownership em N e com entrega pausada até meia-noite ET.",
+      "next_step": "Nenhuma ação técnica pendente; acompanhar pelos crons ativos.",
       "objective": "Migrar todos os monitores Meta app da coluna M/NO APP para N/APP PROVISORIO na aba Migracao 22/06.",
       "source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
-      "state": "concluído e validado. genérico e b013 leem n; b005-2 resolveu 100/100 identidades sem sem email; ciclos agendados genérico e b013 terminaram ok e sem delta; report-infra 1535112403338133648 enviado.",
+      "state": "concluído: todos os monitores leem n; b005-2 100/100 identidades; b013 final 34/1/33/0; ciclos agendados ok; alerts-infra limpo e b013 unknown roteado ao canal dedicado. reports 1535112403338133648 e 1535113079401086997.",
       "thread_id": "1535016020354273370",
-      "updated_at": "2026-08-07T02:28:55+00:00"
+      "updated_at": "2026-08-07T02:32:25+00:00"
     },
     {
       "agent": "zeus",
@@ -462,5 +462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T02:28:55+00:00"
+  "updated_at": "2026-08-07T02:32:25+00:00"
 }
