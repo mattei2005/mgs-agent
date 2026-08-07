@@ -329284,14 +329284,14 @@
       "text": "🔔 CARD REQUEST STATUS\n\nYour card request has an updated review status. Open the page to check the available details before continuing.",
       "cta_1": "🔔 OPEN STATUS",
       "first_seen_at": "2026-08-07T12:57:46-04:00",
-      "last_seen_at": "2026-08-07T12:57:46-04:00",
-      "first_approved_at": null,
-      "last_approved_at": null,
-      "approved_count": 0,
+      "last_seen_at": "2026-08-07T14:02:10-04:00",
+      "first_approved_at": "2026-08-07T14:02:10-04:00",
+      "last_approved_at": "2026-08-07T14:02:10-04:00",
+      "approved_count": 1,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
-      "status": "testing",
+      "status": "approved",
       "seen_in": [
         {
           "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
@@ -329299,6 +329299,13 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-08-07T13:57:46-03:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-08-07T15:02:10-03:00"
         }
       ],
       "usage": []
