@@ -302,7 +302,15 @@ def approved_candidates(bank: dict, vertical: str, used_hashes: set[str], used_t
             continue
         candidates.append(record)
     candidates.sort(key=lambda rec: (-int(rec.get('approved_count') or 0), rec.get('last_approved_at') or '', rec.get('text_cta_hash') or ''))
-    return candidates
+    unique = []
+    seen_texts = set(used_texts)
+    for record in candidates:
+        text_key = normalized(record.get('text') or '')
+        if not text_key or text_key in seen_texts:
+            continue
+        seen_texts.add(text_key)
+        unique.append(record)
+    return unique
 
 
 def duplicate_replacement_ids(messages: list[dict]) -> set[int]:

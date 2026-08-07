@@ -107,6 +107,17 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(len(plan['replaced_slots']), 1)
         self.assertEqual(plan['replaced_slots'][0]['reason'], 'red_and_duplicate')
 
+    def test_approved_candidates_are_unique_by_visible_text(self):
+        bank = bank_for([])
+        first = next(iter(bank['records'].values()))
+        duplicate = dict(first)
+        duplicate['cta_1'] = first['cta_1'] + ' ALT'
+        duplicate['text_cta_hash'] = repair.text_cta_hash({'TEXT': duplicate['text'], 'CTA_1': duplicate['cta_1']})
+        bank['records'][duplicate['text_cta_hash']] = duplicate
+        candidates = repair.approved_candidates(bank, 'US-CC-EN', set(), set())
+        texts = [repair.normalized(item['text']) for item in candidates]
+        self.assertEqual(len(texts), len(set(texts)))
+
     def test_bank_preserves_ever_green_on_purple(self):
         bank = {'records': {}}
         msg = message(1, 'verde')

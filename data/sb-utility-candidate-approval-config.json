@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "enabled": true,
+  "channel_id": "1522487422510694450",
+  "stage": "canary",
+  "auto_promote": true,
+  "margin_minutes": 60,
+  "max_approval_attempts": 3,
+  "canary_verticals_per_day": 1,
+  "staged_verticals_per_day": 3,
+  "full_verticals_per_day": 4,
+  "test_templates": {
+    "GB-CC-EN": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+    "MX-CC-ES": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+    "US-JOB-ES": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+    "ZA-CC-EN": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459"
+  }
+}
