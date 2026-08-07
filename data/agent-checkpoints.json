@@ -243,12 +243,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-sheet-column-n-cutover-20260806",
-      "next_step": "Aplicar leitura N nos monitores genérico e B013, validar dry-run/state/Sheet, atualizar governança e REPORT-INFRA.",
+      "next_step": "Atualizar inventário/audit/REPORT-INFRA, validar crons retomados e encerrar.",
       "objective": "Migrar todos os monitores Meta app da coluna M/NO APP para N/APP PROVISORIO na aba Migracao 22/06.",
-      "source": "discord:1535093279710912544",
-      "state": "preflight concluído: sheets/drive http 200 com service account; coluna m=no app histórica, coluna n=app provisorio atual; 126 linhas diferem.",
+      "source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
+      "state": "cutover runtime concluído: genérico e b013 leem n; b005-2 100/100 identidades resolvidas em 2 chunks, alerta corrigido sem sem email; sheet reconciliada sem delta pendente.",
       "thread_id": "1535016020354273370",
-      "updated_at": "2026-08-07T01:17:55+00:00"
+      "updated_at": "2026-08-07T01:44:52+00:00"
     },
     {
       "agent": "zeus",
@@ -462,5 +462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T01:17:55+00:00"
+  "updated_at": "2026-08-07T01:44:52+00:00"
 }

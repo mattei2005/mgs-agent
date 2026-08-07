@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-06T19:13:17-04:00",
+    "updated_at": "2026-08-06T21:46:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1188,14 +1188,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 77246,
-      "modified_at": "2026-08-06T18:38:30-04:00",
-      "sha256": "b5eeb471199594b8dd6411d0faec538afadce652934190513b6f270353d9148d",
-      "description": "Zeus generic Meta app role/rate-limit monitor. B011/B012/B013 and their DTR-only 1Password items are excluded from /roles discovery and Sheet reconciliation; B013 routes only through the dedicated DTR monitor.",
-      "validation": "bash -n PASS; explicit BOT B013 Token dry invocation rc=0, empty output and no state file; scheduled generic cycles status ok.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
-      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06",
-      "last_change": "2026-08-06: replaced B012 channel mapping with B013 and added B013 to DTR-only discovery/reconciliation guards.",
+      "size_bytes": 79999,
+      "modified_at": "2026-08-06T21:37:45-04:00",
+      "sha256": "04d9161ecd402fae058d45af81e689a17973be0a844ab41cedb7b8697f950315",
+      "description": "Generic Meta role/rate-limit monitor. Active Sheet assignment source is N/APP PROVISORIO; M/NO APP is historical. Resolves role IDs in <=50-ID chunks and preserves X fail-closed on unresolved identities.",
+      "validation": "Sheet/Drive SA HTTP 200; shell + embedded Python PASS; B005-2 100/100 identities resolved in two HTTP-200 chunks; full dry 173 intent/137 present/35 missing+1 cumulative/8 non-app unknown, zero pending Sheet delta; live corrected alert readback zero sem email.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06",
+      "last_change": "2026-08-06: switched all Sheet assignment paths to N/APP PROVISORIO and fixed B005-2 100-ID Graph identity resolution via two bounded chunks.",
       "backup": "/root/mgs-agent/backups/meta-app-alert-pause-20260806-161025/meta-app-roles-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0062-owner-crislaine-oliveira-20260730-141444/meta-app-role-monitor-state.json",
       "sheet_backup": "/root/mgs-agent/backups/meta-app-b0062-sheet-reconciliation-20260730-123421/sheet-A-Z-before.json"
@@ -1632,9 +1632,9 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Full Meta app roles/admin and Sheet reconciliation for B001-B010/B005-2; B011/B012/B013 are DTR-only exclusions.",
-      "validation": "Cron */3 ET window remains scheduled/ok; discovery readback contains only the ten generic-role app items.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
+      "purpose": "Meta app roles/admin and Sheet reconciliation using N/APP PROVISORIO for B001-B010/B005-2; B011/B012/B013 remain DTR-only exclusions.",
+      "validation": "Cron resumed after controlled cutover; live B005-2 run and full all-app dry passed with no pending Sheet delta.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
       "last_observed_status": "ok_at_2026-08-06T19:04:39-04:00",
       "reconciliation": "B013 replaced B012 as the active dedicated DTR app. B011/B012/B013 remain excluded from this /roles job and its Sheet X writes.",
       "state": "scheduled",
@@ -1651,9 +1651,9 @@
       "schedule": "2-59/9 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "B013 DTR/ChatPion OAuth/debug_token/page capability and Sheet reconciliation for every NO APP=B013 row.",
-      "validation": "Cron scheduled/enabled with deliver=local/no_agent; 19:02 ET cycle completed ok at 19:07 ET, state 35 targets / 1 linked / 33 confirmed unlinked / 1 unknown / alerts_sent=0.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
+      "purpose": "B013 DTR/ChatPion and Sheet reconciliation for every APP PROVISORIO=B013 row from A:N.",
+      "validation": "Cron resumed after controlled cutover; live readback 34/1/33/0, Sheet updates_needed=0.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
       "state": "scheduled",
       "next_run_at": "2026-08-06T19:11:00-04:00",
       "last_run_at": "2026-08-06T19:07:16.543387-04:00",
@@ -3559,16 +3559,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 25238,
-      "modified_at": "2026-08-06T19:00:03-04:00",
-      "sha256": "bff7fea40ea3bd69040aab6577e6dbf28b1214b027714b3f4c1600b2d3e78919",
+      "size_bytes": 25996,
+      "modified_at": "2026-08-06T21:43:39-04:00",
+      "sha256": "59c05969dd59e52a6659de5c3ca3ab600a4e122b5033df07c4a90eadd18caeaf",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Canonical procedure routes the eleventh operational app to B013, preserves B011/B012 retired exclusions and requires identity guards beyond immutable item pinning.",
-      "validation": "Runtime/versioned SHA-256 match; B013 route, command, state, channel, cron and fail-closed guard documented.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
-      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
+      "description": "Canonical route pack now declares N/APP PROVISORIO active, M historical, <=50-ID Graph chunks and all-numeric fail-closed Sheet safety.",
+      "validation": "Runtime/versioned SHA-256 match.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -4827,32 +4827,32 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "size_bytes": 38681,
-      "modified_at": "2026-08-06T18:59:43-04:00",
-      "sha256": "4457d117c74bcc0cba3b62747d1ac8d90507b04999aeb2d55222c88fa7459bfb",
+      "size_bytes": 38965,
+      "modified_at": "2026-08-06T21:18:15-04:00",
+      "sha256": "db99dbe3fc3060577c14b5b3cf741cc3f81421c9bf3421af8e76bf7b408ca561",
       "cron_job_id": "498fb0d95e10",
       "schedule": "2-59/9 0,8-23 * * *",
-      "description": "B013 DTR/ChatPion monitor pinned by immutable 1Password item ID and fail-closed on app_name/channel drift; Service Account-only Sheet reconciliation and bounded Discord 429 retry.",
-      "validation": "Syntax PASS; unique credential metadata + Graph app HTTP 200/id match; dry/live rc=0; B013 Discord readback; scheduled 19:02 ET cycle ok with 35/1/33/1.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
-      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
+      "description": "B013 DTR/ChatPion monitor. Reads A:N and selects APP PROVISORIO=B013 using canonical Service Account; required-header and credential identity guards fail closed.",
+      "validation": "Shell + embedded Python PASS; exact parser selected 34 N rows; live 34 targets / 1 linked / 33 confirmed unlinked / 0 unknown / zero Sheet delta.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
       "id": "zeus-meta-app-b013-dtr-cutover-reference-20260806",
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
-      "size_bytes": 4987,
-      "modified_at": "2026-08-06T19:09:37-04:00",
-      "sha256": "5ced9df4721e00013caf29887d037a4904692b5043b081f68149f4586e924acc",
+      "size_bytes": 5223,
+      "modified_at": "2026-08-06T21:43:48-04:00",
+      "sha256": "0d299576f2ad3dbe188838008763c17017672654985b3aa4bd38917dc5653378",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Canonical B012-retired to B013 cutover, credential-reuse race, fail-closed guard and live validation.",
-      "validation": "Runtime/versioned hash match; registry pointer and live Discord/cron/state readbacks PASS.",
-      "updated_at": "2026-08-06T19:13:17-04:00",
-      "source_report": "REPORT-INFRA Zeus B012 to B013 DTR cutover 2026-08-06"
+      "description": "B012→B013 cutover reference with explicit later supersession to N/APP PROVISORIO.",
+      "validation": "Runtime/versioned SHA-256 match.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
     },
     {
       "id": "zeus-meta-app-b012-to-b013-cutover-backup-20260806",
@@ -4870,6 +4870,32 @@
       "purpose": "Rollback/audit snapshot before B012 retirement guard, B013 runtime creation, generic exclusion and documentation cutover.",
       "validation": "Directory and listed artifacts exist; captured before production writes.",
       "updated_at": "2026-08-06T19:13:17-04:00"
+    },
+    {
+      "id": "zeus-meta-app-sheet-column-n-reference-20260806",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
+      "size_bytes": 3457,
+      "modified_at": "2026-08-06T21:44:18-04:00",
+      "sha256": "18b419230dfc569a57f6f3e7d61ea39c2d5b2ef6b1513ef92b9f2c1c9d18e22c",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Canonical M→N assignment supersession, live Sheet distribution, B005-2 chunked identity fix and rollback.",
+      "validation": "Runtime/versioned hash match; knowledge registry points to reference; live Sheet/Discord/state readbacks PASS.",
+      "updated_at": "2026-08-06T21:46:01-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
+    },
+    {
+      "id": "zeus-meta-app-sheet-column-n-backup-20260806",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/meta-app-sheet-column-n-20260806-211755",
+      "purpose": "Pre-cutover scripts, states, inventory and skill reference plus isolated dry-run harnesses for M→N assignment and B005-2 identity fix.",
+      "validation": "Backup directory and pre-change artifacts read back before production writes.",
+      "updated_at": "2026-08-06T21:46:01-04:00"
     }
   ],
   "profile_skill_references": [
@@ -8373,9 +8399,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 39259,
-      "md5": "a1cf27096acb83a192c75a73c6c1eb7f",
-      "modified_at": "2026-08-06T19:10:29-04:00"
+      "size_bytes": 39985,
+      "md5": "2cb301920a353b44f3325ece368aa82f",
+      "modified_at": "2026-08-06T21:44:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -8409,9 +8435,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 35631,
-      "md5": "06b132271b28e1ca0080e6a48a185e66",
-      "modified_at": "2026-08-06T19:07:16-04:00"
+      "size_bytes": 34399,
+      "md5": "58f9a60f99a88a0039e2ee2685acb2d8",
+      "modified_at": "2026-08-06T21:34:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -8529,9 +8555,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 18620,
-      "md5": "68af93513ee3c71a2eb0ce8f95039abb",
-      "modified_at": "2026-08-06T18:56:55-04:00"
+      "size_bytes": 19309,
+      "md5": "4ebadaf701c41a6dd149507bdaa3cfcb",
+      "modified_at": "2026-08-06T21:45:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -8565,9 +8591,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 88785,
-      "md5": "0a74ce4941ec30f22923eaa7b4cebdcc",
-      "modified_at": "2026-08-06T18:55:42-04:00"
+      "size_bytes": 107071,
+      "md5": "d26330a95a14346ad8c24d16ae889a7c",
+      "modified_at": "2026-08-06T21:40:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
