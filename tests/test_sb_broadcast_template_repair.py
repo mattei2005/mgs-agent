@@ -7,6 +7,7 @@ import sys
 import tempfile
 import threading
 import unittest
+from unittest import mock
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 SCRIPT = pathlib.Path('/root/mgs-agent/scripts/sb-broadcast-template-repair.py')
@@ -137,6 +138,22 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(payload['content'], '')
         self.assertEqual(payload['allowed_mentions']['parse'], [])
         self.assertLessEqual(len(payload['embeds'][0]['fields']), 25)
+
+    def test_notification_failure_does_not_abort_repair_state(self):
+        item = {'template_id': '10', 'template': 'Site'}
+        with mock.patch.object(repair, 'post_event', side_effect=RuntimeError('http_503')):
+            with mock.patch.object(repair, 'append_log'):
+                self.assertIsNone(repair.safe_post_event({}, {}, 'started', item))
+                self.assertIn('http_503', item['notify_error'])
+
+    def test_daily_capacity_counts_already_started_templates(self):
+        state = {'templates': {
+            'a': {'last_started_date': '2026-08-07'},
+            'b': {'last_started_date': '2026-08-07'},
+            'c': {'last_started_date': '2026-08-06'},
+        }}
+        self.assertEqual(repair.remaining_daily_capacity(state, 6, '2026-08-07'), 4)
+        self.assertEqual(repair.remaining_daily_capacity(state, 1, '2026-08-07'), 0)
 
 
 class CaptureHandler(BaseHTTPRequestHandler):

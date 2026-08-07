@@ -3,6 +3,7 @@ import importlib.util
 import json
 import pathlib
 import unittest
+from unittest import mock
 
 SCRIPT = pathlib.Path('/root/mgs-agent/scripts/sb-utility-candidate-approval.py')
 spec = importlib.util.spec_from_file_location('candidate_approval', SCRIPT)
@@ -96,37 +97,25 @@ class CandidateApprovalTests(unittest.TestCase):
         self.assertEqual(selected, [])
 
     def test_notification_failure_does_not_raise(self):
-        original_notify = candidate.notify
-        original_log = candidate.append_log
-        try:
-            candidate.notify = lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError('http_503'))
-            candidate.append_log = lambda *args, **kwargs: None
-            item = {'vertical': 'GB-CC-EN'}
-            self.assertIsNone(candidate.safe_notify({}, 'completed', item))
-            self.assertIn('http_503', item['notify_error'])
-        finally:
-            candidate.notify = original_notify
-            candidate.append_log = original_log
+        with mock.patch.object(candidate, 'notify', side_effect=RuntimeError('http_503')):
+            with mock.patch.object(candidate, 'append_log'):
+                item = {'vertical': 'GB-CC-EN'}
+                self.assertIsNone(candidate.safe_notify({}, 'completed', item))
+                self.assertIn('http_503', item['notify_error'])
 
     def test_stage_promotion_is_idempotent_after_transport_failure(self):
         import tempfile
-        original_path = candidate.CONFIG_PATH
-        original_log = candidate.append_log
-        try:
-            with tempfile.TemporaryDirectory() as directory:
-                candidate.CONFIG_PATH = pathlib.Path(directory) / 'config.json'
-                candidate.append_log = lambda *args, **kwargs: None
-                config = {'stage': 'staged', 'auto_promote': True}
-                state = {'verticals': {
-                    'A': {'stage': 'staged', 'status': 'completed'},
-                    'B': {'stage': 'staged', 'status': 'completed'},
-                }}
-                self.assertTrue(candidate.promote_stage_if_complete(config, state))
-                self.assertEqual(config['stage'], 'full')
-                self.assertFalse(candidate.promote_stage_if_complete(config, state))
-        finally:
-            candidate.CONFIG_PATH = original_path
-            candidate.append_log = original_log
+        with tempfile.TemporaryDirectory() as directory:
+            with mock.patch.object(candidate, 'CONFIG_PATH', pathlib.Path(directory) / 'config.json'):
+                with mock.patch.object(candidate, 'append_log'):
+                    config = {'stage': 'staged', 'auto_promote': True}
+                    state = {'verticals': {
+                        'A': {'stage': 'staged', 'status': 'completed'},
+                        'B': {'stage': 'staged', 'status': 'completed'},
+                    }}
+                    self.assertTrue(candidate.promote_stage_if_complete(config, state))
+                    self.assertEqual(config['stage'], 'full')
+                    self.assertFalse(candidate.promote_stage_if_complete(config, state))
 
 
 if __name__ == '__main__':

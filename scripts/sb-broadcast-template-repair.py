@@ -553,6 +553,24 @@ def post_event(state: dict, config: dict, event: str, item: dict, dry_run: bool 
     return message_id
 
 
+def safe_post_event(state: dict, config: dict, event: str, item: dict, dry_run: bool = False) -> str | None:
+    try:
+        return post_event(state, config, event, item, dry_run=dry_run)
+    except Exception as exc:
+        item['notify_error'] = f'{type(exc).__name__}:{str(exc)[:300]}'
+        append_log('discord_notify_failed', event_name=event, template_id=item.get('template_id'), template=item.get('template'), error=item['notify_error'])
+        return None
+
+
+def remaining_daily_capacity(state: dict, configured_limit: int, today: str) -> int:
+    started_today = sum(
+        1
+        for item in state.get('templates', {}).values()
+        if item.get('last_started_date') == today
+    )
+    return max(0, int(configured_limit) - started_today)
+
+
 async def capture_live():
     return await rollout.capture_rows_headers()
 
@@ -654,7 +672,7 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
             candidates = candidates[:1]
         else:
             raw_limit = config.get('staged_templates_per_day') if config.get('stage') == 'staged' else config.get('full_templates_per_day')
-            limit = int(raw_limit or 3)
+            limit = remaining_daily_capacity(state, int(raw_limit or 3), now_sp().date().isoformat())
             candidates = candidates[:limit]
         for candidate in candidates:
             row = candidate['row']; plan = candidate['plan']; key = row_id(row); name = str(row.get('NAME') or '')
@@ -688,7 +706,7 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                 item['dry_run'] = True
                 run['templates'].append(item)
                 if notify:
-                    post_event(state, config, 'started', item, dry_run=dry_notify)
+                    safe_post_event(state, config, 'started', item, dry_run=dry_notify)
                 continue
             stamp = started.strftime('%Y%m%d-%H%M%S')
             backup_path = BACKUP_ROOT / stamp / f'{safe_backup_name(name)}-before.json'
@@ -731,9 +749,10 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
             atomic_json(BANK_PATH, bank)
             # Persist the pending Approval before external notification. A Discord
             # transport failure must never make the checker lose the live cycle.
+            state['updated_at_sp'] = iso_sp()
             atomic_json(STATE_PATH, state)
             if notify:
-                item['discord_message_id'] = post_event(state, config, 'started', item, dry_run=dry_notify)
+                item['discord_message_id'] = safe_post_event(state, config, 'started', item, dry_run=dry_notify)
             atomic_json(STATE_PATH, state)
             run['templates'].append(item)
             append_log('template_started', template_id=key, template=name, pages=pages, cycle=cycle, action=plan['action'], before=plan['before'], due_at_sp=item['due_at_sp'])
@@ -801,7 +820,7 @@ async def check_due(notify: bool, dry_notify: bool = False) -> dict:
             state['updated_at_sp'] = iso_sp()
             atomic_json(STATE_PATH, state)
             if notify:
-                item['discord_result_message_id'] = post_event(state, config, event, item, dry_run=dry_notify)
+                item['discord_result_message_id'] = safe_post_event(state, config, event, item, dry_run=dry_notify)
                 atomic_json(STATE_PATH, state)
             results.append({'template_id': item['template_id'], 'event': event, 'after': item.get('after'), 'status': item['status']})
             append_log('template_readback', template_id=item['template_id'], template=item.get('template'), cycle=item.get('cycle'), outcome=event, before=item.get('before'), after=item.get('after'))
@@ -847,7 +866,7 @@ def daily_digest(notify: bool, dry_notify: bool = False) -> dict:
         rows.append(f"{compact_template_name(item.get('template') or '', 42):<42} | {before.get('verde',0):>2}→{after.get('verde','-'):>2} Vd | {before.get('vermelho',0):>2}→{after.get('vermelho','-'):>2} Vm | {before.get('roxo',0):>2}→{after.get('roxo','-'):>2} Rx | {item.get('status','-')}")
     summary = '```\nTemplate                                   | Verde | Verm. | Roxo  | Estado\n' + '\n'.join(rows) + '\n```' if rows else 'Nenhum template processado hoje.'
     item = {'processed': len(items), 'positive': positive, 'blocked': blocked, 'summary': summary, 'template_id': 'daily', 'cycle': today}
-    message_id = post_event(state, config, 'daily', item, dry_run=dry_notify) if notify else None
+    message_id = safe_post_event(state, config, 'daily', item, dry_run=dry_notify) if notify else None
     atomic_json(STATE_PATH, state)
     return {'status': 'ok', 'processed': len(items), 'positive': positive, 'blocked': blocked, 'message_id': message_id}
 
