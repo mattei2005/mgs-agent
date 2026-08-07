@@ -423,12 +423,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Dispatcher autorizado das 08:00 usa o catálogo reposto; acompanhar o canário pendente de ZA e os ciclos de aprovação sem reutilizar candidates pending/completed ou já aprovadas/rejeitadas no banco.",
-      "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies quando o banco for insuficiente",
-      "source": "Discord thread 1535306062457081926; runtime plan 2026-08-07T13:02:24-03:00; data/sb-utility-generated-candidates.json",
-      "state": "catálogo model-written reposto em 2026-08-07 com 13 novas candidates: gb-cc-en +3, mx-cc-es +3, us-job-es +3 e za-cc-en +4. readback local confirmou 8/4/5/4 candidates disponíveis respectivamente, cobrindo o maior déficit live mais 3 reservas; za mantém 1 candidate anterior pending e foi excluída da disponibilidade. nenhum template smart bidding foi alterado, staged ou aprovado nesta rotina.",
+      "next_step": "Cron de 15 minutos fará readback dos dois templates de produção pendentes após 20:55 SP; dispatcher diário continuará a fila sem bloqueios locais",
+      "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
+      "source": "discord:1535311753192153139",
+      "state": "deployed_full_candidate_rollout_production_readback_pending",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-07T16:05:05+00:00"
+      "updated_at": "2026-08-07T22:30:45+00:00"
     },
     {
       "agent": "zeus",
@@ -482,5 +482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T16:05:05+00:00"
+  "updated_at": "2026-08-07T22:30:45+00:00"
 }
