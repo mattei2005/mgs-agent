@@ -393,12 +393,12 @@
     {
       "agent": "zeus",
       "id": "openzed-routing-four-markets-20260808",
-      "next_step": "Aplicar sequencialmente os quatro mercados com guardas de concorrência e readback após cada pool.",
+      "next_step": "Nenhuma execução pendente; AdOps não possui parâmetro pendente nestes quatro mercados.",
       "objective": "Aplicar o padrão de cinco URLs nos pools Drip e Broadcast de OpenzedFinanzas ES-CC-ES, OpenzedFinanzas US-CC-ES, Openzed GB-CC-EN e Openzed US-CC-EN.",
-      "source": "discord:thread:1534759161642881144; message:1535638288310730786; /root/mgs-agent/work/sb-smart-routing/20260808T132308Z-openzed-four-markets-live-preflight",
-      "state": "preflight concluído: 20/20 urls http 200; quatro mercados com 30 identidades drip e 23 broadcast; operações resolvidas live por source, incluindo milestone us pelo catálogo ui; quatro dry-runs aprovados; nenhuma escrita ainda.",
+      "source": "discord:thread:1534759161642881144; message:1535638288310730786; report:1535642968877301925; evidence:20260808T132949Z,20260808T133005Z,20260808T133020Z,20260808T133035Z",
+      "state": "concluído: quatro mercados em drip 001-006 e broadcast 001-005; 20 urls, 212 rotas, 212 operações jbf preenchidas, 25 pools criados, 19 atualizados, zero excluídos; readback independente 4/4 e report-infra 1535642968877301925 validados.",
       "thread_id": "1534759161642881144",
-      "updated_at": "2026-08-08T13:29:44+00:00"
+      "updated_at": "2026-08-08T13:39:43+00:00"
     },
     {
       "agent": "zeus",
@@ -502,5 +502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-08T13:32:32+00:00"
+  "updated_at": "2026-08-08T13:39:43+00:00"
 }

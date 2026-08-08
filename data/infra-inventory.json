@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-08T09:29:11-04:00",
+    "updated_at": "2026-08-08T09:35:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -4942,6 +4942,242 @@
       "authorization_message_id": "1535639424023531631",
       "validation": "py_compile PASS; dry-run PASS; live apply PASS; canary write/readback/restore PASS; 157/215 rows matched; exact-cent readback total 256041.35; cron readback exact.",
       "updated_at": "2026-08-08T09:28:01-04:00"
+    },
+    {
+      "id": "openzedfinanzas-es-cc-es-smart-routing-five-url-20260808",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "openzedfinanzas",
+      "market": "ES-CC-ES",
+      "authorized_message_id": "1535638288310730786",
+      "applied_at": "2026-08-08T09:35:42-04:00",
+      "drip_pool_ids": [
+        833,
+        834,
+        835,
+        992,
+        993,
+        994
+      ],
+      "broadcast_pool_ids": [
+        836,
+        837,
+        995,
+        996,
+        997
+      ],
+      "created_pool_ids": [
+        995,
+        996,
+        997,
+        992,
+        993,
+        994
+      ],
+      "updated_pool_ids": [
+        836,
+        837,
+        833,
+        834,
+        835
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://finanzas.openzed.com/rec-es-tarjeta-bbva-visa-gold",
+        "https://finanzas.openzed.com/rec-es-tarjeta-bbva-aqua-mas",
+        "https://finanzas.openzed.com/rec-es-tarjeta-santander-classica",
+        "https://finanzas.openzed.com/rec-es-tarjeta-wizink-now",
+        "https://finanzas.openzed.com/rec-es-tarjeta-openbank-visa-opencredit"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T132949Z-openzedfinanzas-es-cc-es-five-url-pools",
+      "summary_sha256": "edfb757a27378c94a30f8e3f7619047bacd509b2e82dcd8c10b642dd7f9b5662",
+      "readback_sha256": "b552ba2594b736774299d7a02b0530c0953511e77b2ee603178ecff276bd831b",
+      "unrelated_pools_unchanged": true,
+      "validation": "44-pool batch used live route operations; Openzed US Milestone operation resolved from live UI catalog; independent exact readback PASS."
+    },
+    {
+      "id": "openzedfinanzas-us-cc-es-smart-routing-five-url-20260808",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "openzedfinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1535638288310730786",
+      "applied_at": "2026-08-08T09:35:42-04:00",
+      "drip_pool_ids": [
+        818,
+        824,
+        998,
+        999,
+        1000,
+        1001
+      ],
+      "broadcast_pool_ids": [
+        825,
+        826,
+        1002,
+        1003,
+        1004
+      ],
+      "created_pool_ids": [
+        1002,
+        1003,
+        1004,
+        998,
+        999,
+        1000,
+        1001
+      ],
+      "updated_pool_ids": [
+        825,
+        826,
+        818,
+        824
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+        "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+        "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+        "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+        "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-mastercard-macro"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133005Z-openzedfinanzas-us-cc-es-five-url-pools",
+      "summary_sha256": "d257950f5c10b5641a2fb8763be7425341b18ce0addf1c7c6d0ae982c307e977",
+      "readback_sha256": "0c0f78bbd60c7db1ef84ba8bf74bd91b78bf9bc9619f19dccde45bebaa6c6ce1",
+      "unrelated_pools_unchanged": true,
+      "validation": "44-pool batch used live route operations; Openzed US Milestone operation resolved from live UI catalog; independent exact readback PASS."
+    },
+    {
+      "id": "openzed-gb-cc-en-smart-routing-five-url-20260808",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "openzed",
+      "market": "GB-CC-EN",
+      "authorized_message_id": "1535638288310730786",
+      "applied_at": "2026-08-08T09:35:42-04:00",
+      "drip_pool_ids": [
+        827,
+        828,
+        829,
+        1005,
+        1006,
+        1007
+      ],
+      "broadcast_pool_ids": [
+        830,
+        831,
+        832,
+        1008,
+        1009
+      ],
+      "created_pool_ids": [
+        1008,
+        1009,
+        1005,
+        1006,
+        1007
+      ],
+      "updated_pool_ids": [
+        830,
+        831,
+        832,
+        827,
+        828,
+        829
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://openzed.com/rec-gb-cc-aib-visa-gold",
+        "https://openzed.com/rec-gb-cc-fluid-credit-card-the-flexible",
+        "https://openzed.com/rec-gb-cc-santander-all-in-one",
+        "https://openzed.com/rec-gb-cc-chase-credit-card",
+        "https://openzed.com/rec-gb-cc-virgin-money-balance-transfer"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133020Z-openzed-gb-cc-en-five-url-pools",
+      "summary_sha256": "6814eb8b09c8dbbce93334da213634d5f5b43c97f1ddbb9ad3eddd5e94bff65b",
+      "readback_sha256": "08f789684cfdce0b988dfaf1da50a7b8275ba213f9a413f9b846cc8764cf600c",
+      "unrelated_pools_unchanged": true,
+      "validation": "44-pool batch used live route operations; Openzed US Milestone operation resolved from live UI catalog; independent exact readback PASS."
+    },
+    {
+      "id": "openzed-us-cc-en-smart-routing-five-url-20260808",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "openzed",
+      "market": "US-CC-EN",
+      "authorized_message_id": "1535638288310730786",
+      "applied_at": "2026-08-08T09:35:42-04:00",
+      "drip_pool_ids": [
+        817,
+        823,
+        1010,
+        1011,
+        1012,
+        1013
+      ],
+      "broadcast_pool_ids": [
+        821,
+        822,
+        1014,
+        1015,
+        1016
+      ],
+      "created_pool_ids": [
+        1014,
+        1015,
+        1016,
+        1010,
+        1011,
+        1012,
+        1013
+      ],
+      "updated_pool_ids": [
+        821,
+        822,
+        817,
+        823
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://openzed.com/rec-us-cc-bankamericard",
+        "https://openzed.com/rec-us-cc-first-digital-nextgen-mastercard",
+        "https://openzed.com/rec-us-cc-citi-double-cash",
+        "https://openzed.com/rec-us-cc-milestone-gold-mastercard",
+        "https://openzed.com/rec-us-cc-fit-mastercard"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133035Z-openzed-us-cc-en-five-url-pools",
+      "summary_sha256": "8455cbfd91eabf7503d516d8cd13e0df2e1c9f734311ee9d82f587fe49fe9086",
+      "readback_sha256": "85a35036374ced8a557efe374d3f1e95140fdfa5e7995d2cc5c3b5e424cb0438",
+      "unrelated_pools_unchanged": true,
+      "validation": "44-pool batch used live route operations; Openzed US Milestone operation resolved from live UI catalog; independent exact readback PASS."
     }
   ],
   "profile_skill_references": [
@@ -8463,15 +8699,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 42951,
-      "md5": "bdc9d4232f73462b66ed6f9306e86975",
-      "modified_at": "2026-08-08T09:27:38-04:00"
+      "size_bytes": 43113,
+      "md5": "365f35c58f81533a24acf822ee829381",
+      "modified_at": "2026-08-08T09:33:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 20420,
-      "md5": "57eb0ca3829e646a4805f482c91a2852",
-      "modified_at": "2026-08-08T09:27:00-04:00"
+      "md5": "ab23eccd64b201b3290d802bb5fe5384",
+      "modified_at": "2026-08-08T09:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -8500,8 +8736,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 34297,
-      "md5": "26624ccdb6902d5bea5fba2d58df4a83",
-      "modified_at": "2026-08-08T09:26:12-04:00"
+      "md5": "2b07172aea5b0fd3856003e2b818e75f",
+      "modified_at": "2026-08-08T09:35:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -8512,8 +8748,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 483,
-      "md5": "c11621475e3880a471869034be4cb8c1",
-      "modified_at": "2026-08-08T09:15:01-04:00"
+      "md5": "ef9144df7600087373f772d902cc6191",
+      "modified_at": "2026-08-08T09:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -8560,8 +8796,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1659,
-      "md5": "4447c1f938c1c30734fbe22ab245e8a5",
-      "modified_at": "2026-08-08T09:24:01-04:00"
+      "md5": "7b9585f44bbddc4e8383982a11a624bb",
+      "modified_at": "2026-08-08T09:34:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -8572,20 +8808,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 38224,
-      "md5": "930c31db6bb7739c73da9b653ddafce9",
-      "modified_at": "2026-08-08T09:25:02-04:00"
+      "md5": "955f1741955c8adc77352632039dd9d4",
+      "modified_at": "2026-08-08T09:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 25293,
-      "md5": "688c130a69c6b6de7e6b75c0e3509dac",
-      "modified_at": "2026-08-08T09:29:02-04:00"
+      "md5": "7074f50634843eeeba9ad07199c9a465",
+      "modified_at": "2026-08-08T09:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 356,
-      "md5": "76feb1941d198703db4e35a3790e2e9e",
-      "modified_at": "2026-08-08T09:29:02-04:00"
+      "size_bytes": 355,
+      "md5": "21430e42253823a682dd62000cef9d32",
+      "modified_at": "2026-08-08T09:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -8613,9 +8849,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 386747,
-      "md5": "5dfd4a3379d802b6b0a87907b7d7096a",
-      "modified_at": "2026-08-08T09:28:53-04:00"
+      "size_bytes": 394007,
+      "md5": "6161c14cfe2150322041fdf6d33f2187",
+      "modified_at": "2026-08-08T09:35:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -8656,8 +8892,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 112602,
-      "md5": "99e615e73efc455116faf1ed3b13ed7c",
-      "modified_at": "2026-08-08T09:28:03-04:00"
+      "md5": "1a68c9ee9f04b747093e065cef3e0107",
+      "modified_at": "2026-08-08T09:34:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -8801,7 +9037,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "cc37debe2ad48e85eca2cc905db5304f",
-      "modified_at": "2026-08-08T09:26:02-04:00"
+      "modified_at": "2026-08-08T09:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -8835,9 +9071,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2112,
-      "md5": "a580da479972178f53dfe42e431fcb37",
-      "modified_at": "2026-08-08T09:25:03-04:00"
+      "size_bytes": 2111,
+      "md5": "abdaa1ea5a1b8aa9db9ef5f42b752748",
+      "modified_at": "2026-08-08T09:35:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
