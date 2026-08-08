@@ -28,6 +28,14 @@ def message(mid, color='verde', text=None):
 
 
 class CandidateApprovalTests(unittest.TestCase):
+    def test_formatted_candidate_strips_first_name_placeholder(self):
+        formatted = candidate.formatted_candidate(
+            {'candidate_id': 'x', 'text': 'Hello {{first_name}}, your update is ready.', 'cta_1': 'OPEN'},
+            'US-CC-EN',
+        )
+        self.assertEqual(formatted['text'], 'Hello your update is ready.')
+        self.assertNotIn('{{first_name}}', formatted['text'])
+
     def test_stage_messages_preserves_links_and_replaces_tail(self):
         messages = [message(i) for i in range(1, 21)]
         candidates = [

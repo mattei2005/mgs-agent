@@ -100,8 +100,8 @@ def zero_width_words(text: str) -> str:
 
 
 def formatted_candidate(candidate: dict, vertical: str) -> dict:
-    text = str(candidate.get('text') or '').strip()
-    cta = str(candidate.get('cta_1') or '').strip()
+    text = repair.remove_first_name_placeholder(str(candidate.get('text') or '').strip())
+    cta = repair.remove_first_name_placeholder(str(candidate.get('cta_1') or '').strip())
     if vertical.endswith('-ES'):
         text = zero_width_words(text)
     return {

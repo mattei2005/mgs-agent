@@ -461,6 +461,7 @@ def build_repair(row: dict, bank: dict) -> dict:
     return {
         'action': action, 'before': before, 'messages': prepared,
         'replaced_slots': replaced_slots, 'duplicate_slots': sorted(duplicate_ids),
+        'sanitized_slots': sorted(placeholder_ids),
         'deficit': 0, 'reason': None,
     }
 
@@ -504,6 +505,7 @@ def classify_rows(rows: list[dict], bank: dict, config: dict, state: dict) -> li
             'replace_red_duplicates_reset',
             'replace_duplicates_reset',
             'reset_purple',
+            'sanitize_first_name_reset',
         }:
             continue
         before = plan['before']
@@ -720,6 +722,7 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                 'template_id': key, 'template': name, 'vertical': parse_vertical(name), 'pages': pages,
                 'cycle': cycle, 'stage': config.get('stage'), 'before': plan['before'], 'action': plan['action'],
                 'replaced_slots': [slot['message_id'] for slot in plan.get('replaced_slots', [])],
+                'sanitized_slots': plan.get('sanitized_slots', []),
                 'content_hash_before': content_hash(messages_before), 'content_hash_after': content_hash(plan['messages']),
                 'approval_started_at_sp': iso_sp(started), 'due_at_sp': iso_sp(due),
                 'no_progress_cycles': int(old.get('no_progress_cycles') or 0),
@@ -735,6 +738,9 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
                     noun = 'duplicada substituída' if duplicate_count == 1 else 'duplicadas substituídas'
                     parts.append(f'{duplicate_count} {noun}')
                 item['action_label'] = ', '.join(parts) + ', reset global e Run Approval'
+            elif plan['action'] == 'sanitize_first_name_reset':
+                count = len(plan.get('sanitized_slots') or [])
+                item['action_label'] = f'{{{{first_name}}}} removido de {count} mensagens, reset global e Run Approval'
             else:
                 item['action_label'] = 'Conteúdo preservado, reset global do log e Run Approval'
             item['next_step'] = f"Aguardar ETA; readback automático após {due.strftime('%H:%M')} SP."

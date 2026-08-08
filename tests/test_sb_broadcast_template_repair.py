@@ -56,6 +56,22 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(plan['action'], 'skip_green')
         self.assertEqual(repair.content_hash(plan['messages']), repair.content_hash(repair.parse_messages(row)))
 
+    def test_first_name_placeholder_is_removed_and_forces_reset(self):
+        row = template(['verde'] * 30)
+        messages = repair.parse_messages(row)
+        messages[0]['TEXT'] = 'Congratulations, {{first_name}}! Your card is ready.'
+        messages[1]['TEXT'] = '— {{first_name}}, your request is ready.'
+        row['MESSAGES'] = json.dumps(messages)
+        links = repair.link_map(messages)
+        plan = repair.build_repair(row, bank_for([row]))
+        self.assertEqual(plan['action'], 'sanitize_first_name_reset')
+        self.assertEqual(plan['sanitized_slots'], [1, 2])
+        self.assertEqual(plan['messages'][0]['TEXT'], 'Congratulations! Your card is ready.')
+        self.assertEqual(plan['messages'][1]['TEXT'], '— your request is ready.')
+        self.assertNotIn('{{first_name}}', json.dumps(plan['messages']))
+        self.assertEqual(repair.link_map(plan['messages']), links)
+        self.assertEqual(repair.counts_for(plan['messages'])['cinza'], 30)
+
     def test_red_batch_replaced_links_preserved_and_all_statuses_removed(self):
         colors = ['verde'] * 20 + ['vermelho'] * 4 + ['roxo'] * 6
         row = template(colors)
@@ -118,6 +134,18 @@ class RepairTests(unittest.TestCase):
         candidates = repair.approved_candidates(bank, 'US-CC-EN', set(), set())
         texts = [repair.normalized(item['text']) for item in candidates]
         self.assertEqual(len(texts), len(set(texts)))
+
+    def test_approved_candidates_reject_first_name_placeholder(self):
+        bank = bank_for([])
+        msg = {'TEXT': 'Hello {{first_name}}', 'CTA_1': 'OPEN'}
+        key = repair.text_cta_hash(msg)
+        bank['records'][key] = {
+            'text_cta_hash': key, 'vertical': 'US-CC-EN', 'text': msg['TEXT'],
+            'cta_1': msg['CTA_1'], 'approved_count': 10, 'rejected_count': 0,
+            'last_approved_at': '2026-08-08T00:00:00-04:00',
+        }
+        candidates = repair.approved_candidates(bank, 'US-CC-EN', set(), set())
+        self.assertTrue(all('{{first_name}}' not in item['text'] for item in candidates))
 
     def test_bank_preserves_ever_green_on_purple(self):
         bank = {'records': {}}

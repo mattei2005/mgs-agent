@@ -52,6 +52,7 @@ DESCRIPTIONS = {
     'monitor-op-rate-limit.py': 'Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.',
     'monitor-hermes-memory-capacity.py': 'Compacta USER/MEMORY automaticamente de >=90% para <=85% com backup, validação semântica, rollback/readback e alerta metadata-only em #limites-90.',
     'sync-sb-sms-revenue-daily.sh': 'Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert/readback e uma retentativa automática após 5 minutos para falhas transitórias.',
+    'sync-sb-messenger-revenue-sheet.py': 'Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.',
 }
 
 RISK = {
@@ -84,6 +85,7 @@ RISK = {
     'monitor-op-rate-limit.py': 'baixo: consulta read-only + alerta Discord por transição',
     'monitor-hermes-memory-capacity.py': 'médio: reescreve USER/MEMORY somente após gates fail-closed e backup protegido',
     'sync-sb-sms-revenue-daily.sh': 'médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback',
+    'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
 }
 
 OWNER = {
@@ -98,6 +100,7 @@ OWNER = {
     'monitor-hermes-memory-capacity.py': 'Zeus/Infra',
     'hermes-context-cost-audit.py': 'Zeus/Infra',
     'sync-sb-sms-revenue-daily.sh': 'Zeus/Revenue Tech',
+    'sync-sb-messenger-revenue-sheet.py': 'Zeus/Revenue Tech',
 }
 
 

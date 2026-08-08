@@ -6087,7 +6087,7 @@
   "duplicate_policy": "candidate bank message must be skipped when same TEXT+CTA already exists in the live template; do not include LINK in duplicate key",
   "purple_policy": "do_not_touch_globally; investigate page/segurador/app/block cause; controlled single-template test only",
   "alert_channel_templates_broadcast": "1522487422510694450",
-  "last_text_sanitization_et": "2026-07-03T14:16:40-04:00",
-  "last_text_sanitization_rule": "Removed {{first_name}} and hyphen/dash chars from TEXT only for linked-template workflow; CTAs/links untouched.",
-  "updated_at_et": "2026-07-10T00:00:26-04:00"
+  "last_text_sanitization_et": "2026-08-08T10:26:11-03:00",
+  "last_text_sanitization_rule": "Removed {{first_name}} from all message string fields across every digital-trust and digital-trust-2 Broadcast Template row, including linked, unlinked, test and NAO USAR; IDs, links and counts preserved; linked rows sent to Approval; full-scope live readback confirmed zero remaining occurrences.",
+  "updated_at_et": "2026-08-08T09:26:11-04:00"
 }
