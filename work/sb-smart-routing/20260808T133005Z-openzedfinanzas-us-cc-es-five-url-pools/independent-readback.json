@@ -1,0 +1,120 @@
+{
+  "status": "success",
+  "market": "openzedfinanzas-us-cc-es",
+  "http": 201,
+  "publisher_pool_count": 22,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        818,
+        824,
+        998,
+        999,
+        1000,
+        1001
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "finanzas.openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "opf-us-cc-es-drip 001",
+          "id": 818,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-drip 002",
+          "id": 824,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-drip 003",
+          "id": 998,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-drip 004",
+          "id": 999,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-drip 005",
+          "id": 1000,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-drip 006",
+          "id": 1001,
+          "routes": 5
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        825,
+        826,
+        1002,
+        1003,
+        1004
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "finanzas.openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "opf-us-cc-es-mct 001",
+          "id": 825,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-mct 002",
+          "id": 826,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-mct 003",
+          "id": 1002,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-mct 004",
+          "id": 1003,
+          "routes": 5
+        },
+        {
+          "name": "opf-us-cc-es-mct 005",
+          "id": 1004,
+          "routes": 3
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133005Z-openzedfinanzas-us-cc-es-five-url-pools"
+}

@@ -1,0 +1,146 @@
+{
+  "status": "success",
+  "authorized_message_id": "1535638288310730786",
+  "market": "openzedfinanzas-us-cc-es",
+  "before_count": 15,
+  "target_pool_ids": [
+    818,
+    824,
+    825,
+    826
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-mastercard-macro"
+  ],
+  "unrelated_pools_guarded": 11,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133005Z-openzedfinanzas-us-cc-es-five-url-pools",
+  "manifest_hash": "88e254a69f64f885ad353a7c2bcbc6a7d5bb413fadd719e0496ceb1613ad9c72",
+  "after_count": 22,
+  "created": 7,
+  "updated": 4,
+  "already_correct": 0,
+  "deleted": 0,
+  "results": [
+    {
+      "id": 825,
+      "name": "opf-us-cc-es-mct 001",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 826,
+      "name": "opf-us-cc-es-mct 002",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 1002,
+      "name": "opf-us-cc-es-mct 003",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1003,
+      "name": "opf-us-cc-es-mct 004",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1004,
+      "name": "opf-us-cc-es-mct 005",
+      "route_count": 3,
+      "family": "broadcast",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 818,
+      "name": "opf-us-cc-es-drip 001",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 824,
+      "name": "opf-us-cc-es-drip 002",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 998,
+      "name": "opf-us-cc-es-drip 003",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 999,
+      "name": "opf-us-cc-es-drip 004",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1000,
+      "name": "opf-us-cc-es-drip 005",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1001,
+      "name": "opf-us-cc-es-drip 006",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "006",
+      "action": "created",
+      "http": 201
+    }
+  ],
+  "unrelated_pools_unchanged": true
+}

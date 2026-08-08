@@ -1,0 +1,120 @@
+{
+  "status": "success",
+  "market": "openzed-gb-cc-en",
+  "http": 201,
+  "publisher_pool_count": 22,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        827,
+        828,
+        829,
+        1005,
+        1006,
+        1007
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "op-gb-cc-en-drip 001",
+          "id": 827,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-drip 002",
+          "id": 828,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-drip 003",
+          "id": 829,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-drip 004",
+          "id": 1005,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-drip 005",
+          "id": 1006,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-drip 006",
+          "id": 1007,
+          "routes": 5
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        830,
+        831,
+        832,
+        1008,
+        1009
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "op-gb-cc-en-mct 001",
+          "id": 830,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-mct 002",
+          "id": 831,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-mct 003",
+          "id": 832,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-mct 004",
+          "id": 1008,
+          "routes": 5
+        },
+        {
+          "name": "op-gb-cc-en-mct 005",
+          "id": 1009,
+          "routes": 3
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133020Z-openzed-gb-cc-en-five-url-pools"
+}

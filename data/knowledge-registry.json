@@ -377,6 +377,23 @@
       "updated_at": "2026-07-21T15:21:56+00:00"
     },
     {
+      "canonical_key": "procedure.sb-utility.first-name-placeholder-ban",
+      "canonical_source": "profiles/zeus-skills/growth/meta-utility-template-approval/references/route-pack-08.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-08",
+      "id": "PROC-SB-UTILITY-FIRST-NAME-BAN",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ban {{first_name}} from all MGS Broadcast Template messages",
+      "updated_at": "2026-08-08T13:27:22+00:00"
+    },
+    {
       "canonical_key": "source.company-os",
       "canonical_source": "context/company-os.md",
       "consumers": [
@@ -613,5 +630,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T15:37:31+00:00"
+  "updated_at": "2026-08-08T13:27:22+00:00"
 }

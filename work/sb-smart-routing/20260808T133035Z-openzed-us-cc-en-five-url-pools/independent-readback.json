@@ -1,0 +1,120 @@
+{
+  "status": "success",
+  "market": "openzed-us-cc-en",
+  "http": 201,
+  "publisher_pool_count": 22,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        817,
+        823,
+        1010,
+        1011,
+        1012,
+        1013
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "op-us-cc-en-drip 001",
+          "id": 817,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-drip 002",
+          "id": 823,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-drip 003",
+          "id": 1010,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-drip 004",
+          "id": 1011,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-drip 005",
+          "id": 1012,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-drip 006",
+          "id": 1013,
+          "routes": 5
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        821,
+        822,
+        1014,
+        1015,
+        1016
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "openzed.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "op-us-cc-en-mct 001",
+          "id": 821,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-mct 002",
+          "id": 822,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-mct 003",
+          "id": 1014,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-mct 004",
+          "id": 1015,
+          "routes": 5
+        },
+        {
+          "name": "op-us-cc-en-mct 005",
+          "id": 1016,
+          "routes": 3
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted": 0,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T133035Z-openzed-us-cc-en-five-url-pools"
+}

@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-SB-FIRST-NAME-REMOVAL-20260808",
+      "next_step": "Automatic fixed-30 readback: Financeadx after 11:22 SP and Eggbev after 22:08 SP; report only validated outcomes/exceptions.",
+      "objective": "Remove {{first_name}} from every MGS Smart Bidding Broadcast Template message and prevent reintroduction",
+      "source": "logs/sb-remove-first-name-20260808-103221.json",
+      "state": "final live audit 10:32 sp: 108 digital-trust/digital-trust-2 rows scanned, 0 affected templates and 0 remaining occurrences. total executed: 53 templates, 758 messages, 3 approvals; production readbacks pending only for financeadx and eggbev.",
+      "thread_id": "1535306062457081926",
+      "updated_at": "2026-08-08T13:32:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "app-b013-cutover-20260806",
       "next_step": "Operação reconecta os 34 perfis pendentes ao B013; Zeus monitora ciclos ~9 min e limpa X automaticamente quando cada debug_token B013 ficar válido.",
       "objective": "Substituir B012 inativo por B013 no monitor DTR/ChatPion e canal 1522830283240505385 sem expor credenciais.",
@@ -383,12 +393,12 @@
     {
       "agent": "zeus",
       "id": "openzed-routing-four-markets-20260808",
-      "next_step": "Capturar os publishers Openzed/OpenzedFinanzas ao vivo, validar URLs/operações, executar dry-run e aplicar com readback independente.",
+      "next_step": "Aplicar sequencialmente os quatro mercados com guardas de concorrência e readback após cada pool.",
       "objective": "Aplicar o padrão de cinco URLs nos pools Drip e Broadcast de OpenzedFinanzas ES-CC-ES, OpenzedFinanzas US-CC-ES, Openzed GB-CC-EN e Openzed US-CC-EN.",
-      "source": "discord:thread:1534759161642881144; message:1535638288310730786",
-      "state": "iniciado: escopo autorizado por rodolfo; fontes canônicas e procedimento smart routing carregados; baseline live pendente.",
+      "source": "discord:thread:1534759161642881144; message:1535638288310730786; /root/mgs-agent/work/sb-smart-routing/20260808T132308Z-openzed-four-markets-live-preflight",
+      "state": "preflight concluído: 20/20 urls http 200; quatro mercados com 30 identidades drip e 23 broadcast; operações resolvidas live por source, incluindo milestone us pelo catálogo ui; quatro dry-runs aprovados; nenhuma escrita ainda.",
       "thread_id": "1534759161642881144",
-      "updated_at": "2026-08-08T13:21:23+00:00"
+      "updated_at": "2026-08-08T13:29:44+00:00"
     },
     {
       "agent": "zeus",
@@ -492,5 +502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-08T13:21:23+00:00"
+  "updated_at": "2026-08-08T13:32:32+00:00"
 }

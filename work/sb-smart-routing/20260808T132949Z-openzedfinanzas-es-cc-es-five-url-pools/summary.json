@@ -1,0 +1,147 @@
+{
+  "status": "success",
+  "authorized_message_id": "1535638288310730786",
+  "market": "openzedfinanzas-es-cc-es",
+  "before_count": 9,
+  "target_pool_ids": [
+    833,
+    834,
+    835,
+    836,
+    837
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://finanzas.openzed.com/rec-es-tarjeta-bbva-visa-gold",
+    "https://finanzas.openzed.com/rec-es-tarjeta-bbva-aqua-mas",
+    "https://finanzas.openzed.com/rec-es-tarjeta-santander-classica",
+    "https://finanzas.openzed.com/rec-es-tarjeta-wizink-now",
+    "https://finanzas.openzed.com/rec-es-tarjeta-openbank-visa-opencredit"
+  ],
+  "unrelated_pools_guarded": 4,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T132949Z-openzedfinanzas-es-cc-es-five-url-pools",
+  "manifest_hash": "704bab49dc332dcf7b5d4a52ba2efedd3bafc246311409be3233760f3828358a",
+  "after_count": 15,
+  "created": 6,
+  "updated": 5,
+  "already_correct": 0,
+  "deleted": 0,
+  "results": [
+    {
+      "id": 836,
+      "name": "opf-es-cc-es-mct 001",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 837,
+      "name": "opf-es-cc-es-mct 002",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 995,
+      "name": "opf-es-cc-es-mct 003",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 996,
+      "name": "opf-es-cc-es-mct 004",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 997,
+      "name": "opf-es-cc-es-mct 005",
+      "route_count": 3,
+      "family": "broadcast",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 833,
+      "name": "opf-es-cc-es-drip 001",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 834,
+      "name": "opf-es-cc-es-drip 002",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "002",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 835,
+      "name": "opf-es-cc-es-drip 003",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "003",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 992,
+      "name": "opf-es-cc-es-drip 004",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 993,
+      "name": "opf-es-cc-es-drip 005",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 994,
+      "name": "opf-es-cc-es-drip 006",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "006",
+      "action": "created",
+      "http": 201
+    }
+  ],
+  "unrelated_pools_unchanged": true
+}

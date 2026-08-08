@@ -1,0 +1,39 @@
+{
+  "status": "dry_run_ok",
+  "authorized_message_id": "1535638288310730786",
+  "market": "openzed-us-cc-en",
+  "before_count": 10,
+  "target_pool_ids": [
+    817,
+    821,
+    822,
+    823
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://openzed.com/rec-us-cc-bankamericard",
+    "https://openzed.com/rec-us-cc-first-digital-nextgen-mastercard",
+    "https://openzed.com/rec-us-cc-citi-double-cash",
+    "https://openzed.com/rec-us-cc-milestone-gold-mastercard",
+    "https://openzed.com/rec-us-cc-fit-mastercard"
+  ],
+  "unrelated_pools_guarded": 6,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T132916Z-openzed-us-cc-en-five-url-pools",
+  "manifest_hash": "33e8ebfecbfba169a029bedeed2d3989e3224362b16be087c285b4a6d921a70d"
+}

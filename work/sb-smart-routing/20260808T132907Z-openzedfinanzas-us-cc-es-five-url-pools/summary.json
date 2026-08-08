@@ -1,0 +1,39 @@
+{
+  "status": "dry_run_ok",
+  "authorized_message_id": "1535638288310730786",
+  "market": "openzedfinanzas-us-cc-es",
+  "before_count": 9,
+  "target_pool_ids": [
+    818,
+    824,
+    825,
+    826
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+    "https://finanzas.openzed.com/rec-us-cc-tarjeta-de-credito-mastercard-macro"
+  ],
+  "unrelated_pools_guarded": 5,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T132907Z-openzedfinanzas-us-cc-es-five-url-pools",
+  "manifest_hash": "88e254a69f64f885ad353a7c2bcbc6a7d5bb413fadd719e0496ceb1613ad9c72"
+}

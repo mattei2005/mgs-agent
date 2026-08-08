@@ -1,0 +1,40 @@
+{
+  "status": "dry_run_ok",
+  "authorized_message_id": "1535638288310730786",
+  "market": "openzedfinanzas-es-cc-es",
+  "before_count": 9,
+  "target_pool_ids": [
+    833,
+    834,
+    835,
+    836,
+    837
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://finanzas.openzed.com/rec-es-tarjeta-bbva-visa-gold",
+    "https://finanzas.openzed.com/rec-es-tarjeta-bbva-aqua-mas",
+    "https://finanzas.openzed.com/rec-es-tarjeta-santander-classica",
+    "https://finanzas.openzed.com/rec-es-tarjeta-wizink-now",
+    "https://finanzas.openzed.com/rec-es-tarjeta-openbank-visa-opencredit"
+  ],
+  "unrelated_pools_guarded": 4,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260808T132902Z-openzedfinanzas-es-cc-es-five-url-pools",
+  "manifest_hash": "704bab49dc332dcf7b5d4a52ba2efedd3bafc246311409be3233760f3828358a"
+}
