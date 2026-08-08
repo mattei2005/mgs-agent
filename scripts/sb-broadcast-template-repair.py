@@ -42,6 +42,7 @@ ET = ZoneInfo('America/New_York')
 MESSAGE_COUNT = 30
 SECONDS_PER_MESSAGE_PAGE = 12
 STATUS_FIELDS = ('APPROVED', 'INVALID_FORMAT', 'REJECTED', 'ERROR', 'REJECTED_REASON')
+FIRST_NAME_TOKEN = '{{first_name}}'
 ALLOWED_COMPANIES = {'digital-trust', 'digital-trust-2'}
 LIST_URL = 'https://api.jbfdigital.com.br/broadcast/Messenger?companies[]=digital-trust&companies[]=digital-trust-2&source=Messenger'
 
@@ -140,6 +141,29 @@ def visible(value: str) -> str:
 
 def normalized(value: str) -> str:
     return re.sub(r'\s+', ' ', visible(value).strip().lower())
+
+
+def remove_first_name_placeholder(value: str) -> str:
+    """Remove the forbidden Messenger placeholder without leaving bad punctuation."""
+    if FIRST_NAME_TOKEN not in (value or ''):
+        return value
+    result = re.sub(r',\s*\{\{first_name\}\}\s*!', '!', value)
+    result = re.sub(r'\{\{first_name\}\}\s*,\s*', '', result)
+    result = result.replace(FIRST_NAME_TOKEN, '')
+    result = re.sub(r'[ \t]+([,!?;:])', r'\1', result)
+    result = re.sub(r'([ \t]){2,}', ' ', result)
+    result = '\n'.join(line.rstrip() for line in result.split('\n'))
+    return re.sub(r'\n{3,}', '\n\n', result).strip()
+
+
+def sanitize_first_name_message(message: dict) -> tuple[dict, bool]:
+    result = deepcopy(message)
+    changed = False
+    for key, value in list(result.items()):
+        if isinstance(value, str) and FIRST_NAME_TOKEN in value:
+            result[key] = remove_first_name_placeholder(value)
+            changed = True
+    return result, changed
 
 
 def text_cta_hash(message: dict) -> str:
@@ -298,6 +322,8 @@ def approved_candidates(bank: dict, vertical: str, used_hashes: set[str], used_t
             continue
         text = record.get('text') or ''
         cta = record.get('cta_1') or ''
+        if FIRST_NAME_TOKEN in text or FIRST_NAME_TOKEN in cta:
+            continue
         if not text or not cta or normalized(text) in used_texts:
             continue
         candidates.append(record)
@@ -349,21 +375,29 @@ def build_repair(row: dict, bank: dict) -> dict:
         if status_color(message) == 'vermelho'
     }
     duplicate_ids = duplicate_replacement_ids(messages)
+    placeholder_ids = {
+        int(message.get('MESSAGE_ID') or 0)
+        for message in messages
+        if any(isinstance(value, str) and FIRST_NAME_TOKEN in value for value in message.values())
+    }
     target_ids = red_ids | duplicate_ids
     purple_slots = [message for message in messages if status_color(message) == 'roxo']
-    if before['verde'] == MESSAGE_COUNT and not duplicate_ids:
+    if before['verde'] == MESSAGE_COUNT and not duplicate_ids and not placeholder_ids:
         return {
             'action': 'skip_green', 'before': before, 'messages': messages,
             'replaced_slots': [], 'duplicate_slots': [], 'deficit': 0,
             'reason': 'template_100_percent_green_unique',
         }
-    if not target_ids and not purple_slots:
+    if not target_ids and not purple_slots and not placeholder_ids:
         return {
             'action': 'wait_gray', 'before': before, 'messages': messages,
             'replaced_slots': [], 'duplicate_slots': [], 'deficit': 0,
             'reason': 'no_red_purple_or_duplicates',
         }
-    prepared = [strip_status(message) for message in messages]
+    prepared = []
+    for message in messages:
+        sanitized, _ = sanitize_first_name_message(strip_status(message))
+        prepared.append(sanitized)
     replaced_slots = []
     if target_ids:
         retained = [
@@ -407,6 +441,8 @@ def build_repair(row: dict, bank: dict) -> dict:
             action = 'replace_red_reset'
         else:
             action = 'replace_duplicates_reset'
+    elif placeholder_ids:
+        action = 'sanitize_first_name_reset'
     else:
         action = 'reset_purple'
     texts = [normalized(message.get('TEXT') or '') for message in prepared]

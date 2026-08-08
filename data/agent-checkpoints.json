@@ -382,6 +382,16 @@
     },
     {
       "agent": "zeus",
+      "id": "openzed-routing-four-markets-20260808",
+      "next_step": "Capturar os publishers Openzed/OpenzedFinanzas ao vivo, validar URLs/operações, executar dry-run e aplicar com readback independente.",
+      "objective": "Aplicar o padrão de cinco URLs nos pools Drip e Broadcast de OpenzedFinanzas ES-CC-ES, OpenzedFinanzas US-CC-ES, Openzed GB-CC-EN e Openzed US-CC-EN.",
+      "source": "discord:thread:1534759161642881144; message:1535638288310730786",
+      "state": "iniciado: escopo autorizado por rodolfo; fontes canônicas e procedimento smart routing carregados; baseline live pendente.",
+      "thread_id": "1534759161642881144",
+      "updated_at": "2026-08-08T13:21:23+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "sb-broadcast-templates-23-30-20260716",
       "next_step": "Acompanhar a evolução assíncrona dos status de Approval no monitor read-only; não repetir o rollout sem novo escopo.",
       "objective": "Normalizar templates Messenger Broadcast usando links TXT",
@@ -482,5 +492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-07T22:30:45+00:00"
+  "updated_at": "2026-08-08T13:21:23+00:00"
 }
