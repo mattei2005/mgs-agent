@@ -1,0 +1,45 @@
+{
+  "status": "dry_run_ok",
+  "authorized_message_id": "1536394313980842074",
+  "before_count": 6,
+  "target_pool_ids": [
+    444,
+    445
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes_before": 31,
+  "drip_routes_after": 30,
+  "broadcast_routes": 23,
+  "authorized_removed_identity": [
+    {
+      "route": "eb-us-cc-en-drip-m0-2",
+      "utm_content": "drip_us_cc_m0-2",
+      "url": "https://eggbev.com/rec-us-cc-self-visa-secured",
+      "jbf_operation": "facebook_us_cc_self-d_rec"
+    }
+  ],
+  "urls": [
+    "https://eggbev.com/rec-us-cc-bankamericard",
+    "https://eggbev.com/rec-us-cc-bank-of-america-unlimited-cash-rewards",
+    "https://eggbev.com/rec-us-cc-citi-rewards-card",
+    "https://eggbev.com/rec-us-cc-citi-custom-cash",
+    "https://eggbev.com/rec-us-cc-self-visa-secured"
+  ],
+  "unrelated_pools_guarded": 4,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T152358Z-eggbev-us-cc-en-five-url-pools",
+  "manifest_hash": "7d540403fd85819cb4e4d3507f15183a1b2f91f602895cdc32f34b952c2b740c"
+}

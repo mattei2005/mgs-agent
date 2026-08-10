@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-SB-EGGBEV-US-CC-EN-20260810",
+      "next_step": "Aplicar 9 criações e 2 atualizações, executar readback independente e REPORT-INFRA.",
+      "objective": "Padronizar Smart Routing Eggbev US-CC-EN em Drip 6x5 e Broadcast 5/5/5/5/3 com cinco URLs aprovadas.",
+      "source": "discord:thread:1534759161642881144; messages:1536392231106379827,1536394313980842074; evidence:/root/mgs-agent/work/sb-smart-routing/20260810T152358Z-eggbev-us-cc-en-five-url-pools",
+      "state": "preflight concluído: 5/5 urls http 200; operações facebook/mct únicas; drip legado tem 31 rotas e rodolfo autorizou remover eb-us-cc-en-drip-m0-2; dry-run aprovado sem escrita.",
+      "thread_id": "1534759161642881144",
+      "updated_at": "2026-08-10T15:24:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-SB-FIRST-NAME-REMOVAL-20260808",
       "next_step": "Automatic fixed-30 readback: Financeadx after 11:22 SP and Eggbev after 22:08 SP; report only validated outcomes/exceptions.",
       "objective": "Remove {{first_name}} from every MGS Smart Bidding Broadcast Template message and prevent reintroduction",
@@ -502,5 +512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-08T13:39:43+00:00"
+  "updated_at": "2026-08-10T15:24:13+00:00"
 }

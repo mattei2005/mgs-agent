@@ -1,0 +1,153 @@
+{
+  "status": "success",
+  "authorized_message_id": "1536394313980842074",
+  "before_count": 6,
+  "target_pool_ids": [
+    444,
+    445
+  ],
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes_before": 31,
+  "drip_routes_after": 30,
+  "broadcast_routes": 23,
+  "authorized_removed_identity": [
+    {
+      "route": "eb-us-cc-en-drip-m0-2",
+      "utm_content": "drip_us_cc_m0-2",
+      "url": "https://eggbev.com/rec-us-cc-self-visa-secured",
+      "jbf_operation": "facebook_us_cc_self-d_rec"
+    }
+  ],
+  "urls": [
+    "https://eggbev.com/rec-us-cc-bankamericard",
+    "https://eggbev.com/rec-us-cc-bank-of-america-unlimited-cash-rewards",
+    "https://eggbev.com/rec-us-cc-citi-rewards-card",
+    "https://eggbev.com/rec-us-cc-citi-custom-cash",
+    "https://eggbev.com/rec-us-cc-self-visa-secured"
+  ],
+  "unrelated_pools_guarded": 4,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T152425Z-eggbev-us-cc-en-five-url-pools",
+  "manifest_hash": "7d540403fd85819cb4e4d3507f15183a1b2f91f602895cdc32f34b952c2b740c",
+  "after_count": 15,
+  "created": 9,
+  "updated": 2,
+  "already_correct": 0,
+  "deleted_pools": 0,
+  "deleted_route_identities": 1,
+  "results": [
+    {
+      "id": 445,
+      "name": "eb-us-cc-en-mct broadcast 001",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 1022,
+      "name": "eb-us-cc-en-mct broadcast 002",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1023,
+      "name": "eb-us-cc-en-mct broadcast 003",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1024,
+      "name": "eb-us-cc-en-mct broadcast 004",
+      "route_count": 5,
+      "family": "broadcast",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1025,
+      "name": "eb-us-cc-en-mct broadcast 005",
+      "route_count": 3,
+      "family": "broadcast",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 444,
+      "name": "eb-us-cc-en-drip 001",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 1017,
+      "name": "eb-us-cc-en-drip 002",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1018,
+      "name": "eb-us-cc-en-drip 003",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1019,
+      "name": "eb-us-cc-en-drip 004",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1020,
+      "name": "eb-us-cc-en-drip 005",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1021,
+      "name": "eb-us-cc-en-drip 006",
+      "route_count": 5,
+      "family": "drip",
+      "suffix": "006",
+      "action": "created",
+      "http": 201
+    }
+  ],
+  "unrelated_pools_unchanged": true
+}

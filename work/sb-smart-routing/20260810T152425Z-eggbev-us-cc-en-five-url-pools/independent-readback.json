@@ -1,0 +1,121 @@
+{
+  "status": "success",
+  "http": 201,
+  "publisher_pool_count": 15,
+  "families": {
+    "drip": {
+      "pools": 6,
+      "pool_ids": [
+        444,
+        1017,
+        1018,
+        1019,
+        1020,
+        1021
+      ],
+      "routes": 30,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "unique_identities": 30,
+      "unique_urls": 5,
+      "domains": [
+        "eggbev.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "eb-us-cc-en-drip 001",
+          "id": 444,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-drip 002",
+          "id": 1017,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-drip 003",
+          "id": 1018,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-drip 004",
+          "id": 1019,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-drip 005",
+          "id": 1020,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-drip 006",
+          "id": 1021,
+          "routes": 5
+        }
+      ]
+    },
+    "broadcast": {
+      "pools": 5,
+      "pool_ids": [
+        445,
+        1022,
+        1023,
+        1024,
+        1025
+      ],
+      "routes": 23,
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "unique_identities": 23,
+      "unique_urls": 5,
+      "domains": [
+        "eggbev.com"
+      ],
+      "blank_operations": 0,
+      "pool_checks": [
+        {
+          "name": "eb-us-cc-en-mct broadcast 001",
+          "id": 445,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-mct broadcast 002",
+          "id": 1022,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-mct broadcast 003",
+          "id": 1023,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-mct broadcast 004",
+          "id": 1024,
+          "routes": 5
+        },
+        {
+          "name": "eb-us-cc-en-mct broadcast 005",
+          "id": 1025,
+          "routes": 3
+        }
+      ]
+    }
+  },
+  "unrelated_pools_unchanged": true,
+  "deleted_pools": 0,
+  "deleted_route_identities": 1,
+  "removed_route_absent": true,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T152425Z-eggbev-us-cc-en-five-url-pools"
+}
