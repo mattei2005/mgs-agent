@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-SB-EGGBEV-GB-CC-EN-20260810",
+      "next_step": "Executar preflight live, derivar operações JBF por source, gerar manifest e aplicar de forma idempotente.",
+      "objective": "Padronizar Smart Routing Eggbev GB-CC-EN em Drip 6x5 e Broadcast 5/5/5/5/3 com as cinco URLs confirmadas por Rodolfo.",
+      "source": "discord:thread:1534759161642881144; messages:1536498344334205031,1536500767102607430",
+      "state": "iniciado; nenhuma escrita na smart bidding ainda. preflight live e backup pendentes.",
+      "thread_id": "1534759161642881144",
+      "updated_at": "2026-08-10T22:26:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-SB-EGGBEV-US-CC-EN-20260810",
       "next_step": "Configuração externa concluída. Estado autenticado temporário /tmp/sb_eggbev_state.json permanece protegido em modo 600 até autorização separada para exclusão.",
       "objective": "Padronizar Smart Routing Eggbev US-CC-EN em Drip 6x5 e Broadcast 5/5/5/5/3 com cinco URLs aprovadas.",
@@ -462,6 +472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "shein-messenger-flow-research-20260810",
+      "next_step": "Validar sessao autenticada, percorrer cada fluxo ponta a ponta e extrair mensagens, botoes, midia e destinos",
+      "objective": "Mapear integralmente os fluxos Messenger de duas paginas SHEIN e entregar copia fiel em Excel",
+      "source": "discord:1536500671971328041",
+      "state": "inicio autorizado; fontes recebidas; preparando navegador persistente meta library residencial e coleta dos dois fluxos",
+      "thread_id": "1536500671971328041",
+      "updated_at": "2026-08-10T22:27:09+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
       "next_step": "Operação normal e burn-in; preservar runtime v0.19.0 e backups para rollback. Qualquer limpeza futura exige escopo e autorização separados.",
       "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
@@ -512,5 +532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-10T15:29:07+00:00"
+  "updated_at": "2026-08-10T22:27:09+00:00"
 }
