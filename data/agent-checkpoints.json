@@ -492,6 +492,16 @@
     },
     {
       "agent": "zeus",
+      "id": "us-emp-cc-messenger-flow-20260810",
+      "next_step": "Coletar histórico completo pelo perfil Meta persistente, reconstruir cronologia, gerar e validar o Excel",
+      "objective": "Extrair integralmente o fluxo Messenger da página 1106546162547817 do nicho us-emp-cc e entregar Excel fiel",
+      "source": "discord-thread:1536512083577937960",
+      "state": "in_progress",
+      "thread_id": "1536512083577937960",
+      "updated_at": "2026-08-10T23:13:28+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
       "next_step": "Operação normal e burn-in; preservar runtime v0.19.0 e backups para rollback. Qualquer limpeza futura exige escopo e autorização separados.",
       "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
@@ -542,5 +552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-10T22:57:47+00:00"
+  "updated_at": "2026-08-10T23:13:28+00:00"
 }
