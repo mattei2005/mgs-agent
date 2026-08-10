@@ -1,0 +1,151 @@
+{
+  "status": "success",
+  "authorized_message_id": "1536500767102607430",
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T222633Z-eggbev-gb-cc-en-five-url-pools",
+  "before_count": 15,
+  "after_count": 24,
+  "created": 9,
+  "updated": 2,
+  "already_correct": 0,
+  "deleted_pools": 0,
+  "results": [
+    {
+      "id": 1026,
+      "name": "eb-gb-cc-en-mct broadcast 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1027,
+      "name": "eb-gb-cc-en-mct broadcast 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1028,
+      "name": "eb-gb-cc-en-mct broadcast 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1029,
+      "name": "eb-gb-cc-en-mct broadcast 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1030,
+      "name": "eb-gb-cc-en-drip 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1031,
+      "name": "eb-gb-cc-en-drip 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1032,
+      "name": "eb-gb-cc-en-drip 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1033,
+      "name": "eb-gb-cc-en-drip 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 1034,
+      "name": "eb-gb-cc-en-drip 006",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "id": 704,
+      "name": "eb-gb-cc-en-mct broadcast 001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "id": 703,
+      "name": "eb-gb-cc-en-drip 001",
+      "action": "updated",
+      "http": 201
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "problems": [],
+    "target_pool_count": 11,
+    "total_routes": 53,
+    "unique_identities": 53,
+    "blank_operations": 0,
+    "urls": [
+      "https://eggbev.com/rec-gb-cc-aib-visa-gold",
+      "https://eggbev.com/rec-gb-cc-chase-credit-card",
+      "https://eggbev.com/rec-gb-cc-fluid-credit-card-the-flexible",
+      "https://eggbev.com/rec-gb-cc-santander-all-in-one",
+      "https://eggbev.com/rec-gb-cc-virgin-money-balance-transfer"
+    ],
+    "pool_ids": [
+      {
+        "id": 703,
+        "name": "eb-gb-cc-en-drip 001",
+        "route_count": 5
+      },
+      {
+        "id": 1030,
+        "name": "eb-gb-cc-en-drip 002",
+        "route_count": 5
+      },
+      {
+        "id": 1031,
+        "name": "eb-gb-cc-en-drip 003",
+        "route_count": 5
+      },
+      {
+        "id": 1032,
+        "name": "eb-gb-cc-en-drip 004",
+        "route_count": 5
+      },
+      {
+        "id": 1033,
+        "name": "eb-gb-cc-en-drip 005",
+        "route_count": 5
+      },
+      {
+        "id": 1034,
+        "name": "eb-gb-cc-en-drip 006",
+        "route_count": 5
+      },
+      {
+        "id": 704,
+        "name": "eb-gb-cc-en-mct broadcast 001",
+        "route_count": 5
+      },
+      {
+        "id": 1026,
+        "name": "eb-gb-cc-en-mct broadcast 002",
+        "route_count": 5
+      },
+      {
+        "id": 1027,
+        "name": "eb-gb-cc-en-mct broadcast 003",
+        "route_count": 5
+      },
+      {
+        "id": 1028,
+        "name": "eb-gb-cc-en-mct broadcast 004",
+        "route_count": 5
+      },
+      {
+        "id": 1029,
+        "name": "eb-gb-cc-en-mct broadcast 005",
+        "route_count": 3
+      }
+    ]
+  }
+}

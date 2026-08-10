@@ -5247,6 +5247,66 @@
       "readback_sha256": "98a135e6d088338b35a35f22e887e753f3879201f98268af13fe3696c3a63ff4",
       "unrelated_pools_unchanged": true,
       "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; exact independent readback PASS; 53/53 routes with nonblank JBF operation; authorized m0-2 identity absent; no unrelated pool drift."
+    },
+    {
+      "id": "eggbev-gb-cc-en-smart-routing-five-url-20260810",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "eggbev",
+      "market": "GB-CC-EN",
+      "authorized_message_id": "1536500767102607430",
+      "applied_at": "2026-08-10T18:31:09-04:00",
+      "drip_pool_ids": [
+        703,
+        1030,
+        1031,
+        1032,
+        1033,
+        1034
+      ],
+      "broadcast_pool_ids": [
+        704,
+        1026,
+        1027,
+        1028,
+        1029
+      ],
+      "created_pool_ids": [
+        1026,
+        1027,
+        1028,
+        1029,
+        1030,
+        1031,
+        1032,
+        1033,
+        1034
+      ],
+      "updated_pool_ids": [
+        704,
+        703
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://eggbev.com/rec-gb-cc-virgin-money-balance-transfer",
+        "https://eggbev.com/rec-gb-cc-chase-credit-card",
+        "https://eggbev.com/rec-gb-cc-aib-visa-gold",
+        "https://eggbev.com/rec-gb-cc-santander-all-in-one",
+        "https://eggbev.com/rec-gb-cc-fluid-credit-card-the-flexible"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T222633Z-eggbev-gb-cc-en-five-url-pools",
+      "summary_sha256": "2bd314fe1c4b70b8eb4fe334ac4f3eb96728e866e8676805a23b02e9d2a663c6",
+      "readback_sha256": "4208049b87f323e84a7d387511ef2fbcfa8d106a40245c76b1a7c7e4016a7282",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent exact readback PASS; 53/53 routes with nonblank JBF operation; no unrelated pool drift.",
+      "report_message_id": "1536502240750075905"
     }
   ],
   "profile_skill_references": [
