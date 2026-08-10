@@ -5178,6 +5178,75 @@
       "readback_sha256": "85a35036374ced8a557efe374d3f1e95140fdfa5e7995d2cc5c3b5e424cb0438",
       "unrelated_pools_unchanged": true,
       "validation": "44-pool batch used live route operations; Openzed US Milestone operation resolved from live UI catalog; independent exact readback PASS."
+    },
+    {
+      "id": "eggbev-us-cc-en-smart-routing-five-url-20260810",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "eggbev",
+      "market": "US-CC-EN",
+      "authorized_message_ids": [
+        "1536392231106379827",
+        "1536394313980842074"
+      ],
+      "applied_at": "2026-08-10T11:27:10-04:00",
+      "drip_pool_ids": [
+        444,
+        1017,
+        1018,
+        1019,
+        1020,
+        1021
+      ],
+      "broadcast_pool_ids": [
+        445,
+        1022,
+        1023,
+        1024,
+        1025
+      ],
+      "created_pool_ids": [
+        1017,
+        1018,
+        1019,
+        1020,
+        1021,
+        1022,
+        1023,
+        1024,
+        1025
+      ],
+      "updated_pool_ids": [
+        444,
+        445
+      ],
+      "deleted_pool_ids": [],
+      "authorized_removed_route_identities": [
+        {
+          "route": "eb-us-cc-en-drip-m0-2",
+          "utm_content": "drip_us_cc_m0-2"
+        }
+      ],
+      "routes": {
+        "drip_before": 31,
+        "drip_after": 30,
+        "broadcast": 23,
+        "total_after": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://eggbev.com/rec-us-cc-bankamericard",
+        "https://eggbev.com/rec-us-cc-bank-of-america-unlimited-cash-rewards",
+        "https://eggbev.com/rec-us-cc-citi-rewards-card",
+        "https://eggbev.com/rec-us-cc-citi-custom-cash",
+        "https://eggbev.com/rec-us-cc-self-visa-secured"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260810T152425Z-eggbev-us-cc-en-five-url-pools",
+      "summary_sha256": "44816e2e7e8b4744a94b59cbce67ab9747d9338ea90ad6e107a574ec2ea84dbd",
+      "readback_sha256": "98a135e6d088338b35a35f22e887e753f3879201f98268af13fe3696c3a63ff4",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; exact independent readback PASS; 53/53 routes with nonblank JBF operation; authorized m0-2 identity absent; no unrelated pool drift."
     }
   ],
   "profile_skill_references": [
