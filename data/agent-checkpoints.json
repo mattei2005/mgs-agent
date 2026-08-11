@@ -522,6 +522,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-maintenance-20260811",
+      "next_step": "Congelar versões/PIDs, preparar backup e finalizer pós-boot, executar apt controlado",
+      "objective": "Atualizar 17 pacotes da VPS, rebootar para kernel 6.8.0-137 e validar pós-boot",
+      "source": "discord:1536567182824308839#1536581988322906142",
+      "state": "autorizado por rodolfo; pré-flight em preparação; hermes fora do escopo",
+      "thread_id": "1536567182824308839",
+      "updated_at": "2026-08-11T03:48:38+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-storage-hermes-delta-review-20260727",
       "next_step": "Rodolfo decide separadamente sobre política safety latest-two, retenção DTR e remoção futura do runtime rollback após burn-in.",
       "objective": "Auditar toda a VPS após limpeza, classificar backups/arquivos compactados, estimar capacidade e revisar o delta Hermes útil à MGS.",
@@ -562,5 +572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-11T03:36:59+00:00"
+  "updated_at": "2026-08-11T03:48:38+00:00"
 }
