@@ -35,6 +35,15 @@ class HermesNewsExplainerTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'rc=-6'):
                 MODULE.explain('anúncio')
 
+    def test_git_metrics_prompt_explains_distinct_bases(self):
+        result = subprocess.CompletedProcess(['hermes'], 0, stdout=COMPLETE, stderr='')
+        with mock.patch.object(MODULE.subprocess, 'run', return_value=result) as run_mock:
+            MODULE.explain('Novos desde o último alerta: 5093; pendentes: 2082')
+        prompt = run_mock.call_args.args[0][-1]
+        self.assertIn('novos desde o último alerta', prompt)
+        self.assertIn('commits pendentes no runtime', prompt)
+        self.assertIn('Não chame essa diferença de inconsistência', prompt)
+
     def test_failed_messages_are_selected_for_retry(self):
         messages = [{'id': '101'}, {'id': '100'}, {'id': '99'}]
         state = {

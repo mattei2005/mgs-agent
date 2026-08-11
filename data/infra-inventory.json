@@ -5368,6 +5368,50 @@
       "unrelated_pools_unchanged": true,
       "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent exact readback PASS; 53/53 routes with nonblank JBF operation; legacy LANGUAGE=null preserved; no unrelated pool drift.",
       "report_message_id": "1536503796337868862"
+    },
+    {
+      "id": "hermes-news-monitor-upstream-fix-20260811",
+      "agent": "zeus",
+      "type": "monitor_hardening",
+      "owner": "Zeus/Infra",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1536572999015202877",
+      "source_thread_id": "1536567182824308839",
+      "status": "deployed_validated",
+      "scripts": [
+        "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+        "/root/mgs-agent/scripts/hermes-news-explainer.py"
+      ],
+      "cron_schedule": "37 8,14,20 * * * monitor; */5 * * * explainer",
+      "discord": {
+        "channel_id": "1505609056771899644",
+        "alert_message_id": "1536576875357536259",
+        "explanation_message_id": "1536577194707394621"
+      },
+      "remote_topology": {
+        "active_repo": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f",
+        "origin": "https://github.com/NousResearch/hermes-agent.git",
+        "preserved_port_source_remote": "mgs-port-source",
+        "monitor_ref": "refs/remotes/mgs-monitor-upstream/main"
+      },
+      "upstream": {
+        "sha": "2cdb30a474d76cca9eb61714d889c18f493aa7fc",
+        "release": "v2026.8.3",
+        "new_since_last_alert": 5093,
+        "pending_in_runtime": 2082
+      },
+      "backup": "/root/mgs-agent/backups/hermes-news-upstream-fix-20260810T231238-0400",
+      "validation": {
+        "tests": "16 passed",
+        "shell_syntax": "PASS",
+        "dry_run_state_unchanged": true,
+        "discord_alert_readback": "message/channel/embed/state matched",
+        "discord_explainer_readback": "edited explanation matched distinct metric bases",
+        "hermes_version": "Update available: 2082 commits behind",
+        "watchdog": "healthy=49 waiting=0 orphan=0 failed=0 reconciled=1"
+      },
+      "rollback": "restore backup scripts; restore origin URL from remote mgs-port-source only if reverting remote topology; restore state backup before republishing",
+      "updated_at": "2026-08-10T23:34:11-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6362,8 +6406,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 10575,
-      "modified_at": "2026-07-18T00:43:03-04:00"
+      "size_bytes": 11043,
+      "modified_at": "2026-08-10T23:29:50-04:00",
+      "sha256": "b0f182fc990531da27eb7ee457fc210518a4e29060a8f648cee1089cec7b07a0"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-post-update-restart-finalize.sh",
@@ -6537,8 +6582,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-      "size_bytes": 11289,
-      "modified_at": "2026-08-02T23:16:54-04:00"
+      "size_bytes": 13427,
+      "modified_at": "2026-08-10T23:26:31-04:00",
+      "sha256": "5528bd5767b54790b73c8151056468a4bb14a4deb231f3f20f10834ac13d702a"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
@@ -9351,5 +9397,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-08-10T23:34:11-04:00"
 }
