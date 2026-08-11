@@ -1,6 +1,6 @@
 #!/bin/bash
 # Monitor de updates do Hermes Agent (NousResearch upstream)
-# Frequência: 1×/dia (8 AM EST/EDT via cron — servidor está em America/New_York)
+# Frequência: 3×/dia (08:37, 14:37 e 20:37 EST/EDT — servidor em America/New_York)
 # Custo: ZERO tokens no monitor (git fetch + Discord Bot API); explicação roda no cron hermes-news-explainer
 # Canal destino: #alerts-hermes-news (via Zeus Bot API)
 # Estado: /root/mgs-agent/data/hermes-version-state.json
@@ -19,6 +19,9 @@ LOG="${HERMES_MONITOR_LOG:-/root/mgs-agent/logs/monitor-hermes-updates.log}"
 STATE="${HERMES_MONITOR_STATE:-/root/mgs-agent/data/hermes-version-state.json}"
 HERMES_BIN="${HERMES_MONITOR_BIN:-/root/.local/bin/hermes}"
 HERMES_DIR_OVERRIDE="${HERMES_MONITOR_DIR:-}"
+UPSTREAM_URL="${HERMES_MONITOR_UPSTREAM_URL:-https://github.com/NousResearch/hermes-agent.git}"
+UPSTREAM_BRANCH="${HERMES_MONITOR_UPSTREAM_BRANCH:-main}"
+UPSTREAM_TRACKING_REF="refs/remotes/mgs-monitor-upstream/${UPSTREAM_BRANCH}"
 DRY_RUN_OUTPUT="${HERMES_MONITOR_DRY_RUN_OUTPUT:-}"
 TARGET_CHANNEL_ID="${HERMES_MONITOR_CHANNEL_ID:-1505609056771899644}"  # #alerts-hermes-news
 ZEUS_PROFILE_ENV="${HERMES_MONITOR_ZEUS_ENV:-/root/.hermes/profiles/zeus/.env}"
@@ -77,6 +80,11 @@ HERMES_DIR=$(resolve_active_hermes_dir) || {
     log "ERROR: active Hermes install resolution failed launcher=$HERMES_BIN"
     exit 1
 }
+
+if [[ ! "$UPSTREAM_BRANCH" =~ ^[A-Za-z0-9._/-]+$ ]] || [[ "$UPSTREAM_BRANCH" == -* ]] || [[ "$UPSTREAM_BRANCH" == *..* ]]; then
+    log "ERROR: invalid upstream branch"
+    exit 1
+fi
 
 trap 'rc=$?; log "ERROR unexpected_exit rc=$rc line=$LINENO"' ERR
 
