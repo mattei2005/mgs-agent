@@ -79,6 +79,7 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_p
         {
             "HERMES_MONITOR_DRY_RUN": "1",
             "HERMES_MONITOR_BIN": str(symlink),
+            "HERMES_MONITOR_UPSTREAM_URL": str(origin),
             "HERMES_MONITOR_LOG": str(log),
             "HERMES_MONITOR_STATE": str(state),
             "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),

@@ -112,19 +112,23 @@ fi
 
 cd "$HERMES_DIR"
 
-# 3. Fetch upstream
-git fetch origin --tags --quiet 2>/dev/null || {
-  log "ERROR: git fetch failed"
+# 3. Buscar o upstream oficial em ref dedicada. O origin do runtime pode ser
+# uma cópia local congelada usada durante ports MGS e nunca é fonte de verdade
+# para disponibilidade de updates.
+git fetch --force --quiet "$UPSTREAM_URL" \
+  "+refs/heads/${UPSTREAM_BRANCH}:${UPSTREAM_TRACKING_REF}" \
+  "+refs/tags/*:refs/tags/*" 2>/dev/null || {
+  log "ERROR: official upstream fetch failed branch=$UPSTREAM_BRANCH"
   exit 1
 }
 
 # 4. Estado atual
 CURRENT_LOCAL=$(git rev-parse HEAD)
-CURRENT_UPSTREAM=$(git rev-parse origin/main)
+CURRENT_UPSTREAM=$(git rev-parse "$UPSTREAM_TRACKING_REF")
 LOCAL_SHORT=$(git rev-parse --short HEAD)
-UPSTREAM_SHORT=$(git rev-parse --short origin/main)
+UPSTREAM_SHORT=$(git rev-parse --short "$UPSTREAM_TRACKING_REF")
 LOCAL_DATE=$(git log -1 --format='%ad' --date=short HEAD)
-UPSTREAM_DATE=$(git log -1 --format='%ad' --date=short origin/main)
+UPSTREAM_DATE=$(git log -1 --format='%ad' --date=short "$UPSTREAM_TRACKING_REF")
 
 # 5. Ler último commit notificado
 LAST_NOTIFIED=""
@@ -161,12 +165,27 @@ fi
 COMPARE_BASE_SHORT=$(git rev-parse --short "$COMPARE_BASE")
 
 # 8. Calcular diferenças
-COMMITS_BEHIND=$(git rev-list --count "$COMPARE_BASE..origin/main" 2>/dev/null || echo "?")
+COMMITS_BEHIND=$(git rev-list --count "$COMPARE_BASE..$UPSTREAM_TRACKING_REF" 2>/dev/null || echo "?")
 DAYS_BEHIND=$(( ($(date +%s) - $(git log -1 --format='%ct' "$COMPARE_BASE")) / 86400 ))
+
+NEW_SINCE_LAST="indisponível (base anterior não ancestral)"
+NEW_SINCE_LAST_COUNT=-1
+if [[ -n "$LAST_NOTIFIED" ]] \
+  && git cat-file -e "${LAST_NOTIFIED}^{commit}" 2>/dev/null \
+  && git merge-base --is-ancestor "$LAST_NOTIFIED" "$CURRENT_UPSTREAM"; then
+  NEW_SINCE_LAST_COUNT=$(git rev-list --count "$LAST_NOTIFIED..$CURRENT_UPSTREAM")
+  NEW_SINCE_LAST="${NEW_SINCE_LAST_COUNT} commits"
+elif [[ -z "$LAST_NOTIFIED" ]]; then
+  NEW_SINCE_LAST="primeiro alerta desta instalação"
+fi
 
 # Tags entre local e upstream
 LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || echo "n/a")
-LATEST_TAG=$(git describe --tags --abbrev=0 origin/main 2>/dev/null || echo "n/a")
+LATEST_TAG=$(git describe --tags --abbrev=0 "$CURRENT_UPSTREAM" 2>/dev/null || echo "n/a")
+COMMITS_SINCE_TAG="n/a"
+if [[ "$LATEST_TAG" != "n/a" ]]; then
+  COMMITS_SINCE_TAG=$(git rev-list --count "$LATEST_TAG..$CURRENT_UPSTREAM" 2>/dev/null || echo "n/a")
+fi
 
 # Tags intermediárias (até 5)
 LOCAL_BASE_TAG="$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)"
@@ -175,7 +194,7 @@ INTERMEDIATE_TAGS=$(git tag --sort=creatordate --contains "$COMPARE_BASE" 2>/dev
   head -5 | sed 's/^/• /')
 
 # 9. Categorizar commits por tipo (conventional commits)
-COMMIT_RANGE="$COMPARE_BASE..origin/main"
+COMMIT_RANGE="$COMPARE_BASE..$UPSTREAM_TRACKING_REF"
 
 FEAT_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | wc -l)
 FIX_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^fix" -E 2>/dev/null | wc -l)
@@ -213,7 +232,9 @@ PAYLOAD=$(jq -n \
   --arg title "Hermes Agent — update disponível" \
   --arg upstream "${LATEST_TAG} (${UPSTREAM_SHORT}) — ${UPSTREAM_DATE}" \
   --arg local "${LOCAL_TAG} (${LOCAL_SHORT}) — ${LOCAL_DATE}" \
-  --arg lag "${DAYS_BEHIND} dias / ${COMMITS_BEHIND} commits atrás" \
+  --arg lag "${DAYS_BEHIND} dias / ${COMMITS_BEHIND} commits pendentes no runtime" \
+  --arg new_since_last "$NEW_SINCE_LAST" \
+  --arg since_tag "${COMMITS_SINCE_TAG} commits após ${LATEST_TAG}" \
   --arg summary "Features ${FEAT_COUNT} | Fixes ${FIX_COUNT} | Perf ${PERF_COUNT} | Security ${SECURITY_COUNT} | Breaking ${BREAKING_COUNT}" \
   --arg breaking "$BREAKING_HEADER" \
   --arg features "$FEATURES_FIELD" \
@@ -222,13 +243,13 @@ PAYLOAD=$(jq -n \
   --arg tags "$TAGS_FIELD" \
   --arg diff "$DIFF_URL" \
   --arg releases "$RELEASE_URL" \
-  '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream", value:$upstream, inline:true}, {name:"Versão local", value:$local, inline:true}, {name:"Atraso", value:$lag, inline:false}, {name:"Resumo", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```text\n"+.[:900]+"\n```" end), inline:false}, {name:"Top features", value:("```text\n"+$features[:900]+"\n```"), inline:false}, {name:"Top fixes", value:("```text\n"+$fixes[:900]+"\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
+  '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream oficial", value:$upstream, inline:true}, {name:"Runtime MGS", value:$local, inline:true}, {name:"Atualizações acumuladas", value:$lag, inline:false}, {name:"Novos desde o último alerta", value:$new_since_last, inline:true}, {name:"Após a última release", value:$since_tag, inline:true}, {name:"Resumo acumulado", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```\n"+.[:900]+"\n```" end), inline:false}, {name:"Top features", value:("```\n"+$features[:900]+"\n```"), inline:false}, {name:"Top fixes", value:("```\n"+$fixes[:900]+"\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
 
 if [[ "$DRY_RUN" == "1" ]]; then
   if [[ -n "$DRY_RUN_OUTPUT" ]]; then
     printf '%s\n' "$PAYLOAD" > "$DRY_RUN_OUTPUT"
   fi
-  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT compare_base=$COMPARE_BASE_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
+  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT compare_base=$COMPARE_BASE_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT since_tag=$COMMITS_SINCE_TAG days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
   printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s compare_base=%s behind=%s discord_post=false state_unchanged=true\n' \
     "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT" "$COMPARE_BASE_SHORT" "$COMMITS_BEHIND"
   exit 0
@@ -242,14 +263,15 @@ HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   -d "$PAYLOAD" || true)
 
 if [[ "$HTTP_CODE" =~ ^2 ]]; then
-  log "OK notified upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT"
+  log "OK notified upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT since_tag=$COMMITS_SINCE_TAG days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT"
   
   # 12. Atualizar state
   jq -n --arg u "$CURRENT_UPSTREAM" --arg l "$CURRENT_LOCAL" --arg t "$(date -Iseconds)" \
         --arg tag "$LATEST_TAG" --argjson b "$COMMITS_BEHIND" --argjson d "$DAYS_BEHIND" \
         --argjson f "$FEAT_COUNT" --argjson fx "$FIX_COUNT" --argjson br "$BREAKING_COUNT" \
+        --argjson n "$NEW_SINCE_LAST_COUNT" --arg st "$COMMITS_SINCE_TAG" \
     '{last_notified_upstream: $u, last_local: $l, last_check: $t, latest_tag: $tag, 
-      commits_behind: $b, days_behind: $d,
+      commits_behind: $b, new_since_last_alert: $n, commits_since_latest_tag: $st, days_behind: $d,
       breakdown: {features: $f, fixes: $fx, breaking: $br}}' \
     > "$STATE"
 else
