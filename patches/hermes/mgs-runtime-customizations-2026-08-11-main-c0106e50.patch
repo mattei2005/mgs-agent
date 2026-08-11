@@ -5340,6 +5340,34 @@ index 4938d85da..8b13f8315 100644
  
  class TestMirrorToSession:
  
+diff --git a/tests/gateway/test_multiplex_busy_input_mode.py b/tests/gateway/test_multiplex_busy_input_mode.py
+index d23c3c062..d551f0422 100644
+--- a/tests/gateway/test_multiplex_busy_input_mode.py
++++ b/tests/gateway/test_multiplex_busy_input_mode.py
+@@ -320,8 +320,22 @@ async def test_missing_or_invalid_secondary_mode_falls_back_to_gateway_default(
+     assert runner._busy_text_mode == "queue"
+ 
+ 
+-def test_profile_route_and_nonmultiplexed_resolution_preserve_boundaries():
++def test_profile_route_and_nonmultiplexed_resolution_preserve_boundaries(
++    monkeypatch,
++    tmp_path,
++):
+     runner = _runner(default_mode="interrupt")
++    # The route-rejection guard introduced on main only accepts targets that
++    # are in the multiplexer's authoritative served-profile set. Keep this
++    # unit test isolated from live/on-disk profiles while declaring research
++    # as served, which is the production precondition for this route.
++    monkeypatch.setattr(
++        "gateway.run._multiplex_profile_homes",
++        lambda _config: [
++            ("default", tmp_path / "default"),
++            ("research", tmp_path / "research"),
++        ],
++    )
+     runner._snapshot_profile_busy_modes(
+         "research",
+         {"display": {"busy_input_mode": "steer"}},
 diff --git a/tests/gateway/test_reasoning_command.py b/tests/gateway/test_reasoning_command.py
 index 3b497a9c5..62f738267 100644
 --- a/tests/gateway/test_reasoning_command.py
