@@ -47,6 +47,27 @@ Before declaring success, verify:
 - current disk bytes and observed free-space delta are captured;
 - inventory, audit, checkpoint, REPORT-INFRA, and Git state are reconciled.
 
+### 3.1 Git closure when confirmed targets contain tracked files
+
+A destructive cleanup can be filesystem-correct while its Git evidence looks incomplete if the auto-commit watcher divides hundreds of deletions and policy edits into several commits. Close the versioned boundary this way:
+
+1. Before deletion, capture the repository HEAD and enumerate every tracked file under the frozen target roots from that exact tree.
+2. Pause the auto-commit watcher before the first removal so it cannot commit a partially deleted target set or half-applied policy change. Keep gateway services untouched.
+3. Finish filesystem validation, policy readbacks, audit, inventory, checkpoint, and REPORT-INFRA before letting the watcher flush the repository.
+4. After synchronization, validate `pre_operation_head..post_operation_head`; never inspect only the final commit. Require every tracked deletion in the range to equal the pre-operation tracked files under the confirmed roots, with zero unexpected deletions and zero expected files left behind.
+5. Validate required script/skill/data changes across the same range. A manifest that was committed before the owner's confirmation is correctly absent from the post-confirmation diff; prove that it remains tracked and still contains the confirmed operation-set hash instead of calling it missing.
+6. Require a clean worktree, active auto-commit service, and `HEAD == origin/main`. Record the commit range when the watcher produced more than one commit.
+
+### 3.2 Upstream advancement discovered during cleanup
+
+A final fetch may show that an application upstream advanced after the destructive manifest was confirmed. Do not let that moving ref rewrite the cleanup result or silently widen the authorized scope.
+
+- Re-fetch only after filesystem/runtime acceptance and freeze the newly observed upstream SHA.
+- If the active launcher, runtime, patches, and services are unchanged, the cleanup may still be `completed_validated`; record the installed base, upstream SHA, behind count, and concise delta as a separate follow-up.
+- Never claim `behind=0` from a pre-cleanup observation after a later fetch disproves it.
+- Porting patches, building a new runtime, or restarting production belongs to a separate controlled-update scope and its own Critical Subset confirmation.
+- Do not classify ordinary upstream movement as a cleanup anomaly.
+
 ## 4. Whole-VPS read-only scan
 
 Scan writable persistent filesystems independently. At minimum on the MGS VPS:
@@ -90,6 +111,8 @@ Before proposing a browser-related target:
 3. Prove which browser revision the collector actually requires via its installed Playwright manifest or executable resolution; protect that revision even if another browser is active elsewhere.
 4. Freeze the persistent profile, lock, collector runtime, and required browser revision as an explicit protected set. Do not delete cache-looking subdirectories inside the persistent profile unless the owner separately authorizes session compaction.
 5. Treat collector outputs/evidence as a different storage class. They may be reviewed for retention without touching authentication state.
+
+6. For a named session that must survive, hash a minimal set of non-secret state containers such as `Cookies`, `Local State`, and `Preferences` immediately before the destructive boundary and compare them after cleanup. Report only pass/count, never contents. Authentication may already be expired; that does not make the owner-protected profile deletable.
 
 When the owner says a named browser session must survive cleanup, that protection overrides generic orphan/cache classification and belongs in the manifest's protected paths.
 

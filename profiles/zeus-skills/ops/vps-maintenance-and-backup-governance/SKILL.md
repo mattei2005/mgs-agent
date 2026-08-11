@@ -33,7 +33,7 @@ Load this skill when Rodolfo asks:
 6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
 8. When an audit surfaces Ubuntu Pro, ESM Apps/Infra, Livepatch, a device-code attach flow, or the boundary between subscription attachment and package installation, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; it defines coverage classification, supervised PTY attachment, local readback, separate authorization gates, and post-install closure.
-9. For exact destructive target manifests followed by an exhaustive backup/orphan scan, load `references/full-vps-cleanup-inventory.md`; it defines inode-aware reclaim estimates, per-filesystem coverage, evidence tiers, post-deletion acceptance, and fail-closed housekeeping dry-runs.
+9. For exact destructive target manifests followed by an exhaustive backup/orphan scan, load `references/full-vps-cleanup-inventory.md`; it defines inode-aware reclaim estimates, protected browser/Drive-backed state, tracked-file Git range closure, moving-upstream scope separation, per-filesystem coverage, post-deletion acceptance, and fail-closed housekeeping dry-runs.
 
 ## Audit workflow
 
