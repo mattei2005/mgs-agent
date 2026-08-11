@@ -105,6 +105,8 @@ For Ares, preserve raw assets in the canonical Drive lineage, upload only cleane
 
 Local creative media is transient after successful upload. Remove the VPS copy only after a live `files.get(...supportsAllDrives=true)` confirms the destination is non-trashed in `MGS-AGENTS`, the expected `driveId` matches, size matches exactly, Drive MD5 matches the local file, and any recorded SHA-256/readback also matches. Preserve a compact provenance manifest with source/destination IDs, filename, size, checksums and status. A missing legacy ID, name-only match, stale success report, partial batch, or failed readback must fail closed and retain the local file.
 
+For residual media that may have been renamed, inventory the full bounded local media scope and the canonical Shared Drive, then join by **exact size + Drive MD5**, never by filename. This proves byte identity despite renaming. Revalidate every proposed remote ID with individual `files.get` readback immediately before freezing the deletion manifest; include local path, size, MD5, SHA-256, remote ID, `driveId`, and readback status. Preserve every unmatched, derived, frame-extracted, metadata-changed, or recompressed file: similarity is not identity. Before Critical Subset confirmation, verify the exact local targets have no process, literal script/cron/systemd, symlink, or mount references, bind authorization to a target-set hash, and never include parent directories merely to remove matched children.
+
 This local-media rule never authorizes deletion of persistent browser authentication state. Ares browser profiles, cookies/storage, collector locks, collector runtime, and the Playwright browser revision required by that collector are a separate protected class.
 
 ## Consumer contract

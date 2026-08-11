@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_PENDING_CRITICAL_CONFIRMATION",
+  "created_at_utc": "2026-08-11T18:25:21.791633+00:00",
+  "scope": "Delete only local Ares media with exact byte identity in canonical Shared Drive, independent of filename",
+  "target_set_sha256": "0cd143cd24f2dc6f0843051d7a62a30d4f4e7635e1f3d4d22ded123f9a3633cd",
+  "target_count": 16,
+  "target_logical_bytes": 170167717,
+  "target_allocated_bytes": 170196992,
+  "preconditions": {
+    "drive_id": "0AEwt4Ye690ocUk9PVA",
+    "service_account_project": "mgs-core-prod",
+    "all_remote_files_get_ok": true,
+    "process_refs": 0,
+    "literal_runtime_refs": 0,
+    "symlink_refs": 0,
+    "mountpoints": 0
+  },
+  "preserve_rule": "All unmatched local media remain untouched. No directory target is included.",
+  "targets": [
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/intake/1516856111284748388/46_-_IA_-_Story_Mexico.mov",
+      "size_bytes": 3368951,
+      "allocated_bytes": 3371008,
+      "mtime_ns": 1781717282513888516,
+      "md5": "64dd1d3ea56667d7efc92e43646b994f",
+      "sha256": "547cb55b06fa5023b1a71b00bf7a30acc27fae4c607fd06ee2371994321d2332",
+      "drive_readback": [
+        {
+          "id": "1qN8P_g4oQ-I7YRdEhl165m658Hwhi7uZ",
+          "name": "CC_MX_ES_VID_LIMITE_ALTO_PV_002.mov",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 3368951,
+          "md5": "64dd1d3ea56667d7efc92e43646b994f",
+          "mimeType": "video/quicktime",
+          "modifiedTime": "2026-06-17T17:30:20.005Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/intake/1516856111284748388/47_-_IA_-_Story_Mexico.mov",
+      "size_bytes": 3510714,
+      "allocated_bytes": 3514368,
+      "mtime_ns": 1781717147246995096,
+      "md5": "423512591e6c1c8216414de8132edf6b",
+      "sha256": "9c632ff878d266c56271f9f4a9e7b06d13e5952e247802b8ba9e8cbf5ae847af",
+      "drive_readback": [
+        {
+          "id": "1ih52uaBWZi245mRrAyuIyFq9dgu_RtDW",
+          "name": "CC_MX_ES_VID_LIMITE_ALTO_PV_001.mov",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 3510714,
+          "md5": "423512591e6c1c8216414de8132edf6b",
+          "mimeType": "video/quicktime",
+          "modifiedTime": "2026-06-17T17:29:45.787Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/2455ff9b28c98084.mp4",
+      "size_bytes": 10075847,
+      "allocated_bytes": 10076160,
+      "mtime_ns": 1784129216683306358,
+      "md5": "f6dd288b036371de8bd79c67070df70c",
+      "sha256": "d3297acd523eec730f80015e6d59cb79ed9c65494ba3b2bd4b5050c899e808bb",
+      "drive_readback": [
+        {
+          "id": "1oMrQNChCjsYqjO9EMtkgxHq2zqFPgIHC",
+          "name": "3_85 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 10075847,
+          "md5": "f6dd288b036371de8bd79c67070df70c",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-16T00:49:09.037Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/97d9d41003386205.mp4",
+      "size_bytes": 10563770,
+      "allocated_bytes": 10567680,
+      "mtime_ns": 1784129210560303236,
+      "md5": "18e4f1064bd21d8b3d2da2b5cd6fc74f",
+      "sha256": "de2301ef28da9d9e51c0af678f54f951f7720a43239f43299e5c4617a19ff8f2",
+      "drive_readback": [
+        {
+          "id": "1l-qKAISzk91nt_mL1SXiBSuV4Ey6UpxY",
+          "name": "1_84 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 10563770,
+          "md5": "18e4f1064bd21d8b3d2da2b5cd6fc74f",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-16T00:48:42.740Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/a2b6db38ded7d2b2.mp4",
+      "size_bytes": 7869665,
+      "allocated_bytes": 7872512,
+      "mtime_ns": 1784129213789304876,
+      "md5": "18b2ef08bc4b2fcbf040ea70176ac937",
+      "sha256": "f5036baa294f2706c5ca7e95b273217085745484777d286c239d43e984d30c03",
+      "drive_readback": [
+        {
+          "id": "1XmaTVOpq7FQJYlDjDJ8c75PVDpWY-znO",
+          "name": "2_83 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 7869665,
+          "md5": "18b2ef08bc4b2fcbf040ea70176ac937",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-16T00:49:00.445Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/1bd00bcfdf94e61b.mp4",
+      "size_bytes": 10190335,
+      "allocated_bytes": 10190848,
+      "mtime_ns": 1784645110292684042,
+      "md5": "3533fcddfe89edbb515b4d7f5761c69f",
+      "sha256": "59f868459bdc5f60896fcd25da3e6f7a4532334b0579c390aba62ab59ec60572",
+      "drive_readback": [
+        {
+          "id": "18HI11mzf8vKKCwOH5H161cFfiw4Dw2_K",
+          "name": "6_96 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 10190335,
+          "md5": "3533fcddfe89edbb515b4d7f5761c69f",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/66ffbeaf1f303828.mp4",
+      "size_bytes": 14355184,
+      "allocated_bytes": 14356480,
+      "mtime_ns": 1784645115110690906,
+      "md5": "820cba185fae75f5283397cbaef7390a",
+      "sha256": "4ade569f369ca02e8d0109dfbb442c90b5776551195aec257a7d726ca32e0b5b",
+      "drive_readback": [
+        {
+          "id": "1zW7rArJo9jT0vxEeenHDHLmZZgC3RUo1",
+          "name": "8_98 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 14355184,
+          "md5": "820cba185fae75f5283397cbaef7390a",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/81fc676c0427388e.mp4",
+      "size_bytes": 11533341,
+      "allocated_bytes": 11534336,
+      "mtime_ns": 1784645112881687729,
+      "md5": "7a0e7137cba7423b59c3fd4b11076153",
+      "sha256": "84f53d9d93dffaa21fda55dafc05b8f38aad3c25fbe04a9efb9e6f8ed67d78ef",
+      "drive_readback": [
+        {
+          "id": "1wHIOo6M4CPIiPP8648WvQa5oHEup3Ls1",
+          "name": "7_101 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 11533341,
+          "md5": "7a0e7137cba7423b59c3fd4b11076153",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/89b1352844a4d30e.mp4",
+      "size_bytes": 13503549,
+      "allocated_bytes": 13504512,
+      "mtime_ns": 1784645095222662570,
+      "md5": "270b13d8c65b68e9cc8f3984da70eb9c",
+      "sha256": "54d93af1c00db1f667c40a95cec57c50c76c014d4454757b479779e458fc1330",
+      "drive_readback": [
+        {
+          "id": "1RxPzREXSJ57IaT_cQs7Ao4l-tzbnLJYT",
+          "name": "1_95 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 13503549,
+          "md5": "270b13d8c65b68e9cc8f3984da70eb9c",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/b8010581f6aea1ad.mp4",
+      "size_bytes": 13686554,
+      "allocated_bytes": 13688832,
+      "mtime_ns": 1784645098207666824,
+      "md5": "5856f24d50b7cf3b8007e9ec242991a9",
+      "sha256": "92a3d256e0cb5ff98d92b0fac718fea8ac5123a332a0d2a3841960cee61c0931",
+      "drive_readback": [
+        {
+          "id": "1U75zpqJXs0EdBcW_RxmYf5kQiFvc1hhI",
+          "name": "2_99 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 13686554,
+          "md5": "5856f24d50b7cf3b8007e9ec242991a9",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/c75d070728a137fc.mp4",
+      "size_bytes": 14269282,
+      "allocated_bytes": 14270464,
+      "mtime_ns": 1784645104759676158,
+      "md5": "3e5cdd198eb94e0f0dc2417606da94ba",
+      "sha256": "98648c79b93384b5f0594a363c21878290ec31201bfa5f20af8e98d5e28bd059",
+      "drive_readback": [
+        {
+          "id": "1atDR-W3DhAPnlX-TDL-6OUQWbbbiVhmo",
+          "name": "4_100 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 14269282,
+          "md5": "3e5cdd198eb94e0f0dc2417606da94ba",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/cbfe40c46b2e1e18.mp4",
+      "size_bytes": 12710809,
+      "allocated_bytes": 12713984,
+      "mtime_ns": 1784645107535680113,
+      "md5": "5d67c2bd61385da2089416729962ba03",
+      "sha256": "242cd34080a3b24a75c4c7717d7873a12b4f8800574f36d04d07c94a4650d580",
+      "drive_readback": [
+        {
+          "id": "1aM5K8FXID-uaHyBeDVDJKQP1O5ENv6XH",
+          "name": "5_97 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 12710809,
+          "md5": "5d67c2bd61385da2089416729962ba03",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/cc7e9130af0b958f.mp4",
+      "size_bytes": 12976561,
+      "allocated_bytes": 12980224,
+      "mtime_ns": 1784645117758694680,
+      "md5": "718c6eba147e510e5be81d434d240c21",
+      "sha256": "2e8c1f05f9c1d889e63ca27723c2ba76d393c5078878d87153283cfa0d95673b",
+      "drive_readback": [
+        {
+          "id": "1TIG4Fa_3lccg-t-Hw25x-2Nqc8Hsx9Q1",
+          "name": "9_102 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 12976561,
+          "md5": "718c6eba147e510e5be81d434d240c21",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/f0536ed3d2798802.mp4",
+      "size_bytes": 10206732,
+      "allocated_bytes": 10207232,
+      "mtime_ns": 1784645100945670725,
+      "md5": "c0741e24bff57f8dcd24616e1a2ecefb",
+      "sha256": "530f1aedb2acdba780206a0a9eac7dbe6d892d6f40d2d16a5bdac99d508454bf",
+      "drive_readback": [
+        {
+          "id": "1LoaN82DGaoXwIwPSnaNSxJdoil8XWa-O",
+          "name": "3_94 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 10206732,
+          "md5": "c0741e24bff57f8dcd24616e1a2ecefb",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-21T14:36:07.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260728-kelly/20260728T151527Z/videos/491e3c46a889cd30.mp4",
+      "size_bytes": 11680165,
+      "allocated_bytes": 11681792,
+      "mtime_ns": 1785251732554650998,
+      "md5": "6262908dcadf823a4519bc9cfd6e0199",
+      "sha256": "978761c092c187a64284c2cc8ae04c6353adef8eebefbbbba3a8cea25ae8c13d",
+      "drive_readback": [
+        {
+          "id": "1QrYS50bdWsOXVb1DAm2bUDneIR7Sdj5B",
+          "name": "2_126 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 11680165,
+          "md5": "6262908dcadf823a4519bc9cfd6e0199",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-28T15:08:04.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260728-kelly/20260728T151527Z/videos/f023ccc4ceb30b41.mp4",
+      "size_bytes": 9666258,
+      "allocated_bytes": 9666560,
+      "mtime_ns": 1785251729072647982,
+      "md5": "0e74c8161fa8ac6fbf39e02a717fd88b",
+      "sha256": "36c7692ded7347f845fbc1b71b7a4a00678f6323111c3be802be67bffbd0fcfe",
+      "drive_readback": [
+        {
+          "id": "1TRrz2xizQRFVw7U1aX-w76fSeWL3OsJN",
+          "name": "1_129 - Story Financiamento (Brasil).mp4",
+          "http": 200,
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "trashed": false,
+          "size": 9666258,
+          "md5": "0e74c8161fa8ac6fbf39e02a717fd88b",
+          "mimeType": "video/mp4",
+          "modifiedTime": "2026-07-28T15:08:04.000Z",
+          "readback_ok": true
+        }
+      ],
+      "process_refs": [],
+      "literal_runtime_refs": [],
+      "symlink_refs": [],
+      "is_mountpoint": false
+    }
+  ]
+}

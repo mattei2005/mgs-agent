@@ -84,6 +84,12 @@ Use two sections:
 1. **Updates:** closed pendencies, current candidates, service/reboot health, Git release/main distinction, local port risk, recommendation.
 2. **Backups:** total by root/set, exact high-confidence deletion paths and bytes, projected disk result, protected/conditional classes, housekeeping coverage gap.
 
+When Rodolfo asks **only what remained after a cleanup**, answer strictly from a fresh post-cleanup inventory: omit every deleted class/path, avoid before/after narration, and show only current bytes plus whether each residue is removable, conditional, or protected. Keep overlapping roots explicitly non-additive. If he asks which dates remain, summarize current files in date/age ranges with file counts and allocated bytes instead of listing already removed history or every child path.
+
+For residual backup review, distinguish exact duplicates of the live state from historically unique content. A file that duplicates the live state is not individually removable when it belongs to an archive/checksum/restore set whose integrity would be broken. For temporary storage, measure age from the newest descendant in each top-level entry and check live process references before classifying it as abandoned.
+
+A provider-level whole-VPS snapshot may replace overlapping bulky local pre-update archives only after the snapshot is created outside the VPS, provider/account access is read back, and restoration capability is proven. Keep offsite backup as a separate failure domain and retain current local rollback/archives until that gate passes; never substitute a tar of `/` stored on the same VPS and never retire verified recovery paths merely because the snapshot was proposed.
+
 Do not dump thousands of child paths into Discord. Count all files, but list deletion candidates at the exact file or operational-set boundary that would be authorized.
 
 ## Completion checklist
