@@ -312,11 +312,17 @@ check_patches_against_upstream() {
   local wt="$REPORT_DIR/upstream-worktree"
   git -C "$REPO" worktree add --detach "$wt" "$TARGET_REF" > "$REPORT_DIR/worktree-add.txt" 2>&1
   local rc=0
-  local runtime_patches=("$PATCH_DIR"/mgs-runtime-customizations-*.patch)
+  # Derive the canonical runtime patch from the guard's first consolidated
+  # patch entry. Filename sorting is unsafe when more than one port is created
+  # on the same date or when an older suffix sorts after a newer target.
   local latest_runtime_patch=""
-  if [[ -e "${runtime_patches[0]:-}" ]]; then
-    latest_runtime_patch="${runtime_patches[${#runtime_patches[@]}-1]##*/}"
-  fi
+  latest_runtime_patch="$(python3 - "$ENSURE_SCRIPT" <<'PY'
+import re, sys
+text = open(sys.argv[1], encoding="utf-8").read()
+m = re.search(r'apply_patch_if_needed "(mgs-runtime-customizations-[^"]+\.patch)"', text)
+print(m.group(1) if m else "")
+PY
+)"
   {
     if [[ -z "$latest_runtime_patch" ]]; then
       echo "MISSING latest mgs-runtime-customizations patch"

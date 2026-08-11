@@ -34,6 +34,7 @@ fi
 
 PATCH_DIR="${PATCH_DIR:-/root/mgs-agent/patches/hermes}"
 PATCHES=(
+  "$PATCH_DIR/mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"
   "$PATCH_DIR/mgs-runtime-customizations-2026-08-11-v0200.patch"
   "$PATCH_DIR/mgs-runtime-customizations-2026-08-02-v0191.patch"
 )
