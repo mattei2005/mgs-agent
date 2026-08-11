@@ -132,10 +132,19 @@ When the package gate leaves `/var/run/reboot-required`, the VPS phase remains o
 4. Do not let a scheduled validator become a duplicate asynchronous conclusion. If Rodolfo asks for status before it runs, inspect the live host first, pause/remove the pending validator, complete the checks in foreground, and deliver one canonical result. If it already ran, read its actual output before replying.
 5. Persist a compact validation artifact, update the existing inventory entries rather than duplicating them, close the checkpoint, append audit readback, and send one canonical REPORT-INFRA embed. Remove any one-shot validator after foreground completion.
 6. Communication is binary-first: `sim, VPS concluída` only after all post-boot gates pass; otherwise `não, <single remaining gate>` before details. Never describe `packages updated; reboot pending` as complete maintenance.
+7. Prefer a durable one-shot systemd unit that is enabled before reboot, writes into the validated maintenance backup, waits for fresh gateway readiness, posts one clean conclusion, and disables/removes only itself after persisting result/audit/inventory. Validate both the result artifact and cleanup (`unit not-found/inactive`) on the next foreground readback; a cached `Result=success` alone is insufficient.
+8. Filter agent-log and journal evidence by the **new boot boundary** (boot ID or boot timestamp). Arbitrary tail windows contain historical ERROR/Traceback markers and can create false post-reboot alarms even when `journalctl -b` is clean.
+9. On a second-pass audit, classify residuals instead of collapsing them into “VPS dirty”: normal APT candidates/reboot markers are OS maintenance; Ubuntu Pro/ESM-only fixes are an entitlement decision; a deferred Hermes port is application lifecycle; failed DTR/SB writes are application operations. Report each owner/scope separately and do not expand the authorized maintenance scope.
+10. Parse `pro security-status --format json` defensively from `summary`: schema variants can expose `packages` as a list and omit a `services` object. `num_standard_security_updates`, `num_esm_apps_updates`, `reboot_required`, and `summary.ua.attached` are the stable decision fields; never make a clean/dirty claim from an assumed nested shape.
 
 ## 8. Reconcile canonical services and inventory
 
 Do not guess unit names. Resolve operational services from `data/infra-inventory.json` and live systemd readback; for example, the active MGS auto-commit unit may differ from an assumed name.
+
+Cron/control-plane reconciliation has two common traps:
+
+- `log_stat.exists=false` is not automatically a failed job. A crontab may redirect stdout to `/dev/null` while the called wrapper writes its own canonical log internally. Read the cron command and wrapper before classifying the absence.
+- With `set -euo pipefail`, a wrapper that pipes a child through `tee` can exit immediately when the child returns nonzero, before its intended `PIPESTATUS`, `END rc=...`, or cleanup lines run. A final `START` without `END` therefore requires reading the child’s structured result and checking whether its failure is infrastructure, authentication already recovered, or an application write that awaits retry. Do not call the whole VPS unhealthy from the missing footer alone.
 
 When Monarx changes:
 
