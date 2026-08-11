@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-11T00:28:02-04:00",
+    "updated_at": "2026-08-11T01:18:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -5438,6 +5438,40 @@
       },
       "rollback": "restore backup scripts; restore origin URL from remote mgs-port-source only if reverting remote topology; restore state backup before republishing",
       "updated_at": "2026-08-10T23:34:11-04:00"
+    },
+    {
+      "id": "hermes-port-9d6c5a92-20260811",
+      "agent": "zeus",
+      "type": "hermes_runtime_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1536593883092484106",
+      "source_thread_id": "1536567182824308839",
+      "status": "staged_validated_pending_activation",
+      "installed_before": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
+      "target_sha": "9d6c5a920c773f86fad9ea16528212faeaa21815",
+      "target_version": "0.20.0",
+      "candidate_path": "/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92",
+      "candidate_commit": "8c8a6b4b79d85d00da173ce81aafca5e78c12249",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-11-v0200.patch",
+      "patch_sha256": "6372cde1232efbede375600a6563868cab279ff2f4b22882fe52553f6af0eafb",
+      "guard": "/root/mgs-agent/scripts/ensure-hermes-local-patches.sh",
+      "guard_sha256": "cf7cfd8f1216bf9134581e5d90dedb3d6b6acfc0a70a3368bf2b4c9497c77aa9",
+      "patch_scope_files": 43,
+      "report_dir": "/root/mgs-agent/reports/hermes-updates/20260811-port-9d6c5a92",
+      "backup": "/root/mgs-agent/reports/hermes-updates/20260811-004100/hermes-profiles-backup-20260811-004100.tar.gz",
+      "validation": {
+        "surface_tests": "532 passed + 6 subtests",
+        "post_upstream_guard": "193 passed",
+        "config_check": "Zeus/Atena/Ares 3/3 rc=0",
+        "profile_status": "3/3 rc=0; active provider openai-codex/gpt-5.6-sol",
+        "patch_guard_three_state": "legacy active reverse PASS; candidate reverse PASS; clean target apply tree exact PASS",
+        "profile_config_hashes_unchanged": true,
+        "source_pathset_preserved": "43/43",
+        "candidate_cli_import": "PASS"
+      },
+      "rollback_launcher": "/root/.local/bin/hermes-v0191-mgs",
+      "updated_at": "2026-08-11T01:18:39-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6934,6 +6968,11 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ensure-hermes-local-patches.sh",
+      "size_bytes": 1800,
+      "modified_at": "2026-08-11T01:18:39-04:00"
     }
   ],
   "skills_mgs": [
