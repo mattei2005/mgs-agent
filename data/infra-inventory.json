@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-11T08:31:12-04:00",
+    "updated_at": "2026-08-11T08:32:41-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -186,12 +186,13 @@
         "security_services": "monarx-agent active; cron active",
         "reboot_required": false,
         "journal_errors_since_boot": 0,
-        "needrestart_kernel": "current 6.8.0-136-generic",
+        "needrestart_kernel": "current 6.8.0-137-generic",
         "needrestart_deferred_service": null,
         "needrestart_sessions": "none reported post-reboot",
-        "rollback_integrity": "PASS; SHA256SUMS present; npm/corepack tar; old DEBs; 1Password payload/metadata"
+        "rollback_integrity": "PASS; SHA256SUMS present; npm/corepack tar; old DEBs; 1Password payload/metadata",
+        "ubuntu_pro": "attached; esm-apps/esm-infra/livepatch enabled; zero ESM Apps updates pending"
       },
-      "updated_at": "2026-08-02T19:42:25-04:00",
+      "updated_at": "2026-08-11T12:32:41.527969+00:00",
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
@@ -259,15 +260,173 @@
       "purpose": "Extended security coverage for Ubuntu packages and kernel livepatching.",
       "validation": {
         "attached": true,
-        "esm_apps_updates_pending": 24,
+        "esm_apps_updates_pending": 0,
         "standard_security_updates_pending": 0,
         "livepatch_kernel_supported": true,
         "livepatch_patch_state": "nothing-to-apply",
-        "reboot_required": false
+        "reboot_required": false,
+        "apt_upgradable": 0,
+        "dpkg_audit": "clean",
+        "held_packages": 0,
+        "failed_systemd_units": 0,
+        "gateway_pids": "unchanged"
       },
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536712042700873818",
-      "updated_at": "2026-08-11T12:28:14.996282+00:00"
+      "updated_at": "2026-08-11T12:32:41.527969+00:00",
+      "packages_count": 24,
+      "packages": [
+        {
+          "name": "imagemagick-6-common",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "libmagickcore-6.q16-7t64",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "libmagickwand-6.q16-7t64",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "libswscale7",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libavdevice60",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libavformat60",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libavfilter9",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libavcodec60",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libavutil58",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libpostproc57",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libswresample4",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "libzvbi0t64",
+          "previous_version": "0.2.42-2",
+          "version": "0.2.42-2ubuntu0.24.04.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "libzvbi-common",
+          "previous_version": "0.2.42-2",
+          "version": "0.2.42-2ubuntu0.24.04.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "ffmpeg",
+          "previous_version": "7:6.1.1-3ubuntu5",
+          "version": "7:6.1.1-3ubuntu5+esm10",
+          "status": "installed"
+        },
+        {
+          "name": "imagemagick-6.q16",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "imagemagick",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "libcjson1",
+          "previous_version": "1.7.17-1",
+          "version": "1.7.17-1ubuntu0.1~esm3",
+          "status": "installed"
+        },
+        {
+          "name": "libopenexr-3-1-30",
+          "previous_version": "3.1.5-5.1build3",
+          "version": "3.1.5-5.1ubuntu0.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "libmagickcore-6.q16-7-extra",
+          "previous_version": "8:6.9.12.98+dfsg1-5.2build2",
+          "version": "8:6.9.12.98+dfsg1-5.2ubuntu0.1~esm12",
+          "status": "installed"
+        },
+        {
+          "name": "libmbedcrypto7t64",
+          "previous_version": "2.28.8-1",
+          "version": "2.28.8-1ubuntu0.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "node-lodash-packages",
+          "previous_version": "4.17.21+dfsg+~cs8.31.198.20210220-9",
+          "version": "4.17.21+dfsg+~cs8.31.198.20210220-9ubuntu0.24.04.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "python3-wheel",
+          "previous_version": "0.42.0-2",
+          "version": "0.42.0-2ubuntu0.1~esm1",
+          "status": "installed"
+        },
+        {
+          "name": "python3-pip",
+          "previous_version": "24.0+dfsg-1ubuntu1.3",
+          "version": "24.0+dfsg-1ubuntu1.3+esm3",
+          "status": "installed"
+        },
+        {
+          "name": "python3-pip-whl",
+          "previous_version": "24.0+dfsg-1ubuntu1.3",
+          "version": "24.0+dfsg-1ubuntu1.3+esm3",
+          "status": "installed"
+        }
+      ],
+      "last_maintenance": {
+        "authorization_message_id": "1536713317085614181",
+        "result": "PASS; 24 ESM Apps packages upgraded; zero pending; no reboot; gateways unchanged",
+        "rollback": "/root/.hermes/secure-backups/vps-maintenance/ubuntu-pro-esm-20260811T123045Z",
+        "log": "/root/mgs-agent/logs/ubuntu-pro-esm-update-20260811T123045Z.log"
+      }
     }
   ],
   "runtime_artifacts": [
@@ -9072,8 +9231,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 21173,
-      "md5": "135d817cabee4f60dc01008186c30ef3",
-      "modified_at": "2026-08-11T08:27:01-04:00"
+      "md5": "7963af6d4b9bb4909a2b8272feffc308",
+      "modified_at": "2026-08-11T08:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -9180,14 +9339,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 27103,
-      "md5": "e925486e686df084dc95a5ea04997fed",
-      "modified_at": "2026-08-11T08:31:02-04:00"
+      "md5": "4a3e2d68c79d7277893658db3833f7db",
+      "modified_at": "2026-08-11T08:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 355,
-      "md5": "8c5d187d7dcc54f2c117d98d73f77bd2",
-      "modified_at": "2026-08-11T08:31:02-04:00"
+      "md5": "0055a29f3ff7c961ba6d7d9ece4c300b",
+      "modified_at": "2026-08-11T08:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -9215,9 +9374,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 407957,
-      "md5": "151fa09f2fd932c639d29bcf58a7dc4f",
-      "modified_at": "2026-08-11T08:31:11-04:00"
+      "size_bytes": 413332,
+      "md5": "1fab374f01465b1922a89e064f49a220",
+      "modified_at": "2026-08-11T08:32:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -9257,9 +9416,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 112593,
-      "md5": "fc21d3f6bfcaed9fc8d7a24a2b082ae8",
-      "modified_at": "2026-08-11T08:28:31-04:00"
+      "size_bytes": 112601,
+      "md5": "5e54eff85079f74ce7b7816be14004f8",
+      "modified_at": "2026-08-11T08:31:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
