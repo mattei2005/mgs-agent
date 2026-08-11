@@ -213,12 +213,12 @@
     {
       "agent": "zeus",
       "id": "hermes-v0200-activation-20260811",
-      "next_step": "Corrigir o finalizer para caminho absoluto de uv, refazer snapshot/gates e ativar o target congelado; validar três gateways. Depois executar inventário integral da VPS e congelar manifesto exato antes de qualquer limpeza.",
-      "objective": "Atualizar Hermes controladamente de 0.19.1 para o port MGS 0.20.0 congelado e, após aceitação/burn-in, auditar a VPS inteira para limpeza conservadora.",
-      "source": "discord:thread:1536567182824308839#1536717686695002284; live:/root/.local/bin/hermes; git:/root/.hermes/hermes-agent-port-v0191-cc4cab2f; git:/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92",
-      "state": "pré-update reconciliado: runtime ativo 0.19.1 local 506a8a80 sobre base cc4cab2f; target congelado 0.20.0 local 8c8a6b4b sobre upstream 9d6c5a92; delta operacional 2086 commits; main atual c0106e50 está 5 commits após o target.",
+      "next_step": "Executar finalizador detached; validar main atual sem commits pendentes; auditar limpeza sem excluir",
+      "objective": "Atualizar Hermes integralmente e revisar limpeza conservadora da VPS",
+      "source": "discord:1536567182824308839",
+      "state": "activation_prepared",
       "thread_id": "1536567182824308839",
-      "updated_at": "2026-08-11T12:49:53+00:00"
+      "updated_at": "2026-08-11T13:26:21+00:00"
     },
     {
       "agent": "zeus",
@@ -602,5 +602,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-11T12:49:53+00:00"
+  "updated_at": "2026-08-11T13:26:21+00:00"
 }
