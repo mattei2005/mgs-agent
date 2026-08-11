@@ -15,6 +15,8 @@ Capture into a mode-`0700` secure maintenance set:
 - `/tmp` owner/group/mode;
 - exact previous vendor `.deb` when available, plus a SHA256 manifest validated before mutation.
 
+For systemd pre-state, never assume that multiple `systemctl show -p ... --value` lines preserve the caller's property order. Query `ActiveState`, `MainPID`, restart count, and exit status separately, or parse named `Property=value` output by key. A swapped PID/state field can make a healthy service snapshot unusable as reboot evidence.
+
 Do not call `packages updated; reboot pending` complete maintenance.
 
 ## Package gate before reboot
@@ -53,15 +55,17 @@ Report inaccessible ESM Apps updates as a separate residual; do not fold them in
 
 ## Governance closure
 
-Write an atomic compact result JSON first, then:
+Write an atomic compact result JSON first, then close in this order:
 
-- append audit readback;
-- update the existing VPS and vendor-agent inventory records instead of adding duplicate baselines;
-- close or fail the existing checkpoint;
-- send one REPORT-INFRA embed with content empty and readback evidence;
-- post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
-- persist transport receipts in the result artifact;
-- clean the one-shot unit after the result is durable.
+1. append the validation audit readback;
+2. update the existing VPS/vendor inventory records and close or fail the checkpoint;
+3. disable/remove the one-shot unit, daemon-reload, and verify the unit is absent/inactive;
+4. update the validator runtime-artifact entry to `cleaned_after_validation` and append a cleanup audit boundary;
+5. send one REPORT-INFRA embed with content empty and evidence that includes the cleanup readback;
+6. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
+7. persist REPORT/thread transport receipts in the result artifact.
+
+Do not publish the final green REPORT before the one-shot unit is actually cleaned. If cleanup fails, keep the result durable, classify `unit_cleanup` as a governance failure, and report red rather than claiming full closure.
 
 ## Pre-reboot verification
 
@@ -78,7 +82,7 @@ Before scheduling reboot, require:
 
 ## Pitfalls
 
+- After the Critical confirmation, finish and hash the pre-state, validator, unit, and reboot finalizer before dispatch. Use a detached, silent finalizer with a short acknowledgement window plus hard guards (`unit enabled`, protected gateway active, hashes/readback still valid); deliver the user-facing “reboot dispatched” message before the finalizer calls `systemctl reboot`. Never use completion notifications or poll that reboot from the active Discord tool chain.
 - Do not reuse dated post-reboot scripts with old thread IDs, legacy Hermes paths, plaintext REPORT formats or stale service lists.
-- Do not poll the reboot from the active Discord tool chain.
 - Do not post a second asynchronous conclusion if a foreground status check already consumed and replaced the pending validator.
 - A validator failure is a real open maintenance phase; preserve its artifact and report the first gate rather than smoothing it into success.

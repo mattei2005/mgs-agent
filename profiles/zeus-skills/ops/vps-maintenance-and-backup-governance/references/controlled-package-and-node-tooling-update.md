@@ -40,6 +40,20 @@ Before touching `/usr`, present:
 
 Do not treat a general “continue maintenance” as permission to add unrelated packages, restart a deferred system service, update Hermes, or reboot.
 
+### Ubuntu Pro attachment is its own system-config gate
+
+Treat `pro attach` as a production system-configuration mutation, not as a harmless login helper: successful browser confirmation can alter APT entitlement/configuration and enable ESM/Livepatch. Obtain the Critical Subset confirmation **before** starting the attach flow. Then:
+
+1. Confirm live `attached=false` before generating a device code.
+2. Run `pro attach` in a silent PTY/background process and poll it manually; never enable asynchronous raw-output delivery in an operational Discord thread.
+3. Send the short-lived device URL/code only to the authorized owner for immediate use. Do not persist the code, repeat account email from command output, or include either in audit/inventory.
+4. Wait for process exit `0`; a browser “feito” is not local validation.
+5. Read back `attached=true` and the statuses of `esm-apps`, `esm-infra`, and `livepatch`. Validate Livepatch separately against the running kernel.
+6. Inventory and REPORT the attachment before claiming closure.
+7. Treat package installation as a second gate: simulate the newly entitled transaction, freeze exact versions and rollback, and obtain the `/usr` confirmation before applying it.
+
+This separation prevents device authorization from silently expanding into package installation or reboot.
+
 ## 3. Build rollback before mutation
 
 Create a mode-`0700` set under:
@@ -82,6 +96,8 @@ Immediately validate:
 - Zeus/Atena/Ares active;
 - gateway PIDs unchanged unless their restart was explicitly authorized;
 - no priority 0..3 journal errors since the maintenance boundary.
+
+When freezing or comparing service state, do not parse multiple `systemctl show -p ... --value` properties by positional line order; systemd may emit them in a different order than requested. Query each property separately, or retain `Property=value` names and parse by key. Require `ActiveState=active` and a positive `MainPID` independently before comparing PIDs.
 
 Record the APT gate before proceeding to npm.
 
