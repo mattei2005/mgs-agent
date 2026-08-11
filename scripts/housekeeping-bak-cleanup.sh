@@ -239,11 +239,17 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
             log "  would rm hermes-update $f"
         done
     fi
-    awk -F '\t' '$1 == "preserve_latest" {print $5}' "$KEEP_FILE" | head -30 | while IFS= read -r f; do
+    # Limit in awk instead of piping through head: with `set -o pipefail`,
+    # head closes early and can make awk exit on SIGPIPE, falsely failing an
+    # otherwise successful dry-run when more than 30 families are preserved.
+    awk -F '\t' '$1 == "preserve_latest" && shown < 30 {print $5; shown++}' "$KEEP_FILE" | while IFS= read -r f; do
         [[ -z "$f" ]] && continue
         log "  keep latest $f"
     done
-    DIRS_CANDIDATE=$(find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
+    DIRS_CANDIDATE=0
+    if [[ -d "$BACKUPS_ROOT" ]]; then
+        DIRS_CANDIDATE=$(find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
+    fi
     log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
     log "=== END DRY-RUN — candidatos ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="
     exit 0
@@ -269,7 +275,14 @@ if (( DELETE_FAILURES > 0 )); then
 fi
 
 # ─── Limpar diretórios vazios deixados pra trás (snapshots antigos) ─────────
-DIRS_REMOVED=$({ find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find "$HERMES_UPDATE_ROOT" -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
+DIRS_REMOVED=$({
+    if [[ -d "$BACKUPS_ROOT" ]]; then
+        find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null
+    fi
+    if [[ -d "$HERMES_UPDATE_ROOT" ]]; then
+        find "$HERMES_UPDATE_ROOT" -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null
+    fi
+} | wc -l)
 if [[ "$DIRS_REMOVED" -gt 0 ]]; then
     log "Removidos ${DIRS_REMOVED} diretórios vazios"
 fi

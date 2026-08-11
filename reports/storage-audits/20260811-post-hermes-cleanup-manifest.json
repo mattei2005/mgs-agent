@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "generated_at_utc": "2026-08-11T14:30:20.497877+00:00",
+  "mode": "frozen_read_only_no_deletion",
+  "source_audit": "/root/mgs-agent/reports/storage-audits/20260811-post-hermes-v0200-full-scan.json",
+  "target_set_sha256": "4f5109b86c5271cdc0b11cb910524803ae0ad0182cf86832e77b5e5bcc3a4be5",
+  "authorization_required": "Critical Subset double-confirmation before any deletion; any scope/size/path change requires a new manifest and confirmation",
+  "preconditions": {
+    "primary_maintenance": "activated_validated",
+    "active_runtime": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+    "active_port_commit": "6fc69c9d705a41f7b31a200b12a75677857e9a8a",
+    "upstream_behind": 0,
+    "report_infra_readback_message_id": "1536736742135304214",
+    "failed_units": 0,
+    "process_references_to_targets": 0,
+    "same_device_only": true,
+    "retained_profile_archive_validation": "PASS tar 75245 entries; sha256 3f5d5efd652626648e7a74dc81df377a239183d128d511d3ece729937918aa0b; isolated restore 6 structural files PASS",
+    "offsite_backup": "quick PASS 2026-08-11T14:24:26Z; full PASS 2026-08-11T08:16:40Z; isolated full restore PASS 2026-08-09T09:45:55Z",
+    "rollback_runtime": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f preserved; clean; config v34 3/3"
+  },
+  "targets": [
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "listed_path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "action": "delete_tree",
+      "reason": "superseded_staging_runtime",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 24148,
+      "dirs": 3379,
+      "symlinks": 3,
+      "logical_bytes": 2389903533,
+      "allocated_bytes": 2451906560,
+      "oldest_mtime_utc": "2026-07-04T17:17:34.263646+00:00",
+      "newest_mtime_utc": "2026-08-03T00:18:51.991170+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "c38358ac6d0ccf4fe83d225a6668e6d564b6abd154bb7251345145d4d765d806"
+    },
+    {
+      "path": "/root/.local/bin/hermes-b9ba7c78",
+      "listed_path": "/root/.local/bin/hermes-b9ba7c78",
+      "action": "delete_file",
+      "reason": "launcher_for_superseded_staging_runtime",
+      "process_refs": 0,
+      "type": "file",
+      "files": 1,
+      "dirs": 0,
+      "symlinks": 0,
+      "logical_bytes": 338,
+      "allocated_bytes": 4096,
+      "oldest_mtime_utc": "2026-07-27T04:05:35.633024+00:00",
+      "newest_mtime_utc": "2026-07-27T04:05:35.633024+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "676c2319351136f27be59345988b0096d8e0b39e3ed733795f045f6fd08a2647"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92",
+      "listed_path": "/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92",
+      "action": "delete_tree",
+      "reason": "superseded_hermes_port",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 17525,
+      "dirs": 2119,
+      "symlinks": 3,
+      "logical_bytes": 781361554,
+      "allocated_bytes": 822628352,
+      "oldest_mtime_utc": "2026-08-11T04:59:51.886710+00:00",
+      "newest_mtime_utc": "2026-08-11T12:48:08.462113+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "fff9cf67b4bbb1d365b26200983feb6714dc0f9839be731b5c44de699cef6d4f"
+    },
+    {
+      "path": "/root/.local/bin/hermes-v0200-mgs",
+      "listed_path": "/root/.local/bin/hermes-v0200-mgs",
+      "action": "delete_symlink",
+      "reason": "launcher_for_superseded_hermes_port",
+      "process_refs": 0,
+      "type": "symlink",
+      "files": 1,
+      "dirs": 0,
+      "symlinks": 1,
+      "logical_bytes": 66,
+      "allocated_bytes": 4096,
+      "oldest_mtime_utc": "2026-08-11T05:22:45.586116+00:00",
+      "newest_mtime_utc": "2026-08-11T05:22:45.586116+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "a8f84f2f985e631972c766c3df924908069f5489851d69bbeef1e3c514b4e3f9"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-verify-v0191-cc4cab2f",
+      "listed_path": "/root/.hermes/hermes-agent-verify-v0191-cc4cab2f",
+      "action": "delete_tree",
+      "reason": "obsolete_verification_checkout",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 8115,
+      "dirs": 963,
+      "symlinks": 0,
+      "logical_bytes": 143680742,
+      "allocated_bytes": 161738752,
+      "oldest_mtime_utc": "2026-08-02T22:29:00.152609+00:00",
+      "newest_mtime_utc": "2026-08-02T22:29:02.324612+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "70ea3925a4e40c45f69c340523f442841f664417a7db95ad91b85d44c34ae3fe"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-verify2-v0191-cc4cab2f",
+      "listed_path": "/root/.hermes/hermes-agent-verify2-v0191-cc4cab2f",
+      "action": "delete_tree",
+      "reason": "obsolete_verification_checkout",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 8636,
+      "dirs": 1068,
+      "symlinks": 0,
+      "logical_bytes": 166261760,
+      "allocated_bytes": 185450496,
+      "oldest_mtime_utc": "2026-08-02T22:35:27.044247+00:00",
+      "newest_mtime_utc": "2026-08-02T22:36:44.980374+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "8fe48d520fe137568c97663e7bc21b06514bd6a1efcdfff112b7152767330b77"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
+      "listed_path": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
+      "action": "delete_file",
+      "reason": "older_than_two_newer_validated_profile_backups",
+      "process_refs": 0,
+      "type": "file",
+      "files": 1,
+      "dirs": 0,
+      "symlinks": 0,
+      "logical_bytes": 3765540839,
+      "allocated_bytes": 3765547008,
+      "oldest_mtime_utc": "2026-08-02T21:57:37.726892+00:00",
+      "newest_mtime_utc": "2026-08-02T21:57:37.726892+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "7de256464aa186f22380094da60872ab136659bed3e9e611f63649f9a9842e8a"
+    },
+    {
+      "path": "/root/.cache/pip",
+      "listed_path": "/root/.cache/pip",
+      "action": "delete_tree",
+      "reason": "rebuildable_package_cache",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 222,
+      "dirs": 437,
+      "symlinks": 0,
+      "logical_bytes": 183924488,
+      "allocated_bytes": 184446976,
+      "oldest_mtime_utc": "2026-07-31T15:51:09.049623+00:00",
+      "newest_mtime_utc": "2026-08-06T14:18:08.264305+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "7c9d9c1f75d2e0a139147f0983aa1e13e68ce01f11fadf776c75761959d8ef5b"
+    },
+    {
+      "path": "/root/.cache/uv",
+      "listed_path": "/root/.cache/uv",
+      "action": "delete_tree",
+      "reason": "rebuildable_package_cache",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 9233,
+      "dirs": 1355,
+      "symlinks": 0,
+      "logical_bytes": 829944144,
+      "allocated_bytes": 852807680,
+      "oldest_mtime_utc": "2026-07-27T17:54:03.525517+00:00",
+      "newest_mtime_utc": "2026-08-11T13:14:52.239152+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "588448954fa6b3ac075af0e3ab2062b4001ab140116aa804b06b3bcb8607a26a"
+    },
+    {
+      "path": "/root/.npm/_cacache",
+      "listed_path": "/root/.npm/_cacache",
+      "action": "delete_tree",
+      "reason": "rebuildable_package_cache",
+      "process_refs": 0,
+      "type": "directory",
+      "files": 969,
+      "dirs": 1407,
+      "symlinks": 0,
+      "logical_bytes": 304925025,
+      "allocated_bytes": 307531776,
+      "oldest_mtime_utc": "2026-07-28T03:35:21.375982+00:00",
+      "newest_mtime_utc": "2026-08-11T13:11:30.595258+00:00",
+      "errors": 0,
+      "mount_crossings": 0,
+      "metadata_fingerprint_sha256": "10a664a2408ac1c5a58ea851f9bc13f15d132cf83d9bbd5b21bb70b13e20b5a8"
+    }
+  ],
+  "summary": {
+    "entries": 10,
+    "files": 68851,
+    "dirs": 10728,
+    "symlinks": 7,
+    "logical_bytes": 8565542489,
+    "allocated_bytes": 8732065792,
+    "current_total_bytes": 102888095744,
+    "current_used_bytes": 67231309824,
+    "current_free_bytes": 35656785920,
+    "current_used_percent": 65.34,
+    "projected_used_bytes": 58499244032,
+    "projected_free_bytes": 44388851712,
+    "projected_used_percent": 56.86
+  },
+  "retained_protected": [
+    {
+      "path": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+      "reason": "active runtime"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f",
+      "reason": "minimum rollback runtime"
+    },
+    {
+      "path": "/root/.local/bin/hermes-v0191-mgs",
+      "reason": "rollback launcher"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent",
+      "reason": "canonical source checkout used by default update tooling"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260811-main-c0106e50-precheck2/hermes-profiles-backup-20260811-090113.tar.gz",
+      "reason": "latest validated canonical profile rollback archive"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260811-004100/hermes-profiles-backup-20260811-004100.tar.gz",
+      "reason": "second-newest archive protected by current keep-latest=2 policy"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety",
+      "reason": "exactly two validated archives retained by current policy"
+    },
+    {
+      "path": "/root/.hermes/secure-backups",
+      "reason": "unique rollback/state sets; separate retention review"
+    },
+    {
+      "path": "/root/.cache/ms-playwright",
+      "reason": "operational browser revisions 1228/1234"
+    },
+    {
+      "path": "/root/.cache/huggingface",
+      "reason": "operational local models"
+    },
+    {
+      "path": "/root/.hermes/profiles",
+      "reason": "live profile state"
+    },
+    {
+      "path": "/root/mgs-agent/.git",
+      "reason": "institutional Git history"
+    }
+  ],
+  "queue_b_not_in_target_set": [
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260811-004100/hermes-profiles-backup-20260811-004100.tar.gz",
+      "allocated_bytes": 4674850816,
+      "reason": "would require changing keep-latest from 2 to 1"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f",
+      "allocated_bytes": 2372018176,
+      "reason": "remove only after explicit rollback-window closure"
+    },
+    {
+      "path": "/var/cache/apt/archives",
+      "allocated_bytes": 90853376,
+      "reason": "package rollback cache retained through maintenance burn-in"
+    },
+    {
+      "path": "APT autoremove candidate set",
+      "allocated_bytes": null,
+      "reason": "package removal requires separate dependency review and critical confirmation"
+    }
+  ],
+  "execution_rules": [
+    "Re-read and match every target metadata fingerprint and allocated byte count immediately before deletion",
+    "Abort on any process reference, symlink/type drift, mount crossing, missing retained artifact, failed unit, or upstream/runtime regression",
+    "Delete only exact listed paths; no globs; independent Git roots only; preserve compact logs/reports",
+    "Verify every target absent, retained artifacts present/integrity PASS, services active, smokes PASS, and disk delta after execution",
+    "Update inventory/audit and send one REPORT-INFRA embed after validated execution"
+  ]
+}

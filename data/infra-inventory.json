@@ -5733,7 +5733,7 @@
         "git": "behind=0 ahead=1 MGS clean",
         "discord_partial_edit_pycord27": "unit 10/10 + real flags payload=4 + corrected runtime loaded by 3/3 gateways"
       },
-      "updated_at": "2026-08-11T14:03:01.293129+00:00",
+      "updated_at": "2026-08-11T14:33:36.166226+00:00",
       "activation_finalizer": "/root/mgs-agent/data/hermes-v0200-main-activation-finalizer-20260811.sh",
       "cleanup_audit_script": "/root/mgs-agent/data/vps-post-hermes-cleanup-audit-20260811.py",
       "cleanup_audit_script_sha256": "eade3d945293677f420b884a0afe8229226852c6b169df4543da0052a2e85bef",
@@ -5762,7 +5762,15 @@
       },
       "validated_at": "2026-08-11T14:03:01.293129+00:00",
       "reload_finalizer": "/root/mgs-agent/data/hermes-v0200-discord-edit-reload-finalizer-20260811.sh",
-      "reload_finalizer_sha256": "a2eb42a8eae427cda6ed64605d42465c4b3076d296595de783ea4a5582849512"
+      "reload_finalizer_sha256": "a2eb42a8eae427cda6ed64605d42465c4b3076d296595de783ea4a5582849512",
+      "cleanup_manifest": "/root/mgs-agent/reports/storage-audits/20260811-post-hermes-cleanup-manifest.json",
+      "cleanup_manifest_sha256": "3e05ff0d79835e39ce7f240b212d303a6d7db8ba17e1ab003ea533e4bf088b9c",
+      "cleanup_target_set_sha256": "4f5109b86c5271cdc0b11cb910524803ae0ad0182cf86832e77b5e5bcc3a4be5",
+      "cleanup_status": "frozen_awaiting_critical_confirmation",
+      "cleanup_targets": 10,
+      "cleanup_allocated_bytes": 8732065792,
+      "cleanup_projected_used_percent": 56.86,
+      "cleanup_mutation_performed": false
     }
   ],
   "profile_skill_references": [
@@ -6787,8 +6795,11 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 14972,
-      "modified_at": "2026-07-11T00:24:01-04:00"
+      "size_bytes": 15393,
+      "modified_at": "2026-08-11T10:32:33-04:00",
+      "sha256": "bb3cc53edb621f4804d5f42baeb23c2d2761436ae5a9762c469dc4ce7e5c9871",
+      "validation": "bash -n PASS; dry-run rc=0; 1 eligible tarball 3591.10 MiB; no mutation",
+      "updated_at": "2026-08-11T14:33:36.166226+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
