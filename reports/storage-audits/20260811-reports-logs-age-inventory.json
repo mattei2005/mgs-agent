@@ -1,0 +1,1108 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-11T18:16:25.982621+00:00",
+  "timezone": "America/New_York",
+  "scopes": {
+    "reports_non_hermes": {
+      "root": "/root/mgs-agent/reports",
+      "files": 456,
+      "allocated_bytes": 191324160,
+      "oldest_mtime_local": "2026-06-27T18:49:10.178077-04:00",
+      "newest_mtime_local": "2026-08-11T14:15:50.422496-04:00",
+      "months": {
+        "2026-06": {
+          "files": 4,
+          "allocated_bytes": 94208,
+          "logical_bytes": 87036
+        },
+        "2026-07": {
+          "files": 394,
+          "allocated_bytes": 152174592,
+          "logical_bytes": 151339170
+        },
+        "2026-08": {
+          "files": 58,
+          "allocated_bytes": 39055360,
+          "logical_bytes": 38932623
+        }
+      },
+      "age_buckets": {
+        "30-60d": {
+          "files": 274,
+          "allocated_bytes": 89759744,
+          "logical_bytes": 89200026
+        },
+        "14-30d": {
+          "files": 111,
+          "allocated_bytes": 52887552,
+          "logical_bytes": 52634181
+        },
+        "7-14d": {
+          "files": 35,
+          "allocated_bytes": 20549632,
+          "logical_bytes": 20469505
+        },
+        "1-7d": {
+          "files": 23,
+          "allocated_bytes": 16338944,
+          "logical_bytes": 16291367
+        },
+        "0-1d": {
+          "files": 13,
+          "allocated_bytes": 11788288,
+          "logical_bytes": 11763750
+        }
+      },
+      "older_than_30d": {
+        "files": 274,
+        "allocated_bytes": 89759744
+      },
+      "older_than_60d": {
+        "files": 0,
+        "allocated_bytes": 0
+      },
+      "oldest_files": [
+        {
+          "path": "/root/mgs-agent/reports/meta-app-rate-limit-monitor-explicacao.txt",
+          "relative_path": "meta-app-rate-limit-monitor-explicacao.txt",
+          "mtime_local": "2026-06-27T18:49:10.178077-04:00",
+          "age_days": 44.81,
+          "size_bytes": 5308,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/migracao-colN-not-emails-backup-20260701T024518Z.json",
+          "relative_path": "migracao-colN-not-emails-backup-20260701T024518Z.json",
+          "mtime_local": "2026-06-30T22:45:18.389978-04:00",
+          "age_days": 41.65,
+          "size_bytes": 10838,
+          "allocated_bytes": 12288
+        },
+        {
+          "path": "/root/mgs-agent/reports/migracao-colN-all-seguradores-backup-20260701T025545Z.json",
+          "relative_path": "migracao-colN-all-seguradores-backup-20260701T025545Z.json",
+          "mtime_local": "2026-06-30T22:55:45.914313-04:00",
+          "age_days": 41.64,
+          "size_bytes": 28066,
+          "allocated_bytes": 28672
+        },
+        {
+          "path": "/root/mgs-agent/reports/migracao-colN-by-botuser-balanced-20260701T025909Z.json",
+          "relative_path": "migracao-colN-by-botuser-balanced-20260701T025909Z.json",
+          "mtime_local": "2026-06-30T22:59:09.533433-04:00",
+          "age_days": 41.64,
+          "size_bytes": 42824,
+          "allocated_bytes": 45056
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-2022-mixed-openzed-20260703.xlsx",
+          "relative_path": "dtr-2022-mixed-openzed-20260703.xlsx",
+          "mtime_local": "2026-07-03T03:17:52.362092-04:00",
+          "age_days": 39.46,
+          "size_bytes": 8439,
+          "allocated_bytes": 12288
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-report-disparosxyvlovusccen_gmail.com-20260703-035853.json",
+          "relative_path": "dtr-report-disparosxyvlovusccen_gmail.com-20260703-035853.json",
+          "mtime_local": "2026-07-03T03:58:53.257460-04:00",
+          "age_days": 39.43,
+          "size_bytes": 6922,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-report-disparosxyvlovusccen_gmail.com-20260703-035853.xlsx",
+          "relative_path": "dtr-report-disparosxyvlovusccen_gmail.com-20260703-035853.xlsx",
+          "mtime_local": "2026-07-03T03:58:53.266460-04:00",
+          "age_days": 39.43,
+          "size_bytes": 8356,
+          "allocated_bytes": 12288
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-043451.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-043451.json",
+          "mtime_local": "2026-07-03T04:35:57.806909-04:00",
+          "age_days": 39.4,
+          "size_bytes": 1301,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-043451.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-043451.xlsx",
+          "mtime_local": "2026-07-03T04:35:57.815909-04:00",
+          "age_days": 39.4,
+          "size_bytes": 7050,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-043603.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-043603.json",
+          "mtime_local": "2026-07-03T04:37:11.514884-04:00",
+          "age_days": 39.4,
+          "size_bytes": 436,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-043603.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-043603.xlsx",
+          "mtime_local": "2026-07-03T04:37:11.522883-04:00",
+          "age_days": 39.4,
+          "size_bytes": 7146,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-044210.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-044210.json",
+          "mtime_local": "2026-07-03T04:43:19.740871-04:00",
+          "age_days": 39.4,
+          "size_bytes": 882,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-044210.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-044210.xlsx",
+          "mtime_local": "2026-07-03T04:43:19.751871-04:00",
+          "age_days": 39.4,
+          "size_bytes": 7499,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-044332.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-044332.json",
+          "mtime_local": "2026-07-03T04:44:45.584888-04:00",
+          "age_days": 39.4,
+          "size_bytes": 1320,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-044332.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-044332.xlsx",
+          "mtime_local": "2026-07-03T04:44:45.593888-04:00",
+          "age_days": 39.4,
+          "size_bytes": 7043,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-045046.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-045046.json",
+          "mtime_local": "2026-07-03T04:51:58.949035-04:00",
+          "age_days": 39.39,
+          "size_bytes": 1758,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-045046.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-045046.xlsx",
+          "mtime_local": "2026-07-03T04:51:58.958035-04:00",
+          "age_days": 39.39,
+          "size_bytes": 7136,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-070656.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-070656.json",
+          "mtime_local": "2026-07-03T07:51:42.745399-04:00",
+          "age_days": 39.27,
+          "size_bytes": 296432,
+          "allocated_bytes": 299008
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-070656.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-070656.xlsx",
+          "mtime_local": "2026-07-03T07:51:42.862398-04:00",
+          "age_days": 39.27,
+          "size_bytes": 69947,
+          "allocated_bytes": 73728
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-135649.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-135649.json",
+          "mtime_local": "2026-07-03T13:57:55.664073-04:00",
+          "age_days": 39.01,
+          "size_bytes": 1791,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-135649.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-135649.xlsx",
+          "mtime_local": "2026-07-03T13:57:55.673073-04:00",
+          "age_days": 39.01,
+          "size_bytes": 7256,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-140522.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-140522.json",
+          "mtime_local": "2026-07-03T14:06:46.989243-04:00",
+          "age_days": 39.01,
+          "size_bytes": 3259,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-140522.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-140522.xlsx",
+          "mtime_local": "2026-07-03T14:06:46.999243-04:00",
+          "age_days": 39.01,
+          "size_bytes": 7741,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-140715.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-140715.json",
+          "mtime_local": "2026-07-03T14:08:36.894283-04:00",
+          "age_days": 39.01,
+          "size_bytes": 897,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-140715.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-140715.xlsx",
+          "mtime_local": "2026-07-03T14:08:36.902283-04:00",
+          "age_days": 39.01,
+          "size_bytes": 7126,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20260703-142203.json",
+          "relative_path": "dtr-sb-page-health-sync-backup-20260703-142203.json",
+          "mtime_local": "2026-07-03T14:23:07.609624-04:00",
+          "age_days": 39.0,
+          "size_bytes": 897,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-page-health-sync-20260703-142203.xlsx",
+          "relative_path": "dtr-sb-page-health-sync-20260703-142203.xlsx",
+          "mtime_local": "2026-07-03T14:23:07.620624-04:00",
+          "age_days": 39.0,
+          "size_bytes": 7016,
+          "allocated_bytes": 8192
+        },
+        {
+          "path": "/root/mgs-agent/reports/sb-messenger-low-delivery-20260703-155827.json",
+          "relative_path": "sb-messenger-low-delivery-20260703-155827.json",
+          "mtime_local": "2026-07-03T15:58:38.971147-04:00",
+          "age_days": 38.93,
+          "size_bytes": 631598,
+          "allocated_bytes": 634880
+        },
+        {
+          "path": "/root/mgs-agent/reports/sb-messenger-low-delivery-20260703-155827-low-delivery.csv",
+          "relative_path": "sb-messenger-low-delivery-20260703-155827-low-delivery.csv",
+          "mtime_local": "2026-07-03T15:58:38.977147-04:00",
+          "age_days": 38.93,
+          "size_bytes": 325126,
+          "allocated_bytes": 327680
+        },
+        {
+          "path": "/root/mgs-agent/reports/sb-messenger-low-delivery-20260703-155827-active-restricted.csv",
+          "relative_path": "sb-messenger-low-delivery-20260703-155827-active-restricted.csv",
+          "mtime_local": "2026-07-03T15:58:38.979147-04:00",
+          "age_days": 38.93,
+          "size_bytes": 67324,
+          "allocated_bytes": 69632
+        }
+      ],
+      "largest_files": [
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-phase1-final-confirmation-20260707-012651.json",
+          "relative_path": "dtr-sb-phase1-final-confirmation-20260707-012651.json",
+          "mtime_local": "2026-07-07T01:36:07.104093-04:00",
+          "age_days": 35.53,
+          "size_bytes": 5320636,
+          "allocated_bytes": 5320704
+        },
+        {
+          "path": "/root/mgs-agent/reports/storage-audits/20260811-ares-residual-drive-content-reconciliation.json",
+          "relative_path": "storage-audits/20260811-ares-residual-drive-content-reconciliation.json",
+          "mtime_local": "2026-08-11T14:15:50.422496-04:00",
+          "age_days": 0.0,
+          "size_bytes": 3995536,
+          "allocated_bytes": 3997696
+        },
+        {
+          "path": "/root/mgs-agent/reports/storage-audits/20260811-vps-backup-unused-inventory.json",
+          "relative_path": "storage-audits/20260811-vps-backup-unused-inventory.json",
+          "mtime_local": "2026-08-11T11:01:23.977098-04:00",
+          "age_days": 0.14,
+          "size_bytes": 3863254,
+          "allocated_bytes": 3866624
+        },
+        {
+          "path": "/root/mgs-agent/reports/storage-audits/20260727-full-vps-backup-scan.json",
+          "relative_path": "storage-audits/20260727-full-vps-backup-scan.json",
+          "mtime_local": "2026-07-27T09:12:56.748372-04:00",
+          "age_days": 15.21,
+          "size_bytes": 3491372,
+          "allocated_bytes": 3493888
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-step1-fresh-audit-20260706-215139.json",
+          "relative_path": "dtr-sb-step1-fresh-audit-20260706-215139.json",
+          "mtime_local": "2026-07-06T22:29:43.023349-04:00",
+          "age_days": 35.66,
+          "size_bytes": 3209832,
+          "allocated_bytes": 3211264
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-sheet-update-20260706-205114.json",
+          "relative_path": "dtr-sb-id-audit-sheet-update-20260706-205114.json",
+          "mtime_local": "2026-07-06T21:29:31.493601-04:00",
+          "age_days": 35.7,
+          "size_bytes": 2896964,
+          "allocated_bytes": 2899968
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-20260705-134549.json",
+          "relative_path": "dtr-sb-id-audit-all-1p-20260705-134549.json",
+          "mtime_local": "2026-07-05T14:23:51.452314-04:00",
+          "age_days": 36.99,
+          "size_bytes": 2526069,
+          "allocated_bytes": 2527232
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-v2-full-20260706-012017.json",
+          "relative_path": "dtr-sb-id-audit-v2-full-20260706-012017.json",
+          "mtime_local": "2026-07-06T01:58:39.842089-04:00",
+          "age_days": 36.51,
+          "size_bytes": 2499374,
+          "allocated_bytes": 2502656
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-20260705-024003.json",
+          "relative_path": "dtr-sb-id-audit-20260705-024003.json",
+          "mtime_local": "2026-07-05T03:16:12.044684-04:00",
+          "age_days": 37.46,
+          "size_bytes": 2486347,
+          "allocated_bytes": 2490368
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-v2-full-20260706-191207.json",
+          "relative_path": "dtr-sb-id-audit-v2-full-20260706-191207.json",
+          "mtime_local": "2026-07-06T19:50:12.122189-04:00",
+          "age_days": 35.77,
+          "size_bytes": 2481322,
+          "allocated_bytes": 2482176
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-20260705-232615.json",
+          "relative_path": "dtr-sb-id-audit-all-1p-20260705-232615.json",
+          "mtime_local": "2026-07-06T00:04:34.021028-04:00",
+          "age_days": 36.59,
+          "size_bytes": 2401128,
+          "allocated_bytes": 2404352
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-20260705-015935.json",
+          "relative_path": "dtr-sb-id-audit-20260705-015935.json",
+          "mtime_local": "2026-07-05T02:00:56.773815-04:00",
+          "age_days": 37.51,
+          "size_bytes": 2359827,
+          "allocated_bytes": 2363392
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-20260707-232053.json",
+          "relative_path": "dtr-sb-id-audit-all-1p-20260707-232053.json",
+          "mtime_local": "2026-07-07T23:58:57.859242-04:00",
+          "age_days": 34.6,
+          "size_bytes": 2325771,
+          "allocated_bytes": 2326528
+        },
+        {
+          "path": "/root/mgs-agent/reports/id-login-utm-counts-20260706.json",
+          "relative_path": "id-login-utm-counts-20260706.json",
+          "mtime_local": "2026-07-06T03:09:32.887140-04:00",
+          "age_days": 36.46,
+          "size_bytes": 2282843,
+          "allocated_bytes": 2285568
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-20260705-015548.json",
+          "relative_path": "dtr-sb-id-audit-20260705-015548.json",
+          "mtime_local": "2026-07-05T01:57:05.261573-04:00",
+          "age_days": 37.51,
+          "size_bytes": 2275499,
+          "allocated_bytes": 2277376
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-fixed-login-20260708-000146.json",
+          "relative_path": "dtr-sb-id-audit-all-1p-fixed-login-20260708-000146.json",
+          "mtime_local": "2026-07-08T00:01:46.881418-04:00",
+          "age_days": 34.59,
+          "size_bytes": 1555788,
+          "allocated_bytes": 1556480
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260810-062002.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260810-062002.json",
+          "mtime_local": "2026-08-10T06:56:34.637825-04:00",
+          "age_days": 1.31,
+          "size_bytes": 1218293,
+          "allocated_bytes": 1220608
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260809-062002.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260809-062002.json",
+          "mtime_local": "2026-08-09T06:56:29.485473-04:00",
+          "age_days": 2.31,
+          "size_bytes": 1218281,
+          "allocated_bytes": 1220608
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260808-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260808-062001.json",
+          "mtime_local": "2026-08-08T06:56:30.078869-04:00",
+          "age_days": 3.31,
+          "size_bytes": 1218281,
+          "allocated_bytes": 1220608
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260811-062002.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260811-062002.json",
+          "mtime_local": "2026-08-11T06:56:51.793298-04:00",
+          "age_days": 0.31,
+          "size_bytes": 1218679,
+          "allocated_bytes": 1220608
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260805-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260805-062001.json",
+          "mtime_local": "2026-08-05T06:55:29.922131-04:00",
+          "age_days": 6.31,
+          "size_bytes": 1202263,
+          "allocated_bytes": 1204224
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260806-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260806-062001.json",
+          "mtime_local": "2026-08-06T06:55:26.693578-04:00",
+          "age_days": 5.31,
+          "size_bytes": 1202263,
+          "allocated_bytes": 1204224
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260801-062002.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260801-062002.json",
+          "mtime_local": "2026-08-01T06:55:30.056864-04:00",
+          "age_days": 10.31,
+          "size_bytes": 1192377,
+          "allocated_bytes": 1196032
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260802-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260802-062001.json",
+          "mtime_local": "2026-08-02T06:55:26.982698-04:00",
+          "age_days": 9.31,
+          "size_bytes": 1192503,
+          "allocated_bytes": 1196032
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260803-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260803-062001.json",
+          "mtime_local": "2026-08-03T06:55:20.397846-04:00",
+          "age_days": 8.31,
+          "size_bytes": 1192884,
+          "allocated_bytes": 1196032
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260804-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260804-062001.json",
+          "mtime_local": "2026-08-04T06:55:29.533123-04:00",
+          "age_days": 7.31,
+          "size_bytes": 1194611,
+          "allocated_bytes": 1196032
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260716-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260716-062001.json",
+          "mtime_local": "2026-07-16T06:55:07.335245-04:00",
+          "age_days": 26.31,
+          "size_bytes": 1189959,
+          "allocated_bytes": 1191936
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260726-062002.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260726-062002.json",
+          "mtime_local": "2026-07-26T06:54:46.048221-04:00",
+          "age_days": 16.31,
+          "size_bytes": 1188110,
+          "allocated_bytes": 1191936
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260728-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260728-062001.json",
+          "mtime_local": "2026-07-28T06:54:41.470289-04:00",
+          "age_days": 14.31,
+          "size_bytes": 1188507,
+          "allocated_bytes": 1191936
+        },
+        {
+          "path": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20260714-062001.json",
+          "relative_path": "dtr-sb-daily-match-audit-20260714-062001.json",
+          "mtime_local": "2026-07-14T06:55:13.751211-04:00",
+          "age_days": 28.31,
+          "size_bytes": 1189555,
+          "allocated_bytes": 1191936
+        }
+      ]
+    },
+    "logs": {
+      "root": "/root/mgs-agent/logs",
+      "files": 612,
+      "allocated_bytes": 104235008,
+      "oldest_mtime_local": "2026-04-22T00:27:45.911786-04:00",
+      "newest_mtime_local": "2026-08-11T14:16:02.306508-04:00",
+      "months": {
+        "2026-04": {
+          "files": 2,
+          "allocated_bytes": 0,
+          "logical_bytes": 0
+        },
+        "2026-05": {
+          "files": 22,
+          "allocated_bytes": 4096,
+          "logical_bytes": 388
+        },
+        "2026-06": {
+          "files": 148,
+          "allocated_bytes": 9351168,
+          "logical_bytes": 9251478
+        },
+        "2026-07": {
+          "files": 340,
+          "allocated_bytes": 7720960,
+          "logical_bytes": 6796063
+        },
+        "2026-08": {
+          "files": 100,
+          "allocated_bytes": 87158784,
+          "logical_bytes": 86757131
+        }
+      },
+      "age_buckets": {
+        "30-60d": {
+          "files": 343,
+          "allocated_bytes": 14606336,
+          "logical_bytes": 13790250
+        },
+        "14-30d": {
+          "files": 71,
+          "allocated_bytes": 2314240,
+          "logical_bytes": 2134008
+        },
+        "60d+": {
+          "files": 90,
+          "allocated_bytes": 20480,
+          "logical_bytes": 3549
+        },
+        "1-7d": {
+          "files": 19,
+          "allocated_bytes": 278528,
+          "logical_bytes": 233746
+        },
+        "7-14d": {
+          "files": 31,
+          "allocated_bytes": 4775936,
+          "logical_bytes": 4693922
+        },
+        "0-1d": {
+          "files": 58,
+          "allocated_bytes": 82239488,
+          "logical_bytes": 81949585
+        }
+      },
+      "older_than_30d": {
+        "files": 433,
+        "allocated_bytes": 14626816
+      },
+      "older_than_60d": {
+        "files": 90,
+        "allocated_bytes": 20480
+      },
+      "oldest_files": [
+        {
+          "path": "/root/mgs-agent/logs/hermes-zeus-gateway.log",
+          "relative_path": "hermes-zeus-gateway.log",
+          "mtime_local": "2026-04-22T00:27:45.911786-04:00",
+          "age_days": 111.58,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-atena-gateway.log",
+          "relative_path": "hermes-atena-gateway.log",
+          "mtime_local": "2026-04-22T00:28:06.047996-04:00",
+          "age_days": 111.58,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/bot-atena.log",
+          "relative_path": "bot-atena.log",
+          "mtime_local": "2026-05-02T21:51:05.882866-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/bot-atena-stdout.log",
+          "relative_path": "bot-atena-stdout.log",
+          "mtime_local": "2026-05-02T21:51:05.883866-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/bot-zeus.log",
+          "relative_path": "bot-zeus.log",
+          "mtime_local": "2026-05-02T21:51:05.884866-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/bot-zeus-stdout.log",
+          "relative_path": "bot-zeus-stdout.log",
+          "mtime_local": "2026-05-02T21:51:05.885866-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-update-20260502_002416.log",
+          "relative_path": "hermes-update-20260502_002416.log",
+          "mtime_local": "2026-05-02T21:51:05.893866-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/rec-readability-monitor.log",
+          "relative_path": "rec-readability-monitor.log",
+          "mtime_local": "2026-05-02T21:51:05.913867-04:00",
+          "age_days": 100.68,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/cleanup-discord-threads-cron.log",
+          "relative_path": "cleanup-discord-threads-cron.log",
+          "mtime_local": "2026-05-16T00:00:02.241055-04:00",
+          "age_days": 87.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/cleanup-discord-threads.log",
+          "relative_path": "cleanup-discord-threads.log",
+          "mtime_local": "2026-05-16T00:00:02.247056-04:00",
+          "age_days": 87.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-force-restart-20260517-094531.log",
+          "relative_path": "zeus-force-restart-20260517-094531.log",
+          "mtime_local": "2026-05-19T00:00:02.183932-04:00",
+          "age_days": 84.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-restart-atena-channel-20260517-075044.log",
+          "relative_path": "zeus-restart-atena-channel-20260517-075044.log",
+          "mtime_local": "2026-05-19T00:00:02.185932-04:00",
+          "age_days": 84.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-update-controlled-20260522-192931.log",
+          "relative_path": "hermes-update-controlled-20260522-192931.log",
+          "mtime_local": "2026-05-24T00:00:01.650801-04:00",
+          "age_days": 79.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-update-controlled-20260522-193047.log",
+          "relative_path": "hermes-update-controlled-20260522-193047.log",
+          "mtime_local": "2026-05-24T00:00:01.656801-04:00",
+          "age_days": 79.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-post-restart-validate-20260522-130057.log",
+          "relative_path": "zeus-post-restart-validate-20260522-130057.log",
+          "mtime_local": "2026-05-24T00:00:01.728801-04:00",
+          "age_days": 79.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/backup-cleanup-20260524-115010.log",
+          "relative_path": "backup-cleanup-20260524-115010.log",
+          "mtime_local": "2026-05-26T00:00:01.446531-04:00",
+          "age_days": 77.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/cleanup-zombies.log",
+          "relative_path": "cleanup-zombies.log",
+          "mtime_local": "2026-05-27T00:00:01.459964-04:00",
+          "age_days": 76.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/card-cache.log",
+          "relative_path": "card-cache.log",
+          "mtime_local": "2026-05-28T00:00:01.499524-04:00",
+          "age_days": 75.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/mgs-zeus-delayed-restart-20260526150905.log",
+          "relative_path": "mgs-zeus-delayed-restart-20260526150905.log",
+          "mtime_local": "2026-05-28T00:00:01.547523-04:00",
+          "age_days": 75.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-rename-fix-validate.log",
+          "relative_path": "zeus-rename-fix-validate.log",
+          "mtime_local": "2026-05-28T00:00:01.605523-04:00",
+          "age_days": 75.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/last-agent-restart-check.txt",
+          "relative_path": "last-agent-restart-check.txt",
+          "mtime_local": "2026-05-28T10:20:45.580545-04:00",
+          "age_days": 75.16,
+          "size_bytes": 388,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-deterministic-rename-postcheck.log",
+          "relative_path": "zeus-deterministic-rename-postcheck.log",
+          "mtime_local": "2026-05-29T00:00:01.467855-04:00",
+          "age_days": 74.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-gateway-postcheck.log",
+          "relative_path": "zeus-gateway-postcheck.log",
+          "mtime_local": "2026-05-29T00:00:01.469856-04:00",
+          "age_days": 74.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-thread-rename-restart-validation.log",
+          "relative_path": "zeus-thread-rename-restart-validation.log",
+          "mtime_local": "2026-05-30T00:00:12.327400-04:00",
+          "age_days": 73.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-rename-fix-finalize.log",
+          "relative_path": "zeus-rename-fix-finalize.log",
+          "mtime_local": "2026-06-01T00:00:06.130466-04:00",
+          "age_days": 71.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/zeus-rename-fix-restart.log",
+          "relative_path": "zeus-rename-fix-restart.log",
+          "mtime_local": "2026-06-01T00:00:06.131466-04:00",
+          "age_days": 71.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/backup-cleanup-20260601-231246.log",
+          "relative_path": "backup-cleanup-20260601-231246.log",
+          "mtime_local": "2026-06-03T00:00:01.880455-04:00",
+          "age_days": 69.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/root/mgs-agent/logs/restart-hermes-gateways-20260603-153119.sh",
+          "relative_path": "restart-hermes-gateways-20260603-153119.sh",
+          "mtime_local": "2026-06-03T15:31:19.743613-04:00",
+          "age_days": 68.95,
+          "size_bytes": 1442,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/logs/finalize-zeus-restart-20260603-153246.sh",
+          "relative_path": "finalize-zeus-restart-20260603-153246.sh",
+          "mtime_local": "2026-06-03T15:32:46.079119-04:00",
+          "age_days": 68.95,
+          "size_bytes": 1090,
+          "allocated_bytes": 4096
+        },
+        {
+          "path": "/root/mgs-agent/logs/clear-thread-rename-restart-validation.log",
+          "relative_path": "clear-thread-rename-restart-validation.log",
+          "mtime_local": "2026-06-04T00:00:17.075832-04:00",
+          "age_days": 68.59,
+          "size_bytes": 0,
+          "allocated_bytes": 0
+        }
+      ],
+      "largest_files": [
+        {
+          "path": "/root/mgs-agent/logs/auto-commit-watcher.log",
+          "relative_path": "auto-commit-watcher.log",
+          "mtime_local": "2026-08-11T14:16:01.632507-04:00",
+          "age_days": 0.0,
+          "size_bytes": 17641583,
+          "allocated_bytes": 17653760
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-service-restarts.log",
+          "relative_path": "monitor-service-restarts.log",
+          "mtime_local": "2026-08-11T14:16:01.877507-04:00",
+          "age_days": 0.0,
+          "size_bytes": 9387769,
+          "allocated_bytes": 9392128
+        },
+        {
+          "path": "/root/mgs-agent/logs/hostinger-migration-transfer-20260618-130943.log",
+          "relative_path": "hostinger-migration-transfer-20260618-130943.log",
+          "mtime_local": "2026-06-18T13:13:37.260597-04:00",
+          "age_days": 54.04,
+          "size_bytes": 9172935,
+          "allocated_bytes": 9175040
+        },
+        {
+          "path": "/root/mgs-agent/logs/sb-restricted-transition-monitor.log",
+          "relative_path": "sb-restricted-transition-monitor.log",
+          "mtime_local": "2026-08-11T14:14:17.488403-04:00",
+          "age_days": 0.0,
+          "size_bytes": 8659165,
+          "allocated_bytes": 8667136
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-hermes-pending-writes.log",
+          "relative_path": "monitor-hermes-pending-writes.log",
+          "mtime_local": "2026-08-11T14:16:01.807507-04:00",
+          "age_days": 0.0,
+          "size_bytes": 7597433,
+          "allocated_bytes": 7602176
+        },
+        {
+          "path": "/root/mgs-agent/logs/sync-souls.log",
+          "relative_path": "sync-souls.log",
+          "mtime_local": "2026-08-11T14:15:02.668448-04:00",
+          "age_days": 0.0,
+          "size_bytes": 6670208,
+          "allocated_bytes": 6676480
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-news-explainer-watchdog.log",
+          "relative_path": "hermes-news-explainer-watchdog.log",
+          "mtime_local": "2026-08-11T14:16:02.306508-04:00",
+          "age_days": 0.0,
+          "size_bytes": 6157223,
+          "allocated_bytes": 6164480
+        },
+        {
+          "path": "/root/mgs-agent/logs/events-audit.jsonl",
+          "relative_path": "events-audit.jsonl",
+          "mtime_local": "2026-08-11T13:18:23.179384-04:00",
+          "age_days": 0.04,
+          "size_bytes": 5598175,
+          "allocated_bytes": 5603328
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-structural-write-finalizer.log.1.gz",
+          "relative_path": "hermes-structural-write-finalizer.log.1.gz",
+          "mtime_local": "2026-08-02T23:15:04.082714-04:00",
+          "age_days": 8.63,
+          "size_bytes": 2885108,
+          "allocated_bytes": 2887680
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-news-explainer.log",
+          "relative_path": "hermes-news-explainer.log",
+          "mtime_local": "2026-08-11T14:15:02.355448-04:00",
+          "age_days": 0.0,
+          "size_bytes": 2273183,
+          "allocated_bytes": 2277376
+        },
+        {
+          "path": "/root/mgs-agent/logs/dtr-sb-page-health-sync.log",
+          "relative_path": "dtr-sb-page-health-sync.log",
+          "mtime_local": "2026-08-11T07:45:12.013762-04:00",
+          "age_days": 0.27,
+          "size_bytes": 2058206,
+          "allocated_bytes": 2064384
+        },
+        {
+          "path": "/root/mgs-agent/logs/sync-codex-oauth.log",
+          "relative_path": "sync-codex-oauth.log",
+          "mtime_local": "2026-07-16T14:30:02.013409-04:00",
+          "age_days": 25.99,
+          "size_bytes": 1699655,
+          "allocated_bytes": 1703936
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-structural-write-finalizer.log",
+          "relative_path": "hermes-structural-write-finalizer.log",
+          "mtime_local": "2026-08-11T14:16:01.746507-04:00",
+          "age_days": 0.0,
+          "size_bytes": 1540452,
+          "allocated_bytes": 1548288
+        },
+        {
+          "path": "/root/mgs-agent/logs/creative-metadata-sanitizer.jsonl",
+          "relative_path": "creative-metadata-sanitizer.jsonl",
+          "mtime_local": "2026-08-03T19:45:56.544225-04:00",
+          "age_days": 7.77,
+          "size_bytes": 1507645,
+          "allocated_bytes": 1515520
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-auto-push.log",
+          "relative_path": "monitor-auto-push.log",
+          "mtime_local": "2026-08-11T14:12:00.288265-04:00",
+          "age_days": 0.0,
+          "size_bytes": 1440144,
+          "allocated_bytes": 1445888
+        },
+        {
+          "path": "/root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log",
+          "relative_path": "alerts-infra-failed-alert-resolver.log",
+          "mtime_local": "2026-08-11T14:12:00.774265-04:00",
+          "age_days": 0.0,
+          "size_bytes": 1404898,
+          "allocated_bytes": 1409024
+        },
+        {
+          "path": "/root/mgs-agent/logs/track-article-cost-cron.log",
+          "relative_path": "track-article-cost-cron.log",
+          "mtime_local": "2026-08-11T14:15:01.843447-04:00",
+          "age_days": 0.0,
+          "size_bytes": 1288151,
+          "allocated_bytes": 1294336
+        },
+        {
+          "path": "/root/mgs-agent/logs/track-article-cost.log",
+          "relative_path": "track-article-cost.log",
+          "mtime_local": "2026-08-11T14:15:01.843447-04:00",
+          "age_days": 0.0,
+          "size_bytes": 1287651,
+          "allocated_bytes": 1294336
+        },
+        {
+          "path": "/root/mgs-agent/logs/auto-push.log",
+          "relative_path": "auto-push.log",
+          "mtime_local": "2026-08-11T13:44:18.714503-04:00",
+          "age_days": 0.02,
+          "size_bytes": 1211077,
+          "allocated_bytes": 1216512
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-vps-health.log",
+          "relative_path": "monitor-vps-health.log",
+          "mtime_local": "2026-08-11T14:15:03.232449-04:00",
+          "age_days": 0.0,
+          "size_bytes": 947144,
+          "allocated_bytes": 954368
+        },
+        {
+          "path": "/root/mgs-agent/logs/hermes-mgs-patch-watchdog.log",
+          "relative_path": "hermes-mgs-patch-watchdog.log",
+          "mtime_local": "2026-08-11T12:06:09.682347-04:00",
+          "age_days": 0.09,
+          "size_bytes": 865235,
+          "allocated_bytes": 872448
+        },
+        {
+          "path": "/root/mgs-agent/logs/ensure-hermes-mgs-patches.log",
+          "relative_path": "ensure-hermes-mgs-patches.log",
+          "mtime_local": "2026-08-11T12:06:09.680347-04:00",
+          "age_days": 0.09,
+          "size_bytes": 848213,
+          "allocated_bytes": 856064
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-hermes-memory-capacity.log",
+          "relative_path": "monitor-hermes-memory-capacity.log",
+          "mtime_local": "2026-08-11T14:14:01.686387-04:00",
+          "age_days": 0.0,
+          "size_bytes": 672576,
+          "allocated_bytes": 679936
+        },
+        {
+          "path": "/root/mgs-agent/logs/check-pending-reports.log",
+          "relative_path": "check-pending-reports.log",
+          "mtime_local": "2026-08-11T14:07:03.773962-04:00",
+          "age_days": 0.01,
+          "size_bytes": 672610,
+          "allocated_bytes": 679936
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-honcho-health.log",
+          "relative_path": "monitor-honcho-health.log",
+          "mtime_local": "2026-08-11T13:54:27.099141-04:00",
+          "age_days": 0.02,
+          "size_bytes": 614178,
+          "allocated_bytes": 618496
+        },
+        {
+          "path": "/root/mgs-agent/logs/discord-archive-stale-agent-threads.log",
+          "relative_path": "discord-archive-stale-agent-threads.log",
+          "mtime_local": "2026-08-11T14:15:03.498449-04:00",
+          "age_days": 0.0,
+          "size_bytes": 594474,
+          "allocated_bytes": 602112
+        },
+        {
+          "path": "/root/mgs-agent/logs/sb-utility-rollout-20260703-020043.json",
+          "relative_path": "sb-utility-rollout-20260703-020043.json",
+          "mtime_local": "2026-07-03T02:00:43.977942-04:00",
+          "age_days": 39.51,
+          "size_bytes": 599657,
+          "allocated_bytes": 602112
+        },
+        {
+          "path": "/root/mgs-agent/logs/sb-utility-rollout-20260702-013857.json",
+          "relative_path": "sb-utility-rollout-20260702-013857.json",
+          "mtime_local": "2026-07-02T01:42:24.676574-04:00",
+          "age_days": 40.52,
+          "size_bytes": 548207,
+          "allocated_bytes": 548864
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-tool-loops.log",
+          "relative_path": "monitor-tool-loops.log",
+          "mtime_local": "2026-08-11T14:13:01.970327-04:00",
+          "age_days": 0.0,
+          "size_bytes": 534446,
+          "allocated_bytes": 540672
+        },
+        {
+          "path": "/root/mgs-agent/logs/monitor-cron-stale-logs.log",
+          "relative_path": "monitor-cron-stale-logs.log",
+          "mtime_local": "2026-08-11T14:15:02.600448-04:00",
+          "age_days": 0.0,
+          "size_bytes": 445485,
+          "allocated_bytes": 450560
+        }
+      ]
+    }
+  }
+}
