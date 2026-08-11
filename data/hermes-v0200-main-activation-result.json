@@ -1,20 +1,28 @@
 {
-  "status": "failed",
-  "detail": "rc=1 line=173 rollback_done=0",
-  "validated_at": "2026-08-11T13:29:29.793793+00:00",
+  "status": "success",
+  "detail": "Hermes 0.20.0 active after reconciliation of validator false-positive; zero upstream commits pending",
+  "validated_at": "2026-08-11T13:46:44.425909+00:00",
   "upstream_sha": "c0106e50e7ecedb3ce34e785d949725dc4e0e457",
   "port_commit": "5b1a61da87ef6961f9ee3bd65d9acbfb582ca0a8",
   "version": "0.20.0",
-  "services": [
+  "services": {
+    "ares": 254923,
+    "atena": 254972,
+    "zeus": 255015
+  },
+  "gateway_order": [
     "ares",
     "atena",
     "zeus"
   ],
-  "restart_order": [
-    "ares",
-    "atena",
-    "zeus"
-  ],
-  "log": "/root/mgs-agent/logs/hermes-v0200-main-activation-20260811T132834Z.log",
-  "cleanup_audit": null
+  "config_auth_smokes": "4/4 PASS",
+  "upstream_behind": 0,
+  "mgs_ahead": 1,
+  "repo_clean": true,
+  "failed_units": 0,
+  "initial_failure_reconciled": true,
+  "initial_failure_cause": "validator checked arrows in entire optional-field output, not only version line",
+  "fallback_service_cycle_performed": false,
+  "cleanup_audit": "/root/mgs-agent/reports/storage-audits/20260811-post-hermes-v0200-full-scan.json",
+  "mutation_in_cleanup": false
 }
