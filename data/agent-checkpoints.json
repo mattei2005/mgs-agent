@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
-      "next_step": "Executar coleta completa pela rota residencial dedicada, validar qualidade máxima, sanitizar, empacotar, enviar ao Shared Drive e fazer readback independente.",
+      "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
       "objective": "Coletar todos os criativos disponíveis da busca Meta Ad Library eco financa carro no Brasil, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/ECO_FINANCA_CARRO_BR.",
-      "source": "discord:thread:1536816641499730080",
-      "state": "in_progress; authorization_validated; collector_pending",
+      "source": "discord:thread:1536816641499730080; /root/.hermes/profiles/ares/artifacts/meta-library/2026-08-11T19-21-51-243Z/evidence-report.json; report-infra:1536819714192449597",
+      "state": "completed; displayed_estimate=48; library_ids=25; selected_records=25; unique_videos=17; duplicates_removed=8; clean=17; drive_folder_id=1oxovfsyjstt7kmmmzwhxl70wdxivvoel; independent_files_verified=19; all_remote_bytes_equal=true; local_transient_media_cleaned=true",
       "thread_id": "1536816641499730080",
-      "updated_at": "2026-08-11T19:21:45+00:00"
+      "updated_at": "2026-08-11T19:33:06+00:00"
     },
     {
       "agent": "ares",
@@ -632,5 +632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-11T19:21:45+00:00"
+  "updated_at": "2026-08-11T19:33:06+00:00"
 }
