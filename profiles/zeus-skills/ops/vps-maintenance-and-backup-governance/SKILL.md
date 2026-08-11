@@ -31,6 +31,7 @@ Load this skill when Rodolfo asks:
 4. For inventory generators that assemble large JSON, atomic-write design, `jq` argument-size failures, or Git auto-push races involving temporary artifacts, load `references/inventory-generation-and-autopush-safety.md`.
 5. For public SSH exposure, missing key-based access, dynamic administrator IPs, provider firewalls, or lockout-safe sequencing, load `references/lockout-safe-ssh-hardening.md` before recommending any authentication or firewall mutation.
 6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
+7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
 
 ## Audit workflow
 
