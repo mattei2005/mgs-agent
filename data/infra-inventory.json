@@ -5447,7 +5447,7 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536593883092484106",
       "source_thread_id": "1536567182824308839",
-      "status": "staged_validated_pending_activation",
+      "status": "activation_scheduled_esm_external_pending",
       "installed_before": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
       "target_sha": "9d6c5a920c773f86fad9ea16528212faeaa21815",
       "target_version": "0.20.0",
@@ -5471,7 +5471,13 @@
         "candidate_cli_import": "PASS"
       },
       "rollback_launcher": "/root/.local/bin/hermes-v0191-mgs",
-      "updated_at": "2026-08-11T01:18:39-04:00"
+      "updated_at": "2026-08-11T01:26:25-04:00",
+      "activation_finalizer": "/root/mgs-agent/data/hermes-v0200-activation-finalizer-20260811-011958.sh",
+      "activation_finalizer_sha256": "dbd504c20da936f0f606390dae70e7ba1b3c4a5cd1c91dc71dc8105119949289",
+      "staged_wrapper": "/root/.local/bin/hermes-v0200-mgs",
+      "esm_status": "blocked_external_device_authorization_not_completed",
+      "activation_unit": "mgs-hermes-v0200-activation-20260811T052625Z",
+      "activation_delay_seconds": 180
     }
   ],
   "profile_skill_references": [
@@ -9459,6 +9465,12 @@
       "size_bytes": 11432,
       "md5": "7a65e50c541ca13ae75c2fa419550135",
       "modified_at": "2026-07-17T11:05:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/hermes-v0200-activation-finalizer-20260811-011958.sh",
+      "size_bytes": 8123,
+      "md5": "abbdda511878eab67711d14792c6b2de",
+      "modified_at": "2026-08-11T01:26:01-04:00"
     }
   ],
   "mu_plugin_canonical": {
