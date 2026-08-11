@@ -5706,14 +5706,14 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536718896483278888",
       "source_thread_id": "1536567182824308839",
-      "status": "activated_validated",
+      "status": "corrected_runtime_reload_prepared",
       "installed_before": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
       "target_upstream_sha": "c0106e50e7ecedb3ce34e785d949725dc4e0e457",
       "target_version": "0.20.0",
       "candidate_path": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
-      "candidate_commit": "5b1a61da87ef6961f9ee3bd65d9acbfb582ca0a8",
+      "candidate_commit": "6fc69c9d705a41f7b31a200b12a75677857e9a8a",
       "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-11-main-c0106e50.patch",
-      "patch_sha256": "445daf75e545295eee33721bc03421146f58b77f5aef48108e73eca104a64596",
+      "patch_sha256": "4ad3c0c41fd66f46c8b4883a53f78da8ec5ff3820ae9fb83160a60864492016a",
       "patch_scope_files": 44,
       "staged_wrapper": "/root/.local/bin/hermes-v0200-main-c0106e50-mgs",
       "rollback_launcher": "/root/.local/bin/hermes-v0191-mgs",
@@ -5732,7 +5732,7 @@
         "patch_apply_reverse_byte_identity": "44/44",
         "git": "behind=0 ahead=1 clean"
       },
-      "updated_at": "2026-08-11T13:46:44.425909+00:00",
+      "updated_at": "2026-08-11T13:59:43.785033+00:00",
       "activation_finalizer": "/root/mgs-agent/data/hermes-v0200-main-activation-finalizer-20260811.sh",
       "cleanup_audit_script": "/root/mgs-agent/data/vps-post-hermes-cleanup-audit-20260811.py",
       "cleanup_audit_script_sha256": "eade3d945293677f420b884a0afe8229226852c6b169df4543da0052a2e85bef",
@@ -5759,7 +5759,9 @@
         "git_final": "origin/main c0106e50; behind=0; ahead=1 MGS; clean",
         "cleanup_scan": "749705 files, 88829 dirs, 0 errors, no deletion"
       },
-      "validated_at": "2026-08-11T13:46:44.425909+00:00"
+      "validated_at": "2026-08-11T13:46:44.425909+00:00",
+      "reload_finalizer": "/root/mgs-agent/data/hermes-v0200-discord-edit-reload-finalizer-20260811.sh",
+      "reload_finalizer_sha256": "a2eb42a8eae427cda6ed64605d42465c4b3076d296595de783ea4a5582849512"
     }
   ],
   "profile_skill_references": [

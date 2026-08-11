@@ -1949,7 +1949,7 @@ index b8d2db4ef..f02d0f14d 100644
  
      def set_context_result(self, session_key: str, result: dict[str, str]) -> None:
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index 10d2e32cd..4316e5ec3 100644
+index 10d2e32cd..86e549099 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -26,7 +26,7 @@ import time
@@ -2231,52 +2231,84 @@ index 10d2e32cd..4316e5ec3 100644
          if content:
              kwargs["content"] = content
          if file is not None:
-@@ -3393,7 +3591,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3330,6 +3528,40 @@ class DiscordAdapter(BasePlatformAdapter):
+             raw_response={"thread_id": thread_id},
+         )
+ 
++    async def _edit_partial_message(self, msg: Any, *, content: str) -> Any:
++        """Edit a cached partial message while preserving embed suppression.
++
++        py-cord 2.7 exposes ``suppress`` on ``Message.edit`` but not on
++        ``PartialMessage.edit``.  The gateway intentionally uses partial
++        messages to avoid a GET on every streaming edit, so fall back to the
++        same low-level parameter builder used by py-cord and set the message
++        flags directly when that public keyword is unavailable.
++        """
++        try:
++            return await msg.edit(
++                content=content,
++                suppress=self._suppress_link_previews,
++            )
++        except TypeError as exc:
++            if (
++                not self._suppress_link_previews
++                or "unexpected keyword argument 'suppress'" not in str(exc)
++            ):
++                raise
++
++        flags = discord.MessageFlags()
++        flags.suppress_embeds = True
++        with discord.http.handle_message_parameters(
++            content=content,
++            flags=flags,
++            previous_allowed_mentions=msg._state.allowed_mentions,
++        ) as params:
++            return await msg._state.http.edit_message(
++                msg.channel.id,
++                msg.id,
++                params=params,
++            )
++
+     async def edit_message(
+         self,
+         chat_id: str,
+@@ -3393,7 +3625,7 @@ class DiscordAdapter(BasePlatformAdapter):
                  self._last_overflow_preview.pop(_preview_key, None)
  
              try:
 -                await msg.edit(content=formatted)
-+                await msg.edit(
-+                    content=formatted,
-+                    suppress=self._suppress_link_previews,
-+                )
++                await self._edit_partial_message(msg, content=formatted)
                  if _saturated_preview:
                      self._last_overflow_preview[_preview_key] = formatted
              except Exception as edit_err:
-@@ -3413,7 +3614,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3413,7 +3645,7 @@ class DiscordAdapter(BasePlatformAdapter):
                      if self._last_overflow_preview.get(_preview_key) == truncated:
                          # Saturated-preview dedup (see pre-flight path above).
                          return SendResult(success=True, message_id=message_id)
 -                    await msg.edit(content=truncated)
-+                    await msg.edit(
-+                        content=truncated,
-+                        suppress=self._suppress_link_previews,
-+                    )
++                    await self._edit_partial_message(msg, content=truncated)
                      self._last_overflow_preview[_preview_key] = truncated
                  else:
                      raise
-@@ -3474,12 +3678,18 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3474,12 +3706,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if len(chunks) <= 1:
              # Defensive: caller's pre-flight should guarantee >1 chunk, but if
              # not, just edit normally.
 -            await msg.edit(content=chunks[0] if chunks else formatted)
-+            await msg.edit(
++            await self._edit_partial_message(
++                msg,
 +                content=chunks[0] if chunks else formatted,
-+                suppress=self._suppress_link_previews,
 +            )
              return SendResult(success=True, message_id=message_id)
  
          # Step 1 — edit the existing message with the first chunk.
          try:
 -            await msg.edit(content=chunks[0])
-+            await msg.edit(
-+                content=chunks[0],
-+                suppress=self._suppress_link_previews,
-+            )
++            await self._edit_partial_message(msg, content=chunks[0])
          except Exception as e:
              logger.error(
                  "[%s] Overflow split: first-chunk edit failed: %s",
-@@ -3505,7 +3715,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3505,7 +3740,11 @@ class DiscordAdapter(BasePlatformAdapter):
                  # overflow continuations stay threaded.
                  reference = self._message_reference_from_ids(prev_msg.id, channel)
              try:
@@ -2289,7 +2321,7 @@ index 10d2e32cd..4316e5ec3 100644
              except Exception as send_err:
                  # Drop the reply anchor and retry once — a deleted/expired
                  # anchor (10008) or system-message reply (50035) shouldn't lose
-@@ -3515,7 +3729,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3515,7 +3754,11 @@ class DiscordAdapter(BasePlatformAdapter):
                      self.name, send_err,
                  )
                  try:
@@ -2302,7 +2334,7 @@ index 10d2e32cd..4316e5ec3 100644
                  except Exception as retry_err:
                      logger.warning(
                          "[%s] Overflow split: stopped at %d/%d chunks delivered: %s",
-@@ -3607,6 +3825,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3607,6 +3850,7 @@ class DiscordAdapter(BasePlatformAdapter):
          msg = await channel.send(
              content=caption if caption else None,
              files=[discord_file],
@@ -2310,7 +2342,7 @@ index 10d2e32cd..4316e5ec3 100644
          )
          attachments = getattr(msg, "attachments", None) or []
          if not attachments:
-@@ -3742,7 +3961,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3742,7 +3986,11 @@ class DiscordAdapter(BasePlatformAdapter):
                          files=files,
                      )
                  else:
@@ -2323,7 +2355,7 @@ index 10d2e32cd..4316e5ec3 100644
              except Exception as e:
                  logger.warning(
                      "[%s] Multi-image Discord send failed (chunk %d/%d), falling back to per-image: %s",
-@@ -5048,6 +5271,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5048,6 +5296,7 @@ class DiscordAdapter(BasePlatformAdapter):
                          channel,
                          content=(caption or "").strip(),
                          file=file,
@@ -2331,7 +2363,7 @@ index 10d2e32cd..4316e5ec3 100644
                      )
  
                  msg = await channel.send(
-@@ -5120,6 +5344,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5120,6 +5369,7 @@ class DiscordAdapter(BasePlatformAdapter):
                          channel,
                          content=(caption or "").strip(),
                          file=file,
@@ -2339,7 +2371,7 @@ index 10d2e32cd..4316e5ec3 100644
                      )
  
                  msg = await channel.send(
-@@ -6496,7 +6721,9 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6496,7 +6746,9 @@ class DiscordAdapter(BasePlatformAdapter):
  
          Returns a formatted block like::
  
@@ -2350,7 +2382,7 @@ index 10d2e32cd..4316e5ec3 100644
              [Alice] some message
              [Bob [bot]] another message
  
-@@ -6673,7 +6900,14 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6673,7 +6925,14 @@ class DiscordAdapter(BasePlatformAdapter):
              collected.reverse()
              reply_collected.reverse()
  
@@ -2366,7 +2398,7 @@ index 10d2e32cd..4316e5ec3 100644
              if has_unverified:
                  blocks.append(
                      "[Messages prefixed with [unverified] are from people whose "
-@@ -6765,7 +6999,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6765,7 +7024,10 @@ class DiscordAdapter(BasePlatformAdapter):
                  reason=reason,
              )
              if starter_message:
@@ -2378,7 +2410,7 @@ index 10d2e32cd..4316e5ec3 100644
              return {
                  "success": True,
                  "thread_id": str(thread.id),
-@@ -6774,7 +7011,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6774,7 +7036,10 @@ class DiscordAdapter(BasePlatformAdapter):
          except Exception as direct_error:
              try:
                  seed_content = starter_message or f"\U0001f9f5 Thread created by Hermes: **{name}**"
@@ -2390,7 +2422,7 @@ index 10d2e32cd..4316e5ec3 100644
                  thread = await seed_msg.create_thread(
                      name=name,
                      auto_archive_duration=auto_archive_duration,
-@@ -6797,80 +7037,378 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6797,80 +7062,378 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -2436,12 +2468,7 @@ index 10d2e32cd..4316e5ec3 100644
 +        explicit_user_ids, explicit_users_configured = _discord_thread_auto_add_user_ids(
 +            getattr(parent_channel, "id", None)
 +        )
- 
--        Returns the created thread object, or ``None`` on failure. Both the
--        primary ``message.create_thread`` and the seed-message fallback are
--        retried once after a short backoff so transient connect errors
--        (e.g. ``Cannot connect to host discord.com:443``) don't immediately
--        burn through to the caller's failure path (#20243).
++
 +        async def consider(member: Any) -> None:
 +            if member is None:
 +                return
@@ -2529,7 +2556,12 @@ index 10d2e32cd..4316e5ec3 100644
 +            failed,
 +            fetch_failed,
 +        )
-+
+ 
+-        Returns the created thread object, or ``None`` on failure. Both the
+-        primary ``message.create_thread`` and the seed-message fallback are
+-        retried once after a short backoff so transient connect errors
+-        (e.g. ``Cannot connect to host discord.com:443``) don't immediately
+-        burn through to the caller's failure path (#20243).
 +    def _remember_auto_thread_initial_title(self, thread: Any, thread_name: str) -> None:
 +        """Remember the exact provisional title used for a new auto-created thread.
 +
@@ -2721,14 +2753,14 @@ index 10d2e32cd..4316e5ec3 100644
 +            base_thread_name,
 +            getattr(getattr(message, "author", None), "display_name", None),
 +        )
-+
+ 
 +        async def resolve_source_thread() -> Optional[Any]:
 +            message_id = getattr(message, "id", None)
 +            try:
 +                thread_id = int(message_id)
 +            except (TypeError, ValueError):
 +                return None
- 
++
 +            guild = getattr(message, "guild", None) or getattr(
 +                getattr(message, "channel", None), "guild", None
 +            )
@@ -2826,7 +2858,7 @@ index 10d2e32cd..4316e5ec3 100644
          )
          return None
  
-@@ -7762,12 +8300,21 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7762,12 +8325,21 @@ class DiscordAdapter(BasePlatformAdapter):
          auto_threaded_channel = None
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels = self._get_no_thread_channels()
@@ -2849,7 +2881,7 @@ index 10d2e32cd..4316e5ec3 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -7880,7 +8427,8 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7880,7 +8452,8 @@ class DiscordAdapter(BasePlatformAdapter):
              auto_thread_created=auto_threaded_channel is not None,
              auto_thread_initial_name=(
                  getattr(auto_threaded_channel, "_hermes_auto_thread_initial_name", None)
@@ -2859,7 +2891,7 @@ index 10d2e32cd..4316e5ec3 100644
              ) if auto_threaded_channel is not None else None,
          )
  
-@@ -8136,13 +8684,17 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -8136,13 +8709,17 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -2880,7 +2912,7 @@ index 10d2e32cd..4316e5ec3 100644
          ):
              self._enqueue_text_event(event)
          else:
-@@ -9998,11 +10550,26 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -9998,11 +10575,26 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
              os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
@@ -4161,10 +4193,18 @@ index 03a210360..cae0d7f2a 100644
      monkeypatch.setattr(discord_platform.discord, "Thread", FakeThread, raising=False)
  
 diff --git a/tests/gateway/test_discord_edit_message_overflow.py b/tests/gateway/test_discord_edit_message_overflow.py
-index 740894694..169c05889 100644
+index 740894694..62b93046a 100644
 --- a/tests/gateway/test_discord_edit_message_overflow.py
 +++ b/tests/gateway/test_discord_edit_message_overflow.py
-@@ -61,7 +61,7 @@ def _wire_channel(adapter, *, original_msg, send_side_effect=None):
+@@ -46,6 +46,7 @@ def _ensure_discord_mock():
+ 
+ _ensure_discord_mock()
+ 
++import plugins.platforms.discord.adapter as discord_adapter_module  # noqa: E402
+ from plugins.platforms.discord.adapter import DiscordAdapter  # noqa: E402
+ 
+ 
+@@ -61,7 +62,7 @@ def _wire_channel(adapter, *, original_msg, send_side_effect=None):
      records every ``channel.send`` call."""
      sends = []
  
@@ -4173,7 +4213,7 @@ index 740894694..169c05889 100644
          sends.append({"content": content, "reference": reference})
          if send_side_effect is not None:
              res = send_side_effect(len(sends), content, reference)
-@@ -93,7 +93,7 @@ class TestEditMessageHappyPath:
+@@ -93,7 +94,7 @@ class TestEditMessageHappyPath:
          edits = []
          msg = SimpleNamespace(
              id=42,
@@ -4182,7 +4222,72 @@ index 740894694..169c05889 100644
          )
          channel, sends = _wire_channel(adapter, original_msg=msg)
  
-@@ -118,7 +118,7 @@ class TestMidStreamOverflowTruncates:
+@@ -105,6 +106,64 @@ class TestEditMessageHappyPath:
+         assert edits == ["short reply"]
+         assert sends == []  # no continuations for a short edit
+ 
++    @pytest.mark.asyncio
++    async def test_partial_message_suppression_uses_http_flags_on_pycord_27(
++        self,
++        monkeypatch,
++    ):
++        adapter = _make_adapter()
++        adapter._suppress_link_previews = True
++        http = SimpleNamespace(edit_message=AsyncMock(return_value={"id": "42"}))
++
++        class FakeFlags:
++            suppress_embeds = False
++
++        class ParamsContext:
++            def __init__(self, **kwargs):
++                self.params = SimpleNamespace(
++                    payload={
++                        "content": kwargs["content"],
++                        "flags": 4 if kwargs["flags"].suppress_embeds else 0,
++                    }
++                )
++
++            def __enter__(self):
++                return self.params
++
++            def __exit__(self, *_args):
++                return False
++
++        monkeypatch.setattr(
++            discord_adapter_module,
++            "discord",
++            SimpleNamespace(
++                MessageFlags=FakeFlags,
++                http=SimpleNamespace(handle_message_parameters=ParamsContext),
++            ),
++        )
++
++        async def partial_edit(*, content, **kwargs):
++            if "suppress" in kwargs:
++                raise TypeError(
++                    "PartialMessage.edit() got an unexpected keyword argument 'suppress'"
++                )
++
++        msg = SimpleNamespace(
++            id=42,
++            channel=SimpleNamespace(id=555),
++            _state=SimpleNamespace(http=http, allowed_mentions=None),
++            edit=AsyncMock(side_effect=partial_edit),
++        )
++        _wire_channel(adapter, original_msg=msg)
++
++        result = await adapter.edit_message("555", "42", "https://example.com")
++
++        assert result.success is True
++        http.edit_message.assert_awaited_once()
++        args = http.edit_message.await_args
++        assert args.args[:2] == (555, 42)
++        assert args.kwargs["params"].payload["flags"] == 4
++
+ 
+ # --------------------------------------------------------------------------- #
+ # Mid-stream overflow — TRUNCATE, never split (the #48648 lesson)
+@@ -118,7 +177,7 @@ class TestMidStreamOverflowTruncates:
          edits = []
          msg = SimpleNamespace(
              id=42,
@@ -4191,7 +4296,7 @@ index 740894694..169c05889 100644
          )
          channel, sends = _wire_channel(adapter, original_msg=msg)
  
-@@ -156,7 +156,7 @@ class TestSaturatedPreviewDedup:
+@@ -156,7 +215,7 @@ class TestSaturatedPreviewDedup:
          edits = []
          msg = SimpleNamespace(
              id=42,
@@ -4200,7 +4305,7 @@ index 740894694..169c05889 100644
          )
          channel, sends = _wire_channel(adapter, original_msg=msg)
  
-@@ -187,6 +187,32 @@ class TestSaturatedPreviewDedup:
+@@ -187,6 +246,32 @@ class TestSaturatedPreviewDedup:
          assert result.success is True
          assert len(edits) == 3
  
@@ -4233,7 +4338,7 @@ index 740894694..169c05889 100644
  
  # --------------------------------------------------------------------------- #
  # Final overflow — SPLIT and deliver every chunk
-@@ -201,7 +227,7 @@ class TestFinalOverflowSplits:
+@@ -201,7 +286,7 @@ class TestFinalOverflowSplits:
          msg = SimpleNamespace(
              id=42,
              to_reference=MagicMock(return_value=SimpleNamespace(kind="ref")),
@@ -4242,7 +4347,7 @@ index 740894694..169c05889 100644
          )
          channel, sends = _wire_channel(adapter, original_msg=msg)
  
-@@ -229,7 +255,7 @@ class TestFinalOverflowSplits:
+@@ -229,7 +314,7 @@ class TestFinalOverflowSplits:
          msg = SimpleNamespace(
              id=42,
              to_reference=MagicMock(return_value=object()),
@@ -4251,7 +4356,7 @@ index 740894694..169c05889 100644
          )
          channel, sends = _wire_channel(adapter, original_msg=msg)
  
-@@ -255,7 +281,7 @@ class TestReactiveOverflowDetection:
+@@ -255,7 +340,7 @@ class TestReactiveOverflowDetection:
  
          # format_message leaves content under the cap, but the first edit
          # raises 50035 (server-side rejection); the split path then runs.

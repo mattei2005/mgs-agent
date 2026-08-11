@@ -6,7 +6,7 @@ REPO=/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50
 NEW_LAUNCHER=/root/.local/bin/hermes-v0200-main-c0106e50-mgs
 OLD_LAUNCHER=/root/.local/bin/hermes-v0191-mgs
 CANONICAL=/root/.local/bin/hermes
-EXPECTED_HEAD=5b1a61da87ef6961f9ee3bd65d9acbfb582ca0a8
+EXPECTED_HEAD=6fc69c9d705a41f7b31a200b12a75677857e9a8a
 EXPECTED_UPSTREAM=c0106e50e7ecedb3ce34e785d949725dc4e0e457
 PATCH=$ROOT/patches/hermes/mgs-runtime-customizations-2026-08-11-main-c0106e50.patch
 LOCAL_GUARD=$ROOT/scripts/ensure-hermes-local-patches.sh
@@ -127,7 +127,7 @@ log 'START Hermes v0.20.0 main-current activation'
 audit hermes_v0200_main_activation_started "target=$EXPECTED_UPSTREAM port=$EXPECTED_HEAD log=$LOG"
 [[ -x "$UV" ]]
 "$UV" --version
-[[ "$(sha256sum "$PATCH" | cut -d' ' -f1)" == 445daf75e545295eee33721bc03421146f58b77f5aef48108e73eca104a64596 ]]
+[[ "$(sha256sum "$PATCH" | cut -d' ' -f1)" == 4ad3c0c41fd66f46c8b4883a53f78da8ec5ff3820ae9fb83160a60864492016a ]]
 [[ "$(sha256sum "$LOCAL_GUARD" | cut -d' ' -f1)" == a320f97b965da7f1200ee76b698ddcf22e913279e22ab8a7848a26b94fc986ac ]]
 [[ "$(sha256sum "$MGS_GUARD" | cut -d' ' -f1)" == 29625ff98ed48dff6e4753f7a1f379f2f385078d890c4e5d26e9e583e6b7748a ]]
 [[ "$(sha256sum "$UPDATER" | cut -d' ' -f1)" == b36569942c176136ee77539a42735010308bbcc7f69d1f21f263952dadd3b00e ]]
@@ -204,7 +204,7 @@ import json,sys
 x=json.load(open(sys.argv[1])); assert x['mutation_performed'] is False; assert x['active_runtime']=='/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50'; print('cleanup_audit_readback=PASS')
 PY
 
-update_inventory activated_validated 'version=0.20.0 upstream=c0106e50 port=5b1a61da services=3/3 configs=4/4 smokes=3/3 behind=0 cleanup_audit=ready'
+update_inventory activated_validated 'version=0.20.0 upstream=c0106e50 port=6fc69c9d services=3/3 configs=4/4 smokes=3/3 behind=0 cleanup_audit=ready'
 "$ROOT/scripts/infra-discovery.sh" >/dev/null
 "$ROOT/scripts/mgs-knowledge-control.py" checkpoint-upsert \
   --id "$CHECKPOINT_ID" --agent zeus --thread-id "$THREAD_ID" \
@@ -213,8 +213,8 @@ update_inventory activated_validated 'version=0.20.0 upstream=c0106e50 port=5b1a
   --next-step 'Revisar com Rodolfo o manifesto de limpeza pós-Hermes; nenhuma exclusão foi feita' \
   --source "discord:$THREAD_ID"
 "$ROOT/scripts/mgs-knowledge-control.py" validate >/dev/null
-write_result success 'Hermes 0.20.0 active; main current c0106e50; MGS port 5b1a61da; zero upstream commits pending; configs v34; services and smokes PASS; cleanup inventory ready'
+write_result success 'Hermes 0.20.0 active; main current c0106e50; MGS port 6fc69c9d; zero upstream commits pending; configs v34; services and smokes PASS; cleanup inventory ready'
 audit hermes_v0200_main_activation_finished "version=0.20.0 upstream=$EXPECTED_UPSTREAM port=$EXPECTED_HEAD services=3/3 configs=4/4 smokes=3/3 behind=0 cleanup=$CLEANUP_REPORT log=$LOG"
-report_infra 'Hermes atualizado integralmente para o main atual, configurações migradas e inventário de limpeza pós-update gerado.' "version=0.20.0; upstream=$EXPECTED_UPSTREAM; port=$EXPECTED_HEAD; pending=0; tests=532+6,220(+2 skipped),193,453+6; configs=4/4 v34; services=3/3; smokes=3/3; cleanup=$CLEANUP_REPORT; log=$LOG"
-post_thread "Atualização concluída e validada: Hermes 0.20.0, upstream c0106e50, port MGS 5b1a61da, zero commits upstream pendentes. Ares, Atena e Zeus reiniciaram nessa ordem e passaram prontidão, configs v34 e smokes reais. A auditoria completa de limpeza ficou pronta em $CLEANUP_REPORT; nenhuma exclusão foi feita."
+report_infra 'Hermes atualizado integralmente para o main atual, configurações migradas e inventário de limpeza pós-update gerado.' "version=0.20.0; upstream=$EXPECTED_UPSTREAM; port=$EXPECTED_HEAD; pending=0; tests=532+6,220(+2 skipped),193,454+6; configs=4/4 v34; services=3/3; smokes=3/3; cleanup=$CLEANUP_REPORT; log=$LOG"
+post_thread "Atualização concluída e validada: Hermes 0.20.0, upstream c0106e50, port MGS 6fc69c9d, zero commits upstream pendentes. Ares, Atena e Zeus carregaram o runtime corrigido e passaram prontidão, configs v34 e smokes reais. A auditoria completa de limpeza ficou pronta em $CLEANUP_REPORT; nenhuma exclusão foi feita."
 log 'DONE Hermes v0.20.0 main-current activation'
