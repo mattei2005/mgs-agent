@@ -32,6 +32,7 @@ Load this skill when:
 6. **Verify the customization surface.** Check the canonical patch with reverse-apply validation and run the current MGS guard when authorized. A green patch guard does not replace config-file equality.
 7. **Interpret update prechecks by evidence, not process exit alone.** A diagnostic `PRECHECK_ONLY` wrapper may return `rc=0` after collecting evidence even when its internal patch/local-diff checks recorded `DRIFT`. Require clean `pre-upstream-patch-check.txt`, `pre-local-diff-upstream-check.txt`, and read-only invariants before calling the update gate green. Report `diagnóstico concluído, update bloqueado` when collection succeeded but drift remains; never promote readiness from `DONE precheck only` or the existence of `final-report.md` alone.
 7a. **Audit port preservation path-by-path.** Freeze one target SHA; manifest tracked, staged, and untracked files; require a verified rollback snapshot; and classify every path absent from the final patch as explicitly upstream-equivalent with commit and test evidence. Prove the final artifact in a second clean checkout with apply/reverse checks, path-set equality, byte identity, and a `module.__file__` probe from the intended cwd. For no-restart preparation, require a durable external stage with its own venv and alternate launcher rather than advancing the active editable checkout. Isolate both `HOME` and `HERMES_HOME` for candidate doctor/install regression packs and fingerprint the active launcher before and after. Follow `references/controlled-update-port-preservation.md`.
+7b. **For very large upstream jumps, prove a three-state patch lifecycle.** Resolve the consolidated patch with three-way semantics in an independent checkout, distinguish stale test fixtures from lost behavior, and promote a guard that recognizes the legacy active runtime, clean frozen target, and validated candidate. Require exact clean-target tree equality, explicit `.venv`/`venv` compatibility, and detached wrapper cutover with rollback. Follow `references/large-port-three-state-guard-and-detached-cutover.md`.
 8. **Verify live services.** Confirm `active/running`, `ExecMainStatus=0`, and restart counters. Use current runtime evidence, not only the old cron summary.
 8a. **Close detached maintenance only after independent post-restart proof.** Reconcile the exact finalizer reason and terminal `DONE`; require changed PIDs plus fresh Discord markers; validate frozen Git target, full tracked+untracked patch path-set equality, guards, per-profile rc=0 exact-marker smokes, mirrors, capabilities, and fail-closed routes. Then atomically close inventory/checkpoint, send one final Embed, GET-readback the Discord message, and store its ID. Follow `references/controlled-maintenance-post-restart-closure.md`.
 9. **Check attribution before calling drift anomalous.** Reconcile audit log → infrastructure inventory → REPORT-INFRA → Git → session/thread history.
@@ -51,6 +52,7 @@ Load this skill when:
 
 - Detailed comparison patterns, redaction rules, profile resolver pitfall, and cleanup checks: `references/post-reload-personalization-audit.md`.
 - Frozen-target port preservation, upstream-equivalent retirement, external no-restart staging, editable-venv import proof, launcher fingerprinting, dual `HOME`/`HERMES_HOME` test isolation, npm review, and rollback validation: `references/controlled-update-port-preservation.md`.
+- Very large upstream jumps, three-way semantic conflict resolution, three-state legacy/target/candidate guards, exact tree equality, `.venv` compatibility, and detached wrapper cutover with rollback: `references/large-port-three-state-guard-and-detached-cutover.md`.
 - Detached finalizer verification, tracked+untracked patch set equality, exact rc=0 profile smokes, atomic closure, and single-Embed Discord readback: `references/controlled-maintenance-post-restart-closure.md`.
 
 ## Completion checklist
@@ -61,6 +63,7 @@ Load this skill when:
 - [ ] Per-profile resolved values read with correct `HERMES_HOME`
 - [ ] Patch/customization guard verified
 - [ ] Pre-port paths retained or explicitly proven upstream-equivalent
+- [ ] For a large jump, legacy-active reverse, clean-target forward, candidate reverse, and clean-target tree-equality gates all pass
 - [ ] Clean-checkout imports proven from the intended cwd
 - [ ] Rollback stash includes and hash-matches tracked plus untracked paths
 - [ ] Services checked live
