@@ -71,6 +71,7 @@ When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard op
 - Preserve patches, manifests, hashes, final reports, and compact logs when deleting only bulky staging clones or redundant archives.
 - Inventory/render generators running inside an auto-versioned repository must create component work directories outside the Git tree (prefer `/run` for short-lived root jobs, otherwise `/tmp`) and place only the final validated file in the repository via atomic rename. Large JSON components must be passed to `jq` through files such as `--slurpfile`, not serialized into many `--argjson` command-line arguments where `ARG_MAX` can fail.
 - After a generator failure, reconcile Git/auto-push before moving or removing temporary artifacts. A concurrent auto-commit can make a formerly untracked temp directory tracked; restore/reconcile first, preserve a hash-validated copy, and apply Critical Subset confirmation before deleting tracked artifacts.
+- When an inotify-based auto-commit watcher is restarted after authorized changes were already made, do not assume it scans the existing dirty tree retroactively. Inspect its event mask and batching controls first. With a watcher limited to `modify,create,delete,move`, plain `touch` emits only an attribute event and will not advance the batch; if canonical catch-up is needed, perform a byte-identical rewrite of an already-authorized dirty file, prove its hash unchanged, then require watcher active, clean scoped status, and `HEAD == origin/main`. Never bypass a guardrail with a manual commit.
 - For retired-agent cleanup, interpret broad language at the **dedicated operational-set boundary**: remove dedicated archive/backup roots only; preserve references embedded in mixed backups, Git, audit logs, and shared evidence unless the user separately names that wider purge scope.
 - If the owner explicitly chooses to discard a protected snapshot that contains unique state, disclose the unique classes/bytes and require the Critical Subset double-confirmation with exact roots, file count, bytes, irreversible loss, and what historical evidence will remain.
 - Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, has zero process references, is not a mount, and still matches the confirmed type/fingerprint/file/byte totals. A tree target must not be a symlink; an explicitly listed launcher may use a separate `delete_symlink` action after expected-target readback. Use exact paths rather than wildcard deletion, bind authorization to the target-set hash, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward. Any newly discovered path belongs to a new scope and requires a new manifest and confirmation.
@@ -89,6 +90,18 @@ When Rodolfo asks **only what remained after a cleanup**, answer strictly from a
 For residual backup review, distinguish exact duplicates of the live state from historically unique content. A file that duplicates the live state is not individually removable when it belongs to an archive/checksum/restore set whose integrity would be broken. For temporary storage, measure age from the newest descendant in each top-level entry and check live process references before classifying it as abandoned.
 
 A provider-level whole-VPS snapshot may replace overlapping bulky local pre-update archives only after the snapshot is created outside the VPS, provider/account access is read back, and restoration capability is proven. Keep offsite backup as a separate failure domain and retain current local rollback/archives until that gate passes; never substitute a tar of `/` stored on the same VPS and never retire verified recovery paths merely because the snapshot was proposed.
+
+### Provider control-plane credential gate
+
+Classify the available credential by the interface it actually reaches, not by the 1Password item title. A server item containing an SSH target, root/admin username, and server password authorizes guest-OS administration only; it does **not** provide the provider control-plane access needed to create, list, or restore a VPS snapshot. Before changing backup architecture:
+
+1. inspect only non-secret field labels/types and the URL scheme/host;
+2. require a validated provider dashboard session or provider API token with access to the exact VPS;
+3. create the snapshot and read it back from that control plane;
+4. prove the advertised restore capability and retention behavior;
+5. only then freeze a separate Critical Subset target set for retiring local archives.
+
+If only SSH is available, report the control-plane gap and leave every verified recovery path unchanged. Do not mislabel an SSH/console password as a dashboard credential and do not attempt to emulate a provider snapshot from inside the guest.
 
 Do not dump thousands of child paths into Discord. Count all files, but list deletion candidates at the exact file or operational-set boundary that would be authorized.
 
