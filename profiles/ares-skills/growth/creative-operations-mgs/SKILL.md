@@ -46,6 +46,9 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - `01_READY` prova prontidão técnica, não ineditismo.
 - Antes de seleção/write, conciliar Drive × Meta.
 - Nunca tratar material de Ad Library como asset final sem transformação/aprovação.
+- Depois que o asset final estiver no Shared Drive `MGS-AGENTS`, excluir da VPS a mídia e o workdir transitórios somente após readback do ID, `driveId`, tamanho, MD5/SHA e registro da linhagem/inventário. Preservar apenas o manifesto compacto necessário à auditoria.
+- Falha ou ausência de qualquer readback preserva a cópia local e exige escalação; nunca inferir upload por nome, fila ou tentativa concluída.
+- A limpeza local nunca inclui `/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium`, o lock do coletor, cookies/sessão, `/root/mgs-agent/tools/meta-library-collector` nem o Playwright Chromium 1228 usado pelo Library.
 
 ## Invariantes atuais de intake e naming
 

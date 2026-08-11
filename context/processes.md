@@ -137,12 +137,15 @@ Etapa   Ação
 1       Usuário autorizado pede ou envia criativo ao Ares.
 2       Creative Ops cria/trata/sanitiza/nomeia e registra original → tratado.
 3       Kelly ou responsável aprova quando aplicável.
-4       Ares salva no Drive e valida por readback.
-5       Upload de gestor fica reservado e ares_eligible=false.
-6       Campaign Ops concilia Drive × Meta antes de selecionar.
-7       Ares reserva, executa dentro da autoridade e valida a plataforma.
-8       Performance/ROI retornam ao inventário para orientar novas variações.
+4       Ares salva no Shared Drive MGS-AGENTS e valida ID, driveId, tamanho e hash por readback.
+5       Após o readback e o registro da linhagem, Ares remove da VPS a mídia e o workdir transitórios; preserva apenas o manifesto compacto.
+6       Upload de gestor fica reservado e ares_eligible=false.
+7       Campaign Ops concilia Drive × Meta antes de selecionar.
+8       Ares reserva, executa dentro da autoridade e valida a plataforma.
+9       Performance/ROI retornam ao inventário para orientar novas variações.
 ```
+
+A limpeza local do Ares é fail-closed: falha de ID, `driveId`, tamanho, MD5/SHA ou inventário preserva o arquivo local e escala a exceção. A regra nunca alcança o perfil persistente do Meta Library, cookies/sessão, lock, runtime do coletor ou o Playwright Chromium 1228 necessário ao fluxo.
 
 Regras:
 

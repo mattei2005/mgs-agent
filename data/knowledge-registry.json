@@ -239,6 +239,43 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "policy.ares.creative-ops.local-retention-after-drive",
+      "canonical_source": "context/processes.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-08-11",
+      "id": "POL-ARES-LOCAL-RETENTION-AFTER-DRIVE-20260811",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares removes transient VPS media after validated Shared Drive readback",
+      "updated_at": "2026-08-11T17:07:24+00:00"
+    },
+    {
+      "canonical_key": "policy.mgs.local-backup-retention.latest-only",
+      "canonical_source": "context/mgs-os-map.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-08-11",
+      "id": "POL-MGS-LOCAL-BACKUP-RETENTION-LATEST-20260811",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS local backups retain only the latest valid backup per family",
+      "updated_at": "2026-08-11T17:07:24+00:00"
+    },
+    {
       "canonical_key": "procedure.meta.b011-bm-capability-watch",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-04.md",
       "consumers": [
@@ -630,5 +667,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-08T13:27:22+00:00"
+  "updated_at": "2026-08-11T17:07:24+00:00"
 }
