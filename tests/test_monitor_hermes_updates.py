@@ -91,10 +91,10 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_p
     assert f"runtime_dir={live}" in proc.stdout
     assert "behind=1" in proc.stdout
     assert "discord_post=false" in proc.stdout
-    assert field(payload, "Versão local").find(installed[:7]) >= 0
-    assert field(payload, "Upstream").find(upstream[:7]) >= 0
-    assert field(payload, "Atraso").endswith("1 commits atrás")
-    assert field(payload, "Resumo") == "Features 0 | Fixes 1 | Perf 0 | Security 0 | Breaking 0"
+    assert field(payload, "Runtime MGS").find(installed[:7]) >= 0
+    assert field(payload, "Upstream oficial").find(upstream[:7]) >= 0
+    assert field(payload, "Atualizações acumuladas").endswith("1 commits pendentes no runtime")
+    assert field(payload, "Resumo acumulado") == "Features 0 | Fixes 1 | Perf 0 | Security 0 | Breaking 0"
     assert not state.exists(), "dry-run must not mutate the configured state file"
     assert "state_unchanged=true discord_post=false" in log.read_text(encoding="utf-8")
 
@@ -127,6 +127,7 @@ def test_custom_runtime_on_top_of_upstream_is_current(tmp_path: Path) -> None:
         {
             "HERMES_MONITOR_DRY_RUN": "1",
             "HERMES_MONITOR_DIR": str(live),
+            "HERMES_MONITOR_UPSTREAM_URL": str(origin),
             "HERMES_MONITOR_LOG": str(log),
             "HERMES_MONITOR_STATE": str(state),
             "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),
@@ -139,3 +140,54 @@ def test_custom_runtime_on_top_of_upstream_is_current(tmp_path: Path) -> None:
     assert not output.exists(), "an up-to-date custom runtime must not build an alert payload"
     assert not state.exists(), "dry-run must not mutate the configured state file"
     assert "OK already_contains_upstream" in log.read_text(encoding="utf-8")
+
+
+def test_frozen_runtime_origin_does_not_hide_official_upstream(tmp_path: Path) -> None:
+    frozen_origin = tmp_path / "frozen-origin.git"
+    official_origin = tmp_path / "official-origin.git"
+    seed = tmp_path / "seed"
+    live = tmp_path / "active-runtime"
+    output = tmp_path / "payload.json"
+    state = tmp_path / "state.json"
+    log = tmp_path / "monitor.log"
+
+    frozen_origin.mkdir()
+    official_origin.mkdir()
+    git("init", "--bare", "--initial-branch=main", cwd=frozen_origin)
+    git("init", "--bare", "--initial-branch=main", cwd=official_origin)
+    seed.mkdir()
+    git("init", "--initial-branch=main", cwd=seed)
+    (seed / "marker.txt").write_text("installed\n", encoding="utf-8")
+    git("add", "marker.txt", cwd=seed)
+    git("commit", "-m", "feat: installed baseline", cwd=seed)
+    installed = git("rev-parse", "HEAD", cwd=seed)
+    git("remote", "add", "frozen", str(frozen_origin), cwd=seed)
+    git("remote", "add", "official", str(official_origin), cwd=seed)
+    git("push", "frozen", "main", cwd=seed)
+    git("push", "official", "main", cwd=seed)
+
+    run("git", "clone", str(frozen_origin), str(live), cwd=tmp_path)
+    (seed / "marker.txt").write_text("official update\n", encoding="utf-8")
+    git("commit", "-am", "fix: official upstream advanced", cwd=seed)
+    upstream = git("rev-parse", "HEAD", cwd=seed)
+    git("push", "official", "main", cwd=seed)
+
+    env = os.environ.copy()
+    env.update(
+        {
+            "HERMES_MONITOR_DRY_RUN": "1",
+            "HERMES_MONITOR_DIR": str(live),
+            "HERMES_MONITOR_UPSTREAM_URL": str(official_origin),
+            "HERMES_MONITOR_LOG": str(log),
+            "HERMES_MONITOR_STATE": str(state),
+            "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),
+        }
+    )
+    proc = run("bash", str(SCRIPT), cwd=ROOT, env=env)
+
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert "behind=1" in proc.stdout
+    assert field(payload, "Runtime MGS").find(installed[:7]) >= 0
+    assert field(payload, "Upstream oficial").find(upstream[:7]) >= 0
+    assert field(payload, "Atualizações acumuladas").endswith("1 commits pendentes no runtime")
+    assert not state.exists(), "dry-run must not mutate the configured state file"
