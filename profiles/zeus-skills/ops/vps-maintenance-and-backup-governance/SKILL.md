@@ -32,10 +32,11 @@ Load this skill when Rodolfo asks:
 5. For public SSH exposure, missing key-based access, dynamic administrator IPs, provider firewalls, or lockout-safe sequencing, load `references/lockout-safe-ssh-hardening.md` before recommending any authentication or firewall mutation.
 6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
+8. When an audit surfaces Ubuntu Pro, ESM Apps, or a device-code attach flow, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; classify standard security coverage separately, treat ESM package counts correctly, and explain optional subscription linkage before presenting it as a maintenance decision.
 
 ## Audit workflow
 
-1. **Recover the real pendency.** Use current runtime first; use checkpoints/audit/inventory and prior sessions only to explain what was pending. A historical package list never overrides the current APT graph, running kernel, or live service state.
+1. **Recover the real pendency.** Use current runtime first; use checkpoints/audit/inventory and prior sessions only to explain what was pending. A historical package list never overrides the current APT graph, running kernel, or live service state. A scheduled or detached update is still pending until the finalizer log/result, canonical launcher, target service start times, and required report/readback agree; reconcile those sources before repeating any earlier success claim.
 2. **Freeze a coherent observation.** Refresh package metadata and Git refs when allowed, then capture timestamp, running kernel, reboot marker, update candidates, Git SHAs/tag, services, disk, and backup roots. Do not calculate against refs while a fetch is still changing them.
 3. **Separate update classes.** Report standard OS/security updates, third-party repositories, inaccessible subscription/ESM fixes, language/package-manager updates, Snaps, and Git application updates independently. Do not call every available package a security update.
 4. **Distinguish stable release from moving main.** Name the latest public tag, installed checkout, and current upstream SHA. Count pending commits from the installed checkout and untagged commits since the tag separately.
@@ -86,6 +87,7 @@ Do not dump thousands of child paths into Discord. Count all files, but list del
 ## Completion checklist
 
 - [ ] Current package graph and security classification captured
+- [ ] Any scheduled/detached finalizer reconciled against live launcher, services, logs, and report readback
 - [ ] Running kernel and reboot marker agree
 - [ ] Failed units and target services checked
 - [ ] Latest tag, installed SHA, upstream SHA, and observation time frozen
