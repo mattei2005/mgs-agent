@@ -33,6 +33,7 @@ Load this skill when Rodolfo asks:
 6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
 8. When an audit surfaces Ubuntu Pro, ESM Apps/Infra, Livepatch, a device-code attach flow, or the boundary between subscription attachment and package installation, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; it defines coverage classification, supervised PTY attachment, local readback, separate authorization gates, and post-install closure.
+9. For exact destructive target manifests followed by an exhaustive backup/orphan scan, load `references/full-vps-cleanup-inventory.md`; it defines inode-aware reclaim estimates, per-filesystem coverage, evidence tiers, post-deletion acceptance, and fail-closed housekeeping dry-runs.
 
 ## Audit workflow
 
@@ -45,8 +46,9 @@ Load this skill when Rodolfo asks:
 7. **Audit the cleanup implementation, not just its cron.** Read its scan roots, filename patterns, keep-latest logic, and retention. A green dry-run proves only the policy it implements; it does not prove that legacy names or backup directories are covered.
 8. **Classify before proposing deletion.** Use exactly three classes: eligible under current policy; eligible only after an explicit retention/policy change; protected or containing unique data. Never blend them into one reclaim number.
 9. **Validate retained recovery paths.** Before naming an archive deletable, validate the archives that remain and prove that a supposedly redundant snapshot has no unique state required by the canonical archive.
-10. **Quantify the decision.** Calculate exact recoverable bytes and projected filesystem usage; after any authorized cleanup, verify path absence and measure actual reclaimed space.
-11. **Report conclusion first.** State whether reboot is required, what can update routinely, what requires a controlled window, exact high-confidence cleanup candidates, protected classes, and the residual governance gap.
+10. **Quantify the decision without hardlink inflation.** Report both the naive allocated sum and an inode-aware reclaim estimate that credits file blocks only when every hardlink is inside the target set. Keep overlapping review roots non-additive. After any authorized cleanup, verify path absence and treat the measured `df` free-space delta as the authoritative observed result.
+11. **Cover every persistent filesystem explicitly.** Scan `/`, `/boot`, and `/boot/efi` separately whenever they are different devices; prune pseudo-filesystems and mount crossings, record errors per filesystem, and never infer whole-VPS coverage from the root filesystem alone.
+12. **Report conclusion first.** State whether reboot is required, what can update routinely, what requires a controlled window, exact high-confidence cleanup candidates, protected classes, and the residual governance gap.
 
 ## Phase boundary: VPS first, application runtime later
 
@@ -71,7 +73,7 @@ When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard op
 - After a generator failure, reconcile Git/auto-push before moving or removing temporary artifacts. A concurrent auto-commit can make a formerly untracked temp directory tracked; restore/reconcile first, preserve a hash-validated copy, and apply Critical Subset confirmation before deleting tracked artifacts.
 - For retired-agent cleanup, interpret broad language at the **dedicated operational-set boundary**: remove dedicated archive/backup roots only; preserve references embedded in mixed backups, Git, audit logs, and shared evidence unless the user separately names that wider purge scope.
 - If the owner explicitly chooses to discard a protected snapshot that contains unique state, disclose the unique classes/bytes and require the Critical Subset double-confirmation with exact roots, file count, bytes, irreversible loss, and what historical evidence will remain.
-- Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, is neither a symlink nor a mount, and still matches the confirmed file/byte totals. Use exact paths rather than wildcard deletion, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward.
+- Before destructive execution, freeze the authorized target list and verify every target exists, is under an allowed root, has zero process references, is not a mount, and still matches the confirmed type/fingerprint/file/byte totals. A tree target must not be a symlink; an explicitly listed launcher may use a separate `delete_symlink` action after expected-target readback. Use exact paths rather than wildcard deletion, bind authorization to the target-set hash, record an audit start boundary before removing anything, and record a success/partial-failure boundary afterward. Any newly discovered path belongs to a new scope and requires a new manifest and confirmation.
 - For a separately authorized deferred-service restart, freeze active sessions and protected service PIDs first. Acceptance requires the named service active, gateway PIDs unchanged, zero `NEEDRESTART-SVC` rows, and no new warning/critical logs. Remaining `NEEDRESTART-SESS` rows normally clear on logout/reconnection and do not justify forced logout, user-manager restart, or reboot.
 - Any resulting script/config/data/skill change requires the applicable inventory, audit, validation, and REPORT-INFRA closure.
 
@@ -93,9 +95,11 @@ Do not dump thousands of child paths into Discord. Count all files, but list del
 - [ ] Latest tag, installed SHA, upstream SHA, and observation time frozen
 - [ ] Tracked/untracked local surface and real apply blockers measured
 - [ ] Backup roots and staging/report/archive classes counted without double counting
-- [ ] Cleanup script scope compared with actual storage
+- [ ] `/`, `/boot`, and `/boot/efi` scanned separately where device boundaries require it; pseudo-filesystems pruned; errors recorded
+- [ ] Cleanup script scope compared with actual storage and dry-run exits zero without mutation
 - [ ] Retained archives validated before redundant archive is proposed
 - [ ] Retired-agent snapshot checked for unique content before deletion
 - [ ] Current-policy, policy-change, and protected queues separated
-- [ ] Recoverable bytes and projected disk calculated
+- [ ] Naive allocated bytes and inode-aware reclaim estimate both reported; overlapping review roots kept non-additive
+- [ ] After deletion, exact targets are absent and observed `df` delta is recorded as authoritative
 - [ ] No install, restart, policy change, or deletion occurred without authorization
