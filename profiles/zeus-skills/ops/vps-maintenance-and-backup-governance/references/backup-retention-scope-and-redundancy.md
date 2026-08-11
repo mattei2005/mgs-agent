@@ -74,6 +74,21 @@ Requirements:
 
 Examples: shortening safety retention, changing keep-latest count, or introducing retention for DTR/report transaction directories. Keep these bytes out of the “safe now” total. A retention change is a separate script/config decision with its own authorization, fixtures, inventory, audit, and reporting.
 
+#### Interpreting “keep only the latest backup”
+
+Treat “latest” per independent recovery class unless the owner explicitly says otherwise. A profile/update archive and an operational safety snapshot protect different failure modes; one does not replace the other.
+
+For a latest-one local policy:
+
+1. Retain the newest validated profile/update archive and the newest validated safety archive—one per class.
+2. Keep the active runtime rollback and offsite disaster-recovery retention separate; do not silently reduce either.
+3. Validate the retained profile archive by full tar listing. Validate a safety archive against its own manifest format: some manifests store `sha256=` and `size_bytes=` metadata plus an archive listing rather than `sha256sum -c` rows.
+4. Change every producer and its operational description together. A common split is a housekeeping script for update archives and a separate safety-backup script for safety snapshots; updating only one leaves policy drift.
+5. Put older archives and companion manifests in the same exact destructive manifest, with no parent/report-root overlap.
+6. Report large `reports/` totals carefully: profile tarballs may dominate the root, so explain that deleting an old archive is not equivalent to deleting operational reports or logs.
+
+The policy change and the immediate deletion remain Critical Subset operations and must be double-confirmed as one frozen operation set or as separately hashed sets.
+
 ### C. Protected or unique
 
 Includes:

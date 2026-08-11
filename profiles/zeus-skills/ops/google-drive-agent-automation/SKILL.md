@@ -101,7 +101,11 @@ For the canonical root, validate:
 - `canModifyContent=true`;
 - membership role sufficient for the requested operation.
 
-For Ares, preserve raw assets, upload only cleaned/final copies, and record source ID, destination ID, filename and operation status. Never use the same lineage twice as independent candidates.
+For Ares, preserve raw assets in the canonical Drive lineage, upload only cleaned/final copies, and record source ID, destination ID, filename and operation status. Never use the same lineage twice as independent candidates.
+
+Local creative media is transient after successful upload. Remove the VPS copy only after a live `files.get(...supportsAllDrives=true)` confirms the destination is non-trashed in `MGS-AGENTS`, the expected `driveId` matches, size matches exactly, Drive MD5 matches the local file, and any recorded SHA-256/readback also matches. Preserve a compact provenance manifest with source/destination IDs, filename, size, checksums and status. A missing legacy ID, name-only match, stale success report, partial batch, or failed readback must fail closed and retain the local file.
+
+This local-media rule never authorizes deletion of persistent browser authentication state. Ares browser profiles, cookies/storage, collector locks, collector runtime, and the Playwright browser revision required by that collector are a separate protected class.
 
 ## Consumer contract
 

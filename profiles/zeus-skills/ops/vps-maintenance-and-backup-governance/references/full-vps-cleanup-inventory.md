@@ -79,6 +79,31 @@ Do not sum overlapping review roots into one reclaim figure. When a parent root 
 
 For old temporary material, list top-level entries individually, apply an explicit age threshold, exclude current lock files, and require zero process references. Temporary media may still carry evidence value, so keep it separate from purely rebuildable caches.
 
+### 5.1 Persistent browser sessions are not browser caches
+
+A large Playwright/Chromium tree may contain either a rebuildable binary bundle or irreplaceable authenticated session state. Never classify them together by size, age, or the word `browser`.
+
+Before proposing a browser-related target:
+
+1. Resolve the consumer script's persistent profile path, lock path, tool/runtime directory, and `browsers.json` revision.
+2. Separate binary caches such as `home/.cache/ms-playwright/<revision>` from profile state such as `browser-profiles/<purpose>` containing Cookies, Local State, IndexedDB, Sessions, and storage.
+3. Prove which browser revision the collector actually requires via its installed Playwright manifest or executable resolution; protect that revision even if another browser is active elsewhere.
+4. Freeze the persistent profile, lock, collector runtime, and required browser revision as an explicit protected set. Do not delete cache-looking subdirectories inside the persistent profile unless the owner separately authorizes session compaction.
+5. Treat collector outputs/evidence as a different storage class. They may be reviewed for retention without touching authentication state.
+
+When the owner says a named browser session must survive cleanup, that protection overrides generic orphan/cache classification and belongs in the manifest's protected paths.
+
+### 5.2 Drive-backed local media must close by lineage
+
+For creative/media staging, remote existence is proven by the canonical Shared Drive—not by filename coincidence or an old success message.
+
+1. Validate the canonical Service Account and Shared Drive `driveId`.
+2. For uploaded/final media, require a live non-trashed destination ID plus exact size and MD5; require recorded SHA-256/readback parity when the operation manifest provides it.
+3. For execution trees containing raw and readback copies, require every completed item's destination ID live and its recorded size/hash valid. Empty abandoned execution directories may be classified separately as stale temporary material.
+4. Derived frames/contact sheets may be deleted with their local batch only when their parent media has exact remote closure and no independent evidentiary retention applies.
+5. If legacy IDs are missing after a migration, exclude that local root from the destructive manifest. Do not infer a replacement by name alone.
+6. A future upload workflow may remove transient local media immediately after this readback, but must preserve a compact provenance manifest containing source ID, destination ID, filename, size, checksum, and status.
+
 ## 6. Housekeeping dry-run pitfalls
 
 With `set -Eeuo pipefail`:
