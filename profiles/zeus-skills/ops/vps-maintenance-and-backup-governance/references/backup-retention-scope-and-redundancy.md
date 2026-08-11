@@ -49,6 +49,15 @@ Then run dry-run with a temporary log. A no-op means only that no object matched
 
 Do not say “housekeeping is healthy” from cron presence or a successful no-op alone.
 
+### 2.1 Dry-run confiável sob `set -euo pipefail`
+
+O dry-run é um gate operacional e precisa terminar `rc=0` sem mutação. Dois padrões comuns produzem falso erro mesmo quando a classificação está correta:
+
+- `producer | head -N | consumer` sob `pipefail`: `head` fecha cedo, o produtor recebe SIGPIPE e o script sai não-zero. Limite no próprio produtor (por exemplo, contador no `awk`) para que ele consuma a entrada inteira e encerre normalmente.
+- `find "$OPTIONAL_ROOT" ... | wc -l` quando a raiz opcional não existe: com `pipefail`, o `find` retorna erro e aborta o wrapper. Teste `[[ -d "$OPTIONAL_ROOT" ]]` antes de contar ou remover.
+
+Depois de corrigir, valide `bash -n`, execute com log temporário, confirme o resumo esperado e faça readback de que cada candidato ainda existe. Um wrapper mutante que retorna não-zero sempre exige readback antes de repetir, pois a falha pode ter ocorrido depois de algum efeito.
+
 ## 3. Use three deletion queues
 
 ### A. Eligible under current policy
