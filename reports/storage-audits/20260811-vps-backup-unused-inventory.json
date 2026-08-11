@@ -79910,7 +79910,15 @@
       "allocated_bytes": 5627052032,
       "logical_bytes": 5346268246,
       "files": 117870,
-      "dirs": 10900
+      "dirs": 10900,
+      "naive_allocated_bytes": 5627052032,
+      "inode_aware_reclaimable_bytes": 5627052032,
+      "directory_bytes": 48222208,
+      "file_bytes_freed_if_all_links_targeted": 5578829824,
+      "file_bytes_retained_due_links_outside_set": 0,
+      "unique_file_inodes": 117870,
+      "errors": [],
+      "note": "Use inode-aware value for projected disk delta; naive st_blocks double-counts hardlinks."
     },
     "review_required": [
       {
