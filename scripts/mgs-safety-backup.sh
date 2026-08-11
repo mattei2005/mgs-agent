@@ -9,7 +9,7 @@
 #   - Exclui segredos conhecidos (.env, auth.json, token, secret, credential etc.)
 #   - Gera manifest sem conteúdo sensível
 #   - Valida o tar.gz com tar -tzf antes de declarar sucesso
-#   - Mantém exatamente os KEEP_LATEST_BACKUPS snapshots mais recentes (default: 2)
+#   - Mantém exatamente o snapshot validado mais recente (default: 1)
 #   - Só aplica a poda depois que o novo archive foi validado
 #   - --dry-run mostra o que faria sem criar/deletar nada
 # =============================================================================
@@ -20,7 +20,7 @@ BASE_DIR=/root/mgs-agent
 BACKUP_DIR="${BACKUP_DIR:-/root/mgs-agent/backups/safety}"
 LOG="${LOG:-/root/mgs-agent/logs/mgs-safety-backup.log}"
 INTERVAL_DAYS="${BACKUP_INTERVAL_DAYS:-3}"
-KEEP_LATEST_BACKUPS="${KEEP_LATEST_BACKUPS:-2}"
+KEEP_LATEST_BACKUPS="${KEEP_LATEST_BACKUPS:-1}"
 DRY_RUN=0
 FORCE=0
 

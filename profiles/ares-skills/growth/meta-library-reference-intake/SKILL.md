@@ -21,7 +21,7 @@ O runtime canônico é versionado e o perfil do navegador é persistente:
 - Perfil/cookies: `/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium/`
 - Saídas: `/root/.hermes/profiles/ares/artifacts/meta-library/<timestamp>/`
 
-Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versionar o diretório do perfil. Ele pode conter uma sessão autenticada do Rodolfo. Cookies podem expirar por decisão da Meta, mas não devem ser removidos pela operação MGS.
+Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versionar o diretório do perfil. Ele pode conter uma sessão autenticada do Rodolfo. Cookies podem expirar por decisão da Meta, mas não devem ser removidos pela operação MGS. Limpezas genéricas de VPS, caches ou criativos também devem excluir explicitamente o perfil, `/root/.hermes/profiles/ares/browser-profiles/.meta-library-collector.lock`, o runtime `/root/mgs-agent/tools/meta-library-collector` e o Playwright Chromium 1228 exigido pelo coletor.
 
 Se Rodolfo marcar “confiar neste dispositivo” ou a sessão depender de 2FA, após encerrar o helper visual de forma limpa e liberar o lock, exigir snapshot seguro do perfil canônico **antes** de iniciar o coletor. Não abrir duas instâncias, não remover `SingletonLock` manualmente e não prosseguir até haver confirmação do snapshot. O coletor deve continuar pela rota residencial dedicada resolvida pelo wrapper; `direct-vps` é proibido.
 

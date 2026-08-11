@@ -1,0 +1,66 @@
+{
+  "status": "COMPLETED_VALIDATED",
+  "event_id": "vps-cleanup-round2-20260811T165749Z",
+  "target_set_sha256": "04a8e7804e43fbff25522e256e1a1a4b2b885a85df8e5689d122aabb543c0f9e",
+  "confirmation_message_id": "1536779414203932742",
+  "targets_removed": 284,
+  "files_removed_manifest": 257995,
+  "dirs_removed_manifest": 21107,
+  "manifest_inode_aware_bytes": 22380789760,
+  "removed_allocated_bytes_manifest": 22380789760,
+  "disk_before": {
+    "total_bytes": 102888095744,
+    "used_bytes": 59339513856,
+    "free_bytes": 43548581888
+  },
+  "disk_after": {
+    "total_bytes": 102888095744,
+    "used_bytes": 36957417472,
+    "free_bytes": 65930678272
+  },
+  "observed_free_delta_bytes": 22382096384,
+  "protected_paths_present": true,
+  "finished_at_utc": "2026-08-11T16:57:57.448809+00:00",
+  "policy_changes_status": "ACTIVE_VALIDATED",
+  "validated_at_utc": "2026-08-11T17:12:29.185351+00:00",
+  "full_scan_report": "/root/mgs-agent/reports/storage-audits/20260811-post-cleanup-round2-full-scan.json",
+  "validation": {
+    "targets_remaining": 0,
+    "protected_paths_missing": 0,
+    "library_critical_hashes": "PASS 3/3 unchanged",
+    "drive_ready_exact_match": "PASS 210/210",
+    "drive_completed_executions": "PASS 5/5",
+    "profile_backup_retained": "PASS 1/1 tar readable",
+    "safety_backup_retained": "PASS 1/1 tar+manifest hash",
+    "housekeeping_keep_latest_1": "PASS dry-run no-op",
+    "safety_keep_latest_1": "PASS real and synthetic dry-run",
+    "fts": "PASS integrity 3/3 and populated",
+    "services": {
+      "ares-gateway.service": "active",
+      "atena-gateway.service": "active",
+      "zeus-gateway.service": "active"
+    },
+    "failed_units": 0,
+    "active_hermes": "0.20.0",
+    "rollback_hermes": "0.19.1"
+  },
+  "institutional_policies": [
+    "POL-ARES-LOCAL-RETENTION-AFTER-DRIVE-20260811",
+    "POL-MGS-LOCAL-BACKUP-RETENTION-LATEST-20260811"
+  ],
+  "upstream_followup": {
+    "status": "separate_scope_not_applied",
+    "runtime_base": "c0106e50e7ecedb3ce34e785d949725dc4e0e457",
+    "origin_main": "f51aa6a9b5ce514e15f8e337777f522fd5cc6fa2",
+    "behind": 5,
+    "reason": "origin advanced during cleanup; requires separate controlled runtime cutover authorization"
+  },
+  "report_infra": {
+    "status": "published",
+    "channel_id": "1498132022634483894",
+    "message_id": "1536784485696143403",
+    "http_status": 200,
+    "content_empty": true,
+    "mentions": 0
+  }
+}

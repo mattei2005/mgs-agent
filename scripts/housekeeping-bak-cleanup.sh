@@ -14,8 +14,8 @@
 #   - NUNCA deleta canônicos (SOUL.md, config.yaml, .env, *.sh sem marcador backup)
 #   - Backups pequenos: só pega nomes com marcador explícito de backup: *.bak*,
 #     *.backup*, *.old, *.orig, *~
-#   - Backups grandes Hermes update: aplica retenção dedicada, preservando os N
-#     mais recentes globalmente (default: 2) e deletando o restante acima de
+#   - Backups grandes Hermes update: aplica retenção dedicada, preservando apenas
+#     o mais recente globalmente (default: 1) e deletando o restante acima de
 #     HERMES_UPDATE_BACKUP_RETENTION_DAYS (default: 2 dias).
 #   - Preserva SEMPRE o arquivo mais recente de cada família de backup, mesmo
 #     acima da retenção. Se só existe 1 arquivo na família, não deleta.
@@ -40,7 +40,7 @@ fi
 
 RETENTION_DAYS="${RETENTION_DAYS:-15}"
 HERMES_UPDATE_BACKUP_RETENTION_DAYS="${HERMES_UPDATE_BACKUP_RETENTION_DAYS:-2}"
-HERMES_UPDATE_BACKUP_KEEP_LATEST="${HERMES_UPDATE_BACKUP_KEEP_LATEST:-2}"
+HERMES_UPDATE_BACKUP_KEEP_LATEST="${HERMES_UPDATE_BACKUP_KEEP_LATEST:-1}"
 BASE_DIR=/root/mgs-agent
 LOG="${MGS_HOUSEKEEPING_LOG:-${BASE_DIR}/logs/housekeeping.log}"
 SCAN_ROOTS="${MGS_HOUSEKEEPING_SCAN_ROOTS:-/root/.hermes:/root/mgs-agent:/root/backups:/tmp}"
