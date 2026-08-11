@@ -5648,7 +5648,7 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536593883092484106",
       "source_thread_id": "1536567182824308839",
-      "status": "activation_scheduled_esm_external_pending",
+      "status": "superseded_before_activation",
       "installed_before": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
       "target_sha": "9d6c5a920c773f86fad9ea16528212faeaa21815",
       "target_version": "0.20.0",
@@ -5672,13 +5672,14 @@
         "candidate_cli_import": "PASS"
       },
       "rollback_launcher": "/root/.local/bin/hermes-v0191-mgs",
-      "updated_at": "2026-08-11T01:26:25-04:00",
+      "updated_at": "2026-08-11T13:17:41.824928+00:00",
       "activation_finalizer": "/root/mgs-agent/data/hermes-v0200-activation-finalizer-20260811-011958.sh",
       "activation_finalizer_sha256": "dbd504c20da936f0f606390dae70e7ba1b3c4a5cd1c91dc71dc8105119949289",
       "staged_wrapper": "/root/.local/bin/hermes-v0200-mgs",
       "esm_status": "blocked_external_device_authorization_not_completed",
       "activation_unit": "mgs-hermes-v0200-activation-20260811T052625Z",
-      "activation_delay_seconds": 180
+      "activation_delay_seconds": 180,
+      "superseded_by": "hermes-port-main-c0106e50-20260811"
     },
     {
       "id": "vps-reboot-validator-20260811-pro",
@@ -5696,6 +5697,42 @@
       "unit_present": false,
       "result": "/root/.hermes/secure-backups/vps-maintenance/reboot-20260811T123633Z/post-reboot-result.json",
       "validated_at": "2026-08-11T12:45:08.033762+00:00"
+    },
+    {
+      "id": "hermes-port-main-c0106e50-20260811",
+      "agent": "zeus",
+      "type": "hermes_runtime_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1536718896483278888",
+      "source_thread_id": "1536567182824308839",
+      "status": "staged_validated_activation_pending",
+      "installed_before": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
+      "target_upstream_sha": "c0106e50e7ecedb3ce34e785d949725dc4e0e457",
+      "target_version": "0.20.0",
+      "candidate_path": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+      "candidate_commit": "5b1a61da87ef6961f9ee3bd65d9acbfb582ca0a8",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-11-main-c0106e50.patch",
+      "patch_sha256": "445daf75e545295eee33721bc03421146f58b77f5aef48108e73eca104a64596",
+      "patch_scope_files": 44,
+      "staged_wrapper": "/root/.local/bin/hermes-v0200-main-c0106e50-mgs",
+      "rollback_launcher": "/root/.local/bin/hermes-v0191-mgs",
+      "config_schema": 34,
+      "validation": {
+        "surface_tests": "532 passed + 6 subtests",
+        "new_upstream_tests": "220 passed + 2 skipped",
+        "post_upstream_guard": "193 passed",
+        "mgs_guard": "453 passed + 6 subtests",
+        "web_build": "PASS",
+        "tui_build": "PASS",
+        "npm_audit": "0 vulnerabilities",
+        "config_check": "root/Zeus/Atena/Ares 4/4 schema 34",
+        "codex_auth": "4/4 logged in",
+        "codex_smokes": "4/4 exact rc=0",
+        "patch_apply_reverse_byte_identity": "44/44",
+        "git": "behind=0 ahead=1 clean"
+      },
+      "updated_at": "2026-08-11T13:17:41.824928+00:00"
     }
   ],
   "profile_skill_references": [
