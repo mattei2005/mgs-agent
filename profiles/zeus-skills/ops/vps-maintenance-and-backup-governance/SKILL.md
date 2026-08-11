@@ -32,7 +32,7 @@ Load this skill when Rodolfo asks:
 5. For public SSH exposure, missing key-based access, dynamic administrator IPs, provider firewalls, or lockout-safe sequencing, load `references/lockout-safe-ssh-hardening.md` before recommending any authentication or firewall mutation.
 6. Route Hermes deployment/restart to `hermes-agent-operations` and monitor implementation to `log-monitor-discord-alert`. Do not duplicate those procedures here.
 7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
-8. When an audit surfaces Ubuntu Pro, ESM Apps, or a device-code attach flow, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; classify standard security coverage separately, treat ESM package counts correctly, and explain optional subscription linkage before presenting it as a maintenance decision.
+8. When an audit surfaces Ubuntu Pro, ESM Apps/Infra, Livepatch, a device-code attach flow, or the boundary between subscription attachment and package installation, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; it defines coverage classification, supervised PTY attachment, local readback, separate authorization gates, and post-install closure.
 
 ## Audit workflow
 

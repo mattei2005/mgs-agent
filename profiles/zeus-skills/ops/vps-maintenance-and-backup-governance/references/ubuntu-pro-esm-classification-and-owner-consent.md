@@ -22,6 +22,27 @@ Use this reference when a VPS audit reports security updates available only thro
 - Keep the waiting process bounded and manually supervised. If the owner declines or questions the need, stop/let the device code expire and verify `attached=false`; do not leave a waiting process or imply any subscription was created.
 - Do not claim free/commercial eligibility from memory. Check Canonical's current official terms when price or licensing matters.
 
+## Supervised attachment and local readback
+
+1. Run `pro attach` in a tracked PTY process. In Discord operations, keep it silent from automatic completion notifications and supervise it with manual `poll`/`wait` calls.
+2. Poll only until the device URL and temporary code appear, then send those values to the owner. Keep the PTY alive; terminating it after extracting the code invalidates the pending flow.
+3. After the owner confirms the browser step, wait until the local process exits. Browser confirmation is not proof that the host attached successfully.
+4. Require a fresh `pro status --format json` readback with `attached=true` and inspect the actual states of `esm-apps`, `esm-infra`, and `livepatch`.
+5. For Livepatch, confirm the running kernel is supported and report its patch state. `enabled` proves entitlement/configuration, not that a patch was applied; `nothing-to-apply` is a valid healthy result.
+6. Never publish subscription identity, client secrets, tokens, or private Ubuntu Pro state. Inventory/report only the subscription class and validated service states.
+
+## Separate attachment from package installation
+
+Attachment and ESM package installation are two distinct state changes and authorization gates:
+
+1. After attachment, freeze the package set with `apt list --upgradable`, `apt-get -s upgrade`, and `pro security-status`.
+2. State explicitly when attachment succeeded but ESM packages remain pending.
+3. Under MGS policy, obtain the Critical Subset confirmation before installing the frozen set because the upgrade writes under `/usr`, even when the owner has just completed device attachment or previously requested broad VPS maintenance.
+4. Do not enable unrelated Pro services such as FIPS, realtime kernel, Landscape, or USG unless separately requested.
+5. After confirmation, follow `controlled-package-and-node-tooling-update.md` for exact candidate versions, rollback evidence, narrow installation, and service/reboot closure.
+6. Post-install acceptance requires: zero intended updates remaining, clean `dpkg --audit`, current/expected kernel agreement, reboot-marker and `needrestart` readback, zero failed units, target gateways active, and no new critical logs. A required reboot is a separate gate governed by the durable post-reboot validator.
+7. Record validated attachment/config changes in inventory and audit, then publish the canonical REPORT-INFRA embed without account identity or token material.
+
 ## Executive wording
 
 Use this order:
