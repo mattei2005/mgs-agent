@@ -61,8 +61,13 @@ atomic_launcher(){
   [[ "$(readlink -f "$CANONICAL")" == "$(readlink -f "$target")" ]]
 }
 prepare_and_run_restart(){
-  local reason="$1" output finalizer
-  output="$(HERMES_BIN="$CANONICAL" HERMES_REPO="$(dirname "$(dirname "$(dirname "$(readlink -f "$CANONICAL")")")")" "$ROOT/scripts/mgs-gateway-restart-safe.sh" --agents 'ares atena zeus' --reason "$reason")"
+  local reason="$1" output finalizer resolved shebang python_path repo
+  resolved="$(readlink -f "$CANONICAL")"
+  shebang="$(head -n 1 "$resolved")"
+  python_path="${shebang#\#!}"
+  repo="$(dirname "$(dirname "$(dirname "$python_path")")")"
+  [[ -x "$repo/venv/bin/python" ]]
+  output="$(HERMES_BIN="$CANONICAL" HERMES_REPO="$repo" "$ROOT/scripts/mgs-gateway-restart-safe.sh" --agents 'ares atena zeus' --reason "$reason")"
   finalizer="$(python3 - "$output" <<'PY'
 import re,sys
 m=re.search(r'Prepared detached finalizer only \(no restart executed\): (\S+)',sys.argv[1])
@@ -175,7 +180,8 @@ import os,subprocess,sys
 h=sys.argv[1]; env=os.environ.copy(); env.pop('HERMES_HOME',None); env.pop('HERMES_PROFILE',None); env['HOME']='/root'
 for p in ['default','zeus','atena','ares']:
  args=[h]+([] if p=='default' else ['-p',p])+['config','check']; r=subprocess.run(args,env=env,text=True,capture_output=True,timeout=60); t=r.stdout+r.stderr
- assert r.returncode==0 and 'Config version: 34' in t and '→' not in t,(p,r.returncode)
+ version_line=next((line for line in t.splitlines() if 'Config version:' in line),'')
+ assert r.returncode==0 and 'Config version: 34' in version_line and '→' not in version_line,(p,r.returncode,version_line)
  args=[h]+([] if p=='default' else ['-p',p])+['auth','status','openai-codex']; r=subprocess.run(args,env=env,text=True,capture_output=True,timeout=60)
  assert r.returncode==0 and 'logged in' in (r.stdout+r.stderr).lower(),(p,r.returncode)
 for p in ['zeus','atena','ares']:

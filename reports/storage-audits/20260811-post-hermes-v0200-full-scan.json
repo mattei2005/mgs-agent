@@ -1,0 +1,485 @@
+{
+  "schema": 1,
+  "generated_at": "2026-08-11T13:43:52.896836+00:00",
+  "scope": "root filesystem, same-device only; excludes /proc /sys /dev /run and other mounted filesystems",
+  "mutation_performed": false,
+  "active_launcher": "/root/.local/bin/hermes",
+  "active_binary": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50/.venv/bin/hermes",
+  "active_runtime": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+  "rollback_runtime": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f",
+  "disk": {
+    "total_bytes": 102888095744,
+    "used_bytes": 67251703808,
+    "free_bytes": 35619614720
+  },
+  "scan": {
+    "files": 749705,
+    "dirs": 88829,
+    "errors": 0,
+    "logical_bytes": 65061448364,
+    "allocated_bytes": 67223670784,
+    "by_top_level": {
+      "/root": {
+        "logical_bytes": 56431735362,
+        "allocated_bytes": 58243723264,
+        "dirs": 60749
+      },
+      "/swapfile": {
+        "logical_bytes": 4294967296,
+        "allocated_bytes": 4294971392,
+        "dirs": 0
+      },
+      "/usr": {
+        "logical_bytes": 3259986128,
+        "allocated_bytes": 3639099392,
+        "dirs": 18323
+      },
+      "/var": {
+        "logical_bytes": 1045501748,
+        "allocated_bytes": 964800512,
+        "dirs": 398
+      },
+      "/tmp": {
+        "logical_bytes": 25432304,
+        "allocated_bytes": 72540160,
+        "dirs": 9073
+      },
+      "/etc": {
+        "logical_bytes": 2932174,
+        "allocated_bytes": 7557120,
+        "dirs": 270
+      },
+      "/memfd:mgs-midturn-fifo-index (deleted)": {
+        "logical_bytes": 892799,
+        "allocated_bytes": 892928,
+        "dirs": 0
+      },
+      "/snap": {
+        "logical_bytes": 548,
+        "allocated_bytes": 24576,
+        "dirs": 5
+      },
+      "/lost+found": {
+        "logical_bytes": 0,
+        "allocated_bytes": 16384,
+        "dirs": 1
+      },
+      "/.pytest-cache": {
+        "logical_bytes": 5,
+        "allocated_bytes": 8192,
+        "dirs": 1
+      },
+      "/": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/home": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/mnt": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/sbin.usr-is-merged": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/bin.usr-is-merged": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/lib.usr-is-merged": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/media": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/srv": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/opt": {
+        "logical_bytes": 0,
+        "allocated_bytes": 4096,
+        "dirs": 1
+      },
+      "/sbin": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "dirs": 0
+      },
+      "/lib": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "dirs": 0
+      },
+      "/lib64": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "dirs": 0
+      },
+      "/bin": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "dirs": 0
+      }
+    },
+    "files_over_100MiB": [
+      {
+        "path": "/root/mgs-agent/reports/hermes-updates/20260811-main-c0106e50-precheck2/hermes-profiles-backup-20260811-090113.tar.gz",
+        "logical_bytes": 4744214333,
+        "allocated_bytes": 4744220672
+      },
+      {
+        "path": "/root/mgs-agent/reports/hermes-updates/20260811-004100/hermes-profiles-backup-20260811-004100.tar.gz",
+        "logical_bytes": 4674846379,
+        "allocated_bytes": 4674850816
+      },
+      {
+        "path": "/swapfile",
+        "logical_bytes": 4294967296,
+        "allocated_bytes": 4294971392
+      },
+      {
+        "path": "/root/mgs-agent/backups/safety/mgs-safety-20260811-034101.tar.gz",
+        "logical_bytes": 3903554101,
+        "allocated_bytes": 3903561728
+      },
+      {
+        "path": "/root/mgs-agent/backups/safety/mgs-safety-20260807-034101.tar.gz",
+        "logical_bytes": 3903334409,
+        "allocated_bytes": 3903340544
+      },
+      {
+        "path": "/root/mgs-agent/reports/hermes-updates/20260802-175238-port-v0191/hermes-profiles-backup.tar.gz",
+        "logical_bytes": 3765540839,
+        "allocated_bytes": 3765547008
+      },
+      {
+        "path": "/root/mgs-agent/.git/objects/pack/pack-162c7d602c39742af22dc85515c553d9990f740d.pack",
+        "logical_bytes": 1758961691,
+        "allocated_bytes": 1758969856
+      },
+      {
+        "path": "/root/.hermes/secure-backups/fts-repair/20260802-2148/zeus-state-before.db",
+        "logical_bytes": 1699655680,
+        "allocated_bytes": 1699655680
+      },
+      {
+        "path": "/root/mgs-agent/.git/objects/pack/pack-69422f4fafeda0b3783fb0be42a333f83dce6a5f.pack",
+        "logical_bytes": 1183511539,
+        "allocated_bytes": 1183518720
+      },
+      {
+        "path": "/root/.hermes/profiles/zeus/checkpoints/store/objects/pack/pack-223ce90dff2c308dd4dc4471ce4e959d4b0590d2.pack",
+        "logical_bytes": 595058281,
+        "allocated_bytes": 595062784
+      },
+      {
+        "path": "/root/.hermes/profiles/zeus/state.db",
+        "logical_bytes": 536420352,
+        "allocated_bytes": 536424448
+      },
+      {
+        "path": "/root/.hermes/profiles/ares/checkpoints/store/objects/pack/pack-a6211c1081b1dd548f45c5e82438bb2103f719bd.pack",
+        "logical_bytes": 516907497,
+        "allocated_bytes": 516915200
+      },
+      {
+        "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-small/blobs/3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "logical_bytes": 483546902,
+        "allocated_bytes": 483553280
+      },
+      {
+        "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-88e3551539e6a9cb3ed6bbc2ef0462e72f041610.pack",
+        "logical_bytes": 403377014,
+        "allocated_bytes": 403382272
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-88e3551539e6a9cb3ed6bbc2ef0462e72f041610.pack",
+        "logical_bytes": 403377014,
+        "allocated_bytes": 403382272
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92/.git/objects/pack/pack-8e99b18b1933962c48389d6bcda5b2859b119526.pack",
+        "logical_bytes": 313208393,
+        "allocated_bytes": 313212928
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50/.git/objects/pack/pack-8e99b18b1933962c48389d6bcda5b2859b119526.pack",
+        "logical_bytes": 313208393,
+        "allocated_bytes": 313212928
+      },
+      {
+        "path": "/root/.npm/_npx/c8ab89660c602c20/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex",
+        "logical_bytes": 311001136,
+        "allocated_bytes": 311009280
+      },
+      {
+        "path": "/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+        "logical_bytes": 290614600,
+        "allocated_bytes": 290619392
+      },
+      {
+        "path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+        "logical_bytes": 278568152,
+        "allocated_bytes": 278573056
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/home/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
+        "logical_bytes": 273505496,
+        "allocated_bytes": 273506304
+      },
+      {
+        "path": "/root/.hermes/profiles/ares/home/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
+        "logical_bytes": 273505496,
+        "allocated_bytes": 273506304
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-47eb78e38a6f3304adf136a1c1121d973dfefe6b.pack",
+        "logical_bytes": 264392444,
+        "allocated_bytes": 264396800
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-ea20a2921d07498a437104b3221916bfddffce7d.pack",
+        "logical_bytes": 245347475,
+        "allocated_bytes": 245354496
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-87ab38bd8aaebb4eb411da97ed78848fc71a5cb4.pack",
+        "logical_bytes": 245345465,
+        "allocated_bytes": 245350400
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-d256e4c89daf290220769c55af9b7c5ede1b51d0.pack",
+        "logical_bytes": 243823917,
+        "allocated_bytes": 243830784
+      },
+      {
+        "path": "/root/.hermes/hermes-agent-next-b9ba7c78/.git/objects/pack/pack-656914cc5e410446986ddadebe92dcdd576b0650.pack",
+        "logical_bytes": 243520115,
+        "allocated_bytes": 243527680
+      },
+      {
+        "path": "/root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+        "logical_bytes": 196975952,
+        "allocated_bytes": 196980736
+      },
+      {
+        "path": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+        "logical_bytes": 189181152,
+        "allocated_bytes": 189186048
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/home/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell",
+        "logical_bytes": 185257184,
+        "allocated_bytes": 185257984
+      },
+      {
+        "path": "/root/.hermes/profiles/ares/home/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell",
+        "logical_bytes": 185257184,
+        "allocated_bytes": 185257984
+      },
+      {
+        "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-base/blobs/d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+        "logical_bytes": 145217532,
+        "allocated_bytes": 145219584
+      },
+      {
+        "path": "/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1",
+        "logical_bytes": 143545784,
+        "allocated_bytes": 143548416
+      },
+      {
+        "path": "/root/.npm/_cacache/content-v2/sha512/7e/cc/2fc86a6b00f08c88e12e7bfecc28c93ba428e1f6464825f257e62f5ab667e798661b602714859b041fd2c43f4fb4b79c723ea0db7cd5d8ecd4b1215b97c4",
+        "logical_bytes": 137138170,
+        "allocated_bytes": 137142272
+      },
+      {
+        "path": "/root/.hermes/secure-backups/fts-repair/20260802-2148/ares-state-before.db",
+        "logical_bytes": 126709760,
+        "allocated_bytes": 126713856
+      },
+      {
+        "path": "/usr/bin/node",
+        "logical_bytes": 124836408,
+        "allocated_bytes": 124841984
+      },
+      {
+        "path": "/root/.cache/uv/archive-v0/H31-90xaFxItAKcX/playwright/driver/node",
+        "logical_bytes": 123656816,
+        "allocated_bytes": 123662336
+      },
+      {
+        "path": "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/node",
+        "logical_bytes": 123459976,
+        "allocated_bytes": 123465728
+      },
+      {
+        "path": "/usr/lib/llvm-18/lib/libLLVM.so.1",
+        "logical_bytes": 123215144,
+        "allocated_bytes": 123215872
+      }
+    ]
+  },
+  "review_roots": [
+    {
+      "path": "/root/.cache",
+      "kind": "cache",
+      "policy": "review",
+      "logical_bytes": 3090269619,
+      "allocated_bytes": 3129266176,
+      "files": 12100,
+      "dirs": 2035,
+      "errors": 0
+    },
+    {
+      "path": "/root/.npm",
+      "kind": "cache",
+      "policy": "review",
+      "logical_bytes": 742039919,
+      "allocated_bytes": 751321088,
+      "files": 1191,
+      "dirs": 1475,
+      "errors": 0
+    },
+    {
+      "path": "/var/cache/apt/archives",
+      "kind": "apt_cache",
+      "policy": "usually_safe",
+      "logical_bytes": 90666798,
+      "allocated_bytes": 90853376,
+      "files": 49,
+      "dirs": 2,
+      "errors": 0
+    },
+    {
+      "path": "/tmp",
+      "kind": "temporary",
+      "policy": "age_review",
+      "logical_bytes": 25492950,
+      "allocated_bytes": 72540160,
+      "files": 2203,
+      "dirs": 9073,
+      "errors": 0
+    },
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates",
+      "kind": "hermes_update_reports",
+      "policy": "retain_one_canonical_rollback_set",
+      "logical_bytes": 13199063658,
+      "allocated_bytes": 13203394560,
+      "files": 1400,
+      "dirs": 72,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/secure-backups",
+      "kind": "secure_backups",
+      "policy": "retention_review",
+      "logical_bytes": 2009895676,
+      "allocated_bytes": 2013741056,
+      "files": 1509,
+      "dirs": 191,
+      "errors": 0
+    }
+  ],
+  "hermes_runtimes": [
+    {
+      "path": "/root/.hermes/hermes-agent",
+      "preserved": false,
+      "reason": "old_runtime_review",
+      "logical_bytes": 5519596304,
+      "allocated_bytes": 6290685952,
+      "files": 264601,
+      "dirs": 21405,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-next-b9ba7c78",
+      "preserved": false,
+      "reason": "old_runtime_review",
+      "logical_bytes": 2375706800,
+      "allocated_bytes": 2451906560,
+      "files": 24145,
+      "dirs": 3379,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v0191-cc4cab2f",
+      "preserved": true,
+      "reason": "rollback",
+      "logical_bytes": 1999109898,
+      "allocated_bytes": 2372018176,
+      "files": 119807,
+      "dirs": 9317,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+      "preserved": true,
+      "reason": "active",
+      "logical_bytes": 1112637698,
+      "allocated_bytes": 1235578880,
+      "files": 40509,
+      "dirs": 4148,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-v2026-8-3-9d6c5a92",
+      "preserved": false,
+      "reason": "old_runtime_review",
+      "logical_bytes": 772440474,
+      "allocated_bytes": 822628352,
+      "files": 17522,
+      "dirs": 2119,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-verify-v0191-cc4cab2f",
+      "preserved": false,
+      "reason": "old_runtime_review",
+      "logical_bytes": 139580646,
+      "allocated_bytes": 161738752,
+      "files": 8115,
+      "dirs": 963,
+      "errors": 0
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-verify2-v0191-cc4cab2f",
+      "preserved": false,
+      "reason": "old_runtime_review",
+      "logical_bytes": 161731584,
+      "allocated_bytes": 185450496,
+      "files": 8636,
+      "dirs": 1068,
+      "errors": 0
+    }
+  ],
+  "apt_autoremove_simulation": {
+    "rc": 0,
+    "stdout": "emv node-is-extendable [1.0.1-3]\nRemv node-is-extglob [2.1.1-5]\nRemv node-is-path-cwd [2.2.0-2]\nRemv node-is-plain-obj [3.0.0-2]\nRemv node-is-plain-object [5.0.0-7]\nRemv node-is-stream [3.0.0-4]\nRemv node-is-windows [1.0.2+~cs1.0.0-1]\nRemv node-isarray [2.0.5-4]\nRemv node-isexe [2.0.0+~2.0.1-5]\nRemv node-map-visit [1.0.0-4]\nRemv node-object-visit [1.0.1-5]\nRemv node-isobject [4.0.0-2]\nRemv node-js-tokens [8.0.0-2]\nRemv node-jsesc [3.0.2+~3.0.1-1]\nRemv node-json-buffer [3.0.1+~3.0.0-1]\nRemv node-json-parse-better-errors [1.0.2+~cs3.3.1-2]\nRemv node-json-schema [0.4.0+~7.0.11-1]\nRemv node-json-schema-traverse [1.0.0-3]\nRemv node-json-stable-stringify [1.0.2+repack1+~cs1.0.34-2]\nRemv node-shell-quote [1.7.4+~1.7.1-1ubuntu0.24.04.1]\nRemv node-jsonify [0.0.1-1]\nRemv node-jsonparse [1.3.1-10]\nRemv node-levn [0.4.1+dfsg-2]\nRemv node-loader-runner [4.3.0-1]\nRemv node-locate-path [7.1.1-2]\nRemv node-log-driver [1.2.7+git+20180219+bba1761737-7]\nRemv node-lowercase-keys [2.0.0-2]\nRemv node-lru-cache [7.14.1-1]\nRemv node-memfs [3.4.12+~cs1.0.3-1]\nRemv node-merge-stream [2.0.0+~1.1.2-2]\nRemv node-mimic-response [3.1.0-8]\nRemv node-promzard [0.3.0-2]\nRemv node-read [1.0.7-5]\nRemv node-mute-stream [0.0.8+~0.0.1-3]\nRemv node-negotiator [0.6.3+~0.6.1-1]\nRemv node-neo-async [2.6.2+~cs3.0.0-3]\nRemv node-npm-run-path [5.1.0+~4.0.0-8]\nRemv node-object-inspect [1.12.2+~cs1.8.1-1]\nRemv node-restore-cursor [4.0.0-4]\nRemv node-once [1.4.1-1]\nRemv node-osenv [0.1.5+~0.1.1-1]\nRemv node-p-cancelable [2.1.1-1]\nRemv node-p-locate [6.0.0-12]\nRemv node-p-limit [4.0.0+~cs4.0.0-5]\nRemv node-pascalcase [1.0.0-1]\nRemv node-path-dirname [1.0.2-2]\nRemv node-path-exists [5.0.0-8]\nRemv node-path-is-absolute [2.0.0-2]\nRemv node-path-is-inside [1.0.2+~1.0.0-1]\nRemv node-path-type [4.0.0-3]\nRemv node-pify [5.0.0+~cs5.0.1-1]\nRemv node-postcss-value-parser [4.2.0-1]\nRemv node-type-check [0.4.0+dfsg-3]\nRemv node-prelude-ls [1.2.1+dfsg-3]\nRemv node-process-nextick-args [2.0.1-3]\nRemv node-promise-inflight [1.0.1+~1.0.0-1]\nRemv node-prr [1.0.1-3]\nRemv node-uri-js [4.4.0+dfsg-8]\nRemv node-punycode [2.2.3-2]\nRemv node-quick-lru [6.1.1-4]\nRemv node-serialize-javascript [6.0.1-1]\nRemv node-randombytes [2.1.0+~2.0.0-2]\nRemv node-rechoir [0.8.0+~0.6.1-2]\nRemv node-regenerator-runtime [0.15.2+~0.10.8-1]\nRemv node-regexpp [3.2.0-5]\nRemv node-regjsgen [0.7.1+ds-1]\nRemv node-repeat-string [1.6.1+repack-1]\nRemv node-require-directory [2.1.1+~2.1.2-1]\nRemv node-require-from-string [2.0.2+~1.2.1-1]\nRemv node-resolve [1.22.8+~cs5.34.15-2]\nRemv node-resolve-cwd [3.0.0-2]\nRemv node-resolve-from [5.0.0+~3.1.0+~3.3.0+~2.0.0-1]\nRemv node-resumer [0.0.0-6]\nRemv node-retry [0.13.1+~0.12.1-1]\nRemv node-string-decoder [1.3.0-6]\nRemv node-safe-buffer [5.2.1+~cs2.1.2-3]\nRemv node-sellside-emitter [1.2.1-3]\nRemv node-set-blocking [2.0.0-2]\nRemv node-set-immediate-shim [2.0.0-2]\nRemv node-shebang-command [2.0.0-1]\nRemv node-shebang-regex [3.0.0-2]\nRemv node-signal-exit [4.1.0-6]\nRemv node-slash [4.0.0-3]\nRemv node-source-list-map [2.0.1+dfsg+~0.1.2-1]\nRemv node-validate-npm-package-license [3.0.4-2]\nRemv node-spdx-correct [3.1.1-2]\nRemv node-spdx-expression-parse [3.0.1+~3.0.1-1]\nRemv node-spdx-exceptions [2.3.0-2]\nRemv node-spdx-license-ids [3.0.12-1]\nRemv node-strip-bom [4.0.0-2]\nRemv node-strip-json-comments [4.0.0-4]\nRemv node-tapable [2.2.1-3]\nRemv node-text-table [0.2.0-4]\nRemv node-through [2.3.8+~cs0.0.30-1]\nRemv node-time-stamp [2.2.0-2]\nRemv node-to-fast-properties [3.0.1-3]\nRemv node-tslib [2.4.1-1]\nRemv node-typedarray [0.0.7-1]\nRemv node-unicode-canonical-property-names-ecmascript [2.0.0-2]\nRemv node-unicode-match-property-value-ecmascript [2.1.0+ds-1]\nRemv node-unicode-property-aliases-ecmascript [2.1.0+ds-1]\nRemv node-util-deprecate [1.0.2-3]\nRemv node-uuid [8.3.2+~8.3.3-4]\nRemv node-v8flags [3.2.0+~3.1.1-1]\nRemv node-wordwrap [1.0.0-4]\nRemv node-wrappy [1.0.2-3]\nRemv node-xtend [4.0.2-3]\nRemv node-y18n [5.0.8+~5.0.0-3]\nRemv node-yallist [4.0.0+~4.0.1-1]\nRemv node-yaml [2.3.4-1build1]\n",
+    "stderr": ""
+  },
+  "journal_disk_usage": {
+    "rc": 0,
+    "stdout": "Archived and active journals take up 161.4M in the file system.\n",
+    "stderr": ""
+  },
+  "failed_units": {
+    "rc": 0,
+    "lines": []
+  },
+  "decision": "inventory_only_no_deletion; exact deletion manifest requires Rodolfo confirmation after review"
+}
