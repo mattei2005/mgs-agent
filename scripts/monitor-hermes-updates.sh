@@ -8,7 +8,8 @@
 
 set -euo pipefail
 DRY_RUN="${HERMES_MONITOR_DRY_RUN:-0}"
-if [[ "$DRY_RUN" != "1" ]]; then
+SKIP_ENV_LOAD="${HERMES_MONITOR_SKIP_ENV_LOAD:-0}"
+if [[ "$DRY_RUN" != "1" && "$SKIP_ENV_LOAD" != "1" ]]; then
     set -a
     # shellcheck source=/dev/null
     source /root/mgs-agent/.env 2>/dev/null || true
@@ -22,6 +23,7 @@ HERMES_DIR_OVERRIDE="${HERMES_MONITOR_DIR:-}"
 UPSTREAM_URL="${HERMES_MONITOR_UPSTREAM_URL:-https://github.com/NousResearch/hermes-agent.git}"
 UPSTREAM_BRANCH="${HERMES_MONITOR_UPSTREAM_BRANCH:-main}"
 UPSTREAM_TRACKING_REF="refs/remotes/mgs-monitor-upstream/${UPSTREAM_BRANCH}"
+CURL_BIN="${HERMES_MONITOR_CURL_BIN:-curl}"
 DRY_RUN_OUTPUT="${HERMES_MONITOR_DRY_RUN_OUTPUT:-}"
 TARGET_CHANNEL_ID="${HERMES_MONITOR_CHANNEL_ID:-1505609056771899644}"  # #alerts-hermes-news
 ZEUS_PROFILE_ENV="${HERMES_MONITOR_ZEUS_ENV:-/root/.hermes/profiles/zeus/.env}"
@@ -255,7 +257,7 @@ if [[ "$DRY_RUN" == "1" ]]; then
   exit 0
 fi
 
-HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
+HTTP_CODE=$("$CURL_BIN" -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   --max-time 15 \
   -X POST "https://discord.com/api/v10/channels/${TARGET_CHANNEL_ID}/messages" \
   -H "Authorization: Bot ${DISCORD_TOKEN}" \
