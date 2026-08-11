@@ -2483,7 +2483,7 @@
         "execution": "PASS: host boot 2026-07-19 23:36:34 EDT, boot id 3d0eff28-a817-4a9e-9f62-cdba82e262d5, pending boot indicator absent",
         "validation_status": "PASS"
       },
-      "updated_at": "2026-07-20T03:40:51Z",
+      "updated_at": "2026-08-10T23:56:52-04:00",
       "post_reboot_validation": {
         "checked_at": "2026-07-20T03:23:24.030560Z",
         "overall": "FAIL",
@@ -2538,6 +2538,14 @@
         "exec_main_status": 0,
         "dpkg_audit": "clean",
         "report_infra_final_message_id": "1528608707884093547"
+      },
+      "latest_update_20260811": {
+        "status": "package_updated_reboot_pending",
+        "version_before": "4.3.54-master",
+        "version_after": "4.3.56-master",
+        "service": "active/running",
+        "backup_deb": "/root/.hermes/secure-backups/vps-maintenance/20260810T235019-0400/previous-debs/monarx-agent_4.3.54-master_amd64.deb",
+        "updated_at": "2026-08-10T23:56:52-04:00"
       }
     },
     {
@@ -3992,7 +4000,27 @@
         "valid_backup_hashes": "9/9 PASS",
         "result": "/root/mgs-agent/reports/vps-maintenance/20260802-invalid-backup-cleanup.json",
         "completed_at": "2026-08-02T20:00:47-04:00"
-      }
+      },
+      "latest_maintenance_20260811": {
+        "status": "packages_updated_reboot_pending",
+        "authorization_message_id": "1536581988322906142",
+        "source_thread_id": "1536567182824308839",
+        "packages_updated": 17,
+        "apt_pending": 0,
+        "holds": 0,
+        "dpkg_audit": "clean",
+        "kernel_running": "6.8.0-136-generic",
+        "kernel_expected": "6.8.0-137-generic",
+        "reboot_required": true,
+        "gateway_pids_unchanged": true,
+        "hermes_launcher": "/root/.local/bin/hermes-v0191-mgs",
+        "hermes_head": "506a8a80e2f619e573a75093a1d6edff1fc12d1d",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260810T235019-0400",
+        "post_reboot_validator": "/root/mgs-agent/scripts/vps-post-reboot-validate-20260811.py",
+        "post_reboot_unit": "mgs-vps-post-reboot-20260811.service",
+        "updated_at": "2026-08-10T23:56:52-04:00"
+      },
+      "updated_at": "2026-08-10T23:56:52-04:00"
     },
     {
       "id": "hermes-v0191-activation-20260802",
@@ -6905,6 +6933,12 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/vps-post-reboot-validate-20260811.py",
+      "size_bytes": 16346,
+      "modified_at": "2026-08-10T23:55:05-04:00",
+      "sha256": "c6f570698f9c96bcec1d86fc902ced116f6b306e026e29eb5bb33b39fd8f355b"
     }
   ],
   "skills_mgs": [
@@ -9398,5 +9432,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-10T23:34:11-04:00"
+  "updated_at": "2026-08-10T23:56:52-04:00"
 }
