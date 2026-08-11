@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "ares",
+      "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
+      "next_step": "Executar coleta completa pela rota residencial dedicada, validar qualidade máxima, sanitizar, empacotar, enviar ao Shared Drive e fazer readback independente.",
+      "objective": "Coletar todos os criativos disponíveis da busca Meta Ad Library eco financa carro no Brasil, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/ECO_FINANCA_CARRO_BR.",
+      "source": "discord:thread:1536816641499730080",
+      "state": "in_progress; authorization_validated; collector_pending",
+      "thread_id": "1536816641499730080",
+      "updated_at": "2026-08-11T19:21:45+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-META-LIBRARY-FMYBC-BR-CAR-BR-BOT-20260720",
       "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
       "objective": "Coletar todos os criativos disponíveis da Meta Ad Library da página 688667231000931, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/FMYBC_BR_CAR_BR-BOT.",
@@ -69,6 +79,16 @@
       "state": "completed: 15/15 em vid/01_ready; 15/15 originais em vid/99_legacy; clean=true 15; readback drive+sha-256 15; inventário 15; rejeições 0; upload manual 0; verificação independente all_verified=true.",
       "thread_id": "1533980723784978624",
       "updated_at": "2026-08-03T23:47:26+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ares-drive-residual-reconciliation-20260811",
+      "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
+      "objective": "Reconciliar por conteúdo o residual Ares local com o Shared Drive e remover somente cópias binariamente idênticas autorizadas.",
+      "source": "discord:1536567182824308839#1536799345016570038 confirmation:1536807027899367534; /root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
+      "state": "completed: 16/16 arquivos locais exatos removidos; Drive 16/16 após exclusão; 7178 não conciliados preservados; snapshot Hostinger bloqueado por credencial somente SSH.",
+      "thread_id": "1536567182824308839",
+      "updated_at": "2026-08-11T18:45:29.758885+00:00"
     },
     {
       "agent": "zeus",
@@ -609,18 +629,8 @@
       "state": "concluído e ativo: root cron com flock executa a cada dez minutos, descobre zeus/atena/ares e futuros profiles operacionais, mede user/memory e compacta automaticamente de >=90% para <=85% sem aprovação por ocorrência. backup 0700/0600, literais protegidos, segunda verificação semântica, escrita atômica, rollback/readback, outbox durável, anti-spam e embeds metadata-only em #limites-90. canários exact-dedup apply e semantic verified target 85 passaram; 13 testes passaram; primeiro ciclo de produção 3 profiles/6 stores saudável, zero threshold/falha/outbox.",
       "thread_id": "1527558141397700618",
       "updated_at": "2026-07-17T15:53:49+00:00"
-    },
-    {
-      "agent": "zeus",
-      "id": "ares-drive-residual-reconciliation-20260811",
-      "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
-      "objective": "Reconciliar por conteúdo o residual Ares local com o Shared Drive e remover somente cópias binariamente idênticas autorizadas.",
-      "source": "discord:1536567182824308839#1536799345016570038 confirmation:1536807027899367534; /root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
-      "state": "completed: 16/16 arquivos locais exatos removidos; Drive 16/16 após exclusão; 7178 não conciliados preservados; snapshot Hostinger bloqueado por credencial somente SSH.",
-      "thread_id": "1536567182824308839",
-      "updated_at": "2026-08-11T18:45:29.758885+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-11T17:12:41+00:00"
+  "updated_at": "2026-08-11T19:21:45+00:00"
 }
