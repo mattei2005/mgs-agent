@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "completed_at_utc": "2026-08-11T18:44:41.898853+00:00",
+  "actor": "zeus",
+  "authorized_by": "rodolfo",
+  "confirmation_message_id": "1536807027899367534",
+  "thread_id": "1536567182824308839",
+  "manifest": "/root/mgs-agent/reports/storage-audits/20260811-ares-drive-exact-match-deletion-manifest.json",
+  "target_set_sha256": "0cd143cd24f2dc6f0843051d7a62a30d4f4e7635e1f3d4d22ded123f9a3633cd",
+  "deleted_count": 16,
+  "deleted_logical_bytes": 170167717,
+  "deleted_allocated_bytes_manifest": 170196992,
+  "targets_remaining": 0,
+  "drive_readback_pre": "16/16",
+  "drive_readback_post": "16/16",
+  "unmatched_preserved": 7178,
+  "unmatched_missing": 0,
+  "unmatched_changed": 0,
+  "tracked_targets": [
+    "data/ares/creative-ops/intake/1516856111284748388/46_-_IA_-_Story_Mexico.mov",
+    "data/ares/creative-ops/intake/1516856111284748388/47_-_IA_-_Story_Mexico.mov",
+    "data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/2455ff9b28c98084.mp4",
+    "data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/97d9d41003386205.mp4",
+    "data/ares/creative-ops/upload-manual/video-frame-samples/20260715T152649Z/videos/a2b6db38ded7d2b2.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/1bd00bcfdf94e61b.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/66ffbeaf1f303828.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/81fc676c0427388e.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/89b1352844a4d30e.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/b8010581f6aea1ad.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/c75d070728a137fc.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/cbfe40c46b2e1e18.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/cc7e9130af0b958f.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260721/20260721T144453Z/videos/f0536ed3d2798802.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260728-kelly/20260728T151527Z/videos/491e3c46a889cd30.mp4",
+    "data/ares/creative-ops/upload-manual/visual-review-car-br-br-20260728-kelly/20260728T151527Z/videos/f023ccc4ceb30b41.mp4"
+  ],
+  "disk_before": {
+    "total": 102888095744,
+    "used": 37182005248,
+    "free": 65689313280
+  },
+  "disk_after": {
+    "total": 102888095744,
+    "used": 37008404480,
+    "free": 65862914048
+  },
+  "observed_free_delta_bytes": 173600768
+}

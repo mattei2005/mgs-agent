@@ -5885,6 +5885,61 @@
         "mentions": 0
       },
       "updated_at": "2026-08-11T17:13:07.883020+00:00"
+    },
+    {
+      "id": "ares-drive-exact-match-cleanup-20260811",
+      "type": "ares_drive_exact_match_local_cleanup",
+      "owner": "zeus",
+      "requested_by": "Rodolfo Mattei",
+      "request_message_id": "1536799345016570038",
+      "confirmation_message_id": "1536807027899367534",
+      "thread_id": "1536567182824308839",
+      "status": "completed_validated",
+      "manifest": "/root/mgs-agent/reports/storage-audits/20260811-ares-drive-exact-match-deletion-manifest.json",
+      "target_set_sha256": "0cd143cd24f2dc6f0843051d7a62a30d4f4e7635e1f3d4d22ded123f9a3633cd",
+      "result": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
+      "reconciliation_report": "/root/mgs-agent/reports/storage-audits/20260811-ares-residual-drive-content-reconciliation.json",
+      "deletion": {
+        "targets": 16,
+        "logical_bytes": 170167717,
+        "manifest_allocated_bytes": 170196992,
+        "observed_free_delta_bytes": 173600768,
+        "targets_remaining": 0
+      },
+      "drive": {
+        "drive_id": "0AEwt4Ye690ocUk9PVA",
+        "readback_pre": "16/16",
+        "readback_post": "16/16",
+        "identity_rule": "same exact size and MD5 independent of filename"
+      },
+      "preserved": {
+        "unmatched_media_files": 7178,
+        "unmatched_missing": 0,
+        "unmatched_changed": 0,
+        "creative_ops_current_bytes": 210346644,
+        "creative_inventory_current_bytes": 1128396442
+      },
+      "runtime": {
+        "gateways": "Ares/Atena/Zeus active",
+        "failed_units": 0,
+        "restart_performed": false
+      },
+      "hostinger_snapshot_followup": {
+        "status": "blocked_missing_hpanel_or_api_access",
+        "available_credential": "SSH/root VPS only",
+        "backup_architecture_changed": false
+      },
+      "updated_at": "2026-08-11T18:46:40.198775+00:00",
+      "report_infra": {
+        "status": "published_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1536807884795674897",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      }
     }
   ],
   "profile_skill_references": [
