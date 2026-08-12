@@ -5642,16 +5642,17 @@
       },
       "backup": "/root/mgs-agent/backups/hermes-news-upstream-fix-20260810T231238-0400",
       "validation": {
-        "tests": "16 passed",
+        "tests": "9 passed (monitor + explainer regression suite)",
         "shell_syntax": "PASS",
         "dry_run_state_unchanged": true,
+        "payload_metric_readback": "pending + new bases explicit; raw tag graph field absent",
         "discord_alert_readback": "message/channel/embed/state matched",
         "discord_explainer_readback": "edited explanation matched distinct metric bases",
-        "hermes_version": "Update available: 2082 commits behind",
+        "hermes_version": "runtime v0.20.0 (2026.8.3)",
         "watchdog": "healthy=49 waiting=0 orphan=0 failed=0 reconciled=1"
       },
-      "rollback": "restore backup scripts; restore origin URL from remote mgs-port-source only if reverting remote topology; restore state backup before republishing",
-      "updated_at": "2026-08-10T23:34:11-04:00"
+      "rollback": "revert monitor/tests/skill rule; restore backup scripts if a full rollback is required",
+      "updated_at": "2026-08-11T21:22:40-04:00"
     },
     {
       "id": "hermes-port-9d6c5a92-20260811",
