@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "adspower-dtr-app-failover-20260812",
-      "next_step": "Levantar mapa segurador -> perfil AdsPower -> app atual e definir com Rodolfo a matriz de app substituto e os gates de execução/validação antes do primeiro canário.",
+      "next_step": "Inventariar cada instância/PC e mapear segurador -> host -> profile_id -> app atual; depois definir matriz de app substituto, ativação segura de API Key e canário DTR em um perfil.",
       "objective": "Projetar e validar automação de contingência que reconecta seguradores no DigitalTRChat a um app Meta substituto via AdsPower quando o app atual cair.",
-      "source": "discord:thread:1517183244297179251#message:1537198272857374812",
-      "state": "requisito operacional confirmado por rodolfo: queda do app interrompe broadcast e funil de 24 horas em todas as páginas do segurador, enquanto campanhas podem continuar gastando; estratégia registrada como candidato, sem automação ou troca em produção nesta etapa.",
+      "source": "discord:thread:1517183244297179251#messages:1537198272857374812,1537201384766709762; https://localapi-doc-en.adspower.com/docs/Rdw7Iu; https://localapi-doc-en.adspower.com/docs/Open-Browser-V2",
+      "state": "documentação oficial e screenshots analisadas: local api conectada no pc em local.adspower.net:50325; verificação por api key aparece desativada; open browser v2 retorna interfaces locais selenium/puppeteer e webdriver. arquitetura recomendada: worker local no pc do adspower, usando o cliente instalado para preservar perfis/sessões, enquanto zeus orquestra alertas e jobs. cli independente e transferência de perfis não são a rota primária.",
       "thread_id": "1517183244297179251",
-      "updated_at": "2026-08-12T20:39:00+00:00"
+      "updated_at": "2026-08-12T20:53:12+00:00"
     },
     {
       "agent": "zeus",
@@ -642,5 +642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-12T20:39:00+00:00"
+  "updated_at": "2026-08-12T20:53:12+00:00"
 }
