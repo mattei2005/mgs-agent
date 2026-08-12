@@ -181,13 +181,11 @@ elif [[ -z "$LAST_NOTIFIED" ]]; then
   NEW_SINCE_LAST="primeiro alerta desta instalação"
 fi
 
-# Tags entre local e upstream
+# Tags entre local e upstream. Não exibir uma contagem bruta `tag..main`:
+# merges podem incorporar commits com data anterior à release e inflar o número,
+# embora o delta operacional pendente no runtime seja pequeno.
 LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || echo "n/a")
 LATEST_TAG=$(git describe --tags --abbrev=0 "$CURRENT_UPSTREAM" 2>/dev/null || echo "n/a")
-COMMITS_SINCE_TAG="n/a"
-if [[ "$LATEST_TAG" != "n/a" ]]; then
-  COMMITS_SINCE_TAG=$(git rev-list --count "$LATEST_TAG..$CURRENT_UPSTREAM" 2>/dev/null || echo "n/a")
-fi
 
 # Tags intermediárias (até 5)
 LOCAL_BASE_TAG="$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)"
@@ -236,7 +234,7 @@ PAYLOAD=$(jq -n \
   --arg local "${LOCAL_TAG} (${LOCAL_SHORT}) — ${LOCAL_DATE}" \
   --arg lag "${DAYS_BEHIND} dias / ${COMMITS_BEHIND} commits pendentes no runtime" \
   --arg new_since_last "$NEW_SINCE_LAST" \
-  --arg since_tag "${COMMITS_SINCE_TAG} commits após ${LATEST_TAG}" \
+  --arg metric_bases $'Pendentes = runtime atual → upstream\nNovos = alerta anterior → upstream' \
   --arg summary "Features ${FEAT_COUNT} | Fixes ${FIX_COUNT} | Perf ${PERF_COUNT} | Security ${SECURITY_COUNT} | Breaking ${BREAKING_COUNT}" \
   --arg breaking "$BREAKING_HEADER" \
   --arg features "$FEATURES_FIELD" \
@@ -245,13 +243,13 @@ PAYLOAD=$(jq -n \
   --arg tags "$TAGS_FIELD" \
   --arg diff "$DIFF_URL" \
   --arg releases "$RELEASE_URL" \
-  '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream oficial", value:$upstream, inline:true}, {name:"Runtime MGS", value:$local, inline:true}, {name:"Atualizações acumuladas", value:$lag, inline:false}, {name:"Novos desde o último alerta", value:$new_since_last, inline:true}, {name:"Após a última release", value:$since_tag, inline:true}, {name:"Resumo acumulado", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```\n"+.[:900]+"\n```" end), inline:false}, {name:"Top features", value:("```\n"+$features[:900]+"\n```"), inline:false}, {name:"Top fixes", value:("```\n"+$fixes[:900]+"\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
+  '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream oficial", value:$upstream, inline:true}, {name:"Runtime MGS", value:$local, inline:true}, {name:"Atualizações acumuladas", value:$lag, inline:false}, {name:"Novos desde o último alerta", value:$new_since_last, inline:true}, {name:"Como ler as contagens", value:$metric_bases, inline:false}, {name:"Resumo acumulado", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```\n"+.[:900]+"\n```" end), inline:false}, {name:"Top features", value:("```\n"+$features[:900]+"\n```"), inline:false}, {name:"Top fixes", value:("```\n"+$fixes[:900]+"\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
 
 if [[ "$DRY_RUN" == "1" ]]; then
   if [[ -n "$DRY_RUN_OUTPUT" ]]; then
     printf '%s\n' "$PAYLOAD" > "$DRY_RUN_OUTPUT"
   fi
-  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT compare_base=$COMPARE_BASE_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT since_tag=$COMMITS_SINCE_TAG days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
+  log "DRY_RUN upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT compare_base=$COMPARE_BASE_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT state_unchanged=true discord_post=false"
   printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s compare_base=%s behind=%s discord_post=false state_unchanged=true\n' \
     "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT" "$COMPARE_BASE_SHORT" "$COMMITS_BEHIND"
   exit 0
@@ -265,15 +263,15 @@ HTTP_CODE=$("$CURL_BIN" -s -o /tmp/hermes-monitor-response.json -w '%{http_code}
   -d "$PAYLOAD" || true)
 
 if [[ "$HTTP_CODE" =~ ^2 ]]; then
-  log "OK notified upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT since_tag=$COMMITS_SINCE_TAG days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT"
+  log "OK notified upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND new_since_last=$NEW_SINCE_LAST_COUNT days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT"
   
   # 12. Atualizar state
   jq -n --arg u "$CURRENT_UPSTREAM" --arg l "$CURRENT_LOCAL" --arg t "$(date -Iseconds)" \
         --arg tag "$LATEST_TAG" --argjson b "$COMMITS_BEHIND" --argjson d "$DAYS_BEHIND" \
         --argjson f "$FEAT_COUNT" --argjson fx "$FIX_COUNT" --argjson br "$BREAKING_COUNT" \
-        --argjson n "$NEW_SINCE_LAST_COUNT" --arg st "$COMMITS_SINCE_TAG" \
+        --argjson n "$NEW_SINCE_LAST_COUNT" \
     '{last_notified_upstream: $u, last_local: $l, last_check: $t, latest_tag: $tag, 
-      commits_behind: $b, new_since_last_alert: $n, commits_since_latest_tag: $st, days_behind: $d,
+      commits_behind: $b, new_since_last_alert: $n, days_behind: $d,
       breakdown: {features: $f, fixes: $fx, breaking: $br}}' \
     > "$STATE"
 else

@@ -94,6 +94,13 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_p
     assert field(payload, "Runtime MGS").find(installed[:7]) >= 0
     assert field(payload, "Upstream oficial").find(upstream[:7]) >= 0
     assert field(payload, "Atualizações acumuladas").endswith("1 commits pendentes no runtime")
+    assert field(payload, "Como ler as contagens") == (
+        "Pendentes = runtime atual → upstream\nNovos = alerta anterior → upstream"
+    )
+    assert not any(
+        item["name"] == "Após a última release"
+        for item in payload["embeds"][0]["fields"]
+    ), "raw tag..main count is merge-inflated and must not be shown as an operational metric"
     assert field(payload, "Resumo acumulado") == "Features 0 | Fixes 1 | Perf 0 | Security 0 | Breaking 0"
     assert not state.exists(), "dry-run must not mutate the configured state file"
     assert "state_unchanged=true discord_post=false" in log.read_text(encoding="utf-8")
