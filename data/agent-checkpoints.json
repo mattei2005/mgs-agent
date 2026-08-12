@@ -63,12 +63,12 @@
     {
       "agent": "zeus",
       "id": "adspower-dtr-app-failover-20260812",
-      "next_step": "Inventariar cada instância/PC e mapear segurador -> host -> profile_id -> app atual; depois definir matriz de app substituto, ativação segura de API Key e canário DTR em um perfil.",
+      "next_step": "Inventariar por profile_id o host/instância, segurador, app atual, proxy esperado e país/IP esperado; definir matriz de app substituto e executar canário sem overrides de proxy, fingerprint, cookies ou cache.",
       "objective": "Projetar e validar automação de contingência que reconecta seguradores no DigitalTRChat a um app Meta substituto via AdsPower quando o app atual cair.",
-      "source": "discord:thread:1517183244297179251#messages:1537198272857374812,1537201384766709762; https://localapi-doc-en.adspower.com/docs/Rdw7Iu; https://localapi-doc-en.adspower.com/docs/Open-Browser-V2",
-      "state": "documentação oficial e screenshots analisadas: local api conectada no pc em local.adspower.net:50325; verificação por api key aparece desativada; open browser v2 retorna interfaces locais selenium/puppeteer e webdriver. arquitetura recomendada: worker local no pc do adspower, usando o cliente instalado para preservar perfis/sessões, enquanto zeus orquestra alertas e jobs. cli independente e transferência de perfis não são a rota primária.",
+      "source": "discord:thread:1517183244297179251#messages:1537198272857374812,1537201384766709762,1537204800842633338; https://localapi-doc-en.adspower.com/docs/Open-Browser-V2",
+      "state": "arquitetura confirmada: o profile_id existente já carrega sessão, fingerprint e proxy do segurador. o worker pode executar de qualquer local, mas o tráfego facebook deve sair pelo proxy configurado; abrir sem substituir proxy/ip/cache. gate obrigatório antes do dtr: proxy presente e ip/país esperado; divergência ou ausência bloqueia o perfil fail-closed. screenshot mostra no grupo exemplo dois perfis com badge ip azul usando ip us e um terceiro com saída br/ipv6 visualmente distinta.",
       "thread_id": "1517183244297179251",
-      "updated_at": "2026-08-12T20:53:12+00:00"
+      "updated_at": "2026-08-12T21:03:47+00:00"
     },
     {
       "agent": "zeus",
@@ -642,5 +642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-12T20:53:12+00:00"
+  "updated_at": "2026-08-12T21:03:47+00:00"
 }
