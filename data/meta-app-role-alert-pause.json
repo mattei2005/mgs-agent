@@ -1,21 +1,11 @@
 {
   "version": 2,
-  "mode": "manual",
-  "apps": [
-    "B001",
-    "B002",
-    "B003",
-    "B004",
-    "B005-2",
-    "B008",
-    "B009",
-    "B010",
-    "B006-2",
-    "B007"
-  ],
+  "mode": "until",
+  "apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1537304832409473024",
-  "updated_at": "2026-08-12T23:43:26-04:00",
-  "reason": "Pausa manual de alertas para todo o conjunto B001-B010/B005-2 durante a reconstrução e redistribuição; B006-2 e B007 adicionados por instrução direta de Rodolfo. Reativar somente após instrução explícita."
+  "source_message_id": "1537524755379257505",
+  "updated_at": "2026-08-13T14:22:00-04:00",
+  "reason": "Pausa manual encerrada por instrução explícita; arquivo permanece como readback histórico sem apps suprimidos.",
+  "until": "2026-08-13T14:25:00-04:00"
 }
