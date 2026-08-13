@@ -22,6 +22,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-META-APP-REDISTRIBUTION-20260812",
+      "next_step": "Rodolfo revisar a divisão proposta; após aprovação explícita, escrever a coluna de destino adequada com backup, canário e readback.",
+      "objective": "Redistribuir seguradores ainda não ticados na coluna H entre os novos apps Meta, usando receita 7 dias da coluna C e páginas, sem mexer em B006-2/B007.",
+      "source": "discord:thread:1537304832409473024; messages:1537304832409473024,1537306997404475412; report:reports/meta-app-allocation-draft-20260812.json",
+      "state": "foreground concluído: alertas b006-2/b007 pausados no conjunto manual; quatro mensagens excluídas; sheet lida via service account; 84 linhas ticadas ignoradas; rascunho validado para 133 seguradores, 1865 páginas e r$149626,24 em 11 apps novos incluindo b013-2; nenhuma escrita feita na sheet.",
+      "thread_id": "1537304832409473024",
+      "updated_at": "2026-08-13T03:55:58+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-SB-EGGBEV-GB-CC-EN-20260810",
       "next_step": "Nenhuma ação pendente.",
       "objective": "Padronizar Smart Routing Eggbev GB-CC-EN em Drip 6x5 e Broadcast 5/5/5/5/3 com as cinco URLs confirmadas por Rodolfo.",
@@ -642,5 +652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-12T21:03:47+00:00"
+  "updated_at": "2026-08-13T03:55:58+00:00"
 }
