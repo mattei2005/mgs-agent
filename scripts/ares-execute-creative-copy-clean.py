@@ -181,7 +181,10 @@ class Drive:
         parts = folder_path.split("/")
         if len(parts) < 2 or parts[:2] != ["MGS-AGENTS", "CRIATIVOS"]:
             raise ValueError(f"unexpected destination path: {folder_path}")
-        parent = ROOT_FOLDER_ID
+        creatives_id = self.find_child_folder(ROOT_FOLDER_ID, "CRIATIVOS")
+        if not creatives_id:
+            raise RuntimeError("canonical folder MGS-AGENTS/CRIATIVOS not found; refusing to create paths at Shared Drive root")
+        parent = creatives_id
         for part in parts[2:]:
             parent = self.create_folder(parent, part)
         return parent
