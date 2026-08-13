@@ -76,6 +76,9 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 ## Eligibility discovery before any write
 
 1. Resolve the exact approved DTR login from 1Password without exposing credentials.
+   - Treat the login string as an exact identity boundary. A similarly named item, a missing/extra numeric suffix, or the same site/vertical label is **not** an authorized substitute.
+   - If the exact login is absent, do not try a near-match credential against the requested login and do not infer access from a different container. Report the exact missing identity and stop before Page/URL claims or writes.
+   - If Rodolfo explicitly corrects the login, restart discovery under the corrected identity; preserve the originally requested value in the manifest.
 2. Read the approved Page-classification spreadsheet through the canonical MGS Service Account; never fall back to personal Google auth.
 3. Match the candidate by internal DTR Page ID and cross-check the exact Facebook Page ID. Derive the target catalog from `vertical + pais + lingua`. If a long Facebook Page ID is rendered in scientific notation, preserve the raw cell and reconcile the exact value from the live DTR Page; never reconstruct or round it. Normalize Page names to Unicode NFC only for comparison so composed/decomposed accents do not create a false mismatch.
 4. Apply the spreadsheet status gate: `Blocked` and `On-hold` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit. Do not infer status from the DTR UI alone when the sheet provides it.
