@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-08-13T13:10:38-04:00",
+  "status": "DIVERGENCES",
+  "source": {
+    "spreadsheet_id": "1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY",
+    "sheet": "Migracao 22/06",
+    "assignment_header": "NO APP",
+    "sheet_read_only": true,
+    "meta_endpoint": "/{app_id}/roles"
+  },
+  "totals": {
+    "sheet_assignments": 205,
+    "accepted_current_roles": 170,
+    "sheet_duplicates": 0,
+    "matching_apps": 9,
+    "divergent_apps": 4,
+    "not_present_in_current_roles": 37,
+    "accepted_in_wrong_app": 0,
+    "unresolved_role_ids": 0
+  },
+  "matching_apps": {
+    "B001-2": {"sheet": 16, "accepted": 16},
+    "B002-2": {"sheet": 11, "accepted": 11},
+    "B003-2": {"sheet": 14, "accepted": 14},
+    "B004-2": {"sheet": 13, "accepted": 13},
+    "B005-3": {"sheet": 14, "accepted": 14},
+    "B006-2": {"sheet": 16, "accepted": 16},
+    "B007": {"sheet": 20, "accepted": 20},
+    "B008-2": {"sheet": 11, "accepted": 11},
+    "B009-2": {"sheet": 17, "accepted": 17}
+  },
+  "divergences": {
+    "B010-2": {
+      "sheet": 13,
+      "accepted": 10,
+      "not_present_in_current_roles": ["Marcio Carnelós", "Alexandre Jonas", "Geane Pedroso"]
+    },
+    "B011": {
+      "sheet": 18,
+      "accepted": 17,
+      "not_present_in_current_roles": ["Naiara Bella"]
+    },
+    "B012": {
+      "sheet": 10,
+      "accepted": 9,
+      "not_present_in_current_roles": ["Michele Moura"]
+    },
+    "B013-2": {
+      "sheet": 32,
+      "accepted_sheet_seguradores": 0,
+      "current_technical_admins_not_counted_as_seguradores": ["Alessandra Lopes", "Hazel Rivera"],
+      "not_present_in_current_roles": [
+        "Lorraynii Criistiinii", "Yudi Anggara", "Ricardo Oliveira",
+        "Fabiana Da Silva Maciel Da Silva Maciel", "Wah Lan", "Caue Pereira",
+        "Antonia Souza", "Nataly Braga", "Maria Borges", "Vanessa Martins",
+        "Daniela Pimenta", "Ophelia Gonzalez", "Maria Pereira Dutra", "Raquel Mota",
+        "Vivian Silva", "Sydney Smith", "Akew Rider", "Lourival Lemes Silva",
+        "Lorena Santos Cardoso", "William Nogueira", "Maricel Taruc Ronquillo",
+        "Bianca Fernandes", "Fernanda Peixoto", "Rian Silva", "Maria Isabelly Bel",
+        "Hindawan Pratama", "Gege Geovanna", "Semakin Sadar", "Gabriela Da Rocha",
+        "Ione Silva", "Sad Grill", "Michelle Ferreira"
+      ]
+    }
+  },
+  "health": {
+    "roles_http_200": "13/13",
+    "debug_token_valid": "13/13",
+    "debug_app_id_match": "13/13"
+  },
+  "interpretation": "Not present means absent from accepted/current /roles. The Graph API does not distinguish a pending invitation from an invitation that was not sent. No accepted segurador was found in a different app than the Sheet assignment.",
+  "reactivation_gate": "BLOCKED",
+  "secrets_exposed": false
+}

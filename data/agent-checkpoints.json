@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Após confirmação de que todos aceitaram: releitura da Sheet sem reordenar; /roles fresco dos 13; comparar admin/segurador por app; exigir zero falta/sobra e checks saudáveis; só então reativar todos e validar ciclos/canais.",
+      "next_step": "Aguardar/corrigir os 37 seguradores ausentes em B010-2, B011, B012 e B013-2; repetir /roles x NO APP. Reativar somente quando falta/sobra for zero.",
       "objective": "Conferir os 13 apps após os gestores aceitarem todos os convites e religar monitores somente com reconciliação 100%.",
-      "source": "discord:message:1537324393519259718; data/meta-app-registry.json; reports/meta-app-accepted-admins-vs-sheet-20260813.json",
-      "state": "aguardando 2026-08-14 et: gestores aceitarão convites. graph /roles mostra apenas aceitos e não expõe pendentes. gate ativo; nenhuma reativação feita. monitor genérico segue em checks silenciosos com entregas pausadas; b013 dedicado segue pausado.",
+      "source": "discord:message:1537506734686478459; reports/meta-app-live-reconciliation-20260813-1310.json; data/meta-app-registry.json",
+      "state": "auditoria live 2026-08-13 13:10 edt: 9/13 apps reconciliados; 4 divergentes; 37 seguradores da planilha ainda ausentes dos roles aceitos/correntes; nenhum segurador aceito em app errado; 13/13 tokens e app ids válidos; gate de reativação segue bloqueado; nenhuma reativação feita.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T04:59:38+00:00"
+      "updated_at": "2026-08-13T17:11:45+00:00"
     },
     {
       "agent": "zeus",
@@ -682,5 +682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T14:52:12+00:00"
+  "updated_at": "2026-08-13T17:11:45+00:00"
 }
