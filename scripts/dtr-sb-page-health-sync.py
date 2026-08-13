@@ -81,9 +81,9 @@ def sheet_rows():
     # silently return only the visible subset. Read the canonical tab through
     # the MGS Service Account so operational scope always includes hidden rows.
     access_token=google_access_token()
-    # Column N / APP PROVISORIO is the current assignment source. Column M /
-    # NO APP is historical. Stop at N so unused columns/formulas cannot inflate
-    # the Sheets response used by the cron.
+    # Column I / NO APP is the current assignment source after Rodolfo's
+    # 2026-08-13 allocation write. APP PROVISORIO is currently blank. Stop at N
+    # so unused columns/formulas cannot inflate the Sheets response used by the cron.
     tab_range=urllib.parse.quote(f"'{MIGRATION_TAB}'!A:N",safe='')
     url=f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{tab_range}?majorDimension=ROWS'
     values=sheets_api(access_token,'GET',url).get('values') or []
@@ -103,7 +103,7 @@ def active_users_from_sheet(rows):
     for r in rows:
         u=norm_email(r.get('User'))
         if '@' not in u: continue
-        assignment=norm(r.get('APP PROVISORIO'))
+        assignment=norm(r.get('NO APP'))
         if not re.fullmatch(r'B\d{3}(?:-\d+)?', assignment, re.I): continue
         if norm(r.get('Removidos acumulado')).upper()=='X': continue
         users.append(u)

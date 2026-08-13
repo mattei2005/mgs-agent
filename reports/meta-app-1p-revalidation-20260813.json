@@ -1,0 +1,40 @@
+{
+  "status": "FAIL",
+  "results": [
+    {
+      "app": "B002-2",
+      "required_fields_present": true,
+      "app_name_field_match": true,
+      "app_metadata_http": 200,
+      "app_metadata_id_match": true,
+      "token_me_http": 200,
+      "token_profile_name": "Ninda Nak Mapa",
+      "token_profile_match": true,
+      "debug_token_http": 200,
+      "debug_token_valid": true,
+      "debug_token_app_match": true,
+      "debug_user_in_roles": true,
+      "roles_http": 200,
+      "roles_count": 2,
+      "status": "PASS"
+    },
+    {
+      "app": "B013-2",
+      "required_fields_present": true,
+      "app_name_field_match": true,
+      "app_metadata_http": 200,
+      "app_metadata_id_match": true,
+      "token_me_http": 200,
+      "token_profile_name": "Alessandra Lopes",
+      "token_profile_match": false,
+      "debug_token_http": 200,
+      "debug_token_valid": true,
+      "debug_token_app_match": true,
+      "debug_user_in_roles": true,
+      "roles_http": 200,
+      "roles_count": 2,
+      "status": "FAIL"
+    }
+  ],
+  "secrets_exposed": false
+}

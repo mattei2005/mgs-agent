@@ -1,0 +1,669 @@
+{
+  "status": "PASS",
+  "sheet_read_only": true,
+  "sheet_headers": {
+    "A": "Removidos acumulado",
+    "B": "User",
+    "C": "RECEITA 7 DIAS",
+    "D": "Segurador",
+    "E": "PG",
+    "F": "Tipo",
+    "G": "Cartao",
+    "H": "Migrado",
+    "I": "NO APP",
+    "J": "APP PROVISORIO",
+    "K": "Migracao",
+    "L": "USUARIO",
+    "M": "Telefone Atual",
+    "N": "Telefone Novo"
+  },
+  "sheet_app_block_sequence": [
+    "B001-2",
+    "B002-2",
+    "B003-2",
+    "B004-2",
+    "B005-3",
+    "B006-2",
+    "B007",
+    "B008-2",
+    "B009-2",
+    "B010-2",
+    "B011",
+    "B012",
+    "B013-2"
+  ],
+  "graph_semantics": "/{app_id}/roles returned accepted/current roles only in observed payloads; no pending/status field appeared",
+  "results": [
+    {
+      "app": "B001-2",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "122194372910682172",
+          "role": "administrators"
+        },
+        {
+          "name": "1010958918600612",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 16,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Debora Monteiro Lima",
+        "Fabio Aleksander",
+        "Wong Awam",
+        "Iris Rubio",
+        "Beatriz Silva",
+        "Emen",
+        "Yunita Melvianus",
+        "Aan Supri Adi",
+        "Jack Smith",
+        "Salsa Billa",
+        "Vije Juemadhic III",
+        "Karla Michelli",
+        "Luis Hoàng",
+        "Adriano Alves",
+        "Ricardo Gabriel Monteiro",
+        "Alnashri Lumandung Maja"
+      ]
+    },
+    {
+      "app": "B002-2",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "1753963609086322",
+          "role": "administrators"
+        },
+        {
+          "name": "2178372139675926",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 11,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Nilza Mayara",
+        "Sabrina Pereira",
+        "Afonso Araujo",
+        "Adalberto Vilela Oliveira",
+        "Selma Aparecido Antunes",
+        "Lien Bui",
+        "Nur Mala Mala",
+        "Dân Kbang",
+        "Ninda Nak Mapa",
+        "Khánh Chi Phùng",
+        "Marsya Aisya"
+      ]
+    },
+    {
+      "app": "B003-2",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "984995307881018",
+          "role": "administrators"
+        },
+        {
+          "name": "1023715280410639",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 14,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Giselle Icaro",
+        "Dhidin Distro",
+        "Manoel Maximiano",
+        "Kurniati Kurniati",
+        "Putra",
+        "Lisna Lumbantobing",
+        "Arief",
+        "Cauã Santos",
+        "Ajiwarawiri Ajiwarawiri",
+        "Angela Maria",
+        "Choy",
+        "John Cesar",
+        "Reginaldo Novaes Santiago",
+        "Sebastiana Francisca"
+      ]
+    },
+    {
+      "app": "B004-2",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "Heloisa Barbosa Almeida",
+          "role": "administrators"
+        },
+        {
+          "name": "Om Gendut",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 13,
+      "sheet_present_in_accepted": [
+        "Om Gendut",
+        "Heloisa Barbosa Almeida"
+      ],
+      "sheet_not_in_accepted_roles": [
+        "Rebeca Rocha Ferreira",
+        "Ahyaruel Monyeng",
+        "Milla Fernandes",
+        "Beatriz Santos",
+        "Joao Matheus",
+        "Gustavo Padilha",
+        "Maria Bari",
+        "San Dra",
+        "Eldha Sully",
+        "Dono Handoko",
+        "Pready AS"
+      ]
+    },
+    {
+      "app": "B005-3",
+      "roles_http": 200,
+      "accepted_count": 1,
+      "accepted": [
+        {
+          "name": "122170610636714477",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 14,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Vanderlei Evangelista da Silva",
+        "Bernadete Do Socorro Rodrigues",
+        "Jorge Robson",
+        "Alessandra Furtado",
+        "Joao Italo",
+        "Raj Aryan",
+        "Barbara Leticia",
+        "Beatriz Thomaz",
+        "Vitor Melo Barbosa",
+        "Ichfla",
+        "Alice Prates",
+        "Muhammad Ishak",
+        "Vitoria Souza Duarte",
+        "Taina Rocha Silveira"
+      ]
+    },
+    {
+      "app": "B006-2",
+      "roles_http": 200,
+      "accepted_count": 16,
+      "accepted": [
+        {
+          "name": "1068745469440349",
+          "role": "administrators"
+        },
+        {
+          "name": "1077864728004347",
+          "role": "administrators"
+        },
+        {
+          "name": "1072737581757122",
+          "role": "administrators"
+        },
+        {
+          "name": "1543606970634041",
+          "role": "administrators"
+        },
+        {
+          "name": "2180440732745809",
+          "role": "administrators"
+        },
+        {
+          "name": "27374813002200790",
+          "role": "administrators"
+        },
+        {
+          "name": "122183492348687502",
+          "role": "administrators"
+        },
+        {
+          "name": "2552104718562986",
+          "role": "administrators"
+        },
+        {
+          "name": "122182709060896419",
+          "role": "administrators"
+        },
+        {
+          "name": "1042430454842244",
+          "role": "administrators"
+        },
+        {
+          "name": "1790515048970966",
+          "role": "administrators"
+        },
+        {
+          "name": "2457237834799098",
+          "role": "administrators"
+        },
+        {
+          "name": "3203779656499693",
+          "role": "administrators"
+        },
+        {
+          "name": "27454886677517224",
+          "role": "administrators"
+        },
+        {
+          "name": "2808957192817509",
+          "role": "administrators"
+        },
+        {
+          "name": "2422296368256372",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 16,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Crislaine Oliveira",
+        "Isidoro Cristina Barbosa Martins",
+        "Millena Kelly",
+        "Tiago De Oliveira Vianna",
+        "Indah",
+        "Simone Oliveira",
+        "Abah Ngatimin",
+        "Gia Huy",
+        "Valentino Simanjuntak",
+        "Anre Kameza",
+        "Gentil Alves Ribeiro",
+        "Viviane Moura",
+        "Jayadi Thaha Patonangi",
+        "SobiRin Kemana Mana",
+        "Edleide Gomes",
+        "Rori Ginbresil Ginting"
+      ]
+    },
+    {
+      "app": "B007",
+      "roles_http": 200,
+      "accepted_count": 20,
+      "accepted": [
+        {
+          "name": "Dek Fiyan",
+          "role": "administrators"
+        },
+        {
+          "name": "Siti Uwiyah",
+          "role": "administrators"
+        },
+        {
+          "name": "Tu Tu",
+          "role": "administrators"
+        },
+        {
+          "name": "Tiger",
+          "role": "administrators"
+        },
+        {
+          "name": "Rosana Oliveira",
+          "role": "administrators"
+        },
+        {
+          "name": "Ratna",
+          "role": "administrators"
+        },
+        {
+          "name": "Rida'e Muhammad",
+          "role": "administrators"
+        },
+        {
+          "name": "Max Tin Masela",
+          "role": "administrators"
+        },
+        {
+          "name": "Marcio Dos Santos",
+          "role": "administrators"
+        },
+        {
+          "name": "Jemmy Santos Vieira",
+          "role": "administrators"
+        },
+        {
+          "name": "Võ Hạnh",
+          "role": "administrators"
+        },
+        {
+          "name": "Lam Sai",
+          "role": "administrators"
+        },
+        {
+          "name": "Marites Pattung",
+          "role": "administrators"
+        },
+        {
+          "name": "Bas Tian",
+          "role": "administrators"
+        },
+        {
+          "name": "Danilo Santos Lima",
+          "role": "administrators"
+        },
+        {
+          "name": "Ka Mal",
+          "role": "administrators"
+        },
+        {
+          "name": "Bẹp Lan",
+          "role": "administrators"
+        },
+        {
+          "name": "An Na",
+          "role": "administrators"
+        },
+        {
+          "name": "Alex Silva Araujo",
+          "role": "administrators"
+        },
+        {
+          "name": "Ameenah Abdullahi",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 20,
+      "sheet_present_in_accepted": [
+        "Dek Fiyan",
+        "Siti Uwiyah",
+        "Jemmy Santos Vieira",
+        "Alex Silva Araujo",
+        "Marcio Dos Santos",
+        "Danilo Santos Lima",
+        "Ka Mal",
+        "Marites Pattung",
+        "Ameenah Abdullahi",
+        "Lam Sai",
+        "Tu Tu",
+        "Bas Tian",
+        "An Na",
+        "Bẹp Lan",
+        "Max Tin Masela",
+        "Ratna",
+        "Tiger",
+        "Rosana Oliveira",
+        "Võ Hạnh",
+        "Rida'e Muhammad"
+      ],
+      "sheet_not_in_accepted_roles": []
+    },
+    {
+      "app": "B008-2",
+      "roles_http": 200,
+      "accepted_count": 1,
+      "accepted": [
+        {
+          "name": "1740176133697682",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 11,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Ed Michael Sena",
+        "Oncho Anha",
+        "Mary Pessoa Neres",
+        "Yu Hana",
+        "Mïïläynïï Lëändrö",
+        "Arruda Arruda",
+        "André De Souza",
+        "Refi Aldiyansyah",
+        "Phong Huynh",
+        "Lance David",
+        "Ismail Mail"
+      ]
+    },
+    {
+      "app": "B009-2",
+      "roles_http": 200,
+      "accepted_count": 1,
+      "accepted": [
+        {
+          "name": "4591033364449778",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 17,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Gabriele Aparecida",
+        "Davi Andrade",
+        "Rinny Purnama Tige",
+        "Amoey Pnr",
+        "Sem Taimenas",
+        "Arif Nugroho",
+        "Riza Gabiola",
+        "Mas Indro",
+        "Marcelo Serbai",
+        "Elisangela Alves",
+        "Elisa Thompson",
+        "Agus Husain",
+        "Trương Gia Vinh",
+        "Ninin Ninin",
+        "Janaina Santos",
+        "Leticia Silva",
+        "Thanh Hiep"
+      ]
+    },
+    {
+      "app": "B010-2",
+      "roles_http": 200,
+      "accepted_count": 1,
+      "accepted": [
+        {
+          "name": "2844577762609399",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 13,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Crislaine Carvalho",
+        "Luana Ferreira Gomes",
+        "Nathasha Bessa",
+        "Marcio Carnelós",
+        "Alexandre Jonas",
+        "Geane Pedroso",
+        "Huy Phạm",
+        "Dayanne Costa",
+        "Pendang Novi",
+        "Daniel Gomes",
+        "Dhiemas Gilang Fergusson",
+        "Erik Sabar",
+        "Anh Tran"
+      ]
+    },
+    {
+      "app": "B011",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "122188633190925586",
+          "role": "administrators"
+        },
+        {
+          "name": "122168969234691114",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 18,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Ashley Comf",
+        "Mawar Vetran",
+        "Lan Bui",
+        "Andhinda Asyani Putri",
+        "Kristo Pratama",
+        "Edi Sangkut",
+        "Jaqueline Dagostin",
+        "Ky Păc",
+        "Ngọc Phạm Khoang",
+        "Alexandre Dias",
+        "Ari Irham",
+        "Fernando Narciso Acosta",
+        "ISrael Saucedo",
+        "Arther Tahalele",
+        "Yani Diana Delima",
+        "Maria Silva Nobrega",
+        "Naiara Bella",
+        "Eliana Moura Burgos"
+      ]
+    },
+    {
+      "app": "B012",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "122190062792921119",
+          "role": "administrators"
+        },
+        {
+          "name": "1855349979180132",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 10,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Zmii",
+        "Hnif Iste",
+        "Maribel Tamboon",
+        "Bình Hòa Trần",
+        "Posisi Nek Endi Iki",
+        "Đoàn Diệu Hồng",
+        "Riski Miftahul Hid",
+        "Elso Antonio Pelentir",
+        "Nhi Trần",
+        "Michele Moura"
+      ]
+    },
+    {
+      "app": "B013-2",
+      "roles_http": 200,
+      "accepted_count": 2,
+      "accepted": [
+        {
+          "name": "Alessandra Lopes",
+          "role": "administrators"
+        },
+        {
+          "name": "Hazel Rivera",
+          "role": "administrators"
+        }
+      ],
+      "raw_role_fields": [
+        "app_id",
+        "role",
+        "user"
+      ],
+      "sheet_intended_count": 32,
+      "sheet_present_in_accepted": [],
+      "sheet_not_in_accepted_roles": [
+        "Antonia Souza",
+        "Bianca Fernandes",
+        "Daniela Pimenta",
+        "Gabriela Da Rocha",
+        "Ione Silva",
+        "Sad Grill",
+        "Semakin Sadar",
+        "Vivian Silva",
+        "Sydney Smith",
+        "Raquel Mota",
+        "William Nogueira",
+        "Nataly Braga",
+        "Maria Pereira Dutra",
+        "Vanessa Martins",
+        "Ophelia Gonzalez",
+        "Maria Borges",
+        "Hindawan Pratama",
+        "Lorraynii Criistiinii",
+        "Lorena Santos Cardoso",
+        "Yudi Anggara",
+        "Wah Lan",
+        "Michelle Ferreira",
+        "Caue Pereira",
+        "Ricardo Oliveira",
+        "Fernanda Peixoto",
+        "Akew Rider",
+        "Fabiana Da Silva Maciel Da Silva Maciel",
+        "Lourival Lemes Silva",
+        "Maricel Taruc Ronquillo",
+        "Rian Silva",
+        "Maria Isabelly Bel",
+        "Gege Geovanna"
+      ]
+    }
+  ],
+  "secrets_exposed": false
+}

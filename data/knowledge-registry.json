@@ -431,6 +431,24 @@
       "updated_at": "2026-08-08T13:27:22+00:00"
     },
     {
+      "canonical_key": "meta-apps.registry.current",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-monitors",
+        "zeus"
+      ],
+      "domain": "security-access",
+      "effective_at": "2026-08-13",
+      "id": "SOURCE-META-APP-REGISTRY",
+      "kind": "source",
+      "owner": "Zeus / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Registro canônico de apps Meta, canais, admins e referências 1Password",
+      "updated_at": "2026-08-13T04:22:34+00:00"
+    },
+    {
       "canonical_key": "source.company-os",
       "canonical_source": "context/company-os.md",
       "consumers": [
@@ -667,5 +685,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-11T17:07:24+00:00"
+  "updated_at": "2026-08-13T04:22:34+00:00"
 }

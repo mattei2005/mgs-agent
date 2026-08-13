@@ -22,13 +22,23 @@
     },
     {
       "agent": "zeus",
-      "id": "INIT-META-APP-REDISTRIBUTION-20260812",
-      "next_step": "Rodolfo executar a migração operacional pelos destinos da coluna I; Zeus manter B006-2/B007 pausados até nova ordem explícita.",
-      "objective": "Redistribuir seguradores não ticados na coluna H entre os novos apps Meta pela receita C e páginas, excluindo também os 11 nomes definidos por Rodolfo.",
-      "source": "discord:thread:1537304832409473024; message:1537310297361092699; sheet:1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY#gid=542936436; report:reports/meta-app-allocation-final-20260813.json; backup:backups/meta-app-allocation-column-I-20260813-r2/before-r2.json",
-      "state": "concluído r2: 122 seguradores distribuídos e gravados na coluna i; 84 ticados em h preservados; 11 nomes adicionais excluídos e deixados em branco; canário e readback fresco completo pass, 0 divergências.",
+      "id": "INIT-META-APP-ACCESS-20260813",
+      "next_step": "Após confirmação de que todos aceitaram: releitura da Sheet sem reordenar; /roles fresco dos 13; comparar admin/segurador por app; exigir zero falta/sobra e checks saudáveis; só então reativar todos e validar ciclos/canais.",
+      "objective": "Conferir os 13 apps após os gestores aceitarem todos os convites e religar monitores somente com reconciliação 100%.",
+      "source": "discord:message:1537324393519259718; data/meta-app-registry.json; reports/meta-app-accepted-admins-vs-sheet-20260813.json",
+      "state": "aguardando 2026-08-14 et: gestores aceitarão convites. graph /roles mostra apenas aceitos e não expõe pendentes. gate ativo; nenhuma reativação feita. monitor genérico segue em checks silenciosos com entregas pausadas; b013 dedicado segue pausado.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T04:08:43+00:00"
+      "updated_at": "2026-08-13T04:59:38+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "INIT-META-APP-REDISTRIBUTION-20260812",
+      "next_step": "Rodolfo pode continuar os convites usando a coluna I; nenhum segurador previamente convidado fora do B013-2 mudou em relação à seleção original.",
+      "objective": "Preservar convites já enviados e redistribuir exclusivamente os seguradores que estavam destinados ao B013-2.",
+      "source": "discord:message:1537319595852038246; report:reports/meta-app-allocation-final-r4-preserve-invites-20260813.json; backup:backups/meta-app-allocation-column-I-20260813-r4-preserve-invites/before-r4.json",
+      "state": "concluído r4: erro r3 revertido por identidade user+segurador; 114 destinos anteriores restaurados exatamente; somente 8 ex-b013-2 redistribuídos; 84 h preservados; 11 nomes em branco; b006-2/b007/b013-2 ausentes; readback 0 divergências.",
+      "thread_id": "1537304832409473024",
+      "updated_at": "2026-08-13T04:42:44+00:00"
     },
     {
       "agent": "zeus",
@@ -652,5 +662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T04:08:43+00:00"
+  "updated_at": "2026-08-13T04:59:38+00:00"
 }

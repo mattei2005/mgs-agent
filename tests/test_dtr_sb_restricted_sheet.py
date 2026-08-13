@@ -29,10 +29,10 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
     def test_sheet_rows_uses_service_account_api_and_keeps_filtered_out_rows(self):
         values = [
             ['Removidos acumulado', 'User', 'Segurador', 'Migrado', 'NO APP', 'APP PROVISORIO'],
-            ['', 'active@example.com', 'Active User', 'FALSE', 'B001', 'B013-1'],
-            ['X', 'removed@example.com', 'Removed User', 'FALSE', 'B006-2', 'B006-2'],
-            ['', 'note@example.com', 'Operational Note', 'FALSE', 'B005-2', 'CONTA DESATIVADA'],
-            ['', 'historical@example.com', 'Historical Only', 'FALSE', 'B007', ''],
+            ['', 'active@example.com', 'Active User', 'FALSE', 'B013-1', ''],
+            ['X', 'removed@example.com', 'Removed User', 'FALSE', 'B006-2', ''],
+            ['', 'note@example.com', 'Operational Note', 'FALSE', 'CONTA DESATIVADA', ''],
+            ['', 'provisional-only@example.com', 'Provisional Only', 'FALSE', '', 'B007'],
         ]
         with mock.patch.object(sync, 'google_access_token', return_value='fixture-token'), \
              mock.patch.object(sync, 'sheets_api', return_value={'values': values}) as sheets_api:

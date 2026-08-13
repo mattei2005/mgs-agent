@@ -1,13 +1,15 @@
-# Meta App Assignment Column N Cutover — 2026-08-06
+# Meta App Assignment Source — 2026-08-06, superseded 2026-08-13
 
-## Decision
+## Current decision
 
-Rodolfo superseded the Meta app assignment source in Sheet `1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY`, tab `Migracao 22/06` / gid `542936436`:
+Rodolfo superseded the 2026-08-06 column-N cutover on 2026-08-13 while rebuilding the app allocation in Sheet `1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY`, tab `Migracao 22/06` / gid `542936436`:
 
-- column M / `NO APP` is historical;
-- column N / `APP PROVISORIO` is the current app-routing truth for every app monitor;
-- non-app status values in N are not app assignments and must be preserved fail-closed;
+- the current `NO APP` header is in column I and is the active app-routing source;
+- `APP PROVISORIO` is currently blank and must not define monitor scope;
+- only values matching `B\d{3}(?:-\d+)?` are active assignments; notes and blanks remain excluded fail-closed;
 - column A / `Removidos acumulado` remains the X marker written by reconciliation.
+
+The former rule below is retained only as superseded history: on 2026-08-06, column N / `APP PROVISORIO` replaced the then-historical M / `NO APP`. It ceased to describe live Sheet structure after Rodolfo's 2026-08-13 allocation write.
 
 ## Sheet preflight
 
