@@ -76,6 +76,8 @@ A generic watchdog pass does not prove a specific consumer. After this check, ru
 
 ## Sheets verification
 
+For DigitalTRChat portfolio page-count refreshes, use `references/dtr-page-count-reconciliation.md`: it defines row-occurrence scope, duplicate switcher-name resolution, immutable backup, numeric-string canary readback, narrow writes and monitor pause/resume closure.
+
 For every cutover or permission change:
 
 1. `spreadsheets.get` must return HTTP 200.
