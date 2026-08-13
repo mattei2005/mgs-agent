@@ -1,0 +1,118 @@
+{
+  "http": 201,
+  "pool_count": 11,
+  "pools": [
+    {
+      "ID": 360,
+      "NAME": "ftf-us-cc-en-drip 001",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1048,
+      "NAME": "ftf-us-cc-en-drip 002",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1049,
+      "NAME": "ftf-us-cc-en-drip 003",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1050,
+      "NAME": "ftf-us-cc-en-drip 004",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1051,
+      "NAME": "ftf-us-cc-en-drip 005",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1052,
+      "NAME": "ftf-us-cc-en-drip 006",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 361,
+      "NAME": "ftf-us-cc-en-mct broadcast 001",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1044,
+      "NAME": "ftf-us-cc-en-mct broadcast 002",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1045,
+      "NAME": "ftf-us-cc-en-mct broadcast 003",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1046,
+      "NAME": "ftf-us-cc-en-mct broadcast 004",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1047,
+      "NAME": "ftf-us-cc-en-mct broadcast 005",
+      "SOURCE": "MCT",
+      "route_count": 3
+    }
+  ],
+  "total_routes": 53,
+  "blank_routes": [
+    {
+      "route": "ftf-us-cc-en-drip-m3-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-drip-m8-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-drip-m13-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-drip-m18-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-drip-m23-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-drip-m28-1",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-mct-003",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-mct-006",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-mct-010-2",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    },
+    {
+      "route": "ftf-us-cc-en-mct-013-2",
+      "url": "https://finance.topfeed.fun/rec-us-cc-chase-freedom-unlimited"
+    }
+  ],
+  "all_urls_allowed": true,
+  "all_blanks_only_chase": true,
+  "snapshot_sha256": "3d0df5c87ffad7beb7dbd3ffc226b525a47891a4df9d0f3b5494d04b02adf031"
+}

@@ -33,6 +33,7 @@ ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 # ─── Transporte Discord direto pelo bot Zeus ────────────────────────────────
 DISCORD_CHANNEL_ID="1498132022634483894"
 DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
+GIT_SSH_COMMAND_DEFAULT="ssh -i /root/.ssh/mgs_github_deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/root/.ssh/known_hosts_github_mgs"
 
 post_discord_payload() {
     local payload="$1"
@@ -149,8 +150,11 @@ if [[ "$CURRENT_BRANCH" != "main" ]]; then
     REPO_FAILURES+=("repo branch=$CURRENT_BRANCH [esperado main]")
 fi
 
-# Fetch é read-only; se falhar, registrar como falha de saúde.
-if git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+# Fetch é read-only; usar a mesma identidade SSH restrita do hook de push.
+# Sem isso, o cron/execução não interativa pode depender do ssh-agent da sessão
+# e gerar falso alerta de fetch mesmo com HEAD e GitHub sincronizados.
+if GIT_SSH_COMMAND="${MGS_AUTOPUSH_GIT_SSH_COMMAND:-$GIT_SSH_COMMAND_DEFAULT}" \
+    git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
     LOCAL_HEAD="$(git -C "$BASE_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
     ORIGIN_MAIN="$(git -C "$BASE_DIR" rev-parse --short origin/main 2>/dev/null || echo unknown)"
     if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_HEAD" != "$ORIGIN_MAIN" ]]; then
