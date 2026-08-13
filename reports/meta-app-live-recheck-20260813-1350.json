@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-08-13T13:50:50-04:00",
+  "requested_by_message_id": "1537518737908047903",
+  "status": "ROLE_BASED_APPS_EXACT",
+  "source": {
+    "spreadsheet_id": "1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY",
+    "sheet": "Migracao 22/06",
+    "assignment_header": "NO APP",
+    "meta_endpoint": "/{app_id}/roles",
+    "sheet_read_only": true
+  },
+  "summary": {
+    "sheet_assignments_total": 205,
+    "role_based_apps": 12,
+    "role_based_sheet_assignments": 171,
+    "role_based_accepted": 171,
+    "role_based_missing": 0,
+    "role_based_extras": 0,
+    "b013_2_sheet_assignments": 34,
+    "b013_2_roles_reconciliation": "NOT_APPLICABLE"
+  },
+  "requested_names": {
+    "Marcio Carnelós": {
+      "sheet_app": "B010-2",
+      "accepted_role_in_sheet_app": true
+    },
+    "Alexandre Jonas": {
+      "sheet_app": "B010-2",
+      "accepted_role_in_sheet_app": true
+    },
+    "Geane Pedroso": {
+      "sheet_app": "B010-2",
+      "accepted_role_in_sheet_app": true
+    },
+    "Naiara Bella": {
+      "sheet_app": "B013-2",
+      "accepted_role_in_B011": false,
+      "note": "Current live Sheet does not assign this identity to B011."
+    },
+    "Michele Moura": {
+      "sheet_app": "B013-2",
+      "accepted_role_in_B012": false,
+      "note": "Current live Sheet does not assign this identity to B012."
+    }
+  },
+  "b013_2_historical_alert_evidence": {
+    "discord_message_id": "1535503539948884071",
+    "timestamp_utc": "2026-08-08T04:22:52.200000+00:00",
+    "title": "Meta APP - B013",
+    "description": "Dados consultados no DTR/ChatPion e Meta Graph e reconciliados com a planilha.",
+    "count": "32/37",
+    "pending": 5,
+    "pages_connected": 326,
+    "dtr_visible": 306,
+    "meta_visible": 332,
+    "route": "DigitalTRChat account context -> active Facebook user token -> debug_token -> me/accounts -> Page subscribed_apps",
+    "used_app_roles_for_seguradores": false
+  },
+  "current_b013_2_direct_connection_status": "NOT_RECHECKED; existing monitor is stale for current B013-2 identity/NO APP schema",
+  "secrets_exposed": false
+}
