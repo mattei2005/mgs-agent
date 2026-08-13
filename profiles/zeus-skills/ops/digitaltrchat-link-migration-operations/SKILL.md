@@ -25,6 +25,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/openzed-country-vertical-language.md` — canonical Openzed classification, catalog patterns, DTR route details, and the 2026-07-21 pilot discovery.
 - `references/batch-manifest-identity-and-readback.md` — reusable batch manifest, Unicode/long-ID identity reconciliation, variable image-click coverage, rollback, and independent readback procedure.
 - `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, blocker rechecks, exact ignore-list identity matching, disconnected-Page handling, resumable backups, login-safe concurrency, canary/readback, Openzed 21/07 EN/ES signatures, and column-I completion rules.
+- `references/utm-medium-only-migration-and-exact-login-resolution.md` — validated narrow migration for changing only `utm_medium` across Get Started and existing Drip URLs, including exact-login discovery when a newly added generic-title 1Password item is absent from the resolver map, dynamic occurrence counts, normalized graph hashing, rollback, and fresh-session readback.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
 ## Non-negotiable model
