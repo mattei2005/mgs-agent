@@ -5951,6 +5951,39 @@
         "mentions": 0,
         "thread_created": false
       }
+    },
+    {
+      "id": "zeus-meta-app-allocation-column-i-20260813",
+      "agent": "zeus",
+      "type": "google_sheet_operational_write",
+      "path": "Google Sheet 1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY / Migracao 22/06 / coluna I",
+      "mode": "manual-authorized",
+      "source_report": "REPORT-INFRA Meta app allocation column I 2026-08-13",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1537310297361092699",
+      "scope": {
+        "eligible_written": 122,
+        "excluded_by_checked_H": 84,
+        "excluded_by_name": 11,
+        "destination_apps": [
+          "B001-2",
+          "B002-2",
+          "B003-2",
+          "B004-2",
+          "B005-3",
+          "B008-2",
+          "B009-2",
+          "B010-2",
+          "B011",
+          "B012",
+          "B013-2"
+        ]
+      },
+      "artifact": "reports/meta-app-allocation-final-20260813.json",
+      "artifact_sha256": "cd7bb69915a6fc93289202b85352db0931dbd5a650601f60d3d3e55f194a40c2",
+      "backup": "backups/meta-app-allocation-column-I-20260813-r2/before-r2.json",
+      "validation": "Service Account canonical; canary write/read/restore PASS; fresh Sheets API readback PASS; 122 assignments exact; 11 named exclusions blank; 84 H-checked rows preserved; 0 mismatch.",
+      "updated_at": "2026-08-13T00:08:43-04:00"
     }
   ],
   "profile_skill_references": [

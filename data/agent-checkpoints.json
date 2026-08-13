@@ -24,11 +24,11 @@
       "agent": "zeus",
       "id": "INIT-META-APP-REDISTRIBUTION-20260812",
       "next_step": "Rodolfo executar a migração operacional pelos destinos da coluna I; Zeus manter B006-2/B007 pausados até nova ordem explícita.",
-      "objective": "Redistribuir seguradores ainda não ticados na coluna H entre os novos apps Meta, usando receita 7 dias da coluna C e páginas, sem mexer nos seguradores preservados de B006-2/B007/B013-2.",
-      "source": "discord:thread:1537304832409473024; messages:1537304832409473024,1537310297361092699; sheet:1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY#gid=542936436; report:reports/meta-app-allocation-draft-20260812.json; backup:backups/meta-app-allocation-column-I-20260813/before.json",
-      "state": "concluído: coluna i (no app) da aba migracao 22/06 atualizada para 133 seguradores não ticados; 84 ticados em h permaneceram inalterados; destino distribuído entre 11 apps novos; canário write/read/restore pass e readback fresco completo pass, 0 divergências.",
+      "objective": "Redistribuir seguradores não ticados na coluna H entre os novos apps Meta pela receita C e páginas, excluindo também os 11 nomes definidos por Rodolfo.",
+      "source": "discord:thread:1537304832409473024; message:1537310297361092699; sheet:1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY#gid=542936436; report:reports/meta-app-allocation-final-20260813.json; backup:backups/meta-app-allocation-column-I-20260813-r2/before-r2.json",
+      "state": "concluído r2: 122 seguradores distribuídos e gravados na coluna i; 84 ticados em h preservados; 11 nomes adicionais excluídos e deixados em branco; canário e readback fresco completo pass, 0 divergências.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T04:05:35+00:00"
+      "updated_at": "2026-08-13T04:08:43+00:00"
     },
     {
       "agent": "zeus",
@@ -652,5 +652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T04:05:35+00:00"
+  "updated_at": "2026-08-13T04:08:43+00:00"
 }
