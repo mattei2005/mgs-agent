@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Executar auditoria direta dos 32 B013-2 pela rota DTR/Meta e aguardar/corrigir as 5 ausências roles-based; reativar somente com ambos os gates zerados.",
+      "next_step": "Confirmar com Rodolfo se Naiara Bella e Michele Moura devem permanecer B013-2 na Sheet ou se a intenção é B011/B012; depois adaptar/executar auditoria direta B013-2 se autorizado. Não reativar monitor antes dos gates.",
       "objective": "Conferir os 13 apps pelos métodos corretos e religar monitores somente com reconciliação 100%.",
-      "source": "discord:message:1537512639641559060; reports/meta-app-live-reconciliation-corrected-20260813-1331.json; Meta Graph API docs debug_token/user accounts/page subscribed_apps/app roles",
-      "state": "pesquisa oficial/correção 2026-08-13: b013-2 usa advanced access/conexão direta e não deve ser conferido por /roles. app token sozinho não enumera seguradores conectados. os 12 apps roles-based têm 9 exatos e 5 ausências em b010-2/b011/b012. b013-2 exige auditoria individual dtr token -> debug_token(app_id b013-2) -> me/accounts -> page subscribed_apps. nenhuma reativação feita.",
+      "source": "discord:message:1537518737908047903; discord:message:1535503539948884071; reports/meta-app-live-recheck-20260813-1350.json",
+      "state": "recheck live 2026-08-13 13:50 et: 12 apps roles-based exatos, 171/171, zero faltas/sobras. marcio carnelós, alexandre jonas e geane pedroso aceitos no b010-2. naiara bella e michele moura constam atualmente na sheet como b013-2, não b011/b012. screenshot reconciliado: alerta b013 msg 1535503539948884071 em 2026-08-08 foi produzido por dtr/chatpion + meta graph + planilha, com 32/37 links e inventário dtr/meta; não usava /roles para seguradores. b013-2 atual ainda não rechecado pela rota direta.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T17:33:49+00:00"
+      "updated_at": "2026-08-13T17:55:28+00:00"
     },
     {
       "agent": "zeus",
@@ -682,5 +682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T17:33:49+00:00"
+  "updated_at": "2026-08-13T17:55:28+00:00"
 }
