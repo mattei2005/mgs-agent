@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Fazer backup, alinhar ambos os monitores ao NO APP e labels Bxxx atuais, validar fixtures/sintaxe/dry-run, reativar e rodar force-live foreground com readback Discord.",
-      "objective": "Reativar os crons dos 13 apps, executar varredura live e publicar alertas reais com contagens atuais.",
-      "source": "discord:message:1537524755379257505",
-      "state": "execução autorizada por rodolfo na mensagem 1537524755379257505. pré-flight: cron meta-app-roles está enabled, b013 dtr está paused e runtime/skills ainda carregam labels/coluna antigos; nenhuma mudança aplicada neste novo estágio.",
+      "next_step": "Monitores recorrentes ativos; escalar somente divergências reais. Último live: roles 171/171; B013-2 33/34, Ophelia Gonzalez removida.",
+      "objective": "Manter os 13 apps Meta monitorados; 12 via roles e B013-2 via DTR/Graph",
+      "source": "discord:1537304832409473024#1537524755379257505",
+      "state": "done",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T18:15:08+00:00"
+      "updated_at": "2026-08-13T18:56:47+00:00"
     },
     {
       "agent": "zeus",
@@ -682,5 +682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T18:15:08+00:00"
+  "updated_at": "2026-08-13T18:56:47+00:00"
 }
