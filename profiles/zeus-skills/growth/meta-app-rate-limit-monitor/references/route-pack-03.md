@@ -1,6 +1,18 @@
 ## Advanced-Access App Without Seguradores as App Admins
 
-Rodolfo clarified for B012 that the app may have Advanced Access permissions in a verified Business Manager and the seguradores will not necessarily be added as app administrators. This is a valid Meta operating model for ChatPion/DigitalTrChat-style integrations: Advanced Access allows non-app-role customers/users to grant the app permissions after App Review, but it does **not** remove page-level access requirements for Graph API reads.
+Rodolfo reconfirmed on 2026-08-13 that current app **B013-2** uses Advanced Access and direct Facebook Login/DigitalTRChat connections: seguradores do not need app roles and must never be reconciled through `/{app_id}/roles`. The same operating model was previously validated for B012-style apps. Advanced Access allows non-app-role users to grant reviewed permissions, but it does **not** create an app-token endpoint that enumerates every connected user/page, nor does it remove page-level access requirements for Graph API reads.
+
+Current B013-2 rule:
+
+```text
+Sheet intent            current NO APP = B013-2
+App token /roles        technical developer roles only; ignore for segurador reconciliation
+App token alone         cannot enumerate connected seguradores
+Per-segurador proof     DTR active user token → /debug_token against B013-2 app token
+Page-level proof        same user token → /me/accounts → page token → /{page_id}/subscribed_apps
+```
+
+A segurador absent from B013-2 `/roles` is not a divergence. Count a B013-2 connection only when that segurador's active token validates with `debug_token.data.app_id == B013-2 app_id` and `is_valid=true`; report page inventory separately.
 
 Operational implication:
 

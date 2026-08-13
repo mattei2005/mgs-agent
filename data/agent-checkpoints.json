@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Aguardar/corrigir os 37 seguradores ausentes em B010-2, B011, B012 e B013-2; repetir /roles x NO APP. Reativar somente quando falta/sobra for zero.",
-      "objective": "Conferir os 13 apps após os gestores aceitarem todos os convites e religar monitores somente com reconciliação 100%.",
-      "source": "discord:message:1537506734686478459; reports/meta-app-live-reconciliation-20260813-1310.json; data/meta-app-registry.json",
-      "state": "auditoria live 2026-08-13 13:10 edt: 9/13 apps reconciliados; 4 divergentes; 37 seguradores da planilha ainda ausentes dos roles aceitos/correntes; nenhum segurador aceito em app errado; 13/13 tokens e app ids válidos; gate de reativação segue bloqueado; nenhuma reativação feita.",
+      "next_step": "Executar auditoria direta dos 32 B013-2 pela rota DTR/Meta e aguardar/corrigir as 5 ausências roles-based; reativar somente com ambos os gates zerados.",
+      "objective": "Conferir os 13 apps pelos métodos corretos e religar monitores somente com reconciliação 100%.",
+      "source": "discord:message:1537512639641559060; reports/meta-app-live-reconciliation-corrected-20260813-1331.json; Meta Graph API docs debug_token/user accounts/page subscribed_apps/app roles",
+      "state": "pesquisa oficial/correção 2026-08-13: b013-2 usa advanced access/conexão direta e não deve ser conferido por /roles. app token sozinho não enumera seguradores conectados. os 12 apps roles-based têm 9 exatos e 5 ausências em b010-2/b011/b012. b013-2 exige auditoria individual dtr token -> debug_token(app_id b013-2) -> me/accounts -> page subscribed_apps. nenhuma reativação feita.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T17:11:45+00:00"
+      "updated_at": "2026-08-13T17:33:49+00:00"
     },
     {
       "agent": "zeus",
@@ -682,5 +682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T17:11:45+00:00"
+  "updated_at": "2026-08-13T17:33:49+00:00"
 }

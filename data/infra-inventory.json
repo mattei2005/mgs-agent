@@ -3967,16 +3967,16 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-03.md",
-      "size_bytes": 6944,
-      "modified_at": "2026-07-30T15:15:40-04:00",
-      "sha256": "7574a596dbd6b2f565605f873d040ac4672c08469aa2af5604e44f2ac42eb6a7",
+      "size_bytes": 7704,
+      "modified_at": "2026-08-13T13:32:31-04:00",
+      "sha256": "024ddc70cc846b8cc18b1f633ebf5eceb98450708cfbb030fa7185c9086de6db",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-03.md",
-      "runtime_versioned_sha_match": true,
+      "runtime_versioned_sha_match": false,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Advanced Access/DTR route updated for active B012 and hourly all-row monitoring.",
-      "validation": "Runtime/versioned SHA-256 match and readback PASS.",
-      "updated_at": "2026-07-30T15:22:42-04:00",
+      "description": "Advanced Access/DTR route updated for B013-2 direct connections; /roles is not a segurador source.",
+      "validation": "Skill readback confirms B013-2 app-token-only enumeration is unsupported; use per-segurador DTR token -> debug_token -> me/accounts -> subscribed_apps.",
+      "updated_at": "2026-08-13T13:34:09-04:00",
       "source_report": "REPORT-INFRA Zeus B011 to B012 DTR cutover 2026-07-30"
     },
     {
@@ -9856,9 +9856,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 56726,
-      "md5": "265c83ee5e624191bb0322815ee11a5d",
-      "modified_at": "2026-08-13T13:11:45-04:00"
+      "size_bytes": 56873,
+      "md5": "038c86eea3c73c014755cb170c8b1452",
+      "modified_at": "2026-08-13T13:33:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",

@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-08-13T13:10:38-04:00",
+  "corrected_at": "2026-08-13T13:31:00-04:00",
+  "status": "DIVERGENCES",
+  "supersedes": "reports/meta-app-live-reconciliation-20260813-1310.json",
+  "correction_source_message_id": "1537512639641559060",
+  "source": {
+    "spreadsheet_id": "1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY",
+    "sheet": "Migracao 22/06",
+    "assignment_header": "NO APP",
+    "sheet_read_only": true
+  },
+  "roles_based_apps": {
+    "scope": 12,
+    "matching": 9,
+    "divergent": 3,
+    "sheet_assignments": 173,
+    "accepted_current_roles": 168,
+    "not_present_in_current_roles": 5,
+    "accepted_in_wrong_app": 0,
+    "divergences": {
+      "B010-2": ["Marcio Carnelós", "Alexandre Jonas", "Geane Pedroso"],
+      "B011": ["Naiara Bella"],
+      "B012": ["Michele Moura"]
+    }
+  },
+  "b013_2": {
+    "sheet_assignments": 32,
+    "roles_reconciliation": "NOT_APPLICABLE",
+    "reason": "Advanced Access/direct Facebook Login integration; seguradores do not need app roles.",
+    "app_token_alone_can_enumerate_connected_seguradores": false,
+    "required_route": [
+      "Obtain each segurador active user token from the authorized DigitalTRChat account context",
+      "Inspect it with /debug_token using the B013-2 app token",
+      "Require is_valid=true and app_id equal to B013-2",
+      "Use that user token on /me/accounts for Page inventory",
+      "Use each Page access token on /{page_id}/subscribed_apps to verify page-level app subscription"
+    ],
+    "current_connection_status": "NOT_RECHECKED_IN_THIS_RESEARCH_TURN"
+  },
+  "documentation": [
+    "https://developers.facebook.com/docs/graph-api/reference/debug_token/",
+    "https://developers.facebook.com/docs/graph-api/reference/user/accounts/",
+    "https://developers.facebook.com/docs/graph-api/reference/page/subscribed_apps/",
+    "https://developers.facebook.com/docs/graph-api/reference/app/roles/",
+    "https://developers.facebook.com/docs/graph-api/reference/application/"
+  ],
+  "monitor_enablement_gate": "BLOCKED_BY_5_ROLE_BASED_DIVERGENCES_AND_PENDING_B013_2_DIRECT_CONNECTION_AUDIT",
+  "secrets_exposed": false
+}
