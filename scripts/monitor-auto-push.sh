@@ -34,10 +34,48 @@ ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 DISCORD_CHANNEL_ID="1498132022634483894"
 DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 GIT_SSH_COMMAND_DEFAULT="ssh -i /root/.ssh/mgs_github_deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/root/.ssh/known_hosts_github_mgs"
+GIT_HTTPS_REMOTE="https://github.com/mattei2005/mgs-agent.git"
 
 post_discord_payload() {
     local payload="$1"
     printf '%s' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID"
+}
+
+fetch_origin_main() {
+    if GIT_SSH_COMMAND="${MGS_AUTOPUSH_GIT_SSH_COMMAND:-$GIT_SSH_COMMAND_DEFAULT}" \
+        git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+        return 0
+    fi
+
+    local token askpass rc
+    token="$(
+        if [[ -f "$BASE_DIR/.env" ]]; then
+            set -a
+            . "$BASE_DIR/.env" >/dev/null 2>&1
+            set +a
+        fi
+        op item get 'GitHub PAT - mgs-agent' \
+            --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
+            --fields github_token --reveal 2>/dev/null
+    )" || true
+    [[ -n "$token" ]] || return 1
+
+    askpass="$(mktemp)"
+    printf '%s\n' \
+        '#!/bin/sh' \
+        'case "$1" in' \
+        '  *Username*) echo x-access-token ;;' \
+        '  *Password*) echo "$GITHUB_TOKEN" ;;' \
+        '  *) echo ;;' \
+        'esac' > "$askpass"
+    chmod 700 "$askpass"
+    rc=0
+    GIT_ASKPASS="$askpass" GITHUB_TOKEN="$token" GIT_TERMINAL_PROMPT=0 \
+        git -C "$BASE_DIR" fetch --quiet "$GIT_HTTPS_REMOTE" \
+        main:refs/remotes/origin/main 2>/dev/null || rc=$?
+    rm -f "$askpass"
+    unset token
+    return "$rc"
 }
 
 
@@ -150,11 +188,8 @@ if [[ "$CURRENT_BRANCH" != "main" ]]; then
     REPO_FAILURES+=("repo branch=$CURRENT_BRANCH [esperado main]")
 fi
 
-# Fetch é read-only; usar a mesma identidade SSH restrita do hook de push.
-# Sem isso, o cron/execução não interativa pode depender do ssh-agent da sessão
-# e gerar falso alerta de fetch mesmo com HEAD e GitHub sincronizados.
-if GIT_SSH_COMMAND="${MGS_AUTOPUSH_GIT_SSH_COMMAND:-$GIT_SSH_COMMAND_DEFAULT}" \
-    git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+# Fetch é read-only; usar SSH dedicado e fallback HTTPS/1Password sem persistir PAT.
+if fetch_origin_main; then
     LOCAL_HEAD="$(git -C "$BASE_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
     ORIGIN_MAIN="$(git -C "$BASE_DIR" rev-parse --short origin/main 2>/dev/null || echo unknown)"
     if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_HEAD" != "$ORIGIN_MAIN" ]]; then
