@@ -22,6 +22,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-DTR-PAGE-COUNT-SHEET-20260813",
+      "next_step": "Validar escopo completo, mapear logins DTR e coletar contagens antes de qualquer escrita",
+      "objective": "Contar páginas DTR por ocorrência de segurador e atualizar somente a coluna E PG da aba Migracao 22/06",
+      "source": "discord:1537304832409473024#1537595209440034836",
+      "state": "in_progress",
+      "thread_id": "1537304832409473024",
+      "updated_at": "2026-08-13T22:54:48+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
       "next_step": "Monitores recorrentes ativos; escalar somente divergências reais. Último live: roles 171/171; B013-2 33/34, Ophelia Gonzalez removida.",
       "objective": "Manter os 13 apps Meta monitorados; 12 via roles e B013-2 via DTR/Graph",
@@ -682,5 +692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T18:56:47+00:00"
+  "updated_at": "2026-08-13T22:54:48+00:00"
 }
