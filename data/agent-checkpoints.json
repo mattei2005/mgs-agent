@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Confirmar com Rodolfo se Naiara Bella e Michele Moura devem permanecer B013-2 na Sheet ou se a intenção é B011/B012; depois adaptar/executar auditoria direta B013-2 se autorizado. Não reativar monitor antes dos gates.",
-      "objective": "Conferir os 13 apps pelos métodos corretos e religar monitores somente com reconciliação 100%.",
-      "source": "discord:message:1537518737908047903; discord:message:1535503539948884071; reports/meta-app-live-recheck-20260813-1350.json",
-      "state": "recheck live 2026-08-13 13:50 et: 12 apps roles-based exatos, 171/171, zero faltas/sobras. marcio carnelós, alexandre jonas e geane pedroso aceitos no b010-2. naiara bella e michele moura constam atualmente na sheet como b013-2, não b011/b012. screenshot reconciliado: alerta b013 msg 1535503539948884071 em 2026-08-08 foi produzido por dtr/chatpion + meta graph + planilha, com 32/37 links e inventário dtr/meta; não usava /roles para seguradores. b013-2 atual ainda não rechecado pela rota direta.",
+      "next_step": "Fazer backup, alinhar ambos os monitores ao NO APP e labels Bxxx atuais, validar fixtures/sintaxe/dry-run, reativar e rodar force-live foreground com readback Discord.",
+      "objective": "Reativar os crons dos 13 apps, executar varredura live e publicar alertas reais com contagens atuais.",
+      "source": "discord:message:1537524755379257505",
+      "state": "execução autorizada por rodolfo na mensagem 1537524755379257505. pré-flight: cron meta-app-roles está enabled, b013 dtr está paused e runtime/skills ainda carregam labels/coluna antigos; nenhuma mudança aplicada neste novo estágio.",
       "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T17:55:28+00:00"
+      "updated_at": "2026-08-13T18:15:08+00:00"
     },
     {
       "agent": "zeus",
@@ -682,5 +682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T17:55:28+00:00"
+  "updated_at": "2026-08-13T18:15:08+00:00"
 }
