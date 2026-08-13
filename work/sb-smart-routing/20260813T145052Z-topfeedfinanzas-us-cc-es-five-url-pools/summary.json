@@ -1,0 +1,163 @@
+{
+  "status": "success",
+  "authorized_message_id": "1537473014562693211",
+  "before_count": 2,
+  "after_count": 11,
+  "created": 9,
+  "updated": 2,
+  "deleted": 0,
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "urls": [
+    "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-custom-cash",
+    "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-fit-mastercard-platinum",
+    "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bank-of-america",
+    "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-double-cash-card",
+    "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-blue-cash-preferred"
+  ],
+  "url_counts": {
+    "drip": {
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-custom-cash": 6,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-fit-mastercard-platinum": 6,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bank-of-america": 6,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-double-cash-card": 6,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-blue-cash-preferred": 6
+    },
+    "broadcast": {
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-custom-cash": 5,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-fit-mastercard-platinum": 5,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bank-of-america": 5,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-double-cash-card": 4,
+      "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-blue-cash-preferred": 4
+    }
+  },
+  "blank_operations_authorized": false,
+  "blank_operation_routes": 0,
+  "checks": {
+    "target_pools": true,
+    "distributions": true,
+    "identities": true,
+    "urls": true,
+    "all_operations": true,
+    "blank_count": true,
+    "unrelated": true
+  },
+  "results": [
+    {
+      "family": "broadcast",
+      "suffix": "001",
+      "id": 584,
+      "name": "ftf-f-us-cc-es-mct broadcast 001",
+      "route_count": 5,
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "002",
+      "id": 1053,
+      "name": "ftf-f-us-cc-es-mct broadcast 002",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "003",
+      "id": 1054,
+      "name": "ftf-f-us-cc-es-mct broadcast 003",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "004",
+      "id": 1055,
+      "name": "ftf-f-us-cc-es-mct broadcast 004",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "005",
+      "id": 1056,
+      "name": "ftf-f-us-cc-es-mct broadcast 005",
+      "route_count": 3,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "001",
+      "id": 583,
+      "name": "ftf-f-us-cc-es-drip 001",
+      "route_count": 5,
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "002",
+      "id": 1057,
+      "name": "ftf-f-us-cc-es-drip 002",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "003",
+      "id": 1058,
+      "name": "ftf-f-us-cc-es-drip 003",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "004",
+      "id": 1059,
+      "name": "ftf-f-us-cc-es-drip 004",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "005",
+      "id": 1060,
+      "name": "ftf-f-us-cc-es-drip 005",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "006",
+      "id": 1061,
+      "name": "ftf-f-us-cc-es-drip 006",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    }
+  ],
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260813T145052Z-topfeedfinanzas-us-cc-es-five-url-pools",
+  "manifest_hash": "c04189c8411ccf72f6168f051cac23ff684a079b2b9666ee7d95d66b9cd51431"
+}

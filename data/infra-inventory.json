@@ -6083,6 +6083,65 @@
       "readback_sha256": "f160d270e9cfacce32d75c709addd36c5f628fbf1f07f303035c947c1683f7a0",
       "unrelated_pools_unchanged": true,
       "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53 routes, 10 blank JBF operations exclusively for Chase Freedom Unlimited as explicitly authorized pending AdOps; no unrelated pool drift."
+    },
+    {
+      "id": "topfeedfinanzas-us-cc-es-smart-routing-five-url-20260813",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "topfeedfinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1537473014562693211",
+      "applied_at": "2026-08-13T10:52:00.726077-04:00",
+      "drip_pool_ids": [
+        583,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061
+      ],
+      "broadcast_pool_ids": [
+        584,
+        1053,
+        1054,
+        1055,
+        1056
+      ],
+      "created_pool_ids": [
+        1053,
+        1054,
+        1055,
+        1056,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061
+      ],
+      "updated_pool_ids": [
+        583,
+        584
+      ],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-custom-cash",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-fit-mastercard-platinum",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bank-of-america",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-citi-double-cash-card",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-blue-cash-preferred"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260813T145052Z-topfeedfinanzas-us-cc-es-five-url-pools",
+      "summary_sha256": "c97725e2e99bef77af968e1f6b2526be769aa647efdb40b562504afe8bc62d72",
+      "readback_sha256": "8831fb7263687807e89bf787f22a1c5469b84ad71356d194110cc8ff4fec5fff",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
     }
   ],
   "profile_skill_references": [
