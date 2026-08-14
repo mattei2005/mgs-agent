@@ -573,12 +573,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Cron de 15 minutos fará readback dos dois templates de produção pendentes após 20:55 SP; dispatcher diário continuará a fila sem bloqueios locais",
+      "next_step": "Dispatcher das 08:00 SP pode consumir 4 candidates elegíveis de US-JOB-ES para o déficit live máximo 1, incluindo reserva operacional 3",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535311753192153139",
-      "state": "deployed_full_candidate_rollout_production_readback_pending",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-14T07:31:01-03:00; data:sb-utility-generated-candidates.json",
+      "state": "model_written_catalog_replenished_for_live_deficit",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-07T22:30:45+00:00"
+      "updated_at": "2026-08-14T10:32:43+00:00"
     },
     {
       "agent": "zeus",
@@ -692,5 +692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T23:07:37+00:00"
+  "updated_at": "2026-08-14T10:32:43+00:00"
 }
