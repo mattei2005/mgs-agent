@@ -96,13 +96,18 @@ async function fetchRows(context, listUrl, headers) {
   let headers = null;
   let listUrl = null;
   const captured = [];
+  const writeResponses = [];
   page.on('request', req => {
     if (req.url().includes('/broadcast/Messenger') && req.method() === 'GET') {
       headers = req.headers(); listUrl = req.url();
     }
   });
   page.on('response', async resp => {
-    if (resp.url().includes('/broadcast/Messenger') && resp.status() === 200 && resp.request().method() === 'GET') {
+    const method = resp.request().method();
+    if (method !== 'GET' && resp.url().includes('api.jbfdigital.com.br')) {
+      writeResponses.push({method, url:resp.url(), http:resp.status()});
+    }
+    if (resp.url().includes('/broadcast/Messenger') && resp.status() === 200 && method === 'GET') {
       try { const data = await resp.json(); if (Array.isArray(data)) captured.push(...data); } catch (_) {}
     }
   });
@@ -167,19 +172,18 @@ async function fetchRows(context, listUrl, headers) {
     await parentAfterUpdate.getByRole('button', {name:/30 Messages/}).waitFor({timeout:10000});
     await page.screenshot({path:path.join(OUT,'before-save.png'), fullPage:false});
 
-    const responsePromise = page.waitForResponse(resp => resp.url().includes('/broadcast/Messenger') && resp.request().method()==='POST', {timeout:60000});
     await parentAfterUpdate.getByRole('button', {name:'Save', exact:true}).click();
-    const saveResponse = await responsePromise;
-    const saveStatus = saveResponse.status();
-    const saveText = await saveResponse.text();
-    fs.writeFileSync(path.join(OUT,'save-response.json'), JSON.stringify({http:saveStatus, body:saveText.slice(0,5000)}, null, 2));
-    if (saveStatus < 200 || saveStatus >= 300) throw new Error(`save POST failed HTTP ${saveStatus}: ${saveText.slice(0,300)}`);
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(5000);
+    await page.screenshot({path:path.join(OUT,'after-save.png'), fullPage:false});
+    const toastText = await page.locator('.toast:visible, .p-toast:visible, [role="alert"]:visible').allInnerTexts().catch(()=>[]);
+    fs.writeFileSync(path.join(OUT,'write-responses.json'), JSON.stringify({writeResponses,toastText}, null, 2));
 
     const liveRows = await fetchRows(context, listUrl, headers);
     const liveTargets = liveRows.filter(r=>r.NAME===TARGET);
-    if (liveTargets.length !== 1) throw new Error(`readback target count ${liveTargets.length}`);
+    if (liveTargets.length !== 1) throw new Error(`readback target count ${liveTargets.length}; writes=${JSON.stringify(writeResponses)}; alerts=${JSON.stringify(toastText)}`);
     const target = liveTargets[0];
+    const matchingWrite = [...writeResponses].reverse().find(x=>x.url.toLowerCase().includes('/broadcast/'));
+    const saveStatus = matchingWrite ? matchingWrite.http : null;
     const targetMessages = parseMessages(target);
     const expectedCanonical = desired.map(canonicalMessage);
     const actualCanonical = targetMessages.map(canonicalMessage);
