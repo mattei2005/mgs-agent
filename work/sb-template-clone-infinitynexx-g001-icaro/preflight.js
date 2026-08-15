@@ -75,6 +75,8 @@ async function loginIfNeeded(page, context) {
     await page.screenshot({path:path.join(OUT, 'new-template-modal.png'), fullPage:false});
     await page.getByRole('button', {name:/0 Messages/}).click();
     await page.waitForTimeout(1000);
+    await page.getByText('Import', {exact:true}).last().click();
+    await page.waitForTimeout(700);
     await page.screenshot({path:path.join(OUT, 'messages-modal.png'), fullPage:false});
     const modalTexts = await page.locator('.modal-content:visible, .p-dialog:visible, [role="dialog"]:visible').allInnerTexts();
     const visibleInputsAfterMessages = await page.locator('input:visible, textarea:visible').evaluateAll(nodes => nodes.map((n,i)=>({i,type:n.type||'',id:n.id||'',placeholder:n.placeholder||'',value:n.value||'',accept:n.accept||''})));
