@@ -143,12 +143,12 @@
     {
       "agent": "ares",
       "id": "ares-car-br-br-intake-20260815-kelly",
-      "next_step": "Executar lote sob lock com Service Account canônica, validar READY/LEGACY/hash/clean=true, atualizar inventário, emitir REPORT-INFRA e fechar checkpoint.",
+      "next_step": "Nenhuma pendência no intake. Assets permanecem RESERVADO_PELO_GESTOR e ares_eligible=false até liberação expressa ou conciliação Meta × Drive.",
       "objective": "Tratar 6 vídeos CAR_BR_BR enviados por Kelly em UPLOAD MANUAL, sanitizar, nomear, validar em 01_READY, preservar originais em 99_LEGACY e registrar inventário.",
-      "source": "/root/mgs-agent/tmp/ares-intake-kelly-car-br-20260815T235625-0400/stability/poll-3/; /root/mgs-agent/tmp/ares-intake-kelly-car-br-20260815T235625-0400/evidence-final/20260816T040012Z/evidence-manifest-enriched.json; discord:thread:1538395826022514768",
-      "state": "batch estabilizado em 6 source ids por três polls; 6/6 baixados e probeados; evidência visual multi-frame classificada; zero duplicatas sha-256 internas ou já inventariadas; zero rejeições técnicas.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260816T040505Z.json; /root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260816T040505Z-independent-verification.json; discord:thread:1538395826022514768",
+      "state": "completed: 6/6 em vid/01_ready; 6/6 originais em vid/99_legacy; clean=true 6; readback drive+sha-256 6; inventário 6; rejeições 0; upload manual 0; verificação independente all_verified=true.",
       "thread_id": "1538395826022514768",
-      "updated_at": "2026-08-16T04:02:26+00:00"
+      "updated_at": "2026-08-16T04:07:09+00:00"
     },
     {
       "agent": "zeus",
@@ -702,5 +702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-16T04:02:26+00:00"
+  "updated_at": "2026-08-16T04:07:09+00:00"
 }
