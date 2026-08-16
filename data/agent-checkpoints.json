@@ -141,6 +141,16 @@
       "updated_at": "2026-08-03T23:47:26+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-car-br-br-intake-20260815-kelly",
+      "next_step": "Executar lote sob lock com Service Account canônica, validar READY/LEGACY/hash/clean=true, atualizar inventário, emitir REPORT-INFRA e fechar checkpoint.",
+      "objective": "Tratar 6 vídeos CAR_BR_BR enviados por Kelly em UPLOAD MANUAL, sanitizar, nomear, validar em 01_READY, preservar originais em 99_LEGACY e registrar inventário.",
+      "source": "/root/mgs-agent/tmp/ares-intake-kelly-car-br-20260815T235625-0400/stability/poll-3/; /root/mgs-agent/tmp/ares-intake-kelly-car-br-20260815T235625-0400/evidence-final/20260816T040012Z/evidence-manifest-enriched.json; discord:thread:1538395826022514768",
+      "state": "batch estabilizado em 6 source ids por três polls; 6/6 baixados e probeados; evidência visual multi-frame classificada; zero duplicatas sha-256 internas ou já inventariadas; zero rejeições técnicas.",
+      "thread_id": "1538395826022514768",
+      "updated_at": "2026-08-16T04:02:26+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -692,5 +702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-15T10:33:08+00:00"
+  "updated_at": "2026-08-16T04:02:26+00:00"
 }
