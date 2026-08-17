@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T19:03:45-04:00",
+    "updated_at": "2026-08-17T19:13:00-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6917,14 +6917,14 @@
       "agent": "zeus",
       "type": "wordpress_plugin_preloader_rollout",
       "owner": "Zeus/Tech",
-      "status": "configured_validated_waiting_wantabrand_gate",
+      "status": "completed_validated",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1539030910010265712",
       "source_thread_id": "1538961042753851402",
       "non_jbf_pending_sites_count": 17,
-      "configured_validated_count": 16,
-      "wantabrand_pending_count": 1,
-      "runcloud_configured": 14,
+      "configured_validated_count": 17,
+      "wantabrand_pending_count": 0,
+      "runcloud_configured": 15,
       "external_configured": 2,
       "new_plugin_installs_runcloud": 10,
       "existing_plugin_activations": 3,
@@ -6962,24 +6962,27 @@
       },
       "wantabrand_gate": {
         "site": "wantabrand.com",
-        "status": "unchanged",
-        "reason": "M2/PubGuru exception requires explicit inclusion confirmation before plugin/preloader change."
+        "status": "included_configured_validated",
+        "authorization_message_id": "1539048639983263774",
+        "reason": "Rodolfo explicitly confirmed inclusion despite the M2/PubGuru exception.",
+        "m2_validation": "Both /chat/car/br1 and /chat-sms/car/br1 HTTP 200; PubGuru loader and pg-rewarded present; zero assets.jbfdigital, zero jbftag and zero unresolved placeholders."
       },
       "backup_paths": [
         "/var/backups/mgs-loftloader-rollout/20260817T220734Z",
         "/var/backups/mgs-loftloader-rollout/20260817T221555Z",
+        "/var/backups/mgs-loftloader-rollout/20260817T231029Z",
         "/var/backups/mgs-loftloader-rollout/autolendpro-cleanup-20260817T230012Z",
         "/root/.hermes/secure-backups/loftloader-external/20260817T221813086Z/openzed.com",
         "/root/.hermes/secure-backups/loftloader-external/20260817T221836553Z/finanzas.openzed.com",
         "/root/.hermes/secure-backups/loftloader-external/finopenzed-fallback-20260817"
       ],
       "checkpoint_id": "loftloader-rollout-20260817",
-      "checkpoint_state": "configured_validated_16_cleanup_complete_waiting_wantabrand_gate",
-      "validation": "16/16 authorized homepages HTTP 200 with one LoftLoader wrapper, correct logo, scoped CSS marker and no-animation; browser visual acceptance 15/16 first pass plus de.newsoun instrumented recheck PASS; Autolendpro screenshot clean and duplicate cleanup validated; OpenZed Customizer readbacks PASS; Finanzas OpenZed fallback source/browser PASS; knowledge validate PASS and regression 10/10.",
+      "checkpoint_state": "completed_validated_all_17_non_jbf",
+      "validation": "17/17 non-JBF target homepages HTTP 200 with one LoftLoader wrapper, correct logo, scoped CSS marker and no-animation; Wantabrand and Finance Wantabrand visual browser PASS; Wantabrand M2/PubGuru chat invariants PASS; portfolio final 54/54 HTTP 200 with preloader (36 JBF-family including FinanceADX manual exception, 18 LoftLoader); Autolendpro duplicate cleanup validated; knowledge validate PASS and regression 10/10.",
       "report_infra_message_id": "1539039566655389800",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
-      "updated_at": "2026-08-17T19:03:45-04:00"
+      "updated_at": "2026-08-17T19:13:00-04:00"
     }
   ],
   "profile_skill_references": [
@@ -11228,5 +11231,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T19:03:45-04:00"
+  "updated_at": "2026-08-17T19:13:00-04:00"
 }

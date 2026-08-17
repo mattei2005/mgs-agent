@@ -373,12 +373,12 @@
     {
       "agent": "zeus",
       "id": "loftloader-rollout-20260817",
-      "next_step": "Rodolfo deve confirmar explicitamente incluir ou excluir wantabrand.com/M2; 16 demais sites e limpeza Autolendpro estão concluídos.",
+      "next_step": "Nenhuma pendência de preloader; manter monitoramento e usar a skill canônica para futuros sites.",
       "objective": "Padronizar preloader LoftLoader nos 17 sites sem tema JBF usando logo oficial, fundo branco, no-animation e máximo 2s.",
       "source": "context/sites.md",
-      "state": "configured_validated_16_cleanup_complete_waiting_wantabrand_gate",
+      "state": "completed_validated_all_17_non_jbf",
       "thread_id": "1538961042753851402",
-      "updated_at": "2026-08-17T23:01:54+00:00"
+      "updated_at": "2026-08-17T23:12:47+00:00"
     },
     {
       "agent": "zeus",
@@ -782,5 +782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T23:01:54+00:00"
+  "updated_at": "2026-08-17T23:12:47+00:00"
 }
