@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "mode": "until",
-  "apps": [],
+  "mode": "manual",
+  "apps": [
+    "B004-2",
+    "B006-2"
+  ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1537524755379257505",
-  "updated_at": "2026-08-13T14:22:00-04:00",
-  "reason": "Pausa manual encerrada por instrução explícita; arquivo permanece como readback histórico sem apps suprimidos.",
-  "until": "2026-08-13T14:25:00-04:00"
+  "source_message_id": "1538890597492854864",
+  "updated_at": "2026-08-17T08:43:27-04:00",
+  "reason": "B004-2 e B006-2 pararam de funcionar; alertas desses apps pausados temporariamente por instrução explícita de Rodolfo."
 }
