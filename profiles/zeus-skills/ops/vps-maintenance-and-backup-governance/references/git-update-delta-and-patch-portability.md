@@ -33,6 +33,24 @@ Report three different dimensions when available:
 - untagged development after the latest public tag: `tag..upstream`;
 - new since a prior audited SHA: `prior..upstream`.
 
+### Active launcher and local-port ancestry
+
+Do not assume the conventional checkout path is the runtime actually serving gateways. Resolve the canonical launcher first (`readlink -f` plus its Python shebang), corroborate it with the install directory from `hermes --version` and systemd `ExecStart`, and run the installed-state comparison against that checkout. A default clone or staging checkout may be newer while production still runs a separate controlled port.
+
+When active `HEAD` is a local port commit and therefore is not an ancestor of `origin/main`, a raw `HEAD..origin/main` count is not the clean upstream-pendency measure. Freeze and report the local-only side separately:
+
+```bash
+base=$(git -C "$repo" merge-base HEAD origin/main)
+git -C "$repo" rev-list --left-right --count HEAD...origin/main
+git -C "$repo" rev-list --count "$base..origin/main"
+```
+
+Use `base..origin/main` for upstream commits pending since the installed upstream base, name the base SHA, and never silently substitute the graph of a different checkout because its version banner or tag looks newer.
+
+For a read-only MGS patch gate, prefer an explicit check-only wrapper when present. Prove the current canonical patch reverses against the active port, then export `origin/main` to a temporary directory and run a forward `git apply --check` there. A clean reverse check proves the deployed customization matches its artifact; a failed clean-target forward check names a real port requirement without mutating production. Do not run an apply-capable guard merely to answer a status question.
+
+For large ranges, aggregate `name-status`, commit subjects, categories, path intersections, and blocker errors inside a script and return only counts, top domains, bounded samples, and exact blockers. Never serialize the full raw range into tool output; multi-thousand-commit updates can flood the session and obscure the decision.
+
 A large `main` delta with no newer public tag is not a new stable release. Name it as untagged upstream development and default to a controlled port/defer recommendation unless an operational need justifies targeting that SHA.
 
 ## Measure the local customization surface
