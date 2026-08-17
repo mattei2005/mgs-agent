@@ -230,12 +230,17 @@ PY
       fi
       ;;
     honcho-provider-shutdown-drain-*.patch)
-      if grep -q 'shutdown = getattr(manager, "shutdown", None)' "$REPO/plugins/memory/honcho/__init__.py" \
-        && grep -q 'manager.stop_async_writer()' "$REPO/plugins/memory/honcho/__init__.py" \
-        && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py" \
-        && grep -q 'spawn_context_thread(_run, name="honcho-context-prefetch")' "$REPO/plugins/memory/honcho/session.py" \
-        && grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$REPO/tests/test_honcho_startup_fail_open.py" \
-        && grep -q "test_honcho_manager_shutdown_joins_context_prefetch_thread" "$REPO/tests/test_honcho_startup_fail_open.py"; then
+      if {
+        grep -q 'shutdown = getattr(manager, "shutdown", None)' "$REPO/plugins/memory/honcho/__init__.py" \
+          && grep -q 'manager.stop_async_writer()' "$REPO/plugins/memory/honcho/__init__.py" \
+          && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py" \
+          && grep -q 'spawn_context_thread(_run, name="honcho-context-prefetch")' "$REPO/plugins/memory/honcho/session.py" \
+          && grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$REPO/tests/test_honcho_startup_fail_open.py" \
+          && grep -q "test_honcho_manager_shutdown_joins_context_prefetch_thread" "$REPO/tests/test_honcho_startup_fail_open.py";
+      } || {
+        grep -q "Stop the manager lifecycle" "$REPO/plugins/memory/honcho/__init__.py" \
+          && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py";
+      }; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
