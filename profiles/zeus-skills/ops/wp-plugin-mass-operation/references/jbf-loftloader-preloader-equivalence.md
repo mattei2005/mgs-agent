@@ -93,6 +93,43 @@ LoftLoader Lite não possui um modo nativo perfeitamente estático igual ao JBF:
 
 Para igualdade visual real, manter `frame` e adicionar CSS restrito ao LoftLoader para ocultar as quatro bordas animadas e renderizar apenas o logo central com 40 px de altura. Fazer isso somente após canário e screenshot/runtime readback.
 
+## Migração de preloader manual para JBF integrado
+
+Antes de ativar `jbf_preloader_option_name`, auditar a home bare e cache-busted para `#jbf-preloader` e `.Preloader`. Se `.Preloader` já existir e o JBF integrado estiver ausente/desabilitado, localizar a origem para evitar dois overlays.
+
+Caso validado em `finanzas.lyzmo.com`:
+
+- opção JBF integrada ausente;
+- home servia `.Preloader` manual com GIF/selo externos de `fincgolem.com`;
+- origem: option `ad_inserter`, envelope `:AI:` com base64 de uma string serializada;
+- código do header no array decodificado em `['h']['code']`;
+- todas as demais 89 chaves do Ad Inserter precisavam ser preservadas.
+
+Procedimento seguro:
+
+1. Fazer backup exato da option `ad_inserter` codificada e da option JBF anterior.
+2. Exigir prefixo `:AI:`.
+3. Decodificar base64 e desserializar a estrutura.
+4. Validar hash, comprimento e marcador do `['h']['code']` esperado antes de escrever.
+5. Zerar somente `['h']['code']`; não substituir a option inteira nem mexer nos outros blocos.
+6. Serializar novamente, gerar o base64 no shell/runtime e validar hash reverso antes do `update_option`.
+7. Gravar `jbf_preloader_option_name` com:
+   - `enable_0=enable_0`;
+   - `image_1_1` apontando para o logo oficial do próprio site;
+   - `image_2_2` vazio, salvo decisão específica;
+   - `bgcolor_3_3=#ffffff`.
+8. Se a gravação JBF falhar, restaurar imediatamente a option antiga do Ad Inserter.
+9. Purgar WP Fastest Cache.
+10. Validar na home bare e cache-busted:
+    - exatamente um `#jbf-preloader`;
+    - zero `.Preloader` manual;
+    - zero referência aos assets antigos;
+    - logo oficial presente;
+    - CSS e JS JBF presentes;
+    - overlay removido e body com overflow visível ao final.
+
+No canário Finanzas Lyzmo, o JBF ficou visualmente ativo por mediana ~1,24 s fria e ~1,19 s quente; remoção absoluta mediana ~2,00 s fria e ~1,52 s quente; 10/10 HTTP 200, sem overlay residual.
+
 ## Auditoria obrigatória
 
 1. Ler options reais via WP-CLI/REST.
