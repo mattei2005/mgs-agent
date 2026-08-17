@@ -6397,6 +6397,24 @@
         "report_infra_channel_id": "1498132022634483894",
         "report_infra_readback": true
       }
+    },
+    {
+      "id": "vps-post-cleanup-reboot-20260817",
+      "agent": "zeus",
+      "type": "vps_reboot_validator",
+      "owner": "Zeus/Infra",
+      "status": "prepared_enabled",
+      "authorization_message_id": "1538937976443244625",
+      "source_thread_id": "1538878021455319140",
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z",
+      "unit": "mgs-vps-post-cleanup-reboot-20260817.service",
+      "validator": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/post_reboot_validator.py",
+      "finalizer": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/reboot_finalizer.py",
+      "snapshot": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/REBOOT_SHA256SUMS",
+      "expected_kernel": "6.8.0-138-generic",
+      "hermes_head": "72bb673285f5e6e8f4adcff7c6c4a999401f72d0",
+      "cleanup_target_set_sha256": "68af439e3af471fdf91884fb7503d61b2ea5ecdaba20ca092abf8363ee827fb8",
+      "prepared_at": "2026-08-17T15:54:50.433695+00:00"
     }
   ],
   "profile_skill_references": [
@@ -10615,5 +10633,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-08-17T15:54:50.433695+00:00"
 }
