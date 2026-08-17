@@ -353,12 +353,12 @@
     {
       "agent": "zeus",
       "id": "jbf-preloader-rollout-20260817",
-      "next_step": "Auditar opção JBF, logo oficial, origem de preloader manual e acesso de escrita por site antes do rollout.",
+      "next_step": "Aguardar decisão do Rodolfo sobre migrar financeadx.com (jbf-server-child sem módulo integrado) para LoftLoader; não há pendência nos 35 sites compatíveis com JBF integrado.",
       "objective": "Ativar e padronizar o preloader integrado JBF com logo oficial nos 34 sites pendentes, removendo preloaders manuais sem tocar nos demais blocos.",
       "source": "context/sites.md",
-      "state": "audit_started_34_pending",
+      "state": "completed_validated_35_integrated_1_manual_exception",
       "thread_id": "1538961042753851402",
-      "updated_at": "2026-08-17T21:02:21+00:00"
+      "updated_at": "2026-08-17T21:40:38+00:00"
     },
     {
       "agent": "zeus",
@@ -772,5 +772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T21:02:21+00:00"
+  "updated_at": "2026-08-17T21:40:38+00:00"
 }

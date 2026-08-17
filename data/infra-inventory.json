@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T16:45:59-04:00",
+    "updated_at": "2026-08-17T17:40:27-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6860,6 +6860,54 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T16:45:59-04:00"
+    },
+    {
+      "id": "jbf-preloader-portfolio-rollout-20260817",
+      "agent": "zeus",
+      "type": "wordpress_theme_preloader_rollout",
+      "owner": "Zeus/Tech",
+      "status": "completed_validated_with_exception",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1539016364587622481",
+      "source_thread_id": "1538961042753851402",
+      "jbf_family_sites_count": 36,
+      "integrated_jbf_final_count": 35,
+      "manual_exception_count": 1,
+      "pending_sites_processed": 34,
+      "runcloud_attempted": 31,
+      "runcloud_integrated": 30,
+      "runcloud_rolled_back": 1,
+      "external_integrated": 3,
+      "manual_preloaders_removed_in_rollout": 17,
+      "mixed_ad_header_residuals_preserved": 3,
+      "compatibility_failsafe_sites": [
+        "empleo.seuprimeiroempregoam.com",
+        "finanzas.topfeed.fun",
+        "finanzas.zuout.com",
+        "zuout.com"
+      ],
+      "compatibility_code_sha256": "bbf6f72e3c8beade9703ef7485c533fceacd37ea5b0eed658fa94c96631442a7",
+      "external_sites": [
+        "cliquet.com",
+        "finanzas.cliquet.com",
+        "fincgriffin.com"
+      ],
+      "exception": {
+        "site": "financeadx.com",
+        "theme": "jbf-server-child",
+        "reason": "The theme accepted the option but does not load the integrated preloader node/CSS/JS.",
+        "rollback": "Exact Ad Inserter option restored from validated backup; JBF option removed; manual preloader and GPT/JBF code preserved.",
+        "current_state": "HTTP 200 with the previous manual preloader; candidate for future LoftLoader route, not forced JBF."
+      },
+      "backup_paths": [
+        "/var/backups/mgs-jbf-preloader-rollout/20260817T210951Z",
+        "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212643Z",
+        "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212935Z"
+      ],
+      "checkpoint_id": "jbf-preloader-rollout-20260817",
+      "checkpoint_state": "completed_validated_35_integrated_1_manual_exception",
+      "validation": "Final 36/36 JBF-family homepages HTTP 200; 35 integrated homes with exactly one #jbf-preloader and zero manual .Preloader; FinanceADX manual exception restored and validated; RunCloud public readback 30/30 and browser acceptance 30/30 after bounded rechecks/failsafes; external source readback 3/3 and browser acceptance 3/3; old fincgolem assets absent from integrated sites; body overflow visible after close; knowledge validate PASS and regression 10/10.",
+      "updated_at": "2026-08-17T17:40:27-04:00"
     }
   ],
   "profile_skill_references": [

@@ -130,6 +130,32 @@ Procedimento seguro:
 
 No canário Finanzas Lyzmo, o JBF ficou visualmente ativo por mediana ~1,24 s fria e ~1,19 s quente; remoção absoluta mediana ~2,00 s fria e ~1,52 s quente; 10/10 HTTP 200, sem overlay residual.
 
+## Pitfalls de rollout JBF em portfólio
+
+### Variante sem módulo integrado
+
+`jbf-server-child` não garante o módulo `inc/jbf-preloader`. Caso `financeadx.com` validado: a option JBF aceitou a gravação, mas a home não carregou node/CSS/JS. O site foi restaurado integralmente ao preloader manual anterior. Regra: depois do option readback, exigir sempre node/CSS/JS públicos; se ausentes, rollback imediato e tratar o site como exceção para uma futura rota LoftLoader, não forçar o integrado.
+
+### Builder antigo e LiteSpeed
+
+Alguns builders antigos não removem `#jbf-preloader`. Em `empleo.seuprimeiroempregoam.com`, `finanzas.topfeed.fun`, `finanzas.zuout.com` e `zuout.com`, foi necessário um Header Code de compatibilidade que:
+
+- dispara `onWindowLoaded` quando `window.load` já ocorreu ou quando ocorrer;
+- remove diretamente o node como fallback;
+- restaura `body.style.overflow = "visible"`;
+- inclui `data-no-optimize="1"` e `data-cfasync="false"` no script;
+- inclui failsafe CSS de 2 s com `opacity:0`, `visibility:hidden` e `pointer-events:none`.
+
+Sem `data-no-optimize`, LiteSpeed converteu o script para `type="litespeed/javascript"` e o segurou até interação. O failsafe CSS deve continuar mesmo com o JS robusto.
+
+### Ad Inserter externo
+
+Nos sites externos Cliquet, um POST de `requests` com `code_block_h=:AI:...` retornou HTTP 200 sem persistir porque o JavaScript do Ad Inserter também recalcula `block-parameters-h` durante `encode_code("h")`. Não tentar adivinhar esse índice. Usar Chromium autenticado, editar o ACE `editor-h`, clicar no botão Save real e exigir readback do textarea. Para purge do WP Fastest Cache quando o botão está coberto por overlay do admin, submeter o formulário nativo com `form.submit()` e validar a home bare.
+
+### Janela de browser
+
+Uma janela inicial de 6,5 s gerou falso negativo em sites com `window.load` tardio. Revalidar falhas por até 15 s antes de classificar como preloader preso. A aceitação final exige remoção do node ou failsafe visual completo, overflow do body visível e HTTP 200.
+
 ## Auditoria obrigatória
 
 1. Ler options reais via WP-CLI/REST.
