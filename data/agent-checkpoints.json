@@ -283,12 +283,12 @@
     {
       "agent": "zeus",
       "id": "hermes-port-20260817",
-      "next_step": "Monitoramento rotineiro.",
+      "next_step": "Monitoramento rotineiro; OAuth root/default permanece pendência separada sem impacto nos gateways.",
       "objective": "Hermes 0.20.2 atualizado, limpeza concluída e reboot pós-limpeza validado.",
-      "source": "discord-thread:1538878021455319140;authorization-message:1538937976443244625;/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/post-reboot-result.json",
-      "state": "reboot pós-limpeza validado em runtime; fechamento de unit/report/git em andamento.",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/post-reboot-result.json;discord-message:1538937976443244625",
+      "state": "completed: reboot pós-limpeza validado; novo boot e kernel 6.8.0-138; hermes 72bb6732; ares/atena/zeus discord ready; cleanup 5/5; rollback e backup íntegros; unit limpa; timeout posterior de git reconciliado sem segundo reboot.",
       "thread_id": "1538878021455319140",
-      "updated_at": "2026-08-17T16:03:47+00:00"
+      "updated_at": "2026-08-17T17:06:38+00:00"
     },
     {
       "agent": "zeus",
@@ -762,5 +762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T16:37:11+00:00"
+  "updated_at": "2026-08-17T17:06:38+00:00"
 }

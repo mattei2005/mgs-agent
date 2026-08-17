@@ -6398,10 +6398,10 @@
         "report_infra_readback": true
       },
       "last_post_cleanup_reboot": {
-        "status": "validated_pending_report",
+        "status": "completed_validated_closure_recovered",
         "authorization_message_id": "1538937976443244625",
         "result": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/post-reboot-result.json",
-        "validated_at": "2026-08-17T16:03:47.796415+00:00"
+        "validated_at": "2026-08-17T17:06:28.004596+00:00"
       }
     },
     {
@@ -6409,7 +6409,7 @@
       "agent": "zeus",
       "type": "vps_reboot_validator",
       "owner": "Zeus/Infra",
-      "status": "validated_pending_report",
+      "status": "completed_validated_closure_recovered",
       "authorization_message_id": "1538937976443244625",
       "source_thread_id": "1538878021455319140",
       "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z",
@@ -6425,7 +6425,15 @@
       "boot_id_before": "91f43384-0696-4629-b6e4-277cc9bd9e8e",
       "boot_id_after": "a4ab7d67-6185-4290-9ddf-f564b759a09e",
       "kernel": "6.8.0-138-generic",
-      "validated_at": "2026-08-17T16:03:47.796415+00:00"
+      "validated_at": "2026-08-17T17:06:28.004596+00:00",
+      "overall": "PASS",
+      "unit_present": false,
+      "unit_failed_state_cleared": true,
+      "closure_recovery": "foreground reconciliation after validator timeout during Git sync; no second reboot",
+      "report_infra_message_id": "1538957281717391432",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T17:07:15.212021+00:00"
     }
   ],
   "profile_skill_references": [
@@ -10645,5 +10653,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T16:03:47.796415+00:00"
+  "updated_at": "2026-08-17T17:07:15.212021+00:00"
 }
