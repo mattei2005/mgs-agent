@@ -692,6 +692,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-b0063-cutover-1538892880783876200",
+      "next_step": "Atualizar inventário, registrar audit e validar REPORT-INFRA",
+      "objective": "Substituir B006-2 por B006-3 e reativar o monitor Meta sem reativar B004-2",
+      "source": "discord:1538892880783876200",
+      "state": "active",
+      "thread_id": "1538890597492854864",
+      "updated_at": "2026-08-17T13:01:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-hermes-news-completeness-watchdog-20260718",
       "next_step": "Operação normal. Zeus só escala fallback usado, duas falhas de entrega ou perda do ciclo de um minuto; nenhum restart pendente.",
       "objective": "Eliminar falhas silenciosas no cron de explicações do Hermes News com watchdog independente, recuperação, fallback determinístico e readback",
@@ -712,5 +722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T12:35:08+00:00"
+  "updated_at": "2026-08-17T13:01:32+00:00"
 }

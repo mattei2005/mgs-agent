@@ -1,5 +1,21 @@
 ## Production Cron Implementation
 
+### Current B006-3 cutover — 2026-08-17
+
+Rodolfo explicitly replaced retired `B006-2` with `B006-3` and re-enabled this app inside the generic Meta roles cron. Current canonical runtime:
+
+- app key: `B006-3`;
+- 1Password item: `BOT B006-3 Token - Isidoro Cristina Barbosa Martins`;
+- reused Discord channel ID: `1521252068319297666`; the live channel name remains `b006-2-app-status` until a separate rename is authorized;
+- live token/profile and the sole accepted `administrators` role resolve to `Gia Huy`; do not infer the operational admin from the 1Password title when `/me` and `/roles` prove a different profile;
+- app metadata, `/roles`, `/me`, and `debug_token` return HTTP 200; token is valid and app-bound;
+- current `/roles` count is 1 across one page;
+- the canonical Sheet, read through the MGS Service Account, has 15 `NO APP = B006-3` rows and zero writes were made during cutover validation;
+- only `B004-2` remains in the manual app-alert pause; `B006-3` is unpaused;
+- production state must migrate `B006-3` over stale `B006-2` and must not reuse the old B006-2 confirmed 17-role baseline because Meta role IDs are app-scoped and only one B006-3 admin is currently accepted.
+
+Validation pitfall: `MGS_META_APP_ROLES_DRY_RUN=1` does not persist the temporary state or print the final run summary. For an isolated end-to-end validation, use a temporary state path, disable Sheet writes, and run normal mode with `B006-3` present in a temporary manual pause file; then require all four checks healthy, `consecutive_errors=0`, `current_count=1`, `alerts_sent=0`, and no Discord delivery. After that gate, run the exact production item once without forcing an alert and read back production state plus the canonical pause file.
+
 Active Hermes cron job:
 
 ```text

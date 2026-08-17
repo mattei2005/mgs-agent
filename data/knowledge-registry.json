@@ -569,10 +569,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": "2026-10-30",
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-3-gia-huy-20260817",
       "title": "B006-2 mantém os mesmos 17 seguradores do B006 desativado",
-      "updated_at": "2026-07-30T16:42:50+00:00"
+      "updated_at": "2026-08-17T13:01:32+00:00"
     },
     {
       "canonical_key": "meta_app.dtr_active_app",
@@ -641,10 +641,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-3-gia-huy-20260817",
+      "title": "B006-2 owner/admin is Crislaine Oliveira, also a seguradora with pages",
+      "updated_at": "2026-08-17T13:01:32+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b006-3",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "#B006-3 app alert channel 1521252068319297666",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-17T08:55:28-04:00",
+      "id": "meta-app-owner-b006-3-gia-huy-20260817",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B006-2 owner/admin is Crislaine Oliveira, also a seguradora with pages",
-      "updated_at": "2026-07-30T18:20:34+00:00"
+      "title": "B006-3 substitui B006-2; admin live é Gia Huy",
+      "updated_at": "2026-08-17T13:01:32+00:00"
     },
     {
       "canonical_key": "security.google-workspace-auth",
@@ -685,5 +703,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T04:22:34+00:00"
+  "updated_at": "2026-08-17T13:01:32+00:00"
 }
