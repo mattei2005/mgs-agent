@@ -45,6 +45,7 @@ Fail closed if no known patch is present or applicable. Verify the guard in all 
 ### Separate candidate defects from external state
 
 - A real provider smoke matrix must preserve the distinction between candidate code, profile config, and profile credential health. If a profile's actual OAuth refresh fails, record that blocker. An additional ephemeral smoke using the same profile config plus a known-valid credential may prove the candidate path, but it never converts the original credential failure into a pass.
+- Before activation, classify profiles by runtime role. A credential failure in a non-gateway/default profile may be carried as a bounded exception only when Rodolfo explicitly authorizes that exception, its config check still passes, the candidate path has been proven with isolated valid authentication, and every production gateway profile passes its own exact live smoke. Preserve the failed profile as `known invalid / not modified`, never relabel it as green, and do not mutate its credential during the cutover.
 - Classify dependency advisories by the shipped/runtime surface before deciding whether they block a gateway candidate. Do not run an automatic dependency fix against a frozen upstream lock merely to make the audit count green; record upstream Electron/build-chain findings separately from the Python gateway process and keep critical severity explicit.
 - Candidate governance writers must be idempotent. A failure after inventory or audit mutation but before summary creation is a partial success: read back each durable target before retrying, deduplicate audit events by artifact/message identity, and allow atomic writers to create a new summary file with a safe default mode.
 
@@ -54,6 +55,7 @@ A modern uv checkout commonly uses `.venv`, while an older MGS restart helper ma
 
 - Prefer updating the resolver to accept both layouts.
 - If compatibility with an already validated helper is required, create `venv -> .venv` in the candidate and validate Python, CLI, imports, and the helper's repository resolver through that path.
+- Keep that compatibility symlink out of the candidate patch without accepting a dirty checkout: add the exact repository-local entry (for example `/venv`) to `.git/info/exclude`, then require both `readlink venv == .venv` and a clean `git status`. Because `.git/info/exclude` is not part of the candidate commit, freeze and validate the symlink target separately in the activation snapshot/preflight.
 - Keep versioned inactive wrappers such as `hermes-vNEXT-mgs`; make the canonical launcher switch atomic and preserve the exact prior wrapper as rollback.
 
 ## 6. Detached activation with rollback
