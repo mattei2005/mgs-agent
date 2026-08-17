@@ -35,6 +35,19 @@ Generate the new canonical patch from the frozen upstream parent to the validate
 
 Fail closed if no known patch is present or applicable. Verify the guard in all three states. On a disposable clean target, apply the new patch, stage it, run `git write-tree`, and require the tree hash to equal the candidate commit tree. This is stronger than a path count or `git apply --check` alone.
 
+### Conflict and coverage details that must remain explicit
+
+- A consolidated MGS commit may be cherry-picked onto the frozen upstream target instead of applying a raw patch. During conflict resolution, stage 2 is the frozen upstream side and stage 3 is the MGS side; archive both before editing so the semantic decision remains auditable.
+- Do not require the final patch path count to equal the original manifest blindly. Compute three sets: original customized paths, final candidate paths, and clean-reproduction paths. Every original path absent from the candidate needs an upstream commit plus behavior-test evidence; every new candidate-only path needs a stated compatibility reason. Candidate and reproduction sets must still be equal and byte-identical.
+- When a guard's semantic fallback is broadened for the new candidate, retest it against both the candidate and the untouched legacy runtime. A predicate that recognizes only the new implementation can make the production-active legacy state fail closed even though production itself did not drift.
+- For upstream keyword/signature changes, update all affected fakes and fixtures to accept or assert the new contract. If a broad pack fails because another module polluted import state, preserve the broad result and rerun every failed module together in a fresh process. Call the behavior green only when all failures pass in that isolated rerun; do not erase or mislabel the order-dependent broad result.
+
+### Separate candidate defects from external state
+
+- A real provider smoke matrix must preserve the distinction between candidate code, profile config, and profile credential health. If a profile's actual OAuth refresh fails, record that blocker. An additional ephemeral smoke using the same profile config plus a known-valid credential may prove the candidate path, but it never converts the original credential failure into a pass.
+- Classify dependency advisories by the shipped/runtime surface before deciding whether they block a gateway candidate. Do not run an automatic dependency fix against a frozen upstream lock merely to make the audit count green; record upstream Electron/build-chain findings separately from the Python gateway process and keep critical severity explicit.
+- Candidate governance writers must be idempotent. A failure after inventory or audit mutation but before summary creation is a partial success: read back each durable target before retrying, deduplicate audit events by artifact/message identity, and allow atomic writers to create a new summary file with a safe default mode.
+
 ## 5. Venv/layout compatibility
 
 A modern uv checkout commonly uses `.venv`, while an older MGS restart helper may resolve only `venv/bin/python`. Do not discover this after cutover.
