@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T16:21:15-04:00",
+    "updated_at": "2026-08-17T16:45:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6790,6 +6790,43 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T16:20:12-04:00"
+    },
+    {
+      "id": "finanzas-lyzmo-jbf-preloader-canary-20260817",
+      "agent": "zeus",
+      "type": "wordpress_theme_preloader_canary",
+      "owner": "Zeus/Tech",
+      "status": "deployed_validated",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1539010042207145994",
+      "source_thread_id": "1538961042753851402",
+      "site": "finanzas.lyzmo.com",
+      "theme": "jbf-wp-theme-main",
+      "theme_version": "2.4.2",
+      "before": {
+        "jbf_preloader_option": "absent",
+        "manual_preloader": "Ad Inserter header code h/code",
+        "manual_code_length": 1025,
+        "manual_code_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "manual_assets_origin": "fincgolem.com"
+      },
+      "after": {
+        "jbf_preloader_enabled": true,
+        "logo": "https://finanzas.lyzmo.com/wp-content/uploads/2023/12/logofull-lyzmo-3.png",
+        "logo_dimensions": "2560x853",
+        "second_image": "",
+        "background": "#ffffff",
+        "manual_header_code_length": 0,
+        "ad_inserter_top_level_keys_preserved": "89/89",
+        "base64_reverse_sha256": "89cc82b12d9c8c80542d8b8d85fab41549613077994ff92f1c8c74e4d2ea2bb5"
+      },
+      "backup_path": "/var/backups/mgs-jbf-preloader/20260817T204113Z/finanzas.lyzmo.com",
+      "cache_action": "WP Fastest Cache purged after migration",
+      "validation": "Bare and cache-busted home HTTP 200; exactly one #jbf-preloader; official logo present; zero manual .Preloader; zero fincgolem references; JBF CSS/JS present; screenshot clean and centered; 5 cold + 5 warm runs all HTTP 200; visual duration median 1.24s cold and 1.19s warm; removal absolute median 2.00s cold and 1.52s warm; zero residual overlays; body overflow visible at final state.",
+      "report_infra_message_id": "1539012410726424617",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T16:45:59-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6800,18 +6837,21 @@
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
-      "size_bytes": 5684,
-      "modified_at": "2026-08-17T16:18:02-04:00",
-      "sha256": "62e577316a431cecefe9fdb068ca284907c516c3a5cf3778b0c58053a1af2919",
+      "size_bytes": 7622,
+      "modified_at": "2026-08-17T16:43:13-04:00",
+      "sha256": "ed15be06ee255d55ce10634c4094664b4958e5b814df7c520e3af1b5e4796b27",
       "purpose": "Durable procedure to audit and standardize SB/JBF integrated preloaders against LoftLoader on non-JBF WordPress sites, including timing, cache-bust validation and an equivalence preset.",
-      "validation": "Updated after Rodolfo correction: visual timing now measures .loader-section and #loader rather than the transparent wrapper; Gamezonead current preset and logo CSS documented; 5 cold + 5 warm runs measured; live and versioned hashes match.",
+      "validation": "Expanded with safe migration from manual Ad Inserter .Preloader to integrated JBF: :AI: base64 envelope, reverse-hash validation, h/code-only clearing, 89-key preservation, rollback and canary browser gates; live and versioned hashes match.",
       "report_infra_message_id": "1539001065696006188",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "last_update_report_infra_message_id": "1539005911706902599",
       "last_update_report_infra_channel_id": "1498132022634483894",
       "last_update_report_infra_readback": true,
-      "updated_at": "2026-08-17T16:20:12-04:00"
+      "last_migration_report_infra_message_id": "1539012410726424617",
+      "last_migration_report_infra_channel_id": "1498132022634483894",
+      "last_migration_report_infra_readback": true,
+      "updated_at": "2026-08-17T16:45:59-04:00"
     },
     {
       "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",
@@ -11029,5 +11069,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T16:20:12-04:00"
+  "updated_at": "2026-08-17T16:45:59-04:00"
 }
