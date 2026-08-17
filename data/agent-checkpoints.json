@@ -273,12 +273,12 @@
     {
       "agent": "zeus",
       "id": "hermes-port-20260817",
-      "next_step": "Capturar alvo, manifestar 44 paths MGS e executar baseline amplo",
-      "objective": "Portar Hermes 0.20.0 MGS para o origin/main mais recente, validar candidato isolado e não reiniciar gateways",
-      "source": "discord:1538878021455319140#1538915006148644939",
-      "state": "in_progress: autorização recebida; congelando alvo e reconciliando superfície ativa",
+      "next_step": "Obter decisão sobre OAuth root/default e autorização separada para cutover controlado Ares→Atena→Zeus; antes disso refazer fetch/gate móvel e preparar finalizador/rollback.",
+      "objective": "Portar Hermes 0.20.0 MGS para o origin/main mais recente sem alterar produção",
+      "source": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/final-validation-summary.json",
+      "state": "candidato 0.20.2 em 4323c67d concluído: commit 72bb6732, patch reproduzido 43/43 e gates dos três gateways verdes; produção permanece em 6fc69c9d. exceções: oauth root/default inválido e 4 advisories npm high upstream.",
       "thread_id": "1538878021455319140",
-      "updated_at": "2026-08-17T14:19:10+00:00"
+      "updated_at": "2026-08-17T15:02:34+00:00"
     },
     {
       "agent": "zeus",
@@ -742,5 +742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T14:19:10+00:00"
+  "updated_at": "2026-08-17T15:02:34+00:00"
 }

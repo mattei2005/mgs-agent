@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T10:03:57-04:00",
+    "updated_at": "2026-08-17T15:02:15.608108+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6258,6 +6258,60 @@
       "unit_present": false,
       "result": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json",
       "validated_at": "2026-08-17T12:34:57.341308+00:00"
+    },
+    {
+      "id": "hermes-port-main-4323c67d-20260817",
+      "agent": "zeus",
+      "type": "hermes_runtime_update_candidate",
+      "owner": "Zeus/Infra",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1538915006148644939",
+      "source_thread_id": "1538878021455319140",
+      "status": "candidate_validated_gateway_ready_root_cli_auth_blocked",
+      "installed_before": "6fc69c9d705a41f7b31a200b12a75677857e9a8a",
+      "target_upstream_sha": "4323c67dcc6048fc8e311cdff7600d3d6a17807f",
+      "target_version": "0.20.2",
+      "candidate_path": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d",
+      "candidate_commit": "72bb673285f5e6e8f4adcff7c6c4a999401f72d0",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-17-main-4323c67d.patch",
+      "patch_sha256": "7e2014d5f103c6c66a7b9dcc150a7ae830d58606fff7f8aecb6b4daf07ebaeab",
+      "patch_scope_files": 43,
+      "original_customization_paths": 44,
+      "absorbed_upstream_paths": 2,
+      "new_compatibility_test_paths": 1,
+      "report_dir": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d",
+      "profiles_backup": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/hermes-profiles-backup-20260817.tar.gz",
+      "activation_authorized": false,
+      "gateway_activation_sequence": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "validation": {
+        "baseline_active": "454 guard + 551 broad MGS passed",
+        "targeted_conflicts": "159 passed",
+        "candidate_broad_mgs": "551 passed",
+        "post_upstream_regression": "205 passed",
+        "candidate_guard": "465 passed + 6 subtests",
+        "overlap_pack": "560 passed + 1 skipped; 3 module-order failures all passed in isolated 19/19 rerun",
+        "clean_reproduction": "43/43 paths equal and byte-identical; apply-check and reverse-check PASS",
+        "original_surface": "44 audited; 42 retained; 2 absorbed upstream with evidence; 1 compatibility test added",
+        "config_check": "root/Zeus/Atena/Ares 4/4 accepted; version metadata 34 -> 37 available, no required fields missing",
+        "codex_production_profiles": "Zeus/Atena/Ares 3/3 exact rc=0",
+        "codex_root_profile": "actual root credential failed: invalid refresh token; root config passed exact smoke with valid ephemeral auth",
+        "python_dependencies": "uv pip check PASS, 103 packages compatible",
+        "web_build": "PASS",
+        "tui_build": "PASS",
+        "npm_audit": "4 high advisories in current upstream lock: Electron/extract-zip and nanoid/postcss; no critical",
+        "moving_main": "origin/main equals target; zero known commits pending",
+        "active_runtime": "unchanged at 0.20.0 / 6fc69c9d; no gateway activation performed"
+      },
+      "known_risks": [
+        "Root/default OpenAI-Codex refresh credential is invalid; credentials were not changed.",
+        "Current upstream npm lock reports 4 high advisories and 0 critical advisories.",
+        "Config checker accepts current profiles but advertises metadata version 37 over current version 34."
+      ],
+      "updated_at": "2026-08-17T15:02:15.608108+00:00"
     }
   ],
   "profile_skill_references": [
