@@ -21,6 +21,16 @@
       "updated_at": "2026-07-20T16:14:51+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-US-EMP-STATIC-30-20260817",
+      "next_step": "Ler a planilha live e o artefato-fonte, analisar 15 referências, definir copy/conceitos e validar backend antes da geração.",
+      "objective": "Produzir 30 criativos estáticos originais US-EMP Messenger: 15 ES e 15 EN, 1254x1254, com referência, claims gate, sanitização, naming, Shared Drive, inventário e readback.",
+      "source": "discord:thread:1538949395586875564; sheet:1RNY-sal7hyVFsM7j-BDPxJ_-ZYjNMZJvZ_ICU2JbL70; /tmp/solius-reference-images; /root/.hermes/profiles/zeus/artifacts/US-EMP-CC_Solius_Loans_Messenger_Fluxo_Completo_2026-08-10.xlsx",
+      "state": "in_progress: preflight autorizado; fontes, referências e provider em validação",
+      "thread_id": "1538949395586875564",
+      "updated_at": "2026-08-17T16:37:11+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "INIT-DTR-PAGE-COUNT-SHEET-20260813",
       "next_step": "Monitores retomados; acompanhar apenas drift futuro de páginas por segurador",
@@ -622,6 +632,16 @@
     },
     {
       "agent": "zeus",
+      "id": "us-emp-es-en-drip-build-20260817",
+      "next_step": "Ares produzir 30 criativos, salvar no Shared Drive e preencher a aba Plano Imagens ES-EN; depois validar copies, claims e URLs finais",
+      "objective": "Montar dois fluxos Messenger US-EMP ES/EN com Get Started, No Match e M01-M28 e produzir 15 criativos por idioma",
+      "source": "https://docs.google.com/spreadsheets/d/1RNY-sal7hyVFsM7j-BDPxJ_-ZYjNMZJvZ_ICU2JbL70/edit",
+      "state": "in_progress",
+      "thread_id": "1536512083577937960",
+      "updated_at": "2026-08-17T16:35:55+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-cleanup-round2-20260811",
       "next_step": "Aguardar autorização separada para portar o Hermes de c0106e50 para f51aa6a9b (5 commits novos detectados no fetch final)",
       "objective": "Limpar VPS conforme target set confirmado e ativar retenção Ares/Hermes",
@@ -742,5 +762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T16:03:47+00:00"
+  "updated_at": "2026-08-17T16:37:11+00:00"
 }
