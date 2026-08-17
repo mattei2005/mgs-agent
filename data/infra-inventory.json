@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T19:13:43-04:00",
+    "updated_at": "2026-08-17T19:36:57-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6986,9 +6986,74 @@
       "completion_report_infra_channel_id": "1498132022634483894",
       "completion_report_infra_readback": true,
       "updated_at": "2026-08-17T19:13:43-04:00"
+    },
+    {
+      "id": "wordpress-irrelevant-posts-audit-20260817",
+      "agent": "zeus",
+      "type": "wordpress_content_security_audit",
+      "owner": "Zeus/Tech",
+      "status": "completed_read_only_flagged_7_sites",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1539052642217627729",
+      "source_thread_id": "1538961042753851402",
+      "scope_sites": 54,
+      "collected_posts": 12950,
+      "collection_limit_per_site": 500,
+      "flagged_sites_count": 7,
+      "flagged_posts_count": 272,
+      "common_recent_author": "rodmaster",
+      "cluster_start": "2026-07-20 07:52:12",
+      "cluster_end": "2026-08-17 22:11:28",
+      "flagged_sites": {
+        "gamehubad.com": 75,
+        "carcreditad.com": 40,
+        "financiamentoautoadx.com": 38,
+        "autocreditadx.com": 38,
+        "creditoparaveiculo.com": 36,
+        "financiarveiculo.com": 30,
+        "autolendpro.com": 15
+      },
+      "screenshot_match": "The six circled titles match financiamentoautoadx.com posts IDs 52576, 52612, 52614, 52616, 52618 and 52622.",
+      "control_sites_not_flagged": [
+        "eggbev.com",
+        "zytiva.com",
+        "finanzas.newsoun.com"
+      ],
+      "false_positives_excluded": [
+        "AAdvantage Aviator credit-card posts",
+        "Banque Casino loan posts",
+        "betting on AI phrase",
+        "microSD card slot phrase"
+      ],
+      "evidence_path": "/root/mgs-agent/reports/wordpress-spam-audit/20260817-irrelevant-posts.json",
+      "checkpoint_id": "wordpress-irrelevant-posts-audit-20260817",
+      "checkpoint_state": "completed_flagged_7_sites_272_posts_read_only",
+      "action_taken": "Read-only audit; no posts, users, passwords, permissions or credentials modified.",
+      "validation": "54/54 sites collected; 49 RunCloud via WP-CLI/DB and 5 external via authenticated REST; 12,950 post records normalized; keyword/language detection followed by author/date cluster review and manual control-site validation; evidence JSON readback PASS; knowledge validate PASS and regression 10/10.",
+      "report_infra_message_id": "1539055417718611969",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T19:36:57-04:00"
     }
   ],
   "profile_skill_references": [
+    {
+      "id": "zeus-wordpress-irrelevant-posts-incident-audit-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "skill": "wp-plugin-mass-operation",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/wordpress-irrelevant-posts-incident-audit.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/wordpress-irrelevant-posts-incident-audit.md",
+      "size_bytes": 2895,
+      "modified_at": "2026-08-17T19:34:45-04:00",
+      "sha256": "b200fa899bb03a2c06832086edbb765fa41364672ab9c0d538748a82d7845c36",
+      "purpose": "Reusable read-only workflow for detecting irrelevant/spam WordPress publication clusters while excluding contextual false positives.",
+      "validation": "Procedure exercised across 54 sites and 12,950 posts; seven sites/272 posts confirmed; three same-author control sites reviewed and excluded; live and versioned hashes match.",
+      "report_infra_message_id": "1539055417718611969",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T19:36:57-04:00"
+    },
     {
       "id": "zeus-jbf-loftloader-preloader-equivalence-reference",
       "agent": "zeus",
@@ -11234,5 +11299,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T19:13:43-04:00"
+  "updated_at": "2026-08-17T19:36:57-04:00"
 }

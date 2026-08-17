@@ -733,12 +733,12 @@
     {
       "agent": "zeus",
       "id": "wordpress-irrelevant-posts-audit-20260817",
-      "next_step": "Coletar títulos, datas, autores e categorias dos posts publicados via WP-CLI/REST; detectar e validar clusters suspeitos.",
+      "next_step": "Aguardar autorização crítica de contenção do autor/credenciais e decisão entre quarentena ou exclusão dos 272 posts confirmados.",
       "objective": "Auditar os 54 sites WordPress e identificar sites com artigos publicados incompatíveis/spam, sem excluir conteúdo.",
-      "source": "context/sites.md",
-      "state": "collection_started_54_sites",
+      "source": "reports/wordpress-spam-audit/20260817-irrelevant-posts.json",
+      "state": "completed_flagged_7_sites_272_posts_read_only",
       "thread_id": "1538961042753851402",
-      "updated_at": "2026-08-17T23:26:36+00:00"
+      "updated_at": "2026-08-17T23:35:28+00:00"
     },
     {
       "agent": "zeus",
@@ -792,5 +792,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T23:26:36+00:00"
+  "updated_at": "2026-08-17T23:35:28+00:00"
 }
