@@ -352,6 +352,16 @@
     },
     {
       "agent": "zeus",
+      "id": "jbf-preloader-rollout-20260817",
+      "next_step": "Auditar opção JBF, logo oficial, origem de preloader manual e acesso de escrita por site antes do rollout.",
+      "objective": "Ativar e padronizar o preloader integrado JBF com logo oficial nos 34 sites pendentes, removendo preloaders manuais sem tocar nos demais blocos.",
+      "source": "context/sites.md",
+      "state": "audit_started_34_pending",
+      "thread_id": "1538961042753851402",
+      "updated_at": "2026-08-17T21:02:21+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "knowledge-continuity-2026",
       "next_step": "Normal monitoring: automatic residual compaction at >=90% to <=85% with backup/readback and metadata-only success/failure embeds in #limites-90; no per-occurrence approval.",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
@@ -762,5 +772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T20:20:55+00:00"
+  "updated_at": "2026-08-17T21:02:21+00:00"
 }
