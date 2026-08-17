@@ -693,12 +693,12 @@
     {
       "agent": "zeus",
       "id": "zeus-b0043-cutover-1538901046653358121",
-      "next_step": "Aplicar registro, proteção de contagem esperada, migração de estado e validação live",
-      "objective": "Substituir B004-2 por B004-3, corrigir rotas e reativar o monitor sem falsos X durante aceite de convites",
+      "next_step": "Nenhum: retomar somente em novo alerta ou nova substituição autorizada",
+      "objective": "B004-3 substituiu B004-2: canal normalizado, 4/4 Graph HTTP 200, token válido/app-bound, 12 roles/12 nomes, Sheet 12/12 presente e cron saudável",
       "source": "discord:1538901046653358121",
-      "state": "active",
+      "state": "completed",
       "thread_id": "1538890597492854864",
-      "updated_at": "2026-08-17T13:26:15+00:00"
+      "updated_at": "2026-08-17T13:42:47+00:00"
     },
     {
       "agent": "zeus",
@@ -732,5 +732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T13:26:15+00:00"
+  "updated_at": "2026-08-17T13:42:47+00:00"
 }

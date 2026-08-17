@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T08:35:09-04:00",
+    "updated_at": "2026-08-17T09:43:00-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6097,14 +6097,14 @@
       "modified_at": "2026-08-17T09:34:13-04:00",
       "sha256": "fc737ca02858ce52dfdcd2460a938f86fad10e086c2a92f986088fa27332e593",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Zeus B006-3 Meta monitor cutover 2026-08-17",
+      "source_report": "REPORT-INFRA Zeus B004-3 Meta monitor cutover 2026-08-17",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1538892880783876200",
+      "authorization_message_id": "1538901046653358121",
       "scope": [
         "B001-2",
         "B002-2",
         "B003-2",
-        "B004-2",
+        "B004-3",
         "B005-3",
         "B006-3",
         "B007",
@@ -6115,9 +6115,9 @@
         "B012",
         "B013-2"
       ],
-      "validation": "B006-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; 15 accepted roles resolved to 15 names; Sheet readback has 15 NO APP=B006-3 rows, 15/15 present, identity_blocked_rows=0 and zero cutover writes.",
-      "updated_at": "2026-08-17T09:02:25-04:00",
-      "last_change": "Replaced B006-2 with B006-3, retained the same Discord channel ID, recorded live Gia Huy admin evidence and reactivated this app explicitly."
+      "validation": "B004-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; 12 accepted roles resolved to 12 names; Sheet has 12 NO APP=B004-3 rows, 12/12 present, identity_blocked_rows=0 and zero cutover writes; Discord channel name b004-3-app-status confirmed by GET.",
+      "updated_at": "2026-08-17T09:36:20-04:00",
+      "last_change": "Replaced B004-2 with B004-3, changed owner/admin to Beatriz Santos, normalized the same Discord channel name and stored expected_sheet_roles=12."
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -9972,9 +9972,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 59121,
-      "md5": "99b5260f7a37c53c803350c3e8ad16da",
-      "modified_at": "2026-08-17T09:08:45-04:00"
+      "size_bytes": 59640,
+      "md5": "d05c528aba85945350c2524af03c1e21",
+      "modified_at": "2026-08-17T09:42:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -10140,9 +10140,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 24502,
-      "md5": "ea96a14255cf1ae3e773d1b3d97a76c2",
-      "modified_at": "2026-08-17T09:01:32-04:00"
+      "size_bytes": 25271,
+      "md5": "0a3a7fdf18ffdc79221cb3cae82f926a",
+      "modified_at": "2026-08-17T09:35:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
