@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-08-13T00:58:56-04:00",
+  "updated_at": "2026-08-17T08:55:28-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1537313147378073621",
+  "source_message_id": "1538892880783876200",
   "guild_id": "1185714635991679006",
   "apps": [
     {"app":"B001-2","channel_id":"1521251196294135858","channel_name":"b001-2-app-status","admin":"Adriano Alves","onepassword_item_title":"BOT B001-2 Token - Adriano Alves"},
@@ -11,7 +11,7 @@
     {"app":"B003-2","channel_id":"1521251246860931223","channel_name":"b003-2-app-status","admin":"Reginaldo Novaes Santiago","onepassword_item_title":"BOT B003-2 Token - Reginaldo Novaes Santiago"},
     {"app":"B004-2","channel_id":"1521251334496456815","channel_name":"b004-2-app-status","admin":"Om Gendut","onepassword_item_title":"BOT B004-2 Token - Om Gendut"},
     {"app":"B005-3","channel_id":"1521251961662341160","channel_name":"b005-3-app-status","admin":"Vitoria Souza Duarte","onepassword_item_title":"BOT B005-3 Token - Vitoria Souza Duarte"},
-    {"app":"B006-2","channel_id":"1521252068319297666","channel_name":"b006-2-app-status","admin":"Crislaine Oliveira","onepassword_item_title":"BOT B006-2 Token - Crislaine Oliveira"},
+    {"app":"B006-3","channel_id":"1521252068319297666","channel_name":"b006-2-app-status","admin":"Gia Huy","onepassword_item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins"},
     {"app":"B007","channel_id":"1520510823426949313","channel_name":"b007-app-status","admin":"Dek Fiyan","onepassword_item_title":"BOT B007 Token - Dek Fiyan"},
     {"app":"B008-2","channel_id":"1521252172929564744","channel_name":"b008-2-app-status","admin":"Lance David","onepassword_item_title":"BOT B008-2 Token - Lance David"},
     {"app":"B009-2","channel_id":"1521252284623884288","channel_name":"b009-2-app-status","admin":"Leticia Silva","onepassword_item_title":"BOT B009-2 Token - Leticia Silva"},
@@ -22,8 +22,8 @@
   ],
   "discord_readback": {
     "channels_found": 13,
-    "names_matching_canonical_map": 13,
-    "reported_label_aliases": {},
+    "names_matching_canonical_map": 12,
+    "reported_label_aliases": {"B006-3":"b006-2-app-status"},
     "confirmed_correction": "B003-3 was a typing error; B003-2 is canonical",
     "confirmation_message_id": "1537317279405047809"
   },
@@ -34,28 +34,29 @@
     "credential_runtime_pass": 13,
     "credential_runtime_fail": [],
     "metadata_drift": [],
-    "credential_drift": [],
+    "credential_drift": [{"app":"B006-3","item_title_profile":"Isidoro Cristina Barbosa Martins","live_token_profile":"Gia Huy","operational_admin":"Gia Huy","status":"non_blocking_title_drift"}],
     "validated_corrections": [
       {"app":"B002-2","field":"app_name","result":"PASS","message_id":"1537317279405047809"},
-      {"app":"B013-2","token_profile_meta_name":"Alessandra Lopes","operational_profile_label":"PERFIL NOVO - 192","debug_token":"PASS","app_id_match":true,"role_membership":true,"message_id":"1537317483323850782"}
+      {"app":"B013-2","token_profile_meta_name":"Alessandra Lopes","operational_profile_label":"PERFIL NOVO - 192","debug_token":"PASS","app_id_match":true,"role_membership":true,"message_id":"1537317483323850782"},
+      {"app":"B006-3","item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins","app_name":"B006-3","app_metadata_http":200,"roles_http":200,"roles_count":1,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Gia Huy","source_message_id":"1538892880783876200"}
     ],
     "secrets_exposed": false,
     "report":"reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "blocked_pending_full_acceptance_reconciliation",
+    "status": "partial_explicit_reactivation_b006_3",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1537324393519259718",
-    "planned_check": "2026-08-14 America/New_York after managers accept all Meta app invitations",
+    "source_message_id": "1538892880783876200",
+    "planned_check": "B006-3 reativado imediatamente por instrução explícita; reconciliação ampla permanece separada",
     "required_before_reactivation": [
       "fresh /roles readback for all 13 apps",
       "exact reconciliation against the current Sheet order and assignments",
       "zero missing expected admins",
       "zero unexpected operational admins after owner exceptions",
       "all app/token/debug checks healthy",
-      "explicitly preserve B006-2/B007/B013-2 routing semantics"
+      "explicitly preserve B006-3/B007/B013-2 routing semantics"
     ],
-    "reactivate_only_when": "100 percent reconciled",
-    "current_runtime_note": "generic role monitor remains scheduled for silent checks with all generic app-channel deliveries manually suppressed; B013 dedicated cron remains paused"
+    "reactivate_only_when": "explicit Rodolfo instruction or 100 percent reconciled",
+    "current_runtime_note": "B006-3 generic role monitoring reactivated; B004-2 remains manually paused."
   }
 }
