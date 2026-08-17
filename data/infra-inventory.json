@@ -1499,39 +1499,37 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 87140,
-      "modified_at": "2026-08-07T23:33:56-04:00",
-      "sha256": "64af7f19190a3af7bb69459639008afd17517644aa50314e1bf287918252f60b",
-      "description": "Generic B001-B010 monitor using APP PROVISORIO/N with uncapped full Graph roles pagination, identity resolution and fail-closed Sheet reconciliation.",
-      "validation": "bash/Python syntax PASS; B005-2 live pagination returned 135 raw roles across all pages with 135/135 resolved; confirmed UI-only Lollo reconciliation guarded by exact raw-ID signature; fixture hidden/native/drift PASS; full production rerun updated=false, alerts_sent=0, identity_blocked_rows=0.",
-      "updated_at": "2026-08-07T23:44:58-04:00",
-      "source_report": "REPORT-INFRA Zeus B005-2 full roles pagination and Sheet X repair 2026-08-07",
-      "last_change": "2026-08-07: removed first-page-only role cap, followed every paging.next, repaired false X markers from column N assignments and added fail-closed UI/API visibility reconciliation.",
-      "backup": "/root/mgs-agent/backups/meta-app-roles-pagination-20260807-232008/meta-app-roles-watch.sh.before",
-      "state_backup": "/root/mgs-agent/backups/meta-app-roles-pagination-20260807-232008/meta-app-role-monitor-state.before-production.json",
-      "sheet_backup": "/root/mgs-agent/backups/meta-app-roles-pagination-20260807-232008/sheet-A-N-before.json"
+      "size_bytes": 88044,
+      "modified_at": "2026-08-17T08:55:25-04:00",
+      "sha256": "9b0e1daeb3c5137e6620b73b4ce526975496d4fe2998b5019333c4c5c2b3a15a",
+      "description": "Generic Meta app roles monitor using the canonical registry, APP PROVISORIO/N Sheet routing, identity resolution and fail-closed reconciliation.",
+      "validation": "bash and embedded-Python syntax PASS; isolated B006-3 run returned all four checks HTTP 200, token valid, current_count=1, consecutive_errors=0 and alerts_sent=0; production scoped run rc=0 migrated stale B006-2 state to B006-3 with B004-2 remaining paused.",
+      "updated_at": "2026-08-17T09:02:25-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-3 Meta monitor cutover 2026-08-17",
+      "last_change": "2026-08-17: migrated canonical replacement state B006-2 to B006-3 after Rodolfo updated the 1Password item and authorized reactivation.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0063-cutover-20260817-085508/meta-app-roles-watch.sh.before",
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0063-cutover-20260817-085508/meta-app-role-monitor-state.json.before"
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 381,
-      "modified_at": "2026-08-17T08:43:52-04:00",
-      "sha256": "2ca0ab77296f25ee928137ac0e4e6abf030ed0d37c998c9cfa4d86ae05836f31",
+      "size_bytes": 365,
+      "modified_at": "2026-08-17T08:56:25-04:00",
+      "sha256": "b5a49daba69141c74ff073a7de2dd156ff988447d027faa6d2539a5d13ff9d3e",
       "mode": "manual",
       "scope": [
-        "B004-2",
-        "B006-2"
+        "B004-2"
       ],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1538890597492854864",
-      "validation": "JSON/shell/embedded-Python PASS; isolated actual post_webhook pause gate returned 204 without network; production scoped run rc=0 read back exact manual apps B004-2/B006-2 and alerts_sent=0; Discord latest IDs unchanged in both app channels.",
-      "updated_at": "2026-08-17T08:45:24-04:00",
-      "source_report": "REPORT-INFRA Zeus B004-2/B006-2 temporary Meta monitor pause 2026-08-17",
-      "description": "Canonical manual app-channel alert pause for B004-2 and B006-2 until Rodolfo explicitly re-enables or replacement apps are configured.",
-      "last_change": "2026-08-17: paused B004-2 and B006-2 app-scoped deliveries after live Graph code 190 confirmed both applications deleted; unaffected Meta apps remain monitored."
+      "authorization_message_id": "1538892880783876200",
+      "validation": "JSON PASS; production B006-3 scoped run read back only B004-2 paused, B006-3 unpaused, alerts_sent=0 and errors_count=0.",
+      "updated_at": "2026-08-17T09:02:25-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-3 Meta monitor cutover 2026-08-17",
+      "description": "Canonical manual app-channel alert pause; only B004-2 remains paused after the B006-3 replacement was reactivated.",
+      "last_change": "2026-08-17: removed retired B006-2 from the pause after B006-3 credentials and Graph checks passed; B004-2 remains paused."
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -3887,16 +3885,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 27159,
-      "modified_at": "2026-08-06T23:22:36-04:00",
-      "sha256": "f9501cd5dfa528f2c023b572692ca23fb2999cef7287821cdf82f18e8e5d5aae",
+      "size_bytes": 29983,
+      "modified_at": "2026-08-17T08:59:45-04:00",
+      "sha256": "55887ace6825420cb39723931ec93d5c28e6aaefe884dff7ad5fb447360141f7",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Manual/until pause modes and operator override rule documented.",
-      "validation": "Runtime/versioned SHA-256 match.",
-      "updated_at": "2026-08-06T23:32:48-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app Sheet column N and B005-2 identity fix 2026-08-06"
+      "description": "B006-3 replacement, isolated-validation pitfall and live owner/role evidence documented.",
+      "validation": "Runtime/versioned SHA-256 match; canonical knowledge source exists and registry validation PASS.",
+      "updated_at": "2026-08-17T09:02:25-04:00",
+      "source_report": "REPORT-INFRA Zeus B006-3 Meta monitor cutover 2026-08-17"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -6097,20 +6095,20 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 4398,
-      "modified_at": "2026-08-13T00:59:05-04:00",
-      "sha256": "54d0c8ba0df30a503bfdb2bd9e5fcee72492445fa5f4c514e5fd46f1025102bd",
+      "size_bytes": 4882,
+      "modified_at": "2026-08-17T08:56:12-04:00",
+      "sha256": "941dd6931ef0e984ad117a642177b8e8976133395e438edc382e9db54dfbc39b",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Meta apps reactivation gate 2026-08-13",
+      "source_report": "REPORT-INFRA Zeus B006-3 Meta monitor cutover 2026-08-17",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1537324393519259718",
+      "authorization_message_id": "1538892880783876200",
       "scope": [
         "B001-2",
         "B002-2",
         "B003-2",
         "B004-2",
         "B005-3",
-        "B006-2",
+        "B006-3",
         "B007",
         "B008-2",
         "B009-2",
@@ -6119,9 +6117,9 @@
         "B012",
         "B013-2"
       ],
-      "validation": "Readback: reactivation blocked until managers accept all invitations and fresh 13-app /roles-vs-Sheet reconciliation is 100%; no cron resumed.",
-      "updated_at": "2026-08-13T00:59:38-04:00",
-      "last_change": "Added mandatory 100% acceptance/reconciliation gate before 13-app monitor reactivation."
+      "validation": "B006-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; one live admin role; Sheet readback has 15 NO APP=B006-3 rows and zero writes.",
+      "updated_at": "2026-08-17T09:02:25-04:00",
+      "last_change": "Replaced B006-2 with B006-3, retained the same Discord channel ID, recorded live Gia Huy admin evidence and reactivated this app explicitly."
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -9976,9 +9974,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 58672,
-      "md5": "a9bf215e8f0022dcd78cb93a1971c11f",
-      "modified_at": "2026-08-17T08:35:08-04:00"
+      "size_bytes": 59105,
+      "md5": "6d4fc05e774d5679cf4eb692d150acde",
+      "modified_at": "2026-08-17T09:01:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -10144,9 +10142,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 23690,
-      "md5": "a80f45980a54c7dfff481e83549bfb0e",
-      "modified_at": "2026-08-13T00:22:34-04:00"
+      "size_bytes": 24502,
+      "md5": "ea96a14255cf1ae3e773d1b3d97a76c2",
+      "modified_at": "2026-08-17T09:01:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
