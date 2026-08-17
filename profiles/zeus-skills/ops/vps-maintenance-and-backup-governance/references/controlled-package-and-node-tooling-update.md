@@ -68,6 +68,8 @@ Include:
 - a non-secret pre-state JSON with Node/npm/Corepack, exact package versions, service states/PIDs, reboot marker, and authorization message ID;
 - the exact previous vendor `.deb` downloaded while it is still available.
 
+If the installed vendor version is absent from the current APT index, try one bounded recovery before falling back to a payload archive: obtain the current candidate's pool URI with `apt-get --print-uris download package=candidate`, derive the exact prior-version URI only when the repository naming pattern is unambiguous, require a successful bounded fetch, and validate the downloaded artifact with `dpkg-deb -f previous.deb Version` against the installed version. Never trust URL substitution alone or print credential-bearing repository URLs. If the historical artifact is unavailable or its metadata differs, use the strict payload fallback below.
+
 If the previous `.deb` is no longer published and the installed payload must be archived from `dpkg-query -L`, treat that list as untrusted archive input. It commonly contains directory sentinels such as `/.`; passing the raw list to `tar -C /` can archive the entire root filesystem. Build the payload list programmatically and require every entry to be a regular file or symlink. Explicitly reject blank paths, `.`, `/`, `./`, `../`, and every directory before invoking `tar`. Validate the resulting member list against the package manifest and cap/check expected bytes before accepting it as rollback evidence. If an accidental archive exceeds the expected package footprint, stop immediately, preserve/quarantine it without deletion, re-check disk, and rebuild from a strict allowlist.
 
 Generate hashes in shell, then validate:
@@ -122,7 +124,8 @@ Use the manual verified-tarball replacement path only if the standard self-updat
 
 Run `needrestart -b` after the package work.
 
-- Kernel current and no `/var/run/reboot-required` means no reboot is required.
+- Treat `/var/run/reboot-required` as supporting evidence, not the sole reboot gate. Some valid kernel transactions install the expected kernel without creating that marker. Parse the named `NEEDRESTART-KCUR`, `NEEDRESTART-KEXP`, and `NEEDRESTART-KSTA` fields: when current and expected kernels differ and `KSTA=3`, the reboot phase remains required even if the marker is absent. Record the discrepancy explicitly and validate the new kernel after boot; do not rerun the package transaction merely to manufacture a marker.
+- Kernel current and no `/var/run/reboot-required` means no reboot is required only when `NEEDRESTART-KCUR` and `NEEDRESTART-KEXP` also agree.
 - A deferred unrelated service such as `systemd-logind.service` is a **documented residual**, not permission to restart it.
 - If that service was not named in the confirmed scope, report it and obtain separate authorization before restart—especially when SSH/user sessions may be affected.
 - Do not call a clean package transaction failed solely because a separate deferred service remains.

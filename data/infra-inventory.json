@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T08:23:42-04:00",
+    "updated_at": "2026-08-17T08:35:09-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -15,23 +15,23 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.54-master",
+          "version": "4.3.56-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect",
-          "version": "5.2.55-master",
+          "version": "5.2.60-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect-autodetect",
-          "version": "5.2.55-master",
+          "version": "5.2.60-master",
           "status": "installed"
         }
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-08-02T19:42:25-04:00",
+      "updated_at": "2026-08-17T12:34:57.341308+00:00",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "authorization_message_ids": [
@@ -48,6 +48,12 @@
         "date": "2026-07-10",
         "result": "upgraded and service active",
         "log": "/root/mgs-agent/logs/vps-update-20260710-001713.log"
+      },
+      "latest_maintenance_20260817": {
+        "authorization_message_id": "1538882878409019402",
+        "result": "PASS",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
+        "validated_at": "2026-08-17T12:34:57.341308+00:00"
       }
     },
     {
@@ -55,41 +61,11 @@
       "agent": "zeus",
       "manager": "apt/npm",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "packages_count": 23,
+      "packages_count": 40,
       "packages": [
         {
-          "name": "tzdata",
-          "version": "2026b-0ubuntu0.24.04.1",
-          "status": "installed"
-        },
-        {
-          "name": "curl",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
-        },
-        {
-          "name": "libcurl4t64",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
-        },
-        {
-          "name": "libcurl3t64-gnutls",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
-        },
-        {
-          "name": "monarx-agent",
-          "version": "4.3.54-master",
-          "status": "installed"
-        },
-        {
-          "name": "monarx-protect",
-          "version": "5.2.55-master",
-          "status": "installed"
-        },
-        {
-          "name": "monarx-protect-autodetect",
-          "version": "5.2.55-master",
+          "name": "1password-cli",
+          "version": "2.39.0-1",
           "status": "installed"
         },
         {
@@ -103,18 +79,43 @@
           "status": "installed"
         },
         {
-          "name": "python3-apport",
-          "version": "2.28.2-0ubuntu0.1",
+          "name": "corepack",
+          "version": "0.35.0",
           "status": "installed"
         },
         {
-          "name": "python3-problem-report",
-          "version": "2.28.2-0ubuntu0.1",
+          "name": "curl",
+          "version": "8.5.0-2ubuntu10.11",
           "status": "installed"
         },
         {
-          "name": "libheif1",
-          "version": "1.17.6-1ubuntu4.5",
+          "name": "fwupd",
+          "version": "2.0.20-1ubuntu2~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "krb5-locales",
+          "version": "1.20.1-6ubuntu2.8",
+          "status": "installed"
+        },
+        {
+          "name": "libcurl3t64-gnutls",
+          "version": "8.5.0-2ubuntu10.11",
+          "status": "installed"
+        },
+        {
+          "name": "libcurl4t64",
+          "version": "8.5.0-2ubuntu10.11",
+          "status": "installed"
+        },
+        {
+          "name": "libfwupd3",
+          "version": "2.0.20-1ubuntu2~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libgssapi-krb5-2",
+          "version": "1.20.1-6ubuntu2.8",
           "status": "installed"
         },
         {
@@ -128,22 +129,117 @@
           "status": "installed"
         },
         {
-          "name": "fwupd",
-          "version": "2.0.20-1ubuntu2~24.04.2",
+          "name": "libheif1",
+          "version": "1.17.6-1ubuntu4.5",
           "status": "installed"
         },
         {
-          "name": "libfwupd3",
-          "version": "2.0.20-1ubuntu2~24.04.2",
+          "name": "libk5crypto3",
+          "version": "1.20.1-6ubuntu2.8",
           "status": "installed"
         },
         {
-          "name": "plymouth",
-          "version": "24.004.60-1ubuntu7.2",
+          "name": "libkrb5-3",
+          "version": "1.20.1-6ubuntu2.8",
+          "status": "installed"
+        },
+        {
+          "name": "libkrb5support0",
+          "version": "1.20.1-6ubuntu2.8",
           "status": "installed"
         },
         {
           "name": "libplymouth5",
+          "version": "24.004.60-1ubuntu7.2",
+          "status": "installed"
+        },
+        {
+          "name": "linux-headers-6.8.0-138",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-headers-6.8.0-138-generic",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-headers-generic",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-headers-virtual",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-image-6.8.0-138-generic",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-image-virtual",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-libc-dev",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-modules-6.8.0-138-generic",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-tools-6.8.0-138",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-tools-6.8.0-138-generic",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-tools-common",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "linux-virtual",
+          "version": "6.8.0-138.138",
+          "status": "installed"
+        },
+        {
+          "name": "monarx-agent",
+          "version": "4.3.54-master",
+          "status": "installed"
+        },
+        {
+          "name": "monarx-protect",
+          "version": "5.2.60-master",
+          "status": "installed"
+        },
+        {
+          "name": "monarx-protect-autodetect",
+          "version": "5.2.60-master",
+          "status": "installed"
+        },
+        {
+          "name": "nodejs",
+          "version": "22.23.2-1nodesource1",
+          "status": "installed"
+        },
+        {
+          "name": "npm",
+          "version": "12.0.2",
+          "status": "installed"
+        },
+        {
+          "name": "plymouth",
           "version": "24.004.60-1ubuntu7.2",
           "status": "installed"
         },
@@ -153,29 +249,24 @@
           "status": "installed"
         },
         {
-          "name": "corepack",
-          "version": "0.35.0",
+          "name": "python3-apport",
+          "version": "2.28.2-0ubuntu0.1",
           "status": "installed"
         },
         {
-          "name": "npm",
-          "version": "12.0.2",
+          "name": "python3-problem-report",
+          "version": "2.28.2-0ubuntu0.1",
           "status": "installed"
         },
         {
-          "name": "1password-cli",
-          "version": "2.38.1-1",
-          "status": "installed"
-        },
-        {
-          "name": "nodejs",
-          "version": "22.23.2-1nodesource1",
+          "name": "tzdata",
+          "version": "2026b-0ubuntu0.24.04.1",
           "status": "installed"
         }
       ],
       "node_runtime": "v22.23.2",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
-      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260802-174737",
+      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
       "validation": {
         "apt_upgradable": 0,
         "npm_outdated_global": 0,
@@ -186,13 +277,13 @@
         "security_services": "monarx-agent active; cron active",
         "reboot_required": false,
         "journal_errors_since_boot": 0,
-        "needrestart_kernel": "current 6.8.0-137-generic",
+        "needrestart_kernel": "current 6.8.0-138-generic",
         "needrestart_deferred_service": null,
         "needrestart_sessions": "none reported post-reboot",
-        "rollback_integrity": "PASS; SHA256SUMS present; npm/corepack tar; old DEBs; 1Password payload/metadata",
+        "rollback_integrity": "PASS; SHA256SUMS; 14 previous DEBs; npm/corepack archive",
         "ubuntu_pro": "attached; esm-apps pending=0; livepatch=nothing-to-apply"
       },
-      "updated_at": "2026-08-11T12:45:08.033762+00:00",
+      "updated_at": "2026-08-17T12:34:57.341308+00:00",
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
@@ -220,6 +311,16 @@
         "kernel": "6.8.0-137-generic",
         "validated_at": "2026-08-11T12:45:08.033762+00:00",
         "artifact": "/root/.hermes/secure-backups/vps-maintenance/reboot-20260811T123633Z/post-reboot-result.json"
+      },
+      "last_maintenance_20260817": {
+        "requested_by": "Rodolfo Mattei",
+        "authorization_message_id": "1538882878409019402",
+        "scope": "14 upgrades + 6 new kernel packages + controlled reboot",
+        "result": "PASS",
+        "kernel": "6.8.0-138-generic",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json",
+        "validated_at": "2026-08-17T12:34:57.341308+00:00"
       }
     },
     {
@@ -283,7 +384,7 @@
       },
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536712042700873818",
-      "updated_at": "2026-08-11T12:45:08.033762+00:00",
+      "updated_at": "2026-08-17T12:34:57.341308+00:00",
       "packages_count": 24,
       "packages": [
         {
@@ -445,6 +546,15 @@
         "kernel": "6.8.0-137-generic",
         "validated_at": "2026-08-11T12:45:08.033762+00:00",
         "artifact": "/root/.hermes/secure-backups/vps-maintenance/reboot-20260811T123633Z/post-reboot-result.json"
+      },
+      "last_reboot_20260817": {
+        "authorization_message_id": "1538882878409019402",
+        "result": "PASS",
+        "boot_id_before": "dc446ca6-4f03-4cc6-99e1-096660685c3f",
+        "boot_id_after": "91f43384-0696-4629-b6e4-277cc9bd9e8e",
+        "kernel": "6.8.0-138-generic",
+        "validated_at": "2026-08-17T12:34:57.341308+00:00",
+        "artifact": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json"
       }
     }
   ],
@@ -6147,7 +6257,7 @@
       "id": "vps-reboot-validator-20260817",
       "type": "ephemeral-systemd-validator",
       "agent": "zeus",
-      "status": "prepared_enabled",
+      "status": "cleaned_after_validation",
       "authorization_message_id": "1538882878409019402",
       "source_thread_id": "1538878021455319140",
       "unit": "mgs-vps-post-reboot-20260817.service",
@@ -6155,7 +6265,11 @@
       "pre_state": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/pre-state.json",
       "transaction": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/apt-transaction.json",
       "purpose": "Validate kernel 6.8.0-138, exact packages, gateways, Ubuntu Pro/Livepatch and governance; self-remove after one execution.",
-      "updated_at": "2026-08-17T12:23:42.424129+00:00"
+      "updated_at": "2026-08-17T12:23:42.424129+00:00",
+      "overall": "PASS",
+      "unit_present": false,
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json",
+      "validated_at": "2026-08-17T12:34:57.341308+00:00"
     }
   ],
   "profile_skill_references": [
@@ -9870,15 +9984,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 58602,
-      "md5": "746e5fa3457d40e741d6837e170e10eb",
-      "modified_at": "2026-08-17T08:12:09-04:00"
+      "size_bytes": 58672,
+      "md5": "a9bf215e8f0022dcd78cb93a1971c11f",
+      "modified_at": "2026-08-17T08:35:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 24339,
-      "md5": "f5b5755d4c59a7a4eafcb253bbcfe3a1",
-      "modified_at": "2026-08-17T08:22:01-04:00"
+      "md5": "7bc0d9168a19d269036dc6eb3a15ceee",
+      "modified_at": "2026-08-17T08:27:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -9895,8 +10009,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "044dd793d50bb7c976514ee1dbbf968d",
-      "modified_at": "2026-08-17T08:12:05-04:00"
+      "md5": "cfdb4d24eac2789ef7c1acd573799389",
+      "modified_at": "2026-08-17T08:27:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -9913,8 +10027,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 26729,
-      "md5": "ae2960a53b18bead91c446c16bf14876",
-      "modified_at": "2026-08-17T08:18:20-04:00"
+      "md5": "9a54079c52542a1458ae81841a76160e",
+      "modified_at": "2026-08-17T08:27:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -9925,8 +10039,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 495,
-      "md5": "11abacf4e5c9212117116356abd0afae",
-      "modified_at": "2026-08-17T08:15:02-04:00"
+      "md5": "9ae855a0ca384e6e5dc3539b0760710d",
+      "modified_at": "2026-08-17T08:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -9973,8 +10087,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 1658,
-      "md5": "481ca63687e9c632f700f5f3ab3fdeb8",
-      "modified_at": "2026-08-17T08:14:01-04:00"
+      "md5": "b4cc9ea8424bb38aa1a7e84ad6adbd75",
+      "modified_at": "2026-08-17T08:24:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -9985,20 +10099,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 43374,
-      "md5": "2225c55ad372f1e170f2c18918811eae",
-      "modified_at": "2026-08-17T08:20:02-04:00"
+      "md5": "65b5801c6f794e53266b0d21ac6bf0ea",
+      "modified_at": "2026-08-17T08:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 37385,
-      "md5": "e480c364f1929f15950aa5f3dc9bf470",
-      "modified_at": "2026-08-17T08:23:01-04:00"
+      "md5": "71f55a06834e30429664f75a2e4d7ed9",
+      "modified_at": "2026-08-17T08:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 355,
-      "md5": "8437949d7bca0fc34a2ae9f3b3e7d6e2",
-      "modified_at": "2026-08-17T08:23:01-04:00"
+      "size_bytes": 354,
+      "md5": "bd3f2df59a72351009e76777a41fca6c",
+      "modified_at": "2026-08-17T08:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -10032,9 +10146,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 442032,
-      "md5": "95a1dd877d4dbee2f1e0c4c21a50636d",
-      "modified_at": "2026-08-17T08:23:42-04:00"
+      "size_bytes": 445798,
+      "md5": "5bf332e763a1dd3aa3da7c1590576b40",
+      "modified_at": "2026-08-17T08:35:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -10086,9 +10200,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 84637,
-      "md5": "f688abd28c025c8a1adead12c3d66e7d",
-      "modified_at": "2026-08-17T08:23:16-04:00"
+      "size_bytes": 84678,
+      "md5": "07809571c725219ce7def54dd3625bd7",
+      "modified_at": "2026-08-17T08:29:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -10105,8 +10219,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7097,
-      "md5": "03a1b6ff10f21fadfa965fe937d7fc46",
-      "modified_at": "2026-08-17T07:24:45-04:00"
+      "md5": "18353453bbfd9b22c2e3ffce7a944ef7",
+      "modified_at": "2026-08-17T08:24:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -10171,8 +10285,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 223009,
-      "md5": "3ba0dc7274b39355be13ba2fd77d58d7",
-      "modified_at": "2026-08-17T08:14:16-04:00"
+      "md5": "50152d96cdb22d8a4cdc73bd6ede870c",
+      "modified_at": "2026-08-17T08:29:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -10232,7 +10346,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "84785bae56fc39d505aa1dfb4ecdbb4c",
-      "modified_at": "2026-08-17T08:21:01-04:00"
+      "modified_at": "2026-08-17T08:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -10242,9 +10356,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17325,
-      "md5": "88c4828a0988c8a4c3b590152ec9bed9",
-      "modified_at": "2026-08-17T07:24:04-04:00"
+      "size_bytes": 17448,
+      "md5": "33785f7b3d29f0154ffe988763bf29a7",
+      "modified_at": "2026-08-17T08:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -10272,9 +10386,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2112,
-      "md5": "8efe2466dde7d98bc2ce301d34ed34b9",
-      "modified_at": "2026-08-17T08:20:03-04:00"
+      "size_bytes": 2263,
+      "md5": "91f0c0baf8e44d44464396365d18da81",
+      "modified_at": "2026-08-17T08:35:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
