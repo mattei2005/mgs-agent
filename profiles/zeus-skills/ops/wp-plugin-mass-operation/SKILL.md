@@ -25,6 +25,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **SEÇÃO D — SFTP para sites fora do RunCloud → Exceção Wantabrand — MonetizeMore/M2** → `references/route-pack-04.md`
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
+- **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
 
 ## Context-efficiency guardrails
 
