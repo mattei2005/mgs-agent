@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T14:49:16-04:00",
+    "updated_at": "2026-08-17T15:26:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6255,10 +6255,36 @@
       "market": "US-CC-EN",
       "authorized_message_id": "1538988150452650114",
       "applied_at": "2026-08-17T15:20:28-04:00",
-      "drip_pool_ids": [393, 1066, 1067, 1068, 1069, 1070],
-      "broadcast_pool_ids": [394, 1062, 1063, 1064, 1065],
-      "created_pool_ids": [1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070],
-      "updated_pool_ids": [393, 394],
+      "drip_pool_ids": [
+        393,
+        1066,
+        1067,
+        1068,
+        1069,
+        1070
+      ],
+      "broadcast_pool_ids": [
+        394,
+        1062,
+        1063,
+        1064,
+        1065
+      ],
+      "created_pool_ids": [
+        1062,
+        1063,
+        1064,
+        1065,
+        1066,
+        1067,
+        1068,
+        1069,
+        1070
+      ],
+      "updated_pool_ids": [
+        393,
+        394
+      ],
       "deleted_pool_ids": [],
       "routes": {
         "drip": 30,
@@ -6288,10 +6314,36 @@
       "market": "GB-CC-EN",
       "authorized_message_id": "1538988259290390539",
       "applied_at": "2026-08-17T15:20:28-04:00",
-      "drip_pool_ids": [697, 1075, 1076, 1077, 1078, 1079],
-      "broadcast_pool_ids": [698, 1071, 1072, 1073, 1074],
-      "created_pool_ids": [1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079],
-      "updated_pool_ids": [697, 698],
+      "drip_pool_ids": [
+        697,
+        1075,
+        1076,
+        1077,
+        1078,
+        1079
+      ],
+      "broadcast_pool_ids": [
+        698,
+        1071,
+        1072,
+        1073,
+        1074
+      ],
+      "created_pool_ids": [
+        1071,
+        1072,
+        1073,
+        1074,
+        1075,
+        1076,
+        1077,
+        1078,
+        1079
+      ],
+      "updated_pool_ids": [
+        697,
+        698
+      ],
       "deleted_pool_ids": [],
       "routes": {
         "drip": 30,
@@ -10461,9 +10513,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 62126,
-      "md5": "7b113bb7fe087e1c41e23cdd9942d9a9",
-      "modified_at": "2026-08-17T14:32:43-04:00"
+      "size_bytes": 62125,
+      "md5": "306a901f0cb043c3908d01f06ac7182a",
+      "modified_at": "2026-08-17T15:26:37-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
