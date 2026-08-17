@@ -1,0 +1,88 @@
+{
+  "publisher": "digital-trust_zytiva",
+  "routing_http": 201,
+  "publisher_pool_count": 6,
+  "title": "Routing > digital-trust > zytiva",
+  "final_url": "https://app.smartbiddingdigital.com/company/digital-trust/zytiva/routing",
+  "url_checks": [
+    {
+      "url": "https://zytiva.com/rec-gb-cc-chase-credit-card",
+      "status": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-chase-credit-card/"
+    },
+    {
+      "url": "https://zytiva.com/rec-gb-cc-aib-visa-gold",
+      "status": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-aib-visa-gold/"
+    },
+    {
+      "url": "https://zytiva.com/rec-gb-cc-fluid-credit-card-the-flexible",
+      "status": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-fluid-credit-card-the-flexible/"
+    },
+    {
+      "url": "https://zytiva.com/rec-gb-cc-santander-all-in-one",
+      "status": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-santander-all-in-one/"
+    },
+    {
+      "url": "https://zytiva.com/rec-gb-cc-aib-options-two-credit-card",
+      "status": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-aib-options-two-credit-card/"
+    }
+  ],
+  "target_pools": [
+    {
+      "ID": 605,
+      "NAME": "zy-gb-cc-en-drip",
+      "SOURCE": "FACEBOOK",
+      "MEDIUM": ".*-d$",
+      "LANGUAGE": "EN",
+      "route_count": 30
+    },
+    {
+      "ID": 606,
+      "NAME": "zy-gb-cc-en-mct broadcast",
+      "SOURCE": "MCT",
+      "MEDIUM": "",
+      "LANGUAGE": "EN",
+      "route_count": 23
+    }
+  ],
+  "operations": {
+    "FACEBOOK": [
+      [
+        "facebook_gb_cc_chase-d_rec"
+      ],
+      [
+        "facebook_gb_cc_aib-visa-d_rec"
+      ],
+      [
+        "facebook_gb_cc_fluid-d_rec"
+      ],
+      [
+        "facebook_gb_cc_santander-d_rec"
+      ],
+      [
+        "facebook_gb_cc_options-d_rec"
+      ]
+    ],
+    "MCT": [
+      [
+        "mct_gb_cc_chase_rec"
+      ],
+      [
+        "mct_gb_cc_aib-visa_rec"
+      ],
+      [
+        "mct_gb_cc_fluid_rec"
+      ],
+      [
+        "mct_gb_cc_santander_rec"
+      ],
+      [
+        "mct_gb_cc_options_rec"
+      ]
+    ]
+  }
+}

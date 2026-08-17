@@ -6366,6 +6366,39 @@
       "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
     },
     {
+      "id": "zytiva-gb-cc-en-smart-routing-five-url-20260817",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "zytiva",
+      "market": "GB-CC-EN",
+      "authorized_message_id": "1539013270592290837",
+      "applied_at": "2026-08-17T16:52:40-04:00",
+      "drip_pool_ids": [605, 1084, 1085, 1086, 1087, 1088],
+      "broadcast_pool_ids": [606, 1080, 1081, 1082, 1083],
+      "created_pool_ids": [1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088],
+      "updated_pool_ids": [605, 606],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://zytiva.com/rec-gb-cc-chase-credit-card",
+        "https://zytiva.com/rec-gb-cc-aib-visa-gold",
+        "https://zytiva.com/rec-gb-cc-fluid-credit-card-the-flexible",
+        "https://zytiva.com/rec-gb-cc-santander-all-in-one",
+        "https://zytiva.com/rec-gb-cc-aib-options-two-credit-card"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260817T165045-0400-zytiva-gb-cc-en-five-url-pools",
+      "summary_sha256": "fdd75c19c4e906b796a95e16ba096319a3c90c2fe327d9beebf43a4863e30369",
+      "readback_sha256": "522798aa00f3e880c5d497d54352e118a78a40e7412c073b9cba7b89682b12dd",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
+    },
+    {
       "id": "vps-reboot-validator-20260817",
       "type": "ephemeral-systemd-validator",
       "agent": "zeus",
