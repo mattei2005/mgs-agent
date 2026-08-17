@@ -45,8 +45,8 @@ Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
-Scope          B001-B010 + B005-2 role/admin monitoring only. B013 is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
-Channels       B001 1521251196294135858; B002 1521251220130496723; B003 1521251246860931223; B004 1521251334496456815; B005-2 1521251961662341160; B006-2 1521252068319297666; B007 1520510823426949313; B008 1521252172929564744; B009 1521252284623884288; B010 1521252369331916902
+Scope          Registry-driven current B001-B010 replacement lineage, including B004-3/B005-3/B006-3. B013 is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
+Channels       B001-2 1521251196294135858; B002-2 1521251220130496723; B003-2 1521251246860931223; B004-3 1521251334496456815; B005-3 1521251961662341160; B006-3 1521252068319297666; B007 1520510823426949313; B008-2 1521252172929564744; B009-2 1521252284623884288; B010-2 1521252369331916902
 ```
 
 Use the Meta roles cron for B001–B010/B005-2. B013 remains in the 11-channel operating plan, but uses a separate slower route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`.
@@ -190,9 +190,9 @@ B001  #b001-app-rate-limit  1521251196294135858
 B013  #b013-app-status      1522830283240505385
 B002  #b002-app-rate-limit   1521251220130496723
 B003  #b003-app-rate-limit  1521251246860931223
-B004  #b004-app-rate-limit  1521251334496456815
-B005-2  #b005-app-rate-limit  1521251961662341160
-B006-2  #b006-app-rate-limit  1521252068319297666
+B004-3  #b004-3-app-status  1521251334496456815
+B005-3  #b005-3-app-status  1521251961662341160
+B006-3  #b006-2-app-status  1521252068319297666
 B007  #b007-app-rate-limit  1520510823426949313
 B008  #b008-app-rate-limit  1521252172929564744
 B009  #b009-app-rate-limit  1521252284623884288
