@@ -156,6 +156,40 @@ Nos sites externos Cliquet, um POST de `requests` com `code_block_h=:AI:...` ret
 
 Uma janela inicial de 6,5 s gerou falso negativo em sites com `window.load` tardio. Revalidar falhas por até 15 s antes de classificar como preloader preso. A aceitação final exige remoção do node ou failsafe visual completo, overflow do body visível e HTTP 200.
 
+## Pitfalls de rollout LoftLoader em portfólio
+
+### Gate Wantabrand/M2
+
+`wantabrand.com` usa MonetizeMore/M2/PubGuru. Mesmo quando o pedido disser “todos os não-JBF”, não alterar plugin/preloader nesse domínio sem Rodolfo confirmar explicitamente a inclusão. `finance.wantabrand.com` não herda automaticamente essa exceção e pode seguir o preset normal quando validado.
+
+### Import de logo precisa ser idempotente
+
+Nunca executar `wp media import` dentro de um bloco acumulado que possa ser reexecutado por domínio. Antes de importar:
+
+1. procurar attachment existente por título, filename e hash;
+2. reutilizar o ID/URL se já existir;
+3. manter a execução remota fora do loop que apenas constrói comandos;
+4. após timeout, reconciliar o estado live antes de retomar.
+
+No caso Autolendpro, um erro de indentação no orquestrador temporário reexecutou o bloco e criou attachments duplicados. O logo final ficou correto, mas a exclusão dos extras permanece sujeita à confirmação crítica de Rodolfo.
+
+### Tema externo sem `wp_footer`
+
+Em `finanzas.openzed.com`, o LoftLoader ficou ativo e com opções salvas, mas a home carregava CSS/body class sem emitir wrapper nem JS porque o tema não completava o hook necessário (`wp_footer`). Não editar o tema para forçar compatibilidade.
+
+Fallback validado:
+
+- manter LoftLoader ativo e configurado;
+- inserir pelo Header Code do Ad Inserter somente o HTML compatível `#loftloader-wrapper` com `pl-frame`, `end-no-animation`, logo oficial e `data-max-load-time="2000"`;
+- incluir script `data-no-optimize="1"` que adiciona `body.loaded` no `window.load` ou após 2 s;
+- ativar explicitamente o toggle `enable_manual_block_h` — salvar o código sem marcar esse checkbox não injeta nada;
+- usar Chromium/ACE e botão Save real para que `block-parameters-h` seja recalculado;
+- purgar WP Fastest Cache e exigir wrapper único, logo, CSS marker, `end-no-animation`, HTTP 200 e desaparecimento visual no browser.
+
+### Readback numérico do Customizer
+
+O Customizer pode devolver `2.0` como string mesmo quando o valor semântico é `2`. Validar `Number(value) === 2`, não igualdade textual rígida.
+
 ## Auditoria obrigatória
 
 1. Ler options reais via WP-CLI/REST.

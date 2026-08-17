@@ -373,12 +373,12 @@
     {
       "agent": "zeus",
       "id": "loftloader-rollout-20260817",
-      "next_step": "Auditar plugin, opções, logo e overlays; aplicar gate específico Wantabrand M2 antes de qualquer mudança.",
+      "next_step": "Rodolfo deve confirmar explicitamente inclusão de wantabrand.com/M2 e confirmar operação crítica de exclusão dos 6 attachments duplicados no Autolendpro; preservar attachment 119 em uso.",
       "objective": "Padronizar preloader LoftLoader nos 17 sites sem tema JBF usando logo oficial, fundo branco, no-animation e máximo 2s.",
       "source": "context/sites.md",
-      "state": "audit_started_17_non_jbf",
+      "state": "configured_validated_16_waiting_wantabrand_gate_and_duplicate_cleanup",
       "thread_id": "1538961042753851402",
-      "updated_at": "2026-08-17T22:00:04+00:00"
+      "updated_at": "2026-08-17T22:31:43+00:00"
     },
     {
       "agent": "zeus",
@@ -782,5 +782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T22:00:04+00:00"
+  "updated_at": "2026-08-17T22:31:43+00:00"
 }
