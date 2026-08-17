@@ -372,6 +372,16 @@
     },
     {
       "agent": "zeus",
+      "id": "loftloader-rollout-20260817",
+      "next_step": "Auditar plugin, opções, logo e overlays; aplicar gate específico Wantabrand M2 antes de qualquer mudança.",
+      "objective": "Padronizar preloader LoftLoader nos 17 sites sem tema JBF usando logo oficial, fundo branco, no-animation e máximo 2s.",
+      "source": "context/sites.md",
+      "state": "audit_started_17_non_jbf",
+      "thread_id": "1538961042753851402",
+      "updated_at": "2026-08-17T22:00:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-b0062-owner-crislaine-oliveira-20260730",
       "next_step": "Evitar novas chamadas Meta até a janela de quota baixar: X-App-Usage estava em 98% no snapshot live. Pendência separada: App Secret exposto aguarda confirmação crítica.",
       "objective": "Alterar owner do B006-2 para Crislaine Oliveira, preservar suas páginas e validar alerta real com token atualizado.",
@@ -772,5 +782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T21:40:38+00:00"
+  "updated_at": "2026-08-17T22:00:04+00:00"
 }
