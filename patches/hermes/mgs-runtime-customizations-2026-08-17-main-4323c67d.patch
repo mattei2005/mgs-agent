@@ -5089,6 +5089,41 @@ index e3e5a39ff..39dd54d6e 100644
  
  
  @pytest.mark.asyncio
+diff --git a/tests/gateway/test_discord_split_cap.py b/tests/gateway/test_discord_split_cap.py
+index 05f0f6b24..f72f4cd72 100644
+--- a/tests/gateway/test_discord_split_cap.py
++++ b/tests/gateway/test_discord_split_cap.py
+@@ -80,7 +80,7 @@ class TestSendCap:
+         adapter = _make_adapter()
+         sends = []
+ 
+-        async def fake_send(*, content, reference=None):
++        async def fake_send(*, content, reference=None, **kwargs):
+             sends.append(content)
+             return SimpleNamespace(id=9000 + len(sends))
+ 
+@@ -104,7 +104,7 @@ class TestForumCap:
+         adapter = _make_adapter()
+         thread_sends = []
+ 
+-        async def fake_thread_send(*, content):
++        async def fake_thread_send(*, content, **kwargs):
+             thread_sends.append(content)
+             return SimpleNamespace(id=8000 + len(thread_sends))
+ 
+@@ -137,10 +137,10 @@ class TestEditOverflowCap:
+         edits = []
+         sends = []
+ 
+-        async def fake_edit(*, content):
++        async def fake_edit(*, content, suppress=None):
+             edits.append(content)
+ 
+-        async def fake_send(*, content, reference=None):
++        async def fake_send(*, content, reference=None, **kwargs):
+             sends.append(content)
+             return SimpleNamespace(id=9000 + len(sends))
+ 
 diff --git a/tests/gateway/test_discord_thread_auto_add_by_channel.py b/tests/gateway/test_discord_thread_auto_add_by_channel.py
 new file mode 100644
 index 000000000..4e7f8b47a
