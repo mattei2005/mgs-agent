@@ -652,6 +652,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-maintenance-20260817",
+      "next_step": "Congelar versões exatas, criar rollback e instalar somente a transação autorizada",
+      "objective": "Atualizar 14 pacotes e 6 dependências de kernel, reiniciar para 6.8.0-138 e validar; Hermes permanece inalterado",
+      "source": "discord:1538878021455319140#1538882878409019402",
+      "state": "in_progress: autorização crítica recebida; congelando transação e rollback",
+      "thread_id": "1538878021455319140",
+      "updated_at": "2026-08-17T12:12:09+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-reboot-20260811-pro",
       "next_step": "Nenhum; reboot encerrado.",
       "objective": "Reiniciar a VPS após Ubuntu Pro/ESM e validar todos os serviços.",
@@ -702,5 +712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T10:35:05+00:00"
+  "updated_at": "2026-08-17T12:12:09+00:00"
 }
