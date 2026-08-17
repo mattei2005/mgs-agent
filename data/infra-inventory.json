@@ -3883,16 +3883,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 33135,
-      "modified_at": "2026-08-17T09:35:10-04:00",
-      "sha256": "51efd33174bd106510a877182ca5339be760f423c20c2f5b1fe68cd6ba0d3a30",
+      "size_bytes": 33799,
+      "modified_at": "2026-08-17T10:03:20-04:00",
+      "sha256": "2561059db49fe4b44e8dc4be262a58f7e887b54781b94e4dbb416d14639a0c64",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "B004-3/B006-3 replacement state, expected-role fail-closed guard and bounded cache-backed identity fallback documented.",
-      "validation": "Runtime/versioned SHA-256 match; canonical knowledge source exists; B004-3 procedure matches live 12/12 production readback.",
-      "updated_at": "2026-08-17T09:36:20-04:00",
-      "source_report": "REPORT-INFRA Zeus B004-3 Meta monitor cutover 2026-08-17"
+      "description": "Current B004-3/B006-3 live-alert procedure and 2026-08-13 NO APP assignment-source supersession documented; current 11-app replacement set refreshed.",
+      "validation": "Runtime/versioned SHA-256 match; live Service Account readback shows current assignments in NO APP with APP PROVISORIO blank; B004-3 12/12 and B006-3 15/15 token/roles/Sheet reconciliation PASS.",
+      "updated_at": "2026-08-17T10:03:57-04:00",
+      "source_report": "REPORT-INFRA Zeus B004-3/B006-3 live alert reconciliation 2026-08-17"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
