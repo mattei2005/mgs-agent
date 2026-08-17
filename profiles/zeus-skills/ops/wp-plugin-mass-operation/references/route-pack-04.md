@@ -13,7 +13,7 @@ Para os 4 sites AWS/Bitnami onde SFTP é o canal de acesso (read-only para verif
 | cliquet.com | 35.175.97.196 |
 | finanzas.cliquet.com | 18.116.18.34 |
 
-> **fincgriffin.com** — servidor de terceiros sem acesso programático, atualizar manualmente.
+> **fincgriffin.com** — WordPress externo agora com acesso programático validado via WP Admin e REST. Credenciais no 1Password, item `Fincgriffin Wordpress`: `username` + `password` para login e `app user` + `app password` para REST. Não há SSH/SFTP conhecido; operações de plugin devem usar REST autenticado e configuração pelo formulário real `options.php`, com readback autenticado.
 
 **CRÍTICO:** `wpfiles` é 100% read-only em todos os diretórios. Para escrita, usar elFinder (ver Seção B) ou SSH bitnami + .pem.
 

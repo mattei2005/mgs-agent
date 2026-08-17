@@ -11,7 +11,7 @@ Conteúdo originalmente em skill `sftp-deployment` (arquivada 2026-05-06).
 | cliquet.com | `SFTP cliquet servers` | 35.175.97.196 |
 | finanzas.cliquet.com | `SFTP finanzas.cliquet servers` | 18.116.18.34 |
 
-> **fincgriffin.com** — servidor de terceiros sem acesso programático. Atualizar via File Manager do WP Admin quando necessário.
+> **fincgriffin.com** — servidor externo sem SSH/SFTP conhecido, mas com acesso programático WordPress validado em 2026-08-17. Usar o item 1Password `Fincgriffin Wordpress`: `username` + `password` para WP Admin e `app user` + `app password` para REST. Instalação/ativação de plugins usa `/wp-json/wp/v2/plugins`; configuração usa login autenticado e POST real para `/wp-admin/options.php`, seguida de readback na página do plugin.
 
 ## Arquitetura (CRÍTICO)
 

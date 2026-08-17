@@ -249,4 +249,4 @@ Não existe padrão rígido universal. Cada site deve ser tratado conforme sua c
 
 ### fincgriffin.com
 
-`fincgriffin.com` é exceção operacional conhecida: deploy manual em infra de terceiros/ADX, sem acesso SSH/API/SFTP para agentes. Zeus/Atena não devem assumir operação automatizada nesse site. Atualizações de plugins, mu-plugins ou conteúdo são feitas manualmente por Rodolfo via WP-Admin, salvo nova decisão.
+`fincgriffin.com` é uma exceção operacional em infraestrutura externa, sem SSH/SFTP conhecido para agentes. Desde 2026-08-17, Zeus possui acesso programático validado ao WordPress via WP Admin e REST usando o item `Fincgriffin Wordpress` no 1Password. Instalação/ativação de plugins deve usar REST autenticado; configurações devem usar o formulário real do WP Admin com readback autenticado. Operações de arquivo que dependam de SSH/SFTP continuam manuais até existir uma rota validada.
