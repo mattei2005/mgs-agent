@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T18:31:29-04:00",
+    "updated_at": "2026-08-17T18:33:57-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6969,7 +6969,10 @@
       "checkpoint_id": "loftloader-rollout-20260817",
       "checkpoint_state": "configured_validated_16_waiting_wantabrand_gate_and_duplicate_cleanup",
       "validation": "16/16 authorized homepages HTTP 200 with one LoftLoader wrapper, correct logo, scoped CSS marker and no-animation; browser visual acceptance 15/16 first pass plus de.newsoun instrumented recheck PASS; Autolendpro screenshot clean; OpenZed Customizer readbacks PASS; Finanzas OpenZed fallback source/browser PASS; knowledge validate PASS and regression 10/10.",
-      "updated_at": "2026-08-17T18:31:29-04:00"
+      "report_infra_message_id": "1539039566655389800",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T18:33:57-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6997,7 +7000,10 @@
       "last_portfolio_report_infra_message_id": "1539026987509616661",
       "last_portfolio_report_infra_channel_id": "1498132022634483894",
       "last_portfolio_report_infra_readback": true,
-      "updated_at": "2026-08-17T18:31:29-04:00"
+      "last_loftloader_report_infra_message_id": "1539039566655389800",
+      "last_loftloader_report_infra_channel_id": "1498132022634483894",
+      "last_loftloader_report_infra_readback": true,
+      "updated_at": "2026-08-17T18:33:57-04:00"
     },
     {
       "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",
@@ -11215,5 +11221,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T18:31:29-04:00"
+  "updated_at": "2026-08-17T18:33:57-04:00"
 }
