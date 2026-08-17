@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-US-EMP-STATIC-30-20260817",
-      "next_step": "Rodolfo/Zeus confirmar o destino canônico: autorizar criação de EMP_US_ES e EMP_US_EN com IMG/01_READY ou indicar outra operação existente. Após confirmação, Ares fará upload via Service Account, readback ID/tamanho/checksum/driveId, preencherá H2:H31, registrará inventário/linhagem e limpará mídia transitória local somente após paridade real.",
+      "next_step": "Criar destinos canônicos EMP_US_ES/EMP_US_EN em CRIATIVOS, subir 30 arquivos para IMG/01_READY, validar download/SHA-256/tamanho, registrar inventário e atualizar a aba Plano Imagens ES-EN.",
       "objective": "Produzir 30 criativos estáticos originais US-EMP Messenger: 15 ES e 15 EN, 1254x1254, com referência, claims gate, sanitização, naming, Shared Drive, inventário e readback.",
-      "source": "discord:thread:1538949395586875564; discord:thread:1538956706304761978; sheet:1RNY-sal7hyVFsM7j-BDPxJ_-ZYjNMZJvZ_ICU2JbL70; /root/.hermes/profiles/ares/artifacts/US-EMP-STATIC-30-20260817/handoff-state.json; /root/.hermes/profiles/zeus/artifacts/US-EMP-CC_Solius_Loans_Messenger_Fluxo_Completo_2026-08-10.xlsx",
-      "state": "in_progress: 30/30 criativos gerados com fundos inéditos; qa visual pass 30/30; 30/30 em 1254x1254; metadata clean=true 30/30; 30 sha-256 únicos; claims específicos removidos/suavizados e revisão humana ainda necessária; planilha plano imagens es-en g2:g31 atualizada com readback exato; drive write não executado porque emp_us_es/emp_us_en não existem e criar estrutura exige aprovação.",
-      "thread_id": "1538956706304761978",
-      "updated_at": "2026-08-17T17:17:43+00:00"
+      "source": "discord:thread:1538949395586875564; /tmp/ares-us-emp-static-30-20260817/ready-manifest.json; /tmp/ares-us-emp-static-30-20260817/contact-horizontal-fixed.jpg",
+      "state": "in_progress: 15 fundos originais gerados; 30/30 peças renderizadas; qa visual corrigido e aprovado; dimensões 1254x1254; zero-width en=0; metadata clean=true 30/30; claims específicos removidos/suavizados.",
+      "thread_id": "1538949395586875564",
+      "updated_at": "2026-08-17T17:42:10+00:00"
     },
     {
       "agent": "zeus",
@@ -762,5 +762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T17:17:43+00:00"
+  "updated_at": "2026-08-17T17:42:10+00:00"
 }
