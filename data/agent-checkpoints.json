@@ -583,12 +583,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Dispatcher das 08:00 SP pode consumir US-JOB-ES: déficit live máximo 1 + reserva 3 já disponíveis; US-CC-ES: déficit live máximo 2 + reserva 3 repostos com 5 candidates model-written",
+      "next_step": "Dispatcher das 08:00 SP pode consumir US-JOB-ES: déficit live máximo 1 + reserva 3 disponíveis (4 candidates); US-CC-ES: déficit live máximo 3 + reserva 3 repostos (6 candidates model-written)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-15T07:31:09-03:00; data:sb-utility-generated-candidates.json",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-17T07:31:51-03:00; data:sb-utility-generated-candidates.json",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-15T10:33:08+00:00"
+      "updated_at": "2026-08-17T10:35:05+00:00"
     },
     {
       "agent": "zeus",
@@ -702,5 +702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-16T04:07:09+00:00"
+  "updated_at": "2026-08-17T10:35:05+00:00"
 }
