@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T17:40:27-04:00",
+    "updated_at": "2026-08-17T17:43:54-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6907,7 +6907,10 @@
       "checkpoint_id": "jbf-preloader-rollout-20260817",
       "checkpoint_state": "completed_validated_35_integrated_1_manual_exception",
       "validation": "Final 36/36 JBF-family homepages HTTP 200; 35 integrated homes with exactly one #jbf-preloader and zero manual .Preloader; FinanceADX manual exception restored and validated; RunCloud public readback 30/30 and browser acceptance 30/30 after bounded rechecks/failsafes; external source readback 3/3 and browser acceptance 3/3; old fincgolem assets absent from integrated sites; body overflow visible after close; knowledge validate PASS and regression 10/10.",
-      "updated_at": "2026-08-17T17:40:27-04:00"
+      "report_infra_message_id": "1539026987509616661",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T17:43:54-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6918,11 +6921,11 @@
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
-      "size_bytes": 7622,
-      "modified_at": "2026-08-17T16:43:13-04:00",
-      "sha256": "ed15be06ee255d55ce10634c4094664b4958e5b814df7c520e3af1b5e4796b27",
+      "size_bytes": 9701,
+      "modified_at": "2026-08-17T17:40:12-04:00",
+      "sha256": "ecaac8e626851a433ae548e4ec8fef5403e88b46c50d1f791fdfa5127872b93a",
       "purpose": "Durable procedure to audit and standardize SB/JBF integrated preloaders against LoftLoader on non-JBF WordPress sites, including timing, cache-bust validation and an equivalence preset.",
-      "validation": "Expanded with safe migration from manual Ad Inserter .Preloader to integrated JBF: :AI: base64 envelope, reverse-hash validation, h/code-only clearing, 89-key preservation, rollback and canary browser gates; live and versioned hashes match.",
+      "validation": "Expanded after portfolio rollout with jbf-server-child rollback rule, old-builder/LiteSpeed compatibility failsafe, 15-second browser recheck and external Ad Inserter save via real Chromium/ACE submit; live and versioned hashes match.",
       "report_infra_message_id": "1539001065696006188",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
@@ -6932,7 +6935,10 @@
       "last_migration_report_infra_message_id": "1539012410726424617",
       "last_migration_report_infra_channel_id": "1498132022634483894",
       "last_migration_report_infra_readback": true,
-      "updated_at": "2026-08-17T16:45:59-04:00"
+      "last_portfolio_report_infra_message_id": "1539026987509616661",
+      "last_portfolio_report_infra_channel_id": "1498132022634483894",
+      "last_portfolio_report_infra_readback": true,
+      "updated_at": "2026-08-17T17:43:54-04:00"
     },
     {
       "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",
@@ -11150,5 +11156,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T16:45:59-04:00"
+  "updated_at": "2026-08-17T17:43:54-04:00"
 }
