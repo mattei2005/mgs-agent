@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T16:00:53-04:00",
+    "updated_at": "2026-08-17T16:21:15-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6754,6 +6754,42 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T14:49:16-04:00"
+    },
+    {
+      "id": "gamezonead-loftloader-jbf-equivalent-logo-20260817",
+      "agent": "zeus",
+      "type": "wordpress_plugin_config",
+      "owner": "Zeus/Tech",
+      "status": "deployed_validated",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1539003209853706341",
+      "source_thread_id": "1538961042753851402",
+      "site": "gamezonead.com",
+      "plugin": "LoftLoader",
+      "plugin_version": "2.5.3",
+      "scope": "Replace only the preloader image and add scoped CSS that hides the frame animation and renders the existing full GameZoneAd logo at 40px height.",
+      "image_before": "https://gamezonead.com/wp-content/uploads/2026/03/cropped-gamezonead-favicon.png",
+      "image_after": "https://gamezonead.com/wp-content/uploads/2026/03/cropped-gamezonead-logo.png",
+      "image_after_dimensions": "792x289",
+      "new_creative_generated": false,
+      "preserved_options": {
+        "loftloader_main_switch": "on",
+        "loftloader_show_range": "sitewide",
+        "loftloader_bg_color": "#ffffff",
+        "loftloader_bg_opacity": "100",
+        "loftloader_bg_animation": "no-animation",
+        "loftloader_loader_type": "frame",
+        "loftloader_max_load_time": "2.0"
+      },
+      "custom_css_marker": "MGS LoftLoader JBF-equivalent logo",
+      "backup_path": "/var/backups/mgs-loftloader-logo/20260817T201626Z/gamezonead.com",
+      "cache_action": "WP Fastest Cache purged after option/CSS write",
+      "known_warning": "Existing mu-plugin yoast-rest-meta.php permission warning appeared during WP-CLI bootstrap; writes and all readbacks completed successfully.",
+      "validation": "Public home HTTP 200; new logo URL present and old favicon absent; custom CSS marker exactly once; no-animation active; fresh-browser screenshot shows centered full logo without frame; 5 cold + 5 warm visual timing runs all HTTP 200; visual duration median 1.52s cold and 1.03s warm; visual disappearance absolute median 2.19s cold and 1.39s warm; Helixenit bare home now contains JBF preloader node/CSS/JS after cache refresh.",
+      "report_infra_message_id": "1539005911706902599",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T16:20:12-04:00"
     }
   ],
   "profile_skill_references": [
@@ -6764,15 +6800,18 @@
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
-      "size_bytes": 4547,
-      "modified_at": "2026-08-17T15:59:16-04:00",
-      "sha256": "3c7c5086de4b37b9e6e4aaf9aa19e20903fc18c049fb2a0d60af9410d36c2e31",
+      "size_bytes": 5684,
+      "modified_at": "2026-08-17T16:18:02-04:00",
+      "sha256": "62e577316a431cecefe9fdb068ca284907c516c3a5cf3778b0c58053a1af2919",
       "purpose": "Durable procedure to audit and standardize SB/JBF integrated preloaders against LoftLoader on non-JBF WordPress sites, including timing, cache-bust validation and an equivalence preset.",
-      "validation": "Helixenit JBF option/source/builder inspected; direct Element.remove stack captured from external JBF builder; Gamezonead LoftLoader options/source inspected; fresh-browser timings measured; bare versus cache-busted WP Fastest Cache behavior confirmed; live and versioned hashes match.",
+      "validation": "Updated after Rodolfo correction: visual timing now measures .loader-section and #loader rather than the transparent wrapper; Gamezonead current preset and logo CSS documented; 5 cold + 5 warm runs measured; live and versioned hashes match.",
       "report_infra_message_id": "1539001065696006188",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
-      "updated_at": "2026-08-17T16:00:53-04:00"
+      "last_update_report_infra_message_id": "1539005911706902599",
+      "last_update_report_infra_channel_id": "1498132022634483894",
+      "last_update_report_infra_readback": true,
+      "updated_at": "2026-08-17T16:20:12-04:00"
     },
     {
       "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",
@@ -10530,9 +10569,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 62131,
-      "md5": "68174e0791a1dcbaeb90bee16d12310b",
-      "modified_at": "2026-08-17T15:59:19-04:00"
+      "size_bytes": 62136,
+      "md5": "7ec656e781eb8add613899704494fe83",
+      "modified_at": "2026-08-17T16:20:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -10990,5 +11029,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T16:00:53-04:00"
+  "updated_at": "2026-08-17T16:20:12-04:00"
 }

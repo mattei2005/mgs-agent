@@ -41,25 +41,36 @@ No canário Helixenit cache-busted, o overlay ficou visível aproximadamente de 
 
 Validação de referência: `gamezonead.com`, plugin `loftloader` 2.5.3, 2026-08-17.
 
-Options persistidas:
+Options persistidas após o ajuste canário:
 
 - `loftloader_main_switch`: `on`;
 - `loftloader_show_range`: `sitewide`;
 - `loftloader_bg_color`: `#ffffff`;
-- `loftloader_bg_opacity`: `95`;
-- `loftloader_bg_animation`: `fade`;
+- `loftloader_bg_opacity`: `100`;
+- `loftloader_bg_animation`: `no-animation`;
 - `loftloader_loader_type`: `frame`;
-- `loftloader_loader_color`: `#164201`;
-- `loftloader_custom_img`: favicon do site;
-- `loftloader_img_width`: `76`;
+- `loftloader_loader_color`: `#164201` (a moldura é ocultada pelo CSS canônico);
+- `loftloader_custom_img`: logo completo 792×289 do próprio site;
+- `loftloader_img_width`: `76` (não governa o `frame`; o CSS canônico fixa o logo em 40 px de altura);
 - `loftloader_max_load_time`: `2.0`.
+
+CSS canônico do canário oculta as quatro bordas animadas do `frame`, mantém o logo completo central com 40 px de altura e não altera as demais opções do plugin.
 
 Comportamento:
 
 - fecha ao receber `window.load` adicionando `body.loaded`;
 - `max_load_time` é fallback máximo, também adicionando `body.loaded`;
-- `fade` inicia após 0,3 s e dura 0,7 s;
-- no canário Gamezonead, o overlay ficou visível de ~0,66 s a ~2,65 s; `window.load` ocorreu em ~1,60 s.
+- `no-animation` remove visualmente o fundo de imediato e o logo termina seu fade em cerca de 0,3 s;
+- o wrapper técnico permanece transparente no DOM por aproximadamente 1 s adicional e pode continuar com dimensão de viewport, mas isso não representa tempo visual para o usuário.
+
+Medição corrigida após o preset novo, em cinco cargas frias e cinco quentes:
+
+- duração visual fria mediana: ~1,52 s (0,94–1,86 s);
+- duração visual quente mediana: ~1,03 s (0,99–1,26 s);
+- desaparecimento visual absoluto desde o início da navegação: mediana ~2,19 s fria e ~1,39 s quente;
+- 10/10 respostas HTTP 200.
+
+Não reportar o instante em que `#loftloader-wrapper` fica transparente ou sai do DOM como duração do preloader. Medir o fundo (`.loader-section`) e o logo (`#loader`) visíveis. O valor anterior de ~2,65 s representava o wrapper/fade técnico sob a configuração antiga e não o tempo percebido no computador do usuário.
 
 ## Preset LoftLoader para reproduzir a experiência JBF
 
