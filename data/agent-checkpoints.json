@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-US-EMP-STATIC-30-20260817",
-      "next_step": "Ler a planilha live e o artefato-fonte, analisar 15 referências, definir copy/conceitos e validar backend antes da geração.",
+      "next_step": "Rodolfo/Zeus confirmar o destino canônico: autorizar criação de EMP_US_ES e EMP_US_EN com IMG/01_READY ou indicar outra operação existente. Após confirmação, Ares fará upload via Service Account, readback ID/tamanho/checksum/driveId, preencherá H2:H31, registrará inventário/linhagem e limpará mídia transitória local somente após paridade real.",
       "objective": "Produzir 30 criativos estáticos originais US-EMP Messenger: 15 ES e 15 EN, 1254x1254, com referência, claims gate, sanitização, naming, Shared Drive, inventário e readback.",
-      "source": "discord:thread:1538949395586875564; sheet:1RNY-sal7hyVFsM7j-BDPxJ_-ZYjNMZJvZ_ICU2JbL70; /tmp/solius-reference-images; /root/.hermes/profiles/zeus/artifacts/US-EMP-CC_Solius_Loans_Messenger_Fluxo_Completo_2026-08-10.xlsx",
-      "state": "in_progress: preflight autorizado; fontes, referências e provider em validação",
-      "thread_id": "1538949395586875564",
-      "updated_at": "2026-08-17T16:37:11+00:00"
+      "source": "discord:thread:1538949395586875564; discord:thread:1538956706304761978; sheet:1RNY-sal7hyVFsM7j-BDPxJ_-ZYjNMZJvZ_ICU2JbL70; /root/.hermes/profiles/ares/artifacts/US-EMP-STATIC-30-20260817/handoff-state.json; /root/.hermes/profiles/zeus/artifacts/US-EMP-CC_Solius_Loans_Messenger_Fluxo_Completo_2026-08-10.xlsx",
+      "state": "in_progress: 30/30 criativos gerados com fundos inéditos; qa visual pass 30/30; 30/30 em 1254x1254; metadata clean=true 30/30; 30 sha-256 únicos; claims específicos removidos/suavizados e revisão humana ainda necessária; planilha plano imagens es-en g2:g31 atualizada com readback exato; drive write não executado porque emp_us_es/emp_us_en não existem e criar estrutura exige aprovação.",
+      "thread_id": "1538956706304761978",
+      "updated_at": "2026-08-17T17:17:43+00:00"
     },
     {
       "agent": "zeus",
@@ -762,5 +762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T17:06:38+00:00"
+  "updated_at": "2026-08-17T17:17:43+00:00"
 }
