@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T18:33:57-04:00",
+    "updated_at": "2026-08-17T19:03:45-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6917,7 +6917,7 @@
       "agent": "zeus",
       "type": "wordpress_plugin_preloader_rollout",
       "owner": "Zeus/Tech",
-      "status": "configured_validated_waiting_gates",
+      "status": "configured_validated_waiting_wantabrand_gate",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1539030910010265712",
       "source_thread_id": "1538961042753851402",
@@ -6944,8 +6944,14 @@
         "logo_sha256": "36f94911ac3514a908c8a0066fac7b9b82a712d7ac6a3e949961e6d5b20083c5",
         "current_attachment_id": 119,
         "current_logo_url": "https://autolendpro.com/wp-content/uploads/2026/08/autolendpro-preloader-logo-6.png",
-        "duplicate_attachment_ids_pending_critical_confirmation": [111, 114, 115, 116, 117, 118],
-        "duplicate_cleanup_performed": false,
+        "deleted_duplicate_attachment_ids": [111, 114, 115, 116, 117, 118],
+        "duplicate_cleanup_performed": true,
+        "cleanup_authorization_message_id": "1539045585670246491",
+        "cleanup_backup_path": "/var/backups/mgs-loftloader-rollout/autolendpro-cleanup-20260817T230012Z",
+        "cleanup_validation": "All six attachment records removed; six public URLs return HTTP 404; attachment 119 remains the only matching media and returns HTTP 200; LoftLoader option and homepage still reference attachment 119.",
+        "cleanup_report_infra_message_id": "1539047070609051719",
+        "cleanup_report_infra_channel_id": "1498132022634483894",
+        "cleanup_report_infra_readback": true,
         "cause": "Temporary orchestrator indentation bug reexecuted the accumulated remote block after executor timeout; corrected before resume."
       },
       "external_fallback": {
@@ -6962,17 +6968,18 @@
       "backup_paths": [
         "/var/backups/mgs-loftloader-rollout/20260817T220734Z",
         "/var/backups/mgs-loftloader-rollout/20260817T221555Z",
+        "/var/backups/mgs-loftloader-rollout/autolendpro-cleanup-20260817T230012Z",
         "/root/.hermes/secure-backups/loftloader-external/20260817T221813086Z/openzed.com",
         "/root/.hermes/secure-backups/loftloader-external/20260817T221836553Z/finanzas.openzed.com",
         "/root/.hermes/secure-backups/loftloader-external/finopenzed-fallback-20260817"
       ],
       "checkpoint_id": "loftloader-rollout-20260817",
-      "checkpoint_state": "configured_validated_16_waiting_wantabrand_gate_and_duplicate_cleanup",
-      "validation": "16/16 authorized homepages HTTP 200 with one LoftLoader wrapper, correct logo, scoped CSS marker and no-animation; browser visual acceptance 15/16 first pass plus de.newsoun instrumented recheck PASS; Autolendpro screenshot clean; OpenZed Customizer readbacks PASS; Finanzas OpenZed fallback source/browser PASS; knowledge validate PASS and regression 10/10.",
+      "checkpoint_state": "configured_validated_16_cleanup_complete_waiting_wantabrand_gate",
+      "validation": "16/16 authorized homepages HTTP 200 with one LoftLoader wrapper, correct logo, scoped CSS marker and no-animation; browser visual acceptance 15/16 first pass plus de.newsoun instrumented recheck PASS; Autolendpro screenshot clean and duplicate cleanup validated; OpenZed Customizer readbacks PASS; Finanzas OpenZed fallback source/browser PASS; knowledge validate PASS and regression 10/10.",
       "report_infra_message_id": "1539039566655389800",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
-      "updated_at": "2026-08-17T18:33:57-04:00"
+      "updated_at": "2026-08-17T19:03:45-04:00"
     }
   ],
   "profile_skill_references": [
@@ -11221,5 +11228,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T18:33:57-04:00"
+  "updated_at": "2026-08-17T19:03:45-04:00"
 }
