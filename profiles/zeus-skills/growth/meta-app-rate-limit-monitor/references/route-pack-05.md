@@ -10,6 +10,8 @@ Rodolfo explicitly replaced retired `B006-2` with `B006-3` and re-enabled this a
 - live token/profile and the sole accepted `administrators` role resolve to `Gia Huy`; do not infer the operational admin from the 1Password title when `/me` and `/roles` prove a different profile;
 - app metadata, `/roles`, `/me`, and `debug_token` return HTTP 200; token is valid and app-bound;
 - the isolated cutover `/roles` baseline started with one accepted admin; subsequent scheduled production cycles observed additional accepted roles and delivered the corresponding additions alerts. Treat the count as live state, not as a frozen baseline;
+- after all 15 expected B006-3 roles were accepted, resolve every app-scoped role ID individually with the validated user token, require 15/15 names, and freeze the exact ID-signature baseline. The generic multi-ID read can return HTTP 200 with per-ID errors under the app token or HTTP 500 under the user token even while individual reads succeed; never treat the outer multi-ID HTTP status alone as identity proof;
+- the final scoped production readback must show 15 resolved names, `safe_for_sheet=true`, 15/15 assigned Sheet rows present, `identity_blocked_rows=0`, zero Sheet writes, zero alerts, and zero errors;
 - the canonical Sheet, read through the MGS Service Account, has 15 `NO APP = B006-3` rows and zero writes were made during cutover validation;
 - only `B004-2` remains in the manual app-alert pause; `B006-3` is unpaused;
 - production state must migrate `B006-3` over stale `B006-2` and must not reuse the old B006-2 confirmed 17-role baseline because Meta role IDs are app-scoped. Build the B006-3 baseline from fresh accepted roles and alert subsequent additions/removals.
