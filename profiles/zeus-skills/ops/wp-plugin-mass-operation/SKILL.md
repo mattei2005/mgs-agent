@@ -24,6 +24,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **SEÇÃO B — Deploy de mu-plugins nos 4 sites AWS/Bitnami → Referência rápida** → `references/route-pack-03.md`
 - **SEÇÃO D — SFTP para sites fora do RunCloud → Exceção Wantabrand — MonetizeMore/M2** → `references/route-pack-04.md`
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`
+- **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
 
 ## Context-efficiency guardrails
 
