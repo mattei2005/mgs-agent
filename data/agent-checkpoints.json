@@ -693,12 +693,12 @@
     {
       "agent": "zeus",
       "id": "zeus-b0063-cutover-1538892880783876200",
-      "next_step": "Atualizar inventário, registrar audit e validar REPORT-INFRA",
+      "next_step": "Zeus monitora ciclos recorrentes; escalar somente falha material do B006-3",
       "objective": "Substituir B006-2 por B006-3 e reativar o monitor Meta sem reativar B004-2",
       "source": "discord:1538892880783876200",
-      "state": "active",
+      "state": "completed",
       "thread_id": "1538890597492854864",
-      "updated_at": "2026-08-17T13:01:32+00:00"
+      "updated_at": "2026-08-17T13:08:45+00:00"
     },
     {
       "agent": "zeus",
@@ -722,5 +722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T13:01:32+00:00"
+  "updated_at": "2026-08-17T13:08:45+00:00"
 }

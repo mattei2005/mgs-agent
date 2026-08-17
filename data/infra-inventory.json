@@ -1938,13 +1938,13 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Meta app roles/admin and Sheet reconciliation using N/APP PROVISORIO for B001-B010/B005-2; B011/B012/B013 remain DTR-only exclusions.",
-      "validation": "Enabled; scheduled post-cutover cycle last_status=ok, alerts_sent=0 and zero Sheet delta.",
-      "updated_at": "2026-08-06T22:27:36-04:00",
-      "last_observed_status": "ok_at_2026-08-06T19:04:39-04:00",
-      "reconciliation": "B013 replaced B012 as the active dedicated DTR app. B011/B012/B013 remain excluded from this /roles job and its Sheet X writes.",
+      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for current B001-B010 lineage including B006-3; dedicated DTR apps remain outside this generic alert route.",
+      "validation": "Enabled and scheduled; 09:05 EDT scheduler cycle last_status=ok. B006-3 returned four healthy Graph checks, 9 current roles, zero consecutive errors and delivered verified additions alerts in the reused app channel; Sheet updated=false.",
+      "updated_at": "2026-08-17T09:06:57-04:00",
+      "last_observed_status": "ok_at_2026-08-17T09:05:21-04:00",
+      "reconciliation": "B006-3 replaces B006-2 in registry, state and 1Password routing; B004-2 remains the only manually paused generic-app alert.",
       "state": "scheduled",
-      "next_run_at": "2026-08-06T19:09:00-04:00"
+      "next_run_at": "2026-08-17T09:09:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -3885,9 +3885,9 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 29983,
-      "modified_at": "2026-08-17T08:59:45-04:00",
-      "sha256": "55887ace6825420cb39723931ec93d5c28e6aaefe884dff7ad5fb447360141f7",
+      "size_bytes": 30218,
+      "modified_at": "2026-08-17T09:07:59-04:00",
+      "sha256": "fee418a3cca9d493430df4290786a64f994d23cd762f6bea69ce51a43efef67d",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
@@ -6117,7 +6117,7 @@
         "B012",
         "B013-2"
       ],
-      "validation": "B006-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; one live admin role; Sheet readback has 15 NO APP=B006-3 rows and zero writes.",
+      "validation": "B006-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; accepted roles observed live and increasing as invitations completed; Sheet readback has 15 NO APP=B006-3 rows and zero cutover writes.",
       "updated_at": "2026-08-17T09:02:25-04:00",
       "last_change": "Replaced B006-2 with B006-3, retained the same Discord channel ID, recorded live Gia Huy admin evidence and reactivated this app explicitly."
     },
@@ -9974,9 +9974,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 59105,
-      "md5": "6d4fc05e774d5679cf4eb692d150acde",
-      "modified_at": "2026-08-17T09:01:32-04:00"
+      "size_bytes": 59121,
+      "md5": "99b5260f7a37c53c803350c3e8ad16da",
+      "modified_at": "2026-08-17T09:08:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
