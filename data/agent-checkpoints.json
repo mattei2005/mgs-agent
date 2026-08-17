@@ -742,6 +742,16 @@
     },
     {
       "agent": "zeus",
+      "id": "wp2fa-rollout-54-sites-20260817",
+      "next_step": "Após confirmação crítica adicional, executar canário com backup/rollback e depois rollout dos 53 restantes, validando política e acesso.",
+      "objective": "Instalar e configurar WP 2FA 4.1.0 nos 54 sites, com TOTP app, backup codes, obrigatório para todos, sem exclusões e sem grace period.",
+      "source": "context/sites.md",
+      "state": "preflight_complete_waiting_critical_confirmation",
+      "thread_id": "1538961042753851402",
+      "updated_at": "2026-08-17T23:56:24+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-alerts-infra-red-fix-20260717",
       "next_step": "Monitorar o próximo ciclo normal; nenhuma ação operacional pendente",
       "objective": "Corrigir bloqueio do auto-commit e spam do monitor de auto-push identificado nos alertas vermelhos de 48h",
@@ -792,5 +802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T23:35:28+00:00"
+  "updated_at": "2026-08-17T23:56:24+00:00"
 }
