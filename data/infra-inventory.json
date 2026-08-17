@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T13:47:00-04:00",
+    "updated_at": "2026-08-17T14:18:26-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6524,7 +6524,73 @@
       "report_infra_message_id": "1538967370608156825",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
+      "superseded_by": "wordpress-wp-fastest-cache-portfolio-install-20260817",
+      "superseded_at": "2026-08-17T14:17:32-04:00",
       "updated_at": "2026-08-17T13:47:00-04:00"
+    },
+    {
+      "id": "wordpress-wp-fastest-cache-portfolio-install-20260817",
+      "agent": "zeus",
+      "type": "wordpress_plugin_install_and_config_rollout",
+      "owner": "Zeus/Tech",
+      "status": "installed_configured_validated",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1538972655385055382",
+      "source_thread_id": "1538961042753851402",
+      "plugin": "WP Fastest Cache",
+      "plugin_slug": "wp-fastest-cache",
+      "portfolio_sites_count": 54,
+      "programmatically_accessible_sites_count": 53,
+      "installed_before_count": 37,
+      "installed_in_this_rollout_count": 16,
+      "final_installed_active_count": 53,
+      "final_exact_config_count": 53,
+      "remaining_confirmed_missing_count": 0,
+      "no_programmatic_access_count": 1,
+      "installed_sites": [
+        "finanzas.lyzmo.com",
+        "finanzas.eggbev.com",
+        "finanzas.topfeed.fun",
+        "finanzas.zuout.com",
+        "finanzas.zytiva.com",
+        "finanzas.newsoun.com",
+        "de.newsoun.com",
+        "finance.wantabrand.com",
+        "empleo.seuprimeiroempregoam.com",
+        "finanzas.wavesbee.com",
+        "finanzas.conectageral.com",
+        "finanzas.portalrelevante.com",
+        "financeadx.com",
+        "finanzas.openzed.com",
+        "cliquet.com",
+        "finanzas.cliquet.com"
+      ],
+      "execution_routes": {
+        "runcloud_sites": 13,
+        "runcloud_method": "WP-CLI install --activate plus plugin-native saveOption routine",
+        "bitnami_sites": 3,
+        "bitnami_method": "Authenticated WordPress REST plugin installation plus real options.php form submit"
+      },
+      "required_options": {
+        "wpFastestCacheStatus": "on",
+        "wpFastestCacheUpdatePost": "on",
+        "wpFastestCacheMinifyCss": "on"
+      },
+      "backup_paths": [
+        "/var/backups/mgs-wpfc-install/20260817T181123Z",
+        "/var/backups/mgs-wpfc-install/20260817T181148Z",
+        "/root/.hermes/secure-backups/wpfc-install-bitnami/20260817T181437Z",
+        "/root/.hermes/secure-backups/wpfc-install-bitnami/20260817T181459Z"
+      ],
+      "no_programmatic_access_sites": [
+        "fincgriffin.com"
+      ],
+      "fincgriffin_status": "Not changed; plugin presence remains unverified because the site is manual/no programmatic access.",
+      "validation": "Final readback PASS: 49/49 RunCloud sites and 4/4 Bitnami sites have WP Fastest Cache installed, active, and the three required options on; zero configuration drift; 53/53 accessible homepages returned HTTP 2xx.",
+      "report_infra_message_id": "1538975288405397686",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T14:18:26-04:00"
     }
   ],
   "profile_skill_references": [
@@ -10744,5 +10810,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T13:47:00-04:00"
+  "updated_at": "2026-08-17T14:18:26-04:00"
 }
