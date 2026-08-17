@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-08-13T14:47:00-04:00",
-  "source": "fresh read-only /roles audit with per-ID name fallback, reconciled to live NO APP Sheet",
+  "generated_at": "2026-08-17T09:14:01-04:00",
+  "source": "fresh read-only /roles audits with per-ID name fallback, reconciled to live NO APP Sheet; B006-3 added after explicit cutover",
   "apps": {
     "B001-2": {
       "ids_sha256": "990f48ab1e31381ae6c60d545e9199f63831cfc3f8c0412356105641ecfd3e58",
@@ -457,6 +457,27 @@
           "name": "Crislaine Oliveira",
           "role": "administrators"
         }
+      ]
+    },
+    "B006-3": {
+      "ids_sha256": "82926f8cd46483e74cbb9229ade893bd40766864e889d41d14f6dc0f5b329a3b",
+      "role_count": 15,
+      "roles": [
+        {"id": "1057259966692626", "name": "Millena Kelly", "role": "administrators"},
+        {"id": "1806146397407831", "name": "Indah", "role": "administrators"},
+        {"id": "27670845009254722", "name": "Tiago De Oliveira Vianna", "role": "administrators"},
+        {"id": "2826179511095277", "name": "Abah Ngatimin", "role": "administrators"},
+        {"id": "2569046513535473", "name": "Valentino Simanjuntak", "role": "administrators"},
+        {"id": "2195896471200235", "name": "Simone Oliveira", "role": "administrators"},
+        {"id": "3223499284527730", "name": "Anre Kameza", "role": "administrators"},
+        {"id": "1558655839129154", "name": "Gentil Alves Ribeiro", "role": "administrators"},
+        {"id": "122185347014896419", "name": "Viviane Moura", "role": "administrators"},
+        {"id": "27590397203975701", "name": "SobiRin Kemana Mana", "role": "administrators"},
+        {"id": "2473762996479915", "name": "Jayadi Thaha Patonangi", "role": "administrators"},
+        {"id": "1084511061197123", "name": "Edleide Gomes", "role": "administrators"},
+        {"id": "1087671893597024", "name": "Rori Ginbresil Ginting", "role": "administrators"},
+        {"id": "122185161518687502", "name": "Isidoro Cristina Barbosa Martins", "role": "administrators"},
+        {"id": "1093110196479800", "name": "Gia Huy", "role": "administrators"}
       ]
     },
     "B007": {

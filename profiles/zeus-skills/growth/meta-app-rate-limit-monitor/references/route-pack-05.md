@@ -9,7 +9,7 @@ Rodolfo explicitly replaced retired `B006-2` with `B006-3` and re-enabled this a
 - reused Discord channel ID: `1521252068319297666`; the live channel name remains `b006-2-app-status` until a separate rename is authorized;
 - live token/profile and the sole accepted `administrators` role resolve to `Gia Huy`; do not infer the operational admin from the 1Password title when `/me` and `/roles` prove a different profile;
 - app metadata, `/roles`, `/me`, and `debug_token` return HTTP 200; token is valid and app-bound;
-- initial isolated `/roles` count was 1; the first scheduled production cycles then observed 3 and 9 accepted roles and delivered the corresponding additions alerts. Treat the count as live state, not as a frozen baseline;
+- the isolated cutover `/roles` baseline started with one accepted admin; subsequent scheduled production cycles observed additional accepted roles and delivered the corresponding additions alerts. Treat the count as live state, not as a frozen baseline;
 - the canonical Sheet, read through the MGS Service Account, has 15 `NO APP = B006-3` rows and zero writes were made during cutover validation;
 - only `B004-2` remains in the manual app-alert pause; `B006-3` is unpaused;
 - production state must migrate `B006-3` over stale `B006-2` and must not reuse the old B006-2 confirmed 17-role baseline because Meta role IDs are app-scoped. Build the B006-3 baseline from fresh accepted roles and alert subsequent additions/removals.
