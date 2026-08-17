@@ -2088,8 +2088,14 @@
         "monitor-sb-restricted-pages.sh"
       ],
       "purpose": "Keep Smart Bidding/DigitalTRChat Playwright automation and authenticated storage outside ephemeral /tmp across VPS restarts.",
-      "validation": "pip check PASS; Playwright Chromium local smoke PASS; bash -n 10 wrappers PASS; py_compile affected Python PASS; live SB gray-alert script rc=0; Hermes cron 500f8f1cff5e manual run last_status=ok.",
-      "updated_at": "2026-07-11T12:18:07-04:00"
+      "validation": "2026-08-17 session refresh via canonical headed/Xvfb login: live /company HTTP 200, /routing HTTP 201, authorization captured in memory, Newsoun apply/readback PASS; storage state mode 0600.",
+      "last_session_refresh": "2026-08-17T15:14:51-04:00",
+      "last_session_refresh_authorization_message_ids": [
+        "1538988150452650114",
+        "1538988259290390539"
+      ],
+      "last_session_refresh_backup": "/root/.local/share/mgs/smartbidding_state_headed.json.pre-refresh-20260817T151451-0400",
+      "updated_at": "2026-08-17T15:20:28-04:00"
     },
     {
       "id": "dtr-sb-daily-match-audit-transitive-helper",
@@ -6238,6 +6244,72 @@
       "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260813T145052Z-topfeedfinanzas-us-cc-es-five-url-pools",
       "summary_sha256": "c97725e2e99bef77af968e1f6b2526be769aa647efdb40b562504afe8bc62d72",
       "readback_sha256": "8831fb7263687807e89bf787f22a1c5469b84ad71356d194110cc8ff4fec5fff",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
+    },
+    {
+      "id": "newsoun-us-cc-en-smart-routing-five-url-20260817",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "newsoun",
+      "market": "US-CC-EN",
+      "authorized_message_id": "1538988150452650114",
+      "applied_at": "2026-08-17T15:20:28-04:00",
+      "drip_pool_ids": [393, 1066, 1067, 1068, 1069, 1070],
+      "broadcast_pool_ids": [394, 1062, 1063, 1064, 1065],
+      "created_pool_ids": [1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070],
+      "updated_pool_ids": [393, 394],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://newsoun.com/rec-us-cc-bankamericard",
+        "https://newsoun.com/rec-us-cc-bank-cash",
+        "https://newsoun.com/rec-us-cc-bank-of-america-unlimited-cash-rewards",
+        "https://newsoun.com/rec-us-cc-chase-freedom-flex",
+        "https://newsoun.com/rec-us-cc-citi-rewards-card"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260817T151713-0400-newsoun-us-cc-en-five-url-pools",
+      "summary_sha256": "95cb96b42bdee9cf20179b48886c2eaa8f41f17c36405c56c9d51b7a4b6b4b30",
+      "readback_sha256": "2cca7e9bf90b77b8b5307438d254c4fc96b43bbb10967253e6e2a7a249926e33",
+      "unrelated_pools_unchanged": true,
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
+    },
+    {
+      "id": "newsoun-gb-cc-en-smart-routing-five-url-20260817",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "newsoun",
+      "market": "GB-CC-EN",
+      "authorized_message_id": "1538988259290390539",
+      "applied_at": "2026-08-17T15:20:28-04:00",
+      "drip_pool_ids": [697, 1075, 1076, 1077, 1078, 1079],
+      "broadcast_pool_ids": [698, 1071, 1072, 1073, 1074],
+      "created_pool_ids": [1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079],
+      "updated_pool_ids": [697, 698],
+      "deleted_pool_ids": [],
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "adops_pending": false,
+      "urls": [
+        "https://newsoun.com/rec-gb-cc-aib-visa-gold",
+        "https://newsoun.com/rec-gb-cc-aib-options-two-credit-card",
+        "https://newsoun.com/rec-gb-cc-chase-credit-card",
+        "https://newsoun.com/rec-gb-cc-118-118-money-credit-card",
+        "https://newsoun.com/rec-gb-cc-fluid-credit-card-the-flexible"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260817T151713-0400-newsoun-gb-cc-en-five-url-pools",
+      "summary_sha256": "3c954538ecf58efdec341d38ceb57518c54d80051da2b831fd28ab9441739b46",
+      "readback_sha256": "03156a1454fd8646a8cffa08931242c20f38790f771f7eb8a227c77452c15795",
       "unrelated_pools_unchanged": true,
       "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
     },
