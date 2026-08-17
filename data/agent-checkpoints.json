@@ -273,12 +273,12 @@
     {
       "agent": "zeus",
       "id": "hermes-port-20260817",
-      "next_step": "Despachar reboot seguro; validador pós-boot fechará boot, kernel, gateways, Hermes, cleanup, rollback, backup, unit, Git e REPORT-INFRA.",
+      "next_step": "Monitoramento rotineiro.",
       "objective": "Hermes 0.20.2 atualizado, limpeza concluída e reboot pós-limpeza validado.",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/pre-state.json;discord-message:1538937976443244625",
-      "state": "reboot autorizado por rodolfo na mensagem 1538937976443244625; validador durável habilitado, kernel esperado 6.8.0-138, hermes 72bb6732 e cleanup 68af439e congelados; despacho detached pendente.",
+      "source": "discord-thread:1538878021455319140;authorization-message:1538937976443244625;/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z/post-reboot-result.json",
+      "state": "reboot pós-limpeza validado em runtime; fechamento de unit/report/git em andamento.",
       "thread_id": "1538878021455319140",
-      "updated_at": "2026-08-17T15:54:59+00:00"
+      "updated_at": "2026-08-17T16:03:47+00:00"
     },
     {
       "agent": "zeus",
@@ -742,5 +742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T15:54:59+00:00"
+  "updated_at": "2026-08-17T16:03:47+00:00"
 }
