@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T12:36:13-04:00",
+    "updated_at": "2026-08-17T13:13:10-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6434,6 +6434,29 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T17:07:15.212021+00:00"
+    },
+    {
+      "id": "discord-channel-cron-temp-templates-retirement-20260817",
+      "agent": "zeus",
+      "type": "discord_channel_retirement",
+      "owner": "Zeus/Infra",
+      "status": "deleted_validated",
+      "guild_id": "1185714635991679006",
+      "channel_id": "1524188896215171222",
+      "channel_name": "cron-temp-templates",
+      "parent_category_id": "1513368627812761722",
+      "authorization_message_id": "1538958379375136802",
+      "source_thread_id": "1538956710469701782",
+      "last_message_id_before_deletion": "1524241717036056776",
+      "replacement_operational_channel_id": "1522487422510694450",
+      "replacement_operational_channel_name": "broadcast-templates",
+      "delete_http": 200,
+      "validation_http": 404,
+      "validation": "Discord REST GET and discord_admin channel_info both returned Unknown Channel after deletion.",
+      "report_infra_message_id": "1538959150497800245",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T13:13:10-04:00"
     }
   ],
   "profile_skill_references": [
@@ -10653,5 +10676,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T17:07:15.212021+00:00"
+  "updated_at": "2026-08-17T13:13:10-04:00"
 }
