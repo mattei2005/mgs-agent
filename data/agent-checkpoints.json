@@ -25,10 +25,10 @@
       "id": "ARES-US-EMP-STATIC-30-20260817",
       "next_step": "Nenhuma pendência de Creative Ops. Assets permanecem ares_eligible=false e não publicados; qualquer seleção/campanha exige liberação e conciliação Meta × Drive.",
       "objective": "Produzir 30 criativos estáticos originais US-EMP Messenger: 15 ES e 15 EN, 1254x1254, com referência, claims gate, sanitização, naming, Shared Drive, inventário e readback.",
-      "source": "/root/mgs-agent/data/ares/creative-ops/us-emp-static-30/20260817/execution-summary.json; /root/mgs-agent/data/ares/creative-ops/us-emp-static-30/20260817/independent-verification.json; discord:thread:1538949395586875564; report-infra:1538967432914272317",
-      "state": "completed: 30/30 assets (15 es + 15 en); jpeg 1254x1254; clean=true 30; zero-width en=0; drive emp_us_es/emp_us_en readback por id+tamanho+sha-256 30; inventário 30; sheet plano imagens es-en g2:h31 atualizada com 30 ids/urls e 0 mismatches; claims específicos removidos/suavizados; independent all_pass=true; report-infra 1538967432914272317.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/us-emp-static-30/20260817/execution-summary.json; /root/mgs-agent/data/ares/creative-ops/us-emp-static-30/20260817/independent-verification.json; /root/mgs-agent/data/ares/creative-ops/us-emp-static-30/20260817/local-cleanup.json; discord:thread:1538949395586875564; report-infra:1538967432914272317",
+      "state": "completed: 30/30 assets (15 es + 15 en); jpeg 1254x1254; clean=true 30; zero-width en=0; drive emp_us_es/emp_us_en readback por id+tamanho+sha-256 30; inventário 30; sheet plano imagens es-en g2:h31 atualizada com 30 ids/urls e 0 mismatches; claims específicos removidos/suavizados; independent all_pass=true; mídia/workdir transitórios locais removidos após readback; report-infra 1538967432914272317.",
       "thread_id": "1538949395586875564",
-      "updated_at": "2026-08-17T17:47:37+00:00"
+      "updated_at": "2026-08-17T17:51:24+00:00"
     },
     {
       "agent": "zeus",
@@ -762,5 +762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T17:47:37+00:00"
+  "updated_at": "2026-08-17T17:51:24+00:00"
 }
