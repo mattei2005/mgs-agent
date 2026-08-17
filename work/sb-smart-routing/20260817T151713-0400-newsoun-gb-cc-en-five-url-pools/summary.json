@@ -1,0 +1,153 @@
+{
+  "status": "success",
+  "authorized_message_id": "1538988259290390539",
+  "before_count": 6,
+  "results": [
+    {
+      "family": "broadcast",
+      "suffix": "002",
+      "id": 1071,
+      "name": "ns-gb-cc-en-mct broadcast 002",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "003",
+      "id": 1072,
+      "name": "ns-gb-cc-en-mct broadcast 003",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "004",
+      "id": 1073,
+      "name": "ns-gb-cc-en-mct broadcast 004",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "005",
+      "id": 1074,
+      "name": "ns-gb-cc-en-mct broadcast 005",
+      "route_count": 3,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "002",
+      "id": 1075,
+      "name": "ns-gb-cc-en-drip 002",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "003",
+      "id": 1076,
+      "name": "ns-gb-cc-en-drip 003",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "004",
+      "id": 1077,
+      "name": "ns-gb-cc-en-drip 004",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "005",
+      "id": 1078,
+      "name": "ns-gb-cc-en-drip 005",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "006",
+      "id": 1079,
+      "name": "ns-gb-cc-en-drip 006",
+      "route_count": 5,
+      "action": "created",
+      "http": 201
+    },
+    {
+      "family": "broadcast",
+      "suffix": "001",
+      "id": 698,
+      "name": "ns-gb-cc-en-mct broadcast 001",
+      "route_count": 5,
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "family": "drip",
+      "suffix": "001",
+      "id": 697,
+      "name": "ns-gb-cc-en-drip 001",
+      "route_count": 5,
+      "action": "updated",
+      "http": 201
+    }
+  ],
+  "created": 9,
+  "updated": 2,
+  "deleted": 0,
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260817T151713-0400-newsoun-gb-cc-en-five-url-pools",
+  "after_count": 24,
+  "drip_distribution": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "broadcast_distribution": [
+    5,
+    5,
+    5,
+    5,
+    3
+  ],
+  "drip_routes": 30,
+  "broadcast_routes": 23,
+  "blank_operations": 0,
+  "checks": {
+    "target_pools": true,
+    "distributions": true,
+    "identities": true,
+    "urls": true,
+    "operations_nonblank": true,
+    "metadata": true,
+    "unrelated": true
+  },
+  "drip_pool_ids": [
+    697,
+    1075,
+    1076,
+    1077,
+    1078,
+    1079
+  ],
+  "broadcast_pool_ids": [
+    698,
+    1071,
+    1072,
+    1073,
+    1074
+  ]
+}

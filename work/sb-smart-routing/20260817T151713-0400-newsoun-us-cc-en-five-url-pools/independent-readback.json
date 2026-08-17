@@ -1,0 +1,84 @@
+{
+  "http": 201,
+  "pool_count": 11,
+  "pools": [
+    {
+      "ID": 393,
+      "NAME": "ns-us-cc-en-drip 001",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1066,
+      "NAME": "ns-us-cc-en-drip 002",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1067,
+      "NAME": "ns-us-cc-en-drip 003",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1068,
+      "NAME": "ns-us-cc-en-drip 004",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1069,
+      "NAME": "ns-us-cc-en-drip 005",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 1070,
+      "NAME": "ns-us-cc-en-drip 006",
+      "SOURCE": "FACEBOOK",
+      "route_count": 5
+    },
+    {
+      "ID": 394,
+      "NAME": "ns-us-cc-en-mct broadcast 001",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1062,
+      "NAME": "ns-us-cc-en-mct broadcast 002",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1063,
+      "NAME": "ns-us-cc-en-mct broadcast 003",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1064,
+      "NAME": "ns-us-cc-en-mct broadcast 004",
+      "SOURCE": "MCT",
+      "route_count": 5
+    },
+    {
+      "ID": 1065,
+      "NAME": "ns-us-cc-en-mct broadcast 005",
+      "SOURCE": "MCT",
+      "route_count": 3
+    }
+  ],
+  "total_routes": 53,
+  "blank_routes": [],
+  "checks": {
+    "target_pools": true,
+    "distributions": true,
+    "identities": true,
+    "urls": true,
+    "operations_nonblank": true,
+    "metadata": true,
+    "unrelated": true
+  },
+  "snapshot_sha256": "8e1c0d9b311da6e54ce221ed2a976e0b8e53545e3c6dcf21cd0a9c69c5ea38b6"
+}

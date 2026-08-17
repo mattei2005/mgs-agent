@@ -1,0 +1,203 @@
+{
+  "publisher": "digital-trust_newsoun",
+  "routing_http": 201,
+  "publisher_pool_count": 6,
+  "title": "Routing > digital-trust > newsoun",
+  "final_url": "https://app.smartbiddingdigital.com/company/digital-trust/newsoun/routing",
+  "url_checks": {
+    "US": [
+      {
+        "url": "https://newsoun.com/rec-us-cc-bankamericard",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-us-cc-bankamericard/"
+      },
+      {
+        "url": "https://newsoun.com/rec-us-cc-bank-cash",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-us-cc-bank-cash/"
+      },
+      {
+        "url": "https://newsoun.com/rec-us-cc-bank-of-america-unlimited-cash-rewards",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-us-cc-bank-of-america-unlimited-cash-rewards/"
+      },
+      {
+        "url": "https://newsoun.com/rec-us-cc-chase-freedom-flex",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-us-cc-chase-freedom-flex/"
+      },
+      {
+        "url": "https://newsoun.com/rec-us-cc-citi-rewards-card",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-us-cc-citi-rewards-card/"
+      }
+    ],
+    "GB": [
+      {
+        "url": "https://newsoun.com/rec-gb-cc-aib-visa-gold",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-gb-cc-aib-visa-gold/"
+      },
+      {
+        "url": "https://newsoun.com/rec-gb-cc-aib-options-two-credit-card",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-gb-cc-aib-options-two-credit-card/"
+      },
+      {
+        "url": "https://newsoun.com/rec-gb-cc-chase-credit-card",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-gb-cc-chase-credit-card/"
+      },
+      {
+        "url": "https://newsoun.com/rec-gb-cc-118-118-money-credit-card",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-gb-cc-118-118-money-credit-card/"
+      },
+      {
+        "url": "https://newsoun.com/rec-gb-cc-fluid-credit-card-the-flexible",
+        "status": 200,
+        "final_url": "https://newsoun.com/rec-gb-cc-fluid-credit-card-the-flexible/"
+      }
+    ]
+  },
+  "markets": {
+    "US": {
+      "pools": [
+        {
+          "ID": 391,
+          "NAME": "ns-us-cc-es-drip",
+          "SOURCE": "FACEBOOK",
+          "LANGUAGE": null,
+          "route_count": 18
+        },
+        {
+          "ID": 392,
+          "NAME": "ns-us-cc-es-broadcast",
+          "SOURCE": "MCT",
+          "LANGUAGE": null,
+          "route_count": 23
+        },
+        {
+          "ID": 393,
+          "NAME": "ns-us-cc-en-drip",
+          "SOURCE": "FACEBOOK",
+          "LANGUAGE": null,
+          "route_count": 30
+        },
+        {
+          "ID": 394,
+          "NAME": "ns-us-cc-en-broadcast",
+          "SOURCE": "MCT",
+          "LANGUAGE": null,
+          "route_count": 23
+        }
+      ],
+      "route_counts_by_source": {
+        "FACEBOOK": 48,
+        "MCT": 46
+      },
+      "unique_identities_by_source": {
+        "FACEBOOK": 48,
+        "MCT": 46
+      },
+      "operations": {
+        "FACEBOOK": [
+          [
+            "facebook_us_cc_bankameri-d_rec"
+          ],
+          [
+            "facebook_us_cc_bank-cash-d_rec"
+          ],
+          [
+            "facebook_us_cc_rewards-d_rec"
+          ],
+          [
+            "facebook_us_cc_freedom-d_rec"
+          ],
+          [
+            "facebook_us_cc_citi-rew-d_rec"
+          ]
+        ],
+        "MCT": [
+          [
+            "mct_us_cc_bankameri_rec"
+          ],
+          [
+            "mct_us_cc_bank-cash_rec"
+          ],
+          [
+            "mct_us_cc_rewards_rec"
+          ],
+          [
+            "mct_us_cc_freedom_rec"
+          ],
+          [
+            "mct_us_cc_citi-rew_rec"
+          ]
+        ]
+      }
+    },
+    "GB": {
+      "pools": [
+        {
+          "ID": 697,
+          "NAME": "ns-gb-cc-en-drip",
+          "SOURCE": "FACEBOOK",
+          "LANGUAGE": "EN",
+          "route_count": 30
+        },
+        {
+          "ID": 698,
+          "NAME": "ns-gb-cc-en-broadcast",
+          "SOURCE": "MCT",
+          "LANGUAGE": "EN",
+          "route_count": 23
+        }
+      ],
+      "route_counts_by_source": {
+        "FACEBOOK": 30,
+        "MCT": 23
+      },
+      "unique_identities_by_source": {
+        "FACEBOOK": 30,
+        "MCT": 23
+      },
+      "operations": {
+        "FACEBOOK": [
+          [
+            "facebook_gb_cc_aib-d_rec"
+          ],
+          [
+            "facebook_gb_cc_options-d_rec"
+          ],
+          [
+            "facebook_gb_cc_chase-d_rec"
+          ],
+          [
+            "facebook_gb_cc_118-118-d_rec"
+          ],
+          [
+            "facebook_gb_cc_flexible-d_rec"
+          ]
+        ],
+        "MCT": [
+          [
+            "mct_gb_cc_aib_rec"
+          ],
+          [
+            "mct_gb_cc_options_rec"
+          ],
+          [
+            "mct_gb_cc_chase_rec"
+          ],
+          [
+            "mct_gb_cc_118-118_rec"
+          ],
+          [
+            "mct_gb_cc_flexible_rec"
+          ]
+        ]
+      }
+    }
+  }
+}
