@@ -6314,7 +6314,7 @@
         "Current upstream npm lock reports 4 high advisories and 0 critical advisories.",
         "Config checker accepts current profiles but advertises metadata version 37 over current version 34."
       ],
-      "updated_at": "2026-08-17T15:29:05.297051+00:00",
+      "updated_at": "2026-08-17T15:47:29.175299+00:00",
       "activation_authorization_message_id": "1538928722525032470",
       "activation_preflight": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/activation-authorized-20260817T151824Z/validator-preflight-result.json",
       "activation_artifacts": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/activation-authorized-20260817T151824Z",
@@ -6379,7 +6379,24 @@
       },
       "activation_report_infra_message_id": "1538932688604626976",
       "activation_report_infra_channel_id": "1498132022634483894",
-      "activation_report_readback": true
+      "activation_report_readback": true,
+      "cleanup": {
+        "status": "completed_validated",
+        "confirmation_message_id": "1538935528630652958",
+        "target_set_sha256": "68af439e3af471fdf91884fb7503d61b2ea5ecdaba20ca092abf8363ee827fb8",
+        "target_count": 5,
+        "manifest_allocated_bytes": 8359649280,
+        "observed_available_delta_bytes": 8357023744,
+        "disk_used_bytes_after": 34696527872,
+        "disk_used_pct_after": 33.72,
+        "result": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/cleanup-execution-20260817.json",
+        "retained_rollback_runtime": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+        "retained_profile_archive": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/hermes-profiles-backup-20260817.tar.gz",
+        "validated_at": "2026-08-17T15:46:41.586192+00:00",
+        "report_infra_message_id": "1538937210798215259",
+        "report_infra_channel_id": "1498132022634483894",
+        "report_infra_readback": true
+      }
     }
   ],
   "profile_skill_references": [

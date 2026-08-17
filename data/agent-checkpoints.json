@@ -273,12 +273,12 @@
     {
       "agent": "zeus",
       "id": "hermes-port-20260817",
-      "next_step": "Monitoramento rotineiro; tratar OAuth root/default separadamente.",
-      "objective": "Ativar e validar Hermes 0.20.2 MGS em 4323c67d com rollback controlado.",
-      "source": "discord-thread:1538878021455319140;authorization-message:1538928722525032470;artifacts:/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/activation-authorized-20260817T151824Z",
-      "state": "completed: hermes 0.20.2 candidate 72bb6732 activated_validated; guard pass; regression 205; config 4/4; gateway one-shots 3/3; root oauth unchanged; ares→atena→zeus ready.",
+      "next_step": "Após confirmação crítica explícita, preparar validador durável e agendar reboot seguro da VPS; sem confirmação, não reiniciar.",
+      "objective": "Ativar e validar Hermes 0.20.2 MGS em 4323c67d, limpar artefatos antigos confirmados e preservar rollback.",
+      "source": "/root/mgs-agent/reports/hermes-updates/20260817-port-4323c67d/cleanup-execution-20260817.json;discord-message:1538935528630652958",
+      "state": "hermes 0.20.2 activated_validated; cleanup target-set 68af439e completed_validated: 5/5 ausentes, 7.78 gib observados, disco 33.72%, rollback 0.20.0 e backup 17/08 preservados. rodolfo pediu reboot após limpeza; aguardando confirmação crítica específica do reboot.",
       "thread_id": "1538878021455319140",
-      "updated_at": "2026-08-17T15:29:04+00:00"
+      "updated_at": "2026-08-17T15:46:52+00:00"
     },
     {
       "agent": "zeus",
@@ -742,5 +742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T15:29:04+00:00"
+  "updated_at": "2026-08-17T15:46:52+00:00"
 }
