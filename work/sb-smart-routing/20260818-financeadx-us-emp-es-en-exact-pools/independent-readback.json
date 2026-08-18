@@ -1,0 +1,195 @@
+{
+  "http": 201,
+  "pool_count": 22,
+  "pools": [
+    {
+      "ID": 1089,
+      "NAME": "fax-us-emp-en-drip 001",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1097,
+      "NAME": "fax-us-emp-en-drip 002",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1098,
+      "NAME": "fax-us-emp-en-drip 003",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1099,
+      "NAME": "fax-us-emp-en-drip 004",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1100,
+      "NAME": "fax-us-emp-en-drip 005",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1101,
+      "NAME": "fax-us-emp-en-drip 006",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1090,
+      "NAME": "fax-us-emp-en-mct broadcast 001",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1093,
+      "NAME": "fax-us-emp-en-mct broadcast 002",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1094,
+      "NAME": "fax-us-emp-en-mct broadcast 003",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1095,
+      "NAME": "fax-us-emp-en-mct broadcast 004",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 5
+    },
+    {
+      "ID": 1096,
+      "NAME": "fax-us-emp-en-mct broadcast 005",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "EN",
+      "route_count": 3
+    },
+    {
+      "ID": 1091,
+      "NAME": "fax-us-emp-es-drip 001",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1106,
+      "NAME": "fax-us-emp-es-drip 002",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1107,
+      "NAME": "fax-us-emp-es-drip 003",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1108,
+      "NAME": "fax-us-emp-es-drip 004",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1109,
+      "NAME": "fax-us-emp-es-drip 005",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1110,
+      "NAME": "fax-us-emp-es-drip 006",
+      "SOURCE": "FACEBOOK",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1092,
+      "NAME": "fax-us-emp-es-mct broadcast 001",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1102,
+      "NAME": "fax-us-emp-es-mct broadcast 002",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1103,
+      "NAME": "fax-us-emp-es-mct broadcast 003",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1104,
+      "NAME": "fax-us-emp-es-mct broadcast 004",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 5
+    },
+    {
+      "ID": 1105,
+      "NAME": "fax-us-emp-es-mct broadcast 005",
+      "SOURCE": "MCT",
+      "VERTICAL": "EMP",
+      "LANGUAGE": "ES",
+      "route_count": 3
+    }
+  ],
+  "total_routes": 106,
+  "blank_operations": 106,
+  "errors": [],
+  "checks": {
+    "target_pools": true,
+    "distributions": true,
+    "identities": true,
+    "metadata": true,
+    "unrelated": true,
+    "operations_nonblank": false
+  },
+  "snapshot_sha256": "d476fa07b591399c44fe6b4a8efa2504ba2ebfe41d7f8ba299c7564655beaa19",
+  "validated_at_et": "2026-08-18T14:07:55-04:00"
+}

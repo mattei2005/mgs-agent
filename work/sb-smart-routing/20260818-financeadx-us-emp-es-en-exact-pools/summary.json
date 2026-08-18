@@ -1,0 +1,259 @@
+{
+  "status": "success_with_adops_pending",
+  "authorized_message_ids": {
+    "ES": "1539331734578012180",
+    "EN": "1539334184923828224"
+  },
+  "before_count": 63,
+  "after_count": 81,
+  "created": 18,
+  "updated": 4,
+  "deleted": 0,
+  "distributions": {
+    "US-EMP-ES:drip": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "US-EMP-ES:broadcast": [
+      5,
+      5,
+      5,
+      5,
+      3
+    ],
+    "US-EMP-EN:drip": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "US-EMP-EN:broadcast": [
+      5,
+      5,
+      5,
+      5,
+      3
+    ]
+  },
+  "routes_total": 106,
+  "blank_operations": 106,
+  "operations_pending_for_adops": 106,
+  "checks": {
+    "target_pools": true,
+    "distributions": true,
+    "identities": true,
+    "urls": true,
+    "metadata": true,
+    "unrelated": true,
+    "operations_nonblank": false
+  },
+  "results": [
+    {
+      "market": "US-EMP-EN",
+      "family": "broadcast",
+      "suffix": 2,
+      "id": 1093,
+      "name": "fax-us-emp-en-mct broadcast 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "broadcast",
+      "suffix": 3,
+      "id": 1094,
+      "name": "fax-us-emp-en-mct broadcast 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "broadcast",
+      "suffix": 4,
+      "id": 1095,
+      "name": "fax-us-emp-en-mct broadcast 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "broadcast",
+      "suffix": 5,
+      "id": 1096,
+      "name": "fax-us-emp-en-mct broadcast 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 2,
+      "id": 1097,
+      "name": "fax-us-emp-en-drip 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 3,
+      "id": 1098,
+      "name": "fax-us-emp-en-drip 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 4,
+      "id": 1099,
+      "name": "fax-us-emp-en-drip 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 5,
+      "id": 1100,
+      "name": "fax-us-emp-en-drip 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 6,
+      "id": 1101,
+      "name": "fax-us-emp-en-drip 006",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "broadcast",
+      "suffix": 2,
+      "id": 1102,
+      "name": "fax-us-emp-es-mct broadcast 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "broadcast",
+      "suffix": 3,
+      "id": 1103,
+      "name": "fax-us-emp-es-mct broadcast 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "broadcast",
+      "suffix": 4,
+      "id": 1104,
+      "name": "fax-us-emp-es-mct broadcast 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "broadcast",
+      "suffix": 5,
+      "id": 1105,
+      "name": "fax-us-emp-es-mct broadcast 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 2,
+      "id": 1106,
+      "name": "fax-us-emp-es-drip 002",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 3,
+      "id": 1107,
+      "name": "fax-us-emp-es-drip 003",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 4,
+      "id": 1108,
+      "name": "fax-us-emp-es-drip 004",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 5,
+      "id": 1109,
+      "name": "fax-us-emp-es-drip 005",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 6,
+      "id": 1110,
+      "name": "fax-us-emp-es-drip 006",
+      "action": "created",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "drip",
+      "suffix": 1,
+      "id": 1091,
+      "name": "fax-us-emp-es-drip 001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-ES",
+      "family": "broadcast",
+      "suffix": 1,
+      "id": 1092,
+      "name": "fax-us-emp-es-mct broadcast 001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "drip",
+      "suffix": 1,
+      "id": 1089,
+      "name": "fax-us-emp-en-drip 001",
+      "action": "updated",
+      "http": 201
+    },
+    {
+      "market": "US-EMP-EN",
+      "family": "broadcast",
+      "suffix": 1,
+      "id": 1090,
+      "name": "fax-us-emp-en-mct broadcast 001",
+      "action": "updated",
+      "http": 201
+    }
+  ],
+  "snapshot_sha256": "d476fa07b591399c44fe6b4a8efa2504ba2ebfe41d7f8ba299c7564655beaa19",
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260818-financeadx-us-emp-es-en-exact-pools",
+  "completed_at_et": "2026-08-18T14:07:45-04:00"
+}
