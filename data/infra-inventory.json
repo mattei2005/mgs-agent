@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T20:40:19-04:00",
+    "updated_at": "2026-08-17T20:41:55-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7128,7 +7128,10 @@
       ],
       "preexisting_warnings": "Permission warnings in selected mu-plugins on lyzmo.com, wantabrand.com, gamezonead.com and creditoparaveiculo.com; WP 2FA gates passed and those files were not changed.",
       "user_post_action": "Every account without a ready TOTP binding must scan its own QR and store backup codes at the next login.",
-      "updated_at": "2026-08-17T20:40:19-04:00"
+      "report_infra_message_id": "1539071779488792587",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T20:41:55-04:00"
     }
   ],
   "profile_skill_references": [
@@ -7144,7 +7147,10 @@
       "sha256": "b8c24f57d5930e26383989d3223f7edb89dbc401aea3f629a220994f46eadc00",
       "purpose": "Canonical MGS workflow for mass WP 2FA install, all-user immediate enforcement, exact policy readback and external backend automation.",
       "validation": "Exercised across 54 sites and 447 accounts; RunCloud 49/49, external fresh-login 5/5 and public 54/54; live/versioned hashes match.",
-      "updated_at": "2026-08-17T20:40:19-04:00"
+      "report_infra_message_id": "1539071779488792587",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T20:41:55-04:00"
     },
     {
       "id": "zeus-wordpress-irrelevant-posts-incident-audit-reference",
@@ -11408,5 +11414,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-08-17T19:36:57-04:00"
+  "updated_at": "2026-08-17T20:41:55-04:00"
 }
