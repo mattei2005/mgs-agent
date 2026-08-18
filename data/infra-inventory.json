@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T19:36:57-04:00",
+    "updated_at": "2026-08-17T20:13:51-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -6373,10 +6373,36 @@
       "market": "GB-CC-EN",
       "authorized_message_id": "1539013270592290837",
       "applied_at": "2026-08-17T16:52:40-04:00",
-      "drip_pool_ids": [605, 1084, 1085, 1086, 1087, 1088],
-      "broadcast_pool_ids": [606, 1080, 1081, 1082, 1083],
-      "created_pool_ids": [1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088],
-      "updated_pool_ids": [605, 606],
+      "drip_pool_ids": [
+        605,
+        1084,
+        1085,
+        1086,
+        1087,
+        1088
+      ],
+      "broadcast_pool_ids": [
+        606,
+        1080,
+        1081,
+        1082,
+        1083
+      ],
+      "created_pool_ids": [
+        1080,
+        1081,
+        1082,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087,
+        1088
+      ],
+      "updated_pool_ids": [
+        605,
+        606
+      ],
       "deleted_pool_ids": [],
       "routes": {
         "drip": 30,
@@ -6944,7 +6970,14 @@
         "logo_sha256": "36f94911ac3514a908c8a0066fac7b9b82a712d7ac6a3e949961e6d5b20083c5",
         "current_attachment_id": 119,
         "current_logo_url": "https://autolendpro.com/wp-content/uploads/2026/08/autolendpro-preloader-logo-6.png",
-        "deleted_duplicate_attachment_ids": [111, 114, 115, 116, 117, 118],
+        "deleted_duplicate_attachment_ids": [
+          111,
+          114,
+          115,
+          116,
+          117,
+          118
+        ],
         "duplicate_cleanup_performed": true,
         "cleanup_authorization_message_id": "1539045585670246491",
         "cleanup_backup_path": "/var/backups/mgs-loftloader-rollout/autolendpro-cleanup-20260817T230012Z",
@@ -10839,9 +10872,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 62136,
-      "md5": "7ec656e781eb8add613899704494fe83",
-      "modified_at": "2026-08-17T16:20:55-04:00"
+      "size_bytes": 64505,
+      "md5": "3d5e77b28c53febfab27b2f8d834025f",
+      "modified_at": "2026-08-17T20:13:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
