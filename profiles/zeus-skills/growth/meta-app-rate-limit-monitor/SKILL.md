@@ -1,6 +1,6 @@
 ---
 name: meta-app-rate-limit-monitor
-description: "Use when setting up, validating, monitoring, or troubleshooting MGS Meta/Facebook Developer apps B001–B011 for Messenger/ChatPion/DigitalTrChat rate-limit health, token status, app availability, and Openzed/B007 operational risk."
+description: "Use when setting up, validating, monitoring, or troubleshooting MGS Meta/Facebook Developer apps B001–B012 for Messenger/ChatPion/DigitalTrChat rate-limit health, token status, app availability, and Openzed/B007 operational risk."
 version: 1.0.0
 author: Hermes Agent
 license: MIT
