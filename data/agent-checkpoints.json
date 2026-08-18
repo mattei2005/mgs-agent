@@ -442,6 +442,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b013-b008-alert-refresh-20260818",
+      "next_step": "Nenhuma ação pendente; manter somente os novos snapshots live e a monitoração normal",
+      "objective": "Limpar alertas históricos B013-2 desde 16/08, remover alerta sem email B008-2 de 15/08 e publicar snapshots live corretos",
+      "source": "discord:1539297264965656636#1539307036645392434",
+      "state": "concluído e reportado: b013-2 38 antigas removidas e live 30/30; b008-2 3 antigas removidas e live 9/9 sem sem-email; report-infra 1539309932124311603",
+      "thread_id": "1539297264965656636",
+      "updated_at": "2026-08-18T16:28:16+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-general-alert-manual-pause-20260806",
       "next_step": "Reativar B001/B002/B003/B004/B008/B009/B010 somente quando Rodolfo informar a troca dos apps.",
       "objective": "Enviar alerta geral aos apps operacionais e persistir a pausa manual dos sete apps off conforme correção de Rodolfo.",
@@ -822,5 +832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-18T15:58:19+00:00"
+  "updated_at": "2026-08-18T16:28:16+00:00"
 }

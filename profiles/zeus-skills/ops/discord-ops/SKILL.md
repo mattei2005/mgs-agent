@@ -23,6 +23,7 @@ Completion criterion: only the procedure and evidence required for the current a
   - Cutover de política em sessão nova, sem produção, com readback de `state.db` → `references/cross-agent-session-policy-cutover.md`
 - **Recuperar e consolidar continuidade de thread grande → Novo agente Discord/Hermes — bootstrap de bot, token e service** → `references/route-pack-03.md`
 - **Enviar arquivos grandes/anexos no Discord → Formato REPORT-INFRA (Atena/Ares → Zeus)** → `references/route-pack-04.md`
+- **Excluir alertas/mensagens em lote com HTTP 429** → `references/discord-batch-message-deletion-rate-limits.md`
 - **Processamento Zeus de REPORT-INFRA** → `references/route-pack-05.md`
 - **Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile → Alternativa Operacional** → `references/route-pack-06.md`
 - **SEÇÃO C — Hook git post-commit com notificação Discord → Política MGS de tool progress no Discord** → `references/route-pack-07.md`

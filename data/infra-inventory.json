@@ -7437,19 +7437,39 @@
       "type": "profile_skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/SKILL.md",
-      "size_bytes": 99113,
-      "sha256": "77aa4fa32d5c58b6529026997d06851c602115068e952f1a338441380fdad53e",
-      "runtime_versioned_sha_match": false,
-      "updated_at": "2026-07-09T13:19:17-04:00",
-      "validation": "Patched Discord delete/repost by channel ID rule after Rodolfo correction; runtime skill updated; used REST API to delete/repost HOA report parts without ID REC.",
-      "source_report": "Zeus REPORT-INFRA embed standardization 2026-07-02",
+      "size_bytes": 3986,
+      "sha256": "72393cdb99bd96b2ea5da083f28e2165d746f83ab29db8f36d602de168953027",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-08-18T12:27:13-04:00",
+      "validation": "Runtime/versioned SKILL SHA match; rate-limit deletion reference added after live 38-message cleanup recovered from Discord HTTP 429 with sequential retry_after handling and zero failures.",
+      "source_report": "REPORT-INFRA Zeus Discord alert cleanup rate-limit handling 2026-08-18",
       "agent": "zeus",
-      "modified_at": "2026-07-14T14:47:17-04:00",
+      "modified_at": "2026-08-18T12:25:31-04:00",
       "reference_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/route-pack-09.md",
       "versioned_reference_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/route-pack-09.md",
       "reference_sha256": "7c7c3bd2eb8273d8b386de6c0577fbe934aedb35b5b502a5bc9b26356337f996",
       "reference_runtime_versioned_sha_match": true,
-      "last_change": "2026-07-14: documented that the effective DISCORD_ALLOWED_USERS gate runs before auto-thread, and required parity between registry, live/mirror allow_from and process environment for team profiles."
+      "last_change": "2026-08-18: routed batch Discord message deletion to a sequential 429-aware procedure with exact preflight/readback/audit requirements.",
+      "batch_delete_reference_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
+      "batch_delete_versioned_reference_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
+      "batch_delete_reference_sha256": "16f3787d09fcf34d924dd9416cdd40c7b37fd1a4cd3221b56f5248cbd9400dc6",
+      "batch_delete_reference_runtime_versioned_sha_match": true
+    },
+    {
+      "id": "zeus-discord-ops-batch-message-deletion-rate-limits",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
+      "size_bytes": 2213,
+      "sha256": "16f3787d09fcf34d924dd9416cdd40c7b37fd1a4cd3221b56f5248cbd9400dc6",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Sequential, rate-limit-aware Discord batch alert deletion with exact preflight and readback.",
+      "validation": "Live B013-2 cleanup requested 38 messages: 31 deleted by retry-aware REST, 7 already deleted by the initial tool path, zero failures; channel cutoff readback PASS.",
+      "updated_at": "2026-08-18T12:27:13-04:00",
+      "source_report": "REPORT-INFRA Zeus Discord alert cleanup rate-limit handling 2026-08-18"
     },
     {
       "profile": "zeus",
@@ -11033,9 +11053,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 66034,
-      "md5": "e9163157899698ff9dec34a93d0cd582",
-      "modified_at": "2026-08-18T11:58:19-04:00"
+      "size_bytes": 66710,
+      "md5": "90b0ef3e7dd5006ebef2beea6edfb7f1",
+      "modified_at": "2026-08-18T12:28:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
