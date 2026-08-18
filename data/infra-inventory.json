@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T21:09:16-04:00",
+    "updated_at": "2026-08-17T21:51:28-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7150,10 +7150,35 @@
         "removed_header_was_preloader_only": 12,
         "ad_inserter_not_modified": 1
       },
-      "preserved_ad_header_sites": ["ducapes.com", "eggbev.com", "finanzas.newsoun.com", "finanzas.portalrelevante.com", "newsoun.com", "zytiva.com"],
-      "untouched_ad_header_sites": ["de.newsoun.com", "finance.topfeed.fun"],
-      "preloader_only_removed_sites": ["cliquet.com", "conectageral.com", "finance.ducapes.com", "finanzas.cliquet.com", "finanzas.conectageral.com", "finanzas.eggbev.com", "finanzas.lyzmo.com", "finanzas.openzed.com", "finanzas.topfeed.fun", "finanzas.zytiva.com", "lyzmo.com", "portalrelevante.com"],
-      "ad_inserter_untouched_sites": ["openzed.com"],
+      "preserved_ad_header_sites": [
+        "ducapes.com",
+        "eggbev.com",
+        "finanzas.newsoun.com",
+        "finanzas.portalrelevante.com",
+        "newsoun.com",
+        "zytiva.com"
+      ],
+      "untouched_ad_header_sites": [
+        "de.newsoun.com",
+        "finance.topfeed.fun"
+      ],
+      "preloader_only_removed_sites": [
+        "cliquet.com",
+        "conectageral.com",
+        "finance.ducapes.com",
+        "finanzas.cliquet.com",
+        "finanzas.conectageral.com",
+        "finanzas.eggbev.com",
+        "finanzas.lyzmo.com",
+        "finanzas.openzed.com",
+        "finanzas.topfeed.fun",
+        "finanzas.zytiva.com",
+        "lyzmo.com",
+        "portalrelevante.com"
+      ],
+      "ad_inserter_untouched_sites": [
+        "openzed.com"
+      ],
       "backup_integrity": "15 RunCloud SHA256SUMS verified; three exact external Header backups read; Finance Topfeed and DE Newsoun had no Ad Inserter backup because that option was not modified.",
       "frontend_validation": {
         "article_http_200": 21,
@@ -7163,8 +7188,15 @@
         "positive_slots_after_scroll": 3
       },
       "separate_findings": {
-        "duplicate_or_mismatched_ad_stack_source": ["ducapes.com", "zytiva.com", "finanzas.newsoun.com", "finanzas.portalrelevante.com"],
-        "no_gpt_or_builder_on_latest_article": ["finanzas.topfeed.fun"],
+        "duplicate_or_mismatched_ad_stack_source": [
+          "ducapes.com",
+          "zytiva.com",
+          "finanzas.newsoun.com",
+          "finanzas.portalrelevante.com"
+        ],
+        "no_gpt_or_builder_on_latest_article": [
+          "finanzas.topfeed.fun"
+        ],
         "runtime_note": "Headless article smoke produced slots on Finance Topfeed, Cliquet and Finanzas Cliquet only; zero slots elsewhere is a separate provider/targeting/runtime signal, not evidence of Header deletion."
       },
       "evidence_path": "/root/mgs-agent/reports/wordpress-ad-inserter-audit/20260817-preloader-backup-comparison-21-sites.json",
@@ -11001,9 +11033,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 64505,
-      "md5": "3d5e77b28c53febfab27b2f8d834025f",
-      "modified_at": "2026-08-17T20:13:27-04:00"
+      "size_bytes": 65262,
+      "md5": "69a5390b2756923aa3ebd7e5acb7ca22",
+      "modified_at": "2026-08-17T21:51:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
