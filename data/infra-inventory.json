@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-18T06:33:14-04:00",
+    "updated_at": "2026-08-18T14:08:07-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7208,6 +7208,122 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T21:09:16-04:00"
+    },
+    {
+      "type": "smart-routing-config",
+      "status": "active_with_adops_pending",
+      "publisher": "financeadx",
+      "applied_at": "2026-08-18T14:07:45-04:00",
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 53,
+      "adops_pending": true,
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260818-financeadx-us-emp-es-en-exact-pools",
+      "summary_sha256": "199b302c73dbeb3f4878fcdc0a5b67258095dba13f834ec8dec3faad99d1b3bd",
+      "readback_sha256": "7a1011c64f4555734b2ed5333259e7300737c433ad18629a64db3c207a772a92",
+      "unrelated_pools_unchanged": true,
+      "validation": "4/4 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 JBF operations blank because the exact products/pathnames are absent from the live FinanceADX catalog; AdOps pending; no unrelated pool drift.",
+      "id": "financeadx-us-emp-es-smart-routing-exact-pools-20260818",
+      "market": "US-EMP-ES",
+      "authorized_message_id": "1539331734578012180",
+      "drip_pool_ids": [
+        1091,
+        1106,
+        1107,
+        1108,
+        1109,
+        1110
+      ],
+      "broadcast_pool_ids": [
+        1092,
+        1102,
+        1103,
+        1104,
+        1105
+      ],
+      "created_pool_ids": [
+        1102,
+        1103,
+        1104,
+        1105,
+        1106,
+        1107,
+        1108,
+        1109,
+        1110
+      ],
+      "updated_pool_ids": [
+        1091,
+        1092
+      ],
+      "deleted_pool_ids": [],
+      "urls": [
+        "https://financeadx.com/rec-us-prestamo-alliant-credit-union",
+        "https://financeadx.com/rec-us-prestamo-achieve",
+        "https://financeadx.com/rec-us-prestamo-grace-loan-advance",
+        "https://financeadx.com/rec-us-prestamo-wells-fargo"
+      ]
+    },
+    {
+      "type": "smart-routing-config",
+      "status": "active_with_adops_pending",
+      "publisher": "financeadx",
+      "applied_at": "2026-08-18T14:07:45-04:00",
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 53,
+      "adops_pending": true,
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260818-financeadx-us-emp-es-en-exact-pools",
+      "summary_sha256": "199b302c73dbeb3f4878fcdc0a5b67258095dba13f834ec8dec3faad99d1b3bd",
+      "readback_sha256": "7a1011c64f4555734b2ed5333259e7300737c433ad18629a64db3c207a772a92",
+      "unrelated_pools_unchanged": true,
+      "validation": "4/4 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 JBF operations blank because the exact products/pathnames are absent from the live FinanceADX catalog; AdOps pending; no unrelated pool drift.",
+      "id": "financeadx-us-emp-en-smart-routing-exact-pools-20260818",
+      "market": "US-EMP-EN",
+      "authorized_message_id": "1539334184923828224",
+      "drip_pool_ids": [
+        1089,
+        1097,
+        1098,
+        1099,
+        1100,
+        1101
+      ],
+      "broadcast_pool_ids": [
+        1090,
+        1093,
+        1094,
+        1095,
+        1096
+      ],
+      "created_pool_ids": [
+        1093,
+        1094,
+        1095,
+        1096,
+        1097,
+        1098,
+        1099,
+        1100,
+        1101
+      ],
+      "updated_pool_ids": [
+        1089,
+        1090
+      ],
+      "deleted_pool_ids": [],
+      "urls": [
+        "https://financeadx.com/rec-us-loan-alliant-credit-union",
+        "https://financeadx.com/rec-us-loan-achieve",
+        "https://financeadx.com/rec-us-loan-grace-loan-advance",
+        "https://financeadx.com/rec-us-loan-wells-fargo"
+      ]
     }
   ],
   "profile_skill_references": [
