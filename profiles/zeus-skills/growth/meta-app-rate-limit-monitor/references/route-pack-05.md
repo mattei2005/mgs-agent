@@ -61,6 +61,18 @@ Rodolfo confirmed that every segurador in B001–B012 is an app administrator, s
 - Do not remove the registry `admin` value solely for this presentation rule; it can remain as credential/profile metadata and must not be interpreted as a unique owner.
 - When activating this policy over an open incident caused only by `user_token_me`, close that incident silently in state so the monitor does not emit a now-obsolete recovery alert.
 
+### Direct-traffic profiles excluded from role verification — effective 2026-08-18
+
+Rodolfo designated the following Sheet identities for direct-traffic strategy, not Meta app-role verification: `Ninda Nak Mapa`, `Reginaldo Novaes Santiago`, `Arruda Arruda`, `Pasgal ID`, `PERFIL NOVO - 193 - backup 192`, and `PERFIL NOVO - 192 - usando para apps pagos 11/08`.
+
+The canonical set lives in `data/meta-app-registry.json` under `verification_ignored_profiles.identities`. Match normalized exact identity against Sheet `Segurador`, `User`, or `USUARIO`, and against Meta role name/ID when available. For these identities only:
+
+- suppress added/removed role deltas and remove stale `last_removed`/`cumulative_removed` entries on the next successful cycle;
+- do not create or preserve an `X` in `Removidos acumulado`; the full Sheet reconciler clears the marker and counts the row under `ignored_verification_rows`;
+- omit ignored Sheet rows from manual/live accumulated-removal lists;
+- continue scanning and alerting every other segurador in the same apps normally;
+- do not treat this ignore set as a global page or user authorization change.
+
 ### Temporary app-scoped notification pause
 
 When Rodolfo asks to pause only selected app channels, do not pause the whole `meta-app-roles-watch` cron if unaffected apps must remain monitored. Write `/root/mgs-agent/data/meta-app-role-alert-pause.json` with the exact app keys and one of two explicit modes:
