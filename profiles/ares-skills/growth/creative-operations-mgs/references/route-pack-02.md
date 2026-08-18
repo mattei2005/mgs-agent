@@ -29,7 +29,7 @@ https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
 
 O root canônico é exclusivamente o Shared Drive `0AEwt4Ye690ocUk9PVA`, administrado no Google Workspace por `support@matteiservicesinc.com`. Nomes, paths e estrutura permanecem iguais. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
 
-Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
+Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar o transporte correspondente: `HTTP 200/201` com `message_id` no bot poster atual, ou `HTTP 204` no webhook legado. Em seguida, confirmar via Discord API que a mensagem existe em `#alerts-infra` (`1498132022634483894`), com `content` vazio e embed esperado, antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 
 ### Gate de capacidades no UPLOAD MANUAL
 

@@ -5,6 +5,7 @@ Use when an authorized request identifies country, vertical and language and ask
 ## Durable execution pattern
 
 1. Resolve the live hierarchy from the configured root and confirm `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; never assume the root ID is itself `CRIATIVOS`.
+   - For the Shared Drive root, `files.get(root_id)` can legitimately return the generic file name `Drive` even when `id` and `driveId` are both the canonical Shared Drive ID. Validate the actual Shared Drive name with `drives.get(drive_id)` and require `name=MGS-AGENTS`; use `files.get` for root ID, `driveId` and capabilities. Do not reject a valid root solely because the file-resource name is `Drive`.
 2. List current source files with Drive ID, name, MIME, size/checksum, image/video dimensions, `ownedByMe` and `capabilities(canDownload,canEdit,canMoveItemWithinDrive,canTrash,canDelete)`. Key all processing by `source_drive_id`, not filename.
    - For the canonical treat/move flow, require the capabilities actually used: download the raw asset, upload the clean copy, and move the source within Drive. `ownedByMe=false`, `canTrash=false`, or `canDelete=false` do not block processing because the original is preserved rather than deleted.
    - Block only when a required capability is absent or the live API rejects that action. Do not require transfer of ownership by default.
