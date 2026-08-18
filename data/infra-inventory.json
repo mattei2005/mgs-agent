@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T20:41:55-04:00",
+    "updated_at": "2026-08-17T21:09:16-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7132,6 +7132,50 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T20:41:55-04:00"
+    },
+    {
+      "id": "ad-inserter-preloader-forensic-20260817",
+      "agent": "zeus",
+      "type": "wordpress_ad_inserter_forensic_audit",
+      "owner": "Zeus/Tech",
+      "status": "completed_read_only_no_ad_code_deleted",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1539073686752075856",
+      "source_thread_id": "1538961042753851402",
+      "scope_sites": 21,
+      "conclusion": "No GPT, window.tags or JBF builder code present in a pre-change Ad Inserter backup was deleted by the preloader rollout.",
+      "classification_counts": {
+        "ad_code_preserved": 6,
+        "ad_inserter_not_modified_current_ad_code_present": 2,
+        "removed_header_was_preloader_only": 12,
+        "ad_inserter_not_modified": 1
+      },
+      "preserved_ad_header_sites": ["ducapes.com", "eggbev.com", "finanzas.newsoun.com", "finanzas.portalrelevante.com", "newsoun.com", "zytiva.com"],
+      "untouched_ad_header_sites": ["de.newsoun.com", "finance.topfeed.fun"],
+      "preloader_only_removed_sites": ["cliquet.com", "conectageral.com", "finance.ducapes.com", "finanzas.cliquet.com", "finanzas.conectageral.com", "finanzas.eggbev.com", "finanzas.lyzmo.com", "finanzas.openzed.com", "finanzas.topfeed.fun", "finanzas.zytiva.com", "lyzmo.com", "portalrelevante.com"],
+      "ad_inserter_untouched_sites": ["openzed.com"],
+      "backup_integrity": "15 RunCloud SHA256SUMS verified; three exact external Header backups read; Finance Topfeed and DE Newsoun had no Ad Inserter backup because that option was not modified.",
+      "frontend_validation": {
+        "article_http_200": 21,
+        "googletag_initialized": 20,
+        "builder_loaded": 19,
+        "builder_urls_http_200": 17,
+        "positive_slots_after_scroll": 3
+      },
+      "separate_findings": {
+        "duplicate_or_mismatched_ad_stack_source": ["ducapes.com", "zytiva.com", "finanzas.newsoun.com", "finanzas.portalrelevante.com"],
+        "no_gpt_or_builder_on_latest_article": ["finanzas.topfeed.fun"],
+        "runtime_note": "Headless article smoke produced slots on Finance Topfeed, Cliquet and Finanzas Cliquet only; zero slots elsewhere is a separate provider/targeting/runtime signal, not evidence of Header deletion."
+      },
+      "evidence_path": "/root/mgs-agent/reports/wordpress-ad-inserter-audit/20260817-preloader-backup-comparison-21-sites.json",
+      "checkpoint_id": "ad-inserter-preloader-forensic-20260817",
+      "checkpoint_state": "completed_read_only_no_ad_code_deleted_separate_runtime_findings",
+      "action_taken": "Read-only audit; no WordPress option, plugin, cache, user, password or credential changed.",
+      "validation": "RunCloud backups/current options decoded and compared by Header length/hash/markers/toggle; exact external backups and saved authenticated readbacks checked; bare/cache-busted frontend and article/scroll browser runtime tested; 21/21 HTTP 200; knowledge validate PASS and regression 10/10.",
+      "report_infra_message_id": "1539078663574650961",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "updated_at": "2026-08-17T21:09:16-04:00"
     }
   ],
   "profile_skill_references": [
@@ -7176,11 +7220,11 @@
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/jbf-loftloader-preloader-equivalence.md",
-      "size_bytes": 11871,
-      "modified_at": "2026-08-17T18:31:14-04:00",
-      "sha256": "feada4ec13b0b74ba7fe19abf9bbae95ff81839c68353f839345bf0eae212615",
+      "size_bytes": 14238,
+      "modified_at": "2026-08-17T21:05:45-04:00",
+      "sha256": "fc83b1470b328d97568115f844bce74f367b4e39cce845710fe00ddf2e88f8b7",
       "purpose": "Durable procedure to audit and standardize SB/JBF integrated preloaders against LoftLoader on non-JBF WordPress sites, including timing, cache-bust validation and an equivalence preset.",
-      "validation": "Expanded after LoftLoader portfolio rollout with explicit Wantabrand/M2 gate, idempotent media-import rule, external missing-wp_footer fallback, Header enable toggle and numeric Customizer readback; live and versioned hashes match.",
+      "validation": "Expanded with a backup-forensic workflow distinguishing removed preloader-only Headers from preserved ad code and separate runtime/duplication signals; exercised on 21 sites; live and versioned hashes match.",
       "report_infra_message_id": "1539001065696006188",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
@@ -7196,7 +7240,10 @@
       "last_loftloader_report_infra_message_id": "1539039566655389800",
       "last_loftloader_report_infra_channel_id": "1498132022634483894",
       "last_loftloader_report_infra_readback": true,
-      "updated_at": "2026-08-17T18:33:57-04:00"
+      "last_ad_forensic_report_infra_message_id": "1539078663574650961",
+      "last_ad_forensic_report_infra_channel_id": "1498132022634483894",
+      "last_ad_forensic_report_infra_readback": true,
+      "updated_at": "2026-08-17T21:09:16-04:00"
     },
     {
       "id": "zeus-mgs-chat-car-offer-and-sms-rollout-reference",

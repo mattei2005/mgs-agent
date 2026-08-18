@@ -122,6 +122,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ad-inserter-preloader-forensic-20260817",
+      "next_step": "Aguardar decisão de Rodolfo sobre abrir investigação/correção separada de duplicidade de builders e ausência/runtime de slots; não restaurar Headers preloader-only.",
+      "objective": "Comparar backups pré-preloader e estado atual do Ad Inserter em 21 sites para determinar se GPT/window.tags/JBF builder foram removidos.",
+      "source": "reports/wordpress-ad-inserter-audit/20260817-preloader-backup-comparison-21-sites.json",
+      "state": "completed_read_only_no_ad_code_deleted_separate_runtime_findings",
+      "thread_id": "1538961042753851402",
+      "updated_at": "2026-08-18T01:06:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "adspower-dtr-app-failover-20260812",
       "next_step": "Inventariar por profile_id o host/instância, segurador, app atual, proxy esperado e país/IP esperado; definir matriz de app substituto e executar canário sem overrides de proxy, fingerprint, cookies ou cache.",
       "objective": "Projetar e validar automação de contingência que reconecta seguradores no DigitalTRChat a um app Meta substituto via AdsPower quando o app atual cair.",
@@ -802,5 +812,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-18T00:40:00+00:00"
+  "updated_at": "2026-08-18T01:06:10+00:00"
 }

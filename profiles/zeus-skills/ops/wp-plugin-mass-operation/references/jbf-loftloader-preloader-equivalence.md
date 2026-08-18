@@ -190,6 +190,32 @@ Fallback validado:
 
 O Customizer pode devolver `2.0` como string mesmo quando o valor semântico é `2`. Validar `Number(value) === 2`, não igualdade textual rígida.
 
+## Auditoria forense após suspeita de remoção de anúncios
+
+Use quando alguém suspeitar que a migração do preloader removeu GPT/JBF do Ad Inserter.
+
+1. Não inferir pelo Header atual vazio. Ler o `ad_inserter-before.raw` exato do backup pré-mudança, validar `SHA256SUMS`, decodificar o envelope `:AI:` e desserializar `['h']['code']`.
+2. Comparar antes/agora por:
+   - tamanho e SHA-256 do Header;
+   - `get_the_tags`, `window.tags`, `securepubads.../gpt.js` e URL `.builder.js`;
+   - `enable_manual`/scalars do Header;
+   - preloader manual e assets `fincgolem`.
+3. Classificar por site:
+   - código publicitário estava no backup e foi preservado;
+   - Ad Inserter não foi alterado e o código atual continua presente;
+   - Header removido continha somente preloader;
+   - Ad Inserter não participou do rollout.
+4. Não restaurar o snippet padrão em um Header vazio se o backup mostra que aquele Header continha somente preloader. O GPT/builder pode vir do tema, WPCode ou outro hook; uma restauração inventada pode duplicar o ad stack.
+5. Validar frontend bare e cache-busted, extrair todas as URLs de builder e exigir HTTP 200. Depois testar artigo publicado em browser; homepage pode não criar slots.
+6. Separar conclusões:
+   - backup prova se houve ou não exclusão;
+   - GPT/builder presentes no HTML provam carregamento de fonte;
+   - `googletag.pubads().getSlots()`/iframes provam inicialização runtime;
+   - slots zero em headless podem depender de geografia, targeting, consentimento ou integração e exigem investigação do provedor antes de mudar produção.
+7. Procurar duplicidade/mismatch: GPT repetido, `window.tags` repetido e mais de um builder no mesmo source. Esse é um incidente separado de “código apagado”.
+
+Caso de referência 2026-08-17, 21 sites: 15 backups RunCloud validados por SHA-256 + backups externos exatos; seis Headers com GPT/builder foram preservados, dois sites com Ad Header não participaram da mudança, doze Headers removidos tinham somente preloader e OpenZed não teve Ad Inserter alterado. Frontend: 21/21 HTTP 200, GPT em 20/21 artigos e builder em 19/21. Foram detectados sinais separados de duplicidade/mismatch em Ducapes, Zytiva, Finanzas Newsoun e Finanzas PortalRelevante, e ausência de GPT/builder em Finanzas Topfeed; nenhuma correção foi aplicada durante a auditoria read-only.
+
 ## Auditoria obrigatória
 
 1. Ler options reais via WP-CLI/REST.

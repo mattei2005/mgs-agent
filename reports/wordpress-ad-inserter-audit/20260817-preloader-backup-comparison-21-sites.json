@@ -1,0 +1,2101 @@
+{
+  "audit": "Ad Inserter preloader-change forensic comparison",
+  "requested_by": "Rodolfo Mattei",
+  "source_thread_id": "1538961042753851402",
+  "scope_sites": 21,
+  "conclusion": "No GPT/window.tags/JBF builder code present in a pre-change Ad Inserter backup was deleted by the preloader rollout.",
+  "counts": {
+    "ad_code_preserved": 6,
+    "ad_inserter_not_modified_current_ad_code_present": 2,
+    "removed_header_was_preloader_only": 12,
+    "ad_inserter_not_modified": 1,
+    "article_http_200": 21,
+    "article_googletag_initialized": 20,
+    "article_builder_loaded": 19,
+    "article_slots_positive_initial": 3,
+    "article_slots_positive_after_scroll": 3
+  },
+  "preserved_sites": [
+    "ducapes.com",
+    "eggbev.com",
+    "finanzas.newsoun.com",
+    "finanzas.portalrelevante.com",
+    "newsoun.com",
+    "zytiva.com"
+  ],
+  "untouched_ad_header_sites": [
+    "de.newsoun.com",
+    "finance.topfeed.fun"
+  ],
+  "preloader_only_removed_sites": [
+    "cliquet.com",
+    "conectageral.com",
+    "finance.ducapes.com",
+    "finanzas.cliquet.com",
+    "finanzas.conectageral.com",
+    "finanzas.eggbev.com",
+    "finanzas.lyzmo.com",
+    "finanzas.openzed.com",
+    "finanzas.topfeed.fun",
+    "finanzas.zytiva.com",
+    "lyzmo.com",
+    "portalrelevante.com"
+  ],
+  "ad_inserter_untouched_sites": [
+    "openzed.com"
+  ],
+  "separate_findings": {
+    "duplicate_or_mismatched_ad_stack_source": [
+      "ducapes.com",
+      "zytiva.com",
+      "finanzas.newsoun.com",
+      "finanzas.portalrelevante.com"
+    ],
+    "no_gpt_or_builder_on_latest_article": [
+      "finanzas.topfeed.fun"
+    ],
+    "headless_runtime_zero_slots_after_scroll": [
+      "lyzmo.com",
+      "finanzas.lyzmo.com",
+      "eggbev.com",
+      "finanzas.eggbev.com",
+      "ducapes.com",
+      "finance.ducapes.com",
+      "finanzas.topfeed.fun",
+      "zytiva.com",
+      "finanzas.zytiva.com",
+      "newsoun.com",
+      "finanzas.newsoun.com",
+      "de.newsoun.com",
+      "openzed.com",
+      "finanzas.openzed.com",
+      "conectageral.com",
+      "finanzas.conectageral.com",
+      "portalrelevante.com",
+      "finanzas.portalrelevante.com"
+    ],
+    "positive_slots": [
+      "finance.topfeed.fun",
+      "cliquet.com",
+      "finanzas.cliquet.com"
+    ],
+    "note": "Zero slots in headless smoke is a separate delivery/runtime signal and is not evidence of Header deletion; builders loaded HTTP 200. Further JBF/provider diagnosis is required before changing production."
+  },
+  "backup_integrity": {
+    "runcloud_sha256sum_verified": 15,
+    "runcloud_without_ad_backup_because_not_modified": [
+      "finance.topfeed.fun",
+      "de.newsoun.com"
+    ],
+    "external_exact_header_backups": {
+      "cliquet.com": {
+        "path": "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212935Z/cliquet.com/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      },
+      "finanzas.cliquet.com": {
+        "path": "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212935Z/finanzas.cliquet.com/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      },
+      "finanzas.openzed.com": {
+        "path": "/root/.hermes/secure-backups/loftloader-external/finopenzed-fallback-20260817/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      }
+    }
+  },
+  "action_taken": "Read-only audit. No WordPress option, plugin, cache, user, password or credential changed.",
+  "sites": [
+    {
+      "domain": "lyzmo.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "lyzmo.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "099036bea2ba35e8beeecf3b8e4276e390d2f2b552d8d921c48692f964a37a94",
+          "top_keys": 89,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "cbfa223d3278004367178b71b973fc8c1fa971e3fe1e040f190f2ede5346cc8f",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmo/digital-trust_lyzmo.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmo/digital-trust_lyzmo.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "lyzmo.com",
+        "target": "https://lyzmo.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://lyzmo.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmo/digital-trust_lyzmo.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "lyzmo.com",
+        "target": "https://lyzmo.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3480,
+        "scrollY": 2712
+      }
+    },
+    {
+      "domain": "finanzas.lyzmo.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finanzas.lyzmo.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "006f688bc4ddd7eafa7598fd5dbc1ef3eda625ee50908acfedfc516eeea79407",
+          "top_keys": 89,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "f8dc0640adecc2a09ed56e69424aec36ad058e241788baf88da54c99ce488542",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmofinanzas/digital-trust_lyzmofinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmofinanzas/digital-trust_lyzmofinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.lyzmo.com",
+        "target": "https://finanzas.lyzmo.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.lyzmo.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/lyzmofinanzas/digital-trust_lyzmofinanzas.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 7
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.lyzmo.com",
+        "target": "https://finanzas.lyzmo.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3536,
+        "scrollY": 2768
+      }
+    },
+    {
+      "domain": "eggbev.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "eggbev.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "a342f8f6e0181e8c47974c3d03a1b7b5adad71fcdebf9436163af0435fb30bd3",
+          "top_keys": 89,
+          "header_len": 1181,
+          "header_sha256": "e583adb26bf3152c7bb4b3145b305aa6a35522674461e09fa0971008dd56db7c",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": true,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/eggbev/digital-trust_eggbev.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "dad379b18e586b368f836849f595f318972b1ea8d8ab7ed60235497b9d60171c",
+          "top_keys": 89,
+          "header_len": 426,
+          "header_sha256": "3905467c747cf7ef6c94c00f7f6600f9f792ff5d73d7ade2c752d76fb5045a0a",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/eggbev/digital-trust_eggbev.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbev/digital-trust_eggbev.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbev/digital-trust_eggbev.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "eggbev.com",
+        "target": "https://eggbev.com/apply-us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://eggbev.com/apply-us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbev/digital-trust_eggbev.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "eggbev.com",
+        "target": "https://eggbev.com/apply-us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3011,
+        "scrollY": 2243
+      }
+    },
+    {
+      "domain": "finanzas.eggbev.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finanzas.eggbev.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "b219ebbd1527642fa6762c24878cdbf986139dd2e71396d86b9d59dcc2ced275",
+          "top_keys": 89,
+          "header_len": 754,
+          "header_sha256": "906e0a9d320762ce7964c4558584e89311efa7b8d2777112d2eb2365ad014328",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "72e03c44b258e34da73d846d8942d242d0a05ff7b9f9caa6868f982a71f43473",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbevfinanzas/digital-trust_eggbevfinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbevfinanzas/digital-trust_eggbevfinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.eggbev.com",
+        "target": "https://finanzas.eggbev.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.eggbev.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/eggbevfinanzas/digital-trust_eggbevfinanzas.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.eggbev.com",
+        "target": "https://finanzas.eggbev.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3270,
+        "scrollY": 2502
+      }
+    },
+    {
+      "domain": "ducapes.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "ducapes.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "03be88664b98631a4e7c92a24a0f6f5ba60122bcd19a3009101b05fd538dcd59",
+          "top_keys": 85,
+          "header_len": 430,
+          "header_sha256": "1770cecae2220003bbfb6a8baafe1346174632ced1de549c5fc2381728342b47",
+          "header_scalars": {
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/ducapes/digital-trust_ducapes.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "03be88664b98631a4e7c92a24a0f6f5ba60122bcd19a3009101b05fd538dcd59",
+          "top_keys": 85,
+          "header_len": 430,
+          "header_sha256": "1770cecae2220003bbfb6a8baafe1346174632ced1de549c5fc2381728342b47",
+          "header_scalars": {
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/ducapes/digital-trust_ducapes.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapes/digital-trust_ducapes.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapes/digital-trust_ducapes.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "ducapes.com",
+        "target": "https://ducapes.com/ciclos-economicos-y-fluctuaciones-economicas/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://ducapes.com/ciclos-economicos-y-fluctuaciones-economicas/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapes/digital-trust_ducapes.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 2
+      },
+      "scroll_runtime": {
+        "domain": "ducapes.com",
+        "target": "https://ducapes.com/ciclos-economicos-y-fluctuaciones-economicas/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 7224,
+        "scrollY": 6456
+      }
+    },
+    {
+      "domain": "finance.ducapes.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finance.ducapes.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "e0f10dedecd7ce9fc7767ebe68818d5b43e36f78b83a5b56d907e95eb4d90c74",
+          "top_keys": 89,
+          "header_len": 1024,
+          "header_sha256": "c1ed9e2aa3fd9619c17c11164a616e0239c1b5391f83916d808d7810e41a5864",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "9fdf4f5f2aa5a116897f716e729f979c02915b5abb98e1f5feae900dcf89d15f",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapesfinance/digital-trust_ducapesfinance.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapesfinance/digital-trust_ducapesfinance.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finance.ducapes.com",
+        "target": "https://finance.ducapes.com/credit-markets-and-access-to-financing/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finance.ducapes.com/credit-markets-and-access-to-financing/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/ducapesfinance/digital-trust_ducapesfinance.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 2
+      },
+      "scroll_runtime": {
+        "domain": "finance.ducapes.com",
+        "target": "https://finance.ducapes.com/credit-markets-and-access-to-financing/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 6016,
+        "scrollY": 5248
+      }
+    },
+    {
+      "domain": "finance.topfeed.fun",
+      "classification": "ad_inserter_not_modified_current_ad_code_present",
+      "runcloud_compare": {
+        "domain": "finance.topfeed.fun",
+        "before": {
+          "backup_available": false
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "4925ca3d596fd7ac1299b0353d5fa88938df25f392ef9fc459b9ab9471005652",
+          "top_keys": 93,
+          "header_len": 513,
+          "header_sha256": "f2b5f906dfc054f4ba9490ff3297cd892895a86ecb10fc3e53017b24809fa267",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "article_runtime": {
+        "domain": "finance.topfeed.fun",
+        "target": "https://finance.topfeed.fun/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finance.topfeed.fun/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [],
+        "googletag": true,
+        "slots": 2,
+        "adIframes": 0,
+        "adContainers": 4,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "finance.topfeed.fun",
+        "target": "https://finance.topfeed.fun/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 2,
+        "adIframes": 0,
+        "adContainers": 1,
+        "scrollHeight": 5319,
+        "scrollY": 4551
+      }
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finanzas.topfeed.fun",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "5297f7440bd5b6900dba8a937b517ed40758c23fb22e8bdbec304f8ab3afc69b",
+          "top_keys": 101,
+          "header_len": 817,
+          "header_sha256": "bc25b489564b5544a2d361829531530cdaf770ef9e4137efaf8e4fd4e3a2efe2",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1",
+            "enable_404": "0",
+            "detect_server_side": "0",
+            "display_for_devices": "0"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "368494073e541d84cf361f96b39aed3bd9b13e854dbaeee0e06088b04d988d2d",
+          "top_keys": 101,
+          "header_len": 794,
+          "header_sha256": "bbf6f72e3c8beade9703ef7485c533fceacd37ea5b0eed658fa94c96631442a7",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1",
+            "enable_404": "0",
+            "detect_server_side": "0",
+            "display_for_devices": "0"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 1,
+        "builders": [],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 1,
+        "builders": [],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.topfeed.fun",
+        "target": "https://finanzas.topfeed.fun/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.topfeed.fun/us-loan-achieve/",
+        "gptResources": [],
+        "builderResources": [],
+        "googletag": false,
+        "slots": -1,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 0
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.topfeed.fun",
+        "target": "https://finanzas.topfeed.fun/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3289,
+        "scrollY": 2521
+      }
+    },
+    {
+      "domain": "zytiva.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "zytiva.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "d7b0bfca387774ec95d3885565f2bafab51e10e5c3e49abd355c2cc0529f2c03",
+          "top_keys": 89,
+          "header_len": 1453,
+          "header_sha256": "9181f1222f60c35bed8426cb4f15ca5983d7dac2481034f554cf27d137bc0d78",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/zytiva/digital-trust_zytiva.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "a017b8b86ce6159b29e81d3f64464add739fbc741dec14fe15c6dffeb56732ba",
+          "top_keys": 89,
+          "header_len": 426,
+          "header_sha256": "af08dadd35fc3dbfd4988330adbd5bbb8939b1d7c3aded9920c375487b990155",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/zytiva/digital-trust_zytiva.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytiva/digital-trust_zytiva.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytiva/digital-trust_zytiva.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "zytiva.com",
+        "target": "https://zytiva.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://zytiva.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytiva/digital-trust_zytiva.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "zytiva.com",
+        "target": "https://zytiva.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3599,
+        "scrollY": 2831
+      }
+    },
+    {
+      "domain": "finanzas.zytiva.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finanzas.zytiva.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "3d6458e33d09f43459304aaac0502e776f8bd1434d5dedd56cf91efb5da79a8a",
+          "top_keys": 89,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "6df009ce31dd037ec917d95b13e065f6eccddff74c9e178d77d45af1726b7180",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytivafinanzas/digital-trust_zytivafinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytivafinanzas/digital-trust_zytivafinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.zytiva.com",
+        "target": "https://finanzas.zytiva.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.zytiva.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/zytivafinanzas/digital-trust_zytivafinanzas.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 7
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.zytiva.com",
+        "target": "https://finanzas.zytiva.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3509,
+        "scrollY": 2741
+      }
+    },
+    {
+      "domain": "newsoun.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "newsoun.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "72a7a372b34897a4b1ab09d2a53297dec68e330430584e2a911a7a2b5cf265c5",
+          "top_keys": 91,
+          "header_len": 430,
+          "header_sha256": "9efcd84ad4e6d2734f9d88698bedc5b457245c0ee37fba7070c7f121bf71f798",
+          "header_scalars": {
+            "process_php": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "72a7a372b34897a4b1ab09d2a53297dec68e330430584e2a911a7a2b5cf265c5",
+          "top_keys": 91,
+          "header_len": 430,
+          "header_sha256": "9efcd84ad4e6d2734f9d88698bedc5b457245c0ee37fba7070c7f121bf71f798",
+          "header_scalars": {
+            "process_php": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "newsoun.com",
+        "target": "https://newsoun.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://newsoun.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "newsoun.com",
+        "target": "https://newsoun.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3917,
+        "scrollY": 3149
+      }
+    },
+    {
+      "domain": "finanzas.newsoun.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "finanzas.newsoun.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "a04636ffee45f5074f806ce0fcc3e26d43aae560c349908908e8862383fbad25",
+          "top_keys": 91,
+          "header_len": 1455,
+          "header_sha256": "e0302ea574a37d69180339677175512fea0f41baaf25eefa38d5eaa3fb79a211",
+          "header_scalars": {
+            "process_php": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "700f0a1cc6832c12b0d0e796c169f761281684bc49b3ac9187dc3dd6b2525fd3",
+          "top_keys": 91,
+          "header_len": 429,
+          "header_sha256": "351c3ff07ad6364785111a5295821cf69ecb568fb00e4268edebca1b1864e9ec",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounfinanzas/digital-trust_newsounfinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsoun/digital-trust_newsoun.builder.js",
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounfinanzas/digital-trust_newsounfinanzas.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.newsoun.com",
+        "target": "https://finanzas.newsoun.com/us-loan-achieve/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.newsoun.com/us-loan-achieve/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounfinanzas/digital-trust_newsounfinanzas.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 7
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.newsoun.com",
+        "target": "https://finanzas.newsoun.com/us-loan-achieve/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 3584,
+        "scrollY": 2816
+      }
+    },
+    {
+      "domain": "de.newsoun.com",
+      "classification": "ad_inserter_not_modified_current_ad_code_present",
+      "runcloud_compare": {
+        "domain": "de.newsoun.com",
+        "before": {
+          "backup_available": false
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "e0f6e4074aa4d532404312f482d89b2b974532457ce1049bf540e0aeebf96224",
+          "top_keys": 89,
+          "header_len": 434,
+          "header_sha256": "e1347a20058dcb7b4fa2238589bc42633f63b42e6b59a6e5a201229065dd4e2d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/newsounde/digital-trust_newsounde.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounde/digital-trust_newsounde.builder.js"
+        ],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounde/digital-trust_newsounde.builder.js"
+        ],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "article_runtime": {
+        "domain": "de.newsoun.com",
+        "target": "https://de.newsoun.com/14-spartipps-die-im-alltag-wirklich-funktionieren/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://de.newsoun.com/14-spartipps-die-im-alltag-wirklich-funktionieren/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/newsounde/digital-trust_newsounde.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 2
+      },
+      "scroll_runtime": {
+        "domain": "de.newsoun.com",
+        "target": "https://de.newsoun.com/14-spartipps-die-im-alltag-wirklich-funktionieren/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 6013,
+        "scrollY": 5245
+      }
+    },
+    {
+      "domain": "openzed.com",
+      "classification": "ad_inserter_not_modified",
+      "runcloud_compare": null,
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 0,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 0,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "article_runtime": {
+        "domain": "openzed.com",
+        "target": "https://openzed.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://openzed.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/openzed/digital-trust_openzed.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 7
+      },
+      "scroll_runtime": {
+        "domain": "openzed.com",
+        "target": "https://openzed.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 7675,
+        "scrollY": 6915
+      }
+    },
+    {
+      "domain": "finanzas.openzed.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": null,
+      "external_backup": {
+        "path": "/root/.hermes/secure-backups/loftloader-external/finopenzed-fallback-20260817/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      },
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 0,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 0,
+        "window_tags": 0,
+        "builders": [],
+        "jbf_preloader": 0,
+        "loftloader": 1
+      },
+      "article_runtime": {
+        "domain": "finanzas.openzed.com",
+        "target": "https://finanzas.openzed.com/rec-es-tarjeta-cetelem-visa/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.openzed.com/rec-es-tarjeta-cetelem-visa/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/openzedfinanzas/digital-trust_openzedfinanzas.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.openzed.com",
+        "target": "https://finanzas.openzed.com/rec-es-tarjeta-cetelem-visa/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 4116,
+        "scrollY": 3356
+      }
+    },
+    {
+      "domain": "cliquet.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": null,
+      "external_backup": {
+        "path": "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212935Z/cliquet.com/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      },
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquet/digital-trust_cliquet_direct_br.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquet/digital-trust_cliquet_direct_br.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "cliquet.com",
+        "target": "https://cliquet.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://cliquet.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquet/digital-trust_cliquet_direct_br.builder.js"
+        ],
+        "googletag": true,
+        "slots": 4,
+        "adIframes": 1,
+        "adContainers": 8,
+        "windowTags": 7
+      },
+      "scroll_runtime": {
+        "domain": "cliquet.com",
+        "target": "https://cliquet.com/p1-br-car-financie-seu-carro-em-60-meses/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 4,
+        "adIframes": 0,
+        "adContainers": 5,
+        "scrollHeight": 6646,
+        "scrollY": 5878
+      }
+    },
+    {
+      "domain": "finanzas.cliquet.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": null,
+      "external_backup": {
+        "path": "/root/.hermes/secure-backups/jbf-preloader-external/20260817T212935Z/finanzas.cliquet.com/ad-header-before.html",
+        "len": 1025,
+        "sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+        "gpt": false,
+        "builder": false,
+        "manual_preloader": true
+      },
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquetfinanzas/digital-trust_cliquetfinanzas_direct_us.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquetfinanzas/digital-trust_cliquetfinanzas_direct_us.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.cliquet.com",
+        "target": "https://finanzas.cliquet.com/inversores-apuestan-por-la-ia-en-ee-uu/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.cliquet.com/inversores-apuestan-por-la-ia-en-ee-uu/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/cliquetfinanzas/digital-trust_cliquetfinanzas_direct_us.builder.js"
+        ],
+        "googletag": true,
+        "slots": 4,
+        "adIframes": 1,
+        "adContainers": 6,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.cliquet.com",
+        "target": "https://finanzas.cliquet.com/inversores-apuestan-por-la-ia-en-ee-uu/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 4,
+        "adIframes": 1,
+        "adContainers": 4,
+        "scrollHeight": 4384,
+        "scrollY": 3616
+      }
+    },
+    {
+      "domain": "conectageral.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "conectageral.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "5e0adaab0334e9deb18ac92bfe597e83271174252773b46a46028dea1f109086",
+          "top_keys": 98,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "06b796b06f64469defbee3f97318687f6eee3e4011cdbde10e7cbf34a1d3bc67",
+          "top_keys": 98,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageral/digital-trust_conectageral.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageral/digital-trust_conectageral.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "conectageral.com",
+        "target": "https://conectageral.com/rec-us-cc-state-department-fcu-platinum/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://conectageral.com/rec-us-cc-state-department-fcu-platinum/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageral/digital-trust_conectageral.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 6
+      },
+      "scroll_runtime": {
+        "domain": "conectageral.com",
+        "target": "https://conectageral.com/rec-us-cc-state-department-fcu-platinum/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 2974,
+        "scrollY": 2206
+      }
+    },
+    {
+      "domain": "finanzas.conectageral.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "finanzas.conectageral.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "734752d41f5824f61a871645a3ad6741e34837bd68816cef4269d232560a88e2",
+          "top_keys": 98,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "405a89749a738e16c5cc2d9a2e438a6c03fad8e86f35554d55dd01d194dc4182",
+          "top_keys": 98,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageralfinanzas/digital-trust_conectageralfinanzas_direct.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageralfinanzas/digital-trust_conectageralfinanzas_direct.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.conectageral.com",
+        "target": "https://finanzas.conectageral.com/",
+        "targetKind": "home_no_public_posts",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.conectageral.com/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/conectageralfinanzas/digital-trust_conectageralfinanzas_direct.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 0
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.conectageral.com",
+        "target": "https://finanzas.conectageral.com/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 396,
+        "scrollY": 0
+      }
+    },
+    {
+      "domain": "portalrelevante.com",
+      "classification": "removed_header_was_preloader_only",
+      "runcloud_compare": {
+        "domain": "portalrelevante.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "70a0d6b57b0ad0ad4b316c0f3f4a7536f685330508d5018ef66a5243092f2803",
+          "top_keys": 89,
+          "header_len": 1025,
+          "header_sha256": "04811272536696b3ecae4bb3f3609ce41bed878ad9eb29a9b1b70b182ef8527d",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": true,
+            "fincgolem": true
+          },
+          "builder_urls": []
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "18c04cab5139451dba3cb7df6cdcc543677aeb33d2c8f19d5c74b06179147386",
+          "top_keys": 89,
+          "header_len": 0,
+          "header_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": false,
+            "window_tags": false,
+            "gpt": false,
+            "jbf_builder": false,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": []
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 1,
+        "window_tags": 1,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "portalrelevante.com",
+        "target": "https://portalrelevante.com/14-practical-ways-to-strengthen-your-financial-future/",
+        "targetKind": "latest_post",
+        "status": 200,
+        "error": null,
+        "url": "https://portalrelevante.com/14-practical-ways-to-strengthen-your-financial-future/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 4
+      },
+      "scroll_runtime": {
+        "domain": "portalrelevante.com",
+        "target": "https://portalrelevante.com/14-practical-ways-to-strengthen-your-financial-future/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 4910,
+        "scrollY": 4142
+      }
+    },
+    {
+      "domain": "finanzas.portalrelevante.com",
+      "classification": "ad_code_preserved",
+      "runcloud_compare": {
+        "domain": "finanzas.portalrelevante.com",
+        "before": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "bdf6794b449984efab93ff43aef89a5e53402506dd806a5d8aa795dbc2a28b87",
+          "top_keys": 89,
+          "header_len": 445,
+          "header_sha256": "b046cf8222814d3a27935c01a42fdd6288e01864bf58a2af49ec2fb70861b11b",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+          ]
+        },
+        "current": {
+          "option_present": true,
+          "decode_ok": true,
+          "raw_sha256": "bdf6794b449984efab93ff43aef89a5e53402506dd806a5d8aa795dbc2a28b87",
+          "top_keys": 89,
+          "header_len": 445,
+          "header_sha256": "b046cf8222814d3a27935c01a42fdd6288e01864bf58a2af49ec2fb70861b11b",
+          "header_scalars": {
+            "process_php": "1",
+            "enable_manual": "1"
+          },
+          "markers": {
+            "get_the_tags": true,
+            "window_tags": true,
+            "gpt": true,
+            "jbf_builder": true,
+            "manual_preloader": false,
+            "fincgolem": false
+          },
+          "builder_urls": [
+            "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+          ]
+        }
+      },
+      "external_backup": null,
+      "frontend_bare": {
+        "kind": "bare",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js",
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevantefinanzas/digital-trust_portalrelevantefinanzas_direct.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "frontend_cachebust": {
+        "kind": "bust",
+        "http": 200,
+        "gpt": 2,
+        "window_tags": 2,
+        "builders": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js",
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevantefinanzas/digital-trust_portalrelevantefinanzas_direct.builder.js"
+        ],
+        "jbf_preloader": 1,
+        "loftloader": 0
+      },
+      "article_runtime": {
+        "domain": "finanzas.portalrelevante.com",
+        "target": "https://finanzas.portalrelevante.com/",
+        "targetKind": "home_no_public_posts",
+        "status": 200,
+        "error": null,
+        "url": "https://finanzas.portalrelevante.com/",
+        "gptResources": [
+          "https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        ],
+        "builderResources": [
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevantefinanzas/digital-trust_portalrelevantefinanzas_direct.builder.js",
+          "https://assets.jbfdigital.com.br/assets/digital-trust/portalrelevante/digital-trust_portalrelevante.builder.js"
+        ],
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "windowTags": 0
+      },
+      "scroll_runtime": {
+        "domain": "finanzas.portalrelevante.com",
+        "target": "https://finanzas.portalrelevante.com/",
+        "status": 200,
+        "error": null,
+        "googletag": true,
+        "slots": 0,
+        "adIframes": 0,
+        "adContainers": 0,
+        "scrollHeight": 292,
+        "scrollY": 0
+      }
+    }
+  ]
+}
