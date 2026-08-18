@@ -22,6 +22,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-NICOLAS-META-CHANNELS-20260818",
+      "next_step": "Zeus promover a exceção de autonomia campaign-level do Nicolas na fonte real de permissões. Admin criar os canais por operação e fornecer IDs; Ares então configura route map, aliases das contas, threads e crons com readback.",
+      "objective": "Estruturar canais privados do Ares por operação estável (site, país, vertical e idioma), contendo criação de campanhas e relatórios em threads, inclusive quando houver múltiplas contas de anúncio.",
+      "source": "discord:thread:1539394253526925384; decisões de Rodolfo Mattei em 2026-08-18",
+      "state": "decisão confirmada por rodolfo: não haverá canal por nome do nicolas; cada canal será por site+país+vertical+idioma e reunirá criação e acompanhamento da operação. múltiplas contas de anúncio permanecem no mesmo canal, identificadas por alias e separadas em threads/sections. geizian está fora do plano. nicolas tem autonomia total em nível de campanha, incluindo criar, editar, definir/alterar budget, ativar, pausar, reativar, clonar, substituir e arquivar, sem aprovação rotineira de rodolfo. guardrails técnicos de preflight, dry-run quando disponível, conciliação de criativos, audit e get/readback permanecem; billing, credenciais, ownership da conta, app permissions e pixel/capi estrutural não são ações de campanha e continuam fora desta delegação.",
+      "thread_id": "1539394253526925384",
+      "updated_at": "2026-08-18T22:26:49+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-US-EMP-STATIC-30-20260817",
       "next_step": "Nenhuma pendência. O lote não existe mais. Qualquer nova produção deve começar com nova direção criativa aprovada antes de gerar em escala.",
       "objective": "Excluir definitivamente o lote de 30 criativos US-EMP rejeitado por Rodolfo e reverter Drive, inventário e planilha.",
@@ -832,5 +842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-18T16:28:16+00:00"
+  "updated_at": "2026-08-18T22:26:49+00:00"
 }
