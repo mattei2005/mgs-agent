@@ -504,6 +504,42 @@
       "updated_at": "2026-08-07T03:31:50+00:00"
     },
     {
+      "canonical_key": "meta-app.b001-b012.shared-admin-alert-policy",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-18T11:36:00-04:00",
+      "id": "decision-meta-app-b001-b012-shared-admin-alert-policy-20260818",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B001-B012 use shared-admin alert semantics without a unique admin field",
+      "updated_at": "2026-08-18T15:55:29+00:00"
+    },
+    {
+      "canonical_key": "meta-app.role-verification.direct-traffic-ignore-set",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-18T11:48:40-04:00",
+      "id": "decision-meta-app-direct-traffic-verification-ignore-20260818",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Direct-traffic Sheet profiles are excluded from Meta role verification",
+      "updated_at": "2026-08-18T15:55:29+00:00"
+    },
+    {
       "canonical_key": "meta-app.alert-pause.manual-replacement-set",
       "canonical_source": "data/meta-app-role-alert-pause.json",
       "consumers": [
@@ -739,5 +775,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-17T18:47:29+00:00"
+  "updated_at": "2026-08-18T15:55:29+00:00"
 }

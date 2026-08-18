@@ -453,12 +453,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-shared-admin-alert-policy-20260818",
-      "next_step": "Aplicar patch reversível no monitor e na referência, testar em fixture e validar ciclo real silencioso",
-      "objective": "Remover alertas e campos de admin específico dos monitores Meta B001–B012, preservando roles, token válido e saúde real do app",
-      "source": "discord:1539297264965656636#1539297264965656636",
-      "state": "escopo confirmado por rodolfo; causa live confirmada em b002-2 como falha isolada de user_token_me; implementação pendente",
+      "next_step": "Nenhuma ação pendente; cron segue monitorando somente os sinais e perfis operacionais restantes",
+      "objective": "Remover alertas e campos de admin específico dos monitores Meta B001–B012 e ignorar perfis de tráfego direto definidos por Rodolfo",
+      "source": "discord:1539297264965656636#1539300335393177691",
+      "state": "concluído e reportado: monitor live validado em 12 apps; 6 perfis excluídos da verificação; 10 mensagens falsas removidas; report-infra 1539302343844167701",
       "thread_id": "1539297264965656636",
-      "updated_at": "2026-08-18T15:39:40+00:00"
+      "updated_at": "2026-08-18T15:58:19+00:00"
     },
     {
       "agent": "zeus",
@@ -822,5 +822,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-18T15:39:40+00:00"
+  "updated_at": "2026-08-18T15:58:19+00:00"
 }

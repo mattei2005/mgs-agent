@@ -1499,16 +1499,16 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 91641,
-      "modified_at": "2026-08-17T09:28:14-04:00",
-      "sha256": "1dbb29263631804863b131aa85239ddcfbda62571eb1df33752a0640ddfa0b82",
-      "description": "Registry-driven Meta roles monitor with replacement-app state migration, expected-role fail-closed guard and cache-backed new-ID identity resolution.",
-      "validation": "bash and embedded-Python syntax PASS; B004-3 all four Graph checks HTTP 200, token valid, 12 roles/12 names resolved, cache reused 12 names with zero individual calls on repeat, safe_for_sheet=true and errors=0; scoped Sheet readback 12/12 present, identity_blocked_rows=0, updated=false, alerts_sent=0.",
-      "updated_at": "2026-08-17T09:36:20-04:00",
-      "source_report": "REPORT-INFRA Zeus B004-3 Meta monitor cutover 2026-08-17",
-      "last_change": "2026-08-17: migrated B004-2 to B004-3, added expected_sheet_roles fail-closed protection and bounded cache-backed per-new-ID identity fallback.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0043-cutover-20260817-092609/meta-app-roles-watch.sh.before",
-      "state_backup": "/root/mgs-agent/backups/meta-app-b0043-cutover-20260817-092609/meta-app-role-monitor-state.json.before"
+      "size_bytes": 93769,
+      "modified_at": "2026-08-18T11:52:53-04:00",
+      "sha256": "2f54ada0b6aaea00ec644299df909f2cb73015023ecca4af90bf6e47f955ea33",
+      "description": "Registry-driven Meta roles monitor with B001-B012 shared-admin alert semantics and direct-traffic verification exclusions.",
+      "validation": "Shell/embedded-Python PASS; full live run processed 12 apps with alerts_sent=0, errors_count=0, ignored_verification_rows=6, no ignored identities left in alert state and zero Discord re-alerts.",
+      "updated_at": "2026-08-18T11:56:53-04:00",
+      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18",
+      "last_change": "2026-08-18: removed unique admin fields and /me-driven alerts for B001-B012; excluded six direct-traffic identities from role deltas and Sheet X reconciliation.",
+      "backup": "/root/mgs-agent/backups/meta-app-shared-admin-alerts-20260818-114022/meta-app-roles-watch.sh.before",
+      "state_backup": "/root/mgs-agent/backups/meta-app-shared-admin-alerts-20260818-114022/meta-app-role-monitor-state.json.before"
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -1584,13 +1584,13 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 47646,
-      "modified_at": "2026-07-08T16:20:53-04:00",
-      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
+      "size_bytes": 1928,
+      "modified_at": "2026-08-18T11:43:07-04:00",
+      "sha256": "6b6c4c127ca5dd22d5da4c7e10509135a1903a91e9ea35ff684a61c404ea0247",
       "id": "doc-8887da278c",
       "agent": "zeus",
       "type": "ops_doc",
-      "updated_at": "2026-07-09T10:11:23-04:00",
+      "updated_at": "2026-08-18T11:56:53-04:00",
       "description": "B011 DTR route/canonical alert/cache-clean rules updated.",
       "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing.",
       "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
@@ -3889,16 +3889,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 33799,
-      "modified_at": "2026-08-17T10:03:20-04:00",
-      "sha256": "2561059db49fe4b44e8dc4be262a58f7e887b54781b94e4dbb416d14639a0c64",
+      "size_bytes": 35389,
+      "modified_at": "2026-08-18T11:53:09-04:00",
+      "sha256": "fe9d50187bdfb0a6a691cb59aa3bddf1372e5bf0389cfb5a2ba28642d3448820",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Current B004-3/B006-3 live-alert procedure and 2026-08-13 NO APP assignment-source supersession documented; current 11-app replacement set refreshed.",
-      "validation": "Runtime/versioned SHA-256 match; live Service Account readback shows current assignments in NO APP with APP PROVISORIO blank; B004-3 12/12 and B006-3 15/15 token/roles/Sheet reconciliation PASS.",
-      "updated_at": "2026-08-17T10:03:57-04:00",
-      "source_report": "REPORT-INFRA Zeus B004-3/B006-3 live alert reconciliation 2026-08-17"
+      "description": "B001-B012 shared-admin alert policy and six-profile direct-traffic verification exclusion procedure.",
+      "validation": "Runtime/versioned SHA-256 match; policy fixture PASS; full live run 12 apps, six ignored rows, zero alerts/errors.",
+      "updated_at": "2026-08-18T11:56:53-04:00",
+      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -6099,13 +6099,13 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 5696,
-      "modified_at": "2026-08-17T09:34:13-04:00",
-      "sha256": "fc737ca02858ce52dfdcd2460a938f86fad10e086c2a92f986088fa27332e593",
+      "size_bytes": 6156,
+      "modified_at": "2026-08-18T11:51:12-04:00",
+      "sha256": "86b8bb419c7a85de25d66d1cdb0912daeacb30239eb9ad5de20df2e228239e8f",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Zeus B004-3 Meta monitor cutover 2026-08-17",
+      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1538901046653358121",
+      "authorization_message_id": "1539300007885152407",
       "scope": [
         "B001-2",
         "B002-2",
@@ -6121,9 +6121,9 @@
         "B012",
         "B013-2"
       ],
-      "validation": "B004-3 exact 1Password item unique; app metadata, roles, me and debug_token HTTP 200; token valid/app-bound; 12 accepted roles resolved to 12 names; Sheet has 12 NO APP=B004-3 rows, 12/12 present, identity_blocked_rows=0 and zero cutover writes; Discord channel name b004-3-app-status confirmed by GET.",
-      "updated_at": "2026-08-17T09:36:20-04:00",
-      "last_change": "Replaced B004-2 with B004-3, changed owner/admin to Beatriz Santos, normalized the same Discord channel name and stored expected_sheet_roles=12."
+      "validation": "JSON PASS; six exact Sheet identities matched by live Service Account readback; full live monitor reported ignored_verification_rows=6, alerts_sent=0 and errors_count=0.",
+      "updated_at": "2026-08-18T11:56:53-04:00",
+      "last_change": "Added canonical direct-traffic verification ignore set for six Sheet identities; app registry scope unchanged."
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -7331,13 +7331,13 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 47646,
-      "modified_at": "2026-07-08T16:20:53-04:00",
-      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
+      "size_bytes": 1928,
+      "modified_at": "2026-08-18T11:43:07-04:00",
+      "sha256": "6b6c4c127ca5dd22d5da4c7e10509135a1903a91e9ea35ff684a61c404ea0247",
       "owner": "Zeus/Ops",
       "type": "skill",
       "description": "Updated for canonical B011 naming and monitor configuration.",
-      "updated_at": "2026-07-09T10:11:23-04:00",
+      "updated_at": "2026-08-18T11:56:53-04:00",
       "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing.",
       "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
     },
@@ -7355,14 +7355,14 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 47646,
-      "modified_at": "2026-07-08T16:20:53-04:00",
-      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
+      "size_bytes": 1928,
+      "modified_at": "2026-08-18T11:43:07-04:00",
+      "sha256": "6b6c4c127ca5dd22d5da4c7e10509135a1903a91e9ea35ff684a61c404ea0247",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
       "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT.",
-      "updated_at": "2026-07-09T10:11:23-04:00",
+      "updated_at": "2026-08-18T11:56:53-04:00",
       "skill": "meta-app-rate-limit-monitor",
-      "md5": "e67190c6524427c58ffabd2f3e652f07",
+      "md5": "4c8036a77db6614596c95749e2a6e39e",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
       "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
@@ -7473,16 +7473,16 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 47646,
-      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
+      "size_bytes": 1928,
+      "sha256": "6b6c4c127ca5dd22d5da4c7e10509135a1903a91e9ea35ff684a61c404ea0247",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-09T10:11:23-04:00",
+      "updated_at": "2026-08-18T11:56:53-04:00",
       "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT.",
-      "modified_at": "2026-07-08T16:20:53-04:00",
+      "modified_at": "2026-08-18T11:43:07-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "agent": "zeus",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
-      "md5": "e67190c6524427c58ffabd2f3e652f07",
+      "md5": "4c8036a77db6614596c95749e2a6e39e",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
       "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
@@ -11033,9 +11033,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 65327,
-      "md5": "cb362f46b17a036ff1f0f7de700aa12b",
-      "modified_at": "2026-08-18T06:33:11-04:00"
+      "size_bytes": 66034,
+      "md5": "e9163157899698ff9dec34a93d0cd582",
+      "modified_at": "2026-08-18T11:58:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -11201,9 +11201,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 25866,
-      "md5": "68e2b4a54ba88799f8e49e1af57c525a",
-      "modified_at": "2026-08-17T14:47:29-04:00"
+      "size_bytes": 27230,
+      "md5": "a38de94e856813e6ce0fcbe61cff9e19",
+      "modified_at": "2026-08-18T11:55:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -11225,9 +11225,10 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 5696,
-      "md5": "00aa7819096dbb0f3d58cd129c1f0092",
-      "modified_at": "2026-08-17T09:34:13-04:00"
+      "size_bytes": 6156,
+      "md5": "a3a7ae8c4fe84a6f6dd81c573878b6b8",
+      "modified_at": "2026-08-18T11:51:12-04:00",
+      "sha256": "86b8bb419c7a85de25d66d1cdb0912daeacb30239eb9ad5de20df2e228239e8f"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
