@@ -8,13 +8,13 @@ HOA ponderado = Hoje 50% + Ontem 30% + D-2 20%
 
 Decisões atuais para OpenzedFinanzas/Europa:
 
-- Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente.
+- Intraday R1-R4 e HOA são camadas separadas e devem coexistir inicialmente; R5 foi removida e não pode ser reativada por referência histórica.
 - HOA roda nos checkpoints `08:00`, `12:00`, `15:00`, `18:00`, `22:00` no timezone da conta.
 - Relatório Discord do HOA deve ser legível para gestor: cabeçalho humano com horário no fuso da conta, `ID REC` com 3 dígitos, campanhas ordenadas por sufixo `001...`, sem Meta ID/Campaign ID no report normal. Ao mesclar campanha viva + histórico de insights, ocultar `HIST` duplicado quando já existir linha viva (`ACTIVE`/`PAUSED`/`IN_PROCESS`/`WITH_ISSUES`) com o mesmo nome/número; manter duplicata técnica só em audit JSON.
 - Europa/GDPR usa `MO=complete_registration` e `CPMO=spend/MO`, não CPS/subs.
-- “Dia ruim” para replacement exige dia completo, gasto mínimo `USD 5.00` e `MO >= 2`; replacement requer 2 dias completos ruins.
+- No contrato atual de OpenzedFinanzas, “dia ruim” para replacement exige dia completo, `CPMO > USD 1.30`, gasto mínimo `USD 10.00` e `MO >= 5`; replacement requer 2 dias ruins entre 3 dias completos.
 - Budget total de referência: `USD 300/dia`; 20% (`USD 60/dia`) reservado para testes de criativos novos.
-- CPMO alvo inicial do HOA: `USD 2.00`; Ares deve otimizar para chegar nele.
+- CPMO alvo atual do HOA: `USD 1.30`. Em conflito, `meta-ads-intraday-operations/references/current-pilot-contract.md` vence esta referência.
 - Campanha nova nunca deve ser criada com budget maior que `USD 25/dia` inicialmente.
 - Replacement deve: mapear loser → identificar melhores criativos da conta inteira por menor CPMO nos últimos 3 dias → clonar campanha/adset/criativos do zero → validar clone → deletar a loser se a Meta/API permitir; se não permitir delete, arquivar. O clone deve usar a mesma página, mas pode usar criativo vencedor de outra página.
 - Campanhas de replacement devem ser programadas para o dia seguinte, preferencialmente `01:00` no timezone da conta.
