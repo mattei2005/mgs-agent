@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-17T20:13:51-04:00",
+    "updated_at": "2026-08-17T20:40:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7067,9 +7067,85 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "updated_at": "2026-08-17T19:36:57-04:00"
+    },
+    {
+      "id": "wp2fa-rollout-54-sites-20260817",
+      "agent": "zeus",
+      "type": "wordpress_security_plugin_mass_rollout",
+      "owner": "Zeus/Tech",
+      "status": "completed_validated",
+      "requested_by": "Rodolfo Mattei",
+      "initial_request_message_id": "1539058283195670538",
+      "critical_confirmation_message_id": "1539061328889511957",
+      "source_thread_id": "1538961042753851402",
+      "scope_sites": 54,
+      "runcloud_sites": 49,
+      "external_sites": 5,
+      "accounts_subject_to_policy": 447,
+      "runcloud_accounts_stored_enforced": 395,
+      "confirmed_existing_totp_ready": 7,
+      "plugin": {
+        "name": "WP 2FA - Two-factor authentication for WordPress",
+        "slug": "wp-2fa",
+        "version": "4.1.0",
+        "official_zip_sha256": "a3a0fd5a0fdb28c84d7c5c837ddb0ea5194efddd92cca7c84918f487eb45c779",
+        "requires_wordpress": "5.5",
+        "requires_php": "7.4"
+      },
+      "policy": {
+        "totp_app": true,
+        "email_otp": false,
+        "passkeys": false,
+        "backup_codes": true,
+        "email_backup": false,
+        "enforcement": "all-users",
+        "excluded_users": 0,
+        "excluded_roles": 0,
+        "grace_policy": "no-grace-period",
+        "after_expire": "configure-right-away",
+        "wizard_finished": true
+      },
+      "canary": {
+        "site": "autolendpro.com",
+        "backup": "/var/backups/mgs-wp2fa-rollout/20260818T000433Z/autolendpro.com",
+        "result": "PASS: plugin active 4.1.0, policy exact, 4/4 users enforced, home/login/REST HTTP 200."
+      },
+      "backup_roots": [
+        "/var/backups/mgs-wp2fa-rollout/",
+        "/root/.hermes/secure-backups/wp2fa-external/"
+      ],
+      "evidence_path": "/root/mgs-agent/reports/wp2fa-rollout/20260817-wp2fa-54-sites.json",
+      "checkpoint_id": "wp2fa-rollout-54-sites-20260817",
+      "checkpoint_state": "completed_validated_54_sites_447_accounts",
+      "validation": "49/49 RunCloud plugin/policy/database readback PASS; 395/395 RunCloud accounts stored enforced; 5/5 external fresh-login redirect to profile.php?show=wp-2fa-setup PASS with TOTP configure control and zero email method inputs; 54/54 homes HTTP 200; 54/54 public WP 2FA assets HTTP 200; five external Application Password user APIs remain functional; seven pre-existing TOTP bindings confirmed ready without exposing values; knowledge validate PASS and regression 10/10.",
+      "intermediate_issues": [
+        "External REST plugin install returned 401 and plugin controller 404; used authenticated ZIP upload, direct activation href and official wizard AJAX.",
+        "Activation link was hidden in iframe; direct nonce-bearing href navigation used.",
+        "Spanish panels required language-neutral version and DOM gates.",
+        "Immediate enforcement validated in a new session because it applies on the next login.",
+        "Package 4.1.0 readme still declares Stable tag 4.0; authenticated plugin row was source for exact version.",
+        "Initial rollback checks were fooled by enforcement redirects; state was reconciled before final classification."
+      ],
+      "preexisting_warnings": "Permission warnings in selected mu-plugins on lyzmo.com, wantabrand.com, gamezonead.com and creditoparaveiculo.com; WP 2FA gates passed and those files were not changed.",
+      "user_post_action": "Every account without a ready TOTP binding must scan its own QR and store backup codes at the next login.",
+      "updated_at": "2026-08-17T20:40:19-04:00"
     }
   ],
   "profile_skill_references": [
+    {
+      "id": "zeus-wp2fa-mass-enforcement-rollout-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "skill": "wp-plugin-mass-operation",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/wp2fa-mass-enforcement-rollout.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/wp2fa-mass-enforcement-rollout.md",
+      "size_bytes": 5137,
+      "modified_at": "2026-08-17T20:38:42-04:00",
+      "sha256": "b8c24f57d5930e26383989d3223f7edb89dbc401aea3f629a220994f46eadc00",
+      "purpose": "Canonical MGS workflow for mass WP 2FA install, all-user immediate enforcement, exact policy readback and external backend automation.",
+      "validation": "Exercised across 54 sites and 447 accounts; RunCloud 49/49, external fresh-login 5/5 and public 54/54; live/versioned hashes match.",
+      "updated_at": "2026-08-17T20:40:19-04:00"
+    },
     {
       "id": "zeus-wordpress-irrelevant-posts-incident-audit-reference",
       "agent": "zeus",

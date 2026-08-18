@@ -26,6 +26,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
 - **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
+- **Instalar/enforçar WP 2FA em todo o portfólio** → `references/wp2fa-mass-enforcement-rollout.md`
 
 ## Context-efficiency guardrails
 
