@@ -1,0 +1,38 @@
+{
+  "inspected_at_et": "2026-08-18T13:58:05-04:00",
+  "final_url": "https://app.smartbiddingdigital.com/company/digital-trust/financeadx/routing",
+  "title": "Routing > digital-trust > financeadx",
+  "list_status": 201,
+  "total_pools": 63,
+  "matched_pools": 2,
+  "pools": [
+    {
+      "id": 1091,
+      "name": "fax-us-emp-es-drip 001",
+      "source": "FACEBOOK",
+      "country": "US",
+      "vertical": "CC",
+      "language": "ES",
+      "medium": ".*-d$",
+      "append_params": false,
+      "routes": 1,
+      "route_names": [
+        "fax-us-emp-es-drip-m0-1"
+      ]
+    },
+    {
+      "id": 1092,
+      "name": "fax-us-emp-es-mct broadcast 001",
+      "source": "MCT",
+      "country": "US",
+      "vertical": "EMP",
+      "language": "ES",
+      "medium": "",
+      "append_params": false,
+      "routes": 1,
+      "route_names": [
+        "fax-us-emp-es-mct-001"
+      ]
+    }
+  ]
+}
