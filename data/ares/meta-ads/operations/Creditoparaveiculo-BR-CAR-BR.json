@@ -36,7 +36,7 @@
     "days": 3,
     "day_1_action": "observe_no_cut; scale at 08:00 only by approved ROI tiers",
     "day_2_action": "observe_no_cut; repeat approved ROI tiers",
-    "day_3_action": "pause campaign if cumulative SB ROI <= -10%; otherwise maintain/scale by tiers",
+    "day_3_action": "ROI<=-10 passes estimated/anomaly gate; pause if no bounded hold; scale by 10/20/30 tiers",
     "d3_cut_roi_pct": -10.0,
     "scale_tiers": [
       {
@@ -47,12 +47,24 @@
         "roi_gt": 30.0,
         "roi_lte": 40.0,
         "budget_increase_pct": 20.0
+      },
+      {
+        "roi_gte": 20.0,
+        "roi_lte": 30.0,
+        "budget_increase_pct": 10.0
       }
     ],
     "no_scale_roi_lte": 30.0,
     "scale_checkpoint": "around_08:00_account_timezone",
     "decision_source": "Smart Bidding AdGroup USD NET_REVENUE revshare enabled",
-    "meta_roas_role": "signal_only"
+    "meta_roas_role": "signal_only",
+    "no_scale_roi_lt": 20.0,
+    "d3_estimated_gate": {
+      "actual_roi_lte": -10.0,
+      "estimated_roi_positive": "hold one consolidation/next checkpoint, no scale",
+      "actual_and_estimated_negative": "pause unless external anomaly",
+      "estimated_never_scales_alone": true
+    }
   },
   "daily_budget_policy": {
     "operational_account_cap_usd": 300.0,
@@ -101,7 +113,8 @@
     "reporting_mode": "read_only_calibration",
     "write_enabled": false,
     "campaign_creation_test": "pending_dry_run_and_paused_creation_approval",
-    "manual_holds": []
+    "manual_holds": [],
+    "controlled_write_one_shot": "reactivate campaigns 07,08,09,10,11 at 00:30; Rodolfo authorized; general write_enabled remains false"
   },
   "scheduler_jobs": {},
   "pending_configuration": [
@@ -111,7 +124,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T15:12:33-04:00",
+  "updated_at": "2026-08-19T15:42:31-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -206,7 +219,11 @@
     "enabled": true,
     "experience": "quiz_with_phone_capture",
     "source": "Smart Bidding Reports > SMS",
-    "policy": "reconcile separately from AdGroup acquisition revenue and do not double count"
+    "manager_bucket": "s01c01g006",
+    "display": "separate block Receita SMS G006 — não atribuída por campanha",
+    "campaign_level_join_available": false,
+    "policy": "do not repeat SMS bucket in campaign rows; no double count",
+    "future_mapping_required": "SMS namespace to CAMPAIGN_ID/UTM_ADGROUP"
   },
   "reference_inheritance_policy": {
     "pixel": "inherit and readback from validated reference campaign",
@@ -231,7 +248,23 @@
     "utm_medium": "g006-s",
     "utm_campaign": "b01fb13cNN",
     "utm_adgroup": "b01fb13cNNg01",
-    "sequence_policy": "read Meta live and use next free campaign number; do not reuse deleted number"
+    "sequence_policy": "read Meta live and use next free campaign number; do not reuse deleted number",
+    "url_policy": {
+      "base_url": "inherit exact reference URL",
+      "replace_utm_values": true,
+      "utm_source": "facebook",
+      "utm_medium": "g006-s",
+      "utm_campaign": "b01fb13cNN",
+      "utm_adgroup": "b01fb13cNNg01",
+      "remove_duplicate_old_utms": true,
+      "url_encode": true,
+      "post_write_readback_all_ads": true
+    },
+    "proposed_extensions_not_active": {
+      "campaign_suffix": "QZCAP - {BID_TAG e.g. LC or ROAS1.3}",
+      "adset_suffix": "{AUDIENCE_TAG e.g. BROAD/LAL/INT}",
+      "reason": "future tracking without putting manager/date/angle at campaign level"
+    }
   },
   "creative_testing_policy": {
     "drive_selection_authorized_by_Rodolfo": true,
@@ -259,5 +292,79 @@
     ],
     "legacy_child_repair_required": false,
     "ares_write_performed": false
+  },
+  "playbook_version": "0.3.1",
+  "budget_authority": {
+    "operation_specific": true,
+    "campaign_budget_authorizers": [
+      "Rodolfo Mattei",
+      "Nicolas G006"
+    ],
+    "account_operational_cap_authorizers": [
+      "Rodolfo Mattei",
+      "Nicolas G006"
+    ],
+    "billing_payment_credentials_excluded": true,
+    "ares_write_requires_preflight_audit_readback": true
+  },
+  "estimated_revenue_policy": {
+    "enabled": true,
+    "source_endpoints": [
+      "/estimated/delay",
+      "/estimated/revenue/utm_adgroup"
+    ],
+    "fields": [
+      "estimatedRevenue",
+      "confidence",
+      "gam_revenue",
+      "impressions",
+      "gam_matched_request"
+    ],
+    "formula": "estimatedRoi=(estimatedRevenue-INVESTIMENT)/INVESTIMENT*100",
+    "confidence_interpretation": "provider signal not guarantee",
+    "d3_hold_policy": "bounded one consolidation/next checkpoint; no scale",
+    "validated_delay_snapshot_minutes": 98,
+    "validated_confidence_snapshot": 0.95
+  },
+  "anomaly_gate": {
+    "enabled": true,
+    "before_campaign_blame_check": [
+      "account-wide ROI decline",
+      "RPS drop",
+      "CPM/AVG_PRICE drop",
+      "Smart Bidding/GAM/AdX revenue delay or outage",
+      "Meta account/delivery issue",
+      "pixel/event issue",
+      "URL/quiz issue",
+      "simultaneous multi-campaign deterioration"
+    ],
+    "action": "HOLD_EXTERNAL_ANOMALY; no cut or scale until source confirmation/next checkpoint",
+    "thresholds": "collect baseline; no invented numeric threshold yet"
+  },
+  "angle_analytics": {
+    "angle_source": "canonical creative filename/inventory",
+    "ad_name": "AD0N - CANONICAL_FILENAME_WITHOUT_EXTENSION",
+    "meta_capability": "aggregate ad-level spend and purchase_roas by angle",
+    "sb_capability": "campaign/adgroup ROI only; AD_NAME empty in 301/301 validated rows",
+    "current_honest_report": "Meta ad-angle ROAS + campaign SB ROI",
+    "future_requirement": "validate AD_NAME ingestion or ad-level UTM key before claiming SB ROI by angle"
+  },
+  "creative_reservation_explanation": {
+    "reservation_is_inventory_metadata_not_folder": true,
+    "ready_means": "technically ready only",
+    "reserved_means": "manager upload may be intended/used; blocked until express release or Meta x Drive reconciliation",
+    "current_selected_release": "not yet persisted"
+  },
+  "scheduled_operations": {
+    "reactivate_07_08_09_10_11": {
+      "scheduled_for": "2026-08-20T00:30:00-03:00",
+      "mode": "no_agent_one_shot",
+      "script": "reactivate-creditoparaveiculo-20260820.py",
+      "state": "scheduled",
+      "preflight_ok": true,
+      "total_daily_budget_usd": 189.0,
+      "post_write_readback": true,
+      "rollback": true
+    }
   }
 }

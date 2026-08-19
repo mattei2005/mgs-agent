@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar autorização concreta de Rodolfo para programar reativação às 00:30 e definir quantidade de campanhas novas após conciliação/liberação dos criativos.",
+      "next_step": "Aguardar one-shot de 00:30 e readback. Depois monitorar D1 em Meta ROAS + SB ROI real/estimado + anomalias; conciliar/liberar criativos antes de campanhas novas.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "rodolfo/gestor normalizou manualmente a hierarquia. readback meta: 42/42 campanhas paused, 42/42 adsets active, 126/126 ads active. campanhas 07/08/09/10/11 agora estão prontas para reativação somente no nível campanha; reparo legado não é mais necessário. ares não executou write.",
+      "state": "playbook v0.3.1: escala +10% roi20-30, +20% >30-40, +30% >40; budget autorizado por rodolfo/nicolas; url base herdada com utms por campanha; sms g006 reportado em bloco separado por falta de join cnn; gate de estimado/anomalia habilitado. reativação 07/08/09/10/11 autorizada e agendada no one-shot determinístico às 00:30 são paulo; dry-run ok, budgets usd189, filhos ativos.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T19:12:59+00:00"
+      "updated_at": "2026-08-19T19:43:29+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T19:12:59+00:00"
+  "updated_at": "2026-08-19T19:43:29+00:00"
 }
