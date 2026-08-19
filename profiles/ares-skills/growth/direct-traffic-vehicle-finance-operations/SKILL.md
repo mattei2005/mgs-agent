@@ -45,6 +45,19 @@ Toda leitura de ROI deve informar período, moeda, timezone, fonte e horário de
 
 Para `Creditoparaveiculo-BR-CAR-BR-13-G006`, a regra operacional é fixa: selecionar `USD` no rodapé da Smart Bidding, manter `Discount revenue share` ativado e calcular ROI com `NET_REVENUE` pela fórmula `(NET_REVENUE − INVESTIMENT) × 100 ÷ INVESTIMENT`. Não relatar ROI dessa operação com o toggle desligado ou em BRL.
 
+### Análise histórica do ciclo
+
+Quando comparar duração e viradas de ROI:
+
+1. Data de criação vem de `created_time` da Meta, convertida para o timezone da conta.
+2. “Dia rodado” é uma data distinta com `spend > 0` nos insights diários da Meta; não usar apenas a diferença entre primeira e última data.
+3. ROI diário agrega todas as linhas da SB por `CAMPAIGN_ID + DATE`, em USD, com revshare ativado: `(ΣNET_REVENUE − ΣINVESTIMENT) × 100 ÷ ΣINVESTIMENT`.
+4. Dia sem spend não é positivo, negativo nem dia rodado.
+5. Virada `positivo → negativo` ocorre entre dois dias de spend consecutivos na sequência cronológica; registrar todas as viradas, não apenas a primeira.
+6. Marcar o dia atual como parcial e reconciliar spend diário Meta × SB antes de interpretar a curva.
+
+Conclusão: criação, dias rodados, dias positivos/negativos e viradas fecham por campanha, sem confundir intervalo civil com entrega real.
+
 ## Estrutura padrão de lançamento
 
 ```text
