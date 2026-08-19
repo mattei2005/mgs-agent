@@ -7340,6 +7340,39 @@
       "authorized_message_id": "1539714576038367242",
       "validated_at": "2026-08-19T15:18:40-04:00",
       "validation": "WP readback confirmed retina_logo empty while custom_logo 3520 and logo_width 300 were preserved; canonical public HTML returned HTTP 200 with ScoreXBoost primary logo and no vagaaqui.com URL in logo markup."
+    },
+    {
+      "id": "legal-footer-corrections-noticiainforme-vagaaqui-newsfolha-20260819",
+      "agent": "zeus",
+      "type": "wordpress_runtime_config",
+      "server": "MatteiInc01",
+      "sites": [
+        "https://noticiainforme.com",
+        "https://vagaaqui.com",
+        "https://newsfolha.com"
+      ],
+      "changes": {
+        "noticiainforme.com": "Removed the stale secondary copyright block and purged the WP Rocket homepage cache after explicit critical confirmation.",
+        "vagaaqui.com": "Removed the stale secondary copyright block.",
+        "newsfolha.com": "Inserted a deliberate line break after Harju, Estonia. in the ActiveView legal footer."
+      },
+      "backups": [
+        {
+          "path": "/root/mgs-agent/backups/footer-secondary-copyright-before-1539744034300370984.json",
+          "sha256": "97aa7aeae1dec2285fdbfd541ad35e3bb53a9f8766d65f18f08f4f440af85602"
+        },
+        {
+          "path": "/root/mgs-agent/backups/newsfolha-footer-linebreak-before-1539744560929050674.json",
+          "sha256": "d88c0402e2855b5835042bc38fd5ecb1e4255d72565877ad3e542b900b96f127"
+        }
+      ],
+      "authorized_message_ids": [
+        "1539744034300370984",
+        "1539744560929050674",
+        "1539745468186108035"
+      ],
+      "validated_at": "2026-08-19T17:19:22-04:00",
+      "validation": "Bare public URLs for noticiainforme.com and vagaaqui.com returned HTTP 200 with exactly one ActiveView footer and no legacy/secondary copyright. NewsFolha WP raw and do_blocks render each contain exactly one requested br line break; its public root remains under the pre-existing maintenance page."
     }
   ],
   "profile_skill_references": [
