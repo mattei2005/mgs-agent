@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar one-shot de 00:30 e readback. Depois monitorar D1 em Meta ROAS + SB ROI real/estimado + anomalias; conciliar/liberar criativos antes de campanhas novas.",
+      "next_step": "Aguardar reativação 00:30 e readback; monitorar ROI real/estimado/ROAS/anomalias. Definir se tags opcionais LC/ROAS1.3 e BROAD/INT/LAL entrarão no naming quando houver testes diferentes.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "playbook v0.3.1: escala +10% roi20-30, +20% >30-40, +30% >40; budget autorizado por rodolfo/nicolas; url base herdada com utms por campanha; sms g006 reportado em bloco separado por falta de join cnn; gate de estimado/anomalia habilitado. reativação 07/08/09/10/11 autorizada e agendada no one-shot determinístico às 00:30 são paulo; dry-run ok, budgets usd189, filhos ativos.",
+      "state": "budgets 07/08/09/10/11 alterados e validados em usd30 cada, total usd150; campanhas permanecem paused e one-shot 00:30 passou novo dry-run. naming obrigatório agora inclui dd-mm. sms g006 fica em bloco final; exemplo 30d roi aquisição 6.24% e roi total com sms antes do custo 21.84%. rodolfo/nicolas têm autoridade total de campanha e budget nesta operação, com billing/pagamento/credenciais/outras operações excluídos. drive usa transição de status e inventário, sem duplicar arquivos em subpastas por conta.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T19:43:29+00:00"
+      "updated_at": "2026-08-19T22:10:18+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T19:43:29+00:00"
+  "updated_at": "2026-08-19T22:10:18+00:00"
 }

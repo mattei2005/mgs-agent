@@ -23,13 +23,21 @@ Resposta executiva correta: manter mu-plugin necessário, mas auditar superfíci
    - presença/status de `wp-file-manager`;
    - presença/status de WPCode/Insert Headers and Footers/Code Snippets;
    - snippets `wpcode` com títulos contendo `zeus`, `deploy`, `mu-plugin`, `yoast`.
-3. Diferenciar achado crítico de diferença de arquitetura:
+   - quando o pedido também incluir plugins customizados, auditar os diretórios exatos em `wp-content/plugins/`: modos de diretórios/arquivos, owner/group, qualquer item gravável por grupo/outros, backups/resíduos dentro do webroot e resposta HTTP externa para a pasta e para extensões de backup conhecidas;
+   - revisar o código customizado por credencial embutida, handler público (`wp_ajax_nopriv`/REST), capability + nonce nas mutações administrativas, sanitização, SSRF/URL controlada pelo cliente e rate limiting. Nunca imprimir o valor de uma credencial encontrada; reportar apenas presença, escopo e risco.
+3. Interpretar permissões corretamente:
+   - diretório `755` não significa “todos podem alterar”: somente o owner escreve; grupo/outros leem e atravessam;
+   - arquivo `644` é o padrão comum; somente o owner escreve;
+   - `775` permite escrita ao grupo e precisa ser interpretado junto com owner/group e arquitetura do host (por exemplo, Bitnami `daemon`), mas ainda não é world-writable;
+   - `777`, bit de escrita para `other`, owner inesperado ou código gravável por um grupo amplo são achados de alto risco;
+   - permissão de filesystem não substitui teste HTTP: um diretório pode negar listagem e ainda servir um `.bak` diretamente.
+4. Diferenciar achado crítico de diferença de arquitetura:
    - `wp-file-manager` instalado/ativo sem uso atual = resíduo a remover;
    - snippet de deploy órfão = remover após confirmação;
    - mu-plugin desconhecido = parar e reportar antes de remover;
    - ausência de `mu-plugins` em RunCloud não é, sozinha, falha de segurança — pode indicar que o site usa outro mecanismo/pipeline.
-4. Confirmar antes de mudar produção.
-5. Se autorizado, remover WP File Manager com `plugin deactivate` + `plugin delete` e validar que não está instalado.
+5. Confirmar antes de mudar produção.
+6. Se autorizado, remover WP File Manager com `plugin deactivate` + `plugin delete` e validar que não está instalado.
 
 ## RunCloud — padrão de auditoria read-only
 

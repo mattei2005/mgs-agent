@@ -59,6 +59,19 @@ Relatório de SMS        Smart Bidding > Reports > SMS
 
 O endpoint SMS atual usa `UTM_CAMPAIGN=s01c01g006` para o bucket de Nicolas/G006 e não expõe `CAMPAIGN_ID`, `b01fb13cNN` ou `UTM_ADGROUP`. Portanto, até existir ponte confiável, o relatório mostra um bloco separado `Receita SMS G006 — não atribuída por campanha`; nunca repetir o mesmo total em cada linha de campanha. Atribuição por campanha exige mapping adicional no tracking/backend.
 
+No final do relatório da conta/G006, exibir:
+
+```text
+Spend Meta
+Receita Aquisição SB (NET_REVENUE)
+Receita SMS G006 (NET_REVENUE)
+Receita Total = Aquisição + SMS
+ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
+ROI Total com SMS = (Receita Aquisição + Receita SMS − Spend) / Spend × 100
+```
+
+Enquanto o custo real de SMS não estiver conciliado, rotular `ROI Total com SMS — antes do custo SMS`; não chamar de lucro líquido.
+
 Pixel, evento, Page/identidade, Instagram e URL de destino devem ser herdados da campanha de referência validada na mesma conta e confirmados por readback antes de criar campanha. Não inferir IDs ou valores por nome.
 
 ### Meta Purchase ROAS como proxy
@@ -225,7 +238,7 @@ Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas e info
 Antes do write, ler a conta e usar o próximo número de campanha livre; não reutilizar número de campanha deletada.
 
 ```text
-Campanha  NN - {PAGE_NAME} - (b01fb13cNN) event_Subscribe
+Campanha  NN - DD-MM - {PAGE_NAME} - (b01fb13cNN) event_Subscribe
 Adset     01 - AdGroup - (b01fb13cNNg01) event_Subscribe
 Anúncio   AD01 - {CANONICAL_FILENAME_SEM_EXTENSÃO}
            AD02 - {CANONICAL_FILENAME_SEM_EXTENSÃO}
@@ -239,8 +252,11 @@ b01   Business Manager 01
 fb13  conta de anúncio 13
 cNN   número da campanha
 g01   conjunto 01
+DD-MM data de início no timezone da conta
 event_Subscribe  evento de rewards/quiz obrigatório no nome
 ```
+
+Tags opcionais entram somente quando diferenciam testes: `LC` = Lowest Cost; `ROAS1.3` = estratégia de bid/ROAS mínimo 1,3; `BROAD` = público amplo; `INT` = interesses; `LAL` = lookalike. Não adicionar tags fixas que sejam iguais em todas as campanhas.
 
 UTMs:
 
@@ -283,6 +299,8 @@ Clone fica como fallback quando a API não expuser ou reproduzir com segurança 
 6. Reconciliar novamente Meta × Drive e reservar os escolhidos imediatamente antes do write.
 
 O estado atual do pool deve ser lido no inventário e no Drive imediatamente antes da seleção. `01_READY` e metadata limpa não liberam asset reservado; ausência de vínculo Meta também não prova ineditismo.
+
+Quando selecionado, o asset canônico avança de `01_READY` para `02_TESTING`; conta, site, campanha, ad IDs e datas ficam no inventário. Não criar cópias nem mover o mesmo asset para subpastas por conta, pois ele pode participar de vários testes e a identidade deve permanecer única. Se for necessária navegação visual no Drive, usar atalhos por conta/site apontando para o arquivo canônico, somente após plano estrutural aprovado; o inventário continua sendo a fonte de verdade.
 
 O ângulo vem do nome canônico/inventário (`SEM_ENTRADA`, `SUPER_OFERTA`, etc.) e entra no nome do anúncio pelo filename. Ares pode agregar spend e Purchase ROAS em nível de anúncio/ângulo na Meta e confrontar com o ROI SB da campanha. No endpoint AdGroup atual, `AD_NAME` veio vazio em todas as linhas; portanto, ROI SB por anúncio/ângulo ainda não é atribuível de forma honesta. Uma futura chave ad-level (`utm_content` ou AD_NAME ingerido pela SB) só entra após validação do backend.
 
