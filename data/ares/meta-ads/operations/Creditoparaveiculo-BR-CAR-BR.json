@@ -59,6 +59,25 @@
       "unit_status": "pending_confirmation"
     }
   },
+  "smart_bidding_roi": {
+    "enabled": true,
+    "mode": "adgroup_campaign_reconciliation_read_only",
+    "credential_item": "Ares - Smartbidding Dashboard",
+    "publisher_name": "Creditoparaveiculo",
+    "publisher_id": "digital-trust_creditoparaveiculo",
+    "account_name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "account_id": "1046241194533786",
+    "endpoint": "/report/performance_per_campaigns",
+    "account_currency": "USD",
+    "default_revenue_field": "NET_REVENUE",
+    "roi_formula": "(NET_REVENUE - INVESTIMENT) / INVESTIMENT * 100",
+    "join_keys": [
+      "CUSTOMER_ID",
+      "CAMPAIGN_ID",
+      "UTM_ADGROUP"
+    ],
+    "date_policy": "filter response DATE again to requested inclusive range in account timezone"
+  },
   "management_scope": {
     "read_scope": "entire_account",
     "reporting_mode": "read_only_calibration",
@@ -81,5 +100,5 @@
     "campaign_ceiling_definition",
     "account_cap_scaling_approval"
   ],
-  "updated_at": "2026-08-19T12:30:40-04:00"
+  "updated_at": "2026-08-19T12:51:30-04:00"
 }

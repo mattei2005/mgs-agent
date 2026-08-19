@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Completar configuração de campanha: confirmar quiz/chat, captura, pixel/evento, identidade Page/Instagram, URL/UTMs e naming; depois gerar dry-run e campanha PAUSED para readback.",
+      "next_step": "Rodolfo revisar o ranking e definir quais campanhas positivas/estrutura servirão como referência para o primeiro dry-run de criação PAUSED.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "conta 1046241194533786 cadastrada no ares. token corporativo validado em read-only com http 200, scopes ads_management/ads_read/business_management/read_insights e tasks analyze/advertise/manage. operação permanece write_enabled=false até teste de criação aprovado.",
+      "state": "token específico da conta validado com permissões meta ampliadas. cruzamento de 21/07/2026 a 19/08/2026 concluído: 51 campanhas sb e 51 meta, 51 matches por id, zero nomes divergentes, spend usd 6579.58 sb vs usd 6579.59 meta, 7 roi positivo, 42 negativo e 2 sem spend.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T16:31:35+00:00"
+      "updated_at": "2026-08-19T16:52:41+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T16:31:35+00:00"
+  "updated_at": "2026-08-19T16:52:41+00:00"
 }
