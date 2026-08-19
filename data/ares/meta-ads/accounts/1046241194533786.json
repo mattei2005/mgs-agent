@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "accounts": [
+    {
+      "account_id": "1046241194533786",
+      "meta_account_ref": "act_1046241194533786",
+      "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+      "site_name": "Creditoparaveiculo",
+      "country": "BR",
+      "vertical": "CAR",
+      "language": "BR",
+      "account_number": 13,
+      "manager": {
+        "code": "G006",
+        "name": "Nicolas",
+        "discord_id": "1055570806945620030"
+      },
+      "channel": "DirectTraffic",
+      "currency_expected": "USD",
+      "timezone_source": "meta_ad_account_timezone",
+      "cut_level": "campaign",
+      "budget_type": "daily",
+      "pilot_write_authorizer": "Rodolfo Mattei",
+      "write_mode": "read_only_until_campaign_test_approved",
+      "token_1password_item": "Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+      "account_reference_1password_item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+      "meta_detected": {
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "timezone_offset_hours_utc": -3,
+        "account_status": 1
+      },
+      "technical_access": {
+        "validated": true,
+        "http_status": 200,
+        "scopes_granted": [
+          "ads_management",
+          "ads_read",
+          "business_management",
+          "public_profile",
+          "read_insights"
+        ],
+        "account_user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "read_validation": {
+          "campaigns": true,
+          "adsets": true,
+          "ads": true,
+          "adcreatives": true,
+          "adspixels": true,
+          "insights": true,
+          "http_status_all": 200
+        },
+        "campaign_read_validated": true,
+        "write_not_exercised": true,
+        "validated_at": "2026-08-19T12:32:33-04:00"
+      },
+      "daily_budget_policy": {
+        "operational_account_cap_usd": 300.0,
+        "new_campaign_share_default": 0.2,
+        "new_campaign_share_flexible_max": 0.3,
+        "new_campaign_initial_budget_usd": 30.0,
+        "campaign_scale_step": 0.25,
+        "campaign_operational_ceiling_usd": 150.0,
+        "campaign_ceiling_definition_status": "pending_confirmation"
+      }
+    }
+  ]
+}

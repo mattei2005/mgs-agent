@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+  "site_name": "Creditoparaveiculo",
+  "site_domain": "creditoparaveiculo.com",
+  "country": "BR",
+  "country_name": "Brazil",
+  "vertical": "CAR",
+  "language": "BR",
+  "channel": "DirectTraffic",
+  "purchase_type": "CBO",
+  "destination": "direct_link",
+  "experience": "pending_quiz_or_chat_confirmation",
+  "capture": "pending_confirmation",
+  "cut_level": "campaign",
+  "account_currency": "USD",
+  "account_timezone": "America/Sao_Paulo",
+  "account": {
+    "account_id": "1046241194533786",
+    "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "account_number": 13
+  },
+  "manager": {
+    "code": "G006",
+    "name": "Nicolas",
+    "discord_id": "1055570806945620030"
+  },
+  "campaign_structure": {
+    "budget_level": "campaign_CBO",
+    "adsets_per_campaign": 1,
+    "ads_per_adset": 3,
+    "new_campaign_count": "dynamic_by_test_pool",
+    "start_time": "00:00_account_timezone"
+  },
+  "learning_policy": {
+    "days": 3,
+    "day_1_action": "observe_no_cut",
+    "day_2_action": "observe_no_cut",
+    "day_3_action": "cut_scale_or_maintain_using_approved_rules",
+    "positive_roi_scale_step": 0.25,
+    "positive_roi_scale_checkpoint": "around_08:00_account_timezone"
+  },
+  "daily_budget_policy": {
+    "operational_account_cap_usd": 300.0,
+    "new_campaign_share_default": 0.2,
+    "new_campaign_share_flexible_max": 0.3,
+    "new_campaign_initial_budget_usd": 30.0,
+    "campaign_operational_ceiling_usd": 150.0,
+    "campaign_ceiling_definition_status": "pending_confirmation",
+    "account_cap_scaling_policy_status": "calibration_pending_Rodolfo_approval"
+  },
+  "roi_policy": {
+    "decision_source": "Smart Bidding Reports > Adgroup",
+    "join_key": "utm_adgroup",
+    "period_timezone_currency_required": true,
+    "negative_promising_band": {
+      "from": -15,
+      "to": -10,
+      "unit_status": "pending_confirmation"
+    }
+  },
+  "management_scope": {
+    "read_scope": "entire_account",
+    "reporting_mode": "read_only_calibration",
+    "write_enabled": false,
+    "campaign_creation_test": "pending_dry_run_and_paused_creation_approval",
+    "manual_holds": []
+  },
+  "scheduler_jobs": {},
+  "pending_configuration": [
+    "experience_quiz_or_chat",
+    "capture_yes_or_no",
+    "pixel_id",
+    "conversion_event",
+    "page_id_and_identity",
+    "instagram_actor_if_used",
+    "destination_url",
+    "utm_mapping",
+    "campaign_naming",
+    "day_3_cut_rules",
+    "campaign_ceiling_definition",
+    "account_cap_scaling_approval"
+  ],
+  "updated_at": "2026-08-19T12:30:40-04:00"
+}

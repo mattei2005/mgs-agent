@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo informar o ID da conta Meta piloto e o nome do item autorizado no 1Password para executar auth check read-only e inventário da conta.",
+      "next_step": "Completar configuração de campanha: confirmar quiz/chat, captura, pixel/evento, identidade Page/Instagram, URL/UTMs e naming; depois gerar dry-run e campanha PAUSED para readback.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "playbook vertical v0.2 criado; regras iniciais de ciclo d1-d3, pool de testes 20%-30%, escala de campanha e proposta de escala do teto da conta documentadas. conta meta piloto ainda não cadastrada no ares.",
+      "state": "conta 1046241194533786 cadastrada no ares. token corporativo validado em read-only com http 200, scopes ads_management/ads_read/business_management/read_insights e tasks analyze/advertise/manage. operação permanece write_enabled=false até teste de criação aprovado.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T15:34:15+00:00"
+      "updated_at": "2026-08-19T16:31:35+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T15:34:15+00:00"
+  "updated_at": "2026-08-19T16:31:35+00:00"
 }
