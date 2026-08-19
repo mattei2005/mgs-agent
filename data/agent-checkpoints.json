@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
+      "next_step": "Rodolfo informar o ID da conta Meta piloto e o nome do item autorizado no 1Password para executar auth check read-only e inventário da conta.",
+      "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1539434208408375426",
+      "state": "playbook vertical v0.2 criado; regras iniciais de ciclo d1-d3, pool de testes 20%-30%, escala de campanha e proposta de escala do teto da conta documentadas. conta meta piloto ainda não cadastrada no ares.",
+      "thread_id": "1539434208408375426",
+      "updated_at": "2026-08-19T15:34:15+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
       "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
       "objective": "Coletar todos os criativos disponíveis da busca Meta Ad Library eco financa carro no Brasil, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/ECO_FINANCA_CARRO_BR.",
@@ -842,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T10:32:50+00:00"
+  "updated_at": "2026-08-19T15:34:15+00:00"
 }

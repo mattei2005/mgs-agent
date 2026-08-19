@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 0.1.0
+version: 0.2.0
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -46,13 +46,26 @@ Toda leitura de ROI deve informar período, moeda, timezone, fonte e horário de
 ## Estrutura padrão de lançamento
 
 ```text
-Nível       Quantidade normal   Regra
------------ ------------------- -------------------------------------
+Nível       Quantidade          Regra
+----------- ------------------- ----------------------------------------------
 Campanha    1                   CBO, link direto
 Conjunto    1                   evento/UTMs validados
 Anúncios    3                   criativos distintos e elegíveis
-Lote diário 3 campanhas         padrão inicial informado por Rodolfo
+Lote diário dinâmica            calculada pelo pool de testes aprovado
 ```
+
+A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reservado a testes e pelo budget inicial mínimo aprovado:
+
+```text
+quantidade possível = piso(pool diário de testes ÷ budget inicial por campanha)
+```
+
+Exemplo com teto operacional diário de `USD 300` e budget inicial de `USD 30`:
+
+- pool de 20% = `USD 60` = até 2 campanhas;
+- pool de 30% = `USD 90` = até 3 campanhas.
+
+O padrão é reservar 20%; Rodolfo autorizou flexibilização para 30% quando necessária para preservar o budget inicial de USD 30 e o volume de testes adequado. A quantidade final também depende de criativos elegíveis, capacidade de análise e espaço para escalar campanhas boas.
 
 Programar a campanha para começar às `00:00` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 
@@ -107,16 +120,53 @@ Parâmetros iniciais informados por Rodolfo:
 
 ```text
 Parâmetro                                      Valor inicial
----------------------------------------------- -----------------------------
-Orçamento de referência por conta              USD 300
+---------------------------------------------- ----------------------------------
+Teto operacional diário da conta               USD 300 como referência inicial
 Budget inicial por campanha                    USD 30
-Percentual reservado a campanhas novas         20% do orçamento da conta
-Quantidade normal de campanhas novas por dia   3
+Pool normal para campanhas novas               20% do teto operacional
+Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
+Quantidade de campanhas novas                  dinâmica, calculada pelo pool
 Escala por rodada elegível                     +25%
-Teto operacional por campanha                  USD 150
+Teto operacional por campanha                  USD 150, definição exata pendente
 ```
 
-Há uma pendência matemática a fechar: `20% de USD 300 = USD 60`, enquanto `3 campanhas × USD 30 = USD 90`, ou `30%` do orçamento de referência. Não resolver por inferência. Antes de automatizar lotes, confirmar se muda o percentual, a quantidade de campanhas, o budget inicial ou a definição de “orçamento por conta”.
+“Budget da conta” deve ser tratado como **teto operacional interno diário do portfólio**, não confundido automaticamente com `account_spend_limit` da Meta. Os writes normais continuam nos budgets CBO das campanhas.
+
+### Escala sugerida do teto da conta
+
+Ares pode recomendar aumento do teto quando a conta provar capacidade de absorção. Usar dois níveis independentes:
+
+1. **Escala da campanha:** campanha elegível recebe +25% no primeiro checkpoint operacional, dentro do teto atual.
+2. **Escala da conta:** aumentar o teto do portfólio somente quando a soma das campanhas boas estiver sem espaço para novas escalas/testes e o ROI consolidado da conta permanecer saudável em dias fechados.
+
+Sugestão inicial para calibração:
+
+- manter 70%–80% para campanhas em aprendizagem/escala e 20% para novos testes;
+- permitir 30% de testes quando o piso de USD 30 ou a necessidade de volume justificar;
+- recomendar aumento do teto em degraus de 20%–25%, nunca salto aberto;
+- exigir pelo menos dois dias fechados consecutivos com ROI consolidado positivo e ausência de anomalia relevante antes de subir o teto;
+- após o aumento, observar um dia fechado antes de recomendar novo degrau;
+- se o ROI consolidado deteriorar, congelar novas escalas da conta antes de cortar automaticamente campanhas ainda em D1/D2.
+
+Esses critérios de escala da conta são proposta do Ares e permanecem em calibração até aprovação explícita de Rodolfo.
+
+## Criação do zero versus clone
+
+Os dois métodos são tecnicamente possíveis e ambos geram novos IDs na Meta:
+
+- **Criar do zero:** POST de nova campanha, novo conjunto, novos criativos/anúncios e todos os campos explícitos.
+- **Clonar:** copiar uma campanha/conjunto/anúncios existentes e depois alterar nome, criativos, horários, URLs, orçamento e demais diferenças.
+
+“Clonar” não é apenas renomear o objeto existente; é duplicá-lo em novos objetos. A diferença operacional é que o clone pode herdar configurações antigas ou ocultas. Para uma conta gerenciada 100% pelo Ares, o padrão recomendado é:
+
+1. ler uma campanha humana correta como referência;
+2. gerar uma especificação canônica validada;
+3. criar a primeira campanha de teste **do zero e PAUSED**;
+4. comparar por readback todos os campos críticos com a referência;
+5. ativar somente após aprovação do teste;
+6. depois usar a especificação validada como template determinístico, sem depender de clone de campanha viva.
+
+Clone fica como fallback quando a API não expuser ou reproduzir com segurança algum campo necessário, ou quando Rodolfo pedir duplicação exata de uma campanha-base. Mesmo no clone, remover heranças indevidas e validar attribution, optimization, evento, placements, pixel, URLs, criativos, budget, horário e status.
 
 ## Seleção de criativos
 
@@ -151,8 +201,9 @@ Não automatizar os itens abaixo até Rodolfo concluir a explicação:
 3. Se a escala de 25% pode ocorrer em dias consecutivos sobre o budget já escalado.
 4. Se `USD 150` é teto de budget diário, spend acumulado ou outra medida.
 5. Regra de realocação do budget liberado por campanhas cortadas.
-6. Resolução entre 20% para campanhas novas e o lote 3 × USD 30.
+6. Gatilho definitivo para aumentar o teto operacional da conta e percentual de cada degrau.
 7. Frequência e momento de substituição dos três criativos.
+8. Conta Meta piloto, alias, timezone, moeda, pixel/evento, experiência e credencial autorizada.
 
 ## Pitfalls
 
