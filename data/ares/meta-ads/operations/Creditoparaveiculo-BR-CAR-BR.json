@@ -132,7 +132,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T18:08:12-04:00",
+  "updated_at": "2026-08-19T18:58:52-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -253,6 +253,13 @@
       "total_revenue_usd": 8016.76,
       "roi_acquisition_pct": 6.24,
       "roi_total_with_sms_before_sms_cost_pct": 21.84
+    },
+    "sms_unit_cost": {
+      "amount": 0.08,
+      "currency": "pending_confirmation",
+      "source": "Rodolfo Mattei message",
+      "calculation": "sent_sms_count * 0.08",
+      "block_roi_after_cost_until_currency_confirmed": true
     }
   },
   "reference_inheritance_policy": {
@@ -306,7 +313,9 @@
         "INT": "interest targeting",
         "LAL": "lookalike audience"
       },
-      "policy": "optional only when differentiating a real test; not mandatory"
+      "policy": "optional only when differentiating a real test; not mandatory",
+      "active_for_current_reactivation": false,
+      "reason_current": "all campaigns use same strategy and broad audience; only DD-MM added"
     }
   },
   "creative_testing_policy": {
@@ -408,7 +417,16 @@
       "total_daily_budget_usd": 150.0,
       "post_write_readback": true,
       "rollback": true,
-      "post_budget_update_dry_run": "ok"
+      "post_budget_update_dry_run": "ok",
+      "name_prefix_20_08_required": true,
+      "post_rename_dry_run": "ok",
+      "campaign_names": {
+        "07": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe com bid",
+        "08": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe sem bid",
+        "09": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe sem bid",
+        "10": "10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe sem bid",
+        "11": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe teste roas 1.3 (estava 1.6 sem gasto com roi e 4.0)"
+      }
     }
   },
   "creative_drive_organization": {
@@ -416,7 +434,8 @@
     "account_site_campaign_tracking": "inventory fields, not duplicate files",
     "per_account_subfolders_default": false,
     "optional_visual_navigation": "Drive shortcuts by account/site after structural plan approval",
-    "source_of_truth": "inventory + canonical file lineage"
+    "source_of_truth": "inventory + canonical file lineage",
+    "canonical_filename_policy": "keep stable taxonomy; do not append test date/site/account; usage lives in inventory"
   },
   "operation_authority": {
     "Rodolfo Mattei": "full campaign operations including create, activate, pause, reactivate, clone, replacement, archive and budget/account cap",

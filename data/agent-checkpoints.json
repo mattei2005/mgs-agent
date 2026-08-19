@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar reativação 00:30 e readback; monitorar ROI real/estimado/ROAS/anomalias. Definir se tags opcionais LC/ROAS1.3 e BROAD/INT/LAL entrarão no naming quando houver testes diferentes.",
+      "next_step": "Rodolfo confirmar se o custo 0.08 é BRL ou USD. Aguardar one-shot 00:30 e readback; depois monitorar D1.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "budgets 07/08/09/10/11 alterados e validados em usd30 cada, total usd150; campanhas permanecem paused e one-shot 00:30 passou novo dry-run. naming obrigatório agora inclui dd-mm. sms g006 fica em bloco final; exemplo 30d roi aquisição 6.24% e roi total com sms antes do custo 21.84%. rodolfo/nicolas têm autoridade total de campanha e budget nesta operação, com billing/pagamento/credenciais/outras operações excluídos. drive usa transição de status e inventário, sem duplicar arquivos em subpastas por conta.",
+      "state": "campanhas 07/08/09/10/11 renomeadas com 20-08, budgets usd30 e status paused confirmados. one-shot 00:30 agora exige prefixo de nome 20-08 e passou py_compile/dry-run com total usd150. tags lc/roas/broad omitidas nesta reativação porque estratégia/público são iguais. custo sms informado como 0.08, aguardando confirmação da moeda antes do roi após custo. creative filename permanece estável; uso por conta/campanha fica no inventário.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T22:10:18+00:00"
+      "updated_at": "2026-08-19T23:00:26+00:00"
     },
     {
       "agent": "ares",
@@ -793,12 +793,12 @@
     {
       "agent": "zeus",
       "id": "wp-mu-bak-purge-20260819",
-      "next_step": "Criar e validar archives por servidor; excluir somente os 51 caminhos congelados; remover WP File Manager após backup; repetir varredura integral",
+      "next_step": "Aguardar acesso SSH/SFTP ou sessão admin utilizável do Fincgriffin para enumeração interna; manter monitoramento de nova raiz concorrente bkp2.topfeed.fun",
       "objective": "Arquivar fora do webroot e excluir todos os *.bak em wp-content/mu-plugins da frota MGS; remover WP File Manager inativo do OpenZed",
-      "source": "/root/mgs-agent/backups/mu-plugin-bak-purge/20260819T184628-0400/preflight-manifest.json",
-      "state": "escopo congelado: 111 runcloud, 4 sftp, fincgriffin publicamente bloqueado; 51 arquivos/26 instalações com caminhos+sha-256 exatos; confirmação crítica 1539767128628920460",
+      "source": "/root/mgs-agent/backups/mu-plugin-bak-purge/20260819T184628-0400/result.json",
+      "state": "concluído com lacuna explícita fincgriffin: 51 arquivos excluídos em 26 instalações runcloud; zero restantes em 112 raízes pós-operação; 4 sftp externos zero; 51 urls retornam 404; wp file manager openzed removido com backup/readback; fincgriffin filesystem inacessível mas mu-plugin e urls conhecidas em 403",
       "thread_id": "1539755374226448414",
-      "updated_at": "2026-08-19T22:47:06+00:00"
+      "updated_at": "2026-08-19T23:00:14+00:00"
     },
     {
       "agent": "zeus",
@@ -862,5 +862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T22:47:06+00:00"
+  "updated_at": "2026-08-19T23:00:26+00:00"
 }
