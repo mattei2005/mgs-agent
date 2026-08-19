@@ -7324,6 +7324,22 @@
         "https://financeadx.com/rec-us-loan-grace-loan-advance",
         "https://financeadx.com/rec-us-loan-wells-fargo"
       ]
+    },
+    {
+      "id": "jobs-scorexboost-generatepress-retina-logo-20260819",
+      "agent": "zeus",
+      "type": "wordpress_runtime_config",
+      "site": "https://jobs.scorexboost.com",
+      "server": "MatteiInc01",
+      "wp_path": "/home/runcloud/webapps/sscorexboost-jobs",
+      "setting": "generate_settings.retina_logo",
+      "previous": "https://vagaaqui.com/wp-content/uploads/2022/01/02-1.png",
+      "current": "",
+      "backup": "/root/mgs-agent/backups/jobs-scorexboost-retina-logo-before-1539714576038367242.json",
+      "backup_sha256": "481ec68cb366de28f0f53eb38265db37e2627909c055ddb210032daaa60ad8c4",
+      "authorized_message_id": "1539714576038367242",
+      "validated_at": "2026-08-19T15:18:40-04:00",
+      "validation": "WP readback confirmed retina_logo empty while custom_logo 3520 and logo_width 300 were preserved; canonical public HTML returned HTTP 200 with ScoreXBoost primary logo and no vagaaqui.com URL in logo markup."
     }
   ],
   "profile_skill_references": [
