@@ -44,7 +44,20 @@ Dados SMS                    | `POST https://api.jbfdigital.com.br/report/perfor
 Última atualização           | `POST https://api.jbfdigital.com.br/report/last_update`
 ```
 
-A tela AdGroup possui seletor de data, seletor de sites, `Filter` e rótulos/cards como `Investment`, `Conversions`, `Revenue Acquisition` e `Revenue Total`. A tela SMS expõe `Investment`, `Revenue Acquisition`, filtro, data e receita. Não inferir valores cortados em captura. Prefira a API autenticada capturada da própria SPA para extração repetível, preservando sessão/tokens fora de logs e chat.
+A tela AdGroup possui seletor de data, seletor de sites, `Filter` e rótulos/cards como `Investment`, `Conversions`, `Revenue Acquisition` e `Revenue Total`. A validação do bundle oficial e da API autenticada em 2026-08-19 confirmou o contrato usado pela própria tela:
+
+```text
+Endpoint  POST /report/performance_per_campaigns
+Payload   initialDate, finalDate, publishers[], currency
+Conta     CUSTOMER_ID + ACCOUNT_NAME
+Campanha  CAMPAIGN_ID + CAMPAIGN_NAME
+Junção    UTM_ADGROUP
+Spend     INVESTIMENT
+Receita   NET_REVENUE quando Discount revenue share está habilitado
+ROI       (receita − INVESTIMENT) × 100 ÷ INVESTIMENT
+```
+
+A tela inicia com `Discount revenue share` habilitado; portanto, reproduzir o relatório padrão exige usar `NET_REVENUE`, não `REVENUE` bruto. Datas do date picker são objetos JavaScript e são serializadas em UTC. A API pode devolver uma data civil adjacente ao intervalo escolhido; depois da resposta, filtrar `DATE` novamente pelo início/fim pretendidos no timezone operacional e contar os dias inclusivos. Para reconciliar com Meta, filtrar primeiro `CUSTOMER_ID` exato, cruzar `CAMPAIGN_ID` exato, comparar `CAMPAIGN_NAME` normalizado e só comparar spend quando as duas fontes estiverem na mesma moeda. Prefira a API autenticada capturada da própria SPA para extração repetível, preservando sessão/tokens fora de logs e chat. Não inferir valores cortados em captura.
 
 ## Smart Bidding — SMS
 
