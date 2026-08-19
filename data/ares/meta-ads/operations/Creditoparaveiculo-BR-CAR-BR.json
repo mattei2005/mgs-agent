@@ -10,8 +10,8 @@
   "channel": "DirectTraffic",
   "purchase_type": "CBO",
   "destination": "direct_link",
-  "experience": "pending_quiz_or_chat_confirmation",
-  "capture": "pending_confirmation",
+  "experience": "quiz_rewards_after_form",
+  "capture": "phone_for_sms",
   "cut_level": "campaign",
   "account_currency": "USD",
   "account_timezone": "America/Sao_Paulo",
@@ -30,15 +30,29 @@
     "adsets_per_campaign": 1,
     "ads_per_adset": 3,
     "new_campaign_count": "dynamic_by_test_pool",
-    "start_time": "00:00_account_timezone"
+    "start_time": "00:30_account_timezone"
   },
   "learning_policy": {
     "days": 3,
-    "day_1_action": "observe_no_cut",
-    "day_2_action": "observe_no_cut",
-    "day_3_action": "cut_scale_or_maintain_using_approved_rules",
-    "positive_roi_scale_step": 0.25,
-    "positive_roi_scale_checkpoint": "around_08:00_account_timezone"
+    "day_1_action": "observe_no_cut; scale at 08:00 only by approved ROI tiers",
+    "day_2_action": "observe_no_cut; repeat approved ROI tiers",
+    "day_3_action": "pause campaign if cumulative SB ROI <= -10%; otherwise maintain/scale by tiers",
+    "d3_cut_roi_pct": -10.0,
+    "scale_tiers": [
+      {
+        "roi_gt": 40.0,
+        "budget_increase_pct": 30.0
+      },
+      {
+        "roi_gt": 30.0,
+        "roi_lte": 40.0,
+        "budget_increase_pct": 20.0
+      }
+    ],
+    "no_scale_roi_lte": 30.0,
+    "scale_checkpoint": "around_08:00_account_timezone",
+    "decision_source": "Smart Bidding AdGroup USD NET_REVENUE revshare enabled",
+    "meta_roas_role": "signal_only"
   },
   "daily_budget_policy": {
     "operational_account_cap_usd": 300.0,
@@ -46,17 +60,18 @@
     "new_campaign_share_flexible_max": 0.3,
     "new_campaign_initial_budget_usd": 30.0,
     "campaign_operational_ceiling_usd": 150.0,
-    "campaign_ceiling_definition_status": "pending_confirmation",
-    "account_cap_scaling_policy_status": "calibration_pending_Rodolfo_approval"
+    "campaign_ceiling_definition_status": "provisional_approved_monitor_roi_roas",
+    "account_cap_scaling_policy_status": "Rodolfo informs/adjusts as scale requires; Ares does not raise autonomously",
+    "campaign_daily_ceiling_usd": 150.0
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
     "join_key": "utm_adgroup",
     "period_timezone_currency_required": true,
     "negative_promising_band": {
-      "from": -15,
-      "to": -10,
-      "unit_status": "pending_confirmation"
+      "cut_threshold_pct": -10.0,
+      "d1_d2": "observe_no_cut",
+      "d3": "pause_if_roi_lte_minus_10"
     }
   },
   "smart_bidding_roi": {
@@ -90,20 +105,13 @@
   },
   "scheduler_jobs": {},
   "pending_configuration": [
-    "experience_quiz_or_chat",
-    "capture_yes_or_no",
-    "pixel_id",
-    "conversion_event",
-    "page_id_and_identity",
-    "instagram_actor_if_used",
-    "destination_url",
-    "utm_mapping",
-    "campaign_naming",
-    "day_3_cut_rules",
-    "campaign_ceiling_definition",
-    "account_cap_scaling_approval"
+    "select_reference_campaign",
+    "readback_exact_pixel_page_instagram_url_placements_attribution",
+    "reconcile_and_release_selected_creatives",
+    "dry_run_paused_campaign",
+    "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T14:20:26-04:00",
+  "updated_at": "2026-08-19T15:12:33-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -152,7 +160,7 @@
     "corrected_at": "2026-08-19T14:15:49-04:00"
   },
   "meta_roas_proxy_calibration": {
-    "status": "calibrated_single_30d_window_informational_only",
+    "status": "approved_as_signal_single_window_no_write_trigger",
     "meta_field": "purchase_roas:omni_purchase",
     "attribution": "default",
     "sb_target_metric": "ROI from NET_REVENUE with revenue share enabled",
@@ -182,6 +190,74 @@
     "meta_value_to_sb_net_revenue_factor": 1.330959,
     "action_policy": "signal_only_no_cut_or_scale_write",
     "approval_required_for_automation": "Rodolfo Mattei",
-    "validated_at": "2026-08-19T14:20:26-04:00"
+    "validated_at": "2026-08-19T14:20:26-04:00",
+    "d3_history_validation": {
+      "winner_at_or_below_minus10_on_d3": false,
+      "campaign_28_d3_roi_pct": -8.1,
+      "campaign_28_first_positive_delivery_day": 9,
+      "negative_below_minus10_examples": [
+        20,
+        34,
+        54
+      ]
+    }
+  },
+  "sms_reporting": {
+    "enabled": true,
+    "experience": "quiz_with_phone_capture",
+    "source": "Smart Bidding Reports > SMS",
+    "policy": "reconcile separately from AdGroup acquisition revenue and do not double count"
+  },
+  "reference_inheritance_policy": {
+    "pixel": "inherit and readback from validated reference campaign",
+    "conversion_event": "event_Subscribe / SUBSCRIBE",
+    "page_identity": "same validated Page as reference",
+    "instagram_identity": "same validated actor if used",
+    "destination_url": "same validated URL as reference",
+    "attribution_placements": "inherit and compare by readback; do not guess IDs"
+  },
+  "naming_policy": {
+    "campaign": "NN - {PAGE_NAME} - (b01fb13cNN) event_Subscribe",
+    "adset": "01 - AdGroup - (b01fb13cNNg01) event_Subscribe",
+    "ad": "AD0N - {CANONICAL_FILENAME_WITHOUT_EXTENSION}",
+    "components": {
+      "bm": "b01",
+      "account": "fb13",
+      "campaign": "cNN",
+      "adset": "g01",
+      "event": "event_Subscribe"
+    },
+    "utm_source": "facebook",
+    "utm_medium": "g006-s",
+    "utm_campaign": "b01fb13cNN",
+    "utm_adgroup": "b01fb13cNNg01",
+    "sequence_policy": "read Meta live and use next free campaign number; do not reuse deleted number"
+  },
+  "creative_testing_policy": {
+    "drive_selection_authorized_by_Rodolfo": true,
+    "ares_eligible_required_before_write": true,
+    "meta_drive_reconciliation_required": true,
+    "new_assets_preferred": true,
+    "real_variations_allowed": true,
+    "current_pool_source": "data/ares/creative-ops/inventory/assets.jsonl + live Drive readback"
+  },
+  "hierarchy_normalization_state": {
+    "validated_at_sao_paulo": "2026-08-19T16:12:33.660637-03:00",
+    "source": "manual_manager_action_confirmed_by_Rodolfo_then_Meta_API_readback",
+    "campaigns_paused": 42,
+    "campaigns_active": 0,
+    "adsets_active": 42,
+    "adsets_paused": 0,
+    "ads_active": 126,
+    "ads_paused": 0,
+    "target_campaigns_ready_for_campaign_only_reactivation": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "legacy_child_repair_required": false,
+    "ares_write_performed": false
   }
 }

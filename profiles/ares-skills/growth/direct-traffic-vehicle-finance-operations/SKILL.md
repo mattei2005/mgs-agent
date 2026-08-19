@@ -45,6 +45,20 @@ Toda leitura de ROI deve informar período, moeda, timezone, fonte e horário de
 
 Para `Creditoparaveiculo-BR-CAR-BR-13-G006`, a regra operacional é fixa: selecionar `USD` no rodapé da Smart Bidding, manter `Discount revenue share` ativado e calcular ROI com `NET_REVENUE` pela fórmula `(NET_REVENUE − INVESTIMENT) × 100 ÷ INVESTIMENT`. Não relatar ROI dessa operação com o toggle desligado ou em BRL.
 
+### Experiência, captura e SMS
+
+A experiência é **quiz com rewards após o preenchimento**, com captura de telefone para envio de SMS.
+
+```text
+Experiência Meta/Site   quiz com rewards
+Captura                 telefone
+Evento                  event_Subscribe / SUBSCRIBE
+Relatório de aquisição  Smart Bidding > Reports > AdGroup
+Relatório de SMS        Smart Bidding > Reports > SMS
+```
+
+Pixel, evento, Page/identidade, Instagram e URL de destino devem ser herdados da campanha de referência validada na mesma conta e confirmados por readback antes de criar campanha. Não inferir IDs ou valores por nome.
+
 ### Meta Purchase ROAS como proxy
 
 A coluna do Ads Manager usada nesta operação é `purchase_roas:omni_purchase`, com atribuição padrão da conta. Ela usa valor de compra atribuído pela Meta e não é numericamente igual ao ROI líquido da SB.
@@ -58,7 +72,7 @@ Calibração read-only de 21/07/2026 a 19/08/2026:
 - Meta ROAS >= `1,40` teve maior precisão, mas perdeu positivas marginais (`19` e `28`);
 - spend muito baixo produz outliers e não deve calibrar limiar.
 
-Usar Meta ROAS como triagem/sinal rápido, nunca como substituto do ROI SB. Antes de automatizar corte ou escala por ROAS, repetir a calibração em outras janelas e aprovar thresholds com Rodolfo.
+Usar Meta ROAS como triagem/sinal rápido, nunca como substituto do ROI SB. “Repetir a calibração” significa conferir se os mesmos limites continuam funcionando em outros períodos fechados; não exige mudar a operação diária. “Automatizar por ROAS” significaria pausar/escalar sem abrir a SB — isso permanece desativado. A regra atual é: ROAS sinaliza, SB decide.
 
 ### Análise histórica do ciclo
 
@@ -101,11 +115,11 @@ Exemplo com teto operacional diário de `USD 300` e budget inicial de `USD 30`:
 
 O padrão é reservar 20%; Rodolfo autorizou flexibilização para 30% quando necessária para preservar o budget inicial de USD 30 e o volume de testes adequado. A quantidade final também depende de criativos elegíveis, capacidade de análise e espaço para escalar campanhas boas.
 
-Programar a campanha para começar às `00:00` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
+Programar a campanha para começar às `00:30` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 
 ## Ciclo de três dias
 
-A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado à meia-noite da conta.
+A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado às `00:30` no timezone da conta.
 
 ### Preparação — antes do D1
 
@@ -113,7 +127,7 @@ A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado à m
 2. Selecionar três criativos elegíveis no Shared Drive.
 3. Reconciliar Drive × Meta e reservar os assets imediatamente antes do write.
 4. Criar a CBO com um conjunto e três anúncios, no budget inicial aprovado.
-5. Programar início para `00:00` da conta e validar por GET/readback.
+5. Programar início para `00:30` da conta e validar por GET/readback.
 
 Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corretos.
 
@@ -121,32 +135,42 @@ Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corr
 
 1. Ler o ROI na Smart Bidding, na sessão `Reports > Adgroup`.
 2. Classificar provisoriamente:
-   - ROI positivo: campanha promissora e elegível para escala;
-   - ROI levemente negativo na faixa mencionada de `-10` a `-15`: campanha promissora para observação, sem escala automática por essa condição;
-   - resultado muito ruim: marcar para vigilância, mas não cortar, pausar ou substituir no D1.
-3. No primeiro horário operacional, por volta das `08:00` da conta, campanha com ROI positivo pode receber aumento de `25%` no budget.
-4. Validar qualquer escala por GET/readback e registrar valor anterior, valor novo, fonte do ROI e horário.
+   - ROI positivo: campanha promissora; aplicar escala somente nas faixas acima de 30%;
+   - ROI `> -10%` e `<= 0%`: campanha promissora para observação, sem escala;
+   - ROI `<= -10%` ou resultado muito ruim: marcar risco e continuar observando, mas não cortar/pausar no D1.
+3. No primeiro horário operacional, por volta das `08:00` da conta, aplicar escala pelo ROI cumulativo da SB:
+   - ROI `> 40%`: aumentar budget em `30%`;
+   - ROI `> 30%` e `<= 40%`: aumentar budget em `20%`;
+   - ROI `<= 30%`: manter budget, sem escala.
+4. Respeitar o teto diário provisório de USD 150 e validar qualquer escala por GET/readback, registrando valor anterior, valor novo, ROI, ROAS e horário.
 
-Conclusão: nenhuma campanha foi cortada no D1; eventual escala de 25% ocorreu apenas com ROI positivo e autorização vigente.
+Conclusão: nenhuma campanha foi cortada no D1; eventual escala ocorreu somente nas faixas aprovadas e com autorização vigente.
 
 ### D2 — repetir análise; ainda não cortar
 
 1. Reabrir ROI e spend no mesmo recorte/timezone.
 2. Continuar sem corte por resultado ruim: a campanha permanece em aprendizagem/observação.
-3. Por volta das `08:00` da conta, campanha com ROI positivo pode receber novo aumento de `25%`, sujeito à regra final de frequência/compounding e ao teto operacional.
-4. Validar write por readback e manter histórico cumulativo da campanha.
+3. Por volta das `08:00` da conta, repetir as faixas de escala:
+   - ROI `> 40%`: `+30%`;
+   - ROI `> 30%` e `<= 40%`: `+20%`;
+   - ROI `<= 30%`: manter.
+4. Nunca ultrapassar o teto diário provisório de USD 150; validar write por readback e manter histórico cumulativo da campanha.
 
 Conclusão: D2 preserva a campanha para leitura; cortes continuam bloqueados e escalas ficam auditadas.
 
 ### D3 — iniciar cortes e escala disciplinada
 
-1. Ler o acumulado dos três dias e também o desempenho diário, sem misturar timezones.
-2. Aplicar critérios de corte e escala definidos pelo playbook final de Rodolfo.
-3. Não permitir que a campanha ultrapasse o teto operacional informado de `USD 150` sem nova regra/autorização explícita.
-4. Evitar escala agressiva que estoure custo e destrua o ROI.
-5. Validar pausa, corte, escala ou manutenção por readback Meta e registrar o ROI da Smart Bidding usado na decisão.
+1. Ler o ROI cumulativo dos três dias na SB, em USD e com revshare ativado.
+2. Aplicar a regra de corte no nível campanha:
+   - ROI `<= -10%`: pausar/cortar a campanha;
+   - ROI `> -10%` e `<= 30%`: manter sem escala e continuar observação;
+   - ROI `> 30%` e `<= 40%`: escalar `20%`;
+   - ROI `> 40%`: escalar `30%`.
+3. Usar Meta ROAS como apoio: `<1,20` reforça negativo; `1,20–1,34` é faixa cinza; `>=1,34` é sinal positivo/proximidade, mas a SB decide.
+4. Respeitar teto diário provisório de `USD 150` por campanha e monitorar se ROAS/ROI deterioram após escala.
+5. Pausa, manutenção ou escala são feitas no nível campanha e validadas por readback.
 
-Conclusão: cada campanha recebe uma decisão auditável no D3; os critérios exatos de corte permanecem pendentes até Rodolfo concluir o playbook.
+Validação histórica: entre campanhas com Meta ROAS >1,30 e spend >=USD 10, nenhuma vencedora estava em ROI cumulativo `<= -10%` no D3. A campanha 28 estava em `-8,10%` no D3 e só ficou positiva no 9º dia, portanto não deve ser cortada pela regra. Campanhas 20, 34 e 54 estavam abaixo de -10% no D3 e terminaram negativas. O limite é operacional e deve continuar sendo monitorado.
 
 ## Budget e renovação do portfólio
 
@@ -160,29 +184,51 @@ Budget inicial por campanha                    USD 30
 Pool normal para campanhas novas               20% do teto operacional
 Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
 Quantidade de campanhas novas                  dinâmica, calculada pelo pool
-Escala por rodada elegível                     +25%
-Teto operacional por campanha                  USD 150, definição exata pendente
+Escala com ROI >30% e <=40%                    +20%
+Escala com ROI >40%                            +30%
+Teto diário provisório por campanha            USD 150
 ```
 
-“Budget da conta” deve ser tratado como **teto operacional interno diário do portfólio**, não confundido automaticamente com `account_spend_limit` da Meta. Os writes normais continuam nos budgets CBO das campanhas.
+“Budget da conta” é o teto operacional interno diário do portfólio, não `account_spend_limit` da Meta. O teto de USD 150 por campanha é provisório/empírico: após cada escala, acompanhar ROAS e ROI e interromper novas escalas se houver deterioração relevante.
 
-### Escala sugerida do teto da conta
+### Escala do teto da conta
 
-Ares pode recomendar aumento do teto quando a conta provar capacidade de absorção. Usar dois níveis independentes:
+O teto da conta será informado/ajustado por Rodolfo conforme a escala e a necessidade de manter campanhas boas. Ares pode calcular uso, projeção e espaço para testes, mas não aumenta o teto da conta por conta própria.
 
-1. **Escala da campanha:** campanha elegível recebe +25% no primeiro checkpoint operacional, dentro do teto atual.
-2. **Escala da conta:** aumentar o teto do portfólio somente quando a soma das campanhas boas estiver sem espaço para novas escalas/testes e o ROI consolidado da conta permanecer saudável em dias fechados.
+Manter 20% como pool normal de campanhas novas e até 30% quando o piso de USD 30 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
 
-Sugestão inicial para calibração:
+## Naming Meta e rastreamento
 
-- manter 70%–80% para campanhas em aprendizagem/escala e 20% para novos testes;
-- permitir 30% de testes quando o piso de USD 30 ou a necessidade de volume justificar;
-- recomendar aumento do teto em degraus de 20%–25%, nunca salto aberto;
-- exigir pelo menos dois dias fechados consecutivos com ROI consolidado positivo e ausência de anomalia relevante antes de subir o teto;
-- após o aumento, observar um dia fechado antes de recomendar novo degrau;
-- se o ROI consolidado deteriorar, congelar novas escalas da conta antes de cortar automaticamente campanhas ainda em D1/D2.
+Antes do write, ler a conta e usar o próximo número de campanha livre; não reutilizar número de campanha deletada.
 
-Esses critérios de escala da conta são proposta do Ares e permanecem em calibração até aprovação explícita de Rodolfo.
+```text
+Campanha  NN - {PAGE_NAME} - (b01fb13cNN) event_Subscribe
+Adset     01 - AdGroup - (b01fb13cNNg01) event_Subscribe
+Anúncio   AD01 - {CANONICAL_FILENAME_SEM_EXTENSÃO}
+           AD02 - {CANONICAL_FILENAME_SEM_EXTENSÃO}
+           AD03 - {CANONICAL_FILENAME_SEM_EXTENSÃO}
+```
+
+Significado:
+
+```text
+b01   Business Manager 01
+fb13  conta de anúncio 13
+cNN   número da campanha
+g01   conjunto 01
+event_Subscribe  evento de rewards/quiz obrigatório no nome
+```
+
+UTMs:
+
+```text
+utm_source   facebook
+utm_medium   g006-s
+utm_campaign b01fb13cNN
+utm_adgroup  b01fb13cNNg01
+```
+
+O nome do anúncio preserva o ordinal e o nome canônico do Drive. Inventário/audit também registra `asset_id`, Drive ID, checksum, Meta ad/creative/video ID e linhagem; filename sozinho não prova identidade.
 
 ## Criação do zero versus clone
 
@@ -202,22 +248,25 @@ Os dois métodos são tecnicamente possíveis e ambos geram novos IDs na Meta:
 
 Clone fica como fallback quando a API não expuser ou reproduzir com segurança algum campo necessário, ou quando Rodolfo pedir duplicação exata de uma campanha-base. Mesmo no clone, remover heranças indevidas e validar attribution, optimization, evento, placements, pixel, URLs, criativos, budget, horário e status.
 
-## Seleção de criativos
+## Seleção e variação de criativos
 
 1. Usar apenas assets `ares_eligible=true` e sem reserva conflitante.
 2. Tratar original e versão sanitizada como uma única linhagem, nunca como candidatos independentes.
-3. Preferir criativos com histórico compatível com o teste proposto, sem transformar winner antigo em garantia.
-4. Registrar campanha, conta, gestor, ad IDs, creative IDs, hashes e data do teste.
-5. Consumir o percentual aprovado de renovação somente após reconciliar o orçamento disponível.
+3. Preferir assets novos; também é permitido criar variações reais de criativos promissores para acelerar novos testes.
+4. Variação deve mudar criativo de verdade — hook, abertura, copy visual, CTA, composição ou edição — e não somente overlay/zoom.
+5. Registrar campanha, conta, gestor, ad/creative IDs, image hash/video ID, Drive ID e data do teste.
+6. Reconciliar novamente Meta × Drive e reservar os escolhidos imediatamente antes do write.
 
-Conclusão: os três anúncios têm assets distintos, rastreáveis, sanitizados e reservados para a campanha correta.
+O estado atual do pool deve ser lido no inventário e no Drive imediatamente antes da seleção. `01_READY` e metadata limpa não liberam asset reservado; ausência de vínculo Meta também não prova ineditismo.
+
+Conclusão: os três anúncios têm assets distintos ou variações explicitamente aprovadas, rastreáveis, sanitizadas e reservadas para a campanha correta.
 
 ## Rotina diária do gestor
 
 ```text
 Janela                 Ação
 ---------------------- ---------------------------------------------------
-Antes de 00:00          preparar e programar novas CBOs
+Antes de 00:30          preparar e programar novas CBOs
 Por volta de 08:00      ler ROI SB, revisar spend e executar escala elegível
 Durante D1/D2           observar campanhas ruins; não cortar
 No D3                   decidir corte, manutenção ou escala pelo acumulado
@@ -226,18 +275,14 @@ Após qualquer write     readback Meta + audit da decisão e da fonte de ROI
 
 O horário operacional é sempre o timezone da conta Meta, não o horário local presumido do gestor.
 
-## Pontos ainda abertos
+## Pontos ainda abertos antes do primeiro write
 
-Não automatizar os itens abaixo até Rodolfo concluir a explicação:
-
-1. Unidade exata da faixa `-10`/`-15` na Smart Bidding.
-2. Critérios objetivos de corte no D3.
-3. Se a escala de 25% pode ocorrer em dias consecutivos sobre o budget já escalado.
-4. Se `USD 150` é teto de budget diário, spend acumulado ou outra medida.
-5. Regra de realocação do budget liberado por campanhas cortadas.
-6. Gatilho definitivo para aumentar o teto operacional da conta e percentual de cada degrau.
-7. Frequência e momento de substituição dos três criativos.
-8. Conta Meta piloto, alias, timezone, moeda, pixel/evento, experiência e credencial autorizada.
+1. Escolher a campanha de referência e ler por API os IDs exatos de pixel, Page/Instagram, URL, placements e attribution.
+2. Reconciliar/liberar no inventário os criativos que entrarão nas campanhas novas.
+3. Definir o próximo número de campanha livre por leitura Meta imediatamente antes da criação.
+4. Rodar dry-run da estrutura e validar campanha PAUSED antes de ativação.
+5. Obter autorização explícita para o write concreto de reparo legado, reativação e/ou criação.
+6. Acompanhar em janelas futuras se o modelo ROAS 1,20/1,34 continua estável; ROAS permanece sinal, SB permanece decisão.
 
 ## Pitfalls
 
@@ -256,12 +301,12 @@ Não automatizar os itens abaixo até Rodolfo concluir a explicação:
 - [ ] Estratégia quiz/chat, captura, evento e UTMs confirmados
 - [ ] Estrutura CBO 1×1×3 validada
 - [ ] Três criativos sanitizados, elegíveis e reservados
-- [ ] Início às 00:00 do timezone da conta validado
+- [ ] Início às 00:30 do timezone da conta validado
 - [ ] ROI lido na Smart Bidding > Reports > Adgroup
-- [ ] Nenhum corte executado no D1/D2
-- [ ] Escala de 25% aplicada somente com ROI positivo e autorização vigente
-- [ ] D3 usa critérios finais aprovados por Rodolfo
-- [ ] Teto de USD 150 respeitado conforme definição final
+- [ ] D1/D2 sem cortes
+- [ ] D3 pausa campanha com ROI cumulativo <= -10%
+- [ ] ROI >30% e <=40% escala 20%; ROI >40% escala 30%
+- [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
 - [ ] Budget anterior/novo, moeda, período e fonte registrados
 - [ ] Todo write confirmado por readback Meta
 - [ ] Pendências desta versão resolvidas antes de automação autônoma
