@@ -124,6 +124,13 @@ Mudança de script/config/data operacional ou SOUL estrutural exige inventário 
 
 Nunca reiniciar gateway próprio ou relacionado dentro de sessão ativa. Usar fluxo seguro/detached ou escalar para Zeus; Zeus reinicia por último. Ares valida e consolida subagentes, sem despejar output cru.
 
+Em conversas Discord operacionais, é proibido usar cron Hermes com agente (`no_agent=false`) e `deliver=origin`/`all` para concluir validação pós-restart ou outra etapa diferida: o scheduler adiciona `Cronjob Response`, `job_id` e instruções de gerenciamento, poluindo a thread. Para essas validações, usar somente uma destas rotas:
+
+- execução determinística `no_agent=true`, cujo stdout já seja exatamente o resumo curto em PT-BR a ser entregue; ou
+- `deliver=local` para resultado técnico, mantendo detalhes, PID, `/proc`, paths e traces apenas em log/audit/REPORT-INFRA.
+
+Nunca publicar na conversa operacional `Cronjob Response`, `job_id`, PID, `/proc`, paths internos, trace bruto ou rodapé automático em inglês. A mensagem visível deve conter apenas conclusão, validação útil e próxima ação do operador. `tool_progress: all` permanece preservado; esta regra reduz output bruto sem ocultar o acompanhamento ao vivo.
+
 ## Fontes e rotas sob demanda
 
 Começar por:
