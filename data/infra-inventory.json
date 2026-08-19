@@ -7354,7 +7354,7 @@
       "changes": {
         "noticiainforme.com": "Removed the stale secondary copyright block and purged the WP Rocket homepage cache after explicit critical confirmation.",
         "vagaaqui.com": "Removed the stale secondary copyright block.",
-        "newsfolha.com": "Inserted a deliberate line break after Harju, Estonia. in the ActiveView legal footer."
+        "newsfolha.com": "Inserted deliberate line breaks after the tenant copyright, after Harju, Estonia., and after services provided by so the ActiveView operator, service description, and CLICK ON ADV company data render on separate lines."
       },
       "backups": [
         {
@@ -7364,15 +7364,20 @@
         {
           "path": "/root/mgs-agent/backups/newsfolha-footer-linebreak-before-1539744560929050674.json",
           "sha256": "d88c0402e2855b5835042bc38fd5ecb1e4255d72565877ad3e542b900b96f127"
+        },
+        {
+          "path": "/root/mgs-agent/backups/newsfolha-footer-layout-before-1539749164303519815.json",
+          "sha256": "8d1d031829aaa0d4d75b47df86961debdc9ca874c7319dc477b48d3a4b0d222e"
         }
       ],
       "authorized_message_ids": [
         "1539744034300370984",
         "1539744560929050674",
-        "1539745468186108035"
+        "1539745468186108035",
+        "1539749164303519815"
       ],
-      "validated_at": "2026-08-19T17:19:22-04:00",
-      "validation": "Bare public URLs for noticiainforme.com and vagaaqui.com returned HTTP 200 with exactly one ActiveView footer and no legacy/secondary copyright. NewsFolha WP raw and do_blocks render each contain exactly one requested br line break; its public root remains under the pre-existing maintenance page."
+      "validated_at": "2026-08-19T17:34:44-04:00",
+      "validation": "Bare public URLs for noticiainforme.com and vagaaqui.com returned HTTP 200 with exactly one ActiveView footer and no legacy/secondary copyright. NewsFolha do_blocks render confirms five deliberate br elements: after tenant copyright, after Estonia, after services provided by, after CLICK ON ADV EIN, and after the street address; its public root remains under the pre-existing maintenance page."
     }
   ],
   "profile_skill_references": [
