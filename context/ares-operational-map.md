@@ -41,13 +41,14 @@ Audit MGS                               /root/mgs-agent/logs/events-audit.jsonl
 ### Canais Discord canônicos
 
 ```text
-Canal            ID                    Participantes                         Finalidade
----------------  --------------------  ------------------------------------  ----------------------------------------------
-ares-diretoria   1508853425952133180   Rodolfo, Zeus e Ares                  Diretoria privada e histórico completo do Ares
-ares-aquisicao   1516887105543077949   Rodolfo, Zeus, Ares e gestores        Campanhas, HOA, Intraday, regras e relatórios
+Canal                              ID                    Participantes                         Finalidade
+---------------------------------  --------------------  ------------------------------------  ----------------------------------------------
+ares-diretoria                     1508853425952133180   Rodolfo, Zeus e Ares                  Diretoria privada e histórico completo do Ares
+ares-aquisicao                     1516887105543077949   Rodolfo, Zeus, Ares e gestores        Campanhas, HOA, Intraday, regras e relatórios
+ares-aquisicao-eggbev-us-cc-en     1539422731727147079   Rodolfo, Nicolas, Zeus e Ares         Eggbev US-CC-EN: criação, contas e relatórios em threads
 ```
 
-`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado; assuntos ficam separados por threads. Nenhum outro canal Discord é rota ativa do Ares.
+`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado. `ares-aquisicao-eggbev-us-cc-en` é a rota privada da operação Eggbev US-CC-EN, com múltiplas contas identificadas por alias e threads separadas para criação de campanhas, Diário, Intraday, HOA e criativos/testes. Nenhum outro canal Discord é rota ativa do Ares.
 
 ## 3. Pedido → primeira rota
 
