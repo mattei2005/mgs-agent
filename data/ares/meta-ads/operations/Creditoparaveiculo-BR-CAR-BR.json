@@ -69,6 +69,9 @@
     "account_id": "1046241194533786",
     "endpoint": "/report/performance_per_campaigns",
     "account_currency": "USD",
+    "dashboard_currency": "USD",
+    "revenue_share_enabled": true,
+    "revenue_share_toggle_required": true,
     "default_revenue_field": "NET_REVENUE",
     "roi_formula": "(NET_REVENUE - INVESTIMENT) / INVESTIMENT * 100",
     "join_keys": [
@@ -100,5 +103,5 @@
     "campaign_ceiling_definition",
     "account_cap_scaling_approval"
   ],
-  "updated_at": "2026-08-19T12:51:30-04:00"
+  "updated_at": "2026-08-19T13:16:50-04:00"
 }
