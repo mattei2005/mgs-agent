@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-NICOLAS-META-CHANNELS-20260818",
-      "next_step": "Executar finalizer destacado do ares-gateway, validar systemd+Discord readiness e então Rodolfo reenviar uma mensagem nova no canal para validar auto-thread e resposta; a mensagem antiga não será reprocessada automaticamente.",
-      "objective": "Ativar o canal privado ares-aquisicao-eggbev-us-cc-en para criação e gestão de campanhas e relatórios em threads, inclusive com múltiplas contas Meta.",
-      "source": "discord:thread:1539394253526925384; channel:1539422731727147079; /root/.hermes/profiles/ares/config.yaml; context/ares-operational-map.md",
-      "state": "diagnóstico confirmado: mensagem de rodolfo no canal 1539422731727147079 não chegou porque o gateway ares só permitia os canais 1508853425952133180 e 1516887105543077949. correção gravada no config vivo e espelho versionado: allowed_channels e free_response_channels incluem 1539422731727147079; thread_require_mention=false; auto_thread=true; channel prompt eggbev é string válida e registra rodolfo, nicolas, zeus e ares, geizian fora, múltiplas contas por alias e autonomia campaign-level do nicolas. mapa operacional atualizado. backup: /root/.hermes/profiles/ares/config.yaml.backup-eggbev-channel-20260819t000115z. restart seguro destacado ainda pendente.",
+      "next_step": "Reiniciar Ares novamente; validar /proc/<MainPID>/environ com o novo canal e thread_require_mention=false; então responder/importar a mensagem de Rodolfo no canal Eggbev e validar auto-thread.",
+      "objective": "Ativar e validar o canal privado ares-aquisicao-eggbev-us-cc-en para criação de campanhas e relatórios em threads.",
+      "source": "discord:thread:1539394253526925384; channel:1539422731727147079; finalizer log /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260819T000343Z-1847699.log; runtime /proc/1848491/environ",
+      "state": "segundo teste de rodolfo às 20:07 não gerou inbound. restart anterior foi saudável e discord connected=true às 20:06:14. causa raiz confirmada no processo vivo: systemd environmentfile /root/.hermes/profiles/ares/.env ainda exportava apenas os dois canais antigos e thread_require_mention=true, prevalecendo sobre config.yaml. as cinco chaves discord não secretas foram alinhadas entre config e .env; all_parity=true; .env preservado 0600; backup /root/.hermes/profiles/ares/.env.backup-eggbev-channel-20260819t000915z. skill discord-ops atualizada com o pitfall. novo restart destacado pendente.",
       "thread_id": "1539394253526925384",
-      "updated_at": "2026-08-19T00:03:26+00:00"
+      "updated_at": "2026-08-19T00:10:31+00:00"
     },
     {
       "agent": "ares",
@@ -842,5 +842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T00:03:26+00:00"
+  "updated_at": "2026-08-19T00:10:31+00:00"
 }

@@ -22,17 +22,21 @@ User question: Esse eh um teste ou já eh uma análise ?
 
 ## Root cause
 
-Ares `.env` had been updated, but `config.yaml` contained a `discord:` section that was loaded into the runtime and overrode/seeded the effective Discord env/config:
+Ares `.env` tinha sido atualizado, mas `config.yaml` continha uma seção `discord:` divergente. No runtime validado em 2026-06-19, isso manteve `allowed_channels`, `free_response_channels` e `thread_require_mention` antigos.
 
-```yaml
-discord:
-  require_mention: true
-  free_response_channels: '1508853425952133180'
-  allowed_channels: 1508853425952133180,1513005743954198538
-  thread_require_mention: true
+No runtime Hermes/MGS v0.20.2 validado em 2026-08-18, existe o caso inverso: o unit systemd carrega `EnvironmentFile=/root/.hermes/profiles/ares/.env`, e os valores `DISCORD_*` já exportados podem prevalecer sobre o `config.yaml` correto. Portanto, depois de qualquer mudança de rota Discord, não concluir pelo arquivo: validar o processo vivo em `/proc/<MainPID>/environ` e exigir paridade entre `config.yaml`, `.env` não secreto e runtime efetivo.
+
+As chaves não secretas que precisam permanecer alinhadas são:
+
+```text
+DISCORD_ALLOWED_CHANNELS
+DISCORD_FREE_RESPONSE_CHANNELS
+DISCORD_REQUIRE_MENTION
+DISCORD_THREAD_REQUIRE_MENTION
+DISCORD_AUTO_THREAD
 ```
 
-So `logs-aquisicao` was not effectively in `allowed_channels`/`free_response_channels`, and thread follow-up still required mention.
+Nunca imprimir outras linhas do `.env`; atualizar somente essas chaves por edição restrita, preservar modo `0600`, criar backup e validar novamente após restart destacado.
 
 ## Fix pattern
 
