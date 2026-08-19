@@ -103,7 +103,7 @@
     "campaign_ceiling_definition",
     "account_cap_scaling_approval"
   ],
-  "updated_at": "2026-08-19T14:15:49-04:00",
+  "updated_at": "2026-08-19T14:20:26-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -150,5 +150,38 @@
     "child_level_mismatch": "observation_only_when_relevant",
     "manager_instruction_status": "Nicolas already instructed by Rodolfo to pause/reactivate at campaign level",
     "corrected_at": "2026-08-19T14:15:49-04:00"
+  },
+  "meta_roas_proxy_calibration": {
+    "status": "calibrated_single_30d_window_informational_only",
+    "meta_field": "purchase_roas:omni_purchase",
+    "attribution": "default",
+    "sb_target_metric": "ROI from NET_REVENUE with revenue share enabled",
+    "currency": "USD",
+    "period": {
+      "start": "2026-07-21",
+      "end": "2026-08-19"
+    },
+    "minimum_spend_for_stable_pattern_usd": 10.0,
+    "pearson_spend_ge_10": 0.7783,
+    "spearman_spend_ge_10": 0.7843,
+    "empirical_break_even_roas": 1.340664,
+    "negative_floor_observed": "Meta ROAS < 1.20 => 0 positive SB campaigns in this window",
+    "threshold_1_34_spend_ge_10": {
+      "true_positive": 6,
+      "false_positive": 2,
+      "true_negative": 29,
+      "false_negative": 0,
+      "precision_positive": 0.75,
+      "sensitivity": 1.0,
+      "specificity": 0.9355
+    },
+    "known_false_positives": [
+      20,
+      54
+    ],
+    "meta_value_to_sb_net_revenue_factor": 1.330959,
+    "action_policy": "signal_only_no_cut_or_scale_write",
+    "approval_required_for_automation": "Rodolfo Mattei",
+    "validated_at": "2026-08-19T14:20:26-04:00"
   }
 }

@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Manter análises pelo status da campanha e aplicar qualquer ação somente no nível campanha.",
+      "next_step": "Repetir calibração em outras janelas/dias fechados antes de Rodolfo aprovar thresholds para corte ou escala.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "classificação sintética removida por correção de rodolfo. relatórios usam somente status do nível campanha; filhos pausados entram apenas como observação quando relevante. nicolas já foi orientado a pausar/reativar a campanha, não conjunto/anúncios.",
+      "state": "calibração meta purchase roas versus roi líquido sb concluída para 21/07-19/08. com spend >= usd 10: pearson 0.7783, spearman 0.7843; limiar empírico ~1.34 capturou 6/6 positivas e gerou 2 falsas positivas (20,54). meta roas preservado como sinal informativo, sem gatilho de write.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T18:16:21+00:00"
+      "updated_at": "2026-08-19T18:21:10+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T18:16:21+00:00"
+  "updated_at": "2026-08-19T18:21:10+00:00"
 }

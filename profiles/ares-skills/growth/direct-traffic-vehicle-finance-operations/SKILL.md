@@ -45,6 +45,21 @@ Toda leitura de ROI deve informar período, moeda, timezone, fonte e horário de
 
 Para `Creditoparaveiculo-BR-CAR-BR-13-G006`, a regra operacional é fixa: selecionar `USD` no rodapé da Smart Bidding, manter `Discount revenue share` ativado e calcular ROI com `NET_REVENUE` pela fórmula `(NET_REVENUE − INVESTIMENT) × 100 ÷ INVESTIMENT`. Não relatar ROI dessa operação com o toggle desligado ou em BRL.
 
+### Meta Purchase ROAS como proxy
+
+A coluna do Ads Manager usada nesta operação é `purchase_roas:omni_purchase`, com atribuição padrão da conta. Ela usa valor de compra atribuído pela Meta e não é numericamente igual ao ROI líquido da SB.
+
+Calibração read-only de 21/07/2026 a 19/08/2026:
+
+- com `spend >= USD 10`, correlação Pearson `0,7783` e Spearman `0,7843` entre Meta ROAS e ROI SB;
+- limiar empírico que melhor separou sinal positivo/negativo: Meta ROAS aproximado `1,34`;
+- abaixo de `1,20`, nenhuma campanha ficou positiva na SB nesse recorte;
+- a partir de `1,34`, todas as seis positivas com spend relevante foram capturadas, com duas falsas positivas (`20` e `54`);
+- Meta ROAS >= `1,40` teve maior precisão, mas perdeu positivas marginais (`19` e `28`);
+- spend muito baixo produz outliers e não deve calibrar limiar.
+
+Usar Meta ROAS como triagem/sinal rápido, nunca como substituto do ROI SB. Antes de automatizar corte ou escala por ROAS, repetir a calibração em outras janelas e aprovar thresholds com Rodolfo.
+
 ### Análise histórica do ciclo
 
 Quando comparar duração e viradas de ROI:
