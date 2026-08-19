@@ -792,6 +792,16 @@
     },
     {
       "agent": "zeus",
+      "id": "wp-mu-bak-purge-20260819",
+      "next_step": "Criar e validar archives por servidor; excluir somente os 51 caminhos congelados; remover WP File Manager após backup; repetir varredura integral",
+      "objective": "Arquivar fora do webroot e excluir todos os *.bak em wp-content/mu-plugins da frota MGS; remover WP File Manager inativo do OpenZed",
+      "source": "/root/mgs-agent/backups/mu-plugin-bak-purge/20260819T184628-0400/preflight-manifest.json",
+      "state": "escopo congelado: 111 runcloud, 4 sftp, fincgriffin publicamente bloqueado; 51 arquivos/26 instalações com caminhos+sha-256 exatos; confirmação crítica 1539767128628920460",
+      "thread_id": "1539755374226448414",
+      "updated_at": "2026-08-19T22:47:06+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "wp2fa-rollout-54-sites-20260817",
       "next_step": "Cada usuário sem TOTP configurado deve escanear o QR no próximo login e guardar seus backup codes; monitorar suporte/lockouts.",
       "objective": "Instalar e configurar WP 2FA 4.1.0 nos 54 sites, com TOTP app, backup codes, obrigatório para todos, sem exclusões e sem grace period.",
@@ -852,5 +862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T22:10:18+00:00"
+  "updated_at": "2026-08-19T22:47:06+00:00"
 }
