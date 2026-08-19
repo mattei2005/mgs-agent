@@ -20,7 +20,7 @@ Completion criterion: only the procedure and evidence required for the current a
 ## Operational route packs
 
 - **Quando usar → Sem acesso programático** → `references/route-pack-01.md`
-- **Mapeamento completo dos 27 sites RunCloud → ⚠️ Pitfalls** → `references/route-pack-02.md`
+- **Acesso RunCloud legado + descoberta live de webapps → ⚠️ Pitfalls** → `references/route-pack-02.md`
 - **SEÇÃO B — Deploy de mu-plugins nos 4 sites AWS/Bitnami → Referência rápida** → `references/route-pack-03.md`
 - **SEÇÃO D — SFTP para sites fora do RunCloud → Exceção Wantabrand — MonetizeMore/M2** → `references/route-pack-04.md`
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`

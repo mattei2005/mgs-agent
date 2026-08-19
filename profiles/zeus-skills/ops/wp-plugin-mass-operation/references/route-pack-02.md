@@ -1,4 +1,35 @@
-## Mapeamento completo dos 27 sites RunCloud
+## Acesso RunCloud legado + descoberta live de webapps
+
+> **Guard de frescor:** o dicionário histórico abaixo não representa o portfólio RunCloud completo atual. Antes de concluir que um domínio não está hospedado ou antes de operar um site ausente da lista, descubra os webapps no servidor em modo read-only e confirme cada alvo com `wp option get home`. Não edite o inventário histórico apenas por suposição.
+
+Descoberta live no MatteiInc01:
+
+```bash
+sudo python3 -c 'import glob; print(chr(10).join(glob.glob("/home/runcloud*/webapps/*")))'
+```
+
+Alvos validados em produção em 2026-08-19:
+
+```text
+vagaaqui.com              /home/runcloud/webapps/vagaaqui                    runcloud
+newsfolha.com             /home/runcloud/webapps/newsfolha                   runcloud
+jobs.newsfolha.com        /home/runcloud/webapps/newsfolha-jobs              runcloud
+financescredit.com        /home/runcloud/webapps/financescredit              runcloud
+deolhonoworld.com         /home/runcloud/webapps/deolho                      runcloud
+jobs.deolhonoworld.com    /home/runcloud2/webapps/jobs-deolhonoworld-com     runcloud2
+noticiainforme.com        /home/runcloud/webapps/noticiainforme              runcloud
+esp.noticiainforme.com    /home/runcloud/webapps/esp-noticiainforme          runcloud
+scorexboost.com           /home/runcloud/webapps/scorexboost                 runcloud
+jobs.scorexboost.com      /home/runcloud/webapps/sscorexboost-jobs           runcloud
+```
+
+Para validar um alvo descoberto:
+
+```bash
+sudo -u <owner> wp --path=<root_path> option get home --allow-root
+```
+
+## Dicionário histórico de 27 sites
 
 ```python
 SITES_RUNCLOUD = {

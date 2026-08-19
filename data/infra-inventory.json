@@ -7426,12 +7426,12 @@
       "type": "skill_reference",
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md",
-      "size_bytes": 7773,
-      "modified_at": "2026-07-14T21:57:25-04:00",
-      "sha256": "dd3dbea27e22a5c0bd40249be82ef79adaba731d999f4c5bca63c02bbbffe7ac",
-      "purpose": "Canonical RunCloud/AWS WordPress access procedure with current 1Password item titles, authenticated REST field mapping, and credential-safe sshpass file handling.",
-      "validation": "Four Python reference blocks compile; canonical 1Password titles present; legacy titles and plaintext password note absent; sshpass -p absent; sshpass -f temp-file path present; four authenticated WordPress post-ID smokes returned HTTP 200.",
-      "updated_at": "2026-07-14T21:58:16-04:00"
+      "size_bytes": 9361,
+      "modified_at": "2026-08-19T13:52:21.062405-04:00",
+      "sha256": "f20bca48e6fe907853b415818e5277769c7b5feeb3576ed65e96c7f88b14d50d",
+      "purpose": "Canonical RunCloud/AWS WordPress access procedure with credential-safe access plus a live-discovery guard for portfolio paths absent from the legacy 27-site dictionary.",
+      "validation": "Readback confirmed the 10 production domain/path/owner mappings used in the footer and ads.txt rollout; live discovery and wp option get home are now required before treating the historical dictionary as complete.",
+      "updated_at": "2026-08-19T13:52:21.062405-04:00"
     },
     {
       "id": "zeus-log-monitor-honcho-flapping-debounce-reference",
