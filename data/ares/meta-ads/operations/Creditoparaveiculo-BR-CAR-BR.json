@@ -103,7 +103,7 @@
     "campaign_ceiling_definition",
     "account_cap_scaling_approval"
   ],
-  "updated_at": "2026-08-19T14:09:22-04:00",
+  "updated_at": "2026-08-19T14:15:49-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -134,5 +134,21 @@
       59,
       60
     ]
+  },
+  "campaign_level_control_policy": {
+    "action_level": "campaign",
+    "pause_level": "campaign_only",
+    "reactivate_level": "campaign_only",
+    "cut_level": "campaign_only",
+    "do_not_use_adset_or_ad_pause_as_campaign_shutdown": true,
+    "hierarchical_status_required": true,
+    "delivery_interpretation": "campaign ACTIVE does not mean delivering when all child ads are PAUSED",
+    "owner_instruction": "Rodolfo Mattei; Nicolas G006 instructed to deactivate the campaign, not adset or ads",
+    "validated_at": "2026-08-19T14:14:14-04:00",
+    "reporting_status_source": "campaign_level",
+    "synthetic_status_classification_enabled": false,
+    "child_level_mismatch": "observation_only_when_relevant",
+    "manager_instruction_status": "Nicolas already instructed by Rodolfo to pause/reactivate at campaign level",
+    "corrected_at": "2026-08-19T14:15:49-04:00"
   }
 }
