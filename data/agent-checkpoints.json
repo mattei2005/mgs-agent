@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-NICOLAS-META-CHANNELS-20260818",
-      "next_step": "Nenhuma pendência de roteamento. Próximo passo operacional é Nicolas informar a primeira conta Meta/operação ou campanha a trabalhar.",
-      "objective": "Ativar e validar o canal privado ares-aquisicao-eggbev-us-cc-en para criação de campanhas e relatórios em threads.",
-      "source": "discord:source-thread:1539394253526925384; channel:1539422731727147079; e2e-thread:1539427734294499420; /root/mgs-agent/data/agent-checkpoints.json",
-      "state": "completed: canal 1539422731727147079 operacional; mensagem humana recebida pelo ares e auto-thread criada em 1539427734294499420; resposta nesta thread confirma o fluxo inbound e conversation route. rodolfo, nicolas, zeus e ares participam; geizian fora; múltiplas contas por alias; nicolas com autonomia total em nível de campanha; relatórios e criações separados por threads.",
-      "thread_id": "1539427734294499420",
-      "updated_at": "2026-08-19T00:17:06+00:00"
+      "next_step": "Reiniciar Ares; validar no novo PID DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL com Eggbev=Nicolas e Diretoria vazia; abrir/usar próxima thread real e confirmar Auto-thread member sync added=1055570806945620030 por log e member readback.",
+      "objective": "Ativar e validar o canal privado ares-aquisicao-eggbev-us-cc-en para campanhas, relatórios e membership automático por thread.",
+      "source": "discord:thread:1539394253526925384; channel:1539422731727147079; /root/.hermes/profiles/ares/config.yaml; /root/.hermes/profiles/ares/.env; tests/gateway/test_discord_thread_auto_add_by_channel.py",
+      "state": "rota eggbev ativa. nova decisão de rodolfo: toda thread criada no parent 1539422731727147079 deve adicionar nicolas 1055570806945620030. política por canal gravada em config e environmentfile json: diretoria 1508853425952133180=[], aquisição compartilhada mantém lista vigente, eggbev=[1055570806945620030]; global auto-add permanece vazio. config/env parity=true; adapter contém sync determinístico; testes test_discord_thread_auto_add_by_channel.py 5 passed; prompt e mapa operacional atualizados; backups config/.env stamp 20260819t001842z. restart destacado pendente.",
+      "thread_id": "1539394253526925384",
+      "updated_at": "2026-08-19T00:20:20+00:00"
     },
     {
       "agent": "ares",
@@ -842,5 +842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T00:17:06+00:00"
+  "updated_at": "2026-08-19T00:20:20+00:00"
 }

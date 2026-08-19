@@ -98,11 +98,15 @@ Fast restoration:
 - After changing profile config, update both the live profile (`/root/.hermes/profiles/{agent}/config.yaml`) and the versioned copy (`/root/mgs-agent/profiles/{agent}-config.yaml`), validate YAML, then restart the affected gateway and verify `Connected as ...` + `Gateway running with 1 platform(s)`.
 - For the already-broken test thread, manually add the missing user with the same `PUT thread-members` endpoint and verify `GET /channels/{THREAD_ID}/thread-members` shows the expected count.
 
-More robust repair:
+More robust repair — obrigatório quando o mesmo profile atende canais com audiências diferentes:
 
 - Implement deterministic post-create member-addition in the Discord gateway/runtime after `_auto_create_thread(...)`.
-- Configure explicit allowed users/roles per profile/channel, e.g. `thread_auto_add_users` and later `thread_auto_add_roles`.
-- Validate with a real new test thread and `GET /channels/{THREAD_ID}/thread-members`.
+- Keep `discord.thread_auto_add_users` only as legacy profile-wide fallback.
+- Configure `discord.thread_auto_add_users_by_channel` as an explicit parent-channel mapping. Precedence: exact parent channel → global fallback → broad discovery only when neither source exists.
+- An explicit empty list is meaningful and must fail closed; never turn `[]` into broad guild discovery.
+- When systemd loads a profile `.env`, persist the same mapping as compact JSON in `DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL`; runtime env wins over YAML hydration. Validate the new PID through `/proc/<pid>/environ` without printing tokens.
+- For Ares, preserve `ares-diretoria` with `[]`; operational channels declare only their approved users. Never use one global list, because it would add managers to private Diretoria threads.
+- Validate with config/env parity, targeted tests, detached safe restart, `Auto-thread member sync` log marker and a real thread-member readback.
 
 ## Safety notes
 

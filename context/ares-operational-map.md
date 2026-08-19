@@ -48,7 +48,7 @@ ares-aquisicao                     1516887105543077949   Rodolfo, Zeus, Ares e g
 ares-aquisicao-eggbev-us-cc-en     1539422731727147079   Rodolfo, Nicolas, Zeus e Ares         Eggbev US-CC-EN: criação, contas e relatórios em threads
 ```
 
-`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado. `ares-aquisicao-eggbev-us-cc-en` é a rota privada da operação Eggbev US-CC-EN, com múltiplas contas identificadas por alias e threads separadas para criação de campanhas, Diário, Intraday, HOA e criativos/testes. Nenhum outro canal Discord é rota ativa do Ares.
+`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado. `ares-aquisicao-eggbev-us-cc-en` é a rota privada da operação Eggbev US-CC-EN, com múltiplas contas identificadas por alias e threads separadas para criação de campanhas, Diário, Intraday, HOA e criativos/testes. Toda thread nova nesse canal deve auto-adicionar exclusivamente Nicolas (`1055570806945620030`) como participante humano extra; a Diretoria permanece com lista automática vazia. Nenhum outro canal Discord é rota ativa do Ares.
 
 ## 3. Pedido → primeira rota
 
