@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-NICOLAS-META-CHANNELS-20260818",
-      "next_step": "Reiniciar Ares; validar no novo PID DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL com Eggbev=Nicolas e Diretoria vazia; abrir/usar próxima thread real e confirmar Auto-thread member sync added=1055570806945620030 por log e member readback.",
+      "next_step": "Corrigir em escopo autorizado o JSON por canal para conter exatamente Diretoria=[] e Eggbev=[Nicolas], manter global vazio, reiniciar por finalizer detached e repetir esta validação; depois confirmar o E2E no próximo log Auto-thread member sync/readback de thread real.",
       "objective": "Ativar e validar o canal privado ares-aquisicao-eggbev-us-cc-en para campanhas, relatórios e membership automático por thread.",
-      "source": "discord:thread:1539394253526925384; channel:1539422731727147079; /root/.hermes/profiles/ares/config.yaml; /root/.hermes/profiles/ares/.env; tests/gateway/test_discord_thread_auto_add_by_channel.py",
-      "state": "rota eggbev ativa. nova decisão de rodolfo: toda thread criada no parent 1539422731727147079 deve adicionar nicolas 1055570806945620030. política por canal gravada em config e environmentfile json: diretoria 1508853425952133180=[], aquisição compartilhada mantém lista vigente, eggbev=[1055570806945620030]; global auto-add permanece vazio. config/env parity=true; adapter contém sync determinístico; testes test_discord_thread_auto_add_by_channel.py 5 passed; prompt e mapa operacional atualizados; backups config/.env stamp 20260819t001842z. restart destacado pendente.",
+      "source": "discord:thread:1539394253526925384; /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260819T002036Z-1930059.log; systemctl:ares-gateway.service; proc:1930805/environ:selected-vars-only",
+      "state": "validation_fail: ares-gateway active/running, result=success, nrestarts=0; pid novo 1930805 (anterior 1912741); finalizer load-eggbev-thread-auto-add-nicolas-1539422731727147079 concluído com connected=true e done; /proc/1930805/environ confirma global vazio, diretoria 1508853425952133180=[] e eggbev 1539422731727147079=[1055570806945620030], porém discord_thread_auto_add_users_by_channel contém também o parent extra 1516887105543077949, portanto não é exatamente o json esperado.",
       "thread_id": "1539394253526925384",
-      "updated_at": "2026-08-19T00:20:20+00:00"
+      "updated_at": "2026-08-19T00:24:05+00:00"
     },
     {
       "agent": "ares",
@@ -842,5 +842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T00:20:20+00:00"
+  "updated_at": "2026-08-19T00:24:05+00:00"
 }
