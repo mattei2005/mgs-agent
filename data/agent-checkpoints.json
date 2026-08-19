@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo e Nicolas revisar duração/viradas; usar o aprendizado para fechar regras objetivas D3 e escolher campanhas de referência para criação PAUSED.",
+      "next_step": "Continuar calibração de ROI/ciclo usando status humano do Ads Manager e status bruto API apenas para auditoria.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "análise de ciclo concluída para 24 campanhas das três categorias: created_time meta, dias com spend, roi diário usd com revshare, dias positivos/negativos e transições positivo→negativo. spend diário meta×sb reconciliado com diferença máxima usd 0.00.",
+      "state": "correção de status aplicada por evidência do ads manager: campanhas exibidas como deleted retornam raw archived na graph api. relatórios operacionais agora mostram deleted e preservam api_raw_status=archived no audit. validação atual: 19 objetos em ambos os lados.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T17:25:05+00:00"
+      "updated_at": "2026-08-19T18:11:17+00:00"
     },
     {
       "agent": "ares",
@@ -852,5 +852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T17:25:05+00:00"
+  "updated_at": "2026-08-19T18:11:17+00:00"
 }

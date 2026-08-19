@@ -99,6 +99,7 @@ Ordem de `subs`:
 
 ## Pitfalls
 
+- **Status Deleted no Ads Manager × ARCHIVED na Graph API.** Na conta `Creditoparaveiculo-BR-CAR-BR-13-G006`, campanhas exibidas pelo Ads Manager sob `Campaign delivery = Deleted` retornam `status/effective_status/configured_status = ARCHIVED` na Graph API. Relatórios para gestor devem mostrar `DELETED`; audit técnico preserva `api_raw_status=ARCHIVED` e `ads_manager_status=DELETED`. Nunca contradizer a UI chamando essas campanhas de arquivadas sem explicar o mapeamento.
 - `amount_spent`, `balance` e budgets vêm em unidade menor da moeda da conta em alguns endpoints; não interpretar sem normalização.
 - `date_preset=today` depende do timezone da conta, não do VPS.
 - `complete_registration` pode ser a primeira action válida hoje, mas nos últimos 7 dias pode aparecer `messaging_conversation_started_7d` antes na prioridade; sempre aplicar a ordem canônica.
