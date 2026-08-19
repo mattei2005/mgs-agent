@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 0.3.0
+version: 0.3.1
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -56,6 +56,8 @@ Evento                  event_Subscribe / SUBSCRIBE
 Relatório de aquisição  Smart Bidding > Reports > AdGroup
 Relatório de SMS        Smart Bidding > Reports > SMS
 ```
+
+O endpoint SMS atual usa `UTM_CAMPAIGN=s01c01g006` para o bucket de Nicolas/G006 e não expõe `CAMPAIGN_ID`, `b01fb13cNN` ou `UTM_ADGROUP`. Portanto, até existir ponte confiável, o relatório mostra um bloco separado `Receita SMS G006 — não atribuída por campanha`; nunca repetir o mesmo total em cada linha de campanha. Atribuição por campanha exige mapping adicional no tracking/backend.
 
 Pixel, evento, Page/identidade, Instagram e URL de destino devem ser herdados da campanha de referência validada na mesma conta e confirmados por readback antes de criar campanha. Não inferir IDs ou valores por nome.
 
@@ -141,7 +143,8 @@ Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corr
 3. No primeiro horário operacional, por volta das `08:00` da conta, aplicar escala pelo ROI cumulativo da SB:
    - ROI `> 40%`: aumentar budget em `30%`;
    - ROI `> 30%` e `<= 40%`: aumentar budget em `20%`;
-   - ROI `<= 30%`: manter budget, sem escala.
+   - ROI `>= 20%` e `<= 30%`: aumentar budget em `10%`;
+   - ROI `< 20%`: manter budget, sem escala.
 4. Respeitar o teto diário provisório de USD 150 e validar qualquer escala por GET/readback, registrando valor anterior, valor novo, ROI, ROAS e horário.
 
 Conclusão: nenhuma campanha foi cortada no D1; eventual escala ocorreu somente nas faixas aprovadas e com autorização vigente.
@@ -153,7 +156,8 @@ Conclusão: nenhuma campanha foi cortada no D1; eventual escala ocorreu somente 
 3. Por volta das `08:00` da conta, repetir as faixas de escala:
    - ROI `> 40%`: `+30%`;
    - ROI `> 30%` e `<= 40%`: `+20%`;
-   - ROI `<= 30%`: manter.
+   - ROI `>= 20%` e `<= 30%`: `+10%`;
+   - ROI `< 20%`: manter.
 4. Nunca ultrapassar o teto diário provisório de USD 150; validar write por readback e manter histórico cumulativo da campanha.
 
 Conclusão: D2 preserva a campanha para leitura; cortes continuam bloqueados e escalas ficam auditadas.
@@ -162,8 +166,9 @@ Conclusão: D2 preserva a campanha para leitura; cortes continuam bloqueados e e
 
 1. Ler o ROI cumulativo dos três dias na SB, em USD e com revshare ativado.
 2. Aplicar a regra de corte no nível campanha:
-   - ROI `<= -10%`: pausar/cortar a campanha;
-   - ROI `> -10%` e `<= 30%`: manter sem escala e continuar observação;
+   - ROI `<= -10%`: avaliar estimado/anomalias; pausar se o gate não justificar hold;
+   - ROI `> -10%` e `< 20%`: manter sem escala e continuar observação;
+   - ROI `>= 20%` e `<= 30%`: escalar `10%`;
    - ROI `> 30%` e `<= 40%`: escalar `20%`;
    - ROI `> 40%`: escalar `30%`.
 3. Usar Meta ROAS como apoio: `<1,20` reforça negativo; `1,20–1,34` é faixa cinza; `>=1,34` é sinal positivo/proximidade, mas a SB decide.
@@ -171,6 +176,19 @@ Conclusão: D2 preserva a campanha para leitura; cortes continuam bloqueados e e
 5. Pausa, manutenção ou escala são feitas no nível campanha e validadas por readback.
 
 Validação histórica: entre campanhas com Meta ROAS >1,30 e spend >=USD 10, nenhuma vencedora estava em ROI cumulativo `<= -10%` no D3. A campanha 28 estava em `-8,10%` no D3 e só ficou positiva no 9º dia, portanto não deve ser cortada pela regra. Campanhas 20, 34 e 54 estavam abaixo de -10% no D3 e terminaram negativas. O limite é operacional e deve continuar sendo monitorado.
+
+### Gate de estimado e anomalias
+
+A SB expõe `estimatedRevenue`, `estimatedRoi`, `confidence` e atraso estimado de consolidação. `confidence=0,95` significa confiança declarada do estimador, não garantia de acerto. O ROI estimado usa `(estimatedRevenue − INVESTIMENT) / INVESTIMENT × 100`.
+
+- D1/D2: estimado é informativo; não há corte.
+- D3 com ROI real `<= -10%` e ROI estimado também negativo: pausar, salvo anomalia externa.
+- D3 com ROI real `<= -10%`, mas ROI estimado positivo: não escalar; colocar em hold por uma atualização consolidada/até o próximo checkpoint, respeitando teto de spend, e reavaliar ROI real.
+- Se a projeção não se confirmar após o atraso informado pela SB, aplicar a regra do ROI real.
+- Antes de culpar a campanha, verificar anomalia de monetização/entrega: queda ampla de RPS/CPM/AVG_PRICE, atraso de receita, problema de AdX/GAM/SB, Meta account/delivery, pixel/evento, URL/quiz ou queda simultânea em várias campanhas.
+- Anomalia externa relevante gera `HOLD_EXTERNAL_ANOMALY`: sem corte/escala até confirmar a fonte ou o próximo checkpoint.
+
+Conclusão: estimado pode adiar um corte por um período limitado; nunca autoriza escala sozinho. ROAS e estimado sinalizam, ROI real SB decide depois do gate de anomalia.
 
 ## Budget e renovação do portfólio
 
@@ -184,6 +202,7 @@ Budget inicial por campanha                    USD 30
 Pool normal para campanhas novas               20% do teto operacional
 Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
 Quantidade de campanhas novas                  dinâmica, calculada pelo pool
+Escala com ROI >=20% e <=30%                  +10%
 Escala com ROI >30% e <=40%                    +20%
 Escala com ROI >40%                            +30%
 Teto diário provisório por campanha            USD 150
@@ -196,6 +215,10 @@ Teto diário provisório por campanha            USD 150
 O teto da conta será informado/ajustado por Rodolfo conforme a escala e a necessidade de manter campanhas boas. Ares pode calcular uso, projeção e espaço para testes, mas não aumenta o teto da conta por conta própria.
 
 Manter 20% como pool normal de campanhas novas e até 30% quando o piso de USD 30 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
+
+### Autoridade de budget nesta operação
+
+Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas e informar/ajustar o teto operacional da conta `Creditoparaveiculo-BR-CAR-BR-13-G006`. Billing, pagamento, credencial e mudanças fora desta operação continuam fora desse escopo. Todo ajuste feito pelo Ares exige preflight, limite vigente, audit e readback.
 
 ## Naming Meta e rastreamento
 
@@ -228,6 +251,8 @@ utm_campaign b01fb13cNN
 utm_adgroup  b01fb13cNNg01
 ```
 
+A URL base permanece a mesma, mas os parâmetros UTM devem ser substituídos de acordo com a nova campanha/conjunto. Preservar os demais parâmetros da URL, remover valores UTM antigos/duplicados, aplicar URL encoding, validar ausência de espaços e fazer readback da URL final nos três anúncios.
+
 O nome do anúncio preserva o ordinal e o nome canônico do Drive. Inventário/audit também registra `asset_id`, Drive ID, checksum, Meta ad/creative/video ID e linhagem; filename sozinho não prova identidade.
 
 ## Criação do zero versus clone
@@ -258,6 +283,8 @@ Clone fica como fallback quando a API não expuser ou reproduzir com segurança 
 6. Reconciliar novamente Meta × Drive e reservar os escolhidos imediatamente antes do write.
 
 O estado atual do pool deve ser lido no inventário e no Drive imediatamente antes da seleção. `01_READY` e metadata limpa não liberam asset reservado; ausência de vínculo Meta também não prova ineditismo.
+
+O ângulo vem do nome canônico/inventário (`SEM_ENTRADA`, `SUPER_OFERTA`, etc.) e entra no nome do anúncio pelo filename. Ares pode agregar spend e Purchase ROAS em nível de anúncio/ângulo na Meta e confrontar com o ROI SB da campanha. No endpoint AdGroup atual, `AD_NAME` veio vazio em todas as linhas; portanto, ROI SB por anúncio/ângulo ainda não é atribuível de forma honesta. Uma futura chave ad-level (`utm_content` ou AD_NAME ingerido pela SB) só entra após validação do backend.
 
 Conclusão: os três anúncios têm assets distintos ou variações explicitamente aprovadas, rastreáveis, sanitizadas e reservadas para a campanha correta.
 
@@ -304,8 +331,9 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] Início às 00:30 do timezone da conta validado
 - [ ] ROI lido na Smart Bidding > Reports > Adgroup
 - [ ] D1/D2 sem cortes
-- [ ] D3 pausa campanha com ROI cumulativo <= -10%
-- [ ] ROI >30% e <=40% escala 20%; ROI >40% escala 30%
+- [ ] D3 com ROI <= -10% passa pelo gate de estimado/anomalia antes da pausa
+- [ ] ROI 20%–30% escala 10%; >30%–40% escala 20%; >40% escala 30%
+- [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping
 - [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
 - [ ] Budget anterior/novo, moeda, período e fonte registrados
 - [ ] Todo write confirmado por readback Meta
