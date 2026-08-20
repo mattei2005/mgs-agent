@@ -176,7 +176,15 @@
     "out_of_order_slots_forbidden": true,
     "prior_wrong_retry_slots": [50, 49],
     "prior_wrong_retry_removed_before_execution": true,
-    "two_campaign_batch_gate": "C12 is mandatory first; the second sequential slot is C13 and must fail closed if a non-deleted C13 already exists until Rodolfo decides whether today is one campaign or a controlled C13 replacement"
+    "two_campaign_batch_gate": "C12 is mandatory first; the second sequential slot is C13 and must fail closed if a non-deleted C13 already exists until Rodolfo decides whether today is one campaign or a controlled C13 replacement",
+    "live_readback_20260820_1954_sp": {
+      "meta_http": 200,
+      "buc_max_usage_pct": 2.0,
+      "access_tier": "development_access",
+      "c12": "PAUSED legacy ROAS campaign, USD30, non-deleted",
+      "c13": "PAUSED legacy ROAS campaign, USD25, non-deleted",
+      "decision_required": "replacement C12 requires explicit authorization to retire/delete the old C12 after the new PAUSED C12 validates; second campaign requires a separate C13 replacement decision"
+    }
   },
   "utm_uniqueness_policy": {
     "authorized_by": "Rodolfo Mattei",
