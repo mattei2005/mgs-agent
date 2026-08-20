@@ -1,0 +1,297 @@
+{
+  "generated_at_utc": "2026-08-20T21:01:29.936327+00:00",
+  "thread_id": "1540085104322543726",
+  "requested_by": "Kelly Nice",
+  "authorization_context": "Rodolfo informou que Kelly listaria os criativos ruins para deletar; execução ainda sujeita à confirmação crítica após preflight exato.",
+  "auth_mode": "service_account",
+  "shared_drive_validated": true,
+  "lineage_count": 3,
+  "drive_file_count": 6,
+  "total_bytes": 30022540,
+  "all_untrashed": true,
+  "all_can_trash": true,
+  "all_reserved_ineligible": true,
+  "all_unused_no_meta_ids": true,
+  "proposed_action": "Trash both clean READY asset and preserved RAW source for each exact lineage; update inventory to TRASHED after Drive readback. No permanent deletion.",
+  "lineages": [
+    {
+      "asset_id": "asset_be60a6a20eb2b8ac08ac",
+      "operation": "CC_US_EN",
+      "original_filename": "10_límite disponible.mp4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_043.mp4",
+      "source_drive_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "asset_drive_id": "1VR1FaXCyqd8LmbB28SXK7ap7RfpLyYm3",
+      "status": "01_READY",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "ares_eligible": false,
+      "used_by": null,
+      "meta_ids_present": [],
+      "source": {
+        "role": "source_raw",
+        "id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+        "name": "10_límite disponible.mp4",
+        "size_bytes": 4865980,
+        "duration_ms": 7999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk",
+            "name": "99_LEGACY"
+          },
+          {
+            "id": "1Ki6MWj_jY_G6IqP8rgZ5qZllMvxK46Bt",
+            "name": "VID"
+          },
+          {
+            "id": "1BIy_nKYSM2TYc7RETLxDWzlQTpYTRGFj",
+            "name": "CC_US_EN"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "6921b3ac7e2a3379196c6d99408451e5"
+      },
+      "asset": {
+        "role": "asset_clean",
+        "id": "1VR1FaXCyqd8LmbB28SXK7ap7RfpLyYm3",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_043.mp4",
+        "size_bytes": 4862456,
+        "duration_ms": 7999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh",
+            "name": "01_READY"
+          },
+          {
+            "id": "1Ki6MWj_jY_G6IqP8rgZ5qZllMvxK46Bt",
+            "name": "VID"
+          },
+          {
+            "id": "1BIy_nKYSM2TYc7RETLxDWzlQTpYTRGFj",
+            "name": "CC_US_EN"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "df0ccbc83345ce2d1bd517e5df8b1ecd"
+      }
+    },
+    {
+      "asset_id": "asset_ddbc6bc2f3b2a1f5a0e3",
+      "operation": "CC_US_EN",
+      "original_filename": "13_08 - Story ( ingles) .mp4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_046.mp4",
+      "source_drive_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "asset_drive_id": "1VMVEdDGKRSbb3kvSdIBOJQAiqlbjbjFs",
+      "status": "01_READY",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "ares_eligible": false,
+      "used_by": null,
+      "meta_ids_present": [],
+      "source": {
+        "role": "source_raw",
+        "id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+        "name": "13_08 - Story ( ingles) .mp4",
+        "size_bytes": 5278229,
+        "duration_ms": 9999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk",
+            "name": "99_LEGACY"
+          },
+          {
+            "id": "1Ki6MWj_jY_G6IqP8rgZ5qZllMvxK46Bt",
+            "name": "VID"
+          },
+          {
+            "id": "1BIy_nKYSM2TYc7RETLxDWzlQTpYTRGFj",
+            "name": "CC_US_EN"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "5554ef2626a87dbb25f1f5b47f837a42"
+      },
+      "asset": {
+        "role": "asset_clean",
+        "id": "1VMVEdDGKRSbb3kvSdIBOJQAiqlbjbjFs",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_046.mp4",
+        "size_bytes": 5274705,
+        "duration_ms": 9999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh",
+            "name": "01_READY"
+          },
+          {
+            "id": "1Ki6MWj_jY_G6IqP8rgZ5qZllMvxK46Bt",
+            "name": "VID"
+          },
+          {
+            "id": "1BIy_nKYSM2TYc7RETLxDWzlQTpYTRGFj",
+            "name": "CC_US_EN"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "9ca8ca98b7b410cd8ddb543220731cac"
+      }
+    },
+    {
+      "asset_id": "asset_d895145e160d855cfc21",
+      "operation": "CC_US_ES",
+      "original_filename": "6_$14,760.mp4",
+      "canonical_filename": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_006.mp4",
+      "source_drive_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "asset_drive_id": "18-Mi5iAAU1zumSSvU3Kw0iEQi2Fa6D2-",
+      "status": "01_READY",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "ares_eligible": false,
+      "used_by": null,
+      "meta_ids_present": [],
+      "source": {
+        "role": "source_raw",
+        "id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+        "name": "6_$14,760.mp4",
+        "size_bytes": 4872347,
+        "duration_ms": 7999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1fCetqJFt09TvUFSDA6rvHLzZ5cIfaUTo",
+            "name": "99_LEGACY"
+          },
+          {
+            "id": "12jNMZVs22omzcAlc65zO7vw1gxsjoiAO",
+            "name": "VID"
+          },
+          {
+            "id": "1kv5r3Eyz-XIOm8R_WsrSZRjCabiF33Ql",
+            "name": "CC_US_ES"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "e7feec95e9eee187763911d14c53f797"
+      },
+      "asset": {
+        "role": "asset_clean",
+        "id": "18-Mi5iAAU1zumSSvU3Kw0iEQi2Fa6D2-",
+        "name": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_006.mp4",
+        "size_bytes": 4868823,
+        "duration_ms": 7999,
+        "width": 1080,
+        "height": 1920,
+        "trashed": false,
+        "parent_chain": [
+          {
+            "id": "1_2vN1ryrF2yAgzchOgqBZnmX4IeWTGFA",
+            "name": "01_READY"
+          },
+          {
+            "id": "12jNMZVs22omzcAlc65zO7vw1gxsjoiAO",
+            "name": "VID"
+          },
+          {
+            "id": "1kv5r3Eyz-XIOm8R_WsrSZRjCabiF33Ql",
+            "name": "CC_US_ES"
+          },
+          {
+            "id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+            "name": "CRIATIVOS"
+          },
+          {
+            "id": "0AEwt4Ye690ocUk9PVA",
+            "name": "Drive"
+          }
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canDownload": true,
+          "canEdit": true,
+          "canMoveItemWithinDrive": true,
+          "canTrash": true
+        },
+        "md5_checksum": "cb57c002f9900aa0d9a1abab19421fed"
+      }
+    }
+  ]
+}
