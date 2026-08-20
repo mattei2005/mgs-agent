@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Perguntar e aguardar Rodolfo confirmar a estratégia das duas campanhas de hoje: recomendação 2x MAXVOL; se COSTCAP, exigir valor. Não declarar publicação futura sem readback do objeto exato e confirmação de que não está Em rascunho.",
+      "next_step": "Rodolfo abre uma sessão Chrome autenticada acessível ao Ares/Computer Use ou publica manualmente pelo botão Conferir e publicar. Assim que o draft for publicado, Ares valida o objeto exato e avisa; não deletar até Rodolfo pedir depois da conferência.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; screenshot C50 draft; operation v1.0.34; skill v1.0.19; corrected audit create-c50-clone-c07-to-c12-20260820T175824Z.json",
-      "state": "correção final de rodolfo: o teste de clone c12 foi publicado com sucesso; o teste do zero c50 permaneceu em rascunho com sufixo — cópia e nunca foi publicado como campanha pretendida. ares havia confundido um objeto c50 paused separado da graph com o draft da ui. screenshot/estado manual do objeto exato vence essa inferência. objetos graph de teste foram deletados e spend0; o rascunho ui exige descartar rascunhos no ads manager. nomenclatura aplicada c07 costcap-0.50, c08-c10 maxvol; c11 roas exception. relatórios lance validados. rotina 17h segue bloqueada apenas por escolha de estratégia.",
+      "source": "discord:thread:1539434208408375426; screenshot C50 draft; browser harness chrome-not-running; operation v1.0.34; skill v1.0.21",
+      "state": "verdade final: c12 clone publicou; c50 do zero permanece draft ui em rascunho/— cópia e ainda precisa ser publicada antes de rodolfo conferir e autorizar a exclusão. rodolfo ordenou: publicar primeiro, avisar para conferência, deletar somente após novo pedido. tentativa de anexar à sessão meta falhou porque o runtime não tem chrome/browser autenticado aberto; graph api não publica nem descarta esse draft de ui. nenhum write novo executado. demais entregas concluídas: testes graph deletados spend0, c07 costcap-0.50, c08-c10 maxvol, c11 roas exception, relatórios lance.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T19:41:24+00:00"
+      "updated_at": "2026-08-20T19:52:22+00:00"
     },
     {
       "agent": "ares",
@@ -892,5 +892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T19:49:22+00:00"
+  "updated_at": "2026-08-20T19:52:22+00:00"
 }
