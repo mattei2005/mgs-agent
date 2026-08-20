@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Common helpers for Ares Meta Ads operations. Never print tokens."""
 from __future__ import annotations
-import fcntl, json, os, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
+import fcntl, json, math, os, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
@@ -181,7 +181,8 @@ def _header_value(headers, name):
 
 def _as_number(value, default=0.0):
     try:
-        return float(value)
+        number = float(value)
+        return number if math.isfinite(number) else float(default)
     except (TypeError, ValueError):
         return float(default)
 
@@ -217,7 +218,7 @@ def parse_business_usage_headers(headers):
     max_usage = 0.0
     limiting_metric = None
     estimated_minutes = 0.0
-    for business_id, item in groups[:32]:
+    for business_id, item in groups:
         normalized = {
             'business_id': business_id,
             'type': item.get('type'),
@@ -227,7 +228,8 @@ def parse_business_usage_headers(headers):
             'estimated_time_to_regain_access': _as_number(item.get('estimated_time_to_regain_access')),
             'ads_api_access_tier': item.get('ads_api_access_tier'),
         }
-        entries.append(normalized)
+        if len(entries) < 32:
+            entries.append(normalized)
         estimated_minutes = max(estimated_minutes, normalized['estimated_time_to_regain_access'])
         for metric in ('call_count', 'total_cputime', 'total_time'):
             value = normalized[metric]
@@ -235,7 +237,7 @@ def parse_business_usage_headers(headers):
                 max_usage = value
                 limiting_metric = metric
     return {
-        'entry_count': len(entries),
+        'entry_count': len(groups),
         'entries': entries,
         'max_usage_pct': max_usage,
         'limiting_metric': limiting_metric,
@@ -250,7 +252,7 @@ def business_usage_decision(usage, now_epoch=None):
     soft_limited = max_usage >= BUSINESS_USAGE_SOFT_LIMIT_PERCENT
     wait_seconds = 0
     if soft_limited:
-        wait_seconds = int(round(estimated_minutes * 60)) if estimated_minutes > 0 else BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS
+        wait_seconds = max(1, int(math.ceil(estimated_minutes * 60))) if estimated_minutes > 0 else BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS
     return {
         'soft_limited': soft_limited,
         'wait_seconds': max(0, wait_seconds),
@@ -267,7 +269,7 @@ def retry_wait_seconds(status, payload, headers, attempt=1):
         usage = parse_business_usage_headers(headers)
         estimated_minutes = _as_number(usage.get('estimated_time_to_regain_access_minutes'))
         if estimated_minutes > 0:
-            return int(round(estimated_minutes * 60))
+            return max(1, int(math.ceil(estimated_minutes * 60)))
         return min(RATE_LIMIT_INITIAL_SLEEP * (2 ** max(0, int(attempt) - 1)), RATE_LIMIT_MAX_TOTAL_SLEEP)
     if isinstance(status, int) and 500 <= status <= 599:
         return TRANSIENT_5XX_RETRY_SECONDS
@@ -323,7 +325,7 @@ def record_response_usage(headers, status, payload, now_epoch=None):
         if (status == 429 or error_code in RATE_LIMIT_CODES) and rate_wait is not None:
             blocked_until = max(blocked_until, now_epoch + rate_wait)
             reason = 'meta_rate_limit'
-        if usage['entry_count'] and not decision['soft_limited'] and status < 400:
+        if usage['entry_count'] and not decision['soft_limited'] and status < 400 and current_block <= now_epoch:
             blocked_until = 0
             reason = None
         state['blocked_until_epoch'] = blocked_until
@@ -335,48 +337,62 @@ def record_response_usage(headers, status, payload, now_epoch=None):
 
 
 def _wait_before_request_from_state(now_epoch=None):
-    now_epoch = time.time() if now_epoch is None else float(now_epoch)
-    if not THROTTLE_STATE_PATH.exists():
-        return 0
-    with _open_throttle_state() as fh:
-        fcntl.flock(fh, fcntl.LOCK_EX)
-        state = _read_state_locked(fh)
-        blocked_until = _as_number(state.get('blocked_until_epoch'))
-        remaining = max(0, int(round(blocked_until - now_epoch)))
-        reason = state.get('block_reason') or 'business_usage_soft_limit'
-        if remaining <= 0 and blocked_until:
-            state['blocked_until_epoch'] = 0
-            state['block_reason'] = None
-            _write_state_locked(fh, state)
-        fcntl.flock(fh, fcntl.LOCK_UN)
-    if remaining <= 0:
-        return 0
-    if remaining > BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS:
-        raise AresMetaUsageBlocked(remaining, reason=reason)
-    time.sleep(remaining)
-    return remaining
+    fixed_now = None if now_epoch is None else float(now_epoch)
+    total_wait = 0
+    while True:
+        current = time.time() if fixed_now is None else fixed_now
+        if not THROTTLE_STATE_PATH.exists():
+            return total_wait
+        with _open_throttle_state() as fh:
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            state = _read_state_locked(fh)
+            blocked_until = _as_number(state.get('blocked_until_epoch'))
+            remaining = max(0, int(math.ceil(blocked_until - current)))
+            reason = state.get('block_reason') or 'business_usage_soft_limit'
+            if remaining <= 0 and blocked_until and blocked_until <= current:
+                state['blocked_until_epoch'] = 0
+                state['block_reason'] = None
+                _write_state_locked(fh, state)
+            fcntl.flock(fh, fcntl.LOCK_UN)
+        if remaining <= 0:
+            return total_wait
+        if remaining > BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS:
+            raise AresMetaUsageBlocked(remaining, reason=reason)
+        time.sleep(remaining)
+        total_wait += remaining
+        if fixed_now is not None:
+            fixed_now += remaining
 
 
 def _throttle_before_request():
     """Cross-process BUC gate plus minimum spacing between Meta calls."""
-    _wait_before_request_from_state()
-    if MIN_INTERVAL_SECONDS <= 0:
-        return
-    with _open_throttle_state() as fh:
-        fcntl.flock(fh, fcntl.LOCK_EX)
-        state = _read_state_locked(fh)
-        now = time.monotonic()
-        last = float(state.get('last_request_monotonic') or 0)
-        if last > now:
-            last = 0
-        wait = MIN_INTERVAL_SECONDS - (now - last)
-        if 0 < wait <= MIN_INTERVAL_SECONDS:
-            time.sleep(wait)
-            now = time.monotonic()
-        state['last_request_monotonic'] = now
-        state['min_interval_seconds'] = MIN_INTERVAL_SECONDS
-        _write_state_locked(fh, state)
-        fcntl.flock(fh, fcntl.LOCK_UN)
+    while True:
+        now_epoch = time.time()
+        now_mono = time.monotonic()
+        with _open_throttle_state() as fh:
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            state = _read_state_locked(fh)
+            blocked_until = _as_number(state.get('blocked_until_epoch'))
+            cooldown_wait = max(0.0, blocked_until - now_epoch)
+            reason = state.get('block_reason') or 'business_usage_soft_limit'
+            last = _as_number(state.get('last_request_monotonic'))
+            if last > now_mono:
+                last = 0
+            interval_wait = max(0.0, MIN_INTERVAL_SECONDS - (now_mono - last)) if MIN_INTERVAL_SECONDS > 0 else 0.0
+            wait = max(cooldown_wait, interval_wait)
+            if wait <= 0:
+                state['last_request_monotonic'] = now_mono
+                state['min_interval_seconds'] = MIN_INTERVAL_SECONDS
+                if blocked_until and blocked_until <= now_epoch:
+                    state['blocked_until_epoch'] = 0
+                    state['block_reason'] = None
+                _write_state_locked(fh, state)
+                fcntl.flock(fh, fcntl.LOCK_UN)
+                return
+            fcntl.flock(fh, fcntl.LOCK_UN)
+        if cooldown_wait > BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS:
+            raise AresMetaUsageBlocked(int(math.ceil(cooldown_wait)), reason=reason)
+        time.sleep(wait)
 
 
 def is_rate_limit_response(status, payload):

@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import math
 from pathlib import Path
 from unittest import mock
 
@@ -39,6 +40,18 @@ def test_parse_business_usage_malformed_is_safe():
     mod = load_module()
     assert mod.parse_business_usage_headers({'x-business-use-case-usage': 'not-json'})['entry_count'] == 0
     assert mod.parse_business_usage_headers({})['max_usage_pct'] == 0.0
+
+
+def test_parser_computes_max_over_more_than_32_entries_and_rejects_nonfinite():
+    mod = load_module()
+    rows = [{'type': 'ads_management', 'call_count': 1} for _ in range(32)]
+    rows.append({'type': 'ads_management', 'call_count': 99, 'estimated_time_to_regain_access': 4})
+    rows.append({'type': 'ads_management', 'call_count': float('inf')})
+    parsed = mod.parse_business_usage_headers({'X-Business-Use-Case-Usage': json.dumps({'biz': rows})})
+    assert parsed['entry_count'] == 34
+    assert len(parsed['entries']) == 32
+    assert parsed['max_usage_pct'] == 99.0
+    assert parsed['estimated_time_to_regain_access_minutes'] == 4.0
 
 
 def test_soft_limit_wait_starts_at_80_percent():
@@ -90,6 +103,17 @@ def test_record_usage_state_persists_block_cross_process(tmp_path, monkeypatch):
     assert saved['business_usage']['max_usage_pct'] == 83.0
 
 
+def test_successful_low_usage_response_does_not_clear_future_rate_block(tmp_path, monkeypatch):
+    mod = load_module()
+    monkeypatch.setattr(mod, 'THROTTLE_STATE_PATH', tmp_path / 'state.json')
+    high = {'X-Business-Use-Case-Usage': json.dumps({'biz': [{'type': 'ads_management', 'call_count': 100, 'estimated_time_to_regain_access': 1}]})}
+    mod.record_response_usage(high, 400, {'error': {'code': 17}}, now_epoch=1000.0)
+    low = {'X-Business-Use-Case-Usage': json.dumps({'biz': [{'type': 'ads_management', 'call_count': 10}]})}
+    state = mod.record_response_usage(low, 200, {'id': 'ok'}, now_epoch=1001.0)
+    assert state['blocked_until_epoch'] == 1060.0
+    assert state['block_reason'] == 'meta_rate_limit'
+
+
 def test_graph_get_retries_5xx_in_ten_seconds(monkeypatch):
     mod = load_module()
     responses = iter([
@@ -118,8 +142,9 @@ def test_graph_get_does_not_retry_validation_error(monkeypatch):
     assert len(calls) == 1
 
 
-def test_graph_batch_get_builds_one_outer_request(monkeypatch):
+def test_graph_batch_get_builds_one_outer_request(monkeypatch, tmp_path):
     mod = load_module()
+    monkeypatch.setattr(mod, 'THROTTLE_STATE_PATH', tmp_path / 'state.json')
     captured = {}
     def fake_post(path, token, params=None):
         captured['path'] = path

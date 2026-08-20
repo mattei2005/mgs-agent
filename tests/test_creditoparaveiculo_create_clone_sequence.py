@@ -97,6 +97,54 @@ def test_batch_readback_waits_using_child_estimate(monkeypatch):
     assert sleeps == [120]
 
 
+def test_outer_deferred_is_not_slept_or_retried_again(monkeypatch):
+    mod = load_module()
+    calls = []
+    class Common:
+        def graph_batch_get(self, token, requests):
+            calls.append(1)
+            return 429, {'error': {'type': 'AresRateLimitDeferred', 'code': 'ARES_RATE_LIMIT_DEFERRED', 'retry_after_seconds': 120}}, {}
+        def safe_meta_error(self, payload):
+            return payload['error']
+    sleeps = []
+    monkeypatch.setattr(mod.time, 'sleep', sleeps.append)
+    with pytest.raises(mod.ReadbackDeferred) as captured:
+        mod.batch_requests(Common(), 'token', [{'name': 'campaign', 'path': '1', 'params': {}}], 'readback', ['1'])
+    assert captured.value.retry_after_seconds == 120
+    assert calls == [1]
+    assert sleeps == []
+
+
+def test_async_nonterminal_never_reads_hierarchy_or_cleans(monkeypatch, tmp_path):
+    mod = load_module()
+    audit = {'tests': [], 'cleanups': [], 'active_campaign_ids': [], 'audit_path': str(tmp_path / 'audit.json')}
+    monkeypatch.setattr(mod, 'create_campaign_shell', lambda *args, **kwargs: 'campaign-72')
+    monkeypatch.setattr(mod, 'save_audit', lambda *args, **kwargs: None)
+    monkeypatch.setattr(mod, 'post', lambda *args, **kwargs: ({'async_sessions': [{'id': 'session-1'}]}, {}))
+    monkeypatch.setattr(mod, 'batch_requests', lambda *args, **kwargs: ({'session_1': {'status': 'RUNNING'}}, {'attempts': 1, 'wait_seconds': 0}))
+    monkeypatch.setattr(mod.time, 'sleep', lambda _: None)
+    monkeypatch.setattr(mod, 'hierarchy_readback', lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError('must not read before terminal')))
+    monkeypatch.setattr(mod, 'cleanup_campaign', lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError('must not cleanup before terminal')))
+    with pytest.raises(mod.ReadbackDeferred) as captured:
+        mod.run_test3(object(), 'token', fake_source(), audit)
+    assert captured.value.stage == 'test3_async_poll'
+    assert audit['active_campaign_ids'] == ['campaign-72']
+
+
+def test_async_missing_session_id_defers_without_cleanup(monkeypatch, tmp_path):
+    mod = load_module()
+    audit = {'tests': [], 'cleanups': [], 'active_campaign_ids': [], 'audit_path': str(tmp_path / 'audit.json')}
+    monkeypatch.setattr(mod, 'create_campaign_shell', lambda *args, **kwargs: 'campaign-72')
+    monkeypatch.setattr(mod, 'save_audit', lambda *args, **kwargs: None)
+    monkeypatch.setattr(mod, 'post', lambda *args, **kwargs: ({'accepted': True}, {}))
+    monkeypatch.setattr(mod.time, 'sleep', lambda _: None)
+    monkeypatch.setattr(mod, 'hierarchy_readback', lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError('must not read without async terminal')))
+    monkeypatch.setattr(mod, 'cleanup_campaign', lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError('must not cleanup without async terminal')))
+    with pytest.raises(mod.ReadbackDeferred) as captured:
+        mod.run_test3(object(), 'token', fake_source(), audit)
+    assert captured.value.stage == 'test3_async_session_missing'
+
+
 def test_dry_run_has_zero_meta_calls(monkeypatch, capsys):
     mod = load_module()
     monkeypatch.setattr(mod, 'execute_sequence', lambda: (_ for _ in ()).throw(AssertionError('must not execute')))
