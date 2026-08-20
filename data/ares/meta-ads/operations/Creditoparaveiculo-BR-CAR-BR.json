@@ -421,6 +421,7 @@
       "timezone_gate": "17:00 America/Sao_Paulo daily",
       "script": "creditoparaveiculo-daily-create.sh",
       "runner": "creditoparaveiculo-daily-create.py",
+      "deferred_preflight_reconciler": "creditoparaveiculo-daily-create-preflight-resume.py; hourly wrapper retries the exact saved plan only after cooldown and before any write",
       "deferred_readback_reconciler": "creditoparaveiculo-daily-create-resume.py; hourly wrapper checks persisted state and resumes only after cooldown",
       "no_agent": true,
       "deliver": "local",

@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Executar o retry deterministico apos o cooldown da conta, validar C50/C49 1x1x3 por GET, mover os seis assets 01_READY para 02_TESTING, atualizar inventario e publicar o estoque restante; se o GET voltar a limitar, o reconciliador horario retoma apos o novo cooldown antes de 00:30.",
+      "next_step": "No retry pós-cooldown, paginar current+archived ads, excluir apenas IDs tecnicos de testes com cleanup comprovado, reconciliar os seis assets, preparar C50/C49 PAUSED e validar 1x1x3; mover os seis para 02_TESTING e reportar estoque físico e elegível separados. Às 00:30, ativar C50/C49 por campaign-only write com cap/holds/hierarquia e GET.",
       "objective": "Operar trafego direto CBO e a criacao diaria de campanhas para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539826050765299872; operation config; dry-run audit daily-create-2026-08-20-20260820T210618Z; failed-clean audit daily-create-2026-08-20-20260820T210712Z; scheduler readback enabled+scheduled",
-      "state": "rotina diaria ativada para 17:00 sao paulo: 2 campanhas maxvol de usd30, seis criativos unicos do shared drive e inicio 00:30 seguinte. drive live 263 ready no dry-run, com 58 linhagens unicas liberadas/reconciliadas e 1 duplicata bloqueada. primeira tentativa criou a hierarquia mas recebeu meta code17 no get final; cleanup completo confirmou 2 campanhas, 6 ads, 6 creatives e 12 videos removidos, zero assets consumidos. retry deterministico agendado apos cooldown; runner corrigido para persistir readback_deferred e reconciliar depois, sem cleanup prematuro.",
+      "source": "discord:thread:1539826050765299872; operation config; independent delegation deleg_6a58f1bc; dry-run audit daily-create-2026-08-20-20260820T210618Z; failed-clean audit daily-create-2026-08-20-20260820T210712Z; scheduler readback creation+activation enabled",
+      "state": "rotina ativada e endurecida: 17:00 prepara 2 campanhas maxvol usd30 em paused com filhos active e seis criativos drive; 00:30 uma fase separada revalida cap/holds/hierarquia, ativa somente campanhas e faz get. auditoria independente corrigiu o estoque: drive live tem 263 ready fisicos, mas 58 liberacoes foram colocadas em meta_history_pending e ares_eligible=0 ate reconciliacao full current+paused+archived; drift 19 drive-only, 16 inventory-only e 4 grupos de filename duplicado registrado fail-closed. primeiro write anterior foi limpo integralmente apos code17; retry pós-cooldown permanece agendado com full-history gate, preflight/readback resume e ativacao separada.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-20T21:20:26+00:00"
+      "updated_at": "2026-08-20T21:36:57+00:00"
     },
     {
       "agent": "ares",
@@ -912,5 +912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:20:26+00:00"
+  "updated_at": "2026-08-20T21:36:57+00:00"
 }
