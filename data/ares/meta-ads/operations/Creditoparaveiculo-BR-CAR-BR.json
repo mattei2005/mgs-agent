@@ -255,12 +255,14 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T14:11:44-04:00",
+  "updated_at": "2026-08-20T14:25:23-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
     "graph_api_raw_status_for_deleted_objects": "ARCHIVED",
     "reporting_policy": "show DELETED to operators; preserve ARCHIVED only as api_raw_status in audit",
+    "last_reconfirmed_by": "Rodolfo Mattei",
+    "reconfirmed_at_et": "2026-08-20T14:25:23-04:00",
     "validated_account_id": "1046241194533786",
     "validated_at": "2026-08-19T14:09:22-04:00",
     "evidence": "Ads Manager Campaign delivery = Deleted showed 19 campaigns; Graph API effective_status=[ARCHIVED] returned the same 19 objects",
@@ -473,7 +475,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.26",
+  "playbook_version": "1.0.27",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1159,7 +1161,7 @@
       "universal_beneficiary_and_payer_present": true
     },
     "same_number_existing_preserved": {
-      "50": "historical ARCHIVED campaign preserved untouched",
+      "50": "historical DELETED campaign preserved untouched; Graph API raw status ARCHIVED",
       "12": "historical PAUSED campaign preserved untouched"
     },
     "configured_active_budget_usd_before": 153,

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.13
+version: 1.0.14
 author: Ares
 license: internal
 metadata:
@@ -196,6 +196,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 21. **Criar adset `BRAZIL_REGULATION` só com DSA beneficiary/payor.** Esses textos não satisfazem `3858634` (`Advertiser is missing`). Ler `regional_regulation_identities` do adset fonte compliant e enviar junto com `regional_regulated_categories`; para BR, exigir `universal_beneficiary` e `universal_payer`, podendo usar o mesmo verified identity ID. Rodar `validate_only` antes do write e confirmar as identidades no readback.
 22. **Rejeitar cópia HTTP 200 sem `success`/`id` mesmo quando há ID específico.** `/copies` pode retornar somente `copied_campaign_id` ou `copied_adset_id` (e `ad_object_ids`). Aceitar apenas essas chaves reconhecidas, persistir o ID imediatamente e fazer GET antes de qualquer nova tentativa; nunca repetir a cópia só porque `success` não veio.
 23. **Tratar `PENDING_REVIEW` como anúncio desligado por herança sem conferir configuração.** O gate correto para campanha de revisão é: campanha `configured_status=PAUSED`; adset/anúncio `configured_status=ACTIVE`; effective do filho pode estar `CAMPAIGN_PAUSED`, `PENDING_REVIEW`, `IN_PROCESS` ou `WITH_ISSUES` durante materialização/revisão. O pai PAUSED continua sendo o bloqueio de entrega.
+24. **Tratar `ARCHIVED` como campanha ainda arquivada.** Em Creditoparaveiculo, `ARCHIVED` no Graph representa campanha `DELETED` no Ads Manager. Relatórios e respostas humanas usam `DELETED`; `ARCHIVED` fica apenas como `api_raw_status` no audit. Não contar esses objetos como campanhas vivas, pausadas ou reutilizáveis sem nova criação.
 
 ## Verification checklist
 
