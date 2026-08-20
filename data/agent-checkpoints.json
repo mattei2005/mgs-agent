@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo abre uma sessão Chrome autenticada acessível ao Ares/Computer Use ou publica manualmente pelo botão Conferir e publicar. Assim que o draft for publicado, Ares valida o objeto exato e avisa; não deletar até Rodolfo pedir depois da conferência.",
+      "next_step": "Rodolfo confere a C50 publicada/PAUSED no Ads Manager e informa o próximo passo. Separadamente, a rotina diária de campanhas Drive continua pendente da escolha de estratégia para as duas campanhas (recomendação 2x MAXVOL).",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; screenshot C50 draft; browser harness chrome-not-running; operation v1.0.34; skill v1.0.21",
-      "state": "verdade final: c12 clone publicou; c50 do zero permanece draft ui em rascunho/— cópia e ainda precisa ser publicada antes de rodolfo conferir e autorizar a exclusão. rodolfo ordenou: publicar primeiro, avisar para conferência, deletar somente após novo pedido. tentativa de anexar à sessão meta falhou porque o runtime não tem chrome/browser autenticado aberto; graph api não publica nem descarta esse draft de ui. nenhum write novo executado. demais entregas concluídas: testes graph deletados spend0, c07 costcap-0.50, c08-c10 maxvol, c11 roas exception, relatórios lance.",
+      "source": "discord:thread:1539434208408375426; audit create-c50-maxvol-from-zero-20260820T200337Z.json; operation v1.0.36; skill v1.0.22",
+      "state": "nova c50 recriada do zero pela graph api após rodolfo descartar o draft anterior. publicada server-side e deixada paused para revisão: nome canônico ... - maxvol, usd30, lowest_cost_without_cap, 1 adset active sob campaign_paused, 3 ads active sob campaign_paused, sem bid_amount/bid_constraints, subscribe/pixel/compliance br, utms c50/g01 e 3 criativos sanitizados herdando mídia/copy da c08. readback completo validado; spend/delivery impact usd0. não deletar até novo pedido após conferência de rodolfo.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T19:52:22+00:00"
+      "updated_at": "2026-08-20T20:08:14+00:00"
     },
     {
       "agent": "ares",
@@ -892,5 +892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T19:52:22+00:00"
+  "updated_at": "2026-08-20T20:08:14+00:00"
 }

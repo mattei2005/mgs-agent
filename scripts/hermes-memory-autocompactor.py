@@ -130,6 +130,8 @@ def _validate_candidate(
     target_chars: int,
     budgets: Sequence[int],
     selected_indexes: Sequence[int],
+    *,
+    enforce_total: bool = True,
 ) -> List[str]:
     raw_entries = candidate.get("entries")
     if not isinstance(raw_entries, list) or len(raw_entries) != len(selected_indexes):
@@ -165,13 +167,13 @@ def _validate_candidate(
             raise CompactionError("protected_literals_changed")
     if len(budgets) != len(result):
         raise CompactionError("candidate_budget_shape_invalid")
-    if any(len(text) > budgets[index] for index, text in enumerate(result)):
+    if any(len(result[index - 1]) > budgets[index - 1] for index in expected):
         raise CompactionError("candidate_entry_above_budget")
 
     rendered = _render_entries(result)
     if len(rendered) >= len(_render_entries(original)):
         raise CompactionError("candidate_not_shorter")
-    if len(rendered) > target_chars:
+    if enforce_total and len(rendered) > target_chars:
         raise CompactionError("candidate_above_target")
     return result
 
@@ -229,7 +231,8 @@ def _proposal_prompt(
         "use concise labels, semicolons and standard abbreviations where meaning is unchanged. "
         "Return strict JSON with exactly this schema: "
         "{\"entries\":[{\"index\":1,\"text\":\"...\"}]}. Each returned text must "
-        "respect that input entry's max_chars hard limit. "
+        "respect that input entry's max_chars hard limit and contain the exact same multiset "
+        "listed in protected_literals, byte-for-byte, with no additions or removals. "
         f"The rendered entries, joined by {ENTRY_DELIMITER!r}, must total at most "
         f"{target_chars} characters. Store type: {store}.{retry} Data: "
         + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
@@ -295,7 +298,7 @@ def propose_and_verify(
     *,
     max_proposal_attempts: int = DEFAULT_PROPOSAL_ATTEMPTS,
 ) -> List[str]:
-    candidate: List[str] | None = None
+    candidate = list(entries)
     retryable = {
         "candidate_not_shorter",
         "candidate_above_target",
@@ -305,8 +308,8 @@ def propose_and_verify(
         "candidate_indexes_invalid",
         "invalid_model_json",
         "model_call_failed",
+        "model_call_timeout",
     }
-    last_error: CompactionError | None = None
     budgets = _entry_budgets(entries, target_chars)
     selected_indexes = [
         index + 1 for index, (entry, budget) in enumerate(zip(entries, budgets))
@@ -314,31 +317,36 @@ def propose_and_verify(
     ]
     if not selected_indexes:
         raise CompactionError("no_entries_selected")
-    for attempt in range(1, max_proposal_attempts + 1):
-        try:
-            candidate = _validate_candidate(
-                entries,
-                llm_runner(
-                    _proposal_prompt(
-                        store,
-                        entries,
-                        target_chars,
-                        budgets,
-                        selected_indexes,
-                        attempt=attempt,
-                    )
-                ),
-                target_chars,
-                budgets,
-                selected_indexes,
-            )
-            break
-        except CompactionError as exc:
-            last_error = exc
-            if exc.code not in retryable or attempt == max_proposal_attempts:
-                raise
-    if candidate is None:
-        raise last_error or CompactionError("candidate_generation_failed")
+    for selected_index in selected_indexes:
+        last_error: CompactionError | None = None
+        for attempt in range(1, max_proposal_attempts + 1):
+            try:
+                candidate = _validate_candidate(
+                    candidate,
+                    llm_runner(
+                        _proposal_prompt(
+                            store,
+                            candidate,
+                            target_chars,
+                            budgets,
+                            [selected_index],
+                            attempt=attempt,
+                        )
+                    ),
+                    target_chars,
+                    budgets,
+                    [selected_index],
+                    enforce_total=False,
+                )
+                break
+            except CompactionError as exc:
+                last_error = exc
+                if exc.code not in retryable or attempt == max_proposal_attempts:
+                    raise
+        else:
+            raise last_error or CompactionError("candidate_generation_failed")
+    if len(_render_entries(candidate)) > target_chars:
+        raise CompactionError("candidate_above_target")
     verdict = llm_runner(_verifier_prompt(entries, candidate, selected_indexes))
     _validate_verifier(verdict, selected_indexes)
     return candidate

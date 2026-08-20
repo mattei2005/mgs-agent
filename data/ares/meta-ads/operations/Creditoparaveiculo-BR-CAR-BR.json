@@ -439,7 +439,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T15:45:00-04:00",
+  "updated_at": "2026-08-20T16:06:14-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -681,7 +681,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.35",
+  "playbook_version": "1.0.36",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1401,6 +1401,35 @@
     "review_gate": "Rodolfo manual check required before activation or inclusion in recurrent autonomous actions",
     "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-clone-c07-to-c12-20260820T175824Z.json",
     "validated_at_et": "2026-08-20T14:11:44-04:00"
+  },
+  "campaign_creation_20260820_c50_maxvol_retry": {
+    "status": "published_paused_pending_Rodolfo_review",
+    "authorized_by": "Rodolfo Mattei",
+    "created_at_sp": "2026-08-20T17:03:37-03:00",
+    "campaign_id": "120250857348260632",
+    "name": "50 - 20-08 - Garagem Brasil - (b01fb13c50) event_Subscribe - MAXVOL",
+    "route": "from_zero_via_Graph_API_using_C08_MAXVOL_as_configuration_and_creative_lineage_source",
+    "strategy": {
+      "campaign_bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "adset_bid_amount": null,
+      "adset_bid_constraints": null,
+      "report_label": "MAXVOL"
+    },
+    "status_contract": {
+      "campaign": "PAUSED",
+      "adset": "ACTIVE under CAMPAIGN_PAUSED",
+      "ads": "3 ACTIVE under CAMPAIGN_PAUSED"
+    },
+    "budget_usd": 30,
+    "utm_campaign": "b01fb13c50",
+    "utm_adgroup": "b01fb13c50g01",
+    "regional_identity_validated": true,
+    "exact_standard_enhancements_absent": true,
+    "server_published": true,
+    "delivery_budget_impact_usd": 0,
+    "deletion_hold": "do not delete until Rodolfo reviews and gives a new explicit deletion request",
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-maxvol-from-zero-20260820T200337Z.json",
+    "validated_at_sp": "2026-08-20T17:05:40-03:00"
   },
   "code31_research_20260820": {
     "status": "completed_grounded",

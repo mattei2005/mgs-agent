@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.21
+version: 1.0.22
 author: Ares
 license: internal
 metadata:
@@ -221,6 +221,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 24. **Tratar `ARCHIVED` como campanha ainda arquivada.** Em Creditoparaveiculo, `ARCHIVED` no Graph representa campanha `DELETED` no Ads Manager. Relatórios e respostas humanas usam `DELETED`; `ARCHIVED` fica apenas como `api_raw_status` no audit. Não contar esses objetos como campanhas vivas, pausadas ou reutilizáveis sem nova criação.
 25. **Adicionar geração/sufixo fora do wrapper para reciclar número.** O wrapper UTM é imutável (`bNNfbNNcNN` / `...gNN`); `rNN` ou equivalente é proibido. Segundo Ciro, dev da SB, deletar a campanha antiga basta para reutilizar a UTM canônica. O estado final nunca pode manter duas campanhas não deletadas com a mesma UTM. Fluxo: confirmar antiga PAUSED e terminal → criar substituta PAUSED e validar → deletar antiga e confirmar `DELETED` → ativar substituta após revisão. Campanha antiga ACTIVE bloqueia o rollover.
 26. **Usar outro objeto Graph do mesmo número como prova de publicação de um rascunho.** Quando o Ads Manager mostra `Em rascunho`, `Conferir e publicar` ou sufixo `— Cópia`, aquela campanha ainda não foi publicada. Um objeto Graph PAUSED separado, mesmo com o mesmo número, não prova a publicação do draft. Reconciliar o objeto exato por UI/ID/estado; screenshot e confirmação manual do operador vencem a inferência. Drafts do Ads Manager não são campanhas normais da Graph e exigem `Conferir e publicar` ou `Descartar rascunhos` na própria UI.
+27. **Validar remoção de `standard_enhancements` por substring.** `standard_enhancements_catalog` é uma chave diferente e pode aparecer como `OPT_OUT`. O gate procura recursivamente a chave JSON exata `standard_enhancements`; não reprovar criativo apenas porque outra chave contém o mesmo prefixo.
 
 ## Verification checklist
 

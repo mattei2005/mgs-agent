@@ -141,10 +141,11 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
 
         def fake_model(prompt):
             calls.append(prompt)
-            if len(calls) == 1:
+            if '"before":' not in prompt:
+                payload = json.loads(prompt.split(" Data: ", 1)[1])
                 return {"entries": [
-                    {"index": index, "text": candidate[index - 1]}
-                    for index in selected
+                    {"index": row["index"], "text": candidate[row["index"] - 1]}
+                    for row in payload
                 ]}
             return {"valid": True, "entries": [
                 {"index": index, "equivalent": True, "missing": [], "added": []}
@@ -160,7 +161,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             backup_root=self.backups,
         )
 
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls), len(selected) + 1)
         self.assertEqual(result["mode"], "semantic_verified")
         self.assertTrue(result["readback_matches"])
         expected = list(original)
