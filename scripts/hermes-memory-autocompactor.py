@@ -319,7 +319,8 @@ def propose_and_verify(
     ]
     if not selected_indexes:
         raise CompactionError("no_entries_selected")
-    for selected_index in selected_indexes:
+    def rewrite_one(selected_index: int) -> None:
+        nonlocal candidate
         last_error: CompactionError | None = None
         for attempt in range(1, max_proposal_attempts + 1):
             try:
@@ -340,17 +341,39 @@ def propose_and_verify(
                     [selected_index],
                     enforce_total=False,
                 )
-                break
+                return
             except CompactionError as exc:
                 last_error = exc
                 if exc.code not in retryable or attempt == max_proposal_attempts:
                     raise
-        else:
-            raise last_error or CompactionError("candidate_generation_failed")
+        raise last_error or CompactionError("candidate_generation_failed")
+
+    validated_indexes = list(selected_indexes)
+    for selected_index in selected_indexes:
+        rewrite_one(selected_index)
+
+    # Model output may be safely shorter while missing a per-entry advisory
+    # budget. Add further entries adaptively; the total target remains hard.
+    remaining_indexes = [
+        index + 1
+        for index in sorted(range(len(candidate)), key=lambda item: len(candidate[item]), reverse=True)
+        if index + 1 not in validated_indexes
+    ]
+    for selected_index in remaining_indexes:
+        current_chars = len(_render_entries(candidate))
+        if current_chars <= target_chars:
+            break
+        excess = current_chars - target_chars
+        current_length = len(candidate[selected_index - 1])
+        requested = min(excess, max(1, math.floor(current_length * 0.30)))
+        budgets[selected_index - 1] = max(35, current_length - requested)
+        rewrite_one(selected_index)
+        validated_indexes.append(selected_index)
+
     if len(_render_entries(candidate)) > target_chars:
         raise CompactionError("candidate_above_target")
-    verdict = llm_runner(_verifier_prompt(entries, candidate, selected_indexes))
-    _validate_verifier(verdict, selected_indexes)
+    verdict = llm_runner(_verifier_prompt(entries, candidate, validated_indexes))
+    _validate_verifier(verdict, validated_indexes)
     return candidate
 
 
