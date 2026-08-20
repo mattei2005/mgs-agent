@@ -160,14 +160,32 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert module.daily_signal(-10) == "🔴"
     assert "aligned_table" in inspect.getsource(module.build_daily)
     daily_source = inspect.getsource(module.build_daily)
+    assert '"Lance"' in daily_source
     assert '"Budget"' in daily_source
     assert '"Custo"' in daily_source
     intraday_source = inspect.getsource(module.build_intraday)
     assert "aligned_table" in intraday_source
+    assert '"Lance"' in intraday_source
     assert '"Custo"' in intraday_source
     assert '"ROAS"' in intraday_source
     assert '["Sinal", "Camp"' in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
+
+
+def test_bid_strategy_labels_use_live_campaign_and_adset_fields():
+    module = load_reports_module()
+    assert module.bid_strategy_label(
+        {"bid_strategy": "COST_CAP"},
+        [{"bid_amount": 50}],
+    ) == "CPA 0,50"
+    assert module.bid_strategy_label(
+        {"bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
+        [{}],
+    ) == "MAXVOL"
+    assert module.bid_strategy_label(
+        {"bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
+        [{"bid_constraints": {"roas_average_floor": 10000}}],
+    ) == "ROAS"
 
 
 def test_intraday_report_cadence_and_action_checkpoint_are_separate():
