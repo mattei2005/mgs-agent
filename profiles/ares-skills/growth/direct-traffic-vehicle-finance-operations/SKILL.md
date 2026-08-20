@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.2
+version: 1.0.3
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -261,6 +261,15 @@ Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas e info
 ## Naming Meta e rastreamento
 
 Antes do write, ler a conta e usar o próximo número de campanha livre; não reutilizar número de campanha deletada.
+
+Limite da integração Smart Bidding informado por Rodolfo:
+
+```text
+c01–c59   campanhas operacionais rastreáveis na SB
+c60+      sem tracking SB; permitido somente para teste técnico explicitamente autorizado
+```
+
+Ao esgotar `c59`, bloquear novas campanhas de produção e exigir nova convenção/mapping antes do write. Não contornar o limite reutilizando número deletado nem declarar ROI SB para `c60+`.
 
 ```text
 Campanha  NN - DD-MM - {PAGE_NAME} - (b01fb13cNN) event_Subscribe

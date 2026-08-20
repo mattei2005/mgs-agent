@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T00:07:37.236281-04:00",
+  "updated_at": "2026-08-20T00:11:42.853266-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.3",
+  "playbook_version": "1.0.4",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -637,5 +637,44 @@
       ]
     },
     "final_attempt": "cooldown then compliance-corrected execution in progress"
+  },
+  "financial_products_br_compliance": {
+    "source_endpoint": "/act_1046241194533786/dsa_recommendations",
+    "verified_advertiser_exact": "Garagem Brasil",
+    "recommendation_count": 1,
+    "adset_fields": {
+      "dsa_beneficiary": "Garagem Brasil",
+      "dsa_payor": "Garagem Brasil"
+    },
+    "regional_regulated_categories_from_reference": [
+      "BRAZIL_REGULATION",
+      "VOLUNTARY_VERIFICATION"
+    ],
+    "readback_required": true,
+    "error_signature": {
+      "code": 100,
+      "error_subcode": 3858634,
+      "error_user_title": "Advertiser is missing",
+      "blame_field": "compliance_section"
+    },
+    "do_not_infer_entity": true
+  },
+  "meta_read_retry_policy": {
+    "delay_seconds": 10,
+    "max_attempts": 12,
+    "retry_only": [
+      "HTTP 408",
+      "HTTP 425",
+      "HTTP 429",
+      "HTTP 5xx",
+      "Meta rate-limit codes 4/17/32/613/80004"
+    ],
+    "no_retry": [
+      "parameter errors",
+      "compliance errors",
+      "validation errors"
+    ],
+    "fail_closed": true,
+    "source": "Rodolfo Mattei correction + runtime validation"
   }
 }
