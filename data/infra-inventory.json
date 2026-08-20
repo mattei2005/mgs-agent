@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-19T22:26:33-04:00",
+    "updated_at": "2026-08-19T22:27:33-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7495,7 +7495,10 @@
         "visual_state": "ready"
       },
       "status": "visual_login_active_waiting_user_authentication",
-      "updated_at": "2026-08-19T22:25:11-04:00"
+      "updated_at": "2026-08-19T22:25:11-04:00",
+      "report_infra_message_id": "1539823082456485889",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -11356,15 +11359,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 70490,
-      "md5": "140e26009092bcc82602e8bbb098b0d0",
-      "modified_at": "2026-08-19T22:24:43-04:00"
+      "size_bytes": 70522,
+      "md5": "1e8b29e99c3a874424be5c783a283c6c",
+      "modified_at": "2026-08-19T22:26:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 25092,
-      "md5": "e120c1705564a009b113d9c9824f8db1",
-      "modified_at": "2026-08-19T22:22:02-04:00"
+      "md5": "3d740e64c79aed5bfa9c4c6fe83ffd93",
+      "modified_at": "2026-08-19T22:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -11381,8 +11384,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "0143f570b830c54172129f765b22479f",
-      "modified_at": "2026-08-19T22:12:08-04:00"
+      "md5": "6ba2b4c4287fb6c0f120a3af77fdf172",
+      "modified_at": "2026-08-19T22:27:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -11477,14 +11480,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 41005,
-      "md5": "246bedff2f81d8b98f482efd4afffb1b",
-      "modified_at": "2026-08-19T22:26:01-04:00"
+      "md5": "381b2d7fd7767f049b5579b57592b43c",
+      "modified_at": "2026-08-19T22:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 357,
-      "md5": "95b506f6ca59b2a9ec4eab44d4e71dd6",
-      "modified_at": "2026-08-19T22:26:01-04:00"
+      "md5": "e9a760a9683220b57f0fc1b20f03900d",
+      "modified_at": "2026-08-19T22:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -11518,9 +11521,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 509941,
-      "md5": "bc36ce2c4df6dd07f90fd9b3caadac3f",
-      "modified_at": "2026-08-19T22:26:15-04:00"
+      "size_bytes": 510435,
+      "md5": "65ad60dd7f84b06ebdc16dcdd2d27377",
+      "modified_at": "2026-08-19T22:27:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
