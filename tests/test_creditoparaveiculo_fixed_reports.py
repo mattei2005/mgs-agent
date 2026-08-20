@@ -59,6 +59,7 @@ def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=3
             "campaign_daily_ceiling_usd": 150,
             "operational_account_cap_usd": account_cap,
         },
+        "anomaly_gate": {"thresholds": "test_calibrated_v1"},
     }
     operation_path = tmp_path / "operation.json"
     operation_path.write_text(json.dumps(operation))
@@ -120,8 +121,10 @@ def test_scale_is_written_once_and_verified(monkeypatch, tmp_path):
     assert fake_meta.posts == [("1", {"daily_budget": "3300"})]
     assert Path(first_audit).exists()
 
+    changed_tier = scale_row()
+    changed_tier["recommendation"] = "ESCALAR +20%"
     second, second_audit = module.execute_intraday_actions(
-        [scale_row()], [campaign], {"anomaly": False, "spend_diff": 0.1}, "2026-08-20", decision_at
+        [changed_tier], [campaign], {"anomaly": False, "spend_diff": 0.1}, "2026-08-20", decision_at
     )
     assert second[0]["status"] == "already_applied"
     assert fake_meta.posts == [("1", {"daily_budget": "3300"})]

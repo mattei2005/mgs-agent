@@ -75,14 +75,14 @@
     "campaign_ceiling_definition_status": "approved_guardrail",
     "account_cap_scaling_policy_status": "Ares may change campaign budgets only through approved ROI tiers within the USD300 operational cap; Ares never raises the account cap autonomously",
     "campaign_daily_ceiling_usd": 150.0,
-    "reactivation_campaigns_current_budget_usd": {
+    "reactivation_campaigns_initial_budget_usd": {
       "07": 30.0,
       "08": 30.0,
       "09": 30.0,
       "10": 30.0,
       "11": 30.0
     },
-    "reactivation_total_daily_budget_usd": 150.0
+    "reactivation_initial_total_daily_budget_usd": 150.0
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
@@ -587,7 +587,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "skill v1.0.0",
+      "direct-traffic-cbo-operations v1.0.1",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",

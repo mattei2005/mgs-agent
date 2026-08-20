@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.0
+version: 1.0.1
 author: Ares
 license: internal
 metadata:
@@ -151,8 +151,10 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 
 - Reportar aquisição, SMS e custo de SMS em colunas separadas.
 - Exibir fonte e status de reconciliação.
-- Recomendar antes de escrever na Meta.
-- Depois de write autorizado, validar via GET real a campanha, CBO/budget, adset, três anúncios e parâmetros da URL.
+- Recomendar antes de escrever na Meta, salvo quando Rodolfo autorizar explicitamente `autonomous_guarded` para uma operação e a fonte canônica da operação registrar `write_enabled=true`.
+- Em `autonomous_guarded`, executar somente ações e tiers nomeados na configuração da operação, com lock/idempotência, preflight Meta vivo, holds, ceilings/caps, audit sanitizado e GET/readback. Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
+- Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
+- O formato do relatório pode substituir `ID REC` pela própria coluna de número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 
 ## Guardrails de credenciais
 
