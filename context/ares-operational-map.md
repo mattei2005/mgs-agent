@@ -46,10 +46,10 @@ Canal                              ID                    Participantes          
 ares-diretoria                     1508853425952133180   Rodolfo, Zeus e Ares                  Diretoria privada e histórico completo do Ares
 ares-aquisicao                     1516887105543077949   Rodolfo, Zeus, Ares e gestores        Campanhas, HOA, Intraday, regras e relatórios
 ares-aquisicao-eggbev-us-cc-en     1539422731727147079   Rodolfo, Nicolas, Zeus e Ares         Eggbev US-CC-EN: criação, contas e relatórios em threads
-ares-creditoparaveiculo-br-car-br  1539432300364824607   Rodolfo, Nicolas, Zeus e Ares         creditoparaveiculo.com BR-CAR-BR: tráfego direto
+ares-creditoparaveiculo-br-car-br  1539432300364824607   Rodolfo, Nicolas, Geizian, Zeus e Ares creditoparaveiculo.com BR-CAR-BR: tráfego direto
 ```
 
-`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado. Os canais privados por operação usam múltiplas contas por alias e threads separadas para criação, relatórios e criativos. `ares-aquisicao-eggbev-us-cc-en` cobre Eggbev US-CC-EN; `ares-creditoparaveiculo-br-car-br` cobre creditoparaveiculo.com BR-CAR-BR na estratégia de tráfego direto. Toda thread nova nesses canais privados deve auto-adicionar exclusivamente Nicolas (`1055570806945620030`) como participante humano extra; a Diretoria permanece com lista automática vazia. Nenhum outro canal Discord é rota ativa do Ares.
+`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado. Os canais privados por operação usam múltiplas contas por alias e threads separadas para criação, relatórios e criativos. `ares-aquisicao-eggbev-us-cc-en` cobre Eggbev US-CC-EN e auto-adiciona Nicolas (`1055570806945620030`). `ares-creditoparaveiculo-br-car-br` cobre creditoparaveiculo.com BR-CAR-BR na estratégia de tráfego direto e auto-adiciona Nicolas e Geizian (`321263240782807040`) em toda thread nova. A Diretoria permanece com lista automática vazia. Nenhum outro canal Discord é rota ativa do Ares.
 
 ## 3. Pedido → primeira rota
 

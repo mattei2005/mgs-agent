@@ -312,6 +312,24 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "discord-gateway"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "POL-ARES-CREDITOPARAVEICULO-THREAD-MEMBERS-20260820",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo threads auto-add Nicolas and Geizian",
+      "updated_at": "2026-08-20T23:31:13+00:00"
+    },
+    {
       "canonical_key": "policy.ares.creative-ops.local-retention-after-drive",
       "canonical_source": "context/processes.md",
       "consumers": [
@@ -848,5 +866,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T23:19:50+00:00"
+  "updated_at": "2026-08-20T23:31:13+00:00"
 }

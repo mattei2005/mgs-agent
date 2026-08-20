@@ -83,12 +83,12 @@
     {
       "agent": "ares",
       "id": "ARES-NICOLAS-META-CHANNELS-20260818",
-      "next_step": "Rodolfo envia uma mensagem nova no canal Crédito Para Veículo (1539432300364824607); confirmar inbound, auto-thread, auto-add Nicolas (1055570806945620030) e resposta.",
-      "objective": "Ativar canais privados do Ares por site/operação para Nicolas criar e gerenciar campanhas e receber relatórios em threads.",
-      "source": "discord:thread:1539394253526925384; channel:1539432300364824607; /root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260819T003745Z-2011546.log; /proc/2011874/environ live read-only validation; /root/mgs-agent/logs/events-audit.jsonl events 2133-2137",
-      "state": "restart validated: ares-gateway active/running; new pid 2011874 (previous 1930805); detached finalizer completed connected=true; live /proc env passed all requested discord route, auto-thread, mention and by-channel auto-add checks; e2e pending.",
-      "thread_id": "1539394253526925384",
-      "updated_at": "2026-08-19T00:41:54+00:00"
+      "next_step": "Reiniciar Ares de forma detached e validar config, ambiente do novo processo e readback dos quatro membros no Discord",
+      "objective": "Manter Nicolas e Geizian nas threads da operação creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1540139527341998151; /root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "pending_restart_validation",
+      "thread_id": "1540139527341998151",
+      "updated_at": "2026-08-20T23:31:13+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T23:19:50+00:00"
+  "updated_at": "2026-08-20T23:31:13+00:00"
 }
