@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://developers.facebook.com/community/threads/845129991936233",
+      "title": "Meta Community - Marketing API error 31/subcode 3858385",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "OAuthException code: 31 error_subcode: 3858385 message: \"This request requires the user to take a pending action\"",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Important details: • Existing ads are running normally • The issue only happens when creating ads via the Marketing API • We already completed the Data Access Renewal • No security warning or pending action appears in Ads Manager",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "I created a bug report here: https://developers.facebook.com/support/bugs/3397941523702775/",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "url": "https://developers.facebook.com/community/threads/1820634641959662",
+      "title": "Meta Community - no Ads Manager error, code31/3858385",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "i have checked my whole ads account page and there is no error",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "url": "https://developers.facebook.com/support/bugs/3397941523702775",
+      "title": "Meta Bug Report 3397941523702775",
+      "accessed": "2026-08-20"
+    },
+    {
+      "id": 4,
+      "url": "https://www.jonloomer.com/chatgpt-ads-missing-audience-segments-account-authentication-errors",
+      "title": "Jon Loomer - Account Authentication Error 3858385",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "We think someone may have tried to access your account without permission. For your protection, you won’t be able to create or modify ads until you authenticate your account in Ads Manager. Your existing ads will continue to run normally. (#3858385)",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Meta should immediately send a confirmation code to the connected email address. Paste it into that text box and hit Submit.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization",
+      "title": "Meta Marketing API Authorization",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Most access tokens are portable — you can use them from a mobile client, a web browser, or your server.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "url": "https://developers.facebook.com/docs/facebook-login/guides/access-tokens",
+      "title": "Meta Access Tokens",
+      "accessed": "2026-08-20"
+    },
+    {
+      "id": 7,
+      "url": "https://developers.facebook.com/documentation/facebook-login/facebook-login-for-business",
+      "title": "Facebook Login for Business",
+      "accessed": "2026-08-20"
+    },
+    {
+      "id": 8,
+      "url": "https://metastatus.com/marketing-api",
+      "title": "Meta Marketing API Status",
+      "accessed": "2026-08-20"
+    },
+    {
+      "id": 9,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1glm58s/unable_to_publish_ads_error_3858385",
+      "title": "Reddit - Unable to Publish Ads 3858385",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Just managed to resolve this by editing the ad. Once i made changes to the ad copy, an option to verify the email appeared. The ads were published successfully once I entered the code received in the email. Hope this helps others who face the same issue.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "You can make a small change like a period or something in the text body for the ad and it will generate the verify option again.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "I had this issue while trying to make changes on an existing campaign and I was getting the error without an option to verify, so I made a new campaign added a random image and when I pressed publish I got the option to verify, hope this helps if the solution here didnt work, thanks mate!",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1gaj7hq/need_help_asap",
+      "title": "Reddit - Need Help ASAP 3858385",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "I was receiving the same message, and no email was appearing in the authentication section. I reached out to Meta Support, and they were able to walk me through getting my Meta account authenticated.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "I resolved it by going to the Ads Manager base page, then drill down into the ad, then at the top right I see the error message but with a \"Start Authentication\" button. Click that which walks you through simple email verification, allowing you to run your ad once complete.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "I get that message every few months usually... (And I am home. Not travelling or anything.) I only need to check an ad, click on \"start authentication\" and I get a code via email.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "url": "https://www.facebook.com/business/help/708679622611131",
+      "title": "Meta Business Help - Add Partners",
+      "accessed": "2026-08-20"
+    }
+  ]
+}
