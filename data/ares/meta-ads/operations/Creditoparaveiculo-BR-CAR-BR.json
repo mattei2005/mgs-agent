@@ -364,7 +364,7 @@
     "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
     "remove_id_rec": true,
     "campaign_identifier": "campaign number column",
-    "daily_focus": "closed performance and account summary",
+    "daily_focus": "07:00 previous closed-day performance; 11:00/14:00/20:00 current-day performance through dispatch time",
     "intraday_focus": "current decision, executed action, gates and readback",
     "legend": {
       "green": "healthy, maintain or scale",
@@ -898,7 +898,7 @@
       {
         "key": "daily",
         "title": "Creditoparaveiculo 13 G006 Diario",
-        "purpose": "closed-day spend, acquisition revenue, SMS block, ROI acquisition/total, anomalies",
+        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 11:00/14:00/20:00",
         "delivery": "recurring script-only report",
         "thread_id": "1539831487719800872",
         "schedule": "07:00 America/Sao_Paulo for the previous closed day; 11:00, 14:00 and 20:00 for the current day through dispatch time",

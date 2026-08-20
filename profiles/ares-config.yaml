@@ -572,23 +572,36 @@ discord:
       send_message para resposta normal.\n- Titulos de threads: etiqueta semantica
       curta de 3 a 6 palavras, sem sobrescrever titulo manual.\n- Nao adicionar outros
       gestores automaticamente."'
-    '1539432300364824607': '"INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR\n\n-
-      Canal privado da operacao creditoparaveiculo.com BR-CAR-BR, estrategia trafego
-      direto, para Rodolfo, Nicolas, Zeus e Ares; Geizian esta fora deste plano.\n-
-      Toda thread nova criada neste canal deve adicionar automaticamente Nicolas,
-      Discord ID 1055570806945620030; confirmar sucesso somente pelo log Auto-thread
-      member sync/readback real.\n- Nicolas possui autonomia total em nivel de campanha,
-      inclusive criacao, budget, ativacao, pausa, reativacao, edicao, clone, replacement
-      e arquivamento, preservando preflight, audit e readback.\n- O site pode ter
-      varias contas Meta; identifique cada conta por alias curto e mantenha IDs tecnicos
-      no audit.\n- Para trafego direto, carregar direct-traffic-cbo-operations e classificar
+    '1539432300364824607': 'INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR
+
+
+      - Canal privado da operacao creditoparaveiculo.com BR-CAR-BR, estrategia trafego
+      direto, para Rodolfo, Nicolas, Geizian, Zeus e Ares.
+
+      - Toda thread nova criada neste canal deve adicionar automaticamente Nicolas,
+      Discord ID 1055570806945620030, e Geizian, Discord ID 321263240782807040; confirmar
+      sucesso somente pelo log Auto-thread member sync/readback real.
+
+      - Nicolas possui autonomia total em nivel de campanha, inclusive criacao, budget,
+      ativacao, pausa, reativacao, edicao, clone, replacement e arquivamento, preservando
+      preflight, audit e readback.
+
+      - O site pode ter varias contas Meta; identifique cada conta por alias curto
+      e mantenha IDs tecnicos no audit.
+
+      - Para trafego direto, carregar direct-traffic-cbo-operations e classificar
       quiz/chat, com/sem captura, conta, evento e UTMs antes do write; nao configurar
-      quiz, SMS Funnel, pixel ou WordPress fora do escopo aprovado.\n- Use threads
-      separadas por criacao de campanha, Diario, Intraday, criativos/testes e ROI/reconciliacao;
-      HOA somente se a operacao habilitar.\n- Responda na thread atual; nao use send_message
-      para resposta normal.\n- Titulos de threads: etiqueta semantica curta de 3 a
-      6 palavras, sem sobrescrever titulo manual.\n- Nao adicionar outros gestores
-      automaticamente."'
+      quiz, SMS Funnel, pixel ou WordPress fora do escopo aprovado.
+
+      - Use threads separadas por criacao de campanha, Diario, Intraday, criativos/testes
+      e ROI/reconciliacao; HOA somente se a operacao habilitar.
+
+      - Responda na thread atual; nao use send_message para resposta normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras, sem sobrescrever
+      titulo manual.
+
+      - Nao adicionar outros gestores automaticamente.'
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -623,6 +636,7 @@ discord:
       - '1055570806945620030'
     '1539432300364824607':
       - '1055570806945620030'
+      - '321263240782807040'
   suppress_link_previews: true
 telegram:
   reactions: false
