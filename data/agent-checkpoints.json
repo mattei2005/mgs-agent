@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Fase D1: observar ROI real SB, estimado, ROAS e anomalias; sem cortes. Executar escala elegível somente conforme faixas aprovadas e checkpoint operacional.",
+      "next_step": "Aguardar cooldown. Se Rodolfo quiser continuar o diagnóstico, testar apenas async batch nativo ou capturar HAR/payload sanitizado do Ads Manager para o advertiser BR; não repetir criação manual atual.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "implantação encerrada por rodolfo: automação da conta ativa; campanhas iniciais 07/08/09/10/11 active com 5 conjuntos e 15 anúncios ativos, usd150/dia total. skill v1.0.2, threads fixas, diário 07:00, intraday 08/12/15/20/23, snapshot 3d 03:00 sem reset e janela de novas campanhas 18:00-23:30/início 00:30 estão operacionais.",
+      "state": "teste criação+clone concluído com blockers e usd0 spend. campanhas técnicas c61-c69 que chegaram a existir foram todas deleted por cleanup e validadas. from-scratch: campaign shell cria, adset financeiro br bloqueia 3858634 advertiser is missing/compliance_section mesmo com dsa_recommendations=garagem brasil e campos dsa. clone: deep sync bloqueia 1885194 copy too large; shallow shell cria, async batch é próximo diagnóstico após cooldown. rate limit 17/2446079 encerrou writes. campanhas iniciais 07-11 não foram alteradas.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T03:44:39+00:00"
+      "updated_at": "2026-08-20T04:19:02+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T03:44:39+00:00"
+  "updated_at": "2026-08-20T04:19:02+00:00"
 }

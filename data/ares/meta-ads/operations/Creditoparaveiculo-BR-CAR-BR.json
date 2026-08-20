@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T00:11:42.853266-04:00",
+  "updated_at": "2026-08-20T00:19:02.823024-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.4",
+  "playbook_version": "1.0.5",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -616,27 +616,116 @@
     "source": "Rodolfo Mattei"
   },
   "test_create_clone_20260820": {
-    "authorization": "technical test; numbers above 59 allowed despite no SB tracking",
+    "status": "completed_with_blockers_no_campaign_kept",
+    "authorization": "technical test above c59; no SB tracking expected",
     "source_campaign_number": 8,
-    "source_campaign_id": "120250209380780632",
-    "spend_usd": 0.0,
-    "attempted_numbers_deleted": [
+    "attempted_numbers": [
       61,
       62,
       63,
       64,
-      65
+      65,
+      66,
+      67,
+      68,
+      69
     ],
-    "current_findings": {
-      "native_deep_copy_error_subcode": 1885194,
-      "adset_error_subcode": 3858634,
-      "adset_error_title": "Advertiser is missing",
-      "required_source_compliance": [
-        "BRAZIL_REGULATION",
-        "VOLUNTARY_VERIFICATION"
-      ]
+    "cleanup_verified_deleted": [
+      {
+        "number": 61,
+        "campaign_id": "120250842561130632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "61 - 20-08 - Garagem Brasil - (b01fb13c61) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 62,
+        "campaign_id": "120250842668950632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "62 - 20-08 - Garagem Brasil - (b01fb13c62) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 63,
+        "campaign_id": "120250842673540632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "63 - 20-08 - Garagem Brasil - (b01fb13c63) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 64,
+        "campaign_id": "120250842807600632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "64 - 20-08 - Garagem Brasil - (b01fb13c64) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 65,
+        "campaign_id": "120250842819730632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "65 - 20-08 - Garagem Brasil - (b01fb13c65) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 66,
+        "campaign_id": "120250843106860632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "66 - 20-08 - Garagem Brasil - (b01fb13c66) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 67,
+        "campaign_id": "120250843107800632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "67 - 20-08 - Garagem Brasil - (b01fb13c67) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 68,
+        "campaign_id": "120250843119300632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "68 - 20-08 - Garagem Brasil - (b01fb13c68) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 69,
+        "campaign_id": "120250843121290632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe sem bid - ARES TESTE CLONE SHELL"
+      }
+    ],
+    "all_test_campaigns_deleted": true,
+    "spend_usd": 0.0,
+    "from_scratch": {
+      "campaign_shell_create": "success",
+      "adset_create": "blocked",
+      "error": {
+        "code": 100,
+        "subcode": 3858634,
+        "title": "Advertiser is missing",
+        "blame": "compliance_section"
+      },
+      "dsa_recommendation": "Garagem Brasil",
+      "dsa_text_fields_result": "did not resolve hidden BR advertiser identity"
     },
-    "final_attempt": "cooldown then compliance-corrected execution in progress"
+    "clone": {
+      "sync_deep_copy": "blocked",
+      "error": {
+        "code": 100,
+        "subcode": 1885194,
+        "title": "Copy request is too large"
+      },
+      "shallow_shell": "success then cleaned",
+      "async_batch": "next diagnostic route after cooldown; not executed in this test due account rate limit"
+    },
+    "rate_limit_stop": {
+      "code": 17,
+      "subcode": 2446079,
+      "title": "Ad Account Has Too Many API Calls",
+      "action": "writes stopped; no automatic retry"
+    },
+    "production_conclusion": "do not automate new campaign creation yet; initial active campaigns 07-11 unaffected"
   },
   "financial_products_br_compliance": {
     "source_endpoint": "/act_1046241194533786/dsa_recommendations",
@@ -657,7 +746,13 @@
       "error_user_title": "Advertiser is missing",
       "blame_field": "compliance_section"
     },
-    "do_not_infer_entity": true
+    "do_not_infer_entity": true,
+    "validated_result": "dsa_beneficiary/payor text did not resolve advertiser for BR public adset POST",
+    "from_scratch_api_status": "blocked pending sanitized Ads Manager payload/HAR or Meta field support",
+    "regional_post_tested": [
+      "BRAZIL_REGULATION",
+      "BRAZIL_REGULATION + VOLUNTARY_VERIFICATION"
+    ]
   },
   "meta_read_retry_policy": {
     "delay_seconds": 10,
