@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.12
+version: 1.0.13
 author: Ares
 license: internal
 metadata:
@@ -193,6 +193,9 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 18. **Ignorar tier e role do app.** Header `ads_api_access_tier=development_access` indica tier limitado/desenvolvimento. Conferir no App Dashboard o Marketing API Access Tier, acesso de `ads_management` e se o usuário anunciante é Admin/Developer/Tester. Limited serve a pilotos por app roles; produção com usuários externos exige o acesso/review aplicável.
 19. **Tratar System User como única arquitetura.** Facebook Login for Business suporta User Access Token que herda os assets atuais do usuário, sem mover todas as Pages para uma única BM. System User/BISU exige assets owned/shared ou explicitamente designados em business portfolios e pode ser inviável em alto volume; escolher arquitetura com Rodolfo.
 20. **Trocar de token/app sem readback durante o cleanup.** Se anúncios falharem com `2446289` antes de a campanha ficar `DELETED`, fazer GET e, depois da exclusão confirmada da campanha, repetir uma única vez com a credencial de cleanup já autorizada: anúncios → readback `DELETED` → criativos. Para vídeos técnicos da Página, se User Token retornar `code=10/subcode=1363055`, resolver internamente o Page Access Token via `/me/accounts` e excluir somente os IDs técnicos allowlisted; nunca registrar o token. Concluir apenas quando anúncios/criativos estiverem `DELETED`, os vídeos retornarem `100/33` ou sumirem do edge da Página e o gasto permanecer zero.
+21. **Criar adset `BRAZIL_REGULATION` só com DSA beneficiary/payor.** Esses textos não satisfazem `3858634` (`Advertiser is missing`). Ler `regional_regulation_identities` do adset fonte compliant e enviar junto com `regional_regulated_categories`; para BR, exigir `universal_beneficiary` e `universal_payer`, podendo usar o mesmo verified identity ID. Rodar `validate_only` antes do write e confirmar as identidades no readback.
+22. **Rejeitar cópia HTTP 200 sem `success`/`id` mesmo quando há ID específico.** `/copies` pode retornar somente `copied_campaign_id` ou `copied_adset_id` (e `ad_object_ids`). Aceitar apenas essas chaves reconhecidas, persistir o ID imediatamente e fazer GET antes de qualquer nova tentativa; nunca repetir a cópia só porque `success` não veio.
+23. **Tratar `PENDING_REVIEW` como anúncio desligado por herança sem conferir configuração.** O gate correto para campanha de revisão é: campanha `configured_status=PAUSED`; adset/anúncio `configured_status=ACTIVE`; effective do filho pode estar `CAMPAIGN_PAUSED`, `PENDING_REVIEW`, `IN_PROCESS` ou `WITH_ISSUES` durante materialização/revisão. O pai PAUSED continua sendo o bloqueio de entrega.
 
 ## Verification checklist
 
