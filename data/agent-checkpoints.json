@@ -43,12 +43,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-CC-US-ES-EN-CREATIVE-REVIEW-20260820",
-      "next_step": "Aguardar confirmação crítica sim/não após apresentar os 6 alvos exatos. Se sim, enviar os 6 arquivos à lixeira (não exclusão permanente), validar trashed=true e ausência das pastas ativas, atualizar exatamente 3 registros de inventário para TRASHED preservando IDs/checksums e emitir auditoria/REPORT-INFRA.",
+      "next_step": "Aguardar Kelly continuar a revisão e listar outros bons/ruins ou arquivos classificados no idioma incorreto. Manter os 22 READY restantes RESERVADO_PELO_GESTOR e ares_eligible=false; aplicar somente mudanças exatas com reconciliação de linhagem e readback.",
       "objective": "Concluir revisão humana dos criativos CC_US_ES e CC_US_EN processados em 20/08/2026",
-      "source": "discord:thread:1540085104322543726; data/ares/creative-ops/deletion-preflight/kelly-cc-us-en-es-delete-preflight-20260820T210129Z.json",
-      "state": "kelly marcou três linhagens como ruins para remoção: 10_límite disponible.mp4 / cc_us_en_vid_available_limit_pv_043.mp4; 13_08 - story ( ingles) .mp4 / cc_us_en_vid_available_limit_pv_046.mp4; 6_$14,760.mp4 / cc_us_es_vid_limite_disponible_pv_006.mp4. preflight real validou 3 linhagens, 6 arquivos drive (ready+legacy), todos ativos, reservados, inelegíveis, sem uso/ids meta e com capability de lixeira. nenhuma exclusão foi executada.",
+      "source": "discord:thread:1540085104322543726; data/ares/creative-ops/deletion-execution/kelly-cc-us-en-es-trash-20260820T210456Z.json; data/ares/creative-ops/deletion-execution/kelly-cc-us-en-es-trash-20260820T210456Z-independent-verification.json",
+      "state": "kelly reprovou e confirmou criticamente a remoção de três linhagens: 10_límite disponible.mp4 / cc_us_en_vid_available_limit_pv_043.mp4; 13_08 - story ( ingles) .mp4 / cc_us_en_vid_available_limit_pv_046.mp4; 6_$14,760.mp4 / cc_us_es_vid_limite_disponible_pv_006.mp4. as 3 linhagens completas foram enviadas à lixeira: 6 arquivos drive (3 ready + 3 legacy), todos com trashed=true, ausentes das pastas ativas; inventário atualizado para trashed e auditoria validada. não houve exclusão permanente. restam 22 ready neste lote: 15 cc_us_en e 7 cc_us_es; 7_espanol 03.mp4 permanece em 05_rejected.",
       "thread_id": "1540085104322543726",
-      "updated_at": "2026-08-20T21:02:07+00:00"
+      "updated_at": "2026-08-20T21:08:40+00:00"
     },
     {
       "agent": "ares",
@@ -912,5 +912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:02:07+00:00"
+  "updated_at": "2026-08-20T21:08:40+00:00"
 }

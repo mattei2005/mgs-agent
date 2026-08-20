@@ -21,7 +21,18 @@
       "cut_level": "campaign",
       "budget_type": "daily",
       "pilot_write_authorizer": "Rodolfo Mattei",
-      "write_mode": "read_only_until_campaign_test_approved",
+      "write_mode": "autonomous_guarded_daily_creation_and_campaign_level_actions_per_operation_config",
+      "daily_creation_authorized": {
+        "authorized_by": "Rodolfo Mattei",
+        "activated_at": "2026-08-20T17:06:18-04:00",
+        "schedule": "17:00 America/Sao_Paulo",
+        "campaigns_per_day": 2,
+        "budget_usd_each": 30,
+        "strategy": "MAXVOL",
+        "start_time": "00:30 next day America/Sao_Paulo",
+        "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR",
+        "stock_report_required": true
+      },
       "token_1password_item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
       "account_reference_1password_item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
       "meta_detected": {
