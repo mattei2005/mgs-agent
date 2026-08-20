@@ -159,11 +159,34 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert module.daily_signal(-5) == "🟡"
     assert module.daily_signal(-10) == "🔴"
     assert "aligned_table" in inspect.getsource(module.build_daily)
+    daily_source = inspect.getsource(module.build_daily)
+    assert '"Budget"' in daily_source
+    assert '"Custo"' in daily_source
     intraday_source = inspect.getsource(module.build_intraday)
     assert "aligned_table" in intraday_source
     assert '"Custo"' in intraday_source
     assert '"ROAS"' in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
+
+
+def test_aligned_table_accounts_for_wide_emoji_cells():
+    module = load_reports_module()
+    rendered = module.aligned_table(
+        ["Sinal", "Indicador"],
+        [["⚪", "Spend Meta"], ["🔴", "Receita aquisição"]],
+    )
+    lines = rendered.splitlines()
+    spend_line = next(line for line in lines if "Spend Meta" in line)
+    revenue_line = next(line for line in lines if "Receita aquisição" in line)
+
+    def visual_width(text):
+        import unicodedata
+
+        return sum(2 if unicodedata.east_asian_width(char) in {"W", "F"} else 1 for char in text)
+
+    assert visual_width(spend_line.split("Spend Meta")[0]) == visual_width(
+        revenue_line.split("Receita aquisição")[0]
+    )
 
 
 def test_decision_boundaries_are_explicit():
