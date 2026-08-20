@@ -214,7 +214,7 @@
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
-      "name": "Creditoparaveiculo 13 G006 Intraday 2h",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
         "01:00",
@@ -256,7 +256,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T09:37:38-04:00",
+  "updated_at": "2026-08-20T09:51:15-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -631,7 +631,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.7",
+      "direct-traffic-cbo-operations v1.0.8",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",

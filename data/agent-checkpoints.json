@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Operação recorrente normal; validar primeira entrega automática das 11:00 SP pelo audit/readback e manter pausa D3 fail-closed até calibrar gate externo",
-      "objective": "Operar Intraday seguro com cadência e apresentação aprovadas por Rodolfo",
-      "source": "discord:thread:1539969033170980945; operation config v1.0.19; direct-traffic-cbo-operations v1.0.7; cron Creditoparaveiculo 13 G006 Intraday 2h; daily message 1539992479015772200; intraday message 1539992545780826204",
-      "state": "concluído: intraday publica a cada 2h de 07:00 a 23:00 são paulo (07/09/11/13/15/17/19/21/23). checkpoint de ação das 08:00 foi separado em actions-only para preservar escala sem relatório extra. job hermes atualizado, enabled e scheduled. coluna camp substitui campanha e exibe cnn-dd/mm em diário/intraday; ambos republicados e validados por discord get 200. autowrite guarded seguro; c09 active usd33.",
+      "next_step": "Operação recorrente normal; primeira próxima entrega automática deve usar slot 11:00 SP e seguir continuamente nas horas ímpares",
+      "objective": "Operar Intraday seguro com cadência contínua e apresentação aprovadas por Rodolfo",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.20; direct-traffic-cbo-operations v1.0.8; cron Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "state": "concluído: intraday contínuo a cada 2h nas horas ímpares de são paulo (01/03/05/07/09/11/13/15/17/19/21/23), atravessando meia-noite sem parar às 23. último envio manual 10:40 sp não ocupa o slot 11; próximo automático confirmado para 11:00 sp. checkpoint de ação 08:00 permanece actions-only. job hermes enabled e scheduled. camp usa cnn-dd/mm em diário/intraday.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T13:41:56+00:00"
+      "updated_at": "2026-08-20T13:53:04+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:41:56+00:00"
+  "updated_at": "2026-08-20T13:53:04+00:00"
 }
