@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.3
+version: 1.0.4
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -147,6 +147,22 @@ Programar a campanha para começar às `00:30` no timezone real da conta Meta. N
 ## Ciclo de três dias
 
 A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado às `00:30` no timezone da conta.
+
+### Compliance de anunciante — financeiro BR
+
+Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
+
+1. Ler `/{ad_account_id}/dsa_recommendations`.
+2. Exigir exatamente uma entidade verificada; preservar capitalização e string integral.
+3. Enviar juntos no adset:
+   - `dsa_beneficiary = entidade verificada`;
+   - `dsa_payor = entidade verificada`.
+4. Copiar `regional_regulated_categories` da referência válida da mesma conta; não usar mapeamento histórico de outro país.
+5. Validar por readback os dois campos e as categorias regionais.
+
+O subcode `3858634` com `error_user_title=Advertiser is missing` culpa `compliance_section`; não é erro de targeting. Nunca inventar o advertiser pelo nome da empresa/página.
+
+Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação; somente `408/425/429/5xx` e códigos de rate limit.
 
 ### Janela de criação e aprovação
 
