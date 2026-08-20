@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.4
+version: 1.0.5
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -152,17 +152,14 @@ A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado às 
 
 Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 
-1. Ler `/{ad_account_id}/dsa_recommendations`.
-2. Exigir exatamente uma entidade verificada; preservar capitalização e string integral.
-3. Enviar juntos no adset:
-   - `dsa_beneficiary = entidade verificada`;
-   - `dsa_payor = entidade verificada`.
-4. Copiar `regional_regulated_categories` da referência válida da mesma conta; não usar mapeamento histórico de outro país.
-5. Validar por readback os dois campos e as categorias regionais.
+1. Ler `/{ad_account_id}/dsa_recommendations` e registrar a entidade recomendada sem inventar valor.
+2. Ler explicitamente na referência `dsa_beneficiary`, `dsa_payor` e `regional_regulated_categories`.
+3. Não assumir que os campos DSA resolvem o advertiser brasileiro: nesta conta a recomendação foi `Garagem Brasil`, a referência retornou DSA nulo e o POST continuou falhando com `3858634 / Advertiser is missing / compliance_section`, mesmo enviando `Garagem Brasil` nos dois campos.
+4. Tratar `VOLUNTARY_VERIFICATION` visto no GET como estado derivado; não há evidência de que enviá-lo no POST crie o vínculo oculto.
+5. Criação do zero via API pública permanece bloqueada nesta conta até capturar um payload/HAR sanitizado do Ads Manager ou a Meta expor o campo de identidade regional necessário.
+6. Cópia profunda síncrona de 1×1×3 falha com `1885194 / Copy request is too large`; o próximo caminho autorizado de diagnóstico é async batch nativo, após cooldown da conta.
 
-O subcode `3858634` com `error_user_title=Advertiser is missing` culpa `compliance_section`; não é erro de targeting. Nunca inventar o advertiser pelo nome da empresa/página.
-
-Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação; somente `408/425/429/5xx` e códigos de rate limit.
+Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação. Ao receber `code=17/subcode=2446079 / Ad Account Has Too Many API Calls`, parar imediatamente os writes, preservar cleanup/audit e aguardar cooldown.
 
 ### Janela de criação e aprovação
 
