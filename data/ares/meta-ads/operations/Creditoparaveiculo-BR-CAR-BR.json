@@ -255,7 +255,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T13:41:03-04:00",
+  "updated_at": "2026-08-20T14:11:44-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -473,7 +473,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.25",
+  "playbook_version": "1.0.26",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1113,6 +1113,62 @@
     "spend_today_usd": 0,
     "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/post-auth-full-1x1x3-v26-rafael-20260820T173600Z.json",
     "validated_at_et": "2026-08-20T13:41:03-04:00"
+  },
+  "campaign_creation_20260820_c50_c12": {
+    "status": "published_paused_pending_manual_review",
+    "authorized_by": "Rodolfo Mattei",
+    "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "source_campaign": {
+      "number": 7,
+      "campaign_id": "120250209327510632"
+    },
+    "campaigns": {
+      "50": {
+        "route": "created_from_zero",
+        "campaign_id": "120250855399230632",
+        "name": "50 - 20-08 - Garagem Brasil - (b01fb13c50) event_Subscribe com bid",
+        "status": "PAUSED",
+        "budget_usd": 30,
+        "bid_strategy": "COST_CAP",
+        "adset_bid_amount_minor": 50,
+        "structure": "1x1x3",
+        "utm_campaign": "b01fb13c50",
+        "utm_adgroup": "b01fb13c50g01"
+      },
+      "12": {
+        "route": "native_campaign_and_adset_clone_from_07_with_sanitized_creative_wrappers",
+        "campaign_id": "120250855405380632",
+        "name": "12 - 20-08 - Garagem Brasil - (b01fb13c12) event_Subscribe com bid",
+        "status": "PAUSED",
+        "budget_usd": 30,
+        "bid_strategy": "COST_CAP",
+        "adset_bid_amount_minor": 50,
+        "structure": "1x1x3",
+        "utm_campaign": "b01fb13c12",
+        "utm_adgroup": "b01fb13c12g01"
+      }
+    },
+    "child_status_contract": "adsets and ads ACTIVE; delivery disabled by PAUSED campaign",
+    "creative_source": "same media/copy lineage as campaign 07; no Drive intake",
+    "brazil_compliance": {
+      "regional_regulated_categories": [
+        "BRAZIL_REGULATION",
+        "VOLUNTARY_VERIFICATION"
+      ],
+      "regional_regulation_identities_source": "copied from compliant campaign 07",
+      "universal_beneficiary_and_payer_present": true
+    },
+    "same_number_existing_preserved": {
+      "50": "historical ARCHIVED campaign preserved untouched",
+      "12": "historical PAUSED campaign preserved untouched"
+    },
+    "configured_active_budget_usd_before": 153,
+    "configured_active_budget_usd_after": 153,
+    "delivery_budget_impact_usd": 0,
+    "autonomous_action_allowlist": false,
+    "review_gate": "Rodolfo manual check required before activation or inclusion in recurrent autonomous actions",
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-clone-c07-to-c12-20260820T175824Z.json",
+    "validated_at_et": "2026-08-20T14:11:44-04:00"
   },
   "code31_research_20260820": {
     "status": "completed_grounded",

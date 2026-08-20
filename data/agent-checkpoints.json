@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Nenhum blocker de capacidade de criação. Em criação futura, aplicar escopo/autorização da operação, preflight, sanitização, propagação, validate-only, write PAUSED e readback. Cleanup: credencial autorizada para ads/criativos; Page Access Token interno para vídeos técnicos allowlisted quando User Token retornar code10/sub1363055.",
+      "next_step": "Aguardar conferência manual de Rodolfo. Não ativar nem incluir C50/C12 na allowlist autônoma até autorização explícita. Se aprovadas, ativação continua apenas no nível campanha.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; audit post-auth-full-1x1x3-v26-rafael-20260820T173600Z.json; operation Creditoparaveiculo-BR-CAR-BR v1.0.25; direct-traffic-cbo-operations v1.0.12",
-      "state": "concluído após confirmação por email no ads manager. o mesmo token passou graph v26 validate-only. controlled-write temporário validou campanha paused, 1 adset paused, 3 anúncios paused, budget usd30, brazil_regulation e linhagem sanitizada dos 3 criativos. cleanup final por readback: campanha/adset/3 anúncios/3 criativos deleted; 6/6 vídeos técnicos excluídos com page access token resolvido internamente; gasto usd0; nenhum id ativo.",
+      "source": "discord:thread:1539434208408375426; audit create-c50-clone-c07-to-c12-20260820T175824Z.json; operation Creditoparaveiculo-BR-CAR-BR v1.0.26; direct-traffic-cbo-operations v1.0.13",
+      "state": "c50 criada do zero e c12 criada por clone nativo da c07, ambas publicadas com campanha paused para revisão. cada uma tem budget usd30, cost_cap, 1 adset active com bid 0,50, subscribe/pixel correto, brazil_regulation + identidades universais verificadas e 3 anúncios active herdando campaign_paused. criativos reutilizam mídia/copy da c07 com wrappers sanitizados e utms próprias c50/c12. active budget permaneceu usd153; impacto de entrega usd0. campanhas históricas c50 archived e c12 paused foram preservadas.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T17:42:56+00:00"
+      "updated_at": "2026-08-20T18:12:48+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T17:42:56+00:00"
+  "updated_at": "2026-08-20T18:12:48+00:00"
 }
