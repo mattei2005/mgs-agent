@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T23:44:39.852543-04:00",
+  "updated_at": "2026-08-20T00:07:37.236281-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.2",
+  "playbook_version": "1.0.3",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -605,5 +605,37 @@
       "23:00"
     ],
     "new_campaign_window": "18:00-23:30 São Paulo; start 00:30 next day"
+  },
+  "smart_bidding_tracking_limit": {
+    "campaign_number_min": 1,
+    "campaign_number_max": 59,
+    "trackable_pattern": "b01fb13c01..b01fb13c59",
+    "campaign_60_plus": "no Smart Bidding tracking; technical test only with explicit authorization",
+    "production_behavior_at_limit": "block creation and require new mapping/convention",
+    "do_not_reuse_deleted_numbers": true,
+    "source": "Rodolfo Mattei"
+  },
+  "test_create_clone_20260820": {
+    "authorization": "technical test; numbers above 59 allowed despite no SB tracking",
+    "source_campaign_number": 8,
+    "source_campaign_id": "120250209380780632",
+    "spend_usd": 0.0,
+    "attempted_numbers_deleted": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "current_findings": {
+      "native_deep_copy_error_subcode": 1885194,
+      "adset_error_subcode": 3858634,
+      "adset_error_title": "Advertiser is missing",
+      "required_source_compliance": [
+        "BRAZIL_REGULATION",
+        "VOLUNTARY_VERIFICATION"
+      ]
+    },
+    "final_attempt": "cooldown then compliance-corrected execution in progress"
   }
 }
