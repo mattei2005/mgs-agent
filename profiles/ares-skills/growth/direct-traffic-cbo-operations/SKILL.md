@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.6
+version: 1.0.7
 author: Ares
 license: internal
 metadata:
@@ -182,8 +182,12 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 9. **Concluir por login.** Acesso é validado só depois de abrir as páginas/relatórios e observar dados/filtros esperados.
 10. **Copiar criativo legado com `standard_enhancements`.** Em Graph v25, `/copies` pode falhar com `3858504` quando o `degrees_of_freedom_spec` da fonte ainda contém `creative_features_spec.standard_enhancements`; é erro de parâmetro não transitório, não recebe retry.
 11. **Reconstruir criativo dinâmico só pelo story ID.** Fontes com `asset_feed_spec` podem exigir `catalog_id`/`product_set_id`; story-only pode falhar com `1815017`. Extrair o payload dinâmico gravável real e nunca inventar esses IDs.
-12. **Tratar HTTP 200 sem ID como sucesso.** Em write não idempotente, `success=false` ou ausência de ID não confirma criação. Fazer GET por nome exato + linhagem antes de qualquer retry; se nada aparecer, classificar como falha.
+12. **Tratar HTTP 200 sem ID como sucesso.** Em write não idempotente, `success=false`, payload com `error` ou ausência de ID não confirma criação. Fazer GET por nome exato + linhagem antes de qualquer retry; se nada aparecer, classificar como falha. `execution_options=[validate_only]` retorna `success=true` sem ID por definição e nunca prova write real.
 13. **Assumir que o token que cria também deleta.** Validar a capacidade de cleanup no preflight. Se o token anunciante não remover o artefato, usar somente uma credencial de cleanup já autorizada e confirmar `DELETED` por GET.
+14. **Repetir write após checkpoint de segurança.** `code=31`/`error_subcode=3858385` (`Autentique sua conta`) bloqueia novas criações/edições até o humano concluir a autenticação no Ads Manager. Parar sem retry; a própria Meta informa que anúncios existentes continuam normalmente.
+15. **Exigir o mesmo `video_id` ou ordem ao reconstruir criativo dinâmico.** A Meta pode materializar novos IDs e reordenar vídeos. Reconciliar como conjunto/bijeção por título, duração, dimensão e evidência visual pixel-idêntica de frame, além de manter textos, links, CTA, formatos e regras exatos.
+16. **Criar anúncio imediatamente após o criativo.** Criativo recém-criado pode precisar de propagação. Aplicar espera limitada, executar `validate_only` e só então o POST real; erro de parâmetro ou segurança não recebe retry.
+17. **Limpar criativo antes do anúncio/campanha.** A ordem segura é anúncios → campanha/adset → criativos → assets técnicos. Remover o criativo primeiro pode bloquear o cleanup da campanha com `2446289` (`Ad Creative Is Incomplete`).
 
 ## Verification checklist
 

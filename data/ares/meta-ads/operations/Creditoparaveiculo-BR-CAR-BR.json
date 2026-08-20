@@ -180,12 +180,13 @@
     "authorized_by": "Rodolfo Mattei",
     "style": "report-specific Discord presentation",
     "daily_style": "aligned monospace tables for campaigns and account summary",
-    "daily_columns": ["Sinal", "Campanha", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
+    "daily_columns": ["Sinal", "Camp", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
     "daily_alignment": "Unicode display-width aware; every summary row has an explicit signal",
     "daily_budget_definition": "current campaign daily_budget from Meta at report generation time",
     "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
     "intraday_style": "aligned monospace table matching Rodolfo reference",
-    "intraday_columns": ["Sinal", "Campanha", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"],
+    "intraday_columns": ["Sinal", "Camp", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"],
+    "campaign_display_format": "CNN-DD/MM, e.g. C07-20/08",
     "intraday_cost_definition": "Meta cost per omni_purchase = campaign spend / actions.omni_purchase",
     "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
     "remove_id_rec": true,
@@ -216,12 +217,17 @@
       "name": "Creditoparaveiculo 13 G006 Intraday",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
-        "08:00",
-        "12:00",
+        "07:00",
+        "09:00",
+        "11:00",
+        "13:00",
         "15:00",
-        "20:00",
+        "17:00",
+        "19:00",
+        "21:00",
         "23:00 America/Sao_Paulo"
       ],
+      "action_only_checkpoint": "08:00 America/Sao_Paulo; preserve approved scale timing without publishing an extra report",
       "script": "creditoparaveiculo-intraday.sh",
       "no_agent": true,
       "deliver": "local",
@@ -247,7 +253,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T09:30:52-04:00",
+  "updated_at": "2026-08-20T09:35:56-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -465,7 +471,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.18",
+  "playbook_version": "1.0.19",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -594,7 +600,7 @@
         "purpose": "campaign status, spend pacing, Meta ROAS, SB actual/estimated ROI, confidence/delay, anomaly gate and recommendation",
         "delivery": "recurring script-only report",
         "thread_id": "1539832402744975450",
-        "schedule": "08:00,12:00,15:00,20:00,23:00 America/Sao_Paulo"
+        "schedule": "every 2 hours from 07:00 through 23:00 America/Sao_Paulo; action-only checkpoint remains 08:00"
       }
     ],
     "excluded_threads": [
@@ -673,10 +679,14 @@
     "current_phase": "D1 monitoring",
     "next_operational_checkpoints": [
       "07:00 São Paulo Daily previous day",
-      "08:00 São Paulo Intraday",
-      "12:00",
+      "07:00 São Paulo Intraday",
+      "09:00",
+      "11:00",
+      "13:00",
       "15:00",
-      "20:00",
+      "17:00",
+      "19:00",
+      "21:00",
       "23:00"
     ],
     "new_campaign_window": "18:00-23:30 São Paulo; start 00:30 next day"
