@@ -30,6 +30,14 @@
         {
           "text": "i have checked my whole ads account page and there is no error",
           "added": "2026-08-20"
+        },
+        {
+          "text": "I created a bug report here: https://developers.facebook.com/support/bugs/3397941523702775/",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Status Unresolved Posted",
+          "added": "2026-08-20"
         }
       ]
     },
@@ -62,7 +70,19 @@
       "accessed": "2026-08-20",
       "quotes": [
         {
-          "text": "Most access tokens are portable — you can use them from a mobile client, a web browser, or your server.",
+          "text": "Tier labels have been updated: “Standard Access” is now Limited Access, and “Advanced Access” is now Full Access.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "The Marketing API Access Tier controls your rate limits, Business Manager access, and system user capacity.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "If your app is only managing your ad account, standard access to the ads_read and ads_management permissions are sufficient. If your app is managing other people’s ad accounts, you need advanced access to the ads_read and/or ads_management permissions.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Manage an unlimited number of ad accounts. App admins or developers can make API calls on behalf of ad account admins or advertisers.",
           "added": "2026-08-20"
         }
       ]
@@ -71,13 +91,37 @@
       "id": 6,
       "url": "https://developers.facebook.com/docs/facebook-login/guides/access-tokens",
       "title": "Meta Access Tokens",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Most access tokens are portable — you can use them from a mobile client, a web browser, or your server.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "System User access tokens let your app perform programmatic, automated actions on Ad objects or Pages without requiring input from an app user or re-authentication.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Admin system users have full access to all assets owned by or shared with your business portfolio by default.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 7,
       "url": "https://developers.facebook.com/documentation/facebook-login/facebook-login-for-business",
       "title": "Facebook Login for Business",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Access is inherited from your app user’s current account access; your app can access the same business assets that the app user currently has access to.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Businesses onboarding to your app must have, or be willing to create, a business portfolio",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 8,
@@ -112,15 +156,15 @@
       "accessed": "2026-08-20",
       "quotes": [
         {
-          "text": "I was receiving the same message, and no email was appearing in the authentication section. I reached out to Meta Support, and they were able to walk me through getting my Meta account authenticated.",
-          "added": "2026-08-20"
-        },
-        {
           "text": "I resolved it by going to the Ads Manager base page, then drill down into the ad, then at the top right I see the error message but with a \"Start Authentication\" button. Click that which walks you through simple email verification, allowing you to run your ad once complete.",
           "added": "2026-08-20"
         },
         {
           "text": "I get that message every few months usually... (And I am home. Not travelling or anything.) I only need to check an ad, click on \"start authentication\" and I get a code via email.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "I was receiving the same message, and no email was appearing in the authentication section. I reached out to Meta Support, and they were able to walk me through getting my Meta account authenticated.",
           "added": "2026-08-20"
         }
       ]
@@ -129,7 +173,13 @@
       "id": 11,
       "url": "https://www.facebook.com/business/help/708679622611131",
       "title": "Meta Business Help - Add Partners",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "You can add partners (example: an agency you work with) to your organization’s business portfolio in Meta Business Suite by either:",
+          "added": "2026-08-20"
+        }
+      ]
     }
   ]
 }
