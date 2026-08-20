@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.9
+version: 1.0.10
 author: Ares
 license: internal
 metadata:
@@ -186,11 +186,12 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 11. **Reconstruir criativo dinâmico só pelo story ID.** Fontes com `asset_feed_spec` podem exigir `catalog_id`/`product_set_id`; story-only pode falhar com `1815017`. Extrair o payload dinâmico gravável real e nunca inventar esses IDs.
 12. **Tratar HTTP 200 sem ID como sucesso.** Em write não idempotente, `success=false`, payload com `error` ou ausência de ID não confirma criação. Fazer GET por nome exato + linhagem antes de qualquer retry; se nada aparecer, classificar como falha. `execution_options=[validate_only]` retorna `success=true` sem ID por definição e nunca prova write real.
 13. **Assumir que o token que cria também deleta.** Validar a capacidade de cleanup no preflight. Se o token anunciante não remover o artefato, usar somente uma credencial de cleanup já autorizada e confirmar `DELETED` por GET.
-14. **Interpretar `code=31`/`error_subcode=3858385` como bloqueio manual do Ads Manager.** É um checkpoint de segurança/confiança da rota de API; o Ads Manager humano pode continuar operacional. Identificar o usuário do token, revisar Segurança/Qualidade/sessões e comparar o mesmo `validate_only` entre a sessão/navegador confiável e o servidor. Não alterar payload nem exigir token novo sem evidência.
+14. **Interpretar `code=31`/`error_subcode=3858385` como problema de payload ou IP da VPS.** A Meta documenta tokens como portáveis entre navegador e servidor. Esse subcode é um checkpoint de autenticação do anunciante; o prompt pode ficar oculto até editar/criar um anúncio e tentar publicar no Ads Manager. Procurar `Verifying your changes → Start Authentication`, concluir e-mail/SMS e só então repetir `validate_only`. Se a API continuar bloqueada sem ação visível, registrar como variante API-only e escalar com as threads/bug report oficiais.
 15. **Exigir o mesmo `video_id` ou ordem ao reconstruir criativo dinâmico.** A Meta pode materializar novos IDs e reordenar vídeos. Reconciliar como conjunto/bijeção por título, duração, dimensão e evidência visual pixel-idêntica de frame, além de manter textos, links, CTA, formatos e regras exatos.
 16. **Criar anúncio imediatamente após o criativo.** Criativo recém-criado pode precisar de propagação. Aplicar espera limitada, executar `validate_only` e só então o POST real; erro de parâmetro ou segurança não recebe retry.
 17. **Limpar criativo antes do anúncio/campanha.** A ordem segura é anúncios → campanha/adset → criativos → assets técnicos. Remover o criativo primeiro pode bloquear o cleanup da campanha com `2446289` (`Ad Creative Is Incomplete`).
-18. **Usar token humano em servidor sem comparar confiança de localização.** Se o mesmo `validate_only` passar no navegador confiável e falhar no egress da VPS, tratar como evidência de localização/dispositivo. Não mascarar com retries; propor System User corporativo ou egress confiável somente com aprovação estrutural de Rodolfo.
+18. **Ignorar tier e role do app.** Header `ads_api_access_tier=development_access` indica tier limitado/desenvolvimento. Conferir no App Dashboard o Marketing API Access Tier, acesso de `ads_management` e se o usuário anunciante é Admin/Developer/Tester. Limited serve a pilotos por app roles; produção com usuários externos exige o acesso/review aplicável.
+19. **Tratar System User como única arquitetura.** Facebook Login for Business suporta User Access Token que herda os assets atuais do usuário, sem mover todas as Pages para uma única BM. System User/BISU exige assets owned/shared ou explicitamente designados em business portfolios e pode ser inviável em alto volume; escolher arquitetura com Rodolfo.
 
 ## Verification checklist
 

@@ -1,0 +1,24 @@
+{
+  "html_url": "https://github.com/facebook/facebook-python-business-sdk/issues/722",
+  "title": "We think that someone may have tried to access your account without permission. For your protection, you won't be able to create or modify ads until you've authenticated your account in Ads Manager. Your existing ads will continue to run normally.",
+  "state": "closed",
+  "created_at": "2026-01-22T06:59:05Z",
+  "updated_at": "2026-01-28T01:10:33Z",
+  "closed_at": "2026-01-28T01:10:33Z",
+  "body": "I am getting this error - We think that someone may have tried to access your account without permission. For your protection, you won't be able to create or modify ads until you've authenticated your account in Ads Manager. Your existing ads will continue to run normally.\n\nEven though I have launched manually from ads manager and its working fine, I am not prompted to authenticate my account. After that also, it is not working, is there anyone facing the same issue?",
+  "labels": [],
+  "comments": [
+    {
+      "author": "neerajideaclan",
+      "created_at": "2026-01-22T08:24:21Z",
+      "updated_at": "2026-01-22T08:24:21Z",
+      "body": "I am also facing the same issue.\nThe campaigns and adsets are being created but as soon as I try to create Ads, it is throwing this error\n\n`FacebookRequestError: \\n\\n  Message: Call was not successful\\n  Method:  POST\\n  Path:    https://graph.facebook.com/v21.0/act_659077493278187/ads\\n  Params:  {'name': 'wkc-18-Jan-video_7a32db2f89a94df59f39886c34aaf463.mp4-v5', 'status': 'ACTIVE', 'creative': '{\\\"creative_id\\\":\\\"191699367587<id>\\\"}', 'adset_id': '120243046684680670', 'campaign_id': '120243046680340<id>'}\\n\\n  Status:  200\\n  Response:\\n    {\\n      \\\"error\\\": {\\n        \\\"message\\\": \\\"This request requires the user to take a pending action\\\",\\n        \\\"type\\\": \\\"OAuthException\\\",\\n        \\\"code\\\": 31,\\n        \\\"error_subcode\\\": 3858385,\\n        \\\"is_transient\\\": false,\\n        \\\"error_user_title\\\": \\\"Please authenticate your account\\\",\\n        \\\"error_user_msg\\\": \\\"We think someone may have tried to access your account without permission. For your protection, you won't be able to create or modify ads until you authenticate your account in Ads Manager. Your existing ads will continue to run normally.\\\",\\n        \\\"fbtrace_id\\\": \\\"Aj1VSfvFWODHJaIFC7NAeLN\\\"\\n      }\\n    }\\n\"`\n\n"
+    },
+    {
+      "author": "shrmnk",
+      "created_at": "2026-01-28T01:10:33Z",
+      "updated_at": "2026-01-28T01:10:33Z",
+      "body": "Hey folks, support for the API is available at https://developers.facebook.com/support\n\nThis GitHub issues page is specifically for issues relating to the Python SDK."
+    }
+  ]
+}

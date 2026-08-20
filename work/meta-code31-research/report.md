@@ -7,7 +7,7 @@ A hipótese de localização da VPS deve ser retirada. A documentação oficial 
 O caso da operação corresponde a dois fenômenos que precisam ser separados:
 
 1. **Checkpoint real de autenticação do anunciante (#3858385).** Em muitos casos, o botão **Start Authentication** só aparece depois de editar/criar um anúncio e tentar publicá-lo. O fluxo envia código ao e-mail ou telefone conectado ao perfil.[4][9][10]
-2. **Variante API-only sem ação visível.** Existem ao menos duas threads no próprio Meta Developer Community com `code=31`, `subcode=3858385`, anúncios existentes normais, criação via API bloqueada e nenhuma ação pendente visível no Ads Manager. As threads continuam marcadas como não resolvidas e apontam para o bug report `3397941523702775`.[1][2][3]
+2. **Variante API-only sem ação visível.** Existem ao menos duas threads no próprio Meta Developer Community com `code=31`, `subcode=3858385`, anúncios existentes normais, criação via API bloqueada e nenhuma ação pendente visível no Ads Manager. As threads continuam marcadas como não resolvidas e apontam para o bug report `3397941523702775`.[1][2]
 
 A cronologia da operação favorece o checkpoint de autenticação, não falta de payload: o mesmo token/app conseguiu criar e ler um anúncio PAUSED; o `31/3858385` apareceu somente depois, nas tentativas seguintes. Os testes `validate_only` com criativo fonte ativo e criativo sanitizado retornam o mesmo bloqueio, portanto o payload criativo não é a causa imediata.
 
@@ -30,7 +30,7 @@ Em uma thread extensa do Reddit, a solução mais repetida foi editar o texto de
 
 ### 2. Existe uma variante API-only aparentemente bugada
 
-Uma thread oficial descreve exatamente: Marketing API falha com `31/3858385`, anúncios existentes continuam, Data Access Renewal já foi concluída e não aparece qualquer ação de segurança no Ads Manager.[1] Outra thread oficial repete “checked my whole ads account page and there is no error”, está marcada `Unresolved` e aponta ao mesmo bug report.[2][3]
+Uma thread oficial descreve exatamente: Marketing API falha com `31/3858385`, anúncios existentes continuam, Data Access Renewal já foi concluída e não aparece qualquer ação de segurança no Ads Manager.[1] Outra thread oficial repete “checked my whole ads account page and there is no error”, está marcada `Unresolved` e aponta ao mesmo bug report.[2]
 
 Isso não prova que a Meta já reconheceu formalmente a causa; prova que o caso não é isolado e que há um bug report público correspondente.
 
@@ -84,7 +84,7 @@ Se não houver botão ou se o código não limpar a API:
 
 - anexar o JSON sanitizado ao bug report `3397941523702775`;
 - abrir Meta Support citando as duas threads oficiais;
-- anexar horário, endpoint, app ID, ad account ID e `fbtrace_id`, sem token.[1][2][3]
+- anexar horário, endpoint, app ID, ad account ID e `fbtrace_id`, sem token.[1][2]
 
 ### Passo 4 — app access audit
 
@@ -102,7 +102,6 @@ Em paralelo, conferir tier/permissões/app role. Se o app estiver Limited Access
 
 [1] https://developers.facebook.com/community/threads/845129991936233 — Meta Community - Marketing API error 31/subcode 3858385
 [2] https://developers.facebook.com/community/threads/1820634641959662 — Meta Community - no Ads Manager error, code31/3858385
-[3] https://developers.facebook.com/support/bugs/3397941523702775 — Meta Bug Report 3397941523702775
 [4] https://www.jonloomer.com/chatgpt-ads-missing-audience-segments-account-authentication-errors — Jon Loomer - Account Authentication Error 3858385
 [5] https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization — Meta Marketing API Authorization
 [6] https://developers.facebook.com/docs/facebook-login/guides/access-tokens — Meta Access Tokens
