@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T00:45:10.988097-04:00",
+  "updated_at": "2026-08-20T00:49:56.717221-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -796,10 +796,15 @@
       "error_data",
       "blame_field_specs"
     ],
-    "cross_process_state": "data/ares/meta-ads/cache/meta-api-throttle-state.json"
+    "cross_process_state": "data/ares/meta-ads/cache/meta-api-throttle-state.json",
+    "helper_implementation": "active in scripts/ares-meta-common.py",
+    "state_gate_verified_offline": true,
+    "manual_cooldown_reason": "code17 without legacy usage header; 65-minute conservative fallback",
+    "manual_cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
+    "resume_route": "temporary hourly no-agent watchdog; read/cleanup only, never restarts tests"
   },
   "post_cooldown_test_sequence": {
-    "status": "implementation_complete_offline_tests_passed_waiting_cooldown",
+    "status": "scheduled_after_conservative_cooldown",
     "cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
     "test_numbers": {
       "test1": 70,
@@ -811,7 +816,13 @@
     "test3": "async batch minimal only when tests 1 and 2 both fail",
     "runner": "creditoparaveiculo-create-clone-sequence.py",
     "wrapper": "creditoparaveiculo-create-clone-sequence.sh",
-    "offline_validation": "26 tests passed; py_compile/bash syntax passed",
-    "cleanup": "conclusive batch readback required; deferred readback retains PAUSED IDs"
+    "offline_validation": "28 tests passed; py_compile and bash syntax passed; dry-run Meta calls=0",
+    "cleanup": "conclusive batch readback required; deferred readback retains PAUSED IDs",
+    "scheduled_for": "2026-08-20T02:20:00-03:00",
+    "one_shot_internal_id": "85701628f09f",
+    "resume_watchdog_internal_id": "890382a1555a",
+    "resume_watchdog_repeat": 6,
+    "full_error_json": true,
+    "deep_copy_disabled_tests_2_3": true
   }
 }

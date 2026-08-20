@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar cooldown. Se Rodolfo quiser continuar o diagnóstico, testar apenas async batch nativo ou capturar HAR/payload sanitizado do Ads Manager para o advertiser BR; não repetir criação manual atual.",
+      "next_step": "Aguardar execução determinística pós-cooldown e a entrega do resumo; JSON completo no audit. Em DEFERRED, watchdog relê e confirma cleanup.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "teste criação+clone concluído com blockers e usd0 spend. campanhas técnicas c61-c69 que chegaram a existir foram todas deleted por cleanup e validadas. from-scratch: campaign shell cria, adset financeiro br bloqueia 3858634 advertiser is missing/compliance_section mesmo com dsa_recommendations=garagem brasil e campos dsa. clone: deep sync bloqueia 1885194 copy too large; shallow shell cria, async batch é próximo diagnóstico após cooldown. rate limit 17/2446079 encerrou writes. campanhas iniciais 07-11 não foram alteradas.",
+      "state": "sequência pós-cooldown implementada e agendada 02:20 sp. helper meta agora lê x-business-use-case-usage em get/post/batch, soft limit 80%, estimated_time em minutos para 17/613, exponencial sem estimativa, 10s só 5xx, batch readbacks e json completo. cooldown local até 05:19:35z. teste1 c70 direto paused; teste2 c71 adset copy deep_copy=false paused; teste3 c72 async mínimo só se 1/2 falharem. cleanup só após readback conclusivo; watchdog temporário retoma deferred sem reiniciar testes. 28 testes offline passaram.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T04:19:02+00:00"
+      "updated_at": "2026-08-20T04:49:56+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T04:19:02+00:00"
+  "updated_at": "2026-08-20T04:49:56+00:00"
 }

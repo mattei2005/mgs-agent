@@ -60,6 +60,11 @@ def test_test3_runs_only_when_both_test1_and_test2_fail():
     assert mod.should_run_test3({'status': 'rejected_by_meta'}, {'status': 'copy_compliant_updated_readable'}) is False
 
 
+def test_copy_paths_explicitly_disable_deep_copy():
+    source = SCRIPT.read_text()
+    assert source.count("'deep_copy': 'false'") >= 2
+
+
 def test_minimal_readback_contract():
     mod = load_module()
     readback = {
