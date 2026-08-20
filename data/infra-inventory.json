@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T15:41:48-04:00",
+    "updated_at": "2026-08-20T16:08:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8135,12 +8135,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 21313,
-      "modified_at": "2026-08-20T15:48:28-04:00",
-      "sha256": "e6ddc2a98e6ea8e214f77f88deaaa6f02249e7629df238d97bed00c0a2984fb4",
+      "size_bytes": 21616,
+      "modified_at": "2026-08-20T16:07:28-04:00",
+      "sha256": "c4539641742c30cd1f1f916232b12f462f441e0ff431d1090ad48db9f3ec2fcf",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T15:48:28-04:00",
-      "validation": "Skill v1.0.21 live/mirror SHA match. Correção de Rodolfo: Diário 07/11/14/20; Intraday contínuo 2h inalterado; snapshot 03:00 restrito às três threads CPV; demais threads seguem Zeus."
+      "updated_at": "2026-08-20T16:08:43-04:00",
+      "validation": "Skill v1.0.22 live/mirror SHA match. Added exact-key validation for standard_enhancements so standard_enhancements_catalog does not cause a false failure; prior draft/object reconciliation and CPV schedules preserved."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

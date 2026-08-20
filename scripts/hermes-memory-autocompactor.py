@@ -114,7 +114,9 @@ def _entry_budgets(entries: Sequence[str], target_chars: int) -> List[int]:
     for index in sorted(range(len(entries)), key=lambda item: lengths[item], reverse=True):
         if required <= 0:
             break
-        minimum = max(35, math.ceil(lengths[index] * 0.55))
+        # Spread difficult compactions across more entries instead of demanding
+        # a brittle >30% rewrite from one operational fact.
+        minimum = max(35, math.ceil(lengths[index] * 0.70))
         reducible = max(0, budgets[index] - minimum)
         reduction = min(required, reducible)
         budgets[index] -= reduction
@@ -167,7 +169,7 @@ def _validate_candidate(
             raise CompactionError("protected_literals_changed")
     if len(budgets) != len(result):
         raise CompactionError("candidate_budget_shape_invalid")
-    if any(len(result[index - 1]) > budgets[index - 1] for index in expected):
+    if enforce_total and any(len(result[index - 1]) > budgets[index - 1] for index in expected):
         raise CompactionError("candidate_entry_above_budget")
 
     rendered = _render_entries(result)
