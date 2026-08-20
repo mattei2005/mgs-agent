@@ -6450,7 +6450,7 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1538915006148644939",
       "source_thread_id": "1538878021455319140",
-      "status": "hotfix_validated_restart_pending",
+      "status": "activated_validated",
       "installed_before": "6fc69c9d705a41f7b31a200b12a75677857e9a8a",
       "target_upstream_sha": "4323c67dcc6048fc8e311cdff7600d3d6a17807f",
       "target_version": "0.20.2",
@@ -6509,7 +6509,7 @@
       ],
       "rollback_wrapper": "/root/.local/bin/hermes-v0200-main-c0106e50-mgs",
       "active_runtime_path": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d",
-      "active_runtime_sha": "72bb673285f5e6e8f4adcff7c6c4a999401f72d0",
+      "active_runtime_sha": "1021e0724fe20134340420cb7e7117419fb68404",
       "active_runtime_metadata_version": "0.20.2",
       "active_wrapper_target": "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
       "hotfix_20260819": {
@@ -6518,11 +6518,27 @@
         "root_cause": "auto-thread retry ignored Discord's endpoint-specific retry_after and concurrent parent-channel messages retried the same bucket",
         "commit": "1021e0724fe20134340420cb7e7117419fb68404",
         "backup": "/root/.hermes/secure-backups/discord-auto-thread-rate-limit-20260819T224552-0400",
-        "status": "validated_restart_pending",
+        "status": "activated_validated",
         "validation": "22 focused Discord tests PASS; real discord.RateLimited classification PASS; py_compile PASS; canonical patch reverse-check PASS; guard 465 tests + 6 subtests PASS",
+        "activation": {
+          "service": "ares-gateway.service",
+          "pid": 2171780,
+          "active_since": "2026-08-19T23:03:03-04:00",
+          "nrestarts": 0,
+          "discord_connected": true,
+          "finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260820T030253Z-2171629.log",
+          "validated_at": "2026-08-20T03:03:15Z"
+        },
         "report_infra": {
           "channel_id": "1498132022634483894",
           "message_id": "1539830019860201534",
+          "http": 200,
+          "content_empty": true,
+          "readback": "PASS"
+        },
+        "activation_report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1539832494671667241",
           "http": 200,
           "content_empty": true,
           "readback": "PASS"

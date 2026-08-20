@@ -10,7 +10,7 @@
 - Scope: semantic port of the complete reviewed Hermes 0.20.0 MGS customization surface to upstream 0.20.2 plus the 2026-08-19 Discord auto-thread rate-limit retention fix.
 - Preservation: 44 original paths audited; 42 retained in the candidate, 2 absorbed upstream with commit and test evidence, plus 1 upstream compatibility test adapted, for 43 final patch paths.
 - Validation: reverse-check PASS; 22 focused Discord tests PASS; real `discord.RateLimited` classification PASS; guard 465 tests + 6 subtests PASS.
-- Status: active runtime source validated; Ares gateway restart required to load the hotfix.
+- Status: active and validated in Ares gateway after detached restart; PID `2171780`, Discord connected, zero service restarts.
 - Upstream note: `origin/main` advanced after the reviewed 2026-08-17 baseline; those unrelated commits are outside this narrow incident hotfix and were not silently folded into it.
 
 ## Rollback production patch
