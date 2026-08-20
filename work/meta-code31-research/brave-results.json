@@ -1,0 +1,985 @@
+[
+  {
+    "query": "\"3858385\" Facebook Marketing API",
+    "results": [
+      {
+        "title": "Marketing API error 31 / subcode 3858385 when creating ads",
+        "url": "https://developers.facebook.com/community/threads/845129991936233/",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      }
+    ]
+  },
+  {
+    "query": "\"error_subcode\": 3858385 Facebook",
+    "results": [
+      {
+        "title": "Facebook Graph API error code list - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/10478812/facebook-graph-api-error-code-list",
+        "description": "I knew there is FQL error code list, http://fbdevwiki.com/wiki/Error_codes#FQL_Errors, but it seems out of date and does not provide any message about the &quot;error_subcode&quot;. ... Save this answer. ... Show activity on this post. Facebook Developer Wiki (unofficial) contain not only list of FQL error codes but others too it&#x27;s somehow updated but not contain full list of possible error codes.",
+        "extra_snippets": [
+          "I knew there is FQL error code list, http://fbdevwiki.com/wiki/Error_codes#FQL_Errors, but it seems out of date and does not provide any message about the \"error_subcode\". ... Save this answer. ... Show activity on this post. Facebook Developer Wiki (unofficial) contain not only list of FQL error codes but others too it's somehow updated but not contain full list of possible error codes.",
+          "Or to be specific, this page: developers.facebook.com/docs/graph-api/using-graph-api/… 2018-03-08T10:16:32.673Z+00:00 ... Save this answer. ... Show activity on this post. I have also found some more error subcodes, in case of OAuth exception.",
+          "{ \"error\": { \"message\": \"Error invalidating access token: The session has been invalidated because the user has changed the password.\", \"type\": \"OAuthException\", \"code\": 190, \"error_subcode\": 460 } }",
+          "The OAuth Errors link is no longer working. The correct URL is in another answer below, developers.facebook.com/docs/reference/api/errors 2013-06-14T06:39:21.763Z+00:00"
+        ]
+      },
+      {
+        "title": "Common Facebook Errors - Re:amaze",
+        "url": "https://support.reamaze.com/kb/3rd-party-integrations/common-facebook-errors",
+        "description": "An error occurred posting to Facebook: type: GraphMethodException, code: 100, error_subcode: 33, message: <strong>Unsupported post request</strong>. Object with ID &#x27;[COMMENT ID NUMBER]&#x27; does not exist, cannot be loaded due to missing permissions, or does not support this operation.",
+        "extra_snippets": [
+          "An error occurred posting to Facebook: type: OAuthException, code: 190, error_subcode: 460, message: Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons., x-fb-trace-id: Eihnec0vEYO [HTTP 400]. Please try again or contact support.",
+          "An error occured posting to Facebook: type: OAuthException, code: 200, error_subcode: 2424008, message: Permissions error, error_user_title: Page Publishing Authorization is Required, error_user_msg: Access to your Pages is temporarily restricted until you complete Publishing Authorization., x-fb-trace-id: DMvvPiYaXxx [HTTP 400].",
+          "An error occurred posting to Facebook: type: OAuthException, code: 551, error_subcode: 1545041, message: (#551) This person isn't available right now, x-fb-trace-id: BD8bLj0X0/I [HTTP 400].",
+          "An error occurred posting to Facebook: type: OAuthException, code: 10, error_subcode: 2018278, message: (#10) This message is sent outside of allowed window."
+        ]
+      },
+      {
+        "title": "What does it mean \"error_subcode\": 33 in the facebook response error? - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/47437362/what-does-it-mean-error-subcode-33-in-the-facebook-response-error",
+        "description": "<strong>Object with ID &#x27;me&#x27; does not exist, cannot be loaded due to missing permissions, or does not support this operation</strong>. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api&quot;, &quot;type&quot;: &quot;GraphMethodException&quot;, ...",
+        "extra_snippets": [
+          "After I added him as Administrator to the Facebook TEST app, the issue resolved and he could register and log in on his own development environment. So, you may want to check if this is applicable to you. An easy way to check is to use the keys for the real app in your development environment. ... Save this answer. ... Show activity on this post. Error subcode 33 information as per Facebook official documentation:",
+          "But in the Facebook API documentation about Graph API https://developers.facebook.com/docs/graph-api/using-graph-api/ , I cannot find error_subcode with value 33.",
+          "I want that I can rely on this subcode to verify that I don't have permissions to get the resource from Facebook API because I don't want to rely on the error message.",
+          "Object with ID 'me' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\", \"type\": \"GraphMethodException\", \"code\": 100, \"error_subcode\": 33, \"fbtrace_id\": \"____\" } }"
+        ]
+      },
+      {
+        "title": "Error codes - Meta for Developers - Facebook",
+        "url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/support/error-codes",
+        "description": "{ &quot;error&quot;: { &quot;message&quot;: &quot;&lt;MESSAGE&gt;&quot;, &quot;type&quot;: &quot;&lt;TYPE&gt;&quot;, &quot;code&quot;: &lt;CODE&gt;, &quot;error_data&quot;: { &quot;messaging_product&quot;: &quot;whatsapp&quot;, &quot;details&quot;: &quot;&lt;DETAILS&gt;&quot; }, &quot;error_subcode&quot;: &lt;ERROR_SUBCODE&gt;, &quot;fbtrace_id&quot;: &quot;&lt;FBTRACE_ID&gt;&quot; } }",
+        "extra_snippets": [
+          "{ \"error\": { \"message\": \"<MESSAGE>\", \"type\": \"<TYPE>\", \"code\": <CODE>, \"error_data\": { \"messaging_product\": \"whatsapp\", \"details\": \"<DETAILS>\" }, \"error_subcode\": <ERROR_SUBCODE>, \"fbtrace_id\": \"<FBTRACE_ID>\" } }",
+          "{ \"error\": { \"message\": \"(#130429) Rate limit hit\", \"type\": \"OAuthException\", \"code\": 130429, \"error_data\": { \"messaging_product\": \"whatsapp\", \"details\": \"Cloud API message throughput has been reached.\" }, \"error_subcode\": 2494055, \"fbtrace_id\": \"Az8or2yhqkZfEZ-_4Qn_Bam\" } }"
+        ]
+      },
+      {
+        "title": "fb.md · GitHub",
+        "url": "https://gist.github.com/nemosupremo/b90a752eb715858a9cc7c010b3d128ff",
+        "description": "{ &quot;error&quot;: { &quot;code&quot;: 1, &quot;error_subcode&quot;: 1357045, &quot;message&quot;: &quot;unknown error (empty response)&quot;, &quot;type&quot;: &quot;http&quot;, &quot;status&quot;: 0 } }",
+        "extra_snippets": [
+          "{ \"error\": { \"code\": 1, \"error_subcode\": 1357045, \"message\": \"unknown error (empty response)\", \"type\": \"http\", \"status\": 0 } }",
+          "Facebook continues to make real-time improvements to its platform to protect people's data. We are making the following changes to maintain trust with people who use our products. These changes are never easy, but by focusing our efforts, we can put stronger protections in place to combat potential abuse.",
+          "Please direct any questions below and we will get back to you as soon as possible. For more general or implementation questions regarding the Facebook platform, please visit the Facebook Developer Community Group: https://www.facebook.com/groups/fbdevelopers/.",
+          "Facebook would like to thank you and the entire global developer community for working with us to create a better experience for people."
+        ]
+      },
+      {
+        "title": "php - Facebook messenger API throws error after deprecation - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/60538711/facebook-messenger-api-throws-error-after-deprecation",
+        "description": "I&#x27;m suddenyly getting errors in my facebook messenger service that sends messages from my website to a facebook chat. The error is &quot;type&quot;:&quot;OAuthException&quot;,&quot;code&quot;:10,&quot;error_subcode&quot;:2018278,&quot;fbtrac...",
+        "extra_snippets": [
+          "I'm suddenyly getting errors in my facebook messenger service that sends messages from my website to a facebook chat. The error is \"type\":\"OAuthException\",\"code\":10,\"error_subcode\":2018278,\"fbtrace_id\":\"AJSz9EQPjUFjShr0QK34yEr\"}} {\"error\":{\"message\":\"(#10) This message is sent outside of allowed window.",
+          "Facebook API fails and Graph works.",
+          "“This message is sent outside of allowed window.” means you are trying to send a message in a situation, where you are not allowed to do so any more. developers.facebook.com/docs/messenger-platform/policy/… has a quite extensive explanation of what you can send when."
+        ]
+      },
+      {
+        "title": "restfb - Facebook error subcode 1870034 - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/51152221/facebook-error-subcode-1870034",
+        "description": "{&quot;error&quot;:{&quot;message&quot;:&quot;Permissions error&quot;,&quot;type&quot;:&quot;OAuthException&quot;,&quot;code&quot;:200,&quot;error_subcode&quot;:1870047,&quot;is_transient&quot;:false,&quot;error_user_title&quot;:&quot;<strong>Audience Size too Low</strong>&quot;,&quot;error_user_msg&quot;:&quot;You cannot remove users from this audience because it will result ...",
+        "extra_snippets": [
+          "I have a automated job to publish some data to facebook through API, it was working fine until recently it started throwing error com.restfb.exception.FacebookOAuthException: Received Facebook error response of type OAuthException: Permissions error (code 200, subcode 1870034)",
+          "I'm having the same issue for error subcode 1870034, which seems to come from a Custom Audience TOS issue, here is the full error message · You'll need to agree to the Custom Audience terms before you can create or edit an audience of CUSTOM type. You can try accept the Custom Audience TOS using this link https://www.facebook.com/ads/manage/customaudiences/tos/?act=AD_ACCOUNT_ID (Though you'd probably need to own the ad account in this case)",
+          "I googled subcode 1870034 but no help, if anyone have encountered this error previously ,please explain regarding this subcode. Thanks for any help. ... Dunno. Suggest you go check the changelog first of all, to see what might have happened regarding the specific functionality you are using there. ... There are no recent changes, and as i mentioned it is an automated job which is successfully running for quite a long time. just wanted to know the description for subcode 1870034",
+          "{\"error\":{\"message\":\"Permissions error\",\"type\":\"OAuthException\",\"code\":200,\"error_subcode\":1870047,\"is_transient\":false,\"error_user_title\":\"Audience Size too Low\",\"error_user_msg\":\"You cannot remove users from this audience because it will result in a low audience size.\",\"fbtrace_id\":\"xxx\"}} Here you can find an official answer from FB team https://developers.facebook.com/support/bugs/2093728693993530"
+        ]
+      },
+      {
+        "title": "Definition for Facebook Error Code =190 Subcode = 2069032 - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/66665300/definition-for-facebook-error-code-190-subcode-2069032",
+        "description": "The error code 190 is about access token, but with the subcode 2069032 seems more related to the token you&#x27;re using. I can replicate the scenario using the wrong token type for the related API call, as example: { &quot;error&quot;:{ &quot;message&quot;:&quot;Invalid OAuth 2.0 Access Token&quot;, &quot;type&quot;:&quot;OAuthException&quot;, &quot;code&quot;:190, &quot;error_subcode&quot;:2069032, &quot;is_transient&quot;:false, &quot;error_user_title&quot;:&quot;User Access Token Is Not Supported&quot;, &quot;error_user_msg&quot;:&quot;This method must be called with a Page Access Token for New Page Experience&quot;, } }",
+        "extra_snippets": [
+          "The error code 190 is about access token, but with the subcode 2069032 seems more related to the token you're using. I can replicate the scenario using the wrong token type for the related API call, as example: { \"error\":{ \"message\":\"Invalid OAuth 2.0 Access Token\", \"type\":\"OAuthException\", \"code\":190, \"error_subcode\":2069032, \"is_transient\":false, \"error_user_title\":\"User Access Token Is Not Supported\", \"error_user_msg\":\"This method must be called with a Page Access Token for New Page Experience\", } }"
+        ]
+      },
+      {
+        "title": "wcf - Facebook access token gives error code 190 and error subcode 463 for user search - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/28811553/facebook-access-token-gives-error-code-190-and-error-subcode-463-for-user-search",
+        "description": "<strong>You are using an access token that has expired</strong> you need to send the user back through the OAuth Login flow. https://developers.facebook.com/docs/facebook-login/access-tokens#extending",
+        "extra_snippets": [
+          "I'm trying to make HttpWebRequest for the facebook url using a WCF service. It gives a bad request error in WCF: https://graph.facebook.com/search?type=user&access_token=\" + Convert.ToString(",
+          "The current time is Monday, 02-Mar-15 04:47:31 PST.\", \"type\": \"OAuthException\", \"code\": 190, \"error_subcode\": 463 } } This code worked fine earlier as a Java Rest service. But now it does not work this way. Any pointers would be helpful. Thanks. ... Save this answer. ... Show activity on this post. You are using an access token that has expired you need to send the user back through the OAuth Login flow. https://developers.facebook.com/docs/facebook-login/access-tokens#extending",
+          "Copyhttps://graph.facebook.com/search?type=user&access_token=<access_token>&q=f=Pulkit&offset=0&limit=1000&fields=name,link,gender,languages,location,address,education,work,picture · If I directly try to access this url through browser it gives the below error msg:"
+        ]
+      },
+      {
+        "title": "post - Facebook Graph API, error_subcode: 1366063 - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/42511832/facebook-graph-api-error-subcode-1366063",
+        "description": "It&#x27;s been three days that the Facebook Graph Api fails to publish some of the photos of our users. Only about 1% of the photo fails. This is the error message, but I could not find the subcode anyw...",
+        "extra_snippets": [
+          "It's been three days that the Facebook Graph Api fails to publish some of the photos of our users. Only about 1% of the photo fails. This is the error message, but I could not find the subcode anywhere!",
+          "That sounds weird. Sugget you file a bug report, developers.facebook.com/bugs",
+          "Ok, it was a bug of Facebook...",
+          "-responseData: array:1 [ \"error\" => array:8 [ \"message\" => \"Invalid parameter\" \"type\" => \"OAuthException\" \"code\" => 100 \"error_subcode\" => 1366063 \"is_transient\" => false \"error_user_title\" => \"The album is no longer available\" \"error_user_msg\" => \"Try to create a new album\" \"fbtrace_id\" => \"DJsbfZeBYQD\" ] ] Someone has this problem too? This seems to be an album problem, but I tried to delete the album in witch the photos goes on several profiles, but the graph api always recreates it correctly!! Thanks guys!!! EDIT: I'll add some details. We use the SDK v4 via composer: ... $request = new FacebookRequest( $session, 'POST', '/me/photos', array ( 'url' => 'photo.jpg', 'message' => 'message', ) );"
+        ]
+      },
+      {
+        "title": "facebook - Meta Marketing API: \"Invalid Parameter\" error (code 100, subcode 3699001) when fetching insights - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/79431142/meta-marketing-api-invalid-parameter-error-code-100-subcode-3699001-when-f",
+        "description": "I&#x27;m working with the Meta Marketing API to retrieve insights for campaigns, ad sets, and ads. However, when I make a request to the following endpoint: https://graph.facebook.com/v21.0/{entity_ids[...",
+        "extra_snippets": [
+          "I'm working with the Meta Marketing API to retrieve insights for campaigns, ad sets, and ads. However, when I make a request to the following endpoint: https://graph.facebook.com/v21.0/{entity_ids[...",
+          "https://graph.facebook.com/v21.0/{entity_ids[i]}/insights? I consistently receive the following error response: { \"error\": { \"message\": \"Invalid parameter\", \"type\": \"OAuthException\", \"code\": 100, \"error_subcode\": 3699001, \"is_transient\": false, \"error_user_title\": \"Attribut indisponible\", \"error_user_msg\": \"Cet attribut n’est pas encore disponible pour vous\", \"fbtrace_id\": \"AoLUSTRB7wFmPwsBdr98xdN\" } }",
+          "4 Unable to create ad creative using Facebook graph api",
+          "2 Facebook Marketing API : Get results and cost per result of a Campaign"
+        ]
+      },
+      {
+        "title": "facebook - Meta Ad Library API permission error (subcode 2332004) - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/79015396/meta-ad-library-api-permission-error-subcode-2332004",
+        "description": "I followed the Meta Ad Library API Guide, generated the user token access and when I make a call (e.g. https://graph.facebook.com/v20.0/ads_archive?ad_reached_countries=[&quot;FR&quot;]&amp;search_terms=savon&amp;access_token=MY_TOKEN) I always have this return : { &quot;error&quot;: { &quot;message&quot;: &quot;Application does not have permission for this action&quot;, &quot;type&quot;: &quot;OAuthException&quot;, &quot;code&quot;: 10, &quot;error_subcode&quot;: 2332004, &quot;is_transient&quot;: false, &quot;error_user_title&quot;: &quot;App role required&quot;, &quot;error_user_msg&quot;: &quot;You need to be assigned a role by the app owner to continue.",
+        "extra_snippets": [
+          "I followed the Meta Ad Library API Guide, generated the user token access and when I make a call (e.g. https://graph.facebook.com/v20.0/ads_archive?ad_reached_countries=[\"FR\"]&search_terms=savon&access_token=MY_TOKEN) I always have this return : { \"error\": { \"message\": \"Application does not have permission for this action\", \"type\": \"OAuthException\", \"code\": 10, \"error_subcode\": 2332004, \"is_transient\": false, \"error_user_title\": \"App role required\", \"error_user_msg\": \"You need to be assigned a role by the app owner to continue.",
+          "Why am I getting \"Ad account owner has NOT granted ads_management or ads_read permission\" error with Meta API despite having the permissions?"
+        ]
+      }
+    ]
+  },
+  {
+    "query": "\"This request requires the user to take a pending action\" Facebook",
+    "results": []
+  },
+  {
+    "query": "\"Autentique sua conta\" \"3858385\"",
+    "results": []
+  },
+  {
+    "query": "\"Authenticate your account\" \"Facebook Ads API\"",
+    "results": []
+  },
+  {
+    "query": "Meta Marketing API OAuthException code 31 create ads",
+    "results": [
+      {
+        "title": "r/webdev on Reddit: Need help with Meta Marketing API authentication for accessing Ads data",
+        "url": "https://www.reddit.com/r/webdev/comments/1i3aucs/need_help_with_meta_marketing_api_authentication/",
+        "description": "That error (subcode 2332002) is <strong>specific to the Ads Library API needing a separate registration step</strong>. Even with ads_read and ads_management on your token, /ads_archive won&#x27;t work until you go to facebook.com/ads/library/api and register for ...",
+        "extra_snippets": [
+          "{ \"error\": { \"message\": \"Application does not have permission for this action\", \"type\": \"OAuthException\", \"code\": 10, \"error_subcode\": 2332002, \"is_transient\": false, \"error_user_title\": \"Authorisation and login needed\", \"error_user_msg\": \"To access the API, you'll need to follow the steps at facebook.com/ads/library/api.\", \"fbtrace_id\": \"AX1SwvUJSUISccjDgacjWMK\" } }",
+          "Posted by u/zeb0rg - 4 votes and 10 comments",
+          "Much love thank you 🙏🏼. The whole time i was running circles about that because it literally tells you you only need that if you want to run political or social ads. I wish they made it more clear that its required for access to the ad archive library.",
+          "That error (subcode 2332002) is specific to the Ads Library API needing a separate registration step. Even with ads_read and ads_management on your token, /ads_archive won't work until you go to facebook.com/ads/library/api and register for Ad Library access there ."
+        ]
+      },
+      {
+        "title": "Ads Insights API Error Codes - Meta for Developers - Facebook",
+        "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/insights/error-codes",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "Error Codes - Marketing API - Documentation - Meta for Developers",
+        "url": "https://developers.facebook.com/docs/marketing-api/error-reference/",
+        "description": "<strong>This is a property included in the error_data blob of any API call that results in a validation error, which indicates which field(s) is at fault for the validation error</strong>. This can be used to provide contextual errors, e.g. displaying an error right next to the field(s) at fault in the GUI ...",
+        "extra_snippets": [
+          "This is a property included in the error_data blob of any API call that results in a validation error, which indicates which field(s) is at fault for the validation error. This can be used to provide contextual errors, e.g. displaying an error right next to the field(s) at fault in the GUI of an ad creation tool.",
+          "{ \"error\":{ \"type\":\"Exception\", \"message\":\"The budget for your Ad-Set is too low."
+        ]
+      },
+      {
+        "title": "Error Codes - Meta for Developers - Facebook",
+        "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/error-reference",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "Marketing API error 31 / subcode 3858385 when creating ads",
+        "url": "https://developers.facebook.com/community/threads/845129991936233/",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "Facebook Marketing API - Cannot Create Ad-Set",
+        "url": "https://stackoverflow.com/questions/43035583/facebook-marketing-api-cannot-create-ad-set",
+        "description": "Then I&#x27;ve tried the same with the Javascript SDK https://github.com/lucascosta/facebook-js-ads-sdk, with the same payload data, and this time I get: { code:1 fbtrace_id:&quot;DcXmP0Wr82Q&quot; message:&quot;An unknown error has occurred.&quot; type:&quot;OAuthException&quot; }",
+        "extra_snippets": [
+          "{ \"error\": { \"message\": \"Invalid parameter\", \"type\": \"OAuthException\", \"code\": 100, \"error_data\": { \"blame_field_specs\": [ [ \"name\" ] ] }, \"error_subcode\": 2061015, \"is_transient\": false, \"error_user_title\": \"Required Field Is Missing\", \"error_user_msg\": \"The name field is required.",
+          "Then I've tried the same with the Javascript SDK https://github.com/lucascosta/facebook-js-ads-sdk, with the same payload data, and this time I get: { code:1 fbtrace_id:\"DcXmP0Wr82Q\" message:\"An unknown error has occurred.\" type:\"OAuthException\" }",
+          "{\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_data\": {\"blame_field_specs\":[[\"name\"]]},\"error_subcode\":2061015,\"is_transient\": false,\"error_user_title\":\"Required Field Is Missing\",\"error_user_msg\":\"The name field is required."
+        ]
+      },
+      {
+        "title": "Invalid parameter - AdCreative ( facebook-marketing-api) - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/56272700/invalid-parameter-adcreative-facebook-marketing-api",
+        "description": "During the creation of an AdCreative in the facebook marketing api (using the PHP sdk), I get the &quot;Invalid Parameter&quot; error. According to the graph-api (see below), the error is happening because I...",
+        "extra_snippets": [
+          "When I try to create the AdCreative using the graph-api (using curl) I get the following JSON response: {\"error\":{\"message\":\"Invalid Parameter\", \"type\":\"OAuthException\", \"code\":100, \"error_subcode\":1885183, \"is_transient\":false, \"error_user_title\":\"Ads creative post was created by an app that is in development mode\", \"error_user_msg\":\"Ads creative post was created by an app that is in development mode.",
+          "{\"error\":{\"message\":\"(#294) Managing advertisements requires an access token with the extended permission for ads_management\",\"type\":\"OAuthException\",\"code\":294,\"fbtrace_id\":\"AHZ4vUXzCv+\"}}",
+          "We’ve updated our Terms of Service. A new AI Addendum clarifies how Stack Overflow utilizes AI interactions.",
+          "According to the graph-api (see below), the error is happening because I am trying to create an AdCreative using an app that is in development mode."
+        ]
+      },
+      {
+        "title": "java - Ads creative post was created by an app that is in development mode - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/53223822/ads-creative-post-was-created-by-an-app-that-is-in-development-mode",
+        "description": "After getting this error i make my app public but now i am unable to create any thing like campaign or ad set and this time api show me this error",
+        "extra_snippets": [
+          "I am working on creating campaigns using facebook marketing api with java code. I am successfully created campaign and adset and targeting stuff but when i created creative it shows me this error · com.facebook.ads.sdk.APIException$FailedRequestException: {\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_subcode\":1885183,\"is_transient\":false,\"error_user_title\":\"Ads creative post was created by an app that is in development mode\",\"error_user_msg\":\"Ads creative post was created by an app that is in development mode.",
+          "com.facebook.ads.sdk.APIException$FailedRequestException: {\"error\":{\"message\":\"(#294) Managing advertisements requires an access token with the extended permission for ads_management\",\"type\":\"OAuthException\",\"code\":294,\"fbtrace_id\":\"CmN3BD1aQlQ\"}} at com.facebook.ads.sdk.APIRequest.readResponse(APIRequest.java:304) at com.facebook.ads.sdk.APIRequest.access$100(APIRequest.java:53)",
+          "After getting this error i make my app public but now i am unable to create any thing like campaign or ad set and this time api show me this error"
+        ]
+      },
+      {
+        "title": "r/FacebookAds on Reddit: App Token - Accessing campaign data through facebook marketing api",
+        "url": "https://www.reddit.com/r/FacebookAds/comments/qrvrxd/app_token_accessing_campaign_data_through/",
+        "description": "Then you go to marketing api in the left side menu -&gt; tools -&gt; check the permissions need and then click get token · Has anyone tried making a new facebook account to improve ad performance?",
+        "extra_snippets": [
+          "I'm trying get access to campaign data through the facebook marketing api. When I use a user token, I can access the campaign data with this request: `https://graph.facebook.com/v12.0/act_3142341234124/campaigns?access_token=asdfafdsasd` When I use the App Token, the request fails with this error: { \"error\": { \"message\": \"(#100) Missing permissions\", \"type\": \"OAuthException\", \"code\": 100, \"fbtrace_id\": \"Asz178lJDU4_1z5kPA6MLvH\" } }",
+          "Then you go to marketing api in the left side menu -> tools -> check the permissions need and then click get token · Has anyone tried making a new facebook account to improve ad performance?",
+          "Posted by u/theredbarr - 1 vote and 3 comments",
+          "What are the top AI tools for facebook ads these days?"
+        ]
+      },
+      {
+        "title": "How to Resolve the error while calling the API of an Ad ...",
+        "url": "https://developers.facebook.com/community/threads/392894979818506/",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "Facebook Marketing API error, You must select an object to promote - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/39490375/facebook-marketing-api-error-you-must-select-an-object-to-promote",
+        "description": "When trying to create ads it gives me following error. {&quot;error&quot;=&gt;{&quot;message&quot;=&gt;&quot;Invalid parameter&quot;, &quot;type&quot;=&gt;&quot;OAuthException&quot;, &quot;code&quot;=&gt;100, &quot;error_subcode&quot;=&gt;1487930, &quot;is_transient&quot;=&gt;false, &quot;error_user_title&quot;=&gt;&quot;You Must Select an Object to Promote&quot;, &quot;error_user_msg&quot;=&gt;&quot;Your campaign must include an ad set with a selected object to promote related to your objective (ex: Page, URL, event).",
+        "extra_snippets": [
+          "When trying to create ads it gives me following error. {\"error\"=>{\"message\"=>\"Invalid parameter\", \"type\"=>\"OAuthException\", \"code\"=>100, \"error_subcode\"=>1487930, \"is_transient\"=>false, \"error_user_title\"=>\"You Must Select an Object to Promote\", \"error_user_msg\"=>\"Your campaign must include an ad set with a selected object to promote related to your objective (ex: Page, URL, event).",
+          "Stack Ads Connect your brand to the world’s most trusted technologist communities.",
+          "Releases Keep up-to-date on features we add to Stack Overflow and Stack Internal.",
+          "This error is also thrown in case when no AdCreative id provided during Ad object creation."
+        ]
+      },
+      {
+        "title": "Meta Marketing API Limitations & Errors: The 2026 Fix",
+        "url": "https://admanage.ai/blog/meta-marketing-api-challenges-and-fix",
+        "description": "AdManage does the same for ad channels. Connect your accounts, and your API calls work identically regardless of which platform you are targeting. Short version: connecting a third-party app to Meta’s Marketing API means building (or registering) your own reviewed Meta app, wiring up the OAuth flow, and then maintaining that connection through every token refresh and version bump described above.",
+        "extra_snippets": [
+          "This is why we built the AdManage API. This post breaks down exactly what goes wrong when you build directly on the Meta Marketing API, why those problems compound at scale (with real developer war stories), and how AdManage’s API eliminates each one.",
+          "That’s 10+ hours a week per developer not building features or launching ads, but just debugging the API that’s supposed to help them launch ads. Let’s go through Meta Marketing API’s requirements, step by step.",
+          "With AdManage, you skip Meta’s entire app review process. 1. Your ad accounts, Facebook pages, Instagram pages, and saved ad copy are already connected through the AdManage platform. 1. When you hit their API, you’re launching through AdManage’s pre-approved infrastructure. 1. Admanage.ai holds official marketing partner status with all six supported ad platforms.",
+          "AdManage does the same for ad channels. Connect your accounts, and your API calls work identically regardless of which platform you are targeting. Short version: connecting a third-party app to Meta’s Marketing API means building (or registering) your own reviewed Meta app, wiring up the OAuth flow, and then maintaining that connection through every token refresh and version bump described above."
+        ]
+      },
+      {
+        "title": "Facebook Ads Insights API: (#3) Application does not have the capability to make this API call - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/40142294/facebook-ads-insights-api-3-application-does-not-have-the-capability-to-make",
+        "description": "<strong>Go to Marketing API &gt; Tools Then select what token permissions you want.</strong> Press &quot;Get Token&quot; button.",
+        "extra_snippets": [
+          "I am trying to pull Facebook Ads metrics through the Facebook Marketing API. The flow is basically that I wish to pull all the account ids of my company, and then loop over them, retrieving the insights for them individually. However I have an error which I am not able to solve/comprehend. When I attempt to make the API call (both in the Graph Explorer and my Alteryx workflow): ... \"error\": { \"message\": \"(#3) Application does not have the capability to make this API call.\", \"type\": \"OAuthException\", \"code\": 3, \"fbtrace_id\": \"BNevVWUExDg\" }",
+          "This is from the Marketing API quickstart.",
+          "Go to Marketing API > Tools Then select what token permissions you want. Press \"Get Token\" button.",
+          "https://developers.facebook.com/docs/marketing-apis"
+        ]
+      },
+      {
+        "title": "Create an Ad in an Ad Account | Meta | One - WithOne AI",
+        "url": "https://www.withone.ai/knowledge/meta/conn_mod_def::GKRjsHq1qOU::sXbCtK7eS_SU7Y3pWkr0mQ",
+        "description": "{ &quot;error&quot;: { &quot;message&quot;: &quot;Calls to this api have exceeded the rate limit.&quot;, &quot;type&quot;: &quot;OAuthException&quot;, &quot;code&quot;: 613 } }Copy codejson · { &quot;error&quot;: { &quot;message&quot;: &quot;There have been too many calls to this ad-account. Wait a bit and try again.",
+        "extra_snippets": [
+          "license One-Knowledge-1.0 (https://withone.ai/licenses/knowledge)maintained_by One Systems Inc.model ads ... This knowledge powers One's agent infrastructure. Your AI agents can execute Meta's 61 actions with managed auth, rate limiting, and error handling built in.",
+          "/act_1234567890/ads /act_987654321/adsCopy codehttp ... { \"error\": { \"message\": \"Missing at least one required parameter\", \"type\": \"OAuthException\", \"code\": 194 } }Copy codejson",
+          "{ \"error\": { \"message\": \"Calls to this api have exceeded the rate limit.\", \"type\": \"OAuthException\", \"code\": 613 } }Copy codejson · { \"error\": { \"message\": \"There have been too many calls to this ad-account. Wait a bit and try again.",
+          "{ \"error\": { \"message\": \"Message contains banned content\", \"type\": \"OAuthException\", \"code\": 500 } }Copy codejson · { \"error\": { \"message\": \"You are calling a deprecated version of the Ads API."
+        ]
+      },
+      {
+        "title": "GitHub - phwd/fbec: API error codes for Facebook Developers · GitHub",
+        "url": "https://github.com/phwd/fbec",
+        "description": "<strong>User &lt;MY_USER_ID&gt; not admin on ad account &lt;ACT_ID&gt;</strong>",
+        "extra_snippets": [
+          "270 - Development access is not allowed to access business API post:Business/adaccount.",
+          "273 - This Ads API call requires the user to be admin of the ad account.",
+          "User <MY_USER_ID> not admin on ad account <ACT_ID>",
+          "275 - Reading advertisements requires an access token with the extended permission ads_read"
+        ]
+      },
+      {
+        "title": "r/developersIndia on Reddit: Need help with Meta Marketing API authentication for accessing Ads data",
+        "url": "https://www.reddit.com/r/developersIndia/comments/1i34hbv/need_help_with_meta_marketing_api_authentication/",
+        "description": "{ &quot;error&quot;: { &quot;message&quot;: &quot;Application does not have permission for this action&quot;, &quot;type&quot;: &quot;OAuthException&quot;, &quot;code&quot;: 10, &quot;error_subcode&quot;: 2332002, &quot;is_transient&quot;: false, &quot;error_user_title&quot;: &quot;Authorisation and login needed&quot;, &quot;error_user_msg&quot;: &quot;To access the API, you&#x27;ll need to follow the steps at facebook.com/ads/library/api.&quot;, &quot;fbtrace_id&quot;: &quot;AX1SwvUJSUISccjDgacjWMK&quot; } }",
+        "extra_snippets": [
+          "{ \"error\": { \"message\": \"Application does not have permission for this action\", \"type\": \"OAuthException\", \"code\": 10, \"error_subcode\": 2332002, \"is_transient\": false, \"error_user_title\": \"Authorisation and login needed\", \"error_user_msg\": \"To access the API, you'll need to follow the steps at facebook.com/ads/library/api.\", \"fbtrace_id\": \"AX1SwvUJSUISccjDgacjWMK\" } }",
+          "Posted by u/zeb0rg - 1 vote and 4 comments",
+          "A sub for Professional WordPress developers to ask advanced questions, problem solving, code snippets, workflow methods, and developer focused talks. Do not spam links! Please use r/WordPress for basic/entry level help.",
+          "Business Intelligence is the process of utilizing organizational data, technology, analytics, and the knowledge of subject matter experts to create data-driven decisions via dashboards, reports, alerts, and ad-hoc analysis. This is not a generic 'business' subreddit and off topic posts will be marked as spam."
+        ]
+      },
+      {
+        "title": "Application does not have permission for this action · Issue #3 · facebookresearch/Ad-Library-API-Script-Repository",
+        "url": "https://github.com/facebookresearch/Ad-Library-API-Script-Repository/issues/3",
+        "description": "python fb_ads_library_api_cli.py -t &lt;access token&gt; -f &#x27;page_id,ad_snapshot_url,ad_delivery_start_time&#x27; -c &#x27;HU&#x27; -s &#x27;&quot;&quot;&#x27; --ad-active-status &#x27;ALL&#x27; --batch-size &#x27;5000&#x27; -v save &#x27;output-.json&#x27; And I get the following error, can someone do what I can to run cli? { &quot;error&quot;: { &quot;message&quot;: &quot;Application does not have permission for this action&quot;, &quot;type&quot;: &quot;OAuthException&quot;, &quot;code&quot;: 10, &quot;error_subcode&quot;: 2332002, &quot;is_transient&quot;: false, &quot;error_user_title&quot;: &quot;Authorization and login needed&quot;, &quot;error_user_msg&quot;: &quot;To access the API, you&#x27;ll need to follow the steps at facebook.com/ads/library/api.&quot;, &quot;fbtrace_id&quot;: &quot;AOxlW9wwYGgl5evOXSPcbiD&quot; } }",
+        "extra_snippets": [
+          "I get access token from: https://developers.facebook.com/tools/accesstoken python fb_ads_library_api_cli.py -t -f 'page_id,ad_snapshot_url,ad_delivery_start_time' -c &#...",
+          "I get access token from: https://developers.facebook.com/tools/accesstoken python fb_ads_library_api_cli.py -t -f 'page_id,ad_snapshot_url,ad_delivery_start_time' -c 'HU' -s '\"\"' --ad-active-status 'ALL' --batch-size '5000...",
+          "python fb_ads_library_api_cli.py -t <access token> -f 'page_id,ad_snapshot_url,ad_delivery_start_time' -c 'HU' -s '\"\"' --ad-active-status 'ALL' --batch-size '5000' -v save 'output-.json' And I get the following error, can someone do what I can to run cli? { \"error\": { \"message\": \"Application does not have permission for this action\", \"type\": \"OAuthException\", \"code\": 10, \"error_subcode\": 2332002, \"is_transient\": false, \"error_user_title\": \"Authorization and login needed\", \"error_user_msg\": \"To access the API, you'll need to follow the steps at facebook.com/ads/library/api.\", \"fbtrace_id\": \"AOxlW9wwYGgl5evOXSPcbiD\" } }"
+        ]
+      },
+      {
+        "title": "Hey when i create Ad Creative through API when error \"Below\" ?? - Developer Community Forum - Facebook for Developers",
+        "url": "https://developers.facebook.com/community/threads/755165968233230",
+        "description": "when i hit request via API for making a creative lead gen . but i got error &quot;Ads creative post was created by an app that is in development mode. It must be in public to create this ad.&quot;, The token have all permission · POST request. https://graph.facebook.com/v3.3/act_1377324315876631/ad...",
+        "extra_snippets": [
+          "It's kind of hard to get approved for an app when you can't even test out or demonstrate (which is required) that the app works. October 31 at 3:43 PM",
+          "{ \"error\": { \"message\": \"Invalid parameter\", \"type\": \"OAuthException\", \"code\": 100, \"error_subcode\": 1885183, \"is_transient\": false, \"error_user_title\": \"Ads creative post was created by an app that is in development mode\", \"error_user_msg\": \"Ads creative post was created by an app that is in development mode."
+        ]
+      },
+      {
+        "title": "python - Facebook Marketing/Insights API returns OAuthException with error code 100 missing permissions - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/69766050/facebook-marketing-insights-api-returns-oauthexception-with-error-code-100-missi",
+        "description": "Message: Call was not successful Method: GET Path: https://graph.facebook.com/v12.0/{ad_account_id}/insights Params: {&#x27;time_range&#x27;: &#x27;{&quot;since&quot;:&quot;2021-10-28&quot;,&quot;until&quot;:&quot;2021-10-28&quot;}&#x27;, &#x27;breakdowns&#x27;: &#x27;[&quot;publisher_platform&quot;,&quot;platform_position&quot;]&#x27;, &#x27;fields&#x27;: &#x27;[&quot;campaign_name&quot;,&quot;clicks&quot;,&quot;spend&quot;,&quot;impressions&quot;,&quot;date_start&quot;,&quot;campaign_id&quot;,&quot;adset_id&quot;,&quot;ad_id&quot;,&quot;adset_name&quot;,&quot;ad_name&quot;,&quot;link_url&quot;]&#x27;, &#x27;filtering&#x27;: &#x27;[{&quot;field&quot;:&quot;ad.impressions&quot;,&quot;operator&quot;:&quot;GREATER_THAN&quot;,&quot;value&quot;:&quot;0&quot;}]&#x27;, &#x27;level&#x27;: &#x27;ad&#x27;, &#x27;limit&#x27;: &#x27;100000&#x27;} Status: 400 Response: { &quot;error&quot;: { &quot;message&quot;: &quot;(#100) Missing permissions&quot;, &quot;type&quot;: &quot;OAuthException&quot;, &quot;code&quot;: 100, &quot;fbtrace_id&quot;: &quot;AZhZZ3O_3iRkR4nObcyU-yB&quot; } }",
+        "extra_snippets": [
+          "Lately, the Facebook Marketing API throws an OAuthException error with code 100/missing permissions. When looking into the Facebook Developer App, nothing indicates that the permissions are missing or not configured properly. The permissions needed for the Insights API (ads_read) is active and currently at Standard Access (which should be sufficient).",
+          "Message: Call was not successful Method: GET Path: https://graph.facebook.com/v12.0/{ad_account_id}/insights Params: {'time_range': '{\"since\":\"2021-10-28\",\"until\":\"2021-10-28\"}', 'breakdowns': '[\"publisher_platform\",\"platform_position\"]', 'fields': '[\"campaign_name\",\"clicks\",\"spend\",\"impressions\",\"date_start\",\"campaign_id\",\"adset_id\",\"ad_id\",\"adset_name\",\"ad_name\",\"link_url\"]', 'filtering': '[{\"field\":\"ad.impressions\",\"operator\":\"GREATER_THAN\",\"value\":\"0\"}]', 'level': 'ad', 'limit': '100000'} Status: 400 Response: { \"error\": { \"message\": \"(#100) Missing permissions\", \"type\": \"OAuthException\", \"code\": 100, \"fbtrace_id\": \"AZhZZ3O_3iRkR4nObcyU-yB\" } }",
+          "Sign up to request clarification or add additional context in comments.",
+          "2 Facebook marketing api 'Unsupported get request. Object with ID '[number_of_ad_account_id]' does not exist"
+        ]
+      },
+      {
+        "title": "Detect exceeded limit of ad creation in Facebook Marketing API - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/37693645/detect-exceeded-limit-of-ad-creation-in-facebook-marketing-api",
+        "description": "@EugeneMescheryakov <strong>there is no way to get the number of api calls. While creation of ad you are sending many api calls and that&#x27;s why getting error of exceeded rate limit</strong>. There should be some time difference between creating ads or Apply for ...",
+        "extra_snippets": [
+          "Look at my case please: 1. I have one ad account 2. The app is on public mode already, also I sent application for basic mode access 3. The maximum number of ads I can create is 2, only 2 then I got this error of exceeded rate limit 2016-06-08T09:31:06.257Z+00:00",
+          "@EugeneMescheryakov there is no way to get the number of api calls. While creation of ad you are sending many api calls and that's why getting error of exceeded rate limit. There should be some time difference between creating ads or Apply for Standard Access Levels for avoiding that issue 2016-06-08T09:54:31.42Z+00:00",
+          "Array ( [code] => 613 [error_subcode] => 1487742 [message] => Calls to this api have exceeded the rate limit. [error_user_title] => There have been too many calls from this ad-account. Wait a bit and try again. [error_user_msg] => There have been too many calls from this ad-account. Wait a bit and try again. [error_blame_field_specs] => [type] => OAuthException )"
+        ]
+      }
+    ]
+  },
+  {
+    "query": "site:developers.facebook.com/community 3858385",
+    "results": [
+      {
+        "title": "Marketing API error 31 / subcode 3858385 when creating ads",
+        "url": "https://developers.facebook.com/community/threads/845129991936233/",
+        "description": "We cannot provide a description for this page right now",
+        "extra_snippets": []
+      }
+    ]
+  },
+  {
+    "query": "site:stackoverflow.com Facebook Marketing API code 31 pending action",
+    "results": [
+      {
+        "title": "python 3.x - Facebook Marketing API Not working when using Exactly what they are asking for? - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/77141022/facebook-marketing-api-not-working-when-using-exactly-what-they-are-asking-for",
+        "description": "My code Thats producing the error, I have * out all of the details for obvious resins ,but i can assure you that the details are correct as of my knowledge from facebook_business.adobjects.adaccount",
+        "extra_snippets": [
+          "So this is the sample code for the marketing api documentation here: https://developers.facebook.com/docs/marketing-apis/get-started Ive put in my own details: Access token app secret app id heres the issue, i put in my ad account id and i get an error ill show it below, if i put the sandbox ad account id i get the same error.",
+          "Supports Claude Code, Cursor, Codex, Windsurf and more. Explore Stack Overflow for Agents ... Your MVP doesn’t need a Kubernetes... ... Are the existing open-ended question tags enough to define the scope of... ... 16 \"message\": \"Unsupported post request. Object with ID does not exist, cannot be loaded due to missing permissions · 1 Facebook Marketing API Campaign spend_cap field returns inconsistently",
+          "You'll need to complete a few actions and gain 15 reputation points before being able to upvote. Upvoting indicates when questions and answers are useful.",
+          "I want the code to Send a request to the api, from there i will be expanding it, ive tried to swap all the ids out ive tried creating a new account but no luck, from there i will be turning it all to a library etc anyway,"
+        ]
+      },
+      {
+        "title": "Facebook Graph API error code list - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/10478812/facebook-graph-api-error-code-list",
+        "description": "Where can I find the official Graph API Error Code list? I have been using the Graph API for half a year, and in the past 6 months, the error code&#x27;s format has changed twice! The first time I saw...",
+        "extra_snippets": [
+          "You'll need to complete a few actions and gain 15 reputation points before being able to upvote. Upvoting indicates when questions and answers are useful."
+        ]
+      },
+      {
+        "title": "facebook graph api - Meta Marketing API async batch gets stuck in INITIAL or PENDING_DEPENDENCY - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/79990702/meta-marketing-api-async-batch-gets-stuck-in-initial-or-pending-dependency",
+        "description": "The only syntax I have found that allows the async batch to be accepted is: <strong>{result=create-campaign:$.id}</strong> However, even with this syntax, the dependent ad set can remain indefinitely in PENDING_DEPENDENCY.",
+        "extra_snippets": [
+          "If so, why can the campaign creation finish with SUCCESS while its dependent ad set remains indefinitely in PENDING_DEPENDENCY? Could this be related to how the subrequest bodies are URL-encoded, or is it a known limitation or bug in async batch dependency resolution? What is the recommended way to asynchronously create dozens of campaigns together with their dependent ad sets? ... Creating an ad creative with multiple asset placements, titles and primary texts with the Meta Marketing API",
+          "In other cases, the campaign is successfully created, but the dependent ad set never proceeds beyond PENDING_DEPENDENCY.",
+          "The only syntax I have found that allows the async batch to be accepted is: {result=create-campaign:$.id} However, even with this syntax, the dependent ad set can remain indefinitely in PENDING_DEPENDENCY.",
+          "{ \"data\": [ { \"id\": \"<ADSET_REQUEST_ID>\", \"status\": \"PENDING_DEPENDENCY\", \"type\": \"CAMPAIGN_CREATION\", \"input\": { \"campaign_spec\": { \"name\": \"<ADSET_NAME>\", \"status\": \"PAUSED\", ..."
+        ]
+      },
+      {
+        "title": "facebook ads api - FB Ads API status , effective_status and the ads actual status - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/38632685/fb-ads-api-status-effective-status-and-the-ads-actual-status",
+        "description": "From the ads api doc it says effective_status enum {ACTIVE, PAUSED, DELETED, PENDING_REVIEW, DISAPPROVED, PREAPPROVED, PENDING_BILLING_INFO, CAMPAIGN_PAUSED, ARCHIVED, ADSET_PAUSED} The effe...",
+        "extra_snippets": [
+          "2017-07-06T10:39:31.403Z+00:00 ... AivanF. Over a year ago · In my case, both configured and effective status are \"Active\" for both Ad and AdSet, however FB online AdManager says that they aren't delivering due to being in review... Yes, \"EffectiveStatus\" field has a \"PENDING_REVIEW\" option, but it never appears. Why the SDK isn't working?! And how my code should determine if the ad is being reviewed?!?!?",
+          "According to Facebook, the new feature identifies under-delivering ad sets and explains why the under-delivery is happening and highlights suggestions for specific actions an advertiser can take to make their ad more competitive at auction – in-turn helping them to increase the performance of their advert.",
+          "You'll need to complete a few actions and gain 15 reputation points before being able to upvote. Upvoting indicates when questions and answers are useful.",
+          "effective_status enum {ACTIVE, PAUSED, DELETED, PENDING_REVIEW, DISAPPROVED, PREAPPROVED, PENDING_BILLING_INFO, CAMPAIGN_PAUSED, ARCHIVED, ADSET_PAUSED} The effective status of the ad."
+        ]
+      },
+      {
+        "title": "Facebook Marketing API error, You must select an object to promote - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/39490375/facebook-marketing-api-error-you-must-select-an-object-to-promote",
+        "description": "{&quot;error&quot;=&gt;{&quot;message&quot;=&gt;&quot;Invalid parameter&quot;, &quot;type&quot;=&gt;&quot;OAuthException&quot;, &quot;code&quot;=&gt;100, &quot;error_subcode&quot;=&gt;1487930, &quot;is_transient&quot;=&gt;false, &quot;error_user_title&quot;=&gt;&quot;You Must Select an Object to Promote&quot;, &quot;error_user_msg&quot;=&gt;&quot;Your campaign must include an ad set with a selected object to promote related to your objective (ex: Page, URL, event).",
+        "extra_snippets": [
+          "{\"error\"=>{\"message\"=>\"Invalid parameter\", \"type\"=>\"OAuthException\", \"code\"=>100, \"error_subcode\"=>1487930, \"is_transient\"=>false, \"error_user_title\"=>\"You Must Select an Object to Promote\", \"error_user_msg\"=>\"Your campaign must include an ad set with a selected object to promote related to your objective (ex: Page, URL, event).",
+          "{:name=>\"Buy new Item\", :object_story_spec=>{:link_data=>{:call_to_action=>{:value=>{}, :type=>\"LEARN_MORE\"}, :name=>\"Buy new Item\", :message=>\"amazing Items for you\", :image_hash=>\"7cc87683d1b75492622a82a158790dcb\", :link=>\"www.xyz.com\"}, :page_id=>\"123123123\"}, :access_token=>\"xxxxxxxxxxxxxxxxxxxx\"}"
+        ]
+      },
+      {
+        "title": "Facebook sdk error: \"Application does not have permission for this action\" - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/48644128/facebook-sdk-error-application-does-not-have-permission-for-this-action",
+        "description": "The problem was that <strong>the ad account for which the API token was generated had access to pages and the ad manager account but in addition to that we will have to give the user access to the page &amp; ad account and apps</strong>.",
+        "extra_snippets": [
+          "Making the OWASP top ten in the vibe code... ... Help Shape the 2026 Developer Survey! ... 12 Facebook's ads api exception 294 - Managing advertisements requires the extended permission ads_management, and a participating API key · 2 Facebook SDK .NET - (#200) The user hasn't authorized the application to perform this action ... Who used the software in 'The police arrested 30 criminals who ordered laptops from online shops promoted by marketers using advanced software'?",
+          "I'm trying to use facebook java sdk to create ads. I'm able to create AdCampaign and AdSet, but when I'm trying to create AdCreative, it returns with error: { \"error\": { \"message\": \"Applicatio...",
+          "The problem was that the ad account for which the API token was generated had access to pages and the ad manager account but in addition to that we will have to give the user access to the page & ad account and apps. Because FB assumes that some user is running the code and not the ad account and hence users should be given access.",
+          "{ \"error\": { \"message\": \"Application does not have permission for this action\", \"type\": \"OAuthException\", \"code\": 10, \"error_subcode\": 1341012, \"is_transient\": false, \"error_user_title\": \"No permission to access this profile\", \"error_user_msg\": \"You don't have required permission to access this profile\", \"fbtrace_id\": \"Gvc9OPtfxrb\" } ... To create APIContext, I'm using Access Token, generated from \"System User\" section under Business settings and App Secret from application settings."
+        ]
+      },
+      {
+        "title": "php - Error creating Ad via Facebook Marketing API - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/55000849/error-creating-ad-via-facebook-marketing-api",
+        "description": "facebook-marketing-api · Share · Improve this question · Follow · edited Mar 5, 2019 at 11:31 · ineersaineersa · asked Mar 5, 2019 at 10:39 · ineersaineersa · 3,4453232 silver badges4040 bronze badges 1 · Not all campaign types support APPLY_NOW so that might be causing the error. Trying removing the CALL_TO_ACTION from the AdCreativeLinkData to test if that is the issue.",
+        "extra_snippets": [
+          "facebook-marketing-api · Share · Improve this question · Follow · edited Mar 5, 2019 at 11:31 · ineersaineersa · asked Mar 5, 2019 at 10:39 · ineersaineersa · 3,4453232 silver badges4040 bronze badges 1 · Not all campaign types support APPLY_NOW so that might be causing the error. Trying removing the CALL_TO_ACTION from the AdCreativeLinkData to test if that is the issue.",
+          "curl \\ -F 'name=Trial Company ' \\ -F 'adset_id=xxxx' \\ -F 'creative={\"title\":\"Trial Company Inc\",\"body\":\"xxx\",\"object_story_spec\":{\"page_id\":\"xxxxxxxx\",\"link_data\":{\"link\":\"link\",\"call_to_action\":{\"type\":\"APPLY_NOW\"},\"picture\":\"link\"}}}' \\ -F 'status=PAUSED' \\ -F 'access_token=xxxxxx' \\ -F 'appsecret_proof=xxxxx' \\ https://graph.facebook.com/v3.2/act_{id}}/ads ... {\"error\":{\"message\":\"Unsupported post request.\",\"type\":\"GraphMethodException\",\"code\":100,\"fbtrace_id\":\"AtGSfGrLe42\"}}",
+          "/** * @param RequestContract $request * @param Ad $runner * @return ResponseContract * @throws \\Exception */ public function run(RequestContract $request, AbstractCrudObject $runner): ResponseContract { $this->configureCreative($request); $runner->setData([ AdFields::NAME => $request->getItem('[ad][name]'), AdFields::ADSET_ID => $request->getItem('[facebook][adset_id]'), AdFields::CREATIVE => $this->creative, ]); $graphResponse = $runner->create(array( Ad::STATUS_PARAM_NAME => Ad::STATUS_PAUSED, )); return new ResponseGraph($graphResponse); } private function configureCreative(RequestContract"
+        ]
+      },
+      {
+        "title": "Invalid parameter - AdCreative ( facebook-marketing-api) - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/56272700/invalid-parameter-adcreative-facebook-marketing-api",
+        "description": "During the creation of an AdCreative in the facebook marketing api (using the PHP sdk), I get the &quot;Invalid Parameter&quot; error. According to the graph-api (see below), the error is happening because I...",
+        "extra_snippets": [
+          "I am using the official Creative guide by facebook to create the AdCreative: https://developers.facebook.com/docs/marketing-api/buying-api · I am currently using the following code to create the AdCreative",
+          "Is there a way to create the AdCreative (and consequently an Ad) using the facebook-marketing-api using my app (in development mode)? ... {\"error\":{\"message\":\"(#294) Managing advertisements requires an access token with the extended permission for ads_management\",\"type\":\"OAuthException\",\"code\":294,\"fbtrace_id\":\"AHZ4vUXzCv+\"}}",
+          "{\"error\":{\"message\":\"Invalid Parameter\", \"type\":\"OAuthException\", \"code\":100, \"error_subcode\":1885183, \"is_transient\":false, \"error_user_title\":\"Ads creative post was created by an app that is in development mode\", \"error_user_msg\":\"Ads creative post was created by an app that is in development mode."
+        ]
+      },
+      {
+        "title": "Detect exceeded limit of ad creation in Facebook Marketing API - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/37693645/detect-exceeded-limit-of-ad-creation-in-facebook-marketing-api",
+        "description": "You can check Marketing API Rate Limiting Marketing API Rate Limiting",
+        "extra_snippets": [
+          "Look at my case please: 1. I have one ad account 2. The app is on public mode already, also I sent application for basic mode access 3. The maximum number of ads I can create is 2, only 2 then I got this error of exceeded rate limit 2016-06-08T09:31:06.257Z+00:00 ... @Nadeem0025 any ideas how to get the number of api calls for ad creation? I also attached error code, maybe it would be helpful 2016-06-08T09:36:08.943Z+00:00",
+          "I want to see why it's so limited, but cannot find any chance too see exceeded limit. I am using PHP Facebook Marketing API SDK ver. 2.6 Hope there are some developers how know about it. ... Array ( [code] => 613 [error_subcode] => 1487742 [message] => Calls to this api have exceeded the rate limit.",
+          "You can check Marketing API Rate Limiting Marketing API Rate Limiting",
+          "Also Limit of ads creation or API Rate Limiting depends on your Marketing API Access Levels Marketing API Access Levels"
+        ]
+      },
+      {
+        "title": "Recently Active 'facebook-ads-api' Questions - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/tagged/facebook-ads-api?sort=active&pageSize=50",
+        "description": "I&#x27;m running into an issue when trying to fetch data from a Facebook ad account via the Marketing API. I’m using a long-lived user access token created by the account admin.",
+        "extra_snippets": [
+          "I have a Google Apps script that's sending batch requests to the Facebook Marketing API (Insights). I'm fetching mobile installs, ad spend per day over several campaigns. However, the results are ... ... I have implemented server-side tagging in in Google Tag Manager (GTM), but I'm sending HTTP requests directly from my backend code, rather than using JavaScript on the frontend (as many other ...",
+          "I have downloaded the \"SAMPLE_CODE.js\" from the Facebook developers website for their Marketing API.",
+          "I've read a lot about facebook ads and stuff, using GUI it allow to do what I'm doing and for some reason on sdk it doesn't. I get this suberror code on Facebook ads sdk subcode 1487930. The message ... ... I was trying to enable Advertiser Tracking using capacitor-community facebook-login plugin.i found a method for enabling ( i guess ) in documentation of facebook-login plugin but there is no ... ... I made a playable ad and now i want to make a build for Mintegral platform. As the whole point of playable ad is to redirect user to store, i need to implement a CTA (call to action) method, that will ...",
+          "I'm running into an issue when trying to fetch data from a Facebook ad account via the Marketing API. I’m using a long-lived user access token created by the account admin."
+        ]
+      },
+      {
+        "title": "What does it mean \"error_subcode\": 33 in the facebook response error? - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/47437362/what-does-it-mean-error-subcode-33-in-the-facebook-response-error",
+        "description": "https://developers.facebook.com/docs/marketing-api/error-reference/",
+        "extra_snippets": [
+          "Here's the link to the Facebook marketing API error reference.",
+          "Supports Claude Code, Cursor, Codex, Windsurf and more. Explore Stack Overflow for Agents ... Are the existing open-ended question tags enough to define the scope of... ... 2 Why does Facebook Graph API return error \"An unexpected error has occurred.",
+          "https://developers.facebook.com/docs/marketing-api/error-reference/",
+          "You'll need to complete a few actions and gain 15 reputation points before being able to upvote. Upvoting indicates when questions and answers are useful."
+        ]
+      },
+      {
+        "title": "facebook marketing api exception handling - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/40542688/facebook-marketing-api-exception-handling",
+        "description": "Actually I want to cover maximum errors so that can show to users in a user friendly way so anyone can tell what I am missing or what is the perfect way for exception handling in facebook marketing api? ... Anyway, catch(Exception $e) will catch any exception that has not been caught by a more specific line above. So if you still get a fatal error for an uncaught exception(?) - then that exception did occur elsewhere. ... The reason is you are mixing two SDKs in your code.",
+        "extra_snippets": [
+          "I am using Facebook marketing/graph api v2.8. I have read exception handling from here https://developers.facebook.com/docs/php/FacebookRequestException/5.0.0, I am using following code for exception handling.",
+          "Actually I want to cover maximum errors so that can show to users in a user friendly way so anyone can tell what I am missing or what is the perfect way for exception handling in facebook marketing api? ... Anyway, catch(Exception $e) will catch any exception that has not been caught by a more specific line above. So if you still get a fatal error for an uncaught exception(?) - then that exception did occur elsewhere. ... The reason is you are mixing two SDKs in your code.",
+          "So for now, you will have too look at both documentations for Marketing API/SDK and the general Facebook SDK. We will get your feedback and see if we have opportunity to improve it. ... Sign up to request clarification or add additional context in comments. ... Find the answer to your question by asking. Ask question ... See similar questions with these tags. ... Help me join Stack Overflow for Agents here. Read https://agents.stackoverflow.com/skill.md, then start onboarding. Supports Claude Code, Cursor, Codex, Windsurf and more."
+        ]
+      },
+      {
+        "title": "Facebook Insights API - getting error code 1 with subcode 99 - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/50703307/facebook-insights-api-getting-error-code-1-with-subcode-99",
+        "description": "We are retrieving Insights data via the Facebook Marketing API. We are using the Python &quot;facebookads&quot; module for this. I was downloading historic data in the past for all of our accounts which was",
+        "extra_snippets": [
+          "We are retrieving Insights data via the Facebook Marketing API. We are using the Python \"facebookads\" module for this. I was downloading historic data in the past for all of our accounts which was working perfectly fine.",
+          "2018-06-01 16:01:57 - (DEBUG) - urllib3.connectionpool - https://graph.facebook.com:443 \"GET /v2.11/act_nnnn/insights?access_token=&appsecret_proof=&time_range={\"since\":\"2018-05-08\",\"until\":\"2018-05-08\"}&level=ad&breakdowns=[\"impression_device\"]&filtering=[{\"field\":\"spend\",\"operator\":\"GREATER_THAN\",\"value\":\"0\"}]&limit=5000&fields=account_id,campaign_id,campaign_name,adset_id,adset_name,ad_id,ad_name,impressions,clicks,reach,spend,account_currency,actions,action_values,total_actions,total_action_value HTTP/1.1\" 500 77",
+          "Params: {'time_range': '{\"since\":\"2018-05-08\",\"until\":\"2018-05-08\"}', 'level': 'ad', 'breakdowns': '[\"impression_device\"]', 'filtering': '[{\"field\":\"spend\",\"operator\":\"GREATER_THAN\",\"value\":\"0\"}]', 'limit': 5000, 'fields': 'account_id,campaign_id,campaign_name,adset_id,adset_name,ad_id,ad_name,impressions,clicks,reach,spend,account_currency,actions,action_values,total_actions,total_action_value'}"
+        ]
+      },
+      {
+        "title": "python - Facebook Marketing API - how to handle rate limit for retrieving *all* ad sets through campaign ids? - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/68026231/facebook-marketing-api-how-to-handle-rate-limit-for-retrieving-all-ad-sets-t",
+        "description": "from facebook_business.exceptions import FacebookRequestError ... for status in campaign_types: ad_sets_for_status = [] for campaign_id in output[status]: # keep trying until the request is ok while True: try: campaign_ad_sets = Campaign(campaign_id).get_ad_sets() break except FacebookRequestError as error: if error.api_error_code() in [17, 80000]: time.sleep(sleepy_time) # sleep for a period of time for entry in campaign_ad_sets: ad_sets_for_status.append(entry[&#x27;id&#x27;]) ad_sets[status] = ad_sets_for_status",
+        "extra_snippets": [
+          "I can't reproduce the time at which it crashes, however, it certainly doesn't take ~600 calls (see here: https://stackoverflow.com/a/29690316/5080858), and as you can see, I'm sleeping ahead of every API call. You might suggest that I should just call the get_ad_sets method on the AdAccount endpoint, however, this pulls fewer ad sets than the above code does, even before it crashes.",
+          "The error with 'code': 17 means that you reach the limit of call and in order to get more nodes you have to wait.",
+          "FacebookRequestError: Message: Call was not successful Method: GET Path: https://graph.facebook.com/v11.0/23846914220310083/adsets Params: {'summary': 'true'} Status: 400 Response: { \"error\": { \"message\": \"(#17) User request limit reached\", \"type\": \"OAuthException\", \"is_transient\": true, \"code\": 17, \"error_subcode\": 2446079, \"fbtrace_id\": \"***************\" } }",
+          "from facebook_business.exceptions import FacebookRequestError ... for status in campaign_types: ad_sets_for_status = [] for campaign_id in output[status]: # keep trying until the request is ok while True: try: campaign_ad_sets = Campaign(campaign_id).get_ad_sets() break except FacebookRequestError as error: if error.api_error_code() in [17, 80000]: time.sleep(sleepy_time) # sleep for a period of time for entry in campaign_ad_sets: ad_sets_for_status.append(entry['id']) ad_sets[status] = ad_sets_for_status"
+        ]
+      },
+      {
+        "title": "facebook - product catalog api fail - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/29693496/product-catalog-api-fail",
+        "description": "upd: try to create in business manager project. add there my AD account, my page, and try to add catalog. when i try to add a catalog i have a message &quot;(#10) Application does not have permission for this action &quot; its strange, becose i do not use any application - only facebook. may be problem in other place ... upd: strange. deleta all app, ad company , catalogs. left business account only. recreate catalog - it has no errors. ... also getting this error, despite following instructions at this link under &quot;managing account list&quot; section: developers.facebook.com/docs/marketing-api/…. Unfortunately, deleting a bunch of stuff and recreating it is not an option.",
+        "extra_snippets": [
+          "need help. I tried to start with https://developers.facebook.com/docs/marketing-api/dynamic-product-ads/ads-management/v2.3 created account. Approved it by phone. created a business account, an ad account, an app, and so on. linked app to ad accont like this https://developers.facebook.com/docs/marketing-api/access#standard_accounts.",
+          "DPi = DPA developers.facebook.com/docs/marketing-api/dynamic-product-ads/… 2015-04-22T07:31:11.91Z+00:00",
+          "upd: try to create in business manager project. add there my AD account, my page, and try to add catalog. when i try to add a catalog i have a message \"(#10) Application does not have permission for this action \" its strange, becose i do not use any application - only facebook. may be problem in other place ... upd: strange. deleta all app, ad company , catalogs. left business account only. recreate catalog - it has no errors. ... also getting this error, despite following instructions at this link under \"managing account list\" section: developers.facebook.com/docs/marketing-api/…. Unfortunately, deleting a bunch of stuff and recreating it is not an option.",
+          "You'll need to complete a few actions and gain 15 reputation points before being able to upvote. Upvoting indicates when questions and answers are useful."
+        ]
+      },
+      {
+        "title": "Facebook Ads API Error - Not enabled for usage - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/26985300/facebook-ads-api-error-not-enabled-for-usage/45758318",
+        "description": "You have to <strong>go your app and in the added products tab on the left side panel click on Marketing API , click on tools, on the right side, select the permissions needed and get the token</strong>.",
+        "extra_snippets": [
+          "You have to go your app and in the added products tab on the left side panel click on Marketing API , click on tools, on the right side, select the permissions needed and get the token. Now use this token and pass it with the FB.api('POST'.. call along with the other parameters.",
+          "I was getting this #274 error and it started working after adding the Test Sandbox Ad Account's ID (under Marketing API > Tools) to the Ads API Account Configuration (under Settings > Advanced > Advertising Accounts).",
+          "\"error\":{\"message\":\"(#274) The ad account is not enabled for usage in Ads API. Please add it in developer.facebook.com -> application -> settings -> advanced -> advertising accounts -> Ads API. Account XXXXXXXXXXXXX not enabled for application XXXXXXXXXXXXX.\",\"type\":\"OAuthException\",\"code\":274}}"
+        ]
+      },
+      {
+        "title": "How do I get applications submitted and appointments booked from Facebook Marketing API?",
+        "url": "https://stackoverflow.com/questions/79487731/how-do-i-get-applications-submitted-and-appointments-booked-from-facebook-market",
+        "description": "2025-03-05 23:31:07 +00:00 Commented Mar 5, 2025 at 23:31 · I don&#x27;t get an error&#x27;s. I am able to pull most metrics like Date, Campaign Name, Spend, Frequency, Impressions, All Clicks, Link Clicks, Leads, CPC, CPM, and CTR. It just won&#x27;t pull applications submitted and appointments scheduled for some reason. I do use an access token and Account ID - In my code under var urlAdAccountInsights, I have the URL listed minus the PII that pulls the metrics. Based off Facebooks Marketing API sheets these metrics should be able to pull under action_type For Reference - developers.facebook.com/docs/marketing-api/reference/… ·",
+        "extra_snippets": [
+          "2025-03-05 23:31:07 +00:00 Commented Mar 5, 2025 at 23:31 · I don't get an error's. I am able to pull most metrics like Date, Campaign Name, Spend, Frequency, Impressions, All Clicks, Link Clicks, Leads, CPC, CPM, and CTR. It just won't pull applications submitted and appointments scheduled for some reason. I do use an access token and Account ID - In my code under var urlAdAccountInsights, I have the URL listed minus the PII that pulls the metrics. Based off Facebooks Marketing API sheets these metrics should be able to pull under action_type For Reference - developers.facebook.com/docs/marketing-api/reference/… ·",
+          "Here's the code I have thus far that is the closest I have to working. It works with leads at least but still doesn't get me applications submitted and appointments scheduled, which are two of the most important metrics. var urlAdAccountInsights = \"https://graph.facebook.com/v22.0/act_\" + adAccountId + \"/insights?fields=campaign_name,impressions,spend,cpc,ctr,cpm,frequency,clicks,inline_link_clicks,actions,action_values,conversion_values\" + \"&date_preset=this_month&access_token=\" + token; var responseCampaignInsights = UrlFetchApp.fetch(urlAdAccountInsights); var json = JSON.parse(responseCamp"
+        ]
+      },
+      {
+        "title": "Facebook API pending requests - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/18107763/facebook-api-pending-requests",
+        "description": "I know this have been asked several times, and I have already read several posts in here, but somehow it doesn&#x27;t work for me. Even when I gave myself ALL permissions and not only &#x27;read_requests&#x27;. ...",
+        "extra_snippets": []
+      },
+      {
+        "title": "python 3.x - Facebook Marketing API Incorrect Syntax - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/56862409/facebook-marketing-api-incorrect-syntax",
+        "description": "from facebookads.adobjects.adaccount import AdAccount from facebookads.adobjects.adsinsights import AdsInsights from facebookads.api import FacebookAdsApi access_token = &#x27;***&#x27; ad_account_id = &#x27;act_***&#x27; app_secret = &#x27;***&#x27; app_id = &#x27;***&#x27; FacebookAdsApi.init(access_token=access_token) fields = [ &#x27;reach&#x27;, &#x27;frequency&#x27;, &#x27;impressions&#x27;, &#x27;relevance_score:score&#x27;, &#x27;spend&#x27;, &#x27;campaign_group_name&#x27;, &#x27;campaign_name&#x27;, &#x27;adgroup_name&#x27;, &#x27;actions:mobile_app_install&#x27;, &#x27;cost_per_action_type:omni_app_install&#x27;, &#x27;actions:page_engagement&#x27;, &#x27;actions:like&#x27;, &#x27;actions:comment&#x27;, &#x27;actions:post_engagement&#x27;, &#x27;actions:post_react",
+        "extra_snippets": [
+          "IN NO EVENT SHALL # THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER # DEALINGS IN THE SOFTWARE.",
+          "from facebookads.adobjects.adaccount import AdAccount from facebookads.adobjects.adsinsights import AdsInsights from facebookads.api import FacebookAdsApi access_token = '***' ad_account_id = 'act_***' app_secret = '***' app_id = '***' FacebookAdsApi.init(access_token=access_token) fields = [ 'reach', 'frequency', 'impressions', 'relevance_score:score', 'spend', 'campaign_group_name', 'campaign_name', 'adgroup_name', 'actions:mobile_app_install', 'cost_per_action_type:omni_app_install', 'actions:page_engagement', 'actions:like', 'actions:comment', 'actions:post_engagement', 'actions:post_react"
+        ]
+      },
+      {
+        "title": "Facebook Marketing API returns error on \"breakdowns call\" - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/65664960/facebook-marketing-api-returns-error-on-breakdowns-call",
+        "description": "it is OK and responds with data. I don&#x27;t know why it happens because I&#x27;m not specifying any &quot;action_type&quot; breakdown but it tells that I am :(",
+        "extra_snippets": [
+          "it is OK and responds with data. I don't know why it happens because I'm not specifying any \"action_type\" breakdown but it tells that I am :(",
+          "{ \"error\": { \"message\": \"(#100) Current combination of data breakdown columns (action_type, platform_position) is invalid \", \"type\": \"OAuthException\", \"code\": 100, \"fbtrace_id\": \"XXXXXXXXXXXXXXXXXXXX\" } }",
+          "act_XXXXXXXX/insights?fields=ad_id,clicks,unique_clicks,impressions,reach,spend,date_start,date_stop,actions,action_values,unique_actions,account_id&level=ad&breakdowns=platform_position&time_range={\"since\":\"2019-09-07\",\"until\":\"2019-09-07\"}"
+        ]
+      }
+    ]
+  },
+  {
+    "query": "site:github.com \"3858385\" facebook",
+    "results": []
+  },
+  {
+    "query": "Meta Marketing API system user pages partner shared assets business manager",
+    "results": [
+      {
+        "title": "Facebook api to give partner access of business assets - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/79121866/facebook-api-to-give-partner-access-of-business-assets",
+        "description": "This is the only clear Meta documentation I&#x27;ve seen in my searches for how a partner should gain access to client assets (e.g. ad accounts, pages). <strong>The partner would need to have its own business manager and developer account</strong>. Share ·",
+        "extra_snippets": [
+          "Have you tried the business on behalf of flow https://developers.facebook.com/docs/marketing-api/business-manager/guides/on-behalf-of? This is the only clear Meta documentation I've seen in my searches for how a partner should gain access to client assets (e.g. ad accounts, pages). The partner would need to have its own business manager and developer account. Share ·"
+        ]
+      },
+      {
+        "title": "Understanding Facebook Business Manager APIs: Tier-1 vs Tier-2 | by Ashish Kumar | Medium",
+        "url": "https://medium.com/@ashishkumar_81395/understanding-facebook-business-manager-apis-tier-1-vs-tier-2-153ec3894f00",
+        "description": "What many don’t realize: Meta has two levels of Business Manager APIs — <strong>Tier-1 and Tier-2.</strong> ... Tier-1 is the foundation. It’s about managing a single Business Manager — users, roles, assets, and partners.",
+        "extra_snippets": [
+          "Understanding Facebook Business Manager APIs: Tier-1 vs Tier-2 Most developers who work with Meta’s APIs know the Marketing API — the engine behind campaigns, ads, and reporting. But behind every …",
+          "Most developers who work with Meta’s APIs know the Marketing API — the engine behind campaigns, ads, and reporting. But behind every ad account sits a Business Manager (BM), and that’s where the Business Management APIs come into play. What many don’t realize: Meta has two levels of Business Manager APIs — Tier-1 and Tier-2. ... Tier-1 is the foundation. It’s about managing a single Business Manager — users, roles, assets, and partners.",
+          "Pages and Instagram accounts must already exist. You can only attach or claim them under a Business Manager. No. Billing cards cannot be created via API. Tier-2 only supports Line of Credit (LOC) management. Yes. The Parent BM must have a Line of Credit (LOC) and your app must be approved with business_management permissions. Many LOC features require Meta partner approval. No. Campaigns, Ad Sets, Ads, and Insights are managed via the Marketing API (using Ad Account IDs)."
+        ]
+      },
+      {
+        "title": "Business Manager - Business Management APIs - Documentation - Meta for Developers",
+        "url": "https://developers.facebook.com/docs/business-management-apis/business-manager-api/",
+        "description": "<strong>Help businesses and agencies manage Facebook Pages, ad accounts and apps in one place</strong>. Business Manager API&#x27;s help manage multiple ad account assets and permissions. You can also automate the creation of ad accounts. See Ads Help Center, Business Manager Basics · In Business Manager you connect ...",
+        "extra_snippets": []
+      },
+      {
+        "title": "How to Add a Partner in Meta Business Manager",
+        "url": "https://herocontent.ai/en/blog/add-partner-in-meta-business-manager",
+        "description": "<strong>When you add a partner, each organization retains control over its own Business Manager</strong>. You share specific assets (Pages, ad accounts, pixels) with the partner, and the partner can manage those assets from their own environment.",
+        "extra_snippets": [
+          "Managing external access to your Meta assets is one of the trickiest operational challenges in digital marketing. The wrong approach — sharing passwords, creating fake team accounts, or giving outside parties full admin control — creates security risks and messy offboarding situations. The Partner system is built specifically to handle this cleanly. When you add a partner, each organization retains control over its own Business Manager. You share specific assets (Pages, ad accounts, pixels) with the partner, and the partner can manage those assets from their own environment.",
+          "Can I share the same asset with multiple partners? Yes. A single ad account, Page, or pixel can be shared with multiple partner Business Managers simultaneously.",
+          "Select which assets to share. For each asset (Page, ad account, Instagram account, pixel), choose the appropriate access level.",
+          "Pages: Employee with full task access (or Admin if the agency needs to manage the page fully) Ad accounts: Advertiser (to create and manage campaigns) or Admin (for full control including billing) Pixels: Analyst (to use the pixel for targeting) or Admin (to manage the pixel itself) Click Send request. The partner will receive a notification in their Business Manager. They must accept the invitation before access is granted. Follow up with them to ensure they do. This is the flow for agencies requesting access to client assets."
+        ]
+      },
+      {
+        "title": "Add Partners to Your Business Manager | Meta Business Help Center",
+        "url": "https://www.facebook.com/business/help/708679622611131",
+        "description": "Note: If a different business owns the Page or ad account, the agency partner can contact that person or business directly to request access. ... <strong>Open Business Settings.</strong> Click Partners.",
+        "extra_snippets": [
+          "Note: If a different business owns the Page or ad account, the agency partner can contact that person or business directly to request access. ... Open Business Settings. Click Partners. Click + Add. Decide if you want to give a partner access to assets in your Business Manager or ask a partner to share assets with your business.",
+          "Add peopleAssign assets to peopleGive partners access to assetsAsk partners to share assetsAdd system users · Best practices for Page access requestsChange someone's roleRemove peopleRemove partners",
+          "NewsNews Page IndexJournalist RegistrationLocal AlertsFacebook NewsBulletinLink Preview EditingContext Button",
+          "Create Ads from a Facebook PageBeginner's GuideFeaturesBoost PostsPage LikesCall-to-ActionWebsite VisitorsWebsite PurchasesWebsite Purchases With Your CatalogAutomated Ads"
+        ]
+      },
+      {
+        "title": "How to Add Partners and Connect Ad Accounts in Meta : Knowledge Base",
+        "url": "https://support.shopalyst.com/support/solutions/articles/27000084411-adding-partner-to-meta-business-apps",
+        "description": "This is done from the partner’s Business Manager, inside the App section. The partner logs in to their Meta Business Manager. <strong>Navigate to Business Settings → Accounts → Apps</strong>. Select the App that your business shared with them. Click Connect ...",
+        "extra_snippets": [
+          "Step-by-step guide on adding partners to your Meta app and linking their ad accounts to enable integrations, permissions, and marketing automation",
+          "After the partner is added to your app, they must link their Ad Accounts to the app so the app can access campaigns, insights, or execute automation through the Marketing API. This is done from the partner’s Business Manager, inside the App section. The partner logs in to their Meta Business Manager. Navigate to Business Settings → Accounts → Apps. Select the App that your business shared with them. Click Connect Assets.",
+          "Partner Connects Their Ad Accounts to the App The partner must then link their Ad Accounts to the app via their own Business Manager: Business Settings → Accounts → Apps → Select App → Connect Assets → Ad Accounts · To enable another business to work with your Meta App—such as for API integration, automation, or campaign management—you must first grant that business access to the app. Open Meta Business Settings. Go to Accounts → Apps. Select the App you want to share.",
+          "Add the partner’s Business Manager to your Meta App via Business Settings → Accounts → Apps → Select App → Add Partner."
+        ]
+      },
+      {
+        "title": "How to Share Partner Access with an Agency in Meta’s Business Portfolio (Without Losing Control of Your Assets)",
+        "url": "https://tj21.com/how-to-share-partner-access-with-an-agency-in-metas-business-portfolio-without-losing-control-of-your-assets/",
+        "description": "Paste the agency’s Business Manager ID. ... This is where most mistakes happen. You will see a list of assets you can share.",
+        "extra_snippets": [
+          "You should always own your assets (granted not everyone necessarily wants to and we understand that too) ... Because great marketing starts with solid foundations. ... If an agency needs control to do good work, something is probably wrong (barring some kind of fringe API access request that honestly can be handled on a case by case basis).",
+          "The technical storage or access is required to create user profiles to send advertising, or to track the user on a website or across several websites for similar marketing purposes. ... Sign up for our newsletter where we provide assets like this and more.",
+          "At TJ21 Media Group, we never ask clients to transfer ownership of assets, and more often than not have to assist in recovery of assets from former agencies. ... Agencies should provide their Business ID, not a personal Facebook profile. Go to Meta Business Settings and select the correct Business Portfolio. (This matters — many businesses accidentally manage multiple portfolios.)",
+          "Paste the agency’s Business Manager ID. ... This is where most mistakes happen. You will see a list of assets you can share."
+        ]
+      },
+      {
+        "title": "How to Share Business Assets Across Meta Business Suites",
+        "url": "https://ecomparkour.com/blog/share-business-assets-with-another-facebook-business-manager",
+        "description": "Key Takeaways - Meta now routes most asset sharing through Business Settings inside Meta Business Suite, not the legacy Business Manager URL. - <strong>Use &quot;Share Asset&quot; for single tools like a Pixel or Page</strong>. Use &quot;Add Partner&quot; when an agency needs ongoing ...",
+        "extra_snippets": [
+          "A Hootsuite Social Trends Report (2025) found 64% of small brands work with at least one external marketing partner. Yet the asset-sharing flow still trips people up. The UI was rebranded, screens moved, and some old guides still reference \"Business Manager\" buttons that no longer exist.",
+          "Per the Meta Business Help Center (2026), the standard tiers are Admin, Advertiser, and Analyst, though Pages add Editor, Moderator, and Content Creator. Choose the lowest tier that lets the partner do the job. A 2025 HubSpot Marketing Report noted 38% of breach incidents in marketing operations involved over-privileged users.",
+          "Key Takeaways - Meta now routes most asset sharing through Business Settings inside Meta Business Suite, not the legacy Business Manager URL. - Use \"Share Asset\" for single tools like a Pixel or Page. Use \"Add Partner\" when an agency needs ongoing access to multiple assets.",
+          "Per the Meta Business Help Center (2026), \"Share Asset\" grants user-level access to a single property, while \"Add Partner\" creates a Business-to-Business link that lets the partner Suite manage permissions on its own side. For one-off tasks (a freelancer editing your Page banner) use Share Asset."
+        ]
+      },
+      {
+        "title": "How to Give & Request Access to a Meta Business Portfolio",
+        "url": "https://www.leadsie.com/blog/give-request-access-to-meta-business-portfolio",
+        "description": "... Step 1. <strong>Go to Settings @ https://business.facebook.com/settings in Meta Business Suite.</strong> Step 2. Click “Partners” in the left-hand menu under the Users section. ‍ · Step 3. Click “Add,” then choose “Give a partner access to your ...",
+        "extra_snippets": [
+          "A business portfolio (accessed in Meta Business Suite) is a free, centralized hub where you can manage multiple business assets, like Facebook Pages, and control who has access to them; all without relying on personal logins or scattered access. If you’re a marketing agency, you can also use it to request access to client assets and manage them from one place. 💡 Note: You might also see this referred to as “Meta Business Manager”. Meta has updated the name, but some guides still use the old term. ... There are two main ways to do it: people access and partner access.",
+          "This allows them to manage things like ads, content, or messages without taking ownership of your assets. ... Step 1. Go to Settings @ https://business.facebook.com/settings in Meta Business Suite. Step 2. Click “Partners” in the left-hand menu under the Users section. ‍ · Step 3. Click “Add,” then choose “Give a partner access to your assets.” · This tells Meta you want to share access with another business (not an individual user).",
+          "💡 Tip: Only share what they actually need. For example, if they’re only running ads, they may not need access to your Page or messages. Step 6. Set their asset permissions by choosing between: ... Step 7. Click “Assign assets” to complete the setup. In some cases, another admin may need to approve the request before it goes through. ... If you stop working with an agency, you can remove their partner access at any time in Meta Business Suite.",
+          "Meta Business Portfolio was introduced to simplify access management and give businesses more control. There are different types of permissions (portfolio-level vs asset-level), different ways to give access (people vs partners), and multiple ways to request it."
+        ]
+      },
+      {
+        "title": "Obtaining a System User Access Token in Meta – InfoSum",
+        "url": "https://support.infosum.com/hc/en-us/articles/21987155916306-Obtaining-a-System-User-Access-Token-in-Meta",
+        "description": "In Business Manager, <strong>go to &quot;Business Settings&quot; &gt; &quot;Users&quot; &gt; &quot;System Users&quot; Click &quot;Add&quot; to create a new system user</strong>. You can find more information about system users on Meta&#x27;s dev docs for APIs",
+        "extra_snippets": [
+          "In Business Manager, go to \"Business Settings\" > \"Users\" > \"System Users\" Click \"Add\" to create a new system user. You can find more information about system users on Meta's dev docs for APIs",
+          "An understanding of where the customer information in your custom audience was originally collected. (User Provided only, Partner provided only or Both User and partner provided) Permission Errors: Ensure your app has the ads_management permission approved and that the system user has been granted appropriate access to both the app and ad account.",
+          "To create a Meta Destination and connect your Meta Business Manager account with the InfoSum platform you will need to obtain a System User Access Token to authorize InfoSum to send data to your Meta account.",
+          "You can connect your business portfolio now or later and click create app."
+        ]
+      },
+      {
+        "title": "How To Use Meta Business Manager: 2026 Retailer’s Guide - Shopify",
+        "url": "https://www.shopify.com/blog/business-manager-facebook",
+        "description": "<strong>Use the Partners tab to securely share your business assets with an outside agency or request access to theirs</strong>. To connect a partner, you’ll need their Business Portfolio ID. Once connected, you can choose which assets they can access, such ...",
+        "extra_snippets": [
+          "Learn to set up Meta Business Manager (formerly Facebook Business Manager) with this 10-step guide covering Suite, Pixel, ads, partners, and security. ... Meta Business Manager, now called Meta Business Portfolio, is the administrative centre for your collection of Facebook Pages, Instagram accounts, ad accounts, catalogs, and datasets. If you sell on Facebook or Instagram, or run paid campaigns through Meta, you’ll manage the assets in Meta Business Manager. It’s also where you’ll give user permissions and securely share assets with interested parties.",
+          "A social media manager, for example, may need access to a Facebook Page and Instagram account but not an ad account, dataset, or catalog. Partners—agencies, consultants, freelancers with their own Business Portfolio—are added in setup (step 7 above). System users are different: they’re not people; they’re server-to-server integrations that access your assets through Meta’s Marketing API without a personal login attached.",
+          "They’re useful for businesses that manage multiple brands, markets, teams, or agencies. To create a group, go to Settings > Accounts > Business asset groups. Click Add > Create a business asset group. Business asset groups allow you to bundle multiple Facebook pages, ad accounts, or pixels together so you can assign team permissions all at once. Once created, you can add assets such as pages, ad accounts, Instagram accounts, catalogs, and datasets to the group. You can then assign people or partners to the asset group instead of managing permissions asset by asset.",
+          "Use the Partners tab to securely share your business assets with an outside agency or request access to theirs. To connect a partner, you’ll need their Business Portfolio ID. Once connected, you can choose which assets they can access, such as Facebook pages, Instagram accounts, ad accounts, catalogs, or datasets."
+        ]
+      },
+      {
+        "title": "Meta Ads User Management API Guide | Stitchflow",
+        "url": "https://www.stitchflow.com/user-management/meta-ads/api",
+        "description": "The Meta Marketing API (Graph API v20.0, base URL https://graph.facebook.com/v20.0) <strong>exposes full CRUD over Business Manager membership and asset-level ad account assignments</strong>.",
+        "extra_snippets": [
+          "Watch out for: Removes asset-level access only; does not remove the user from the Business Manager. ... Rate limits: Meta Marketing API uses Business Use Case (BUC) rate limiting. Each API call consumes a score based on complexity. Limits are per app per ad account.",
+          "The Meta Marketing API (Graph API v20.0, base URL https://graph.facebook.com/v20.0) exposes full CRUD over Business Manager membership and asset-level ad account assignments.",
+          "Watch out for: Removing a user from the Business Manager automatically revokes all asset-level access (ad accounts, pages, etc.) within that business.",
+          "Onboarding: POST to /{business-id}/business_users to invite, poll /pending_users until acceptance, then re-fetch /business_users to obtain the final business_user ID before POSTing to /act_{ad-account-id}/assigned_users with the appropriate tasks array (MANAGE, ADVERTISE, ANALYZE, or DRAFT). The ID change between pending and active state is a hard requirement - using the pending_user ID for asset assignment will fail."
+        ]
+      },
+      {
+        "title": "GitHub - api-evangelist/facebook-business-manager: APIs for managing Facebook Business accounts, advertising, pages, and assets across the Meta platform family. Facebook Business Manager exposes a deep catalog of Graph API surfaces for marketing, pages, conversions, business asset management, Instagram, insights, Messenger, catalogs, live video, Threads, and the WhatsApp Business Platform, all…",
+        "url": "https://github.com/api-evangelist/facebook-business-manager",
+        "description": "<strong>Facebook Business Manager</strong> exposes a deep catalog of Graph API surfaces for marketing, pages, conversions, business asset management, Instagram, insights, Messenger, catalogs, live video, Threads, and the WhatsApp Business Platform, all governed ...",
+        "extra_snippets": [
+          "APIs for managing Facebook Business accounts, advertising, pages, and assets across the Meta platform family. Facebook Business Manager exposes a deep catalog of Graph API surfaces for marketing, pages, conversions, business asset management, Instagram, insights, Messenger, catalogs, live video, Threads, and the WhatsApp Business Platform, all…",
+          "APIs for managing Facebook Business accounts, advertising, pages, and assets across the Meta platform family. Facebook Business Manager exposes a deep catalog of Graph API surfaces for marketing, pages, conversions, business asset management, Instagram, insights, Messenger, catalogs, live video, Threads, and the WhatsApp Business Platform, all governed through a shared authentication and access model.",
+          "Create and manage product catalogs for use in dynamic ads, shops, and commerce experiences across Meta platforms. The Catalog API allows businesses to upload product information, manage inventory feeds, and synchronize product data for advertising and shopping features. Human URL: https://developers.facebook.com/docs/marketing-api/catalog ... Stream live video content directly to Facebook Pages, user profiles, and groups.",
+          "Human URL: https://developers.facebook.com/docs/marketing-api/business-asset-management ... Manage Instagram Business and Creator accounts through Business Manager. Human URL: https://developers.facebook.com/docs/instagram-api ... Access performance metrics and analytics data for Facebook Pages, ad campaigns, and content. The Insights API provides detailed reporting on engagement, reach, impressions, and audience demographics for businesses managing their Meta presence."
+        ]
+      },
+      {
+        "title": "Meta Business Manager: Partner Access Setup Guide",
+        "url": "https://www.adamigo.ai/blog/meta-business-manager-partner-access-setup-guide",
+        "description": "Go to Business Settings: Start by logging into your Business Manager account and navigating to the settings page. Find &quot;Partners&quot; in the menu: <strong>Under the &quot;Users&quot; section in the left-hand menu, click on &quot;Partners&quot; and then select &quot;Add&quot;.</strong>",
+        "extra_snippets": [
+          "Want to securely share your Meta assets with external partners? Partner access in Meta Business Manager lets you grant permissions to agencies or tools without sharing your login details or ownership. Here's what you need to know: What is Partner Access? It connects two businesses for asset management (ad accounts, Pages, Pixels, etc.) through their own Business Manager accounts.",
+          "Meta Business Manager allows you to share essential assets with partners, such as: Ad Accounts: For running and managing campaigns. Facebook Pages: To handle content publishing and page-level ads.",
+          "Go to Business Settings: Start by logging into your Business Manager account and navigating to the settings page. Find \"Partners\" in the menu: Under the \"Users\" section in the left-hand menu, click on \"Partners\" and then select \"Add\". Enter the partner's Business ID: Your partner, whether it's an agency, contractor, or tool provider, will provide you with their Business ID. Choose the assets to share: Decide which assets you want to grant access to - this could include ad accounts, Pages, Pixels, Instagram accounts, or product catalogs.",
+          "Locate the Partners section, select the partner you want to remove, and click Remove. After completing this, double-check your partner list to confirm they no longer appear. Additionally, verify that shared assets, such as ad accounts or pages, no longer include the partner."
+        ]
+      },
+      {
+        "title": "How To Assign Roles & Permissions In Meta Business Manager",
+        "url": "https://whitebunnie.com/blog/how-to-assign-roles-and-permissions-in-meta-business-manager/",
+        "description": "<strong>Partners can have roles just like People, but they remain in their own Business Manager while accessing your assets</strong>. (There are also System Users, but that’s mainly for API integrations and is beyond a beginner’s setup.)",
+        "extra_snippets": [
+          "Many businesses use this approach when hiring a social media marketing agency for campaign strategy and execution. In Business Settings, under Users, click Partners. Click + Add and enter the agency’s Business ID (they should provide this). Grant the Partner access to your assets (similar to above: choose pages, ad accounts, etc., and set roles).",
+          "You then assign each Person access to specific assets (Pages, ad accounts, etc.) with role levels on each. Partners – These are other business accounts, like an agency’s Business Account. You grant a Partner access by business ID. Partners can have roles just like People, but they remain in their own Business Manager while accessing your assets. (There are also System Users, but that’s mainly for API integrations and is beyond a beginner’s setup.)",
+          "In summary, Meta Business Manager (Business Portfolio) lets you secure and organize your social marketing work by delegating access carefully. Remember: You access roles via Business Settings in Meta Business Suite. Add People or Partners, choose Admin or Employee, then assign asset roles.",
+          "When you open Business Manager/Portfolio, you see all your assets on the left and user access in the center. Even if Meta’s terminology seems to change (for instance, Facebook Business Manager was renamed Business Portfolio, then simplified to Business Manager), the core idea is the same: one dashboard for everything. A Business Account holds all your Pages, ad accounts, Instagram accounts, and team members. By assigning people as either People (employees), Partners (agencies or vendors), or System Users (for apps), you control who can do what."
+        ]
+      },
+      {
+        "title": "Facebook api - request business manager partnership - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/49368744/facebook-api-request-business-manager-partnership",
+        "description": "This is documented in the Business-to-Business Functions of the Assets section. ... <strong>Business Manager may request access to an ad account or a page owned by another business manager</strong>.",
+        "extra_snippets": [
+          "The API is only intended for automating the request being sent when the other party is already aware and agreed to share this permissions. 2018-03-20T11:27:14.367Z+00:00 ... @NazarenoLorenzo Thanks for your answer, This is what I'm trying to do but still permissions errors comes up I get the user token via a login app then with the token I'm requesting to this endpoint to set a facebook page and ad account as assets to a specific business account but's throwing error #10) You do not have permission to perform this action.",
+          "Update So after digging documentation, playing with Facebook Graph API and asking on official Q/A groups we came to conclusion, that at this moment Facebook API doesn't provide any endpoint to request business partnership. So we refactor our flow and now we will request access to business's ad accounts. I will accept answer as correct, cause at this moment this is the only possible solution ... Save this answer. ... Show activity on this post. The Business Manager API provide a functionality to request access to assets.",
+          "Thank you for answer, your answer covers only the part when business already know each other. The quote from the link you have posted - You can only send request to assets to business manager that you intend to approve and that they must already know your business. My question originally is, can we make some partnership requests to business?",
+          "This is documented in the Business-to-Business Functions of the Assets section. ... Business Manager may request access to an ad account or a page owned by another business manager."
+        ]
+      },
+      {
+        "title": "How to Partner in Meta Business Suite",
+        "url": "https://blog.weareclever.com/blog/how-to-partner-in-meta-business-suite",
+        "description": "<strong>Go to Business settings, the gear icon located in the lower left corner of the page.</strong> In the menu on the left, below Users, click Partners. On the next screen, click Add. Then, select: Give a partner access to your assets. Enter your digital marketing partner’s Meta business ID and click Next.",
+        "extra_snippets": [
+          "Go to Business settings, the gear icon located in the lower left corner of the page. Below Users, click Partners. Click your digital marketing partner to open a screen showing two tabs: Click Assets you shared.",
+          "That is your “running total” of asset types you’re sharing with your digital marketing partner. Now, click Save changes. For your records, make a screenshot of the Meta Business Page showing that you’ve shared assets with your digital marketing partner in Meta Business Suite.",
+          "Or perhaps, your company has been the victim of hacking due to a security breach by someone directly associated with your Facebook page or Meta Business Suite account. Setting up vendors, like marketing agencies, through the partner option in Meta Business Suite provides an extra layer of security for this important asset to your company.",
+          "Go to Business settings, the gear icon located in the lower left corner of the page. In the menu on the left, below Users, click Partners. On the next screen, click Add. Then, select: Give a partner access to your assets. Enter your digital marketing partner’s Meta business ID and click Next."
+        ]
+      },
+      {
+        "title": "Manage Assets - Business Management APIs - Documentation - Facebook for Developers",
+        "url": "https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/assets",
+        "description": "<strong>You can add a page to an asset group</strong>. You can add both owned pages and shared pages:",
+        "extra_snippets": [
+          "You can add a page to an asset group. You can add both owned pages and shared pages:",
+          "curl -i -X DELETE \\ \"https://graph.facebook.com/<VERSION>/<BUS_ASSET_GROUP_ID>/contained_pages?asset_id=<ID>&access_token=<TOKEN>\" On success, we return true. Business asset groups can contain either owned or shared ad accounts.",
+          "You can get, add and delete assets from an asset group. This includes ad accounts, pages, Facebook pixels, offline event sets, app, catalogs, Instagram accounts and custom conversions.",
+          "You can add both owned and shared product catalogs to a business asset group."
+        ]
+      },
+      {
+        "title": "How to Give a Partner Access to Your Meta Assets - Adseco",
+        "url": "https://adseco.co.uk/how-to-give-a-partner-access-to-your-meta-assets/",
+        "description": "If you haven’t already created a Meta Business Manager, you can do so here: https://business.facebook.com/ Facebook will ask you to log in to your Facebook profile. ... ✅ We recommend granting full access to all shared assets to avoid permission issues during campaign setup and ongoing management.",
+        "extra_snippets": [
+          "If you haven’t already created a Meta Business Manager, you can do so here: https://business.facebook.com/ Facebook will ask you to log in to your Facebook profile. ... ✅ We recommend granting full access to all shared assets to avoid permission issues during campaign setup and ongoing management.",
+          "Your partner will now have access to the selected assets in their Business Manager. ... When promoting your business on YouTube, you can employ ad targeting methods that leverage a user’s… ... In today’s digital world, online promotion has become a crucial element of business success."
+        ]
+      },
+      {
+        "title": "Meta Ads API: 5 Steps to Connect Third-Party Tools",
+        "url": "https://www.adamigo.ai/blog/5-steps-to-connect-meta-ads-to-third-party-tools",
+        "description": "Using Events Manager to generate an access token is often the easiest way to get this done. If you&#x27;re working with enterprise-level tools, you may need to create a system user, assign specific assets, and safely share ad account access by generating a system user access token with permissions like catalog_management, business_management, and commerce_manage_accounts.",
+        "extra_snippets": [
+          "Using Events Manager to generate an access token is often the easiest way to get this done. If you're working with enterprise-level tools, you may need to create a system user, assign specific assets, and safely share ad account access by generating a system user access token with permissions like catalog_management, business_management, and commerce_manage_accounts.",
+          "In February 2024, a Stack Overflow user named Fabrizio shared a solution for persistent permission errors. He created a Business Asset Group within Meta's Business Manager and properly assigned people and assets to the group before regenerating tokens.",
+          "You’ll be prompted to grant access to your business profile (like your name and profile picture) and select which business assets and permissions to allow. Complete any required verification steps. Once connected, the tool will appear under third-party app integrations in Meta Business Suite or Business Manager.",
+          "Navigate to the tool’s settings to manage business asset permissions."
+        ]
+      }
+    ]
+  },
+  {
+    "query": "Meta Business Login user access token Marketing API external pages",
+    "results": [
+      {
+        "title": "Meta Ads User Management API Guide | Stitchflow",
+        "url": "https://www.stitchflow.com/user-management/meta-ads/api",
+        "description": "The Meta Marketing API (Graph API v20.0, base URL https://graph.facebook.com/v20.0) exposes full CRUD over Business Manager membership and asset-level ad account assignments. ... for server-to-server automation, System User Access Tokens are strongly preferred over User Access Tokens because they can be set to non-expiring, avoiding the ~60-day expiry that breaks unattended workflows.",
+        "extra_snippets": [
+          "The Meta Marketing API (Graph API v20.0, base URL https://graph.facebook.com/v20.0) exposes full CRUD over Business Manager membership and asset-level ad account assignments. ... for server-to-server automation, System User Access Tokens are strongly preferred over User Access Tokens because they can be set to non-expiring, avoiding the ~60-day expiry that breaks unattended workflows.",
+          "Integrating Meta Ads into an identity graph requires reconciling two separate user namespaces: business_user IDs (active members) and pending_user IDs (unaccepted invitations), which are distinct identifiers returned from different endpoints and must not be mixed. Auth method: OAuth 2.0 (User Access Token or System User Access Token) Create a Meta App at developers.facebook.com and add the Marketing API product.",
+          "SCIM provisioning applies to Meta Work Accounts (formerly Workplace by Meta), not directly to Meta Ads Business Manager user roles or ad account task assignments. SCIM does not provision ad account-level task permissions (ADVERTISE, ANALYZE, etc.); those must be managed via the Graph API. No major IdP (Okta, Entra, Google Workspace, OneLogin) has a pre-built Meta Ads SCIM connector listed in their official app catalogs as of the research date. SCIM token is generated within the Workplace/Work Accounts admin console, not via the Marketing API OAuth flow.",
+          "Pass the access token as the 'access_token' query parameter or in the Authorization header on all API requests. ... Watch out for: Requires business_management permission. Only returns users who have accepted their invitation (ACTIVE)."
+        ]
+      },
+      {
+        "title": "Access Tokens for Meta Technologies - Meta for Developers",
+        "url": "https://developers.facebook.com/documentation/facebook-login/guides/access-tokens",
+        "description": "To obtain one, <strong>first get a user access token, then exchange it for a Page access token via the Graph API</strong>.",
+        "extra_snippets": [
+          "An access token is an opaque string that identifies a user, app, or Facebook Page and can be used by the app to make Graph API calls. The token includes information about when it expires and which app generated it. Most API calls on Meta apps require an access token for privacy checks.",
+          "Reload the page to confirm your system user has been granted Full control of your app. Click the Generate token button. In the window that appears, select your app, choose a token expiration preference, and assign the required permissions for your use case. Click Generate token and copy the token when it appears. Client tokens identify your app when calling app-level APIs from native or desktop apps.",
+          "To obtain one, first get a user access token, then exchange it for a Page access token via the Graph API.",
+          "With a Page access token, you can make API calls on behalf of a Page, such as posting a status update to a Page or reading Page Insights data."
+        ]
+      },
+      {
+        "title": "Access Token Guide - Facebook Login - Documentation - Meta for Developers",
+        "url": "https://developers.facebook.com/docs/facebook-login/guides/access-tokens/",
+        "description": "An access token is <strong>an opaque string that identifies a user, app, or Page and can be used by the app to make graph API calls</strong>. The token includes information about when the token will expire and which app generated the token. Because of privacy checks, the majority of API calls on Meta apps need ...",
+        "extra_snippets": [
+          "Apps with Standard access to Facebook's Marketing API when using long-lived tokens will receive long-lived tokens that don't have an expiry time. These tokens are still subject to invalidation for other reasons, but won't expire solely based on time. This is also true of access tokens for System Users in Business Manager.",
+          "An access token is an opaque string that identifies a user, app, or Page and can be used by the app to make graph API calls. The token includes information about when the token will expire and which app generated the token. Because of privacy checks, the majority of API calls on Meta apps need to include an access token.",
+          "Page access tokens are unique to each Page, admin, and app. Like App tokens, Client tokens make Graph API requests on behalf of apps instead of users.",
+          "With a page access token you can make API calls on behalf of a Page."
+        ]
+      },
+      {
+        "title": "Facebook Login for Business - Meta for Developers",
+        "url": "https://developers.facebook.com/documentation/facebook-login/facebook-login-for-business",
+        "description": "To create a Conversions API for Business Messaging configuration, visit our Marketing API – Conversions API for Business Messaging guide. To create an Instagram Graph API configuration, visit our Instagram Graph API documentation. Invoke a login dialog using one of our SDKs (recommended) or manually build your login flow. You can use any of our SDKs to invoke the login dialog by replacing the list of scopes (permissions) your app needs with your configuration ID and the access token’s required OAuth grant type.",
+        "extra_snippets": [
+          "Facebook Login for Business is the preferred authentication and authorization solution for tech providers building integrations with Meta’s business tools to create marketing, messaging, and selling solutions. Facebook Login for Business allows you to create a login experience in the Meta App Dashboard based on the needs of your app. You can specify the access token type, assets, and permissions your app needs, and save it as a configuration.",
+          "On success your app receives a JSON response with a new access token to be used in subsequent API calls. ... The following are the steps required to set up Facebook Login for Business if you don’t already have an app. In Meta’s App Dashboard, create a Business type app.",
+          "If you only request email and/or public_profile from your business clients, switching the app to Facebook Login for Business will lead to the invalidation of all previously installed tokens for these clients. If your app has both Facebook Login for Business and Meta Business Extension, the Meta Business Extension experience will be limited to permissions supported by Facebook Login for Business. Business Asset User Profile Access may affect how user profile data is accessed and managed through our APIs.",
+          "To create a Conversions API for Business Messaging configuration, visit our Marketing API – Conversions API for Business Messaging guide. To create an Instagram Graph API configuration, visit our Instagram Graph API documentation. Invoke a login dialog using one of our SDKs (recommended) or manually build your login flow. You can use any of our SDKs to invoke the login dialog by replacing the list of scopes (permissions) your app needs with your configuration ID and the access token’s required OAuth grant type."
+        ]
+      },
+      {
+        "title": "r/webdev on Reddit: Need help with Meta Marketing API authentication for accessing Ads data",
+        "url": "https://www.reddit.com/r/webdev/comments/1i3aucs/need_help_with_meta_marketing_api_authentication/",
+        "description": "That error (subcode 2332002) is specific to the Ads Library API needing a separate registration step. Even with ads_read and ads_management on your token, /ads_archive won&#x27;t work until you go to facebook.com/ads/library/api and register for Ad Library access there .",
+        "extra_snippets": [
+          "The reason your colleague's token works but yours doesn't is almost certainly a role mismatch at the Business Manager level, not the token level. Check your role under Business Settings > People. You need to be an admin on the Business Portfolio that owns the app.",
+          "(1) Custom app on my company's business portfolio with: ... I tried approach (1) with my colleague's User access token with the same permissions and it somehow worked, but it doesn't work for me in any of the cases.",
+          "That error (subcode 2332002) is specific to the Ads Library API needing a separate registration step. Even with ads_read and ads_management on your token, /ads_archive won't work until you go to facebook.com/ads/library/api and register for Ad Library access there .",
+          "Posted by u/zeb0rg - 4 votes and 10 comments"
+        ]
+      },
+      {
+        "title": "Authentication - Meta for Developers - Facebook",
+        "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authentication",
+        "description": "We cannot provide a description for this <strong>page</strong> right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "Obtaining a System User Access Token in Meta – InfoSum",
+        "url": "https://support.infosum.com/hc/en-us/articles/21987155916306-Obtaining-a-System-User-Access-Token-in-Meta",
+        "description": "In Business Manager, <strong>go to &quot;Business Settings&quot; &gt; &quot;Users&quot; &gt; &quot;System Users&quot; Click &quot;Add&quot; to create a new system user</strong>. You can find more information about system users on Meta&#x27;s dev docs for APIs",
+        "extra_snippets": [
+          "In Business Manager, go to \"Business Settings\" > \"Users\" > \"System Users\" Click \"Add\" to create a new system user. You can find more information about system users on Meta's dev docs for APIs",
+          "To create a Meta Destination and connect your Meta Business Manager account with the InfoSum platform you will need to obtain a System User Access Token to authorize InfoSum to send data to your Meta account.",
+          "Go to developers.facebook.com and log in. You will be creating a business app.",
+          "You can connect your business portfolio now or later and click create app."
+        ]
+      },
+      {
+        "title": "How to Generate a Meta Marketing API Access Token | A Step-by-Step Guide",
+        "url": "https://digital-expanse.com/tutorials/facebook-marketing-api-access-token/",
+        "description": "... An API access token is <strong>a security credential that acts as a key to authenticate and authorize access to the Facebook Marketing API</strong>. Access tokens are obtained through the Meta Developer portal and are required for every API call to ensure ...",
+        "extra_snippets": [
+          "Learn how to generate a Meta marketing API access token.",
+          "This API enables businesses and developers to create custom applications, automate advertising processes, and extract valuable insights from their Facebook ad campaigns. ... An API access token is a security credential that acts as a key to authenticate and authorize access to the Facebook Marketing API. Access tokens are obtained through the Meta Developer portal and are required for every API call to ensure proper validation and control over the data and actions requested."
+        ]
+      },
+      {
+        "title": "How to get Facebook Access Token in 1 minute ( 2026 )",
+        "url": "https://elfsight.com/blog/how-to-get-facebook-access-token/",
+        "description": "business_management gives a permission ... available group member information. <strong>manage_pages gives permission to retrieve Page Access Tokens for the Pages and Apps that the app user administers</strong>....",
+        "extra_snippets": [
+          "business_management gives a permission to read and write with the Business Manager API. groups_access_member_info gives a permission to publicly available group member information. manage_pages gives permission to retrieve Page Access Tokens for the Pages and Apps that the app user administers.",
+          "Also, keep in mind that we’ve got other awesome guides, for example, you can find out how to embed google business reviews on website! ... I’m Andrei Kozinskiy, Marketing Lead at Elfsight. I’m responsible for driving user growth through content and various traffic channels.",
+          "Facebook access token is an opaque string which is used to identify the user, application, or page and can be applied by the application to make graph API calls. Getting token for Facebook page is absolutely free.",
+          "Working with the Facebook API, specifically, displaying your personal Facebook Feed or profile page on a website, requires a Access Token."
+        ]
+      },
+      {
+        "title": "How to Set Up a Meta Ads API Access Token: Step-by-Step Configuration",
+        "url": "https://www.adamigo.ai/blog/meta-ads-api-key-setup-guide",
+        "description": "This involves <strong>creating a developer app, enabling the Marketing API, and generating access tokens</strong>. Start by logging into the Meta for Developers portal and heading to the App Dashboard.",
+        "extra_snippets": [
+          "An active ad account linked to your Business Manager. A registered Meta Developer account for creating apps. ... Create a developer app in the Meta for Developers portal. Enable the Marketing API and configure permissions.",
+          "If you're working in a production environment or setting up third-party integrations, you’ll need to create a System User within Business Manager. System User tokens are ideal for server-to-server communication since they don’t expire like standard user tokens, which last only 1 to 2 hours (short-lived) or up to 60 days (long-lived). After setting up your developer account, familiarize yourself with how Meta’s Marketing API is structured to streamline the process of generating keys.",
+          "This involves creating a developer app, enabling the Marketing API, and generating access tokens. Start by logging into the Meta for Developers portal and heading to the App Dashboard. Click on \"Create App\" and choose the app type that fits your needs - typically Business for advertising integrations.",
+          "Enter your app name, a contact email, and link the appropriate Business Manager account. Once the app is created, make sure to save the provided App ID and App Secret, as you'll need them to generate tokens later. In your App Dashboard, go to the \"Add Products\" section and select Marketing API."
+        ]
+      },
+      {
+        "title": "System User Access Token Handling - Meta for Developers",
+        "url": "https://developers.facebook.com/docs/marketing-api/guides/smb/system-user-access-token-handling/",
+        "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can",
+        "extra_snippets": []
+      },
+      {
+        "title": "Facebook Marketing API (MAPI) | Facebook Marketing API | Postman API Network",
+        "url": "https://www.postman.com/meta/facebook-marketing-api/collection/0zr4mes/facebook-marketing-api-mapi",
+        "description": "The API supports both user and system user access tokens. You can get a user access token by <strong>loading your app in the app dashboard and Add Marketing API as a product to your app</strong>.",
+        "extra_snippets": [
+          "If your app is managing other people’s ad accounts, you need Advanced Access ads_read and/or ads_management permissions. See all available permissions for business apps. You can paste your token into the access token debugger to see what type of token it is and what permission you have granted to your app.",
+          "The API supports both user and system user access tokens. You can get a user access token by loading your app in the app dashboard and Add Marketing API as a product to your app.",
+          "Since user access tokens expire after 24 hours, you'll likely want to generate a system user access token, which lasts up to 60 days (or permanently, if you wish).",
+          "See System Users to learn how to create a system user and system user access token."
+        ]
+      },
+      {
+        "title": "GitHub - facebook/facebook-php-business-sdk: PHP SDK for Meta Marketing API · GitHub",
+        "url": "https://github.com/facebook/facebook-php-business-sdk",
+        "description": "For example, to access the Marketing API, you need to <strong>generate a User access token for your app and ask for the ads_management permission</strong>; to access Pages API, you need to generate a Page access token for your app and ask for the manage_page ...",
+        "extra_snippets": [
+          "To manage the Marketing API, please visit your App Dashboard and add the Marketing API product to your app. IMPORTANT: For security, it is recommended that you turn on 'Require App Secret' in your app's Settings->Advanced page. When someone connects with an app using Facebook Login and approves the request for permissions, the app obtains an access token that provides temporary, secure access to Facebook APIs.",
+          "An access token is an opaque string that identifies a User, app, or Page. For example, to access the Marketing API, you need to generate a User access token for your app and ask for the ads_management permission; to access Pages API, you need to generate a Page access token for your app and ask for the manage_page permission.",
+          "For this reason Facebook has developed the Business SDK bundling many of its APIs into one SDK to ease implementation and upkeep. The Business SDK is an upgraded version of the Marketing API SDK that includes the Marketing API as well as many Facebook APIs from different platforms such as Pages, Business Manager, Instagram, etc.",
+          "For now, we can use the Graph Explorer to get an access token. The Facebook Business SDK requires PHP 8.0 or greater. The Facebook Business SDK uses composer to manage dependencies. Visit the composer documentation to learn how to install composer. ... This SDK and its dependencies will be installed under ./vendor. This repository is written following the psr-4 autoloading standard. Any psr-4 compatible autoloader can be used. The FacebookAds\\Api object is the foundation of the Business SDK which encapsulates a FacebookAds\\Session and is used to execute requests against the Graph API."
+        ]
+      },
+      {
+        "title": "Facebook Marketing API (MAPI) | Documentation",
+        "url": "https://www.postman.com/meta/facebook-marketing-api/documentation/0zr4mes/facebook-marketing-api-mapi",
+        "description": "We cannot provide a description for this <strong>page</strong> right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "How to generate Facebook Marketing API access token to use it in Windows application - Stack Overflow",
+        "url": "https://stackoverflow.com/questions/28834319/how-to-generate-facebook-marketing-api-access-token-to-use-it-in-windows-applica",
+        "description": "You may also want to consider managing the app, ad account, and access tokens (via a business system user) with the FB Business Manager.",
+        "extra_snippets": [
+          "1 Why am I getting \"Ad account owner has NOT granted ads_management or ads_read permission\" error with Meta API despite having the permissions?",
+          "You may also want to consider managing the app, ad account, and access tokens (via a business system user) with the FB Business Manager."
+        ]
+      },
+      {
+        "title": "Overview - Business Management APIs - Meta for Developers",
+        "url": "https://developers.facebook.com/docs/business-management-apis/system-users/overview/",
+        "description": "We cannot provide a description for this <strong>page</strong> right now",
+        "extra_snippets": []
+      },
+      {
+        "title": "GitHub - facebook/facebook-python-business-sdk: Python SDK for Meta Marketing APIs · GitHub",
+        "url": "https://github.com/facebook/facebook-python-business-sdk",
+        "description": "For example, to access the Marketing API, you need to <strong>generate a user access token for your app and ask for the ads_management permission</strong>; to access Pages API, you need to generate a Page access token for your app and ask for the manage_page ...",
+        "extra_snippets": [
+          "To manage the Marketing API, please visit your App Dashboard and add the Marketing API product to your app. IMPORTANT: For security, it is recommended that you turn on 'App Secret Proof for Server API calls' in your app's Settings->Advanced page. When someone connects with an app using Facebook Login and approves the request for permissions, the app obtains an access token that provides temporary, secure access to Facebook APIs.",
+          "An access token is an opaque string that identifies a User, app, or Page. For example, to access the Marketing API, you need to generate a user access token for your app and ask for the ads_management permission; to access Pages API, you need to generate a Page access token for your app and ask for the manage_page permission.",
+          "For this reason Facebook has developed the Business SDK bundling many of its APIs into one SDK to ease implementation and upkeep. The Business SDK is an upgraded version of the Marketing API SDK that includes the Marketing API as well as many Facebook APIs from different platforms such as Pages, Business Manager, Instagram, etc.",
+          "You should see the result in your terminal window. If it complains about an expired token, repeat the process for requesting a Page Access Token described in the prerequisites section above."
+        ]
+      },
+      {
+        "title": "Access Tokens Guide - Meta for Developers",
+        "url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/access-tokens/",
+        "description": "As you develop your app, however, ... a new one every few hours. There are several ways to generate a User access token: <strong>Access the App Dashboard &gt; WhatsApp &gt; API setup panel</strong>....",
+        "extra_snippets": [
+          "It may take a few minutes for the permissions to be granted, so reload the page after a few minutes if your app doesn’t appear as an assigned asset. Once the asset has been assigned, it should look like this: Once you see that your system user has been granted full control of your app, in the asset assignment overlay, click the Generate token button. In the window that appears, select your app, choose a token expiration preference, and assign your app these three Graph API permissions:",
+          "As you develop your app, however, you will switch to a System User access token (and eventually a Business System User access token, if you are a Tech Provider or a Solution Provider). This is because user access tokens expire quickly, so you will have to keep generating a new one every few hours. There are several ways to generate a User access token: Access the App Dashboard > WhatsApp > API setup panel.",
+          "After creating a system user, you must set business asset access levels. Many endpoints require the system user whose token is included in API requests to have either Partial or Full business asset access to the WABA being queried (or its assets).",
+          "Use Graph API Explorer."
+        ]
+      },
+      {
+        "title": "Meta Ads API Key & Access Token Creation Workflow",
+        "url": "https://www.adamigo.ai/blog/meta-ads-api-key-creation-workflow-explained",
+        "description": "What the platform provides are access tokens — <strong>time-bound credentials that grant your application permission to interact with the Meta Marketing API</strong>. The terms &quot;API key&quot; and &quot;access token&quot; are used interchangeably across the industry, and ...",
+        "extra_snippets": [
+          "They're tied to your Business Manager, not an individual, so they survive personnel changes and don't expire based on time when your app has Full Access to the Marketing API. ... In Business Manager, navigate to Users > System Users. Create a new System User or select an existing one. Assign it the Admin role on the assets it needs: your app, ad accounts, Pages, catalogs, and Pixels.",
+          "What the platform provides are access tokens — time-bound credentials that grant your application permission to interact with the Meta Marketing API. The terms \"API key\" and \"access token\" are used interchangeably across the industry, and Google treats them as the same intent: this page ranks for both.",
+          "For the Marketing API, three permissions matter most: For a basic integration that pulls reports, ads_read is enough. For automated campaign management, you need ads_management. For platforms that create and manage ad accounts programmatically — like AdAmigo.ai's agency workflows — business_management at Full Access is also required.",
+          "Limited Access: The entry-level tier. Your app can make Marketing API calls, but with stricter rate limits. This replaces the old \"Standard Access\" label. Requirements: a verified Business Manager and a live app with the Marketing API product enabled."
+        ]
+      },
+      {
+        "title": "Meta System User Access Tokens: SaaS Guide (2026)",
+        "url": "https://singhamandeep.com/meta-system-user-access-tokens/",
+        "description": "Belongs to a &quot;system user&quot; — an entity inside your Meta business portfolio that represents software, not a person. Built for programmatic, automated actions without user input or re-authentication. Tokens can be generated as long-lived, including tokens that do not expire, which is why this is the standard model for Marketing API and WhatsApp Cloud API backends.",
+        "extra_snippets": [
+          "User access tokens expire and break automated Meta API integrations. System user tokens and Business Integration System User tokens are how SaaS platforms get stable, long-lived access — here is how the token model works and where setups go wrong.",
+          "Belongs to a \"system user\" — an entity inside your Meta business portfolio that represents software, not a person. Built for programmatic, automated actions without user input or re-authentication. Tokens can be generated as long-lived, including tokens that do not expire, which is why this is the standard model for Marketing API and WhatsApp Cloud API backends.",
+          "The system user must install your app before it can generate a token for it, and the assets it will touch — Pages, ad accounts, WABAs, catalogs — must be assigned with the right level of control. Most \"token works in Graph API Explorer but fails in production\" cases trace back to this step.",
+          "Facebook App Review Instagram App Review WhatsApp App Review Business Verification Rejection Fix Service · ChatPion App Approval BotSailor App Approval Stackposts App Approval Chatwoot App Approval MagicAI App Approval Beepost App Approval SocialAI App Approval IniBazar App Approval Postiz App Approval Midrub App Approval SocialVibe App Approval · YouTube API Setup LinkedIn API Setup Hire Facebook API Developer"
+        ]
+      }
+    ]
+  }
+]
