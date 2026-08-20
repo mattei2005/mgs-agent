@@ -1,0 +1,177 @@
+{
+  "generated_at_utc": "2026-08-20T21:05:05.395269+00:00",
+  "status": "COMPLETED",
+  "operation": "creative_lineage_trash",
+  "thread_id": "1540085104322543726",
+  "requested_by": "Kelly Nice",
+  "authorized_by": "Kelly Nice",
+  "authorization": "Explicit Sim after critical confirmation; Rodolfo authorization context present in thread",
+  "permanent_delete": false,
+  "lineage_count": 3,
+  "drive_files_trashed": 6,
+  "all_drive_trash_readback_verified": true,
+  "all_absent_from_active_parent_listings": true,
+  "inventory_rows_updated": 3,
+  "inventory_readback_verified": true,
+  "inventory_backup": "/root/mgs-agent/backups/ares-creative-ops/assets-before-kelly-trash-20260820T210456Z.jsonl",
+  "preflight": "/root/mgs-agent/data/ares/creative-ops/deletion-preflight/kelly-cc-us-en-es-delete-preflight-20260820T210129Z.json",
+  "before": [
+    {
+      "lineage_source_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "role": "source_raw",
+      "id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "name": "10_límite disponible.mp4",
+      "parents": [
+        "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk"
+      ],
+      "size": 4865980,
+      "trashed": false
+    },
+    {
+      "lineage_source_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "role": "asset_clean",
+      "id": "1VR1FaXCyqd8LmbB28SXK7ap7RfpLyYm3",
+      "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_043.mp4",
+      "parents": [
+        "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+      ],
+      "size": 4862456,
+      "trashed": false
+    },
+    {
+      "lineage_source_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "role": "source_raw",
+      "id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "name": "13_08 - Story ( ingles) .mp4",
+      "parents": [
+        "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk"
+      ],
+      "size": 5278229,
+      "trashed": false
+    },
+    {
+      "lineage_source_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "role": "asset_clean",
+      "id": "1VMVEdDGKRSbb3kvSdIBOJQAiqlbjbjFs",
+      "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_046.mp4",
+      "parents": [
+        "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+      ],
+      "size": 5274705,
+      "trashed": false
+    },
+    {
+      "lineage_source_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "role": "source_raw",
+      "id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "name": "6_$14,760.mp4",
+      "parents": [
+        "1fCetqJFt09TvUFSDA6rvHLzZ5cIfaUTo"
+      ],
+      "size": 4872347,
+      "trashed": false
+    },
+    {
+      "lineage_source_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "role": "asset_clean",
+      "id": "18-Mi5iAAU1zumSSvU3Kw0iEQi2Fa6D2-",
+      "name": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_006.mp4",
+      "parents": [
+        "1_2vN1ryrF2yAgzchOgqBZnmX4IeWTGFA"
+      ],
+      "size": 4868823,
+      "trashed": false
+    }
+  ],
+  "after": [
+    {
+      "lineage_source_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "role": "source_raw",
+      "id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "name": "10_límite disponible.mp4",
+      "parents": [
+        "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk"
+      ],
+      "size": 4865980,
+      "trashed": true
+    },
+    {
+      "lineage_source_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "role": "asset_clean",
+      "id": "1VR1FaXCyqd8LmbB28SXK7ap7RfpLyYm3",
+      "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_043.mp4",
+      "parents": [
+        "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+      ],
+      "size": 4862456,
+      "trashed": true
+    },
+    {
+      "lineage_source_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "role": "source_raw",
+      "id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "name": "13_08 - Story ( ingles) .mp4",
+      "parents": [
+        "1GqtML2FV98rlXbRP4UGsFba7_BEpLCEk"
+      ],
+      "size": 5278229,
+      "trashed": true
+    },
+    {
+      "lineage_source_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "role": "asset_clean",
+      "id": "1VMVEdDGKRSbb3kvSdIBOJQAiqlbjbjFs",
+      "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_046.mp4",
+      "parents": [
+        "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+      ],
+      "size": 5274705,
+      "trashed": true
+    },
+    {
+      "lineage_source_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "role": "source_raw",
+      "id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "name": "6_$14,760.mp4",
+      "parents": [
+        "1fCetqJFt09TvUFSDA6rvHLzZ5cIfaUTo"
+      ],
+      "size": 4872347,
+      "trashed": true
+    },
+    {
+      "lineage_source_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "role": "asset_clean",
+      "id": "18-Mi5iAAU1zumSSvU3Kw0iEQi2Fa6D2-",
+      "name": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_006.mp4",
+      "parents": [
+        "1_2vN1ryrF2yAgzchOgqBZnmX4IeWTGFA"
+      ],
+      "size": 4868823,
+      "trashed": true
+    }
+  ],
+  "lineages": [
+    {
+      "asset_id": "asset_be60a6a20eb2b8ac08ac",
+      "original_filename": "10_límite disponible.mp4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_043.mp4",
+      "source_drive_id": "1pv3ldzOGJgfJF9pkVcjj7WWIPQAhE9Iu",
+      "asset_drive_id": "1VR1FaXCyqd8LmbB28SXK7ap7RfpLyYm3"
+    },
+    {
+      "asset_id": "asset_ddbc6bc2f3b2a1f5a0e3",
+      "original_filename": "13_08 - Story ( ingles) .mp4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_046.mp4",
+      "source_drive_id": "1eY8NfZBo5tez3nRz68ubZmsixbXX5cJ1",
+      "asset_drive_id": "1VMVEdDGKRSbb3kvSdIBOJQAiqlbjbjFs"
+    },
+    {
+      "asset_id": "asset_d895145e160d855cfc21",
+      "original_filename": "6_$14,760.mp4",
+      "canonical_filename": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_006.mp4",
+      "source_drive_id": "1ZYSVVFlOAZ_h52SSK428FYoNeItLiuFg",
+      "asset_drive_id": "18-Mi5iAAU1zumSSvU3Kw0iEQi2Fa6D2-"
+    }
+  ]
+}

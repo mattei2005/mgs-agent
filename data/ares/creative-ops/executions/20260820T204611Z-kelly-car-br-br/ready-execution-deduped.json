@@ -8,20 +8,12 @@
   "duplicate_sources": 1,
   "metadata_clean_verified": 18,
   "raw_legacy_verified": 19,
-  "upload_manual_remaining": 1,
+  "upload_manual_remaining": 0,
   "reservation_status": "RESERVADO_PELO_GESTOR",
   "ares_eligible": false,
   "active_report": "/root/mgs-agent/data/ares/creative-ops/executions/20260820T204611Z-kelly-car-br-br/ready-execution-deduped.csv",
   "lineage_report": "/root/mgs-agent/data/ares/creative-ops/executions/20260820T204611Z-kelly-car-br-br/ready-lineages-deduped.csv",
   "dedupe_report": "/root/mgs-agent/data/ares/creative-ops/executions/20260820T204611Z-kelly-car-br-br/clean-dedupe.csv",
-  "pending": [
-    {
-      "source_drive_id": "1s7eLcPrLY8JI9sfiQbmFF-SfF0w5-xGd",
-      "source_filename": "12_01 - Story ( ESPANHOL) .mp4",
-      "status": "PENDING_DESTINATION_CLARIFICATION",
-      "reason": "Conteúdo visual de cartão de crédito em espanhol; país/operação não podem ser inferidos com segurança. Mantido em UPLOAD MANUAL sem alteração."
-    }
-  ],
   "items": [
     {
       "source_drive_id": "1aQcjH8EidXjtNZLYTrbqwN0tWpdllX5-",
@@ -196,5 +188,23 @@
     }
   ],
   "ready_link": "https://drive.google.com/drive/folders/18cGu-O2BPqaZgBcwJrfhOU2trkgj6h_i",
-  "legacy_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3"
+  "legacy_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
+  "resolved_out_of_scope_items": [
+    {
+      "source_filename": "12_01 - Story ( ESPANHOL) .mp4",
+      "resolved_operation": "CC_US_ES",
+      "disposition": "DUPLICATE_SOURCE",
+      "active_destination_filename": "CC_US_ES_VID_LIMITE_DISPONIBLE_PV_008.mp4",
+      "resolved_at_utc": "2026-08-20T21:06:24.563705+00:00",
+      "resolution_note": "Destino confirmado por Kelly; RAW preservado em CC_US_ES/VID/99_LEGACY e vinculado à linhagem ativa já existente."
+    }
+  ],
+  "pending_resolution_history": [
+    {
+      "source_drive_id": "1s7eLcPrLY8JI9sfiQbmFF-SfF0w5-xGd",
+      "source_filename": "12_01 - Story ( ESPANHOL) .mp4",
+      "status": "PENDING_DESTINATION_CLARIFICATION",
+      "reason": "Conteúdo visual de cartão de crédito em espanhol; país/operação não podem ser inferidos com segurança. Mantido em UPLOAD MANUAL sem alteração."
+    }
+  ]
 }

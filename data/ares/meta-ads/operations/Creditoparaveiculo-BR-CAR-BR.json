@@ -138,6 +138,8 @@
   "daily_new_campaign_routine": {
     "authorized_by": "Rodolfo Mattei",
     "reconfirmed_at_et": "2026-08-20T14:48:29-04:00",
+    "activated_at_et": "2026-08-20T17:06:18-04:00",
+    "status": "active_scheduled",
     "responsibility": "Ares daily operation includes creating new direct-traffic campaigns in addition to analysis, D1/D2 scaling and campaign-level pauses",
     "account_operational_cap_usd": 300,
     "new_campaign_budget_share": 0.2,
@@ -147,8 +149,12 @@
     "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
     "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
     "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
+    "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
     "budget_gate": "complete live active-budget preflight; never exceed USD300 account cap",
+    "creative_source": "Shared Drive MGS-AGENTS/CRIATIVOS/CAR_BR_BR; select only reconciled unique lineages and move used assets from 01_READY to 02_TESTING after Meta readback",
+    "stock_reporting_required": true,
+    "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
     "production_readback": "campaign/adset/ads published, start time 00:30 next day, exact strategy, UTMs, budget and hierarchy validated before handoff"
   },
@@ -222,7 +228,8 @@
       "level": "campaign_only",
       "allowed": [
         "scale campaign daily_budget by approved ROI tiers 10/20/30 percent at the 08:00 checkpoint",
-        "pause campaign on D3 only after actual ROI, estimated revenue and fully calibrated external anomaly gates"
+        "pause campaign on D3 only after actual ROI, estimated revenue and fully calibrated external anomaly gates",
+        "create the daily 17:00 Sao Paulo cycle as 2 MAXVOL campaigns of USD30 each with six unique reconciled Drive creatives, start_time 00:30 next day and full readback"
       ],
       "current_gate_status": {
         "budget_scale": "enabled",
@@ -279,7 +286,7 @@
         "raise account operational cap",
         "billing/payment/credentials",
         "adset or ad level shutdown",
-        "campaign creation/clone/replacement until their independent gates pass",
+        "clone/replacement outside the separately approved daily from-zero creation route",
         "other accounts or operations"
       ]
     }
@@ -406,6 +413,24 @@
       "direct_thread_post": "1539832402744975450",
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight"
+    },
+    "daily_creation": {
+      "internal_job_id": "2cf8115a4f8b",
+      "name": "Creditoparaveiculo 13 G006 Criacao diaria 17h",
+      "scheduler": "hourly minute 0",
+      "timezone_gate": "17:00 America/Sao_Paulo daily",
+      "script": "creditoparaveiculo-daily-create.sh",
+      "runner": "creditoparaveiculo-daily-create.py",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539826050765299872",
+      "enabled": true,
+      "campaigns_per_day": 2,
+      "budget_usd_each": 30,
+      "bid_strategy": "MAXVOL",
+      "creative_count_per_campaign": 3,
+      "stock_report_after_every_creation": true,
+      "scheduled_start": "00:30 next day America/Sao_Paulo"
     },
     "snapshot": {
       "internal_job_id": "f45eed5047b9",
@@ -856,13 +881,13 @@
   },
   "campaign_creation_window": {
     "timezone": "America/Sao_Paulo",
-    "prepare_pool_before": "18:00",
-    "create_and_schedule_at": "18:00",
-    "approval_monitor_window": "18:00-23:30",
+    "prepare_pool_before": "17:00",
+    "create_and_schedule_at": "17:00",
+    "approval_monitor_window": "17:00-23:30",
     "final_approval_readback_at": "23:30",
     "scheduled_delivery_start": "00:30 next day",
     "eastern_reference_august_2026": {
-      "create": "17:00 EDT",
+      "create": "16:00 EDT",
       "final_readback": "22:30 EDT",
       "delivery_start": "23:30 EDT"
     },
