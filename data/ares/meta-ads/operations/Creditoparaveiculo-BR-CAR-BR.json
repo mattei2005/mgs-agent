@@ -421,6 +421,7 @@
       "timezone_gate": "17:00 America/Sao_Paulo daily",
       "script": "creditoparaveiculo-daily-create.sh",
       "runner": "creditoparaveiculo-daily-create.py",
+      "deferred_readback_reconciler": "creditoparaveiculo-daily-create-resume.py; hourly wrapper checks persisted state and resumes only after cooldown",
       "no_agent": true,
       "deliver": "local",
       "direct_thread_post": "1539826050765299872",
@@ -668,24 +669,40 @@
   "daily_creation_preflight_20260820_17h": {
     "requested_by": "Rodolfo Mattei",
     "requested_start_sp": "2026-08-20T17:00:00-03:00",
-    "status": "blocked_pending_bid_strategy_choice_before_write",
+    "status": "first_write_cleaned_after_meta_code17; deterministic_retry_scheduled_after_65m_cooldown",
     "planned_budget_pool_usd": 60,
     "planned_default_campaigns": 2,
     "planned_budget_usd_each": 30,
     "planned_start_sp": "2026-08-21T00:30:00-03:00",
     "creative_source": "Shared Drive MGS-AGENTS through canonical inventory + live Drive/Meta reconciliation",
     "inventory_preflight": {
-      "car_br_total": 56,
-      "ready": 55,
-      "trashed": 1,
-      "ares_eligible_true": 0,
-      "legacy_needs_meta_reconciliation": 36,
-      "reserved_by_manager": 20,
-      "selection_gate": "Rodolfo authorized Drive selection; chosen assets still require live Drive readback, Meta reconciliation and explicit per-asset reservation before campaign write"
+      "drive_ready_total_live": 263,
+      "drive_ready_img_live": 42,
+      "drive_ready_vid_live": 221,
+      "released_reconciled_unique": 58,
+      "exact_duplicate_lineages_blocked": 1,
+      "ares_eligible_true": 58,
+      "selected_for_today": 6,
+      "selection_gate": "Rodolfo expressly authorized Drive selection; selected assets passed live Drive readback, Meta 126-ad/226-video reconciliation, exact fingerprint dedupe, technical QA and visual QA"
     },
     "strategy_recommendation": "2 MAXVOL campaigns based on C07 delivery restriction at CPA target USD0.50 and more delivery latitude in highest-volume strategy",
-    "blocking_question": "Confirm 2x MAXVOL, 2x COSTCAP with target value, or 1 of each",
-    "selected_assets": []
+    "strategy_confirmed_by_Rodolfo": "2x MAXVOL",
+    "first_write_result": {
+      "status": "failed_clean",
+      "reason": "Meta code 17 subcode 2446079 during final GET readback",
+      "created_then_cleaned": "2 campaigns, 6 ads, 6 creatives and 12 technical videos",
+      "cleanup_complete": true,
+      "assets_consumed": 0,
+      "retry_policy": "one deterministic retry after 65-minute account cooldown; future final-readback rate limits persist readback_deferred instead of premature cleanup"
+    },
+    "selected_assets": [
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_017.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_018.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_037.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_038.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_039.mp4"
+    ]
   },
   "hierarchy_normalization_state": {
     "validated_at_sao_paulo": "2026-08-19T16:12:33.660637-03:00",

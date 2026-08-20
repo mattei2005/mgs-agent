@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rotina diária de campanhas Drive segue pendente da definição da estratégia das duas campanhas (recomendação 2x MAXVOL). Não há C50 nova viva após o cleanup.",
-      "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; audits create-c50-maxvol-from-zero-20260820T200337Z and delete-c50-maxvol-20260820T201446Z; operation v1.0.37; skill v1.0.22",
-      "state": "c50 maxvol recriada do zero, publicada/paused e aprovada manualmente por rodolfo como perfeita. após nova autorização explícita, cleanup concluído: campanha/adset/3 ads/3 creatives/6 vídeos técnicos deleted, spend usd0 e readback completo. slot c50 volta a ficar livre segundo regra ciro/sb. nomenclatura/reporting/utm permanecem vigentes.",
-      "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T20:16:22+00:00"
+      "next_step": "Executar o retry deterministico apos o cooldown da conta, validar C50/C49 1x1x3 por GET, mover os seis assets 01_READY para 02_TESTING, atualizar inventario e publicar o estoque restante; se o GET voltar a limitar, o reconciliador horario retoma apos o novo cooldown antes de 00:30.",
+      "objective": "Operar trafego direto CBO e a criacao diaria de campanhas para creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1539826050765299872; operation config; dry-run audit daily-create-2026-08-20-20260820T210618Z; failed-clean audit daily-create-2026-08-20-20260820T210712Z; scheduler readback enabled+scheduled",
+      "state": "rotina diaria ativada para 17:00 sao paulo: 2 campanhas maxvol de usd30, seis criativos unicos do shared drive e inicio 00:30 seguinte. drive live 263 ready no dry-run, com 58 linhagens unicas liberadas/reconciliadas e 1 duplicata bloqueada. primeira tentativa criou a hierarquia mas recebeu meta code17 no get final; cleanup completo confirmou 2 campanhas, 6 ads, 6 creatives e 12 videos removidos, zero assets consumidos. retry deterministico agendado apos cooldown; runner corrigido para persistir readback_deferred e reconciliar depois, sem cleanup prematuro.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-20T21:20:26+00:00"
     },
     {
       "agent": "ares",
@@ -912,5 +912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:08:40+00:00"
+  "updated_at": "2026-08-20T21:20:26+00:00"
 }

@@ -1,6 +1,24 @@
 {
   "entries": [
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.daily-creation-stock",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-CREATION-STOCK-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo daily 17h MAXVOL creation and mandatory Drive stock reporting",
+      "updated_at": "2026-08-20T21:20:14+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -793,5 +811,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T12:28:34+00:00"
+  "updated_at": "2026-08-20T21:20:14+00:00"
 }
