@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T00:16:00-03:00",
+  "updated_at": "2026-08-19T23:44:39.852543-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.1",
+  "playbook_version": "1.0.2",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -533,7 +533,8 @@
       "daily": "1539835613916696586",
       "intraday": "1539835615393091644",
       "content_match_all": true
-    }
+    },
+    "creation_window_update_message_id": "1539841742965317763"
   },
   "session_continuity_policy": {
     "native_renew_command_exists": false,
@@ -554,5 +555,55 @@
     ],
     "optional_three_day_job": "active: local continuity snapshot every ~3 days at 03:00 America/Sao_Paulo; no session reset",
     "snapshot_job_active": true
+  },
+  "campaign_creation_window": {
+    "timezone": "America/Sao_Paulo",
+    "prepare_pool_before": "18:00",
+    "create_and_schedule_at": "18:00",
+    "approval_monitor_window": "18:00-23:30",
+    "final_approval_readback_at": "23:30",
+    "scheduled_delivery_start": "00:30 next day",
+    "eastern_reference_august_2026": {
+      "create": "17:00 EDT",
+      "final_readback": "22:30 EDT",
+      "delivery_start": "23:30 EDT"
+    },
+    "gates": [
+      "approved budget/test pool",
+      "three eligible reconciled creatives per campaign",
+      "validated reference fields",
+      "authorization vigente"
+    ],
+    "pending_or_rejected_at_23_30": "report in Creation thread; do not invent approval; status change only with current authority",
+    "approved_by": "Rodolfo Mattei"
+  },
+  "implementation_status": {
+    "state": "AUTOMATION_ACTIVE_INITIAL_CAMPAIGNS_RUNNING",
+    "closed_by": "Rodolfo Mattei",
+    "closed_at_et": "2026-08-19T23:44:39.852543-04:00",
+    "automation_scope_complete": true,
+    "initial_campaigns": [
+      "07",
+      "08",
+      "09",
+      "10",
+      "11"
+    ],
+    "initial_campaigns_live_readback": {
+      "campaigns_active": 5,
+      "adsets_active": 5,
+      "ads_active": 15,
+      "budget_total_usd": 150.0
+    },
+    "current_phase": "D1 monitoring",
+    "next_operational_checkpoints": [
+      "07:00 São Paulo Daily previous day",
+      "08:00 São Paulo Intraday",
+      "12:00",
+      "15:00",
+      "20:00",
+      "23:00"
+    ],
+    "new_campaign_window": "18:00-23:30 São Paulo; start 00:30 next day"
   }
 }
