@@ -27,6 +27,19 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 | Múltiplos `Retrying request` (waits 21s, 45s, 56s) | Rate limit Anthropic |
 | Gateway reiniciou mas parou de receber após reconexão | Sessão zumbi pós-restart |
 | Canal principal responde inline e não cria threads, apesar de `auto_thread: true` | Upstream Hermes pode estar pulando auto-thread em `free_response_channels` |
+| Auto-thread falha com `Too many requests. Retry in ~300 seconds` após uma primeira thread funcionar | Bucket específico do endpoint de criação de threads; retry fixo de 0,75s descarta o pedido antes da janela real |
+
+### Auto-thread sob rate limit do Discord
+
+Quando o log do gateway mostrar `Auto-thread creation failed after retry` junto de `Too many requests. Retry in N seconds`:
+
+1. Confirmar no Discord e no journal os IDs da mensagem/canal e o `retry_after` real. `rate_limit_per_user: 0` no canal não elimina o bucket próprio do endpoint de criação de threads.
+2. Preservar a mensagem humana como starter; não reintroduzir fallback com mensagem-semente do bot.
+3. Tratar apenas exceções Discord 429/`RateLimited`, extrair `retry_after`, aguardar essa janela uma vez com pequena margem e então repetir a criação.
+4. Serializar as criações por canal pai para evitar várias mensagens acordando e golpeando o mesmo bucket; não usar trava global que bloqueie canais Ares independentes.
+5. Manter o retry curto existente apenas para falhas transitórias não-429.
+6. Validar com teste usando o `retry_after` observado, classificação da exceção real do `discord.py`, `py_compile`, regressão de auto-thread e guard consolidado MGS.
+7. Ativar somente pelo restart seguro do gateway afetado e validar serviço ativo + novo marcador de conexão antes do smoke humano.
 
 ### Channel permission overwrites and narrow delegation
 
