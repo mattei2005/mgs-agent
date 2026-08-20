@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar execução determinística pós-cooldown e a entrega do resumo; JSON completo no audit. Em DEFERRED, watchdog relê e confirma cleanup.",
+      "next_step": "Aguardar entrega do one-shot v2. Em deferred, watchdog v2 retoma por estágio; async sem session id fica PAUSED e não recebe cleanup sem terminal comprovado.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "sequência pós-cooldown implementada e agendada 02:20 sp. helper meta agora lê x-business-use-case-usage em get/post/batch, soft limit 80%, estimated_time em minutos para 17/613, exponencial sem estimativa, 10s só 5xx, batch readbacks e json completo. cooldown local até 05:19:35z. teste1 c70 direto paused; teste2 c71 adset copy deep_copy=false paused; teste3 c72 async mínimo só se 1/2 falharem. cleanup só após readback conclusivo; watchdog temporário retoma deferred sem reiniciar testes. 28 testes offline passaram.",
+      "state": "sequência pós-cooldown v2 reagendada 02:20 sp após revisão independente. dois blockers corrigidos: deferred state separa active campaign/deferred target/async session e teste3 nunca readback/cleanup antes de async terminal. highs corrigidos: outer deferred sem segundo backoff; cooldown futuro não é apagado por 200 concorrente; throttle revalida sob lock. parser cobre todas entradas e guarda só 32. 37 testes passaram. jobs v1 removidos, v2 no-agent ativos.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T04:49:56+00:00"
+      "updated_at": "2026-08-20T05:01:04+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T04:49:56+00:00"
+  "updated_at": "2026-08-20T05:01:04+00:00"
 }

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.6
+version: 1.0.7
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -169,7 +169,10 @@ Para chamadas Meta nesta operação:
 - sem estimativa, backoff exponencial limitado;
 - 10 segundos fixos somente para HTTP `5xx`;
 - readbacks de campanha/adsets/ads devem ser agrupados por batch;
-- readback rate-limited fica `DEFERRED`, sem classificação de falha nem cleanup até leitura conclusiva.
+- readback rate-limited fica `DEFERRED`, sem classificação de falha nem cleanup até leitura conclusiva;
+- state deferred separa `active_campaign_ids`, `deferred_target_ids`, `deferred_stage` e `async_session_ids`; somente campaign IDs criados entram em cleanup;
+- sessão async sem ID ou ainda não terminal permanece PAUSED e nunca recebe hierarchy readback/cleanup como se estivesse concluída;
+- outer `AresRateLimitDeferred` não recebe segundo backoff no runner; o orçamento de espera é único.
 
 Sequência diagnóstica aprovada após cooldown completo:
 

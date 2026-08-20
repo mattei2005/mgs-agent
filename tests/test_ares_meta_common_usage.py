@@ -114,6 +114,32 @@ def test_successful_low_usage_response_does_not_clear_future_rate_block(tmp_path
     assert state['block_reason'] == 'meta_rate_limit'
 
 
+def test_throttle_revalidates_new_block_written_while_sleeping(tmp_path, monkeypatch):
+    mod = load_module()
+    state_path = tmp_path / 'state.json'
+    state_path.write_text(json.dumps({'last_request_monotonic': 100.0, 'blocked_until_epoch': 0, 'block_reason': None}))
+    monkeypatch.setattr(mod, 'THROTTLE_STATE_PATH', state_path)
+    monkeypatch.setattr(mod, 'MIN_INTERVAL_SECONDS', 1.0)
+    wall = iter([1000.0, 1001.0, 1002.0])
+    mono = iter([100.0, 101.0, 102.0])
+    monkeypatch.setattr(mod.time, 'time', lambda: next(wall))
+    monkeypatch.setattr(mod.time, 'monotonic', lambda: next(mono))
+    sleeps = []
+    def fake_sleep(value):
+        sleeps.append(value)
+        if len(sleeps) == 1:
+            state = json.loads(state_path.read_text())
+            state['blocked_until_epoch'] = 1002.0
+            state['block_reason'] = 'meta_rate_limit'
+            state_path.write_text(json.dumps(state))
+    monkeypatch.setattr(mod.time, 'sleep', fake_sleep)
+    mod._throttle_before_request()
+    saved = json.loads(state_path.read_text())
+    assert sleeps == [1.0, 1.0]
+    assert saved['last_request_monotonic'] == 102.0
+    assert saved['blocked_until_epoch'] == 0
+
+
 def test_graph_get_retries_5xx_in_ten_seconds(monkeypatch):
     mod = load_module()
     responses = iter([
