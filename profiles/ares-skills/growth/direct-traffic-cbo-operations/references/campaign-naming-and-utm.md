@@ -61,6 +61,15 @@ Exemplo: `b01fb01c01g01`.
 6. A URL contém uma ocorrência de cada UTM obrigatória.
 7. Outros parâmetros podem coexistir (`fbclid`, parâmetros internos), mas não duplicar/chocar UTMs canônicas.
 
+## Unicidade e reciclagem dos slots 01–60
+
+1. `utm_campaign` e `utm_adgroup` são chaves de linhagem da Smart Bidding e não podem ser reutilizadas por outra campanha, mesmo depois de a campanha Meta antiga ficar `PAUSED` ou `DELETED`.
+2. Os números visuais/operacionais da campanha permanecem limitados a `01–60`; reciclar o slot exige uma nova chave de geração dentro das UTMs.
+3. Deletar a campanha Meta antiga não garante apagar receita, conversões ou histórico já registrados pela Smart Bidding sob a UTM anterior.
+4. O formato da geração ainda depende de aprovação de Rodolfo e validação do parser/relatórios SB. Exemplo apenas candidato, não ativo: slot 15, geração 2 → `utm_campaign=b01fb13c15r02` e `utm_adgroup=b01fb13c15r02g01`.
+5. Até a aprovação do formato, qualquer tentativa de criar campanha com par UTM já utilizado falha fechada.
+6. Depois da aprovação, a ordem segura é: confirmar ciclo terminal após D3/reconciliação → criar nova geração `PAUSED` e validar → deletar a campanha terminal antiga → ativar a nova somente após revisão.
+
 ## Estrutura padrão da campanha
 
 ```text

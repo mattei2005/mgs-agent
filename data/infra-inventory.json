@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T14:27:22-04:00",
+    "updated_at": "2026-08-20T14:35:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7552,14 +7552,14 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create50-clone07-to12.py",
-      "size_bytes": 33623,
-      "modified_at": "2026-08-20T14:28:19-04:00",
-      "sha256": "598ea1bc1bc963c99de20a34cb03857940a3adac59dfc1788d5d784c35bac4af",
+      "size_bytes": 34152,
+      "modified_at": "2026-08-20T14:35:43-04:00",
+      "sha256": "64a733a6f95c24e0f5b62fdbe76d17aa090e9c4b5928261b8e82980db6308fc4",
       "purpose": "Create CPV C50 from zero and clone C07 to C12 with PAUSED campaign control, active children, sanitized C07 creative lineage, target UTMs and full audit/readback.",
       "graph_version": "v26.0",
-      "validation": "py_compile and offline dry-run passed after Rodolfo status correction; future audit records operator_status=DELETED when Graph raw effective_status=ARCHIVED. Real C50/C12 Graph write/readback remains validated.",
+      "validation": "py_compile and offline dry-run passed. Runner now fails closed if slot 01-60 has prior lineage until a unique UTM generation format is approved by Rodolfo and validated in the SB parser; raw ARCHIVED remains operator DELETED.",
       "git_tracked": false,
-      "updated_at": "2026-08-20T14:28:19-04:00"
+      "updated_at": "2026-08-20T14:35:43-04:00"
     },
     {
       "id": "ares-creditoparaveiculo-resume-create50-clone12",
@@ -8120,12 +8120,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 17436,
-      "modified_at": "2026-08-20T14:26:31-04:00",
-      "sha256": "a5159edea1c3687fc818d555532be66f8e126bca631aac9698880987060c3c0f",
+      "size_bytes": 17979,
+      "modified_at": "2026-08-20T14:34:29-04:00",
+      "sha256": "88d14a665d6a2dcd9e44a1343b326632762937edf8d8b6e78ee5377da797dc24",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T14:27:22-04:00",
-      "validation": "Skill v1.0.14 live/mirror SHA match. Rodolfo reconfirmed CPV status semantics: Graph raw ARCHIVED maps to operator-facing DELETED; reports must never present those campaigns as merely archived/live."
+      "updated_at": "2026-08-20T14:35:43-04:00",
+      "validation": "Skill v1.0.15 live/mirror SHA match. Added immutable Smart Bidding UTM lineage across Meta slots 01-60; slot recycling fails closed until Rodolfo approves a generation format and the SB parser validates it."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

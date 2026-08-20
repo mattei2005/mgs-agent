@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar conferência manual de Rodolfo. Não ativar nem incluir C50/C12 novas na allowlist autônoma até autorização explícita. Em reporting, converter API raw ARCHIVED para DELETED.",
+      "next_step": "Rodolfo decide o formato de geração da UTM. Recomendação candidata: c15r02/g01. Até aprovação, falhar fechado em qualquer slot 01–60 já usado. Depois: fechar D3/reconciliação, criar nova geração PAUSED, readback, deletar antiga terminal e ativar após revisão.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; operation Creditoparaveiculo-BR-CAR-BR v1.0.27; direct-traffic-cbo-operations v1.0.14; audit create-c50-clone-c07-to-c12-20260820T175824Z.json",
-      "state": "c50 criada do zero e c12 criada por clone nativo da c07, ambas publicadas com campanha paused para revisão. cada uma tem usd30, cost_cap, 1 adset active e 3 anúncios active sob campaign_paused, utms próprias e compliance br validada. correção de rodolfo: nesta conta, archived no graph significa deleted no ads manager e deve ser reportado como deleted. a antiga c50 é deleted; a antiga c12 segue paused.",
+      "source": "discord:thread:1539434208408375426; operation Creditoparaveiculo-BR-CAR-BR v1.0.28; direct-traffic-cbo-operations v1.0.15; campaign-naming-and-utm uniqueness policy",
+      "state": "c50 e c12 novas permanecem paused para revisão. regra nova de rodolfo: slots de campanha são 01–60 e o mesmo utm_campaign/utm_adgroup nunca pode ser reutilizado, porque a smart bidding junta por utm. deletar a meta antiga não garante remover histórico sb. reciclagem de slot exige uma geração utm única; formato ainda pendente de aprovação e validação do parser sb. c12/c50 atuais entram em auditoria de possível reutilização.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T18:27:13+00:00"
+      "updated_at": "2026-08-20T18:35:30+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T18:27:13+00:00"
+  "updated_at": "2026-08-20T18:35:30+00:00"
 }

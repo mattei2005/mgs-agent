@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.14
+version: 1.0.15
 author: Ares
 license: internal
 metadata:
@@ -197,6 +197,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 22. **Rejeitar cópia HTTP 200 sem `success`/`id` mesmo quando há ID específico.** `/copies` pode retornar somente `copied_campaign_id` ou `copied_adset_id` (e `ad_object_ids`). Aceitar apenas essas chaves reconhecidas, persistir o ID imediatamente e fazer GET antes de qualquer nova tentativa; nunca repetir a cópia só porque `success` não veio.
 23. **Tratar `PENDING_REVIEW` como anúncio desligado por herança sem conferir configuração.** O gate correto para campanha de revisão é: campanha `configured_status=PAUSED`; adset/anúncio `configured_status=ACTIVE`; effective do filho pode estar `CAMPAIGN_PAUSED`, `PENDING_REVIEW`, `IN_PROCESS` ou `WITH_ISSUES` durante materialização/revisão. O pai PAUSED continua sendo o bloqueio de entrega.
 24. **Tratar `ARCHIVED` como campanha ainda arquivada.** Em Creditoparaveiculo, `ARCHIVED` no Graph representa campanha `DELETED` no Ads Manager. Relatórios e respostas humanas usam `DELETED`; `ARCHIVED` fica apenas como `api_raw_status` no audit. Não contar esses objetos como campanhas vivas, pausadas ou reutilizáveis sem nova criação.
+25. **Reutilizar a UTM ao reciclar um número de campanha.** Os slots Meta são `01–60`, mas `utm_campaign` e `utm_adgroup` precisam ser únicos por linhagem na Smart Bidding. Deletar a campanha antiga não torna a chave histórica reutilizável. Até Rodolfo aprovar o formato de geração e a compatibilidade do parser SB, falhar fechado ao tentar reciclar slot já usado. Depois da aprovação: fechar D3/reconciliação → criar nova geração PAUSED → readback → deletar campanha terminal antiga → ativar somente após revisão.
 
 ## Verification checklist
 
