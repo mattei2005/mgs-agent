@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T15:25:20-04:00",
+    "updated_at": "2026-08-20T15:41:48-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8135,12 +8135,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 20341,
-      "modified_at": "2026-08-20T15:22:15-04:00",
-      "sha256": "780474501f495b8b9a79bf614f293eac3e16acede1ffd0be1dfc17aeeb35eb25",
+      "size_bytes": 21154,
+      "modified_at": "2026-08-20T15:42:02-04:00",
+      "sha256": "d8617353222d6110daeacbb0394788b025ccc614df33cb23304bbeb69ebbc273",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T15:25:20-04:00",
-      "validation": "Skill v1.0.18 live/mirror SHA match. Approved COSTCAP-0.50/MAXVOL naming, added C11 ROAS-floor exception, CPV 17:00 creation-cycle start and corrected immutable-wrapper rollover from Ciro/SB."
+      "updated_at": "2026-08-20T15:42:02-04:00",
+      "validation": "Skill v1.0.20 live/mirror SHA match. Agenda CPV vigente registrada como Diário 07:00 + Intraday 11:00/14:00/20:00; checkpoint 08:00 separado; snapshot diário 03:00 local e sem reset de sessão; agenda 2h superseded explicitamente."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
