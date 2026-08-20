@@ -217,6 +217,9 @@
       "name": "Creditoparaveiculo 13 G006 Intraday 2h",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
+        "01:00",
+        "03:00",
+        "05:00",
         "07:00",
         "09:00",
         "11:00",
@@ -600,7 +603,7 @@
         "purpose": "campaign status, spend pacing, Meta ROAS, SB actual/estimated ROI, confidence/delay, anomaly gate and recommendation",
         "delivery": "recurring script-only report",
         "thread_id": "1539832402744975450",
-        "schedule": "every 2 hours from 07:00 through 23:00 America/Sao_Paulo; action-only checkpoint remains 08:00"
+        "schedule": "continuous every 2 hours on odd hours 01:00–23:00 America/Sao_Paulo; sequence crosses midnight; action-only checkpoint remains 08:00"
       }
     ],
     "excluded_threads": [
@@ -678,6 +681,9 @@
     },
     "current_phase": "D1 monitoring",
     "next_operational_checkpoints": [
+      "01:00 São Paulo Intraday",
+      "03:00",
+      "05:00",
       "07:00 São Paulo Daily previous day",
       "07:00 São Paulo Intraday",
       "09:00",

@@ -172,7 +172,7 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
 
 def test_intraday_report_cadence_and_action_checkpoint_are_separate():
     module = load_reports_module()
-    expected_report_hours = {7, 9, 11, 13, 15, 17, 19, 21, 23}
+    expected_report_hours = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23}
     assert module.INTRADAY_REPORT_HOURS == expected_report_hours
     for hour in range(24):
         assert module.intraday_gate_due(hour, actions_only=False) is (hour in expected_report_hours)
