@@ -72,8 +72,8 @@
     "new_campaign_share_flexible_max": 0.3,
     "new_campaign_initial_budget_usd": 30.0,
     "campaign_operational_ceiling_usd": 150.0,
-    "campaign_ceiling_definition_status": "provisional_approved_monitor_roi_roas",
-    "account_cap_scaling_policy_status": "Rodolfo informs/adjusts as scale requires; Ares does not raise autonomously",
+    "campaign_ceiling_definition_status": "approved_guardrail",
+    "account_cap_scaling_policy_status": "Ares may change campaign budgets only through approved ROI tiers within the USD300 operational cap; Ares never raises the account cap autonomously",
     "campaign_daily_ceiling_usd": 150.0,
     "reactivation_campaigns_current_budget_usd": {
       "07": 30.0,
@@ -118,11 +118,51 @@
   },
   "management_scope": {
     "read_scope": "entire_account",
-    "reporting_mode": "read_only_calibration",
-    "write_enabled": false,
-    "campaign_creation_test": "pending_dry_run_and_paused_creation_approval",
+    "reporting_mode": "autonomous_guarded",
+    "write_enabled": true,
+    "campaign_creation_test": "pending_paused_build_after_page_assignment_fix",
     "manual_holds": [],
-    "controlled_write_one_shot": "reactivate campaigns 07,08,09,10,11 at 00:30; Rodolfo authorized; general write_enabled remains false"
+    "controlled_write_one_shot": "historical: reactivate campaigns 07,08,09,10,11 at 00:30; completed",
+    "autonomous_action_scope": {
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_recorded_at_et": "2026-08-20T08:21:06-04:00",
+      "operation_only": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "level": "campaign_only",
+      "allowed": [
+        "scale campaign daily_budget by approved ROI tiers 10/20/30 percent at the 08:00 checkpoint",
+        "pause campaign on D3 only after actual ROI, estimated revenue and anomaly gates"
+      ],
+      "required": [
+        "fresh Meta preflight",
+        "manual hold check",
+        "USD150 campaign ceiling",
+        "USD300 account operational cap",
+        "idempotency lock/state",
+        "audit without credentials",
+        "Meta GET readback"
+      ],
+      "excluded": [
+        "raise account operational cap",
+        "billing/payment/credentials",
+        "adset or ad level shutdown",
+        "campaign creation/clone/replacement until their independent gates pass",
+        "other accounts or operations"
+      ]
+    }
+  },
+  "reporting_presentation": {
+    "authorized_by": "Rodolfo Mattei",
+    "style": "aligned monospace tables with green/yellow/red/white status signals",
+    "remove_id_rec": true,
+    "campaign_identifier": "campaign number column",
+    "daily_focus": "closed performance and account summary",
+    "intraday_focus": "current decision, executed action, gates and readback",
+    "legend": {
+      "green": "healthy, maintain or scale",
+      "yellow": "observe or gated",
+      "red": "critical action",
+      "white": "insufficient data"
+    }
   },
   "scheduler_jobs": {
     "daily": {
@@ -170,9 +210,9 @@
     "readback_exact_pixel_page_instagram_url_placements_attribution",
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign",
-    "explicit_write_authorization"
+    "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T01:59:54.230775-04:00",
+  "updated_at": "2026-08-20T08:21:06-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +430,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.12",
+  "playbook_version": "1.0.13",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
