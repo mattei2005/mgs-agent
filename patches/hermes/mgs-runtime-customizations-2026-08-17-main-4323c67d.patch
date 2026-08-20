@@ -1,5 +1,5 @@
 diff --git a/agent/background_review.py b/agent/background_review.py
-index ae12a059d..95c39703d 100644
+index ae12a059d8e6bf8f91a167d935ef129b654313f5..95c39703d71ed988078a3c1bf46a053c7528d4df 100644
 --- a/agent/background_review.py
 +++ b/agent/background_review.py
 @@ -497,13 +497,12 @@ def summarize_background_review_actions(
@@ -51,7 +51,7 @@ index ae12a059d..95c39703d 100644
          detail = call_details.get(tcid) or {}
          if not isinstance(detail, dict):
 diff --git a/gateway/platforms/base.py b/gateway/platforms/base.py
-index d3efafaeb..19d95b693 100644
+index d3efafaeb8b0e9322d93809d0ccf1ed25d786f8d..19d95b693d9e3d999d3b630cfe83553912b81499 100644
 --- a/gateway/platforms/base.py
 +++ b/gateway/platforms/base.py
 @@ -1187,6 +1187,7 @@ MEDIA_DELIVERY_TRUST_RECENT_SECONDS_ENV = "HERMES_MEDIA_TRUST_RECENT_SECONDS"
@@ -108,7 +108,7 @@ index d3efafaeb..19d95b693 100644
  
 diff --git a/gateway/reasoning_router.py b/gateway/reasoning_router.py
 new file mode 100644
-index 000000000..e47c22362
+index 0000000000000000000000000000000000000000..e47c22362459b95404d9dd1a615ea5976b6b556e
 --- /dev/null
 +++ b/gateway/reasoning_router.py
 @@ -0,0 +1,171 @@
@@ -284,7 +284,7 @@ index 000000000..e47c22362
 +
 +    return _effort_config(default_effort, profile_default)
 diff --git a/gateway/run.py b/gateway/run.py
-index 924858867..6779b9417 100644
+index 924858867adc2b34518bfd563c9372ef8545c4d6..6779b94178aa5ea0a39a6882b1325e8ab2e8efb8 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -115,8 +115,8 @@ _GATEWAY_PROXY_SSE_BUFFER_MAX_CHARS = 16 * 1024 * 1024
@@ -1768,7 +1768,7 @@ index 924858867..6779b9417 100644
                  # the follow-up turn runs.  The outer _process_message_background
                  # typing task is still alive but may be stale.
 diff --git a/gateway/slash_commands.py b/gateway/slash_commands.py
-index a7bb1aa44..b6dbc125d 100644
+index a7bb1aa447c2b091fb4deab54e0f9a7a0cf32cf4..b6dbc125d956333db1d80ae667873fc634c2af51 100644
 --- a/gateway/slash_commands.py
 +++ b/gateway/slash_commands.py
 @@ -3648,7 +3648,10 @@ class GatewaySlashCommandsMixin:
@@ -1840,7 +1840,7 @@ index a7bb1aa44..b6dbc125d 100644
      async def _handle_memory_command(self, event: MessageEvent) -> str:
          """Handle /memory — review pending memory writes + toggle the approval gate.
 diff --git a/gateway/turn_context.py b/gateway/turn_context.py
-index 284875e22..93aa6e79d 100644
+index 284875e228d3708fa369f6efb0414d53e2195d72..93aa6e79d3ce8abd9eaa8fde51ba4444c3ead298 100644
 --- a/gateway/turn_context.py
 +++ b/gateway/turn_context.py
 @@ -113,6 +113,9 @@ class TurnContext:
@@ -1854,7 +1854,7 @@ index 284875e22..93aa6e79d 100644
      # --- voice-ack wiring --------------------------------------------------
      _voice_ack_fired: list = field(default_factory=lambda: [False])
 diff --git a/plugins/memory/honcho/__init__.py b/plugins/memory/honcho/__init__.py
-index 1347014ce..fa849d433 100644
+index 1347014cea72a64707d91eb0ebcef15cdee38abe..fa849d433d42b0298f8c0b022c7df08326421307 100644
 --- a/plugins/memory/honcho/__init__.py
 +++ b/plugins/memory/honcho/__init__.py
 @@ -1672,16 +1672,25 @@ class HonchoMemoryProvider(MemoryProvider):
@@ -1906,7 +1906,7 @@ index 1347014ce..fa849d433 100644
                  pass
  
 diff --git a/plugins/memory/honcho/session.py b/plugins/memory/honcho/session.py
-index 1ee7dc4fe..23178e0c6 100644
+index 1ee7dc4fee3820c79d3656464bf07f29a80f49ab..23178e0c6e17ed3ae0272fccce40a7750988cbe2 100644
 --- a/plugins/memory/honcho/session.py
 +++ b/plugins/memory/honcho/session.py
 @@ -171,6 +171,10 @@ class HonchoSessionManager:
@@ -1957,7 +1957,7 @@ index 1ee7dc4fe..23178e0c6 100644
  
      def set_context_result(self, session_key: str, result: dict[str, str]) -> None:
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index ef0cdd14d..ef3cee30d 100644
+index ef0cdd14d74d4ad6c1d0a9b8686b5149ef94e9e7..80d48aac5daf7a83232c51bc73e718fc2ae9a59a 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -26,7 +26,7 @@ import time
@@ -1969,7 +1969,16 @@ index ef0cdd14d..ef3cee30d 100644
  from urllib.parse import quote, urljoin
  
  from agent.async_utils import (
-@@ -119,6 +119,133 @@ _DISCORD_NONCONVERSATIONAL_HISTORY_MESSAGE_PATTERNS = (
+@@ -77,6 +77,8 @@ _DISCORD_NONCONVERSATIONAL_STATE_FILENAME = "discord_nonconversational_messages.
+ 
+ _DISCORD_COMMAND_SYNC_MUTATION_INTERVAL_SECONDS = 4.5
+ _DISCORD_COMMAND_SYNC_MAX_RATE_LIMIT_SLEEP_SECONDS = 30.0
++_DISCORD_AUTO_THREAD_MAX_RATE_LIMIT_SLEEP_SECONDS = 600.0
++_DISCORD_AUTO_THREAD_RATE_LIMIT_GRACE_SECONDS = 1.0
+ # Discord enforces a hard cap of 100 global application (slash) commands per
+ # app. Registering more makes the ENTIRE sync fail with error 30032
+ # ("Maximum number of application commands reached"), which silently breaks
+@@ -119,6 +121,133 @@ _DISCORD_NONCONVERSATIONAL_HISTORY_MESSAGE_PATTERNS = (
      ),
      re.compile(r"^\s*♻️?\s+Gateway\s+(?:restarted successfully|online\b)[\s\S]*$", re.IGNORECASE),
  )
@@ -2103,7 +2112,18 @@ index ef0cdd14d..ef3cee30d 100644
  try:
      import discord
      from discord import Message as DiscordMessage, Intents
-@@ -1156,6 +1283,13 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -1110,6 +1239,10 @@ class DiscordAdapter(BasePlatformAdapter):
+         # in those threads don't require @mention.  Persisted to disk so the
+         # set survives gateway restarts.
+         self._threads = ThreadParticipationTracker("discord")
++        # Discord's thread-create route uses a small multi-minute bucket keyed
++        # by parent channel. Serialize only within that channel so a burst does
++        # not retry one 429 concurrently or block unrelated Ares channels.
++        self._auto_thread_create_locks: Dict[int, asyncio.Lock] = {}
+         # Persistent typing indicator loops per channel (DMs don't reliably
+         # show the standard typing gateway event for bots)
+         self._typing_tasks: Dict[str, asyncio.Task] = {}
+@@ -1156,6 +1289,13 @@ class DiscordAdapter(BasePlatformAdapter):
          # Reply threading mode: "off" (no replies), "first" (reply on first
          # chunk only, default), "all" (reply-reference on every chunk).
          self._reply_to_mode: str = getattr(config, 'reply_to_mode', 'first') or 'first'
@@ -2117,7 +2137,7 @@ index ef0cdd14d..ef3cee30d 100644
          self._slash_commands: bool = self.config.extra.get("slash_commands", True)
          # In-memory cache of the bot's last message ID per channel, used by
          # history backfill to skip the full scan on hot paths.  Falls back to
-@@ -1567,6 +1701,27 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -1567,6 +1707,27 @@ class DiscordAdapter(BasePlatformAdapter):
  
          role_authorized = False
          if getattr(message.author, "bot", False):
@@ -2145,7 +2165,7 @@ index ef0cdd14d..ef3cee30d 100644
              allow_bots = self._get_allow_bots()
              if allow_bots == "none":
                  return False, False
-@@ -3426,6 +3581,16 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3426,6 +3587,16 @@ class DiscordAdapter(BasePlatformAdapter):
          kept.append(notice)
          return kept
  
@@ -2162,7 +2182,7 @@ index ef0cdd14d..ef3cee30d 100644
      async def send(
          self,
          chat_id: str,
-@@ -3521,6 +3686,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3521,6 +3692,7 @@ class DiscordAdapter(BasePlatformAdapter):
                      msg = await channel.send(
                          content=chunk,
                          reference=chunk_reference,
@@ -2170,7 +2190,7 @@ index ef0cdd14d..ef3cee30d 100644
                      )
                  except Exception as e:
                      err_text = str(e)
-@@ -3543,6 +3709,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3543,6 +3715,7 @@ class DiscordAdapter(BasePlatformAdapter):
                          msg = await channel.send(
                              content=chunk,
                              reference=None,
@@ -2178,7 +2198,7 @@ index ef0cdd14d..ef3cee30d 100644
                          )
                      else:
                          raise
-@@ -3583,6 +3750,32 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3583,6 +3756,32 @@ class DiscordAdapter(BasePlatformAdapter):
              )
              return result
  
@@ -2211,7 +2231,7 @@ index ef0cdd14d..ef3cee30d 100644
      async def _send_to_forum(self, forum_channel: Any, content: str) -> SendResult:
          """Create a thread post in a forum channel with the message as starter content.
  
-@@ -3608,6 +3801,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3608,6 +3807,7 @@ class DiscordAdapter(BasePlatformAdapter):
              thread = await forum_channel.create_thread(
                  name=thread_name,
                  content=starter_content,
@@ -2219,7 +2239,7 @@ index ef0cdd14d..ef3cee30d 100644
              )
          except Exception as e:
              logger.error("[%s] Failed to create forum thread in %s: %s", self.name, forum_channel.id, e)
-@@ -3624,7 +3818,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3624,7 +3824,10 @@ class DiscordAdapter(BasePlatformAdapter):
          warnings: list[str] = []
          for chunk in chunks[1:]:
              try:
@@ -2231,7 +2251,7 @@ index ef0cdd14d..ef3cee30d 100644
                  message_ids.append(str(msg.id))
              except Exception as e:
                  warning = f"Failed to send follow-up chunk to forum thread {thread_id}: {e}"
-@@ -3672,6 +3869,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3672,6 +3875,7 @@ class DiscordAdapter(BasePlatformAdapter):
              thread_name = _derive_forum_thread_name(hint) if hint.strip() else "New Post"
  
          kwargs: Dict[str, Any] = {"name": thread_name}
@@ -2239,7 +2259,7 @@ index ef0cdd14d..ef3cee30d 100644
          if content:
              kwargs["content"] = content
          if file is not None:
-@@ -3725,6 +3923,40 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3725,6 +3929,40 @@ class DiscordAdapter(BasePlatformAdapter):
              raw_response={"thread_id": thread_id},
          )
  
@@ -2280,7 +2300,7 @@ index ef0cdd14d..ef3cee30d 100644
      async def edit_message(
          self,
          chat_id: str,
-@@ -3788,7 +4020,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3788,7 +4026,7 @@ class DiscordAdapter(BasePlatformAdapter):
                  self._last_overflow_preview.pop(_preview_key, None)
  
              try:
@@ -2289,7 +2309,7 @@ index ef0cdd14d..ef3cee30d 100644
                  if _saturated_preview:
                      self._last_overflow_preview[_preview_key] = formatted
              except Exception as edit_err:
-@@ -3808,7 +4040,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3808,7 +4046,7 @@ class DiscordAdapter(BasePlatformAdapter):
                      if self._last_overflow_preview.get(_preview_key) == truncated:
                          # Saturated-preview dedup (see pre-flight path above).
                          return SendResult(success=True, message_id=message_id)
@@ -2298,7 +2318,7 @@ index ef0cdd14d..ef3cee30d 100644
                      self._last_overflow_preview[_preview_key] = truncated
                  else:
                      raise
-@@ -3871,12 +4103,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3871,12 +4109,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if len(chunks) <= 1:
              # Defensive: caller's pre-flight should guarantee >1 chunk, but if
              # not, just edit normally.
@@ -2316,7 +2336,7 @@ index ef0cdd14d..ef3cee30d 100644
          except Exception as e:
              logger.error(
                  "[%s] Overflow split: first-chunk edit failed: %s",
-@@ -3902,7 +4137,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3902,7 +4143,11 @@ class DiscordAdapter(BasePlatformAdapter):
                  # overflow continuations stay threaded.
                  reference = self._message_reference_from_ids(prev_msg.id, channel)
              try:
@@ -2329,7 +2349,7 @@ index ef0cdd14d..ef3cee30d 100644
              except Exception as send_err:
                  # Drop the reply anchor and retry once — a deleted/expired
                  # anchor (10008) or system-message reply (50035) shouldn't lose
-@@ -3912,7 +4151,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3912,7 +4157,11 @@ class DiscordAdapter(BasePlatformAdapter):
                      self.name, send_err,
                  )
                  try:
@@ -2342,7 +2362,7 @@ index ef0cdd14d..ef3cee30d 100644
                  except Exception as retry_err:
                      logger.warning(
                          "[%s] Overflow split: stopped at %d/%d chunks delivered: %s",
-@@ -4004,6 +4247,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4004,6 +4253,7 @@ class DiscordAdapter(BasePlatformAdapter):
          msg = await channel.send(
              content=caption if caption else None,
              files=[discord_file],
@@ -2350,7 +2370,7 @@ index ef0cdd14d..ef3cee30d 100644
          )
          attachments = getattr(msg, "attachments", None) or []
          if not attachments:
-@@ -4139,7 +4383,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4139,7 +4389,11 @@ class DiscordAdapter(BasePlatformAdapter):
                          files=files,
                      )
                  else:
@@ -2363,7 +2383,7 @@ index ef0cdd14d..ef3cee30d 100644
              except Exception as e:
                  logger.warning(
                      "[%s] Multi-image Discord send failed (chunk %d/%d), falling back to per-image: %s",
-@@ -5445,6 +5693,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5445,6 +5699,7 @@ class DiscordAdapter(BasePlatformAdapter):
                          channel,
                          content=(caption or "").strip(),
                          file=file,
@@ -2371,7 +2391,7 @@ index ef0cdd14d..ef3cee30d 100644
                      )
  
                  msg = await channel.send(
-@@ -5517,6 +5766,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5517,6 +5772,7 @@ class DiscordAdapter(BasePlatformAdapter):
                          channel,
                          content=(caption or "").strip(),
                          file=file,
@@ -2379,7 +2399,7 @@ index ef0cdd14d..ef3cee30d 100644
                      )
  
                  msg = await channel.send(
-@@ -6893,7 +7143,9 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -6893,7 +7149,9 @@ class DiscordAdapter(BasePlatformAdapter):
  
          Returns a formatted block like::
  
@@ -2390,7 +2410,7 @@ index ef0cdd14d..ef3cee30d 100644
              [Alice] some message
              [Bob [bot]] another message
  
-@@ -7070,7 +7322,14 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7070,7 +7328,14 @@ class DiscordAdapter(BasePlatformAdapter):
              collected.reverse()
              reply_collected.reverse()
  
@@ -2406,7 +2426,7 @@ index ef0cdd14d..ef3cee30d 100644
              if has_unverified:
                  blocks.append(
                      "[Messages prefixed with [unverified] are from people whose "
-@@ -7162,7 +7421,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7162,7 +7427,10 @@ class DiscordAdapter(BasePlatformAdapter):
                  reason=reason,
              )
              if starter_message:
@@ -2418,7 +2438,7 @@ index ef0cdd14d..ef3cee30d 100644
              return {
                  "success": True,
                  "thread_id": str(thread.id),
-@@ -7171,7 +7433,10 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7171,7 +7439,10 @@ class DiscordAdapter(BasePlatformAdapter):
          except Exception as direct_error:
              try:
                  seed_content = starter_message or f"\U0001f9f5 Thread created by Hermes: **{name}**"
@@ -2430,7 +2450,7 @@ index ef0cdd14d..ef3cee30d 100644
                  thread = await seed_msg.create_thread(
                      name=name,
                      auto_archive_duration=auto_archive_duration,
-@@ -7194,80 +7459,378 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -7194,80 +7465,416 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -2469,7 +2489,12 @@ index ef0cdd14d..ef3cee30d 100644
 +        bot_user_id = str(getattr(client_user, "id", "")) if client_user else None
 +        target_members = []
 +        seen: Set[int] = set()
-+
+ 
+-        Returns the created thread object, or ``None`` on failure. Both the
+-        primary ``message.create_thread`` and the seed-message fallback are
+-        retried once after a short backoff so transient connect errors
+-        (e.g. ``Cannot connect to host discord.com:443``) don't immediately
+-        burn through to the caller's failure path (#20243).
 +        # PATCH (MGS Digital Corp): allow explicit per-profile or per-parent
 +        # thread members. Per-channel entries win and may intentionally be
 +        # empty, which prevents broad fallback discovery in private channels.
@@ -2564,12 +2589,7 @@ index ef0cdd14d..ef3cee30d 100644
 +            failed,
 +            fetch_failed,
 +        )
- 
--        Returns the created thread object, or ``None`` on failure. Both the
--        primary ``message.create_thread`` and the seed-message fallback are
--        retried once after a short backoff so transient connect errors
--        (e.g. ``Cannot connect to host discord.com:443``) don't immediately
--        burn through to the caller's failure path (#20243).
++
 +    def _remember_auto_thread_initial_title(self, thread: Any, thread_name: str) -> None:
 +        """Remember the exact provisional title used for a new auto-created thread.
 +
@@ -2752,8 +2772,11 @@ index ef0cdd14d..ef3cee30d 100644
 +        after each error, reconcile the thread ID derived from the source
 +        message.  Discord uses the starter message snowflake as the thread ID,
 +        so this also recovers cleanly when the create request succeeded but the
-+        client lost the response.  Persistent failures return ``None`` and the
-+        caller reports the routing error in the parent channel (#20243).
++        client lost the response.  Discord ``RateLimited`` errors carry the
++        route's real ``retry_after``; wait for that window once instead of
++        treating a multi-minute bucket as a permanent routing failure.
++        Persistent failures return ``None`` and the caller reports the routing
++        error in the parent channel (#20243).
 +        """
 +        content = (message.content or "").strip()
 +        base_thread_name = self._auto_thread_name_from_message(content)
@@ -2762,9 +2785,18 @@ index ef0cdd14d..ef3cee30d 100644
 +            getattr(getattr(message, "author", None), "display_name", None),
 +        )
  
+-        for attempt in range(2):
 +        async def resolve_source_thread() -> Optional[Any]:
 +            message_id = getattr(message, "id", None)
-+            try:
+             try:
+-                thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
+-                try:
+-                    setattr(thread, "_hermes_auto_thread_initial_name", thread_name)
+-                except Exception:
+-                    pass
+-                return thread
+-            except Exception as direct_error:
+-                last_direct_error = direct_error
 +                thread_id = int(message_id)
 +            except (TypeError, ValueError):
 +                return None
@@ -2796,64 +2828,88 @@ index ef0cdd14d..ef3cee30d 100644
 +            return None
 +
 +        last_direct_error: Exception | None = None
-         for attempt in range(2):
-             try:
--                thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
--                try:
--                    setattr(thread, "_hermes_auto_thread_initial_name", thread_name)
--                except Exception:
--                    pass
-+                thread = await message.create_thread(
-+                    name=thread_name,
-+                    auto_archive_duration=1440,
-+                )
-+                self._remember_auto_thread_initial_title(thread, thread_name)
-                 return thread
-             except Exception as direct_error:
-                 last_direct_error = direct_error
--                try:
++        attempt = 0
++        generic_retry_used = False
++        rate_limit_retry_used = False
++        parent_channel_id = int(getattr(getattr(message, "channel", None), "id", 0) or 0)
++        create_lock = self._auto_thread_create_locks.setdefault(parent_channel_id, asyncio.Lock())
++
++        async with create_lock:
++            while True:
++                attempt += 1
+                 try:
 -                    seed_msg = await message.channel.send(
 -                        f"\U0001f9f5 Thread created by Hermes: **{thread_name}**"
 -                    )
 -                    thread = await seed_msg.create_thread(
--                        name=thread_name,
--                        auto_archive_duration=1440,
++                    thread = await message.create_thread(
+                         name=thread_name,
+                         auto_archive_duration=1440,
 -                        reason=reason,
-+                logger.info(
-+                    "[%s] Direct auto-thread attempt %d failed for source message=%s channel=%s: %s",
-+                    self.name,
-+                    attempt + 1,
-+                    getattr(message, "id", None),
-+                    getattr(getattr(message, "channel", None), "id", None),
-+                    direct_error,
-+                )
-+
-+                existing_thread = await resolve_source_thread()
-+                if existing_thread is not None:
-+                    logger.info(
-+                        "[%s] Reconciled existing source-message thread=%s after create error",
-+                        self.name,
-+                        getattr(existing_thread, "id", None),
                      )
 -                    try:
 -                        setattr(thread, "_hermes_auto_thread_initial_name", thread_name)
 -                    except Exception:
 -                        pass
--                    return thread
++                    self._remember_auto_thread_initial_title(thread, thread_name)
+                     return thread
 -                except Exception as fallback_error:
 -                    last_fallback_error = fallback_error
 -                    if attempt == 0:
 -                        # Brief backoff before the second attempt — most failures
 -                        # in this path are transient connect errors that recover
 -                        # within a second or two.
--                        await asyncio.sleep(0.75)
--                        continue
-+                    self._remember_auto_thread_initial_title(existing_thread, thread_name)
-+                    return existing_thread
++                except Exception as direct_error:
++                    last_direct_error = direct_error
++                    logger.info(
++                        "[%s] Direct auto-thread attempt %d failed for source message=%s channel=%s: %s",
++                        self.name,
++                        attempt,
++                        getattr(message, "id", None),
++                        getattr(getattr(message, "channel", None), "id", None),
++                        direct_error,
++                    )
 +
-+                if attempt == 0:
-+                    await asyncio.sleep(0.75)
++                    existing_thread = await resolve_source_thread()
++                    if existing_thread is not None:
++                        logger.info(
++                            "[%s] Reconciled existing source-message thread=%s after create error",
++                            self.name,
++                            getattr(existing_thread, "id", None),
++                        )
++                        self._remember_auto_thread_initial_title(existing_thread, thread_name)
++                        return existing_thread
++
++                    retry_after = (
++                        self._extract_discord_retry_after(direct_error)
++                        if self._is_discord_rate_limit(direct_error)
++                        else None
++                    )
++                    if (
++                        not rate_limit_retry_used
++                        and retry_after is not None
++                        and retry_after <= _DISCORD_AUTO_THREAD_MAX_RATE_LIMIT_SLEEP_SECONDS
++                    ):
++                        rate_limit_retry_used = True
++                        delay = retry_after + _DISCORD_AUTO_THREAD_RATE_LIMIT_GRACE_SECONDS
++                        logger.warning(
++                            "[%s] Discord rate-limited auto-thread source message=%s channel=%s; "
++                            "waiting %.2fs before retry instead of dropping the request",
++                            self.name,
++                            getattr(message, "id", None),
++                            getattr(getattr(message, "channel", None), "id", None),
++                            delay,
++                        )
++                        await asyncio.sleep(delay)
++                        continue
++
++                    if not generic_retry_used:
++                        generic_retry_used = True
+                         await asyncio.sleep(0.75)
+                         continue
  
++                    break
++
          logger.warning(
 -            "[%s] Auto-thread creation failed after retry. Direct error: %s. Fallback error: %s",
 +            "[%s] Auto-thread creation failed after retry for source message=%s channel=%s. "
@@ -2866,7 +2922,7 @@ index ef0cdd14d..ef3cee30d 100644
          )
          return None
  
-@@ -8159,12 +8722,21 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -8159,12 +8766,21 @@ class DiscordAdapter(BasePlatformAdapter):
          auto_threaded_channel = None
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels = self._get_no_thread_channels()
@@ -2889,7 +2945,7 @@ index ef0cdd14d..ef3cee30d 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -8277,7 +8849,8 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -8277,7 +8893,8 @@ class DiscordAdapter(BasePlatformAdapter):
              auto_thread_created=auto_threaded_channel is not None,
              auto_thread_initial_name=(
                  getattr(auto_threaded_channel, "_hermes_auto_thread_initial_name", None)
@@ -2899,7 +2955,7 @@ index ef0cdd14d..ef3cee30d 100644
              ) if auto_threaded_channel is not None else None,
          )
  
-@@ -8533,13 +9106,17 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -8533,13 +9150,17 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -2920,7 +2976,7 @@ index ef0cdd14d..ef3cee30d 100644
          ):
              self._enqueue_text_event(event)
          else:
-@@ -10402,11 +10979,26 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -10402,11 +11023,26 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
              os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
@@ -2948,7 +3004,7 @@ index ef0cdd14d..ef3cee30d 100644
      ic = discord_cfg.get("ignored_channels")
      if ic is not None:
 diff --git a/tests/gateway/test_agent_cache.py b/tests/gateway/test_agent_cache.py
-index a7e1d00cb..ec7b93fd2 100644
+index a7e1d00cb97cc6ded301f67c377143b17e8a60e4..ec7b93fd2a13d088a42ff30ba5c4f6024d4f042b 100644
 --- a/tests/gateway/test_agent_cache.py
 +++ b/tests/gateway/test_agent_cache.py
 @@ -9,6 +9,7 @@ Verifies that the agent cache correctly:
@@ -3109,7 +3165,7 @@ index a7e1d00cb..ec7b93fd2 100644
  
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
-index 000000000..1b8a13d25
+index 0000000000000000000000000000000000000000..1b8a13d253a4f8a11989af912b2f72a5ae0dd8e9
 --- /dev/null
 +++ b/tests/gateway/test_auto_reasoning_routing.py
 @@ -0,0 +1,199 @@
@@ -3313,7 +3369,7 @@ index 000000000..1b8a13d25
 +    assert medium["reasoning"]["effort"] == "medium"
 +    assert xhigh["reasoning"]["effort"] == "xhigh"
 diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
-index c9b5442fc..d7661caf7 100644
+index c9b5442fc5a1fe84549b711c33cb18415a2865b7..d7661caf79ed6bb8d8125a0730d2e5af10479071 100644
 --- a/tests/gateway/test_busy_session_ack.py
 +++ b/tests/gateway/test_busy_session_ack.py
 @@ -3,6 +3,8 @@
@@ -4006,16 +4062,22 @@ index c9b5442fc..d7661caf7 100644
      async def test_interrupt_mode_text_followups_fifo_not_merged(self):
 diff --git a/tests/gateway/test_discord_auto_thread_origin.py b/tests/gateway/test_discord_auto_thread_origin.py
 new file mode 100644
-index 000000000..bb9ed8110
+index 0000000000000000000000000000000000000000..6b43ad1127b4977633c01dc38d9ea230c21b43e8
 --- /dev/null
 +++ b/tests/gateway/test_discord_auto_thread_origin.py
-@@ -0,0 +1,82 @@
+@@ -0,0 +1,106 @@
 +"""Auto-threading must preserve the human's Discord message as thread starter."""
 +
 +from types import SimpleNamespace
 +from unittest.mock import AsyncMock, MagicMock
 +
 +import pytest
++
++
++class RateLimitedForTest(RuntimeError):
++    def __init__(self, retry_after: float):
++        self.retry_after = retry_after
++        super().__init__(f"Too many requests. Retry in {retry_after:.2f} seconds.")
 +
 +from gateway.config import PlatformConfig
 +from plugins.platforms.discord.adapter import DiscordAdapter
@@ -4065,6 +4127,24 @@ index 000000000..bb9ed8110
 +
 +
 +@pytest.mark.asyncio
++async def test_auto_thread_waits_for_discord_rate_limit_before_retry(monkeypatch):
++    """A multi-minute Discord bucket must delay, not drop, the user request."""
++    adapter = _adapter()
++    thread = SimpleNamespace(id=123456789, name="CAR Brasil - Nicolas")
++    create_thread = AsyncMock(side_effect=[RateLimitedForTest(297.1), thread])
++    message = _message(create_thread)
++    sleep = AsyncMock()
++    monkeypatch.setattr("plugins.platforms.discord.adapter.asyncio.sleep", sleep)
++
++    result = await adapter._auto_create_thread(message)
++
++    assert result is thread
++    assert create_thread.await_count == 2
++    sleep.assert_awaited_once_with(pytest.approx(298.1))
++    message.channel.send.assert_not_awaited()
++
++
++@pytest.mark.asyncio
 +async def test_auto_thread_reconciles_thread_created_despite_client_error():
 +    """A lost create response must reuse the source-message thread, not duplicate it."""
 +    thread = SimpleNamespace(id=123456789, name="CAR Brasil - Nicolas")
@@ -4093,7 +4173,7 @@ index 000000000..bb9ed8110
 +    assert create_thread.await_count == 2
 +    message.channel.send.assert_not_awaited()
 diff --git a/tests/gateway/test_discord_bot_filter.py b/tests/gateway/test_discord_bot_filter.py
-index 1e1033a2d..8bf956536 100644
+index 1e1033a2d97669ff84c713271f0c93140eabec69..8bf9565362cecf6e6df808aa40f6a8027ef16843 100644
 --- a/tests/gateway/test_discord_bot_filter.py
 +++ b/tests/gateway/test_discord_bot_filter.py
 @@ -3,7 +3,9 @@
@@ -4181,7 +4261,7 @@ index 1e1033a2d..8bf956536 100644
  
  if __name__ == "__main__":
 diff --git a/tests/gateway/test_discord_channel_controls.py b/tests/gateway/test_discord_channel_controls.py
-index 03a210360..cae0d7f2a 100644
+index 03a210360b0a34f951f7d1da970d7f2420e04536..cae0d7f2a01376836753206ccc66d852f672d749 100644
 --- a/tests/gateway/test_discord_channel_controls.py
 +++ b/tests/gateway/test_discord_channel_controls.py
 @@ -75,6 +75,15 @@ class FakeThread:
@@ -4201,7 +4281,7 @@ index 03a210360..cae0d7f2a 100644
      monkeypatch.setattr(discord_platform.discord, "Thread", FakeThread, raising=False)
  
 diff --git a/tests/gateway/test_discord_edit_message_overflow.py b/tests/gateway/test_discord_edit_message_overflow.py
-index 740894694..62b93046a 100644
+index 7408946945e448b392d212d0593217e759df8c83..62b93046a35c3184dd65f6b301fab4a1f2c9d539 100644
 --- a/tests/gateway/test_discord_edit_message_overflow.py
 +++ b/tests/gateway/test_discord_edit_message_overflow.py
 @@ -46,6 +46,7 @@ def _ensure_discord_mock():
@@ -4374,7 +4454,7 @@ index 740894694..62b93046a 100644
              if len(edit_calls) == 1:
                  raise RuntimeError(
 diff --git a/tests/gateway/test_discord_free_response.py b/tests/gateway/test_discord_free_response.py
-index fdba6fea2..79403d049 100644
+index fdba6fea2ab7415974cc6313f9a1e2589ec4579e..79403d0493a01bfadc8ed39a3d2613b3c8b1b201 100644
 --- a/tests/gateway/test_discord_free_response.py
 +++ b/tests/gateway/test_discord_free_response.py
 @@ -204,6 +204,126 @@ async def test_discord_free_response_in_server_channels(adapter, monkeypatch):
@@ -4818,7 +4898,7 @@ index fdba6fea2..79403d049 100644
  
      channel = SendingChannel(channel_id=777)
 diff --git a/tests/gateway/test_discord_send.py b/tests/gateway/test_discord_send.py
-index f12595e1a..14f86e017 100644
+index f12595e1abbb61eb355891eefc9b513ebbffb474..14f86e0170e0c3d6fa38b8023fad023af6b846fc 100644
 --- a/tests/gateway/test_discord_send.py
 +++ b/tests/gateway/test_discord_send.py
 @@ -85,6 +85,18 @@ async def test_send_rejects_whitespace_and_records_failed_final_reply(
@@ -4944,7 +5024,7 @@ index f12595e1a..14f86e017 100644
  # Forum channel tests
  # ---------------------------------------------------------------------------
 diff --git a/tests/gateway/test_discord_slash_commands.py b/tests/gateway/test_discord_slash_commands.py
-index e3e5a39ff..39dd54d6e 100644
+index e3e5a39ff57ce8e1fbfbb5b467daa9de8c86a5cd..39dd54d6eb38ea143db2fc83c0226289b174c265 100644
 --- a/tests/gateway/test_discord_slash_commands.py
 +++ b/tests/gateway/test_discord_slash_commands.py
 @@ -97,7 +97,16 @@ class FakeTree:
@@ -5090,7 +5170,7 @@ index e3e5a39ff..39dd54d6e 100644
  
  @pytest.mark.asyncio
 diff --git a/tests/gateway/test_discord_split_cap.py b/tests/gateway/test_discord_split_cap.py
-index 05f0f6b24..f72f4cd72 100644
+index 05f0f6b24754509a422d380d321eee34f913928e..f72f4cd72511d460d5f1e88d4e99c751cdcd51aa 100644
 --- a/tests/gateway/test_discord_split_cap.py
 +++ b/tests/gateway/test_discord_split_cap.py
 @@ -80,7 +80,7 @@ class TestSendCap:
@@ -5126,7 +5206,7 @@ index 05f0f6b24..f72f4cd72 100644
  
 diff --git a/tests/gateway/test_discord_thread_auto_add_by_channel.py b/tests/gateway/test_discord_thread_auto_add_by_channel.py
 new file mode 100644
-index 000000000..4e7f8b47a
+index 0000000000000000000000000000000000000000..4e7f8b47aa9a775c522260b4e613ad5641fe2a1f
 --- /dev/null
 +++ b/tests/gateway/test_discord_thread_auto_add_by_channel.py
 @@ -0,0 +1,110 @@
@@ -5241,7 +5321,7 @@ index 000000000..4e7f8b47a
 +    await adapter._auto_add_parent_channel_members_to_thread(thread, director)
 +    thread.add_user.assert_not_awaited()
 diff --git a/tests/gateway/test_extract_local_files.py b/tests/gateway/test_extract_local_files.py
-index 5cb1c3900..eb96a0c1f 100644
+index 5cb1c3900ce97f40ee89f02c7b9e20fe286af621..eb96a0c1f0cc6020472511cbd4aec95c75e91f1f 100644
 --- a/tests/gateway/test_extract_local_files.py
 +++ b/tests/gateway/test_extract_local_files.py
 @@ -37,7 +37,8 @@ def _extract(content: str, existing_files: set[str] | None = None):
@@ -5255,7 +5335,7 @@ index 5cb1c3900..eb96a0c1f 100644
          return BasePlatformAdapter.extract_local_files(content)
  
 diff --git a/tests/gateway/test_fast_command.py b/tests/gateway/test_fast_command.py
-index c714b76e8..b9fa2bf50 100644
+index c714b76e84702100af05953b74ec19077d907365..b9fa2bf504138fbceda8224df5b2e7f50e40b094 100644
 --- a/tests/gateway/test_fast_command.py
 +++ b/tests/gateway/test_fast_command.py
 @@ -18,9 +18,12 @@ from gateway.session import SessionSource
@@ -5376,7 +5456,7 @@ index c714b76e8..b9fa2bf50 100644
 +    assert restored.auto_thread_created is True
 +    assert restored.auto_thread_initial_name == "raw user prompt"
 diff --git a/tests/gateway/test_mirror.py b/tests/gateway/test_mirror.py
-index 4938d85da..8b13f8315 100644
+index 4938d85da7498ec6173470c32d38eeab96410d98..8b13f83153bdfcd47766cc5a773385ad2c1102e8 100644
 --- a/tests/gateway/test_mirror.py
 +++ b/tests/gateway/test_mirror.py
 @@ -3,6 +3,8 @@
@@ -5489,7 +5569,7 @@ index 4938d85da..8b13f8315 100644
  class TestMirrorToSession:
  
 diff --git a/tests/gateway/test_reasoning_command.py b/tests/gateway/test_reasoning_command.py
-index 3b497a9c5..62f738267 100644
+index 3b497a9c53f1810d6be7900863a218153f8cf7d7..62f73826767115e8e9724dd7886261045e9a4f41 100644
 --- a/tests/gateway/test_reasoning_command.py
 +++ b/tests/gateway/test_reasoning_command.py
 @@ -76,7 +76,12 @@ class TestReasoningCommand:
@@ -5564,7 +5644,7 @@ index 3b497a9c5..62f738267 100644
      @pytest.mark.asyncio
      @pytest.mark.parametrize("effort", ["max", "ultra"])
 diff --git a/tests/gateway/test_restart_resume_pending.py b/tests/gateway/test_restart_resume_pending.py
-index 1acc357e1..11523620b 100644
+index 1acc357e16f7d739ed5934156d2db34ec1940e7a..11523620b4c59181d41107543cc8d5669ed96d00 100644
 --- a/tests/gateway/test_restart_resume_pending.py
 +++ b/tests/gateway/test_restart_resume_pending.py
 @@ -25,7 +25,10 @@ PRs #9850, #9934, #7536):
@@ -6194,7 +6274,7 @@ index 1acc357e1..11523620b 100644
  async def test_reconnect_reschedule_is_platform_scoped():
      """The platform filter limits the pass to that platform's sessions, so
 diff --git a/tests/gateway/test_run_progress_topics.py b/tests/gateway/test_run_progress_topics.py
-index da3dd2efc..8ccabc5bd 100644
+index da3dd2efc7bf37e4e4b42d512636d2c24c7c4d80..8ccabc5bdc2d3d90533dcf3b548f49a71d73e804 100644
 --- a/tests/gateway/test_run_progress_topics.py
 +++ b/tests/gateway/test_run_progress_topics.py
 @@ -955,6 +955,30 @@ class QueuedFailedEmptyAgent:
@@ -6265,7 +6345,7 @@ index da3dd2efc..8ccabc5bd 100644
  async def test_run_agent_defers_background_review_notification_until_release(monkeypatch, tmp_path):
      adapter, result = await _run_with_agent(
 diff --git a/tests/gateway/test_session.py b/tests/gateway/test_session.py
-index 2defd546b..5676e4333 100644
+index 2defd546b7a7db22dcb536edb74f9e5b6f0911bf..5676e4333ab0bf1cdc5c897eae3df376bf44a3a0 100644
 --- a/tests/gateway/test_session.py
 +++ b/tests/gateway/test_session.py
 @@ -328,6 +328,29 @@ class TestSenderPrefixWithBackfill:
@@ -6299,7 +6379,7 @@ index 2defd546b..5676e4333 100644
      @pytest.mark.asyncio
      async def test_backfill_preserves_context_block(self, runner, source):
 diff --git a/tests/gateway/test_telegram_photo_interrupts.py b/tests/gateway/test_telegram_photo_interrupts.py
-index 74fb8baa3..4f4032d55 100644
+index 74fb8baa3e393a4b9bad11769519e34d201d29dc..4f4032d55f8d2cfef558badb4e5e3bc3617f9f04 100644
 --- a/tests/gateway/test_telegram_photo_interrupts.py
 +++ b/tests/gateway/test_telegram_photo_interrupts.py
 @@ -1,4 +1,4 @@
@@ -6355,7 +6435,7 @@ index 74fb8baa3..4f4032d55 100644
 +    running_agent.interrupt.assert_not_called()
 +    assert session_key not in runner.adapters[Platform.TELEGRAM]._pending_messages
 diff --git a/tests/hermes_cli/test_config_validation.py b/tests/hermes_cli/test_config_validation.py
-index 8f5746eda..7e54163fa 100644
+index 8f5746eda293101d573504e17d7bc7e24c3cb89c..7e54163fa6be40cd245501e7d52ac55a22a914ec 100644
 --- a/tests/hermes_cli/test_config_validation.py
 +++ b/tests/hermes_cli/test_config_validation.py
 @@ -122,6 +122,18 @@ class TestUnknownTopLevelKeys:
@@ -6378,7 +6458,7 @@ index 8f5746eda..7e54163fa 100644
          """_KNOWN_ROOT_KEYS must be DEFAULT_CONFIG.keys() plus extras — single source of truth."""
          assert set(DEFAULT_CONFIG.keys()).issubset(_KNOWN_ROOT_KEYS)
 diff --git a/tests/hermes_cli/test_tui_resume_flow.py b/tests/hermes_cli/test_tui_resume_flow.py
-index 33ff8f870..cf2349970 100644
+index 33ff8f8700f6f395b9228c418e16dec7715128dc..cf23499704135431c7d090aa3baa8e7fca0a75d9 100644
 --- a/tests/hermes_cli/test_tui_resume_flow.py
 +++ b/tests/hermes_cli/test_tui_resume_flow.py
 @@ -37,6 +37,147 @@ def main_mod(monkeypatch):
@@ -6530,7 +6610,7 @@ index 33ff8f870..cf2349970 100644
  
  
 diff --git a/tests/run_agent/test_background_review_summary.py b/tests/run_agent/test_background_review_summary.py
-index 1ba003588..2746dfcfd 100644
+index 1ba00358817e859ebc599817cdd866cc061251f9..2746dfcfdcdf0facb07e19754736b46db19056f8 100644
 --- a/tests/run_agent/test_background_review_summary.py
 +++ b/tests/run_agent/test_background_review_summary.py
 @@ -76,6 +76,86 @@ def test_falls_back_to_content_equality_when_tool_call_id_missing():
@@ -6621,7 +6701,7 @@ index 1ba003588..2746dfcfd 100644
      review_messages = [
          {"role": "tool", "tool_call_id": "x", "content": "not-json"},
 diff --git a/tests/test_honcho_startup_fail_open.py b/tests/test_honcho_startup_fail_open.py
-index 4b8e1da2d..bd6f722df 100644
+index 4b8e1da2d3e8e60b1f4f4df20c3c9c6fab9bb019..bd6f722dffdb779058a278a8d9a79d39c405c36c 100644
 --- a/tests/test_honcho_startup_fail_open.py
 +++ b/tests/test_honcho_startup_fail_open.py
 @@ -548,3 +548,78 @@ def test_honcho_on_memory_write_still_writes_when_enabled():
@@ -6705,7 +6785,7 @@ index 4b8e1da2d..bd6f722df 100644
 +    assert not worker.is_alive()
 diff --git a/tests/tools/test_memory_capacity_dead_letter.py b/tests/tools/test_memory_capacity_dead_letter.py
 new file mode 100644
-index 000000000..799108516
+index 0000000000000000000000000000000000000000..799108516b4bcabc62aa59bafec502cb33116e30
 --- /dev/null
 +++ b/tests/tools/test_memory_capacity_dead_letter.py
 @@ -0,0 +1,276 @@
@@ -6986,7 +7066,7 @@ index 000000000..799108516
 +    assert record["persisted"] is False
 +    assert "readback mismatch" in record["persistence_error"].lower()
 diff --git a/tests/tools/test_memory_tool.py b/tests/tools/test_memory_tool.py
-index 0582703ab..75a70c6c0 100644
+index 0582703abb5102b95fc9a64c9c32cce6b102fb70..75a70c6c06d9411964141a220c83e68136eb52ce 100644
 --- a/tests/tools/test_memory_tool.py
 +++ b/tests/tools/test_memory_tool.py
 @@ -125,17 +125,24 @@ class TestMemoryStoreAdd:
@@ -7077,7 +7157,7 @@ index 0582703ab..75a70c6c0 100644
      def test_apply_batch_failures_count_toward_budget(self, store):
          """apply_batch is the primary at-capacity consolidation path; its
 diff --git a/tests/tools/test_skills_tool.py b/tests/tools/test_skills_tool.py
-index 656d02e35..2e6d9dd5a 100644
+index 656d02e35566398121ab30eb3c7be82aedc3e945..2e6d9dd5a1f37c867982625b0819537a11eb09c4 100644
 --- a/tests/tools/test_skills_tool.py
 +++ b/tests/tools/test_skills_tool.py
 @@ -375,6 +375,155 @@ class TestSkillView:
@@ -7237,7 +7317,7 @@ index 656d02e35..2e6d9dd5a 100644
      def test_disabled_skill_blocked_enabled_allowed(self, tmp_path):
          with (
 diff --git a/tests/tools/test_write_approval.py b/tests/tools/test_write_approval.py
-index a0e2c572a..79e58d493 100644
+index a0e2c572af5d666ae63b2534d984fb33a4dabc6f..79e58d493ecf484e84c2d3c18db45680144c9f6e 100644
 --- a/tests/tools/test_write_approval.py
 +++ b/tests/tools/test_write_approval.py
 @@ -78,6 +78,56 @@ def test_memory_gate_off_allows_write(hermes_home):
@@ -7299,7 +7379,7 @@ index a0e2c572a..79e58d493 100644
      Desktop GUI) passed ``memory_store=None`` into the shared handler, which
 diff --git a/tests/tools/test_write_trace.py b/tests/tools/test_write_trace.py
 new file mode 100644
-index 000000000..5196b3d07
+index 0000000000000000000000000000000000000000..5196b3d07f556fa3eda4b4eb95e3167d069f6421
 --- /dev/null
 +++ b/tests/tools/test_write_trace.py
 @@ -0,0 +1,153 @@
@@ -7457,7 +7537,7 @@ index 000000000..5196b3d07
 +    assert list(receipt["after"]) == [str(skill_path)]
 +    assert receipt["before"][str(skill_path)] != receipt["after"][str(skill_path)]
 diff --git a/tools/memory_tool.py b/tools/memory_tool.py
-index 44effd02c..ecb58e4c1 100644
+index 44effd02c27e488a07a0feb80f2e4ced4563cd39..ecb58e4c15dcd23065af26af3d280a8a05a6e19b 100644
 --- a/tools/memory_tool.py
 +++ b/tools/memory_tool.py
 @@ -23,6 +23,7 @@ Design:
@@ -7711,7 +7791,7 @@ index 44effd02c..ecb58e4c1 100644
  
  
 diff --git a/tools/skill_manager_tool.py b/tools/skill_manager_tool.py
-index 9c602bca7..94ed271fc 100644
+index 9c602bca7d4c8461515b4e6c213313ea177c7309..94ed271fca8f20e6b8f26c42b6312dd0f3c03f26 100644
 --- a/tools/skill_manager_tool.py
 +++ b/tools/skill_manager_tool.py
 @@ -1590,6 +1590,23 @@ def skill_manage(
@@ -7784,7 +7864,7 @@ index 9c602bca7..94ed271fc 100644
      return json.dumps(result, ensure_ascii=False)
  
 diff --git a/tools/skills_tool.py b/tools/skills_tool.py
-index 44157ce13..2955cda32 100644
+index 44157ce136e7c2962753cccbaa0cac9f7085a2cf..2955cda32ffc460a2281a75316f71b0a86a27b88 100644
 --- a/tools/skills_tool.py
 +++ b/tools/skills_tool.py
 @@ -619,6 +619,94 @@ def _parse_tags(tags_value) -> List[str]:
@@ -7929,7 +8009,7 @@ index 44157ce13..2955cda32 100644
          if setup_help:
              result["setup_help"] = setup_help
 diff --git a/tools/write_approval.py b/tools/write_approval.py
-index b017299d8..66742dde3 100644
+index b017299d806b83e5a0fa9f9d7f22c0bf5c8f7309..66742dde3aebbc140bea5940376943fe89a655ac 100644
 --- a/tools/write_approval.py
 +++ b/tools/write_approval.py
 @@ -42,9 +42,12 @@ web dashboard.
@@ -8102,7 +8182,7 @@ index b017299d8..66742dde3 100644
          if path.exists():
 diff --git a/tools/write_trace.py b/tools/write_trace.py
 new file mode 100644
-index 000000000..f2806f619
+index 0000000000000000000000000000000000000000..f2806f61964bf23f4ba7806141eaa0c6c824b396
 --- /dev/null
 +++ b/tools/write_trace.py
 @@ -0,0 +1,165 @@
