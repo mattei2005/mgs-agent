@@ -171,35 +171,213 @@ def shell_quote(s):
     import shlex
     return shlex.quote(str(s))
 
+def _header_value(headers, name):
+    wanted = str(name).lower()
+    for key, value in dict(headers or {}).items():
+        if str(key).lower() == wanted:
+            return value
+    return None
+
+
+def _as_number(value, default=0.0):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float(default)
+
+
+def parse_business_usage_headers(headers):
+    """Parse Meta X-Business-Use-Case-Usage without trusting its shape."""
+    raw = _header_value(headers, BUSINESS_USAGE_HEADER)
+    empty = {
+        'entry_count': 0,
+        'entries': [],
+        'max_usage_pct': 0.0,
+        'limiting_metric': None,
+        'estimated_time_to_regain_access_minutes': 0.0,
+    }
+    if raw in (None, ''):
+        return empty
+    try:
+        data = json.loads(raw) if isinstance(raw, str) else raw
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return empty
+    groups = []
+    if isinstance(data, dict):
+        for business_id, value in data.items():
+            values = value if isinstance(value, list) else [value]
+            for item in values:
+                if isinstance(item, dict):
+                    groups.append((str(business_id), item))
+    elif isinstance(data, list):
+        for item in data:
+            if isinstance(item, dict):
+                groups.append((str(item.get('business_id') or ''), item))
+    entries = []
+    max_usage = 0.0
+    limiting_metric = None
+    estimated_minutes = 0.0
+    for business_id, item in groups[:32]:
+        normalized = {
+            'business_id': business_id,
+            'type': item.get('type'),
+            'call_count': _as_number(item.get('call_count')),
+            'total_cputime': _as_number(item.get('total_cputime')),
+            'total_time': _as_number(item.get('total_time')),
+            'estimated_time_to_regain_access': _as_number(item.get('estimated_time_to_regain_access')),
+            'ads_api_access_tier': item.get('ads_api_access_tier'),
+        }
+        entries.append(normalized)
+        estimated_minutes = max(estimated_minutes, normalized['estimated_time_to_regain_access'])
+        for metric in ('call_count', 'total_cputime', 'total_time'):
+            value = normalized[metric]
+            if value > max_usage:
+                max_usage = value
+                limiting_metric = metric
+    return {
+        'entry_count': len(entries),
+        'entries': entries,
+        'max_usage_pct': max_usage,
+        'limiting_metric': limiting_metric,
+        'estimated_time_to_regain_access_minutes': estimated_minutes,
+    }
+
+
+def business_usage_decision(usage, now_epoch=None):
+    now_epoch = time.time() if now_epoch is None else float(now_epoch)
+    max_usage = _as_number((usage or {}).get('max_usage_pct'))
+    estimated_minutes = _as_number((usage or {}).get('estimated_time_to_regain_access_minutes'))
+    soft_limited = max_usage >= BUSINESS_USAGE_SOFT_LIMIT_PERCENT
+    wait_seconds = 0
+    if soft_limited:
+        wait_seconds = int(round(estimated_minutes * 60)) if estimated_minutes > 0 else BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS
+    return {
+        'soft_limited': soft_limited,
+        'wait_seconds': max(0, wait_seconds),
+        'blocked_until_epoch': now_epoch + max(0, wait_seconds),
+        'max_usage_pct': max_usage,
+        'limiting_metric': (usage or {}).get('limiting_metric'),
+    }
+
+
+def retry_wait_seconds(status, payload, headers, attempt=1):
+    err = payload.get('error') if isinstance(payload, dict) else None
+    code = err.get('code') if isinstance(err, dict) else None
+    if status == 429 or code in RATE_LIMIT_CODES:
+        usage = parse_business_usage_headers(headers)
+        estimated_minutes = _as_number(usage.get('estimated_time_to_regain_access_minutes'))
+        if estimated_minutes > 0:
+            return int(round(estimated_minutes * 60))
+        return min(RATE_LIMIT_INITIAL_SLEEP * (2 ** max(0, int(attempt) - 1)), RATE_LIMIT_MAX_TOTAL_SLEEP)
+    if isinstance(status, int) and 500 <= status <= 599:
+        return TRANSIENT_5XX_RETRY_SECONDS
+    return None
+
+
+def _open_throttle_state():
+    THROTTLE_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(THROTTLE_STATE_PATH, os.O_CREAT | os.O_RDWR, 0o600)
+    os.fchmod(fd, 0o600)
+    return os.fdopen(fd, 'r+')
+
+
+def _read_state_locked(fh):
+    fh.seek(0)
+    try:
+        state = json.loads(fh.read() or '{}')
+        return state if isinstance(state, dict) else {}
+    except Exception:
+        return {}
+
+
+def _write_state_locked(fh, state):
+    fh.seek(0)
+    fh.truncate()
+    fh.write(json.dumps(state, ensure_ascii=False, sort_keys=True))
+    fh.flush()
+    os.fsync(fh.fileno())
+
+
+def record_response_usage(headers, status, payload, now_epoch=None):
+    """Persist BUC usage and cooldown from every HTTP response."""
+    now_epoch = time.time() if now_epoch is None else float(now_epoch)
+    usage = parse_business_usage_headers(headers)
+    decision = business_usage_decision(usage, now_epoch=now_epoch)
+    err = payload.get('error') if isinstance(payload, dict) else None
+    error_code = err.get('code') if isinstance(err, dict) else None
+    with _open_throttle_state() as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        state = _read_state_locked(fh)
+        if usage['entry_count']:
+            state['business_usage'] = usage
+            state['usage_updated_at_epoch'] = now_epoch
+        state['last_response_status'] = status
+        state['last_error_code'] = error_code
+        current_block = _as_number(state.get('blocked_until_epoch'))
+        blocked_until = current_block
+        reason = state.get('block_reason')
+        if decision['soft_limited']:
+            blocked_until = max(blocked_until, decision['blocked_until_epoch'])
+            reason = 'business_usage_soft_limit'
+        rate_wait = retry_wait_seconds(status, payload, headers, attempt=1)
+        if (status == 429 or error_code in RATE_LIMIT_CODES) and rate_wait is not None:
+            blocked_until = max(blocked_until, now_epoch + rate_wait)
+            reason = 'meta_rate_limit'
+        if usage['entry_count'] and not decision['soft_limited'] and status < 400:
+            blocked_until = 0
+            reason = None
+        state['blocked_until_epoch'] = blocked_until
+        state['block_reason'] = reason
+        state['soft_limit_percent'] = BUSINESS_USAGE_SOFT_LIMIT_PERCENT
+        _write_state_locked(fh, state)
+        fcntl.flock(fh, fcntl.LOCK_UN)
+    return state
+
+
+def _wait_before_request_from_state(now_epoch=None):
+    now_epoch = time.time() if now_epoch is None else float(now_epoch)
+    if not THROTTLE_STATE_PATH.exists():
+        return 0
+    with _open_throttle_state() as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        state = _read_state_locked(fh)
+        blocked_until = _as_number(state.get('blocked_until_epoch'))
+        remaining = max(0, int(round(blocked_until - now_epoch)))
+        reason = state.get('block_reason') or 'business_usage_soft_limit'
+        if remaining <= 0 and blocked_until:
+            state['blocked_until_epoch'] = 0
+            state['block_reason'] = None
+            _write_state_locked(fh, state)
+        fcntl.flock(fh, fcntl.LOCK_UN)
+    if remaining <= 0:
+        return 0
+    if remaining > BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS:
+        raise AresMetaUsageBlocked(remaining, reason=reason)
+    time.sleep(remaining)
+    return remaining
+
+
 def _throttle_before_request():
-    """Cross-process soft throttle to avoid Meta API bursts."""
+    """Cross-process BUC gate plus minimum spacing between Meta calls."""
+    _wait_before_request_from_state()
     if MIN_INTERVAL_SECONDS <= 0:
         return
-    THROTTLE_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with THROTTLE_STATE_PATH.open('a+') as fh:
+    with _open_throttle_state() as fh:
         fcntl.flock(fh, fcntl.LOCK_EX)
-        fh.seek(0)
-        try:
-            state = json.loads(fh.read() or '{}')
-        except Exception:
-            state = {}
+        state = _read_state_locked(fh)
         now = time.monotonic()
         last = float(state.get('last_request_monotonic') or 0)
-        # time.monotonic() is process/boot-local. If the VPS rebooted after the
-        # throttle state was persisted, a previous high monotonic value can be
-        # greater than the current boot's value and would otherwise sleep for
-        # days while holding the cross-process lock.
         if last > now:
             last = 0
         wait = MIN_INTERVAL_SECONDS - (now - last)
         if 0 < wait <= MIN_INTERVAL_SECONDS:
             time.sleep(wait)
             now = time.monotonic()
-        fh.seek(0)
-        fh.truncate()
-        fh.write(json.dumps({'last_request_monotonic': now, 'min_interval_seconds': MIN_INTERVAL_SECONDS}))
-        fh.flush()
+        state['last_request_monotonic'] = now
+        state['min_interval_seconds'] = MIN_INTERVAL_SECONDS
+        _write_state_locked(fh, state)
         fcntl.flock(fh, fcntl.LOCK_UN)
+
 
 def is_rate_limit_response(status, payload):
     err = payload.get('error') if isinstance(payload, dict) else None
@@ -214,56 +392,171 @@ def is_rate_limit_response(status, payload):
             return True
     return False
 
+
 def _graph_get_once(path, token, params=None):
-    params=dict(params or {})
-    params['access_token']=token
-    url=f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}?'+urllib.parse.urlencode(params)
-    req=urllib.request.Request(url, headers={'User-Agent':'mgs-ares-meta-ads/0.1'})
+    params = dict(params or {})
+    params['access_token'] = token
+    url = f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}?'+urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={'User-Agent':'mgs-ares-meta-ads/0.2'})
     try:
         _throttle_before_request()
         with urllib.request.urlopen(req, timeout=45) as resp:
-            body=resp.read().decode('utf-8', 'replace')
-            return resp.status, json.loads(body), dict(resp.headers)
+            body = resp.read().decode('utf-8', 'replace')
+            payload = json.loads(body)
+            headers = dict(resp.headers)
+            record_response_usage(headers, resp.status, payload)
+            return resp.status, payload, headers
     except urllib.error.HTTPError as e:
-        body=e.read().decode('utf-8','replace')
-        try: payload=json.loads(body)
-        except Exception: payload={'raw':body[:1000]}
-        return e.code, payload, dict(e.headers)
+        body = e.read().decode('utf-8','replace')
+        try: payload = json.loads(body)
+        except Exception: payload = {'raw_length': len(body)}
+        headers = dict(e.headers)
+        record_response_usage(headers, e.code, payload)
+        return e.code, payload, headers
+
+
+def _encode_form(params):
+    clean = {}
+    for key, value in dict(params or {}).items():
+        if value is None:
+            continue
+        if isinstance(value, (dict, list)):
+            clean[key] = json.dumps(value, ensure_ascii=False, separators=(',', ':'))
+        elif isinstance(value, bool):
+            clean[key] = 'true' if value else 'false'
+        else:
+            clean[key] = str(value)
+    return clean
+
+
+def _graph_post_once(path, token, params=None):
+    clean = _encode_form(params)
+    clean['access_token'] = token
+    req = urllib.request.Request(
+        f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}',
+        data=urllib.parse.urlencode(clean).encode(),
+        headers={'User-Agent':'mgs-ares-meta-ads/0.2'},
+        method='POST',
+    )
+    try:
+        _throttle_before_request()
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            body = resp.read().decode('utf-8', 'replace')
+            payload = json.loads(body) if body else {}
+            headers = dict(resp.headers)
+            record_response_usage(headers, resp.status, payload)
+            return resp.status, payload, headers
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8','replace')
+        try: payload = json.loads(body)
+        except Exception: payload = {'raw_length': len(body)}
+        headers = dict(e.headers)
+        record_response_usage(headers, e.code, payload)
+        return e.code, payload, headers
+
+
+def _deferred_payload(status, payload, attempts, total_sleep, retry_after):
+    return {
+        'error': {
+            'message': 'Meta API request deferred by quota-aware backoff; stopped before exceeding the bounded wait.',
+            'type': 'AresRateLimitDeferred',
+            'code': 'ARES_RATE_LIMIT_DEFERRED',
+            'http_status': status,
+            'attempts': attempts,
+            'total_sleep_seconds': total_sleep,
+            'retry_after_seconds': retry_after,
+            'last_meta_error': safe_meta_error(payload),
+        }
+    }
+
+
+def _request_with_retry(once, path, token, params=None):
+    total_sleep = 0
+    attempt = 0
+    while True:
+        attempt += 1
+        try:
+            status, payload, headers = once(path, token, params)
+        except AresMetaUsageBlocked as exc:
+            return 429, {
+                'error': {
+                    'message': str(exc),
+                    'type': 'AresMetaUsageBlocked',
+                    'code': 'ARES_BUSINESS_USAGE_BLOCKED',
+                    'retry_after_seconds': exc.retry_after_seconds,
+                    'reason': exc.reason,
+                }
+            }, {}
+        wait_seconds = retry_wait_seconds(status, payload, headers, attempt=attempt)
+        if wait_seconds is None:
+            return status, payload, headers
+        if total_sleep + wait_seconds > RATE_LIMIT_MAX_TOTAL_SLEEP:
+            return status, _deferred_payload(status, payload, attempt, total_sleep, wait_seconds), headers
+        time.sleep(wait_seconds)
+        total_sleep += wait_seconds
+
 
 def graph_get(path, token, params=None):
-    """GET Meta Graph with burst throttling and bounded rate-limit backoff.
+    return _request_with_retry(_graph_get_once, path, token, params)
 
-    Backoff sequence starts at 30s and doubles, capped at 10 minutes total
-    sleep. If Meta still rate-limits after that, return a structured error so
-    the caller/agent can stop and alert the current channel.
-    """
-    total_sleep = 0
-    next_sleep = RATE_LIMIT_INITIAL_SLEEP
-    attempts = 0
-    while True:
-        attempts += 1
-        status, payload, headers = _graph_get_once(path, token, params)
-        if not is_rate_limit_response(status, payload):
-            return status, payload, headers
-        if total_sleep >= RATE_LIMIT_MAX_TOTAL_SLEEP:
-            payload = {
-                'error': {
-                    'message': 'Meta API rate limit persisted after bounded backoff; stopped to avoid hammering the API.',
-                    'type': 'AresRateLimitExceeded',
-                    'code': 'ARES_RATE_LIMIT_EXHAUSTED',
-                    'attempts': attempts,
-                    'total_sleep_seconds': total_sleep,
-                    'last_meta_error': safe_meta_error(payload),
-                }
-            }
-            return status, payload, headers
-        sleep_for = min(next_sleep, RATE_LIMIT_MAX_TOTAL_SLEEP - total_sleep)
-        time.sleep(sleep_for)
-        total_sleep += sleep_for
-        next_sleep *= 2
+
+def graph_post(path, token, params=None):
+    return _request_with_retry(_graph_post_once, path, token, params)
+
+
+def graph_batch_get(token, requests):
+    if not isinstance(requests, list) or not requests or len(requests) > 50:
+        raise ValueError('batch GET requires 1..50 requests')
+    batch = []
+    names = []
+    for index, item in enumerate(requests):
+        if not isinstance(item, dict) or not item.get('path'):
+            raise ValueError(f'invalid batch request at index {index}')
+        params = _encode_form(item.get('params') or {})
+        relative_url = str(item['path']).lstrip('/')
+        if params:
+            relative_url += '?' + urllib.parse.urlencode(params)
+        batch.append({'method': 'GET', 'relative_url': relative_url})
+        names.append(str(item.get('name') or f'request_{index+1}'))
+    status, payload, headers = graph_post('', token, {'batch': batch})
+    if status != 200 or not isinstance(payload, list):
+        return status, payload, headers
+    normalized = []
+    for index, item in enumerate(payload):
+        code = int(item.get('code') or 0) if isinstance(item, dict) else 0
+        child_headers = {}
+        for row in (item.get('headers') or []) if isinstance(item, dict) else []:
+            if isinstance(row, dict) and row.get('name'):
+                child_headers[str(row['name'])] = row.get('value')
+        raw_body = item.get('body') if isinstance(item, dict) else None
+        try: body = json.loads(raw_body) if isinstance(raw_body, str) else raw_body
+        except (TypeError, ValueError, json.JSONDecodeError): body = {'raw_length': len(raw_body or '')}
+        record_response_usage(child_headers, code, body if isinstance(body, dict) else {})
+        normalized.append({'name': names[index], 'code': code, 'body': body, 'headers': child_headers})
+    return status, normalized, headers
+
 
 def safe_meta_error(payload):
-    err=payload.get('error') if isinstance(payload,dict) else None
-    if not err:
+    err = payload.get('error') if isinstance(payload, dict) else None
+    if not isinstance(err, dict):
         return payload
-    return {k:err.get(k) for k in ['message','type','code','error_subcode','fbtrace_id'] if k in err}
+    result = {
+        key: err.get(key)
+        for key in (
+            'message', 'type', 'code', 'error_subcode', 'error_user_title',
+            'error_user_msg', 'error_data', 'fbtrace_id', 'retry_after_seconds',
+            'reason', 'http_status', 'attempts', 'total_sleep_seconds',
+            'last_meta_error',
+        )
+        if err.get(key) is not None
+    }
+    error_data = result.get('error_data')
+    if isinstance(error_data, str):
+        try:
+            parsed = json.loads(error_data)
+            result['error_data'] = parsed
+            if isinstance(parsed, dict) and parsed.get('blame_field_specs') is not None:
+                result['blame_field_specs'] = parsed.get('blame_field_specs')
+        except (TypeError, ValueError, json.JSONDecodeError):
+            pass
+    return result
