@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "No Graph API Explorer, clicar Generate Access Token após Salvar, copiar o token novo, substituir somente o campo credential do item Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006 no 1Password e avisar. Ares força novo refresh e repete validate-only v26 antes do 1x1x3.",
+      "next_step": "Executar o mesmo validate-only Graph v26 no Graph API Explorer pela sessão/navegador confiável do Rafael. Se passar localmente e falhar na VPS, confirmar bloqueio de egress e decidir com Rodolfo entre System User corporativo ou rota de saída confiável; nenhum novo write pela VPS antes disso.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; 1Password metadata version4 updated 2026-08-20T08:49:41-04:00; Graph v26 post-auth validate-only no-write",
-      "state": "rodolfo concluiu a autenticação oauth, mas o item 1password ainda não contém um token pós-autenticação: metadata version=4, updated_at=20/08/2026 08:49:41 et, anterior ao fluxo atual. ares forçou refresh do 1password e testou graph v26 validate-only sem write em criativo sanitizado e criativo fonte ativo; ambos continuam code31/sub3858385. conta, scopes, página garagem brasil e advertise passam. nenhum write foi executado.",
+      "source": "discord:thread:1539434208408375426; imagem com diagnóstico externo code31/3858385; Graph v26 post-auth validate-only duplo sem write; VPS egress Boston US Hostinger; operation config v1.0.22",
+      "state": "rodolfo confirmou que o token é o mesmo e concluiu a autenticação. ares forçou refresh do 1password e repetiu graph v26 validate-only em criativo sanitizado e criativo fonte ativo: ambos continuam code31/sub3858385, sem write. conta, scopes, página e advertise passam; ads manager manual está operacional. egress da vps validado em boston/us pela hostinger, enquanto o perfil humano opera em sessão/localidade distinta. a hipótese mais forte agora é checkpoint de confiança por localização/dispositivo na rota server-side, ainda não comprovada.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T16:00:14+00:00"
+      "updated_at": "2026-08-20T16:09:19+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T16:00:14+00:00"
+  "updated_at": "2026-08-20T16:09:19+00:00"
 }
