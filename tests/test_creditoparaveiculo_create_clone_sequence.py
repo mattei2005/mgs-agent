@@ -20,6 +20,10 @@ def fake_source():
         'advertiser': 'Garagem Brasil',
         'beneficiary': 'Digital Trust',
         'payor': 'Digital Trust',
+        'ads': [
+            {'id': f'source-ad-{i}', 'name': f'AD{i}', 'creative': {'id': f'creative-{i}'}}
+            for i in range(1, 4)
+        ],
         'campaign': {
             'objective': 'OUTCOME_SALES',
             'buying_type': 'AUCTION',
@@ -65,6 +69,50 @@ def test_test3_runs_only_when_both_test1_and_test2_fail():
 def test_copy_paths_explicitly_disable_deep_copy():
     source = SCRIPT.read_text()
     assert source.count("'deep_copy': 'false'") >= 2
+
+
+def test_create_from_zero_creates_three_paused_ads_with_existing_creatives(monkeypatch):
+    mod = load_module()
+    calls = []
+    def fake_post(common, token, path, params, stage):
+        calls.append((path, params, stage))
+        return ({'id': f'new-ad-{len(calls)}'}, {})
+    monkeypatch.setattr(mod, 'post', fake_post)
+    created = mod.create_three_ads_from_zero(object(), 'token', fake_source(), 'target-adset', 72)
+    assert len(created) == 3
+    assert all(path == mod.ACCOUNT_ACT + '/ads' for path, _, _ in calls)
+    assert [params['creative']['creative_id'] for _, params, _ in calls] == ['creative-1', 'creative-2', 'creative-3']
+    assert all(params['status'] == 'PAUSED' and params['adset_id'] == 'target-adset' for _, params, _ in calls)
+
+
+def test_hierarchical_clone_uses_native_copy_at_every_level(monkeypatch, tmp_path):
+    mod = load_module()
+    routes = []
+    def fake_post(common, token, path, params, stage):
+        routes.append(path)
+        if path == mod.SOURCE_CAMPAIGN_ID + '/copies':
+            return ({'copied_campaign_id': 'campaign-copy'}, {})
+        if path == mod.SOURCE_ADSET_ID + '/copies':
+            return ({'copied_adset_id': 'adset-copy'}, {})
+        if path.startswith('source-ad-') and path.endswith('/copies'):
+            return ({'copied_ad_id': 'copied-' + path.split('/')[0]}, {})
+        return ({'success': True}, {})
+    readback = {
+        'campaign': {'configured_status': 'PAUSED', 'daily_budget': '3000'},
+        'adsets': {'data': [{'id': 'adset-copy', 'configured_status': 'PAUSED', 'regional_regulated_categories': ['BRAZIL_REGULATION', 'VOLUNTARY_VERIFICATION']}]},
+        'ads': {'data': [{'id': f'copied-ad-{i}', 'configured_status': 'PAUSED', 'source_ad_id': f'source-ad-{i}'} for i in range(1, 4)]},
+    }
+    monkeypatch.setattr(mod, 'post', fake_post)
+    monkeypatch.setattr(mod, 'hierarchy_readback', lambda *args, **kwargs: (readback, {'attempts': 1, 'wait_seconds': 0}))
+    monkeypatch.setattr(mod, 'save_audit', lambda *args, **kwargs: None)
+    monkeypatch.setattr(mod, 'cleanup_campaign', lambda *args, **kwargs: None)
+    audit = {'tests': [], 'cleanups': [], 'active_campaign_ids': [], 'audit_path': str(tmp_path / 'audit.json')}
+    result = mod.run_test2(object(), 'token', fake_source(), audit)
+    assert result['status'] == 'copy_compliant_updated_readable'
+    assert routes[0] == mod.SOURCE_CAMPAIGN_ID + '/copies'
+    assert mod.SOURCE_ADSET_ID + '/copies' in routes
+    assert sum(path.startswith('source-ad-') and path.endswith('/copies') for path in routes) == 3
+    assert mod.ACCOUNT_ACT + '/adsets' not in routes
 
 
 def test_minimal_readback_contract():

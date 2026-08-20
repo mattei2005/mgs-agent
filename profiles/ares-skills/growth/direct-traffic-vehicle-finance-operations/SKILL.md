@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.9
+version: 1.0.10
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -152,14 +152,18 @@ A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado às 
 
 Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 
-1. Ler `/{ad_account_id}/dsa_recommendations` e registrar a entidade recomendada sem inventar valor.
-2. Ler explicitamente na referência `dsa_beneficiary`, `dsa_payor` e `regional_regulated_categories`.
-3. Não assumir que os campos DSA resolvem o advertiser brasileiro: nesta conta a recomendação foi `Garagem Brasil`, a referência retornou DSA nulo e o POST continuou falhando com `3858634 / Advertiser is missing / compliance_section`, mesmo enviando `Garagem Brasil` nos dois campos.
-4. Tratar `VOLUNTARY_VERIFICATION` visto no GET como estado derivado; não há evidência de que enviá-lo no POST crie o vínculo oculto.
-5. Criação completa do zero via API pública permanece bloqueada nesta conta: o campaign shell é criado corretamente, mas o POST direto do adset financeiro continua rejeitado com `3858634 / Advertiser is missing / compliance_section`.
-6. Cópia profunda síncrona de 1×1×3 falha com `1885194 / Copy request is too large`.
-7. Rota validada em 20/08/2026: criar campaign shell PAUSED e copiar nativamente somente o adset compliant da campanha 08 com `deep_copy=false` e sem ads. O readback confirmou campaign/adset PAUSED, budget USD 30, evento SUBSCRIBE, pixel/attribution/targeting herdados e `BRAZIL_REGULATION + VOLUNTARY_VERIFICATION`; updates de nome, budget e targeting foram aceitos e relidos. Essa rota é o fallback técnico aprovado para construir a campanha antes de adicionar os três anúncios em etapa separada.
-8. Async batch mínimo não foi necessário nesse teste, porque a cópia nativa de adset passou. Não tratá-lo como validado.
+1. Não usar nome de página como beneficiário/pagador. Nesta operação, `Garagem Brasil` é o nome da página; Rodolfo confirmou `Digital Trust` como beneficiário e também como pagador.
+2. Beneficiário e pagador são campos separados, mesmo quando têm o mesmo valor; enviar ambos explicitamente quando o fluxo exigir.
+3. `/{ad_account_id}/dsa_recommendations` retorna sugestões baseadas na atividade da conta e pode devolver nome de página; isso não prova entidade legal verificada.
+4. A documentação oficial da Meta informa que `dsa_beneficiary` e `dsa_payor` são campos para conjuntos que segmentam UE/territórios associados; fora da UE, os valores não são salvos mesmo quando enviados. Portanto, não tratar DSA como solução comprovada do `compliance_section` brasileiro.
+5. Ler explicitamente na referência `dsa_beneficiary`, `dsa_payor` e `regional_regulated_categories`, mas separar esses valores de UE da identidade regional brasileira.
+6. As tentativas diretas anteriores com `Garagem Brasil` nos dois campos foram inválidas como teste da entidade correta; o erro `3858634` não prova que `Digital Trust` também seria rejeitado.
+7. Criação completa do zero só pode ser retestada após beneficiário e pagador corretos estarem confirmados, com tudo PAUSED e readback binário.
+8. Cópia profunda síncrona da campanha inteira com `deep_copy=true` falhou com `1885194 / Copy request is too large`.
+9. O fallback antigo — cópia rasa de campanha seguida de criação manual de adset — não é clone completo e não pode ser usado para concluir que “clonar também gera 3858634”. Nesse fluxo, `3858634` veio do POST manual do adset.
+10. Rota parcial validada em 20/08/2026: criar campaign shell PAUSED e copiar nativamente somente o adset compliant da campanha 08 com `deep_copy=false` e sem ads. O readback confirmou campaign/adset PAUSED, budget USD 30, evento SUBSCRIBE, pixel/attribution/targeting herdados e `BRAZIL_REGULATION + VOLUNTARY_VERIFICATION`; updates de nome, budget e targeting foram aceitos e relidos.
+11. Clone completo ainda precisa ser validado hierarquicamente, sem recriar o adset manualmente: campaign shell/cópia rasa → cópia nativa do adset → cópia nativa dos três ads (ou deep copy do adset se couber) → readback 1×1×3.
+12. Async batch mínimo não foi necessário no teste parcial e permanece não validado.
 
 Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação. Ao receber `code=17/subcode=2446079 / Ad Account Has Too Many API Calls`, parar imediatamente os writes, preservar cleanup/audit e aguardar cooldown.
 
