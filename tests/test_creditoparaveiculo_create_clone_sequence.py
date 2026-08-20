@@ -145,6 +145,39 @@ def test_async_missing_session_id_defers_without_cleanup(monkeypatch, tmp_path):
     assert captured.value.stage == 'test3_async_session_missing'
 
 
+def test_deferred_exception_separates_target_and_async_ids():
+    mod = load_module()
+    exc = mod.ReadbackDeferred('test3_async_poll', 300, ['campaign-72'], ['session-1'])
+    assert exc.deferred_target_ids == ['campaign-72']
+    assert exc.async_session_ids == ['session-1']
+
+
+def test_resume_preflight_without_artifact_restarts_sequence_not_hierarchy(monkeypatch, tmp_path):
+    mod = load_module()
+    state = tmp_path / 'state.json'
+    audit = tmp_path / 'audit.json'
+    audit.write_text(json.dumps({'active_campaign_ids': [], 'tests': [], 'cleanups': []}))
+    state.write_text(json.dumps({'status': 'deferred_readback', 'audit_path': str(audit), 'active_campaign_ids': [], 'deferred_target_ids': ['source-campaign', 'source-adset'], 'deferred_stage': 'source_preflight', 'async_session_ids': []}))
+    monkeypatch.setattr(mod, 'STATE_PATH', state)
+    monkeypatch.setattr(mod, 'execute_sequence', lambda: 7)
+    monkeypatch.setattr(mod, 'hierarchy_readback', lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError('source ids must not be treated as campaign artifacts')))
+    assert mod.resume_deferred() == 7
+
+
+def test_resume_missing_async_session_preserves_paused_artifact(monkeypatch, tmp_path, capsys):
+    mod = load_module()
+    state = tmp_path / 'state.json'
+    audit_path = tmp_path / 'audit.json'
+    audit_path.write_text(json.dumps({'active_campaign_ids': ['campaign-72'], 'tests': [], 'cleanups': []}))
+    state.write_text(json.dumps({'status': 'deferred_readback', 'audit_path': str(audit_path), 'active_campaign_ids': ['campaign-72'], 'deferred_target_ids': ['campaign-72'], 'deferred_stage': 'test3_async_session_missing', 'async_session_ids': []}))
+    monkeypatch.setattr(mod, 'STATE_PATH', state)
+    monkeypatch.setattr(mod, 'load_common', lambda: (_ for _ in ()).throw(AssertionError('must not call Meta without pollable session id')))
+    assert mod.resume_deferred() == 2
+    saved = json.loads(state.read_text())
+    assert saved['status'] == 'async_session_untrackable_no_cleanup'
+    assert saved['active_campaign_ids'] == ['campaign-72']
+
+
 def test_dry_run_has_zero_meta_calls(monkeypatch, capsys):
     mod = load_module()
     monkeypatch.setattr(mod, 'execute_sequence', lambda: (_ for _ in ()).throw(AssertionError('must not execute')))
