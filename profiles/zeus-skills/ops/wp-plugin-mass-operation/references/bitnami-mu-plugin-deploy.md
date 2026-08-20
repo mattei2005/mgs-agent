@@ -28,6 +28,18 @@ b64=$(base64 -w 0 /caminho/arquivo.php)
 
 **Regra absoluta:** Nunca usar WPCode snippet em Bitnami sem .pem disponível para recuperação.
 
+### Gate WP 2FA antes do File Manager
+
+Alguns usuários técnicos podem autenticar corretamente e ainda serem forçados para `profile.php?show=wp-2fa-setup`; nesse estado, o WP 2FA também redireciona o `admin-ajax.php` do elFinder e impede o write. Não tente contornar a política 2FA por nonce, criação de usuário ou mudança oculta de option/meta.
+
+1. Se o redirect aparecer, remova imediatamente qualquer WP File Manager temporário já instalado e valide `rest_plugin_not_found`.
+2. Reporte o bloqueio e peça ao Rodolfo a ação/autorização de segurança necessária.
+3. Após Rodolfo informar que desativou WP 2FA, confirme por REST autenticado que `wp-2fa/wp-2fa` está `inactive` nos alvos antes de reinstalar File Manager.
+4. Processe um site por vez, seguindo a ordem canário, e remova File Manager no `finally` mesmo se login ou write falhar.
+5. Preserve o estado de WP 2FA deixado pelo Rodolfo; não reative por suposição.
+
+Se o login mostrar `Cookies are blocked or not supported`, estabeleça `wordpress_test_cookie=WP Cookie check` para o host/path `/` e acione o botão real `#wp-submit`; `form.submit()` pode pular o comportamento necessário. Depois, navegue novamente à página do File Manager e valide sessão autenticada antes do write.
+
 ---
 
 ## Credenciais dos 4 sites Bitnami

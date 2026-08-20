@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T09:39:38-04:00",
+    "updated_at": "2026-08-20T10:34:21.842508-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7546,6 +7546,81 @@
       "validation": "Rodolfo screenshot confirms app v26.0; live v26 account/Page/creative GET passed; v26 validate-only reproduced code31/3858385 without write; py_compile and offline dry-run passed; 15 pytest tests passed.",
       "git_tracked": false,
       "updated_at": "2026-08-20T09:37:38-04:00"
+    },
+    {
+      "id": "wordpress-ads-txt-single-line-rollout-20260820",
+      "agent": "zeus",
+      "type": "wordpress_ads_txt_production_rollout",
+      "requested_by": "Rodolfo Mattei",
+      "request_message_id": "1539995664317153331",
+      "critical_confirmation_message_id": "1539999931950178425",
+      "wp2fa_state_message_id": "1540003178605711501",
+      "thread_id": "1539995664317153331",
+      "sites": [
+        "zytiva.com",
+        "finanzas.zytiva.com",
+        "dicasfinancas.info",
+        "lyzmo.com",
+        "finanzas.lyzmo.com",
+        "newsoun.com",
+        "de.newsoun.com",
+        "finanzas.newsoun.com",
+        "cliquet.com",
+        "finanzas.cliquet.com",
+        "portalrelevante.com",
+        "finanzas.portalrelevante.com",
+        "topfeed.fun",
+        "finanzas.topfeed.fun",
+        "finance.topfeed.fun",
+        "eggbev.com",
+        "finanzas.eggbev.com",
+        "openzed.com",
+        "finanzas.openzed.com",
+        "ducapes.com",
+        "finance.ducapes.com"
+      ],
+      "sites_count": 21,
+      "target_line": "google.com, pub-9015335735065396, DIRECT, f08c47fec0942fa0",
+      "execution": {
+        "runcloud_ssh_physical_files": 17,
+        "aws_bitnami_elfinder": 4,
+        "canary": "finanzas.openzed.com",
+        "temporary_plugin": "wp-file-manager/file_folder_manager",
+        "temporary_plugin_cleanup": "4/4 absent by authenticated REST readback",
+        "wp_2fa": "inactive on 4 AWS sites by Rodolfo action; state preserved"
+      },
+      "backups": {
+        "local": "/root/.hermes/secure-backups/ads-txt-20260820T140240Z",
+        "runcloud_inc01": "/var/backups/mgs/ads-txt/20260820T140240Z",
+        "runcloud_inc03": "/var/backups/mgs/ads-txt/20260820T140240Z"
+      },
+      "validation": {
+        "public_http_200": "21/21",
+        "single_exact_line": "21/21",
+        "trailing_newline": "20/21; ducapes.com exact line without trailing newline",
+        "cloudflare": "CF-Cache-Status DYNAMIC; no purge required",
+        "failures": 0
+      },
+      "skill_updates": {
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md": {
+          "size_bytes": 11468,
+          "sha256": "0790eace8570aaa43d1cfc878c4452196553b7f78af49d03a9e8ed512141ea6b"
+        },
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-03.md": {
+          "size_bytes": 5994,
+          "sha256": "1f640ba8060149338c312d5a5eb208241689d4ffec94b22eb60b554cb0eb82de"
+        }
+      },
+      "status": "deployed_validated",
+      "updated_at": "2026-08-20T10:34:21.842508-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540005919197499433",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "readback": "ok"
+      }
     }
   ],
   "profile_skill_references": [
