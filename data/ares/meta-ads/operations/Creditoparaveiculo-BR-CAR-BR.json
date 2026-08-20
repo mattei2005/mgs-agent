@@ -681,7 +681,17 @@
     "meta_drive_reconciliation_required": true,
     "new_assets_preferred": true,
     "real_variations_allowed": true,
-    "current_pool_source": "data/ares/creative-ops/inventory/assets.jsonl + live Drive readback"
+    "current_pool_source": "data/ares/creative-ops/inventory/assets.jsonl + live Drive readback",
+    "availability_reporting": "Report raw live 01_READY count separately from unique ares_eligible count; never present raw READY as immediately usable stock"
+  },
+  "creative_inventory_drift_20260820": {
+    "status": "open_fail_closed_for_affected_assets",
+    "drive_ready_live": 263,
+    "drive_only_missing_inventory": 19,
+    "inventory_only_absent_from_ready": 16,
+    "duplicate_filename_groups": 4,
+    "policy": "Affected lineages remain ineligible until exact Drive folder/status and inventory identity are repaired; raw Drive count remains valid as physical READY count but not as eligibility count",
+    "source": "independent audit deleg_6a58f1bc"
   },
   "daily_creation_preflight_20260820_17h": {
     "requested_by": "Rodolfo Mattei",
@@ -696,11 +706,11 @@
       "drive_ready_total_live": 263,
       "drive_ready_img_live": 42,
       "drive_ready_vid_live": 221,
-      "released_reconciled_unique": 58,
+      "released_by_Rodolfo_meta_history_pending": 58,
       "exact_duplicate_lineages_blocked": 1,
-      "ares_eligible_true": 58,
+      "ares_eligible_true": 0,
       "selected_for_today": 6,
-      "selection_gate": "Rodolfo expressly authorized Drive selection; selected assets passed live Drive readback, Meta 126-ad/226-video reconciliation, exact fingerprint dedupe, technical QA and visual QA"
+      "selection_gate": "Rodolfo expressly authorized Drive selection; selected assets passed live Drive readback, current/paused Meta reconciliation, exact fingerprint dedupe, technical QA and visual QA. Full archived/deleted-history reconciliation was added after independent audit and is mandatory in the retry before ares_eligible=true"
     },
     "strategy_recommendation": "2 MAXVOL campaigns based on C07 delivery restriction at CPA target USD0.50 and more delivery latitude in highest-volume strategy",
     "strategy_confirmed_by_Rodolfo": "2x MAXVOL",

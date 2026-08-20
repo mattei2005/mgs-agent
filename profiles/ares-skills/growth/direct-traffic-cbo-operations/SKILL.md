@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.23
+version: 1.0.24
 author: Ares
 license: internal
 metadata:
@@ -178,7 +178,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Relatórios recorrentes em thread fixa usam chave idempotente por dia/checkpoint e readback Discord por GET, validando thread, mensagem e conteúdo. Tabela cercada que ultrapassar o chunk seguro deve falhar fechada em vez de publicar bloco quebrado.
 - Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
-- Na rotina diária CPV, reservar 20% do cap USD300 para campanhas novas: pool padrão USD60, normalmente 2 campanhas de USD30. Iniciar o ciclo às 17:00 São Paulo, criar entre 17:00–23:30 e programar início para 00:30 do dia seguinte. A estratégia padrão autorizada é `MAXVOL` (`LOWEST_COST_WITHOUT_CAP`) até nova decisão explícita. Antes do write, validar espaço real no cap; campanha do zero exige estratégia explícita e clone herda a fonte. Testes de capacidade pedidos como desativados não são produção diária e permanecem PAUSED sem agendamento até aprovação.
+- Na rotina diária CPV, reservar 20% do cap USD300 para campanhas novas: pool padrão USD60, normalmente 2 campanhas de USD30. Iniciar o ciclo às 17:00 São Paulo e preparar entre 17:00–23:30. A estratégia padrão autorizada é `MAXVOL` (`LOWEST_COST_WITHOUT_CAP`) até nova decisão explícita. A fase de preparo publica cada campanha `PAUSED`, com adset e três anúncios `ACTIVE`, e conclui readback 1×1×3; `start_time` sozinho não ativa campanha PAUSED. Às 00:30 do dia seguinte, uma fase separada relê holds, cap, campanha e filhos, muda somente as duas campanhas para `ACTIVE` e valida por GET; falha parcial reverte apenas o write confirmado da tentativa. Antes do write, validar espaço real no cap; campanha do zero exige estratégia explícita e clone herda a fonte. Testes de capacidade pedidos como desativados não são produção diária e permanecem PAUSED sem agendamento até aprovação.
 - Sempre que criar campanhas CPV, selecionar somente linhagens únicas liberadas e reconciliadas do Shared Drive, mover os assets usados de `01_READY` para `02_TESTING` após readback Meta e informar na thread de criação: quantidade usada, total restante em `01_READY` por IMG/VID e total restante de criativos únicos já liberados/reconciliados. Essa atualização de estoque é obrigatória mesmo quando o volume bruto do Drive for maior que o pool imediatamente elegível.
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 - Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.

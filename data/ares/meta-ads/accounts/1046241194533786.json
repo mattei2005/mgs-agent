@@ -29,7 +29,8 @@
         "campaigns_per_day": 2,
         "budget_usd_each": 30,
         "strategy": "MAXVOL",
-        "start_time": "00:30 next day America/Sao_Paulo",
+        "prepare_status": "PAUSED",
+        "activation": "separate guarded campaign-level write at 00:30 next day America/Sao_Paulo",
         "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR",
         "stock_report_required": true
       },
