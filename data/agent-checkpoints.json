@@ -32,6 +32,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-KELLY-CC-US-ES-EN-CREATIVE-REVIEW-20260820",
+      "next_step": "Aguardar Kelly listar arquivos exatos bons, ruins e com idioma incorreto. Reconciliar cada nome com source_drive_id e asset_drive_id antes de qualquer mudança; manter todos RESERVADO_PELO_GESTOR e ares_eligible=false. Aplicar reclassificação e o gate de descarte somente sobre o conjunto exato informado, com readback e auditoria.",
+      "objective": "Concluir revisão humana dos 25 criativos READY dos lotes CC_US_ES e CC_US_EN processados em 20/08/2026",
+      "source": "discord:thread:1540085104322543726; data/ares/creative-ops/upload-manual/ready-execution/upload-manual-cc-us-es-en-ready-20260820T201544Z.json; data/ares/creative-ops/upload-manual/postcheck-cc-us-es-en-20260820-kelly/independent-verification.json",
+      "state": "ares processou e verificou 25 criativos em 01_ready (8 cc_us_es e 17 cc_us_en); 7_espanol 03.mp4 está em 05_rejected e fora do pool. rodolfo definiu que kelly revisará produção/qualidade, listará bons e ruins para descarte e informará classificações de idioma incorretas. nenhuma nova exclusão, reclassificação ou elegibilidade foi aplicada.",
+      "thread_id": "1540085104322543726",
+      "updated_at": "2026-08-20T20:42:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
       "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
       "objective": "Coletar todos os criativos disponíveis da busca Meta Ad Library eco financa carro no Brasil, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/ECO_FINANCA_CARRO_BR.",
@@ -892,5 +902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T20:16:22+00:00"
+  "updated_at": "2026-08-20T20:42:29+00:00"
 }
