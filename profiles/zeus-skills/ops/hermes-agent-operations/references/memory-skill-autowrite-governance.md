@@ -386,6 +386,8 @@ While activation is blocked, preserve the current fail-closed behavior and handl
 
 A semantic compactor must fail closed on model timeout, malformed output, protected-literal drift, semantic-verifier rejection or concurrent source change. After repeated failures, stop rather than weakening validation or silently applying an unverifiable rewrite.
 
+Runtime-resolution invariant: the autocompactor must derive the active Hermes repository and Python interpreter from the canonical `/root/.local/bin/hermes` launcher, freeze that pair for proposal plus verifier, and fail closed if the launcher/shebang/runtime is ambiguous or incomplete. Never hardcode a rollback checkout's `venv/bin/python`; isolated-runtime activation can retire that venv while gateways remain healthy. Every Hermes cutover must include a synthetic internal `--llm-once` probe plus a real threshold-path dry-run or canary for this consumer.
+
 ## Pitfalls
 
 - **Canonical-source fallacy** — “it exists in a reference” is not equivalent to “the agent knows it by default.”
