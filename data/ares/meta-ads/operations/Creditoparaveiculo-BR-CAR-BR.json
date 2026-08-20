@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T01:01:04.793307-04:00",
+  "updated_at": "2026-08-20T01:45:29.397715-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.6",
+  "playbook_version": "1.0.8",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -810,7 +810,7 @@
     "outer_deferred_no_double_sleep": true
   },
   "post_cooldown_test_sequence": {
-    "status": "scheduled_v2_after_independent_review",
+    "status": "complete_native_adset_copy_validated",
     "cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
     "test_numbers": {
       "test1": 70,
@@ -823,7 +823,11 @@
     "runner": "creditoparaveiculo-create-clone-sequence.py",
     "wrapper": "creditoparaveiculo-create-clone-sequence.sh",
     "offline_validation": "37 tests passed; independent review blockers/high/medium converted to regression tests and fixed",
-    "cleanup": "conclusive batch readback required; deferred readback retains PAUSED IDs",
+    "cleanup": {
+      "campaigns_deleted": 2,
+      "all_cleanup_deleted": true,
+      "spend_usd": 0.0
+    },
     "scheduled_for": "2026-08-20T02:20:00-03:00",
     "one_shot_internal_id": "0f59161283c1",
     "resume_watchdog_internal_id": "9c5292f62f7a",
@@ -842,6 +846,32 @@
         "offline batch tests use temp throttle state"
       ],
       "post_fix_status": "all regression tests green"
+    },
+    "completed_at_utc": "2026-08-20T05:20:31.440105+00:00",
+    "test1_result": "rejected_by_meta: direct financial adset POST 3858634 compliance_section advertiser missing",
+    "test2_result": "success: native compliant adset copy deep_copy=false, updated and batch-readback valid",
+    "test3_result": "not_required_not_validated",
+    "validated_method": "create PAUSED campaign shell + native copy source compliant adset without ads + update name/budget/targeting + batch readback",
+    "validated_invariants": {
+      "campaign_paused": true,
+      "campaign_budget_usd": 30,
+      "one_adset": true,
+      "adset_paused": true,
+      "zero_ads": true,
+      "regional_regulated_categories": [
+        "BRAZIL_REGULATION",
+        "VOLUNTARY_VERIFICATION"
+      ],
+      "event": "SUBSCRIBE",
+      "updates_readback": true
     }
+  },
+  "campaign_creation_capability": {
+    "campaign_shell_from_zero": "validated",
+    "direct_financial_adset_from_zero": "blocked_3858634_compliance_section",
+    "native_compliant_adset_copy": "validated",
+    "full_1x1x3_deep_copy_sync": "blocked_1885194_copy_too_large",
+    "async_batch_minimal": "not_run_not_validated",
+    "practical_next_build_route": "campaign shell + compliant adset native copy + add 3 ads separately + full readback"
   }
 }
