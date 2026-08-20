@@ -144,6 +144,13 @@
         "estimated_roi_never_scales_alone": true,
         "technical_safety_basis": "bounded above the validated 98-minute delay snapshot; missing/nonfinite/staler data fails closed"
       },
+      "write_safety": {
+        "transport": "single-attempt absolute POST then bounded GET before any retry",
+        "state_machine": "in_flight persisted and fsynced before POST; recovery GET accepts only original or desired value",
+        "campaign_preflight": "immutable allowlist ID, exact number, status, budget, updated_time, 1 active adset and 3 active ads",
+        "batch_preflight": "complete configured-active account budget in integer cents; all scale candidates fail together if combined plan exceeds cap",
+        "final_readback": "campaign and hierarchy GET per write plus full active-account budget GET"
+      },
       "allowed_campaigns": {
         "07": {"campaign_id": "120250209327510632", "cycle_start_date": "2026-08-20"},
         "08": {"campaign_id": "120250209380780632", "cycle_start_date": "2026-08-20"},
@@ -608,7 +615,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.3",
+      "direct-traffic-cbo-operations v1.0.4",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",

@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Operação recorrente normal; observar feedback visual e calibrar gate externo antes de permitir pausa automática D3",
-      "objective": "Ativar ações intraday autorizadas por Rodolfo, remover ID REC e publicar Diário/Intraday com visual limpo",
-      "source": "discord:thread:1539969033170980945; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.14; daily message 1539978094457131159; intraday message 1539978138321162382; Meta campaign 120250209406580632",
-      "state": "concluído: autowrite guarded ativo; c09 escalada usd30→usd33 com post/get 200; layout tabular largo foi supersedido por cards/linhas verticais mobile-first; diário e intraday republicados com discord get de conteúdo/thread 200; 6 testes passam",
+      "next_step": "Operação recorrente normal; pausa D3 continua fail-closed até calibrar deterministicamente o gate externo",
+      "objective": "Executar Intraday com segurança e consolidar layouts distintos para Diário e Intraday",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.16; direct-traffic-cbo-operations v1.0.4; daily message 1539983341212803132; intraday message 1539983397202436187; Meta campaign 120250209406580632",
+      "state": "concluído: diário restaurado em tabelas alinhadas; intraday reduzido a uma linha por campanha; ambos republicados e validados por discord get 200. revisão independente fechada com allowlist imutável, ciclo persistido, janela 08:00-08:10, sb delay<=120, cap batch conta inteira, budgets estritos, hierarquia 1x1x3, fsync in_flight, post single-attempt, get bounded e readback final da conta. c09 active usd33.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T12:44:29+00:00"
+      "updated_at": "2026-08-20T13:10:11+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:05:01+00:00"
+  "updated_at": "2026-08-20T13:10:11+00:00"
 }
