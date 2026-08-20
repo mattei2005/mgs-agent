@@ -51,6 +51,16 @@
       "updated_at": "2026-08-20T21:08:40+00:00"
     },
     {
+      "agent": "zeus",
+      "id": "ARES-META-CLONE-RATE-LIMIT-RESEARCH-20260820",
+      "next_step": "Pesquisar documentação oficial Meta, bugs, fóruns e SDKs em inglês sobre Development vs Standard Access, Business Use Case Usage, code 17/2446079, batch/asynchronous requests e native copies; cruzar com a sequência real do Ares e entregar recomendação implementável sem System User.",
+      "objective": "Investigar integralmente a falha de clone/criação Meta do Ares, identificar a causa real do code 17 e definir uma rota de criação robusta com fontes oficiais e evidência pública em inglês.",
+      "source": "discord:thread:1539826050765299872; discord:thread:1540114948984938607; audit:/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-create-2026-08-20-20260820T210712Z.json; throttle:/root/mgs-agent/data/ares/meta-ads/cache/meta-api-throttle-state.json",
+      "state": "thread 1539826050765299872 lida integralmente: 31/31 mensagens, 0 anexos. runtime confirmou que 2 campanhas, 2 adsets, 6 ads, 6 creatives e 12 uploads de vídeo foram criados; o único erro foi get batch adsets no readback final com oauthexception code 17 subcode 2446079. header vivo registra ads_api_access_tier=development_access. pesquisa externa e auditoria de arquitetura em andamento.",
+      "thread_id": "1540114948984938607",
+      "updated_at": "2026-08-20T21:48:11+00:00"
+    },
+    {
       "agent": "ares",
       "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
       "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
@@ -912,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:36:57+00:00"
+  "updated_at": "2026-08-20T21:48:11+00:00"
 }
