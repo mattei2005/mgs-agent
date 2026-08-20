@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo confirmar se autoriza criar nova C12 PAUSED e, após validação, deletar a C12 antiga; confirmar também se hoje será somente C12 ou C12+C13 com replacement controlado de ambas. Após confirmação, executar canário C12 com fluxo otimizado e ativar 00:30.",
-      "objective": "Operar trafego direto CBO e a criacao diaria sequencial para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539826050765299872; live Meta sequence-capacity probe HTTP200 at 2026-08-20 19:54 SP; operation config v1.0.38",
-      "state": "probe pós-cooldown concluído às 19:54 sp: meta http200, buc 2%, tier development_access. c12 e c13 antigas existem paused e não deletadas; c12 é campanha roas usd30 e c13 roas usd25. retry c50/c49 permanece removido. nenhum write executado. próxima ação sequencial exige replacement c12 autorizado; o segundo slot exige decisão separada sobre c13.",
+      "next_step": "No retry, clonar C08 para novas C12/C13 PAUSED, anexar seis criativos Drive, validar 1x1x3, deletar/readback antigas C12/C13 uma por uma, mover assets para 02_TESTING e reportar estoque. Ativar somente às 00:30 após cap/holds/hierarquia.",
+      "objective": "Operar tráfego direto CBO e a criação diária sequencial por clone para creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1539826050765299872; abort audit daily-create-2026-08-20-20260820T232142Z; clone audit daily-create-2026-08-20-20260820T233929Z; operation config v1.0.38; clone retry scheduler enabled",
+      "state": "rodolfo confirmou execução e esclareceu que esperava clone. o write from-zero em andamento foi interrompido antes de deletar c12/c13 antigas; cleanup independente validou 2 novas campanhas, 6 ads, 6 creatives e 24 vídeos técnicos removidos, assets não consumidos e antigas preservadas. rota alterada para clone nativo raso de c08 maxvol campaign/adset com novos creatives drive. primeiro canário de clone materializou c12/adset corretamente, mas effective_status in_process foi reprovado cedo; cleanup completo preservou antigas. gate corrigido para configured paused/active com effective in_process seguro. retry determinístico pós-cooldown agendado para aproximadamente 21:50 sp; buc anterior 46%, tier development_access.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-20T22:56:09+00:00"
+      "updated_at": "2026-08-20T23:46:57+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T23:37:32+00:00"
+  "updated_at": "2026-08-20T23:46:57+00:00"
 }

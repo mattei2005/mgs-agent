@@ -451,6 +451,8 @@
       "timezone_gate": "17:00 America/Sao_Paulo daily",
       "script": "creditoparaveiculo-daily-create.sh",
       "runner": "creditoparaveiculo-daily-create.py",
+      "creation_route": "native shallow clone of the current approved MAXVOL source campaign/adset; attach new Drive creatives; never label from-zero field copying as clone",
+      "sequence_state": "initial C12/C13; after each completed day derive next pair as max(previous campaign_numbers)+1,+2 and fail closed on non-PAUSED replacement targets",
       "deferred_preflight_reconciler": "creditoparaveiculo-daily-create-preflight-resume.py; hourly wrapper retries the exact saved plan only after cooldown and before any write",
       "deferred_readback_reconciler": "creditoparaveiculo-daily-create-resume.py; hourly wrapper checks persisted state and resumes only after cooldown",
       "no_agent": true,
@@ -761,6 +763,30 @@
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_038.mp4",
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_039.mp4"
     ]
+  },
+  "daily_clone_execution_20260820": {
+    "authorized_by": "Rodolfo Mattei",
+    "scope": "controlled replacement of legacy C12 and C13 by native shallow clones of C08 MAXVOL campaign/adset with six new Drive creatives",
+    "from_zero_route": {
+      "status": "aborted_wrong_mode_clean",
+      "reason": "Rodolfo clarified clone mode while write was in flight",
+      "new_campaigns_deleted": 2,
+      "new_ads_deleted": 6,
+      "new_creatives_absent_from_account_edge": 6,
+      "technical_videos_deleted": 24,
+      "legacy_c12_c13_preserved": true,
+      "assets_consumed": 0
+    },
+    "first_clone_attempt": {
+      "status": "failed_clean",
+      "source": "C08 MAXVOL",
+      "reason": "clone campaign/adset were configured correctly but effective_status was IN_PROCESS during materialization; prior gate required PAUSED/CAMPAIGN_PAUSED too early",
+      "cleanup_complete": true,
+      "legacy_c12_c13_preserved": true
+    },
+    "corrected_gate": "configured campaign PAUSED and adset ACTIVE remain delivery-safe while effective_status is IN_PROCESS/PENDING_REVIEW/WITH_ISSUES; final activation remains separate at 00:30",
+    "retry": "deterministic no-agent clone retry after 65-minute cooldown at approximately 21:50 Sao Paulo",
+    "tests": "15 passed"
   },
   "hierarchy_normalization_state": {
     "validated_at_sao_paulo": "2026-08-19T16:12:33.660637-03:00",
