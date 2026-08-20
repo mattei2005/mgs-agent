@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T00:19:02.823024-04:00",
+  "updated_at": "2026-08-20T00:45:10.988097-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.5",
+  "playbook_version": "1.0.6",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -771,5 +771,47 @@
     ],
     "fail_closed": true,
     "source": "Rodolfo Mattei correction + runtime validation"
+  },
+  "meta_rate_limit_policy": {
+    "helper": "scripts/ares-meta-common.py v0.2 behavior",
+    "header": "X-Business-Use-Case-Usage",
+    "metrics": [
+      "call_count",
+      "total_cputime",
+      "total_time"
+    ],
+    "soft_limit_pct": 80.0,
+    "estimated_regain_unit": "minutes",
+    "rate_codes_using_header": [
+      17,
+      613
+    ],
+    "fallback": "bounded exponential backoff",
+    "fixed_10s_retry": "HTTP 5xx only",
+    "batch_readbacks": true,
+    "deferred_readback": "do not classify failure or cleanup until conclusive readback",
+    "full_error_fields": [
+      "error_user_title",
+      "error_user_msg",
+      "error_data",
+      "blame_field_specs"
+    ],
+    "cross_process_state": "data/ares/meta-ads/cache/meta-api-throttle-state.json"
+  },
+  "post_cooldown_test_sequence": {
+    "status": "implementation_complete_offline_tests_passed_waiting_cooldown",
+    "cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
+    "test_numbers": {
+      "test1": 70,
+      "test2": 71,
+      "test3": 72
+    },
+    "test1": "direct adset BRAZIL_REGULATION + DSA, PAUSED, binary readback",
+    "test2": "native source adset copy to new campaign without ads, PAUSED, update name/budget/targeting after compliant readback",
+    "test3": "async batch minimal only when tests 1 and 2 both fail",
+    "runner": "creditoparaveiculo-create-clone-sequence.py",
+    "wrapper": "creditoparaveiculo-create-clone-sequence.sh",
+    "offline_validation": "26 tests passed; py_compile/bash syntax passed",
+    "cleanup": "conclusive batch readback required; deferred readback retains PAUSED IDs"
   }
 }

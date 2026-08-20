@@ -2,6 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+import pytest
+
 SCRIPT = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-sequence.py')
 
 
@@ -99,3 +101,24 @@ def test_dry_run_has_zero_meta_calls(monkeypatch, capsys):
     payload = json.loads(capsys.readouterr().out)
     assert payload['status'] == 'DRY_RUN_OFFLINE'
     assert payload['meta_calls'] == 0
+
+
+def test_known_error_keeps_full_meta_json():
+    mod = load_module()
+    class Common:
+        def graph_post(self, path, token, params):
+            return 400, {'error': {
+                'message': 'Invalid parameter',
+                'code': 100,
+                'error_subcode': 3858634,
+                'error_user_title': 'Advertiser is missing',
+                'error_user_msg': 'Provide a verified advertiser',
+                'error_data': {'blame_field_specs': [['compliance_section']]},
+            }}, {}
+        def safe_meta_error(self, payload):
+            return payload['error']
+    with pytest.raises(mod.KnownMetaError) as captured:
+        mod.post(Common(), 'token', 'path', {}, 'test_stage')
+    assert captured.value.error['error_user_title'] == 'Advertiser is missing'
+    assert captured.value.error['error_user_msg'] == 'Provide a verified advertiser'
+    assert captured.value.error['error_data']['blame_field_specs'] == [['compliance_section']]

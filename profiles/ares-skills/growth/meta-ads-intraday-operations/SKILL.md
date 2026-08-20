@@ -1,7 +1,7 @@
 ---
 name: meta-ads-intraday-operations
 description: "Operação intraday e governança Meta Ads do Ares: R1-R4 v2, persistência, HOA, reativação segura, read-only/dry-run/controlled-write, logs e auditoria."
-version: 2.0.0
+version: 2.0.1
 author: Ares
 license: internal
 metadata:
@@ -48,7 +48,10 @@ autonomous_guarded  Futuro; exige política, limites e aprovação formal própr
 - Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Campaign Ops e Creative Ops; Kelly também é gestora de campanhas e Geizian atua nos dois módulos.
 - Autorização para operar o Ares não libera automaticamente budget, billing, token/app/permissão Meta, pixel/CAPI, credencial ou produção fora do playbook.
 - Token Meta vem da fonte 1Password/config da conta e nunca é impresso. Scripts usam `ares-meta-common.py` para token, cache, lock, throttling e backoff.
-- Espaçamento padrão entre chamadas: `ARES_META_MIN_INTERVAL_SECONDS=0.75`; backoff é limitado e falha persistente deve parar com alerta sanitizado.
+- Espaçamento base entre chamadas: `ARES_META_MIN_INTERVAL_SECONDS=0.75`. Toda resposta GET/POST/batch deve alimentar o estado cross-process de `X-Business-Use-Case-Usage`; usar o máximo entre `call_count`, `total_cputime` e `total_time`.
+- A partir de `80%`, aplicar soft limit antes da próxima chamada. Em `code 17/613` ou rate limit, usar `estimated_time_to_regain_access` do header em minutos; sem estimativa, usar backoff exponencial limitado. Retry fixo de 10 segundos é exclusivo para HTTP `5xx`.
+- Readbacks relacionados devem usar Graph batch quando possível. Se o readback for adiado por quota, não classificar a operação como falha nem executar cleanup prematuro; persistir IDs PAUSED e retomar leitura depois.
+- Erro de parâmetro/compliance/validação não recebe retry. Preservar no audit `error_user_title`, `error_user_msg`, `error_data` e `blame_field_specs`.
 - Toda ação real salva decisão, regra, métrica, status anterior/posterior e timestamp; sucesso exige write confirmado + GET/readback do alvo completo.
 - `exit code 0` de job em background não prova sucesso operacional: abrir o audit e validar campanhas, budgets, status/effective_status, start time, adsets/ads e campos críticos.
 - Pausar/reativar exige `controlled_write` aplicável; budget exige autorização explícita vigente; billing exige confirmação crítica; token/permissão/app e tracking crítico não mudam sem autorização explícita.

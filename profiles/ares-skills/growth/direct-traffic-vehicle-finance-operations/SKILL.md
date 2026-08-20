@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.5
+version: 1.0.6
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -160,6 +160,24 @@ Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 6. Cópia profunda síncrona de 1×1×3 falha com `1885194 / Copy request is too large`; o próximo caminho autorizado de diagnóstico é async batch nativo, após cooldown da conta.
 
 Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação. Ao receber `code=17/subcode=2446079 / Ad Account Has Too Many API Calls`, parar imediatamente os writes, preservar cleanup/audit e aguardar cooldown.
+
+Para chamadas Meta nesta operação:
+
+- registrar `X-Business-Use-Case-Usage` em toda resposta;
+- soft limit a partir de `80%` da maior métrica;
+- `estimated_time_to_regain_access` é em minutos e governa espera de `17/613`;
+- sem estimativa, backoff exponencial limitado;
+- 10 segundos fixos somente para HTTP `5xx`;
+- readbacks de campanha/adsets/ads devem ser agrupados por batch;
+- readback rate-limited fica `DEFERRED`, sem classificação de falha nem cleanup até leitura conclusiva.
+
+Sequência diagnóstica aprovada após cooldown completo:
+
+1. Teste direto com `BRAZIL_REGULATION + dsa_beneficiary/dsa_payor`, tudo PAUSED; resultado binário por readback.
+2. Copiar nativamente o adset compliant da campanha 08 para campanha shell nova, sem ads; se compliant, atualizar nome/budget/targeting e reler.
+3. Somente se 1 e 2 falharem, usar async batch nativo com hierarquia mínima.
+
+Qualquer erro novo interrompe a sequência, preserva JSON completo e tenta cleanup confirmado; erro de quota apenas adia o readback.
 
 ### Janela de criação e aprovação
 
