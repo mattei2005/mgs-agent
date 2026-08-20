@@ -75,6 +75,18 @@ Prioridade:
 
 Para `cliquet.com`, já houve caso de item 1Password sem `api_application_password`; tratar como lacuna de credencial e não inferir status.
 
+### Fincgriffin — limite do REST para File Manager
+
+No `fincgriffin.com`, a Application Password autenticada pode listar, instalar, ativar, desativar e excluir plugins pelo endpoint REST `/wp-json/wp/v2/plugins`, mas não cria sessão cookie no `wp-admin` nem autentica o `admin-ajax.php`. O conector do `WP File Manager` 8.0.4 exige simultaneamente `current_user_can('manage_options')` e nonce `wp-file-manager`; portanto, instalar o plugin por REST não basta para enumerar arquivos.
+
+Se o login real no WordPress for bloqueado por WAF/2FA (`403`) e não houver SSH/SFTP:
+
+1. não chamar o `admin-ajax` sem capability/nonce nem tentar bypass;
+2. desativar e excluir imediatamente qualquer File Manager instalado para o teste, por REST, e validar zero ocorrência;
+3. validar home e caminhos públicos, mas não tratar `403` como prova de ausência física;
+4. registrar a enumeração interna como lacuna até existir sessão administrativa real ou acesso SSH/SFTP;
+5. limpar artefatos locais e não deixar o File Manager instalado apenas para uma tentativa futura.
+
 ## Comunicação com Rodolfo
 
 Formato recomendado:

@@ -793,12 +793,12 @@
     {
       "agent": "zeus",
       "id": "wp-mu-bak-purge-20260819",
-      "next_step": "Aguardar acesso SSH/SFTP ou sessão admin utilizável do Fincgriffin para enumeração interna; manter monitoramento de nova raiz concorrente bkp2.topfeed.fun",
+      "next_step": "Obter sessão administrativa real aprovada no Fincgriffin ou acesso SSH/SFTP; então enumerar fisicamente mu-plugins sem reinstalar File Manager até o login estar validado",
       "objective": "Arquivar fora do webroot e excluir todos os *.bak em wp-content/mu-plugins da frota MGS; remover WP File Manager inativo do OpenZed",
       "source": "/root/mgs-agent/backups/mu-plugin-bak-purge/20260819T184628-0400/result.json",
-      "state": "concluído com lacuna explícita fincgriffin: 51 arquivos excluídos em 26 instalações runcloud; zero restantes em 112 raízes pós-operação; 4 sftp externos zero; 51 urls retornam 404; wp file manager openzed removido com backup/readback; fincgriffin filesystem inacessível mas mu-plugin e urls conhecidas em 403",
+      "state": "runcloud/openzed concluídos. fincgriffin tentou rota confirmada com wp file manager 8.0.4: duas instalações/ativações temporárias, login playwright sem sessão admin e xml-rpc 403; application password limitada ao rest, sem admin-ajax nonce. plugin removido, final matches=0, home=200, mu/urls conhecidas=403; enumeração interna continua bloqueada.",
       "thread_id": "1539755374226448414",
-      "updated_at": "2026-08-19T23:00:14+00:00"
+      "updated_at": "2026-08-20T00:51:15+00:00"
     },
     {
       "agent": "zeus",
@@ -862,5 +862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-19T23:00:26+00:00"
+  "updated_at": "2026-08-20T00:51:15+00:00"
 }
