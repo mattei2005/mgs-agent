@@ -7552,14 +7552,14 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create50-clone07-to12.py",
-      "size_bytes": 33451,
-      "modified_at": "2026-08-20T14:02:00-04:00",
-      "sha256": "56ef95c3d752c5b144a0cfa060d330d0d38225d7755fff29459370725fad4204",
+      "size_bytes": 33623,
+      "modified_at": "2026-08-20T14:28:19-04:00",
+      "sha256": "598ea1bc1bc963c99de20a34cb03857940a3adac59dfc1788d5d784c35bac4af",
       "purpose": "Create CPV C50 from zero and clone C07 to C12 with PAUSED campaign control, active children, sanitized C07 creative lineage, target UTMs and full audit/readback.",
       "graph_version": "v26.0",
-      "validation": "py_compile and offline dry-run passed; real Graph write/readback validated C50 and C12 as PAUSED 1x1x3, USD30 COST_CAP, BR regional identities, exact target UTMs and zero delivery budget impact.",
+      "validation": "py_compile and offline dry-run passed after Rodolfo status correction; future audit records operator_status=DELETED when Graph raw effective_status=ARCHIVED. Real C50/C12 Graph write/readback remains validated.",
       "git_tracked": false,
-      "updated_at": "2026-08-20T14:13:18-04:00"
+      "updated_at": "2026-08-20T14:28:19-04:00"
     },
     {
       "id": "ares-creditoparaveiculo-resume-create50-clone12",
@@ -8120,12 +8120,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 17092,
-      "modified_at": "2026-08-20T14:13:18-04:00",
-      "sha256": "44cb9413138331d20b39001e9afb6a5319f10e24da9f137b58ca360781afdfc7",
+      "size_bytes": 17436,
+      "modified_at": "2026-08-20T14:26:31-04:00",
+      "sha256": "a5159edea1c3687fc818d555532be66f8e126bca631aac9698880987060c3c0f",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T14:13:18-04:00",
-      "validation": "Skill v1.0.13 live/mirror SHA match. Added BRAZIL_REGULATION regional_regulation_identities, copied_*_id response handling and PAUSED-parent validation for PENDING_REVIEW children; rules exercised by real C50/C12 Graph v26 write/readback."
+      "updated_at": "2026-08-20T14:27:22-04:00",
+      "validation": "Skill v1.0.14 live/mirror SHA match. Rodolfo reconfirmed CPV status semantics: Graph raw ARCHIVED maps to operator-facing DELETED; reports must never present those campaigns as merely archived/live."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
