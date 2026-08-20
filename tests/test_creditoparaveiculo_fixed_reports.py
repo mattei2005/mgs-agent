@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import importlib.util
 import hashlib
+import importlib.util
+import inspect
 import json
 from datetime import datetime
 from pathlib import Path
@@ -27,12 +28,28 @@ class FakeMeta:
         return "sanitized-test-token", "token"
 
     def graph_get(self, path, token, params=None):
-        row = self.campaigns.get(str(path))
+        path = str(path)
+        if path.endswith("/adsets"):
+            campaign_id = path.rsplit("/", 1)[0]
+            if campaign_id not in self.campaigns:
+                return 404, {"error": {"message": "not found"}}, {}
+            return 200, {"data": [{"id": f"as-{campaign_id}", "status": "ACTIVE", "effective_status": "ACTIVE"}]}, {}
+        if path.endswith("/ads"):
+            campaign_id = path.rsplit("/", 1)[0]
+            if campaign_id not in self.campaigns:
+                return 404, {"error": {"message": "not found"}}, {}
+            return 200, {
+                "data": [
+                    {"id": f"ad-{campaign_id}-{index}", "status": "ACTIVE", "effective_status": "ACTIVE"}
+                    for index in range(1, 4)
+                ]
+            }, {}
+        row = self.campaigns.get(path)
         if row is None:
             return 404, {"error": {"message": "not found"}}, {}
         return 200, dict(row), {}
 
-    def graph_post(self, path, token, params=None):
+    def graph_post_once(self, path, token, params=None):
         params = dict(params or {})
         self.posts.append((str(path), params))
         row = self.campaigns[str(path)]
@@ -49,12 +66,23 @@ class FakeMeta:
 
 
 def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=300):
+    monkeypatch.setattr(module, "MONITORED_NUMBERS", {"09"})
     operation = {
         "operation_id": "Creditoparaveiculo-BR-CAR-BR",
         "management_scope": {
             "write_enabled": True,
             "reporting_mode": "autonomous_guarded",
             "manual_holds": [],
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "09": {"campaign_id": "1", "cycle_start_date": "2026-08-20"}
+                },
+                "scale_execution_gate": {
+                    "window_minutes": 10,
+                    "max_smart_bidding_delay_minutes": 120,
+                    "required_matched_adgroups": 1,
+                },
+            },
         },
         "daily_budget_policy": {
             "campaign_daily_ceiling_usd": 150,
@@ -71,13 +99,13 @@ def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=3
     monkeypatch.setattr(module, "load_module", lambda path, name: fake_meta)
 
 
-def active_campaign(campaign_id="1", budget="3000"):
+def active_campaign(campaign_id="1", budget="3000", number="09", *, status="ACTIVE"):
     return {
         "id": campaign_id,
-        "name": "09 - 20-08 - Garagem Brasil",
-        "status": "ACTIVE",
-        "configured_status": "ACTIVE",
-        "effective_status": "ACTIVE",
+        "name": f"{number} - 20-08 - Garagem Brasil",
+        "status": status,
+        "configured_status": status,
+        "effective_status": status,
         "daily_budget": budget,
         "updated_time": "2026-08-20T08:00:00-0300",
     }
@@ -89,32 +117,59 @@ def scale_row(campaign_id="1", budget_usd=30.0):
         "campaign_id": campaign_id,
         "name": "09 - 20-08 - Garagem Brasil",
         "budget_usd": budget_usd,
+        "sb_roi": 27.0,
+        "matched_adgroups": 1,
         "recommendation": "ESCALAR +10%",
     }
 
 
-def test_reporting_signals_and_no_wide_table_or_id_rec():
+def meta_account():
+    return {
+        "id": "act_1046241194533786",
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "account_status": 1,
+        "disable_reason": 0,
+    }
+
+
+def source_context(*, delay=60, current_date="2026-08-20"):
+    return {"delay": {"totalMinutes": delay}, "current_date": current_date}
+
+
+def run_actions(module, rows, campaigns, decision_at, *, anomaly=False, source=None):
+    return module.execute_intraday_actions(
+        rows,
+        meta_account(),
+        campaigns,
+        source or source_context(),
+        {"anomaly": anomaly, "spend_diff": 0.1},
+        "2026-08-20",
+        decision_at,
+    )
+
+
+def test_reporting_layouts_are_report_specific_and_no_id_rec():
     module = load_reports_module()
     assert module.recommendation(1, 27, 88, 8) == "ESCALAR +10%"
     assert module.recommendation(3, -11, -5, 12) == "CORTE APÓS GATE"
     assert module.daily_signal(1) == "🟢"
     assert module.daily_signal(-5) == "🟡"
     assert module.daily_signal(-10) == "🔴"
-    source = SCRIPT.read_text()
-    assert "aligned_table" not in source
-    assert "ID REC" not in source
+    assert "aligned_table" in inspect.getsource(module.build_daily)
+    assert "aligned_table" not in inspect.getsource(module.build_intraday)
+    assert "campaign_lines.append" in inspect.getsource(module.build_intraday)
+    assert "ID REC" not in SCRIPT.read_text()
 
 
-def test_scale_is_written_once_and_verified(monkeypatch, tmp_path):
+def test_scale_is_single_attempt_written_once_and_verified(monkeypatch, tmp_path):
     module = load_reports_module()
     campaign = active_campaign()
     fake_meta = FakeMeta([campaign])
     configure_runtime(monkeypatch, tmp_path, module, fake_meta)
     decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
 
-    first, first_audit = module.execute_intraday_actions(
-        [scale_row()], [campaign], {"anomaly": False, "spend_diff": 0.1}, "2026-08-20", decision_at
-    )
+    first, first_audit = run_actions(module, [scale_row()], [campaign], decision_at)
     assert first[0]["status"] == "executed"
     assert first[0]["verified"] is True
     assert fake_meta.campaigns["1"]["daily_budget"] == "3300"
@@ -123,28 +178,77 @@ def test_scale_is_written_once_and_verified(monkeypatch, tmp_path):
 
     changed_tier = scale_row()
     changed_tier["recommendation"] = "ESCALAR +20%"
-    second, second_audit = module.execute_intraday_actions(
-        [changed_tier], [campaign], {"anomaly": False, "spend_diff": 0.1}, "2026-08-20", decision_at
-    )
+    second, second_audit = run_actions(module, [changed_tier], [campaign], decision_at)
     assert second[0]["status"] == "already_applied"
     assert fake_meta.posts == [("1", {"daily_budget": "3300"})]
     assert Path(second_audit).exists()
 
 
-def test_scale_blocks_account_cap(monkeypatch, tmp_path):
+def test_scale_blocks_whole_batch_when_account_cap_would_be_exceeded(monkeypatch, tmp_path):
     module = load_reports_module()
     campaign = active_campaign()
-    other = active_campaign(campaign_id="2", budget="27000")
+    other = active_campaign(campaign_id="2", budget="27000", number="99")
     other["effective_status"] = "IN_PROCESS"
     fake_meta = FakeMeta([campaign, other])
     configure_runtime(monkeypatch, tmp_path, module, fake_meta, account_cap=300)
     decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
 
-    results, _ = module.execute_intraday_actions(
-        [scale_row()], [campaign, other], {"anomaly": False}, "2026-08-20", decision_at
-    )
+    results, _ = run_actions(module, [scale_row()], [campaign, other], decision_at)
     assert results[0]["status"] == "blocked"
-    assert results[0]["reason"] == "account_operational_cap_exceeded"
+    assert results[0]["reason"] == "batch_account_operational_cap_exceeded"
+    assert fake_meta.posts == []
+
+
+def test_scale_blocks_outside_checkpoint_window(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 11, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    results, _ = run_actions(module, [scale_row()], [campaign], decision_at)
+    assert results[0]["reason"] == "outside_scale_checkpoint_window"
+    assert fake_meta.posts == []
+
+
+def test_scale_blocks_stale_smart_bidding_source(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    results, _ = run_actions(module, [scale_row()], [campaign], decision_at, source=source_context(delay=121))
+    assert results[0]["reason"] == "smart_bidding_source_stale_or_unknown"
+    assert fake_meta.posts == []
+
+
+def test_scale_blocks_campaign_number_collision(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    duplicate = active_campaign(campaign_id="2", number="09", status="PAUSED")
+    fake_meta = FakeMeta([campaign, duplicate])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    results, _ = run_actions(module, [scale_row()], [campaign, duplicate], decision_at)
+    assert results[0]["reason"] == "campaign_number_collision_or_drift"
+    assert fake_meta.posts == []
+
+
+def test_historical_date_issues_zero_posts(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    try:
+        run_actions(module, [scale_row()], [campaign], decision_at, source=source_context(current_date="2026-08-21"))
+    except RuntimeError as exc:
+        assert "historical or mismatched date" in str(exc)
+    else:
+        raise AssertionError("historical action must fail closed")
     assert fake_meta.posts == []
 
 
@@ -157,9 +261,7 @@ def test_cut_blocks_on_reconciliation_anomaly(monkeypatch, tmp_path):
     row["recommendation"] = "CORTE APÓS GATE"
     decision_at = datetime(2026, 8, 20, 12, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
 
-    results, _ = module.execute_intraday_actions(
-        [row], [campaign], {"anomaly": True, "spend_diff": 2.0}, "2026-08-20", decision_at
-    )
+    results, _ = run_actions(module, [row], [campaign], decision_at, anomaly=True)
     assert results[0]["status"] == "blocked"
     assert results[0]["reason"] == "reconciliation_anomaly_gate"
     assert fake_meta.posts == []
@@ -187,9 +289,7 @@ def test_in_flight_scale_recovers_by_get_without_second_post(monkeypatch, tmp_pa
         },
     )
 
-    results, _ = module.execute_intraday_actions(
-        [scale_row()], [campaign], {"anomaly": False}, "2026-08-20", decision_at
-    )
+    results, _ = run_actions(module, [scale_row()], [campaign], decision_at)
     assert results[0]["status"] == "recovered_verified"
     assert fake_meta.posts == []
 

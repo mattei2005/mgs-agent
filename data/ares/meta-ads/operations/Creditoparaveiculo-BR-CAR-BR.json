@@ -171,7 +171,9 @@
   },
   "reporting_presentation": {
     "authorized_by": "Rodolfo Mattei",
-    "style": "mobile-first vertical cards/lines with green/yellow/red/white status signals; no wide monospace tables",
+    "style": "report-specific Discord presentation",
+    "daily_style": "aligned monospace tables for campaigns and account summary",
+    "intraday_style": "compact single-line campaign rows; no wide table and no three-line cards",
     "remove_id_rec": true,
     "campaign_identifier": "campaign number column",
     "daily_focus": "closed performance and account summary",
@@ -231,7 +233,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T08:41:48-04:00",
+  "updated_at": "2026-08-20T08:56:33-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -449,7 +451,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.14",
+  "playbook_version": "1.0.15",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -606,7 +608,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.2",
+      "direct-traffic-cbo-operations v1.0.3",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",
