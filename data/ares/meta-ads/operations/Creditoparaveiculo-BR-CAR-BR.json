@@ -119,7 +119,7 @@
     "read_scope": "entire_account",
     "reporting_mode": "autonomous_guarded",
     "write_enabled": true,
-    "campaign_creation_test": "blocked_pending_meta_account_authentication_code31_subcode3858385",
+    "campaign_creation_test": "blocked_pending_oauth_access_review_and_fresh_token_validation_code31_subcode3858385",
     "manual_holds": [],
     "controlled_write_one_shot": "historical: reactivate campaigns 07,08,09,10,11 at 00:30; completed",
     "autonomous_action_scope": {
@@ -256,7 +256,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T09:51:15-04:00",
+  "updated_at": "2026-08-20T10:22:17-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -474,7 +474,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.20",
+  "playbook_version": "1.0.21",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -981,12 +981,12 @@
     "source_creative_diagnosis": "all three reference creatives are dynamic asset-feed creatives with degrees_of_freedom_spec.creative_features_spec.standard_enhancements=OPT_IN, which Graph v25 refuses to copy",
     "sanitized_dynamic_creative_rebuild": "validated_3_of_3: writable asset_feed_spec rebuilt, exact standard_enhancements key absent, non-video fields exact, videos reconciled unordered by title/duration/dimensions/pixel-identical first frame",
     "sanitized_dynamic_one_ad_create": "validated: one PAUSED ad created and read back with the rebuilt creative, then ad and campaign deleted",
-    "full_1x1x3_status": "blocked_before_ad_write_by_meta_security_checkpoint_code31_subcode3858385",
-    "practical_next_build_route": "after human authentication in Ads Manager, use Graph v26.0, recreate the three already-validated sanitized dynamic creatives, allow propagation, validate-only the three ads, then write and read back 1x1x3 PAUSED",
-    "next_step": "Rafael/Rodolfo must complete the pending account authentication inside Meta Ads Manager; no API write retry before that confirmation"
+    "full_1x1x3_status": "blocked_before_ad_write_by_api_oauth_pending_action_code31_subcode3858385",
+    "practical_next_build_route": "complete the pending OAuth access-review Save flow for minibot rod, issue a fresh token, validate Graph v26.0, then recreate the three already-validated sanitized dynamic creatives and read back 1x1x3 PAUSED",
+    "next_step": "complete OAuth access review and replace the 1Password token; do not retry write until a fresh-token v26 validate-only passes"
   },
   "page_asset_permission": {
-    "status": "asset_assignment_valid_but_meta_account_security_checkpoint_pending",
+    "status": "asset_assignment_valid_manual_ads_manager_operational_api_oauth_pending_action",
     "token_identity": "Rafael Lucas Oliveira",
     "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
     "oauth_scopes_required_present": [
@@ -1018,12 +1018,20 @@
       "code": 31,
       "error_subcode": 3858385,
       "title": "Autentique sua conta",
-      "action": "complete authentication in Meta Ads Manager before any further ad create or modify call",
+      "action": "complete the OAuth access-review Save flow shown by Rodolfo, issue a fresh token, and rerun Graph v26 validate-only before any write",
       "existing_ads_message": "Meta states existing ads continue to run normally",
-      "no_retry_until_human_authentication": true,
+      "no_retry_until_oauth_access_review_and_fresh_token": true,
       "observed_at_et": "2026-08-20T09:27:10-04:00",
       "reconfirmed_on_graph_v26_validate_only": true,
-      "v26_reconfirmed_at_et": "2026-08-20T09:36:15-04:00"
+      "v26_reconfirmed_at_et": "2026-08-20T10:22:17-04:00",
+      "manual_ads_manager_evidence": {
+        "provided_by": "Rodolfo Mattei",
+        "account_operational": true,
+        "active_campaigns_visible": true,
+        "draft_campaigns_visible": true,
+        "authentication_or_security_banner_visible": false,
+        "conclusion": "do not interpret the generic API message as a manual Ads Manager account lock"
+      }
     }
   },
   "campaign_creation_retest_20260820": {
@@ -1041,7 +1049,7 @@
     "source_creative_invariant": "3_of_3 dynamic creatives contain deprecated standard_enhancements OPT_IN",
     "sanitized_dynamic_creative_result": "validated_3_of_3 with exact non-video payload parity and unordered video lineage by title, duration, dimensions and pixel-identical first frame",
     "sanitized_dynamic_one_ad_result": "validated PAUSED with Meta ad readback, then deleted",
-    "final_blocker": "Meta code31/subcode3858385 pending account authentication before final three ad writes",
+    "final_blocker": "Meta API code31/subcode3858385 is isolated to the app/token write path; manual Ads Manager is operational and the next diagnostic is completing OAuth access review plus fresh-token validation",
     "full_1x1x3_validated": false,
     "test_campaign_ids": [
       "120250850864180632",
@@ -1075,6 +1083,6 @@
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-dynamic-propagated-rafael-20260820T132332Z.json",
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json"
     ],
-    "completed_at_et": "2026-08-20T09:37:38-04:00"
+    "completed_at_et": "2026-08-20T10:22:17-04:00"
   }
 }

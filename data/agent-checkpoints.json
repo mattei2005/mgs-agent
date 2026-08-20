@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rafael/Rodolfo completa a autenticação pendente no Meta Ads Manager e confirma. Depois Ares usa Graph v26.0 e retesta somente o fechamento: recriar três criativos sanitizados, aguardar propagação, validate-only dos três anúncios, write PAUSED e readback 1x1x3.",
+      "next_step": "No popup OAuth do minibot rod, concluir Salvar, gerar token novo, substituir o item no 1Password e avisar. Ares testa o token novo em Graph v26 validate-only; se passar, conclui apenas os três anúncios PAUSED e o readback 1x1x3.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; screenshot v26.0; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.20; data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json",
-      "state": "rodolfo confirmou por screenshot que o app meta está em v26.0 nos dois seletores. ares alinhou o runner para graph v26.0 e validou conta, página garagem brasil/advertise e creative com http200. o validate-only v26.0, sem write, retornou o mesmo checkpoint de segurança code31/subcode3858385 autentique sua conta. rebuild sanitizado permanece validado 3/3 e um anúncio paused real já foi criado/lido; full 1x1x3 aguarda somente autenticação humana. nove campanhas técnicas deleted, gasto usd0, zero campanha ativa/pausada, 0 criativos no edge da conta e 0 vídeos no edge da página.",
+      "source": "discord:thread:1539434208408375426; screenshots Ads Manager operacional e OAuth access review; snapshots sanitizados Meta Graph v26 2026-08-20T10:22:17-04:00; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.21",
+      "state": "rodolfo comprovou por screenshots que o ads manager manual está operacional: campanhas ativas e rascunhos visíveis, sem banner de autenticação ou segurança. ares corrigiu a interpretação: code31/sub3858385 está isolado à rota app/token de write, não é bloqueio manual da conta. snapshot v26 ao vivo: conta/página/creative http200; validate-only sem write retorna o erro genérico. rebuild sanitizado continua validado 3/3 e um ad paused real foi criado/lido. nove campanhas técnicas deleted, usd0 e zero artefato ativo nos edges operacionais.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T13:38:38+00:00"
+      "updated_at": "2026-08-20T14:24:35+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:53:04+00:00"
+  "updated_at": "2026-08-20T14:24:35+00:00"
 }
