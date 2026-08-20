@@ -12,6 +12,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
+      "next_step": "Aplicar backup, alterar script/config com gates, testar, executar ação elegível e reenviar relatórios",
+      "objective": "Ativar ações intraday autorizadas por Rodolfo, remover ID REC e publicar Diário/Intraday com nova estética",
+      "source": "discord:thread:1539969033170980945; /root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py; /root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "inventário em andamento; runtime localizado no script creditoparaveiculo-fixed-reports.py e operação canônica identificada",
+      "thread_id": "1539969033170980945",
+      "updated_at": "2026-08-20T12:15:07+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-META-LIBRARY-ECO-FINANCA-CARRO-BR-20260811",
       "next_step": "Nenhum passo pendente. Material permanece referência-only e fora do pool de campanha.",
       "objective": "Coletar todos os criativos disponíveis da busca Meta Ad Library eco financa carro no Brasil, preservar a melhor qualidade exposta, sanitizar, deduplicar e enviar como referências para MGS-AGENTS/CRIATIVOS/LIBRARY META/ECO_FINANCA_CARRO_BR.",
@@ -872,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T10:33:28+00:00"
+  "updated_at": "2026-08-20T12:15:07+00:00"
 }
