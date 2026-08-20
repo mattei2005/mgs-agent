@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.24
+version: 1.0.26
 author: Ares
 license: internal
 metadata:
@@ -223,7 +223,8 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 25. **Adicionar geração/sufixo fora do wrapper para reciclar número.** O wrapper UTM é imutável (`bNNfbNNcNN` / `...gNN`); `rNN` ou equivalente é proibido. Segundo Ciro, dev da SB, deletar a campanha antiga basta para reutilizar a UTM canônica. O estado final nunca pode manter duas campanhas não deletadas com a mesma UTM. Fluxo: confirmar antiga PAUSED e terminal → criar substituta PAUSED e validar → deletar antiga e confirmar `DELETED` → ativar substituta após revisão. Campanha antiga ACTIVE bloqueia o rollover.
 26. **Usar outro objeto Graph do mesmo número como prova de publicação de um rascunho.** Quando o Ads Manager mostra `Em rascunho`, `Conferir e publicar` ou sufixo `— Cópia`, aquela campanha ainda não foi publicada. Um objeto Graph PAUSED separado, mesmo com o mesmo número, não prova a publicação do draft. Reconciliar o objeto exato por UI/ID/estado; screenshot e confirmação manual do operador vencem a inferência. Drafts do Ads Manager não são campanhas normais da Graph e exigem `Conferir e publicar` ou `Descartar rascunhos` na própria UI.
 27. **Validar remoção de `standard_enhancements` por substring.** `standard_enhancements_catalog` é uma chave diferente e pode aparecer como `OPT_OUT`. O gate procura recursivamente a chave JSON exata `standard_enhancements`; não reprovar criativo apenas porque outra chave contém o mesmo prefixo.
-28. **Tratar `code=17`/`subcode=2446079` no readback final como falha da criação.** Se todos os POSTs já produziram IDs, persistir campanha/adset/anúncio/creative/vídeos e assignments como `readback_deferred`, manter assets reservados e retomar o GET somente após cooldown. Não fazer cleanup apenas porque o GET final foi limitado; cleanup é para erro de write/validação ou estado terminal comprovadamente inválido. Um reconciliador determinístico deve finalizar readback, movimento `01_READY→02_TESTING`, inventário e estoque antes de liberar o próximo ciclo.
+28. **Não tratar `code=17`/`subcode=2446079` no readback final como erro definitivo.** Se todos os POSTs já produziram IDs, persistir campanha/adset/anúncio/creative/vídeos e assignments como `readback_deferred`, manter assets reservados e retomar o GET somente após cooldown. Não fazer cleanup apenas porque o GET final foi limitado; cleanup é para erro de write/validação ou estado terminal comprovadamente inválido. Um reconciliador determinístico deve finalizar readback, movimento `01_READY→02_TESTING`, inventário e estoque antes de liberar o próximo ciclo.
+29. **Não reportar o total bruto de `01_READY` como estoque disponível.** `01_READY` prova prontidão técnica, não elegibilidade. Sempre separar: total físico live por IMG/VID, total com identidade Drive↔inventário íntegra e total único `ares_eligible=true` após current+paused+archived Meta. Gaps Drive-only, inventory-only ou filename duplicado ficam fail-closed e não entram no saldo utilizável até reparo da identidade/status.
 
 ## Verification checklist
 
