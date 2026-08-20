@@ -32,6 +32,50 @@
     "new_campaign_count": "dynamic_by_test_pool",
     "start_time": "00:30_account_timezone"
   },
+  "campaign_bid_strategy_taxonomy": {
+    "authorized_by": "Rodolfo Mattei",
+    "recorded_at_et": "2026-08-20T14:48:29-04:00",
+    "from_zero_requirement": "requester must specify the bid strategy; if omitted, ask before write",
+    "clone_requirement": "inherit campaign and adset bid configuration exactly from the named source campaign",
+    "types": {
+      "result_cost_goal": {
+        "meta_ui_campaign_label": "Meta de custo por resultado",
+        "meta_ui_adset_field": "Meta de custo por resultado",
+        "api_campaign_bid_strategy": "COST_CAP",
+        "api_adset_bid_amount_required": true,
+        "semantics": "target average cost per conversion/result while maximizing volume; individual results may cost more or less",
+        "delivery_behavior": "a target that is too low can materially restrict audience access and spend",
+        "live_reference_campaign": 7,
+        "live_reference_bid_amount_minor": 50,
+        "live_reference_currency": "USD",
+        "current_name_suffix": "com bid"
+      },
+      "highest_volume": {
+        "meta_ui_campaign_label": "Valor ou volume mais alto",
+        "meta_ui_adset_field": "Meta de custo por resultado: Nenhum",
+        "api_campaign_bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "api_adset_bid_amount_required": false,
+        "semantics": "maximize conversions/volume within budget without a CPA target",
+        "delivery_behavior": "more delivery latitude and learning space; no configured CPA ceiling/target",
+        "live_reference_campaign": 8,
+        "current_name_suffix": "sem bid"
+      }
+    },
+    "naming_status": "pending_Rodolfo_approval",
+    "naming_recommendation": {
+      "campaign_and_adset_suffix_result_cost_goal": "COSTCAP-0.50",
+      "campaign_and_adset_suffix_highest_volume": "MAXVOL",
+      "report_column": "Lance",
+      "report_value_result_cost_goal": "CAP 0,50",
+      "report_value_highest_volume": "MAXVOL"
+    },
+    "rename_targets_after_approval": [
+      7,
+      8,
+      12,
+      50
+    ]
+  },
   "learning_policy": {
     "days": 3,
     "day_1_action": "observe_no_cut; scale at 08:00 only by approved ROI tiers",
@@ -83,6 +127,22 @@
     },
     "reactivation_initial_total_daily_budget_usd": 150.0
   },
+  "daily_new_campaign_routine": {
+    "authorized_by": "Rodolfo Mattei",
+    "reconfirmed_at_et": "2026-08-20T14:48:29-04:00",
+    "responsibility": "Ares daily operation includes creating new direct-traffic campaigns in addition to analysis, D1/D2 scaling and campaign-level pauses",
+    "account_operational_cap_usd": 300,
+    "new_campaign_budget_share": 0.2,
+    "new_campaign_budget_pool_usd": 60,
+    "default_campaign_initial_budget_usd": 30,
+    "default_campaign_count_when_not_otherwise_specified": 2,
+    "creation_window_account_timezone": "18:00-23:30 America/Sao_Paulo",
+    "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
+    "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
+    "budget_gate": "complete live active-budget preflight; never exceed USD300 account cap",
+    "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
+    "production_readback": "campaign/adset/ads published, start time 00:30 next day, exact strategy, UTMs, budget and hierarchy validated before handoff"
+  },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
     "join_key": "utm_adgroup",
@@ -95,33 +155,27 @@
   },
   "utm_uniqueness_policy": {
     "authorized_by": "Rodolfo Mattei",
-    "recorded_at_et": "2026-08-20T14:33:08-04:00",
+    "smart_bidding_source": "Ciro (SB developer), relayed by Rodolfo Mattei",
+    "superseded_at_et": "2026-08-20T14:48:29-04:00",
     "campaign_number_min": 1,
     "campaign_number_max": 60,
-    "exact_utm_campaign_reuse_forbidden": true,
-    "exact_utm_adgroup_reuse_forbidden": true,
-    "reason": "Smart Bidding joins by UTM and duplicate keys can merge or conflict campaign revenue/performance",
-    "slot_reuse": "allowed only with a new globally unique UTM generation key",
-    "deletion_only_proposal": "insufficient by itself because deleting the Meta object does not guarantee removal of Smart Bidding history already keyed by the old UTM",
-    "recommended_rollover_order": [
-      "confirm old slot lifecycle is terminal after D3 and revenue/anomaly reconciliation",
-      "allocate a new unique UTM generation for the reused 01-60 slot",
-      "create the new campaign PAUSED and complete hierarchy/UTM readback",
-      "delete the old terminal campaign and confirm operator status DELETED",
-      "activate the new campaign only after review"
+    "wrapper_format_immutable": true,
+    "generation_suffix_forbidden": true,
+    "simultaneous_non_deleted_duplicate_utm_forbidden": true,
+    "exact_utm_reuse_after_old_campaign_deleted": true,
+    "smart_bidding_behavior": "Ciro confirmed deleting the old campaign is sufficient; the canonical wrapper UTM may then be reused",
+    "slot_reuse_order": [
+      "confirm the old same-number campaign is PAUSED and lifecycle-terminal after D3/revenue/anomaly reconciliation",
+      "create the replacement campaign PAUSED with the canonical wrapper UTM and complete hierarchy/UTM readback",
+      "delete the old same-number campaign and confirm operator status DELETED",
+      "activate the replacement only after review"
     ],
-    "generation_format_status": "pending_Rodolfo_approval_and_Smart_Bidding_parser_validation",
-    "candidate_example_only": {
-      "slot": 15,
-      "generation": 2,
-      "utm_campaign": "b01fb13c15r02",
-      "utm_adgroup": "b01fb13c15r02g01"
-    },
-    "fail_closed_until_generation_format_approved": true,
-    "current_reuse_audit_required": [
-      12,
-      50
-    ]
+    "active_same_number_campaign": "block; never delete or replace automatically",
+    "paused_same_number_campaign": "eligible for deletion only after terminal lifecycle and the creation request authorizes slot reuse",
+    "deleted_same_number_campaign": "does not block canonical UTM reuse",
+    "current_cleanup_candidate": 12,
+    "current_resolved_deleted_slot": 50,
+    "supersedes": "rNN generation recommendation and global historical UTM immutability"
   },
   "smart_bidding_roi": {
     "enabled": true,
@@ -285,7 +339,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T14:33:08-04:00",
+  "updated_at": "2026-08-20T14:48:29-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -505,7 +559,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.28",
+  "playbook_version": "1.0.30",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
