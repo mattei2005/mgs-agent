@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 0.3.1
+version: 1.0.0
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -70,7 +70,19 @@ ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
 ROI Total com SMS = (Receita Aquisição + Receita SMS − Spend) / Spend × 100
 ```
 
-Enquanto o custo real de SMS não estiver conciliado, rotular `ROI Total com SMS — antes do custo SMS`; não chamar de lucro líquido.
+Custo real informado por Rodolfo: `R$ 0,08 × SMS efetivamente enviados`. A quantidade enviada deve vir do SMS Funnel/vendor (`total_sms_sent`); não usar quantidade de leads nem repetir o custo por campanha sem atribuição. O card WordPress `linhas × R$ 0,08` continua sendo apenas estimativa e deve permanecer separado.
+
+Como a conta Meta/SB é USD, converter o custo real BRL→USD com taxa, data e fonte registradas antes do fechamento:
+
+```text
+Custo SMS BRL = SMS enviados × R$ 0,08
+Custo SMS USD = Custo SMS BRL ÷ taxa USD/BRL confirmada
+ROI Total líquido após SMS =
+(Receita Aquisição USD + Receita SMS USD − Spend Meta USD − Custo SMS USD)
+÷ Spend Meta USD × 100
+```
+
+Se o SMS Funnel não fornecer `total_sms_sent`, exibir `ROI Total com SMS — antes do custo SMS`; não chamar de lucro líquido.
 
 Pixel, evento, Page/identidade, Instagram e URL de destino devem ser herdados da campanha de referência validada na mesma conta e confirmados por readback antes de criar campanha. Não inferir IDs ou valores por nome.
 

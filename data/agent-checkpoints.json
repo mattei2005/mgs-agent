@@ -262,6 +262,16 @@
     },
     {
       "agent": "zeus",
+      "id": "fincgriffin-wordpress-persistent-session",
+      "next_step": "Rodolfo abre túnel SSH para 6084, autentica no WordPress e confirma; Zeus encerra processo visual graciosamente e executa probe persistente",
+      "objective": "Criar e manter sessão Chromium persistente e reutilizável do WordPress Fincgriffin para operações Zeus autenticadas",
+      "source": "/root/.hermes/profiles/zeus/artifacts/fincgriffin-wordpress-login-status.json",
+      "state": "sessão visual ativa: profile cleanup-protected 0700, lock exclusivo ocupado, novnc 127.0.0.1:6084 e vnc 127.0.0.1:5904, page=/wp-login.php, authenticatedlikely=false; aguardando rodolfo autenticar pelo túnel ssh",
+      "thread_id": "1539755374226448414",
+      "updated_at": "2026-08-20T02:26:43+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "full-system-checkup-20260802",
       "next_step": "Após confirmação de Rodolfo, deletar somente o backup antigo congelado e validar; para web_extract, receber Firecrawl/Tavily/Exa/Parallel corporativo no 1Password ou habilitar Nous Tool Gateway.",
       "objective": "Auditar e corrigir integralmente VPS, Hermes e operação MGS após manutenção e ativação v0.19.1.",
@@ -862,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T02:21:42+00:00"
+  "updated_at": "2026-08-20T02:26:43+00:00"
 }

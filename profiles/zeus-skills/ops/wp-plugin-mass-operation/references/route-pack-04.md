@@ -14,6 +14,8 @@ Para os 4 sites AWS/Bitnami onde SFTP é o canal de acesso (read-only para verif
 | finanzas.cliquet.com | 18.116.18.34 |
 
 > **fincgriffin.com** — WordPress externo agora com acesso programático validado via WP Admin e REST. Credenciais no 1Password, item `Fincgriffin Wordpress`: `username` + `password` para login e `app user` + `app password` para REST. Não há SSH/SFTP conhecido; operações de plugin devem usar REST autenticado e configuração pelo formulário real `options.php`, com readback autenticado.
+>
+> **Sessão WordPress persistente do Zeus:** usar exclusivamente o perfil cleanup-protected `/root/.hermes/profiles/zeus/browser-profiles/fincgriffin-wordpress-chromium`, o runtime `/root/mgs-agent/tools/fincgriffin-wordpress-browser/` e os wrappers `scripts/zeus-fincgriffin-wordpress-login-browser.sh` / `scripts/zeus-fincgriffin-wordpress-session-probe.sh`. A sessão visual usa lock exclusivo e noVNC `127.0.0.1:6084` (VNC `127.0.0.1:5904`) por túnel SSH; nunca expor as portas publicamente nem serializar cookies. O login humano deve ser feito diretamente no browser remoto. Fechar o visual graciosamente antes do probe para o Chromium persistir cookies e liberar `SingletonLock`. Nunca apagar o profile, cookies ou lock state durante limpeza; primeiro provar que nenhum browser usa o perfil.
 
 **CRÍTICO:** `wpfiles` é 100% read-only em todos os diretórios. Para escrita, usar elFinder (ver Seção B) ou SSH bitnami + .pem.
 

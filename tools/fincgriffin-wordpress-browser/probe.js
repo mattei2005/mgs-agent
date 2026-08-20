@@ -12,6 +12,8 @@ const STATUS_PATH = process.env.FINCG_WP_PROBE_STATUS || '/root/.hermes/profiles
 (async () => {
   fs.mkdirSync(PROFILE_DIR, { recursive: true, mode: 0o700 });
   fs.chmodSync(PROFILE_DIR, 0o700);
+  fs.writeFileSync(path.join(PROFILE_DIR, 'README-MGS-SESSION.txt'), 'Sensitive persistent Chromium profile for fincgriffin.com WordPress. Never copy, attach, commit, or delete while Chromium is running.\n', { mode: 0o600 });
+  fs.chmodSync(path.join(PROFILE_DIR, 'README-MGS-SESSION.txt'), 0o600);
   fs.mkdirSync(path.dirname(STATUS_PATH), { recursive: true, mode: 0o700 });
   const context = await chromium.launchPersistentContext(PROFILE_DIR, {
     headless: true,
