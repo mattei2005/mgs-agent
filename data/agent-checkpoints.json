@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo aprova/ajusta nomenclatura e coluna Lance. Depois renomear C07/C08/C12/C50 e adaptar relatórios. Confirmar separadamente se a C12 antiga PAUSED deve ser deletada agora. Se Rodolfo vê — Cópia em outro objeto/draft, solicitar screenshot da linha exata; live C50/C12 Graph não têm sufixo.",
+      "next_step": "Bloqueio único para a criação de hoje às 17:00 SP: Rodolfo precisa especificar a estratégia das duas campanhas do zero (duas MAXVOL; duas COSTCAP com valor; ou uma de cada). Depois selecionar criativos Drive, reconciliar reserva/Meta, criar PAUSED/validar e programar 00:30.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; 4 screenshots Ads Manager; live Graph C07/C08/C12/C50; operation v1.0.30; skill v1.0.16",
-      "state": "dois tipos confirmados por screenshots + graph: custo por resultado = cost_cap + bid_amount (c07 usd0,50; alvo médio, não teto rígido; baixo pode travar entrega) e maior volume = lowest_cost_without_cap sem bid_amount (c08). do zero exige tipo explícito; clone herda fonte. c50/c12 estão publicadas server-side, paused, 1x1x3, nomes sem sufixo cópia; foram testes desativados e não agendados para 00:30. rotina produtiva diária: 20% de usd300 = usd60, normalmente 2xusd30, criar 18:00–23:30 sp e iniciar 00:30 seguinte. utm: wrapper imutável, rnn proibido; segundo ciro, deletar antiga basta para reutilizar slot. nomenclatura candidata costcap-0.50/maxvol pendente.",
+      "source": "discord:thread:1539434208408375426; audits delete-test-c50-c12-20260820T190950Z and rename-bid-strategy-c07-c11-20260820T191221Z; live report dry-runs 19:18/19:19Z; operation v1.0.31; skill v1.0.17",
+      "state": "testes novos c50/c12 excluídos integralmente com readback: 2 campanhas, 6 ads, 6 creatives e 12 vídeos técnicos deleted; spend usd0. screenshot confirma draft ui c50 com — cópia, mas live graph do objeto publicado c50 estava paused sem sufixo; após autorização os objetos server-side foram deletados, e draft ui pode exigir descartar rascunhos. nomenclatura aprovada/aplicada: c07 campanha+adset costcap-0.50; c08/c09/c10 campanha+adset maxvol. c11 revelou bid_constraints.roas_average_floor e foi revertida/excluída como terceira estratégia pendente. relatórios diário/intraday agora têm coluna lance e render live validado: cpa 0,50, maxvol, roas. utm: wrapper imutável; rnn proibido; reuse após antiga deleted segundo ciro. rotina diária 20%=usd60, 2xusd30, 17:00 preparação/criação e início 00:30 seguinte.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T18:55:12+00:00"
+      "updated_at": "2026-08-20T19:21:41+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T18:55:12+00:00"
+  "updated_at": "2026-08-20T19:21:41+00:00"
 }

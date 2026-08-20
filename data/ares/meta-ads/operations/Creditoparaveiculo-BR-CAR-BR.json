@@ -61,20 +61,28 @@
         "current_name_suffix": "sem bid"
       }
     },
-    "naming_status": "pending_Rodolfo_approval",
-    "naming_recommendation": {
+    "naming_status": "approved_and_applied",
+    "naming_approved_at_et": "2026-08-20T14:48:29-04:00",
+    "canonical_naming": {
       "campaign_and_adset_suffix_result_cost_goal": "COSTCAP-0.50",
       "campaign_and_adset_suffix_highest_volume": "MAXVOL",
       "report_column": "Lance",
-      "report_value_result_cost_goal": "CAP 0,50",
-      "report_value_highest_volume": "MAXVOL"
+      "report_value_result_cost_goal": "CPA 0,50",
+      "report_value_highest_volume": "MAXVOL",
+      "report_value_roas_exception": "ROAS"
     },
-    "rename_targets_after_approval": [
+    "renamed_campaigns_and_adsets": [
       7,
       8,
-      12,
-      50
-    ]
+      9,
+      10
+    ],
+    "rename_exclusions": {
+      "11": "hidden bid_constraints.roas_average_floor exposed error 1815890; third strategy pending explicit classification",
+      "12": "test campaign deleted",
+      "50": "test campaign deleted"
+    },
+    "rename_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/rename-bid-strategy-c07-c11-20260820T191221Z.json"
   },
   "learning_policy": {
     "days": 3,
@@ -136,7 +144,8 @@
     "new_campaign_budget_pool_usd": 60,
     "default_campaign_initial_budget_usd": 30,
     "default_campaign_count_when_not_otherwise_specified": 2,
-    "creation_window_account_timezone": "18:00-23:30 America/Sao_Paulo",
+    "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
+    "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
     "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
     "budget_gate": "complete live active-budget preflight; never exceed USD300 account cap",
@@ -264,12 +273,17 @@
     "authorized_by": "Rodolfo Mattei",
     "style": "report-specific Discord presentation",
     "daily_style": "aligned monospace tables for campaigns and account summary",
-    "daily_columns": ["Sinal", "Camp", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
+    "daily_columns": ["Sinal", "Camp", "Lance", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
     "daily_alignment": "Unicode display-width aware; every summary row has an explicit signal",
     "daily_budget_definition": "current campaign daily_budget from Meta at report generation time",
     "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
     "intraday_style": "aligned monospace table matching Rodolfo reference",
-    "intraday_columns": ["Sinal", "Camp", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"],
+    "intraday_columns": ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"],
+    "lance_values": {
+      "COST_CAP": "CPA 0,50 (value derived live from adset bid_amount)",
+      "LOWEST_COST_WITHOUT_CAP": "MAXVOL",
+      "roas_average_floor": "ROAS"
+    },
     "campaign_display_format": "CNN-DD/MM, e.g. C07-20/08",
     "intraday_cost_definition": "Meta cost per omni_purchase = campaign spend / actions.omni_purchase",
     "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
@@ -339,7 +353,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T14:48:29-04:00",
+  "updated_at": "2026-08-20T15:20:22-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -559,7 +573,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.30",
+  "playbook_version": "1.0.32",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1201,8 +1215,17 @@
     "validated_at_et": "2026-08-20T13:41:03-04:00"
   },
   "campaign_creation_20260820_c50_c12": {
-    "status": "published_paused_pending_manual_review",
+    "status": "test_campaigns_deleted_after_validation",
     "authorized_by": "Rodolfo Mattei",
+    "deleted_at_sp": "2026-08-20T16:09:50-03:00",
+    "deletion_result": {
+      "campaigns_deleted": 2,
+      "ads_deleted": 6,
+      "creatives_deleted": 6,
+      "technical_videos_deleted": 12,
+      "spend_usd": 0,
+      "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/delete-test-c50-c12-20260820T190950Z.json"
+    },
     "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
     "source_campaign": {
       "number": 7,
