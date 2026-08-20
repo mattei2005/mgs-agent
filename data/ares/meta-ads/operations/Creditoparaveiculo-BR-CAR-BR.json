@@ -439,7 +439,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T16:06:14-04:00",
+  "updated_at": "2026-08-20T16:15:41-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -681,7 +681,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.36",
+  "playbook_version": "1.0.37",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1403,7 +1403,7 @@
     "validated_at_et": "2026-08-20T14:11:44-04:00"
   },
   "campaign_creation_20260820_c50_maxvol_retry": {
-    "status": "published_paused_pending_Rodolfo_review",
+    "status": "reviewed_and_deleted_by_Rodolfo_authorization",
     "authorized_by": "Rodolfo Mattei",
     "created_at_sp": "2026-08-20T17:03:37-03:00",
     "campaign_id": "120250857348260632",
@@ -1427,7 +1427,18 @@
     "exact_standard_enhancements_absent": true,
     "server_published": true,
     "delivery_budget_impact_usd": 0,
-    "deletion_hold": "do not delete until Rodolfo reviews and gives a new explicit deletion request",
+    "deletion_hold": null,
+    "review_result": "Rodolfo confirmed the campaign was perfect",
+    "deleted_at_sp": "2026-08-20T17:14:46-03:00",
+    "deletion_result": {
+      "campaigns_deleted": 1,
+      "adsets_deleted": 1,
+      "ads_deleted": 3,
+      "creatives_deleted": 3,
+      "technical_videos_deleted": 6,
+      "spend_usd": 0,
+      "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/delete-c50-maxvol-20260820T201446Z.json"
+    },
     "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-maxvol-from-zero-20260820T200337Z.json",
     "validated_at_sp": "2026-08-20T17:05:40-03:00"
   },

@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo confere a C50 publicada/PAUSED no Ads Manager e informa o próximo passo. Separadamente, a rotina diária de campanhas Drive continua pendente da escolha de estratégia para as duas campanhas (recomendação 2x MAXVOL).",
+      "next_step": "Rotina diária de campanhas Drive segue pendente da definição da estratégia das duas campanhas (recomendação 2x MAXVOL). Não há C50 nova viva após o cleanup.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; audit create-c50-maxvol-from-zero-20260820T200337Z.json; operation v1.0.36; skill v1.0.22",
-      "state": "nova c50 recriada do zero pela graph api após rodolfo descartar o draft anterior. publicada server-side e deixada paused para revisão: nome canônico ... - maxvol, usd30, lowest_cost_without_cap, 1 adset active sob campaign_paused, 3 ads active sob campaign_paused, sem bid_amount/bid_constraints, subscribe/pixel/compliance br, utms c50/g01 e 3 criativos sanitizados herdando mídia/copy da c08. readback completo validado; spend/delivery impact usd0. não deletar até novo pedido após conferência de rodolfo.",
+      "source": "discord:thread:1539434208408375426; audits create-c50-maxvol-from-zero-20260820T200337Z and delete-c50-maxvol-20260820T201446Z; operation v1.0.37; skill v1.0.22",
+      "state": "c50 maxvol recriada do zero, publicada/paused e aprovada manualmente por rodolfo como perfeita. após nova autorização explícita, cleanup concluído: campanha/adset/3 ads/3 creatives/6 vídeos técnicos deleted, spend usd0 e readback completo. slot c50 volta a ficar livre segundo regra ciro/sb. nomenclatura/reporting/utm permanecem vigentes.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T20:08:14+00:00"
+      "updated_at": "2026-08-20T20:16:22+00:00"
     },
     {
       "agent": "ares",
@@ -892,5 +892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T20:08:14+00:00"
+  "updated_at": "2026-08-20T20:16:22+00:00"
 }

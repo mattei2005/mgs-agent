@@ -98,6 +98,25 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
 
         self.assertEqual(caught.exception.code, "model_call_timeout")
 
+    def test_soft_per_entry_budget_keeps_final_total_as_hard_gate(self):
+        original = ["a" * 80, "b" * 80]
+        budgets = [50, 50]
+        candidate = {"entries": [{"index": 1, "text": "a" * 60}]}
+
+        partial = compactor._validate_candidate(
+            original,
+            candidate,
+            120,
+            budgets,
+            [1],
+            enforce_total=False,
+        )
+
+        self.assertEqual(len(partial[0]), 60)
+        with self.assertRaises(compactor.CompactionError) as caught:
+            compactor._validate_candidate(original, candidate, 120, budgets, [1])
+        self.assertEqual(caught.exception.code, "candidate_entry_above_budget")
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 
