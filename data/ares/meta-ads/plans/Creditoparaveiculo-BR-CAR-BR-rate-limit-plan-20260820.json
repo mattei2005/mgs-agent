@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+  "created_at_sp": "2026-08-20T18:45:25-03:00",
+  "owner": "Rodolfo Mattei",
+  "objective": "Create campaigns in strict sequence starting at C12 while eliminating Meta code17 failures and scaling safely toward high-volume campaign creation.",
+  "current_evidence": {
+    "first_attempt": {
+      "result": "objects created, final hierarchy readback blocked by Meta code17/subcode2446079, then fully cleaned",
+      "failure_stage": "final hierarchy readback",
+      "credentials_or_permission_failure": false,
+      "drive_or_asset_download_failure": false,
+      "budget_failure": false,
+      "cleanup_complete": true
+    },
+    "meta_access_tier_from_live_buc_header": "development_access",
+    "original_transport_call_estimate_before_failure": 59,
+    "original_call_shape": {
+      "source_and_account_preflight": 3,
+      "video_metadata_batches": 5,
+      "page_video_uploads": 12,
+      "individual_video_readiness_gets": 12,
+      "campaign_adset_creative_ad_validate_and_create": 26,
+      "first_final_readback_batch": 1
+    },
+    "numbering_correction": {
+      "next_required": 12,
+      "strict_sequence": true,
+      "wrong_retry_slots_removed": [50, 49]
+    }
+  },
+  "immediate_changes_applied": [
+    "Removed the wrong C50/C49 retry before execution.",
+    "Changed default numbering to contiguous C12,C13 and fail closed if either slot conflicts.",
+    "Changed creation to prepare campaigns PAUSED at 17:00 and activate campaign-only at/after 00:30.",
+    "Changed 12 individual video readiness GETs to one bounded Graph batch poll.",
+    "Persisted preflight_deferred and readback_deferred states with hourly cooldown resume.",
+    "Separated physical Drive READY count from ares_eligible stock.",
+    "Added current+paused+archived Meta reconciliation and excluded only technical IDs with cleanup evidence."
+  ],
+  "short_term_plan": {
+    "goal": "Complete the next production cycle without code17 on development access.",
+    "steps": [
+      "After cooldown, perform one read-only live check for C12/C13 status, account budget and BUC header.",
+      "Resolve whether today's batch is only C12 or a controlled C12+C13 replacement; never skip ahead.",
+      "Stage and process media separately from campaign-object writes.",
+      "Use one batch readiness poll for all staged videos.",
+      "Prepare campaigns PAUSED with children ACTIVE and do one combined final hierarchy batch readback.",
+      "At 00:30, recheck holds, hierarchy and projected active budget, then activate only campaigns and validate by GET."
+    ],
+    "fail_closed": [
+      "No write when next sequential slot is occupied without an explicit replacement decision.",
+      "No write when BUC/cooldown state predicts insufficient request budget.",
+      "No asset consumption until final preparation readback and Drive move to 02_TESTING."
+    ]
+  },
+  "call_reduction_plan": {
+    "stage_media": {
+      "target_transport_calls": 7,
+      "method": "For one campaign: upload three vertical plus three square derivatives, then one batch readiness poll. For two campaigns, run this as a separate resumable phase before campaign-object creation."
+    },
+    "stage_campaign_objects": {
+      "target_transport_calls": 10,
+      "method": "Implement a BUC-aware Graph batch POST route after a one-campaign canary: batch campaign validations, batch campaign creates, batch adset validations/creates, batch six creative creates, batch ad validations/creates, one final hierarchy batch readback. Persist IDs between dependency boundaries."
+    },
+    "stage_activation": {
+      "target_transport_calls": 5,
+      "method": "One batch preflight, two single campaign status POSTs, one batch final readback, one budget readback; rollback only confirmed partial activation."
+    },
+    "request_budget_guard": "Before each stage, read persisted BUC usage/tier/cooldown. Stop before the account hard limit and resume from fsynced state instead of continuing until code17."
+  },
+  "reconciliation_scale_plan": {
+    "full_baseline": "Run current+paused+archived ads/creatives/media reconciliation once and persist Drive-to-Meta links.",
+    "incremental_daily": "After baseline, query only new/updated Meta objects since the last checkpoint and known Page media deltas; do not rescan hundreds of historical media before every campaign batch.",
+    "inventory_drift": "Repair 19 Drive-only files, 16 inventory-only READY records and four duplicate filename groups before counting affected lineages as eligible."
+  },
+  "access_tier_plan": {
+    "finding": "The live BUC header identifies the current app as development_access, which is not an appropriate baseline for high-volume automation.",
+    "action": "Audit the app in Meta App Dashboard and request/enable the applicable Standard/Advanced Marketing API access after business verification/app review as required. Do not change app, token or credential without Rodolfo approval.",
+    "comparison_with_ads_manager": "Bulk creation through Ads Manager or another first-party/standard-tier route is not directly comparable to calls made by a development-access app. Confirm the friend's route/app/tier before using 40 campaigns as an API capacity benchmark."
+  },
+  "validation_ramp": [
+    "Canary A: prepare and validate C12 only.",
+    "Canary B: activate C12 at 00:30 and validate spend remains zero before activation.",
+    "Canary C: prepare two sequential campaigns after the C13 conflict decision.",
+    "Scale test: 10 paused campaigns with staged media and batch writes, zero delivery.",
+    "Capacity test: 40 paused campaigns only after Standard/Advanced access and explicit Rodolfo approval."
+  ],
+  "success_criteria": [
+    "No code17 during the planned stage request budget.",
+    "Exact sequential numbering beginning at C12.",
+    "Every prepared campaign PAUSED with one ACTIVE adset and three ACTIVE ads.",
+    "Every activation campaign-only, within USD300 cap, with GET readback.",
+    "Physical READY and unique eligible stock reported separately after every creation."
+  ]
+}

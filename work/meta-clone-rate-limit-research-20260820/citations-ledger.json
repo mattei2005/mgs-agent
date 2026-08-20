@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting",
+      "title": "Marketing API Rate Limiting",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "If your app is in the Marketing API development tier:",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Your maximum score is 60.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "If your app has Full access to the Marketing API:",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Your maximum score is 9000.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Related error code:`17, Error subcode: 2446079, Message: User request limit reached.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "url": "https://developers.facebook.com/docs/marketing-api/access",
+      "title": "Marketing API Authorization and Access Tier",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Limited access (default)",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Heavily rate-limited per ad account. For development only. Not for production apps running for live advertisers.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Have successfully made at least 500 Marketing API calls in the last 15 days.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Have made Marketing API calls with an error rate of less than 15% in the last 500 calls.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
+      "title": "Ad Campaign Group Copies",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Whether to copy all the child ads. Limits: the total number of children ads to copy should not exceed 3 for a synchronous call and 51 for an asynchronous call.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "This endpoint supports read-after-write",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "url": "https://developers.facebook.com/docs/graph-api/asynchronous-batch-requests",
+      "title": "Asynchronous and Batch Requests",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Batch API enables you to batch requests and send them asynchronously.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "You can also specify dependencies between related operations.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "url": "https://developers.facebook.com/docs/graph-api/making-multiple-requests",
+      "title": "Graph API Batch Requests",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Each call within the batch is counted separately for the purposes of calculating API call limits and resource limits.",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "url": "https://github.com/facebook/facebook-python-business-sdk/blob/main/facebook_business/adobjects/campaign.py",
+      "title": "Meta Python Business SDK Campaign copy implementation",
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "def create_copy(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):",
+          "added": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "url": "https://stackoverflow.com/questions/54539702/facebookads-http-exception-authorizationexception-code-17-17-user-request",
+      "title": "Stack Overflow: Code 17 and response headers",
+      "accessed": "2026-08-20"
+    },
+    {
+      "id": 8,
+      "url": "https://stackoverflow.com/questions/48573248/overcoming-rate-limiting-in-facebook-marketing-api",
+      "title": "Stack Overflow: Marketing API throttling strategies",
+      "accessed": "2026-08-20"
+    }
+  ]
+}

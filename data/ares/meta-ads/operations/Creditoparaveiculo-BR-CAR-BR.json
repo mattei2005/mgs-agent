@@ -168,6 +168,16 @@
       "d3": "pause_if_roi_lte_minus_10"
     }
   },
+  "campaign_numbering_policy": {
+    "corrected_by": "Rodolfo Mattei",
+    "corrected_at_sp": "2026-08-20T18:45:25-03:00",
+    "next_required_campaign_number": 12,
+    "strict_sequence": true,
+    "out_of_order_slots_forbidden": true,
+    "prior_wrong_retry_slots": [50, 49],
+    "prior_wrong_retry_removed_before_execution": true,
+    "two_campaign_batch_gate": "C12 is mandatory first; the second sequential slot is C13 and must fail closed if a non-deleted C13 already exists until Rodolfo decides whether today is one campaign or a controlled C13 replacement"
+  },
   "utm_uniqueness_policy": {
     "authorized_by": "Rodolfo Mattei",
     "smart_bidding_source": "Ciro (SB developer), relayed by Rodolfo Mattei",
@@ -213,6 +223,15 @@
       "UTM_ADGROUP"
     ],
     "date_policy": "filter response DATE again to requested inclusive range in account timezone"
+  },
+  "meta_rate_limit_scale_plan": {
+    "status": "active",
+    "canonical_plan": "/root/mgs-agent/data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json",
+    "live_access_tier": "development_access",
+    "original_transport_calls_before_code17": 59,
+    "immediate_reduction": "12 individual video readiness GETs replaced by one bounded Graph batch poll; wrong retry removed; stage-level deferred resume active",
+    "next_engineering_step": "After C12 one-campaign canary, add BUC-aware batch POST boundaries and separate media staging from campaign-object writes",
+    "scale_gate": "Do not use 40-campaign API capacity as baseline until the friend's route/app tier is known and the MGS app has the applicable Standard/Advanced Marketing API access with Rodolfo approval"
   },
   "management_scope": {
     "read_scope": "entire_account",
@@ -697,7 +716,7 @@
   "daily_creation_preflight_20260820_17h": {
     "requested_by": "Rodolfo Mattei",
     "requested_start_sp": "2026-08-20T17:00:00-03:00",
-    "status": "first_write_cleaned_after_meta_code17; deterministic_retry_scheduled_after_65m_cooldown",
+    "status": "wrong C50/C49 retry removed; next mandatory C12; waiting only for second-slot decision and post-cooldown optimized preflight",
     "planned_budget_pool_usd": 60,
     "planned_default_campaigns": 2,
     "planned_budget_usd_each": 30,
