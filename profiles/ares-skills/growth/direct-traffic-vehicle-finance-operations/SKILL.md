@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.1
+version: 1.0.2
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -147,6 +147,19 @@ Programar a campanha para começar às `00:30` no timezone real da conta Meta. N
 ## Ciclo de três dias
 
 A contagem abaixo usa `D1` como o primeiro dia efetivo de entrega, iniciado às `00:30` no timezone da conta.
+
+### Janela de criação e aprovação
+
+Para campanhas novas, trabalhar no timezone da conta:
+
+```text
+18:00          iniciar criação/write e programar para o dia seguinte
+18:00–23:30    acompanhar revisão/aprovação da Meta e corrigir erros permitidos
+23:30          último readback de campanha, conjunto, anúncios, URLs e aprovação
+00:30          início programado da entrega no dia seguinte
+```
+
+Essa janela não autoriza campanha sem budget/pool/criativos elegíveis. Se algum anúncio continuar pendente ou rejeitado às 23:30, reportar na thread de Criação e não inventar aprovação; manter a programação ou alterar status somente conforme autorização vigente.
 
 ### Preparação — antes do D1
 
@@ -339,8 +352,11 @@ A cada três dias às 03:00 de São Paulo, criar snapshot local de continuidade 
 ```text
 Janela                 Ação
 ---------------------- ---------------------------------------------------
-Antes de 00:30          preparar e programar novas CBOs
-Por volta de 08:00      ler ROI SB, revisar spend e executar escala elegível
+Antes de 18:00          fechar pool de budget, referência e criativos elegíveis
+18:00                    criar/programar novas CBOs para 00:30 do dia seguinte
+18:00–23:30              acompanhar aprovação Meta e corrigir erros permitidos
+23:30                    readback final de aprovação/estrutura/URLs
+Por volta de 08:00       ler ROI SB, revisar spend e executar escala elegível
 Durante D1/D2           observar campanhas ruins; não cortar
 No D3                   decidir corte, manutenção ou escala pelo acumulado
 Após qualquer write     readback Meta + audit da decisão e da fonte de ROI
