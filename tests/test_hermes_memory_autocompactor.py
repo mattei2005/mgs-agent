@@ -79,6 +79,25 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(command[0], str(interpreter))
         self.assertEqual(environment["MGS_HERMES_RUNTIME_ROOT"], str(repo))
 
+    def test_llm_timeout_is_classified_without_leaking_output(self):
+        _launcher, repo, interpreter = self.make_launcher_fixture()
+
+        with mock.patch.object(
+            compactor.subprocess,
+            "run",
+            side_effect=subprocess.TimeoutExpired([str(interpreter)], 1),
+        ):
+            with self.assertRaises(compactor.CompactionError) as caught:
+                compactor._run_llm_subprocess(
+                    "private prompt",
+                    self.profile,
+                    hermes_repo=repo,
+                    hermes_python=interpreter,
+                    timeout_seconds=1,
+                )
+
+        self.assertEqual(caught.exception.code, "model_call_timeout")
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 

@@ -32,7 +32,7 @@ DEFAULT_HERMES_LAUNCHER = Path("/root/.local/bin/hermes")
 DEFAULT_BACKUP_ROOT = Path("/root/.hermes/secure-backups/memory-autocompaction")
 ENTRY_DELIMITER = "\n§\n"
 DEFAULT_TARGET_PERCENT = 85.0
-DEFAULT_TIMEOUT_SECONDS = 150
+DEFAULT_TIMEOUT_SECONDS = 300
 DEFAULT_PROPOSAL_ATTEMPTS = 2
 
 # Literals whose accidental change is especially dangerous in operational
@@ -206,7 +206,12 @@ def _proposal_prompt(
     attempt: int = 1,
 ) -> str:
     payload = [
-        {"index": index, "max_chars": budgets[index - 1], "text": entries[index - 1]}
+        {
+            "index": index,
+            "max_chars": budgets[index - 1],
+            "protected_literals": _protected_literals(entries[index - 1]),
+            "text": entries[index - 1],
+        }
         for index in selected_indexes
     ]
     retry = ""
@@ -265,15 +270,18 @@ def _run_llm_subprocess(
     env["HERMES_HOME"] = str(model_profile_root)
     env["MGS_HERMES_RUNTIME_ROOT"] = str(hermes_repo)
     command = [str(hermes_python), str(Path(__file__).resolve()), "--llm-once"]
-    completed = subprocess.run(
-        command,
-        input=prompt,
-        text=True,
-        capture_output=True,
-        timeout=timeout_seconds,
-        check=False,
-        env=env,
-    )
+    try:
+        completed = subprocess.run(
+            command,
+            input=prompt,
+            text=True,
+            capture_output=True,
+            timeout=timeout_seconds,
+            check=False,
+            env=env,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise CompactionError("model_call_timeout") from exc
     if completed.returncode != 0:
         raise CompactionError("model_call_failed")
     return _extract_json_object(completed.stdout)
@@ -553,9 +561,9 @@ def _run_toolless_llm_once(prompt: str) -> int:
         session_db=None,
         credential_pool=runtime.get("credential_pool"),
         fallback_model=get_fallback_chain(config) or None,
-        max_iterations=2,
-        max_tokens=2200,
-        reasoning_config={"effort": "medium"},
+        max_iterations=1,
+        max_tokens=6000,
+        reasoning_config={"effort": "low"},
         skip_context_files=True,
         load_soul_identity=False,
         skip_memory=True,
