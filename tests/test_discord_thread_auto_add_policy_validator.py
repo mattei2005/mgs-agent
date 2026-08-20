@@ -15,17 +15,17 @@ spec.loader.exec_module(validator)
 
 class DiscordThreadPolicyValidatorTests(unittest.TestCase):
     def test_systemctl_properties_are_order_independent(self):
-        text = "MainPID=658805\nActiveState=active\nSubState=running\n"
+        text = "MainPID=658805\nActiveState=active\nSubState=running\nActiveEnterTimestamp=Thu 2026-08-20 19:37:26 EDT\n"
         self.assertEqual(
             validator.parse_systemctl_properties(text),
-            {"MainPID": "658805", "ActiveState": "active", "SubState": "running"},
+            {"MainPID": "658805", "ActiveState": "active", "SubState": "running", "ActiveEnterTimestamp": "Thu 2026-08-20 19:37:26 EDT"},
         )
 
     def test_systemd_snapshot_accepts_main_pid_first(self):
         completed = subprocess.CompletedProcess(
             args=[],
             returncode=0,
-            stdout="MainPID=658805\nActiveState=active\nSubState=running\n",
+            stdout="MainPID=658805\nActiveState=active\nSubState=running\nActiveEnterTimestamp=Thu 2026-08-20 19:37:26 EDT\n",
             stderr="",
         )
         with mock.patch.object(validator.subprocess, "run", return_value=completed):

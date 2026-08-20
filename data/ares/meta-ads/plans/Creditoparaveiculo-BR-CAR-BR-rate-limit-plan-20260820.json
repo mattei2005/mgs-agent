@@ -23,6 +23,16 @@
       "campaign_adset_creative_ad_validate_and_create": 26,
       "first_final_readback_batch": 1
     },
+    "cumulative_postmortem_20260820": {
+      "daily_create_audits": 7,
+      "full_meta_reconciliations_repeated": 6,
+      "meta_video_subrequests": 1436,
+      "meta_ad_rows_scanned": 984,
+      "campaigns_created_then_cleaned": 5,
+      "ads_created_then_cleaned": 12,
+      "technical_video_ids_created_then_cleaned": 48,
+      "root_cause": "The campaign runner incorrectly embedded a full portfolio reconciliation and repeated it on dry-runs and retries. Batch transport reduced HTTP connections but Meta still counted the hundreds of logical subrequests against the development-access app/account window."
+    },
     "numbering_correction": {
       "next_required": 12,
       "strict_sequence": true,

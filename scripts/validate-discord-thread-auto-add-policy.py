@@ -69,6 +69,7 @@ def systemd_snapshot(profile: str) -> dict[str, str]:
             "--property=ActiveState",
             "--property=SubState",
             "--property=MainPID",
+            "--property=ActiveEnterTimestamp",
         ],
         text=True,
         capture_output=True,
@@ -86,18 +87,32 @@ def systemd_snapshot(profile: str) -> dict[str, str]:
     return {"service": service, "pid": pid, **values}
 
 
-def current_pid_connected(service: str, pid: str) -> bool:
-    completed = subprocess.run(
-        ["journalctl", f"_PID={pid}", "-u", service, "--no-pager", "-o", "cat"],
-        text=True,
-        capture_output=True,
-        check=False,
-        timeout=20,
-    )
-    if completed.returncode != 0:
+def current_pid_connected(profile_root: Path, active_enter_timestamp: str) -> bool:
+    """Require fresh Discord markers in gateway.log after this service start."""
+    parts = active_enter_timestamp.split()
+    if len(parts) < 3:
         return False
-    text = completed.stdout
-    return "Connected as" in text and ("discord connected" in text or "platform(s)" in text)
+    try:
+        started = datetime.strptime(" ".join(parts[1:3]), "%Y-%m-%d %H:%M:%S")
+        lines = (profile_root / "logs/gateway.log").read_text(
+            encoding="utf-8", errors="replace"
+        ).splitlines()
+    except (OSError, ValueError):
+        return False
+    connected = False
+    platform = False
+    for line in lines:
+        if len(line) < 19:
+            continue
+        try:
+            moment = datetime.strptime(line[:19], "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            continue
+        if moment < started:
+            continue
+        connected = connected or "Connected as" in line
+        platform = platform or "✓ discord connected" in line
+    return connected and platform
 
 
 def read_mapping(value: str, *, code: str) -> dict[str, list[str]]:
@@ -279,7 +294,7 @@ def validate_once(args: argparse.Namespace) -> dict[str, Any]:
     runtime_mapping = process_mapping(systemd["pid"])
     if runtime_mapping.get(args.channel_id) != expected:
         raise ValidationError("process_targets_mismatch", transient=True)
-    if not current_pid_connected(systemd["service"], systemd["pid"]):
+    if not current_pid_connected(profile_root, systemd.get("ActiveEnterTimestamp", "")):
         raise ValidationError("discord_connection_not_ready", transient=True)
 
     helper_users, helper_configured = runtime_helper_targets(runtime_mapping, args.channel_id)

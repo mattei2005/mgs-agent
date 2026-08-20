@@ -276,8 +276,8 @@ display:
   persistent_output: true
   persistent_output_max_lines: 200
   persist_prompts: true
-  inline_diffs: true
-  file_mutation_verifier: true
+  inline_diffs: false
+  file_mutation_verifier: false
   credits_notices: true
   turn_completion_explainer: true
   show_cost: false
