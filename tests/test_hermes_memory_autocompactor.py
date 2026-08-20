@@ -3,9 +3,11 @@ import importlib.util
 import json
 import math
 import stat
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "hermes-memory-autocompactor.py"
@@ -37,6 +39,45 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         path.write_text(text, encoding="utf-8")
         path.chmod(0o600)
         return path
+
+    def make_launcher_fixture(self):
+        repo = self.root / "active-runtime"
+        interpreter = repo / ".venv" / "bin" / "python"
+        interpreter.parent.mkdir(parents=True)
+        interpreter.write_text("fixture", encoding="utf-8")
+        interpreter.chmod(0o755)
+        (repo / "run_agent.py").write_text("# fixture\n", encoding="utf-8")
+        wrapper = self.root / "hermes-active"
+        wrapper.write_text(f"#!{interpreter}\n", encoding="utf-8")
+        launcher = self.root / "hermes"
+        launcher.symlink_to(wrapper)
+        return launcher, repo, interpreter
+
+    def test_active_runtime_is_resolved_from_canonical_launcher(self):
+        launcher, repo, interpreter = self.make_launcher_fixture()
+
+        resolved_repo, resolved_python = compactor._resolve_active_hermes_runtime(launcher)
+
+        self.assertEqual(resolved_repo, repo)
+        self.assertEqual(resolved_python, interpreter)
+
+    def test_llm_subprocess_uses_frozen_active_runtime(self):
+        _launcher, repo, interpreter = self.make_launcher_fixture()
+        completed = subprocess.CompletedProcess([], 0, stdout='{"valid":true}\n', stderr="")
+
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed) as run:
+            result = compactor._run_llm_subprocess(
+                "prompt",
+                self.profile,
+                hermes_repo=repo,
+                hermes_python=interpreter,
+            )
+
+        self.assertTrue(result["valid"])
+        command = run.call_args.args[0]
+        environment = run.call_args.kwargs["env"]
+        self.assertEqual(command[0], str(interpreter))
+        self.assertEqual(environment["MGS_HERMES_RUNTIME_ROOT"], str(repo))
 
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)

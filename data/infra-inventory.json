@@ -7580,15 +7580,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 97090,
-      "modified_at": "2026-08-20T15:38:12-04:00",
-      "sha256": "fac0f61266136db0e1b42f78f285fefc3161e3d1fdedfcb9b36b0cc21aee45f3",
-      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with Meta×SB reconciliation, controlled actions, four daily report windows, fixed Discord threads and daily continuity capture.",
-      "validation": "py_compile + bash -n PASS; 20 pytest tests PASS; live snapshot dry-run and real local write PASS with previous-day Meta campaigns/adsets/insights plus Smart Bidding acquisition/SMS rows; schedule gate 07:00 Daily + 11:00/14:00/20:00 Intraday; 08:00 action-only preserved.",
+      "size_bytes": 99248,
+      "modified_at": "2026-08-20T15:47:30-04:00",
+      "sha256": "3d867a15229b24570649a41f8d2167a003535a5bcc8bba2407f6d3851815b4b3",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with Meta×SB reconciliation, controlled actions, four Daily slots, continuous 2h Intraday and exact three-thread continuity archive.",
+      "validation": "py_compile PASS; 21 pytest tests PASS; real snapshot imported only creation/daily/intraday threads with 11/12/19 messages and SHA readback; Daily 07/11/14/20 previous closed day; Intraday restored to continuous odd-hour 2h; 08:00 action-only preserved.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "801a4c9e42280bdc993c68631f16a116c041951af4665025d4e1bd32806d516b",
+      "test_sha256": "c55d140dd22b2be938ee4e8e3a4d339d94006f633d1554571787fa0f694904e1",
       "git_tracked": false,
-      "updated_at": "2026-08-20T15:40:24-04:00"
+      "updated_at": "2026-08-20T15:48:51-04:00"
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",
@@ -8135,12 +8135,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 21154,
-      "modified_at": "2026-08-20T15:42:02-04:00",
-      "sha256": "d8617353222d6110daeacbb0394788b025ccc614df33cb23304bbeb69ebbc273",
+      "size_bytes": 21313,
+      "modified_at": "2026-08-20T15:48:28-04:00",
+      "sha256": "e6ddc2a98e6ea8e214f77f88deaaa6f02249e7629df238d97bed00c0a2984fb4",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T15:42:02-04:00",
-      "validation": "Skill v1.0.20 live/mirror SHA match. Agenda CPV vigente registrada como Diário 07:00 + Intraday 11:00/14:00/20:00; checkpoint 08:00 separado; snapshot diário 03:00 local e sem reset de sessão; agenda 2h superseded explicitamente."
+      "updated_at": "2026-08-20T15:48:28-04:00",
+      "validation": "Skill v1.0.21 live/mirror SHA match. Correção de Rodolfo: Diário 07/11/14/20; Intraday contínuo 2h inalterado; snapshot 03:00 restrito às três threads CPV; demais threads seguem Zeus."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

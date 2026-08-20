@@ -13,22 +13,22 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTING",
-      "next_step": "Operação recorrente normal; validar a próxima entrega aplicável no horário programado e consultar snapshots/JSON/thread import quando houver pedido histórico.",
+      "next_step": "Operação recorrente normal; manter Diário nos quatro slots, Intraday contínuo 2h e snapshot restrito às três threads.",
       "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável",
-      "source": "discord:thread:1539969033170980945; operation config v1.0.34; report runner live SHA fac0f612; cron readback enabled+scheduled",
-      "state": "rodolfo substituiu o intraday contínuo de 2h por quatro entregas totais diárias em são paulo: diário 07:00 do dia anterior fechado; intraday 11:00, 14:00 e 20:00 do dia corrente. checkpoint de ação 08:00 continua separado e sem relatório. snapshot das 03:00 agora é diário, local e sem reset de sessão; salva o dia anterior com campanhas, adsets, insights meta, linhas smart bidding aquisição/sms e políticas. threads discord e json de relatórios permanecem preservados.",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.35; direct-traffic-cbo-operations v1.0.21",
+      "state": "correção de rodolfo: somente o diário mudou para quatro envios do dia anterior fechado às 07:00, 11:00, 14:00 e 20:00 são paulo. o intraday não foi alterado e permanece contínuo a cada 2h nas horas ímpares 01/03/05/07/09/11/13/15/17/19/21/23, atravessando meia-noite. checkpoint de ação 08:00 separado. snapshot 03:00 diário e sem reset arquiva exclusivamente as threads 1539826050765299872, 1539831487719800872 e 1539832402744975450; demais threads seguem padrão zeus. snapshot real importou 11/12/19 mensagens respectivamente com readback local.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T19:41:19+00:00"
+      "updated_at": "2026-08-20T19:49:22+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Não executar a cadência antiga; consultar ARES-CREDITOPARAVEICULO-REPORTING.",
-      "objective": "Registro histórico da antiga cadência Intraday contínua",
-      "source": "discord:thread:1539969033170980945; superseded by operation config v1.0.34",
-      "state": "superseded em 20/08/2026 por decisão de rodolfo. a cadência contínua de 2h nas horas ímpares não está mais ativa. a regra vigente está no checkpoint ares-creditoparaveiculo-reporting e na operação v1.0.34: diário 07:00 + intraday 11:00/14:00/20:00 são paulo; snapshot diário 03:00.",
+      "next_step": "Manter cadência contínua 2h; checkpoint de ação 08:00 separado.",
+      "objective": "Operar Intraday seguro com cadência contínua e apresentação aprovadas por Rodolfo",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.35; cron readback enabled+scheduled",
+      "state": "ativo e reconfirmado: intraday contínuo a cada 2h nas horas ímpares de são paulo 01/03/05/07/09/11/13/15/17/19/21/23, atravessando meia-noite. a interpretação temporária v1.0.34 foi incorreta e está superseded; apenas o diário mudou.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T19:41:33+00:00"
+      "updated_at": "2026-08-20T19:49:22+00:00"
     },
     {
       "agent": "ares",
@@ -892,5 +892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T19:41:33+00:00"
+  "updated_at": "2026-08-20T19:49:22+00:00"
 }

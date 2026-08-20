@@ -345,20 +345,20 @@
       {
         "time": "11:00",
         "timezone": "America/Sao_Paulo",
-        "type": "intraday",
-        "period": "current day"
+        "type": "daily",
+        "period": "previous closed day"
       },
       {
         "time": "14:00",
         "timezone": "America/Sao_Paulo",
-        "type": "intraday",
-        "period": "current day"
+        "type": "daily",
+        "period": "previous closed day"
       },
       {
         "time": "20:00",
         "timezone": "America/Sao_Paulo",
-        "type": "intraday",
-        "period": "current day"
+        "type": "daily",
+        "period": "previous closed day"
       }
     ],
     "dispatch_count_per_day": 4
@@ -368,21 +368,36 @@
       "internal_job_id": "41712f74f949",
       "name": "Creditoparaveiculo 13 G006 Diario",
       "scheduler": "hourly minute 0",
-      "timezone_gate": "07:00 America/Sao_Paulo",
+      "timezone_gate": [
+        "07:00",
+        "11:00",
+        "14:00",
+        "20:00 America/Sao_Paulo"
+      ],
       "script": "creditoparaveiculo-daily.sh",
       "no_agent": true,
       "deliver": "local",
       "direct_thread_post": "1539831487719800872",
-      "enabled": true
+      "enabled": true,
+      "cadence": "four Daily reports per day; each references the previous closed day"
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
-      "name": "Creditoparaveiculo 13 G006 Intraday 11h 14h 20h",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
+        "01:00",
+        "03:00",
+        "05:00",
+        "07:00",
+        "09:00",
         "11:00",
-        "14:00",
-        "20:00 America/Sao_Paulo"
+        "13:00",
+        "15:00",
+        "17:00",
+        "19:00",
+        "21:00",
+        "23:00 America/Sao_Paulo"
       ],
       "action_only_checkpoint": "08:00 America/Sao_Paulo; preserve approved scale timing without publishing an extra report",
       "script": "creditoparaveiculo-intraday.sh",
@@ -390,7 +405,7 @@
       "deliver": "local",
       "direct_thread_post": "1539832402744975450",
       "enabled": true,
-      "cadence": "three intraday reports per day; total operation reports = four including 07:00 Daily"
+      "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight"
     },
     "snapshot": {
       "internal_job_id": "f45eed5047b9",
@@ -403,8 +418,19 @@
       "session_reset": false,
       "enabled": true,
       "cadence": "daily",
-      "coverage": "previous closed day Meta campaigns/adsets/insights + Smart Bidding acquisition/SMS rows + operation policies; local only",
-      "history_purpose": "future consultation independent of active thread context; reports and Discord threads remain preserved"
+      "coverage": "daily local archive of the three fixed CPV thread histories plus previous closed-day Meta/SB operational data",
+      "history_purpose": "future consultation independent of active thread context; reports and Discord threads remain preserved",
+      "thread_history_scope": [
+        "1539826050765299872",
+        "1539831487719800872",
+        "1539832402744975450"
+      ],
+      "thread_history_scope_keys": [
+        "creation",
+        "daily",
+        "intraday"
+      ],
+      "other_threads_policy": "untouched; follow the standard agreed with Zeus"
     }
   },
   "pending_configuration": [
@@ -413,7 +439,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T15:38:21-04:00",
+  "updated_at": "2026-08-20T15:45:00-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -655,7 +681,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.34",
+  "playbook_version": "1.0.35",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -775,7 +801,7 @@
         "purpose": "closed-day spend, acquisition revenue, SMS block, ROI acquisition/total, anomalies",
         "delivery": "recurring script-only report",
         "thread_id": "1539831487719800872",
-        "schedule": "07:00 America/Sao_Paulo",
+        "schedule": "07:00, 11:00, 14:00, 20:00 America/Sao_Paulo; previous closed day",
         "period": "previous closed day"
       },
       {
@@ -818,8 +844,15 @@
       "MGS knowledge checkpoint",
       "session_search"
     ],
-    "optional_three_day_job": "active: local continuity snapshot every ~3 days at 03:00 America/Sao_Paulo; no session reset",
-    "snapshot_job_active": true
+    "optional_three_day_job": "superseded; no longer active",
+    "snapshot_job_active": true,
+    "snapshot_schedule": "03:00 America/Sao_Paulo daily",
+    "snapshot_thread_scope": [
+      "1539826050765299872",
+      "1539831487719800872",
+      "1539832402744975450"
+    ],
+    "snapshot_scope_exclusion": "all other threads follow the standard agreed with Zeus"
   },
   "campaign_creation_window": {
     "timezone": "America/Sao_Paulo",
@@ -1400,6 +1433,14 @@
       "superseded_at": "2026-08-20T15:38:21-04:00",
       "superseded_by": "Daily 07:00 previous day + Intraday 11:00/14:00/20:00 current day",
       "authorized_by": "Rodolfo Mattei",
+      "source": "discord:thread:1539969033170980945"
+    },
+    {
+      "superseded_schedule": "Operation v1.0.34 incorrectly moved Intraday to 11:00/14:00/20:00 and treated 07:00 as the only Daily slot",
+      "superseded_at": "2026-08-20T15:45:00-04:00",
+      "superseded_by": "Daily 07:00/11:00/14:00/20:00 previous closed day; Intraday restored to continuous 2h odd hours",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Intraday was not to be changed; only Daily schedule changed",
       "source": "discord:thread:1539969033170980945"
     }
   ]

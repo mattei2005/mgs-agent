@@ -18,6 +18,7 @@ import json
 import math
 import os
 import re
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -27,8 +28,7 @@ from typing import Any, Callable, Dict, List, Sequence
 
 import yaml
 
-HERMES_REPO = Path("/root/.hermes/hermes-agent")
-HERMES_PYTHON = HERMES_REPO / "venv/bin/python"
+DEFAULT_HERMES_LAUNCHER = Path("/root/.local/bin/hermes")
 DEFAULT_BACKUP_ROOT = Path("/root/.hermes/secure-backups/memory-autocompaction")
 ENTRY_DELIMITER = "\n§\n"
 DEFAULT_TARGET_PERCENT = 85.0
@@ -50,6 +50,27 @@ class CompactionError(RuntimeError):
     def __init__(self, code: str, message: str = ""):
         super().__init__(message or code)
         self.code = code
+
+
+def _resolve_active_hermes_runtime(
+    launcher: Path = DEFAULT_HERMES_LAUNCHER,
+) -> tuple[Path, Path]:
+    """Resolve and freeze the active repo/interpreter from Hermes' launcher."""
+    try:
+        wrapper = launcher.resolve(strict=True)
+        first_line = wrapper.open("r", encoding="utf-8").readline().strip()
+        if not first_line.startswith("#!"):
+            raise ValueError("launcher_shebang_missing")
+        command = shlex.split(first_line[2:].strip())
+        if not command or command[0] == "/usr/bin/env":
+            raise ValueError("launcher_interpreter_ambiguous")
+        interpreter = Path(command[0])
+        repo = interpreter.parent.parent.parent
+        if not interpreter.is_file() or not (repo / "run_agent.py").is_file():
+            raise FileNotFoundError("active_runtime_incomplete")
+    except (OSError, ValueError) as exc:
+        raise CompactionError("active_runtime_unresolvable") from exc
+    return repo, interpreter
 
 
 def _sha256(text: str) -> str:
@@ -234,11 +255,16 @@ def _run_llm_subprocess(
     prompt: str,
     model_profile_root: Path,
     *,
+    hermes_repo: Path | None = None,
+    hermes_python: Path | None = None,
     timeout_seconds: int = DEFAULT_TIMEOUT_SECONDS,
 ) -> Dict[str, Any]:
+    if hermes_repo is None or hermes_python is None:
+        hermes_repo, hermes_python = _resolve_active_hermes_runtime()
     env = os.environ.copy()
     env["HERMES_HOME"] = str(model_profile_root)
-    command = [str(HERMES_PYTHON), str(Path(__file__).resolve()), "--llm-once"]
+    env["MGS_HERMES_RUNTIME_ROOT"] = str(hermes_repo)
+    command = [str(hermes_python), str(Path(__file__).resolve()), "--llm-once"]
     completed = subprocess.run(
         command,
         input=prompt,
@@ -439,9 +465,16 @@ def compact_store(
         candidate = unique_entries
         mode = "exact_dedup"
     else:
-        runner = llm_runner or (
-            lambda prompt: _run_llm_subprocess(prompt, model_profile_root)
-        )
+        if llm_runner is None:
+            hermes_repo, hermes_python = _resolve_active_hermes_runtime()
+            runner = lambda prompt: _run_llm_subprocess(
+                prompt,
+                model_profile_root,
+                hermes_repo=hermes_repo,
+                hermes_python=hermes_python,
+            )
+        else:
+            runner = llm_runner
         candidate = propose_and_verify(store, unique_entries, target_chars, runner)
         mode = "semantic_verified"
 
@@ -486,7 +519,17 @@ def compact_store(
 
 
 def _run_toolless_llm_once(prompt: str) -> int:
-    sys.path.insert(0, str(HERMES_REPO))
+    runtime_root = os.environ.get("MGS_HERMES_RUNTIME_ROOT")
+    if runtime_root:
+        hermes_repo = Path(runtime_root)
+        if not (hermes_repo / "run_agent.py").is_file():
+            return 3
+    else:
+        try:
+            hermes_repo, _ = _resolve_active_hermes_runtime()
+        except CompactionError:
+            return 3
+    sys.path.insert(0, str(hermes_repo))
     from hermes_cli.config import load_config  # type: ignore[import-not-found]
     from hermes_cli.fallback_config import get_fallback_chain  # type: ignore[import-not-found]
     from hermes_cli.runtime_provider import resolve_runtime_provider  # type: ignore[import-not-found]
