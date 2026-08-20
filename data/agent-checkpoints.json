@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Extrair da fonte/Ads Manager o payload dinâmico gravável completo com catalog_id/product_set_id e asset_feed_spec; remover somente standard_enhancements; validar um canário criativo+anúncio PAUSED com cleanup; só então retestar 1x1x3.",
+      "next_step": "Rafael/Rodolfo completa a autenticação pendente no Meta Ads Manager e confirma. Depois Ares retesta somente a etapa final: recriar os três criativos sanitizados já validados, aguardar propagação, validate-only dos três anúncios, write PAUSED e readback 1x1x3.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.17; data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/*rafael-20260820*.json",
-      "state": "token rafael lucas oliveira validado: conta ativa, scopes completos e página garagem brasil presente com advertise; bloqueio code10/1341012 resolvido. full 1x1x3 ainda não validado: native ad copy falhou 3858504 por standard_enhancements legado; referência direta a creative_id foi parcial/inconsistente; rebuild por effective_object_story_id falhou 1815017 por product_set_id ausente. quatro campanhas técnicas reconciliadas deleted, gasto usd0, zero artefato ativo e zero criativo de teste criado.",
+      "source": "discord:thread:1539434208408375426; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.18; data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json",
+      "state": "token rafael validado para conta e página garagem brasil/advertise. rebuild dinâmico sanitizado validado 3/3: standard_enhancements removido, copy/utm/textos exatos e vídeos conciliados por título, duração, dimensão e frame pixel-idêntico; um anúncio paused foi criado e lido com sucesso. o 1x1x3 final parou antes dos três ad writes por checkpoint de segurança meta code31/subcode3858385 autentique sua conta. nenhum retry permitido. nove campanhas técnicas estão deleted, gasto usd0, zero campanha ativa/pausada, 0 criativos no edge da conta e 0 vídeos no edge da página; nove ids de vídeo permanecem somente como soft/internal direct-readable pelo token anunciante.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T13:05:01+00:00"
+      "updated_at": "2026-08-20T13:32:59+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:26:25+00:00"
+  "updated_at": "2026-08-20T13:32:59+00:00"
 }
