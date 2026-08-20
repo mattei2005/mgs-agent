@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rodolfo confirmar se o custo 0.08 é BRL ou USD. Aguardar one-shot 00:30 e readback; depois monitorar D1.",
+      "next_step": "Criar as três threads fixas manualmente no Discord e informar seus IDs/cadências; depois Ares cria os crons de Diário e Intraday. Criação recebe logs por evento, não cron vazio. Não usar /renew; compressão automática atual preserva continuidade.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "campanhas 07/08/09/10/11 renomeadas com 20-08, budgets usd30 e status paused confirmados. one-shot 00:30 agora exige prefixo de nome 20-08 e passou py_compile/dry-run com total usd150. tags lc/roas/broad omitidas nesta reativação porque estratégia/público são iguais. custo sms informado como 0.08, aguardando confirmação da moeda antes do roi após custo. creative filename permanece estável; uso por conta/campanha fica no inventário.",
+      "state": "playbook de tráfego direto finalizado em v1.0.0. custo real sms fixado em r$0,08 por sms efetivamente enviado; contagem vem do sms funnel/vendor e custo é convertido brl→usd com taxa/data/fonte para roi líquido. wp linhas×r$0,08 permanece estimativa separada. campanhas 07-11 seguem paused, usd30, nomes 20-08 e reativação 00:30 agendada.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-19T23:00:26+00:00"
+      "updated_at": "2026-08-20T02:21:42+00:00"
     },
     {
       "agent": "ares",
@@ -862,5 +862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T00:54:21+00:00"
+  "updated_at": "2026-08-20T02:21:42+00:00"
 }

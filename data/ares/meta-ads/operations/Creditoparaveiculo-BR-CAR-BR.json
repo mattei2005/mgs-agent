@@ -132,7 +132,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T18:58:52-04:00",
+  "updated_at": "2026-08-19T19:20:00-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -256,10 +256,15 @@
     },
     "sms_unit_cost": {
       "amount": 0.08,
-      "currency": "pending_confirmation",
-      "source": "Rodolfo Mattei message",
-      "calculation": "sent_sms_count * 0.08",
-      "block_roi_after_cost_until_currency_confirmed": true
+      "currency": "BRL",
+      "basis": "per SMS effectively sent",
+      "source": "Rodolfo Mattei + canonical site rule",
+      "sent_count_source": "SMS Funnel/vendor total_sms_sent",
+      "wp_estimate_separate": true,
+      "wp_estimate_definition": "filtered WP rows × R$0.08; not vendor actual",
+      "currency_conversion": "BRL cost / confirmed USD_BRL rate with date/source",
+      "roi_after_cost_formula": "(acquisition_net_revenue_usd + sms_net_revenue_usd - meta_spend_usd - sms_cost_usd) / meta_spend_usd * 100",
+      "missing_sent_count_policy": "show ROI Total with SMS — before SMS cost; not net profit"
     }
   },
   "reference_inheritance_policy": {
@@ -345,7 +350,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "0.3.1",
+  "playbook_version": "1.0.0",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -446,5 +451,60 @@
       "credentials",
       "other accounts/operations"
     ]
+  },
+  "discord_operational_structure": {
+    "status": "approved_structure_pending_thread_ids_and_cadence",
+    "parent_channel": "ares-creditoparaveiculo-br-car-br",
+    "parent_channel_id": "1539432300364824607",
+    "fixed_threads": [
+      {
+        "key": "creation",
+        "title": "Criação de Campanhas — Conta 13",
+        "purpose": "requests, dry-runs, writes, IDs and readbacks",
+        "delivery": "event-driven on campaign action; no empty recurring cron",
+        "thread_id": null
+      },
+      {
+        "key": "daily",
+        "title": "Diário Consolidado — Conta 13",
+        "purpose": "closed-day spend, acquisition revenue, SMS block, ROI acquisition/total, anomalies",
+        "delivery": "recurring script-only report",
+        "thread_id": null,
+        "proposed_schedule": "03:05 America/Sao_Paulo"
+      },
+      {
+        "key": "intraday",
+        "title": "Intraday — Conta 13",
+        "purpose": "campaign status, spend pacing, Meta ROAS, SB actual/estimated ROI, confidence/delay, anomaly gate and recommendation",
+        "delivery": "recurring script-only report",
+        "thread_id": null,
+        "schedule": "pending Rodolfo cadence"
+      }
+    ],
+    "excluded_threads": [
+      "HOA por conta",
+      "criativos/testes"
+    ],
+    "creative_updates": "stay in creation/intraday context and canonical inventory; no separate fixed thread",
+    "cron_delivery_policy": "script-only direct post into existing thread; stdout empty; no Cronjob Response wrapper; chunk <=1900 chars"
+  },
+  "session_continuity_policy": {
+    "native_renew_command_exists": false,
+    "native_commands": [
+      "/compress",
+      "/new",
+      "/reset"
+    ],
+    "forced_three_day_reset": false,
+    "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
+    "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
+    "durable_context": [
+      "skill v1.0.0",
+      "operation config",
+      "audit/reports",
+      "MGS knowledge checkpoint",
+      "session_search"
+    ],
+    "optional_three_day_job": "local continuity snapshot/checkpoint at 03:00; no session reset; pending approval and timezone/cadence"
   }
 }
