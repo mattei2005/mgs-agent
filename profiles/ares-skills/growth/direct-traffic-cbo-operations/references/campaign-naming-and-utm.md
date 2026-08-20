@@ -63,12 +63,13 @@ Exemplo: `b01fb01c01g01`.
 
 ## Unicidade e reciclagem dos slots 01–60
 
-1. `utm_campaign` e `utm_adgroup` são chaves de linhagem da Smart Bidding e não podem ser reutilizadas por outra campanha, mesmo depois de a campanha Meta antiga ficar `PAUSED` ou `DELETED`.
-2. Os números visuais/operacionais da campanha permanecem limitados a `01–60`; reciclar o slot exige uma nova chave de geração dentro das UTMs.
-3. Deletar a campanha Meta antiga não garante apagar receita, conversões ou histórico já registrados pela Smart Bidding sob a UTM anterior.
-4. O formato da geração ainda depende de aprovação de Rodolfo e validação do parser/relatórios SB. Exemplo apenas candidato, não ativo: slot 15, geração 2 → `utm_campaign=b01fb13c15r02` e `utm_adgroup=b01fb13c15r02g01`.
-5. Até a aprovação do formato, qualquer tentativa de criar campanha com par UTM já utilizado falha fechada.
-6. Depois da aprovação, a ordem segura é: confirmar ciclo terminal após D3/reconciliação → criar nova geração `PAUSED` e validar → deletar a campanha terminal antiga → ativar a nova somente após revisão.
+1. Os números visuais e operacionais da campanha são limitados a `01–60`.
+2. O wrapper é imutável: `utm_campaign=bNNfbNNcNN` e `utm_adgroup=bNNfbNNcNNgNN`. Não adicionar `rNN`, data, versão ou outro sufixo.
+3. Não pode haver duas campanhas não deletadas com o mesmo par `utm_campaign`/`utm_adgroup` no estado final.
+4. Segundo Ciro, desenvolvedor da Smart Bidding, deletar a campanha antiga é suficiente para que a UTM canônica do slot possa ser reutilizada.
+5. Rollover seguro: confirmar antiga `PAUSED` e terminal após D3/reconciliação → criar substituta `PAUSED` e validar → deletar antiga → readback operador `DELETED` → ativar substituta após revisão.
+6. Campanha antiga `ACTIVE`, em hold, sem D3 fechado ou com reconciliação pendente bloqueia o rollover.
+7. `ARCHIVED` cru no Graph equivale a `DELETED` no Ads Manager desta operação e não bloqueia a reutilização do slot.
 
 ## Estrutura padrão da campanha
 

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.15
+version: 1.0.16
 author: Ares
 license: internal
 metadata:
@@ -81,6 +81,26 @@ Adset      | 1          | código `gNN` dentro da campanha
 Anúncios   | 3          | imagem, vídeo ou mix permitido
 ```
 
+### 2.1 Tipos de estratégia de lance
+
+```text
+Tipo operacional          | UI Meta                        | Campaign API              | Adset API
+--------------------------|--------------------------------|---------------------------|-----------------------------
+Meta de custo por resultado| Meta de custo por resultado   | COST_CAP                  | bid_amount obrigatório
+Valor/volume mais alto     | Valor ou volume mais alto     | LOWEST_COST_WITHOUT_CAP   | omitir bid_amount
+```
+
+**Meta de custo por resultado:** define uma meta de CPA/custo médio por resultado. Não é um teto rígido por conversão: a própria Meta informa que alguns resultados podem custar mais e outros menos. Um alvo excessivamente baixo pode restringir fortemente a entrega e o gasto. Referência CPV: C07 com `bid_amount=50` em USD.
+
+**Valor ou volume mais alto:** não configura meta de CPA no conjunto; a Meta busca maximizar conversões/volume dentro do orçamento, com mais latitude de entrega e aprendizado. Referência CPV: C08 com `LOWEST_COST_WITHOUT_CAP` e sem `bid_amount`.
+
+Regras:
+
+1. Campanha criada do zero exige o tipo explicitamente informado pelo solicitante; se faltar, perguntar antes do write.
+2. Clone herda exatamente `bid_strategy` e presença/valor de `bid_amount` da campanha/adset fonte.
+3. Não usar “com bid/sem bid” como única classificação técnica: todo leilão possui lances; a diferença é meta de custo configurada versus maximização sem meta de CPA.
+4. Nomenclatura definitiva para nomes e relatórios depende de aprovação de Rodolfo. Candidato atual: `COSTCAP-0.50` versus `MAXVOL`; coluna de relatório `Lance` com `CAP 0,50` versus `MAXVOL`.
+
 Evento de conversão obrigatório no **adset/conjunto**, independentemente de haver captura:
 
 ```text
@@ -157,6 +177,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Relatórios recorrentes em thread fixa usam chave idempotente por dia/checkpoint e readback Discord por GET, validando thread, mensagem e conteúdo. Tabela cercada que ultrapassar o chunk seguro deve falhar fechada em vez de publicar bloco quebrado.
 - Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
+- Na rotina diária CPV, reservar 20% do cap USD300 para campanhas novas: pool padrão USD60, normalmente 2 campanhas de USD30. Criar entre 18:00–23:30 São Paulo e programar início para 00:30 do dia seguinte. Antes do write, validar espaço real no cap; campanha do zero exige estratégia explícita e clone herda a fonte. Testes de capacidade pedidos como desativados não são produção diária e permanecem PAUSED sem agendamento até aprovação.
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 - Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.
 - Emoji fica no início da coluna `Sinal`; o renderer deve calcular largura visual Unicode, não `len()`, e toda linha do resumo recebe sinal explícito para evitar recuo variável. `ID REC` permanece apenas no audit quando a operação o removeu da apresentação.
@@ -197,7 +218,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 22. **Rejeitar cópia HTTP 200 sem `success`/`id` mesmo quando há ID específico.** `/copies` pode retornar somente `copied_campaign_id` ou `copied_adset_id` (e `ad_object_ids`). Aceitar apenas essas chaves reconhecidas, persistir o ID imediatamente e fazer GET antes de qualquer nova tentativa; nunca repetir a cópia só porque `success` não veio.
 23. **Tratar `PENDING_REVIEW` como anúncio desligado por herança sem conferir configuração.** O gate correto para campanha de revisão é: campanha `configured_status=PAUSED`; adset/anúncio `configured_status=ACTIVE`; effective do filho pode estar `CAMPAIGN_PAUSED`, `PENDING_REVIEW`, `IN_PROCESS` ou `WITH_ISSUES` durante materialização/revisão. O pai PAUSED continua sendo o bloqueio de entrega.
 24. **Tratar `ARCHIVED` como campanha ainda arquivada.** Em Creditoparaveiculo, `ARCHIVED` no Graph representa campanha `DELETED` no Ads Manager. Relatórios e respostas humanas usam `DELETED`; `ARCHIVED` fica apenas como `api_raw_status` no audit. Não contar esses objetos como campanhas vivas, pausadas ou reutilizáveis sem nova criação.
-25. **Reutilizar a UTM ao reciclar um número de campanha.** Os slots Meta são `01–60`, mas `utm_campaign` e `utm_adgroup` precisam ser únicos por linhagem na Smart Bidding. Deletar a campanha antiga não torna a chave histórica reutilizável. Até Rodolfo aprovar o formato de geração e a compatibilidade do parser SB, falhar fechado ao tentar reciclar slot já usado. Depois da aprovação: fechar D3/reconciliação → criar nova geração PAUSED → readback → deletar campanha terminal antiga → ativar somente após revisão.
+25. **Adicionar geração/sufixo fora do wrapper para reciclar número.** O wrapper UTM é imutável (`bNNfbNNcNN` / `...gNN`); `rNN` ou equivalente é proibido. Segundo Ciro, dev da SB, deletar a campanha antiga basta para reutilizar a UTM canônica. O estado final nunca pode manter duas campanhas não deletadas com a mesma UTM. Fluxo: confirmar antiga PAUSED e terminal → criar substituta PAUSED e validar → deletar antiga e confirmar `DELETED` → ativar substituta após revisão. Campanha antiga ACTIVE bloqueia o rollover.
 
 ## Verification checklist
 

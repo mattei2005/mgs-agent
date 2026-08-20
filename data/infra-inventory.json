@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T14:35:43-04:00",
+    "updated_at": "2026-08-20T14:55:47-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7552,14 +7552,14 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create50-clone07-to12.py",
-      "size_bytes": 34152,
-      "modified_at": "2026-08-20T14:35:43-04:00",
-      "sha256": "64a733a6f95c24e0f5b62fdbe76d17aa090e9c4b5928261b8e82980db6308fc4",
+      "size_bytes": 34401,
+      "modified_at": "2026-08-20T14:52:00-04:00",
+      "sha256": "6dcd75f7df1eb85993d2d8ae911a18d69b92ad5c33371fb279d5471935a00d33",
       "purpose": "Create CPV C50 from zero and clone C07 to C12 with PAUSED campaign control, active children, sanitized C07 creative lineage, target UTMs and full audit/readback.",
       "graph_version": "v26.0",
-      "validation": "py_compile and offline dry-run passed. Runner now fails closed if slot 01-60 has prior lineage until a unique UTM generation format is approved by Rodolfo and validated in the SB parser; raw ARCHIVED remains operator DELETED.",
+      "validation": "py_compile and offline dry-run passed after Ciro/SB correction. Wrapper is immutable; raw ARCHIVED/operator DELETED does not block slot reuse; ACTIVE/PAUSED predecessor blocks this one-off runner until an authorized rollover deletes it.",
       "git_tracked": false,
-      "updated_at": "2026-08-20T14:35:43-04:00"
+      "updated_at": "2026-08-20T14:55:47-04:00"
     },
     {
       "id": "ares-creditoparaveiculo-resume-create50-clone12",
