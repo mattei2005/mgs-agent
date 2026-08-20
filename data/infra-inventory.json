@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T10:34:21.842508-04:00",
+    "updated_at": "2026-08-20T11:12:44.012034-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7587,7 +7587,7 @@
         "canary": "finanzas.openzed.com",
         "temporary_plugin": "wp-file-manager/file_folder_manager",
         "temporary_plugin_cleanup": "4/4 absent by authenticated REST readback",
-        "wp_2fa": "inactive on 4 AWS sites by Rodolfo action; state preserved"
+        "wp_2fa": "restored active on 4/4 AWS sites by explicit Rodolfo request"
       },
       "backups": {
         "local": "/root/.hermes/secure-backups/ads-txt-20260820T140240Z",
@@ -7612,7 +7612,7 @@
         }
       },
       "status": "deployed_validated",
-      "updated_at": "2026-08-20T10:34:21.842508-04:00",
+      "updated_at": "2026-08-20T11:12:44.012034-04:00",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1540005919197499433",
@@ -7620,6 +7620,22 @@
         "content_empty": true,
         "mentions": [],
         "readback": "ok"
+      },
+      "wp2fa_restoration": {
+        "requested_by": "Rodolfo Mattei",
+        "request_message_id": "1540015488820707348",
+        "sites": [
+          "finanzas.openzed.com",
+          "finanzas.cliquet.com",
+          "openzed.com",
+          "cliquet.com"
+        ],
+        "precheck": "inactive 4/4",
+        "activation_http": "200 4/4",
+        "readback": "active 4/4",
+        "file_manager": "absent 4/4",
+        "ads_txt": "HTTP 200 and exact single line 4/4",
+        "updated_at": "2026-08-20T11:12:44.012034-04:00"
       }
     }
   ],
