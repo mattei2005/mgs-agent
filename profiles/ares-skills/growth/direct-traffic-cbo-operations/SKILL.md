@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.10
+version: 1.0.12
 author: Ares
 license: internal
 metadata:
@@ -192,6 +192,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 17. **Limpar criativo antes do anúncio/campanha.** A ordem segura é anúncios → campanha/adset → criativos → assets técnicos. Remover o criativo primeiro pode bloquear o cleanup da campanha com `2446289` (`Ad Creative Is Incomplete`).
 18. **Ignorar tier e role do app.** Header `ads_api_access_tier=development_access` indica tier limitado/desenvolvimento. Conferir no App Dashboard o Marketing API Access Tier, acesso de `ads_management` e se o usuário anunciante é Admin/Developer/Tester. Limited serve a pilotos por app roles; produção com usuários externos exige o acesso/review aplicável.
 19. **Tratar System User como única arquitetura.** Facebook Login for Business suporta User Access Token que herda os assets atuais do usuário, sem mover todas as Pages para uma única BM. System User/BISU exige assets owned/shared ou explicitamente designados em business portfolios e pode ser inviável em alto volume; escolher arquitetura com Rodolfo.
+20. **Trocar de token/app sem readback durante o cleanup.** Se anúncios falharem com `2446289` antes de a campanha ficar `DELETED`, fazer GET e, depois da exclusão confirmada da campanha, repetir uma única vez com a credencial de cleanup já autorizada: anúncios → readback `DELETED` → criativos. Para vídeos técnicos da Página, se User Token retornar `code=10/subcode=1363055`, resolver internamente o Page Access Token via `/me/accounts` e excluir somente os IDs técnicos allowlisted; nunca registrar o token. Concluir apenas quando anúncios/criativos estiverem `DELETED`, os vídeos retornarem `100/33` ou sumirem do edge da Página e o gasto permanecer zero.
 
 ## Verification checklist
 

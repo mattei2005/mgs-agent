@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "No nível de anúncio, editar ou criar um único draft PAUSED isolado, publicar somente esse item e procurar Start Authentication no topo direito; concluir código. Depois Ares repete validate-only v26. Se não houver prompt, abrir bug/support com as três threads, issue #722 e JSON sanitizado. Em paralelo conferir Marketing API Access Tier e Rafael como App Admin/Developer/Tester.",
+      "next_step": "Nenhum blocker de capacidade de criação. Em criação futura, aplicar escopo/autorização da operação, preflight, sanitização, propagação, validate-only, write PAUSED e readback. Cleanup: credencial autorizada para ads/criativos; Page Access Token interno para vídeos técnicos allowlisted quando User Token retornar code10/sub1363055.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; /root/mgs-agent/work/meta-code31-research/report.md; Meta threads 845129991936233, 1820634641959662, 1621056952512571; bug 3397941523702775; github facebook-python-business-sdk#722; operation v1.0.23",
-      "state": "pesquisa profunda concluída. rodolfo estava correto: localização da vps não é causa primária; a meta documenta tokens como portáveis entre navegador e servidor. há três threads meta community e o issue facebook-python-business-sdk#722 reproduzindo code31/sub3858385 com ads manager manual funcional, campanha/adset podendo passar e somente ads falhando; bug report comum 3397941523702775, status público ainda unresolved. o fluxo mais repetidamente resolvido é editar/criar um anúncio manual, publicar somente ele e usar verifying your changes → start authentication para receber código por email/sms. se o prompt não aparecer, tratar como variante api-only e escalar. app minibot rod está em development_access e precisa auditoria de tier/roles.",
+      "source": "discord:thread:1539434208408375426; audit post-auth-full-1x1x3-v26-rafael-20260820T173600Z.json; operation Creditoparaveiculo-BR-CAR-BR v1.0.25; direct-traffic-cbo-operations v1.0.12",
+      "state": "concluído após confirmação por email no ads manager. o mesmo token passou graph v26 validate-only. controlled-write temporário validou campanha paused, 1 adset paused, 3 anúncios paused, budget usd30, brazil_regulation e linhagem sanitizada dos 3 criativos. cleanup final por readback: campanha/adset/3 anúncios/3 criativos deleted; 6/6 vídeos técnicos excluídos com page access token resolvido internamente; gasto usd0; nenhum id ativo.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T16:53:07+00:00"
+      "updated_at": "2026-08-20T17:42:56+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T16:53:07+00:00"
+  "updated_at": "2026-08-20T17:42:56+00:00"
 }

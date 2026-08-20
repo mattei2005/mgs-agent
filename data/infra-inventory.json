@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T13:01:02-04:00",
+    "updated_at": "2026-08-20T13:42:44.264624-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8092,12 +8092,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 15226,
-      "modified_at": "2026-08-20T12:49:14-04:00",
-      "sha256": "7bd085a135d5fe4fa33bf5326beb20e21b82b610415016b12c24867d7c1d2aef",
+      "size_bytes": 15902,
+      "modified_at": "2026-08-20T13:42:14.937385-04:00",
+      "sha256": "38be68fab495724fe802ba262ee6622e919368ce99f266d46ee15ec82d802e67",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T12:53:17-04:00",
-      "validation": "Skill v1.0.10 live/mirror SHA match. Grounded correction: tokens are portable; 3858385 is an advertiser-auth checkpoint whose UI may appear only after ad edit/publish. Added API-only bug escalation, app tier/role audit and User Token alternative to System User."
+      "updated_at": "2026-08-20T13:42:44.264624-04:00",
+      "validation": "Skill v1.0.12 live/mirror SHA match. Retry ads/creatives with the already authorized cleanup credential after campaign DELETED; use internally resolved Page Access Token only for allowlisted technical videos after User Token code10/sub1363055. Require deleted/readback, direct video 100/33 or page-edge absence, and zero spend."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
