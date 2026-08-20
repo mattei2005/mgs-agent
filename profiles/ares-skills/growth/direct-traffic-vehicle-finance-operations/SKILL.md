@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.0
+version: 1.0.1
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -317,6 +317,22 @@ Quando selecionado, o asset canônico avança de `01_READY` para `02_TESTING`; c
 O ângulo vem do nome canônico/inventário (`SEM_ENTRADA`, `SUPER_OFERTA`, etc.) e entra no nome do anúncio pelo filename. Ares pode agregar spend e Purchase ROAS em nível de anúncio/ângulo na Meta e confrontar com o ROI SB da campanha. No endpoint AdGroup atual, `AD_NAME` veio vazio em todas as linhas; portanto, ROI SB por anúncio/ângulo ainda não é atribuível de forma honesta. Uma futura chave ad-level (`utm_content` ou AD_NAME ingerido pela SB) só entra após validação do backend.
 
 Conclusão: os três anúncios têm assets distintos ou variações explicitamente aprovadas, rastreáveis, sanitizadas e reservadas para a campanha correta.
+
+## Relatórios Discord e continuidade
+
+Para tráfego direto desta operação, usar três threads fixas por conta:
+
+```text
+Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e readback
+Diário Consolidado     07:00 São Paulo, referente ao dia anterior fechado
+Intraday               08:00, 12:00, 15:00, 20:00 e 23:00 São Paulo
+```
+
+Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
+
+Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
+
+A cada três dias às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 
 ## Rotina diária do gestor
 

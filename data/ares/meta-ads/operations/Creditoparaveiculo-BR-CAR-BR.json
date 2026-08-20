@@ -54,7 +54,7 @@
         "budget_increase_pct": 10.0
       }
     ],
-    "no_scale_roi_lte": 30.0,
+    "no_scale_roi_lte": 20.0,
     "scale_checkpoint": "around_08:00_account_timezone",
     "decision_source": "Smart Bidding AdGroup USD NET_REVENUE revshare enabled",
     "meta_roas_role": "signal_only",
@@ -124,7 +124,47 @@
     "manual_holds": [],
     "controlled_write_one_shot": "reactivate campaigns 07,08,09,10,11 at 00:30; Rodolfo authorized; general write_enabled remains false"
   },
-  "scheduler_jobs": {},
+  "scheduler_jobs": {
+    "daily": {
+      "internal_job_id": "41712f74f949",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "scheduler": "hourly minute 0",
+      "timezone_gate": "07:00 America/Sao_Paulo",
+      "script": "creditoparaveiculo-daily.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539831487719800872",
+      "enabled": true
+    },
+    "intraday": {
+      "internal_job_id": "69dfca2b9719",
+      "name": "Creditoparaveiculo 13 G006 Intraday",
+      "scheduler": "hourly minute 0",
+      "timezone_gate": [
+        "08:00",
+        "12:00",
+        "15:00",
+        "20:00",
+        "23:00 America/Sao_Paulo"
+      ],
+      "script": "creditoparaveiculo-intraday.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539832402744975450",
+      "enabled": true
+    },
+    "snapshot": {
+      "internal_job_id": "f45eed5047b9",
+      "name": "Creditoparaveiculo 13 G006 Snapshot",
+      "scheduler": "hourly minute 0",
+      "timezone_gate": "03:00 America/Sao_Paulo every ~72h",
+      "script": "creditoparaveiculo-snapshot.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "session_reset": false,
+      "enabled": true
+    }
+  },
   "pending_configuration": [
     "select_reference_campaign",
     "readback_exact_pixel_page_instagram_url_placements_attribution",
@@ -132,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-19T19:20:00-04:00",
+  "updated_at": "2026-08-20T00:16:00-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -350,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.0",
+  "playbook_version": "1.0.1",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -453,32 +493,33 @@
     ]
   },
   "discord_operational_structure": {
-    "status": "approved_structure_pending_thread_ids_and_cadence",
+    "status": "active_validated_http_200_post_readback",
     "parent_channel": "ares-creditoparaveiculo-br-car-br",
     "parent_channel_id": "1539432300364824607",
     "fixed_threads": [
       {
         "key": "creation",
-        "title": "Criação de Campanhas — Conta 13",
+        "title": "Creditoparaveiculo 13 G006 Criar Campanhas",
         "purpose": "requests, dry-runs, writes, IDs and readbacks",
         "delivery": "event-driven on campaign action; no empty recurring cron",
-        "thread_id": null
+        "thread_id": "1539826050765299872"
       },
       {
         "key": "daily",
-        "title": "Diário Consolidado — Conta 13",
+        "title": "Creditoparaveiculo 13 G006 Diario",
         "purpose": "closed-day spend, acquisition revenue, SMS block, ROI acquisition/total, anomalies",
         "delivery": "recurring script-only report",
-        "thread_id": null,
-        "proposed_schedule": "03:05 America/Sao_Paulo"
+        "thread_id": "1539831487719800872",
+        "schedule": "07:00 America/Sao_Paulo",
+        "period": "previous closed day"
       },
       {
         "key": "intraday",
-        "title": "Intraday — Conta 13",
+        "title": "Creditoparaveiculo 13 G006 Intraday",
         "purpose": "campaign status, spend pacing, Meta ROAS, SB actual/estimated ROI, confidence/delay, anomaly gate and recommendation",
         "delivery": "recurring script-only report",
-        "thread_id": null,
-        "schedule": "pending Rodolfo cadence"
+        "thread_id": "1539832402744975450",
+        "schedule": "08:00,12:00,15:00,20:00,23:00 America/Sao_Paulo"
       }
     ],
     "excluded_threads": [
@@ -486,7 +527,13 @@
       "criativos/testes"
     ],
     "creative_updates": "stay in creation/intraday context and canonical inventory; no separate fixed thread",
-    "cron_delivery_policy": "script-only direct post into existing thread; stdout empty; no Cronjob Response wrapper; chunk <=1900 chars"
+    "cron_delivery_policy": "script-only direct post into existing thread; stdout empty; no Cronjob Response wrapper; chunk <=1900 chars",
+    "setup_message_readback": {
+      "creation": "1539835611525939200",
+      "daily": "1539835613916696586",
+      "intraday": "1539835615393091644",
+      "content_match_all": true
+    }
   },
   "session_continuity_policy": {
     "native_renew_command_exists": false,
@@ -505,6 +552,7 @@
       "MGS knowledge checkpoint",
       "session_search"
     ],
-    "optional_three_day_job": "local continuity snapshot/checkpoint at 03:00; no session reset; pending approval and timezone/cadence"
+    "optional_three_day_job": "active: local continuity snapshot every ~3 days at 03:00 America/Sao_Paulo; no session reset",
+    "snapshot_job_active": true
   }
 }

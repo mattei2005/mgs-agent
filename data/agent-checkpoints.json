@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Criar as três threads fixas manualmente no Discord e informar seus IDs/cadências; depois Ares cria os crons de Diário e Intraday. Criação recebe logs por evento, não cron vazio. Não usar /renew; compressão automática atual preserva continuidade.",
+      "next_step": "Aguardar reativação 00:30 e primeiro Intraday 08:00. Diário começa 07:00 pelo dia anterior. Snapshot inicial roda 03:00 e depois a cada ~72h. Criação recebe registros por evento.",
       "objective": "Implantar gestão integral de tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "playbook de tráfego direto finalizado em v1.0.0. custo real sms fixado em r$0,08 por sms efetivamente enviado; contagem vem do sms funnel/vendor e custo é convertido brl→usd com taxa/data/fonte para roi líquido. wp linhas×r$0,08 permanece estimativa separada. campanhas 07-11 seguem paused, usd30, nomes 20-08 e reativação 00:30 agendada.",
+      "state": "playbook v1.0.1 e estrutura discord ativos. threads fixas validadas: criação 1539826050765299872 (event-driven), diário 1539831487719800872 às 07:00 sp referente ao dia anterior, intraday 1539832402744975450 às 08/12/15/20/23 sp. três crons script-only/no-agent ativos com timezone gate: diário, intraday e snapshot local a cada ~3 dias às 03:00 sem reset. dry-runs meta/sb reais passaram; posts de setup e readback 3/3 passaram.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T02:21:42+00:00"
+      "updated_at": "2026-08-20T03:18:00+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T02:26:43+00:00"
+  "updated_at": "2026-08-20T03:18:00+00:00"
 }
