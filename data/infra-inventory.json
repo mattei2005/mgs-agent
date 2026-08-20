@@ -7576,6 +7576,21 @@
       "updated_at": "2026-08-20T14:13:18-04:00"
     },
     {
+      "id": "ares-creditoparaveiculo-fixed-reports",
+      "agent": "ares",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+      "size_bytes": 96235,
+      "modified_at": "2026-08-20T15:17:33-04:00",
+      "sha256": "a5a7dfc938c6146ed3a3dfffb6060fe99a0c21e438e69bb3b407f41ee253f2c8",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with Meta×SB reconciliation, controlled actions, fixed Discord threads and live bid-strategy labels.",
+      "validation": "py_compile PASS; 18 pytest tests PASS; live Intraday and Daily dry-runs render Lance values CPA 0,50, MAXVOL and ROAS in one Discord-safe chunk.",
+      "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
+      "test_sha256": "f947c0a593df4cdcb5331fc82ccb6744943090b2f620598229e9b9c5328827d6",
+      "git_tracked": false,
+      "updated_at": "2026-08-20T15:25:20-04:00"
+    },
+    {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",
       "agent": "zeus",
       "type": "wordpress_ads_txt_production_rollout",
