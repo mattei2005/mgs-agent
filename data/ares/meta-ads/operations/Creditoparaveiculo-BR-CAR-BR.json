@@ -48,7 +48,7 @@
         "live_reference_campaign": 7,
         "live_reference_bid_amount_minor": 50,
         "live_reference_currency": "USD",
-        "current_name_suffix": "com bid"
+        "current_name_suffix": "COSTCAP-0.50"
       },
       "highest_volume": {
         "meta_ui_campaign_label": "Valor ou volume mais alto",
@@ -58,7 +58,7 @@
         "semantics": "maximize conversions/volume within budget without a CPA target",
         "delivery_behavior": "more delivery latitude and learning space; no configured CPA ceiling/target",
         "live_reference_campaign": 8,
-        "current_name_suffix": "sem bid"
+        "current_name_suffix": "MAXVOL"
       }
     },
     "naming_status": "approved_and_applied",
@@ -245,11 +245,26 @@
         "final_readback": "campaign and hierarchy GET per write plus full active-account budget GET"
       },
       "allowed_campaigns": {
-        "07": {"campaign_id": "120250209327510632", "cycle_start_date": "2026-08-20"},
-        "08": {"campaign_id": "120250209380780632", "cycle_start_date": "2026-08-20"},
-        "09": {"campaign_id": "120250209406580632", "cycle_start_date": "2026-08-20"},
-        "10": {"campaign_id": "120250209406610632", "cycle_start_date": "2026-08-20"},
-        "11": {"campaign_id": "120250210269480632", "cycle_start_date": "2026-08-20"}
+        "07": {
+          "campaign_id": "120250209327510632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "08": {
+          "campaign_id": "120250209380780632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "09": {
+          "campaign_id": "120250209406580632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "10": {
+          "campaign_id": "120250209406610632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "11": {
+          "campaign_id": "120250210269480632",
+          "cycle_start_date": "2026-08-20"
+        }
       },
       "required": [
         "fresh Meta preflight",
@@ -273,12 +288,35 @@
     "authorized_by": "Rodolfo Mattei",
     "style": "report-specific Discord presentation",
     "daily_style": "aligned monospace tables for campaigns and account summary",
-    "daily_columns": ["Sinal", "Camp", "Lance", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
+    "daily_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Status",
+      "Budget",
+      "Spend",
+      "Custo",
+      "ROI SB",
+      "ROAS"
+    ],
     "daily_alignment": "Unicode display-width aware; every summary row has an explicit signal",
     "daily_budget_definition": "current campaign daily_budget from Meta at report generation time",
     "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
     "intraday_style": "aligned monospace table matching Rodolfo reference",
-    "intraday_columns": ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"],
+    "intraday_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "Custo",
+      "ROAS",
+      "ROI real",
+      "ROI est.",
+      "Ação"
+    ],
     "lance_values": {
       "COST_CAP": "CPA 0,50 (value derived live from adset bid_amount)",
       "LOWEST_COST_WITHOUT_CAP": "MAXVOL",
@@ -296,7 +334,34 @@
       "yellow": "observe or gated",
       "red": "critical action",
       "white": "insufficient data"
-    }
+    },
+    "daily_dispatch_plan": [
+      {
+        "time": "07:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "previous closed day"
+      },
+      {
+        "time": "11:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "intraday",
+        "period": "current day"
+      },
+      {
+        "time": "14:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "intraday",
+        "period": "current day"
+      },
+      {
+        "time": "20:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "intraday",
+        "period": "current day"
+      }
+    ],
+    "dispatch_count_per_day": 4
   },
   "scheduler_jobs": {
     "daily": {
@@ -312,39 +377,34 @@
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
-      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "name": "Creditoparaveiculo 13 G006 Intraday 11h 14h 20h",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
-        "01:00",
-        "03:00",
-        "05:00",
-        "07:00",
-        "09:00",
         "11:00",
-        "13:00",
-        "15:00",
-        "17:00",
-        "19:00",
-        "21:00",
-        "23:00 America/Sao_Paulo"
+        "14:00",
+        "20:00 America/Sao_Paulo"
       ],
       "action_only_checkpoint": "08:00 America/Sao_Paulo; preserve approved scale timing without publishing an extra report",
       "script": "creditoparaveiculo-intraday.sh",
       "no_agent": true,
       "deliver": "local",
       "direct_thread_post": "1539832402744975450",
-      "enabled": true
+      "enabled": true,
+      "cadence": "three intraday reports per day; total operation reports = four including 07:00 Daily"
     },
     "snapshot": {
       "internal_job_id": "f45eed5047b9",
       "name": "Creditoparaveiculo 13 G006 Snapshot",
       "scheduler": "hourly minute 0",
-      "timezone_gate": "03:00 America/Sao_Paulo every ~72h",
+      "timezone_gate": "03:00 America/Sao_Paulo daily",
       "script": "creditoparaveiculo-snapshot.sh",
       "no_agent": true,
       "deliver": "local",
       "session_reset": false,
-      "enabled": true
+      "enabled": true,
+      "cadence": "daily",
+      "coverage": "previous closed day Meta campaigns/adsets/insights + Smart Bidding acquisition/SMS rows + operation policies; local only",
+      "history_purpose": "future consultation independent of active thread context; reports and Discord threads remain preserved"
     }
   },
   "pending_configuration": [
@@ -353,7 +413,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T15:20:22-04:00",
+  "updated_at": "2026-08-20T15:38:21-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -595,7 +655,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.33",
+  "playbook_version": "1.0.34",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -671,11 +731,11 @@
       "name_prefix_20_08_required": true,
       "post_rename_dry_run": "ok",
       "campaign_names": {
-        "07": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe com bid",
-        "08": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe sem bid",
-        "09": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe sem bid",
-        "10": "10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe sem bid",
-        "11": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe teste roas 1.3 (estava 1.6 sem gasto com roi e 4.0)"
+        "07": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+        "08": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe - MAXVOL",
+        "09": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe - MAXVOL",
+        "10": "10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe - MAXVOL",
+        "11": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe"
       }
     }
   },
@@ -1237,7 +1297,7 @@
     "validated_at_et": "2026-08-20T13:41:03-04:00"
   },
   "campaign_creation_20260820_c50_c12": {
-    "status": "test_campaigns_deleted_after_validation",
+    "status": "mixed_test_outcome_then_objects_deleted",
     "authorized_by": "Rodolfo Mattei",
     "deleted_at_sp": "2026-08-20T16:09:50-03:00",
     "deletion_result": {
@@ -1280,8 +1340,13 @@
       }
     },
     "child_status_contract": "adsets and ads ACTIVE; delivery disabled by PAUSED campaign",
-    "server_publish_readback": "C50 and C12 exist as normal Graph campaign objects with one adset and three ads each; both PAUSED, not unpublished drafts",
-    "copy_suffix_readback": "C50 and C12 names contain no — Cópia suffix in live Graph",
+    "test_outcomes": {
+      "clone_C12": "successful published clone before authorized deletion",
+      "from_zero_C50": "failed publication gate: remained Em rascunho with — Cópia in Ads Manager; never published as the intended campaign"
+    },
+    "human_ui_evidence": "Rodolfo screenshot and repeated manual confirmation supersede the prior inference that a separate Graph C50 object proved the intended draft was published",
+    "graph_reconciliation": "A separate C50 Graph object existed PAUSED and was later deleted, but it was not valid evidence that the Ads Manager draft C50 had been published",
+    "draft_cleanup": "UI draft is outside normal Graph campaign objects and requires Descartar rascunhos/Conferir e publicar in Ads Manager",
     "test_schedule_exception": "requested as disabled capability tests; not scheduled for 00:30 next day",
     "creative_source": "same media/copy lineage as campaign 07; no Drive intake",
     "brazil_compliance": {
@@ -1328,5 +1393,14 @@
     "research_report": "/root/mgs-agent/work/meta-code31-research/report.md",
     "citations_verified": true,
     "updated_at_et": "2026-08-20T12:52:17-04:00"
-  }
+  },
+  "reporting_schedule_history": [
+    {
+      "superseded_schedule": "Intraday every 2h continuously at odd São Paulo hours",
+      "superseded_at": "2026-08-20T15:38:21-04:00",
+      "superseded_by": "Daily 07:00 previous day + Intraday 11:00/14:00/20:00 current day",
+      "authorized_by": "Rodolfo Mattei",
+      "source": "discord:thread:1539969033170980945"
+    }
+  ]
 }

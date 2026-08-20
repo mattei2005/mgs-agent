@@ -190,7 +190,7 @@ def test_bid_strategy_labels_use_live_campaign_and_adset_fields():
 
 def test_intraday_report_cadence_and_action_checkpoint_are_separate():
     module = load_reports_module()
-    expected_report_hours = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23}
+    expected_report_hours = {11, 14, 20}
     assert module.INTRADAY_REPORT_HOURS == expected_report_hours
     for hour in range(24):
         assert module.intraday_gate_due(hour, actions_only=False) is (hour in expected_report_hours)
@@ -451,3 +451,25 @@ def test_report_delivery_is_idempotent_per_slot(monkeypatch, tmp_path):
     assert first[2] is False
     assert second[2] is True
     assert posted == [("thread", text)]
+
+
+def test_approved_report_schedule_and_action_checkpoint():
+    module = load_reports_module()
+    assert module.intraday_gate_due(11, actions_only=False)
+    assert module.intraday_gate_due(14, actions_only=False)
+    assert module.intraday_gate_due(20, actions_only=False)
+    assert not module.intraday_gate_due(7, actions_only=False)
+    assert not module.intraday_gate_due(13, actions_only=False)
+    assert module.intraday_gate_due(8, actions_only=True)
+    assert not module.intraday_gate_due(11, actions_only=True)
+
+
+def test_snapshot_gate_is_daily_not_72_hourly(monkeypatch, tmp_path):
+    module = load_reports_module()
+    state = tmp_path / "snapshot-gate.json"
+    monkeypatch.setattr(module, "SNAPSHOT_STATE", state)
+    now_sp = datetime(2026, 8, 20, 3, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+    assert module.snapshot_due(now_sp)
+    state.write_text(json.dumps({"last_snapshot_sp": now_sp.isoformat()}))
+    assert not module.snapshot_due(now_sp.replace(hour=4))
+    assert module.snapshot_due(now_sp.replace(day=21))

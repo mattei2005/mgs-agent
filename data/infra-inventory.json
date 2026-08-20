@@ -7580,15 +7580,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 96235,
-      "modified_at": "2026-08-20T15:17:33-04:00",
-      "sha256": "a5a7dfc938c6146ed3a3dfffb6060fe99a0c21e438e69bb3b407f41ee253f2c8",
-      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with Meta×SB reconciliation, controlled actions, fixed Discord threads and live bid-strategy labels.",
-      "validation": "py_compile PASS; 18 pytest tests PASS; live Intraday and Daily dry-runs render Lance values CPA 0,50, MAXVOL and ROAS in one Discord-safe chunk.",
+      "size_bytes": 97090,
+      "modified_at": "2026-08-20T15:38:12-04:00",
+      "sha256": "fac0f61266136db0e1b42f78f285fefc3161e3d1fdedfcb9b36b0cc21aee45f3",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with Meta×SB reconciliation, controlled actions, four daily report windows, fixed Discord threads and daily continuity capture.",
+      "validation": "py_compile + bash -n PASS; 20 pytest tests PASS; live snapshot dry-run and real local write PASS with previous-day Meta campaigns/adsets/insights plus Smart Bidding acquisition/SMS rows; schedule gate 07:00 Daily + 11:00/14:00/20:00 Intraday; 08:00 action-only preserved.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "f947c0a593df4cdcb5331fc82ccb6744943090b2f620598229e9b9c5328827d6",
+      "test_sha256": "801a4c9e42280bdc993c68631f16a116c041951af4665025d4e1bd32806d516b",
       "git_tracked": false,
-      "updated_at": "2026-08-20T15:25:20-04:00"
+      "updated_at": "2026-08-20T15:40:24-04:00"
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",

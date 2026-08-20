@@ -3,22 +3,32 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Bloqueio único para a criação de hoje às 17:00 SP: Rodolfo precisa especificar a estratégia das duas campanhas do zero (duas MAXVOL; duas COSTCAP com valor; ou uma de cada). Depois selecionar criativos Drive, reconciliar reserva/Meta, criar PAUSED/validar e programar 00:30.",
+      "next_step": "Perguntar e aguardar Rodolfo confirmar a estratégia das duas campanhas de hoje: recomendação 2x MAXVOL; se COSTCAP, exigir valor. Não declarar publicação futura sem readback do objeto exato e confirmação de que não está Em rascunho.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; audits delete-test-c50-c12-20260820T190950Z and rename-bid-strategy-c07-c11-20260820T191221Z; live report dry-runs 19:18/19:19Z; operation v1.0.31; skill v1.0.17",
-      "state": "testes novos c50/c12 excluídos integralmente com readback: 2 campanhas, 6 ads, 6 creatives e 12 vídeos técnicos deleted; spend usd0. screenshot confirma draft ui c50 com — cópia, mas live graph do objeto publicado c50 estava paused sem sufixo; após autorização os objetos server-side foram deletados, e draft ui pode exigir descartar rascunhos. nomenclatura aprovada/aplicada: c07 campanha+adset costcap-0.50; c08/c09/c10 campanha+adset maxvol. c11 revelou bid_constraints.roas_average_floor e foi revertida/excluída como terceira estratégia pendente. relatórios diário/intraday agora têm coluna lance e render live validado: cpa 0,50, maxvol, roas. utm: wrapper imutável; rnn proibido; reuse após antiga deleted segundo ciro. rotina diária 20%=usd60, 2xusd30, 17:00 preparação/criação e início 00:30 seguinte.",
+      "source": "discord:thread:1539434208408375426; screenshot C50 draft; operation v1.0.34; skill v1.0.19; corrected audit create-c50-clone-c07-to-c12-20260820T175824Z.json",
+      "state": "correção final de rodolfo: o teste de clone c12 foi publicado com sucesso; o teste do zero c50 permaneceu em rascunho com sufixo — cópia e nunca foi publicado como campanha pretendida. ares havia confundido um objeto c50 paused separado da graph com o draft da ui. screenshot/estado manual do objeto exato vence essa inferência. objetos graph de teste foram deletados e spend0; o rascunho ui exige descartar rascunhos no ads manager. nomenclatura aplicada c07 costcap-0.50, c08-c10 maxvol; c11 roas exception. relatórios lance validados. rotina 17h segue bloqueada apenas por escolha de estratégia.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T19:21:41+00:00"
+      "updated_at": "2026-08-20T19:41:24+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-REPORTING",
+      "next_step": "Operação recorrente normal; validar a próxima entrega aplicável no horário programado e consultar snapshots/JSON/thread import quando houver pedido histórico.",
+      "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.34; report runner live SHA fac0f612; cron readback enabled+scheduled",
+      "state": "rodolfo substituiu o intraday contínuo de 2h por quatro entregas totais diárias em são paulo: diário 07:00 do dia anterior fechado; intraday 11:00, 14:00 e 20:00 do dia corrente. checkpoint de ação 08:00 continua separado e sem relatório. snapshot das 03:00 agora é diário, local e sem reset de sessão; salva o dia anterior com campanhas, adsets, insights meta, linhas smart bidding aquisição/sms e políticas. threads discord e json de relatórios permanecem preservados.",
+      "thread_id": "1539969033170980945",
+      "updated_at": "2026-08-20T19:41:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Operação recorrente normal; primeira próxima entrega automática deve usar slot 11:00 SP e seguir continuamente nas horas ímpares",
-      "objective": "Operar Intraday seguro com cadência contínua e apresentação aprovadas por Rodolfo",
-      "source": "discord:thread:1539969033170980945; operation config v1.0.20; direct-traffic-cbo-operations v1.0.8; cron Creditoparaveiculo 13 G006 Intraday 2h contínuo",
-      "state": "concluído: intraday contínuo a cada 2h nas horas ímpares de são paulo (01/03/05/07/09/11/13/15/17/19/21/23), atravessando meia-noite sem parar às 23. último envio manual 10:40 sp não ocupa o slot 11; próximo automático confirmado para 11:00 sp. checkpoint de ação 08:00 permanece actions-only. job hermes enabled e scheduled. camp usa cnn-dd/mm em diário/intraday.",
+      "next_step": "Não executar a cadência antiga; consultar ARES-CREDITOPARAVEICULO-REPORTING.",
+      "objective": "Registro histórico da antiga cadência Intraday contínua",
+      "source": "discord:thread:1539969033170980945; superseded by operation config v1.0.34",
+      "state": "superseded em 20/08/2026 por decisão de rodolfo. a cadência contínua de 2h nas horas ímpares não está mais ativa. a regra vigente está no checkpoint ares-creditoparaveiculo-reporting e na operação v1.0.34: diário 07:00 + intraday 11:00/14:00/20:00 são paulo; snapshot diário 03:00.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T13:53:04+00:00"
+      "updated_at": "2026-08-20T19:41:33+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T19:21:41+00:00"
+  "updated_at": "2026-08-20T19:41:33+00:00"
 }
