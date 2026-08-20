@@ -520,6 +520,11 @@ def graph_post(path, token, params=None):
     return _request_with_retry(_graph_post_once, path, token, params)
 
 
+def graph_post_once(path, token, params=None):
+    """Single-attempt POST for non-idempotent writes; caller must GET before any retry."""
+    return _graph_post_once(path, token, params)
+
+
 def graph_batch_get(token, requests):
     if not isinstance(requests, list) or not requests or len(requests) > 50:
         raise ValueError('batch GET requires 1..50 requests')
