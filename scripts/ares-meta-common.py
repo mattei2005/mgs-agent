@@ -21,7 +21,19 @@ RATE_LIMIT_MESSAGE_PATTERNS = (
 MIN_INTERVAL_SECONDS = float(os.environ.get('ARES_META_MIN_INTERVAL_SECONDS', '0.75'))
 RATE_LIMIT_MAX_TOTAL_SLEEP = int(os.environ.get('ARES_META_RATE_LIMIT_MAX_TOTAL_SLEEP', '600'))
 RATE_LIMIT_INITIAL_SLEEP = int(os.environ.get('ARES_META_RATE_LIMIT_INITIAL_SLEEP', '30'))
+BUSINESS_USAGE_SOFT_LIMIT_PERCENT = float(os.environ.get('ARES_META_BUSINESS_USAGE_SOFT_LIMIT_PERCENT', '80'))
+BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS = int(os.environ.get('ARES_META_BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS', '60'))
+BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS = int(os.environ.get('ARES_META_BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS', str(RATE_LIMIT_MAX_TOTAL_SLEEP)))
+TRANSIENT_5XX_RETRY_SECONDS = 10
 THROTTLE_STATE_PATH = BASE / 'cache' / 'meta-api-throttle-state.json'
+BUSINESS_USAGE_HEADER = 'x-business-use-case-usage'
+
+
+class AresMetaUsageBlocked(RuntimeError):
+    def __init__(self, retry_after_seconds, reason='business_usage_soft_limit'):
+        self.retry_after_seconds = max(0, int(retry_after_seconds))
+        self.reason = str(reason)
+        super().__init__(f'Meta API blocked by {self.reason}; retry after {self.retry_after_seconds}s')
 
 def load_json(path):
     return json.loads(Path(path).read_text())
