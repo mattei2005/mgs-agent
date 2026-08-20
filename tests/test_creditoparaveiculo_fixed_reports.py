@@ -6,16 +6,13 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-import pytest
-
-
 SCRIPT = Path("/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py")
 
 
 def load_reports_module():
     spec = importlib.util.spec_from_file_location("creditoparaveiculo_fixed_reports_test", SCRIPT)
-    module = importlib.util.module_from_spec(spec)
     assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
@@ -103,6 +100,7 @@ def test_reporting_signals_and_no_id_rec():
     assert module.daily_signal(-10) == "🔴"
     rendered = module.aligned_table(["Sinal", "Campanha"], [["🟢", "C09"]])
     assert "Campanha" in rendered
+    assert "C09" in rendered
     assert "ID REC" not in rendered
 
 
@@ -134,6 +132,7 @@ def test_scale_blocks_account_cap(monkeypatch, tmp_path):
     module = load_reports_module()
     campaign = active_campaign()
     other = active_campaign(campaign_id="2", budget="27000")
+    other["effective_status"] = "IN_PROCESS"
     fake_meta = FakeMeta([campaign, other])
     configure_runtime(monkeypatch, tmp_path, module, fake_meta, account_cap=300)
     decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
