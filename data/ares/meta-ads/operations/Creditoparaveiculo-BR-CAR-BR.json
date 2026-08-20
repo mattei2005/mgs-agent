@@ -54,7 +54,6 @@
         "budget_increase_pct": 10.0
       }
     ],
-    "no_scale_roi_lte": 20.0,
     "scale_checkpoint": "around_08:00_account_timezone",
     "decision_source": "Smart Bidding AdGroup USD NET_REVENUE revshare enabled",
     "meta_roas_role": "signal_only",
@@ -136,6 +135,22 @@
         "budget_scale": "enabled",
         "campaign_pause": "fail_closed_until_external_anomaly_thresholds_are_calibrated"
       },
+      "scale_execution_gate": {
+        "checkpoint": "08:00 America/Sao_Paulo",
+        "window_minutes": 10,
+        "max_smart_bidding_delay_minutes": 120,
+        "required_matched_adgroups": 1,
+        "actual_roi_required": true,
+        "estimated_roi_never_scales_alone": true,
+        "technical_safety_basis": "bounded above the validated 98-minute delay snapshot; missing/nonfinite/staler data fails closed"
+      },
+      "allowed_campaigns": {
+        "07": {"campaign_id": "120250209327510632", "cycle_start_date": "2026-08-20"},
+        "08": {"campaign_id": "120250209380780632", "cycle_start_date": "2026-08-20"},
+        "09": {"campaign_id": "120250209406580632", "cycle_start_date": "2026-08-20"},
+        "10": {"campaign_id": "120250209406610632", "cycle_start_date": "2026-08-20"},
+        "11": {"campaign_id": "120250210269480632", "cycle_start_date": "2026-08-20"}
+      },
       "required": [
         "fresh Meta preflight",
         "manual hold check",
@@ -156,7 +171,7 @@
   },
   "reporting_presentation": {
     "authorized_by": "Rodolfo Mattei",
-    "style": "aligned monospace tables with green/yellow/red/white status signals",
+    "style": "mobile-first vertical cards/lines with green/yellow/red/white status signals; no wide monospace tables",
     "remove_id_rec": true,
     "campaign_identifier": "campaign number column",
     "daily_focus": "closed performance and account summary",
@@ -216,7 +231,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T08:21:06-04:00",
+  "updated_at": "2026-08-20T08:41:48-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -434,7 +449,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.13",
+  "playbook_version": "1.0.14",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -591,7 +606,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.1",
+      "direct-traffic-cbo-operations v1.0.2",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",

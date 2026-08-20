@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.1
+version: 1.0.2
 author: Ares
 license: internal
 metadata:
@@ -156,7 +156,8 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Relatórios recorrentes em thread fixa usam chave idempotente por dia/checkpoint e readback Discord por GET, validando thread, mensagem e conteúdo. Tabela cercada que ultrapassar o chunk seguro deve falhar fechada em vez de publicar bloco quebrado.
 - Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
-- O formato do relatório pode substituir `ID REC` pela própria coluna de número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
+- O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
+- Em Discord, priorizar layout mobile-first: resumo curto e uma linha/bloco vertical por campanha. Se a tabela monoespaçada criar faixa larga, espaços vazios ou leitura quebrada no celular, trocar por cards textuais sem cercas; emoji fica no início do bloco e não em coluna artificial.
 
 ## Guardrails de credenciais
 
