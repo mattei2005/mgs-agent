@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T11:13:12.890556-04:00",
+    "updated_at": "2026-08-20T12:10:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8092,12 +8092,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 14107,
-      "modified_at": "2026-08-20T09:38:08-04:00",
-      "sha256": "622a01e8712813f3b0dc5cf1880f074eb24f9322da5edb43e66ad1995c007360",
+      "size_bytes": 14699,
+      "modified_at": "2026-08-20T12:09:50-04:00",
+      "sha256": "4dcb5892a06f6620f57f6d0f523854ca17901b3e79b77f69c9725dde7d008916",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T09:39:38-04:00",
-      "validation": "Skill v1.0.7 live/mirror SHA match. Graph v25/v26 retest added: embedded error/validate-only handling, account security checkpoint code31/3858385 fail-closed, unordered video lineage matching, bounded creative propagation, and ads-before-creative cleanup order after 2446289."
+      "updated_at": "2026-08-20T12:10:19-04:00",
+      "validation": "Skill v1.0.9 live/mirror SHA match. Corrected code31/3858385 handling: manual Ads Manager may remain operational; compare trusted-browser validate-only against server egress before token rotation, payload changes, System User or proxy decisions."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
