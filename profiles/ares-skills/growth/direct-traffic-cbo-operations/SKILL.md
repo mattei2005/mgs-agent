@@ -152,7 +152,9 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Reportar aquisição, SMS e custo de SMS em colunas separadas.
 - Exibir fonte e status de reconciliação.
 - Recomendar antes de escrever na Meta, salvo quando Rodolfo autorizar explicitamente `autonomous_guarded` para uma operação e a fonte canônica da operação registrar `write_enabled=true`.
-- Em `autonomous_guarded`, executar somente ações e tiers nomeados na configuração da operação, com lock/idempotência, preflight Meta vivo, holds, ceilings/caps, audit sanitizado e GET/readback. Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
+- Em `autonomous_guarded`, executar somente ações e tiers nomeados na configuração da operação, com lock/idempotência, preflight Meta vivo, holds, ceilings/caps, audit sanitizado e GET/readback. Persistir estado `in_flight` antes do POST; após crash/timeout, fazer GET antes de qualquer retry e aceitar somente valor original ou valor absoluto desejado — terceiro valor bloqueia por possível ação humana.
+- Relatórios recorrentes em thread fixa usam chave idempotente por dia/checkpoint e readback Discord por GET, validando thread, mensagem e conteúdo. Tabela cercada que ultrapassar o chunk seguro deve falhar fechada em vez de publicar bloco quebrado.
+- Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
 - O formato do relatório pode substituir `ID REC` pela própria coluna de número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 

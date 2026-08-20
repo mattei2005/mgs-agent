@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
@@ -92,17 +93,16 @@ def scale_row(campaign_id="1", budget_usd=30.0):
     }
 
 
-def test_reporting_signals_and_no_id_rec():
+def test_reporting_signals_and_no_wide_table_or_id_rec():
     module = load_reports_module()
     assert module.recommendation(1, 27, 88, 8) == "ESCALAR +10%"
     assert module.recommendation(3, -11, -5, 12) == "CORTE APÓS GATE"
     assert module.daily_signal(1) == "🟢"
     assert module.daily_signal(-5) == "🟡"
     assert module.daily_signal(-10) == "🔴"
-    rendered = module.aligned_table(["Sinal", "Campanha"], [["🟢", "C09"]])
-    assert "Campanha" in rendered
-    assert "C09" in rendered
-    assert "ID REC" not in rendered
+    source = SCRIPT.read_text()
+    assert "aligned_table" not in source
+    assert "ID REC" not in source
 
 
 def test_scale_is_written_once_and_verified(monkeypatch, tmp_path):
@@ -163,3 +163,68 @@ def test_cut_blocks_on_reconciliation_anomaly(monkeypatch, tmp_path):
     assert results[0]["status"] == "blocked"
     assert results[0]["reason"] == "reconciliation_anomaly_gate"
     assert fake_meta.posts == []
+
+
+def test_in_flight_scale_recovers_by_get_without_second_post(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign(budget="3300")
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+    key = module._action_key("2026-08-20", 8, scale_row(), "ESCALAR +10%")
+    module.atomic_write_json(
+        module.ACTION_STATE,
+        {
+            "schema_version": "1.0",
+            "applied": {
+                key: {
+                    "status": "in_flight",
+                    "action_type": "scale_budget",
+                    "expected_minor": 3000,
+                    "requested_minor": 3300,
+                }
+            },
+        },
+    )
+
+    results, _ = module.execute_intraday_actions(
+        [scale_row()], [campaign], {"anomaly": False}, "2026-08-20", decision_at
+    )
+    assert results[0]["status"] == "recovered_verified"
+    assert fake_meta.posts == []
+
+
+def test_report_delivery_is_idempotent_per_slot(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "DELIVERY_STATE", tmp_path / "delivery.json")
+    monkeypatch.setattr(module, "DELIVERY_LOCK", tmp_path / "delivery.lock")
+    posted = []
+    text = "relatório curto"
+    content_hash = hashlib.sha256(text.encode()).hexdigest()
+
+    def fake_post(thread_id, body):
+        posted.append((thread_id, body))
+        return ["m1"]
+
+    def fake_readback(thread_id, message_ids, expected_text=None):
+        return {
+            "ok": True,
+            "messages": [
+                {
+                    "message_id": "m1",
+                    "channel_id": str(thread_id),
+                    "http_status": 200,
+                    "content_length": len(text),
+                    "content_sha256": content_hash,
+                    "verified": True,
+                }
+            ],
+        }
+
+    monkeypatch.setattr(module, "post_discord", fake_post)
+    monkeypatch.setattr(module, "readback_discord_messages", fake_readback)
+    first = module.deliver_report_once("intraday:2026-08-20:12", "thread", text)
+    second = module.deliver_report_once("intraday:2026-08-20:12", "thread", text)
+    assert first[2] is False
+    assert second[2] is True
+    assert posted == [("thread", text)]
