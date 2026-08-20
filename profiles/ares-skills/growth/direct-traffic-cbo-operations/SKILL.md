@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.27
+version: 1.0.28
 author: Ares
 license: internal
 metadata:
@@ -184,7 +184,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 - Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.
 - Emoji fica no início da coluna `Sinal`; o renderer deve calcular largura visual Unicode, não `len()`, e toda linha do resumo recebe sinal explícito para evitar recuo variável. `ID REC` permanece apenas no audit quando a operação o removeu da apresentação.
-- Quando a cadência de relatório mudar, não deslocar silenciosamente outro tipo de relatório nem o checkpoint de ação. Separar `Daily schedule`, `Intraday schedule` e `action-only checkpoint`, registrar a agenda vigente na fonte canônica e superseder explicitamente a anterior. Em Creditoparaveiculo BR-CAR-BR: o **Diário** do dia anterior fechado publica às 07:00, 11:00, 14:00 e 20:00; o **Intraday** permanece contínuo a cada 2 horas nas horas ímpares de São Paulo (`01/03/05/07/09/11/13/15/17/19/21/23`); a escala autorizada continua às 08:00 em checkpoint separado. O snapshot de continuidade às 03:00 é diário, local, sem reset, e arquiva exclusivamente as três threads fixas de criação, Diário e Intraday registradas na operação; qualquer outra thread segue o padrão definido com Zeus.
+- Quando a cadência de relatório mudar, não deslocar silenciosamente outro tipo de relatório nem o checkpoint de ação. Separar `Daily schedule`, `Intraday schedule` e `action-only checkpoint`, registrar a agenda vigente na fonte canônica e superseder explicitamente a anterior. Em Creditoparaveiculo BR-CAR-BR: o **Diário das 07:00** referencia o dia anterior fechado; os **Diários das 11:00, 14:00 e 20:00** referenciam o próprio dia até o horário do envio. O **Intraday** permanece contínuo a cada 2 horas nas horas ímpares de São Paulo (`01/03/05/07/09/11/13/15/17/19/21/23`); a escala autorizada continua às 08:00 em checkpoint separado. O snapshot de continuidade às 03:00 é diário, local, sem reset, e arquiva exclusivamente as três threads fixas de criação, Diário e Intraday registradas na operação; qualquer outra thread segue o padrão definido com Zeus.
 - Cabeçalhos compactos aprovados devem ser preservados. Quando `Campanha` virar `Camp`, exibir também a data operacional no mesmo campo (`CNN-DD/MM`, como `C07-20/08`) usando data persistida/naming validado, não a data presumida do relatório.
 - Quando o Diário exibir `Budget`, rotular como budget atual da Meta se o período for histórico; `Custo` deve declarar a ação/fórmula usada, por exemplo `spend ÷ omni_purchase`.
 

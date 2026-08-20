@@ -23,6 +23,25 @@
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
         "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20T19:16:14-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Daily 07 previous day and later same-day periods",
+      "updated_at": "2026-08-20T23:19:50+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
         "direct-traffic-cbo-operations"
       ],
       "domain": "growth",
@@ -31,10 +50,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V2",
       "title": "Creditoparaveiculo guarded actions, Daily four-slot schedule, continuous 2h Intraday and scoped continuity snapshot",
-      "updated_at": "2026-08-20T19:45:00+00:00"
+      "updated_at": "2026-08-20T23:19:50+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.meta-rate-scale",
@@ -829,5 +848,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:59:16+00:00"
+  "updated_at": "2026-08-20T23:19:50+00:00"
 }

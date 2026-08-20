@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.12
+version: 1.0.13
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -389,15 +389,16 @@ Para tráfego direto desta operação, usar três threads fixas por conta:
 
 ```text
 Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e readback
-Diário Consolidado     07:00 São Paulo, referente ao dia anterior fechado
-Intraday               08:00, 12:00, 15:00, 20:00 e 23:00 São Paulo
+Diário Consolidado     07:00 dia anterior; 11:00/14:00/20:00 mesmo dia
+Intraday               01/03/05/07/09/11/13/15/17/19/21/23 São Paulo
+Checkpoint de ação     08:00 São Paulo, separado e sem relatório extra
 ```
 
 Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
 
-A cada três dias às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
+Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 
 ## Rotina diária do gestor
 

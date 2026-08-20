@@ -465,6 +465,18 @@ def test_approved_report_schedule_and_action_checkpoint():
     assert not module.intraday_gate_due(11, actions_only=True)
 
 
+def test_daily_period_is_previous_day_only_at_07_and_current_day_afterward():
+    module = load_reports_module()
+    sp = ZoneInfo("America/Sao_Paulo")
+    assert module.daily_target_date(datetime(2026, 8, 20, 7, 0, tzinfo=sp)) == "2026-08-19"
+    for hour in (11, 14, 20):
+        assert module.daily_target_date(datetime(2026, 8, 20, hour, 0, tzinfo=sp)) == "2026-08-20"
+    assert module.daily_target_date(
+        datetime(2026, 8, 20, 7, 0, tzinfo=sp),
+        "2026-08-01",
+    ) == "2026-08-01"
+
+
 def test_snapshot_thread_history_scope_is_exact():
     module = load_reports_module()
     assert module.THREAD_HISTORY_SCOPE == {
