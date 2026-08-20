@@ -618,7 +618,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.4",
+      "direct-traffic-cbo-operations v1.0.5",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",

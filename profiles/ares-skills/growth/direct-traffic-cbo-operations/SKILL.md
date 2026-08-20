@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.4
+version: 1.0.5
 author: Ares
 license: internal
 metadata:
@@ -158,7 +158,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
-- Em Discord, o layout é definido por tipo de relatório, não globalmente. Preserve tabela monoespaçada curta quando o operador aprovar o Diário dessa forma; para Intraday de alta frequência, prefira uma linha compacta por campanha quando tabela larga ou cards de três linhas ficarem repetitivos. Nunca reaproveitar automaticamente a preferência visual de um relatório no outro.
+- Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.
 - Emoji fica no início da linha/coluna de sinal; `ID REC` permanece apenas no audit quando a operação o removeu da apresentação.
 
 ## Guardrails de credenciais

@@ -159,8 +159,10 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert module.daily_signal(-5) == "🟡"
     assert module.daily_signal(-10) == "🔴"
     assert "aligned_table" in inspect.getsource(module.build_daily)
-    assert "aligned_table" not in inspect.getsource(module.build_intraday)
-    assert "campaign_lines.append" in inspect.getsource(module.build_intraday)
+    intraday_source = inspect.getsource(module.build_intraday)
+    assert "aligned_table" in intraday_source
+    assert '"Custo"' in intraday_source
+    assert '"ROAS"' in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
 
 
@@ -174,6 +176,23 @@ def test_decision_boundaries_are_explicit():
     assert module.recommendation(1, 40.001, None, 8) == "ESCALAR +30%"
     assert module.recommendation(3, -10.0, -1.0, 12) == "CORTE APÓS GATE"
     assert module.recommendation(3, -10.0, 1.0, 12) == "HOLD ESTIMADO"
+
+
+def test_meta_cost_and_roas_use_omni_purchase():
+    module = load_reports_module()
+    aggregated = module.aggregate_meta(
+        [
+            {
+                "campaign_id": "1",
+                "campaign_name": "09 - Teste",
+                "spend": "10.00",
+                "actions": [{"action_type": "omni_purchase", "value": "20"}],
+                "purchase_roas": [{"action_type": "omni_purchase", "value": "1.50"}],
+            }
+        ]
+    )["1"]
+    assert aggregated["cost_per_purchase"] == 0.5
+    assert aggregated["purchase_roas"] == 1.5
 
 
 def test_scale_is_single_attempt_written_once_and_verified(monkeypatch, tmp_path):

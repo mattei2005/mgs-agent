@@ -14,11 +14,11 @@
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
       "next_step": "Operação recorrente normal; pausa D3 continua fail-closed até calibrar deterministicamente o gate externo",
-      "objective": "Executar Intraday com segurança e consolidar layouts distintos para Diário e Intraday",
-      "source": "discord:thread:1539969033170980945; operation config v1.0.16; direct-traffic-cbo-operations v1.0.4; daily message 1539983341212803132; intraday message 1539983397202436187; Meta campaign 120250209406580632",
-      "state": "concluído: diário restaurado em tabelas alinhadas; intraday reduzido a uma linha por campanha; ambos republicados e validados por discord get 200. revisão independente fechada com allowlist imutável, ciclo persistido, janela 08:00-08:10, sb delay<=120, cap batch conta inteira, budgets estritos, hierarquia 1x1x3, fsync in_flight, post single-attempt, get bounded e readback final da conta. c09 active usd33.",
+      "objective": "Executar Intraday com segurança e consolidar layouts aprovados por Rodolfo",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.17; direct-traffic-cbo-operations v1.0.5; intraday message 1539987130330390559; Meta campaign 120250209406580632",
+      "state": "concluído: diário permanece em tabela alinhada; intraday agora replica a tabela da referência de rodolfo e inclui custo e roas. custo usa spend/omni_purchase meta; roas usa purchase_roas omni_purchase. intraday republicado em um chunk com discord get de conteúdo/thread 200. autowrite guarded permanece com blockers de segurança fechados; c09 active usd33.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T13:10:11+00:00"
+      "updated_at": "2026-08-20T13:20:04+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:10:11+00:00"
+  "updated_at": "2026-08-20T13:20:04+00:00"
 }
