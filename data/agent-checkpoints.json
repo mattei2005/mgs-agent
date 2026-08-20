@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Aplicar backup, alterar script/config com gates, testar, executar ação elegível e reenviar relatórios",
+      "next_step": "Emitir REPORT-INFRA, consolidar revisão final e encerrar",
       "objective": "Ativar ações intraday autorizadas por Rodolfo, remover ID REC e publicar Diário/Intraday com nova estética",
-      "source": "discord:thread:1539969033170980945; /root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py; /root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "inventário em andamento; runtime localizado no script creditoparaveiculo-fixed-reports.py e operação canônica identificada",
+      "source": "discord:thread:1539969033170980945; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; audit/automated-actions/actions-20260820T122433087107Z.json; daily message 1539973791159947404; intraday message 1539973982420205598",
+      "state": "autonomia guarded habilitada para tiers de budget; c09 escalada de usd30 para usd33 com post/get 200; nova estética publicada no diário e intraday com discord get readback 200; pausa d3 fail-closed até calibrar gate externo",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T12:15:07+00:00"
+      "updated_at": "2026-08-20T12:31:05+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T12:15:07+00:00"
+  "updated_at": "2026-08-20T12:31:05+00:00"
 }

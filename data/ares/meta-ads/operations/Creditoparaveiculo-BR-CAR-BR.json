@@ -130,8 +130,12 @@
       "level": "campaign_only",
       "allowed": [
         "scale campaign daily_budget by approved ROI tiers 10/20/30 percent at the 08:00 checkpoint",
-        "pause campaign on D3 only after actual ROI, estimated revenue and anomaly gates"
+        "pause campaign on D3 only after actual ROI, estimated revenue and fully calibrated external anomaly gates"
       ],
+      "current_gate_status": {
+        "budget_scale": "enabled",
+        "campaign_pause": "fail_closed_until_external_anomaly_thresholds_are_calibrated"
+      },
       "required": [
         "fresh Meta preflight",
         "manual hold check",
