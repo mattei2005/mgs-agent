@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T06:33:39-04:00",
+    "updated_at": "2026-08-20T09:05:47-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7979,12 +7979,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 8993,
-      "modified_at": "2026-07-10T21:22:32-04:00",
-      "sha256": "a7e6abf425bfb6de1e0a7cf13a1b342a5e6e11aa4f9d128a974d2e24817d7690",
+      "size_bytes": 11758,
+      "modified_at": "2026-08-20T09:04:41-04:00",
+      "sha256": "c713e857a983cdb90340594633696f44641737ed456e55f54c09e13fe453a1dc",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-10T21:23:43-04:00",
-      "validation": "Live Graph evidence: quiz adset custom_event_type=SUBSCRIBE with OFFSITE_CONVERSIONS/pixel. Corrected prior naming assumption: chat=ADD_TO_WISHLIST, quiz=SUBSCRIBE at adset; positive cases PASS; cross-event rejected; py_compile OK."
+      "updated_at": "2026-08-20T09:05:47-04:00",
+      "validation": "Skill v1.0.3 live/mirror SHA match. Added Graph v25 pitfalls validated on Creditoparaveiculo: native copy 3858504 from deprecated standard_enhancements, story-only dynamic rebuild 1815017 without product_set_id, HTTP 200/no ID non-success, and cleanup capability readback."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

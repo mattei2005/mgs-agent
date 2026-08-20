@@ -29,6 +29,8 @@ class FakeMeta:
 
     def graph_get(self, path, token, params=None):
         path = str(path)
+        if path == "act_1046241194533786/campaigns":
+            return 200, {"data": [dict(row) for row in self.campaigns.values()]}, {}
         if path.endswith("/adsets"):
             campaign_id = path.rsplit("/", 1)[0]
             if campaign_id not in self.campaigns:
@@ -162,6 +164,18 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "ID REC" not in SCRIPT.read_text()
 
 
+def test_decision_boundaries_are_explicit():
+    module = load_reports_module()
+    assert module.recommendation(1, 19.999, None, 8) == "OBSERVAR D1/D2"
+    assert module.recommendation(1, 20.0, None, 8) == "ESCALAR +10%"
+    assert module.recommendation(1, 30.0, None, 8) == "ESCALAR +10%"
+    assert module.recommendation(1, 30.001, None, 8) == "ESCALAR +20%"
+    assert module.recommendation(1, 40.0, None, 8) == "ESCALAR +20%"
+    assert module.recommendation(1, 40.001, None, 8) == "ESCALAR +30%"
+    assert module.recommendation(3, -10.0, -1.0, 12) == "CORTE APÓS GATE"
+    assert module.recommendation(3, -10.0, 1.0, 12) == "HOLD ESTIMADO"
+
+
 def test_scale_is_single_attempt_written_once_and_verified(monkeypatch, tmp_path):
     module = load_reports_module()
     campaign = active_campaign()
@@ -233,6 +247,39 @@ def test_scale_blocks_campaign_number_collision(monkeypatch, tmp_path):
 
     results, _ = run_actions(module, [scale_row()], [campaign, duplicate], decision_at)
     assert results[0]["reason"] == "campaign_number_collision_or_drift"
+    assert fake_meta.posts == []
+
+
+def test_scale_blocks_inactive_child_hierarchy(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    monkeypatch.setattr(
+        module,
+        "campaign_hierarchy_snapshot",
+        lambda *args: (False, {"active_adsets": 1, "active_ads": 2}),
+    )
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    results, _ = run_actions(module, [scale_row()], [campaign], decision_at)
+    assert results[0]["reason"] == "campaign_hierarchy_not_1x1x3_active"
+    assert fake_meta.posts == []
+
+
+def test_malformed_active_budget_fails_closed(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign(budget="NaN")
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    try:
+        run_actions(module, [scale_row()], [campaign], decision_at)
+    except RuntimeError as exc:
+        assert "invalid daily_budget" in str(exc)
+    else:
+        raise AssertionError("malformed active budget must fail closed")
     assert fake_meta.posts == []
 
 

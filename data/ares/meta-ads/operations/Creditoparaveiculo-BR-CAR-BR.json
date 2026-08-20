@@ -119,7 +119,7 @@
     "read_scope": "entire_account",
     "reporting_mode": "autonomous_guarded",
     "write_enabled": true,
-    "campaign_creation_test": "pending_paused_build_after_page_assignment_fix",
+    "campaign_creation_test": "blocked_legacy_dynamic_creative_rebuild_requires_product_set_payload",
     "manual_holds": [],
     "controlled_write_one_shot": "historical: reactivate campaigns 07,08,09,10,11 at 00:30; completed",
     "autonomous_action_scope": {
@@ -233,7 +233,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T08:56:33-04:00",
+  "updated_at": "2026-08-20T09:03:49-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -451,7 +451,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.15",
+  "playbook_version": "1.0.17",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -938,41 +938,78 @@
   },
   "campaign_creation_capability": {
     "campaign_shell_from_zero": "validated",
-    "direct_financial_adset_from_zero": "requires_retest_with_confirmed_Digital_Trust_beneficiary_and_payor",
+    "direct_financial_adset_from_zero": "failed_3858634_compliance_section_with_confirmed_Digital_Trust_beneficiary_and_payor",
     "native_compliant_adset_copy": "validated",
     "full_1x1x3_deep_copy_sync": "blocked_1885194_copy_too_large",
     "async_batch_minimal": "not_run_not_validated",
-    "practical_next_build_route": "campaign shell + compliant adset native copy + add 3 ads separately + full readback",
-    "full_clone_diagnosis": "not_conclusive: only whole-campaign deep copy failed; manual-adset fallback was not a clone",
-    "correct_full_clone_route": "native shallow campaign copy + native adset copy + native copy of 3 ads + full readback",
     "direct_retest_digital_trust": "failed_3858634_compliance_section",
     "hierarchical_clone_campaign_copy": "validated",
     "hierarchical_clone_adset_copy": "validated",
-    "hierarchical_clone_ad_copy": "blocked_page_assignment_code10_subcode1341012",
-    "next_step": "fix Page ADVERTISE assignment, then rerun ad-copy layer only"
+    "hierarchical_clone_ad_copy": "blocked_3858504_deprecated_standard_enhancements",
+    "existing_creative_id_ad_create": "inconclusive_partial_2_of_3_then_http_200_without_id_or_object_on_retest",
+    "sanitized_effective_story_rebuild": "blocked_1815017_dynamic_creative_missing_product_set_id",
+    "source_creative_diagnosis": "all three reference creatives are dynamic asset-feed creatives with degrees_of_freedom_spec.creative_features_spec.standard_enhancements=OPT_IN, which Graph v25 refuses to copy",
+    "full_1x1x3_status": "not_validated",
+    "practical_next_build_route": "extract the exact writable dynamic creative payload including catalog/product_set identity; remove only deprecated standard_enhancements; validate one PAUSED creative/ad canary; then build and read back 1x1x3",
+    "next_step": "obtain and validate product_set/catalog identity and sanitized asset_feed_spec for the three source creatives; do not retry native copy or story-only rebuild"
   },
   "page_asset_permission": {
-    "status": "blocked_missing_page_assignment",
-    "token_identity": "Roosevelt Mattei",
+    "status": "validated_with_new_advertiser_token",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
     "oauth_scopes_required_present": [
       "ads_management",
+      "ads_read",
+      "business_management",
+      "instagram_basic",
       "pages_manage_ads",
-      "pages_show_list",
+      "pages_manage_posts",
       "pages_read_engagement",
-      "business_management"
+      "pages_show_list",
+      "read_insights"
     ],
     "oauth_scopes_not_granted": [],
     "target_page": "Garagem Brasil",
-    "target_page_present_in_me_accounts": false,
+    "target_page_id": "621037101089579",
+    "target_page_present_in_me_accounts": true,
     "required_graph_task": "ADVERTISE",
-    "meta_documentation_interpretation": "pages_manage_ads is granted; /user/accounts lists pages where the user can perform tasks; page must be assigned with ADVERTISE task",
-    "business_manager_fix": "assign Garagem Brasil Page to token user with Ads/Create and manage ads access; refresh token; verify page appears in /me/accounts with ADVERTISE",
-    "instagram_followup": "ensure associated Instagram asset is assigned to same user/business/ad account after Page assignment",
-    "validated_error": {
+    "required_graph_task_present": true,
+    "source_instagram_identity": "reference creatives expose instagram_actor_id=null and are Page-backed; absence was not the ad-layer blocker",
+    "prior_error_resolved": {
       "code": 10,
       "error_subcode": 1341012,
       "title": "No permission to access this profile"
     },
-    "no_retry_until_assignment": true
+    "campaign_delete_capability": "new advertiser token returned HTTP 200 success=false and left test campaign PAUSED; deterministic cleanup used the prior account credential and validated DELETED",
+    "validated_at_et": "2026-08-20T08:51:00-04:00"
+  },
+  "campaign_creation_retest_20260820": {
+    "authorized_by": "Rodolfo Mattei",
+    "token_identity": "Rafael Lucas Oliveira",
+    "permission_preflight": "pass: account active, all required scopes present, Garagem Brasil in me/accounts with ADVERTISE",
+    "native_ad_copy_result": "failed_3858504_deprecated_standard_enhancements",
+    "existing_creative_id_result": "partial_2_of_3_once; subsequent POST returned no id and exact-name GET found no object",
+    "sanitized_story_result": "failed_1815017_dynamic_creative_missing_product_set_id",
+    "source_creative_invariant": "3_of_3 dynamic creatives contain deprecated standard_enhancements OPT_IN",
+    "full_1x1x3_validated": false,
+    "test_campaign_ids": [
+      "120250850864180632",
+      "120250850876480632",
+      "120250850910440632",
+      "120250850936290632"
+    ],
+    "cleanup_readback": {
+      "campaigns_deleted": 4,
+      "campaigns_remaining_active_or_paused": 0,
+      "spend_today_usd": 0.0,
+      "created_test_creatives": 0
+    },
+    "audit_paths": [
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-copy-layer-retry-rafael-20260820T125228Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-layer-existing-creative-retry-rafael-20260820T125359Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-layer-readback-recovery-rafael-20260820T125726Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/sanitized-story-creative-rebuild-rafael-20260820T130138Z.json"
+    ],
+    "completed_at_et": "2026-08-20T09:02:51-04:00"
   }
 }

@@ -178,6 +178,10 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 7. **Usar R$ 0,08 como fatura real.** O relatório WordPress atual estima 8 centavos por linha filtrada; isso não prova evento cobrado no vendor.
 8. **Cruzar datas diferentes.** Meta, SB, SMS Funnel e WP precisam do mesmo período/timezone ou da divergência declarada.
 9. **Concluir por login.** Acesso é validado só depois de abrir as páginas/relatórios e observar dados/filtros esperados.
+10. **Copiar criativo legado com `standard_enhancements`.** Em Graph v25, `/copies` pode falhar com `3858504` quando o `degrees_of_freedom_spec` da fonte ainda contém `creative_features_spec.standard_enhancements`; é erro de parâmetro não transitório, não recebe retry.
+11. **Reconstruir criativo dinâmico só pelo story ID.** Fontes com `asset_feed_spec` podem exigir `catalog_id`/`product_set_id`; story-only pode falhar com `1815017`. Extrair o payload dinâmico gravável real e nunca inventar esses IDs.
+12. **Tratar HTTP 200 sem ID como sucesso.** Em write não idempotente, `success=false` ou ausência de ID não confirma criação. Fazer GET por nome exato + linhagem antes de qualquer retry; se nada aparecer, classificar como falha.
+13. **Assumir que o token que cria também deleta.** Validar a capacidade de cleanup no preflight. Se o token anunciante não remover o artefato, usar somente uma credencial de cleanup já autorizada e confirmar `DELETED` por GET.
 
 ## Verification checklist
 
