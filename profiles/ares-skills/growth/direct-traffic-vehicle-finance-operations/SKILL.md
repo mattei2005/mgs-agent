@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.10
+version: 1.0.12
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -157,15 +157,18 @@ Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 3. `/{ad_account_id}/dsa_recommendations` retorna sugestões baseadas na atividade da conta e pode devolver nome de página; isso não prova entidade legal verificada.
 4. A documentação oficial da Meta informa que `dsa_beneficiary` e `dsa_payor` são campos para conjuntos que segmentam UE/territórios associados; fora da UE, os valores não são salvos mesmo quando enviados. Portanto, não tratar DSA como solução comprovada do `compliance_section` brasileiro.
 5. Ler explicitamente na referência `dsa_beneficiary`, `dsa_payor` e `regional_regulated_categories`, mas separar esses valores de UE da identidade regional brasileira.
-6. As tentativas diretas anteriores com `Garagem Brasil` nos dois campos foram inválidas como teste da entidade correta; o erro `3858634` não prova que `Digital Trust` também seria rejeitado.
-7. Criação completa do zero só pode ser retestada após beneficiário e pagador corretos estarem confirmados, com tudo PAUSED e readback binário.
-8. Cópia profunda síncrona da campanha inteira com `deep_copy=true` falhou com `1885194 / Copy request is too large`.
-9. O fallback antigo — cópia rasa de campanha seguida de criação manual de adset — não é clone completo e não pode ser usado para concluir que “clonar também gera 3858634”. Nesse fluxo, `3858634` veio do POST manual do adset.
-10. Rota parcial validada em 20/08/2026: criar campaign shell PAUSED e copiar nativamente somente o adset compliant da campanha 08 com `deep_copy=false` e sem ads. O readback confirmou campaign/adset PAUSED, budget USD 30, evento SUBSCRIBE, pixel/attribution/targeting herdados e `BRAZIL_REGULATION + VOLUNTARY_VERIFICATION`; updates de nome, budget e targeting foram aceitos e relidos.
-11. Clone completo ainda precisa ser validado hierarquicamente, sem recriar o adset manualmente: campaign shell/cópia rasa → cópia nativa do adset → cópia nativa dos três ads (ou deep copy do adset se couber) → readback 1×1×3.
-12. Async batch mínimo não foi necessário no teste parcial e permanece não validado.
+6. As tentativas diretas anteriores com `Garagem Brasil` nos dois campos foram inválidas como teste da entidade correta. O reteste com `Digital Trust` como beneficiário e pagador também retornou `3858634`; isso é coerente com a documentação oficial de que DSA não é salvo fora da UE e indica que o `compliance_section` brasileiro depende de outra identidade/estado regional.
+7. Cópia profunda síncrona da campanha inteira com `deep_copy=true` falhou com `1885194 / Copy request is too large`.
+8. O fallback antigo — cópia rasa de campanha seguida de criação manual de adset — não é clone completo e não pode ser usado para concluir que “clonar também gera 3858634”. Nesse fluxo, `3858634` veio do POST manual do adset.
+9. Clone hierárquico validado parcialmente em 20/08/2026: cópia rasa nativa da campanha e cópia nativa do adset compliant passaram, evitando `1885194` e preservando `BRAZIL_REGULATION + VOLUNTARY_VERIFICATION`.
+10. A cópia do primeiro anúncio parou com `code=10/subcode=1341012 / No permission to access this profile`. Readback de permissão confirmou que o token de `Roosevelt Mattei` já possui os scopes OAuth `ads_management`, `pages_manage_ads`, `pages_show_list`, `pages_read_engagement` e `business_management`, sem scopes negados.
+11. O ativo Página `Garagem Brasil` não aparece em `/me/accounts`, e o GET da página foi negado. Pela documentação oficial, `/user-id/accounts` lista as páginas nas quais o usuário pode executar tasks; para anúncios a task necessária é `ADVERTISE`. Portanto, o blocker é assignment/acesso ao ativo Página, não falta de scope no token.
+12. Corrigir no Business Manager: atribuir a Página `Garagem Brasil` ao usuário que emitiu o token (atualmente `Roosevelt Mattei`) com capacidade de anunciar/gerenciar anúncios, equivalente à task Graph `ADVERTISE`; depois renovar o token e validar que `/me/accounts?fields=id,name,tasks` retorna a página contendo `ADVERTISE`.
+13. Como o criativo também referencia uma identidade Instagram, manter a conta Instagram associada à Página e atribuída ao mesmo usuário/Business/ad account; o primeiro blocker comprovado, porém, é a ausência da Página.
+14. Não repetir cópia/criação de anúncios até o assignment da Página estar corrigido. Depois, repetir somente a camada de anúncios do clone hierárquico e validar 1×1×3 PAUSED.
+15. Async batch mínimo permanece não validado e não contorna falta de permissão da página.
 
-Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação. Ao receber `code=17/subcode=2446079 / Ad Account Has Too Many API Calls`, parar imediatamente os writes, preservar cleanup/audit e aguardar cooldown.
+Para leituras Meta, usar o próprio header de usage para decidir a janela. Em `code 17/613`, esperar `estimated_time_to_regain_access` informado pela Meta; sem estimativa, aplicar backoff exponencial limitado. Intervalo fixo de 10 segundos fica somente para HTTP `5xx`. Não repetir erro de parâmetro, compliance, permissão ou validação.
 
 Para chamadas Meta nesta operação:
 

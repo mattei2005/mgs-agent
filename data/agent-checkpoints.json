@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Para campanha real, usar rota validada: criar shell PAUSED, copiar adset compliant, atualizar spec, adicionar 3 anúncios separadamente e fazer readback completo antes de ativar.",
+      "next_step": "Atribuir Página Garagem Brasil ao usuário Roosevelt Mattei com acesso Ads/ADVERTISE, garantir Instagram associado, renovar token e validar me/accounts tasks; depois retestar apenas os 3 ad copies e readback 1x1x3 PAUSED.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "teste pós-cooldown concluído. teste1 direto: campaign shell criado, adset financeiro rejeitado 3858634 compliance_section; cleanup deleted. teste2: sucesso — campaign shell paused + cópia nativa do adset compliant 08 deep_copy=false/sem ads; readback confirmou paused, usd30, subscribe, pixel/attribution/targeting e brazil_regulation+voluntary_verification; updates de nome/budget/targeting aceitos e relidos; cleanup deleted. teste3 async não necessário/não validado. 2/2 cleanups confirmados, usd0 spend.",
+      "state": "beneficiário e pagador confirmados por rodolfo como digital trust; página é garagem brasil. reteste direto ainda 3858634. clone hierárquico corrigido copiou campanha e adset; primeiro ad copy parou code10/subcode1341012. permission audit: token roosevelt mattei já tem ads_management/pages_manage_ads/pages_show_list/pages_read_engagement/business_management, mas garagem brasil não aparece em me/accounts; falta assignment da página com task advertise. cleanups 2/2 deleted, nenhum ativo.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T05:45:29+00:00"
+      "updated_at": "2026-08-20T05:59:54+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T05:45:29+00:00"
+  "updated_at": "2026-08-20T05:59:54+00:00"
 }
