@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "ares",
+      "id": "ARES-CC-US-EN-KELLY-CREATIVE-REVIEW-20260820",
+      "next_step": "Quando Kelly enviar a lista, reconciliar cada nome com source_drive_id e asset_drive_id, preservar os bons, corrigir operação/naming/inventário dos idiomas errados e congelar o conjunto exato dos ruins para o gate de exclusão permanente, sem tocar nos não listados.",
+      "objective": "Concluir a revisão humana do lote CC_US_EN enviado por Kelly, separando criativos bons, ruins de produção e itens classificados no idioma incorreto.",
+      "source": "discord:thread:1540085161125879848; ready-execution:/root/mgs-agent/data/ares/creative-ops/executions/20260820T195706Z-kelly-cc-us-en/ready-execution.json",
+      "state": "aguardando a lista por arquivo da kelly. rodolfo definiu kelly como revisora do lote e informou que ela indicará os criativos bons, os ruins destinados à exclusão e as correções de idioma. nenhum asset será liberado, reclassificado ou excluído antes dessa lista; todos permanecem reservado_pelo_gestor e ares_eligible=false.",
+      "thread_id": "1540085161125879848",
+      "updated_at": "2026-08-20T20:42:44+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
       "next_step": "Rotina diária de campanhas Drive segue pendente da definição da estratégia das duas campanhas (recomendação 2x MAXVOL). Não há C50 nova viva após o cleanup.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
@@ -902,5 +912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T20:42:29+00:00"
+  "updated_at": "2026-08-20T20:42:44+00:00"
 }
