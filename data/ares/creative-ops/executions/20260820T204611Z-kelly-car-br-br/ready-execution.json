@@ -1,6 +1,6 @@
 {
   "done": true,
-  "status": "COMPLETED_WITH_1_PENDING",
+  "status": "SUPERSEDED_BY_CLEAN_DEDUPE_RECONCILIATION",
   "started_at_utc": "2026-08-20T20:46:11.318908+00:00",
   "operation": "CAR_BR_BR",
   "thread_id": "1540097284056813658",
@@ -488,5 +488,16 @@
     "unique_destination_ids": 19
   },
   "ready_link": "https://drive.google.com/drive/folders/18cGu-O2BPqaZgBcwJrfhOU2trkgj6h_i",
-  "legacy_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3"
+  "legacy_link": "https://drive.google.com/drive/folders/14cmKBF2Eb0BxYWRO2M94nOIerY81m5-3",
+  "superseded_at_utc": "2026-08-20T20:51:05.819631+00:00",
+  "superseded_by": "/root/mgs-agent/data/ares/creative-ops/executions/20260820T204611Z-kelly-car-br-br/ready-execution-deduped.json",
+  "reconciliation": {
+    "duplicate_clean_sha256": "3fedcc018c10d58ba1005dfbd4e4b570ebcff11b88aae33c4349e74df9b431ee",
+    "active_destination_drive_id": "1legr38Ls6DWqKkS1D_S2o94GfbQW0gVv",
+    "active_destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_056.mp4",
+    "rejected_duplicate_drive_id": "1ZrXZGHAH9DHNZHFMUGpZEYSGO3LabHfq",
+    "rejected_duplicate_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_057.mp4",
+    "rejected_parent_id": "1lbhg5ZvKKBciKPwyAcatA23kFgBig0Ug",
+    "inventory_backup": "/root/mgs-agent/backups/ares-creative-ops/assets-before-clean-dedupe-20260820T205105Z.jsonl"
+  }
 }
