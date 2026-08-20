@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.16
+version: 1.0.18
 author: Ares
 license: internal
 metadata:
@@ -99,7 +99,8 @@ Regras:
 1. Campanha criada do zero exige o tipo explicitamente informado pelo solicitante; se faltar, perguntar antes do write.
 2. Clone herda exatamente `bid_strategy` e presença/valor de `bid_amount` da campanha/adset fonte.
 3. Não usar “com bid/sem bid” como única classificação técnica: todo leilão possui lances; a diferença é meta de custo configurada versus maximização sem meta de CPA.
-4. Nomenclatura definitiva para nomes e relatórios depende de aprovação de Rodolfo. Candidato atual: `COSTCAP-0.50` versus `MAXVOL`; coluna de relatório `Lance` com `CAP 0,50` versus `MAXVOL`.
+4. Nomenclatura aprovada: sufixos de campanha/adset `COSTCAP-0.50` versus `MAXVOL`; coluna de relatório `Lance` com `CPA 0,50` versus `MAXVOL`.
+5. Se o adset expuser `bid_constraints.roas_average_floor`, classificar provisoriamente como `ROAS` no relatório e não renomear como MAXVOL; é uma terceira estratégia que ainda exige definição explícita de Rodolfo. C11 é a exceção viva identificada.
 
 Evento de conversão obrigatório no **adset/conjunto**, independentemente de haver captura:
 
@@ -177,7 +178,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - Relatórios recorrentes em thread fixa usam chave idempotente por dia/checkpoint e readback Discord por GET, validando thread, mensagem e conteúdo. Tabela cercada que ultrapassar o chunk seguro deve falhar fechada em vez de publicar bloco quebrado.
 - Alterar o cap da conta, billing, credenciais, criação/clone/replacement e outras operações continuam fora do escopo salvo autorização própria.
 - Depois de qualquer write autorizado, validar via GET real a campanha, CBO/budget, status e os campos afetados; para criação, validar também adset, três anúncios e parâmetros da URL.
-- Na rotina diária CPV, reservar 20% do cap USD300 para campanhas novas: pool padrão USD60, normalmente 2 campanhas de USD30. Criar entre 18:00–23:30 São Paulo e programar início para 00:30 do dia seguinte. Antes do write, validar espaço real no cap; campanha do zero exige estratégia explícita e clone herda a fonte. Testes de capacidade pedidos como desativados não são produção diária e permanecem PAUSED sem agendamento até aprovação.
+- Na rotina diária CPV, reservar 20% do cap USD300 para campanhas novas: pool padrão USD60, normalmente 2 campanhas de USD30. Iniciar o ciclo às 17:00 São Paulo, criar entre 17:00–23:30 e programar início para 00:30 do dia seguinte. Antes do write, validar espaço real no cap; campanha do zero exige estratégia explícita e clone herda a fonte. Testes de capacidade pedidos como desativados não são produção diária e permanecem PAUSED sem agendamento até aprovação.
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 - Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.
 - Emoji fica no início da coluna `Sinal`; o renderer deve calcular largura visual Unicode, não `len()`, e toda linha do resumo recebe sinal explícito para evitar recuo variável. `ID REC` permanece apenas no audit quando a operação o removeu da apresentação.

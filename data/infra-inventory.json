@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T14:55:47-04:00",
+    "updated_at": "2026-08-20T15:25:20-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8120,12 +8120,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 20106,
-      "modified_at": "2026-08-20T14:52:57-04:00",
-      "sha256": "6f84d9f1ea436e20ac8b89f7ff5c75dc505a7dcb98a4da2faed5793d4f0ab5a6",
+      "size_bytes": 20341,
+      "modified_at": "2026-08-20T15:22:15-04:00",
+      "sha256": "780474501f495b8b9a79bf614f293eac3e16acede1ffd0be1dfc17aeeb35eb25",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T14:55:47-04:00",
-      "validation": "Skill v1.0.16 live/mirror SHA match. Added COST_CAP versus LOWEST_COST_WITHOUT_CAP taxonomy, CPV daily 20% creation routine, and corrected wrapper rollover rule from Ciro/SB; naming remains pending Rodolfo."
+      "updated_at": "2026-08-20T15:25:20-04:00",
+      "validation": "Skill v1.0.18 live/mirror SHA match. Approved COSTCAP-0.50/MAXVOL naming, added C11 ROAS-floor exception, CPV 17:00 creation-cycle start and corrected immutable-wrapper rollover from Ciro/SB."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

@@ -554,6 +554,28 @@
     "real_variations_allowed": true,
     "current_pool_source": "data/ares/creative-ops/inventory/assets.jsonl + live Drive readback"
   },
+  "daily_creation_preflight_20260820_17h": {
+    "requested_by": "Rodolfo Mattei",
+    "requested_start_sp": "2026-08-20T17:00:00-03:00",
+    "status": "blocked_pending_bid_strategy_choice_before_write",
+    "planned_budget_pool_usd": 60,
+    "planned_default_campaigns": 2,
+    "planned_budget_usd_each": 30,
+    "planned_start_sp": "2026-08-21T00:30:00-03:00",
+    "creative_source": "Shared Drive MGS-AGENTS through canonical inventory + live Drive/Meta reconciliation",
+    "inventory_preflight": {
+      "car_br_total": 56,
+      "ready": 55,
+      "trashed": 1,
+      "ares_eligible_true": 0,
+      "legacy_needs_meta_reconciliation": 36,
+      "reserved_by_manager": 20,
+      "selection_gate": "Rodolfo authorized Drive selection; chosen assets still require live Drive readback, Meta reconciliation and explicit per-asset reservation before campaign write"
+    },
+    "strategy_recommendation": "2 MAXVOL campaigns based on C07 delivery restriction at CPA target USD0.50 and more delivery latitude in highest-volume strategy",
+    "blocking_question": "Confirm 2x MAXVOL, 2x COSTCAP with target value, or 1 of each",
+    "selected_assets": []
+  },
   "hierarchy_normalization_state": {
     "validated_at_sao_paulo": "2026-08-19T16:12:33.660637-03:00",
     "source": "manual_manager_action_confirmed_by_Rodolfo_then_Meta_API_readback",
@@ -573,7 +595,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.32",
+  "playbook_version": "1.0.33",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
