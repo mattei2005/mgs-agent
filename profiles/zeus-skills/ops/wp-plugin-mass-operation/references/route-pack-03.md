@@ -13,8 +13,8 @@ Para deploy de arquivos PHP em `wp-content/mu-plugins/` nos 4 sites fora do RunC
 | **WPCode snippet** | ❌ Alto | Última opção. Parse error = site DOWN irrecuperável sem .pem. |
 | **SSH bitnami + .pem** | ✅ Melhor | Quando .pem disponível — acesso direto. |
 
-Credenciais WP Admin (browser login): `op item get "SITE wordpress zeus" --vault "MGS Conteúdo" --fields label=username`
-Credenciais REST API: campos `api_auth_user` + `api_application_password` no mesmo item.
+Credenciais WP Admin (browser login): itens canônicos `Wordpress - SITE`, campos `username` + `password`.
+Credenciais REST API: `api_auth_user` + `api_application_password`; exceção `cliquet.com`, que usa `username` + `wp_app_password`. Se houver título duplicado, selecionar o UUID por campos esperados e validar `/wp-json/wp/v2/users/me?context=edit` (HTTP 200, administrator) antes de qualquer write.
 
 ---
 

@@ -32,21 +32,24 @@ b64=$(base64 -w 0 /caminho/arquivo.php)
 
 ## Credenciais dos 4 sites Bitnami
 
-Items no 1Password (vault "MGS Conteúdo"):
+Items canônicos no 1Password (vault "MGS Conteúdo"):
 
 | Site | Item 1Password | IP |
 |---|---|---|
-| finanzas.openzed.com | `openzed finanzas wordpress zeus` | 3.19.138.131 |
-| finanzas.cliquet.com | `cliquet finanzas wordpress zeus` | 18.116.18.34 |
-| openzed.com | `openzed wordpress zeus` | 44.208.155.39 |
-| cliquet.com | `cliquet wordpress zeus` | 35.175.97.196 |
+| finanzas.openzed.com | `Wordpress - finanzas.openzed.com` | 3.19.138.131 |
+| finanzas.cliquet.com | `Wordpress - finanzas.cliquet.com` | 18.116.18.34 |
+| openzed.com | `Wordpress - openzed.com` | 44.208.155.39 |
+| cliquet.com | `Wordpress - cliquet.com` | 35.175.97.196 |
+
+Se houver título duplicado, selecione o UUID que contenha os campos esperados e valide-o por smoke REST autenticado (`/wp-json/wp/v2/users/me?context=edit` HTTP 200, role administrator) antes de qualquer write. Nunca escolha só pelo título.
 
 ### Dois conjuntos de credenciais por item (CRÍTICO)
 
 | Contexto | Campo 1Password | Uso |
 |---|---|---|
 | Login browser (File Manager UI) | `username` + `password` | Autenticação wp-admin |
-| REST API | `api_auth_user` + `api_application_password` | curl, validação, install/remove plugins |
+| REST API (padrão) | `api_auth_user` + `api_application_password` | curl, validação, install/remove plugins |
+| REST API (`cliquet.com`) | `username` + `wp_app_password` | Exceção de campos validada por smoke autenticado |
 
 ---
 
