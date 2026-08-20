@@ -1,0 +1,631 @@
+Title: Ad Account Adsets
+
+URL Source: https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-account/adsets
+
+Markdown Content:
+`adlabels`
+
+_list<Object>_ Specifies list of labels to be associated with this object. This field is optional
+`ad_set_goal`
+
+_Object_ The customer lifecycle strategy for this ad set. Available only for Sales (`OUTCOME_SALES`) ad sets on ad accounts with goal access; otherwise the write is rejected with error `1870252`. Writes merge with the existing goal: an omitted sub-field keeps its current value, and the effective `type` is the sent `type` or, if omitted, the existing one. A non-BROAD goal is not allowed on an ad set whose campaign is in a restricted special ad category (housing, employment, credit, financial products & services, education, or online gambling & gaming); such writes are rejected with error `1870261`.
+
+* * *
+
+`type`_int64_
+
+Required whenever `ad_set_goal` is present (otherwise error `1870258`). Values writable via the API: `0` BROAD, `2` EXCLUDE_EXISTING_CUSTOMERS, `1` EXCLUDE_EXISTING_AND_ENGAGED_CUSTOMERS. Note the mapping: `2` excludes existing customers only, while `1` excludes both existing and engaged customers.
+
+`existing_customers_exclusions`_list<numeric string>_
+
+Custom audience IDs of existing customers to exclude. Required for `type``1` and `2`.
+
+`engaged_audiences_exclusions`_list<numeric string>_
+
+Custom audience IDs of engaged audiences to exclude. Required for `type``1`; not allowed for `type``0` or `2` (error `1870254`).
+
+Show child parameters
+`adset_schedule`
+
+_list<Object>_ Ad set schedule, representing a delivery schedule for a single day
+
+* * *
+
+`start_minute`_int64_
+
+A 0 based minute of the day representing when the schedule starts
+
+required
+
+`end_minute`_int64_
+
+A 0 based minute of the day representing when the schedule ends
+
+required
+
+`days`_list<int64>_
+
+Array of ints representing which days the schedule is active. Valid values are 0-6 with 0 representing Sunday, 1 representing Monday, ... and 6 representing Saturday.
+
+required
+
+`timezone_type`_enum {USER, ADVERTISER}_
+
+**Default value:**`USER`
+
+Show child parameters
+`attribution_spec`
+
+_list<JSON object>_ Conversion attribution spec used for attributing conversions for optimization. Supported window lengths differ by optimization goal and campaign objective.
+
+* * *
+
+`event_type`_enum {CLICK\_THROUGH, VIEW\_THROUGH, ENGAGED\_VIDEO\_VIEW}_
+
+required
+
+`window_days`_int64_
+
+required
+
+`weight`_float_
+
+**Default value:**`100`
+
+Show child parameters
+`automatic_manual_state`
+
+_enum{UNSET, AUTOMATIC, MANUAL}_ automatic_manual_state
+`bid_amount`
+
+_integer_ Bid cap or target cost for this ad set. The bid cap used in a _lowest cost bid strategy_ is defined as the maximum bid you want to pay for a result based on your `optimization_goal`. The target cost used in a _target cost bid strategy_ lets Facebook bid to meet your target on average and keep costs stable as you spend. If an ad level `bid_amount` is specified, updating this value will overwrite the previous ad level bid. Unless you are using [Reach and Frequency](https://developers.facebook.com/docs/marketing-api/reachandfrequency), `bid_amount` is required if `bid_strategy` is set to `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. 
+
+ The bid amount's unit is cents for currencies like USD, EUR, and the basic unit for currencies like JPY, KRW. The bid amount for ads with `IMPRESSION` or `REACH` as `billing_event` is per 1,000 occurrences, and has to be at least 2 US cents or more. For ads with other `billing_event`s, the bid amount is for each occurrence, and has a minimum value 1 US cents. The minimum bid amounts of other currencies are of similar value to the US Dollar values provided.
+`bid_strategy`
+
+_enum{LOWEST\_COST\_WITHOUT\_CAP, LOWEST\_COST\_WITH\_BID\_CAP, COST\_CAP, LOWEST\_COST\_WITH\_MIN\_ROAS}_ Choose bid strategy for this ad set to suit your specific business goals. Each strategy has tradeoffs and may be available for certain `optimization_goal`s:
+
+`LOWEST_COST_WITHOUT_CAP`: Designed to get the most results for your budget based on your ad set `optimization_goal` without limiting your bid amount. This is the best strategy if you care most about cost efficiency. However with this strategy it may be harder to get stable average costs as you spend. This strategy is also known as _automatic bidding_. Learn more in [Ads Help Center, About bid strategies: Lowest cost⁠](https://www.facebook.com/business/help/721453268045071).
+
+`LOWEST_COST_WITH_BID_CAP`: Designed to get the most results for your budget based on your ad set `optimization_goal` while limiting actual bid to your specified amount. With a bid cap you have more control over your cost per actual optimization event. However if you set a limit which is too low you may get less ads delivery. If you select this, you must provide a bid cap with the `bid_amount` field. Note: during creation this bid strategy is set if you provide `bid_amount` only. This strategy is also known as _manual maximum-cost bidding_. Learn more in [Ads Help Center, About bid strategies: Lowest cost⁠](https://www.facebook.com/business/help/721453268045071).
+
+Notes:
+
+*   If you enable campaign budget optimization, you should set `bid_strategy` at the parent campaign level.
+
+*   `TARGET_COST` bidding strategy has been deprecated with [Marketing API v9](https://developers.facebook.com/docs/graph-api/changelog/version9.0).
+`billing_event`
+
+_enum{APP\_INSTALLS, CLICKS, IMPRESSIONS, LINK\_CLICKS, NONE, OFFER\_CLAIMS, PAGE\_LIKES, POST\_ENGAGEMENT, THRUPLAY, PURCHASE, LISTING\_INTERACTION}_ The billing event that this ad set is using:
+
+APP_INSTALLS: Pay when people install your app.
+
+CLICKS: Deprecated.
+
+IMPRESSIONS: Pay when the ads are shown to people.
+
+LINK_CLICKS: Pay when people click on the link of the ad.
+
+OFFER_CLAIMS: Pay when people claim the offer.
+
+PAGE_LIKES: Pay when people like your page.
+
+POST_ENGAGEMENT: Pay when people engage with your post.
+
+VIDEO_VIEWS: Pay when people watch your video ads for at least 10 seconds.
+
+THRUPLAY: Pay for ads that are played to completion, or played for at least 15 seconds.
+`budget_schedule_specs`
+
+_list<JSON or object-like arrays>_ Initial high demand periods to be created with the ad set.
+
+ Provide list of `time_start`, `time_end`,`budget_value`, and `budget_value_type`.
+
+For example,
+
+-F 'budget_schedule_specs=[{
+
+ "time_start":1699081200,
+
+ "time_end":1699167600,
+
+ "budget_value":100,
+
+ "budget_value_type":"ABSOLUTE"
+
+ }]' 
+
+ See [High Demand Period](https://developers.facebook.com/docs/graph-api/reference/high-demand-period) for more details on each field.
+
+* * *
+
+`id`_int64_
+
+`time_start`_datetime_
+
+`time_end`_datetime_
+
+`budget_value`_int64_
+
+`budget_value_type`_enum{ABSOLUTE, MULTIPLIER}_
+
+`recurrence_type`_enum{ONE\_TIME, WEEKLY}_
+
+`weekly_schedule`_list<JSON or object-like arrays>_
+
+* * *
+
+`days`_list<int64>_
+
+`minute_start`_int64_
+
+`minute_end`_int64_
+
+`timezone_type`_string_
+
+Show child parameters
+
+Show child parameters
+`budget_source`
+
+_enum{NONE, RMN}_ budget_source
+`budget_split_set_id`
+
+_numeric string or integer_ budget_split_set_id
+`campaign_attribution`
+
+_enum{}_ campaign_attribution
+`campaign_id`
+
+_numeric string or integer_ The ad campaign you wish to add this ad set to.
+`campaign_spec`
+
+_Campaign spec_ Provide `name`, `objective` and `buying_type` for a campaign you want to create. Otherwise you need to provide `campaign_id` for an existing ad campaign. For example:
+
+-F 'campaign_spec={
+
+"name": "Inline created campaign",
+
+"objective": "CONVERSIONS",
+
+"buying_type": "AUCTION"
+
+}'
+
+Please refer to the [Outcome-Driven Ads Experiences mapping table](https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-campaign-group#odax-mapping) to find new objectives and their corresponding destination types, optimization goals and promoted objects.
+`contextual_bundling_spec`
+
+_Object_ settings of Contextual Bundle to support ads serving in Facebook contextual surfaces
+
+* * *
+
+`status`_enum{OPT\_OUT, OPT\_IN}_
+
+Show child parameters
+`cost_bidding_mode`
+
+_enum{VOLUME\_FOCUSED, BALANCED, COST\_FOCUSED}_ cost_bidding_mode
+`creative_sequence`
+
+_list<numeric string or integer>_ Order of the adgroup sequence to be shown to users
+`daily_budget`
+
+_int64_ The daily budget defined in your [account currency](https://developers.facebook.com/documentation/ads-commerce/marketing-api), allowed only for ad sets with a duration (difference between `end_time` and `start_time`) longer than 24 hours. 
+
+Either `daily_budget` or `lifetime_budget` must be greater than 0.
+`daily_imps`
+
+_int64_ Daily impressions. Available only for campaigns with `buying_type=FIXED_CPM`
+`daily_min_spend_target`
+
+_int64_ Daily minimum spend target of the ad set defined in your account currency. To use this field, daily budget must be specified in the Campaign. This target is not a guarantee but our best effort.
+`daily_spend_cap`
+
+_int64_ Daily spend cap of the ad set defined in your account currency. To use this field, daily budget must be specified in the Campaign. Set the value to 922337203685478 to remove the spend cap.
+`destination_type`
+
+_enum{WEBSITE, APP, MESSENGER, APPLINKS\_AUTOMATIC, WHATSAPP, INSTAGRAM\_DIRECT, FACEBOOK, MESSAGING\_MESSENGER\_WHATSAPP, MESSAGING\_INSTAGRAM\_DIRECT\_MESSENGER, MESSAGING\_INSTAGRAM\_DIRECT\_MESSENGER\_WHATSAPP, MESSAGING\_INSTAGRAM\_DIRECT\_WHATSAPP, SHOP\_AUTOMATIC, ON\_AD, ON\_POST, ON\_EVENT, ON\_VIDEO, ON\_PAGE, INSTAGRAM\_PROFILE, FACEBOOK\_PAGE, INSTAGRAM\_PROFILE\_AND\_FACEBOOK\_PAGE, INSTAGRAM\_LIVE, FACEBOOK\_LIVE, IMAGINE}_ Destination of ads in this Ad Set. Options include: Website, App, Messenger, `INSTAGRAM_DIRECT`, `INSTAGRAM_PROFILE`.
+`dsa_beneficiary`
+
+_string_ dsa_beneficiary
+`dsa_payor`
+
+_string_ dsa_payor
+`end_time`
+
+_datetime_ End time, required when `lifetime_budget` is specified. e.g. `2015-03-12 23:59:59-07:00` or `2015-03-12 23:59:59 PDT`. When creating a set with a daily budget, specify `end_time=0` to set the set to be ongoing and have no end date. UTC UNIX timestamp
+`execution_options`
+
+_list<enum{validate\_only, include\_recommendations}>_**Default value:**`Set`
+
+An execution setting
+
+`validate_only`: when this option is specified, the API call will not perform the mutation but will run through the validation rules against values of each field. 
+
+`include_recommendations`: this option cannot be used by itself. When this option is used, recommendations for ad object's configuration will be included. A separate section [recommendations](https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation) will be included in the response, but only if recommendations for this specification exist.
+
+If the call passes validation or review, response will be `{"success": true}`. If the call does not pass, an error will be returned with more details. These options can be used to improve any UI to display errors to the user much sooner, e.g. as soon as a new value is typed into any field corresponding to this ad object, rather than at the upload/save stage, or after review.
+`existing_customer_budget_percentage`
+
+_int64_ existing_customer_budget_percentage
+`frequency_control_specs`
+
+_list<Object>_ An array of frequency control specs for this ad set. Writes to this field are only available in ad sets where `REACH` and `THRUPLAY` are the performance goal.
+
+* * *
+
+`event`_enum{IMPRESSIONS, VIDEO\_VIEWS, VIDEO\_VIEWS\_2S, VIDEO\_VIEWS\_15S}_
+
+Event name, only `IMPRESSIONS` currently.
+
+required
+
+`interval_days`_integer_
+
+Interval period in days, between 1 and 90 (inclusive)
+
+required
+
+`max_frequency`_integer_
+
+The maximum frequency, between 1 and 90 (inclusive)
+
+required
+
+`type`_enum{NONE, CAP, TARGET}_
+
+Show child parameters
+`is_dc_follow_optimized`
+
+_boolean_ is_dc_follow_optimized
+`is_dynamic_creative`
+
+_boolean_ Indicates the ad set must only be used for dynamic creatives. Dynamic creative ads can be created in this ad set. Defaults to `false`
+`is_sac_cfca_terms_certified`
+
+_boolean_ is_sac_cfca_terms_certified
+`lifetime_budget`
+
+_int64_ Lifetime budget, defined in your [account currency](https://developers.facebook.com/documentation/ads-commerce/marketing-api). If specified, you must also specify an `end_time`.
+
+Either `daily_budget` or `lifetime_budget` must be greater than 0.
+`lifetime_imps`
+
+_int64_ Lifetime impressions. Available only for campaigns with `buying_type=FIXED_CPM`
+`lifetime_min_spend_target`
+
+_int64_ Lifetime minimum spend target of the ad set defined in your account currency. To use this field, lifetime budget must be specified in the Campaign. This target is not a guarantee but our best effort.
+`lifetime_spend_cap`
+
+_int64_ Lifetime spend cap of the ad set defined in your account currency. To use this field, lifetime budget must be specified in the Campaign. Set the value to 922337203685478 to remove the spend cap.
+`max_budget_spend_percentage`
+
+_int64_ max_budget_spend_percentage
+`min_budget_spend_percentage`
+
+_int64_ min_budget_spend_percentage
+`multi_event_conversion_attribution_window_seconds`
+
+_int64_ multi_event_conversion_attribution_window_seconds
+`multi_optimization_goal_weight`
+
+_enum{UNDEFINED, BALANCED, PREFER\_INSTALL, PREFER\_EVENT}_ multi_optimization_goal_weight
+`name`
+
+_string_ Ad set name, max length of 400 characters.
+
+required
+
+supports emoji
+`optimization_goal`
+
+_enum{NONE, APP\_INSTALLS, AD\_RECALL\_LIFT, ENGAGED\_USERS, EVENT\_RESPONSES, IMPRESSIONS, LEAD\_GENERATION, QUALITY\_LEAD, LINK\_CLICKS, OFFSITE\_CONVERSIONS, PAGE\_LIKES, POST\_ENGAGEMENT, QUALITY\_CALL, REACH, LANDING\_PAGE\_VIEWS, VISIT\_INSTAGRAM\_PROFILE, ENGAGED\_PAGE\_VIEWS, VALUE, THRUPLAY, DERIVED\_EVENTS, APP\_INSTALLS\_AND\_OFFSITE\_CONVERSIONS, CONVERSATIONS, IN\_APP\_VALUE, MESSAGING\_PURCHASE\_CONVERSION, MESSAGING\_DEEP\_CONVERSATION\_AND\_FOLLOW, SUBSCRIBERS, REMINDERS\_SET, MEANINGFUL\_CALL\_ATTEMPT, PROFILE\_VISIT, PROFILE\_AND\_PAGE\_ENGAGEMENT, ADVERTISER\_SILOED\_VALUE, AUTOMATIC\_OBJECTIVE, MESSAGING\_APPOINTMENT\_CONVERSION}_ What the ad set is optimizing for. 
+
+`APP_INSTALLS`: Will optimize for people more likely to install your app.
+
+`ENGAGED_USERS`: Will optimize for people more likely to take a particular action in your app.
+
+`EVENT_RESPONSES`: Will optimize for people more likely to attend your event.
+
+`IMPRESSIONS`: Will show the ads as many times as possible.
+
+`LEAD_GENERATION`: Will optimize for people more likely to fill out a lead generation form.
+
+`LINK_CLICKS`: Will optimize for people more likely to click in the link of the ad.
+
+`OFFER_CLAIMS`: Will optimize for people more likely to claim the offer.
+
+`OFFSITE_CONVERSIONS`: Will optimize for people more likely to make a conversion in the site
+
+`PAGE_ENGAGEMENT`: Will optimize for people more likely to engage with your page.
+
+`PAGE_LIKES`: Will optimize for people more likely to like your page.
+
+`POST_ENGAGEMENT`: Will optimize for people more likely to engage with your post.
+
+`REACH`: Optimize to reach the most unique users of each day or interval specified in `frequency_control_specs`.
+
+`SOCIAL_IMPRESSIONS`: Increase the number of impressions with social context. For example, with the names of one or more of the user's friends attached to the ad who have already liked the page or installed the app.
+
+`VALUE`: Will optimize for maximum total purchase value within the specified attribution window.
+
+`THRUPLAY`: Will optimize delivery of your ads to people are more likely to play your ad to completion, or play it for at least 15 seconds.
+
+`AD_RECALL_LIFT`: Optimize for people more likely to remember seeing your ads.
+
+`VISIT_INSTAGRAM_PROFILE`: Optimize for visits to the advertiser's instagram profile.
+`optimization_sub_event`
+
+_enum{NONE, VIDEO\_SOUND\_ON, TRIP\_CONSIDERATION, TRAVEL\_INTENT, TRAVEL\_INTENT\_NO\_DESTINATION\_INTENT, TRAVEL\_INTENT\_BUCKET\_01, TRAVEL\_INTENT\_BUCKET\_02, TRAVEL\_INTENT\_BUCKET\_03, TRAVEL\_INTENT\_BUCKET\_04, TRAVEL\_INTENT\_BUCKET\_05, POST\_INTERACTION}_ Optimization sub event for a specific optimization goal (ex: Sound-On event for Video-View-2s optimization goal)
+`pacing_type`
+
+_list<string>_ Defines the pacing type, standard by default or using [ad scheduling](https://developers.facebook.com/docs/marketing-api/adset/pacing)
+`promoted_object`
+
+_Object_ The object this ad set is promoting across all its ads. Required with certain campaign objectives.
+
+**CONVERSIONS**
+
+*   `pixel_id` (Conversion pixel ID) 
+*   `pixel_id` (Facebook pixel ID) and `custom_event_type`
+*   `pixel_id` (Facebook pixel ID) and `pixel_rule` and `custom_event_type`
+*   `event_id` (Facebook event ID) and `custom_event_type`
+*   `application_id`, `object_store_url`, and `custom_event_type` for mobile app events 
+*   `offline_conversion_data_set_id` (Offline dataset ID) and `custom_event_type` for offline conversions 
+
+**PAGE_LIKES**
+
+*   `page_id`
+
+**OFFER_CLAIMS**
+
+*   `page_id`
+
+**LINK_CLICKS**
+
+*   `application_id` and `object_store_url` for mobile app or Canvas app engagement link clicks 
+
+**APP_INSTALLS**
+
+*   `application_id` and `object_store_url`
+
+**if the `optimization_goal` is `OFFSITE_CONVERSIONS`**
+
+*   `application_id`, `object_store_url`, and `custom_event_type` (Standard Events) 
+*   `application_id`, `object_store_url`, `custom_event_type = OTHER` and `custom_event_str` (Custom Events) 
+
+**PRODUCT_CATALOG_SALES**
+
+*   `product_set_id`
+*   `product_set_id` and `custom_event_type`
+
+When `optimization_goal` is `LEAD_GENERATION`, `page_id` needs to be passed as promoted_object.
+
+Please refer to the [Outcome-Driven Ads Experiences mapping table](https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-campaign-group#odax-mapping) to find new objectives and their corresponding destination types, optimization goals and promoted objects.
+
+* * *
+
+`application_id`_int_
+
+The ID of a Facebook Application. Usually related to mobile or canvas games being promoted on Facebook for installs or engagement
+
+`pixel_id`_numeric string or integer_
+
+The ID of a Facebook conversion pixel. Used with offsite conversion campaigns.
+
+`custom_event_type`_enum{AD\_IMPRESSION, RATE, TUTORIAL\_COMPLETION, CONTACT, CUSTOMIZE\_PRODUCT, DONATE, FIND\_LOCATION, SCHEDULE, START\_TRIAL, SUBMIT\_APPLICATION, SUBSCRIBE, ADD\_TO\_CART, ADD\_TO\_WISHLIST, INITIATED\_CHECKOUT, ADD\_PAYMENT\_INFO, PURCHASE, LEAD, COMPLETE\_REGISTRATION, CONTENT\_VIEW, SEARCH, SERVICE\_BOOKING\_REQUEST, MESSAGING\_CONVERSATION\_STARTED\_7D, LEVEL\_ACHIEVED, ACHIEVEMENT\_UNLOCKED, SPENT\_CREDITS, LISTING\_INTERACTION, D2\_RETENTION, D7\_RETENTION, OTHER}_
+
+The event from an App Event of a mobile app, not in the standard event list.
+
+`object_store_url`_URL_
+
+The uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the "application_id" this uniquely specifies an object which can be the subject of a Facebook advertising campaign.
+
+`object_store_urls`_list<URL>_
+
+The vec of uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the "application_id" this uniquely specifies an object which can be the subject of a Facebook advertising campaign.
+
+`offer_id`_numeric string or integer_
+
+The ID of an Offer from a Facebook Page.
+
+`page_id`_Page ID_
+
+The ID of a Facebook Page
+
+`product_catalog_id`_numeric string or integer_
+
+`product_item_id`_numeric string or integer_
+
+The ID of the product item.
+
+`job_listing_id`_numeric string or integer_
+
+The ID of the marketplace job listing.
+
+`instagram_profile_id`_numeric string or integer_
+
+The ID of the instagram profile id.
+
+`product_set_id`_numeric string or integer_
+
+The ID of a Product Set within an Ad Set level Product Catalog. Used with [Dynamic Product Ads](https://developers.facebook.com/docs/marketing-api/dynamic-product-ads).
+
+`event_id`_numeric string or integer_
+
+The ID of a Facebook Event
+
+`offline_conversion_data_set_id`_numeric string or integer_
+
+The ID of the offline dataset.
+
+`fundraiser_campaign_id`_numeric string or integer_
+
+The ID of the fundraiser campaign.
+
+`custom_event_str`_string_
+
+The event from an App Event of a mobile app, not in the standard event list.
+
+`mcme_conversion_id`_numeric string or integer_
+
+The ID of a MCME conversion.
+
+`conversion_goal_id`_numeric string or integer_
+
+The ID of a Conversion Goal.
+
+`offsite_conversion_event_id`_numeric string or integer_
+
+The ID of a Offsite Conversion Event
+
+`boosted_product_set_id`_numeric string or integer_
+
+The ID of the Boosted Product Set within an Ad Set level Product Catalog. Should only be present when the advertiser has opted into Product Set Boosting.
+
+`lead_ads_form_event_source_type`_enum{inferred, meta\_source, offsite\_crm, offsite\_web, onsite\_crm, onsite\_crm\_single\_event, onsite\_clo\_dep\_aet, onsite\_web, onsite\_p2b\_call, onsite\_messaging, qualified\_lead\_file}_
+
+The event source of lead ads form.
+
+`lead_ads_custom_event_type`_enum{AD\_IMPRESSION, RATE, TUTORIAL\_COMPLETION, CONTACT, CUSTOMIZE\_PRODUCT, DONATE, FIND\_LOCATION, SCHEDULE, START\_TRIAL, SUBMIT\_APPLICATION, SUBSCRIBE, ADD\_TO\_CART, ADD\_TO\_WISHLIST, INITIATED\_CHECKOUT, ADD\_PAYMENT\_INFO, PURCHASE, LEAD, COMPLETE\_REGISTRATION, CONTENT\_VIEW, SEARCH, SERVICE\_BOOKING\_REQUEST, MESSAGING\_CONVERSATION\_STARTED\_7D, LEVEL\_ACHIEVED, ACHIEVEMENT\_UNLOCKED, SPENT\_CREDITS, LISTING\_INTERACTION, D2\_RETENTION, D7\_RETENTION, OTHER}_
+
+The event from an App Event of a mobile app, not in the standard event list.
+
+`lead_ads_custom_event_str`_string_
+
+The event from an App Event of a mobile app, not in the standard event list.
+
+`lead_ads_offsite_conversion_type`_enum{default, clo}_
+
+The offsite conversion type for lead ads
+
+`value_semantic_type`_enum {VALUE, MARGIN, LIFETIME\_VALUE}_
+
+The semantic of the event value to be using for optimization
+
+`variation`_enum {OMNI\_CHANNEL\_SHOP\_AUTOMATIC\_DATA\_COLLECTION, PRODUCT\_SET\_AND\_APP, PRODUCT\_SET\_AND\_IN\_STORE, PRODUCT\_SET\_AND\_OMNICHANNEL, PRODUCT\_SET\_AND\_PHONE\_CALL, PRODUCT\_SET\_AND\_WEBSITE, PRODUCT\_SET\_AND\_WEBSITE\_AND\_PHONE\_CALL, PRODUCT\_SET\_WEBSITE\_APP\_AND\_INSTORE}_
+
+Variation of the promoted object for a PCA ad
+
+`passback_pixel_id`_numeric string or integer_
+
+ID of the pixel used for tracking passback events
+
+`passback_application_id`_numeric string or integer_
+
+ID of the application used for tracking passback events
+
+`product_set_optimization`_enum{enabled, disabled}_
+
+Enum defining whether or not the ad should be optimized for the promoted product set
+
+`full_funnel_objective`_enum{OFFER\_CLAIMS, PAGE\_LIKES, EVENT\_RESPONSES, POST\_ENGAGEMENT, WEBSITE\_CONVERSIONS, LINK\_CLICKS, VIDEO\_VIEWS, LOCAL\_AWARENESS, PRODUCT\_CATALOG\_SALES, LEAD\_GENERATION, BRAND\_AWARENESS, STORE\_VISITS, REACH, APP\_INSTALLS, MESSAGES, OUTCOME\_AWARENESS, OUTCOME\_ENGAGEMENT, OUTCOME\_LEADS, OUTCOME\_SALES, OUTCOME\_TRAFFIC, OUTCOME\_APP\_PROMOTION}_
+
+Enum defining the full funnel objective of the campaign
+
+`dataset_split_id`_numeric string or integer_
+
+ID of the dataset split used to perform additional optimization on the dataset
+
+`dataset_split_ids`_array<numeric string>_
+
+IDs of the dataset splits used to perform additional optimization on the dataset
+
+`lead_ads_selected_pixel_id`_numeric string or integer_
+
+The selected pixel id for lead ads conversion leads optimization
+
+`custom_attribution_source_ids`_array<numeric string>_
+
+IDs of the custom attribution sources used for tracking passback events
+
+`multi_event_product`_int64_
+
+Identifies which action-to-action product the advertiser is using
+
+`product_sales_channel`_enum {ONLINE, IN\_STORE, OMNI}_
+
+ProductSalesChannel of the promoted object for Omni L3 DA SBLI ads
+
+`anchor_event_config`_JSON object_
+
+Configuration for anchor event in multi-event optimization campaigns
+
+`multi_event_conversion_info`_JSON object_
+
+Configuration for multi-event conversion info in CLO campaigns
+
+`live_video_destination`_string_
+
+The live video destination type for live video ads
+
+`smart_pse_enabled`_boolean_
+
+Whether Smart Product Set Expansion is enabled for this campaign.
+
+`smart_pse_setting`_enum{ENABLED, DISABLED}_
+
+Setting for Smart Product Set Expansion. Uses an enum instead of a boolean to avoid TAO null handling issues.
+
+`lead_ads_follow_up_event`_enum{whatsapp\_conversations}_
+
+The selected lead follow-up event for lead ads campaigns.
+
+`omnichannel_object`_Object_
+
+* * *
+
+`app`_array<JSON object>_
+
+`pixel`_array<JSON object>_
+
+required
+
+`onsite`_array<JSON object>_
+
+Show child parameters
+
+`whats_app_business_phone_number_id`_numeric string or integer_
+
+`whatsapp_phone_number`_string_
+
+Show child parameters
+`relative_value`
+
+_float_ relative_value
+`rf_prediction_id`
+
+_numeric string or integer_ Reach and frequency prediction ID
+`source_adset_id`
+
+_numeric string or integer_ The source adset id that this ad is copied from (if applicable).
+`start_time`
+
+_datetime_ The start time of the set, e.g. `2015-03-12 23:59:59-07:00` or `2015-03-12 23:59:59 PDT`. UTC UNIX timestamp
+`status`
+
+_enum{ACTIVE, PAUSED, DELETED, ARCHIVED}_ Only `ACTIVE` and `PAUSED` are valid for creation. The other statuses can be used for update. If it is set to `PAUSED`, all its active ads will be paused and have an effective status `ADSET_PAUSED`.
+`targeting`
+
+_Targeting object_ An ad set's targeting structure. "countries" is required. See [targeting](https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/reference/advanced-targeting).
+`time_based_ad_rotation_id_blocks`
+
+_list<list<int64>>_ Specify ad creative that displays at custom date ranges in a campaign as an array. A list of Adgroup IDs. The list of ads to display for each time range in a given schedule. For example display first ad in Adgroup for first date range, second ad for second date range, and so on. You can display more than one ad per date range by providing more than one ad ID per array. For example set `time_based_ad_rotation_id_blocks` to [[1], [2, 3], [1, 4]]. On the first date range show ad 1, on the second date range show ad 2 and ad 3 and on the last date range show ad 1 and ad 4. Use with `time_based_ad_rotation_intervals` to specify date ranges.
+`time_based_ad_rotation_intervals`
+
+_list<int64>_ Date range when specific ad creative displays during a campaign. Provide date ranges in an array of UNIX timestamps where each timestamp represents the start time for each date range. For example a 3-day campaign from May 9 12am to May 11 11:59PM PST can have three date ranges, the first date range starts from May 9 12:00AM to May 9 11:59PM, second date range starts from May 10 12:00AM to May 10 11:59PM and last starts from May 11 12:00AM to May 11 11:59PM. The first timestamp should match the campaign start time. The last timestamp should be at least 1 hour before the campaign end time. You must provide at least two date ranges. All date ranges must cover the whole campaign length, so any date range cannot exceed campaign length. Use with `time_based_ad_rotation_id_blocks` to specify ad creative for each date range.
+`time_start`
+
+_datetime_ Time start
+`time_stop`
+
+_datetime_ Time stop
+`tune_for_category`
+
+_enum{NONE, EMPLOYMENT, HOUSING, CREDIT, ISSUES\_ELECTIONS\_POLITICS, ONLINE\_GAMBLING\_AND\_GAMING, FINANCIAL\_PRODUCTS\_SERVICES}_ tune_for_category
+`value_rule_set_id`
+
+_numeric string or integer_ Value Rule Set ID
+`value_rules_applied`
+
+_boolean_ value_rules_applied
