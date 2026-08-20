@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTS-AUTOWRITE-20260820",
-      "next_step": "Operação recorrente normal; pausa D3 continua fail-closed até calibrar deterministicamente o gate externo",
-      "objective": "Executar Intraday com segurança e consolidar layouts aprovados por Rodolfo",
-      "source": "discord:thread:1539969033170980945; operation config v1.0.18; direct-traffic-cbo-operations v1.0.6; daily message 1539988839848742953; Meta campaign 120250209406580632",
-      "state": "concluído: diário alinhado por largura visual unicode, com sinal explícito em todas as linhas do resumo e novas colunas budget e custo na tabela de campanhas. budget é o valor atual meta; custo é spend/omni_purchase do dia. diário republicado em um chunk e validado por discord get 200; posições visuais do resumo idênticas. intraday mantém tabela aprovada com custo e roas. autowrite guarded permanece seguro; c09 active usd33.",
+      "next_step": "Operação recorrente normal; validar primeira entrega automática das 11:00 SP pelo audit/readback e manter pausa D3 fail-closed até calibrar gate externo",
+      "objective": "Operar Intraday seguro com cadência e apresentação aprovadas por Rodolfo",
+      "source": "discord:thread:1539969033170980945; operation config v1.0.19; direct-traffic-cbo-operations v1.0.7; cron Creditoparaveiculo 13 G006 Intraday 2h; daily message 1539992479015772200; intraday message 1539992545780826204",
+      "state": "concluído: intraday publica a cada 2h de 07:00 a 23:00 são paulo (07/09/11/13/15/17/19/21/23). checkpoint de ação das 08:00 foi separado em actions-only para preservar escala sem relatório extra. job hermes atualizado, enabled e scheduled. coluna camp substitui campanha e exibe cnn-dd/mm em diário/intraday; ambos republicados e validados por discord get 200. autowrite guarded seguro; c09 active usd33.",
       "thread_id": "1539969033170980945",
-      "updated_at": "2026-08-20T13:26:25+00:00"
+      "updated_at": "2026-08-20T13:41:56+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:38:38+00:00"
+  "updated_at": "2026-08-20T13:41:56+00:00"
 }
