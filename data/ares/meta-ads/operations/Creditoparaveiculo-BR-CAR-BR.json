@@ -214,7 +214,7 @@
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
-      "name": "Creditoparaveiculo 13 G006 Intraday",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h",
       "scheduler": "hourly minute 0",
       "timezone_gate": [
         "07:00",
@@ -253,7 +253,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T09:35:56-04:00",
+  "updated_at": "2026-08-20T09:37:38-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -471,7 +471,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.19",
+  "playbook_version": "1.0.20",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -628,7 +628,7 @@
     "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
     "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
     "durable_context": [
-      "direct-traffic-cbo-operations v1.0.6",
+      "direct-traffic-cbo-operations v1.0.7",
       "operation config",
       "audit/reports",
       "MGS knowledge checkpoint",
@@ -976,7 +976,7 @@
     "sanitized_dynamic_creative_rebuild": "validated_3_of_3: writable asset_feed_spec rebuilt, exact standard_enhancements key absent, non-video fields exact, videos reconciled unordered by title/duration/dimensions/pixel-identical first frame",
     "sanitized_dynamic_one_ad_create": "validated: one PAUSED ad created and read back with the rebuilt creative, then ad and campaign deleted",
     "full_1x1x3_status": "blocked_before_ad_write_by_meta_security_checkpoint_code31_subcode3858385",
-    "practical_next_build_route": "after human authentication in Ads Manager, recreate the three already-validated sanitized dynamic creatives, allow propagation, validate-only the three ads, then write and read back 1x1x3 PAUSED",
+    "practical_next_build_route": "after human authentication in Ads Manager, use Graph v26.0, recreate the three already-validated sanitized dynamic creatives, allow propagation, validate-only the three ads, then write and read back 1x1x3 PAUSED",
     "next_step": "Rafael/Rodolfo must complete the pending account authentication inside Meta Ads Manager; no API write retry before that confirmation"
   },
   "page_asset_permission": {
@@ -1015,12 +1015,19 @@
       "action": "complete authentication in Meta Ads Manager before any further ad create or modify call",
       "existing_ads_message": "Meta states existing ads continue to run normally",
       "no_retry_until_human_authentication": true,
-      "observed_at_et": "2026-08-20T09:27:10-04:00"
+      "observed_at_et": "2026-08-20T09:27:10-04:00",
+      "reconfirmed_on_graph_v26_validate_only": true,
+      "v26_reconfirmed_at_et": "2026-08-20T09:36:15-04:00"
     }
   },
   "campaign_creation_retest_20260820": {
     "authorized_by": "Rodolfo Mattei",
     "token_identity": "Rafael Lucas Oliveira",
+    "meta_app_api_version": "v26.0",
+    "meta_app_api_version_source": "Rodolfo screenshot: both Update all calls and app function upgrade selectors set to v26.0",
+    "v26_runtime_validation": "read preflight HTTP200 for account/Page/creative; validate-only performed no write and returned the same code31/subcode3858385 authentication checkpoint",
+    "runner_graph_version": "v26.0",
+    "runner_graph_version_validation": "py_compile PASS, offline dry-run meta_calls=0, 15 pytest tests passed",
     "permission_preflight": "pass: account active, all required scopes present, Garagem Brasil in me/accounts with ADVERTISE",
     "native_ad_copy_result": "failed_3858504_deprecated_standard_enhancements",
     "existing_creative_id_result": "partial_2_of_3_once; subsequent POST returned no id and exact-name GET found no object",
@@ -1062,6 +1069,6 @@
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-dynamic-propagated-rafael-20260820T132332Z.json",
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json"
     ],
-    "completed_at_et": "2026-08-20T09:30:52-04:00"
+    "completed_at_et": "2026-08-20T09:37:38-04:00"
   }
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T09:34:27-04:00",
+    "updated_at": "2026-08-20T09:37:38-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7532,6 +7532,20 @@
       "report_infra_message_id": "1539823082456485889",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "ares-creditoparaveiculo-create-clone-sequence",
+      "agent": "ares",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-sequence.py",
+      "size_bytes": 38797,
+      "modified_at": "2026-08-20T09:36:59-04:00",
+      "sha256": "aea872347c0fe004e44c48864fadd3eaafc11451eb07dc9985e8a7d95ea7e3a6",
+      "purpose": "Controlled PAUSED campaign/adset/ad creation diagnostics for Creditoparaveiculo BR-CAR-BR with quota, audit, readback and cleanup guards.",
+      "graph_version": "v26.0",
+      "validation": "Rodolfo screenshot confirms app v26.0; live v26 account/Page/creative GET passed; v26 validate-only reproduced code31/3858385 without write; py_compile and offline dry-run passed; 15 pytest tests passed.",
+      "git_tracked": false,
+      "updated_at": "2026-08-20T09:37:38-04:00"
     }
   ],
   "profile_skill_references": [

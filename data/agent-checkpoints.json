@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Rafael/Rodolfo completa a autenticação pendente no Meta Ads Manager e confirma. Depois Ares retesta somente a etapa final: recriar os três criativos sanitizados já validados, aguardar propagação, validate-only dos três anúncios, write PAUSED e readback 1x1x3.",
+      "next_step": "Rafael/Rodolfo completa a autenticação pendente no Meta Ads Manager e confirma. Depois Ares usa Graph v26.0 e retesta somente o fechamento: recriar três criativos sanitizados, aguardar propagação, validate-only dos três anúncios, write PAUSED e readback 1x1x3.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.18; data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json",
-      "state": "token rafael validado para conta e página garagem brasil/advertise. rebuild dinâmico sanitizado validado 3/3: standard_enhancements removido, copy/utm/textos exatos e vídeos conciliados por título, duração, dimensão e frame pixel-idêntico; um anúncio paused foi criado e lido com sucesso. o 1x1x3 final parou antes dos três ad writes por checkpoint de segurança meta code31/subcode3858385 autentique sua conta. nenhum retry permitido. nove campanhas técnicas estão deleted, gasto usd0, zero campanha ativa/pausada, 0 criativos no edge da conta e 0 vídeos no edge da página; nove ids de vídeo permanecem somente como soft/internal direct-readable pelo token anunciante.",
+      "source": "discord:thread:1539434208408375426; screenshot v26.0; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json v1.0.20; data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json",
+      "state": "rodolfo confirmou por screenshot que o app meta está em v26.0 nos dois seletores. ares alinhou o runner para graph v26.0 e validou conta, página garagem brasil/advertise e creative com http200. o validate-only v26.0, sem write, retornou o mesmo checkpoint de segurança code31/subcode3858385 autentique sua conta. rebuild sanitizado permanece validado 3/3 e um anúncio paused real já foi criado/lido; full 1x1x3 aguarda somente autenticação humana. nove campanhas técnicas deleted, gasto usd0, zero campanha ativa/pausada, 0 criativos no edge da conta e 0 vídeos no edge da página.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T13:32:59+00:00"
+      "updated_at": "2026-08-20T13:38:38+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T13:32:59+00:00"
+  "updated_at": "2026-08-20T13:38:38+00:00"
 }

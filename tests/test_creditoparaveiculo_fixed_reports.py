@@ -166,7 +166,23 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "aligned_table" in intraday_source
     assert '"Custo"' in intraday_source
     assert '"ROAS"' in intraday_source
+    assert '["Sinal", "Camp"' in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
+
+
+def test_intraday_report_cadence_and_action_checkpoint_are_separate():
+    module = load_reports_module()
+    expected_report_hours = {7, 9, 11, 13, 15, 17, 19, 21, 23}
+    assert module.INTRADAY_REPORT_HOURS == expected_report_hours
+    for hour in range(24):
+        assert module.intraday_gate_due(hour, actions_only=False) is (hour in expected_report_hours)
+        assert module.intraday_gate_due(hour, actions_only=True) is (hour == 8)
+
+
+def test_campaign_column_is_compact_and_includes_date():
+    module = load_reports_module()
+    assert module.compact_campaign_label("07", "07 - 20-08 - Garagem Brasil") == "C07-20/08"
+    assert module.compact_campaign_label("09", "09 - Garagem Brasil", "2026-08-20") == "C09-20/08"
 
 
 def test_aligned_table_accounts_for_wide_emoji_cells():

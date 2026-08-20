@@ -160,6 +160,8 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 - O formato do relatório pode substituir `ID REC` pela própria coluna/número da campanha quando o contrato específico da operação registrar essa exceção; nunca aplicar a remoção globalmente por inferência.
 - Em Discord, o layout é definido por tipo de relatório e pela referência visual explícita mais recente do operador. Quando Rodolfo disser “quero assim” acompanhando screenshot, reproduzir a estrutura dessa referência em vez de aplicar preferência genérica por cards/linhas. Tabela aprovada pode ser usada tanto no Diário quanto no Intraday; novas colunas devem declarar fonte e fórmula.
 - Emoji fica no início da coluna `Sinal`; o renderer deve calcular largura visual Unicode, não `len()`, e toda linha do resumo recebe sinal explícito para evitar recuo variável. `ID REC` permanece apenas no audit quando a operação o removeu da apresentação.
+- Quando a cadência de relatório mudar, não deslocar silenciosamente o checkpoint de ação. Separar `report schedule` de `action-only checkpoint`; por exemplo, relatórios 07:00–23:00 a cada 2h podem coexistir com escala autorizada às 08:00 sem publicar relatório extra.
+- Cabeçalhos compactos aprovados devem ser preservados. Quando `Campanha` virar `Camp`, exibir também a data operacional no mesmo campo (`CNN-DD/MM`, como `C07-20/08`) usando data persistida/naming validado, não a data presumida do relatório.
 - Quando o Diário exibir `Budget`, rotular como budget atual da Meta se o período for histórico; `Custo` deve declarar a ação/fórmula usada, por exemplo `spend ÷ omni_purchase`.
 
 ## Guardrails de credenciais
