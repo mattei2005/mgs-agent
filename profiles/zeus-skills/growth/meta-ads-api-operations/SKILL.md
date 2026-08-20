@@ -124,6 +124,21 @@ Operational sequence:
 
 Reference: `references/meta-native-clone-standard-enhancements-2026-06-18.md`.
 
+### Campaign clone rate limits: development tier is not production capacity
+
+When a clone/create workflow returns `code=17` / `error_subcode=2446079`, inspect the live tier and both quota-header families before retrying. A valid token with `ads_management` can still be on `development_access`; Meta documents that tier as a 60-point ad-account score ceiling, while writes generally cost 3 points. Project the complete plan—including `validate_only` mutation calls and final-readback reserve—before the first write.
+
+Operational rules:
+
+1. Parse `X-Ad-Account-Usage` independently from `X-Business-Use-Case-Usage`; a low BUC percentage does not prove ad-account score capacity.
+2. Upgrade the MGS-controlled app to Marketing API Full Access for production capacity and validate `ads_api_access_tier=standard_access` by live header. This does not require a System User.
+3. For faithful deep copy above the synchronous child limit, use native `/{campaign_id}/copies` through `/{ad_account_id}/async_batch_requests`, keep the copy `PAUSED`, poll with bounded backoff, and read back the source-to-copy ID map.
+4. Do not treat Graph batch as a quota bypass: every child operation still counts.
+5. On `17/2446079`, preserve valid PAUSED objects and defer readback until the header reset; do not clean them up solely because the final GET was throttled.
+6. While the live tier remains `development_access`, use one campaign per five-minute window, pre-upload/cache media IDs, and move heavy historical reconciliation outside the mutation window.
+
+Full causal proof, current Meta limits, MGS reconstructed score, implementation order, and verification checklist: `references/meta-clone-development-tier-rate-limit-2026-08-20.md`.
+
 ### Proxy/IP isolation
 
 If the same payload/token fails direct from Hetzner and also fails through Webshare/AdsPower residential proxy, do **not** conclude “it is just Hetzner.” The likely problem is app/token/API trust or the specific Marketing API endpoint.

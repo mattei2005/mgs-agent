@@ -113,13 +113,29 @@
       "id": 7,
       "url": "https://stackoverflow.com/questions/54539702/facebookads-http-exception-authorizationexception-code-17-17-user-request",
       "title": "Stack Overflow: Code 17 and response headers",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Batching won't help at all with rate limiting.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "The best thing you can do is pull in the header x-ad-account-usage and put in a sleep once you hit a high percentage.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 8,
       "url": "https://stackoverflow.com/questions/48573248/overcoming-rate-limiting-in-facebook-marketing-api",
       "title": "Stack Overflow: Marketing API throttling strategies",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "The issue with the mentioned solutions are that they require making a specific request to the Facebook API every second request to check the limit, which reduces the rate by half",
+          "added": "2026-08-20"
+        }
+      ]
     }
   ]
 }

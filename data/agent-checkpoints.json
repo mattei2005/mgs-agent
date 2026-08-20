@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "No retry pós-cooldown, paginar current+archived ads, excluir apenas IDs tecnicos de testes com cleanup comprovado, reconciliar os seis assets, preparar C50/C49 PAUSED e validar 1x1x3; mover os seis para 02_TESTING e reportar estoque físico e elegível separados. Às 00:30, ativar C50/C49 por campaign-only write com cap/holds/hierarquia e GET.",
-      "objective": "Operar trafego direto CBO e a criacao diaria de campanhas para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539826050765299872; operation config; independent delegation deleg_6a58f1bc; dry-run audit daily-create-2026-08-20-20260820T210618Z; failed-clean audit daily-create-2026-08-20-20260820T210712Z; scheduler readback creation+activation enabled",
-      "state": "rotina ativada e endurecida: 17:00 prepara 2 campanhas maxvol usd30 em paused com filhos active e seis criativos drive; 00:30 uma fase separada revalida cap/holds/hierarquia, ativa somente campanhas e faz get. auditoria independente corrigiu o estoque: drive live tem 263 ready fisicos, mas 58 liberacoes foram colocadas em meta_history_pending e ares_eligible=0 ate reconciliacao full current+paused+archived; drift 19 drive-only, 16 inventory-only e 4 grupos de filename duplicado registrado fail-closed. primeiro write anterior foi limpo integralmente apos code17; retry pós-cooldown permanece agendado com full-history gate, preflight/readback resume e ativacao separada.",
+      "next_step": "Após o probe, Rodolfo decide o segundo slot do lote: somente C12 hoje ou replacement controlado de C13; depois executar canário C12 PAUSED com três criativos, validar e ativar 00:30. Em paralelo, implementar batch POST por estágios e auditar upgrade do access tier antes de teste de 10/40 campanhas.",
+      "objective": "Operar trafego direto CBO e a criacao diaria sequencial para creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1539826050765299872; screenshot creation-not-complete; canonical rate-limit plan; operation config; scheduler probe enabled",
+      "state": "rodolfo corrigiu a numeração: próxima campanha obrigatória c12; retry c50/c49 removido antes da execução e runner passou a exigir c12/c13 contíguas, falhando fechado se c13 estiver ocupada. limite meta diagnosticado: app live em development_access; tentativa original usou estimados 59 transport calls antes do code17. plano canônico criado: separar reconciliação, staging de mídia, preparo paused e ativação 00:30; batch readiness reduziu 12 gets para 1; preflight/readback resumíveis e tier standard/advanced como gate de escala. probe read-only pós-cooldown agendado para validar c12/c13, budget e tier sem write.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-20T21:36:57+00:00"
+      "updated_at": "2026-08-20T21:59:16+00:00"
     },
     {
       "agent": "ares",
@@ -53,12 +53,12 @@
     {
       "agent": "zeus",
       "id": "ARES-META-CLONE-RATE-LIMIT-RESEARCH-20260820",
-      "next_step": "Pesquisar documentação oficial Meta, bugs, fóruns e SDKs em inglês sobre Development vs Standard Access, Business Use Case Usage, code 17/2446079, batch/asynchronous requests e native copies; cruzar com a sequência real do Ares e entregar recomendação implementável sem System User.",
+      "next_step": "Aguardar Rodolfo autorizar a implementação no Ares: patch quota-aware e clone async; em paralelo verificar no App Dashboard se o app emissor pode subir para Marketing API Full Access e validar standard_access no header.",
       "objective": "Investigar integralmente a falha de clone/criação Meta do Ares, identificar a causa real do code 17 e definir uma rota de criação robusta com fontes oficiais e evidência pública em inglês.",
-      "source": "discord:thread:1539826050765299872; discord:thread:1540114948984938607; audit:/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-create-2026-08-20-20260820T210712Z.json; throttle:/root/mgs-agent/data/ares/meta-ads/cache/meta-api-throttle-state.json",
-      "state": "thread 1539826050765299872 lida integralmente: 31/31 mensagens, 0 anexos. runtime confirmou que 2 campanhas, 2 adsets, 6 ads, 6 creatives e 12 uploads de vídeo foram criados; o único erro foi get batch adsets no readback final com oauthexception code 17 subcode 2446079. header vivo registra ads_api_access_tier=development_access. pesquisa externa e auditoria de arquitetura em andamento.",
+      "source": "discord:thread:1539826050765299872; discord:thread:1540114948984938607; report:/root/mgs-agent/work/meta-clone-rate-limit-research-20260820/report.md; skill:meta-ads-api-operations/references/meta-clone-development-tier-rate-limit-2026-08-20.md; audit:daily-create-2026-08-20-20260820T210712Z.json",
+      "state": "pesquisa concluída e citations ok: causa confirmada é app/token em development_access, tier limited/documentado como não produtivo. o runner atual projeta 26 mutations ads management (10 validate_only + 16 reais), 78 pontos antes do readback contra teto 60; helper monitora buc mas ignora x-ad-account-usage. solução definida: full access do app emissor, parse/gate de ambos headers, score budget, readback deferred e clone nativo async paused; fallback temporário de uma campanha por janela de 5 minutos.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-20T21:48:11+00:00"
+      "updated_at": "2026-08-20T22:02:23+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:48:11+00:00"
+  "updated_at": "2026-08-20T22:02:23+00:00"
 }

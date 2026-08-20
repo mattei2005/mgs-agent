@@ -37,6 +37,24 @@
       "updated_at": "2026-08-20T19:45:00+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.meta-rate-scale",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "ARES-CREDITOPARAVEICULO-META-RATE-SCALE-V1",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Meta rate-limit reduction and scale plan",
+      "updated_at": "2026-08-20T21:59:16+00:00"
+    },
+    {
       "canonical_key": "capability.disaster-recovery",
       "canonical_source": "config/backup/mgs-offsite-backup.json",
       "consumers": [
@@ -811,5 +829,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T21:20:14+00:00"
+  "updated_at": "2026-08-20T21:59:16+00:00"
 }
