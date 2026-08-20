@@ -18,6 +18,8 @@ def load_module():
 def fake_source():
     return {
         'advertiser': 'Garagem Brasil',
+        'beneficiary': 'Digital Trust',
+        'payor': 'Digital Trust',
         'campaign': {
             'objective': 'OUTCOME_SALES',
             'buying_type': 'AUCTION',
@@ -46,8 +48,8 @@ def test_test1_payload_is_paused_brazil_regulation_and_dsa():
     payload = mod.direct_adset_payload(fake_source(), 'campaign-id', 70)
     assert payload['status'] == 'PAUSED'
     assert payload['regional_regulated_categories'] == ['BRAZIL_REGULATION']
-    assert payload['dsa_beneficiary'] == 'Garagem Brasil'
-    assert payload['dsa_payor'] == 'Garagem Brasil'
+    assert payload['dsa_beneficiary'] == 'Digital Trust'
+    assert payload['dsa_payor'] == 'Digital Trust'
     assert 'age_range' not in payload['targeting']
     assert 'brand_safety_content_filter_levels' not in payload['targeting']
     assert 'smart_pse_enabled' not in payload['promoted_object']

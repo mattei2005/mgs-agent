@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar entrega do one-shot v2. Em deferred, watchdog v2 retoma por estágio; async sem session id fica PAUSED e não recebe cleanup sem terminal comprovado.",
+      "next_step": "Para campanha real, usar rota validada: criar shell PAUSED, copiar adset compliant, atualizar spec, adicionar 3 anúncios separadamente e fazer readback completo antes de ativar.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1539434208408375426",
-      "state": "sequência pós-cooldown v2 reagendada 02:20 sp após revisão independente. dois blockers corrigidos: deferred state separa active campaign/deferred target/async session e teste3 nunca readback/cleanup antes de async terminal. highs corrigidos: outer deferred sem segundo backoff; cooldown futuro não é apagado por 200 concorrente; throttle revalida sob lock. parser cobre todas entradas e guarda só 32. 37 testes passaram. jobs v1 removidos, v2 no-agent ativos.",
+      "state": "teste pós-cooldown concluído. teste1 direto: campaign shell criado, adset financeiro rejeitado 3858634 compliance_section; cleanup deleted. teste2: sucesso — campaign shell paused + cópia nativa do adset compliant 08 deep_copy=false/sem ads; readback confirmou paused, usd30, subscribe, pixel/attribution/targeting e brazil_regulation+voluntary_verification; updates de nome/budget/targeting aceitos e relidos; cleanup deleted. teste3 async não necessário/não validado. 2/2 cleanups confirmados, usd0 spend.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T05:01:04+00:00"
+      "updated_at": "2026-08-20T05:45:29+00:00"
     },
     {
       "agent": "ares",
@@ -872,5 +872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T05:01:04+00:00"
+  "updated_at": "2026-08-20T05:45:29+00:00"
 }

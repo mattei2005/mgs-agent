@@ -172,7 +172,7 @@
     "dry_run_paused_campaign",
     "explicit_write_authorization"
   ],
-  "updated_at": "2026-08-20T01:45:29.397715-04:00",
+  "updated_at": "2026-08-20T01:51:44.181548-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -390,7 +390,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.8",
+  "playbook_version": "1.0.10",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -729,11 +729,10 @@
   },
   "financial_products_br_compliance": {
     "source_endpoint": "/act_1046241194533786/dsa_recommendations",
-    "verified_advertiser_exact": "Garagem Brasil",
     "recommendation_count": 1,
     "adset_fields": {
-      "dsa_beneficiary": "Garagem Brasil",
-      "dsa_payor": "Garagem Brasil"
+      "dsa_beneficiary": "Digital Trust",
+      "dsa_payor": "Digital Trust"
     },
     "regional_regulated_categories_from_reference": [
       "BRAZIL_REGULATION",
@@ -752,7 +751,17 @@
     "regional_post_tested": [
       "BRAZIL_REGULATION",
       "BRAZIL_REGULATION + VOLUNTARY_VERIFICATION"
-    ]
+    ],
+    "page_name": "Garagem Brasil",
+    "confirmed_beneficiary": "Digital Trust",
+    "confirmed_payor": "Digital Trust",
+    "confirmed_by": "Rodolfo Mattei",
+    "confirmation_time_et": "2026-08-20T01:51:44.181522-04:00",
+    "dsa_recommendation_from_account_activity": "Garagem Brasil",
+    "dsa_recommendation_is_legal_entity": false,
+    "previous_verified_advertiser_exact": "superseded_wrong_page_name",
+    "prior_direct_tests_validity": "invalid_for_correct_entity_because_page_name_was_sent",
+    "clone_diagnosis": "campaign deep_copy=true failed 1885194; shallow campaign + manual adset was not a full clone and its 3858634 came from manual adset POST; native adset copy succeeded"
   },
   "meta_read_retry_policy": {
     "delay_seconds": 10,
@@ -868,10 +877,12 @@
   },
   "campaign_creation_capability": {
     "campaign_shell_from_zero": "validated",
-    "direct_financial_adset_from_zero": "blocked_3858634_compliance_section",
+    "direct_financial_adset_from_zero": "requires_retest_with_confirmed_Digital_Trust_beneficiary_and_payor",
     "native_compliant_adset_copy": "validated",
     "full_1x1x3_deep_copy_sync": "blocked_1885194_copy_too_large",
     "async_batch_minimal": "not_run_not_validated",
-    "practical_next_build_route": "campaign shell + compliant adset native copy + add 3 ads separately + full readback"
+    "practical_next_build_route": "campaign shell + compliant adset native copy + add 3 ads separately + full readback",
+    "full_clone_diagnosis": "not_conclusive: only whole-campaign deep copy failed; manual-adset fallback was not a clone",
+    "correct_full_clone_route": "native shallow campaign copy + native adset copy + native copy of 3 ads + full readback"
   }
 }

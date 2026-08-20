@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.8
+version: 1.0.9
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -156,8 +156,10 @@ Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 2. Ler explicitamente na referência `dsa_beneficiary`, `dsa_payor` e `regional_regulated_categories`.
 3. Não assumir que os campos DSA resolvem o advertiser brasileiro: nesta conta a recomendação foi `Garagem Brasil`, a referência retornou DSA nulo e o POST continuou falhando com `3858634 / Advertiser is missing / compliance_section`, mesmo enviando `Garagem Brasil` nos dois campos.
 4. Tratar `VOLUNTARY_VERIFICATION` visto no GET como estado derivado; não há evidência de que enviá-lo no POST crie o vínculo oculto.
-5. Criação do zero via API pública permanece bloqueada nesta conta até capturar um payload/HAR sanitizado do Ads Manager ou a Meta expor o campo de identidade regional necessário.
-6. Cópia profunda síncrona de 1×1×3 falha com `1885194 / Copy request is too large`; o próximo caminho autorizado de diagnóstico é async batch nativo, após cooldown da conta.
+5. Criação completa do zero via API pública permanece bloqueada nesta conta: o campaign shell é criado corretamente, mas o POST direto do adset financeiro continua rejeitado com `3858634 / Advertiser is missing / compliance_section`.
+6. Cópia profunda síncrona de 1×1×3 falha com `1885194 / Copy request is too large`.
+7. Rota validada em 20/08/2026: criar campaign shell PAUSED e copiar nativamente somente o adset compliant da campanha 08 com `deep_copy=false` e sem ads. O readback confirmou campaign/adset PAUSED, budget USD 30, evento SUBSCRIBE, pixel/attribution/targeting herdados e `BRAZIL_REGULATION + VOLUNTARY_VERIFICATION`; updates de nome, budget e targeting foram aceitos e relidos. Essa rota é o fallback técnico aprovado para construir a campanha antes de adicionar os três anúncios em etapa separada.
+8. Async batch mínimo não foi necessário nesse teste, porque a cópia nativa de adset passou. Não tratá-lo como validado.
 
 Para leituras Meta com falha transitória/rate limit, esperar 10 segundos e tentar novamente com limite total. Não repetir erro de parâmetro, compliance ou validação. Ao receber `code=17/subcode=2446079 / Ad Account Has Too Many API Calls`, parar imediatamente os writes, preservar cleanup/audit e aguardar cooldown.
 
