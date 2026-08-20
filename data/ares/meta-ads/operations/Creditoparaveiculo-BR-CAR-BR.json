@@ -119,7 +119,7 @@
     "read_scope": "entire_account",
     "reporting_mode": "autonomous_guarded",
     "write_enabled": true,
-    "campaign_creation_test": "blocked_security_checkpoint_likely_vps_location_device_mismatch_code31_subcode3858385",
+    "campaign_creation_test": "blocked_advertiser_authentication_checkpoint_or_meta_api_bug_code31_subcode3858385",
     "manual_holds": [],
     "controlled_write_one_shot": "historical: reactivate campaigns 07,08,09,10,11 at 00:30; completed",
     "autonomous_action_scope": {
@@ -256,7 +256,7 @@
     "dry_run_paused_campaign",
     "campaign_creation_write_remains_blocked_pending_independent_gates"
   ],
-  "updated_at": "2026-08-20T12:08:34-04:00",
+  "updated_at": "2026-08-20T12:52:17-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -474,7 +474,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.22",
+  "playbook_version": "1.0.23",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -981,12 +981,12 @@
     "source_creative_diagnosis": "all three reference creatives are dynamic asset-feed creatives with degrees_of_freedom_spec.creative_features_spec.standard_enhancements=OPT_IN, which Graph v25 refuses to copy",
     "sanitized_dynamic_creative_rebuild": "validated_3_of_3: writable asset_feed_spec rebuilt, exact standard_enhancements key absent, non-video fields exact, videos reconciled unordered by title/duration/dimensions/pixel-identical first frame",
     "sanitized_dynamic_one_ad_create": "validated: one PAUSED ad created and read back with the rebuilt creative, then ad and campaign deleted",
-    "full_1x1x3_status": "blocked_before_ad_write_by_security_checkpoint_likely_location_or_device_trust_code31_subcode3858385",
-    "practical_next_build_route": "run the same Graph v26 validate-only from Rafael's trusted browser/network; if it passes locally but fails from the VPS, replace the personal-token server route with an approved system-user or trusted egress architecture",
-    "next_step": "do not retry VPS write; compare validate-only from Rafael's trusted Brazil session against VPS Boston egress"
+    "full_1x1x3_status": "blocked_before_ad_write_by_advertiser_authentication_checkpoint_or_api_only_bug_code31_subcode3858385",
+    "practical_next_build_route": "in Ads Manager at ad level, edit or create one isolated PAUSED ad and publish only that item to surface Verifying your changes → Start Authentication; complete email/SMS, then rerun Graph v26 validate-only",
+    "next_step": "if Start Authentication never appears or validate-only remains blocked after the code, escalate with Meta bug 3397941523702775 and audit the app access tier/roles; no API write before that"
   },
   "page_asset_permission": {
-    "status": "asset_assignment_valid_manual_ads_manager_operational_security_checkpoint_on_vps_api_route",
+    "status": "asset_assignment_valid_manual_ads_manager_operational_advertiser_authentication_checkpoint_or_api_bug",
     "token_identity": "Rafael Lucas Oliveira",
     "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
     "oauth_scopes_required_present": [
@@ -1018,9 +1018,9 @@
       "code": 31,
       "error_subcode": 3858385,
       "title": "Autentique sua conta",
-      "action": "run the same Graph v26 validate-only from Rafael's trusted browser/network and compare with the VPS result before any further server-side write",
+      "action": "trigger Start Authentication by editing/creating and publishing one isolated PAUSED ad in Ads Manager; complete email/SMS and rerun validate-only",
       "existing_ads_message": "Meta states existing ads continue to run normally",
-      "no_retry_until_trusted_location_diagnostic": true,
+      "no_retry_until_advertiser_authentication_or_bug_escalation": true,
       "observed_at_et": "2026-08-20T09:27:10-04:00",
       "reconfirmed_on_graph_v26_validate_only": true,
       "v26_reconfirmed_at_et": "2026-08-20T10:22:17-04:00",
@@ -1038,7 +1038,7 @@
         "region": "Massachusetts",
         "provider": "Hostinger International Limited",
         "timezone": "America/New_York",
-        "interpretation": "different location/device trust is a strong hypothesis, not yet proven"
+        "interpretation": "superseded as active hypothesis: Meta documents most tokens as portable between browser and server, and matching cases occur without travel or VPN"
       }
     }
   },
@@ -1058,7 +1058,7 @@
     "sanitized_dynamic_creative_result": "validated_3_of_3 with exact non-video payload parity and unordered video lineage by title, duration, dimensions and pixel-identical first frame",
     "sanitized_dynamic_one_ad_result": "validated PAUSED with Meta ad readback, then deleted",
     "post_authentication_retest": "same token intentionally retained; forced 1Password refresh; validate-only with both sanitized and active source creatives still returns code31/subcode3858385 with no write",
-    "final_blocker": "Meta security checkpoint isolated to server-side API writes; strongest current hypothesis is VPS Boston egress versus Rafael trusted location/device, pending same-request comparison from the browser session",
+    "final_blocker": "advertiser authentication checkpoint hidden until ad edit/publish, or the matching unresolved API-only Meta bug if no Start Authentication action becomes visible",
     "full_1x1x3_validated": false,
     "test_campaign_ids": [
       "120250850864180632",
@@ -1092,6 +1092,31 @@
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-dynamic-propagated-rafael-20260820T132332Z.json",
       "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json"
     ],
-    "completed_at_et": "2026-08-20T10:22:17-04:00"
+    "completed_at_et": "2026-08-20T12:52:17-04:00"
+  },
+  "code31_research_20260820": {
+    "status": "completed_grounded",
+    "exact_public_matches": {
+      "meta_developer_community_threads": 3,
+      "official_sdk_issue": "facebook/facebook-python-business-sdk#722",
+      "shared_bug_report": "3397941523702775",
+      "community_status": "unresolved"
+    },
+    "most_supported_resolution": "edit or create one ad in Ads Manager, attempt publish, click Start Authentication, receive email/SMS code and submit",
+    "api_only_variant": "documented by multiple Meta Community users and the official SDK issue: manual Ads Manager works, campaign/adset may pass, ad creation fails with code31/sub3858385 and no pending action visible",
+    "location_hypothesis": "rejected as primary cause; official Meta access-token documentation states most tokens are portable across browser and server",
+    "app_configuration_gate": {
+      "live_header_ads_api_access_tier": "development_access",
+      "current_marketing_api_tier_interpretation": "Limited/development",
+      "required_checks": [
+        "Marketing API Access Tier Limited vs Full",
+        "ads_management/ads_read standard vs advanced access",
+        "Rafael App Admin/Developer/Tester role while Limited"
+      ]
+    },
+    "system_user_conclusion": "not mandatory; Facebook Login for Business User Access Token inherits the app user's current asset access. System User/BISU requires assets owned/shared or explicitly designated in business portfolios and adds per-asset onboarding.",
+    "research_report": "/root/mgs-agent/work/meta-code31-research/report.md",
+    "citations_verified": true,
+    "updated_at_et": "2026-08-20T12:52:17-04:00"
   }
 }

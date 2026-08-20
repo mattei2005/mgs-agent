@@ -1,0 +1,261 @@
+Title: Users couldn’t launch campaigns through our product. What do we need to fix? - Developer Community Forum - Meta for Developers
+
+URL Source: https://developers.facebook.com/community/threads/1621056952512571/
+
+Markdown Content:
+![Image 4](https://facebook.com/security/hsts-pixel.gif)
+
+[](https://developers.facebook.com/?no_redirect=true)
+
+Docs Docs Docs
+
+Tools Tools Tools
+
+Support Support Support
+
+More More More
+
+Search input 
+
+​
+
+[Login Login Login](https://business.facebook.com/business/loginpage/?is_work_accounts=true&login_options[0]=FB&login_options[1]=SSO&config_ref=biz_login_tool_flavor_dfc&app=436761779744620&next=https%3A%2F%2Fdevelopers.facebook.com%2Fcommunity%2Fthreads%2F1621056952512571%2F%3Fnav_ref%3Dbiz_unified_f3_login_page_to_dfc)
+
+*   [[Support](https://developers.facebook.com/support/) Support](https://developers.facebook.com/community/threads/1621056952512571/)
+*   [[Bugs](https://developers.facebook.com/support/bugs/) Bugs](https://developers.facebook.com/community/threads/1621056952512571/)
+*   [[Community](https://developers.facebook.com/community/) Community](https://developers.facebook.com/community/threads/1621056952512571/)
+*   [[FAQ](https://developers.facebook.com/support/faq/) FAQ](https://developers.facebook.com/community/threads/1621056952512571/)
+*   [[Platform Status](https://l.facebook.com/l.php?u=https%3A%2F%2Fmetastatus.com%2F%3Fref%3Ddfc%23developerplatform&h=AUD7fdXDywsGvz5nAb2AtkzbtWupLzirqxznzf2ijrJxJI6YjM6iDO2HfzdYTys2QWhP81MMN8SPtA3nANxolMe37-MviRT18yd6dMq-589gpM4ALsulLRMa1wswvsYXKMnNZXWwz7B0mw) Platform Status](https://developers.facebook.com/community/threads/1621056952512571/)
+
+*   [Community](https://developers.facebook.com/community/)
+*   Question
+
+Users couldn’t launch campaigns through our product. What do we need to fix?
+
+1
+
+We've launched new logic in our product that allows users to connect their Meta Ads accounts and launch campaigns through our interface.
+
+However, we're currently seeing a number of errors like the one below.
+
+message: 'This request requires the user to take a pending action', type: 'OAuthException', code: 31, error_subcode: 3858385, is_transient: false, error_user_title: 'Please authenticate your account', error_user_msg: "We think someone may have tried to access your account without permission. For your protection, you won't be able to create or modify ads until you authenticate your account in Ads Manager. Your existing ads will continue to run normally.", fbtrace_id: 'ARtJrU7sxfs22CkMvcJ-mxj'
+
+Could you help us understand what we need to fix?
+
+[Marketing API](https://developers.facebook.com/community?category=2358662624160901)
+
+![Image 5](https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-1/470505005_8986104381458830_983281623412394438_n.jpg?stp=c0.146.1365.1365a_dst-jpg_s1365x1364_tt6&_nc_cat=106&ccb=1-7&_nc_sid=cf4b0e&_nc_ohc=af1ZDiPlt28Q7kNvwHteGAT&_nc_oc=AdqNkXrjqiya4DqlZEdVDURfzD3AGiLlme96aYh8Epz8UZPfhVEKPK5_2R0iBtQ2NdI&_nc_zt=24&_nc_ht=scontent-atl3-1.xx&_nc_gid=hi5E0FMybuww4el7RK3mKA&_nc_ss=7b289&oh=00_AQEoLx02erL7Ke4tB3rI_tf4fo3ba965ELJ6bAA_yY0mug&oe=6A8CF103)
+
+Oleksandr
+
+Asked about 5 months ago
+
+Selected Answer
+
+1
+
+I created a bug report here: https://developers.facebook.com/support/bugs/3397941523702775/
+
+4 hours ago
+
+![Image 6](https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-1/758830723_2548098518959411_3852361988422786509_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cf4b0e&_nc_ohc=dInVH29z8nQQ7kNvwEueS9Z&_nc_oc=Ado1sZkVB2boMEvPQAJ2jO7a-Lt0lefCJ-gl8J6I557DFPnvR96Nvnp8tFGvgcDJ81A&_nc_zt=24&_nc_ht=scontent-atl3-3.xx&_nc_gid=hi5E0FMybuww4el7RK3mKA&_nc_ss=7b289&oh=00_AQGCNgz2aIeuKpEsVqUUxofLHvsqF7guYhQxglqyaH-aPw&oe=6A8D148C)
+
+Manal
+
+Status
+
+Unresolved
+
+Posted
+
+4 months ago
+
+Last Answered
+
+4 hours ago ago
+
+Type
+
+Unclassified
+
+* * *
+
+![Image 7: Meta](https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg)
+
+[![Image 8: Facebook](https://scontent-atl3-2.xx.fbcdn.net/v/t39.2365-6/425860105_925920989121941_6933048753023841367_n.svg?_nc_cat=1&ccb=1-7&_nc_sid=aa6a2f&_nc_ohc=Bh3Ql4b0P3oQ7kNvwH4HuiT&_nc_oc=Adoicj642C4kI3aRgF_J-OB8VY8S5bZZE694-qPapT4rmXBUYNO9hQBhrY-bBCL2XFXoJM0r0KFDsTtP93-dOp2W&_nc_zt=14&_nc_ht=scontent-atl3-2.xx&_nc_gid=zIkeCFO5jE14hOSDfhyGdw&_nc_ss=7b289&oh=00_AQGDXZXqJ-3C4FoVbUiuWIMcaHkLWWwu52VVnYpU9fsAyA&oe=6A8D0BA2)](https://www.facebook.com/MetaforDevelopers)[![Image 9: Instagram](https://scontent-atl3-2.xx.fbcdn.net/v/t39.2365-6/425804778_757649995874129_6917476492193301523_n.svg?_nc_cat=1&ccb=1-7&_nc_sid=aa6a2f&_nc_ohc=HD_utZwIiGgQ7kNvwHDxfJi&_nc_oc=Adqe1h14z2tTyD7QLg996ky4M1N0JqpzH7HGmFGhM9mqtTOArFQomI3_rOlkD4ONctd4FBLqfNDP3HJc16q6CsfD&_nc_zt=14&_nc_ht=scontent-atl3-2.xx&_nc_gid=zIkeCFO5jE14hOSDfhyGdw&_nc_ss=7b289&oh=00_AQGm_zhycyKXcGfjKZpToVTXQSmPaW6vW5ifpmXPcvtbbQ&oe=6A8CF5B8)](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fmetafordevelopers%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[![Image 10: X](https://scontent-atl3-2.xx.fbcdn.net/v/t39.2365-6/426747931_385023204117867_5811151062540225287_n.svg?_nc_cat=1&ccb=1-7&_nc_sid=aa6a2f&_nc_ohc=kdTPUWE2o0QQ7kNvwGA6Wd1&_nc_oc=Adqg3mQgNlID7080shkQtsjVMSAiu-uC-jCD3cLt_uqTQ2urU6LN25-qA-Gv-r8qpVnfDGYcay9u7ZNk9N53xzYV&_nc_zt=14&_nc_ht=scontent-atl3-2.xx&_nc_gid=zIkeCFO5jE14hOSDfhyGdw&_nc_ss=7b289&oh=00_AQEvVfZqvbqNVP4dcoHI-SXNG6-MYZlvv_b4DWtHjUCOAQ&oe=6A8D142A)](https://l.facebook.com/l.php?u=https%3A%2F%2Ftwitter.com%2Fmetafordevs&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[![Image 11: LinkedIn](https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/467689750_1684384502343829_7561568713040200172_n.svg?_nc_cat=103&ccb=1-7&_nc_sid=aa6a2f&_nc_ohc=NvQ9ix9m62EQ7kNvwGEePvA&_nc_oc=AdoXVKlNI3nt8y8s7e30IjIrgZsLonVRRRtrNlGh6iq_nuxdlRWFwE4SIwpHleFu-Zipuddch-76OqQjje0k0l_W&_nc_zt=14&_nc_ht=scontent-atl3-1.xx&_nc_gid=zIkeCFO5jE14hOSDfhyGdw&_nc_ss=7b289&oh=00_AQEgTK7azMw3yzpRfUfMqOLC2p2G1AsNfrSnDFnMgAdysA&oe=6A8CEB7E)](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fshowcase%2Fmeta-for-developers%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[![Image 12: YouTube](https://scontent-atl3-2.xx.fbcdn.net/v/t39.2365-6/425519002_724756916408357_7491658959807896355_n.svg?_nc_cat=104&ccb=1-7&_nc_sid=aa6a2f&_nc_ohc=RPDTaII9FQYQ7kNvwEAAa2o&_nc_oc=AdpuuM6R4JzSSHlbaK4QEQgA_269Qg0N_EkROf68s2vmZ4iQQB1wQTnghSA1oBFtB2rkRaOm-TXGZAEvgJa1UvLH&_nc_zt=14&_nc_ht=scontent-atl3-2.xx&_nc_gid=zIkeCFO5jE14hOSDfhyGdw&_nc_ss=7b289&oh=00_AQGVJtPA-81eIdu5RXMRWws57kV3QqpJWZRUu9j4eM876Q&oe=6A8D0EDF)](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2FMetaDevelopers%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+Build with Meta
+
+[AI](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.llama.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[Meta Horizon](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fhorizon%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[Social technologies](https://developers.facebook.com/social-technologies/)[Wearables](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fwearables%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+* * *
+
+News
+
+[Meta for Developers](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fblog%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[Blog](https://developers.facebook.com/blog/)[Success stories](https://developers.facebook.com/success-stories/)
+
+* * *
+
+Support
+
+[Developer Support](https://developers.facebook.com/support/)[Bug tool](https://developers.facebook.com/support/bugs/)[Platform status](https://l.facebook.com/l.php?u=https%3A%2F%2Fmetastatus.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[Developer community forum](https://www.facebook.com/groups/fbdevelopers/)[Report an incident](https://developers.facebook.com/incident/report/)
+
+* * *
+
+Terms and policies
+
+[Responsible platform initiatives](https://developers.facebook.com/products/responsible-platform-initiatives/)[Platform terms](https://developers.facebook.com/terms/dfc_platform_terms/)[Developer policies](https://developers.facebook.com/devpolicy/)[Privacy policy](https://www.facebook.com/about/privacy)[Cookies](https://www.facebook.com/help/cookies)
+
+* * *
+
+About us
+
+[About](https://l.facebook.com/l.php?u=https%3A%2F%2Fabout.fb.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)[Careers](https://www.facebook.com/careers)
+
+* * *
+
+Build with Meta
+
+[AI](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.llama.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Meta Horizon](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fhorizon%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Social technologies](https://developers.facebook.com/social-technologies/)
+
+[Wearables](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fwearables%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+News
+
+[Meta for Developers](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fblog%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Blog](https://developers.facebook.com/blog/)
+
+[Success stories](https://developers.facebook.com/success-stories/)
+
+Support
+
+[Developer Support](https://developers.facebook.com/support/)
+
+[Bug tool](https://developers.facebook.com/support/bugs/)
+
+[Platform status](https://l.facebook.com/l.php?u=https%3A%2F%2Fmetastatus.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Developer community forum](https://www.facebook.com/groups/fbdevelopers/)
+
+[Report an incident](https://developers.facebook.com/incident/report/)
+
+About us
+
+[About](https://l.facebook.com/l.php?u=https%3A%2F%2Fabout.fb.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Careers](https://www.facebook.com/careers)
+
+Terms and policies
+
+[Responsible platform initiatives](https://developers.facebook.com/products/responsible-platform-initiatives/)
+
+[Platform terms](https://developers.facebook.com/terms/dfc_platform_terms/)
+
+[Developer policies](https://developers.facebook.com/devpolicy/)
+
+[Privacy policy](https://www.facebook.com/about/privacy)
+
+[Cookies](https://www.facebook.com/help/cookies)
+
+Build with Meta
+
+[AI](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.llama.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Meta Horizon](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fhorizon%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Social technologies](https://developers.facebook.com/social-technologies/)
+
+[Wearables](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fwearables%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+News
+
+[Meta for Developers](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fblog%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Blog](https://developers.facebook.com/blog/)
+
+[Success stories](https://developers.facebook.com/success-stories/)
+
+Support
+
+[Developer Support](https://developers.facebook.com/support/)
+
+[Bug tool](https://developers.facebook.com/support/bugs/)
+
+[Platform status](https://l.facebook.com/l.php?u=https%3A%2F%2Fmetastatus.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Developer community forum](https://www.facebook.com/groups/fbdevelopers/)
+
+[Report an incident](https://developers.facebook.com/incident/report/)
+
+About us
+
+[About](https://l.facebook.com/l.php?u=https%3A%2F%2Fabout.fb.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Careers](https://www.facebook.com/careers)
+
+Terms and policies
+
+[Responsible platform initiatives](https://developers.facebook.com/products/responsible-platform-initiatives/)
+
+[Platform terms](https://developers.facebook.com/terms/dfc_platform_terms/)
+
+[Developer policies](https://developers.facebook.com/devpolicy/)
+
+[Privacy policy](https://www.facebook.com/about/privacy)
+
+[Cookies](https://www.facebook.com/help/cookies)
+
+Build with Meta
+
+[AI](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.llama.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Meta Horizon](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fhorizon%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Social technologies](https://developers.facebook.com/social-technologies/)
+
+[Wearables](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fwearables%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+News
+
+[Meta for Developers](https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.meta.com%2Fblog%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Blog](https://developers.facebook.com/blog/)
+
+[Success stories](https://developers.facebook.com/success-stories/)
+
+Support
+
+[Developer Support](https://developers.facebook.com/support/)
+
+[Bug tool](https://developers.facebook.com/support/bugs/)
+
+[Platform status](https://l.facebook.com/l.php?u=https%3A%2F%2Fmetastatus.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Developer community forum](https://www.facebook.com/groups/fbdevelopers/)
+
+[Report an incident](https://developers.facebook.com/incident/report/)
+
+About us
+
+[About](https://l.facebook.com/l.php?u=https%3A%2F%2Fabout.fb.com%2F&h=AUC16dJ4Q6Wz288jOtZiGtmuLAue4IHXZHHSCzFE0m5M2NZ5-Ev0jLwYnONu0NZu9TbbAtPXbRmGNShtaQdHXlgMn6tiXlcnTD2Fjmz1rGOWGKGkcZZFfmbKJtXfZmWvqbzYkyvIBHAzXQ)
+
+[Careers](https://www.facebook.com/careers)
+
+Terms and policies
+
+[Responsible platform initiatives](https://developers.facebook.com/products/responsible-platform-initiatives/)
+
+[Platform terms](https://developers.facebook.com/terms/dfc_platform_terms/)
+
+[Developer policies](https://developers.facebook.com/devpolicy/)
+
+[Privacy policy](https://www.facebook.com/about/privacy)
+
+[Cookies](https://www.facebook.com/help/cookies)
+
+English (US)

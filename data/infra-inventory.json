@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-20T12:10:19-04:00",
+    "updated_at": "2026-08-20T12:53:17-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8092,12 +8092,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 14699,
-      "modified_at": "2026-08-20T12:09:50-04:00",
-      "sha256": "4dcb5892a06f6620f57f6d0f523854ca17901b3e79b77f69c9725dde7d008916",
+      "size_bytes": 15226,
+      "modified_at": "2026-08-20T12:49:14-04:00",
+      "sha256": "7bd085a135d5fe4fa33bf5326beb20e21b82b610415016b12c24867d7c1d2aef",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T12:10:19-04:00",
-      "validation": "Skill v1.0.9 live/mirror SHA match. Corrected code31/3858385 handling: manual Ads Manager may remain operational; compare trusted-browser validate-only against server egress before token rotation, payload changes, System User or proxy decisions."
+      "updated_at": "2026-08-20T12:53:17-04:00",
+      "validation": "Skill v1.0.10 live/mirror SHA match. Grounded correction: tokens are portable; 3858385 is an advertiser-auth checkpoint whose UI may appear only after ad edit/publish. Added API-only bug escalation, app tier/role audit and User Token alternative to System User."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",

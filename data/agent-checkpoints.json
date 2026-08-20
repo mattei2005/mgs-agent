@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Executar o mesmo validate-only Graph v26 no Graph API Explorer pela sessão/navegador confiável do Rafael. Se passar localmente e falhar na VPS, confirmar bloqueio de egress e decidir com Rodolfo entre System User corporativo ou rota de saída confiável; nenhum novo write pela VPS antes disso.",
+      "next_step": "No nível de anúncio, editar ou criar um único draft PAUSED isolado, publicar somente esse item e procurar Start Authentication no topo direito; concluir código. Depois Ares repete validate-only v26. Se não houver prompt, abrir bug/support com as três threads, issue #722 e JSON sanitizado. Em paralelo conferir Marketing API Access Tier e Rafael como App Admin/Developer/Tester.",
       "objective": "Operar tráfego direto CBO para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539434208408375426; imagem com diagnóstico externo code31/3858385; Graph v26 post-auth validate-only duplo sem write; VPS egress Boston US Hostinger; operation config v1.0.22",
-      "state": "rodolfo confirmou que o token é o mesmo e concluiu a autenticação. ares forçou refresh do 1password e repetiu graph v26 validate-only em criativo sanitizado e criativo fonte ativo: ambos continuam code31/sub3858385, sem write. conta, scopes, página e advertise passam; ads manager manual está operacional. egress da vps validado em boston/us pela hostinger, enquanto o perfil humano opera em sessão/localidade distinta. a hipótese mais forte agora é checkpoint de confiança por localização/dispositivo na rota server-side, ainda não comprovada.",
+      "source": "discord:thread:1539434208408375426; /root/mgs-agent/work/meta-code31-research/report.md; Meta threads 845129991936233, 1820634641959662, 1621056952512571; bug 3397941523702775; github facebook-python-business-sdk#722; operation v1.0.23",
+      "state": "pesquisa profunda concluída. rodolfo estava correto: localização da vps não é causa primária; a meta documenta tokens como portáveis entre navegador e servidor. há três threads meta community e o issue facebook-python-business-sdk#722 reproduzindo code31/sub3858385 com ads manager manual funcional, campanha/adset podendo passar e somente ads falhando; bug report comum 3397941523702775, status público ainda unresolved. o fluxo mais repetidamente resolvido é editar/criar um anúncio manual, publicar somente ele e usar verifying your changes → start authentication para receber código por email/sms. se o prompt não aparecer, tratar como variante api-only e escalar. app minibot rod está em development_access e precisa auditoria de tier/roles.",
       "thread_id": "1539434208408375426",
-      "updated_at": "2026-08-20T16:09:19+00:00"
+      "updated_at": "2026-08-20T16:53:07+00:00"
     },
     {
       "agent": "ares",
@@ -882,5 +882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T16:09:19+00:00"
+  "updated_at": "2026-08-20T16:53:07+00:00"
 }

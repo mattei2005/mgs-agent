@@ -7,7 +7,7 @@ A hipótese de localização da VPS deve ser retirada. A documentação oficial 
 O caso da operação corresponde a dois fenômenos que precisam ser separados:
 
 1. **Checkpoint real de autenticação do anunciante (#3858385).** Em muitos casos, o botão **Start Authentication** só aparece depois de editar/criar um anúncio e tentar publicá-lo. O fluxo envia código ao e-mail ou telefone conectado ao perfil.[4][9][10]
-2. **Variante API-only sem ação visível.** Existem ao menos duas threads no próprio Meta Developer Community com `code=31`, `subcode=3858385`, anúncios existentes normais, criação via API bloqueada e nenhuma ação pendente visível no Ads Manager. As threads continuam marcadas como não resolvidas e apontam para o bug report `3397941523702775`.[1][2]
+2. **Variante API-only sem ação visível.** Existem ao menos três threads no próprio Meta Developer Community com `code=31`, `subcode=3858385`, incluindo um produto cujos usuários conectavam contas e tentavam lançar campanhas pela interface da plataforma. As threads continuam marcadas como não resolvidas e apontam para o mesmo bug report `3397941523702775`.[1][2][14] Há também um issue no SDK oficial `facebook-python-business-sdk`: Ads Manager manual funcionava, campanha/adset eram criados, mas o POST de Ads retornava exatamente `31/3858385`; o maintainer encerrou o issue direcionando o caso ao suporte da Meta, sem correção no SDK.[13]
 
 A cronologia da operação favorece o checkpoint de autenticação, não falta de payload: o mesmo token/app conseguiu criar e ler um anúncio PAUSED; o `31/3858385` apareceu somente depois, nas tentativas seguintes. Os testes `validate_only` com criativo fonte ativo e criativo sanitizado retornam o mesmo bloqueio, portanto o payload criativo não é a causa imediata.
 
@@ -30,7 +30,7 @@ Em uma thread extensa do Reddit, a solução mais repetida foi editar o texto de
 
 ### 2. Existe uma variante API-only aparentemente bugada
 
-Uma thread oficial descreve exatamente: Marketing API falha com `31/3858385`, anúncios existentes continuam, Data Access Renewal já foi concluída e não aparece qualquer ação de segurança no Ads Manager.[1] Outra thread oficial repete “checked my whole ads account page and there is no error”, está marcada `Unresolved` e aponta ao mesmo bug report.[2]
+Uma thread oficial descreve exatamente: Marketing API falha com `31/3858385`, anúncios existentes continuam, Data Access Renewal já foi concluída e não aparece qualquer ação de segurança no Ads Manager.[1] Outra thread oficial repete “checked my whole ads account page and there is no error”, está marcada `Unresolved` e aponta ao mesmo bug report.[2] O issue do SDK oficial reproduz ainda melhor a nossa hierarquia: campanha/adset passam e somente a criação do anúncio falha.[13]
 
 Isso não prova que a Meta já reconheceu formalmente a causa; prova que o caso não é isolado e que há um bug report público correspondente.
 
@@ -109,3 +109,5 @@ Em paralelo, conferir tier/permissões/app role. Se o app estiver Limited Access
 [9] https://www.reddit.com/r/FacebookAds/comments/1glm58s/unable_to_publish_ads_error_3858385 — Reddit - Unable to Publish Ads 3858385
 [10] https://www.reddit.com/r/FacebookAds/comments/1gaj7hq/need_help_asap — Reddit - Need Help ASAP 3858385
 [11] https://www.facebook.com/business/help/708679622611131 — Meta Business Help - Add Partners
+[13] https://github.com/facebook/facebook-python-business-sdk/issues/722 — facebook-python-business-sdk issue 722 - code31/3858385
+[14] https://developers.facebook.com/community/threads/1621056952512571 — Meta Community - product users cannot launch campaigns, code31/3858385
