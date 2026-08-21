@@ -13,6 +13,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from contextvars import ContextVar
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal, ROUND_FLOOR
@@ -54,6 +55,8 @@ STATE_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.json"
 LOCK_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.lock"
 AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit/daily"
 WORK_ROOT = PROFILE / "work/creditoparaveiculo-v3-daily"
+PHASE_ORDER = ["meta_preflight", "drive_preflight", "reconciliation", "asset_selection", "prestage", "manifest_prevalidation", "engine", "postprocess"]
+_CALL_COUNTER: ContextVar[dict[str, int] | None] = ContextVar("cpv_v3_daily_call_counter", default=None)
 
 
 class DailyBlocked(RuntimeError):
@@ -79,6 +82,33 @@ class DailyPaths:
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def count_call(kind: str, amount: int = 1) -> None:
+    counter = _CALL_COUNTER.get()
+    if counter is not None:
+        counter[kind] = int(counter.get(kind) or 0) + int(amount)
+
+
+def phase_begin(counter: dict[str, int]) -> tuple[float, dict[str, int]]:
+    return time.perf_counter(), dict(counter)
+
+
+def phase_end(audit: dict[str, Any], name: str, started: float, before: dict[str, int], counter: dict[str, int], *, detail: dict[str, Any] | None = None) -> None:
+    calls = {key: int(counter.get(key) or 0) - int(before.get(key) or 0) for key in sorted(set(counter) | set(before))}
+    calls = {key: value for key, value in calls.items() if value}
+    row: dict[str, Any] = {"duration_ms": round((time.perf_counter() - started) * 1000, 3), "calls": calls, "skipped": False}
+    if detail:
+        row["detail"] = detail
+    audit.setdefault("observability", {}).setdefault("phases", {})[name] = row
+
+
+def init_observability(audit: dict[str, Any]) -> None:
+    audit["observability"] = {
+        "phase_order": list(PHASE_ORDER),
+        "phases": {name: {"duration_ms": 0.0, "calls": {}, "skipped": True} for name in PHASE_ORDER},
+        "total": {"duration_ms": 0.0, "calls": {}},
+    }
 
 
 def atomic_json(path: Path, payload: dict[str, Any], *, sort_keys: bool = True) -> None:
@@ -388,6 +418,7 @@ def _load_module(path: Path, name: str):
 
 
 def drive_request(token: str, method: str, url: str, *, body: bytes | None = None, content_type: str | None = None) -> dict[str, Any]:
+    count_call("drive_http")
     headers = {"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"}
     if content_type:
         headers["Content-Type"] = content_type
@@ -465,6 +496,7 @@ def drive_inventory(token: str) -> dict[str, Any]:
 
 
 def download_drive_file(token: str, source: dict[str, Any], destination: Path) -> dict[str, Any]:
+    count_call("drive_download")
     destination.parent.mkdir(parents=True, exist_ok=True)
     request = urllib.request.Request(
         f"https://www.googleapis.com/drive/v3/files/{source['id']}?"
@@ -499,6 +531,7 @@ def verify_clean(path: Path) -> dict[str, Any]:
 
 
 def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
+    count_call("local_square_render")
     destination.parent.mkdir(parents=True, exist_ok=True)
     raw = destination.with_suffix(".raw.mp4")
     result = subprocess.run(
@@ -638,10 +671,12 @@ class LiveDailyBackend:
     def meta_preflight(self) -> dict[str, Any]:
         token, token_field = self.common.get_token_from_1password(TOKEN_ITEM)
         self.token = token
+        count_call("meta_get")
         status, account, _ = self.common.graph_get(ACCOUNT_ACT, token, {"fields": "id,name,currency,timezone_name,account_status,disable_reason"})
         if status != 200 or not isinstance(account, dict) or str(account.get("currency")) != "USD" or str(account.get("timezone_name")) != "America/Sao_Paulo" or int(account.get("account_status") or 0) != 1 or int(account.get("disable_reason") or 0) != 0:
             raise DailyBlocked("meta_preflight", "Meta account identity or health failed", {"http": status})
         campaigns = self._graph_pages(f"{ACCOUNT_ACT}/campaigns", {"fields": "id,name,status,effective_status,configured_status,daily_budget,created_time,start_time,updated_time", "limit": 500})
+        count_call("meta_get")
         page_status, pages, _ = self.common.graph_get("me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200})
         page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == PAGE_ID), None) if page_status == 200 and isinstance(pages, dict) else None
         if not page or "ADVERTISE" not in (page.get("tasks") or []) or not page.get("access_token"):
@@ -658,6 +693,7 @@ class LiveDailyBackend:
         rows: list[dict[str, Any]] = []
         next_path, next_params = path, dict(params)
         while True:
+            count_call("meta_get")
             status, body, _ = self.common.graph_get(next_path, token, next_params)
             if status != 200 or not isinstance(body, dict):
                 raise DailyBlocked("meta", "Meta paginated GET failed", {"path": next_path, "http": status})
@@ -713,6 +749,7 @@ class LiveDailyBackend:
         videos = []
         for start in range(0, len(video_ids), 50):
             requests_ = [{"name": video_id, "path": video_id, "params": {"fields": "id,title,length,status"}} for video_id in video_ids[start:start + 50]]
+            count_call("meta_batch")
             status, rows, _ = self.common.graph_batch_get(self.page_token, requests_)
             if status != 200 or not isinstance(rows, list):
                 raise DailyBlocked("reconciliation", "Meta video reconciliation batch failed", {"http": status})
@@ -773,26 +810,40 @@ class LiveDailyBackend:
         if duplicates:
             raise DailyBlocked("prestage", "duplicate deterministic Page video titles require reconciliation", {"duplicates": duplicates})
         prepared = []
+        self.prestage_breakdown_ms = {"download": 0.0, "render_square": 0.0, "upload": 0.0, "ready_readback": 0.0}
         for row in selected:
             source = by_id.get(str(row.get("asset_drive_id") or ""))
             if not source:
                 raise DailyBlocked("prestage", "selected Drive asset disappeared", {"asset_id": row.get("asset_id")})
             vertical = work_dir / "vertical" / str(row.get("canonical_filename"))
             square = work_dir / "square" / f"{Path(str(row.get('canonical_filename'))).stem}__SQUARE.mp4"
+            started = time.perf_counter()
             drive_readback = download_drive_file(self.drive_token, source, vertical)
+            self.prestage_breakdown_ms["download"] += round((time.perf_counter() - started) * 1000, 3)
             clean = verify_clean(vertical)
             if clean["sha256"] != str(row.get("clean_checksum") or ""):
                 raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
+            started = time.perf_counter()
             square_readback = make_square_clean(vertical, square)
+            self.prestage_breakdown_ms["render_square"] += round((time.perf_counter() - started) * 1000, 3)
             vertical_title = media_title("VERTICAL", str(row["asset_id"]), clean["sha256"])
             square_title = media_title("SQUARE", str(row["asset_id"]), clean["sha256"])
             vertical_id = (existing_by_title.get(vertical_title) or [None])[0]
             square_id = (existing_by_title.get(square_title) or [None])[0]
             if not vertical_id:
+                started = time.perf_counter()
+                count_call("meta_video_upload")
                 vertical_id = uploader.upload(vertical, vertical_title)
+                self.prestage_breakdown_ms["upload"] += round((time.perf_counter() - started) * 1000, 3)
             if not square_id:
+                started = time.perf_counter()
+                count_call("meta_video_upload")
                 square_id = uploader.upload(square, square_title)
+                self.prestage_breakdown_ms["upload"] += round((time.perf_counter() - started) * 1000, 3)
+            started = time.perf_counter()
+            count_call("meta_ready_wait")
             processing = uploader.wait_ready([str(vertical_id), str(square_id)])
+            self.prestage_breakdown_ms["ready_readback"] += round((time.perf_counter() - started) * 1000, 3)
             if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
                 raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
             record = registry.register(
@@ -813,11 +864,13 @@ class LiveDailyBackend:
     def execute_engine(self, sealed: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
         manifest = Manifest.from_dict(sealed)
         engine = CampaignEngine(config, transport_factory=real_transport_factory(config, manifest))
+        count_call("engine_execute")
         return engine.execute(manifest)
 
     def hierarchy_readback(self, campaign_id: str) -> dict[str, Any]:
         if not self.token:
             raise DailyBlocked("readback", "Meta token not initialized")
+        count_call("meta_get")
         campaign_status, campaign, _ = self.common.graph_get(campaign_id, self.token, {"fields": "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time"})
         adsets = self._graph_pages(f"{campaign_id}/adsets", {"fields": "id,name,status,effective_status,configured_status,start_time", "limit": 20})
         ads = self._graph_pages(f"{campaign_id}/ads", {"fields": "id,name,status,effective_status,configured_status,adset_id,creative{id,name}", "limit": 50})
@@ -907,6 +960,9 @@ def run_daily(
         state = {} if plan_only else (load_json(paths.state) if paths.state.exists() else {})
         if state.get("completed_operational_date_sp") == day:
             return {"status": "ALREADY_COMPLETE", "operational_date_sp": day, "audit": state.get("audit_path")}
+        total_started = time.perf_counter()
+        call_counter: dict[str, int] = {}
+        call_counter_token = _CALL_COUNTER.set(call_counter)
         request_id = str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
         audit_path = Path(state.get("audit_path") or (paths.audit_root / f"{request_id}.json"))
         audit = load_json(audit_path) if audit_path.exists() else {"schema_version": 3, "kind": "cpv_daily_v3", "request_id": request_id, "operational_date_sp": day, "created_at_utc": utc_now(), "stage": "INITIALIZING", "side_effects": {"campaign_write": False, "media_upload": False, "drive_move": False}}
@@ -918,6 +974,9 @@ def run_daily(
             })
             audit.pop("failure", None)
             audit.pop("failed_at_utc", None)
+        if audit.get("observability"):
+            audit.setdefault("observability_attempts", []).append(audit["observability"])
+        init_observability(audit)
         atomic_json(audit_path, audit)
         backend = backend_factory(paths)
         inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -928,7 +987,9 @@ def run_daily(
             config = load_json(paths.config)
             validate_engine_config(config)
             desired_count = int(state.get("desired_campaign_count") or requested_campaign_count(operation, operational_date))
+            phase_started, phase_calls = phase_begin(call_counter)
             meta = backend.meta_preflight()
+            phase_end(audit, "meta_preflight", phase_started, phase_calls, call_counter)
             completed_before = len(state.get("campaign_ids") or [])
             if state.get("campaign_count"):
                 count = int(state["campaign_count"])
@@ -940,16 +1001,22 @@ def run_daily(
                 budget = enforce_budget_cap(meta["campaigns"], desired_count, operation)
                 count = int(budget["selected_count"])
             numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
+            phase_started, phase_calls = phase_begin(call_counter)
             drive_info = backend.drive_preflight()
             drive = drive_info["drive"]
+            phase_end(audit, "drive_preflight", phase_started, phase_calls, call_counter)
             if not selected:
+                phase_started, phase_calls = phase_begin(call_counter)
                 backend.refresh_reconciliation(inventory_rows, drive, current)
+                phase_end(audit, "reconciliation", phase_started, phase_calls, call_counter)
+                phase_started, phase_calls = phase_begin(call_counter)
                 selected = select_assets(
                     inventory_rows,
                     {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"},
                     count * 3,
                 )
                 reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
+                phase_end(audit, "asset_selection", phase_started, phase_calls, call_counter, detail={"selected": len(selected)})
                 if plan_only:
                     result = {
                         "status": "DRY_RUN_OK",
@@ -975,7 +1042,10 @@ def run_daily(
                 state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "desired_campaign_count": desired_count, "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "budget_plan": budget, "updated_at_utc": utc_now()}
                 atomic_json(paths.state, state)
             else:
+                phase_started, phase_calls = phase_begin(call_counter)
                 verify_reconciliation(paths.reconciliation, selected, current)
+                phase_end(audit, "reconciliation", phase_started, phase_calls, call_counter, detail={"resume_validation": True})
+            phase_started, phase_calls = phase_begin(call_counter)
             registry = MediaRegistry(paths.registry)
             ready = []
             for row in selected:
@@ -996,6 +1066,15 @@ def run_daily(
                 atomic_json(audit_path, audit)
                 state.update(status="MEDIA_READY", updated_at_utc=utc_now())
                 atomic_json(paths.state, state)
+            phase_end(
+                audit,
+                "prestage",
+                phase_started,
+                phase_calls,
+                call_counter,
+                detail={"assets": len(selected), "breakdown_ms": getattr(backend, "prestage_breakdown_ms", {})},
+            )
+            phase_started, phase_calls = phase_begin(call_counter)
             assets_payload = {"assets": [{"asset_id": str(row["asset_id"]), "checksum": str(row["clean_checksum"])} for row in selected]}
             manifest_dir = paths.work_root / request_id / "manifest"
             manifest_dir.mkdir(parents=True, exist_ok=True)
@@ -1014,6 +1093,7 @@ def run_daily(
                 audit.update(stage="MANIFEST_SEALED", manifest_path=str(sealed_path), manifest_digest=sealed["prevalidation"]["content_digest"], campaign_numbers=numbers, budget=budget)
                 atomic_json(audit_path, audit)
             manifest = Manifest.from_dict(sealed)
+            phase_end(audit, "manifest_prevalidation", phase_started, phase_calls, call_counter, detail={"prevalidated": True, "campaigns": len(manifest.campaigns)})
             collisions = campaign_name_collisions(
                 manifest,
                 meta["campaigns"],
@@ -1028,7 +1108,9 @@ def run_daily(
             audit["side_effects"]["campaign_write"] = True
             audit["stage"] = "ENGINE_IN_FLIGHT"
             atomic_json(audit_path, audit)
+            phase_started, phase_calls = phase_begin(call_counter)
             result = backend.execute_engine(sealed, config)
+            phase_end(audit, "engine", phase_started, phase_calls, call_counter, detail={"status": result.get("status"), "metrics": result.get("metrics") or {}})
             audit["engine_result"] = result
             audit["stage"] = result.get("status")
             atomic_json(audit_path, audit)
@@ -1036,6 +1118,7 @@ def run_daily(
             processed_ids = set(str(item) for item in state.get("postprocessed_campaign_ids") or [])
             pending_ids = [item for item in campaign_ids if item not in processed_ids]
             if pending_ids:
+                phase_started, phase_calls = phase_begin(call_counter)
                 indexed_pairs = [
                     (index, campaign_id)
                     for index, campaign_id in enumerate(campaign_ids)
@@ -1065,6 +1148,7 @@ def run_daily(
                 audit.setdefault("assignments", []).extend(assignments)
                 audit.setdefault("drive_moves", {}).update(moves)
                 audit["side_effects"]["drive_move"] = bool(moves)
+                phase_end(audit, "postprocess", phase_started, phase_calls, call_counter, detail={"campaigns": len(pending_ids), "assets": len(assignments)})
                 atomic_json(audit_path, audit)
             if result.get("status") == "PARTIAL_DEFERRED_QUOTA":
                 retry_after = int(time.time()) + max(60, int(result.get("retry_after_seconds") or 300))
@@ -1120,6 +1204,12 @@ def run_daily(
                 print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
             return {"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}
         finally:
+            audit.setdefault("observability", {})["total"] = {
+                "duration_ms": round((time.perf_counter() - total_started) * 1000, 3),
+                "calls": {key: int(value) for key, value in sorted(call_counter.items())},
+            }
+            atomic_json(audit_path, audit)
+            _CALL_COUNTER.reset(call_counter_token)
             fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
 
 

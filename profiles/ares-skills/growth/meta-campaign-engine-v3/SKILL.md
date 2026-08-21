@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.6
+version: 3.0.7
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -86,6 +86,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - média/p95 por estágio no audit;
 - nenhuma credencial no manifest/audit;
 - GET final confirma IDs, estrutura, budget, status e `start_time`;
+- Token é resolvido cache-first pelo helper canônico; runner/cron nunca usa `force_refresh=True` por padrão;
 - antes do execute, nomes exatos do manifest não colidem com campanhas live não deletadas fora do mapeamento idempotente do mesmo request;
 - títulos de pre-stage incluem `asset_id + checksum curto`, e o registry confirma `account + asset + checksum + IDs` por readback;
 - falhas após possível side effect ficam `READBACK_DEFERRED`/`POSTPROCESS_PENDING`, nunca `FAILED` fora do gate;
