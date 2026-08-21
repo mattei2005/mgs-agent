@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Zeus faz último foreground readback do commit 4a55ee79 e da regressão cache-first. Só após PASS altera job 2cf8115a4f8b para creditoparaveiculo-v3-daily-create.sh mantendo no_agent=true/deliver=local; P1 de instrumentação de duração/calls fica para pós-primeiro ciclo.",
-      "objective": "Concluir revisão foreground Zeus e cutover do schedule diário CPV 17h para Campaign Engine v3",
-      "source": "discord:thread:1540228969071116408 Zeus cache-first P0; commit:4a55ee79; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
-      "state": "p0 token cache-first fechado: livedailybackend.meta_preflight usa get_token_from_1password(token_item) sem force_refresh, preservando cache/invalidação do helper e evitando pressão 1password em cron/resume. regressão mock confirma assinatura sem force refresh. suite relevante 129 passed; compile pass; commit 4a55ee79. p0 anteriores de colisão, checksum de mídia e resume pós-side-effect permanecem verdes. cron 2cf8115a4f8b continua paused/disabled, registry vazio e nenhum runner state produtivo.",
+      "next_step": "Zeus faz foreground readback dos commits 15e88e43 e 461b5481, confirma audit observability e, se PASS, realiza cutover do job 2cf8115a4f8b mantendo no_agent=true/deliver=local. Após primeiro ciclo comparar durações/calls e otimizar reconciliação/prestage se necessário.",
+      "objective": "Concluir observabilidade e cutover do schedule diário CPV 17h para Campaign Engine v3",
+      "source": "discord:thread:1540228969071116408 Zeus observability P1; commit:15e88e43,461b5481; audit:/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260821.json",
+      "state": "p1 observabilidade implementado sem external writes: audit diário registra phase_order estável e duration_ms/calls sanitizados para meta_preflight, drive_preflight, reconciliation, asset_selection, prestage, manifest_prevalidation, engine, postprocess e total. prestage mantém breakdown download/render_square/upload/ready_readback; engine inclui métricas consolidadas. regressão de presença/ordem/sanitização passou. suite relevante 129 passed. live dry-run c14/c15 confirmou meta_preflight 2389ms/3 get, drive_preflight 4676ms/11 calls, reconciliation 13567ms/2 get+5 batch, asset_selection 0.62ms, total 20657ms; demais fases skipped no dry-run. side effects todos false; cron 2cf8115a4f8b continua paused.",
       "thread_id": "1540228969071116408",
-      "updated_at": "2026-08-21T06:57:18+00:00"
+      "updated_at": "2026-08-21T07:04:11+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:57:18+00:00"
+  "updated_at": "2026-08-21T07:04:11+00:00"
 }
