@@ -117,19 +117,21 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             compactor._validate_candidate(original, candidate, 120, budgets, [1])
         self.assertEqual(caught.exception.code, "candidate_entry_above_budget")
 
-    def test_protected_literal_mask_roundtrip_is_exact(self):
+    def test_protected_literal_segment_roundtrip_is_exact(self):
         original = "Use `Camp` at 90% with ID `1527401973698007060` and https://example.com/x."
-        masked, literals = compactor._mask_protected_literals(original)
-        self.assertNotEqual(masked, original)
-        self.assertEqual(compactor._restore_protected_literals(masked, literals), original)
+        segments, literals = compactor._split_protected_literal_segments(original)
+        self.assertGreater(len(literals), 0)
+        self.assertEqual(
+            compactor._restore_protected_literal_segments(segments, literals),
+            original,
+        )
 
-    def test_protected_literal_restore_rejects_dropped_placeholder(self):
+    def test_protected_literal_restore_rejects_segment_count_drift(self):
         original = "Keep 90% and ID `1527401973698007060`."
-        masked, literals = compactor._mask_protected_literals(original)
-        broken = masked.replace("⟦mgs_literal_0000⟧", "", 1)
+        segments, literals = compactor._split_protected_literal_segments(original)
         with self.assertRaises(compactor.CompactionError) as caught:
-            compactor._restore_protected_literals(broken, literals)
-        self.assertEqual(caught.exception.code, "literal_placeholder_mismatch")
+            compactor._restore_protected_literal_segments(segments[:-1], literals)
+        self.assertEqual(caught.exception.code, "literal_segment_shape_mismatch")
 
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)

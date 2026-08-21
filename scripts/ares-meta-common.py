@@ -28,6 +28,8 @@ AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT = float(os.environ.get('ARES_META_AD_ACCOUNT
 DEVELOPMENT_ACCESS_SCORE_MAX = 60
 STANDARD_ACCESS_SCORE_MAX = 9000
 DEFAULT_AD_ACCOUNT_RESET_SECONDS = 300
+LOCAL_SCORE_WINDOW_SECONDS = 300
+LOCAL_SCORE_MAX_ENTRIES = 512
 TRANSIENT_5XX_RETRY_SECONDS = 10
 THROTTLE_STATE_PATH = BASE / 'cache' / 'meta-api-throttle-state.json'
 BUSINESS_USAGE_HEADER = 'x-business-use-case-usage'
@@ -302,7 +304,7 @@ def ad_account_usage_decision(usage, now_epoch=None):
     }
 
 
-def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls, write_calls, reserve_points=5):
+def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls, write_calls, reserve_points=5, local_score=None):
     """Project logical Marketing API score; Graph batch children count separately."""
     tier = marketing_access_tier(ad_account_usage, business_usage)
     if tier == 'development_access':
@@ -313,21 +315,29 @@ def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls,
         maximum = None
     header_present = bool((ad_account_usage or {}).get('present'))
     util_pct = max(0.0, _as_number((ad_account_usage or {}).get('acc_id_util_pct')))
+    local_ready = bool((local_score or {}).get('ready'))
     projected = max(0, int(read_calls)) + 3 * max(0, int(write_calls)) + max(0, int(reserve_points))
     if maximum is not None and header_present:
         used = int(math.ceil(maximum * min(util_pct, 100.0) / 100.0))
         available = max(0, maximum - used)
+        measurement_source = 'x_ad_account_usage'
+    elif maximum is not None and local_ready:
+        used = max(0, int((local_score or {}).get('points') or 0))
+        available = max(0, maximum - used)
+        measurement_source = 'local_rolling_ledger'
     else:
         used = None
         available = None
-    allowed = bool(maximum is not None and available is not None and header_present and projected <= available and util_pct < AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT)
+        measurement_source = None
+    usage_soft_limited = header_present and util_pct >= AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT
+    allowed = bool(maximum is not None and available is not None and projected <= available and not usage_soft_limited)
     if maximum is None:
         reason = 'unknown_access_tier'
-    elif not header_present:
-        reason = 'missing_x_ad_account_usage'
-    elif util_pct >= AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT:
+    elif not header_present and not local_ready:
+        reason = 'local_score_warmup' if local_score else 'missing_x_ad_account_usage'
+    elif usage_soft_limited:
         reason = 'ad_account_usage_soft_limit'
-    elif projected > available:
+    elif available is not None and projected > available:
         reason = 'projected_score_exceeds_available'
     else:
         reason = 'within_budget'
@@ -336,6 +346,7 @@ def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls,
         'reason': reason,
         'tier': tier,
         'header_present': header_present,
+        'measurement_source': measurement_source,
         'maximum_score': maximum,
         'estimated_used_score': used,
         'estimated_available_score': available,
@@ -344,6 +355,8 @@ def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls,
         'write_calls': max(0, int(write_calls)),
         'reserve_points': max(0, int(reserve_points)),
         'acc_id_util_pct': util_pct,
+        'local_score_ready': local_ready,
+        'local_score_warmup_remaining_seconds': max(0, int((local_score or {}).get('warmup_remaining_seconds') or 0)),
     }
 
 
@@ -408,7 +421,42 @@ def _write_state_locked(fh, state):
     os.fsync(fh.fileno())
 
 
-def record_response_usage(headers, status, payload, now_epoch=None):
+def _update_local_score_ledger(state, now_epoch, logical_points, business_usage, ad_account_usage):
+    ads_management = bool(ad_account_usage.get('present')) or any(
+        str(entry.get('type') or '') == 'ads_management'
+        for entry in business_usage.get('entries') or []
+    )
+    ledger = state.get('local_score') if isinstance(state.get('local_score'), dict) else {}
+    raw_events = ledger.get('events')
+    events = raw_events if isinstance(raw_events, list) else []
+    cutoff = now_epoch - LOCAL_SCORE_WINDOW_SECONDS
+    cleaned = []
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        at = _as_number(event.get('at'), default=-1)
+        points = max(0, int(_as_number(event.get('points'))))
+        if at >= cutoff and points:
+            cleaned.append({'at': at, 'points': points})
+    if ads_management and int(logical_points or 0) > 0:
+        cleaned.append({'at': now_epoch, 'points': max(0, int(logical_points))})
+    cleaned = cleaned[-LOCAL_SCORE_MAX_ENTRIES:]
+    started_at = _as_number(ledger.get('window_started_at_epoch'))
+    if ads_management and started_at <= 0:
+        started_at = now_epoch
+    warmup_remaining = max(0, int(math.ceil((started_at + LOCAL_SCORE_WINDOW_SECONDS) - now_epoch))) if started_at > 0 else LOCAL_SCORE_WINDOW_SECONDS
+    state['local_score'] = {
+        'window_seconds': LOCAL_SCORE_WINDOW_SECONDS,
+        'window_started_at_epoch': started_at or None,
+        'ready': bool(started_at > 0 and warmup_remaining == 0),
+        'warmup_remaining_seconds': warmup_remaining,
+        'points': sum(event['points'] for event in cleaned),
+        'events': cleaned,
+        'updated_at_epoch': now_epoch,
+    }
+
+
+def record_response_usage(headers, status, payload, now_epoch=None, logical_points=0):
     """Persist independent BUC and ad-account usage/cooldown from every response."""
     now_epoch = time.time() if now_epoch is None else float(now_epoch)
     usage = parse_business_usage_headers(headers)
