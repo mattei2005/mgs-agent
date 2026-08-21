@@ -10,6 +10,7 @@ from typing import Any
 from .adapters import build_cpv_manifest
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
+from .prestage import PageVideoUploader, PrestageService
 from .schema import Manifest
 from .transport import FakeBatchTransport, GraphBatchTransport
 
@@ -74,6 +75,15 @@ def parser() -> argparse.ArgumentParser:
     media.add_argument("--ready", action="store_true")
     summary = sub.add_parser("media-summary")
     summary.add_argument("--registry", default=str(DEFAULT_MEDIA))
+    prestage = sub.add_parser("prestage-upload")
+    prestage.add_argument("--registry", default=str(DEFAULT_MEDIA))
+    prestage.add_argument("--account-id", required=True)
+    prestage.add_argument("--page-id", required=True)
+    prestage.add_argument("--asset-id", required=True)
+    prestage.add_argument("--checksum", required=True)
+    prestage.add_argument("--vertical-file", required=True)
+    prestage.add_argument("--square-file", required=True)
+    prestage.add_argument("--confirm-upload", action="store_true")
     cpv = sub.add_parser("build-cpv")
     cpv.add_argument("--registry", default=str(DEFAULT_MEDIA))
     cpv.add_argument("--assets-json", required=True)

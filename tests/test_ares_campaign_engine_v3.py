@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from datetime import datetime, timedelta, timezone
@@ -14,6 +15,7 @@ if str(ROOT / 'scripts') not in sys.path:
 from ares_campaign_v3.adapters import build_cpv_manifest
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
+from ares_campaign_v3.prestage import PrestageService
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
 from ares_campaign_v3.schema import Manifest, ManifestError
@@ -208,6 +210,48 @@ def test_media_registry_roundtrip_and_fail_closed(tmp_path):
     assert registry.require_ready('100', 'asset-1', 'sum-1')['vertical_video_id'] == 'v1'
     with pytest.raises(MediaNotReady):
         registry.require_ready('100', 'missing', 'sum-x')
+
+
+def test_prestage_registers_only_after_both_videos_are_ready(tmp_path):
+    class Uploader:
+        def __init__(self):
+            self.uploads = []
+        def upload(self, path, title):
+            self.uploads.append((Path(path).name, title))
+            return f'video-{len(self.uploads)}'
+        def wait_ready(self, video_ids):
+            return {video_id: {'ready': True} for video_id in video_ids}
+    vertical = tmp_path / 'vertical.mp4'
+    square = tmp_path / 'square.mp4'
+    vertical.write_bytes(b'vertical')
+    square.write_bytes(b'square')
+    checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
+    registry = MediaRegistry(tmp_path / 'media.json')
+    uploader = Uploader()
+    result = PrestageService(registry, uploader).prestage(
+        account_id='100', asset_id='asset-1', checksum=checksum,
+        vertical_path=vertical, square_path=square,
+    )
+    assert result['ready'] is True
+    assert len(uploader.uploads) == 2
+    assert registry.require_ready('100', 'asset-1', checksum)['square_video_id'] == 'video-2'
+
+
+def test_prestage_does_not_register_partial_processing(tmp_path):
+    class Uploader:
+        def upload(self, path, title):
+            return 'vertical' if 'vertical' in str(path) else 'square'
+        def wait_ready(self, video_ids):
+            return {'vertical': {'ready': True}, 'square': {'ready': False}}
+    vertical = tmp_path / 'vertical.mp4'
+    square = tmp_path / 'square.mp4'
+    vertical.write_bytes(b'v')
+    square.write_bytes(b's')
+    checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
+    registry = MediaRegistry(tmp_path / 'media.json')
+    with pytest.raises(MediaNotReady):
+        PrestageService(registry, Uploader()).prestage(account_id='100', asset_id='asset', checksum=checksum, vertical_path=vertical, square_path=square)
+    assert registry.summary()['total'] == 0
 
 
 def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
