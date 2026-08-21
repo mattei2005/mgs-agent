@@ -13,6 +13,7 @@ if str(ROOT / 'scripts') not in sys.path:
     sys.path.insert(0, str(ROOT / 'scripts'))
 
 from ares_campaign_v3.adapters import build_cpv_manifest
+from ares_campaign_v3.cli import main as cli_main
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
 from ares_campaign_v3.prestage import PrestageService
@@ -300,6 +301,23 @@ def test_engine_refuses_execute_while_disabled(tmp_path):
     engine = CampaignEngine(config(tmp_path), transport_factory=lambda account: FakeBatchTransport(account))
     with pytest.raises(EngineDisabled):
         engine.execute(manifest([pure_campaign(1)]))
+
+
+def test_cli_disabled_execute_returns_safe_json_without_trace(tmp_path, capsys):
+    cfg_path = tmp_path / 'config.json'
+    cfg_path.write_text(json.dumps(config(tmp_path)))
+    manifest_path = tmp_path / 'manifest.json'
+    manifest_path.write_text(json.dumps(manifest([pure_campaign(1)]).raw))
+    rc = cli_main([
+        '--config', str(cfg_path), 'execute', '--manifest', str(manifest_path),
+        '--confirm-execute', '--offline-fake',
+    ])
+    output = capsys.readouterr().out
+    payload = json.loads(output)
+    assert rc == 2
+    assert payload['status'] == 'BLOCKED'
+    assert payload['error_type'] == 'EngineDisabled'
+    assert 'Traceback' not in output
 
 
 def test_engine_dry_run_never_calls_transport(tmp_path):

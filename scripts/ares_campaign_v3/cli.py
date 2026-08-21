@@ -8,11 +8,12 @@ from pathlib import Path
 from typing import Any
 
 from .adapters import build_cpv_manifest
-from .engine import CampaignEngine
-from .media_registry import MediaRegistry
-from .prestage import PageVideoUploader, PrestageService
-from .schema import Manifest
-from .transport import FakeBatchTransport, GraphBatchTransport
+from .engine import CampaignEngine, EngineDisabled, ExecutionFailed
+from .media_registry import MediaNotReady, MediaRegistry
+from .prestage import MediaUploadError, PageVideoUploader, PrestageService
+from .quota import QuotaBlocked
+from .schema import Manifest, ManifestError
+from .transport import BatchTransportError, FakeBatchTransport, GraphBatchTransport
 
 BASE = Path("/root/mgs-agent")
 DEFAULT_CONFIG = BASE / "data/ares/meta-ads/engine-v3/config.json"
@@ -95,7 +96,7 @@ def parser() -> argparse.ArgumentParser:
     return ap
 
 
-def main(argv: list[str] | None = None) -> int:
+def _main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.command == "media-register":
         record = MediaRegistry(args.registry).register(
@@ -107,6 +108,33 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "media-summary":
         print(json.dumps(MediaRegistry(args.registry).summary(), ensure_ascii=False))
+        return 0
+    if args.command == "prestage-upload":
+        if not args.confirm_upload:
+            raise SystemExit("prestage-upload requires --confirm-upload")
+        config = load_json(args.config)
+        if config.get("media_upload_enabled") is not True:
+            raise SystemExit("v3 media upload is disabled in config")
+        account = str(args.account_id).removeprefix("act_")
+        account_cfg = (config.get("accounts") or {}).get(account) or {}
+        token_item = account_cfg.get("token_item")
+        if not token_item:
+            raise SystemExit(f"missing token_item for account {account}")
+        os.environ["ARES_META_GRAPH_VERSION"] = str(config.get("graph_version") or "v26.0")
+        common = load_common()
+        user_token, _ = common.get_token_from_1password(item_name=token_item)
+        status, pages, _ = common.graph_get("me/accounts", user_token, {"fields": "id,name,tasks,access_token", "limit": 200})
+        if status != 200:
+            raise SystemExit(f"Page inventory failed http={status}")
+        page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == str(args.page_id)), None)
+        if not page or "ADVERTISE" not in (page.get("tasks") or []) or not page.get("access_token"):
+            raise SystemExit("Page missing ADVERTISE task or Page token")
+        uploader = PageVideoUploader(common=common, page_token=str(page["access_token"]), page_id=str(args.page_id), graph_version=str(config.get("graph_version") or "v26.0"))
+        record = PrestageService(MediaRegistry(args.registry), uploader).prestage(
+            account_id=account, asset_id=args.asset_id, checksum=args.checksum,
+            vertical_path=args.vertical_file, square_path=args.square_file,
+        )
+        print(json.dumps({"status": "PRESTAGED_READY", "account_id": record["account_id"], "asset_id": record["asset_id"], "ready": record["ready"]}))
         return 0
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []
@@ -140,6 +168,15 @@ def main(argv: list[str] | None = None) -> int:
     result = CampaignEngine(config, transport_factory=factory).execute(manifest)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    try:
+        return _main(argv)
+    except (EngineDisabled, ExecutionFailed, ManifestError, MediaNotReady, MediaUploadError, QuotaBlocked, BatchTransportError) as exc:
+        status = "BLOCKED" if isinstance(exc, (EngineDisabled, ManifestError, MediaNotReady, QuotaBlocked)) else "FAILED"
+        print(json.dumps({"status": status, "error_type": type(exc).__name__, "message": str(exc)[:500]}, ensure_ascii=False))
+        return 2
 
 
 if __name__ == "__main__":

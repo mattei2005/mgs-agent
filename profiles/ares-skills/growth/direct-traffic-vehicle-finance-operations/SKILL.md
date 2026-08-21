@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.14
+version: 1.0.15
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -28,6 +28,10 @@ Use quando o pedido envolver:
 - criação diária com criativos do Shared Drive.
 
 Não use para configurar quiz, SMS Funnel, ChatPion, WordPress, pixel crítico, billing ou credenciais. Esses itens exigem rota e autorização próprias.
+
+## Executor de campanhas
+
+Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O hot path recebe mídia Meta pre-stageada, bundle de duas campanhas e um readback consolidado. Enquanto v3 estiver disabled, somente validate/plan é permitido e v2 permanece rollback explícito.
 
 ## Fontes de verdade
 
@@ -196,8 +200,8 @@ Qualquer erro novo interrompe a sequência, preserva JSON completo e tenta clean
 Para campanhas novas, trabalhar no timezone da conta:
 
 ```text
-18:00          iniciar criação/write e programar para o dia seguinte
-18:00–23:30    acompanhar revisão/aprovação da Meta e corrigir erros permitidos
+17:00          materializar/prevalidar manifest e programar para o dia seguinte
+17:00–23:30    acompanhar revisão/aprovação da Meta e corrigir erros permitidos
 23:30          último readback de campanha, conjunto, anúncios, URLs e aprovação
 00:30          início programado da entrega no dia seguinte
 ```
@@ -206,11 +210,11 @@ Essa janela não autoriza campanha sem budget/pool/criativos elegíveis. Se algu
 
 ### Preparação — antes do D1
 
-1. Confirmar conta/alias, site, país, vertical, idioma, timezone, experiência quiz/chat, captura, evento e UTMs.
-2. Selecionar três criativos elegíveis no Shared Drive.
-3. Reconciliar Drive × Meta e reservar os assets imediatamente antes do write.
-4. Criar a CBO com um conjunto e três anúncios, no budget inicial aprovado.
-5. Programar início para `00:30` da conta e validar por GET/readback.
+1. Confirmar conta/alias, site, país, vertical, idioma, timezone, experiência quiz/chat, captura, evento e UTMs no contrato da operação.
+2. Selecionar seis criativos elegíveis por bundle de duas campanhas e exigir IDs Meta vertical/square `ready` no media registry v3.
+3. Validar o manifest contra a reconciliação/registry já materializados; nenhuma varredura global ocorre no hot path.
+4. Executar o bundle CBO 1×1×3 por campanha com cap/quota da lane e mídia pre-stageada.
+5. Fazer um readback consolidado das duas campanhas, adsets e ads, validando `00:30` no timezone da conta.
 
 Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corretos.
 
