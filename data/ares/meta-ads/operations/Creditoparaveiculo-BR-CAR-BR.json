@@ -368,6 +368,9 @@
     "campaign_identifier": "campaign number column",
     "daily_focus": "07:00 previous closed-day performance; 08:00/11:00/14:00/20:00 current-day performance through dispatch time",
     "intraday_focus": "current decision, executed action, gates and readback",
+    "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
+    "new_campaign_visibility_required": true,
+    "report_scope_is_separate_from_autonomous_write_allowlist": true,
     "legend": {
       "green": "healthy, maintain or scale",
       "yellow": "observe or gated",
@@ -847,7 +850,7 @@
     "legacy_deletion_performed": false,
     "real_meta_canary_requires_separate_authorization": true
   },
-  "playbook_version": "1.0.44",
+  "playbook_version": "1.0.45",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

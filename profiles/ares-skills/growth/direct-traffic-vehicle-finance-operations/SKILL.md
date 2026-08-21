@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.15
+version: 1.0.16
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -401,6 +401,8 @@ Checkpoint de ação     08:00 São Paulo, separado e sem relatório extra
 Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
+
+O escopo de **exibição** é descoberto dinamicamente em cada execução pelas campanhas Meta da linhagem da conta (`b01fb13cNN`) e é separado do allowlist de **write** autônomo. Toda campanha nova não deletada entra no Diário e no Intraday mesmo antes do primeiro spend; campanha deletada/histórica entra somente quando possui métricas no período solicitado. Paginar a tabela em blocos cercados seguros em vez de truncar campanhas silenciosamente. O allowlist de escala/pausa permanece fail-closed e não pode crescer apenas porque a campanha passou a aparecer no relatório.
 
 Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 

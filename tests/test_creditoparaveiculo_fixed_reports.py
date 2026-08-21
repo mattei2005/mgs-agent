@@ -68,7 +68,7 @@ class FakeMeta:
 
 
 def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=300):
-    monkeypatch.setattr(module, "MONITORED_NUMBERS", {"09"})
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"09"})
     operation = {
         "operation_id": "Creditoparaveiculo-BR-CAR-BR",
         "management_scope": {
@@ -164,7 +164,7 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert '"Budget"' in daily_source
     assert '"Custo"' in daily_source
     intraday_source = inspect.getsource(module.build_intraday)
-    assert "aligned_table" in intraday_source
+    assert "table_pages" in intraday_source
     assert '"Lance"' in intraday_source
     assert '"Custo"' in intraday_source
     assert '"ROAS"' in intraday_source
@@ -201,6 +201,38 @@ def test_campaign_column_is_compact_and_includes_date():
     module = load_reports_module()
     assert module.compact_campaign_label("07", "07 - 20-08 - Garagem Brasil") == "C07-20/08"
     assert module.compact_campaign_label("09", "09 - Garagem Brasil", "2026-08-20") == "C09-20/08"
+
+
+def test_report_scope_discovers_new_live_campaigns_without_expanding_write_allowlist():
+    module = load_reports_module()
+    campaigns = [
+        {"id": "7", "name": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe", "status": "ACTIVE"},
+        {"id": "12", "name": "12 - 21-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL", "status": "ACTIVE"},
+        {"id": "13", "name": "13 - 21-08 - Garagem Brasil - (b01fb13c13) event_Subscribe - MAXVOL", "status": "PAUSED"},
+        {"id": "50", "name": "50 - old - (b01fb13c50) event_Subscribe", "status": "ARCHIVED"},
+        {"id": "other", "name": "Unrelated account campaign", "status": "ACTIVE"},
+    ]
+    assert module.report_campaign_ids(campaigns) == ["7", "12", "13"]
+    assert module.report_campaign_ids(campaigns, {"50": {"spend": 1}}, {}) == ["7", "12", "13", "50"]
+    assert module.AUTONOMOUS_WRITE_NUMBERS == {"07", "08", "09", "10", "11"}
+
+
+def test_new_campaign_cycle_date_comes_from_operational_name():
+    module = load_reports_module()
+    campaign = {
+        "id": "12",
+        "name": "12 - 21-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL",
+        "start_time": "2026-08-20T23:25:41-0300",
+    }
+    assert module.campaign_cycle_start_date(campaign, {}, datetime(2026, 8, 21).date()) == "2026-08-21"
+
+
+def test_report_tables_paginate_instead_of_hiding_new_campaigns():
+    module = load_reports_module()
+    pages = module.table_pages(["Camp"], [[f"C{number:02d}"] for number in range(1, 15)], page_size=7)
+    assert len(pages) == 2
+    assert "C01" in pages[0]
+    assert "C14" in pages[1]
 
 
 def test_aligned_table_accounts_for_wide_emoji_cells():

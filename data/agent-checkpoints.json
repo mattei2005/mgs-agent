@@ -13,32 +13,32 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Concluir consistência/mirror/inventário/audit/REPORT-INFRA e handoff ao Ares. V3 canary real permanece separado: primeiro pre-stage seis mídias e uma campanha PAUSED; config enabled/write/media seguem false.",
+      "next_step": "Aguardar aprovação/permissões Meta e autorização operacional separada para o canário v3: pre-stage das mídias, manifest selado, 1 campanha PAUSED, depois bundle de 2 PAUSED com readback consolidado.",
       "objective": "Construir e instalar o Ares Campaign Engine v3 completo, centralizado e de alta escala, preservando v2 como rollback.",
-      "source": "discord:1540202751387246664; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; runner:/root/mgs-agent/scripts/ares-campaign-engine-v3.py; skill:/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md; backup:/root/mgs-agent/backups/ares-campaign-engine-v3-20260821T033736Z",
-      "state": "v3 implementado e instalado disabled. código modular: schema/planning/quota/media registry/prestage/transport/prevalidation/engine/adapters/cli; duas campanhas por bundle, lanes por app+account, soft100/hard120, full access libera bundle concluído somente com header standard_access e util<80, zero get intermediário, um readback outer batch/bundle, graph batch dependencies, appsecret_proof support, checkpoints de lane, bloqueio de replay após falha. cpv: contrato v3, source c08/templates graph v26 read-only 3/3 sanitizados, utm cnn replacement, mídia pre-stage gate, cron v2 creation/activation paused/frozen. ares: nova skill meta-campaign-engine-v3 v3.0.0 + 4 references, 18 urls oficiais de rodolfo, soul/hot map/direct cbo/vehicle finance/paid acquisition atualizados. testes 67 pass; v3 unit 25 pass; cpv offline e2e 2 campaigns/6 ads/prevalidated/zero intermediate get; synthetic 40 campaigns/3 lanes/7 waves pass. no meta write, media upload, budget, credential, delete or restart.",
+      "source": "discord:1540202751387246664; runner:/root/mgs-agent/scripts/ares-campaign-engine-v3.py; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md; report-infra:1540213886706253925; handoff:1540214201610666056",
+      "state": "implementação concluída e handoff entregue. v3 instalado disabled com 12 módulos/entrypoint, config/operation/media registry/source templates, skill v3+4 refs e 18 urls meta, soul/hot map/3 skills/cpv operation/cron paused reasons alinhados. 68 testes pass; cpv offline e2e 2x1x3 prevalidated, c14/c15 utm, 1 readback, 0 intermediate get; synthetic 40/3 lanes/7 waves; source graph v26 read-only 200/200/3. live/mirror parity, v2 hashes unchanged, inventory scripts198/ares skills155, report-infra 1540213886706253925. handoff 1540214201610666056; ares ack 1540214284355633193 e carregou a nova skill sem restart. engine/write/media upload false, v2 jobs paused/frozen, no meta write/budget/credential/delete/restart.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T04:18:07+00:00"
+      "updated_at": "2026-08-21T04:22:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Hoje: one-shot ativa C12/C13 às 00:30 com cap/holds/readback. Próxima criação: validar canário em que adset nasce com start_time futuro exato; somente após esse GET a campanha pode ficar ACTIVE e não deve existir activation job separado.",
-      "objective": "Concluir C12/C13 em 21/08 e corrigir a rotina para naming por data de entrega e agendamento nativo",
-      "source": "Meta readback C12/C13; error code100/sub1487057; rename audit 20260821T024443Z; cron one-shot corrected; operation v1.0.43; tests 40 passed",
-      "state": "rodolfo corrigiu dois pontos: nome da campanha deve usar a data de entrega/início, e a rota ideal deve programar 00:30 no adset durante a criação e deixar campanha active, eliminando ativação posterior. c12/c13 live foram renomeadas para 12/13 - 21-08 com get http200; permanecem paused. tentativa de editar start_time dos adsets atuais falhou com meta code100/sub1487057 porque já haviam iniciado tecnicamente; nenhum status foi ativado nessa tentativa. para hoje, fallback one-shot no_agent local está agendado às 00:30. runtime futuro agora deriva nome de scheduled_start, envia start_time no adset copy e exige readback adset_start_exact; crons recorrentes seguem pausados até canário nativo. operação v1.0.43, skill direct-traffic-cbo v1.0.32, 40 testes pass.",
+      "next_step": "Aguardar autorização separada de Rodolfo para canário v3 real. Até lá usar somente validate/plan; não pre-stage/upload mídia nem alterar gates. Canário futuro nasce PAUSED conforme contrato v3 e passa readback consolidado.",
+      "objective": "Operar CPV com Campaign Engine v3 como única rota futura de criação/clone",
+      "source": "Zeus handoff; skill meta-campaign-engine-v3 v3.0.0; engine-v3 config; CPV-v3 operation; acceptance.md; activation audit 20260821T033005Z; pytest 68 passed",
+      "state": "exceção v2 de hoje concluída antes do handoff: c12/c13 active validadas às 00:30 são paulo, ambas maxvol usd30 1x1x3, budget ativo conta usd213, estoque ready 257 (42 img+215 vid), elegíveis únicos 52. campaign engine v3 recebido e validado por ares: installed_disabled_pending_canary; enabled=false, write_enabled=false, media_upload_enabled=false; bundle2, lanes app+account, soft100/hard120, mídia pre-stageada, zero get intermediário, um readback bundle. v2 creation/activation recorrentes permanecem pausados/frozen rollback; one-shot já completed. suíte combinada independente 68/68 pass. nenhum write v3 executado.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T02:49:39+00:00"
+      "updated_at": "2026-08-21T04:23:43+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTING",
-      "next_step": "Operação recorrente normal; manter os cinco slots do Diário, Intraday contínuo 2h e snapshot restrito às três threads.",
-      "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável",
-      "source": "discord:thread:1540137110789562408; operation config v1.0.40; direct-traffic-cbo-operations v1.0.31; direct-traffic-vehicle-finance-operations v1.0.14",
-      "state": "regra vigente de rodolfo: o diário das 07:00 de são paulo referencia o dia anterior fechado; os diários das 08:00, 11:00, 14:00 e 20:00 referenciam o próprio dia até o horário do envio. intraday permanece contínuo a cada 2h nas horas ímpares 01/03/05/07/09/11/13/15/17/19/21/23; checkpoint de ação 08:00 permanece separado; snapshot 03:00 diário restrito às três threads fixas.",
-      "thread_id": "1540137110789562408",
-      "updated_at": "2026-08-21T00:31:45+00:00"
+      "next_step": "Operação recorrente normal; verificar automaticamente nos próximos slots 03:00 Intraday e 07:00/08:00 Diário que campanhas futuras entram sem atualização manual de lista.",
+      "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável e inclusão automática de campanhas novas",
+      "source": "discord:thread:1540212696933470229; operation config v1.0.45; live report:/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260821T042210Z.json; activation audit:/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-activate-2026-08-21-20260821T033005Z.json",
+      "state": "correção aplicada após rodolfo identificar omissão de c12/c13: diário, intraday e snapshot agora descobrem dinamicamente todas as campanhas não deletadas da linhagem b01fb13cnn, inclusive antes do primeiro spend; campanhas deletadas entram somente com métricas no período. escopo visual ficou separado do allowlist de write autônomo. c12/c13 active usd30 1x1x3 foram confirmadas por readback meta; dry-runs live diário/intraday exibiram 7 campanhas e a reemissão intraday foi validada por readback discord. operação v1.0.45; 25 testes passaram.",
+      "thread_id": "1540212696933470229",
+      "updated_at": "2026-08-21T04:23:15+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T04:18:07+00:00"
+  "updated_at": "2026-08-21T04:23:43+00:00"
 }
