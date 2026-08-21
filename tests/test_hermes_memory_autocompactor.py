@@ -212,9 +212,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 return {"entries": [
                     {
                         "index": row["index"],
-                        "segments": compactor._split_protected_literal_segments(
-                            candidate[row["index"] - 1]
-                        )[0],
+                        "text": candidate[row["index"] - 1],
                     }
                     for row in payload
                 ]}
@@ -237,20 +235,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertTrue(result["readback_matches"])
         expected = list(original)
         for index in selected:
-            original_segments, literals = compactor._split_protected_literal_segments(
-                original[index - 1]
-            )
-            candidate_segments, _candidate_literals = compactor._split_protected_literal_segments(
-                candidate[index - 1]
-            )
-            normalized = compactor._normalize_segment_boundaries(
-                candidate_segments,
-                original_segments,
-            )
-            expected[index - 1] = compactor._restore_protected_literal_segments(
-                normalized,
-                literals,
-            )
+            expected[index - 1] = candidate[index - 1]
         self.assertEqual(source.read_text(), compactor.ENTRY_DELIMITER.join(expected))
         self.assertLess(result["after_chars"], result["before_chars"])
 
