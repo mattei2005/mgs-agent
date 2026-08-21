@@ -207,7 +207,18 @@ def graph_post_once(common, token: str, path: str, params: dict[str, Any], stage
     return payload, headers
 
 
-def batch_get(common, token: str, requests_: list[dict[str, Any]], stage: str) -> dict[str, Any]:
+def validate_only_retry_delay(detail: dict[str, Any], attempt: int, transient_5xx_retries: int) -> int | None:
+    """Bound retries for idempotent validate_only propagation/transient failures."""
+    http_status = int((detail or {}).get("http") or 0)
+    error = (detail or {}).get("error") or {}
+    if 500 <= http_status <= 599 and transient_5xx_retries < 2 and attempt < 6:
+        return 10
+    if error.get("error_subcode") == 2446289 and attempt < 6:
+        return 5
+    return None
+
+
+def batch_get(common, token: str, requests_list: list[dict[str, Any]], stage: str) -> dict[str, dict[str, Any]]:
     status, rows, _ = common.graph_batch_get(token, requests_)
     if status != 200 or not isinstance(rows, list):
         error = safe_meta(common, rows)
@@ -1430,6 +1441,7 @@ def execute(args: argparse.Namespace) -> int:
                 ad_params = {"name": f"AD {ad_index:02d} - {Path(str(item['inventory']['canonical_filename'])).stem}", "adset_id": adset_id, "creative": {"creative_id": creative_id}, "status": "ACTIVE"}
                 validated = False
                 propagation: list[dict[str, Any]] = []
+                transient_5xx_retries = 0
                 for attempt in range(1, 7):
                     avp = dict(ad_params)
                     avp["execution_options"] = ["validate_only"]
@@ -1441,9 +1453,12 @@ def execute(args: argparse.Namespace) -> int:
                     except Stop as exc:
                         error = (exc.detail or {}).get("error") or {}
                         propagation.append({"attempt": attempt, "success": False, "error": error})
-                        if error.get("error_subcode") != 2446289 or attempt == 6:
+                        retry_delay = validate_only_retry_delay(exc.detail or {}, attempt, transient_5xx_retries)
+                        if retry_delay is None:
                             raise
-                        time.sleep(5)
+                        if 500 <= int((exc.detail or {}).get("http") or 0) <= 599:
+                            transient_5xx_retries += 1
+                        time.sleep(retry_delay)
                 if not validated:
                     raise Stop(f"c{number}_ad_{ad_index}_validate", {"message": "validate_only did not pass", "propagation": propagation})
                 created, _ = graph_post_once(common, token, ACCOUNT_ACT + "/ads", ad_params, f"c{number}_ad_{ad_index}_create", expect_id=True)
