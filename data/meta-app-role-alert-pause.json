@@ -1,12 +1,10 @@
 {
   "version": 2,
   "mode": "manual",
-  "apps": [
-    "B001-2"
-  ],
+  "apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1540340806341099540",
-  "updated_at": "2026-08-21T08:45:58-04:00",
-  "reason": "Rodolfo solicitou parar o monitoramento do B001-2; o cron genérico permanece ativo para os demais apps e suprime a entrega deste app até nova instrução."
+  "source_message_id": "1540351562088452147",
+  "updated_at": "2026-08-21T09:31:04-04:00",
+  "reason": "B001-2 foi substituído por B001-3; a nova rota foi liberada para varredura live e alerta real por instrução explícita de Rodolfo."
 }
