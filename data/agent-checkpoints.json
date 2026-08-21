@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Rodolfo decidir se autoriza construir o Ares Campaign Engine vNext em paralelo ao v2 congelado: higiene não destrutiva, módulos, throttle por conta, media registry, batch engine, native scheduling e canários 1→3→10 antes do teste 40/3 contas.",
+      "next_step": "Rodolfo decidir se autoriza construir um executor central vNext, preservando v2 como rollback: dispatcher único sem searching, auditor/proteção separados, media pre-stage, lanes por conta, batch engine, native schedule, instrumentação e canários 1→3→10→40.",
       "objective": "Auditar integralmente o subsistema de criação/clonagem do Ares e desenhar rota de alta escala comparável a 40 clones em 15 minutos, reduzindo searching, tool overhead, chamadas Meta e etapas operacionais.",
-      "source": "discord:1540188640955727983; threads:1540137110789562408,1539826050765299872; report:/root/mgs-agent/work/ares-high-scale-audit-20260821/report.md; findings:/root/mgs-agent/work/ares-high-scale-audit-20260821/findings.json; citations:strict-evidence-ok",
-      "state": "auditoria concluída sem implementar vnext. threads: 15/15 e 91/91. benchmark normalizado: externo equivale a 67,5s por clone por account lane; ares clean path 119,4s, 1,77x mais lento; 30,8min percebidos vieram de 2 falhas+cleanup+gap. ares tem 26 arquivos cpv, 16 legados/completados, 19 pycache; writer 1740 linhas/69 funções e execute 491 linhas. hot path ainda faz media antes do clone, 6 uploads sequenciais, 3 creatives+3 validates+3 ads sequenciais, sleeps fixos; throttle é global entre contas; async existe mas não é chamado; score clone subconta 12 vs 13 mutations; regras ativas conflitam. integridade mecânica passou: 16 python, 10 shell, 13 cron refs, 43 testes, 0 refs quebradas/segredos. arquitetura vnext definida: dispatcher determinístico sem searching, contrato pequeno, media pre-stage, lanes por app+account, batch/dependencies, pure clone e pre-staged modes, native future scheduling e observabilidade por estágio.",
+      "source": "discord:1540188640955727983; images:img_f6236782b9ff.png,img_f7ba75237164.png,img_2f67a7f709bb.png,img_66db5b74b13a.png,img_972404cb2e14.png; report:/root/mgs-agent/work/ares-high-scale-audit-20260821/report.md; findings:/root/mgs-agent/work/ares-high-scale-audit-20260821/findings.json",
+      "state": "auditoria concluída sem implementar vnext, agora reforçada por 5 capturas do operador externo. o executor externo é programa central padronizado separado do agente, único para todos os tópicos, já chamado v23; tem proteção de api e validação de fluxo separadas; rota referência→build→auditoria→executor paused→get final; mídia nova sobe primeiro à library meta; drive/upload adiciona ~5min; melhorias ocorrem pós-execução; operador relata 100 campanhas em uma operação após mapear barreira >99. isso confirma nosso diagnóstico: ares deve parar de criar/patchar executor por sessão. benchmark normalizado 67,5s/clone/account lane vs ares clean119,4s; arquivos mecanicamente íntegros, mas writer monolítico/sequencial, throttle global, mídia no hot path, async morto, score 12 vs 13 e regras conflitantes.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T03:01:49+00:00"
+      "updated_at": "2026-08-21T03:04:27+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T03:01:49+00:00"
+  "updated_at": "2026-08-21T03:04:27+00:00"
 }

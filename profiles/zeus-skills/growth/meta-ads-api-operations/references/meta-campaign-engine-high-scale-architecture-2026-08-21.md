@@ -4,6 +4,12 @@
 
 Use when Ares is asked to create/clone campaigns in bulk, operate several ad accounts in parallel, reduce visible `Searching`/live patching, or approach a benchmark such as 40 clones across three accounts in 15 minutes.
 
+## Confirmed external executor pattern
+
+Rodolfo's operator screenshots confirmed the benchmark engine is a standardized program separate from the agent, shared by every topic and currently described as optimization v23. It uses separate API-protection and flow-validation components. Its operating loop is reference → build → audit → execute PAUSED → final GET; improvements happen after execution, not by editing code inside the production request. New media is uploaded to the Facebook library before campaign construction; the operator attributes about five extra minutes to the Drive/upload route. The same executor reportedly handled 100 campaigns in one operation after mapping an initial >99 barrier.
+
+This evidence strengthens the hot-path invariant below: do not let each Ares conversation invent or patch its own executor.
+
 ## First distinction: three workloads
 
 ```text
