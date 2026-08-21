@@ -55,7 +55,8 @@ Never put token, app secret, Page token or signed URL in the registry.
 - Token is loaded only for guarded execute through the existing protected credential provider.
 - `appsecret_proof` is supported; enable `Require App Secret` only after app secret provisioning and full route validation.
 - Canário técnico explicitamente solicitado nasce `PAUSED`.
-- Pedido normal de produção preserva `ACTIVE` com `start_time` futuro já selado; o primeiro bundle autorizado funciona como fase de canário guardado/fail-closed sem trocar silenciosamente o status pedido.
+- Pedido normal de produção preserva `ACTIVE` com `start_time` futuro já selado.
+- O guard inicial é por lane: o primeiro bundle de cada `app_key + ad_account_id` funciona como fase guardada/fail-closed; lanes de contas diferentes podem começar em paralelo pelo `ThreadPoolExecutor`, sem canário global serial.
 - Audit error records contain type/safe message only.
 
 ## Observability

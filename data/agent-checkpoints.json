@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
-      "next_step": "Executar scan completo de código/arquivos e banco nos quatro sites; identificar origem exata antes de qualquer alteração.",
+      "next_step": "Aguardar autorização específica de Rodolfo para substituir somente a URL do builder JBF em finanzas.wavesbee.com, com backup do option ad_inserter, purge de cache e validação desktop/mobile/network.",
       "objective": "Auditar profundamente e eliminar requisições ActiveView/rede antiga em cliquet.com, finanzas.cliquet.com, wavesbee.com e finanzas.wavesbee.com, preservando a monetização Smart Bidding/JBF.",
-      "source": "Discord thread 1540230925261213707; user message 1540230925261213707; /root/mgs-agent/inventario-webapps.json; wp-plugin-mass-operation route packs.",
-      "state": "governança e inventário validados; cliquet/finanzas em aws bitnami com sftp read-only e rest/wp admin; wavesbee/finanzas em runcloud inc01. varredura read-only de arquivos, banco e runtime público em andamento.",
+      "source": "Discord thread 1540230925261213707; artifacts /root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821; RunCloud Inc01; Bitnami SFTP/REST.",
+      "state": "varredura read-only concluída: 42.922 arquivos enumerados, 42.912 lidos, 10 binários grandes classificados, zero erro; zero assinatura forte actview nos arquivos; zero em bancos wavesbee; zero no conteúdo rest cliquet; 16 execuções desktop/mobile com scroll e zero request actview. requisições activeview observadas em wavesbee são google pagead2 active view de mensuração, carregadas pelo gam/jbf, não a rede antiga. cliquet tem usuários wp legados activeview e regra wpfc de cookie, sem script/request. bloqueador real: finanzas.wavesbee.com aponta o ad inserter para builder jbf inválido com slug finanzas.wavesbee; endpoint retorna http 403 xml. builder canônico wavesbeefinanzas responde 200 js.",
       "thread_id": "1540230925261213707",
-      "updated_at": "2026-08-21T05:30:52+00:00"
+      "updated_at": "2026-08-21T05:57:01+00:00"
     },
     {
       "agent": "zeus",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T05:30:52+00:00"
+  "updated_at": "2026-08-21T05:57:01+00:00"
 }
