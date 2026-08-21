@@ -58,16 +58,16 @@
       {"app":"B006-3","item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins","app_name":"B006-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Gia Huy","sheet_no_app_rows":15,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538892880783876200"},
       {"app":"B004-3","item_title":"BOT B004-3 Token - Beatriz Santos","app_name":"B004-3","app_metadata_http":200,"roles_http":200,"roles_count":12,"roles_resolved_names":12,"expected_sheet_roles":12,"pending_role_acceptances":0,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Beatriz Santos","sheet_no_app_rows":12,"sheet_present_rows":12,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538901046653358121"},
       {"app":"B001-3","item_title":"BOT B001-2 Token - Adriano Alves","app_name":"B001-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"expected_sheet_roles":17,"pending_role_acceptances":2,"missing_sheet_roles":["Adriano Alves","Alnashri Lumandung Maja"],"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_token_profile":"Aline Rosse","sheet_no_app_rows":17,"sheet_identity_blocked_rows":17,"sheet_writes":0,"force_live_alert_message_ids":["1540353027204976741","1540353028484497488","1540353029482745988"],"source_message_id":"1540351562088452147"},
-      {"app":"B013-3","item_title":"BOT B013-3 Token - PERFIL NOVO - 192","app_name":"B013-3","app_metadata_http":200,"roles_http":200,"roles_count":3,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"sheet_no_app_rows":30,"dtr_targets":30,"dtr_linked":30,"dtr_unlinked_confirmed":0,"dtr_unknown":0,"dtr_pages_visible":301,"graph_pages_visible":293,"connected_pages":279,"dry_run_sheet_writes":0,"source_message_id":"1540372238467862579"}
+      {"app":"B013-3","item_title":"BOT B013-3 Token - PERFIL NOVO - 192","app_name":"B013-3","app_metadata_http":200,"roles_http":200,"roles_count":3,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"sheet_no_app_rows":31,"dtr_targets":31,"dtr_linked":31,"dtr_unlinked_confirmed":0,"dtr_unknown":0,"dtr_pages_visible":324,"graph_pages_visible":316,"connected_pages":302,"sheet_x_final":0,"production_sheet_writes":{"first_cycle":1,"containment_clear":30},"force_live_alert_message_ids":["1540374844380553238","1540374847199248434","1540374848587563038","1540374850030403674"],"recovery_alert_message_ids":["1540376653388189878","1540376654847680663","1540376656781385868","1540376658110980257"],"source_message_id":"1540372238467862579"}
     ],
     "secrets_exposed": false,
     "report":"reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "b001_3_pending_and_b013_3_activated",
+    "status": "b001_3_pending_and_b013_3_active_validated",
     "authorized_by": "Rodolfo Mattei",
     "source_message_id": "1540372238467862579",
-    "planned_check": "B001-3 segue em 15/17; B013-3 foi autorizado após preflight completo 30/30 linked e será ativado no monitor dedicado.",
+    "planned_check": "B001-3 segue em 15/17; B013-3 está ativo e validado em 31/31 linked, zero pendentes e Sheet X limpo.",
     "required_before_reactivation": [
       "fresh /roles readback for all 13 apps",
       "exact reconciliation against the current Sheet order and assignments",
@@ -77,6 +77,6 @@
       "explicitly preserve B001-3/B004-3/B006-3/B007/B013-3 routing semantics"
     ],
     "reactivate_only_when": "explicit Rodolfo instruction or 100 percent reconciled",
-    "current_runtime_note": "Generic role monitoring is active and B001-3 remains fail-closed at 15/17. B013-3 passed full 30/30 DTR/Graph preflight and was explicitly authorized for dedicated monitor activation and real alert."
+    "current_runtime_note": "Generic role monitoring is active and excludes B013-3; B001-3 remains fail-closed at 15/17. Dedicated B013-3 monitoring is active with 31/31 linked, zero pending/unknown, healthy capability and zero Sheet X markers."
   }
 }
