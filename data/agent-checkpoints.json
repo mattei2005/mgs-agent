@@ -113,12 +113,12 @@
     {
       "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
-      "next_step": "Aguardar autorização específica de Rodolfo para substituir somente a URL do builder JBF em finanzas.wavesbee.com, com backup do option ad_inserter, purge de cache e validação desktop/mobile/network.",
+      "next_step": "Aguardar nova autorização de Rodolfo para trocar o builder genérico por digital-trust_wavesbeefinanzas_direct_us.builder.js; depois limpar cache, validar desktop/mobile REC/P1 com request gampad e fechar inventário/audit/REPORT-INFRA.",
       "objective": "Auditar profundamente e eliminar requisições ActiveView/rede antiga em cliquet.com, finanzas.cliquet.com, wavesbee.com e finanzas.wavesbee.com, preservando a monetização Smart Bidding/JBF.",
-      "source": "Discord thread 1540230925261213707; artifacts /root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821; RunCloud Inc01; Bitnami SFTP/REST.",
-      "state": "varredura read-only concluída: 42.922 arquivos enumerados, 42.912 lidos, 10 binários grandes classificados, zero erro; zero assinatura forte actview nos arquivos; zero em bancos wavesbee; zero no conteúdo rest cliquet; 16 execuções desktop/mobile com scroll e zero request actview. requisições activeview observadas em wavesbee são google pagead2 active view de mensuração, carregadas pelo gam/jbf, não a rede antiga. cliquet tem usuários wp legados activeview e regra wpfc de cookie, sem script/request. bloqueador real: finanzas.wavesbee.com aponta o ad inserter para builder jbf inválido com slug finanzas.wavesbee; endpoint retorna http 403 xml. builder canônico wavesbeefinanzas responde 200 js.",
+      "source": "Discord thread 1540230925261213707; autorização 1540239590022058015; backup /var/backups/mgs/jbf-wrapper-fix/20260821T060248Z/finanzas.wavesbee.com; artifacts /root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821.",
+      "state": "etapa autorizada aplicada em finanzas.wavesbee.com: ad inserter corrigido do builder inexistente finanzas.wavesbee (http 403 xml) para wavesbeefinanzas genérico (http 200 js); backup e readback passaram, url antiga zerada e cache limpo. validação funcional adicional detectou que o builder genérico carrega mas não cria slot/gampad nas rotas testadas. simulação local sem alterar produção provou que o builder wavesbeefinanzas_direct_us cria o slot smart bidding /22048006626/digital-trust_wavesbeefinanzas_desk_us_interstitial. resultado atual é parcial: arquivo jbf válido, porém sem impressão comprovada.",
       "thread_id": "1540230925261213707",
-      "updated_at": "2026-08-21T05:57:01+00:00"
+      "updated_at": "2026-08-21T06:12:30+00:00"
     },
     {
       "agent": "zeus",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T05:57:01+00:00"
+  "updated_at": "2026-08-21T06:12:30+00:00"
 }
