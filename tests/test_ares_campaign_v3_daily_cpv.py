@@ -380,6 +380,28 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
     }
     assert paths.inventory.read_bytes() == before
     assert not paths.state.exists()
+    audit = json.loads(Path(result["audit"]).read_text())
+    observability = audit["observability"]
+    assert observability["phase_order"] == [
+        "meta_preflight",
+        "drive_preflight",
+        "reconciliation",
+        "asset_selection",
+        "prestage",
+        "manifest_prevalidation",
+        "engine",
+        "postprocess",
+    ]
+    assert list(observability["phases"]) == observability["phase_order"]
+    assert all("duration_ms" in observability["phases"][name] and "calls" in observability["phases"][name] for name in observability["phase_order"])
+    assert observability["phases"]["meta_preflight"]["skipped"] is False
+    assert observability["phases"]["drive_preflight"]["skipped"] is False
+    assert observability["phases"]["reconciliation"]["skipped"] is False
+    assert observability["phases"]["asset_selection"]["skipped"] is False
+    assert observability["phases"]["prestage"]["skipped"] is True
+    assert observability["phases"]["engine"]["skipped"] is True
+    assert observability["total"]["duration_ms"] >= 0
+    assert "access_token" not in json.dumps(observability).lower()
 
 
 def test_move_to_testing_is_idempotent_after_crash_without_second_patch():

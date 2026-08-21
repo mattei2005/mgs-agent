@@ -111,7 +111,7 @@ def init_observability(audit: dict[str, Any]) -> None:
     }
 
 
-def atomic_json(path: Path, payload: dict[str, Any], *, sort_keys: bool = True) -> None:
+def atomic_json(path: Path, payload: dict[str, Any], *, sort_keys: bool = False) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, raw = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
     temporary = Path(raw)
