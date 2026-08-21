@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Zeus repete revisão foreground dos três P0s, roda crash/collision/checksum regressions e cron readback. Só após PASS altera job 2cf8115a4f8b para creditoparaveiculo-v3-daily-create.sh mantendo no_agent=true/deliver=local; não habilitar pausa D3 neste cutover.",
+      "next_step": "Zeus faz último foreground readback do commit 4a55ee79 e da regressão cache-first. Só após PASS altera job 2cf8115a4f8b para creditoparaveiculo-v3-daily-create.sh mantendo no_agent=true/deliver=local; P1 de instrumentação de duração/calls fica para pós-primeiro ciclo.",
       "objective": "Concluir revisão foreground Zeus e cutover do schedule diário CPV 17h para Campaign Engine v3",
-      "source": "discord:thread:1540228969071116408 Zeus P0 review; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; cli:/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
-      "state": "p0-1/2/3 corrigidos em foreground sem meta write/upload: guard antes de execute_engine bloqueia nome exato live não-deleted/archived fora do campaign_ids mapeado do mesmo request; títulos determinísticos de vídeo agora incluem asset_id+checksum curto e registry confirma account+asset+checksum+ids; falha após possível media/campaign/drive side effect vira readback_deferred ou postprocess_pending, com manual_reconciliation_required para campanha sem ids conhecidos, e gate hourly não retoma manual hold. suite relevante 128 passed; offline smoke segue 2->partial_deferred_quota->3 complete_future_active, zero rede. commits 0c476c8f e b0339a0d. cron 2cf8115a4f8b deve permanecer paused até novo foreground zeus.",
+      "source": "discord:thread:1540228969071116408 Zeus cache-first P0; commit:4a55ee79; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+      "state": "p0 token cache-first fechado: livedailybackend.meta_preflight usa get_token_from_1password(token_item) sem force_refresh, preservando cache/invalidação do helper e evitando pressão 1password em cron/resume. regressão mock confirma assinatura sem force refresh. suite relevante 129 passed; compile pass; commit 4a55ee79. p0 anteriores de colisão, checksum de mídia e resume pós-side-effect permanecem verdes. cron 2cf8115a4f8b continua paused/disabled, registry vazio e nenhum runner state produtivo.",
       "thread_id": "1540228969071116408",
-      "updated_at": "2026-08-21T06:53:35+00:00"
+      "updated_at": "2026-08-21T06:57:18+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:53:35+00:00"
+  "updated_at": "2026-08-21T06:57:18+00:00"
 }
