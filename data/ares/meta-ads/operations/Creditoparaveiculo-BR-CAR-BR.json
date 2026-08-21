@@ -146,6 +146,20 @@
     "new_campaign_budget_pool_usd": 60,
     "default_campaign_initial_budget_usd": 30,
     "default_campaign_count_when_not_otherwise_specified": 2,
+    "one_time_override_20260821": {
+      "authorized_by": "Rodolfo Mattei",
+      "scope": "three total new campaigns, not two plus three",
+      "budget_share": 0.3,
+      "budget_pool_usd": 90,
+      "campaign_count": 3,
+      "budget_per_campaign_usd": 30,
+      "mode": "clone_prestaged",
+      "planner_bundles": [2, 1],
+      "creative_lineages_required": 9,
+      "creation_at": "2026-08-21T17:00:00-03:00",
+      "delivery_start": "2026-08-22T00:30:00-03:00",
+      "status": "authorized_pending_media_manifest_and_live_preflight"
+    },
     "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
     "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
     "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
@@ -157,7 +171,7 @@
     "stock_reporting_required": true,
     "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
-    "production_readback": "historical v2: prepare PAUSED and activate later; superseded for every new manifest by Campaign Engine v3 native future scheduling after the separate v3 canary gate. While v3 remains disabled, no v3 production write is permitted"
+    "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start; v2 creation/activation crons remain paused as rollback."
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
@@ -172,7 +186,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-20T18:45:25-03:00",
-    "next_required_campaign_number": 12,
+    "next_required_campaign_number": 14,
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
     "prior_wrong_retry_slots": [50, 49],
@@ -303,6 +317,14 @@
         "11": {
           "campaign_id": "120250210269480632",
           "cycle_start_date": "2026-08-20"
+        },
+        "12": {
+          "campaign_id": "120250860233210632",
+          "cycle_start_date": "2026-08-21"
+        },
+        "13": {
+          "campaign_id": "120250860295890632",
+          "cycle_start_date": "2026-08-21"
         }
       },
       "required": [

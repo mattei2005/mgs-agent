@@ -214,7 +214,7 @@ def test_report_scope_discovers_new_live_campaigns_without_expanding_write_allow
     ]
     assert module.report_campaign_ids(campaigns) == ["7", "12", "13"]
     assert module.report_campaign_ids(campaigns, {"50": {"spend": 1}}, {}) == ["7", "12", "13", "50"]
-    assert module.AUTONOMOUS_WRITE_NUMBERS == {"07", "08", "09", "10", "11"}
+    assert module.AUTONOMOUS_WRITE_NUMBERS == {"07", "08", "09", "10", "11", "12", "13"}
 
 
 def test_new_campaign_cycle_date_comes_from_operational_name():

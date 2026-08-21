@@ -349,6 +349,24 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T02:17:53-04:00",
+      "id": "DEC-MONETIZATION-NETWORK-ASSIGNMENT-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "ActiveView restrita a Openzed; Cliquet e Wavesbee em JBF/Smart Bidding",
+      "updated_at": "2026-08-21T06:17:53+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -903,5 +921,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T04:18:36+00:00"
+  "updated_at": "2026-08-21T06:17:53+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-21T01:08:51-04:00",
+    "updated_at": "2026-08-21T02:18:57.645172-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7768,6 +7768,89 @@
         "mentions": [],
         "readback": "HTTP 200; author Zeus; message present; content empty"
       }
+    },
+    {
+      "id": "wordpress-av-legacy-four-sites-audit-jbf-fix-20260821",
+      "agent": "zeus",
+      "type": "wordpress_ad_network_audit_and_jbf_wrapper_fix",
+      "owner": "Zeus/Tech + Rodolfo/Revenue-AdOps",
+      "status": "completed_validated",
+      "requested_by": "Rodolfo Mattei",
+      "request_message_id": "1540230925261213707",
+      "authorization_message_id": "1540239590022058015",
+      "canonical_confirmation_message_id": "1540242985156087818",
+      "source_thread_id": "1540230925261213707",
+      "sites": [
+        "cliquet.com",
+        "finanzas.cliquet.com",
+        "wavesbee.com",
+        "finanzas.wavesbee.com"
+      ],
+      "audit_coverage": {
+        "files_enumerated": 42922,
+        "files_content_scanned": 42912,
+        "large_binary_assets_classified": 10,
+        "filesystem_errors": 0,
+        "strong_actview_file_matches": 0,
+        "runcloud_db_strong_matches": 0,
+        "runtime_desktop_mobile_scroll_runs": 16,
+        "strong_actview_runtime_requests": 0
+      },
+      "classification": {
+        "google_active_view": "Google GAM/JBF viewability measurement from pagead2.googlesyndication.com; not the legacy ActView partner loader",
+        "legacy_actview_loader": "scr.actview.net/zuout.js and related signatures absent from all four active runtimes",
+        "cliquet_residue": "legacy WordPress usernames/cache exclusion names only; no script or request"
+      },
+      "production_change": {
+        "site": "finanzas.wavesbee.com",
+        "surface": "Ad Inserter encoded option ad_inserter",
+        "before_builder": "https://assets.jbfdigital.com.br/assets/digital-trust/finanzas.wavesbee/digital-trust_finanzas.wavesbee.builder.js",
+        "before_http": "403 application/xml",
+        "after_builder": "https://assets.jbfdigital.com.br/assets/digital-trust/wavesbeefinanzas/digital-trust_wavesbeefinanzas.builder.js",
+        "after_http": "200 text/javascript",
+        "direct_us_applied": false,
+        "reason_not_direct_us": "Rodolfo confirmed the generic wavesbeefinanzas builder as canonical in message 1540242985156087818."
+      },
+      "backup": {
+        "remote": "/var/backups/mgs/jbf-wrapper-fix/20260821T060248Z/finanzas.wavesbee.com",
+        "local": "/root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821/finanzas_wavesbee_com-ad-inserter.json",
+        "local_before_sha256": "617ec83a1491d850026e8c65372f2f722768c28205ef8e3877ee20cd7cd21648"
+      },
+      "validation": {
+        "option_readback": "old_count=0; canonical_count=1; serialized roundtrip PASS",
+        "cache": "WP Fastest Cache clear all PASS",
+        "public_bare": "HTTP 200; old_count=0; canonical_count=1; CF-Cache-Status DYNAMIC",
+        "public_cachebuster": "HTTP 200; old_count=0; canonical_count=1; CF-Cache-Status DYNAMIC",
+        "canonical_builder": "HTTP 200 text/javascript; zero strong ActView signatures",
+        "old_builder": "HTTP 403 application/xml",
+        "browser": "desktop/mobile builder request HTTP 200; zero old URL; zero strong ActView request; window.jbftag object present"
+      },
+      "institutional_update": {
+        "registry_id": "DEC-MONETIZATION-NETWORK-ASSIGNMENT-20260821",
+        "canonical_source": "context/monetization.md",
+        "context_files": [
+          "context/monetization.md",
+          "context/sites.md",
+          "context/routes.md",
+          "context/areas.md",
+          "context/company-os.md",
+          "context/company.md",
+          "context/sources-of-truth.md"
+        ],
+        "activeview_exception": "openzed and its subdomains only",
+        "smart_bidding_jbf_sites": [
+          "cliquet.com",
+          "finanzas.cliquet.com",
+          "wavesbee.com",
+          "finanzas.wavesbee.com"
+        ]
+      },
+      "artifacts": "/root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821",
+      "report_infra_message_id": "1540243927272132680",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "report_infra_readback_evidence": "Discord fetch: message present; author Zeus bot; content empty; no attachments or mentions.",
+      "updated_at": "2026-08-21T02:20:07-04:00"
     }
   ],
   "profile_skill_references": [
@@ -12167,5 +12250,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-08-21T02:18:57.645172-04:00"
 }
