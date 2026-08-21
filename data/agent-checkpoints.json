@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "No retry, clonar C08 para novas C12/C13 PAUSED, anexar seis criativos Drive, validar 1x1x3, deletar/readback antigas C12/C13 uma por uma, mover assets para 02_TESTING e reportar estoque. Ativar somente às 00:30 após cap/holds/hierarquia.",
-      "objective": "Operar tráfego direto CBO e a criação diária sequencial por clone para creditoparaveiculo.com BR-CAR-BR",
-      "source": "discord:thread:1539826050765299872; abort audit daily-create-2026-08-20-20260820T232142Z; clone audit daily-create-2026-08-20-20260820T233929Z; operation config v1.0.38; clone retry scheduler enabled",
-      "state": "rodolfo confirmou execução e esclareceu que esperava clone. o write from-zero em andamento foi interrompido antes de deletar c12/c13 antigas; cleanup independente validou 2 novas campanhas, 6 ads, 6 creatives e 24 vídeos técnicos removidos, assets não consumidos e antigas preservadas. rota alterada para clone nativo raso de c08 maxvol campaign/adset com novos creatives drive. primeiro canário de clone materializou c12/adset corretamente, mas effective_status in_process foi reprovado cedo; cleanup completo preservou antigas. gate corrigido para configured paused/active com effective in_process seguro. retry determinístico pós-cooldown agendado para aproximadamente 21:50 sp; buc anterior 46%, tier development_access.",
+      "next_step": "Construir rota v2: baseline Drive×Meta separada e incremental; media staging persistente; clone writer lendo somente seis bindings reservados + source/targets/budget; batch POST por dependency boundary; request budget hard gate. Validar em C12 canary sem repetir portfólio, depois C13, antes de reativar cron.",
+      "objective": "Reescrever e validar a rota de clone diário CPV sem reconciliação global no writer",
+      "source": "discord:thread:1539826050765299872; cumulative audit aggregation 2026-08-20; canonical rate-limit plan; operation config v1.0.38; scheduler readback creation+activation paused",
+      "state": "rodolfo identificou corretamente que a quota não fazia sentido para duas campanhas. postmortem real: 7 audits, 6 full reconciliations repetidas, 1.436 video subrequests e 984 ad rows; 5 campanhas, 12 ads e 48 technical video ids foram criados/limpos durante retries. a rota misturava baseline global, staging de mídia e campaign write; graph batch reduziu transport mas subrequests consumiram quota. clone retry one-shot removido; creation e activation crons pausados; state route_paused_postmortem, zero prepared ids, c12/c13 antigas preservadas. buc live 46%, development_access.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-20T23:46:57+00:00"
+      "updated_at": "2026-08-21T00:01:45+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-20T23:46:57+00:00"
+  "updated_at": "2026-08-21T00:01:45+00:00"
 }
