@@ -142,10 +142,17 @@ def _restore_candidate_literals(
     restored_rows = []
     selected = set(selected_indexes)
     for item in rows:
-        if not isinstance(item, dict) or not isinstance(item.get("index"), int):
+        if not isinstance(item, dict):
             restored_rows.append(item)
             continue
-        index = item["index"]
+        raw_index = item.get("index")
+        if isinstance(raw_index, int):
+            index = raw_index
+        elif isinstance(raw_index, str) and raw_index.isdigit():
+            index = int(raw_index)
+        else:
+            restored_rows.append(item)
+            continue
         if index not in selected or not 1 <= index <= len(original):
             restored_rows.append(item)
             continue
@@ -351,9 +358,13 @@ def _run_llm_subprocess(
         )
     except subprocess.TimeoutExpired as exc:
         raise CompactionError("model_call_timeout") from exc
-    if completed.returncode != 0:
-        raise CompactionError("model_call_failed")
-    return _extract_json_object(completed.stdout)
+    try:
+        data = _extract_json_object(completed.stdout)
+    except CompactionError as exc:
+        if completed.returncode != 0:
+            raise CompactionError("model_call_failed") from exc
+        raise
+    return data
 
 
 def propose_and_verify(
@@ -371,6 +382,7 @@ def propose_and_verify(
         "candidate_entry_above_budget",
         "protected_literals_changed",
         "candidate_entry_count_mismatch",
+        "candidate_entry_shape_invalid",
         "candidate_indexes_invalid",
         "invalid_model_json",
         "model_call_failed",

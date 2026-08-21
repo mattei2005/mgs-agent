@@ -79,6 +79,23 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(command[0], str(interpreter))
         self.assertEqual(environment["MGS_HERMES_RUNTIME_ROOT"], str(repo))
 
+    def test_llm_subprocess_accepts_valid_json_from_abnormal_exit(self):
+        _launcher, repo, interpreter = self.make_launcher_fixture()
+        completed = subprocess.CompletedProcess(
+            [],
+            134,
+            stdout='{"valid":true}\n',
+            stderr="late teardown failure",
+        )
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed):
+            result = compactor._run_llm_subprocess(
+                "prompt",
+                self.profile,
+                hermes_repo=repo,
+                hermes_python=interpreter,
+            )
+        self.assertTrue(result["valid"])
+
     def test_llm_timeout_is_classified_without_leaking_output(self):
         _launcher, repo, interpreter = self.make_launcher_fixture()
 

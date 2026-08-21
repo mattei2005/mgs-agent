@@ -74,6 +74,24 @@ def test_score_budget_fails_closed_without_x_ad_account_usage():
     assert budget['reason'] == 'missing_x_ad_account_usage'
 
 
+def test_local_score_ledger_warms_up_then_replaces_missing_header():
+    mod = load_module()
+    state = {}
+    business = {'entries': [{'type': 'ads_management', 'ads_api_access_tier': 'development_access'}]}
+    mod._update_local_score_ledger(state, 1000.0, 1, business, {'present': False})
+    assert state['local_score']['ready'] is False
+    assert state['local_score']['warmup_remaining_seconds'] == 300
+    warmup_budget = mod.ads_management_score_budget({}, business, read_calls=1, write_calls=1, local_score=state['local_score'])
+    assert warmup_budget['allowed'] is False
+    assert warmup_budget['reason'] == 'local_score_warmup'
+    mod._update_local_score_ledger(state, 1301.0, 1, business, {'present': False})
+    assert state['local_score']['ready'] is True
+    assert state['local_score']['points'] == 1
+    budget = mod.ads_management_score_budget({}, business, read_calls=8, write_calls=12, reserve_points=5, local_score=state['local_score'])
+    assert budget['allowed'] is True
+    assert budget['measurement_source'] == 'local_rolling_ledger'
+
+
 def test_parser_computes_max_over_more_than_32_entries_and_rejects_nonfinite():
     mod = load_module()
     rows = [{'type': 'ads_management', 'call_count': 1} for _ in range(32)]
@@ -226,19 +244,21 @@ def test_graph_batch_get_builds_one_outer_request(monkeypatch, tmp_path):
     mod = load_module()
     monkeypatch.setattr(mod, 'THROTTLE_STATE_PATH', tmp_path / 'state.json')
     captured = {}
-    def fake_post(path, token, params=None):
+    def fake_retry(once, path, token, params=None):
+        captured['once'] = once.__name__
         captured['path'] = path
         captured['params'] = params
         return 200, [
             {'code': 200, 'headers': [], 'body': json.dumps({'id': '1'})},
             {'code': 200, 'headers': [], 'body': json.dumps({'data': []})},
         ], {}
-    monkeypatch.setattr(mod, 'graph_post', fake_post)
+    monkeypatch.setattr(mod, '_request_with_retry', fake_retry)
     status, rows, _ = mod.graph_batch_get('token', [
         {'name': 'campaign', 'path': '1', 'params': {'fields': 'id'}},
         {'name': 'ads', 'path': '1/ads', 'params': {'fields': 'id', 'limit': 10}},
     ])
     assert status == 200
+    assert captured['once'] == '_graph_post_batch_once'
     assert captured['path'] == ''
     assert len(captured['params']['batch']) == 2
     assert [row['name'] for row in rows] == ['campaign', 'ads']
