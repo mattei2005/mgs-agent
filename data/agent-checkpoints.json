@@ -43,12 +43,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTING",
-      "next_step": "Operação recorrente normal; verificar automaticamente nos próximos slots 03:00 Intraday e 07:00/08:00 Diário que campanhas futuras entram sem atualização manual de lista.",
-      "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável e inclusão automática de campanhas novas",
-      "source": "discord:thread:1540212696933470229; operation config v1.0.45; live report:/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260821T042210Z.json; activation audit:/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-activate-2026-08-21-20260821T033005Z.json",
-      "state": "correção aplicada após rodolfo identificar omissão de c12/c13: diário, intraday e snapshot agora descobrem dinamicamente todas as campanhas não deletadas da linhagem b01fb13cnn, inclusive antes do primeiro spend; campanhas deletadas entram somente com métricas no período. escopo visual ficou separado do allowlist de write autônomo. c12/c13 active usd30 1x1x3 foram confirmadas por readback meta; dry-runs live diário/intraday exibiram 7 campanhas e a reemissão intraday foi validada por readback discord. operação v1.0.45; 25 testes passaram.",
-      "thread_id": "1540212696933470229",
-      "updated_at": "2026-08-21T04:23:15+00:00"
+      "next_step": "Backup, patch do renderer/testes/config, dry-run live, REPORT-INFRA e envio report-only com readback Discord.",
+      "objective": "Aplicar o layout mobile aprovado por Rodolfo ao Intraday CPV e validar por alerta real no thread fixo",
+      "source": "discord:thread:1540379584124555334; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+      "state": "em execução: layout aprovado em cards verticais; observar em linha separada com d1/d2; divisor visual de 34 traços entre campanhas; nenhuma regra, métrica ou ação meta será alterada.",
+      "thread_id": "1540379584124555334",
+      "updated_at": "2026-08-21T15:35:56+00:00"
     },
     {
       "agent": "ares",
@@ -962,5 +962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T15:29:48+00:00"
+  "updated_at": "2026-08-21T15:35:56+00:00"
 }
