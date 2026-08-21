@@ -83,12 +83,12 @@
     {
       "agent": "ares",
       "id": "ARES-NICOLAS-META-CHANNELS-20260818",
-      "next_step": "Corrigir validação pós-restart: gateway Ares não está ativo",
+      "next_step": "Nenhuma ação pendente; validar automaticamente no próximo thread real pelo log Auto-thread member sync",
       "objective": "Manter Nicolas e Geizian nas threads da operação creditoparaveiculo.com BR-CAR-BR",
       "source": "discord:thread:1540139527341998151; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "blocked_post_restart_validation",
+      "state": "completed",
       "thread_id": "1540139527341998151",
-      "updated_at": "2026-08-20T23:37:32+00:00"
+      "updated_at": "2026-08-21T01:10:56+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:53:22+00:00"
+  "updated_at": "2026-08-21T01:10:56+00:00"
 }

@@ -112,6 +112,7 @@ SNAPSHOT_FILES=(
   "$HERMES_REPO/hermes_cli/oneshot.py"
   "$HERMES_REPO/agent/background_review.py"
   "$HERMES_REPO/tools/memory_tool.py"
+  "$HERMES_REPO/tools/checkpoint_manager.py"
   "$HERMES_REPO/tools/write_approval.py"
   "$HERMES_REPO/tools/skill_manager_tool.py"
   "$HERMES_REPO/tools/skills_tool.py"
@@ -174,6 +175,7 @@ if ! "\$HERMES_PY" -m py_compile \
   "\$HERMES_REPO/hermes_cli/oneshot.py" \
   "\$HERMES_REPO/agent/background_review.py" \
   "\$HERMES_REPO/tools/memory_tool.py" \
+  "\$HERMES_REPO/tools/checkpoint_manager.py" \
   "\$HERMES_REPO/tools/write_approval.py" \
   "\$HERMES_REPO/tools/skill_manager_tool.py" \
   "\$HERMES_REPO/tools/skills_tool.py" \
@@ -183,7 +185,7 @@ if ! "\$HERMES_PY" -m py_compile \
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
 fi
-if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, plugins.memory.honcho.session, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
+if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, plugins.memory.honcho.session, tools.checkpoint_manager, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; assert hasattr(tools.checkpoint_manager, "_checkpoint_store_lock"); print("runtime_deadletter_trace_checkpoint_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"
   audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
   exit 78
