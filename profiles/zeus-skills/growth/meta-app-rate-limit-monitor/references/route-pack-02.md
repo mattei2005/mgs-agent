@@ -5,7 +5,7 @@ Failure mode                         Detection method
 ------------------------------------ ------------------------------------------------
 Token expired                         /debug_token invalid; OAuth error.
 Token permissions changed             /debug_token scopes changed.
-App removed/desativado                /{app_id} fails or no longer returns app.
+App em `Restrito` / removido          `/{app_id}` falha; a Graph pode retornar OAuthException 190 `Application has been deleted`.
 Token lost access to app               Permission/OAuth error on /{app_id}.
 Meta API access blocked                code=200 OAuthException "API access blocked" across app/user/debug/roles checks.
 Rate limit high                        X-App-Usage crosses thresholds.
@@ -15,6 +15,10 @@ App admin/segurador removed            /{app_id}/roles diff vs previous state; a
 Graph API throttling                   Errors such as 613, 4, 17, 32 or throttle messages.
 ChatPion/DigitalTrChat delivery issue  Indirect: BD_DELIVEREDS drops vs BD_SENDS.
 ```
+
+### Interpretação MGS de `Application has been deleted`
+
+Quando a Graph API retornar `OAuthException` código `190` com a mensagem `Application has been deleted` e o painel Meta for Developers colocar o app na categoria **Restritos**, classificar operacionalmente o alerta como **app entrou em restrição**. O app permanece listado na conta dentro do filtro **Restritos**; a mensagem da API é o sintoma técnico usado para detectar essa transição e não prova exclusão permanente. Preserve o erro bruto como evidência e diferencie esse estado de **rate limit alto**, que é detectado por `X-App-Usage` ou por códigos/mensagens de throttling.
 
 If only one app returns `API access blocked` while B001–B010 siblings still validate, treat it as an app/token/developer restriction, not a 1Password/webhook outage. The monitor should classify this separately from generic script errors and throttle repeated alerts to daily until Meta Developers/token remediation is done, otherwise Rodolfo receives hourly duplicates with no new operational signal.
 

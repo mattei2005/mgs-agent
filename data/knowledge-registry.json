@@ -902,6 +902,24 @@
       "updated_at": "2026-07-17T14:26:17+00:00"
     },
     {
+      "canonical_key": "procedure.meta.app-restriction-graph-190",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T14:50:38+00:00",
+      "id": "procedure-meta-app-restriction-graph-190-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Application has been deleted indica app na categoria Restritos",
+      "updated_at": "2026-08-21T14:50:38+00:00"
+    },
+    {
       "canonical_key": "sb.utility-template-repair.self-healing",
       "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-utility-template-approval/references/production-red-gray-repair-purple-page-audit.md",
       "consumers": [
@@ -921,5 +939,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:17:53+00:00"
+  "updated_at": "2026-08-21T14:50:38+00:00"
 }
