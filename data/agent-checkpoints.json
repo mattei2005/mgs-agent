@@ -11,6 +11,16 @@
       "updated_at": "2026-08-20T20:42:44+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV-C12-C13-REACTIVATE-20260822",
+      "next_step": "Às 00:15 São Paulo, o wrapper determinístico repete holds, hierarquia e cap; ativa somente C12/C13 em nível campanha; exige GET/readback e persiste ACTIVE_VALIDATED ou falha fechada.",
+      "objective": "Reativar C12 e C13 em 22/08/2026 às 00:15 São Paulo e tratar 22/08 como D1",
+      "source": "discord:thread:1540379367983546408; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; data/ares/meta-ads/state/creditoparaveiculo-daily-create.json; audit:rollover-c12-c13-to-2026-08-22-20260821T152032Z.json",
+      "state": "c12/c13 confirmadas paused na meta; nomes alterados e validados para 22-08; cycle_start_date=2026-08-22; state prepared_paused; dry-run de ativação passou com budget projetado usd222; one-shot no_agent está enabled/scheduled para 00:15 são paulo.",
+      "thread_id": "1540379367983546408",
+      "updated_at": "2026-08-21T15:23:19+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
       "next_step": "Aguardar execução às 17:00 São Paulo. Após o ciclo, analisar observability por meta_preflight/drive/reconciliation/asset/prestage/manifest/engine/postprocess, status C14/C15, quota e stock; P1 possível: reduzir full reconciliation e paralelizar prestage conforme medição real.",
@@ -952,5 +962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T15:10:15+00:00"
+  "updated_at": "2026-08-21T15:23:19+00:00"
 }
