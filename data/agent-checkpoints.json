@@ -803,12 +803,12 @@
     {
       "agent": "zeus",
       "id": "vps-kvm4-full-update-20260820",
-      "next_step": "instalar versões exatas, validar pre-reboot, preparar validador durável e reiniciar host",
-      "objective": "Atualizar todos os 23 pacotes APT elegíveis da VPS KVM4 e concluir reboot validado",
+      "next_step": "despachar ciclo seguro do host e aguardar validação autônoma",
+      "objective": "Atualizar todos os 23 pacotes APT elegíveis da VPS KVM4 e concluir novo boot validado",
       "source": "/root/.hermes/secure-backups/vps-maintenance/20260821T013506Z-kvm4-full-update/pre-state.json",
-      "state": "pre-state congelado; transação 23/0/0/0; rollback monarx hash-validado; instalação pendente",
+      "state": "23/23 pacotes exatos; apt 0; serviços saudáveis; validador durável habilitado; novo boot pendente",
       "thread_id": "1540144895300345987",
-      "updated_at": "2026-08-21T01:35:27+00:00"
+      "updated_at": "2026-08-21T01:41:47+00:00"
     },
     {
       "agent": "zeus",
@@ -932,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T01:35:27+00:00"
+  "updated_at": "2026-08-21T01:41:47+00:00"
 }
