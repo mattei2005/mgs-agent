@@ -218,7 +218,7 @@ def validate_only_retry_delay(detail: dict[str, Any], attempt: int, transient_5x
     return None
 
 
-def batch_get(common, token: str, requests_list: list[dict[str, Any]], stage: str) -> dict[str, dict[str, Any]]:
+def batch_get(common, token: str, requests_: list[dict[str, Any]], stage: str) -> dict[str, Any]:
     status, rows, _ = common.graph_batch_get(token, requests_)
     if status != 200 or not isinstance(rows, list):
         error = safe_meta(common, rows)

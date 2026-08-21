@@ -35,6 +35,14 @@ def test_standard_enhancements_validator_uses_exact_recursive_key():
     assert mod.contains_exact_json_key(exact_nested, 'standard_enhancements') is True
 
 
+def test_validate_only_retry_is_bounded_for_5xx_and_propagation():
+    assert mod.validate_only_retry_delay({'http': 500, 'error': {'code': 1}}, 1, 0) == 10
+    assert mod.validate_only_retry_delay({'http': 503, 'error': {}}, 2, 1) == 10
+    assert mod.validate_only_retry_delay({'http': 500, 'error': {}}, 3, 2) is None
+    assert mod.validate_only_retry_delay({'http': 400, 'error': {'error_subcode': 2446289}}, 1, 0) == 5
+    assert mod.validate_only_retry_delay({'http': 400, 'error': {'error_subcode': 3858504}}, 1, 0) is None
+
+
 def test_choose_slots_requires_deleted_or_absent():
     campaigns = [
         {'id': 'a', 'name': '50 - old', 'effective_status': 'ARCHIVED'},
