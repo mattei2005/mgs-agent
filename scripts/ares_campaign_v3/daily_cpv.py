@@ -218,14 +218,29 @@ def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: d
     cap_minor = int(Decimal(str(policy.get("operational_account_cap_usd") or 0)) * 100)
     initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
     before = active_budget_minor(campaigns)
-    after = before + count * initial_minor
-    if cap_minor <= 0 or initial_minor <= 0 or after > cap_minor:
+    if cap_minor <= 0 or initial_minor <= 0:
+        raise DailyBlocked("budget_cap", "operational cap or initial campaign budget is invalid")
+    available = max(0, cap_minor - before)
+    capacity = available // initial_minor
+    selected = min(count, capacity)
+    if selected < 1:
         raise DailyBlocked(
             "budget_cap",
-            "new campaign plan exceeds the operational account cap",
-            {"active_before_minor": before, "new_minor": count * initial_minor, "projected_minor": after, "cap_minor": cap_minor},
+            "no new campaign fits the operational account cap at the approved initial budget",
+            {"active_before_minor": before, "available_minor": available, "initial_minor": initial_minor, "desired_count": count, "capacity": capacity, "cap_minor": cap_minor},
         )
-    return {"active_before_minor": before, "new_minor": count * initial_minor, "projected_minor": after, "cap_minor": cap_minor}
+    after = before + selected * initial_minor
+    return {
+        "active_before_minor": before,
+        "available_minor": available,
+        "initial_minor": initial_minor,
+        "desired_count": count,
+        "selected_count": selected,
+        "deferred_by_budget_count": count - selected,
+        "new_minor": selected * initial_minor,
+        "projected_minor": after,
+        "cap_minor": cap_minor,
+    }
 
 
 def validate_engine_config(config: dict[str, Any]) -> None:
@@ -829,12 +844,19 @@ def run_daily(
             operation = load_json(paths.operation)
             config = load_json(paths.config)
             validate_engine_config(config)
-            count = int(state.get("campaign_count") or requested_campaign_count(operation, operational_date))
+            desired_count = int(state.get("desired_campaign_count") or requested_campaign_count(operation, operational_date))
             meta = backend.meta_preflight()
-            numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
             completed_before = len(state.get("campaign_ids") or [])
-            pending_budget_count = max(0, count - completed_before)
-            budget = enforce_budget_cap(meta["campaigns"], pending_budget_count, operation)
+            if state.get("campaign_count"):
+                count = int(state["campaign_count"])
+                pending_budget_count = max(0, count - completed_before)
+                budget = enforce_budget_cap(meta["campaigns"], max(1, pending_budget_count), operation)
+                if int(budget["selected_count"]) < pending_budget_count:
+                    raise DailyBlocked("budget_cap", "remaining resumable campaign no longer fits the operational cap", budget)
+            else:
+                budget = enforce_budget_cap(meta["campaigns"], desired_count, operation)
+                count = int(budget["selected_count"])
+            numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
             drive_info = backend.drive_preflight()
             drive = drive_info["drive"]
             if not selected:
@@ -850,6 +872,7 @@ def run_daily(
                         "status": "DRY_RUN_OK",
                         "operational_date_sp": day,
                         "campaign_count": count,
+                        "desired_campaign_count": desired_count,
                         "campaign_numbers": numbers,
                         "planner_bundles": [2] * (count // 2) + ([1] if count % 2 else []),
                         "budget": budget,
@@ -866,7 +889,7 @@ def run_daily(
                     return result
                 reserve_inventory(paths.inventory, inventory_rows, selected, audit_path)
                 selected_ids = {str(row.get("asset_id") or "") for row in selected}
-                state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "updated_at_utc": utc_now()}
+                state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "desired_campaign_count": desired_count, "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "budget_plan": budget, "updated_at_utc": utc_now()}
                 atomic_json(paths.state, state)
             else:
                 verify_reconciliation(paths.reconciliation, selected, current)

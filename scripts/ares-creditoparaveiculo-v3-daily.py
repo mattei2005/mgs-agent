@@ -35,8 +35,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     now_sp = datetime.now(SP)
-    if args.operational_date:
-        now_sp = datetime.fromisoformat(args.operational_date).replace(hour=17, minute=0, second=0, microsecond=0, tzinfo=SP)
+    if args.operational_date and args.operational_date != now_sp.date().isoformat():
+        raise SystemExit("--operational-date live override must match the current São Paulo date; use --offline-smoke for synthetic dates")
     result = run_daily(paths=DailyPaths(), now_sp=now_sp, gate=args.gate, post_report=(args.post_discord and not args.dry_run), quiet=args.quiet, plan_only=args.dry_run)
     return 0 if result.get("status") in {"SILENT_NOT_DUE", "ALREADY_COMPLETE", "DRY_RUN_OK", "COMPLETE_FUTURE_ACTIVE", "PARTIAL_DEFERRED_QUOTA"} else 1
 

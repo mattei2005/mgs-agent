@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.4
+version: 3.0.5
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -34,6 +34,7 @@ Config v3       /root/mgs-agent/data/ares/meta-ads/engine-v3/config.json
 Operações       /root/mgs-agent/data/ares/meta-ads/operations/*-v3.json
 Media registry  /root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json
 Executor         /root/mgs-agent/scripts/ares-campaign-engine-v3.py
+Runner diário CPV /root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py
 Módulos          /root/mgs-agent/scripts/ares_campaign_v3/
 Audits           /root/mgs-agent/data/ares/meta-ads/engine-v3/audit/
 State/lanes      /root/mgs-agent/data/ares/meta-ads/engine-v3/state/
@@ -68,7 +69,11 @@ Validação e plan são read-only:
 ```text
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py validate --manifest <manifest>
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py plan --manifest <manifest>
+python3 /root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py --offline-smoke
+python3 /root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py --dry-run --operational-date YYYY-MM-DD
 ```
+
+O runner diário CPV tem gate de início às 17:00 São Paulo e permite retomar o mesmo request fora da janela quando o state estiver `PARTIAL_DEFERRED_QUOTA` ou em outro estágio resumível. `--dry-run` faz somente plano live/read-only; `--offline-smoke` usa transporte fake e zero rede. O wrapper v3 só pode substituir o job legado depois da revisão independente do Zeus; até então, o cron de criação permanece pausado e o v2 continua rollback isolado.
 
 A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais. O guard inicial é **por lane**: em uma conta, o primeiro bundle daquela conta é guardado/fail-closed; em várias contas, o primeiro bundle de cada `app_key + ad_account_id` pode iniciar em paralelo pelo `ThreadPoolExecutor`. Não existe canário global único antes das outras lanes; os bundles seguintes de cada lane obedecem à própria quota.
 

@@ -116,19 +116,43 @@ def test_budget_cap_exact_300_passes():
     result = enforce_budget_cap(campaigns, 3, operation(cap=300))
     assert result == {
         "active_before_minor": 21000,
+        "available_minor": 9000,
+        "initial_minor": 3000,
+        "desired_count": 3,
+        "selected_count": 3,
+        "deferred_by_budget_count": 0,
         "new_minor": 9000,
         "projected_minor": 30000,
         "cap_minor": 30000,
     }
 
 
-def test_budget_cap_live_213_plus_90_blocks():
+def test_budget_planner_reduces_three_desired_to_two_selected_at_live_213():
     campaigns = [campaign(number) for number in range(7, 14)]
     campaigns[2]["daily_budget"] = "3300"
     assert active_budget_minor(campaigns) == 21300
-    with pytest.raises(DailyBlocked, match="exceeds") as caught:
+    result = enforce_budget_cap(campaigns, 3, operation(cap=300))
+    assert result["desired_count"] == 3
+    assert result["selected_count"] == 2
+    assert result["deferred_by_budget_count"] == 1
+    assert result["new_minor"] == 6000
+    assert result["projected_minor"] == 27300
+
+
+def test_live_213_plan_maps_three_desired_to_c14_c15_only():
+    campaigns = [campaign(number) for number in range(7, 14)]
+    campaigns[2]["daily_budget"] = "3300"
+    budget = enforce_budget_cap(campaigns, 3, operation(cap=300))
+    assert budget["desired_count"] == 3
+    assert budget["selected_count"] == 2
+    assert next_campaign_numbers(campaigns, budget["selected_count"], operation()) == [14, 15]
+
+
+def test_budget_planner_fails_closed_only_when_zero_campaigns_fit():
+    campaigns = [campaign(number) for number in range(7, 14)]
+    campaigns[0]["daily_budget"] = "12000"
+    with pytest.raises(DailyBlocked, match="no new campaign fits"):
         enforce_budget_cap(campaigns, 3, operation(cap=300))
-    assert caught.value.detail["projected_minor"] == 30300
 
 
 def test_engine_config_requires_all_independent_gates():
@@ -275,6 +299,8 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         backend_factory=PlanBackend,
     )
     assert result["status"] == "DRY_RUN_OK"
+    assert result["desired_campaign_count"] == 3
+    assert result["campaign_count"] == 3
     assert result["campaign_numbers"] == [14, 15, 16]
     assert result["planner_bundles"] == [2, 1]
     assert result["side_effects"] == {

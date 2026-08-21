@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.16
+version: 1.0.17
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -411,9 +411,9 @@ Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com co
 ```text
 Janela                 Ação
 ---------------------- ---------------------------------------------------
-Antes de 18:00          fechar pool de budget, referência e criativos elegíveis
-18:00                    criar/programar novas CBOs para 00:30 do dia seguinte
-18:00–23:30              acompanhar aprovação Meta e corrigir erros permitidos
+Antes de 17:00          fechar pool de budget, referência e criativos elegíveis
+17:00                    materializar/prevalidar manifest e programar novas CBOs para 00:30 do dia seguinte
+17:00–23:30              acompanhar aprovação Meta e corrigir erros permitidos
 23:30                    readback final de aprovação/estrutura/URLs
 Por volta de 08:00       ler ROI SB, revisar spend e executar escala elegível
 Durante D1/D2           observar campanhas ruins; não cortar
