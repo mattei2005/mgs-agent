@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Zeus faz revisão independente do runner e testes, valida hashes/audit/inventário e cron readback. Se aprovado, alterar somente o job 2cf8115a4f8b para o wrapper v3, manter no_agent=true/deliver=local, preservar v2 como rollback e só então habilitar. Antes das 17h renovar dry-run/reconciliação; execução real criará C14/C15, não C16, salvo novo espaço/cap live. Não liberar pausa D3 no mesmo cutover.",
-      "objective": "Concluir com Zeus o cutover do schedule diário CPV 17h para Campaign Engine v3",
-      "source": "discord:thread:1540228969071116408; runner:/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py; audit:/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260821.json",
-      "state": "ares materializou runner v3 em scripts/ares-creditoparaveiculo-v3-daily.py e módulo scripts/ares_campaign_v3/daily_cpv.py, com wrapper profile creditoparaveiculo-v3-daily-create.sh. cron 2cf8115a4f8b permanece paused/disabled e ainda aponta para creditoparaveiculo-daily-create.sh v2; nenhum cron foi habilitado. suíte relevante 125 passed; offline smoke 3 campanhas validou 2->partial_deferred_quota->3 complete_future_active, zero rede. dry-run live read-only validou desired_count=3, selected_count=2 por cap: portfolio usd213, disponível usd87, c14/c15, projeção usd273, 6 assets reconciliados; inventory não reservado, registry 0, zero upload/campaign/drive move. c12/c13 foram adicionadas à allowlist autônoma com ids live; futuras campanhas entram apenas por provenance campaign_engine_v3_daily_readback. escala 08h já possui runner; pausa d3 continua fail-closed enquanto roi cumulativo/anomaly gate não estiverem corrigidos/validados.",
+      "next_step": "Zeus repete revisão foreground dos três P0s, roda crash/collision/checksum regressions e cron readback. Só após PASS altera job 2cf8115a4f8b para creditoparaveiculo-v3-daily-create.sh mantendo no_agent=true/deliver=local; não habilitar pausa D3 neste cutover.",
+      "objective": "Concluir revisão foreground Zeus e cutover do schedule diário CPV 17h para Campaign Engine v3",
+      "source": "discord:thread:1540228969071116408 Zeus P0 review; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; cli:/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+      "state": "p0-1/2/3 corrigidos em foreground sem meta write/upload: guard antes de execute_engine bloqueia nome exato live não-deleted/archived fora do campaign_ids mapeado do mesmo request; títulos determinísticos de vídeo agora incluem asset_id+checksum curto e registry confirma account+asset+checksum+ids; falha após possível media/campaign/drive side effect vira readback_deferred ou postprocess_pending, com manual_reconciliation_required para campanha sem ids conhecidos, e gate hourly não retoma manual hold. suite relevante 128 passed; offline smoke segue 2->partial_deferred_quota->3 complete_future_active, zero rede. commits 0c476c8f e b0339a0d. cron 2cf8115a4f8b deve permanecer paused até novo foreground zeus.",
       "thread_id": "1540228969071116408",
-      "updated_at": "2026-08-21T06:44:51+00:00"
+      "updated_at": "2026-08-21T06:53:35+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:44:51+00:00"
+  "updated_at": "2026-08-21T06:53:35+00:00"
 }
