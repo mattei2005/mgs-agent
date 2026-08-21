@@ -1,0 +1,420 @@
+{
+  "cpv_files": 26,
+  "dated_one_shots": 6,
+  "cron_direct": 9,
+  "unreferenced": 9,
+  "pycache_files": 19,
+  "rows": [
+    {
+      "name": "creditoparaveiculo-abort-cleanup-retry-20260820.py",
+      "bytes": 6450,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-abort-cleanup-retry-20260820.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 116,
+      "graph_get_tokens": 4,
+      "graph_post_tokens": 1,
+      "sleep_tokens": 1
+    },
+    {
+      "name": "creditoparaveiculo-abort-from-zero-20260820.py",
+      "bytes": 6604,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-abort-from-zero-20260820.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 115,
+      "graph_get_tokens": 4,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-correct-native-schedule-20260821.py",
+      "bytes": 10912,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-correct-native-schedule-20260821.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 203,
+      "graph_get_tokens": 3,
+      "graph_post_tokens": 3,
+      "sleep_tokens": 1
+    },
+    {
+      "name": "creditoparaveiculo-create-clone-resume.sh",
+      "bytes": 1524,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-resume.sh",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 39,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-create-clone-sequence.py",
+      "bytes": 38797,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-sequence.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-create-clone-sequence.sh",
+        "creditoparaveiculo-create-clone-resume.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 753,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 5,
+      "sleep_tokens": 2
+    },
+    {
+      "name": "creditoparaveiculo-create-clone-sequence.sh",
+      "bytes": 2443,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-sequence.sh",
+      "cron": {
+        "id": "0f59161283c1",
+        "name": "Creditoparaveiculo teste pós-cooldown v2",
+        "enabled": false,
+        "state": "completed"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 62,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-create-clone-test.py",
+      "bytes": 31654,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create-clone-test.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 656,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 3,
+      "sleep_tokens": 1
+    },
+    {
+      "name": "creditoparaveiculo-create50-clone07-to12.py",
+      "bytes": 34401,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-create50-clone07-to12.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-resume-create50-clone12.py"
+      ],
+      "dated_one_shot": false,
+      "lines": 647,
+      "graph_get_tokens": 3,
+      "graph_post_tokens": 3,
+      "sleep_tokens": 2
+    },
+    {
+      "name": "creditoparaveiculo-daily-activate.py",
+      "bytes": 14074,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-activate.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-daily-activate.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 250,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 2,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-activate.sh",
+      "bytes": 492,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-activate.sh",
+      "cron": {
+        "id": "9532b8be5aa2",
+        "name": "Creditoparaveiculo 13 G006 Ativacao 00h30",
+        "enabled": false,
+        "state": "paused"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 21,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-clone-retry-20260820.sh",
+      "bytes": 829,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-clone-retry-20260820.sh",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 24,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-create-preflight-resume.py",
+      "bytes": 1446,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-create-preflight-resume.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-daily-create.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 42,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-create-resume.py",
+      "bytes": 11059,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-create-resume.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-daily-create.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 190,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 1,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-create-retry-20260820.sh",
+      "bytes": 189,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-create-retry-20260820.sh",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 5,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily-create.py",
+      "bytes": 102184,
+      "symlink": true,
+      "realpath": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-abort-from-zero-20260820.py",
+        "creditoparaveiculo-correct-native-schedule-20260821.py",
+        "creditoparaveiculo-abort-cleanup-retry-20260820.py",
+        "creditoparaveiculo-daily-create.sh",
+        "creditoparaveiculo-daily-clone-retry-20260820.sh",
+        "creditoparaveiculo-sequence-capacity-probe.py",
+        "creditoparaveiculo-daily-create-preflight-resume.py",
+        "creditoparaveiculo-daily-activate.py",
+        "creditoparaveiculo-reconcile.py",
+        "creditoparaveiculo-daily-create-resume.py"
+      ],
+      "dated_one_shot": false,
+      "lines": 1733,
+      "graph_get_tokens": 11,
+      "graph_post_tokens": 20,
+      "sleep_tokens": 5
+    },
+    {
+      "name": "creditoparaveiculo-daily-create.sh",
+      "bytes": 1087,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-create.sh",
+      "cron": {
+        "id": "2cf8115a4f8b",
+        "name": "Creditoparaveiculo 13 G006 Criacao diaria 17h",
+        "enabled": false,
+        "state": "paused"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 45,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-daily.sh",
+      "bytes": 185,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh",
+      "cron": {
+        "id": "41712f74f949",
+        "name": "Creditoparaveiculo 13 G006 Diario",
+        "enabled": true,
+        "state": "scheduled"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 6,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-fixed-reports.py",
+      "bytes": 99884,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-snapshot.sh",
+        "creditoparaveiculo-intraday.sh",
+        "creditoparaveiculo-daily.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 2044,
+      "graph_get_tokens": 10,
+      "graph_post_tokens": 2,
+      "sleep_tokens": 1
+    },
+    {
+      "name": "creditoparaveiculo-intraday.sh",
+      "bytes": 391,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh",
+      "cron": {
+        "id": "69dfca2b9719",
+        "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+        "enabled": true,
+        "state": "scheduled"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 10,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-reconcile.py",
+      "bytes": 6255,
+      "symlink": true,
+      "realpath": "/root/mgs-agent/scripts/ares-creditoparaveiculo-reconcile.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 139,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-resume-create50-clone12.py",
+      "bytes": 7964,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-resume-create50-clone12.py",
+      "cron": null,
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 143,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 1,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-sequence-capacity-probe.py",
+      "bytes": 4206,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-sequence-capacity-probe.py",
+      "cron": null,
+      "referenced_by": [
+        "creditoparaveiculo-sequence-capacity-probe.sh"
+      ],
+      "dated_one_shot": false,
+      "lines": 89,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-sequence-capacity-probe.sh",
+      "bytes": 257,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-sequence-capacity-probe.sh",
+      "cron": {
+        "id": "6dc6990200ad",
+        "name": "Creditoparaveiculo check C12 C13 e tier",
+        "enabled": false,
+        "state": "completed"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 5,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "creditoparaveiculo-snapshot.sh",
+      "bytes": 188,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-snapshot.sh",
+      "cron": {
+        "id": "f45eed5047b9",
+        "name": "Creditoparaveiculo 13 G006 Snapshot",
+        "enabled": true,
+        "state": "scheduled"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 6,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "reactivate-creditoparaveiculo-20260820.py",
+      "bytes": 8387,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/reactivate-creditoparaveiculo-20260820.py",
+      "cron": {
+        "id": "4fe5a32a7dd3",
+        "name": "Reativar BR-CAR-BR 07-11",
+        "enabled": false,
+        "state": "completed"
+      },
+      "referenced_by": [],
+      "dated_one_shot": true,
+      "lines": 208,
+      "graph_get_tokens": 1,
+      "graph_post_tokens": 3,
+      "sleep_tokens": 0
+    },
+    {
+      "name": "validate-creditoparaveiculo-geizian-thread-policy.py",
+      "bytes": 1111,
+      "symlink": false,
+      "realpath": "/root/.hermes/profiles/ares/scripts/validate-creditoparaveiculo-geizian-thread-policy.py",
+      "cron": {
+        "id": "4b4934e08af6",
+        "name": "Validar auto-add Geizian CPV",
+        "enabled": false,
+        "state": "completed"
+      },
+      "referenced_by": [],
+      "dated_one_shot": false,
+      "lines": 33,
+      "graph_get_tokens": 0,
+      "graph_post_tokens": 0,
+      "sleep_tokens": 0
+    }
+  ]
+}
