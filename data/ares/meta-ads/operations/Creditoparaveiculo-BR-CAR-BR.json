@@ -851,7 +851,8 @@
     "development_access_guard": "bundles execute sequentially per account with 300-second reservation until live tier becomes standard_access",
     "v2_rollback_preserved": true,
     "legacy_deletion_performed": false,
-    "real_meta_canary_requires_separate_authorization": true
+    "real_meta_canary_requires_separate_authorization": false,
+    "first_production_request_is_guarded_canary": true
   },
   "playbook_version": "1.0.45",
   "budget_authority": {

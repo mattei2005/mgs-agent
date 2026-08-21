@@ -27,7 +27,8 @@
   "intermediate_gets": 0,
   "media_gate": "all_six_assets_ready_in_v3_media_registry_before_manifest",
   "manifest_gate": "prevalidated=true required for execute",
-  "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute",
+  "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute from an authorized campaign request",
+  "first_production_request": "guarded canary automatically: prevalidated manifest, first bundle monitored, fail closed on any drift",
   "rollback": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
   "authorization": {
     "authorized_by": "Rodolfo Mattei",

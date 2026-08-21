@@ -195,7 +195,7 @@ Dados:
 /root/mgs-agent/scripts/ares-campaign-engine-v3.py
 ```
 
-Criação/clonagem nova começa em `meta-campaign-engine-v3`, nunca por busca ampla em `scripts/ares-*`. O executor v3 instalado fica disabled até canário aprovado; v2 é somente rollback. Mídia é pre-stageada, bundles têm duas campanhas por conta, lanes são independentes e o readback é um outer batch por bundle.
+Criação/clonagem nova começa em `meta-campaign-engine-v3`, nunca por busca ampla em `scripts/ares-*`. O executor v3 está ativo sob guards de `development_access`; v2 é somente rollback. Mídia é pre-stageada, bundles têm duas campanhas por conta, lanes são independentes e o readback é um outer batch por bundle.
 
 Regras:
 
