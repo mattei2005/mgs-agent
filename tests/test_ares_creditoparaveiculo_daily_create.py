@@ -11,7 +11,7 @@ spec.loader.exec_module(mod)
 
 def test_campaign_name_and_start_time():
     op = datetime(2026, 8, 20, 17, 0, tzinfo=mod.SP)
-    assert mod.campaign_name(50, op) == '50 - 20-08 - Garagem Brasil - (b01fb13c50) event_Subscribe - MAXVOL'
+    assert mod.campaign_name(50, op) == '50 - 21-08 - Garagem Brasil - (b01fb13c50) event_Subscribe - MAXVOL'
     assert mod.scheduled_start(op).isoformat() == '2026-08-21T00:30:00-03:00'
     payload = mod.campaign_payload({'campaign': {'objective': 'OUTCOME_SALES', 'buying_type': 'AUCTION', 'special_ad_categories': ['FINANCIAL_PRODUCTS_SERVICES'], 'special_ad_category_country': ['BR']}}, 50, op)
     assert payload['status'] == 'PAUSED'

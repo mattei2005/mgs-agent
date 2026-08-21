@@ -149,6 +149,7 @@
     "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
     "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
     "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
+    "campaign_name_date_source": "delivery/start date; never the creation date",
     "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
     "budget_gate": "complete live active-budget preflight; never exceed USD300 account cap",
@@ -480,9 +481,10 @@
       "bid_strategy": "MAXVOL",
       "creative_count_per_campaign": 3,
       "stock_report_after_every_creation": true,
-      "prepare_status": "PAUSED",
-      "child_status": "ACTIVE",
-      "activation_phase": "separate guarded campaign-level write at 00:30 next day America/Sao_Paulo"
+      "prepare_status": "target ACTIVE only after adset future start_time exact readback; keep PAUSED during construction",
+      "child_status": "ACTIVE with future start_time 00:30 next day",
+      "activation_phase": "native Meta schedule preferred; separate one-shot campaign activation is fallback only for already-started adsets whose start_time is immutable",
+      "native_schedule_gate": "campaign name date equals delivery date; adset start_time exact by GET before campaign ACTIVE; fail closed otherwise"
     },
     "daily_activation": {
       "internal_job_id": "9532b8be5aa2",
@@ -532,7 +534,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T21:52:52-03:00",
+  "updated_at": "2026-08-20T23:49:18-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -824,7 +826,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.42",
+  "playbook_version": "1.0.43",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

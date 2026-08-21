@@ -273,7 +273,8 @@ def replace_utm(value: Any, number: int) -> Any:
 
 
 def campaign_name(number: int, operational_date: datetime) -> str:
-    return f"{number:02d} - {operational_date:%d-%m} - Garagem Brasil - (b01fb13c{number:02d}) event_Subscribe - MAXVOL"
+    delivery_date = scheduled_start(operational_date)
+    return f"{number:02d} - {delivery_date:%d-%m} - Garagem Brasil - (b01fb13c{number:02d}) event_Subscribe - MAXVOL"
 
 
 def adset_name(number: int) -> str:
@@ -832,6 +833,7 @@ def clone_campaign_adset_shell(common, token: str, source: dict[str, Any], numbe
         "campaign_id": campaign_id,
         "deep_copy": "false",
         "status_option": "ACTIVE",
+        "start_time": scheduled_start(operational_date).isoformat(),
         "rename_options": {"rename_strategy": "ONLY_TOP_LEVEL_RENAME", "rename_suffix": f" - C{number:02d} DAILY CLONE"},
     }, f"c{number}_adset_clone")
     adset_id = copy_response_id(adset_copy, "copied_adset_id", "copied_adsets")
@@ -846,15 +848,18 @@ def clone_campaign_adset_shell(common, token: str, source: dict[str, Any], numbe
     }, f"c{number}_adset_clone_update")
     readback = batch_get(common, token, [
         {"name": "campaign", "path": campaign_id, "params": {"fields": "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time"}},
-        {"name": "adset", "path": adset_id, "params": {"fields": "id,name,status,effective_status,configured_status,bid_amount,billing_event,optimization_goal,promoted_object,attribution_spec,regional_regulated_categories,regional_regulation_identities,dsa_beneficiary,dsa_payor"}},
+        {"name": "adset", "path": adset_id, "params": {"fields": "id,name,status,effective_status,configured_status,start_time,bid_amount,billing_event,optimization_goal,promoted_object,attribution_spec,regional_regulated_categories,regional_regulation_identities,dsa_beneficiary,dsa_payor"}},
     ], f"c{number}_clone_shell_readback")
     campaign = readback["campaign"]
     adset = readback["adset"]
+    adset_start = datetime.fromisoformat(str(adset.get("start_time") or "").replace("Z", "+00:00")) if adset.get("start_time") else None
+    expected_start = scheduled_start(operational_date)
     checks = {
         "campaign_paused": (campaign.get("configured_status") or campaign.get("status")) == "PAUSED" and campaign.get("effective_status") in {"PAUSED", "IN_PROCESS", "PENDING_REVIEW", "WITH_ISSUES"},
         "campaign_maxvol": campaign.get("bid_strategy") == "LOWEST_COST_WITHOUT_CAP",
         "campaign_budget": str(campaign.get("daily_budget")) == str(BUDGET_MINOR),
         "adset_active_under_paused": (adset.get("configured_status") or adset.get("status")) == "ACTIVE" and adset.get("effective_status") in {"CAMPAIGN_PAUSED", "IN_PROCESS", "PENDING_REVIEW", "WITH_ISSUES"},
+        "adset_start_exact": bool(adset_start and abs((adset_start - expected_start).total_seconds()) < 2),
         "bid_amount_absent": adset.get("bid_amount") in {None, "", 0, "0"},
         "subscribe_pixel": (adset.get("promoted_object") or {}).get("custom_event_type") == "SUBSCRIBE" and str((adset.get("promoted_object") or {}).get("pixel_id")) == "1033279451747443",
         "attribution_exact": (adset.get("attribution_spec") or []) == (source["adset"].get("attribution_spec") or []),
@@ -919,7 +924,7 @@ def validate_hierarchy(readback: dict[str, Any], source: dict[str, Any], number:
     ads = readback["ads"].get("data") or []
     expected_code = f"b01fb13c{number:02d}"
     start = scheduled_start(operational_date)
-    campaign_start = datetime.fromisoformat(str(campaign.get("start_time") or "").replace("Z", "+00:00")) if campaign.get("start_time") else None
+
     checks: dict[str, bool] = {
         "campaign_exact_name": campaign.get("name") == campaign_name(number, operational_date),
         "campaign_configured_paused": (campaign.get("configured_status") or campaign.get("status")) == "PAUSED",
@@ -933,9 +938,11 @@ def validate_hierarchy(readback: dict[str, Any], source: dict[str, Any], number:
     }
     if len(adsets) == 1:
         adset = adsets[0]
+        adset_start = datetime.fromisoformat(str(adset.get("start_time") or "").replace("Z", "+00:00")) if adset.get("start_time") else None
         checks.update({
             "adset_exact_name": adset.get("name") == adset_name(number),
             "adset_configured_active": (adset.get("configured_status") or adset.get("status")) == "ACTIVE",
+            "adset_start_exact": bool(adset_start and abs((adset_start - start).total_seconds()) < 2),
             "bid_amount_absent": adset.get("bid_amount") in {None, "", 0, "0"},
             "subscribe_pixel": (adset.get("promoted_object") or {}).get("custom_event_type") == "SUBSCRIBE" and str((adset.get("promoted_object") or {}).get("pixel_id")) == "1033279451747443",
             "regional_brazil": "BRAZIL_REGULATION" in set(adset.get("regional_regulated_categories") or []),
