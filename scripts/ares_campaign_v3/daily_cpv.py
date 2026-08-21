@@ -81,14 +81,14 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def atomic_json(path: Path, payload: dict[str, Any]) -> None:
+def atomic_json(path: Path, payload: dict[str, Any], *, sort_keys: bool = True) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, raw = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
     temporary = Path(raw)
     try:
         os.fchmod(fd, 0o600)
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
+            json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=sort_keys)
             handle.write("\n")
             handle.flush()
             os.fsync(handle.fileno())
@@ -804,7 +804,7 @@ def update_operation_after_creation(path: Path, manifest: Manifest, campaign_ids
     if isinstance(override, dict):
         override["status"] = "completed_validated"
         override["completed_at_utc"] = utc_now()
-    atomic_json(path, operation)
+    atomic_json(path, operation, sort_keys=False)
     readback = load_json(path)
     if int((readback.get("campaign_numbering_policy") or {}).get("next_required_campaign_number") or 0) != numbering["next_required_campaign_number"]:
         raise DailyBlocked("operation_update", "operation config readback failed")
@@ -835,6 +835,14 @@ def run_daily(
         request_id = str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
         audit_path = Path(state.get("audit_path") or (paths.audit_root / f"{request_id}.json"))
         audit = load_json(audit_path) if audit_path.exists() else {"schema_version": 3, "kind": "cpv_daily_v3", "request_id": request_id, "operational_date_sp": day, "created_at_utc": utc_now(), "stage": "INITIALIZING", "side_effects": {"campaign_write": False, "media_upload": False, "drive_move": False}}
+        if audit.get("failure"):
+            audit.setdefault("attempt_history", []).append({
+                "stage": audit.get("stage"),
+                "failed_at_utc": audit.get("failed_at_utc"),
+                "failure": audit.get("failure"),
+            })
+            audit.pop("failure", None)
+            audit.pop("failed_at_utc", None)
         atomic_json(audit_path, audit)
         backend = backend_factory(paths)
         inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
