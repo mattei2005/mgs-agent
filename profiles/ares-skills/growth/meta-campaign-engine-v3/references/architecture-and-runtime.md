@@ -54,7 +54,8 @@ Never put token, app secret, Page token or signed URL in the registry.
 - User Access Token path remains canonical.
 - Token is loaded only for guarded execute through the existing protected credential provider.
 - `appsecret_proof` is supported; enable `Require App Secret` only after app secret provisioning and full route validation.
-- All canaries are PAUSED.
+- Canário técnico explicitamente solicitado nasce `PAUSED`.
+- Pedido normal de produção preserva `ACTIVE` com `start_time` futuro já selado; o primeiro bundle autorizado funciona como fase de canário guardado/fail-closed sem trocar silenciosamente o status pedido.
 - Audit error records contain type/safe message only.
 
 ## Observability

@@ -78,4 +78,4 @@ config.write_enabled = true
 --confirm-execute
 ```
 
-The installed v3 config is disabled. `--offline-fake` is test-only and never contacts Meta.
+O config instalado está ativo sob guards de `development_access`: `enabled=true`, `write_enabled=true` e `media_upload_enabled=true`. Isso não remove os gates independentes de manifest selado, `--confirm-execute` ou `--confirm-upload`; `--offline-fake` é somente teste e nunca contata a Meta.

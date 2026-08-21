@@ -112,6 +112,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
+      "next_step": "Executar scan completo de código/arquivos e banco nos quatro sites; identificar origem exata antes de qualquer alteração.",
+      "objective": "Auditar profundamente e eliminar requisições ActiveView/rede antiga em cliquet.com, finanzas.cliquet.com, wavesbee.com e finanzas.wavesbee.com, preservando a monetização Smart Bidding/JBF.",
+      "source": "Discord thread 1540230925261213707; user message 1540230925261213707; /root/mgs-agent/inventario-webapps.json; wp-plugin-mass-operation route packs.",
+      "state": "governança e inventário validados; cliquet/finanzas em aws bitnami com sftp read-only e rest/wp admin; wavesbee/finanzas em runcloud inc01. varredura read-only de arquivos, banco e runtime público em andamento.",
+      "thread_id": "1540230925261213707",
+      "updated_at": "2026-08-21T05:30:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-DTR-PAGE-COUNT-SHEET-20260813",
       "next_step": "Monitores retomados; acompanhar apenas drift futuro de páginas por segurador",
       "objective": "Contar páginas DTR por ocorrência de segurador e atualizar somente a coluna E PG da aba Migracao 22/06",
@@ -942,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T05:10:30+00:00"
+  "updated_at": "2026-08-21T05:30:52+00:00"
 }
