@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Executar resume pontual C13 após 23:31 São Paulo, validar ambas e agendar ativação pontual 00:30.",
-      "objective": "Executar ciclo autorizado C12/C13 clonadas para ativação às 00:30",
-      "source": "audit daily-create-2026-08-20-20260821T022441Z.json; state preflight_deferred; Discord readback content_match=true",
-      "state": "c12 concluída e validada: campanha paused, adset active, 3 ads active, maxvol usd30, estrutura 1x1x3, início alvo 00:30. três assets score_baixo 016-018 usados e movidos para 02_testing. estoque agora 260 (42 img + 218 vid), pool elegível único 55. c13 persistida preflight_deferred com assets sem_entrada 037-039 e resume_after 23:31 são paulo. validador de chave exata e retry bounded de validate_only 5xx corrigidos; 40/40 testes passam.",
+      "next_step": "One-shot ativa somente C12/C13 às 00:30, faz GET readback e publica resultado na thread. Se houver falha, rollback só de ativações confirmadas e estado fail-closed.",
+      "objective": "Concluir ciclo autorizado C12/C13 clonadas e ativá-las às 00:30",
+      "source": "audits daily-create-2026-08-20-20260821T022441Z.json and daily-create-2026-08-20-20260821T023155Z.json; activation dry-run daily-activate-2026-08-21-20260821T023449Z.json; cron one-shot readback scheduled",
+      "state": "c12 e c13 concluídas e validadas paused, ambas maxvol usd30 com 1 adset active e 3 ads active; utms, page, pixel subscribe, compliance br, attribution, assets e chave exata standard_enhancements validados. seis assets movidos para 02_testing com ids meta/drive no inventário. estoque final ready 257 (42 img + 215 vid); pool único elegível 52. activation dry-run passou: ambas paused, budget ativo usd153, alvo usd60, projetado usd213 <= cap usd300. one-shot no_agent local agendado para 00:30 são paulo; crons recorrentes de criação/ativação permanecem pausados. duas falhas anteriores foram clean: falso positivo de substring standard_enhancements_catalog e 5xx transitório em validate_only; cleanup completo em ambas. script corrigido, 40/40 testes passam.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T02:27:17+00:00"
+      "updated_at": "2026-08-21T02:36:34+00:00"
     },
     {
       "agent": "ares",
@@ -932,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T02:27:17+00:00"
+  "updated_at": "2026-08-21T02:36:34+00:00"
 }

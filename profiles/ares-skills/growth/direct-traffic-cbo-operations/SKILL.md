@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.31
+version: 1.0.32
 author: Ares
 license: internal
 metadata:
@@ -230,6 +230,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 30. **Comparar bulk do Ads Manager com a capacidade de uma app `development_access`.** O header BUC vivo pode expor `ads_api_access_tier=development_access`, sujeito a limite incompatível com automação de alto volume. Não concluir que “40 campanhas funcionam” prova a mesma capacidade da rota API atual sem identificar UI/API, app e tier. No curto prazo, separar reconciliação, staging de mídia, preparo e ativação; usar batch readiness/readback, budget de chamadas por estágio e estado resumível. Para escala, auditar e obter o acesso Standard/Advanced aplicável antes do teste de 10/40 campanhas.
 31. **Não executar reconciliação global dentro do campaign writer.** A baseline Drive×Meta pode ler centenas de ads/media, mas roda uma vez e depois incrementalmente em job separado. Dry-run e retry de duas campanhas nunca repetem todo o portfólio. Graph batch reduz conexões HTTP, porém seus subrequests continuam consumindo quota lógica. Um incidente CPV repetiu seis full scans, 1.436 video subrequests e 984 linhas de ads antes de o writer ser pausado; esse padrão é proibido.
 32. **Não confundir redução de transport calls com redução de quota.** Cada child de Graph batch continua contando logicamente. O helper deve registrar `X-Ad-Account-Usage` separado do BUC e, quando a Meta não enviar esse header, usar um ledger local rolling de 300s que só libera write após warmup completo. Projetar reads×1 + mutations×3 + reserva de readback antes de qualquer write. Em `development_access`, se duas campanhas não couberem mas uma couber, preparar somente a primeira PAUSED e persistir a segunda como `preflight_deferred` para a próxima janela; se nem uma couber, não fazer upload/write. A rota diária de novos criativos continua clone raso de campaign/adset + creatives do Drive. Deep copy assíncrono por `async_batch_requests` fica disponível apenas para clone fiel explícito, sempre PAUSED e com polling bounded; não é bypass de quota.
+33. **Tratar `validate_only` como idempotente, não como write real.** `validate_only` é idempotente e pode receber no máximo duas retentativas com espera fixa de 10s exclusivamente para HTTP `5xx` (inclusive `code=1` genérico), além do retry bounded de propagação `2446289`. O POST real que cria campanha/adset/anúncio continua single-attempt; erro de parâmetro, permissão, segurança ou compliance nunca recebe retry automático.
 
 ## Verification checklist
 
