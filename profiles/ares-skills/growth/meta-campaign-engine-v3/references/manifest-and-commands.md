@@ -32,13 +32,19 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py plan --manifest <path
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py media-summary
 ```
 
-Register media only after real Meta readback:
+Register media only after real Meta readback. Manual registration is for importing already-confirmed IDs; the v3 pre-stage uploader is separately gated by `media_upload_enabled=true` and `--confirm-upload`:
 
 ```text
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py media-register \
   --account-id <id> --asset-id <id> --checksum <sha256> \
   --vertical-video-id <id> --square-video-id <id> --ready
+
+python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prestage-upload \
+  --account-id <id> --page-id <id> --asset-id <id> --checksum <sha256> \
+  --vertical-file <file> --square-file <file> --confirm-upload
 ```
+
+The installed config keeps media upload disabled until the pre-stage canary is separately authorized.
 
 Build CPV manifest only when six media records are ready and the source creative templates are current:
 

@@ -215,6 +215,7 @@ class CampaignEngine:
             else:
                 ids = self._run_prestaged_bundle(bundle, transport, record)
             record["campaign_ids"] = ids
+            record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
             lane_result["bundles"].append(record)
             lane_result["campaign_ids"].extend(ids)
         return lane_result

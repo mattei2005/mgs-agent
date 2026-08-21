@@ -94,6 +94,30 @@ class LaneQuotaStore:
             fcntl.flock(fh, fcntl.LOCK_UN)
         return {"points": projected, "idempotent": False, "path": str(path)}
 
+    def complete(self, lane: tuple[str, str], request_id: str, *, now: float | None = None) -> dict[str, Any]:
+        at = time.time() if now is None else float(now)
+        path = self._path(lane)
+        if not path.exists():
+            return {"released": False, "reason": "missing_state"}
+        with path.open("r+") as fh:
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            state = self._read(fh)
+            live = state.get("live_usage") or {}
+            tier = str(live.get("ads_api_access_tier") or "")
+            util = live.get("acc_id_util_pct")
+            healthy_full_access = tier == "standard_access" and (util is None or float(util) < 80.0)
+            if healthy_full_access:
+                state["events"] = [row for row in (state.get("events") or []) if row.get("request_id") != request_id]
+                reservations = dict(state.get("reservations") or {})
+                reservations.pop(request_id, None)
+                state["reservations"] = reservations
+                state["points"] = sum(int(row.get("points") or 0) for row in state["events"])
+                state["updated_at"] = at
+                state["last_completed_request_id"] = request_id
+                self._write(fh, state)
+            fcntl.flock(fh, fcntl.LOCK_UN)
+        return {"released": healthy_full_access, "tier": tier or None, "acc_id_util_pct": util}
+
     def observe_headers(self, lane: tuple[str, str], headers: dict[str, Any], *, now: float | None = None) -> dict[str, Any]:
         at = time.time() if now is None else float(now)
         normalized = {str(key).lower(): value for key, value in (headers or {}).items()}

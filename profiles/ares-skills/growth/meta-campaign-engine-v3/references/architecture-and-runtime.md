@@ -41,7 +41,7 @@ bundle estimate             90/two campaigns
 window                     300s
 ```
 
-`X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` are persisted separately when Meta returns them. Do not infer server capacity only from the local counter.
+`X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` are persisted separately when Meta returns them. Do not infer server capacity only from the local counter. In `development_access` the rolling reservation remains for 300 seconds. In live `standard_access`, a completed bundle releases its local reservation only when the latest account usage is below 80%; server headers remain the controlling safety signal for the next wave.
 
 ## Media
 

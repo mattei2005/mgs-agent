@@ -17,6 +17,7 @@ from ares_campaign_v3.cli import main as cli_main
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
 from ares_campaign_v3.prestage import PrestageService
+from ares_campaign_v3.prevalidation import prevalidate_payload
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
 from ares_campaign_v3.schema import Manifest, ManifestError
@@ -203,6 +204,24 @@ def test_quota_store_persists_live_meta_tier_and_usage_headers(tmp_path):
     assert snap['live_usage']['acc_id_util_pct'] == 23.5
     assert snap['live_usage']['reset_time_duration'] == 120
     assert snap['live_usage']['business_usage_present'] is True
+
+
+def test_full_access_lane_releases_completed_bundle_but_development_keeps_window(tmp_path):
+    full = LaneQuotaStore(tmp_path / 'full', soft_score=100, hard_score=120, window_seconds=300)
+    lane = ('app', '100')
+    full.observe_headers(lane, {'x-ad-account-usage': json.dumps({'acc_id_util_pct': 10, 'ads_api_access_tier': 'standard_access'})}, now=1000)
+    full.reserve(lane, 90, request_id='bundle-1', now=1000)
+    released = full.complete(lane, 'bundle-1', now=1001)
+    assert released['released'] is True
+    assert full.reserve(lane, 90, request_id='bundle-2', now=1002)['points'] == 90
+
+    development = LaneQuotaStore(tmp_path / 'dev', soft_score=100, hard_score=120, window_seconds=300)
+    development.observe_headers(lane, {'x-ad-account-usage': json.dumps({'acc_id_util_pct': 10, 'ads_api_access_tier': 'development_access'})}, now=1000)
+    development.reserve(lane, 90, request_id='bundle-1', now=1000)
+    kept = development.complete(lane, 'bundle-1', now=1001)
+    assert kept['released'] is False
+    with pytest.raises(QuotaBlocked):
+        development.reserve(lane, 90, request_id='bundle-2', now=1002)
 
 
 def test_media_registry_roundtrip_and_fail_closed(tmp_path):
