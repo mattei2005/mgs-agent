@@ -139,6 +139,8 @@ Operational rules:
 
 Full causal proof, current Meta limits, MGS reconstructed score, implementation order, and verification checklist: `references/meta-clone-development-tier-rate-limit-2026-08-20.md`.
 
+For bulk/high-scale work, do not optimize only the quota wrapper. Separate pure clone from new-media replacement, eliminate live `Searching`/patching, pre-stage media IDs, use independent account lanes, batch dependencies and native future scheduling. Current CPV code/file findings, benchmark math, target architecture and rollout gates: `references/meta-campaign-engine-high-scale-architecture-2026-08-21.md`.
+
 ### Proxy/IP isolation
 
 If the same payload/token fails direct from Hetzner and also fails through Webshare/AdsPower residential proxy, do **not** conclude “it is just Hetzner.” The likely problem is app/token/API trust or the specific Marketing API endpoint.

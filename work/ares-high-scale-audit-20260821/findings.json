@@ -1,0 +1,80 @@
+{
+  "audit_id": "ARES-CPV-HIGH-SCALE-20260821",
+  "status": "analysis_complete_no_vnext_implementation",
+  "threads": {
+    "1540137110789562408": {"messages": 15, "attachments": 12},
+    "1539826050765299872": {"messages": 91, "attachments": 2}
+  },
+  "external_executor_evidence": {
+    "current_optimization_version_reported_in_images": "v23",
+    "executor_is_standardized_program_separate_from_agent": true,
+    "single_executor_shared_across_topics": true,
+    "separate_api_protection_and_flow_validation_components": true,
+    "workflow": ["reference", "build", "audit", "execute_paused", "final_get"],
+    "new_media_uploaded_before_campaign_build": true,
+    "drive_upload_penalty_reported_minutes": 5,
+    "reported_bulk_campaigns_one_operation": 100,
+    "improvement_loop": ["execute", "audit_duration_or_error", "suggest_improvement", "apply", "next_problem"]
+  },
+  "benchmark": {
+    "external_clones": 40,
+    "external_accounts": 3,
+    "external_total_seconds": 900,
+    "external_global_seconds_per_clone": 22.5,
+    "external_seconds_per_clone_per_account_lane": 67.5,
+    "ares_success_seconds": [115.602379, 123.174884],
+    "ares_success_average_seconds": 119.3886315,
+    "ares_clean_path_slowdown_vs_external_lane": 1.7687204666666667,
+    "confirmation_to_final_seconds": 1849.164
+  },
+  "file_audit": {
+    "ares_profile_scripts": 46,
+    "mgs_ares_scripts": 76,
+    "ares_growth_skill_files": 152,
+    "cpv_runtime_files": 26,
+    "cpv_active_closure_files": 10,
+    "cpv_legacy_or_completed_files": 16,
+    "cpv_pycache_residues": 19,
+    "cpv_active_lines": 4347,
+    "cpv_legacy_or_completed_lines": 3237,
+    "writer_lines": 1740,
+    "writer_functions": 69,
+    "execute_lines": 491,
+    "python_compile_failures": 0,
+    "shell_syntax_failures": 0,
+    "broken_cron_script_references": 0,
+    "broken_canonical_references": 0,
+    "tests_passed": 43,
+    "token_literal_files": 0
+  },
+  "thread_progress_counts": {
+    "searching": 41,
+    "reading": 56,
+    "editing": 42,
+    "writing": 16,
+    "terminal": 64,
+    "scheduling": 16
+  },
+  "confirmed_findings": [
+    {"severity": "high", "id": "live_engineering_hot_path", "summary": "Ares discovers, patches and tests code inside the campaign execution conversation."},
+    {"severity": "high", "id": "media_in_hot_path", "summary": "Drive download, ffmpeg, six uploads and video processing occur per campaign before campaign/adset copy."},
+    {"severity": "high", "id": "global_throttle", "summary": "One throttle file/lock serializes independent ad accounts."},
+    {"severity": "high", "id": "fully_sequential_mutations", "summary": "Creative creates, validate_only and ad creates run sequentially."},
+    {"severity": "medium", "id": "score_undercount", "summary": "Clone score constant says 12 mutations while current route executes 13."},
+    {"severity": "medium", "id": "dead_async_route", "summary": "Async deep-copy helpers exist but are never called."},
+    {"severity": "medium", "id": "blind_sleeps", "summary": "Two fixed five-second sleeps remain despite IN_PROCESS post-processing support."},
+    {"severity": "medium", "id": "semantic_reference_drift", "summary": "17:00/18:00, PAUSED+activation/native ACTIVE schedule and reconciliation rules conflict across active sources."},
+    {"severity": "medium", "id": "legacy_clutter", "summary": "16 legacy/completed CPV files and 19 pycache residues sit beside the active route."},
+    {"severity": "low", "id": "mechanical_integrity", "summary": "Current files compile, shell syntax passes, tests pass and references exist."}
+  ],
+  "recommended_engine": {
+    "modes": ["pure_clone", "clone_with_prestaged_media", "raw_media_staging_queue"],
+    "components": ["planner", "media_registry", "account_lane", "batch_executor", "validator", "state_audit"],
+    "normal_activation_job_required": false,
+    "account_lane_key": "app_id+ad_account_id",
+    "searching_in_hot_path_target": 0,
+    "global_reconciliation_per_creation_target": 0,
+    "pure_clone_p95_target_seconds": 70,
+    "prestaged_replacement_p95_target_seconds": 75
+  }
+}

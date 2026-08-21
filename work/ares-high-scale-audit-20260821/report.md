@@ -4,7 +4,23 @@
 
 Rodolfo está correto: o problema dominante não é apenas rate limit. A rota atual do Ares ainda é uma automação de canário/engenharia, não um executor industrial de campanhas. O `development_access` amplia o problema, mas os maiores atrasos observados vieram de trabalho feito dentro da conversa, duas falhas que exigiram cleanup, preparação/upload de mídia dentro da transação e execução totalmente sequencial.
 
-A correção sobre “v20” também está registrada: `v20` é a maturidade/versão de otimização do executor externo, não a versão da Graph API. Não usar Graph v20 como hipótese de desempenho.
+A correção sobre “v20” também está registrada: `v20` era a maturidade/versão de otimização do executor externo, não a versão da Graph API. As novas capturas mostram que o amigo já chama o executor atual de **v23**. Não usar Graph v20 como hipótese de desempenho.
+
+## Evidência direta do executor externo
+
+As cinco capturas recebidas depois da auditoria confirmam os princípios do desenho vNext:
+
+1. O executor é um **programa padronizado**, separado do agente; não é recriado por sessão ou por tópico.
+2. Todos os tópicos usam o mesmo executor. Antes da padronização, cada sessão tentava criar um executor novo e o comportamento saía do padrão.
+3. Há componentes separados para proteção de API e validação de fluxo.
+4. O processo operacional informado é: pegar a campanha de referência → montar tudo → passar por auditoria → mandar para o executor → subir PAUSED → fazer GET final.
+5. Quando há mídia nova, ela é enviada primeiro para a library do Facebook; a campanha só é montada quando todas as mídias já terminaram de subir.
+6. A rota via Drive adiciona cerca de cinco minutos por causa do upload da mídia, segundo o operador externo.
+7. O executor é melhorado fora da execução: executar → auditar duração/problema → sugerir melhoria → aplicar → próximo problema.
+8. O operador relata já ter enviado 100 campanhas em uma operação; o primeiro bloqueio acima de 99 foi mapeado e depois tratado.
+9. O executor atual citado nas capturas está em v23, resultado de mutações incrementais, e não tem relação com versão de Graph API.
+
+Isso confirma que o maior diferencial não é um prompt mais forte: é **produto de software centralizado, versionado e reutilizado**, com mídia pre-stageada e melhoria pós-execução.
 
 ## Cobertura da investigação
 
