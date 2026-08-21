@@ -25,7 +25,7 @@ Authorization: Rodolfo message `1540202751387246664`
 - Zero intermediate GET.
 - One consolidated campaign/adsets/ads readback per two-campaign bundle.
 - Tamper-evident manifest prevalidation.
-- Media upload/processing occurs outside campaign hot path and is separately disabled.
+- Media upload/processing occurs outside the campaign hot path and is guarded by `media_upload_enabled`, `--confirm-upload`, Page `ADVERTISE`, checksum and dual-video ready readback.
 - Per-lane checkpoints preserve known object IDs; a failed request is blocked from blind replay until reconciliation.
 - App-secret proof supported but disabled pending app setup.
 - No token/credential value in code, config, manifests or audits.
