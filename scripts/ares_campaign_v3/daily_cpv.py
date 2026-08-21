@@ -147,9 +147,44 @@ def is_resume_state(state: dict[str, Any], operational_date: str) -> bool:
 def gate_due(now_sp: datetime, state: dict[str, Any]) -> bool:
     day = now_sp.date().isoformat()
     if is_resume_state(state, day):
+        if state.get("manual_reconciliation_required") is True:
+            return False
         retry_after = int(state.get("retry_after_epoch") or 0)
         return retry_after <= int(now_sp.timestamp())
     return now_sp.hour == 17
+
+
+def media_title(kind: str, asset_id: str, checksum: str) -> str:
+    normalized_kind = str(kind or "").upper()
+    if normalized_kind not in {"VERTICAL", "SQUARE"}:
+        raise ValueError("media title kind must be VERTICAL or SQUARE")
+    short = re.sub(r"[^a-fA-F0-9]", "", str(checksum or ""))[:12].lower()
+    if len(short) < 8:
+        raise ValueError("media title checksum is too short")
+    return f"V3 {normalized_kind} {asset_id} {short}"
+
+
+def campaign_name_collisions(manifest: Manifest, live_campaigns: list[dict[str, Any]], mapped_campaign_ids: set[str]) -> list[dict[str, str]]:
+    expected_names = {campaign.name for campaign in manifest.campaigns}
+    collisions = []
+    for row in live_campaigns:
+        status = str(row.get("effective_status") or row.get("status") or "").upper()
+        name = str(row.get("name") or "")
+        campaign_id = str(row.get("id") or "")
+        if status in {"ARCHIVED", "DELETED"} or name not in expected_names or campaign_id in mapped_campaign_ids:
+            continue
+        collisions.append({"campaign_id": campaign_id, "name": name, "status": status})
+    return collisions
+
+
+def failure_resume_state(side_effects: dict[str, Any], *, known_campaign_ids: bool) -> tuple[str, bool]:
+    if side_effects.get("drive_move"):
+        return "POSTPROCESS_PENDING", False
+    if side_effects.get("campaign_write"):
+        return "READBACK_DEFERRED", not known_campaign_ids
+    if side_effects.get("media_upload"):
+        return "READBACK_DEFERRED", False
+    return "FAILED", False
 
 
 def requested_campaign_count(operation: dict[str, Any], operational_date: date) -> int:
@@ -724,7 +759,10 @@ class LiveDailyBackend:
         expected_titles = {
             title
             for row in selected
-            for title in (f"V3 VERTICAL {row['asset_id']}", f"V3 SQUARE {row['asset_id']}")
+            for title in (
+                media_title("VERTICAL", str(row["asset_id"]), str(row["clean_checksum"])),
+                media_title("SQUARE", str(row["asset_id"]), str(row["clean_checksum"])),
+            )
         }
         existing_by_title: dict[str, list[str]] = {}
         for video in self._graph_pages_with_token(f"{PAGE_ID}/videos", {"fields": "id,title,status", "limit": 500}, self.page_token):
@@ -746,8 +784,8 @@ class LiveDailyBackend:
             if clean["sha256"] != str(row.get("clean_checksum") or ""):
                 raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
             square_readback = make_square_clean(vertical, square)
-            vertical_title = f"V3 VERTICAL {row['asset_id']}"
-            square_title = f"V3 SQUARE {row['asset_id']}"
+            vertical_title = media_title("VERTICAL", str(row["asset_id"]), clean["sha256"])
+            square_title = media_title("SQUARE", str(row["asset_id"]), clean["sha256"])
             vertical_id = (existing_by_title.get(vertical_title) or [None])[0]
             square_id = (existing_by_title.get(square_title) or [None])[0]
             if not vertical_id:
@@ -766,6 +804,9 @@ class LiveDailyBackend:
                 ready=True,
                 source="v3-daily-resumable-meta-readback",
             )
+            registry_readback = registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), clean["sha256"])
+            if str(registry_readback.get("vertical_video_id")) != str(vertical_id) or str(registry_readback.get("square_video_id")) != str(square_id):
+                raise DailyBlocked("prestage", "media registry readback mismatch", {"asset_id": row.get("asset_id")})
             prepared.append({"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record})
         return prepared
 
@@ -946,8 +987,10 @@ def run_daily(
             if len(ready) != len(selected):
                 work_dir = paths.work_root / request_id
                 work_dir.mkdir(parents=True, exist_ok=True)
-                prepared = backend.prepare_and_prestage(selected, drive, work_dir, registry)
                 audit["side_effects"]["media_upload"] = True
+                audit["stage"] = "MEDIA_UPLOAD_IN_FLIGHT"
+                atomic_json(audit_path, audit)
+                prepared = backend.prepare_and_prestage(selected, drive, work_dir, registry)
                 audit["prepared_assets"] = [{"asset_id": item["asset_id"], "clean": item["clean"], "square": item["square_readback"], "registry": item["registry"]} for item in prepared]
                 audit["stage"] = "MEDIA_READY"
                 atomic_json(audit_path, audit)
@@ -971,8 +1014,21 @@ def run_daily(
                 audit.update(stage="MANIFEST_SEALED", manifest_path=str(sealed_path), manifest_digest=sealed["prevalidation"]["content_digest"], campaign_numbers=numbers, budget=budget)
                 atomic_json(audit_path, audit)
             manifest = Manifest.from_dict(sealed)
+            collisions = campaign_name_collisions(
+                manifest,
+                meta["campaigns"],
+                {str(item) for item in state.get("campaign_ids") or []},
+            )
+            if collisions:
+                raise DailyBlocked(
+                    "campaign_collision",
+                    "exact manifest campaign name already exists without idempotent request mapping",
+                    {"collisions": collisions, "manual_reconciliation_required": True},
+                )
+            audit["side_effects"]["campaign_write"] = True
+            audit["stage"] = "ENGINE_IN_FLIGHT"
+            atomic_json(audit_path, audit)
             result = backend.execute_engine(sealed, config)
-            audit["side_effects"]["campaign_write"] = bool(result.get("campaign_ids"))
             audit["engine_result"] = result
             audit["stage"] = result.get("status")
             atomic_json(audit_path, audit)
@@ -996,6 +1052,9 @@ def run_daily(
                 drive_by_asset = {str(row.get("asset_id") or ""): row for row in selected}
                 drive_rows = {str(row.get("id") or ""): row for row in drive.get("files") or []}
                 moves: dict[str, dict[str, Any]] = {}
+                audit["side_effects"]["drive_move"] = True
+                audit["stage"] = "POSTPROCESS_IN_FLIGHT"
+                atomic_json(audit_path, audit)
                 for assignment in assignments:
                     inventory_row = drive_by_asset[assignment["asset_id"]]
                     drive_row = drive_rows[str(inventory_row["asset_drive_id"])]
@@ -1036,13 +1095,21 @@ def run_daily(
             return final
         except Exception as exc:
             failure = safe_error(exc)
-            audit.update(stage="FAILED", failure=failure, failed_at_utc=utc_now())
+            known_campaign_ids = bool(state.get("campaign_ids") or (audit.get("engine_result") or {}).get("campaign_ids"))
+            failure_status, manual_gate = failure_resume_state(audit.get("side_effects") or {}, known_campaign_ids=known_campaign_ids)
+            audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=manual_gate)
             atomic_json(audit_path, audit)
-            if not audit.get("side_effects", {}).get("media_upload") and not audit.get("side_effects", {}).get("campaign_write") and selected_ids:
+            if failure_status == "FAILED" and selected_ids:
                 inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
                 release_inventory(paths.inventory, inventory_rows, selected_ids)
             if not plan_only:
-                state.update(status="FAILED", failure=failure, updated_at_utc=utc_now())
+                state.update(
+                    status=failure_status,
+                    failure=failure,
+                    retry_after_epoch=int(time.time()) + 300 if failure_status != "FAILED" else 0,
+                    manual_reconciliation_required=manual_gate,
+                    updated_at_utc=utc_now(),
+                )
                 atomic_json(paths.state, state)
             if post_report:
                 try:
@@ -1050,8 +1117,8 @@ def run_daily(
                 except Exception:
                     pass
             if not quiet:
-                print(json.dumps({"status": "FAILED", "failure": failure, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
-            return {"status": "FAILED", "failure": failure, "audit": str(audit_path)}
+                print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
+            return {"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}
         finally:
             fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
 
