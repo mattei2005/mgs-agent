@@ -48,6 +48,34 @@
     "Separated physical Drive READY count from ares_eligible stock.",
     "Added current+paused+archived Meta reconciliation and excluded only technical IDs with cleanup evidence."
   ],
+  "route_v2_applied": {
+    "status": "implemented_validated_no_meta_write",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_message_id": "1540148277935345744",
+    "writer_global_reconciliation_calls": 0,
+    "separate_reconciler": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-reconcile.py",
+    "reconciliation_manifest": "/root/mgs-agent/data/ares/meta-ads/reconciliation/Creditoparaveiculo-BR-CAR-BR.json",
+    "quota_controls": [
+      "X-Ad-Account-Usage parsed independently from BUC when Meta sends it",
+      "local 300-second rolling score ledger used after full warmup when X-Ad-Account-Usage is absent",
+      "logical score projection counts reads x1, mutations x3 and readback reserve",
+      "development_access falls back from C12+C13 to C12 only when one campaign fits",
+      "C13 is persisted as preflight_deferred for the next quota window",
+      "code17/sub2446079 uses header reset or documented 300-second fallback"
+    ],
+    "clone_controls": [
+      "daily new-creative route remains shallow campaign/adset clone plus Drive creatives",
+      "explicit faithful clone has async deep-copy request builder and bounded request-set polling",
+      "all copy routes remain PAUSED until hierarchy readback"
+    ],
+    "validation": {
+      "unit_tests": "38 passed",
+      "live_read_only_probe": "HTTP 200; tier development_access; no Meta write",
+      "dry_run": "C12 selected; C13 deferred; 0 global reconciliation calls; local ledger source; score C12=50 and C12+C13=95",
+      "creation_cron": "paused",
+      "activation_cron": "paused"
+    }
+  },
   "short_term_plan": {
     "goal": "Complete the next production cycle without code17 on development access.",
     "steps": [

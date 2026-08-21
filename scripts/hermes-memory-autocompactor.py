@@ -396,7 +396,7 @@ def propose_and_verify(
     ]
     if not selected_indexes:
         raise CompactionError("no_entries_selected")
-    def rewrite_one(selected_index: int) -> None:
+    def rewrite_many(indexes: Sequence[int]) -> None:
         nonlocal candidate
         last_error: CompactionError | None = None
         for attempt in range(1, max_proposal_attempts + 1):
@@ -407,21 +407,21 @@ def propose_and_verify(
                         candidate,
                         target_chars,
                         budgets,
-                        [selected_index],
+                        indexes,
                         attempt=attempt,
                     )
                 )
                 restored_candidate = _restore_candidate_literals(
                     candidate,
                     raw_candidate,
-                    [selected_index],
+                    indexes,
                 )
                 candidate = _validate_candidate(
                     candidate,
                     restored_candidate,
                     target_chars,
                     budgets,
-                    [selected_index],
+                    indexes,
                     enforce_total=False,
                 )
                 return
@@ -432,8 +432,7 @@ def propose_and_verify(
         raise last_error or CompactionError("candidate_generation_failed")
 
     validated_indexes = list(selected_indexes)
-    for selected_index in selected_indexes:
-        rewrite_one(selected_index)
+    rewrite_many(selected_indexes)
 
     # Model output may be safely shorter while missing a per-entry advisory
     # budget. Add further entries adaptively; the total target remains hard.
@@ -450,7 +449,7 @@ def propose_and_verify(
         current_length = len(candidate[selected_index - 1])
         requested = min(excess, max(1, math.floor(current_length * 0.30)))
         budgets[selected_index - 1] = max(35, current_length - requested)
-        rewrite_one(selected_index)
+        rewrite_many([selected_index])
         validated_indexes.append(selected_index)
 
     if len(_render_entries(candidate)) > target_chars:

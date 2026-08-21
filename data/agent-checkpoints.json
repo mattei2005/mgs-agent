@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTING",
-      "next_step": "Operação recorrente normal; manter os períodos do Diário por slot, Intraday contínuo 2h e snapshot restrito às três threads.",
+      "next_step": "Operação recorrente normal; manter os cinco slots do Diário, Intraday contínuo 2h e snapshot restrito às três threads.",
       "objective": "Preservar e entregar relatórios Creditoparaveiculo com histórico consultável",
-      "source": "discord:thread:1540137110789562408; operation config v1.0.39; direct-traffic-cbo-operations v1.0.28; direct-traffic-vehicle-finance-operations v1.0.13",
-      "state": "correção de rodolfo aplicada: o diário das 07:00 de são paulo referencia o dia anterior fechado; os diários das 11:00, 14:00 e 20:00 referenciam o próprio dia até o horário do envio. intraday permanece contínuo a cada 2h nas horas ímpares 01/03/05/07/09/11/13/15/17/19/21/23; checkpoint de ação 08:00 separado; snapshot 03:00 diário restrito às três threads fixas.",
+      "source": "discord:thread:1540137110789562408; operation config v1.0.40; direct-traffic-cbo-operations v1.0.31; direct-traffic-vehicle-finance-operations v1.0.14",
+      "state": "regra vigente de rodolfo: o diário das 07:00 de são paulo referencia o dia anterior fechado; os diários das 08:00, 11:00, 14:00 e 20:00 referenciam o próprio dia até o horário do envio. intraday permanece contínuo a cada 2h nas horas ímpares 01/03/05/07/09/11/13/15/17/19/21/23; checkpoint de ação 08:00 permanece separado; snapshot 03:00 diário restrito às três threads fixas.",
       "thread_id": "1540137110789562408",
-      "updated_at": "2026-08-20T23:19:50+00:00"
+      "updated_at": "2026-08-21T00:31:45+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:01:45+00:00"
+  "updated_at": "2026-08-21T00:31:45+00:00"
 }

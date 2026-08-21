@@ -129,6 +129,12 @@ For post-cutover OOM/swap, sandboxed credential diagnostics, retired IP/domain s
 
 Choose only one branch: migration/restore, deep host decommission, final agent retirement, post-migration hardening, or new-agent bootstrap.
 
+### Checkpoint store CPU spikes, git index locks, or repeated gc
+
+Primary reference: `references/checkpoint-store-cpu-lock-contention.md`.
+
+Use it when `htop` shows checkpoint `git add -A` / `git pack-objects`, logs show `checkpoints/store/indexes/<hash>.lock`, or a profile's packed checkpoint floor already exceeds `checkpoints.max_total_size_mb`.
+
 ### Honcho memory/copilot or `/root/mgs-agent` Git auto-push
 
 Primary reference: `references/honcho-git-operations.md`.

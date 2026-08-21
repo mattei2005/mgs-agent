@@ -218,7 +218,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             backup_root=self.backups,
         )
 
-        self.assertEqual(len(calls), len(selected) + 1)
+        self.assertEqual(len(calls), 2)
         self.assertEqual(result["mode"], "semantic_verified")
         self.assertTrue(result["readback_matches"])
         expected = list(original)
