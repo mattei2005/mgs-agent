@@ -831,9 +831,9 @@
   },
   "campaign_engine_v3": {
     "version": "3.0.0",
-    "status": "installed_disabled_pending_prestage_and_canary",
+    "status": "active_guarded_development_access",
     "authorized_by": "Rodolfo Mattei",
-    "authorization_message_id": "1540202751387246664",
+    "authorization_message_id": "1540222249036939324",
     "config": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
     "operation_contract": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
     "runner": "/root/mgs-agent/scripts/ares-campaign-engine-v3.py",
@@ -845,7 +845,10 @@
     "media_policy": "prestage_before_manifest",
     "readback_policy": "one_outer_graph_batch_per_two_campaigns",
     "intermediate_get_calls": 0,
-    "write_enabled": false,
+    "write_enabled": true,
+    "media_upload_enabled": true,
+    "production_status": "ACTIVE_with_future_start_time",
+    "development_access_guard": "bundles execute sequentially per account with 300-second reservation until live tier becomes standard_access",
     "v2_rollback_preserved": true,
     "legacy_deletion_performed": false,
     "real_meta_canary_requires_separate_authorization": true

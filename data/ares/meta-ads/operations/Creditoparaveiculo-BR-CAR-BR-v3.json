@@ -2,7 +2,7 @@
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
-  "status": "installed_disabled_pending_prestage_and_canary",
+  "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
   "app_key": "mgs-meta-app-current",
   "timezone": "America/Sao_Paulo",
@@ -14,7 +14,8 @@
   "bundle_size": 2,
   "ads_per_campaign": 3,
   "campaign_status_during_canary": "PAUSED",
-  "child_status": "ACTIVE_under_PAUSED_campaign",
+  "production_status": "ACTIVE_with_future_start_time_after_manifest_prevalidation",
+  "child_status": "ACTIVE_under_PAUSED_or_future_ACTIVE_campaign",
   "start_time": "00:30_next_day_America/Sao_Paulo",
   "budget_minor": 3000,
   "account_cap_minor": 30000,
@@ -30,7 +31,7 @@
   "rollback": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
   "authorization": {
     "authorized_by": "Rodolfo Mattei",
-    "authorization_message_id": "1540202751387246664",
-    "scope": "build and install complete v3; no Meta write canary in this change"
+    "authorization_message_id": "1540222249036939324",
+    "scope": "build, install and activate v3 as the production route under development_access guards; no campaign object requested by this activation"
   }
 }

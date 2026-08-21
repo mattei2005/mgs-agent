@@ -98,6 +98,7 @@ def parser() -> argparse.ArgumentParser:
     cpv.add_argument("--campaign-numbers", required=True)
     cpv.add_argument("--operational-date", required=True)
     cpv.add_argument("--request-id", required=True)
+    cpv.add_argument("--status", choices=["PAUSED", "ACTIVE"], default="PAUSED")
     cpv.add_argument("--output", required=True)
     return ap
 
@@ -153,6 +154,7 @@ def _main(argv: list[str] | None = None) -> int:
         payload = build_cpv_manifest(
             registry=MediaRegistry(args.registry), asset_refs=assets, campaign_numbers=numbers,
             operational_date=args.operational_date, request_id=args.request_id, creative_templates=templates,
+            status=args.status,
         )
         Manifest.from_dict(payload)
         output = Path(args.output)

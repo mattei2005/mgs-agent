@@ -392,6 +392,24 @@ def test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback(tmp_pa
     assert result['metrics']['outer_readback_calls'] == 1
 
 
+def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+    row = prestaged_campaign(1)
+    row['status'] = 'ACTIVE'
+    transport = CaptureTransport('100')
+    result = CampaignEngine(config(tmp_path, enabled=True, write_enabled=True), transport_factory=lambda account: transport).execute(manifest([row], request_id='active-future'))
+    updates = transport.operations_by_stage['campaign_update_adset_copy']
+    campaign_update = next(op for op in updates if op.kind == 'campaign_update')
+    assert campaign_update.body['status'] == 'ACTIVE'
+    assert result['status'] == 'COMPLETE_FUTURE_ACTIVE'
+
+
 def test_engine_executes_accounts_in_independent_lanes(tmp_path):
     transports: dict[str, FakeBatchTransport] = {}
     def factory(account: str) -> FakeBatchTransport:
