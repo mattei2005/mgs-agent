@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Rodolfo decidir se autoriza vNext central. Implementação deve começar pelo bundle prevalidado + readback consolidado e media pre-stage, não por aumentar60→120.",
-      "objective": "Auditar integralmente o subsistema de criação/clonagem do Ares e desenhar rota de alta escala comparável a 40 clones em 15 minutos, reduzindo searching, tool overhead, chamadas Meta e etapas operacionais.",
-      "source": "discord:1540197534084112435; image:img_2ca790662b14.webp; report:/root/mgs-agent/work/ares-high-scale-audit-20260821/report.md; findings:/root/mgs-agent/work/ares-high-scale-audit-20260821/findings.json",
-      "state": "auditoria concluída sem implementar vnext. evidência externa refinada: limite executor60→120 é guard empírico; atingir120 ainda trava e campanha consome40–50. otimização-chave externa: rota antiga fazia get após campaign, adgroup e creative; nova prevalida o bundle, cria/upload tudo e faz um get para duas campanhas, repetindo um get a cada2 em lotes maiores. portanto não elevar constante ares: remover gets intermediários, prevalidar manifest e consolidar readback. demais achados permanecem: executor central v23 separado do agente, media pre-stage, lanes por conta; ares119,4s vs67,5s/lane, monólito1740, throttle global, seq, async morto, score13vs12 e drift.",
+      "next_step": "Responder Rodolfo com checklist exato. Não aplicar v3 antes de ele receber a resposta e confirmar prosseguimento/ajustes.",
+      "objective": "Construir o Ares Campaign Engine v3 completo após alinhar todas as aprovações máximas do Meta App.",
+      "source": "discord:1540199569705410610; report:/root/mgs-agent/work/ares-app-permissions-research-20260821/report.md; skill-ref:meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md; official:developers.facebook.com/docs/permissions,features-reference,marketing-api/access,business-verification,facebook-login-for-business,access-tokens,secure-requests,app-review",
+      "state": "aplicação v3 aguardando resposta prévia a rodolfo e confirmação crítica já solicitada. pesquisa oficial de app concluída: três gates independentes — advanced access por permissão, marketing api access tier full access, e asset assignments reais. core proposto: ads_management, ads_read, business_management, pages_show_list, pages_read_engagement, pages_manage_ads; mgs creative/identity: pages_read_user_content, pages_manage_posts, instagram_basic; mgs messenger: pages_manage_metadata, pages_messaging; analytics: read_insights. opcionais por módulo: ads_mcp_management, leads_retrieval, catalog_management, marketing_messages_messenger, instagram_manage_insights, instagram_content_publish, pages_manage_engagement. full access exige >=500 calls/15d e <15% error last500. business verification, app review, live mode, data use checkup, oauth/asset assignments, appsecret_proof e readback definidos. system user não é requisito nem rota mgs.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T03:16:47+00:00"
+      "updated_at": "2026-08-21T03:30:01+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T03:16:47+00:00"
+  "updated_at": "2026-08-21T03:30:01+00:00"
 }
