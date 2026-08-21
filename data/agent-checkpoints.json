@@ -143,12 +143,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Acompanhar o primeiro ciclo recorrente agendado do B013-3 e escalar apenas novas mudanças reais. Para B001-3, fechar o gate quando Adriano Alves e Alnashri Lumandung Maja aparecerem em roles e o live readback chegar a 17/17.",
+      "next_step": "B013-3 sem pendências: escalar apenas nova mudança real. Para B001-3, fechar o gate quando Adriano Alves e Alnashri Lumandung Maja aparecerem em roles e o live readback chegar a 17/17.",
       "objective": "Manter os 13 apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-3 via DTR/Graph.",
-      "source": "Discord authorization 1540372238467862579; registry data/meta-app-registry.json; scripts b013-dtr-link-watch.sh e meta-app-roles-watch.sh; Sheet Migracao 22/06 gid 542936436; Discord channel 1522830283240505385.",
-      "state": "b013-2 substituído por b013-3 com backup reversível, script e registry migrados, state fresco e cron dedicado ativado. preflight integral: 30/30 linked, zero falhas/unknowns. o alvo live avançou para 31 linhas antes da produção. primeiro alerta b013-3 mostrou william nogueira temporariamente não vinculado em 30/31; segundo ciclo validou william e fechou 31/31, zero pendentes, 324 páginas dtr, 316 graph e 302 subscribed. durante o cutover, o generic roles monitor ainda excluía apenas b013-2 e um ciclo marcou 30 linhas b013-3 com x. exclusão corrigida para b013-3 em active_app_configs/dtr_only/role_reconciliation_excluded_apps; ciclo dedicado limpou os 30 x e readback final mostrou 31/31 marcadores vazios. alertas reais: primeira família 1540374844380553238..1540374850030403674; recuperação/final 1540376653388189878..1540376658110980257. b001-3 segue pendente 15/17.",
+      "source": "Discord authorization 1540372238467862579; registry data/meta-app-registry.json; scripts b013-dtr-link-watch.sh e meta-app-roles-watch.sh; Sheet Migracao 22/06 gid 542936436; Discord channel 1522830283240505385; cron 498fb0d95e10.",
+      "state": "b013-3 cutover concluído e recorrente validado. app/token/roles saudáveis; produção convergiu a 31/31 linked, zero pendentes/unknown, 324 páginas dtr, 316 graph e 302 subscribed. primeiro force-live mostrou william nogueira temporariamente unlinked em 30/31; ciclo seguinte confirmou recovery 31/31. durante a troca, o generic roles monitor ainda excluía b013-2 e marcou 30 linhas b013-3 com x; exclusão corrigida para b013-3 nos três guards e ciclo dedicado limpou todos os x. primeiro ciclo agendado falhou antes de writes por timeout sheets metadata; sheets_request recebeu retry bounded 3x, smoke dry-run passou e o próximo ciclo agendado terminou ok em 11:27 et, alerts_sent=0, writes=0. cron 498fb0d95e10 enabled/scheduled. alertas: primeira família 1540374844380553238..1540374850030403674; recovery/final 1540376653388189878..1540376658110980257. b001-3 segue 15/17.",
       "thread_id": "1540340806341099540",
-      "updated_at": "2026-08-21T15:10:15+00:00"
+      "updated_at": "2026-08-21T15:29:48+00:00"
     },
     {
       "agent": "zeus",
@@ -962,5 +962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T15:23:19+00:00"
+  "updated_at": "2026-08-21T15:29:48+00:00"
 }
