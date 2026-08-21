@@ -150,6 +150,19 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             compactor._restore_protected_literal_segments(segments[:-1], literals)
         self.assertEqual(caught.exception.code, "literal_segment_shape_mismatch")
 
+    def test_literal_segment_boundaries_preserve_hyphen_attachment(self):
+        original = "diagnóstico API-first e VPS-location"
+        segments, literals = compactor._split_protected_literal_segments(original)
+        returned = [segments[0], " primeiro e ", " localização"]
+        normalized = compactor._normalize_segment_boundaries(returned, segments)
+        restored = compactor._restore_protected_literal_segments(normalized, literals)
+        self.assertIn("API-primeiro", restored)
+        self.assertIn("VPS-localização", restored)
+        self.assertEqual(
+            compactor._protected_literals(restored),
+            compactor._protected_literals(original),
+        )
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 

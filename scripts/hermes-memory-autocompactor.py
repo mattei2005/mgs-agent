@@ -116,6 +116,26 @@ def _split_protected_literal_segments(text: str) -> tuple[List[str], List[str]]:
     return segments, literals
 
 
+def _normalize_segment_boundaries(
+    returned: Sequence[str],
+    original: Sequence[str],
+) -> List[str]:
+    """Keep whitespace adjacency around hidden literals byte-stable."""
+    if len(returned) != len(original):
+        raise CompactionError("literal_segment_shape_mismatch")
+    normalized: List[str] = []
+    for new, old in zip(returned, original):
+        if not isinstance(new, str):
+            raise CompactionError("literal_segment_shape_mismatch")
+        prefix_match = re.match(r"^\s*", old)
+        suffix_match = re.search(r"\s*$", old)
+        prefix = prefix_match.group(0) if prefix_match else ""
+        suffix = suffix_match.group(0) if suffix_match else ""
+        core = new.strip()
+        normalized.append(prefix + core + suffix)
+    return normalized
+
+
 def _restore_protected_literal_segments(
     segments: Sequence[str],
     literals: Sequence[str],
@@ -160,10 +180,14 @@ def _restore_candidate_literals(
         if not isinstance(returned_segments, list):
             raise CompactionError("literal_segment_shape_mismatch")
         original_text = str(original[index - 1])
-        _segments, literals = _split_protected_literal_segments(original_text)
+        original_segments, literals = _split_protected_literal_segments(original_text)
+        normalized_segments = _normalize_segment_boundaries(
+            returned_segments,
+            original_segments,
+        )
         restored_rows.append({
             "index": index,
-            "text": _restore_protected_literal_segments(returned_segments, literals),
+            "text": _restore_protected_literal_segments(normalized_segments, literals),
         })
     return {**candidate, "entries": restored_rows}
 

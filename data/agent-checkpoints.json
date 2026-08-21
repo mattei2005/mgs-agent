@@ -53,12 +53,12 @@
     {
       "agent": "zeus",
       "id": "ARES-META-CLONE-RATE-LIMIT-RESEARCH-20260820",
-      "next_step": "Aguardar Rodolfo autorizar a implementação no Ares: patch quota-aware e clone async; em paralelo verificar no App Dashboard se o app emissor pode subir para Marketing API Full Access e validar standard_access no header.",
-      "objective": "Investigar integralmente a falha de clone/criação Meta do Ares, identificar a causa real do code 17 e definir uma rota de criação robusta com fontes oficiais e evidência pública em inglês.",
-      "source": "discord:thread:1539826050765299872; discord:thread:1540114948984938607; report:/root/mgs-agent/work/meta-clone-rate-limit-research-20260820/report.md; skill:meta-ads-api-operations/references/meta-clone-development-tier-rate-limit-2026-08-20.md; audit:daily-create-2026-08-20-20260820T210712Z.json",
-      "state": "pesquisa concluída e citations ok: causa confirmada é app/token em development_access, tier limited/documentado como não produtivo. o runner atual projeta 26 mutations ads management (10 validate_only + 16 reais), 78 pontos antes do readback contra teto 60; helper monitora buc mas ignora x-ad-account-usage. solução definida: full access do app emissor, parse/gate de ambos headers, score budget, readback deferred e clone nativo async paused; fallback temporário de uma campanha por janela de 5 minutos.",
+      "next_step": "Ares recebe handoff na thread 1539826050765299872. Produção só retoma após autorização separada de Rodolfo para canário C12 PAUSED; depois validar hierarchy/readback antes de C13.",
+      "objective": "Investigar e corrigir a falha de clone/criação Meta do Ares, eliminando code17 por arquitetura de rota e controle de quota.",
+      "source": "discord:thread:1540114948984938607; authorization:1540148277935345744; handoff-target:1539826050765299872; plan:data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json; dry-run-audit:daily-create-2026-08-20-20260821T003059Z.json; scripts:ares-creditoparaveiculo-daily-create.py,ares-creditoparaveiculo-reconcile.py,ares-meta-common.py",
+      "state": "implementado e validado sem meta write: writer v2 removeu reconciliação global (0 scans no writer), usa manifest do reconciliador separado, contabiliza quota lógica com x-ad quando disponível ou ledger rolling local maduro de 300s, projeta reads x1/mutations x3+reserva, executa fallback development c12 por janela e persiste c13; deep-copy async paused ficou disponível para clone fiel explícito. testes 38/38; live read-only http200; dry-run c12 selecionada/c13 deferred, score 50 vs 95; crons de criação e ativação seguem pausados.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-20T22:02:23+00:00"
+      "updated_at": "2026-08-21T00:37:11+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:31:45+00:00"
+  "updated_at": "2026-08-21T00:37:11+00:00"
 }
