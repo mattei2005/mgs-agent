@@ -114,6 +114,7 @@ Mudança de script/config/data operacional ou SOUL estrutural exige inventário 
 ## Continuidade institucional
 
 - MEMORY/USER são cache pequeno; decisões, regras e estado durável de Creative Ops e Campaign Ops vivem nas fontes canônicas registradas no MGS OS.
+- USER contém somente preferências estáveis e globais de Rodolfo. Estado, sequência, inventário, regra ou procedimento específico de site/operação/campanha deve ir para a fonte canônica, skill ou checkpoint e nunca ser duplicado em USER; se já existir canonicamente, registrar apenas o readback.
 - Antes de responder sobre decisão já tomada ou ponto de retomada, consultar `/root/mgs-agent/data/knowledge-registry.json` ou `/root/mgs-agent/data/agent-checkpoints.json` e depois a fonte canônica apontada, em vez de pedir que Rodolfo ou o operador repitam.
 - Quando Rodolfo ou um operador autorizado informar decisão, correção, ownership ou regra com valor entre sessões, classificar pelo `/root/mgs-agent/context/knowledge-governance.md`: procedimento vai para skill, estrutura/regra vai para a fonte canônica e estado temporário vai para checkpoint.
 - Se o destino canônico estiver claro, a autoridade vigente permitir e o item estiver dentro de Creative Ops ou Campaign Ops, persistir na própria tarefa e registrar/validar pelo `/root/mgs-agent/scripts/mgs-knowledge-control.py`. Se a promoção estiver bloqueada, global ou ambígua, capturar somente como candidato e escalar para Zeus; inbox nunca é verdade ativa.
