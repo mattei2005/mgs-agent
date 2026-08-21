@@ -30,6 +30,7 @@ from ares_campaign_v3.daily_cpv import (
     campaign_name_collisions,
     failure_resume_state,
     media_title,
+    LiveDailyBackend,
 )
 
 SP = ZoneInfo("America/Sao_Paulo")
@@ -203,6 +204,40 @@ def test_engine_config_requires_all_independent_gates():
     config["media_upload_enabled"] = False
     with pytest.raises(DailyBlocked, match="gates"):
         validate_engine_config(config)
+
+
+def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
+    class FakeCommon:
+        def __init__(self):
+            self.token_calls = []
+
+        def get_token_from_1password(self, item_name):
+            self.token_calls.append(item_name)
+            return "sanitized-token", "token"
+
+        def graph_get(self, path, token, params):
+            if path == "act_1046241194533786":
+                return 200, {
+                    "id": "act_1046241194533786",
+                    "currency": "USD",
+                    "timezone_name": "America/Sao_Paulo",
+                    "account_status": 1,
+                    "disable_reason": 0,
+                }, {}
+            if path == "me/accounts":
+                return 200, {"data": [{"id": "621037101089579", "tasks": ["ADVERTISE"], "access_token": "sanitized-page-token"}]}, {}
+            raise AssertionError(path)
+
+    backend = object.__new__(LiveDailyBackend)
+    backend.common = FakeCommon()
+    backend.token = None
+    backend.page_token = None
+    backend.drive_token = None
+    backend._graph_pages = lambda path, params: []
+    result = backend.meta_preflight()
+    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+    assert result["token_report"]["field"] == "token"
+    assert result["page"]["tasks"] == ["ADVERTISE"]
 
 
 def test_asset_selection_requires_nine_unique_reconciled_ready_lineages():

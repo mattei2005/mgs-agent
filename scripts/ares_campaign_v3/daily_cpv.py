@@ -636,7 +636,7 @@ class LiveDailyBackend:
         self.drive_token: str | None = None
 
     def meta_preflight(self) -> dict[str, Any]:
-        token, token_field = self.common.get_token_from_1password(TOKEN_ITEM, force_refresh=True)
+        token, token_field = self.common.get_token_from_1password(TOKEN_ITEM)
         self.token = token
         status, account, _ = self.common.graph_get(ACCOUNT_ACT, token, {"fields": "id,name,currency,timezone_name,account_status,disable_reason"})
         if status != 200 or not isinstance(account, dict) or str(account.get("currency")) != "USD" or str(account.get("timezone_name")) != "America/Sao_Paulo" or int(account.get("account_status") or 0) != 1 or int(account.get("disable_reason") or 0) != 0:
