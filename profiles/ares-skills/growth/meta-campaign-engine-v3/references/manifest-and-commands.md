@@ -56,7 +56,14 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py build-cpv \
   --request-id <unique-id> --output <manifest.json>
 ```
 
-The builder emits `prevalidated=false`. A production preflight must explicitly promote that gate after source, templates, media, budget, UTMs, names and future start pass.
+The builder emits `prevalidated=false`. Promote only through the deterministic prevalidator, which rechecks the media registry and seals a tamper-evident content digest:
+
+```text
+python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prevalidate \
+  --manifest <draft.json> --registry <media-registry.json> --output <sealed.json>
+```
+
+Any post-prevalidation change invalidates execute. Source, templates, media, budget, UTMs, names and future start must be final before sealing.
 
 ## Execute gate
 

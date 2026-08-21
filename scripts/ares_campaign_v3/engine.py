@@ -120,6 +120,8 @@ class CampaignEngine:
         copy_results = self._batch(bundle, transport, list(bundle.stages[0].operations), "pure_clone_copy")
         self._timed_finish(timing, started)
         campaign_ids = [_copied_id(row, "copied_campaign_id", "copied_campaigns") for row in copy_results]
+        record["campaign_ids"] = campaign_ids
+        record["stage"] = "copies_created_readback_pending"
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
@@ -133,6 +135,8 @@ class CampaignEngine:
         copy_results = self._batch(bundle, transport, list(bundle.stages[0].operations), "campaign_copy")
         self._timed_finish(timing, started)
         campaign_ids = [_copied_id(row, "copied_campaign_id", "copied_campaigns") for row in copy_results]
+        record["campaign_ids"] = campaign_ids
+        record["stage"] = "campaign_copies_created"
 
         shell_ops: list[BatchOperation] = []
         for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1):
@@ -236,6 +240,8 @@ class CampaignEngine:
                 result = dict(previous["result"])
                 result["idempotent_replay"] = True
                 return result
+            if previous.get("status") == "FAILED":
+                raise ExecutionFailed("failed request requires reconciliation before replay")
         audit: dict[str, Any] = {
             "engine_version": 3,
             "request_id": manifest.request_id,
@@ -276,6 +282,16 @@ class CampaignEngine:
             _atomic_json(audit_path, audit)
             return result
         except Exception as exc:
-            audit.update({"status": "FAILED", "finished_at": _utc(), "lanes": lane_results, "error": {"type": type(exc).__name__, "message": str(exc)[:500]}})
+            checkpoint_dir = Path(self.config["state_root"]) / "checkpoints"
+            checkpoint_paths = sorted(str(path) for path in checkpoint_dir.glob(f"{_safe_name(manifest.request_id)}-*.json")) if checkpoint_dir.exists() else []
+            audit.update({
+                "status": "FAILED",
+                "finished_at": _utc(),
+                "lanes": lane_results,
+                "error": {"type": type(exc).__name__, "message": str(exc)[:500]},
+                "manual_reconciliation_required": True,
+                "blind_replay_blocked": True,
+                "lane_checkpoints": checkpoint_paths,
+            })
             _atomic_json(audit_path, audit)
             raise

@@ -405,6 +405,25 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
 
+def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path):
+    class FailReadback(FakeBatchTransport):
+        def execute(self, operations, stage):
+            if stage == 'consolidated_readback':
+                raise RuntimeError('synthetic readback failure')
+            return super().execute(operations, stage)
+    cfg = config(tmp_path, enabled=True, write_enabled=True)
+    engine = CampaignEngine(cfg, transport_factory=lambda account: FailReadback(account))
+    m = manifest([pure_campaign(1)], request_id='partial')
+    with pytest.raises(RuntimeError, match='synthetic readback'):
+        engine.execute(m)
+    audit_path = Path(cfg['audit_root']) / 'partial.json'
+    audit = json.loads(audit_path.read_text())
+    assert audit['status'] == 'FAILED'
+    assert audit['manual_reconciliation_required'] is True
+    with pytest.raises(ExecutionFailed, match='reconciliation'):
+        CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
+
+
 def test_forty_campaigns_three_accounts_produce_seven_global_waves():
     rows = [pure_campaign(i, str(100 + (i % 3))) for i in range(40)]
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(manifest(rows, request_id='forty'))

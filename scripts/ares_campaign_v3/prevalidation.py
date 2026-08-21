@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .media_registry import MediaRegistry
-from .schema import Manifest
+from .schema import Manifest, ManifestError
 
 
 def content_digest(payload: dict[str, Any]) -> str:
@@ -34,10 +34,10 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
         for ad in campaign.ads:
             record = registry.require_ready(campaign.account_id, ad.media.asset_id, ad.media.checksum)
             if str(record["vertical_video_id"]) != ad.media.vertical_video_id or str(record["square_video_id"]) != ad.media.square_video_id:
-                raise ValueError(f"manifest media IDs drifted for asset={ad.media.asset_id}")
+                raise ManifestError(f"manifest media IDs drifted for asset={ad.media.asset_id}")
             media_keys.append(f"{campaign.account_id}|{ad.media.asset_id}|{ad.media.checksum}")
     if len(media_keys) != len(set(media_keys)):
-        raise ValueError("duplicate media lineage in manifest")
+        raise ManifestError("duplicate media lineage in manifest")
     if media_keys:
         checks.extend(["media_registry_exact", "media_lineage_unique"])
     result = copy.deepcopy(payload)
