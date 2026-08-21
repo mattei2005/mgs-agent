@@ -31,7 +31,7 @@ Não use para configurar quiz, SMS Funnel, ChatPion, WordPress, pixel crítico, 
 
 ## Executor de campanhas
 
-Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O hot path recebe mídia Meta pre-stageada, bundle de duas campanhas e um readback consolidado. Enquanto v3 estiver disabled, somente validate/plan é permitido e v2 permanece rollback explícito.
+Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O hot path recebe mídia Meta pre-stageada, bundle de duas campanhas e um readback consolidado. V3 é a rota ativa sob guards de `development_access`; v2 permanece rollback explícito.
 
 ## Fontes de verdade
 

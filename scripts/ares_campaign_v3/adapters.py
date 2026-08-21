@@ -30,10 +30,11 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
     status = str(status).upper()
     if status not in {"PAUSED", "ACTIVE"}:
         raise ValueError("CPV v3 status must be PAUSED or ACTIVE")
-    if len(campaign_numbers) != 2:
-        raise ValueError("CPV v3 requires two campaign numbers per bundle")
-    if len(asset_refs) != 6:
-        raise ValueError("CPV v3 requires six pre-staged assets")
+    if not 1 <= len(campaign_numbers) <= 100:
+        raise ValueError("CPV v3 requires 1..100 campaign numbers")
+    required_assets = len(campaign_numbers) * 3
+    if len(asset_refs) != required_assets:
+        raise ValueError(f"CPV v3 requires exactly {required_assets} pre-staged assets for {len(campaign_numbers)} campaigns")
     base_date = datetime.fromisoformat(operational_date).replace(tzinfo=SP)
     start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
     templates = creative_templates or [

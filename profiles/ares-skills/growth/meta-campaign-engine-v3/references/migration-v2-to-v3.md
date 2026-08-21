@@ -5,9 +5,9 @@
 - v2 runner remains at `/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py`.
 - Pre-v3 backup is recorded in v3 config.
 - No v2 or legacy file is deleted.
-- v3 is installed disabled and has no cron.
+- v3 is active as the production route under `development_access` guards and has no recurring cron.
 
-## Promotion gates
+## Activation gates
 
 ```text
 Gate 1  unit/behavior tests
@@ -20,13 +20,13 @@ Gate 7  three-account synthetic/live-approved lane test
 Gate 8  1→3→10→40 rollout with p50/p95
 ```
 
-Every real Meta canary requires separate operational authorization. Installing v3 does not authorize campaign writes.
+Gates 1–4 and the synthetic scale validation are complete. The first authorized production request executes Gate 5 automatically/fail-closed; if it succeeds, the same request can continue to Gate 6 and remaining bundles according to the lane quota. A normal campaign request is the operational authorization for its own objects; no extra architecture confirmation is inserted.
 
 A failed request is never blindly replayed. Each account lane writes an independent checkpoint with any known campaign/adset IDs and last stage; the main audit marks `manual_reconciliation_required=true`. Reconcile those PAUSED objects by GET before creating a new request ID or authorizing cleanup.
 
 ## Rollback
 
-Before promotion, rollback is simply keeping `enabled=false` and using v2. After promotion, rollback requires:
+Rollback from the active v3 route requires:
 
 1. stop new v3 manifests;
 2. preserve v3 audits/state;

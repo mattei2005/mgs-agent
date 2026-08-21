@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.33
+version: 1.0.34
 author: Ares
 license: internal
 metadata:
@@ -50,7 +50,7 @@ Não use como dona da configuração do quiz, ChatPion, SMS Funnel, pixel ou Wor
 
 ### Campaign Engine v3
 
-Toda criação/clonagem nova usa o executor central v3. Esta skill define estratégia CBO, evento, naming, UTM, ROI e regras da operação; ela não implementa outro campaign writer. O v2 existe somente como rollback explícito até o canário v3 ser promovido.
+Toda criação/clonagem nova usa o executor central v3. Esta skill define estratégia CBO, evento, naming, UTM, ROI e regras da operação; ela não implementa outro campaign writer. O v3 está ativo como rota de produção sob guards de `development_access`; v2 existe somente como rollback explícito.
 
 Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source, budget, status e horário estão fechados; durante o hot path não existe `Searching`, patch, teste, criação de cron ou releitura global de portfólio.
 

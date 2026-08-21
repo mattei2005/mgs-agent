@@ -12,7 +12,7 @@ from typing import Any, Callable
 
 from .planning import BundlePlan, Planner
 from .prevalidation import verify_prevalidation
-from .quota import LaneQuotaStore
+from .quota import LaneQuotaStore, QuotaBlocked
 from .schema import Manifest
 from .transport import BatchOperation, BatchResult
 
@@ -205,12 +205,28 @@ class CampaignEngine:
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
         transport = self.transport_factory(account)
         checkpoint_path = Path(self.config["state_root"]) / "checkpoints" / f"{_safe_name(request_id)}-{_safe_name(account)}.json"
-        lane_result: dict[str, Any] = {"account_id": account, "status": "IN_PROGRESS", "bundles": [], "campaign_ids": [], "checkpoint_path": str(checkpoint_path)}
+        if checkpoint_path.exists():
+            lane_result = json.loads(checkpoint_path.read_text())
+            if str(lane_result.get("account_id")) != account:
+                raise ExecutionFailed("lane checkpoint account mismatch")
+        else:
+            lane_result = {"account_id": account, "status": "IN_PROGRESS", "bundles": [], "campaign_ids": [], "checkpoint_path": str(checkpoint_path)}
+        lane_result["status"] = "IN_PROGRESS"
+        lane_result.pop("deferred", None)
+        completed_indices = {int(row["index"]) for row in (lane_result.get("bundles") or []) if row.get("status") == "COMPLETE"}
         _atomic_json(checkpoint_path, lane_result)
         for bundle in bundles:
+            if bundle.index in completed_indices:
+                continue
             bundle_request_id = f"{request_id}:{account}:{bundle.index}"
             points = self._points(bundle)
-            quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
+            try:
+                quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
+            except QuotaBlocked as exc:
+                lane_result["status"] = "DEFERRED_QUOTA"
+                lane_result["deferred"] = {"next_bundle_index": bundle.index, **exc.detail}
+                _atomic_json(checkpoint_path, lane_result)
+                return lane_result
             record: dict[str, Any] = {
                 "index": bundle.index,
                 "status": "IN_PROGRESS",
@@ -221,7 +237,7 @@ class CampaignEngine:
                 "intermediate_get_calls": 0,
                 "outer_readback_calls": 1,
             }
-            lane_result["bundles"].append(record)
+            lane_result.setdefault("bundles", []).append(record)
             _atomic_json(checkpoint_path, lane_result)
             try:
                 if bundle.campaigns[0].mode == "pure_clone":
@@ -282,14 +298,19 @@ class CampaignEngine:
                     account = futures[future]
                     lane_results[account] = future.result()
             campaign_ids = [campaign_id for account in sorted(lane_results) for campaign_id in lane_results[account]["campaign_ids"]]
-            status = "COMPLETE_PAUSED" if all(campaign.status == "PAUSED" for campaign in manifest.campaigns) else "COMPLETE_FUTURE_ACTIVE"
+            deferred_accounts = sorted(account for account, value in lane_results.items() if value.get("status") == "DEFERRED_QUOTA")
+            if deferred_accounts:
+                status = "PARTIAL_DEFERRED_QUOTA"
+            else:
+                status = "COMPLETE_PAUSED" if all(campaign.status == "PAUSED" for campaign in manifest.campaigns) else "COMPLETE_FUTURE_ACTIVE"
             metrics = {
                 "lane_count": len(lane_results),
                 "campaign_count": len(campaign_ids),
                 "global_wave_count": plan.global_wave_count,
                 "intermediate_get_calls": 0,
-                "outer_readback_calls": sum(len(result["bundles"]) for result in lane_results.values()),
+                "outer_readback_calls": sum(sum(row.get("status") == "COMPLETE" for row in result["bundles"]) for result in lane_results.values()),
             }
+            retry_after = max((int((lane_results[account].get("deferred") or {}).get("retry_after_seconds") or 0) for account in deferred_accounts), default=0)
             result = {
                 "status": status,
                 "request_id": manifest.request_id,
@@ -297,6 +318,8 @@ class CampaignEngine:
                 "metrics": metrics,
                 "audit_path": str(audit_path),
                 "idempotent_replay": False,
+                "deferred_accounts": deferred_accounts,
+                "retry_after_seconds": retry_after,
             }
             audit.update({"status": status, "finished_at": _utc(), "lanes": lane_results, "result": result})
             _atomic_json(audit_path, audit)

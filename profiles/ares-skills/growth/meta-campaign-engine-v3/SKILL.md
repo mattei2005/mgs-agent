@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.0
+version: 3.0.1
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -54,10 +54,10 @@ Carregue somente a referência do branch atual.
 2. Zero busca ampla, skill discovery, patch, teste ou criação de cron durante execução.
 3. Bundle padrão: duas campanhas da mesma conta.
 4. Lanes independentes por `app_key + ad_account_id`; nunca misturar contas no mesmo bundle.
-5. `clone_prestaged`: seis mídias já `ready` antes do manifest de duas campanhas 1×1×3.
+5. `clone_prestaged`: três mídias `ready` por campanha antes do manifest; o planner divide qualquer pedido de 1–100 campanhas em bundles 2+2+…+1 por conta.
 6. Um outer Graph batch de readback por bundle; zero GET intermediário.
 7. Cap local inicial: soft 100, hard 120; headers vivos da Meta são persistidos por lane.
-8. Todo canário nasce `PAUSED` até autorização específica posterior.
+8. Canário técnico explícito nasce `PAUSED`; pedido normal de produção usa `ACTIVE` com `start_time` futuro após manifest selado e validação dos guards.
 9. `prevalidated=true`, `config.enabled=true`, `write_enabled=true` e `--confirm-execute` são gates independentes.
 10. V2 permanece rollback congelado; nenhum legado é apagado durante a migração inicial.
 
@@ -70,7 +70,7 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py validate --manifest <
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py plan --manifest <manifest>
 ```
 
-A execução real permanece bloqueada enquanto o config estiver disabled. Nunca alterar os gates durante uma conversa operacional de criação; a promoção ocorre em mudança estrutural separada com testes e autorização.
+A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais; o primeiro bundle do primeiro pedido é tratado como canário guardado/fail-closed e os demais seguem a quota da lane.
 
 ## Verification
 

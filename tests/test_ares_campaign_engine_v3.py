@@ -326,6 +326,24 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert 'creative_payload' not in built.campaigns[0].ads[0].creative_payload
 
 
+def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    assets = []
+    for i in range(15):
+        asset_id = f'five-asset-{i}'
+        checksum = f'five-sum-{i}'
+        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'five-v{i}', square_video_id=f'five-s{i}', ready=True)
+        assets.append({'asset_id': asset_id, 'checksum': checksum})
+    payload = build_cpv_manifest(
+        registry=registry, asset_refs=assets, campaign_numbers=[14, 15, 16, 17, 18],
+        operational_date='2026-08-21', request_id='cpv-five', status='ACTIVE',
+    )
+    built = Manifest.from_dict(payload)
+    assert len(built.campaigns) == 5
+    plan = Planner(bundle_size=2, max_ads_per_batch=10).build(built)
+    assert [len(bundle.campaigns) for bundle in plan.lanes['1046241194533786']] == [2, 2, 1]
+
+
 def test_engine_refuses_execute_while_disabled(tmp_path):
     engine = CampaignEngine(config(tmp_path), transport_factory=lambda account: FakeBatchTransport(account))
     with pytest.raises(EngineDisabled):
@@ -431,6 +449,40 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     assert audit['request_id'] == 'order-1'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
+
+
+def test_five_prestaged_campaigns_defer_and_resume_without_replaying_completed_bundles(tmp_path):
+    cfg = config(tmp_path, enabled=True, write_enabled=True)
+    transport = FakeBatchTransport('100')
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    m = manifest([prestaged_campaign(i) for i in range(1, 6)], request_id='five-development')
+    first = engine.execute(m)
+    assert first['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert len(first['campaign_ids']) == 2
+    assert first['deferred_accounts'] == ['100']
+    first_calls = len(transport.calls)
+
+    lane_files = list((Path(cfg['state_root'])).glob('lane-*.json'))
+    assert len(lane_files) == 1
+    lane_state = json.loads(lane_files[0].read_text())
+    lane_state['events'] = []
+    lane_state['reservations'] = {}
+    lane_state['points'] = 0
+    lane_files[0].write_text(json.dumps(lane_state))
+    second = engine.execute(m)
+    assert second['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert len(second['campaign_ids']) == 4
+    assert len(transport.calls) > first_calls
+
+    lane_state = json.loads(lane_files[0].read_text())
+    lane_state['events'] = []
+    lane_state['reservations'] = {}
+    lane_state['points'] = 0
+    lane_files[0].write_text(json.dumps(lane_state))
+    third = engine.execute(m)
+    assert third['status'] == 'COMPLETE_PAUSED'
+    assert len(third['campaign_ids']) == 5
+    assert len(set(third['campaign_ids'])) == 5
 
 
 def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path):

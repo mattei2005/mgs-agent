@@ -25,7 +25,7 @@
   "projected_points_per_bundle": 90,
   "readback": "one_outer_graph_batch_for_campaign_adsets_ads_after_two_campaigns",
   "intermediate_gets": 0,
-  "media_gate": "all_six_assets_ready_in_v3_media_registry_before_manifest",
+  "media_gate": "three ready assets per campaign in v3 media registry before manifest; planner chunks 1-100 campaigns into bundles of two",
   "manifest_gate": "prevalidated=true required for execute",
   "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute from an authorized campaign request",
   "first_production_request": "guarded canary automatically: prevalidated manifest, first bundle monitored, fail closed on any drift",

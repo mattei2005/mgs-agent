@@ -44,17 +44,19 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prestage-upload \
   --vertical-file <file> --square-file <file> --confirm-upload
 ```
 
-The installed config keeps media upload disabled until the pre-stage canary is separately authorized.
+The v3 pre-stage uploader is active but still requires `--confirm-upload`, Page `ADVERTISE`, exact checksum and both Meta videos reaching ready before registry commit. Manual registration requires `--confirm-readback`.
 
-Build CPV manifest only when six media records are ready and the source creative templates are current:
+Build CPV manifests only when every campaign has three ready media records and the source creative templates are current. `--campaign-numbers` accepts 1–100 values; the planner chunks them into bundles of two automatically:
 
 ```text
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py build-cpv \
   --assets-json <six-assets.json> \
   --templates-json /root/mgs-agent/data/ares/meta-ads/engine-v3/templates/cpv-c08-source-templates.json \
   --campaign-numbers 14,15 --operational-date YYYY-MM-DD \
-  --request-id <unique-id> --output <manifest.json>
+  --request-id <unique-id> --status ACTIVE --output <manifest.json>
 ```
+
+Use `--status PAUSED` only for an explicitly requested technical canary; normal production uses `ACTIVE` with the future `start_time` sealed in the manifest.
 
 The builder emits `prevalidated=false`. Promote only through the deterministic prevalidator, which rechecks the media registry and seals a tamper-evident content digest:
 
