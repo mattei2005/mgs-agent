@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "No próximo pedido autorizado: carregar meta-campaign-engine-v3, pre-stage 3 mídias por campanha, materializar/sealar manifest, executar validate/plan e então executor com confirm-execute; observar primeiro bundle fail-closed e continuar/retomar por lane conforme quota.",
-      "objective": "Operar próximas produções CPV exclusivamente pelo Campaign Engine v3 ativo",
-      "source": "Zeus handoff ativo; skill meta-campaign-engine-v3 v3.0.1; engine-v3 config active; CPV-v3 operation active; pytest 96 passed; cron readback v2 paused/frozen",
-      "state": "campaign engine v3 ativo e validado por ares: config enabled=true, write_enabled=true, media_upload_enabled=true, require_prevalidated_manifest=true; tier live development_access. pedidos aceitam 1-100 campanhas; cpv exige 3 mídias ready por campanha; planner divide 2+2+...+1 por lane app+account. quota insuficiente persiste partial_deferred_quota e retoma o mesmo request sem blind replay. produção normal usa active com start_time futuro; paused só para canário técnico explicitamente pedido. primeiro pedido real inclui canário guardado dentro da própria autorização, sem aprovação arquitetural extra. v2 creation/activation recorrentes seguem pausados/frozen rollback. suíte combinada independente 96/96 pass; nenhum meta write neste handoff.",
-      "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T05:10:30+00:00"
+      "next_step": "Antes da execução, reconciliar e reservar 9 linhagens únicas do Drive, confirmar numeração e cap por API Meta, fazer pre-stage/upload/readback vertical+square, registrar mídias ready, materializar e selar manifest de 3 campanhas, validar plan 2+1 e executar somente se todos os gates passarem. Se Rodolfo quiser disparo automático às 17h, materializar previamente uma execução determinística one-shot; não reativar o cron v2.",
+      "objective": "Executar o próximo ciclo CPV pelo Campaign Engine v3 com três clones e criativos novos",
+      "source": "discord:thread:1540228969071116408 Rodolfo; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "state": "rodolfo definiu escopo pontual para 21/08/2026: iniciar o ciclo às 17:00 america/sao_paulo (16:00 america/new_york), clonar 3 campanhas com criativos novos pelo modo clone_prestaged. planejamento esperado 2+1 por uma account lane, 3 anúncios por campanha e 9 linhagens criativas únicas. source/estratégia/budget permanecem sujeitos ao preflight live e à herança exata do clone; nenhuma execução automática está armada neste checkpoint. o cron v2 das 17h está pausado e o v3 não possui cron recorrente. media registry atual vazio.",
+      "thread_id": "1540228969071116408",
+      "updated_at": "2026-08-21T06:13:13+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:12:30+00:00"
+  "updated_at": "2026-08-21T06:13:13+00:00"
 }
