@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar até 24h para a Meta ativar Solicitar acesso avançado nas três permissões; Rodolfo poderá então iniciar a solicitação. Antes de qualquer canário C12, revalidar tier vivo, manifest, quota plan e status sequencial; não reativar crons nem executar produção sem autorização.",
-      "objective": "Operar rota v2 de clone diário CPV com quota guard, reconciliação separada e acesso Meta aplicável",
-      "source": "discord:thread:1540137110789562408; audit meta-app-permission-test-calls-20260821.json; operation config v1.0.42; Graph v26 live readbacks",
-      "state": "token cpv g006 validado saudável. em 20/08/2026 às 20:52 et, ares executou chamadas de teste graph v26 bem-sucedidas para as três permissões que ainda estavam standard: ads_read get ad_account/campaigns http200; ads_management post campaign validate_only http200 success=true sem id/objeto; pages_manage_ads get page/ads_posts http200 usando page access token resolvido internamente. zero objeto criado, zero write aplicado, nenhuma credencial exposta. meta informa que o botão solicitar acesso avançado pode levar até 24h após a primeira chamada bem-sucedida para ativar. tier vivo continua development_access/limited até aprovação efetiva. criação e ativação seguem pausadas; nenhuma produção autorizada.",
+      "next_step": "Concluir C12 PAUSED e readback; persistir C13 deferred; depois executar C13 na janela seguinte, validar ambas e agendar ativação pontual 00:30.",
+      "objective": "Executar ciclo autorizado C12/C13 clonadas para ativação às 00:30",
+      "source": "discord:thread:1540137110789562408 confirmation; live dry-run daily-create-2026-08-20-20260821T020351Z.json; reconciliation manifest valid until 03:30 SP",
+      "state": "rodolfo confirmou explicitamente às 23:08 são paulo: executar c12 e c13 paused em duas janelas controladas e ativar ambas às 00:30. iniciando c12 pela rota v2 com clone raso c08 maxvol, três criativos reconciliados, quota guard e readback 1x1x3. c13 seguirá após janela mínima de 300s. crons recorrentes permanecem pausados; ativação será pontual.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T00:53:22+00:00"
+      "updated_at": "2026-08-21T02:08:27+00:00"
     },
     {
       "agent": "ares",
@@ -932,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T02:04:12+00:00"
+  "updated_at": "2026-08-21T02:08:27+00:00"
 }
