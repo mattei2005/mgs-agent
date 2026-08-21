@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Migrar deterministicamente o schedule 17h para um runner v3 completo (seleção/reconciliação Drive, pre-stage/media registry, manifest/prevalidation, execute/readback, inventory/stock), testar offline e só então habilitar o job; não reativar o wrapper v2.",
-      "objective": "Operar o Ares Campaign Engine v3 como rota ativa de produção, preservando v2 como rollback.",
-      "source": "discord:1540242048760807465; cron:/root/.hermes/profiles/ares/cron/jobs.json job 2cf8115a4f8b; v3 config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
-      "state": "v3 ativo e validado, mas auditoria live do scheduler encontrou gap material: job ares 2cf8115a4f8b “criacao diaria 17h” está enabled=false/state=paused e ainda aponta para `creditoparaveiculo-daily-create.sh` v2. não existe job v3 recorrente no cron live. portanto o próximo 17:00 não criará campanhas automaticamente, apesar do engine v3 estar ativo para pedidos manuais/autorizados. correções 1/3–3/3 do handoff concluídas por ares; config v3 continua active.",
+      "next_step": "Aguardar execução às 17:00 São Paulo. Após o ciclo, analisar observability por meta_preflight/drive/reconciliation/asset/prestage/manifest/engine/postprocess, status C14/C15, quota e stock; P1 possível: reduzir full reconciliation e paralelizar prestage conforme medição real.",
+      "objective": "Operar o Ares Campaign Engine v3 como rota ativa, inclusive schedule diário 17h, preservando v2 como rollback.",
+      "source": "discord:1540243886188924988; runner:/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; cron:/root/.hermes/profiles/ares/cron/jobs.json#2cf8115a4f8b; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md",
+      "state": "cutover scheduler concluído por zeus+ares, autorizado rodolfo 1540243886188924988. job 2cf8115a4f8b active/scheduled/no-agent/deliver local agora aponta creditoparaveiculo-v3-daily-create.sh; wrapper gate17 sp e resume hourly. runner v3 próprio daily_cpv.py não importa/executa writer v2. live dry-run read-only: desired3→selected2 c14/c15 por cap usd213→273, seis assets reconciliados, stock257, zero reservation/upload/write/move. guards: campaign exact-name collision; media title checksum; resumable side-effect states; token cache-first; budget pending-only; drive move idempotent; audit phase observability. 132 testes pass; offline smoke 2→deferred→3; wrapper silent outside gate; cron cli readback active. v2 wrapper/runner frozen; recurring v2 activation paused. nenhum meta write/upload/budget/credential/restart durante cutover.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T06:14:03+00:00"
+      "updated_at": "2026-08-21T07:10:56+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T07:04:11+00:00"
+  "updated_at": "2026-08-21T07:10:56+00:00"
 }

@@ -41,7 +41,9 @@ Authorization: Rodolfo message `1540202751387246664`
 - Installed production gates: engine enabled, write enabled and media upload enabled under `development_access` guards.
 - Five-campaign active-mode offline E2E: planner produced 2+2+1; development quota deferred/resumed 2→4→5 without replay; final status `COMPLETE_FUTURE_ACTIVE`.
 - V2 runner and Meta common helper hashes unchanged from pre-v3 backup.
-- V2 creation/activation crons remain paused and are explicitly classified as rollback/frozen.
+- V2 wrapper/runner remain frozen rollback artifacts and the recurring v2 activation job remains paused; the recurring 17:00 creation job ID was migrated in place to the v3 wrapper after independent acceptance.
+- Live scheduler readback: job `2cf8115a4f8b` active, script `creditoparaveiculo-v3-daily-create.sh`, hourly scheduler with São Paulo 17:00 gate and resumable continuation.
+- Live read-only daily plan: desired 3 reduced by budget cap to C14/C15, projected active budget USD 273, six reconciled assets, zero inventory reservation/upload/campaign write/Drive move.
 
 ## No production side effects
 
