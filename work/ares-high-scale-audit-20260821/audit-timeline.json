@@ -1,0 +1,499 @@
+[
+  {
+    "file": "daily-create-2026-08-20-20260820T210618Z.json",
+    "created": "2026-08-20T21:06:18.056126+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "dry_run_complete",
+    "slots": [
+      50,
+      49
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T210712Z.json",
+    "created": "2026-08-20T21:07:12.096685+00:00",
+    "updated": "2026-08-20T21:13:23.382169+00:00",
+    "elapsed_s": 371.285484,
+    "mode": "CONTROLLED_WRITE_DAILY_DRIVE_MAXVOL",
+    "stage": "failed_clean",
+    "slots": [
+      50,
+      49
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 6,
+    "video_ids": 12,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": "c50_final_readback",
+    "cleanup": true,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T232034Z.json",
+    "created": "2026-08-20T23:20:34.990299+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "dry_run_complete",
+    "slots": [
+      12,
+      13
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T232142Z.json",
+    "created": "2026-08-20T23:21:42.925435+00:00",
+    "updated": "2026-08-20T23:32:03.509660+00:00",
+    "elapsed_s": 620.584225,
+    "mode": "CONTROLLED_WRITE_DAILY_DRIVE_MAXVOL",
+    "stage": "aborted_wrong_mode_clean",
+    "slots": [
+      12,
+      13
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 6,
+    "video_ids": 24,
+    "assignments": 6,
+    "video_poll_attempts": 1,
+    "failure": null,
+    "cleanup": true,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T233717Z.json",
+    "created": "2026-08-20T23:37:17.792372+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "initializing",
+    "slots": null,
+    "desired": null,
+    "remaining": null,
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T233816Z.json",
+    "created": "2026-08-20T23:38:16.958811+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "dry_run_complete",
+    "slots": [
+      12,
+      13
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260820T233929Z.json",
+    "created": "2026-08-20T23:39:29.625564+00:00",
+    "updated": "2026-08-20T23:43:27.354327+00:00",
+    "elapsed_s": 237.728763,
+    "mode": "CONTROLLED_WRITE_DAILY_C08_CLONE_WITH_DRIVE_CREATIVES",
+    "stage": "failed_clean",
+    "slots": [
+      12,
+      13
+    ],
+    "desired": null,
+    "remaining": null,
+    "assets": 6,
+    "video_ids": 12,
+    "assignments": 0,
+    "video_poll_attempts": 1,
+    "failure": "c12_clone_shell_readback",
+    "cleanup": true,
+    "writer_global": null,
+    "quota": {}
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T003059Z.json",
+    "created": "2026-08-21T00:30:59.715017+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "dry_run_complete",
+    "slots": [
+      12
+    ],
+    "desired": [
+      12,
+      13
+    ],
+    "remaining": [
+      13
+    ],
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": 0,
+    "quota": {
+      "2": {
+        "allowed": false,
+        "reason": "projected_score_exceeds_available",
+        "tier": "development_access",
+        "header_present": false,
+        "measurement_source": "local_rolling_ledger",
+        "maximum_score": 60,
+        "estimated_used_score": 5,
+        "estimated_available_score": 55,
+        "projected_score": 95,
+        "read_calls": 12,
+        "write_calls": 26,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      },
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": false,
+        "measurement_source": "local_rolling_ledger",
+        "maximum_score": 60,
+        "estimated_used_score": 5,
+        "estimated_available_score": 55,
+        "projected_score": 50,
+        "read_calls": 6,
+        "write_calls": 13,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T020351Z.json",
+    "created": "2026-08-21T02:03:51.980967+00:00",
+    "updated": null,
+    "elapsed_s": null,
+    "mode": "DRY_RUN",
+    "stage": "dry_run_complete",
+    "slots": [
+      12
+    ],
+    "desired": [
+      12,
+      13
+    ],
+    "remaining": [
+      13
+    ],
+    "assets": 0,
+    "video_ids": 0,
+    "assignments": 0,
+    "video_poll_attempts": 0,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": 0,
+    "quota": {
+      "2": {
+        "allowed": false,
+        "reason": "projected_score_exceeds_available",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 89,
+        "read_calls": 12,
+        "write_calls": 24,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      },
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 47,
+        "read_calls": 6,
+        "write_calls": 12,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T020837Z.json",
+    "created": "2026-08-21T02:08:37.010331+00:00",
+    "updated": "2026-08-21T02:11:19.687135+00:00",
+    "elapsed_s": 162.676804,
+    "mode": "CONTROLLED_WRITE_DAILY_C08_CLONE_WITH_DRIVE_CREATIVES",
+    "stage": "failed_clean",
+    "slots": [
+      12
+    ],
+    "desired": [
+      12,
+      13
+    ],
+    "remaining": [
+      13
+    ],
+    "assets": 3,
+    "video_ids": 6,
+    "assignments": 3,
+    "video_poll_attempts": 2,
+    "failure": "final_validation",
+    "cleanup": true,
+    "writer_global": 0,
+    "quota": {
+      "2": {
+        "allowed": false,
+        "reason": "projected_score_exceeds_available",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 89,
+        "read_calls": 12,
+        "write_calls": 24,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      },
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 47,
+        "read_calls": 6,
+        "write_calls": 12,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T021721Z.json",
+    "created": "2026-08-21T02:17:21.655815+00:00",
+    "updated": "2026-08-21T02:19:42.813239+00:00",
+    "elapsed_s": 141.157424,
+    "mode": "CONTROLLED_WRITE_DAILY_C08_CLONE_WITH_DRIVE_CREATIVES",
+    "stage": "failed_clean",
+    "slots": [
+      12
+    ],
+    "desired": [
+      12,
+      13
+    ],
+    "remaining": [
+      13
+    ],
+    "assets": 3,
+    "video_ids": 6,
+    "assignments": 2,
+    "video_poll_attempts": 1,
+    "failure": "c12_ad_3_validate",
+    "cleanup": true,
+    "writer_global": 0,
+    "quota": {
+      "2": {
+        "allowed": false,
+        "reason": "projected_score_exceeds_available",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 89,
+        "read_calls": 12,
+        "write_calls": 24,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      },
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 47,
+        "read_calls": 6,
+        "write_calls": 12,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T022441Z.json",
+    "created": "2026-08-21T02:24:41.614312+00:00",
+    "updated": "2026-08-21T02:26:37.216691+00:00",
+    "elapsed_s": 115.602379,
+    "mode": "CONTROLLED_WRITE_DAILY_C08_CLONE_WITH_DRIVE_CREATIVES",
+    "stage": "complete_partial_quota",
+    "slots": [
+      12
+    ],
+    "desired": [
+      12,
+      13
+    ],
+    "remaining": [
+      13
+    ],
+    "assets": 3,
+    "video_ids": 6,
+    "assignments": 3,
+    "video_poll_attempts": 1,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": 0,
+    "quota": {
+      "2": {
+        "allowed": false,
+        "reason": "projected_score_exceeds_available",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 89,
+        "read_calls": 12,
+        "write_calls": 24,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      },
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 47,
+        "read_calls": 6,
+        "write_calls": 12,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  },
+  {
+    "file": "daily-create-2026-08-20-20260821T023155Z.json",
+    "created": "2026-08-21T02:31:55.535176+00:00",
+    "updated": "2026-08-21T02:33:58.710060+00:00",
+    "elapsed_s": 123.174884,
+    "mode": "CONTROLLED_WRITE_DAILY_C08_CLONE_WITH_DRIVE_CREATIVES",
+    "stage": "complete",
+    "slots": [
+      13
+    ],
+    "desired": [
+      13
+    ],
+    "remaining": [],
+    "assets": 3,
+    "video_ids": 6,
+    "assignments": 3,
+    "video_poll_attempts": 1,
+    "failure": null,
+    "cleanup": null,
+    "writer_global": 0,
+    "quota": {
+      "1": {
+        "allowed": true,
+        "reason": "within_budget",
+        "tier": "development_access",
+        "header_present": true,
+        "measurement_source": "x_ad_account_usage",
+        "maximum_score": 60,
+        "estimated_used_score": 0,
+        "estimated_available_score": 60,
+        "projected_score": 47,
+        "read_calls": 6,
+        "write_calls": 12,
+        "reserve_points": 5,
+        "acc_id_util_pct": 0.0,
+        "local_score_ready": true,
+        "local_score_warmup_remaining_seconds": 0
+      }
+    }
+  }
+]
