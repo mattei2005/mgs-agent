@@ -1,0 +1,64 @@
+{
+  "engine_version": 3,
+  "status": "installed_disabled_pending_canary",
+  "enabled": false,
+  "write_enabled": false,
+  "require_prevalidated_manifest": true,
+  "graph_version": "v26.0",
+  "bundle_size": 2,
+  "max_ads_per_batch": 10,
+  "max_account_workers": 8,
+  "soft_score": 100,
+  "hard_score": 120,
+  "score_window_seconds": 300,
+  "points_per_mode": {
+    "pure_clone": 20,
+    "clone_prestaged": 45
+  },
+  "quota_scope": "app_key_plus_ad_account_id",
+  "readback_policy": "one_outer_graph_batch_per_two_campaigns",
+  "intermediate_get_calls": 0,
+  "media_policy": "prestage_before_campaign_manifest",
+  "appsecret_proof": {
+    "required": false,
+    "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"
+  },
+  "state_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state",
+  "audit_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit",
+  "media_registry": "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json",
+  "accounts": {
+    "1046241194533786": {
+      "app_key": "mgs-meta-app-current",
+      "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_type": "user_access_token",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  "rollback": {
+    "engine": "v2",
+    "runner": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+    "backup": "/root/mgs-agent/backups/ares-campaign-engine-v3-20260821T033736Z",
+    "deletion_performed": false
+  },
+  "official_meta_sources": [
+    "https://developers.facebook.com/ads/blog/post/v2/2018/07/02/marketing-api-tier-simplification/",
+    "https://developers.facebook.com/docs/app-review/",
+    "https://developers.facebook.com/docs/development/release/business-verification/",
+    "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
+    "https://developers.facebook.com/docs/facebook-login/guides/access-tokens/",
+    "https://developers.facebook.com/docs/features-reference/",
+    "https://developers.facebook.com/docs/features-reference#marketing-api-access-tier",
+    "https://developers.facebook.com/docs/graph-api/batch-requests",
+    "https://developers.facebook.com/docs/graph-api/guides/secure-requests/",
+    "https://developers.facebook.com/docs/marketing-api/access/",
+    "https://developers.facebook.com/docs/marketing-api/asyncrequests",
+    "https://developers.facebook.com/docs/marketing-api/guides/videoads",
+    "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
+    "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
+    "https://developers.facebook.com/docs/permissions/"
+  ]
+}

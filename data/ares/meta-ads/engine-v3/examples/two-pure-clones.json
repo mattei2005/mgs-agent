@@ -1,0 +1,30 @@
+{
+  "schema_version": 3,
+  "request_id": "example-two-pure-clones",
+  "operation": "example-disabled-no-production",
+  "graph_version": "v26.0",
+  "created_at": "2026-08-21T03:40:00+00:00",
+  "prevalidated": false,
+  "campaigns": [
+    {
+      "idempotency_key": "example-account-1-campaign-1",
+      "app_key": "example-app",
+      "account_id": "111111111111111",
+      "mode": "pure_clone",
+      "source_campaign_id": "222222222222222",
+      "name": "Example Clone 1",
+      "start_time": "2099-01-01T00:30:00-03:00",
+      "status": "PAUSED"
+    },
+    {
+      "idempotency_key": "example-account-1-campaign-2",
+      "app_key": "example-app",
+      "account_id": "111111111111111",
+      "mode": "pure_clone",
+      "source_campaign_id": "222222222222222",
+      "name": "Example Clone 2",
+      "start_time": "2099-01-01T00:30:00-03:00",
+      "status": "PAUSED"
+    }
+  ]
+}

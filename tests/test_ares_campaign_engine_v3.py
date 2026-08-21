@@ -220,13 +220,16 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         assets.append({'asset_id': asset_id, 'checksum': checksum})
     templates = [
         {
-            'object_story_spec': {'page_id': '621037101089579'},
-            'asset_feed_spec': {
-                'videos': [],
-                'link_urls': [{'website_url': 'https://example.test/?utm_campaign=b01fb13c08&utm_adgroup=b01fb13c08g01'}],
+            'source_ad_id': f'source-ad-{i}',
+            'creative_payload': {
+                'object_story_spec': {'page_id': '621037101089579'},
+                'asset_feed_spec': {
+                    'videos': [],
+                    'link_urls': [{'website_url': 'https://example.test/?utm_campaign=b01fb13c08&utm_adgroup=b01fb13c08g01'}],
+                },
             },
         }
-        for _ in range(3)
+        for i in range(3)
     ]
     payload = build_cpv_manifest(
         registry=registry,
@@ -245,6 +248,8 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert 'b01fb13c14' in json.dumps(built.campaigns[0].ads[0].creative_payload)
     assert 'b01fb13c15' in json.dumps(built.campaigns[1].ads[0].creative_payload)
     assert 'b01fb13c08' not in json.dumps(payload)
+    assert 'source_ad_id' not in built.campaigns[0].ads[0].creative_payload
+    assert 'creative_payload' not in built.campaigns[0].ads[0].creative_payload
 
 
 def test_engine_refuses_execute_while_disabled(tmp_path):

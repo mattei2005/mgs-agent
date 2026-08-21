@@ -16,6 +16,16 @@ CPV_PAGE_ID = "621037101089579"
 SP = ZoneInfo("America/Sao_Paulo")
 
 
+def _replace_cpv_utm(value: Any, number: int) -> Any:
+    if isinstance(value, str):
+        return re.sub(r"b01fb13c08", f"b01fb13c{number:02d}", value)
+    if isinstance(value, list):
+        return [_replace_cpv_utm(item, number) for item in value]
+    if isinstance(value, dict):
+        return {key: _replace_cpv_utm(item, number) for key, item in value.items()}
+    return value
+
+
 def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, str]], campaign_numbers: list[int], operational_date: str, request_id: str, creative_templates: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     if len(campaign_numbers) != 2:
         raise ValueError("CPV v3 requires two campaign numbers per bundle")
@@ -35,7 +45,9 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
         for ad_index in range(3):
             ref = asset_refs[campaign_index * 3 + ad_index]
             ready = registry.require_ready(CPV_ACCOUNT_ID, ref["asset_id"], ref["checksum"])
-            template = dict(templates[ad_index])
+            source_template = templates[ad_index]
+            payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
+            template = _replace_cpv_utm(copy.deepcopy(payload_template if isinstance(payload_template, dict) else source_template), number)
             asset_feed = dict(template.get("asset_feed_spec") or {})
             asset_feed["videos"] = [{"video_id": ready["vertical_video_id"]}, {"video_id": ready["square_video_id"]}]
             template["asset_feed_spec"] = asset_feed
