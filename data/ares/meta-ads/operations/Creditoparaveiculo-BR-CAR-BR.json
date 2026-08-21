@@ -157,7 +157,7 @@
     "stock_reporting_required": true,
     "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
-    "production_readback": "prepare campaign PAUSED with adset/ads ACTIVE and validate exact strategy, UTMs, budget and hierarchy; at 00:30 next day a separate campaign-level activation runner rechecks cap/holds/hierarchy, sets only campaigns ACTIVE and validates by GET"
+    "production_readback": "historical v2: prepare PAUSED and activate later; superseded for every new manifest by Campaign Engine v3 native future scheduling after the separate v3 canary gate. While v3 remains disabled, no v3 production write is permitted"
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
@@ -826,7 +826,28 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.43",
+  "campaign_engine_v3": {
+    "version": "3.0.0",
+    "status": "installed_disabled_pending_prestage_and_canary",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_message_id": "1540202751387246664",
+    "config": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+    "operation_contract": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+    "runner": "/root/mgs-agent/scripts/ares-campaign-engine-v3.py",
+    "skill": "meta-campaign-engine-v3",
+    "bundle_size": 2,
+    "lane_scope": "app_key_plus_ad_account_id",
+    "soft_score": 100,
+    "hard_score": 120,
+    "media_policy": "prestage_before_manifest",
+    "readback_policy": "one_outer_graph_batch_per_two_campaigns",
+    "intermediate_get_calls": 0,
+    "write_enabled": false,
+    "v2_rollback_preserved": true,
+    "legacy_deletion_performed": false,
+    "real_meta_canary_requires_separate_authorization": true
+  },
+  "playbook_version": "1.0.44",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

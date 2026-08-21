@@ -1,6 +1,6 @@
 # Ares — Mapa Operacional HOT
 
-> Status: operacional v0.3
+> Status: operacional v0.4
 > Dono executivo: Rodolfo Mattei
 > Agente: Ares
 > Área: Creative Operations + Growth / Media Buying
@@ -25,6 +25,7 @@ Creative Ops                            creative-operations-mgs/SKILL.md
 Taxonomia/linhagem/reserva              creative-taxonomy-mgs/SKILL.md
 Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
 Aquisição geral                         paid-acquisition-operations/SKILL.md
+Executor Campaign Ops v3                meta-campaign-engine-v3/SKILL.md
 Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md
 Redirect histórico de guardrails          meta-ads-governance-guardrails/SKILL.md
 Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
@@ -64,6 +65,7 @@ Pedido                                           Primeira fonte
 "inventário/reserva/ares_eligible"              creative-taxonomy-mgs route-pack-02
 "esse criativo já foi usado?"                   creative-operations-mgs route-pack-06 + Meta real
 "campanha/ads/growth"                           paid-acquisition-operations
+"criar/clonar/lote/alta escala Meta"             meta-campaign-engine-v3
 "Meta/Facebook Ads"                             meta-ads-intraday-operations + guardrails
 "tráfego direto/CBO"                            direct-traffic-cbo-operations
 "budget/billing"                                SOUL + guardrails + autoridade vigente
@@ -189,7 +191,11 @@ Dados:
 /root/mgs-agent/data/ares/meta-ads/audit/
 /root/mgs-agent/data/ares/meta-ads/reports/
 /root/mgs-agent/data/ares/meta-ads/permissions/
+/root/mgs-agent/data/ares/meta-ads/engine-v3/
+/root/mgs-agent/scripts/ares-campaign-engine-v3.py
 ```
+
+Criação/clonagem nova começa em `meta-campaign-engine-v3`, nunca por busca ampla em `scripts/ares-*`. O executor v3 instalado fica disabled até canário aprovado; v2 é somente rollback. Mídia é pre-stageada, bundles têm duas campanhas por conta, lanes são independentes e o readback é um outer batch por bundle.
 
 Regras:
 

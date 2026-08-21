@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.0.0
+version: 1.1.0
 author: Ares
 license: internal
 metadata:
@@ -25,10 +25,13 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
+- **Criar/clonar campanhas Meta, lotes e alta escala** → `meta-campaign-engine-v3/SKILL.md`
 - **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
 - **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
 - **Precedentes históricos de `UPLOAD_CANVAS` + Meta Ads intraday** → `references/route-pack-03.md`
 - **Regras de decisão de campanha → Referências** → `references/route-pack-04.md`
+
+Campaign Engine v3 é o único executor novo. `paid-acquisition-operations` continua dona do processo/guardrails gerais e não deve criar um runner alternativo por thread ou operação.
 
 ## Context-efficiency guardrails
 

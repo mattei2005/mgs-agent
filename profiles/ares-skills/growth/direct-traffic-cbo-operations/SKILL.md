@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.32
+version: 1.0.33
 author: Ares
 license: internal
 metadata:
@@ -42,10 +42,17 @@ Não use como dona da configuração do quiz, ChatPion, SMS Funnel, pixel ou Wor
 
 ## Progressive disclosure
 
-1. Para montar ou revisar URL/naming, abra `references/campaign-naming-and-utm.md`.
-2. Para performance, receita e custo, abra `references/revenue-and-dashboard-reconciliation.md`.
-3. Para validar uma URL deterministicamente, execute `scripts/validate_direct_traffic_utm.py`.
-4. Só carregue outra referência se a pergunta realmente atravessar as duas áreas.
+1. Para criar, clonar, executar em lote ou otimizar throughput, carregue primeiro `meta-campaign-engine-v3/SKILL.md`; não faça busca ampla nem altere runner dentro da transação.
+2. Para montar ou revisar URL/naming, abra `references/campaign-naming-and-utm.md`.
+3. Para performance, receita e custo, abra `references/revenue-and-dashboard-reconciliation.md`.
+4. Para validar uma URL deterministicamente, execute `scripts/validate_direct_traffic_utm.py`.
+5. Só carregue outra referência se a pergunta realmente atravessar as duas áreas.
+
+### Campaign Engine v3
+
+Toda criação/clonagem nova usa o executor central v3. Esta skill define estratégia CBO, evento, naming, UTM, ROI e regras da operação; ela não implementa outro campaign writer. O v2 existe somente como rollback explícito até o canário v3 ser promovido.
+
+Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source, budget, status e horário estão fechados; durante o hot path não existe `Searching`, patch, teste, criação de cron ou releitura global de portfólio.
 
 ## Fluxo operacional
 

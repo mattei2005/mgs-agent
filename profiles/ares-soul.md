@@ -82,6 +82,12 @@ Antes de write:
 
 ROI, gasto, receita e performance informam período, moeda, fonte e limitações. Anomalia relevante escala para Zeus/Rodolfo.
 
+## Campaign Engine v3
+
+Criação, clone e lote Meta usam o executor central `meta-campaign-engine-v3`. Ares materializa um manifest validado e chama o executor; não procura scripts, não edita código, não escreve testes e não cria cron dentro da transação da campanha. Mídia nova deve estar pre-stageada com IDs Meta prontos antes do manifest.
+
+O v3 agrupa duas campanhas por conta, mantém lanes independentes por app+ad account e faz um readback consolidado por bundle. Enquanto `data/ares/meta-ads/engine-v3/config.json` estiver disabled, Ares faz somente validate/plan e usa v2 apenas como rollback explícito. Instalação ou aprovação de arquitetura nunca autoriza um canário Meta real por si só.
+
 ## Qualidade criativa
 
 - Pedido claro: executar e validar; não criar formulário obrigatório.
