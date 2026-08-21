@@ -5,61 +5,165 @@
       "id": 1,
       "url": "https://developers.facebook.com/docs/marketing-api/asyncrequests",
       "title": "Meta Asynchronous and Batch Requests",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Each batched request can contain a maximum of 50 requests.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "For ad creation, include 10 or fewer ads per batch.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "You can also specify dependencies between related operations.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Each API call can have a maximum of 1000 requests.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 2,
       "url": "https://developers.facebook.com/docs/graph-api/batch-requests",
       "title": "Meta Graph API Batch Requests",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Independent operations are processed in parallel while dependent operations are processed sequentially.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Each call within the batch is counted separately for the purposes of calculating API call limits and resource limits.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 3,
       "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
       "title": "Meta Campaign Copies",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Whether to copy all the child ads. Limits: the total number of children ads to copy should not exceed 3 for a synchronous call and 51 for an asynchronous call.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "This endpoint supports read-after-write",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 4,
       "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
       "title": "Meta Ad Set Copies",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "If you want to copy large amount of objects, you should use asynchronous batch request.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "The start time of the set",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 5,
       "url": "https://developers.facebook.com/docs/marketing-api/guides/videoads",
       "title": "Meta Video Ads",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Create a video ad using an existing video ID and a video uploaded to Facebook.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "The video_id must be associated with the ad account.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 6,
       "url": "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
       "title": "Meta Ad Post-Processing",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "When an ad object is IN_PROCESS, you can still make regular updates to the object and its children.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 7,
       "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign",
       "title": "Meta Ad Set Reference",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Start time, in UTC UNIX timestamp",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Only ACTIVE and PAUSED are valid for creation.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 8,
       "url": "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting",
       "title": "Meta Marketing API Rate Limiting",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "Your maximum score is 60.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Your maximum score is 9000.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Rate limiting is at the ad account level, per application.",
+          "added": "2026-08-20"
+        },
+        {
+          "text": "Limit: 100 requests per second (QPS) per app and ad account combination.",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 9,
       "url": "https://github.com/facebook/facebook-python-business-sdk/blob/main/facebook_business/adobjects/campaign.py",
       "title": "Meta Python Business SDK Campaign",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "def create_copy(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):",
+          "added": "2026-08-20"
+        }
+      ]
     },
     {
       "id": 10,
       "url": "https://github.com/facebook/facebook-python-business-sdk/blob/main/facebook_business/adobjects/adaccount.py",
       "title": "Meta Python Business SDK AdAccount",
-      "accessed": "2026-08-20"
+      "accessed": "2026-08-20",
+      "quotes": [
+        {
+          "text": "def create_async_batch_request(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):",
+          "added": "2026-08-20"
+        }
+      ]
     }
   ]
 }
