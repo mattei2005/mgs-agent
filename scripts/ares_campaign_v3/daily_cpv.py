@@ -228,6 +228,15 @@ def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: d
     return {"active_before_minor": before, "new_minor": count * initial_minor, "projected_minor": after, "cap_minor": cap_minor}
 
 
+def validate_engine_config(config: dict[str, Any]) -> None:
+    required_true = ["enabled", "write_enabled", "media_upload_enabled", "require_prevalidated_manifest"]
+    missing = [key for key in required_true if config.get(key) is not True]
+    if missing:
+        raise DailyBlocked("engine_config", "required v3 gates are not active", {"missing_true": missing})
+    if int(config.get("engine_version") or 0) != 3 or str(config.get("graph_version") or "") != GRAPH_VERSION or int(config.get("bundle_size") or 0) != 2:
+        raise DailyBlocked("engine_config", "v3 engine identity, Graph version or bundle size drifted")
+
+
 def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -> list[dict[str, Any]]:
     candidates = [
         row
@@ -256,6 +265,41 @@ def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -
     if len(selected) != count:
         raise DailyBlocked("asset_selection", "insufficient unique eligible assets", {"required": count, "available_unique": len(selected)})
     return selected
+
+
+def normalize_title(value: str | None) -> str:
+    text = re.sub(r"[^a-z0-9]+", " ", str(value or "").lower())
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def source_sequence(value: str | None) -> str | None:
+    matches = re.findall(r"(?:^|[_\s-])(\d{3})(?:\s*-|[_\s])", str(value or ""))
+    return matches[-1] if matches else None
+
+
+def reconciliation_conflicts(candidates: list[dict[str, Any]], ads: list[dict[str, Any]], videos: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    haystacks = []
+    for ad in ads:
+        creative = ad.get("creative") or {}
+        haystacks.append({
+            "kind": "ad",
+            "id": str(ad.get("id") or ""),
+            "text": normalize_title(" ".join([str(ad.get("name") or ""), str(creative.get("name") or ""), str((ad.get("campaign") or {}).get("name") or "")])),
+        })
+    for video in videos:
+        haystacks.append({"kind": "video", "id": str(video.get("video_id") or ""), "text": normalize_title(video.get("title"))})
+    conflicts = []
+    for row in candidates:
+        canonical = normalize_title(Path(str(row.get("canonical_filename") or "")).stem)
+        original = normalize_title(Path(str(row.get("original_filename") or "")).stem)
+        sequence = source_sequence(row.get("original_filename"))
+        for haystack in haystacks:
+            text = haystack["text"]
+            exact = bool(canonical and canonical in text) or bool(original and len(original) >= 12 and original in text)
+            sequence_match = bool(sequence and re.search(rf"(?:^|\s){re.escape(sequence)}(?:\s|$)", text))
+            if exact or sequence_match:
+                conflicts.append({"asset_id": row.get("asset_id"), "match_kind": haystack["kind"], "match_id": haystack["id"], "exact_name": exact, "source_sequence": sequence if sequence_match else None})
+    return conflicts
 
 
 def verify_reconciliation(path: Path, selected: list[dict[str, Any]], now: datetime) -> dict[str, Any]:
@@ -582,6 +626,78 @@ class LiveDailyBackend:
         inventory = drive_inventory(self.drive_token)
         return {"service_account": service_account["client_email"], "project_id": service_account["project_id"], "drive": inventory}
 
+    def refresh_reconciliation(self, inventory: list[dict[str, Any]], drive: dict[str, Any], now: datetime) -> dict[str, Any]:
+        if not self.token or not self.page_token:
+            raise DailyBlocked("reconciliation", "Meta/Page token not initialized")
+        ready_ids = {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"}
+        candidates = [
+            row for row in inventory
+            if row.get("vertical") == "CAR"
+            and row.get("country") == "BR"
+            and row.get("language") == "BR"
+            and row.get("format") == "VID"
+            and row.get("status") == "01_READY"
+            and row.get("metadata_clean") is True
+            and row.get("ares_eligible") is True
+            and not row.get("used_by")
+            and str(row.get("asset_drive_id") or "") in ready_ids
+        ]
+        fields = "id,name,status,effective_status,configured_status,campaign{id,name,status,effective_status},creative{id,name,asset_feed_spec,object_story_spec}"
+        ads_by_id: dict[str, dict[str, Any]] = {}
+        for status_filter in (None, ["ARCHIVED"]):
+            params: dict[str, Any] = {"fields": fields, "limit": 500}
+            if status_filter:
+                params["effective_status"] = status_filter
+            for row in self._graph_pages(f"{ACCOUNT_ACT}/ads", params):
+                ads_by_id[str(row.get("id") or "")] = row
+        ads = list(ads_by_id.values())
+        video_ids = sorted({
+            str(video.get("video_id"))
+            for ad in ads
+            for video in (((ad.get("creative") or {}).get("asset_feed_spec") or {}).get("videos") or [])
+            if video.get("video_id")
+        })
+        videos = []
+        for start in range(0, len(video_ids), 50):
+            requests_ = [{"name": video_id, "path": video_id, "params": {"fields": "id,title,length,status"}} for video_id in video_ids[start:start + 50]]
+            status, rows, _ = self.common.graph_batch_get(self.page_token, requests_)
+            if status != 200 or not isinstance(rows, list):
+                raise DailyBlocked("reconciliation", "Meta video reconciliation batch failed", {"http": status})
+            for row in rows:
+                body = row.get("body") or {}
+                if int(row.get("code") or 0) == 200:
+                    videos.append({"video_id": str(row.get("name") or ""), "title": body.get("title")})
+        conflicts = reconciliation_conflicts(candidates, ads, videos)
+        conflicts_by_asset: dict[str, list[dict[str, Any]]] = {}
+        for conflict in conflicts:
+            conflicts_by_asset.setdefault(str(conflict.get("asset_id") or ""), []).append(conflict)
+        assets = [
+            {
+                "asset_id": row.get("asset_id"),
+                "canonical_filename": row.get("canonical_filename"),
+                "asset_drive_id": row.get("asset_drive_id"),
+                "clean_checksum": row.get("clean_checksum"),
+                "perceptual_fingerprint": row.get("perceptual_fingerprint"),
+                "approved": not conflicts_by_asset.get(str(row.get("asset_id") or "")),
+                "meta_conflicts": conflicts_by_asset.get(str(row.get("asset_id") or ""), []),
+            }
+            for row in candidates
+        ]
+        payload = {
+            "schema_version": 2,
+            "status": "valid",
+            "account_id": ACCOUNT_ID,
+            "generated_at_utc": now.astimezone(timezone.utc).isoformat(),
+            "valid_until_utc": (now.astimezone(timezone.utc) + timedelta(hours=6)).isoformat(),
+            "source": {"mode": "v3_live_separate_reconciliation", "current_and_archived": True},
+            "meta_counts": {"ads_scanned": len(ads), "video_ids_scanned": len(video_ids)},
+            "assets": assets,
+        }
+        if sum(item["approved"] is True for item in assets) < 3:
+            raise DailyBlocked("reconciliation", "fewer than three reconciled assets remain")
+        atomic_json(self.paths.reconciliation, payload)
+        return payload
+
     def prepare_and_prestage(self, selected: list[dict[str, Any]], drive: dict[str, Any], work_dir: Path, registry: MediaRegistry) -> list[dict[str, Any]]:
         if not self.page_token or not self.drive_token:
             raise DailyBlocked("prestage", "Meta Page or Drive token not initialized")
@@ -712,6 +828,7 @@ def run_daily(
         try:
             operation = load_json(paths.operation)
             config = load_json(paths.config)
+            validate_engine_config(config)
             count = int(state.get("campaign_count") or requested_campaign_count(operation, operational_date))
             meta = backend.meta_preflight()
             numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
@@ -721,6 +838,7 @@ def run_daily(
             drive_info = backend.drive_preflight()
             drive = drive_info["drive"]
             if not selected:
+                backend.refresh_reconciliation(inventory_rows, drive, current)
                 selected = select_assets(
                     inventory_rows,
                     {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"},

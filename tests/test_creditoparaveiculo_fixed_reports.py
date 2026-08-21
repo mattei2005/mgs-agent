@@ -8,6 +8,8 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import pytest
+
 SCRIPT = Path("/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py")
 
 
@@ -225,6 +227,30 @@ def test_new_campaign_cycle_date_comes_from_operational_name():
         "start_time": "2026-08-20T23:25:41-0300",
     }
     assert module.campaign_cycle_start_date(campaign, {}, datetime(2026, 8, 21).date()) == "2026-08-21"
+
+
+def test_dynamic_v3_campaign_enters_autonomous_allowlist_only_with_readback_provenance(monkeypatch):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})
+    operation = {
+        "management_scope": {
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "13": {"campaign_id": "id-13", "cycle_start_date": "2026-08-21"},
+                    "14": {
+                        "campaign_id": "id-14",
+                        "cycle_start_date": "2026-08-22",
+                        "source": "campaign_engine_v3_daily_readback",
+                        "request_id": "cpv-daily-20260821",
+                    },
+                }
+            }
+        }
+    }
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "14"}
+    operation["management_scope"]["autonomous_action_scope"]["allowed_campaigns"]["14"].pop("request_id")
+    with pytest.raises(RuntimeError, match="provenance"):
+        module.validated_allowed_campaigns(operation)
 
 
 def test_report_tables_paginate_instead_of_hiding_new_campaigns():

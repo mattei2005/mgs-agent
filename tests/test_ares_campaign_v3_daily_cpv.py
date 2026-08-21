@@ -21,8 +21,10 @@ from ares_campaign_v3.daily_cpv import (
     next_campaign_numbers,
     offline_smoke,
     requested_campaign_count,
+    reconciliation_conflicts,
     run_daily,
     select_assets,
+    validate_engine_config,
     move_to_testing,
 )
 
@@ -129,6 +131,22 @@ def test_budget_cap_live_213_plus_90_blocks():
     assert caught.value.detail["projected_minor"] == 30300
 
 
+def test_engine_config_requires_all_independent_gates():
+    config = {
+        "engine_version": 3,
+        "graph_version": "v26.0",
+        "bundle_size": 2,
+        "enabled": True,
+        "write_enabled": True,
+        "media_upload_enabled": True,
+        "require_prevalidated_manifest": True,
+    }
+    validate_engine_config(config)
+    config["media_upload_enabled"] = False
+    with pytest.raises(DailyBlocked, match="gates"):
+        validate_engine_config(config)
+
+
 def test_asset_selection_requires_nine_unique_reconciled_ready_lineages():
     rows = [asset(index) for index in range(1, 11)]
     rows.append(asset(11, fingerprint="fp-1"))
@@ -141,6 +159,20 @@ def test_asset_selection_fails_when_only_eight_unique_assets_exist():
     rows = [asset(index) for index in range(1, 9)]
     with pytest.raises(DailyBlocked, match="insufficient"):
         select_assets(rows, {f"drive-{index}" for index in range(1, 9)}, 9)
+
+
+def test_reconciliation_blocks_existing_canonical_name_in_meta_ads():
+    row = asset(1)
+    row["canonical_filename"] = "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4"
+    ads = [{"id": "ad-1", "name": "AD 01 - CAR_BR_BR_VID_SCORE_BAIXO_PV_016", "creative": {"name": "creative"}, "campaign": {"name": "C12"}}]
+    conflicts = reconciliation_conflicts([row], ads, [])
+    assert conflicts == [{
+        "asset_id": "asset-1",
+        "match_kind": "ad",
+        "match_id": "ad-1",
+        "exact_name": True,
+        "source_sequence": None,
+    }]
 
 
 def test_offline_smoke_exercises_two_plus_one_resume_without_network():
@@ -176,7 +208,15 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         audit_root=tmp_path / "audit",
         work_root=tmp_path / "work",
     )
-    paths.config.write_text(json.dumps({"enabled": True, "write_enabled": True}))
+    paths.config.write_text(json.dumps({
+        "engine_version": 3,
+        "graph_version": "v26.0",
+        "bundle_size": 2,
+        "enabled": True,
+        "write_enabled": True,
+        "media_upload_enabled": True,
+        "require_prevalidated_manifest": True,
+    }))
     paths.operation.write_text(json.dumps(operation()))
     paths.inventory.write_text("".join(json.dumps(asset(index)) + "\n" for index in range(1, 10)))
     paths.reconciliation.write_text(json.dumps({
@@ -212,6 +252,10 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
                     "counts": {"IMG": 0, "VID": 9, "TOTAL": 9},
                 }
             }
+
+        def refresh_reconciliation(self, inventory, drive, now):
+            self.calls.append("refresh_reconciliation")
+            return json.loads(paths.reconciliation.read_text())
 
         def prepare_and_prestage(self, *args, **kwargs):
             raise AssertionError("plan-only must not prestage")
