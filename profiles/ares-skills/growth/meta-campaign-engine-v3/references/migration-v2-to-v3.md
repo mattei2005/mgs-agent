@@ -22,6 +22,8 @@ Gate 8  1→3→10→40 rollout with p50/p95
 
 Every real Meta canary requires separate operational authorization. Installing v3 does not authorize campaign writes.
 
+A failed request is never blindly replayed. Each account lane writes an independent checkpoint with any known campaign/adset IDs and last stage; the main audit marks `manual_reconciliation_required=true`. Reconcile those PAUSED objects by GET before creating a new request ID or authorizing cleanup.
+
 ## Rollback
 
 Before promotion, rollback is simply keeping `enabled=false` and using v2. After promotion, rollback requires:

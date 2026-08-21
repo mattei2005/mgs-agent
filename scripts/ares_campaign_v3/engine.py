@@ -166,6 +166,8 @@ class CampaignEngine:
         for index in range(len(bundle.campaigns)):
             result = next(row for row in shell_results if row.name == f"adset_copy_{index + 1}")
             adset_ids.append(_copied_id(result, "copied_adset_id", "copied_adsets"))
+        record["adset_ids"] = adset_ids
+        record["stage"] = "shells_created"
 
         create_ops: list[BatchOperation] = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
@@ -191,6 +193,7 @@ class CampaignEngine:
         create_results = self._batch(bundle, transport, create_ops, "creative_ad_create")
         self._timed_finish(timing, started)
         record["created_children"] = len(create_results)
+        record["stage"] = "children_created_readback_pending"
 
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
@@ -201,13 +204,16 @@ class CampaignEngine:
 
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
         transport = self.transport_factory(account)
-        lane_result: dict[str, Any] = {"account_id": account, "bundles": [], "campaign_ids": []}
+        checkpoint_path = Path(self.config["state_root"]) / "checkpoints" / f"{_safe_name(request_id)}-{_safe_name(account)}.json"
+        lane_result: dict[str, Any] = {"account_id": account, "status": "IN_PROGRESS", "bundles": [], "campaign_ids": [], "checkpoint_path": str(checkpoint_path)}
+        _atomic_json(checkpoint_path, lane_result)
         for bundle in bundles:
             bundle_request_id = f"{request_id}:{account}:{bundle.index}"
             points = self._points(bundle)
             quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
             record: dict[str, Any] = {
                 "index": bundle.index,
+                "status": "IN_PROGRESS",
                 "idempotency_keys": [campaign.idempotency_key for campaign in bundle.campaigns],
                 "projected_points": points,
                 "quota": quota,
@@ -215,14 +221,28 @@ class CampaignEngine:
                 "intermediate_get_calls": 0,
                 "outer_readback_calls": 1,
             }
-            if bundle.campaigns[0].mode == "pure_clone":
-                ids = self._run_pure_bundle(bundle, transport, record)
-            else:
-                ids = self._run_prestaged_bundle(bundle, transport, record)
-            record["campaign_ids"] = ids
-            record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
             lane_result["bundles"].append(record)
-            lane_result["campaign_ids"].extend(ids)
+            _atomic_json(checkpoint_path, lane_result)
+            try:
+                if bundle.campaigns[0].mode == "pure_clone":
+                    ids = self._run_pure_bundle(bundle, transport, record)
+                else:
+                    ids = self._run_prestaged_bundle(bundle, transport, record)
+                record["campaign_ids"] = ids
+                record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
+                record["status"] = "COMPLETE"
+                record["stage"] = "readback_complete"
+                lane_result["campaign_ids"].extend(ids)
+                _atomic_json(checkpoint_path, lane_result)
+            except Exception as exc:
+                record["status"] = "FAILED"
+                record["error"] = {"type": type(exc).__name__, "message": str(exc)[:500]}
+                lane_result["status"] = "FAILED"
+                lane_result["manual_reconciliation_required"] = True
+                _atomic_json(checkpoint_path, lane_result)
+                raise
+        lane_result["status"] = "COMPLETE"
+        _atomic_json(checkpoint_path, lane_result)
         return lane_result
 
     def execute(self, manifest: Manifest) -> dict[str, Any]:
