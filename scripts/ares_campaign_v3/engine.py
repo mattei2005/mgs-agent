@@ -86,6 +86,13 @@ class CampaignEngine:
         points_by_mode = self.config.get("points_per_mode") or {}
         return sum(int(points_by_mode.get(campaign.mode, 45)) for campaign in bundle.campaigns)
 
+    def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
+        results = transport.execute(operations, stage)
+        headers = getattr(transport, "last_outer_headers", None)
+        if isinstance(headers, dict) and headers:
+            self.quota.observe_headers((bundle.app_key, bundle.account_id), headers)
+        return results
+
     @staticmethod
     def _timed_start() -> tuple[dict[str, Any], float]:
         return {"started_at": _utc()}, perf_counter()
@@ -109,12 +116,12 @@ class CampaignEngine:
     def _run_pure_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         timing, started = self._timed_start()
         record["timings"]["copy_submit"] = timing
-        copy_results = transport.execute(list(bundle.stages[0].operations), "pure_clone_copy")
+        copy_results = self._batch(bundle, transport, list(bundle.stages[0].operations), "pure_clone_copy")
         self._timed_finish(timing, started)
         campaign_ids = [_copied_id(row, "copied_campaign_id", "copied_campaigns") for row in copy_results]
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
-        readbacks = transport.execute(self._readback_ops(campaign_ids), "consolidated_readback")
+        readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
         return campaign_ids
@@ -122,7 +129,7 @@ class CampaignEngine:
     def _run_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         timing, started = self._timed_start()
         record["timings"]["copy_submit"] = timing
-        copy_results = transport.execute(list(bundle.stages[0].operations), "campaign_copy")
+        copy_results = self._batch(bundle, transport, list(bundle.stages[0].operations), "campaign_copy")
         self._timed_finish(timing, started)
         campaign_ids = [_copied_id(row, "copied_campaign_id", "copied_campaigns") for row in copy_results]
 
@@ -148,7 +155,7 @@ class CampaignEngine:
             ])
         timing, started = self._timed_start()
         record["timings"]["shells"] = timing
-        shell_results = transport.execute(shell_ops, "campaign_update_adset_copy")
+        shell_results = self._batch(bundle, transport, shell_ops, "campaign_update_adset_copy")
         self._timed_finish(timing, started)
         adset_ids: list[str] = []
         for index in range(len(bundle.campaigns)):
@@ -176,13 +183,13 @@ class CampaignEngine:
                 ))
         timing, started = self._timed_start()
         record["timings"]["creative_ads"] = timing
-        create_results = transport.execute(create_ops, "creative_ad_create")
+        create_results = self._batch(bundle, transport, create_ops, "creative_ad_create")
         self._timed_finish(timing, started)
         record["created_children"] = len(create_results)
 
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
-        readbacks = transport.execute(self._readback_ops(campaign_ids), "consolidated_readback")
+        readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
         return campaign_ids

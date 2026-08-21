@@ -62,6 +62,7 @@ class GraphBatchTransport:
         self._app_secret = app_secret
         self.timeout = timeout
         self.calls: list[dict[str, Any]] = []
+        self.last_outer_headers: dict[str, Any] = {}
 
     def execute(self, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
         if not operations:
@@ -84,6 +85,7 @@ class GraphBatchTransport:
                 raw = resp.read().decode("utf-8", "replace")
                 payload = json.loads(raw)
                 outer_headers = {str(k).lower(): str(v) for k, v in resp.headers.items()}
+                self.last_outer_headers = outer_headers
         except urllib.error.HTTPError as exc:
             raw = exc.read().decode("utf-8", "replace")
             try:
@@ -119,6 +121,7 @@ class FakeBatchTransport:
     def __init__(self, account_id: str):
         self.account_id = str(account_id)
         self.calls: list[dict[str, Any]] = []
+        self.last_outer_headers: dict[str, Any] = {}
         self._sequence = 0
 
     def _id(self, kind: str) -> str:

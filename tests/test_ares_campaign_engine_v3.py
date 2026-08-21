@@ -188,6 +188,20 @@ def test_quota_is_independent_per_app_and_ad_account(tmp_path):
     assert store.reserve(('other-app', '100'), 90, request_id='c', now=1000)['points'] == 90
 
 
+def test_quota_store_persists_live_meta_tier_and_usage_headers(tmp_path):
+    store = LaneQuotaStore(tmp_path, soft_score=100, hard_score=120, window_seconds=300)
+    lane = ('app', '100')
+    observed = store.observe_headers(lane, {
+        'x-ad-account-usage': json.dumps({'acc_id_util_pct': 23.5, 'reset_time_duration': 120, 'ads_api_access_tier': 'standard_access'}),
+        'x-business-use-case-usage': json.dumps({'100': [{'type': 'ads_management', 'call_count': 12, 'total_time': 18, 'total_cputime': 5}]}),
+    }, now=1000)
+    assert observed['ads_api_access_tier'] == 'standard_access'
+    snap = store.snapshot(lane, now=1000)
+    assert snap['live_usage']['acc_id_util_pct'] == 23.5
+    assert snap['live_usage']['reset_time_duration'] == 120
+    assert snap['live_usage']['business_usage_present'] is True
+
+
 def test_media_registry_roundtrip_and_fail_closed(tmp_path):
     registry = MediaRegistry(tmp_path / 'media.json')
     registry.register(account_id='100', asset_id='asset-1', checksum='sum-1', vertical_video_id='v1', square_video_id='s1', ready=True)
@@ -204,12 +218,23 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         checksum = f'sum-{i}'
         registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True)
         assets.append({'asset_id': asset_id, 'checksum': checksum})
+    templates = [
+        {
+            'object_story_spec': {'page_id': '621037101089579'},
+            'asset_feed_spec': {
+                'videos': [],
+                'link_urls': [{'website_url': 'https://example.test/?utm_campaign=b01fb13c08&utm_adgroup=b01fb13c08g01'}],
+            },
+        }
+        for _ in range(3)
+    ]
     payload = build_cpv_manifest(
         registry=registry,
         asset_refs=assets,
         campaign_numbers=[14, 15],
         operational_date='2026-08-21',
         request_id='cpv-20260821',
+        creative_templates=templates,
     )
     built = Manifest.from_dict(payload)
     assert len(built.campaigns) == 2
@@ -217,6 +242,9 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert all(c.status == 'PAUSED' for c in built.campaigns)
     assert [len(c.ads) for c in built.campaigns] == [3, 3]
     assert all(c.start_time.endswith('-03:00') for c in built.campaigns)
+    assert 'b01fb13c14' in json.dumps(built.campaigns[0].ads[0].creative_payload)
+    assert 'b01fb13c15' in json.dumps(built.campaigns[1].ads[0].creative_payload)
+    assert 'b01fb13c08' not in json.dumps(payload)
 
 
 def test_engine_refuses_execute_while_disabled(tmp_path):

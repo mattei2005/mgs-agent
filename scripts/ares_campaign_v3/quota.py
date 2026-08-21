@@ -94,6 +94,43 @@ class LaneQuotaStore:
             fcntl.flock(fh, fcntl.LOCK_UN)
         return {"points": projected, "idempotent": False, "path": str(path)}
 
+    def observe_headers(self, lane: tuple[str, str], headers: dict[str, Any], *, now: float | None = None) -> dict[str, Any]:
+        at = time.time() if now is None else float(now)
+        normalized = {str(key).lower(): value for key, value in (headers or {}).items()}
+        def parse(name: str) -> Any:
+            raw = normalized.get(name)
+            if isinstance(raw, (dict, list)):
+                return raw
+            if not raw:
+                return None
+            try:
+                return json.loads(str(raw))
+            except json.JSONDecodeError:
+                return None
+        ad_usage = parse('x-ad-account-usage')
+        business_usage = parse('x-business-use-case-usage')
+        live = {
+            'observed_at': at,
+            'ad_account_usage_present': isinstance(ad_usage, dict),
+            'business_usage_present': isinstance(business_usage, (dict, list)),
+            'acc_id_util_pct': ad_usage.get('acc_id_util_pct') if isinstance(ad_usage, dict) else None,
+            'reset_time_duration': ad_usage.get('reset_time_duration') if isinstance(ad_usage, dict) else None,
+            'ads_api_access_tier': ad_usage.get('ads_api_access_tier') if isinstance(ad_usage, dict) else None,
+            'business_usage': business_usage,
+        }
+        path = self._path(lane)
+        fd = os.open(path, os.O_CREAT | os.O_RDWR, 0o600)
+        with os.fdopen(fd, 'r+') as fh:
+            os.fchmod(fh.fileno(), 0o600)
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            state = self._read(fh)
+            state['lane'] = {'app_key': lane[0], 'account_id': lane[1]}
+            state['live_usage'] = live
+            state['updated_at'] = at
+            self._write(fh, state)
+            fcntl.flock(fh, fcntl.LOCK_UN)
+        return live
+
     def snapshot(self, lane: tuple[str, str], now: float | None = None) -> dict[str, Any]:
         at = time.time() if now is None else float(now)
         path = self._path(lane)
