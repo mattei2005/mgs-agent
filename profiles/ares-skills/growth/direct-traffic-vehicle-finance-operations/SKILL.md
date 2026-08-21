@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.13
+version: 1.0.14
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -389,7 +389,7 @@ Para tráfego direto desta operação, usar três threads fixas por conta:
 
 ```text
 Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e readback
-Diário Consolidado     07:00 dia anterior; 11:00/14:00/20:00 mesmo dia
+Diário Consolidado     07:00 dia anterior; 08:00/11:00/14:00/20:00 mesmo dia
 Intraday               01/03/05/07/09/11/13/15/17/19/21/23 São Paulo
 Checkpoint de ação     08:00 São Paulo, separado e sem relatório extra
 ```

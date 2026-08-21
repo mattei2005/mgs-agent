@@ -47,6 +47,14 @@ apply_patch_if_needed() {
   # known invariant-positive states as applied so the watchdog remains useful
   # instead of false-failing forever.
   case "$name" in
+    checkpoint-store-serialization-*.patch)
+      if grep -q "def _checkpoint_store_lock" "$REPO/tools/checkpoint_manager.py" \
+        && grep -q "return self._take_locked(working_dir, reason)" "$REPO/tools/checkpoint_manager.py" \
+        && grep -q "test_concurrent_managers_serialize_same_project_store" "$REPO/tests/tools/test_checkpoint_manager.py"; then
+        log "checkpoint serialization invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-runtime-customizations-*.patch|discord-deterministic-thread-rename-auto-add-users.patch)
       if grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
@@ -276,6 +284,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # Apply the newest reviewed surface first; legacy composite/per-feature patches
 # below remain invariant checks and backward-compatible fallback.
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-17-main-4323c67d.patch"
+apply_patch_if_needed "checkpoint-store-serialization-2026-08-20.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-v0200.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-02-v0191.patch"

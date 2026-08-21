@@ -331,13 +331,14 @@ PY
       echo "DRIFT patch guard does not reference latest runtime patch: $latest_runtime_patch"
       rc=1
     fi
-    # The newest consolidated runtime patch is the complete canonical MGS
-    # surface for its reviewed upstream target. Legacy per-feature artifacts
-    # remain in ensure-hermes-mgs-patches.sh as invariant/fallback checks; testing
-    # them independently here creates false drift because their hunks overlap the
-    # consolidated patch and older upstream layouts.
+    # The newest consolidated runtime patch is the complete reviewed MGS base.
+    # Newer non-overlapping supplemental fixes that are explicitly listed here
+    # must also apply cleanly to the frozen target before an update can proceed.
+    # Legacy per-feature artifacts remain invariant/fallback checks because
+    # their hunks overlap older consolidated surfaces.
     local canonical_patches=(
       "$latest_runtime_patch"
+      "checkpoint-store-serialization-2026-08-20.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue

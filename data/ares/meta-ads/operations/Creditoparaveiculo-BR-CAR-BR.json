@@ -365,7 +365,7 @@
     "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
     "remove_id_rec": true,
     "campaign_identifier": "campaign number column",
-    "daily_focus": "07:00 previous closed-day performance; 11:00/14:00/20:00 current-day performance through dispatch time",
+    "daily_focus": "07:00 previous closed-day performance; 08:00/11:00/14:00/20:00 current-day performance through dispatch time",
     "intraday_focus": "current decision, executed action, gates and readback",
     "legend": {
       "green": "healthy, maintain or scale",
@@ -379,6 +379,12 @@
         "timezone": "America/Sao_Paulo",
         "type": "daily",
         "period": "previous closed day"
+      },
+      {
+        "time": "08:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
       },
       {
         "time": "11:00",
@@ -399,7 +405,7 @@
         "period": "current day through dispatch time"
       }
     ],
-    "dispatch_count_per_day": 4
+    "dispatch_count_per_day": 5
   },
   "scheduler_jobs": {
     "daily": {
@@ -408,6 +414,7 @@
       "scheduler": "hourly minute 0",
       "timezone_gate": [
         "07:00",
+        "08:00",
         "11:00",
         "14:00",
         "20:00 America/Sao_Paulo"
@@ -417,7 +424,7 @@
       "deliver": "local",
       "direct_thread_post": "1539831487719800872",
       "enabled": true,
-      "cadence": "four Daily reports per day; 07:00 references the previous closed day and 11:00/14:00/20:00 reference the current day through dispatch time"
+      "cadence": "five Daily reports per day; 07:00 references the previous closed day and 08:00/11:00/14:00/20:00 reference the current day through dispatch time"
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
@@ -518,7 +525,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T20:16:14-03:00",
+  "updated_at": "2026-08-20T21:29:22-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -810,7 +817,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.39",
+  "playbook_version": "1.0.40",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -953,11 +960,11 @@
       {
         "key": "daily",
         "title": "Creditoparaveiculo 13 G006 Diario",
-        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 11:00/14:00/20:00",
+        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 08:00/11:00/14:00/20:00",
         "delivery": "recurring script-only report",
         "thread_id": "1539831487719800872",
-        "schedule": "07:00 America/Sao_Paulo for the previous closed day; 11:00, 14:00 and 20:00 for the current day through dispatch time",
-        "period": "slot-dependent: previous closed day only at 07:00; current day at 11:00/14:00/20:00"
+        "schedule": "07:00 America/Sao_Paulo for the previous closed day; 08:00, 11:00, 14:00 and 20:00 for the current day through dispatch time",
+        "period": "slot-dependent: previous closed day only at 07:00; current day at 08:00/11:00/14:00/20:00"
       },
       {
         "key": "intraday",
@@ -1055,6 +1062,7 @@
       "05:00",
       "07:00 São Paulo Daily previous day",
       "07:00 São Paulo Intraday",
+      "08:00 São Paulo Daily current day + separate action checkpoint",
       "09:00",
       "11:00",
       "13:00",
@@ -1644,6 +1652,14 @@
       "superseded_by": "Daily 07:00 references the previous closed day; Daily 11:00/14:00/20:00 reference the current day through dispatch time",
       "authorized_by": "Rodolfo Mattei",
       "correction": "The first Daily report at 07:00 is for the previous day; all later Daily reports are for the same day",
+      "source": "discord:thread:1540137110789562408"
+    },
+    {
+      "superseded_schedule": "Daily 07:00 previous closed day; Daily 11:00/14:00/20:00 current day",
+      "superseded_at": "2026-08-20T20:29:22-04:00",
+      "superseded_by": "Daily 07:00 previous closed day; Daily 08:00/11:00/14:00/20:00 current day through dispatch time",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Added one Daily current-day report at 08:00 without changing Intraday or the separate 08:00 action checkpoint",
       "source": "discord:thread:1540137110789562408"
     }
   ]

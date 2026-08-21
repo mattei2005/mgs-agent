@@ -51,7 +51,7 @@ index d0af8e9e58..1f2c2f3a82 100644
  class TestTouchProjectMalformedMeta:
      """_touch_project must not raise when the project metadata file is corrupted.
 diff --git a/tools/checkpoint_manager.py b/tools/checkpoint_manager.py
-index 5448632103..bc0113e8c5 100644
+index 5448632103..8a8a25b946 100644
 --- a/tools/checkpoint_manager.py
 +++ b/tools/checkpoint_manager.py
 @@ -56,10 +56,11 @@ import re
@@ -152,6 +152,15 @@ index 5448632103..bc0113e8c5 100644
  # ---------------------------------------------------------------------------
  # Store initialisation + legacy migration
  # ---------------------------------------------------------------------------
+@@ -441,7 +506,7 @@ def _migrate_legacy_store(base: Path) -> Optional[Path]:
+     store = _store_path(base)
+     legacy_root: Optional[Path] = None
+     # Reserved top-level entries managed by v2.
+-    reserved = {_STORE_DIRNAME, _PRUNE_MARKER_NAME}
++    reserved = {_STORE_DIRNAME, _PRUNE_MARKER_NAME, _STORE_LOCK_NAME}
+     for child in list(base.iterdir()):
+         name = child.name
+         if name in reserved or name.startswith(_LEGACY_PREFIX):
 @@ -1207,7 +1272,16 @@ class CheckpointManager:
      # ------------------------------------------------------------------
  

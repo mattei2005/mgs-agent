@@ -455,7 +455,7 @@ def test_report_delivery_is_idempotent_per_slot(monkeypatch, tmp_path):
 
 def test_approved_report_schedule_and_action_checkpoint():
     module = load_reports_module()
-    assert module.DAILY_REPORT_HOURS == {7, 11, 14, 20}
+    assert module.DAILY_REPORT_HOURS == {7, 8, 11, 14, 20}
     assert module.intraday_gate_due(11, actions_only=False)
     assert module.intraday_gate_due(7, actions_only=False)
     assert module.intraday_gate_due(13, actions_only=False)
@@ -469,7 +469,7 @@ def test_daily_period_is_previous_day_only_at_07_and_current_day_afterward():
     module = load_reports_module()
     sp = ZoneInfo("America/Sao_Paulo")
     assert module.daily_target_date(datetime(2026, 8, 20, 7, 0, tzinfo=sp)) == "2026-08-19"
-    for hour in (11, 14, 20):
+    for hour in (8, 11, 14, 20):
         assert module.daily_target_date(datetime(2026, 8, 20, hour, 0, tzinfo=sp)) == "2026-08-20"
     assert module.daily_target_date(
         datetime(2026, 8, 20, 7, 0, tzinfo=sp),
