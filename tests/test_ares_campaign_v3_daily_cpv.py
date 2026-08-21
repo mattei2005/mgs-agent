@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from types import SimpleNamespace
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -26,6 +27,9 @@ from ares_campaign_v3.daily_cpv import (
     select_assets,
     validate_engine_config,
     move_to_testing,
+    campaign_name_collisions,
+    failure_resume_state,
+    media_title,
 )
 
 SP = ZoneInfo("America/Sao_Paulo")
@@ -90,6 +94,36 @@ def test_gate_starts_only_at_17_sp_but_resume_may_run_later():
         "retry_after_epoch": 0,
     }
     assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is True
+    resume["manual_reconciliation_required"] = True
+    assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is False
+
+
+def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():
+    name = "14 - 22-08 - Garagem Brasil - (b01fb13c14) event_Subscribe - MAXVOL"
+    manifest = SimpleNamespace(campaigns=[SimpleNamespace(name=name)])
+    live = [{"id": "live-14", "name": name, "status": "ACTIVE", "effective_status": "ACTIVE"}]
+    assert campaign_name_collisions(manifest, live, set()) == [{"campaign_id": "live-14", "name": name, "status": "ACTIVE"}]
+    assert campaign_name_collisions(manifest, live, {"live-14"}) == []
+    live[0]["effective_status"] = "ARCHIVED"
+    assert campaign_name_collisions(manifest, live, set()) == []
+
+
+def test_media_title_binds_reuse_to_asset_and_checksum():
+    first = media_title("VERTICAL", "asset-1", "a" * 64)
+    second = media_title("VERTICAL", "asset-1", "b" * 64)
+    square = media_title("SQUARE", "asset-1", "a" * 64)
+    assert first == "V3 VERTICAL asset-1 aaaaaaaaaaaa"
+    assert second == "V3 VERTICAL asset-1 bbbbbbbbbbbb"
+    assert first != second
+    assert first != square
+
+
+def test_failure_after_external_side_effect_never_becomes_terminal_failed():
+    assert failure_resume_state({"media_upload": True}, known_campaign_ids=False) == ("READBACK_DEFERRED", False)
+    assert failure_resume_state({"campaign_write": True}, known_campaign_ids=False) == ("READBACK_DEFERRED", True)
+    assert failure_resume_state({"campaign_write": True}, known_campaign_ids=True) == ("READBACK_DEFERRED", False)
+    assert failure_resume_state({"drive_move": True, "campaign_write": True}, known_campaign_ids=True) == ("POSTPROCESS_PENDING", False)
+    assert failure_resume_state({}, known_campaign_ids=False) == ("FAILED", False)
 
 
 def test_one_time_override_is_three_total_and_default_remains_two():
