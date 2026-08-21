@@ -42,6 +42,38 @@ def test_parse_business_usage_malformed_is_safe():
     assert mod.parse_business_usage_headers({})['max_usage_pct'] == 0.0
 
 
+def test_parse_ad_account_usage_and_tier():
+    mod = load_module()
+    header = json.dumps({'acc_id_util_pct': 46, 'reset_time_duration': 187.2, 'ads_api_access_tier': 'development_access'})
+    parsed = mod.parse_ad_account_usage_headers({'X-Ad-Account-Usage': header})
+    assert parsed == {
+        'present': True,
+        'acc_id_util_pct': 46.0,
+        'reset_time_duration_seconds': 188,
+        'ads_api_access_tier': 'development_access',
+    }
+    assert mod.parse_ad_account_usage_headers({'x-ad-account-usage': 'bad'})['present'] is False
+
+
+def test_score_budget_blocks_two_campaigns_and_allows_one_at_low_usage():
+    mod = load_module()
+    low = {'present': True, 'acc_id_util_pct': 2, 'ads_api_access_tier': 'development_access'}
+    two = mod.ads_management_score_budget(low, {}, read_calls=8, write_calls=24, reserve_points=5)
+    one = mod.ads_management_score_budget(low, {}, read_calls=8, write_calls=12, reserve_points=5)
+    assert two['projected_score'] == 85 and two['allowed'] is False
+    assert two['reason'] == 'projected_score_exceeds_available'
+    assert one['projected_score'] == 49 and one['allowed'] is True
+    assert one['estimated_available_score'] == 58
+
+
+def test_score_budget_fails_closed_without_x_ad_account_usage():
+    mod = load_module()
+    business = {'entries': [{'ads_api_access_tier': 'development_access'}]}
+    budget = mod.ads_management_score_budget({}, business, read_calls=1, write_calls=1)
+    assert budget['allowed'] is False
+    assert budget['reason'] == 'missing_x_ad_account_usage'
+
+
 def test_parser_computes_max_over_more_than_32_entries_and_rejects_nonfinite():
     mod = load_module()
     rows = [{'type': 'ads_management', 'call_count': 1} for _ in range(32)]
@@ -78,6 +110,17 @@ def test_rate_error_17_uses_header_estimated_minutes():
     assert mod.retry_wait_seconds(400, payload, headers, attempt=1) == 120
 
 
+def test_rate_error_17_prefers_ad_account_reset_and_exact_subcode_defaults_300():
+    mod = load_module()
+    headers = {
+        'X-Ad-Account-Usage': json.dumps({'acc_id_util_pct': 100, 'reset_time_duration': 187, 'ads_api_access_tier': 'development_access'}),
+        'X-Business-Use-Case-Usage': json.dumps({'biz': [{'estimated_time_to_regain_access': 9}]}),
+    }
+    payload = {'error': {'code': 17, 'error_subcode': 2446079}}
+    assert mod.retry_wait_seconds(400, payload, headers) == 187
+    assert mod.retry_wait_seconds(400, payload, {}, attempt=1) == 300
+
+
 def test_rate_error_613_falls_back_to_exponential_without_header_estimate():
     mod = load_module()
     payload = {'error': {'code': 613, 'message': 'Calls to this api have exceeded rate limit'}}
@@ -101,6 +144,17 @@ def test_record_usage_state_persists_block_cross_process(tmp_path, monkeypatch):
     assert state['blocked_until_epoch'] > 5000.0
     saved = json.loads((tmp_path / 'state.json').read_text())
     assert saved['business_usage']['max_usage_pct'] == 83.0
+
+
+def test_record_usage_persists_ad_account_header_and_soft_block(tmp_path, monkeypatch):
+    mod = load_module()
+    monkeypatch.setattr(mod, 'THROTTLE_STATE_PATH', tmp_path / 'state.json')
+    headers = {'X-Ad-Account-Usage': json.dumps({'acc_id_util_pct': 80, 'reset_time_duration': 120, 'ads_api_access_tier': 'development_access'})}
+    state = mod.record_response_usage(headers, 200, {'id': 'ok'}, now_epoch=1000.0)
+    assert state['ad_account_usage']['acc_id_util_pct'] == 80.0
+    assert state['ads_api_access_tier'] == 'development_access'
+    assert state['blocked_until_epoch'] == 1120.0
+    assert state['block_reason'] == 'ad_account_usage_soft_limit'
 
 
 def test_successful_low_usage_response_does_not_clear_future_rate_block(tmp_path, monkeypatch):

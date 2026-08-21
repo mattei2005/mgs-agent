@@ -409,37 +409,62 @@ def _write_state_locked(fh, state):
 
 
 def record_response_usage(headers, status, payload, now_epoch=None):
-    """Persist BUC usage and cooldown from every HTTP response."""
+    """Persist independent BUC and ad-account usage/cooldown from every response."""
     now_epoch = time.time() if now_epoch is None else float(now_epoch)
     usage = parse_business_usage_headers(headers)
     decision = business_usage_decision(usage, now_epoch=now_epoch)
+    ad_usage = parse_ad_account_usage_headers(headers)
+    ad_decision = ad_account_usage_decision(ad_usage, now_epoch=now_epoch)
     err = payload.get('error') if isinstance(payload, dict) else None
     error_code = err.get('code') if isinstance(err, dict) else None
+    error_subcode = err.get('error_subcode') if isinstance(err, dict) else None
     with _open_throttle_state() as fh:
         fcntl.flock(fh, fcntl.LOCK_EX)
         state = _read_state_locked(fh)
         if usage['entry_count']:
             state['business_usage'] = usage
             state['usage_updated_at_epoch'] = now_epoch
+        if ad_usage['present']:
+            state['ad_account_usage'] = ad_usage
+            state['ad_account_usage_updated_at_epoch'] = now_epoch
+        tier = marketing_access_tier(ad_usage, usage)
+        if tier:
+            state['ads_api_access_tier'] = tier
         state['last_response_status'] = status
         state['last_error_code'] = error_code
+        state['last_error_subcode'] = error_subcode
         current_block = _as_number(state.get('blocked_until_epoch'))
         blocked_until = current_block
         reason = state.get('block_reason')
         if decision['soft_limited']:
             blocked_until = max(blocked_until, decision['blocked_until_epoch'])
             reason = 'business_usage_soft_limit'
+        if ad_decision['soft_limited']:
+            blocked_until = max(blocked_until, ad_decision['blocked_until_epoch'])
+            reason = 'ad_account_usage_soft_limit'
         rate_wait = retry_wait_seconds(status, payload, headers, attempt=1)
         if (status == 429 or error_code in RATE_LIMIT_CODES) and rate_wait is not None:
             blocked_until = max(blocked_until, now_epoch + rate_wait)
             reason = 'meta_rate_limit'
-        if usage['entry_count'] and not decision['soft_limited'] and status < 400 and current_block <= now_epoch:
+        fresh_usage = bool(usage['entry_count'] or ad_usage['present'])
+        if fresh_usage and not decision['soft_limited'] and not ad_decision['soft_limited'] and status < 400 and current_block <= now_epoch:
             blocked_until = 0
             reason = None
         state['blocked_until_epoch'] = blocked_until
         state['block_reason'] = reason
         state['soft_limit_percent'] = BUSINESS_USAGE_SOFT_LIMIT_PERCENT
+        state['ad_account_soft_limit_percent'] = AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT
         _write_state_locked(fh, state)
+        fcntl.flock(fh, fcntl.LOCK_UN)
+    return state
+
+
+def read_throttle_state():
+    if not THROTTLE_STATE_PATH.exists():
+        return {}
+    with _open_throttle_state() as fh:
+        fcntl.flock(fh, fcntl.LOCK_SH)
+        state = _read_state_locked(fh)
         fcntl.flock(fh, fcntl.LOCK_UN)
     return state
 

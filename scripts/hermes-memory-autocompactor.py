@@ -154,7 +154,8 @@ def _restore_candidate_literals(
         if index not in selected or not 1 <= index <= len(original):
             restored_rows.append(item)
             continue
-        _masked, literals = _mask_protected_literals(original[index - 1])
+        original_text = str(original[index - 1])
+        _masked, literals = _mask_protected_literals(original_text)
         restored_rows.append({
             **item,
             "text": _restore_protected_literals(item["text"], literals),
@@ -373,6 +374,7 @@ def propose_and_verify(
         "invalid_model_json",
         "model_call_failed",
         "model_call_timeout",
+        "literal_placeholder_mismatch",
     }
     budgets = _entry_budgets(entries, target_chars)
     selected_indexes = [
@@ -386,18 +388,24 @@ def propose_and_verify(
         last_error: CompactionError | None = None
         for attempt in range(1, max_proposal_attempts + 1):
             try:
+                raw_candidate = llm_runner(
+                    _proposal_prompt(
+                        store,
+                        candidate,
+                        target_chars,
+                        budgets,
+                        [selected_index],
+                        attempt=attempt,
+                    )
+                )
+                restored_candidate = _restore_candidate_literals(
+                    candidate,
+                    raw_candidate,
+                    [selected_index],
+                )
                 candidate = _validate_candidate(
                     candidate,
-                    llm_runner(
-                        _proposal_prompt(
-                            store,
-                            candidate,
-                            target_chars,
-                            budgets,
-                            [selected_index],
-                            attempt=attempt,
-                        )
-                    ),
+                    restored_candidate,
                     target_chars,
                     budgets,
                     [selected_index],

@@ -117,6 +117,20 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             compactor._validate_candidate(original, candidate, 120, budgets, [1])
         self.assertEqual(caught.exception.code, "candidate_entry_above_budget")
 
+    def test_protected_literal_mask_roundtrip_is_exact(self):
+        original = "Use `Camp` at 90% with ID `1527401973698007060` and https://example.com/x."
+        masked, literals = compactor._mask_protected_literals(original)
+        self.assertNotEqual(masked, original)
+        self.assertEqual(compactor._restore_protected_literals(masked, literals), original)
+
+    def test_protected_literal_restore_rejects_dropped_placeholder(self):
+        original = "Keep 90% and ID `1527401973698007060`."
+        masked, literals = compactor._mask_protected_literals(original)
+        broken = masked.replace("⟦mgs_literal_0000⟧", "", 1)
+        with self.assertRaises(compactor.CompactionError) as caught:
+            compactor._restore_protected_literals(broken, literals)
+        self.assertEqual(caught.exception.code, "literal_placeholder_mismatch")
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 
@@ -163,7 +177,12 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             if '"before":' not in prompt:
                 payload = json.loads(prompt.split(" Data: ", 1)[1])
                 return {"entries": [
-                    {"index": row["index"], "text": candidate[row["index"] - 1]}
+                    {
+                        "index": row["index"],
+                        "text": compactor._mask_protected_literals(
+                            candidate[row["index"] - 1]
+                        )[0],
+                    }
                     for row in payload
                 ]}
             return {"valid": True, "entries": [
@@ -201,7 +220,10 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             nonlocal calls
             calls += 1
             if calls == 1:
-                return {"entries": [{"index": 1, "text": candidate[0]}]}
+                return {"entries": [{
+                    "index": 1,
+                    "text": compactor._mask_protected_literals(candidate[0])[0],
+                }]}
             return {"valid": False, "entries": [
                 {"index": 1, "equivalent": False, "missing": ["threshold"], "added": []}
             ]}
@@ -240,7 +262,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 llm_runner=fake_model,
                 backup_root=self.backups,
             )
-        self.assertEqual(caught.exception.code, "protected_literals_changed")
+        self.assertEqual(caught.exception.code, "literal_placeholder_mismatch")
         self.assertEqual(source.read_text(), before)
 
     def test_apply_rejects_concurrent_source_change(self):
