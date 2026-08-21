@@ -103,7 +103,7 @@ Kelly              Creative Operations        Pessoa responsável por criativos 
 Smart Bidding      Revenue / AdOps            Parceiro Google/AdX; rede e dash
                                               principal para gerenciamento.
 ActiveView         Revenue / AdOps            Parceiro Google/AdX; exceção ativa
-                                              para openzed/cliquet/subdomínios.
+                                              para openzed e seus subdomínios.
 ```
 
 ---
@@ -145,7 +145,7 @@ Sistema/rede       Papel no MGS OS
 ----------------- -------------------------------------------------------------
 Smart Bidding      Fonte operacional principal para gerenciamento de sites,
                    campanhas, ROI, blocos, tecnologia e relatórios.
-ActiveView         Exceção ativa para openzed, cliquet e seus subdomínios,
+ActiveView         Exceção ativa para openzed e seus subdomínios,
                    quando ainda estiverem na tecnologia/rede AV.
 AdManager/AdX      Camada de monetização Google dentro das redes parceiras
                    Smart Bidding e ActiveView.
@@ -156,7 +156,7 @@ Discord AdOps      Canal operacional com Smart Bidding para regras, aprovação,
 Regra canônica inicial:
 
 - Smart Bidding é a dashboard/rede principal de gerenciamento operacional.
-- ActiveView deve ser tratada como exceção ativa apenas para sites que ainda estejam na tecnologia AV: openzed, cliquet e subdomínios.
+- ActiveView deve ser tratada como exceção ativa apenas para sites que ainda estejam na tecnologia AV: openzed e seus subdomínios. Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
 - Alterações de blocos, regras e precificação pertencem a Revenue / AdOps.
 - Impactos financeiros pertencem a Finance / BI.
 

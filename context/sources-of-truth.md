@@ -60,7 +60,7 @@ Security / Access             authorized-users, 1Password, policies, audit log
 Fonte externa                  Uso operacional
 ------------------------------ ------------------------------------------------
 Smart Bidding                   Parceiro Google/AdX/Ad Manager principal da MGS; rede e dashboard principal de gerenciamento, com sites, campanhas, ROI, blocos, tecnologia e reports.
-ActiveView                      Parceiro Google/AdX/Ad Manager; exceção ativa para openzed, cliquet e subdomínios.
+ActiveView                      Parceiro Google/AdX/Ad Manager; exceção ativa para openzed e seus subdomínios.
 Facebook Business Manager       Gastos de campanha e contas de anúncio.
 Google Ads                      Campanhas/aquisição quando usado.
 TikTok Ads                      Canal potencial/futuro para Ares.
@@ -86,7 +86,7 @@ Conflito                                      Vence
 Fala recente do Rodolfo vs arquivo antigo      Fala recente do Rodolfo.
 Dashboard externo validado vs arquivo antigo   Dashboard externo validado.
 Permissão em memória vs authorized-users.json   authorized-users.json.
-Smart Bidding vs ActiveView                    Smart Bidding como dashboard principal; ActiveView vence só nos sites ainda na tecnologia AV (`openzed`, `cliquet` e subdomínios).
+Smart Bidding vs ActiveView                    Smart Bidding como dashboard principal; ActiveView vence só nos sites ainda na tecnologia AV (`openzed` e seus subdomínios). Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
 Credencial em qualquer fonte vs 1Password       1Password.
 Prompt de agente vs company-os/context          company-os/context.
 Criativo em ferramenta vs Drive aprovado         Google Drive de criativos aprovados.

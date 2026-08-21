@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Próximo pedido autorizado de campanhas usa v3 diretamente. Full Access será validado por header quando Felipe/dev concluir App Review; até lá, respeitar janelas development_access.",
+      "next_step": "Migrar deterministicamente o schedule 17h para um runner v3 completo (seleção/reconciliação Drive, pre-stage/media registry, manifest/prevalidation, execute/readback, inventory/stock), testar offline e só então habilitar o job; não reativar o wrapper v2.",
       "objective": "Operar o Ares Campaign Engine v3 como rota ativa de produção, preservando v2 como rollback.",
-      "source": "discord:1540222249036939324; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md",
-      "state": "v3 ativo por ordem rodolfo 1540222249036939324. config readback: enabled=true, write_enabled=true, media_upload_enabled=true, prevalidation/app/account/media/quota guards preservados; v2 crons pausados. cpv aceita 1–100 campanhas, 3 mídias ready/campanha e planner 2+2+…+1. development access confirmado ao vivo por graph v26 http200/header development_access; bundles que não cabem retornam partial_deferred_quota e retomam o mesmo request sem replay. production status suporta active+future start; technical canary paused opcional. suíte atual 96 pass; offline e2e 5 campanhas active: 2→4→5, final complete_future_active; nenhuma meta write/upload/budget/credential/delete/restart nesta ativação. skill v3.0.1 e refs/hot/cbo/vehicle alinhados; soul protegido não foi reescrito, mas sua regra é condicional a config disabled e portanto não bloqueia o config ativo.",
+      "source": "discord:1540242048760807465; cron:/root/.hermes/profiles/ares/cron/jobs.json job 2cf8115a4f8b; v3 config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+      "state": "v3 ativo e validado, mas auditoria live do scheduler encontrou gap material: job ares 2cf8115a4f8b “criacao diaria 17h” está enabled=false/state=paused e ainda aponta para `creditoparaveiculo-daily-create.sh` v2. não existe job v3 recorrente no cron live. portanto o próximo 17:00 não criará campanhas automaticamente, apesar do engine v3 estar ativo para pedidos manuais/autorizados. correções 1/3–3/3 do handoff concluídas por ares; config v3 continua active.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T05:08:24+00:00"
+      "updated_at": "2026-08-21T06:14:03+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:13:13+00:00"
+  "updated_at": "2026-08-21T06:14:03+00:00"
 }

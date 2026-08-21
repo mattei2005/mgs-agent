@@ -42,7 +42,7 @@ Camada                        Uso
 Smart Bidding                 Parceiro Google/AdX principal da MGS; rede onde
                               a maior parte dos sites deve ser gerenciada.
 ActiveView                    Parceiro Google/AdX usado como exceção ativa para
-                              openzed, cliquet e respectivos subdomínios.
+                              openzed e respectivos subdomínios.
 Google AdX / Ad Manager       Ambiente onde parceiros adicionam sites, URLs e
                               criam blocos de anúncio.
 Dashboard Smart Bidding       Dashboard mais completa; preferida para concentrar
@@ -52,7 +52,7 @@ Blocos de anúncio             Criados/configurados dentro das redes dos parceir
 SMS / Messenger / broadcast   Estratégias de retorno de usuário para os sites.
 ```
 
-A MGS tem alguns sites dentro da rede da Smart Bidding e alguns sites dentro da rede da ActiveView. Como a dashboard da Smart Bidding é mais completa, a preferência operacional é concentrar o gerenciamento dos sites nela. Os sites `openzed`, `cliquet` e respectivos subdomínios ainda seguem no controle/tecnologia da ActiveView.
+A MGS tem alguns sites dentro da rede da Smart Bidding e alguns sites dentro da rede da ActiveView. Como a dashboard da Smart Bidding é mais completa, a preferência operacional é concentrar o gerenciamento dos sites nela. `openzed` e seus subdomínios ainda seguem no controle/tecnologia da ActiveView; Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
 
 ### Custo / aquisição
 
@@ -130,7 +130,7 @@ Gestores                      Operam campanhas, páginas, verticais e rotinas
                               definidas por Growth/Revenue/AdOps.
 Smart Bidding                 Parceiro de monetização/AdOps e tecnologia.
 ActiveView                    Parceiro AdX/Ad Manager em exceção ativa para
-                              openzed, cliquet e respectivos subdomínios.
+                              openzed e respectivos subdomínios.
 ```
 
 Gestores e códigos usados no `UTM_medium`:

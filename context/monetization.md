@@ -27,8 +27,9 @@ Smart Bidding   Empresa parceira Google com rede AdX/Ad Manager própria.
                 blocos, reports, ROI, tecnologia, permissões e visão operacional.
 ActiveView      Empresa parceira Google com rede AdX/Ad Manager própria.
                 Tem dashboard própria, mas é menos usada pela MGS atualmente.
-                Permanece como exceção ativa para openzed, cliquet e seus
-                respectivos subdomínios.
+                Permanece como exceção ativa para openzed e seus subdomínios.
+                Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam
+                o wrapper JBF/Smart Bidding validado em produção.
 Google / AdX    Camada de pagamento/monetização por trás das redes parceiras.
                 Google paga as parceiras; as parceiras retiram o revenue share
                 delas e repassam a MGS conforme reports/fechamento.
@@ -90,11 +91,10 @@ Uso principal atual:
 
 ```text
 openzed
-cliquet
-subdomínios de openzed/cliquet
+subdomínios de openzed
 ```
 
-Esses sites/subdomínios continuam como exceção ativa porque ainda usam tecnologia/controle da ActiveView.
+Openzed e seus subdomínios continuam como exceção ativa enquanto usam tecnologia/controle da ActiveView. Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee não fazem parte dessa exceção: o runtime público validado em 2026-08-21 usa JBF/Smart Bidding e não requisita o loader ActView legado.
 
 ---
 
@@ -195,7 +195,7 @@ Queda forte de receita                     Rodolfo / Revenue / Finance
 Tráfego inválido elevado                   Rodolfo / parceiro / gestores
 Bloco quebrado ou site sem anúncio          Rodolfo / Tech / AdOps
 Alteração de rede/parceiro                  Rodolfo
-Mudança em openzed/cliquet/subdomínios      Rodolfo / ActiveView
+Mudança em openzed/subdomínios              Rodolfo / ActiveView
 Mudança de regra com impacto em ROI         Rodolfo / Geizian
 Divergência entre dashboard e planilha       Rodolfo / Finance
 ```

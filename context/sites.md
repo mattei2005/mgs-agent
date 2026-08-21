@@ -149,8 +149,8 @@ Smart Bidding e ActiveView são empresas parceiras Google com redes AdX/Ad Manag
 Regra operacional atual:
 
 ```text
-Smart Bidding   Dashboard principal/preferida da MGS.
-ActiveView      Exceção ativa para openzed, cliquet e seus subdomínios.
+Smart Bidding   Dashboard principal/preferida da MGS; inclui Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee.
+ActiveView      Exceção ativa para openzed e seus subdomínios.
 ```
 
 Sites/subdomínios AV conhecidos:
@@ -158,8 +158,6 @@ Sites/subdomínios AV conhecidos:
 ```text
 openzed.com
 finanzas.openzed.com
-cliquet.com
-finanzas.cliquet.com
 ```
 
 Se houver dúvida entre este arquivo e dashboards externos validados, vence a fonte operacional validada: Smart Bidding, ActiveView ou planilha/relatório confirmado por Rodolfo.
