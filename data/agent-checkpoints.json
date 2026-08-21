@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Concluir C12 PAUSED e readback; persistir C13 deferred; depois executar C13 na janela seguinte, validar ambas e agendar ativação pontual 00:30.",
+      "next_step": "Após cooldown, repetir C12 PAUSED com validador corrigido; validar 1x1x3; depois executar C13 na janela seguinte e agendar ativação pontual 00:30.",
       "objective": "Executar ciclo autorizado C12/C13 clonadas para ativação às 00:30",
-      "source": "discord:thread:1540137110789562408 confirmation; live dry-run daily-create-2026-08-20-20260821T020351Z.json; reconciliation manifest valid until 03:30 SP",
-      "state": "rodolfo confirmou explicitamente às 23:08 são paulo: executar c12 e c13 paused em duas janelas controladas e ativar ambas às 00:30. iniciando c12 pela rota v2 com clone raso c08 maxvol, três criativos reconciliados, quota guard e readback 1x1x3. c13 seguirá após janela mínima de 300s. crons recorrentes permanecem pausados; ativação será pontual.",
+      "source": "audit daily-create-2026-08-20-20260821T020837Z.json cleanup complete; script exact-key patch; pytest 39 passed",
+      "state": "primeira tentativa c12 criou hierarquia correta paused 1x1x3, mas o validador reprovou falsamente standard_enhancements_absent porque usava substring e encontrou standard_enhancements_catalog. cleanup completo confirmado: 3 ads, campanha, 3 creatives e 6 vídeos removidos; assets retornaram 01_ready, ares_eligible=true e sem campanha vinculada. script corrigido para chave json exata recursiva, conforme pitfall canônico; 39/39 testes passaram. aguardando completar a janela local de 300s antes da nova tentativa controlada.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T02:08:27+00:00"
+      "updated_at": "2026-08-21T02:14:29+00:00"
     },
     {
       "agent": "ares",
@@ -803,12 +803,12 @@
     {
       "agent": "zeus",
       "id": "vps-kvm4-full-update-20260820",
-      "next_step": "Obter confirmação separada antes de normalizar as 8 linhas históricas inválidas do audit JSONL; Hermes continua atualização separada",
+      "next_step": "Nenhum para a VPS; Hermes permanece iniciativa separada de port controlado",
       "objective": "Atualizar todos os 23 pacotes APT elegíveis da VPS KVM4 e concluir novo boot validado",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20260821T020202Z-events-audit-nul-repair/repair-result.json",
-      "state": "vps técnica pass; 23/23 pacotes; novo boot; 930 nuls removidos do audit com backup; 8 linhas históricas inválidas permanecem fora do escopo",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260821T013506Z-kvm4-full-update/post-reboot-validation.json",
+      "state": "pass final: kvm4 validada; 23/23 pacotes; apt 0; novo boot; serviços e gateways ativos; audit jsonl 100% parseável e sem nul",
       "thread_id": "1540144895300345987",
-      "updated_at": "2026-08-21T02:04:12+00:00"
+      "updated_at": "2026-08-21T02:11:08+00:00"
     },
     {
       "agent": "zeus",
@@ -932,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T02:08:27+00:00"
+  "updated_at": "2026-08-21T02:14:29+00:00"
 }

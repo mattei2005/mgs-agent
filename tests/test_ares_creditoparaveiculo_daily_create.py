@@ -18,6 +18,23 @@ def test_campaign_name_and_start_time():
     assert payload['bid_strategy'] == 'LOWEST_COST_WITHOUT_CAP'
 
 
+def test_standard_enhancements_validator_uses_exact_recursive_key():
+    catalog_only = {
+        'creative_features_spec': {
+            'standard_enhancements_catalog': {'enroll_status': 'OPT_OUT'},
+        }
+    }
+    exact_nested = {
+        'creative_features_spec': {
+            'nested': {
+                'standard_enhancements': {'enroll_status': 'OPT_IN'},
+            }
+        }
+    }
+    assert mod.contains_exact_json_key(catalog_only, 'standard_enhancements') is False
+    assert mod.contains_exact_json_key(exact_nested, 'standard_enhancements') is True
+
+
 def test_choose_slots_requires_deleted_or_absent():
     campaigns = [
         {'id': 'a', 'name': '50 - old', 'effective_status': 'ARCHIVED'},

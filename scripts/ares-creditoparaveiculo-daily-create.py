@@ -893,6 +893,15 @@ def read_hierarchy(common, token: str, campaign_id: str, stage: str) -> dict[str
     ], stage)
 
 
+def contains_exact_json_key(value: Any, target: str) -> bool:
+    """Return True only for an exact recursive JSON key match."""
+    if isinstance(value, dict):
+        return target in value or any(contains_exact_json_key(item, target) for item in value.values())
+    if isinstance(value, list):
+        return any(contains_exact_json_key(item, target) for item in value)
+    return False
+
+
 def validate_hierarchy(readback: dict[str, Any], source: dict[str, Any], number: int, operational_date: datetime, expected_assets: list[dict[str, Any]]) -> dict[str, Any]:
     campaign = readback["campaign"]
     adsets = readback["adsets"].get("data") or []
@@ -939,7 +948,7 @@ def validate_hierarchy(readback: dict[str, Any], source: dict[str, Any], number:
             "configured_active": (ad.get("configured_status") or ad.get("status")) == "ACTIVE",
             "effective_safe": ad.get("effective_status") in {"ACTIVE", "CAMPAIGN_PAUSED", "IN_PROCESS", "WITH_ISSUES", "PENDING_REVIEW", "PREPARED"},
             "utm_exact": bool(urls) and all(expected_code in str(url) and f"{expected_code}g01" in str(url) and "b01fb13c08" not in str(url) for url in urls),
-            "standard_enhancements_absent": "standard_enhancements" not in json.dumps(dof, ensure_ascii=False),
+            "standard_enhancements_absent": not contains_exact_json_key(dof, "standard_enhancements"),
             "page_exact": str((creative.get("object_story_spec") or {}).get("page_id")) == PAGE_ID,
             "video_count_two": len(asset_feed.get("videos") or []) == 2,
             "asset_name_match": bool(matched),
