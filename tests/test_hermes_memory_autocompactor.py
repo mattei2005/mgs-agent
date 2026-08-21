@@ -164,6 +164,14 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             compactor._protected_literals(original),
         )
 
+    def test_protected_literal_guard_ignores_regex_boundary_false_positive(self):
+        original = "diagnóstico API-first e VPS-location"
+        candidate = "diagnóstico API- primeiro e VPS- localização"
+        self.assertTrue(compactor._protected_literals_preserved(original, candidate))
+
+    def test_protected_literal_guard_rejects_value_change(self):
+        self.assertFalse(compactor._protected_literals_preserved("limite 90%", "limite 80%"))
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 
@@ -251,10 +259,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             nonlocal calls
             calls += 1
             if calls == 1:
-                return {"entries": [{
-                    "index": 1,
-                    "segments": compactor._split_protected_literal_segments(candidate[0])[0],
-                }]}
+                return {"entries": [{"index": 1, "text": candidate[0]}]}
             return {"valid": False, "entries": [
                 {"index": 1, "equivalent": False, "missing": ["threshold"], "added": []}
             ]}
@@ -293,7 +298,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 llm_runner=fake_model,
                 backup_root=self.backups,
             )
-        self.assertEqual(caught.exception.code, "literal_segment_shape_mismatch")
+        self.assertEqual(caught.exception.code, "protected_literals_changed")
         self.assertEqual(source.read_text(), before)
 
     def test_apply_rejects_concurrent_source_change(self):
