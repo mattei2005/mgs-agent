@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Aguardar Full Access/permissões e autorização separada do canário: pre-stage, manifest selado, 1 campanha PAUSED, depois bundle 2 PAUSED.",
-      "objective": "Construir e instalar o Ares Campaign Engine v3 completo, centralizado e de alta escala, preservando v2 como rollback.",
-      "source": "discord:1540202751387246664; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md; ares-validation:1540214950310449253; report-infra:1540213886706253925; git:78415f4c",
-      "state": "concluído. campaign engine v3 instalado disabled e validado por zeus/ares. código modular, media prestage/registry, manifest prevalidation digest, two-campaign bundles, lanes app+account, soft100/hard120, live tier/usage headers, graph dependencies, 0 intermediate get, 1 readback/bundle, lane checkpoints/replay block, appsecret_proof support. cpv source/templates graph v26 read-only 200/200/3, utms c14/c15 offline. ares skill v3+4 refs com 18 urls, soul/hot/direct cbo/vehicle finance/paid acquisition/operation/crons aligned. current extended suite 93 pass; ares independent handoff set 68/68 pass; e2e offline 2 campaigns/6 ads; synthetic 40/3 lanes/7 waves. handoff ares 1540214201610666056, final validation 1540214950310449253. report-infra zeus 1540213886706253925. git clean e head=origin 78415f4c. engine/write/media=false; v2 paused/frozen; no meta write/upload/budget/credential/delete/restart.",
+      "next_step": "Próximo pedido autorizado de campanhas usa v3 diretamente. Full Access será validado por header quando Felipe/dev concluir App Review; até lá, respeitar janelas development_access.",
+      "objective": "Operar o Ares Campaign Engine v3 como rota ativa de produção, preservando v2 como rollback.",
+      "source": "discord:1540222249036939324; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md",
+      "state": "v3 ativo por ordem rodolfo 1540222249036939324. config readback: enabled=true, write_enabled=true, media_upload_enabled=true, prevalidation/app/account/media/quota guards preservados; v2 crons pausados. cpv aceita 1–100 campanhas, 3 mídias ready/campanha e planner 2+2+…+1. development access confirmado ao vivo por graph v26 http200/header development_access; bundles que não cabem retornam partial_deferred_quota e retomam o mesmo request sem replay. production status suporta active+future start; technical canary paused opcional. suíte atual 96 pass; offline e2e 5 campanhas active: 2→4→5, final complete_future_active; nenhuma meta write/upload/budget/credential/delete/restart nesta ativação. skill v3.0.1 e refs/hot/cbo/vehicle alinhados; soul protegido não foi reescrito, mas sua regra é condicional a config disabled e portanto não bloqueia o config ativo.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T04:27:14+00:00"
+      "updated_at": "2026-08-21T05:08:24+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T04:27:14+00:00"
+  "updated_at": "2026-08-21T05:08:24+00:00"
 }
