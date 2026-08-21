@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.3
+version: 3.0.4
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -54,7 +54,7 @@ Carregue somente a referência do branch atual.
 2. Zero busca ampla, skill discovery, patch, teste ou criação de cron durante execução.
 3. Bundle padrão: duas campanhas da mesma conta.
 4. Lanes independentes por `app_key + ad_account_id`; nunca misturar contas no mesmo bundle.
-5. `clone_prestaged`: três mídias `ready` por campanha antes do manifest; o planner divide qualquer pedido de 1–100 campanhas em bundles 2+2+…+1 por conta.
+5. `pure_clone` reutiliza os creatives/mídias existentes da campanha fonte e não depende do v3 media registry. `clone_prestaged` exige três mídias `ready` por campanha antes do manifest; o próprio pedido autorizado pode fazer pre-stage/upload/readback e registrar os IDs antes de materializar. O planner divide qualquer pedido de 1–100 campanhas em bundles 2+2+…+1 por conta.
 6. Um outer Graph batch de readback por bundle; zero GET intermediário.
 7. Cap local inicial: soft 100, hard 120; headers vivos da Meta são persistidos por lane.
 8. Canário técnico explícito nasce `PAUSED`; pedido normal de produção usa `ACTIVE` com `start_time` futuro após manifest selado e validação dos guards.

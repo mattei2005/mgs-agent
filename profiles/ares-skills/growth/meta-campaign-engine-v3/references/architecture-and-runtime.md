@@ -45,7 +45,9 @@ window                     300s
 
 ## Media
 
-Register only IDs confirmed by Meta readback. Registry key is account + asset ID + checksum. Both vertical and square video IDs must be present and `ready=true`.
+O registry é obrigatório somente para `clone_prestaged`. `pure_clone` reutiliza os creatives/mídias existentes da fonte e não consulta o registry.
+
+Para `clone_prestaged`, registre somente IDs confirmados por Meta readback. O próprio pedido autorizado pode executar pre-stage/upload/readback antes da materialização; não existe obrigação de prepopular o registry sem pedido. A chave é account + asset ID + checksum, e os IDs vertical e square precisam existir com `ready=true`.
 
 Never put token, app secret, Page token or signed URL in the registry.
 

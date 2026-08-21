@@ -7611,15 +7611,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 103077,
-      "modified_at": "2026-08-21T01:20:29-03:00",
-      "sha256": "f224bd0a1db5bbad0e69d3bba4d437d3b696f186310623818accca26b39a7c99",
+      "size_bytes": 103258,
+      "modified_at": "2026-08-21T02:03:55-04:00",
+      "sha256": "75daa4bff4135f68acb420ce6f0d2e22131279a7bf06d422c81b53d0d74a1c23",
       "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with live Meta×SB reconciliation, dynamic b01fb13cNN campaign discovery separated from the fail-closed autonomous write allowlist, safe table pagination and exact three-thread continuity archive.",
-      "validation": "py_compile PASS; 25 pytest tests PASS; live Intraday and Daily dry-runs discovered C07-C13 including zero-spend C12/C13; corrected Intraday reissued with Discord GET readback ok=true and content hash verified; recurring cron jobs remain enabled+scheduled.",
+      "validation": "py_compile PASS; 25 pytest tests PASS; live Intraday dry-run discovered C07-C13, classified zero-spend C12/C13 as D1 with action OBSERVAR D1/D2, preserved mathematically undefined KPI ratios as n/d and added an explicit human explanation; no Meta or Discord write.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "bd2cd3f274bdd35d56397616dc5f896c47fa2f040480623adc5594f46dbb271f",
+      "test_sha256": "6278218f2c6af75f5e5ca9f97c4b138429061079b1ac58295a9f10da123459cf",
       "git_tracked": false,
-      "updated_at": "2026-08-21T01:23:36-03:00"
+      "updated_at": "2026-08-21T02:05:08-04:00"
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",

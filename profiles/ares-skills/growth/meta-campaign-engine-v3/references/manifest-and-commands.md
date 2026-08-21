@@ -7,6 +7,8 @@ pure_clone         source campaign copied deeply; no replacement ads
 clone_prestaged    campaign/adset shell + exactly 3 ready replacement media assets
 ```
 
+O alcance do registry é específico ao modo: `pure_clone` reutiliza os creatives/mídias já existentes e pode executar mesmo com o v3 media registry vazio; `clone_prestaged` exige exatamente três registros `ready` por campanha. Não é necessário prepopular o registry sem pedido: quando houver mídia crua, o próprio pedido autorizado pode executar pre-stage/upload/readback, registrar os IDs e só então materializar e selar o manifest.
+
 Every campaign requires:
 
 ```text

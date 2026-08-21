@@ -257,6 +257,9 @@ def test_aligned_table_accounts_for_wide_emoji_cells():
 
 def test_decision_boundaries_are_explicit():
     module = load_reports_module()
+    assert module.recommendation(1, None, None, 3) == "OBSERVAR D1/D2"
+    assert module.recommendation(2, None, None, 3) == "OBSERVAR D1/D2"
+    assert module.recommendation(3, None, None, 3) == "OBSERVAR"
     assert module.recommendation(1, 19.999, None, 8) == "OBSERVAR D1/D2"
     assert module.recommendation(1, 20.0, None, 8) == "ESCALAR +10%"
     assert module.recommendation(1, 30.0, None, 8) == "ESCALAR +10%"
