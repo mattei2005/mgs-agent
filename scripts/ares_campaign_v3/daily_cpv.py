@@ -24,7 +24,7 @@ from .adapters import CPV_ACCOUNT_ID, CPV_PAGE_ID, build_cpv_manifest
 from .cli import real_transport_factory
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
-from .prestage import PageVideoUploader, PrestageService
+from .prestage import PageVideoUploader
 from .prevalidation import prevalidate_payload
 from .schema import Manifest
 from .transport import FakeBatchTransport
@@ -617,10 +617,13 @@ class LiveDailyBackend:
     def _graph_pages(self, path: str, params: dict[str, Any]) -> list[dict[str, Any]]:
         if not self.token:
             raise DailyBlocked("meta", "Meta token not initialized")
+        return self._graph_pages_with_token(path, params, self.token)
+
+    def _graph_pages_with_token(self, path: str, params: dict[str, Any], token: str) -> list[dict[str, Any]]:
         rows: list[dict[str, Any]] = []
         next_path, next_params = path, dict(params)
         while True:
-            status, body, _ = self.common.graph_get(next_path, self.token, next_params)
+            status, body, _ = self.common.graph_get(next_path, token, next_params)
             if status != 200 or not isinstance(body, dict):
                 raise DailyBlocked("meta", "Meta paginated GET failed", {"path": next_path, "http": status})
             rows.extend(body.get("data") or [])
@@ -718,7 +721,19 @@ class LiveDailyBackend:
             raise DailyBlocked("prestage", "Meta Page or Drive token not initialized")
         by_id = {str(row.get("id") or ""): row for row in drive.get("files") or []}
         uploader = PageVideoUploader(common=self.common, page_token=self.page_token, page_id=PAGE_ID, graph_version=GRAPH_VERSION)
-        service = PrestageService(registry, uploader)
+        expected_titles = {
+            title
+            for row in selected
+            for title in (f"V3 VERTICAL {row['asset_id']}", f"V3 SQUARE {row['asset_id']}")
+        }
+        existing_by_title: dict[str, list[str]] = {}
+        for video in self._graph_pages_with_token(f"{PAGE_ID}/videos", {"fields": "id,title,status", "limit": 500}, self.page_token):
+            title = str(video.get("title") or "")
+            if title in expected_titles and video.get("id"):
+                existing_by_title.setdefault(title, []).append(str(video["id"]))
+        duplicates = {title: ids for title, ids in existing_by_title.items() if len(ids) > 1}
+        if duplicates:
+            raise DailyBlocked("prestage", "duplicate deterministic Page video titles require reconciliation", {"duplicates": duplicates})
         prepared = []
         for row in selected:
             source = by_id.get(str(row.get("asset_drive_id") or ""))
@@ -731,7 +746,26 @@ class LiveDailyBackend:
             if clean["sha256"] != str(row.get("clean_checksum") or ""):
                 raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
             square_readback = make_square_clean(vertical, square)
-            record = service.prestage(account_id=ACCOUNT_ID, asset_id=str(row["asset_id"]), checksum=clean["sha256"], vertical_path=vertical, square_path=square)
+            vertical_title = f"V3 VERTICAL {row['asset_id']}"
+            square_title = f"V3 SQUARE {row['asset_id']}"
+            vertical_id = (existing_by_title.get(vertical_title) or [None])[0]
+            square_id = (existing_by_title.get(square_title) or [None])[0]
+            if not vertical_id:
+                vertical_id = uploader.upload(vertical, vertical_title)
+            if not square_id:
+                square_id = uploader.upload(square, square_title)
+            processing = uploader.wait_ready([str(vertical_id), str(square_id)])
+            if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
+                raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
+            record = registry.register(
+                account_id=ACCOUNT_ID,
+                asset_id=str(row["asset_id"]),
+                checksum=clean["sha256"],
+                vertical_video_id=str(vertical_id),
+                square_video_id=str(square_id),
+                ready=True,
+                source="v3-daily-resumable-meta-readback",
+            )
             prepared.append({"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record})
         return prepared
 
