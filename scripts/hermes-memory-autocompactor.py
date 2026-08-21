@@ -179,6 +179,11 @@ def _restore_candidate_literals(
         returned_segments = item.get("segments")
         if not isinstance(returned_segments, list):
             raise CompactionError("literal_segment_shape_mismatch")
+        if any(
+            not isinstance(segment, str) or _PROTECTED_RE.search(segment)
+            for segment in returned_segments
+        ):
+            raise CompactionError("protected_literals_changed")
         original_text = str(original[index - 1])
         original_segments, literals = _split_protected_literal_segments(original_text)
         normalized_segments = _normalize_segment_boundaries(
@@ -223,6 +228,7 @@ def _validate_candidate(
     selected_indexes: Sequence[int],
     *,
     enforce_total: bool = True,
+    protected_literals_exact: bool = False,
 ) -> List[str]:
     raw_entries = candidate.get("entries")
     if not isinstance(raw_entries, list) or len(raw_entries) != len(selected_indexes):
@@ -251,11 +257,12 @@ def _validate_candidate(
         result[index - 1] = by_index[index]
     if len(set(result)) != len(result):
         raise CompactionError("candidate_duplicate_entries")
-    for index in expected:
-        old = original[index - 1]
-        new = result[index - 1]
-        if _protected_literals(old) != _protected_literals(new):
-            raise CompactionError("protected_literals_changed")
+    if not protected_literals_exact:
+        for index in expected:
+            old = original[index - 1]
+            new = result[index - 1]
+            if _protected_literals(old) != _protected_literals(new):
+                raise CompactionError("protected_literals_changed")
     if len(budgets) != len(result):
         raise CompactionError("candidate_budget_shape_invalid")
     if enforce_total and any(len(result[index - 1]) > budgets[index - 1] for index in expected):
@@ -306,6 +313,10 @@ def _proposal_prompt(
             "max_chars": budgets[index - 1],
             "segment_count": len(segments),
             "protected_literal_chars": sum(len(value) for value in literals),
+            "segment_char_budget": max(
+                1,
+                budgets[index - 1] - sum(len(value) for value in literals),
+            ),
             "segments": segments,
         })
     retry = ""
@@ -447,6 +458,7 @@ def propose_and_verify(
                     budgets,
                     indexes,
                     enforce_total=False,
+                    protected_literals_exact=True,
                 )
                 return
             except CompactionError as exc:

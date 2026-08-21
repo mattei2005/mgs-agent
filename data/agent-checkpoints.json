@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Construir rota v2: baseline Drive×Meta separada e incremental; media staging persistente; clone writer lendo somente seis bindings reservados + source/targets/budget; batch POST por dependency boundary; request budget hard gate. Validar em C12 canary sem repetir portfólio, depois C13, antes de reativar cron.",
-      "objective": "Reescrever e validar a rota de clone diário CPV sem reconciliação global no writer",
-      "source": "discord:thread:1539826050765299872; cumulative audit aggregation 2026-08-20; canonical rate-limit plan; operation config v1.0.38; scheduler readback creation+activation paused",
-      "state": "rodolfo identificou corretamente que a quota não fazia sentido para duas campanhas. postmortem real: 7 audits, 6 full reconciliations repetidas, 1.436 video subrequests e 984 ad rows; 5 campanhas, 12 ads e 48 technical video ids foram criados/limpos durante retries. a rota misturava baseline global, staging de mídia e campaign write; graph batch reduziu transport mas subrequests consumiram quota. clone retry one-shot removido; creation e activation crons pausados; state route_paused_postmortem, zero prepared ids, c12/c13 antigas preservadas. buc live 46%, development_access.",
+      "next_step": "Aguardar autorização separada de Rodolfo para o canário C12 PAUSED. Antes do write, revalidar manifest vigente, quota plan e status sequencial; não reativar crons nem executar C13 sem nova janela/autorização.",
+      "objective": "Operar rota v2 de clone diário CPV com quota guard e reconciliação separada",
+      "source": "Zeus handoff; scripts canônicos; reconciliation manifest; audit daily-create-2026-08-20-20260821T003059Z.json; pytest 38 passed; Hermes cron readback paused",
+      "state": "handoff zeus validado por ares nas fontes canônicas. writer live aponta para scripts/ares-creditoparaveiculo-daily-create.py e não chama reconciliação global; exige manifest separado válido. reconciliador separado gera manifest drive-meta 6/6. helper separa x-ad-account-usage do buc e usa ledger rolling 300s quando x-ad não vem. dry-run audit 20260821t003059z: http/source válidos, c12 selecionada, c13 preflight_deferred, score 50 vs 95, writer_global_reconciliation_calls=0, budget 153→183, zero meta write. testes independentes por ares: 38 passed. criação e ativação permanecem pausadas; nenhuma produção autorizada.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T00:01:45+00:00"
+      "updated_at": "2026-08-21T00:40:22+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:37:11+00:00"
+  "updated_at": "2026-08-21T00:40:22+00:00"
 }
