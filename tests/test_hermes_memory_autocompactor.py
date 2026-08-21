@@ -181,7 +181,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 return {"entries": [
                     {
                         "index": row["index"],
-                        "text": compactor._mask_protected_literals(
+                        "segments": compactor._split_protected_literal_segments(
                             candidate[row["index"] - 1]
                         )[0],
                     }
@@ -224,7 +224,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             if calls == 1:
                 return {"entries": [{
                     "index": 1,
-                    "text": compactor._mask_protected_literals(candidate[0])[0],
+                    "segments": compactor._split_protected_literal_segments(candidate[0])[0],
                 }]}
             return {"valid": False, "entries": [
                 {"index": 1, "equivalent": False, "missing": ["threshold"], "added": []}
@@ -264,7 +264,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 llm_runner=fake_model,
                 backup_root=self.backups,
             )
-        self.assertEqual(caught.exception.code, "literal_placeholder_mismatch")
+        self.assertEqual(caught.exception.code, "literal_segment_shape_mismatch")
         self.assertEqual(source.read_text(), before)
 
     def test_apply_rejects_concurrent_source_change(self):

@@ -469,6 +469,7 @@ def record_response_usage(headers, status, payload, now_epoch=None, logical_poin
     with _open_throttle_state() as fh:
         fcntl.flock(fh, fcntl.LOCK_EX)
         state = _read_state_locked(fh)
+        _update_local_score_ledger(state, now_epoch, logical_points, usage, ad_usage)
         if usage['entry_count']:
             state['business_usage'] = usage
             state['usage_updated_at_epoch'] = now_epoch
@@ -601,14 +602,14 @@ def _graph_get_once(path, token, params=None):
             body = resp.read().decode('utf-8', 'replace')
             payload = json.loads(body)
             headers = dict(resp.headers)
-            record_response_usage(headers, resp.status, payload)
+            record_response_usage(headers, resp.status, payload, logical_points=1)
             return resp.status, payload, headers
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8','replace')
         try: payload = json.loads(body)
         except Exception: payload = {'raw_length': len(body)}
         headers = dict(e.headers)
-        record_response_usage(headers, e.code, payload)
+        record_response_usage(headers, e.code, payload, logical_points=1)
         return e.code, payload, headers
 
 
@@ -626,7 +627,7 @@ def _encode_form(params):
     return clean
 
 
-def _graph_post_once(path, token, params=None):
+def _graph_post_once(path, token, params=None, logical_points=3):
     clean = _encode_form(params)
     clean['access_token'] = token
     req = urllib.request.Request(
@@ -641,15 +642,19 @@ def _graph_post_once(path, token, params=None):
             body = resp.read().decode('utf-8', 'replace')
             payload = json.loads(body) if body else {}
             headers = dict(resp.headers)
-            record_response_usage(headers, resp.status, payload)
+            record_response_usage(headers, resp.status, payload, logical_points=logical_points)
             return resp.status, payload, headers
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8','replace')
         try: payload = json.loads(body)
         except Exception: payload = {'raw_length': len(body)}
         headers = dict(e.headers)
-        record_response_usage(headers, e.code, payload)
+        record_response_usage(headers, e.code, payload, logical_points=logical_points)
         return e.code, payload, headers
+
+
+def _graph_post_batch_once(path, token, params=None):
+    return _graph_post_once(path, token, params, logical_points=0)
 
 
 def _deferred_payload(status, payload, attempts, total_sleep, retry_after):
@@ -720,7 +725,7 @@ def graph_batch_get(token, requests):
             relative_url += '?' + urllib.parse.urlencode(params)
         batch.append({'method': 'GET', 'relative_url': relative_url})
         names.append(str(item.get('name') or f'request_{index+1}'))
-    status, payload, headers = graph_post('', token, {'batch': batch})
+    status, payload, headers = _request_with_retry(_graph_post_batch_once, '', token, {'batch': batch})
     if status != 200 or not isinstance(payload, list):
         return status, payload, headers
     normalized = []
@@ -733,7 +738,7 @@ def graph_batch_get(token, requests):
         raw_body = item.get('body') if isinstance(item, dict) else None
         try: body = json.loads(raw_body) if isinstance(raw_body, str) else raw_body
         except (TypeError, ValueError, json.JSONDecodeError): body = {'raw_length': len(raw_body or '')}
-        record_response_usage(child_headers, code, body if isinstance(body, dict) else {})
+        record_response_usage(child_headers, code, body if isinstance(body, dict) else {}, logical_points=1)
         normalized.append({'name': names[index], 'code': code, 'body': body, 'headers': child_headers})
     return status, normalized, headers
 
