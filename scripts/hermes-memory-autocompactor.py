@@ -325,15 +325,15 @@ def _proposal_prompt(
     payload = []
     for index in selected_indexes:
         segments, literals = _split_protected_literal_segments(entries[index - 1])
+        literal_chars = sum(len(value) for value in literals)
+        base_segment_budget = max(1, budgets[index - 1] - literal_chars)
+        pressure = 0.65 if attempt == 1 else 0.55
         payload.append({
             "index": index,
             "max_chars": budgets[index - 1],
             "segment_count": len(segments),
-            "protected_literal_chars": sum(len(value) for value in literals),
-            "segment_char_budget": max(
-                1,
-                budgets[index - 1] - sum(len(value) for value in literals),
-            ),
+            "protected_literal_chars": literal_chars,
+            "segment_char_budget": max(1, math.floor(base_segment_budget * pressure)),
             "segments": segments,
         })
     retry = ""

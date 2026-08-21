@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Aguardar autorização separada de Rodolfo para o canário C12 PAUSED. Antes do write, revalidar manifest vigente, quota plan e status sequencial; não reativar crons nem executar C13 sem nova janela/autorização.",
-      "objective": "Operar rota v2 de clone diário CPV com quota guard e reconciliação separada",
-      "source": "discord:thread:1540137110789562408; auth audit auth-check-creditoparaveiculo-token-refresh-20260821.json; operation config v1.0.41; live Graph v26 readbacks at 2026-08-20T20:44 ET",
-      "state": "token anunciante cpv g006 atualizado por rodolfo e validado ao vivo com refresh forçado do 1password: graph v26, debug_token http200 is_valid=true, conta http200 ativa/saudável em usd e america/sao_paulo, 13 permissões concedidas com as 9 obrigatórias presentes, garagem brasil presente com advertise e edge de campanhas http200. buc ficou em 0%/1%. limitação permanece: header vivo reporta development_access e screenshot do app dashboard mostra marketing api access tier limited; ads_read, ads_management e pages_manage_ads continuam standard. o refresh melhora autenticação/validade, mas não aumenta throughput/quota do app. rota v2 permanece necessária; criação e ativação continuam pausadas e nenhuma produção foi autorizada.",
+      "next_step": "Aguardar até 24h para a Meta ativar Solicitar acesso avançado nas três permissões; Rodolfo poderá então iniciar a solicitação. Antes de qualquer canário C12, revalidar tier vivo, manifest, quota plan e status sequencial; não reativar crons nem executar produção sem autorização.",
+      "objective": "Operar rota v2 de clone diário CPV com quota guard, reconciliação separada e acesso Meta aplicável",
+      "source": "discord:thread:1540137110789562408; audit meta-app-permission-test-calls-20260821.json; operation config v1.0.42; Graph v26 live readbacks",
+      "state": "token cpv g006 validado saudável. em 20/08/2026 às 20:52 et, ares executou chamadas de teste graph v26 bem-sucedidas para as três permissões que ainda estavam standard: ads_read get ad_account/campaigns http200; ads_management post campaign validate_only http200 success=true sem id/objeto; pages_manage_ads get page/ads_posts http200 usando page access token resolvido internamente. zero objeto criado, zero write aplicado, nenhuma credencial exposta. meta informa que o botão solicitar acesso avançado pode levar até 24h após a primeira chamada bem-sucedida para ativar. tier vivo continua development_access/limited até aprovação efetiva. criação e ativação seguem pausadas; nenhuma produção autorizada.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T00:46:31+00:00"
+      "updated_at": "2026-08-21T00:53:22+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:46:31+00:00"
+  "updated_at": "2026-08-21T00:53:22+00:00"
 }

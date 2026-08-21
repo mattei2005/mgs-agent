@@ -532,7 +532,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T21:44:16-03:00",
+  "updated_at": "2026-08-20T21:52:52-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -824,7 +824,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.41",
+  "playbook_version": "1.0.42",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1472,6 +1472,37 @@
       "ads_management": "Standard access",
       "pages_manage_ads": "Standard access",
       "several_page_and_business_permissions": "Advanced access"
+    },
+    "advanced_access_test_calls": {
+      "completed_at_et": "2026-08-20T20:52:15-04:00",
+      "graph_version": "v26.0",
+      "ads_read": {
+        "method": "GET",
+        "endpoint": "ad_account/campaigns",
+        "http_status": 200,
+        "success": true
+      },
+      "ads_management": {
+        "method": "POST validate_only",
+        "endpoint": "ad_account/campaigns",
+        "http_status": 200,
+        "success": true,
+        "object_created": false
+      },
+      "pages_manage_ads": {
+        "method": "GET",
+        "endpoint": "page/ads_posts",
+        "auth": "internally_resolved_page_access_token",
+        "http_status": 200,
+        "success": true
+      },
+      "side_effects": {
+        "objects_created": 0,
+        "writes_applied": 0,
+        "credential_exposed": false
+      },
+      "dashboard_activation_window": "Meta says the advanced-access request button can take up to 24 hours after the first successful API call to become active",
+      "audit": "data/ares/meta-ads/audit/meta-app-permission-test-calls-20260821.json"
     },
     "conclusion": "Authentication and required asset permissions are healthy after the refresh, but the token refresh does not upgrade the app's Marketing API tier. Read requests are working; high-volume write throughput remains constrained by development/Limited access and the quota-aware route stays required."
   },
