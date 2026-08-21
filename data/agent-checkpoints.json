@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Após cooldown, repetir C12 PAUSED com validador corrigido; validar 1x1x3; depois executar C13 na janela seguinte e agendar ativação pontual 00:30.",
+      "next_step": "Executar resume pontual C13 após 23:31 São Paulo, validar ambas e agendar ativação pontual 00:30.",
       "objective": "Executar ciclo autorizado C12/C13 clonadas para ativação às 00:30",
-      "source": "audit daily-create-2026-08-20-20260821T020837Z.json cleanup complete; script exact-key patch; pytest 39 passed",
-      "state": "primeira tentativa c12 criou hierarquia correta paused 1x1x3, mas o validador reprovou falsamente standard_enhancements_absent porque usava substring e encontrou standard_enhancements_catalog. cleanup completo confirmado: 3 ads, campanha, 3 creatives e 6 vídeos removidos; assets retornaram 01_ready, ares_eligible=true e sem campanha vinculada. script corrigido para chave json exata recursiva, conforme pitfall canônico; 39/39 testes passaram. aguardando completar a janela local de 300s antes da nova tentativa controlada.",
+      "source": "audit daily-create-2026-08-20-20260821T022441Z.json; state preflight_deferred; Discord readback content_match=true",
+      "state": "c12 concluída e validada: campanha paused, adset active, 3 ads active, maxvol usd30, estrutura 1x1x3, início alvo 00:30. três assets score_baixo 016-018 usados e movidos para 02_testing. estoque agora 260 (42 img + 218 vid), pool elegível único 55. c13 persistida preflight_deferred com assets sem_entrada 037-039 e resume_after 23:31 são paulo. validador de chave exata e retry bounded de validate_only 5xx corrigidos; 40/40 testes passam.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T02:14:29+00:00"
+      "updated_at": "2026-08-21T02:27:17+00:00"
     },
     {
       "agent": "ares",
@@ -932,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T02:14:29+00:00"
+  "updated_at": "2026-08-21T02:27:17+00:00"
 }
