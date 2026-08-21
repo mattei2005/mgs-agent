@@ -10,6 +10,10 @@ Rodolfo's operator screenshots confirmed the benchmark engine is a standardized 
 
 This evidence strengthens the hot-path invariant below: do not let each Ares conversation invent or patch its own executor.
 
+A later screenshot reports that the operator asked the external agent to raise a limit from 60 to 120 and that it "worked," but the operator did not know how. Treat this as evidence of a configurable executor-side cap, not proof that an agent changed Meta's server quota. In MGS, 60 is also a local hardcoded guard (`DEVELOPMENT_ACCESS_SCORE_MAX`). Raising a client constant only removes local protection. The vNext engine must resolve capacity per app+ad-account from live headers/local measured ledger and canary acceptance; never substitute 120 for 60 without server-side evidence.
+
+A follow-up screenshot clarified that reaching 120 still locks the external executor and one campaign is estimated to consume 40–50. Its key optimization is fewer GETs: the old route did GET after campaign, adgroup and creative; the new route prevalidates the bundle, creates/uploads it, then performs one consolidated GET for two campaigns (or one per two campaigns in larger lots). Port this pattern as prevalidated manifests plus consolidated readback; do not merely raise the local constant.
+
 ## First distinction: three workloads
 
 ```text

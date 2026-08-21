@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Rodolfo decidir se autoriza construir um executor central vNext, preservando v2 como rollback: dispatcher único sem searching, auditor/proteção separados, media pre-stage, lanes por conta, batch engine, native schedule, instrumentação e canários 1→3→10→40.",
+      "next_step": "Rodolfo decidir se autoriza vNext central. Implementação deve começar pelo bundle prevalidado + readback consolidado e media pre-stage, não por aumentar60→120.",
       "objective": "Auditar integralmente o subsistema de criação/clonagem do Ares e desenhar rota de alta escala comparável a 40 clones em 15 minutos, reduzindo searching, tool overhead, chamadas Meta e etapas operacionais.",
-      "source": "discord:1540188640955727983; images:img_f6236782b9ff.png,img_f7ba75237164.png,img_2f67a7f709bb.png,img_66db5b74b13a.png,img_972404cb2e14.png; report:/root/mgs-agent/work/ares-high-scale-audit-20260821/report.md; findings:/root/mgs-agent/work/ares-high-scale-audit-20260821/findings.json",
-      "state": "auditoria concluída sem implementar vnext, agora reforçada por 5 capturas do operador externo. o executor externo é programa central padronizado separado do agente, único para todos os tópicos, já chamado v23; tem proteção de api e validação de fluxo separadas; rota referência→build→auditoria→executor paused→get final; mídia nova sobe primeiro à library meta; drive/upload adiciona ~5min; melhorias ocorrem pós-execução; operador relata 100 campanhas em uma operação após mapear barreira >99. isso confirma nosso diagnóstico: ares deve parar de criar/patchar executor por sessão. benchmark normalizado 67,5s/clone/account lane vs ares clean119,4s; arquivos mecanicamente íntegros, mas writer monolítico/sequencial, throttle global, mídia no hot path, async morto, score 12 vs 13 e regras conflitantes.",
+      "source": "discord:1540197534084112435; image:img_2ca790662b14.webp; report:/root/mgs-agent/work/ares-high-scale-audit-20260821/report.md; findings:/root/mgs-agent/work/ares-high-scale-audit-20260821/findings.json",
+      "state": "auditoria concluída sem implementar vnext. evidência externa refinada: limite executor60→120 é guard empírico; atingir120 ainda trava e campanha consome40–50. otimização-chave externa: rota antiga fazia get após campaign, adgroup e creative; nova prevalida o bundle, cria/upload tudo e faz um get para duas campanhas, repetindo um get a cada2 em lotes maiores. portanto não elevar constante ares: remover gets intermediários, prevalidar manifest e consolidar readback. demais achados permanecem: executor central v23 separado do agente, media pre-stage, lanes por conta; ares119,4s vs67,5s/lane, monólito1740, throttle global, seq, async morto, score13vs12 e drift.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T03:04:27+00:00"
+      "updated_at": "2026-08-21T03:16:47+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T03:04:27+00:00"
+  "updated_at": "2026-08-21T03:16:47+00:00"
 }

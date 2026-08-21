@@ -14,7 +14,12 @@
     "new_media_uploaded_before_campaign_build": true,
     "drive_upload_penalty_reported_minutes": 5,
     "reported_bulk_campaigns_one_operation": 100,
-    "operator_requested_local_limit_change": {"from": 60, "to": 120, "reported_working": true, "server_side_proof": false},
+    "operator_requested_local_limit_change": {"from": 60, "to": 120, "reported_working": true, "server_side_proof": false, "locks_when_reaching_120": true},
+    "reported_local_cost_per_campaign": "40-50",
+    "get_optimization": {
+      "old": "GET after campaign, adgroup and creative",
+      "new": "prevalidate bundle, upload/create bundle, one GET for two campaigns; for larger lots one GET per two campaigns"
+    },
     "improvement_loop": ["execute", "audit_duration_or_error", "suggest_improvement", "apply", "next_problem"]
   },
   "benchmark": {

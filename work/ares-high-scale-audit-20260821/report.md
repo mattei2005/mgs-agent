@@ -37,6 +37,19 @@ As explicações compatíveis com a evidência são:
 
 Para o Ares vNext, não usar 60 nem 120 como constante operacional cega. Resolver capacidade por `app_id + ad_account_id`, usar os headers vivos e manter o cap local como proteção conservadora. Aumentar o número só pode ocorrer após um canário provar que o servidor aceitou a carga sem `17/2446079`.
 
+A captura seguinte esclarece o mecanismo do executor externo:
+
+- atingir 120 trava a operação; o operador não considera seguro aumentar mais;
+- o contador local estima 40–50 por campanha;
+- a rota antiga criava campaign e fazia GET, criava adgroup e fazia GET, criava creative e fazia outro GET;
+- a rota otimizada envia o bundle e só então faz GET;
+- para duas campanhas, faz as duas e um único GET consolidado;
+- em lotes maiores, faz um GET a cada duas campanhas;
+- o payload já é avaliado antes do upload, reduzindo a necessidade de validação intermediária;
+- segundo o operador, os GETs eram a parte que mais consumia.
+
+Isso reforça que 120 é um orçamento/guard empírico do executor, não uma quota que o agente “aumentou” na Meta. A otimização correta para o Ares não é trocar a constante: é eliminar GET após cada nível, prevalidar o bundle e fazer readback consolidado por duas campanhas/IDs conhecidos.
+
 ## Cobertura da investigação
 
 - Thread de autorização/execução `1540137110789562408`: 15/15 mensagens; 12 anexos de token/permissões inventariados, não necessários para medir throughput.
