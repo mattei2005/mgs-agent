@@ -174,7 +174,14 @@ def parse_campaign_number(name: str | None) -> int | None:
 
 
 def next_campaign_numbers(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> list[int]:
-    numbers = [number for number in (parse_campaign_number(row.get("name")) for row in campaigns) if number is not None]
+    numbers = []
+    for row in campaigns:
+        status = str(row.get("effective_status") or row.get("status") or "").upper()
+        if status in {"ARCHIVED", "DELETED"}:
+            continue
+        number = parse_campaign_number(row.get("name"))
+        if number is not None:
+            numbers.append(number)
     live_max = max(numbers, default=0)
     configured = int((operation.get("campaign_numbering_policy") or {}).get("next_required_campaign_number") or live_max + 1)
     start = live_max + 1
@@ -350,11 +357,15 @@ def drive_inventory(token: str) -> dict[str, Any]:
         children = drive_children(token, folder["id"])
         ready = one_folder(children, "01_READY", f"drive_{kind}_ready")
         testing = one_folder(children, "02_TESTING", f"drive_{kind}_testing")
-        current = [row for row in drive_children(token, ready["id"]) if row.get("mimeType") != FOLDER_MIME]
-        for row in current:
-            row.update(kind=kind, ready_parent_id=ready["id"], testing_parent_id=testing["id"])
-        files.extend(current)
-        counts[kind] = len(current)
+        current_ready = [row for row in drive_children(token, ready["id"]) if row.get("mimeType") != FOLDER_MIME]
+        current_testing = [row for row in drive_children(token, testing["id"]) if row.get("mimeType") != FOLDER_MIME]
+        for row in current_ready:
+            row.update(kind=kind, location="01_READY", ready_parent_id=ready["id"], testing_parent_id=testing["id"])
+        for row in current_testing:
+            row.update(kind=kind, location="02_TESTING", ready_parent_id=ready["id"], testing_parent_id=testing["id"])
+        files.extend(current_ready)
+        files.extend(current_testing)
+        counts[kind] = len(current_ready)
     counts["TOTAL"] = sum(counts.values())
     return {"root": root, "files": files, "counts": counts}
 
@@ -419,6 +430,17 @@ def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
 
 
 def move_to_testing(token: str, source: dict[str, Any]) -> dict[str, Any]:
+    if source.get("location") == "02_TESTING" or set(source.get("parents") or []) == {source.get("testing_parent_id")}:
+        return {
+            "id": source.get("id"),
+            "name": source.get("name"),
+            "driveId": source.get("driveId"),
+            "parents": [source.get("testing_parent_id")],
+            "trashed": False,
+            "size": source.get("size"),
+            "md5Checksum": source.get("md5Checksum"),
+            "already_in_testing": True,
+        }
     params = urllib.parse.urlencode({"addParents": source["testing_parent_id"], "removeParents": source["ready_parent_id"], "fields": "id,name,driveId,parents,trashed,size,md5Checksum", "supportsAllDrives": "true"})
     result = drive_request(token, "PATCH", f"https://www.googleapis.com/drive/v3/files/{source['id']}?{params}", body=b"{}", content_type="application/json")
     if result.get("driveId") != DRIVE_ID or result.get("trashed") or set(result.get("parents") or []) != {source["testing_parent_id"]} or str(result.get("md5Checksum") or "") != str(source.get("md5Checksum") or ""):
@@ -664,6 +686,7 @@ def run_daily(
     gate: bool = False,
     post_report: bool = False,
     quiet: bool = False,
+    plan_only: bool = False,
     backend_factory: Callable[[DailyPaths], Any] = LiveDailyBackend,
 ) -> dict[str, Any]:
     current = now_sp.astimezone(SP) if now_sp else datetime.now(SP)
@@ -675,7 +698,7 @@ def run_daily(
     paths.lock.parent.mkdir(parents=True, exist_ok=True)
     with paths.lock.open("a+") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
-        state = load_json(paths.state) if paths.state.exists() else {}
+        state = {} if plan_only else (load_json(paths.state) if paths.state.exists() else {})
         if state.get("completed_operational_date_sp") == day:
             return {"status": "ALREADY_COMPLETE", "operational_date_sp": day, "audit": state.get("audit_path")}
         request_id = str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
@@ -692,12 +715,37 @@ def run_daily(
             count = int(state.get("campaign_count") or requested_campaign_count(operation, operational_date))
             meta = backend.meta_preflight()
             numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
-            budget = enforce_budget_cap(meta["campaigns"], count, operation)
+            completed_before = len(state.get("campaign_ids") or [])
+            pending_budget_count = max(0, count - completed_before)
+            budget = enforce_budget_cap(meta["campaigns"], pending_budget_count, operation)
             drive_info = backend.drive_preflight()
             drive = drive_info["drive"]
             if not selected:
-                selected = select_assets(inventory_rows, {str(row.get("id") or "") for row in drive.get("files") or []}, count * 3)
+                selected = select_assets(
+                    inventory_rows,
+                    {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"},
+                    count * 3,
+                )
                 reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
+                if plan_only:
+                    result = {
+                        "status": "DRY_RUN_OK",
+                        "operational_date_sp": day,
+                        "campaign_count": count,
+                        "campaign_numbers": numbers,
+                        "planner_bundles": [2] * (count // 2) + ([1] if count % 2 else []),
+                        "budget": budget,
+                        "selected_assets": [str(row.get("canonical_filename") or "") for row in selected],
+                        "reconciliation": reconciliation,
+                        "drive_counts": drive.get("counts") or {},
+                        "side_effects": {"inventory_reservation": False, "media_upload": False, "campaign_write": False, "drive_move": False},
+                        "audit": str(audit_path),
+                    }
+                    audit.update(stage="DRY_RUN_OK", final=result, completed_at_utc=utc_now())
+                    atomic_json(audit_path, audit)
+                    if not quiet:
+                        print(json.dumps(result, ensure_ascii=False, indent=2))
+                    return result
                 reserve_inventory(paths.inventory, inventory_rows, selected, audit_path)
                 selected_ids = {str(row.get("asset_id") or "") for row in selected}
                 state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "updated_at_utc": utc_now()}
@@ -810,8 +858,9 @@ def run_daily(
             if not audit.get("side_effects", {}).get("media_upload") and not audit.get("side_effects", {}).get("campaign_write") and selected_ids:
                 inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
                 release_inventory(paths.inventory, inventory_rows, selected_ids)
-            state.update(status="FAILED", failure=failure, updated_at_utc=utc_now())
-            atomic_json(paths.state, state)
+            if not plan_only:
+                state.update(status="FAILED", failure=failure, updated_at_utc=utc_now())
+                atomic_json(paths.state, state)
             if post_report:
                 try:
                     post_discord(f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\nEtapa: {failure.get('stage') or failure['type']}. Nenhuma conclusão foi declarada sem readback; o estado foi preservado para reconciliação.")

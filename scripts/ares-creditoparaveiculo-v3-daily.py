@@ -23,6 +23,7 @@ def parser() -> argparse.ArgumentParser:
     ap.add_argument("--post-discord", action="store_true", help="Post sanitized result to the fixed creation thread")
     ap.add_argument("--quiet", action="store_true", help="Suppress stdout on normal scheduler runs")
     ap.add_argument("--operational-date", help="Testing override YYYY-MM-DD; does not bypass live gates")
+    ap.add_argument("--dry-run", action="store_true", help="Live read-only plan; no reservation, upload, campaign write or Drive move")
     ap.add_argument("--offline-smoke", action="store_true", help="Fully offline fake transport; no Drive/Meta/Discord")
     return ap
 
@@ -36,8 +37,8 @@ def main(argv: list[str] | None = None) -> int:
     now_sp = datetime.now(SP)
     if args.operational_date:
         now_sp = datetime.fromisoformat(args.operational_date).replace(hour=17, minute=0, second=0, microsecond=0, tzinfo=SP)
-    result = run_daily(paths=DailyPaths(), now_sp=now_sp, gate=args.gate, post_report=args.post_discord, quiet=args.quiet)
-    return 0 if result.get("status") in {"SILENT_NOT_DUE", "ALREADY_COMPLETE", "COMPLETE_FUTURE_ACTIVE", "PARTIAL_DEFERRED_QUOTA"} else 1
+    result = run_daily(paths=DailyPaths(), now_sp=now_sp, gate=args.gate, post_report=(args.post_discord and not args.dry_run), quiet=args.quiet, plan_only=args.dry_run)
+    return 0 if result.get("status") in {"SILENT_NOT_DUE", "ALREADY_COMPLETE", "DRY_RUN_OK", "COMPLETE_FUTURE_ACTIVE", "PARTIAL_DEFERRED_QUOTA"} else 1
 
 
 if __name__ == "__main__":
