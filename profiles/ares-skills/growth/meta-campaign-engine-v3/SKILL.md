@@ -70,7 +70,7 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py validate --manifest <
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py plan --manifest <manifest>
 ```
 
-A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais; o primeiro bundle do primeiro pedido é tratado como canário guardado/fail-closed e os demais seguem a quota da lane.
+A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais. O guard inicial é **por lane**: em uma conta, o primeiro bundle daquela conta é guardado/fail-closed; em várias contas, o primeiro bundle de cada `app_key + ad_account_id` pode iniciar em paralelo pelo `ThreadPoolExecutor`. Não existe canário global único antes das outras lanes; os bundles seguintes de cada lane obedecem à própria quota.
 
 ## Verification
 
