@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Aguardar aprovação/permissões Meta e autorização operacional separada para o canário v3: pre-stage das mídias, manifest selado, 1 campanha PAUSED, depois bundle de 2 PAUSED com readback consolidado.",
+      "next_step": "Aguardar Full Access/permissões e autorização separada do canário: pre-stage, manifest selado, 1 campanha PAUSED, depois bundle 2 PAUSED.",
       "objective": "Construir e instalar o Ares Campaign Engine v3 completo, centralizado e de alta escala, preservando v2 como rollback.",
-      "source": "discord:1540202751387246664; runner:/root/mgs-agent/scripts/ares-campaign-engine-v3.py; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md; report-infra:1540213886706253925; handoff:1540214201610666056",
-      "state": "implementação concluída e handoff entregue. v3 instalado disabled com 12 módulos/entrypoint, config/operation/media registry/source templates, skill v3+4 refs e 18 urls meta, soul/hot map/3 skills/cpv operation/cron paused reasons alinhados. 68 testes pass; cpv offline e2e 2x1x3 prevalidated, c14/c15 utm, 1 readback, 0 intermediate get; synthetic 40/3 lanes/7 waves; source graph v26 read-only 200/200/3. live/mirror parity, v2 hashes unchanged, inventory scripts198/ares skills155, report-infra 1540213886706253925. handoff 1540214201610666056; ares ack 1540214284355633193 e carregou a nova skill sem restart. engine/write/media upload false, v2 jobs paused/frozen, no meta write/budget/credential/delete/restart.",
+      "source": "discord:1540202751387246664; acceptance:/root/mgs-agent/work/ares-campaign-engine-v3-20260821/acceptance.md; ares-validation:1540214950310449253; report-infra:1540213886706253925; git:78415f4c",
+      "state": "concluído. campaign engine v3 instalado disabled e validado por zeus/ares. código modular, media prestage/registry, manifest prevalidation digest, two-campaign bundles, lanes app+account, soft100/hard120, live tier/usage headers, graph dependencies, 0 intermediate get, 1 readback/bundle, lane checkpoints/replay block, appsecret_proof support. cpv source/templates graph v26 read-only 200/200/3, utms c14/c15 offline. ares skill v3+4 refs com 18 urls, soul/hot/direct cbo/vehicle finance/paid acquisition/operation/crons aligned. current extended suite 93 pass; ares independent handoff set 68/68 pass; e2e offline 2 campaigns/6 ads; synthetic 40/3 lanes/7 waves. handoff ares 1540214201610666056, final validation 1540214950310449253. report-infra zeus 1540213886706253925. git clean e head=origin 78415f4c. engine/write/media=false; v2 paused/frozen; no meta write/upload/budget/credential/delete/restart.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T04:22:19+00:00"
+      "updated_at": "2026-08-21T04:27:14+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T04:23:43+00:00"
+  "updated_at": "2026-08-21T04:27:14+00:00"
 }

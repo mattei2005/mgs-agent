@@ -33,7 +33,8 @@ Authorization: Rodolfo message `1540202751387246664`
 ## Execution evidence
 
 - Python compilation: PASS.
-- Combined v2/v3/common/activation suite: 68 passed.
+- Combined current suite including v3, fixed reports, v2/common and activation rollback: 93 passed.
+- Independent Ares handoff reproduction of the requested v3/v2 set: 68/68 passed.
 - CPV offline E2E: 2 campaigns, 6 ads, prevalidated, c14/c15 UTMs, no legacy c08 UTM, one readback batch, zero intermediate GET.
 - Synthetic full-access benchmark: 40 campaigns, 3 account lanes, 7 waves, 6 campaigns maximum per global wave, zero intermediate GET.
 - Live read-only source refresh: Graph v26 campaign/adset/3 ads HTTP 200; 3 sanitized creative templates; no `standard_enhancements`; no credential persisted.
