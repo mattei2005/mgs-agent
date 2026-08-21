@@ -333,11 +333,11 @@
         },
         "12": {
           "campaign_id": "120250860233210632",
-          "cycle_start_date": "2026-08-21"
+          "cycle_start_date": "2026-08-22"
         },
         "13": {
           "campaign_id": "120250860295890632",
-          "cycle_start_date": "2026-08-21"
+          "cycle_start_date": "2026-08-22"
         }
       },
       "required": [
@@ -573,7 +573,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T23:49:18-03:00",
+  "updated_at": "2026-08-21T12:21:00-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -890,7 +890,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.46",
+  "playbook_version": "1.0.47",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -972,6 +972,31 @@
         "10": "10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe - MAXVOL",
         "11": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe"
       }
+    },
+    "reactivate_12_13_20260822": {
+      "requested_by": "Rodolfo Mattei",
+      "requested_at_sp": "2026-08-21T12:21:00-03:00",
+      "scheduled_for": "2026-08-22T00:15:00-03:00",
+      "mode": "no_agent_one_shot_campaign_level",
+      "script": "creditoparaveiculo-daily-activate.sh",
+      "state": "scheduled_pending",
+      "campaign_numbers": [
+        12,
+        13
+      ],
+      "campaign_ids": [
+        "120250860233210632",
+        "120250860295890632"
+      ],
+      "campaign_names": {
+        "12": "12 - 22-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL",
+        "13": "13 - 22-08 - Garagem Brasil - (b01fb13c13) event_Subscribe - MAXVOL"
+      },
+      "d1_start_date": "2026-08-22",
+      "pause_source": "Rodolfo reported manual campaign-level pause; live Meta preflight confirmed both PAUSED",
+      "preflight": "campaign PAUSED; one ACTIVE adset and three ACTIVE ads each; MAXVOL; USD30 each; fresh account-cap and hold checks repeat at execution",
+      "post_write_readback": true,
+      "rollback": "only campaigns proven activated by this attempt"
     }
   },
   "creative_drive_organization": {
