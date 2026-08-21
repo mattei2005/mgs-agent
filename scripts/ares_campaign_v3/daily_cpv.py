@@ -1,0 +1,899 @@
+from __future__ import annotations
+
+import fcntl
+import hashlib
+import importlib.util
+import json
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
+from decimal import Decimal, ROUND_FLOOR
+from pathlib import Path
+from typing import Any, Callable
+from zoneinfo import ZoneInfo
+
+from .adapters import CPV_ACCOUNT_ID, CPV_PAGE_ID, build_cpv_manifest
+from .cli import real_transport_factory
+from .engine import CampaignEngine
+from .media_registry import MediaRegistry
+from .prestage import PageVideoUploader, PrestageService
+from .prevalidation import prevalidate_payload
+from .schema import Manifest
+from .transport import FakeBatchTransport
+
+BASE = Path("/root/mgs-agent")
+PROFILE = Path("/root/.hermes/profiles/ares")
+SP = ZoneInfo("America/Sao_Paulo")
+GRAPH_VERSION = "v26.0"
+ACCOUNT_ID = CPV_ACCOUNT_ID
+ACCOUNT_ACT = f"act_{ACCOUNT_ID}"
+ACCOUNT_ALIAS = "Creditoparaveiculo-BR-CAR-BR-13-G006"
+PAGE_ID = CPV_PAGE_ID
+DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
+FOLDER_MIME = "application/vnd.google-apps.folder"
+TOKEN_ITEM = "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"
+THREAD_CREATION = "1539826050765299872"
+COMMON_PATH = BASE / "scripts/ares-meta-common.py"
+DRIVE_MODULE_PATH = BASE / "scripts/ares-drive-upload-manual-inventory.py"
+SANITIZER = BASE / "scripts/clean-creative-metadata.sh"
+CONFIG_PATH = BASE / "data/ares/meta-ads/engine-v3/config.json"
+OPERATION_PATH = BASE / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json"
+TEMPLATES_PATH = BASE / "data/ares/meta-ads/engine-v3/templates/cpv-c08-source-templates.json"
+REGISTRY_PATH = BASE / "data/ares/meta-ads/engine-v3/media-registry.json"
+INVENTORY_PATH = BASE / "data/ares/creative-ops/inventory/assets.jsonl"
+RECONCILIATION_PATH = BASE / "data/ares/meta-ads/reconciliation/Creditoparaveiculo-BR-CAR-BR.json"
+STATE_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.json"
+LOCK_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.lock"
+AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit/daily"
+WORK_ROOT = PROFILE / "work/creditoparaveiculo-v3-daily"
+
+
+class DailyBlocked(RuntimeError):
+    def __init__(self, stage: str, message: str, detail: dict[str, Any] | None = None):
+        self.stage = stage
+        self.detail = detail or {}
+        super().__init__(message)
+
+
+@dataclass(frozen=True)
+class DailyPaths:
+    config: Path = CONFIG_PATH
+    operation: Path = OPERATION_PATH
+    templates: Path = TEMPLATES_PATH
+    registry: Path = REGISTRY_PATH
+    inventory: Path = INVENTORY_PATH
+    reconciliation: Path = RECONCILIATION_PATH
+    state: Path = STATE_PATH
+    lock: Path = LOCK_PATH
+    audit_root: Path = AUDIT_ROOT
+    work_root: Path = WORK_ROOT
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def atomic_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, raw = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    temporary = Path(raw)
+    try:
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        os.chmod(path, 0o600)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def atomic_inventory(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, raw = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    temporary = Path(raw)
+    try:
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            for row in rows:
+                handle.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        os.chmod(path, 0o600)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise DailyBlocked("json", f"expected JSON object: {path}")
+    return payload
+
+
+def safe_error(exc: Exception) -> dict[str, Any]:
+    result: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
+    if isinstance(exc, DailyBlocked):
+        result.update(stage=exc.stage, detail=exc.detail)
+    return result
+
+
+def is_resume_state(state: dict[str, Any], operational_date: str) -> bool:
+    return (
+        str(state.get("operational_date_sp") or "") == operational_date
+        and str(state.get("status") or "")
+        in {
+            "ASSETS_RESERVED",
+            "MEDIA_READY",
+            "MANIFEST_SEALED",
+            "PARTIAL_DEFERRED_QUOTA",
+            "POSTPROCESS_PENDING",
+            "READBACK_DEFERRED",
+        }
+    )
+
+
+def gate_due(now_sp: datetime, state: dict[str, Any]) -> bool:
+    day = now_sp.date().isoformat()
+    if is_resume_state(state, day):
+        retry_after = int(state.get("retry_after_epoch") or 0)
+        return retry_after <= int(now_sp.timestamp())
+    return now_sp.hour == 17
+
+
+def requested_campaign_count(operation: dict[str, Any], operational_date: date) -> int:
+    routine = operation.get("daily_new_campaign_routine") or {}
+    override = routine.get(f"one_time_override_{operational_date:%Y%m%d}") or {}
+    if override and str(override.get("status") or "").startswith("authorized"):
+        count = int(override.get("campaign_count") or 0)
+    else:
+        pool = Decimal(str(routine.get("new_campaign_budget_pool_usd") or 0))
+        initial = Decimal(str(routine.get("default_campaign_initial_budget_usd") or 0))
+        if pool <= 0 or initial <= 0:
+            raise DailyBlocked("campaign_count", "daily pool or initial budget is invalid")
+        count = int((pool / initial).to_integral_value(rounding=ROUND_FLOOR))
+    if not 1 <= count <= 100:
+        raise DailyBlocked("campaign_count", "campaign count is outside 1..100", {"count": count})
+    return count
+
+
+def parse_campaign_number(name: str | None) -> int | None:
+    match = re.search(r"\bb01fb13c(\d{1,3})\b", str(name or ""), re.I)
+    return int(match.group(1)) if match else None
+
+
+def next_campaign_numbers(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> list[int]:
+    numbers = [number for number in (parse_campaign_number(row.get("name")) for row in campaigns) if number is not None]
+    live_max = max(numbers, default=0)
+    configured = int((operation.get("campaign_numbering_policy") or {}).get("next_required_campaign_number") or live_max + 1)
+    start = live_max + 1
+    if configured != start:
+        raise DailyBlocked(
+            "campaign_numbering",
+            "configured next campaign number drifted from live Meta",
+            {"configured": configured, "live_next": start},
+        )
+    selected = list(range(start, start + count))
+    if selected[-1] > 59:
+        raise DailyBlocked("campaign_numbering", "Smart Bidding tracked range ends at C59", {"selected": selected})
+    return selected
+
+
+def active_budget_minor(campaigns: list[dict[str, Any]]) -> int:
+    total = 0
+    for row in campaigns:
+        status = str(row.get("configured_status") or row.get("status") or "").upper()
+        effective = str(row.get("effective_status") or "").upper()
+        if status == "ACTIVE" and effective not in {"ARCHIVED", "DELETED"}:
+            try:
+                value = int(str(row.get("daily_budget") or "0"))
+            except ValueError as exc:
+                raise DailyBlocked("budget_cap", "active campaign budget is malformed", {"campaign_id": row.get("id")}) from exc
+            if value <= 0:
+                raise DailyBlocked("budget_cap", "active campaign budget is missing", {"campaign_id": row.get("id")})
+            total += value
+    return total
+
+
+def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> dict[str, int]:
+    policy = operation.get("daily_budget_policy") or {}
+    cap_minor = int(Decimal(str(policy.get("operational_account_cap_usd") or 0)) * 100)
+    initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
+    before = active_budget_minor(campaigns)
+    after = before + count * initial_minor
+    if cap_minor <= 0 or initial_minor <= 0 or after > cap_minor:
+        raise DailyBlocked(
+            "budget_cap",
+            "new campaign plan exceeds the operational account cap",
+            {"active_before_minor": before, "new_minor": count * initial_minor, "projected_minor": after, "cap_minor": cap_minor},
+        )
+    return {"active_before_minor": before, "new_minor": count * initial_minor, "projected_minor": after, "cap_minor": cap_minor}
+
+
+def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -> list[dict[str, Any]]:
+    candidates = [
+        row
+        for row in rows
+        if row.get("vertical") == "CAR"
+        and row.get("country") == "BR"
+        and row.get("language") == "BR"
+        and row.get("format") == "VID"
+        and row.get("status") == "01_READY"
+        and row.get("metadata_clean") is True
+        and row.get("ares_eligible") is True
+        and not row.get("used_by")
+        and str(row.get("asset_drive_id") or "") in drive_ids
+    ]
+    candidates.sort(key=lambda row: (str(row.get("first_seen_at") or ""), str(row.get("canonical_filename") or "")))
+    selected: list[dict[str, Any]] = []
+    fingerprints: set[str] = set()
+    for row in candidates:
+        fingerprint = str(row.get("perceptual_fingerprint") or row.get("clean_checksum") or row.get("asset_id") or "")
+        if not fingerprint or fingerprint in fingerprints:
+            continue
+        fingerprints.add(fingerprint)
+        selected.append(row)
+        if len(selected) == count:
+            break
+    if len(selected) != count:
+        raise DailyBlocked("asset_selection", "insufficient unique eligible assets", {"required": count, "available_unique": len(selected)})
+    return selected
+
+
+def verify_reconciliation(path: Path, selected: list[dict[str, Any]], now: datetime) -> dict[str, Any]:
+    payload = load_json(path)
+    if payload.get("status") != "valid" or str(payload.get("account_id") or "") != ACCOUNT_ID:
+        raise DailyBlocked("reconciliation", "reconciliation manifest is invalid or belongs to another account")
+    try:
+        valid_until = datetime.fromisoformat(str(payload.get("valid_until_utc") or "").replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise DailyBlocked("reconciliation", "reconciliation manifest expiry is invalid") from exc
+    if valid_until <= now.astimezone(timezone.utc):
+        raise DailyBlocked("reconciliation", "reconciliation manifest expired", {"valid_until_utc": payload.get("valid_until_utc")})
+    allowed = {str(row.get("asset_id") or ""): row for row in payload.get("assets") or []}
+    checks = []
+    for row in selected:
+        source = allowed.get(str(row.get("asset_id") or "")) or {}
+        ok = (
+            source.get("approved") is True
+            and str(source.get("asset_drive_id") or "") == str(row.get("asset_drive_id") or "")
+            and str(source.get("clean_checksum") or "") == str(row.get("clean_checksum") or "")
+            and not (source.get("meta_conflicts") or [])
+        )
+        checks.append({"asset_id": row.get("asset_id"), "ok": ok})
+    if not checks or not all(item["ok"] for item in checks):
+        raise DailyBlocked("reconciliation", "one or more selected assets are not reconciled", {"checks": checks})
+    return {"generated_at_utc": payload.get("generated_at_utc"), "valid_until_utc": payload.get("valid_until_utc"), "checks": checks}
+
+
+def _load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, str(path))
+    if not spec or not spec.loader:
+        raise DailyBlocked("module", f"cannot load module {name}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def drive_request(token: str, method: str, url: str, *, body: bytes | None = None, content_type: str | None = None) -> dict[str, Any]:
+    headers = {"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"}
+    if content_type:
+        headers["Content-Type"] = content_type
+    request = urllib.request.Request(url, data=body, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(request, timeout=180) as response:
+            raw = response.read()
+            return json.loads(raw.decode("utf-8")) if raw else {}
+    except urllib.error.HTTPError as exc:
+        try:
+            error = json.loads(exc.read().decode("utf-8", "replace"))
+        except Exception:
+            error = {"type": "non_json_error"}
+        raise DailyBlocked("drive_request", "Drive request failed", {"http": exc.code, "error": error}) from exc
+
+
+def drive_children(token: str, parent_id: str) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    page_token: str | None = None
+    while True:
+        params: dict[str, Any] = {
+            "q": f"'{parent_id}' in parents and trashed=false",
+            "fields": "nextPageToken,files(id,name,mimeType,size,md5Checksum,driveId,parents,trashed,capabilities(canDownload,canEdit,canMoveItemWithinDrive))",
+            "pageSize": 1000,
+            "supportsAllDrives": "true",
+            "includeItemsFromAllDrives": "true",
+            "orderBy": "name_natural",
+        }
+        if page_token:
+            params["pageToken"] = page_token
+        payload = drive_request(token, "GET", "https://www.googleapis.com/drive/v3/files?" + urllib.parse.urlencode(params))
+        rows.extend(payload.get("files") or [])
+        page_token = payload.get("nextPageToken")
+        if not page_token:
+            return rows
+
+
+def one_folder(rows: list[dict[str, Any]], name: str, stage: str) -> dict[str, Any]:
+    matches = [row for row in rows if row.get("name") == name and row.get("mimeType") == FOLDER_MIME]
+    if len(matches) != 1:
+        raise DailyBlocked(stage, f"expected exactly one folder named {name}", {"count": len(matches)})
+    return matches[0]
+
+
+def drive_inventory(token: str) -> dict[str, Any]:
+    root = drive_request(
+        token,
+        "GET",
+        f"https://www.googleapis.com/drive/v3/files/{DRIVE_ID}?"
+        + urllib.parse.urlencode({"fields": "id,name,driveId,trashed,capabilities(canDownload,canEdit,canMoveItemWithinDrive)", "supportsAllDrives": "true"}),
+    )
+    caps = root.get("capabilities") or {}
+    if root.get("driveId") != DRIVE_ID or root.get("trashed") or not all(caps.get(name) for name in ("canDownload", "canEdit", "canMoveItemWithinDrive")):
+        raise DailyBlocked("drive_root", "canonical Shared Drive identity or capabilities failed")
+    creatives = one_folder(drive_children(token, DRIVE_ID), "CRIATIVOS", "drive_creatives")
+    operation = one_folder(drive_children(token, creatives["id"]), "CAR_BR_BR", "drive_operation")
+    files: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    for kind in ("IMG", "VID"):
+        folder = one_folder(drive_children(token, operation["id"]), kind, f"drive_{kind}")
+        children = drive_children(token, folder["id"])
+        ready = one_folder(children, "01_READY", f"drive_{kind}_ready")
+        testing = one_folder(children, "02_TESTING", f"drive_{kind}_testing")
+        current = [row for row in drive_children(token, ready["id"]) if row.get("mimeType") != FOLDER_MIME]
+        for row in current:
+            row.update(kind=kind, ready_parent_id=ready["id"], testing_parent_id=testing["id"])
+        files.extend(current)
+        counts[kind] = len(current)
+    counts["TOTAL"] = sum(counts.values())
+    return {"root": root, "files": files, "counts": counts}
+
+
+def download_drive_file(token: str, source: dict[str, Any], destination: Path) -> dict[str, Any]:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    request = urllib.request.Request(
+        f"https://www.googleapis.com/drive/v3/files/{source['id']}?"
+        + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"}),
+        headers={"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"},
+    )
+    digest = hashlib.md5()
+    size = 0
+    try:
+        with urllib.request.urlopen(request, timeout=240) as response, destination.open("wb") as handle:
+            while True:
+                chunk = response.read(1024 * 1024)
+                if not chunk:
+                    break
+                handle.write(chunk)
+                digest.update(chunk)
+                size += len(chunk)
+    except Exception:
+        destination.unlink(missing_ok=True)
+        raise
+    if digest.hexdigest() != str(source.get("md5Checksum") or "") or size != int(source.get("size") or 0):
+        destination.unlink(missing_ok=True)
+        raise DailyBlocked("drive_download", "Drive download checksum or size mismatch", {"file_id": source.get("id")})
+    return {"md5": digest.hexdigest(), "bytes": size}
+
+
+def verify_clean(path: Path) -> dict[str, Any]:
+    result = subprocess.run([str(SANITIZER), "verify", str(path)], capture_output=True, text=True, timeout=120, check=False)
+    if result.returncode != 0 or "clean: true" not in result.stdout:
+        raise DailyBlocked("metadata_verify", "creative metadata verification failed", {"file": path.name, "rc": result.returncode})
+    return {"sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "bytes": path.stat().st_size, "clean": True}
+
+
+def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    raw = destination.with_suffix(".raw.mp4")
+    result = subprocess.run(
+        ["ffmpeg", "-y", "-i", str(source), "-vf", "crop=iw:iw:0:(ih-iw)/2,scale=1080:1080", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", str(raw)],
+        capture_output=True,
+        text=True,
+        timeout=300,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise DailyBlocked("square", "square render failed", {"file": source.name})
+    cleaned = subprocess.run([str(SANITIZER), "clean", str(raw), "--out", str(destination), "--agent", "ares", "--json"], capture_output=True, text=True, timeout=300, check=False)
+    raw.unlink(missing_ok=True)
+    if cleaned.returncode != 0:
+        raise DailyBlocked("square", "square metadata sanitization failed", {"file": source.name})
+    verified = verify_clean(destination)
+    probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height", "-of", "json", str(destination)], capture_output=True, text=True, timeout=60, check=False)
+    body = json.loads(probe.stdout or "{}") if probe.returncode == 0 else {}
+    video = next((row for row in body.get("streams") or [] if row.get("codec_type") == "video"), {})
+    if video.get("width") != 1080 or video.get("height") != 1080:
+        raise DailyBlocked("square", "square dimensions are not 1080x1080", {"file": source.name})
+    return {**verified, "width": 1080, "height": 1080}
+
+
+def move_to_testing(token: str, source: dict[str, Any]) -> dict[str, Any]:
+    params = urllib.parse.urlencode({"addParents": source["testing_parent_id"], "removeParents": source["ready_parent_id"], "fields": "id,name,driveId,parents,trashed,size,md5Checksum", "supportsAllDrives": "true"})
+    result = drive_request(token, "PATCH", f"https://www.googleapis.com/drive/v3/files/{source['id']}?{params}", body=b"{}", content_type="application/json")
+    if result.get("driveId") != DRIVE_ID or result.get("trashed") or set(result.get("parents") or []) != {source["testing_parent_id"]} or str(result.get("md5Checksum") or "") != str(source.get("md5Checksum") or ""):
+        raise DailyBlocked("drive_move", "Drive move readback failed", {"file_id": source.get("id")})
+    return result
+
+
+def stock_counts(inventory: list[dict[str, Any]], drive: dict[str, Any]) -> dict[str, int]:
+    live_ids = {str(row.get("id") or "") for row in drive.get("files") or []}
+    unique = {
+        str(row.get("perceptual_fingerprint") or row.get("clean_checksum") or row.get("asset_id"))
+        for row in inventory
+        if row.get("ares_eligible") is True
+        and row.get("status") == "01_READY"
+        and not row.get("used_by")
+        and str(row.get("asset_drive_id") or "") in live_ids
+    }
+    return {"ready_folder_total": int((drive.get("counts") or {}).get("TOTAL") or 0), "ready_folder_img": int((drive.get("counts") or {}).get("IMG") or 0), "ready_folder_vid": int((drive.get("counts") or {}).get("VID") or 0), "eligible_unique_creatives": len(unique)}
+
+
+def reserve_inventory(path: Path, rows: list[dict[str, Any]], selected: list[dict[str, Any]], audit_path: Path) -> None:
+    ids = {str(row.get("asset_id") or "") for row in selected}
+    for row in rows:
+        if str(row.get("asset_id") or "") in ids:
+            row.update(reservation_status="RESERVADO_PELO_ARES_V3_DAILY", ares_eligible=False, used_by="ARES_V3_IN_FLIGHT", campaign_owner="Ares", reservation_audit=str(audit_path), last_reconciled_at=utc_now())
+    atomic_inventory(path, rows)
+
+
+def release_inventory(path: Path, rows: list[dict[str, Any]], selected_ids: set[str]) -> None:
+    for row in rows:
+        if str(row.get("asset_id") or "") in selected_ids and row.get("used_by") == "ARES_V3_IN_FLIGHT":
+            row.update(reservation_status="LIBERADO_POR_RODOLFO_PARA_ARES_DAILY", ares_eligible=True, used_by=None, campaign_owner="Ares", last_reconciled_at=utc_now())
+            row.pop("reservation_audit", None)
+    atomic_inventory(path, rows)
+
+
+def update_inventory_assignments(path: Path, rows: list[dict[str, Any]], assignments: list[dict[str, Any]], moves: dict[str, dict[str, Any]], audit_path: Path) -> None:
+    by_asset = {str(row["asset_id"]): row for row in assignments}
+    for row in rows:
+        assignment = by_asset.get(str(row.get("asset_id") or ""))
+        if not assignment:
+            continue
+        moved = str(row.get("asset_drive_id") or "") in moves
+        row.update(
+            status="02_TESTING" if moved else "01_READY_USED_MOVE_PENDING",
+            reservation_status="UTILIZADO_PELO_ARES",
+            ares_eligible=False,
+            used_by="ARES",
+            campaign_owner="Ares",
+            ad_account_id=ACCOUNT_ID,
+            meta_campaign_id=assignment["campaign_id"],
+            meta_adset_id=assignment["adset_id"],
+            meta_ad_id=assignment["ad_id"],
+            meta_creative_id=assignment["creative_id"],
+            meta_video_id=assignment["vertical_video_id"],
+            meta_video_ids=[assignment["vertical_video_id"], assignment["square_video_id"]],
+            campaign_audit=str(audit_path),
+            drive_status_readback=moves.get(str(row.get("asset_drive_id") or "")),
+            last_reconciled_at=utc_now(),
+        )
+    atomic_inventory(path, rows)
+
+
+def load_discord_token() -> str:
+    for line in (PROFILE / ".env").read_text(errors="ignore").splitlines():
+        if line.startswith("DISCORD_BOT_TOKEN="):
+            return line.split("=", 1)[1].strip().strip('"').strip("'")
+    raise DailyBlocked("discord", "Ares Discord token unavailable")
+
+
+def post_discord(message: str) -> dict[str, Any]:
+    if len(message) > 1900:
+        raise DailyBlocked("discord", "Discord message exceeds 1900 characters")
+    token = load_discord_token()
+    payload = json.dumps({"content": message, "allowed_mentions": {"parse": []}}, ensure_ascii=False).encode()
+    request = urllib.request.Request(f"https://discord.com/api/v10/channels/{THREAD_CREATION}/messages", data=payload, headers={"Authorization": f"Bot {token}", "Content-Type": "application/json", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"})
+    with urllib.request.urlopen(request, timeout=30) as response:
+        body = json.load(response)
+    message_id = str(body.get("id") or "")
+    if not message_id:
+        raise DailyBlocked("discord", "Discord response missing message id")
+    check = urllib.request.Request(f"https://discord.com/api/v10/channels/{THREAD_CREATION}/messages/{message_id}", headers={"Authorization": f"Bot {token}", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"})
+    with urllib.request.urlopen(check, timeout=30) as response:
+        readback = json.load(response)
+    if str(readback.get("channel_id") or "") != THREAD_CREATION or str(readback.get("content") or "") != message:
+        raise DailyBlocked("discord", "Discord readback mismatch")
+    return {"message_id": message_id, "thread_id": THREAD_CREATION, "content_match": True}
+
+
+class LiveDailyBackend:
+    def __init__(self, paths: DailyPaths):
+        self.paths = paths
+        self.common = _load_module(COMMON_PATH, "ares_meta_common_cpv_v3_daily")
+        self.drive_module = _load_module(DRIVE_MODULE_PATH, "ares_drive_cpv_v3_daily")
+        self.drive_module.load_env()
+        setattr(self.drive_module, "SCOPES", "https://www.googleapis.com/auth/drive")
+        self.token: str | None = None
+        self.page_token: str | None = None
+        self.drive_token: str | None = None
+
+    def meta_preflight(self) -> dict[str, Any]:
+        token, token_field = self.common.get_token_from_1password(TOKEN_ITEM, force_refresh=True)
+        self.token = token
+        status, account, _ = self.common.graph_get(ACCOUNT_ACT, token, {"fields": "id,name,currency,timezone_name,account_status,disable_reason"})
+        if status != 200 or not isinstance(account, dict) or str(account.get("currency")) != "USD" or str(account.get("timezone_name")) != "America/Sao_Paulo" or int(account.get("account_status") or 0) != 1 or int(account.get("disable_reason") or 0) != 0:
+            raise DailyBlocked("meta_preflight", "Meta account identity or health failed", {"http": status})
+        campaigns = self._graph_pages(f"{ACCOUNT_ACT}/campaigns", {"fields": "id,name,status,effective_status,configured_status,daily_budget,created_time,start_time,updated_time", "limit": 500})
+        page_status, pages, _ = self.common.graph_get("me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200})
+        page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == PAGE_ID), None) if page_status == 200 and isinstance(pages, dict) else None
+        if not page or "ADVERTISE" not in (page.get("tasks") or []) or not page.get("access_token"):
+            raise DailyBlocked("meta_preflight", "Page is missing ADVERTISE or Page token", {"http": page_status})
+        self.page_token = str(page["access_token"])
+        return {"account": account, "campaigns": campaigns, "token_report": {"item": TOKEN_ITEM, "field": token_field, "len": len(token)}, "page": {"id": PAGE_ID, "tasks": page.get("tasks")}}
+
+    def _graph_pages(self, path: str, params: dict[str, Any]) -> list[dict[str, Any]]:
+        if not self.token:
+            raise DailyBlocked("meta", "Meta token not initialized")
+        rows: list[dict[str, Any]] = []
+        next_path, next_params = path, dict(params)
+        while True:
+            status, body, _ = self.common.graph_get(next_path, self.token, next_params)
+            if status != 200 or not isinstance(body, dict):
+                raise DailyBlocked("meta", "Meta paginated GET failed", {"path": next_path, "http": status})
+            rows.extend(body.get("data") or [])
+            next_url = (body.get("paging") or {}).get("next")
+            if not next_url:
+                return rows
+            parsed = urllib.parse.urlparse(next_url)
+            next_path = parsed.path.split(f"/{GRAPH_VERSION}/", 1)[-1].lstrip("/")
+            next_params = {key: values[-1] for key, values in urllib.parse.parse_qs(parsed.query).items()}
+
+    def drive_preflight(self) -> dict[str, Any]:
+        service_account = self.drive_module.extract_service_account(self.drive_module.get_op_item_json())
+        if service_account.get("client_email") != "mgsagent@mgs-core-prod.iam.gserviceaccount.com" or service_account.get("project_id") != "mgs-core-prod":
+            raise DailyBlocked("drive_identity", "Drive Service Account identity mismatch")
+        self.drive_token = self.drive_module.get_access_token(service_account)
+        if not self.drive_token:
+            raise DailyBlocked("drive_identity", "Drive Service Account token unavailable")
+        inventory = drive_inventory(self.drive_token)
+        return {"service_account": service_account["client_email"], "project_id": service_account["project_id"], "drive": inventory}
+
+    def prepare_and_prestage(self, selected: list[dict[str, Any]], drive: dict[str, Any], work_dir: Path, registry: MediaRegistry) -> list[dict[str, Any]]:
+        if not self.page_token or not self.drive_token:
+            raise DailyBlocked("prestage", "Meta Page or Drive token not initialized")
+        by_id = {str(row.get("id") or ""): row for row in drive.get("files") or []}
+        uploader = PageVideoUploader(common=self.common, page_token=self.page_token, page_id=PAGE_ID, graph_version=GRAPH_VERSION)
+        service = PrestageService(registry, uploader)
+        prepared = []
+        for row in selected:
+            source = by_id.get(str(row.get("asset_drive_id") or ""))
+            if not source:
+                raise DailyBlocked("prestage", "selected Drive asset disappeared", {"asset_id": row.get("asset_id")})
+            vertical = work_dir / "vertical" / str(row.get("canonical_filename"))
+            square = work_dir / "square" / f"{Path(str(row.get('canonical_filename'))).stem}__SQUARE.mp4"
+            drive_readback = download_drive_file(self.drive_token, source, vertical)
+            clean = verify_clean(vertical)
+            if clean["sha256"] != str(row.get("clean_checksum") or ""):
+                raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
+            square_readback = make_square_clean(vertical, square)
+            record = service.prestage(account_id=ACCOUNT_ID, asset_id=str(row["asset_id"]), checksum=clean["sha256"], vertical_path=vertical, square_path=square)
+            prepared.append({"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record})
+        return prepared
+
+    def execute_engine(self, sealed: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
+        manifest = Manifest.from_dict(sealed)
+        engine = CampaignEngine(config, transport_factory=real_transport_factory(config, manifest))
+        return engine.execute(manifest)
+
+    def hierarchy_readback(self, campaign_id: str) -> dict[str, Any]:
+        if not self.token:
+            raise DailyBlocked("readback", "Meta token not initialized")
+        campaign_status, campaign, _ = self.common.graph_get(campaign_id, self.token, {"fields": "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time"})
+        adsets = self._graph_pages(f"{campaign_id}/adsets", {"fields": "id,name,status,effective_status,configured_status,start_time", "limit": 20})
+        ads = self._graph_pages(f"{campaign_id}/ads", {"fields": "id,name,status,effective_status,configured_status,adset_id,creative{id,name}", "limit": 50})
+        if campaign_status != 200 or not isinstance(campaign, dict):
+            raise DailyBlocked("readback", "campaign readback failed", {"campaign_id": campaign_id, "http": campaign_status})
+        return {"campaign": campaign, "adsets": adsets, "ads": ads}
+
+    def move_asset(self, drive_row: dict[str, Any]) -> dict[str, Any]:
+        if not self.drive_token:
+            raise DailyBlocked("drive_move", "Drive token not initialized")
+        return move_to_testing(self.drive_token, drive_row)
+
+
+def validate_hierarchy(readback: dict[str, Any], campaign: Any) -> dict[str, Any]:
+    live = readback.get("campaign") or {}
+    adsets = readback.get("adsets") or []
+    ads = readback.get("ads") or []
+    campaign_ok = (
+        str(live.get("name") or "") == campaign.name
+        and str(live.get("status") or live.get("configured_status") or "").upper() == campaign.status
+        and int(str(live.get("daily_budget") or "0")) == int(str(campaign.campaign_updates.get("daily_budget") or "0"))
+        and str(live.get("start_time") or "")[:16] == str(campaign.start_time)[:16]
+    )
+    adsets_ok = len(adsets) == 1 and str(adsets[0].get("status") or adsets[0].get("configured_status") or "").upper() == "ACTIVE"
+    ads_ok = len(ads) == 3 and all(str(row.get("status") or row.get("configured_status") or "").upper() == "ACTIVE" for row in ads)
+    return {"valid": campaign_ok and adsets_ok and ads_ok, "campaign_ok": campaign_ok, "adsets_ok": adsets_ok, "ads_ok": ads_ok}
+
+
+def assignments_from_readback(manifest: Manifest, campaign_ids: list[str], readbacks: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    assignments: list[dict[str, Any]] = []
+    for campaign, campaign_id in zip(manifest.campaigns, campaign_ids):
+        readback = readbacks[campaign_id]
+        if not validate_hierarchy(readback, campaign)["valid"]:
+            raise DailyBlocked("readback", "campaign hierarchy validation failed", {"campaign_id": campaign_id})
+        adset_id = str((readback["adsets"][0] or {}).get("id") or "")
+        ads_by_name = {str(row.get("name") or ""): row for row in readback.get("ads") or []}
+        for ad in campaign.ads:
+            live_ad = ads_by_name.get(ad.name)
+            if not live_ad:
+                raise DailyBlocked("readback", "ad name missing from readback", {"campaign_id": campaign_id, "ad_name": ad.name})
+            creative = live_ad.get("creative") or {}
+            assignments.append({"asset_id": ad.media.asset_id, "campaign_id": campaign_id, "adset_id": adset_id, "ad_id": str(live_ad.get("id") or ""), "creative_id": str(creative.get("id") or ""), "vertical_video_id": ad.media.vertical_video_id, "square_video_id": ad.media.square_video_id})
+    return assignments
+
+
+def update_operation_after_creation(path: Path, manifest: Manifest, campaign_ids: list[str], operational_date: date) -> None:
+    operation = load_json(path)
+    scope = ((operation.get("management_scope") or {}).get("autonomous_action_scope") or {})
+    allowed = scope.setdefault("allowed_campaigns", {})
+    for campaign, campaign_id in zip(manifest.campaigns, campaign_ids):
+        number = parse_campaign_number(campaign.name)
+        if number is None:
+            raise DailyBlocked("operation_update", "manifest campaign number is missing")
+        allowed[f"{number:02d}"] = {"campaign_id": campaign_id, "cycle_start_date": (operational_date + timedelta(days=1)).isoformat(), "source": "campaign_engine_v3_daily_readback", "request_id": manifest.request_id}
+    numbering = operation.setdefault("campaign_numbering_policy", {})
+    numbers = [parse_campaign_number(campaign.name) for campaign in manifest.campaigns]
+    numbering["next_required_campaign_number"] = max(number for number in numbers if number is not None) + 1
+    override = (operation.get("daily_new_campaign_routine") or {}).get(f"one_time_override_{operational_date:%Y%m%d}")
+    if isinstance(override, dict):
+        override["status"] = "completed_validated"
+        override["completed_at_utc"] = utc_now()
+    atomic_json(path, operation)
+    readback = load_json(path)
+    if int((readback.get("campaign_numbering_policy") or {}).get("next_required_campaign_number") or 0) != numbering["next_required_campaign_number"]:
+        raise DailyBlocked("operation_update", "operation config readback failed")
+
+
+def run_daily(
+    *,
+    paths: DailyPaths = DailyPaths(),
+    now_sp: datetime | None = None,
+    gate: bool = False,
+    post_report: bool = False,
+    quiet: bool = False,
+    backend_factory: Callable[[DailyPaths], Any] = LiveDailyBackend,
+) -> dict[str, Any]:
+    current = now_sp.astimezone(SP) if now_sp else datetime.now(SP)
+    operational_date = current.date()
+    day = operational_date.isoformat()
+    state = load_json(paths.state) if paths.state.exists() else {}
+    if gate and not gate_due(current, state):
+        return {"status": "SILENT_NOT_DUE", "operational_date_sp": day}
+    paths.lock.parent.mkdir(parents=True, exist_ok=True)
+    with paths.lock.open("a+") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        state = load_json(paths.state) if paths.state.exists() else {}
+        if state.get("completed_operational_date_sp") == day:
+            return {"status": "ALREADY_COMPLETE", "operational_date_sp": day, "audit": state.get("audit_path")}
+        request_id = str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
+        audit_path = Path(state.get("audit_path") or (paths.audit_root / f"{request_id}.json"))
+        audit = load_json(audit_path) if audit_path.exists() else {"schema_version": 3, "kind": "cpv_daily_v3", "request_id": request_id, "operational_date_sp": day, "created_at_utc": utc_now(), "stage": "INITIALIZING", "side_effects": {"campaign_write": False, "media_upload": False, "drive_move": False}}
+        atomic_json(audit_path, audit)
+        backend = backend_factory(paths)
+        inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
+        selected_ids = set(str(item) for item in state.get("selected_asset_ids") or [])
+        selected = [row for row in inventory_rows if str(row.get("asset_id") or "") in selected_ids]
+        try:
+            operation = load_json(paths.operation)
+            config = load_json(paths.config)
+            count = int(state.get("campaign_count") or requested_campaign_count(operation, operational_date))
+            meta = backend.meta_preflight()
+            numbers = list(state.get("campaign_numbers") or next_campaign_numbers(meta["campaigns"], count, operation))
+            budget = enforce_budget_cap(meta["campaigns"], count, operation)
+            drive_info = backend.drive_preflight()
+            drive = drive_info["drive"]
+            if not selected:
+                selected = select_assets(inventory_rows, {str(row.get("id") or "") for row in drive.get("files") or []}, count * 3)
+                reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
+                reserve_inventory(paths.inventory, inventory_rows, selected, audit_path)
+                selected_ids = {str(row.get("asset_id") or "") for row in selected}
+                state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "updated_at_utc": utc_now()}
+                atomic_json(paths.state, state)
+            else:
+                verify_reconciliation(paths.reconciliation, selected, current)
+            registry = MediaRegistry(paths.registry)
+            ready = []
+            for row in selected:
+                try:
+                    registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), str(row["clean_checksum"]))
+                    ready.append(str(row["asset_id"]))
+                except Exception:
+                    pass
+            if len(ready) != len(selected):
+                work_dir = paths.work_root / request_id
+                work_dir.mkdir(parents=True, exist_ok=True)
+                prepared = backend.prepare_and_prestage(selected, drive, work_dir, registry)
+                audit["side_effects"]["media_upload"] = True
+                audit["prepared_assets"] = [{"asset_id": item["asset_id"], "clean": item["clean"], "square": item["square_readback"], "registry": item["registry"]} for item in prepared]
+                audit["stage"] = "MEDIA_READY"
+                atomic_json(audit_path, audit)
+                state.update(status="MEDIA_READY", updated_at_utc=utc_now())
+                atomic_json(paths.state, state)
+            assets_payload = {"assets": [{"asset_id": str(row["asset_id"]), "checksum": str(row["clean_checksum"])} for row in selected]}
+            manifest_dir = paths.work_root / request_id / "manifest"
+            manifest_dir.mkdir(parents=True, exist_ok=True)
+            draft_path = manifest_dir / "draft.json"
+            sealed_path = manifest_dir / "sealed.json"
+            if sealed_path.exists():
+                sealed = load_json(sealed_path)
+            else:
+                templates = load_json(paths.templates).get("templates") or []
+                draft = build_cpv_manifest(registry=registry, asset_refs=assets_payload["assets"], campaign_numbers=[int(item) for item in numbers], operational_date=day, request_id=request_id, creative_templates=templates, status="ACTIVE")
+                atomic_json(draft_path, draft)
+                sealed = prevalidate_payload(draft, registry)
+                atomic_json(sealed_path, sealed)
+                state.update(status="MANIFEST_SEALED", manifest_path=str(sealed_path), manifest_digest=sealed["prevalidation"]["content_digest"], updated_at_utc=utc_now())
+                atomic_json(paths.state, state)
+                audit.update(stage="MANIFEST_SEALED", manifest_path=str(sealed_path), manifest_digest=sealed["prevalidation"]["content_digest"], campaign_numbers=numbers, budget=budget)
+                atomic_json(audit_path, audit)
+            manifest = Manifest.from_dict(sealed)
+            result = backend.execute_engine(sealed, config)
+            audit["side_effects"]["campaign_write"] = bool(result.get("campaign_ids"))
+            audit["engine_result"] = result
+            audit["stage"] = result.get("status")
+            atomic_json(audit_path, audit)
+            campaign_ids = [str(item) for item in result.get("campaign_ids") or []]
+            processed_ids = set(str(item) for item in state.get("postprocessed_campaign_ids") or [])
+            pending_ids = [item for item in campaign_ids if item not in processed_ids]
+            if pending_ids:
+                indexed_pairs = [
+                    (index, campaign_id)
+                    for index, campaign_id in enumerate(campaign_ids)
+                    if campaign_id in pending_ids
+                ]
+                manifest_subset = Manifest.from_dict({
+                    **manifest.raw,
+                    "campaigns": [manifest.raw["campaigns"][index] for index, _ in indexed_pairs],
+                })
+                pending_order = [campaign_id for _, campaign_id in indexed_pairs]
+                readbacks = {campaign_id: backend.hierarchy_readback(campaign_id) for campaign_id in pending_order}
+                assignments = assignments_from_readback(manifest_subset, pending_order, readbacks)
+                inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
+                drive_by_asset = {str(row.get("asset_id") or ""): row for row in selected}
+                drive_rows = {str(row.get("id") or ""): row for row in drive.get("files") or []}
+                moves: dict[str, dict[str, Any]] = {}
+                for assignment in assignments:
+                    inventory_row = drive_by_asset[assignment["asset_id"]]
+                    drive_row = drive_rows[str(inventory_row["asset_drive_id"])]
+                    moves[str(inventory_row["asset_drive_id"])] = backend.move_asset(drive_row)
+                update_inventory_assignments(paths.inventory, inventory_rows, assignments, moves, audit_path)
+                processed_ids.update(pending_ids)
+                state["postprocessed_campaign_ids"] = sorted(processed_ids)
+                audit.setdefault("assignments", []).extend(assignments)
+                audit.setdefault("drive_moves", {}).update(moves)
+                audit["side_effects"]["drive_move"] = bool(moves)
+                atomic_json(audit_path, audit)
+            if result.get("status") == "PARTIAL_DEFERRED_QUOTA":
+                retry_after = int(time.time()) + max(60, int(result.get("retry_after_seconds") or 300))
+                state.update(status="PARTIAL_DEFERRED_QUOTA", retry_after_epoch=retry_after, campaign_ids=campaign_ids, updated_at_utc=utc_now())
+                atomic_json(paths.state, state)
+                message = f"🟡 V3 PARCIAL — CPV G006 — {operational_date:%d/%m}\n{len(campaign_ids)}/{count} campanhas concluídas e validadas. O mesmo request será retomado após a janela de quota, sem replay."
+                if post_report:
+                    audit["discord_readback"] = post_discord(message)
+                    atomic_json(audit_path, audit)
+                return {"status": "PARTIAL_DEFERRED_QUOTA", "campaign_ids": campaign_ids, "retry_after_epoch": retry_after, "audit": str(audit_path)}
+            if len(campaign_ids) != count or len(processed_ids) != count:
+                raise DailyBlocked("completion", "engine completed without the full validated campaign set", {"campaign_ids": campaign_ids, "processed": sorted(processed_ids), "count": count})
+            update_operation_after_creation(paths.operation, manifest, campaign_ids, operational_date)
+            inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
+            drive_after = backend.drive_preflight()["drive"]
+            stock = stock_counts(inventory_rows, drive_after)
+            final = {"status": "COMPLETE_FUTURE_ACTIVE", "request_id": request_id, "campaign_numbers": numbers, "campaign_ids": campaign_ids, "start_time_sp": (operational_date + timedelta(days=1)).isoformat() + "T00:30:00-03:00", "assets_used": len(selected), "stock_remaining": stock, "audit": str(audit_path)}
+            audit.update(stage="COMPLETE", final=final, completed_at_utc=utc_now())
+            atomic_json(audit_path, audit)
+            state.update(status="COMPLETE", completed_operational_date_sp=day, campaign_ids=campaign_ids, stock_remaining=stock, updated_at_utc=utc_now())
+            atomic_json(paths.state, state)
+            if post_report:
+                labels = ", ".join(f"C{number:02d}" for number in numbers)
+                audit["discord_readback"] = post_discord(f"✅ V3 CONCLUÍDO — CPV G006 — {operational_date:%d/%m}\n{labels} · USD 30 cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\nCriativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}")
+                atomic_json(audit_path, audit)
+            if not quiet:
+                print(json.dumps(final, ensure_ascii=False, indent=2))
+            return final
+        except Exception as exc:
+            failure = safe_error(exc)
+            audit.update(stage="FAILED", failure=failure, failed_at_utc=utc_now())
+            atomic_json(audit_path, audit)
+            if not audit.get("side_effects", {}).get("media_upload") and not audit.get("side_effects", {}).get("campaign_write") and selected_ids:
+                inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
+                release_inventory(paths.inventory, inventory_rows, selected_ids)
+            state.update(status="FAILED", failure=failure, updated_at_utc=utc_now())
+            atomic_json(paths.state, state)
+            if post_report:
+                try:
+                    post_discord(f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\nEtapa: {failure.get('stage') or failure['type']}. Nenhuma conclusão foi declarada sem readback; o estado foi preservado para reconciliação.")
+                except Exception:
+                    pass
+            if not quiet:
+                print(json.dumps({"status": "FAILED", "failure": failure, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
+            return {"status": "FAILED", "failure": failure, "audit": str(audit_path)}
+        finally:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+
+
+def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
+    """Exercise v3 planning, sealing and resumable execution without network or production paths."""
+    if campaign_count != 3:
+        raise ValueError("offline smoke currently validates the required three-campaign 2+1 route")
+    with tempfile.TemporaryDirectory(prefix="ares-cpv-v3-offline-") as raw:
+        root = Path(raw)
+        registry = MediaRegistry(root / "media.json")
+        assets = []
+        for index in range(campaign_count * 3):
+            asset_id = f"offline-asset-{index + 1:02d}"
+            checksum = f"offline-sha256-{index + 1:02d}"
+            registry.register(
+                account_id=ACCOUNT_ID,
+                asset_id=asset_id,
+                checksum=checksum,
+                vertical_video_id=f"offline-v-{index + 1:02d}",
+                square_video_id=f"offline-s-{index + 1:02d}",
+                ready=True,
+                source="offline-smoke",
+            )
+            assets.append({"asset_id": asset_id, "checksum": checksum})
+        operational_date = datetime.now(SP).date().isoformat()
+        draft = build_cpv_manifest(
+            registry=registry,
+            asset_refs=assets,
+            campaign_numbers=[14, 15, 16],
+            operational_date=operational_date,
+            request_id=f"offline-cpv-{operational_date.replace('-', '')}",
+            status="ACTIVE",
+        )
+        sealed = prevalidate_payload(draft, registry)
+        manifest = Manifest.from_dict(sealed)
+        config = {
+            "engine_version": 3,
+            "enabled": True,
+            "write_enabled": True,
+            "require_prevalidated_manifest": True,
+            "bundle_size": 2,
+            "max_ads_per_batch": 10,
+            "max_account_workers": 8,
+            "soft_score": 100,
+            "hard_score": 120,
+            "score_window_seconds": 300,
+            "points_per_mode": {"pure_clone": 20, "clone_prestaged": 45},
+            "state_root": str(root / "state"),
+            "audit_root": str(root / "audit"),
+        }
+        transport = FakeBatchTransport(ACCOUNT_ID)
+        engine = CampaignEngine(config, transport_factory=lambda account: transport)
+        first = engine.execute(manifest)
+        if first.get("status") != "PARTIAL_DEFERRED_QUOTA" or len(first.get("campaign_ids") or []) != 2:
+            raise RuntimeError("offline first wave did not produce guarded 2+deferred plan")
+        lane_files = list((root / "state").glob("lane-*.json"))
+        if len(lane_files) != 1:
+            raise RuntimeError("offline lane state missing")
+        lane = load_json(lane_files[0])
+        lane.update(events=[], reservations={}, points=0)
+        atomic_json(lane_files[0], lane)
+        second = engine.execute(manifest)
+        if second.get("status") != "COMPLETE_FUTURE_ACTIVE" or len(second.get("campaign_ids") or []) != 3:
+            raise RuntimeError("offline resume did not complete the third campaign")
+        return {
+            "status": "OFFLINE_SMOKE_OK",
+            "campaign_count": 3,
+            "planner": [2, 1],
+            "first_status": first["status"],
+            "first_campaigns": len(first["campaign_ids"]),
+            "final_status": second["status"],
+            "final_campaigns": len(second["campaign_ids"]),
+            "unique_campaign_ids": len(set(second["campaign_ids"])),
+            "intermediate_get_calls": second["metrics"]["intermediate_get_calls"],
+            "external_network_calls": 0,
+        }
