@@ -336,9 +336,10 @@ def _proposal_prompt(
         "use concise labels, semicolons and standard abbreviations where meaning is unchanged. "
         "Return strict JSON with exactly this schema: "
         "{\"entries\":[{\"index\":1,\"segments\":[\"...\"]}]}. Return exactly segment_count "
-        "segments in the same order; do not merge, drop or add segments. Protected literals are "
-        "never sent to you and will be deterministically reinserted between returned segments. "
-        "The combined segment text plus protected_literal_chars must respect max_chars. Do not "
+        "segments in the same order; do not merge, drop or add segments. The combined returned "
+        "segment strings for each entry must total at most that entry's "
+        "segment_char_budget; this is a hard per-entry limit. Protected literals are never sent "
+        "to you and will be deterministically reinserted between returned segments. Do not "
         "emit numeric digits, backticks, URLs, hashtags, mentions or all-caps abbreviations in "
         "segments; use ordinary lowercase prose. "
         f"The rendered entries, joined by {ENTRY_DELIMITER!r}, must total at most "
@@ -457,7 +458,7 @@ def propose_and_verify(
                     target_chars,
                     budgets,
                     indexes,
-                    enforce_total=False,
+                    enforce_total=True,
                     protected_literals_exact=True,
                 )
                 return
