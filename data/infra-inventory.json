@@ -3889,16 +3889,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
-      "size_bytes": 8845,
-      "modified_at": "2026-07-30T14:16:20-04:00",
-      "sha256": "30170c4bff80982fee8e0e54aef8f3bf90c2d111d39fcfcffb5d7f97f29d9ab9",
+      "size_bytes": 9547,
+      "modified_at": "2026-08-21T10:48:44-04:00",
+      "sha256": "5931ccb971181be00656426291f0389cad709d5d5225c5e6c3073bfc7dfced59",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Operational Meta role/Sheet reconciliation rules including B006-2 owner Crislaine Oliveira as an in-set seguradora with pages and exact-ID fail-closed behavior.",
-      "validation": "Runtime/versioned SHA-256 match; owner identity/token live validation and Discord/Sheet readbacks PASS.",
-      "updated_at": "2026-07-30T14:20:54-04:00",
-      "source_report": "REPORT-INFRA Zeus B006-2 owner Crislaine Oliveira 2026-07-30"
+      "description": "Operational Meta failure modes and role/Sheet reconciliation. OAuthException 190 `Application has been deleted` maps to an app that remains listed in Meta for Developers under Restritos; this is distinct from rate-limit pressure.",
+      "validation": "Runtime/versioned SHA-256 match; exact rule readback PASS; Rodolfo screenshot confirmed Developers filter `Restritos (1)`; REPORT-INFRA message 1540372969635840033 read back via Discord GET with HTTP 200, empty content, zero mentions and expected embed fields.",
+      "updated_at": "2026-08-21T10:53:18-04:00",
+      "source_report": "discord:#alerts-infra/1540372969635840033"
     },
     {
       "id": "zeus-meta-app-rate-limit-route-pack-05",
