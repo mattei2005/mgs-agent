@@ -254,6 +254,29 @@ def test_asset_selection_fails_when_only_eight_unique_assets_exist():
         select_assets(rows, {f"drive-{index}" for index in range(1, 9)}, 9)
 
 
+def test_asset_selection_skips_unreconciled_drive_assets_before_filling_batch():
+    rows = [asset(index) for index in range(1, 12)]
+    reconciliation = {
+        "assets": [
+            {
+                "asset_id": row["asset_id"],
+                "asset_drive_id": row["asset_drive_id"],
+                "clean_checksum": row["clean_checksum"],
+                "approved": row["asset_id"] not in {"asset-1", "asset-2"},
+                "meta_conflicts": ([{"match_id": f"video-{row['asset_id']}"}] if row["asset_id"] in {"asset-1", "asset-2"} else []),
+            }
+            for row in rows
+        ],
+    }
+    selected = select_assets(
+        rows,
+        {f"drive-{index}" for index in range(1, 12)},
+        9,
+        reconciliation=reconciliation,
+    )
+    assert [row["asset_id"] for row in selected] == [f"asset-{index}" for index in range(3, 12)]
+
+
 def test_reconciliation_blocks_existing_canonical_name_in_meta_ads():
     row = asset(1)
     row["canonical_filename"] = "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4"
@@ -311,7 +334,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         "require_prevalidated_manifest": True,
     }))
     paths.operation.write_text(json.dumps(operation()))
-    paths.inventory.write_text("".join(json.dumps(asset(index)) + "\n" for index in range(1, 10)))
+    paths.inventory.write_text("".join(json.dumps(asset(index)) + "\n" for index in range(1, 12)))
     paths.reconciliation.write_text(json.dumps({
         "status": "valid",
         "account_id": "1046241194533786",
@@ -322,10 +345,10 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
                 "asset_id": f"asset-{index}",
                 "asset_drive_id": f"drive-{index}",
                 "clean_checksum": f"sha-{index}",
-                "approved": True,
-                "meta_conflicts": [],
+                "approved": index > 2,
+                "meta_conflicts": ([{"match_id": f"video-{index}"}] if index <= 2 else []),
             }
-            for index in range(1, 10)
+            for index in range(1, 12)
         ],
     }))
 
@@ -341,8 +364,8 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
             self.calls.append("drive_preflight")
             return {
                 "drive": {
-                    "files": [{"id": f"drive-{index}", "location": "01_READY"} for index in range(1, 10)],
-                    "counts": {"IMG": 0, "VID": 9, "TOTAL": 9},
+                    "files": [{"id": f"drive-{index}", "location": "01_READY"} for index in range(1, 12)],
+                    "counts": {"IMG": 0, "VID": 11, "TOTAL": 11},
                 }
             }
 
@@ -372,6 +395,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
     assert result["campaign_count"] == 3
     assert result["campaign_numbers"] == [14, 15, 16]
     assert result["planner_bundles"] == [2, 1]
+    assert result["selected_assets"] == [f"CAR_BR_BR_VID_TEST_PV_{index:03d}.mp4" for index in range(3, 12)]
     assert result["side_effects"] == {
         "inventory_reservation": False,
         "media_upload": False,

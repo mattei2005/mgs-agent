@@ -53,7 +53,16 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
             template = _replace_cpv_utm(copy.deepcopy(payload_template if isinstance(payload_template, dict) else source_template), number)
             asset_feed = dict(template.get("asset_feed_spec") or {})
-            asset_feed["videos"] = [{"video_id": ready["vertical_video_id"]}, {"video_id": ready["square_video_id"]}]
+            source_videos = list(asset_feed.get("videos") or [])
+            replacement_videos = []
+            for source_index, video_id in enumerate((ready["vertical_video_id"], ready["square_video_id"])):
+                replacement = {"video_id": video_id}
+                if source_index < len(source_videos):
+                    labels = copy.deepcopy((source_videos[source_index] or {}).get("adlabels") or [])
+                    if labels:
+                        replacement["adlabels"] = labels
+                replacement_videos.append(replacement)
+            asset_feed["videos"] = replacement_videos
             template["asset_feed_spec"] = asset_feed
             template.setdefault("object_story_spec", {"page_id": CPV_PAGE_ID})
             template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {ref['asset_id']}"

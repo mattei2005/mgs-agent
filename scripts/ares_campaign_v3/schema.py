@@ -39,6 +39,35 @@ def _has_text(value: Any, target: str) -> bool:
     return False
 
 
+def _label_identity(value: Any) -> str:
+    if not isinstance(value, dict):
+        return ""
+    return str(value.get("id") or value.get("name") or "").strip()
+
+
+def _validate_video_label_references(payload: dict[str, Any]) -> None:
+    asset_feed = payload.get("asset_feed_spec") or {}
+    rules = asset_feed.get("asset_customization_rules") or []
+    referenced = {
+        _label_identity(rule.get("video_label"))
+        for rule in rules
+        if isinstance(rule, dict) and rule.get("video_label")
+    }
+    referenced.discard("")
+    if not referenced:
+        return
+    available = {
+        _label_identity(label)
+        for video in (asset_feed.get("videos") or [])
+        if isinstance(video, dict)
+        for label in (video.get("adlabels") or [])
+    }
+    available.discard("")
+    missing = sorted(referenced - available)
+    if missing:
+        raise ManifestError(f"asset_customization_rules video_label missing from videos: {','.join(missing)}")
+
+
 @dataclass(frozen=True)
 class MediaSpec:
     asset_id: str
@@ -82,6 +111,7 @@ class AdSpec:
             raise ManifestError("standard_enhancements is prohibited")
         if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
+        _validate_video_label_references(payload)
         return cls(name=name, media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
 
 

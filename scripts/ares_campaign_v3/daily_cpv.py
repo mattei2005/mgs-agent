@@ -317,7 +317,28 @@ def validate_engine_config(config: dict[str, Any]) -> None:
         raise DailyBlocked("engine_config", "v3 engine identity, Graph version or bundle size drifted")
 
 
-def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -> list[dict[str, Any]]:
+def reconciliation_asset_ok(row: dict[str, Any], allowed: dict[str, dict[str, Any]]) -> bool:
+    source = allowed.get(str(row.get("asset_id") or "")) or {}
+    return (
+        source.get("approved") is True
+        and str(source.get("asset_drive_id") or "") == str(row.get("asset_drive_id") or "")
+        and str(source.get("clean_checksum") or "") == str(row.get("clean_checksum") or "")
+        and not (source.get("meta_conflicts") or [])
+    )
+
+
+def select_assets(
+    rows: list[dict[str, Any]],
+    drive_ids: set[str],
+    count: int,
+    *,
+    reconciliation: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    allowed = (
+        {str(row.get("asset_id") or ""): row for row in reconciliation.get("assets") or []}
+        if reconciliation is not None
+        else None
+    )
     candidates = [
         row
         for row in rows
@@ -330,6 +351,7 @@ def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -
         and row.get("ares_eligible") is True
         and not row.get("used_by")
         and str(row.get("asset_drive_id") or "") in drive_ids
+        and (allowed is None or reconciliation_asset_ok(row, allowed))
     ]
     candidates.sort(key=lambda row: (str(row.get("first_seen_at") or ""), str(row.get("canonical_filename") or "")))
     selected: list[dict[str, Any]] = []
@@ -343,7 +365,11 @@ def select_assets(rows: list[dict[str, Any]], drive_ids: set[str], count: int) -
         if len(selected) == count:
             break
     if len(selected) != count:
-        raise DailyBlocked("asset_selection", "insufficient unique eligible assets", {"required": count, "available_unique": len(selected)})
+        raise DailyBlocked(
+            "asset_selection",
+            "insufficient unique eligible reconciled assets",
+            {"required": count, "available_unique": len(selected)},
+        )
     return selected
 
 
@@ -395,13 +421,7 @@ def verify_reconciliation(path: Path, selected: list[dict[str, Any]], now: datet
     allowed = {str(row.get("asset_id") or ""): row for row in payload.get("assets") or []}
     checks = []
     for row in selected:
-        source = allowed.get(str(row.get("asset_id") or "")) or {}
-        ok = (
-            source.get("approved") is True
-            and str(source.get("asset_drive_id") or "") == str(row.get("asset_drive_id") or "")
-            and str(source.get("clean_checksum") or "") == str(row.get("clean_checksum") or "")
-            and not (source.get("meta_conflicts") or [])
-        )
+        ok = reconciliation_asset_ok(row, allowed)
         checks.append({"asset_id": row.get("asset_id"), "ok": ok})
     if not checks or not all(item["ok"] for item in checks):
         raise DailyBlocked("reconciliation", "one or more selected assets are not reconciled", {"checks": checks})
@@ -1007,13 +1027,14 @@ def run_daily(
             phase_end(audit, "drive_preflight", phase_started, phase_calls, call_counter)
             if not selected:
                 phase_started, phase_calls = phase_begin(call_counter)
-                backend.refresh_reconciliation(inventory_rows, drive, current)
+                reconciliation_payload = backend.refresh_reconciliation(inventory_rows, drive, current)
                 phase_end(audit, "reconciliation", phase_started, phase_calls, call_counter)
                 phase_started, phase_calls = phase_begin(call_counter)
                 selected = select_assets(
                     inventory_rows,
                     {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"},
                     count * 3,
+                    reconciliation=reconciliation_payload,
                 )
                 reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
                 phase_end(audit, "asset_selection", phase_started, phase_calls, call_counter, detail={"selected": len(selected)})

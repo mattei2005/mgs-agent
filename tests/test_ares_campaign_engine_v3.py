@@ -144,6 +144,15 @@ def test_manifest_rejects_legacy_standard_enhancements_anywhere():
         manifest([row])
 
 
+def test_manifest_rejects_video_customization_label_missing_from_replacement_videos():
+    row = prestaged_campaign(1)
+    row['ads'][0]['creative_payload']['asset_feed_spec']['asset_customization_rules'] = [
+        {'video_label': {'id': 'vertical-label', 'name': 'vertical'}}
+    ]
+    with pytest.raises(ManifestError, match='video_label'):
+        manifest([row])
+
+
 def test_planner_bundles_two_campaigns_per_account_without_cross_account_mix():
     m = manifest([
         pure_campaign(1, '100'), pure_campaign(2, '100'), pure_campaign(3, '100'),
@@ -297,7 +306,10 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
             'creative_payload': {
                 'object_story_spec': {'page_id': '621037101089579'},
                 'asset_feed_spec': {
-                    'videos': [],
+                    'videos': [
+                        {'video_id': f'old-v-{i}', 'adlabels': [{'id': f'v-label-{i}', 'name': f'vertical-{i}'}]},
+                        {'video_id': f'old-s-{i}', 'adlabels': [{'id': f's-label-{i}', 'name': f'square-{i}'}]},
+                    ],
                     'link_urls': [{'website_url': 'https://example.test/?utm_campaign=b01fb13c08&utm_adgroup=b01fb13c08g01'}],
                 },
             },
@@ -324,6 +336,10 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert 'b01fb13c08' not in json.dumps(payload)
     assert 'source_ad_id' not in built.campaigns[0].ads[0].creative_payload
     assert 'creative_payload' not in built.campaigns[0].ads[0].creative_payload
+    assert built.campaigns[0].ads[0].creative_payload['asset_feed_spec']['videos'] == [
+        {'video_id': 'v0', 'adlabels': [{'id': 'v-label-0', 'name': 'vertical-0'}]},
+        {'video_id': 's0', 'adlabels': [{'id': 's-label-0', 'name': 'square-0'}]},
+    ]
 
 
 def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tmp_path):

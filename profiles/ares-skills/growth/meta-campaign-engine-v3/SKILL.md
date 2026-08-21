@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.8
+version: 3.0.9
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -100,3 +100,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - `IN_PROCESS` é post-processing, não falha terminal.
 - Mídia crua não entra na transação: primeiro pre-stage, depois manifest.
 - Advanced Access por permission, Marketing API Full Access e asset assignment são gates diferentes.
+- Em `clone_prestaged`, ao substituir `asset_feed_spec.videos`, preservar em cada novo vídeo os `adlabels` do vídeo-fonte vertical/square quando `asset_customization_rules` os referencia. Remover os labels causa `code=100/subcode=2446173` mesmo com mídia pronta. O mapeamento usa dimensão/orientação real, não apenas ordem presumida.
+- `rename_options` da cópia nativa de adset pode concatenar o nome-fonte com o sufixo desejado. O pós-processamento deve normalizar o adset para o nome canônico exato e validar por readback.
+- Se o bundle falhar depois de criar campaign/adset shells, bloquear replay cego. Reconciliar IDs existentes, procurar filhos/orphans por escopo recente ou nomes exatos, corrigir o payload, passar `validate_only` e retomar somente a camada faltante com state/audit/readback explícitos.
+- Na criação `clone_prestaged`, a ordem do pool é obrigatória: atualizar a reconciliação Drive×Meta, eliminar do conjunto candidato todo asset não aprovado, conflitante, reservado ou com identidade divergente e somente então selecionar `3 × campanhas` do Shared Drive. Conflito em um candidato faz o seletor pular para o próximo elegível; nunca bloquear o lote inteiro enquanto houver quantidade reconciliada suficiente. Bloquear apenas quando o saldo único reconciliado for menor que o necessário.
