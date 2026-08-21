@@ -24,9 +24,14 @@ RATE_LIMIT_INITIAL_SLEEP = int(os.environ.get('ARES_META_RATE_LIMIT_INITIAL_SLEE
 BUSINESS_USAGE_SOFT_LIMIT_PERCENT = float(os.environ.get('ARES_META_BUSINESS_USAGE_SOFT_LIMIT_PERCENT', '80'))
 BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS = int(os.environ.get('ARES_META_BUSINESS_USAGE_SOFT_LIMIT_WAIT_SECONDS', '60'))
 BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS = int(os.environ.get('ARES_META_BUSINESS_USAGE_MAX_INLINE_WAIT_SECONDS', str(RATE_LIMIT_MAX_TOTAL_SLEEP)))
+AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT = float(os.environ.get('ARES_META_AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT', '75'))
+DEVELOPMENT_ACCESS_SCORE_MAX = 60
+STANDARD_ACCESS_SCORE_MAX = 9000
+DEFAULT_AD_ACCOUNT_RESET_SECONDS = 300
 TRANSIENT_5XX_RETRY_SECONDS = 10
 THROTTLE_STATE_PATH = BASE / 'cache' / 'meta-api-throttle-state.json'
 BUSINESS_USAGE_HEADER = 'x-business-use-case-usage'
+AD_ACCOUNT_USAGE_HEADER = 'x-ad-account-usage'
 
 
 class AresMetaUsageBlocked(RuntimeError):
@@ -245,6 +250,103 @@ def parse_business_usage_headers(headers):
     }
 
 
+def parse_ad_account_usage_headers(headers):
+    """Parse Meta X-Ad-Account-Usage independently from BUC usage."""
+    empty = {
+        'present': False,
+        'acc_id_util_pct': 0.0,
+        'reset_time_duration_seconds': 0,
+        'ads_api_access_tier': None,
+    }
+    raw = _header_value(headers, AD_ACCOUNT_USAGE_HEADER)
+    if raw in (None, ''):
+        return empty
+    try:
+        data = json.loads(raw) if isinstance(raw, str) else raw
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return empty
+    if not isinstance(data, dict):
+        return empty
+    return {
+        'present': True,
+        'acc_id_util_pct': max(0.0, _as_number(data.get('acc_id_util_pct'))),
+        'reset_time_duration_seconds': max(0, int(math.ceil(_as_number(data.get('reset_time_duration'))))),
+        'ads_api_access_tier': str(data.get('ads_api_access_tier') or '').strip() or None,
+    }
+
+
+def marketing_access_tier(ad_account_usage=None, business_usage=None):
+    tier = str((ad_account_usage or {}).get('ads_api_access_tier') or '').strip()
+    if tier:
+        return tier
+    for entry in (business_usage or {}).get('entries') or []:
+        tier = str(entry.get('ads_api_access_tier') or '').strip()
+        if tier:
+            return tier
+    return None
+
+
+def ad_account_usage_decision(usage, now_epoch=None):
+    now_epoch = time.time() if now_epoch is None else float(now_epoch)
+    present = bool((usage or {}).get('present'))
+    util_pct = _as_number((usage or {}).get('acc_id_util_pct'))
+    soft_limited = present and util_pct >= AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT
+    reset_seconds = max(0, int((usage or {}).get('reset_time_duration_seconds') or 0))
+    wait_seconds = reset_seconds if soft_limited and reset_seconds > 0 else (DEFAULT_AD_ACCOUNT_RESET_SECONDS if soft_limited else 0)
+    return {
+        'soft_limited': soft_limited,
+        'wait_seconds': wait_seconds,
+        'blocked_until_epoch': now_epoch + wait_seconds,
+        'acc_id_util_pct': util_pct,
+        'ads_api_access_tier': (usage or {}).get('ads_api_access_tier'),
+    }
+
+
+def ads_management_score_budget(ad_account_usage, business_usage, *, read_calls, write_calls, reserve_points=5):
+    """Project logical Marketing API score; Graph batch children count separately."""
+    tier = marketing_access_tier(ad_account_usage, business_usage)
+    if tier == 'development_access':
+        maximum = DEVELOPMENT_ACCESS_SCORE_MAX
+    elif tier == 'standard_access':
+        maximum = STANDARD_ACCESS_SCORE_MAX
+    else:
+        maximum = None
+    header_present = bool((ad_account_usage or {}).get('present'))
+    util_pct = max(0.0, _as_number((ad_account_usage or {}).get('acc_id_util_pct')))
+    projected = max(0, int(read_calls)) + 3 * max(0, int(write_calls)) + max(0, int(reserve_points))
+    if maximum is not None and header_present:
+        used = int(math.ceil(maximum * min(util_pct, 100.0) / 100.0))
+        available = max(0, maximum - used)
+    else:
+        used = None
+        available = None
+    allowed = bool(maximum is not None and available is not None and header_present and projected <= available and util_pct < AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT)
+    if maximum is None:
+        reason = 'unknown_access_tier'
+    elif not header_present:
+        reason = 'missing_x_ad_account_usage'
+    elif util_pct >= AD_ACCOUNT_USAGE_SOFT_LIMIT_PERCENT:
+        reason = 'ad_account_usage_soft_limit'
+    elif projected > available:
+        reason = 'projected_score_exceeds_available'
+    else:
+        reason = 'within_budget'
+    return {
+        'allowed': allowed,
+        'reason': reason,
+        'tier': tier,
+        'header_present': header_present,
+        'maximum_score': maximum,
+        'estimated_used_score': used,
+        'estimated_available_score': available,
+        'projected_score': projected,
+        'read_calls': max(0, int(read_calls)),
+        'write_calls': max(0, int(write_calls)),
+        'reserve_points': max(0, int(reserve_points)),
+        'acc_id_util_pct': util_pct,
+    }
+
+
 def business_usage_decision(usage, now_epoch=None):
     now_epoch = time.time() if now_epoch is None else float(now_epoch)
     max_usage = _as_number((usage or {}).get('max_usage_pct'))
@@ -265,11 +367,17 @@ def business_usage_decision(usage, now_epoch=None):
 def retry_wait_seconds(status, payload, headers, attempt=1):
     err = payload.get('error') if isinstance(payload, dict) else None
     code = err.get('code') if isinstance(err, dict) else None
+    subcode = err.get('error_subcode') if isinstance(err, dict) else None
     if status == 429 or code in RATE_LIMIT_CODES:
+        ad_usage = parse_ad_account_usage_headers(headers)
+        if ad_usage['reset_time_duration_seconds'] > 0:
+            return ad_usage['reset_time_duration_seconds']
         usage = parse_business_usage_headers(headers)
         estimated_minutes = _as_number(usage.get('estimated_time_to_regain_access_minutes'))
         if estimated_minutes > 0:
             return max(1, int(math.ceil(estimated_minutes * 60)))
+        if subcode == 2446079 or (code == 17 and marketing_access_tier(ad_usage, usage) == 'development_access'):
+            return DEFAULT_AD_ACCOUNT_RESET_SECONDS
         return min(RATE_LIMIT_INITIAL_SLEEP * (2 ** max(0, int(attempt) - 1)), RATE_LIMIT_MAX_TOTAL_SLEEP)
     if isinstance(status, int) and 500 <= status <= 599:
         return TRANSIENT_5XX_RETRY_SECONDS

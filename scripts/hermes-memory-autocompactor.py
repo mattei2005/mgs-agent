@@ -44,6 +44,7 @@ _PROTECTED_RE = re.compile(
     r"\b\d+(?:[.,]\d+)?%|\b\d+(?:[.,]\d+)?(?:ms|s|m|h|x/dia)\b|"
     r"\b\d{2,}\b|\b\d+/\d+\b|(?<!\w)\.\d+\b|\b[A-Z][A-Z0-9/_-]{1,}\b"
 )
+_LITERAL_PLACEHOLDER_RE = re.compile(r"⟦mgs_literal_(\d{4})⟧")
 
 
 class CompactionError(RuntimeError):
@@ -101,6 +102,64 @@ def _extract_json_object(text: str) -> Dict[str, Any]:
 
 def _protected_literals(text: str) -> List[str]:
     return sorted(_PROTECTED_RE.findall(text))
+
+
+def _mask_protected_literals(text: str) -> tuple[str, List[str]]:
+    """Replace operational literals with opaque, stable model placeholders."""
+    literals: List[str] = []
+
+    def replace(match: re.Match[str]) -> str:
+        index = len(literals)
+        literals.append(match.group(0))
+        return f"⟦mgs_literal_{index:04d}⟧"
+
+    return _PROTECTED_RE.sub(replace, text), literals
+
+
+def _restore_protected_literals(text: str, literals: Sequence[str]) -> str:
+    """Restore placeholders only when every expected token occurs exactly once."""
+    seen = [int(value) for value in _LITERAL_PLACEHOLDER_RE.findall(text)]
+    expected = list(range(len(literals)))
+    if sorted(seen) != expected or len(seen) != len(set(seen)):
+        raise CompactionError("literal_placeholder_mismatch")
+
+    def replace(match: re.Match[str]) -> str:
+        return literals[int(match.group(1))]
+
+    restored = _LITERAL_PLACEHOLDER_RE.sub(replace, text)
+    if _LITERAL_PLACEHOLDER_RE.search(restored):
+        raise CompactionError("literal_placeholder_mismatch")
+    return restored
+
+
+def _restore_candidate_literals(
+    original: Sequence[str],
+    candidate: Dict[str, Any],
+    selected_indexes: Sequence[int],
+) -> Dict[str, Any]:
+    rows = candidate.get("entries")
+    if not isinstance(rows, list):
+        return candidate
+    restored_rows = []
+    selected = set(selected_indexes)
+    for item in rows:
+        if (
+            not isinstance(item, dict)
+            or not isinstance(item.get("index"), int)
+            or not isinstance(item.get("text"), str)
+        ):
+            restored_rows.append(item)
+            continue
+        index = item["index"]
+        if index not in selected or not 1 <= index <= len(original):
+            restored_rows.append(item)
+            continue
+        _masked, literals = _mask_protected_literals(original[index - 1])
+        restored_rows.append({
+            **item,
+            "text": _restore_protected_literals(item["text"], literals),
+        })
+    return {**candidate, "entries": restored_rows}
 
 
 def _entry_budgets(entries: Sequence[str], target_chars: int) -> List[int]:
@@ -209,15 +268,17 @@ def _proposal_prompt(
     *,
     attempt: int = 1,
 ) -> str:
-    payload = [
-        {
+    payload = []
+    for index in selected_indexes:
+        masked, literals = _mask_protected_literals(entries[index - 1])
+        payload.append({
             "index": index,
             "max_chars": budgets[index - 1],
-            "protected_literals": _protected_literals(entries[index - 1]),
-            "text": entries[index - 1],
-        }
-        for index in selected_indexes
-    ]
+            "literal_placeholders": [
+                f"⟦mgs_literal_{item:04d}⟧" for item in range(len(literals))
+            ],
+            "text": masked,
+        })
     retry = ""
     if attempt > 1:
         retry = (
@@ -233,8 +294,9 @@ def _proposal_prompt(
         "use concise labels, semicolons and standard abbreviations where meaning is unchanged. "
         "Return strict JSON with exactly this schema: "
         "{\"entries\":[{\"index\":1,\"text\":\"...\"}]}. Each returned text must "
-        "respect that input entry's max_chars hard limit and contain the exact same multiset "
-        "listed in protected_literals, byte-for-byte, with no additions or removals. "
+        "respect that input entry's max_chars hard limit and preserve every opaque token "
+        "listed in literal_placeholders exactly once, byte-for-byte, with no additions, "
+        "removals, renaming or shortening. Never replace a placeholder with a guessed value. "
         f"The rendered entries, joined by {ENTRY_DELIMITER!r}, must total at most "
         f"{target_chars} characters. Store type: {store}.{retry} Data: "
         + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-cbo-operations
 description: "Use quando Ares estruturar, validar ou analisar campanhas Meta de tráfego direto por CBO para quiz/chat, com ou sem captura, incluindo UTMs MGS, estrutura 1x1x3 e reconciliação de receita Smart Bidding + SMS com custo de SMS."
-version: 1.0.28
+version: 1.0.29
 author: Ares
 license: internal
 metadata:
@@ -228,6 +228,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 28. **Não tratar `code=17`/`subcode=2446079` no readback final como erro definitivo.** Se todos os POSTs já produziram IDs, persistir campanha/adset/anúncio/creative/vídeos e assignments como `readback_deferred`, manter assets reservados e retomar o GET somente após cooldown. Não fazer cleanup apenas porque o GET final foi limitado; cleanup é para erro de write/validação ou estado terminal comprovadamente inválido. Um reconciliador determinístico deve finalizar readback, movimento `01_READY→02_TESTING`, inventário e estoque antes de liberar o próximo ciclo.
 29. **Não reportar o total bruto de `01_READY` como estoque disponível.** `01_READY` prova prontidão técnica, não elegibilidade. Sempre separar: total físico live por IMG/VID, total com identidade Drive↔inventário íntegra e total único `ares_eligible=true` após current+paused+archived Meta. Gaps Drive-only, inventory-only ou filename duplicado ficam fail-closed e não entram no saldo utilizável até reparo da identidade/status.
 30. **Comparar bulk do Ads Manager com a capacidade de uma app `development_access`.** O header BUC vivo pode expor `ads_api_access_tier=development_access`, sujeito a limite incompatível com automação de alto volume. Não concluir que “40 campanhas funcionam” prova a mesma capacidade da rota API atual sem identificar UI/API, app e tier. No curto prazo, separar reconciliação, staging de mídia, preparo e ativação; usar batch readiness/readback, budget de chamadas por estágio e estado resumível. Para escala, auditar e obter o acesso Standard/Advanced aplicável antes do teste de 10/40 campanhas.
+31. **Não executar reconciliação global dentro do campaign writer.** A baseline Drive×Meta pode ler centenas de ads/media, mas roda uma vez e depois incrementalmente em job separado. Dry-run e retry de duas campanhas nunca repetem todo o portfólio. Graph batch reduz conexões HTTP, porém seus subrequests continuam consumindo quota lógica. Um incidente CPV repetiu seis full scans, 1.436 video subrequests e 984 linhas de ads antes de o writer ser pausado; esse padrão é proibido.
 
 ## Verification checklist
 
