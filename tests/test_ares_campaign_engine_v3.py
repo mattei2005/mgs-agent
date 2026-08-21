@@ -311,11 +311,12 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         operational_date='2026-08-21',
         request_id='cpv-20260821',
         creative_templates=templates,
+        status='ACTIVE',
     )
     built = Manifest.from_dict(payload)
     assert len(built.campaigns) == 2
     assert all(c.mode == 'clone_prestaged' for c in built.campaigns)
-    assert all(c.status == 'PAUSED' for c in built.campaigns)
+    assert all(c.status == 'ACTIVE' for c in built.campaigns)
     assert [len(c.ads) for c in built.campaigns] == [3, 3]
     assert all(c.start_time.endswith('-03:00') for c in built.campaigns)
     assert 'b01fb13c14' in json.dumps(built.campaigns[0].ads[0].creative_payload)

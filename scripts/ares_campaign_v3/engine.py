@@ -143,7 +143,7 @@ class CampaignEngine:
             shell_ops.extend([
                 BatchOperation(
                     f"campaign_update_{index}", "POST", campaign_id,
-                    body={"name": campaign.name, "status": "PAUSED", "start_time": campaign.start_time, **campaign.campaign_updates},
+                    body={"name": campaign.name, "status": campaign.status, "start_time": campaign.start_time, **campaign.campaign_updates},
                     kind="campaign_update",
                 ),
                 BatchOperation(

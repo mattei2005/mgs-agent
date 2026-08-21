@@ -26,7 +26,10 @@ def _replace_cpv_utm(value: Any, number: int) -> Any:
     return value
 
 
-def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, str]], campaign_numbers: list[int], operational_date: str, request_id: str, creative_templates: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, str]], campaign_numbers: list[int], operational_date: str, request_id: str, creative_templates: list[dict[str, Any]] | None = None, status: str = "PAUSED") -> dict[str, Any]:
+    status = str(status).upper()
+    if status not in {"PAUSED", "ACTIVE"}:
+        raise ValueError("CPV v3 status must be PAUSED or ACTIVE")
     if len(campaign_numbers) != 2:
         raise ValueError("CPV v3 requires two campaign numbers per bundle")
     if len(asset_refs) != 6:
@@ -68,7 +71,7 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
             "name": f"{number:02d} - {start:%d-%m} - Garagem Brasil - (b01fb13c{number:02d}) event_Subscribe - MAXVOL",
             "adset_name": f"01 - AdGroup - (b01fb13c{number:02d}g01) event_Subscribe - MAXVOL",
             "start_time": start.isoformat(),
-            "status": "PAUSED",
+            "status": status,
             "campaign_updates": {"daily_budget": "3000", "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
             "ads": ads,
         })
