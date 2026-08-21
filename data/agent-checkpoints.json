@@ -23,12 +23,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Antes da execução, reconciliar e reservar 9 linhagens únicas do Drive, confirmar numeração e cap por API Meta, fazer pre-stage/upload/readback vertical+square, registrar mídias ready, materializar e selar manifest de 3 campanhas, validar plan 2+1 e executar somente se todos os gates passarem. Se Rodolfo quiser disparo automático às 17h, materializar previamente uma execução determinística one-shot; não reativar o cron v2.",
-      "objective": "Executar o próximo ciclo CPV pelo Campaign Engine v3 com três clones e criativos novos",
-      "source": "discord:thread:1540228969071116408 Rodolfo; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
-      "state": "rodolfo definiu escopo pontual para 21/08/2026: iniciar o ciclo às 17:00 america/sao_paulo (16:00 america/new_york), clonar 3 campanhas com criativos novos pelo modo clone_prestaged. planejamento esperado 2+1 por uma account lane, 3 anúncios por campanha e 9 linhagens criativas únicas. source/estratégia/budget permanecem sujeitos ao preflight live e à herança exata do clone; nenhuma execução automática está armada neste checkpoint. o cron v2 das 17h está pausado e o v3 não possui cron recorrente. media registry atual vazio.",
+      "next_step": "Zeus faz revisão independente do runner e testes, valida hashes/audit/inventário e cron readback. Se aprovado, alterar somente o job 2cf8115a4f8b para o wrapper v3, manter no_agent=true/deliver=local, preservar v2 como rollback e só então habilitar. Antes das 17h renovar dry-run/reconciliação; execução real criará C14/C15, não C16, salvo novo espaço/cap live. Não liberar pausa D3 no mesmo cutover.",
+      "objective": "Concluir com Zeus o cutover do schedule diário CPV 17h para Campaign Engine v3",
+      "source": "discord:thread:1540228969071116408; runner:/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py; module:/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py; tests:/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py; audit:/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260821.json",
+      "state": "ares materializou runner v3 em scripts/ares-creditoparaveiculo-v3-daily.py e módulo scripts/ares_campaign_v3/daily_cpv.py, com wrapper profile creditoparaveiculo-v3-daily-create.sh. cron 2cf8115a4f8b permanece paused/disabled e ainda aponta para creditoparaveiculo-daily-create.sh v2; nenhum cron foi habilitado. suíte relevante 125 passed; offline smoke 3 campanhas validou 2->partial_deferred_quota->3 complete_future_active, zero rede. dry-run live read-only validou desired_count=3, selected_count=2 por cap: portfolio usd213, disponível usd87, c14/c15, projeção usd273, 6 assets reconciliados; inventory não reservado, registry 0, zero upload/campaign/drive move. c12/c13 foram adicionadas à allowlist autônoma com ids live; futuras campanhas entram apenas por provenance campaign_engine_v3_daily_readback. escala 08h já possui runner; pausa d3 continua fail-closed enquanto roi cumulativo/anomaly gate não estiverem corrigidos/validados.",
       "thread_id": "1540228969071116408",
-      "updated_at": "2026-08-21T06:13:13+00:00"
+      "updated_at": "2026-08-21T06:44:51+00:00"
     },
     {
       "agent": "ares",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T06:18:09+00:00"
+  "updated_at": "2026-08-21T06:44:51+00:00"
 }
