@@ -133,12 +133,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Monitores recorrentes ativos; escalar somente divergências reais. Último live: roles 171/171; B013-2 33/34, Ophelia Gonzalez removida.",
-      "objective": "Manter os 13 apps Meta monitorados; 12 via roles e B013-2 via DTR/Graph",
-      "source": "discord:1537304832409473024#1537524755379257505",
-      "state": "done",
-      "thread_id": "1537304832409473024",
-      "updated_at": "2026-08-13T18:56:47+00:00"
+      "next_step": "Acompanhar os ciclos recorrentes; quando Adriano Alves e Alnashri Lumandung Maja aceitarem e o live readback chegar a 17/17, validar safe_for_sheet=true, zero divergências e fechar o cutover B001-3.",
+      "objective": "Manter os 13 apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-2 via DTR/Graph.",
+      "source": "Discord thread 1540340806341099540; authorization message 1540351562088452147; data/meta-app-registry.json; meta-app-roles-watch state; Sheet Migracao 22/06 gid 542936436.",
+      "state": "b001-2 substituído por b001-3 no registry e monitor. credenciais do item existente validadas: app metadata, roles, me e debug_token http 200, token válido/app-bound. planilha no app tem 17 linhas b001-3; meta tem 15 roles aceitas e 15 nomes resolvidos. ausentes atuais: adriano alves e alnashri lumandung maja. expected_sheet_roles=17 mantém safe_for_sheet=false, bloqueou 17 x writes e preservou a planilha. alerta real b001-3 publicado e lido nas mensagens 1540353027204976741, 1540353028484497488 e 1540353029482745988. cron genérico ativo; b013-2 dedicado permanece pausado.",
+      "thread_id": "1540340806341099540",
+      "updated_at": "2026-08-21T13:38:13+00:00"
     },
     {
       "agent": "zeus",
@@ -952,5 +952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T10:32:56+00:00"
+  "updated_at": "2026-08-21T13:38:13+00:00"
 }

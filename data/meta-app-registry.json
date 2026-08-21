@@ -48,30 +48,34 @@
     "credential_runtime_pass": 13,
     "credential_runtime_fail": [],
     "metadata_drift": [],
-    "credential_drift": [{"app":"B006-3","item_title_profile":"Isidoro Cristina Barbosa Martins","live_token_profile":"Gia Huy","operational_admin":"Gia Huy","status":"non_blocking_title_drift"}],
+    "credential_drift": [
+      {"app":"B001-3","item_title":"BOT B001-2 Token - Adriano Alves","item_app_name":"B001-3","status":"non_blocking_title_drift"},
+      {"app":"B006-3","item_title_profile":"Isidoro Cristina Barbosa Martins","live_token_profile":"Gia Huy","operational_admin":"Gia Huy","status":"non_blocking_title_drift"}
+    ],
     "validated_corrections": [
       {"app":"B002-2","field":"app_name","result":"PASS","message_id":"1537317279405047809"},
       {"app":"B013-2","token_profile_meta_name":"Alessandra Lopes","operational_profile_label":"PERFIL NOVO - 192","debug_token":"PASS","app_id_match":true,"role_membership":true,"message_id":"1537317483323850782"},
       {"app":"B006-3","item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins","app_name":"B006-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Gia Huy","sheet_no_app_rows":15,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538892880783876200"},
-      {"app":"B004-3","item_title":"BOT B004-3 Token - Beatriz Santos","app_name":"B004-3","app_metadata_http":200,"roles_http":200,"roles_count":12,"roles_resolved_names":12,"expected_sheet_roles":12,"pending_role_acceptances":0,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Beatriz Santos","sheet_no_app_rows":12,"sheet_present_rows":12,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538901046653358121"}
+      {"app":"B004-3","item_title":"BOT B004-3 Token - Beatriz Santos","app_name":"B004-3","app_metadata_http":200,"roles_http":200,"roles_count":12,"roles_resolved_names":12,"expected_sheet_roles":12,"pending_role_acceptances":0,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Beatriz Santos","sheet_no_app_rows":12,"sheet_present_rows":12,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538901046653358121"},
+      {"app":"B001-3","item_title":"BOT B001-2 Token - Adriano Alves","app_name":"B001-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"expected_sheet_roles":17,"pending_role_acceptances":2,"missing_sheet_roles":["Adriano Alves","Alnashri Lumandung Maja"],"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_token_profile":"Aline Rosse","sheet_no_app_rows":17,"sheet_identity_blocked_rows":17,"sheet_writes":0,"force_live_alert_message_ids":["1540353027204976741","1540353028484497488","1540353029482745988"],"source_message_id":"1540351562088452147"}
     ],
     "secrets_exposed": false,
     "report":"reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "partial_explicit_reactivation_b004_3_b006_3",
+    "status": "b001_3_live_pending_17_of_17",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1538901046653358121",
-    "planned_check": "B004-3 e B006-3 reativados por instrução explícita; B004-3 validado com 12/12 roles e mantém fail-closed automático se cair abaixo do esperado",
+    "source_message_id": "1540351562088452147",
+    "planned_check": "B001-3 foi ativado no monitor e recebeu alerta real; 15/17 roles estão aceitas e resolvidas, com Adriano Alves e Alnashri Lumandung Maja ainda ausentes de /roles.",
     "required_before_reactivation": [
       "fresh /roles readback for all 13 apps",
       "exact reconciliation against the current Sheet order and assignments",
       "zero missing expected admins",
       "zero unexpected operational admins after owner exceptions",
       "all app/token/debug checks healthy",
-      "explicitly preserve B004-3/B006-3/B007/B013-2 routing semantics"
+      "explicitly preserve B001-3/B004-3/B006-3/B007/B013-2 routing semantics"
     ],
     "reactivate_only_when": "explicit Rodolfo instruction or 100 percent reconciled",
-    "current_runtime_note": "B004-3 and B006-3 generic role monitoring reactivated; no generic app remains manually paused. B004-3 is healthy at expected_sheet_roles=12 and fails closed automatically if accepted roles fall below that count."
+    "current_runtime_note": "Generic role monitoring is active and B001-3 is unpaused. B001-3 has 15 accepted/resolved roles against 17 Sheet assignments; expected_sheet_roles=17 keeps safe_for_sheet=false and blocks X writes until 17/17. B013-2 dedicated cron remains paused by Rodolfo."
   }
 }
