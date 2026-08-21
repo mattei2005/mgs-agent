@@ -802,6 +802,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-kvm4-full-update-20260820",
+      "next_step": "instalar versões exatas, validar pre-reboot, preparar validador durável e reiniciar host",
+      "objective": "Atualizar todos os 23 pacotes APT elegíveis da VPS KVM4 e concluir reboot validado",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260821T013506Z-kvm4-full-update/pre-state.json",
+      "state": "pre-state congelado; transação 23/0/0/0; rollback monarx hash-validado; instalação pendente",
+      "thread_id": "1540144895300345987",
+      "updated_at": "2026-08-21T01:35:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-maintenance-20260811",
       "next_step": "Nenhum; manutenção encerrada. ESM Apps permanece decisão separada.",
       "objective": "Atualizar 17 pacotes da VPS, rebootar para kernel 6.8.0-137 e validar pós-boot",
@@ -922,5 +932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T01:10:56+00:00"
+  "updated_at": "2026-08-21T01:35:27+00:00"
 }
