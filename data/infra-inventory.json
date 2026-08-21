@@ -1499,38 +1499,36 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 93769,
-      "modified_at": "2026-08-18T11:52:53-04:00",
-      "sha256": "2f54ada0b6aaea00ec644299df909f2cb73015023ecca4af90bf6e47f955ea33",
-      "description": "Registry-driven Meta roles monitor with B001-B012 shared-admin alert semantics and direct-traffic verification exclusions.",
-      "validation": "Shell/embedded-Python PASS; full live run processed 12 apps with alerts_sent=0, errors_count=0, ignored_verification_rows=6, no ignored identities left in alert state and zero Discord re-alerts.",
-      "updated_at": "2026-08-18T11:56:53-04:00",
-      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18",
-      "last_change": "2026-08-18: removed unique admin fields and /me-driven alerts for B001-B012; excluded six direct-traffic identities from role deltas and Sheet X reconciliation.",
-      "backup": "/root/mgs-agent/backups/meta-app-shared-admin-alerts-20260818-114022/meta-app-roles-watch.sh.before",
-      "state_backup": "/root/mgs-agent/backups/meta-app-shared-admin-alerts-20260818-114022/meta-app-role-monitor-state.json.before"
+      "size_bytes": 93791,
+      "modified_at": "2026-08-21T09:31:26-04:00",
+      "sha256": "2c12397d90c665627cc2d81bbf233151bc3be3714aa0f02acd508d97a52ddff0",
+      "description": "Registry-driven Meta roles monitor with B001-3 predecessor cleanup, expected-role fail-closed Sheet reconciliation and standard live alerts.",
+      "validation": "Shell and embedded-Python PASS; isolated and production B001-3 runs returned four healthy Graph checks, token valid/app-bound, 15 roles/15 names resolved, errors_count=0; expected_sheet_roles=17 set safe_for_sheet=false and blocked 17 Sheet X writes; force-live delivered one verified three-message alert family.",
+      "updated_at": "2026-08-21T09:38:13-04:00",
+      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21",
+      "last_change": "2026-08-21: added B001-3 over B001-2 state migration guard and activated the replacement registry route.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0013-cutover-20260821-093104/meta-app-roles-watch.sh.before",
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0013-cutover-20260821-093104/meta-app-role-monitor-state.json.before"
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 402,
-      "modified_at": "2026-08-21T08:46:30-04:00",
-      "sha256": "0c24c7e1841c560bda197107b9762da8cb75ebc33874b17c3d7d99098dd38455",
+      "size_bytes": 363,
+      "modified_at": "2026-08-21T09:31:26-04:00",
+      "sha256": "4c573706d4a5807562bb2b1a20ff94ace95bd500ea443caafa5b70e7efb7a0af",
       "mode": "manual",
-      "scope": [
-        "B001-2"
-      ],
+      "scope": [],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1540340806341099540",
-      "validation": "JSON PASS; isolated B001-2 production cycle recognized the exact manual pause, kept alerts_sent=0, and Discord readback found no new B001-2 delivery after the pause. The app check still reports Meta code 190/application deleted, which is the live reason for keeping it paused.",
-      "updated_at": "2026-08-21T08:48:01-04:00",
-      "source_report": "REPORT-INFRA Zeus B001-2/B013-2 monitor pause 2026-08-21",
-      "description": "Canonical generic-app alert pause file; B001-2 delivery is manually suppressed while the shared cron continues for unaffected apps.",
-      "last_change": "2026-08-21: added B001-2 to manual pause by Rodolfo instruction.",
-      "backup": "/root/mgs-agent/backups/meta-app-pause-20260821-084558/meta-app-role-alert-pause.json.before"
+      "authorization_message_id": "1540351562088452147",
+      "validation": "JSON PASS; B001-3 production state read back no active app pause and force-live delivery succeeded; B013-2 dedicated cron pause is independent.",
+      "updated_at": "2026-08-21T09:38:13-04:00",
+      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21",
+      "description": "Canonical generic-app alert pause file; no generic app is paused after B001-3 activation.",
+      "last_change": "2026-08-21: removed retired B001-2 manual pause and activated B001-3.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0013-cutover-20260821-093104/meta-app-role-alert-pause.json.before"
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -1939,13 +1937,13 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for current B001-B010 replacement lineage including B004-3/B005-3/B006-3; dedicated DTR apps remain outside this generic route.",
-      "validation": "Enabled and scheduled with last_status=ok at 2026-08-21T08:46:49-04:00. Scoped B001-2 cycle read back active_alert_pause.apps=[B001-2], alerts_sent=0 and no new Discord delivery; unaffected apps remain scheduled.",
-      "updated_at": "2026-08-21T08:48:01-04:00",
-      "last_observed_status": "ok_at_2026-08-21T08:46:49-04:00",
-      "reconciliation": "B001-2 alert delivery is manually paused after Meta reported application deleted; the shared job remains active for the other generic apps.",
+      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for the current B001-B010 replacement lineage including B001-3/B004-3/B005-3/B006-3; dedicated DTR apps remain outside this generic route.",
+      "validation": "Enabled and scheduled with last_status=ok at 2026-08-21T09:34:45-04:00. B001-3 production and force-live cycles returned 15 accepted/resolved roles, four healthy Graph checks, errors_count=0, active pause empty and verified Discord alert messages 1540353027204976741/1540353028484497488/1540353029482745988.",
+      "updated_at": "2026-08-21T09:38:13-04:00",
+      "last_observed_status": "ok_at_2026-08-21T09:34:45-04:00",
+      "reconciliation": "B001-3 replaces B001-2 in registry/state. The job is active; expected_sheet_roles=17 keeps Sheet writes fail-closed at the current 15/17 state until the two remaining role acceptances appear.",
       "state": "scheduled",
-      "next_run_at": "2026-08-21T08:48:00-04:00"
+      "next_run_at": "2026-08-21T09:39:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -3908,16 +3906,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 35389,
-      "modified_at": "2026-08-18T11:53:09-04:00",
-      "sha256": "fe9d50187bdfb0a6a691cb59aa3bddf1372e5bf0389cfb5a2ba28642d3448820",
+      "size_bytes": 37569,
+      "modified_at": "2026-08-21T09:35:01-04:00",
+      "sha256": "be579b4d4b5b50c8378c392b7a8d19e5fbf7afbf5e907b38dec42e05183cd1ed",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "B001-B012 shared-admin alert policy and six-profile direct-traffic verification exclusion procedure.",
-      "validation": "Runtime/versioned SHA-256 match; policy fixture PASS; full live run 12 apps, six ignored rows, zero alerts/errors.",
-      "updated_at": "2026-08-18T11:56:53-04:00",
-      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18"
+      "description": "B001-3 replacement cutover, 17-role fail-closed gate, live-alert/readback procedure and current B013-2 routing.",
+      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches B001-3 live 15/17 state and three-message Discord readback.",
+      "updated_at": "2026-08-21T09:38:13-04:00",
+      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -6134,15 +6132,15 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 6156,
-      "modified_at": "2026-08-18T11:51:12-04:00",
-      "sha256": "86b8bb419c7a85de25d66d1cdb0912daeacb30239eb9ad5de20df2e228239e8f",
+      "size_bytes": 7009,
+      "modified_at": "2026-08-21T09:36:19-04:00",
+      "sha256": "e28c70182943469f9c264a62d1589aa413fa1ae3fffa771f3c2c0332f1ed7f5f",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Zeus shared-admin/direct-traffic Meta monitor policy 2026-08-18",
+      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1539300007885152407",
+      "authorization_message_id": "1540351562088452147",
       "scope": [
-        "B001-2",
+        "B001-3",
         "B002-2",
         "B003-2",
         "B004-3",
@@ -6156,9 +6154,10 @@
         "B012",
         "B013-2"
       ],
-      "validation": "JSON PASS; six exact Sheet identities matched by live Service Account readback; full live monitor reported ignored_verification_rows=6, alerts_sent=0 and errors_count=0.",
-      "updated_at": "2026-08-18T11:56:53-04:00",
-      "last_change": "Added canonical direct-traffic verification ignore set for six Sheet identities; app registry scope unchanged."
+      "validation": "JSON PASS; B001-3 credential metadata and four Graph checks healthy; Sheet has 17 exact NO APP rows; Meta has 15 accepted/resolved roles; expected_sheet_roles=17 blocks X writes; real B001-3 alert read back from Discord.",
+      "updated_at": "2026-08-21T09:38:13-04:00",
+      "last_change": "Replaced B001-2 with B001-3, retained the existing 1Password item title and channel ID, and stored expected_sheet_roles=17 plus the 15/17 pending gate.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0013-cutover-20260821-093104/meta-app-registry.json.before"
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -11805,9 +11804,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 80921,
-      "md5": "47f3e409c208682dc3d2f82d68bab7f6",
-      "modified_at": "2026-08-21T06:32:56-04:00"
+      "size_bytes": 81718,
+      "md5": "147d5d45812634b43923abe34807512d",
+      "modified_at": "2026-08-21T09:38:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -12021,9 +12020,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 84685,
-      "md5": "616c277be54d825bcd1a3982fc5d0f7c",
-      "modified_at": "2026-08-21T00:58:39-04:00"
+      "size_bytes": 84415,
+      "md5": "9df96cbbabdd7a38b22db7406b30feca",
+      "modified_at": "2026-08-21T09:37:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
