@@ -14,7 +14,7 @@ if str(ROOT / 'scripts') not in sys.path:
 
 from ares_campaign_v3.adapters import build_cpv_manifest
 from ares_campaign_v3.cli import main as cli_main
-from ares_campaign_v3.engine import CampaignEngine, EngineDisabled
+from ares_campaign_v3.engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
 from ares_campaign_v3.prestage import PrestageService
 from ares_campaign_v3.prevalidation import prevalidate_payload
@@ -320,6 +320,28 @@ def test_engine_refuses_execute_while_disabled(tmp_path):
     engine = CampaignEngine(config(tmp_path), transport_factory=lambda account: FakeBatchTransport(account))
     with pytest.raises(EngineDisabled):
         engine.execute(manifest([pure_campaign(1)]))
+
+
+def test_prevalidation_hash_allows_exact_manifest_and_blocks_tamper(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    row = prestaged_campaign(1)
+    for ad in row['ads']:
+        item = ad['media']
+        registry.register(
+            account_id='100', asset_id=item['asset_id'], checksum=item['checksum'],
+            vertical_video_id=item['vertical_video_id'], square_video_id=item['square_video_id'], ready=True,
+        )
+    payload = manifest([row], request_id='prevalidated').raw
+    validated = prevalidate_payload(payload, registry)
+    assert validated['prevalidated'] is True
+    cfg = config(tmp_path, enabled=True, write_enabled=True, require_prevalidated_manifest=True)
+    engine = CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account))
+    assert engine.execute(Manifest.from_dict(validated))['status'] == 'COMPLETE_PAUSED'
+
+    tampered = json.loads(json.dumps(validated))
+    tampered['campaigns'][0]['name'] = 'tampered after prevalidation'
+    with pytest.raises(ExecutionFailed, match='prevalidation'):
+        CampaignEngine(config(tmp_path / 'tampered', enabled=True, write_enabled=True, require_prevalidated_manifest=True), transport_factory=lambda account: FakeBatchTransport(account)).execute(Manifest.from_dict(tampered))
 
 
 def test_cli_disabled_execute_returns_safe_json_without_trace(tmp_path, capsys):

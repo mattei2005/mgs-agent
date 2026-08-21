@@ -11,6 +11,7 @@ from time import perf_counter
 from typing import Any, Callable
 
 from .planning import BundlePlan, Planner
+from .prevalidation import verify_prevalidation
 from .quota import LaneQuotaStore
 from .schema import Manifest
 from .transport import BatchOperation, BatchResult
@@ -223,8 +224,8 @@ class CampaignEngine:
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         if self.config.get("enabled") is not True or self.config.get("write_enabled") is not True:
             raise EngineDisabled("v3 execute is disabled; use dry_run until the canary gate is approved")
-        if self.config.get("require_prevalidated_manifest") is True and manifest.raw.get("prevalidated") is not True:
-            raise ExecutionFailed("manifest is not prevalidated")
+        if self.config.get("require_prevalidated_manifest") is True and not verify_prevalidation(manifest.raw):
+            raise ExecutionFailed("manifest prevalidation is missing or digest does not match")
         plan = self.planner.build(manifest)
         audit_path = self.audit_root / f"{_safe_name(manifest.request_id)}.json"
         if audit_path.exists():

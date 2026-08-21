@@ -11,6 +11,7 @@ from .adapters import build_cpv_manifest
 from .engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from .media_registry import MediaNotReady, MediaRegistry
 from .prestage import MediaUploadError, PageVideoUploader, PrestageService
+from .prevalidation import prevalidate_payload
 from .quota import QuotaBlocked
 from .schema import Manifest, ManifestError
 from .transport import BatchTransportError, FakeBatchTransport, GraphBatchTransport
@@ -62,6 +63,10 @@ def parser() -> argparse.ArgumentParser:
     for name in ("validate", "plan"):
         cmd = sub.add_parser(name)
         cmd.add_argument("--manifest", required=True)
+    prevalidate = sub.add_parser("prevalidate")
+    prevalidate.add_argument("--manifest", required=True)
+    prevalidate.add_argument("--registry", default=str(DEFAULT_MEDIA))
+    prevalidate.add_argument("--output", required=True)
     execute = sub.add_parser("execute")
     execute.add_argument("--manifest", required=True)
     execute.add_argument("--confirm-execute", action="store_true")
@@ -151,6 +156,13 @@ def _main(argv: list[str] | None = None) -> int:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
         print(json.dumps({"status": "MANIFEST_BUILT_NOT_PREVALIDATED", "output": str(output), "campaigns": len(payload["campaigns"])}))
+        return 0
+    if args.command == "prevalidate":
+        payload = prevalidate_payload(load_json(args.manifest), MediaRegistry(args.registry))
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+        print(json.dumps({"status": "PREVALIDATED", "output": str(output), "content_digest": payload["prevalidation"]["content_digest"]}))
         return 0
 
     config = load_json(args.config)
