@@ -13,6 +13,7 @@ Rodolfo explicitly replaced `B013-2` with `B013-3`, updated the exact 1Password 
 - Production state is freshly baselined for B013-3 after backing up the B013-2 state; never reuse predecessor link statuses as the new app baseline.
 - B013-3 reuses channel ID `1522830283240505385`; the live channel name remains `b013-2-app-status` until a separate rename is authorized. Manager-facing titles must say `Meta APP - B013-3`.
 - Job `498fb0d95e10` remains `b013-dtr-link-watch`, schedule `2-59/9 0,8-23 * * *`, `no_agent`, `deliver=local`. Activation requires `enabled=true`, `state=scheduled`, then one scheduled-cycle readback.
+- The first scheduled B013-3 cycle failed before any DTR or Sheet write because the Sheets metadata read timed out after a single 25-second attempt. `sheets_request` now performs up to three bounded attempts for `TimeoutError`, `socket.timeout`, `URLError`, HTTP 429 and HTTP 5xx with short backoff; non-retryable HTTP errors still fail closed. Validate shell/embedded Python plus a one-target real dry-run, then require the next scheduled cycle to finish `ok` before closure.
 - The alert request can legitimately produce two chronological families if the first production snapshot proves an unlinked target and a later fresh cycle proves its recovery. Do not delete either family without Critical Subset confirmation; report the final state and both exact message families.
 
 ### Current B001-3 cutover — 2026-08-21

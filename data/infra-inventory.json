@@ -1507,7 +1507,8 @@
       "updated_at": "2026-08-21T11:10:15-04:00",
       "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21",
       "last_change": "2026-08-21: changed ACTIVE_APP_CONFIGS, DTR_ONLY_APP_ITEMS and ROLE_RECONCILIATION_EXCLUDED_APPS from B013-2 to B013-3 after containment of one generic-cycle X write.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-watch.sh.before",
+      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
+      "backup_validation": "Deterministically reconstructed from the post-cutover script by reversing only B013-3→B013-2; SHA-256 exactly matches the pre-change inventory hash 2c12397d90c665627cc2d81bbf233151bc3be3714aa0f02acd508d97a52ddff0.",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before"
     },
     {
@@ -3906,16 +3907,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 37569,
-      "modified_at": "2026-08-21T09:35:01-04:00",
-      "sha256": "be579b4d4b5b50c8378c392b7a8d19e5fbf7afbf5e907b38dec42e05183cd1ed",
+      "size_bytes": 40220,
+      "modified_at": "2026-08-21T11:09:19-04:00",
+      "sha256": "7b80b85d9c14499d8a0737a8af581525f7b0c21fed3797369ef5aa40e80ce10d",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "B001-3 replacement cutover, 17-role fail-closed gate, live-alert/readback procedure and current B013-2 routing.",
-      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches B001-3 live 15/17 state and three-message Discord readback.",
-      "updated_at": "2026-08-21T09:38:13-04:00",
-      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21"
+      "description": "Current B013-3 cutover, 31/31 final state, generic-route containment ordering, chronological alert handling and active cron validation; preserves B001-3 15/17 gate.",
+      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches live B013-3 Graph/DTR/Sheet/Discord readbacks and documents the 30-X containment plus zero-X final state.",
+      "updated_at": "2026-08-21T11:10:15-04:00",
+      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -6135,13 +6136,13 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 7009,
-      "modified_at": "2026-08-21T09:36:19-04:00",
-      "sha256": "e28c70182943469f9c264a62d1589aa413fa1ae3fffa771f3c2c0332f1ed7f5f",
+      "size_bytes": 7690,
+      "modified_at": "2026-08-21T11:11:16-04:00",
+      "sha256": "f66f16169c8a6c81a4fcafd4e2929b20d95c0c6b442b0a490ee47e75bb6f125c",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Zeus B001-3 Meta monitor cutover 2026-08-21",
+      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1540351562088452147",
+      "authorization_message_id": "1540372238467862579",
       "scope": [
         "B001-3",
         "B002-2",
@@ -6155,12 +6156,12 @@
         "B010-2",
         "B011",
         "B012",
-        "B013-2"
+        "B013-3"
       ],
-      "validation": "JSON PASS; B001-3 credential metadata and four Graph checks healthy; Sheet has 17 exact NO APP rows; Meta has 15 accepted/resolved roles; expected_sheet_roles=17 blocks X writes; real B001-3 alert read back from Discord.",
-      "updated_at": "2026-08-21T09:38:13-04:00",
-      "last_change": "Replaced B001-2 with B001-3, retained the existing 1Password item title and channel ID, and stored expected_sheet_roles=17 plus the 15/17 pending gate.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0013-cutover-20260821-093104/meta-app-registry.json.before"
+      "validation": "JSON PASS; B013-3 credentials/app/debug/roles healthy; dedicated live state 31/31 linked, zero pending/unknown; final Sheet readback 31 blank X markers; B001-3 15/17 gate preserved.",
+      "updated_at": "2026-08-21T11:10:15-04:00",
+      "last_change": "Replaced B013-2 with B013-3, updated exact 1Password item routing, retained channel ID/name alias and recorded both live alert families plus final 31/31 closure.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-registry.json.before"
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -11807,9 +11808,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 81718,
-      "md5": "147d5d45812634b43923abe34807512d",
-      "modified_at": "2026-08-21T09:38:13-04:00"
+      "size_bytes": 82090,
+      "md5": "5cd47786beca13746610ccd9c85df2d2",
+      "modified_at": "2026-08-21T11:10:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -11849,9 +11850,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 27844,
-      "md5": "3dd35d2624a3653158c697bdf16d4653",
-      "modified_at": "2026-08-21T01:01:57-04:00"
+      "size_bytes": 29097,
+      "md5": "17c3f770643bb1d109090d91cd6545b6",
+      "modified_at": "2026-08-21T11:06:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
