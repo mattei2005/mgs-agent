@@ -232,6 +232,15 @@ def test_media_registry_roundtrip_and_fail_closed(tmp_path):
         registry.require_ready('100', 'missing', 'sum-x')
 
 
+def test_cli_media_register_requires_explicit_readback_confirmation(tmp_path):
+    with pytest.raises(SystemExit, match='confirm-readback'):
+        cli_main([
+            'media-register', '--registry', str(tmp_path / 'media.json'),
+            '--account-id', '100', '--asset-id', 'asset', '--checksum', 'sum',
+            '--vertical-video-id', 'v1', '--square-video-id', 's1', '--ready',
+        ])
+
+
 def test_prestage_registers_only_after_both_videos_are_ready(tmp_path):
     class Uploader:
         def __init__(self):

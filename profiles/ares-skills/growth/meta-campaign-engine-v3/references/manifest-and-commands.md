@@ -37,7 +37,7 @@ Register media only after real Meta readback. Manual registration is for importi
 ```text
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py media-register \
   --account-id <id> --asset-id <id> --checksum <sha256> \
-  --vertical-video-id <id> --square-video-id <id> --ready
+  --vertical-video-id <id> --square-video-id <id> --ready --confirm-readback
 
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prestage-upload \
   --account-id <id> --page-id <id> --asset-id <id> --checksum <sha256> \

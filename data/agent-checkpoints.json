@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
-      "next_step": "Responder Rodolfo com checklist exato. Não aplicar v3 antes de ele receber a resposta e confirmar prosseguimento/ajustes.",
-      "objective": "Construir o Ares Campaign Engine v3 completo após alinhar todas as aprovações máximas do Meta App.",
-      "source": "discord:1540199569705410610; report:/root/mgs-agent/work/ares-app-permissions-research-20260821/report.md; skill-ref:meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md; official:developers.facebook.com/docs/permissions,features-reference,marketing-api/access,business-verification,facebook-login-for-business,access-tokens,secure-requests,app-review",
-      "state": "aplicação v3 aguardando resposta prévia a rodolfo e confirmação crítica já solicitada. pesquisa oficial de app concluída: três gates independentes — advanced access por permissão, marketing api access tier full access, e asset assignments reais. core proposto: ads_management, ads_read, business_management, pages_show_list, pages_read_engagement, pages_manage_ads; mgs creative/identity: pages_read_user_content, pages_manage_posts, instagram_basic; mgs messenger: pages_manage_metadata, pages_messaging; analytics: read_insights. opcionais por módulo: ads_mcp_management, leads_retrieval, catalog_management, marketing_messages_messenger, instagram_manage_insights, instagram_content_publish, pages_manage_engagement. full access exige >=500 calls/15d e <15% error last500. business verification, app review, live mode, data use checkup, oauth/asset assignments, appsecret_proof e readback definidos. system user não é requisito nem rota mgs.",
+      "next_step": "Concluir consistência/mirror/inventário/audit/REPORT-INFRA e handoff ao Ares. V3 canary real permanece separado: primeiro pre-stage seis mídias e uma campanha PAUSED; config enabled/write/media seguem false.",
+      "objective": "Construir e instalar o Ares Campaign Engine v3 completo, centralizado e de alta escala, preservando v2 como rollback.",
+      "source": "discord:1540202751387246664; config:/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json; runner:/root/mgs-agent/scripts/ares-campaign-engine-v3.py; skill:/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md; backup:/root/mgs-agent/backups/ares-campaign-engine-v3-20260821T033736Z",
+      "state": "v3 implementado e instalado disabled. código modular: schema/planning/quota/media registry/prestage/transport/prevalidation/engine/adapters/cli; duas campanhas por bundle, lanes por app+account, soft100/hard120, full access libera bundle concluído somente com header standard_access e util<80, zero get intermediário, um readback outer batch/bundle, graph batch dependencies, appsecret_proof support, checkpoints de lane, bloqueio de replay após falha. cpv: contrato v3, source c08/templates graph v26 read-only 3/3 sanitizados, utm cnn replacement, mídia pre-stage gate, cron v2 creation/activation paused/frozen. ares: nova skill meta-campaign-engine-v3 v3.0.0 + 4 references, 18 urls oficiais de rodolfo, soul/hot map/direct cbo/vehicle finance/paid acquisition atualizados. testes 67 pass; v3 unit 25 pass; cpv offline e2e 2 campaigns/6 ads/prevalidated/zero intermediate get; synthetic 40 campaigns/3 lanes/7 waves pass. no meta write, media upload, budget, credential, delete or restart.",
       "thread_id": "1540114948984938607",
-      "updated_at": "2026-08-21T03:30:01+00:00"
+      "updated_at": "2026-08-21T04:18:07+00:00"
     },
     {
       "agent": "ares",
@@ -942,5 +942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T03:30:01+00:00"
+  "updated_at": "2026-08-21T04:18:07+00:00"
 }

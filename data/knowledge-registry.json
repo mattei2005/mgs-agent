@@ -1,6 +1,24 @@
 {
   "entries": [
     {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares Campaign Engine v3 é a rota única para nova criação e clone Meta",
+      "updated_at": "2026-08-21T04:18:36+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.daily-creation-stock",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -885,5 +903,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:31:45+00:00"
+  "updated_at": "2026-08-21T04:18:36+00:00"
 }

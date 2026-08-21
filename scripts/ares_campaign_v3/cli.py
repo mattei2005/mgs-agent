@@ -79,6 +79,7 @@ def parser() -> argparse.ArgumentParser:
     media.add_argument("--vertical-video-id", required=True)
     media.add_argument("--square-video-id", required=True)
     media.add_argument("--ready", action="store_true")
+    media.add_argument("--confirm-readback", action="store_true")
     summary = sub.add_parser("media-summary")
     summary.add_argument("--registry", default=str(DEFAULT_MEDIA))
     prestage = sub.add_parser("prestage-upload")
@@ -104,6 +105,8 @@ def parser() -> argparse.ArgumentParser:
 def _main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.command == "media-register":
+        if not args.confirm_readback:
+            raise SystemExit("media-register requires --confirm-readback")
         record = MediaRegistry(args.registry).register(
             account_id=args.account_id, asset_id=args.asset_id, checksum=args.checksum,
             vertical_video_id=args.vertical_video_id, square_video_id=args.square_video_id,
