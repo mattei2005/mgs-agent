@@ -203,21 +203,35 @@ def _entry_budgets(entries: Sequence[str], target_chars: int) -> List[int]:
     if content_target <= 0:
         raise CompactionError("target_unreachable_under_guard")
     lengths = [len(entry) for entry in entries]
-    budgets = list(lengths)
     required = max(0, sum(lengths) - content_target)
-    for index in sorted(range(len(entries)), key=lambda item: lengths[item], reverse=True):
-        if required <= 0:
-            break
-        # Spread difficult compactions across more entries instead of demanding
-        # a brittle >30% rewrite from one operational fact.
-        minimum = max(35, math.ceil(lengths[index] * 0.70))
-        reducible = max(0, budgets[index] - minimum)
-        reduction = min(required, reducible)
-        budgets[index] -= reduction
-        required -= reduction
-    if required > 0:
+    minimums = [max(35, math.ceil(length * 0.80)) for length in lengths]
+    capacities = [max(0, length - minimum) for length, minimum in zip(lengths, minimums)]
+    total_capacity = sum(capacities)
+    if required > total_capacity:
         raise CompactionError("target_unreachable_under_guard")
-    return budgets
+    if required == 0:
+        return lengths
+
+    allocations = [required * capacity // total_capacity for capacity in capacities]
+    remaining = required - sum(allocations)
+    order = sorted(
+        range(len(entries)),
+        key=lambda index: capacities[index] - allocations[index],
+        reverse=True,
+    )
+    while remaining > 0:
+        progressed = False
+        for index in order:
+            if allocations[index] >= capacities[index]:
+                continue
+            allocations[index] += 1
+            remaining -= 1
+            progressed = True
+            if remaining == 0:
+                break
+        if not progressed:
+            raise CompactionError("target_unreachable_under_guard")
+    return [length - reduction for length, reduction in zip(lengths, allocations)]
 
 
 def _validate_candidate(
@@ -228,6 +242,7 @@ def _validate_candidate(
     selected_indexes: Sequence[int],
     *,
     enforce_total: bool = True,
+    enforce_entry_budgets: bool = True,
     protected_literals_exact: bool = False,
 ) -> List[str]:
     raw_entries = candidate.get("entries")
@@ -265,7 +280,9 @@ def _validate_candidate(
                 raise CompactionError("protected_literals_changed")
     if len(budgets) != len(result):
         raise CompactionError("candidate_budget_shape_invalid")
-    if enforce_total and any(len(result[index - 1]) > budgets[index - 1] for index in expected):
+    if enforce_entry_budgets and any(
+        len(result[index - 1]) > budgets[index - 1] for index in expected
+    ):
         raise CompactionError("candidate_entry_above_budget")
 
     rendered = _render_entries(result)
@@ -459,6 +476,7 @@ def propose_and_verify(
                     budgets,
                     indexes,
                     enforce_total=True,
+                    enforce_entry_budgets=False,
                     protected_literals_exact=True,
                 )
                 return

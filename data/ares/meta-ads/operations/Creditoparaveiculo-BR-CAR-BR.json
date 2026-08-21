@@ -532,7 +532,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-20T21:29:22-03:00",
+  "updated_at": "2026-08-20T21:44:16-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -824,7 +824,7 @@
     "legacy_child_repair_required": false,
     "ares_write_performed": false
   },
-  "playbook_version": "1.0.40",
+  "playbook_version": "1.0.41",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1427,6 +1427,53 @@
       "resolved_at_et": "2026-08-20T13:36:00-04:00",
       "resolution": "email confirmation completed in Ads Manager; the same token passed Graph v26 validate-only and real PAUSED ad creation"
     }
+  },
+  "token_refresh_validation_20260820": {
+    "reported_by": "Rodolfo Mattei",
+    "reported_at_et": "2026-08-20T20:37:55-04:00",
+    "validated_at_et": "2026-08-20T20:44:16-04:00",
+    "credential_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "credential_field": "credential",
+    "credential_length": 196,
+    "graph_version": "v26.0",
+    "debug_token": {
+      "http_status": 200,
+      "is_valid": true,
+      "expires_at_utc": "2026-10-20T00:37:21Z",
+      "data_access_expires_at_utc": "2026-11-19T00:37:21Z"
+    },
+    "account_readback": {
+      "http_status": 200,
+      "account_status": 1,
+      "disable_reason": 0,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo"
+    },
+    "permission_readback": {
+      "granted_count": 13,
+      "required_count": 9,
+      "required_missing": [],
+      "target_page_present": true,
+      "advertise_task_present": true
+    },
+    "campaign_edge_readback": {
+      "http_status": 200,
+      "sample_rows": 5
+    },
+    "usage_readback": {
+      "buc_max_usage_pct_first_probe": 0.0,
+      "buc_max_usage_pct_campaign_probe": 1.0,
+      "x_ad_account_usage_present": false,
+      "live_access_tier": "development_access"
+    },
+    "app_dashboard_evidence": {
+      "marketing_api_access_tier": "Limited access",
+      "ads_read": "Standard access",
+      "ads_management": "Standard access",
+      "pages_manage_ads": "Standard access",
+      "several_page_and_business_permissions": "Advanced access"
+    },
+    "conclusion": "Authentication and required asset permissions are healthy after the refresh, but the token refresh does not upgrade the app's Marketing API tier. Read requests are working; high-volume write throughput remains constrained by development/Limited access and the quota-aware route stays required."
   },
   "campaign_creation_retest_20260820": {
     "authorized_by": "Rodolfo Mattei",

@@ -15,10 +15,10 @@
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
       "next_step": "Aguardar autorização separada de Rodolfo para o canário C12 PAUSED. Antes do write, revalidar manifest vigente, quota plan e status sequencial; não reativar crons nem executar C13 sem nova janela/autorização.",
       "objective": "Operar rota v2 de clone diário CPV com quota guard e reconciliação separada",
-      "source": "Zeus handoff; scripts canônicos; reconciliation manifest; audit daily-create-2026-08-20-20260821T003059Z.json; pytest 38 passed; Hermes cron readback paused",
-      "state": "handoff zeus validado por ares nas fontes canônicas. writer live aponta para scripts/ares-creditoparaveiculo-daily-create.py e não chama reconciliação global; exige manifest separado válido. reconciliador separado gera manifest drive-meta 6/6. helper separa x-ad-account-usage do buc e usa ledger rolling 300s quando x-ad não vem. dry-run audit 20260821t003059z: http/source válidos, c12 selecionada, c13 preflight_deferred, score 50 vs 95, writer_global_reconciliation_calls=0, budget 153→183, zero meta write. testes independentes por ares: 38 passed. criação e ativação permanecem pausadas; nenhuma produção autorizada.",
+      "source": "discord:thread:1540137110789562408; auth audit auth-check-creditoparaveiculo-token-refresh-20260821.json; operation config v1.0.41; live Graph v26 readbacks at 2026-08-20T20:44 ET",
+      "state": "token anunciante cpv g006 atualizado por rodolfo e validado ao vivo com refresh forçado do 1password: graph v26, debug_token http200 is_valid=true, conta http200 ativa/saudável em usd e america/sao_paulo, 13 permissões concedidas com as 9 obrigatórias presentes, garagem brasil presente com advertise e edge de campanhas http200. buc ficou em 0%/1%. limitação permanece: header vivo reporta development_access e screenshot do app dashboard mostra marketing api access tier limited; ads_read, ads_management e pages_manage_ads continuam standard. o refresh melhora autenticação/validade, mas não aumenta throughput/quota do app. rota v2 permanece necessária; criação e ativação continuam pausadas e nenhuma produção foi autorizada.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-21T00:40:22+00:00"
+      "updated_at": "2026-08-21T00:46:31+00:00"
     },
     {
       "agent": "ares",
@@ -922,5 +922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T00:40:22+00:00"
+  "updated_at": "2026-08-21T00:46:31+00:00"
 }
