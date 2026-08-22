@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.11
+version: 3.0.12
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -63,6 +63,7 @@ Carregue somente a referência do branch atual.
 10. V2 permanece rollback congelado; nenhum legado é apagado durante a migração inicial.
 11. Em CPV `clone_prestaged`, todo `asset_ref` exige `canonical_filename` válido da taxonomia `CAR_BR_BR_VID_*_{PV|NV|PH|NH}_NNN.mp4`. O anúncio nasce como `AD NN - {canonical_stem}` e o creative como `CPV CNN ADNN {canonical_stem}`. `asset_id` permanece apenas como identidade técnica no manifest/audit; se o nome canônico faltar ou for inválido, bloquear antes de selar o manifest.
 12. Em Creditoparaveiculo, o pós-processamento só conclui após auto-armar cada campanha nova no guardrail de primeiro gasto. O enrollment valida IDs, data operacional, status `ACTIVE`, gasto zero e retorna `meta_writes=0`; falha deixa o request `POSTPROCESS_PENDING`. O watcher aceita primeiro spend observado de 00:30 a 02:00 SP inclusive sem pause; fora dessa janela, pausa uma vez e agenda reativação 00:30 do dia seguinte.
+13. Todo alerta operacional de erro deve informar, em linguagem humana e sem paths/credenciais: etapa, causa provável baseada no erro real, impacto/estado preservado e correção ou próxima ação segura. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
 
 ## How to run
 
@@ -106,3 +107,4 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - `rename_options` da cópia nativa de adset pode concatenar o nome-fonte com o sufixo desejado. O pós-processamento deve normalizar o adset para o nome canônico exato e validar por readback.
 - Se o bundle falhar depois de criar campaign/adset shells, bloquear replay cego. Reconciliar IDs existentes, procurar filhos/orphans por escopo recente ou nomes exatos, corrigir o payload, passar `validate_only` e retomar somente a camada faltante com state/audit/readback explícitos.
 - Na criação `clone_prestaged`, a ordem do pool é obrigatória: atualizar a reconciliação Drive×Meta, eliminar do conjunto candidato todo asset não aprovado, conflitante, reservado ou com identidade divergente e somente então selecionar `3 × campanhas` do Shared Drive. Conflito em um candidato faz o seletor pular para o próximo elegível; nunca bloquear o lote inteiro enquanto houver quantidade reconciliada suficiente. Bloquear apenas quando o saldo único reconciliado for menor que o necessário.
+- Nunca reutilizar o state de um request já concluído como ciclo do dia seguinte. `completed_operational_date_sp` anterior fecha a execução antiga; o novo ciclo começa com request e conciliação novos.

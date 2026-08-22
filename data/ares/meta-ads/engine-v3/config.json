@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.0.11",
+  "release_version": "3.0.12",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -23,6 +23,7 @@
   "intermediate_get_calls": 0,
   "media_policy": "prestage_before_campaign_manifest",
   "ad_naming_policy": "CPV clone_prestaged requires canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
+  "failure_reporting_policy": "every operator-visible failure states stage, human cause, impact and safe correction; no internal paths or credentials",
   "appsecret_proof": {
     "required": false,
     "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"

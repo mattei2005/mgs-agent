@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.0.11",
+  "release_version": "3.0.12",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -30,6 +30,8 @@
   "ad_naming_gate": "every asset_ref requires canonical_filename; ad=AD NN - canonical stem; creative=CPV CNN ADNN canonical stem; asset_id is forbidden as display name",
   "first_delivery_postprocess": "after validated hierarchy readback, every production campaign is auto-allowlisted and armed in the 15-minute watcher; first spend observed 00:30-02:00 SP releases without pause, later first spend pauses once and queues next-day 00:30 reactivation",
   "first_delivery_fail_closed": "campaign completion remains POSTPROCESS_PENDING until watcher enrollment returns exact campaign IDs, armed count and meta_writes=0",
+  "daily_state_rollover": "a completed operational date is never reused as the next day's resumable request; the next 17:00 cycle starts with a fresh request and fresh Drive-Meta reconciliation",
+  "failure_reporting": "operator-visible errors always include stage, cause, impact and correction without internal paths or credentials",
   "manifest_gate": "prevalidated=true required for execute",
   "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute from an authorized campaign request",
   "first_production_request": "guarded canary automatically: prevalidated manifest, first bundle monitored, fail closed on any drift",
