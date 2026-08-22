@@ -1,0 +1,214 @@
+{
+  "checked_at_utc": "2026-08-21T18:01:31.237964+00:00",
+  "http_status": 200,
+  "rows": [
+    {
+      "name": "campaign:120250872826560632",
+      "code": 200,
+      "body": {
+        "id": "120250872826560632",
+        "name": "07 - 22-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "created_time": "2026-08-21T15:00:36-0300",
+        "updated_time": "2026-08-21T15:00:56-0300",
+        "start_time": "2026-08-22T00:30:00-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":4,\"total_cputime\":4,\"total_time\":13,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "366",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Content-Security-Policy": "frame-ancestors 'none'",
+        "Vary": "Accept-Encoding"
+      }
+    },
+    {
+      "name": "ads:120250872826560632",
+      "code": 200,
+      "body": {
+        "data": []
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-App-Usage": "{\"call_count\":8,\"total_cputime\":0,\"total_time\":3}",
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "X-Ad-Account-Usage": "{\"acc_id_util_pct\":0,\"reset_time_duration\":0,\"ads_api_access_tier\":\"development_access\"}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    },
+    {
+      "name": "campaign:120250872826570632",
+      "code": 200,
+      "body": {
+        "id": "120250872826570632",
+        "name": "11 - 22-08 - Garagem Brasil - (b01fb13c11) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "created_time": "2026-08-21T15:00:36-0300",
+        "updated_time": "2026-08-21T15:00:55-0300",
+        "start_time": "2026-08-22T00:30:00-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":4,\"total_cputime\":4,\"total_time\":13,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "366",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Content-Security-Policy": "frame-ancestors 'none'",
+        "Vary": "Accept-Encoding"
+      }
+    },
+    {
+      "name": "ads:120250872826570632",
+      "code": 200,
+      "body": {
+        "data": []
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-App-Usage": "{\"call_count\":8,\"total_cputime\":0,\"total_time\":3}",
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "X-Ad-Account-Usage": "{\"acc_id_util_pct\":0,\"reset_time_duration\":0,\"ads_api_access_tier\":\"development_access\"}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    },
+    {
+      "name": "adset:120250872827440632",
+      "code": 200,
+      "body": {
+        "id": "120250872827440632",
+        "name": "01 - AdGroup - (b01fb13c09g01) event_Subscribe - MAXVOL - 01 - AdGroup - (b01fb13c07g01) event_Subscribe - MAXVOL",
+        "campaign_id": "120250872826560632",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          },
+          {
+            "event_type": "ENGAGED_VIDEO_VIEW",
+            "window_days": 1
+          }
+        ],
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "start_time": "2026-08-22T00:30:00-0300",
+        "created_time": "2026-08-21T15:00:38-0300",
+        "updated_time": "2026-08-21T15:01:01-0300"
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":4,\"total_cputime\":4,\"total_time\":13,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    },
+    {
+      "name": "adset:120250872827380632",
+      "code": 200,
+      "body": {
+        "id": "120250872827380632",
+        "name": "01 - AdGroup - (b01fb13c08g01) event_Subscribe - MAXVOL - 01 - AdGroup - (b01fb13c11g01) event_Subscribe - MAXVOL",
+        "campaign_id": "120250872826570632",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          },
+          {
+            "event_type": "ENGAGED_VIDEO_VIEW",
+            "window_days": 1
+          }
+        ],
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "start_time": "2026-08-22T00:30:00-0300",
+        "created_time": "2026-08-21T15:00:38-0300",
+        "updated_time": "2026-08-21T15:01:01-0300"
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":4,\"total_cputime\":4,\"total_time\":13,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    }
+  ]
+}

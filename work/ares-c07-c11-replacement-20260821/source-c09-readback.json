@@ -1,0 +1,996 @@
+{
+  "http_status": 200,
+  "rows": [
+    {
+      "name": "campaign",
+      "code": 200,
+      "body": {
+        "id": "120250209406580632",
+        "name": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "objective": "OUTCOME_SALES",
+        "created_time": "2026-07-24T18:58:29-0300",
+        "updated_time": "2026-08-20T16:12:29-0300",
+        "start_time": "2026-07-25T00:00:00-0300",
+        "daily_budget": "3300",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "BR"
+        ]
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":1,\"total_time\":1,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "487",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Content-Security-Policy": "frame-ancestors 'none'",
+        "Vary": "Accept-Encoding"
+      }
+    },
+    {
+      "name": "adsets",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "id": "120250209406660632",
+            "name": "01 - AdGroup - (b01fb13c09g01) event_Subscribe - MAXVOL",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "configured_status": "ACTIVE",
+            "billing_event": "IMPRESSIONS",
+            "optimization_goal": "OFFSITE_CONVERSIONS",
+            "targeting": {
+              "age_max": 65,
+              "age_min": 18,
+              "age_range": [
+                18,
+                65
+              ],
+              "geo_locations": {
+                "countries": [
+                  "BR"
+                ],
+                "location_types": [
+                  "home",
+                  "recent"
+                ]
+              },
+              "brand_safety_content_filter_levels": [
+                "FACEBOOK_RELAXED",
+                "AN_RELAXED"
+              ],
+              "targeting_automation": {
+                "advantage_audience": 1
+              }
+            },
+            "promoted_object": {
+              "pixel_id": "1033279451747443",
+              "custom_event_type": "SUBSCRIBE",
+              "smart_pse_enabled": false
+            },
+            "attribution_spec": [
+              {
+                "event_type": "CLICK_THROUGH",
+                "window_days": 7
+              },
+              {
+                "event_type": "VIEW_THROUGH",
+                "window_days": 1
+              },
+              {
+                "event_type": "ENGAGED_VIDEO_VIEW",
+                "window_days": 1
+              }
+            ],
+            "regional_regulated_categories": [
+              "BRAZIL_REGULATION",
+              "VOLUNTARY_VERIFICATION"
+            ],
+            "regional_regulation_identities": {
+              "universal_beneficiary": "1580679396253124",
+              "universal_payer": "1580679396253124"
+            },
+            "created_time": "2026-07-24T18:58:30-0300",
+            "updated_time": "2026-08-20T16:12:29-0300"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIVDNpdURqRHNxVWEyVTd5RmNlZAkZAsQWE3LU95c2ZAoUGoxZAC1aWEYycmxyUUw1QklVWGw3R0xaNjc2d3g4SUJ1MnhMV25FMDhOWmdwTXpoNkF0RXNjRm5R",
+            "after": "QVFIVDNpdURqRHNxVWEyVTd5RmNlZAkZAsQWE3LU95c2ZAoUGoxZAC1aWEYycmxyUUw1QklVWGw3R0xaNjc2d3g4SUJ1MnhMV25FMDhOWmdwTXpoNkF0RXNjRm5R"
+          }
+        }
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-App-Usage": "{\"call_count\":8,\"total_cputime\":0,\"total_time\":3}",
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "X-Ad-Account-Usage": "{\"acc_id_util_pct\":0,\"reset_time_duration\":0,\"ads_api_access_tier\":\"development_access\"}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    },
+    {
+      "name": "ads",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "id": "120250209406600632",
+            "name": "AD 01",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "configured_status": "ACTIVE",
+            "created_time": "2026-07-24T18:58:33-0300",
+            "updated_time": "2026-08-19T16:09:58-0300",
+            "tracking_specs": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "1033279451747443"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "26912564461755322"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122169811748824035"
+                ],
+                "post.wall": [
+                  "621037101089579"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811748824035"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811748824035"
+                ]
+              }
+            ],
+            "creative": {
+              "id": "2586771885115118",
+              "name": "{{product.name}} 2026-07-24-66452814cf12f3cdb8ede9bb194514c2",
+              "object_story_spec": {
+                "page_id": "621037101089579",
+                "instagram_user_id": "17841418924864919"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                        "id": "120250209360530632"
+                      }
+                    ],
+                    "video_id": "1650118506056020",
+                    "thumbnail_url": "https://scontent-iad6-1.xx.fbcdn.net/v/t15.5256-10/754579533_2174602046446944_9155164428764349765_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=102&ccb=1-7&_nc_sid=b696e2&_nc_ohc=gkAkyiiktuAQ7kNvwGV_hjA&_nc_oc=AdoOm_TQo4XRAuU4_Fr1DQrgmbG4oot6jgZKiYzXe9EcO3Y002WTSkh5LwXnSfwBKIGPKYj7w5GxUreMmyEuMPyx&_nc_zt=23&_nc_ht=scontent-iad6-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQIZ18wUGljghSEzwmLcroYdu3U2NkFLatOZBjUyg3FspksmC55n-TpEdmrgSCKrSde9wGSnX1JP&oh=00_AQGNGB2oV_G8YKLtz2BsMHjD7Jqu34KJbhK7T7_B-xboog&oe=6A8E55BC"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                        "id": "120250209360470632"
+                      }
+                    ],
+                    "video_id": "1845593049747297",
+                    "thumbnail_url": "https://scontent-iad3-2.xx.fbcdn.net/v/t15.5256-10/755945385_1574809000959104_5857260805361957696_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=105&ccb=1-7&_nc_sid=4c1fc5&_nc_ohc=bYXWk_2XvqAQ7kNvwFTUdzW&_nc_oc=AdrQcTnrDHtHbnpV8R0saQ6M2kHZYd8BBnpXsuOu7bEDXmOenQZFTz9oe_jOunX1wd09uWynEE9WauuFhEdJASB2&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQKJu7CZhAhbLcV9jOGpZuViz6zYVAynGSgiFmyDBQx352en0X0WjlsAwRez9udoYGKwvDgAzeSq&oh=00_AQFPuqRnmCx1fJm38HDmNsl-4GtsOXfpxPiuIE33klrn2w&oe=6A8E5B21"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                        "id": "120250209360560632"
+                      },
+                      {
+                        "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                        "id": "120250209360590632"
+                      }
+                    ],
+                    "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                        "id": "120250209360560632"
+                      },
+                      {
+                        "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                        "id": "120250209360590632"
+                      }
+                    ],
+                    "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+                  }
+                ],
+                "call_to_action_types": [
+                  "LEARN_MORE"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐⭐⭐⭐"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                        "id": "120250209360540632"
+                      },
+                      {
+                        "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                        "id": "120250209360550632"
+                      }
+                    ],
+                    "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c09&utm_adgroup=b01fb13c09g01",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                        "id": "120250209360480632"
+                      },
+                      {
+                        "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                        "id": "120250209360600632"
+                      }
+                    ],
+                    "text": "Financie Seu Carro Sem Entrada ✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                        "id": "120250209360480632"
+                      },
+                      {
+                        "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                        "id": "120250209360600632"
+                      }
+                    ],
+                    "text": "✅HOJE - SEM ENTRADA✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                        "id": "120250209360480632"
+                      },
+                      {
+                        "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                        "id": "120250209360600632"
+                      }
+                    ],
+                    "text": "✅SOMENTE HOJE✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram"
+                      ],
+                      "facebook_positions": [
+                        "feed",
+                        "instream_video",
+                        "marketplace",
+                        "profile_feed"
+                      ],
+                      "instagram_positions": [
+                        "stream",
+                        "explore_home",
+                        "profile_feed"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                      "id": "120250209360470632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                      "id": "120250209360560632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                      "id": "120250209360540632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                      "id": "120250209360600632"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                      "id": "120250209360530632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                      "id": "120250209360590632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                      "id": "120250209360550632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                      "id": "120250209360480632"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "thumbnail_url": "https://scontent-iad6-1.xx.fbcdn.net/v/t15.5256-10/754579533_2174602046446944_9155164428764349765_n.jpg?_nc_cat=102&ccb=1-7&_nc_ohc=gkAkyiiktuAQ7kNvwGV_hjA&_nc_oc=AdoOm_TQo4XRAuU4_Fr1DQrgmbG4oot6jgZKiYzXe9EcO3Y002WTSkh5LwXnSfwBKIGPKYj7w5GxUreMmyEuMPyx&_nc_zt=23&_nc_ht=scontent-iad6-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQIZ18wUGljghSEzwmLcroYdu3U2NkFLatOZBjUyg3FspksmC55n-TpEdmrgSCKrSde9wGSnX1JP&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=b696e2&_nc_sid=58080a&oh=00_AQGfRaErUNCwT0lY5geZ7xJKlH2t94wVDMZQArzGpm5vng&oe=6A8E55BC"
+            }
+          },
+          {
+            "id": "120250209406630632",
+            "name": "AD 03",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "configured_status": "ACTIVE",
+            "created_time": "2026-07-24T18:58:33-0300",
+            "updated_time": "2026-08-19T16:09:56-0300",
+            "tracking_specs": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "1033279451747443"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "26912564461755322"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811682824035"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122169811682824035"
+                ],
+                "post.wall": [
+                  "621037101089579"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811682824035"
+                ]
+              }
+            ],
+            "creative": {
+              "id": "2132411321001507",
+              "name": "{{product.name}} 2026-07-24-10c3ee67b1be71f44ab989af77bb316c",
+              "object_story_spec": {
+                "page_id": "621037101089579",
+                "instagram_user_id": "17841418924864919"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                        "id": "120250209350960632"
+                      }
+                    ],
+                    "video_id": "27745544788388918",
+                    "thumbnail_url": "https://scontent-iad3-1.xx.fbcdn.net/v/t15.5256-10/755693094_27527446176924450_7643018496312403693_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=101&ccb=1-7&_nc_sid=b696e2&_nc_ohc=2CFkcLcLrNoQ7kNvwFSpArL&_nc_oc=Adoo16yBVaA8jvAXLRbK0TiQLkazeRVVuidkF888dKE9GfFHpGK8YBFlFhpw5vMigpqzCobpA_P_NFDmyNzjE3X8&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQJJjNpifwHBevy9YUvP2aFiyUp5sjnlV_8eoD9ujv0ZtHSo6RrTJmL0ozA9l895FTYgQozqAJKB&oh=00_AQFe3StqbC_iSFHHBezjwUUvgx0b9qHo1wYpQ1PDDiQ7hA&oe=6A8E5916"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                        "id": "120250209350990632"
+                      }
+                    ],
+                    "video_id": "4556515344592712",
+                    "thumbnail_url": "https://scontent-iad3-1.xx.fbcdn.net/v/t15.5256-10/753329112_1537526157383302_7417659548834224000_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=101&ccb=1-7&_nc_sid=4c1fc5&_nc_ohc=FRKfxGq1WUwQ7kNvwF_ASQn&_nc_oc=AdpRKOAX0QK5ODzM1VBKnO3Zg7Pezos7WyT3zYiNPGnwCJO-TqehcaaBIuo_kwgxel5rSK-E0-8RfU1vqSFZN--Z&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQKRktHJU3rj1KBwCzyKrhqUguha28U052Efi89iMwTk6bLzO_xkj2X6DfX8AJxbq1UkjiqFL1Ms&oh=00_AQGO14qoZfW61VWG33zsX8biy-BDSLyaDVRshpmfJO9IVw&oe=6A8E4A9D"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                        "id": "120250209351050632"
+                      },
+                      {
+                        "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                        "id": "120250209351070632"
+                      }
+                    ],
+                    "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                        "id": "120250209351050632"
+                      },
+                      {
+                        "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                        "id": "120250209351070632"
+                      }
+                    ],
+                    "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+                  }
+                ],
+                "call_to_action_types": [
+                  "LEARN_MORE"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐⭐⭐⭐"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                        "id": "120250209351000632"
+                      },
+                      {
+                        "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                        "id": "120250209351020632"
+                      }
+                    ],
+                    "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c09&utm_adgroup=b01fb13c09g01",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f65158c940486da78_1784929732069",
+                        "id": "120250209351010632"
+                      },
+                      {
+                        "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                        "id": "120250209351080632"
+                      }
+                    ],
+                    "text": "Financie Seu Carro Sem Entrada ✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f65158c940486da78_1784929732069",
+                        "id": "120250209351010632"
+                      },
+                      {
+                        "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                        "id": "120250209351080632"
+                      }
+                    ],
+                    "text": "✅HOJE - SEM ENTRADA✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f65158c940486da78_1784929732069",
+                        "id": "120250209351010632"
+                      },
+                      {
+                        "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                        "id": "120250209351080632"
+                      }
+                    ],
+                    "text": "✅SOMENTE HOJE✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram"
+                      ],
+                      "facebook_positions": [
+                        "feed",
+                        "instream_video",
+                        "marketplace",
+                        "profile_feed"
+                      ],
+                      "instagram_positions": [
+                        "stream",
+                        "explore_home",
+                        "profile_feed"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                      "id": "120250209350990632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                      "id": "120250209351070632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                      "id": "120250209351020632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                      "id": "120250209351080632"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                      "id": "120250209350960632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                      "id": "120250209351050632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                      "id": "120250209351000632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_f65158c940486da78_1784929732069",
+                      "id": "120250209351010632"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "thumbnail_url": "https://scontent-iad3-1.xx.fbcdn.net/v/t15.5256-10/755693094_27527446176924450_7643018496312403693_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=2CFkcLcLrNoQ7kNvwFSpArL&_nc_oc=Adoo16yBVaA8jvAXLRbK0TiQLkazeRVVuidkF888dKE9GfFHpGK8YBFlFhpw5vMigpqzCobpA_P_NFDmyNzjE3X8&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQJJjNpifwHBevy9YUvP2aFiyUp5sjnlV_8eoD9ujv0ZtHSo6RrTJmL0ozA9l895FTYgQozqAJKB&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=b696e2&_nc_sid=58080a&oh=00_AQGxLElM4i2Jv3ctpj-37KB4-IuTiVdR9SF4IGmIBg-tZA&oe=6A8E5916"
+            }
+          },
+          {
+            "id": "120250209406590632",
+            "name": "AD 02",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "configured_status": "ACTIVE",
+            "created_time": "2026-07-24T18:58:33-0300",
+            "updated_time": "2026-08-19T16:09:56-0300",
+            "tracking_specs": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "1033279451747443"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "26912564461755322"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122169811736824035"
+                ],
+                "post.wall": [
+                  "621037101089579"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811736824035"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "621037101089579"
+                ],
+                "post": [
+                  "122169811736824035"
+                ]
+              }
+            ],
+            "creative": {
+              "id": "1764141718353299",
+              "name": "{{product.name}} 2026-07-24-d3635c69a1eaeefde96a0c7f81a901a1",
+              "object_story_spec": {
+                "page_id": "621037101089579",
+                "instagram_user_id": "17841418924864919"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                        "id": "120250209368650632"
+                      }
+                    ],
+                    "video_id": "889339397104447",
+                    "thumbnail_url": "https://scontent-iad6-1.xx.fbcdn.net/v/t15.5256-10/756953293_2304036863760446_6819104209950737890_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=106&ccb=1-7&_nc_sid=b696e2&_nc_ohc=hxUHdIO06bsQ7kNvwGbN2-l&_nc_oc=Adpax0YW9cXyA8W8K9H3h9sGotaPu3CWpYq32q68oizJqVXS2OjxuOZGKiHu_HzRBhXkbrASplIYFJTrl_-Nk4al&_nc_zt=23&_nc_ht=scontent-iad6-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQKHiU_clLQ1dKg13MH8SUIMoHoRUfEyV9OHic3ASu2uHO7C6qH5REPfqf5sWFEBvb-MtS4fQdvh&oh=00_AQGDPUvVU_tSdnUkirWUYp5K2mpeUKgeeZE4AgRWKxheDQ&oe=6A8E62AB"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                        "id": "120250209368660632"
+                      }
+                    ],
+                    "video_id": "2524786631295778",
+                    "thumbnail_url": "https://scontent-iad3-2.xx.fbcdn.net/v/t15.5256-10/756136758_1571871041193970_5952541960861250964_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=105&ccb=1-7&_nc_sid=4c1fc5&_nc_ohc=tU7Iwi8mFswQ7kNvwEZgd7Z&_nc_oc=Adoa0KrPMdtMmRg1N_OyVWIImOf3228zjAeHJG9MAUPDtBjfS_ogKxTxU6aN4Jb1VQGvQzjMIigIXvCcOq8J0KYJ&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQLl31qcD_IrlTRtdCtzqlfsNg7CEaHq7x0wvaJ0sy1SNHcYuSnP8kVhrMDm5Zyu2ZZbcczu9Oq_&oh=00_AQEjmXRcjDaG8AkAyhK-wTArtNxZX3XnHFzvNf9IQizG_Q&oe=6A8E4D1C"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                        "id": "120250209368670632"
+                      },
+                      {
+                        "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                        "id": "120250209368680632"
+                      }
+                    ],
+                    "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                        "id": "120250209368670632"
+                      },
+                      {
+                        "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                        "id": "120250209368680632"
+                      }
+                    ],
+                    "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+                  }
+                ],
+                "call_to_action_types": [
+                  "LEARN_MORE"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐⭐⭐⭐"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                        "id": "120250209368700632"
+                      },
+                      {
+                        "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                        "id": "120250209368720632"
+                      }
+                    ],
+                    "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c09&utm_adgroup=b01fb13c09g01",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                        "id": "120250209368640632"
+                      },
+                      {
+                        "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                        "id": "120250209368710632"
+                      }
+                    ],
+                    "text": "Financie Seu Carro Sem Entrada ✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                        "id": "120250209368640632"
+                      },
+                      {
+                        "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                        "id": "120250209368710632"
+                      }
+                    ],
+                    "text": "✅HOJE - SEM ENTRADA✅"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                        "id": "120250209368640632"
+                      },
+                      {
+                        "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                        "id": "120250209368710632"
+                      }
+                    ],
+                    "text": "✅SOMENTE HOJE✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram"
+                      ],
+                      "facebook_positions": [
+                        "feed",
+                        "instream_video",
+                        "marketplace",
+                        "profile_feed"
+                      ],
+                      "instagram_positions": [
+                        "stream",
+                        "explore_home",
+                        "profile_feed"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                      "id": "120250209368660632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                      "id": "120250209368680632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                      "id": "120250209368700632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                      "id": "120250209368710632"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                      "id": "120250209368650632"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                      "id": "120250209368670632"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                      "id": "120250209368720632"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                      "id": "120250209368640632"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "thumbnail_url": "https://scontent-iad6-1.xx.fbcdn.net/v/t15.5256-10/756953293_2304036863760446_6819104209950737890_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=hxUHdIO06bsQ7kNvwGbN2-l&_nc_oc=Adpax0YW9cXyA8W8K9H3h9sGotaPu3CWpYq32q68oizJqVXS2OjxuOZGKiHu_HzRBhXkbrASplIYFJTrl_-Nk4al&_nc_zt=23&_nc_ht=scontent-iad6-1.xx&edm=ANIILHsEAAAA&_nc_gid=48EWcB7SyXP-anYd_aetYA&_nc_tpa=Q5bMBQKHiU_clLQ1dKg13MH8SUIMoHoRUfEyV9OHic3ASu2uHO7C6qH5REPfqf5sWFEBvb-MtS4fQdvh&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=b696e2&_nc_sid=58080a&oh=00_AQGef477ifPUFdFxf5MdZ3kfZEihans6o8rEDk3o34tFWw&oe=6A8E62AB"
+            }
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIVEhTNzBRVi14WEVOTHpBX1BHcVJWR0xBZA3lUSmdFQmp2N1lYczVoVmZAZAbXZAHWUlKQjhLVlk5VmNMb3NHVUZALOU9Fa2NWUE5CWEhiekNUcEd0Rl9LQXVn",
+            "after": "QVFIVEZA4a2hFU3dRbWJEY2plOVk5RnZAtZAUNieW1kNWFoQ3ZAMeDV5OEJ1YTRVYWNPSzNaMExZAcWh6NkJVOUtZAQ0FwSktoOGhDZAy11dDdRN0YzbVMyZAFlhVGJ3"
+          }
+        }
+      },
+      "headers": {
+        "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=15552000; preload",
+        "Facebook-API-Version": "v26.0",
+        "Access-Control-Allow-Origin": "*",
+        "X-Business-Use-Case-Usage": "{\"1046241194533786\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":1,\"total_time\":1,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/javascript; charset=UTF-8"
+      }
+    }
+  ]
+}

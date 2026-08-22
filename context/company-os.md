@@ -156,7 +156,7 @@ Discord AdOps      Canal operacional com Smart Bidding para regras, aprovação,
 Regra canônica inicial:
 
 - Smart Bidding é a dashboard/rede principal de gerenciamento operacional.
-- ActiveView deve ser tratada como exceção ativa apenas para sites que ainda estejam na tecnologia AV: openzed e seus subdomínios. Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
+- ActiveView deve ser tratada como exceção intencional apenas para sites que ainda estejam na tecnologia AV: openzed e seus subdomínios. Wavesbee e finanzas.wavesbee usam JBF/GAM SB. Cliquet e finanzas.cliquet carregam wrapper JBF, mas os builders de produção de 2026-07-15 ainda requisitam o GAM AV `198073784`; o cutover para os builders genéricos atuais no GAM SB `21922122164` permanece pendente.
 - Alterações de blocos, regras e precificação pertencem a Revenue / AdOps.
 - Impactos financeiros pertencem a Finance / BI.
 

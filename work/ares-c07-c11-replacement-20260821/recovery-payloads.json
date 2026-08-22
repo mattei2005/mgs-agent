@@ -1,0 +1,1356 @@
+{
+  "request_id": "cpv-c07-c11-maxvol-replacement-20260821-recovery",
+  "reason": "engine v3 child batch rejected new video IDs because source asset customization labels were dropped; recovery restores exact source adlabels on vertical/square media",
+  "rows": [
+    {
+      "campaign_number": "07",
+      "ad_number": 1,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_019",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "1799544214379216",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                  "id": "120250209360530632"
+                }
+              ]
+            },
+            {
+              "video_id": "1085979600606742",
+              "adlabels": [
+                {
+                  "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                  "id": "120250209360470632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                  "id": "120250209360560632"
+                },
+                {
+                  "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                  "id": "120250209360590632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                  "id": "120250209360560632"
+                },
+                {
+                  "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                  "id": "120250209360590632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                  "id": "120250209360540632"
+                },
+                {
+                  "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                  "id": "120250209360550632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                "id": "120250209360470632"
+              },
+              "body_label": {
+                "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                "id": "120250209360560632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                "id": "120250209360540632"
+              },
+              "title_label": {
+                "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                "id": "120250209360600632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                "id": "120250209360530632"
+              },
+              "body_label": {
+                "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                "id": "120250209360590632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                "id": "120250209360550632"
+              },
+              "title_label": {
+                "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                "id": "120250209360480632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C07 AD01 CAR_BR_BR_VID_SUPER_OFERTA_NV_019"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_47afe0a65b05273c8056",
+        "checksum": "47afe0a65b05273c805697e662d7c3b700276d3c7e64a3706adac429f3c533cb",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "1085979600606742",
+        "updated_at": "2026-08-21T17:54:02.168812+00:00",
+        "vertical_video_id": "1799544214379216"
+      }
+    },
+    {
+      "campaign_number": "07",
+      "ad_number": 2,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_020",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "1774494757072982",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                  "id": "120250209368650632"
+                }
+              ]
+            },
+            {
+              "video_id": "1998050817565019",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                  "id": "120250209368660632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                  "id": "120250209368670632"
+                },
+                {
+                  "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                  "id": "120250209368680632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                  "id": "120250209368670632"
+                },
+                {
+                  "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                  "id": "120250209368680632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                  "id": "120250209368700632"
+                },
+                {
+                  "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                  "id": "120250209368720632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                "id": "120250209368660632"
+              },
+              "body_label": {
+                "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                "id": "120250209368680632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                "id": "120250209368700632"
+              },
+              "title_label": {
+                "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                "id": "120250209368710632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                "id": "120250209368650632"
+              },
+              "body_label": {
+                "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                "id": "120250209368670632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                "id": "120250209368720632"
+              },
+              "title_label": {
+                "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                "id": "120250209368640632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C07 AD02 CAR_BR_BR_VID_SUPER_OFERTA_NV_020"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_983f0552648c72cf20b0",
+        "checksum": "983f0552648c72cf20b03e6a3b5ebc5739880cda6090f3c7b786254efe151e17",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "1998050817565019",
+        "updated_at": "2026-08-21T17:54:17.907394+00:00",
+        "vertical_video_id": "1774494757072982"
+      }
+    },
+    {
+      "campaign_number": "07",
+      "ad_number": 3,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_021",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "1042882311693540",
+              "adlabels": [
+                {
+                  "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                  "id": "120250209350960632"
+                }
+              ]
+            },
+            {
+              "video_id": "1001870426212716",
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                  "id": "120250209350990632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                  "id": "120250209351050632"
+                },
+                {
+                  "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                  "id": "120250209351070632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                  "id": "120250209351050632"
+                },
+                {
+                  "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                  "id": "120250209351070632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                  "id": "120250209351000632"
+                },
+                {
+                  "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                  "id": "120250209351020632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                "id": "120250209350990632"
+              },
+              "body_label": {
+                "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                "id": "120250209351070632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                "id": "120250209351020632"
+              },
+              "title_label": {
+                "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                "id": "120250209351080632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                "id": "120250209350960632"
+              },
+              "body_label": {
+                "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                "id": "120250209351050632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                "id": "120250209351000632"
+              },
+              "title_label": {
+                "name": "placement_asset_f65158c940486da78_1784929732069",
+                "id": "120250209351010632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C07 AD03 CAR_BR_BR_VID_SUPER_OFERTA_NV_021"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_2ee0484fa713b1406152",
+        "checksum": "2ee0484fa713b1406152ace654a3dfc58c27be9f915e07e48538c338f62e50bc",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "1001870426212716",
+        "updated_at": "2026-08-21T17:54:29.166925+00:00",
+        "vertical_video_id": "1042882311693540"
+      }
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 1,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_022",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "1534535221334104",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                  "id": "120250209360530632"
+                }
+              ]
+            },
+            {
+              "video_id": "1321285576746374",
+              "adlabels": [
+                {
+                  "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                  "id": "120250209360470632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                  "id": "120250209360560632"
+                },
+                {
+                  "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                  "id": "120250209360590632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                  "id": "120250209360560632"
+                },
+                {
+                  "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                  "id": "120250209360590632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                  "id": "120250209360540632"
+                },
+                {
+                  "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                  "id": "120250209360550632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                  "id": "120250209360480632"
+                },
+                {
+                  "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                  "id": "120250209360600632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                "id": "120250209360470632"
+              },
+              "body_label": {
+                "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                "id": "120250209360560632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                "id": "120250209360540632"
+              },
+              "title_label": {
+                "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                "id": "120250209360600632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                "id": "120250209360530632"
+              },
+              "body_label": {
+                "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                "id": "120250209360590632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                "id": "120250209360550632"
+              },
+              "title_label": {
+                "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                "id": "120250209360480632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C11 AD01 CAR_BR_BR_VID_SUPER_OFERTA_NV_022"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_64a92396935ff7b29e72",
+        "checksum": "64a92396935ff7b29e72120afb7d2e1f86377f0cd2326a44adecc48c2d58dd58",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "1321285576746374",
+        "updated_at": "2026-08-21T17:54:45.948103+00:00",
+        "vertical_video_id": "1534535221334104"
+      }
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 2,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_023",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "2900379757028489",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                  "id": "120250209368650632"
+                }
+              ]
+            },
+            {
+              "video_id": "2923071084721025",
+              "adlabels": [
+                {
+                  "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                  "id": "120250209368660632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                  "id": "120250209368670632"
+                },
+                {
+                  "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                  "id": "120250209368680632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                  "id": "120250209368670632"
+                },
+                {
+                  "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                  "id": "120250209368680632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                  "id": "120250209368700632"
+                },
+                {
+                  "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                  "id": "120250209368720632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                  "id": "120250209368640632"
+                },
+                {
+                  "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                  "id": "120250209368710632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                "id": "120250209368660632"
+              },
+              "body_label": {
+                "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                "id": "120250209368680632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                "id": "120250209368700632"
+              },
+              "title_label": {
+                "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                "id": "120250209368710632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                "id": "120250209368650632"
+              },
+              "body_label": {
+                "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                "id": "120250209368670632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                "id": "120250209368720632"
+              },
+              "title_label": {
+                "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                "id": "120250209368640632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C11 AD02 CAR_BR_BR_VID_SUPER_OFERTA_NV_023"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_c30cbe257e2022463f7e",
+        "checksum": "c30cbe257e2022463f7ea9ece3b43cbe2cff163057c81138b8b401245ddf6b7c",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "2923071084721025",
+        "updated_at": "2026-08-21T17:54:57.316448+00:00",
+        "vertical_video_id": "2900379757028489"
+      }
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 3,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_024",
+      "creative_payload": {
+        "object_story_spec": {
+          "page_id": "621037101089579",
+          "instagram_user_id": "17841418924864919"
+        },
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "video_id": "1374335540878360",
+              "adlabels": [
+                {
+                  "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                  "id": "120250209350960632"
+                }
+              ]
+            },
+            {
+              "video_id": "1445558487419371",
+              "adlabels": [
+                {
+                  "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                  "id": "120250209350990632"
+                }
+              ]
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                  "id": "120250209351050632"
+                },
+                {
+                  "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                  "id": "120250209351070632"
+                }
+              ],
+              "text": "🚘 Financiamento sem entrada e com parcelas acessíveis!"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                  "id": "120250209351050632"
+                },
+                {
+                  "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                  "id": "120250209351070632"
+                }
+              ],
+              "text": "Financia seu carro sem entrada mesmo com nome sujo!"
+            }
+          ],
+          "call_to_action_types": [
+            "LEARN_MORE"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐⭐⭐⭐"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                  "id": "120250209351000632"
+                },
+                {
+                  "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                  "id": "120250209351020632"
+                }
+              ],
+              "website_url": "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "Financie Seu Carro Sem Entrada ✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "✅HOJE - SEM ENTRADA✅"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f65158c940486da78_1784929732069",
+                  "id": "120250209351010632"
+                },
+                {
+                  "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                  "id": "120250209351080632"
+                }
+              ],
+              "text": "✅SOMENTE HOJE✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "explore_home",
+                  "profile_feed"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                "id": "120250209350990632"
+              },
+              "body_label": {
+                "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                "id": "120250209351070632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                "id": "120250209351020632"
+              },
+              "title_label": {
+                "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                "id": "120250209351080632"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                "id": "120250209350960632"
+              },
+              "body_label": {
+                "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                "id": "120250209351050632"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                "id": "120250209351000632"
+              },
+              "title_label": {
+                "name": "placement_asset_f65158c940486da78_1784929732069",
+                "id": "120250209351010632"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {
+            "pac_relaxation": {
+              "enroll_status": "OPT_IN"
+            },
+            "product_browsing": {
+              "enroll_status": "OPT_OUT"
+            },
+            "site_extensions": {
+              "enroll_status": "OPT_OUT"
+            }
+          }
+        },
+        "name": "CPV C11 AD03 CAR_BR_BR_VID_SUPER_OFERTA_NV_024"
+      },
+      "media": {
+        "account_id": "1046241194533786",
+        "asset_id": "asset_23eb4ab64a72d006ee4e",
+        "checksum": "23eb4ab64a72d006ee4e67190e39d2eff85f73362b5be8a17b233f41916e8d03",
+        "ready": true,
+        "source": "v3-prestage-meta-readback",
+        "square_video_id": "1445558487419371",
+        "updated_at": "2026-08-21T17:55:07.034595+00:00",
+        "vertical_video_id": "1374335540878360"
+      }
+    }
+  ]
+}

@@ -28,8 +28,10 @@ Smart Bidding   Empresa parceira Google com rede AdX/Ad Manager própria.
 ActiveView      Empresa parceira Google com rede AdX/Ad Manager própria.
                 Tem dashboard própria, mas é menos usada pela MGS atualmente.
                 Permanece como exceção ativa para openzed e seus subdomínios.
-                Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam
-                o wrapper JBF/Smart Bidding validado em produção.
+                Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding. Cliquet e
+                finanzas.cliquet carregam wrapper JBF, mas o runtime de produção
+                ainda aponta para builders country-specific antigos que usam o
+                GAM ActiveView `198073784`; o cutover para o GAM SB está incompleto.
 Google / AdX    Camada de pagamento/monetização por trás das redes parceiras.
                 Google paga as parceiras; as parceiras retiram o revenue share
                 delas e repassam a MGS conforme reports/fechamento.
@@ -94,7 +96,7 @@ openzed
 subdomínios de openzed
 ```
 
-Openzed e seus subdomínios continuam como exceção ativa enquanto usam tecnologia/controle da ActiveView. Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee não fazem parte dessa exceção: o runtime público validado em 2026-08-21 usa JBF/Smart Bidding e não requisita o loader ActView legado.
+Openzed e seus subdomínios continuam como exceção ativa enquanto usam tecnologia/controle da ActiveView. Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding. Em 2026-08-21, Rodolfo instalou nos dois Cliquet os snippets manuais mínimos com os builders genéricos e desativou o Wrapper integrado antigo do tema. Após purge Cloudflare, o runtime público de `cliquet.com` e `finanzas.cliquet.com` ficou com exatamente um GPT e um builder genérico por site, zero builder legacy e `window.wrapper.config.general.networkCode=21922122164` em desktop/mobile; não houve mais slot ou request para a ActiveView `198073784`. A seleção do GAM SB e a remoção do stack AV estão confirmadas. A impressão/fill real continua bloqueada pelo detector IVT da JBF: além do VPS (`Crawler`, risk 9/10), o navegador residencial do Rodolfo retornou `network=21922122164`, `operation=facebook_us_cc_all-d`, `flow=facebook_us_cc`, `page_type=rec`, tags corretas, porém `bot_code=100`, `traffic=Crawler`, `risk=0` e nenhum slot. Isso caracteriza falso positivo/decisão do detector JBF, não erro de builder, GAM, operação ou tags; escalar à Smart Bidding/JBF antes de marcar throughput como provado.
 
 ---
 

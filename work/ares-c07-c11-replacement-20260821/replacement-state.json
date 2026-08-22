@@ -1,0 +1,72 @@
+{
+  "request_id": "cpv-c07-c11-maxvol-replacement-20260821",
+  "stage": "old_deleted_validated",
+  "updated_at_utc": "2026-08-21T18:00:29.484310+00:00",
+  "targets": {
+    "07": {
+      "campaign_id": "120250209327510632",
+      "before": {
+        "id": "120250209327510632",
+        "name": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "updated_time": "2026-08-20T16:12:25-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "COST_CAP"
+      },
+      "delete_post": {
+        "http_status": 200,
+        "success": true,
+        "error": null
+      },
+      "readback_http": 200,
+      "readback": {
+        "id": "120250209327510632",
+        "name": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+        "status": "DELETED",
+        "configured_status": "DELETED",
+        "effective_status": "DELETED",
+        "updated_time": "2026-08-21T15:00:25-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "COST_CAP"
+      },
+      "deleted": true
+    },
+    "11": {
+      "campaign_id": "120250210269480632",
+      "before": {
+        "id": "120250210269480632",
+        "name": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "updated_time": "2026-08-20T16:13:28-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+      },
+      "delete_post": {
+        "http_status": 200,
+        "success": true,
+        "error": null
+      },
+      "readback_http": 200,
+      "readback": {
+        "id": "120250210269480632",
+        "name": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe",
+        "status": "DELETED",
+        "configured_status": "DELETED",
+        "effective_status": "DELETED",
+        "updated_time": "2026-08-21T15:00:28-0300",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+      },
+      "deleted": true
+    }
+  },
+  "token_report": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "field": "credential",
+    "len": 196
+  }
+}

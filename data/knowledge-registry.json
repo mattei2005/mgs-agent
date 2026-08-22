@@ -5,6 +5,25 @@
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
       "consumers": [
         "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T04:11:25-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-10-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares Campaign Engine v3.0.10 enforces canonical ad naming",
+      "updated_at": "2026-08-22T07:13:20+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
         "zeus"
       ],
       "domain": "growth",
@@ -13,10 +32,67 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-10-20260822",
+      "title": "Ares Campaign Engine v3 é a rota única para nova criação e clone Meta",
+      "updated_at": "2026-08-22T07:13:20+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.operational-account-cap",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T02:11:35-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-ACCOUNT-CAP-USD500-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3 é a rota única para nova criação e clone Meta",
-      "updated_at": "2026-08-21T04:18:36+00:00"
+      "title": "Creditoparaveiculo G006 operational account cap USD500",
+      "updated_at": "2026-08-22T05:19:11+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.campaign-numbering",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T18:40:34-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-CAMPAIGN-NUMBER-NO-LIMIT-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo campaign numbering has no C59 upper limit",
+      "updated_at": "2026-08-21T21:44:57+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:45:22-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-V11",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-V12",
+      "title": "Creditoparaveiculo ROI geral/estimado, D3 e guardrail pós-escala",
+      "updated_at": "2026-08-22T17:38:13+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.daily-creation-stock",
@@ -35,6 +111,25 @@
       "superseded_by": null,
       "title": "Creditoparaveiculo daily 17h MAXVOL creation and mandatory Drive stock reporting",
       "updated_at": "2026-08-20T21:20:14+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-HYBRID-GHOST-FILTER-V7",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-HISTORY-V8",
+      "title": "Creditoparaveiculo hybrid Daily preview and zero-only ghost filtering",
+      "updated_at": "2026-08-21T16:37:06+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -69,10 +164,73 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-MOBILE-LAYOUT-V4",
+      "title": "Creditoparaveiculo Daily 07 previous day plus 08/11/14/20 same-day periods",
+      "updated_at": "2026-08-21T15:40:25+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:14:48-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SCHEDULE-V9",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-REPORT-CHUNK-RETRY-V10",
+      "title": "Creditoparaveiculo Diário 07/08/12/14/16/20 com Intraday preservado",
+      "updated_at": "2026-08-21T18:27:54+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T13:22:00-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-V12",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-STANDARD-V13",
+      "title": "Creditoparaveiculo first-delivery one-shot guardrail without time cutoff",
+      "updated_at": "2026-08-22T17:59:06+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T13:49:00-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-STANDARD-V13",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Creditoparaveiculo Daily 07 previous day plus 08/11/14/20 same-day periods",
-      "updated_at": "2026-08-21T00:31:45+00:00"
+      "title": "Creditoparaveiculo automatic first-delivery enrollment with 02:00 grace",
+      "updated_at": "2026-08-22T17:59:06+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -93,6 +251,82 @@
       "updated_at": "2026-08-20T23:19:50+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-LAYOUT-V5",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-STANDARD-V6",
+      "title": "Creditoparaveiculo hybrid mobile-card and desktop-table Intraday layout",
+      "updated_at": "2026-08-21T15:54:12+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-STANDARD-V6",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-HYBRID-GHOST-FILTER-V7",
+      "title": "Creditoparaveiculo canonical hybrid Intraday standard",
+      "updated_at": "2026-08-21T16:10:07+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-MOBILE-LAYOUT-V4",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-LAYOUT-V5",
+      "title": "Creditoparaveiculo Daily periods plus mobile-card Intraday layout",
+      "updated_at": "2026-08-21T15:49:28+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-HISTORY-V8",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-SCHEDULE-V9",
+      "title": "Creditoparaveiculo Intraday híbrido com histórico ROI SB de três datas",
+      "updated_at": "2026-08-21T18:18:59+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.meta-rate-scale",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json",
       "consumers": [
@@ -109,6 +343,61 @@
       "superseded_by": null,
       "title": "Creditoparaveiculo Meta rate-limit reduction and scale plan",
       "updated_at": "2026-08-20T21:59:16+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:23:56-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-REPORT-CHUNK-RETRY-V10",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-V11",
+      "title": "Creditoparaveiculo reporting with bounded Discord chunk retry",
+      "updated_at": "2026-08-21T18:52:40+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.rules-thread",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T18:12:11-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo permanent rules reference thread",
+      "updated_at": "2026-08-21T21:13:17+00:00"
+    },
+    {
+      "canonical_key": "growth.openzedfinanzas.es-cc-es-03.discord-route",
+      "canonical_source": "data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+      "consumers": [
+        "ares",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-OPENZEDFINANZAS-DISCORD-ROUTE-V1",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "OpenzedFinanzas ES-CC-ES-03 usa canal Discord dedicado; ares-criativos fica em Creative Ops",
+      "updated_at": "2026-08-21T22:49:23+00:00"
     },
     {
       "canonical_key": "capability.disaster-recovery",
@@ -349,6 +638,61 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "decision.honcho-memory.file-autowrite-cutover",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-08-21T13:50:00-04:00",
+      "id": "DEC-2026-007",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Honcho owns automatic user modeling; file memory stays bounded",
+      "updated_at": "2026-08-21T18:13:13+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T16:10:16-04:00",
+      "id": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821",
+      "title": "Cliquet e Cliquetfinanzas: wrapper JBF ainda aponta para GAM ActiveView por builders antigos",
+      "updated_at": "2026-08-21T21:54:51+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T17:53:46-04:00",
+      "id": "DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cliquet e Cliquetfinanzas: stack único genérico seleciona GAM SB; impressão residencial pendente",
+      "updated_at": "2026-08-21T21:54:51+00:00"
+    },
+    {
       "canonical_key": "monetization.partner-network.activeview-exception",
       "canonical_source": "context/monetization.md",
       "consumers": [
@@ -361,10 +705,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei / Revenue-AdOps",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821",
       "title": "ActiveView restrita a Openzed; Cliquet e Wavesbee em JBF/Smart Bidding",
-      "updated_at": "2026-08-21T06:17:53+00:00"
+      "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
@@ -575,6 +919,42 @@
       "superseded_by": null,
       "title": "Ban {{first_name}} from all MGS Broadcast Template messages",
       "updated_at": "2026-08-08T13:27:22+00:00"
+    },
+    {
+      "canonical_key": "revenue.smart-routing.drip.url-position-order",
+      "canonical_source": "profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "consumers": [
+        "smartbidding-dashboard-access",
+        "zeus"
+      ],
+      "domain": "revenue-adops",
+      "effective_at": "2026-08-21T16:23:22-04:00",
+      "id": "SB-SMART-ROUTING-DRIP-URL-ORDER-V1",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "SB-SMART-ROUTING-DRIP-URL-SLOT-ORDER-V2",
+      "title": "Smart Routing Drip preserva ordem e URL exata de M0, NM e M1-M28",
+      "updated_at": "2026-08-21T20:37:56+00:00"
+    },
+    {
+      "canonical_key": "revenue.smart-routing.drip.url-position-order",
+      "canonical_source": "profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "consumers": [
+        "smartbidding-dashboard-access",
+        "zeus"
+      ],
+      "domain": "revenue-adops",
+      "effective_at": "2026-08-21T16:37:48-04:00",
+      "id": "SB-SMART-ROUTING-DRIP-URL-SLOT-ORDER-V2",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Smart Routing Drip preserva cinco URLs por slot e reordena route mais utm_content em M0-NM-M1-M28",
+      "updated_at": "2026-08-21T20:37:56+00:00"
     },
     {
       "canonical_key": "meta-apps.registry.current",
@@ -902,6 +1282,24 @@
       "updated_at": "2026-07-17T14:26:17+00:00"
     },
     {
+      "canonical_key": "procedure.discord.alert-embed-bottom-emoji-layout",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "ops.discord-alert-format",
+      "effective_at": "2026-08-21T15:39:46+00:00",
+      "id": "procedure-discord-alert-embed-emoji-layout-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Discord embed não suporta conteúdo externo abaixo e emoji isolado vira jumbo",
+      "updated_at": "2026-08-21T15:39:46+00:00"
+    },
+    {
       "canonical_key": "procedure.meta.app-restriction-graph-190",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "consumers": [
@@ -918,6 +1316,42 @@
       "superseded_by": null,
       "title": "Application has been deleted indica app na categoria Restritos",
       "updated_at": "2026-08-21T14:50:38+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b001-b012-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T16:13:20+00:00",
+      "id": "procedure-meta-b001-b012-restriction-alert-format-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Padrão humano de alerta quando app B001-B012 entra em Restritos",
+      "updated_at": "2026-08-21T16:13:20+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T16:42:29+00:00",
+      "id": "procedure-meta-b0133-possible-restriction-alert-format-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Padrão humano B013-3 para possível restrição em validação persistente",
+      "updated_at": "2026-08-21T16:42:29+00:00"
     },
     {
       "canonical_key": "sb.utility-template-repair.self-healing",
@@ -939,5 +1373,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T14:50:38+00:00"
+  "updated_at": "2026-08-22T17:59:06+00:00"
 }

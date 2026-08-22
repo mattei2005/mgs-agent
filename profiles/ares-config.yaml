@@ -391,7 +391,7 @@ memory:
   memory_char_limit: 6400
   user_char_limit: 3600
   provider: honcho
-  nudge_interval: 10
+  nudge_interval: 0
   flush_min_turns: 6
 delegation:
   model: ''
@@ -522,8 +522,8 @@ discord:
     - '1291113428982693940'
     - '1055570806945620030'
   require_mention: true
-  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
-  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
+  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1540489861876678657
+  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1540489861876678657
   auto_thread: true
   thread_require_mention: false
   history_backfill: true
@@ -543,22 +543,10 @@ discord:
 
       - Participantes extras entram somente por pedido explicito de Rodolfo e readback
       real.'
-    '1516887105543077949': 'INSTRUCAO DE THREAD Ares Aquisicao:
-
-
-      - Canal operacional compartilhado por Rodolfo, Zeus, Ares e gestores autorizados.
-
-      - Use threads por conta, estrategia ou assunto; mantenha HOA, Intraday, regras,
-      campanhas e monitoramento neste canal.
-
-      - Responda na thread atual; nao use send_message para resposta normal.
-
-      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada
-      no assunto principal + contexto especifico; nao sobrescreva titulo manual.
-
-      - Quando Rodolfo pedir para adicionar ou remover gestor, use /root/mgs-agent/scripts/discord-add-thread-member.sh
-      --profile ares --thread <thread_id> --user <user_id> e confirme somente apos
-      readback real.'
+    '1516887105543077949': Ares Creative Ops channel; use for briefs, references,
+      uploads, images, videos, Drive, naming and inventory; existing Openzed Intraday
+      and HOA threads stay temporarily until migration; do not create new Campaign
+      Ops threads here; reply in current thread
     '1539422731727147079': '"INSTRUCAO DE THREAD Ares Eggbev US-CC-EN\n\n- Canal privado
       da operacao Eggbev US-CC-EN para Rodolfo, Nicolas, Zeus e Ares; Geizian esta
       fora deste plano.\n- Toda thread nova criada neste canal deve adicionar automaticamente
@@ -602,6 +590,8 @@ discord:
       titulo manual.
 
       - Nao adicionar outros gestores automaticamente.'
+    '1540489861876678657': OpenzedFinanzas ES-CC-ES-03 dedicated channel; manual Intraday
+      and HOA threads; reply in current thread; no automatic thread creation
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -637,6 +627,7 @@ discord:
     '1539432300364824607':
       - '1055570806945620030'
       - '321263240782807040'
+    '1540489861876678657': []
   suppress_link_previews: true
 telegram:
   reactions: false

@@ -73,6 +73,16 @@ Canal/Webhook         OK — mensagem limpa sem wrapper de cron
 Destino operacional: #app-rate-limit
 ```
 
+## Discord rendering constraints
+
+- In one Discord message, regular `content` is rendered **only above** embeds; Discord provides no content slot below an embed.
+- A separate message containing only emojis is rendered with Discord's enlarged **jumbo emoji** style, so it will not match an emoji line that shares a message with text or role mentions.
+- Do not send a bottom emoji-only message without a non-emoji character: Discord renders it in enlarged **jumbo emoji** style.
+- When Rodolfo asks to preview “in alert form,” preserve the real Discord embed and post it in the current review thread; do not replace it with plain formatted prose.
+- If the alert must remain one Discord message, bottom emojis cannot sit outside/below the embed; they must stay inside the embed (for example, in the footer/description).
+- If the real embed appearance and bottom emojis outside the box are both required, two Discord messages are technically unavoidable. Append a visible period to the bottom emoji line (for example `🚨🚨🚨🚨🚨.`) so Discord no longer treats it as emoji-only and does not apply jumbo sizing; keep notifications disabled during previews and validate the result visually in the target Discord client.
+- Use one plain formatted message only when Rodolfo explicitly accepts removal of the embed/alert appearance.
+
 ## Implementation notes
 
 - Do not use `cronjob(deliver=...)` for final Discord presentation when a clean operational report is required.

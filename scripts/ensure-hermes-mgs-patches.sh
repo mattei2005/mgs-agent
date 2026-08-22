@@ -55,6 +55,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    honcho-background-file-memory-freeze-*.patch)
+      if grep -q "allow_memory_tool: bool = True" "$REPO/agent/background_review.py" \
+        && grep -q "allow_memory_tool=review_memory" "$REPO/agent/background_review.py" \
+        && grep -q "test_skill_only_review_excludes_memory_tool" "$REPO/tests/run_agent/test_background_review_toolset_restriction.py"; then
+        log "Honcho background file-memory freeze invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-runtime-customizations-*.patch|discord-deterministic-thread-rename-auto-add-users.patch)
       if grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
@@ -285,6 +293,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # below remain invariant checks and backward-compatible fallback.
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-17-main-4323c67d.patch"
 apply_patch_if_needed "checkpoint-store-serialization-2026-08-20.patch"
+apply_patch_if_needed "honcho-background-file-memory-freeze-2026-08-21.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-v0200.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-02-v0191.patch"

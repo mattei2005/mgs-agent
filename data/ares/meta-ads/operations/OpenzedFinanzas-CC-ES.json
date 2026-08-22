@@ -104,34 +104,50 @@
   "gdpr_sensitive": true,
   "account_currency": "USD",
   "discord_log_channel": {
-    "name": "ares-aquisicao",
-    "id": "1516887105543077949",
-    "policy": "cron stdout delivered here only on proposed actions/errors"
+    "name": "bot-openzedfinanzas-es-cc-es-03",
+    "id": "1540489861876678657",
+    "policy": "Dedicated Openzed Campaign Ops channel; Intraday and HOA use separate fixed threads"
+  },
+  "discord_migration": {
+    "status": "complete",
+    "target_channel": {
+      "name": "bot-openzedfinanzas-es-cc-es-03",
+      "id": "1540489861876678657"
+    },
+    "legacy_threads": {
+      "intraday": "1517682975234326729",
+      "hoa": "1518648967360024757"
+    },
+    "target_threads": {
+      "intraday": "1540502156845781103",
+      "hoa": "1540502177376632922"
+    },
+    "cutover_gate": "Complete: Rodolfo explicitly provided both target threads; routes configured in the dedicated channel"
   },
   "scheduler_jobs": {
     "intraday": {
       "job_id": "aa9e01a5ec4a",
       "schedule": "every 30m",
-      "deliver": "discord:1516887105543077949",
+      "deliver": "discord:1540489861876678657:1540502156845781103",
       "mode": "dry_run_v2_R1_R4_persistence_no_write"
     },
     "reactivate_all": {
       "job_id": "c6c737070d3f",
       "schedule": "30 18 * * * America/New_York (00:30 Europe/Madrid current offset)",
-      "deliver": "discord:1516887105543077949",
+      "deliver": "discord:1540489861876678657:1540502156845781103",
       "mode": "dry_run_safe_paused_by_ares_rule_only_no_write"
     },
     "hoa_manager": {
       "job_id": "e84a8db81fb3",
       "schedule": "0 2,6,9,12,16 * * * America/New_York (08:00,12:00,15:00,18:00,22:00 Europe/Madrid current offset)",
-      "deliver": "discord:1516887105543077949",
+      "deliver": "local_via_script:discord:1540502177376632922",
       "mode": "read_only_dry_run_no_write",
       "script": "ares-meta-hoa-manager.sh",
       "repeat": "20 times",
       "reports": "always_output_each_checkpoint"
     }
   },
-  "updated_at": "2026-08-05T23:10:44-04:00",
+  "updated_at": "2026-08-21T19:27:25-04:00",
   "hoa_policy": {
     "status": "approved_config_read_only_no_meta_write",
     "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v2.json",

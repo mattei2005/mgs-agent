@@ -32,11 +32,13 @@ b64=$(base64 -w 0 /caminho/arquivo.php)
 
 Alguns usuários técnicos podem autenticar corretamente e ainda serem forçados para `profile.php?show=wp-2fa-setup`; nesse estado, o WP 2FA também redireciona o `admin-ajax.php` do elFinder e impede o write. Não tente contornar a política 2FA por nonce, criação de usuário ou mudança oculta de option/meta.
 
-1. Se o redirect aparecer, remova imediatamente qualquer WP File Manager temporário já instalado e valide `rest_plugin_not_found`.
-2. Reporte o bloqueio e peça ao Rodolfo a ação/autorização de segurança necessária.
-3. Após Rodolfo informar que desativou WP 2FA, confirme por REST autenticado que `wp-2fa/wp-2fa` está `inactive` nos alvos antes de reinstalar File Manager.
-4. Processe um site por vez, seguindo a ordem canário, e remova File Manager no `finally` mesmo se login ou write falhar.
-5. Preserve o estado de WP 2FA deixado pelo Rodolfo; não reative por suposição.
+Standing authorization de Rodolfo (Discord `1540462317236650026`, 2026-08-21): quando uma operação técnica já autorizada exigir acesso temporariamente bloqueado pelo WP 2FA, Zeus pode desativar o plugin somente no site-alvo sem nova pergunta, desde que registre o estado inicial, mantenha o escopo mínimo e reative/valide `active` no `finally`, inclusive após falha ou rollback. Isso não autoriza alterar credenciais, enrollment, usuários ou política global.
+
+1. Se o redirect aparecer, não contorne o setup por nonce, novo usuário ou option/meta oculta.
+2. Faça readback REST do estado inicial do plugin no alvo. Se estiver `active`, desative somente o WP 2FA daquele site e confirme `inactive` antes de prosseguir.
+3. Processe um site por vez, seguindo a ordem canário; qualquer WP File Manager temporário deve ser removido no `finally` mesmo se login ou write falhar.
+4. No mesmo `finally`, reative WP 2FA e exija readback REST `active`; falha de reativação é incidente material e deve ser reportada imediatamente.
+5. Nunca deixe WP 2FA inativo por conveniência entre operações e nunca amplie o standing authorization para sites fora do alvo autorizado.
 
 Se o login mostrar `Cookies are blocked or not supported`, estabeleça `wordpress_test_cookie=WP Cookie check` para o host/path `/` e acione o botão real `#wp-submit`; `form.submit()` pode pular o comportamento necessário. Depois, navegue novamente à página do File Manager e valide sessão autenticada antes do write.
 
@@ -248,7 +250,19 @@ WHERE post_type = 'wpcode' AND post_title = 'zeus-deploy-v4-once';
 6. **SFTP path relativo** — `get wp-content/mu-plugins/arquivo.php` (sem `/` inicial).
 7. **Sessão WP expira em ~5min** — ter b64 pronto ANTES de entrar no admin.
 8. **Cloudflare cache mascara HTTP 500** — sempre testar endpoint autenticado para confirmar PHP rodando.
-9. **cliquet.com senha pode ser `Zeus_Deploy_2024!`** — foi alterada emergencialmente em 2026-04-23; verificar qual funciona.
+9. **Credenciais Cliquet podem ter mudado** — resolva sempre pelo item canônico no 1Password e valide por smoke; nunca mantenha valor literal em skill, script ou chat.
+
+## Cutover de JBF builder entre GAMs
+
+O domínio do loader JBF não prova qual GAM será usado. Leia `window.wrapper.config.general.networkCode` e os `googletag.pubads().getSlots()` reais.
+
+- O tema JBF pode construir automaticamente o URL country/source-specific em `inc/jbf-wrapper/jbf-wrapper.php` usando `company + domain + utm_source + country`.
+- Quando Rodolfo pedir o código manual para o Header do Ad Inserter, não transplante o resolver completo do tema nem crie um snippet multi-host. Use o padrão canônico mínimo já adotado no Wavesbee: `get_the_tags()` → `window.tags` → GPT `async` → builder genérico do publisher com `defer`. Entregue um bloco separado por site e use `wp_json_encode($slugTags)` diretamente, sem embrulhar JSON em string para `JSON.parse`.
+- Garanta stack único: o snippet manual não pode coexistir com outra saída GPT/JBF ativa no mesmo site.
+- Se um asset específico antigo selecionar o GAM errado, trocar o tema para o builder genérico pode mudar regras/segmentações de source e country. O reparo preferido é o provedor regenerar o asset específico existente no GAM correto.
+- Canário mínimo: backup e hash do PHP → PHP lint → alteração em um site → cache/origin readback → desktop e mobile com `jbf_deb=1`/`dfpdeb` → network code, slots e `/gampad/ads` → rollback comprovado → restaurar WP 2FA.
+- Network code correto sem slots não fecha o gate. No VPS, o builder atual pode classificar o tráfego como `Crawler` e suprimir slots; não falsifique `jbf_bd` nem ignore esse bloqueio. Use validação residencial/AdOps ou correção provider-side.
+- Conte o URL no HTML considerando que ele aparece em `window.wrapper_url` e no `<script src>`: duas ocorrências são esperadas; uma asserção de uma única ocorrência gera falso rollback.
 
 ## Política de canário (obrigatório)
 

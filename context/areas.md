@@ -55,7 +55,7 @@ Kelly é a dona humana da frente criativa. Geizian orienta e apoia. Ares cria/or
 
 Smart Bidding, ActiveView, AdManager/AdX, aprovação de sites, blocos de anúncio, precificação, regras e Discord AdOps.
 
-Regra atual: Smart Bidding e ActiveView são parceiros Google/AdX. A dashboard da Smart Bidding é a central principal de gerenciamento por ser mais completa. ActiveView permanece como exceção ativa para `openzed` e seus subdomínios; Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding. Rodolfo, Geizian e gestores atuam na interface operacional com AdOps, blocos, regras e performance.
+Regra atual: Smart Bidding e ActiveView são parceiros Google/AdX. A dashboard da Smart Bidding é a central principal de gerenciamento por ser mais completa. ActiveView permanece como exceção intencional para `openzed` e seus subdomínios. Wavesbee e finanzas.wavesbee usam JBF/GAM SB; Cliquet e finanzas.cliquet carregam JBF, mas ainda requisitam o GAM AV `198073784` por builders antigos e permanecem com cutover SB pendente. Rodolfo, Geizian e gestores atuam na interface operacional com AdOps, blocos, regras e performance.
 
 ## Finance / BI
 

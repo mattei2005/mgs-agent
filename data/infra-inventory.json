@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-21T06:32:59-04:00",
+    "updated_at": "2026-08-22T06:33:08-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1268,19 +1268,21 @@
         "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
         "/root/mgs-agent/tests/test_ares_meta_ruleset_v2.py",
         "/root/mgs-agent/tests/test_ares_meta_hoa_roi.py",
+        "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
         "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
         "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
       ],
       "sha256": {
         "openzedfinanzas_cc_es_intraday_v2.json": "548f23281632cabcfde377c60e7a74b6ede260ce8b62cde44bb4146d127d07f2",
         "openzedfinanzas_cc_es_hoa_v2.json": "ecc1b1a86aa7e374b391fd4adb24a5a0e635e25013cc4c46b605b072e2371613",
-        "OpenzedFinanzas-CC-ES.json": "66f47654a6d9f6ec923985b819f1c554d0779f99d00efb6b592fb39f7a34660c",
+        "OpenzedFinanzas-CC-ES.json": "1a7ef7e3b6d97ee7f62e6b65b588440743c2b9d6d86ca934eaec1c96f41092bc",
         "campaign-action-provenance.json": "24eb0e1a05e19a2f90273ffe6fc070776f8118dce921342d4620ad4f9737cac8",
         "ares-meta-cron-runner.py": "00c45342f35bdcedf21fe134911588561a546f49b7e4319128293559cc5e90b1",
         "ares-meta-hoa-manager.py": "1b109a8177002c8ceb4fa0822f9e8e0c187ef0dee510bb45851a5149d74741bd",
         "test_ares_meta_ruleset_v2.py": "660737da5b4d20db63399e4f6c81c20e7fcaf93d8b1adc02eb0896da773093d6",
         "test_ares_meta_hoa_roi.py": "fd5b1e7dd6d0ba496efc6c7f121ed5b6bf2ec25726c299a9b40f13c91f6ce008",
-        "ares-meta-reactivate-all-cron.sh": "97a2bbe8570383238608dc0f6dacf21b4c34db0ef7c96dea23653c22220a6e05",
+        "ares-meta-intraday-cron.sh": "88572a2f5cf9a15fab282fb6402082ee1106e02d1e2be542a8d4467f2dbaed01",
+        "ares-meta-reactivate-all-cron.sh": "cfbcafff95d58501229a47942805e78d40e6da934e673ed1af1695cf3802da37",
         "meta-ads-intraday-operations-SKILL.md": "78a0504d249242980cfb3e9ec0e5c79e56c495af9ee17ed0a0a9074ce7ff80f7"
       },
       "rules": "R1 MO=0/spend>=4; R2 MO=1/spend>=4.5; R3 MO>=2/spend>=6/CPMO>2; R4 LOWEST_COST variants/MO>=5/spend>=10/CPMO>1.75; all require 2 consecutive checkpoints; R5 removed.",
@@ -1499,16 +1501,17 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 93791,
-      "modified_at": "2026-08-21T11:00:45-04:00",
-      "sha256": "49850518aa417ec7ba896da65b6c66804ab19d2d07474e769883c804e3ce9428",
-      "description": "Registry-driven Meta roles monitor with B001-3 fail-closed reconciliation and hard exclusion of dedicated B013-3 from the generic /roles path.",
-      "validation": "Shell and embedded-Python PASS; scheduled full cycle discovered 12 generic items, contained no B013-3 item, alerts_sent=0 and errors_count=0. Dedicated B013-3 now owns every B013-3 Sheet row.",
-      "updated_at": "2026-08-21T11:10:15-04:00",
-      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21",
-      "last_change": "2026-08-21: changed ACTIVE_APP_CONFIGS, DTR_ONLY_APP_ITEMS and ROLE_RECONCILIATION_EXCLUDED_APPS from B013-2 to B013-3 after containment of one generic-cycle X write.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
-      "backup_validation": "Deterministically reconstructed from the post-cutover script by reversing only B013-3→B013-2; SHA-256 exactly matches the pre-change inventory hash 2c12397d90c665627cc2d81bbf233151bc3be3714aa0f02acd508d97a52ddff0.",
+      "size_bytes": 96773,
+      "modified_at": "2026-08-21T12:09:48-04:00",
+      "sha256": "8e28d803bcd1a5d67156d0ee4a7f7de7ebf34aadd63207085d329788b9b606e4",
+      "description": "Registry-driven B001–B012 Meta roles monitor with dedicated human-readable restriction alerts for OAuthException 190 `Application has been deleted`; B013-3 remains excluded on the dedicated DTR route.",
+      "validation": "Shell and embedded-Python PASS; pure render test PASS for all 12 registry apps; live B001-3 dry-run used real 1Password/Graph with exit 0, three JSON render rows, Discord posts=0 and Sheet sync disabled; production helper payload matches the approved Discord preview by exact readback; scheduled production cycle at 2026-08-21T12:10:47-04:00 loaded all 12 items with alerts_sent=0, errors_count=0 and Sheet sync healthy.",
+      "updated_at": "2026-08-21T12:14:50-04:00",
+      "source_report": "discord:#alerts-infra/1540393687517757502",
+      "last_change": "2026-08-21: B001–B012 restriction detection now uses dedicated app_restricted daily cooldown, three operational role mentions, approved human copy, native red embed and five-emojis-plus-period lower line; unrelated alert families unchanged.",
+      "backup": "/root/mgs-agent/backups/meta-app-restriction-alert-format-20260821-120656/meta-app-roles-watch.sh.before",
+      "backup_validation": "Backup SHA-256 49850518aa417ec7ba896da65b6c66804ab19d2d07474e769883c804e3ce9428 exactly matches the pre-change script and manifest.",
+      "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before"
     },
     {
@@ -3885,6 +3888,23 @@
       "updated_at": "2026-08-11T17:12:29.185351+00:00"
     },
     {
+      "id": "zeus-meta-app-rate-limit-discord-webhook-format",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
+      "size_bytes": 3722,
+      "modified_at": "2026-08-21T11:50:00-04:00",
+      "sha256": "7f148b0314cae450873e90f27ffa5f384a32c7288eedac6fa3dda994a341f26b",
+      "runtime_versioned_sha_match": true,
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Canonical Discord presentation constraints for Meta app alerts: preserve real embeds in review previews, explain bottom-content limits, and append a period to an external bottom emoji line to suppress jumbo sizing.",
+      "validation": "Runtime/versioned SHA-256 match; exact rule readback PASS; review-thread embed 1540387179178623057 plus bottom line 1540387199898484858 posted with notifications suppressed; bottom readback is exactly `🚨🚨🚨🚨🚨.`; REPORT-INFRA 1540387709334454374 read back with HTTP 200, empty content, zero mentions and expected embed fields; visual client approval pending Rodolfo.",
+      "updated_at": "2026-08-21T11:51:03-04:00",
+      "source_report": "discord:#alerts-infra/1540387709334454374"
+    },
+    {
       "id": "zeus-meta-app-rate-limit-route-pack-02",
       "agent": "zeus",
       "type": "skill_reference",
@@ -3907,16 +3927,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 40697,
-      "modified_at": "2026-08-21T11:16:31-04:00",
-      "sha256": "72344efab866840aadca4ca1f783a188240aece89618eb461305c0db74a260b8",
+      "size_bytes": 43228,
+      "modified_at": "2026-08-21T12:41:10-04:00",
+      "sha256": "7c12c6180a7fb16079dc04bd4057943844e0b6ba994f28c43d475beb0d7854d7",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Current B013-3 cutover, 31/31 final state, generic-route containment ordering, chronological alert handling and active cron validation; preserves B001-3 15/17 gate.",
-      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches live B013-3 Graph/DTR/Sheet/Discord readbacks, 30-X containment, bounded Sheets retry and successful scheduled-cycle closure.",
-      "updated_at": "2026-08-21T11:28:13-04:00",
-      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21"
+      "description": "Current B001–B012 restriction-alert standard plus the approved B013-3 possible-restriction presentation; preserves dedicated B013 routing and all existing monitoring gates.",
+      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches deployed render helpers and exact approved Discord previews for B001–B012 restriction and B013-3 possible restriction; scheduled B013 post-change cycle completed 31/31 linked, zero unknown/unlinked/alerts, no Sheet update and healthy capability.",
+      "updated_at": "2026-08-21T12:45:42-04:00",
+      "source_report": "discord:#alerts-infra/1540401445910872109"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -5204,17 +5224,19 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "size_bytes": 40544,
-      "modified_at": "2026-08-21T11:15:35-04:00",
-      "sha256": "90b5dc1e577cc0d4419af1966834d28bbfebf01fbe0c09d2e84c335f5c2bfce9",
+      "size_bytes": 42342,
+      "modified_at": "2026-08-21T12:37:58-04:00",
+      "sha256": "e0bdb9bbb1183d300e438fc877de7a27efec775474cbd4fcdad9d08803e23717",
       "cron_job_id": "498fb0d95e10",
       "schedule": "2-59/9 0,8-23 * * *",
-      "description": "Dedicated B013-3 DTR/ChatPion monitor reading current NO APP=B013-3 rows, validating each DTR token via B013-3 debug_token and reconciling Sheet X fail-closed.",
-      "validation": "Shell/embedded-Python PASS; full dry-run 30/30 healthy; production converged to 31/31 linked and zero X; Sheets transport now retries bounded timeout/429/5xx and the post-patch scheduled cycle completed ok with zero alerts/writes.",
-      "updated_at": "2026-08-21T11:28:13-04:00",
-      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21",
-      "last_change": "2026-08-21: migrated B013-2→B013-3 and added three-attempt Sheets transport retry after the first scheduled metadata timeout.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-watch.sh.before",
+      "description": "Dedicated B013-3 DTR/ChatPion monitor with approved human-readable possible-restriction alert for persistent unknown validation, while preserving current NO APP=B013-3 reconciliation and fail-closed Sheet safety.",
+      "validation": "Shell and embedded-Python PASS; render helper PASS; production helper payload matches approved Discord preview 1540396575854035115/1540396601728700498 by exact semantic readback; scheduled post-change cycle completed at 2026-08-21T12:44:14-04:00 with 31/31 linked, zero unknown/unlinked, alerts_sent=0, Sheet updates_needed=0/updated=false and capability healthy.",
+      "updated_at": "2026-08-21T12:45:42-04:00",
+      "source_report": "discord:#alerts-infra/1540401445910872109",
+      "last_change": "2026-08-21: persistent B013-3 unknown alert now uses title POSSÍVEL RESTRIÇÃO, three operational role mentions, approved non-technical copy, native yellow embed and five-emojis-plus-period lower line; other B013 alert families unchanged.",
+      "backup": "/root/mgs-agent/backups/b0133-possible-restriction-alert-format-20260821-123658/b013-dtr-link-watch.sh.before",
+      "backup_validation": "Backup SHA-256 90b5dc1e577cc0d4419af1966834d28bbfebf01fbe0c09d2e84c335f5c2bfce9 exactly matches the pre-change script and manifest.",
+      "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before"
     },
     {
@@ -7618,15 +7640,211 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 103258,
-      "modified_at": "2026-08-21T02:03:55-04:00",
-      "sha256": "75daa4bff4135f68acb420ce6f0d2e22131279a7bf06d422c81b53d0d74a1c23",
-      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with live Meta×SB reconciliation, dynamic b01fb13cNN campaign discovery separated from the fail-closed autonomous write allowlist, safe table pagination and exact three-thread continuity archive.",
-      "validation": "py_compile PASS; 25 pytest tests PASS; live Intraday dry-run discovered C07-C13, classified zero-spend C12/C13 as D1 with action OBSERVAR D1/D2, preserved mathematically undefined KPI ratios as n/d and added an explicit human explanation; no Meta or Discord write.",
+      "size_bytes": 148272,
+      "modified_at": "2026-08-22T13:30:50.217120024-04:00",
+      "sha256": "9bd847d317b1b732edefb4aa1d54619b4626f8e8990c4f17ac4a91820d09f30d",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting, including read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
+      "validation": "py_compile PASS; 47/47 targeted fixed-report and first-delivery tests PASS; live first-delivery dry-run selected exactly C07/C11-C16; seven Meta renames HTTP200 plus GET200; independent live readback confirmed all seven ACTIVE, names 23-08, spend zero; 15-minute watcher foreground returned NO_FIRST_SPEND with zero writes; scheduler readback enabled/scheduled/no-agent/local.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "6278218f2c6af75f5e5ca9f97c4b138429061079b1ac58295a9f10da123459cf",
+      "test_sha256": "3f7c0d3611d5532aac344e11388a844a393031154c238c80dff64ef3fa73001c",
+      "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "operation_sha256": "637fd9546fb48743eeda72ae90c7a97f68c0dac3e17b5013f47a885943ba5441",
+      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/daily/daily-20260821T223607Z.json",
+      "last_report_sha256": "98586dee2d07ebf4552e2364a61927121d15f09dc6c763b119f73897d13ba1f1",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540479725795938355",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "readback": "POST HTTP 200; content empty; embed only; no thread"
+      },
       "git_tracked": false,
-      "updated_at": "2026-08-21T02:05:08-04:00"
+      "updated_at": "2026-08-21T18:38:42.787703-04:00",
+      "intraday_wrapper_sha256": "6037d8de7da6b8eedc1aa3fcd2141314fd8497d06c97a73c8069e27ea0d7ac8b",
+      "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
+      "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
+      "guardrail_reactivation_cron_id": "5d0974e97ebd",
+      "direct_traffic_cbo_skill_sha256": "f8284911eb714127a775eabf212d34a789d3f784dad3c443dd9d5c4c880e55a2",
+      "vehicle_finance_skill_sha256": "dfacf3db0e87153e1098db9c2feee6d6219a3b3fef05e0cfd24cd30a11ae6789",
+      "meta_intraday_skill_sha256": "03b3a0211ac4e6511d4fe81e2e0f6ee08f23850ef56f6f9b8246f8cbe0f34798",
+      "first_delivery_guardrail_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "policy": "standard automatic enrollment; first spend observed 00:30-02:00 SP inclusive releases without pause; later first spend pauses once and queues verified 00:30 next-day reactivation",
+        "automatic_enrollment": "Campaign Engine v3 postprocess after hierarchy readback; exact IDs/count and meta_writes=0 required",
+        "grace_window": "00:30-02:00 inclusive America/Sao_Paulo",
+        "campaign_numbers": [
+          7,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "operational_date": "2026-08-23",
+        "runtime_path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py",
+        "runtime_size_bytes": 39107,
+        "runtime_sha256": "464c3f8d44f71cb816a8251e3ce2e89d8f5fc61c82b4587390450a0db49fb545",
+        "wrapper_path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.sh",
+        "wrapper_size_bytes": 192,
+        "wrapper_sha256": "c866fecb64d389d908111dde52e42ee2bb0e9b98784dff60c5be3c0ce7b81495",
+        "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_first_delivery_guardrail.py",
+        "test_sha256": "4dfdf78ebee0e6332eb7dcb0c759207c97dbedcfcef5140616800e3c00511dea",
+        "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-first-delivery-guardrail.json",
+        "state_sha256": "9a6d114c0e160335488315dcae1932a6a922279464891b7fdd338ef668c2efeb",
+        "arm_audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/arm-20260822T173301980288Z.json",
+        "arm_audit_sha256": "53928731e543c0c5af2877b2b05d9233ba5dc4367aa2e8afbf5fc6d9668e9cda",
+        "cron_id": "990b3e644f36",
+        "cron_schedule": "*/15 * * * *",
+        "cron_no_agent": true,
+        "cron_deliver": "local",
+        "validation": "Current seven targets migrated to grace-window policy and live watcher returned NO_FIRST_SPEND with zero writes; scheduled tick readback ok. Auto-arm dry-run on C14 returned exact ID/count and meta_writes=0. 102 targeted guardrail, reports, v3 daily and engine tests passed; offline smoke 2+1 remained zero-network.",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540777259990917225",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        }
+      },
+      "direct_traffic_utm_script_sha256": "d8c66c4b70c198ee8238db6816c7ca433591cdee05e2070c8eff3f0b779db823",
+      "campaign_number_no_limit_test_path": "/root/mgs-agent/tests/test_direct_traffic_utm.py",
+      "campaign_number_no_limit_test_sha256": "d22214b36ddfe86a8ca804f310e6e8b85bc90c90edea1206e847fd2b454f63de",
+      "rules_thread_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540469642320154737",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "http_status": 200
+      },
+      "campaign_number_no_limit_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540477179010486384",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "http_status": 200
+      },
+      "historical_campaign_hydration_audit": "/root/mgs-agent/data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/historical-campaign-hydration-20260821T223706Z.json",
+      "historical_campaign_hydration_audit_sha256": "b6e1c14dfb2f25e03cdadc791aab52ea96f741884ffd2dc95271722e435f29eb",
+      "historical_campaign_hydration_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540490503752126595",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "http_status": 200,
+        "readback": "helper confirmed bot Zeus POST HTTP 200; embed only; no thread"
+      },
+      "historical_campaign_hydration_skill_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540490976777212069",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "http_status": 200,
+        "readback": "helper confirmed bot Zeus POST HTTP 200; embed only; no thread"
+      },
+      "cap500_activation_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "operational_cap_usd": 500,
+        "active_budget_usd_after": 312,
+        "campaigns_activated": [
+          12,
+          13
+        ],
+        "runtime_path": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+        "runtime_sha256": "fb80e51c3e9ca9e2d8b3546379f684d3a0b10065cdf213f06567e6b6cf4bea62",
+        "operation_v3_sha256": "d265d0e581fa071ce33b52e3b8fd4e7d1d6809eee6c2f248e6052fea2fe4b299",
+        "account_registry_sha256": "844ee270481408b9b344ab55d3d4d6886ec8953c6e12e5af23728d47e96ea202",
+        "activation_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-activate-2026-08-22-20260822T051431Z.json",
+        "activation_audit_sha256": "692b74bd66d6244a4ad7efbeca48e86c76bf1889f6d64264895490e92d9a6c14",
+        "validation": "Dry-run projected USD312 under USD500; controlled write activated C12/C13; independent Meta GET confirmed both ACTIVE with 1x1x3, USD30 each, active account budget USD312, within cap. 4 activation tests and 21 v3 planner tests passed.",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540591294877798512",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        },
+        "updated_at": "2026-08-22T02:17:42-03:00"
+      },
+      "v3_ad_naming_fix_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "release_version": "3.0.10",
+        "scope": "Rename the nine C14/C15/C16 ads and make CPV v3 fail closed unless canonical_filename drives ad and creative display names.",
+        "runtime": {
+          "adapter_path": "/root/mgs-agent/scripts/ares_campaign_v3/adapters.py",
+          "adapter_sha256": "60e8046c019be5e008e6de13071173f486495dcd350528edb66cb65cd333eead",
+          "daily_path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "daily_sha256": "9b8697d63b90bcc36a067bdfb7d71c2dd9a6f796f35e89c933b7eb7bfad539aa",
+          "config_sha256": "57c87e0fc32b914d3d65a952825f551eea1c3e06a9997987b49339cbfb725f8a",
+          "operation_v3_sha256": "901bfcd044415b590c2285e7ad012c0b033061996a6460b7410f2869081cf66f"
+        },
+        "tests": {
+          "engine_test_sha256": "22bcf22122b3bef85b53a3913d7fcee8a83b9b9abf56a9ed0c6065acb5f0aaab",
+          "daily_test_sha256": "965ed6ac23558f6ab6de058d0b778658bc4124f36772e038f1489d6a87cd9ac4",
+          "passed": 51,
+          "offline_smoke": "PASS 2+1 resumable, zero network",
+          "real_registry_manifest_preview": "9/9 ad names and 9/9 creative names canonical; zero asset_id display names"
+        },
+        "live_correction": {
+          "plan_sha256": "9e447eb1d8acead87a93688f21eeced917afdbfdb07fd4a0e49ef9ecfa0dad88",
+          "audit_sha256": "ed56c991f77af46826bce01f0ae630ac6c93d235b58d2ce1209216443d6015ea",
+          "renamed_ads": 9,
+          "campaigns": [
+            14,
+            15,
+            16
+          ],
+          "independent_meta_readback": "9/9 canonical names; all configured ACTIVE; bounded follow-up confirmed all effective ACTIVE"
+        },
+        "skill": {
+          "name": "meta-campaign-engine-v3",
+          "version": "3.0.10",
+          "sha256": "21f692b6c786a9d0e2b9a9eff0d7c7d38c5b002eaf323e2117068aead3b9290a",
+          "runtime_versioned_sha_match": true
+        },
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540619993643745301",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        },
+        "updated_at": "2026-08-22T04:13:56-03:00"
+      },
+      "v3_first_delivery_standard_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "release_version": "3.0.11",
+        "scope": "Auto-enroll every new CPV production campaign in the first-delivery watcher after validated hierarchy readback, with healthy 00:30-02:00 grace and one late-start reactivation.",
+        "daily_runtime_path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+        "daily_runtime_sha256": "4ec59c195bb4eba31f9fd32fc7f8d996852949fa5089d038befda2a4d4d27129",
+        "guardrail_runtime_sha256": "464c3f8d44f71cb816a8251e3ce2e89d8f5fc61c82b4587390450a0db49fb545",
+        "config_sha256": "98771393cf4142701e6a7ddb4d39dc8fd73c8ed25ebf39f635babfaabace4305",
+        "operation_sha256": "3fa63392e09e171664293de43cb2fc6927f0657549c1dc613101a9ddf7c71ad5",
+        "operation_v3_sha256": "ac95d24088569eaa9fdd4d5c199409872554d04b372725eb4821757ba054eb0f",
+        "daily_test_sha256": "a0d7aa834655f61faae416ab73f50cac4231fc313adb027bc91506236ae7ebf5",
+        "engine_test_sha256": "22bcf22122b3bef85b53a3913d7fcee8a83b9b9abf56a9ed0c6065acb5f0aaab",
+        "meta_campaign_engine_skill_sha256": "9b5cf6f627481451531bcbd80f19eca17ff9cc6224dd762f027c7051e76152bd",
+        "tests_passed": 102,
+        "offline_smoke": "PASS 2+1 resumable; zero external network calls",
+        "live_validation": "Current watcher 7 armed, zero spend, zero writes; auto-arm dry-run exact C14/id/count, meta_writes=0; cron enabled/scheduled with last_status ok.",
+        "fail_closed": "POSTPROCESS_PENDING until auto-arm exact-set readback succeeds; unknown provenance and enrollment conflict never reactivate or overwrite state.",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540782473766764636",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        }
+      }
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",
@@ -7781,7 +7999,7 @@
       "agent": "zeus",
       "type": "wordpress_ad_network_audit_and_jbf_wrapper_fix",
       "owner": "Zeus/Tech + Rodolfo/Revenue-AdOps",
-      "status": "completed_validated",
+      "status": "superseded_by_deeper_gam_network_diagnosis",
       "requested_by": "Rodolfo Mattei",
       "request_message_id": "1540230925261213707",
       "authorization_message_id": "1540239590022058015",
@@ -7857,7 +8075,348 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "report_infra_readback_evidence": "Discord fetch: message present; author Zeus bot; content empty; no attachments or mentions.",
-      "updated_at": "2026-08-21T02:20:07-04:00"
+      "updated_at": "2026-08-21T02:20:07-04:00",
+      "superseded_by": "cliquet-gam-av-residual-diagnosis-20260821",
+      "superseded_at": "2026-08-21T16:10:16-04:00",
+      "correction": {
+        "source_message_id": "1540451701247709204",
+        "fact": "198073784 is the ActiveView GAM network; absence of a separate ActView loader did not prove Smart Bidding GAM selection.",
+        "replacement_registry_id": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821"
+      }
+    },
+    {
+      "id": "ares-creditoparaveiculo-guardrail-reactivate",
+      "agent": "ares",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
+      "size_bytes": 190,
+      "modified_at": "2026-08-21T14:45:13-04:00",
+      "sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
+      "purpose": "Hourly minute-30 wrapper with internal 00:30 Sao Paulo gate for provenance-bound temporary guardrail reactivation.",
+      "validation": "bash -n PASS; executable 0750; off-gate execution rc=0/stdout empty; cron 5d0974e97ebd enabled/scheduled/no_agent=true/deliver=local.",
+      "cron_id": "5d0974e97ebd",
+      "git_tracked": false,
+      "updated_at": "2026-08-21T14:52:47-04:00"
+    },
+    {
+      "id": "cliquet-gam-av-residual-diagnosis-20260821",
+      "agent": "zeus",
+      "type": "wordpress_jbf_builder_gam_network_diagnosis",
+      "owner": "Zeus/Tech + Rodolfo/Revenue-AdOps",
+      "status": "sb_stack_confirmed_ivt_false_positive_blocks_slots",
+      "requested_by": "Rodolfo Mattei",
+      "thread_id": "1540432459932508160",
+      "correction_message_id": "1540451701247709204",
+      "sites": [
+        "cliquet.com",
+        "finanzas.cliquet.com"
+      ],
+      "production": {
+        "builder_family": "stale country-specific direct builders from 2026-07-15",
+        "gam_network_code": "198073784",
+        "gam_owner": "ActiveView"
+      },
+      "current_generic_builder_canary": {
+        "builder_date": "2026-08-21",
+        "gam_network_code": "21922122164",
+        "gam_owner": "Smart Bidding / JBF",
+        "method": "isolated no-cache browser request interception; no production mutation",
+        "network_selection": "PASS",
+        "slot_fill_compatibility": "NOT YET PROVEN"
+      },
+      "root_cause": "WordPress references stale country-specific JBF builder artifacts whose embedded general.networkCode still selects ActiveView GAM 198073784. Current generic JBF builders select SB GAM 21922122164 but are not referenced in production.",
+      "artifact": {
+        "path": "/root/.hermes/profiles/zeus/artifacts/cliquet-gam-diagnosis-20260821/summary.json",
+        "sha256": "86ab9711be7ce1cd50f68e034800a2fdd4bdec50a500eb857bc973258eecaf02"
+      },
+      "canonical_registry_id": "DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821",
+      "production_changed": false,
+      "next_gate": "Smart Bidding/JBF must correct or whitelist the IVT detector for legitimate residential traffic; then retest slots and gampad under /21922122164/.",
+      "updated_at": "2026-08-21T18:19:22-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540453576571355158",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "checkpoint_id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
+      "checkpoint_state": "active_cutover_pending",
+      "checkpoint_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540454471023329340",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "canary_authorization_message_id": "1540459725035012196",
+      "preflight_blocker": {
+        "site": "finanzas.cliquet.com",
+        "wp2fa": "active; authenticated technical admin redirected to mandatory setup page",
+        "blocked_surfaces": [
+          "JBF Wrapper admin",
+          "Ad Inserter admin/settings",
+          "options.php",
+          "admin-ajax elFinder"
+        ],
+        "rest": "administrator application password works; Ad Inserter settings endpoint HTTP 403",
+        "sftp": "read-only; 3031 text files scanned; builder URL not stored in readable files",
+        "write_access": "no SSH/pem write credential available",
+        "production_changed": false
+      },
+      "preflight_blocker_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540461726892560434",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "standing_wp2fa_authorization": {
+        "message_id": "1540462317236650026",
+        "scope": "Temporarily disable WP 2FA only when required for an already-authorized technical operation; minimal target; mandatory active readback in finally; no credential/enrollment/user/global-policy change."
+      },
+      "canary_execution": {
+        "site": "finanzas.cliquet.com",
+        "authorization_message_id": "1540459725035012196",
+        "source_file": "wp-content/themes/jbf-wp-theme-main/inc/jbf-wrapper/jbf-wrapper.php",
+        "source_behavior": "Builds company_domain_utmSource_country.builder.js automatically.",
+        "before_sha256": "d12042289f95832f5115e429bc8db26917b7cb55d4e22cddff8cd7dddbb98d67",
+        "temporary_sha256": "5e2a53818a3f8d605e4aff23cddd1b2eea34c64617e2dbae1c9a1bf375141cec",
+        "temporary_builder": "digital-trust_cliquetfinanzas.builder.js",
+        "temporary_network": "21922122164 Smart Bidding/JBF",
+        "temporary_html": "HTTP 200, CF DYNAMIC, generic URL 2, legacy URL 0",
+        "temporary_browser": {
+          "desktop": {
+            "network": "21922122164",
+            "slots": 0,
+            "gampad": 0,
+            "traffic_class": "Crawler",
+            "risk_score": 9
+          },
+          "mobile": {
+            "network": "21922122164",
+            "slots": 0,
+            "gampad": 0,
+            "traffic_class": "Crawler",
+            "risk_score": 10
+          }
+        },
+        "gate": "FAILED: zero slots and zero gampad desktop/mobile",
+        "rollback": {
+          "sha256": "d12042289f95832f5115e429bc8db26917b7cb55d4e22cddff8cd7dddbb98d67",
+          "html": "HTTP 200, CF DYNAMIC, generic URL 0, legacy URL 2",
+          "desktop": "GAM AV 198073784, 3 slots",
+          "mobile": "GAM AV 198073784, 2 slots",
+          "wp2fa": "active HTTP 200 readback",
+          "wp_file_manager": "absent HTTP 404 rest_plugin_not_found"
+        },
+        "cache": "No cache plugin is installed; Cloudflare response DYNAMIC with no Age; browser contexts used Network.setCacheDisabled and clearBrowserCache.",
+        "production_final": "Original theme file and ActiveView country-specific builder restored; no production cutover remains."
+      },
+      "artifacts_final": {
+        "final_state": {
+          "path": "/root/.hermes/profiles/zeus/artifacts/cliquet-gam-cutover-20260821/final-state.json",
+          "sha256": "d2d9f6dddb495fac2c100521480d7b6d90c4d6eb31ffaa3d930eb182f8bc0ff3"
+        },
+        "deploy_result": {
+          "path": "/root/.hermes/profiles/zeus/artifacts/cliquet-gam-cutover-20260821/finanzas-cliquet-deploy-result.json",
+          "sha256": "1a31153041cfbb41e65ae15e7b0d76813e8a6095fce17239f4b4d35c1bd3c4b9"
+        },
+        "backup": {
+          "path": "/root/.hermes/secure-backups/cliquet-gam-cutover-20260821/finanzas.cliquet.com/jbf-wrapper.php.before",
+          "sha256": "d12042289f95832f5115e429bc8db26917b7cb55d4e22cddff8cd7dddbb98d67"
+        }
+      },
+      "procedure_update": {
+        "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md",
+        "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md",
+        "sha256": "332e46df6c6e20c50a61bfba1a1a3b7b81e118b8066e3f8ca838a87a017a9a46",
+        "correction_message_id": "1540473864574738432",
+        "summary": "Manual Ad Inserter JBF header uses the canonical minimal per-site pattern: get_the_tags -> window.tags -> GPT async -> publisher generic builder defer. Do not transplant the theme resolver or create a multi-host snippet; require a single active GPT/JBF stack."
+      },
+      "canary_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540470692137672756",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "manual_header_skill_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540474443703394425",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "cloudflare_purge": {
+        "request_message_id": "1540475201777573969",
+        "zone": "cliquet.com",
+        "scope": [
+          "cliquet.com",
+          "finanzas.cliquet.com"
+        ],
+        "http": 200,
+        "success": true,
+        "result_id_prefix": "9217f0f0",
+        "post_headers": "CF-Cache-Status DYNAMIC; Age absent"
+      },
+      "post_manual_validation": {
+        "artifact": "/root/.hermes/profiles/zeus/artifacts/cliquet-gam-cutover-20260821/post-manual-cloudflare-browser.json",
+        "sha256": "4bd426add291b79ce4c4f198545ec3eafabffbd516fae65a4598c66812e5298b",
+        "builders_per_site": 2,
+        "gpt_per_site": 2,
+        "duplicate_stack": true,
+        "cliquet": {
+          "desktop_slots": 5,
+          "mobile_slots": 4,
+          "gampad_network": "198073784 ActiveView"
+        },
+        "cliquetfinanzas": {
+          "desktop_slots": 3,
+          "mobile_slots": 2,
+          "gampad_network": "198073784 ActiveView"
+        },
+        "generic_builder_loaded": true,
+        "legacy_builder_loaded": true,
+        "migration_complete": false
+      },
+      "post_manual_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540476630890192977",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "cloudflare_purge_after_wrapper_disable": {
+        "request_message_id": "1540478214282018936",
+        "zone": "cliquet.com",
+        "scope": [
+          "cliquet.com",
+          "finanzas.cliquet.com"
+        ],
+        "http": 200,
+        "success": true,
+        "result_id_prefix": "9217f0f0",
+        "post_headers": "CF-Cache-Status DYNAMIC; Age absent"
+      },
+      "post_disable_validation": {
+        "artifact": "/root/.hermes/profiles/zeus/artifacts/cliquet-gam-cutover-20260821/post-manual-cloudflare-browser.json",
+        "sha256": "ccd22e4e0c1293bc68022c65260f399acd18457583c674590785c07167614eff",
+        "runs": 4,
+        "stack": {
+          "cliquet.com": "1 GPT + digital-trust_cliquet.builder.js only",
+          "finanzas.cliquet.com": "1 GPT + digital-trust_cliquetfinanzas.builder.js only"
+        },
+        "legacy_builder_requests": 0,
+        "activeview_slots_or_gampad": 0,
+        "wrapper_network": "21922122164 in desktop/mobile both sites",
+        "page_errors": 0,
+        "vps_traffic": "Crawler risk 9/10",
+        "slots": 0,
+        "gampad": 0,
+        "gam_selection_confirmed": true,
+        "ad_printing_fill_proven": false
+      },
+      "post_disable_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540479499014242336",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      },
+      "residential_validation": {
+        "source_message_id": "1540485001504759899",
+        "network": "21922122164",
+        "bot_code": 100,
+        "traffic": "Crawler",
+        "risk": 0,
+        "operation": "facebook_us_cc_all-d",
+        "flow": "facebook_us_cc",
+        "page_type": "rec",
+        "country": "us",
+        "tags": [
+          "BankAmericard",
+          "cc",
+          "credit card",
+          "lang_en",
+          "rec",
+          "us"
+        ],
+        "slots": 0,
+        "classification": "JBF IVT false-positive/decision; builder/GAM/operation/tags correct",
+        "ad_printing_fill_proven": false
+      },
+      "residential_ivt_report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540485494855565455",
+        "delivery": "discord_embed",
+        "content_empty": true,
+        "mentions": [],
+        "attachments": [],
+        "author_id": "1496296175014252634",
+        "readback": "message present; content empty; no attachments; author Zeus"
+      }
+    },
+    {
+      "id": "ares-openzedfinanzas-discord-channel-20260821",
+      "agent": "ares",
+      "type": "discord_channel_route",
+      "owner": "Rodolfo Mattei",
+      "status": "intraday_hoa_route_cutover_validated",
+      "guild_id": "1185714635991679006",
+      "channel_id": "1540489861876678657",
+      "channel_name": "bot-openzedfinanzas-es-cc-es-03",
+      "category_id": "1522474237238050858",
+      "operation": "OpenzedFinanzas-ES-CC-ES-03",
+      "legacy_channel": {
+        "id": "1516887105543077949",
+        "name": "ares-criativos"
+      },
+      "legacy_threads": {
+        "intraday": "1517682975234326729",
+        "hoa": "1518648967360024757"
+      },
+      "target_threads": {
+        "intraday": "1540502156845781103",
+        "hoa": "1540502177376632922"
+      },
+      "activation": {
+        "allowed_channel": true,
+        "free_response": true,
+        "auto_thread_members": []
+      },
+      "validation": "HOA wrapper route channel 1540489861876678657/thread 1540502177376632922; wrapper SHA-256 a09a036ef6b3e0d1b8155f05268a61c358f7ad250566fe46968461381b9c7ddd; Intraday/reactivation cron deliveries read back at channel 1540489861876678657/thread 1540502156845781103; three jobs preserved paused; bash -n PASS; JSON PASS; 10 unit tests PASS; knowledge validate status=ok",
+      "authorized_by": "Rodolfo Mattei via Discord thread 1540502177376632922",
+      "updated_at": "2026-08-21T19:30:22-04:00",
+      "report_infra_message_id": "1540503179484069979",
+      "report_infra_reconciliation_message_id": "1540503560381399071",
+      "discord_confirmation": {
+        "message_id": "1540493586909372417",
+        "post_http": 200,
+        "readback_http": 200,
+        "content_match": true
+      }
     }
   ],
   "profile_skill_references": [
@@ -8305,12 +8864,25 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 21616,
-      "modified_at": "2026-08-20T16:07:28-04:00",
-      "sha256": "c4539641742c30cd1f1f916232b12f462f441e0ff431d1090ad48db9f3ec2fcf",
+      "size_bytes": 31809,
+      "modified_at": "2026-08-22T01:16:36-04:00",
+      "sha256": "db065999bbbc91dd4b0d3d9b43d8e28d0dba133dd503fd61f43e0db174c72b08",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-20T16:08:43-04:00",
-      "validation": "Skill v1.0.22 live/mirror SHA match. Added exact-key validation for standard_enhancements so standard_enhancements_catalog does not cause a false failure; prior draft/object reconciliation and CPV schedules preserved."
+      "updated_at": "2026-08-22T02:17:42-03:00",
+      "validation": "Skill v1.0.40 live/mirror SHA match. CPV cap vigente USD500; pool normal 20%=USD100, normalmente 3 campanhas de USD30, com até 30%=USD150 quando autorizado."
+    },
+    {
+      "profile": "ares",
+      "skill": "direct-traffic-vehicle-finance-operations",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md",
+      "size_bytes": 36819,
+      "modified_at": "2026-08-22T01:16:36-04:00",
+      "sha256": "4d324f7a47e82ec4f18f783401077ba6b7b5f0820630981d43d702daa67f9836",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-08-22T02:17:42-03:00",
+      "validation": "Skill v1.0.24 live/mirror SHA match. CPV cap vigente USD500; pool normal USD100 (3xUSD30) e flexível USD150 (5xUSD30); escala continua limitada a USD150 por campanha e GET/readback."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
@@ -8322,6 +8894,21 @@
       "purpose": "Document persistent SB venv/storage-state paths and post-rebuild validation gates.",
       "validation": "skill_manage patch readback; live cron smoke PASS.",
       "updated_at": "2026-07-11T12:18:07-04:00"
+    },
+    {
+      "id": "zeus-smart-routing-drip-url-slot-order-20260821",
+      "agent": "zeus",
+      "skill": "smartbidding-dashboard-access",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "size_bytes": 9402,
+      "modified_at": "2026-08-21T16:37:12-04:00",
+      "sha256": "297d53d1625fca24d790a683220ff5959a292321bd8d2b5ccfd76843393f956e",
+      "runtime_versioned_sha_match": true,
+      "purpose": "Preservar a sequência canônica de cinco URL + jbf_operation por slot de cada pool e reordenar somente route + utm_content para m0, nm e m1-m28.",
+      "validation": "Lyzmo e Zytiva GB-CC-EN corrigidos com backup e sessão independente: 6 pools e 30 rotas cada; M0/NM nos slots 1/2 do 001; URLs/operations por slot preservadas; zero erros e zero operations vazias.",
+      "updated_at": "2026-08-21T16:37:48-04:00"
     },
     {
       "id": "zeus-wp-quiz-lead-funnel-br-car-reference",
@@ -8564,7 +9151,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
       "size_bytes": 102714,
-      "modified_at": "2026-08-20T22:46:29-04:00"
+      "modified_at": "2026-08-22T01:12:18-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-creditoparaveiculo-reconcile.py",
@@ -8758,8 +9345,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/adapters.py",
-      "size_bytes": 4221,
-      "modified_at": "2026-08-21T01:02:46-04:00"
+      "size_bytes": 5322,
+      "modified_at": "2026-08-22T03:04:48-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/cli.py",
@@ -8768,8 +9355,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
-      "size_bytes": 73412,
-      "modified_at": "2026-08-21T03:02:33-04:00"
+      "size_bytes": 77841,
+      "modified_at": "2026-08-22T13:50:54.725091152-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
@@ -8803,8 +9390,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/schema.py",
-      "size_bytes": 7278,
-      "modified_at": "2026-08-20T23:43:43-04:00"
+      "size_bytes": 8300,
+      "modified_at": "2026-08-21T16:36:38-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/transport.py",
@@ -8983,8 +9570,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 34088,
-      "modified_at": "2026-08-20T20:28:33-04:00"
+      "size_bytes": 34676,
+      "modified_at": "2026-08-21T13:55:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -9008,8 +9595,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-memory-autocompactor.py",
-      "size_bytes": 31142,
-      "modified_at": "2026-08-20T21:09:08-04:00"
+      "size_bytes": 34389,
+      "modified_at": "2026-08-21T12:27:45-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
@@ -9193,8 +9780,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py",
-      "size_bytes": 21572,
-      "modified_at": "2026-08-20T16:00:43-04:00"
+      "size_bytes": 21573,
+      "modified_at": "2026-08-21T13:00:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
@@ -9253,8 +9840,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
-      "size_bytes": 26199,
-      "modified_at": "2026-07-16T15:51:26-04:00"
+      "size_bytes": 27434,
+      "modified_at": "2026-08-21T13:01:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
@@ -11456,6 +12043,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/unsloth/SKILL.md"
       },
       {
+        "name": "ad-wrapper-network-forensics",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/ad-wrapper-network-forensics/SKILL.md"
+      },
+      {
         "name": "chat-funnel-vertical-country",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/SKILL.md"
@@ -11524,6 +12116,11 @@
         "name": "monthly-finance-sheet-fill",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
+      },
+      {
+        "name": "publisher-ad-stack-diagnostics",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/publisher-ad-stack-diagnostics/SKILL.md"
       },
       {
         "name": "rec-p1-wordpress-sheet-audit",
@@ -11743,7 +12340,7 @@
       "platform": "discord",
       "guild_id": "1185714635991679006",
       "channel_id": "1516887105543077949",
-      "channel_name": "ares-aquisicao",
+      "channel_name": "ares-criativos",
       "subject_type": "bot_user",
       "subject_id": "1508864261504630925",
       "subject_name": "Ares",
@@ -11784,7 +12381,7 @@
       "guild_id": "1185714635991679006",
       "category_id": "1522474237238050858",
       "channel_id": "1516887105543077949",
-      "channel_name": "ares-aquisicao",
+      "channel_name": "ares-criativos",
       "agent": "ares",
       "intended_participants": [
         "344196393512075265",
@@ -11808,15 +12405,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 83063,
-      "md5": "547b1dc7d025148b4edd974273bf602e",
-      "modified_at": "2026-08-21T11:29:48-04:00"
+      "size_bytes": 90421,
+      "md5": "02d2dad4be1e6dd0aee13b66693c8e96",
+      "modified_at": "2026-08-22T06:33:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 25343,
-      "md5": "fa15b39b715071b3297ce5480c28252d",
-      "modified_at": "2026-08-21T06:32:01-04:00"
+      "size_bytes": 25594,
+      "md5": "171848ec4670013ad1d137b06bc73c36",
+      "modified_at": "2026-08-22T06:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -11826,15 +12423,15 @@
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
-      "size_bytes": 9920,
-      "md5": "145ce6b2ef88abc064edf6928a4a9b97",
-      "modified_at": "2026-07-17T11:05:56-04:00"
+      "size_bytes": 10368,
+      "md5": "d8dc18aee24e55c9d599f262a8fca266",
+      "modified_at": "2026-08-21T18:47:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "a06d0271014673cda8614a9050a48aa0",
-      "modified_at": "2026-08-21T06:27:16-04:00"
+      "size_bytes": 441,
+      "md5": "522d59f0f1c5ec53b3d2ad6574cfd5f5",
+      "modified_at": "2026-08-22T06:27:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -11851,8 +12448,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 29012,
-      "md5": "7fb650ec2b7831967276b4177fa2c9cc",
-      "modified_at": "2026-08-21T11:27:24-04:00"
+      "md5": "e7fe6d5815f23a9f12ce9af9e6098b53",
+      "modified_at": "2026-08-22T01:01:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -11863,20 +12460,20 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 513,
-      "md5": "92af3e6d5cd40d019e44b6e215d72514",
-      "modified_at": "2026-08-21T06:30:01-04:00"
+      "md5": "85ff6d360dcdfd5b1496f625ea7f074c",
+      "modified_at": "2026-08-22T06:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 10853,
-      "md5": "cb8acf9aa510c5eb0d5771940c267e3c",
-      "modified_at": "2026-08-20T09:16:02-04:00"
+      "size_bytes": 11623,
+      "md5": "46ca811839c3b051ac2ca0a8b6e3291a",
+      "modified_at": "2026-08-21T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "dfb6ed9511be26f6f640dc0cf9951456",
-      "modified_at": "2026-08-21T06:19:01-04:00"
+      "md5": "a831466f424f7f2bbe523cf48ab4536d",
+      "modified_at": "2026-08-22T06:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -11892,9 +12489,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 426180,
-      "md5": "323bcb414704957d40d59dac8e6222a8",
-      "modified_at": "2026-08-20T15:48:19-04:00"
+      "size_bytes": 428361,
+      "md5": "bc9f8f3e54472f3b108a57c2d5342d04",
+      "modified_at": "2026-08-21T15:46:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -11904,39 +12501,39 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-context-cost-audit-state.json",
-      "size_bytes": 12636,
-      "md5": "6f3c73c2738cc70add47c984a84b3eac",
-      "modified_at": "2026-08-21T04:47:08-04:00"
+      "size_bytes": 12586,
+      "md5": "757231bf21528165c9a29ff86df9bb21",
+      "modified_at": "2026-08-22T04:47:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
-      "size_bytes": 6216,
-      "md5": "6e37ff2f162e53f8e475f4b556f83b06",
-      "modified_at": "2026-08-21T06:26:22-04:00"
+      "size_bytes": 7092,
+      "md5": "f5d4ac748f5103546a8bad2612c79ba2",
+      "modified_at": "2026-08-22T06:24:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "50664c2048379e8f49dcdcbbe9809984",
-      "modified_at": "2026-08-21T00:46:38-04:00"
+      "md5": "8e92603becbd9d5a8bc3793a92136109",
+      "modified_at": "2026-08-22T00:50:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 45474,
-      "md5": "f2ebf708854a48c27bdf1d9e4f083bed",
-      "modified_at": "2026-08-21T06:30:02-04:00"
+      "size_bytes": 45924,
+      "md5": "ca9eb1eb1d841ff36b5c2ef9492435fe",
+      "modified_at": "2026-08-22T06:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 42453,
-      "md5": "26fce8ecdf461ce92d36c734956efc00",
-      "modified_at": "2026-08-21T06:33:02-04:00"
+      "size_bytes": 43539,
+      "md5": "2a5dbe426fd53c36b3f130bfb744e839",
+      "modified_at": "2026-08-22T06:33:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 431,
-      "md5": "bf4f120f513ed244b71908330fd138bb",
-      "modified_at": "2026-08-21T06:33:01-04:00"
+      "size_bytes": 432,
+      "md5": "d91ab6439faf616fb09d2cd4d60bb4e3",
+      "modified_at": "2026-08-22T06:33:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -11952,15 +12549,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 364,
-      "md5": "8761bf00c7b73bd115db7d9e2a5b97b5",
-      "modified_at": "2026-08-20T20:37:03-04:00"
+      "size_bytes": 365,
+      "md5": "9f3dd79346453347ba78036a5ab0cffb",
+      "modified_at": "2026-08-21T20:37:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 440,
-      "md5": "e2649d1502f20cde62a41ad51ce39f49",
-      "modified_at": "2026-08-20T22:54:26-04:00"
+      "md5": "a3448bd4284edb8724811e437a4248d8",
+      "modified_at": "2026-08-21T22:54:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
@@ -11970,21 +12567,21 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 529644,
-      "md5": "8da6bad3a2150bf9b504ea4e10823377",
-      "modified_at": "2026-08-21T05:00:12-04:00"
+      "size_bytes": 558386,
+      "md5": "79cc9a90d96659d24747d87499d60c3c",
+      "modified_at": "2026-08-22T05:00:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 33106,
-      "md5": "a8a24bc682603500d6d7b530a5839d09",
-      "modified_at": "2026-08-21T02:17:53-04:00"
+      "size_bytes": 50020,
+      "md5": "1c223786ead9b0185c051658bc5b6e1d",
+      "modified_at": "2026-08-22T03:13:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
-      "size_bytes": 3403,
-      "md5": "61ad7041797ea35ae00511c01650740f",
-      "modified_at": "2026-07-17T11:17:51-04:00"
+      "size_bytes": 3457,
+      "md5": "e779d1ace1442670e3d11968cbb94597",
+      "modified_at": "2026-08-21T16:10:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -12000,15 +12597,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 6156,
-      "md5": "a3a7ae8c4fe84a6f6dd81c573878b6b8",
-      "modified_at": "2026-08-18T11:51:12-04:00"
+      "size_bytes": 7690,
+      "md5": "77a04eabb15f002760d8f713b71f1e85",
+      "modified_at": "2026-08-21T11:11:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 355,
-      "md5": "417e13e645d89ac503cd165c186b48a2",
-      "modified_at": "2026-08-17T09:30:52-04:00"
+      "size_bytes": 363,
+      "md5": "70ee406ec4a2fc283614c222721760e0",
+      "modified_at": "2026-08-21T09:31:26-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
@@ -12024,9 +12621,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 84415,
-      "md5": "9df96cbbabdd7a38b22db7406b30feca",
-      "modified_at": "2026-08-21T09:37:44-04:00"
+      "size_bytes": 87972,
+      "md5": "4a5b14e6f609ad7e661c7edf5d7efe46",
+      "modified_at": "2026-08-22T00:58:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -12043,8 +12640,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7098,
-      "md5": "30299faf4ca5db29afa61f6c4b82caa4",
-      "modified_at": "2026-08-21T06:23:54-04:00"
+      "md5": "25af52e5f9105ad7e63e15a0151a6dc6",
+      "modified_at": "2026-08-22T06:24:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -12054,9 +12651,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1083,
-      "md5": "f961117fdb597f48c68dd7f60488ee7c",
-      "modified_at": "2026-08-21T05:39:01-04:00"
+      "size_bytes": 1082,
+      "md5": "ee222cd35a94e3dacd1a8920e460a552",
+      "modified_at": "2026-08-22T05:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -12068,7 +12665,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-08-21T06:22:03-04:00"
+      "modified_at": "2026-08-22T06:22:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -12090,15 +12687,15 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 260801,
-      "md5": "d5d5cff50f5b026a8d8f51e90a34005c",
-      "modified_at": "2026-08-20T23:10:02-04:00"
+      "size_bytes": 273314,
+      "md5": "a1d4a1aa8eb3c89c96b0c8385d7ebcef",
+      "modified_at": "2026-08-21T23:10:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
-      "size_bytes": 950,
-      "md5": "4beb3d682a77ee45757058309c0cded7",
-      "modified_at": "2026-08-20T08:17:13-04:00"
+      "size_bytes": 975,
+      "md5": "f4c309c873b85779e983517eca6c89a3",
+      "modified_at": "2026-08-21T08:17:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -12108,9 +12705,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 198083,
-      "md5": "c08ea9c2cfd658636b26099227615b21",
-      "modified_at": "2026-08-21T06:29:17-04:00"
+      "size_bytes": 203288,
+      "md5": "349b020dbe081fa991edbf5cffe80b81",
+      "modified_at": "2026-08-22T06:29:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -12120,15 +12717,15 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-state.json",
-      "size_bytes": 28575,
-      "md5": "9b28fcb187eee322da3352ff0159fed2",
-      "modified_at": "2026-08-19T10:30:22-04:00"
+      "size_bytes": 30350,
+      "md5": "b642e9091efa8a432fcff04396dee8c0",
+      "modified_at": "2026-08-21T09:15:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-generated-candidates.json",
-      "size_bytes": 13067,
-      "md5": "29f3f112c7b9ccb788a014c73dde98de",
-      "modified_at": "2026-08-21T06:32:10-04:00"
+      "size_bytes": 13365,
+      "md5": "1d87a98d78043eac070cfcd937a675db",
+      "modified_at": "2026-08-22T06:32:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -12169,8 +12766,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
-      "md5": "e5ee018eff795b7c9b362c98a8e239e9",
-      "modified_at": "2026-08-21T06:31:01-04:00"
+      "md5": "2d6f8f544696be43015e88f618797883",
+      "modified_at": "2026-08-22T06:31:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -12180,9 +12777,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17448,
-      "md5": "e0d2505f3538770dbccb25a5996e6bfe",
-      "modified_at": "2026-08-21T01:24:03-04:00"
+      "size_bytes": 17325,
+      "md5": "c223078829a687c36d473deca443be89",
+      "modified_at": "2026-08-22T01:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -12198,9 +12795,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 15197887,
-      "md5": "22478bdfb12d1b9f07a2d72fb1c41818",
-      "modified_at": "2026-08-20T17:00:21-04:00"
+      "size_bytes": 15302246,
+      "md5": "2cd89cb9d28fd2a65d3cf82c815d0aa2",
+      "modified_at": "2026-08-21T12:45:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -12210,15 +12807,15 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2114,
-      "md5": "4343fa9b41ce0a91cd35d236aaf24e2c",
-      "modified_at": "2026-08-21T06:30:02-04:00"
+      "size_bytes": 2115,
+      "md5": "f890dc3099c8afd3f75f5ab8b6a0121e",
+      "modified_at": "2026-08-22T06:30:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "6944e629b3343397e1ca9e625a758a70",
-      "modified_at": "2026-08-20T20:07:02-04:00"
+      "md5": "6ebcb7692cb5b1f9d2459a6845d65471",
+      "modified_at": "2026-08-21T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -12229,8 +12826,8 @@
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
       "size_bytes": 33172,
-      "md5": "7c11cd5559c3fa56e26f48ab5846b888",
-      "modified_at": "2026-08-20T10:23:08-04:00"
+      "md5": "fffd7f5797f0620ebc7e2d8ea2d08b06",
+      "modified_at": "2026-08-21T10:23:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

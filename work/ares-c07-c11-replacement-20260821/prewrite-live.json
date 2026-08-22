@@ -1,0 +1,114 @@
+{
+  "checked_at_utc": "2026-08-21T17:59:47.262722+00:00",
+  "graph_http": 200,
+  "account": {
+    "id": "act_1046241194533786",
+    "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "currency": "USD",
+    "timezone_name": "America/Sao_Paulo",
+    "account_status": 1,
+    "disable_reason": 0
+  },
+  "campaigns": {
+    "c07": {
+      "id": "120250209327510632",
+      "name": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "updated_time": "2026-08-20T16:12:25-0300",
+      "start_time": "2026-07-25T00:00:00-0300",
+      "daily_budget": "3000",
+      "bid_strategy": "COST_CAP"
+    },
+    "c11": {
+      "id": "120250210269480632",
+      "name": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "updated_time": "2026-08-20T16:13:28-0300",
+      "start_time": "2026-07-25T00:00:00-0300",
+      "daily_budget": "3000",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "c09": {
+      "id": "120250209406580632",
+      "name": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe - MAXVOL",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "updated_time": "2026-08-20T16:12:29-0300",
+      "start_time": "2026-07-25T00:00:00-0300",
+      "daily_budget": "3300",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "c08": {
+      "id": "120250209380780632",
+      "name": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe - MAXVOL",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "updated_time": "2026-08-21T08:00:41-0300",
+      "start_time": "2026-07-25T00:00:00-0300",
+      "daily_budget": "3900",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "c12": {
+      "id": "120250860233210632",
+      "name": "12 - 22-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL",
+      "status": "PAUSED",
+      "configured_status": "PAUSED",
+      "effective_status": "PAUSED",
+      "updated_time": "2026-08-21T12:20:33-0300",
+      "start_time": "2026-08-20T23:25:41-0300",
+      "daily_budget": "3000",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "c13": {
+      "id": "120250860295890632",
+      "name": "13 - 22-08 - Garagem Brasil - (b01fb13c13) event_Subscribe - MAXVOL",
+      "status": "PAUSED",
+      "configured_status": "PAUSED",
+      "effective_status": "PAUSED",
+      "updated_time": "2026-08-21T12:20:35-0300",
+      "start_time": "2026-08-20T23:32:58-0300",
+      "daily_budget": "3000",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    }
+  },
+  "budget_minor": {
+    "live_configured_active": 16200,
+    "old_c07_c11": 6000,
+    "replacement": 6000,
+    "projected_after_replacement": 16200,
+    "projected_with_c12_c13_activation": 22200,
+    "projected_with_c14_c15_if_daily_cycle_executes": 28200,
+    "cap": 30000
+  },
+  "start_times": [
+    "2026-08-22T00:30:00-03:00",
+    "2026-08-22T00:30:00-03:00"
+  ],
+  "media_ready": 6,
+  "usage": {
+    "business": {
+      "entry_count": 0,
+      "entries": [],
+      "max_usage_pct": 0.0,
+      "limiting_metric": null,
+      "estimated_time_to_regain_access_minutes": 0.0
+    },
+    "ad_account": {
+      "present": false,
+      "acc_id_util_pct": 0.0,
+      "reset_time_duration_seconds": 0,
+      "ads_api_access_tier": null
+    }
+  },
+  "token_report": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "field": "credential (cache 785s)",
+    "len": 196
+  }
+}

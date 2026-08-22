@@ -1,0 +1,129 @@
+{
+  "request_id": "cpv-c07-c11-maxvol-replacement-20260821-recovery",
+  "stage": "child_recovery_created_pending_readback",
+  "started_at_utc": "2026-08-21T18:08:19.513907+00:00",
+  "targets": [
+    {
+      "campaign_number": "07",
+      "ad_number": 1,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_019"
+    },
+    {
+      "campaign_number": "07",
+      "ad_number": 2,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_020"
+    },
+    {
+      "campaign_number": "07",
+      "ad_number": 3,
+      "campaign_id": "120250872826560632",
+      "adset_id": "120250872827440632",
+      "ad_name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_021"
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 1,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_022"
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 2,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_023"
+    },
+    {
+      "campaign_number": "11",
+      "ad_number": 3,
+      "campaign_id": "120250872826570632",
+      "adset_id": "120250872827380632",
+      "ad_name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_024"
+    }
+  ],
+  "token_report": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "field": "credential (cache 476s)",
+    "len": 196
+  },
+  "results": [
+    {
+      "name": "recovery_creative_07_1",
+      "code": 200,
+      "id": "28424746277138593",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_07_1",
+      "code": 200,
+      "id": "120250872908040632",
+      "success": null
+    },
+    {
+      "name": "recovery_creative_07_2",
+      "code": 200,
+      "id": "2909390809459790",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_07_2",
+      "code": 200,
+      "id": "120250872908480632",
+      "success": null
+    },
+    {
+      "name": "recovery_creative_07_3",
+      "code": 200,
+      "id": "1061585886354649",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_07_3",
+      "code": 200,
+      "id": "120250872908660632",
+      "success": null
+    },
+    {
+      "name": "recovery_creative_11_1",
+      "code": 200,
+      "id": "2057120931636470",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_11_1",
+      "code": 200,
+      "id": "120250872908080632",
+      "success": null
+    },
+    {
+      "name": "recovery_creative_11_2",
+      "code": 200,
+      "id": "1076771781965879",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_11_2",
+      "code": 200,
+      "id": "120250872908060632",
+      "success": null
+    },
+    {
+      "name": "recovery_creative_11_3",
+      "code": 200,
+      "id": "1058653260471428",
+      "success": null
+    },
+    {
+      "name": "recovery_ad_11_3",
+      "code": 200,
+      "id": "120250872910800632",
+      "success": null
+    }
+  ],
+  "outer_headers": {}
+}

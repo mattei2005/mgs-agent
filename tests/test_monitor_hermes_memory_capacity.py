@@ -46,7 +46,7 @@ class MonitorHermesMemoryCapacityTests(unittest.TestCase):
             "profiles_root": self.profiles,
             "state_file": self.state,
             "threshold_percent": 90.0,
-            "target_percent": 85.0,
+            "target_percent": 89.0,
             "channel_id": "1527401973698007060",
             "profile_filter": (),
             "dry_run": False,
@@ -117,7 +117,7 @@ class MonitorHermesMemoryCapacityTests(unittest.TestCase):
             poster=lambda payload: posts.append(payload) or "123", now=self.now,
         )
 
-        self.assertEqual(calls, [("zeus", "user", 85.0)])
+        self.assertEqual(calls, [("zeus", "user", 89.0)])
         self.assertEqual(len(posts), 1)
         self.assertNotIn("content", posts[0])
         embed = posts[0]["embeds"][0]
@@ -182,6 +182,10 @@ class MonitorHermesMemoryCapacityTests(unittest.TestCase):
         self.assertEqual(second["delivery_failures"], 0)
         self.assertEqual(json.loads(self.state.read_text())["outbox"], [])
         self.assertEqual(len(post_attempts), 2)
+
+    def test_default_compactor_timeout_covers_verified_per_entry_runs(self):
+        args = monitor._parser().parse_args([])
+        self.assertEqual(args.compactor_timeout, 1200)
 
     def test_dry_run_never_compacts_posts_or_writes_state(self):
         profile = self.make_profile(user_text="d" * 95)

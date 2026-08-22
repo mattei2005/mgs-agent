@@ -299,7 +299,11 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         asset_id = f'asset-{i}'
         checksum = f'sum-{i}'
         registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True)
-        assets.append({'asset_id': asset_id, 'checksum': checksum})
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_TEST_PV_{i + 1:03d}.mp4',
+        })
     templates = [
         {
             'source_ad_id': f'source-ad-{i}',
@@ -320,7 +324,7 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         registry=registry,
         asset_refs=assets,
         campaign_numbers=[14, 15],
-        operational_date='2026-08-21',
+        operational_date='2099-08-21',
         request_id='cpv-20260821',
         creative_templates=templates,
         status='ACTIVE',
@@ -340,6 +344,41 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         {'video_id': 'v0', 'adlabels': [{'id': 'v-label-0', 'name': 'vertical-0'}]},
         {'video_id': 's0', 'adlabels': [{'id': 's-label-0', 'name': 'square-0'}]},
     ]
+    assert [ad.name for ad in built.campaigns[0].ads] == [
+        'AD 01 - CAR_BR_BR_VID_TEST_PV_001',
+        'AD 02 - CAR_BR_BR_VID_TEST_PV_002',
+        'AD 03 - CAR_BR_BR_VID_TEST_PV_003',
+    ]
+    assert built.campaigns[0].ads[0].creative_payload['name'] == 'CPV C14 AD01 CAR_BR_BR_VID_TEST_PV_001'
+    assert all('asset-' not in ad.name for campaign in built.campaigns for ad in campaign.ads)
+
+
+def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    assets = []
+    for i in range(3):
+        asset_id = f'asset-{i}'
+        checksum = f'sum-{i}'
+        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True)
+        assets.append({'asset_id': asset_id, 'checksum': checksum, 'canonical_filename': f'CAR_BR_BR_VID_TEST_PV_{i + 1:03d}.mp4'})
+    assets[0].pop('canonical_filename')
+    with pytest.raises(ValueError, match='requires canonical_filename'):
+        build_cpv_manifest(
+            registry=registry,
+            asset_refs=assets,
+            campaign_numbers=[14],
+            operational_date='2099-08-21',
+            request_id='cpv-invalid-missing-name',
+        )
+    assets[0]['canonical_filename'] = 'asset_technical_id.mp4'
+    with pytest.raises(ValueError, match='canonical_filename is invalid'):
+        build_cpv_manifest(
+            registry=registry,
+            asset_refs=assets,
+            campaign_numbers=[14],
+            operational_date='2099-08-21',
+            request_id='cpv-invalid-technical-name',
+        )
 
 
 def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tmp_path):
@@ -349,10 +388,14 @@ def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tm
         asset_id = f'five-asset-{i}'
         checksum = f'five-sum-{i}'
         registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'five-v{i}', square_video_id=f'five-s{i}', ready=True)
-        assets.append({'asset_id': asset_id, 'checksum': checksum})
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_FIVE_PV_{i + 1:03d}.mp4',
+        })
     payload = build_cpv_manifest(
         registry=registry, asset_refs=assets, campaign_numbers=[14, 15, 16, 17, 18],
-        operational_date='2026-08-21', request_id='cpv-five', status='ACTIVE',
+        operational_date='2099-08-21', request_id='cpv-five', status='ACTIVE',
     )
     built = Manifest.from_dict(payload)
     assert len(built.campaigns) == 5

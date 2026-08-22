@@ -116,6 +116,30 @@ class PendingMonitorTests(unittest.TestCase):
     def test_default_alert_channel_is_limites_90(self):
         args = monitor._parser().parse_args([])
         self.assertEqual(args.channel_id, "1527401973698007060")
+        self.assertFalse(args.capacity_alerts)
+
+    def test_default_owner_suppresses_duplicate_capacity_alert_and_stale_state(self):
+        self.memory_store("zeus", "USER.md", 900, user_limit=1000)
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        state = {
+            "aged_ids": [],
+            "capacity_warning_ids": ["zeus.user"],
+            "dead_letter_ids": [],
+            "last_alert_at": self.now - 3600,
+        }
+        decision_summary, decision_state = monitor.capacity_owned_by_autocompactor(
+            summary, state
+        )
+        decision = monitor.decide(
+            decision_summary,
+            decision_state,
+            now_epoch=self.now,
+            reminder_hours=24,
+        )
+        self.assertEqual(summary["capacity"]["warning_ids"], ["zeus.user"])
+        self.assertEqual(decision_summary["capacity"]["warning_ids"], [])
+        self.assertEqual(decision_state["capacity_warning_ids"], [])
+        self.assertEqual(decision, {"action": "none", "reason": "healthy"})
 
     def test_capacity_exactly_90_percent_warns_by_default_without_content(self):
         self.memory_store("zeus", "MEMORY.md", 900, memory_limit=1000)

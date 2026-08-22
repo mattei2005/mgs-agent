@@ -42,6 +42,14 @@ Divisão confirmada:
 - `005`: `m19–m23`
 - `006`: `m24–m28`
 
+### Invariante de ordem e URLs por slot
+
+Ao criar, dividir, revisar ou redistribuir pools Drip de cinco rotas, preservar simultaneamente a ordem semântica `m0`, `nm`, `m1`–`m28` e a sequência canônica de cinco destinos por **slot do pool**. Em cada pool, os slots `1–5` devem manter, na mesma ordem, seus pares `URL + jbf_operation` do baseline live; a correção redistribui somente as identidades `route + utm_content` para os grupos semânticos corretos.
+
+`m0` e `nm` são invariantes prioritárias: devem permanecer, respectivamente, nos slots 1 e 2 do pool `001`, mantendo as URLs/operations desses dois slots. Não carregar para a nova posição a URL que uma rota M possuía enquanto estava embaralhada em outro pool, pois isso destruiria a ordem canônica dos cinco destinos.
+
+Antes do write, comparar `pool → slot → URL + jbf_operation` e validar a cobertura única `m0`, `nm`, `m1`–`m28`; depois do write, exigir readback da mesma sequência de destinos por slot e dos grupos `001–006`. Abortar/rollback se qualquer URL/operation mudar de slot, se M0/NM mudarem de destino ou se houver perda/duplicação de identidade.
+
 Na planilha, usar a coluna de URL calculada por `REGEXREPLACE(...;"/$";"")`, não a URL com barra final.
 
 ## Padrão Infinitynexx — Broadcast MCT MX-CC-ES

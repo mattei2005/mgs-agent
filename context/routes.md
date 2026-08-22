@@ -172,7 +172,7 @@ Ferramenta atual de SMS: `SMS Funnel` (`app2.smsfunnel.com.br`).
 
 Ajustar blocos/preço AdOps e aprovar site em rede fazem parte da camada AdX/Ad Manager dos parceiros Google: Smart Bidding e ActiveView.
 
-A dashboard da Smart Bidding é a principal para gerenciamento por ser mais completa. ActiveView permanece como exceção para `openzed` e seus subdomínios enquanto esses sites ainda estiverem na tecnologia/rede AV. Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
+A dashboard da Smart Bidding é a principal para gerenciamento por ser mais completa. ActiveView permanece como exceção intencional para `openzed` e seus subdomínios enquanto esses sites ainda estiverem na tecnologia/rede AV. Wavesbee e finanzas.wavesbee usam JBF/GAM SB. Cliquet e finanzas.cliquet carregam wrapper JBF, mas os builders de produção ainda usam o GAM AV `198073784`; rotear como migração SB incompleta até o cutover para os builders genéricos atuais e a validação dos slots no GAM SB `21922122164`.
 
 Fluxo resumido para site novo:
 

@@ -55,6 +55,7 @@ STATE_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.json"
 LOCK_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.lock"
 AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit/daily"
 WORK_ROOT = PROFILE / "work/creditoparaveiculo-v3-daily"
+FIRST_DELIVERY_GUARDRAIL_SCRIPT = PROFILE / "scripts/creditoparaveiculo-first-delivery-guardrail.py"
 PHASE_ORDER = ["meta_preflight", "drive_preflight", "reconciliation", "asset_selection", "prestage", "manifest_prevalidation", "engine", "postprocess"]
 _CALL_COUNTER: ContextVar[dict[str, int] | None] = ContextVar("cpv_v3_daily_call_counter", default=None)
 
@@ -936,7 +937,14 @@ def assignments_from_readback(manifest: Manifest, campaign_ids: list[str], readb
     return assignments
 
 
-def update_operation_after_creation(path: Path, manifest: Manifest, campaign_ids: list[str], operational_date: date) -> None:
+def update_operation_after_creation(
+    path: Path,
+    manifest: Manifest,
+    campaign_ids: list[str],
+    operational_date: date,
+    *,
+    complete_request: bool = True,
+) -> None:
     operation = load_json(path)
     scope = ((operation.get("management_scope") or {}).get("autonomous_action_scope") or {})
     allowed = scope.setdefault("allowed_campaigns", {})
@@ -949,13 +957,64 @@ def update_operation_after_creation(path: Path, manifest: Manifest, campaign_ids
     numbers = [parse_campaign_number(campaign.name) for campaign in manifest.campaigns]
     numbering["next_required_campaign_number"] = max(number for number in numbers if number is not None) + 1
     override = (operation.get("daily_new_campaign_routine") or {}).get(f"one_time_override_{operational_date:%Y%m%d}")
-    if isinstance(override, dict):
+    if complete_request and isinstance(override, dict):
         override["status"] = "completed_validated"
         override["completed_at_utc"] = utc_now()
     atomic_json(path, operation, sort_keys=False)
     readback = load_json(path)
     if int((readback.get("campaign_numbering_policy") or {}).get("next_required_campaign_number") or 0) != numbering["next_required_campaign_number"]:
         raise DailyBlocked("operation_update", "operation config readback failed")
+
+
+def auto_arm_first_delivery_campaigns(
+    campaign_ids: list[str],
+    operational_start_date: date,
+    request_id: str,
+    *,
+    script: Path = FIRST_DELIVERY_GUARDRAIL_SCRIPT,
+) -> dict[str, Any]:
+    """Register newly validated campaigns in the one-shot first-delivery watcher."""
+    command = [
+        "python3",
+        str(script),
+        "--auto-arm",
+        "--operational-date",
+        operational_start_date.isoformat(),
+        "--request-id",
+        request_id,
+    ]
+    for campaign_id in campaign_ids:
+        command.extend(["--campaign-id", str(campaign_id)])
+    proc = subprocess.run(
+        command,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=120,
+        check=False,
+    )
+    if proc.returncode != 0:
+        raise DailyBlocked(
+            "first_delivery_guardrail",
+            "new campaigns could not be enrolled in the first-delivery watcher",
+            {"campaign_ids": list(campaign_ids), "safe_error": proc.stderr.strip()[-700:]},
+        )
+    try:
+        payload = json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:
+        raise DailyBlocked("first_delivery_guardrail", "first-delivery watcher returned invalid JSON") from exc
+    if (
+        payload.get("status") != "AUTO_ARMED"
+        or set(str(item) for item in payload.get("campaign_ids") or []) != set(str(item) for item in campaign_ids)
+        or int(payload.get("armed_count") or 0) != len(campaign_ids)
+        or int(payload.get("meta_writes") or 0) != 0
+    ):
+        raise DailyBlocked(
+            "first_delivery_guardrail",
+            "first-delivery watcher enrollment readback mismatch",
+            {"campaign_ids": list(campaign_ids), "result": payload},
+        )
+    return payload
 
 
 def run_daily(
@@ -1096,7 +1155,16 @@ def run_daily(
                 detail={"assets": len(selected), "breakdown_ms": getattr(backend, "prestage_breakdown_ms", {})},
             )
             phase_started, phase_calls = phase_begin(call_counter)
-            assets_payload = {"assets": [{"asset_id": str(row["asset_id"]), "checksum": str(row["clean_checksum"])} for row in selected]}
+            assets_payload = {
+                "assets": [
+                    {
+                        "asset_id": str(row["asset_id"]),
+                        "checksum": str(row["clean_checksum"]),
+                        "canonical_filename": str(row["canonical_filename"]),
+                    }
+                    for row in selected
+                ]
+            }
             manifest_dir = paths.work_root / request_id / "manifest"
             manifest_dir.mkdir(parents=True, exist_ok=True)
             draft_path = manifest_dir / "draft.json"
@@ -1164,12 +1232,46 @@ def run_daily(
                     drive_row = drive_rows[str(inventory_row["asset_drive_id"])]
                     moves[str(inventory_row["asset_drive_id"])] = backend.move_asset(drive_row)
                 update_inventory_assignments(paths.inventory, inventory_rows, assignments, moves, audit_path)
+                update_operation_after_creation(
+                    paths.operation,
+                    manifest_subset,
+                    pending_order,
+                    operational_date,
+                    complete_request=False,
+                )
+                state.update(
+                    status="FIRST_DELIVERY_ARM_IN_FLIGHT",
+                    campaign_ids=campaign_ids,
+                    first_delivery_pending_ids=pending_order,
+                    updated_at_utc=utc_now(),
+                )
+                atomic_json(paths.state, state)
+                first_delivery = auto_arm_first_delivery_campaigns(
+                    pending_order,
+                    operational_date + timedelta(days=1),
+                    request_id,
+                )
+                armed_ids = set(str(item) for item in state.get("first_delivery_armed_campaign_ids") or [])
+                armed_ids.update(pending_order)
+                state["first_delivery_armed_campaign_ids"] = sorted(armed_ids)
+                state.pop("first_delivery_pending_ids", None)
+                audit.setdefault("first_delivery_guardrail", []).append(first_delivery)
                 processed_ids.update(pending_ids)
                 state["postprocessed_campaign_ids"] = sorted(processed_ids)
+                state["status"] = "POSTPROCESSED"
+                state["updated_at_utc"] = utc_now()
+                atomic_json(paths.state, state)
                 audit.setdefault("assignments", []).extend(assignments)
                 audit.setdefault("drive_moves", {}).update(moves)
                 audit["side_effects"]["drive_move"] = bool(moves)
-                phase_end(audit, "postprocess", phase_started, phase_calls, call_counter, detail={"campaigns": len(pending_ids), "assets": len(assignments)})
+                phase_end(
+                    audit,
+                    "postprocess",
+                    phase_started,
+                    phase_calls,
+                    call_counter,
+                    detail={"campaigns": len(pending_ids), "assets": len(assignments), "first_delivery_armed": len(pending_order)},
+                )
                 atomic_json(audit_path, audit)
             if result.get("status") == "PARTIAL_DEFERRED_QUOTA":
                 retry_after = int(time.time()) + max(60, int(result.get("retry_after_seconds") or 300))
@@ -1182,7 +1284,7 @@ def run_daily(
                 return {"status": "PARTIAL_DEFERRED_QUOTA", "campaign_ids": campaign_ids, "retry_after_epoch": retry_after, "audit": str(audit_path)}
             if len(campaign_ids) != count or len(processed_ids) != count:
                 raise DailyBlocked("completion", "engine completed without the full validated campaign set", {"campaign_ids": campaign_ids, "processed": sorted(processed_ids), "count": count})
-            update_operation_after_creation(paths.operation, manifest, campaign_ids, operational_date)
+            update_operation_after_creation(paths.operation, manifest, campaign_ids, operational_date, complete_request=True)
             inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
             drive_after = backend.drive_preflight()["drive"]
             stock = stock_counts(inventory_rows, drive_after)
@@ -1254,7 +1356,11 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
                 ready=True,
                 source="offline-smoke",
             )
-            assets.append({"asset_id": asset_id, "checksum": checksum})
+            assets.append({
+                "asset_id": asset_id,
+                "checksum": checksum,
+                "canonical_filename": f"CAR_BR_BR_VID_OFFLINE_PV_{index + 1:03d}.mp4",
+            })
         operational_date = datetime.now(SP).date().isoformat()
         draft = build_cpv_manifest(
             registry=registry,

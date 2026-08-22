@@ -1,5 +1,6 @@
 {
   "engine_version": 3,
+  "release_version": "3.0.11",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -21,6 +22,7 @@
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
   "media_policy": "prestage_before_campaign_manifest",
+  "ad_naming_policy": "CPV clone_prestaged requires canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
   "appsecret_proof": {
     "required": false,
     "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"

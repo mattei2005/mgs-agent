@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.17
+version: 1.0.26
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -69,14 +69,29 @@ No final do relatório da conta/G006, exibir:
 Spend Meta
 Receita Aquisição SB (NET_REVENUE)
 Receita SMS G006 (NET_REVENUE)
+SMS enviados G006 (SMS Funnel, recorte de data)
+Custo SMS G006 em USD = custo BRL ÷ PTAX venda BCB
 Receita Total = Aquisição + SMS
 ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
-ROI Total com SMS = (Receita Aquisição + Receita SMS − Spend) / Spend × 100
+ROI Total com SMS — antes do custo SMS
+ROI Total após custo SMS em USD
 ```
 
-Custo real informado por Rodolfo: `R$ 0,08 × SMS efetivamente enviados`. A quantidade enviada deve vir do SMS Funnel/vendor (`total_sms_sent`); não usar quantidade de leads nem repetir o custo por campanha sem atribuição. O card WordPress `linhas × R$ 0,08` continua sendo apenas estimativa e deve permanecer separado.
+O custo SMS é do bucket do gestor G006 e não deve ser repetido em cada campanha Meta.
 
-Como a conta Meta/SB é USD, converter o custo real BRL→USD com taxa, data e fonte registradas antes do fechamento:
+Custo real informado por Rodolfo: `R$ 0,08 × SMS efetivamente enviados`. Para Creditoparaveiculo/G006, a quantidade não vem do total global nem do número de leads:
+
+1. Resolver internamente o item 1Password `SMS Funnel Dashboard` e autenticar somente em modo read-only.
+2. Listar as campanhas do SMS Funnel filtrando o gestor exato `G006`.
+3. Aceitar exclusivamente as linhagens `AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006` e `AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006`.
+4. Abrir o drill-down `funnel-performance/{campaignId}/sequences` de cada linhagem.
+5. Para um dia, enviar a mesma data em `start_date` e `end_date`; esse drill-down usa intervalo inclusivo.
+6. Somar `sms_sent` e `cost`, separar quiz/chat e validar `sms_sent × R$ 0,08 = cost` com tolerância máxima de R$ 0,02.
+7. O consolidado global apresentou `end_date` exclusivo no readback vivo; usar `dia+1` somente para auditoria global e nunca para atribuir custo ao G006.
+
+Readback fechado de 20/08/2026: `430 SMS G006 = 430 quiz + 0 chat`, custo `R$ 34,40`. O total global de 5.176 envios permaneceu fora da atribuição do gestor. O card WordPress `linhas × R$ 0,08` continua sendo apenas estimativa e deve permanecer separado.
+
+Como a conta Meta/SB é USD, o relatório visível converte o custo SMS para USD pela `cotacaoVenda` da PTAX oficial do Banco Central do Brasil na data-alvo. Em fim de semana/feriado, usar a taxa oficial mais recente disponível em até 7 dias anteriores e exibir `rate_date` e fonte. Preservar no audit o custo-base em BRL, a taxa e o cálculo. Fórmula:
 
 ```text
 Custo SMS BRL = SMS enviados × R$ 0,08
@@ -139,10 +154,10 @@ A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reserva
 quantidade possível = piso(pool diário de testes ÷ budget inicial por campanha)
 ```
 
-Exemplo com teto operacional diário de `USD 300` e budget inicial de `USD 30`:
+Exemplo vigente com teto operacional diário de `USD 500` e budget inicial de `USD 30`:
 
-- pool de 20% = `USD 60` = até 2 campanhas;
-- pool de 30% = `USD 90` = até 3 campanhas.
+- pool de 20% = `USD 100` = até 3 campanhas de USD30, preservando USD10;
+- pool de 30% = `USD 150` = até 5 campanhas.
 
 O padrão é reservar 20%; Rodolfo autorizou flexibilização para 30% quando necessária para preservar o budget inicial de USD 30 e o volume de testes adequado. A quantidade final também depende de criativos elegíveis, capacidade de análise e espaço para escalar campanhas boas.
 
@@ -208,6 +223,20 @@ Para campanhas novas, trabalhar no timezone da conta:
 
 Essa janela não autoriza campanha sem budget/pool/criativos elegíveis. Se algum anúncio continuar pendente ou rejeitado às 23:30, reportar na thread de Criação e não inventar aprovação; manter a programação ou alterar status somente conforme autorização vigente.
 
+### Guardrail padrão one-shot de primeiro gasto atrasado
+
+Em Creditoparaveiculo BR-CAR-BR, **toda nova campanha de produção** entra automaticamente no guardrail após o readback validado do Campaign Engine v3. Não depende de novo pedido do operador.
+
+1. Pós-processamento obrigatório: campanha `ACTIVE` com início futuro `00:30`, nome/data canônicos, allowlist/ID e hierarquia 1×1×3 validados e gasto observado zero. Falha de enrollment mantém a criação em `POSTPROCESS_PENDING`.
+2. Consultar o gasto a cada 15 minutos enquanto a campanha estiver armada e sem primeiro spend.
+3. Janela saudável: se o primeiro `spend > 0` for observado entre `00:30` e `02:00` inclusive em `America/Sao_Paulo`, manter ativa, tratar como D1 normal e retirar definitivamente do watcher sem pause.
+4. Fora da janela saudável, no primeiro spend positivo pausar imediatamente no nível campanha, validar `PAUSED` por GET e registrar o gasto já ocorrido como pré-D1.
+5. Agendar reativação única às `00:30` do dia seguinte, com proveniência obrigatória `first_delivery_guardrail`. Ajustar `DD-MM` para a data dessa reativação sem alterar UTM, ID, budget ou hierarquia.
+6. A reativação confirmada começa o D1 operacional MGS. Isso não é alegação de reset técnico do aprendizado Meta.
+7. Depois da liberação saudável ou dessa primeira reativação validada, remover a campanha do watcher e nunca rearmá-la automaticamente por esta regra. Pausa humana, terminal ou de origem desconhecida continua bloqueada.
+
+Conclusão: campanhas novas não ficam descobertas; início normal até 02:00 segue otimizando e apenas a primeira entrega tardia recebe uma reentrada controlada.
+
 ### Preparação — antes do D1
 
 1. Confirmar conta/alias, site, país, vertical, idioma, timezone, experiência quiz/chat, captura, evento e UTMs no contrato da operação.
@@ -218,62 +247,54 @@ Essa janela não autoriza campanha sem budget/pool/criativos elegíveis. Se algu
 
 Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corretos.
 
-### D1 — observar aprendizagem; não cortar
+### D1 — observar e escalar somente às 08:00
 
-1. Ler o ROI na Smart Bidding, na sessão `Reports > Adgroup`.
-2. Classificar provisoriamente:
-   - ROI positivo: campanha promissora; aplicar escala somente nas faixas acima de 30%;
-   - ROI `> -10%` e `<= 0%`: campanha promissora para observação, sem escala;
-   - ROI `<= -10%` ou resultado muito ruim: marcar risco e continuar observando, mas não cortar/pausar no D1.
-3. No primeiro horário operacional, por volta das `08:00` da conta, aplicar escala pelo ROI cumulativo da SB:
-   - ROI `> 40%`: aumentar budget em `30%`;
-   - ROI `> 30%` e `<= 40%`: aumentar budget em `20%`;
-   - ROI `>= 20%` e `<= 30%`: aumentar budget em `10%`;
-   - ROI `< 20%`: manter budget, sem escala.
-4. Respeitar o teto diário provisório de USD 150 e validar qualquer escala por GET/readback, registrando valor anterior, valor novo, ROI, ROAS e horário.
+1. Separar sempre as duas métricas da Smart Bidding: `ROI geral` é o ROI normal/real usado para escala; `ROI estimado` é a projeção separada usada nos guardrails de corte. Nunca chamar uma pela outra.
+2. Às `08:00`, persistir o ROI estimado do D1 e aplicar no máximo uma escala pelo ROI geral:
+   - ROI geral `> 40%`: budget `+30%`;
+   - ROI geral `> 30%` e `<= 40%`: `+20%`;
+   - ROI geral `> 20%` e `<= 30%`: `+10%`;
+   - ROI geral `> 10%` e `<= 20%`: manter sem escala;
+   - demais valores: observar, sem corte.
+3. Campanha que já começa o D1 em faixa de escala participa normalmente da regra das 08:00.
+4. Fora das faixas, D1 continua em observação. Respeitar USD150 por campanha e USD500 na conta; todo scale exige POST único e GET/readback.
 
-Conclusão: nenhuma campanha foi cortada no D1; eventual escala ocorreu somente nas faixas aprovadas e com autorização vigente.
+Conclusão: D1 não corta por resultado inicial; escala usa somente ROI geral, apenas às 08:00.
 
-### D2 — repetir análise; ainda não cortar
+### D2 — repetir análise; ainda sem corte por resultado isolado
 
-1. Reabrir ROI e spend no mesmo recorte/timezone.
-2. Continuar sem corte por resultado ruim: a campanha permanece em aprendizagem/observação.
-3. Por volta das `08:00` da conta, repetir as faixas de escala:
-   - ROI `> 40%`: `+30%`;
-   - ROI `> 30%` e `<= 40%`: `+20%`;
-   - ROI `>= 20%` e `<= 30%`: `+10%`;
-   - ROI `< 20%`: manter.
-4. Nunca ultrapassar o teto diário provisório de USD 150; validar write por readback e manter histórico cumulativo da campanha.
+1. Às `08:00`, persistir o ROI estimado do D2.
+2. Aplicar uma única escala usando o ROI geral e as mesmas faixas do D1: `>20–30% → +10%`, `>30–40% → +20%`, `>40% → +30%`; `>10–20%` mantém; fora das faixas observa.
+3. Resultado ruim isolado continua sem corte no D2. Nunca escalar pelo ROI estimado.
+4. Respeitar os tetos e confirmar qualquer write por GET/readback.
 
-Conclusão: D2 preserva a campanha para leitura; cortes continuam bloqueados e escalas ficam auditadas.
+Conclusão: D2 preserva aprendizagem, registra a segunda observação estimada e mantém a escala restrita às 08:00.
 
-### D3 — iniciar cortes e escala disciplinada
+### D3 — corte pela trajetória do ROI estimado
 
-1. Ler o ROI cumulativo dos três dias na SB, em USD e com revshare ativado.
-2. Aplicar a regra de corte no nível campanha:
-   - ROI `<= -10%`: avaliar estimado/anomalias; pausar se o gate não justificar hold;
-   - ROI `> -10%` e `< 20%`: manter sem escala e continuar observação;
-   - ROI `>= 20%` e `<= 30%`: escalar `10%`;
-   - ROI `> 30%` e `<= 40%`: escalar `20%`;
-   - ROI `> 40%`: escalar `30%`.
-3. Usar Meta ROAS como apoio: `<1,20` reforça negativo; `1,20–1,34` é faixa cinza; `>=1,34` é sinal positivo/proximidade, mas a SB decide.
-4. Respeitar teto diário provisório de `USD 150` por campanha e monitorar se ROAS/ROI deterioram após escala.
-5. Pausa, manutenção ou escala são feitas no nível campanha e validadas por readback.
+1. Na leitura das `08:00`, persistir o ROI estimado do D3 e comparar os três checkpoints matinais.
+2. Se o **ROI estimado** foi negativo no D1, negativo no D2 e continua negativo no D3, pausar definitivamente a campanha no nível campanha. O valor negativo não possui tolerância de `-10%`; os três checkpoints negativos provam a trajetória.
+3. Se faltar qualquer checkpoint estimado, falhar fechado e não inventar a sequência.
+4. Quando a trajetória D1–D3 não acionar o corte, aplicar às 08:00 as faixas do ROI geral: `>20–30% → +10%`, `>30–40% → +20%`, `>40% → +30%`; `>10–20%` mantém; fora disso observa.
+5. Pausa definitiva não entra na fila de reativação das 00:30.
 
-Validação histórica: entre campanhas com Meta ROAS >1,30 e spend >=USD 10, nenhuma vencedora estava em ROI cumulativo `<= -10%` no D3. A campanha 28 estava em `-8,10%` no D3 e só ficou positiva no 9º dia, portanto não deve ser cortada pela regra. Campanhas 20, 34 e 54 estavam abaixo de -10% no D3 e terminaram negativas. O limite é operacional e deve continuar sendo monitorado.
+Conclusão: no D3, trajetória negativa usa exclusivamente o ROI estimado persistido; escala continua usando exclusivamente o ROI geral.
 
-### Gate de estimado e anomalias
+### Guardrail pós-escala das 16:00
 
-A SB expõe `estimatedRevenue`, `estimatedRoi`, `confidence` e atraso estimado de consolidação. `confidence=0,95` significa confiança declarada do estimador, não garantia de acerto. O ROI estimado usa `(estimatedRevenue − INVESTIMENT) / INVESTIMENT × 100`.
+A agenda do próprio dia é `08:00/12:00/14:00/16:00/20:00`; 07:00 permanece o dia anterior fechado. A escala acontece somente às 08:00.
 
-- D1/D2: estimado é informativo; não há corte.
-- D3 com ROI real `<= -10%` e ROI estimado também negativo: pausar, salvo anomalia externa.
-- D3 com ROI real `<= -10%`, mas ROI estimado positivo: não escalar; colocar em hold por uma atualização consolidada/até o próximo checkpoint, respeitando teto de spend, e reavaliar ROI real.
-- Se a projeção não se confirmar após o atraso informado pela SB, aplicar a regra do ROI real.
-- Antes de culpar a campanha, verificar anomalia de monetização/entrega: queda ampla de RPS/CPM/AVG_PRICE, atraso de receita, problema de AdX/GAM/SB, Meta account/delivery, pixel/evento, URL/quiz ou queda simultânea em várias campanhas.
-- Anomalia externa relevante gera `HOLD_EXTERNAL_ANOMALY`: sem corte/escala até confirmar a fonte ou o próximo checkpoint.
+- O guardrail das 16:00 só vale quando o aumento de budget das 08:00 foi realmente executado e confirmado por readback.
+- Se às 16:00 o ROI geral estiver negativo, mas o ROI estimado continuar positivo, manter a campanha ativa.
+- Se às 16:00 **ROI geral < 0 e ROI estimado < 0**, pausar no nível campanha independentemente da magnitude negativa.
+- Primeira ocorrência: pausa temporária; reativação guardada às 00:30 do dia seguinte.
+- Segunda ocorrência consecutiva: repetir a pausa temporária e a reativação das 00:30.
+- Terceira ocorrência consecutiva: pausa definitiva; nunca reativar.
+- Um dia seguinte que não repita o mesmo comportamento pós-escala rompe a sequência e zera o contador consecutivo; dia sem nova escala também não conta como repetição.
+- A reativação só aceita proveniência de pausa confirmada por este guardrail; silêncio, pausa humana, hold manual, D3 terminal ou origem desconhecida nunca entram.
+- Estado da ocorrência, POST e readback ficam persistidos por campaign ID. Dado estimado ausente/stale bloqueia write.
 
-Conclusão: estimado pode adiar um corte por um período limitado; nunca autoriza escala sozinho. ROAS e estimado sinalizam, ROI real SB decide depois do gate de anomalia.
+Conclusão: ROI geral e ROI estimado permanecem métricas distintas; a escala usa o geral às 08:00 e o corte pós-escala usa o estimado junto do geral às 16:00.
 
 ## Budget e renovação do portfólio
 
@@ -282,14 +303,14 @@ Parâmetros iniciais informados por Rodolfo:
 ```text
 Parâmetro                                      Valor inicial
 ---------------------------------------------- ----------------------------------
-Teto operacional diário da conta               USD 300 como referência inicial
+Teto operacional diário da conta               USD 500 vigente desde 22/08/2026
 Budget inicial por campanha                    USD 30
 Pool normal para campanhas novas               20% do teto operacional
 Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
 Quantidade de campanhas novas                  dinâmica, calculada pelo pool
-Escala com ROI >=20% e <=30%                  +10%
-Escala com ROI >30% e <=40%                    +20%
-Escala com ROI >40%                            +30%
+Escala com ROI geral >20% e <=30%             +10%
+Escala com ROI geral >30% e <=40%             +20%
+Escala com ROI geral >40%                      +30%
 Teto diário provisório por campanha            USD 150
 ```
 
@@ -307,16 +328,16 @@ Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas e info
 
 ## Naming Meta e rastreamento
 
-Antes do write, ler a conta e usar o próximo número de campanha livre; não reutilizar número de campanha deletada.
+Para criação sequencial normal, ler a conta e usar o próximo número livre. Em **replacement explícito e autorizado**, é permitido reutilizar o número/wrapper canônico `cNN` somente quando a campanha antiga do mesmo número estiver confirmada `DELETED` e não existir outra campanha não deletada com a mesma UTM. Nunca adicionar `rNN` ou outro sufixo fora do wrapper. Preservar auditoria do ID antigo e do novo.
 
-Limite da integração Smart Bidding informado por Rodolfo:
+A numeração operacional das campanhas não possui limite em `c59`. Rodolfo confirmou com o time de AdOps que campanhas `c60+` continuam rastreáveis normalmente na Smart Bidding.
 
 ```text
-c01–c59   campanhas operacionais rastreáveis na SB
-c60+      sem tracking SB; permitido somente para teste técnico explicitamente autorizado
+c01–c99     numeração com no mínimo dois dígitos
+c100+       sequência natural com três ou mais dígitos
 ```
 
-Ao esgotar `c59`, bloquear novas campanhas de produção e exigir nova convenção/mapping antes do write. Não contornar o limite reutilizando número deletado nem declarar ROI SB para `c60+`.
+Continuar a sequência lida ao vivo na Meta, sem bloquear produção em `c59` e sem criar sufixos externos ao wrapper. Criação normal não recicla número deletado; replacement explícito continua podendo reutilizar o número canônico pelo fluxo controlado de campanha substituta `PAUSED` validada, antiga confirmada `DELETED` e ativação posterior. O wrapper permanece `b01fb13c{N}` / `b01fb13c{N}g01`, com o número da campanha em largura variável e mínimo de dois dígitos.
 
 ```text
 Campanha  NN - DD-MM - {PAGE_NAME} - (b01fb13cNN) event_Subscribe
@@ -389,20 +410,27 @@ Conclusão: os três anúncios têm assets distintos ou variações explicitamen
 
 ## Relatórios Discord e continuidade
 
-Para tráfego direto desta operação, usar três threads fixas por conta:
+Para tráfego direto desta operação, usar três threads operacionais fixas por conta e uma thread permanente de referência:
 
 ```text
 Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e readback
-Diário Consolidado     07:00 dia anterior; 08:00/11:00/14:00/20:00 mesmo dia
+Diário Consolidado     07:00 dia anterior; 08:00/12:00/14:00/16:00/20:00 mesmo dia
 Intraday               01/03/05/07/09/11/13/15/17/19/21/23 São Paulo
-Checkpoint de ação     08:00 São Paulo, separado e sem relatório extra
+CPV Regras              manual permanente da estratégia; consulta dos gestores
+Checkpoint de ação     08:00 e 16:00 São Paulo, separados e sem relatório extra
 ```
+
+A thread `CPV Regras` (`1540426218405363873`) é manual, deve ser preservada indefinidamente e não recebe relatório recorrente nem ação automática de campanha. Quando Rodolfo alterar uma regra, atualizar a operação/skills por supersessão e publicar a regra revisada nessa mesma thread.
 
 Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
 
-O escopo de **exibição** é descoberto dinamicamente em cada execução pelas campanhas Meta da linhagem da conta (`b01fb13cNN`) e é separado do allowlist de **write** autônomo. Toda campanha nova não deletada entra no Diário e no Intraday mesmo antes do primeiro spend; campanha deletada/histórica entra somente quando possui métricas no período solicitado. Paginar a tabela em blocos cercados seguros em vez de truncar campanhas silenciosamente. O allowlist de escala/pausa permanece fail-closed e não pode crescer apenas porque a campanha passou a aparecer no relatório.
+O escopo de **exibição** é descoberto dinamicamente em cada execução pelas campanhas Meta da linhagem da conta (`b01fb13cNN`) e é separado do allowlist de **write** autônomo. Toda campanha nova não deletada entra no Diário e no Intraday mesmo antes do primeiro spend. Campanha deletada/histórica só entra quando possui métrica material no período solicitado: `spend`, `investment` ou `net_revenue` diferente de zero. Linha ausente da lista atual da Meta com todos esses valores zerados é ghost de agregação e fica excluída; C28/C34 são casos de regressão validados. Paginar tabelas e seções cercadas com segurança em vez de truncar campanhas silenciosamente. O allowlist de escala/pausa permanece fail-closed e não pode crescer apenas porque a campanha passou a aparecer no relatório.
+
+No Diário de Creditoparaveiculo BR-CAR-BR, o formato solicitado é híbrido: cards verticais por campanha para mobile, com `Budget/Spend`, `Custo/ROAS` e `ROI SB`; divisor de 34 caracteres `━`; depois, preservar a tabela consolidada de campanhas e a tabela de resumo da conta para desktop. Cards e tabelas são seções atômicas no chunker, cercas ficam balanceadas e cada conteúdo final permanece em até 1.900 caracteres. Se o empacotamento seguro falhar antes do primeiro POST, repetir automaticamente uma única vez com parser fence-aware e paginação de tabela com cabeçalho repetido; só então falhar fechado. Após qualquer message ID, fazer readback antes de considerar novo envio e nunca repetir cegamente.
+
+No Intraday da mesma operação, cada card mobile também mostra o ROI diário da Smart Bidding nas últimas três datas — dia atual parcial e dois dias anteriores — com data explícita e `n/d` quando não houver investimento/match. Para desktop, manter a tabela consolidada atual e acrescentar uma tabela histórica compacta separada. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
 
 Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 
@@ -415,9 +443,13 @@ Antes de 17:00          fechar pool de budget, referência e criativos elegívei
 17:00                    materializar/prevalidar manifest e programar novas CBOs para 00:30 do dia seguinte
 17:00–23:30              acompanhar aprovação Meta e corrigir erros permitidos
 23:30                    readback final de aprovação/estrutura/URLs
-Por volta de 08:00       ler ROI SB, revisar spend e executar escala elegível
-Durante D1/D2           observar campanhas ruins; não cortar
-No D3                   decidir corte, manutenção ou escala pelo acumulado
+Por volta de 08:00       persistir ROI estimado; ler ROI geral e executar a única escala elegível do dia
+12:00 e 14:00            analisar a evolução sem nova escala
+16:00                    aplicar o guardrail pós-escala pelo ROI geral + ROI estimado
+20:00                    última análise regular do próprio dia
+Durante D1/D2           observar campanhas fora das faixas; não cortar por resultado isolado
+No D3 às 08:00          encerrar se o ROI estimado persistido foi negativo em D1, D2 e D3
+00:30                    reativar somente pausas temporárias verificadas das ocorrências 1–2
 Após qualquer write     readback Meta + audit da decisão e da fonte de ROI
 ```
 
@@ -451,10 +483,15 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] Três criativos sanitizados, elegíveis e reservados
 - [ ] Início às 00:30 do timezone da conta validado
 - [ ] ROI lido na Smart Bidding > Reports > Adgroup
-- [ ] D1/D2 sem cortes
-- [ ] D3 com ROI <= -10% passa pelo gate de estimado/anomalia antes da pausa
-- [ ] ROI 20%–30% escala 10%; >30%–40% escala 20%; >40% escala 30%
+- [ ] D1/D2 sem cortes por resultado isolado
+- [ ] ROI geral e ROI estimado aparecem e são tratados como métricas distintas
+- [ ] ROI geral >20%–30% escala 10%; >30%–40% escala 20%; >40% escala 30%, somente às 08:00
+- [ ] ROI estimado negativo persistido em D1/D2/D3 às 08:00 gera pausa terminal no D3
+- [ ] Às 16:00, somente campanha escalada às 08:00 com ROI geral e estimado negativos recebe pausa temporária/terminal
+- [ ] Ocorrências 1–2 reativam às 00:30; ocorrência 3 e D3 terminal nunca reativam
 - [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping
+- [ ] SMS enviados G006 filtrados por data nas duas linhagens SMS Funnel explícitas de quiz/chat
+- [ ] Custo SMS G006 validado por `envios × R$ 0,08`, exibido em USD via PTAX venda BCB com data/fonte e sem atribuição do consolidado global
 - [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
 - [ ] Budget anterior/novo, moeda, período e fonte registrados
 - [ ] Todo write confirmado por readback Meta

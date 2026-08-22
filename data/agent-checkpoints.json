@@ -12,13 +12,43 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C07-C11-MAXVOL-REPLACEMENT-20260821",
+      "next_step": "Às 00:30 São Paulo inicia D1; acompanhar aprovação dos anúncios e observar D1/D2 pelos relatórios canônicos, sem corte automático.",
+      "objective": "Substituir C07 e C11 por clones estruturais das duas melhores campanhas MAXVOL, reutilizando e tratando os criativos legados, com início em 22/08/2026 00:30 São Paulo",
+      "source": "discord:thread:1540413462394568824; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; audit:data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/replacement-c07-c11-maxvol-20260821T181424Z.json",
+      "state": "concluído: campanhas antigas c07/c11 confirmadas deleted; novas c07/c11 future active com início nativo 22/08 00:30 sp, usd30, maxvol, 1x1x3 e spend pré-start zero. fontes c09→c07 e c08→c11. seis linhagens recuperadas, 12 variantes clean=true, drive/inventário/meta reconciliados. falha inicial do child batch v3 foi recuperada sem replay cego após restaurar adlabels e validar 6/6 payloads.",
+      "thread_id": "1540413462394568824",
+      "updated_at": "2026-08-21T18:17:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-C12-C13-REACTIVATE-20260822",
-      "next_step": "Às 00:15 São Paulo, o wrapper determinístico repete holds, hierarquia e cap; ativa somente C12/C13 em nível campanha; exige GET/readback e persiste ACTIVE_VALIDATED ou falha fechada.",
-      "objective": "Reativar C12 e C13 em 22/08/2026 às 00:15 São Paulo e tratar 22/08 como D1",
-      "source": "discord:thread:1540379367983546408; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; data/ares/meta-ads/state/creditoparaveiculo-daily-create.json; audit:rollover-c12-c13-to-2026-08-22-20260821T152032Z.json",
-      "state": "c12/c13 confirmadas paused na meta; nomes alterados e validados para 22-08; cycle_start_date=2026-08-22; state prepared_paused; dry-run de ativação passou com budget projetado usd222; one-shot no_agent está enabled/scheduled para 00:15 são paulo.",
+      "next_step": "Acompanhar C12/C13 como D1 pelos relatórios canônicos e aplicar somente os guardrails aprovados com readback.",
+      "objective": "Reativar C12 e C13 em 22/08/2026 e tratar 22/08 como D1",
+      "source": "discord:thread:1539826050765299872; audit:data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/daily-activate-2026-08-22-20260822T051431Z.json",
+      "state": "concluído: após autorização de rodolfo, cap operacional interno promovido de usd300 para usd500; c12/c13 ativadas em nível campanha e get independente confirmou active, usd30 cada, 1x1x3; budget ativo da conta usd312 dentro do cap.",
       "thread_id": "1540379367983546408",
-      "updated_at": "2026-08-21T15:23:19+00:00"
+      "updated_at": "2026-08-22T05:20:17+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPV-C14-C16-DAILY-CREATION-20260821",
+      "next_step": "Até 23:30 São Paulo acompanhar aprovação/revisão dos nove anúncios; em 22/08 tratar as três campanhas como D1 pelos relatórios canônicos, sem corte automático.",
+      "objective": "Criar C14, C15 e C16 CPV via Campaign Engine v3 com nove criativos reconciliados do Shared Drive e início em 22/08/2026 00:30 São Paulo",
+      "source": "discord:thread:1539826050765299872; audit:/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260821.json; finalize:/root/.hermes/profiles/ares/work/creditoparaveiculo-v3-daily/cpv-daily-20260821/finalize-drive-inventory.json; commit:43a16f6e",
+      "state": "concluído e validado: seletor corrigido para filtrar conflitos antes de escolher; 9/9 assets do drive reconciliados; c14/c15/c16 confirmadas active future, usd30, maxvol, 1x1x3 e 00:30; adlabels preservados; 9 assets movidos/readback para 02_testing; estado complete_future_active; estoque 01_ready img42 vid196 e 41 únicos elegíveis; discord final readback confirmado; commit 43a16f6e; report-infra 1540467904573603852.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-21T21:09:51+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPV-CAP500-C12-C13-20260822",
+      "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
+      "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
+      "source": "discord:thread:1539826050765299872; policy:ARES-CREDITOPARAVEICULO-ACCOUNT-CAP-USD500-V1; report-infra:1540591294877798512",
+      "state": "concluído e validado: cap usd500 aplicado em operação, v3, registry da conta, runtime e skills; pool normal 20%=usd100; c12/c13 active 1x1x3 usd30 cada; budget ativo usd312; testes 4+21 pass; report-infra http200.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-22T05:20:17+00:00"
     },
     {
       "agent": "zeus",
@@ -32,23 +62,63 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-V3-AD-NAMING-C14-C16-20260822",
+      "next_step": "Operação normal; próximos manifests CPV só selam com naming canônico e qualquer ausência/invalidez falha fechado antes do write.",
+      "objective": "Corrigir os nomes dos nove anúncios C14/C15/C16 e impedir recorrência no Campaign Engine v3",
+      "source": "discord:thread:1539826050765299872; policy:ARES-CAMPAIGN-ENGINE-V3-0-10-20260822; report-infra:1540619993643745301",
+      "state": "concluído e validado: 9/9 anúncios renomeados para canonical_filename stem; get independente confirmou todos canônicos, configured active e effective active. v3.0.10 exige canonical_filename válido e bloqueia asset_id como display name antes do manifest; 51 testes, offline smoke e preview real-registry passaram.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-22T07:14:16+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-20260821",
+      "next_step": "Operação normal nos checkpoints 08/12/14/16/20; observar o primeiro ciclo real e exigir readback Meta para qualquer scale, pause ou reactivation.",
+      "objective": "Operar escala 08h, corte D3 por ROI estimado e guardrail pós-escala 16h com reativação segura 00h30",
+      "source": "discord:thread:1540418972007006208; operation v1.0.54; runtime creditoparaveiculo-fixed-reports.py; cron 5d0974e97ebd",
+      "state": "concluído e ativo: roi geral e estimado separados; escala apenas 08h e estritamente acima de 20%; d3 terminal após estimado negativo persistido em d1/d2/d3; 16h pausa pós-escala quando roi geral e estimado negativos; ocorrências 1-2 reativam 00h30 e terceira é terminal. runtime, estado persistente, cron no_agent/local e skills atualizados; 38 testes e dry-runs sem meta write aprovados.",
+      "thread_id": "1540418972007006208",
+      "updated_at": "2026-08-21T18:52:40+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SCHEDULE-20260821",
+      "next_step": "Operação normal na nova cadência; qualquer mudança futura exige supersessão explícita. Intraday ímpar e checkpoint de ação 08:00 permanecem inalterados.",
+      "objective": "Alterar a agenda do Diário CPV para 07:00 fechado anterior e 08:00/12:00/14:00/16:00/20:00 dia atual",
+      "source": "discord:thread:1540422897854714049; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; report-infra:1540425236309090426",
+      "state": "concluído e ativo: gate determinístico, operação v1.0.53, cron no_agent/local, duas skills, testes, inventário e registry v9 atualizados; py_compile e 31 testes pass; schedule readback pass; report-infra 1540425236309090426 http 200; zero meta write.",
+      "thread_id": "1540422897854714049",
+      "updated_at": "2026-08-21T18:20:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-DIRECT-TRAFFIC",
-      "next_step": "Zeus faz foreground readback dos commits 15e88e43 e 461b5481, confirma audit observability e, se PASS, realiza cutover do job 2cf8115a4f8b mantendo no_agent=true/deliver=local. Após primeiro ciclo comparar durações/calls e otimizar reconciliação/prestage se necessário.",
-      "objective": "Concluir observabilidade e cutover do schedule diário CPV 17h para Campaign Engine v3",
-      "source": "discord:thread:1540228969071116408 Zeus observability P1; commit:15e88e43,461b5481; audit:/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260821.json",
-      "state": "p1 observabilidade implementado sem external writes: audit diário registra phase_order estável e duration_ms/calls sanitizados para meta_preflight, drive_preflight, reconciliation, asset_selection, prestage, manifest_prevalidation, engine, postprocess e total. prestage mantém breakdown download/render_square/upload/ready_readback; engine inclui métricas consolidadas. regressão de presença/ordem/sanitização passou. suite relevante 129 passed. live dry-run c14/c15 confirmou meta_preflight 2389ms/3 get, drive_preflight 4676ms/11 calls, reconciliation 13567ms/2 get+5 batch, asset_selection 0.62ms, total 20657ms; demais fases skipped no dry-run. side effects todos false; cron 2cf8115a4f8b continua paused.",
-      "thread_id": "1540228969071116408",
-      "updated_at": "2026-08-21T07:04:11+00:00"
+      "next_step": "Usar automaticamente PTAX venda BCB da data-alvo em todo Diário; fim de semana/feriado usa taxa oficial anterior em até 7 dias com rate_date exposta.",
+      "objective": "Operar tráfego direto CBO e reconciliar aquisição, receita SMS e custo real do SMS para creditoparaveiculo.com BR-CAR-BR",
+      "source": "discord:thread:1540475822182371429; discord:thread:1539831487719800872 messages 1540487678888378428,1540487680259915777,1540487681543512255; daily-20260821T222756Z.json; operation v1.0.58",
+      "state": "alerta diário real reemitido na thread fixa com custo sms g006 em usd. readback discord 3/3 mensagens http 200 e conteúdo verificado. em 21/08 parcial às 19:27 sp: 358 sms g006, custo-base r$28,64, ptax venda bcb 5,1625 brl/usd, custo usd5,55; roi antes custo +15,34% e após custo +10,33%. operação v1.0.58; skills direct-traffic-cbo v1.0.39 e vehicle-finance v1.0.23 com runtime/mirror alinhados.",
+      "thread_id": "1540475822182371429",
+      "updated_at": "2026-08-21T22:29:43+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-20260822",
+      "next_step": "Toda nova campanha validada pelo v3 é auto-armada no pós-processamento. Primeiro spend observado 00:30-02:00 inclusive libera sem pause; depois de 02:00 pausa uma vez e agenda 00:30 seguinte. C07/C11-C16 seguem armadas e sem spend.",
+      "objective": "Aplicar automaticamente o guardrail de primeiro gasto a toda campanha nova CPV, preservando a janela saudável 00:30-02:00 SP",
+      "source": "discord:thread:1540770026376794113; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; v3:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; audit:data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/arm-20260822T173301980288Z.json",
+      "state": "active_watching",
+      "thread_id": "1540770026376794113",
+      "updated_at": "2026-08-22T17:59:06+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-REPORTING",
-      "next_step": "Backup, patch do renderer/testes/config, dry-run live, REPORT-INFRA e envio report-only com readback Discord.",
-      "objective": "Aplicar o layout mobile aprovado por Rodolfo ao Intraday CPV e validar por alerta real no thread fixo",
-      "source": "discord:thread:1540379584124555334; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "state": "em execução: layout aprovado em cards verticais; observar em linha separada com d1/d2; divisor visual de 34 traços entre campanhas; nenhuma regra, métrica ou ação meta será alterada.",
-      "thread_id": "1540379584124555334",
-      "updated_at": "2026-08-21T15:35:56+00:00"
+      "next_step": "Operação normal: aplicar automaticamente o padrão nos próximos Intraday; qualquer mudança de janela, fonte ou layout exige supersessão explícita de Rodolfo.",
+      "objective": "Padronizar relatórios CPV legíveis em mobile e desktop, impedir campanhas fantasma e mostrar tendência diária de ROI no Intraday",
+      "source": "discord:thread:1540394604275310672; operation:/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; report:/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260821T163717Z.json",
+      "state": "concluído e canônico: intraday híbrido preserva cards mobile e tabela atual desktop, acrescenta roi sb diário de três datas em cada card e tabela histórica compacta; dia atual marcado parcial, ausência n/d. 31 testes passaram. alerta report-only entregue na thread fixa em 3 chunks com readback 3/3 http 200; operação v1.0.52; zero write meta.",
+      "thread_id": "1540394604275310672",
+      "updated_at": "2026-08-21T16:38:35+00:00"
     },
     {
       "agent": "ares",
@@ -112,6 +182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-OPENZEDFINANZAS-DISCORD-MIGRATION-20260821",
+      "next_step": "Nenhuma pendência de rota. Manter as threads legadas apenas como histórico; ativação futura dos crons exige pedido operacional separado.",
+      "objective": "Separar Creative Ops de Campaign Ops e migrar Intraday e HOA OpenzedFinanzas ES-CC-ES-03 para o canal dedicado 1540489861876678657",
+      "source": "discord:thread:1540490591903948860; discord:thread:1540502156845781103; discord:thread:1540502177376632922; channel:1540489861876678657; operation:data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+      "state": "migração concluída e reconciliada: HOA do job e84a8db81fb3 foi redirecionado da thread legada 1518648967360024757 para 1540502177376632922; Intraday aa9e01a5ec4a e reativação c6c737070d3f apontam para 1540502156845781103. Todos usam o canal dedicado 1540489861876678657. Os três jobs permanecem pausados; HOA preserva deliver local/no_agent porque o wrapper publica diretamente na thread. REPORT-INFRA HOA 1540503179484069979; reconciliação 1540503560381399071.",
+      "thread_id": "1540502177376632922",
+      "updated_at": "2026-08-21T23:30:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-US-EMP-STATIC-30-20260817",
       "next_step": "Nenhuma pendência. O lote não existe mais. Qualquer nova produção deve começar com nova direção criativa aprovada antes de gerar em escala.",
       "objective": "Excluir definitivamente o lote de 30 criativos US-EMP rejeitado por Rodolfo e reverter Drive, inventário e planilha.",
@@ -123,12 +203,12 @@
     {
       "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
-      "next_step": "Nenhuma ação pendente nesta iniciativa; Zeus monitora drift futuro do wrapper e requisições ActView.",
-      "objective": "Auditar profundamente e eliminar requisições ActiveView/rede antiga em cliquet.com, finanzas.cliquet.com, wavesbee.com e finanzas.wavesbee.com, preservando a monetização Smart Bidding/JBF.",
-      "source": "Discord thread 1540230925261213707; autorização 1540239590022058015; confirmação canônica 1540242985156087818; context/monetization.md; artifacts /root/.hermes/profiles/zeus/artifacts/av-legacy-audit-20260821; backup /var/backups/mgs/jbf-wrapper-fix/20260821T060248Z/finanzas.wavesbee.com.",
-      "state": "concluído. rodolfo confirmou no message 1540242985156087818 que o builder correto de finanzas.wavesbee.com é o genérico wavesbeefinanzas/digital-trust_wavesbeefinanzas.builder.js. esse url já está ativo no ad inserter, responde http 200 javascript, está presente exatamente uma vez no html público bare e cachebuster, e o url antigo finanzas.wavesbee está ausente. varredura dos quatro sites: 42.922 arquivos enumerados, zero assinatura forte/loader actview legado, 16 execuções desktop/mobile com scroll e zero request actview.net/scr.actview. o activeview observado em wavesbee é o google active view de mensuração carregado pelo gam/jbf. não aplicar o builder direct_us: a simulação foi apenas diagnóstico e rodolfo definiu o genérico como canônico.",
-      "thread_id": "1540230925261213707",
-      "updated_at": "2026-08-21T06:18:09+00:00"
+      "next_step": "Enviar à Isa/Smart Bidding/JBF a evidência exata e solicitar correção/whitelist do detector IVT para tráfego residencial legítimo. Após ajuste, repetir teste desktop/mobile e exigir slots e gampad sob /21922122164/ antes de marcar impressão/fill como provados.",
+      "objective": "Concluir a migração real de Cliquet e finanzas.cliquet do GAM ActiveView para o GAM Smart Bidding/JBF, preservando slots, targeting, receita e rollback independente por site.",
+      "source": "Discord thread 1540432459932508160; residential diagnostic screenshot message 1540485001504759899; context/monetization.md; registry DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821.",
+      "state": "stack público permanece correto após purge: um gpt e um builder genérico por site, zero av, network 21922122164. validação residencial do rodolfo no message 1540485001504759899 confirmou network 21922122164, operation facebook_us_cc_all-d, flow facebook_us_cc, page_type rec, country us e tags bankamericard/cc/credit card/lang_en/rec/us. apesar dos inputs corretos, o detector jbf retornou bot_code 100, traffic crawler, risk 0 e não criou slots. isso confirma falso positivo/decisão do ivt jbf como bloqueio atual; não é erro de builder, gam, operation, flow, page_type ou tags.",
+      "thread_id": "1540432459932508160",
+      "updated_at": "2026-08-21T22:18:32+00:00"
     },
     {
       "agent": "zeus",
@@ -765,10 +845,10 @@
       "id": "sb-template-self-healing-rollout-20260807",
       "next_step": "Dispatcher das 08:00 SP pode consumir US-JOB-ES: déficit live máximo 1 + reserva 3 disponíveis (4 candidates); US-CC-ES: déficit live máximo 15 + reserva 3 disponíveis (18 candidates)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-21T07:30:49-03:00; data:sb-utility-generated-candidates.json",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-22T07:31:05-03:00; data:sb-utility-generated-candidates.json",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-21T10:32:56+00:00"
+      "updated_at": "2026-08-22T10:33:05+00:00"
     },
     {
       "agent": "zeus",
@@ -959,8 +1039,18 @@
       "state": "concluído e ativo: root cron com flock executa a cada dez minutos, descobre zeus/atena/ares e futuros profiles operacionais, mede user/memory e compacta automaticamente de >=90% para <=85% sem aprovação por ocorrência. backup 0700/0600, literais protegidos, segunda verificação semântica, escrita atômica, rollback/readback, outbox durável, anti-spam e embeds metadata-only em #limites-90. canários exact-dedup apply e semantic verified target 85 passaram; 13 testes passaram; primeiro ciclo de produção 3 profiles/6 stores saudável, zero threshold/falha/outbox.",
       "thread_id": "1527558141397700618",
       "updated_at": "2026-07-17T15:53:49+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zeus-smart-routing-lyzmo-gb-cc-en-20260821",
+      "next_step": "Nenhuma ação pendente; usar o procedimento canônico por slot em futuras correções equivalentes.",
+      "objective": "Corrigir Smart Routing GB-CC-EN de Lyzmo e Zytiva em pools 001-006, preservando a sequência exata de cinco URLs por slot.",
+      "source": "work/sb-smart-routing/20260821-lyzmo-gb-cc-en/independent-readback.json; work/sb-smart-routing/20260821-zytiva-gb-cc-en/independent-readback.json; profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "state": "concluído: lyzmo e zytiva corrigidos; 6 pools e 30 rotas por publisher; m0/nm nos slots 1/2 do 001; url+jbf_operation por slot preservadas; sessão independente sem erros; backups e audit gravados.",
+      "thread_id": "1540454000577745076",
+      "updated_at": "2026-08-21T20:39:16+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-21T15:35:56+00:00"
+  "updated_at": "2026-08-22T17:59:06+00:00"
 }

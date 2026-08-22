@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.9
+version: 3.0.11
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -61,6 +61,8 @@ Carregue somente a referência do branch atual.
 8. Canário técnico explícito nasce `PAUSED`; pedido normal de produção usa `ACTIVE` com `start_time` futuro após manifest selado e validação dos guards.
 9. `prevalidated=true`, `config.enabled=true`, `write_enabled=true` e `--confirm-execute` são gates independentes.
 10. V2 permanece rollback congelado; nenhum legado é apagado durante a migração inicial.
+11. Em CPV `clone_prestaged`, todo `asset_ref` exige `canonical_filename` válido da taxonomia `CAR_BR_BR_VID_*_{PV|NV|PH|NH}_NNN.mp4`. O anúncio nasce como `AD NN - {canonical_stem}` e o creative como `CPV CNN ADNN {canonical_stem}`. `asset_id` permanece apenas como identidade técnica no manifest/audit; se o nome canônico faltar ou for inválido, bloquear antes de selar o manifest.
+12. Em Creditoparaveiculo, o pós-processamento só conclui após auto-armar cada campanha nova no guardrail de primeiro gasto. O enrollment valida IDs, data operacional, status `ACTIVE`, gasto zero e retorna `meta_writes=0`; falha deixa o request `POSTPROCESS_PENDING`. O watcher aceita primeiro spend observado de 00:30 a 02:00 SP inclusive sem pause; fora dessa janela, pausa uma vez e agenda reativação 00:30 do dia seguinte.
 
 ## How to run
 

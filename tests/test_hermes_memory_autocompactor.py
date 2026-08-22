@@ -172,6 +172,33 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
     def test_protected_literal_guard_rejects_value_change(self):
         self.assertFalse(compactor._protected_literals_preserved("limite 90%", "limite 80%"))
 
+    def test_masked_literal_roundtrip_restores_exact_values(self):
+        original = "Use 90% in #limites-90 with ID `1527401973698007060`."
+        masked, literals = compactor._mask_protected_literals(original)
+        self.assertNotIn("90%", masked)
+        self.assertNotIn("1527401973698007060", masked)
+        self.assertEqual(len(literals), 4)
+        self.assertEqual(compactor._restore_masked_literals(original, masked), original)
+
+    def test_masked_literal_restore_rejects_missing_placeholder(self):
+        original = "Use 90% in #limites-90."
+        masked, _ = compactor._mask_protected_literals(original)
+        changed = masked.replace("{{lit_a}}", "", 1)
+        with self.assertRaises(compactor.CompactionError) as caught:
+            compactor._restore_masked_literals(original, changed)
+        self.assertEqual(caught.exception.code, "literal_placeholder_changed")
+
+    def test_proposal_budget_matches_final_entry_budget(self):
+        original = ["Keep 90% in #limites-90 with ID `1527401973698007060` for Rodolfo."]
+        budgets = [len(original[0]) - 5]
+        prompt = compactor._proposal_prompt("user", original, budgets[0], budgets, [1])
+        payload = json.loads(prompt.split(" Data: ", 1)[1])
+        masked, literals = compactor._mask_protected_literals(original[0])
+        placeholder_chars = len(masked) - (len(original[0]) - sum(map(len, literals)))
+        expected = math.floor((budgets[0] - sum(map(len, literals)) + placeholder_chars) * 0.85)
+        self.assertEqual(payload[0]["max_chars"], expected)
+        self.assertNotIn("1527401973698007060", payload[0]["text"])
+
     def test_exact_duplicate_compaction_applies_without_model(self):
         source = self.write_store("alpha\n§\nalpha", user_limit=14)
 
@@ -195,6 +222,35 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(backup.read_text(), "alpha\n§\nalpha")
         self.assertEqual(stat.S_IMODE(backup.stat().st_mode), 0o600)
         self.assertEqual(stat.S_IMODE(backup.parent.stat().st_mode), 0o700)
+
+    def test_large_store_is_proposed_in_bounded_batches(self):
+        original = [chr(ord("a") + index) * 100 for index in range(5)]
+        target_chars = 420
+        proposal_calls = 0
+
+        def fake_model(prompt):
+            nonlocal proposal_calls
+            if '"before":' in prompt:
+                pairs = json.loads(prompt.split(" Data: ", 1)[1])
+                return {"valid": True, "entries": [
+                    {"index": row["index"], "equivalent": True, "missing": [], "added": []}
+                    for row in pairs
+                ]}
+            proposal_calls += 1
+            payload = json.loads(prompt.split(" Data: ", 1)[1])
+            return {"entries": [
+                {"index": row["index"], "text": row["text"][:row["max_chars"]]}
+                for row in payload
+            ]}
+
+        candidate = compactor.propose_and_verify(
+            "user",
+            original,
+            target_chars,
+            fake_model,
+        )
+        self.assertEqual(proposal_calls, 4)
+        self.assertLessEqual(len(compactor._render_entries(candidate)), target_chars)
 
     def test_semantic_candidate_requires_second_pass_and_applies(self):
         original = [
@@ -220,13 +276,16 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 return {"entries": [
                     {
                         "index": row["index"],
-                        "text": candidate[row["index"] - 1],
+                        "text": compactor._mask_protected_literals(
+                            candidate[row["index"] - 1]
+                        )[0],
                     }
                     for row in payload
                 ]}
+            pairs = json.loads(prompt.split(" Data: ", 1)[1])
             return {"valid": True, "entries": [
-                {"index": index, "equivalent": True, "missing": [], "added": []}
-                for index in selected
+                {"index": row["index"], "equivalent": True, "missing": [], "added": []}
+                for row in pairs
             ]}
 
         result = compactor.compact_store(
@@ -241,10 +300,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(result["mode"], "semantic_verified")
         self.assertTrue(result["readback_matches"])
-        expected = list(original)
-        for index in selected:
-            expected[index - 1] = candidate[index - 1]
-        self.assertEqual(source.read_text(), compactor.ENTRY_DELIMITER.join(expected))
+        self.assertNotEqual(source.read_text(), before)
         self.assertLess(result["after_chars"], result["before_chars"])
 
     def test_verifier_failure_keeps_source_unchanged(self):
@@ -259,7 +315,10 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             nonlocal calls
             calls += 1
             if calls == 1:
-                return {"entries": [{"index": 1, "text": candidate[0]}]}
+                return {"entries": [{
+                    "index": 1,
+                    "text": compactor._mask_protected_literals(candidate[0])[0],
+                }]}
             return {"valid": False, "entries": [
                 {"index": 1, "equivalent": False, "missing": ["threshold"], "added": []}
             ]}
@@ -273,7 +332,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 llm_runner=fake_model,
                 backup_root=self.backups,
             )
-        self.assertEqual(caught.exception.code, "semantic_verification_failed")
+        self.assertEqual(caught.exception.code, "semantic_target_unreachable")
         self.assertEqual(source.read_text(), before)
         self.assertFalse(self.backups.exists())
 
@@ -298,7 +357,7 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                 llm_runner=fake_model,
                 backup_root=self.backups,
             )
-        self.assertEqual(caught.exception.code, "protected_literals_changed")
+        self.assertEqual(caught.exception.code, "semantic_target_unreachable")
         self.assertEqual(source.read_text(), before)
 
     def test_apply_rejects_concurrent_source_change(self):

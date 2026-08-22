@@ -91,6 +91,29 @@ API base                     | `https://web2.smsfunnel.com.br/api`
 
 A tela declara `Receita Total`, `Receita Total SMS`, `Custo Total`, `Total de Conversões SMS`, `Total SMS Enviados` e tabela por funil com `SMS Enviados`, `Custo`, `Conversões`, `Receita` e `ROI`. O tooltip de custo define `quantidade enviada × custo unitário por SMS`. A resposta autenticada usa `data.totals.total_sms_sent`, `data.totals.sms_unit_cost` e `data.totals.total_cost`; validar sempre `total_sms_sent × sms_unit_cost = total_cost`. Esses endpoints exigem sessão; nunca colocar token/cookie em log ou chat.
 
+### Atribuição por gestor no Creditoparaveiculo
+
+Readback autenticado validado em 2026-08-21 para a data civil 2026-08-20:
+
+1. Resolver internamente o item 1Password `SMS Funnel Dashboard` e autenticar em modo read-only.
+2. Listar `GET /api/campaigns` com filtro textual do gestor (`g006`).
+3. Aceitar somente campanhas cujo nome contenha simultaneamente `CREDITOPARAVEICULO`, o gestor exato `G006` e a experiência `QUIZ` ou `CHAT`.
+4. Para cada `campaign_id`, ler `GET /api/analytics/funnel-performance/{campaignId}/sequences?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD`.
+5. O drill-down de sequences usa intervalo inclusivo; para um dia, enviar a mesma data no início e no fim. Somar `sms_sent` e `cost` apenas das linhagens explícitas do gestor.
+6. O consolidado global apresentou semântica diferente no readback vivo: `end_date` funciona como limite exclusivo. Usar `target_date+1` somente para reconciliação global; nunca atribuir o total global ao G006.
+7. Confirmar `soma sms_sent × R$ 0,08 = soma cost` com tolerância máxima de R$ 0,02.
+
+Mapeamento G006 validado:
+
+```text
+Experiência | Campanha SMS Funnel
+------------|-----------------------------------------------------------
+Quiz        | AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006
+Chat        | AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006
+```
+
+No dia 20/08/2026, o readback retornou 430 SMS G006 (430 quiz + 0 chat) e R$ 34,40 de custo-base. O consolidado global tinha 5.176 envios, mas não foi atribuído ao gestor. Como a operação Meta/SB reporta em USD, o custo visível é convertido pela `cotacaoVenda` da PTAX oficial do Banco Central do Brasil na data-alvo; em fim de semana/feriado, usar a taxa oficial mais recente disponível em até 7 dias anteriores e exibir a data efetiva. Para 20/08, PTAX venda `5,1862 BRL/USD`, resultando em `USD 6,63`. Preservar no audit o custo BRL, a taxa, a data e a fonte.
+
 Checklist de exploração:
 
 - filtros por período;

@@ -1,0 +1,100 @@
+diff --git a/agent/background_review.py b/agent/background_review.py
+index 95c39703d7..d427715355 100644
+--- a/agent/background_review.py
++++ b/agent/background_review.py
+@@ -884,6 +884,8 @@ def _run_review_in_thread(
+     messages_snapshot: List[Dict],
+     prompt: str,
+     task_cfg: Optional[Dict[str, Any]] = None,
++    *,
++    allow_memory_tool: bool = True,
+ ) -> None:
+     """Worker function executed in the background-review daemon thread.
+ 
+@@ -1171,7 +1173,10 @@ def _run_review_in_thread(
+             # read/write tool even when a profile set memory_enabled: false,
+             # contaminating a memory-disabled profile (#54937 layer 2).
+             review_toolsets = ["skills"]
+-            if review_agent._memory_enabled or review_agent._user_profile_enabled:
++            if (
++                allow_memory_tool
++                and (review_agent._memory_enabled or review_agent._user_profile_enabled)
++            ):
+                 review_toolsets.insert(0, "memory")
+             review_whitelist = {
+                 t["function"]["name"]
+@@ -1202,12 +1207,16 @@ def _run_review_in_thread(
+                     _digest_history(messages_snapshot) if _routed
+                     else messages_snapshot
+                 )
++                _allowed_review_tools = (
++                    "memory and skill management tools"
++                    if allow_memory_tool
++                    else "skill management tools"
++                )
+                 review_agent.run_conversation(
+                     user_message=(
+                         prompt
+-                        + "\n\nYou can only call memory and skill "
+-                        "management tools. Other tools will be denied "
+-                        "at runtime — do not attempt them."
++                        + f"\n\nYou can only call {_allowed_review_tools}. "
++                        "Other tools will be denied at runtime — do not attempt them."
+                     ),
+                     conversation_history=_review_history,
+                 )
+@@ -1381,7 +1390,13 @@ def spawn_background_review_thread(
+         )
+ 
+     def _target() -> None:
+-        _run_review_in_thread(agent, messages_snapshot, prompt, task_cfg)
++        _run_review_in_thread(
++            agent,
++            messages_snapshot,
++            prompt,
++            task_cfg,
++            allow_memory_tool=review_memory,
++        )
+ 
+     return _target, prompt
+ 
+diff --git a/tests/run_agent/test_background_review_toolset_restriction.py b/tests/run_agent/test_background_review_toolset_restriction.py
+index ab39d87eda..df28cd4999 100644
+--- a/tests/run_agent/test_background_review_toolset_restriction.py
++++ b/tests/run_agent/test_background_review_toolset_restriction.py
+@@ -135,6 +135,35 @@ def test_background_review_installs_thread_local_whitelist():
+     assert "execute_code" not in whitelist
+ 
+ 
++def test_skill_only_review_excludes_memory_tool():
++    """Skill nudges must not grow USER.md/MEMORY.md when memory review is off."""
++    import run_agent
++    from hermes_cli import plugins as _plugins
++
++    captured = {}
++
++    def _capture_whitelist(whitelist, deny_msg_fmt=None):
++        captured["whitelist"] = set(whitelist)
++        raise RuntimeError("stop after capturing whitelist")
++
++    agent = _make_agent_stub(run_agent.AIAgent)
++
++    with patch.object(run_agent.AIAgent, "__init__", lambda self, *a, **k: None), \
++         patch.object(_plugins, "set_thread_tool_whitelist", _capture_whitelist), \
++         patch("threading.Thread", _SyncThread):
++        agent._spawn_background_review(
++            messages_snapshot=[],
++            review_memory=False,
++            review_skills=True,
++        )
++
++    whitelist = captured["whitelist"]
++    assert "memory" not in whitelist
++    assert "skill_manage" in whitelist
++    assert "skill_view" in whitelist
++    assert "skills_list" in whitelist
++
++
+ 
+ 
+ 

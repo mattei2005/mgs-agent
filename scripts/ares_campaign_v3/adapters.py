@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import re
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -14,6 +15,18 @@ CPV_SOURCE_CAMPAIGN_ID = "120250209380780632"
 CPV_SOURCE_ADSET_ID = "120250209380820632"
 CPV_PAGE_ID = "621037101089579"
 SP = ZoneInfo("America/Sao_Paulo")
+CPV_CANONICAL_VIDEO_RE = re.compile(
+    r"^CAR_BR_BR_VID_[A-Z0-9]+(?:_[A-Z0-9]+)*_(?:PV|NV|PH|NH)_\d{3}\.mp4$"
+)
+
+
+def _cpv_canonical_stem(ref: dict[str, str]) -> str:
+    filename = str(ref.get("canonical_filename") or "").strip()
+    if not filename:
+        raise ValueError("CPV v3 asset_ref requires canonical_filename")
+    if Path(filename).name != filename or not CPV_CANONICAL_VIDEO_RE.fullmatch(filename):
+        raise ValueError(f"CPV v3 canonical_filename is invalid: {filename}")
+    return Path(filename).stem
 
 
 def _replace_cpv_utm(value: Any, number: int) -> Any:
@@ -48,6 +61,7 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
         ads = []
         for ad_index in range(3):
             ref = asset_refs[campaign_index * 3 + ad_index]
+            canonical_stem = _cpv_canonical_stem(ref)
             ready = registry.require_ready(CPV_ACCOUNT_ID, ref["asset_id"], ref["checksum"])
             source_template = templates[ad_index]
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
@@ -65,9 +79,9 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
             asset_feed["videos"] = replacement_videos
             template["asset_feed_spec"] = asset_feed
             template.setdefault("object_story_spec", {"page_id": CPV_PAGE_ID})
-            template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {ref['asset_id']}"
+            template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {canonical_stem}"
             ads.append({
-                "name": f"AD {ad_index + 1:02d} - {ref['asset_id']}",
+                "name": f"AD {ad_index + 1:02d} - {canonical_stem}",
                 "media": ready,
                 "creative_payload": template,
             })

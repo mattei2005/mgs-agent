@@ -11,7 +11,7 @@ Token | Significado                                    | Formato
 ------|------------------------------------------------|--------
 bNN   | Business Manager onde está a conta             | 2 dígitos
 fbNN  | Conta de anúncio Meta dentro da sequência MGS  | 2 dígitos
-cNN   | Campanha dentro da conta                       | 2 dígitos
+cN    | Campanha dentro da conta                       | mínimo 2 dígitos, sem limite superior
 gNN   | Adset/conjunto dentro da campanha              | 2 dígitos
 gXXX  | Gestor responsável                             | 3 dígitos
 -f    | Estratégia de chat                             | literal
@@ -55,16 +55,16 @@ Exemplo: `b01fb01c01g01`.
 
 1. `utm_adgroup` começa com o valor exato de `utm_campaign`.
 2. O sufixo de `utm_adgroup` contém somente um `gNN` adicional.
-3. BM, conta, campanha e adset usam no mínimo/contrato atual exatamente 2 dígitos.
+3. BM, conta e adset usam exatamente 2 dígitos. Campanha usa no mínimo 2 dígitos e cresce naturalmente sem limite superior (`01..99`, depois `100`, `101` etc.).
 4. Gestor usa exatamente 3 dígitos.
 5. Não há espaços em nomes ou valores.
 6. A URL contém uma ocorrência de cada UTM obrigatória.
 7. Outros parâmetros podem coexistir (`fbclid`, parâmetros internos), mas não duplicar/chocar UTMs canônicas.
 
-## Unicidade e reciclagem dos slots 01–60
+## Unicidade e sequência sem limite superior
 
-1. Os números visuais e operacionais da campanha são limitados a `01–60`.
-2. O wrapper é imutável: `utm_campaign=bNNfbNNcNN` e `utm_adgroup=bNNfbNNcNNgNN`. Não adicionar `rNN`, data, versão ou outro sufixo.
+1. A campanha usa numeração sequencial sem limite em `c59` ou `c60`. Números de 1 a 9 recebem zero à esquerda; de `c100` em diante a largura cresce naturalmente.
+2. O wrapper é imutável: `utm_campaign=bNNfbNNc{N}` e `utm_adgroup=bNNfbNNc{N}gNN`. Não adicionar `rNN`, data, versão ou outro sufixo.
 3. Não pode haver duas campanhas não deletadas com o mesmo par `utm_campaign`/`utm_adgroup` no estado final.
 4. Segundo Ciro, desenvolvedor da Smart Bidding, deletar a campanha antiga é suficiente para que a UTM canônica do slot possa ser reutilizada.
 5. Rollover seguro: confirmar antiga `PAUSED` e terminal após D3/reconciliação → criar substituta `PAUSED` e validar → deletar antiga → readback operador `DELETED` → ativar substituta após revisão.

@@ -52,7 +52,7 @@ Blocos de anúncio             Criados/configurados dentro das redes dos parceir
 SMS / Messenger / broadcast   Estratégias de retorno de usuário para os sites.
 ```
 
-A MGS tem alguns sites dentro da rede da Smart Bidding e alguns sites dentro da rede da ActiveView. Como a dashboard da Smart Bidding é mais completa, a preferência operacional é concentrar o gerenciamento dos sites nela. `openzed` e seus subdomínios ainda seguem no controle/tecnologia da ActiveView; Cliquet, finanzas.cliquet, Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding.
+A MGS tem alguns sites dentro da rede da Smart Bidding e alguns sites dentro da rede da ActiveView. Como a dashboard da Smart Bidding é mais completa, a preferência operacional é concentrar o gerenciamento dos sites nela. `openzed` e seus subdomínios ainda seguem intencionalmente no controle/tecnologia da ActiveView. Wavesbee e finanzas.wavesbee usam JBF/GAM SB. Cliquet e finanzas.cliquet carregam wrapper JBF, porém ainda requisitam o GAM AV `198073784` por builders antigos; a migração para o GAM SB permanece incompleta.
 
 ### Custo / aquisição
 

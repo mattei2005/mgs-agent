@@ -1,0 +1,216 @@
+{
+  "checked_at_utc": "2026-08-21T18:13:09.134969+00:00",
+  "status": "COMPLETE_FUTURE_ACTIVE_RECOVERED",
+  "all_pass": true,
+  "errors": [],
+  "validation_note": "Meta materializou IDs de vídeo novos; identidade conciliada por título de lineage, dimensão, duração e vídeo completo SSIM/PSNR, não por igualdade de video_id.",
+  "visual_reconciliation": {
+    "all_pass": true,
+    "min_ssim": 0.99259,
+    "min_psnr_db": 44.225177
+  },
+  "summary": {
+    "07": {
+      "old_campaign": {
+        "id": "120250209327510632",
+        "name": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+        "status": "DELETED",
+        "configured_status": "DELETED",
+        "effective_status": "DELETED"
+      },
+      "new_campaign": {
+        "id": "120250872826560632",
+        "name": "07 - 22-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "start_time": "2026-08-22T00:30:00-0300"
+      },
+      "adset": {
+        "id": "120250872827440632",
+        "name": "01 - AdGroup - (b01fb13c07g01) event_Subscribe - MAXVOL",
+        "campaign_id": "120250872826560632",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "bid_amount": null,
+        "bid_constraints": null,
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE",
+          "smart_pse_enabled": false
+        },
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "start_time": "2026-08-22T00:30:00-0300"
+      },
+      "ads": [
+        {
+          "id": "120250872908040632",
+          "name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_019",
+          "configured_status": "ACTIVE",
+          "effective_status": "PENDING_REVIEW",
+          "creative_id": "28424746277138593",
+          "creative_name": "CPV C07 AD01 CAR_BR_BR_VID_SUPER_OFERTA_NV_019 2026-08-21-db34f3f060312b72333d2fe42c4bccc4",
+          "video_ids": [
+            "1039934465516323",
+            "909934985518023"
+          ],
+          "asset_id": "asset_47afe0a65b05273c8056",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        },
+        {
+          "id": "120250872908480632",
+          "name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_020",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative_id": "2909390809459790",
+          "creative_name": "CPV C07 AD02 CAR_BR_BR_VID_SUPER_OFERTA_NV_020 2026-08-21-8e58817d6b3a004cb7fa3e5eae7d8ae0",
+          "video_ids": [
+            "1945494382809073",
+            "897050593124185"
+          ],
+          "asset_id": "asset_983f0552648c72cf20b0",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        },
+        {
+          "id": "120250872908660632",
+          "name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_021",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative_id": "1061585886354649",
+          "creative_name": "CPV C07 AD03 CAR_BR_BR_VID_SUPER_OFERTA_NV_021 2026-08-21-1d0fdde60bcc9370426554529541004f",
+          "video_ids": [
+            "1384051423833450",
+            "942861158860994"
+          ],
+          "asset_id": "asset_2ee0484fa713b1406152",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c07&utm_adgroup=b01fb13c07g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        }
+      ],
+      "spend_today_usd": 0
+    },
+    "11": {
+      "old_campaign": {
+        "id": "120250210269480632",
+        "name": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe",
+        "status": "DELETED",
+        "configured_status": "DELETED",
+        "effective_status": "DELETED"
+      },
+      "new_campaign": {
+        "id": "120250872826570632",
+        "name": "11 - 22-08 - Garagem Brasil - (b01fb13c11) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "3000",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "start_time": "2026-08-22T00:30:00-0300"
+      },
+      "adset": {
+        "id": "120250872827380632",
+        "name": "01 - AdGroup - (b01fb13c11g01) event_Subscribe - MAXVOL",
+        "campaign_id": "120250872826570632",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "bid_amount": null,
+        "bid_constraints": null,
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE",
+          "smart_pse_enabled": false
+        },
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "start_time": "2026-08-22T00:30:00-0300"
+      },
+      "ads": [
+        {
+          "id": "120250872908080632",
+          "name": "AD01 - CAR_BR_BR_VID_SUPER_OFERTA_NV_022",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative_id": "2057120931636470",
+          "creative_name": "CPV C11 AD01 CAR_BR_BR_VID_SUPER_OFERTA_NV_022 2026-08-21-4f4b919d04c3567c692dfe98a29f0696",
+          "video_ids": [
+            "1265596958938544",
+            "1608891690869494"
+          ],
+          "asset_id": "asset_64a92396935ff7b29e72",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        },
+        {
+          "id": "120250872908060632",
+          "name": "AD02 - CAR_BR_BR_VID_SUPER_OFERTA_NV_023",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative_id": "1076771781965879",
+          "creative_name": "CPV C11 AD02 CAR_BR_BR_VID_SUPER_OFERTA_NV_023 2026-08-21-3ee8bf9c27545fd3cb5fc48518a17699",
+          "video_ids": [
+            "2802733243441478",
+            "1393501572756465"
+          ],
+          "asset_id": "asset_c30cbe257e2022463f7e",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        },
+        {
+          "id": "120250872910800632",
+          "name": "AD03 - CAR_BR_BR_VID_SUPER_OFERTA_NV_024",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative_id": "1058653260471428",
+          "creative_name": "CPV C11 AD03 CAR_BR_BR_VID_SUPER_OFERTA_NV_024 2026-08-21-64e5a1c44311699a6bb61d9e14c92bc9",
+          "video_ids": [
+            "1620172392966357",
+            "1520209793472150"
+          ],
+          "asset_id": "asset_23eb4ab64a72d006ee4e",
+          "urls": [
+            "https://creditoparaveiculo.com/quiz-car-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c11&utm_adgroup=b01fb13c11g01"
+          ],
+          "labels_present": true,
+          "standard_enhancements_present": false
+        }
+      ],
+      "spend_today_usd": 0
+    }
+  }
+}

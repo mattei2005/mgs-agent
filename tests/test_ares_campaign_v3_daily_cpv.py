@@ -17,6 +17,7 @@ from ares_campaign_v3.daily_cpv import (
     DailyPaths,
     DailyBlocked,
     active_budget_minor,
+    auto_arm_first_delivery_campaigns,
     enforce_budget_cap,
     gate_due,
     next_campaign_numbers,
@@ -26,6 +27,7 @@ from ares_campaign_v3.daily_cpv import (
     run_daily,
     select_assets,
     validate_engine_config,
+    update_operation_after_creation,
     move_to_testing,
     campaign_name_collisions,
     failure_resume_state,
@@ -125,6 +127,49 @@ def test_failure_after_external_side_effect_never_becomes_terminal_failed():
     assert failure_resume_state({"campaign_write": True}, known_campaign_ids=True) == ("READBACK_DEFERRED", False)
     assert failure_resume_state({"drive_move": True, "campaign_write": True}, known_campaign_ids=True) == ("POSTPROCESS_PENDING", False)
     assert failure_resume_state({}, known_campaign_ids=False) == ("FAILED", False)
+
+
+def test_first_delivery_auto_arm_helper_requires_exact_zero_write_readback(tmp_path):
+    script = tmp_path / "guardrail.py"
+    script.write_text(
+        "import json,sys\n"
+        "ids=[sys.argv[i+1] for i,x in enumerate(sys.argv) if x=='--campaign-id']\n"
+        "print(json.dumps({'status':'AUTO_ARMED','campaign_ids':ids,'armed_count':len(ids),'meta_writes':0}))\n"
+    )
+    result = auto_arm_first_delivery_campaigns(
+        ["c17", "c18"],
+        datetime(2026, 8, 23, tzinfo=SP).date(),
+        "request-17-18",
+        script=script,
+    )
+    assert result["status"] == "AUTO_ARMED"
+    assert result["campaign_ids"] == ["c17", "c18"]
+    assert result["meta_writes"] == 0
+
+
+def test_operation_partial_postprocess_adds_allowlist_without_closing_request(tmp_path):
+    path = tmp_path / "operation.json"
+    payload = operation(next_number=17)
+    payload["management_scope"] = {"autonomous_action_scope": {"allowed_campaigns": {}}}
+    payload["daily_new_campaign_routine"]["one_time_override_20260821"]["status"] = "pending"
+    path.write_text(json.dumps(payload))
+    manifest = SimpleNamespace(
+        request_id="request-17",
+        campaigns=[SimpleNamespace(name="17 - 22-08 - Garagem Brasil - (b01fb13c17) event_Subscribe - MAXVOL")],
+    )
+    update_operation_after_creation(
+        path,
+        manifest,
+        ["campaign-17"],
+        datetime(2026, 8, 21, tzinfo=SP).date(),
+        complete_request=False,
+    )
+    readback = json.loads(path.read_text())
+    allowed = readback["management_scope"]["autonomous_action_scope"]["allowed_campaigns"]["17"]
+    assert allowed["campaign_id"] == "campaign-17"
+    assert allowed["cycle_start_date"] == "2026-08-22"
+    assert readback["campaign_numbering_policy"]["next_required_campaign_number"] == 18
+    assert readback["daily_new_campaign_routine"]["one_time_override_20260821"]["status"] == "pending"
 
 
 def test_one_time_override_is_three_total_and_default_remains_two():

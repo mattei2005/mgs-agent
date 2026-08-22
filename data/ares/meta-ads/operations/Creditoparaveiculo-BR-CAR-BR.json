@@ -86,10 +86,14 @@
   },
   "learning_policy": {
     "days": 3,
-    "day_1_action": "observe_no_cut; scale at 08:00 only by approved ROI tiers",
-    "day_2_action": "observe_no_cut; repeat approved ROI tiers",
-    "day_3_action": "ROI<=-10 passes estimated/anomaly gate; pause if no bounded hold; scale by 10/20/30 tiers",
-    "d3_cut_roi_pct": -10.0,
+    "terminology": {
+      "general_roi": "Smart Bidding ROI/actual ROI from NET_REVENUE; used for 08:00 scale tiers",
+      "estimated_roi": "separate Smart Bidding estimated ROI; used for D3 trajectory and 16:00 pause guardrails",
+      "never_conflate": true
+    },
+    "day_1_action": "observe outside tiers; scale once at 08:00 only when general ROI is strictly above 20%",
+    "day_2_action": "observe outside tiers; repeat the same one-time 08:00 general-ROI scale tiers",
+    "day_3_action": "at 08:00, permanently stop when estimated ROI was negative at D1 08:00, D2 08:00 and remains negative at D3 08:00; otherwise apply the general-ROI scale/observe tiers",
     "scale_tiers": [
       {
         "roi_gt": 40.0,
@@ -101,30 +105,80 @@
         "budget_increase_pct": 20.0
       },
       {
-        "roi_gte": 20.0,
+        "roi_gt": 20.0,
         "roi_lte": 30.0,
         "budget_increase_pct": 10.0
       }
     ],
-    "scale_checkpoint": "around_08:00_account_timezone",
-    "decision_source": "Smart Bidding AdGroup USD NET_REVENUE revshare enabled",
-    "meta_roas_role": "signal_only",
-    "no_scale_roi_lt": 20.0,
-    "d3_estimated_gate": {
-      "actual_roi_lte": -10.0,
-      "estimated_roi_positive": "hold one consolidation/next checkpoint, no scale",
-      "actual_and_estimated_negative": "pause unless external anomaly",
-      "estimated_never_scales_alone": true
-    }
+    "maintain_without_scale": {
+      "roi_gt": 10.0,
+      "roi_lte": 20.0
+    },
+    "observe_d1_d2_outside_tiers": true,
+    "scale_checkpoint": "08:00 America/Sao_Paulo only; at most one scale per campaign/day",
+    "scale_decision_source": "Smart Bidding general ROI, USD NET_REVENUE, revenue share enabled",
+    "d3_estimated_trajectory_gate": {
+      "checkpoint": "08:00 America/Sao_Paulo",
+      "required_cycle_days": [
+        1,
+        2,
+        3
+      ],
+      "metric": "Smart Bidding estimated ROI",
+      "condition": "estimated ROI strictly negative at each D1/D2/D3 morning checkpoint",
+      "action": "permanent campaign-level pause; no 00:30 reactivation",
+      "missing_checkpoint": "fail closed; do not infer a negative streak"
+    },
+    "post_scale_16h_guardrail": {
+      "checkpoint": "16:00 America/Sao_Paulo",
+      "eligibility": "campaign budget was actually scaled and readback-verified at 08:00 the same day",
+      "trigger": "general ROI < 0 and estimated ROI < 0 at 16:00",
+      "estimated_positive": "keep active even when general ROI is negative",
+      "first_occurrence": "pause at campaign level; schedule guarded reactivation at 00:30 next day",
+      "second_consecutive_occurrence": "repeat pause and guarded 00:30 next-day reactivation",
+      "third_consecutive_occurrence": "permanent campaign-level pause; never reactivate",
+      "healthy_scaled_day": "a following day that does not repeat the same post-scale dual-negative behavior resets the consecutive counter; a day without a new scale also breaks the sequence",
+      "reactivation_provenance": "only a pause confirmed by this guardrail can be reactivated"
+    },
+    "analysis_checkpoints": [
+      "08:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "20:00 America/Sao_Paulo"
+    ]
+  },
+  "first_delivery_guardrail": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_et": "2026-08-22T13:49:00-04:00",
+    "scope": "every validated new production campaign plus the currently armed zero-spend campaigns",
+    "automatic_enrollment": "every validated new production campaign after Campaign Engine v3 readback",
+    "enrollment_gate": "campaign ACTIVE with future 00:30 start, exact canonical date/name, allowlist identity, hierarchy readback and zero observed spend",
+    "initial_operational_date": "2026-08-23",
+    "watch_interval_minutes": 15,
+    "grace_window": "00:30 through 02:00 inclusive America/Sao_Paulo",
+    "grace_action": "first spend observed within the grace window releases the campaign from this watcher with no pause and no future rearm",
+    "trigger": "first_observed_spend_after_02_00_grace_window",
+    "action": "outside the grace window, pause immediately at campaign level after the first observed positive spend and verify by GET",
+    "reactivation_time": "00:30 America/Sao_Paulo next day",
+    "renaming": "campaign DD-MM is the next 00:30 operational restart date; UTM and campaign identity remain unchanged",
+    "cycle_accounting": "a campaign released between 00:30 and 02:00 continues its scheduled D1; a campaign paused after the grace window keeps the observed spend as pre-D1 and the next verified 00:30 reactivation starts operational D1",
+    "one_shot": true,
+    "repeat_after_safe_release_or_verified_reactivation": false,
+    "support_basis": "Rodolfo relayed Meta support guidance that first delivery indicates release; do not infer an exact 72-hour threshold",
+    "provenance_required_for_reactivation": "first_delivery_guardrail",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-first-delivery-guardrail.json",
+    "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py"
   },
   "daily_budget_policy": {
-    "operational_account_cap_usd": 300.0,
+    "operational_account_cap_usd": 500.0,
     "new_campaign_share_default": 0.2,
     "new_campaign_share_flexible_max": 0.3,
     "new_campaign_initial_budget_usd": 30.0,
     "campaign_operational_ceiling_usd": 150.0,
     "campaign_ceiling_definition_status": "approved_guardrail",
-    "account_cap_scaling_policy_status": "Ares may change campaign budgets only through approved ROI tiers within the USD300 operational cap; Ares never raises the account cap autonomously",
+    "account_cap_scaling_policy_status": "Rodolfo Mattei raised the internal daily operational cap to USD500 on 2026-08-22; Ares may change campaign budgets only through approved ROI tiers within this cap and never raises it autonomously",
     "campaign_daily_ceiling_usd": 150.0,
     "reactivation_campaigns_initial_budget_usd": {
       "07": 30.0,
@@ -141,11 +195,11 @@
     "activated_at_et": "2026-08-20T17:06:18-04:00",
     "status": "active_scheduled",
     "responsibility": "Ares daily operation includes creating new direct-traffic campaigns in addition to analysis, D1/D2 scaling and campaign-level pauses",
-    "account_operational_cap_usd": 300,
+    "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
-    "new_campaign_budget_pool_usd": 60,
+    "new_campaign_budget_pool_usd": 100,
     "default_campaign_initial_budget_usd": 30,
-    "default_campaign_count_when_not_otherwise_specified": 2,
+    "default_campaign_count_when_not_otherwise_specified": 3,
     "one_time_override_20260821": {
       "authorized_by": "Rodolfo Mattei",
       "scope": "three total new campaigns, not two plus three",
@@ -160,18 +214,27 @@
         "active_budget_usd": 213,
         "available_budget_usd": 87,
         "projected_budget_usd": 273,
-        "selected_campaign_numbers": [14, 15],
+        "selected_campaign_numbers": [
+          14,
+          15
+        ],
         "side_effects": "none"
       },
       "budget_per_campaign_usd": 30,
       "mode": "clone_prestaged",
-      "planner_bundles": [2, 1],
-      "selected_planner_bundles": [2],
+      "planner_bundles": [
+        2,
+        1
+      ],
+      "selected_planner_bundles": [
+        2
+      ],
       "creative_lineages_required": 9,
       "selected_creative_lineages_required": 6,
       "creation_at": "2026-08-21T17:00:00-03:00",
       "delivery_start": "2026-08-22T00:30:00-03:00",
-      "status": "authorized_pending_media_manifest_and_live_preflight"
+      "status": "completed_validated",
+      "completed_at_utc": "2026-08-21T21:14:55.512328+00:00"
     },
     "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
     "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
@@ -179,12 +242,12 @@
     "campaign_name_date_source": "delivery/start date; never the creation date",
     "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
-    "budget_gate": "complete live active-budget preflight; never exceed USD300 account cap",
+    "budget_gate": "complete live active-budget preflight; never exceed USD500 account cap",
     "creative_source": "Shared Drive MGS-AGENTS/CRIATIVOS/CAR_BR_BR; select only reconciled unique lineages and move used assets from 01_READY to 02_TESTING after Meta readback",
     "stock_reporting_required": true,
     "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
-    "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start; v2 creation/activation crons remain paused as rollback."
+    "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback; v2 creation/activation crons remain paused as rollback."
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
@@ -199,10 +262,13 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-20T18:45:25-03:00",
-    "next_required_campaign_number": 14,
+    "next_required_campaign_number": 17,
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
-    "prior_wrong_retry_slots": [50, 49],
+    "prior_wrong_retry_slots": [
+      50,
+      49
+    ],
     "prior_wrong_retry_removed_before_execution": true,
     "two_campaign_batch_gate": "C12 is mandatory first; the second sequential slot is C13 and must fail closed if a non-deleted C13 already exists until Rodolfo decides whether today is one campaign or a controlled C13 replacement",
     "live_readback_20260820_1954_sp": {
@@ -213,7 +279,10 @@
       "c13": "PAUSED legacy ROAS campaign, USD25, non-deleted",
       "decision_required": "resolved: Rodolfo replied ok faca after the C12-only versus C12+C13 replacement options; apply the standing two-campaign instruction as authorization for controlled C12+C13 replacement",
       "replacement_authorized": true,
-      "replacement_scope": [12, 13],
+      "replacement_scope": [
+        12,
+        13
+      ],
       "replacement_commit_order": "validate both new campaigns PAUSED first, then delete/readback old C12 and old C13 one by one; preserve new PAUSED state on partial commit"
     }
   },
@@ -222,7 +291,8 @@
     "smart_bidding_source": "Ciro (SB developer), relayed by Rodolfo Mattei",
     "superseded_at_et": "2026-08-20T14:48:29-04:00",
     "campaign_number_min": 1,
-    "campaign_number_max": 60,
+    "campaign_number_max": null,
+    "campaign_number_format": "minimum two digits with no upper bound; 01..99 then 100, 101 and onward",
     "wrapper_format_immutable": true,
     "generation_suffix_forbidden": true,
     "simultaneous_non_deleted_duplicate_utm_forbidden": true,
@@ -286,13 +356,16 @@
       "operation_only": "Creditoparaveiculo-BR-CAR-BR-13-G006",
       "level": "campaign_only",
       "allowed": [
-        "scale campaign daily_budget by approved ROI tiers 10/20/30 percent at the 08:00 checkpoint",
-        "pause campaign on D3 only after actual ROI, estimated revenue and fully calibrated external anomaly gates",
-        "prepare the daily 17:00 Sao Paulo cycle as 2 PAUSED MAXVOL campaigns of USD30 each with six unique reconciled Drive creatives and full readback; activate only the two campaigns at/after 00:30 next day through the separate guarded activation phase"
+        "scale campaign daily_budget once at 08:00 by strict general-ROI tiers: >20–30 +10%, >30–40 +20%, >40 +30%",
+        "permanently pause at D3 08:00 only when negative estimated ROI is persisted at D1, D2 and D3 morning checkpoints",
+        "after a verified 08:00 scale, pause at 16:00 when both general ROI and estimated ROI are negative; guarded reactivation at 00:30 after occurrences 1–2 and permanent stop on occurrence 3",
+        "prepare the daily 17:00 Sao Paulo campaign cycle through Campaign Engine v3 with reconciled creatives and full readback"
       ],
       "current_gate_status": {
         "budget_scale": "enabled",
-        "campaign_pause": "fail_closed_until_external_anomaly_thresholds_are_calibrated"
+        "d3_estimated_trajectory_pause": "enabled",
+        "post_scale_16h_pause": "enabled",
+        "guardrail_00_30_reactivation": "enabled_for_verified_temporary_pauses_only"
       },
       "scale_execution_gate": {
         "checkpoint": "08:00 America/Sao_Paulo",
@@ -301,7 +374,10 @@
         "required_matched_adgroups": 1,
         "actual_roi_required": true,
         "estimated_roi_never_scales_alone": true,
-        "technical_safety_basis": "bounded above the validated 98-minute delay snapshot; missing/nonfinite/staler data fails closed"
+        "technical_safety_basis": "bounded above the validated 98-minute delay snapshot; missing/nonfinite/staler data fails closed",
+        "general_roi_required": true,
+        "estimated_roi_used_for_scale": false,
+        "strict_lower_bound_roi_pct": 20.0
       },
       "write_safety": {
         "transport": "single-attempt absolute POST then bounded GET before any retry",
@@ -312,8 +388,8 @@
       },
       "allowed_campaigns": {
         "07": {
-          "campaign_id": "120250209327510632",
-          "cycle_start_date": "2026-08-20"
+          "campaign_id": "120250872826560632",
+          "cycle_start_date": "2026-08-23"
         },
         "08": {
           "campaign_id": "120250209380780632",
@@ -328,23 +404,41 @@
           "cycle_start_date": "2026-08-20"
         },
         "11": {
-          "campaign_id": "120250210269480632",
-          "cycle_start_date": "2026-08-20"
+          "campaign_id": "120250872826570632",
+          "cycle_start_date": "2026-08-23"
         },
         "12": {
           "campaign_id": "120250860233210632",
-          "cycle_start_date": "2026-08-22"
+          "cycle_start_date": "2026-08-23"
         },
         "13": {
           "campaign_id": "120250860295890632",
-          "cycle_start_date": "2026-08-22"
+          "cycle_start_date": "2026-08-23"
+        },
+        "14": {
+          "campaign_id": "120250874142920632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260821"
+        },
+        "15": {
+          "campaign_id": "120250874142910632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260821"
+        },
+        "16": {
+          "campaign_id": "120250874307310632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260821"
         }
       },
       "required": [
         "fresh Meta preflight",
         "manual hold check",
         "USD150 campaign ceiling",
-        "USD300 account operational cap",
+        "USD500 account operational cap",
         "idempotency lock/state",
         "audit without credentials",
         "Meta GET readback"
@@ -355,7 +449,25 @@
         "adset or ad level shutdown",
         "clone/replacement outside the separately approved daily from-zero creation route",
         "other accounts or operations"
-      ]
+      ],
+      "pause_execution_gate": {
+        "source": "Smart Bidding USD with revenue share enabled",
+        "max_smart_bidding_delay_minutes": 120,
+        "d3_checkpoint": "08:00 America/Sao_Paulo",
+        "d3_required_persisted_estimated_negative_days": [
+          1,
+          2,
+          3
+        ],
+        "post_scale_checkpoint": "16:00 America/Sao_Paulo",
+        "post_scale_requires_verified_08_scale": true,
+        "post_scale_requires_general_roi_negative": true,
+        "post_scale_requires_estimated_roi_negative": true,
+        "temporary_pause_reactivates_at": "00:30 next day America/Sao_Paulo",
+        "temporary_reactivation_limit": 2,
+        "third_consecutive_failure": "terminal_pause",
+        "missing_or_stale_data": "fail_closed_no_write"
+      }
     }
   },
   "reporting_presentation": {
@@ -401,8 +513,20 @@
     "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
     "remove_id_rec": true,
     "campaign_identifier": "campaign number column",
-    "daily_focus": "07:00 previous closed-day performance; 08:00/11:00/14:00/20:00 current-day performance through dispatch time",
+    "daily_focus": "07:00 previous closed-day performance; 08:00/12:00/14:00/16:00/20:00 current-day performance through dispatch time",
     "intraday_focus": "current decision, executed action, gates and readback",
+    "intraday_roi_history": {
+      "status": "canonical_default",
+      "days": 3,
+      "window": "current partial day plus the two immediately previous calendar dates",
+      "source": "Smart Bidding NET_REVENUE in USD with revenue share enabled",
+      "mobile": "three dated ROI lines inside each campaign card",
+      "desktop": "separate compact dated ROI table after the consolidated current-metrics table",
+      "missing_value": "n/d when the campaign has no investment/match on that date",
+      "current_day_marker": "asterisk and explicit partial-until dispatch time",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-21"
+    },
     "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
     "new_campaign_visibility_required": true,
     "report_scope_is_separate_from_autonomous_write_allowlist": true,
@@ -426,7 +550,7 @@
         "period": "current day through dispatch time"
       },
       {
-        "time": "11:00",
+        "time": "12:00",
         "timezone": "America/Sao_Paulo",
         "type": "daily",
         "period": "current day through dispatch time"
@@ -438,13 +562,19 @@
         "period": "current day through dispatch time"
       },
       {
+        "time": "16:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      },
+      {
         "time": "20:00",
         "timezone": "America/Sao_Paulo",
         "type": "daily",
         "period": "current day through dispatch time"
       }
     ],
-    "dispatch_count_per_day": 5
+    "dispatch_count_per_day": 6
   },
   "scheduler_jobs": {
     "daily": {
@@ -454,8 +584,9 @@
       "timezone_gate": [
         "07:00",
         "08:00",
-        "11:00",
+        "12:00",
         "14:00",
+        "16:00",
         "20:00 America/Sao_Paulo"
       ],
       "script": "creditoparaveiculo-daily.sh",
@@ -463,7 +594,18 @@
       "deliver": "local",
       "direct_thread_post": "1539831487719800872",
       "enabled": true,
-      "cadence": "five Daily reports per day; 07:00 references the previous closed day and 08:00/11:00/14:00/20:00 reference the current day through dispatch time"
+      "cadence": "six Daily reports per day; 07:00 references the previous closed day and 08:00/12:00/14:00/16:00/20:00 reference the current day through dispatch time",
+      "report_layout": {
+        "style": "hybrid_mobile_cards_desktop_tables_v1",
+        "status": "active_pending_visual_confirmation",
+        "mobile_cards": "one campaign per card with Budget/Spend, Custo/ROAS and ROI SB; 34-character divider between campaigns",
+        "desktop_tables": "preserve the consolidated campaign table and account summary table",
+        "campaign_scope": "all current non-deleted Meta campaigns in the operation lineage; missing historical rows enter only with material period spend, investment or net revenue",
+        "zero_only_ghost_policy": "exclude rows absent from current Meta campaigns when spend, investment and net revenue are all zero; C28/C34 are the validated regression examples",
+        "requested_by": "Rodolfo Mattei",
+        "requested_at": "2026-08-21",
+        "source_thread_id": "1540379584124555334"
+      }
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
@@ -483,13 +625,38 @@
         "21:00",
         "23:00 America/Sao_Paulo"
       ],
-      "action_only_checkpoint": "08:00 America/Sao_Paulo; preserve approved scale timing without publishing an extra report",
+      "action_only_checkpoint": "08:00 scale checkpoint and 16:00 post-scale guardrail checkpoint, America/Sao_Paulo; no extra Intraday report",
       "script": "creditoparaveiculo-intraday.sh",
       "no_agent": true,
       "deliver": "local",
       "direct_thread_post": "1539832402744975450",
       "enabled": true,
-      "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight"
+      "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
+      "report_layout": {
+        "style": "hybrid_mobile_cards_desktop_table_v2",
+        "status": "canonical_default",
+        "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
+        "campaign_header": "signal + Camp-DD/MM + Lance + Dn + operator status",
+        "action_line": "separate line; OBSERVAR renders as OBSERVAR · D1/D2",
+        "metrics": "two columns per line: Budget/Spend, Custo/ROAS, ROI real/ROI est; then three dated ROI SB lines for the current partial day and two prior dates",
+        "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
+        "divider": "34 heavy horizontal characters between campaigns",
+        "desktop_table": "repeat the current campaign metrics as a consolidated aligned table after the final card, followed by a separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
+        "delivery_retry_policy": {
+          "authorized_by": "Rodolfo Mattei",
+          "authorized_at": "2026-08-21T15:23:56-03:00",
+          "trigger": "pre-post Discord safe chunking or fenced-table pagination failure",
+          "max_attempts": 2,
+          "retry": "one bounded automatic re-pack with fence-aware atomic sections and repeated table headers",
+          "partial_post_gate": "never retry blindly after any message ID exists; reconcile by Discord GET before another post",
+          "terminal_behavior": "fail closed only after the bounded retry also fails",
+          "audit_field": "chunking_retry_used"
+        },
+        "approved_by": "Rodolfo Mattei",
+        "approved_at": "2026-08-21",
+        "final_standard_confirmation": "Rodolfo Mattei confirmed the hybrid layout as the Intraday default after visual readback on mobile and desktop",
+        "source_thread_id": "1540379584124555334"
+      }
     },
     "daily_creation": {
       "internal_job_id": "2cf8115a4f8b",
@@ -538,7 +705,7 @@
       "enabled": false,
       "paused_reason": "Campaign Engine v3 uses native future scheduling; this recurring v2 activation job is frozen",
       "action_level": "campaign_only",
-      "preflight": "campaign PAUSED, one adset ACTIVE, three ads ACTIVE, no hold, combined active budget plus targets <= USD300",
+      "preflight": "campaign PAUSED, one adset ACTIVE, three ads ACTIVE, no hold, combined active budget plus targets <= USD500",
       "partial_failure_policy": "rollback only campaigns proven activated by the current attempt; ambiguous readback persists and retries after cooldown"
     },
     "snapshot": {
@@ -565,6 +732,28 @@
         "intraday"
       ],
       "other_threads_policy": "untouched; follow the standard agreed with Zeus"
+    },
+    "guardrail_reactivation": {
+      "name": "Creditoparaveiculo 13 G006 Guardrail Reactivation 00h30",
+      "scheduler": "30 * * * * with internal America/Sao_Paulo 00:30 gate",
+      "script": "creditoparaveiculo-guardrail-reactivate.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "scope": "only verified temporary pauses with post_scale_16h or first_delivery_guardrail provenance due today; terminal and unknown-provenance pauses excluded",
+      "internal_job_id": "5d0974e97ebd"
+    },
+    "first_delivery_watch": {
+      "internal_job_id": "990b3e644f36",
+      "name": "CPV primeiro gasto 15min",
+      "scheduler": "*/15 * * * *",
+      "script": "creditoparaveiculo-first-delivery-guardrail.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "cadence": "every 15 minutes while at least one auto-enrolled or explicitly armed campaign has not shown its first spend",
+      "decision": "first spend observed 00:30-02:00 SP inclusive releases without pause; later first spend pauses once and queues next-day 00:30 reactivation",
+      "action_delivery": "direct sanitized post to the fixed Intraday thread only after a verified pause; stdout stays empty"
     }
   },
   "pending_configuration": [
@@ -573,7 +762,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-21T12:21:00-03:00",
+  "updated_at": "2026-08-22T14:33:01-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -679,14 +868,18 @@
       "Spend Meta",
       "Receita Aquisição SB NET_REVENUE",
       "Receita SMS G006 NET_REVENUE",
+      "SMS enviados G006",
+      "Custo SMS G006 em USD",
       "Receita Total",
       "ROI Aquisição",
-      "ROI Total com SMS — antes do custo SMS"
+      "ROI Total com SMS — antes do custo SMS",
+      "ROI Total após custo SMS em USD"
     ],
     "formulas": {
       "revenue_total": "acquisition_net_revenue + sms_net_revenue",
       "roi_acquisition": "(acquisition_net_revenue - meta_spend) / meta_spend * 100",
-      "roi_total_with_sms_before_cost": "(acquisition_net_revenue + sms_net_revenue - meta_spend) / meta_spend * 100"
+      "roi_total_with_sms_before_cost": "(acquisition_net_revenue + sms_net_revenue - meta_spend) / meta_spend * 100",
+      "roi_total_after_sms_cost_usd": "(acquisition_net_revenue + sms_net_revenue - sms_cost_usd - meta_spend) / meta_spend * 100"
     },
     "validated_30d_example": {
       "period": "2026-07-21..2026-08-19",
@@ -702,10 +895,52 @@
       "currency": "BRL",
       "basis": "per SMS effectively sent",
       "source": "Rodolfo Mattei + canonical site rule",
-      "sent_count_source": "SMS Funnel/vendor total_sms_sent",
+      "sent_count_source": "SMS Funnel Dashboard: campaign list filtered by exact manager G006, then per-campaign funnel-performance/{campaignId}/sequences on the target civil date",
+      "credential_item": "SMS Funnel Dashboard",
+      "api_base": "https://web2.smsfunnel.com.br/api",
+      "manager_campaign_mapping": [
+        {
+          "experience": "quiz",
+          "campaign_id": "019ef609-ae0a-7227-99ca-351cd9f6ba2e",
+          "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006"
+        },
+        {
+          "experience": "chat",
+          "campaign_id": "019f6ce4-6940-71e6-9a6a-1f3d8abe54c3",
+          "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006"
+        }
+      ],
+      "date_semantics": {
+        "campaign_sequences": "inclusive; use start_date=target_date and end_date=target_date",
+        "global_consolidated": "end-exclusive in live readback; use end_date=target_date+1 only for global reconciliation, never manager attribution"
+      },
+      "validated_readback_2026_08_20": {
+        "timezone": "America/Sao_Paulo",
+        "g006_sms_sent": 430,
+        "quiz_sms_sent": 430,
+        "chat_sms_sent": 0,
+        "unit_cost_brl": 0.08,
+        "cost_brl": 34.4,
+        "ptax_sell_brl_per_usd": 5.1862,
+        "ptax_rate_date": "2026-08-20",
+        "cost_usd": 6.63,
+        "arithmetic_ok": true,
+        "global_sms_sent_not_attributed_to_g006": 5176,
+        "attribution_rule": "only the two explicit G006 campaign lineages enter G006 cost"
+      },
       "wp_estimate_separate": true,
       "wp_estimate_definition": "filtered WP rows × R$0.08; not vendor actual",
-      "currency_conversion": "BRL cost / confirmed USD_BRL rate with date/source",
+      "currency_conversion": "Divide BRL cost by Banco Central do Brasil PTAX cotacaoVenda for the target date; on weekend/holiday use the latest available official rate on or before target within 7 days and expose rate_date/source",
+      "fx_policy": {
+        "source": "Banco Central do Brasil PTAX",
+        "series": "CotacaoDolarDia",
+        "rate_type": "cotacaoVenda",
+        "unit": "BRL per USD",
+        "formula": "sms_cost_usd = sms_cost_brl / ptax_sell_brl_per_usd",
+        "fallback": "latest official rate on or before target date, maximum lookback 7 days",
+        "visible_report_currency": "USD",
+        "retain_brl_in_audit": true
+      },
       "roi_after_cost_formula": "(acquisition_net_revenue_usd + sms_net_revenue_usd - meta_spend_usd - sms_cost_usd) / meta_spend_usd * 100",
       "missing_sent_count_policy": "show ROI Total with SMS — before SMS cost; not net profit"
     }
@@ -866,7 +1101,7 @@
     "ares_write_performed": false
   },
   "campaign_engine_v3": {
-    "version": "3.0.0",
+    "version": "3.0.11",
     "status": "active_guarded_development_access",
     "authorized_by": "Rodolfo Mattei",
     "authorization_message_id": "1540222249036939324",
@@ -879,6 +1114,7 @@
     "soft_score": 100,
     "hard_score": 120,
     "media_policy": "prestage_before_manifest",
+    "ad_naming_policy": "canonical_filename required before manifest sealing; ad and creative names use canonical stem; asset_id remains technical only",
     "readback_policy": "one_outer_graph_batch_per_two_campaigns",
     "intermediate_get_calls": 0,
     "write_enabled": true,
@@ -890,7 +1126,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.47",
+  "playbook_version": "1.0.60",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
@@ -1058,11 +1294,11 @@
       {
         "key": "daily",
         "title": "Creditoparaveiculo 13 G006 Diario",
-        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 08:00/11:00/14:00/20:00",
+        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 08:00/12:00/14:00/16:00/20:00",
         "delivery": "recurring script-only report",
         "thread_id": "1539831487719800872",
-        "schedule": "07:00 America/Sao_Paulo for the previous closed day; 08:00, 11:00, 14:00 and 20:00 for the current day through dispatch time",
-        "period": "slot-dependent: previous closed day only at 07:00; current day at 08:00/11:00/14:00/20:00"
+        "schedule": "07:00 America/Sao_Paulo for the previous closed day; 08:00, 12:00, 14:00, 16:00 and 20:00 for the current day through dispatch time",
+        "period": "slot-dependent: previous closed day only at 07:00; current day at 08:00/12:00/14:00/16:00/20:00"
       },
       {
         "key": "intraday",
@@ -1071,6 +1307,20 @@
         "delivery": "recurring script-only report",
         "thread_id": "1539832402744975450",
         "schedule": "continuous every 2 hours on odd hours 01:00–23:00 America/Sao_Paulo; sequence crosses midnight; action-only checkpoint remains 08:00"
+      }
+    ],
+    "persistent_reference_threads": [
+      {
+        "key": "rules",
+        "title": "CPV Regras",
+        "purpose": "manual permanente da estratégia de tráfego direto para financiamento veicular; ponto de consulta dos gestores para regras vigentes",
+        "delivery": "manual only; no recurring report or automated campaign action targets this thread",
+        "thread_id": "1540426218405363873",
+        "retention": "preserve indefinitely; never auto-delete",
+        "update_policy": "when Rodolfo explicitly changes a rule, update the canonical operation/skills with supersession and publish the revised rule in this same thread",
+        "authorized_by": "Rodolfo Mattei",
+        "authorized_at": "2026-08-21T18:12:11-03:00",
+        "report_infra_message_id": "1540469642320154737"
       }
     ],
     "excluded_threads": [
@@ -1173,17 +1423,25 @@
     "new_campaign_window": "18:00-23:30 São Paulo; start 00:30 next day"
   },
   "smart_bidding_tracking_limit": {
+    "status": "active_no_upper_campaign_limit",
     "campaign_number_min": 1,
-    "campaign_number_max": 59,
-    "trackable_pattern": "b01fb13c01..b01fb13c59",
-    "campaign_60_plus": "no Smart Bidding tracking; technical test only with explicit authorization",
-    "production_behavior_at_limit": "block creation and require new mapping/convention",
-    "do_not_reuse_deleted_numbers": true,
-    "source": "Rodolfo Mattei"
+    "campaign_number_max": null,
+    "campaign_number_format": "minimum two digits; numbers above 99 expand naturally without suffixes",
+    "trackable_pattern": "b01fb13c{SEQUENTIAL_CAMPAIGN_NUMBER}",
+    "campaign_60_plus": "normal sequential production and Smart Bidding tracking; no special technical-test restriction",
+    "production_behavior_at_limit": "no C59 stop exists; continue the live Meta sequence while preserving canonical wrappers and uniqueness",
+    "do_not_reuse_deleted_numbers_in_normal_creation": true,
+    "replacement_exception": "an explicitly authorized replacement may reuse the canonical number after the controlled PAUSED/validated/DELETED rollover",
+    "confirmed_by": "Rodolfo Mattei",
+    "authority_source": "AdOps team confirmation relayed by Rodolfo Mattei",
+    "confirmed_at": "2026-08-21T18:40:34-03:00",
+    "report_infra_message_id": "1540477179010486384",
+    "supersedes": "the prior C01-C59 production/tracking limit and C60+ technical-test-only rule"
   },
   "test_create_clone_20260820": {
     "status": "completed_with_blockers_no_campaign_kept",
     "authorization": "technical test above c59; no SB tracking expected",
+    "tracking_assumption_status": "historical_and_superseded_by_AdOps_no-limit_confirmation_20260821",
     "source_campaign_number": 8,
     "attempted_numbers": [
       61,
@@ -1806,6 +2064,34 @@
     "citations_verified": true,
     "updated_at_et": "2026-08-20T12:52:17-04:00"
   },
+  "campaign_replacement_20260821_c07_c11": {
+    "status": "COMPLETE_FUTURE_ACTIVE_RECOVERED",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1540413462394568824",
+    "executed_at_sp": "2026-08-21T15:14:24-03:00",
+    "start_time_sp": "2026-08-22T00:30:00-03:00",
+    "source_selection": {
+      "07": "C09 MAXVOL — melhor ROI líquido reconciliado",
+      "11": "C08 MAXVOL — segundo melhor ROI líquido reconciliado"
+    },
+    "old_campaigns_deleted": {
+      "07": "120250209327510632",
+      "11": "120250210269480632"
+    },
+    "new_campaigns": {
+      "07": "120250872826560632",
+      "11": "120250872826570632"
+    },
+    "budget_usd_each": 30,
+    "structure": "CBO 1x1x3 MAXVOL",
+    "creative_lineages_reused_and_treated": 6,
+    "creative_files_clean": 12,
+    "drive_readbacks": 24,
+    "prestart_spend_usd": 0,
+    "engine_v3_result": "initial creative_ad_create failed because source adlabels were dropped; blind replay blocked; existing shells were reconciled and recovered after 6/6 validate_only with labels restored",
+    "final_readback": "campaigns/adsets/ads/UTMs/event/pixel/compliance/start/budget passed; materialized videos reconciled by lineage title, dimensions, duration and full-video SSIM/PSNR",
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/replacement-c07-c11-maxvol-20260821T181424Z.json"
+  },
   "reporting_schedule_history": [
     {
       "superseded_schedule": "Intraday every 2h continuously at odd São Paulo hours",
@@ -1837,6 +2123,14 @@
       "authorized_by": "Rodolfo Mattei",
       "correction": "Added one Daily current-day report at 08:00 without changing Intraday or the separate 08:00 action checkpoint",
       "source": "discord:thread:1540137110789562408"
+    },
+    {
+      "superseded_schedule": "Daily 07:00 previous closed day; Daily 08:00/11:00/14:00/20:00 current day through dispatch time",
+      "superseded_at": "2026-08-21T15:14:48-03:00",
+      "superseded_by": "Daily 07:00 previous closed day; Daily 08:00/12:00/14:00/16:00/20:00 current day through dispatch time",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Replace the 11:00 slot with 12:00 and add a new 16:00 same-day report; preserve 07:00, 08:00, 14:00 and 20:00 plus the independent Intraday and 08:00 action checkpoint",
+      "source": "discord:thread:1540422897854714049"
     }
   ]
 }

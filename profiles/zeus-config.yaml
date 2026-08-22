@@ -409,7 +409,7 @@ memory:
   memory_char_limit: 6400
   user_char_limit: 3600
   provider: honcho
-  nudge_interval: 10
+  nudge_interval: 0
   flush_min_turns: 6
 delegation:
   model: ''

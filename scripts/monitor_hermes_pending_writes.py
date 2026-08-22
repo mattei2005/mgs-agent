@@ -2,9 +2,12 @@
 """Monitor staged Hermes memory/skill writes without reading their content.
 
 Default mode updates a small anti-spam state and sends Discord embeds for
-items aged >= threshold, memory/user stores at or above the capacity threshold,
-daily reminders, scanner errors, and recovery. The ``--summary-json`` mode is
-strictly read-only and is used by REPORT-INFRA.
+items aged >= threshold, failure-only memory dead-letters, daily reminders,
+scanner errors, and recovery. Raw USER/MEMORY capacity remains visible in
+``--summary-json`` but is owned operationally by the dedicated automatic
+compactor; duplicate capacity alerts/proposals require explicit legacy
+``--capacity-alerts``. The ``--summary-json`` mode is strictly read-only and is
+used by REPORT-INFRA.
 """
 from __future__ import annotations
 
@@ -550,6 +553,19 @@ def _send(poster: Path, channel_id: str, payload: Dict[str, Any], *, dry_run: bo
     return result.stdout.strip()
 
 
+def capacity_owned_by_autocompactor(
+    summary: Dict[str, Any],
+    state: Dict[str, Any],
+) -> tuple[Dict[str, Any], Dict[str, Any]]:
+    """Remove duplicate capacity alerts while preserving pending/dead-letter checks."""
+    capacity = {**(summary.get("capacity") or {})}
+    capacity["warning_ids"] = []
+    capacity["warning_count"] = 0
+    decision_summary = {**summary, "capacity": capacity}
+    decision_state = {**state, "capacity_warning_ids": []}
+    return decision_summary, decision_state
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profiles-root", type=Path, default=DEFAULT_PROFILES_ROOT)
@@ -559,6 +575,11 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--threshold-hours", type=float, default=24.0)
     parser.add_argument("--reminder-hours", type=float, default=24.0)
     parser.add_argument("--capacity-threshold-percent", type=float, default=DEFAULT_CAPACITY_THRESHOLD_PERCENT)
+    parser.add_argument(
+        "--capacity-alerts",
+        action="store_true",
+        help="Legacy compatibility only; the automatic compactor owns capacity alerts by default.",
+    )
     parser.add_argument("--summary-json", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--now-epoch", type=float)
@@ -579,15 +600,26 @@ def main(argv: Optional[List[str]] = None) -> int:
         return 0 if not summary["errors"] else 2
 
     state = _load_state(args.state_file)
-    decision = decide(summary, state, now_epoch=now, reminder_hours=args.reminder_hours)
+    decision_summary = summary
+    decision_state = state
+    if not args.capacity_alerts:
+        decision_summary, decision_state = capacity_owned_by_autocompactor(summary, state)
+    decision = decide(
+        decision_summary,
+        decision_state,
+        now_epoch=now,
+        reminder_hours=args.reminder_hours,
+    )
     proposals = (
         create_compaction_proposals(
             summary, args.profiles_root, now_epoch=now, dry_run=args.dry_run,
         )
-        if summary.get("capacity", {}).get("warning_count") and not summary.get("errors")
+        if args.capacity_alerts
+        and summary.get("capacity", {}).get("warning_count")
+        and not summary.get("errors")
         else []
     )
-    payload = build_payload(summary, decision) if decision["action"] != "none" else None
+    payload = build_payload(decision_summary, decision) if decision["action"] != "none" else None
     if payload is not None:
         payload = _attach_proposals(payload, proposals)
     send_result = "not_sent"
@@ -595,12 +627,15 @@ def main(argv: Optional[List[str]] = None) -> int:
         send_result = _send(args.poster, args.channel_id, payload, dry_run=args.dry_run)
 
     if not args.dry_run:
-        _write_state(args.state_file, next_state(summary, state, decision, now_epoch=now))
+        _write_state(
+            args.state_file,
+            next_state(decision_summary, decision_state, decision, now_epoch=now),
+        )
 
     print(json.dumps({
         "action": decision["action"],
         "reason": decision["reason"],
-        "summary": report_field(summary),
+        "summary": report_field(decision_summary),
         "discord": send_result,
         "compaction_proposals": proposals,
         "dry_run": args.dry_run,
