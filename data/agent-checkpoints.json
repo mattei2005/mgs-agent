@@ -43,12 +43,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C17-C19-DAILY-CREATION-20260822",
-      "next_step": "Após o cooldown Meta, concluir readback final, mover nove assets para 02_TESTING, auto-armar C17-C19 no guardrail de primeiro gasto e validar Discord/audit.",
-      "objective": "Corrigir o rollover diário do Campaign Engine v3 e concluir C17, C18 e C19 com diagnóstico operacional útil",
-      "source": "discord:thread:1540813334809542776; audit:data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260822.json; recovery:/root/.hermes/profiles/ares/work/creditoparaveiculo-v3-daily/cpv-daily-20260822/partial-bundle-recovery.json",
-      "state": "em validação final: rollover v3.0.12 corrigido; c17/c18 recuperadas sem replay do lote; c19 criada e hierarquia 1x1x3 validada; c17-c19 active futuras 23/08 00:30 sp. pós-processamento final aguarda cooldown real meta code 17/subcode 2446079; estado preservado, sem novo write de campanha.",
+      "next_step": "Operação normal; watcher observa primeiro spend de C17 a C19 e o ciclo seguinte começa com request e conciliação novos.",
+      "objective": "Corrigir rollover diário do v3 e concluir C17 C18 C19 com diagnóstico útil",
+      "source": "discord:thread:1540813334809542776; audit:data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260822.json; policy:ARES-CAMPAIGN-ENGINE-V3-0-12-20260822; report-infra:1540826377283182614",
+      "state": "concluído e validado: v3.0.12 impede reuso do request anterior e publica etapa causa impacto e correção. c17 a c19 active futuras 23/08 00:30 sp, usd30, maxvol e 1x1x3; 9 assets em 02_testing; watcher 3/3 armado; estoque elegível 32; discord final confirmado; 56 testes pass; report-infra 1540826377283182614.",
       "thread_id": "1540813334809542776",
-      "updated_at": "2026-08-22T20:47:08+00:00"
+      "updated_at": "2026-08-22T20:54:41+00:00"
     },
     {
       "agent": "ares",
@@ -1062,5 +1062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T20:47:08+00:00"
+  "updated_at": "2026-08-22T20:54:41+00:00"
 }
