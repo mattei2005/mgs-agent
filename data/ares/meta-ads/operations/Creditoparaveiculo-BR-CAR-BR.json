@@ -262,7 +262,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-20T18:45:25-03:00",
-    "next_required_campaign_number": 17,
+    "next_required_campaign_number": 20,
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
     "prior_wrong_retry_slots": [
@@ -432,6 +432,24 @@
           "cycle_start_date": "2026-08-23",
           "source": "campaign_engine_v3_daily_readback",
           "request_id": "cpv-daily-20260821"
+        },
+        "17": {
+          "campaign_id": "120250885258350632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260822"
+        },
+        "18": {
+          "campaign_id": "120250885258360632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260822"
+        },
+        "19": {
+          "campaign_id": "120250885355540632",
+          "cycle_start_date": "2026-08-23",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260822"
         }
       },
       "required": [

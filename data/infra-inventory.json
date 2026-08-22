@@ -7844,6 +7844,63 @@
           "mentions": [],
           "thread_created": false
         }
+      },
+      "v3_failure_diagnostics_rollover_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "release_version": "3.0.12",
+        "scope": "Prevent completed prior-day CPV requests from being reused; operator-visible errors explain stage, cause, impact and correction; BatchTransportError preserves sanitized Meta code/subcode/title.",
+        "runtime": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "sha256": "01af9d5dcdc03853fb9d17c94316541c517817197a711fec29312b9e98cef8bf"
+        },
+        "config": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "2711f014b0dc78c5857162f2fd70d9bba63a47fcef71cd3b60d884b6c94c265f"
+        },
+        "operations": {
+          "main_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+          "main_sha256": "3bed000b1fee941836a0a211e1efcaab2784e6f9bac20dbbd054c80e8140efbe",
+          "v3_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+          "v3_sha256": "f623dc28d9c15e5b207ad9112612290b51a298c436bbadfeff644df00bfd8033",
+          "playbook_version": "1.0.61"
+        },
+        "skill": {
+          "name": "meta-campaign-engine-v3",
+          "version": "3.0.12",
+          "sha256": "1081fd7c2c6788a1b1f9983362cc09d94a83a5c30a522ee6fea4215ae46fb441",
+          "profile_mirror_match": true
+        },
+        "tests": {
+          "path": "/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+          "sha256": "57d6dbdbc3a6ce6980a335b3390820ef17e043b54fb29626f9cd5c03d46ade08",
+          "passed": 56,
+          "offline_smoke": "PASS 2+1 resumable; zero external network calls",
+          "live_dry_run": "C17-C19; USD405 projected under USD500; 9/9 assets reconciled; zero side effects"
+        },
+        "live_recovery": {
+          "request_id": "cpv-daily-20260822",
+          "campaigns": [
+            17,
+            18,
+            19
+          ],
+          "campaign_count": 3,
+          "ads": 9,
+          "status": "COMPLETE_FUTURE_ACTIVE",
+          "start_time_sp": "2026-08-23T00:30:00-03:00",
+          "assets_moved_to_testing": 9,
+          "first_delivery_armed": 3,
+          "stock_eligible_remaining": 32,
+          "discord_readback_message_id": "1540826107274723419",
+          "audit_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260822.json",
+          "audit_sha256": "8defeb3b805e72b97079b5babedcd9b3155b3105797b7440219f909bf6e483b9"
+        },
+        "knowledge": {
+          "registry_id": "ARES-CAMPAIGN-ENGINE-V3-0-12-20260822",
+          "registry_sha256": "e14da202a088f06bb10d904a7ccac2fe3e9a2c130dad44173aabcb28b4038cac",
+          "validation": "PASS"
+        },
+        "updated_at": "2026-08-22T16:53:43-04:00"
       }
     },
     {
