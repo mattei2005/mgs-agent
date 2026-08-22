@@ -35,6 +35,8 @@ from ares_campaign_v3.daily_cpv import (
     rollover_completed_state,
     media_title,
     LiveDailyBackend,
+    safe_error,
+    BatchTransportError,
 )
 
 SP = ZoneInfo("America/Sao_Paulo")
@@ -132,6 +134,32 @@ def test_discord_failure_explains_cause_impact_and_correction_without_internal_p
     assert "Correção:" in message
     assert "Drive × Meta" in message
     assert "/root/" not in message
+
+
+def test_batch_transport_failure_preserves_sanitized_meta_cause_for_operator_message():
+    failure = safe_error(BatchTransportError("creative_ad_create", {
+        "children": [{
+            "name": "creative_1_1",
+            "code": 400,
+            "error": {
+                "message": "Invalid parameter",
+                "type": "OAuthException",
+                "code": 100,
+                "error_subcode": 2446173,
+                "error_user_title": "O rótulo da regra não referencia um ativo",
+                "fbtrace_id": "not-operator-output",
+            },
+        }],
+        "outer_headers": {"authorization": "secret"},
+    }))
+    assert failure["stage"] == "creative_ad_create"
+    assert failure["detail"]["children"][0]["error"]["error_subcode"] == 2446173
+    serialized = json.dumps(failure)
+    assert "authorization" not in serialized
+    assert "fbtrace_id" not in serialized
+    message = discord_failure_message(failure, "READBACK_DEFERRED", date(2026, 8, 22))
+    assert "código 100/2446173" in message
+    assert "O rótulo da regra" in message
 
 
 def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():

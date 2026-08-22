@@ -94,6 +94,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - antes do execute, nomes exatos do manifest não colidem com campanhas live não deletadas fora do mapeamento idempotente do mesmo request;
 - títulos de pre-stage incluem `asset_id + checksum curto`, e o registry confirma `account + asset + checksum + IDs` por readback;
 - falhas após possível side effect ficam `READBACK_DEFERRED`/`POSTPROCESS_PENDING`, nunca `FAILED` fora do gate;
+- `BatchTransportError` persiste etapa e causa Meta sanitizada (`code/subcode/user_title`) para o alerta; paths, headers sensíveis, token e trace não entram na mensagem ao operador;
 - REPORT-INFRA para qualquer mudança estrutural.
 
 ## Pitfalls

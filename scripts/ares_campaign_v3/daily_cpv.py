@@ -28,7 +28,7 @@ from .media_registry import MediaRegistry
 from .prestage import PageVideoUploader
 from .prevalidation import prevalidate_payload
 from .schema import Manifest
-from .transport import FakeBatchTransport
+from .transport import BatchTransportError, FakeBatchTransport
 
 BASE = Path("/root/mgs-agent")
 PROFILE = Path("/root/.hermes/profiles/ares")
@@ -157,6 +157,45 @@ def safe_error(exc: Exception) -> dict[str, Any]:
     result: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
     if isinstance(exc, DailyBlocked):
         result.update(stage=exc.stage, detail=exc.detail)
+        return result
+    stage = getattr(exc, "stage", None)
+    detail = getattr(exc, "detail", None)
+    if isinstance(stage, str) and stage:
+        result["stage"] = stage[:120]
+    if isinstance(detail, dict):
+        safe_detail: dict[str, Any] = {}
+        if isinstance(detail.get("http"), int):
+            safe_detail["http"] = detail["http"]
+        if isinstance(detail.get("message"), str):
+            safe_detail["message"] = detail["message"][:300]
+        if isinstance(detail.get("error"), str):
+            safe_detail["error"] = detail["error"][:120]
+        payload_error = (detail.get("payload") or {}).get("error") if isinstance(detail.get("payload"), dict) else None
+        if isinstance(payload_error, dict):
+            safe_detail["error_response"] = {
+                key: payload_error.get(key)
+                for key in ("message", "type", "code", "error_subcode", "error_user_title", "error_user_msg")
+                if payload_error.get(key) is not None
+            }
+        children = []
+        for child in detail.get("children") or []:
+            if not isinstance(child, dict):
+                continue
+            raw_error = child.get("error")
+            error: dict[str, Any] = raw_error if isinstance(raw_error, dict) else {}
+            children.append({
+                "name": str(child.get("name") or "")[:120],
+                "code": child.get("code"),
+                "error": {
+                    key: error.get(key)
+                    for key in ("message", "type", "code", "error_subcode", "error_user_title", "error_user_msg")
+                    if error.get(key) is not None
+                },
+            })
+        if children:
+            safe_detail["children"] = children[:20]
+        if safe_detail:
+            result["detail"] = safe_detail
     return result
 
 
@@ -206,7 +245,23 @@ def discord_failure_message(failure: dict[str, Any], failure_status: str, operat
         cause = "Um ou mais criativos selecionados não passaram na conciliação Drive × Meta."
         correction = "Remover os candidatos em conflito, atualizar a conciliação e completar o lote apenas com linhagens elegíveis."
     elif failure_type == "BatchTransportError":
-        cause = "A Meta não devolveu confirmação confiável do lote."
+        raw_detail = failure.get("detail")
+        detail: dict[str, Any] = raw_detail if isinstance(raw_detail, dict) else {}
+        raw_children = detail.get("children")
+        children: list[Any] = raw_children if isinstance(raw_children, list) else []
+        first_error = (children[0].get("error") or {}) if children and isinstance(children[0], dict) else {}
+        code = first_error.get("code")
+        subcode = first_error.get("error_subcode")
+        reason = first_error.get("error_user_title") or first_error.get("error_user_msg") or first_error.get("message")
+        code_label = "/".join(str(value) for value in (code, subcode) if value is not None)
+        if reason:
+            compact_reason = " ".join(str(reason).split())[:260]
+            suffix = f" (código {code_label})" if code_label else ""
+            cause = f"A Meta rejeitou uma operação do lote{suffix}: {compact_reason}"
+        elif stage == "consolidated_readback":
+            cause = "Os writes terminaram, mas a Meta não confirmou todos os GETs do readback consolidado."
+        else:
+            cause = "A Meta não devolveu confirmação confiável do lote."
         correction = "Fazer readback dos objetos esperados antes de qualquer nova tentativa; nunca repetir o POST às cegas."
     elif stage == "budget_cap":
         cause = "O plano ultrapassou o teto operacional ou não havia espaço suficiente no orçamento ativo."

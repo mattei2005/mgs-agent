@@ -42,6 +42,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C17-C19-DAILY-CREATION-20260822",
+      "next_step": "Após o cooldown Meta, concluir readback final, mover nove assets para 02_TESTING, auto-armar C17-C19 no guardrail de primeiro gasto e validar Discord/audit.",
+      "objective": "Corrigir o rollover diário do Campaign Engine v3 e concluir C17, C18 e C19 com diagnóstico operacional útil",
+      "source": "discord:thread:1540813334809542776; audit:data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260822.json; recovery:/root/.hermes/profiles/ares/work/creditoparaveiculo-v3-daily/cpv-daily-20260822/partial-bundle-recovery.json",
+      "state": "em validação final: rollover v3.0.12 corrigido; c17/c18 recuperadas sem replay do lote; c19 criada e hierarquia 1x1x3 validada; c17-c19 active futuras 23/08 00:30 sp. pós-processamento final aguarda cooldown real meta code 17/subcode 2446079; estado preservado, sem novo write de campanha.",
+      "thread_id": "1540813334809542776",
+      "updated_at": "2026-08-22T20:47:08+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -1052,5 +1062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T17:59:06+00:00"
+  "updated_at": "2026-08-22T20:47:08+00:00"
 }
