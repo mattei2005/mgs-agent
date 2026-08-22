@@ -33,10 +33,30 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-13-20260822",
+      "title": "Ares Campaign Engine v3.0.12 corrige rollover diário e diagnóstico de falhas",
+      "updated_at": "2026-08-22T21:14:10+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:14:10-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-13-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3.0.12 corrige rollover diário e diagnóstico de falhas",
-      "updated_at": "2026-08-22T20:43:34+00:00"
+      "title": "Ares v3.0.13 exige diagnóstico autorizável e reporta budget restante",
+      "updated_at": "2026-08-22T21:14:10+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -1392,5 +1412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T20:43:34+00:00"
+  "updated_at": "2026-08-22T21:14:10+00:00"
 }

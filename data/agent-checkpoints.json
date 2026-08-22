@@ -43,12 +43,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C17-C19-DAILY-CREATION-20260822",
-      "next_step": "Operação normal; watcher observa primeiro spend de C17 a C19 e o ciclo seguinte começa com request e conciliação novos.",
-      "objective": "Corrigir rollover diário do v3 e concluir C17 C18 C19 com diagnóstico útil",
-      "source": "discord:thread:1540813334809542776; audit:data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260822.json; policy:ARES-CAMPAIGN-ENGINE-V3-0-12-20260822; report-infra:1540826377283182614",
-      "state": "concluído e validado: v3.0.12 impede reuso do request anterior e publica etapa causa impacto e correção. c17 a c19 active futuras 23/08 00:30 sp, usd30, maxvol e 1x1x3; 9 assets em 02_testing; watcher 3/3 armado; estoque elegível 32; discord final confirmado; 56 testes pass; report-infra 1540826377283182614.",
+      "next_step": "Operação normal; próximos V3 BLOQUEADO ficam fail-closed aguardando autorização para write corretivo e próximas criações programadas reportam saldo do cap em USD.",
+      "objective": "Concluir C17-C19 e tornar erros do v3 autorizáveis com budget restante obrigatório",
+      "source": "discord:thread:1540813334809542776; policy:ARES-CAMPAIGN-ENGINE-V3-0-13-20260822; budget-readback:1540831305078415372; report-infra:1540831621958336606",
+      "state": "concluído e validado: c17-c19 active futuras 23/08 00:30 sp, 9/9 anúncios, watcher 3/3 e 9 assets em 02_testing. v3.0.13 agora identifica campanhas, causa, consequência e solução; qualquer write corretivo aguarda rodolfo ou nicolas. conclusão programada informa budget ativo e restante. addendum c17-c19 confirmou usd405 ativo e usd95 restante do cap usd500. 59 testes pass; report-infra 1540831621958336606.",
       "thread_id": "1540813334809542776",
-      "updated_at": "2026-08-22T20:54:41+00:00"
+      "updated_at": "2026-08-22T21:15:12+00:00"
     },
     {
       "agent": "ares",
@@ -1062,5 +1062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T20:54:41+00:00"
+  "updated_at": "2026-08-22T21:15:12+00:00"
 }

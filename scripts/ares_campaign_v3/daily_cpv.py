@@ -354,6 +354,14 @@ def failure_resume_state(side_effects: dict[str, Any], *, known_campaign_ids: bo
     return "FAILED", False
 
 
+def corrective_write_authorization() -> dict[str, Any]:
+    return {
+        "required": True,
+        "authorized_roles": ["Rodolfo", "Nicolas"],
+        "scope": "any corrective write after this failure",
+    }
+
+
 def requested_campaign_count(operation: dict[str, Any], operational_date: date) -> int:
     routine = operation.get("daily_new_campaign_routine") or {}
     override = routine.get(f"one_time_override_{operational_date:%Y%m%d}") or {}
@@ -1448,7 +1456,7 @@ def run_daily(
             known_campaign_ids = bool(state.get("campaign_ids") or (audit.get("engine_result") or {}).get("campaign_ids"))
             failure_status, _ = failure_resume_state(audit.get("side_effects") or {}, known_campaign_ids=known_campaign_ids)
             manual_gate = True
-            authorization = {"required": True, "authorized_roles": ["Rodolfo", "Nicolas"], "scope": "any corrective write after this failure"}
+            authorization = corrective_write_authorization()
             audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=True, operator_authorization=authorization)
             atomic_json(audit_path, audit)
             if failure_status == "FAILED" and selected_ids:

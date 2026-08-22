@@ -7909,6 +7909,77 @@
           "mentions": [],
           "thread_created": false
         }
+      },
+      "v3_operator_authorization_budget_reporting_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "release_version": "3.0.13",
+        "scope": "V3 BLOQUEADO identifies campaigns and reports cause, consequence, proposed solution and Rodolfo-or-Nicolas authorization gate; scheduled completion reports active and remaining USD account budget.",
+        "runtime": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "sha256": "f9610202211d7b8603efa5288a373f7a84b01ee8bd0bc3dd1b19435afc019f71"
+        },
+        "config": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "df97d2ebe4abe2d1d73c93f9e2d47fe224fc3583e5130524690aaadcded01b32"
+        },
+        "operations": {
+          "main_sha256": "10e473c06a218ef04c530eb858279ac6eefc0c4b31e1f5cd66b9d3370bdcfea4",
+          "v3_sha256": "2c412e612438fd241a2ce366914c7f7a171f79cedd9bf9c74f8cf6b0285c19ce",
+          "playbook_version": "1.0.62"
+        },
+        "skills": {
+          "meta_campaign_engine_v3": {
+            "version": "3.0.13",
+            "sha256": "a90517e4ba39f8275807ba674a73a6b8b1c5e7eb8d331629d3be4c49f1f66bc1"
+          },
+          "direct_traffic_cbo": {
+            "version": "1.0.43",
+            "sha256": "bd24a117a6d2dd7d554a15774ae2c4b116b41587a1bc19e732bc4b277a02dc41"
+          },
+          "profile_mirrors_match": true
+        },
+        "tests": {
+          "path": "/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+          "sha256": "d29bc6e3ca721396b937a9a6caa9590b3d18f876643f6010d11cbe6f5a8f438f",
+          "passed": 59,
+          "offline_smoke": "PASS",
+          "rendered_error_chars": 563,
+          "required_sections": [
+            "Objeto",
+            "Etapa",
+            "Causa",
+            "Consequência",
+            "Solução proposta",
+            "Autorização necessária"
+          ],
+          "corrective_meta_write_gate": "Rodolfo or Nicolas"
+        },
+        "budget_reporting_readback": {
+          "campaigns": [
+            "C17",
+            "C18",
+            "C19"
+          ],
+          "active_usd": 405,
+          "remaining_usd": 95,
+          "cap_usd": 500,
+          "discord_message_id": "1540831305078415372",
+          "content_match": true
+        },
+        "knowledge": {
+          "registry_id": "ARES-CAMPAIGN-ENGINE-V3-0-13-20260822",
+          "registry_sha256": "6fcb8aa74b5bf081722be5d681a898767e77b621d9525e4fa69b1e59dde526fb",
+          "validation": "PASS"
+        },
+        "updated_at": "2026-08-22T17:14:57-04:00",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540831621958336606",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        }
       }
     },
     {

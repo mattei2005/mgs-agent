@@ -39,6 +39,7 @@ from ares_campaign_v3.daily_cpv import (
     BatchTransportError,
     account_budget_summary,
     usd_minor_label,
+    corrective_write_authorization,
 )
 
 SP = ZoneInfo("America/Sao_Paulo")
@@ -217,6 +218,14 @@ def test_failure_after_external_side_effect_never_becomes_terminal_failed():
     assert failure_resume_state({"campaign_write": True}, known_campaign_ids=True) == ("READBACK_DEFERRED", False)
     assert failure_resume_state({"drive_move": True, "campaign_write": True}, known_campaign_ids=True) == ("POSTPROCESS_PENDING", False)
     assert failure_resume_state({}, known_campaign_ids=False) == ("FAILED", False)
+
+
+def test_corrective_write_authorization_is_exclusively_rodolfo_or_nicolas():
+    assert corrective_write_authorization() == {
+        "required": True,
+        "authorized_roles": ["Rodolfo", "Nicolas"],
+        "scope": "any corrective write after this failure",
+    }
 
 
 def test_first_delivery_auto_arm_helper_requires_exact_zero_write_readback(tmp_path):
