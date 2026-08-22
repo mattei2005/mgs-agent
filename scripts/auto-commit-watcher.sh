@@ -12,7 +12,7 @@ BATCH_MAX_WAIT_SECONDS="${MGS_AUTOCOMMIT_BATCH_MAX_WAIT_SECONDS:-600}"
 SENSITIVE_PATH_REGEX='(^|/)(\.env($|\.)|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
 # Allowlist estritamente nominal para código/documentação revisados e sem segredo.
 # Nunca usar padrão amplo por diretório ou por extensão.
-SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17\.md|service-account-token-rotation-bootstrap\.md)$'
+SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17\.md|service-account-token-rotation-bootstrap\.md|profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format\.md)$'
 
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
