@@ -185,6 +185,58 @@ def gate_due(now_sp: datetime, state: dict[str, Any]) -> bool:
     return now_sp.hour == 17
 
 
+def rollover_completed_state(state: dict[str, Any], operational_date: str) -> dict[str, Any]:
+    """Do not reuse a completed request as the next day's resumable state."""
+    completed_day = str(state.get("completed_operational_date_sp") or "")
+    if completed_day and completed_day != operational_date:
+        return {}
+    return state
+
+
+def discord_failure_message(failure: dict[str, Any], failure_status: str, operational_date: date) -> str:
+    """Render a useful, credential-safe failure explanation for operators."""
+    stage = str(failure.get("stage") or failure.get("type") or "desconhecida")
+    message = str(failure.get("message") or "")
+    failure_type = str(failure.get("type") or "")
+
+    if message == "reconciliation manifest expired":
+        cause = "A validação Drive × Meta usada na retomada venceu antes deste ciclo."
+        correction = "Atualizar a conciliação, reselecionar somente criativos elegíveis e retomar sem repetir writes já confirmados."
+    elif message == "one or more selected assets are not reconciled":
+        cause = "Um ou mais criativos selecionados não passaram na conciliação Drive × Meta."
+        correction = "Remover os candidatos em conflito, atualizar a conciliação e completar o lote apenas com linhagens elegíveis."
+    elif failure_type == "BatchTransportError":
+        cause = "A Meta não devolveu confirmação confiável do lote."
+        correction = "Fazer readback dos objetos esperados antes de qualquer nova tentativa; nunca repetir o POST às cegas."
+    elif stage == "budget_cap":
+        cause = "O plano ultrapassou o teto operacional ou não havia espaço suficiente no orçamento ativo."
+        correction = "Recalcular o budget ativo por API e reduzir o lote; aumentar o teto exige nova autorização."
+    elif stage in {"readback", "completion"}:
+        cause = "A plataforma não confirmou integralmente a estrutura esperada no readback final."
+        correction = "Reconciliar campanha, conjunto e anúncios pelos IDs já persistidos antes de retomar."
+    elif stage == "first_delivery_guardrail":
+        cause = "O pós-processamento não confirmou o cadastro das campanhas no guardrail de primeiro gasto."
+        correction = "Validar o estado do watcher e rearmar somente os IDs já confirmados, sem novo write de campanha."
+    else:
+        cause = "O executor encontrou uma falha técnica não classificada; o detalhe seguro ficou registrado no audit."
+        correction = "Revisar o audit, confirmar o estado real por readback e corrigir a causa antes de retomar."
+
+    if failure_status == "FAILED":
+        impact = "O ciclo parou antes de confirmar novos writes."
+    elif failure_status == "READBACK_DEFERRED":
+        impact = "Pode haver alteração na Meta; o estado foi preservado e não haverá retry cego."
+    else:
+        impact = "Os objetos já identificados foram preservados; falta concluir a reconciliação ou o pós-processamento."
+
+    return (
+        f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\n"
+        f"Etapa: {stage}\n"
+        f"Causa: {cause}\n"
+        f"Impacto: {impact}\n"
+        f"Correção: {correction}"
+    )
+
+
 def media_title(kind: str, asset_id: str, checksum: str) -> str:
     normalized_kind = str(kind or "").upper()
     if normalized_kind not in {"VERTICAL", "SQUARE"}:
@@ -1037,6 +1089,7 @@ def run_daily(
     with paths.lock.open("a+") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
         state = {} if plan_only else (load_json(paths.state) if paths.state.exists() else {})
+        state = rollover_completed_state(state, day)
         if state.get("completed_operational_date_sp") == day:
             return {"status": "ALREADY_COMPLETE", "operational_date_sp": day, "audit": state.get("audit_path")}
         total_started = time.perf_counter()
@@ -1320,7 +1373,7 @@ def run_daily(
                 atomic_json(paths.state, state)
             if post_report:
                 try:
-                    post_discord(f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\nEtapa: {failure.get('stage') or failure['type']}. Nenhuma conclusão foi declarada sem readback; o estado foi preservado para reconciliação.")
+                    post_discord(discord_failure_message(failure, failure_status, operational_date))
                 except Exception:
                     pass
             if not quiet:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import sys
 from types import SimpleNamespace
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -31,6 +31,8 @@ from ares_campaign_v3.daily_cpv import (
     move_to_testing,
     campaign_name_collisions,
     failure_resume_state,
+    discord_failure_message,
+    rollover_completed_state,
     media_title,
     LiveDailyBackend,
 )
@@ -99,6 +101,37 @@ def test_gate_starts_only_at_17_sp_but_resume_may_run_later():
     assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is True
     resume["manual_reconciliation_required"] = True
     assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is False
+
+
+def test_completed_request_is_not_reused_on_the_next_operational_day():
+    previous = {
+        "status": "POSTPROCESS_PENDING",
+        "operational_date_sp": "2026-08-21",
+        "completed_operational_date_sp": "2026-08-21",
+        "request_id": "cpv-daily-20260821",
+        "selected_asset_ids": ["old-asset"],
+    }
+    assert rollover_completed_state(previous, "2026-08-22") == {}
+    assert rollover_completed_state(previous, "2026-08-21") == previous
+
+
+def test_discord_failure_explains_cause_impact_and_correction_without_internal_paths():
+    message = discord_failure_message(
+        {
+            "type": "DailyBlocked",
+            "stage": "reconciliation",
+            "message": "reconciliation manifest expired",
+            "detail": {"valid_until_utc": "2026-08-22T02:15:23+00:00", "path": "/root/private"},
+        },
+        "POSTPROCESS_PENDING",
+        date(2026, 8, 22),
+    )
+    assert "Etapa: reconciliation" in message
+    assert "Causa:" in message
+    assert "Impacto:" in message
+    assert "Correção:" in message
+    assert "Drive × Meta" in message
+    assert "/root/" not in message
 
 
 def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():
