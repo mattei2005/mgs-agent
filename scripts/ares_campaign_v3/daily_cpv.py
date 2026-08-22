@@ -277,6 +277,9 @@ def discord_failure_message(
     elif stage == "first_delivery_guardrail":
         cause = "O pós-processamento não confirmou o cadastro das campanhas no guardrail de primeiro gasto."
         correction = "Validar o estado do watcher e rearmar somente os IDs já confirmados, sem novo write de campanha."
+    elif stage == "creation_hold":
+        cause = "A criação de novas campanhas está pausada para observar a coorte mais recente durante D1, D2 e D3."
+        correction = "Manter análise, pausa e escala normais; criar nova coorte somente quando a leitura do ciclo justificar e Rodolfo ou Nicolas liberar."
     else:
         cause = "O executor encontrou uma falha técnica não classificada; o detalhe seguro ficou registrado no audit."
         correction = "Revisar o audit, confirmar o estado real por readback e corrigir a causa antes de retomar."
@@ -364,6 +367,18 @@ def corrective_write_authorization() -> dict[str, Any]:
 
 def requested_campaign_count(operation: dict[str, Any], operational_date: date) -> int:
     routine = operation.get("daily_new_campaign_routine") or {}
+    raw_hold = routine.get("creation_hold")
+    hold: dict[str, Any] = raw_hold if isinstance(raw_hold, dict) else {}
+    if str(routine.get("status") or "").startswith("paused") or hold.get("enabled") is True:
+        raise DailyBlocked(
+            "creation_hold",
+            "scheduled campaign creation is paused for lifecycle observation",
+            {
+                "operational_date_sp": operational_date.isoformat(),
+                "observe_campaigns": list(hold.get("observe_campaigns") or []),
+                "resume_authority": list(hold.get("resume_authority") or []),
+            },
+        )
     override = routine.get(f"one_time_override_{operational_date:%Y%m%d}") or {}
     if override and str(override.get("status") or "").startswith("authorized"):
         count = int(override.get("campaign_count") or 0)

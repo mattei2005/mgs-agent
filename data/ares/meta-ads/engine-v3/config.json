@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.0.13",
+  "release_version": "3.0.14",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -26,6 +26,7 @@
   "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, proposed solution and Rodolfo-or-Nicolas authorization gate; no internal paths or credentials",
   "failure_write_gate": "after a V3 BLOQUEADO exception, diagnosis/readback may continue but every corrective Meta write waits for explicit Rodolfo or Nicolas authorization",
   "scheduled_creation_budget_reporting": "every completed scheduled creation reports active account budget, remaining operational cap and USD source basis",
+  "creation_lifecycle_gate": "scheduled creation is a conditional phase after D1-D3 analysis, pause and scale decisions; a creation_hold blocks all new campaign writes until Rodolfo or Nicolas releases it",
   "appsecret_proof": {
     "required": false,
     "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"

@@ -192,6 +192,31 @@ def test_account_budget_summary_reports_remaining_operational_cap():
     assert usd_minor_label(summary["remaining_minor"]) == "95"
 
 
+def test_lifecycle_observation_hold_blocks_new_campaign_count_but_not_analysis_jobs():
+    held = operation()
+    held["daily_new_campaign_routine"]["status"] = "paused_lifecycle_observation"
+    held["daily_new_campaign_routine"]["creation_hold"] = {
+        "enabled": True,
+        "observe_campaigns": [17, 18, 19],
+        "resume_authority": ["Rodolfo", "Nicolas"],
+    }
+    with pytest.raises(DailyBlocked, match="paused for lifecycle observation") as exc:
+        requested_campaign_count(held, date(2026, 8, 23))
+    assert exc.value.stage == "creation_hold"
+
+
+def test_creation_hold_alert_explains_loop_and_release_gate():
+    message = discord_failure_message(
+        {"type": "DailyBlocked", "stage": "creation_hold", "message": "scheduled campaign creation is paused for lifecycle observation"},
+        "FAILED",
+        date(2026, 8, 23),
+        [17, 18, 19],
+    )
+    assert "pausada para observar a coorte mais recente durante D1, D2 e D3" in message
+    assert "Manter análise, pausa e escala normais" in message
+    assert "Rodolfo ou Nicolas" in message
+
+
 def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():
     name = "14 - 22-08 - Garagem Brasil - (b01fb13c14) event_Subscribe - MAXVOL"
     manifest = SimpleNamespace(campaigns=[SimpleNamespace(name=name)])
