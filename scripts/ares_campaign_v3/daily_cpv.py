@@ -1202,7 +1202,11 @@ def run_daily(
         total_started = time.perf_counter()
         call_counter: dict[str, int] = {}
         call_counter_token = _CALL_COUNTER.set(call_counter)
-        request_id = str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
+        request_id = (
+            f"cpv-daily-{operational_date:%Y%m%d}-dry-run"
+            if plan_only
+            else str(state.get("request_id") or f"cpv-daily-{operational_date:%Y%m%d}")
+        )
         audit_path = Path(state.get("audit_path") or (paths.audit_root / f"{request_id}.json"))
         audit = load_json(audit_path) if audit_path.exists() else {"schema_version": 3, "kind": "cpv_daily_v3", "request_id": request_id, "operational_date_sp": day, "created_at_utc": utc_now(), "stage": "INITIALIZING", "side_effects": {"campaign_write": False, "media_upload": False, "drive_move": False}}
         if audit.get("failure"):

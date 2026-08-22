@@ -560,6 +560,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         backend_factory=PlanBackend,
     )
     assert result["status"] == "DRY_RUN_OK"
+    assert result["audit"].endswith("cpv-daily-20260821-dry-run.json")
     assert result["desired_campaign_count"] == 3
     assert result["campaign_count"] == 3
     assert result["campaign_numbers"] == [14, 15, 16]

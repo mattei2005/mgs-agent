@@ -61,6 +61,16 @@
       "updated_at": "2026-08-22T05:20:17+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV-CREATION-LIFECYCLE-HOLD-20260822",
+      "next_step": "Observar início de gasto e evolução D1-D2-D3 das campanhas atuais; somente após a análise demonstrar necessidade, Rodolfo ou Nicolas pode liberar uma nova coorte e reativar o scheduler de criação.",
+      "objective": "Preservar o loop análise D1-D2-D3, pausa, escala e criação sem abrir novas coortes diariamente por inércia",
+      "source": "discord:thread:1540813334809542776; policy:ARES-CREDITOPARAVEICULO-CREATION-LIFECYCLE-HOLD-V1; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; cron:2cf8115a4f8b",
+      "state": "ativo e fail-closed: criação v3 programada pausada; nenhuma nova campanha em 23/08 e sem expiração automática. c14-c19 ficam em observação de entrega/lifecycle. diário, intraday, d1-d2-d3, guardrails de pausa/escala, first-delivery e snapshot continuam ativos. v3.0.14 bloqueia criação mesmo por execução manual enquanto creation_hold estiver enabled.",
+      "thread_id": "1540813334809542776",
+      "updated_at": "2026-08-22T21:24:55+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
       "next_step": "Aguardar execução às 17:00 São Paulo. Após o ciclo, analisar observability por meta_preflight/drive/reconciliation/asset/prestage/manifest/engine/postprocess, status C14/C15, quota e stock; P1 possível: reduzir full reconciliation e paralelizar prestage conforme medição real.",
@@ -69,6 +79,16 @@
       "state": "cutover scheduler concluído por zeus+ares, autorizado rodolfo 1540243886188924988. job 2cf8115a4f8b active/scheduled/no-agent/deliver local agora aponta creditoparaveiculo-v3-daily-create.sh; wrapper gate17 sp e resume hourly. runner v3 próprio daily_cpv.py não importa/executa writer v2. live dry-run read-only: desired3→selected2 c14/c15 por cap usd213→273, seis assets reconciliados, stock257, zero reservation/upload/write/move. guards: campaign exact-name collision; media title checksum; resumable side-effect states; token cache-first; budget pending-only; drive move idempotent; audit phase observability. 132 testes pass; offline smoke 2→deferred→3; wrapper silent outside gate; cron cli readback active. v2 wrapper/runner frozen; recurring v2 activation paused. nenhum meta write/upload/budget/credential/restart durante cutover.",
       "thread_id": "1540114948984938607",
       "updated_at": "2026-08-21T07:10:56+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPV-HOURLY-ROI-SB-20260822",
+      "next_step": "Construir e testar coletor horário SB/Meta, agendar script-only para 23:00 SP e validar entrega por readback Discord",
+      "objective": "Entregar às 23:00 São Paulo análise hora a hora dos últimos quatro dias para Creditoparaveiculo G006, cruzando ROI de campanhas com RPS, CPM e cobertura Smart Bidding, sem writes Meta",
+      "source": "discord:thread:1540832226583773265; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "solicitação confirmada por rodolfo; escopo read-only; implementação e validação do one-shot em andamento",
+      "thread_id": "1540832226583773265",
+      "updated_at": "2026-08-22T21:22:40+00:00"
     },
     {
       "agent": "ares",
@@ -1062,5 +1082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T21:15:12+00:00"
+  "updated_at": "2026-08-22T21:24:55+00:00"
 }

@@ -7980,6 +7980,83 @@
           "mentions": [],
           "thread_created": false
         }
+      },
+      "v3_creation_lifecycle_hold_20260822": {
+        "authorized_by": "Rodolfo Mattei",
+        "release_version": "3.0.14",
+        "scope": "Pause new CPV campaign creation for 2026-08-23 and until explicit lifecycle review release; preserve D1-D3 analysis, reporting, pause/scale guardrails and first-delivery.",
+        "runtime": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "sha256": "e1259ede5af10dc656f28d5d50dfca79145c33299ab03a993976232df0424b7d",
+          "manual_hold_gate": "creation_hold blocks requested_campaign_count before Meta/Drive side effects"
+        },
+        "config": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "6b974bf58b517f2e47c375468e4d9e7d42150363960d2231a923ebd78917dd7c"
+        },
+        "operations": {
+          "main_sha256": "354bf5ad7e40a010657a779a2842f8c3537fdaaa2fda4c5555fe2e9cbc6c949c",
+          "v3_sha256": "e1bf49c6c7953c969b752a07c6350277dc9e029d52f60ee19324af9c20ec1844",
+          "playbook_version": "1.0.63",
+          "hold_enabled": true,
+          "minimum_blocked_date_sp": "2026-08-23",
+          "auto_expiry": false,
+          "resume_authority": [
+            "Rodolfo",
+            "Nicolas"
+          ]
+        },
+        "scheduler": {
+          "name": "Creditoparaveiculo 13 G006 Campaign Engine v3 diario 17h",
+          "enabled": false,
+          "state": "paused",
+          "paused_at_et": "2026-08-22T17:19:27.116785-04:00",
+          "analysis_jobs_preserved": [
+            "Diario",
+            "Intraday",
+            "Snapshot",
+            "Guardrail Reactivation",
+            "First Delivery"
+          ]
+        },
+        "skills": {
+          "meta_campaign_engine_v3": {
+            "version": "3.0.14",
+            "sha256": "f8258d572736b0e9f451d26bc96808aef99b0cf74208beb87fa1de3412acdd6d"
+          },
+          "direct_traffic_cbo": {
+            "version": "1.0.44",
+            "sha256": "fb42efa86f36b5a4b0734fb9789a8badca9e3c25561cfbd2a98a12295de167f4"
+          },
+          "profile_mirrors_match": true
+        },
+        "tests": {
+          "passed": 61,
+          "offline_smoke": "PASS",
+          "hold_probe_status": "FAILED creation_hold",
+          "hold_probe_side_effects": {
+            "campaign_write": false,
+            "media_upload": false,
+            "drive_move": false
+          },
+          "dry_run_audit_sha256": "76b14e1e03c0ad8cafe32188610497d0130bf1f88eb98a5e8b8fd6353ea137c7",
+          "production_audit_restored_sha256": "90cfa6021d5929dc28d709f5f24a88ff09a33a0d8710f9406843d5e4812dcc52"
+        },
+        "knowledge": {
+          "version_registry_id": "ARES-CAMPAIGN-ENGINE-V3-0-14-20260822",
+          "policy_registry_id": "ARES-CREDITOPARAVEICULO-CREATION-LIFECYCLE-HOLD-V1",
+          "registry_sha256": "02724774c6c01d9357f240dbdd35b08350eb63c89238b370f84408d84faf24e8",
+          "validation": "PASS"
+        },
+        "updated_at": "2026-08-22T17:25:49-04:00",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540834362751193261",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        }
       }
     },
     {

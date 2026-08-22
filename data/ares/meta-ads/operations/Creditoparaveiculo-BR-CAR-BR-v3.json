@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.0.13",
+  "release_version": "3.0.14",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -34,6 +34,8 @@
   "failure_reporting": "operator-visible errors identify the affected scheduled campaigns and include stage, cause, consequence, proposed solution and an explicit Rodolfo-or-Nicolas authorization gate without internal paths or credentials",
   "failure_write_gate": "after any V3 BLOQUEADO exception, Ares may continue read-only diagnosis/readback but must not execute a corrective Meta write until Rodolfo or Nicolas authorizes the proposed solution",
   "budget_reporting": "every completed scheduled creation reports active account budget and remaining USD operational cap from live Meta preflight plus validated budgets created by the request",
+  "creation_lifecycle_gate": "new campaigns are not an unconditional daily output; analyze D1-D3, apply approved pause/scale actions and create a new cohort only when the lifecycle review justifies it and Rodolfo or Nicolas releases the creation hold",
+  "current_creation_hold": "no new campaign creation on 2026-08-23; hold remains fail-closed until explicit lifecycle review release",
   "manifest_gate": "prevalidated=true required for execute",
   "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute from an authorized campaign request",
   "first_production_request": "guarded canary automatically: prevalidated manifest, first bundle monitored, fail closed on any drift",

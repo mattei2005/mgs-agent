@@ -53,10 +53,30 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-14-20260822",
+      "title": "Ares v3.0.13 exige diagnóstico autorizável e reporta budget restante",
+      "updated_at": "2026-08-22T21:24:43+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:24:43-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-14-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares v3.0.13 exige diagnóstico autorizável e reporta budget restante",
-      "updated_at": "2026-08-22T21:14:10+00:00"
+      "title": "Ares v3.0.14 cria somente após lifecycle gate",
+      "updated_at": "2026-08-22T21:24:43+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -113,6 +133,25 @@
       "superseded_by": null,
       "title": "Creditoparaveiculo campaign numbering has no C59 upper limit",
       "updated_at": "2026-08-21T21:44:57+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creation-lifecycle-loop",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:24:43-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-CREATION-LIFECYCLE-HOLD-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo creation is conditional after D1-D3 lifecycle review",
+      "updated_at": "2026-08-22T21:24:43+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -1412,5 +1451,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T21:14:10+00:00"
+  "updated_at": "2026-08-22T21:24:43+00:00"
 }

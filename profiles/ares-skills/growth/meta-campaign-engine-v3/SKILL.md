@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.13
+version: 3.0.14
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -66,6 +66,7 @@ Carregue somente a referência do branch atual.
 13. Todo alerta operacional de erro deve identificar operação e campanhas afetadas e informar, em linguagem humana e sem paths/credenciais: etapa, causa baseada no erro real, consequência, solução proposta e autorização necessária. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
 14. Depois de qualquer exceção `V3 BLOQUEADO`, Ares pode continuar diagnóstico e readback somente leitura, mas nenhum write corretivo na Meta ocorre até Rodolfo ou Nicolas autorizar explicitamente a solução proposta. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
 15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o saldo restante dentro do cap operacional e a fonte: preflight Meta vivo mais budgets do request confirmados por readback.
+16. Criação programada é uma fase condicional do loop, não uma obrigação diária: analisar D1/D2/D3, aplicar pausas/escalas aprovadas e só abrir nova coorte quando a leitura justificar. `creation_hold.enabled=true` bloqueia criação/clone de novos slots e não expira sozinho; Rodolfo ou Nicolas libera explicitamente.
 
 ## How to run
 
@@ -113,3 +114,4 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - Se o bundle falhar depois de criar campaign/adset shells, bloquear replay cego. Reconciliar IDs existentes, procurar filhos/orphans por escopo recente ou nomes exatos, corrigir o payload, passar `validate_only` e retomar somente a camada faltante com state/audit/readback explícitos.
 - Na criação `clone_prestaged`, a ordem do pool é obrigatória: atualizar a reconciliação Drive×Meta, eliminar do conjunto candidato todo asset não aprovado, conflitante, reservado ou com identidade divergente e somente então selecionar `3 × campanhas` do Shared Drive. Conflito em um candidato faz o seletor pular para o próximo elegível; nunca bloquear o lote inteiro enquanto houver quantidade reconciliada suficiente. Bloquear apenas quando o saldo único reconciliado for menor que o necessário.
 - Nunca reutilizar o state de um request já concluído como ciclo do dia seguinte. `completed_operational_date_sp` anterior fecha a execução antiga; o novo ciclo começa com request e conciliação novos.
+- Nunca confundir o horário de 17:00 com autorização automática para criar. O schedule apenas pode iniciar quando o lifecycle gate estiver liberado; em hold, Diário, Intraday, D1-D3, pausa, escala e first-delivery continuam ativos sem novos campaigns.
