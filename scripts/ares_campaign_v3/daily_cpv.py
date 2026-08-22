@@ -232,7 +232,12 @@ def rollover_completed_state(state: dict[str, Any], operational_date: str) -> di
     return state
 
 
-def discord_failure_message(failure: dict[str, Any], failure_status: str, operational_date: date) -> str:
+def discord_failure_message(
+    failure: dict[str, Any],
+    failure_status: str,
+    operational_date: date,
+    campaign_numbers: list[int] | None = None,
+) -> str:
     """Render a useful, credential-safe failure explanation for operators."""
     stage = str(failure.get("stage") or failure.get("type") or "desconhecida")
     message = str(failure.get("message") or "")
@@ -277,19 +282,43 @@ def discord_failure_message(failure: dict[str, Any], failure_status: str, operat
         correction = "Revisar o audit, confirmar o estado real por readback e corrigir a causa antes de retomar."
 
     if failure_status == "FAILED":
-        impact = "O ciclo parou antes de confirmar novos writes."
+        consequence = "O ciclo parou antes de confirmar novos writes."
     elif failure_status == "READBACK_DEFERRED":
-        impact = "Pode haver alteração na Meta; o estado foi preservado e não haverá retry cego."
+        consequence = "Pode haver alteração na Meta; o estado foi preservado e nenhum write será repetido."
     else:
-        impact = "Os objetos já identificados foram preservados; falta concluir a reconciliação ou o pós-processamento."
+        consequence = "Os objetos já identificados foram preservados; falta concluir a reconciliação ou o pós-processamento."
+
+    campaign_label = ", ".join(f"C{int(number):02d}" for number in campaign_numbers or []) or "ciclo diário programado"
 
     return (
         f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\n"
+        f"Objeto: {campaign_label} · criação CBO programada\n"
         f"Etapa: {stage}\n"
         f"Causa: {cause}\n"
-        f"Impacto: {impact}\n"
-        f"Correção: {correction}"
+        f"Consequência: {consequence}\n"
+        f"Solução proposta: {correction}\n"
+        "Autorização necessária: Rodolfo ou Nicolas. Até a aprovação, Ares faz somente diagnóstico/readback e não executa write corretivo."
     )
+
+
+def account_budget_summary(budget: dict[str, Any]) -> dict[str, Any]:
+    active_minor = int(budget.get("projected_minor") or 0)
+    cap_minor = int(budget.get("cap_minor") or 0)
+    if active_minor < 0 or cap_minor <= 0 or active_minor > cap_minor:
+        raise DailyBlocked("budget_cap", "post-creation budget summary is invalid", {"active_minor": active_minor, "cap_minor": cap_minor})
+    return {
+        "active_minor": active_minor,
+        "remaining_minor": cap_minor - active_minor,
+        "cap_minor": cap_minor,
+        "currency": "USD",
+        "source": "live Meta preflight plus validated campaign budgets from this request",
+    }
+
+
+def usd_minor_label(value: int) -> str:
+    amount = Decimal(int(value)) / Decimal(100)
+    text = f"{amount:.2f}"
+    return text.rstrip("0").rstrip(".")
 
 
 def media_title(kind: str, asset_id: str, checksum: str) -> str:
@@ -1396,14 +1425,20 @@ def run_daily(
             inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
             drive_after = backend.drive_preflight()["drive"]
             stock = stock_counts(inventory_rows, drive_after)
-            final = {"status": "COMPLETE_FUTURE_ACTIVE", "request_id": request_id, "campaign_numbers": numbers, "campaign_ids": campaign_ids, "start_time_sp": (operational_date + timedelta(days=1)).isoformat() + "T00:30:00-03:00", "assets_used": len(selected), "stock_remaining": stock, "audit": str(audit_path)}
+            budget_after = account_budget_summary(budget)
+            final = {"status": "COMPLETE_FUTURE_ACTIVE", "request_id": request_id, "campaign_numbers": numbers, "campaign_ids": campaign_ids, "start_time_sp": (operational_date + timedelta(days=1)).isoformat() + "T00:30:00-03:00", "assets_used": len(selected), "stock_remaining": stock, "account_budget_after_creation": budget_after, "audit": str(audit_path)}
             audit.update(stage="COMPLETE", final=final, completed_at_utc=utc_now())
             atomic_json(audit_path, audit)
             state.update(status="COMPLETE", completed_operational_date_sp=day, campaign_ids=campaign_ids, stock_remaining=stock, updated_at_utc=utc_now())
             atomic_json(paths.state, state)
             if post_report:
                 labels = ", ".join(f"C{number:02d}" for number in numbers)
-                audit["discord_readback"] = post_discord(f"✅ V3 CONCLUÍDO — CPV G006 — {operational_date:%d/%m}\n{labels} · USD 30 cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\nCriativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}")
+                audit["discord_readback"] = post_discord(
+                    f"✅ V3 CONCLUÍDO — CPV G006 — {operational_date:%d/%m}\n"
+                    f"{labels} · USD 30 cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\n"
+                    f"Budget ativo: USD {usd_minor_label(budget_after['active_minor'])} · restante: USD {usd_minor_label(budget_after['remaining_minor'])} / cap USD {usd_minor_label(budget_after['cap_minor'])}\n"
+                    f"Criativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}"
+                )
                 atomic_json(audit_path, audit)
             if not quiet:
                 print(json.dumps(final, ensure_ascii=False, indent=2))
@@ -1411,8 +1446,10 @@ def run_daily(
         except Exception as exc:
             failure = safe_error(exc)
             known_campaign_ids = bool(state.get("campaign_ids") or (audit.get("engine_result") or {}).get("campaign_ids"))
-            failure_status, manual_gate = failure_resume_state(audit.get("side_effects") or {}, known_campaign_ids=known_campaign_ids)
-            audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=manual_gate)
+            failure_status, _ = failure_resume_state(audit.get("side_effects") or {}, known_campaign_ids=known_campaign_ids)
+            manual_gate = True
+            authorization = {"required": True, "authorized_roles": ["Rodolfo", "Nicolas"], "scope": "any corrective write after this failure"}
+            audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=True, operator_authorization=authorization)
             atomic_json(audit_path, audit)
             if failure_status == "FAILED" and selected_ids:
                 inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -1422,18 +1459,19 @@ def run_daily(
                     status=failure_status,
                     failure=failure,
                     retry_after_epoch=int(time.time()) + 300 if failure_status != "FAILED" else 0,
-                    manual_reconciliation_required=manual_gate,
+                    manual_reconciliation_required=True,
+                    operator_authorization=authorization,
                     updated_at_utc=utc_now(),
                 )
                 atomic_json(paths.state, state)
             if post_report:
                 try:
-                    post_discord(discord_failure_message(failure, failure_status, operational_date))
+                    post_discord(discord_failure_message(failure, failure_status, operational_date, list(state.get("campaign_numbers") or [])))
                 except Exception:
                     pass
             if not quiet:
-                print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
-            return {"status": failure_status, "failure": failure, "manual_reconciliation_required": manual_gate, "audit": str(audit_path)}
+                print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": True, "operator_authorization": authorization, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
+            return {"status": failure_status, "failure": failure, "manual_reconciliation_required": True, "operator_authorization": authorization, "audit": str(audit_path)}
         finally:
             audit.setdefault("observability", {})["total"] = {
                 "duration_ms": round((time.perf_counter() - total_started) * 1000, 3),

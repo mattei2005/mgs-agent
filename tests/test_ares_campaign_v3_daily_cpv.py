@@ -37,6 +37,8 @@ from ares_campaign_v3.daily_cpv import (
     LiveDailyBackend,
     safe_error,
     BatchTransportError,
+    account_budget_summary,
+    usd_minor_label,
 )
 
 SP = ZoneInfo("America/Sao_Paulo")
@@ -130,8 +132,10 @@ def test_discord_failure_explains_cause_impact_and_correction_without_internal_p
     )
     assert "Etapa: reconciliation" in message
     assert "Causa:" in message
-    assert "Impacto:" in message
-    assert "Correção:" in message
+    assert "Objeto: ciclo diário programado" in message
+    assert "Consequência:" in message
+    assert "Solução proposta:" in message
+    assert "Autorização necessária: Rodolfo ou Nicolas" in message
     assert "Drive × Meta" in message
     assert "/root/" not in message
 
@@ -160,6 +164,31 @@ def test_batch_transport_failure_preserves_sanitized_meta_cause_for_operator_mes
     message = discord_failure_message(failure, "READBACK_DEFERRED", date(2026, 8, 22))
     assert "código 100/2446173" in message
     assert "O rótulo da regra" in message
+
+
+def test_failure_message_identifies_campaigns_and_blocks_corrective_write_until_authorized():
+    message = discord_failure_message(
+        {"type": "DailyBlocked", "stage": "readback", "message": "campaign hierarchy validation failed"},
+        "READBACK_DEFERRED",
+        date(2026, 8, 22),
+        [17, 18, 19],
+    )
+    assert "Objeto: C17, C18, C19 · criação CBO programada" in message
+    assert "Ares faz somente diagnóstico/readback" in message
+    assert "não executa write corretivo" in message
+
+
+def test_account_budget_summary_reports_remaining_operational_cap():
+    summary = account_budget_summary({"projected_minor": 40500, "cap_minor": 50000})
+    assert summary == {
+        "active_minor": 40500,
+        "remaining_minor": 9500,
+        "cap_minor": 50000,
+        "currency": "USD",
+        "source": "live Meta preflight plus validated campaign budgets from this request",
+    }
+    assert usd_minor_label(summary["active_minor"]) == "405"
+    assert usd_minor_label(summary["remaining_minor"]) == "95"
 
 
 def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():

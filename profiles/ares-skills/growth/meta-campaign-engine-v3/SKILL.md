@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.12
+version: 3.0.13
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -63,7 +63,9 @@ Carregue somente a referência do branch atual.
 10. V2 permanece rollback congelado; nenhum legado é apagado durante a migração inicial.
 11. Em CPV `clone_prestaged`, todo `asset_ref` exige `canonical_filename` válido da taxonomia `CAR_BR_BR_VID_*_{PV|NV|PH|NH}_NNN.mp4`. O anúncio nasce como `AD NN - {canonical_stem}` e o creative como `CPV CNN ADNN {canonical_stem}`. `asset_id` permanece apenas como identidade técnica no manifest/audit; se o nome canônico faltar ou for inválido, bloquear antes de selar o manifest.
 12. Em Creditoparaveiculo, o pós-processamento só conclui após auto-armar cada campanha nova no guardrail de primeiro gasto. O enrollment valida IDs, data operacional, status `ACTIVE`, gasto zero e retorna `meta_writes=0`; falha deixa o request `POSTPROCESS_PENDING`. O watcher aceita primeiro spend observado de 00:30 a 02:00 SP inclusive sem pause; fora dessa janela, pausa uma vez e agenda reativação 00:30 do dia seguinte.
-13. Todo alerta operacional de erro deve informar, em linguagem humana e sem paths/credenciais: etapa, causa provável baseada no erro real, impacto/estado preservado e correção ou próxima ação segura. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
+13. Todo alerta operacional de erro deve identificar operação e campanhas afetadas e informar, em linguagem humana e sem paths/credenciais: etapa, causa baseada no erro real, consequência, solução proposta e autorização necessária. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
+14. Depois de qualquer exceção `V3 BLOQUEADO`, Ares pode continuar diagnóstico e readback somente leitura, mas nenhum write corretivo na Meta ocorre até Rodolfo ou Nicolas autorizar explicitamente a solução proposta. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
+15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o saldo restante dentro do cap operacional e a fonte: preflight Meta vivo mais budgets do request confirmados por readback.
 
 ## How to run
 
@@ -95,6 +97,8 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - títulos de pre-stage incluem `asset_id + checksum curto`, e o registry confirma `account + asset + checksum + IDs` por readback;
 - falhas após possível side effect ficam `READBACK_DEFERRED`/`POSTPROCESS_PENDING`, nunca `FAILED` fora do gate;
 - `BatchTransportError` persiste etapa e causa Meta sanitizada (`code/subcode/user_title`) para o alerta; paths, headers sensíveis, token e trace não entram na mensagem ao operador;
+- simulação de erro confirma que o state recebe `manual_reconciliation_required=true` e `operator_authorization.required=true`, impedindo retomada/write corretivo automático;
+- conclusão programada inclui `account_budget_after_creation` e a mensagem Discord informa budget ativo, restante e cap em USD;
 - REPORT-INFRA para qualquer mudança estrutural.
 
 ## Pitfalls

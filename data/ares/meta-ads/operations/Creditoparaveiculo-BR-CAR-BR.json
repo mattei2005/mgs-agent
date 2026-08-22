@@ -1119,7 +1119,7 @@
     "ares_write_performed": false
   },
   "campaign_engine_v3": {
-    "version": "3.0.12",
+    "version": "3.0.13",
     "status": "active_guarded_development_access",
     "authorized_by": "Rodolfo Mattei",
     "authorization_message_id": "1540222249036939324",
@@ -1134,7 +1134,9 @@
     "media_policy": "prestage_before_manifest",
     "ad_naming_policy": "canonical_filename required before manifest sealing; ad and creative names use canonical stem; asset_id remains technical only",
     "daily_state_rollover": "completed prior-day requests are closed and never reused as the next day's resumable state",
-    "failure_reporting_policy": "every operator-visible failure includes stage, cause, impact and safe correction without internal paths or credentials",
+    "failure_reporting_policy": "every operator-visible failure identifies affected campaigns and includes stage, cause, consequence, proposed solution and explicit authorization by Rodolfo or Nicolas without internal paths or credentials",
+    "failure_write_gate": "read-only diagnosis/readback may continue automatically; any corrective Meta write after a V3 BLOQUEADO exception waits for Rodolfo or Nicolas",
+    "scheduled_creation_budget_reporting": "completion message always includes active account budget and remaining USD operational cap",
     "readback_policy": "one_outer_graph_batch_per_two_campaigns",
     "intermediate_get_calls": 0,
     "write_enabled": true,
@@ -1146,7 +1148,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.61",
+  "playbook_version": "1.0.62",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
