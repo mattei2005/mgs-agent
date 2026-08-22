@@ -8630,6 +8630,44 @@
         "readback_http": 200,
         "content_match": true
       }
+    },
+    {
+      "id": "ares-cpv-hourly-roi-sb-4d-20260822",
+      "agent": "ares",
+      "type": "profile_script_one_shot_report",
+      "requested_by": "Rodolfo Mattei",
+      "source_thread_id": "1540832226583773265",
+      "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "mode": "read_only",
+      "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-hourly-roi-sb-20260822.py",
+      "size_bytes": 28910,
+      "sha256": "666bcde9fdc2ac4f3468eb05f4ebd2af016d42c0d42840fcccebdf1436265e88",
+      "wrapper_path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-hourly-roi-sb-20260822.sh",
+      "wrapper_size_bytes": 224,
+      "wrapper_sha256": "4baf461adce1c0fd1636ea96f3593bd890fb8a513efb658eb7ef5b277bb92567",
+      "purpose": "One-shot 23:00 São Paulo analysis of four days by hour, reconciling campaign ROI with Smart Bidding RPS, CPM and coverage without Meta writes.",
+      "smart_bidding_endpoint": "/photo/performance_per_adgroup",
+      "scheduler": {
+        "schedule": "2026-08-22T23:00:00-03:00",
+        "no_agent": true,
+        "deliver": "local",
+        "direct_thread_post": "1540832226583773265",
+        "state": "scheduled"
+      },
+      "validation": "Live read-only dry-run PASS: 556 SB hourly rows, 348 Meta hourly rows, four dates 19/08-22/08, closed-day SB-vs-Meta max absolute spend delta USD2.63, five Discord-safe chunks, max 1689 chars, zero Meta writes.",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1540835809505054733",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": [],
+        "thread_created": false,
+        "author_id": "1496296175014252634",
+        "readback": true
+      },
+      "git_tracked": false,
+      "updated_at": "2026-08-22T18:30:43-03:00"
     }
   ],
   "profile_skill_references": [

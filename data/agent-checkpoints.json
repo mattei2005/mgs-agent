@@ -83,12 +83,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-HOURLY-ROI-SB-20260822",
-      "next_step": "Construir e testar coletor horário SB/Meta, agendar script-only para 23:00 SP e validar entrega por readback Discord",
+      "next_step": "Às 23:00 SP executar coleta final, publicar diretamente na thread e exigir readback Discord; em falha, publicar bloqueio sanitizado sem alterar campanhas",
       "objective": "Entregar às 23:00 São Paulo análise hora a hora dos últimos quatro dias para Creditoparaveiculo G006, cruzando ROI de campanhas com RPS, CPM e cobertura Smart Bidding, sem writes Meta",
-      "source": "discord:thread:1540832226583773265; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "solicitação confirmada por rodolfo; escopo read-only; implementação e validação do one-shot em andamento",
+      "source": "discord:thread:1540832226583773265; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-hourly-roi-sb-20260822.py",
+      "state": "runtime one-shot criado e validado read-only; agenda script-only no-agent habilitada para 23:00 sp; dry-run fechou quatro datas, cinco chunks seguros e zero writes meta",
       "thread_id": "1540832226583773265",
-      "updated_at": "2026-08-22T21:22:40+00:00"
+      "updated_at": "2026-08-22T21:32:21+00:00"
     },
     {
       "agent": "ares",
@@ -1082,5 +1082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T21:24:55+00:00"
+  "updated_at": "2026-08-22T21:32:21+00:00"
 }
