@@ -1,12 +1,12 @@
 {
-  "inspected_at_et": "2026-08-21T16:34:45-04:00",
+  "inspected_at_et": "2026-08-22T17:50:30-04:00",
   "final_url": "https://app.smartbiddingdigital.com/company/digital-trust/zytiva/routing",
   "title": "Routing > digital-trust > zytiva",
   "list_http": 201,
   "publisher": "digital-trust_zytiva",
   "total_pools": 15,
   "matched_pools": 6,
-  "target_snapshot_sha256": "bf744c529cc2f4cf3351644483b92bc15a8f6ad16541c4f0a2ff5c42d99b185b",
+  "target_snapshot_sha256": "2088dbc76ce5ce4711bd354f2155a5ae0d61cd86ee304b124eabc0fc4fea3d07",
   "pools": [
     {
       "id": 605,
@@ -20,14 +20,95 @@
       "route_count": 5,
       "routes": [
         "zy-gb-cc-en-drip-m0-1",
+        "zy-gb-cc-en-drip-m3-1",
+        "zy-gb-cc-en-drip-m2-1",
         "zy-gb-cc-en-drip-nm",
+        "zy-gb-cc-en-drip-m1-1"
+      ],
+      "utm_contents": [
+        "drip_gb_cc_m0-1",
+        "drip_gb_cc_3-1",
+        "drip_gb_cc_2-1",
+        "drip_gb_cc_nm",
+        "drip_gb_cc_1-1"
+      ],
+      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
+      "blank_operations": 0
+    },
+    {
+      "id": 1084,
+      "name": "zy-gb-cc-en-drip 002",
+      "source": "FACEBOOK",
+      "country": "GB",
+      "vertical": "CC",
+      "language": "EN",
+      "medium": ".*-d$",
+      "append_params": false,
+      "route_count": 5,
+      "routes": [
+        "zy-gb-cc-en-drip-m4-1",
+        "zy-gb-cc-en-drip-m6-1",
+        "zy-gb-cc-en-drip-m5-1",
+        "zy-gb-cc-en-drip-m7-1",
+        "zy-gb-cc-en-drip-m8-1"
+      ],
+      "utm_contents": [
+        "drip_gb_cc_4-1",
+        "drip_gb_cc_6-1",
+        "drip_gb_cc_5-1",
+        "drip_gb_cc_7-1",
+        "drip_gb_cc_8-1"
+      ],
+      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
+      "blank_operations": 0
+    },
+    {
+      "id": 1085,
+      "name": "zy-gb-cc-en-drip 003",
+      "source": "FACEBOOK",
+      "country": "GB",
+      "vertical": "CC",
+      "language": "EN",
+      "medium": ".*-d$",
+      "append_params": false,
+      "route_count": 5,
+      "routes": [
+        "zy-gb-cc-en-drip-m10-1",
+        "zy-gb-cc-en-drip-m9-1",
+        "zy-gb-cc-en-drip-m12-1",
+        "zy-gb-cc-en-drip-m11-1",
+        "zy-gb-cc-en-drip-m13-1"
+      ],
+      "utm_contents": [
+        "drip_gb_cc_10-1",
+        "drip_gb_cc_9-1",
+        "drip_gb_cc_12-1",
+        "drip_gb_cc_11-1",
+        "drip_gb_cc_13-1"
+      ],
+      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
+      "blank_operations": 0
+    },
+    {
+      "id": 1086,
+      "name": "zy-gb-cc-en-drip 004",
+      "source": "FACEBOOK",
+      "country": "GB",
+      "vertical": "CC",
+      "language": "EN",
+      "medium": ".*-d$",
+      "append_params": false,
+      "route_count": 5,
+      "routes": [
+        "zy-gb-cc-en-drip-m15-1",
+        "zy-gb-cc-en-drip-m14-1",
         "zy-gb-cc-en-drip-m16-1",
         "zy-gb-cc-en-drip-m17-1",
         "zy-gb-cc-en-drip-m18-1"
       ],
       "utm_contents": [
-        "drip_gb_cc_m0-1",
-        "drip_gb_cc_nm",
+        "drip_gb_cc_15-1",
+        "drip_gb_cc_14-1",
         "drip_gb_cc_m16-1",
         "drip_gb_cc_m17-1",
         "drip_gb_cc_m18-1"
@@ -36,8 +117,8 @@
       "blank_operations": 0
     },
     {
-      "id": 1084,
-      "name": "zy-gb-cc-en-drip 002",
+      "id": 1087,
+      "name": "zy-gb-cc-en-drip 005",
       "source": "FACEBOOK",
       "country": "GB",
       "vertical": "CC",
@@ -63,8 +144,8 @@
       "blank_operations": 0
     },
     {
-      "id": 1085,
-      "name": "zy-gb-cc-en-drip 003",
+      "id": 1088,
+      "name": "zy-gb-cc-en-drip 006",
       "source": "FACEBOOK",
       "country": "GB",
       "vertical": "CC",
@@ -85,87 +166,6 @@
         "drip_gb_cc_m26-1",
         "drip_gb_cc_m27-1",
         "drip_gb_cc_m28-1"
-      ],
-      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
-      "blank_operations": 0
-    },
-    {
-      "id": 1086,
-      "name": "zy-gb-cc-en-drip 004",
-      "source": "FACEBOOK",
-      "country": "GB",
-      "vertical": "CC",
-      "language": "EN",
-      "medium": ".*-d$",
-      "append_params": false,
-      "route_count": 5,
-      "routes": [
-        "zy-gb-cc-en-drip-m10-1",
-        "zy-gb-cc-en-drip-m12-1",
-        "zy-gb-cc-en-drip-m11-1",
-        "zy-gb-cc-en-drip-m13-1",
-        "zy-gb-cc-en-drip-m1-1"
-      ],
-      "utm_contents": [
-        "drip_gb_cc_10-1",
-        "drip_gb_cc_12-1",
-        "drip_gb_cc_11-1",
-        "drip_gb_cc_13-1",
-        "drip_gb_cc_1-1"
-      ],
-      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
-      "blank_operations": 0
-    },
-    {
-      "id": 1087,
-      "name": "zy-gb-cc-en-drip 005",
-      "source": "FACEBOOK",
-      "country": "GB",
-      "vertical": "CC",
-      "language": "EN",
-      "medium": ".*-d$",
-      "append_params": false,
-      "route_count": 5,
-      "routes": [
-        "zy-gb-cc-en-drip-m3-1",
-        "zy-gb-cc-en-drip-m2-1",
-        "zy-gb-cc-en-drip-m4-1",
-        "zy-gb-cc-en-drip-m15-1",
-        "zy-gb-cc-en-drip-m14-1"
-      ],
-      "utm_contents": [
-        "drip_gb_cc_3-1",
-        "drip_gb_cc_2-1",
-        "drip_gb_cc_4-1",
-        "drip_gb_cc_15-1",
-        "drip_gb_cc_14-1"
-      ],
-      "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
-      "blank_operations": 0
-    },
-    {
-      "id": 1088,
-      "name": "zy-gb-cc-en-drip 006",
-      "source": "FACEBOOK",
-      "country": "GB",
-      "vertical": "CC",
-      "language": "EN",
-      "medium": ".*-d$",
-      "append_params": false,
-      "route_count": 5,
-      "routes": [
-        "zy-gb-cc-en-drip-m6-1",
-        "zy-gb-cc-en-drip-m5-1",
-        "zy-gb-cc-en-drip-m7-1",
-        "zy-gb-cc-en-drip-m8-1",
-        "zy-gb-cc-en-drip-m9-1"
-      ],
-      "utm_contents": [
-        "drip_gb_cc_6-1",
-        "drip_gb_cc_5-1",
-        "drip_gb_cc_7-1",
-        "drip_gb_cc_8-1",
-        "drip_gb_cc_9-1"
       ],
       "url_sequence_sha256": "7be2e133f193eb283ad3b9665e6cdccc00ab7642a98f0c25fb82f281e124fa97",
       "blank_operations": 0
