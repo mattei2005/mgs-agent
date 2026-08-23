@@ -25,7 +25,7 @@ from .adapters import CPV_ACCOUNT_ID, CPV_PAGE_ID, build_cpv_manifest
 from .cli import real_transport_factory
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
-from .prestage import PageVideoUploader
+from .prestage import AdAccountVideoUploader
 from .prevalidation import prevalidate_payload
 from .schema import Manifest
 from .transport import BatchTransportError, FakeBatchTransport
@@ -969,10 +969,15 @@ class LiveDailyBackend:
         return payload
 
     def prepare_and_prestage(self, selected: list[dict[str, Any]], drive: dict[str, Any], work_dir: Path, registry: MediaRegistry) -> list[dict[str, Any]]:
-        if not self.page_token or not self.drive_token:
-            raise DailyBlocked("prestage", "Meta Page or Drive token not initialized")
+        if not self.token or not self.drive_token:
+            raise DailyBlocked("prestage", "Meta advertiser or Drive token not initialized")
         by_id = {str(row.get("id") or ""): row for row in drive.get("files") or []}
-        uploader = PageVideoUploader(common=self.common, page_token=self.page_token, page_id=PAGE_ID, graph_version=GRAPH_VERSION)
+        uploader = AdAccountVideoUploader(
+            common=self.common,
+            user_token=self.token,
+            account_id=ACCOUNT_ID,
+            graph_version=GRAPH_VERSION,
+        )
         expected_titles = {
             title
             for row in selected
@@ -982,13 +987,15 @@ class LiveDailyBackend:
             )
         }
         existing_by_title: dict[str, list[str]] = {}
-        for video in self._graph_pages_with_token(f"{PAGE_ID}/videos", {"fields": "id,title,status", "limit": 500}, self.page_token):
+        for video in self._graph_pages_with_token(
+            f"{ACCOUNT_ACT}/advideos", {"fields": "id,title,status", "limit": 500}, self.token
+        ):
             title = str(video.get("title") or "")
             if title in expected_titles and video.get("id"):
                 existing_by_title.setdefault(title, []).append(str(video["id"]))
         duplicates = {title: ids for title, ids in existing_by_title.items() if len(ids) > 1}
         if duplicates:
-            raise DailyBlocked("prestage", "duplicate deterministic Page video titles require reconciliation", {"duplicates": duplicates})
+            raise DailyBlocked("prestage", "duplicate deterministic ad-account video titles require reconciliation", {"duplicates": duplicates})
         prepared = []
         self.prestage_breakdown_ms = {"download": 0.0, "render_square": 0.0, "upload": 0.0, "ready_readback": 0.0}
         for row in selected:
@@ -1026,6 +1033,10 @@ class LiveDailyBackend:
             self.prestage_breakdown_ms["ready_readback"] += round((time.perf_counter() - started) * 1000, 3)
             if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
                 raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
+            count_call("meta_association_readback")
+            association = uploader.verify_association([str(vertical_id), str(square_id)])
+            if any((association.get(str(video_id)) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
+                raise DailyBlocked("prestage", "dual-video ad-account association readback failed", {"asset_id": row.get("asset_id")})
             record = registry.register(
                 account_id=ACCOUNT_ID,
                 asset_id=str(row["asset_id"]),
@@ -1033,7 +1044,9 @@ class LiveDailyBackend:
                 vertical_video_id=str(vertical_id),
                 square_video_id=str(square_id),
                 ready=True,
-                source="v3-daily-resumable-meta-readback",
+                source="v3-daily-ad-account-meta-readback",
+                upload_edge="ad_account_advideos",
+                association_verified=True,
             )
             registry_readback = registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), clean["sha256"])
             if str(registry_readback.get("vertical_video_id")) != str(vertical_id) or str(registry_readback.get("square_video_id")) != str(square_id):
@@ -1528,6 +1541,8 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
                 square_video_id=f"offline-s-{index + 1:02d}",
                 ready=True,
                 source="offline-smoke",
+                upload_edge="ad_account_advideos",
+                association_verified=True,
             )
             assets.append({
                 "asset_id": asset_id,

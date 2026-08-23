@@ -38,7 +38,19 @@ class MediaRegistry:
         os.replace(tmp, self.path)
         os.chmod(self.path, 0o600)
 
-    def register(self, *, account_id: str, asset_id: str, checksum: str, vertical_video_id: str, square_video_id: str, ready: bool, source: str = "manual-readback") -> dict[str, Any]:
+    def register(
+        self,
+        *,
+        account_id: str,
+        asset_id: str,
+        checksum: str,
+        vertical_video_id: str,
+        square_video_id: str,
+        ready: bool,
+        source: str = "manual-readback",
+        upload_edge: str | None = None,
+        association_verified: bool = False,
+    ) -> dict[str, Any]:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd = os.open(self.lock_path, os.O_CREAT | os.O_RDWR, 0o600)
         with os.fdopen(fd, "r+") as lock:
@@ -55,6 +67,8 @@ class MediaRegistry:
                 "square_video_id": str(square_video_id),
                 "ready": bool(ready),
                 "source": source,
+                "upload_edge": upload_edge,
+                "association_verified": bool(association_verified),
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             }
             records[key] = record
@@ -70,8 +84,20 @@ class MediaRegistry:
             raise MediaNotReady(f"media not ready for account={str(account_id).removeprefix('act_')} asset={asset_id}")
         if not record.get("vertical_video_id") or not record.get("square_video_id"):
             raise MediaNotReady(f"media IDs incomplete for asset={asset_id}")
+        if record.get("upload_edge") != "ad_account_advideos" or record.get("association_verified") is not True:
+            raise MediaNotReady(f"media is not associated with the ad account for asset={asset_id}")
         return record
 
     def summary(self) -> dict[str, Any]:
         records = list((self._load().get("records") or {}).values())
-        return {"total": len(records), "ready": sum(row.get("ready") is True for row in records), "accounts": sorted({str(row.get("account_id")) for row in records})}
+        return {
+            "total": len(records),
+            "ready": sum(row.get("ready") is True for row in records),
+            "associated": sum(
+                row.get("ready") is True
+                and row.get("upload_edge") == "ad_account_advideos"
+                and row.get("association_verified") is True
+                for row in records
+            ),
+            "accounts": sorted({str(row.get("account_id")) for row in records}),
+        }

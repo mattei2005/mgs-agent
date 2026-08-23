@@ -371,7 +371,7 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     for i in range(6):
         asset_id = f'asset-{i}'
         checksum = f'sum-{i}'
-        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True)
+        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True, upload_edge='ad_account_advideos', association_verified=True)
         assets.append({
             'asset_id': asset_id,
             'checksum': checksum,
@@ -432,7 +432,7 @@ def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
     for i in range(3):
         asset_id = f'asset-{i}'
         checksum = f'sum-{i}'
-        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True)
+        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'v{i}', square_video_id=f's{i}', ready=True, upload_edge='ad_account_advideos', association_verified=True)
         assets.append({'asset_id': asset_id, 'checksum': checksum, 'canonical_filename': f'CAR_BR_BR_VID_TEST_PV_{i + 1:03d}.mp4'})
     assets[0].pop('canonical_filename')
     with pytest.raises(ValueError, match='requires canonical_filename'):
@@ -460,7 +460,7 @@ def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tm
     for i in range(15):
         asset_id = f'five-asset-{i}'
         checksum = f'five-sum-{i}'
-        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'five-v{i}', square_video_id=f'five-s{i}', ready=True)
+        registry.register(account_id='1046241194533786', asset_id=asset_id, checksum=checksum, vertical_video_id=f'five-v{i}', square_video_id=f'five-s{i}', ready=True, upload_edge='ad_account_advideos', association_verified=True)
         assets.append({
             'asset_id': asset_id,
             'checksum': checksum,
@@ -490,6 +490,7 @@ def test_prevalidation_hash_allows_exact_manifest_and_blocks_tamper(tmp_path):
         registry.register(
             account_id='100', asset_id=item['asset_id'], checksum=item['checksum'],
             vertical_video_id=item['vertical_video_id'], square_video_id=item['square_video_id'], ready=True,
+            upload_edge='ad_account_advideos', association_verified=True,
         )
     payload = manifest([row], request_id='prevalidated').raw
     validated = prevalidate_payload(payload, registry)

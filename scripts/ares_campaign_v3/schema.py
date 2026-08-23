@@ -75,6 +75,8 @@ class MediaSpec:
     vertical_video_id: str
     square_video_id: str
     ready: bool
+    upload_edge: str
+    association_verified: bool
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "MediaSpec":
@@ -84,12 +86,16 @@ class MediaSpec:
             raise ManifestError(f"media missing fields: {','.join(missing)}")
         if value.get("ready") is not True:
             raise ManifestError("media is not ready")
+        if value.get("upload_edge") != "ad_account_advideos" or value.get("association_verified") is not True:
+            raise ManifestError("media is not associated with the ad account")
         return cls(
             asset_id=str(value["asset_id"]),
             checksum=str(value["checksum"]),
             vertical_video_id=str(value["vertical_video_id"]),
             square_video_id=str(value["square_video_id"]),
             ready=True,
+            upload_edge="ad_account_advideos",
+            association_verified=True,
         )
 
 

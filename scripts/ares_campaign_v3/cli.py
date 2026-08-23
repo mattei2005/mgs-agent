@@ -10,7 +10,7 @@ from typing import Any
 from .adapters import build_cpv_manifest
 from .engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from .media_registry import MediaNotReady, MediaRegistry
-from .prestage import MediaUploadError, PageVideoUploader, PrestageService
+from .prestage import AdAccountVideoUploader, MediaUploadError, PrestageService
 from .prevalidation import prevalidate_payload
 from .quota import QuotaBlocked
 from .schema import Manifest, ManifestError
@@ -136,9 +136,14 @@ def _main(argv: list[str] | None = None) -> int:
         if status != 200:
             raise SystemExit(f"Page inventory failed http={status}")
         page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == str(args.page_id)), None)
-        if not page or "ADVERTISE" not in (page.get("tasks") or []) or not page.get("access_token"):
-            raise SystemExit("Page missing ADVERTISE task or Page token")
-        uploader = PageVideoUploader(common=common, page_token=str(page["access_token"]), page_id=str(args.page_id), graph_version=str(config.get("graph_version") or "v26.0"))
+        if not page or "ADVERTISE" not in (page.get("tasks") or []):
+            raise SystemExit("Page missing ADVERTISE task")
+        uploader = AdAccountVideoUploader(
+            common=common,
+            user_token=user_token,
+            account_id=account,
+            graph_version=str(config.get("graph_version") or "v26.0"),
+        )
         record = PrestageService(MediaRegistry(args.registry), uploader).prestage(
             account_id=account, asset_id=args.asset_id, checksum=args.checksum,
             vertical_path=args.vertical_file, square_path=args.square_file,

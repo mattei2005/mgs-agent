@@ -15,11 +15,11 @@ class MediaUploadError(RuntimeError):
     pass
 
 
-class PageVideoUploader:
-    def __init__(self, *, common: Any, page_token: str, page_id: str, graph_version: str = "v26.0", attempts: int = 12, interval_seconds: int = 5):
+class AdAccountVideoUploader:
+    def __init__(self, *, common: Any, user_token: str, account_id: str, graph_version: str = "v26.0", attempts: int = 12, interval_seconds: int = 5):
         self.common = common
-        self.page_token = page_token
-        self.page_id = str(page_id)
+        self.user_token = user_token
+        self.account_id = str(account_id).removeprefix("act_")
         self.graph_version = graph_version
         self.attempts = int(attempts)
         self.interval_seconds = int(interval_seconds)
@@ -27,12 +27,16 @@ class PageVideoUploader:
     def upload(self, path: Path | str, title: str) -> str:
         source = Path(path)
         self.common._throttle_before_request()
-        url = f"https://graph-video.facebook.com/{self.graph_version}/{self.page_id}/videos"
+        url = f"https://graph-video.facebook.com/{self.graph_version}/act_{self.account_id}/advideos"
         try:
             with source.open("rb") as fh:
                 response = requests.post(
                     url,
-                    data={"access_token": self.page_token, "title": title},
+                    data={
+                        "access_token": self.user_token,
+                        "title": title,
+                        "unpublished_content_type": "ADS_POST",
+                    },
                     files={"source": (source.name, fh, "video/mp4")},
                     timeout=300,
                 )
@@ -53,7 +57,7 @@ class PageVideoUploader:
         latest: dict[str, dict[str, Any]] = {}
         for _ in range(self.attempts):
             requests_ = [{"name": video_id, "path": video_id, "params": {"fields": "id,title,length,status"}} for video_id in unique_ids]
-            status, rows, _ = self.common.graph_batch_get(self.page_token, requests_)
+            status, rows, _ = self.common.graph_batch_get(self.user_token, requests_)
             if status != 200 or not isinstance(rows, list):
                 raise MediaUploadError(f"video processing readback failed http={status}")
             latest = {}
@@ -72,6 +76,33 @@ class PageVideoUploader:
                 return latest
             time.sleep(max(1, self.interval_seconds))
         return latest
+
+    def verify_association(self, video_ids: list[str]) -> dict[str, dict[str, Any]]:
+        required = set(dict.fromkeys(str(item) for item in video_ids))
+        found: dict[str, dict[str, Any]] = {}
+        after: str | None = None
+        for _ in range(20):
+            params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
+            if after:
+                params["after"] = after
+            status, payload, _ = self.common.graph_get(
+                f"act_{self.account_id}/advideos", self.user_token, params
+            )
+            if status != 200 or not isinstance(payload, dict):
+                raise MediaUploadError(f"ad-account video association readback failed http={status}")
+            for row in payload.get("data") or []:
+                video_id = str(row.get("id") or "")
+                if video_id in required:
+                    found[video_id] = row
+            if required.issubset(found):
+                break
+            after = str((((payload.get("paging") or {}).get("cursors") or {}).get("after")) or "")
+            if not after:
+                break
+        return {
+            video_id: {"associated": video_id in found, "readback": found.get(video_id)}
+            for video_id in required
+        }
 
 
 class PrestageService:
@@ -93,6 +124,9 @@ class PrestageService:
         processing = self.uploader.wait_ready([vertical_id, square_id])
         if not processing or any((processing.get(video_id) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
             raise MediaNotReady("both uploaded videos must be ready before registry commit")
+        association = self.uploader.verify_association([vertical_id, square_id])
+        if any((association.get(video_id) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
+            raise MediaNotReady("both uploaded videos must be associated with the ad account")
         return self.registry.register(
             account_id=account_id,
             asset_id=asset_id,
@@ -100,5 +134,7 @@ class PrestageService:
             vertical_video_id=vertical_id,
             square_video_id=square_id,
             ready=True,
-            source="v3-prestage-meta-readback",
+            source="v3-ad-account-prestage-meta-readback",
+            upload_edge="ad_account_advideos",
+            association_verified=True,
         )

@@ -35,11 +35,13 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
             record = registry.require_ready(campaign.account_id, ad.media.asset_id, ad.media.checksum)
             if str(record["vertical_video_id"]) != ad.media.vertical_video_id or str(record["square_video_id"]) != ad.media.square_video_id:
                 raise ManifestError(f"manifest media IDs drifted for asset={ad.media.asset_id}")
+            if record.get("upload_edge") != "ad_account_advideos" or record.get("association_verified") is not True:
+                raise ManifestError(f"manifest media is not associated with the ad account for asset={ad.media.asset_id}")
             media_keys.append(f"{campaign.account_id}|{ad.media.asset_id}|{ad.media.checksum}")
     if len(media_keys) != len(set(media_keys)):
         raise ManifestError("duplicate media lineage in manifest")
     if media_keys:
-        checks.extend(["media_registry_exact", "media_lineage_unique"])
+        checks.extend(["media_registry_exact", "media_lineage_unique", "ad_account_video_association"])
     result = copy.deepcopy(payload)
     result.pop("prevalidation", None)
     result["prevalidated"] = True
