@@ -8158,6 +8158,25 @@
         "skill_reference_hashes": {
           "manifest-and-commands.md": "458813eab472503be43f0f072040ed8724c02198cd117c7d9e785d33b873cf62",
           "architecture-and-runtime.md": "2c9d56fceb35b2f383e585c42376c09a5a5a8fc51b54e462d74e936e87660f38"
+        },
+        "delivery_checkpoint": {
+          "script": "/root/.hermes/scripts/c20-delivery-checkpoint-0355.py",
+          "sha256": "fca5c688882ee455fb606ba6e5e5ac54b4069a06fd8bf24744b4fc02a81d10fc",
+          "size_bytes": 2012,
+          "schedule": "2026-08-23T03:55:00-03:00",
+          "no_agent": true,
+          "deliver": "origin",
+          "enabled": true,
+          "state": "scheduled",
+          "meta_writes": 0,
+          "report_infra": {
+            "channel_id": "1498132022634483894",
+            "message_id": "1540973351718096927",
+            "http_status": 200,
+            "content_empty": true,
+            "mentions": [],
+            "thread_created": false
+          }
         }
       }
     },
