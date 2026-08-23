@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-23T01:55:14-03:00",
+    "updated_at": "2026-08-23T01:48:20.719599-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -9265,6 +9265,26 @@
         "thread_created": false,
         "readback": "Discord fetch matched message ID and Zeus bot author"
       }
+    },
+    {
+      "id": "zeus-smartbidding-restricted-alert-title-emojis-20260823",
+      "agent": "zeus",
+      "skill": "smartbidding-dashboard-access",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-11.md",
+      "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-11.md",
+      "size_bytes": 12054,
+      "modified_at": "2026-08-23T01:44:04-04:00",
+      "sha256": "f940563b819b1ca430f6cb3a3c0c4d76d6afa3c988a104bde2886f341795d5e6",
+      "runtime_versioned_sha_match": true,
+      "purpose": "Padronizar um emoji semântico somente no início dos títulos dos alertas de páginas restritas da Smart Bidding.",
+      "validation": "16 testes unittest PASS; py_compile PASS; primeiras mensagens e continuações cobertas; zero títulos ativos sem emoji; live/versioned byte-identical.",
+      "updated_at": "2026-08-23T01:48:20.719599-04:00",
+      "source_authorization": "Discord thread 1540957135083675658 message 1540959139901997156",
+      "report_infra_message_id": "1540960801832177749",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "report_infra_previous_message_id": "1540960333328420886"
     }
   ],
   "systemd_services": [
@@ -9832,8 +9852,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 86716,
-      "modified_at": "2026-08-13T00:19:34-04:00"
+      "size_bytes": 86750,
+      "modified_at": "2026-08-23T01:47:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -9842,8 +9862,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py",
-      "size_bytes": 7233,
-      "modified_at": "2026-07-15T14:00:30-04:00"
+      "size_bytes": 7243,
+      "modified_at": "2026-08-23T01:43:22-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-restricted-sync.py",
@@ -10287,8 +10307,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "size_bytes": 15156,
-      "modified_at": "2026-08-06T11:30:10-04:00"
+      "size_bytes": 15166,
+      "modified_at": "2026-08-23T01:43:21-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-set-restricted-until.py",

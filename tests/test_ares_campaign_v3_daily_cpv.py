@@ -30,6 +30,7 @@ from ares_campaign_v3.daily_cpv import (
     validate_hierarchy,
     update_operation_after_creation,
     move_to_testing,
+    make_square_clean,
     campaign_name_collisions,
     failure_resume_state,
     discord_failure_message,
@@ -108,6 +109,31 @@ def test_hierarchy_requires_active_creatives_with_effective_story_ids():
     result = validate_hierarchy(readback, expected)
     assert result["valid"] is False
     assert result["creatives_ok"] is False
+
+
+def test_square_render_reuses_existing_clean_1080_output(monkeypatch, tmp_path):
+    source = tmp_path / "source.mp4"
+    destination = tmp_path / "square.mp4"
+    source.write_bytes(b"source")
+    destination.write_bytes(b"already-clean")
+    monkeypatch.setattr(
+        "ares_campaign_v3.daily_cpv.verify_clean",
+        lambda path: {"sha256": "clean-sha", "bytes": path.stat().st_size, "clean": True},
+    )
+    calls = []
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        return SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps({"streams": [{"codec_type": "video", "width": 1080, "height": 1080}]}),
+            stderr="",
+        )
+    monkeypatch.setattr("ares_campaign_v3.daily_cpv.subprocess.run", fake_run)
+    result = make_square_clean(source, destination)
+    assert result["reused_existing"] is True
+    assert result["clean"] is True
+    assert len(calls) == 1
+    assert calls[0][0] == "ffprobe"
 
 
 def asset(index: int, *, fingerprint: str | None = None, eligible=True):

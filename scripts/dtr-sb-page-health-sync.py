@@ -695,7 +695,7 @@ def build_new_restrictions_alerts(rows, summary, limit=1900):
         '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
     ]
     continuation_prefix=[
-        'PÁGINAS RESTRITAS — NOVAS APLICADAS (CONTINUAÇÃO)',
+        '🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS (CONTINUAÇÃO)',
         f'Atualizado em: {timestamp}',
         f'Novas nesta execução: {total}',
         '',

@@ -291,11 +291,25 @@ def run(*, dry_run: bool, execute: bool) -> dict[str, Any]:
     paths.lock.parent.mkdir(parents=True, exist_ok=True)
     with paths.lock.open("a+") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        prior_attempt: dict[str, Any] | None = None
         if STATE_PATH.exists():
             prior = load_json(STATE_PATH)
             if prior.get("status") == "COMPLETE":
                 return {**prior, "idempotent_readback": True}
-            raise DailyBlocked("resume", "existing nonterminal C20 state requires manual reconciliation", prior)
+            prior_audit = load_json(AUDIT_PATH) if AUDIT_PATH.exists() else {}
+            retryable_media_only = (
+                prior.get("status") == "FAILED"
+                and prior.get("manual_reconciliation_required") is False
+                and ((prior_audit.get("side_effects") or {}).get("campaign_write")) is False
+            )
+            if not retryable_media_only:
+                raise DailyBlocked("resume", "existing nonterminal C20 state requires manual reconciliation", prior)
+            prior_attempt = {
+                "state": prior,
+                "audit_stage": prior_audit.get("stage"),
+                "failure": prior_audit.get("failure"),
+                "side_effects": prior_audit.get("side_effects"),
+            }
         audit: dict[str, Any] = {
             "schema_version": 3,
             "kind": "cpv_c20_advideos_canary",
@@ -308,6 +322,7 @@ def run(*, dry_run: bool, execute: bool) -> dict[str, Any]:
             "budget": preflight["budget"],
             "selected_assets": selected_public,
             "reconciliation": preflight["reconciliation"],
+            "attempt_history": [prior_attempt] if prior_attempt else [],
         }
         atomic_json(AUDIT_PATH, audit)
         selected_ids = {str(row.get("asset_id") or "") for row in selected}

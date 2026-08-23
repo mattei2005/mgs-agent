@@ -713,7 +713,25 @@ def verify_clean(path: Path) -> dict[str, Any]:
 def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
     count_call("local_square_render")
     destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.is_file():
+        try:
+            verified = verify_clean(destination)
+            probe = subprocess.run(
+                ["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height", "-of", "json", str(destination)],
+                capture_output=True,
+                text=True,
+                timeout=60,
+                check=False,
+            )
+            body = json.loads(probe.stdout or "{}") if probe.returncode == 0 else {}
+            video = next((row for row in body.get("streams") or [] if row.get("codec_type") == "video"), {})
+            if video.get("width") == 1080 and video.get("height") == 1080:
+                return {**verified, "width": 1080, "height": 1080, "reused_existing": True}
+        except Exception:
+            pass
+        destination.unlink(missing_ok=True)
     raw = destination.with_suffix(".raw.mp4")
+    raw.unlink(missing_ok=True)
     result = subprocess.run(
         ["ffmpeg", "-y", "-i", str(source), "-vf", "crop=iw:iw:0:(ih-iw)/2,scale=1080:1080", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", str(raw)],
         capture_output=True,

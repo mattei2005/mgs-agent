@@ -297,7 +297,9 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
             'status sb': 'Broadcast', 'codigos': '#2022', 'data saida': '2026-08-01',
         }]
 
-        self.assertIn('🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING', sync.build_new_restrictions_alerts(restricted, summary)[0])
+        new_blocks = sync.build_new_restrictions_alerts(restricted * 30, summary)
+        self.assertGreater(len(new_blocks), 1)
+        self.assertTrue(all('🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS' in block for block in new_blocks))
         self.assertIn('✅ PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA', sync.build_no_new_restrictions_alert(summary))
         self.assertIn('🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO', sync.build_exited_restrictions_alerts(exited, summary)[0])
 
