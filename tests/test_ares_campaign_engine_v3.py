@@ -16,7 +16,7 @@ from ares_campaign_v3.adapters import build_cpv_manifest
 from ares_campaign_v3.cli import main as cli_main
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
-from ares_campaign_v3.prestage import PrestageService
+from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
 from ares_campaign_v3.prevalidation import prevalidate_payload
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
@@ -48,6 +48,8 @@ def media(i: int) -> dict:
         'vertical_video_id': f'v-{i}',
         'square_video_id': f's-{i}',
         'ready': True,
+        'upload_edge': 'ad_account_advideos',
+        'association_verified': True,
     }
 
 
@@ -235,8 +237,13 @@ def test_full_access_lane_releases_completed_bundle_but_development_keeps_window
 
 def test_media_registry_roundtrip_and_fail_closed(tmp_path):
     registry = MediaRegistry(tmp_path / 'media.json')
-    registry.register(account_id='100', asset_id='asset-1', checksum='sum-1', vertical_video_id='v1', square_video_id='s1', ready=True)
+    registry.register(
+        account_id='100', asset_id='asset-1', checksum='sum-1',
+        vertical_video_id='v1', square_video_id='s1', ready=True,
+        upload_edge='ad_account_advideos', association_verified=True,
+    )
     assert registry.require_ready('100', 'asset-1', 'sum-1')['vertical_video_id'] == 'v1'
+    assert registry.require_ready('100', 'asset-1', 'sum-1')['association_verified'] is True
     with pytest.raises(MediaNotReady):
         registry.require_ready('100', 'missing', 'sum-x')
 
@@ -259,6 +266,8 @@ def test_prestage_registers_only_after_both_videos_are_ready(tmp_path):
             return f'video-{len(self.uploads)}'
         def wait_ready(self, video_ids):
             return {video_id: {'ready': True} for video_id in video_ids}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': True} for video_id in video_ids}
     vertical = tmp_path / 'vertical.mp4'
     square = tmp_path / 'square.mp4'
     vertical.write_bytes(b'vertical')
@@ -271,6 +280,8 @@ def test_prestage_registers_only_after_both_videos_are_ready(tmp_path):
         vertical_path=vertical, square_path=square,
     )
     assert result['ready'] is True
+    assert result['upload_edge'] == 'ad_account_advideos'
+    assert result['association_verified'] is True
     assert len(uploader.uploads) == 2
     assert registry.require_ready('100', 'asset-1', checksum)['square_video_id'] == 'video-2'
 
@@ -281,6 +292,8 @@ def test_prestage_does_not_register_partial_processing(tmp_path):
             return 'vertical' if 'vertical' in str(path) else 'square'
         def wait_ready(self, video_ids):
             return {'vertical': {'ready': True}, 'square': {'ready': False}}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': True} for video_id in video_ids}
     vertical = tmp_path / 'vertical.mp4'
     square = tmp_path / 'square.mp4'
     vertical.write_bytes(b'v')
@@ -290,6 +303,66 @@ def test_prestage_does_not_register_partial_processing(tmp_path):
     with pytest.raises(MediaNotReady):
         PrestageService(registry, Uploader()).prestage(account_id='100', asset_id='asset', checksum=checksum, vertical_path=vertical, square_path=square)
     assert registry.summary()['total'] == 0
+
+
+def test_prestage_rejects_ready_page_videos_without_ad_account_association(tmp_path):
+    class Uploader:
+        def upload(self, path, title):
+            return 'vertical' if 'vertical' in str(path) else 'square'
+        def wait_ready(self, video_ids):
+            return {video_id: {'ready': True} for video_id in video_ids}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': False} for video_id in video_ids}
+    vertical = tmp_path / 'vertical.mp4'
+    square = tmp_path / 'square.mp4'
+    vertical.write_bytes(b'v')
+    square.write_bytes(b's')
+    checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
+    registry = MediaRegistry(tmp_path / 'media.json')
+    with pytest.raises(MediaNotReady, match='associated with the ad account'):
+        PrestageService(registry, Uploader()).prestage(
+            account_id='100', asset_id='asset', checksum=checksum,
+            vertical_path=vertical, square_path=square,
+        )
+    assert registry.summary()['total'] == 0
+
+
+def test_manifest_rejects_page_video_media_even_when_ready():
+    row = prestaged_campaign(1)
+    row['ads'][0]['media']['upload_edge'] = 'page_videos'
+    row['ads'][0]['media']['association_verified'] = False
+    with pytest.raises(ManifestError, match='ad account'):
+        manifest([row])
+
+
+def test_ad_account_video_uploader_posts_to_advideos_with_user_token(monkeypatch):
+    calls = []
+    class Response:
+        status_code = 200
+        headers = {}
+        def json(self):
+            return {'id': 'video-1'}
+    class Common:
+        def _throttle_before_request(self):
+            pass
+        def record_response_usage(self, *args, **kwargs):
+            pass
+    def fake_post(url, data, files, timeout):
+        calls.append({'url': url, 'data': data, 'files': files, 'timeout': timeout})
+        return Response()
+    monkeypatch.setattr('ares_campaign_v3.prestage.requests.post', fake_post)
+    source = Path('/tmp/ares-v3-uploader-test.mp4')
+    source.write_bytes(b'video')
+    try:
+        uploader = AdAccountVideoUploader(
+            common=Common(), user_token='user-token', account_id='123', graph_version='v26.0'
+        )
+        assert uploader.upload(source, 'test-title') == 'video-1'
+    finally:
+        source.unlink(missing_ok=True)
+    assert calls[0]['url'].endswith('/act_123/advideos')
+    assert calls[0]['data']['access_token'] == 'user-token'
+    assert calls[0]['data']['unpublished_content_type'] == 'ADS_POST'
 
 
 def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
