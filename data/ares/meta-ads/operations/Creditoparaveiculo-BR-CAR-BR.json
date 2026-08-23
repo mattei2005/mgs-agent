@@ -282,7 +282,7 @@
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
     "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback; v2 creation/activation crons remain paused as rollback.",
     "c20_advideo_canary_20260823": {
-      "status": "completed_active_readback_validated",
+      "status": "completed_lineage_replacement_active",
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1540939724636819507",
       "authorized_at_sp": "2026-08-23T02:37:58-03:00",
@@ -302,18 +302,39 @@
       "corrective_authorization_source": "discord:thread:1540939724636819507",
       "corrective_authorized_at_sp": "2026-08-23T03:03:02-03:00",
       "corrective_scope": "recover existing paused C20 shell/adset; update campaign; create only missing 3 creatives+ads; validate; activate USD30",
-      "campaign_id": "120250888588510632",
+      "campaign_id": "120250890180320632",
       "completed_at_sp": "2026-08-23T03:23:56.256382-03:00",
       "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
       "research_status": "root_cause_high_confidence_source_ad_lineage",
       "research_report": "data/ares/meta-ads/research/cpv-api-no-delivery/cpv-api-no-delivery-forensic-report-20260823.md",
-      "lineage_ads_status": "PAUSED_READY",
+      "lineage_ads_status": "ACTIVE_REBUILT",
       "lineage_ad_ids": [
-        "120250889800690632",
-        "120250889801450632",
-        "120250889802740632"
+        "120250890182910632",
+        "120250890183050632",
+        "120250890182890632"
       ],
-      "lineage_swap_requires_new_authorization": true
+      "lineage_swap_requires_new_authorization": false,
+      "old_campaign_id": "120250888588510632",
+      "old_campaign_status": "DELETED",
+      "replacement_request_id": "cpv-c20-lineage-rebuild-r2-20260823",
+      "replacement_engine_version": "3.0.15",
+      "replacement_completed_at_sp": "2026-08-23T05:16:14.707759-03:00",
+      "replacement_readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json",
+      "root_cause": "direct ads lost source_ad_id lineage; corrected route uses POST source_ad_id/copies + creative_parameters",
+      "lineage_source_ad_ids": [
+        "120250209380790632",
+        "120250209380800632",
+        "120250209380810632"
+      ],
+      "derived_video_ids": [
+        "1089657326955126",
+        "1803009364199083",
+        "1922582171743180",
+        "2135412263672035",
+        "2302726117210467",
+        "2322923915274194"
+      ],
+      "first_delivery_status": "MONITORING_READ_ONLY_30_MIN"
     }
   },
   "roi_policy": {
@@ -557,13 +578,13 @@
           "replaced_campaign_id": "120250885355540632"
         },
         "20": {
-          "campaign_id": "120250888588510632",
+          "campaign_id": "120250890180320632",
           "cycle_start_date": "2026-08-23",
-          "source": "c20_advideo_canary_readback",
+          "source": "c20_lineage_rebuild_readback",
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1540939724636819507",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
-          "request_id": "cpv-c20-advideos-canary-20260823"
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json",
+          "request_id": "cpv-c20-lineage-rebuild-r2-20260823"
         }
       },
       "required": [
@@ -896,7 +917,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-23T04:41:12-03:00",
+  "updated_at": "2026-08-23T05:16:14.707759-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

@@ -568,6 +568,8 @@ def test_c20_advideo_canary_enters_allowlist_only_after_live_readback(monkeypatc
         }
     }
     assert set(module.validated_allowed_campaigns(operation)) == {"13", "20"}
+    operation["management_scope"]["autonomous_action_scope"]["allowed_campaigns"]["20"]["source"] = "c20_lineage_rebuild_readback"
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "20"}
     operation["management_scope"]["autonomous_action_scope"]["allowed_campaigns"]["20"]["authorized_by"] = "other"
     with pytest.raises(RuntimeError, match="provenance"):
         module.validated_allowed_campaigns(operation)

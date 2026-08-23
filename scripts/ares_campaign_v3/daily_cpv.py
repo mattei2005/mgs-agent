@@ -1087,7 +1087,7 @@ class LiveDailyBackend:
         ads = self._graph_pages(
             f"{campaign_id}/ads",
             {
-                "fields": "id,name,status,effective_status,configured_status,adset_id,issues_info,creative{id,name,status,effective_object_story_id}",
+                "fields": "id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,creative{id,name,status,effective_object_story_id,asset_feed_spec}",
                 "limit": 50,
             },
         )
@@ -1132,6 +1132,21 @@ def validate_hierarchy(readback: dict[str, Any], campaign: Any) -> dict[str, Any
 
 
 def assignments_from_readback(manifest: Manifest, campaign_ids: list[str], readbacks: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    def labels(video: dict[str, Any]) -> set[str]:
+        return {
+            str(value)
+            for row in (video.get("adlabels") or [])
+            for value in (row.get("id"), row.get("name"))
+            if value
+        }
+
+    def materialized_video_id(expected: dict[str, Any], live_videos: list[dict[str, Any]]) -> str:
+        expected_labels = labels(expected)
+        matches = [row for row in live_videos if expected_labels and labels(row) & expected_labels]
+        if len(matches) != 1 or not str(matches[0].get("video_id") or ""):
+            raise DailyBlocked("readback", "materialized video label mapping failed", {"expected_labels": sorted(expected_labels)})
+        return str(matches[0]["video_id"])
+
     assignments: list[dict[str, Any]] = []
     for campaign, campaign_id in zip(manifest.campaigns, campaign_ids):
         readback = readbacks[campaign_id]
@@ -1143,8 +1158,26 @@ def assignments_from_readback(manifest: Manifest, campaign_ids: list[str], readb
             live_ad = ads_by_name.get(ad.name)
             if not live_ad:
                 raise DailyBlocked("readback", "ad name missing from readback", {"campaign_id": campaign_id, "ad_name": ad.name})
+            if str(live_ad.get("source_ad_id") or "") != ad.source_ad_id:
+                raise DailyBlocked("readback", "ad source lineage mismatch", {"campaign_id": campaign_id, "ad_name": ad.name})
             creative = live_ad.get("creative") or {}
-            assignments.append({"asset_id": ad.media.asset_id, "campaign_id": campaign_id, "adset_id": adset_id, "ad_id": str(live_ad.get("id") or ""), "creative_id": str(creative.get("id") or ""), "vertical_video_id": ad.media.vertical_video_id, "square_video_id": ad.media.square_video_id})
+            expected_videos = list(((ad.creative_payload.get("asset_feed_spec") or {}).get("videos") or []))
+            live_videos = list(((creative.get("asset_feed_spec") or {}).get("videos") or []))
+            if len(expected_videos) != 2 or len(live_videos) != 2:
+                raise DailyBlocked("readback", "dual-video materialization readback failed", {"campaign_id": campaign_id, "ad_name": ad.name})
+            assignments.append({
+                "asset_id": ad.media.asset_id,
+                "campaign_id": campaign_id,
+                "adset_id": adset_id,
+                "ad_id": str(live_ad.get("id") or ""),
+                "creative_id": str(creative.get("id") or ""),
+                "source_ad_id": ad.source_ad_id,
+                "effective_object_story_id": str(creative.get("effective_object_story_id") or ""),
+                "prestage_vertical_video_id": ad.media.vertical_video_id,
+                "prestage_square_video_id": ad.media.square_video_id,
+                "vertical_video_id": materialized_video_id(expected_videos[0], live_videos),
+                "square_video_id": materialized_video_id(expected_videos[1], live_videos),
+            })
     return assignments
 
 
