@@ -1,0 +1,160 @@
+{
+  "kind": "c20_vs_manual_delivery_diagnostics",
+  "outer_http": 200,
+  "children": [
+    {
+      "name": "c20_ad1:delivery_checks",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "c20_ad1:activity",
+      "code": 400,
+      "body": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (review_feedback)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AKZV9cMKWcw8O3cbUGXNaVq"
+        }
+      }
+    },
+    {
+      "name": "c20_ad2:delivery_checks",
+      "code": 200,
+      "body": {
+        "id": "120250889025840632",
+        "name": "AD 02 - CAR_BR_BR_VID_SEM_ENTRADA_PV_047",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "c20_ad2:activity",
+      "code": 400,
+      "body": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (review_feedback)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AKZV9cMKWcw8O3cbUGXNaVq"
+        }
+      }
+    },
+    {
+      "name": "c20_ad3:delivery_checks",
+      "code": 200,
+      "body": {
+        "id": "120250889072930632",
+        "name": "AD 03 - CAR_BR_BR_VID_SCORE_BAIXO_PV_020",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "c20_ad3:activity",
+      "code": 400,
+      "body": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (review_feedback)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AKZV9cMKWcw8O3cbUGXNaVq"
+        }
+      }
+    },
+    {
+      "name": "manual_c17_ad1:delivery_checks",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "manual_c17_ad1:activity",
+      "code": 400,
+      "body": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (review_feedback)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AKZV9cMKWcw8O3cbUGXNaVq"
+        }
+      }
+    },
+    {
+      "name": "c20_delivery_estimate",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "estimate_mau_lower_bound": 158100000,
+            "estimate_mau_upper_bound": 185900000,
+            "estimate_ready": true,
+            "daily_outcomes_curve": [
+              {
+                "spend": 0,
+                "reach": 0,
+                "impressions": 0,
+                "actions": 0
+              }
+            ],
+            "estimate_dau": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "manual_c17_delivery_estimate",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "estimate_mau_lower_bound": 157700000,
+            "estimate_mau_upper_bound": 185500000,
+            "estimate_ready": true,
+            "daily_outcomes_curve": [
+              {
+                "spend": 0,
+                "reach": 0,
+                "impressions": 0,
+                "actions": 0
+              }
+            ],
+            "estimate_dau": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "c20_preview",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "body": "<iframe src=\"https://business.facebook.com/ads/api/preview_iframe.php?d=AQK7NbaqWB_xX5zUV44_mVhk4rBsr33nCKHuMkWNhybTBCrME0iGeZVWx0QjtkS-2w63T8fsZwTD8wOoHc0s2cQbldjRAcKX4XjoKJ4sRmxOPOh9Ik2hUP0mnqxluBaG9Q-RvxUIRXhrz3s62rYk6cFid8Wrc5wZzKLY2S4ZCWh_Esj0NXwV8uCLNauInp-SzkpsrhUsv95Q911inYhp2sME4Cu15kvp8231o_46jy5pFKx1h9W5qDf_VT0LAV-jCpJtOYwbSwMh8hoiiFqwZbRueSQNyE7gMhPdy12dp2JrJxsRSqoRPabr1hFy_J6iVUrMnI_-fCNW1LX3G26UkVppMvUvkvIwfPuuUh85sj-nhCC9aXy1A7KpvvkAQMogrnIuiG7FxJ3HtFpd98-Jc1t7CO6cKm1TildxIu7BM5QivztfHM-6i4OarsYVmscBnuY&amp;t=AQJ6tjNio1mRzfrox2Y\" width=\"540\" height=\"690\" scrolling=\"yes\" style=\"border: none;\" allow=\"autoplay\"></iframe>"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manual_c17_preview",
+      "code": 200,
+      "body": {
+        "data": [
+          {
+            "body": "<iframe src=\"https://business.facebook.com/ads/api/preview_iframe.php?d=AQLKPHjUn4bZ14geBebCufcdWsWXKmGGzI_GRw2sC8v5oGcASiYqgMg0kDyokv-S_mX6AKXwJ3HxeuzP7s2DOqq_u5tX-1e1YVl0XqY9V51E_LYxQB9jCp7CE30F1kdrh1xwMbuCeaH5iONriFbVapDsvENHeewMhjobLOF3g92WOnxXBDLS7Kwbis09cTjh03gomr9OdVZrwXBLQID_hnI8HEkzNKUshCSRICBCoEH_lTXrvr2d3683q2vvwtZ57bLh10VUJh-IVGGrFK1vGyKq6s6p2dHZESx_ubqtRJsIGX2tIWs0ev61wUUXK619LzCfOqp7QXsGTNvYuHw71aqF5TvTb96xdyk31euYyMdeVAlTmjocrwJZV__gZ4mOt75php_EDq0sHm4gZVTJXwsmuB2H3-whS084PmLvFi8LIebQqGTpuPm1AoqYeiiMVDo&amp;t=AQJ51ucZfsnWuLBBXHQ\" width=\"540\" height=\"690\" scrolling=\"yes\" style=\"border: none;\" allow=\"autoplay\"></iframe>"
+          }
+        ]
+      }
+    }
+  ]
+}

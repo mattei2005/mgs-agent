@@ -1,0 +1,113 @@
+{
+  "http": 200,
+  "rows": [
+    {
+      "label": "c20_new_direct",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "0",
+        "created_time": "2026-08-23T03:10:46-0300",
+        "updated_time": "2026-08-23T03:14:09-0300",
+        "creative": {
+          "id": "1445898444023038",
+          "name": "CPV C20 AD01 CAR_BR_BR_VID_SEM_ENTRADA_PV_045 2026-08-22-62c977113d686777b9a3a7fe07a78889",
+          "effective_object_story_id": "621037101089579_122172645116824035"
+        }
+      }
+    },
+    {
+      "label": "old_api_c17",
+      "code": 200,
+      "body": {
+        "id": "120250885306030632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "status": "ARCHIVED",
+        "effective_status": "ARCHIVED",
+        "configured_status": "ARCHIVED",
+        "source_ad_id": "0",
+        "created_time": "2026-08-22T17:18:56-0300",
+        "updated_time": "2026-08-23T01:43:57-0300",
+        "creative": {
+          "id": "2796521004053683",
+          "name": "CPV C17 AD01 CAR_BR_BR_VID_SEM_ENTRADA_PV_036 2026-08-22-b944cf6f6fc50a231b8b62c09ea8b72e",
+          "effective_object_story_id": "621037101089579_122172594194824035"
+        }
+      }
+    },
+    {
+      "label": "manual_c17",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "120250885306030632",
+        "created_time": "2026-08-23T01:43:31-0300",
+        "updated_time": "2026-08-23T01:46:08-0300",
+        "creative": {
+          "id": "1325488403975593",
+          "name": "Financie Seu Carro Sem Entrada ✅ 2026-08-22-aaa72fb5f97b38edaceb8958fea8549a",
+          "effective_object_story_id": "621037101089579_122172630872824035"
+        }
+      }
+    },
+    {
+      "label": "source_c08",
+      "code": 400,
+      "body": {
+        "error": {
+          "message": "Unsupported get request. Object with ID '120250209380840632' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api",
+          "type": "GraphMethodException",
+          "code": 100,
+          "error_subcode": 33,
+          "fbtrace_id": "AZIg5Kgnukpyd1g_-L52T5l"
+        }
+      }
+    },
+    {
+      "label": "manual_c10",
+      "code": 200,
+      "body": {
+        "id": "120250887577110632",
+        "name": "AD 03",
+        "status": "ARCHIVED",
+        "effective_status": "ARCHIVED",
+        "configured_status": "ARCHIVED",
+        "source_ad_id": "120250209406640632",
+        "created_time": "2026-08-22T23:31:33-0300",
+        "updated_time": "2026-08-23T01:43:13-0300",
+        "creative": {
+          "id": "2316194448913230",
+          "name": "{{product.name}} 2026-07-24-c67afbf81904da031d03e919d471ce96",
+          "effective_object_story_id": "621037101089579_122169811808824035"
+        }
+      }
+    },
+    {
+      "label": "source_c10",
+      "code": 200,
+      "body": {
+        "id": "120250209406640632",
+        "name": "AD 03",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "120250209380810632",
+        "created_time": "2026-07-24T18:58:33-0300",
+        "updated_time": "2026-08-19T16:09:56-0300",
+        "creative": {
+          "id": "2316194448913230",
+          "name": "{{product.name}} 2026-07-24-c67afbf81904da031d03e919d471ce96",
+          "effective_object_story_id": "621037101089579_122169811808824035"
+        }
+      }
+    }
+  ]
+}

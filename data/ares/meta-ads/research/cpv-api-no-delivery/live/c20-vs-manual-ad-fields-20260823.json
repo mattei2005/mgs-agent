@@ -1,0 +1,197 @@
+{
+  "http": 200,
+  "children": [
+    {
+      "name": "c20:active_time",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "ad_active_time": "3872",
+        "created_time": "2026-08-23T03:10:46-0300",
+        "updated_time": "2026-08-23T03:14:09-0300"
+      }
+    },
+    {
+      "name": "c20:feedback",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "c20:specs",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "tracking_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "fb_pixel": [
+              "1033279451747443"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "26912564461755322"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ]
+          },
+          {
+            "action.type": [
+              "post_engagement"
+            ],
+            "page": [
+              "621037101089579"
+            ],
+            "post": [
+              "122172645116824035"
+            ]
+          },
+          {
+            "action.type": [
+              "link_click"
+            ],
+            "post": [
+              "122172645116824035"
+            ],
+            "post.wall": [
+              "621037101089579"
+            ]
+          },
+          {
+            "action.type": [
+              "post_interaction_gross"
+            ],
+            "page": [
+              "621037101089579"
+            ],
+            "post": [
+              "122172645116824035"
+            ]
+          }
+        ],
+        "conversion_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "conversion_id": [
+              "27422543060683930"
+            ]
+          }
+        ],
+        "source_ad_id": "0"
+      }
+    },
+    {
+      "name": "manual_c17:active_time",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "ad_active_time": "9728",
+        "created_time": "2026-08-23T01:43:31-0300",
+        "updated_time": "2026-08-23T01:46:08-0300"
+      }
+    },
+    {
+      "name": "manual_c17:feedback",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE"
+      }
+    },
+    {
+      "name": "manual_c17:specs",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "tracking_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "fb_pixel": [
+              "1033279451747443"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "26912564461755322"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ]
+          },
+          {
+            "action.type": [
+              "post_engagement"
+            ],
+            "page": [
+              "621037101089579"
+            ],
+            "post": [
+              "122172630872824035"
+            ]
+          },
+          {
+            "action.type": [
+              "link_click"
+            ],
+            "post": [
+              "122172630872824035"
+            ],
+            "post.wall": [
+              "621037101089579"
+            ]
+          },
+          {
+            "action.type": [
+              "post_interaction_gross"
+            ],
+            "page": [
+              "621037101089579"
+            ],
+            "post": [
+              "122172630872824035"
+            ]
+          }
+        ],
+        "conversion_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "conversion_id": [
+              "27422543060683930"
+            ]
+          }
+        ],
+        "source_ad_id": "120250885306030632"
+      }
+    }
+  ]
+}
