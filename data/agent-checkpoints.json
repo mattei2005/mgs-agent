@@ -63,12 +63,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-CREATION-LIFECYCLE-HOLD-20260822",
-      "next_step": "Observar início de gasto e evolução D1-D2-D3 das campanhas atuais; somente após a análise demonstrar necessidade, Rodolfo ou Nicolas pode liberar uma nova coorte e reativar o scheduler de criação.",
-      "objective": "Preservar o loop análise D1-D2-D3, pausa, escala e criação sem abrir novas coortes diariamente por inércia",
-      "source": "discord:thread:1540813334809542776; policy:ARES-CREDITOPARAVEICULO-CREATION-LIFECYCLE-HOLD-V1; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; cron:2cf8115a4f8b",
-      "state": "ativo e fail-closed: criação v3 programada pausada; nenhuma nova campanha em 23/08 e sem expiração automática. c14-c19 ficam em observação de entrega/lifecycle. diário, intraday, d1-d2-d3, guardrails de pausa/escala, first-delivery e snapshot continuam ativos. v3.0.14 bloqueia criação mesmo por execução manual enquanto creation_hold estiver enabled.",
-      "thread_id": "1540813334809542776",
-      "updated_at": "2026-08-22T21:24:55+00:00"
+      "next_step": "Após autorização explícita de Rodolfo: alterar o uploader para ad-account advideos com User Access Token, exigir association_verified no registry e readback; rodar testes; criar um canário PAUSED 1x1x3; somente após revisão autorizar ativação USD30 e observar impressão/gasto. Não reativar scheduler antes do canário e da decisão sobre Full Access.",
+      "objective": "Manter criação CPV bloqueada até corrigir e provar a associação de vídeos à conta de anúncios no Campaign Engine",
+      "source": "discord:thread:1540939724636819507; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json; Meta Video Ads guide:https://developers.facebook.com/docs/marketing-api/guides/videoads; Meta access:https://developers.facebook.com/docs/marketing-api/access/",
+      "state": "investigação read-only concluída com causa primária de alta confiança: v2 e v3 fizeram pre-stage em page/videos; o guia meta exige video_id associado ao ad account via act_1046241194533786/advideos. os 48 ids do registry do ares estão ausentes dos 97 advideos da conta. c17 antigo e duplicado têm adset semanticamente idêntico; a duplicação rematerializou creative/story/video ids e passou a gastar. sete de dez substituições manuais já gastavam às 02:07 sp. o tier live permanece limited/development, documentado pela meta como não apropriado para produção. zero meta writes na investigação.",
+      "thread_id": "1540939724636819507",
+      "updated_at": "2026-08-23T05:21:02+00:00"
     },
     {
       "agent": "zeus",
@@ -1082,5 +1082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T04:54:04+00:00"
+  "updated_at": "2026-08-23T05:21:02+00:00"
 }
