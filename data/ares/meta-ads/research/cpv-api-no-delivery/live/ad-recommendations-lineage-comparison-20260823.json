@@ -1,0 +1,53 @@
+{
+  "http": 200,
+  "rows": [
+    {
+      "label": "c20_direct",
+      "code": 200,
+      "body": {
+        "id": "120250888998350632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_045",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "0"
+      }
+    },
+    {
+      "label": "c20_lineage",
+      "code": 200,
+      "body": {
+        "id": "120250889800690632",
+        "name": "AD 01 - LINEAGE C20 AD01",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "configured_status": "PAUSED",
+        "source_ad_id": "120250209380790632"
+      }
+    },
+    {
+      "label": "manual_c17",
+      "code": 200,
+      "body": {
+        "id": "120250888205760632",
+        "name": "AD 01 - CAR_BR_BR_VID_SEM_ENTRADA_PV_036",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "120250885306030632"
+      }
+    },
+    {
+      "label": "source_c08",
+      "code": 200,
+      "body": {
+        "id": "120250209380790632",
+        "name": "AD 01",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "source_ad_id": "120250209327530632"
+      }
+    }
+  ]
+}

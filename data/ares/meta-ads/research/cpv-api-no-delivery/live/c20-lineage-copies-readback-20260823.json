@@ -1,0 +1,92 @@
+{
+  "http": 200,
+  "rows": [
+    {
+      "kind": "ad",
+      "code": 200,
+      "body": {
+        "id": "120250889800690632",
+        "name": "AD 01 - LINEAGE C20 AD01",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "configured_status": "PAUSED",
+        "source_ad_id": "120250209380790632",
+        "adset_id": "120250888589000632",
+        "creative": {
+          "id": "1598982008269047",
+          "name": "CPV C20 AD01 CAR_BR_BR_VID_SEM_ENTRADA_PV_045 2026-08-23-969a939d7770f996f09e75534729c876",
+          "status": "ACTIVE",
+          "effective_object_story_id": "621037101089579_122172650726824035"
+        }
+      }
+    },
+    {
+      "kind": "creative",
+      "code": 200,
+      "ad_id": "120250889800690632",
+      "creative_id": "1598982008269047",
+      "status": "ACTIVE",
+      "story_id": "621037101089579_122172650726824035",
+      "utm_c20": true,
+      "utm_c08": false
+    },
+    {
+      "kind": "ad",
+      "code": 200,
+      "body": {
+        "id": "120250889801450632",
+        "name": "AD 02 - LINEAGE C20 AD02",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "configured_status": "PAUSED",
+        "source_ad_id": "120250209380800632",
+        "adset_id": "120250888589000632",
+        "creative": {
+          "id": "1611816307266348",
+          "name": "CPV C20 AD02 CAR_BR_BR_VID_SEM_ENTRADA_PV_047 2026-08-23-8b21a64b532df9abd55820e6baf2d71a",
+          "status": "ACTIVE",
+          "effective_object_story_id": "621037101089579_122172650846824035"
+        }
+      }
+    },
+    {
+      "kind": "creative",
+      "code": 200,
+      "ad_id": "120250889801450632",
+      "creative_id": "1611816307266348",
+      "status": "ACTIVE",
+      "story_id": "621037101089579_122172650846824035",
+      "utm_c20": true,
+      "utm_c08": false
+    },
+    {
+      "kind": "ad",
+      "code": 200,
+      "body": {
+        "id": "120250889802740632",
+        "name": "AD 03 - LINEAGE C20 AD03",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "configured_status": "PAUSED",
+        "source_ad_id": "120250209380810632",
+        "adset_id": "120250888589000632",
+        "creative": {
+          "id": "1048430414470564",
+          "name": "CPV C20 AD03 CAR_BR_BR_VID_SCORE_BAIXO_PV_020 2026-08-23-b0c1ddd84164d577e71e1e0656503642",
+          "status": "ACTIVE",
+          "effective_object_story_id": "621037101089579_122172650954824035"
+        }
+      }
+    },
+    {
+      "kind": "creative",
+      "code": 200,
+      "ad_id": "120250889802740632",
+      "creative_id": "1048430414470564",
+      "status": "ACTIVE",
+      "story_id": "621037101089579_122172650954824035",
+      "utm_c20": true,
+      "utm_c08": false
+    }
+  ]
+}

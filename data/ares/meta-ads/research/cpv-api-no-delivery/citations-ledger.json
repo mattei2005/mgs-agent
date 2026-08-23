@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api",
+      "title": "Meta: change creative fields with Ad Copies API",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "As of May 5, 2025, developers can make more changes to their ads when duplicating via Ad Copies API.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies",
+      "title": "Meta Ad Copies API reference",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "When making a copy of an ad, you may overwrite fields on the creative spec by using the creative_parameters argument.",
+          "added": "2026-08-23"
+        },
+        {
+          "text": "If no input is provided, the new ad will be created with an identical ad creative.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/adgroup",
+      "title": "Meta Ad reference",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "source_ad_id numeric string or integer ID of the source Ad, if applicable.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "url": "https://developers.facebook.com/ads/blog/post/2014/07/30/delivery-checks",
+      "title": "Meta Delivery checks guide",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "Once an ad has become ACTIVE (after passing ad review), ads may fail to deliver because of subsequent changes to related assets after the ad becomes active.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "url": "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
+      "title": "Meta Post-Processing for Ad Creation",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "If post-processing fails, the system sets your object to `WITH_ISSUES` and provides an error in `issues_info`.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "url": "https://developers.facebook.com/docs/marketing-api/access",
+      "title": "Meta Marketing API Authorization",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "Calls on ANY access level are against production data.",
+          "added": "2026-08-23"
+        },
+        {
+          "text": "For development only. Not for production apps running for live advertisers.",
+          "added": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "url": "https://developers.facebook.com/community/threads/754307932810192",
+      "title": "Meta Community: API customization delivery error",
+      "accessed": "2026-08-23",
+      "quotes": [
+        {
+          "text": "Only solution so far is turning the ad on and off in the meta platform.",
+          "added": "2026-08-23"
+        }
+      ]
+    }
+  ]
+}
