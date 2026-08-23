@@ -133,12 +133,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-20260822",
-      "next_step": "Toda nova campanha validada pelo v3 é auto-armada no pós-processamento. Primeiro spend observado 00:30-02:00 inclusive libera sem pause; depois de 02:00 pausa uma vez e agenda 00:30 seguinte. C07/C11-C16 seguem armadas e sem spend.",
-      "objective": "Aplicar automaticamente o guardrail de primeiro gasto a toda campanha nova CPV, preservando a janela saudável 00:30-02:00 SP",
-      "source": "discord:thread:1540770026376794113; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; v3:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; audit:data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/arm-20260822T173301980288Z.json",
-      "state": "active_watching",
-      "thread_id": "1540770026376794113",
-      "updated_at": "2026-08-22T17:59:06+00:00"
+      "next_step": "Acompanhar C07 e C11-C19 como D1 nos relatórios canônicos de 23/08; manter creation_hold e não criar nova coorte até nova liberação de Rodolfo ou Nicolas.",
+      "objective": "Tratar C07 e C11-C19 como D1 em 23/08 após substituição manual no Ads Manager e impedir que os IDs antigos ou o watcher de primeiro gasto atuem sobre a coorte",
+      "source": "discord:thread:1540939724636819507; audit:data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json; reconciliation:data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-state-reconcile-20260823.json",
+      "state": "concluído e reconciliado por readback: rodolfo deletou c10 duplicada e os objetos antigos c07/c11-c19; c07 e c11-c19 novas estão active, usd30, maxvol, 1x1x3, nomes canônicos e ciclo_start_date 2026-08-23. ids antigos retornaram archived=deleted. estado local aponta somente aos ids novos; first-delivery tem zero alvos armados e as dez campanhas estão liberadas como d1 por declaração de rodolfo.",
+      "thread_id": "1540939724636819507",
+      "updated_at": "2026-08-23T04:54:04+00:00"
     },
     {
       "agent": "ares",
@@ -1082,5 +1082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-22T21:32:21+00:00"
+  "updated_at": "2026-08-23T04:54:04+00:00"
 }
