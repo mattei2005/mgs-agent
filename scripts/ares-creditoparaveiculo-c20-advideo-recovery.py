@@ -237,7 +237,7 @@ def run(*, dry_run: bool) -> dict[str,Any]:
                     checkpoint['creatives'][creative_name]=creative_id
                     checkpoint['status']='CREATIVES_IN_PROGRESS'
                     atomic_json(RECOVERY_STATE,checkpoint)
-                bounded_object(common,token,creative_id,'id,name,status,effective_object_story_id',lambda b:b.get('name')==creative_name and str(b.get('status') or '').upper()=='ACTIVE' and bool(b.get('effective_object_story_id')),'creative_readback')
+                bounded_object(common,token,creative_id,'id,name,status,effective_object_story_id',lambda b:str(b.get('name') or '').startswith(creative_name) and str(b.get('status') or '').upper()=='ACTIVE' and bool(b.get('effective_object_story_id')),'creative_readback')
                 ad_name=str(ad['name'])
                 if ad_name in checkpoint['ads']:
                     continue
