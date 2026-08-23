@@ -1,0 +1,18 @@
+{
+  "kind": "c20_ad_copies_validate_only_ignored",
+  "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+  "observed_at_sp": "2026-08-23T04:32:53-03:00",
+  "intent": "read-only validate_only of /{ad_id}/copies with creative_parameters",
+  "actual": "Meta ignored execution_options and created three copied ads",
+  "meta_writes": 3,
+  "campaign_id": "120250888588510632",
+  "adset_id": "120250888589000632",
+  "ads": [
+    {"ad_id":"120250889800690632","source_ad_id":"120250209380790632","configured_status":"PAUSED","creative_id":"1598982008269047"},
+    {"ad_id":"120250889801450632","source_ad_id":"120250209380800632","configured_status":"PAUSED","creative_id":"1611816307266348"},
+    {"ad_id":"120250889802740632","source_ad_id":"120250209380810632","configured_status":"PAUSED","creative_id":"1048430414470564"}
+  ],
+  "delivery_risk": "none while all three copied ads remain PAUSED",
+  "corrective_action": "none during research; wait for post-processing and present explicit swap plan before activation",
+  "lesson": "The ad copies endpoint does not document execution_options/validate_only. Never use validate_only with /copies; a copied_ad_id is a real side effect and must be checkpointed immediately."
+}

@@ -1,0 +1,588 @@
+{
+  "queries": [
+    "\"source_ad_id\" \"Marketing API\"",
+    "\"source_ad_id\" Facebook ads delivery",
+    "\"creative_parameters\" \"ad_id\" copies Meta",
+    "\"/{ad_id}/copies\" \"creative_parameters\"",
+    "Facebook Marketing API copied ad source_ad_id",
+    "Facebook API source_ad_id 0 ad not delivering",
+    "Meta ad copies creative_parameters new video",
+    "facebook ads reuse source_ad_id creative_id"
+  ],
+  "results": [
+    {
+      "query": "\"source_ad_id\" Facebook ads delivery",
+      "rank": 1,
+      "title": "python - Facebook Marketing API - Destination Link - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/51031479/facebook-marketing-api-destination-link",
+      "description": "\\n&quot;; } } else { echo &quot;Error deleting record(s): &quot; . $conn-&gt;error; } $select = $conn-&gt;prepare( &quot;SELECT website_id, website_type_id, user_id, campaign_id FROM groups WHERE id = ?&quot; ); $select-&gt;bind_param( &quot;i&quot;, $group_id ); $insert = $conn-&gt;prepare( &quot;INSERT INTO spend ( campaign_name, group_name, ad_name, &quot; . &quot;source_campaign_id, source_group_id, source_ad_id, impressions, clicks, leads, spend, website_id, website_type_id,&quot;. &quot;traffic_source_id, user_id, campaign_id, group_id, created_at, updated_at ) VALUES &quot; . &quot;( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )&quot; ); $insert-&gt;bind_param( &quot;sss"
+    },
+    {
+      "query": "\"creative_parameters\" \"ad_id\" copies Meta",
+      "rank": 1,
+      "title": "Create an Ad in an Ad Account | Meta | One - WithOne AI",
+      "url": "https://www.withone.ai/knowledge/meta/conn_mod_def::GKRjsHq1qOU::sXbCtK7eS_SU7Y3pWkr0mQ",
+      "description": "... Creates a copy of an existing Ad. The copied ad can optionally be assigned to a different ad set, renamed using rename options, or created with creative overrides. The ad_id path parameter must always be present."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 1,
+      "title": "Meta Expands Ad Copies API to Allow Creative Field Changes During Duplication | Swipe Insight",
+      "url": "https://web.swipeinsight.app/posts/change-creative-fields-when-duplicating-ads-using-ad-copies-api-17078",
+      "description": "Top level creative parameters such as title, link_url, url_tags, body, and others can now be edited for the copied ad, whereas previously, all fields were copied over and could not be changed."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 2,
+      "title": "Facebook marketing API - how to Copy Ads / creatives - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/40522812/facebook-marketing-api-how-to-copy-ads-creatives",
+      "description": "the previous responses was correct at the time but as of May 2025, Meta has updated their ad copy api to allow for the editing of &quot;Top level creative parameters such as title, link_url, url_tags, body, and many others&quot;. This is a huge improvement to the previous error-prone workflow of having to copy the entire adcreative when wanting to make a small edit to something like url_tags. https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/ https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies/#-creative-parameters-"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 3,
+      "title": "/act_{account-id}/adcreatives creative_ids parameter is not working in the Facebook Ads Graph API - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/8667910/act-account-id-adcreatives-creative-ids-parameter-is-not-working-in-the-faceb",
+      "description": "and no documentation changes were made in ads.getCreatives so I&#x27;m assuming creative_ids paramter is still there... ... Save this answer. ... Show activity on this post. I found the _ids parameters to be finicky so I use the generic ids=comma-separated list parameter, without the act_{account-id}. Creative IDS are unique across accounts so there&#x27;s no need to specify the account-id."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 4,
+      "title": "Creative ID | Adobe Analytics",
+      "url": "https://experienceleague.adobe.com/en/docs/media-analytics/using/implementation/variables/ads/creative-id",
+      "description": "The creative ID variable identifies the specific ad creative."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 5,
+      "title": "Launch a basic ad campaign with Facebook Marketing API | by Kevin Mora Gamboa | Engineering @ Leaf | Medium",
+      "url": "https://medium.com/leafgrowio-engineering/launch-a-basic-ad-campaign-with-facebook-marketing-api-c4cbeb0650d5",
+      "description": "Copy this ID and paste it in a safe place so we can use it to create our ad in the next step. The ads are what our target audience will see, the ads are associated with an ad set and these ads will be shown to the target audience we defined ..."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 6,
+      "title": "Facebook Marketing API ad creatives",
+      "url": "https://stackoverflow.com/questions/56338825/facebook-marketing-api-ad-creatives",
+      "description": "The type of creative you are making is passed in through this object along with the necessary parameters, which would be photo_data in your case. Copycurl -X POST \\ &#x27;https://graph.facebook.com/v3.3/act_&lt;ACT_ID&gt;/adcreatives?access_token=&lt;TOKEN&gt;&#x27; \\ -H &#x27;Content-Type: application/x-www-form-urlencoded&#x27; \\ -H &#x27;Host: graph.facebook.com&#x27; \\ -d &#x27;link_url=&lt;URL&gt;&amp;name=&lt;CREATIVE_NAME&gt;&amp;object_type=PAGE&amp;object_story_spec={page_id:&lt;PAGE_ID&gt;,photo_data:{image_hash:&lt;HASH&gt;,caption:&lt;CAPTION&gt;}}&#x27;"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 7,
+      "title": "Add creatives - Campaign Manager 360 Help",
+      "url": "https://support.google.com/campaignmanager/answer/2826416?hl=en",
+      "description": "But copies have no assigned ads or placements. Also, the name of each copy will be the same as the original, with &quot;(copy)&quot; at the end. Create a new creative in your campaign or advertiser"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 8,
+      "title": "How to find creative ID to see performance of ad text variations? - Google Ads Community",
+      "url": "https://support.google.com/google-ads/thread/162486857/how-to-find-creative-id-to-see-performance-of-ad-text-variations?hl=en",
+      "description": "Skip to main content · Google Ads Help · Help CenterCommunityAnnouncements · Sign in · Google Help · Help Center · Campaigns · Explore features · Optimize performance · Account &amp; billing"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 9,
+      "title": "Ad Creative - Meta for Developers - Facebook",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-creative/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 10,
+      "title": "How to Find Facebook Post ID: 4 Methods to Duplicate Ads & Preserve Social Proof",
+      "url": "https://adsuploader.com/blog/facebook-post-id",
+      "description": "When scaling a winner to new ad sets, audiences, or campaigns, using the Facebook post ID maintains all social proof. Scaling winning ads efficiently: Instead of manually recreating the ad creative and starting engagement from zero, paste the post ID and you&#x27;re done."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 11,
+      "title": "r/FacebookAds on Reddit: Meta's Creative Entity ID: Why Creative Diversification is Essential",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1o4xf8n/metas_creative_entity_id_why_creative/",
+      "description": "Ad ID: This is the most basic identifier. Every time you create a new ad in Ads Manager, Meta assigns it a unique Ad ID. Creative ID: Every ad creative you upload to Meta is assigned a Creative ID, which identifies that specific combination of creative assets"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 12,
+      "title": "How to pass creativeId into CampaignCreativeAssociations.insert() method using Google CM360 API",
+      "url": "https://stackoverflow.com/questions/71386289/how-to-pass-creativeid-into-campaigncreativeassociations-insert-method-using-g",
+      "description": "GoogleJsonResponseException: API call to dfareporting.campaignCreativeAssociations.insert failed with error: 8058 : Creative ID required. Using the &quot;Try this method&quot; on the side bar of the documentation site has a sample code shows that I should instead pass in an object into the .insert parameter"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 13,
+      "title": "google ads api - How to get the specific <Ad ID, Campaign ID> that was clicked on from the landing page? - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/24319080/how-to-get-the-specific-ad-id-campaign-id-that-was-clicked-on-from-the-landin",
+      "description": "If you use Google Analytics, you probably want to ignore these query parameters, merging hits with these parameters with hits that don&#x27;t have them. You can do that by setting the &quot;Exclude URL Query Parameters&quot; option to aw_campaignid,aw_adgroupid,aw_creative,aw_keyword."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 14,
+      "title": "REST Resource: creatives | Campaign Manager 360 | Google for Developers",
+      "url": "https://developers.google.com/doubleclick-advertisers/rest/v5/creatives",
+      "description": "Source application where creative was authored. A Universal Ad ID as per the VAST 4.0 spec."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 15,
+      "title": "Ad Creative Naming Conventions: Guide (2026) | AdManage.ai Blog",
+      "url": "https://admanage.ai/blog/ad-creative-naming-conventions",
+      "description": "My recommendation: Use positional for ad platform names (campaigns, ad sets, ads) and key-value for UTM parameters (because you&#x27;re already in URL querystring land and parsing correctness matters more). If you do nothing else, implement creative IDs."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 16,
+      "title": "Guidance for Uniquely Identifying Creative Asset IDs in VAST (Deprecated) - IAB Tech Lab",
+      "url": "https://iabtechlab.com/guidance-for-uniquely-identifying-creative-asset-ids-in-vast-2/",
+      "description": "This feature still allows for a creative ID to be included in the adId attribute used in the &lt;Creative&gt; element, with the difference being that the creative ID would be used to specify an ad server’s unique identifier."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 17,
+      "title": "How to Duplicate Facebook Ads Without Losing Likes | AdManage.ai Blog",
+      "url": "https://admanage.ai/blog/how-to-duplicate-facebook-ads",
+      "description": "When you duplicate a Facebook ad ... settings every time you need a similar ad. ... Duplicating an ad copies the creative (image/video, text, links) into a new ad unit......."
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 18,
+      "title": "python - How to get Ad id from Ad creative Facebook marketing API - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/64444263/how-to-get-ad-id-from-ad-creative-facebook-marketing-api",
+      "description": "I am using Facebook python business sdk for fetching Ad related data and the structure we have in database is identical to how facebook structured Ad related API. Following is the structure which was providing correct Ad creative objects"
+    },
+    {
+      "query": "\"/{ad_id}/copies\" \"creative_parameters\"",
+      "rank": 19,
+      "title": "What Are Custom Parameters In Google Ads & How To Set It Up? - Karooya",
+      "url": "https://www.karooya.com/blog/custom-parameters-in-google-ads-how-to-set-it-up/",
+      "description": "Google’s will select the ad level custom parameter. ... Custom Parameters are incorporated into two parts. First name and second its relative value. ... Value: is up to 250 characters which can contain any characters including symbols like |; _ / ^ ( !). Value can also include ValueTrack parameters. The name and value can be anything you want. For example, if you wish to keep a special id for your products, you can create a custom parameter that look like {_myproductid}=1234."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 1,
+      "title": "Graph API-Referenz v7.0: Ad Copies - Dokumentation - Facebook for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies/",
+      "description": "Gib im Parameter „summary“ ... paths: ... When posting to this edge, an Ad will be created. This endpoint supports read-after-write and will read the node represented by copied_ad_id in the return type...."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 2,
+      "title": "Graph API Reference v25.0: Ad Set Copies",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 4,
+      "title": "Facebook Ads | dlt Docs",
+      "url": "https://dlthub.com/docs/dlt-ecosystem/verified-sources/facebook_ads",
+      "description": "Replace the access_token value with the previously copied one to ensure secure access to your Facebook Ads resources. Next, follow the destination documentation instructions to add credentials for your chosen destination, ensuring proper routing of your data to the final destination."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 5,
+      "title": "Graph API Reference v25.0: Campaign Copies",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 6,
+      "title": "Graph API Reference v25.0: Ad - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/adgroup/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 7,
+      "title": "You can now change creative fields when duplicating ads with ...",
+      "url": "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/",
+      "description": "We cannot provide a description for this page right now"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 8,
+      "title": "GitHub - Lejo1/facebook_ad_library: Copy of the Ads from Facebook Ad Library API · GitHub",
+      "url": "https://github.com/Lejo1/facebook_ad_library",
+      "description": "You can access the current data stored for an ad at any time at: https://ad-archive.nexxxt.cloud/ad/&lt;AD_ID&gt;. This endpoint may also be used for automated downloads of ad-information and allows cross-origin requests."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 9,
+      "title": "Graph API Reference v25.0: Ad Account Ads",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-account/ads/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 10,
+      "title": "Graph API Reference v26.0: Ad - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/graph-api/reference/adgroup/",
+      "description": "We cannot provide a description for this page right now"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 11,
+      "title": "Graph API Reference v25.0: Ad Account - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-account/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 12,
+      "title": "Ad Account Ad Creatives - Dokumentation - Facebook for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-account/adcreatives/",
+      "description": "Weitere Informationen zur Paginierung findest du im Graph API-Leitfaden. Gesammelte Informationen zum Edge (z. B. Aufrufe). Gib im Parameter „summary“ an, welche Felder einbezogen werden sollen (z. B. summary=total_count). When creating ad creatives, if the obect_story_id being used is already in use by an existing creative, then the API will return the value of the existing creative_id instead of creating a new one."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 13,
+      "title": "Graph API Reference v25.0: Ad Set - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 15,
+      "title": "marketing-api-samples/samples/samplecode/adcreation.py at master · fbsamples/marketing-api-samples",
+      "url": "https://github.com/fbsamples/marketing-api-samples/blob/master/samples/samplecode/adcreation.py",
+      "description": "[AdSet](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign)         for further details on the API used here.         &quot;&quot;&quot;         # Create ad set ·         ad_set = AdSet(parent_id=accountid)         ad_set[AdSet.Field.campaign_id] = campaign.get_id_assured()         ad_set[AdSet.Field.name] = name + &#x27; AdSet&#x27;         ad_set[AdSet.Field.optimization_goal] = optimization_goal ·"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 16,
+      "title": "Marketing API - Meta for Developers - Facebook",
+      "url": "https://developers.facebook.com/docs/marketing-api/",
+      "description": "Before advertising on Facebook, Instagram, Messenger, and WhatsApp, we recommend you learn about Meta&#x27;s ad campaign structure to understand the objects you&#x27;re working with and how they relate to each other. For information on the latest Marketing API version, see the Changelog."
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 17,
+      "title": "Marketing API Reference - Meta for Developers - Facebook",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook Marketing API copied ad source_ad_id",
+      "rank": 18,
+      "title": "Ad Campaign - Meta for Developers - Facebook",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 4,
+      "title": "Facebook Ads API Error - Not enabled for usage - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/26985300/facebook-ads-api-error-not-enabled-for-usage",
+      "description": "I was getting this #274 error and it started working after adding the Test Sandbox Ad Account&#x27;s ID (under Marketing API &gt; Tools) to the Ads API Account Configuration (under Settings &gt; Advanced &gt; Advertising Accounts)."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 5,
+      "title": "Error Codes - Marketing API - Documentation - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/error-reference/",
+      "description": "Look up the error codes returned by Marketing API and find the solution to your problem."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 7,
+      "title": "php - Unsupported get request when trying to read ad_id with Facebook Graph API - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/68722483/unsupported-get-request-when-trying-to-read-ad-id-with-facebook-graph-api",
+      "description": "Facebook explains it here under Note: https://developers.facebook.com/docs/marketing-api/guides/lead-ads/retrieving/"
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 8,
+      "title": "Error: AdCreative Incomplete - Developer Community Forum - Meta for Developers",
+      "url": "https://developers.facebook.com/community/threads/713533517308839/",
+      "description": "Stelle sicher, dass jeder Bereich deiner Werbeanzeige vollst\\u00e4ndig ist.&quot;, &quot;fbtrace_id&quot;: &quot;ASHnMZKIfV4jwLvgkP-8kUO&quot; } } Which means: One or more Fields are missing. I can create the creative using remote_create (hich is being deprecated) and I can create it in the GRAPH API EXPLORER."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 10,
+      "title": "How to specify an ad-set-id in Facebook graph API URL - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/55494747/how-to-specify-an-ad-set-id-in-facebook-graph-api-url",
+      "description": "0 · Answer - there&#x27;s no prefix or special way to write ad set IDs. I&#x27;m unclear why it wasn&#x27;t working before. You can use this to get a list of adsets for the account (as an array in &#x27;data&#x27;): https://graph.facebook.com/v3.3/act_0000000000/adsets · Then you just supply the ID on it&#x27;s own after the API version number: https://graph.facebook.com/v3.3/12345678901234567/delivery_estimate?targeting_spec..."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 11,
+      "title": "Facebook Marketing API PHP SDK - \"Filtering field delivery_info is invalid\" - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/46824974/facebook-marketing-api-php-sdk-filtering-field-delivery-info-is-invalid",
+      "description": "&#x27;/vendor/autoload.php&#x27;; use FacebookAds\\Object\\AdAccount; use FacebookAds\\Object\\AdsInsights; use FacebookAds\\Api; use FacebookAds\\Logger\\CurlLogger; $access_token; $ad_account_id; $app_secret; $app_id; $api = Api::init($app_id, $app_secret, $access_token); $api-&gt;setLogger(new CurlLogger()); $fields = array( &#x27;frequency&#x27;, &#x27;actions:link_click&#x27;, &#x27;call_to_action_clicks&#x27;, &#x27;actions:tab_view&#x27;, ); $params = array( &#x27;level&#x27; =&gt; &#x27;adset&#x27;, &#x27;filtering&#x27; =&gt; array(array(&#x27;field&#x27; =&gt; &#x27;delivery_info&#x27;,&#x27;operator&#x27; =&gt; &#x27;IN&#x27;,&#x27;value&#x27; =&gt; array(&#x27;inactive&#x27;,&#x27;active&#x27;,&#x27;limited&#x27;,&#x27;archived&#x27;,&#x27;permanently_deleted&#x27;,&#x27;completed&#x27;,&#x27;rece"
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 12,
+      "title": "Facebook Ads Not Delivering? Advanced Troubleshooting Guide for Market – AGrowth.io",
+      "url": "https://agrowth.io/blogs/facebook-ads/facebook-ads-not-delivering",
+      "description": "Have the specific Ad Set ID (and Ad ID) ready. Take screenshots of your &quot;Active&quot; status, $0 spend, and your (working) Events Manager."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 13,
+      "title": "r/FacebookAds on Reddit: Can't create advert account using Facebook API",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/jhhdz4/cant_create_advert_account_using_facebook_api/",
+      "description": "... The error clearly says the access token is invalid. If you can’t make a new one that is valid, that means that either the user or the app has been banned from doing so. ... Thanks, looks so close to the situation, I&#x27;ll check this version."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 15,
+      "title": "python - Facebook Business SDK: cannot create an Ad - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/51822179/facebook-business-sdk-cannot-create-an-ad",
+      "description": "You must note that the user, who creates the ad, must have an access to this page, to the mobile app registered on FB (ad_app_id), and to the Ad Account (account_id). In my server application I use Facebook system users for all the work with API."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 17,
+      "title": "Graph API Reference v23.0: Ad Set Ads - Meta for Developers",
+      "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/ads/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 18,
+      "title": "Facebook Ads API Error - The ad account is not enabled for usage in Ads API - Stack Overflow",
+      "url": "https://stackoverflow.com/questions/36086323/facebook-ads-api-error-the-ad-account-is-not-enabled-for-usage-in-ads-api",
+      "description": "... (OAuthException - #274) (#274) The ad account is not enabled for usage in Ads API. Please add it in developer.facebook.com -&gt; application -&gt; settings -&gt; advanced -&gt; advertising accounts -&gt; Ads API."
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 19,
+      "title": "Ad Accounts - Business Management APIs",
+      "url": "https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/ad-accounts/",
+      "description": "Your Request Couldn&#x27;t be Processed · There was a problem with this request. We&#x27;re working on getting it fixed as soon as we can"
+    },
+    {
+      "query": "Facebook API source_ad_id 0 ad not delivering",
+      "rank": 20,
+      "title": "Common Facebook Ad Errors",
+      "url": "https://help.feature.fm/articles/19226971939085-Common-Facebook-Ad-Errors",
+      "description": "Facebook generally recommends a source audience between 1,000-5,000 people. How to resolve: After several weeks of following Facebook policies, this issue should be fixed automatically. For anything else you are encountering that isn’t listed above, you can refer to Facebook’s documentation here: https://developers.facebook.com/docs/marketing-api/error-reference/"
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 1,
+      "title": "The Evolution of Meta Ads Copy and Creative Control - Jon Loomer Digital",
+      "url": "https://www.jonloomer.com/meta-ads-copy-and-creative/",
+      "description": "The control gap began to widen: You could still provide specific inputs, but Meta was doing more of the assembly. Today, the idea of “control” looks very different. You still submit ingredients, but the final output is far less predictable, and far more varied. ... 2. Advertisers are encouraged to submit three aspect ratios for image and video assets to fit placement groups of 1:1, 9:16, and 1.91:1. 3. You can still customize ad copy and creative by placement (and you should for optimal results)."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 3,
+      "title": "Facebook Ad Copy Examples: 13 Before & After Makeovers",
+      "url": "https://www.wordstream.com/blog/ws/2022/02/07/facebook-ad-copy-examples",
+      "description": "Primary text: the copy that appears at the top, below your account name and above the ad creative. Only the first 125 characters will show, but you can write more (more on that later). Creative: the image, which can be a static image, carousel, animated image, or video."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 4,
+      "title": "Meta Ads Copywriting Guide – Solutions 8",
+      "url": "https://sol8.com/meta-ads-copywriting-guide/",
+      "description": "In addition, the style should suit the images and videos, whether they are new or existing creatives. And based on who we are reaching out to, the meaning can change somewhat. Think about the difference between a female audience and a male audience. You can use this difference to accentuate the ad copy language. The idea is to use the best one or to test them out for the best results. And that’s what we’ve got for you today on Meta Ads copywriting."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 5,
+      "title": "The Ultimate Guide to High-Performing Meta Ads: Copy & Visual Best Practices",
+      "url": "https://139660810.fs1.hubspotusercontent-eu1.net/hubfs/139660810/Meta%20Ads%20Copy%20Best%20Practices_.pdf",
+      "description": "The most effective Meta ads are those where the advertising copy and the visual · creative work in perfect harmony, creating a cohesive and impactful message. Ensuring Seamless Message Alignment · The ad copy must directly match and complement the image or video.4 A critical ·"
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 6,
+      "title": "r/FacebookAds on Reddit: Meta Ads keeps adding extra videos to my “single video” ad — how do I stop this?",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1qt8d1z/meta_ads_keeps_adding_extra_videos_to_my_single/",
+      "description": "When you say Meta keeps adding two more videos, are you referring to the auto-cropped versions of the videos added to your media library? ... Are you seeing those auto-cropped videos in your live ad? Make note of which placements are displaying the incorrect creative and then, under the Media section when you edit an ad, you will see a section that allows you to assign creatives per placement."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 9,
+      "title": "How to Actually Use Meta’s Copy Variations Without Getting Franken-Ads - Bright Red Marketing",
+      "url": "https://brightredmarketing.com.au/blog/how-to-actually-use-metas-copy-variations-without-getting-franken-ads",
+      "description": "Just make sure each line also matches the creative, otherwise even great copy will fall flat. Bonus tip: keep the structure similar across variations. If they&#x27;re wildly different lengths or styles, the combinations can feel clunky. A simple hook + benefit + CTA format works wonders. ... Meta will offer AI-generated text suggestions when you set up an ad."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 10,
+      "title": "What Are Meta's Rules for Ad Creative? | Vizup",
+      "url": "https://www.tryvizup.com/blog/meta-ad-specs-2026",
+      "description": "These are the technical requirements (resolution, aspect ratio, file size, text length, video duration) that Meta enforces or recommends across Facebook, Instagram, Messenger, and the Audience Network. Getting them wrong doesn&#x27;t just hurt aesthetics. It can tank delivery, inflate costs, and burn budget on impressions that never stood a chance. A lot of advertisers treat specs as a checkbox. Upload, hit publish, move on. Then the same thing happens on repeat: one creative runs across Feed, Stories, and Reels without dimension changes."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 11,
+      "title": "Meta Ad Copy Specs: Every Character Limit for 2026",
+      "url": "https://adsuploader.com/blog/meta-ad-copy-specs",
+      "description": "The feature is available for single image and video ads. Certain industries, including Financial Services, Pharma/Health and ads in Special Ad Categories, may have restricted access, though Meta does not maintain a public exclusion list. Advantage+ creative is Meta&#x27;s umbrella for AI-driven creative optimizations."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 12,
+      "title": "r/FacebookAds on Reddit: Meta Automatically Turned on AI Copy in Ad, then it takes away all of my social proof",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1ldojn3/meta_automatically_turned_on_ai_copy_in_ad_then/",
+      "description": "PSA: Meta turned &quot;Related Media&quot; ON by default. Your old creative is auto-injected into new ads."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 13,
+      "title": "Meta Ads Size Guide 2026: All Facebook Ad Specs",
+      "url": "https://adsuploader.com/blog/meta-ads-size",
+      "description": "Try re-exporting with standard settings: H.264 video, AAC audio, 30fps or lower, standard aspect ratios (1:1, 4:5, or 9:16). While Automatic Placements can work, using Placement Asset Customization typically yields better results. Upload optimized creative for each placement rather than letting Meta crop one asset across all placements."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 14,
+      "title": "r/AskMarketing on Reddit: is the ad copy (text options) any important in Meta/Facebook Ads",
+      "url": "https://www.reddit.com/r/AskMarketing/comments/1sm1wpe/is_the_ad_copy_text_options_any_important_in/",
+      "description": "Ad copy matters a lot, even if creative grabs attention first. Meta lets you test so the algorithm mixes them dynamically to boost clicks and conversions. If you skip it or leave it generic you will lose the chance to sell the click with specific benefits or overcome objections."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 15,
+      "title": "r/FacebookAds on Reddit: Ad showing creative from complete/inactive ads",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1ldvwwa/ad_showing_creative_from_completeinactive_ads/",
+      "description": "We ran into this last month and it was because we duplicated a previous campaign, updated copy and creative, but there were some customized placements that carried over and weren&#x27;t updated. It&#x27;s not immediately obvious when glancing at the ad level or even when editing. ... Manually created a new ad instead of duplicating."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 16,
+      "title": "How to run Creative Reports in Meta and Google Ads? – Singular Help Center",
+      "url": "https://support.singular.net/hc/en-us/articles/32135244022299-How-to-run-Creative-Reports-in-Meta-and-Google-Ads",
+      "description": "Advertisers provide basic inputs (e.g., business objectives, creative assets), and Meta optimizes the campaign for performance. Dynamic Creatives - This is an optimization tool, into which Advertisers provide multiple versions of ad assets (e.g., up to 10 images or videos, 5 headlines, 5 ad copy texts, and 5 CTAs)."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 17,
+      "title": "New Creative Workflow for Meta Ads - Jon Loomer Digital",
+      "url": "https://www.jonloomer.com/new-creative-workflow-meta-ads/",
+      "description": "This version will automatically use the text and URL destination provided for your ad. But if you select any of the other creatives, you can edit these things. If you don’t make any changes, Meta will use the text and destination from your original setup. But this is where you could use very different text depending on the image or video."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 18,
+      "title": "How important is ad copy in meta ads, compared to ad creatives? : r/PPC",
+      "url": "https://www.reddit.com/r/PPC/comments/1hwl8fm/how_important_is_ad_copy_in_meta_ads_compared_to/",
+      "description": "A/b testing ad copy can be a good test if a brand struggles to make new creative. ... It is the first thing people see, so it should get a lot of attention but ad copy comes a close second. ... If you&#x27;re comparing ad copy to an image or video, then I don&#x27;t think it&#x27;s as important."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 19,
+      "title": "Copy This Ad Creative Format, It'll Blow Up Your Business - YouTube",
+      "url": "https://www.youtube.com/watch?v=TcIrGfdBDNQ",
+      "description": "Get daily Meta Ads coaching from verified Top 1% Meta Ads advertisers with 82+ 5-star reviews.: https://www.skool.com/meta-ads-mastery/aboutThere&#x27;s one Meta ..."
+    },
+    {
+      "query": "Meta ad copies creative_parameters new video",
+      "rank": 20,
+      "title": "Meta Ads Creative Best Practices 2026: Video, Image, and Carousel",
+      "url": "https://www.cinerads.com/blog/meta-ads-video-creative-best-practices",
+      "description": "CineRads turns a product URL into TikTok-ready slideshow content, and the same sequenced image sets export as creative you can run as Meta carousels, so one production pass feeds both platforms. Test one variable at a time and refresh creative on a regular weekly rhythm. Change only the hook, or only the cover card, or only the offer line in a given variant, so the performance signal is clean, and add a few new assets each week to keep delivery from fatiguing."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 2,
+      "title": "r/FacebookAds on Reddit: How do I use an existing Ad ID for a new ad campaign?",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/17mzhqf/how_do_i_use_an_existing_ad_id_for_a_new_ad/",
+      "description": "This process feels unnecessarily complicated lol Share ... Go to your meta business suite &gt; go to your Facebook comments &gt; find the ad that you want to use with comments/likes/etc &gt; where it says &quot;published by xxxx&quot; and the date."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 4,
+      "title": "r/FacebookAds on Reddit: Do you duplicate the winning ad or use the post ID?",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1byidd3/do_you_duplicate_the_winning_ad_or_use_the_post_id/",
+      "description": "Sure, this is also my approach for dynamic ads. However I have tried testing both duplicating the post and using post ID for single creative ads."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 5,
+      "title": "r/FacebookAds on Reddit: Scaling Winning Ads: Duplicate or Reuse same ad IDs?",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1oelpoz/scaling_winning_ads_duplicate_or_reuse_same_ad_ids/",
+      "description": "Here in Brazil we have a saying “you don’t change a team that is winning”. If the creatives are doing well in the current campaign, don&#x27;t change it, scale it up ... Reuse same ad IDs to keep social proof and algorithm history duplicate ..."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 8,
+      "title": "Using Facebook Ad IDs For Duplication | Internet Bling",
+      "url": "https://internetbling.com/facebook-ads/shine-on-using-facebook-ad-ids-for-duplication/",
+      "description": "In Ad Setup choose ‘Use Existing Post’ then paste your ad ID into the Ad Creative box. Click Submit and you’re done. This will load up your ad with the extra text underneath and you’re good to go. See how much better this ad looks than the bog standard one offered to you when first creating a PPE ad? By using Facebook Ad IDs for duplication – you have now started your PPE campaign with the right type of ad."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 9,
+      "title": "r/PPC on Reddit: Can't use existing post in fb ads",
+      "url": "https://www.reddit.com/r/PPC/comments/ip9aag/cant_use_existing_post_in_fb_ads/",
+      "description": "Because of this, the creative can&#x27;t be used in another ad. Please choose different creative. (#1885535) ... icked on the date/time of the post (to the left of the privacy settings), opened in a new tab, and the URL was corrected with a different ..."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 10,
+      "title": "How to Duplicate a Facebook Ad Without Losing Likes and Comments | Zendux AI",
+      "url": "https://zenduxai.com/blog/duplicate-facebook-ad-without-losing-social-proof.html",
+      "description": "To duplicate a Facebook ad without ... a new creative. In the ad’s creative setup, choose “Use Existing Post” and paste the Post ID of the version that already has engagement...."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 11,
+      "title": "r/PPC on Reddit: FB won't let me use ad ID",
+      "url": "https://www.reddit.com/r/PPC/comments/qn8sfk/fb_wont_let_me_use_ad_id/",
+      "description": "... You cannot reuse a dco ads using its permalink( ads id in your term). Dynamic creative optimize ads is ads with separate creative assets for different placement in one ads.Just duplicate you ads to other adset."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 12,
+      "title": "Scaling Facebook Ads Without Losing Social Proof (2026)",
+      "url": "https://admanage.ai/blog/how-to-preserve-social-proof-scaling-facebook-ads",
+      "description": "The duplication feature is designed for convenience, not for social proof preservation. It&#x27;s built to copy your targeting, budget, and creative settings, but it treats the actual ad creative as something new each time."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 13,
+      "title": "2 Facebook campaign tricks you may have not heard about| Kontentino",
+      "url": "https://www.kontentino.com/blog/2-facebook-campaign-tricks-you-may-have-not-heard-about/",
+      "description": "Long story short1. Use one version of the ad creatives for all target groups (use existing post)2. Automatic URL tagging (URL parameters)Short story longerad 1. Use existing post = the same IDad 2. URL parameters · Are you managing long-term Facebook campaigns (e.g."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 14,
+      "title": "r/socialmedia on Reddit: What happened to being able to enter post IDs in Facebook Ads in order to retain social proof of successful paid ads?",
+      "url": "https://www.reddit.com/r/socialmedia/comments/jfzi75/what_happened_to_being_able_to_enter_post_ids_in/",
+      "description": "Maybe I&#x27;m missing something or a particular step? does it have to be an entirely new ad set, or can the ad set already be created but that ad set does not have the ad? Trying to fish out why it doesn&#x27;t work on my end, but it works on your end ... any help would be greatly appreciated! ... This didn&#x27;t work for me! I&#x27;m still getting &quot;Creative can&#x27;t be used: The creative you are trying to use was previously used in an ad that promoted a Page post 181*****2 that was then edited."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 15,
+      "title": "Find Facebook ad ID numbers | Meta Business Help Centre",
+      "url": "https://www.facebook.com/business/help/2534657046763437",
+      "description": "Find your campaign, ad set or ad ID number in Ads Manager."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 17,
+      "title": "What Is a Facebook Post ID and How to Find It | Zendux AI",
+      "url": "https://zenduxai.com/blog/how-to-find-facebook-post-id.html",
+      "description": "Find it fastest in the post URL; also in Meta Business Suite, Ads Manager previews, or Business Settings → Page Posts. You need it to reuse a post in a new ad so it keeps its likes and comments."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 18,
+      "title": "r/FacebookAds on Reddit: post id & dynamic creative ads",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/tlic4t/post_id_dynamic_creative_ads/",
+      "description": "When you click on the timestamp, always the URL is directed to one kind of dynamic ad (The best one performing) How do you plan to extract ID of every variation or do you just extract the ID from the best ones? ... exactly and best performing is based on how FB values it for their users rather your performance based metrics. ... You can click the time stamp of each iteration to get each post Id. ... No - the entire list of each element is displayed when you view as a Facebook post with comments - each creative in the list will have a time stamp."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 19,
+      "title": "How to Reuse Facebook Ads With Social Proof [Step-by-Step Video]",
+      "url": "https://blog.embertribe.com/reuse-facebook-ads-social-proof-qtt-16",
+      "description": "Remember that post ID you grabbed for the last step? All you have to do is paste it in the box and click Submit. And ✨voila ✨ it appears right here. You can scroll down and see that the same reactions, the same comments are still there. The beauty of this is that you can go back to the Ad Set, choose a new audience, segment, and run the ad in a totally new location...but the ad and ad creative has all of the same engagement and social proof that we had before."
+    },
+    {
+      "query": "facebook ads reuse source_ad_id creative_id",
+      "rank": 20,
+      "title": "r/FacebookAds on Reddit: When making a new ad creative how important is referencing the Post ID from the ad that you duplicated from?",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1ftl1zr/when_making_a_new_ad_creative_how_important_is/",
+      "description": "Do you always reference the Post ID when duplicating posts or do you set them as new Ads? Share ... Always reference the post ID. Post engagement is an asset, esp over the long term. I’ve used the same winning creatives for 12 months because of strong post engagement ... This community is a place to discuss best practices and strategies involved in running successful Facebook and Instagram ad campaigns."
+    }
+  ]
+}
