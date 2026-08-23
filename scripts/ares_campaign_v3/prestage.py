@@ -26,31 +26,61 @@ class AdAccountVideoUploader:
 
     def upload(self, path: Path | str, title: str) -> str:
         source = Path(path)
-        self.common._throttle_before_request()
         url = f"https://graph-video.facebook.com/{self.graph_version}/act_{self.account_id}/advideos"
-        try:
-            with source.open("rb") as fh:
-                response = requests.post(
-                    url,
-                    data={
-                        "access_token": self.user_token,
-                        "title": title,
-                        "unpublished_content_type": "ADS_POST",
-                    },
-                    files={"source": (source.name, fh, "video/mp4")},
-                    timeout=300,
-                )
-        except (OSError, requests.RequestException) as exc:
-            raise MediaUploadError(f"video upload transport failed: {type(exc).__name__}") from exc
-        try:
-            payload = response.json()
-        except ValueError:
-            payload = {"error": {"message": "non-json video upload response"}}
-        self.common.record_response_usage(dict(response.headers), response.status_code, payload, logical_points=3)
-        if response.status_code not in {200, 201} or not isinstance(payload, dict) or payload.get("error") or not payload.get("id"):
+        for attempt in range(2):
+            self.common._throttle_before_request()
+            try:
+                with source.open("rb") as fh:
+                    response = requests.post(
+                        url,
+                        data={
+                            "access_token": self.user_token,
+                            "title": title,
+                            "unpublished_content_type": "ADS_POST",
+                        },
+                        files={"source": (source.name, fh, "video/mp4")},
+                        timeout=300,
+                    )
+            except (OSError, requests.RequestException) as exc:
+                raise MediaUploadError(f"video upload transport failed: {type(exc).__name__}") from exc
+            try:
+                payload = response.json()
+            except ValueError:
+                payload = {"error": {"message": "non-json video upload response"}}
+            self.common.record_response_usage(dict(response.headers), response.status_code, payload, logical_points=3)
+            if response.status_code in {200, 201} and isinstance(payload, dict) and not payload.get("error") and payload.get("id"):
+                return str(payload["id"])
+            matches = self.find_by_title(title)
+            if len(matches) == 1:
+                return str(matches[0]["id"])
+            if len(matches) > 1:
+                raise MediaUploadError("video upload became ambiguous because duplicate titles exist")
+            if 500 <= int(response.status_code) < 600 and attempt == 0:
+                time.sleep(10)
+                continue
             error = payload.get("error") if isinstance(payload, dict) else None
             raise MediaUploadError(f"video upload rejected http={response.status_code} error_code={(error or {}).get('code')}")
-        return str(payload["id"])
+        raise MediaUploadError("video upload failed after bounded retry")
+
+    def find_by_title(self, title: str) -> list[dict[str, Any]]:
+        matches: list[dict[str, Any]] = []
+        after: str | None = None
+        for _ in range(20):
+            params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
+            if after:
+                params["after"] = after
+            status, payload, _ = self.common.graph_get(
+                f"act_{self.account_id}/advideos", self.user_token, params
+            )
+            if status != 200 or not isinstance(payload, dict):
+                raise MediaUploadError(f"ad-account video title readback failed http={status}")
+            matches.extend(
+                row for row in payload.get("data") or [] if str(row.get("title") or "") == str(title)
+            )
+            after = str((((payload.get("paging") or {}).get("cursors") or {}).get("after")) or "")
+            if not after:
+                break
+        return matches
 
     def wait_ready(self, video_ids: list[str]) -> dict[str, dict[str, Any]]:
         unique_ids = list(dict.fromkeys(str(item) for item in video_ids))

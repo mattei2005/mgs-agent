@@ -366,6 +366,60 @@ def test_ad_account_video_uploader_posts_to_advideos_with_user_token(monkeypatch
     assert calls[0]['data']['unpublished_content_type'] == 'ADS_POST'
 
 
+def test_ad_account_video_upload_retries_one_5xx_after_empty_title_readback(monkeypatch, tmp_path):
+    post_calls = []
+    class Response:
+        headers = {}
+        def __init__(self, status_code, payload):
+            self.status_code = status_code
+            self.payload = payload
+        def json(self):
+            return self.payload
+    responses = [Response(500, {}), Response(200, {'id': 'video-after-retry'})]
+    class Common:
+        def _throttle_before_request(self):
+            pass
+        def record_response_usage(self, *args, **kwargs):
+            pass
+        def graph_get(self, path, token, params):
+            return 200, {'data': [], 'paging': {}}, {}
+    def fake_post(*args, **kwargs):
+        post_calls.append((args, kwargs))
+        return responses.pop(0)
+    monkeypatch.setattr('ares_campaign_v3.prestage.requests.post', fake_post)
+    monkeypatch.setattr('ares_campaign_v3.prestage.time.sleep', lambda _: None)
+    source = tmp_path / 'video.mp4'
+    source.write_bytes(b'video')
+    uploader = AdAccountVideoUploader(common=Common(), user_token='user', account_id='123')
+    assert uploader.upload(source, 'deterministic-title') == 'video-after-retry'
+    assert len(post_calls) == 2
+
+
+def test_ad_account_video_upload_accepts_ambiguous_5xx_readback_without_repost(monkeypatch, tmp_path):
+    post_calls = []
+    class Response:
+        status_code = 500
+        headers = {}
+        def json(self):
+            return {}
+    class Common:
+        def _throttle_before_request(self):
+            pass
+        def record_response_usage(self, *args, **kwargs):
+            pass
+        def graph_get(self, path, token, params):
+            return 200, {'data': [{'id': 'video-created', 'title': 'deterministic-title'}], 'paging': {}}, {}
+    def fake_post(*args, **kwargs):
+        post_calls.append((args, kwargs))
+        return Response()
+    monkeypatch.setattr('ares_campaign_v3.prestage.requests.post', fake_post)
+    source = tmp_path / 'video.mp4'
+    source.write_bytes(b'video')
+    uploader = AdAccountVideoUploader(common=Common(), user_token='user', account_id='123')
+    assert uploader.upload(source, 'deterministic-title') == 'video-created'
+    assert len(post_calls) == 1
+
+
 def test_ad_account_video_association_readback_retries_bounded_eventual_consistency(monkeypatch):
     calls = []
     class Common:
