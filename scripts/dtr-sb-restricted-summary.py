@@ -115,7 +115,7 @@ def table_lines(snapshot):
 def render_blocks(snapshot, now=None):
     now = now or datetime.now(NY)
     common = [
-        'PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
+        '📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
         f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
         'Escopo: somente Status SB = Broadcast',
         '',
@@ -140,7 +140,7 @@ def render_blocks(snapshot, now=None):
             raise RuntimeError('one summary row exceeds Discord message limit')
         blocks.append(wrapped(current))
         current = [
-            'PÁGINAS RESTRITAS — RESUMO OPERACIONAL (continuação)',
+            '📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL (continuação)',
             f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
             '',
             *header,

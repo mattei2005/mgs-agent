@@ -278,9 +278,28 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
             },
         )
         joined = '\n'.join(messages)
+        self.assertIn('📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL', joined)
         self.assertIn('Broadcast restritas: 1', joined)
         self.assertIn('2026-08-01         1  openzed', joined)
         self.assertNotIn('eggbev', joined)
+
+    def test_discord_alert_titles_use_stable_semantic_emojis(self):
+        summary = {'started_at': '2026-07-16T12:00:00-04:00', 'stats': {}}
+        restricted = [{
+            'page_name': 'Page Test', 'fb_page_id': '123', 'page_id': '456',
+            'bot_user': 'bot@example.com', 'segurador': 'Segurador',
+            'sites': 'openzed', 'status_sb': 'Broadcast',
+            'restricted_until': '2026-08-01', 'codes': ['#2022'],
+        }]
+        exited = [{
+            'nome da pagina': 'Page Test', 'fb page id': '123', 'page id': '456',
+            'bot user': 'bot@example.com', 'segurador': 'Segurador',
+            'status sb': 'Broadcast', 'codigos': '#2022', 'data saida': '2026-08-01',
+        }]
+
+        self.assertIn('🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING', sync.build_new_restrictions_alerts(restricted, summary)[0])
+        self.assertIn('✅ PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA', sync.build_no_new_restrictions_alert(summary))
+        self.assertIn('🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO', sync.build_exited_restrictions_alerts(exited, summary)[0])
 
 
 if __name__ == '__main__':

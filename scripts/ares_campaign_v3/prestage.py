@@ -80,25 +80,29 @@ class AdAccountVideoUploader:
     def verify_association(self, video_ids: list[str]) -> dict[str, dict[str, Any]]:
         required = set(dict.fromkeys(str(item) for item in video_ids))
         found: dict[str, dict[str, Any]] = {}
-        after: str | None = None
-        for _ in range(20):
-            params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
-            if after:
-                params["after"] = after
-            status, payload, _ = self.common.graph_get(
-                f"act_{self.account_id}/advideos", self.user_token, params
-            )
-            if status != 200 or not isinstance(payload, dict):
-                raise MediaUploadError(f"ad-account video association readback failed http={status}")
-            for row in payload.get("data") or []:
-                video_id = str(row.get("id") or "")
-                if video_id in required:
-                    found[video_id] = row
-            if required.issubset(found):
+        for attempt in range(self.attempts):
+            after: str | None = None
+            for _ in range(20):
+                params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
+                if after:
+                    params["after"] = after
+                status, payload, _ = self.common.graph_get(
+                    f"act_{self.account_id}/advideos", self.user_token, params
+                )
+                if status != 200 or not isinstance(payload, dict):
+                    raise MediaUploadError(f"ad-account video association readback failed http={status}")
+                for row in payload.get("data") or []:
+                    video_id = str(row.get("id") or "")
+                    if video_id in required:
+                        found[video_id] = row
+                if required.issubset(found):
+                    break
+                after = str((((payload.get("paging") or {}).get("cursors") or {}).get("after")) or "")
+                if not after:
+                    break
+            if required.issubset(found) or attempt == self.attempts - 1:
                 break
-            after = str((((payload.get("paging") or {}).get("cursors") or {}).get("after")) or "")
-            if not after:
-                break
+            time.sleep(max(1, self.interval_seconds))
         return {
             video_id: {"associated": video_id in found, "readback": found.get(video_id)}
             for video_id in required

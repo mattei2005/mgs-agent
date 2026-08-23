@@ -366,6 +366,24 @@ def test_ad_account_video_uploader_posts_to_advideos_with_user_token(monkeypatch
     assert calls[0]['data']['unpublished_content_type'] == 'ADS_POST'
 
 
+def test_ad_account_video_association_readback_retries_bounded_eventual_consistency(monkeypatch):
+    calls = []
+    class Common:
+        def graph_get(self, path, token, params):
+            calls.append((path, token, params))
+            data = [] if len(calls) == 1 else [{'id': 'video-1', 'title': 'ready'}]
+            return 200, {'data': data, 'paging': {}}, {}
+    monkeypatch.setattr('ares_campaign_v3.prestage.time.sleep', lambda _: None)
+    uploader = AdAccountVideoUploader(
+        common=Common(), user_token='user-token', account_id='123',
+        graph_version='v26.0', attempts=3, interval_seconds=1,
+    )
+    result = uploader.verify_association(['video-1'])
+    assert result['video-1']['associated'] is True
+    assert len(calls) == 2
+    assert all(call[0] == 'act_123/advideos' for call in calls)
+
+
 def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     registry = MediaRegistry(tmp_path / 'media.json')
     assets = []

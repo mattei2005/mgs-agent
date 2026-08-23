@@ -81,6 +81,8 @@ class RestrictedSummaryActiveDateTest(unittest.TestCase):
         })
         self.assertEqual(len(sync.active_checks), 6)
         self.assertTrue(all(tday == '2026-07-15' for _, tday in sync.active_checks))
+        blocks = summary.render_blocks(snapshot)
+        self.assertTrue(all('📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL' in block for block in blocks))
 
 
 if __name__ == '__main__':

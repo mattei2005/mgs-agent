@@ -686,7 +686,7 @@ def build_new_restrictions_alerts(rows, summary, limit=1900):
     timestamp=alert_timestamp(summary)
     total=len(rows)
     first_prefix=[
-        'PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING',
+        '🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING',
         f'Atualizado em: {timestamp}',
         'Fonte: último Completed da DigitalTRChat → Smart Bidding',
         f'Novas nesta execução: {total}',
@@ -736,7 +736,7 @@ def build_new_restrictions_alert(rows, summary):
 def build_no_new_restrictions_alert(summary):
     stats=summary.get('stats') or {}
     lines=[
-        'PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA',
+        '✅ PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA',
         f'Atualizado em: {alert_timestamp(summary)}',
         '',
         'Nenhuma página restrita nova até o momento, comparado com a última varredura concluída.',
@@ -763,7 +763,7 @@ def build_operational_summary_alerts(rows, summary, limit=1900):
         row_lines.append(f"{date:<11}  {page_counts[date]:>7}  {sites}")
     timestamp=alert_timestamp(summary)
     first_prefix=[
-        'PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
+        '📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
         f'Atualizado em: {timestamp}',
         'Escopo: somente Status SB = Broadcast',
         '',
@@ -774,7 +774,7 @@ def build_operational_summary_alerts(rows, summary, limit=1900):
         '-----------  -------  --------------------------------------------------',
     ]
     continuation_prefix=[
-        'PÁGINAS RESTRITAS — RESUMO OPERACIONAL (CONTINUAÇÃO)',
+        '📊 PÁGINAS RESTRITAS — RESUMO OPERACIONAL (CONTINUAÇÃO)',
         f'Atualizado em: {timestamp}',
         '',
         'Data saída   Páginas  Sites',
@@ -794,14 +794,14 @@ def build_exited_restrictions_alerts(rows, summary, limit=1900):
     rows=sorted(rows,key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
     timestamp=alert_timestamp(summary)
     first_prefix=[
-        'PÁGINAS QUE SAÍRAM DA RESTRIÇÃO',
+        '🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO',
         f'Atualizado em: {timestamp}',
         '',
         'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
         '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
     ]
     continuation_prefix=[
-        'PÁGINAS QUE SAÍRAM DA RESTRIÇÃO (CONTINUAÇÃO)',
+        '🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO (CONTINUAÇÃO)',
         f'Atualizado em: {timestamp}',
         '',
         'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',

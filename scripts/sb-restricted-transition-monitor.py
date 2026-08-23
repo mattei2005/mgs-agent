@@ -255,7 +255,7 @@ def transition_lines(transitions):
 def render_blocks(transitions, counts, source_label, now=None):
     now = now or datetime.now(NY)
     common = [
-        'PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB',
+        '🔴 PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB',
         f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
         'Fonte: Smart Bidding live; agente que escreveu não comprovado',
         f'Comparação: {source_label}',
@@ -286,7 +286,7 @@ def render_blocks(transitions, counts, source_label, now=None):
             completed += sheet_suffix
         blocks.append(completed)
         current = [
-            'PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB (continuação)',
+            '🔴 PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB (continuação)',
             f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
             '',
             *rows[:2],

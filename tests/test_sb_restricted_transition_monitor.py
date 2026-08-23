@@ -73,6 +73,7 @@ class TransitionComparisonTest(unittest.TestCase):
 
         self.assertGreater(len(blocks), 1)
         self.assertTrue(all(len(block) <= monitor.DISCORD_LIMIT for block in blocks))
+        self.assertTrue(all('🔴 PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB' in block for block in blocks))
         joined = '\n'.join(blocks)
         for page_id in range(1, 36):
             fb_page_id = row(page_id, '2026-08-12')['fb_page_id']
