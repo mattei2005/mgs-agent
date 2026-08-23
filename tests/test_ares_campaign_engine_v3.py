@@ -152,6 +152,13 @@ def test_prestaged_manifest_requires_three_ready_media_assets():
         manifest([row])
 
 
+def test_prestaged_manifest_requires_nonzero_source_ad_lineage():
+    row = prestaged_campaign(1)
+    row['ads'][0]['source_ad_id'] = '0'
+    with pytest.raises(ManifestError, match='source_ad_id'):
+        manifest([row])
+
+
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():
     row = prestaged_campaign(1)
     row['ads'][0]['creative_payload']['degrees_of_freedom_spec'] = {
@@ -540,6 +547,7 @@ def test_cpv_adapter_accepts_explicit_future_start_for_authorized_canary(tmp_pat
         campaign_numbers=[20],
         operational_date='2099-08-23',
         request_id='cpv-c20-canary',
+        creative_templates=source_templates(),
         status='ACTIVE',
         start_time=explicit,
     )
@@ -564,6 +572,7 @@ def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
             campaign_numbers=[14],
             operational_date='2099-08-21',
             request_id='cpv-invalid-missing-name',
+            creative_templates=source_templates(),
         )
     assets[0]['canonical_filename'] = 'asset_technical_id.mp4'
     with pytest.raises(ValueError, match='canonical_filename is invalid'):
@@ -573,6 +582,7 @@ def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
             campaign_numbers=[14],
             operational_date='2099-08-21',
             request_id='cpv-invalid-technical-name',
+            creative_templates=source_templates(),
         )
 
 
@@ -590,7 +600,7 @@ def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tm
         })
     payload = build_cpv_manifest(
         registry=registry, asset_refs=assets, campaign_numbers=[14, 15, 16, 17, 18],
-        operational_date='2099-08-21', request_id='cpv-five', status='ACTIVE',
+        operational_date='2099-08-21', request_id='cpv-five', creative_templates=source_templates(), status='ACTIVE',
     )
     built = Manifest.from_dict(payload)
     assert len(built.campaigns) == 5
@@ -683,6 +693,33 @@ def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_
     adset_update = next(op for op in updates if op.kind == 'adset_update')
     assert adset_update.body['status'] == 'ACTIVE'
     assert result['status'] == 'COMPLETE_FUTURE_ACTIVE'
+
+
+def test_prestaged_execution_uses_ad_copies_with_creative_and_no_direct_ad_create(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+
+    transport = CaptureTransport('100')
+    result = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    ).execute(manifest([prestaged_campaign(1)], request_id='lineage-copy-route'))
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [call['stage'] for call in transport.calls] == [
+        'campaign_copy', 'adset_copy', 'campaign_adset_update',
+        'ad_copy_with_creative', 'ad_name_update', 'consolidated_readback',
+    ]
+    copy_ops = transport.operations_by_stage['ad_copy_with_creative']
+    assert len(copy_ops) == 3
+    assert all(op.relative_url.startswith('source-ad-1-') and op.relative_url.endswith('/copies') for op in copy_ops)
+    assert all(op.body['status_option'] == 'PAUSED' for op in copy_ops)
+    assert all('creative_parameters' in op.body for op in copy_ops)
+    assert all(not op.relative_url.startswith('act_') for op in copy_ops)
 
 
 def test_engine_executes_accounts_in_independent_lanes(tmp_path):

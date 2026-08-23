@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.0.14",
+  "release_version": "3.0.15",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -21,7 +21,7 @@
   "quota_scope": "app_key_plus_ad_account_id",
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
-  "media_policy": "prestage_before_campaign_manifest",
+  "media_policy": "prestage_before_campaign_manifest; clone_prestaged uses POST source_ad_id/copies with creative_parameters and nonzero lineage readback",
   "ad_naming_policy": "CPV clone_prestaged requires canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
   "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, proposed solution and Rodolfo-or-Nicolas authorization gate; no internal paths or credentials",
   "failure_write_gate": "after a V3 BLOQUEADO exception, diagnosis/readback may continue but every corrective Meta write waits for explicit Rodolfo or Nicolas authorization",
@@ -66,6 +66,8 @@
     "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign",
     "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
     "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies",
+    "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/",
     "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
     "https://developers.facebook.com/docs/permissions/"
   ]
