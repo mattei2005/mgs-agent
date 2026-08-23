@@ -148,6 +148,14 @@ def test_auto_arm_adds_new_v3_campaign_without_meta_write(monkeypatch, tmp_path)
 
 def test_first_spend_pauses_once_and_queues_next_0030(monkeypatch, tmp_path):
     module = load_module()
+
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            value = datetime(2026, 8, 23, 3, 0, tzinfo=module.SP)
+            return value if tz is None else value.astimezone(tz)
+
+    monkeypatch.setattr(module, "datetime", FixedDatetime)
     campaign_id = "campaign-7"
     campaign = {
         "id": campaign_id,

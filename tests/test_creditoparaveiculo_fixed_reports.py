@@ -517,6 +517,34 @@ def test_dynamic_v3_campaign_enters_autonomous_allowlist_only_with_readback_prov
         module.validated_allowed_campaigns(operation)
 
 
+def test_dynamic_manual_replacement_enters_allowlist_only_with_rodolfo_and_live_readback(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})
+    audit = tmp_path / "manual-readback.json"
+    audit.write_text("{}")
+    operation = {
+        "management_scope": {
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "13": {"campaign_id": "id-13", "cycle_start_date": "2026-08-21"},
+                    "14": {
+                        "campaign_id": "id-14-manual",
+                        "cycle_start_date": "2026-08-23",
+                        "source": "rodolfo_manual_ui_replacement_readback",
+                        "authorized_by": "Rodolfo Mattei",
+                        "authorization_source": "discord:thread:test",
+                        "readback_audit": str(audit),
+                    },
+                }
+            }
+        }
+    }
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "14"}
+    audit.unlink()
+    with pytest.raises(RuntimeError, match="provenance"):
+        module.validated_allowed_campaigns(operation)
+
+
 def test_report_tables_paginate_instead_of_hiding_new_campaigns():
     module = load_reports_module()
     pages = module.table_pages(["Camp"], [[f"C{number:02d}"] for number in range(1, 15)], page_size=7)
