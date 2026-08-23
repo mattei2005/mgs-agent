@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 BASE = Path('/root/mgs-agent')
 DAILY_PATH = BASE / 'scripts/dtr-sb-daily-match-audit.py'
+REVENUE_PATH = BASE / 'scripts/sync-sb-messenger-revenue-sheet.py'
 STATE_PATH = BASE / 'data/sb-restricted-transition-state.json'
 TARGET_CHANNEL_ID = '1522442220903337984'
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0'
@@ -62,6 +63,7 @@ def public_row(raw, daily, sync):
         'fb_page_id': daily.norm(raw.get('FB_PAGE_ID')),
         'status': daily.norm(raw.get('STATUS')),
         'restricted_until': daily.norm(raw.get('RESTRICTED_UNTIL'))[:10],
+        'utm_campaign': daily.norm(raw.get('UTM_CAMPAIGN')),
         'sites': sync.derive_sites(raw),
     })
     return public
@@ -235,8 +237,8 @@ def truncate(value, limit):
 
 
 def transition_lines(transitions):
-    header = 'Tipo            Página             FB Page ID        Page ID  Bot user           Status    Saída'
-    divider = '--------------- ------------------ ----------------- -------- ------------------ --------- ----------'
+    header = 'Tipo            Página             FB Page ID        Page ID  Bot user           Receita 7d    Status    Saída'
+    divider = '--------------- ------------------ ----------------- -------- ------------------ ------------- --------- ----------'
     lines = [header, divider]
     for item in transitions:
         row = item['after']
@@ -246,6 +248,7 @@ def transition_lines(transitions):
             f"{truncate(row.get('fb_page_id'),17):<17} "
             f"{truncate(row.get('page_id'),8):<8} "
             f"{truncate(str(row.get('bot_user') or '').replace('@gmail.com',''),18):<18} "
+            f"{truncate(row.get('revenue_7d_brl') or '—',13):<13} "
             f"{truncate(row.get('status'),9):<9} "
             f"{truncate(row.get('restricted_until'),10)}"
         )
@@ -338,6 +341,37 @@ def main():
         source = 'previous-live-state'
 
     transitions, removed_from_snapshot = compare_snapshots(previous, current)
+    revenue_meta = None
+    if transitions:
+        revenue_targets = [dict(item['after']) for item in transitions]
+        try:
+            revenue = load_module('sb_messenger_revenue_live', REVENUE_PATH)
+            report_rows, request_payload = asyncio.run(revenue.fetch_live_report())
+            # Validate the exact rolling seven-day window and full dashboard scope
+            # before exposing any financial value in Discord.
+            revenue.aggregate_report(report_rows, request_payload)
+            revenue_meta = {
+                'status': 'ok',
+                'period_start': str(request_payload.get('initialDate') or '')[:10],
+                'period_end': str(request_payload.get('finalDate') or '')[:10],
+                'api_rows': len(report_rows),
+                'publishers': len(request_payload.get('publishers') or []),
+            }
+            revenue_meta.update(sync.enrich_revenue_7d(revenue_targets, report_rows))
+        except Exception as revenue_exc:
+            for target in revenue_targets:
+                target['revenue_7d'] = None
+                target['revenue_7d_brl'] = '—'
+                target['revenue_7d_match_basis'] = 'unavailable'
+            revenue_meta = {
+                'status': 'unavailable',
+                'error': f'{type(revenue_exc).__name__}: {revenue_exc}',
+                'rows': len(transitions),
+                'matched': 0,
+                'unmatched': len(transitions),
+            }
+        for item, target in zip(transitions, revenue_targets):
+            item['after'] = target
     confirmed_exits = confirmed_resolutions(removed_from_snapshot, raw_rows, daily, sync, sync.today())
     transition_blocks = render_blocks(transitions, counts, source_label) if transitions else []
     exit_blocks = sync.build_exited_restrictions_alerts(
@@ -377,6 +411,7 @@ def main():
         'resolved_count': len(confirmed_exits),
         'unconfirmed_removed_count': len(removed_from_snapshot) - len(confirmed_exits),
         'counts': counts,
+        'revenue_7d': revenue_meta,
         'sheet_stats': sheet_stats,
         'blocks': len(all_blocks),
         'block_lengths': [len(block) for block in all_blocks],

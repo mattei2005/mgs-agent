@@ -77,6 +77,27 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(urlopen.call_count, 2)
         sleep.assert_called_once_with(0.25)
 
+    def test_new_restriction_alert_renders_revenue_7d(self):
+        row = {
+            'page_name': 'Page 7',
+            'fb_page_id': '9000000000007',
+            'page_id': '7',
+            'bot_user': 'bot@example.com',
+            'segurador': 'Segurador Teste',
+            'revenue_7d': '4.00',
+            'status_sb': 'Broadcast',
+            'codes': ['#2022'],
+            'restricted_until': '2026-08-30',
+        }
+
+        rendered = sync.build_new_restrictions_alert(
+            [row],
+            {'started_at': '2026-08-23T10:00:00-04:00'},
+        )
+
+        self.assertIn('Receita 7d', rendered)
+        self.assertIn('R$ 4,00', rendered)
+
     def test_sheets_api_retries_transient_503(self):
         class Response:
             def __enter__(self):

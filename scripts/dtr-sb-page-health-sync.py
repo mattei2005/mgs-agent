@@ -1484,8 +1484,22 @@ async def main():
             try:
                 deliveries=[]
                 if alert_rows:
-                    revenue_rows,revenue_meta=await fetch_messenger_revenue_7d(ctx,h,pubs)
-                    revenue_meta.update(enrich_revenue_7d(alert_rows,revenue_rows))
+                    try:
+                        revenue_rows,revenue_meta=await fetch_messenger_revenue_7d(ctx,h,pubs)
+                        revenue_meta.update(enrich_revenue_7d(alert_rows,revenue_rows))
+                        revenue_meta['status']='ok'
+                    except Exception as revenue_exc:
+                        for alert_row in alert_rows:
+                            alert_row['revenue_7d']=None
+                            alert_row['revenue_7d_brl']='—'
+                            alert_row['revenue_7d_match_basis']='unavailable'
+                        revenue_meta={
+                            'status':'unavailable',
+                            'error':f'{type(revenue_exc).__name__}: {revenue_exc}',
+                            'rows':len(alert_rows),
+                            'matched':0,
+                            'unmatched':len(alert_rows),
+                        }
                     summary['revenue_7d']=revenue_meta
                     first_contents=build_new_restrictions_alerts(alert_rows, summary)
                     summary['discord_alert_kind']='new_restrictions'

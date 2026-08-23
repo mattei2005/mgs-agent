@@ -20,6 +20,7 @@ def row(page_id, date, status='Broadcast', name=None):
         'fb_page_id': f'90000000000{int(page_id):03d}',
         'status': status,
         'restricted_until': date,
+        'utm_campaign': f'pg_{page_id}',
         'sites': 'openzed',
     }
 
@@ -79,6 +80,24 @@ class TransitionComparisonTest(unittest.TestCase):
             fb_page_id = row(page_id, '2026-08-12')['fb_page_id']
             self.assertEqual(joined.count(fb_page_id), 1)
         self.assertEqual(joined.count(monitor.SHEET_URL), 1)
+
+    def test_revenue_7d_is_aggregated_and_rendered_in_brl(self):
+        daily = monitor.load_module('dtr_sb_daily_match_audit_revenue_test', monitor.DAILY_PATH)
+        sync = daily.load_audit_mod().sync
+        current = row(7, '2026-08-12')
+        report_rows = [
+            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'REVENUE': '1.25'},
+            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'REVENUE': '2.75'},
+        ]
+        stats = sync.enrich_revenue_7d([current], report_rows)
+        transition = {'kind': 'nova', 'key': monitor.stable_key(current), 'before': None, 'after': current}
+
+        rendered = '\n'.join(monitor.transition_lines([transition]))
+
+        self.assertEqual(stats, {'rows': 1, 'matched': 1, 'unmatched': 0})
+        self.assertEqual(current['revenue_7d_brl'], 'R$ 4,00')
+        self.assertIn('Receita 7d', rendered)
+        self.assertIn('R$ 4,00', rendered)
 
     def test_exit_requires_live_inactive_readback_and_ignores_onhold(self):
         class Daily:
