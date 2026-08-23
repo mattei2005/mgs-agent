@@ -13,7 +13,8 @@ Validated workflow:
 """
 import argparse, asyncio, csv, fcntl, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, time, unicodedata, urllib.error, urllib.parse, urllib.request
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from playwright.async_api import async_playwright
@@ -67,6 +68,89 @@ def norm_name(v):
 def today(): return datetime.now(NY).date().isoformat()
 def now_iso(): return datetime.now(NY).isoformat(timespec='seconds')
 def date_only(v): return norm(v)[:10]
+
+def decimal_money(value):
+    try:
+        return Decimal(str(value or 0)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    except (InvalidOperation, TypeError, ValueError):
+        return Decimal('0.00')
+
+def format_brl(value):
+    if value is None or value == '':
+        return '—'
+    amount=decimal_money(value)
+    rendered=f'{amount:,.2f}'.replace(',','X').replace('.',',').replace('X','.')
+    return f'R$ {rendered}'
+
+def _iso_z(value):
+    return value.astimezone(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00','Z')
+
+async def fetch_messenger_revenue_7d(ctx, headers, publishers, now=None):
+    """Read the same rolling seven-day Messenger report used by the SB dashboard."""
+    end_local=now or datetime.now(NY)
+    start_local=end_local-timedelta(days=6)
+    payload={
+        'initialDate':_iso_z(start_local),
+        'finalDate':_iso_z(end_local),
+        'publishers':list(publishers),
+        'currency':None,
+    }
+    response=await ctx.request.post(
+        'https://api.jbfdigital.com.br/report/messenger',
+        headers=headers,
+        data=json.dumps(payload),
+        timeout=180000,
+    )
+    text=await response.text()
+    try:
+        rows=json.loads(text) if text else None
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f'SB Messenger revenue returned non-JSON HTTP {response.status}') from exc
+    if response.status not in (200,201) or not isinstance(rows,list):
+        raise RuntimeError(f'SB Messenger revenue failed HTTP {response.status}')
+    if len(rows)<1000 or len(publishers)<30:
+        raise RuntimeError(f'SB Messenger revenue scope unexpectedly small: rows={len(rows)} publishers={len(publishers)}')
+    return rows, {
+        'period_start':start_local.date().isoformat(),
+        'period_end':end_local.date().isoformat(),
+        'api_rows':len(rows),
+        'publishers':len(publishers),
+    }
+
+def enrich_revenue_7d(rows, report_rows):
+    """Attach exact seven-day revenue by bot+UTM, with bot+FB fallback."""
+    by_user_utm=defaultdict(Decimal)
+    by_user_fb=defaultdict(Decimal)
+    seen_user_utm=set(); seen_user_fb=set()
+    for report in report_rows:
+        if not isinstance(report,dict):
+            continue
+        user=norm_email(report.get('USER_LOGIN') or report.get('USERNAME'))
+        utm=norm(report.get('UTM_CAMPAIGN'))
+        fb=norm(report.get('FB_PAGE_ID') or report.get('PAGE_ID'))
+        revenue=decimal_money(report.get('REVENUE'))
+        if user and utm:
+            by_user_utm[(user,utm)]+=revenue
+            seen_user_utm.add((user,utm))
+        if user and fb:
+            by_user_fb[(user,fb)]+=revenue
+            seen_user_fb.add((user,fb))
+    matched=0
+    for row in rows:
+        user=norm_email(row.get('bot_user') or row.get('bot user') or row.get('USER_LOGIN'))
+        utm=norm(row.get('utm_campaign') or row.get('utm') or row.get('UTM_CAMPAIGN'))
+        fb=norm(row.get('fb_page_id') or row.get('fb page id') or row.get('FB_PAGE_ID'))
+        revenue=None; basis='unmatched'
+        if user and utm and (user,utm) in seen_user_utm:
+            revenue=by_user_utm[(user,utm)]; basis='bot+utm'
+        elif user and fb and (user,fb) in seen_user_fb:
+            revenue=by_user_fb[(user,fb)]; basis='bot+fb'
+        row['revenue_7d']=revenue
+        row['revenue_7d_brl']=format_brl(revenue)
+        row['revenue_7d_match_basis']=basis
+        if revenue is not None:
+            matched+=1
+    return {'rows':len(rows),'matched':matched,'unmatched':len(rows)-matched}
 
 STEP1_NOISE_NAMES={norm_name(x) for x in ['Rodolfo Mattei','Geizian Pereira']}
 STEP1_ACTIVE_OVERRIDES=[
@@ -666,16 +750,21 @@ def post_discord(content, max_attempts=5):
             time.sleep(max(0.25, min(retry_after, 30.0)))
     raise RuntimeError('Discord delivery exhausted retry loop')
 
-def restriction_alert_row(row):
+def restriction_alert_row(row, include_revenue=False):
     codes=row.get('codes') or row.get('codigos') or ''
     if isinstance(codes,list):
         codes=','.join(codes)
+    revenue=(
+        f"{truncate_text(row.get('revenue_7d_brl') or format_brl(row.get('revenue_7d')),13):<13} "
+        if include_revenue else ''
+    )
     return (
         f"{truncate_text(row.get('page_name') or row.get('nome da pagina'),20):<20} "
         f"{truncate_text(row.get('fb_page_id') or row.get('fb page id'),18):<18} "
         f"{truncate_text(row.get('page_id') or row.get('page id'),8):<8} "
         f"{truncate_text((row.get('bot_user') or row.get('bot user') or '').replace('@gmail.com',''),18):<18} "
         f"{truncate_text(row.get('segurador'),20):<20} "
+        f"{revenue}"
         f"{truncate_text(row.get('status_sb') or row.get('status sb') or '?',11):<11} "
         f"{truncate_text(codes,13):<13} "
         f"{truncate_text(row.get('restricted_until_time') or row.get('restricted_until') or row.get('data saida'),16)}"
@@ -691,16 +780,16 @@ def build_new_restrictions_alerts(rows, summary, limit=1900):
         'Fonte: último Completed da DigitalTRChat → Smart Bidding',
         f'Novas nesta execução: {total}',
         '',
-        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
-        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Receita 7d    Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ----------- ------------- ----------------',
     ]
     continuation_prefix=[
         '🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS (CONTINUAÇÃO)',
         f'Atualizado em: {timestamp}',
         f'Novas nesta execução: {total}',
         '',
-        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
-        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Receita 7d    Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ----------- ------------- ----------------',
     ]
     suffix=[
         '',
@@ -717,7 +806,7 @@ def build_new_restrictions_alerts(rows, summary, limit=1900):
             content+='\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
         return content
     for row in rows:
-        line=restriction_alert_row(row)
+        line=restriction_alert_row(row, include_revenue=True)
         candidate=render(current+[line],not messages)
         minimum=len(first_prefix) if not messages else len(continuation_prefix)
         if len(candidate)>limit and len(current)>minimum:
@@ -1364,7 +1453,7 @@ async def main():
                                                 obs.append('restricted_alert_suppressed_already_mentioned')
                                                 stats['restricted_alert_suppressed_already_mentioned'] += 1
                                             else:
-                                                alert_rows.append({'page_name':rep.get('page_name'),'fb_page_id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')),'page_id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'sites':derive_sites(new_sb),'status_sb':status_after,'restricted_until':cls.get('restricted_until'),'restricted_until_time':cls.get('restricted_until_time'),'codes':codes,'sb_id':norm(sb.get('ID')),'alert_identity':ident})
+                                                alert_rows.append({'page_name':rep.get('page_name'),'fb_page_id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')),'page_id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')),'utm_campaign':norm(new_sb.get('UTM_CAMPAIGN')) or norm(sb.get('UTM_CAMPAIGN')),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'sites':derive_sites(new_sb),'status_sb':status_after,'restricted_until':cls.get('restricted_until'),'restricted_until_time':cls.get('restricted_until_time'),'codes':codes,'sb_id':norm(sb.get('ID')),'alert_identity':ident})
                                             if ident and status_after == 'Broadcast':
                                                 state.setdefault('alerted_restricted_pages', {})[ident]={'last_seen':now_iso(),'restricted_until':cls.get('restricted_until'),'sb_id':norm(sb.get('ID')),'page_name':rep.get('page_name'),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'sites':derive_sites(new_sb),'status_sb':status_after}
                                     else:
@@ -1395,6 +1484,9 @@ async def main():
             try:
                 deliveries=[]
                 if alert_rows:
+                    revenue_rows,revenue_meta=await fetch_messenger_revenue_7d(ctx,h,pubs)
+                    revenue_meta.update(enrich_revenue_7d(alert_rows,revenue_rows))
+                    summary['revenue_7d']=revenue_meta
                     first_contents=build_new_restrictions_alerts(alert_rows, summary)
                     summary['discord_alert_kind']='new_restrictions'
                 else:
