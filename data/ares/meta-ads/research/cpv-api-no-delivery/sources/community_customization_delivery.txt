@@ -1,0 +1,37 @@
+ 
+ Delivery error when creating carousel ads with customization rules - Developer Community Forum - Meta for Developers 
+ Community Question Delivery error when creating carousel ads with customization rules 7 Hi, 
+ We seem to be running into problems creating carousel ads with asset_customization_rules. 
+We're including two carousels in the "carousels" prop, with child attachments. 
+ We can publish the ads though the API, but after a short time of processing fall into "Delivery error" status. Error message: 
+ "Unsupported Ad Format In Dynamic Creative Ad: This specified asset feed contains an unsupported ad format. (#1885858) " 
+ If we change the ad name and publish through Ads Manager they get approved. 
+ I also tried pulling the ad creative for working ads from the Graph API explorer, but can't get the carousel property that way. All other properties look similar, so I'm running out of ideas. 
+ The ads sets are not "dynamic creative". Can't find any documentation relating to this. Anyone else experiencing this? 
+ Thanks! 
+ Marketing API Dennis Asked about 3 years ago Eelco I have the exact same issue here 
+ January 22 at 2:32 PM Yoelvis We are having the same issue, it's blocking us for creating multi-placements carousel ads using the APIs. 
+ April 2 at 8:00 AM Sebastián We ran into this error recently and it's blocking our users from using our API integration. Would love some insights on how to fix it since the error message isn't very specific 
+ April 2 at 10:13 AM 정민석 same here. I tried to fix many things to mimic api request Meta ads manager, but the result were same. 
+ June 9 at 11:05 PM Stian Same here. Did you find any solution to this? 
+ August 5 at 4:30 AM Tiago same issue here. someone find any solution? 
+ January 30 at 5:23 AM Alexandre Same issue. This is just annoying! Does anyone have feedback or a solution? 
+ February 1 at 6:43 AM Anzor Hello there, we are experiencing the same issue, does anyone found a solution for it? Please share it. 
+ February 21 at 1:47 AM Marlon Has anyone been able to solve this? 
+ May 26 at 10:18 AM Cedric Only solution so far is turning the ad on and off in the meta platform. 
+ August 8 at 4:51 AM Chris Also having this problem! Are they preventing it happening on purpose? 
+ August 26 at 9:33 AM Marko Hey everyone, we are still running into this delivery error. Has anyone identified a solution besides the workflow of creating the ad, hitting a delivery error, and toggling it off and on in ads manager? 
+ December 17 at 1:43 AM Selected Answer 1 Facing the exact same issue. 
+ To be clear it's when you launch a carousel ad with custom placements (i.e adding a 9x16 image for the reel placement). That when facebook shows this unsuported ad format. 
+ I've found that you can launch the ad via the API and then in ads manager if you turn the ad off and then on, facebook's system will fix the problem. 
+ But I'm still unable to launch an ad without delivery errors with custom placements. 
+ This is my creativeSpec where I'm customizing the 9x16 placements: 
+ Error: 
+Delivery error 
+ Unsupported ad format in dynamic creative ad: This specified asset feed contains an unsupported ad format. (#1885858) 
+ Creative Spec:
+{"name":"Carousel_12055_KW28 - Restube - Creatives - Summer Sale_10__2Chq","object_story_spec":{"page_id":"470703006115773","instagram_user_id":"17841471826052348"},"asset_feed_spec":{"images":[{"hash":"e7deb18f5553af0ddc5765c2cae19add","adlabels":[{"name":"image_1"},{"name":"image_2"}]},{"hash":"2123312c1b220a5b37a53bfc8a82cb2e","adlabels":[{"name":"reels_image_1"},{"name":"reels_image_2"}]}],"bodies":[{"text":"try admanage ","adlabels":[{"name":"body"}]}],"titles":[{"text":"admanage ai","adlabels":[{"name":"title_1"}]}],"link_urls":[{"website_url":"https://admanage.ai","adlabels":[{"name":"url_1"}]}],"carousels":[{"adlabels":[{"name":"feed_carousel"}],"child_attachments":[{"image_label":{"name":"image_1"},"title_label":{"name":"title_1"},"link_url_label":{"name":"url_1"}},{"image_label":{"name":"image_2"},"title_label":{"name":"title_1"},"link_url_label":{"name":"url_1"}}]},{"adlabels":[{"name":"reels_carousel"}],"child_attachments":[{"image_label":{"name":"reels_image_1"},"title_label":{"name":"title_1"},"link_url_label":{"name":"url_1"}},{"image_label":{"name":"reels_image_2"},"title_label":{"name":"title_1"},"link_url_label":{"name":"url_1"}}]}],"call_to_action_types":["LEARN_MORE"],"ad_formats":["CAROUSEL"],"optimization_type":"PLACEMENT","asset_customization_rules":[{"customization_spec":{"publisher_platforms":["facebook","instagram"],"facebook_positions":["feed"],"instagram_positions":["stream"]},"body_label":{"name":"body"},"link_url_label":{"name":"url_1"},"carousel_label":{"name":"feed_carousel"}},{"customization_spec":{"publisher_platforms":["facebook"],"facebook_positions":["story"]},"body_label":{"name":"body"},"link_url_label":{"name":"url_1"},"carousel_label":{"name":"reels_carousel"}},{"customization_spec":{"publisher_platforms":["instagram"],"instagram_positions":["story"]},"body_label":{"name":"body"},"link_url_label":{"name":"url_1"},"carousel_label":{"name":"reels_carousel"}},{"customization_spec":{"publisher_platforms":["facebook"],"facebook_positions":["facebook_reels"]},"body_label":{"name":"body"},"link_url_label":{"name":"url_1"},"carousel_label":{"name":"reels_carousel"}},{"customization_spec":{"publisher_platforms":["instagram"],"instagram_positions":["reels"]},"body_label":{"name":"body"},"link_url_label":{"name":"url_1"},"carousel_label":{"name":"reels_carousel"}}],"multi_share_end_card":false,"multi_share_optimized":true,"audios":[{"type":"random"}]},"degrees_of_freedom_spec":{"creative_features_spec":{"advantage_plus_creative":{"enroll_status":"OPT_OUT"},"carousel_to_video":{"enroll_status":"OPT_OUT"},"profile_card":{"enroll_status":"OPT_OUT"},"media_order":{"enroll_status":"OPT_OUT"},"inline_comment":{"enroll_status":"OPT_OUT"},"text_optimizations":{"enroll_status":"OPT_OUT"},"adapt_to_placement":{"enroll_status":"OPT_OUT"},"description_automation":{"enroll_status":"OPT_OUT"},"enhance_cta":{"enroll_status":"OPT_IN"},"local_store_extension":{"enroll_status":"OPT_OUT"}}},"contextual_multi_ads":{"enroll_status":"OPT_IN"}} 
+ August 8 at 4:49 AM Cedric Chris @cedric did you find a solution? 
+ August 26 at 9:40 AM 
+ --> 
+ 

@@ -1,0 +1,58 @@
+# Post-Processing for Ad Creation and Edits
+
+
+
+Prior to v4.0, ad buying could cause system timeout, out of memory errors or delays. To scale the system, Meta decoupled logic that requires significant computation and that causes transient errors into a separate workflow called *post-processing*. Now when you create or edit ads, it is more resilient to transient errors. The following diagram shows the post-processing workflow:
+
+*Figure 1: Ad creation workflow with post-processing phase.*
+
+To represent a post-processing phase after a request is received, v4.0 introduces the ads run status `IN-PROCESS`. This new status applies to:
+
+- `&#123;campaign_ID&#125;`,
+- `&#123;ad_set_ID&#125;`,
+- `&#123;ad_ID&#125;` and
+- `&#123;ad_creative_ID&#125;`.
+
+For campaigns, ad sets and ads, this impacts:
+
+| Field | v4.0 and above | Below v4.0 |
+| --- | --- | --- |
+| `effective_status (enum &#123;ACTIVE, PAUSED, DELETED, PENDING_REVIEW, DISAPPROVED, PREAPPROVED, PENDING_BILLING_INFO, CAMPAIGN_PAUSED, ARCHIVED, ADSET_PAUSED, WITH_ISSUES, IN_PROCESS&#125;)` | `IN_PROCESS` | For campaigns or ad sets: `configured_status` or `status`. For ads: `pending_review`. |
+| `configured_status enum &#123;ACTIVE, PAUSED, DELETED, ARCHIVED&#125;` | No change | No change |
+| `status (enum &#123;ACTIVE, PAUSED, DELETED, ARCHIVED&#125;)` | No change | No change |
+
+The post-processing phase appears in `effective_status` for campaigns, ad sets and ads, and in the `status` field for ad creatives. For example, you can query the status of your object at `/creative_id?fields=status`. If it is in the post-processing phase, you see:
+
+```
+&#123;
+ &quot;status&quot;: &quot;IN-PROCESS&quot;,
+ &quot;id&quot;: &quot;&lt;creative_id&gt;&quot;
+&#125;
+```
+
+If your ad creative successfully passes post-processing, you see:
+
+```
+&#123;
+&quot;status&quot;: &quot;ACTIVE&quot;,
+&quot;id&quot;: &quot;&lt;creative_id&gt;&quot;
+&#125;
+```
+
+If post-processing fails, the system sets your object to `WITH_ISSUES` and provides an error in `issues_info`. For example, at `creative_ID?fields=status, issues_info`:
+
+```
+&#123;
+&quot;status&quot;: &quot;WITH_ISSUES&quot;,
+&quot;issues_info&quot;: [
+&#123;
+&quot;level&quot;: &quot;CREATIVE&quot;,
+&quot;error_code&quot;: 1815869,
+&quot;error_summary&quot;: &quot;Ad post is not available&quot;,
+&quot;error_message&quot;: &quot;The Facebook post associated with your ad is not available. It may have been removed, or you may not have permission to view it.&quot; &#125;
+],
+&quot;id&quot;: &quot;&lt;creative_id&gt;&quot;
+&#125;
+```
+
+When an ad object is `IN_PROCESS`, you can still make regular updates to the object and its children.

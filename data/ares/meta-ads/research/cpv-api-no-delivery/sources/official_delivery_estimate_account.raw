@@ -1,0 +1,138 @@
+# Ad Account Delivery Estimate
+
+
+
+Returns the delivery estimate for a given ad set configuration in this ad account. You are not able to retrieve this field for [inactive Lookalike Audiences](https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/guides/lookalike-audiences#inactive).
+
+## Reading
+
+Delivery estimate for a given ad set configuration in this ad account.
+
+#### Example
+
+### HTTP
+```
+GET /v25.0/&#123;ad-account-id&#125;/delivery_estimate HTTP/1.1
+Host: graph.facebook.com
+```
+
+### PHP SDK
+```
+/* PHP SDK v5.0.0 */
+/* make the API call */
+try &#123;
+  // Returns a `Facebook\FacebookResponse` object
+  $response = $fb-&gt;get(
+    &#039;/&#123;ad-account-id&#125;/delivery_estimate&#039;,
+    &#039;&#123;access-token&#125;&#039;
+  );
+&#125; catch(Facebook\Exceptions\FacebookResponseException $e) &#123;
+  echo &#039;Graph returned an error: &#039; . $e-&gt;getMessage();
+  exit;
+&#125; catch(Facebook\Exceptions\FacebookSDKException $e) &#123;
+  echo &#039;Facebook SDK returned an error: &#039; . $e-&gt;getMessage();
+  exit;
+&#125;
+$graphNode = $response-&gt;getGraphNode();
+/* handle the result */
+```
+
+### JavaScript SDK
+```
+/* make the API call */
+FB.api(
+    &quot;/&#123;ad-account-id&#125;/delivery_estimate&quot;,
+    function (response) &#123;
+      if (response &amp;&amp; !response.error) &#123;
+        /* handle the result */
+      &#125;
+    &#125;
+);
+```
+
+### Android SDK
+```
+/* make the API call */
+new GraphRequest(
+    AccessToken.getCurrentAccessToken(),
+    &quot;/&#123;ad-account-id&#125;/delivery_estimate&quot;,
+    null,
+    HttpMethod.GET,
+    new GraphRequest.Callback() &#123;
+        public void onCompleted(GraphResponse response) &#123;
+            /* handle the result */
+        &#125;
+    &#125;
+).executeAsync();
+```
+
+### iOS SDK
+```
+/* make the API call */
+FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                               initWithGraphPath:&#064;&quot;/&#123;ad-account-id&#125;/delivery_estimate&quot;
+                                      parameters:params
+                                      HTTPMethod:&#064;&quot;GET&quot;];
+[request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                      id result,
+                                      NSError *error) &#123;
+    // Handle the result
+&#125;];
+```
+
+Try it in [Graph API Explorer](https://developers.facebook.com/tools/explorer/?method=GET&amp;path=%7Bad-account-id%7D%2Fdelivery_estimate&amp;version=v25.0)
+
+If you want to learn how to use the Graph API, read our [Using Graph API guide](https://developers.facebook.com/docs/graph-api/using-graph-api)
+
+#### Parameters
+
+| Parameter | Description |
+| --- | --- |
+| `optimization_goal`&lt;br&gt;&lt;br&gt;*enum&#123;NONE, APP_INSTALLS, AD_RECALL_LIFT, ENGAGED_USERS, EVENT_RESPONSES, IMPRESSIONS, LEAD_GENERATION, QUALITY_LEAD, LINK_CLICKS, OFFSITE_CONVERSIONS, PAGE_LIKES, POST_ENGAGEMENT, QUALITY_CALL, REACH, LANDING_PAGE_VIEWS, VISIT_INSTAGRAM_PROFILE, ENGAGED_PAGE_VIEWS, VALUE, THRUPLAY, DERIVED_EVENTS, APP_INSTALLS_AND_OFFSITE_CONVERSIONS, CONVERSATIONS, IN_APP_VALUE, MESSAGING_PURCHASE_CONVERSION, MESSAGING_DEEP_CONVERSATION_AND_FOLLOW, SUBSCRIBERS, REMINDERS_SET, MEANINGFUL_CALL_ATTEMPT, PROFILE_VISIT, PROFILE_AND_PAGE_ENGAGEMENT, ADVERTISER_SILOED_VALUE, AUTOMATIC_OBJECTIVE, MESSAGING_APPOINTMENT_CONVERSION&#125;* | The optimization goal that you want the estimate for. You only get action predictions for optimization goals where actions make sense. See [optimization_goals](https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-campaign) for allowed values.&lt;br&gt;&lt;br&gt;**[required]**&lt;br&gt; |
+| `promoted_object`&lt;br&gt;&lt;br&gt;*Object* | The promoted object for the ad set that you want an estimate for. This is the same format as when you [create an ad set](https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-campaign).&lt;br&gt;&lt;br&gt;&lt;br&gt;`application_id` *int*&lt;br&gt;The ID of a Facebook Application. Usually related to mobile or canvas games being promoted on Facebook for installs or engagement&lt;br&gt;&lt;br&gt;&lt;br&gt;`pixel_id` *numeric string or integer*&lt;br&gt;The ID of a Facebook conversion pixel.  Used with offsite conversion campaigns.&lt;br&gt;&lt;br&gt;&lt;br&gt;`custom_event_type` *enum&#123;AD_IMPRESSION, RATE, TUTORIAL_COMPLETION, CONTACT, CUSTOMIZE_PRODUCT, DONATE, FIND_LOCATION, SCHEDULE, START_TRIAL, SUBMIT_APPLICATION, SUBSCRIBE, ADD_TO_CART, ADD_TO_WISHLIST, INITIATED_CHECKOUT, ADD_PAYMENT_INFO, PURCHASE, LEAD, COMPLETE_REGISTRATION, CONTENT_VIEW, SEARCH, SERVICE_BOOKING_REQUEST, MESSAGING_CONVERSATION_STARTED_7D, LEVEL_ACHIEVED, ACHIEVEMENT_UNLOCKED, SPENT_CREDITS, LISTING_INTERACTION, D2_RETENTION, D7_RETENTION, OTHER&#125;*&lt;br&gt;The event from an App Event of a mobile app,&lt;br&gt;not in the standard event list.&lt;br&gt;&lt;br&gt;&lt;br&gt;`object_store_url` *URL*&lt;br&gt;The uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the &quot;application_id&quot; this uniquely specifies an object which can be the subject of a Facebook advertising campaign.&lt;br&gt;&lt;br&gt;&lt;br&gt;`object_store_urls` *list&lt;URL&gt;*&lt;br&gt;The vec of uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the &quot;application_id&quot; this uniquely specifies an object which can be the subject of a Facebook advertising campaign.&lt;br&gt;&lt;br&gt;&lt;br&gt;`offer_id` *numeric string or integer*&lt;br&gt;The ID of an Offer from a Facebook Page.&lt;br&gt;&lt;br&gt;&lt;br&gt;`page_id` *Page ID*&lt;br&gt;The ID of a Facebook Page&lt;br&gt;&lt;br&gt;&lt;br&gt;`product_catalog_id` *numeric string or integer*&lt;br&gt;The ID of a Product Catalog. Used with&lt;br&gt;[Dynamic Product Ads](https://developers.facebook.com/docs/marketing-api/dynamic-product-ads).&lt;br&gt;&lt;br&gt;&lt;br&gt;`product_item_id` *numeric string or integer*&lt;br&gt;The ID of the product item.&lt;br&gt;&lt;br&gt;&lt;br&gt;`job_listing_id` *numeric string or integer*&lt;br&gt;The ID of the marketplace job listing.&lt;br&gt;&lt;br&gt;&lt;br&gt;`instagram_profile_id` *numeric string or integer*&lt;br&gt;The ID of the instagram profile id.&lt;br&gt;&lt;br&gt;&lt;br&gt;`product_set_id` *numeric string or integer*&lt;br&gt;The ID of a Product Set within an Ad Set level Product&lt;br&gt;Catalog. Used with&lt;br&gt;[Dynamic Product Ads](https://developers.facebook.com/docs/marketing-api/dynamic-product-ads).&lt;br&gt;&lt;br&gt;&lt;br&gt;`event_id` *numeric string or integer*&lt;br&gt;The ID of a Facebook Event&lt;br&gt;&lt;br&gt;&lt;br&gt;`offline_conversion_data_set_id` *numeric string or integer*&lt;br&gt;The ID of the offline dataset.&lt;br&gt;&lt;br&gt;&lt;br&gt;`fundraiser_campaign_id` *numeric string or integer*&lt;br&gt;The ID of the fundraiser campaign.&lt;br&gt;&lt;br&gt;&lt;br&gt;`custom_event_str` *string*&lt;br&gt;The event from an App Event of a mobile app,&lt;br&gt;not in the standard event list.&lt;br&gt;&lt;br&gt;&lt;br&gt;`mcme_conversion_id` *numeric string or integer*&lt;br&gt;The ID of a MCME conversion.&lt;br&gt;&lt;br&gt;&lt;br&gt;`conversion_goal_id` *numeric string or integer*&lt;br&gt;The ID of a Conversion Goal.&lt;br&gt;&lt;br&gt;&lt;br&gt;`offsite_conversion_event_id` *numeric string or integer*&lt;br&gt;The ID of a Offsite Conversion Event&lt;br&gt;&lt;br&gt;&lt;br&gt;`boosted_product_set_id` *numeric string or integer*&lt;br&gt;The ID of the Boosted Product Set within an Ad Set level Product&lt;br&gt;Catalog. Should only be present when the advertiser has&lt;br&gt;opted into Product Set Boosting.&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_form_event_source_type` *enum&#123;inferred, meta_source, offsite_crm, offsite_web, onsite_crm, onsite_crm_single_event, onsite_clo_dep_aet, onsite_web, onsite_p2b_call, onsite_messaging, qualified_lead_file&#125;*&lt;br&gt;The event source of lead ads form.&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_custom_event_type` *enum&#123;AD_IMPRESSION, RATE, TUTORIAL_COMPLETION, CONTACT, CUSTOMIZE_PRODUCT, DONATE, FIND_LOCATION, SCHEDULE, START_TRIAL, SUBMIT_APPLICATION, SUBSCRIBE, ADD_TO_CART, ADD_TO_WISHLIST, INITIATED_CHECKOUT, ADD_PAYMENT_INFO, PURCHASE, LEAD, COMPLETE_REGISTRATION, CONTENT_VIEW, SEARCH, SERVICE_BOOKING_REQUEST, MESSAGING_CONVERSATION_STARTED_7D, LEVEL_ACHIEVED, ACHIEVEMENT_UNLOCKED, SPENT_CREDITS, LISTING_INTERACTION, D2_RETENTION, D7_RETENTION, OTHER&#125;*&lt;br&gt;The event from an App Event of a mobile app,&lt;br&gt;not in the standard event list.&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_custom_event_str` *string*&lt;br&gt;The event from an App Event of a mobile app,&lt;br&gt;not in the standard event list.&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_offsite_conversion_type` *enum&#123;default, clo&#125;*&lt;br&gt;The offsite conversion type for lead ads&lt;br&gt;&lt;br&gt;&lt;br&gt;`value_semantic_type` *enum &#123;VALUE, MARGIN, LIFETIME_VALUE&#125;*&lt;br&gt;The semantic of the event value to be using for optimization&lt;br&gt;&lt;br&gt;&lt;br&gt;`variation` *enum &#123;OMNI_CHANNEL_SHOP_AUTOMATIC_DATA_COLLECTION, PRODUCT_SET_AND_APP, PRODUCT_SET_AND_IN_STORE, PRODUCT_SET_AND_OMNICHANNEL, PRODUCT_SET_AND_PHONE_CALL, PRODUCT_SET_AND_WEBSITE, PRODUCT_SET_AND_WEBSITE_AND_PHONE_CALL, PRODUCT_SET_WEBSITE_APP_AND_INSTORE&#125;*&lt;br&gt;Variation of the promoted object for a PCA ad&lt;br&gt;&lt;br&gt;&lt;br&gt;`passback_pixel_id` *numeric string or integer*&lt;br&gt;ID of the pixel used for tracking passback events&lt;br&gt;&lt;br&gt;&lt;br&gt;`passback_application_id` *numeric string or integer*&lt;br&gt;ID of the application used for tracking passback events&lt;br&gt;&lt;br&gt;&lt;br&gt;`product_set_optimization` *enum&#123;enabled, disabled&#125;*&lt;br&gt;Enum defining whether or not the ad should be optimized for the promoted product set&lt;br&gt;&lt;br&gt;&lt;br&gt;`full_funnel_objective` *enum&#123;OFFER_CLAIMS, PAGE_LIKES, EVENT_RESPONSES, POST_ENGAGEMENT, WEBSITE_CONVERSIONS, LINK_CLICKS, VIDEO_VIEWS, LOCAL_AWARENESS, PRODUCT_CATALOG_SALES, LEAD_GENERATION, BRAND_AWARENESS, STORE_VISITS, REACH, APP_INSTALLS, MESSAGES, OUTCOME_AWARENESS, OUTCOME_ENGAGEMENT, OUTCOME_LEADS, OUTCOME_SALES, OUTCOME_TRAFFIC, OUTCOME_APP_PROMOTION&#125;*&lt;br&gt;Enum defining the full funnel objective of the campaign&lt;br&gt;&lt;br&gt;&lt;br&gt;`dataset_split_id` *numeric string or integer*&lt;br&gt;ID of the dataset split used to perform additional optimization on the dataset&lt;br&gt;&lt;br&gt;&lt;br&gt;`dataset_split_ids` *array&lt;numeric string&gt;*&lt;br&gt;IDs of the dataset splits used to perform additional optimization on the dataset&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_selected_pixel_id` *numeric string or integer*&lt;br&gt;The selected pixel id for lead ads conversion leads optimization&lt;br&gt;&lt;br&gt;&lt;br&gt;`custom_attribution_source_ids` *array&lt;numeric string&gt;*&lt;br&gt;IDs of the custom attribution sources used for tracking passback events&lt;br&gt;&lt;br&gt;&lt;br&gt;`multi_event_product` *int64*&lt;br&gt;Identifies which action-to-action product the advertiser is using&lt;br&gt;&lt;br&gt;&lt;br&gt;`product_sales_channel` *enum &#123;ONLINE, IN_STORE, OMNI&#125;*&lt;br&gt;ProductSalesChannel of the promoted object for Omni L3 DA SBLI ads&lt;br&gt;&lt;br&gt;&lt;br&gt;`anchor_event_config` *JSON object*&lt;br&gt;Configuration for anchor event in multi-event optimization campaigns&lt;br&gt;&lt;br&gt;&lt;br&gt;`multi_event_conversion_info` *JSON object*&lt;br&gt;Configuration for multi-event conversion info in CLO campaigns&lt;br&gt;&lt;br&gt;&lt;br&gt;`live_video_destination` *string*&lt;br&gt;The live video destination type for live video ads&lt;br&gt;&lt;br&gt;&lt;br&gt;`smart_pse_enabled` *boolean*&lt;br&gt;Whether Smart Product Set Expansion is enabled for this campaign.&lt;br&gt;&lt;br&gt;&lt;br&gt;`smart_pse_setting` *enum&#123;ENABLED, DISABLED&#125;*&lt;br&gt;Setting for Smart Product Set Expansion. Uses an enum instead of a boolean to avoid TAO null handling issues.&lt;br&gt;&lt;br&gt;&lt;br&gt;`lead_ads_follow_up_event` *enum&#123;whatsapp_conversations&#125;*&lt;br&gt;The selected lead follow-up event for lead ads campaigns.&lt;br&gt;&lt;br&gt;&lt;br&gt;`omnichannel_object` *Object*&lt;br&gt;&lt;br&gt;`app` *array&lt;JSON object&gt;*&lt;br&gt;&lt;br&gt;`pixel` *array&lt;JSON object&gt;*&lt;br&gt;**[required]**&lt;br&gt;&lt;br&gt;&lt;br&gt;`onsite` *array&lt;JSON object&gt;*&lt;br&gt;&lt;br&gt;`whats_app_business_phone_number_id` *numeric string or integer*&lt;br&gt;&lt;br&gt;`whatsapp_phone_number` *string* |
+| `targeting_spec`&lt;br&gt;&lt;br&gt;*Targeting object* | The targeting specification for delivery estimate. See [Advanced Targeting and Placement](https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/reference/advanced-targeting).&lt;br&gt;&lt;br&gt;**[required]**&lt;br&gt; |
+
+#### Fields
+
+Reading from this edge will return a JSON formatted result:
+
+```
+&#123;
+&quot;data&quot;: [],
+&quot;paging&quot;: &#123;&#125;
+&#125;
+```
+
+##### data
+
+A list of AdAccountDeliveryEstimate nodes.
+
+##### paging
+
+For more details about pagination, see the [Graph API guide](https://developers.facebook.com/docs/graph-api/using-graph-api#paging).
+
+#### Error Codes
+
+| Error Code | Description |
+| --- | --- |
+| 2635 | You are calling a deprecated version of the Ads API. Please update to the latest version. |
+| 100 | Invalid parameter |
+| 613 | Calls to this api have exceeded the rate limit. |
+| 200 | Permissions error |
+| 80004 | There have been too many calls to this ad-account. Wait a bit and try again. For more info, please refer to /docs/graph-api/overview/rate-limiting#ads-management. |
+| 2641 | Your ad includes or excludes locations that are currently restricted |
+| 190 | Invalid OAuth 2.0 Access Token |
+| 368 | The action attempted has been deemed abusive or is otherwise disallowed |
+
+## Creating
+
+You can&#039;t perform this operation on this endpoint.
+
+## Updating
+
+You can&#039;t perform this operation on this endpoint.
+
+## Deleting
+
+You can&#039;t perform this operation on this endpoint.
+

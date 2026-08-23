@@ -1,0 +1,110 @@
+{
+  "official_delivery_checks": {
+    "url": "https://developers.facebook.com/ads/blog/post/2014/07/30/delivery-checks",
+    "http": 200,
+    "content_type": "text/html; charset=\"utf-8\"",
+    "raw_bytes": 154028,
+    "text_chars": 2183,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_delivery_checks.txt"
+  },
+  "official_delivery_estimate_adset": {
+    "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/delivery_estimate/",
+    "http": 200,
+    "content_type": "text/html; charset=\"utf-8\"",
+    "raw_bytes": 1031679,
+    "text_chars": 11509,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_delivery_estimate_adset.txt"
+  },
+  "official_delivery_estimate_account": {
+    "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-account/delivery_estimate/",
+    "http": 200,
+    "content_type": "text/markdown; charset=utf-8",
+    "raw_bytes": 14351,
+    "text_chars": 12295,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_delivery_estimate_account.txt"
+  },
+  "official_manage_status": {
+    "url": "https://developers.facebook.com/docs/marketing-api/guides/manage-your-ad-object-status/",
+    "http": 404,
+    "content_type": "text/html; charset=\"utf-8\"",
+    "raw_bytes": 139218,
+    "text_chars": 28,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_manage_status.txt"
+  },
+  "official_post_processing": {
+    "url": "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
+    "http": 200,
+    "content_type": "text/markdown; charset=utf-8",
+    "raw_bytes": 2648,
+    "text_chars": 2305,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_post_processing.txt"
+  },
+  "official_access": {
+    "url": "https://developers.facebook.com/docs/marketing-api/access/",
+    "http": 200,
+    "content_type": "text/markdown; charset=utf-8",
+    "raw_bytes": 9192,
+    "text_chars": 8906,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_access.txt"
+  },
+  "official_campaign_copies": {
+    "url": "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
+    "http": 200,
+    "content_type": "text/html; charset=\"utf-8\"",
+    "raw_bytes": 1021423,
+    "text_chars": 8586,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/official_campaign_copies.txt"
+  },
+  "community_customization_delivery": {
+    "url": "https://developers.facebook.com/community/threads/754307932810192/",
+    "http": 200,
+    "content_type": "text/html; charset=\"utf-8\"",
+    "raw_bytes": 1029238,
+    "text_chars": 6311,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/community_customization_delivery.txt"
+  },
+  "stackoverflow_effective_status": {
+    "url": "https://stackoverflow.com/questions/38632685/fb-ads-api-status-effective-status-and-the-ads-actual-status",
+    "http": 403,
+    "content_type": "text/html; charset=UTF-8",
+    "raw_bytes": 5441,
+    "text_chars": 60,
+    "fake_or_blocked": true,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/stackoverflow_effective_status.txt"
+  },
+  "stackoverflow_delivery_status": {
+    "url": "https://stackoverflow.com/questions/42130309/how-can-i-check-delivery-status-of-campaign-on-facebook-marketing-api",
+    "http": 403,
+    "content_type": "text/html; charset=UTF-8",
+    "raw_bytes": 5489,
+    "text_chars": 60,
+    "fake_or_blocked": true,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/stackoverflow_delivery_status.txt"
+  },
+  "reddit_active_zero_duplicate": {
+    "url": "https://www.reddit.com/r/FacebookAds/comments/1ojc996/campaigns_active_but_0_spend_meta_glitch/.json",
+    "http": 403,
+    "content_type": "text/html",
+    "raw_bytes": 190240,
+    "text_chars": 190238,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/reddit_active_zero_duplicate.txt"
+  },
+  "reddit_scheduled_active_no_delivery": {
+    "url": "https://www.reddit.com/r/FacebookAds/comments/1mq459r/help_meta_ads_active_but_not_delivering/.json",
+    "http": 403,
+    "content_type": "text/html",
+    "raw_bytes": 190240,
+    "text_chars": 190238,
+    "fake_or_blocked": false,
+    "text_path": "/root/mgs-agent/data/ares/meta-ads/research/cpv-api-no-delivery/sources/reddit_scheduled_active_no_delivery.txt"
+  }
+}

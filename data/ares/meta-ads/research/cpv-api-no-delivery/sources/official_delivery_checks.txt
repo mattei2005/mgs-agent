@@ -1,0 +1,19 @@
+ 
+ Meta for Developers 
+ Home Blog Delivery checks guide July 30, 2014 Delivery checks guide By Christine Lu In this blog post we will discuss how to use the delivery checks API to help you identify under delivery issues. Once an ad has become ACTIVE (after passing ad review), ads may fail to deliver because of subsequent changes to related assets after the ad becomes active. You should check for any failures in delivery by using the API below. This API returns to you information about why an ad may not be delivering. To query the API, make a call to the adgroup object and ask for the failed_delivery_checks field: curl -G \
+-d "access_token=_____" \
+-d "fields=failed_delivery_checks" \
+"https://graph.facebook.com/6014290603725"
+// Sample response
+{
+"failed_delivery_checks": [
+{
+"check_name": "invalid_custom_audiences", 
+"description": "This ad uses a custom audience that's been deleted by you or by the person who set it up.", 
+"summary": "Ad Using Deleted Custom Audience"
+}
+], 
+"id": "6014290603725"
+} You can see what the possible reasons an ad is not delivering in the table here and serve up a relevant and actionable message to your customer. For instance, for the above example, you can link back to an editing flow to allow the advertiser to change the Custom Audience they've selected. Additionally you can check within your logs whether or not you are surfacing deleted Custom Audiences as targeting options to the advertiser and filter those out so the advertiser is not prompted with options that would not be valid. To take another example, if you see the reason for no delivery is “Page Unpublished”, you can link off to the page and this help center article to provide instructions on how your advertiser can publish their page so their ads can continue running. Doc: https://developers.facebook.com/docs/reference/ads-api/deliverychecks TAGS Explore more August 4, 2026 Meta AI Developer Assistant Now Available for Developer Support July 29, 2026 Introducing Graph API v26.0 and Marketing API v26.0 July 21, 2026 Stop Polling, Start Pushing: The Case for Webhooks Get our newsletter Sign up for monthly updates from Meta for Developers. Sign up 
+ --> 
+ 
