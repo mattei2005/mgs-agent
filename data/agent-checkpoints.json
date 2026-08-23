@@ -53,12 +53,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C20-ADVIDEOS-CANARY-20260823",
-      "next_step": "Projetar um experimento attribution-safe com uma campanha vencedora: provar via readback se o clone API reutiliza exatamente creative_id/post IDs ou rematerializa; evitar UTM duplicada em duas campanhas live. Só executar write após apresentar o commit plan exato e preservar a campanha vencedora.",
-      "objective": "Determinar por que campanhas CPV criadas pela API não entram em delivery sem duplicação manual no Ads Manager",
-      "source": "discord:thread:1540939724636819507; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json; c20:data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
-      "state": "c20 continua active às 04:08 sp com adset, 3 ads, 3 creatives, 3 story ids, utms válidas e 6/6 vídeos associados ao advideos da conta, mas insights permanece vazio: zero impressões e zero gasto após pelo menos 45 minutos. a correção advideos é gate técnico necessário, porém não foi suficiente e foi retirada como causa raiz. branch atual: reutilização exata de creative_id/post/social proof versus materialização de creative novo e divergência de serving api×ads manager. scheduler geral permanece em hold; nenhuma nova campanha será criada às cegas.",
+      "next_step": "Após autorização explícita de Rodolfo: swap attribution-safe dentro da mesma C20 — pausar campanha, pausar 3 ads diretas source_ad_id=0, ativar 3 lineage ads, reativar campanha, manter diretas PAUSED como rollback e observar 30min. Se passar, migrar engine para /{source_ad_id}/copies + creative_parameters; se falhar, escalar pacote à Meta.",
+      "objective": "Provar e corrigir a causa de campanhas CPV criadas pela API ficarem ACTIVE sem delivery",
+      "source": "discord:thread:1540939724636819507; report:data/ares/meta-ads/research/cpv-api-no-delivery/cpv-api-no-delivery-forensic-report-20260823.md; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json; live:data/ares/meta-ads/research/cpv-api-no-delivery/live/source-ad-id-lineage-comparison-20260823.json",
+      "state": "pesquisa oficial+web+live concluída. causa de alta confiança: o adapter descartava source_ad_id dos templates e o engine criava ads diretamente em act_account/ads; todos os ads ares sem delivery têm source_ad_id=0, enquanto c08/c10 e duplicações manuais que entregam têm lineage não zero. meta lançou em maio/2025 creative_parameters no post /{ad_id}/copies para copiar o ad preservando lineage e sobrescrever o creative. três lineage ads c20 foram materializadas paused pelo endpoint oficial, com source_ad_id c08, creatives/story ids active e utm c20 válida. execution_options validate_only foi ignorado pelo /copies; copied ids foram side effects reais checkpointados. c20 direta continua active sem impressões/gasto; lineage ads permanecem paused, zero risco de gasto.",
       "thread_id": "1540939724636819507",
-      "updated_at": "2026-08-23T07:10:18+00:00"
+      "updated_at": "2026-08-23T07:41:54+00:00"
     },
     {
       "agent": "ares",
@@ -1092,5 +1092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T07:10:18+00:00"
+  "updated_at": "2026-08-23T07:41:54+00:00"
 }

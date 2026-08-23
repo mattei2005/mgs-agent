@@ -8141,7 +8141,7 @@
         },
         "media_registry_sha256": "524cd8146b03fadbe23724981d9366f967ebfc9175986459c8a20960eebc5224",
         "final_audit_sha256": "96d9020e8eee516d0c6df89e4b8e7fc87cc355edfe8c7dba8efb7b1be2a202ea",
-        "skill_sha256": "c926a4c435fb1c6bce6afea2a1976b5cb1c95c1d73c3101ec87b453aad281d61",
+        "skill_sha256": "c4b2da6ee4d8419bbaadd4bdb3da64c5b951859cb62f734dcecc3d434592079c",
         "tests": "121 passed",
         "creation_hold_still_enabled": true,
         "first_delivery_mode": "observe_only_no_auto_pause",
@@ -8177,6 +8177,30 @@
             "mentions": [],
             "thread_created": false
           }
+        },
+        "research_status": "root_cause_high_confidence_source_ad_lineage",
+        "research_report_sha256": "30e6a3b187bdc99140e0ca8924012524a4cd5f3b7859f9a07bf6438b5dbbaab3",
+        "forensic_sha256": "c30128f812a2e829eaf8a20c83b4f0efadf940b0b1549c4970e54cc22d913d6c",
+        "operation_sha256": "a54f4285b49b43c8a4db2644fb2f07b7b7417b17e0b402e6b9c607bf3c57675a",
+        "lineage_ads_status": "PAUSED_READY",
+        "lineage_ad_count": 3,
+        "lineage_source_ad_ids": [
+          "120250209380790632",
+          "120250209380800632",
+          "120250209380810632"
+        ],
+        "root_cause": "clone_prestaged discarded source_ad_id and used direct act_account/ads instead of official ad copies creative_parameters",
+        "solution": "POST /{source_ad_id}/copies with adset_id + creative_parameters + source_ad_id readback",
+        "swap_requires_explicit_authorization": true,
+        "citation_sources": 7,
+        "citation_evidence_verified": true,
+        "research_report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540989737899135064",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
         }
       }
     },
