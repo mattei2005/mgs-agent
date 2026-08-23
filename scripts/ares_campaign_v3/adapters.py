@@ -66,10 +66,9 @@ def build_cpv_manifest(
         start = start.astimezone(SP)
     else:
         start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
-    templates = creative_templates or [
-        {"object_story_spec": {"page_id": CPV_PAGE_ID}, "asset_feed_spec": {"videos": []}}
-        for _ in range(3)
-    ]
+    if creative_templates is None:
+        raise ValueError("CPV v3 requires creative_templates with source_ad_id lineage")
+    templates = creative_templates
     if len(templates) != 3:
         raise ValueError("CPV v3 requires three creative templates")
     campaigns = []
@@ -80,6 +79,9 @@ def build_cpv_manifest(
             canonical_stem = _cpv_canonical_stem(ref)
             ready = registry.require_ready(CPV_ACCOUNT_ID, ref["asset_id"], ref["checksum"])
             source_template = templates[ad_index]
+            source_ad_id = str(source_template.get("source_ad_id") or "") if isinstance(source_template, dict) else ""
+            if not source_ad_id or source_ad_id == "0":
+                raise ValueError(f"CPV v3 template AD {ad_index + 1:02d} requires nonzero source_ad_id")
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
             template = _replace_cpv_utm(copy.deepcopy(payload_template if isinstance(payload_template, dict) else source_template), number)
             asset_feed = dict(template.get("asset_feed_spec") or {})
@@ -98,6 +100,7 @@ def build_cpv_manifest(
             template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {canonical_stem}"
             ads.append({
                 "name": f"AD {ad_index + 1:02d} - {canonical_stem}",
+                "source_ad_id": source_ad_id,
                 "media": ready,
                 "creative_payload": template,
             })

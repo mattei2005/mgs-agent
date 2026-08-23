@@ -110,7 +110,7 @@ class CampaignEngine:
             operations.extend([
                 BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
                 BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy&limit=20", kind="readback"),
-                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,creative{{id,name}}&limit=50", kind="readback"),
+                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,effective_object_story_id}}&limit=50", kind="readback"),
             ])
         return operations
 
@@ -138,61 +138,90 @@ class CampaignEngine:
         record["campaign_ids"] = campaign_ids
         record["stage"] = "campaign_copies_created"
 
-        shell_ops: list[BatchOperation] = []
+        adset_copy_ops: list[BatchOperation] = []
         for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1):
-            shell_ops.extend([
+            adset_copy_ops.append(BatchOperation(
+                f"adset_copy_{index}", "POST", f"{campaign.source_adset_id}/copies",
+                body={
+                    "campaign_id": campaign_id,
+                    "deep_copy": "false",
+                    "status_option": campaign.status,
+                    "start_time": campaign.start_time,
+                    "rename_options": {"rename_strategy": "NO_RENAME"},
+                },
+                kind="adset_copy",
+            ))
+        timing, started = self._timed_start()
+        record["timings"]["adset_copy"] = timing
+        adset_results = self._batch(bundle, transport, adset_copy_ops, "adset_copy")
+        self._timed_finish(timing, started)
+        adset_ids: list[str] = []
+        for index in range(len(bundle.campaigns)):
+            result = next(row for row in adset_results if row.name == f"adset_copy_{index + 1}")
+            adset_ids.append(_copied_id(result, "copied_adset_id", "copied_adsets"))
+        record["adset_ids"] = adset_ids
+        record["stage"] = "adsets_created"
+
+        shell_update_ops: list[BatchOperation] = []
+        for index, (campaign, campaign_id, adset_id) in enumerate(zip(bundle.campaigns, campaign_ids, adset_ids), 1):
+            shell_update_ops.extend([
                 BatchOperation(
                     f"campaign_update_{index}", "POST", campaign_id,
                     body={"name": campaign.name, "status": campaign.status, "start_time": campaign.start_time, **campaign.campaign_updates},
                     kind="campaign_update",
                 ),
                 BatchOperation(
-                    f"adset_copy_{index}", "POST", f"{campaign.source_adset_id}/copies",
-                    body={
-                        "campaign_id": campaign_id,
-                        "deep_copy": "false",
-                        "status_option": "ACTIVE",
-                        "start_time": campaign.start_time,
-                        "rename_options": {"rename_strategy": "ONLY_TOP_LEVEL_RENAME", "rename_suffix": f" - {campaign.adset_name or campaign.name}"},
-                    },
-                    kind="adset_copy",
+                    f"adset_update_{index}", "POST", adset_id,
+                    body={"name": campaign.adset_name or campaign.name, "status": campaign.status, "start_time": campaign.start_time},
+                    kind="adset_update",
                 ),
             ])
         timing, started = self._timed_start()
-        record["timings"]["shells"] = timing
-        shell_results = self._batch(bundle, transport, shell_ops, "campaign_update_adset_copy")
+        record["timings"]["shell_normalize"] = timing
+        self._batch(bundle, transport, shell_update_ops, "campaign_adset_update")
         self._timed_finish(timing, started)
-        adset_ids: list[str] = []
-        for index in range(len(bundle.campaigns)):
-            result = next(row for row in shell_results if row.name == f"adset_copy_{index + 1}")
-            adset_ids.append(_copied_id(result, "copied_adset_id", "copied_adsets"))
-        record["adset_ids"] = adset_ids
-        record["stage"] = "shells_created"
+        record["stage"] = "shells_normalized"
 
-        create_ops: list[BatchOperation] = []
+        ad_copy_ops: list[BatchOperation] = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
             for ai, ad in enumerate(campaign.ads, 1):
-                creative_name = f"creative_{ci}_{ai}"
-                create_ops.append(BatchOperation(
-                    creative_name, "POST", f"act_{campaign.account_id}/adcreatives",
-                    body=ad.creative_payload, kind="creative_create",
-                ))
-                create_ops.append(BatchOperation(
-                    f"ad_{ci}_{ai}", "POST", f"act_{campaign.account_id}/ads",
+                ad_copy_ops.append(BatchOperation(
+                    f"ad_copy_{ci}_{ai}", "POST", f"{ad.source_ad_id}/copies",
                     body={
-                        "name": ad.name,
                         "adset_id": adset_id,
-                        "status": "ACTIVE",
-                        "creative": {"creative_id": f"{{result={creative_name}:$.id}}"},
+                        "creative_parameters": ad.creative_payload,
+                        "status_option": campaign.status,
+                        "rename_options": {"rename_strategy": "NO_RENAME"},
                     },
-                    depends_on=creative_name,
-                    kind="ad_create",
+                    kind="ad_copy_with_creative",
                 ))
         timing, started = self._timed_start()
-        record["timings"]["creative_ads"] = timing
-        create_results = self._batch(bundle, transport, create_ops, "creative_ad_create")
+        record["timings"]["ad_copies"] = timing
+        ad_copy_results = self._batch(bundle, transport, ad_copy_ops, "ad_copy_with_creative")
         self._timed_finish(timing, started)
-        record["created_children"] = len(create_results)
+        copied_ad_ids: list[str] = []
+        for ci, campaign in enumerate(bundle.campaigns, 1):
+            for ai in range(1, len(campaign.ads) + 1):
+                result = next(row for row in ad_copy_results if row.name == f"ad_copy_{ci}_{ai}")
+                copied_ad_ids.append(_copied_id(result, "copied_ad_id"))
+        record["ad_ids"] = copied_ad_ids
+        record["created_children"] = len(copied_ad_ids)
+        record["stage"] = "ads_copied_with_lineage"
+
+        ad_name_ops: list[BatchOperation] = []
+        offset = 0
+        for campaign in bundle.campaigns:
+            for ad in campaign.ads:
+                ad_name_ops.append(BatchOperation(
+                    f"ad_name_update_{offset + 1}", "POST", copied_ad_ids[offset],
+                    body={"name": ad.name, "status": campaign.status},
+                    kind="ad_name_update",
+                ))
+                offset += 1
+        timing, started = self._timed_start()
+        record["timings"]["ad_name_normalize"] = timing
+        self._batch(bundle, transport, ad_name_ops, "ad_name_update")
+        self._timed_finish(timing, started)
         record["stage"] = "children_created_readback_pending"
 
         timing, started = self._timed_start()

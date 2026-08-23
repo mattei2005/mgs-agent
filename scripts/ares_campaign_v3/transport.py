@@ -136,11 +136,17 @@ class FakeBatchTransport:
                 body = {"copied_campaign_id": self._id("campaign")}
             elif op.kind == "adset_copy":
                 body = {"copied_adset_id": self._id("adset")}
+            elif op.kind == "ad_copy_with_creative":
+                body = {"copied_ad_id": self._id("ad")}
+            elif op.kind == "ad_name_update":
+                body = {"success": True}
             elif op.kind == "creative_create":
                 body = {"id": self._id("creative")}
             elif op.kind == "ad_create":
                 body = {"id": self._id("ad")}
             elif op.kind == "campaign_update":
+                body = {"success": True}
+            elif op.kind == "adset_update":
                 body = {"success": True}
             elif op.kind == "readback":
                 path = op.relative_url.split("?", 1)[0]

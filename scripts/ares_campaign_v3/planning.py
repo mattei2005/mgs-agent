@@ -90,29 +90,33 @@ class Planner:
     @staticmethod
     def _prestaged_stages(campaigns: tuple[CampaignSpec, ...]) -> tuple[StagePlan, ...]:
         copies = []
-        update_adsets = []
-        create_ops = []
+        shell_updates = []
+        adset_copies = []
+        ad_copies = []
+        ad_name_updates = []
         for ci, campaign in enumerate(campaigns, 1):
             copies.append(BatchOperation(
                 name=f"campaign_copy_{ci}", method="POST", relative_url=f"{campaign.source_campaign_id}/copies",
                 body={"deep_copy": "false", "status_option": "PAUSED", "start_time": campaign.start_time}, kind="campaign_copy",
             ))
-            update_adsets.extend([
-                BatchOperation(name=f"campaign_update_{ci}", method="POST", relative_url=f"{{campaign_id_{ci}}}", body={"name": campaign.name, "status": "PAUSED", **campaign.campaign_updates}, kind="campaign_update"),
-                BatchOperation(name=f"adset_copy_{ci}", method="POST", relative_url=f"{campaign.source_adset_id}/copies", body={"campaign_id": f"{{campaign_id_{ci}}}", "deep_copy": "false", "status_option": "ACTIVE", "start_time": campaign.start_time}, kind="adset_copy"),
+            shell_updates.extend([
+                BatchOperation(name=f"campaign_update_{ci}", method="POST", relative_url=f"{{campaign_id_{ci}}}", body={"name": campaign.name, "status": campaign.status, "start_time": campaign.start_time, **campaign.campaign_updates}, kind="campaign_update"),
+                BatchOperation(name=f"adset_update_{ci}", method="POST", relative_url=f"{{adset_id_{ci}}}", body={"name": campaign.adset_name or campaign.name, "status": campaign.status, "start_time": campaign.start_time}, kind="adset_update"),
             ])
+            adset_copies.append(BatchOperation(name=f"adset_copy_{ci}", method="POST", relative_url=f"{campaign.source_adset_id}/copies", body={"campaign_id": f"{{campaign_id_{ci}}}", "deep_copy": "false", "status_option": campaign.status, "start_time": campaign.start_time}, kind="adset_copy"))
             for ai, ad in enumerate(campaign.ads, 1):
-                creative_name = f"creative_{ci}_{ai}"
-                create_ops.append(BatchOperation(name=creative_name, method="POST", relative_url=f"act_{campaign.account_id}/adcreatives", body=ad.creative_payload, kind="creative_create"))
-                create_ops.append(BatchOperation(
-                    name=f"ad_{ci}_{ai}", method="POST", relative_url=f"act_{campaign.account_id}/ads",
-                    body={"name": ad.name, "adset_id": f"{{adset_id_{ci}}}", "status": "ACTIVE", "creative": {"creative_id": f"{{result={creative_name}:$.id}}"}},
-                    depends_on=creative_name, kind="ad_create",
+                ad_copies.append(BatchOperation(
+                    name=f"ad_copy_{ci}_{ai}", method="POST", relative_url=f"{ad.source_ad_id}/copies",
+                    body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": ad.creative_payload, "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
+                    kind="ad_copy_with_creative",
                 ))
+                ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body={"name": ad.name, "status": campaign.status}, kind="ad_name_update"))
         return (
             StagePlan("campaign_copy", tuple(copies)),
-            StagePlan("campaign_update_adset_copy", tuple(update_adsets)),
-            StagePlan("creative_ad_create", tuple(create_ops)),
+            StagePlan("adset_copy", tuple(adset_copies)),
+            StagePlan("campaign_adset_update", tuple(shell_updates)),
+            StagePlan("ad_copy_with_creative", tuple(ad_copies)),
+            StagePlan("ad_name_update", tuple(ad_name_updates)),
         )
 
     @staticmethod
@@ -140,7 +144,7 @@ class Planner:
                     outer_write_calls = 1
                 else:
                     stages = (*self._prestaged_stages(chunk), self._readback_placeholders(chunk))
-                    outer_write_calls = 3
+                    outer_write_calls = 5
                     ad_count = sum(len(campaign.ads) for campaign in chunk)
                     if ad_count > self.max_ads_per_batch:
                         raise ValueError("ad batch exceeds max_ads_per_batch")

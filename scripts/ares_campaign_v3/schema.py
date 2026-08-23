@@ -102,6 +102,7 @@ class MediaSpec:
 @dataclass(frozen=True)
 class AdSpec:
     name: str
+    source_ad_id: str
     media: MediaSpec
     creative_payload: dict[str, Any]
 
@@ -110,6 +111,9 @@ class AdSpec:
         name = str(value.get("name") or "").strip()
         if not name:
             raise ManifestError("ad name is required")
+        source_ad_id = str(value.get("source_ad_id") or "").strip()
+        if not source_ad_id or source_ad_id == "0":
+            raise ManifestError("clone_prestaged ad requires nonzero source_ad_id")
         payload = value.get("creative_payload")
         if not isinstance(payload, dict) or not payload:
             raise ManifestError("creative_payload is required")
@@ -118,7 +122,7 @@ class AdSpec:
         if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
         _validate_video_label_references(payload)
-        return cls(name=name, media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
+        return cls(name=name, source_ad_id=source_ad_id, media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
 
 
 @dataclass(frozen=True)

@@ -54,6 +54,19 @@ def media(i: int) -> dict:
     }
 
 
+def source_templates() -> list[dict]:
+    return [
+        {
+            'source_ad_id': f'source-template-ad-{i}',
+            'creative_payload': {
+                'object_story_spec': {'page_id': '621037101089579'},
+                'asset_feed_spec': {'videos': []},
+            },
+        }
+        for i in range(3)
+    ]
+
+
 def prestaged_campaign(i: int, account: str = '100') -> dict:
     return {
         'idempotency_key': f'pre-{account}-{i}',
@@ -70,6 +83,7 @@ def prestaged_campaign(i: int, account: str = '100') -> dict:
         'ads': [
             {
                 'name': f'Ad {i}.{j}',
+                'source_ad_id': f'source-ad-{i}-{j}',
                 'media': media(i * 10 + j),
                 'creative_payload': {
                     'name': f'Creative {i}.{j}',
@@ -177,15 +191,18 @@ def test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns()
     assert len(bundle.stages[0].operations) == 2
 
 
-def test_planner_caps_ad_create_batch_at_ten_ads():
+def test_planner_caps_ad_copy_batch_at_ten_ads_and_preserves_lineage():
     m = manifest([prestaged_campaign(1), prestaged_campaign(2)])
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(m)
     bundle = plan.lanes['100'][0]
-    create_stage = next(stage for stage in bundle.stages if stage.name == 'creative_ad_create')
-    ad_ops = [op for op in create_stage.operations if op.kind == 'ad_create']
+    create_stage = next(stage for stage in bundle.stages if stage.name == 'ad_copy_with_creative')
+    ad_ops = [op for op in create_stage.operations if op.kind == 'ad_copy_with_creative']
     assert len(ad_ops) == 6
     assert len(ad_ops) <= 10
-    assert all(op.depends_on for op in ad_ops)
+    assert all(op.depends_on is None for op in ad_ops)
+    assert all(op.relative_url.startswith('source-ad-') and op.relative_url.endswith('/copies') for op in ad_ops)
+    assert all('creative_parameters' in op.body for op in ad_ops)
+    assert all(not op.relative_url.startswith('act_') for op in ad_ops)
 
 
 def test_quota_store_accepts_two_prestaged_campaigns_and_blocks_third(tmp_path):
@@ -485,6 +502,7 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert 'b01fb13c15' in json.dumps(built.campaigns[1].ads[0].creative_payload)
     assert 'b01fb13c08' not in json.dumps(payload)
     assert 'source_ad_id' not in built.campaigns[0].ads[0].creative_payload
+    assert [ad.source_ad_id for ad in built.campaigns[0].ads] == ['source-ad-0', 'source-ad-1', 'source-ad-2']
     assert 'creative_payload' not in built.campaigns[0].ads[0].creative_payload
     assert built.campaigns[0].ads[0].creative_payload['asset_feed_spec']['videos'] == [
         {'video_id': 'v0', 'adlabels': [{'id': 'v-label-0', 'name': 'vertical-0'}]},
@@ -659,9 +677,11 @@ def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_
     row['status'] = 'ACTIVE'
     transport = CaptureTransport('100')
     result = CampaignEngine(config(tmp_path, enabled=True, write_enabled=True), transport_factory=lambda account: transport).execute(manifest([row], request_id='active-future'))
-    updates = transport.operations_by_stage['campaign_update_adset_copy']
+    updates = transport.operations_by_stage['campaign_adset_update']
     campaign_update = next(op for op in updates if op.kind == 'campaign_update')
     assert campaign_update.body['status'] == 'ACTIVE'
+    adset_update = next(op for op in updates if op.kind == 'adset_update')
+    assert adset_update.body['status'] == 'ACTIVE'
     assert result['status'] == 'COMPLETE_FUTURE_ACTIVE'
 
 

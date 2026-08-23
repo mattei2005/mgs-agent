@@ -1589,12 +1589,23 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
                 "canonical_filename": f"CAR_BR_BR_VID_OFFLINE_PV_{index + 1:03d}.mp4",
             })
         operational_date = datetime.now(SP).date().isoformat()
+        templates = [
+            {
+                "source_ad_id": f"offline-source-ad-{index + 1}",
+                "creative_payload": {
+                    "object_story_spec": {"page_id": PAGE_ID},
+                    "asset_feed_spec": {"videos": []},
+                },
+            }
+            for index in range(3)
+        ]
         draft = build_cpv_manifest(
             registry=registry,
             asset_refs=assets,
             campaign_numbers=[14, 15, 16],
             operational_date=operational_date,
             request_id=f"offline-cpv-{operational_date.replace('-', '')}",
+            creative_templates=templates,
             status="ACTIVE",
         )
         sealed = prevalidate_payload(draft, registry)
