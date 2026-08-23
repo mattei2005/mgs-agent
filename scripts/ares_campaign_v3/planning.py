@@ -101,7 +101,7 @@ class Planner:
             ))
             shell_updates.extend([
                 BatchOperation(name=f"campaign_update_{ci}", method="POST", relative_url=f"{{campaign_id_{ci}}}", body={"name": campaign.name, "status": campaign.status, "start_time": campaign.start_time, **campaign.campaign_updates}, kind="campaign_update"),
-                BatchOperation(name=f"adset_update_{ci}", method="POST", relative_url=f"{{adset_id_{ci}}}", body={"name": campaign.adset_name or campaign.name, "status": campaign.status, "start_time": campaign.start_time}, kind="adset_update"),
+                BatchOperation(name=f"adset_update_{ci}", method="POST", relative_url=f"{{adset_id_{ci}}}", body={"name": campaign.adset_name or campaign.name, "status": campaign.status}, kind="adset_update"),
             ])
             adset_copies.append(BatchOperation(name=f"adset_copy_{ci}", method="POST", relative_url=f"{campaign.source_adset_id}/copies", body={"campaign_id": f"{{campaign_id_{ci}}}", "deep_copy": "false", "status_option": campaign.status, "start_time": campaign.start_time}, kind="adset_copy"))
             for ai, ad in enumerate(campaign.ads, 1):

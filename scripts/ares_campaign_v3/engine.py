@@ -14,7 +14,7 @@ from .planning import BundlePlan, Planner
 from .prevalidation import verify_prevalidation
 from .quota import LaneQuotaStore, QuotaBlocked
 from .schema import Manifest
-from .transport import BatchOperation, BatchResult
+from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
 class EngineDisabled(RuntimeError):
@@ -172,7 +172,7 @@ class CampaignEngine:
                 ),
                 BatchOperation(
                     f"adset_update_{index}", "POST", adset_id,
-                    body={"name": campaign.adset_name or campaign.name, "status": campaign.status, "start_time": campaign.start_time},
+                    body={"name": campaign.adset_name or campaign.name, "status": campaign.status},
                     kind="adset_update",
                 ),
             ])
@@ -281,7 +281,11 @@ class CampaignEngine:
                 _atomic_json(checkpoint_path, lane_result)
             except Exception as exc:
                 record["status"] = "FAILED"
-                record["error"] = {"type": type(exc).__name__, "message": str(exc)[:500]}
+                error_row: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
+                if isinstance(exc, BatchTransportError):
+                    error_row["stage"] = exc.stage
+                    error_row["detail"] = exc.detail
+                record["error"] = error_row
                 lane_result["status"] = "FAILED"
                 lane_result["manual_reconciliation_required"] = True
                 _atomic_json(checkpoint_path, lane_result)

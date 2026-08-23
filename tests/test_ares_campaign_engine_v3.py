@@ -692,6 +692,7 @@ def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_
     assert campaign_update.body['status'] == 'ACTIVE'
     adset_update = next(op for op in updates if op.kind == 'adset_update')
     assert adset_update.body['status'] == 'ACTIVE'
+    assert 'start_time' not in adset_update.body
     assert result['status'] == 'COMPLETE_FUTURE_ACTIVE'
 
 

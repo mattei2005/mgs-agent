@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.14
+version: 3.0.15
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -67,6 +67,7 @@ Carregue somente a referência do branch atual.
 14. Depois de qualquer exceção `V3 BLOQUEADO`, Ares pode continuar diagnóstico e readback somente leitura, mas nenhum write corretivo na Meta ocorre até Rodolfo ou Nicolas autorizar explicitamente a solução proposta. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
 15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o saldo restante dentro do cap operacional e a fonte: preflight Meta vivo mais budgets do request confirmados por readback.
 16. Criação programada é uma fase condicional do loop, não uma obrigação diária: analisar D1/D2/D3, aplicar pausas/escalas aprovadas e só abrir nova coorte quando a leitura justificar. `creation_hold.enabled=true` bloqueia criação/clone de novos slots e não expira sozinho; Rodolfo ou Nicolas libera explicitamente.
+17. Em `clone_prestaged`, cada anúncio exige `source_ad_id` não zero e nasce por `POST /{source_ad_id}/copies` com `creative_parameters`; criação direta por `act_{account}/ads` é proibida. Campaign copy, adset copy, normalização de shell, ad copies e normalização de nomes são batches sequenciais; filhos PAUSED permanecem PAUSED até readback e ativação autorizada.
 
 ## How to run
 
