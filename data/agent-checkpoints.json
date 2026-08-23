@@ -53,12 +53,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C20-ADVIDEOS-CANARY-20260823",
-      "next_step": "Aguardar monitor bounded de primeiro gasto; se houver spend/impressões, registrar canário PASS e manter a correção advideos. Se permanecer zero por 30 minutos, continuar diagnóstico de serving sem duplicar a campanha nem reativar criação geral.",
-      "objective": "Corrigir o pre-stage de vídeos para ad-account advideos e provar entrega real na C20 sem duplicação manual no Ads Manager",
-      "source": "discord:thread:1540939724636819507; audit:data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json",
-      "state": "c20 criada e recuperada com sucesso após checkpoint: campanha 120250888588510632 active, usd30, maxvol, 1x1x3; adset e três anúncios/creatives active; 6/6 vídeos associados ao advideos da conta; utms c20 validadas; três assets movidos para 02_testing e inventário reconciliado; budget ativo usd435, saldo usd65 no cap usd500. scheduler geral permanece em hold. monitor de primeiro gasto em execução observe-only sem auto-pause.",
+      "next_step": "Projetar um experimento attribution-safe com uma campanha vencedora: provar via readback se o clone API reutiliza exatamente creative_id/post IDs ou rematerializa; evitar UTM duplicada em duas campanhas live. Só executar write após apresentar o commit plan exato e preservar a campanha vencedora.",
+      "objective": "Determinar por que campanhas CPV criadas pela API não entram em delivery sem duplicação manual no Ads Manager",
+      "source": "discord:thread:1540939724636819507; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json; c20:data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
+      "state": "c20 continua active às 04:08 sp com adset, 3 ads, 3 creatives, 3 story ids, utms válidas e 6/6 vídeos associados ao advideos da conta, mas insights permanece vazio: zero impressões e zero gasto após pelo menos 45 minutos. a correção advideos é gate técnico necessário, porém não foi suficiente e foi retirada como causa raiz. branch atual: reutilização exata de creative_id/post/social proof versus materialização de creative novo e divergência de serving api×ads manager. scheduler geral permanece em hold; nenhuma nova campanha será criada às cegas.",
       "thread_id": "1540939724636819507",
-      "updated_at": "2026-08-23T06:26:22+00:00"
+      "updated_at": "2026-08-23T07:10:18+00:00"
     },
     {
       "agent": "ares",
@@ -1092,5 +1092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T06:26:22+00:00"
+  "updated_at": "2026-08-23T07:10:18+00:00"
 }
