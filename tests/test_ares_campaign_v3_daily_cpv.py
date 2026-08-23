@@ -27,6 +27,7 @@ from ares_campaign_v3.daily_cpv import (
     run_daily,
     select_assets,
     validate_engine_config,
+    validate_hierarchy,
     update_operation_after_creation,
     move_to_testing,
     campaign_name_collisions,
@@ -74,6 +75,39 @@ def campaign(number: int, *, budget=3000, status="ACTIVE"):
         "effective_status": status,
         "daily_budget": str(budget),
     }
+
+
+def test_hierarchy_requires_active_creatives_with_effective_story_ids():
+    expected = SimpleNamespace(
+        name="20 - 23-08 - Garagem Brasil - (b01fb13c20) event_Subscribe - MAXVOL",
+        status="ACTIVE",
+        start_time="2026-08-23T03:00:00-03:00",
+        campaign_updates={"daily_budget": "3000"},
+    )
+    readback = {
+        "campaign": {
+            "name": expected.name,
+            "status": "ACTIVE",
+            "daily_budget": "3000",
+            "start_time": expected.start_time,
+        },
+        "adsets": [{"status": "ACTIVE"}],
+        "ads": [
+            {
+                "status": "ACTIVE",
+                "creative": {
+                    "status": "ACTIVE",
+                    "effective_object_story_id": f"page_story_{index}",
+                },
+            }
+            for index in range(3)
+        ],
+    }
+    assert validate_hierarchy(readback, expected)["valid"] is True
+    readback["ads"][0]["creative"].pop("effective_object_story_id")
+    result = validate_hierarchy(readback, expected)
+    assert result["valid"] is False
+    assert result["creatives_ok"] is False
 
 
 def asset(index: int, *, fingerprint: str | None = None, eligible=True):

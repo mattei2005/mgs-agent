@@ -280,7 +280,25 @@
     "stock_reporting_required": true,
     "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
-    "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback; v2 creation/activation crons remain paused as rollback."
+    "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback; v2 creation/activation crons remain paused as rollback.",
+    "c20_advideo_canary_20260823": {
+      "status": "authorized_pending_runtime_tests_live_preflight",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1540939724636819507",
+      "authorized_at_sp": "2026-08-23T02:37:58-03:00",
+      "scope": "one C20 canary only; new reconciled Drive creatives; corrected ad-account advideos pre-stage; activate now and observe real spend",
+      "campaign_number": 20,
+      "budget_usd": 30,
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "structure": "CBO 1x1x3",
+      "creative_count": 3,
+      "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
+      "status_after_creation": "ACTIVE",
+      "start_mode": "explicit future immediate canary start after media and hierarchy preflight",
+      "creation_hold_override": "this C20 canary only; scheduler and all other creation remain blocked",
+      "first_delivery_mode": "observe only; no automatic late-start pause for this authorized canary",
+      "success_gate": "real impressions or spend without Ads Manager duplication"
+    }
   },
   "roi_policy": {
     "decision_source": "Smart Bidding Reports > Adgroup",
@@ -853,7 +871,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-23T01:53:41.338392-03:00",
+  "updated_at": "2026-08-23T02:37:58-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

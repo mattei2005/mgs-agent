@@ -39,7 +39,17 @@ def _replace_cpv_utm(value: Any, number: int) -> Any:
     return value
 
 
-def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, str]], campaign_numbers: list[int], operational_date: str, request_id: str, creative_templates: list[dict[str, Any]] | None = None, status: str = "PAUSED") -> dict[str, Any]:
+def build_cpv_manifest(
+    *,
+    registry: MediaRegistry,
+    asset_refs: list[dict[str, str]],
+    campaign_numbers: list[int],
+    operational_date: str,
+    request_id: str,
+    creative_templates: list[dict[str, Any]] | None = None,
+    status: str = "PAUSED",
+    start_time: str | None = None,
+) -> dict[str, Any]:
     status = str(status).upper()
     if status not in {"PAUSED", "ACTIVE"}:
         raise ValueError("CPV v3 status must be PAUSED or ACTIVE")
@@ -49,7 +59,13 @@ def build_cpv_manifest(*, registry: MediaRegistry, asset_refs: list[dict[str, st
     if len(asset_refs) != required_assets:
         raise ValueError(f"CPV v3 requires exactly {required_assets} pre-staged assets for {len(campaign_numbers)} campaigns")
     base_date = datetime.fromisoformat(operational_date).replace(tzinfo=SP)
-    start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
+    if start_time:
+        start = datetime.fromisoformat(str(start_time).replace("Z", "+00:00"))
+        if start.tzinfo is None:
+            raise ValueError("CPV v3 explicit start_time requires timezone")
+        start = start.astimezone(SP)
+    else:
+        start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
     templates = creative_templates or [
         {"object_story_spec": {"page_id": CPV_PAGE_ID}, "asset_feed_spec": {"videos": []}}
         for _ in range(3)

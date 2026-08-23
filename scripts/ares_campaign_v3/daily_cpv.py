@@ -1066,7 +1066,13 @@ class LiveDailyBackend:
         count_call("meta_get")
         campaign_status, campaign, _ = self.common.graph_get(campaign_id, self.token, {"fields": "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time"})
         adsets = self._graph_pages(f"{campaign_id}/adsets", {"fields": "id,name,status,effective_status,configured_status,start_time", "limit": 20})
-        ads = self._graph_pages(f"{campaign_id}/ads", {"fields": "id,name,status,effective_status,configured_status,adset_id,creative{id,name}", "limit": 50})
+        ads = self._graph_pages(
+            f"{campaign_id}/ads",
+            {
+                "fields": "id,name,status,effective_status,configured_status,adset_id,issues_info,creative{id,name,status,effective_object_story_id}",
+                "limit": 50,
+            },
+        )
         if campaign_status != 200 or not isinstance(campaign, dict):
             raise DailyBlocked("readback", "campaign readback failed", {"campaign_id": campaign_id, "http": campaign_status})
         return {"campaign": campaign, "adsets": adsets, "ads": ads}
@@ -1088,8 +1094,23 @@ def validate_hierarchy(readback: dict[str, Any], campaign: Any) -> dict[str, Any
         and str(live.get("start_time") or "")[:16] == str(campaign.start_time)[:16]
     )
     adsets_ok = len(adsets) == 1 and str(adsets[0].get("status") or adsets[0].get("configured_status") or "").upper() == "ACTIVE"
-    ads_ok = len(ads) == 3 and all(str(row.get("status") or row.get("configured_status") or "").upper() == "ACTIVE" for row in ads)
-    return {"valid": campaign_ok and adsets_ok and ads_ok, "campaign_ok": campaign_ok, "adsets_ok": adsets_ok, "ads_ok": ads_ok}
+    ads_ok = len(ads) == 3 and all(
+        str(row.get("status") or row.get("configured_status") or "").upper() == "ACTIVE"
+        and not row.get("issues_info")
+        for row in ads
+    )
+    creatives_ok = len(ads) == 3 and all(
+        str(((row.get("creative") or {}).get("status") or "")).upper() == "ACTIVE"
+        and bool(str((row.get("creative") or {}).get("effective_object_story_id") or ""))
+        for row in ads
+    )
+    return {
+        "valid": campaign_ok and adsets_ok and ads_ok and creatives_ok,
+        "campaign_ok": campaign_ok,
+        "adsets_ok": adsets_ok,
+        "ads_ok": ads_ok,
+        "creatives_ok": creatives_ok,
+    }
 
 
 def assignments_from_readback(manifest: Manifest, campaign_ids: list[str], readbacks: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:

@@ -5,6 +5,7 @@ import json
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -424,6 +425,37 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     ]
     assert built.campaigns[0].ads[0].creative_payload['name'] == 'CPV C14 AD01 CAR_BR_BR_VID_TEST_PV_001'
     assert all('asset-' not in ad.name for campaign in built.campaigns for ad in campaign.ads)
+
+
+def test_cpv_adapter_accepts_explicit_future_start_for_authorized_canary(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    assets = []
+    for i in range(3):
+        asset_id = f'canary-asset-{i}'
+        checksum = f'canary-sum-{i}'
+        registry.register(
+            account_id='1046241194533786', asset_id=asset_id, checksum=checksum,
+            vertical_video_id=f'canary-v{i}', square_video_id=f'canary-s{i}', ready=True,
+            upload_edge='ad_account_advideos', association_verified=True,
+        )
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_CANARY_PV_{i + 1:03d}.mp4',
+        })
+    explicit = future_iso(2)
+    payload = build_cpv_manifest(
+        registry=registry,
+        asset_refs=assets,
+        campaign_numbers=[20],
+        operational_date='2099-08-23',
+        request_id='cpv-c20-canary',
+        status='ACTIVE',
+        start_time=explicit,
+    )
+    built = Manifest.from_dict(payload)
+    assert built.campaigns[0].start_time == datetime.fromisoformat(explicit).astimezone(ZoneInfo('America/Sao_Paulo')).isoformat()
+    assert built.campaigns[0].name.startswith('20 - ')
 
 
 def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):

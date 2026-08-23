@@ -545,6 +545,34 @@ def test_dynamic_manual_replacement_enters_allowlist_only_with_rodolfo_and_live_
         module.validated_allowed_campaigns(operation)
 
 
+def test_c20_advideo_canary_enters_allowlist_only_after_live_readback(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})
+    audit = tmp_path / "c20-readback.json"
+    audit.write_text("{}")
+    operation = {
+        "management_scope": {
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "13": {"campaign_id": "id-13", "cycle_start_date": "2026-08-21"},
+                    "20": {
+                        "campaign_id": "id-20-canary",
+                        "cycle_start_date": "2026-08-23",
+                        "source": "c20_advideo_canary_readback",
+                        "authorized_by": "Rodolfo Mattei",
+                        "authorization_source": "discord:thread:1540939724636819507",
+                        "readback_audit": str(audit),
+                    },
+                }
+            }
+        }
+    }
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "20"}
+    operation["management_scope"]["autonomous_action_scope"]["allowed_campaigns"]["20"]["authorized_by"] = "other"
+    with pytest.raises(RuntimeError, match="provenance"):
+        module.validated_allowed_campaigns(operation)
+
+
 def test_report_tables_paginate_instead_of_hiding_new_campaigns():
     module = load_reports_module()
     pages = module.table_pages(["Camp"], [[f"C{number:02d}"] for number in range(1, 15)], page_size=7)
