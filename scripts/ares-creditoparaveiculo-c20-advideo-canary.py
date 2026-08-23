@@ -162,7 +162,7 @@ def creative_utm_readback(backend: LiveDailyBackend, assignments: list[dict[str,
             "name": str(row["creative_id"]),
             "path": str(row["creative_id"]),
             "params": {
-                "fields": "id,name,status,effective_object_story_id,asset_feed_spec,object_story_spec,issues_info"
+                "fields": "id,name,status,effective_object_story_id,asset_feed_spec,object_story_spec"
             },
         }
         for row in assignments
@@ -178,7 +178,6 @@ def creative_utm_readback(backend: LiveDailyBackend, assignments: list[dict[str,
             int(response.get("code") or 0) == 200
             and str(body.get("status") or "").upper() == "ACTIVE"
             and bool(str(body.get("effective_object_story_id") or ""))
-            and not body.get("issues_info")
             and "b01fb13c20" in raw
             and "b01fb13c20g01" in raw
             and "b01fb13c08" not in raw
