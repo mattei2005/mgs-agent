@@ -52,6 +52,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C20-ADVIDEOS-CANARY-20260823",
+      "next_step": "Aguardar monitor bounded de primeiro gasto; se houver spend/impressões, registrar canário PASS e manter a correção advideos. Se permanecer zero por 30 minutos, continuar diagnóstico de serving sem duplicar a campanha nem reativar criação geral.",
+      "objective": "Corrigir o pre-stage de vídeos para ad-account advideos e provar entrega real na C20 sem duplicação manual no Ads Manager",
+      "source": "discord:thread:1540939724636819507; audit:data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json; forensic:data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json",
+      "state": "c20 criada e recuperada com sucesso após checkpoint: campanha 120250888588510632 active, usd30, maxvol, 1x1x3; adset e três anúncios/creatives active; 6/6 vídeos associados ao advideos da conta; utms c20 validadas; três assets movidos para 02_testing e inventário reconciliado; budget ativo usd435, saldo usd65 no cap usd500. scheduler geral permanece em hold. monitor de primeiro gasto em execução observe-only sem auto-pause.",
+      "thread_id": "1540939724636819507",
+      "updated_at": "2026-08-23T06:26:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -1082,5 +1092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T05:21:02+00:00"
+  "updated_at": "2026-08-23T06:26:22+00:00"
 }

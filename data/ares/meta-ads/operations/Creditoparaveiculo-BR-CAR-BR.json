@@ -282,7 +282,7 @@
     "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
     "production_readback": "Campaign Engine v3 is active under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback; v2 creation/activation crons remain paused as rollback.",
     "c20_advideo_canary_20260823": {
-      "status": "authorized_corrective_recovery_existing_shell",
+      "status": "completed_active_readback_validated",
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1540939724636819507",
       "authorized_at_sp": "2026-08-23T02:37:58-03:00",
@@ -301,7 +301,10 @@
       "corrective_authorized_by": "Rodolfo Mattei",
       "corrective_authorization_source": "discord:thread:1540939724636819507",
       "corrective_authorized_at_sp": "2026-08-23T03:03:02-03:00",
-      "corrective_scope": "recover existing paused C20 shell/adset; update campaign; create only missing 3 creatives+ads; validate; activate USD30"
+      "corrective_scope": "recover existing paused C20 shell/adset; update campaign; create only missing 3 creatives+ads; validate; activate USD30",
+      "campaign_id": "120250888588510632",
+      "completed_at_sp": "2026-08-23T03:23:56.256382-03:00",
+      "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json"
     }
   },
   "roi_policy": {
@@ -317,7 +320,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-20T18:45:25-03:00",
-    "next_required_campaign_number": 20,
+    "next_required_campaign_number": 21,
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
     "prior_wrong_retry_slots": [
@@ -543,6 +546,15 @@
           "authorization_source": "discord:thread:1540939724636819507",
           "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
           "replaced_campaign_id": "120250885355540632"
+        },
+        "20": {
+          "campaign_id": "120250888588510632",
+          "cycle_start_date": "2026-08-23",
+          "source": "c20_advideo_canary_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
+          "request_id": "cpv-c20-advideos-canary-20260823"
         }
       },
       "required": [
@@ -875,7 +887,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-23T03:03:02-03:00",
+  "updated_at": "2026-08-23T03:23:56.256382-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-23T01:48:20.719599-04:00",
+    "updated_at": "2026-08-23T03:26:48-03:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7640,15 +7640,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 148900,
+      "size_bytes": 148933,
       "modified_at": "2026-08-23T00:51:18-04:00",
-      "sha256": "25b4cb09241c376140a2a17954ccd6e866236e8612d0f9958e73e4573efc756c",
+      "sha256": "8b16ef82b8bc7b73ed8f65bdaf549d8662f0b758f9006ecb48c47cb586692921",
       "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting, including read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
-      "validation": "py_compile PASS; 50/50 targeted fixed-report and first-delivery tests PASS via ephemeral uv pytest; live Graph readback confirmed C07/C11-C19 replacements ACTIVE, USD30, MAXVOL, 1x1x3 and old IDs plus C10 copy DELETED; Intraday dry-run classified all ten as D1 on 23/08; first-delivery watcher IDLE with zero armed and zero Meta writes.",
+      "validation": "C20 advideos canary: 121 targeted tests PASS; six videos associated to ad-account advideos; campaign/adset/three ads/three creatives ACTIVE with valid C20 UTMs; three Drive assets moved to 02_TESTING; active budget USD435 under USD500 cap; first-delivery monitor running observe-only.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "b14b77d92f930f79d38006b0921b2215f4ac8ebcf685fda7850c6b37af674335",
+      "test_sha256": "bf44354c7301ae5dd084de698d228b0d6138d0e0d770bc38d916c2566d83d778",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "a2977aa3edf5397414908a96aff3cd868b42e92b2028e7cddad1eaaeaeef01f7",
+      "operation_sha256": "9cd9e26a69acd801fad9b523e1ca1cf3080a7de703014793a65f242055236c19",
       "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260823T045358Z.json",
       "last_report_sha256": "359ab5e9f63db5ccf1982a4aed7b8869185c9867ccd9d29f566d93c7a68233c7",
       "report_infra": {
@@ -7660,7 +7660,7 @@
         "readback": "POST HTTP 200; content empty; embed only; no thread"
       },
       "git_tracked": false,
-      "updated_at": "2026-08-23T01:55:14-03:00",
+      "updated_at": "2026-08-23T03:26:48-03:00",
       "intraday_wrapper_sha256": "6037d8de7da6b8eedc1aa3fcd2141314fd8497d06c97a73c8069e27ea0d7ac8b",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
@@ -8098,6 +8098,54 @@
           "mentions": [],
           "thread_created": false
         }
+      },
+      "c20_advideos_canary_20260823": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1540939724636819507",
+        "campaign_id": "120250888588510632",
+        "adset_id": "120250888589000632",
+        "budget_usd": 30,
+        "bid_strategy": "MAXVOL",
+        "structure": "1x1x3",
+        "status": "ACTIVE",
+        "assets_used": 3,
+        "video_pairs_associated": 3,
+        "video_ids_associated": 6,
+        "upload_edge": "ad_account_advideos",
+        "association_verified": true,
+        "active_budget_usd": 435,
+        "remaining_cap_usd": 65,
+        "cap_usd": 500,
+        "ready_remaining": {
+          "img": 42,
+          "vid": 203,
+          "total": 245,
+          "eligible_unique": 29
+        },
+        "runtime_hashes": {
+          "prestage.py": "dd119d134ffbdd71748fdf7eead62f71fe9df1444d5e7a6bd0214d4a24db8be3",
+          "media_registry.py": "81f129847ec196c3ef1efa9d72d1cfa54881d4238181ccfba9aebb103de280d5",
+          "schema.py": "7442aff2935a6f0a5d177801968d2d165dd5a3d78d2e44d93018db3dabb89e80",
+          "prevalidation.py": "43de8835d7de7709428120868d1c6a6a6388f1a7676d9520d2b597e03a9817d1",
+          "adapters.py": "6ba6ac4a6187136733afe48160771c5d2d7285306961fe9e47a3e9d5d954a47c",
+          "daily_cpv.py": "2eb75125fd2f499f742c0518048d342803b6ced0edb2a728a9badde798e0a513",
+          "cli.py": "6191b6a126ae0bb652de98f0e410e4265f8830848e1e4757a70112f7dfe7630e",
+          "canary.py": "074d20d575eb50b47a91adc0b9c1b9d6add218fb82e6b211c56f88fe164ab971",
+          "recovery.py": "07054bed21fa85bbdea747629dff1eb16e8247521d642352f222fcb086b98d15",
+          "finalizer.py": "28a5abed85538c68c419704a967461aa9839e468c1dd68dbc6bd61a76e5d0dc2"
+        },
+        "test_hashes": {
+          "engine": "32494f3f9b3cceb19fcd50efee309bb89d09752b43a034e3aaa10b0a92b8e1ad",
+          "daily": "bf59b23a61885c4d6b869afd7cea62f4e0e98be2b43fe0e4c4543ca0403940a6",
+          "fixed_reports": "bf44354c7301ae5dd084de698d228b0d6138d0e0d770bc38d916c2566d83d778"
+        },
+        "media_registry_sha256": "524cd8146b03fadbe23724981d9366f967ebfc9175986459c8a20960eebc5224",
+        "final_audit_sha256": "96d9020e8eee516d0c6df89e4b8e7fc87cc355edfe8c7dba8efb7b1be2a202ea",
+        "skill_sha256": "c926a4c435fb1c6bce6afea2a1976b5cb1c95c1d73c3101ec87b453aad281d61",
+        "tests": "121 passed",
+        "creation_hold_still_enabled": true,
+        "first_delivery_mode": "observe_only_no_auto_pause",
+        "updated_at": "2026-08-23T03:26:48-03:00"
       }
     },
     {
