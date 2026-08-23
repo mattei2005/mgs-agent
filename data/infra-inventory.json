@@ -8145,7 +8145,20 @@
         "tests": "121 passed",
         "creation_hold_still_enabled": true,
         "first_delivery_mode": "observe_only_no_auto_pause",
-        "updated_at": "2026-08-23T03:26:48-03:00"
+        "updated_at": "2026-08-23T03:26:48-03:00",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1540971087427539055",
+          "http_status": 200,
+          "delivery": "discord_embed",
+          "content_empty": true,
+          "mentions": [],
+          "thread_created": false
+        },
+        "skill_reference_hashes": {
+          "manifest-and-commands.md": "458813eab472503be43f0f072040ed8724c02198cd117c7d9e785d33b873cf62",
+          "architecture-and-runtime.md": "2c9d56fceb35b2f383e585c42376c09a5a5a8fc51b54e462d74e936e87660f38"
+        }
       }
     },
     {

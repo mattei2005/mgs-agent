@@ -47,7 +47,7 @@ window                     300s
 
 O registry é obrigatório somente para `clone_prestaged`. `pure_clone` reutiliza os creatives/mídias existentes da fonte e não consulta o registry.
 
-Para `clone_prestaged`, registre somente IDs confirmados por Meta readback. O próprio pedido autorizado pode executar pre-stage/upload/readback antes da materialização; não existe obrigação de prepopular o registry sem pedido. A chave é account + asset ID + checksum, e os IDs vertical e square precisam existir com `ready=true`.
+Para `clone_prestaged`, registre somente IDs confirmados por Meta readback no edge `act_{AD_ACCOUNT_ID}/advideos`. O próprio pedido autorizado pode executar pre-stage/upload/readback antes da materialização; não existe obrigação de prepopular o registry sem pedido. A chave é account + asset ID + checksum, os IDs vertical e square precisam existir com `ready=true`, `upload_edge=ad_account_advideos` e `association_verified=true`, e uploads em `/{PAGE_ID}/videos` ficam bloqueados como mídia de campanha.
 
 Never put token, app secret, Page token or signed URL in the registry.
 

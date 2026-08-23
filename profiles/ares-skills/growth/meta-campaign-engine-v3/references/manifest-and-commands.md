@@ -22,7 +22,7 @@ start_time with timezone
 status PAUSED or future ACTIVE
 ```
 
-`clone_prestaged` also requires `source_adset_id`, exactly three ads, and for each media: asset ID, checksum, vertical video ID, square video ID and `ready=true`.
+`clone_prestaged` also requires `source_adset_id`, exactly three ads, and for each media: asset ID, checksum, vertical video ID, square video ID, `ready=true`, `upload_edge=ad_account_advideos` and `association_verified=true`.
 
 Payloads containing `standard_enhancements` or external `https://fb.com/messenger_doc/` are rejected before transport.
 
@@ -46,7 +46,7 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prestage-upload \
   --vertical-file <file> --square-file <file> --confirm-upload
 ```
 
-The v3 pre-stage uploader is active but still requires `--confirm-upload`, Page `ADVERTISE`, exact checksum and both Meta videos reaching ready before registry commit. Manual registration requires `--confirm-readback`.
+The v3 pre-stage uploader is active but still requires `--confirm-upload`, advertiser User Access Token, Page `ADVERTISE` identity, exact checksum, both Meta videos reaching ready and exact ID membership readback in `act_{AD_ACCOUNT_ID}/advideos` before registry commit. It never uploads campaign media to `/{PAGE_ID}/videos`. Manual registration requires `--confirm-readback` and the same ad-account association proof.
 
 Build CPV manifests only when every campaign has three ready media records and the source creative templates are current. `--campaign-numbers` accepts 1–100 values; the planner chunks them into bundles of two automatically:
 
