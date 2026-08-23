@@ -344,7 +344,12 @@
       "first_delivery_leading_ad_id": "120250890183050632",
       "first_delivery_leading_ad_name": "AD 02 - CAR_BR_BR_VID_SEM_ENTRADA_PV_047",
       "first_delivery_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-first-delivery-confirmation-20260823.json",
-      "canary_verdict": "PASS_SOURCE_AD_LINEAGE_AND_AD_COPIES_CREATIVE_PARAMETERS"
+      "canary_verdict": "PASS_SOURCE_AD_LINEAGE_AND_AD_COPIES_CREATIVE_PARAMETERS",
+      "close_readback_at_sp": "2026-08-23T05:35:32.376943-03:00",
+      "close_readback_spend_usd": 0.69,
+      "close_readback_impressions": 26,
+      "close_readback_reach": 1,
+      "close_readback_clicks": 1
     }
   },
   "roi_policy": {
@@ -927,7 +932,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-23T05:34:15.580830-03:00",
+  "updated_at": "2026-08-23T05:35:59.329194-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
