@@ -42,7 +42,60 @@ from ares_campaign_v3.daily_cpv import (
     account_budget_summary,
     usd_minor_label,
     corrective_write_authorization,
+    assignments_from_readback,
 )
+
+
+def test_assignments_preserve_source_lineage_and_use_materialized_video_ids():
+    campaign_ads = []
+    live_ads = []
+    for index in range(1, 4):
+        expected_videos = [
+            {"video_id": f"pre-v-{index}", "adlabels": [{"id": f"vertical-label-{index}", "name": f"vertical-{index}"}]},
+            {"video_id": f"pre-s-{index}", "adlabels": [{"id": f"square-label-{index}", "name": f"square-{index}"}]},
+        ]
+        campaign_ads.append(SimpleNamespace(
+            name=f"AD {index:02d}",
+            source_ad_id=f"source-ad-{index}",
+            media=SimpleNamespace(asset_id=f"asset-{index}", vertical_video_id=f"pre-v-{index}", square_video_id=f"pre-s-{index}"),
+            creative_payload={"asset_feed_spec": {"videos": expected_videos}},
+        ))
+        live_ads.append({
+            "id": f"ad-{index}",
+            "name": f"AD {index:02d}",
+            "status": "ACTIVE",
+            "source_ad_id": f"source-ad-{index}",
+            "creative": {
+                "id": f"creative-{index}",
+                "status": "ACTIVE",
+                "effective_object_story_id": f"page_post_{index}",
+                "asset_feed_spec": {"videos": [
+                    {"video_id": f"derived-s-{index}", "adlabels": [{"id": f"square-label-{index}", "name": f"square-{index}"}]},
+                    {"video_id": f"derived-v-{index}", "adlabels": [{"id": f"vertical-label-{index}", "name": f"vertical-{index}"}]},
+                ]},
+            },
+        })
+    campaign = SimpleNamespace(
+        name="C20",
+        status="ACTIVE",
+        start_time="2026-08-23T05:00:00-03:00",
+        campaign_updates={"daily_budget": "3000"},
+        ads=campaign_ads,
+    )
+    readbacks = {
+        "campaign-20": {
+            "campaign": {"name": "C20", "status": "ACTIVE", "daily_budget": "3000", "start_time": "2026-08-23T05:00:00-03:00"},
+            "adsets": [{"id": "adset-20", "status": "ACTIVE"}],
+            "ads": live_ads,
+        }
+    }
+    result = assignments_from_readback(SimpleNamespace(campaigns=[campaign]), ["campaign-20"], readbacks)
+    assert len(result) == 3
+    assert [row["source_ad_id"] for row in result] == ["source-ad-1", "source-ad-2", "source-ad-3"]
+    assert [row["vertical_video_id"] for row in result] == ["derived-v-1", "derived-v-2", "derived-v-3"]
+    assert [row["square_video_id"] for row in result] == ["derived-s-1", "derived-s-2", "derived-s-3"]
+    assert [row["prestage_vertical_video_id"] for row in result] == ["pre-v-1", "pre-v-2", "pre-v-3"]
+
 
 SP = ZoneInfo("America/Sao_Paulo")
 

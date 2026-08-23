@@ -62,6 +62,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C20-LINEAGE-REBUILD-20260823",
+      "next_step": "Aguardar monitor c20_lineage_first_delivery_monitor; se houver impressões/spend, fechar canário PASS e manter rota v3.0.16. Se zero após 30min, manter ACTIVE e escalar pacote de diagnóstico à Meta; não criar outra campanha nem auto-pausar.",
+      "objective": "Substituir a C20 sem delivery por campanha limpa criada com Ad Copies API e lineage preservada",
+      "source": "discord:thread:1540939724636819507; activation:data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json; engine:data/ares/meta-ads/engine-v3/audit/cpv-c20-lineage-rebuild-r2-20260823.json; readback:data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-rebuild-final-paused-readback-20260823.json",
+      "state": "autorização ampla de rodolfo executada. c20 antiga 120250888588510632 foi pausada e deleted com zero spend/impressões. campaign engine v3.0.16 agora exige source_ad_id não zero, usa post /{source_ad_id}/copies + creative_parameters, separa campaign/adset stages e rastreia ids de pre-stage versus derivados. nova c20 120250890180320632 criada pelo executor central, revisada e active em usd30/maxvol, estrutura 1x1x3, source lineage 3/3, utms c20/c20g01, 3 story ids e 6 vídeos derivados ready ligados por asset_id+checksum. budget ativo usd435; saldo cap usd65. inventário/allowlist/guardrails apontam somente ao novo id, histórico antigo preservado. monitor read-only de primeiro gasto roda por até 30min, sem auto-pausa.",
+      "thread_id": "1540939724636819507",
+      "updated_at": "2026-08-23T08:24:27+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -1092,5 +1102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T07:41:54+00:00"
+  "updated_at": "2026-08-23T08:24:27+00:00"
 }
