@@ -89,6 +89,18 @@ Para coleta integral, deduplicação SHA-256, sanitização, pacote de referênc
 
 Para comprovar mudanças task-local sem tocar no collector canônico, use o A/B reproduzível de `references/task-local-collector-controlled-validation.md`: baseline byte-identical, candidato com diff isolado, dois `report.json`, hashes dos downloads, SHA antes/depois do canônico e `git diff --exit-code`.
 
+## Retomada histórica e URL de um criativo já baixado
+
+Quando Rodolfo pedir para lembrar “qual era o criativo” e consultar novamente a URL usada:
+
+1. Não assumir a library pela memória ou pelo nome do pedido. Enumerar por read-only os pacotes em `MGS-AGENTS/CRIATIVOS/LIBRARY META` com a Service Account canônica e ler `inventory.json`/`README.txt` por readback.
+2. Revalidar o conteúdo real do asset. Para vídeo, gerar amostras de vários momentos da timeline; uma miniatura ou o primeiro frame não bastam. Para imagem, inspecionar os pixels reais.
+3. Identificar `canonical_filename`, `library_ids[]`, Drive ID/checksum e distinguir duplicatas da mesma linhagem.
+4. Se houver relatório histórico de CTA, mapear o Library ID ao `targetUrl` arquivado. Depois consultar novamente a Library atual pela rota residencial e extrair os CTAs atuais por Library ID/card, sem misturar URL histórica com estado atual.
+5. Seguir a landing page/quiz atual até o destino externo final e validar o último URL com HTTP/browser real.
+6. Se o mesmo criativo não estiver mais ativo, dizer explicitamente: informar a URL histórica associada, as URLs atualmente ativas do site e o destino externo atual, sem afirmar que o criativo antigo ainda usa a rota.
+7. Distinguir semanticamente moto, e-bike, bicicleta e mobility scooter; se o pedido humano usar um termo aproximado, reportar a classificação visual real e os candidatos próximos.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:

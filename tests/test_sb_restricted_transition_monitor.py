@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 import importlib.util
+import json
+import tempfile
 import unittest
+from decimal import Decimal
 from pathlib import Path
+from typing import Any
 
 SCRIPT = Path('/root/mgs-agent/scripts/sb-restricted-transition-monitor.py')
 spec = importlib.util.spec_from_file_location('sb_restricted_transition_monitor', SCRIPT)
@@ -98,6 +102,28 @@ class TransitionComparisonTest(unittest.TestCase):
         self.assertEqual(current['revenue_7d_brl'], 'R$ 4,00')
         self.assertIn('Receita 7d', rendered)
         self.assertIn('R$ 4,00', rendered)
+
+    def test_state_serializes_decimal_revenue_without_corruption(self):
+        current: dict[str, Any] = row(7, '2026-08-12')
+        current['revenue_7d'] = Decimal('4.00')
+        transition = {'kind': 'nova', 'key': monitor.stable_key(current), 'before': None, 'after': current}
+        original_state_path = monitor.STATE_PATH
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            setattr(monitor, 'STATE_PATH', Path(tmp_dir) / 'state.json')
+            try:
+                monitor.save_state(
+                    {monitor.stable_key(current): current},
+                    {'monitored_active': 1},
+                    [transition],
+                    [],
+                    'fixture',
+                )
+                saved = json.loads(monitor.STATE_PATH.read_text(encoding='utf-8'))
+            finally:
+                setattr(monitor, 'STATE_PATH', original_state_path)
+
+        self.assertEqual(saved['active'][monitor.stable_key(current)]['revenue_7d'], '4.00')
+        self.assertEqual(saved['last_transitions'][0]['after']['revenue_7d'], '4.00')
 
     def test_exit_requires_live_inactive_readback_and_ignores_onhold(self):
         class Daily:

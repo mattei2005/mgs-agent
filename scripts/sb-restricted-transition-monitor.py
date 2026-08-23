@@ -15,6 +15,7 @@ import os
 import tempfile
 from collections import Counter
 from datetime import datetime
+from decimal import Decimal
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -31,6 +32,12 @@ EXCLUDED_STATUSES = {'on-hold', 'blocked'}
 
 def now_iso():
     return datetime.now(NY).isoformat(timespec='seconds')
+
+
+def json_default(value):
+    if isinstance(value, Decimal):
+        return str(value)
+    raise TypeError(f'Object of type {value.__class__.__name__} is not JSON serializable')
 
 
 def load_module(name, path):
@@ -225,7 +232,7 @@ def save_state(snapshot, counts, transitions, resolved, source):
     STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp_name = tempfile.mkstemp(prefix=STATE_PATH.name + '.', dir=str(STATE_PATH.parent))
     with os.fdopen(fd, 'w', encoding='utf-8') as handle:
-        json.dump(state, handle, ensure_ascii=False, indent=2, sort_keys=True)
+        json.dump(state, handle, ensure_ascii=False, indent=2, sort_keys=True, default=json_default)
         handle.write('\n')
     os.replace(tmp_name, STATE_PATH)
     return state
@@ -418,7 +425,7 @@ def main():
         'sheet_update': sheet_update,
         'post_results': post_results,
         'state_written': bool(args.apply),
-    }, ensure_ascii=False, indent=2))
+    }, ensure_ascii=False, indent=2, default=json_default))
 
 
 if __name__ == '__main__':
