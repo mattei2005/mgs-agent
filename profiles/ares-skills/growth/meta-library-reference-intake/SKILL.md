@@ -100,6 +100,7 @@ Quando Rodolfo pedir para lembrar “qual era o criativo” e consultar novament
 5. Seguir a landing page/quiz atual até o destino externo final e validar o último URL com HTTP/browser real.
 6. Se o mesmo criativo não estiver mais ativo, dizer explicitamente: informar a URL histórica associada, as URLs atualmente ativas do site e o destino externo atual, sem afirmar que o criativo antigo ainda usa a rota.
 7. Distinguir semanticamente moto, e-bike, bicicleta e mobility scooter; se o pedido humano usar um termo aproximado, reportar a classificação visual real e os candidatos próximos.
+8. Se nenhum pacote histórico corresponder simultaneamente ao produto e ao funil descritos, não forçar o candidato visual mais próximo. Fazer busca temática atual na Meta Library com frase exata e variações curtas, identificar o anunciante/domínio pelos cards, reconsultar a library exata desse domínio e só então mapear criativo → Library ID → URL. Uma lembrança como “moto + financiamento” exige ambos os sinais; e-bike/brinde sem financiamento não é correspondência válida.
 
 ## Verificação de encerramento
 
