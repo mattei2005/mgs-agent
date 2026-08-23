@@ -63,13 +63,14 @@ The daily summary reads the current Smart Bidding state after the 07:30 DTR sync
 The restricted-pages delta report should include:
 
 ```text
-Página | FB Page ID | Page ID | Bot user | Segurador | Sites | Status SB | Códigos | Data saída
+Página | FB Page ID | Page ID | Bot user | Segurador | Sites | Receita 7d | Status SB | Códigos | Data saída
 ```
 
 Rules:
 
 ```text
 - Include `Sites` column; list multiple sites comma-separated when derivable from SB row/template/domain/publisher.
+- Include `Receita 7d` from the live Smart Bidding Messenger rolling seven-day report. Aggregate `REVENUE` by exact `bot user + UTM_CAMPAIGN`, with exact `bot user + FB Page ID` only as fallback. Format in BRL; if the financial lookup is unavailable or unmatched, show `—` and still deliver the restriction alert.
 - Include `Status SB` even though normal channel scope is Broadcast, because it makes the operational status explicit.
 - `Data saída` must be the last column.
 - Sort rows by `Data saída` ascending.
