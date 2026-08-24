@@ -658,7 +658,7 @@
     "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
     "intraday_style": "aligned monospace table matching Rodolfo reference",
     "intraday_columns": [
-      "Sinal",
+      "R/E",
       "Camp",
       "Lance",
       "Dia",
@@ -698,11 +698,19 @@
     "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
     "new_campaign_visibility_required": true,
     "report_scope_is_separate_from_autonomous_write_allowlist": true,
-    "legend": {
-      "green": "healthy, maintain or scale",
-      "yellow": "observe or gated",
-      "red": "critical action",
-      "white": "insufficient data"
+    "intraday_signal_semantics": {
+      "column": "R/E",
+      "order": [
+        "Smart Bidding ROI real",
+        "Smart Bidding ROI estimado"
+      ],
+      "green": "strictly positive",
+      "red": "strictly negative",
+      "yellow": "exactly zero",
+      "white": "unavailable or not calculable",
+      "action_is_separate": true,
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24T12:13:14-03:00"
     },
     "daily_dispatch_plan": [
       {
@@ -801,11 +809,12 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "hybrid_mobile_cards_desktop_table_v2",
+        "style": "hybrid_mobile_cards_desktop_table_v3_roi_real_estimated",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
-        "campaign_header": "signal + Camp-DD/MM + Lance + Dn + operator status",
-        "action_line": "separate line; OBSERVAR renders as OBSERVAR · D1/D2",
+        "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
+        "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
+        "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
         "metrics": "two columns per line: Budget/Spend, Custo/ROAS, ROI real/ROI est; then three dated ROI SB lines for the current partial day and two prior dates",
         "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
         "divider": "34 heavy horizontal characters between campaigns",
@@ -814,7 +823,7 @@
           "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
           "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
           "overflow": "only paginate on real character overflow, repeating the header and preserving every row exactly once",
-          "validated_case": "C07-C20 uses one table: 14 campaign rows, 1693 table characters and 1733 characters with title",
+          "validated_case": "C07-C20 uses one R/E table: 14 campaign rows, 1700 table characters and 1740 characters with title",
           "corrected_by": "Rodolfo Mattei",
           "corrected_at": "2026-08-24T10:24:49-04:00",
           "source_thread_id": "1541452429823049818"
@@ -830,7 +839,7 @@
           "audit_field": "chunking_retry_used"
         },
         "approved_by": "Rodolfo Mattei",
-        "approved_at": "2026-08-21",
+        "approved_at": "2026-08-24T12:13:14-03:00",
         "final_standard_confirmation": "Rodolfo Mattei confirmed the hybrid layout as the Intraday default after visual readback on mobile and desktop",
         "source_thread_id": "1540379584124555334"
       }
@@ -941,7 +950,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-24T11:24:49-03:00",
+  "updated_at": "2026-08-24T12:13:14-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -1309,7 +1318,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.64",
+  "playbook_version": "1.0.65",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

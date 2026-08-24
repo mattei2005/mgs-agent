@@ -405,6 +405,25 @@
       "updated_at": "2026-08-21T15:49:28+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-roi-action-visual-semantics",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T12:13:14-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-ACTION-VISUAL-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Intraday separa ROI real/estimado de acao",
+      "updated_at": "2026-08-24T15:14:06+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -1470,5 +1489,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T14:27:58+00:00"
+  "updated_at": "2026-08-24T15:14:06+00:00"
 }
