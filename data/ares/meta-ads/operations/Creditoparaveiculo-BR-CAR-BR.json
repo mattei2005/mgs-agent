@@ -173,12 +173,36 @@
   },
   "daily_budget_policy": {
     "operational_account_cap_usd": 500.0,
+    "operational_account_floor_semantics": "USD500 is the minimum internal budget envelope, not a hard ceiling and not Meta account_spend_limit or billing",
+    "dynamic_account_cap": {
+      "enabled": true,
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-24T14:02:37-04:00",
+      "authorization_source": "discord:thread:1541506896299556894",
+      "mode": "raise_effective_internal_envelope_to_exact_authorized_required_budget",
+      "allowed_scopes": [
+        "scheduled_creation",
+        "roi_scale",
+        "guardrail_reactivation"
+      ],
+      "required_budget_formula": "live configured-active campaign budget plus the exact new USD30 campaign budgets and/or approved ROI scale deltas in the current prevalidated plan",
+      "decrease_policy": "never auto-lower the configured USD500 floor; each run recalculates the effective envelope from live Meta",
+      "billing_and_spend_limit_write": false,
+      "campaign_ceiling_preserved_usd": 150.0,
+      "fail_closed_on": [
+        "invalid or missing live campaign budget",
+        "account identity, currency, timezone or health mismatch",
+        "campaign outside immutable allowlist for autonomous scale/reactivation",
+        "campaign budget above USD150",
+        "creation, scale or reactivation outside its authorized playbook"
+      ]
+    },
     "new_campaign_share_default": 0.2,
     "new_campaign_share_flexible_max": 0.3,
     "new_campaign_initial_budget_usd": 30.0,
     "campaign_operational_ceiling_usd": 150.0,
     "campaign_ceiling_definition_status": "approved_guardrail",
-    "account_cap_scaling_policy_status": "Rodolfo Mattei raised the internal daily operational cap to USD500 on 2026-08-22; Ares may change campaign budgets only through approved ROI tiers within this cap and never raises it autonomously",
+    "account_cap_scaling_policy_status": "Superseded on 2026-08-24 by Rodolfo: USD500 is the internal floor; the effective envelope increases automatically to the exact live configured-active budget plus authorized creation/ROI-scale/reactivation deltas, without changing billing or account_spend_limit",
     "campaign_daily_ceiling_usd": 150.0,
     "reactivation_campaigns_initial_budget_usd": {
       "07": 30.0,
@@ -191,17 +215,17 @@
   },
   "daily_new_campaign_routine": {
     "authorized_by": "Rodolfo Mattei",
-    "reconfirmed_at_et": "2026-08-20T14:48:29-04:00",
+    "reconfirmed_at_et": "2026-08-24T14:02:37-04:00",
     "activated_at_et": "2026-08-20T17:06:18-04:00",
-    "status": "paused_lifecycle_observation",
-    "responsibility": "Ares loops through D1/D2/D3 analysis, approved pause/scale actions and only then creates a new cohort when lifecycle need and authority are confirmed; creation is not unconditional daily output",
+    "status": "active_daily_17h",
+    "responsibility": "Ares loops through D1/D2/D3 analysis, approved pause/scale actions and the daily 17:00 campaign creation authorized by Rodolfo; all non-budget campaign, creative, quota and readback gates remain fail-closed",
     "creation_hold": {
-      "enabled": true,
+      "enabled": false,
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-22T17:19:27-04:00",
       "minimum_blocked_operational_date_sp": "2026-08-23",
       "expires_automatically": false,
-      "reason": "observe whether the latest campaigns begin spending and preserve the D1-D2-D3 analysis-pause-scale-create loop",
+      "reason": "historical hold completed; Rodolfo released daily creation after lifecycle observation",
       "observe_campaigns": [
         14,
         15,
@@ -217,12 +241,16 @@
         "approved pause and scale guardrails",
         "first-delivery watcher"
       ],
-      "blocked_actions": [
+      "historical_blocked_actions": [
         "new campaign creation",
         "clone for a new campaign slot",
         "automatic resume of daily creation scheduler"
       ],
-      "resume_gate": "lifecycle review must justify a new cohort and Rodolfo or Nicolas must explicitly release creation",
+      "released_by": "Rodolfo Mattei",
+      "released_at_et": "2026-08-24T14:02:37-04:00",
+      "release_source": "discord:thread:1541506896299556894",
+      "release_instruction": "resume the daily Campaign Engine v3 scheduler at 17:00 Sao Paulo and prevent the internal budget envelope from blocking authorized creation or scale",
+      "resume_gate": "released; future holds still require Rodolfo or Nicolas and never expire automatically",
       "resume_authority": [
         "Rodolfo",
         "Nicolas"
@@ -275,7 +303,7 @@
     "campaign_name_date_source": "delivery/start date; never the creation date",
     "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
-    "budget_gate": "complete live active-budget preflight; never exceed USD500 account cap",
+    "budget_gate": "complete live active-budget preflight; USD500 is the floor and the effective internal envelope rises to the exact authorized creation/scale/reactivation requirement; per-campaign USD150 and all non-budget gates remain fail-closed",
     "creative_source": "Shared Drive MGS-AGENTS/CRIATIVOS/CAR_BR_BR; select only reconciled unique lineages and move used assets from 01_READY to 02_TESTING after Meta readback",
     "stock_reporting_required": true,
     "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
@@ -486,7 +514,7 @@
         "transport": "single-attempt absolute POST then bounded GET before any retry",
         "state_machine": "in_flight persisted and fsynced before POST; recovery GET accepts only original or desired value",
         "campaign_preflight": "immutable allowlist ID, exact number, status, budget, updated_time, 1 active adset and 3 active ads",
-        "batch_preflight": "complete configured-active account budget in integer cents; all scale candidates fail together if combined plan exceeds cap",
+        "batch_preflight": "complete configured-active account budget in integer cents; calculate the effective internal envelope as max(USD500 floor, live active total plus the exact approved batch delta); unexpected post-plan drift still fails the batch readback",
         "final_readback": "campaign and hierarchy GET per write plus full active-account budget GET"
       },
       "allowed_campaigns": {
