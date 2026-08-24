@@ -91,6 +91,16 @@
       "updated_at": "2026-08-23T05:21:02+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV-DYNAMIC-BUDGET-CRON-20260824",
+      "next_step": "Aplicar regra dinâmica em criação, escala e reativação; liberar hold; testar dry-run e reativar o cron com readback.",
+      "objective": "Religar criação diária CPV às 17:00 São Paulo e tornar o envelope interno de budget dinâmico para criação e escalas autorizadas",
+      "source": "discord:thread:1541506896299556894; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "autorização explícita de rodolfo recebida; cron v3 identificado pausado e hold de lifecycle ainda ativo. implementação e validação pendentes.",
+      "thread_id": "1541506896299556894",
+      "updated_at": "2026-08-24T17:59:53+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV-HIGH-SCALE-CAMPAIGN-OPTIMIZATION-20260821",
       "next_step": "Aguardar execução às 17:00 São Paulo. Após o ciclo, analisar observability por meta_preflight/drive/reconciliation/asset/prestage/manifest/engine/postprocess, status C14/C15, quota e stock; P1 possível: reduzir full reconciliation e paralelizar prestage conforme medição real.",
@@ -1112,5 +1122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T14:01:31+00:00"
+  "updated_at": "2026-08-24T17:59:53+00:00"
 }

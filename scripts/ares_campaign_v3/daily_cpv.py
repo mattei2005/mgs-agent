@@ -438,21 +438,39 @@ def active_budget_minor(campaigns: list[dict[str, Any]]) -> int:
     return total
 
 
-def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> dict[str, int]:
+def effective_account_cap_minor(policy: dict[str, Any], required_minor: int, scope: str) -> dict[str, int | bool]:
+    base_cap_minor = int(Decimal(str(policy.get("operational_account_cap_usd") or 0)) * 100)
+    if base_cap_minor <= 0:
+        raise DailyBlocked("budget_cap", "operational account budget floor is invalid")
+    dynamic = policy.get("dynamic_account_cap") or {}
+    allowed_scopes = {str(item) for item in dynamic.get("allowed_scopes") or []}
+    dynamic_enabled = dynamic.get("enabled") is True and scope in allowed_scopes
+    cap_minor = max(base_cap_minor, required_minor) if dynamic_enabled else base_cap_minor
+    return {
+        "base_cap_minor": base_cap_minor,
+        "cap_minor": cap_minor,
+        "cap_adjusted_minor": max(0, cap_minor - base_cap_minor),
+        "dynamic_enabled": dynamic_enabled,
+    }
+
+
+def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> dict[str, int | bool]:
     policy = operation.get("daily_budget_policy") or {}
-    cap_minor = int(Decimal(str(policy.get("operational_account_cap_usd") or 0)) * 100)
     initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
     before = active_budget_minor(campaigns)
-    if cap_minor <= 0 or initial_minor <= 0:
-        raise DailyBlocked("budget_cap", "operational cap or initial campaign budget is invalid")
+    if initial_minor <= 0:
+        raise DailyBlocked("budget_cap", "initial campaign budget is invalid")
+    required_minor = before + count * initial_minor
+    envelope = effective_account_cap_minor(policy, required_minor, "scheduled_creation")
+    cap_minor = int(envelope["cap_minor"])
     available = max(0, cap_minor - before)
     capacity = available // initial_minor
     selected = min(count, capacity)
     if selected < 1:
         raise DailyBlocked(
             "budget_cap",
-            "no new campaign fits the operational account cap at the approved initial budget",
-            {"active_before_minor": before, "available_minor": available, "initial_minor": initial_minor, "desired_count": count, "capacity": capacity, "cap_minor": cap_minor},
+            "no new campaign fits the operational account budget envelope at the approved initial budget",
+            {"active_before_minor": before, "available_minor": available, "initial_minor": initial_minor, "desired_count": count, "capacity": capacity, **envelope},
         )
     after = before + selected * initial_minor
     return {
@@ -464,7 +482,7 @@ def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: d
         "deferred_by_budget_count": count - selected,
         "new_minor": selected * initial_minor,
         "projected_minor": after,
-        "cap_minor": cap_minor,
+        **envelope,
     }
 
 
