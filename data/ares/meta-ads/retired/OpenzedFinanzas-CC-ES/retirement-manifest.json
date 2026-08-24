@@ -1,0 +1,1742 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "status": "retired_from_ares_active_scope",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1541581677602545825",
+  "retired_at": "2026-08-24T23:06:02.176478+00:00",
+  "reason": "OpenzedFinanzas site and ad account will not run now; Ares architecture is being rebuilt for Eggbev US-CC-EN BOT.",
+  "history_policy": "Operational contracts and state were moved out of active loader paths. Existing audit, report, log and Git history remain preserved and must not be treated as active configuration.",
+  "total_files_moved": 344,
+  "counts_by_category": {
+    "accounts": 1,
+    "metrics": 1,
+    "operations": 1,
+    "permissions": 1,
+    "policies": 2,
+    "rules": 2,
+    "state": 336
+  },
+  "mappings": [
+    {
+      "source": "accounts/1356770869843984.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/accounts/1356770869843984.json",
+      "bytes": 1699
+    },
+    {
+      "source": "metrics/openzedfinanzas_cc_es_metrics_v1.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/metrics/openzedfinanzas_cc_es_metrics_v1.json",
+      "bytes": 2056
+    },
+    {
+      "source": "operations/OpenzedFinanzas-CC-ES.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/operations/OpenzedFinanzas-CC-ES.json",
+      "bytes": 8041
+    },
+    {
+      "source": "permissions/pilot-permissions.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/permissions/pilot-permissions.json",
+      "bytes": 467
+    },
+    {
+      "source": "policies/openzedfinanzas_cc_es_hoa_v1.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/policies/openzedfinanzas_cc_es_hoa_v1.json",
+      "bytes": 4350
+    },
+    {
+      "source": "policies/openzedfinanzas_cc_es_hoa_v2.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/policies/openzedfinanzas_cc_es_hoa_v2.json",
+      "bytes": 3522
+    },
+    {
+      "source": "rules/openzedfinanzas_cc_es_intraday_v1.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/rules/openzedfinanzas_cc_es_intraday_v1.json",
+      "bytes": 6602
+    },
+    {
+      "source": "rules/openzedfinanzas_cc_es_intraday_v2.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/rules/openzedfinanzas_cc_es_intraday_v2.json",
+      "bytes": 5870
+    },
+    {
+      "source": "state/campaign-action-provenance-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/campaign-action-provenance-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "bytes": 495
+    },
+    {
+      "source": "state/campaign-test-grace.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/campaign-test-grace.json",
+      "bytes": 131
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T034327Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T034327Z.json",
+      "bytes": 3687
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T060004Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T060004Z.json",
+      "bytes": 3656
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T100004Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T100004Z.json",
+      "bytes": 4308
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T130005Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T130005Z.json",
+      "bytes": 4351
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T160006Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T160006Z.json",
+      "bytes": 4317
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T205115Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260618T205115Z.json",
+      "bytes": 4321
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182511Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182511Z.json",
+      "bytes": 4733
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182601Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182601Z.json",
+      "bytes": 4691
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182739Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T182739Z.json",
+      "bytes": 4691
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T200016Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260619T200016Z.json",
+      "bytes": 4706
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T060040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T060040Z.json",
+      "bytes": 15510
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T100040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T100040Z.json",
+      "bytes": 16429
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T130101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T130101Z.json",
+      "bytes": 15250
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T160101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T160101Z.json",
+      "bytes": 16119
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T174233Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T174233Z.json",
+      "bytes": 15246
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T174430Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T174430Z.json",
+      "bytes": 15260
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T200000Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T200000Z.json",
+      "bytes": 22045
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T200102Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T200102Z.json",
+      "bytes": 15303
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T233818Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T233818Z.json",
+      "bytes": 15503
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T233913Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T233913Z.json",
+      "bytes": 16593
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T234044Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T234044Z.json",
+      "bytes": 16413
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T234203Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260620T234203Z.json",
+      "bytes": 16416
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010701Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010701Z.json",
+      "bytes": 24384
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010757Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010757Z.json",
+      "bytes": 24376
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010821Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010821Z.json",
+      "bytes": 24361
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010938Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T010938Z.json",
+      "bytes": 24405
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011232Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011232Z.json",
+      "bytes": 24408
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011319Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011319Z.json",
+      "bytes": 24404
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011404Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T011404Z.json",
+      "bytes": 24404
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012404Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012404Z.json",
+      "bytes": 24450
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012457Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012457Z.json",
+      "bytes": 24434
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012542Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012542Z.json",
+      "bytes": 24434
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012652Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T012652Z.json",
+      "bytes": 24388
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T013300Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T013300Z.json",
+      "bytes": 21401
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T013351Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T013351Z.json",
+      "bytes": 21442
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T060012Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T060012Z.json",
+      "bytes": 21540
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T100012Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T100012Z.json",
+      "bytes": 21667
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T130013Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T130013Z.json",
+      "bytes": 21750
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T160013Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T160013Z.json",
+      "bytes": 21761
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T200013Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260621T200013Z.json",
+      "bytes": 21739
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T060015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T060015Z.json",
+      "bytes": 21535
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T100015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T100015Z.json",
+      "bytes": 21732
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T160016Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T160016Z.json",
+      "bytes": 21796
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T160931Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T160931Z.json",
+      "bytes": 21753
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161211Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161211Z.json",
+      "bytes": 21784
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161216Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161216Z.json",
+      "bytes": 21801
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161221Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T161221Z.json",
+      "bytes": 21777
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T200017Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260622T200017Z.json",
+      "bytes": 21945
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121730Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121730Z.json",
+      "bytes": 21379
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121735Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121735Z.json",
+      "bytes": 21705
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121739Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T121739Z.json",
+      "bytes": 21443
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T130034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T130034Z.json",
+      "bytes": 21487
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T160034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T160034Z.json",
+      "bytes": 21496
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T200035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260625T200035Z.json",
+      "bytes": 21556
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T060036Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T060036Z.json",
+      "bytes": 20821
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T100050Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T100050Z.json",
+      "bytes": 20854
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T130051Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T130051Z.json",
+      "bytes": 20861
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T160051Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T160051Z.json",
+      "bytes": 20866
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T200052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260626T200052Z.json",
+      "bytes": 20871
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T060055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T060055Z.json",
+      "bytes": 19673
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T100056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T100056Z.json",
+      "bytes": 19673
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T130057Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T130057Z.json",
+      "bytes": 19687
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T160058Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T160058Z.json",
+      "bytes": 19691
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T200058Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260627T200058Z.json",
+      "bytes": 19717
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T100102Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T100102Z.json",
+      "bytes": 18173
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T130002Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T130002Z.json",
+      "bytes": 18185
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T160003Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T160003Z.json",
+      "bytes": 18201
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T200005Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260628T200005Z.json",
+      "bytes": 18205
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T060011Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T060011Z.json",
+      "bytes": 18159
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T100012Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T100012Z.json",
+      "bytes": 18179
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T130015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T130015Z.json",
+      "bytes": 18201
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T160014Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T160014Z.json",
+      "bytes": 18201
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T200015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260629T200015Z.json",
+      "bytes": 18205
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T060017Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T060017Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T100019Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T100019Z.json",
+      "bytes": 18159
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T130019Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T130019Z.json",
+      "bytes": 18171
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T160020Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T160020Z.json",
+      "bytes": 18187
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T200048Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260630T200048Z.json",
+      "bytes": 18191
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T060050Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T060050Z.json",
+      "bytes": 18135
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T100053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T100053Z.json",
+      "bytes": 18147
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T130052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T130052Z.json",
+      "bytes": 18151
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T160053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T160053Z.json",
+      "bytes": 18167
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T200054Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260701T200054Z.json",
+      "bytes": 18167
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T060101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T060101Z.json",
+      "bytes": 18131
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T100028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T100028Z.json",
+      "bytes": 18151
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T130029Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T130029Z.json",
+      "bytes": 18161
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T160030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T160030Z.json",
+      "bytes": 18161
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T200030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260702T200030Z.json",
+      "bytes": 18161
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T060033Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T060033Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T100035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T100035Z.json",
+      "bytes": 18127
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T130035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T130035Z.json",
+      "bytes": 18127
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T160035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T160035Z.json",
+      "bytes": 18127
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T200037Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260703T200037Z.json",
+      "bytes": 18127
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T060039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T060039Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T100040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T100040Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T130041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T130041Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T160048Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T160048Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T200034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260704T200034Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T060037Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T060037Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T100035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T100035Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T130034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T130034Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T160035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T160035Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T200036Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260705T200036Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T060035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T060035Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T100038Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T100038Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T130038Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T130038Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T160039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T160039Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T200040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260706T200040Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T060043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T060043Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T100045Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T100045Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T130046Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T130046Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T160011Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T160011Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T200014Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260707T200014Z.json",
+      "bytes": 18123
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T060015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T060015Z.json",
+      "bytes": 18195
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T100017Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T100017Z.json",
+      "bytes": 18282
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T130017Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T130017Z.json",
+      "bytes": 18311
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T160018Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T160018Z.json",
+      "bytes": 18285
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T200019Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260708T200019Z.json",
+      "bytes": 18319
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T060022Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T060022Z.json",
+      "bytes": 18261
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T100023Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T100023Z.json",
+      "bytes": 18289
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T130024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T130024Z.json",
+      "bytes": 18315
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T160026Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T160026Z.json",
+      "bytes": 18299
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T200052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260709T200052Z.json",
+      "bytes": 18316
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T060037Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T060037Z.json",
+      "bytes": 18255
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T100038Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T100038Z.json",
+      "bytes": 18252
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T130039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T130039Z.json",
+      "bytes": 18322
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T160045Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T160045Z.json",
+      "bytes": 18304
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T200022Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260710T200022Z.json",
+      "bytes": 18310
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T060052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T060052Z.json",
+      "bytes": 18263
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T100052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T100052Z.json",
+      "bytes": 18292
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T130053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T130053Z.json",
+      "bytes": 18315
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T160054Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T160054Z.json",
+      "bytes": 18298
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T200055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260711T200055Z.json",
+      "bytes": 18312
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T060053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T060053Z.json",
+      "bytes": 18244
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T100054Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T100054Z.json",
+      "bytes": 18281
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T130055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T130055Z.json",
+      "bytes": 18295
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T160055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T160055Z.json",
+      "bytes": 18283
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T200039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260712T200039Z.json",
+      "bytes": 18308
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T060024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T060024Z.json",
+      "bytes": 18257
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T100024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T100024Z.json",
+      "bytes": 18287
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T130028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T130028Z.json",
+      "bytes": 18263
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T160026Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T160026Z.json",
+      "bytes": 18302
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T200030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T200030Z.json",
+      "bytes": 18279
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T205535Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T205535Z.json",
+      "bytes": 19060
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T213449Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T213449Z.json",
+      "bytes": 19060
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T220137Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260713T220137Z.json",
+      "bytes": 22516
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T060024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T060024Z.json",
+      "bytes": 22421
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T100025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T100025Z.json",
+      "bytes": 22436
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T130026Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T130026Z.json",
+      "bytes": 22452
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T160027Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T160027Z.json",
+      "bytes": 22472
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T200025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T200025Z.json",
+      "bytes": 22490
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T200420Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T200420Z.json",
+      "bytes": 22487
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T235138Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T235138Z.json",
+      "bytes": 22449
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T235426Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260714T235426Z.json",
+      "bytes": 22467
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T060028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T060028Z.json",
+      "bytes": 22414
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T100030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T100030Z.json",
+      "bytes": 22444
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T130030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T130030Z.json",
+      "bytes": 22442
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T160035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T160035Z.json",
+      "bytes": 22437
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T200036Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260715T200036Z.json",
+      "bytes": 22478
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T060042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T060042Z.json",
+      "bytes": 22433
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T100041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T100041Z.json",
+      "bytes": 22445
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T130042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T130042Z.json",
+      "bytes": 22454
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T160043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T160043Z.json",
+      "bytes": 22489
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T200030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260716T200030Z.json",
+      "bytes": 22478
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T060032Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T060032Z.json",
+      "bytes": 22464
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T100031Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T100031Z.json",
+      "bytes": 22429
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T130033Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T130033Z.json",
+      "bytes": 22431
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T160033Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T160033Z.json",
+      "bytes": 22466
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T200035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260717T200035Z.json",
+      "bytes": 22469
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T060040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T060040Z.json",
+      "bytes": 22443
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T100040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T100040Z.json",
+      "bytes": 22463
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T130039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T130039Z.json",
+      "bytes": 22483
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T160040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T160040Z.json",
+      "bytes": 22480
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T200043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260718T200043Z.json",
+      "bytes": 22469
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T060045Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T060045Z.json",
+      "bytes": 22434
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T100047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T100047Z.json",
+      "bytes": 22459
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T130049Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T130049Z.json",
+      "bytes": 22469
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T160047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T160047Z.json",
+      "bytes": 22487
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T200047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260719T200047Z.json",
+      "bytes": 22474
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T060024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T060024Z.json",
+      "bytes": 22446
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T100023Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T100023Z.json",
+      "bytes": 22449
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T130024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T130024Z.json",
+      "bytes": 22442
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T160025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T160025Z.json",
+      "bytes": 22475
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T200026Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260720T200026Z.json",
+      "bytes": 22483
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T060030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T060030Z.json",
+      "bytes": 22463
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T100029Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T100029Z.json",
+      "bytes": 22452
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T130031Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T130031Z.json",
+      "bytes": 22462
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T160025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T160025Z.json",
+      "bytes": 22484
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T200027Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260721T200027Z.json",
+      "bytes": 22495
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T060029Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T060029Z.json",
+      "bytes": 22502
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T100027Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T100027Z.json",
+      "bytes": 22487
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T130028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T130028Z.json",
+      "bytes": 22516
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T160032Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T160032Z.json",
+      "bytes": 22506
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T200031Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260722T200031Z.json",
+      "bytes": 22482
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T060035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T060035Z.json",
+      "bytes": 22438
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T100034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T100034Z.json",
+      "bytes": 22432
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T130036Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T130036Z.json",
+      "bytes": 22450
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T200037Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260723T200037Z.json",
+      "bytes": 22612
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T060041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T060041Z.json",
+      "bytes": 22517
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T100040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T100040Z.json",
+      "bytes": 22530
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T130042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T130042Z.json",
+      "bytes": 22545
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T160042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T160042Z.json",
+      "bytes": 22606
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T200044Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260724T200044Z.json",
+      "bytes": 22604
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T060052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T060052Z.json",
+      "bytes": 22517
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T100047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T100047Z.json",
+      "bytes": 22531
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T130108Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T130108Z.json",
+      "bytes": 22563
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T160050Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T160050Z.json",
+      "bytes": 22580
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T200050Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260725T200050Z.json",
+      "bytes": 22553
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T060054Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T060054Z.json",
+      "bytes": 22511
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T100054Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T100054Z.json",
+      "bytes": 22572
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T130057Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T130057Z.json",
+      "bytes": 22594
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T160055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T160055Z.json",
+      "bytes": 22562
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T200056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260726T200056Z.json",
+      "bytes": 22567
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T060103Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T060103Z.json",
+      "bytes": 22448
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T100102Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T100102Z.json",
+      "bytes": 22425
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T130015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T130015Z.json",
+      "bytes": 22410
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T160022Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T160022Z.json",
+      "bytes": 22515
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T200024Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260727T200024Z.json",
+      "bytes": 22491
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T060030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T060030Z.json",
+      "bytes": 22456
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T100028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T100028Z.json",
+      "bytes": 22462
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T130029Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T130029Z.json",
+      "bytes": 22476
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T160030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T160030Z.json",
+      "bytes": 22496
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T200030Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260728T200030Z.json",
+      "bytes": 22494
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T060035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T060035Z.json",
+      "bytes": 22448
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T100035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T100035Z.json",
+      "bytes": 22478
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T130035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T130035Z.json",
+      "bytes": 22540
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T200037Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260729T200037Z.json",
+      "bytes": 22557
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T060042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T060042Z.json",
+      "bytes": 22521
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T100041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T100041Z.json",
+      "bytes": 22503
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T130042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T130042Z.json",
+      "bytes": 22552
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T160043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T160043Z.json",
+      "bytes": 22539
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T200038Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260730T200038Z.json",
+      "bytes": 22546
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T060043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T060043Z.json",
+      "bytes": 22464
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T100042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T100042Z.json",
+      "bytes": 22465
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T130043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T130043Z.json",
+      "bytes": 22466
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T160044Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T160044Z.json",
+      "bytes": 22466
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T200045Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260731T200045Z.json",
+      "bytes": 22479
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T060053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T060053Z.json",
+      "bytes": 22079
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T100052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T100052Z.json",
+      "bytes": 22085
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T130053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T130053Z.json",
+      "bytes": 22085
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T160055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T160055Z.json",
+      "bytes": 22085
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T200056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260801T200056Z.json",
+      "bytes": 22087
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T060101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T060101Z.json",
+      "bytes": 22304
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T130101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T130101Z.json",
+      "bytes": 22312
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T160102Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T160102Z.json",
+      "bytes": 22312
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T200103Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260802T200103Z.json",
+      "bytes": 22312
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T060056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T060056Z.json",
+      "bytes": 22303
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T100056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T100056Z.json",
+      "bytes": 22311
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T130125Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T130125Z.json",
+      "bytes": 22065
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T160057Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T160057Z.json",
+      "bytes": 22311
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T200058Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260803T200058Z.json",
+      "bytes": 22311
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T100104Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T100104Z.json",
+      "bytes": 24395
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T130103Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T130103Z.json",
+      "bytes": 24271
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T160005Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T160005Z.json",
+      "bytes": 24393
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T200008Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260804T200008Z.json",
+      "bytes": 24412
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T060009Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T060009Z.json",
+      "bytes": 24358
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T100012Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T100012Z.json",
+      "bytes": 24394
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T130015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T130015Z.json",
+      "bytes": 24435
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T160016Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T160016Z.json",
+      "bytes": 24404
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T200018Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260805T200018Z.json",
+      "bytes": 24466
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T031201Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T031201Z.json",
+      "bytes": 8972
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T031317Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T031317Z.json",
+      "bytes": 8973
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T060021Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T060021Z.json",
+      "bytes": 9001
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T100025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T100025Z.json",
+      "bytes": 9013
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T130023Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T130023Z.json",
+      "bytes": 9049
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T160027Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260806T160027Z.json",
+      "bytes": 8818
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T060100Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T060100Z.json",
+      "bytes": 8759
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T100035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T100035Z.json",
+      "bytes": 8815
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T130034Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T130034Z.json",
+      "bytes": 8802
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T160035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T160035Z.json",
+      "bytes": 8823
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T200036Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260807T200036Z.json",
+      "bytes": 8818
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T060040Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T060040Z.json",
+      "bytes": 8758
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T100042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T100042Z.json",
+      "bytes": 8813
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T130041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T130041Z.json",
+      "bytes": 8800
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T160042Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T160042Z.json",
+      "bytes": 8796
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T200044Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260808T200044Z.json",
+      "bytes": 8813
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T060046Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T060046Z.json",
+      "bytes": 7231
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T100049Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T100049Z.json",
+      "bytes": 7249
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T130048Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T130048Z.json",
+      "bytes": 7257
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T160049Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T160049Z.json",
+      "bytes": 7272
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T200050Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260809T200050Z.json",
+      "bytes": 7246
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T060053Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T060053Z.json",
+      "bytes": 6841
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T100055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T100055Z.json",
+      "bytes": 6841
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T130055Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T130055Z.json",
+      "bytes": 6856
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T160057Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T160057Z.json",
+      "bytes": 6824
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T200057Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260810T200057Z.json",
+      "bytes": 6880
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T060043Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T060043Z.json",
+      "bytes": 6853
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T100047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T100047Z.json",
+      "bytes": 6859
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T130101Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T130101Z.json",
+      "bytes": 6881
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T160049Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T160049Z.json",
+      "bytes": 6879
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T200049Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260811T200049Z.json",
+      "bytes": 6879
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T060052Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T060052Z.json",
+      "bytes": 6858
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T100056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T100056Z.json",
+      "bytes": 6845
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T130058Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T130058Z.json",
+      "bytes": 6893
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T160056Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T160056Z.json",
+      "bytes": 6861
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T200058Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260812T200058Z.json",
+      "bytes": 6869
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T060105Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T060105Z.json",
+      "bytes": 8541
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T100007Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T100007Z.json",
+      "bytes": 8558
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T130007Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T130007Z.json",
+      "bytes": 8570
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T160008Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T160008Z.json",
+      "bytes": 8587
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T200010Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260813T200010Z.json",
+      "bytes": 8608
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T060016Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T060016Z.json",
+      "bytes": 8831
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T100019Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T100019Z.json",
+      "bytes": 8849
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T130020Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T130020Z.json",
+      "bytes": 8848
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T160021Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T160021Z.json",
+      "bytes": 8848
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T200023Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260814T200023Z.json",
+      "bytes": 8849
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T060027Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T060027Z.json",
+      "bytes": 8789
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T100028Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T100028Z.json",
+      "bytes": 8816
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T130029Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T130029Z.json",
+      "bytes": 8810
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T160031Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T160031Z.json",
+      "bytes": 8833
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T200031Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260815T200031Z.json",
+      "bytes": 8873
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T060035Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T060035Z.json",
+      "bytes": 8699
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T100038Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T100038Z.json",
+      "bytes": 8700
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T130039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T130039Z.json",
+      "bytes": 8759
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T160039Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T160039Z.json",
+      "bytes": 8734
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T200041Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260816T200041Z.json",
+      "bytes": 8728
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T060048Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T060048Z.json",
+      "bytes": 8684
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T100051Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T100051Z.json",
+      "bytes": 8710
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T130047Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T130047Z.json",
+      "bytes": 8752
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T160301Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T160301Z.json",
+      "bytes": 8773
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T200102Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260817T200102Z.json",
+      "bytes": 8763
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T060008Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T060008Z.json",
+      "bytes": 8760
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T100012Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T100012Z.json",
+      "bytes": 8786
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T160013Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T160013Z.json",
+      "bytes": 8788
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T200014Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260818T200014Z.json",
+      "bytes": 8786
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T060015Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T060015Z.json",
+      "bytes": 8715
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T100021Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T100021Z.json",
+      "bytes": 8699
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T130019Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T130019Z.json",
+      "bytes": 8706
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T160022Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T160022Z.json",
+      "bytes": 8721
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T200023Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260819T200023Z.json",
+      "bytes": 8720
+    },
+    {
+      "source": "state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260820T060025Z.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/hoa/OpenzedFinanzas-CC-ES/snapshot-20260820T060025Z.json",
+      "bytes": 8757
+    },
+    {
+      "source": "state/intraday-heartbeat-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/intraday-heartbeat-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "bytes": 242
+    },
+    {
+      "source": "state/pending-decisions.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/pending-decisions.json",
+      "bytes": 2353
+    },
+    {
+      "source": "state/reactivate-exclusions.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/reactivate-exclusions.json",
+      "bytes": 124
+    }
+  ]
+}

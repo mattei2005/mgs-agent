@@ -1,0 +1,93 @@
+{
+  "schema_version": "0.1-draft",
+  "status": "architecture_review_in_progress",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "site_name": "Eggbev",
+  "site_domain": "eggbev.com",
+  "country": "US",
+  "country_name": "United States",
+  "vertical": "CC",
+  "language": "EN",
+  "strategy_family": "chatpion_bot_messenger",
+  "channel": "Messenger",
+  "destination": "messenger_conversation",
+  "cut_level": "campaign",
+  "account_currency": "USD",
+  "account_timezone": "America/New_York",
+  "account": {
+    "account_id": "1034081997659047",
+    "account_alias": "Eggbev-US-CC-EN-01-G006",
+    "account_number": 1,
+    "live_readback_name": "Eggbev-US-CC-EN-01"
+  },
+  "management": {
+    "owners": [
+      {
+        "name": "Rodolfo Mattei",
+        "role": "executive_owner"
+      },
+      {
+        "name": "Nicolas",
+        "discord_id": "1055570806945620030",
+        "role": "campaign_manager"
+      }
+    ],
+    "other_managers": [],
+    "budget_write_rule": "pending_explicit_eggbev_review; global MGS gates remain in force until superseded by Rodolfo"
+  },
+  "ares_scope": {
+    "included": [
+      "Meta campaign architecture",
+      "campaign creation and lifecycle after explicit policy approval",
+      "Intraday and Daily reporting",
+      "creative selection, reservation and Meta x Drive reconciliation",
+      "performance and ROI analysis using approved sources"
+    ],
+    "excluded_by_default": [
+      "ChatPion/DigitalTrChat configuration",
+      "Smart Bidding template or route configuration",
+      "pixel/CAPI or WordPress setup",
+      "billing or credential changes"
+    ],
+    "scope_note": "Rodolfo may authorize a specific excluded setup separately; this draft does not imply that authorization."
+  },
+  "discord": {
+    "campaign_ops_channel_id": "1539422731727147079",
+    "campaign_ops_channel_label": "eggbev-us-cc-en-01-g006",
+    "fixed_threads": {
+      "rules": "1541578622106865815",
+      "intraday": "1541578606076231750",
+      "daily": "1541578596253175858",
+      "campaign_creation": "1541578556037927053"
+    },
+    "thread_membership": {
+      "automatic_manager": {
+        "name": "Nicolas",
+        "discord_id": "1055570806945620030"
+      },
+      "other_managers": [],
+      "success_evidence": "Auto-thread member sync/readback real"
+    }
+  },
+  "inheritance_policy": {
+    "inherit_previous_operation_rules": false,
+    "inherit_direct_traffic_rules": false,
+    "reuse_only_generic_guardrails_after_explicit_fit_review": true
+  },
+  "campaign_structure": "pending_review",
+  "campaign_naming": "pending_review",
+  "objective_and_optimization": "pending_review",
+  "budget_policy": "pending_review",
+  "metrics": "pending_review",
+  "intraday_policy": "pending_review",
+  "daily_reporting_policy": "pending_review",
+  "campaign_creation_policy": "pending_review",
+  "creative_policy": "pending_review",
+  "smart_bidding_reconciliation": "pending_review",
+  "scheduler_jobs": {},
+  "write_enabled": false,
+  "activation_enabled": false,
+  "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
+  "authorization_source": "discord:thread:1541581677602545825",
+  "updated_at": "2026-08-24T19:06:22-04:00"
+}

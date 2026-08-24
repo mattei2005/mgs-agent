@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "accounts": [
+    {
+      "account_id": "1034081997659047",
+      "meta_account_ref": "act_1034081997659047",
+      "operation_id": "Eggbev-US-CC-EN-BOT",
+      "account_alias": "Eggbev-US-CC-EN-01-G006",
+      "channel": "Messenger",
+      "strategy": "BOT",
+      "currency_expected": "USD",
+      "timezone_source": "meta_ad_account_timezone",
+      "cut_level": "campaign",
+      "management": {
+        "owners": [
+          "Rodolfo Mattei",
+          "Nicolas"
+        ],
+        "nicolas_discord_id": "1055570806945620030",
+        "budget_write_authority": "pending_explicit_eggbev_rule_review"
+      },
+      "write_mode": "disabled_pending_operational_contract",
+      "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+      "token_field": "credential",
+      "credential_storage_policy": "reference_only; secret remains in 1Password and must never be copied into config, skill, audit or chat",
+      "credential_metadata": {
+        "date_shown_in_1password": "10/23/2026",
+        "alert_shown_in_1password": "2026-10-16",
+        "source": "user-provided 1Password screenshot; credential value masked"
+      },
+      "auth_readback": {
+        "ok": true,
+        "http_status": 200,
+        "checked_at_utc": "2026-08-24T23:02:02Z",
+        "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/auth-check-1034081997659047-20260824T230202Z.json"
+      },
+      "meta_detected": {
+        "name": "Eggbev-US-CC-EN-01",
+        "currency": "USD",
+        "timezone_name": "America/New_York",
+        "timezone_offset_hours_utc": -4,
+        "account_status": 1,
+        "business_name": ""
+      },
+      "account_currency": "USD",
+      "region": "United States",
+      "gdpr_sensitive": false,
+      "metrics_policy": "pending_review_with_rodolfo"
+    }
+  ]
+}

@@ -522,8 +522,8 @@ discord:
     - '1291113428982693940'
     - '1055570806945620030'
   require_mention: true
-  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1540489861876678657
-  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1540489861876678657
+  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
+  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
   auto_thread: true
   thread_require_mention: false
   history_backfill: true
@@ -544,22 +544,31 @@ discord:
       - Participantes extras entram somente por pedido explicito de Rodolfo e readback
       real.'
     '1516887105543077949': Ares Creative Ops channel; use for briefs, references,
-      uploads, images, videos, Drive, naming and inventory; existing Openzed Intraday
-      and HOA threads stay temporarily until migration; do not create new Campaign
-      Ops threads here; reply in current thread
-    '1539422731727147079': '"INSTRUCAO DE THREAD Ares Eggbev US-CC-EN\n\n- Canal privado
-      da operacao Eggbev US-CC-EN para Rodolfo, Nicolas, Zeus e Ares; Geizian esta
-      fora deste plano.\n- Toda thread nova criada neste canal deve adicionar automaticamente
-      Nicolas, Discord ID 1055570806945620030; confirmar sucesso somente pelo log
-      Auto-thread member sync/readback real.\n- Nicolas possui autonomia total em
-      nivel de campanha, inclusive criacao, budget, ativacao, pausa, reativacao, edicao,
-      clone, replacement e arquivamento, preservando preflight, audit e readback.\n-
-      O site pode ter varias contas Meta; identifique cada conta por alias curto e
-      mantenha IDs tecnicos no audit.\n- Use threads separadas por criacao de campanha,
-      Diario, Intraday, HOA e criativos/testes.\n- Responda na thread atual; nao use
-      send_message para resposta normal.\n- Titulos de threads: etiqueta semantica
-      curta de 3 a 6 palavras, sem sobrescrever titulo manual.\n- Nao adicionar outros
-      gestores automaticamente."'
+      uploads, images, videos, Drive, naming and inventory; do not create Campaign
+      Ops threads here; reply in current thread.
+    '1539422731727147079': 'INSTRUCAO DE THREAD Ares Eggbev US-CC-EN BOT
+
+
+      - Canal privado da operacao Eggbev US-CC-EN para Rodolfo, Nicolas, Zeus e Ares;
+      nao adicionar outros gestores automaticamente.
+
+      - Toda thread nova criada neste canal deve adicionar Nicolas, Discord ID 1055570806945620030;
+      confirmar sucesso somente por Auto-thread member sync/readback real.
+
+      - Gestao de campanha por Rodolfo e Nicolas; writes, budget, ativacao e automacao
+      seguem o contrato Eggbev vigente e os gates em revisao, sem herdar regras de
+      operacoes anteriores ou de trafego direto.
+
+      - Conta atual validada: alias Eggbev-US-CC-EN-01-G006; IDs tecnicos ficam no
+      audit.
+
+      - Threads fixas: regras 1541578622106865815; Intraday 1541578606076231750; Diario
+      1541578596253175858; criar campanhas 1541578556037927053.
+
+      - Responda na thread atual; nao use send_message para resposta normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual.'
     '1539432300364824607': 'INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR
 
 
@@ -590,8 +599,6 @@ discord:
       titulo manual.
 
       - Nao adicionar outros gestores automaticamente.'
-    '1540489861876678657': OpenzedFinanzas ES-CC-ES-03 dedicated channel; manual Intraday
-      and HOA threads; reply in current thread; no automatic thread creation
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -632,8 +639,6 @@ discord:
       - '1496296175014252634'
       - '1055570806945620030'
       - '321263240782807040'
-    '1540489861876678657':
-      - '1496296175014252634'
   suppress_link_previews: true
 telegram:
   reactions: false

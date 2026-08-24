@@ -1,0 +1,72 @@
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+index 8596555f9b..0fae1858e7 100644
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -7496,7 +7496,7 @@ class DiscordAdapter(BasePlatformAdapter):
+             getattr(parent_channel, "id", None)
+         )
+ 
+-        async def consider(member: Any) -> None:
++        async def consider(member: Any, *, allow_bot: bool = False) -> None:
+             if member is None:
+                 return
+             member_id = getattr(member, "id", None)
+@@ -7504,10 +7504,13 @@ class DiscordAdapter(BasePlatformAdapter):
+                 return
+             seen.add(member_id)
+             user = getattr(member, "_user", None) or member
+-            if getattr(user, "bot", False):
+-                return
+             if bot_user_id and str(member_id) == bot_user_id:
+                 return
++            # Explicit per-channel targets may intentionally include another
++            # MGS agent bot (for example Zeus in every Ares thread). Keep bot
++            # filtering for broad guild discovery, but honor configured bots.
++            if getattr(user, "bot", False) and not allow_bot:
++                return
+             try:
+                 perms = parent_channel.permissions_for(member)
+             except Exception:
+@@ -7548,7 +7551,7 @@ class DiscordAdapter(BasePlatformAdapter):
+                             exc,
+                         )
+                         continue
+-                await consider(member)
++                await consider(member, allow_bot=True)
+         else:
+             try:
+                 async for member in guild.fetch_members(limit=None):
+diff --git a/tests/gateway/test_discord_thread_auto_add_by_channel.py b/tests/gateway/test_discord_thread_auto_add_by_channel.py
+index 4e7f8b47aa..5dc289f6be 100644
+--- a/tests/gateway/test_discord_thread_auto_add_by_channel.py
++++ b/tests/gateway/test_discord_thread_auto_add_by_channel.py
+@@ -108,3 +108,29 @@ async def test_auto_add_is_scoped_to_parent_channel(monkeypatch):
+     thread.add_user.reset_mock()
+     await adapter._auto_add_parent_channel_members_to_thread(thread, director)
+     thread.add_user.assert_not_awaited()
++
++
++@pytest.mark.asyncio
++async def test_explicit_thread_auto_add_honors_another_agent_bot(monkeypatch):
++    zeus = SimpleNamespace(id=2, bot=True)
++    guild = SimpleNamespace(
++        get_member=lambda user_id: zeus if user_id == 2 else None,
++        fetch_member=AsyncMock(return_value=zeus),
++        members=[zeus],
++    )
++    thread = SimpleNamespace(id=100, add_user=AsyncMock())
++    acquisition = SimpleNamespace(
++        id=int(ACQUISITION_CHANNEL),
++        guild=guild,
++        permissions_for=lambda member: SimpleNamespace(view_channel=True),
++    )
++    monkeypatch.setenv(
++        "DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL",
++        json.dumps({ACQUISITION_CHANNEL: ["2"]}),
++    )
++
++    adapter = DiscordAdapter(PlatformConfig(enabled=True, token="fake-token"))
++    adapter._client = SimpleNamespace(user=SimpleNamespace(id=999, bot=True))
++
++    await adapter._auto_add_parent_channel_members_to_thread(thread, acquisition)
++    assert [call.args[0].id for call in thread.add_user.await_args_list] == [2]
