@@ -1,0 +1,62 @@
+        <div class="wrap mgsq-sms-settings">
+          <h1>SMS Funnel</h1>
+          <p>Gerencie aqui a identificação e a URL add-lead de cada gestor. As alterações são propagadas para todas as quizzes que usam o gestor.</p>
+                              <style>
+            .mgsq-sms-settings{max-width:1280px}.mgsq-sms-admin-grid{display:grid;gap:14px;margin:20px 0}.mgsq-sms-admin-row{display:grid;grid-template-columns:100px 280px minmax(440px,1fr);gap:14px;align-items:end;background:#fff;border:1px solid #dcdcde;border-radius:14px;padding:16px}.mgsq-sms-admin-row label{display:block;font-weight:700;margin-bottom:6px}.mgsq-sms-admin-code{font-size:18px;font-weight:800;color:#15803d;padding:12px 0}.mgsq-sms-admin-row input{width:100%;min-height:46px;border:1px solid #d0d5dd;border-radius:10px;padding:10px 12px;font-size:15px}.mgsq-sms-admin-row .mgsq-sms-code-input{text-transform:uppercase;font-weight:800;color:#15803d}.mgsq-sms-actions{display:flex;gap:10px;align-items:center;margin:0 0 4px}@media(max-width:960px){.mgsq-sms-admin-row{grid-template-columns:1fr}}
+          </style>
+          <form method="post">
+            <input type="hidden" name="_wpnonce" value="test">            <input type="hidden" name="mgs_quiz_action" value="save_sms_presets">
+            <div class="mgsq-sms-admin-grid" id="mgsqSmsAdminGrid">
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G001"><div class="mgsq-sms-admin-code">G001</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G001 – Icaro"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019ef608-21bf-70db-9ae2-26980d501d61/add-lead"></div>
+                </div>
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G002"><div class="mgsq-sms-admin-code">G002</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G002 – Geizian"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019e4820-49be-734a-920a-9a15633f1cfd/add-lead"></div>
+                </div>
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G003"><div class="mgsq-sms-admin-code">G003</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G003 – Isliago"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019ef5da-5176-723c-8de4-261e4777dba3/add-lead"></div>
+                </div>
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G004"><div class="mgsq-sms-admin-code">G004</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G004 – Joe"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019ef608-5249-705a-9bda-df396a2f15d7/add-lead"></div>
+                </div>
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G005"><div class="mgsq-sms-admin-code">G005</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G005 – Kelly"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019ef21e-3714-72e8-928c-6c731604631f/add-lead"></div>
+                </div>
+                              <div class="mgsq-sms-admin-row">
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="G006"><div class="mgsq-sms-admin-code">G006</div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="G006 – Nicolas"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="https://v2.smsfunnel.com.br/integrations/lists/019ef608-7084-7075-b0d0-b0764085bbfc/add-lead"></div>
+                </div>
+                          </div>
+            <div class="mgsq-sms-actions"><button type="button" class="button button-secondary" id="mgsqAddSmsList">+ Adicionar lista</button></div>
+            <button type="submit">Salvar configurações SMS</button>          </form>
+          <script>
+          (function(){
+            var grid=document.getElementById('mgsqSmsAdminGrid'),button=document.getElementById('mgsqAddSmsList');
+            if(!grid||!button)return;
+            function nextCode(){
+              var max=0;
+              grid.querySelectorAll('[name="sms_codes[]"]').forEach(function(input){var m=String(input.value||'').toUpperCase().match(/^G(\d+)$/);if(m)max=Math.max(max,parseInt(m[1],10)||0);});
+              return 'G'+String(max+1).padStart(3,'0');
+            }
+            button.addEventListener('click',function(){
+              var row=document.createElement('div');
+              row.className='mgsq-sms-admin-row';
+              row.innerHTML='<div><label>Gestor</label><input class="mgsq-sms-code-input" name="sms_codes[]" required pattern="G[0-9]{3,}" maxlength="12" value="'+nextCode()+'"></div><div><label>Nome/label</label><input name="sms_labels[]" required placeholder="Ex.: G007 – Nome"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" required placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div>';
+              grid.appendChild(row);
+              row.querySelector('[name="sms_codes[]"]').focus();
+            });
+          })();
+          </script>
+        </div>
+        

@@ -68,20 +68,59 @@ class MGS_Quiz_Admin {
         exit;
     }
 
-    private static function sms_presets() {
-        $defaults = self::sms_default_presets();
-        $saved = get_option( 'mgs_quiz_sms_presets', array() );
-        if ( ! is_array( $saved ) ) return $defaults;
+    private static function normalize_sms_code( $code ) {
+        $code = strtoupper( trim( sanitize_text_field( (string) $code ) ) );
+        return preg_match( '/^G[0-9]{3,}$/', $code ) ? $code : '';
+    }
 
-        foreach ( $defaults as $code => $preset ) {
-            if ( empty( $saved[ $code ] ) || ! is_array( $saved[ $code ] ) ) continue;
-            $label = sanitize_text_field( $saved[ $code ]['label'] ?? '' );
-            $url = esc_url_raw( $saved[ $code ]['url'] ?? '' );
-            if ( $label && self::is_valid_sms_url( $url ) ) {
-                $defaults[ $code ] = array( 'gestor_code' => $code, 'label' => $label, 'url' => $url );
+    private static function build_sms_presets_from_input( $codes, $labels, $urls, $required_codes = array() ) {
+        $codes = array_values( is_array( $codes ) ? $codes : array() );
+        $labels = array_values( is_array( $labels ) ? $labels : array() );
+        $urls = array_values( is_array( $urls ) ? $urls : array() );
+        $presets = array();
+
+        foreach ( $codes as $idx => $raw_code ) {
+            $raw_label = $labels[ $idx ] ?? '';
+            $raw_url = $urls[ $idx ] ?? '';
+            if ( '' === trim( (string) $raw_code ) && '' === trim( (string) $raw_label ) && '' === trim( (string) $raw_url ) ) continue;
+
+            $code = self::normalize_sms_code( $raw_code );
+            $label = sanitize_text_field( $raw_label );
+            $url = esc_url_raw( $raw_url );
+            if ( ! $code ) return new WP_Error( 'invalid_code', 'Código de gestor inválido.' );
+            if ( isset( $presets[ $code ] ) ) return new WP_Error( 'duplicate_code', 'Código de gestor duplicado.', $code );
+            if ( ! $label || ! self::is_valid_sms_url( $url ) ) return new WP_Error( 'invalid', 'Nome ou URL inválidos.', $code );
+
+            $presets[ $code ] = array( 'gestor_code' => $code, 'label' => $label, 'url' => $url );
+        }
+
+        if ( empty( $presets ) ) return new WP_Error( 'empty', 'Adicione ao menos uma lista SMS Funnel.' );
+        foreach ( (array) $required_codes as $required_code ) {
+            $required_code = self::normalize_sms_code( $required_code );
+            if ( $required_code && ! isset( $presets[ $required_code ] ) ) {
+                return new WP_Error( 'missing_code', 'Uma lista existente não pode ser removida nesta tela.', $required_code );
             }
         }
-        return $defaults;
+        ksort( $presets, SORT_NATURAL );
+        return $presets;
+    }
+
+    private static function sms_presets() {
+        $presets = self::sms_default_presets();
+        $saved = get_option( 'mgs_quiz_sms_presets', array() );
+        if ( ! is_array( $saved ) ) return $presets;
+
+        foreach ( $saved as $saved_code => $preset ) {
+            if ( ! is_array( $preset ) ) continue;
+            $code = self::normalize_sms_code( $preset['gestor_code'] ?? $saved_code );
+            $label = sanitize_text_field( $preset['label'] ?? '' );
+            $url = esc_url_raw( $preset['url'] ?? '' );
+            if ( $code && $label && self::is_valid_sms_url( $url ) ) {
+                $presets[ $code ] = array( 'gestor_code' => $code, 'label' => $label, 'url' => $url );
+            }
+        }
+        ksort( $presets, SORT_NATURAL );
+        return $presets;
     }
 
     public static function register_menu() {
@@ -96,19 +135,18 @@ class MGS_Quiz_Admin {
 
     private static function handle_sms_presets_save( $t ) {
         global $wpdb;
-        $defaults = self::sms_default_presets();
+        $existing = self::sms_presets();
+        $codes = isset( $_POST['sms_codes'] ) && is_array( $_POST['sms_codes'] ) ? wp_unslash( $_POST['sms_codes'] ) : array();
         $labels = isset( $_POST['sms_labels'] ) && is_array( $_POST['sms_labels'] ) ? wp_unslash( $_POST['sms_labels'] ) : array();
         $urls = isset( $_POST['sms_urls'] ) && is_array( $_POST['sms_urls'] ) ? wp_unslash( $_POST['sms_urls'] ) : array();
-        $presets = array();
-
-        foreach ( $defaults as $code => $default ) {
-            $label = sanitize_text_field( $labels[ $code ] ?? '' );
-            $url = esc_url_raw( $urls[ $code ] ?? '' );
-            if ( ! $label || ! self::is_valid_sms_url( $url ) ) {
-                wp_safe_redirect( admin_url( 'admin.php?page=mgs-quiz-sms&sms_error=invalid&code=' . urlencode( $code ) ) );
-                exit;
-            }
-            $presets[ $code ] = array( 'gestor_code' => $code, 'label' => $label, 'url' => $url );
+        $presets = self::build_sms_presets_from_input( $codes, $labels, $urls, array_keys( $existing ) );
+        if ( is_wp_error( $presets ) ) {
+            $error_code = $presets->get_error_code();
+            $gestor_code = sanitize_text_field( (string) $presets->get_error_data() );
+            $redirect = admin_url( 'admin.php?page=mgs-quiz-sms&sms_error=' . rawurlencode( $error_code ) );
+            if ( $gestor_code ) $redirect .= '&code=' . rawurlencode( $gestor_code );
+            wp_safe_redirect( $redirect );
+            exit;
         }
 
         $updated_quizzes = 0;
@@ -769,25 +807,44 @@ class MGS_Quiz_Admin {
             <div class="notice notice-success"><p>Configurações SMS salvas. <?php echo (int) ( $_GET['updated'] ?? 0 ); ?> quiz(es) atualizada(s).</p></div>
           <?php endif; ?>
           <?php if ( ! empty( $_GET['sms_error'] ) ) : ?>
-            <div class="notice notice-error"><p>Não foi possível salvar. Todos os nomes são obrigatórios e as URLs devem ser endpoints HTTPS válidos do SMS Funnel terminando em /add-lead.</p></div>
+            <div class="notice notice-error"><p>Não foi possível salvar. Use um código único no formato G001, preencha o nome e informe uma URL HTTPS válida do SMS Funnel terminando em /add-lead. As listas existentes não são removidas nesta tela.</p></div>
           <?php endif; ?>
           <style>
-            .mgsq-sms-settings{max-width:1280px}.mgsq-sms-admin-grid{display:grid;gap:14px;margin:20px 0}.mgsq-sms-admin-row{display:grid;grid-template-columns:100px 280px minmax(440px,1fr);gap:14px;align-items:end;background:#fff;border:1px solid #dcdcde;border-radius:14px;padding:16px}.mgsq-sms-admin-row label{display:block;font-weight:700;margin-bottom:6px}.mgsq-sms-admin-code{font-size:18px;font-weight:800;color:#15803d;padding:12px 0}.mgsq-sms-admin-row input{width:100%;min-height:46px;border:1px solid #d0d5dd;border-radius:10px;padding:10px 12px;font-size:15px}@media(max-width:960px){.mgsq-sms-admin-row{grid-template-columns:1fr}}
+            .mgsq-sms-settings{max-width:1280px}.mgsq-sms-admin-grid{display:grid;gap:14px;margin:20px 0}.mgsq-sms-admin-row{display:grid;grid-template-columns:100px 280px minmax(440px,1fr);gap:14px;align-items:end;background:#fff;border:1px solid #dcdcde;border-radius:14px;padding:16px}.mgsq-sms-admin-row label{display:block;font-weight:700;margin-bottom:6px}.mgsq-sms-admin-code{font-size:18px;font-weight:800;color:#15803d;padding:12px 0}.mgsq-sms-admin-row input{width:100%;min-height:46px;border:1px solid #d0d5dd;border-radius:10px;padding:10px 12px;font-size:15px}.mgsq-sms-admin-row .mgsq-sms-code-input{text-transform:uppercase;font-weight:800;color:#15803d}.mgsq-sms-actions{display:flex;gap:10px;align-items:center;margin:0 0 4px}@media(max-width:960px){.mgsq-sms-admin-row{grid-template-columns:1fr}}
           </style>
           <form method="post">
             <?php wp_nonce_field( 'mgs_quiz_save' ); ?>
             <input type="hidden" name="mgs_quiz_action" value="save_sms_presets">
-            <div class="mgsq-sms-admin-grid">
+            <div class="mgsq-sms-admin-grid" id="mgsqSmsAdminGrid">
               <?php foreach ( $presets as $code => $preset ) : ?>
                 <div class="mgsq-sms-admin-row">
-                  <div><label>Gestor</label><div class="mgsq-sms-admin-code"><?php echo esc_html( $code ); ?></div></div>
-                  <div><label for="sms-label-<?php echo esc_attr( $code ); ?>">Nome/label</label><input id="sms-label-<?php echo esc_attr( $code ); ?>" name="sms_labels[<?php echo esc_attr( $code ); ?>]" required value="<?php echo esc_attr( $preset['label'] ); ?>"></div>
-                  <div><label for="sms-url-<?php echo esc_attr( $code ); ?>">URL add-lead</label><input id="sms-url-<?php echo esc_attr( $code ); ?>" type="url" name="sms_urls[<?php echo esc_attr( $code ); ?>]" required value="<?php echo esc_attr( $preset['url'] ); ?>"></div>
+                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="<?php echo esc_attr( $code ); ?>"><div class="mgsq-sms-admin-code"><?php echo esc_html( $code ); ?></div></div>
+                  <div><label>Nome/label</label><input name="sms_labels[]" required value="<?php echo esc_attr( $preset['label'] ); ?>"></div>
+                  <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="<?php echo esc_attr( $preset['url'] ); ?>"></div>
                 </div>
               <?php endforeach; ?>
             </div>
+            <div class="mgsq-sms-actions"><button type="button" class="button button-secondary" id="mgsqAddSmsList">+ Adicionar lista</button></div>
             <?php submit_button( 'Salvar configurações SMS' ); ?>
           </form>
+          <script>
+          (function(){
+            var grid=document.getElementById('mgsqSmsAdminGrid'),button=document.getElementById('mgsqAddSmsList');
+            if(!grid||!button)return;
+            function nextCode(){
+              var max=0;
+              grid.querySelectorAll('[name="sms_codes[]"]').forEach(function(input){var m=String(input.value||'').toUpperCase().match(/^G(\d+)$/);if(m)max=Math.max(max,parseInt(m[1],10)||0);});
+              return 'G'+String(max+1).padStart(3,'0');
+            }
+            button.addEventListener('click',function(){
+              var row=document.createElement('div');
+              row.className='mgsq-sms-admin-row';
+              row.innerHTML='<div><label>Gestor</label><input class="mgsq-sms-code-input" name="sms_codes[]" required pattern="G[0-9]{3,}" maxlength="12" value="'+nextCode()+'"></div><div><label>Nome/label</label><input name="sms_labels[]" required placeholder="Ex.: G007 – Nome"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" required placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div>';
+              grid.appendChild(row);
+              row.querySelector('[name="sms_codes[]"]').focus();
+            });
+          })();
+          </script>
         </div>
         <?php
     }
