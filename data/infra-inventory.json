@@ -8310,7 +8310,75 @@
         "close_readback_spend_usd": 0.69,
         "close_readback_impressions": 26,
         "close_readback_reach": 1,
-        "close_readback_clicks": 1
+        "close_readback_clicks": 1,
+        "failure_recovery_release_3_0_18": {
+          "authorized_by": "Rodolfo Mattei",
+          "effective_at_et": "2026-08-24T16:33:57-04:00",
+          "inventory_updated_at_et": "2026-08-24T16:47:53-04:00",
+          "scope": "Every failure inside an already authorized Ares request triggers readback-first diagnosis, missing-layer-only correction and deterministic resume until completion; no blind replay and no scope expansion.",
+          "runtime": {
+            "engine_path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+            "engine_sha256": "6fce0509365d181e9b61ef55385311532a19e199092c907287e5eb32d4680784",
+            "daily_path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+            "daily_sha256": "2624ce7f9ff2e880243b46855bb169c6b2bdd37adeaca71b61609b67cfb21c03"
+          },
+          "config_sha256": "9c116f0d64f833fc5419b5102cec5a3d66d6185ceda17c061e89f4438b459c90",
+          "operation_v3_sha256": "9690405da1ddb1fe666a7b673df7765853bd7800dd618ca4628aed3811c8c4dc",
+          "soul_sha256": "8ffb02a393f20ef5a02a94771a27098e9ba743818ac26a6e3e7423e1cc80fc00",
+          "profile_mirrors_match": true,
+          "skills": {
+            "meta_campaign_engine_v3": {
+              "version": "3.0.18",
+              "sha256": "b6fa2ac97ac716c9e22c137376762bf33aad3f58954ddfa55c2826f46f1f74ed"
+            },
+            "direct_traffic_cbo": {
+              "version": "1.0.46",
+              "sha256": "c60f2b825f6233f5f7d30659b9885c7790087f6e9dc35082799509e7fe94f992"
+            }
+          },
+          "knowledge": {
+            "policy_registry_id": "ARES-FAILURE-RECOVERY-MANDATORY-V1",
+            "version_registry_id": "ARES-CAMPAIGN-ENGINE-V3-0-18-20260824",
+            "validation": "PASS",
+            "regression": "10/10 PASS"
+          },
+          "tests": {
+            "pytest": "76 passed",
+            "offline_smoke": "OFFLINE_SMOKE_OK",
+            "git_diff_check": "PASS"
+          },
+          "live_recovery": {
+            "request_id": "cpv-daily-20260824",
+            "campaigns": [
+              "C21",
+              "C22",
+              "C23"
+            ],
+            "campaign_count": 3,
+            "ads": 9,
+            "first_bundle_existing_ads": 5,
+            "first_bundle_missing_ads_created": 1,
+            "second_bundle_existing_ads": 1,
+            "second_bundle_missing_ads_created": 2,
+            "blind_replay_blocked": true,
+            "status": "COMPLETE_FUTURE_ACTIVE",
+            "start_time_sp": "2026-08-25T00:30:00-03:00",
+            "assets_moved_to_testing": 9,
+            "first_delivery_armed": 3,
+            "audit_sha256": "47b1d21e8456c2739184cfc4c619e4d42b54a516ab0d1dae8ed38bad99d5a4fb",
+            "state_sha256": "8caf4c3307abd6df98fdca77c763d776928d63c2dc6469043f2246d17fafd9bb"
+          },
+          "report_infra": {
+            "channel_id": "1498132022634483894",
+            "message_id": "1541549878939746416",
+            "http_status": 200,
+            "delivery": "discord_embed",
+            "content_empty": true,
+            "mentions": [],
+            "thread_created": false,
+            "readback": "PASS"
+          }
+        }
       }
     },
     {
@@ -8973,7 +9041,7 @@
         "Root/default OpenAI-Codex refresh credential remains invalid and was not changed.",
         "Upstream main moves rapidly; finalizer must abort if frozen target/runtime hashes drift."
       ],
-      "updated_at": "2026-08-24T20:42:37Z",
+      "updated_at": "2026-08-24T20:47:44Z",
       "active_runtime_path": "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
       "active_runtime_sha": "005bc450a6e68d33a95b5ace13a111337f6993db",
       "active_runtime_metadata_version": "0.20.5",
@@ -9014,7 +9082,7 @@
         "gateways": "3/3 active/running; ExecMainStatus=0; NRestarts=0; new PIDs; fresh Discord readiness",
         "vps": "13/13 exact package versions; standard security=0; ESM Apps=0; byobu only phased residual; no reboot; Monarx active/running",
         "root_codex_oauth": "pre-existing invalid refresh token persists; root auth bytes and mtime unchanged during validation; non-gateway",
-        "upstream_after_cutover": "origin/main remains frozen target 14201763; zero new commits after fetch"
+        "upstream_after_cutover": "zero pending at cutover; final fetch found 1 new post-freeze commit f14059fa; deferred to next maintenance without redoing update"
       },
       "rollback": {
         "profiles_backup": "/root/mgs-agent/reports/hermes-updates/20260824T194208Z-precheck/hermes-profiles-backup-20260824T194208Z.tar.gz",
@@ -9023,7 +9091,7 @@
         "previous_runtime": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d"
       },
       "final_report_infra": {
-        "status": "sent_and_readback_confirmed",
+        "status": "sent_edited_and_readback_confirmed",
         "channel_id": "1498132022634483894",
         "message_id": "1541548231580721254",
         "http_status": 200,
@@ -9032,7 +9100,17 @@
         "mention_count": 0,
         "required_fields": true,
         "thread_created": false,
-        "validated_at": "2026-08-24T20:42:37Z"
+        "validated_at": "2026-08-24T20:47:44Z",
+        "upstream_correction_present": true
+      },
+      "upstream_post_freeze": {
+        "frozen_target": "1420176393295dfb0dfb55ceb4b1cbab8d1965de",
+        "origin_main_at_final_fetch": "f14059fad20e17acf2512785114791566e70bd06",
+        "new_commits_after_freeze": 1,
+        "commit_timestamp": "2026-08-24T13:36:23-07:00",
+        "subject": "fix(models): OpenRouter :nitro/:floor routing variants no longer rejected by /model validation",
+        "classification": "new upstream after successful frozen cutover; intentionally not ported in closure",
+        "head_vs_origin": "behind=1 ahead=1 because MGS carried commit remains on frozen target"
       }
     }
   ],

@@ -73,12 +73,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C21-C23-AUTO-RECOVERY-20260824",
-      "next_step": "Retomar bundle final C23 após cooldown, validar 1x1x3/start/budget/UTM, concluir Drive/inventário/first-delivery e fechar regra com readback e REPORT-INFRA.",
+      "next_step": "Monitorar início nativo às 00:30 São Paulo pelo first-delivery guardrail; nenhum write corretivo pendente.",
       "objective": "Recuperar C21-C23 e institucionalizar correção automática de falhas até conclusão",
-      "source": "discord:thread:1541541843379027979; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; request:cpv-daily-20260824",
-      "state": "regra autorizada por rodolfo; v3.0.18 implementado e testado; c21/c22 reconciliadas, ad faltante criada sem replay, pós-processadas e armadas; c23 aguarda apenas janela saudável de quota do mesmo request.",
+      "source": "discord:thread:1541541843379027979; registry:ARES-FAILURE-RECOVERY-MANDATORY-V1; request:cpv-daily-20260824",
+      "state": "concluído: regra canônica ativa; v3.0.18 implementado/testado; c21-c23 reconciliadas sem replay cego, 3 camadas ausentes criadas, 3 campanhas/9 anúncios validados, 9 assets em 02_testing e first-delivery armado.",
       "thread_id": "1541541843379027979",
-      "updated_at": "2026-08-24T20:39:24+00:00"
+      "updated_at": "2026-08-24T20:48:33+00:00"
     },
     {
       "agent": "ares",
@@ -393,12 +393,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260824",
-      "next_step": "Nenhum; manutenção encerrada. Monitorar apenas novos commits upstream futuros e o OAuth root/default se esse perfil voltar a ser necessário.",
+      "next_step": "Próxima manutenção Hermes: avaliar o commit upstream pós-freeze f14059fa e quaisquer sucessores; não reabrir o cutover encerrado.",
       "objective": "Atualizar a VPS e o Hermes em fases controladas, com rollback, preservação integral dos patches MGS e zero commits upstream conhecidos pendentes no cutover",
-      "source": "discord:thread:1541526538619588678; candidate:/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d; patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-14201763.patch; finalizer:/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260824T202246Z-2920592.log; inventory:hermes-port-main-14201763-20260824",
-      "state": "pass concluído: vps 13/13 pacotes exatos, security/esm 0, byobu phaseado residual e sem reboot; hermes 0.20.5 ativo em 005bc450a6 sobre target 14201763, behind 0; patch 46 paths reverse pass; guard 470+6 e regressão 220; smokes zeus/atena/ares rc0; gateways ares→atena→zeus com pids novos e discord pronto; mirrors 6/6, auth 3/3; oauth root inválido permanece risco preexistente sem alteração.",
+      "source": "discord:thread:1541526538619588678; candidate:/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d; frozen-target:1420176393295dfb0dfb55ceb4b1cbab8d1965de; post-freeze-origin:f14059fad20e17acf2512785114791566e70bd06; patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-14201763.patch; finalizer:/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260824T202246Z-2920592.log; inventory:hermes-port-main-14201763-20260824",
+      "state": "pass concluído no target congelado: vps 13/13 pacotes exatos, security/esm 0, byobu phaseado residual e sem reboot; hermes 0.20.5 ativo em 005bc450a6 sobre target 14201763; zero upstream pendente no cutover. após o freeze/cutover, origin/main avançou 1 commit para f14059fa; mudança nova foi detectada no fechamento e ficou deliberadamente fora deste update. patch 46 paths reverse pass; guard 470+6 e regressão 220; smokes zeus/atena/ares rc0; gateways ares→atena→zeus com pids novos e discord pronto; mirrors 6/6, auth 3/3; oauth root inválido permanece risco preexistente sem alteração.",
       "thread_id": "1541526538619588678",
-      "updated_at": "2026-08-24T20:37:45+00:00"
+      "updated_at": "2026-08-24T20:47:56+00:00"
     },
     {
       "agent": "zeus",
@@ -1152,5 +1152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T20:39:24+00:00"
+  "updated_at": "2026-08-24T20:48:33+00:00"
 }
