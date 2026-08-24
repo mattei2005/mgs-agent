@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-24T09:49:20-04:00",
+  "updated_at": "2026-08-24T09:56:29-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
   "source_message_id": "1541442725608558623",
@@ -267,25 +267,56 @@
           "1540376658110980257"
         ],
         "source_message_id": "1540372238467862579"
+      },
+      {
+        "app": "B007-2",
+        "item_title": "BOT B007-2 Token - Alex Silva Araujo",
+        "app_name": "B007-2",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 18,
+        "roles_resolved_names": 18,
+        "expected_sheet_roles": 18,
+        "pending_role_acceptances": 0,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Alex Silva Araujo",
+        "sheet_no_app_rows": 19,
+        "sheet_present_rows": 18,
+        "sheet_marked_rows": 1,
+        "sheet_marked_profiles": [
+          "An Na"
+        ],
+        "sheet_identity_blocked_rows": 0,
+        "sheet_writes": 0,
+        "force_live_alert_message_ids": [
+          "1541445398512533626",
+          "1541445399896916068",
+          "1541445401490497638"
+        ],
+        "scheduled_cycle_at": "2026-08-24T09:56:29-04:00",
+        "source_message_id": "1541442725608558623"
       }
     ],
     "secrets_exposed": false,
     "report": "reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "b001_3_pending_and_b013_3_active_validated",
+    "status": "b001_3_pending_b007_2_active_b013_3_active_validated",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1540372238467862579",
-    "planned_check": "B001-3 segue em 15/17; B013-3 está ativo e validado em 31/31 linked, zero pendentes e Sheet X limpo.",
+    "source_message_id": "1541442725608558623",
+    "planned_check": "B001-3 segue no gate fail-closed registrado; B007-2 está ativo com 18/18 roles atuais reconciliadas e An Na preservada como único X; B013-3 permanece ativo e validado.",
     "required_before_reactivation": [
       "fresh /roles readback for all 13 apps",
       "exact reconciliation against the current Sheet order and assignments",
       "zero missing expected admins",
       "zero unexpected operational admins after owner exceptions",
       "all app/token/debug checks healthy",
-      "explicitly preserve B001-3/B004-3/B006-3/B007/B013-3 routing semantics"
+      "explicitly preserve B001-3/B004-3/B006-3/B007-2/B013-3 routing semantics"
     ],
     "reactivate_only_when": "explicit Rodolfo instruction or 100 percent reconciled",
-    "current_runtime_note": "Generic role monitoring is active and excludes B013-3; B001-3 remains fail-closed at 15/17. Dedicated B013-3 monitoring is active with 31/31 linked, zero pending/unknown, healthy capability and zero Sheet X markers."
+    "current_runtime_note": "Generic role monitoring is active and includes B007-2 at 18 roles, 18 present Sheet rows, one preserved X (An Na), zero errors and no active app pause; B013-3 remains excluded on its dedicated healthy route; B001-3 keeps its existing fail-closed gate."
   }
 }
