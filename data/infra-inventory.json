@@ -1519,24 +1519,22 @@
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 353,
-      "modified_at": "2026-08-24T09:18:13-04:00",
-      "sha256": "9ab60fa7e33de8d3d66e0e3637b6dc9b8e9073f933e94200b58b095d7ad45619",
+      "size_bytes": 348,
+      "modified_at": "2026-08-24T09:53:29-04:00",
+      "sha256": "e2851492aaed297d414a10e34c6c7a5b70347f11ddd7c5b4f1e0b94a125dd034",
       "mode": "manual",
-      "scope": [
-        "B007"
-      ],
+      "scope": [],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1541436123652300801",
-      "validation": "JSON PASS; isolated B007 production runner exited 0 with active_alert_pause.apps=[B007], manual=true, alerts_sent=0 and Sheet writes disabled; Discord channel readback found no message after the pause timestamp. The shared cron remains enabled for unaffected apps.",
-      "updated_at": "2026-08-24T09:19:24-04:00",
-      "source_report": "REPORT-INFRA Zeus B007 manual monitor pause 2026-08-24",
-      "backup": "/root/mgs-agent/backups/meta-app-b007-manual-pause-20260824-091750/meta-app-role-alert-pause.json.before",
-      "backup_sha256": "4c573706d4a5807562bb2b1a20ff94ace95bd500ea443caafa5b70e7efb7a0af",
-      "resume_condition": "Rodolfo explicitly confirms the B007 replacement app is ready and asks to re-enable it.",
-      "description": "Canonical generic-app alert pause file; B007 app-channel deliveries are manually paused while Rodolfo creates the replacement app.",
-      "last_change": "2026-08-24: B007 added to manual pause; unaffected apps remain monitored by the shared cron."
+      "authorization_message_id": "1541442725608558623",
+      "validation": "JSON PASS; B007-2 containment pause was active during the fresh baseline, then cleared only after 18 roles, 18 present Sheet rows, one preserved X, zero writes, zero errors and zero Discord messages. Force-live and the next scheduled full cycle both read back with no active app pause.",
+      "updated_at": "2026-08-24T09:56:29-04:00",
+      "source_report": "REPORT-INFRA Zeus B007-2 cutover 2026-08-24",
+      "backup": "/root/mgs-agent/backups/meta-app-b0072-cutover-20260824-094920/meta-app-role-alert-pause.json.before",
+      "backup_sha256": "9ab60fa7e33de8d3d66e0e3637b6dc9b8e9073f933e94200b58b095d7ad45619",
+      "resume_condition": "None; B007-2 is active and unpaused.",
+      "description": "Canonical generic-app alert pause file; no app is paused after validated B007-2 activation.",
+      "last_change": "2026-08-24: temporary B007-2 containment pause cleared after baseline, Sheet reconciliation and real alert readback."
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -1945,13 +1943,13 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for the current B001-B010 replacement lineage including B001-3/B004-3/B005-3/B006-3; dedicated DTR apps remain outside this generic route.",
-      "validation": "Enabled and scheduled with last_status=ok at 2026-08-21T11:25:47-04:00. Full cycle discovered exactly 12 generic items, excluded B013-3, alerts_sent=0 and errors_count=0; B001-3 fail-closed 15/17 gate remains active.",
-      "updated_at": "2026-08-21T11:28:13-04:00",
-      "last_observed_status": "ok_at_2026-08-21T11:25:47-04:00",
-      "reconciliation": "B013-3 is hard-excluded from the generic route and owned by the dedicated DTR monitor. B001-3 remains at 15/17 with Sheet writes blocked.",
+      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for the current B001-B012 replacement lineage including B001-3/B004-3/B005-3/B006-3/B007-2; B013-3 remains on the dedicated DTR route.",
+      "validation": "Enabled and scheduled. Full cycle at 2026-08-24T09:56:29-04:00 discovered 12 generic items including the exact B007-2 item, alerts_sent=0 and errors_count=0; B007-2 had 18 healthy roles, safe_for_sheet=true, 18 present rows and one preserved X.",
+      "updated_at": "2026-08-24T09:56:29-04:00",
+      "last_observed_status": "ok_at_2026-08-24T09:56:29-04:00",
+      "reconciliation": "B007-2 is active and unpaused; B013-3 stays hard-excluded on the dedicated route; B001-3 retains its separate existing fail-closed gate.",
       "state": "scheduled",
-      "next_run_at": "2026-08-21T11:30:00-04:00"
+      "next_run_at": "2026-08-24T09:57:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -3931,16 +3929,16 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 43228,
-      "modified_at": "2026-08-21T12:41:10-04:00",
-      "sha256": "7c12c6180a7fb16079dc04bd4057943844e0b6ba994f28c43d475beb0d7854d7",
+      "size_bytes": 45641,
+      "modified_at": "2026-08-24T09:52:16-04:00",
+      "sha256": "25b2c22abdcda382e1f1e9f3bf02bf2366fb2e51f1c3785cbe0ce8a4d7722aad",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Current B001–B012 restriction-alert standard plus the approved B013-3 possible-restriction presentation; preserves dedicated B013 routing and all existing monitoring gates.",
-      "validation": "Runtime/versioned SHA-256 parity PASS; procedure matches deployed render helpers and exact approved Discord previews for B001–B012 restriction and B013-3 possible restriction; scheduled B013 post-change cycle completed 31/31 linked, zero unknown/unlinked/alerts, no Sheet update and healthy capability.",
-      "updated_at": "2026-08-21T12:45:42-04:00",
-      "source_report": "discord:#alerts-infra/1540401445910872109"
+      "description": "Current B007-2 cutover, baseline, Sheet reconciliation, live-alert and 1Password PTY-edit procedure plus existing Meta app monitoring standards.",
+      "validation": "Runtime/versioned SHA-256 parity PASS; B007-2 procedure matches the executed 18-role baseline, one preserved X, exact 1Password metadata readback, three-message live alert and subsequent scheduled full-cycle readback.",
+      "updated_at": "2026-08-24T09:56:29-04:00",
+      "source_report": "REPORT-INFRA Zeus B007-2 cutover 2026-08-24"
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -6162,13 +6160,13 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 7690,
-      "modified_at": "2026-08-21T11:11:16-04:00",
-      "sha256": "f66f16169c8a6c81a4fcafd4e2929b20d95c0c6b442b0a490ee47e75bb6f125c",
+      "size_bytes": 10721,
+      "modified_at": "2026-08-24T09:57:02-04:00",
+      "sha256": "29d7da5086bf0536cb248872b548187eae65fdf6c5233d3ecacf9997d5ca53ff",
       "mode": "manual-authorized",
-      "source_report": "REPORT-INFRA Zeus B013-3 cutover 2026-08-21",
+      "source_report": "REPORT-INFRA Zeus B007-2 cutover 2026-08-24",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1540372238467862579",
+      "authorization_message_id": "1541442725608558623",
       "scope": [
         "B001-3",
         "B002-2",
@@ -6176,7 +6174,7 @@
         "B004-3",
         "B005-3",
         "B006-3",
-        "B007",
+        "B007-2",
         "B008-2",
         "B009-2",
         "B010-2",
@@ -6184,10 +6182,10 @@
         "B012",
         "B013-3"
       ],
-      "validation": "JSON PASS; B013-3 credentials/app/debug/roles healthy; dedicated live state 31/31 linked, zero pending/unknown; final Sheet readback 31 blank X markers; B001-3 15/17 gate preserved.",
-      "updated_at": "2026-08-21T11:10:15-04:00",
-      "last_change": "Replaced B013-2 with B013-3, updated exact 1Password item routing, retained channel ID/name alias and recorded both live alert families plus final 31/31 closure.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-registry.json.before"
+      "validation": "JSON PASS; exact B007-2 1Password item metadata corrected and read back; app/debug/me/roles healthy; 18/18 current Sheet users present, An Na preserved as the single X, zero Sheet writes/errors; force-live alert 3/3 messages and subsequent 12-item scheduled cycle read back successfully.",
+      "updated_at": "2026-08-24T09:57:02-04:00",
+      "last_change": "Replaced active B007 with B007-2, updated exact 1Password routing/admin/expected roles, preserved channel ID, reset stale app-scoped state, reconciled Sheet and recorded the real alert.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0072-cutover-20260824-094920/meta-app-registry.json.before"
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -13081,15 +13079,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 7690,
-      "md5": "77a04eabb15f002760d8f713b71f1e85",
-      "modified_at": "2026-08-21T11:11:16-04:00"
+      "size_bytes": 10721,
+      "md5": "d3966b1c1a9f207d5fd7f9857b229177",
+      "modified_at": "2026-08-24T09:57:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 363,
-      "md5": "70ee406ec4a2fc283614c222721760e0",
-      "modified_at": "2026-08-21T09:31:26-04:00"
+      "size_bytes": 348,
+      "md5": "188c7db33d084a1c80e50d31973bd36d",
+      "modified_at": "2026-08-24T09:53:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
@@ -13105,9 +13103,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 87855,
-      "md5": "594152b5e2e994000854b3dc51dcf90a",
-      "modified_at": "2026-08-24T00:59:28-04:00"
+      "size_bytes": 85029,
+      "md5": "65eabe4c71e6030949492c7af5ab86ce",
+      "modified_at": "2026-08-24T09:56:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
