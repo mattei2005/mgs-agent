@@ -93,12 +93,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-DYNAMIC-BUDGET-CRON-20260824",
-      "next_step": "Aplicar regra dinâmica em criação, escala e reativação; liberar hold; testar dry-run e reativar o cron com readback.",
+      "next_step": "Operação normal: às 17:00 São Paulo o scheduler executará o ciclo C21-C23; acompanhar o resultado na thread de criação e manter fail-closed para qualquer gate não relacionado ao envelope interno.",
       "objective": "Religar criação diária CPV às 17:00 São Paulo e tornar o envelope interno de budget dinâmico para criação e escalas autorizadas",
-      "source": "discord:thread:1541506896299556894; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "autorização explícita de rodolfo recebida; cron v3 identificado pausado e hold de lifecycle ainda ativo. implementação e validação pendentes.",
+      "source": "discord:thread:1541506896299556894; audit:data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/dynamic-budget-cron-resume-20260824.json",
+      "state": "concluído e validado: hold liberado; scheduler v3 script-only/local enabled+scheduled; envelope dinâmico com piso usd500 ativo para criação, escala roi e reativação guardada; 84 testes, offline smoke e dry-run live aprovados. dry-run c21-c23 selecionou 3/3 com budget live usd495,57, projeção usd585,57 e zero writes.",
       "thread_id": "1541506896299556894",
-      "updated_at": "2026-08-24T17:59:53+00:00"
+      "updated_at": "2026-08-24T18:23:22+00:00"
     },
     {
       "agent": "zeus",
@@ -1122,5 +1122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T17:59:53+00:00"
+  "updated_at": "2026-08-24T18:23:22+00:00"
 }
