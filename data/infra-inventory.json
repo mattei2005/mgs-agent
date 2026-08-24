@@ -1812,28 +1812,28 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.8-20260824",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.9-20260824",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.8",
+      "version": "1.7.9",
       "status": "active",
-      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário/timezone São Paulo + criação dinâmica de listas SMS Funnel",
-      "package_sha256": "4577b36b6c558b007596367eed35ebc607b738183ba98191ce90314ec355d8fd",
-      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-sms-add-list/20260824T150605Z/mgs-quiz-carro-1.7.7.tar.gz",
+      "feature": "Quiz car BR + relatórios SMS + criação dinâmica de múltiplas listas por gestor com preset_id interno",
+      "package_sha256": "d7f2dcb70d6a7ea0a3339a33048add8e23c5ee6096838f146c81ae0fa858ecb1",
+      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-sms-duplicate-gestor/20260824T152827Z/mgs-quiz-carro-1.7.8.tar.gz",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "956d71dd7c7b533365373a5b8f5fe5fc0fa63e061794aed2903fa6ddc6056b87",
+          "sha256": "5eba56f4d0a0ad62e17fd78e664fc14d4ed8d180d257e86135844647182a0425",
           "bytes": 2579
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
-          "sha256": "7e8b5c94910613f4a9050b0492a639f94cf4f6db090a7b8253b0ae3829fcd8a2",
-          "bytes": 102780
+          "sha256": "a5982000941c6a35526b42e1dcc7ba7294a6e2c10d3899de8a28cffad2ecfb36",
+          "bytes": 105678
         },
         {
           "path": "includes/class-mgs-quiz-activator.php",
@@ -1856,8 +1856,8 @@
           "bytes": 6136
         }
       ],
-      "validation": "v1.7.8 lint 11 PHP files; helper tests PASS (new/duplicate/invalid/missing); JS fixture added G007; live hashes exact; plugin active; admin render shows add button/code fields/save; remote helper accepts G007; option hash and 10 quiz configs unchanged; public quiz and REST HTTP 200.",
-      "updated_at": "2026-08-24T11:07:50-04:00",
+      "validation": "v1.7.9 lint 11 PHP files; duplicate G004 helper PASS; internal preset_id/resolver PASS; JS blank Gestor PASS; live admin/editor probes PASS; plugin active with exact hashes; option and 10 quiz config hashes unchanged; public quiz and REST HTTP 200.",
+      "updated_at": "2026-08-24T11:29:19-04:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1920,9 +1920,9 @@
           360
         ]
       },
-      "source_report": "REPORT-INFRA dynamic SMS list rollout 2026-08-24",
-      "report_infra_discord_message_id": "1541464491970134027",
-      "package_path": "/root/mgs-agent/work/mgs-quiz-sms-add-list-178/mgs-quiz-carro-1.7.8.tar.gz",
+      "source_report": "REPORT-INFRA duplicate gestor SMS fix 2026-08-24",
+      "report_infra_discord_message_id": null,
+      "package_path": "/root/mgs-agent/work/mgs-quiz-sms-add-list-179/mgs-quiz-carro-1.7.9.tar.gz",
       "sms_preset_management": {
         "default_codes": [
           "G001",
@@ -1932,11 +1932,14 @@
           "G005",
           "G006"
         ],
-        "custom_code_format": "^G[0-9]{3,}$",
+        "gestor_code_format": "^G[0-9]{3,}$",
+        "duplicate_gestor_codes_allowed": true,
+        "new_row_gestor_default": "",
+        "internal_identity": "preset_id",
         "add_button": "+ Adicionar lista",
         "central_option": "mgs_quiz_sms_presets",
-        "save_semantics": "transactional; existing codes required; duplicate/invalid blocked",
-        "quiz_selector_includes_custom_codes": true
+        "save_semantics": "transactional; existing preset_ids required; invalid fields blocked",
+        "quiz_selector_uses_preset_id": true
       },
       "timezone_reporting": {
         "business_timezone": "America/Sao_Paulo",

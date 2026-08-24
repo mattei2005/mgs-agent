@@ -14,14 +14,21 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-08-24: `mgs-quiz-carro` v1.7.8.
+Versão validada em produção em 2026-08-24: `mgs-quiz-carro` v1.7.9.
 
-Inclusão de listas SMS v1.7.8:
+Correção de múltiplas listas por gestor v1.7.9:
 
-- A página `MGS Quiz > SMS` mantém os presets existentes e oferece `+ Adicionar lista` para criar outro código no formato `G001`, nome/label e URL `add-lead` válida do SMS Funnel.
-- A UI sugere automaticamente o próximo código disponível, mas o backend normaliza e valida o código, bloqueia duplicidade, host/path inválidos e omissão de listas existentes.
-- Presets customizados persistidos em `mgs_quiz_sms_presets` passam a ser carregados, exibidos na página central e disponibilizados no seletor `Gestor / lista SMS Funnel` das quizzes.
-- O salvamento central continua transacional e propaga label/URL somente às quizzes que já usam o código correspondente; adicionar um código novo sem quiz vinculada não altera configurações existentes.
+- `+ Adicionar lista` cria a nova linha com o campo **Gestor vazio**; não sugere `G007` nem qualquer outro código.
+- O mesmo gestor pode ter várias listas distintas, como duas linhas `G004` com labels e URLs diferentes. A restrição de código de gestor único introduzida na v1.7.8 foi supersedida.
+- Cada lista recebe um `preset_id` interno estável, invisível para o operador. A quiz seleciona esse identificador, mas continua persistindo e reportando o `gestor_code` de negócio, como `G004`.
+- Compatibilidade legada resolve a lista antiga por código + URL/label antes de usar o fallback do gestor; isso impede uma segunda lista G004 de sobrescrever ou selecionar a G004 original.
+- Validação continua bloqueando gestor fora do formato `G` + pelo menos três dígitos, nome vazio, URL fora do endpoint SMS Funnel e remoção acidental de listas existentes.
+
+Inclusão de listas SMS v1.7.8 (histórico supersedido parcialmente pela v1.7.9):
+
+- A página `MGS Quiz > SMS` passou a oferecer `+ Adicionar lista` para criar código, nome/label e URL `add-lead` válida do SMS Funnel.
+- Presets customizados persistidos em `mgs_quiz_sms_presets` são carregados, exibidos na página central e disponibilizados no seletor `Gestor / lista SMS Funnel` das quizzes.
+- O salvamento central continua transacional e propaga label/URL somente às quizzes vinculadas à lista correspondente; adicionar uma lista nova sem quiz vinculada não altera configurações existentes.
 
 Correção de timezone v1.7.7:
 
@@ -54,13 +61,13 @@ Hardening operacional v1.6.1:
 - A atualização central de SMS deve rodar somente com `wp_options` e `wp_mgs_quiz_config` em InnoDB, iniciar transação antes da leitura, carregar as quizzes com `SELECT ... FOR UPDATE`, verificar falhas de start/select/update/commit e invalidar o cache da option em rollback.
 - Elementos inválidos dentro de `sms_funnel_urls` devem abortar com rollback, nunca causar propagação parcial ou TypeError.
 - URLs centrais são válidas apenas com HTTPS, host `v2.smsfunnel.com.br` e path `/integrations/lists/<id>/add-lead`; option inválida cai nos defaults canônicos e POST inválido é bloqueado sem alterar option/configs.
-- O escopo inicial G001–G006 permanece como fallback canônico, mas a fonte central aceita novos códigos no formato `G` + pelo menos três dígitos. Nunca introduzir fallback manual silencioso no editor; toda lista customizada deve ser criada na página SMS, persistida na option central e selecionada explicitamente na quiz.
+- O escopo inicial G001–G006 permanece como fallback canônico, mas a fonte central aceita novas listas e permite repetir o mesmo `gestor_code`. Nunca introduzir fallback manual silencioso no editor; toda lista customizada deve ser criada na página SMS, persistida na option central com `preset_id` próprio e selecionada explicitamente na quiz.
 
 Correções operacionais v1.6.0:
 
 - `Nome/label` e `URL add-lead` no editor da quiz são somente leitura. O operador escolhe apenas o gestor no seletor; o backend resolve os dados server-side para evitar erro humano ou adulteração de POST.
 - O menu MGS Quiz possui submenu `SMS`, página central para gerenciar os presets iniciais G001–G006 e adicionar listas posteriores. A fonte central é a option `mgs_quiz_sms_presets`, com os valores canônicos do plugin como fallback inicial.
-- Salvar a página SMS exige label não vazio e URL HTTPS para todos os gestores. A alteração deve ser propagada para todas as linhas `sms_funnel_urls` das quizzes com o mesmo `gestor_code`, mantendo o runtime REST em paridade com a fonte central.
+- Salvar a página SMS exige gestor, label e URL HTTPS válidos para todas as listas. A alteração deve ser propagada às quizzes pelo `preset_id`; configurações legadas sem esse campo são reconciliadas por código + URL/label antes do fallback do gestor.
 - O editor da quiz não oferece modo manual e exige uma seleção válida de gestor antes de salvar.
 
 Correção operacional v1.5.3:
