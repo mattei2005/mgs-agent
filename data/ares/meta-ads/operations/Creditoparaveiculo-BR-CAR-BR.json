@@ -393,7 +393,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-20T18:45:25-03:00",
-    "next_required_campaign_number": 21,
+    "next_required_campaign_number": 23,
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
     "prior_wrong_retry_slots": [
@@ -654,6 +654,18 @@
           "authorization_source": "discord:thread:1540939724636819507",
           "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json",
           "request_id": "cpv-c20-lineage-rebuild-r2-20260823"
+        },
+        "21": {
+          "campaign_id": "120250910426410632",
+          "cycle_start_date": "2026-08-25",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260824"
+        },
+        "22": {
+          "campaign_id": "120250910426420632",
+          "cycle_start_date": "2026-08-25",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260824"
         }
       },
       "required": [

@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.17
+version: 3.0.18
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -63,8 +63,8 @@ Carregue somente a referência do branch atual.
 10. V2 permanece rollback congelado; nenhum legado é apagado durante a migração inicial.
 11. Em CPV `clone_prestaged`, todo `asset_ref` exige `canonical_filename` válido da taxonomia `CAR_BR_BR_VID_*_{PV|NV|PH|NH}_NNN.mp4`. O anúncio nasce como `AD NN - {canonical_stem}` e o creative como `CPV CNN ADNN {canonical_stem}`. `asset_id` permanece apenas como identidade técnica no manifest/audit; se o nome canônico faltar ou for inválido, bloquear antes de selar o manifest.
 12. Em Creditoparaveiculo, o pós-processamento só conclui após auto-armar cada campanha nova no guardrail de primeiro gasto. O enrollment valida IDs, data operacional, status `ACTIVE`, gasto zero e retorna `meta_writes=0`; falha deixa o request `POSTPROCESS_PENDING`. O watcher aceita primeiro spend observado de 00:30 a 02:00 SP inclusive sem pause; fora dessa janela, pausa uma vez e agenda reativação 00:30 do dia seguinte.
-13. Todo alerta operacional de erro deve identificar operação e campanhas afetadas e informar, em linguagem humana e sem paths/credenciais: etapa, causa baseada no erro real, consequência, solução proposta e autorização necessária. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
-14. Depois de qualquer exceção `V3 BLOQUEADO`, Ares pode continuar diagnóstico e readback somente leitura, mas nenhum write corretivo na Meta ocorre até Rodolfo ou Nicolas autorizar explicitamente a solução proposta. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
+13. Todo alerta operacional de erro deve identificar operação e campanhas afetadas e informar, em linguagem humana e sem paths/credenciais: etapa, causa baseada no erro real, consequência, correção em andamento e estado útil da recuperação. Mensagem genérica de “bloqueado” sem diagnóstico e ação não é conclusão suficiente.
+14. Por regra permanente de Rodolfo em 24/08/2026, erro dentro de um request já autorizado inicia recuperação automática, não bloqueio passivo: fazer readback, reconciliar efeitos parciais, corrigir somente a camada ausente/inválida e retomar o mesmo request até concluir. Nunca repetir POST não idempotente às cegas nem ampliar budget, billing, credencial, estratégia ou escopo. Bloqueio externo mantém o request resumível e ativamente escalado. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
 15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o envelope operacional efetivo, o saldo dentro desse envelope e a fonte: preflight Meta vivo mais budgets do request confirmados por readback. Em Creditoparaveiculo G006, USD500 é o piso e o envelope sobe somente ao total live mais os deltas exatos autorizados de criação, escala ROI e reativação; não há write de billing nem `account_spend_limit`.
 16. Criação programada segue o loop de análise, mas o hold vigente pode ser liberado por Rodolfo ou Nicolas. Para Creditoparaveiculo G006, Rodolfo liberou o hold em 24/08/2026 e reativou o scheduler diário de 17:00 São Paulo; um hold futuro continua sem expiração automática e bloqueia criação/clone até nova liberação explícita.
 17. Em `clone_prestaged`, cada anúncio exige `source_ad_id` não zero e nasce por `POST /{source_ad_id}/copies` com `creative_parameters`; criação direta por `act_{account}/ads` é proibida. Campaign copy, adset copy, normalização de shell, ad copies e normalização de nomes são batches sequenciais; filhos PAUSED permanecem PAUSED até readback e ativação autorizada.
@@ -99,7 +99,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - títulos de pre-stage incluem `asset_id + checksum curto`, e o registry confirma `account + asset + checksum + IDs` por readback;
 - falhas após possível side effect ficam `READBACK_DEFERRED`/`POSTPROCESS_PENDING`, nunca `FAILED` fora do gate;
 - `BatchTransportError` persiste etapa e causa Meta sanitizada (`code/subcode/user_title`) para o alerta; paths, headers sensíveis, token e trace não entram na mensagem ao operador;
-- simulação de erro confirma que o state recebe `manual_reconciliation_required=true` e `operator_authorization.required=true`, impedindo retomada/write corretivo automático;
+- simulação de erro confirma que o state recebe `manual_reconciliation_required=false`, `operator_authorization.required=false` e `automatic_recovery_required=true`; o recovery faz readback, preserva o mesmo request e cria somente a camada comprovadamente ausente;
 - conclusão programada inclui `account_budget_after_creation`; a mensagem Discord informa budget ativo, envelope efetivo, saldo dentro do envelope e USD;
 - REPORT-INFRA para qualquer mudança estrutural.
 

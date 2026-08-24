@@ -93,10 +93,30 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-18-20260824",
+      "title": "Ares Campaign Engine v3.0.17 uses dynamic authorized budget envelopes",
+      "updated_at": "2026-08-24T20:39:24+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T16:33:57-04:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-18-20260824",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3.0.17 uses dynamic authorized budget envelopes",
-      "updated_at": "2026-08-24T18:12:23+00:00"
+      "title": "Ares Campaign Engine v3.0.18 automatically recovers partial authorized requests",
+      "updated_at": "2026-08-24T20:39:24+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -575,6 +595,25 @@
       "superseded_by": null,
       "title": "Creditoparaveiculo permanent rules reference thread",
       "updated_at": "2026-08-21T21:13:17+00:00"
+    },
+    {
+      "canonical_key": "ares.failure-recovery",
+      "canonical_source": "profiles/ares-soul.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T16:33:57-04:00",
+      "id": "ARES-FAILURE-RECOVERY-MANDATORY-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares mandatory readback-first recovery until request completion",
+      "updated_at": "2026-08-24T20:39:24+00:00"
     },
     {
       "canonical_key": "growth.openzedfinanzas.es-cc-es-03.discord-route",
@@ -1568,5 +1607,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T20:19:32+00:00"
+  "updated_at": "2026-08-24T20:39:24+00:00"
 }

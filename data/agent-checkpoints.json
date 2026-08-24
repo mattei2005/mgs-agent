@@ -72,6 +72,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C21-C23-AUTO-RECOVERY-20260824",
+      "next_step": "Retomar bundle final C23 após cooldown, validar 1x1x3/start/budget/UTM, concluir Drive/inventário/first-delivery e fechar regra com readback e REPORT-INFRA.",
+      "objective": "Recuperar C21-C23 e institucionalizar correção automática de falhas até conclusão",
+      "source": "discord:thread:1541541843379027979; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json; request:cpv-daily-20260824",
+      "state": "regra autorizada por rodolfo; v3.0.18 implementado e testado; c21/c22 reconciliadas, ad faltante criada sem replay, pós-processadas e armadas; c23 aguarda apenas janela saudável de quota do mesmo request.",
+      "thread_id": "1541541843379027979",
+      "updated_at": "2026-08-24T20:39:24+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -383,12 +393,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260824",
-      "next_step": "Fazer último fetch/hash freeze, apontar launcher canônico para o wrapper 0.20.5, agendar finalizer seguro Ares→Atena→Zeus e concluir por validador externo com inventário/audit/REPORT-INFRA.",
+      "next_step": "Nenhum; manutenção encerrada. Monitorar apenas novos commits upstream futuros e o OAuth root/default se esse perfil voltar a ser necessário.",
       "objective": "Atualizar a VPS e o Hermes em fases controladas, com rollback, preservação integral dos patches MGS e zero commits upstream conhecidos pendentes no cutover",
-      "source": "discord:thread:1541526538619588678; candidate:/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d; patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-85a55e2b.patch; report:/root/mgs-agent/reports/hermes-updates/20260824T194208Z-precheck",
-      "state": "vps concluída pass. hermes 0.20.5 portado em candidato isolado sobre upstream 85a55e2b, commit local 18c5917df0, patch consolidado 46 paths reproduzido com tree equality. baseline 611+6, candidato 616+6, regressão 220 e guard 470+6 passaram. zeus/atena/ares smokes rc0; root oauth inválido já era preexistente. upstream zero pendente na última checagem; runtime ativo ainda é 0.20.2.",
+      "source": "discord:thread:1541526538619588678; candidate:/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d; patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-14201763.patch; finalizer:/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260824T202246Z-2920592.log; inventory:hermes-port-main-14201763-20260824",
+      "state": "pass concluído: vps 13/13 pacotes exatos, security/esm 0, byobu phaseado residual e sem reboot; hermes 0.20.5 ativo em 005bc450a6 sobre target 14201763, behind 0; patch 46 paths reverse pass; guard 470+6 e regressão 220; smokes zeus/atena/ares rc0; gateways ares→atena→zeus com pids novos e discord pronto; mirrors 6/6, auth 3/3; oauth root inválido permanece risco preexistente sem alteração.",
       "thread_id": "1541526538619588678",
-      "updated_at": "2026-08-24T20:13:22+00:00"
+      "updated_at": "2026-08-24T20:37:45+00:00"
     },
     {
       "agent": "zeus",
@@ -1142,5 +1152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T20:22:39+00:00"
+  "updated_at": "2026-08-24T20:39:24+00:00"
 }

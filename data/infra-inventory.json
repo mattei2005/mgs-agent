@@ -8934,7 +8934,7 @@
         "1541531559994335252"
       ],
       "source_thread_id": "1541526538619588678",
-      "status": "staged_validated_activation_pending",
+      "status": "activated_validated",
       "installed_before": "1021e0724fe20134340420cb7e7117419fb68404",
       "target_upstream_sha": "1420176393295dfb0dfb55ceb4b1cbab8d1965de",
       "target_version": "0.20.5",
@@ -8973,7 +8973,55 @@
         "Root/default OpenAI-Codex refresh credential remains invalid and was not changed.",
         "Upstream main moves rapidly; finalizer must abort if frozen target/runtime hashes drift."
       ],
-      "updated_at": "2026-08-24T20:21:39.891888+00:00"
+      "updated_at": "2026-08-24T20:37:02Z",
+      "active_runtime_path": "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
+      "active_runtime_sha": "005bc450a6e68d33a95b5ace13a111337f6993db",
+      "active_runtime_metadata_version": "0.20.5",
+      "canonical_launcher": "/root/.local/bin/hermes",
+      "active_wrapper_target": "/root/.local/bin/hermes-v0205-main-14201763-mgs",
+      "validated_at": "2026-08-24T20:37:02Z",
+      "activation_finalizer": {
+        "unit": "mgs-gateway-restart-20260824T202246Z-2920592.service",
+        "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260824T202246Z-2920592.log",
+        "result": "success; terminal DONE",
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "old_pids": {
+          "ares": 3461458,
+          "atena": 1726050,
+          "zeus": 1781949
+        },
+        "new_pids": {
+          "ares": 2921150,
+          "atena": 2921239,
+          "zeus": 2978428
+        },
+        "discord_readiness": "3/3 fresh after restart"
+      },
+      "activation_validation": {
+        "launcher": "exact target; Hermes Agent v0.20.5",
+        "git": "HEAD=005bc450a6; HEAD^=origin/main=1420176393295dfb0dfb55ceb4b1cbab8d1965de; behind=0 ahead=1",
+        "patch": "sha256 271afbe8492f6f197d3dc8085fb26d5c4faa785548866dda8edef95a21891279; 46 paths; reverse-check PASS",
+        "guard": "470 passed + 6 subtests; explicit candidate REPO/PYBIN",
+        "post_upstream_regression": "220 passed",
+        "py_compile_imports": "46 patch Python files compiled; 18 critical imports PASS",
+        "profile_config_checks": "Zeus/Atena/Ares 3/3 rc=0",
+        "oneshot_smokes": "Zeus/Atena/Ares 3/3 rc=0 with exact markers",
+        "profile_preservation": "config+SOUL live/mirror 6/6 byte-equal; auth present/parseable/mode 0600 3/3",
+        "gateways": "3/3 active/running; ExecMainStatus=0; NRestarts=0; new PIDs; fresh Discord readiness",
+        "vps": "13/13 exact package versions; standard security=0; ESM Apps=0; byobu only phased residual; no reboot; Monarx active/running",
+        "root_codex_oauth": "pre-existing invalid refresh token persists; root auth bytes and mtime unchanged during validation; non-gateway",
+        "upstream_after_cutover": "origin/main remains frozen target 14201763; zero new commits after fetch"
+      },
+      "rollback": {
+        "profiles_backup": "/root/mgs-agent/reports/hermes-updates/20260824T194208Z-precheck/hermes-profiles-backup-20260824T194208Z.tar.gz",
+        "vps_backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+        "previous_wrapper": "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
+        "previous_runtime": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d"
+      }
     }
   ],
   "profile_skill_references": [
