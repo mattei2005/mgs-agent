@@ -671,13 +671,14 @@ def test_reconciliation_blocks_existing_canonical_name_in_meta_ads():
     row["canonical_filename"] = "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4"
     ads = [{"id": "ad-1", "name": "AD 01 - CAR_BR_BR_VID_SCORE_BAIXO_PV_016", "creative": {"name": "creative"}, "campaign": {"name": "C12"}}]
     conflicts = reconciliation_conflicts([row], ads, [])
-    assert conflicts == [{
+    assert len(conflicts) == 1
+    assert {key: conflicts[0][key] for key in ("asset_id", "match_kind", "match_id", "exact_name", "source_sequence")} == {
         "asset_id": "asset-1",
         "match_kind": "ad",
         "match_id": "ad-1",
         "exact_name": True,
         "source_sequence": None,
-    }]
+    }
 
 
 def test_offline_smoke_exercises_two_plus_one_resume_without_network():

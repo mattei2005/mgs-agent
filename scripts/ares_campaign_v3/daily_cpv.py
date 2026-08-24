@@ -643,6 +643,10 @@ def reconciliation_conflicts(candidates: list[dict[str, Any]], ads: list[dict[st
             "kind": "ad",
             "id": str(ad.get("id") or ""),
             "text": normalize_title(" ".join([str(ad.get("name") or ""), str(creative.get("name") or ""), str((ad.get("campaign") or {}).get("name") or "")])),
+            "configured_status": str(ad.get("configured_status") or ad.get("status") or "").upper(),
+            "effective_status": str(ad.get("effective_status") or "").upper(),
+            "campaign_id": str((ad.get("campaign") or {}).get("id") or ""),
+            "campaign_status": str((ad.get("campaign") or {}).get("effective_status") or (ad.get("campaign") or {}).get("status") or "").upper(),
         })
     for video in videos:
         haystacks.append({"kind": "video", "id": str(video.get("video_id") or ""), "text": normalize_title(video.get("title"))})
@@ -656,8 +660,47 @@ def reconciliation_conflicts(candidates: list[dict[str, Any]], ads: list[dict[st
             exact = bool(canonical and canonical in text) or bool(original and len(original) >= 12 and original in text)
             sequence_match = bool(sequence and re.search(rf"(?:^|\s){re.escape(sequence)}(?:\s|$)", text))
             if exact or sequence_match:
-                conflicts.append({"asset_id": row.get("asset_id"), "match_kind": haystack["kind"], "match_id": haystack["id"], "exact_name": exact, "source_sequence": sequence if sequence_match else None})
+                conflicts.append({
+                    "asset_id": row.get("asset_id"),
+                    "match_kind": haystack["kind"],
+                    "match_id": haystack["id"],
+                    "exact_name": exact,
+                    "source_sequence": sequence if sequence_match else None,
+                    "configured_status": haystack.get("configured_status"),
+                    "effective_status": haystack.get("effective_status"),
+                    "campaign_id": haystack.get("campaign_id"),
+                    "campaign_status": haystack.get("campaign_status"),
+                })
     return conflicts
+
+
+def expected_retest_meta_ids(row: dict[str, Any]) -> set[str]:
+    values = {
+        str(row.get("meta_ad_id") or ""),
+        str(row.get("meta_video_id") or ""),
+        *(str(item) for item in row.get("meta_video_ids") or []),
+        *(str(item) for item in row.get("meta_prestage_video_ids") or []),
+    }
+    for attempt in row.get("test_history") or []:
+        values.update(
+            {
+                str(attempt.get("ad_id") or attempt.get("meta_ad_id") or ""),
+                str(attempt.get("vertical_video_id") or ""),
+                str(attempt.get("square_video_id") or ""),
+                str(attempt.get("prestage_vertical_video_id") or ""),
+                str(attempt.get("prestage_square_video_id") or ""),
+                *(str(item) for item in attempt.get("meta_video_ids") or []),
+            }
+        )
+    return {value for value in values if value}
+
+
+def expected_retest_conflict(row: dict[str, Any], conflict: dict[str, Any]) -> bool:
+    if str(conflict.get("match_id") or "") not in expected_retest_meta_ids(row):
+        return False
+    if conflict.get("match_kind") != "ad":
+        return True
+    return str(conflict.get("effective_status") or "").upper() not in {"ACTIVE", "PENDING_REVIEW", "IN_PROCESS"}
 
 
 def verify_reconciliation(path: Path, selected: list[dict[str, Any]], now: datetime) -> dict[str, Any]:
@@ -752,18 +795,33 @@ def drive_inventory(token: str) -> dict[str, Any]:
     for kind in ("IMG", "VID"):
         folder = one_folder(drive_children(token, operation["id"]), kind, f"drive_{kind}")
         children = drive_children(token, folder["id"])
-        ready = one_folder(children, "01_READY", f"drive_{kind}_ready")
-        testing = one_folder(children, "02_TESTING", f"drive_{kind}_testing")
-        current_ready = [row for row in drive_children(token, ready["id"]) if row.get("mimeType") != FOLDER_MIME]
-        current_testing = [row for row in drive_children(token, testing["id"]) if row.get("mimeType") != FOLDER_MIME]
-        for row in current_ready:
-            row.update(kind=kind, location="01_READY", ready_parent_id=ready["id"], testing_parent_id=testing["id"])
-        for row in current_testing:
-            row.update(kind=kind, location="02_TESTING", ready_parent_id=ready["id"], testing_parent_id=testing["id"])
-        files.extend(current_ready)
-        files.extend(current_testing)
+        status_folders = {
+            status: one_folder(children, status, f"drive_{kind}_{status.lower()}")
+            for status in ("01_READY", "02_TESTING", "03_TESTED", "04_WINNERS", "05_REJECTED")
+        }
+        current_by_status = {
+            status: [row for row in drive_children(token, folder["id"]) if row.get("mimeType") != FOLDER_MIME]
+            for status, folder in status_folders.items()
+        }
+        parent_ids = {status: folder["id"] for status, folder in status_folders.items()}
+        for status, current in current_by_status.items():
+            for row in current:
+                row.update(
+                    kind=kind,
+                    location=status,
+                    source_parent_id=parent_ids[status],
+                    status_parent_ids=parent_ids,
+                    ready_parent_id=parent_ids["01_READY"],
+                    testing_parent_id=parent_ids["02_TESTING"],
+                    tested_parent_id=parent_ids["03_TESTED"],
+                    winners_parent_id=parent_ids["04_WINNERS"],
+                    rejected_parent_id=parent_ids["05_REJECTED"],
+                )
+            files.extend(current)
+        current_ready = current_by_status["01_READY"]
         counts[kind] = len(current_ready)
-    counts["TOTAL"] = sum(counts.values())
+        counts[f"{kind}_RETEST_ELIGIBLE_PHYSICAL"] = len(current_by_status["03_TESTED"])
+    counts["TOTAL"] = counts.get("IMG", 0) + counts.get("VID", 0)
     return {"root": root, "files": files, "counts": counts}
 
 
@@ -846,23 +904,45 @@ def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
     return {**verified, "width": 1080, "height": 1080}
 
 
-def move_to_testing(token: str, source: dict[str, Any]) -> dict[str, Any]:
-    if source.get("location") == "02_TESTING" or set(source.get("parents") or []) == {source.get("testing_parent_id")}:
-        return {
+def move_to_status(token: str, source: dict[str, Any], target_status: str) -> dict[str, Any]:
+    parent_ids = source.get("status_parent_ids") or {}
+    target_parent_id = str(parent_ids.get(target_status) or source.get({
+        "01_READY": "ready_parent_id",
+        "02_TESTING": "testing_parent_id",
+        "03_TESTED": "tested_parent_id",
+        "04_WINNERS": "winners_parent_id",
+        "05_REJECTED": "rejected_parent_id",
+    }.get(target_status, "")) or "")
+    if not target_parent_id:
+        raise DailyBlocked("drive_move", "target Drive status folder is unavailable", {"target_status": target_status})
+    if source.get("location") == target_status or set(source.get("parents") or []) == {target_parent_id}:
+        result = {
             "id": source.get("id"),
             "name": source.get("name"),
             "driveId": source.get("driveId"),
-            "parents": [source.get("testing_parent_id")],
+            "parents": [target_parent_id],
             "trashed": False,
             "size": source.get("size"),
             "md5Checksum": source.get("md5Checksum"),
-            "already_in_testing": True,
+            "already_in_target": True,
+            "target_status": target_status,
         }
-    params = urllib.parse.urlencode({"addParents": source["testing_parent_id"], "removeParents": source["ready_parent_id"], "fields": "id,name,driveId,parents,trashed,size,md5Checksum", "supportsAllDrives": "true"})
+        if target_status == "02_TESTING":
+            result["already_in_testing"] = True
+        return result
+    source_parent_id = str(source.get("source_parent_id") or ((source.get("parents") or [""])[0]))
+    if not source_parent_id:
+        raise DailyBlocked("drive_move", "source Drive status folder is unavailable", {"file_id": source.get("id")})
+    params = urllib.parse.urlencode({"addParents": target_parent_id, "removeParents": source_parent_id, "fields": "id,name,driveId,parents,trashed,size,md5Checksum", "supportsAllDrives": "true"})
     result = drive_request(token, "PATCH", f"https://www.googleapis.com/drive/v3/files/{source['id']}?{params}", body=b"{}", content_type="application/json")
-    if result.get("driveId") != DRIVE_ID or result.get("trashed") or set(result.get("parents") or []) != {source["testing_parent_id"]} or str(result.get("md5Checksum") or "") != str(source.get("md5Checksum") or ""):
+    if result.get("driveId") != DRIVE_ID or result.get("trashed") or set(result.get("parents") or []) != {target_parent_id} or str(result.get("md5Checksum") or "") != str(source.get("md5Checksum") or ""):
         raise DailyBlocked("drive_move", "Drive move readback failed", {"file_id": source.get("id")})
+    result["target_status"] = target_status
     return result
+
+
+def move_to_testing(token: str, source: dict[str, Any]) -> dict[str, Any]:
+    return move_to_status(token, source, "02_TESTING")
 
 
 def stock_counts(inventory: list[dict[str, Any]], drive: dict[str, Any]) -> dict[str, int]:
@@ -875,7 +955,23 @@ def stock_counts(inventory: list[dict[str, Any]], drive: dict[str, Any]) -> dict
         and not row.get("used_by")
         and str(row.get("asset_drive_id") or "") in live_ids
     }
-    return {"ready_folder_total": int((drive.get("counts") or {}).get("TOTAL") or 0), "ready_folder_img": int((drive.get("counts") or {}).get("IMG") or 0), "ready_folder_vid": int((drive.get("counts") or {}).get("VID") or 0), "eligible_unique_creatives": len(unique)}
+    retest_unique = {
+        str(row.get("perceptual_fingerprint") or row.get("clean_checksum") or row.get("asset_id"))
+        for row in inventory
+        if row.get("ares_eligible") is True
+        and row.get("status") == "03_TESTED"
+        and row.get("evaluation_status") == "INCONCLUSIVO_POR_SUBENTREGA"
+        and row.get("retest_eligible") is True
+        and not row.get("used_by")
+        and str(row.get("asset_drive_id") or "") in live_ids
+    }
+    return {
+        "ready_folder_total": int((drive.get("counts") or {}).get("TOTAL") or 0),
+        "ready_folder_img": int((drive.get("counts") or {}).get("IMG") or 0),
+        "ready_folder_vid": int((drive.get("counts") or {}).get("VID") or 0),
+        "eligible_unique_creatives": len(unique),
+        "retest_eligible_unique_creatives": len(retest_unique),
+    }
 
 
 def reserve_inventory(path: Path, rows: list[dict[str, Any]], selected: list[dict[str, Any]], audit_path: Path) -> None:
@@ -889,7 +985,8 @@ def reserve_inventory(path: Path, rows: list[dict[str, Any]], selected: list[dic
 def release_inventory(path: Path, rows: list[dict[str, Any]], selected_ids: set[str]) -> None:
     for row in rows:
         if str(row.get("asset_id") or "") in selected_ids and row.get("used_by") == "ARES_V3_IN_FLIGHT":
-            row.update(reservation_status="LIBERADO_POR_RODOLFO_PARA_ARES_DAILY", ares_eligible=True, used_by=None, campaign_owner="Ares", last_reconciled_at=utc_now())
+            reservation = "LIBERADO_PARA_RETESTE" if row.get("status") == "03_TESTED" else "LIBERADO_POR_RODOLFO_PARA_ARES_DAILY"
+            row.update(reservation_status=reservation, ares_eligible=True, used_by=None, campaign_owner="Ares", last_reconciled_at=utc_now())
             row.pop("reservation_audit", None)
     atomic_inventory(path, rows)
 
@@ -901,8 +998,28 @@ def update_inventory_assignments(path: Path, rows: list[dict[str, Any]], assignm
         if not assignment:
             continue
         moved = str(row.get("asset_drive_id") or "") in moves
+        attempt = {
+            "attempt": int(row.get("test_attempt_count") or 0) + 1,
+            "assigned_at_utc": utc_now(),
+            "campaign_id": assignment["campaign_id"],
+            "adset_id": assignment["adset_id"],
+            "ad_id": assignment["ad_id"],
+            "creative_id": assignment["creative_id"],
+            "source_ad_id": assignment["source_ad_id"],
+            "effective_object_story_id": assignment["effective_object_story_id"],
+            "vertical_video_id": assignment["vertical_video_id"],
+            "square_video_id": assignment["square_video_id"],
+            "prestage_vertical_video_id": assignment["prestage_vertical_video_id"],
+            "prestage_square_video_id": assignment["prestage_square_video_id"],
+            "meta_video_ids": [assignment["vertical_video_id"], assignment["square_video_id"]],
+            "campaign_audit": str(audit_path),
+        }
+        row.setdefault("test_history", []).append(attempt)
         row.update(
             status="02_TESTING" if moved else "01_READY_USED_MOVE_PENDING",
+            evaluation_status="EM_TESTE",
+            retest_eligible=False,
+            test_attempt_count=attempt["attempt"],
             reservation_status="UTILIZADO_PELO_ARES",
             ares_eligible=False,
             used_by="ARES",
@@ -1012,18 +1129,18 @@ class LiveDailyBackend:
     def refresh_reconciliation(self, inventory: list[dict[str, Any]], drive: dict[str, Any], now: datetime) -> dict[str, Any]:
         if not self.token or not self.page_token:
             raise DailyBlocked("reconciliation", "Meta/Page token not initialized")
-        ready_ids = {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"}
+        operation = load_json(self.paths.operation)
+        lifecycle = operation.get("creative_performance_lifecycle") or {}
+        retest_policy = lifecycle.get("retest") or {}
+        max_attempts = int(retest_policy.get("max_test_attempts") or 2)
+        candidate_ids = {
+            str(row.get("id") or "")
+            for row in drive.get("files") or []
+            if row.get("location") in {"01_READY", "03_TESTED"}
+        }
         candidates = [
             row for row in inventory
-            if row.get("vertical") == "CAR"
-            and row.get("country") == "BR"
-            and row.get("language") == "BR"
-            and row.get("format") == "VID"
-            and row.get("status") == "01_READY"
-            and row.get("metadata_clean") is True
-            and row.get("ares_eligible") is True
-            and not row.get("used_by")
-            and str(row.get("asset_drive_id") or "") in ready_ids
+            if _creative_candidate(row, candidate_ids, None, max_test_attempts=max_attempts)
         ]
         fields = "id,name,status,effective_status,configured_status,campaign{id,name,status,effective_status},creative{id,name,asset_feed_spec,object_story_spec}"
         ads_by_id: dict[str, dict[str, Any]] = {}
@@ -1055,18 +1172,26 @@ class LiveDailyBackend:
         conflicts_by_asset: dict[str, list[dict[str, Any]]] = {}
         for conflict in conflicts:
             conflicts_by_asset.setdefault(str(conflict.get("asset_id") or ""), []).append(conflict)
-        assets = [
-            {
+        assets = []
+        for row in candidates:
+            raw_conflicts = conflicts_by_asset.get(str(row.get("asset_id") or ""), [])
+            expected_conflicts = []
+            blocking_conflicts = raw_conflicts
+            if row.get("status") == "03_TESTED":
+                expected_conflicts = [item for item in raw_conflicts if expected_retest_conflict(row, item)]
+                blocking_conflicts = [item for item in raw_conflicts if item not in expected_conflicts]
+            assets.append({
                 "asset_id": row.get("asset_id"),
                 "canonical_filename": row.get("canonical_filename"),
                 "asset_drive_id": row.get("asset_drive_id"),
                 "clean_checksum": row.get("clean_checksum"),
                 "perceptual_fingerprint": row.get("perceptual_fingerprint"),
-                "approved": not conflicts_by_asset.get(str(row.get("asset_id") or "")),
-                "meta_conflicts": conflicts_by_asset.get(str(row.get("asset_id") or ""), []),
-            }
-            for row in candidates
-        ]
+                "candidate_status": row.get("status"),
+                "retest_eligible": row.get("retest_eligible") is True,
+                "approved": not blocking_conflicts,
+                "meta_conflicts": blocking_conflicts,
+                "expected_prior_test_conflicts": expected_conflicts,
+            })
         payload = {
             "schema_version": 2,
             "status": "valid",
@@ -1437,9 +1562,17 @@ def run_daily(
                 phase_started, phase_calls = phase_begin(call_counter)
                 selected = select_assets(
                     inventory_rows,
-                    {str(row.get("id") or "") for row in drive.get("files") or [] if row.get("location") == "01_READY"},
+                    {
+                        str(row.get("id") or "")
+                        for row in drive.get("files") or []
+                        if row.get("location") in {"01_READY", "03_TESTED"}
+                    },
                     count * 3,
                     reconciliation=reconciliation_payload,
+                    mix_policy={
+                        **(((operation.get("creative_performance_lifecycle") or {}).get("retest") or {}).get("selection_mix") or {}),
+                        "max_test_attempts": int((((operation.get("creative_performance_lifecycle") or {}).get("retest") or {}).get("max_test_attempts") or 2)),
+                    },
                 )
                 reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
                 phase_end(audit, "asset_selection", phase_started, phase_calls, call_counter, detail={"selected": len(selected)})
@@ -1453,6 +1586,7 @@ def run_daily(
                         "planner_bundles": [2] * (count // 2) + ([1] if count % 2 else []),
                         "budget": budget,
                         "selected_assets": [str(row.get("canonical_filename") or "") for row in selected],
+                        "selected_asset_sources": [str(row.get("status") or "") for row in selected],
                         "reconciliation": reconciliation,
                         "drive_counts": drive.get("counts") or {},
                         "side_effects": {"inventory_reservation": False, "media_upload": False, "campaign_write": False, "drive_move": False},
