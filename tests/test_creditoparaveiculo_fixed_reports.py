@@ -545,6 +545,7 @@ def test_discord_chunking_can_still_pack_dormant_mobile_cards_safely():
     discord_contents = module.discord_message_contents(text)
     assert all(len(content) <= 1900 for content in discord_contents)
     assert all(content.count("```") % 2 == 0 for content in discord_contents)
+    assert all(not content.startswith("[parte ") for content in discord_contents)
 
 
 def test_dormant_mobile_card_fences_preserve_blank_lines():
