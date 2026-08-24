@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.0.17",
+  "release_version": "3.0.18",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -23,8 +23,16 @@
   "intermediate_get_calls": 0,
   "media_policy": "prestage_before_campaign_manifest; clone_prestaged uses POST source_ad_id/copies with creative_parameters and nonzero lineage readback",
   "ad_naming_policy": "CPV clone_prestaged requires canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
-  "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, proposed solution and Rodolfo-or-Nicolas authorization gate; no internal paths or credentials",
-  "failure_write_gate": "after a V3 BLOQUEADO exception, diagnosis/readback may continue but every corrective Meta write waits for explicit Rodolfo or Nicolas authorization",
+  "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
+  "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",
+  "automatic_failure_recovery": {
+    "enabled": true,
+    "readback_before_write": true,
+    "missing_layer_only": true,
+    "blind_replay_blocked": true,
+    "preserve_request_id": true,
+    "preserve_original_scope": true
+  },
   "scheduled_creation_budget_reporting": "every completed scheduled creation reports active account budget, effective dynamic envelope, remaining amount inside that envelope and USD source basis",
   "creation_lifecycle_gate": "scheduled creation is a conditional phase after D1-D3 analysis, pause and scale decisions; a creation_hold blocks all new campaign writes until Rodolfo or Nicolas releases it",
   "appsecret_proof": {

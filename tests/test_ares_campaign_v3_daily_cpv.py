@@ -32,6 +32,7 @@ from ares_campaign_v3.daily_cpv import (
     move_to_testing,
     make_square_clean,
     campaign_name_collisions,
+    recovery_checkpoint_campaign_ids,
     failure_resume_state,
     discord_failure_message,
     rollover_completed_state,
@@ -344,6 +345,19 @@ def test_exact_manifest_name_collision_blocks_unmapped_live_campaign():
     assert campaign_name_collisions(manifest, live, {"live-14"}) == []
     live[0]["effective_status"] = "ARCHIVED"
     assert campaign_name_collisions(manifest, live, set()) == []
+
+
+def test_recovery_checkpoint_campaign_ids_collects_only_persisted_numeric_ids(tmp_path):
+    checkpoint_dir = tmp_path / "state" / "checkpoints"
+    checkpoint_dir.mkdir(parents=True)
+    (checkpoint_dir / "request-1-100.json").write_text(json.dumps({
+        "bundles": [
+            {"campaign_ids": ["123", "456"]},
+            {"campaign_ids": ["456", "not-an-id"]},
+        ]
+    }))
+    (checkpoint_dir / "another-request-100.json").write_text(json.dumps({"bundles": [{"campaign_ids": ["999"]}]}))
+    assert recovery_checkpoint_campaign_ids({"state_root": str(tmp_path / "state")}, "request-1") == ["123", "456"]
 
 
 def test_media_title_binds_reuse_to_asset_and_checksum():

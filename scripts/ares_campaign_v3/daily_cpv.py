@@ -346,6 +346,22 @@ def campaign_name_collisions(manifest: Manifest, live_campaigns: list[dict[str, 
     return collisions
 
 
+def recovery_checkpoint_campaign_ids(config: dict[str, Any], request_id: str) -> list[str]:
+    """Return persisted campaign IDs that are safe to map during recovery."""
+    checkpoint_dir = Path(str(config.get("state_root") or "")) / "checkpoints"
+    if not checkpoint_dir.is_dir():
+        return []
+    safe_request = re.sub(r"[^A-Za-z0-9_.-]+", "-", str(request_id)).strip("-")[:120] or "request"
+    campaign_ids: set[str] = set()
+    for checkpoint in checkpoint_dir.glob(f"{safe_request}-*.json"):
+        payload = load_json(checkpoint)
+        for bundle in payload.get("bundles") or []:
+            for campaign_id in bundle.get("campaign_ids") or []:
+                if str(campaign_id).isdigit():
+                    campaign_ids.add(str(campaign_id))
+    return sorted(campaign_ids)
+
+
 def failure_resume_state(side_effects: dict[str, Any], *, known_campaign_ids: bool) -> tuple[str, bool]:
     if side_effects.get("drive_move"):
         return "POSTPROCESS_PENDING", False
@@ -1340,7 +1356,8 @@ def run_daily(
             phase_started, phase_calls = phase_begin(call_counter)
             meta = backend.meta_preflight()
             phase_end(audit, "meta_preflight", phase_started, phase_calls, call_counter)
-            completed_before = len(state.get("campaign_ids") or [])
+            checkpoint_campaign_ids = recovery_checkpoint_campaign_ids(config, request_id)
+            completed_before = len(set(str(item) for item in state.get("campaign_ids") or []) | set(checkpoint_campaign_ids))
             if state.get("campaign_count"):
                 count = int(state["campaign_count"])
                 pending_budget_count = max(0, count - completed_before)
@@ -1457,7 +1474,7 @@ def run_daily(
             collisions = campaign_name_collisions(
                 manifest,
                 meta["campaigns"],
-                {str(item) for item in state.get("campaign_ids") or []},
+                {str(item) for item in state.get("campaign_ids") or []} | set(checkpoint_campaign_ids),
             )
             if collisions:
                 raise DailyBlocked(
