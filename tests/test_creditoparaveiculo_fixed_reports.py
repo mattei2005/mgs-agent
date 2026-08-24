@@ -294,7 +294,6 @@ def test_intraday_mobile_card_matches_approved_discord_layout():
         "Custo  $0,08     ROAS  1,64\n"
         "ROI real +45,4%  ROI est +81,9%\n"
         "RPS $224,59     CPM $131,80\n"
-        "CR  74,47%      ontem 78,92%\n"
         "\n"
         "ROI 19/08 n/d\n"
         "ROI 20/08 -17,7%\n"
