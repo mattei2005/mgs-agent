@@ -197,6 +197,28 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "ID REC" not in SCRIPT.read_text()
 
 
+def test_operation_contract_persists_intraday_rps_cpm_cr():
+    operation = json.loads(
+        Path("/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json").read_text()
+    )
+    contract = operation["smart_bidding_roi"]["intraday_monetization"]
+    assert contract["adgroup_dimensions"]["deselected_last_three"] == [
+        "ADGROUP_NAME",
+        "AD_NAME",
+        "UTM_ADGROUP",
+    ]
+    assert contract["currency"] == "USD"
+    assert contract["discount_revenue_share"] is True
+    assert contract["rewarded_filter"] == "rewarded"
+    assert contract["cr_column"] == "CR"
+    assert operation["reporting_presentation"]["intraday_columns"][-4:] == [
+        "RPS",
+        "CPM",
+        "CR",
+        "Ação",
+    ]
+
+
 def test_intraday_mobile_card_matches_approved_discord_layout():
     module = load_reports_module()
     row = {

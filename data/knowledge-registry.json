@@ -465,6 +465,25 @@
       "updated_at": "2026-08-21T15:49:28+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-rewarded-monetization",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T17:19:32-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Intraday com RPS, CPM e CR rewarded",
+      "updated_at": "2026-08-24T20:19:32+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-roi-action-visual-semantics",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -1549,5 +1568,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T18:12:23+00:00"
+  "updated_at": "2026-08-24T20:19:32+00:00"
 }

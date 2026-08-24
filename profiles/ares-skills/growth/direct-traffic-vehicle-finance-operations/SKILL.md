@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.27
+version: 1.0.28
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -443,6 +443,8 @@ O escopo de **exibição** é descoberto dinamicamente em cada execução pelas 
 No Diário de Creditoparaveiculo BR-CAR-BR, o formato solicitado é híbrido: cards verticais por campanha para mobile, com `Budget/Spend`, `Custo/ROAS` e `ROI SB`; divisor de 34 caracteres `━`; depois, preservar a tabela consolidada de campanhas e a tabela de resumo da conta para desktop. Cards e tabelas são seções atômicas no chunker, cercas ficam balanceadas e cada conteúdo final permanece em até 1.900 caracteres. Se o empacotamento seguro falhar antes do primeiro POST, repetir automaticamente uma única vez com parser fence-aware e paginação de tabela com cabeçalho repetido; só então falhar fechado. Após qualquer message ID, fazer readback antes de considerar novo envio e nunca repetir cegamente.
 
 No Intraday da mesma operação, cada card mobile também mostra o ROI diário da Smart Bidding nas últimas três datas — dia atual parcial e dois dias anteriores — com data explícita e `n/d` quando não houver investimento/match. Para desktop, manter a tabela consolidada atual e acrescentar uma tabela histórica compacta separada. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
+
+O Intraday CPV inclui ainda `RPS`, `CPM` e `CR`. RPS/CPM são por campanha no Adgroup, em USD e com revenue share descontado: `NET_REVENUE × 1.000 ÷ SESSIONS` e `NET_REVENUE × 1.000 ÷ GAM_IMPRESSIONS`. A Pricing deve estar filtrada por `rewarded`; `CR` é a cobertura efetiva da cascata reward, calculada por `Σ gamMatchedRequests dos cinco blocos rewarded ÷ gamRequests do rewarded base × 100`. O valor cinza imediatamente abaixo na Pricing é o consolidado anterior/ontem e deve aparecer identificado apenas como referência histórica.
 
 Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 

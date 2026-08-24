@@ -462,7 +462,33 @@
       "CAMPAIGN_ID",
       "UTM_ADGROUP"
     ],
-    "date_policy": "filter response DATE again to requested inclusive range in account timezone"
+    "date_policy": "filter response DATE again to requested inclusive range in account timezone",
+    "intraday_monetization": {
+      "status": "canonical_default",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at": "2026-08-24",
+      "source_thread_id": "1541535526610403409",
+      "adgroup_dimensions": {
+        "selected_count": 10,
+        "deselected_last_three": [
+          "ADGROUP_NAME",
+          "AD_NAME",
+          "UTM_ADGROUP"
+        ]
+      },
+      "currency": "USD",
+      "discount_revenue_share": true,
+      "rps_formula": "NET_REVENUE * 1000 / SESSIONS",
+      "cpm_formula": "NET_REVENUE * 1000 / GAM_IMPRESSIONS",
+      "rewarded_filter": "rewarded",
+      "rewarded_pricing_endpoint": "/pricing/digital-trust_creditoparaveiculo?should_update_metrics=1",
+      "rewarded_operation_group": "facebook_br_car_financ-carro-s",
+      "rewarded_slot_base": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
+      "cr_column": "CR",
+      "cr_formula": "sum GAM matchedRequests across rewarded base + _1 + _2 + _3 + _4 / GAM requests of rewarded base * 100",
+      "previous_gray_semantics": "consolidated previous-day reference shown in light gray by Smart Bidding Pricing",
+      "scheduled_cadence": "every two hours on odd America/Sao_Paulo hours"
+    }
   },
   "meta_rate_limit_scale_plan": {
     "status": "route_rewrite_required_before_resume",
@@ -697,6 +723,9 @@
       "ROAS",
       "ROI real",
       "ROI est.",
+      "RPS",
+      "CPM",
+      "CR",
       "Ação"
     ],
     "lance_values": {
@@ -837,13 +866,13 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "hybrid_mobile_cards_desktop_table_v3_roi_real_estimated",
+        "style": "hybrid_mobile_cards_desktop_table_v4_rewarded_monetization",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
         "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
         "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
-        "metrics": "two columns per line: Budget/Spend, Custo/ROAS, ROI real/ROI est; then three dated ROI SB lines for the current partial day and two prior dates",
+        "metrics": "Budget/Spend, Custo/ROAS, ROI real/ROI est, RPS/CPM and CR with previous gray consolidated reference; then three dated ROI SB lines for the current partial day and two prior dates",
         "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
         "divider": "34 heavy horizontal characters between campaigns",
         "desktop_table": "repeat the current campaign metrics as a consolidated aligned table after the final card, followed by a separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
@@ -1346,7 +1375,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.65",
+  "playbook_version": "1.0.66",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
