@@ -231,6 +231,120 @@ class CampaignEngine:
         record["readback_children"] = len(readbacks)
         return campaign_ids
 
+    def _recover_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
+        """Reconcile a partial prestaged bundle and create only missing ads."""
+        campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
+        adset_ids = [str(value) for value in record.get("adset_ids") or []]
+        if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):
+            raise ExecutionFailed("partial prestaged bundle is missing campaign/adset identities")
+
+        record["recovery"] = {
+            "mode": "readback_then_missing_only",
+            "blind_replay_blocked": True,
+            "started_at": _utc(),
+        }
+        recovery_reads = [
+            BatchOperation(
+                f"recovery_ads_{index}",
+                "GET",
+                f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,creative{{id,name,status,effective_object_story_id}}&limit=50",
+                kind="readback",
+            )
+            for index, campaign_id in enumerate(campaign_ids, 1)
+        ]
+        timing, started = self._timed_start()
+        record["timings"]["recovery_readback"] = timing
+        read_results = self._batch(bundle, transport, recovery_reads, "recovery_existing_ads_readback")
+        self._timed_finish(timing, started)
+
+        live_by_campaign: dict[int, list[dict[str, Any]]] = {}
+        for index in range(1, len(bundle.campaigns) + 1):
+            result = next(row for row in read_results if row.name == f"recovery_ads_{index}")
+            live_by_campaign[index] = list(result.body.get("data") or [])
+
+        resolved: dict[tuple[int, int], str] = {}
+        missing_ops: list[BatchOperation] = []
+        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
+            live_rows = live_by_campaign[ci]
+            for ai, ad in enumerate(campaign.ads, 1):
+                matches = [
+                    row
+                    for row in live_rows
+                    if str(row.get("adset_id") or "") == adset_id
+                    and str(row.get("source_ad_id") or "") == str(ad.source_ad_id)
+                ]
+                if len(matches) > 1:
+                    raise ExecutionFailed(
+                        f"partial prestaged bundle has duplicate lineage for campaign {ci} ad {ai}"
+                    )
+                if matches:
+                    resolved[(ci, ai)] = str(matches[0].get("id") or "")
+                    if not resolved[(ci, ai)]:
+                        raise ExecutionFailed("recovery readback returned an ad without id")
+                    continue
+                missing_ops.append(BatchOperation(
+                    f"recovery_ad_copy_{ci}_{ai}",
+                    "POST",
+                    f"{ad.source_ad_id}/copies",
+                    body={
+                        "adset_id": adset_id,
+                        "creative_parameters": ad.creative_payload,
+                        "status_option": campaign.status,
+                        "rename_options": {"rename_strategy": "NO_RENAME"},
+                    },
+                    kind="ad_copy_with_creative",
+                ))
+
+        if missing_ops:
+            timing, started = self._timed_start()
+            record["timings"]["recovery_missing_ad_copies"] = timing
+            missing_results = self._batch(bundle, transport, missing_ops, "recovery_missing_ad_copies")
+            self._timed_finish(timing, started)
+            for result in missing_results:
+                match = re.fullmatch(r"recovery_ad_copy_(\d+)_(\d+)", result.name)
+                if not match:
+                    raise ExecutionFailed("unexpected recovery ad-copy result name")
+                resolved[(int(match.group(1)), int(match.group(2)))] = _copied_id(result, "copied_ad_id")
+
+        expected_count = sum(len(campaign.ads) for campaign in bundle.campaigns)
+        if len(resolved) != expected_count:
+            raise ExecutionFailed("recovery did not resolve every expected ad")
+        copied_ad_ids = [
+            resolved[(ci, ai)]
+            for ci, campaign in enumerate(bundle.campaigns, 1)
+            for ai in range(1, len(campaign.ads) + 1)
+        ]
+        record["ad_ids"] = copied_ad_ids
+        record["created_children"] = len(copied_ad_ids)
+        record["recovery"]["existing_ads"] = expected_count - len(missing_ops)
+        record["recovery"]["missing_ads_created"] = len(missing_ops)
+
+        ad_name_ops: list[BatchOperation] = []
+        offset = 0
+        for campaign in bundle.campaigns:
+            for ad in campaign.ads:
+                ad_name_ops.append(BatchOperation(
+                    f"recovery_ad_name_update_{offset + 1}",
+                    "POST",
+                    copied_ad_ids[offset],
+                    body={"name": ad.name, "status": campaign.status},
+                    kind="ad_name_update",
+                ))
+                offset += 1
+        timing, started = self._timed_start()
+        record["timings"]["recovery_ad_name_normalize"] = timing
+        self._batch(bundle, transport, ad_name_ops, "recovery_ad_name_update")
+        self._timed_finish(timing, started)
+
+        timing, started = self._timed_start()
+        record["timings"]["recovery_consolidated_readback"] = timing
+        readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
+        self._timed_finish(timing, started)
+        record["readback_children"] = len(readbacks)
+        record["recovery"]["finished_at"] = _utc()
+        record["stage"] = "readback_complete_recovered"
+        return campaign_ids
+
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
         transport = self.transport_factory(account)
         checkpoint_path = Path(self.config["state_root"]) / "checkpoints" / f"{_safe_name(request_id)}-{_safe_name(account)}.json"
@@ -243,6 +357,11 @@ class CampaignEngine:
         lane_result["status"] = "IN_PROGRESS"
         lane_result.pop("deferred", None)
         completed_indices = {int(row["index"]) for row in (lane_result.get("bundles") or []) if row.get("status") == "COMPLETE"}
+        failed_by_index = {
+            int(row["index"]): row
+            for row in (lane_result.get("bundles") or [])
+            if row.get("status") == "FAILED"
+        }
         _atomic_json(checkpoint_path, lane_result)
         for bundle in bundles:
             if bundle.index in completed_indices:
