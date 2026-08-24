@@ -122,6 +122,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-INTRADAY-REWARDED-METRICS-20260824",
+      "next_step": "Criar backup, implementar runtime e testes, executar dry-run live, reemitir Intraday report-only com readback e promover regra canônica.",
+      "objective": "Adicionar RPS, CPM e CR rewarded ao Intraday CPV e entregar reemissão real para revisão",
+      "source": "discord:thread:1541535526610403409; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+      "state": "em execução: fontes live confirmadas; rps/cpm por campanha vêm do smart bidding adgroup em usd com revenue share, cr vem da pricing filtrada por rewarded como soma gam matched dos cinco blocos dividida pelos gam requests do bloco base; valores cinza são o consolidado anterior.",
+      "thread_id": "1541535526610403409",
+      "updated_at": "2026-08-24T20:02:18+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-V3-AD-NAMING-C14-C16-20260822",
       "next_step": "Operação normal; próximos manifests CPV só selam com naming canônico e qualquer ausência/invalidez falha fechado antes do write.",
       "objective": "Corrigir os nomes dos nove anúncios C14/C15/C16 e impedir recorrência no Campaign Engine v3",
@@ -373,12 +383,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260824",
-      "next_step": "Corrigir cobertura do precheck para incluir o patch Honcho; congelar upstream mais recente; capturar superfície completa e baseline; portar em checkout/venv isolados; revalidar upstream antes do cutover.",
+      "next_step": "Fazer último fetch/hash freeze, apontar launcher canônico para o wrapper 0.20.5, agendar finalizer seguro Ares→Atena→Zeus e concluir por validador externo com inventário/audit/REPORT-INFRA.",
       "objective": "Atualizar a VPS e o Hermes em fases controladas, com rollback, preservação integral dos patches MGS e zero commits upstream conhecidos pendentes no cutover",
-      "source": "discord:thread:1541526538619588678; authorization:1541528716583112756; critical-confirmation:1541531559994335252; vps-report:1541532764837519361; backup:/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
-      "state": "fase vps concluída pass: 13 pacotes exatos instalados, segurança/esm zeradas, byobu phaseado preservado, sem reboot, gateways com pids inalterados, monarx e fwupd ativos, rollback/hash/inventário/audit/report-infra 1541532764837519361 validados. iniciando fase hermes; runtime ativo ainda inalterado.",
+      "source": "discord:thread:1541526538619588678; candidate:/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d; patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-85a55e2b.patch; report:/root/mgs-agent/reports/hermes-updates/20260824T194208Z-precheck",
+      "state": "vps concluída pass. hermes 0.20.5 portado em candidato isolado sobre upstream 85a55e2b, commit local 18c5917df0, patch consolidado 46 paths reproduzido com tree equality. baseline 611+6, candidato 616+6, regressão 220 e guard 470+6 passaram. zeus/atena/ares smokes rc0; root oauth inválido já era preexistente. upstream zero pendente na última checagem; runtime ativo ainda é 0.20.2.",
       "thread_id": "1541526538619588678",
-      "updated_at": "2026-08-24T19:41:17+00:00"
+      "updated_at": "2026-08-24T20:13:22+00:00"
     },
     {
       "agent": "zeus",
@@ -1132,5 +1142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T19:41:17+00:00"
+  "updated_at": "2026-08-24T20:13:22+00:00"
 }

@@ -113,6 +113,18 @@ Caso validado Fincgriffin US-CAR-EN:
 - URLs-alvo Lightstream primeiro e PenFed Auto Loan segundo;
 - seis pools Drip e três MCT existentes atualizados; dezoito pools novos criados, sem deleção.
 
+## Comparação de cartões entre sites
+
+Quando Rodolfo fornecer URLs de um site e perguntar se os mesmos cartões existem no Smart Routing de outro site, comparar pela **identidade do cartão**, não pela igualdade literal de domínio ou slug.
+
+1. Extrair o nome comercial do cartão da URL ou da referência fornecida.
+2. Consultar ao vivo todos os pools da família solicitada, incluindo o nome-base legado e os sufixos `001–NNN`.
+3. Normalizar somente termos estruturais do slug (`rec`, país, vertical, `tarjeta`, `tarjeta-de-credito`, separadores e domínio).
+4. Exigir os tokens distintivos do produto e emissor — por exemplo, `BBVA + Mastercard + Black`; não considerar apenas `Mastercard Black`, pois isso pode confundir BBVA com Itaú.
+5. Diferenciar variantes próximas: `San Juan Internacional` não é `Banco San Juan Gold`; `BBVA Visa Gold` não é qualquer `Visa Gold`.
+6. Reportar por cartão: presente/ausente, pool/rota e URL live encontrada. Se houver duplicatas, listar todas as rotas ou resumir a quantidade com os identificadores.
+7. Igualdade de slug é evidência auxiliar, nunca pré-condição. Em caso de identidade ambígua, abrir a página ou catálogo live antes de concluir.
+
 ## Contrato live da SB
 
 O bundle da tela define:

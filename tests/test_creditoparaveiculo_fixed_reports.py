@@ -185,6 +185,7 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "intraday_mobile_card" in intraday_source
     assert "INTRADAY_CARD_DIVIDER" in intraday_source
     assert "desktop_table_rows" in intraday_source
+    assert "desktop_table_pages" in intraday_source
     assert "table_pages" in intraday_source
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
