@@ -375,28 +375,41 @@ class CampaignEngine:
                 lane_result["deferred"] = {"next_bundle_index": bundle.index, **exc.detail}
                 _atomic_json(checkpoint_path, lane_result)
                 return lane_result
-            record: dict[str, Any] = {
-                "index": bundle.index,
-                "status": "IN_PROGRESS",
-                "idempotency_keys": [campaign.idempotency_key for campaign in bundle.campaigns],
-                "projected_points": points,
-                "quota": quota,
-                "timings": {},
-                "intermediate_get_calls": 0,
-                "outer_readback_calls": 1,
-            }
-            lane_result.setdefault("bundles", []).append(record)
+            previous_failed = failed_by_index.get(bundle.index)
+            if previous_failed is not None:
+                record = previous_failed
+                record["status"] = "RECOVERING"
+                record["quota_recovery"] = quota
+                record.setdefault("timings", {})
+            else:
+                record = {
+                    "index": bundle.index,
+                    "status": "IN_PROGRESS",
+                    "idempotency_keys": [campaign.idempotency_key for campaign in bundle.campaigns],
+                    "projected_points": points,
+                    "quota": quota,
+                    "timings": {},
+                    "intermediate_get_calls": 0,
+                    "outer_readback_calls": 1,
+                }
+                lane_result.setdefault("bundles", []).append(record)
             _atomic_json(checkpoint_path, lane_result)
             try:
-                if bundle.campaigns[0].mode == "pure_clone":
+                if previous_failed is not None:
+                    if bundle.campaigns[0].mode != "clone_prestaged":
+                        raise ExecutionFailed("automatic recovery currently requires clone_prestaged mode")
+                    ids = self._recover_prestaged_bundle(bundle, transport, record)
+                elif bundle.campaigns[0].mode == "pure_clone":
                     ids = self._run_pure_bundle(bundle, transport, record)
                 else:
                     ids = self._run_prestaged_bundle(bundle, transport, record)
                 record["campaign_ids"] = ids
                 record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
                 record["status"] = "COMPLETE"
-                record["stage"] = "readback_complete"
+                record.pop("error", None)
+                record["stage"] = "readback_complete_recovered" if previous_failed is not None else "readback_complete"
                 lane_result["campaign_ids"].extend(ids)
+                lane_result["manual_reconciliation_required"] = False
                 _atomic_json(checkpoint_path, lane_result)
             except Exception as exc:
                 record["status"] = "FAILED"
@@ -429,7 +442,10 @@ class CampaignEngine:
                 result["idempotent_replay"] = True
                 return result
             if previous.get("status") == "FAILED":
-                raise ExecutionFailed("failed request requires reconciliation before replay")
+                checkpoint_dir = Path(self.config["state_root"]) / "checkpoints"
+                checkpoints = list(checkpoint_dir.glob(f"{_safe_name(manifest.request_id)}-*.json")) if checkpoint_dir.exists() else []
+                if not checkpoints:
+                    raise ExecutionFailed("failed request has no checkpoint for recovery")
         audit: dict[str, Any] = {
             "engine_version": 3,
             "request_id": manifest.request_id,

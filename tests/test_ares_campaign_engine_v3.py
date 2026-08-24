@@ -22,7 +22,7 @@ from ares_campaign_v3.prevalidation import prevalidate_payload
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
 from ares_campaign_v3.schema import Manifest, ManifestError
-from ares_campaign_v3.transport import FakeBatchTransport
+from ares_campaign_v3.transport import BatchResult, BatchTransportError, FakeBatchTransport
 
 
 def future_iso(hours: int = 4) -> str:
@@ -795,8 +795,104 @@ def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path)
     audit = json.loads(audit_path.read_text())
     assert audit['status'] == 'FAILED'
     assert audit['manual_reconciliation_required'] is True
-    with pytest.raises(ExecutionFailed, match='reconciliation'):
+    with pytest.raises(ExecutionFailed, match='automatic recovery currently requires clone_prestaged'):
         CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
+
+
+def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(tmp_path):
+    class PartialAdCopyTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.campaign_ids = []
+            self.adset_ids = []
+            self.ads = []
+            self.initial_copy_calls = 0
+            self.recovery_copy_calls = 0
+
+        def execute(self, operations, stage):
+            if stage == 'campaign_copy':
+                rows = super().execute(operations, stage)
+                self.campaign_ids = [row.body['copied_campaign_id'] for row in rows]
+                return rows
+            if stage == 'adset_copy':
+                rows = super().execute(operations, stage)
+                self.adset_ids = [row.body['copied_adset_id'] for row in rows]
+                return rows
+            if stage == 'ad_copy_with_creative':
+                self.initial_copy_calls += 1
+                for index, operation in enumerate(operations):
+                    if index == 1:
+                        continue
+                    ad_id = self._id('ad')
+                    self.ads.append({
+                        'id': ad_id,
+                        'name': f'raw-{index}',
+                        'adset_id': str(operation.body['adset_id']),
+                        'source_ad_id': operation.relative_url.split('/', 1)[0],
+                    })
+                raise BatchTransportError(stage, {
+                    'children': [{'name': operations[1].name, 'code': 500, 'error': {'code': 2, 'is_transient': True}}]
+                })
+            if stage == 'recovery_existing_ads_readback':
+                rows = []
+                for operation in operations:
+                    campaign_id = operation.relative_url.split('/', 1)[0]
+                    campaign_index = self.campaign_ids.index(campaign_id)
+                    adset_id = self.adset_ids[campaign_index]
+                    rows.append(BatchResult(operation.name, 200, {
+                        'data': [row for row in self.ads if row['adset_id'] == adset_id]
+                    }))
+                return rows
+            if stage == 'recovery_missing_ad_copies':
+                self.recovery_copy_calls += 1
+                rows = []
+                for operation in operations:
+                    ad_id = self._id('ad')
+                    self.ads.append({
+                        'id': ad_id,
+                        'name': 'raw-recovered',
+                        'adset_id': str(operation.body['adset_id']),
+                        'source_ad_id': operation.relative_url.split('/', 1)[0],
+                    })
+                    rows.append(BatchResult(operation.name, 200, {'copied_ad_id': ad_id}))
+                return rows
+            if stage == 'recovery_ad_name_update':
+                for operation in operations:
+                    live = next(row for row in self.ads if row['id'] == operation.relative_url)
+                    live['name'] = str(operation.body['name'])
+                return [BatchResult(operation.name, 200, {'success': True}) for operation in operations]
+            return super().execute(operations, stage)
+
+    cfg = config(
+        tmp_path,
+        enabled=True,
+        write_enabled=True,
+        soft_score=1000,
+        hard_score=1000,
+    )
+    transport = PartialAdCopyTransport('100')
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    expected = [prestaged_campaign(1), prestaged_campaign(2)]
+    request = manifest(expected, request_id='partial-prestaged')
+
+    with pytest.raises(BatchTransportError):
+        engine.execute(request)
+    assert len(transport.ads) == 5
+    assert transport.initial_copy_calls == 1
+
+    result = engine.execute(request)
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert len(result['campaign_ids']) == 2
+    assert len(transport.ads) == 6
+    assert transport.initial_copy_calls == 1
+    assert transport.recovery_copy_calls == 1
+    assert sorted(row['name'] for row in transport.ads) == sorted(
+        ad['name'] for campaign in expected for ad in campaign['ads']
+    )
+    checkpoint = json.loads(next((Path(cfg['state_root']) / 'checkpoints').glob('*.json')).read_text())
+    assert checkpoint['manual_reconciliation_required'] is False
+    assert checkpoint['bundles'][0]['recovery']['existing_ads'] == 5
+    assert checkpoint['bundles'][0]['recovery']['missing_ads_created'] == 1
 
 
 def test_forty_campaigns_three_accounts_produce_seven_global_waves():

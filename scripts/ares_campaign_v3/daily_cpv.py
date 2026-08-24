@@ -210,6 +210,7 @@ def is_resume_state(state: dict[str, Any], operational_date: str) -> bool:
             "PARTIAL_DEFERRED_QUOTA",
             "POSTPROCESS_PENDING",
             "READBACK_DEFERRED",
+            "RECOVERY_PENDING",
         }
     )
 
@@ -217,8 +218,6 @@ def is_resume_state(state: dict[str, Any], operational_date: str) -> bool:
 def gate_due(now_sp: datetime, state: dict[str, Any]) -> bool:
     day = now_sp.date().isoformat()
     if is_resume_state(state, day):
-        if state.get("manual_reconciliation_required") is True:
-            return False
         retry_after = int(state.get("retry_after_epoch") or 0)
         return retry_after <= int(now_sp.timestamp())
     return now_sp.hour == 17
@@ -294,13 +293,13 @@ def discord_failure_message(
     campaign_label = ", ".join(f"C{int(number):02d}" for number in campaign_numbers or []) or "ciclo diário programado"
 
     return (
-        f"⚠️ V3 BLOQUEADO — CPV G006 — {operational_date:%d/%m}\n"
+        f"⚠️ V3 EM RECUPERAÇÃO — CPV G006 — {operational_date:%d/%m}\n"
         f"Objeto: {campaign_label} · criação CBO programada\n"
         f"Etapa: {stage}\n"
         f"Causa: {cause}\n"
         f"Consequência: {consequence}\n"
-        f"Solução proposta: {correction}\n"
-        "Autorização necessária: Rodolfo ou Nicolas. Até a aprovação, Ares faz somente diagnóstico/readback e não executa write corretivo."
+        f"Correção: {correction}\n"
+        "Ação automática: Ares reconcilia o estado real e retoma somente a camada faltante do mesmo request até concluir, sem replay cego e sem ampliar o escopo autorizado."
     )
 
 
@@ -354,14 +353,15 @@ def failure_resume_state(side_effects: dict[str, Any], *, known_campaign_ids: bo
         return "READBACK_DEFERRED", not known_campaign_ids
     if side_effects.get("media_upload"):
         return "READBACK_DEFERRED", False
-    return "FAILED", False
+    return "RECOVERY_PENDING", False
 
 
 def corrective_write_authorization() -> dict[str, Any]:
     return {
-        "required": True,
-        "authorized_roles": ["Rodolfo", "Nicolas"],
-        "scope": "any corrective write after this failure",
+        "required": False,
+        "standing_authority": "Rodolfo Mattei",
+        "scope": "diagnose, reconcile and correct the same authorized request until completion",
+        "guards": ["readback_before_write", "missing_layer_only", "no_blind_replay", "no_scope_expansion"],
     }
 
 
@@ -1581,9 +1581,8 @@ def run_daily(
             failure = safe_error(exc)
             known_campaign_ids = bool(state.get("campaign_ids") or (audit.get("engine_result") or {}).get("campaign_ids"))
             failure_status, _ = failure_resume_state(audit.get("side_effects") or {}, known_campaign_ids=known_campaign_ids)
-            manual_gate = True
             authorization = corrective_write_authorization()
-            audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=True, operator_authorization=authorization)
+            audit.update(stage=failure_status, failure=failure, failed_at_utc=utc_now(), manual_reconciliation_required=False, automatic_recovery_required=True, operator_authorization=authorization)
             atomic_json(audit_path, audit)
             if failure_status == "FAILED" and selected_ids:
                 inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -1592,8 +1591,9 @@ def run_daily(
                 state.update(
                     status=failure_status,
                     failure=failure,
-                    retry_after_epoch=int(time.time()) + 300 if failure_status != "FAILED" else 0,
-                    manual_reconciliation_required=True,
+                    retry_after_epoch=int(time.time()) + 300,
+                    manual_reconciliation_required=False,
+                    automatic_recovery_required=True,
                     operator_authorization=authorization,
                     updated_at_utc=utc_now(),
                 )
@@ -1604,8 +1604,8 @@ def run_daily(
                 except Exception:
                     pass
             if not quiet:
-                print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": True, "operator_authorization": authorization, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
-            return {"status": failure_status, "failure": failure, "manual_reconciliation_required": True, "operator_authorization": authorization, "audit": str(audit_path)}
+                print(json.dumps({"status": failure_status, "failure": failure, "manual_reconciliation_required": False, "automatic_recovery_required": True, "operator_authorization": authorization, "audit": str(audit_path)}, ensure_ascii=False, indent=2))
+            return {"status": failure_status, "failure": failure, "manual_reconciliation_required": False, "automatic_recovery_required": True, "operator_authorization": authorization, "audit": str(audit_path)}
         finally:
             audit.setdefault("observability", {})["total"] = {
                 "duration_ms": round((time.perf_counter() - total_started) * 1000, 3),

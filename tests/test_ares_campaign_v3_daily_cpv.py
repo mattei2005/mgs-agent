@@ -224,7 +224,7 @@ def test_gate_starts_only_at_17_sp_but_resume_may_run_later():
     }
     assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is True
     resume["manual_reconciliation_required"] = True
-    assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is False
+    assert gate_due(datetime(2026, 8, 21, 18, 0, tzinfo=SP), resume) is True
 
 
 def test_completed_request_is_not_reused_on_the_next_operational_day():
@@ -254,8 +254,8 @@ def test_discord_failure_explains_cause_impact_and_correction_without_internal_p
     assert "Causa:" in message
     assert "Objeto: ciclo diário programado" in message
     assert "Consequência:" in message
-    assert "Solução proposta:" in message
-    assert "Autorização necessária: Rodolfo ou Nicolas" in message
+    assert "Correção:" in message
+    assert "Ação automática:" in message
     assert "Drive × Meta" in message
     assert "/root/" not in message
 
@@ -286,7 +286,7 @@ def test_batch_transport_failure_preserves_sanitized_meta_cause_for_operator_mes
     assert "O rótulo da regra" in message
 
 
-def test_failure_message_identifies_campaigns_and_blocks_corrective_write_until_authorized():
+def test_failure_message_identifies_campaigns_and_commits_to_automatic_recovery():
     message = discord_failure_message(
         {"type": "DailyBlocked", "stage": "readback", "message": "campaign hierarchy validation failed"},
         "READBACK_DEFERRED",
@@ -294,8 +294,8 @@ def test_failure_message_identifies_campaigns_and_blocks_corrective_write_until_
         [17, 18, 19],
     )
     assert "Objeto: C17, C18, C19 · criação CBO programada" in message
-    assert "Ares faz somente diagnóstico/readback" in message
-    assert "não executa write corretivo" in message
+    assert "Ares reconcilia o estado real" in message
+    assert "sem replay cego" in message
 
 
 def test_account_budget_summary_reports_remaining_operational_cap():
@@ -361,14 +361,15 @@ def test_failure_after_external_side_effect_never_becomes_terminal_failed():
     assert failure_resume_state({"campaign_write": True}, known_campaign_ids=False) == ("READBACK_DEFERRED", True)
     assert failure_resume_state({"campaign_write": True}, known_campaign_ids=True) == ("READBACK_DEFERRED", False)
     assert failure_resume_state({"drive_move": True, "campaign_write": True}, known_campaign_ids=True) == ("POSTPROCESS_PENDING", False)
-    assert failure_resume_state({}, known_campaign_ids=False) == ("FAILED", False)
+    assert failure_resume_state({}, known_campaign_ids=False) == ("RECOVERY_PENDING", False)
 
 
-def test_corrective_write_authorization_is_exclusively_rodolfo_or_nicolas():
+def test_corrective_write_uses_rodolfo_standing_recovery_authority():
     assert corrective_write_authorization() == {
-        "required": True,
-        "authorized_roles": ["Rodolfo", "Nicolas"],
-        "scope": "any corrective write after this failure",
+        "required": False,
+        "standing_authority": "Rodolfo Mattei",
+        "scope": "diagnose, reconcile and correct the same authorized request until completion",
+        "guards": ["readback_before_write", "missing_layer_only", "no_blind_replay", "no_scope_expansion"],
     }
 
 

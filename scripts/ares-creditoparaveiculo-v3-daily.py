@@ -39,10 +39,8 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("--operational-date live override must match the current São Paulo date; use --offline-smoke for synthetic dates")
     result = run_daily(paths=DailyPaths(), now_sp=now_sp, gate=args.gate, post_report=(args.post_discord and not args.dry_run), quiet=args.quiet, plan_only=args.dry_run)
     status = result.get("status")
-    clean_statuses = {"SILENT_NOT_DUE", "ALREADY_COMPLETE", "DRY_RUN_OK", "COMPLETE_FUTURE_ACTIVE", "PARTIAL_DEFERRED_QUOTA", "POSTPROCESS_PENDING"}
+    clean_statuses = {"SILENT_NOT_DUE", "ALREADY_COMPLETE", "DRY_RUN_OK", "COMPLETE_FUTURE_ACTIVE", "PARTIAL_DEFERRED_QUOTA", "POSTPROCESS_PENDING", "READBACK_DEFERRED", "RECOVERY_PENDING"}
     if status in clean_statuses:
-        return 0
-    if status == "READBACK_DEFERRED" and result.get("manual_reconciliation_required") is not True:
         return 0
     return 1
 
