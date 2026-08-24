@@ -521,48 +521,106 @@ def reconciliation_asset_ok(row: dict[str, Any], allowed: dict[str, dict[str, An
     )
 
 
+def _creative_candidate(
+    row: dict[str, Any],
+    drive_ids: set[str],
+    allowed: dict[str, dict[str, Any]] | None,
+    *,
+    max_test_attempts: int,
+) -> bool:
+    status = str(row.get("status") or "")
+    ready = status == "01_READY"
+    retest = (
+        status == "03_TESTED"
+        and row.get("evaluation_status") == "INCONCLUSIVO_POR_SUBENTREGA"
+        and row.get("retest_eligible") is True
+        and int(row.get("test_attempt_count") or 0) < max_test_attempts
+    )
+    return (
+        row.get("vertical") == "CAR"
+        and row.get("country") == "BR"
+        and row.get("language") == "BR"
+        and row.get("format") == "VID"
+        and (ready or retest)
+        and row.get("metadata_clean") is True
+        and row.get("ares_eligible") is True
+        and not row.get("used_by")
+        and str(row.get("asset_drive_id") or "") in drive_ids
+        and (allowed is None or reconciliation_asset_ok(row, allowed))
+    )
+
+
 def select_assets(
     rows: list[dict[str, Any]],
     drive_ids: set[str],
     count: int,
     *,
     reconciliation: dict[str, Any] | None = None,
+    mix_policy: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     allowed = (
         {str(row.get("asset_id") or ""): row for row in reconciliation.get("assets") or []}
         if reconciliation is not None
         else None
     )
+    policy = mix_policy or {}
+    max_attempts = int(policy.get("max_test_attempts") or 2)
     candidates = [
         row
         for row in rows
-        if row.get("vertical") == "CAR"
-        and row.get("country") == "BR"
-        and row.get("language") == "BR"
-        and row.get("format") == "VID"
-        and row.get("status") == "01_READY"
-        and row.get("metadata_clean") is True
-        and row.get("ares_eligible") is True
-        and not row.get("used_by")
-        and str(row.get("asset_drive_id") or "") in drive_ids
-        and (allowed is None or reconciliation_asset_ok(row, allowed))
+        if _creative_candidate(row, drive_ids, allowed, max_test_attempts=max_attempts)
     ]
-    candidates.sort(key=lambda row: (str(row.get("first_seen_at") or ""), str(row.get("canonical_filename") or "")))
+    candidates.sort(
+        key=lambda row: (
+            int(row.get("test_attempt_count") or 0),
+            str(row.get("first_seen_at") or ""),
+            str(row.get("canonical_filename") or ""),
+        )
+    )
+
+    ready = [row for row in candidates if row.get("status") == "01_READY"]
+    retest = [row for row in candidates if row.get("status") == "03_TESTED"]
     selected: list[dict[str, Any]] = []
     fingerprints: set[str] = set()
-    for row in candidates:
-        fingerprint = str(row.get("perceptual_fingerprint") or row.get("clean_checksum") or row.get("asset_id") or "")
-        if not fingerprint or fingerprint in fingerprints:
-            continue
-        fingerprints.add(fingerprint)
-        selected.append(row)
-        if len(selected) == count:
-            break
+
+    def take(pool: list[dict[str, Any]], amount: int) -> int:
+        taken = 0
+        while pool and taken < amount:
+            row = pool.pop(0)
+            fingerprint = str(row.get("perceptual_fingerprint") or row.get("clean_checksum") or row.get("asset_id") or "")
+            if not fingerprint or fingerprint in fingerprints:
+                continue
+            fingerprints.add(fingerprint)
+            selected.append(row)
+            taken += 1
+        return taken
+
+    if policy.get("enabled") is True:
+        if count % 3:
+            raise DailyBlocked("asset_selection", "creative retest mix requires complete 1x1x3 campaign groups")
+        ready_slots = int(policy.get("ready_slots_per_campaign") or 2)
+        retest_slots = int(policy.get("retest_slots_per_campaign") or 1)
+        if ready_slots + retest_slots != 3 or ready_slots < 1 or retest_slots < 0:
+            raise DailyBlocked("asset_selection", "creative retest mix policy is invalid")
+        for _ in range(count // 3):
+            if take(ready, ready_slots) != ready_slots:
+                break
+            retest_taken = take(retest, retest_slots)
+            if retest_taken < retest_slots:
+                take(ready, retest_slots - retest_taken)
+    else:
+        take(ready, count)
+
     if len(selected) != count:
         raise DailyBlocked(
             "asset_selection",
-            "insufficient unique eligible reconciled assets",
-            {"required": count, "available_unique": len(selected)},
+            "insufficient unique eligible reconciled assets for the approved READY/TESTED mix",
+            {
+                "required": count,
+                "selected": len(selected),
+                "ready_candidates": len([row for row in candidates if row.get("status") == "01_READY"]),
+                "retest_candidates": len([row for row in candidates if row.get("status") == "03_TESTED"]),
+            },
         )
     return selected
 

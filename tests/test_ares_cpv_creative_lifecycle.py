@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
+from pathlib import Path
 from zoneinfo import ZoneInfo
+import sys
+
+ROOT = Path("/root/mgs-agent")
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
 
 from ares_campaign_v3.creative_lifecycle import classify_campaign_assets
 
