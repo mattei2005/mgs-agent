@@ -484,7 +484,7 @@
       "rewarded_pricing_endpoint": "/pricing/digital-trust_creditoparaveiculo?should_update_metrics=1",
       "rewarded_operation_group": "facebook_br_car_financ-carro-s",
       "rewarded_slot_base": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
-      "cr_column": "CR",
+      "cr_presentation": "summary_only; removed from campaign cards and desktop campaign table because the operation-wide value repeats identically",
       "cr_formula": "sum GAM matchedRequests across rewarded base + _1 + _2 + _3 + _4 / GAM requests of rewarded base * 100",
       "previous_gray_semantics": "consolidated previous-day reference shown in light gray by Smart Bidding Pricing",
       "scheduled_cadence": "every two hours on odd America/Sao_Paulo hours"
@@ -743,7 +743,6 @@
       "ROI est.",
       "RPS",
       "CPM",
-      "CR",
       "Ação"
     ],
     "intraday_desktop_summary": {
@@ -761,7 +760,8 @@
         "ROI estimado signal counts"
       ],
       "delay_format": "use Xh YYmin at 60 minutes or more; otherwise use Nmin",
-      "cr_column_required": true,
+      "cr_campaign_column_required": false,
+      "cr_summary_required": true,
       "chunking": "summary and first desktop table page must share one safe Discord chunk; later pages repeat the table header"
     },
     "lance_values": {
@@ -908,10 +908,10 @@
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
         "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
         "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
-        "metrics": "Budget/Spend, Custo/ROAS, ROI real/ROI est, RPS/CPM and CR with previous gray consolidated reference; then three dated ROI SB lines for the current partial day and two prior dates",
+        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the repeated operation summary; then three dated ROI SB lines for the current partial day and two prior dates",
         "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
         "divider": "34 heavy horizontal characters between campaigns",
-        "desktop_table": "repeat the exact Intraday summary immediately before the consolidated aligned table after the final card; keep summary and first table page in the same Discord part, retain the CR column, then show the separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
+        "desktop_table": "repeat the exact Intraday summary immediately before the consolidated aligned table after the final card; keep summary and first table page in the same Discord part; omit the repeated operation-wide CR from campaign cards/table; then show the separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
         "desktop_table_pagination": {
           "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
           "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
@@ -1411,7 +1411,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.67",
+  "playbook_version": "1.0.68",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

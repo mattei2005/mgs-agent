@@ -195,7 +195,8 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "fetch_sb_roi_history" in intraday_source
     assert '"RPS"' in intraday_source
     assert '"CPM"' in intraday_source
-    assert '"CR"' in intraday_source
+    assert '"CR"' not in intraday_source
+    assert "Rewarded CR atual" in intraday_source
     assert "fetch_rewarded_pricing" in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
 
@@ -219,8 +220,8 @@ def test_prefixed_table_pages_keep_summary_with_first_desktop_page():
         "",
         "**Tabela consolidada — visão desktop**",
     ]
-    headers = ["Camp", "CR", "Ação"]
-    rows = [[f"C{index:02d}", "74,56%", "A" * 80] for index in range(1, 13)]
+    headers = ["Camp", "RPS", "Ação"]
+    rows = [[f"C{index:02d}", "$224,59", "A" * 80] for index in range(1, 13)]
     pages = module.prefixed_table_pages(headers, rows, prefix_lines, max_chars=500)
     combined = "\n".join(pages)
     assert len(pages) > 1
@@ -228,12 +229,13 @@ def test_prefixed_table_pages_keep_summary_with_first_desktop_page():
     assert "**Tabela consolidada — visão desktop**" in pages[0]
     assert pages[0].count("📈 INTRADAY — resumo") == 1
     assert all(len(page) <= 500 for page in pages)
-    assert all(any("CR" in line for line in page.splitlines()) for page in pages)
+    assert all(any("RPS" in line for line in page.splitlines()) for page in pages)
+    assert module.report_atomic_sections(pages[0]) == [pages[0]]
     for index in range(1, 13):
         assert combined.count(f"C{index:02d}") == 1
 
 
-def test_operation_contract_persists_intraday_rps_cpm_cr():
+def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     operation = json.loads(
         Path("/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json").read_text()
     )
@@ -246,16 +248,17 @@ def test_operation_contract_persists_intraday_rps_cpm_cr():
     assert contract["currency"] == "USD"
     assert contract["discount_revenue_share"] is True
     assert contract["rewarded_filter"] == "rewarded"
-    assert contract["cr_column"] == "CR"
-    assert operation["reporting_presentation"]["intraday_columns"][-4:] == [
+    assert contract["cr_presentation"].startswith("summary_only")
+    assert operation["reporting_presentation"]["intraday_columns"][-3:] == [
         "RPS",
         "CPM",
-        "CR",
         "Ação",
     ]
+    assert "CR" not in operation["reporting_presentation"]["intraday_columns"]
     desktop_summary = operation["reporting_presentation"]["intraday_desktop_summary"]
     assert desktop_summary["repeat_exact_mobile_summary"] is True
-    assert desktop_summary["cr_column_required"] is True
+    assert desktop_summary["cr_campaign_column_required"] is False
+    assert desktop_summary["cr_summary_required"] is True
     assert desktop_summary["delay_format"] == "use Xh YYmin at 60 minutes or more; otherwise use Nmin"
 
 
