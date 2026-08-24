@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "status": "retired_from_active_runtime",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1541581677602545825",
+  "retired_at": "2026-08-24T23:13:59.760783+00:00",
+  "reason": "Remove operation-specific runners and wrappers from active Ares scope before rebuilding Eggbev US-CC-EN BOT architecture.",
+  "repo_scripts_moved": [
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-cron-runner.py",
+      "bytes": 40424
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-intraday-runner.py",
+      "bytes": 1339
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-hoa-manager.py",
+      "bytes": 31421
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-clone-troubleshoot-3alts.py",
+      "bytes": 11280
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-replacement-clone.py",
+      "bytes": 17797
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-replacement-clone-videoid.py",
+      "bytes": 21773
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
+      "bytes": 9999
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
+      "bytes": 11717
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-elena-bulk-duplicates.py",
+      "bytes": 15961
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-elena-midnight-structure-adjust.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-elena-midnight-structure-adjust.py",
+      "bytes": 12182
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-source-mirror.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-source-mirror.py",
+      "bytes": 21951
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-apply-naming-plan.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-apply-naming-plan.py",
+      "bytes": 6983
+    },
+    {
+      "source": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
+      "retired_path": "/root/mgs-agent/archive/ares-openzedfinanzas-20260824/scripts/ares-meta-token-expiry-alert.py",
+      "bytes": 4410
+    }
+  ],
+  "profile_scripts_moved": [
+    {
+      "source": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
+      "retired_path": "/root/.hermes/profiles/ares/archive/openzedfinanzas-20260824/scripts/ares-meta-reactivate-all-cron.sh",
+      "bytes": 478
+    },
+    {
+      "source": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
+      "retired_path": "/root/.hermes/profiles/ares/archive/openzedfinanzas-20260824/scripts/ares-meta-intraday-cron.sh",
+      "bytes": 2443
+    },
+    {
+      "source": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
+      "retired_path": "/root/.hermes/profiles/ares/archive/openzedfinanzas-20260824/scripts/ares-meta-hoa-manager.sh",
+      "bytes": 463
+    },
+    {
+      "source": "/root/.hermes/profiles/ares/scripts/ares-meta-elena-midnight-structure-adjust.sh",
+      "retired_path": "/root/.hermes/profiles/ares/archive/openzedfinanzas-20260824/scripts/ares-meta-elena-midnight-structure-adjust.sh",
+      "bytes": 122
+    },
+    {
+      "source": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
+      "retired_path": "/root/.hermes/profiles/ares/archive/openzedfinanzas-20260824/scripts/ares-meta-token-expiry-alert.sh",
+      "bytes": 99
+    }
+  ],
+  "generated_pycache_removed": [
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-source-mirror.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-clone-troubleshoot-3alts.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-cron-runner.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-apply-naming-plan.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-hoa-manager.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-replacement-clone.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-hoa-manager.cpython-311.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-elena-asyncbatch-creativeparam-probe.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-elena-midnight-structure-adjust.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-cron-runner.cpython-311.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-token-expiry-alert.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-intraday-runner.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-elena-bulk-duplicates.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-elena-asyncbatch-adset-copy-probe.cpython-312.pyc",
+    "/root/mgs-agent/scripts/__pycache__/ares-meta-replacement-clone-videoid.cpython-312.pyc"
+  ],
+  "history_policy": "Archived files are non-runtime evidence only; Git and audit history remain preserved."
+}
