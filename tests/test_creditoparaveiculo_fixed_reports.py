@@ -71,8 +71,17 @@ class FakeMeta:
         return {"safe": True, "payload_type": type(payload).__name__}
 
 
-def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=300):
+def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=300, dynamic=False):
     monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"09"})
+    budget_policy: dict[str, object] = {
+        "campaign_daily_ceiling_usd": 150,
+        "operational_account_cap_usd": account_cap,
+    }
+    if dynamic:
+        budget_policy["dynamic_account_cap"] = {
+            "enabled": True,
+            "allowed_scopes": ["scheduled_creation", "roi_scale", "guardrail_reactivation"],
+        }
     operation = {
         "operation_id": "Creditoparaveiculo-BR-CAR-BR",
         "management_scope": {
@@ -90,10 +99,7 @@ def configure_runtime(monkeypatch, tmp_path, module, fake_meta, *, account_cap=3
                 },
             },
         },
-        "daily_budget_policy": {
-            "campaign_daily_ceiling_usd": 150,
-            "operational_account_cap_usd": account_cap,
-        },
+        "daily_budget_policy": budget_policy,
         "anomaly_gate": {"thresholds": "test_calibrated_v1"},
     }
     operation_path = tmp_path / "operation.json"
@@ -718,6 +724,25 @@ def test_scale_blocks_whole_batch_when_account_cap_would_be_exceeded(monkeypatch
     assert results[0]["status"] == "blocked"
     assert results[0]["reason"] == "batch_account_operational_cap_exceeded"
     assert fake_meta.posts == []
+
+
+def test_dynamic_budget_envelope_allows_authorized_roi_scale_above_floor(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    other = active_campaign(campaign_id="2", budget="27000", number="99")
+    other["effective_status"] = "IN_PROCESS"
+    fake_meta = FakeMeta([campaign, other])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta, account_cap=300, dynamic=True)
+    decision_at = datetime(2026, 8, 20, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+
+    results, audit_path = run_actions(module, [scale_row()], [campaign, other], decision_at)
+    assert results[0]["status"] == "executed"
+    assert fake_meta.posts == [("1", {"daily_budget": "3300"})]
+    audit = json.loads(Path(audit_path).read_text())
+    assert audit["limits"]["base_cap_minor"] == 30000
+    assert audit["limits"]["account_cap_minor"] == 30300
+    assert audit["limits"]["cap_adjusted_minor"] == 300
+    assert audit["limits"]["dynamic_enabled"] is True
 
 
 def test_scale_blocks_outside_checkpoint_window(monkeypatch, tmp_path):

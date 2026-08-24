@@ -100,7 +100,7 @@ def test_assignments_preserve_source_lineage_and_use_materialized_video_ids():
 SP = ZoneInfo("America/Sao_Paulo")
 
 
-def operation(*, next_number=14, cap=300, override=True):
+def operation(*, next_number=14, cap=300, override=True, dynamic=False):
     routine: dict[str, object] = {
         "new_campaign_budget_pool_usd": 60,
         "default_campaign_initial_budget_usd": 30,
@@ -110,12 +110,18 @@ def operation(*, next_number=14, cap=300, override=True):
             "status": "authorized_pending_media_manifest_and_live_preflight",
             "campaign_count": 3,
         }
+    budget_policy: dict[str, object] = {
+        "operational_account_cap_usd": cap,
+        "new_campaign_initial_budget_usd": 30,
+    }
+    if dynamic:
+        budget_policy["dynamic_account_cap"] = {
+            "enabled": True,
+            "allowed_scopes": ["scheduled_creation", "roi_scale", "guardrail_reactivation"],
+        }
     return {
         "daily_new_campaign_routine": routine,
-        "daily_budget_policy": {
-            "operational_account_cap_usd": cap,
-            "new_campaign_initial_budget_usd": 30,
-        },
+        "daily_budget_policy": budget_policy,
         "campaign_numbering_policy": {"next_required_campaign_number": next_number},
     }
 
@@ -440,7 +446,10 @@ def test_budget_cap_exact_300_passes():
         "deferred_by_budget_count": 0,
         "new_minor": 9000,
         "projected_minor": 30000,
+        "base_cap_minor": 30000,
         "cap_minor": 30000,
+        "cap_adjusted_minor": 0,
+        "dynamic_enabled": False,
     }
 
 
@@ -454,6 +463,20 @@ def test_budget_planner_reduces_three_desired_to_two_selected_at_live_213():
     assert result["deferred_by_budget_count"] == 1
     assert result["new_minor"] == 6000
     assert result["projected_minor"] == 27300
+
+
+def test_dynamic_budget_envelope_keeps_all_authorized_campaigns_when_floor_would_overflow():
+    campaigns = [campaign(number) for number in range(7, 14)]
+    campaigns[2]["daily_budget"] = "3300"
+    result = enforce_budget_cap(campaigns, 3, operation(cap=300, dynamic=True))
+    assert result["desired_count"] == 3
+    assert result["selected_count"] == 3
+    assert result["deferred_by_budget_count"] == 0
+    assert result["projected_minor"] == 30300
+    assert result["base_cap_minor"] == 30000
+    assert result["cap_minor"] == 30300
+    assert result["cap_adjusted_minor"] == 300
+    assert result["dynamic_enabled"] is True
 
 
 def test_live_213_plan_maps_three_desired_to_c14_c15_only():
