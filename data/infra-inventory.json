@@ -1920,9 +1920,24 @@
           360
         ]
       },
-      "source_report": "REPORT-INFRA timezone São Paulo rollout 2026-07-17",
-      "report_infra_discord_message_id": "1526660645813092363",
-      "package_path": "/root/mgs-agent/work/mgs-quiz-calendar-177/mgs-quiz-carro-1.7.7.tar.gz",
+      "source_report": "REPORT-INFRA dynamic SMS list rollout 2026-08-24",
+      "report_infra_discord_message_id": "1541464491970134027",
+      "package_path": "/root/mgs-agent/work/mgs-quiz-sms-add-list-178/mgs-quiz-carro-1.7.8.tar.gz",
+      "sms_preset_management": {
+        "default_codes": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "custom_code_format": "^G[0-9]{3,}$",
+        "add_button": "+ Adicionar lista",
+        "central_option": "mgs_quiz_sms_presets",
+        "save_semantics": "transactional; existing codes required; duplicate/invalid blocked",
+        "quiz_selector_includes_custom_codes": true
+      },
       "timezone_reporting": {
         "business_timezone": "America/Sao_Paulo",
         "storage_timezone": "UTC",

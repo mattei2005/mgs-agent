@@ -206,9 +206,9 @@ def test_intraday_mobile_card_matches_approved_discord_layout():
         ],
     }
     assert module.INTRADAY_CARD_DIVIDER == "━" * 34
-    assert module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟡") == (
-        "🟡 **C08-20/08 · MAXVOL · D2 · ATIVA**\n"
-        "👁️ **OBSERVAR · D1/D2**\n"
+    assert module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟢🟢") == (
+        "🟢🟢 **C08-20/08 · MAXVOL · D2 · ATIVA**\n"
+        "🧪 **APRENDIZADO D1/D2**\n"
         "```text\n"
         "Budget $39,00    Spend $11,77\n"
         "Custo  $0,08     ROAS  1,64\n"
@@ -289,7 +289,7 @@ def test_discord_chunking_keeps_mobile_cards_and_desktop_table_atomic():
     cards = []
     for number in range(7, 14):
         row = {**base_row, "campaign_label": f"C{number:02d}-20/08"}
-        cards.append(module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟡"))
+        cards.append(module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟢🟢"))
     table = module.aligned_table(
         ["Camp", "Spend", "Ação"],
         [[f"C{number:02d}-20/08", "$11,77", "OBSERVAR D1/D2"] for number in range(7, 14)],
@@ -336,7 +336,7 @@ def test_chunking_preserves_blank_lines_inside_mobile_card_fences():
             {"date_label": "21/08", "roi": 45.4, "partial": True},
         ],
     }
-    card = module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟡")
+    card = module.intraday_mobile_card(row, "OBSERVAR D1/D2", "🟢🟢")
     text = "\n\n".join(["Resumo", card, "Spend monitorado: $11,77"])
     sections = module.report_atomic_sections(text)
     assert card in sections
@@ -585,9 +585,9 @@ def test_report_tables_paginate_instead_of_hiding_new_campaigns():
 
 def test_report_table_uses_real_discord_capacity_without_orphaning_c20():
     module = load_reports_module()
-    headers = ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"]
+    headers = ["R/E", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"]
     rows = [
-        ["🟡", f"C{number:02d}-23/08", "MAXVOL", "D2", "ATIVA", "$30,00", "$14,22", "$0,18", "0,78", "−20,0%", "+0,1%", "OBSERVAR D1/D2"]
+        ["🔴🟢", f"C{number:02d}-23/08", "MAXVOL", "D2", "ATIVA", "$30,00", "$14,22", "$0,18", "0,78", "−20,0%", "+0,1%", "🧪 APRENDIZADO D1/D2"]
         for number in range(7, 21)
     ]
 
@@ -596,6 +596,25 @@ def test_report_table_uses_real_discord_capacity_without_orphaning_c20():
     assert "C07-23/08" in pages[0]
     assert "C20-23/08" in pages[0]
     assert len("**Tabela consolidada — visão desktop**\n\n" + pages[0]) <= 1875
+
+
+def test_intraday_roi_signal_keeps_real_and_estimated_independent():
+    module = load_reports_module()
+    assert module.intraday_signal(10.0, 20.0) == "🟢🟢"
+    assert module.intraday_signal(-10.0, 20.0) == "🔴🟢"
+    assert module.intraday_signal(10.0, -20.0) == "🟢🔴"
+    assert module.intraday_signal(-10.0, -20.0) == "🔴🔴"
+    assert module.intraday_signal(0.0, None) == "🟡⚪"
+
+
+def test_intraday_action_display_separates_learning_from_observation():
+    module = load_reports_module()
+    assert module.intraday_action_display("OBSERVAR D1/D2") == ("🧪", "APRENDIZADO D1/D2")
+    assert module.intraday_action_display("OBSERVAR") == ("👁️", "OBSERVAR")
+    assert module.intraday_action_display("MANTER SEM ESCALA") == ("✅", "MANTER SEM ESCALA")
+    assert module.intraday_action_display("ESCALAR +10%") == ("🚀", "ESCALAR +10%")
+    assert module.intraday_action_display("PARAR D3 ESTIMADO") == ("🛑", "PARAR D3 ESTIMADO")
+    assert module.intraday_action_display("PREPARAÇÃO") == ("⏳", "PREPARAÇÃO")
 
 
 def test_report_table_repeats_header_only_after_real_character_overflow():
