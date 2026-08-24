@@ -1,5 +1,19 @@
 ## Production Cron Implementation
 
+### Current B007-2 cutover — 2026-08-24
+
+Rodolfo explicitly replaced B007 with B007-2, updated the existing 1Password item and asked Zeus to re-enable the generic monitor, reconcile the canonical Sheet and send one real live alert to the existing B007 channel.
+
+- Current app key: `B007-2`; predecessor `B007` is retired from the active registry.
+- Current item: `BOT B007-2 Token - Alex Silva Araujo`; its `app_name` metadata must be `B007-2`. Required `app_id`, `access_token` and `app_secret` stay secret and must only be validated for presence/readability.
+- Existing channel remains `1520510823426949313` (`b007-app-status`); manager-facing alerts must display `Meta APP - B007-2`.
+- Fresh preflight proved app metadata, `/roles`, `/me` and `debug_token` HTTP 200; the user token is valid and app-bound; all 18 roles resolve to names and the live token profile is Alex Silva Araujo.
+- The canonical Sheet already uses `NO APP = B007-2`: 19 rows total, 18 current Meta roles present and `An Na` intentionally preserved as the single `X`/removed row. Store `expected_sheet_roles=18`, not 19, because the marked removed row is not a pending role acceptance.
+- Production must not reuse either the retired B007 state or the older stale B007-2 state whose app-scoped role IDs belong to a different historical app ID. Back up state, clear both keys under the monitor lock, baseline B007-2 while its app-channel delivery is contained, require 18 roles, `safe_for_sheet=true`, 18 present, one marked, zero writes when already reconciled, zero errors and zero Discord messages.
+- After the baseline passes, clear the manual app pause and run `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with the exact current item. Require the canonical native embed plus complete current-user and movement blocks, then verify every physical Discord message by channel readback.
+- Hermes cron job `0cc7ed1e587e` remains the shared registry-driven `meta-app-roles-watch`; do not pause it globally. After cutover, B007-2 is unpaused while unaffected apps continue normally.
+- Hermes non-TTY pitfall: `op item edit` can consume the gateway pipe as JSON and fail with `invalid JSON provided`. For a user-authorized non-secret metadata correction, execute the exact field assignment in a real PTY, suppress command output, then read back only the intended non-secret field and credential-presence booleans. Never print token/secret values.
+
 ### Current B013-3 cutover — 2026-08-21
 
 Rodolfo explicitly replaced `B013-2` with `B013-3`, updated the exact 1Password item and authorized the dedicated DTR/ChatPion monitor, cron activation and a real alert after preflight.
