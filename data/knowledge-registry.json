@@ -327,6 +327,25 @@
       "updated_at": "2026-08-21T18:27:54+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.reporting.daily-account-summary",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:07:52-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SUMMARY-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Diário usa resumo em quatro blocos com ROI SMS e ROI total líquido",
+      "updated_at": "2026-08-24T22:10:46+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.reporting.desktop-only",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -1428,6 +1447,25 @@
       "updated_at": "2026-08-17T18:47:29+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "creditoparaveiculo-fixed-reports",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:06:53-04:00",
+      "id": "growth-creditoparaveiculo-br-car-br-g006-creative-performance-lifecycle-v1",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV G006 creative performance lifecycle and retest policy",
+      "updated_at": "2026-08-24T22:10:51+00:00"
+    },
+    {
       "canonical_key": "meta-app-b0062-role-set-continuity",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "consumers": [
@@ -1664,5 +1702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T21:50:05+00:00"
+  "updated_at": "2026-08-24T22:10:51+00:00"
 }

@@ -105,6 +105,7 @@ profiles/atena-skills/                    skill         Content / Atena         
 profiles/ares-soul.md                     config        Growth / Ares               ativo         revisar quando Ares avançar
 profiles/ares-config.yaml                 config        Growth / Ares               ativo         não tocar sem plano Hermes
 profiles/ares-skills/                     skill         Growth / Ares               ativo         manter
+profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/ skill Growth / Ares ativo contrato CPV/Diário; manter em paridade com runtime
 profiles/*bak*                            backup        Agents / Hermes             histórico     manter por enquanto
 ```
 
@@ -125,6 +126,8 @@ data/wp-term-cache.json                   runtime/cache Content / WordPress     
 data/lazyblock-*.json                    runtime/config Content / WordPress        ativo         revisar só com pipeline
 data/*-state.json                        runtime       Monitores / crons           ativo         não tocar sem plano
 data/infra-inventory.json                inventário    Tech / Infra                ativo         manter; atualizar via script
+data/knowledge-registry.json             registro      MGS OS / conhecimento       ativo         ponteiro canônico; validar via mgs-knowledge-control
+data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json runtime/config Growth / Ares ativo fonte canônica da operação CPV G006
 data/pendencias.db.json                  runtime       Executive / Ops             ativo         não tocar sem plano
 data/discord-thread-imports/             histórico     Agents / Discord            histórico     manter
 data/chat-logs/                          histórico     Agents / Discord            histórico     manter
@@ -152,6 +155,7 @@ scripts/mgs-rec-p1-orchestrator.py        automação     Content               
 scripts/mgs-ops-control-plane.py          automação     Executive / Ops             ativo         não tocar agora
 scripts/mgs-ops-briefing.py               automação     Executive / Ops             ativo         não tocar agora
 scripts/sync-souls.sh                     automação     Agents / Hermes             ativo         alterar só com validação completa
+/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py automação Growth / Ares ativo renderer Diário/Intraday CPV; teste e dry-run obrigatórios
 scripts/pendencia-*.sh                    automação     Ops                         ativo         manter
 scripts/mu-plugins/                       automação     WordPress                   ativo         não tocar sem plano
 scripts/yoast-scorer/                     automação     Content / SEO               ativo         não tocar agora

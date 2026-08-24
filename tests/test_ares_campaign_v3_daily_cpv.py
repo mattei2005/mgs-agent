@@ -30,6 +30,7 @@ from ares_campaign_v3.daily_cpv import (
     validate_hierarchy,
     update_operation_after_creation,
     move_to_testing,
+    move_to_status,
     make_square_clean,
     campaign_name_collisions,
     recovery_checkpoint_campaign_ids,
@@ -44,6 +45,7 @@ from ares_campaign_v3.daily_cpv import (
     usd_minor_label,
     corrective_write_authorization,
     assignments_from_readback,
+    update_inventory_assignments,
 )
 
 
@@ -834,3 +836,62 @@ def test_move_to_testing_is_idempotent_after_crash_without_second_patch():
     result = move_to_testing("unused-token", source)
     assert result["already_in_testing"] is True
     assert result["parents"] == ["testing-folder"]
+
+
+def test_inventory_assignment_history_is_idempotent_on_recovery(tmp_path):
+    inventory_path = tmp_path / "assets.jsonl"
+    rows = [asset(1)]
+    inventory_path.write_text(json.dumps(rows[0]) + "\n")
+    assignment = {
+        "asset_id": "asset-1",
+        "campaign_id": "campaign-1",
+        "adset_id": "adset-1",
+        "ad_id": "ad-1",
+        "creative_id": "creative-1",
+        "source_ad_id": "source-1",
+        "effective_object_story_id": "page_post_1",
+        "vertical_video_id": "derived-v-1",
+        "square_video_id": "derived-s-1",
+        "prestage_vertical_video_id": "pre-v-1",
+        "prestage_square_video_id": "pre-s-1",
+    }
+    moves = {"drive-1": {"id": "drive-1", "target_status": "02_TESTING"}}
+    update_inventory_assignments(inventory_path, rows, [assignment], moves, tmp_path / "audit.json")
+    update_inventory_assignments(inventory_path, rows, [assignment], moves, tmp_path / "audit.json")
+    assert rows[0]["test_attempt_count"] == 1
+    assert len(rows[0]["test_history"]) == 1
+
+
+def test_move_to_status_uses_exact_source_and_target_with_readback(monkeypatch):
+    captured = {}
+
+    def fake_drive_request(token, method, url, *, body=None, content_type=None):
+        captured.update(token=token, method=method, url=url, body=body, content_type=content_type)
+        return {
+            "id": "drive-1",
+            "name": "asset.mp4",
+            "driveId": "0AEwt4Ye690ocUk9PVA",
+            "parents": ["tested-folder"],
+            "trashed": False,
+            "size": "100",
+            "md5Checksum": "abc",
+        }
+
+    monkeypatch.setattr("ares_campaign_v3.daily_cpv.drive_request", fake_drive_request)
+    source = {
+        "id": "drive-1",
+        "name": "asset.mp4",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": ["testing-folder"],
+        "source_parent_id": "testing-folder",
+        "status_parent_ids": {"02_TESTING": "testing-folder", "03_TESTED": "tested-folder"},
+        "location": "02_TESTING",
+        "size": "100",
+        "md5Checksum": "abc",
+    }
+    result = move_to_status("token", source, "03_TESTED")
+    assert captured["method"] == "PATCH"
+    assert "addParents=tested-folder" in captured["url"]
+    assert "removeParents=testing-folder" in captured["url"]
+    assert result["target_status"] == "03_TESTED"
+    assert result["parents"] == ["tested-folder"]

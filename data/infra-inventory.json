@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-24T17:50:30-04:00",
+    "updated_at": "2026-08-24T18:14:48.720689-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7700,15 +7700,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 148933,
-      "modified_at": "2026-08-23T00:51:18-04:00",
-      "sha256": "8b16ef82b8bc7b73ed8f65bdaf549d8662f0b758f9006ecb48c47cb586692921",
+      "size_bytes": 164243,
+      "modified_at": "2026-08-24T18:14:48.720689-04:00",
+      "sha256": "b4d93054e771dbecf15c6e45ad44a95766a308ffa770a888cdfe6b4b0a80db86",
       "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting, including read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
       "validation": "C20 advideos canary: 121 targeted tests PASS; six videos associated to ad-account advideos; campaign/adset/three ads/three creatives ACTIVE with valid C20 UTMs; three Drive assets moved to 02_TESTING; active budget USD435 under USD500 cap; first-delivery monitor running observe-only.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "bf44354c7301ae5dd084de698d228b0d6138d0e0d770bc38d916c2566d83d778",
+      "test_sha256": "fab05eeadfe00f7ae82a36c099324d8411b188a9e15f6ada56ec061497688031",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "9cd9e26a69acd801fad9b523e1ca1cf3080a7de703014793a65f242055236c19",
+      "operation_sha256": "33b4d1cdc551de0bee8e7590c651446c177e32938c56d4c1fb573dd6cb6025f5",
       "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260823T045358Z.json",
       "last_report_sha256": "359ab5e9f63db5ccf1982a4aed7b8869185c9867ccd9d29f566d93c7a68233c7",
       "report_infra": {
@@ -7720,7 +7720,7 @@
         "readback": "POST HTTP 200; content empty; embed only; no thread"
       },
       "git_tracked": false,
-      "updated_at": "2026-08-23T03:26:48-03:00",
+      "updated_at": "2026-08-24T18:14:48.720689-04:00",
       "intraday_wrapper_sha256": "6037d8de7da6b8eedc1aa3fcd2141314fd8497d06c97a73c8069e27ea0d7ac8b",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
@@ -8379,7 +8379,8 @@
             "readback": "PASS"
           }
         }
-      }
+      },
+      "creative_performance_lifecycle_release_id": "ares-cpv-creative-performance-lifecycle-retest-20260824"
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",
@@ -9112,6 +9113,119 @@
         "classification": "new upstream after successful frozen cutover; intentionally not ported in closure",
         "head_vs_origin": "behind=1 ahead=1 because MGS carried commit remains on frozen target"
       }
+    },
+    {
+      "id": "ares-cpv-creative-performance-lifecycle-retest-20260824",
+      "agent": "ares",
+      "type": "creative_performance_lifecycle_runtime",
+      "owner": "Rodolfo Mattei / Ares",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1541563564207243335",
+      "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "policy_version": "1.0.0",
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
+      "behavior": {
+        "meaningful_delivery_share_pct": 10,
+        "d3_rejected": "campaign PAUSED terminal PARAR D3 ESTIMADO plus actual ROI < 0 and estimated ROI < 0; only assets with >=10% cumulative spend share",
+        "d4_winner": "actual and estimated ROI > 0 at both 08:00 and 16:00; only assets with >=10% cumulative spend share",
+        "d5_winner": "actual and estimated ROI > 0 at 08:00; only assets with >=10% cumulative spend share",
+        "underexposed_terminal": "03_TESTED + INCONCLUSIVO_POR_SUBENTREGA; retest eligible while attempts < 2",
+        "underexposed_live_winner": "remain 02_TESTING and ineligible until no active use",
+        "selection_mix": "2x 01_READY + 1x 03_TESTED eligible per campaign; fallback third slot to READY",
+        "campaign_deleted_alone_rejects": false,
+        "meta_writes": 0
+      },
+      "artifacts": {
+        "daily_runtime": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "size_bytes": 103005,
+          "sha256": "d666bc7f5b6326f7f86f00018ebc48d54e0cb3f8cc7bfbb21dfaaa4b47cde8bd"
+        },
+        "lifecycle_runtime": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+          "size_bytes": 14409,
+          "sha256": "01e2c1428947a9528629fbf412dd2923156b432e4adaf6ac3f47fd7188dcd6c9"
+        },
+        "fixed_reports": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+          "size_bytes": 164243,
+          "sha256": "b4d93054e771dbecf15c6e45ad44a95766a308ffa770a888cdfe6b4b0a80db86"
+        },
+        "operation": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+          "sha256": "33b4d1cdc551de0bee8e7590c651446c177e32938c56d4c1fb573dd6cb6025f5"
+        },
+        "tests": {
+          "daily": "617726fb8534b8cff3e11d2caf85c914625ead5806d30d95e7390be604153ab0",
+          "lifecycle": "ca025558be88b25b1bb3167eb2ba330c118803ca530237684f82c877dfa39042",
+          "fixed_reports": "fab05eeadfe00f7ae82a36c099324d8411b188a9e15f6ada56ec061497688031"
+        }
+      },
+      "skills": {
+        "creative_operations": {
+          "version": "2.0.1",
+          "sha256": "77f29ff5d40f36b165a1437e1b98a44ed8be2f6cf5b1984cb8d33219ff54d600",
+          "route_pack_06_sha256": "ef39082d24962d8bee38570236e0274f618a2e0014807bc13d874b31041457bf"
+        },
+        "creative_taxonomy": {
+          "version": "1.0.1",
+          "sha256": "391e7df6fd4cfa18741f7a520d7d811ff62cc921321d131db05d22b26a251ca3",
+          "route_pack_01_sha256": "32a2829ac92779de911f6f6b2db835ccdc688562fd301adb4ce22174e272f2c7"
+        },
+        "direct_traffic_cbo": {
+          "version": "1.0.50",
+          "sha256": "b39a47970ab7a84210de19f04f970ac9efc6b2c0e54f8286c0ca3f12af3df9ff"
+        },
+        "meta_campaign_engine_v3": {
+          "version": "3.0.19",
+          "sha256": "73e9528d7497cccced2b493b59fc83e03ff21c59580dfd78895580229e087dcc"
+        }
+      },
+      "validation": {
+        "targeted_tests": "143 passed",
+        "py_compile": "PASS",
+        "json_validation": "PASS",
+        "git_diff_check": "PASS",
+        "offline_smoke": "OFFLINE_SMOKE_OK; 3 campaigns; bundles 2+1; 0 external network calls",
+        "live_dry_run": {
+          "status": "DRY_RUN_OK",
+          "campaign_numbers": [
+            24,
+            25,
+            26
+          ],
+          "selected_assets": 9,
+          "selected_sources": {
+            "01_READY": 9,
+            "03_TESTED": 0
+          },
+          "drive_ready_counts": {
+            "IMG": 42,
+            "VID": 194,
+            "TOTAL": 236
+          },
+          "retest_eligible_physical": 0,
+          "side_effects": {
+            "inventory_reservation": false,
+            "media_upload": false,
+            "campaign_write": false,
+            "drive_move": false
+          },
+          "audit_sha256": "14dce0e32ee0832e9f4e25c675749cde75e1fa69818a4b5590aa24c73b042c68"
+        },
+        "existing_assets_moved_at_deploy": 0,
+        "reason_no_existing_move": "No D3 terminal or D4/D5 checkpoint classification was executed during deployment; future 08:00/16:00 guarded checkpoints apply the policy."
+      },
+      "knowledge": {
+        "registry_id": "growth-creditoparaveiculo-br-car-br-g006-creative-performance-lifecycle-v1",
+        "registry_sha256": "9935c5f20a3e6ba84e4260c898d2fc6d7128af26bf51e76ea7f0b24ec30fe9a3",
+        "checkpoint_id": "ARES-CPV-CREATIVE-LIFECYCLE-RETEST-20260824"
+      },
+      "report_infra": {
+        "status": "pending"
+      },
+      "updated_at": "2026-08-24T18:14:48.720689-04:00"
     }
   ],
   "profile_skill_references": [

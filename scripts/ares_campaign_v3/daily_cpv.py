@@ -998,8 +998,18 @@ def update_inventory_assignments(path: Path, rows: list[dict[str, Any]], assignm
         if not assignment:
             continue
         moved = str(row.get("asset_drive_id") or "") in moves
-        attempt = {
-            "attempt": int(row.get("test_attempt_count") or 0) + 1,
+        existing_attempt = next(
+            (
+                item
+                for item in row.get("test_history") or []
+                if str(item.get("campaign_id") or "") == str(assignment["campaign_id"])
+                and str(item.get("ad_id") or "") == str(assignment["ad_id"])
+            ),
+            None,
+        )
+        attempt_number = int((existing_attempt or {}).get("attempt") or (int(row.get("test_attempt_count") or 0) + 1))
+        attempt = existing_attempt or {
+            "attempt": attempt_number,
             "assigned_at_utc": utc_now(),
             "campaign_id": assignment["campaign_id"],
             "adset_id": assignment["adset_id"],
@@ -1014,12 +1024,13 @@ def update_inventory_assignments(path: Path, rows: list[dict[str, Any]], assignm
             "meta_video_ids": [assignment["vertical_video_id"], assignment["square_video_id"]],
             "campaign_audit": str(audit_path),
         }
-        row.setdefault("test_history", []).append(attempt)
+        if existing_attempt is None:
+            row.setdefault("test_history", []).append(attempt)
         row.update(
             status="02_TESTING" if moved else "01_READY_USED_MOVE_PENDING",
             evaluation_status="EM_TESTE",
             retest_eligible=False,
-            test_attempt_count=attempt["attempt"],
+            test_attempt_count=attempt_number,
             reservation_status="UTILIZADO_PELO_ARES",
             ares_eligible=False,
             used_by="ARES",

@@ -103,12 +103,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-CREATIVE-LIFECYCLE-RETEST-20260824",
-      "next_step": "Persistir política, escrever testes vermelhos e implementar lifecycle + seleção de reteste com readback",
+      "next_step": "Atualizar skills e inventário infra, rodar suite ampliada, REPORT-INFRA e fechar checkpoint",
       "objective": "Aplicar classificação automática de criativos CPV por entrega e ROI, com WINNERS/REJECTED/TESTED e reteste 2 READY + 1 TESTED elegível",
-      "source": "discord:thread:1541563564207243335; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "autorizado por rodolfo; inventário técnico em andamento; nenhuma classificação retrospectiva nem movimento drive executado ainda",
+      "source": "discord:thread:1541563564207243335; canonical-key:growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
+      "state": "política canônica v1 registrada; runtime de classificação e seleção implementado; testes focalizados e dry-run live aprovados; sem movimento retrospectivo e sem write meta",
       "thread_id": "1541563564207243335",
-      "updated_at": "2026-08-24T21:54:43+00:00"
+      "updated_at": "2026-08-24T22:11:00+00:00"
     },
     {
       "agent": "ares",
@@ -1172,5 +1172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T21:54:43+00:00"
+  "updated_at": "2026-08-24T22:11:00+00:00"
 }
