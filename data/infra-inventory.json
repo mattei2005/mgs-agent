@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-24T05:00:01-04:00",
+    "updated_at": "2026-08-24T19:39:23.278279+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -15,8 +15,9 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.56-master",
-          "status": "installed"
+          "version": "4.3.59-master",
+          "status": "installed",
+          "previous_version": "4.3.56-master"
         },
         {
           "name": "monarx-protect",
@@ -31,7 +32,7 @@
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-08-17T12:34:57.341308+00:00",
+      "updated_at": "2026-08-24T19:39:23.278279+00:00",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "authorization_message_ids": [
@@ -54,6 +55,17 @@
         "result": "PASS",
         "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
         "validated_at": "2026-08-17T12:34:57.341308+00:00"
+      },
+      "latest_maintenance_20260824": {
+        "requested_by": "Rodolfo Mattei",
+        "authorization_message_ids": [
+          "1541528716583112756",
+          "1541531559994335252"
+        ],
+        "result": "PASS; monarx-agent upgraded and active/running with new PID",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update/post-update-validation.json",
+        "validated_at": "2026-08-24T19:39:23.278279+00:00"
       }
     },
     {
@@ -85,8 +97,9 @@
         },
         {
           "name": "curl",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
+          "version": "8.5.0-2ubuntu10.13",
+          "status": "installed",
+          "previous_version": "8.5.0-2ubuntu10.12"
         },
         {
           "name": "fwupd",
@@ -100,13 +113,15 @@
         },
         {
           "name": "libcurl3t64-gnutls",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
+          "version": "8.5.0-2ubuntu10.13",
+          "status": "installed",
+          "previous_version": "8.5.0-2ubuntu10.12"
         },
         {
           "name": "libcurl4t64",
-          "version": "8.5.0-2ubuntu10.11",
-          "status": "installed"
+          "version": "8.5.0-2ubuntu10.13",
+          "status": "installed",
+          "previous_version": "8.5.0-2ubuntu10.12"
         },
         {
           "name": "libfwupd3",
@@ -215,8 +230,9 @@
         },
         {
           "name": "monarx-agent",
-          "version": "4.3.54-master",
-          "status": "installed"
+          "version": "4.3.59-master",
+          "status": "installed",
+          "previous_version": "4.3.56-master"
         },
         {
           "name": "monarx-protect",
@@ -266,24 +282,29 @@
       ],
       "node_runtime": "v22.23.2",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
-      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
+      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
       "validation": {
-        "apt_upgradable": 0,
+        "apt_upgradable": 1,
         "npm_outdated_global": 0,
         "dpkg_audit": "clean",
         "held_packages": 0,
         "failed_systemd_units": 0,
-        "gateway_services": "3/3 active and fresh Discord readiness validated",
-        "security_services": "monarx-agent active; cron active",
+        "gateway_services": "3/3 active; PIDs unchanged",
+        "security_services": "monarx-agent active/running with new PID; mgs-autocommit unchanged",
         "reboot_required": false,
         "journal_errors_since_boot": 0,
-        "needrestart_kernel": "current 6.8.0-138-generic",
+        "needrestart_kernel": "current/expected 6.8.0-138-generic; KSTA=1",
         "needrestart_deferred_service": null,
         "needrestart_sessions": "none reported post-reboot",
-        "rollback_integrity": "PASS; SHA256SUMS; 14 previous DEBs; npm/corepack archive",
-        "ubuntu_pro": "attached; esm-apps pending=0; livepatch=nothing-to-apply"
+        "rollback_integrity": "PASS; SHA256SUMS; 4 previous DEBs; strict 70-member FFmpeg ESM payload fallback",
+        "ubuntu_pro": "attached; esm-apps pending=0; standard security pending=0",
+        "apt_residual": "byobu 6.11-0ubuntu1.1 phased 10%; intentionally not forced",
+        "standard_security_updates_pending": 0,
+        "esm_apps_updates_pending": 0,
+        "journal_errors_since_package_boundary": 0,
+        "automatic_service_side_effect": "fwupd restarted by needrestart; active/running; no priority 0..3 errors"
       },
-      "updated_at": "2026-08-17T12:34:57.341308+00:00",
+      "updated_at": "2026-08-24T19:39:23.278279+00:00",
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
@@ -321,6 +342,18 @@
         "backup": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
         "validation": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json",
         "validated_at": "2026-08-17T12:34:57.341308+00:00"
+      },
+      "latest_maintenance_20260824": {
+        "requested_by": "Rodolfo Mattei",
+        "authorization_message_ids": [
+          "1541528716583112756",
+          "1541531559994335252"
+        ],
+        "scope": "13 exact upgrades; byobu phased/autoremove/Hermes/reboot excluded",
+        "result": "PASS; packages exact; security pending 0; no reboot; gateways unchanged",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update/post-update-validation.json",
+        "validated_at": "2026-08-24T19:39:23.278279+00:00"
       }
     },
     {
@@ -375,16 +408,17 @@
         "livepatch_kernel_supported": true,
         "livepatch_patch_state": "nothing-to-apply",
         "reboot_required": false,
-        "apt_upgradable": 0,
+        "apt_upgradable": 1,
         "dpkg_audit": "clean",
         "held_packages": 0,
         "failed_systemd_units": 0,
         "gateway_pids": "unchanged",
-        "post_reboot_gateways_ready": true
+        "post_reboot_gateways_ready": true,
+        "apt_residual": "byobu phased 10% only"
       },
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536712042700873818",
-      "updated_at": "2026-08-17T12:34:57.341308+00:00",
+      "updated_at": "2026-08-24T19:39:23.278279+00:00",
       "packages_count": 24,
       "packages": [
         {
@@ -407,50 +441,50 @@
         },
         {
           "name": "libswscale7",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libavdevice60",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libavformat60",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libavfilter9",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libavcodec60",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libavutil58",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libpostproc57",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
           "name": "libswresample4",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
@@ -467,8 +501,8 @@
         },
         {
           "name": "ffmpeg",
-          "previous_version": "7:6.1.1-3ubuntu5",
-          "version": "7:6.1.1-3ubuntu5+esm10",
+          "previous_version": "7:6.1.1-3ubuntu5+esm10",
+          "version": "7:6.1.1-3ubuntu5+esm11",
           "status": "installed"
         },
         {
@@ -555,6 +589,12 @@
         "kernel": "6.8.0-138-generic",
         "validated_at": "2026-08-17T12:34:57.341308+00:00",
         "artifact": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z/post-reboot-result.json"
+      },
+      "latest_maintenance_20260824": {
+        "authorization_message_id": "1541531559994335252",
+        "result": "PASS; 9 FFmpeg ESM packages upgraded to esm11; ESM pending 0",
+        "rollback": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update/post-update-validation.json"
       }
     }
   ],
