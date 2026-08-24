@@ -1812,28 +1812,28 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.7-20260717",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.8-20260824",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.7",
+      "version": "1.7.8",
       "status": "active",
-      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário + timezone de negócio America/Sao_Paulo com armazenamento UTC preservado",
-      "package_sha256": "d3625fcd28936c6ce146c91fe2f76c91c5e7d52f276b4a06bd95c5411cddc1c9",
-      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-timezone/20260717T032505Z",
+      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário/timezone São Paulo + criação dinâmica de listas SMS Funnel",
+      "package_sha256": "4577b36b6c558b007596367eed35ebc607b738183ba98191ce90314ec355d8fd",
+      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-sms-add-list/20260824T150605Z/mgs-quiz-carro-1.7.7.tar.gz",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "12fa21fad01e0d7fa7a71a42ae95154c47fa5e31729a4bb31275edf2dd28a0f9",
+          "sha256": "956d71dd7c7b533365373a5b8f5fe5fc0fa63e061794aed2903fa6ddc6056b87",
           "bytes": 2579
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
-          "sha256": "3682eca5155181832ecbc5e63da1c50c0827212e35151bfa411869f4e5a3d988",
-          "bytes": 99037
+          "sha256": "7e8b5c94910613f4a9050b0492a639f94cf4f6db090a7b8253b0ae3829fcd8a2",
+          "bytes": 102780
         },
         {
           "path": "includes/class-mgs-quiz-activator.php",
@@ -1856,8 +1856,8 @@
           "bytes": 6136
         }
       ],
-      "validation": "v1.7.7 lint/local helpers OK; live exact hashes; plugin active; São Paulo 15/07 mapped to UTC [03:00, next-day 03:00) with 6,813 rows; report/display/CSV timezone contract validated; public quiz and REST HTTP 200.",
-      "updated_at": "2026-07-17T03:37:30.419082+00:00",
+      "validation": "v1.7.8 lint 11 PHP files; helper tests PASS (new/duplicate/invalid/missing); JS fixture added G007; live hashes exact; plugin active; admin render shows add button/code fields/save; remote helper accepts G007; option hash and 10 quiz configs unchanged; public quiz and REST HTTP 200.",
+      "updated_at": "2026-08-24T11:07:50-04:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
