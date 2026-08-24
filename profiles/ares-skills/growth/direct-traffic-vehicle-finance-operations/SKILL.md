@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.29
+version: 1.0.30
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -445,6 +445,8 @@ No Diário de Creditoparaveiculo BR-CAR-BR, o formato solicitado é híbrido: ca
 No Intraday da mesma operação, cada card mobile também mostra o ROI diário da Smart Bidding nas últimas três datas — dia atual parcial e dois dias anteriores — com data explícita e `n/d` quando não houver investimento/match. Para desktop, manter a tabela consolidada atual e acrescentar uma tabela histórica compacta separada. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
 
 O Intraday CPV inclui `RPS` e `CPM` por campanha no Adgroup, em USD e com revenue share descontado: `NET_REVENUE × 1.000 ÷ SESSIONS` e `NET_REVENUE × 1.000 ÷ GAM_IMPRESSIONS`. A Pricing filtrada por `rewarded` fornece `CR Reward = Σ gamMatchedRequests dos cinco blocos rewarded ÷ gamRequests do rewarded base × 100`, mas essa taxa é consolidada por página/operação, não por campanha; o valor cinza é o consolidado anterior/ontem. Não repetir `CR Reward` em cada linha como se fosse segmentada. Para cobertura por campanha, usar o rótulo distinto `Cob. CDP` e a fórmula `CDP_IMPRESSIONS (AD_MATCHED) ÷ CDP_REQUESTS × 100`, agrupada pela UTM da campanha/adgroup. Essa segunda taxa mede a cobertura CDP do tráfego pós-clique e não reproduz a cascata GAM reward; a cascata exata por campanha requer `gamRequests` e `gamMatchedRequests` expostos com dimensão de campanha/UTM.
+
+Readback live de `Reports > CDP` em 24/08/2026 validou a combinação exata para o reward G006: `DATE + UTM_SOURCE + UTM_MEDIUM + UTM_CAMPAIGN + UTM_ADGROUP + JBF_OPERATION + PAGE_TYPE + PATHNAME + SLOT_ID + DEVICE`, métricas `REQUESTS/AD_REQUESTS`, `CDP_IMPRESSIONS/AD_MATCHED`, `COVERAGE`, `AVG_PRICE/PRICE` e `SESSIONS`. Filtrar `UTM_SOURCE=facebook`, `UTM_MEDIUM=g006-s`, campanha `b01fb13cNN`, `JBF_OPERATION=facebook_br_car_financ-carro-s_rec`, `PAGE_TYPE=rec`, `PATHNAME=rec-br-financiamento-de-carro-sem-entrada`, `SLOT_ID=digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded` e `DEVICE=mob`. A API `POST /report/queryBuilder` devolve `COVERAGE` igual a `AD_MATCHED ÷ AD_REQUESTS × 100` por campanha. O range UTC pode devolver a data civil adjacente; refiltrar `DATE` pela data operacional. Acrescentar `HOUR` aproxima o publisher do limite de 10.000 linhas; para Intraday recorrente, preferir o acumulado diário por campanha e deixar o histórico nascer dos snapshots de 2h. Consulta horária fica diagnóstico on-demand com controle explícito de completude. `JBF_C_PLACEMENT` e `JBF_EX` vieram vazios nesse recorte e não agregam valor.
 
 Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com configuração, políticas e estado live. Não executar `/new`, `/reset` ou suposto `/renew`. Hermes não possui `/renew`; a compressão automática in-place preserva a sessão, deixa turns antigos pesquisáveis e evita reset destrutivo.
 
