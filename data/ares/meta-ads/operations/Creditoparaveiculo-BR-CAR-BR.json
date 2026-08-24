@@ -810,6 +810,15 @@
         "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
         "divider": "34 heavy horizontal characters between campaigns",
         "desktop_table": "repeat the current campaign metrics as a consolidated aligned table after the final card, followed by a separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
+        "desktop_table_pagination": {
+          "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
+          "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
+          "overflow": "only paginate on real character overflow, repeating the header and preserving every row exactly once",
+          "validated_case": "C07-C20 uses one table: 14 campaign rows, 1693 table characters and 1733 characters with title",
+          "corrected_by": "Rodolfo Mattei",
+          "corrected_at": "2026-08-24T10:24:49-04:00",
+          "source_thread_id": "1541452429823049818"
+        },
         "delivery_retry_policy": {
           "authorized_by": "Rodolfo Mattei",
           "authorized_at": "2026-08-21T15:23:56-03:00",
@@ -932,7 +941,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-23T05:35:59.329194-03:00",
+  "updated_at": "2026-08-24T11:24:49-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -1300,7 +1309,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.63",
+  "playbook_version": "1.0.64",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

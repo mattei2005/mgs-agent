@@ -583,6 +583,33 @@ def test_report_tables_paginate_instead_of_hiding_new_campaigns():
     assert "C14" in pages[1]
 
 
+def test_report_table_uses_real_discord_capacity_without_orphaning_c20():
+    module = load_reports_module()
+    headers = ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Ação"]
+    rows = [
+        ["🟡", f"C{number:02d}-23/08", "MAXVOL", "D2", "ATIVA", "$30,00", "$14,22", "$0,18", "0,78", "−20,0%", "+0,1%", "OBSERVAR D1/D2"]
+        for number in range(7, 21)
+    ]
+
+    pages = module.table_pages(headers, rows)
+    assert len(pages) == 1
+    assert "C07-23/08" in pages[0]
+    assert "C20-23/08" in pages[0]
+    assert len("**Tabela consolidada — visão desktop**\n\n" + pages[0]) <= 1875
+
+
+def test_report_table_repeats_header_only_after_real_character_overflow():
+    module = load_reports_module()
+    headers = ["Camp", "Ação"]
+    rows = [[f"C{number:03d}", "OBSERVAR D1/D2 " + ("x" * 80)] for number in range(1, 31)]
+
+    pages = module.table_pages(headers, rows, max_chars=500)
+    assert len(pages) > 1
+    assert all(len(page) <= 500 for page in pages)
+    for number in range(1, 31):
+        assert sum(f"C{number:03d}" in page for page in pages) == 1
+
+
 def test_aligned_table_accounts_for_wide_emoji_cells():
     module = load_reports_module()
     rendered = module.aligned_table(
