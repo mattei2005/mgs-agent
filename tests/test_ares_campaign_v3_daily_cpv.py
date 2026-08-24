@@ -597,6 +597,75 @@ def test_asset_selection_skips_unreconciled_drive_assets_before_filling_batch():
     assert [row["asset_id"] for row in selected] == [f"asset-{index}" for index in range(3, 12)]
 
 
+def test_asset_selection_uses_two_ready_plus_one_retest_per_campaign():
+    ready = [asset(index) for index in range(1, 7)]
+    retests = []
+    for index in range(7, 10):
+        row = asset(index)
+        row.update(
+            status="03_TESTED",
+            evaluation_status="INCONCLUSIVO_POR_SUBENTREGA",
+            retest_eligible=True,
+            test_attempt_count=1,
+        )
+        retests.append(row)
+    rows = [*ready, *retests]
+    selected = select_assets(
+        rows,
+        {f"drive-{index}" for index in range(1, 10)},
+        9,
+        mix_policy={
+            "enabled": True,
+            "ready_slots_per_campaign": 2,
+            "retest_slots_per_campaign": 1,
+            "max_test_attempts": 2,
+        },
+    )
+    assert [row["status"] for row in selected] == [
+        "01_READY", "01_READY", "03_TESTED",
+        "01_READY", "01_READY", "03_TESTED",
+        "01_READY", "01_READY", "03_TESTED",
+    ]
+
+
+def test_asset_selection_falls_back_to_three_ready_when_no_retest_exists():
+    rows = [asset(index) for index in range(1, 4)]
+    selected = select_assets(
+        rows,
+        {f"drive-{index}" for index in range(1, 4)},
+        3,
+        mix_policy={
+            "enabled": True,
+            "ready_slots_per_campaign": 2,
+            "retest_slots_per_campaign": 1,
+            "max_test_attempts": 2,
+        },
+    )
+    assert [row["asset_id"] for row in selected] == ["asset-1", "asset-2", "asset-3"]
+
+
+def test_asset_selection_never_retests_after_second_attempt():
+    rows = [asset(1), asset(2), asset(3)]
+    rows[2].update(
+        status="03_TESTED",
+        evaluation_status="INCONCLUSIVO_POR_SUBENTREGA",
+        retest_eligible=True,
+        test_attempt_count=2,
+    )
+    with pytest.raises(DailyBlocked, match="insufficient"):
+        select_assets(
+            rows,
+            {"drive-1", "drive-2", "drive-3"},
+            3,
+            mix_policy={
+                "enabled": True,
+                "ready_slots_per_campaign": 2,
+                "retest_slots_per_campaign": 1,
+                "max_test_attempts": 2,
+            },
+        )
+
+
 def test_reconciliation_blocks_existing_canonical_name_in_meta_ads():
     row = asset(1)
     row["canonical_filename"] = "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4"
