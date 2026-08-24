@@ -373,12 +373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260824",
-      "next_step": "Após Rodolfo responder sim ao gate crítico, instalar somente os 13 candidatos exatos, validar APT/dpkg/needrestart/Monarx/gateways e fechar a fase VPS antes de iniciar o port Hermes.",
+      "next_step": "Corrigir cobertura do precheck para incluir o patch Honcho; congelar upstream mais recente; capturar superfície completa e baseline; portar em checkout/venv isolados; revalidar upstream antes do cutover.",
       "objective": "Atualizar a VPS e o Hermes em fases controladas, com rollback, preservação integral dos patches MGS e zero commits upstream conhecidos pendentes no cutover",
-      "source": "discord:thread:1541526538619588678; authorization:1541528716583112756; backup:/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update; runtime:/root/.local/bin/hermes",
-      "state": "rollback da fase vps criado e validado em /root/.hermes/secure-backups/vps-maintenance/20260824t192548z-vps-hermes-update: quatro debs anteriores, payload estrito dos nove pacotes ffmpeg esm, dpkg status, simulação e hashes íntegros. instalação ainda não executada; aguardando confirmação crítica para modificar /usr.",
+      "source": "discord:thread:1541526538619588678; authorization:1541528716583112756; critical-confirmation:1541531559994335252; vps-report:1541532764837519361; backup:/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+      "state": "fase vps concluída pass: 13 pacotes exatos instalados, segurança/esm zeradas, byobu phaseado preservado, sem reboot, gateways com pids inalterados, monarx e fwupd ativos, rollback/hash/inventário/audit/report-infra 1541532764837519361 validados. iniciando fase hermes; runtime ativo ainda inalterado.",
       "thread_id": "1541526538619588678",
-      "updated_at": "2026-08-24T19:27:43+00:00"
+      "updated_at": "2026-08-24T19:41:17+00:00"
     },
     {
       "agent": "zeus",
@@ -1132,5 +1132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T19:27:43+00:00"
+  "updated_at": "2026-08-24T19:41:17+00:00"
 }

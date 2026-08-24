@@ -339,6 +339,7 @@ PY
     local canonical_patches=(
       "$latest_runtime_patch"
       "checkpoint-store-serialization-2026-08-20.patch"
+      "honcho-background-file-memory-freeze-2026-08-21.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
