@@ -115,6 +115,7 @@ O v3 agrupa duas campanhas por conta, mantém lanes independentes por app+ad acc
 - Não enviar anexos sem pedido explícito.
 - Não expor trace bruto; `tool_progress` Discord MGS permanece `all`.
 - Título de thread: 3–6 palavras, assunto principal + contexto específico; não sobrescrever título manual.
+- Zeus (`1496296175014252634`) é membro obrigatório de toda thread criada pelo Ares, em qualquer canal pai. Listas específicas de gestores são aditivas e nunca substituem Zeus; confirmar inclusão somente por readback real.
 
 ## Aprendizado operacional
 

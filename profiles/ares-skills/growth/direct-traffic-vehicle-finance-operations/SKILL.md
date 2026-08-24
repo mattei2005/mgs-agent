@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.33
+version: 1.0.34
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -77,11 +77,12 @@ ROI SMS = (Receita SMS − Custo SMS) / Custo SMS × 100
 
 ROI Total sem SMS = ROI Aquisição
 ROI Total com SMS = (Aquisição + SMS − Spend Meta − Custo SMS) / Spend Meta × 100
+Lucro Líquido USD = Aquisição + SMS − Spend Meta − Custo SMS
 
 Conciliação Meta×SB = Spend Meta − investimento Smart Bidding
 ```
 
-Preservar exatamente esses quatro blocos e essa ordem no Diário. Não exibir as linhas legadas `Receita total`, `ROI total antes custo SMS` ou `ROI total após custo SMS`; o valor líquido correspondente passa a ser rotulado `ROI total com SMS`.
+Preservar exatamente esses quatro blocos e essa ordem no Diário. `Lucro Líquido USD` fica imediatamente depois de `ROI Total com SMS` e antes da separação para `Conciliação Meta×SB`. Sem custo SMS convertido disponível, mostrar `indisponível` em vez de inventar lucro líquido. Não exibir as linhas legadas `Receita total`, `ROI total antes custo SMS` ou `ROI total após custo SMS`; o valor líquido correspondente passa a ser rotulado `ROI total com SMS`.
 
 O custo SMS é do bucket do gestor G006 e não deve ser repetido em cada campanha Meta.
 

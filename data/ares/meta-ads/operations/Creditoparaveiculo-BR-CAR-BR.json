@@ -784,7 +784,7 @@
     "daily_account_summary": {
       "status": "canonical_default",
       "approved_by": "Rodolfo Mattei",
-      "approved_at": "2026-08-24T18:07:52-04:00",
+      "approved_at": "2026-08-24T19:02:37-04:00",
       "source_thread_id": "1541568072048054322",
       "fields_in_order": [
         "Spend Meta",
@@ -798,6 +798,7 @@
         "separator",
         "ROI total sem SMS",
         "ROI total com SMS",
+        "Lucro líquido USD",
         "separator",
         "Conciliação Meta×SB"
       ],
@@ -806,6 +807,7 @@
         "roi_sms": "(sms_g006_net_revenue_usd - sms_cost_g006_usd) / sms_cost_g006_usd * 100",
         "roi_total_sem_sms": "roi_aquisicao",
         "roi_total_com_sms": "(acquisition_net_revenue_usd + sms_g006_net_revenue_usd - meta_spend_usd - sms_cost_g006_usd) / meta_spend_usd * 100",
+        "lucro_liquido_usd": "acquisition_net_revenue_usd + sms_g006_net_revenue_usd - meta_spend_usd - sms_cost_g006_usd",
         "conciliacao_meta_sb": "meta_spend_usd - smart_bidding_investment_usd"
       },
       "removed_visible_rows": [
@@ -1143,7 +1145,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-24T18:07:52-04:00",
+  "updated_at": "2026-08-24T19:02:37-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

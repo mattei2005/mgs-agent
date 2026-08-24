@@ -155,7 +155,7 @@ scripts/mgs-rec-p1-orchestrator.py        automação     Content               
 scripts/mgs-ops-control-plane.py          automação     Executive / Ops             ativo         não tocar agora
 scripts/mgs-ops-briefing.py               automação     Executive / Ops             ativo         não tocar agora
 scripts/sync-souls.sh                     automação     Agents / Hermes             ativo         alterar só com validação completa
-/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py automação Growth / Ares ativo renderer Diário/Intraday CPV; teste e dry-run obrigatórios
+/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py automação Growth / Ares ativo renderer Diário/Intraday CPV, incluindo Lucro Líquido USD; teste e dry-run obrigatórios
 scripts/pendencia-*.sh                    automação     Ops                         ativo         manter
 scripts/mu-plugins/                       automação     WordPress                   ativo         não tocar sem plano
 scripts/yoast-scorer/                     automação     Content / SEO               ativo         não tocar agora

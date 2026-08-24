@@ -232,6 +232,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
+      "next_step": "Revisar com Rodolfo os princípios e parâmetros próprios da estratégia BOT/Messenger Eggbev; materializar contrato operacional draft e só então criar crons Eggbev em dry-run/read-only.",
+      "objective": "Reconstruir do zero a arquitetura Campaign Ops da estratégia BOT/Messenger Eggbev US-CC-EN, retirar OpenzedFinanzas do escopo ativo do Ares e configurar regras, skills, dados e crons para gestão de Rodolfo e Nicolas.",
+      "source": "discord:thread:1541581677602545825; account:1034081997659047; auth-audit:data/ares/meta-ads/audit/auth-check-1034081997659047-20260825T021455Z.json",
+      "state": "iniciativa iniciada por rodolfo. conta meta 1034081997659047 validada read-only por http 200 como eggbev-us-cc-en-01, usd, america/new_york. token corporativo localizado no item 1password informado e mantido secreto. threads fixas fornecidas: regras 1541578622106865815, intraday 1541578606076231750, diario 1541578596253175858, criar campanhas 1541578556037927053. openzed será retirado do runtime/escopo ativo com auditoria histórica preservada. nenhuma regra de tráfego direto será herdada automaticamente.",
+      "thread_id": "1541581677602545825",
+      "updated_at": "2026-08-24T23:04:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CC-US-ES-EN-CREATIVE-REVIEW-20260820",
       "next_step": "Aguardar Kelly continuar a revisão e listar outros bons/ruins ou arquivos classificados no idioma incorreto. Manter os 22 READY restantes RESERVADO_PELO_GESTOR e ares_eligible=false; aplicar somente mudanças exatas com reconciliação de linhagem e readback.",
       "objective": "Concluir revisão humana dos criativos CC_US_ES e CC_US_EN processados em 20/08/2026",
@@ -1172,5 +1182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T22:20:38+00:00"
+  "updated_at": "2026-08-24T23:04:20+00:00"
 }

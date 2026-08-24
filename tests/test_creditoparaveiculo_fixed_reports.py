@@ -221,6 +221,7 @@ def test_daily_account_summary_matches_rodolfo_order_and_formulas():
         sms_cost_usd=10.0,
         sms_roi=module.roi(30.0, 10.0),
         total_roi_with_sms=module.roi(120.0 + 30.0 - 10.0, 100.0),
+        net_profit_usd=120.0 + 30.0 - 100.0 - 10.0,
         spend_diff=0.25,
         anomaly=False,
     )
@@ -236,17 +237,37 @@ def test_daily_account_summary_matches_rodolfo_order_and_formulas():
         "",
         "ROI total sem SMS",
         "ROI total com SMS",
+        "Lucro líquido USD",
         "",
         "Conciliação Meta×SB",
     ]
     assert rows[7] == ["⚪", "ROI SMS", "+200,0%"]
     assert rows[9][2] == "+20,0%"
     assert rows[10][2] == "+40,0%"
+    assert rows[11] == ["🟢", "Lucro líquido USD", "$40,00"]
     rendered = module.aligned_table(["Sinal", "Indicador", "Resultado"], rows)
     assert rendered.count("Receita aquisição SB") == 1
     assert "Receita total" not in rendered
     assert "ROI total antes custo SMS" not in rendered
     assert "ROI total após custo SMS" not in rendered
+
+
+def test_daily_account_summary_net_profit_is_unavailable_without_sms_cost():
+    module = load_reports_module()
+    rows = module.daily_account_summary_rows(
+        meta_spend=100.0,
+        acquisition_revenue=120.0,
+        acquisition_roi=20.0,
+        sms_revenue=30.0,
+        sms_sent=None,
+        sms_cost_usd=None,
+        sms_roi=None,
+        total_roi_with_sms=None,
+        net_profit_usd=None,
+        spend_diff=0.0,
+        anomaly=False,
+    )
+    assert rows[11] == ["⚪", "Lucro líquido USD", "indisponível"]
 
 
 def test_intraday_delay_renders_hours_and_minutes():
