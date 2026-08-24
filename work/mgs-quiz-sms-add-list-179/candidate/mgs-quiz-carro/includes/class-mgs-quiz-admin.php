@@ -278,20 +278,21 @@ class MGS_Quiz_Admin {
         $options  = array_values( array_filter( array_map( 'trim', explode( "\n", $opts_raw ) ) ) );
 
         $sms_urls = array();
-        $sms_preset_code = strtoupper( sanitize_text_field( $_POST['sms_preset_code'] ?? '' ) );
+        $sms_preset_id = sanitize_text_field( $_POST['sms_preset_id'] ?? ( $_POST['sms_preset_code'] ?? '' ) );
         $sms_presets = self::sms_presets();
-        if ( ! $sms_preset_code || ! isset( $sms_presets[ $sms_preset_code ] ) ) {
+        if ( ! $sms_preset_id || ! isset( $sms_presets[ $sms_preset_id ] ) ) {
             wp_safe_redirect( admin_url( 'admin.php?page=mgs-quiz-new&id=' . urlencode( $id ) . '&sms_error=invalid' ) );
             exit;
         }
-        if ( $sms_preset_code && isset( $sms_presets[ $sms_preset_code ] ) ) {
-            $preset = $sms_presets[ $sms_preset_code ];
+        if ( $sms_preset_id && isset( $sms_presets[ $sms_preset_id ] ) ) {
+            $preset = $sms_presets[ $sms_preset_id ];
             $sms_urls[] = array(
-                'url'         => $preset['url'],
-                'label'       => $preset['label'],
-                'gestor_code' => $preset['gestor_code'],
-                'active'      => 1,
-                'default'     => 1,
+                'preset_id'    => $sms_preset_id,
+                'url'          => $preset['url'],
+                'label'        => $preset['label'],
+                'gestor_code'  => $preset['gestor_code'],
+                'active'       => 1,
+                'default'      => 1,
             );
         } elseif ( ! empty( $_POST['sms_gestor_codes'] ) && is_array( $_POST['sms_gestor_codes'] ) ) {
             $codes  = array_values( wp_unslash( $_POST['sms_gestor_codes'] ) );
@@ -850,12 +851,12 @@ class MGS_Quiz_Admin {
         ?>
         <div class="wrap mgsq-sms-settings">
           <h1>SMS Funnel</h1>
-          <p>Gerencie aqui a identificação e a URL add-lead de cada gestor. As alterações são propagadas para todas as quizzes que usam o gestor.</p>
+          <p>Gerencie aqui a identificação e a URL add-lead de cada lista. O mesmo gestor pode ter mais de uma lista.</p>
           <?php if ( ! empty( $_GET['saved'] ) ) : ?>
             <div class="notice notice-success"><p>Configurações SMS salvas. <?php echo (int) ( $_GET['updated'] ?? 0 ); ?> quiz(es) atualizada(s).</p></div>
           <?php endif; ?>
           <?php if ( ! empty( $_GET['sms_error'] ) ) : ?>
-            <div class="notice notice-error"><p>Não foi possível salvar. Use um código único no formato G001, preencha o nome e informe uma URL HTTPS válida do SMS Funnel terminando em /add-lead. As listas existentes não são removidas nesta tela.</p></div>
+            <div class="notice notice-error"><p>Não foi possível salvar. Preencha o gestor no formato G001, o nome e uma URL HTTPS válida do SMS Funnel terminando em /add-lead. Um gestor pode aparecer em várias listas.</p></div>
           <?php endif; ?>
           <style>
             .mgsq-sms-settings{max-width:1280px}.mgsq-sms-admin-grid{display:grid;gap:14px;margin:20px 0}.mgsq-sms-admin-row{display:grid;grid-template-columns:100px 280px minmax(440px,1fr);gap:14px;align-items:end;background:#fff;border:1px solid #dcdcde;border-radius:14px;padding:16px}.mgsq-sms-admin-row label{display:block;font-weight:700;margin-bottom:6px}.mgsq-sms-admin-code{font-size:18px;font-weight:800;color:#15803d;padding:12px 0}.mgsq-sms-admin-row input{width:100%;min-height:46px;border:1px solid #d0d5dd;border-radius:10px;padding:10px 12px;font-size:15px}.mgsq-sms-admin-row .mgsq-sms-code-input{text-transform:uppercase;font-weight:800;color:#15803d}.mgsq-sms-actions{display:flex;gap:10px;align-items:center;margin:0 0 4px}@media(max-width:960px){.mgsq-sms-admin-row{grid-template-columns:1fr}}
@@ -864,9 +865,9 @@ class MGS_Quiz_Admin {
             <?php wp_nonce_field( 'mgs_quiz_save' ); ?>
             <input type="hidden" name="mgs_quiz_action" value="save_sms_presets">
             <div class="mgsq-sms-admin-grid" id="mgsqSmsAdminGrid">
-              <?php foreach ( $presets as $code => $preset ) : ?>
+              <?php foreach ( $presets as $preset_id => $preset ) : ?>
                 <div class="mgsq-sms-admin-row">
-                  <div><label>Gestor</label><input type="hidden" name="sms_codes[]" value="<?php echo esc_attr( $code ); ?>"><div class="mgsq-sms-admin-code"><?php echo esc_html( $code ); ?></div></div>
+                  <div><label>Gestor</label><input type="hidden" name="sms_preset_ids[]" value="<?php echo esc_attr( $preset_id ); ?>"><input type="hidden" name="sms_codes[]" value="<?php echo esc_attr( $preset['gestor_code'] ); ?>"><div class="mgsq-sms-admin-code"><?php echo esc_html( $preset['gestor_code'] ); ?></div></div>
                   <div><label>Nome/label</label><input name="sms_labels[]" required value="<?php echo esc_attr( $preset['label'] ); ?>"></div>
                   <div><label>URL add-lead</label><input type="url" name="sms_urls[]" required value="<?php echo esc_attr( $preset['url'] ); ?>"></div>
                 </div>
@@ -879,15 +880,10 @@ class MGS_Quiz_Admin {
           (function(){
             var grid=document.getElementById('mgsqSmsAdminGrid'),button=document.getElementById('mgsqAddSmsList');
             if(!grid||!button)return;
-            function nextCode(){
-              var max=0;
-              grid.querySelectorAll('[name="sms_codes[]"]').forEach(function(input){var m=String(input.value||'').toUpperCase().match(/^G(\d+)$/);if(m)max=Math.max(max,parseInt(m[1],10)||0);});
-              return 'G'+String(max+1).padStart(3,'0');
-            }
             button.addEventListener('click',function(){
               var row=document.createElement('div');
               row.className='mgsq-sms-admin-row';
-              row.innerHTML='<div><label>Gestor</label><input class="mgsq-sms-code-input" name="sms_codes[]" required pattern="G[0-9]{3,}" maxlength="12" value="'+nextCode()+'"></div><div><label>Nome/label</label><input name="sms_labels[]" required placeholder="Ex.: G007 – Nome"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" required placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div>';
+              row.innerHTML='<input type="hidden" name="sms_preset_ids[]" value=""><div><label>Gestor</label><input class="mgsq-sms-code-input" name="sms_codes[]" required pattern="G[0-9]{3,}" maxlength="12" value="" placeholder="G004"></div><div><label>Nome/label</label><input name="sms_labels[]" required placeholder="Ex.: G004 Moto – Joe"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" required placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div>';
               grid.appendChild(row);
               row.querySelector('[name="sms_codes[]"]').focus();
             });
@@ -925,25 +921,25 @@ class MGS_Quiz_Admin {
         $sms_rows = json_decode( (string) $get( 'sms_funnel_urls' ), true );
         if ( ! is_array( $sms_rows ) ) $sms_rows = array();
         $sms_presets = self::sms_presets();
-        $sms_selected_code = '';
+        $sms_selected_id = '';
         foreach ( $sms_rows as $sr ) {
             $is_active = ! isset( $sr['active'] ) || (int) $sr['active'];
-            if ( $is_active && ! empty( $sr['default'] ) && ! empty( $sr['gestor_code'] ) ) {
-                $sms_selected_code = strtoupper( $sr['gestor_code'] );
-                break;
+            if ( $is_active && ! empty( $sr['default'] ) ) {
+                $sms_selected_id = self::sms_preset_id_for_row( $sr, $sms_presets );
+                if ( $sms_selected_id ) break;
             }
         }
-        if ( ! $sms_selected_code ) {
+        if ( ! $sms_selected_id ) {
             foreach ( $sms_rows as $sr ) {
                 $is_active = ! isset( $sr['active'] ) || (int) $sr['active'];
-                if ( $is_active && ! empty( $sr['gestor_code'] ) && ! empty( $sr['url'] ) ) {
-                    $sms_selected_code = strtoupper( $sr['gestor_code'] );
-                    break;
+                if ( $is_active && ! empty( $sr['url'] ) ) {
+                    $sms_selected_id = self::sms_preset_id_for_row( $sr, $sms_presets );
+                    if ( $sms_selected_id ) break;
                 }
             }
         }
-        if ( $sms_selected_code && isset( $sms_presets[ $sms_selected_code ] ) ) {
-            $sms_rows = array( array_merge( $sms_presets[ $sms_selected_code ], array( 'active' => 1, 'default' => 1 ) ) );
+        if ( $sms_selected_id && isset( $sms_presets[ $sms_selected_id ] ) ) {
+            $sms_rows = array( array_merge( $sms_presets[ $sms_selected_id ], array( 'active' => 1, 'default' => 1 ) ) );
         }
         if ( empty( $sms_rows ) ) {
             $sms_rows[] = array( 'gestor_code' => '', 'label' => '', 'url' => '' );
@@ -991,7 +987,7 @@ class MGS_Quiz_Admin {
               <div class="mgsq-field"><label>Título do formulário</label><input name="form_title" value="<?php echo esc_attr( $get('form_title') ); ?>"></div>
               <div class="mgsq-grid2" style="margin-top:18px"><div class="mgsq-field"><label>Label do campo Nome</label><input name="form_name_label" value="<?php echo esc_attr( $get('form_name_label','Nome') ); ?>"></div><div class="mgsq-field"><label>Label do campo Telefone</label><input name="form_phone_label" value="<?php echo esc_attr( $get('form_phone_label','Telefone') ); ?>"></div></div>
               <div class="mgsq-grid2" style="margin-top:18px"><div class="mgsq-field"><label>Máscara do telefone</label><input name="form_phone_mask" value="<?php echo esc_attr( $get('form_phone_mask','(99) 99999-9999') ); ?>"><div class="mgsq-help">Use 9 para cada dígito. Ex: (99) 99999-9999</div></div><div class="mgsq-field"><label>Texto do botão de envio</label><input name="form_submit_label" value="<?php echo esc_attr( $get('form_submit_label','ESCOLHER CARRO') ); ?>"></div></div>
-              <div class="mgsq-sms-box" style="margin-top:18px"><h3>Link SMS Funnel desta quiz</h3><p class="mgsq-muted">Escolha abaixo o único link SMS Funnel que esta quiz vai usar. Todo lead desta quiz vai para o link selecionado, com ou sem UTMs.</p><div class="mgsq-field mgsq-sms-preset"><label>Gestor / lista SMS Funnel</label><select name="sms_preset_code" id="mgsqSmsPreset" required><option value="">Selecione um gestor</option><?php foreach ( $sms_presets as $preset_code => $preset ) : ?><option value="<?php echo esc_attr( $preset_code ); ?>" data-label="<?php echo esc_attr( $preset['label'] ); ?>" data-url="<?php echo esc_attr( $preset['url'] ); ?>" <?php selected( $sms_selected_code, $preset_code ); ?>><?php echo esc_html( $preset['label'] ); ?></option><?php endforeach; ?></select><div class="mgsq-help">Ao selecionar, Gestor, Nome/label e URL add-lead são preenchidos automaticamente.</div></div><style>.mgsq-sms-preset{margin:16px 0 12px;max-width:520px}.mgsq-sms-preset select{width:100%;min-height:48px;border-radius:12px;border:1px solid #d0d5dd;padding:8px 14px;font-size:16px}.mgsq-sms-rows{display:grid;gap:12px;margin-top:12px}.mgsq-sms-row{display:grid;grid-template-columns:220px minmax(360px,1fr);gap:10px;align-items:end;background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:12px}.mgsq-sms-row label{display:block;font-weight:700;font-size:12px;margin:0 0 5px;color:#475467}.mgsq-sms-row input{width:100%;max-width:none;border-radius:10px;border:1px solid #d0d5dd;padding:10px 12px;background:#fff;font-size:14px}.mgsq-sms-tools{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}.mgsq-sms-json{display:none;margin-top:12px}.mgsq-sms-json.is-open{display:block}@media(max-width:1120px){.mgsq-sms-row{grid-template-columns:1fr}}</style><div id="mgsqSmsRows" class="mgsq-sms-rows"><?php foreach ( $sms_rows as $idx => $sr ) : $is_active = ! isset( $sr['active'] ) || (int) $sr['active']; $is_default = ! empty( $sr['default'] ) || ( ! $sms_default_found && $idx === 0 ); ?><div class="mgsq-sms-row"><div><label>Nome/label</label><input name="sms_labels[]" readonly value="<?php echo esc_attr( $sr['label'] ?? '' ); ?>" placeholder="G001 – Nome"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" readonly value="<?php echo esc_attr( $sr['url'] ?? '' ); ?>" placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div><input type="hidden" name="sms_gestor_codes[]" value="<?php echo esc_attr( $sr['gestor_code'] ?? '' ); ?>"></div><?php endforeach; ?></div><div class="mgsq-sms-tools"><button type="button" class="button-link" id="mgsqToggleSmsJson">Ver JSON técnico</button></div><input type="hidden" name="sms_default_idx" value="0"><input type="hidden" name="sms_funnel_url" value="<?php echo esc_attr( $get('sms_funnel_url') ); ?>"><div class="mgsq-field mgsq-sms-json" id="mgsqSmsJson"><label>JSON técnico (somente conferência)</label><textarea readonly rows="5"><?php echo esc_textarea( $get('sms_funnel_urls') ); ?></textarea></div><p><label><input type="checkbox" name="require_sms_success" value="1" <?php checked( (int) $get('require_sms_success', 1), 1 ); ?>> Exigir sucesso SMS Funnel antes de confirmar/redirecionar</label></p><script>(function(){var rows=document.getElementById('mgsqSmsRows'),toggle=document.getElementById('mgsqToggleSmsJson'),json=document.getElementById('mgsqSmsJson'),preset=document.getElementById('mgsqSmsPreset');if(!rows)return;if(toggle&&json)toggle.addEventListener('click',function(){json.classList.toggle('is-open');});function applyPreset(){if(!preset)return;var opt=preset.options[preset.selectedIndex];if(!opt||!opt.value)return;var row=rows.querySelector('.mgsq-sms-row');if(!row)return;var code=row.querySelector('input[name="sms_gestor_codes[]"]'),label=row.querySelector('input[name="sms_labels[]"]'),url=row.querySelector('input[name="sms_urls[]"]');if(code)code.value=opt.value;if(label)label.value=opt.dataset.label||'';if(url)url.value=opt.dataset.url||'';}if(preset)preset.addEventListener('change',applyPreset);})();</script></div>
+              <div class="mgsq-sms-box" style="margin-top:18px"><h3>Link SMS Funnel desta quiz</h3><p class="mgsq-muted">Escolha abaixo o único link SMS Funnel que esta quiz vai usar. Todo lead desta quiz vai para o link selecionado, com ou sem UTMs.</p><div class="mgsq-field mgsq-sms-preset"><label>Gestor / lista SMS Funnel</label><select name="sms_preset_id" id="mgsqSmsPreset" required><option value="">Selecione uma lista</option><?php foreach ( $sms_presets as $preset_id => $preset ) : ?><option value="<?php echo esc_attr( $preset_id ); ?>" data-code="<?php echo esc_attr( $preset['gestor_code'] ); ?>" data-label="<?php echo esc_attr( $preset['label'] ); ?>" data-url="<?php echo esc_attr( $preset['url'] ); ?>" <?php selected( $sms_selected_id, $preset_id ); ?>><?php echo esc_html( $preset['label'] ); ?></option><?php endforeach; ?></select><div class="mgsq-help">Ao selecionar, Gestor, Nome/label e URL add-lead são preenchidos automaticamente.</div></div><style>.mgsq-sms-preset{margin:16px 0 12px;max-width:520px}.mgsq-sms-preset select{width:100%;min-height:48px;border-radius:12px;border:1px solid #d0d5dd;padding:8px 14px;font-size:16px}.mgsq-sms-rows{display:grid;gap:12px;margin-top:12px}.mgsq-sms-row{display:grid;grid-template-columns:220px minmax(360px,1fr);gap:10px;align-items:end;background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:12px}.mgsq-sms-row label{display:block;font-weight:700;font-size:12px;margin:0 0 5px;color:#475467}.mgsq-sms-row input{width:100%;max-width:none;border-radius:10px;border:1px solid #d0d5dd;padding:10px 12px;background:#fff;font-size:14px}.mgsq-sms-tools{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}.mgsq-sms-json{display:none;margin-top:12px}.mgsq-sms-json.is-open{display:block}@media(max-width:1120px){.mgsq-sms-row{grid-template-columns:1fr}}</style><div id="mgsqSmsRows" class="mgsq-sms-rows"><?php foreach ( $sms_rows as $idx => $sr ) : $is_active = ! isset( $sr['active'] ) || (int) $sr['active']; $is_default = ! empty( $sr['default'] ) || ( ! $sms_default_found && $idx === 0 ); ?><div class="mgsq-sms-row"><div><label>Nome/label</label><input name="sms_labels[]" readonly value="<?php echo esc_attr( $sr['label'] ?? '' ); ?>" placeholder="G001 – Nome"></div><div><label>URL add-lead</label><input type="url" name="sms_urls[]" readonly value="<?php echo esc_attr( $sr['url'] ?? '' ); ?>" placeholder="https://v2.smsfunnel.com.br/integrations/lists/.../add-lead"></div><input type="hidden" name="sms_gestor_codes[]" value="<?php echo esc_attr( $sr['gestor_code'] ?? '' ); ?>"></div><?php endforeach; ?></div><div class="mgsq-sms-tools"><button type="button" class="button-link" id="mgsqToggleSmsJson">Ver JSON técnico</button></div><input type="hidden" name="sms_default_idx" value="0"><input type="hidden" name="sms_funnel_url" value="<?php echo esc_attr( $get('sms_funnel_url') ); ?>"><div class="mgsq-field mgsq-sms-json" id="mgsqSmsJson"><label>JSON técnico (somente conferência)</label><textarea readonly rows="5"><?php echo esc_textarea( $get('sms_funnel_urls') ); ?></textarea></div><p><label><input type="checkbox" name="require_sms_success" value="1" <?php checked( (int) $get('require_sms_success', 1), 1 ); ?>> Exigir sucesso SMS Funnel antes de confirmar/redirecionar</label></p><script>(function(){var rows=document.getElementById('mgsqSmsRows'),toggle=document.getElementById('mgsqToggleSmsJson'),json=document.getElementById('mgsqSmsJson'),preset=document.getElementById('mgsqSmsPreset');if(!rows)return;if(toggle&&json)toggle.addEventListener('click',function(){json.classList.toggle('is-open');});function applyPreset(){if(!preset)return;var opt=preset.options[preset.selectedIndex];if(!opt||!opt.value)return;var row=rows.querySelector('.mgsq-sms-row');if(!row)return;var code=row.querySelector('input[name="sms_gestor_codes[]"]'),label=row.querySelector('input[name="sms_labels[]"]'),url=row.querySelector('input[name="sms_urls[]"]');if(code)code.value=opt.dataset.code||'';if(label)label.value=opt.dataset.label||'';if(url)url.value=opt.dataset.url||'';}if(preset)preset.addEventListener('change',applyPreset);})();</script></div>
             </section>
 
             <section class="mgsq-card"><h2>Mensagem de sucesso & redirecionamento</h2>
