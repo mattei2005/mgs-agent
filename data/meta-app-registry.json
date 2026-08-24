@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-08-21T10:50:53-04:00",
+  "updated_at": "2026-08-24T09:49:20-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1540372238467862579",
+  "source_message_id": "1541442725608558623",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -20,24 +20,107 @@
     ]
   },
   "apps": [
-    {"app":"B001-3","channel_id":"1521251196294135858","channel_name":"b001-2-app-status","admin":"Adriano Alves","onepassword_item_title":"BOT B001-2 Token - Adriano Alves","expected_sheet_roles":17},
-    {"app":"B002-2","channel_id":"1521251220130496723","channel_name":"b002-2-app-status","admin":"Ninda Nak Mapa","onepassword_item_title":"BOT B002-2 Token - Ninda Nak Mapa"},
-    {"app":"B003-2","channel_id":"1521251246860931223","channel_name":"b003-2-app-status","admin":"Reginaldo Novaes Santiago","onepassword_item_title":"BOT B003-2 Token - Reginaldo Novaes Santiago"},
-    {"app":"B004-3","channel_id":"1521251334496456815","channel_name":"b004-3-app-status","admin":"Beatriz Santos","onepassword_item_title":"BOT B004-3 Token - Beatriz Santos","expected_sheet_roles":12},
-    {"app":"B005-3","channel_id":"1521251961662341160","channel_name":"b005-3-app-status","admin":"Vitoria Souza Duarte","onepassword_item_title":"BOT B005-3 Token - Vitoria Souza Duarte"},
-    {"app":"B006-3","channel_id":"1521252068319297666","channel_name":"b006-2-app-status","admin":"Gia Huy","onepassword_item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins"},
-    {"app":"B007","channel_id":"1520510823426949313","channel_name":"b007-app-status","admin":"Dek Fiyan","onepassword_item_title":"BOT B007 Token - Dek Fiyan"},
-    {"app":"B008-2","channel_id":"1521252172929564744","channel_name":"b008-2-app-status","admin":"Lance David","onepassword_item_title":"BOT B008-2 Token - Lance David"},
-    {"app":"B009-2","channel_id":"1521252284623884288","channel_name":"b009-2-app-status","admin":"Leticia Silva","onepassword_item_title":"BOT B009-2 Token - Leticia Silva"},
-    {"app":"B010-2","channel_id":"1521252369331916902","channel_name":"b010-2-app-status","admin":"Erik Sabar","onepassword_item_title":"BOT B010-2 Token - Erik Sabar"},
-    {"app":"B011","channel_id":"1537256907373289575","channel_name":"b011-app-status","admin":"Maria Silva Nobrega","onepassword_item_title":"BOT B011 Token - Maria Silva Nobrega"},
-    {"app":"B012","channel_id":"1537256951879172136","channel_name":"b012-app-status","admin":"Nhi Trần","onepassword_item_title":"BOT B012 Token - Nhi Trần"},
-    {"app":"B013-3","channel_id":"1522830283240505385","channel_name":"b013-2-app-status","admin":"PERFIL NOVO - 192","onepassword_item_title":"BOT B013-3 Token - PERFIL NOVO - 192"}
+    {
+      "app": "B001-3",
+      "channel_id": "1521251196294135858",
+      "channel_name": "b001-2-app-status",
+      "admin": "Adriano Alves",
+      "onepassword_item_title": "BOT B001-2 Token - Adriano Alves",
+      "expected_sheet_roles": 17
+    },
+    {
+      "app": "B002-2",
+      "channel_id": "1521251220130496723",
+      "channel_name": "b002-2-app-status",
+      "admin": "Ninda Nak Mapa",
+      "onepassword_item_title": "BOT B002-2 Token - Ninda Nak Mapa"
+    },
+    {
+      "app": "B003-2",
+      "channel_id": "1521251246860931223",
+      "channel_name": "b003-2-app-status",
+      "admin": "Reginaldo Novaes Santiago",
+      "onepassword_item_title": "BOT B003-2 Token - Reginaldo Novaes Santiago"
+    },
+    {
+      "app": "B004-3",
+      "channel_id": "1521251334496456815",
+      "channel_name": "b004-3-app-status",
+      "admin": "Beatriz Santos",
+      "onepassword_item_title": "BOT B004-3 Token - Beatriz Santos",
+      "expected_sheet_roles": 12
+    },
+    {
+      "app": "B005-3",
+      "channel_id": "1521251961662341160",
+      "channel_name": "b005-3-app-status",
+      "admin": "Vitoria Souza Duarte",
+      "onepassword_item_title": "BOT B005-3 Token - Vitoria Souza Duarte"
+    },
+    {
+      "app": "B006-3",
+      "channel_id": "1521252068319297666",
+      "channel_name": "b006-2-app-status",
+      "admin": "Gia Huy",
+      "onepassword_item_title": "BOT B006-3 Token - Isidoro Cristina Barbosa Martins"
+    },
+    {
+      "app": "B007-2",
+      "channel_id": "1520510823426949313",
+      "channel_name": "b007-app-status",
+      "admin": "Alex Silva Araujo",
+      "onepassword_item_title": "BOT B007-2 Token - Alex Silva Araujo",
+      "expected_sheet_roles": 18
+    },
+    {
+      "app": "B008-2",
+      "channel_id": "1521252172929564744",
+      "channel_name": "b008-2-app-status",
+      "admin": "Lance David",
+      "onepassword_item_title": "BOT B008-2 Token - Lance David"
+    },
+    {
+      "app": "B009-2",
+      "channel_id": "1521252284623884288",
+      "channel_name": "b009-2-app-status",
+      "admin": "Leticia Silva",
+      "onepassword_item_title": "BOT B009-2 Token - Leticia Silva"
+    },
+    {
+      "app": "B010-2",
+      "channel_id": "1521252369331916902",
+      "channel_name": "b010-2-app-status",
+      "admin": "Erik Sabar",
+      "onepassword_item_title": "BOT B010-2 Token - Erik Sabar"
+    },
+    {
+      "app": "B011",
+      "channel_id": "1537256907373289575",
+      "channel_name": "b011-app-status",
+      "admin": "Maria Silva Nobrega",
+      "onepassword_item_title": "BOT B011 Token - Maria Silva Nobrega"
+    },
+    {
+      "app": "B012",
+      "channel_id": "1537256951879172136",
+      "channel_name": "b012-app-status",
+      "admin": "Nhi Trần",
+      "onepassword_item_title": "BOT B012 Token - Nhi Trần"
+    },
+    {
+      "app": "B013-3",
+      "channel_id": "1522830283240505385",
+      "channel_name": "b013-2-app-status",
+      "admin": "PERFIL NOVO - 192",
+      "onepassword_item_title": "BOT B013-3 Token - PERFIL NOVO - 192"
+    }
   ],
   "discord_readback": {
     "channels_found": 13,
     "names_matching_canonical_map": 12,
-    "reported_label_aliases": {"B006-3":"b006-2-app-status"},
+    "reported_label_aliases": {
+      "B006-3": "b006-2-app-status"
+    },
     "confirmed_correction": "B003-3 was a typing error; B003-2 is canonical",
     "confirmation_message_id": "1537317279405047809"
   },
@@ -49,19 +132,145 @@
     "credential_runtime_fail": [],
     "metadata_drift": [],
     "credential_drift": [
-      {"app":"B001-3","item_title":"BOT B001-2 Token - Adriano Alves","item_app_name":"B001-3","status":"non_blocking_title_drift"},
-      {"app":"B006-3","item_title_profile":"Isidoro Cristina Barbosa Martins","live_token_profile":"Gia Huy","operational_admin":"Gia Huy","status":"non_blocking_title_drift"}
+      {
+        "app": "B001-3",
+        "item_title": "BOT B001-2 Token - Adriano Alves",
+        "item_app_name": "B001-3",
+        "status": "non_blocking_title_drift"
+      },
+      {
+        "app": "B006-3",
+        "item_title_profile": "Isidoro Cristina Barbosa Martins",
+        "live_token_profile": "Gia Huy",
+        "operational_admin": "Gia Huy",
+        "status": "non_blocking_title_drift"
+      }
     ],
     "validated_corrections": [
-      {"app":"B002-2","field":"app_name","result":"PASS","message_id":"1537317279405047809"},
-      {"app":"B013-2","token_profile_meta_name":"Alessandra Lopes","operational_profile_label":"PERFIL NOVO - 192","debug_token":"PASS","app_id_match":true,"role_membership":true,"message_id":"1537317483323850782"},
-      {"app":"B006-3","item_title":"BOT B006-3 Token - Isidoro Cristina Barbosa Martins","app_name":"B006-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Gia Huy","sheet_no_app_rows":15,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538892880783876200"},
-      {"app":"B004-3","item_title":"BOT B004-3 Token - Beatriz Santos","app_name":"B004-3","app_metadata_http":200,"roles_http":200,"roles_count":12,"roles_resolved_names":12,"expected_sheet_roles":12,"pending_role_acceptances":0,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_admin":"Beatriz Santos","sheet_no_app_rows":12,"sheet_present_rows":12,"sheet_identity_blocked_rows":0,"sheet_writes":0,"source_message_id":"1538901046653358121"},
-      {"app":"B001-3","item_title":"BOT B001-2 Token - Adriano Alves","app_name":"B001-3","app_metadata_http":200,"roles_http":200,"roles_count":15,"roles_resolved_names":15,"expected_sheet_roles":17,"pending_role_acceptances":2,"missing_sheet_roles":["Adriano Alves","Alnashri Lumandung Maja"],"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"live_token_profile":"Aline Rosse","sheet_no_app_rows":17,"sheet_identity_blocked_rows":17,"sheet_writes":0,"force_live_alert_message_ids":["1540353027204976741","1540353028484497488","1540353029482745988"],"source_message_id":"1540351562088452147"},
-      {"app":"B013-3","item_title":"BOT B013-3 Token - PERFIL NOVO - 192","app_name":"B013-3","app_metadata_http":200,"roles_http":200,"roles_count":3,"user_me_http":200,"debug_token_http":200,"token_valid":true,"app_id_match":true,"sheet_no_app_rows":31,"dtr_targets":31,"dtr_linked":31,"dtr_unlinked_confirmed":0,"dtr_unknown":0,"dtr_pages_visible":324,"graph_pages_visible":316,"connected_pages":302,"sheet_x_final":0,"production_sheet_writes":{"first_cycle":1,"containment_clear":30},"force_live_alert_message_ids":["1540374844380553238","1540374847199248434","1540374848587563038","1540374850030403674"],"recovery_alert_message_ids":["1540376653388189878","1540376654847680663","1540376656781385868","1540376658110980257"],"source_message_id":"1540372238467862579"}
+      {
+        "app": "B002-2",
+        "field": "app_name",
+        "result": "PASS",
+        "message_id": "1537317279405047809"
+      },
+      {
+        "app": "B013-2",
+        "token_profile_meta_name": "Alessandra Lopes",
+        "operational_profile_label": "PERFIL NOVO - 192",
+        "debug_token": "PASS",
+        "app_id_match": true,
+        "role_membership": true,
+        "message_id": "1537317483323850782"
+      },
+      {
+        "app": "B006-3",
+        "item_title": "BOT B006-3 Token - Isidoro Cristina Barbosa Martins",
+        "app_name": "B006-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 15,
+        "roles_resolved_names": 15,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_admin": "Gia Huy",
+        "sheet_no_app_rows": 15,
+        "sheet_identity_blocked_rows": 0,
+        "sheet_writes": 0,
+        "source_message_id": "1538892880783876200"
+      },
+      {
+        "app": "B004-3",
+        "item_title": "BOT B004-3 Token - Beatriz Santos",
+        "app_name": "B004-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 12,
+        "roles_resolved_names": 12,
+        "expected_sheet_roles": 12,
+        "pending_role_acceptances": 0,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_admin": "Beatriz Santos",
+        "sheet_no_app_rows": 12,
+        "sheet_present_rows": 12,
+        "sheet_identity_blocked_rows": 0,
+        "sheet_writes": 0,
+        "source_message_id": "1538901046653358121"
+      },
+      {
+        "app": "B001-3",
+        "item_title": "BOT B001-2 Token - Adriano Alves",
+        "app_name": "B001-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 15,
+        "roles_resolved_names": 15,
+        "expected_sheet_roles": 17,
+        "pending_role_acceptances": 2,
+        "missing_sheet_roles": [
+          "Adriano Alves",
+          "Alnashri Lumandung Maja"
+        ],
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Aline Rosse",
+        "sheet_no_app_rows": 17,
+        "sheet_identity_blocked_rows": 17,
+        "sheet_writes": 0,
+        "force_live_alert_message_ids": [
+          "1540353027204976741",
+          "1540353028484497488",
+          "1540353029482745988"
+        ],
+        "source_message_id": "1540351562088452147"
+      },
+      {
+        "app": "B013-3",
+        "item_title": "BOT B013-3 Token - PERFIL NOVO - 192",
+        "app_name": "B013-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 3,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "sheet_no_app_rows": 31,
+        "dtr_targets": 31,
+        "dtr_linked": 31,
+        "dtr_unlinked_confirmed": 0,
+        "dtr_unknown": 0,
+        "dtr_pages_visible": 324,
+        "graph_pages_visible": 316,
+        "connected_pages": 302,
+        "sheet_x_final": 0,
+        "production_sheet_writes": {
+          "first_cycle": 1,
+          "containment_clear": 30
+        },
+        "force_live_alert_message_ids": [
+          "1540374844380553238",
+          "1540374847199248434",
+          "1540374848587563038",
+          "1540374850030403674"
+        ],
+        "recovery_alert_message_ids": [
+          "1540376653388189878",
+          "1540376654847680663",
+          "1540376656781385868",
+          "1540376658110980257"
+        ],
+        "source_message_id": "1540372238467862579"
+      }
     ],
     "secrets_exposed": false,
-    "report":"reports/meta-app-onepassword-access-audit-20260813.json"
+    "report": "reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
     "status": "b001_3_pending_and_b013_3_active_validated",

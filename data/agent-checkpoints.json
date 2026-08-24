@@ -352,6 +352,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-META-B0072-CUTOVER-20260824",
+      "next_step": "Corrigir metadata app_name no 1Password, aplicar cutover atômico registry/pause/state com backup, executar monitor live com Sheet sync e force-live, validar Discord/state/Sheet, inventário/audit/REPORT-INFRA.",
+      "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
+      "source": "discord:thread:1541436123652300801; message:1541442725608558623; registry:data/meta-app-registry.json; sheet:1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY#gid=542936436",
+      "state": "preflight concluído: item 1password exato existe, app_name metadata ainda b007; graph b007-2 saudável com 18 roles resolvidas e token válido; sheet já possui 19 linhas b007-2, 18 ativas correspondentes e an na preservada com x; cutover produtivo ainda pendente.",
+      "thread_id": "1541436123652300801",
+      "updated_at": "2026-08-24T13:47:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ad-inserter-preloader-forensic-20260817",
       "next_step": "Aguardar decisão de Rodolfo sobre abrir investigação/correção separada de duplicidade de builders e ausência/runtime de slots; não restaurar Headers preloader-only.",
       "objective": "Comparar backups pré-preloader e estado atual do Ad Inserter em 21 sites para determinar se GPT/window.tags/JBF builder foram removidos.",
@@ -1102,5 +1112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-23T10:34:20+00:00"
+  "updated_at": "2026-08-24T13:47:34+00:00"
 }
