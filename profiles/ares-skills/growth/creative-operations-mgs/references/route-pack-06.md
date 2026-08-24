@@ -61,7 +61,7 @@ Antes de selecionar o asset para teste/campanha:
    - original → tratado;
    - checksums e fingerprint perceptual/visual;
    - conta, campanha, gestor e estratégia.
-4. Marcar como inelegível tudo que estiver reservado, rodando, `TESTING`, `TESTED`, `WINNER` ou bloqueado.
+4. Marcar como inelegível tudo que estiver reservado, rodando, `TESTING`, `WINNER` ou bloqueado. `TESTED` permanece inelegível por padrão; só retorna ao pool com decisão expressa de reteste, `retest_eligible=true`, histórico de tentativas preservado e conciliação confirmando ausência de uso ativo.
 5. Reservar os escolhidos antes do write.
 6. Repetir a conferência imediatamente antes de publicar, pois gestores podem agir entre análise e execução.
 

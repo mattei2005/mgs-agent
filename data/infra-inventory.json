@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-24T18:14:48.720689-04:00",
+    "updated_at": "2026-08-24T18:19:37.455412-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7700,15 +7700,15 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 164243,
+      "size_bytes": 168937,
       "modified_at": "2026-08-24T18:14:48.720689-04:00",
-      "sha256": "b4d93054e771dbecf15c6e45ad44a95766a308ffa770a888cdfe6b4b0a80db86",
+      "sha256": "887a14bcf84239b1ff76e58316cb7c8689d6579acba2a25327c87af75adb8320",
       "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting, including read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
       "validation": "C20 advideos canary: 121 targeted tests PASS; six videos associated to ad-account advideos; campaign/adset/three ads/three creatives ACTIVE with valid C20 UTMs; three Drive assets moved to 02_TESTING; active budget USD435 under USD500 cap; first-delivery monitor running observe-only.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "fab05eeadfe00f7ae82a36c099324d8411b188a9e15f6ada56ec061497688031",
+      "test_sha256": "af0dc4cf84fdf1e5b5afefc9b46c97dd7c9459a485099c2c512ac6cb9f55bba2",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "33b4d1cdc551de0bee8e7590c651446c177e32938c56d4c1fb573dd6cb6025f5",
+      "operation_sha256": "fbf9fd2e5abda5abb0766cfe911f98eb6439d20ce1611b1070248c3785a8513d",
       "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260823T045358Z.json",
       "last_report_sha256": "359ab5e9f63db5ccf1982a4aed7b8869185c9867ccd9d29f566d93c7a68233c7",
       "report_infra": {
@@ -9144,22 +9144,23 @@
         },
         "lifecycle_runtime": {
           "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
-          "size_bytes": 14409,
-          "sha256": "01e2c1428947a9528629fbf412dd2923156b432e4adaf6ac3f47fd7188dcd6c9"
+          "size_bytes": 14523,
+          "sha256": "627642599ada7006fa661e2e13055777358876422b735fa9eabe4be8bc96da7c"
         },
         "fixed_reports": {
           "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-          "size_bytes": 164243,
-          "sha256": "b4d93054e771dbecf15c6e45ad44a95766a308ffa770a888cdfe6b4b0a80db86"
+          "size_bytes": 168937,
+          "sha256": "887a14bcf84239b1ff76e58316cb7c8689d6579acba2a25327c87af75adb8320"
         },
         "operation": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "sha256": "33b4d1cdc551de0bee8e7590c651446c177e32938c56d4c1fb573dd6cb6025f5"
+          "sha256": "fbf9fd2e5abda5abb0766cfe911f98eb6439d20ce1611b1070248c3785a8513d",
+          "size_bytes": 122115
         },
         "tests": {
           "daily": "617726fb8534b8cff3e11d2caf85c914625ead5806d30d95e7390be604153ab0",
           "lifecycle": "ca025558be88b25b1bb3167eb2ba330c118803ca530237684f82c877dfa39042",
-          "fixed_reports": "fab05eeadfe00f7ae82a36c099324d8411b188a9e15f6ada56ec061497688031"
+          "fixed_reports": "af0dc4cf84fdf1e5b5afefc9b46c97dd7c9459a485099c2c512ac6cb9f55bba2"
         }
       },
       "skills": {
@@ -9183,7 +9184,7 @@
         }
       },
       "validation": {
-        "targeted_tests": "143 passed",
+        "targeted_tests": "146 passed",
         "py_compile": "PASS",
         "json_validation": "PASS",
         "git_diff_check": "PASS",
@@ -9223,9 +9224,17 @@
         "checkpoint_id": "ARES-CPV-CREATIVE-LIFECYCLE-RETEST-20260824"
       },
       "report_infra": {
-        "status": "pending"
+        "status": "sent_and_readback_confirmed",
+        "channel_id": "1498132022634483894",
+        "message_id": "1541571580730150963",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mention_count": 0,
+        "thread_created": false,
+        "title": "REPORT-INFRA — modificada"
       },
-      "updated_at": "2026-08-24T18:14:48.720689-04:00"
+      "updated_at": "2026-08-24T18:19:37.455412-04:00"
     }
   ],
   "profile_skill_references": [

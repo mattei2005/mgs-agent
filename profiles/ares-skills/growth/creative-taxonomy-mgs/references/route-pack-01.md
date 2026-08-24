@@ -196,10 +196,10 @@ Pastas/status recomendados:
 Status / Pasta       | Uso
 ---------------------|--------------------------------------------------
 01_READY             | Pronto para teste/campanha
-02_TESTING           | Em teste
-03_TESTED            | Já testado
-04_WINNERS           | Vencedores / bom desempenho
-05_REJECTED          | Reprovados / baixo desempenho
+02_TESTING           | Em teste; também abriga subentregues enquanto o anúncio/campanha ainda puder entregar
+03_TESTED            | Já testado; só volta ao pool com decisão expressa e `retest_eligible=true`
+04_WINNERS           | Vencedores / bom desempenho com entrega individual relevante
+05_REJECTED          | Reprovados / baixo desempenho com entrega individual relevante; exclusão técnica da campanha não basta
 99_LEGACY            | Legado / arquivo histórico
 00_REVIEW            | Revisão manual antes de uso
 01_READY_CANDIDATE   | Candidato pronto após organização automática

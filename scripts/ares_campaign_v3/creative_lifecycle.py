@@ -288,6 +288,8 @@ def run_live_lifecycle(
         atomic_json(audit_path, audit)
         return {"status": "NO_CLASSIFICATION_DUE", "decisions": [], "audit": str(audit_path), "meta_writes": 0}
 
+    audit.update(status="APPLY_IN_FLIGHT", drive_writes=0, inventory_writes=0)
+    atomic_json(audit_path, audit)
     backend = LiveDailyBackend(paths)
     drive_info = backend.drive_preflight()
     drive = drive_info["drive"]

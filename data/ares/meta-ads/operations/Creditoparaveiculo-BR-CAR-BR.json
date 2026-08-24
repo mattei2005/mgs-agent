@@ -838,18 +838,26 @@
     "intraday_desktop_summary": {
       "status": "canonical_default",
       "approved_by": "Rodolfo Mattei",
-      "approved_at": "2026-08-24",
-      "source_thread_id": "1541535526610403409",
+      "approved_at": "2026-08-24T19:14:34-03:00",
+      "source_thread_id": "1541565020075331745",
       "repeat_summary_after_mobile_cards": false,
       "position": "once at the report start, immediately before Tabela consolidada — visão desktop and its first paginated table block",
       "fields": [
         "title and dispatch time",
-        "currency, SB mode, delay and action mode",
-        "Rewarded CR current and previous-gray reference",
+        "currency, SB mode and action mode",
+        "prominent bold Smart Bidding delay line",
+        "prominent bold Rewarded coverage line plus previous-gray reference",
         "ROI real signal counts",
         "ROI estimado signal counts"
       ],
       "delay_format": "use Xh YYmin at 60 minutes or more; otherwise use Nmin",
+      "highlight_layout": {
+        "delay": "separate bold line prefixed by ⏱️ and labeled ATRASO SMART BIDDING",
+        "rewarded_current": "separate bold line prefixed by 🎯 and labeled COBERTURA REWARDED, with current matched/requests",
+        "rewarded_previous": "separate non-bold line prefixed by ⚪ and labeled Referência anterior/cinza",
+        "approved_by": "Rodolfo Mattei",
+        "approved_at": "2026-08-24T19:14:34-03:00"
+      },
       "cr_campaign_column_required": false,
       "cr_summary_required": true,
       "chunking": "summary and first desktop table page must share one safe Discord chunk; later pages repeat the table header"
@@ -992,7 +1000,7 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "desktop_tables_only_v6",
+        "style": "desktop_tables_only_v7",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
@@ -1018,13 +1026,15 @@
           "max_attempts": 2,
           "retry": "one bounded automatic re-pack with fence-aware atomic sections and repeated table headers",
           "partial_post_gate": "never retry blindly after any message ID exists; reconcile by Discord GET before another post",
+          "http_429": "honor Discord Retry-After with at most 5 retries and 30 seconds total wait; a rate-limited readback after persisted message IDs becomes readback_deferred instead of a false unpublished-data alert",
+          "technical_alert_visibility": "never post raw HTTP 429 or partial-post transport errors into the operational report thread",
           "terminal_behavior": "fail closed only after the bounded retry also fails",
           "audit_field": "chunking_retry_used"
         },
         "approved_by": "Rodolfo Mattei",
         "approved_at": "2026-08-24T12:13:14-03:00",
-        "final_standard_confirmation": "Rodolfo Mattei confirmed the hybrid layout as the Intraday default after visual readback on mobile and desktop",
-        "source_thread_id": "1540379584124555334"
+        "final_standard_confirmation": "Rodolfo Mattei confirmed desktop-only tables and required Smart Bidding delay plus Rewarded coverage to be visually prominent in the report header",
+        "source_thread_id": "1541565020075331745"
       }
     },
     "daily_creation": {

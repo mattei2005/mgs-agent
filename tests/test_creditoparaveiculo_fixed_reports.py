@@ -3,8 +3,12 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import inspect
+import io
 import json
+import urllib.error
+import urllib.request
 from datetime import datetime
+from email.message import Message
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -188,7 +192,10 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "desktop_table_pages" in intraday_source
     assert "prefixed_table_pages" in intraday_source
     assert "summary_lines" in intraday_source
-    assert "duration_hours_minutes" in intraday_source
+    assert (
+        "duration_hours_minutes" in intraday_source
+        or "duration_hours_minutes" in inspect.getsource(module.intraday_operational_highlights)
+    )
     assert "table_pages" in intraday_source
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
@@ -196,7 +203,9 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert '"RPS"' in intraday_source
     assert '"CPM"' in intraday_source
     assert '"CR"' not in intraday_source
-    assert "Rewarded CR atual" in intraday_source
+    highlights_source = inspect.getsource(module.intraday_operational_highlights)
+    assert "intraday_operational_highlights" in intraday_source
+    assert "COBERTURA REWARDED" in highlights_source
     assert "fetch_rewarded_pricing" in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
 
@@ -247,12 +256,26 @@ def test_intraday_delay_renders_hours_and_minutes():
     assert module.duration_hours_minutes(42) == "42min"
 
 
+def test_intraday_delay_and_rewarded_coverage_are_prominent():
+    module = load_reports_module()
+    assert module.intraday_operational_highlights(
+        69,
+        {"coverage_pct": 74.89, "matched": 4269, "requests": 5700},
+        {"coverage_pct": 78.92, "matched": 6758, "requests": 8563},
+    ) == [
+        "**⏱️ ATRASO SMART BIDDING: 1h 09min**",
+        "**🎯 COBERTURA REWARDED: 74,89%** · atual 4.269/5.700",
+        "⚪ Referência anterior/cinza: 78,92% · 6.758/8.563",
+    ]
+
+
 def test_prefixed_table_pages_keep_summary_with_first_desktop_page():
     module = load_reports_module()
     prefix_lines = [
         "📈 INTRADAY — resumo",
-        "USD | atraso 1h 23min",
-        "Rewarded CR atual 74,56%",
+        "USD | SB real/estimado | autonomia ativa",
+        "**⏱️ ATRASO SMART BIDDING: 1h 23min**",
+        "**🎯 COBERTURA REWARDED: 74,56%**",
         "",
         "ROI real: 🟢 8 positivas",
         "ROI estimado: 🟢 8 positivas",
@@ -261,13 +284,13 @@ def test_prefixed_table_pages_keep_summary_with_first_desktop_page():
     ]
     headers = ["Camp", "RPS", "Ação"]
     rows = [[f"C{index:02d}", "$224,59", "A" * 80] for index in range(1, 13)]
-    pages = module.prefixed_table_pages(headers, rows, prefix_lines, max_chars=500)
+    pages = module.prefixed_table_pages(headers, rows, prefix_lines, max_chars=550)
     combined = "\n".join(pages)
     assert len(pages) > 1
     assert pages[0].startswith("📈 INTRADAY — resumo")
     assert "**Tabela consolidada — visão desktop**" in pages[0]
     assert pages[0].count("📈 INTRADAY — resumo") == 1
-    assert all(len(page) <= 500 for page in pages)
+    assert all(len(page) <= 550 for page in pages)
     assert all(any("RPS" in line for line in page.splitlines()) for page in pages)
     assert module.report_atomic_sections(pages[0]) == [pages[0]]
     for index in range(1, 13):
@@ -301,8 +324,10 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert desktop_summary["cr_campaign_column_required"] is False
     assert desktop_summary["cr_summary_required"] is True
     assert desktop_summary["delay_format"] == "use Xh YYmin at 60 minutes or more; otherwise use Nmin"
+    assert desktop_summary["highlight_layout"]["delay"].startswith("separate bold line")
+    assert desktop_summary["highlight_layout"]["rewarded_current"].startswith("separate bold line")
     assert operation["scheduler_jobs"]["daily"]["report_layout"]["style"] == "desktop_tables_only_v2"
-    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v6"
+    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v7"
 
 
 def test_dormant_intraday_mobile_card_renderer_remains_reusable():
@@ -1240,6 +1265,76 @@ def test_report_delivery_is_idempotent_per_slot(monkeypatch, tmp_path):
     assert first[2] is False
     assert second[2] is True
     assert posted == [("thread", text)]
+
+
+def test_discord_api_retries_explicit_429_using_retry_after(monkeypatch):
+    module = load_reports_module()
+    attempts = []
+    sleeps = []
+    headers = Message()
+    headers["Retry-After"] = "0.25"
+    rate_limit = urllib.error.HTTPError(
+        "https://discord.com/api/v10/test",
+        429,
+        "Too Many Requests",
+        headers,
+        io.BytesIO(b'{"retry_after": 0.25}'),
+    )
+
+    class FakeResponse:
+        status = 200
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        @staticmethod
+        def read():
+            return b'{"id": "m1"}'
+
+    responses = [rate_limit, FakeResponse()]
+
+    def fake_urlopen(request, timeout=30):
+        attempts.append((request.full_url, timeout))
+        result = responses.pop(0)
+        if isinstance(result, Exception):
+            raise result
+        return result
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(module.time, "sleep", sleeps.append)
+    request = urllib.request.Request("https://discord.com/api/v10/test")
+    status, body = module.discord_api_json(request, expected_statuses={200})
+    assert status == 200
+    assert body == {"id": "m1"}
+    assert len(attempts) == 2
+    assert sleeps == [0.25]
+
+
+def test_posted_report_with_exhausted_readback_is_deferred_not_failed(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "DELIVERY_STATE", tmp_path / "delivery.json")
+    monkeypatch.setattr(module, "DELIVERY_LOCK", tmp_path / "delivery.lock")
+    monkeypatch.setattr(module, "post_discord", lambda thread_id, text: ["m1"])
+
+    def deferred_readback(thread_id, message_ids, expected_text=None):
+        raise module.DiscordRateLimitExhausted("test 429")
+
+    monkeypatch.setattr(module, "readback_discord_messages", deferred_readback)
+    ids, delivery, suppressed = module.deliver_report_once(
+        "intraday:2026-08-24:19",
+        "thread",
+        "relatório curto",
+    )
+    state = json.loads(module.DELIVERY_STATE.read_text())
+    record = state["deliveries"]["intraday:2026-08-24:19"]
+    assert ids == ["m1"]
+    assert delivery == {"ok": False, "deferred": True, "reason": "discord_rate_limit"}
+    assert suppressed is False
+    assert record["status"] == "readback_deferred"
+    assert record["message_ids"] == ["m1"]
 
 
 def test_approved_report_schedule_and_action_checkpoint():
