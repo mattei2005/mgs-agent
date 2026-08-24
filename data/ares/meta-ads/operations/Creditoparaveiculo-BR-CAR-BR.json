@@ -746,6 +746,24 @@
       "CR",
       "Ação"
     ],
+    "intraday_desktop_summary": {
+      "status": "canonical_default",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24",
+      "source_thread_id": "1541535526610403409",
+      "repeat_exact_mobile_summary": true,
+      "position": "immediately before Tabela consolidada — visão desktop and its first paginated table block",
+      "fields": [
+        "title and dispatch time",
+        "currency, SB mode, delay and action mode",
+        "Rewarded CR current and previous-gray reference",
+        "ROI real signal counts",
+        "ROI estimado signal counts"
+      ],
+      "delay_format": "use Xh YYmin at 60 minutes or more; otherwise use Nmin",
+      "cr_column_required": true,
+      "chunking": "summary and first desktop table page must share one safe Discord chunk; later pages repeat the table header"
+    },
     "lance_values": {
       "COST_CAP": "CPA 0,50 (value derived live from adset bid_amount)",
       "LOWEST_COST_WITHOUT_CAP": "MAXVOL",
@@ -884,7 +902,7 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "hybrid_mobile_cards_desktop_table_v4_rewarded_monetization",
+        "style": "hybrid_mobile_cards_desktop_table_v5_repeated_summary",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
@@ -893,7 +911,7 @@
         "metrics": "Budget/Spend, Custo/ROAS, ROI real/ROI est, RPS/CPM and CR with previous gray consolidated reference; then three dated ROI SB lines for the current partial day and two prior dates",
         "roi_history": "canonical 3-date Smart Bidding NET_REVENUE ROI history in every mobile card; separate compact dated table on desktop; current date marked partial and missing investment/match shown as n/d",
         "divider": "34 heavy horizontal characters between campaigns",
-        "desktop_table": "repeat the current campaign metrics as a consolidated aligned table after the final card, followed by a separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
+        "desktop_table": "repeat the exact Intraday summary immediately before the consolidated aligned table after the final card; keep summary and first table page in the same Discord part, retain the CR column, then show the separate compact 3-date ROI history table before Spend/reconciliation/explanatory text",
         "desktop_table_pagination": {
           "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
           "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
@@ -1393,7 +1411,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.66",
+  "playbook_version": "1.0.67",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

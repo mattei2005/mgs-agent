@@ -186,6 +186,9 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "INTRADAY_CARD_DIVIDER" in intraday_source
     assert "desktop_table_rows" in intraday_source
     assert "desktop_table_pages" in intraday_source
+    assert "prefixed_table_pages" in intraday_source
+    assert "summary_lines" in intraday_source
+    assert "duration_hours_minutes" in intraday_source
     assert "table_pages" in intraday_source
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
@@ -195,6 +198,39 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert '"CR"' in intraday_source
     assert "fetch_rewarded_pricing" in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
+
+
+def test_intraday_delay_renders_hours_and_minutes():
+    module = load_reports_module()
+    assert module.duration_hours_minutes(83) == "1h 23min"
+    assert module.duration_hours_minutes(120) == "2h 00min"
+    assert module.duration_hours_minutes(42) == "42min"
+
+
+def test_prefixed_table_pages_keep_summary_with_first_desktop_page():
+    module = load_reports_module()
+    prefix_lines = [
+        "📈 INTRADAY — resumo",
+        "USD | atraso 1h 23min",
+        "Rewarded CR atual 74,56%",
+        "",
+        "ROI real: 🟢 8 positivas",
+        "ROI estimado: 🟢 8 positivas",
+        "",
+        "**Tabela consolidada — visão desktop**",
+    ]
+    headers = ["Camp", "CR", "Ação"]
+    rows = [[f"C{index:02d}", "74,56%", "A" * 80] for index in range(1, 13)]
+    pages = module.prefixed_table_pages(headers, rows, prefix_lines, max_chars=500)
+    combined = "\n".join(pages)
+    assert len(pages) > 1
+    assert pages[0].startswith("📈 INTRADAY — resumo")
+    assert "**Tabela consolidada — visão desktop**" in pages[0]
+    assert pages[0].count("📈 INTRADAY — resumo") == 1
+    assert all(len(page) <= 500 for page in pages)
+    assert all(any("CR" in line for line in page.splitlines()) for page in pages)
+    for index in range(1, 13):
+        assert combined.count(f"C{index:02d}") == 1
 
 
 def test_operation_contract_persists_intraday_rps_cpm_cr():
@@ -217,6 +253,10 @@ def test_operation_contract_persists_intraday_rps_cpm_cr():
         "CR",
         "Ação",
     ]
+    desktop_summary = operation["reporting_presentation"]["intraday_desktop_summary"]
+    assert desktop_summary["repeat_exact_mobile_summary"] is True
+    assert desktop_summary["cr_column_required"] is True
+    assert desktop_summary["delay_format"] == "use Xh YYmin at 60 minutes or more; otherwise use Nmin"
 
 
 def test_intraday_mobile_card_matches_approved_discord_layout():

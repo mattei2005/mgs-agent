@@ -117,12 +117,26 @@ Caso validado Fincgriffin US-CAR-EN:
 
 Quando Rodolfo fornecer URLs de um site e perguntar se os mesmos cartões existem no Smart Routing de outro site, comparar pela **identidade do cartão**, não pela igualdade literal de domínio ou slug.
 
+Distinguir obrigatoriamente três estados, sem tratar um como prova do outro:
+
+1. **Página publicada** — a URL equivalente do site existe e responde HTTP 200 após redirects.
+2. **Disponível no catálogo SB** — a página aparece em `/operations/{publisher}` ou no contrato live equivalente, com configuração FACEBOOK/Drip `.*-d$` e `jbf_operation` não vazia.
+3. **Já aplicada na pool** — a URL está nas rotas do readback `/routing/{id}` da família solicitada.
+
+Interpretação operacional:
+
+- “Tem esse cartão nesse site / para usar?” → procurar primeiro a página equivalente por identidade e, para afirmar que pode ser selecionada imediatamente no Smart Routing, validar também o catálogo SB.
+- “Está nessa pool?” → validar o readback da pool, mas não concluir que o cartão não existe no site ou catálogo apenas porque não está aplicado.
+- Se a formulação puder abranger mais de um estado, reportar os três em vez de responder somente pela pool atual.
+
+Procedimento:
+
 1. Extrair o nome comercial do cartão da URL ou da referência fornecida.
-2. Consultar ao vivo todos os pools da família solicitada, incluindo o nome-base legado e os sufixos `001–NNN`.
-3. Normalizar somente termos estruturais do slug (`rec`, país, vertical, `tarjeta`, `tarjeta-de-credito`, separadores e domínio).
-4. Exigir os tokens distintivos do produto e emissor — por exemplo, `BBVA + Mastercard + Black`; não considerar apenas `Mastercard Black`, pois isso pode confundir BBVA com Itaú.
-5. Diferenciar variantes próximas: `San Juan Internacional` não é `Banco San Juan Gold`; `BBVA Visa Gold` não é qualquer `Visa Gold`.
-6. Reportar por cartão: presente/ausente, pool/rota e URL live encontrada. Se houver duplicatas, listar todas as rotas ou resumir a quantidade com os identificadores.
+2. Normalizar somente termos estruturais do slug (`rec`, país, vertical, `tarjeta`, `tarjeta-de-credito`, separadores e domínio).
+3. Exigir os tokens distintivos do produto e emissor — por exemplo, `BBVA + Mastercard + Black`; não considerar apenas `Mastercard Black`, pois isso pode confundir BBVA com Itaú.
+4. Diferenciar variantes próximas: `San Juan Internacional` não é `Banco San Juan Gold`; `BBVA Visa Gold` não é qualquer `Visa Gold`.
+5. Para pool membership, consultar ao vivo todos os pools da família, incluindo nome-base legado e sufixos `001–NNN`.
+6. Reportar por cartão: página publicada, catálogo SB, pool/rota atual e URL live encontrada. Se houver duplicatas, listar todas as rotas ou resumir a quantidade com os identificadores.
 7. Igualdade de slug é evidência auxiliar, nunca pré-condição. Em caso de identidade ambígua, abrir a página ou catálogo live antes de concluir.
 
 ## Contrato live da SB
