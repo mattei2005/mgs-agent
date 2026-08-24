@@ -148,6 +148,60 @@
       "20:00 America/Sao_Paulo"
     ]
   },
+  "creative_performance_lifecycle": {
+    "enabled": true,
+    "policy_version": "1.0.0",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_et": "2026-08-24T18:06:53-04:00",
+    "authorization_source": "discord:thread:1541563564207243335",
+    "scope": "Creditoparaveiculo BR-CAR-BR G006 creative status, Drive movement, inventory classification and retest selection only; zero Meta campaign/ad writes",
+    "checkpoints_sp": [
+      "08:00",
+      "16:00"
+    ],
+    "delivery_basis": "cumulative Meta ad-level spend from campaign operational cycle start through checkpoint",
+    "minimum_meaningful_spend_share_pct": 10.0,
+    "zero_spend_action": "no classification; keep 02_TESTING",
+    "campaign_deleted_alone_never_rejects": true,
+    "anomaly_gate": "Meta x Smart Bidding spend anomaly blocks all creative classification",
+    "rejected": {
+      "cycle_day": 3,
+      "checkpoint_hour_sp": 8,
+      "requires_campaign_status": "PAUSED",
+      "requires_terminal_reason": "PARAR D3 ESTIMADO",
+      "requires_actual_roi_lt": 0.0,
+      "requires_estimated_roi_lt": 0.0,
+      "meaningful_delivery_target_status": "05_REJECTED",
+      "underexposed_target_status": "03_TESTED"
+    },
+    "winner": {
+      "d4_checkpoint_hour": 16,
+      "d4_gate": "actual and estimated ROI strictly positive at both 08:00 and 16:00 on D4",
+      "d5_checkpoint_hour": 8,
+      "d5_gate": "actual and estimated ROI strictly positive at D5 08:00",
+      "meaningful_delivery_target_status": "04_WINNERS",
+      "underexposed_live_campaign_action": "keep 02_TESTING and ineligible until no active use"
+    },
+    "retest": {
+      "enabled": true,
+      "authorized_as_express_retest_decision": true,
+      "eligible_status": "03_TESTED",
+      "eligible_evaluation_status": "INCONCLUSIVO_POR_SUBENTREGA",
+      "max_test_attempts": 2,
+      "selection_mix": {
+        "enabled": true,
+        "ready_slots_per_campaign": 2,
+        "retest_slots_per_campaign": 1,
+        "fallback_when_no_retest": "fill retest slot from 01_READY",
+        "fail_closed_when_fewer_than_two_ready_per_campaign": true
+      },
+      "active_use_gate": "asset must have no ACTIVE/PENDING_REVIEW/IN_PROCESS prior ad conflict before retest",
+      "lineage": "preserve every assignment in test_history; original and treated remain one creative lineage"
+    },
+    "drive_readback_required": true,
+    "inventory_readback_required": true,
+    "meta_writes": false
+  },
   "first_delivery_guardrail": {
     "enabled": true,
     "authorized_by": "Rodolfo Mattei",
@@ -726,7 +780,41 @@
       "ROI SB",
       "ROAS"
     ],
-    "daily_alignment": "Unicode display-width aware; every summary row has an explicit signal",
+    "daily_alignment": "Unicode display-width aware; every metric row has an explicit signal and blank separator rows divide acquisition, SMS, totals and reconciliation",
+    "daily_account_summary": {
+      "status": "canonical_default",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24T18:07:52-04:00",
+      "source_thread_id": "1541568072048054322",
+      "fields_in_order": [
+        "Spend Meta",
+        "Receita aquisição SB",
+        "ROI aquisição",
+        "separator",
+        "Custo SMS G006",
+        "Receita SMS G006",
+        "SMS enviados G006",
+        "ROI SMS",
+        "separator",
+        "ROI total sem SMS",
+        "ROI total com SMS",
+        "separator",
+        "Conciliação Meta×SB"
+      ],
+      "formulas": {
+        "roi_aquisicao": "(acquisition_net_revenue_usd - meta_spend_usd) / meta_spend_usd * 100",
+        "roi_sms": "(sms_g006_net_revenue_usd - sms_cost_g006_usd) / sms_cost_g006_usd * 100",
+        "roi_total_sem_sms": "roi_aquisicao",
+        "roi_total_com_sms": "(acquisition_net_revenue_usd + sms_g006_net_revenue_usd - meta_spend_usd - sms_cost_g006_usd) / meta_spend_usd * 100",
+        "conciliacao_meta_sb": "meta_spend_usd - smart_bidding_investment_usd"
+      },
+      "removed_visible_rows": [
+        "Receita total",
+        "ROI total antes custo SMS",
+        "ROI total após custo SMS"
+      ],
+      "sms_signal": "white for cost, revenue, sent count and ROI SMS; totals retain KPI signal semantics"
+    },
     "daily_budget_definition": "current campaign daily_budget from Meta at report generation time",
     "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
     "intraday_style": "desktop-only aligned monospace tables matching Rodolfo reference",
@@ -1045,7 +1133,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-24T12:13:14-03:00",
+  "updated_at": "2026-08-24T18:07:52-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

@@ -201,6 +201,45 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "ID REC" not in SCRIPT.read_text()
 
 
+def test_daily_account_summary_matches_rodolfo_order_and_formulas():
+    module = load_reports_module()
+    rows = module.daily_account_summary_rows(
+        meta_spend=100.0,
+        acquisition_revenue=120.0,
+        acquisition_roi=20.0,
+        sms_revenue=30.0,
+        sms_sent=1000,
+        sms_cost_usd=10.0,
+        sms_roi=module.roi(30.0, 10.0),
+        total_roi_with_sms=module.roi(120.0 + 30.0 - 10.0, 100.0),
+        spend_diff=0.25,
+        anomaly=False,
+    )
+    assert [row[1] for row in rows] == [
+        "Spend Meta",
+        "Receita aquisição SB",
+        "ROI aquisição",
+        "",
+        "Custo SMS G006",
+        "Receita SMS G006",
+        "SMS enviados G006",
+        "ROI SMS",
+        "",
+        "ROI total sem SMS",
+        "ROI total com SMS",
+        "",
+        "Conciliação Meta×SB",
+    ]
+    assert rows[7] == ["⚪", "ROI SMS", "+200,0%"]
+    assert rows[9][2] == "+20,0%"
+    assert rows[10][2] == "+40,0%"
+    rendered = module.aligned_table(["Sinal", "Indicador", "Resultado"], rows)
+    assert rendered.count("Receita aquisição SB") == 1
+    assert "Receita total" not in rendered
+    assert "ROI total antes custo SMS" not in rendered
+    assert "ROI total após custo SMS" not in rendered
+
+
 def test_intraday_delay_renders_hours_and_minutes():
     module = load_reports_module()
     assert module.duration_hours_minutes(83) == "1h 23min"
@@ -1246,3 +1285,35 @@ def test_snapshot_gate_is_daily_not_72_hourly(monkeypatch, tmp_path):
     state.write_text(json.dumps({"last_snapshot_sp": now_sp.isoformat()}))
     assert not module.snapshot_due(now_sp.replace(hour=4))
     assert module.snapshot_due(now_sp.replace(day=21))
+
+
+def test_08_checkpoint_persists_actual_and_estimated_roi(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "ACTION_LOCK", tmp_path / "actions.lock")
+    monkeypatch.setattr(module, "ACTION_STATE", tmp_path / "actions.json")
+    monkeypatch.setattr(module, "GUARDRAIL_STATE", tmp_path / "guardrails.json")
+    rows = [{
+        "campaign_id": "campaign-1",
+        "number": "21",
+        "cycle_start_date": "2026-08-21",
+        "cycle_day": 4,
+        "sb_roi": 12.5,
+        "estimated_roi": 8.25,
+        "autonomous_write_eligible": True,
+    }]
+    state = module.record_guardrail_checkpoint(
+        rows,
+        "2026-08-24",
+        datetime(2026, 8, 24, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo")),
+    )
+    record = state["campaigns"]["campaign-1"]
+    assert record["morning_actual_roi"]["2026-08-24"]["actual_roi"] == 12.5
+    assert record["morning_estimated_roi"]["2026-08-24"]["estimated_roi"] == 8.25
+
+
+def test_creative_lifecycle_wrapper_is_noop_when_policy_disabled():
+    module = load_reports_module()
+    result = module.execute_creative_lifecycle(
+        [], [], "2026-08-24", datetime(2026, 8, 24, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo")), {}, {}
+    )
+    assert result == {"status": "DISABLED_OR_NOT_DUE", "decisions": [], "meta_writes": 0}

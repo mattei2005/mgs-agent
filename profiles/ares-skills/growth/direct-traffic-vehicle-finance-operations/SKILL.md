@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.32
+version: 1.0.33
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -68,14 +68,20 @@ No final do relatório da conta/G006, exibir:
 ```text
 Spend Meta
 Receita Aquisição SB (NET_REVENUE)
+ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
+
+Custo SMS G006 em USD = custo BRL ÷ PTAX venda BCB
 Receita SMS G006 (NET_REVENUE)
 SMS enviados G006 (SMS Funnel, recorte de data)
-Custo SMS G006 em USD = custo BRL ÷ PTAX venda BCB
-Receita Total = Aquisição + SMS
-ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
-ROI Total com SMS — antes do custo SMS
-ROI Total após custo SMS em USD
+ROI SMS = (Receita SMS − Custo SMS) / Custo SMS × 100
+
+ROI Total sem SMS = ROI Aquisição
+ROI Total com SMS = (Aquisição + SMS − Spend Meta − Custo SMS) / Spend Meta × 100
+
+Conciliação Meta×SB = Spend Meta − investimento Smart Bidding
 ```
+
+Preservar exatamente esses quatro blocos e essa ordem no Diário. Não exibir as linhas legadas `Receita total`, `ROI total antes custo SMS` ou `ROI total após custo SMS`; o valor líquido correspondente passa a ser rotulado `ROI total com SMS`.
 
 O custo SMS é do bucket do gestor G006 e não deve ser repetido em cada campanha Meta.
 
