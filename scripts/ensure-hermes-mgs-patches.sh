@@ -287,12 +287,12 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for the current upstream main target cd297653
+# Consolidated port for the current upstream main target 85a55e2b
 # (2026-08-24), preserving the complete reviewed MGS surface, including
 # checkpoint-store serialization and the Honcho background memory freeze.
 # Apply the newest reviewed surface first; legacy composite/per-feature patches
 # below remain invariant checks and backward-compatible fallback.
-apply_patch_if_needed "mgs-runtime-customizations-2026-08-24-main-cd297653.patch"
+apply_patch_if_needed "mgs-runtime-customizations-2026-08-24-main-85a55e2b.patch"
 apply_patch_if_needed "checkpoint-store-serialization-2026-08-20.patch"
 apply_patch_if_needed "honcho-background-file-memory-freeze-2026-08-21.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"

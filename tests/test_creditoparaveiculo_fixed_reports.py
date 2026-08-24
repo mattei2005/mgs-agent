@@ -189,6 +189,10 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
     assert "fetch_sb_roi_history" in intraday_source
+    assert '"RPS"' in intraday_source
+    assert '"CPM"' in intraday_source
+    assert '"CR"' in intraday_source
+    assert "fetch_rewarded_pricing" in intraday_source
     assert "ID REC" not in SCRIPT.read_text()
 
 
@@ -205,6 +209,10 @@ def test_intraday_mobile_card_matches_approved_discord_layout():
         "meta_roas": 1.64,
         "sb_roi": 45.4,
         "estimated_roi": 81.9,
+        "rps": 224.59,
+        "cpm": 131.80,
+        "rewarded_coverage": 74.47,
+        "rewarded_coverage_previous": 78.92,
         "roi_history": [
             {"date_label": "19/08", "roi": None, "partial": False},
             {"date_label": "20/08", "roi": -17.7, "partial": False},
@@ -219,12 +227,95 @@ def test_intraday_mobile_card_matches_approved_discord_layout():
         "Budget $39,00    Spend $11,77\n"
         "Custo  $0,08     ROAS  1,64\n"
         "ROI real +45,4%  ROI est +81,9%\n"
+        "RPS $224,59     CPM $131,80\n"
+        "CR  74,47%      ontem 78,92%\n"
         "\n"
         "ROI 19/08 n/d\n"
         "ROI 20/08 -17,7%\n"
         "ROI 21/08 +45,4% parcial\n"
         "```"
     )
+
+
+def test_sb_rps_and_cpm_use_net_revenue_with_revenue_share():
+    module = load_reports_module()
+    aggregated = module.aggregate_sb(
+        [
+            {
+                "CAMPAIGN_ID": "8",
+                "CAMPAIGN_NAME": "C08",
+                "NET_REVENUE": 10,
+                "REVENUE": 99,
+                "SESSIONS": 50,
+                "GAM_IMPRESSIONS": 100,
+            },
+            {
+                "CAMPAIGN_ID": "8",
+                "CAMPAIGN_NAME": "C08",
+                "NET_REVENUE": 20,
+                "REVENUE": 99,
+                "SESSIONS": 100,
+                "GAM_IMPRESSIONS": 200,
+            },
+        ]
+    )["8"]
+    assert aggregated["rps"] == pytest.approx(200.0)
+    assert aggregated["cpm"] == pytest.approx(100.0)
+
+
+def test_rewarded_pricing_cr_matches_five_block_waterfall_and_gray_previous_day():
+    module = load_reports_module()
+    current_matched = [3039, 197, 153, 76, 117]
+    previous_matched = [5667, 481, 248, 134, 228]
+    rules = []
+    for index, suffix in enumerate(module.REWARDED_SLOT_SUFFIXES):
+        rules.append(
+            {
+                "operation": module.REWARDED_OPERATION,
+                "operationGroup": module.REWARDED_OPERATION_GROUP,
+                "targeting": {
+                    "slot_id": f"{module.REWARDED_SLOT_BASE}{suffix}",
+                    "utm_source": "facebook",
+                    "vertical": "car",
+                    "pathname": module.REWARDED_PATHNAME,
+                    "utm_medium": ".*-s$",
+                },
+                "metricsToday": {
+                    "gamRequests": 4810 if index == 0 else 0,
+                    "gamMatchedRequests": current_matched[index],
+                    "date": "23/08/2026",
+                },
+                "metricsYesterday": {
+                    "gamRequests": 8563 if index == 0 else 0,
+                    "gamMatchedRequests": previous_matched[index],
+                    "date": "22/08/2026",
+                },
+            }
+        )
+    payload = {
+        "publisherId": module.PUBLISHER,
+        "currency": "USD",
+        "metricsDate": "2026-08-24T19:57:36.000Z",
+        "rules": rules,
+    }
+    parsed = module.parse_rewarded_pricing(payload)
+    assert parsed["filter"] == "rewarded"
+    assert parsed["slot_count"] == 5
+    assert parsed["current"] == {
+        "date": "23/08/2026",
+        "requests": 4810,
+        "matched": 3582,
+        "coverage_pct": 74.47,
+    }
+    assert parsed["previous_gray"] == {
+        "date": "22/08/2026",
+        "requests": 8563,
+        "matched": 6758,
+        "coverage_pct": 78.92,
+    }
+
+    with pytest.raises(RuntimeError, match="waterfall incomplete"):
+        module.parse_rewarded_pricing({**payload, "rules": rules[:-1]})
 
 
 def test_roi_history_aggregates_by_campaign_date_and_marks_current_partial():
