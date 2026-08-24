@@ -266,7 +266,7 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v6"
 
 
-def test_intraday_mobile_card_matches_approved_discord_layout():
+def test_dormant_intraday_mobile_card_renderer_remains_reusable():
     module = load_reports_module()
     row = {
         "campaign_label": "C08-20/08",
@@ -416,7 +416,7 @@ def test_roi_history_rejects_nonpositive_window():
         module.campaign_roi_history("8", "2026-08-21", None, {}, current_is_partial=False, days=0)
 
 
-def test_daily_mobile_card_matches_approved_hybrid_layout():
+def test_dormant_daily_mobile_card_renderer_remains_reusable():
     module = load_reports_module()
     row = {
         "campaign_label": "C07-20/08",
@@ -438,7 +438,7 @@ def test_daily_mobile_card_matches_approved_hybrid_layout():
     )
 
 
-def test_discord_chunking_keeps_mobile_cards_and_desktop_table_atomic():
+def test_discord_chunking_can_still_pack_dormant_mobile_cards_safely():
     module = load_reports_module()
     base_row = {
         "campaign_label": "C08-20/08",
@@ -483,7 +483,7 @@ def test_discord_chunking_keeps_mobile_cards_and_desktop_table_atomic():
     assert all(content.count("```") % 2 == 0 for content in discord_contents)
 
 
-def test_chunking_preserves_blank_lines_inside_mobile_card_fences():
+def test_dormant_mobile_card_fences_preserve_blank_lines():
     module = load_reports_module()
     row = {
         "campaign_label": "C08-20/08",

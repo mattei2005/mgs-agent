@@ -102,6 +102,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-DESKTOP-ONLY-REPORTS-20260824",
+      "next_step": "Manter layout desktop-only ate Rodolfo definir canais separados ou pedir reativacao",
+      "objective": "Remover temporariamente a versao mobile dos relatorios Diario e Intraday CPV",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "completed: cards mobile e divisores removidos dos envios ativos; diario e intraday somente com tabelas desktop; intraday com resumo unico; renderers mobile preservados dormentes para eventual canal separado",
+      "thread_id": "1541535526610403409",
+      "updated_at": "2026-08-24T21:50:11+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-DYNAMIC-BUDGET-CRON-20260824",
       "next_step": "Operação normal: às 17:00 São Paulo o scheduler executará o ciclo C21-C23; acompanhar o resultado na thread de criação e manter fail-closed para qualquer gate não relacionado ao envelope interno.",
       "objective": "Religar criação diária CPV às 17:00 São Paulo e tornar o envelope interno de budget dinâmico para criação e escalas autorizadas",
@@ -1152,5 +1162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T21:39:33+00:00"
+  "updated_at": "2026-08-24T21:50:11+00:00"
 }
