@@ -22,7 +22,7 @@ Gate 8  1→3→10→40 rollout with p50/p95
 
 Gates 1–4 and the synthetic scale validation are complete. The first authorized production request executes Gate 5 automatically/fail-closed; if it succeeds, the same request can continue to Gate 6 and remaining bundles according to the lane quota. A normal campaign request is the operational authorization for its own objects; no extra architecture confirmation is inserted.
 
-A failed request is never blindly replayed. Each account lane writes an independent checkpoint with any known campaign/adset IDs and last stage; the main audit marks `manual_reconciliation_required=true`. Reconcile those PAUSED objects by GET before creating a new request ID or authorizing cleanup.
+A failed request is never blindly replayed. Each account lane writes an independent checkpoint with any known campaign/adset/ad IDs and last stage; the main audit marks `automatic_recovery_required=true`, `manual_reconciliation_required=false` and preserves the same request ID. The engine reads back the target hierarchy, reuses every valid object already created and writes only the missing or invalid layer. Cleanup, budget expansion, billing, credentials or strategy changes remain outside this standing recovery scope.
 
 ## Rollback
 

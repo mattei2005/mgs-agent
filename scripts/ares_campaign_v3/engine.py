@@ -419,7 +419,8 @@ class CampaignEngine:
                     error_row["detail"] = exc.detail
                 record["error"] = error_row
                 lane_result["status"] = "FAILED"
-                lane_result["manual_reconciliation_required"] = True
+                lane_result["manual_reconciliation_required"] = False
+                lane_result["automatic_recovery_required"] = True
                 _atomic_json(checkpoint_path, lane_result)
                 raise
         lane_result["status"] = "COMPLETE"
@@ -500,7 +501,8 @@ class CampaignEngine:
                 "finished_at": _utc(),
                 "lanes": lane_results,
                 "error": {"type": type(exc).__name__, "message": str(exc)[:500]},
-                "manual_reconciliation_required": True,
+                "manual_reconciliation_required": False,
+                "automatic_recovery_required": True,
                 "blind_replay_blocked": True,
                 "lane_checkpoints": checkpoint_paths,
             })

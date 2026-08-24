@@ -8973,7 +8973,7 @@
         "Root/default OpenAI-Codex refresh credential remains invalid and was not changed.",
         "Upstream main moves rapidly; finalizer must abort if frozen target/runtime hashes drift."
       ],
-      "updated_at": "2026-08-24T20:37:02Z",
+      "updated_at": "2026-08-24T20:42:37Z",
       "active_runtime_path": "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
       "active_runtime_sha": "005bc450a6e68d33a95b5ace13a111337f6993db",
       "active_runtime_metadata_version": "0.20.5",
@@ -9021,6 +9021,18 @@
         "vps_backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
         "previous_wrapper": "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
         "previous_runtime": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d"
+      },
+      "final_report_infra": {
+        "status": "sent_and_readback_confirmed",
+        "channel_id": "1498132022634483894",
+        "message_id": "1541548231580721254",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mention_count": 0,
+        "required_fields": true,
+        "thread_created": false,
+        "validated_at": "2026-08-24T20:42:37Z"
       }
     }
   ],

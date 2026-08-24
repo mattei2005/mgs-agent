@@ -794,7 +794,8 @@ def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path)
     audit_path = Path(cfg['audit_root']) / 'partial.json'
     audit = json.loads(audit_path.read_text())
     assert audit['status'] == 'FAILED'
-    assert audit['manual_reconciliation_required'] is True
+    assert audit['manual_reconciliation_required'] is False
+    assert audit['automatic_recovery_required'] is True
     with pytest.raises(ExecutionFailed, match='automatic recovery currently requires clone_prestaged'):
         CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
 
