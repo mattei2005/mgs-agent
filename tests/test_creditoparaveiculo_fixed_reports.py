@@ -178,12 +178,12 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert '"Lance"' in daily_source
     assert '"Budget"' in daily_source
     assert '"Custo"' in daily_source
-    assert "daily_mobile_card" in daily_source
-    assert "campaign_mobile_cards" in daily_source
+    assert "daily_mobile_card" not in daily_source
+    assert "campaign_mobile_cards" not in daily_source
     assert "Tabela consolidada — visão desktop" in daily_source
     intraday_source = inspect.getsource(module.build_intraday)
-    assert "intraday_mobile_card" in intraday_source
-    assert "INTRADAY_CARD_DIVIDER" in intraday_source
+    assert "intraday_mobile_card" not in intraday_source
+    assert "INTRADAY_CARD_DIVIDER" not in intraday_source
     assert "desktop_table_rows" in intraday_source
     assert "desktop_table_pages" in intraday_source
     assert "prefixed_table_pages" in intraday_source
@@ -256,10 +256,14 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     ]
     assert "CR" not in operation["reporting_presentation"]["intraday_columns"]
     desktop_summary = operation["reporting_presentation"]["intraday_desktop_summary"]
-    assert desktop_summary["repeat_exact_mobile_summary"] is True
+    assert operation["reporting_presentation"]["daily_mobile_cards_enabled"] is False
+    assert operation["reporting_presentation"]["intraday_mobile_cards_enabled"] is False
+    assert desktop_summary["repeat_summary_after_mobile_cards"] is False
     assert desktop_summary["cr_campaign_column_required"] is False
     assert desktop_summary["cr_summary_required"] is True
     assert desktop_summary["delay_format"] == "use Xh YYmin at 60 minutes or more; otherwise use Nmin"
+    assert operation["scheduler_jobs"]["daily"]["report_layout"]["style"] == "desktop_tables_only_v2"
+    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v6"
 
 
 def test_intraday_mobile_card_matches_approved_discord_layout():
