@@ -332,14 +332,12 @@ PY
       rc=1
     fi
     # The newest consolidated runtime patch is the complete reviewed MGS base.
-    # Newer non-overlapping supplemental fixes that are explicitly listed here
-    # must also apply cleanly to the frozen target before an update can proceed.
-    # Legacy per-feature artifacts remain invariant/fallback checks because
-    # their hunks overlap older consolidated surfaces.
+    # The 2026-08-24 artifact absorbs the checkpoint-store serialization and
+    # Honcho background memory freeze supplements. Legacy per-feature artifacts
+    # remain invariant/fallback checks in ensure-hermes-mgs-patches.sh rather
+    # than independent clean-target apply gates.
     local canonical_patches=(
       "$latest_runtime_patch"
-      "checkpoint-store-serialization-2026-08-20.patch"
-      "honcho-background-file-memory-freeze-2026-08-21.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
