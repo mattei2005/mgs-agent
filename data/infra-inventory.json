@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-24T16:19:41-04:00",
+    "updated_at": "2026-08-24T20:21:39.891888+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8924,7 +8924,7 @@
       "updated_at": "2026-08-22T18:30:43-03:00"
     },
     {
-      "id": "hermes-port-main-a99001c3-20260824",
+      "id": "hermes-port-main-14201763-20260824",
       "agent": "zeus",
       "type": "hermes_runtime_update_candidate",
       "owner": "Zeus/Infra",
@@ -8936,11 +8936,11 @@
       "source_thread_id": "1541526538619588678",
       "status": "staged_validated_activation_pending",
       "installed_before": "1021e0724fe20134340420cb7e7117419fb68404",
-      "target_upstream_sha": "a99001c3b36fc574b0837708f222ac32096b54ce",
+      "target_upstream_sha": "1420176393295dfb0dfb55ceb4b1cbab8d1965de",
       "target_version": "0.20.5",
       "candidate_path": "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
-      "candidate_commit": "94379234a4",
-      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-a99001c3.patch",
+      "candidate_commit": "005bc450a6",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-08-24-main-14201763.patch",
       "patch_sha256": "271afbe8492f6f197d3dc8085fb26d5c4faa785548866dda8edef95a21891279",
       "patch_scope_files": 46,
       "original_customization_paths": 46,
@@ -8952,7 +8952,7 @@
         "zeus"
       ],
       "rollback_wrapper": "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
-      "candidate_wrapper": "/root/.local/bin/hermes-v0205-main-a99001c3-mgs",
+      "candidate_wrapper": "/root/.local/bin/hermes-v0205-main-14201763-mgs",
       "active_runtime_before": "/root/.hermes/hermes-agent-port-v2026-8-17-4323c67d",
       "active_wrapper_before": "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
       "validation": {
@@ -8965,14 +8965,15 @@
         "config_mirrors": "Zeus/Atena/Ares config+SOUL 6/6 byte-equal; auth present 3/3",
         "codex_gateway_profiles": "Zeus/Atena/Ares 3/3 exact rc=0",
         "codex_root_profile": "pre-existing invalid refresh token on active and candidate; not modified; root is non-gateway",
-        "moving_main": "six additional desktop-only commits incorporated; target a99001c3 equals origin/main at port freeze",
-        "candidate_version": "0.20.5; fresh-home Up to date"
+        "moving_main": "target advanced through c73d721b and then 14201763; all added paths were outside MGS surface; target 14201763 frozen for final cutover",
+        "candidate_version": "0.20.5; fresh-home Up to date",
+        "latest_upstream_delta_tests": "computer-use 104 passed; LSP/tree-kill/browser warmup 42 passed"
       },
       "known_risks": [
         "Root/default OpenAI-Codex refresh credential remains invalid and was not changed.",
         "Upstream main moves rapidly; finalizer must abort if frozen target/runtime hashes drift."
       ],
-      "updated_at": "2026-08-24T20:15:58.701074+00:00"
+      "updated_at": "2026-08-24T20:21:39.891888+00:00"
     }
   ],
   "profile_skill_references": [

@@ -123,12 +123,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-INTRADAY-REWARDED-METRICS-20260824",
-      "next_step": "Criar backup, implementar runtime e testes, executar dry-run live, reemitir Intraday report-only com readback e promover regra canônica.",
+      "next_step": "Aguardar revisão visual de Rodolfo; aplicar automaticamente o padrão nos próximos Intraday de duas em duas horas até supersessão explícita.",
       "objective": "Adicionar RPS, CPM e CR rewarded ao Intraday CPV e entregar reemissão real para revisão",
-      "source": "discord:thread:1541535526610403409; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "state": "em execução: fontes live confirmadas; rps/cpm por campanha vêm do smart bidding adgroup em usd com revenue share, cr vem da pricing filtrada por rewarded como soma gam matched dos cinco blocos dividida pelos gam requests do bloco base; valores cinza são o consolidado anterior.",
+      "source": "discord:thread:1541535526610403409; report:data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260824T202054Z.json; policy:ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V1; report-infra:1541543239457448110",
+      "state": "concluído e validado: intraday v4 mostra rps e cpm por campanha via smart bidding adgroup net_revenue usd com revenue share, cr da cascata de cinco rewarded via pricing filtrada; referência cinza anterior identificada. runtime/config/skills/inventário/registry alinhados. reemissão report-only publicou 16 campanhas em 6 chunks com readback discord 6/6 ok, zero ação meta. cr live 74,56% = 3679/4934; anterior 78,92% = 6758/8563. 52 testes e knowledge validate/regression passaram; report-infra http 200.",
       "thread_id": "1541535526610403409",
-      "updated_at": "2026-08-24T20:02:18+00:00"
+      "updated_at": "2026-08-24T20:22:39+00:00"
     },
     {
       "agent": "ares",
@@ -1142,5 +1142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T20:13:22+00:00"
+  "updated_at": "2026-08-24T20:22:39+00:00"
 }
