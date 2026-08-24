@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.26
+version: 1.0.27
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -154,12 +154,13 @@ A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reserva
 quantidade possível = piso(pool diário de testes ÷ budget inicial por campanha)
 ```
 
-Exemplo vigente com teto operacional diário de `USD 500` e budget inicial de `USD 30`:
+Exemplo vigente com piso operacional interno de `USD 500` e budget inicial de `USD 30`:
 
-- pool de 20% = `USD 100` = até 3 campanhas de USD30, preservando USD10;
-- pool de 30% = `USD 150` = até 5 campanhas.
+- pool normal sobre o piso: 20% = `USD 100` = até 3 campanhas de USD30, preservando USD10;
+- pool flexível sobre o piso: 30% = `USD 150` = até 5 campanhas;
+- se o total live mais a criação/escala/reativação autorizada ultrapassar USD500, o envelope efetivo sobe ao valor exato necessário e deixa de bloquear o plano somente por esse motivo.
 
-O padrão é reservar 20%; Rodolfo autorizou flexibilização para 30% quando necessária para preservar o budget inicial de USD 30 e o volume de testes adequado. A quantidade final também depende de criativos elegíveis, capacidade de análise e espaço para escalar campanhas boas.
+O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. O padrão de criação permanece três campanhas de USD30 por ciclo, salvo quantidade diferente autorizada. A quantidade final também depende de criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
 
 Programar a campanha para começar às `00:30` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 
@@ -257,7 +258,7 @@ Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corr
    - ROI geral `> 10%` e `<= 20%`: manter sem escala;
    - demais valores: observar, sem corte.
 3. Campanha que já começa o D1 em faixa de escala participa normalmente da regra das 08:00.
-4. Fora das faixas, D1 continua em observação. Respeitar USD150 por campanha e USD500 na conta; todo scale exige POST único e GET/readback.
+4. Fora das faixas, D1 continua em observação. Respeitar USD150 por campanha; o envelope da conta usa piso USD500 e sobe ao total exato do plano autorizado. Todo scale exige POST único e GET/readback.
 
 Conclusão: D1 não corta por resultado inicial; escala usa somente ROI geral, apenas às 08:00.
 
@@ -303,9 +304,10 @@ Parâmetros iniciais informados por Rodolfo:
 ```text
 Parâmetro                                      Valor inicial
 ---------------------------------------------- ----------------------------------
-Teto operacional diário da conta               USD 500 vigente desde 22/08/2026
+Piso do envelope operacional interno da conta  USD 500 vigente desde 22/08/2026
+Envelope efetivo da conta                      max(USD500, budget live + deltas autorizados)
 Budget inicial por campanha                    USD 30
-Pool normal para campanhas novas               20% do teto operacional
+Pool normal para campanhas novas               20% do piso operacional
 Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
 Quantidade de campanhas novas                  dinâmica, calculada pelo pool
 Escala com ROI geral >20% e <=30%             +10%
@@ -314,13 +316,19 @@ Escala com ROI geral >40%                      +30%
 Teto diário provisório por campanha            USD 150
 ```
 
-“Budget da conta” é o teto operacional interno diário do portfólio, não `account_spend_limit` da Meta. O teto de USD 150 por campanha é provisório/empírico: após cada escala, acompanhar ROAS e ROI e interromper novas escalas se houver deterioração relevante.
+“Budget da conta” é o envelope operacional interno diário do portfólio, não `account_spend_limit` da Meta. USD500 é o piso, não um teto rígido. O teto de USD 150 por campanha é provisório/empírico: após cada escala, acompanhar ROAS e ROI e interromper novas escalas se houver deterioração relevante.
 
-### Escala do teto da conta
+### Envelope dinâmico da conta
 
-O teto da conta será informado/ajustado por Rodolfo conforme a escala e a necessidade de manter campanhas boas. Ares pode calcular uso, projeção e espaço para testes, mas não aumenta o teto da conta por conta própria.
+Por autorização de Rodolfo em 24/08/2026, Ares recalcula o envelope efetivo em cada preflight como `max(USD500, budget configurado-ativo live + deltas exatos autorizados)`. Os deltas elegíveis são somente:
 
-Manter 20% como pool normal de campanhas novas e até 30% quando o piso de USD 30 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
+- campanhas do ciclo diário de 17:00, normalmente três × USD30;
+- escalas das faixas de ROI geral já aprovadas às 08:00;
+- reativações de proveniência guardada já autorizadas.
+
+A regra impede que o piso antigo bloqueie criação ou escala válida. Ela não cria budget extra arbitrário, não altera billing/limite de gasto da conta e não afrouxa identidade, saúde da conta, quota, criativos, reconciliação, horário, allowlist, teto USD150 por campanha ou readback. Drift inesperado depois do plano continua fail-closed.
+
+Manter 20% do piso como pool normal de campanhas novas e até 30% quando o piso de USD 30 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
 
 ### Autoridade de budget nesta operação
 
@@ -465,7 +473,7 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 2. Reconciliar/liberar no inventário os criativos que entrarão nas campanhas novas.
 3. Definir o próximo número de campanha livre por leitura Meta imediatamente antes da criação.
 4. Rodar dry-run da estrutura e validar campanha PAUSED antes de ativação.
-5. Obter autorização explícita para o write concreto de reparo legado, reativação e/ou criação.
+5. O scheduler diário de criação às 17:00 São Paulo possui autorização permanente vigente desde 24/08/2026; write corretivo após `V3 BLOQUEADO`, mudança de quantidade/estratégia fora do padrão ou novo hold exige a autorização aplicável.
 6. Acompanhar em janelas futuras se o modelo ROAS 1,20/1,34 continua estável; ROAS permanece sinal, SB permanece decisão.
 
 ## Pitfalls
@@ -475,7 +483,7 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 3. Decidir somente pelo Ads Manager quando o ROI decisório está no Smart Bidding Adgroup.
 4. Misturar ROI diário com ROI acumulado sem rotular.
 5. Usar timezone do gestor em vez do timezone da conta.
-6. Ultrapassar o teto operacional por escalas sucessivas.
+6. Executar criação/escala fora do envelope dinâmico calculado no preflight ou confundir esse envelope com billing Meta.
 7. Criar três campanhas sem reconciliar o percentual real reservado a testes.
 8. Reutilizar criativo reservado ou já em teste sem conciliação Meta × Drive.
 

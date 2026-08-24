@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.16
+version: 3.0.17
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -65,8 +65,8 @@ Carregue somente a referência do branch atual.
 12. Em Creditoparaveiculo, o pós-processamento só conclui após auto-armar cada campanha nova no guardrail de primeiro gasto. O enrollment valida IDs, data operacional, status `ACTIVE`, gasto zero e retorna `meta_writes=0`; falha deixa o request `POSTPROCESS_PENDING`. O watcher aceita primeiro spend observado de 00:30 a 02:00 SP inclusive sem pause; fora dessa janela, pausa uma vez e agenda reativação 00:30 do dia seguinte.
 13. Todo alerta operacional de erro deve identificar operação e campanhas afetadas e informar, em linguagem humana e sem paths/credenciais: etapa, causa baseada no erro real, consequência, solução proposta e autorização necessária. Mensagem genérica de “bloqueado” sem diagnóstico não é conclusão suficiente.
 14. Depois de qualquer exceção `V3 BLOQUEADO`, Ares pode continuar diagnóstico e readback somente leitura, mas nenhum write corretivo na Meta ocorre até Rodolfo ou Nicolas autorizar explicitamente a solução proposta. `PARTIAL_DEFERRED_QUOTA` saudável continua sendo retomada determinística, não erro.
-15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o saldo restante dentro do cap operacional e a fonte: preflight Meta vivo mais budgets do request confirmados por readback.
-16. Criação programada é uma fase condicional do loop, não uma obrigação diária: analisar D1/D2/D3, aplicar pausas/escalas aprovadas e só abrir nova coorte quando a leitura justificar. `creation_hold.enabled=true` bloqueia criação/clone de novos slots e não expira sozinho; Rodolfo ou Nicolas libera explicitamente.
+15. Toda conclusão de criação programada informa em USD o budget ativo da conta, o envelope operacional efetivo, o saldo dentro desse envelope e a fonte: preflight Meta vivo mais budgets do request confirmados por readback. Em Creditoparaveiculo G006, USD500 é o piso e o envelope sobe somente ao total live mais os deltas exatos autorizados de criação, escala ROI e reativação; não há write de billing nem `account_spend_limit`.
+16. Criação programada segue o loop de análise, mas o hold vigente pode ser liberado por Rodolfo ou Nicolas. Para Creditoparaveiculo G006, Rodolfo liberou o hold em 24/08/2026 e reativou o scheduler diário de 17:00 São Paulo; um hold futuro continua sem expiração automática e bloqueia criação/clone até nova liberação explícita.
 17. Em `clone_prestaged`, cada anúncio exige `source_ad_id` não zero e nasce por `POST /{source_ad_id}/copies` com `creative_parameters`; criação direta por `act_{account}/ads` é proibida. Campaign copy, adset copy, normalização de shell, ad copies e normalização de nomes são batches sequenciais; filhos PAUSED permanecem PAUSED até readback e ativação autorizada.
 
 ## How to run
@@ -80,7 +80,7 @@ python3 /root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py --offline-sm
 python3 /root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py --dry-run --operational-date YYYY-MM-DD
 ```
 
-O runner diário CPV tem gate de início às 17:00 São Paulo e permite retomar o mesmo request fora da janela quando o state estiver `PARTIAL_DEFERRED_QUOTA` ou em outro estágio resumível. `--dry-run` faz somente plano live/read-only; `--offline-smoke` usa transporte fake e zero rede. O wrapper v3 só pode substituir o job legado depois da revisão independente do Zeus; até então, o cron de criação permanece pausado e o v2 continua rollback isolado.
+O runner diário CPV tem gate de início às 17:00 São Paulo e permite retomar o mesmo request fora da janela quando o state estiver `PARTIAL_DEFERRED_QUOTA` ou em outro estágio resumível. `--dry-run` faz somente plano live/read-only; `--offline-smoke` usa transporte fake e zero rede. O cron v3 diário está ativo desde a liberação de Rodolfo em 24/08/2026; v2 continua congelado como rollback isolado.
 
 A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais. O guard inicial é **por lane**: em uma conta, o primeiro bundle daquela conta é guardado/fail-closed; em várias contas, o primeiro bundle de cada `app_key + ad_account_id` pode iniciar em paralelo pelo `ThreadPoolExecutor`. Não existe canário global único antes das outras lanes; os bundles seguintes de cada lane obedecem à própria quota.
 
@@ -100,7 +100,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - falhas após possível side effect ficam `READBACK_DEFERRED`/`POSTPROCESS_PENDING`, nunca `FAILED` fora do gate;
 - `BatchTransportError` persiste etapa e causa Meta sanitizada (`code/subcode/user_title`) para o alerta; paths, headers sensíveis, token e trace não entram na mensagem ao operador;
 - simulação de erro confirma que o state recebe `manual_reconciliation_required=true` e `operator_authorization.required=true`, impedindo retomada/write corretivo automático;
-- conclusão programada inclui `account_budget_after_creation` e a mensagem Discord informa budget ativo, restante e cap em USD;
+- conclusão programada inclui `account_budget_after_creation`; a mensagem Discord informa budget ativo, envelope efetivo, saldo dentro do envelope e USD;
 - REPORT-INFRA para qualquer mudança estrutural.
 
 ## Pitfalls

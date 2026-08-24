@@ -73,10 +73,30 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-17-20260824",
+      "title": "Ares v3.0.14 cria somente após lifecycle gate",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T15:02:37-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-17-20260824",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares v3.0.14 cria somente após lifecycle gate",
-      "updated_at": "2026-08-22T21:24:43+00:00"
+      "title": "Ares Campaign Engine v3.0.17 uses dynamic authorized budget envelopes",
+      "updated_at": "2026-08-24T18:12:23+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -110,10 +130,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DYNAMIC-BUDGET-ENVELOPE-V2",
       "title": "Creditoparaveiculo G006 operational account cap USD500",
-      "updated_at": "2026-08-22T05:19:11+00:00"
+      "updated_at": "2026-08-24T18:12:23+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.campaign-numbering",
@@ -148,10 +168,30 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-CREATION-SCHEDULER-RESUMED-V2",
+      "title": "Creditoparaveiculo creation is conditional after D1-D3 lifecycle review",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creation-lifecycle-loop",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T14:02:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-CREATION-SCHEDULER-RESUMED-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Creditoparaveiculo creation is conditional after D1-D3 lifecycle review",
-      "updated_at": "2026-08-22T21:24:43+00:00"
+      "title": "Creditoparaveiculo daily 17h campaign creation resumed",
+      "updated_at": "2026-08-24T18:12:23+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -265,6 +305,26 @@
       "superseded_by": "ARES-CREDITOPARAVEICULO-REPORT-CHUNK-RETRY-V10",
       "title": "Creditoparaveiculo Diário 07/08/12/14/16/20 com Intraday preservado",
       "updated_at": "2026-08-21T18:27:54+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.operational-account-cap",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T14:02:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DYNAMIC-BUDGET-ENVELOPE-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo dynamic internal budget envelope for creation and ROI scale",
+      "updated_at": "2026-08-24T18:12:23+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -1489,5 +1549,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T15:14:06+00:00"
+  "updated_at": "2026-08-24T18:12:23+00:00"
 }
