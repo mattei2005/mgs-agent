@@ -696,6 +696,23 @@
       "updated_at": "2026-08-20T21:59:16+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.post-cut-lifecycle",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T10:15:18-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV G006 terminal cut immediate finalization",
+      "updated_at": "2026-08-25T13:53:48+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -1798,5 +1815,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T12:56:49+00:00"
+  "updated_at": "2026-08-25T13:53:48+00:00"
 }
