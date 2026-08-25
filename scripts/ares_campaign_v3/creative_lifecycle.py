@@ -67,16 +67,22 @@ def _classification_event(
     status = str(campaign.get("status") or "").upper()
 
     terminal_reason = str(checkpoint_state.get("terminal_reason") or "")
-    terminal_d3 = (
-        cycle_day == 3
-        and status == "PAUSED"
+    rejected_policy = policy.get("rejected") or {}
+    terminal_reasons = set(
+        rejected_policy.get("requires_terminal_reason_any")
+        or {"PARAR D3 ESTIMADO", "PARAR D3 REAL+ROAS"}
+    )
+    d3_reason = terminal_reason in {"PARAR D3 ESTIMADO", "PARAR D3 REAL+ROAS"}
+    terminal_cut = (
+        status == "PAUSED"
         and checkpoint_state.get("terminal") is True
-        and terminal_reason in {"PARAR D3 ESTIMADO", "PARAR D3 REAL+ROAS"}
+        and terminal_reason in terminal_reasons
+        and (not d3_reason or cycle_day == 3)
         and _negative(actual)
         and (terminal_reason == "PARAR D3 REAL+ROAS" or _negative(estimated))
     )
-    if terminal_d3:
-        return "D3_REJECTED"
+    if terminal_cut:
+        return "TERMINAL_REJECTED"
 
     winner = policy.get("winner") or {}
     if cycle_day == 4 and now_sp.hour == int(winner.get("d4_checkpoint_hour") or 16):
@@ -103,10 +109,10 @@ def classify_campaign_assets(
 ) -> list[dict[str, Any]]:
     """Classify one campaign's assets without performing external writes.
 
-    Plain Meta DELETED/PAUSED state never implies rejection. D3 rejection requires
-    the persisted terminal performance reason. D4/D5 winners require both real and
-    estimated ROI to be positive. Underexposed assets are only released for retest
-    after a terminal D3 campaign; underexposed assets in a live winner remain TESTING.
+    Plain Meta DELETED/PAUSED state never implies rejection. Terminal rejection requires
+    a persisted performance-cut reason from the operation policy. D4/D5 winners require
+    both real and estimated ROI to be positive. Underexposed assets are only released
+    for retest after a terminal cut; underexposed assets in a live winner remain TESTING.
     """
     if lifecycle_policy.get("enabled") is not True or anomaly:
         return []
@@ -157,15 +163,15 @@ def classify_campaign_assets(
             "impressions": int(metrics["impressions"]),
             "impression_share_pct": impression_share,
             "test_attempt_count": attempts,
-            "terminal_reason": terminal_reason if event == "D3_REJECTED" else None,
+            "terminal_reason": terminal_reason if event == "TERMINAL_REJECTED" else None,
         }
-        if event == "D3_REJECTED":
+        if event == "TERMINAL_REJECTED":
             if meaningful:
-                evaluation_status = (
-                    "REJECTED_D3_REALIDADE_ECONOMICA"
-                    if terminal_reason == "PARAR D3 REAL+ROAS"
-                    else "REJECTED_D3_ESTIMADO_NEGATIVO"
-                )
+                evaluation_status = {
+                    "PARAR D3 REAL+ROAS": "REJECTED_D3_REALIDADE_ECONOMICA",
+                    "PARAR D3 ESTIMADO": "REJECTED_D3_ESTIMADO_NEGATIVO",
+                    "PARAR RECORRÊNCIA": "REJECTED_RECORRENCIA_TERMINAL",
+                }.get(terminal_reason, "REJECTED_CORTE_TERMINAL")
                 decisions.append({
                     **base,
                     "target_status": "05_REJECTED",
