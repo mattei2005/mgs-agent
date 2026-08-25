@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Quiz Carro
  * Description: Quiz de captação de leads (crédito veicular) com integração SMS Funnel. Autônomo, sem dependência externa.
- * Version:     1.7.9
+ * Version:     1.7.10
  * Author:      MGS Digital Corp
  * License:     GPLv2 or later
  * Text Domain: mgs-quiz-carro
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MGS_QUIZ_VERSION', '1.7.9' );
+define( 'MGS_QUIZ_VERSION', '1.7.10' );
 define( 'MGS_QUIZ_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MGS_QUIZ_URL', plugin_dir_url( __FILE__ ) );
 define( 'MGS_QUIZ_DB_VERSION', '1.3.0' );

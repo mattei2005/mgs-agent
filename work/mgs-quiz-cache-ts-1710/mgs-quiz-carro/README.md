@@ -103,6 +103,9 @@ DELETE FROM wp_options WHERE option_name = 'mgs_quiz_db_version';
 
 ## Changelog
 
+- **1.7.10**
+  - Reinicializa no navegador o timestamp anti-spam ao carregar o JavaScript público, impedindo `formulário expirado` causado por HTML servido do page cache.
+  - Reinicializa novamente ao restaurar a página pelo back-forward cache do navegador.
 - **1.1.1**
   - `require_sms_success` por config, ativo por padrão; falha no SMS Funnel retorna `ok:false` e bloqueia redirect.
   - Pixel/evento Lead movido para depois de `ok:true`.

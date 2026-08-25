@@ -106,6 +106,16 @@
 
   // Step 2: mask + submit
   var phoneInput = step2.querySelector('input[name="phone"]');
+  var tsInput    = step2.querySelector('input[name="ts"]');
+  function resetFormTimestamp() {
+    if (tsInput) tsInput.value = String(Date.now());
+  }
+  // O HTML público pode vir de page cache. Nunca use como início do formulário
+  // o timestamp renderizado pelo servidor dentro de uma página cacheada.
+  resetFormTimestamp();
+  window.addEventListener('pageshow', function (ev) {
+    if (ev.persisted) resetFormTimestamp();
+  });
   if (phoneInput) {
     phoneInput.addEventListener('input', function () { phoneInput.value = maskPhone(phoneInput.value); });
   }
@@ -115,7 +125,6 @@
     clearError();
     var nameInput = step2.querySelector('input[name="name"]');
     var hpInput   = step2.querySelector('input[name="website"]');
-    var tsInput   = step2.querySelector('input[name="ts"]');
     var submitBtn = step2.querySelector('.mgs-quiz-submit');
 
     var name  = ((nameInput && nameInput.value) || '').trim();
