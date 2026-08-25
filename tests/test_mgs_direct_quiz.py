@@ -72,6 +72,12 @@ console.log(JSON.stringify({dest}));
         self.assertNotIn('page_id=', dest)
         self.assertIsNone(re.search(r'[?&]p=', dest))
 
+    def test_unknown_manager_route_is_forced_to_real_404(self):
+        php = read('includes/class-mgs-direct-quiz.php')
+        self.assertIn("$wp_query->set_404()", php)
+        self.assertIn("get_404_template()", php)
+        self.assertIn("status_header( 404 )", php)
+
     def test_php_lint_all_plugin_files(self):
         for php in ROOT.rglob('*.php'):
             subprocess.check_call(['php', '-l', str(php)], stdout=subprocess.DEVNULL)

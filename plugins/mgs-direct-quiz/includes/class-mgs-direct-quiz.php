@@ -78,7 +78,17 @@ final class MGS_Direct_Quiz {
 
         $item = self::find_by_route( $country, $slug );
         if ( ! $item ) {
-            return;
+            global $wp_query;
+            if ( is_object( $wp_query ) && method_exists( $wp_query, 'set_404' ) ) {
+                $wp_query->set_404();
+            }
+            status_header( 404 );
+            nocache_headers();
+            $template = get_404_template();
+            if ( $template ) {
+                include $template;
+            }
+            exit;
         }
 
         status_header( 200 );
