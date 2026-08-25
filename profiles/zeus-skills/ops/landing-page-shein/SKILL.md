@@ -20,7 +20,7 @@ Use quando Rodolfo pedir criação, edição, duplicação, implantação, audit
 
 Skill exclusiva das landing pages de tráfego direto SHEIN. Não misturar com `wp-quiz-lead-funnel` nem com o produto Creditoparaveiculo.
 
-O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor em rotas principais como `/quiz/us/quiz-g002/` e variações do mesmo gestor como `/quiz/us/quiz-g002-v1/`, oferecendo interface administrativa para criar, editar, ativar/desativar e duplicar configurações.
+O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor com a versão visual antes do gestor: LP2 em `/quiz/us/quiz-v2-g002/` e LP1 em `/quiz/us/quiz-v1-g002/`. A interface administrativa permite criar, editar, ativar/desativar e duplicar configurações.
 
 ## Contrato do produto
 
@@ -47,7 +47,7 @@ No painel, usar o menu `Landing SHEIN`:
 1. Abrir `Landing SHEIN > Todas as landings`.
 2. Na landing-base, clicar `Duplicar`.
 3. Confirmar que aparece `Cópia criada inativa`.
-4. Definir nome interno, gestor `Gxxx` e slug correspondente. Use `quiz-gxxx` na principal; para outra versão do mesmo gestor, use `quiz-gxxx-vN` (por exemplo, `quiz-g002-v1`).
+4. Definir nome interno, gestor `Gxxx` e slug correspondente ao modelo: `quiz-v2-gxxx` para LP2 ou `quiz-v1-gxxx` para LP1.
 5. Revisar modelo LP1/LP2, copy, logo e URLs dos dois CTAs.
 6. Manter ambos os destinos iguais quando esse for o desenho aprovado.
 7. Salvar ainda inativa e validar a configuração por readback.
@@ -62,6 +62,7 @@ No painel, usar o menu `Landing SHEIN`:
 5. Ativar e validar versão por WP-CLI.
 6. Limpar cache do WordPress e CDN quando aplicável.
 7. Comparar manifesto SHA-256 da fonte com produção.
+8. Se um arquivo temporário remoto for transferido ao ownership `runcloud`, removê-lo com `sudo rm`; `rm` pelo usuário `zeus` falha com `Operation not permitted` mesmo após deploy bem-sucedido.
 
 ## Validação obrigatória
 
@@ -92,10 +93,9 @@ Não use geração por IA quando um recorte lossless resolve; geração só é n
 ## Estado inicial validado
 
 - Piloto: `yolokfx.com`.
-- Plugin: `mgs-direct-quiz` v1.0.4.
+- Plugin: `mgs-direct-quiz` v1.0.5.
 - Interface administrativa em cards, com Biblioteca de Mídia para o logo.
-- G002 LP2: `https://yolokfx.com/quiz/us/quiz-g002/`, logo YolokFX otimizado para 600×125.
-- G002 V1/LP1: `https://yolokfx.com/quiz/us/quiz-g002-v1/`.
-- Rota: `https://yolokfx.com/quiz/us/quiz-g002/`.
+- G002 LP2: `https://yolokfx.com/quiz/us/quiz-v2-g002/`, logo YolokFX otimizado para 600×125.
+- G002 LP1: `https://yolokfx.com/quiz/us/quiz-v1-g002/`.
 - Destino: `https://yolokfx.com/rec-us-app-shein-circle-of-style/`.
 - `vizioid.com` permanece segunda etapa até aprovação explícita do canário.

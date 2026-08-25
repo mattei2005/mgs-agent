@@ -573,12 +573,12 @@
     {
       "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
-      "next_step": "Rodolfo validar as duas versões; após aprovação, replicar pacote e configurações necessárias no Vizioid",
-      "objective": "Operar landing SHEIN com interface WordPress, LP1/LP2 e variações por gestor",
+      "next_step": "Rodolfo validar as duas URLs; Vizioid permanece sem alteração até nova autorização",
+      "objective": "Operar landing SHEIN com interface WordPress, LP1/LP2 e slugs canônicas por modelo",
       "source": "context/acquisition.md#alocação-ativa-de-tráfego-direto",
-      "state": "yolokfx concluído em mgs-direct-quiz v1.0.4: g002 lp2 ativo em quiz-g002 e g002 v1/lp1 ativo em quiz-g002-v1; ambos levam ao mesmo rec e preservam utms; interface em cards com duplicação e media library; logo lp2 otimizado; 10/10 testes e chromium mobile aprovados",
+      "state": "yolokfx concluído em mgs-direct-quiz v1.0.5: g002 lp2 ativo em quiz-v2-g002 e lp1 ativo em quiz-v1-g002; slugs antigas retornam 404; ambos levam ao mesmo rec e preservam utms; 10/10 testes, chromium mobile e clique real aprovados",
       "thread_id": "1541914123376402452",
-      "updated_at": "2026-08-25T22:30:16+00:00"
+      "updated_at": "2026-08-25T22:45:28+00:00"
     },
     {
       "agent": "zeus",
@@ -1242,5 +1242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T22:30:16+00:00"
+  "updated_at": "2026-08-25T22:45:28+00:00"
 }
