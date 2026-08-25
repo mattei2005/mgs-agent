@@ -173,12 +173,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-POST-CUT-FINALIZATION-20260825",
-      "next_step": "Persistir snapshot, excluir sete campanhas com readback, reconciliar/classificar 21 assets, implementar runtime futuro e editar mensagens canônicas",
+      "next_step": "Monitorar o próximo corte terminal real: o fluxo deve terminar no mesmo checkpoint ou manter PAUSED resumível se qualquer readback criativo/Drive/inventário falhar",
       "objective": "Automatizar e executar o ciclo completo após corte terminal: pausa, auditoria criativa, movimento, exclusão Meta e atualização do manual CPV Regras",
       "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "em execução: preflight meta/inventário concluído; c13-c18/c20 pausadas terminais; dois retestes provisórios na c20; mensagem cpv regras importada para edição in-place",
+      "state": "concluído: c13-c18/c20 deleted por readback; 21 criativos classificados/movidos (13 rejected, 8 tested, 2 retest elegíveis); runtime pós-corte sem retenção de 24h ativo; skills 1.0.54/1.0.37; cpv regras editado in-place; inventário e report-infra reconciliados",
       "thread_id": "1541608945704247408",
-      "updated_at": "2026-08-25T13:24:01+00:00"
+      "updated_at": "2026-08-25T13:56:13+00:00"
     },
     {
       "agent": "ares",
@@ -1212,5 +1212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T13:24:01+00:00"
+  "updated_at": "2026-08-25T13:56:13+00:00"
 }

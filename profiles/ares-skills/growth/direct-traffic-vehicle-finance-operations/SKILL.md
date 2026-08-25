@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.36
+version: 1.0.37
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -306,6 +306,20 @@ Quando nenhuma rota acionar o corte, apenas às 08:00 continuam valendo as faixa
 
 Conclusão: um estimado moderadamente positivo nunca salva uma campanha com perda real D1–D3 e ROAS abaixo do piso quando todo o gate de realidade está provado.
 
+### Pós-corte terminal — conclusão imediata
+
+Todo corte terminal desta operação (`PARAR D3 ESTIMADO`, `PARAR D3 REAL+ROAS` ou terceira ocorrência `PARAR RECORRÊNCIA`) dispara o ciclo completo no mesmo checkpoint, sem retenção de 24 horas:
+
+1. Persistir a decisão e confirmar a campanha `PAUSED` por GET.
+2. Capturar/preservar a entrega acumulada em nível de anúncio e reconciliar exatamente os três assets da campanha.
+3. Classificar `spend share >= 10%` como `05_REJECTED`; abaixo de 10% como `03_TESTED / INCONCLUSIVO_POR_SUBENTREGA`.
+4. Liberar reteste somente com menos de duas tentativas, nenhuma utilização Meta ativa e identidade Drive↔inventário íntegra; após duas tentativas, o asset não volta ao pool.
+5. Mover os três assets no Shared Drive canônico usando a Service Account MGS e exigir readback Drive + inventário.
+6. Somente depois da finalização criativa, enviar uma vez `status=DELETED` no nível campanha e aceitar `DELETED` ou `ARCHIVED` no GET terminal.
+7. Persistir audit e estado resumível. Erro ambíguo recebe GET antes de qualquer nova tentativa; nunca repetir POST às cegas.
+
+Se identidade, entrega, Drive, inventário ou readback estiver incompleto, a campanha permanece `PAUSED` sem gastar, e a exclusão fica bloqueada até concluir somente a camada faltante. Pausas temporárias das ocorrências 1–2 não entram nesse fluxo.
+
 ### Guardrail pós-escala das 16:00
 
 A agenda do próprio dia é `08:00/12:00/14:00/16:00/20:00`; 07:00 permanece o dia anterior fechado. A escala acontece somente às 08:00.
@@ -535,6 +549,8 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] Estimado positivo e RPS não vetam a pausa quando o gate D3 v2 completo está provado
 - [ ] Às 16:00, somente campanha escalada às 08:00 com ROI geral e estimado negativos recebe pausa temporária/terminal
 - [ ] Ocorrências 1–2 reativam às 00:30; ocorrência 3 e D3 terminal nunca reativam
+- [ ] Todo corte terminal confirma PAUSED, classifica/move três criativos com readback e conclui em DELETED/ARCHIVED sem retenção de 24 horas
+- [ ] Falha de identidade/Drive/inventário mantém PAUSED e bloqueia a exclusão até a camada faltante ser reconciliada
 - [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping
 - [ ] SMS enviados G006 filtrados por data nas duas linhagens SMS Funnel explícitas de quiz/chat
 - [ ] Custo SMS G006 validado por `envios × R$ 0,08`, exibido em USD via PTAX venda BCB com data/fonte e sem atribuição do consolidado global

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-25T09:14:34-04:00",
+    "updated_at": "2026-08-25T09:51:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7704,17 +7704,17 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 176819,
-      "modified_at": "2026-08-25T08:54:16-04:00",
-      "sha256": "630a6bd2a7706801b71f57b6403b253eaf780d6ff0c8b392323bd685dc08b8d2",
-      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with D3 v2 reality gate, read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
-      "validation": "72 targeted tests PASS. Live D3 v2 plan selected only C13/C14/C15/C16/C18; five campaign-level pauses verified PAUSED by Meta GET, while C11/C19 remained ACTIVE. C15 returned HTTP 500/code 2 after applying the write and was reconciled as PAUSED by immediate HTTP 200 GET without retry.",
+      "size_bytes": 193417,
+      "modified_at": "2026-08-25T09:41:50-04:00",
+      "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with D3 v2 and immediate resumable post-cut lifecycle: pause readback, creative classification/Drive movement, terminal campaign deletion and audit.",
+      "validation": "76 targeted tests PASS; py_compile and operation JSON validation PASS; live report-only dry-run PASS. C13-C18/C20 confirmed DELETED by Meta GET; 21 creatives moved with Drive/inventory readback; current post-cut reconciler completed seven targets with zero additional Meta writes.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "0ecdd01f184255ed98c78b3132efda090b81a7b0829eee8e95ad74cb4c57164a",
+      "test_sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "6d2ffe5746652926a4fa15864e696b1d70ebcae853af458d027d297959720a8f",
-      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260825T114607Z.json",
-      "last_report_sha256": "921c30c153088ace57e2b14692afb8ca3135c1a8b247563b686da92ff9e89329",
+      "operation_sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d",
+      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260825T134628Z.json",
+      "last_report_sha256": "aaf8de5cf2017fa26a6a37eac126252f70717956a1055d9ad7c2576140afe845",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1541776582656663664",
@@ -7728,13 +7728,13 @@
         "authorization_source": "discord:thread:1541608945704247408",
         "policy": "D3 terminal at 08:00/12:00 when >=2 real-negative days, cumulative ROI <=-10%, D3 real <0, Meta omni ROAS <1.20, current Meta spend >=USD5, one SB match and delay <=120min; estimate/RPS do not veto",
         "wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
-        "lifecycle_runtime_sha256": "aa2358d7a465b47a9ef364bac217f58b34eeca4ef472d90ad10e3fd1edd5e548",
-        "lifecycle_test_sha256": "16d637f3dfc96049662c396c9b7531298841dfbc0e3d2bec62d9dae826a5f5e0",
-        "direct_traffic_cbo_skill_version": "1.0.53",
-        "direct_traffic_cbo_skill_sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c",
-        "vehicle_finance_skill_version": "1.0.36",
-        "vehicle_finance_skill_sha256": "a500b35a0e895a96c1c7f2915ee89dd80ad502533ba3cc3c55402cb6ddb95d7d",
-        "playbook_version": "1.0.71",
+        "lifecycle_runtime_sha256": "e3d1fbb3399d00002c9dfb48fe1cc80d545fd784bd950c7cf15811983256ae3c",
+        "lifecycle_test_sha256": "413f3c8b3725f3e1e343d0f27ff8b05f0fd98aa64798122acb7efc39116dabb4",
+        "direct_traffic_cbo_skill_version": "1.0.54",
+        "direct_traffic_cbo_skill_sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654",
+        "vehicle_finance_skill_version": "1.0.37",
+        "vehicle_finance_skill_sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec",
+        "playbook_version": "1.0.72",
         "execution_record_sha256": "bd0f016cc3a78e198ccecb5358c7cbfcd719e47f248ee82a8079e8e51550b879",
         "action_audit_sha256": "dbad037e773222a382cf3a0f8b83a2f8dbc844f2fef78ada4c96fc2be8200ed7",
         "paused_campaigns": [
@@ -7748,7 +7748,7 @@
           "C11",
           "C19"
         ],
-        "tests": "72 passed",
+        "tests": "76 passed",
         "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
         "knowledge_checkpoint_id": "ARES-CPV-D3-REALITY-V2-20260825",
         "knowledge_validation": "status=ok; errors=0; registry_entries=97; checkpoints=120",
@@ -7771,16 +7771,16 @@
           "thread_created": false,
           "reason": "aligned generic action checkpoints with the approved 12:00 D3 v2 recheck"
         },
-        "meta_readback": "all five targets configured_status/effective_status PAUSED via HTTP 200 GET"
+        "meta_readback": "C13-C18/C20 status/configured_status/effective_status DELETED via HTTP 200 GET; no duplicate POST after ambiguous local post-processing error"
       },
       "git_tracked": false,
-      "updated_at": "2026-08-25T08:54:16-04:00",
+      "updated_at": "2026-08-25T09:51:43-04:00",
       "intraday_wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
       "guardrail_reactivation_cron_id": "5d0974e97ebd",
-      "direct_traffic_cbo_skill_sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c",
-      "vehicle_finance_skill_sha256": "a500b35a0e895a96c1c7f2915ee89dd80ad502533ba3cc3c55402cb6ddb95d7d",
+      "direct_traffic_cbo_skill_sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654",
+      "vehicle_finance_skill_sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec",
       "meta_intraday_skill_sha256": "03b3a0211ac4e6511d4fe81e2e0f6ee08f23850ef56f6f9b8246f8cbe0f34798",
       "first_delivery_guardrail_20260822": {
         "authorized_by": "Rodolfo Mattei",
@@ -8434,7 +8434,130 @@
           }
         }
       },
-      "creative_performance_lifecycle_release_id": "ares-cpv-creative-performance-lifecycle-retest-20260824"
+      "creative_performance_lifecycle_release_id": "ares-cpv-creative-performance-lifecycle-retest-20260824",
+      "post_cut_lifecycle_20260825": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1541608945704247408",
+        "policy": "zero-hour retention; PAUSED readback -> preserve ad-level delivery -> classify and move exactly three creatives with Drive/inventory readback -> one status=DELETED POST -> GET DELETED/ARCHIVED -> resumable audit",
+        "terminal_reasons": [
+          "PARAR D3 ESTIMADO",
+          "PARAR D3 REAL+ROAS",
+          "PARAR RECORRÊNCIA"
+        ],
+        "temporary_pause_excluded": "PAUSAR 16H TEMPORÁRIO",
+        "deleted_campaigns": [
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C20"
+        ],
+        "campaign_delete_readback": {
+          "count": 7,
+          "all_http_200": true,
+          "all_terminal": true,
+          "duplicate_posts": 0
+        },
+        "creative_results": {
+          "total": 21,
+          "05_REJECTED": 13,
+          "03_TESTED": 8,
+          "retest_eligible": 2,
+          "drive_inventory_readback_all_ok": true
+        },
+        "artifacts": {
+          "fixed_reports": {
+            "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+            "size_bytes": 193417,
+            "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
+          },
+          "lifecycle_runtime": {
+            "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+            "size_bytes": 15363,
+            "sha256": "e3d1fbb3399d00002c9dfb48fe1cc80d545fd784bd950c7cf15811983256ae3c"
+          },
+          "fixed_tests": {
+            "path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
+            "size_bytes": 69619,
+            "sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36"
+          },
+          "lifecycle_tests": {
+            "path": "/root/mgs-agent/tests/test_ares_cpv_creative_lifecycle.py",
+            "size_bytes": 8255,
+            "sha256": "413f3c8b3725f3e1e343d0f27ff8b05f0fd98aa64798122acb7efc39116dabb4"
+          },
+          "operation": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+            "size_bytes": 127215,
+            "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
+          },
+          "creative_inventory": {
+            "path": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+            "size_bytes": 969358,
+            "sha256": "de3b39b426e4329e9f5649882756704ea1ee2c45d624c50a682a2a96c8652676"
+          },
+          "delete_audit": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/post-cut-delete-20260825T102508-0300.json",
+            "size_bytes": 10407,
+            "sha256": "e2e1e91f4497d5075ab74649bed09240e2ec14c5318894688b04968ea02dcfec"
+          },
+          "creative_audit": {
+            "path": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/20260825T103441-0300-post-cut-39c22f70dd22.json",
+            "size_bytes": 38645,
+            "sha256": "b77ec0068a71a288b4528de5093d8e0ce02992a72c38780b8b417eb63729fe62"
+          },
+          "postcut_audit": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/post-cut-20260825T134700387826Z.json",
+            "size_bytes": 10246,
+            "sha256": "a4f4cf11c1fc05ffbd20712a6192789a322a445eed2e55b4beb63aca7e503ead"
+          },
+          "postcut_state": {
+            "path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-post-cut-lifecycle.json",
+            "size_bytes": 3794,
+            "sha256": "bc4a4ffa081da7d2d86799b52f263eeab629a90ff003f278f14fa47a6c585ba8"
+          },
+          "discord_audit": {
+            "path": "/root/mgs-agent/data/ares/discord-audit/cpv-rules-update-20260825T134924955726Z.json",
+            "size_bytes": 4317,
+            "sha256": "2a686a71dd4a45f84360456ea2172e4e3bcad3276f9783fc4351bedb7d30c2ce"
+          },
+          "discord_import": {
+            "path": "/root/mgs-agent/data/discord-thread-imports/1540426218405363873.json",
+            "size_bytes": 33759,
+            "sha256": "1672b86973bbaad03a46f19f9ec5307bcf09fc328dfde60151af692da75a318b"
+          }
+        },
+        "skills": {
+          "direct_traffic_cbo": {
+            "version": "1.0.54",
+            "sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654"
+          },
+          "vehicle_finance": {
+            "version": "1.0.37",
+            "sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec"
+          }
+        },
+        "cpv_rules_thread": {
+          "thread_id": "1540426218405363873",
+          "message_count_before_after": 16,
+          "messages_edited_in_place": 8,
+          "patch_http": 200,
+          "readback_http": 200,
+          "all_verified": true,
+          "new_messages_created": 0
+        },
+        "validation": {
+          "tests": "76 passed",
+          "py_compile": "PASS",
+          "operation_json": "PASS",
+          "live_report_only_dry_run": "PASS",
+          "live_postcut_reconcile": "COMPLETED; 7 already_deleted_verified; meta_writes=0"
+        },
+        "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
+        "knowledge_checkpoint_id": "ARES-CPV-POST-CUT-FINALIZATION-20260825"
+      }
     },
     {
       "id": "wordpress-ads-txt-single-line-rollout-20260820",
@@ -9194,20 +9317,22 @@
       "owner": "Rodolfo Mattei / Ares",
       "status": "active_validated",
       "authorized_by": "Rodolfo Mattei",
-      "authorization_source": "discord:thread:1541563564207243335",
+      "authorization_source": "discord:thread:1541608945704247408",
       "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
-      "policy_version": "1.0.0",
+      "policy_version": "1.1.0",
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
       "behavior": {
         "meaningful_delivery_share_pct": 10,
-        "d3_rejected": "campaign PAUSED terminal by PARAR D3 ESTIMADO or PARAR D3 REAL+ROAS; the estimated route requires actual/estimated negative, while the reality route permits a positive estimate after its compound gate; only assets with >=10% cumulative spend share",
+        "d3_rejected": "campaign PAUSED terminal by PARAR D3 ESTIMADO or PARAR D3 REAL+ROAS; reality route permits positive estimate after the full compound gate; >=10% cumulative spend share goes 05_REJECTED",
         "d4_winner": "actual and estimated ROI > 0 at both 08:00 and 16:00; only assets with >=10% cumulative spend share",
         "d5_winner": "actual and estimated ROI > 0 at 08:00; only assets with >=10% cumulative spend share",
-        "underexposed_terminal": "03_TESTED + INCONCLUSIVO_POR_SUBENTREGA; retest eligible while attempts < 2",
+        "underexposed_terminal": "03_TESTED + INCONCLUSIVO_POR_SUBENTREGA; retest eligible only while attempts <2 and no active Meta use",
         "underexposed_live_winner": "remain 02_TESTING and ineligible until no active use",
         "selection_mix": "2x 01_READY + 1x 03_TESTED eligible per campaign; fallback third slot to READY",
         "campaign_deleted_alone_rejects": false,
-        "meta_writes": 0
+        "meta_writes": "creative lifecycle=0; post-cut finalizer=one terminal campaign status write after complete creative readback",
+        "terminal_recurrence": "PARAR RECORRÊNCIA is terminal after the verified third 16:00 failure; actual and estimated ROI must be negative",
+        "post_cut": "no 24h retention; classify/move all three assets first, then delete campaign and read back DELETED/ARCHIVED"
       },
       "artifacts": {
         "daily_runtime": {
@@ -9217,23 +9342,23 @@
         },
         "lifecycle_runtime": {
           "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
-          "size_bytes": 14630,
-          "sha256": "aa2358d7a465b47a9ef364bac217f58b34eeca4ef472d90ad10e3fd1edd5e548"
+          "size_bytes": 15363,
+          "sha256": "e3d1fbb3399d00002c9dfb48fe1cc80d545fd784bd950c7cf15811983256ae3c"
         },
         "fixed_reports": {
           "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-          "size_bytes": 176819,
-          "sha256": "630a6bd2a7706801b71f57b6403b253eaf780d6ff0c8b392323bd685dc08b8d2"
+          "size_bytes": 193417,
+          "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
         },
         "operation": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "sha256": "6d2ffe5746652926a4fa15864e696b1d70ebcae853af458d027d297959720a8f",
-          "size_bytes": 125507
+          "size_bytes": 127215,
+          "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
         },
         "tests": {
           "daily": "617726fb8534b8cff3e11d2caf85c914625ead5806d30d95e7390be604153ab0",
-          "lifecycle": "16d637f3dfc96049662c396c9b7531298841dfbc0e3d2bec62d9dae826a5f5e0",
-          "fixed_reports": "0ecdd01f184255ed98c78b3132efda090b81a7b0829eee8e95ad74cb4c57164a"
+          "lifecycle": "413f3c8b3725f3e1e343d0f27ff8b05f0fd98aa64798122acb7efc39116dabb4",
+          "fixed_reports": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36"
         }
       },
       "skills": {
@@ -9248,17 +9373,21 @@
           "route_pack_01_sha256": "32a2829ac92779de911f6f6b2db835ccdc688562fd301adb4ce22174e272f2c7"
         },
         "direct_traffic_cbo": {
-          "version": "1.0.53",
-          "sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c"
+          "version": "1.0.54",
+          "sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654"
         },
         "meta_campaign_engine_v3": {
           "version": "3.0.19",
           "sha256": "73e9528d7497cccced2b493b59fc83e03ff21c59580dfd78895580229e087dcc"
+        },
+        "vehicle_finance": {
+          "version": "1.0.37",
+          "sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec"
         }
       },
       "validation": {
-        "targeted_tests": "146 passed",
-        "d3_v2_regression_tests": "72 passed",
+        "targeted_tests": "76 passed",
+        "d3_v2_regression_tests": "76 passed",
         "py_compile": "PASS",
         "json_validation": "PASS",
         "git_diff_check": "PASS",
@@ -9289,13 +9418,13 @@
           },
           "audit_sha256": "2682b1e3312fcff8577885fb834aba1ac4cf561ef9cc28cced8e985911abee18"
         },
-        "existing_assets_moved_at_deploy": 0,
-        "reason_no_existing_move": "No D3 terminal or D4/D5 checkpoint classification was executed during deployment; future 08:00/16:00 guarded checkpoints apply the policy."
+        "existing_assets_moved_at_deploy": 21,
+        "asset_classification": "13 rejected; 8 tested; 2 retest eligible; all Drive/inventory readbacks OK",
+        "live_postcut_reconcile": "COMPLETED with zero additional Meta writes after seven campaigns were already terminal"
       },
       "knowledge": {
-        "registry_id": "growth-creditoparaveiculo-br-car-br-g006-creative-performance-lifecycle-v1",
-        "registry_sha256": "9935c5f20a3e6ba84e4260c898d2fc6d7128af26bf51e76ea7f0b24ec30fe9a3",
-        "checkpoint_id": "ARES-CPV-CREATIVE-LIFECYCLE-RETEST-20260824"
+        "registry_id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
+        "checkpoint_id": "ARES-CPV-POST-CUT-FINALIZATION-20260825"
       },
       "report_infra": {
         "status": "sent_and_readback_confirmed",
@@ -9308,7 +9437,7 @@
         "thread_created": false,
         "title": "REPORT-INFRA — modificada"
       },
-      "updated_at": "2026-08-24T18:20:30.735252-04:00"
+      "updated_at": "2026-08-25T09:51:43-04:00"
     },
     {
       "id": "lyzmofinanzas-us-cc-es-smart-routing-five-url-20260824",
@@ -9659,6 +9788,149 @@
       "unfreeze_summary_sha256": "7b8f29a807faee52bc0caff34c1a0923787e29f8bc054e65398d2cd7a1da5848",
       "freeze_sessions_nonzero": 0,
       "optimizer_enabled": true
+    },
+    {
+      "id": "ares-cpv-terminal-post-cut-lifecycle-20260825",
+      "agent": "ares",
+      "type": "campaign_creative_terminal_lifecycle",
+      "owner": "Rodolfo Mattei / Ares",
+      "status": "active_validated",
+      "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1541608945704247408",
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.post-cut-lifecycle",
+      "policy_version": "1.0.0",
+      "retention_hours": 0,
+      "sequence": [
+        "pause_and_readback",
+        "creative_snapshot_classify_move_readback",
+        "delete_and_readback",
+        "audit_complete"
+      ],
+      "results": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1541608945704247408",
+        "policy": "zero-hour retention; PAUSED readback -> preserve ad-level delivery -> classify and move exactly three creatives with Drive/inventory readback -> one status=DELETED POST -> GET DELETED/ARCHIVED -> resumable audit",
+        "terminal_reasons": [
+          "PARAR D3 ESTIMADO",
+          "PARAR D3 REAL+ROAS",
+          "PARAR RECORRÊNCIA"
+        ],
+        "temporary_pause_excluded": "PAUSAR 16H TEMPORÁRIO",
+        "deleted_campaigns": [
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C20"
+        ],
+        "campaign_delete_readback": {
+          "count": 7,
+          "all_http_200": true,
+          "all_terminal": true,
+          "duplicate_posts": 0
+        },
+        "creative_results": {
+          "total": 21,
+          "05_REJECTED": 13,
+          "03_TESTED": 8,
+          "retest_eligible": 2,
+          "drive_inventory_readback_all_ok": true
+        },
+        "artifacts": {
+          "fixed_reports": {
+            "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+            "size_bytes": 193417,
+            "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
+          },
+          "lifecycle_runtime": {
+            "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+            "size_bytes": 15363,
+            "sha256": "e3d1fbb3399d00002c9dfb48fe1cc80d545fd784bd950c7cf15811983256ae3c"
+          },
+          "fixed_tests": {
+            "path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
+            "size_bytes": 69619,
+            "sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36"
+          },
+          "lifecycle_tests": {
+            "path": "/root/mgs-agent/tests/test_ares_cpv_creative_lifecycle.py",
+            "size_bytes": 8255,
+            "sha256": "413f3c8b3725f3e1e343d0f27ff8b05f0fd98aa64798122acb7efc39116dabb4"
+          },
+          "operation": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+            "size_bytes": 127215,
+            "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
+          },
+          "creative_inventory": {
+            "path": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+            "size_bytes": 969358,
+            "sha256": "de3b39b426e4329e9f5649882756704ea1ee2c45d624c50a682a2a96c8652676"
+          },
+          "delete_audit": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/post-cut-delete-20260825T102508-0300.json",
+            "size_bytes": 10407,
+            "sha256": "e2e1e91f4497d5075ab74649bed09240e2ec14c5318894688b04968ea02dcfec"
+          },
+          "creative_audit": {
+            "path": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/20260825T103441-0300-post-cut-39c22f70dd22.json",
+            "size_bytes": 38645,
+            "sha256": "b77ec0068a71a288b4528de5093d8e0ce02992a72c38780b8b417eb63729fe62"
+          },
+          "postcut_audit": {
+            "path": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/post-cut-20260825T134700387826Z.json",
+            "size_bytes": 10246,
+            "sha256": "a4f4cf11c1fc05ffbd20712a6192789a322a445eed2e55b4beb63aca7e503ead"
+          },
+          "postcut_state": {
+            "path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-post-cut-lifecycle.json",
+            "size_bytes": 3794,
+            "sha256": "bc4a4ffa081da7d2d86799b52f263eeab629a90ff003f278f14fa47a6c585ba8"
+          },
+          "discord_audit": {
+            "path": "/root/mgs-agent/data/ares/discord-audit/cpv-rules-update-20260825T134924955726Z.json",
+            "size_bytes": 4317,
+            "sha256": "2a686a71dd4a45f84360456ea2172e4e3bcad3276f9783fc4351bedb7d30c2ce"
+          },
+          "discord_import": {
+            "path": "/root/mgs-agent/data/discord-thread-imports/1540426218405363873.json",
+            "size_bytes": 33759,
+            "sha256": "1672b86973bbaad03a46f19f9ec5307bcf09fc328dfde60151af692da75a318b"
+          }
+        },
+        "skills": {
+          "direct_traffic_cbo": {
+            "version": "1.0.54",
+            "sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654"
+          },
+          "vehicle_finance": {
+            "version": "1.0.37",
+            "sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec"
+          }
+        },
+        "cpv_rules_thread": {
+          "thread_id": "1540426218405363873",
+          "message_count_before_after": 16,
+          "messages_edited_in_place": 8,
+          "patch_http": 200,
+          "readback_http": 200,
+          "all_verified": true,
+          "new_messages_created": 0
+        },
+        "validation": {
+          "tests": "76 passed",
+          "py_compile": "PASS",
+          "operation_json": "PASS",
+          "live_report_only_dry_run": "PASS",
+          "live_postcut_reconcile": "COMPLETED; 7 already_deleted_verified; meta_writes=0"
+        },
+        "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
+        "knowledge_checkpoint_id": "ARES-CPV-POST-CUT-FINALIZATION-20260825"
+      },
+      "updated_at": "2026-08-25T09:51:43-04:00"
     }
   ],
   "profile_skill_references": [
