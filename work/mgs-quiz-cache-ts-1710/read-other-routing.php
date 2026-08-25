@@ -9,10 +9,10 @@ foreach ($rows as $row) {
     $selected = null;
     if ($json_ok) {
         foreach ($items as $item) {
-            if (is_array($item) && !empty($item['default']) && !empty($item['active'])) { $selected = $item; break; }
+            if (is_array($item) && !empty($item['default']) && (!array_key_exists('active', $item) || !empty($item['active']))) { $selected = $item; break; }
         }
         if (!$selected) foreach ($items as $item) {
-            if (is_array($item) && !empty($item['active'])) { $selected = $item; break; }
+            if (is_array($item) && (!array_key_exists('active', $item) || !empty($item['active']))) { $selected = $item; break; }
         }
     }
     $code = is_array($selected) ? (string) ($selected['gestor_code'] ?? $selected['code'] ?? '') : '';
@@ -21,7 +21,7 @@ foreach ($rows as $row) {
     $path = $url ? (string) parse_url($url, PHP_URL_PATH) : '';
     $endpoint_ok = ($host === 'v2.smsfunnel.com.br' && preg_match('#^/integrations/lists/[^/]+/add-lead$#', $path));
     $redirect_ok = ((string) $row->redirect_url === 'https://creditoparaveiculo.com/rec-br-financiamento-de-carro-sem-entrada/');
-    $active_count = $json_ok ? count(array_filter($items, function($x){ return is_array($x) && !empty($x['active']); })) : 0;
+    $active_count = $json_ok ? count(array_filter($items, function($x){ return is_array($x) && (!array_key_exists('active', $x) || !empty($x['active'])); })) : 0;
     echo $row->slug
         . " layout=" . ((string)$row->layout_template !== '' ? $row->layout_template : 'default')
         . " gestor=" . ($code !== '' ? $code : 'blank')
