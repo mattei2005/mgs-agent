@@ -135,6 +135,7 @@ def classify_campaign_assets(
     retest_policy = lifecycle_policy.get("retest") or {}
     max_attempts = int(retest_policy.get("max_test_attempts") or 2)
     retest_enabled = retest_policy.get("enabled") is True
+    terminal_reason = str(checkpoint_state.get("terminal_reason") or "")
     decisions: list[dict[str, Any]] = []
     for row in inventory:
         if str(row.get("status") or "") != "02_TESTING" or campaign_id not in _asset_campaign_ids(row):
@@ -156,13 +157,19 @@ def classify_campaign_assets(
             "impressions": int(metrics["impressions"]),
             "impression_share_pct": impression_share,
             "test_attempt_count": attempts,
+            "terminal_reason": terminal_reason if event == "D3_REJECTED" else None,
         }
         if event == "D3_REJECTED":
             if meaningful:
+                evaluation_status = (
+                    "REJECTED_D3_REALIDADE_ECONOMICA"
+                    if terminal_reason == "PARAR D3 REAL+ROAS"
+                    else "REJECTED_D3_ESTIMADO_NEGATIVO"
+                )
                 decisions.append({
                     **base,
                     "target_status": "05_REJECTED",
-                    "evaluation_status": "REJECTED_D3_ROI_REAL_E_ESTIMADO_NEGATIVOS",
+                    "evaluation_status": evaluation_status,
                     "retest_eligible": False,
                 })
             else:
