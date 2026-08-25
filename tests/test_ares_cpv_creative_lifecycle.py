@@ -35,6 +35,13 @@ def policy():
     return {
         "enabled": True,
         "minimum_meaningful_spend_share_pct": 10,
+        "rejected": {
+            "requires_terminal_reason_any": [
+                "PARAR D3 ESTIMADO",
+                "PARAR D3 REAL+ROAS",
+                "PARAR RECORRÊNCIA",
+            ]
+        },
         "winner": {"d4_checkpoint_hour": 16, "d5_checkpoint_hour": 8},
         "retest": {"enabled": True, "max_test_attempts": 2},
     }
@@ -90,6 +97,46 @@ def test_d3_reality_terminal_rejects_even_when_estimate_was_positive():
         anomaly=False,
     )
     assert decisions[0]["target_status"] == "05_REJECTED"
+    assert decisions[0]["evaluation_status"] == "REJECTED_D3_REALIDADE_ECONOMICA"
+    assert decisions[0]["terminal_reason"] == "PARAR D3 REAL+ROAS"
+
+
+def test_terminal_recurrence_classifies_after_d3_and_requires_negative_estimate():
+    decisions = classify_campaign_assets(
+        inventory=inventory_rows(),
+        ad_insights=delivery(),
+        campaign={
+            "campaign_id": "campaign-1",
+            "cycle_day": 6,
+            "sb_roi": -9,
+            "estimated_roi": -4,
+            "status": "PAUSED",
+        },
+        checkpoint_state={"terminal": True, "terminal_reason": "PARAR RECORRÊNCIA"},
+        now_sp=datetime(2026, 8, 24, 16, 0, tzinfo=SP),
+        lifecycle_policy=policy(),
+        anomaly=False,
+    )
+    assert decisions[0]["target_status"] == "05_REJECTED"
+    assert decisions[0]["evaluation_status"] == "REJECTED_RECORRENCIA_TERMINAL"
+    assert decisions[0]["terminal_reason"] == "PARAR RECORRÊNCIA"
+
+    blocked = classify_campaign_assets(
+        inventory=inventory_rows(),
+        ad_insights=delivery(),
+        campaign={
+            "campaign_id": "campaign-1",
+            "cycle_day": 6,
+            "sb_roi": -9,
+            "estimated_roi": 4,
+            "status": "PAUSED",
+        },
+        checkpoint_state={"terminal": True, "terminal_reason": "PARAR RECORRÊNCIA"},
+        now_sp=datetime(2026, 8, 24, 16, 0, tzinfo=SP),
+        lifecycle_policy=policy(),
+        anomaly=False,
+    )
+    assert blocked == []
 
 
 def test_d4_positive_stable_marks_only_meaningfully_delivered_winner():

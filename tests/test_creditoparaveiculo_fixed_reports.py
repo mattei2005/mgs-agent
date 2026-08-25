@@ -1560,3 +1560,109 @@ def test_creative_lifecycle_wrapper_is_noop_when_policy_disabled():
         [], [], "2026-08-24", datetime(2026, 8, 24, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo")), {}, {}
     )
     assert result == {"status": "DISABLED_OR_NOT_DUE", "decisions": [], "meta_writes": 0}
+
+
+def configure_post_cut_runtime(monkeypatch, tmp_path, module, fake_meta):
+    policy = {
+        "enabled": True,
+        "terminal_reasons": ["PARAR D3 ESTIMADO", "PARAR D3 REAL+ROAS", "PARAR RECORRÊNCIA"],
+        "required_assets_per_campaign": 3,
+        "retention_hours": 0,
+        "delete_after_creative_finalization": True,
+    }
+    operation = {
+        "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+        "playbook_version": "test",
+        "post_cut_lifecycle": policy,
+    }
+    operation_path = tmp_path / "operation.json"
+    operation_path.write_text(json.dumps(operation))
+    monkeypatch.setattr(module, "OP_PATH", operation_path)
+    monkeypatch.setattr(module, "GUARDRAIL_STATE", tmp_path / "guardrail.json")
+    monkeypatch.setattr(module, "POST_CUT_STATE", tmp_path / "post-cut.json")
+    monkeypatch.setattr(module, "POST_CUT_LOCK", tmp_path / "post-cut.lock")
+    monkeypatch.setattr(module, "POST_CUT_AUDIT_ROOT", tmp_path / "post-cut-audit")
+    monkeypatch.setattr(module, "load_module", lambda path, name: fake_meta)
+    return operation
+
+
+def finalized_lifecycle(campaign_id="1", count=3):
+    decisions = [
+        {
+            "asset_id": f"asset-{index}",
+            "campaign_id": campaign_id,
+            "target_status": "05_REJECTED" if index == 1 else "03_TESTED",
+        }
+        for index in range(1, count + 1)
+    ]
+    return {
+        "status": "APPLIED",
+        "audit": "/tmp/lifecycle.json",
+        "decisions": decisions,
+        "inventory_readback": [
+            {"asset_id": row["asset_id"], "ok": True}
+            for row in decisions
+        ],
+    }
+
+
+def test_post_cut_deletes_only_after_three_creatives_are_finalized(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign(status="PAUSED")
+    fake_meta = FakeMeta([campaign])
+    operation = configure_post_cut_runtime(monkeypatch, tmp_path, module, fake_meta)
+    result = module.execute_terminal_post_cut_cleanup(
+        [{"campaign_id": "1", "status": "PAUSED"}],
+        [{"campaign_id": "1", "recommendation": "PARAR D3 REAL+ROAS", "status": "executed"}],
+        finalized_lifecycle(),
+        datetime(2026, 8, 25, 12, 0, tzinfo=ZoneInfo("America/Sao_Paulo")),
+        operation,
+    )
+    assert result["status"] == "COMPLETED"
+    assert result["meta_writes"] == 1
+    assert fake_meta.posts == [("1", {"status": "DELETED"})]
+    assert result["results"][0]["verified"] is True
+    assert result["results"][0]["ads_manager_status"] == "DELETED"
+    assert json.loads(module.POST_CUT_STATE.read_text())["campaigns"]["1"]["status"] == "completed"
+
+
+def test_post_cut_blocks_delete_when_creative_finalization_is_incomplete(monkeypatch, tmp_path):
+    module = load_reports_module()
+    fake_meta = FakeMeta([active_campaign(status="PAUSED")])
+    operation = configure_post_cut_runtime(monkeypatch, tmp_path, module, fake_meta)
+    result = module.execute_terminal_post_cut_cleanup(
+        [{"campaign_id": "1", "status": "PAUSED"}],
+        [{"campaign_id": "1", "recommendation": "PARAR D3 ESTIMADO", "status": "executed"}],
+        finalized_lifecycle(count=2),
+        datetime(2026, 8, 25, 8, 0, tzinfo=ZoneInfo("America/Sao_Paulo")),
+        operation,
+    )
+    assert result["status"] == "PARTIAL_BLOCKED"
+    assert result["meta_writes"] == 0
+    assert fake_meta.posts == []
+    assert result["results"][0]["reason"] == "creative_finalization_incomplete"
+
+
+def test_post_cut_recovers_http_error_by_get_without_duplicate_post(monkeypatch, tmp_path):
+    module = load_reports_module()
+
+    class AmbiguousDeleteMeta(FakeMeta):
+        def graph_post_once(self, path, token, params=None):  # type: ignore[override]
+            super().graph_post_once(path, token, params)
+            return 500, {"error": {"message": "ambiguous"}}, {}
+
+    fake_meta = AmbiguousDeleteMeta([active_campaign(status="PAUSED")])
+    operation = configure_post_cut_runtime(monkeypatch, tmp_path, module, fake_meta)
+    result = module.execute_terminal_post_cut_cleanup(
+        [{"campaign_id": "1", "status": "PAUSED"}],
+        [{"campaign_id": "1", "recommendation": "PARAR RECORRÊNCIA", "status": "executed"}],
+        finalized_lifecycle(),
+        datetime(2026, 8, 25, 16, 0, tzinfo=ZoneInfo("America/Sao_Paulo")),
+        operation,
+    )
+    record = result["results"][0]
+    assert result["status"] == "COMPLETED"
+    assert result["meta_writes"] == 1
+    assert len(fake_meta.posts) == 1
+    assert record["recovered_after_post_error"] is True
+    assert record["readback_http"] == 200
