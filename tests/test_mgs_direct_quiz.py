@@ -27,7 +27,7 @@ class DirectQuizContractTests(unittest.TestCase):
 
     def test_nested_manager_route_and_two_models_exist(self):
         php = read('includes/class-mgs-direct-quiz.php')
-        self.assertIn(r'^quiz/([a-z]{2})/(quiz-g[0-9]{3,}(?:-v[0-9]+)?)/?$', php)
+        self.assertIn(r'^quiz/([a-z]{2})/(quiz-v[12]-g[0-9]{3,})/?$', php)
         self.assertIn("'lp1'", php)
         self.assertIn("'lp2'", php)
         self.assertIn('admin_post_mgs_dq_duplicate', php)
@@ -53,7 +53,7 @@ class DirectQuizContractTests(unittest.TestCase):
         js = ROOT / 'assets/direct-quiz.js'
         code = r'''
 const m = require(process.argv[1]);
-const source = 'https://yolokfx.com/quiz/us/quiz-g002/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b02fb02c27&utm_adgroup=b02fb02c27g01&fbclid=TEST&custom_x=abc&page_id=99&p=5';
+const source = 'https://yolokfx.com/quiz/us/quiz-v2-g002/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b02fb02c27&utm_adgroup=b02fb02c27g01&fbclid=TEST&custom_x=abc&page_id=99&p=5';
 const dest = m.mergeUrl('https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=fixed', source);
 console.log(JSON.stringify({dest}));
 '''
@@ -79,12 +79,13 @@ console.log(JSON.stringify({dest}));
         self.assertIn('width:calc(100vw - 28px)!important', css)
         self.assertIn('max-width:400px!important', css)
 
-    def test_same_manager_can_have_versioned_variant_slug(self):
+    def test_slug_version_matches_selected_layout(self):
         php = read('includes/class-mgs-direct-quiz.php')
-        self.assertIn("$base_slug = 'quiz-' . strtolower( $manager )", php)
-        self.assertIn("$variant_slug_pattern", php)
-        self.assertIn("'-v[0-9]+$/'", php)
-        self.assertIn('quiz-g002-v1', php)
+        self.assertIn("$expected_slug = 'quiz-v' . substr( $layout, 2 ) . '-' . strtolower( $manager )", php)
+        self.assertIn("'/^quiz-v[12]-g[0-9]{3,}$/'", php)
+        self.assertIn('quiz-v2-g002', php)
+        self.assertIn('quiz-v1-g002', php)
+        self.assertNotIn('quiz-g002-v1', php)
 
     def test_unknown_manager_route_is_forced_to_real_404(self):
         php = read('includes/class-mgs-direct-quiz.php')
