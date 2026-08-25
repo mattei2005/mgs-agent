@@ -72,6 +72,11 @@ console.log(JSON.stringify({dest}));
         self.assertNotIn('page_id=', dest)
         self.assertIsNone(re.search(r'[?&]p=', dest))
 
+    def test_mobile_card_has_explicit_viewport_safe_width(self):
+        css = read('assets/direct-quiz.css')
+        self.assertIn('width:calc(100vw - 28px)!important', css)
+        self.assertIn('max-width:400px!important', css)
+
     def test_unknown_manager_route_is_forced_to_real_404(self):
         php = read('includes/class-mgs-direct-quiz.php')
         self.assertIn("$wp_query->set_404()", php)
