@@ -28,6 +28,10 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
                                SMS Funnel pode ser usado para envio de SMS.
 ```
 
+### Alocação ativa de tráfego direto
+
+Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados para tráfego direto da operação SHEIN, conforme decisão de Rodolfo.
+
 ---
 
 ## Gestores e rastreamento
