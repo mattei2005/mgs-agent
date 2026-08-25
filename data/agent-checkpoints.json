@@ -573,12 +573,12 @@
     {
       "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
-      "next_step": "Aguardar Rodolfo confirmar o modelo inicial e a proposta de arquitetura; depois construir em staging, validar e implantar somente o canário G002 no Yolokfx",
-      "objective": "Criar plugin de landing quiz SHEIN com LP1/LP2, piloto em yolokfx.com e replicação posterior em vizioid.com",
-      "source": "discord:thread:1541914123376402452#1541916912156545095",
-      "state": "análise concluída: referências auditadas; plugin car revisado; yolokfx pronto para piloto; sem deploy; requisitos confirmados de rota por gestor, preservação de parâmetros, sem sms e sem formulário",
+      "next_step": "Construir, testar e implantar o canário G002 no Yolokfx; validar query string completa até o artigo",
+      "objective": "Criar plugin novo e simples para landing quiz SHEIN com LP1/LP2, piloto em yolokfx.com e replicação posterior em vizioid.com",
+      "source": "discord:thread:1541914123376402452#1541921424808091790",
+      "state": "requisitos finais corrigidos por rodolfo; implementação autorizada e iniciada; plugin sem lead, sms, tracking ou lógica de campanha; utms serão somente preservadas nos ctas",
       "thread_id": "1541914123376402452",
-      "updated_at": "2026-08-25T21:14:18+00:00"
+      "updated_at": "2026-08-25T21:26:27+00:00"
     },
     {
       "agent": "zeus",
@@ -1242,5 +1242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T21:14:18+00:00"
+  "updated_at": "2026-08-25T21:26:27+00:00"
 }
