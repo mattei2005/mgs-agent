@@ -99,7 +99,7 @@ Ordem de `subs`:
 
 ## Pitfalls
 
-- **Status Deleted no Ads Manager × ARCHIVED na Graph API.** Na conta `Creditoparaveiculo-BR-CAR-BR-13-G006`, campanhas exibidas pelo Ads Manager sob `Campaign delivery = Deleted` retornam `status/effective_status/configured_status = ARCHIVED` na Graph API. Relatórios para gestor devem mostrar `DELETED`; audit técnico preserva `api_raw_status=ARCHIVED` e `ads_manager_status=DELETED`. Nunca contradizer a UI chamando essas campanhas de arquivadas sem explicar o mapeamento.
+- **Status Deleted no Ads Manager × literais terminais da Graph API.** Na conta `Creditoparaveiculo-BR-CAR-BR-13-G006`, edges de listagem já devolveram `ARCHIVED` para campanhas sob `Campaign delivery = Deleted`, enquanto o GET direto da C23 após `POST status=DELETED` em 25/08/2026 devolveu `status/effective_status/configured_status = DELETED`. Aceitar `DELETED` ou `ARCHIVED` como terminal, mostrar `DELETED` ao gestor e preservar o literal real em `api_raw_status` com `ads_manager_status=DELETED`. Nunca contradizer a UI chamando essas campanhas de arquivadas sem explicar o mapeamento.
 - **Status é hierárquico, mas o relatório operacional usa o nível campanha.** Campanha com `status=ACTIVE` continua sendo reportada como ativa. Se adset/anúncios estiverem pausados, registrar somente uma observação de inconsistência quando isso for relevante para entrega; não criar um status sintético. Pausa/reativação da operação deve ocorrer no nível campanha.
 - `amount_spent`, `balance` e budgets vêm em unidade menor da moeda da conta em alguns endpoints; não interpretar sem normalização.
 - `date_preset=today` depende do timezone da conta, não do VPS.

@@ -65,7 +65,7 @@ Trabalhe com o que recebeu. Se faltar informação crítica, pergunte objetivame
 ```text
 Campo                  Exemplo
 ─────────────────────  ─────────────────────────────────────────────────
-Site/projeto           openzed, cliquet, eggbev, etc.
+Site/projeto           eggbev, cliquet, projeto-x, etc.
 Objetivo               teste de campanha, escala, remarketing, criativo novo.
 Oferta/produto         cartão, empréstimo, app, quiz, benefício.
 Canal/formato          Facebook feed, stories, reels, TikTok, YouTube shorts.

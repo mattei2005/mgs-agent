@@ -7,7 +7,7 @@
   "retired_at": "2026-08-24T23:06:02.176478+00:00",
   "reason": "OpenzedFinanzas site and ad account will not run now; Ares architecture is being rebuilt for Eggbev US-CC-EN BOT.",
   "history_policy": "Operational contracts and state were moved out of active loader paths. Existing audit, report, log and Git history remain preserved and must not be treated as active configuration.",
-  "total_files_moved": 344,
+  "total_files_moved": 345,
   "counts_by_category": {
     "accounts": 1,
     "metrics": 1,
@@ -15,9 +15,15 @@
     "permissions": 1,
     "policies": 2,
     "rules": 2,
-    "state": 336
+    "state": 337
   },
   "mappings": [
+    {
+      "source": "state/intraday-rule-persistence-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "retired_path": "retired/OpenzedFinanzas-CC-ES/state/intraday-rule-persistence-OpenzedFinanzas-CC-ES-1356770869843984.json",
+      "bytes": 27268,
+      "sha256": "d4bc0c7131e7030c6f06ffd8596f37df12b6caad658f6514b6c45f6a955b15d7"
+    },
     {
       "source": "accounts/1356770869843984.json",
       "retired_path": "retired/OpenzedFinanzas-CC-ES/accounts/1356770869843984.json",

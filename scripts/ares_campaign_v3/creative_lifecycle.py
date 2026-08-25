@@ -66,13 +66,14 @@ def _classification_event(
     estimated = campaign.get("estimated_roi")
     status = str(campaign.get("status") or "").upper()
 
+    terminal_reason = str(checkpoint_state.get("terminal_reason") or "")
     terminal_d3 = (
         cycle_day == 3
         and status == "PAUSED"
         and checkpoint_state.get("terminal") is True
-        and str(checkpoint_state.get("terminal_reason") or "") == "PARAR D3 ESTIMADO"
+        and terminal_reason in {"PARAR D3 ESTIMADO", "PARAR D3 REAL+ROAS"}
         and _negative(actual)
-        and _negative(estimated)
+        and (terminal_reason == "PARAR D3 REAL+ROAS" or _negative(estimated))
     )
     if terminal_d3:
         return "D3_REJECTED"

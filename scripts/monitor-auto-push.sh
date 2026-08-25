@@ -22,7 +22,7 @@ fi
 
 # ─── Paths ───────────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BASE_DIR="$(dirname "$SCRIPT_DIR")"
+BASE_DIR="${MGS_AUTOPUSH_BASE_DIR:-$(dirname "$SCRIPT_DIR")}"
 PUSH_LOG="${BASE_DIR}/logs/auto-push.log"
 AUTO_COMMIT_LOG="${BASE_DIR}/logs/auto-commit-watcher.log"
 STATE_FILE="${BASE_DIR}/data/auto-push-monitor.json"
@@ -31,8 +31,8 @@ THRESHOLD="${THRESHOLD:-3}"
 ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 
 # ─── Transporte Discord direto pelo bot Zeus ────────────────────────────────
-DISCORD_CHANNEL_ID="1498132022634483894"
-DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
+DISCORD_CHANNEL_ID="${MGS_AUTOPUSH_DISCORD_CHANNEL_ID:-1498132022634483894}"
+DISCORD_POSTER="${MGS_AUTOPUSH_DISCORD_POSTER:-${BASE_DIR}/scripts/discord-bot-post.py}"
 GIT_SSH_COMMAND_DEFAULT="ssh -i /root/.ssh/mgs_github_deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/root/.ssh/known_hosts_github_mgs"
 
 post_discord_payload() {
@@ -211,19 +211,18 @@ if (( CONSECUTIVE >= THRESHOLD )); then
 fi
 
 if (( TOTAL_NEW_FAILURES > 0 )); then
-    # Incrementar falhas consecutivas
-    NEW_CONSECUTIVE=$(( CONSECUTIVE + TOTAL_NEW_FAILURES ))
+    # Contar ciclos consecutivos com falha, não a quantidade de sintomas no
+    # mesmo ciclo. A terceira leitura falha aciona a intervenção do Zeus.
+    NEW_CONSECUTIVE=$(( CONSECUTIVE + 1 ))
     FAILURE_JSON="$(printf '%s\n' "${ALL_FAILURE_DETAILS[@]}" | jq -R . | jq -s .)"
 
     log "FALHA detectada: ${TOTAL_NEW_FAILURES} nova(s), total consecutivo=${NEW_CONSECUTIVE}"
 
-    # Verificar anti-spam. Guardrail bloqueado alerta imediatamente no primeiro
-    # ciclo, mas ciclos seguintes respeitam a mesma janela anti-spam.
+    # Verificar anti-spam. Todo incidente recorrente, inclusive guardrail,
+    # entra no mesmo contrato: intervenção automática na terceira falha.
     SEND_ALERT=false
     SHOULD_EVALUATE_ALERT=false
-    if (( AUTO_COMMIT_GUARDRAIL_BLOCKED == 1 )); then
-        SHOULD_EVALUATE_ALERT=true
-    elif (( NEW_CONSECUTIVE >= THRESHOLD )); then
+    if (( NEW_CONSECUTIVE >= THRESHOLD )); then
         SHOULD_EVALUATE_ALERT=true
     fi
 
@@ -250,7 +249,7 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
             --arg n "$NEW_CONSECUTIVE" \
             --arg detail "$LAST_DETAIL" \
             --arg ok_ts "${LAST_OK_TS:-nunca}" \
-            '{content:"<@344196393512075265> alerta de auto-push", embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Investigar `/root/mgs-agent/logs/auto-push.log`.", inline:false}]}]}')
+            '{content:"<@344196393512075265> alerta de auto-push", embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Intervenção automática do Zeus acionada na 3ª falha; investigar causa-raiz, corrigir e validar.", inline:false}]}]}')
         post_discord_payload "$PAYLOAD" >/dev/null || exit 2
     else
         ALERT_TS="$LAST_ALERT"

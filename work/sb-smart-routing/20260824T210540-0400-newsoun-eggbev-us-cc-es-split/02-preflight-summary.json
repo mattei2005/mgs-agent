@@ -1,0 +1,47 @@
+{
+  "mode": "apply",
+  "publishers": {
+    "newsounfinanzas": {
+      "base_ids": [
+        531,
+        532
+      ],
+      "create_names": [
+        "ns-f-us-cc-es-drip 002",
+        "ns-f-us-cc-es-drip 003",
+        "ns-f-us-cc-es-drip 004",
+        "ns-f-us-cc-es-drip 005",
+        "ns-f-us-cc-es-drip 006",
+        "ns-f-us-cc-es-broadcast 002",
+        "ns-f-us-cc-es-broadcast 003",
+        "ns-f-us-cc-es-broadcast 004",
+        "ns-f-us-cc-es-broadcast 005"
+      ],
+      "update_names": [
+        "ns-f-us-cc-es-drip 001",
+        "ns-f-us-cc-es-broadcast 001"
+      ]
+    },
+    "eggbevfinanzas": {
+      "base_ids": [
+        523,
+        524
+      ],
+      "create_names": [
+        "eb-f-us-cc-es-drip 002",
+        "eb-f-us-cc-es-drip 003",
+        "eb-f-us-cc-es-drip 004",
+        "eb-f-us-cc-es-drip 005",
+        "eb-f-us-cc-es-drip 006",
+        "eb-f-us-cc-es-mct broadcast 002",
+        "eb-f-us-cc-es-mct broadcast 003",
+        "eb-f-us-cc-es-mct broadcast 004",
+        "eb-f-us-cc-es-mct broadcast 005"
+      ],
+      "update_names": [
+        "eb-f-us-cc-es-drip 001",
+        "eb-f-us-cc-es-mct broadcast 001"
+      ]
+    }
+  }
+}

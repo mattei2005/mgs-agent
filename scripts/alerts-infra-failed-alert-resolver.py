@@ -53,6 +53,8 @@ CONFIRMED_RESOLUTION_RE = re.compile(
 SKIP_RE = re.compile(r'\[REPORT-INFRA\]|REPORT-INFRA|Self-improvement review|GPT-5\.5 OAuth', re.I)
 RESOLVED_COLOR = 0x2ECC71
 INVESTIGATED_COLOR = 0xF1C40F
+RESOLVER_FEEDBACK_TITLES = {'✅ ALERTA CORRIGIDO', '🔎 ALERTA INVESTIGADO'}
+RESOLVER_FEEDBACK_FOOTER = 'Zeus · retorno automático do alerta'
 
 
 def now_utc() -> dt.datetime:
@@ -158,9 +160,23 @@ def extract_message_text(message: dict[str, Any]) -> str:
     return '\n\n'.join(parts).strip()
 
 
+def is_resolver_feedback(message: dict[str, Any]) -> bool:
+    for embed in message.get('embeds') or []:
+        if (embed.get('title') or '').strip() in RESOLVER_FEEDBACK_TITLES:
+            return True
+        footer = embed.get('footer') or {}
+        if (footer.get('text') or '').strip() == RESOLVER_FEEDBACK_FOOTER:
+            return True
+    return False
+
+
 def is_candidate(message: dict[str, Any]) -> bool:
     author = message.get('author') or {}
-    if str(author.get('id') or '') == ZEUS_BOT_ID:
+    author_id = str(author.get('id') or '')
+    # Monitores MGS publicam pelo próprio bot Zeus. Ignorar todo conteúdo desse
+    # autor impedia a intervenção automática. Bloqueamos apenas os retornos do
+    # próprio resolver para manter anti-loop.
+    if author_id == ZEUS_BOT_ID and is_resolver_feedback(message):
         return False
     text = extract_message_text(message)
     if not text:
@@ -173,6 +189,8 @@ def is_candidate(message: dict[str, Any]) -> bool:
     has_embed = bool(message.get('embeds'))
     is_bot_or_webhook = bool(author.get('bot')) or bool(message.get('webhook_id'))
     if not (has_embed or is_bot_or_webhook):
+        return False
+    if author_id == ZEUS_BOT_ID and not has_embed:
         return False
     return bool(FAILURE_RE.search(text))
 

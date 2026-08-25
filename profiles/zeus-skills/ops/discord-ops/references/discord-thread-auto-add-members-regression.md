@@ -109,11 +109,11 @@ More robust repair — required when one profile serves channels with different 
   3. broad guild-member discovery only when neither source was configured.
 - An explicit empty list is meaningful and must **fail closed**. Never interpret `[]` or an intentionally empty runtime value as permission to discover/add every visible guild member.
 - If the adapter remains env-driven internally, hydrate the YAML mapping as JSON into `DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL`; keep YAML as the public configuration surface.
-- For Ares, the durable split is:
-  - `ares-aquisicao` (`1516887105543077949`) → Rodolfo, Kelly, Geizian, Icaro, Isliago, Joe and Nicolas.
-  - `ares-diretoria` (`1508853425952133180`) → explicit empty list; no automatic manager inclusion.
+- For Ares, apply the active institutional policy `ARES-DISCORD-ZEUS-ALL-THREADS-V1` from `context/ares-operational-map.md`: Zeus (`1496296175014252634`) is mandatory in every Ares-created thread, including Diretoria and every future parent channel. Per-channel manager lists are additive and must never replace Zeus.
+- Every new Ares parent-channel onboarding must add Zeus to that channel's explicit `thread_auto_add_users_by_channel` entry before activation; an explicit empty list is no longer valid for an Ares channel while this policy is active.
+- Explicit configured targets may be bots. Keep filtering bots during broad guild discovery, but honor another MGS agent bot when its ID is explicitly configured; exclude only the current profile's own bot. Preserve this behavior in the Hermes patch guard and a targeted regression test.
 - Update live + versioned profile configs, preserve the runtime patch artifact and patch guard, and take a rollback snapshot before restart.
-- Regression tests must prove all three invariants: channel-specific list wins over global; explicit empty blocks broad discovery; unrelated channels retain the legacy global fallback.
+- Regression tests must prove: channel-specific lists win over global fallback; Ares mappings always retain Zeus; manager lists remain additive; explicitly configured peer-agent bots are honored; broad discovery still filters bots.
 - Validate config hydration/type, targeted tests, patch guard, detached safe restart, new process env without printing secrets, and a real thread-member API readback when a new operational thread is available.
 
 ## Safety notes

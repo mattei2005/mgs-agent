@@ -1,76 +1,41 @@
-# Meta Ads EU/Finserv — ad-level token scopes and clone diagnostic
+# Meta EU financial-services: compliance and token scope
 
-Use when Meta campaign/adset creation works but ad creation fails, especially on EU/financial products + Messenger/page identity campaigns.
+Use when campaign/adset creation succeeds but ad creation fails on EU financial-products campaigns using Messenger/page identity.
 
-## Session learning
+## Diagnostic order
 
-In OpenzedFinanzas-ES-CC-ES-03 / Elena Santana, the API could create:
+1. Validate token identity and app with read-only `/me` and account GET.
+2. Read source campaign, adset and ad fields before building a payload.
+3. Confirm page access and the exact app-scoped page ID relationship.
+4. Preserve compliance fields returned by the source instead of inventing values.
+5. Create or copy only PAUSED objects during diagnosis.
+6. Retry only one PAUSED ad after fixing the proven missing layer, then validate by GET.
 
-- campaign (`OUTCOME_SALES`, `COST_CAP`, `FINANCIAL_PRODUCTS_SERVICES`, country `ES`)
-- adset (`OFFSITE_CONVERSIONS`, `MESSENGER`, DSA, regional categories)
+## Compliance fields
 
-…but `POST /act_<id>/ads` failed with:
-
-```text
-code=31
-error_subcode=3858385
-error_user_title=Autentica tu cuenta
-message=This request requires the user to take a pending action
-```
-
-The BM UI looked normal: ad account assignment had Manage campaigns; Page Elena had full control/access visible. The real blocker was token scope coverage for Page/Messenger/ad identity, not BM assignment.
-
-Adding these scopes to the user token resolved ad creation:
+The operation contract must explicitly define and source-validate:
 
 ```text
-pages_manage_ads
-pages_messaging
-pages_manage_metadata
-pages_manage_posts
-```
-
-Keep the normal ads/business scopes too:
-
-```text
-ads_management
-ads_read
-business_management
-pages_show_list
-pages_read_engagement
-read_insights
-instagram_basic
-pages_read_user_content
-pages_manage_engagement
-```
-
-Validate before retrying writes:
-
-```text
-GET /me/permissions
-```
-
-Do not rely only on Ads Manager UI. Campaign/adset may succeed with insufficient Page/Messenger scopes; the failure can appear only at ad creation because the ad binds page identity, Messenger template/conversation, creative/page post and tracking.
-
-## Diagnostic sequence
-
-1. Confirm token identity with `/me` and scopes with `/me/permissions`; never expose token.
-2. Check ad account assigned users/tasks if BM permissions are questioned.
-3. Check the Page with user token and page token. A suspicious pattern is `can_post=false` with user token but page token exists.
-4. If campaign/adset POST succeeds but ad POST fails with `31/3858385`, regenerate token with the Page/Messenger scopes above.
-5. Retry only one ad PAUSED first, then validate GET.
-
-## EU finserv fields to preserve
-
-For Openzed/Spain financial campaigns, keep campaign/adset compliance fields explicit:
-
-```text
-special_ad_categories=FINANCIAL_PRODUCTS_SERVICES
-special_ad_category_country=ES
+special_ad_categories
+special_ad_category_country
 dsa_beneficiary
 dsa_payor
-regional_regulated_categories, e.g. SPAIN_FINSERV + VOLUNTARY_VERIFICATION
+regional_regulated_categories
+optimization_goal
+destination_type
+promoted_object
+attribution_spec
 ```
 
-## Operational pitfall from the session
+Values vary by country, advertiser and source campaign. A historical EU payload is not a template for another account.
 
-Do not call this a production standard change until Rodolfo approves. This clone was a diagnostic bridge to prove API creation. The official Ares replacement pattern remains separate from source-mirror diagnostics.
+## Token/page scopes
+
+Validate the minimum permissions actually needed for the requested action. Do not treat readable account insights as proof that the token can create an ad with a page identity. Keep token values secret; audits record only item, field, length and API status.
+
+## Failure handling
+
+- Parameter/compliance errors do not receive blind retries.
+- Preserve Meta `error_user_title`, `error_user_msg`, `error_data` and `blame_field_specs` in sanitized audit.
+- Reconcile partial campaign/adset/ad objects before retry.
+- Never broaden permissions, swap advertiser identity or use another credential without explicit authorization.

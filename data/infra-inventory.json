@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-24T18:20:30.735252-04:00",
+    "updated_at": "2026-08-25T06:33:03-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -5228,7 +5228,7 @@
     {
       "id": "lyzmofinanzas-us-cc-es-smart-routing-five-url-20260806",
       "type": "smart-routing-config",
-      "status": "active_adops_pending",
+      "status": "superseded",
       "publisher": "lyzmofinanzas",
       "market": "US-CC-ES",
       "authorized_message_id": "1534977616048820284",
@@ -5275,7 +5275,9 @@
       "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260806T173604Z-lyzmofinanzas-us-cc-es-five-url-pools",
       "summary_sha256": "4f02c116cff4baae26e26da417220033d97622096bf534123ec607805dc8cd35",
       "readback_sha256": "dfe73f3f962422f8b5b981b8f4f9f63e46dfac4a71bb7426b5ea001fe628d319",
-      "unrelated_pools_unchanged": true
+      "unrelated_pools_unchanged": true,
+      "superseded_at": "2026-08-24T20:07:23-04:00",
+      "superseded_by": "lyzmofinanzas-us-cc-es-smart-routing-five-url-20260824"
     },
     {
       "id": "zeus-b013-dtr-link-watch-script",
@@ -6311,7 +6313,7 @@
     {
       "id": "topfeedfinanzas-us-cc-es-smart-routing-five-url-20260813",
       "type": "smart-routing-config",
-      "status": "active",
+      "status": "superseded",
       "publisher": "topfeedfinanzas",
       "market": "US-CC-ES",
       "authorized_message_id": "1537473014562693211",
@@ -6365,7 +6367,9 @@
       "summary_sha256": "c97725e2e99bef77af968e1f6b2526be769aa647efdb40b562504afe8bc62d72",
       "readback_sha256": "8831fb7263687807e89bf787f22a1c5469b84ad71356d194110cc8ff4fec5fff",
       "unrelated_pools_unchanged": true,
-      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift."
+      "validation": "5/5 target URLs HTTP 200; 11/11 Smart Routing writes HTTP 201; independent readback PASS; 53/53 operations nonblank; no unrelated pool drift.",
+      "superseded_at": "2026-08-24T20:07:23-04:00",
+      "superseded_by": "topfeedfinanzas-us-cc-es-smart-routing-five-url-20260824"
     },
     {
       "id": "newsoun-us-cc-en-smart-routing-five-url-20260817",
@@ -7700,33 +7704,83 @@
       "agent": "ares",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-      "size_bytes": 168937,
-      "modified_at": "2026-08-24T18:14:48.720689-04:00",
-      "sha256": "887a14bcf84239b1ff76e58316cb7c8689d6579acba2a25327c87af75adb8320",
-      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting, including read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
-      "validation": "C20 advideos canary: 121 targeted tests PASS; six videos associated to ad-account advideos; campaign/adset/three ads/three creatives ACTIVE with valid C20 UTMs; three Drive assets moved to 02_TESTING; active budget USD435 under USD500 cap; first-delivery monitor running observe-only.",
+      "size_bytes": 176819,
+      "modified_at": "2026-08-25T08:54:16-04:00",
+      "sha256": "630a6bd2a7706801b71f57b6403b253eaf780d6ff0c8b392323bd685dc08b8d2",
+      "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with D3 v2 reality gate, read-only G006 SMS Funnel attribution, BCB PTAX conversion, guarded campaign actions, first-delivery provenance and safe 00:30 reactivation.",
+      "validation": "72 targeted tests PASS. Live D3 v2 plan selected only C13/C14/C15/C16/C18; five campaign-level pauses verified PAUSED by Meta GET, while C11/C19 remained ACTIVE. C15 returned HTTP 500/code 2 after applying the write and was reconciled as PAUSED by immediate HTTP 200 GET without retry.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "af0dc4cf84fdf1e5b5afefc9b46c97dd7c9459a485099c2c512ac6cb9f55bba2",
+      "test_sha256": "0ecdd01f184255ed98c78b3132efda090b81a7b0829eee8e95ad74cb4c57164a",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "fbf9fd2e5abda5abb0766cfe911f98eb6439d20ce1611b1070248c3785a8513d",
-      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260823T045358Z.json",
-      "last_report_sha256": "359ab5e9f63db5ccf1982a4aed7b8869185c9867ccd9d29f566d93c7a68233c7",
+      "operation_sha256": "6d2ffe5746652926a4fa15864e696b1d70ebcae853af458d027d297959720a8f",
+      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260825T114607Z.json",
+      "last_report_sha256": "921c30c153088ace57e2b14692afb8ca3135c1a8b247563b686da92ff9e89329",
       "report_infra": {
         "channel_id": "1498132022634483894",
-        "message_id": "1540479725795938355",
+        "message_id": "1541776582656663664",
         "delivery": "discord_embed",
         "content_empty": true,
         "mentions": [],
-        "readback": "POST HTTP 200; content empty; embed only; no thread"
+        "readback": "POST HTTP 200; content empty; embed only; no thread; CPV Intraday five-date history and same-checkpoint status correction"
+      },
+      "d3_reality_gate_v2_20260825": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1541608945704247408",
+        "policy": "D3 terminal at 08:00/12:00 when >=2 real-negative days, cumulative ROI <=-10%, D3 real <0, Meta omni ROAS <1.20, current Meta spend >=USD5, one SB match and delay <=120min; estimate/RPS do not veto",
+        "wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
+        "lifecycle_runtime_sha256": "aa2358d7a465b47a9ef364bac217f58b34eeca4ef472d90ad10e3fd1edd5e548",
+        "lifecycle_test_sha256": "16d637f3dfc96049662c396c9b7531298841dfbc0e3d2bec62d9dae826a5f5e0",
+        "direct_traffic_cbo_skill_version": "1.0.53",
+        "direct_traffic_cbo_skill_sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c",
+        "vehicle_finance_skill_version": "1.0.36",
+        "vehicle_finance_skill_sha256": "a500b35a0e895a96c1c7f2915ee89dd80ad502533ba3cc3c55402cb6ddb95d7d",
+        "playbook_version": "1.0.71",
+        "execution_record_sha256": "bd0f016cc3a78e198ccecb5358c7cbfcd719e47f248ee82a8079e8e51550b879",
+        "action_audit_sha256": "dbad037e773222a382cf3a0f8b83a2f8dbc844f2fef78ada4c96fc2be8200ed7",
+        "paused_campaigns": [
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C18"
+        ],
+        "preserved_active": [
+          "C11",
+          "C19"
+        ],
+        "tests": "72 passed",
+        "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
+        "knowledge_checkpoint_id": "ARES-CPV-D3-REALITY-V2-20260825",
+        "knowledge_validation": "status=ok; errors=0; registry_entries=97; checkpoints=120",
+        "report_infra": {
+          "status": "sent_and_readback_confirmed",
+          "channel_id": "1498132022634483894",
+          "message_id": "1541793644531687485",
+          "http_status": 200,
+          "content_empty": true,
+          "mention_count": 0,
+          "thread_created": false
+        },
+        "skill_followup_report_infra": {
+          "status": "sent_and_readback_confirmed",
+          "channel_id": "1498132022634483894",
+          "message_id": "1541794782387634189",
+          "http_status": 200,
+          "content_empty": true,
+          "mention_count": 0,
+          "thread_created": false,
+          "reason": "aligned generic action checkpoints with the approved 12:00 D3 v2 recheck"
+        },
+        "meta_readback": "all five targets configured_status/effective_status PAUSED via HTTP 200 GET"
       },
       "git_tracked": false,
-      "updated_at": "2026-08-24T18:14:48.720689-04:00",
-      "intraday_wrapper_sha256": "6037d8de7da6b8eedc1aa3fcd2141314fd8497d06c97a73c8069e27ea0d7ac8b",
+      "updated_at": "2026-08-25T08:54:16-04:00",
+      "intraday_wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
       "guardrail_reactivation_cron_id": "5d0974e97ebd",
-      "direct_traffic_cbo_skill_sha256": "f8284911eb714127a775eabf212d34a789d3f784dad3c443dd9d5c4c880e55a2",
-      "vehicle_finance_skill_sha256": "dfacf3db0e87153e1098db9c2feee6d6219a3b3fef05e0cfd24cd30a11ae6789",
+      "direct_traffic_cbo_skill_sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c",
+      "vehicle_finance_skill_sha256": "a500b35a0e895a96c1c7f2915ee89dd80ad502533ba3cc3c55402cb6ddb95d7d",
       "meta_intraday_skill_sha256": "03b3a0211ac4e6511d4fe81e2e0f6ee08f23850ef56f6f9b8246f8cbe0f34798",
       "first_delivery_guardrail_20260822": {
         "authorized_by": "Rodolfo Mattei",
@@ -9018,6 +9072,17 @@
           "validation": "reverse-check PASS; 10 targeted Discord tests PASS"
         }
       ],
+      "post_restart_validator": "/root/.hermes/profiles/ares/scripts/validate-zeus-thread-auto-add-post-restart.py",
+      "thread_policy_change_20260824": {
+        "policy_id": "ARES-DISCORD-ZEUS-ALL-THREADS-V1",
+        "existing_threads_verified": 135,
+        "active_threads": 20,
+        "archived_threads": 115,
+        "archive_state_preserved": true,
+        "current_thread_member_http": 200,
+        "report_infra_message_id": "1541587310607339591",
+        "report_infra_readback": "HTTP 200; content empty; 1 embed; 0 mentions"
+      },
       "patch_sha256": "271afbe8492f6f197d3dc8085fb26d5c4faa785548866dda8edef95a21891279",
       "patch_scope_files": 46,
       "original_customization_paths": 46,
@@ -9135,7 +9200,7 @@
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
       "behavior": {
         "meaningful_delivery_share_pct": 10,
-        "d3_rejected": "campaign PAUSED terminal PARAR D3 ESTIMADO plus actual ROI < 0 and estimated ROI < 0; only assets with >=10% cumulative spend share",
+        "d3_rejected": "campaign PAUSED terminal by PARAR D3 ESTIMADO or PARAR D3 REAL+ROAS; the estimated route requires actual/estimated negative, while the reality route permits a positive estimate after its compound gate; only assets with >=10% cumulative spend share",
         "d4_winner": "actual and estimated ROI > 0 at both 08:00 and 16:00; only assets with >=10% cumulative spend share",
         "d5_winner": "actual and estimated ROI > 0 at 08:00; only assets with >=10% cumulative spend share",
         "underexposed_terminal": "03_TESTED + INCONCLUSIVO_POR_SUBENTREGA; retest eligible while attempts < 2",
@@ -9152,23 +9217,23 @@
         },
         "lifecycle_runtime": {
           "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
-          "size_bytes": 14523,
-          "sha256": "627642599ada7006fa661e2e13055777358876422b735fa9eabe4be8bc96da7c"
+          "size_bytes": 14630,
+          "sha256": "aa2358d7a465b47a9ef364bac217f58b34eeca4ef472d90ad10e3fd1edd5e548"
         },
         "fixed_reports": {
           "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-          "size_bytes": 168937,
-          "sha256": "887a14bcf84239b1ff76e58316cb7c8689d6579acba2a25327c87af75adb8320"
+          "size_bytes": 176819,
+          "sha256": "630a6bd2a7706801b71f57b6403b253eaf780d6ff0c8b392323bd685dc08b8d2"
         },
         "operation": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "sha256": "fbf9fd2e5abda5abb0766cfe911f98eb6439d20ce1611b1070248c3785a8513d",
-          "size_bytes": 122115
+          "sha256": "6d2ffe5746652926a4fa15864e696b1d70ebcae853af458d027d297959720a8f",
+          "size_bytes": 125507
         },
         "tests": {
           "daily": "617726fb8534b8cff3e11d2caf85c914625ead5806d30d95e7390be604153ab0",
-          "lifecycle": "ca025558be88b25b1bb3167eb2ba330c118803ca530237684f82c877dfa39042",
-          "fixed_reports": "af0dc4cf84fdf1e5b5afefc9b46c97dd7c9459a485099c2c512ac6cb9f55bba2"
+          "lifecycle": "16d637f3dfc96049662c396c9b7531298841dfbc0e3d2bec62d9dae826a5f5e0",
+          "fixed_reports": "0ecdd01f184255ed98c78b3132efda090b81a7b0829eee8e95ad74cb4c57164a"
         }
       },
       "skills": {
@@ -9183,8 +9248,8 @@
           "route_pack_01_sha256": "32a2829ac92779de911f6f6b2db835ccdc688562fd301adb4ce22174e272f2c7"
         },
         "direct_traffic_cbo": {
-          "version": "1.0.50",
-          "sha256": "b39a47970ab7a84210de19f04f970ac9efc6b2c0e54f8286c0ca3f12af3df9ff"
+          "version": "1.0.53",
+          "sha256": "94dd8dd935edc4c70c89c2fc4915536ca9d65e3e8e188de83ca1218de2c36f4c"
         },
         "meta_campaign_engine_v3": {
           "version": "3.0.19",
@@ -9193,6 +9258,7 @@
       },
       "validation": {
         "targeted_tests": "146 passed",
+        "d3_v2_regression_tests": "72 passed",
         "py_compile": "PASS",
         "json_validation": "PASS",
         "git_diff_check": "PASS",
@@ -9243,6 +9309,356 @@
         "title": "REPORT-INFRA — modificada"
       },
       "updated_at": "2026-08-24T18:20:30.735252-04:00"
+    },
+    {
+      "id": "lyzmofinanzas-us-cc-es-smart-routing-five-url-20260824",
+      "type": "smart-routing-config",
+      "status": "active_adops_pending",
+      "publisher": "lyzmofinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1541597462928687245",
+      "applied_at": "2026-08-24T20:07:23-04:00",
+      "drip_pool_ids": [
+        521,
+        983,
+        984,
+        985,
+        986,
+        987
+      ],
+      "broadcast_pool_ids": [
+        522,
+        988,
+        989,
+        990,
+        991
+      ],
+      "created_pool_ids": [],
+      "updated_pool_ids": [
+        521,
+        983,
+        984,
+        985,
+        986,
+        987,
+        522,
+        988,
+        989,
+        990,
+        991
+      ],
+      "deleted_pool_ids": [],
+      "topology_preserved": true,
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 23,
+      "blank_jbf_operations_by_family": {
+        "drip": 0,
+        "broadcast": 23
+      },
+      "adops_pending": true,
+      "urls": [
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260824T212538-0400-four-finanzas-us-cc-es-unfreeze",
+      "summary_sha256": "ed9d4a49277189acd35035ce5256a265345f6e29153837a08941e769ab80b9a8",
+      "readback_sha256": "bf623e4c4322ea9fdae6765d694635d80b28dc9f1451961688534d641d8350ab",
+      "independent_readback_sha256": "5e19393fed3819853de6d8f12d6c5db9d73fe72a10d588e0bd2cd58134de8df2",
+      "manifest_sha256": "fa4f8c4badac1630c954b2102b73149e8b2a00a1b545e7af6f0e1fba0df23268",
+      "unrelated_pools_unchanged": true,
+      "validation": "11/11 canonical pools; 53/53 identities unique; 53/53 freeze=false; Smart Routing optimizer enabled; 0 unhealthy; 23 blank JBF operations pending AdOps.",
+      "supersedes": "lyzmofinanzas-us-cc-es-smart-routing-five-url-20260806",
+      "delayed_frozen_readback_sha256": "49074eacdfc29b0a9536327f184aaa3b997859beaba3e22a0cb105a3174b252d",
+      "frozen_routes": 0,
+      "freeze_sessions": 0,
+      "freeze_mode": "off",
+      "order_persistent": false,
+      "corrected_at": "2026-08-24T21:28:45-04:00",
+      "final_frozen_readback_sha256": "9050373f70c8037b4597c86b28a23f5194cc3b2d135d759ef46d9087dad8bf1e",
+      "final_readback_file": "/root/mgs-agent/work/sb-smart-routing/20260824T205110-0400-finanzas-four-publishers-us-cc-es-five-url-freeze/97-final-frozen-readback.json",
+      "unfreeze_summary_sha256": "7b8f29a807faee52bc0caff34c1a0923787e29f8bc054e65398d2cd7a1da5848",
+      "freeze_sessions_nonzero": 0,
+      "optimizer_enabled": true
+    },
+    {
+      "id": "newsounfinanzas-us-cc-es-smart-routing-five-url-20260824",
+      "type": "smart-routing-config",
+      "status": "active_adops_pending",
+      "publisher": "newsounfinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1541597462928687245",
+      "applied_at": "2026-08-24T20:07:23-04:00",
+      "drip_pool_ids": [
+        531,
+        1117,
+        1118,
+        1119,
+        1120,
+        1121
+      ],
+      "broadcast_pool_ids": [
+        532,
+        1122,
+        1123,
+        1124,
+        1125
+      ],
+      "created_pool_ids": [
+        1117,
+        1118,
+        1119,
+        1120,
+        1121,
+        1122,
+        1123,
+        1124,
+        1125
+      ],
+      "updated_pool_ids": [
+        531,
+        532
+      ],
+      "deleted_pool_ids": [],
+      "topology_preserved": false,
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 15,
+      "blank_jbf_operations_by_family": {
+        "drip": 6,
+        "broadcast": 9
+      },
+      "adops_pending": true,
+      "urls": [
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260824T212538-0400-four-finanzas-us-cc-es-unfreeze",
+      "summary_sha256": "a7ebd7425603138a0c9b9efadda6820a5196c5b611f9002dfc2f800bf198dc22",
+      "readback_sha256": "bf623e4c4322ea9fdae6765d694635d80b28dc9f1451961688534d641d8350ab",
+      "independent_readback_sha256": "5e19393fed3819853de6d8f12d6c5db9d73fe72a10d588e0bd2cd58134de8df2",
+      "manifest_sha256": "fa4f8c4badac1630c954b2102b73149e8b2a00a1b545e7af6f0e1fba0df23268",
+      "unrelated_pools_unchanged": true,
+      "validation": "11/11 canonical pools; 53/53 identities unique; 53/53 freeze=false; Smart Routing optimizer enabled; 0 unhealthy; 15 blank JBF operations pending AdOps.",
+      "removed_route_identities": [
+        {
+          "route": "ns-f-us-cc-es-drip-m0-2",
+          "utm_content": "drip_us_cc_m0-2"
+        }
+      ],
+      "delayed_frozen_readback_sha256": "49074eacdfc29b0a9536327f184aaa3b997859beaba3e22a0cb105a3174b252d",
+      "frozen_routes": 0,
+      "freeze_sessions": 0,
+      "freeze_mode": "off",
+      "order_persistent": false,
+      "corrected_at": "2026-08-24T21:28:45-04:00",
+      "final_frozen_readback_sha256": "9050373f70c8037b4597c86b28a23f5194cc3b2d135d759ef46d9087dad8bf1e",
+      "final_readback_file": "/root/mgs-agent/work/sb-smart-routing/20260824T205110-0400-finanzas-four-publishers-us-cc-es-five-url-freeze/97-final-frozen-readback.json",
+      "ui_readback_sha256": "23b35e61ed25a3af91532a80410c6ac6c5e2eaa9871605bae1a1f8a427fed38d",
+      "topology_canonical": true,
+      "drip_distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "broadcast_distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "pool_count": 11,
+      "unfreeze_summary_sha256": "7b8f29a807faee52bc0caff34c1a0923787e29f8bc054e65398d2cd7a1da5848",
+      "freeze_sessions_nonzero": 0,
+      "optimizer_enabled": true
+    },
+    {
+      "id": "eggbevfinanzas-us-cc-es-smart-routing-five-url-20260824",
+      "type": "smart-routing-config",
+      "status": "active",
+      "publisher": "eggbevfinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1541597462928687245",
+      "applied_at": "2026-08-24T20:07:23-04:00",
+      "drip_pool_ids": [
+        523,
+        1126,
+        1127,
+        1128,
+        1129,
+        1130
+      ],
+      "broadcast_pool_ids": [
+        524,
+        1131,
+        1132,
+        1133,
+        1134
+      ],
+      "created_pool_ids": [
+        1126,
+        1127,
+        1128,
+        1129,
+        1130,
+        1131,
+        1132,
+        1133,
+        1134
+      ],
+      "updated_pool_ids": [
+        523,
+        524
+      ],
+      "deleted_pool_ids": [],
+      "topology_preserved": false,
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 0,
+      "blank_jbf_operations_by_family": {
+        "drip": 0,
+        "broadcast": 0
+      },
+      "adops_pending": false,
+      "urls": [
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260824T212538-0400-four-finanzas-us-cc-es-unfreeze",
+      "summary_sha256": "a7ebd7425603138a0c9b9efadda6820a5196c5b611f9002dfc2f800bf198dc22",
+      "readback_sha256": "bf623e4c4322ea9fdae6765d694635d80b28dc9f1451961688534d641d8350ab",
+      "independent_readback_sha256": "5e19393fed3819853de6d8f12d6c5db9d73fe72a10d588e0bd2cd58134de8df2",
+      "manifest_sha256": "fa4f8c4badac1630c954b2102b73149e8b2a00a1b545e7af6f0e1fba0df23268",
+      "unrelated_pools_unchanged": true,
+      "validation": "11/11 canonical pools; 53/53 identities unique; 53/53 freeze=false; Smart Routing optimizer enabled; 0 unhealthy; 53/53 JBF operations nonblank.",
+      "delayed_frozen_readback_sha256": "49074eacdfc29b0a9536327f184aaa3b997859beaba3e22a0cb105a3174b252d",
+      "frozen_routes": 0,
+      "freeze_sessions": 0,
+      "freeze_mode": "off",
+      "order_persistent": false,
+      "corrected_at": "2026-08-24T21:28:45-04:00",
+      "final_frozen_readback_sha256": "9050373f70c8037b4597c86b28a23f5194cc3b2d135d759ef46d9087dad8bf1e",
+      "final_readback_file": "/root/mgs-agent/work/sb-smart-routing/20260824T205110-0400-finanzas-four-publishers-us-cc-es-five-url-freeze/97-final-frozen-readback.json",
+      "ui_readback_sha256": "23b35e61ed25a3af91532a80410c6ac6c5e2eaa9871605bae1a1f8a427fed38d",
+      "topology_canonical": true,
+      "drip_distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "broadcast_distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "pool_count": 11,
+      "unfreeze_summary_sha256": "7b8f29a807faee52bc0caff34c1a0923787e29f8bc054e65398d2cd7a1da5848",
+      "freeze_sessions_nonzero": 0,
+      "optimizer_enabled": true
+    },
+    {
+      "id": "topfeedfinanzas-us-cc-es-smart-routing-five-url-20260824",
+      "type": "smart-routing-config",
+      "status": "active_adops_pending",
+      "publisher": "topfeedfinanzas",
+      "market": "US-CC-ES",
+      "authorized_message_id": "1541597462928687245",
+      "applied_at": "2026-08-24T20:07:23-04:00",
+      "drip_pool_ids": [
+        583,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061
+      ],
+      "broadcast_pool_ids": [
+        584,
+        1053,
+        1054,
+        1055,
+        1056
+      ],
+      "created_pool_ids": [],
+      "updated_pool_ids": [
+        583,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061,
+        584,
+        1053,
+        1054,
+        1055,
+        1056
+      ],
+      "deleted_pool_ids": [],
+      "topology_preserved": true,
+      "routes": {
+        "drip": 30,
+        "broadcast": 23,
+        "total": 53
+      },
+      "blank_jbf_operations": 53,
+      "blank_jbf_operations_by_family": {
+        "drip": 30,
+        "broadcast": 23
+      },
+      "adops_pending": true,
+      "urls": [
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold"
+      ],
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260824T212538-0400-four-finanzas-us-cc-es-unfreeze",
+      "summary_sha256": "ed9d4a49277189acd35035ce5256a265345f6e29153837a08941e769ab80b9a8",
+      "readback_sha256": "bf623e4c4322ea9fdae6765d694635d80b28dc9f1451961688534d641d8350ab",
+      "independent_readback_sha256": "5e19393fed3819853de6d8f12d6c5db9d73fe72a10d588e0bd2cd58134de8df2",
+      "manifest_sha256": "fa4f8c4badac1630c954b2102b73149e8b2a00a1b545e7af6f0e1fba0df23268",
+      "unrelated_pools_unchanged": true,
+      "validation": "11/11 canonical pools; 53/53 identities unique; 53/53 freeze=false; Smart Routing optimizer enabled; 0 unhealthy; 53 blank JBF operations pending AdOps.",
+      "supersedes": "topfeedfinanzas-us-cc-es-smart-routing-five-url-20260813",
+      "delayed_frozen_readback_sha256": "49074eacdfc29b0a9536327f184aaa3b997859beaba3e22a0cb105a3174b252d",
+      "frozen_routes": 0,
+      "freeze_sessions": 0,
+      "freeze_mode": "off",
+      "order_persistent": false,
+      "corrected_at": "2026-08-24T21:28:45-04:00",
+      "final_frozen_readback_sha256": "9050373f70c8037b4597c86b28a23f5194cc3b2d135d759ef46d9087dad8bf1e",
+      "final_readback_file": "/root/mgs-agent/work/sb-smart-routing/20260824T205110-0400-finanzas-four-publishers-us-cc-es-five-url-freeze/97-final-frozen-readback.json",
+      "unfreeze_summary_sha256": "7b8f29a807faee52bc0caff34c1a0923787e29f8bc054e65398d2cd7a1da5848",
+      "freeze_sessions_nonzero": 0,
+      "optimizer_enabled": true
     }
   ],
   "profile_skill_references": [
@@ -9488,7 +9904,14 @@
       "batch_delete_reference_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
       "batch_delete_versioned_reference_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-batch-message-deletion-rate-limits.md",
       "batch_delete_reference_sha256": "16f3787d09fcf34d924dd9416cdd40c7b37fd1a4cd3221b56f5248cbd9400dc6",
-      "batch_delete_reference_runtime_versioned_sha_match": true
+      "batch_delete_reference_runtime_versioned_sha_match": true,
+      "thread_auto_add_reference_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-thread-auto-add-members-regression.md",
+      "thread_auto_add_versioned_reference_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-thread-auto-add-members-regression.md",
+      "thread_auto_add_reference_sha256": "a576748c35b0f80726539e369a2e25b3adf26ecaa7f1abe558b3bf396fe7418d",
+      "thread_auto_add_runtime_versioned_sha_match": true,
+      "thread_membership_policy": "ARES-DISCORD-ZEUS-ALL-THREADS-V1",
+      "thread_auto_add_validation": "Zeus-side procedure updated from stale Ares Diretoria empty-list behavior to the active mandatory-Zeus policy; live/versioned reference hashes match; all 5 current Ares parent-channel mappings include Zeus.",
+      "thread_auto_add_updated_at": "2026-08-24T21:06:18-04:00"
     },
     {
       "id": "zeus-discord-ops-batch-message-deletion-rate-limits",
@@ -9964,7 +10387,7 @@
       "entry": "*/15 * * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh check >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1"
     },
     {
-      "entry": "10 23 * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh digest >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1"
+      "entry": "10 * * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh digest --scheduled >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1"
     },
     {
       "entry": "CRON_TZ=America/New_York"
@@ -10026,8 +10449,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 11300,
-      "modified_at": "2026-07-12T19:30:36-04:00"
+      "size_bytes": 11224,
+      "modified_at": "2026-08-24T19:15:06-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
@@ -10055,64 +10478,19 @@
       "modified_at": "2026-08-13T15:23:42-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/ares-meta-apply-naming-plan.py",
-      "size_bytes": 6983,
-      "modified_at": "2026-06-19T19:13:17-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
-      "size_bytes": 1715,
-      "modified_at": "2026-06-22T11:35:44-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py",
-      "size_bytes": 11280,
-      "modified_at": "2026-06-18T00:10:42-04:00"
+      "size_bytes": 1705,
+      "modified_at": "2026-08-24T19:15:06-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-common.py",
-      "size_bytes": 33431,
-      "modified_at": "2026-08-20T20:22:51-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 40424,
-      "modified_at": "2026-07-13T18:06:29-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
-      "size_bytes": 11717,
-      "modified_at": "2026-06-19T11:19:45-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
-      "size_bytes": 9999,
-      "modified_at": "2026-06-19T11:41:11-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py",
-      "size_bytes": 15961,
-      "modified_at": "2026-06-19T15:24:10-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-midnight-structure-adjust.py",
-      "size_bytes": 12182,
-      "modified_at": "2026-06-19T14:49:58-04:00"
+      "size_bytes": 33728,
+      "modified_at": "2026-08-24T19:15:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
-      "size_bytes": 2098,
-      "modified_at": "2026-06-22T11:35:44-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 31421,
-      "modified_at": "2026-07-14T16:03:54-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
-      "size_bytes": 1339,
-      "modified_at": "2026-06-16T00:20:16-04:00"
+      "size_bytes": 2088,
+      "modified_at": "2026-08-24T19:15:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-library-collector.sh",
@@ -10128,26 +10506,6 @@
       "path": "/root/mgs-agent/scripts/ares-meta-library-profile-snapshot.sh",
       "size_bytes": 4494,
       "modified_at": "2026-07-12T13:37:54-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
-      "size_bytes": 21773,
-      "modified_at": "2026-06-18T16:58:35-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
-      "size_bytes": 17797,
-      "modified_at": "2026-06-18T00:01:20-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-source-mirror.py",
-      "size_bytes": 21951,
-      "modified_at": "2026-06-18T21:43:35-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
-      "size_bytes": 4410,
-      "modified_at": "2026-06-22T11:35:42-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-migrate-mgs-agents-shared-drive.py",
@@ -10215,9 +10573,14 @@
       "modified_at": "2026-08-23T01:31:13-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+      "size_bytes": 14523,
+      "modified_at": "2026-08-24T18:16:08-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
-      "size_bytes": 93771,
-      "modified_at": "2026-08-24T16:36:01-04:00"
+      "size_bytes": 103005,
+      "modified_at": "2026-08-24T18:10:01-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
@@ -10841,13 +11204,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-broadcast-template-repair.py",
-      "size_bytes": 45746,
-      "modified_at": "2026-08-08T09:24:03-04:00"
+      "size_bytes": 46766,
+      "modified_at": "2026-08-24T23:32:42-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh",
-      "size_bytes": 1128,
-      "modified_at": "2026-08-07T11:54:04-04:00"
+      "size_bytes": 1166,
+      "modified_at": "2026-08-24T23:31:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-remove-first-name-placeholder.py",
@@ -11455,6 +11818,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md"
       },
       {
+        "name": "eggbev-us-cc-en-bot-operations",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/eggbev-us-cc-en-bot-operations/SKILL.md"
+      },
+      {
         "name": "google-ads-amphtml-creative",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/google-ads-amphtml-creative/SKILL.md"
@@ -11483,11 +11851,6 @@
         "name": "meta-library-reference-intake",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-library-reference-intake/SKILL.md"
-      },
-      {
-        "name": "meta-openzedfinanzas-replacement-clone",
-        "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md"
       },
       {
         "name": "paid-acquisition-operations",
@@ -13266,15 +13629,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 105055,
-      "md5": "0b6741916377c7eea93c2caeb3499050",
-      "modified_at": "2026-08-24T17:50:11-04:00"
+      "size_bytes": 107527,
+      "md5": "1982d1fafd17d80e1a884e77c9459b71",
+      "modified_at": "2026-08-25T06:33:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 26347,
-      "md5": "b37d922befbc037688fc105ae107c562",
-      "modified_at": "2026-08-24T17:47:01-04:00"
+      "size_bytes": 26812,
+      "md5": "642287888c80059386f37d192c0595e3",
+      "modified_at": "2026-08-25T06:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -13284,15 +13647,15 @@
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
-      "size_bytes": 10368,
-      "md5": "d8dc18aee24e55c9d599f262a8fca266",
-      "modified_at": "2026-08-21T18:47:10-04:00"
+      "size_bytes": 10531,
+      "md5": "1a9f5ca9e12e7898f968210e9c756745",
+      "modified_at": "2026-08-24T19:09:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "f67505ea059f7340ceb6cad7c47e4301",
-      "modified_at": "2026-08-24T17:42:22-04:00"
+      "size_bytes": 441,
+      "md5": "fa9adac952e48fd01803ddbf818f0d19",
+      "modified_at": "2026-08-25T06:27:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -13309,8 +13672,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 29012,
-      "md5": "169374bdd84f61f312590bbd0defd94d",
-      "modified_at": "2026-08-24T17:43:51-04:00"
+      "md5": "59f42c1bf8e8297f0b68378c1e36adcc",
+      "modified_at": "2026-08-25T01:01:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -13320,9 +13683,9 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 513,
-      "md5": "42dc4e7d29c27aa8cb8032ea94136a00",
-      "modified_at": "2026-08-24T17:45:01-04:00"
+      "size_bytes": 807,
+      "md5": "471e4886765cbaff30fd51227e03e0ff",
+      "modified_at": "2026-08-25T06:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -13333,8 +13696,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "e7433945bbd06eb27eba0b205f786e7f",
-      "modified_at": "2026-08-24T17:49:02-04:00"
+      "md5": "14189074bda11033f632adacbd05d4ac",
+      "modified_at": "2026-08-25T06:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -13362,39 +13725,39 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-context-cost-audit-state.json",
-      "size_bytes": 12576,
-      "md5": "ff296dc44ca5b4df09f47680fb9646f8",
-      "modified_at": "2026-08-24T04:47:09-04:00"
+      "size_bytes": 12609,
+      "md5": "d366260aaca8aee24f885c5a0960bfee",
+      "modified_at": "2026-08-25T04:47:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
-      "size_bytes": 7327,
-      "md5": "3ad003af6720d304aa1d09b295976c69",
-      "modified_at": "2026-08-24T17:44:02-04:00"
+      "size_bytes": 7798,
+      "md5": "600820e6c4aa0ad0b22d3fdf5e654473",
+      "modified_at": "2026-08-25T06:24:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "bc22ba58348bea2eb3f2d71a320e12d8",
-      "modified_at": "2026-08-24T13:01:27-04:00"
+      "md5": "3300f2cb31d64fa2bb65642eb94c74c4",
+      "modified_at": "2026-08-25T01:03:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 47424,
-      "md5": "abb06b1d2b803d8c564d5622b20063e6",
-      "modified_at": "2026-08-24T17:50:01-04:00"
+      "size_bytes": 47824,
+      "md5": "23e563b1176476cba4cfeac63ef67aee",
+      "modified_at": "2026-08-25T06:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 47159,
-      "md5": "6c1a9e8c138586b3ac830a449bc5cf62",
-      "modified_at": "2026-08-24T17:50:02-04:00"
+      "size_bytes": 47956,
+      "md5": "ee3e06933a39a0c1a0a90a72a86d6c87",
+      "modified_at": "2026-08-25T06:33:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "78754cd38605b7f1a0918c2b3bddeea7",
-      "modified_at": "2026-08-24T17:50:01-04:00"
+      "md5": "b841d668fb652814890bbae4d72a22b2",
+      "modified_at": "2026-08-25T06:33:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -13410,15 +13773,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 364,
-      "md5": "bcf20b3b216a1e26f08adca3acbbcb75",
-      "modified_at": "2026-08-24T14:37:04-04:00"
+      "size_bytes": 359,
+      "md5": "22b2a6403f26e29797a1cb29a51623ec",
+      "modified_at": "2026-08-24T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 440,
-      "md5": "99e18014a6bf107af712d5208510d84c",
-      "modified_at": "2026-08-24T13:54:28-04:00"
+      "md5": "dde110bc640ab72b06a3329910e9c641",
+      "modified_at": "2026-08-24T22:54:26-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
@@ -13428,15 +13791,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 598383,
-      "md5": "f930359e6c0c64a49e0cabd6310ec77b",
-      "modified_at": "2026-08-24T17:39:53-04:00"
+      "size_bytes": 617114,
+      "md5": "2ae8968229d56d55ff0ad57e0b991a74",
+      "modified_at": "2026-08-25T05:00:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 63786,
-      "md5": "15ab1eaea94c36a7eb377c1212d5f286",
-      "modified_at": "2026-08-24T17:50:05-04:00"
+      "size_bytes": 68343,
+      "md5": "b9590d5c7574048d6214a9262805e4e3",
+      "modified_at": "2026-08-24T19:17:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -13483,8 +13846,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 85250,
-      "md5": "f72e672bbe7c626069853ba91d1fcc60",
-      "modified_at": "2026-08-24T17:49:43-04:00"
+      "md5": "12df28a0d5233711b4ac2e23b6602143",
+      "modified_at": "2026-08-25T00:58:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -13501,8 +13864,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7102,
-      "md5": "42e66f4a44c927e66f143c4072b79711",
-      "modified_at": "2026-08-24T17:23:59-04:00"
+      "md5": "8ef2132c06ffff5e1d0450f524c45293",
+      "modified_at": "2026-08-25T06:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -13512,9 +13875,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1083,
-      "md5": "eec3a903432bb1d417ea3cad502f897c",
-      "modified_at": "2026-08-24T17:40:52-04:00"
+      "size_bytes": 1079,
+      "md5": "cc4406955c77da5e86f8cb39352295ad",
+      "modified_at": "2026-08-25T05:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -13526,7 +13889,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-08-24T17:37:03-04:00"
+      "modified_at": "2026-08-25T06:22:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -13548,9 +13911,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 313378,
-      "md5": "5fcbfb2a87bb990d3950eb686d66e33f",
-      "modified_at": "2026-08-24T12:45:20-04:00"
+      "size_bytes": 313820,
+      "md5": "a07491c0a1a33d689763e37d5f5b2f71",
+      "modified_at": "2026-08-24T23:33:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -13566,9 +13929,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 227939,
-      "md5": "49e6d15ac4e9405333e905a65ae7e3c7",
-      "modified_at": "2026-08-24T17:44:17-04:00"
+      "size_bytes": 225420,
+      "md5": "36433b5caac5e5050af5f63fd1151596",
+      "modified_at": "2026-08-25T06:14:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -13584,9 +13947,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-generated-candidates.json",
-      "size_bytes": 13667,
-      "md5": "7de9ece6a32f450354782675f3df5137",
-      "modified_at": "2026-08-23T06:32:49-04:00"
+      "size_bytes": 13979,
+      "md5": "9c9ccac506252c450a0e55e7bbbe76dd",
+      "modified_at": "2026-08-25T06:32:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -13627,8 +13990,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
-      "md5": "fd3453fac5a18ee793402c67441f7a0a",
-      "modified_at": "2026-08-24T17:46:02-04:00"
+      "md5": "e38753373d44d5e77e45bb1459891139",
+      "modified_at": "2026-08-25T06:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -13639,8 +14002,8 @@
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
       "size_bytes": 17448,
-      "md5": "76a3d32a4735a177a1600ee90d283845",
-      "modified_at": "2026-08-24T17:24:03-04:00"
+      "md5": "fb56c2f7380263e852c649d618687f01",
+      "modified_at": "2026-08-25T01:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -13669,14 +14032,14 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2116,
-      "md5": "6c4b46730cd920539877820ebdb1cdfb",
-      "modified_at": "2026-08-24T17:50:02-04:00"
+      "md5": "1e5023e5494467a5cab91afd408b9558",
+      "modified_at": "2026-08-25T06:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "90892d1081fb55f244baa38975137004",
-      "modified_at": "2026-08-24T14:07:02-04:00"
+      "md5": "2cdd40c62ef2e4ee2a7fcef8b834c80e",
+      "modified_at": "2026-08-24T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -13704,9 +14067,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 13301,
-      "md5": "6155f16044395cf977bad020c0c82142",
-      "modified_at": "2026-08-24T16:34:33-04:00"
+      "size_bytes": 13529,
+      "md5": "ba10499c749478daaba74b7e41242141",
+      "modified_at": "2026-08-24T19:05:22-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",

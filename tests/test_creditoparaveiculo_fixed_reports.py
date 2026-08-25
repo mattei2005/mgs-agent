@@ -154,7 +154,7 @@ def source_context(*, delay=60, current_date="2026-08-20"):
     return {"delay": {"totalMinutes": delay}, "current_date": current_date}
 
 
-def run_actions(module, rows, campaigns, decision_at, *, anomaly=False, source=None):
+def run_actions(module, rows, campaigns, decision_at, *, anomaly=False, source=None, manual_d3_v2=False):
     return module.execute_intraday_actions(
         rows,
         meta_account(),
@@ -163,6 +163,7 @@ def run_actions(module, rows, campaigns, decision_at, *, anomaly=False, source=N
         {"anomaly": anomaly, "spend_diff": 0.1},
         "2026-08-20",
         decision_at,
+        manual_d3_v2=manual_d3_v2,
     )
 
 
@@ -200,6 +201,7 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
     assert "fetch_sb_roi_history" in intraday_source
+    assert '["Camp", "Dia"]' in intraday_source
     assert '"RPS"' in intraday_source
     assert '"CPM"' in intraday_source
     assert '"CR"' not in intraday_source
@@ -348,7 +350,9 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert desktop_summary["highlight_layout"]["delay"].startswith("separate bold line")
     assert desktop_summary["highlight_layout"]["rewarded_current"].startswith("separate bold line")
     assert operation["scheduler_jobs"]["daily"]["report_layout"]["style"] == "desktop_tables_only_v2"
-    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v7"
+    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v8"
+    assert operation["reporting_presentation"]["intraday_roi_history"]["days"] == 5
+    assert "Dia" in operation["reporting_presentation"]["intraday_roi_history"]["desktop"]
 
 
 def test_dormant_intraday_mobile_card_renderer_remains_reusable():
@@ -490,9 +494,9 @@ def test_roi_history_aggregates_by_campaign_date_and_marks_current_partial():
         aggregated,
         current_is_partial=True,
     )
-    assert [item["date_label"] for item in history] == ["19/08", "20/08", "21/08"]
-    assert [item["roi"] for item in history] == [None, 0.0, 30.3]
-    assert [item["partial"] for item in history] == [False, False, True]
+    assert [item["date_label"] for item in history] == ["17/08", "18/08", "19/08", "20/08", "21/08"]
+    assert [item["roi"] for item in history] == [None, None, None, 0.0, 30.3]
+    assert [item["partial"] for item in history] == [False, False, False, False, True]
 
 
 def test_roi_history_rejects_nonpositive_window():
@@ -641,7 +645,7 @@ def test_intraday_report_cadence_and_action_checkpoint_are_separate():
     assert module.INTRADAY_REPORT_HOURS == expected_report_hours
     for hour in range(24):
         assert module.intraday_gate_due(hour, actions_only=False) is (hour in expected_report_hours)
-        assert module.intraday_gate_due(hour, actions_only=True) is (hour in {8, 16})
+        assert module.intraday_gate_due(hour, actions_only=True) is (hour in {8, 12, 16})
 
 
 def test_campaign_column_is_compact_and_includes_date():
@@ -916,6 +920,67 @@ def test_decision_boundaries_are_explicit():
     assert module.recommendation(1, 40.001, None, 8) == "ESCALAR +30%"
     assert module.recommendation(3, -10.0, -1.0, 12) == "OBSERVAR"
     assert module.recommendation(3, -10.0, -1.0, 8, d3_negative_estimated_streak=True) == "PARAR D3 ESTIMADO"
+    assert module.recommendation(3, -15.0, 20.0, 8, d3_reality_gate=True) == "PARAR D3 REAL+ROAS"
+    assert module.recommendation(3, -15.0, 20.0, 12, d3_reality_gate=True) == "PARAR D3 REAL+ROAS"
+    assert module.recommendation(3, -15.0, 20.0, 9, d3_reality_gate=True) == "OBSERVAR"
+    assert module.recommendation(3, -15.0, 20.0, 9, d3_reality_gate=True, manual_d3_v2=True) == "PARAR D3 REAL+ROAS"
+
+
+def test_d3_reality_metrics_require_two_negative_days_cumulative_loss_and_roas_floor():
+    module = load_reports_module()
+    rows = [
+        {"CAMPAIGN_ID": "1", "DATE": "2026-08-18", "INVESTIMENT": 100, "NET_REVENUE": 50, "UTM_ADGROUP": "b01fb13c09g01"},
+        {"CAMPAIGN_ID": "1", "DATE": "2026-08-19", "INVESTIMENT": 100, "NET_REVENUE": 110, "UTM_ADGROUP": "b01fb13c09g01"},
+        {"CAMPAIGN_ID": "1", "DATE": "2026-08-20", "INVESTIMENT": 100, "NET_REVENUE": 80, "UTM_ADGROUP": "b01fb13c09g01"},
+    ]
+    metrics = module.d3_reality_metrics(
+        "1",
+        "2026-08-18",
+        "2026-08-20",
+        rows,
+        {"1": {"spend": 300.0, "purchase_roas": 0.90}},
+        current_meta_spend=20.0,
+    )
+    assert metrics["d3_daily_real_roi"] == [-50.0, 10.0, -20.0]
+    assert metrics["d3_negative_real_days"] == 2
+    assert metrics["d3_cumulative_roi"] == -20.0
+    assert metrics["d3_reconciliation_available"] is True
+    assert metrics["d3_reality_gate"] is True
+
+
+def test_d3_reality_pause_is_checkpointed_but_manual_authorization_can_apply_now(monkeypatch, tmp_path):
+    module = load_reports_module()
+    campaign = active_campaign()
+    fake_meta = FakeMeta([campaign])
+    configure_runtime(monkeypatch, tmp_path, module, fake_meta)
+    row = {
+        "number": "09",
+        "campaign_id": "1",
+        "name": "09 - 20-08 - Garagem Brasil",
+        "budget_usd": 30.0,
+        "cycle_day": 3,
+        "sb_roi": -15.0,
+        "estimated_roi": 20.0,
+        "matched_adgroups": 1,
+        "d3_daily_real_roi": [-30.0, 5.0, -20.0],
+        "d3_negative_real_days": 2,
+        "d3_cumulative_roi": -15.0,
+        "d3_meta_roas": 0.9,
+        "d3_current_meta_spend": 10.0,
+        "d3_reconciliation_available": True,
+        "d3_reality_gate": True,
+        "recommendation": "PARAR D3 REAL+ROAS",
+    }
+    at_nine = datetime(2026, 8, 20, 9, 0, tzinfo=ZoneInfo("America/Sao_Paulo"))
+    blocked, _ = run_actions(module, [row], [campaign], at_nine)
+    assert blocked[0]["status"] == "blocked"
+    assert blocked[0]["reason"] == "outside_d3_reality_checkpoint"
+    assert fake_meta.posts == []
+
+    executed, _ = run_actions(module, [row], [campaign], at_nine, manual_d3_v2=True)
+    assert executed[0]["status"] == "executed"
+    assert executed[0]["verified"] is True
+    assert fake_meta.posts == [("1", {"status": "PAUSED"})]
 
 
 def test_meta_cost_and_roas_use_omni_purchase():
@@ -955,6 +1020,51 @@ def test_scale_is_single_attempt_written_once_and_verified(monkeypatch, tmp_path
     assert second[0]["status"] == "already_applied"
     assert fake_meta.posts == [("1", {"daily_budget": "3300"})]
     assert Path(second_audit).exists()
+
+
+def test_budget_readback_accepts_transient_in_process_after_exact_write():
+    module = load_reports_module()
+    campaign = active_campaign(budget="3300")
+    campaign["effective_status"] = "IN_PROCESS"
+    fake_meta = FakeMeta([campaign])
+
+    verified, http_status, payload = module.bounded_campaign_readback(
+        fake_meta,
+        "sanitized-test-token",
+        "1",
+        desired_budget_minor=3300,
+        attempts=1,
+    )
+
+    assert verified is True
+    assert http_status == 200
+    assert payload["status"] == "ACTIVE"
+    assert payload["effective_status"] == "IN_PROCESS"
+    assert payload["daily_budget"] == "3300"
+
+
+def test_intraday_row_reflects_pause_readback_in_same_checkpoint():
+    module = load_reports_module()
+    row = {
+        "status": "ACTIVE",
+        "budget_usd": 30.0,
+        "recommendation": "PARAR D3 ESTIMADO",
+    }
+    action_result = {
+        "status": "executed",
+        "action_type": "pause_campaign",
+        "after": {
+            "status": "PAUSED",
+            "effective_status": "PAUSED",
+            "daily_budget": "3000",
+        },
+    }
+
+    decision = module.apply_action_result_to_intraday_row(row, action_result)
+
+    assert decision == "PAUSADO ✓"
+    assert row["status"] == "PAUSED"
+    assert row["budget_after_usd"] == 30.0
 
 
 def test_scale_blocks_whole_batch_when_account_cap_would_be_exceeded(monkeypatch, tmp_path):
@@ -1251,6 +1361,22 @@ def test_in_flight_scale_recovers_by_get_without_second_post(monkeypatch, tmp_pa
     results, _ = run_actions(module, [scale_row()], [campaign], decision_at)
     assert results[0]["status"] == "recovered_verified"
     assert fake_meta.posts == []
+
+
+def test_verified_scale_today_returns_record_only_for_confirmed_status(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "ACTION_STATE", tmp_path / "state.json")
+    key = "2026-08-25:08:1:scale_budget"
+    module.atomic_write_json(module.ACTION_STATE, {"schema_version": "1.0", "applied": {
+        key: {"status": "executed", "decision_context": {"recommendation": "ESCALAR +30%"}}
+    }})
+
+    record = module.verified_scale_today("2026-08-25", "1")
+
+    assert record["status"] == "executed"
+    assert record["decision_context"]["recommendation"] == "ESCALAR +30%"
+    assert module.scaled_today("2026-08-25", "1") is True
+    assert module.verified_scale_today("2026-08-25", "2") == {}
 
 
 def test_report_delivery_is_idempotent_per_slot(monkeypatch, tmp_path):

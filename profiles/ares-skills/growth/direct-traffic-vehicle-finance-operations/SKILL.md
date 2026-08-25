@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.34
+version: 1.0.36
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -125,7 +125,7 @@ Calibração read-only de 21/07/2026 a 19/08/2026:
 - Meta ROAS >= `1,40` teve maior precisão, mas perdeu positivas marginais (`19` e `28`);
 - spend muito baixo produz outliers e não deve calibrar limiar.
 
-Usar Meta ROAS como triagem/sinal rápido, nunca como substituto do ROI SB. “Repetir a calibração” significa conferir se os mesmos limites continuam funcionando em outros períodos fechados; não exige mudar a operação diária. “Automatizar por ROAS” significaria pausar/escalar sem abrir a SB — isso permanece desativado. A regra atual é: ROAS sinaliza, SB decide.
+Usar Meta ROAS como triagem/sinal rápido, nunca como substituto isolado do ROI SB. A única automação que usa ROAS nesta operação é a rota D3 v2 explicitamente autorizada: ela exige junto o histórico real SB, ROI acumulado, D3 real negativo, entrega material, match e freshness; ROAS sozinho nunca pausa nem escala. “Repetir a calibração” significa conferir se os mesmos limites continuam funcionando em outros períodos fechados. Fora desse gate composto, a regra permanece: ROAS sinaliza, SB decide.
 
 ### Análise histórica do ciclo
 
@@ -140,7 +140,7 @@ Quando comparar duração e viradas de ROI:
 
 Conclusão: criação, dias rodados, dias positivos/negativos e viradas fecham por campanha, sem confundir intervalo civil com entrega real.
 
-Para status de campanha nesta operação, usar o rótulo do Ads Manager como status humano. O filtro `Campaign delivery = Deleted` corresponde, nos objetos validados desta conta, ao literal bruto `ARCHIVED` devolvido pela Graph API. Exibir `DELETED` no relatório operacional e preservar `api_raw_status=ARCHIVED` apenas no audit técnico.
+Para status de campanha nesta operação, usar o rótulo do Ads Manager como status humano. O filtro `Campaign delivery = Deleted` pode corresponder a `ARCHIVED` nos edges de listagem, enquanto o GET direto após um write `status=DELETED` também pode devolver `status/effective_status/configured_status=DELETED` — readback vivo da C23 em 25/08/2026 confirmou esse caso. Aceitar ambos como terminais, exibir `DELETED` no relatório operacional e preservar o literal real em `api_raw_status` no audit técnico.
 
 Pausa, corte, reativação e encerramento operacional devem ocorrer **somente no nível da campanha**. Não pausar conjunto ou anúncios como substituto. Relatórios usam o status da campanha (`ACTIVE`, `PAUSED` ou `DELETED`) sem criar classificação adicional. Se existir legado com campanha ativa e filhos pausados, mencionar apenas como observação quando relevante; Rodolfo já orientou Nicolas a corrigir o procedimento.
 
@@ -278,15 +278,33 @@ Conclusão: D1 não corta por resultado inicial; escala usa somente ROI geral, a
 
 Conclusão: D2 preserva aprendizagem, registra a segunda observação estimada e mantém a escala restrita às 08:00.
 
-### D3 — corte pela trajetória do ROI estimado
+### D3 — duas rotas de corte terminal
 
-1. Na leitura das `08:00`, persistir o ROI estimado do D3 e comparar os três checkpoints matinais.
-2. Se o **ROI estimado** foi negativo no D1, negativo no D2 e continua negativo no D3, pausar definitivamente a campanha no nível campanha. O valor negativo não possui tolerância de `-10%`; os três checkpoints negativos provam a trajetória.
+No D3, o resultado real passa a ser soberano e o estimado fica como sinal auxiliar.
+
+**Rota A — trajetória estimada rejeitada, às 08:00**
+
+1. Persistir o ROI estimado do D3 e comparar os três checkpoints matinais.
+2. Se o ROI estimado foi estritamente negativo no D1, D2 e D3, pausar definitivamente a campanha no nível campanha.
 3. Se faltar qualquer checkpoint estimado, falhar fechado e não inventar a sequência.
-4. Quando a trajetória D1–D3 não acionar o corte, aplicar às 08:00 as faixas do ROI geral: `>20–30% → +10%`, `>30–40% → +20%`, `>40% → +30%`; `>10–20%` mantém; fora disso observa.
-5. Pausa definitiva não entra na fila de reativação das 00:30.
 
-Conclusão: no D3, trajetória negativa usa exclusivamente o ROI estimado persistido; escala continua usando exclusivamente o ROI geral.
+**Rota B — realidade econômica rejeitada, às 08:00 e recheck às 12:00**
+
+Pausar definitivamente somente quando todos os critérios forem verdadeiros:
+
+1. pelo menos 2 dos 3 ROIs reais estão negativos (`D1 fechado + D2 fechado + D3 parcial até o checkpoint`);
+2. ROI real acumulado D1–D3 `<= -10%`;
+3. ROI real do D3 no checkpoint `< 0`;
+4. Meta `purchase_roas:omni_purchase` ponderado D1–D3 `< 1,20`;
+5. spend Meta atual `>= USD 5`;
+6. exatamente um match Smart Bidding válido, investimento SB presente, USD e revenue share ativo;
+7. atraso Smart Bidding `<= 120 minutos`.
+
+ROI estimado positivo entre `+10%` e `+30%` ou qualquer outra faixa não veta a Rota B. RPS é diagnóstico de monetização e também não veta o corte. Campo ausente, atraso excessivo, match incompleto ou entrega imaterial falha fechado: não executar write. Se a campanha não cumprir o gate completo às 08:00, não escala pela Rota B e é reavaliada às 12:00; se cumprir então, recebe o mesmo corte terminal.
+
+Quando nenhuma rota acionar o corte, apenas às 08:00 continuam valendo as faixas do ROI geral: `>20–30% → +10%`, `>30–40% → +20%`, `>40% → +30%`; `>10–20%` mantém; fora disso observa. Nenhum corte terminal entra na fila de reativação das 00:30.
+
+Conclusão: um estimado moderadamente positivo nunca salva uma campanha com perda real D1–D3 e ROAS abaixo do piso quando todo o gate de realidade está provado.
 
 ### Guardrail pós-escala das 16:00
 
@@ -432,7 +450,7 @@ Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e rea
 Diário Consolidado     07:00 dia anterior; 08:00/12:00/14:00/16:00/20:00 mesmo dia
 Intraday               01/03/05/07/09/11/13/15/17/19/21/23 São Paulo
 CPV Regras              manual permanente da estratégia; consulta dos gestores
-Checkpoint de ação     08:00 e 16:00 São Paulo, separados e sem relatório extra
+Checkpoint de ação     08:00 (escala + D3), 12:00 (recheck D3 v2) e 16:00 (pós-escala), separados e sem relatório extra
 ```
 
 A thread `CPV Regras` (`1540426218405363873`) é manual, deve ser preservada indefinidamente e não recebe relatório recorrente nem ação automática de campanha. Quando Rodolfo alterar uma regra, atualizar a operação/skills por supersessão e publicar a regra revisada nessa mesma thread.
@@ -449,7 +467,7 @@ O escopo de **exibição** é descoberto dinamicamente em cada execução pelas 
 
 No Diário de Creditoparaveiculo BR-CAR-BR, a apresentação ativa é somente desktop: tabela consolidada de campanhas seguida da tabela de resumo da conta. Cards verticais/mobile e divisores por campanha ficam desativados até Rodolfo decidir eventual uso em canais separados. Preservar conteúdo, métricas, cores, escopo dinâmico e paginação segura.
 
-No Intraday da mesma operação, retirar os cards mobile e manter o histórico diário da Smart Bidding somente na tabela histórica compacta desktop — dia atual parcial e dois dias anteriores — com data explícita e `n/d` quando não houver investimento/match. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
+No Intraday da mesma operação, retirar os cards mobile e manter o histórico diário da Smart Bidding somente na tabela histórica compacta desktop — dia atual parcial e quatro dias anteriores — com colunas `Camp`, `Dia` (`Dn/PREP`) e cinco datas explícitas; usar `n/d` quando não houver investimento/match. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
 
 O Intraday CPV inclui `RPS` e `CPM` por campanha no Adgroup, em USD e com revenue share descontado: `NET_REVENUE × 1.000 ÷ SESSIONS` e `NET_REVENUE × 1.000 ÷ GAM_IMPRESSIONS`. A Pricing filtrada por `rewarded` fornece `CR Reward = Σ gamMatchedRequests dos cinco blocos rewarded ÷ gamRequests do rewarded base × 100`, mas essa taxa é consolidada por página/operação, não por campanha; o valor cinza é o consolidado anterior/ontem. Não repetir `CR Reward` em cada linha como se fosse segmentada. Para cobertura por campanha, usar o rótulo distinto `Cob. CDP` e a fórmula `CDP_IMPRESSIONS (AD_MATCHED) ÷ CDP_REQUESTS × 100`, agrupada pela UTM da campanha/adgroup. Essa segunda taxa mede a cobertura CDP do tráfego pós-clique e não reproduz a cascata GAM reward; a cascata exata por campanha requer `gamRequests` e `gamMatchedRequests` expostos com dimensão de campanha/UTM.
 
@@ -473,7 +491,8 @@ Por volta de 08:00       persistir ROI estimado; ler ROI geral e executar a úni
 16:00                    aplicar o guardrail pós-escala pelo ROI geral + ROI estimado
 20:00                    última análise regular do próprio dia
 Durante D1/D2           observar campanhas fora das faixas; não cortar por resultado isolado
-No D3 às 08:00          encerrar se o ROI estimado persistido foi negativo em D1, D2 e D3
+No D3 às 08:00          encerrar pela trajetória estimada negativa ou pelo gate composto de realidade
+No D3 às 12:00          reavaliar somente a Rota B completa para campanhas preservadas às 08:00
 00:30                    reativar somente pausas temporárias verificadas das ocorrências 1–2
 Após qualquer write     readback Meta + audit da decisão e da fonte de ROI
 ```
@@ -512,6 +531,8 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] ROI geral e ROI estimado aparecem e são tratados como métricas distintas
 - [ ] ROI geral >20%–30% escala 10%; >30%–40% escala 20%; >40% escala 30%, somente às 08:00
 - [ ] ROI estimado negativo persistido em D1/D2/D3 às 08:00 gera pausa terminal no D3
+- [ ] Gate D3 v2 às 08:00/12:00 exige 2 dias reais negativos, acumulado `<=-10%`, D3 real negativo, ROAS Meta `<1,20`, spend atual `>=USD5`, match único e atraso SB `<=120min`
+- [ ] Estimado positivo e RPS não vetam a pausa quando o gate D3 v2 completo está provado
 - [ ] Às 16:00, somente campanha escalada às 08:00 com ROI geral e estimado negativos recebe pausa temporária/terminal
 - [ ] Ocorrências 1–2 reativam às 00:30; ocorrência 3 e D3 terminal nunca reativam
 - [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping

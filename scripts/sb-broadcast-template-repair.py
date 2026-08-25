@@ -41,6 +41,7 @@ SP = ZoneInfo('America/Sao_Paulo')
 ET = ZoneInfo('America/New_York')
 MESSAGE_COUNT = 30
 SECONDS_PER_MESSAGE_PAGE = 12
+DIGEST_HOUR_SP = 23
 STATUS_FIELDS = ('APPROVED', 'INVALID_FORMAT', 'REJECTED', 'ERROR', 'REJECTED_REASON')
 FIRST_NAME_TOKEN = '{{first_name}}'
 ALLOWED_COMPANIES = {'digital-trust', 'digital-trust-2'}
@@ -581,7 +582,16 @@ def post_discord(payload: dict, channel_id: str, dry_run: bool = False) -> str |
 
 
 def post_event(state: dict, config: dict, event: str, item: dict, dry_run: bool = False) -> str | None:
-    fingerprint_raw = json.dumps([event, item.get('template_id'), item.get('cycle'), item.get('before'), item.get('after'), item.get('action_label')], ensure_ascii=False, sort_keys=True)
+    fingerprint_parts = [
+        event, item.get('template_id'), item.get('cycle'),
+        item.get('before'), item.get('after'), item.get('action_label'),
+    ]
+    if event == 'daily':
+        # A premature empty digest must not suppress the real end-of-day result.
+        fingerprint_parts.extend([
+            item.get('processed'), item.get('positive'), item.get('blocked'), item.get('summary'),
+        ])
+    fingerprint_raw = json.dumps(fingerprint_parts, ensure_ascii=False, sort_keys=True)
     fingerprint = hashlib.sha256(fingerprint_raw.encode()).hexdigest()
     if not dry_run and fingerprint in state.setdefault('alerts', {}):
         return state['alerts'][fingerprint].get('message_id')
@@ -895,10 +905,26 @@ async def check_due(notify: bool, dry_notify: bool = False) -> dict:
             except Exception: pass
 
 
-def daily_digest(notify: bool, dry_notify: bool = False) -> dict:
+def daily_digest(
+    notify: bool,
+    dry_notify: bool = False,
+    report_date: str | None = None,
+    scheduled: bool = False,
+) -> dict:
     config = load_json(CONFIG_PATH, default_config())
     state = load_json(STATE_PATH, default_state())
-    today = now_sp().date().isoformat()
+    current = now_sp()
+    if scheduled and current.hour != DIGEST_HOUR_SP:
+        return {
+            'status': 'skip',
+            'reason': 'outside_digest_hour_sp',
+            'now_sp': current.isoformat(timespec='seconds'),
+            'expected_hour_sp': DIGEST_HOUR_SP,
+        }
+    if report_date:
+        today = dt.date.fromisoformat(report_date).isoformat()
+    else:
+        today = current.date().isoformat()
     items = [item for item in state.get('templates', {}).values() if str(item.get('approval_started_at_sp') or '').startswith(today)]
     positive = sum(1 for item in items if item.get('status') in {'completed', 'eligible_next_day'} and not item.get('no_progress_cycles'))
     blocked = sum(1 for item in items if item.get('status') == 'blocked')
@@ -927,6 +953,8 @@ def main() -> int:
     parser.add_argument('--auto-canary', action='store_true')
     parser.add_argument('--notify', action='store_true')
     parser.add_argument('--dry-notify', action='store_true')
+    parser.add_argument('--scheduled', action='store_true')
+    parser.add_argument('--date')
     parser.add_argument('--json', action='store_true')
     args = parser.parse_args()
     lock = acquire_lock()
@@ -941,7 +969,12 @@ def main() -> int:
         elif args.command == 'check':
             result = asyncio.run(check_due(notify=args.notify, dry_notify=args.dry_notify))
         elif args.command == 'digest':
-            result = daily_digest(notify=args.notify, dry_notify=args.dry_notify)
+            result = daily_digest(
+                notify=args.notify,
+                dry_notify=args.dry_notify,
+                report_date=args.date,
+                scheduled=args.scheduled,
+            )
         elif args.command == 'status':
             result = status()
         else:

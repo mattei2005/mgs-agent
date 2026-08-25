@@ -73,6 +73,25 @@ def test_d3_terminal_negative_rejects_delivered_and_retests_underexposed():
     assert by_asset["asset-3"]["retest_eligible"] is True
 
 
+def test_d3_reality_terminal_rejects_even_when_estimate_was_positive():
+    decisions = classify_campaign_assets(
+        inventory=inventory_rows(),
+        ad_insights=delivery(),
+        campaign={
+            "campaign_id": "campaign-1",
+            "cycle_day": 3,
+            "sb_roi": -14,
+            "estimated_roi": 20,
+            "status": "PAUSED",
+        },
+        checkpoint_state={"terminal": True, "terminal_reason": "PARAR D3 REAL+ROAS"},
+        now_sp=datetime(2026, 8, 24, 12, 0, tzinfo=SP),
+        lifecycle_policy=policy(),
+        anomaly=False,
+    )
+    assert decisions[0]["target_status"] == "05_REJECTED"
+
+
 def test_d4_positive_stable_marks_only_meaningfully_delivered_winner():
     decisions = classify_campaign_assets(
         inventory=inventory_rows(),

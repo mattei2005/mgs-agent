@@ -72,7 +72,6 @@ def thread_title(message: str, fallback: str) -> str:
         title = fallback
     title = re.sub(r'[`*_#>\[\]()]+', '', title)
     title = re.sub(r'\s+', ' ', title).strip()
-    title = title.replace('OpenzedFinanzas-ES-CC-ES-03', 'OpenzedFinanzas')
     title = title.replace(' — decisões simuladas', '')
     title = title.replace(' — ', ' - ')
     if len(title) > 90:

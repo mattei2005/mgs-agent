@@ -63,6 +63,8 @@ Formato de alertas desse fluxo:
 - fingerprint por template ID + ciclo + evento + contagens para suprimir repetição;
 - checker silencioso enquanto o ETA não venceu.
 
+Pitfall validado no host MGS: `CRON_TZ=America/Sao_Paulo` aparece no root crontab, mas o pacote Ubuntu `cron 3.0pl1` observado continuou disparando pelo timezone do host (`America/New_York`). Isso fez `10 23 * * *` executar às `00:10 SP` durante EDT e o digest selecionar o dia recém-iniciado, retornando zero. Para rotinas que precisam fechar exatamente um dia de São Paulo, não depender de `CRON_TZ`: agendar no minuto desejado de todas as horas (`10 * * * *`) e usar um gate `--scheduled` dentro do script baseado em `ZoneInfo('America/Sao_Paulo')`, que só publica na hora SP pretendida. Manter backfill manual por data explícita e incluir as contagens/resumo no fingerprint diário, para que um digest vazio prematuro não suprima o resultado real posterior. Validar com fixture de virada de dia/DST, execução scheduled fora da hora (deve fazer skip) e readback do embed corrigido.
+
 As cores são operacionais: template 30/30 verde é intocável; vermelho entra em troca em lote no nível do template; roxo sem vermelho entra em reset sem alteração visível + novo Approval; cinza aguarda ETA. Essa regra substitui o texto antigo que dizia que roxo era somente diagnóstico e que vermelho não tinha executor ativo. A distinção de atribuição permanece: roxo agregado não identifica a Page causal.
 
 ---

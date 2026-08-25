@@ -3,6 +3,9 @@ set -euo pipefail
 BASE=/root/mgs-agent
 PY=/root/mgs-agent/.venv-sb/bin/python
 CMD=${1:-status}
+if (( $# > 0 )); then
+  shift
+fi
 case "$CMD" in
   dispatch)
     candidate_rc=0
@@ -21,7 +24,7 @@ case "$CMD" in
     exit "$repair_rc"
     ;;
   digest)
-    exec "$PY" "$BASE/scripts/sb-broadcast-template-repair.py" digest --notify
+    exec "$PY" "$BASE/scripts/sb-broadcast-template-repair.py" digest --notify "$@"
     ;;
   audit)
     exec xvfb-run -a "$PY" "$BASE/scripts/sb-broadcast-template-repair.py" audit --json

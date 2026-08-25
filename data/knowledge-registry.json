@@ -215,6 +215,28 @@
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T09:47:37-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo D3 v2 por realidade econômica",
+      "updated_at": "2026-08-25T12:56:49+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
         "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
@@ -442,10 +464,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
       "title": "Creditoparaveiculo automatic first-delivery enrollment with 02:00 grace",
-      "updated_at": "2026-08-22T17:59:06+00:00"
+      "updated_at": "2026-08-25T12:56:49+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -730,6 +752,23 @@
       "updated_at": "2026-08-24T23:12:52+00:00"
     },
     {
+      "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24",
+      "id": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V1",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev US-CC-EN BOT usa canal dedicado e quatro threads fixas",
+      "updated_at": "2026-08-24T23:17:24+00:00"
+    },
+    {
       "canonical_key": "ares.failure-recovery",
       "canonical_source": "profiles/ares-soul.md",
       "consumers": [
@@ -761,10 +800,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V1",
       "title": "OpenzedFinanzas ES-CC-ES-03 usa canal Discord dedicado; ares-criativos fica em Creative Ops",
-      "updated_at": "2026-08-21T22:49:23+00:00"
+      "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
       "canonical_key": "capability.disaster-recovery",
@@ -1759,5 +1798,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T23:12:52+00:00"
+  "updated_at": "2026-08-25T12:56:49+00:00"
 }

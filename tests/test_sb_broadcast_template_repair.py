@@ -7,6 +7,7 @@ import sys
 import tempfile
 import threading
 import unittest
+import datetime as dt
 from unittest import mock
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -174,6 +175,24 @@ class RepairTests(unittest.TestCase):
                 self.assertIsNone(repair.safe_post_event({}, {}, 'started', item))
                 self.assertIn('http_503', item['notify_error'])
 
+    def test_daily_fingerprint_allows_changed_result_but_dedupes_repeat(self):
+        state = {}
+        empty = {
+            'template_id': 'daily', 'cycle': '2026-08-24',
+            'processed': 0, 'positive': 0, 'blocked': 0,
+            'summary': 'Nenhum template processado hoje.',
+        }
+        actual = {
+            'template_id': 'daily', 'cycle': '2026-08-24',
+            'processed': 6, 'positive': 3, 'blocked': 3,
+            'summary': 'resultado real',
+        }
+        with mock.patch.object(repair, 'post_discord', side_effect=['1', '2']) as post:
+            self.assertEqual(repair.post_event(state, {}, 'daily', empty), '1')
+            self.assertEqual(repair.post_event(state, {}, 'daily', actual), '2')
+            self.assertEqual(repair.post_event(state, {}, 'daily', actual), '2')
+        self.assertEqual(post.call_count, 2)
+
     def test_daily_capacity_counts_already_started_templates(self):
         state = {'templates': {
             'a': {'last_started_date': '2026-08-07'},
@@ -182,6 +201,55 @@ class RepairTests(unittest.TestCase):
         }}
         self.assertEqual(repair.remaining_daily_capacity(state, 6, '2026-08-07'), 4)
         self.assertEqual(repair.remaining_daily_capacity(state, 1, '2026-08-07'), 0)
+
+    def test_scheduled_digest_skips_outside_sao_paulo_hour(self):
+        current = dt.datetime(2026, 8, 25, 0, 10, tzinfo=repair.SP)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            state_path = pathlib.Path(tmpdir) / 'state.json'
+            config_path = pathlib.Path(tmpdir) / 'config.json'
+            state_path.write_text(json.dumps(repair.default_state()))
+            config_path.write_text(json.dumps(repair.default_config()))
+            with mock.patch.object(repair, 'STATE_PATH', state_path), \
+                 mock.patch.object(repair, 'CONFIG_PATH', config_path), \
+                 mock.patch.object(repair, 'now_sp', return_value=current), \
+                 mock.patch.object(repair, 'safe_post_event') as post:
+                result = repair.daily_digest(notify=True, scheduled=True)
+        self.assertEqual(result['status'], 'skip')
+        self.assertEqual(result['reason'], 'outside_digest_hour_sp')
+        post.assert_not_called()
+
+    def test_digest_can_backfill_explicit_sao_paulo_date(self):
+        current = dt.datetime(2026, 8, 25, 0, 10, tzinfo=repair.SP)
+        state = repair.default_state()
+        state['templates'] = {
+            'a': {
+                'template_id': 'a', 'template': 'A',
+                'approval_started_at_sp': '2026-08-24T09:00:00-03:00',
+                'before': {'verde': 20, 'vermelho': 1, 'roxo': 9},
+                'after': {'verde': 29, 'vermelho': 1, 'roxo': 0},
+                'status': 'eligible_next_day', 'no_progress_cycles': 0,
+            },
+            'b': {
+                'template_id': 'b', 'template': 'B',
+                'approval_started_at_sp': '2026-08-25T09:00:00-03:00',
+                'status': 'blocked', 'no_progress_cycles': 2,
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            state_path = pathlib.Path(tmpdir) / 'state.json'
+            config_path = pathlib.Path(tmpdir) / 'config.json'
+            state_path.write_text(json.dumps(state))
+            config_path.write_text(json.dumps(repair.default_config()))
+            with mock.patch.object(repair, 'STATE_PATH', state_path), \
+                 mock.patch.object(repair, 'CONFIG_PATH', config_path), \
+                 mock.patch.object(repair, 'now_sp', return_value=current), \
+                 mock.patch.object(repair, 'safe_post_event', return_value='123') as post:
+                result = repair.daily_digest(notify=True, report_date='2026-08-24')
+        self.assertEqual(result['processed'], 1)
+        self.assertEqual(result['positive'], 1)
+        self.assertEqual(result['blocked'], 0)
+        self.assertEqual(result['message_id'], '123')
+        self.assertEqual(post.call_args.args[3]['cycle'], '2026-08-24')
 
 
 class CaptureHandler(BaseHTTPRequestHandler):

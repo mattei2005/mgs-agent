@@ -1,0 +1,2554 @@
+{
+  "mode": "apply",
+  "started_at_et": "2026-08-24T20:53:49-04:00",
+  "authorization_message_id": "1541597462928687245",
+  "scope": "four US-CC-ES publishers; preserve current pool topology; Drip 30 and Broadcast 23; five URL cycle in the exact user order",
+  "publishers": {
+    "lyzmofinanzas": {
+      "publisher": "digital-trust_lyzmofinanzas",
+      "target_ids": [
+        521,
+        522,
+        983,
+        984,
+        985,
+        986,
+        987,
+        988,
+        989,
+        990,
+        991
+      ],
+      "before_target_hash": "7adec433a11ad7b6db6b24ac88e62a43c92bbcd7d27cabb917a173106370c808",
+      "before_unrelated_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "urls": [
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+        "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold"
+      ],
+      "notes": {
+        "drip_operations": [
+          "facebook_us_cc_bbva-d_rec",
+          "facebook_us_cc_san-juan-d_rec",
+          "facebook_us_cc_bbva-vis-d_rec",
+          "facebook_us_cc_macro-d_rec",
+          "facebook_us_cc_san-juan-d_rec"
+        ],
+        "broadcast_operations": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "operation_candidates": {
+          "drip": [
+            [
+              "facebook_us_cc_bbva-d_rec"
+            ],
+            [
+              "facebook_us_cc_san-juan-d_rec"
+            ],
+            [
+              "facebook_us_cc_bbva-vis-d_rec"
+            ],
+            [
+              "facebook_us_cc_macro-d_rec"
+            ],
+            [
+              "facebook_us_cc_san-juan-d_rec"
+            ]
+          ],
+          "broadcast": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ]
+        },
+        "removed_identities": [],
+        "utm_deviations_preserved": [],
+        "drip_distribution": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "broadcast_distribution": [
+          5,
+          5,
+          5,
+          5,
+          3
+        ]
+      },
+      "plans": [
+        {
+          "id": 521,
+          "name": "ly-f-us-cc-es-drip 001",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m0-1",
+              "utm_content": "drip_us_cc_m0-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-nm",
+              "utm_content": "drip_us_cc_nm",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m1-1",
+              "utm_content": "drip_us_cc_m1-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m2-1",
+              "utm_content": "drip_us_cc_m2-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m3-1",
+              "utm_content": "drip_us_cc_m3-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 983,
+          "name": "ly-f-us-cc-es-drip 002",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m4-1",
+              "utm_content": "drip_us_cc_m4-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m5-1",
+              "utm_content": "drip_us_cc_m5-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m6-1",
+              "utm_content": "drip_us_cc_m6-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m7-1",
+              "utm_content": "drip_us_cc_m7-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m8-1",
+              "utm_content": "drip_us_cc_m8-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 984,
+          "name": "ly-f-us-cc-es-drip 003",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m9-1",
+              "utm_content": "drip_us_cc_m9-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m10-1",
+              "utm_content": "drip_us_cc_m10-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m11-1",
+              "utm_content": "drip_us_cc_m11-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m12-1",
+              "utm_content": "drip_us_cc_m12-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m13-1",
+              "utm_content": "drip_us_cc_m13-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 985,
+          "name": "ly-f-us-cc-es-drip 004",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m14-1",
+              "utm_content": "drip_us_cc_m14-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m15-1",
+              "utm_content": "drip_us_cc_m15-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m16-1",
+              "utm_content": "drip_us_cc_m16-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m17-1",
+              "utm_content": "drip_us_cc_m17-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m18-1",
+              "utm_content": "drip_us_cc_m18-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 986,
+          "name": "ly-f-us-cc-es-drip 005",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m19-1",
+              "utm_content": "drip_us_cc_m19-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m20-1",
+              "utm_content": "drip_us_cc_m20-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m21-1",
+              "utm_content": "drip_us_cc_m21-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m22-1",
+              "utm_content": "drip_us_cc_m22-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m23-1",
+              "utm_content": "drip_us_cc_m23-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 987,
+          "name": "ly-f-us-cc-es-drip 006",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-drip-m24-1",
+              "utm_content": "drip_us_cc_m24-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m25-1",
+              "utm_content": "drip_us_cc_m25-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m26-1",
+              "utm_content": "drip_us_cc_m26-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m27-1",
+              "utm_content": "drip_us_cc_m27-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-drip-m28-1",
+              "utm_content": "drip_us_cc_m28-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "facebook_us_cc_san-juan-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 522,
+          "name": "ly-f-us-cc-es-mct broadcast 001",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-mct-001",
+              "utm_content": "bd_us_cc_1-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-001-2",
+              "utm_content": "bd_us_cc_1-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-002",
+              "utm_content": "bd_us_cc_2-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-002-2",
+              "utm_content": "bd_us_cc_2-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-003",
+              "utm_content": "bd_us_cc_3-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 988,
+          "name": "ly-f-us-cc-es-mct broadcast 002",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-mct-003-2",
+              "utm_content": "bd_us_cc_3-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-004",
+              "utm_content": "bd_us_cc_4-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-005",
+              "utm_content": "bd_us_cc_5-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-005-2",
+              "utm_content": "bd_us_cc_5-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-006",
+              "utm_content": "bd_us_cc_6-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 989,
+          "name": "ly-f-us-cc-es-mct broadcast 003",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-mct-007",
+              "utm_content": "bd_us_cc_7-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-008",
+              "utm_content": "bd_us_cc_8-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-009",
+              "utm_content": "bd_us_cc_9-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-010",
+              "utm_content": "bd_us_cc_10-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-010-2",
+              "utm_content": "bd_us_cc_10-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 990,
+          "name": "ly-f-us-cc-es-mct broadcast 004",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-mct-011",
+              "utm_content": "bd_us_cc_11-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-012",
+              "utm_content": "bd_us_cc_12-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-012-2",
+              "utm_content": "bd_us_cc_12-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-013",
+              "utm_content": "bd_us_cc_13-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-013-2",
+              "utm_content": "bd_us_cc_13-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 991,
+          "name": "ly-f-us-cc-es-mct broadcast 005",
+          "family": "broadcast",
+          "route_count": 3,
+          "routes": [
+            {
+              "route": "ly-f-us-cc-es-mct-014",
+              "utm_content": "bd_us_cc_14-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-015",
+              "utm_content": "bd_us_cc_15-1",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ly-f-us-cc-es-mct-015-2",
+              "utm_content": "bd_us_cc_15-2",
+              "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        }
+      ]
+    },
+    "newsounfinanzas": {
+      "publisher": "digital-trust_newsounfinanzas",
+      "target_ids": [
+        531,
+        532
+      ],
+      "before_target_hash": "a2d73845b79da1baaedefb32301aa96f7a2bed41fd6a17d6662040b5d438bc15",
+      "before_unrelated_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "urls": [
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold"
+      ],
+      "notes": {
+        "drip_operations": [
+          "facebook_us_cc_black-d_rec",
+          "facebook_us_cc_interna-d_rec",
+          "facebook_us_cc_bbva-d_rec",
+          "facebook_us_cc_macro-d_rec",
+          ""
+        ],
+        "broadcast_operations": [
+          "mct_us_cc_black_rec",
+          "mct_us_cc_interna_rec",
+          "",
+          "mct_us_cc_macro_rec",
+          ""
+        ],
+        "operation_candidates": {
+          "drip": [
+            [
+              "facebook_us_cc_black-d_rec"
+            ],
+            [
+              "facebook_us_cc_interna-d_rec",
+              "facebook_us_cc_san-juan-d_rec"
+            ],
+            [
+              "facebook_us_cc_bbva-d_rec"
+            ],
+            [
+              "facebook_us_cc_macro-d_rec"
+            ],
+            []
+          ],
+          "broadcast": [
+            [
+              "mct_us_cc_black_rec"
+            ],
+            [
+              "mct_us_cc_interna_rec",
+              "mct_us_cc_san-juan_rec"
+            ],
+            [],
+            [
+              "mct_us_cc_macro_rec"
+            ],
+            []
+          ]
+        },
+        "removed_identities": [],
+        "utm_deviations_preserved": [],
+        "drip_distribution": [
+          30
+        ],
+        "broadcast_distribution": [
+          23
+        ]
+      },
+      "plans": [
+        {
+          "id": 531,
+          "name": "ns-f-us-cc-es-drip",
+          "family": "drip",
+          "route_count": 30,
+          "routes": [
+            {
+              "route": "ns-f-us-cc-es-drip-m0-1",
+              "utm_content": "drip_us_cc_m0-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-nm",
+              "utm_content": "drip_us_cc_nm",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m1-1",
+              "utm_content": "drip_us_cc_m1-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m2-1",
+              "utm_content": "drip_us_cc_m2-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m3-1",
+              "utm_content": "drip_us_cc_m3-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m4-1",
+              "utm_content": "drip_us_cc_m4-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m5-1",
+              "utm_content": "drip_us_cc_m5-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m6-1",
+              "utm_content": "drip_us_cc_m6-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m7-1",
+              "utm_content": "drip_us_cc_m7-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m8-1",
+              "utm_content": "drip_us_cc_m8-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m9-1",
+              "utm_content": "drip_us_cc_m9-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m10-1",
+              "utm_content": "drip_us_cc_m10-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m11-1",
+              "utm_content": "drip_us_cc_m11-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m12-1",
+              "utm_content": "drip_us_cc_m12-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m13-1",
+              "utm_content": "drip_us_cc_m13-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m14-1",
+              "utm_content": "drip_us_cc_m14-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m15-1",
+              "utm_content": "drip_us_cc_m15-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m16-1",
+              "utm_content": "drip_us_cc_m16-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m17-1",
+              "utm_content": "drip_us_cc_m17-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m18-1",
+              "utm_content": "drip_us_cc_m18-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m19-1",
+              "utm_content": "drip_us_cc_m19-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m20-1",
+              "utm_content": "drip_us_cc_m20-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m21-1",
+              "utm_content": "drip_us_cc_m21-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m22-1",
+              "utm_content": "drip_us_cc_m22-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m23-1",
+              "utm_content": "drip_us_cc_m23-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m24-1",
+              "utm_content": "drip_us_cc_m24-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "facebook_us_cc_black-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m25-1",
+              "utm_content": "drip_us_cc_m25-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m26-1",
+              "utm_content": "drip_us_cc_m26-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m27-1",
+              "utm_content": "drip_us_cc_m27-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-drip-m28-1",
+              "utm_content": "drip_us_cc_m28-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 532,
+          "name": "ns-f-us-cc-es-broadcast",
+          "family": "broadcast",
+          "route_count": 23,
+          "routes": [
+            {
+              "route": "ns-f-us-cc-es-mct-001",
+              "utm_content": "bd_us_cc_1-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "mct_us_cc_black_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-001-2",
+              "utm_content": "bd_us_cc_1-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-002",
+              "utm_content": "bd_us_cc_2-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-002-2",
+              "utm_content": "bd_us_cc_2-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-003",
+              "utm_content": "bd_us_cc_3-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-003-2",
+              "utm_content": "bd_us_cc_3-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "mct_us_cc_black_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-004",
+              "utm_content": "bd_us_cc_4-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-005",
+              "utm_content": "bd_us_cc_5-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-005-2",
+              "utm_content": "bd_us_cc_5-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-006",
+              "utm_content": "bd_us_cc_6-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-007",
+              "utm_content": "bd_us_cc_7-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "mct_us_cc_black_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-008",
+              "utm_content": "bd_us_cc_8-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-009",
+              "utm_content": "bd_us_cc_9-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-010",
+              "utm_content": "bd_us_cc_10-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-010-2",
+              "utm_content": "bd_us_cc_10-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-011",
+              "utm_content": "bd_us_cc_11-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "mct_us_cc_black_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-012",
+              "utm_content": "bd_us_cc_12-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-012-2",
+              "utm_content": "bd_us_cc_12-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-013",
+              "utm_content": "bd_us_cc_13-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-013-2",
+              "utm_content": "bd_us_cc_13-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-014",
+              "utm_content": "bd_us_cc_14-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+              "jbf_operation": "mct_us_cc_black_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-015",
+              "utm_content": "bd_us_cc_15-1",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ns-f-us-cc-es-mct-015-2",
+              "utm_content": "bd_us_cc_15-2",
+              "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        }
+      ]
+    },
+    "eggbevfinanzas": {
+      "publisher": "digital-trust_eggbevfinanzas",
+      "target_ids": [
+        523,
+        524
+      ],
+      "before_target_hash": "c772348efde3ecdf3c7822812996787afa277ddb6bcb74de616eb1d2f52a017a",
+      "before_unrelated_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "urls": [
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+        "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold"
+      ],
+      "notes": {
+        "drip_operations": [
+          "facebook_us_cc_bbva-mas-d_rec",
+          "facebook_us_cc_interna-d_rec",
+          "facebook_us_cc_bbva-vis-d_rec",
+          "facebook_us_cc_macro-d_rec",
+          "facebook_us_cc_juan-gold-d_rec"
+        ],
+        "broadcast_operations": [
+          "mct_us_cc_bbva-mas_rec",
+          "mct_us_cc_interna_rec",
+          "mct_us_cc_bbva-vis_rec",
+          "mct_us_cc_macro_rec",
+          "mct_us_cc_juan-gold_rec"
+        ],
+        "operation_candidates": {
+          "drip": [
+            [
+              "facebook_us_cc_bbva-mas-d_rec"
+            ],
+            [
+              "facebook_us_cc_interna-d_rec"
+            ],
+            [
+              "facebook_us_cc_bbva-vis-d_rec"
+            ],
+            [
+              "facebook_us_cc_macro-d_rec"
+            ],
+            [
+              "facebook_us_cc_juan-gold-d_rec"
+            ]
+          ],
+          "broadcast": [
+            [
+              "mct_us_cc_bbva-mas_rec"
+            ],
+            [
+              "mct_us_cc_interna_rec"
+            ],
+            [
+              "mct_us_cc_bbva-vis_rec"
+            ],
+            [
+              "mct_us_cc_macro_rec"
+            ],
+            [
+              "mct_us_cc_juan-gold_rec"
+            ]
+          ]
+        },
+        "removed_identities": [],
+        "utm_deviations_preserved": [
+          {
+            "route": "eb-f-us-cc-es-drip-nm",
+            "current": "drip_nm",
+            "canonical": "drip_us_cc_nm"
+          }
+        ],
+        "drip_distribution": [
+          30
+        ],
+        "broadcast_distribution": [
+          23
+        ]
+      },
+      "plans": [
+        {
+          "id": 523,
+          "name": "eb-f-us-cc-es-drip",
+          "family": "drip",
+          "route_count": 30,
+          "routes": [
+            {
+              "route": "eb-f-us-cc-es-drip-m0-1",
+              "utm_content": "drip_us_cc_m0-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-nm",
+              "utm_content": "drip_nm",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m1-1",
+              "utm_content": "drip_us_cc_m1-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m2-1",
+              "utm_content": "drip_us_cc_m2-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m3-1",
+              "utm_content": "drip_us_cc_m3-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m4-1",
+              "utm_content": "drip_us_cc_m4-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m5-1",
+              "utm_content": "drip_us_cc_m5-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m6-1",
+              "utm_content": "drip_us_cc_m6-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m7-1",
+              "utm_content": "drip_us_cc_m7-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m8-1",
+              "utm_content": "drip_us_cc_m8-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m9-1",
+              "utm_content": "drip_us_cc_m9-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m10-1",
+              "utm_content": "drip_us_cc_m10-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m11-1",
+              "utm_content": "drip_us_cc_m11-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m12-1",
+              "utm_content": "drip_us_cc_m12-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m13-1",
+              "utm_content": "drip_us_cc_m13-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m14-1",
+              "utm_content": "drip_us_cc_m14-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m15-1",
+              "utm_content": "drip_us_cc_m15-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m16-1",
+              "utm_content": "drip_us_cc_m16-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m17-1",
+              "utm_content": "drip_us_cc_m17-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m18-1",
+              "utm_content": "drip_us_cc_m18-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m19-1",
+              "utm_content": "drip_us_cc_m19-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m20-1",
+              "utm_content": "drip_us_cc_m20-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m21-1",
+              "utm_content": "drip_us_cc_m21-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m22-1",
+              "utm_content": "drip_us_cc_m22-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m23-1",
+              "utm_content": "drip_us_cc_m23-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m24-1",
+              "utm_content": "drip_us_cc_m24-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "facebook_us_cc_bbva-mas-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m25-1",
+              "utm_content": "drip_us_cc_m25-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "facebook_us_cc_interna-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m26-1",
+              "utm_content": "drip_us_cc_m26-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "facebook_us_cc_bbva-vis-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m27-1",
+              "utm_content": "drip_us_cc_m27-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "facebook_us_cc_macro-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-drip-m28-1",
+              "utm_content": "drip_us_cc_m28-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "facebook_us_cc_juan-gold-d_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 524,
+          "name": "eb-f-us-cc-es-mct broadcast",
+          "family": "broadcast",
+          "route_count": 23,
+          "routes": [
+            {
+              "route": "eb-f-us-cc-es-mct-001",
+              "utm_content": "bd_us_cc_us_cc_1-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "mct_us_cc_bbva-mas_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-001-2",
+              "utm_content": "bd_us_cc_us_cc_1-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-002",
+              "utm_content": "bd_us_cc_us_cc_2-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "mct_us_cc_bbva-vis_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-002-2",
+              "utm_content": "bd_us_cc_us_cc_2-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-003",
+              "utm_content": "bd_us_cc_us_cc_3-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "mct_us_cc_juan-gold_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-003-2",
+              "utm_content": "bd_us_cc_us_cc_3-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "mct_us_cc_bbva-mas_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-004",
+              "utm_content": "bd_us_cc_us_cc_4-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-005",
+              "utm_content": "bd_us_cc_us_cc_5-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "mct_us_cc_bbva-vis_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-005-2",
+              "utm_content": "bd_us_cc_us_cc_5-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-006",
+              "utm_content": "bd_us_cc_us_cc_6-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "mct_us_cc_juan-gold_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-007",
+              "utm_content": "bd_us_cc_us_cc_7-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "mct_us_cc_bbva-mas_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-008",
+              "utm_content": "bd_us_cc_us_cc_8-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-009",
+              "utm_content": "bd_us_cc_us_cc_9-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "mct_us_cc_bbva-vis_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-010",
+              "utm_content": "bd_us_cc_us_cc_10-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-010-2",
+              "utm_content": "bd_us_cc_us_cc_10-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "mct_us_cc_juan-gold_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-011",
+              "utm_content": "bd_us_cc_us_cc_11-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "mct_us_cc_bbva-mas_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-012",
+              "utm_content": "bd_us_cc_us_cc_12-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-012-2",
+              "utm_content": "bd_us_cc_us_cc_12-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "mct_us_cc_bbva-vis_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-013",
+              "utm_content": "bd_us_cc_us_cc_13-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+              "jbf_operation": "mct_us_cc_macro_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-013-2",
+              "utm_content": "bd_us_cc_us_cc_13-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+              "jbf_operation": "mct_us_cc_juan-gold_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-014",
+              "utm_content": "bd_us_cc_us_cc_14-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+              "jbf_operation": "mct_us_cc_bbva-mas_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-015",
+              "utm_content": "bd_us_cc_us_cc_15-1",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+              "jbf_operation": "mct_us_cc_interna_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "eb-f-us-cc-es-mct-015-2",
+              "utm_content": "bd_us_cc_us_cc_15-2",
+              "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+              "jbf_operation": "mct_us_cc_bbva-vis_rec",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        }
+      ]
+    },
+    "topfeedfinanzas": {
+      "publisher": "digital-trust_topfeedfinanzas",
+      "target_ids": [
+        583,
+        584,
+        1053,
+        1054,
+        1055,
+        1056,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061
+      ],
+      "before_target_hash": "487729337f7118a2e90fd4bd0b024f026f0618b465b9aacf5c52e65d46cd71b1",
+      "before_unrelated_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "urls": [
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold"
+      ],
+      "notes": {
+        "drip_operations": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "broadcast_operations": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "operation_candidates": {
+          "drip": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "broadcast": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ]
+        },
+        "removed_identities": [],
+        "utm_deviations_preserved": [],
+        "drip_distribution": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "broadcast_distribution": [
+          5,
+          5,
+          5,
+          5,
+          3
+        ]
+      },
+      "plans": [
+        {
+          "id": 583,
+          "name": "ftf-f-us-cc-es-drip 001",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m0-1",
+              "utm_content": "drip_us_cc_m0-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-nm",
+              "utm_content": "drip_us_cc_nm",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m1-1",
+              "utm_content": "drip_us_cc_m1-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m2-1",
+              "utm_content": "drip_us_cc_m2-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m3-1",
+              "utm_content": "drip_us_cc_m3-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1057,
+          "name": "ftf-f-us-cc-es-drip 002",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m4-1",
+              "utm_content": "drip_us_cc_m4-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m5-1",
+              "utm_content": "drip_us_cc_m5-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m6-1",
+              "utm_content": "drip_us_cc_m6-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m7-1",
+              "utm_content": "drip_us_cc_m7-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m8-1",
+              "utm_content": "drip_us_cc_m8-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1058,
+          "name": "ftf-f-us-cc-es-drip 003",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m9-1",
+              "utm_content": "drip_us_cc_m9-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m10-1",
+              "utm_content": "drip_us_cc_m10-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m11-1",
+              "utm_content": "drip_us_cc_m11-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m12-1",
+              "utm_content": "drip_us_cc_m12-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m13-1",
+              "utm_content": "drip_us_cc_m13-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1059,
+          "name": "ftf-f-us-cc-es-drip 004",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m14-1",
+              "utm_content": "drip_us_cc_m14-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m15-1",
+              "utm_content": "drip_us_cc_m15-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m16-1",
+              "utm_content": "drip_us_cc_m16-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m17-1",
+              "utm_content": "drip_us_cc_m17-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m18-1",
+              "utm_content": "drip_us_cc_m18-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1060,
+          "name": "ftf-f-us-cc-es-drip 005",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m19-1",
+              "utm_content": "drip_us_cc_m19-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m20-1",
+              "utm_content": "drip_us_cc_m20-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m21-1",
+              "utm_content": "drip_us_cc_m21-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m22-1",
+              "utm_content": "drip_us_cc_m22-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m23-1",
+              "utm_content": "drip_us_cc_m23-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1061,
+          "name": "ftf-f-us-cc-es-drip 006",
+          "family": "drip",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-drip-m24-1",
+              "utm_content": "drip_us_cc_m24-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m25-1",
+              "utm_content": "drip_us_cc_m25-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m26-1",
+              "utm_content": "drip_us_cc_m26-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m27-1",
+              "utm_content": "drip_us_cc_m27-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-drip-m28-1",
+              "utm_content": "drip_us_cc_m28-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 584,
+          "name": "ftf-f-us-cc-es-mct broadcast 001",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-mct-001",
+              "utm_content": "bd_us_cc_1-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-001-2",
+              "utm_content": "bd_us_cc_1-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-002",
+              "utm_content": "bd_us_cc_2-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-002-2",
+              "utm_content": "bd_us_cc_2-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-003",
+              "utm_content": "bd_us_cc_3-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1053,
+          "name": "ftf-f-us-cc-es-mct broadcast 002",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-mct-003-2",
+              "utm_content": "bd_us_cc_3-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-004",
+              "utm_content": "bd_us_cc_4-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-005",
+              "utm_content": "bd_us_cc_5-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-005-2",
+              "utm_content": "bd_us_cc_5-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-006",
+              "utm_content": "bd_us_cc_6-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1054,
+          "name": "ftf-f-us-cc-es-mct broadcast 003",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-mct-007",
+              "utm_content": "bd_us_cc_7-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-008",
+              "utm_content": "bd_us_cc_8-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-009",
+              "utm_content": "bd_us_cc_9-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-010",
+              "utm_content": "bd_us_cc_10-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-010-2",
+              "utm_content": "bd_us_cc_10-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1055,
+          "name": "ftf-f-us-cc-es-mct broadcast 004",
+          "family": "broadcast",
+          "route_count": 5,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-mct-011",
+              "utm_content": "bd_us_cc_11-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-012",
+              "utm_content": "bd_us_cc_12-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-012-2",
+              "utm_content": "bd_us_cc_12-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-013",
+              "utm_content": "bd_us_cc_13-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-013-2",
+              "utm_content": "bd_us_cc_13-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": 1056,
+          "name": "ftf-f-us-cc-es-mct broadcast 005",
+          "family": "broadcast",
+          "route_count": 3,
+          "routes": [
+            {
+              "route": "ftf-f-us-cc-es-mct-014",
+              "utm_content": "bd_us_cc_14-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-015",
+              "utm_content": "bd_us_cc_15-1",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            },
+            {
+              "route": "ftf-f-us-cc-es-mct-015-2",
+              "utm_content": "bd_us_cc_15-2",
+              "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+              "jbf_operation": "",
+              "healthy": true,
+              "freeze": true,
+              "freeze_sessions": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "url_checks": {
+    "lyzmofinanzas": [
+      {
+        "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black",
+        "http": 200,
+        "final_url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-mastercard-black/"
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+        "http": 200,
+        "final_url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional/"
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+        "http": 200,
+        "final_url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold/"
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro",
+        "http": 200,
+        "final_url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-mastercard-macro/"
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold",
+        "http": 200,
+        "final_url": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-banco-san-juan-tarjeta-credito-gold/"
+      }
+    ],
+    "newsounfinanzas": [
+      {
+        "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black",
+        "http": 200,
+        "final_url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-mastercard-black/"
+      },
+      {
+        "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional",
+        "http": 200,
+        "final_url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-san-juan-tarjeta-de-credito-internacional/"
+      },
+      {
+        "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold",
+        "http": 200,
+        "final_url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-bbva-tarjeta-visa-gold/"
+      },
+      {
+        "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "http": 200,
+        "final_url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-mastercard-macro/"
+      },
+      {
+        "url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold",
+        "http": 200,
+        "final_url": "https://finanzas.newsoun.com/rec-us-cc-tarjeta-de-credito-banco-san-juan-tarjeta-credito-gold/"
+      }
+    ],
+    "eggbevfinanzas": [
+      {
+        "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black",
+        "http": 200,
+        "final_url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-mastercard-black/"
+      },
+      {
+        "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional",
+        "http": 200,
+        "final_url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-san-juan-internacional/"
+      },
+      {
+        "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold",
+        "http": 200,
+        "final_url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-bbva-visa-gold/"
+      },
+      {
+        "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro",
+        "http": 200,
+        "final_url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-mastercard-macro/"
+      },
+      {
+        "url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold",
+        "http": 200,
+        "final_url": "https://finanzas.eggbev.com/rec-us-cc-tarjeta-banco-san-juan-gold/"
+      }
+    ],
+    "topfeedfinanzas": [
+      {
+        "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black",
+        "http": 200,
+        "final_url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-mastercard-black/"
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+        "http": 200,
+        "final_url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional/"
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold",
+        "http": 200,
+        "final_url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-bbva-visa-gold/"
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro",
+        "http": 200,
+        "final_url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-mastercard-macro/"
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold",
+        "http": 200,
+        "final_url": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-banco-san-juan-gold/"
+      }
+    ]
+  }
+}

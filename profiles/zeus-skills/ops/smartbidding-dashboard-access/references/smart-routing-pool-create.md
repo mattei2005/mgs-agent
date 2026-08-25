@@ -113,6 +113,26 @@ Caso validado Fincgriffin US-CAR-EN:
 - URLs-alvo Lightstream primeiro e PenFed Auto Loan segundo;
 - seis pools Drip e três MCT existentes atualizados; dezoito pools novos criados, sem deleção.
 
+## Redistribuição ordenada com cinco URLs explícitas
+
+Quando Rodolfo fornecer cinco URLs em uma ordem exata para refazer Drip e Broadcast, essa lista é a fonte autoritativa; não substituir a sequência por um snapshot de outro publisher.
+
+1. Drip: ordenar as identidades como `m0`, `nm`, `m1`–`m28` e aplicar as cinco URLs ciclicamente. Resultado: 30 rotas, seis ocorrências de cada URL.
+2. Broadcast: ordenar naturalmente as 23 identidades live (`001`, `001-2`, `002`, `002-2` etc.) e aplicar as cinco URLs ciclicamente. Resultado por URL: `5,5,5,4,4`.
+3. Se o pedido for apenas troca de destinos, preservar IDs, nomes e topologia live. Porém, quando Rodolfo pedir a “mesma ideologia de sempre” com Drip 30 e Broadcast 23, a topologia canônica é obrigatória mesmo se o publisher ainda tiver pools únicos:
+   - Drip `001–006`: seis pools de cinco rotas;
+   - Broadcast `001–005`: `5,5,5,5,3` rotas;
+   - renomear o pool-base legado para `001` e preservar seu ID;
+   - criar e validar primeiro todos os sufixos `002+`; somente depois reduzir/renomear o base para `001`.
+4. Se o pedido exigir exatamente 30 rotas Drip e houver uma identidade extra conhecida, como `m0-2`, removê-la somente do payload do pool, registrar a identidade e validar cobertura única de `m0`, `nm`, `m1`–`m28`.
+5. Resolver `jbf_operation` ao vivo por `URL + SOURCE + MEDIUM`. Nunca transportar operação de outro publisher nem inventar por padrão nominal.
+6. Se a URL publicada responder HTTP 200, Rodolfo tiver ordenado explicitamente o write e a operação ainda não existir no catálogo, a rota pode ser gravada com `jbf_operation` vazia somente como `success_with_adops_pending`. Reportar contagem exata por publisher/família e nunca declarar prontidão AdOps completa.
+7. Preservar metadata legada mesmo quando incomum; por exemplo, um Broadcast existente com `SOURCE=FACEBOOK` e `MEDIUM` vazio não deve receber operação MCT por inferência.
+8. Fazer backup integral, dry-run, writes reversíveis apenas sobre IDs existentes quando a topologia for preservada, readback imediato e nova sessão independente. Validar contagens, ordem das URLs, saúde, pools não relacionados e operações vazias.
+9. Manter `freeze=false` em todas as rotas por padrão para que o Smart Routing continue otimizando. Ordem exata é configuração inicial, não autorização para congelar destinos. `freeze=true` só pode ser aplicado quando Rodolfo pedir explicitamente o congelamento e definir a duração/sessões; nunca inferir freeze como solução para um readback que mudou depois do write.
+
+Caso corrigido em 2026-08-24: quatro publishers Finanzas US-CC-ES terminaram com 44 pools e 212 rotas — cada publisher com seis Drips e cinco Broadcasts. Lyzmo/Topfeed já estavam divididos; Newsoun/Eggbev exigiram 18 criações e quatro atualizações dos bases. A tentativa indevida de congelar a ordem foi revertida: 212/212 rotas ficaram com `freeze=false`, preservando o otimizador do Smart Routing.
+
 ## Comparação de cartões entre sites
 
 Quando Rodolfo fornecer URLs de um site e perguntar se os mesmos cartões existem no Smart Routing de outro site, comparar pela **identidade do cartão**, não pela igualdade literal de domínio ou slug.

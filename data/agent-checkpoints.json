@@ -112,6 +112,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-D3-REALITY-V2-20260825",
+      "next_step": "Monitorar o recheck automático das 12:00 e revisar falsos positivos após sete ciclos D3, sem generalizar para outra operação",
+      "objective": "Aplicar regra D3 v2 combinando ROI real acumulado e Meta ROAS sem imunidade por estimado moderado",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "concluído: runtime e wrapper atualizados; regra 08:00/12:00 ativa; c13/c14/c15/c16/c18 pausadas e verificadas; c11/c19 preservadas; 72 testes aprovados",
+      "thread_id": "1541608945704247408",
+      "updated_at": "2026-08-25T12:56:49+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-DESKTOP-ONLY-REPORTS-20260824",
       "next_step": "Manter layout desktop-only ate Rodolfo definir canais separados ou pedir reativacao",
       "objective": "Remover temporariamente a versao mobile dos relatorios Diario e Intraday CPV",
@@ -233,12 +243,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Revisar com Rodolfo os princípios e parâmetros próprios da estratégia BOT/Messenger Eggbev; materializar contrato operacional draft e só então criar crons Eggbev em dry-run/read-only.",
-      "objective": "Reconstruir do zero a arquitetura Campaign Ops da estratégia BOT/Messenger Eggbev US-CC-EN, retirar OpenzedFinanzas do escopo ativo do Ares e configurar regras, skills, dados e crons para gestão de Rodolfo e Nicolas.",
-      "source": "discord:thread:1541581677602545825; account:1034081997659047; auth-audit:data/ares/meta-ads/audit/auth-check-1034081997659047-20260824T230202Z.json; retirement:data/ares/meta-ads/retired/OpenzedFinanzas-CC-ES/retirement-manifest.json",
-      "state": "iniciativa iniciada por rodolfo. conta meta 1034081997659047 validada read-only por http 200 como eggbev-us-cc-en-01, usd, america/new_york. token corporativo localizado no item 1password informado e mantido secreto. threads fixas fornecidas: regras 1541578622106865815, intraday 1541578606076231750, diario 1541578596253175858, criar campanhas 1541578556037927053. três crons openzed e a skill específica foram removidos. 344 arquivos openzed saíram das rotas ativas para retired/, com audit/report/log/git histórico preservado. nenhuma regra de tráfego direto será herdada automaticamente.",
+      "next_step": "Definir fluxo final do BOT, objetivo/optimization Meta, métrica principal e fonte de resultado antes de estruturar campanhas, regras Intraday/Diário ou crons",
+      "objective": "Reconstruir do zero a arquitetura Campaign Ops BOT/Messenger Eggbev US-CC-EN, sem herdar regras de tráfego direto ou da operação anterior",
+      "source": "/root/mgs-agent/data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "escopo antigo retirado e base eggbev validada; contrato de campanha em revisão com rodolfo e nicolas; write=false; activation=false; crons eggbev=0",
       "thread_id": "1541581677602545825",
-      "updated_at": "2026-08-24T23:06:39+00:00"
+      "updated_at": "2026-08-24T23:26:32+00:00"
     },
     {
       "agent": "ares",
@@ -975,10 +985,10 @@
       "id": "sb-template-self-healing-rollout-20260807",
       "next_step": "Dispatcher das 08:00 SP pode consumir US-JOB-ES: déficit live máximo 1 + reserva 3 disponíveis (4 candidates); US-CC-ES: déficit live máximo 15 + reserva 3 disponíveis (18 candidates)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-23T07:34:13-03:00; data:sb-utility-generated-candidates.json",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-08-25T07:31:03-03:00; data:sb-utility-generated-candidates.json",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-08-23T10:34:20+00:00"
+      "updated_at": "2026-08-25T10:33:00+00:00"
     },
     {
       "agent": "zeus",
@@ -989,6 +999,16 @@
       "state": "completed",
       "thread_id": "1536500671971328041",
       "updated_at": "2026-08-10T22:57:47+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "smart-routing-four-finanzas-us-cc-es-20260824",
+      "next_step": "AdOps disponibilizar operações faltantes; preencher e validar 91 rotas sem congelar URLs e sem alterar identidades/topologia.",
+      "objective": "Padronizar cinco URLs nos quatro publishers Finanzas US-CC-ES com topologia canônica 6+5 e Smart Routing ativo.",
+      "source": "/root/mgs-agent/work/sb-smart-routing/20260824T212538-0400-four-finanzas-us-cc-es-unfreeze/90-independent-readback.json",
+      "state": "concluído em produção: 44 pools/212 rotas, cada publisher com drip 001-006 e broadcast 001-005. 212/212 rotas com freeze=false e freeze_sessions=0; otimizador ativo. ordem inicial aplicada, mas pode ser redistribuída normalmente pelo smart routing. permanecem 91 jbf_operation vazias adops pending.",
+      "thread_id": "1541531720137052161",
+      "updated_at": "2026-08-25T01:29:41+00:00"
     },
     {
       "agent": "zeus",
@@ -1182,5 +1202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T23:06:39+00:00"
+  "updated_at": "2026-08-25T12:56:49+00:00"
 }

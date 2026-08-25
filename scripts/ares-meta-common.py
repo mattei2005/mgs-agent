@@ -6,7 +6,7 @@ from pathlib import Path
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
 GRAPH_VERSION = os.environ.get('ARES_META_GRAPH_VERSION', 'v20.0')
-TOKEN_ITEM_DEFAULT = 'Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN'
+TOKEN_ITEM_DEFAULT = os.environ.get('ARES_META_TOKEN_ITEM', '').strip()
 TOKEN_CACHE_PATH = Path(os.environ.get('ARES_META_TOKEN_CACHE_PATH', '/root/.cache/mgs/ares-meta-token.json'))
 TOKEN_CACHE_LOCK_PATH = Path(os.environ.get('ARES_META_TOKEN_CACHE_LOCK_PATH', f'{TOKEN_CACHE_PATH}.lock'))
 TOKEN_CACHE_REFRESH_SECONDS = int(os.environ.get('ARES_META_TOKEN_CACHE_REFRESH_SECONDS', '86400'))
@@ -119,6 +119,13 @@ def _fetch_token_from_1password(item_name):
     return None, res.stderr or ''
 
 
+def _require_token_item(item_name):
+    item = str(item_name or '').strip()
+    if not item:
+        raise RuntimeError('Meta token item must be configured explicitly by account or ARES_META_TOKEN_ITEM')
+    return item
+
+
 def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT, force_refresh=False):
     """Return a Meta token without calling 1Password on every process run.
 
@@ -126,6 +133,7 @@ def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT, force_refresh=False):
     cron processes and double-checked after locking to avoid a request stampede.
     If refresh fails, a bounded older cache may be used until its maximum age.
     """
+    item_name = _require_token_item(item_name)
     if not force_refresh:
         cached = _read_token_cache(item_name, TOKEN_CACHE_REFRESH_SECONDS)
         if cached:
@@ -158,6 +166,7 @@ def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT, force_refresh=False):
 
 def invalidate_token_cache(item_name=TOKEN_ITEM_DEFAULT, rejected_token=None):
     """Invalidate only the matching cached credential; never print its value."""
+    item_name = _require_token_item(item_name)
     with _open_token_cache_lock() as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         try:

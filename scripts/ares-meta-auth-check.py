@@ -10,7 +10,7 @@ common=importlib.util.module_from_spec(spec); spec.loader.exec_module(common)
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--account-id', required=True)
-    ap.add_argument('--item', default='Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN')
+    ap.add_argument('--item', required=True, help='Exact 1Password item name for this ad account')
     ap.add_argument('--out')
     args=ap.parse_args()
     token, field = common.get_token_from_1password(args.item)

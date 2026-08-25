@@ -1,28 +1,49 @@
-# Contrato atual de relatórios Meta Ads intraday
+# Contrato genérico de relatórios Meta Ads
 
-Este arquivo preserva literalmente o contrato de logs extraído do `SKILL.md` em 2026-07-13.
+Este arquivo define somente a apresentação e as evidências mínimas. Métricas, horários, thresholds e ações vêm do contrato da operação.
 
-## Formato de log dos crons
-
-Quando configurar ou ajustar crons Meta Ads do Ares (`intraday v2` e `reativação segura 00:30`), o log operacional deve ir para o canal `logs-aquisicao` quando configurado para a operação. O formato preferido por Rodolfo é uma tabela curta, com título contendo conta, dia e horário da conta.
-
-Durante `read_only/dry_run`, relatórios de gestão devem ser tratados como recomendações auditáveis: cada checkpoint/recomendação relevante deve ter thread própria no `logs-aquisicao` para Rodolfo responder a ação manual tomada. Depois que write/autonomia for explicitamente liberado, não abrir thread para cada ação por padrão; executar, validar e postar log consolidado.
+## Cabeçalho obrigatório
 
 ```text
-<Nome da conta> — <YYYY-MM-DD> — <HH:MM TZ> — <Tipo do cron>
-
-ID REC                 | Nome da campanha              | PG ID    | Início     | Spend | MO | CPMO | Ação que eu tomaria | Motivo
------------------------|-------------------------------|----------|------------|-------|----|------|---------------------|-------
-REC-20260621-0124-001  | Elena Santana - ES - ESP - 009| pg_22091 | 20/06/2026 | 6.21  | 0  |      | OBSERVAR            | Learning < 3d; R1 acionou
+<Alias da conta> — <dd/mm/yyyy> — <HH:MM timezone da conta> — <tipo do relatório>
+Período: <início–fim> | Moeda: <currency> | Fontes: <Meta e fontes externas aprovadas>
+Modo: <read_only | dry_run | controlled_write>
 ```
 
-Regras de formatação:
-- Extrair `PG ID` do nome da campanha quando houver padrão `(pg_12345)`.
-- `País/Vertical`: país do nome da campanha quando disponível + vertical da operação.
-- `Regra usada`: `R1`–`R4` no intraday v2; `reativar-00:30-paused_by_ares_rule` no cron diário; `HOA`/razão no gestor HOA.
-- `Status atual`: `effective_status` atual da campanha.
-- `Ação que eu tomaria`: no dry-run, usar verbos simulados (`pausaria`, `reativaria`, `manteria`, `clonaria/substituiria`, `ignoraria`). Nunca executar write nessa fase.
-- Se não houver ação candidata nem erro, o cron fica silencioso e salva apenas audit JSON local, salvo HOA configurado para `always_output_each_checkpoint`.
-- Sempre declarar `dry_run_no_write` no audit enquanto controlled-write não estiver aprovado; não precisa poluir a tabela principal com essa coluna.
-- Respostas curtas de Rodolfo na thread devem mapear para state/audit: `feito`, `ignorar`, `segurar 1 checkpoint`, `pausei`, `reativei`, `não mexer nessa campanha`.
+## Conteúdo mínimo por campanha
 
+```text
+Camp | Nome operacional | Status | Início | Spend | Métrica principal | Custo/resultado | Ação | Motivo
+```
+
+Regras:
+
+- Usar o alias curto da conta no título; IDs técnicos ficam no audit.
+- `Camp` usa o identificador humano definido pela operação; nunca inventar número ausente.
+- `Início` é data real `dd/mm/yyyy` no timezone da conta.
+- Status operacional vem do nível campanha; inconsistência de adset/ad aparece como observação quando relevante.
+- Métrica principal e custo/resultado usam os nomes e fórmulas do contrato da operação.
+- Em `read_only/dry_run`, a ação deve ser simulada: `observaria`, `manteria`, `pausaria`, `reativaria`, `criaria` ou `não agiria`.
+- Em `controlled_write`, mostrar ação executada e resultado do GET/readback.
+- Sem ação/erro, o cron pode ficar silencioso quando o contrato permitir.
+- Quando houver receita/ROI externo, declarar atraso da fonte, moeda, revenue share e fórmula líquida usada.
+- Campanhas e linhas visíveis devem ter contagem reconciliada; não declarar totais que divergem da enumeração.
+
+## Discord
+
+- Usar bloco `text` com colunas alinhadas para consolidação desktop.
+- Para operação que exigir visualização móvel, acrescentar cards verticais responsivos sem eliminar a tabela consolidada.
+- Dividir mensagens por capacidade real do Discord sem cortar uma linha no meio.
+- Usar a thread fixa do tipo de relatório quando registrada no contrato.
+- Wrapper que publica diretamente usa cron `deliver=local` e stdout vazio para evitar duplicidade.
+- Erro visível deve ser curto e sanitizado; detalhes técnicos ficam no audit/REPORT-INFRA.
+
+## Audit mínimo
+
+```text
+operation_id, account_id, account_alias, mode, period, timezone, currency,
+source_readbacks, campaigns_considered, rows_reported, action_candidates,
+writes_attempted, writes_confirmed, errors, created_at
+```
+
+Nunca salvar token, cookie, senha ou payload secreto.

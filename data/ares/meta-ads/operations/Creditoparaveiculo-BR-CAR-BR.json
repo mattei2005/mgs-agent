@@ -88,12 +88,12 @@
     "days": 3,
     "terminology": {
       "general_roi": "Smart Bidding ROI/actual ROI from NET_REVENUE; used for 08:00 scale tiers",
-      "estimated_roi": "separate Smart Bidding estimated ROI; used for D3 trajectory and 16:00 pause guardrails",
+      "estimated_roi": "separate Smart Bidding estimated ROI; auxiliary D3 trajectory signal and required 16:00 post-scale guardrail input; a positive estimate never vetoes the D3 reality gate",
       "never_conflate": true
     },
     "day_1_action": "observe outside tiers; scale once at 08:00 only when general ROI is strictly above 20%",
     "day_2_action": "observe outside tiers; repeat the same one-time 08:00 general-ROI scale tiers",
-    "day_3_action": "at 08:00, permanently stop when estimated ROI was negative at D1 08:00, D2 08:00 and remains negative at D3 08:00; otherwise apply the general-ROI scale/observe tiers",
+    "day_3_action": "at 08:00, permanently stop by either the three-negative estimated trajectory or the D3 v2 reality gate; campaigns in the reality-gate gray zone are rechecked at 12:00; general-ROI scale tiers remain 08:00-only",
     "scale_tiers": [
       {
         "roi_gt": 40.0,
@@ -128,6 +128,40 @@
       "condition": "estimated ROI strictly negative at each D1/D2/D3 morning checkpoint",
       "action": "permanent campaign-level pause; no 00:30 reactivation",
       "missing_checkpoint": "fail closed; do not infer a negative streak"
+    },
+    "d3_reality_gate_v2": {
+      "status": "enabled",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_sp": "2026-08-25T09:47:37-03:00",
+      "authorization_source": "discord:thread:1541608945704247408",
+      "checkpoints": [
+        "08:00",
+        "12:00 America/Sao_Paulo"
+      ],
+      "required_cycle_day": 3,
+      "conditions_all": {
+        "negative_real_roi_days_min": 2,
+        "real_roi_period": "D1 closed + D2 closed + D3 partial through checkpoint",
+        "cumulative_real_roi_lte_pct": -10.0,
+        "d3_current_real_roi_lt_pct": 0.0,
+        "meta_purchase_roas_omni_d1_d3_lt": 1.2,
+        "d3_current_meta_spend_gte_usd": 5.0,
+        "smart_bidding_match_count": 1,
+        "smart_bidding_max_delay_minutes": 120,
+        "smart_bidding_currency": "USD",
+        "discount_revenue_share": true
+      },
+      "estimated_roi_semantics": "auxiliary only; positive estimated ROI does not veto a proven D3 reality cut",
+      "rps_semantics": "diagnostic only; never vetoes a cut when the complete reality gate is proven",
+      "action": "PARAR D3 REAL+ROAS; permanent campaign-level pause; no 00:30 reactivation",
+      "missing_or_stale_data": "fail closed; observe and do not write",
+      "gray_zone": "when cumulative real ROI is greater than -10%, D3 real is nonnegative, ROAS is at least 1.20, delivery is immaterial or a source gate is missing, do not cut at 08:00; re-evaluate the complete gate at 12:00",
+      "initial_manual_application": {
+        "authorized": true,
+        "authorized_by": "Rodolfo Mattei",
+        "authorized_at_sp": "2026-08-25T09:47:37-03:00",
+        "scope": "apply the newly approved D3 v2 gate once immediately to currently ACTIVE and allowlisted D3 campaigns after a fresh plan and before/after readback"
+      }
     },
     "post_scale_16h_guardrail": {
       "checkpoint": "16:00 America/Sao_Paulo",
@@ -166,11 +200,21 @@
     "anomaly_gate": "Meta x Smart Bidding spend anomaly blocks all creative classification",
     "rejected": {
       "cycle_day": 3,
-      "checkpoint_hour_sp": 8,
+      "classification_checkpoint_hours_sp": [
+        8,
+        16
+      ],
+      "terminal_pause_origin_hours_sp": [
+        8,
+        12
+      ],
       "requires_campaign_status": "PAUSED",
-      "requires_terminal_reason": "PARAR D3 ESTIMADO",
+      "requires_terminal_reason_any": [
+        "PARAR D3 ESTIMADO",
+        "PARAR D3 REAL+ROAS"
+      ],
       "requires_actual_roi_lt": 0.0,
-      "requires_estimated_roi_lt": 0.0,
+      "requires_estimated_roi_lt_for_terminal_reason": "PARAR D3 ESTIMADO only",
       "meaningful_delivery_target_status": "05_REJECTED",
       "underexposed_target_status": "03_TESTED"
     },
@@ -568,13 +612,15 @@
       "level": "campaign_only",
       "allowed": [
         "scale campaign daily_budget once at 08:00 by strict general-ROI tiers: >20–30 +10%, >30–40 +20%, >40 +30%",
-        "permanently pause at D3 08:00 only when negative estimated ROI is persisted at D1, D2 and D3 morning checkpoints",
+        "permanently pause at D3 08:00 when negative estimated ROI is persisted at D1, D2 and D3 morning checkpoints",
+        "permanently pause at D3 08:00 or 12:00 when at least two real-ROI days are negative, D1-D3 cumulative real ROI is <= -10%, current D3 real ROI is negative, Meta omni purchase ROAS D1-D3 is <1.20, current Meta spend is >=USD5, Smart Bidding has one valid match and delay <=120 minutes; positive estimated ROI and RPS do not veto",
         "after a verified 08:00 scale, pause at 16:00 when both general ROI and estimated ROI are negative; guarded reactivation at 00:30 after occurrences 1–2 and permanent stop on occurrence 3",
         "prepare the daily 17:00 Sao Paulo campaign cycle through Campaign Engine v3 with reconciled creatives and full readback"
       ],
       "current_gate_status": {
         "budget_scale": "enabled",
         "d3_estimated_trajectory_pause": "enabled",
+        "d3_reality_gate_v2_pause": "enabled_at_08_and_12_plus_authorized_initial_manual_application",
         "post_scale_16h_pause": "enabled",
         "guardrail_00_30_reactivation": "enabled_for_verified_temporary_pauses_only"
       },
@@ -745,14 +791,26 @@
         "other accounts or operations"
       ],
       "pause_execution_gate": {
-        "source": "Smart Bidding USD with revenue share enabled",
+        "source": "Smart Bidding USD with revenue share enabled plus Meta omni purchase ROAS for D3 v2",
         "max_smart_bidding_delay_minutes": 120,
-        "d3_checkpoint": "08:00 America/Sao_Paulo",
+        "d3_estimated_checkpoint": "08:00 America/Sao_Paulo",
         "d3_required_persisted_estimated_negative_days": [
           1,
           2,
           3
         ],
+        "d3_reality_v2_checkpoints": [
+          "08:00",
+          "12:00 America/Sao_Paulo"
+        ],
+        "d3_reality_v2_conditions_all": {
+          "negative_real_roi_days_min": 2,
+          "cumulative_real_roi_lte_pct": -10.0,
+          "current_d3_real_roi_lt_pct": 0.0,
+          "meta_omni_purchase_roas_d1_d3_lt": 1.2,
+          "current_meta_spend_gte_usd": 5.0,
+          "smart_bidding_match_count": 1
+        },
         "post_scale_checkpoint": "16:00 America/Sao_Paulo",
         "post_scale_requires_verified_08_scale": true,
         "post_scale_requires_general_roi_negative": true,
@@ -878,15 +936,16 @@
     "intraday_focus": "current decision, executed action, gates and readback",
     "intraday_roi_history": {
       "status": "canonical_default",
-      "days": 3,
-      "window": "current partial day plus the two immediately previous calendar dates",
+      "days": 5,
+      "window": "current partial day plus the four immediately previous calendar dates",
       "source": "Smart Bidding NET_REVENUE in USD with revenue share enabled",
       "mobile": "disabled while mobile campaign cards remain removed",
-      "desktop": "separate compact dated ROI table after the consolidated current-metrics table",
+      "desktop": "separate compact dated ROI table with Camp, Dia and five dates after the consolidated current-metrics table",
       "missing_value": "n/d when the campaign has no investment/match on that date",
       "current_day_marker": "asterisk and explicit partial-until dispatch time",
       "approved_by": "Rodolfo Mattei",
-      "approved_at": "2026-08-21"
+      "approved_at": "2026-08-25",
+      "supersedes": "the 3-date window approved on 2026-08-21"
     },
     "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
     "new_campaign_visibility_required": true,
@@ -994,7 +1053,7 @@
         "21:00",
         "23:00 America/Sao_Paulo"
       ],
-      "action_only_checkpoint": "08:00 scale checkpoint and 16:00 post-scale guardrail checkpoint, America/Sao_Paulo; no extra Intraday report",
+      "action_only_checkpoint": "08:00 scale + D3 v2 checkpoint, 12:00 D3 v2 gray-zone recheck, and 16:00 post-scale guardrail checkpoint, America/Sao_Paulo; no extra Intraday report",
       "script": "creditoparaveiculo-intraday.sh",
       "no_agent": true,
       "deliver": "local",
@@ -1002,16 +1061,16 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "desktop_tables_only_v7",
+        "style": "desktop_tables_only_v8",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
         "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
         "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
-        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the single operation summary; then a separate three-date ROI SB desktop table",
-        "roi_history": "canonical 3-date Smart Bidding NET_REVENUE history only in the compact desktop table; current date marked partial and missing investment/match shown as n/d",
+        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the single operation summary; then a separate five-date ROI SB desktop table",
+        "roi_history": "canonical 5-date Smart Bidding NET_REVENUE history only in the compact desktop table, with an explicit Dia column for Dn/PREP; current date marked partial and missing investment/match shown as n/d",
         "divider": "disabled with mobile campaign cards",
-        "desktop_table": "start with one Intraday summary followed immediately by the consolidated aligned table in the same Discord part; omit mobile cards and the redundant repeated summary; then show the compact 3-date ROI history table before Spend/reconciliation/explanatory text",
+        "desktop_table": "start with one Intraday summary followed immediately by the consolidated aligned table in the same Discord part; omit mobile cards and the redundant repeated summary; then show the compact 5-date ROI history table with Dia before Spend/reconciliation/explanatory text",
         "desktop_table_pagination": {
           "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
           "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
@@ -1145,7 +1204,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-24T19:02:37-04:00",
+  "updated_at": "2026-08-25T08:47:37-04:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -1513,7 +1572,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.69",
+  "playbook_version": "1.0.71",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [

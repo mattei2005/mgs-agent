@@ -1,0 +1,270 @@
+{
+  "status": "success_with_adops_pending",
+  "authorization_message_id": "1541597462928687245",
+  "completed_at_et": "2026-08-24T20:07:23-04:00",
+  "publishers": {
+    "lyzmofinanzas": {
+      "http": 201,
+      "errors": [],
+      "drip_routes": 30,
+      "broadcast_routes": 23,
+      "blank_drip_operations": 0,
+      "blank_broadcast_operations": 23,
+      "target_hash": "d45d3937c5161b824aab4a006d2ac3cd8d1cab2eb458c476a26f43927ccb3512",
+      "pool_ids": [
+        521,
+        522,
+        983,
+        984,
+        985,
+        986,
+        987,
+        988,
+        989,
+        990,
+        991
+      ]
+    },
+    "newsounfinanzas": {
+      "http": 201,
+      "errors": [],
+      "drip_routes": 30,
+      "broadcast_routes": 23,
+      "blank_drip_operations": 6,
+      "blank_broadcast_operations": 9,
+      "target_hash": "247af920a687b9e80b789cbcdfc24ea02fc22a3373ceb9ceab2134081ea40b34",
+      "pool_ids": [
+        531,
+        532
+      ]
+    },
+    "eggbevfinanzas": {
+      "http": 201,
+      "errors": [],
+      "drip_routes": 30,
+      "broadcast_routes": 23,
+      "blank_drip_operations": 0,
+      "blank_broadcast_operations": 0,
+      "target_hash": "af482c256280ad9ee706c86beaa2971255c11674222492a4d939cf57a2ba49b5",
+      "pool_ids": [
+        523,
+        524
+      ]
+    },
+    "topfeedfinanzas": {
+      "http": 201,
+      "errors": [],
+      "drip_routes": 30,
+      "broadcast_routes": 23,
+      "blank_drip_operations": 30,
+      "blank_broadcast_operations": 23,
+      "target_hash": "56f6bf7d9738b40197af52b31aa222d5513a6ed1b64b41dfd061408d9606d719",
+      "pool_ids": [
+        583,
+        584,
+        1053,
+        1054,
+        1055,
+        1056,
+        1057,
+        1058,
+        1059,
+        1060,
+        1061
+      ]
+    }
+  },
+  "writes": [
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 521,
+      "name": "ly-f-us-cc-es-drip 001",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 983,
+      "name": "ly-f-us-cc-es-drip 002",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 984,
+      "name": "ly-f-us-cc-es-drip 003",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 985,
+      "name": "ly-f-us-cc-es-drip 004",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 986,
+      "name": "ly-f-us-cc-es-drip 005",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 987,
+      "name": "ly-f-us-cc-es-drip 006",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 522,
+      "name": "ly-f-us-cc-es-mct broadcast 001",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 988,
+      "name": "ly-f-us-cc-es-mct broadcast 002",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 989,
+      "name": "ly-f-us-cc-es-mct broadcast 003",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 990,
+      "name": "ly-f-us-cc-es-mct broadcast 004",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "lyzmofinanzas",
+      "id": 991,
+      "name": "ly-f-us-cc-es-mct broadcast 005",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "newsounfinanzas",
+      "id": 531,
+      "name": "ns-f-us-cc-es-drip",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "newsounfinanzas",
+      "id": 532,
+      "name": "ns-f-us-cc-es-broadcast",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "eggbevfinanzas",
+      "id": 523,
+      "name": "eb-f-us-cc-es-drip",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "eggbevfinanzas",
+      "id": 524,
+      "name": "eb-f-us-cc-es-mct broadcast",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 583,
+      "name": "ftf-f-us-cc-es-drip 001",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1057,
+      "name": "ftf-f-us-cc-es-drip 002",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1058,
+      "name": "ftf-f-us-cc-es-drip 003",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1059,
+      "name": "ftf-f-us-cc-es-drip 004",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1060,
+      "name": "ftf-f-us-cc-es-drip 005",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1061,
+      "name": "ftf-f-us-cc-es-drip 006",
+      "family": "drip",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 584,
+      "name": "ftf-f-us-cc-es-mct broadcast 001",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1053,
+      "name": "ftf-f-us-cc-es-mct broadcast 002",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1054,
+      "name": "ftf-f-us-cc-es-mct broadcast 003",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1055,
+      "name": "ftf-f-us-cc-es-mct broadcast 004",
+      "family": "broadcast",
+      "http": 201
+    },
+    {
+      "publisher": "topfeedfinanzas",
+      "id": 1056,
+      "name": "ftf-f-us-cc-es-mct broadcast 005",
+      "family": "broadcast",
+      "http": 201
+    }
+  ],
+  "updated_pool_count": 26,
+  "created": 0,
+  "deleted": 0,
+  "routes_total": 212,
+  "blank_operations": 91,
+  "all_urls_http_200": true,
+  "independent_readback": "PASS",
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260824T200031-0400-finanzas-four-publishers-us-cc-es-five-url",
+  "backup_dir": "/root/mgs-agent/backups/sb-smart-routing/20260824T200031-0400-finanzas-four-publishers-us-cc-es-five-url"
+}
