@@ -32,6 +32,17 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
 
 Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados para tráfego direto da operação SHEIN, conforme decisão de Rodolfo.
 
+Para as landing pages desta operação, a fonte canônica é o plugin WordPress próprio `mgs-direct-quiz`:
+
+- rota pública por gestor: `/quiz/{pais}/quiz-gNNN/`;
+- modelos visuais configuráveis `LP1` e `LP2`;
+- painel restrito a criar, editar e duplicar configurações de landing;
+- nenhuma coleta de lead, SMS, evento Facebook ou configuração de campanha no plugin;
+- o clique apenas encaminha o visitante ao artigo configurado, preservando os parâmetros recebidos; o artigo de destino é responsável pelo evento Facebook;
+- padrão de entrada: `utm_source=facebook`, `utm_medium=gNNN-s`, `utm_campaign=<id da campanha>` e `utm_adgroup=<id do conjunto>`, com campaign/adgroup definidos na criação da campanha de tráfego direto no Facebook, não no plugin.
+
+O canário inicial é `yolokfx.com/quiz/us/quiz-g002/`, gestor G002, antes da replicação para `vizioid.com`.
+
 ---
 
 ## Gestores e rastreamento
