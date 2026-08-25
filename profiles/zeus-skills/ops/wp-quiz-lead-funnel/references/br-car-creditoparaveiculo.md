@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-08-24: `mgs-quiz-carro` v1.7.9.
+Versão validada em produção em 2026-08-25: `mgs-quiz-carro` v1.7.10.
+
+Correção de timestamp anti-spam com page cache v1.7.10:
+
+- O timestamp oculto do formulário é reinicializado no navegador com `Date.now()` quando `public/js/quiz.js` carrega; HTML antigo servido pelo WP Fastest Cache não pode mais provocar `formulário expirado` para um visitante novo.
+- O timestamp também é reinicializado em `pageshow` quando a página volta do back-forward cache do navegador.
+- O backend mantém as travas existentes: rejeita preenchimento abaixo do mínimo e timestamps acima de seis horas. A correção não remove o anti-spam; muda a origem efetiva do início do formulário para o cliente atual.
+- Após o deploy, limpar o WP Fastest Cache e validar todas as rotas públicas sem querystring em viewport mobile. Para as seis rotas `quiz-moto-parcelas-g001`–`g006`, o smoke de produção exigiu HTML e JS HTTP 200, asset `v=1.7.10`, timestamp DOM fresco, formulário visível, botão `ESCOLHER MOTO`, ausência de erro e zero overflow horizontal.
 
 Correção de múltiplas listas por gestor v1.7.9:
 
