@@ -92,6 +92,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-CREATION-HOLD-20260825",
+      "next_step": "Aguardar Rodolfo ou Nicolas liberar explicitamente a criação; então reconciliar o estado live e iniciar um novo ciclo atual, sem retomar automaticamente o request de 25/08.",
+      "objective": "Impedir nova criação ou clone de campanha CPV G006 até nova liberação explícita",
+      "source": "discord:thread:1539826050765299872; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; audit:data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260825.json; cron:2cf8115a4f8b",
+      "state": "hold ativo por instrução de rodolfo. o ciclo cpv-daily-20260825 parou antes de qualquer write: campaign_write=false, media_upload=false e drive_move=false. scheduler v3 diário pausado; diário, intraday e guardrails já aprovados continuam.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-25T20:03:18+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CREATION-LIFECYCLE-HOLD-20260822",
       "next_step": "Após autorização explícita de Rodolfo: alterar o uploader para ad-account advideos com User Access Token, exigir association_verified no registry e readback; rodar testes; criar um canário PAUSED 1x1x3; somente após revisão autorizar ativação USD30 e observar impressão/gasto. Não reativar scheduler antes do canário e da decisão sobre Full Access.",
       "objective": "Manter criação CPV bloqueada até corrigir e provar a associação de vídeos à conta de anúncios no Campaign Engine",
@@ -1212,5 +1222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T13:56:13+00:00"
+  "updated_at": "2026-08-25T20:03:18+00:00"
 }

@@ -349,25 +349,26 @@
   },
   "daily_new_campaign_routine": {
     "authorized_by": "Rodolfo Mattei",
-    "reconfirmed_at_et": "2026-08-24T14:02:37-04:00",
+    "reconfirmed_at_et": "2026-08-25T16:01:37-04:00",
     "activated_at_et": "2026-08-20T17:06:18-04:00",
-    "status": "active_daily_17h",
-    "responsibility": "Ares loops through D1/D2/D3 analysis, approved pause/scale actions and the daily 17:00 campaign creation authorized by Rodolfo; all non-budget campaign, creative, quota and readback gates remain fail-closed",
+    "status": "creation_hold_until_explicit_release",
+    "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
     "creation_hold": {
-      "enabled": false,
+      "enabled": true,
       "authorized_by": "Rodolfo Mattei",
-      "authorized_at_et": "2026-08-22T17:19:27-04:00",
-      "minimum_blocked_operational_date_sp": "2026-08-23",
+      "authorized_at_et": "2026-08-25T16:01:37-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "minimum_blocked_operational_date_sp": "2026-08-25",
       "expires_automatically": false,
-      "reason": "historical hold completed; Rodolfo released daily creation after lifecycle observation",
-      "observe_campaigns": [
-        14,
-        15,
-        16,
-        17,
-        18,
-        19
-      ],
+      "reason": "Rodolfo instructed Ares not to create campaigns today and to wait for his explicit notice before any future creation",
+      "blocked_request_id": "cpv-daily-20260825",
+      "blocked_request_readback": {
+        "stage": "RECOVERY_PENDING",
+        "campaign_write": false,
+        "media_upload": false,
+        "drive_move": false,
+        "failure": "configured next campaign number 24 drifted from live next number 23 before any write"
+      },
       "analysis_continues": [
         "Daily",
         "Intraday",
@@ -375,20 +376,23 @@
         "approved pause and scale guardrails",
         "first-delivery watcher"
       ],
-      "historical_blocked_actions": [
+      "blocked_actions": [
         "new campaign creation",
         "clone for a new campaign slot",
+        "automatic recovery or resume of cpv-daily-20260825",
         "automatic resume of daily creation scheduler"
       ],
-      "released_by": "Rodolfo Mattei",
-      "released_at_et": "2026-08-24T14:02:37-04:00",
-      "release_source": "discord:thread:1541506896299556894",
-      "release_instruction": "resume the daily Campaign Engine v3 scheduler at 17:00 Sao Paulo and prevent the internal budget envelope from blocking authorized creation or scale",
-      "resume_gate": "released; future holds still require Rodolfo or Nicolas and never expire automatically",
+      "resume_gate": "only a new explicit instruction from Rodolfo or Nicolas can release this hold; it never expires automatically",
       "resume_authority": [
         "Rodolfo",
         "Nicolas"
-      ]
+      ],
+      "prior_release_history": {
+        "released_by": "Rodolfo Mattei",
+        "released_at_et": "2026-08-24T14:02:37-04:00",
+        "release_source": "discord:thread:1541506896299556894",
+        "release_instruction": "resume the daily Campaign Engine v3 scheduler at 17:00 Sao Paulo and prevent the internal budget envelope from blocking authorized creation or scale"
+      }
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
