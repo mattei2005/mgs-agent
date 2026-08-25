@@ -1,6 +1,6 @@
 ---
 name: wp-quiz-lead-funnel
-description: "Use when building WordPress quiz lead funnels or direct one-question landing pages, including UTM-preserving article handoff."
+description: "Use when building, migrating, operating, or diagnosing WordPress-based quiz lead funnels with SMS Funnel routing, UTM-preserving redirects, lead reports, CSV export, and per-site/vertical references."
 version: 1.0.0
 author: MGS Digital Corp / Zeus
 license: Internal MGS
@@ -17,19 +17,6 @@ metadata:
 Use this skill for MGS quiz funnels that run first-party inside WordPress instead of external builders such as Lovable/Supabase. The canonical lead-funnel pattern is a custom WordPress plugin that owns public quiz routes, lead capture, SMS Funnel delivery, UTM-preserving redirects, admin editing, duplication, reporting, and CSV export.
 
 The first reference implementation is the BR/CAR quiz on `creditoparaveiculo.com`.
-
-## Branch: direct landing without lead or SMS
-
-When Rodolfo explicitly asks for only a landing-page source that operators can create and duplicate, do **not** import the lead-funnel architecture. Keep this branch as a separate lightweight plugin:
-
-1. Admin owns only create, edit, activate/deactivate and duplicate of landing configuration; duplicate configuration only.
-2. Public page owns visual model, copy, CTA labels and article destination.
-3. Every incoming query parameter is preserved into the CTA URL; parameters already fixed on the destination win and appear once.
-4. `utm_campaign` and `utm_adgroup` are defined when the Facebook direct-traffic campaign is created, not inside the plugin.
-5. Do not add forms, lead storage, REST submit, SMS, phone/name fields, reports, CSV, campaign setup, Facebook events, pixels or data-layer events.
-6. The destination article owns the Facebook event. The landing plugin only renders links and performs the parameter-preserving handoff.
-7. If Rodolfo says the landing is standalone and tracking belongs only to the destination article, do not add `wp_head()`, `wp_body_open()` or `wp_footer()` merely to inherit global tracking.
-8. Validate with a real browser click: LP HTTP 200, no horizontal overflow, zero forms/inputs, both CTA hrefs contain the exact incoming parameters once, navigation reaches the configured article with HTTP 200, and an unknown manager route returns a real 404.
 
 ## When to Use
 
@@ -195,7 +182,6 @@ Before reporting success:
 - Public routes return 200.
 - Public routes inherit normal WordPress global hooks unless Rodolfo explicitly requested an isolated/static page: WPCode/GTM/Yoast/pixels/head/footer changes should appear on quiz URLs like they do on posts/pages. See `wp-plugin-mass-operation/references/wp-custom-plugin-public-routes-global-hooks.md`.
 - If the route is explicitly isolated/standalone, replace global hook capture with a strict plugin-owned allowlist: site-specific GTM container (head + noscript), Analytics through that container, GPT once, and the correct wrapper once. Validate an actual GA4 `page_view` request—not merely the presence of GTM markup—and confirm zero unrelated WordPress/theme assets. See `references/static-chat-wrapper-contract.md`.
-- **Direct-landing exception:** when Rodolfo explicitly assigns Facebook events/tracking only to the destination article, the direct-landing branch above overrides that allowlist requirement. Validate zero plugin-owned tracking/events, zero forms/inputs, exact query passthrough and a real CTA click to the article; skip lead/SMS/report checks for this branch.
 - Public HTML has no old external stack references.
 
 - [ ] WP lead row created with expected slug/UTM/gestor.

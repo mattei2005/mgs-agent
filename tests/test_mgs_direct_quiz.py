@@ -19,6 +19,8 @@ class DirectQuizContractTests(unittest.TestCase):
             'templates/landing.php',
             'assets/direct-quiz.css',
             'assets/direct-quiz.js',
+            'assets/admin.css',
+            'assets/admin.js',
             'index.php',
         ]
         self.assertTrue(all((ROOT / p).is_file() for p in required))
@@ -82,6 +84,35 @@ console.log(JSON.stringify({dest}));
         self.assertIn("$wp_query->set_404()", php)
         self.assertIn("get_404_template()", php)
         self.assertIn("status_header( 404 )", php)
+
+    def test_admin_interface_has_scoped_polished_components(self):
+        php = read('includes/class-mgs-direct-quiz.php')
+        css = read('assets/admin.css')
+        self.assertIn("add_action( 'admin_enqueue_scripts'", php)
+        self.assertIn("wp_enqueue_style( 'mgs-dq-admin'", php)
+        for marker in [
+            'mgs-dq-admin',
+            'mgs-dq-hero',
+            'mgs-dq-stats',
+            'mgs-dq-panel',
+            'mgs-dq-badge',
+            'mgs-dq-form-grid',
+            'mgs-dq-form-card',
+            'mgs-dq-actions',
+        ]:
+            self.assertIn(marker, php)
+            self.assertIn('.' + marker, css)
+        self.assertIn('Landing Pages SHEIN', php)
+        self.assertIn('Duplicar', php)
+        self.assertIn("wp_enqueue_media()", php)
+        self.assertIn("wp_enqueue_script( 'mgs-dq-admin'", php)
+        self.assertIn('mgs-dq-logo-picker', php)
+        self.assertIn('mgs-dq-logo-preview', php)
+        admin_js = read('assets/admin.js')
+        self.assertIn('wp.media', admin_js)
+        self.assertIn('mgs-dq-select-logo', admin_js)
+        self.assertIn('mgs-dq-remove-logo', admin_js)
+        self.assertIn('@media (max-width: 782px)', css)
 
     def test_php_lint_all_plugin_files(self):
         for php in ROOT.rglob('*.php'):
