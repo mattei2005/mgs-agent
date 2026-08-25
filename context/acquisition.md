@@ -34,16 +34,16 @@ Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados para tráfego di
 
 Para as landing pages desta operação, a fonte canônica é o plugin WordPress próprio `mgs-direct-quiz`:
 
-- rota pública LP2 por gestor: `/quiz/{pais}/quiz-v2-gNNN/`;
-- rota pública LP1 por gestor: `/quiz/{pais}/quiz-v1-gNNN/`;
-- a versão indicada na slug corresponde ao modelo visual selecionado;
+- rota pública LP2 por gestor: `/quiz/{pais}/sh2-gNNN/`;
+- rota pública LP1 por gestor: `/quiz/{pais}/sh1-gNNN/`;
+- o número após `sh` corresponde ao modelo visual selecionado;
 - modelos visuais configuráveis `LP1` e `LP2`;
 - painel restrito a criar, editar e duplicar configurações de landing;
 - nenhuma coleta de lead, SMS, evento Facebook ou configuração de campanha no plugin;
 - o clique apenas encaminha o visitante ao artigo configurado, preservando os parâmetros recebidos; o artigo de destino é responsável pelo evento Facebook;
 - padrão de entrada: `utm_source=facebook`, `utm_medium=gNNN-s`, `utm_campaign=<id da campanha>` e `utm_adgroup=<id do conjunto>`, com campaign/adgroup definidos na criação da campanha de tráfego direto no Facebook, não no plugin.
 
-Os canários G002 são `yolokfx.com/quiz/us/quiz-v2-g002/` (LP2) e `yolokfx.com/quiz/us/quiz-v1-g002/` (LP1), antes da replicação para `vizioid.com`.
+Os canários G002 são `yolokfx.com/quiz/us/sh2-g002/` (LP2) e `yolokfx.com/quiz/us/sh1-g002/` (LP1), antes da replicação para `vizioid.com`.
 
 ---
 
