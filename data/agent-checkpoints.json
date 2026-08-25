@@ -573,12 +573,12 @@
     {
       "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
-      "next_step": "Rodolfo validar visual e operação do canário; após aprovação, replicar o pacote validado no Vizioid e criar as landings dos demais gestores",
-      "objective": "Criar plugin novo e simples para landing quiz SHEIN com LP1/LP2, piloto em yolokfx.com e replicação posterior em vizioid.com",
+      "next_step": "Rodolfo validar visual final; após aprovação, replicar o pacote validado no Vizioid e criar landings dos demais gestores",
+      "objective": "Criar plugin novo e simples para landing SHEIN, com interface WordPress bonita, LP1/LP2, duplicação por gestor e piloto no Yolokfx",
       "source": "context/acquisition.md#alocação-ativa-de-tráfego-direto",
-      "state": "canário concluído no yolokfx: mgs-direct-quiz v1.0.2 ativo; g002 lp2 publicado; sem lead, sms, tracking ou configuração de campanha; utms preservadas até o artigo; testes unitários, duplicação, http e chromium mobile aprovados",
+      "state": "yolokfx concluído em mgs-direct-quiz v1.0.3: listagem e edição redesenhadas em cards; criar/editar/duplicar; logo por url ou biblioteca de mídia com preview; logo yolokfx recortado sem ia para 600x125 e validado em chromium mobile; plugin sem lead/sms/tracking; 9/9 testes",
       "thread_id": "1541914123376402452",
-      "updated_at": "2026-08-25T21:52:55+00:00"
+      "updated_at": "2026-08-25T22:20:53+00:00"
     },
     {
       "agent": "zeus",
@@ -1242,5 +1242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T21:52:55+00:00"
+  "updated_at": "2026-08-25T22:20:53+00:00"
 }

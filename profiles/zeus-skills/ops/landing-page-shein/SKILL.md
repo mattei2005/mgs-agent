@@ -34,9 +34,9 @@ O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor
 
 ## Interface WordPress
 
-No painel, usar o menu `MGS Landing Quiz`:
+No painel, usar o menu `Landing SHEIN`:
 
-- `Landings`: lista nome, gestor, modelo, URL, status e ações.
+- `Todas as landings`: lista nome, gestor, modelo, URL, status e ações.
 - `Nova landing`: cria uma configuração.
 - `Editar`: altera nome, país, gestor, slug, LP1/LP2, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex.
 - `Logo do site`: aceita URL direta e também oferece `Escolher na Biblioteca de Mídia`, com preview e opção de remover.
@@ -44,7 +44,7 @@ No painel, usar o menu `MGS Landing Quiz`:
 
 ## Fluxo de duplicação por gestor
 
-1. Abrir `MGS Landing Quiz > Landings`.
+1. Abrir `Landing SHEIN > Todas as landings`.
 2. Na landing-base, clicar `Duplicar`.
 3. Confirmar que aparece `Cópia criada inativa`.
 4. Definir nome interno, gestor `Gxxx` e slug `quiz-gxxx` correspondente.
