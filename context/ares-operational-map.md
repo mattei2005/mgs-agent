@@ -128,10 +128,10 @@ Regras:
 
 ## 6. Naming
 
-Modelo:
+Modelo, com subtipo veicular opcional para a vertical `CAR`:
 
 ```text
-{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
 - `VARIANT`: sempre `001–999`.
@@ -140,6 +140,7 @@ Modelo:
 - status, site, gestor e IDs não entram no nome.
 - dimensão, placement e origem ficam no inventário.
 - idioma `BR` significa português do Brasil e é o padrão quando país=BR e o pedido diz apenas “Português”; `PT` significa português de Portugal explícito.
+- Para `CAR`, revisar cada imagem/timeline real e registrar `vehicle_type=MOTO|CARRO`. Moto usa `MOTO` imediatamente após `FORMAT`; carro mantém o nome sem token adicional. A decisão é por asset, inclusive em lote misto.
 
 ## 7. Metadata
 
