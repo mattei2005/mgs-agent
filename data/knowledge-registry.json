@@ -137,6 +137,26 @@
       "updated_at": "2026-08-22T07:13:20+00:00"
     },
     {
+      "canonical_key": "growth.creative-taxonomy.car.vehicle-subtype-naming",
+      "canonical_source": "profiles/ares-skills/growth/creative-taxonomy-mgs/references/source-taxonomy-empire.md",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs",
+        "creative-taxonomy-mgs",
+        "paid-acquisition-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25",
+      "id": "ARES-CREATIVE-TAXONOMY-CAR-VEHICLE-SUBTYPE-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR creative naming distinguishes motorcycle subtype by visual evidence",
+      "updated_at": "2026-08-25T14:41:19+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.operational-account-cap",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -1815,5 +1835,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T13:53:48+00:00"
+  "updated_at": "2026-08-25T14:41:19+00:00"
 }

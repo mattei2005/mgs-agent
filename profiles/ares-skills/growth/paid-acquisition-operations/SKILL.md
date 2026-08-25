@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.1.0
+version: 1.1.1
 author: Ares
 license: internal
 metadata:

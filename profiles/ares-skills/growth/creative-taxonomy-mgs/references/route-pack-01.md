@@ -19,11 +19,18 @@ Use esta skill quando Rodolfo pedir para:
 Não use esta skill para conteúdo editorial/REC/SEO. Isso fica fora do escopo do Ares.
 ## Modelo oficial do nome de arquivo
 
-Modelo base:
+Modelo base, com subtipo veicular opcional para a vertical `CAR`:
 
 ```text
-{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
+
+```text
+Conteúdo de carro  CAR_BR_BR_VID_SCORE_BAIXO_PV_033.mp4
+Conteúdo de moto   CAR_BR_BR_VID_MOTO_SCORE_BAIXO_PV_035.mp4
+```
+
+`MOTO` entra imediatamente depois de `FORMAT` somente quando a evidência visual do asset mostrar motocicletas como produto dominante. Para carro, o padrão permanece sem token adicional. `CAR` continua sendo a vertical/operação; `MOTO` é o subtipo visual do veículo.
 
 Exemplos:
 
@@ -43,6 +50,7 @@ VERTICAL   | Código da vertical: CC, CAR, EMP, JOB, APP, GAME etc.
 COUNTRY    | País alvo: US, CA, MX, BR etc.
 LANG       | Idioma do criativo: EN, ES, FR, DE, BR, PT etc.
 FORMAT     | IMG ou VID
+VEHICLE    | Opcional na vertical CAR: `MOTO` quando motocicleta for o produto dominante; omitido para carro
 ANGLE      | Ângulo controlado por operação/idioma
 P_ORIENT   | Código compacto de pessoa + orientação
 VARIANT    | Sequência 3 dígitos: 001, 002, 003... até 999
@@ -63,6 +71,7 @@ Regras importantes:
 - Não colocar site no nome.
 - Não colocar gestor/origem no nome.
 - Não colocar IDs longos no nome.
+- Para vertical `CAR`, revisar o conteúdo real e registrar `vehicle_type=MOTO|CARRO`; usar `MOTO` no nome apenas quando a timeline/imagem provar motocicleta como produto dominante.
 - `drive_id`, `page_id`, `meta_creative_id`, `origin_campaign_id` e origem ficam no inventário/metadados.
 
 Regra MGS para português confirmada por Rodolfo em 2026-07-12:

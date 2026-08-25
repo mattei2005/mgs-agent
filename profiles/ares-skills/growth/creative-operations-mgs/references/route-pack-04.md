@@ -4,11 +4,13 @@ Use nomes previsíveis, sem acento e sem espaço.
 
 O Drive tem várias verticais/operações. Identifique a operação correta e aplique a taxonomia correspondente.
 
-Modelo geral:
+Modelo geral, com subtipo veicular opcional para `CAR`:
 
 ```text
-{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
+
+Na vertical `CAR`, revisar cada asset real. Se motocicletas forem o produto dominante, inserir `MOTO` imediatamente após `FORMAT` e registrar `vehicle_type=MOTO`; se forem carros, omitir o token e registrar `vehicle_type=CARRO`. Não classificar o lote inteiro por contexto quando os assets puderem ser mistos.
 
 Exemplo/piloto `CC_US_ES`, já alinhado com o Ares:
 
@@ -31,6 +33,7 @@ Campos:
 Campo       Regra
 ──────────  ─────────────────────────────────────────────────────────────
 FORMAT      IMG ou VID.
+VEHICLE     Opcional em CAR: MOTO para motocicleta dominante; omitido para carro.
 ANGLE       Dicionário controlado por operação; usar UNKNOWN se incerto.
 P_ORIENT    Somente PV, NV, PH ou NH; square/feed 1:1 usa PH/NH.
 VARIANT     Sequencial de 3 dígitos: 001, 002, 003...

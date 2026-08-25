@@ -10,7 +10,7 @@
 8. Não criar Google Sheet/planilha para esse fluxo salvo pedido explícito; usar CSV/JSON local como log/plano técnico e explicar se algum arquivo é apenas evidência local.
 9. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático. Para vídeos, o classificador OCR-assisted canônico é `/root/mgs-agent/scripts/ares-classify-video-timelines-ocr.py`. Se uma abordagem auxiliar não estiver disponível, continuar com a timeline de frames e outra evidência real em vez de encerrar a classificação.
 10. Para escala completa de vídeos, seguir `references/upload-canvas-video-classification-scale.md`.
-11. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
+11. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`. Para a vertical `CAR`, classificar também `vehicle_type=MOTO|CARRO` pela imagem/timeline real: moto usa o token `MOTO` imediatamente após `FORMAT`; carro mantém o padrão sem token adicional. Em lote misto, decidir por asset, nunca pelo pedido ou nome do lote.
 12. Classificar pessoa/orientação usando somente `PV/NV` para vertical e `PH/NH` para square/feed 1:1 ou horizontal/landscape; `PS/NS` não entram em nomes finais.
 13. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
 14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
@@ -49,7 +49,8 @@ Antes de finalizar uma taxonomia ou plano de renomeação:
 ```text
 Check                                      | Exigência
 -------------------------------------------|-----------------------------------------------
-Modelo de nome completo                    | VERTICAL_COUNTRY_LANG_FORMAT_ANGLE_P_ORIENT_VARIANT
+Modelo de nome completo                    | VERTICAL_COUNTRY_LANG_FORMAT_[MOTO_]_ANGLE_P_ORIENT_VARIANT
+Subtipo veicular CAR                       | MOTO só com motocicleta dominante; carro omite o token
 FORMAT validado por arquivo real           | Sim
 ANGLE vem de dicionário controlado         | Sim ou UNKNOWN
 P_ORIENT coerente com pessoa/orientação    | Sim
@@ -75,3 +76,4 @@ Pedido/plano autorizado antes do write  | Pedido natural basta no fluxo canônic
 10. Agir no ID errado em revisão final: reports de copy-clean costumam ter `source_drive_id`=RAW e `dest_drive_id`=cópia limpa. Promoção para `01_READY`, rejeição e rename final devem usar `dest_drive_id`; se o RAW for movido por engano, restaurar o RAW antes de encerrar.
 10. Dizer que não consegue revisar assets do Drive quando existe acesso/pipeline Drive: se os arquivos estão em `MGS-AGENTS/CRIATIVOS`, inventarie, gere evidência visual e revise. Só reporte bloqueio real de permissão/credencial.
 11. Fechar `00_REVIEW` agindo no original: decisões finais usam a cópia limpa (`dest_drive_id`). O original sai de `UPLOAD MANUAL` somente após READY validado e vai para `99_LEGACY`, preservando ID/nome.
+12. Tratar um lote inteiro como moto ou carro sem revisar cada asset: a classificação veicular é por conteúdo real. Em `CAR`, `MOTO` só entra depois de `FORMAT` quando motocicletas dominam visualmente; assets de carro permanecem no padrão anterior.

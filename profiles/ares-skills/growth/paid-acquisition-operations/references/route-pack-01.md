@@ -26,10 +26,10 @@ Ordem | Etapa
 
 Para qualquer trabalho de nomenclatura, renomeação, inventário ou classificação de criativos, carregar também a skill dedicada `creative-taxonomy-mgs`. Ela é a fonte operacional detalhada para campos, P_ORIENT, status, inventário mínimo, Drive e metadata gate.
 
-Modelo preferencial:
+Modelo preferencial, com subtipo veicular opcional para `CAR`:
 
 ```text
-{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
 Regras:
@@ -40,6 +40,7 @@ Regras:
 - Se o ângulo for incerto, usar `UNKNOWN` e preencher `notes`.
 - Não inventar classificação confiante sem evidência.
 - Nome limpo, uppercase, sem acento, com underscore.
+- Na vertical `CAR`, `MOTO` entra imediatamente depois de `FORMAT` somente quando a revisão visual por asset confirmar motocicleta como produto dominante; carro mantém o padrão sem token adicional. Registrar `vehicle_type=MOTO|CARRO` no inventário.
 
 Pitfall: não deixar a taxonomia viva apenas como spec solto ou comentário de sessão. Quando Rodolfo pedir para “criar a skill”/“execute” sobre taxonomia já estabilizada, criar ou atualizar a skill classe `creative-taxonomy-mgs` e apontar esta umbrella para ela, em vez de criar uma skill estreita por sessão.
 

@@ -32,8 +32,9 @@ Vídeo 1      ...                               ...
 
 Arquivos sugeridos
 ──────────────────
-{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 Exemplo: CC_US_ES_IMG_APROBACION_PH_001.jpg
+CAR: omitir o token para carro; inserir MOTO após FORMAT somente quando a evidência visual mostrar motocicleta dominante.
 
 Revisão necessária
 ──────────────────

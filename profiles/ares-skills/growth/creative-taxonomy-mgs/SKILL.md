@@ -1,7 +1,7 @@
 ---
 name: creative-taxonomy-mgs
 description: "Taxonomia operacional de criativos MGS para aquisição paga: nomenclatura de arquivos, campos obrigatórios, P_ORIENT, inventário, status, validação e regras de classificação antes de usar assets em campanhas."
-version: 1.0.1
+version: 1.0.2
 author: Ares
 license: internal
 metadata:

@@ -70,6 +70,23 @@ PS, NS, PU, NU, UU
 - Para o nome final, `P_ORIENT` aceita apenas `PV`, `PH`, `NV`, `NH`.
 - `orientation` do nome final deve ser tratada como `VERTICAL` ou `HORIZONTAL`; square/unknown vai para revisão ou é mapeado operacionalmente como horizontal quando aprovado.
 
+## Extensão veicular MGS — decisão de Rodolfo em 2026-08-25
+
+Para a vertical `CAR`, Ares deve revisar o conteúdo real de cada imagem ou timeline de vídeo e distinguir carro de moto.
+
+```text
+Produto dominante  Modelo final
+-----------------  -------------------------------------------------------------------------
+Carro              {VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+Moto               {VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_MOTO_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+```
+
+- `MOTO` fica imediatamente depois de `FORMAT`.
+- Carro mantém o padrão anterior, sem `CARRO` no nome.
+- A classificação é por asset e por evidência visual real; um lote pode conter carros e motos.
+- Registrar `vehicle_type=MOTO|CARRO` no inventário.
+- A vertical/operação continua `CAR`; `MOTO` é subtipo visual, não uma nova vertical ou pasta.
+
 ## Uso futuro
 
 Quando houver novo país/idioma/vertical, não criar uma skill por operação se a regra for só variação de dicionário de ângulos. Atualizar `creative-taxonomy-mgs` ou adicionar referência específica com o dicionário da operação.
