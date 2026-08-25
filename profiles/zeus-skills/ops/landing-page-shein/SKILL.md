@@ -12,6 +12,10 @@ metadata:
 
 # Landing Page SHEIN
 
+## When to Use
+
+Use quando Rodolfo pedir criação, edição, duplicação, implantação, auditoria ou melhoria da interface das landing pages SHEIN no WordPress. Não usar para funis com lead/SMS nem para o plugin do Creditoparaveiculo.
+
 ## Escopo
 
 Skill exclusiva das landing pages de tráfego direto SHEIN. Não misturar com `wp-quiz-lead-funnel` nem com o produto Creditoparaveiculo.
@@ -35,6 +39,7 @@ No painel, usar o menu `MGS Landing Quiz`:
 - `Landings`: lista nome, gestor, modelo, URL, status e ações.
 - `Nova landing`: cria uma configuração.
 - `Editar`: altera nome, país, gestor, slug, LP1/LP2, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex.
+- `Logo do site`: aceita URL direta e também oferece `Escolher na Biblioteca de Mídia`, com preview e opção de remover.
 - `Duplicar`: copia apenas a configuração, abre a cópia inativa e limpa gestor/slug para impedir publicação acidental. Definir o novo gestor e slug correspondente antes de ativar.
 
 ## Fluxo de duplicação por gestor
