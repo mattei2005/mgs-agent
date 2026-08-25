@@ -27,7 +27,7 @@ class DirectQuizContractTests(unittest.TestCase):
 
     def test_nested_manager_route_and_two_models_exist(self):
         php = read('includes/class-mgs-direct-quiz.php')
-        self.assertIn(r'^quiz/([a-z]{2})/(quiz-g[0-9]{3,})/?$', php)
+        self.assertIn(r'^quiz/([a-z]{2})/(quiz-g[0-9]{3,}(?:-v[0-9]+)?)/?$', php)
         self.assertIn("'lp1'", php)
         self.assertIn("'lp2'", php)
         self.assertIn('admin_post_mgs_dq_duplicate', php)
@@ -78,6 +78,13 @@ console.log(JSON.stringify({dest}));
         css = read('assets/direct-quiz.css')
         self.assertIn('width:calc(100vw - 28px)!important', css)
         self.assertIn('max-width:400px!important', css)
+
+    def test_same_manager_can_have_versioned_variant_slug(self):
+        php = read('includes/class-mgs-direct-quiz.php')
+        self.assertIn("$base_slug = 'quiz-' . strtolower( $manager )", php)
+        self.assertIn("$variant_slug_pattern", php)
+        self.assertIn("'-v[0-9]+$/'", php)
+        self.assertIn('quiz-g002-v1', php)
 
     def test_unknown_manager_route_is_forced_to_real_404(self):
         php = read('includes/class-mgs-direct-quiz.php')

@@ -77,11 +77,24 @@ No painel, usar o menu `Landing SHEIN`:
 - Código fonte e produção com manifesto idêntico.
 - Backups existentes por readback.
 
+## Logos com canvas transparente excessivo
+
+Se um logo quadrado aparecer minúsculo apesar do `max-height`, inspecione as dimensões e o bounding box real do alpha. Quando a marca ocupa apenas uma faixa central do canvas, prefira recortar o arquivo sem redesenhá-lo:
+
+1. Calcule o bbox com alpha visível (limiar baixo, por exemplo `>=5`) para ignorar pixels residuais.
+2. Preserve a marca integral e adicione margem transparente curta e equilibrada.
+3. Redimensione para resolução web/retina proporcional; para logo horizontal, cerca de 600 px de largura é suficiente.
+4. Importe o novo PNG na Biblioteca de Mídia, atualize a landing e valide por readback de attachment, dimensões e URL.
+5. Faça screenshot Chromium mobile e confirme largura renderizada, centralização, legibilidade e zero overflow.
+
+Não use geração por IA quando um recorte lossless resolve; geração só é necessária se o arquivo original estiver incompleto ou em baixa qualidade.
+
 ## Estado inicial validado
 
 - Piloto: `yolokfx.com`.
-- Plugin: `mgs-direct-quiz` v1.0.2.
-- Canário: G002, modelo LP2.
+- Plugin: `mgs-direct-quiz` v1.0.3.
+- Interface administrativa em cards, com Biblioteca de Mídia para o logo.
+- Canário: G002, modelo LP2, logo YolokFX otimizado para 600×125.
 - Rota: `https://yolokfx.com/quiz/us/quiz-g002/`.
 - Destino: `https://yolokfx.com/rec-us-app-shein-circle-of-style/`.
 - `vizioid.com` permanece segunda etapa até aprovação explícita do canário.

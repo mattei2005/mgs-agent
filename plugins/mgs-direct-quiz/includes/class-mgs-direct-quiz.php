@@ -27,7 +27,7 @@ final class MGS_Direct_Quiz {
 
     public static function register_rewrite() {
         add_rewrite_rule(
-            '^quiz/([a-z]{2})/(quiz-g[0-9]{3,})/?$',
+            '^quiz/([a-z]{2})/(quiz-g[0-9]{3,}(?:-v[0-9]+)?)/?$',
             'index.php?mgs_dq_country=$matches[1]&mgs_dq_slug=$matches[2]',
             'top'
         );
@@ -199,7 +199,10 @@ final class MGS_Direct_Quiz {
         if ( ! preg_match( '/^G[0-9]{3,}$/', $manager ) ) {
             self::admin_fail( $id, 'manager' );
         }
-        if ( ! preg_match( '/^quiz-g[0-9]{3,}$/', $slug ) || 'quiz-' . strtolower( $manager ) !== $slug ) {
+        $base_slug = 'quiz-' . strtolower( $manager );
+        $variant_slug_pattern = '/^' . preg_quote( $base_slug, '/' ) . '-v[0-9]+$/';
+        if ( ! preg_match( '/^quiz-g[0-9]{3,}(?:-v[0-9]+)?$/', $slug )
+            || ( $base_slug !== $slug && ! preg_match( $variant_slug_pattern, $slug ) ) ) {
             self::admin_fail( $id, 'slug' );
         }
         if ( ! in_array( $layout, array( 'lp1', 'lp2' ), true ) ) {
@@ -420,7 +423,7 @@ final class MGS_Direct_Quiz {
                     <label class="mgs-dq-field mgs-dq-field-full"><span>Nome interno</span><input id="mgsdq-name" name="name" required value="<?php echo esc_attr( self::field( $item, 'name' ) ); ?>" placeholder="Ex.: SHEIN US — G002"></label>
                     <label class="mgs-dq-field"><span>País</span><input id="mgsdq-country" name="country" required pattern="[a-zA-Z]{2}" maxlength="2" value="<?php echo esc_attr( self::field( $item, 'country', 'us' ) ); ?>" placeholder="us"><small>Código de duas letras.</small></label>
                     <label class="mgs-dq-field"><span>Gestor</span><input id="mgsdq-manager" name="manager_code" required pattern="G[0-9]{3,}" value="<?php echo esc_attr( self::field( $item, 'manager_code' ) ); ?>" placeholder="G002"><small>Use o padrão G + número.</small></label>
-                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="quiz-g002"></div><small>Deve corresponder ao gestor.</small></label>
+                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="quiz-g002 ou quiz-g002-v1"></div><small>Use quiz-g002 na principal ou quiz-g002-v1 para uma variação do mesmo gestor.</small></label>
                     <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>LP1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>LP2 — Branded verde</option></select><small>Você pode trocar o modelo sem alterar a URL.</small></label>
                   </div>
                 </section>
