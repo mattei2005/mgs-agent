@@ -182,6 +182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-MOTO-3X3-20260825",
+      "next_step": "Concluir pre-stage dos 18 vídeos, validar/planejar o manifest v3, executar bundles 2+1, fazer readback da hierarquia, mover 9 assets para 02_TESTING, armar first-delivery e registrar evidências finais.",
+      "objective": "Criar exatamente C23-C25 CPV G006 com os nove criativos MOTO da thread 1541633215645745202, estrutura MAXVOL USD30 1x1x3 e início 26/08 00:30 SP",
+      "source": "discord:thread:1539826050765299872; creatives:discord:thread:1541633215645745202; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; request:cpv-moto-3x3-20260825",
+      "state": "execução em andamento: 9/9 assets moto liberados por rodolfo, metadata limpa, drive e meta reconciliados sem conflitos, reservados para o request cpv-moto-3x3-20260825. preflight live definiu c23-c25, budget ativo usd346,47 e projeção usd436,47 dentro do envelope usd500. general creation hold e scheduler diário permanecem pausados; somente este pedido one-time está autorizado.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-25T20:19:01+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-POST-CUT-FINALIZATION-20260825",
       "next_step": "Monitorar o próximo corte terminal real: o fluxo deve terminar no mesmo checkpoint ou manter PAUSED resumível se qualquer readback criativo/Drive/inventário falhar",
       "objective": "Automatizar e executar o ciclo completo após corte terminal: pausa, auditoria criativa, movimento, exclusão Meta e atualização do manual CPV Regras",
@@ -1222,5 +1232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T20:03:18+00:00"
+  "updated_at": "2026-08-25T20:19:01+00:00"
 }
