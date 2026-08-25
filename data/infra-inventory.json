@@ -1852,23 +1852,33 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.9-20260824",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.10-20260825",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.9",
+      "version": "1.7.10",
       "status": "active",
-      "feature": "Quiz car BR + relatórios SMS + criação dinâmica de múltiplas listas por gestor com preset_id interno",
-      "package_sha256": "d7f2dcb70d6a7ea0a3339a33048add8e23c5ee6096838f146c81ae0fa858ecb1",
-      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-sms-duplicate-gestor/20260824T152827Z/mgs-quiz-carro-1.7.8.tar.gz",
+      "feature": "Quiz BR de carro/moto + relatórios SMS + múltiplas listas por gestor + timestamp anti-spam reinicializado no cliente para HTML servido do page cache",
+      "package_sha256": "ebeaa6f8de2df65b1f23e03c952ff5aede7968eb8a5e0d48b790061a445bd824",
+      "backup_path": "/home/runcloud2/backups/mgs-quiz-cache-ts-20260825T150127-0400/live-1.7.9/",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "5eba56f4d0a0ad62e17fd78e664fc14d4ed8d180d257e86135844647182a0425",
-          "bytes": 2579
+          "sha256": "56d32dabe627b52dd6f3aef3ef2a9878dfff614192ce5a5b17b836fcc1d74e92",
+          "bytes": 2581
+        },
+        {
+          "path": "public/js/quiz.js",
+          "sha256": "88802e6e1f615d21da6afeb2b4cb7c2802b209da12404b16182ed386a991cda4",
+          "bytes": 7981
+        },
+        {
+          "path": "README.md",
+          "sha256": "dbe6c97173fc38ecaf6dd28a3f4f7af6e801ccd645b4f2261178fe6078a45395",
+          "bytes": 6018
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
@@ -1896,8 +1906,8 @@
           "bytes": 6136
         }
       ],
-      "validation": "v1.7.9 lint 11 PHP files; duplicate G004 helper PASS; internal preset_id/resolver PASS; JS blank Gestor PASS; live admin/editor probes PASS; plugin active with exact hashes; option and 10 quiz config hashes unchanged; public quiz and REST HTTP 200.",
-      "updated_at": "2026-08-24T11:29:19-04:00",
+      "validation": "v1.7.10 lint 11 PHP files + node --check; local real-browser stale timestamp fixture PASS; plugin active with exact hashes; WP Fastest Cache purged; six bare moto routes G001-G006 mobile PASS with HTML/JS 200, asset v=1.7.10, fresh DOM timestamp, visible form, ESCOLHER MOTO, no error and zero horizontal overflow; G004 bare and exact UTM URL PASS; REST stale/fresh-invalid branches 400 as expected and lead count unchanged at 416729.",
+      "updated_at": "2026-08-25T15:07:04-04:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1960,9 +1970,10 @@
           360
         ]
       },
-      "source_report": "REPORT-INFRA duplicate gestor SMS fix 2026-08-24",
-      "report_infra_discord_message_id": "1541469891633348634",
-      "package_path": "/root/mgs-agent/work/mgs-quiz-sms-add-list-179/mgs-quiz-carro-1.7.9.tar.gz",
+      "previous_source_report": "REPORT-INFRA duplicate gestor SMS fix 2026-08-24",
+      "previous_report_infra_discord_message_id": "1541469891633348634",
+      "source_report": "REPORT-INFRA formulário expirado/page-cache fix 2026-08-25",
+      "package_path": "/root/mgs-agent/work/mgs-quiz-cache-ts-1710/mgs-quiz-carro-1.7.10.tar.gz",
       "sms_preset_management": {
         "default_codes": [
           "G001",
@@ -10432,20 +10443,36 @@
       "updated_at": "2026-08-21T16:37:48-04:00"
     },
     {
+      "id": "zeus-wp-quiz-lead-funnel-skill",
+      "agent": "zeus",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/SKILL.md",
+      "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-quiz-lead-funnel/SKILL.md",
+      "size_bytes": 17524,
+      "modified_at": "2026-08-25T15:04:46-04:00",
+      "sha256": "410da2367fc4769a8ec63d65b95d03b12c1b7e4536de324f430d7468b7e9ebe7",
+      "purpose": "Procedimento operacional de quizzes WordPress, captura de leads, SMS Funnel, redirects e diagnóstico de frontend/cache.",
+      "validation": "Active profile and versioned mirror have identical SHA-256; documented server-rendered anti-spam timestamp inside page cache, client Date.now reset, cache purge and mobile/readback validation.",
+      "updated_at": "2026-08-25T15:07:04-04:00",
+      "skill": "wp-quiz-lead-funnel",
+      "source_report": "REPORT-INFRA formulário expirado/page-cache fix 2026-08-25"
+    },
+    {
       "id": "zeus-wp-quiz-lead-funnel-br-car-reference",
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/br-car-creditoparaveiculo.md",
       "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-quiz-lead-funnel/references/br-car-creditoparaveiculo.md",
-      "size_bytes": 18690,
-      "modified_at": "2026-07-14T14:42:27-04:00",
-      "sha256": "eb145e5ccd16f24302a33d2d6eefd631cb3514a63bcb6122f5c642db8dce3fb8",
-      "purpose": "Estado operacional e validações do quiz BR/CAR em creditoparaveiculo.com.",
-      "validation": "Active profile and versioned mirror have identical SHA-256 after documenting mgs-quiz-carro v1.7.5 responsive/transparent-image checks.",
-      "updated_at": "2026-07-14T14:42:27-04:00",
+      "size_bytes": 23827,
+      "modified_at": "2026-08-25T15:04:56-04:00",
+      "sha256": "aac4b5feab951361eeb5e5ab856aa43017a11861e4cb7bcb1f3d3a455986383e",
+      "purpose": "Estado operacional e validações do quiz BR de carro/moto em creditoparaveiculo.com.",
+      "validation": "Active profile and versioned mirror have identical SHA-256 after documenting mgs-quiz-carro v1.7.10, client-side anti-spam timestamp reset, WP Fastest Cache purge and six-route mobile smoke.",
+      "updated_at": "2026-08-25T15:07:04-04:00",
       "skill": "wp-quiz-lead-funnel",
-      "source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
-      "report_infra_discord_message_id": "1526660645813092363"
+      "previous_source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
+      "previous_report_infra_discord_message_id": "1526660645813092363",
+      "source_report": "REPORT-INFRA formulário expirado/page-cache fix 2026-08-25"
     },
     {
       "id": "hermes-post-update-review-active-agent-baseline-20260720",
