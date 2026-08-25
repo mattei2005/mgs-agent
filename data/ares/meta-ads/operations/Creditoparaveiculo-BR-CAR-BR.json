@@ -395,7 +395,7 @@
       }
     },
     "one_time_override_20260825": {
-      "status": "authorized_exact_request",
+      "status": "completed_validated",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-25T16:11:51-04:00",
       "authorization_source": "discord:thread:1539826050765299872",
@@ -403,7 +403,11 @@
       "request_id": "cpv-moto-3x3-20260825",
       "scope": "create exactly three CPV G006 production campaigns using exactly the nine released MOTO creative lineages",
       "campaign_count": 3,
-      "campaign_numbers": [23, 24, 25],
+      "campaign_numbers": [
+        23,
+        24,
+        25
+      ],
       "budget_per_campaign_usd": 30,
       "total_new_budget_usd": 90,
       "bid_strategy": "MAXVOL",
@@ -425,7 +429,8 @@
         "asset_d679c014f28a5b063934"
       ],
       "general_creation_hold_preserved": true,
-      "scheduler_remains_paused": true
+      "scheduler_remains_paused": true,
+      "completed_at_utc": "2026-08-25T21:14:37.585474+00:00"
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
@@ -564,16 +569,23 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 25,
+    "next_required_campaign_number": 26,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
-      "authorized_one_time_scope": [23, 24, 25],
+      "authorized_one_time_scope": [
+        23,
+        24,
+        25
+      ],
       "source": "Meta preflight for cpv-moto-3x3-20260825",
       "side_effects": "none"
     },
     "partial_request_readback_20260825_1727_sp": {
       "live_next_campaign_number": 25,
-      "existing_request_campaigns": [23, 24],
+      "existing_request_campaigns": [
+        23,
+        24
+      ],
       "c23_ads": 3,
       "c24_ads": 2,
       "missing_layer": "C24 AD02 only; C25 bundle not started",
@@ -856,10 +868,22 @@
           "request_id": "cpv-daily-20260824"
         },
         "23": {
-          "campaign_id": "120250910801660632",
-          "cycle_start_date": "2026-08-25",
+          "campaign_id": "120250925308930632",
+          "cycle_start_date": "2026-08-26",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260824"
+          "request_id": "cpv-moto-3x3-20260825-corrected-state"
+        },
+        "24": {
+          "campaign_id": "120250925308920632",
+          "cycle_start_date": "2026-08-26",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-moto-3x3-20260825-corrected-state"
+        },
+        "25": {
+          "campaign_id": "120250925458300632",
+          "cycle_start_date": "2026-08-26",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-moto-3x3-20260825-corrected-state"
         }
       },
       "required": [

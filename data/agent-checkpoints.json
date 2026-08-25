@@ -572,6 +572,16 @@
     },
     {
       "agent": "zeus",
+      "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
+      "next_step": "Aguardar Rodolfo confirmar o modelo inicial e a proposta de arquitetura; depois construir em staging, validar e implantar somente o canário G002 no Yolokfx",
+      "objective": "Criar plugin de landing quiz SHEIN com LP1/LP2, piloto em yolokfx.com e replicação posterior em vizioid.com",
+      "source": "discord:thread:1541914123376402452#1541916912156545095",
+      "state": "análise concluída: referências auditadas; plugin car revisado; yolokfx pronto para piloto; sem deploy; requisitos confirmados de rota por gestor, preservação de parâmetros, sem sms e sem formulário",
+      "thread_id": "1541914123376402452",
+      "updated_at": "2026-08-25T21:14:18+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "dtr-financetopfeed-full28-rebuild-20260804",
       "next_step": "Nenhuma execução pendente. Entregar relatório final na thread com lista das 18 páginas e evidência de readback.",
       "objective": "Sobrescrever integralmente os 18 Auto Principal Drip incompletos M1-M15 pelo fluxo canônico completo M1-M28 do mesmo template, incluindo textos, imagens, botões, links, postbacks, horários e conexões.",
@@ -1232,5 +1242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T21:06:49+00:00"
+  "updated_at": "2026-08-25T21:14:18+00:00"
 }
