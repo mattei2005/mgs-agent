@@ -346,7 +346,7 @@ final class MGS_Direct_Quiz {
                       $dup     = wp_nonce_url( admin_url( 'admin-post.php?action=mgs_dq_duplicate&id=' . rawurlencode( $id ) ), 'mgs_dq_duplicate_' . $id );
                       $active  = ! empty( $item['active'] );
                       $manager = self::field( $item, 'manager_code', '' );
-                      $model   = strtoupper( self::field( $item, 'layout_template', 'lp1' ) );
+                      $model = 'V' . substr( self::field( $item, 'layout_template', 'lp1' ), 2 );
                   ?>
                     <tr>
                       <td>
@@ -421,8 +421,8 @@ final class MGS_Direct_Quiz {
                     <label class="mgs-dq-field mgs-dq-field-full"><span>Nome interno</span><input id="mgsdq-name" name="name" required value="<?php echo esc_attr( self::field( $item, 'name' ) ); ?>" placeholder="Ex.: SHEIN US — G002"></label>
                     <label class="mgs-dq-field"><span>País</span><input id="mgsdq-country" name="country" required pattern="[a-zA-Z]{2}" maxlength="2" value="<?php echo esc_attr( self::field( $item, 'country', 'us' ) ); ?>" placeholder="us"><small>Código de duas letras.</small></label>
                     <label class="mgs-dq-field"><span>Gestor</span><input id="mgsdq-manager" name="manager_code" required pattern="G[0-9]{3,}" value="<?php echo esc_attr( self::field( $item, 'manager_code' ) ); ?>" placeholder="G002"><small>Use o padrão G + número.</small></label>
-                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: LP2 usa sh2-g002 e LP1 usa sh1-g002.</small></label>
-                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>LP1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>LP2 — Branded verde</option></select><small>Você pode trocar o modelo sem alterar a URL.</small></label>
+                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: V2 usa sh2-g002 e V1 usa sh1-g002.</small></label>
+                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option></select><small>Você pode trocar o modelo sem alterar a URL.</small></label>
                   </div>
                 </section>
 
@@ -435,7 +435,7 @@ final class MGS_Direct_Quiz {
                     <div class="mgs-dq-logo-controls">
                       <label class="mgs-dq-field"><span>Logo do site</span><input type="url" id="mgsdq-logo" name="logo_url" value="<?php echo esc_attr( self::field( $item, 'logo_url' ) ); ?>" placeholder="https://..."></label>
                       <div class="mgs-dq-inline-actions"><button type="button" class="mgs-dq-button mgs-dq-button-secondary" id="mgs-dq-select-logo"><span class="dashicons dashicons-images-alt2"></span> Escolher na Biblioteca de Mídia</button><button type="button" class="mgs-dq-button mgs-dq-button-ghost" id="mgs-dq-remove-logo" <?php echo self::field( $item, 'logo_url' ) ? '' : 'hidden'; ?>>Remover logo</button></div>
-                      <small>Usado no LP2. No LP1 o logo pode ficar vazio.</small>
+                      <small>Usado no V2. No V1 o logo pode ficar vazio.</small>
                     </div>
                   </div>
                   <div class="mgs-dq-fields">

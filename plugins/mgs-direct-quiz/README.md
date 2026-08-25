@@ -7,7 +7,7 @@ Plugin WordPress simples para criar e duplicar landing pages de uma pergunta usa
 - LP2: `/quiz/{pais}/sh2-gNNN/`, por exemplo `sh2-g002`.
 - LP1: `/quiz/{pais}/sh1-gNNN/`, por exemplo `sh1-g002`.
 - O número após `sh` deve corresponder ao modelo visual selecionado.
-- Modelos: LP1 (minimal escura) e LP2 (branded verde).
+- Modelos visíveis no painel: V1 (minimal escura) e V2 (branded verde).
 - Configuração por gestor no WordPress Admin, no menu `Landing SHEIN`.
 - Interface visual em cards para criar, editar, ativar/desativar e duplicar landings.
 - O logo pode ser informado por URL ou escolhido diretamente na Biblioteca de Mídia do WordPress, com preview e remoção.
