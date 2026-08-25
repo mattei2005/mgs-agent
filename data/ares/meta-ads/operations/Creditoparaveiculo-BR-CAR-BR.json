@@ -559,13 +559,22 @@
   },
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
-    "corrected_at_sp": "2026-08-25T17:13:32-03:00",
-    "next_required_campaign_number": 23,
+    "corrected_at_sp": "2026-08-25T17:27:00-03:00",
+    "next_required_campaign_number": 25,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [23, 24, 25],
       "source": "Meta preflight for cpv-moto-3x3-20260825",
       "side_effects": "none"
+    },
+    "partial_request_readback_20260825_1727_sp": {
+      "live_next_campaign_number": 25,
+      "existing_request_campaigns": [23, 24],
+      "c23_ads": 3,
+      "c24_ads": 2,
+      "missing_layer": "C24 AD02 only; C25 bundle not started",
+      "source": "Meta hierarchy readback before automatic recovery",
+      "blind_replay_blocked": true
     },
     "strict_sequence": true,
     "out_of_order_slots_forbidden": true,
