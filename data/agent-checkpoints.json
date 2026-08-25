@@ -183,12 +183,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-MOTO-3X3-20260825",
-      "next_step": "Após o cooldown persistido, executar readback de C25 pelo recovery do v3, criar somente anúncios comprovadamente ausentes, validar C23-C25, mover 9 assets para 02_TESTING e armar first-delivery. Não repetir cópia cega.",
-      "objective": "Criar exatamente C23-C25 CPV G006 com os nove criativos MOTO da thread 1541633215645745202, estrutura MAXVOL USD30 1x1x3 e início 26/08 00:30 SP",
-      "source": "discord:thread:1539826050765299872; request:cpv-moto-3x3-20260825; c25:120250925458300632; engine-checkpoint:bundle2-failed-transient",
-      "state": "c23 e c24 estão completas no checkpoint v3, 1x1x3 cada. o bundle c25 criou campanha e adset, mas a meta devolveu erro transitório code 2 nos anúncios ad01 e ad03; ad02 pode ter sido criado. o request ficou readback_deferred com ids preservados e recuperação automática obrigatória. nenhum drive move ocorreu ainda.",
+      "next_step": "Após cooldown, validar em um Graph Batch as 3 campanhas, 3 anúncios ACTIVE corretos por campanha, URL moto e UTMs; mover 9 assets para 02_TESTING, atualizar inventário e armar first-delivery.",
+      "objective": "Concluir C23-C25 MOTO com nove criativos da thread 1541633215645745202, MAXVOL USD30 1x1x3, início 26/08 00:30 SP, nome MOTO e destino quiz-moto mantendo UTMs",
+      "source": "discord:thread:1539826050765299872; request:cpv-moto-3x3-20260825; correction:cpv-moto-3x3-20260825-correction-1",
+      "state": "correção de rodolfo aplicada antes da entrega: c23-c25 renomeadas com moto e validadas; destino https://creditoparaveiculo.com/quiz-moto-parcelas-g006/ validado. foram criados 9 anúncios corretos inicialmente paused, todos validados por url/utm/source lineage e depois ativados. os 7 anúncios intermediários com url de carro foram renomeados legacy url car e preservados paused, sem exclusão permanente. meta final readback consolidado está aguardando cooldown por rate/transient response antes do drive/postprocess.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-25T20:41:15+00:00"
+      "updated_at": "2026-08-25T21:06:49+00:00"
     },
     {
       "agent": "ares",
@@ -1232,5 +1232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T20:41:15+00:00"
+  "updated_at": "2026-08-25T21:06:49+00:00"
 }
