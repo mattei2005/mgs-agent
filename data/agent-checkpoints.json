@@ -172,6 +172,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-POST-CUT-FINALIZATION-20260825",
+      "next_step": "Persistir snapshot, excluir sete campanhas com readback, reconciliar/classificar 21 assets, implementar runtime futuro e editar mensagens canônicas",
+      "objective": "Automatizar e executar o ciclo completo após corte terminal: pausa, auditoria criativa, movimento, exclusão Meta e atualização do manual CPV Regras",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "em execução: preflight meta/inventário concluído; c13-c18/c20 pausadas terminais; dois retestes provisórios na c20; mensagem cpv regras importada para edição in-place",
+      "thread_id": "1541608945704247408",
+      "updated_at": "2026-08-25T13:24:01+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-V3-AD-NAMING-C14-C16-20260822",
       "next_step": "Operação normal; próximos manifests CPV só selam com naming canônico e qualquer ausência/invalidez falha fechado antes do write.",
       "objective": "Corrigir os nomes dos nove anúncios C14/C15/C16 e impedir recorrência no Campaign Engine v3",
@@ -1202,5 +1212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T12:56:49+00:00"
+  "updated_at": "2026-08-25T13:24:01+00:00"
 }
