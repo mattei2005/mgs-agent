@@ -183,12 +183,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-MOTO-3X3-20260825",
-      "next_step": "Após cooldown, validar em um Graph Batch as 3 campanhas, 3 anúncios ACTIVE corretos por campanha, URL moto e UTMs; mover 9 assets para 02_TESTING, atualizar inventário e armar first-delivery.",
-      "objective": "Concluir C23-C25 MOTO com nove criativos da thread 1541633215645745202, MAXVOL USD30 1x1x3, início 26/08 00:30 SP, nome MOTO e destino quiz-moto mantendo UTMs",
-      "source": "discord:thread:1539826050765299872; request:cpv-moto-3x3-20260825; correction:cpv-moto-3x3-20260825-correction-1",
-      "state": "correção de rodolfo aplicada antes da entrega: c23-c25 renomeadas com moto e validadas; destino https://creditoparaveiculo.com/quiz-moto-parcelas-g006/ validado. foram criados 9 anúncios corretos inicialmente paused, todos validados por url/utm/source lineage e depois ativados. os 7 anúncios intermediários com url de carro foram renomeados legacy url car e preservados paused, sem exclusão permanente. meta final readback consolidado está aguardando cooldown por rate/transient response antes do drive/postprocess.",
+      "next_step": "Acompanhar revisão/serving e primeiro gasto pelo watcher de 15 minutos; nenhuma nova criação automática até liberação explícita do hold.",
+      "objective": "Criar exatamente C23-C25 CPV G006 com os 9 criativos MOTO da thread 1541633215645745202, MAXVOL USD30 1x1x3, início 26/08 00:30 SP, nome MOTO e destino quiz-moto mantendo UTMs",
+      "source": "discord:thread:1539826050765299872; creatives:thread:1541633215645745202; request:cpv-moto-3x3-20260825-corrected-state",
+      "state": "concluído e validado. c23/c24/c25 active com nomes moto, início futuro 26/08 00:30 sp, usd30 maxvol e 3 anúncios active corretos por campanha. url em todos os 9 anúncios: quiz-moto-parcelas-g006 com utms b01fb13c23/c24/c25 preservadas. os 7 anúncios intermediários com url de carro foram preservados paused como legacy url car, sem exclusão. nove assets movidos por service account para 02_testing e inventário ligado aos ids meta. first-delivery armado 3/3 com meta_writes=0. budget ativo usd436.47, envelope usd500, saldo usd63.53. hold geral de novas criações permanece ativo; override pontual concluído.",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-25T21:06:49+00:00"
+      "updated_at": "2026-08-25T21:31:45+00:00"
     },
     {
       "agent": "ares",
@@ -1242,5 +1242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T21:26:27+00:00"
+  "updated_at": "2026-08-25T21:31:45+00:00"
 }

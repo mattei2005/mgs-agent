@@ -8252,6 +8252,99 @@
           "readback": "PASS"
         }
       },
+      "cpv_moto_3x3_creation_20260825": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1539826050765299872",
+        "source_creative_thread_id": "1541633215645745202",
+        "scope": "One-time override under the standing creation hold: create exactly C23-C25 with the nine released MOTO assets, rename campaigns with MOTO and use the quiz-moto destination while preserving UTMs.",
+        "request": {
+          "parent_request_id": "cpv-moto-3x3-20260825",
+          "corrected_request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "status": "COMPLETE_FUTURE_ACTIVE",
+          "campaign_count": 3,
+          "structure": "CBO 1x1x3",
+          "bid_strategy": "MAXVOL",
+          "budget_per_campaign_usd": 30,
+          "total_new_budget_usd": 90,
+          "start_time_sp": "2026-08-26T00:30:00-03:00"
+        },
+        "campaigns": [
+          {
+            "number": 23,
+            "campaign_id": "120250925308930632",
+            "name": "23 - 26-08 - Garagem Brasil - MOTO - (b01fb13c23) event_Subscribe - MAXVOL",
+            "active_correct_ads": 3,
+            "preserved_paused_legacy_ads": 3
+          },
+          {
+            "number": 24,
+            "campaign_id": "120250925308920632",
+            "name": "24 - 26-08 - Garagem Brasil - MOTO - (b01fb13c24) event_Subscribe - MAXVOL",
+            "active_correct_ads": 3,
+            "preserved_paused_legacy_ads": 3
+          },
+          {
+            "number": 25,
+            "campaign_id": "120250925458300632",
+            "name": "25 - 26-08 - Garagem Brasil - MOTO - (b01fb13c25) event_Subscribe - MAXVOL",
+            "active_correct_ads": 3,
+            "preserved_paused_legacy_ads": 1
+          }
+        ],
+        "destination": {
+          "url_base": "https://creditoparaveiculo.com/quiz-moto-parcelas-g006/",
+          "utms_preserved": true,
+          "live_readback": "PASS: 9/9 ACTIVE ads, exact URL wrapper per C23-C25, source_ad_id lineage present, issues_info null"
+        },
+        "creative_lineage": {
+          "asset_count": 9,
+          "drive_target": "02_TESTING",
+          "inventory_status": "02_TESTING",
+          "drive_readback": "9/9",
+          "inventory_readback": "9/9",
+          "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+          "shared_drive": "MGS-AGENTS",
+          "legacy_wrong_url_ads": "preserved PAUSED as LEGACY URL CAR; no permanent deletion"
+        },
+        "budget": {
+          "currency": "USD",
+          "active_after_usd": 436.47,
+          "effective_envelope_usd": 500,
+          "remaining_usd": 63.53,
+          "source": "live Meta preflight before write plus three USD30 campaign budget readbacks"
+        },
+        "first_delivery": {
+          "status": "AUTO_ARMED",
+          "armed_count": 3,
+          "meta_writes": 0,
+          "cycle_start_date": "2026-08-26",
+          "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/auto-arm-20260825T212931939375Z.json",
+          "audit_sha256": "0aa3b83311916db01c340f95fd987e3eb329fbe9630794f08fa0d466a1693a49"
+        },
+        "hold": {
+          "general_creation_hold_preserved": true,
+          "daily_creation_scheduler_enabled": false,
+          "daily_creation_scheduler_state": "paused",
+          "one_time_override_status": "completed_validated",
+          "next_required_campaign_number": 26
+        },
+        "evidence": {
+          "operation_sha256": "83725f88533752323b05efe68d52f5bc2b2887b62b3953cb5ed48d7be1ed4d29",
+          "daily_audit_sha256": "2a508f180b8159d8eba57541fd74d433896630c9856b2861e83405f4533231cf",
+          "state_sha256": "192e5ae97463ec36bd813a0a9ef4c0278b728049363a738f6b42793c0ab77af8",
+          "correction_state_sha256": "75ebb624baf40ba6c127d1bb415ceac2fc9a2c85f6a5363aa29827181157fd31",
+          "inventory_sha256": "72c08b046ee25db0039bb7d8c6f3e90b4fc72f52cb52773697f7732599d33e69",
+          "corrected_manifest_sha256": "cf0330618a1a87ad6a9674b11baac834bbafe8c4fcedc0764d8141ee5433250c",
+          "first_delivery_state_sha256": "765460c95959029acc2140a339a8d068a54a5f4561da5ef5187ea31009824591",
+          "checkpoint_id": "ARES-CPV-MOTO-3X3-20260825",
+          "checkpoints_sha256": "01e289d273bd5325f7ea37289e432b77da1cce5d61935a6104184155ab11db25",
+          "knowledge_validation": "PASS: 101 registry entries, 124 checkpoints, zero errors"
+        },
+        "updated_at": "2026-08-25T17:30:49-04:00",
+        "report_infra": {
+          "status": "pending"
+        }
+      },
       "manual_ui_replacements_d1_20260823": {
         "authorized_by": "Rodolfo Mattei",
         "authorization_source": "discord:thread:1540939724636819507",
