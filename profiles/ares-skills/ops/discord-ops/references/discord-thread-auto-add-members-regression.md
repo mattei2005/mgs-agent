@@ -105,7 +105,7 @@ More robust repair — obrigatório quando o mesmo profile atende canais com aud
 - Configure `discord.thread_auto_add_users_by_channel` as an explicit parent-channel mapping. Precedence: exact parent channel → global fallback → broad discovery only when neither source exists.
 - An explicit empty list is meaningful and must fail closed; never turn `[]` into broad guild discovery.
 - When systemd loads a profile `.env`, persist the same mapping as compact JSON in `DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL`; runtime env wins over YAML hydration. Validate the new PID through `/proc/<pid>/environ` without printing tokens.
-- For Ares, apply the current institutional policy from `context/ares-operational-map.md`. As of 2026-08-24, Zeus (`1496296175014252634`) is mandatory in every Ares-created thread, including Diretoria and future parent channels; manager lists remain additive.
+- For Ares, apply the current institutional policy from `context/ares-operational-map.md`. Rodolfo (`344196393512075265`) and Zeus (`1496296175014252634`) are mandatory in every Ares-created thread, including Diretoria and future parent channels; this guarantees that every thread initiated by Nicolas inside Ares routes includes Rodolfo. Manager lists remain additive.
 - Explicit configured targets may be bots. The runtime must keep filtering bots during broad guild discovery, but must honor another agent bot when its ID appears in `thread_auto_add_users` or `thread_auto_add_users_by_channel`; only the current profile's own bot remains excluded. Cover this with a targeted test.
 - Validate with config/env parity, targeted tests, detached safe restart, `Auto-thread member sync` log marker and a real thread-member readback.
 

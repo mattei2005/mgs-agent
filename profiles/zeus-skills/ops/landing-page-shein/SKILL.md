@@ -20,7 +20,7 @@ Use quando Rodolfo pedir criação, edição, duplicação, implantação, audit
 
 Skill exclusiva das landing pages de tráfego direto SHEIN. Não misturar com `wp-quiz-lead-funnel` nem com o produto Creditoparaveiculo.
 
-O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor no padrão final SHEIN: LP2 em `/quiz/us/sh2-g002/` e LP1 em `/quiz/us/sh1-g002/`. A interface administrativa permite criar, editar, ativar/desativar e duplicar configurações.
+O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor no padrão final SHEIN: V2 em `/quiz/us/sh2-g002/` e V1 em `/quiz/us/sh1-g002/`. A interface administrativa permite criar, editar, ativar/desativar e duplicar configurações.
 
 ## Contrato do produto
 
@@ -38,7 +38,7 @@ No painel, usar o menu `Landing SHEIN`:
 
 - `Todas as landings`: lista nome, gestor, modelo, URL, status e ações.
 - `Nova landing`: cria uma configuração.
-- `Editar`: altera nome, país, gestor, slug, LP1/LP2, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex.
+- `Editar`: altera nome, país, gestor, slug, V1/V2, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex.
 - `Logo do site`: aceita URL direta e também oferece `Escolher na Biblioteca de Mídia`, com preview e opção de remover.
 - `Duplicar`: copia apenas a configuração, abre a cópia inativa e limpa gestor/slug para impedir publicação acidental. Definir o novo gestor e slug correspondente antes de ativar.
 
@@ -47,8 +47,8 @@ No painel, usar o menu `Landing SHEIN`:
 1. Abrir `Landing SHEIN > Todas as landings`.
 2. Na landing-base, clicar `Duplicar`.
 3. Confirmar que aparece `Cópia criada inativa`.
-4. Definir nome interno, gestor `Gxxx` e slug correspondente ao modelo: `sh2-gxxx` para LP2 ou `sh1-gxxx` para LP1.
-5. Revisar modelo LP1/LP2, copy, logo e URLs dos dois CTAs.
+4. Definir nome interno, gestor `Gxxx` e slug correspondente ao modelo: `sh2-gxxx` para V2 ou `sh1-gxxx` para V1.
+5. Revisar modelo V1/V2, copy, logo e URLs dos dois CTAs.
 6. Manter ambos os destinos iguais quando esse for o desenho aprovado.
 7. Salvar ainda inativa e validar a configuração por readback.
 8. Ativar somente após conferir URL pública, mobile, CTAs e parâmetros.
@@ -93,9 +93,9 @@ Não use geração por IA quando um recorte lossless resolve; geração só é n
 ## Estado inicial validado
 
 - Piloto: `yolokfx.com`.
-- Plugin: `mgs-direct-quiz` v1.0.6.
-- Interface administrativa em cards, com Biblioteca de Mídia para o logo.
-- G002 LP2: `https://yolokfx.com/quiz/us/sh2-g002/`, logo YolokFX otimizado para 600×125.
-- G002 LP1: `https://yolokfx.com/quiz/us/sh1-g002/`.
+- Plugin: `mgs-direct-quiz` v1.0.7.
+- Interface administrativa em cards, com Biblioteca de Mídia para o logo e modelos exibidos como V1/V2.
+- G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`, logo YolokFX otimizado para 600×125.
+- G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
 - Destino: `https://yolokfx.com/rec-us-app-shein-circle-of-style/`.
 - `vizioid.com` permanece segunda etapa até aprovação explícita do canário.
