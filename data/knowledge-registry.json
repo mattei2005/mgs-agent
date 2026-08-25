@@ -798,15 +798,34 @@
         "zeus"
       ],
       "domain": "growth",
-      "effective_at": "2026-08-24T19:11:51-04:00",
-      "id": "ARES-DISCORD-ZEUS-ALL-THREADS-V1",
+      "effective_at": "2026-08-25T19:25:07-04:00",
+      "id": "ARES-DISCORD-CORE-MEMBERS-ALL-THREADS-V2",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Rodolfo and Zeus are mandatory in every Ares-created Discord thread",
+      "updated_at": "2026-08-25T23:25:08+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.threads.mandatory-zeus-member",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "discord-ops",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T19:11:51-04:00",
+      "id": "ARES-DISCORD-ZEUS-ALL-THREADS-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-DISCORD-CORE-MEMBERS-ALL-THREADS-V2",
       "title": "Zeus is mandatory in every Ares-created Discord thread",
-      "updated_at": "2026-08-24T23:12:52+00:00"
+      "updated_at": "2026-08-25T23:25:08+00:00"
     },
     {
       "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
@@ -1944,5 +1963,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T23:21:22+00:00"
+  "updated_at": "2026-08-25T23:25:08+00:00"
 }
