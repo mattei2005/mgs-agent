@@ -1493,6 +1493,24 @@
       "updated_at": "2026-08-07T03:31:50+00:00"
     },
     {
+      "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "decision-direct-shein-landing-plugin-20260825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Landing plugin simples para tráfego direto SHEIN",
+      "updated_at": "2026-08-25T21:52:41+00:00"
+    },
+    {
       "canonical_key": "meta-app.b001-b012.shared-admin-alert-policy",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -1873,5 +1891,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-25T21:02:13+00:00"
+  "updated_at": "2026-08-25T21:52:41+00:00"
 }
