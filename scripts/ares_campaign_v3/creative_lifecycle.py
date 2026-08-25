@@ -163,9 +163,9 @@ def classify_campaign_assets(
             "impressions": int(metrics["impressions"]),
             "impression_share_pct": impression_share,
             "test_attempt_count": attempts,
-            "terminal_reason": terminal_reason if event == "TERMINAL_REJECTED" else None,
         }
         if event == "TERMINAL_REJECTED":
+            base["terminal_reason"] = terminal_reason
             if meaningful:
                 evaluation_status = {
                     "PARAR D3 REAL+ROAS": "REJECTED_D3_REALIDADE_ECONOMICA",

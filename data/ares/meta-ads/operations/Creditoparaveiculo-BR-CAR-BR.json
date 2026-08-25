@@ -184,13 +184,14 @@
   },
   "creative_performance_lifecycle": {
     "enabled": true,
-    "policy_version": "1.0.0",
+    "policy_version": "1.1.0",
     "authorized_by": "Rodolfo Mattei",
-    "authorized_at_et": "2026-08-24T18:06:53-04:00",
-    "authorization_source": "discord:thread:1541563564207243335",
-    "scope": "Creditoparaveiculo BR-CAR-BR G006 creative status, Drive movement, inventory classification and retest selection only; zero Meta campaign/ad writes",
+    "authorized_at_sp": "2026-08-25T10:15:18-03:00",
+    "authorization_source": "discord:thread:1541608945704247408",
+    "scope": "Creditoparaveiculo BR-CAR-BR G006 creative status, Drive movement, inventory classification and retest selection immediately after terminal campaign cut; campaign deletion is governed by post_cut_lifecycle",
     "checkpoints_sp": [
       "08:00",
+      "12:00",
       "16:00"
     ],
     "delivery_basis": "cumulative Meta ad-level spend from campaign operational cycle start through checkpoint",
@@ -199,22 +200,25 @@
     "campaign_deleted_alone_never_rejects": true,
     "anomaly_gate": "Meta x Smart Bidding spend anomaly blocks all creative classification",
     "rejected": {
-      "cycle_day": 3,
+      "cycle_gate": "D3 reasons require cycle_day=3; PARAR RECORRÊNCIA is terminal at its verified third 16:00 occurrence",
       "classification_checkpoint_hours_sp": [
         8,
+        12,
         16
       ],
       "terminal_pause_origin_hours_sp": [
         8,
-        12
+        12,
+        16
       ],
       "requires_campaign_status": "PAUSED",
       "requires_terminal_reason_any": [
         "PARAR D3 ESTIMADO",
-        "PARAR D3 REAL+ROAS"
+        "PARAR D3 REAL+ROAS",
+        "PARAR RECORRÊNCIA"
       ],
       "requires_actual_roi_lt": 0.0,
-      "requires_estimated_roi_lt_for_terminal_reason": "PARAR D3 ESTIMADO only",
+      "requires_estimated_roi_lt_for_terminal_reason": "PARAR D3 ESTIMADO and PARAR RECORRÊNCIA",
       "meaningful_delivery_target_status": "05_REJECTED",
       "underexposed_target_status": "03_TESTED"
     },
@@ -245,6 +249,38 @@
     "drive_readback_required": true,
     "inventory_readback_required": true,
     "meta_writes": false
+  },
+  "post_cut_lifecycle": {
+    "enabled": true,
+    "policy_version": "1.0.0",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_sp": "2026-08-25T10:15:18-03:00",
+    "authorization_source": "discord:thread:1541608945704247408",
+    "scope": "Creditoparaveiculo BR-CAR-BR G006 terminal performance cuts only",
+    "terminal_reasons": [
+      "PARAR D3 ESTIMADO",
+      "PARAR D3 REAL+ROAS",
+      "PARAR RECORRÊNCIA"
+    ],
+    "required_assets_per_campaign": 3,
+    "sequence": [
+      "pause campaign with single POST and confirm PAUSED by GET",
+      "snapshot cumulative ad-level delivery and classify every campaign asset",
+      "move each asset to 03_TESTED or 05_REJECTED and verify Drive plus inventory",
+      "delete campaign with single POST status=DELETED and confirm DELETED or ARCHIVED by GET",
+      "persist resumable audit and conclude the cycle"
+    ],
+    "retention_hours": 0,
+    "delete_after_creative_finalization": true,
+    "delete_before_complete_creative_readback": false,
+    "delete_retry_policy": "never retry blindly; reconcile by GET and write only the still-missing delete layer",
+    "terminal_readback_literals": [
+      "DELETED",
+      "ARCHIVED"
+    ],
+    "temporary_pause_excluded": "PAUSAR 16H TEMPORÁRIO",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-post-cut-lifecycle.json",
+    "audit_root": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR"
   },
   "first_delivery_guardrail": {
     "enabled": true,
@@ -1572,7 +1608,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.71",
+  "playbook_version": "1.0.72",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
