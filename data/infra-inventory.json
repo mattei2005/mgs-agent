@@ -2166,14 +2166,15 @@
         "monitor-sb-restricted-pages.sh"
       ],
       "purpose": "Keep Smart Bidding/DigitalTRChat Playwright automation and authenticated storage outside ephemeral /tmp across VPS restarts.",
-      "validation": "2026-08-17 session refresh via canonical headed/Xvfb login: live /company HTTP 200, /routing HTTP 201, authorization captured in memory, Newsoun apply/readback PASS; storage state mode 0600.",
-      "last_session_refresh": "2026-08-17T15:14:51-04:00",
+      "validation": "2026-08-26 session refresh via canonical headed/Xvfb login: live /company HTTP 200 with 7 companies and authorization captured; exact consumer dry-run and apply both exit 0 with 52 publishers, 447 monitored rows, zero transitions/errors; Google Sheet readback PASS for 447 rows; storage state mode 0600; cron-minimal-environment dry-run PASS.",
+      "last_session_refresh": "2026-08-26T07:04:47-04:00",
       "last_session_refresh_authorization_message_ids": [
         "1538988150452650114",
         "1538988259290390539"
       ],
-      "last_session_refresh_backup": "/root/.local/share/mgs/smartbidding_state_headed.json.pre-refresh-20260817T151451-0400",
-      "updated_at": "2026-08-17T15:20:28-04:00"
+      "last_session_refresh_source_message_id": "1542126475325472852",
+      "last_session_refresh_backup": "/root/.local/share/mgs/smartbidding_state_headed.json.bak.20260826T070447",
+      "updated_at": "2026-08-26T07:05:55-04:00"
     },
     {
       "id": "dtr-sb-daily-match-audit-transitive-helper",
