@@ -1,7 +1,7 @@
 ---
 name: cloudflare-operations
 description: "Use when Rodolfo asks Zeus to operate Cloudflare for MGS domains: purge cache, inspect zones/DNS/settings, or prepare DNS/SSL/WAF/rules changes. Covers 1Password token handling, zone resolution including subdomains, confirmation rules, API calls, audit logging, and reporting."
-version: 1.1.0
+version: 1.1.1
 author: Zeus MGS
 license: Proprietary
 metadata:
@@ -41,8 +41,10 @@ Limit prerequisite work to the required live checks: validate the token, resolve
 Canonical 1Password item currently used by Zeus:
 
 - Vault: `MGS Conteúdo` via `OP_DEFAULT_VAULT`
-- Item: `Cloudflare MGS Admin Token - mattei20052`
+- Item: `Cloudflare MGS Admin Token - mattei2005`
 - Preferred field: `token`
+
+An alternate item, `Cloudflare MGS Admin Token - mattei20052`, may validate as active but has a different zone scope. Never select a token only because `/user/tokens/verify` succeeds: query the exact target zone and use the item that returns it. Live read-only validation on 2026-08-26 confirmed that `pdllifestyle.com` is visible through `mattei2005` and not through `mattei20052`.
 
 Load credentials with `.env` exported for subprocesses:
 
@@ -134,7 +136,7 @@ Use this as the base pattern when no wrapper script exists yet. Keep output smal
 ```python
 import json, os, subprocess, urllib.parse, urllib.request, urllib.error
 
-ITEM = 'Cloudflare MGS Admin Token - mattei20052'
+ITEM = 'Cloudflare MGS Admin Token - mattei2005'
 VAULT = os.environ.get('OP_DEFAULT_VAULT', 'MGS Conteúdo')
 obj = json.loads(subprocess.check_output(['op','item','get',ITEM,'--vault',VAULT,'--format','json'], text=True))
 token = next(f['value'] for f in obj['fields'] if (f.get('label') or '').lower() == 'token')
