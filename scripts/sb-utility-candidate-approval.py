@@ -112,10 +112,12 @@ def formatted_candidate(candidate: dict, vertical: str) -> dict:
     }
 
 
-def needs_by_vertical(rows: list[dict], bank: dict) -> dict[str, dict]:
+def needs_by_vertical(rows: list[dict], bank: dict, automation_config: dict | None = None) -> dict[str, dict]:
     grouped: dict[str, dict] = {}
     for row in rows:
         if not repair.active_production(row, exact_30=True):
+            continue
+        if automation_config is not None and repair.excluded_template(row, automation_config):
             continue
         plan = repair.build_repair(row, bank)
         if plan.get('action') != 'needs_generation':
@@ -289,10 +291,11 @@ def promote_stage_if_complete(config: dict, state: dict) -> bool:
 
 async def plan() -> dict:
     bank = load_json(repair.BANK_PATH, {'version': 1, 'records': {}})
+    automation_config = load_json(repair.CONFIG_PATH, repair.default_config())
     p = browser = None
     try:
         p, browser, ctx, page, rows, headers, post_url = await repair.capture_live()
-        needs = needs_by_vertical(rows, bank)
+        needs = needs_by_vertical(rows, bank, automation_config)
         return {'status': 'ok', 'at_sp': repair.iso_sp(), 'needs': needs}
     finally:
         if browser:
@@ -308,11 +311,12 @@ async def stage(apply: bool, do_notify: bool, vertical_filter: str = '') -> dict
     catalog = load_json(CATALOG_PATH, {'candidates': {}})
     state = load_json(STATE_PATH, default_state())
     bank = load_json(repair.BANK_PATH, {'version': 1, 'records': {}})
+    automation_config = load_json(repair.CONFIG_PATH, repair.default_config())
     p = browser = None
     run = {'at_sp': repair.iso_sp(), 'mode': 'apply' if apply else 'dry_run', 'stage': config.get('stage'), 'items': [], 'errors': []}
     try:
         p, browser, ctx, page, rows, headers, post_url = await repair.capture_live()
-        needs = needs_by_vertical(rows, bank)
+        needs = needs_by_vertical(rows, bank, automation_config)
         by_name = {str(row.get('NAME') or ''): row for row in rows}
         choices = []
         for vertical, need in sorted(needs.items(), key=lambda pair: (-pair[1]['deficit'], pair[0])):

@@ -85,6 +85,19 @@ class CandidateApprovalTests(unittest.TestCase):
         self.assertEqual(needs['GB-CC-EN']['deficit'], 7)
         self.assertEqual(len(needs['GB-CC-EN']['templates']), 2)
 
+    def test_needs_by_vertical_ignores_explicitly_excluded_template(self):
+        messages = [message(i, 'vermelho' if i <= 7 else 'verde') for i in range(1, 31)]
+        row = {
+            'ID': 'protected-id',
+            'NAME': 'Protected - GB-CC-EN/EN-SR - g001-d Test',
+            'COMPANY': 'digital-trust',
+            'PAGES': 1,
+            'MESSAGES': json.dumps(messages),
+        }
+        automation_config = repair.default_config()
+        automation_config['excluded_templates'] = [{'id': 'protected-id'}]
+        self.assertEqual(candidate.needs_by_vertical([row], {'records': {}}, automation_config), {})
+
     def test_spanish_formatting_preserves_visible_text(self):
         raw = {'candidate_id': 'x', 'text': 'REVISIÓN DISPONIBLE\n\nConsulta los detalles ahora.', 'cta_1': 'VER ESTADO'}
         formatted = candidate.formatted_candidate(raw, 'MX-CC-ES')
