@@ -51,6 +51,32 @@ class RepairTests(unittest.TestCase):
         no_pages = dict(good, PAGES=0)
         self.assertFalse(repair.active_production(no_pages))
 
+    def test_explicit_test_template_exclusion_blocks_id_and_exact_name(self):
+        red = template(['vermelho'] + ['verde'] * 29, template_id='protected-id')
+        config = repair.default_config()
+        config['excluded_templates'] = [{
+            'id': 'protected-id',
+            'name': 'Protected test template',
+            'reason': 'manual_test',
+        }]
+        self.assertIsNotNone(repair.excluded_template(red, config))
+        self.assertEqual(repair.classify_rows([red], bank_for([red]), config, repair.default_state()), [])
+
+        recreated = dict(red, ID='new-id', NAME='Protected test template')
+        self.assertIsNotNone(repair.excluded_template(recreated, config))
+        self.assertEqual(repair.classify_rows([recreated], bank_for([recreated]), config, repair.default_state()), [])
+
+        ordinary = dict(red, ID='ordinary-id', NAME='Ordinary - US-CC-EN - g001-d Ciro')
+        self.assertIsNone(repair.excluded_template(ordinary, config))
+        self.assertEqual(len(repair.classify_rows([ordinary], bank_for([ordinary]), config, repair.default_state())), 1)
+
+    def test_invalid_exclusion_config_fails_closed(self):
+        row = template(['vermelho'] + ['verde'] * 29)
+        config = repair.default_config()
+        config['excluded_templates'] = 'not-a-list'
+        with self.assertRaisesRegex(RuntimeError, 'excluded_templates_config_not_list'):
+            repair.classify_rows([row], bank_for([row]), config, repair.default_state())
+
     def test_green_only_is_untouched(self):
         row = template(['verde'] * 30)
         plan = repair.build_repair(row, bank_for([row]))

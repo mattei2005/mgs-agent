@@ -88,12 +88,13 @@ def load_json(path: pathlib.Path, default: dict) -> dict:
 
 def default_config() -> dict:
     return {
-        'version': 1,
+        'version': 2,
         'enabled': False,
         'channel_id': DEFAULT_CHANNEL,
         'stage': 'canary',
         'auto_promote': True,
         'canary_template_id': None,
+        'excluded_templates': [],
         'max_pages': 150,
         'margin_minutes': 60,
         'start_hour_sp': 8,
@@ -226,6 +227,28 @@ def active_production(row: dict, exact_30: bool = True) -> bool:
     return not exact_30 or len(parse_messages(row)) == MESSAGE_COUNT
 
 
+def excluded_template(row: dict, config: dict) -> dict | None:
+    """Return the matching explicit automation exclusion, if any.
+
+    Matching by immutable template ID is authoritative. Exact name is retained
+    as a fail-safe so a recreated test template cannot silently enter repair.
+    Invalid exclusion config fails closed instead of running production writes.
+    """
+    entries = config.get('excluded_templates') or []
+    if not isinstance(entries, list):
+        raise RuntimeError('excluded_templates_config_not_list')
+    current_id = row_id(row)
+    current_name = str(row.get('NAME') or '').strip()
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            raise RuntimeError(f'excluded_templates_entry_not_object:{index}')
+        configured_id = str(entry.get('id') or '').strip()
+        configured_name = str(entry.get('name') or '').strip()
+        if (configured_id and configured_id == current_id) or (configured_name and configured_name == current_name):
+            return entry
+    return None
+
+
 def parse_vertical(name: str) -> str:
     match = re.search(r'\b([A-Z]{2})[-_ ]([A-Z0-9]{2,8})[-_ ]([A-Z]{2})\b', (name or '').upper())
     return '-'.join(match.groups()) if match else ''
@@ -296,12 +319,14 @@ def upsert_bank_observation(bank: dict, template: str, message: dict, color: str
     return key, record
 
 
-def sync_bank(bank: dict, rows: list[dict]) -> dict:
+def sync_bank(bank: dict, rows: list[dict], config: dict | None = None) -> dict:
     observed_at = iso_sp()
     counts = Counter()
     templates = 0
     for row in rows:
         if not active_production(row, exact_30=True):
+            continue
+        if config is not None and excluded_template(row, config):
             continue
         templates += 1
         vertical = parse_vertical(str(row.get('NAME') or ''))
@@ -491,6 +516,8 @@ def classify_rows(rows: list[dict], bank: dict, config: dict, state: dict) -> li
     for row in rows:
         if not active_production(row, exact_30=True):
             continue
+        if excluded_template(row, config):
+            continue
         key = row_id(row)
         pages = pages_for(row)
         if pages > int(config.get('max_pages') or 150) or not fits_window(pages, config):
@@ -666,9 +693,10 @@ async def live_audit(notify: bool = False, dry_notify: bool = False) -> dict:
     p = browser = ctx = page = None
     try:
         p, browser, ctx, page, rows, headers, post_url = await capture_live()
-        sync = sync_bank(bank, rows)
+        sync = sync_bank(bank, rows, config)
         atomic_json(BANK_PATH, bank)
-        targets = [row for row in rows if active_production(row, exact_30=True)]
+        excluded_rows = [row for row in rows if active_production(row, exact_30=True) and excluded_template(row, config)]
+        targets = [row for row in rows if active_production(row, exact_30=True) and not excluded_template(row, config)]
         aggregate = Counter()
         summaries = []
         for row in targets:
@@ -688,8 +716,13 @@ async def live_audit(notify: bool = False, dry_notify: bool = False) -> dict:
                 'duplicate_slots': plan.get('duplicate_slots') or [],
                 'fits_window_now': fits_window(pages_for(row), config),
             })
-        result = {'status': 'ok', 'at_sp': iso_sp(), 'rows_received': len(rows), 'targets_exact30': len(targets), 'counts': dict(aggregate), 'bank_sync': sync, 'templates': summaries}
-        append_log('live_audit', rows=len(rows), targets=len(targets), counts=dict(aggregate))
+        result = {
+            'status': 'ok', 'at_sp': iso_sp(), 'rows_received': len(rows),
+            'targets_exact30': len(targets), 'excluded_exact30': len(excluded_rows),
+            'excluded_template_ids': [row_id(row) for row in excluded_rows],
+            'counts': dict(aggregate), 'bank_sync': sync, 'templates': summaries,
+        }
+        append_log('live_audit', rows=len(rows), targets=len(targets), excluded=len(excluded_rows), counts=dict(aggregate))
         return result
     finally:
         if browser:
@@ -710,7 +743,7 @@ async def dispatch(apply: bool, auto_canary: bool, notify: bool, dry_notify: boo
     run = {'at_sp': iso_sp(), 'mode': 'apply' if apply else 'dry_run', 'stage': config.get('stage'), 'templates': [], 'errors': []}
     try:
         p, browser, ctx, page, rows, headers, post_url = await capture_live()
-        sync_bank(bank, rows)
+        sync_bank(bank, rows, config)
         atomic_json(BANK_PATH, bank)
         candidates = classify_rows(rows, bank, config, state)
         if auto_canary or config.get('stage') == 'canary':
@@ -831,7 +864,7 @@ async def check_due(notify: bool, dry_notify: bool = False) -> dict:
     results = []
     try:
         p, browser, ctx, page, rows, headers, post_url = await capture_live()
-        sync_bank(bank, rows)
+        sync_bank(bank, rows, config)
         atomic_json(BANK_PATH, bank)
         by_id = {row_id(row): row for row in rows}
         positive = True

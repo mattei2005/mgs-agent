@@ -1,10 +1,19 @@
 {
-  "version": 1,
+  "version": 2,
   "enabled": true,
   "channel_id": "1522487422510694450",
   "stage": "full",
   "auto_promote": true,
   "canary_template_id": "6a222a84-22dc-8811-5de6-3745293fe0c1",
+  "excluded_templates": [
+    {
+      "id": "6a8f0a0b-588b-a222-2c86-f56c37022f7b",
+      "name": "Eggbev (NOVO 26/08) - US-CC-EN/EN-SR - g006-d Nicolas",
+      "reason": "Teste manual do Rodolfo; não alterar mensagens nem executar Approval automaticamente",
+      "requested_by": "Rodolfo Mattei",
+      "requested_at_et": "2026-08-26T14:56:55-04:00"
+    }
+  ],
   "max_pages": 150,
   "margin_minutes": 60,
   "start_hour_sp": 8,
