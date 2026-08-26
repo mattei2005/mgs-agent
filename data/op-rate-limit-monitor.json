@@ -5,7 +5,7 @@
     "warning_percent": 50.0,
     "critical_percent": 90.0
   },
-  "last_check": "2026-08-26T06:39:01.403720-04:00",
+  "last_check": "2026-08-26T07:39:01.126166-04:00",
   "overall_level": "normal",
   "last_metrics": [
     {
@@ -31,12 +31,12 @@
     {
       "type": "account",
       "action": "read_write",
-      "used": 0,
-      "remaining": 50000,
+      "used": 15,
+      "remaining": 49985,
       "limit": 50000,
-      "percent": 0.0,
+      "percent": 0.03,
       "level": "normal",
-      "reset_at": null
+      "reset_at": "2026-08-27T07:24:40.436536-04:00"
     }
   ],
   "consecutive_probe_failures": 0,
