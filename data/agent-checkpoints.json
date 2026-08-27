@@ -573,12 +573,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-c25-copy-fix-20260827",
-      "next_step": "Executar somente GET consolidado após cooldown; confirmar binding, copy exata, optimize text disabled, status/review dos três anúncios e reconciliar inventário/audit.",
+      "next_step": "Acompanhar entrega normal da C25; futuras conferências devem distinguir copy (campos de texto Meta) de criativos (imagens/vídeos).",
       "objective": "Corrigir a copy dos três anúncios MOTO ativos da C25 para os textos exatos do screenshot de Rodolfo",
       "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-copy-fix-20260827.json",
-      "state": "readback_pending: os três creatives substitutos foram criados e o batch de atualização dos três anúncios retornou sucesso por child response. meta impôs cooldown de quota antes do get consolidado; o processo permanece resumível e não repetirá os writes.",
+      "state": "complete: os 3 anúncios ativos da c25 120250925458300632 receberam creatives substitutos com a copy moto exata do screenshot. get consolidado confirmou 3/3 bindings e copy_exact=true: 3 primary texts, 3 headlines, 1 description de cinco estrelas, cta learn_more e optimize text per person disabled. campanha e três anúncios permanecem active, issues_info null. inventário foi reconciliado 3/3 com novos creative ids e effective_object_story_ids, preservando os ids antigos como superseded.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T17:17:07+00:00"
+      "updated_at": "2026-08-27T17:20:22+00:00"
     },
     {
       "agent": "zeus",
@@ -1312,5 +1312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T17:19:37+00:00"
+  "updated_at": "2026-08-27T17:20:22+00:00"
 }

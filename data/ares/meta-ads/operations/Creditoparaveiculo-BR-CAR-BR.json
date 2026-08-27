@@ -1087,7 +1087,20 @@
           "campaign_id": "120250925458300632",
           "cycle_start_date": "2026-08-26",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-moto-3x3-20260825-corrected-state"
+          "request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "copy_correction": {
+            "status": "COMPLETE",
+            "request_id": "cpv-c25-copy-fix-20260827",
+            "authorized_by": "Rodolfo Mattei",
+            "authorization_source": "discord:thread:1542545166630396027",
+            "corrected_at_sp": "2026-08-27T14:19:05-03:00",
+            "reason": "MOTO campaign had inherited CAR copy",
+            "ads_updated": 3,
+            "copy_exact_readback": true,
+            "optimize_text_per_person": "DISABLED",
+            "campaign_status_readback": "ACTIVE",
+            "audit": "/root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-copy-fix-20260827.json"
+          }
         },
         "26": {
           "campaign_id": "120250942504060632",

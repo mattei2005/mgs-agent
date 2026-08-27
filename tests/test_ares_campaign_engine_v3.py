@@ -241,6 +241,16 @@ def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_
     with pytest.raises(ManifestError, match='forbids source_campaign_id'):
         manifest([clone_leak])
 
+    nested_clone_leak = from_zero_campaign(4)
+    nested_clone_leak['campaign_create']['source_ad_id'] = 'must-not-clone'
+    with pytest.raises(ManifestError, match='forbids source_ad_id'):
+        manifest([nested_clone_leak])
+
+    owned_field = from_zero_campaign(5)
+    owned_field['adset_create']['campaign_id'] = 'must-be-engine-owned'
+    with pytest.raises(ManifestError, match='engine-owned fields'):
+        manifest([owned_field])
+
 
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():
     row = prestaged_campaign(1)

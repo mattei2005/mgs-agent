@@ -182,6 +182,16 @@ class CampaignSpec:
                 raise ManifestError("from_zero_prestaged forbids source_campaign_id")
             if source_adset_id:
                 raise ManifestError("from_zero_prestaged forbids source_adset_id")
+            create_payloads = {"campaign_create": campaign_create, "adset_create": adset_create}
+            for lineage_key in ("source_campaign_id", "source_adset_id", "source_ad_id"):
+                if _has_key(create_payloads, lineage_key):
+                    raise ManifestError(f"from_zero_prestaged forbids {lineage_key} in create payloads")
+            campaign_reserved = sorted(set(campaign_create) & {"id", "name", "status", "start_time", "campaign_id"})
+            adset_reserved = sorted(set(adset_create) & {"id", "name", "status", "start_time", "campaign_id", "adset_id"})
+            if campaign_reserved:
+                raise ManifestError(f"campaign_create contains engine-owned fields: {','.join(campaign_reserved)}")
+            if adset_reserved:
+                raise ManifestError(f"adset_create contains engine-owned fields: {','.join(adset_reserved)}")
             if len(ads) != 3:
                 raise ManifestError("from_zero_prestaged requires exactly three ads")
             if not adset_name:
