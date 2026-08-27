@@ -521,6 +521,16 @@
       "updated_at": "2026-08-16T04:07:09+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-cpv-c21-c31-20260827",
+      "next_step": "Às 17:00 SP o wrapper determinístico libera somente o override, roda dry-run e Campaign Engine v3 para C29-C31, retoma o mesmo request em ticks horários se necessário, valida Meta/Drive/inventário/watcher/budget, rearma o hold e publica o resumo sanitizado na thread fixa de criação.",
+      "objective": "Pausar C21-C23, substituir C28 para entrega em 28/08 e criar C29-C31 às 17:00 SP",
+      "source": "discord:thread:1542545166630396027",
+      "state": "c21-c23 paused por get. c28 antiga 120250942552200632 deleted; c28 substituta 120250950375430632 active, 1x1x3, start 2026-08-28 00:30 sp e watcher armado. override cpv-daily-20260827 registrado para c29-c31; cron e0344a16b30c script-only/no-agent/local habilitado, com hold geral ainda ativo até 17:00.",
+      "thread_id": "1542545166630396027",
+      "updated_at": "2026-08-27T15:07:48+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -1252,5 +1262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T14:11:32+00:00"
+  "updated_at": "2026-08-27T15:07:48+00:00"
 }
