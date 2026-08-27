@@ -46,6 +46,11 @@ RODOLFO_ID = "344196393512075265"
 NY = ZoneInfo("America/New_York")
 CENT = Decimal("0.01")
 EXPECTED_HEADERS = ["Removidos acumulado", "User", "RECEITA 7 DIAS", "Segurador"]
+SEGURADOR_ALIASES = {
+    # The Sheet preserves the operator spelling while Smart Bidding currently
+    # exposes this profile with a one-letter correction.
+    "ingrid resende": "ingrid rezende",
+}
 
 
 def now_et() -> str:
@@ -350,6 +355,44 @@ def sheet_snapshot(client: GoogleClient, row_count: int) -> tuple[list[list], li
     return values, named_rows
 
 
+def match_sheet_rows(
+    named_rows: list[tuple[int, str, str]], aggregate: dict[str, Decimal]
+) -> tuple[dict[int, Decimal], set[str]]:
+    """Resolve one Sheet row to one or more unique Smart Bidding profile names.
+
+    Slash-separated Segurador cells represent retained old/current operator
+    names. A full-cell exact match wins; otherwise each slash component may
+    contribute revenue. An aggregate profile may never feed two Sheet rows.
+    """
+    expected: dict[int, Decimal] = {}
+    mapped_keys: set[str] = set()
+    key_owner: dict[str, tuple[int, str]] = {}
+    for row_number, name, full_key in named_rows:
+        if full_key in aggregate:
+            row_keys = [full_key]
+        else:
+            row_keys = []
+            for part in name.split("/"):
+                part_key = norm(part)
+                if not part_key:
+                    continue
+                resolved = part_key if part_key in aggregate else SEGURADOR_ALIASES.get(part_key)
+                if resolved in aggregate and resolved not in row_keys:
+                    row_keys.append(resolved)
+        for key in row_keys:
+            if key in key_owner:
+                owner_row, owner_name = key_owner[key]
+                raise RuntimeError(
+                    f"Smart Bidding Segurador maps to multiple Sheet rows: "
+                    f"{key!r} -> {owner_row} {owner_name!r}, {row_number} {name!r}"
+                )
+            key_owner[key] = (row_number, name)
+        if row_keys:
+            expected[row_number] = cents(sum((aggregate[key] for key in row_keys), Decimal(0)))
+            mapped_keys.update(row_keys)
+    return expected, mapped_keys
+
+
 def old_column(values: list[list], row_count: int) -> dict[int, object]:
     previous: dict[int, object] = {}
     for row_number in range(2, row_count + 1):
@@ -489,19 +532,16 @@ def main() -> int:
         report_rows, request_payload = asyncio.run(fetch_live_report())
         aggregate, labels, blank_revenue, report_summary = aggregate_report(report_rows, request_payload)
         values, named_rows = sheet_snapshot(client, preflight["row_count"])
-        expected = {
-            row_number: aggregate[key]
-            for row_number, _, key in named_rows
-            if key in aggregate
-        }
+        expected, mapped_keys = match_sheet_rows(named_rows, aggregate)
         ratio = len(expected) / len(named_rows)
         if ratio < 0.65:
             raise RuntimeError(
                 f"Segurador match ratio below safety gate: {len(expected)}/{len(named_rows)}"
             )
-        sheet_keys = {key for _, _, key in named_rows}
-        unused_names = sorted(labels[key] for key in aggregate if key not in sheet_keys)
-        unmatched_names = [name for _, name, key in named_rows if key not in aggregate]
+        unused_keys = sorted(key for key in aggregate if key not in mapped_keys)
+        unused_names = [labels[key] for key in unused_keys]
+        matched_sheet_rows = set(expected)
+        unmatched_names = [name for row_number, name, _ in named_rows if row_number not in matched_sheet_rows]
         base_summary = {
             "status": "DRY_RUN_OK" if args.dry_run else "SYNC_OK",
             "started_at_et": started,
@@ -512,7 +552,7 @@ def main() -> int:
             "unmatched_sheet_rows": len(unmatched_names),
             "sb_named_not_in_sheet": unused_names,
             "unassigned_revenue": str(
-                cents(blank_revenue + sum((aggregate[norm(name)] for name in unused_names), Decimal(0)))
+                cents(blank_revenue + sum((aggregate[key] for key in unused_keys), Decimal(0)))
             ),
             "auth": "mgs-core-prod Service Account",
         }

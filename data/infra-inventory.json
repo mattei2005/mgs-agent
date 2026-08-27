@@ -5416,7 +5416,7 @@
       "owner": "Zeus/Revenue Tech",
       "risk": "medium",
       "script": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "script_sha256": "6efaf4e0c1e35027d8fba489f5903b38d28060df897c3e07a9b24cc339ff7783",
+      "script_sha256": "e5539b8a19e3506180877f7594f5e88c72137974acf10f4cab7ce22a482b7762",
       "state": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "log": "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
       "backup_dir": "/root/mgs-agent/backups/sb-messenger-revenue-sheet",
@@ -5425,20 +5425,21 @@
       "source": "Smart Bidding Messenger Daily / report/messenger default last-seven-days window",
       "target": "Google Sheet 1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY / gid 542936436 / Migracao 22/06 / column C",
       "google_identity": "mgsagent@mgs-core-prod.iam.gserviceaccount.com / mgs-core-prod",
-      "description": "Aggregates live REVENUE by PROFILE_NAME, writes numeric zero for present zero-revenue insurers, leaves unmatched Sheet names blank, and alerts #alerts-infra only on failure.",
+      "description": "Aggregates live REVENUE by PROFILE_NAME, resolves unique slash-separated old/current Segurador aliases, writes numeric zero for present zero-revenue insurers, leaves unmatched Sheet names blank, and alerts #alerts-infra only on failure.",
       "guardrails": [
         "persistent authenticated Smart Bidding state",
         "Drive + Sheets canonical Service Account preflight",
         "seven-inclusive-day request validation",
         "scope and match-ratio fail-closed gates",
+        "unique slash-alias resolution without cross-row reuse",
         "reversible Sheets canary",
         "pre-write backup",
         "concurrent-name/value gate",
         "exact-cent readback with automatic value rollback"
       ],
       "authorization_message_id": "1535639424023531631",
-      "validation": "py_compile PASS; dry-run PASS; live apply PASS; canary write/readback/restore PASS; 157/215 rows matched; exact-cent readback total 256041.35; cron readback exact.",
-      "updated_at": "2026-08-08T09:28:01-04:00"
+      "validation": "py_compile PASS; alias fixture PASS; dry-run PASS; live apply PASS; canary write/readback/restore PASS; 144/214 rows matched; exact-cent readback total 423498.13; cron readback exact.",
+      "updated_at": "2026-08-27T08:26:22-04:00"
     },
     {
       "id": "openzedfinanzas-es-cc-es-smart-routing-five-url-20260808",
