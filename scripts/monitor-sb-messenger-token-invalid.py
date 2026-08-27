@@ -196,34 +196,43 @@ def fingerprint(alerts: list[dict[str, Any]], canary: bool) -> str:
     return hashlib.sha256(material.encode()).hexdigest()[:16]
 
 
-def build_payloads(alerts: list[dict[str, Any]], canary: bool = False) -> list[dict[str, Any]]:
-    if not alerts:
-        return []
+def build_payloads(
+    alerts: list[dict[str, Any]],
+    canary: bool = False,
+    reminder: bool = False,
+) -> list[dict[str, Any]]:
     payloads: list[dict[str, Any]] = []
-    for start in range(0, len(alerts), MAX_EMBEDS):
-        chunk = alerts[start:start + MAX_EMBEDS]
-        embeds = []
-        for row in chunk:
-            title_prefix = 'CANÁRIO — ' if canary else ''
-            site = (row['domain'] or 'SITE DESCONHECIDO').upper()
-            user = row['user_email'] or row['user_name'] or f"ID {row['user_id']}"
-            segurador = row['segurador_name'] or f"ID {row['segurador_id']}"
-            embeds.append({
-                'title': f"{title_prefix}{site} — Token Messenger inválido"[:256],
-                'color': 15158332,
-                'fields': [
-                    {'name': 'User', 'value': user[:1024] or '—', 'inline': False},
-                    {'name': 'Segurador', 'value': segurador[:1024] or '—', 'inline': True},
-                    {'name': 'Páginas', 'value': str(row['pages']), 'inline': True},
-                ],
-                'footer': {'text': f"SB #{row['notification_id']} · {row['source']}"},
-                'timestamp': row['created_at'],
-            })
-        payloads.append({'content': '', 'allowed_mentions': {'parse': []}, 'embeds': embeds})
+    for row in alerts:
+        if canary:
+            title_prefix = 'CANÁRIO — '
+        elif reminder:
+            title_prefix = 'LEMBRETE — '
+        else:
+            title_prefix = ''
+        site = (row['domain'] or 'SITE DESCONHECIDO').upper()
+        user = row['user_email'] or row['user_name'] or f"ID {row['user_id']}"
+        segurador = row['segurador_name'] or f"ID {row['segurador_id']}"
+        page_count = '—' if row.get('pages') is None else str(row['pages'])
+        embed = {
+            'title': f"{title_prefix}{site} — Token Messenger inválido"[:256],
+            'color': 15158332,
+            'fields': [
+                {'name': 'User', 'value': user[:1024] or '—', 'inline': False},
+                {'name': 'Segurador', 'value': segurador[:1024] or '—', 'inline': True},
+                {'name': 'Páginas', 'value': page_count, 'inline': True},
+            ],
+            'footer': {'text': f"SB #{row['notification_id']} · {row['source']} · ✅ resolve"},
+            'timestamp': row['created_at'],
+        }
+        payloads.append({
+            'content': f'{TEAM_MENTIONS} · Reaja ✅ quando resolver.',
+            'allowed_mentions': {'parse': [], 'roles': TEAM_ROLE_IDS},
+            'embeds': [embed],
+        })
     return payloads
 
 
-async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not SB_STATE.exists():
         raise RuntimeError(f'SB storage state missing: {SB_STATE}')
     async with async_playwright() as playwright:
@@ -253,6 +262,12 @@ async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
             if notification_response.status != 200 or not isinstance(notifications, list):
                 raise RuntimeError(f'bad notification response status={notification_response.status}')
 
+            users_query = 'companies[]=digital-trust&companies[]=digital-trust-2&source=Messenger'
+            users_response = await context.request.get(API_BASE + '/users/Messenger?' + users_query, headers=headers, timeout=120000)
+            users = await users_response.json()
+            if users_response.status != 200 or not isinstance(users, list):
+                raise RuntimeError(f'bad Messenger users response status={users_response.status}')
+
             company_response = await context.request.get(API_BASE + '/company', headers=headers, timeout=120000)
             companies = await company_response.json()
             if company_response.status != 200 or not isinstance(companies, list):
@@ -271,7 +286,7 @@ async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
             pages = await pages_response.json()
             if pages_response.status != 200 or not isinstance(pages, list):
                 raise RuntimeError(f'bad Messenger pages response status={pages_response.status}')
-            return notifications, pages
+            return notifications, users, pages
         finally:
             await browser.close()
 
@@ -316,7 +331,11 @@ def verify_message(channel_id: str, message_id: str, payload: dict[str, Any]) ->
     actual_mentions = sorted(str(row.get('id')) for row in (readback.get('mentions') or []))
     expected_mentions = sorted(str(value) for value in ((payload.get('allowed_mentions') or {}).get('users') or []))
     if actual_mentions != expected_mentions:
-        raise RuntimeError('Discord mention readback mismatch')
+        raise RuntimeError('Discord user-mention readback mismatch')
+    actual_role_mentions = sorted(str(value) for value in (readback.get('mention_roles') or []))
+    expected_role_mentions = sorted(str(value) for value in ((payload.get('allowed_mentions') or {}).get('roles') or []))
+    if actual_role_mentions != expected_role_mentions:
+        raise RuntimeError('Discord role-mention readback mismatch')
     if len(readback.get('embeds') or []) != len(payload.get('embeds') or []):
         raise RuntimeError('Discord embed readback mismatch')
 
@@ -337,6 +356,101 @@ def deliver_payloads(channel_id: str, payloads: list[dict[str, Any]], dry_run: b
         print(json.dumps({'dry_run': True, 'channel_id': channel_id, 'payloads': payloads}, ensure_ascii=False))
         return []
     return [post_and_verify(channel_id, payload) for payload in payloads]
+
+
+def incident_key(alert: dict[str, Any]) -> str:
+    parts = [alert.get('company'), alert.get('domain'), alert.get('user_id'), alert.get('segurador_id')]
+    return '|'.join(str(value or '').strip().lower() for value in parts)
+
+
+def message_has_resolution_reaction(channel_id: str, message_id: str) -> bool:
+    status, message = discord_request('GET', f'/channels/{channel_id}/messages/{message_id}', allow_404=True)
+    if status == 404:
+        return False
+    if status != 200 or not isinstance(message, dict):
+        raise RuntimeError(f'Discord reaction readback failed status={status}')
+    return any(
+        str((reaction.get('emoji') or {}).get('name') or '') == '✅'
+        and int(reaction.get('count') or 0) > 0
+        for reaction in (message.get('reactions') or [])
+    )
+
+
+def register_incidents(
+    state: dict[str, Any],
+    alerts: list[dict[str, Any]],
+    message_ids: list[str],
+    at: str | None = None,
+) -> None:
+    if len(alerts) != len(message_ids):
+        raise RuntimeError('incident registration requires one Discord message per alert')
+    stamp = at or now_iso()
+    incidents = state.setdefault('incidents', {})
+    for alert, message_id in zip(alerts, message_ids):
+        key = incident_key(alert)
+        existing = incidents.get(key)
+        if isinstance(existing, dict) and existing.get('status') == 'active':
+            notification_ids = sorted(set(int(value) for value in existing.get('notification_ids') or []).union({int(alert['notification_id'])}))
+            prior_messages = [str(value) for value in existing.get('message_ids') or []]
+            existing.update({
+                'alert': alert,
+                'notification_ids': notification_ids,
+                'message_ids': (prior_messages + [str(message_id)])[-20:],
+                'last_sent_at': stamp,
+            })
+        else:
+            incidents[key] = {
+                'status': 'active',
+                'opened_at': stamp,
+                'last_sent_at': stamp,
+                'resolved_at': None,
+                'notification_ids': [int(alert['notification_id'])],
+                'message_ids': [str(message_id)],
+                'alert': alert,
+            }
+    if len(incidents) > MAX_INCIDENTS:
+        keep = sorted(
+            incidents.items(),
+            key=lambda item: (item[1].get('status') == 'active', item[1].get('last_sent_at') or ''),
+            reverse=True,
+        )[:MAX_INCIDENTS]
+        state['incidents'] = dict(keep)
+
+
+def process_incident_reminders(
+    state: dict[str, Any],
+    channel_id: str,
+    dry_run: bool,
+    skip_keys: set[str] | None = None,
+    now_value: datetime | None = None,
+) -> dict[str, int]:
+    now_value = now_value or datetime.now(NY)
+    skip_keys = skip_keys or set()
+    stats = {'active': 0, 'resolved': 0, 'reminded': 0, 'would_remind': 0}
+    for key, incident in list((state.get('incidents') or {}).items()):
+        if not isinstance(incident, dict) or incident.get('status') != 'active':
+            continue
+        stats['active'] += 1
+        message_ids = [str(value) for value in incident.get('message_ids') or []]
+        if not dry_run and message_ids and message_has_resolution_reaction(channel_id, message_ids[-1]):
+            incident['status'] = 'resolved'
+            incident['resolved_at'] = now_value.isoformat(timespec='seconds')
+            stats['resolved'] += 1
+            continue
+        if key in skip_keys:
+            continue
+        last_sent = parse_dt(str(incident.get('last_sent_at') or incident.get('opened_at') or now_value.isoformat()))
+        if now_value.astimezone(last_sent.tzinfo) - last_sent < timedelta(hours=REMINDER_HOURS):
+            continue
+        if dry_run:
+            stats['would_remind'] += 1
+            continue
+        payload = build_payloads([dict(incident['alert'])], reminder=True)[0]
+        message_id = post_and_verify(channel_id, payload)
+        incident['message_ids'] = (message_ids + [message_id])[-20:]
+        incident['last_sent_at'] = now_value.isoformat(timespec='seconds')
+        stats['reminded'] += 1
+    return stats
 
 
 def mark_success(state: dict[str, Any], alerts: list[dict[str, Any]], message_ids: list[str]) -> None:
@@ -391,28 +505,34 @@ async def run(args: argparse.Namespace) -> int:
     if args.fixture:
         fixture = json.loads(Path(args.fixture).read_text(encoding='utf-8'))
         notifications = fixture.get('notifications') or []
+        users = fixture.get('users') or []
         pages = fixture.get('pages') or []
     else:
-        notifications, pages = await fetch_live()
-    alerts = normalize_alerts(notifications, pages)
+        notifications, users, pages = await fetch_live()
+    alerts = normalize_alerts(notifications, users, pages)
     max_id = max((int(row['notification_id']) for row in alerts), default=0)
 
     if args.test_alert:
-        selected = latest_batch(alerts)
+        selected = latest_batch(alerts)[-1:]
         if not selected:
             raise RuntimeError('no live MGS token alert available for canary')
         payloads = build_payloads(selected, canary=True)
         message_ids = deliver_payloads(args.channel_id, payloads, args.dry_run)
-        print(json.dumps({'ok': True, 'mode': 'test-alert', 'alerts': len(selected), 'payloads': len(payloads), 'message_ids': message_ids, 'mentions': 0}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'test-alert', 'alerts': len(selected), 'payloads': len(payloads), 'message_ids': message_ids, 'role_mentions': TEAM_ROLE_IDS}, ensure_ascii=False))
         return 0
 
     if args.baseline or state is None:
         baseline = state or initial_state()
+        baseline.setdefault('incidents', {})
+        baseline['_meta'] = initial_state()['_meta']
         baseline.update({'last_check': now_iso(), 'last_seen_id': max_id, 'delivered_ids': [], 'pending': None, 'consecutive_failures': 0, 'last_error': None})
         if not args.dry_run:
             save_state(state_path, baseline)
         print(json.dumps({'ok': True, 'mode': 'baseline', 'last_seen_id': max_id, 'alerts_seen': len(alerts), 'state_written': not args.dry_run}, ensure_ascii=False))
         return 0
+
+    state.setdefault('incidents', {})
+    state['_meta'] = initial_state()['_meta']
 
     pending = state.get('pending')
     if isinstance(pending, dict) and pending.get('notification_ids'):
@@ -435,18 +555,26 @@ async def run(args: argparse.Namespace) -> int:
             state['pending']['message_ids'] = existing_ids
             save_state(state_path, state)
         mark_success(state, pending_alerts, existing_ids)
+        register_incidents(state, pending_alerts, existing_ids)
+        reminder_stats = process_incident_reminders(
+            state,
+            args.channel_id,
+            False,
+            skip_keys={incident_key(row) for row in pending_alerts},
+        )
         save_state(state_path, state)
-        print(json.dumps({'ok': True, 'mode': 'pending-reconciled', 'notification_ids': sorted(pending_ids), 'message_ids': existing_ids, 'mentions': 0}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'pending-reconciled', 'notification_ids': sorted(pending_ids), 'message_ids': existing_ids, 'role_mentions': TEAM_ROLE_IDS, 'reminders': reminder_stats}, ensure_ascii=False))
         return 0
 
     delivered = {int(value) for value in state.get('delivered_ids') or []}
     last_seen = int(state.get('last_seen_id') or 0)
     selected = [row for row in alerts if int(row['notification_id']) > last_seen and int(row['notification_id']) not in delivered]
     if not selected:
+        reminder_stats = process_incident_reminders(state, args.channel_id, args.dry_run)
         state.update({'last_check': now_iso(), 'consecutive_failures': 0, 'last_error': None})
         if not args.dry_run:
             save_state(state_path, state)
-        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'reminders': reminder_stats}, ensure_ascii=False))
         return 0
 
     payloads = build_payloads(selected, canary=False)
