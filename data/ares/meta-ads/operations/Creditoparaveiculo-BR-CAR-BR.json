@@ -462,6 +462,28 @@
       "scheduler_remains_paused_after_completion": true,
       "completed_at_utc": "2026-08-27T03:16:24.344422+00:00"
     },
+    "one_time_override_20260827": {
+      "status": "authorized_scheduled",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T10:58:45-04:00",
+      "authorization_source": "discord:thread:1542545166630396027",
+      "request_id": "cpv-daily-20260827",
+      "scope": "create exactly three CPV G006 production campaigns C29, C30 and C31 at 17:00 Sao Paulo for delivery on 2026-08-28",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        29,
+        30,
+        31
+      ],
+      "budget_per_campaign_usd": 30,
+      "total_new_budget_usd": 90,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "scheduled_creation_sp": "2026-08-27T17:00:00-03:00",
+      "delivery_start_sp": "2026-08-28T00:30:00-03:00",
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true
+    },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
     "new_campaign_budget_pool_usd": 100,
