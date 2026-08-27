@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.1.1",
+  "release_version": "3.1.2",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -30,8 +30,9 @@
   "mode_taxonomy": {
     "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
     "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
-    "pure_clone": "duplicar igual: equivalente operacional ao botão Duplicar do Ads Manager; deep copy da campanha vencedora sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs, e o mesmo post/social proof só é confirmado quando o readback mantém o effective_object_story_id da fonte"
+    "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
   },
+  "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
   "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
   "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",
   "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",

@@ -35,7 +35,8 @@ def main() -> int:
             raise RuntimeError(json.dumps({'http': status, 'error': common.safe_meta_error(body if isinstance(body, dict) else {})}, ensure_ascii=False))
         pages += 1
         for row in body.get('data') or []:
-            if str(row.get('name') or '') in expected_names:
+            observed_name = str(row.get('name') or '')
+            if any(observed_name == expected or observed_name.startswith(expected + ' ') for expected in expected_names):
                 matches[str(row.get('id'))] = row
         paging = body.get('paging') or {}
         next_url = paging.get('next')

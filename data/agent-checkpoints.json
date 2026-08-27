@@ -92,6 +92,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C31-FROM-ZERO-20260827",
+      "next_step": "Acompanhar o primeiro gasto pelo guardrail automático; Rodolfo decide explicitamente se autoriza excluir os dois creatives órfãos 1005594319186248 e 1202273525794609.",
+      "objective": "Criar e programar a C31 MOTO integralmente do zero via Campaign Engine v3, com três assets novos, MAXVOL e USD25",
+      "source": "discord:thread:1542573475104034936; audit:data/ares/meta-ads/engine-v3/audit/cpv-c31-from-zero-20260827.json; activation:work/cpv-c31-from-zero-20260827/activation-audit.json; assets:data/ares/creative-ops/audit/lifecycle/cpv-c31-from-zero-testing-20260827.json; orphan-scan:work/cpv-c31-from-zero-20260827/creative-orphan-scan.json",
+      "state": "c31 120250952825350632 criada pelo modo from_zero_prestaged, active com campanha/adset programados para 28/08/2026 00:30 são paulo, hierarquia 1x1x3 validada, zero spend pré-início, budget ativo da conta usd397,34 e primeiro-gasto armado. três assets estão em drive e inventário 02_testing com ids meta reconciliados. a falha inicial de creative_create foi recuperada readback-first; a varredura final identificou dois creatives órfãos sem anúncios vinculados e não os excluiu.",
+      "thread_id": "1542573475104034936",
+      "updated_at": "2026-08-27T18:03:44+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -1322,5 +1332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T17:36:53+00:00"
+  "updated_at": "2026-08-27T18:03:44+00:00"
 }
