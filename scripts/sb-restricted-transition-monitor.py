@@ -535,7 +535,7 @@ def main():
             print(block)
     else:
         sheet_rows, sheet_stats = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
-        sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats)
+        sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats, history_rows=history_rows)
         if not sheet_update.get('readback_ok'):
             raise RuntimeError('Google Sheet update returned no successful readback')
         for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:
@@ -544,7 +544,7 @@ def main():
                 post_results.append({'kind': kind, 'result': result})
                 if discord_status(result) not in (200, 201):
                     raise RuntimeError(f'Discord {kind} delivery failed: {result!r}')
-        save_state(current, counts, transitions, confirmed_exits, source)
+        save_state(current, counts, transitions, confirmed_exits, source, history)
 
     all_blocks = [*transition_blocks, *exit_blocks]
     print(json.dumps({
@@ -561,6 +561,12 @@ def main():
         'counts': counts,
         'revenue_7d': revenue_meta,
         'sheet_stats': sheet_stats,
+        'history': {
+            'coverage_start': history.get('coverage_start'),
+            'page_count': history.get('page_count'),
+            'totals': history.get('totals'),
+            'sheet_rows': len(history_rows),
+        },
         'blocks': len(all_blocks),
         'block_lengths': [len(block) for block in all_blocks],
         'sheet_update': sheet_update,

@@ -328,6 +328,34 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertIn('✅ PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA', sync.build_no_new_restrictions_alert(summary))
         self.assertIn('🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO', sync.build_exited_restrictions_alerts(exited, summary)[0])
 
+    def test_history_dataset_has_canonical_columns_and_rejects_duplicate_page_keys(self):
+        row = {
+            'link da pagina': 'https://facebook.com/123',
+            'nome da pagina': 'Page Test',
+            'fb page id': '123',
+            'page id': '456',
+            'bot user': 'bot@example.com',
+            'segurador': 'Segurador',
+            'sites': 'openzed',
+            'entradas detectadas': 2,
+            'saidas confirmadas': 1,
+            'renovacoes': 3,
+            'mudancas de status': 0,
+            'estado atual': 'Restrita',
+            'ultima entrada': '2026-08-27T08:00:00-04:00',
+            'ultima saida': '2026-08-20T08:00:00-04:00',
+            'saida prevista atual': '2026-09-24',
+            'cobertura desde': '2026-07-15T14:38:01-04:00',
+        }
+
+        dataset = sync.build_history_dataset([row])
+
+        self.assertEqual(dataset[0], sync.REPORT_HISTORY_HEADERS)
+        self.assertEqual(dataset[1][7:11], [2, 1, 3, 0])
+        self.assertEqual(dataset[1][11], 'Restrita')
+        with self.assertRaisesRegex(RuntimeError, 'duplicada'):
+            sync.build_history_dataset([row, dict(row)])
+
 
 if __name__ == '__main__':
     unittest.main()

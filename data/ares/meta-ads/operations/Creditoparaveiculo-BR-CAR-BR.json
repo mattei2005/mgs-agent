@@ -351,20 +351,25 @@
     "authorized_by": "Rodolfo Mattei",
     "reconfirmed_at_et": "2026-08-25T16:01:37-04:00",
     "activated_at_et": "2026-08-20T17:06:18-04:00",
-    "status": "authorized_one_time_release_20260827",
+    "status": "creation_hold_until_explicit_release",
     "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
     "creation_hold": {
-      "enabled": false,
+      "enabled": true,
       "last_one_time_release": {
-        "request_id": "cpv-c26-c28-20260826",
+        "request_id": "cpv-daily-20260827",
         "authorized_by": "Rodolfo Mattei",
-        "authorized_at_et": "2026-08-26T22:46:47-04:00",
-        "authorization_source": "discord:thread:1539826050765299872",
-        "completed_at_utc": "2026-08-27T03:16:24.344422+00:00",
+        "authorized_at_et": "2026-08-27T10:58:45-04:00",
+        "authorization_source": "discord:thread:1542545166630396027",
+        "completed_at_utc": "2026-08-27T16:00:10.598505+00:00",
         "campaign_numbers": [
-          26,
-          27,
-          28
+          29,
+          30,
+          31
+        ],
+        "campaign_ids": [
+          "120250951366720632",
+          "120250951366750632",
+          "120250951557410632"
         ]
       },
       "authorized_by": "Rodolfo Mattei",
@@ -467,7 +472,7 @@
       "completed_at_utc": "2026-08-27T03:16:24.344422+00:00"
     },
     "one_time_override_20260827": {
-      "status": "executing",
+      "status": "completed_validated",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-27T10:58:45-04:00",
       "authorization_source": "discord:thread:1542545166630396027",
@@ -491,7 +496,13 @@
       "delivery_start_sp": "2026-08-28T00:30:00-03:00",
       "general_creation_hold_preserved": true,
       "scheduler_remains_paused_after_completion": true,
-      "started_at_utc": "2026-08-27T15:33:07.092873+00:00"
+      "started_at_utc": "2026-08-27T15:33:07.092873+00:00",
+      "completed_at_utc": "2026-08-27T16:00:10.598505+00:00",
+      "campaign_ids": [
+        "120250951366720632",
+        "120250951366750632",
+        "120250951557410632"
+      ]
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
@@ -630,7 +641,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 29,
+    "next_required_campaign_number": 32,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -990,6 +1001,24 @@
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1542545166630396027",
           "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c28-replacement-20260827.json"
+        },
+        "29": {
+          "campaign_id": "120250951366720632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260827"
+        },
+        "30": {
+          "campaign_id": "120250951366750632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260827"
+        },
+        "31": {
+          "campaign_id": "120250951557410632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260827"
         }
       },
       "required": [

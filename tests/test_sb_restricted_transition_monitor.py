@@ -117,6 +117,7 @@ class TransitionComparisonTest(unittest.TestCase):
                     [transition],
                     [],
                     'fixture',
+                    {'coverage_start': '2026-07-15', 'pages': {}},
                 )
                 saved = json.loads(monitor.STATE_PATH.read_text(encoding='utf-8'))
             finally:
@@ -124,6 +125,7 @@ class TransitionComparisonTest(unittest.TestCase):
 
         self.assertEqual(saved['active'][monitor.stable_key(current)]['revenue_7d'], '4.00')
         self.assertEqual(saved['last_transitions'][0]['after']['revenue_7d'], '4.00')
+        self.assertEqual(saved['history']['coverage_start'], '2026-07-15')
 
     def test_exit_requires_live_inactive_readback_and_ignores_onhold(self):
         class Daily:
@@ -167,6 +169,55 @@ class TransitionComparisonTest(unittest.TestCase):
 
         self.assertEqual([item['page id'] for item in confirmed], ['1'])
         self.assertEqual(confirmed[0]['nome da pagina'], 'Page 1')
+
+    def test_history_counts_entries_exits_renewals_and_current_state_by_page(self):
+        page1 = row(1, '2026-08-12')
+        page2 = row(2, '2026-08-13', status='Campaign')
+        page3 = row(3, '2026-08-01')
+        transitions = [
+            {'kind': 'nova', 'changed': [], 'after': page1},
+            {'kind': 'renovada + status', 'changed': ['data', 'status'], 'after': page2},
+        ]
+        exit3 = monitor.report_row(page3)
+        current = {
+            monitor.stable_key(page1): page1,
+            monitor.stable_key(page2): page2,
+        }
+
+        history = monitor.update_history(
+            None,
+            transitions,
+            [exit3],
+            current,
+            event_at='2026-08-12T12:00:00-04:00',
+        )
+
+        self.assertEqual(history['totals'], {
+            'entries_detected': 1,
+            'exits_confirmed': 1,
+            'renewals_detected': 1,
+            'status_changes_detected': 1,
+            'currently_restricted': 2,
+        })
+        sheet_rows = monitor.history_sheet_rows(history)
+        by_page = {item['page id']: item for item in sheet_rows}
+        self.assertEqual(set(by_page), {'1', '2', '3'})
+        self.assertEqual(by_page['1']['entradas detectadas'], 1)
+        self.assertEqual(by_page['2']['renovacoes'], 1)
+        self.assertEqual(by_page['2']['mudancas de status'], 1)
+        self.assertEqual(by_page['3']['saidas confirmadas'], 1)
+        self.assertEqual(by_page['3']['estado atual'], 'Fora das restritas monitoradas')
+
+        history = monitor.update_history(
+            history,
+            [],
+            [monitor.report_row(page1)],
+            {monitor.stable_key(page2): page2},
+            event_at='2026-08-13T12:00:00-04:00',
+        )
+        self.assertEqual(history['totals']['entries_detected'], 1)
+        self.assertEqual(history['totals']['exits_confirmed'], 2)
+        self.assertEqual(history['totals']['currently_restricted'], 1)
 
 
 if __name__ == '__main__':
