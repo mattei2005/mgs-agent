@@ -1159,18 +1159,19 @@
           "request_id": "cpv-daily-20260827"
         },
         "31": {
-          "campaign_id": "120250951557410632",
+          "campaign_id": "120250952825350632",
           "cycle_start_date": "2026-08-28",
-          "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260827",
-          "operator_status": "DELETED",
-          "operator_terminal_at_sp": "2026-08-27T13:31:21-03:00",
-          "operator_terminal_reason": "CANCELLED_BEFORE_DELIVERY_AUTHORIZED_BY_RODOLFO",
-          "terminal_request_id": "cpv-operator-cancel-c31-rollback-assets-20260827",
-          "terminal_authorized_by": "Rodolfo Mattei",
-          "terminal_authorization_source": "discord:thread:1542545166630396027",
-          "zero_spend_verified": true,
-          "creative_rollback_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-cancel-c31-rollback-assets-20260827.json"
+          "source": "campaign_engine_v3_from_zero_readback",
+          "request_id": "cpv-c31-from-zero-20260827",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1542573475104034936",
+          "readback_audit": "/root/mgs-agent/work/cpv-c31-from-zero-20260827/final-verification.json",
+          "preactivate_readback": "/root/mgs-agent/work/cpv-c31-from-zero-20260827/preactivate-live.json",
+          "replaces_terminal_campaign_id": "120250951557410632",
+          "replaced_terminal_status": "DELETED",
+          "replaced_terminal_request_id": "cpv-operator-cancel-c31-rollback-assets-20260827",
+          "zero_spend_verified_before_activation": true,
+          "activation_target_sp": "2026-08-28T00:30:00-03:00"
         }
       },
       "required": [

@@ -1,0 +1,94 @@
+{
+  "status": "C31_PREACTIVATE_VERIFIED",
+  "collected_at_sp": "2026-08-27T14:53:57.454597-03:00",
+  "token_report": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "field": "credential (cache 471s)",
+    "len": 196
+  },
+  "campaign": {
+    "id": "120250952825350632",
+    "name": "31 - 28-08 - Garagem Brasil - MOTO - (b01fb13c31) event_Subscribe - MAXVOL",
+    "status": "PAUSED",
+    "configured_status": "PAUSED",
+    "effective_status": "PAUSED",
+    "updated_time": "2026-08-27T14:38:28-0300",
+    "start_time": "2026-08-28T00:30:00-0300",
+    "daily_budget": "2500",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+  },
+  "adsets": [
+    {
+      "id": "120250952825540632",
+      "name": "01 - AdGroup - (b01fb13c31g01) event_Subscribe - MAXVOL",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "CAMPAIGN_PAUSED",
+      "start_time": "2026-08-28T00:30:00-0300"
+    }
+  ],
+  "ads": [
+    {
+      "id": "120250952830530632",
+      "name": "AD 02 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "CAMPAIGN_PAUSED",
+      "creative": {
+        "id": "1046760014614615",
+        "name": "CPV C31 AD02 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006 2026-08-27-5e1fdd47bc5b535c010247c2d4ab3c68",
+        "effective_object_story_id": "621037101089579_122173063910824035"
+      }
+    },
+    {
+      "id": "120250952830620632",
+      "name": "AD 01 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "CAMPAIGN_PAUSED",
+      "creative": {
+        "id": "1426143066280984",
+        "name": "CPV C31 AD01 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005 2026-08-27-1d4bd051f13978c60b2327444ec0a524",
+        "effective_object_story_id": "621037101089579_122173063946824035"
+      }
+    },
+    {
+      "id": "120250952830630632",
+      "name": "AD 03 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "CAMPAIGN_PAUSED",
+      "creative": {
+        "id": "1683620913124636",
+        "name": "CPV C31 AD03 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007 2026-08-27-92dc8909b2253db6da2a0c62848607b0",
+        "effective_object_story_id": "621037101089579_122173063898824035"
+      }
+    }
+  ],
+  "spend_usd": 0,
+  "impressions": 0,
+  "active_campaign_count_before": 11,
+  "active_budget_minor_before": 37234,
+  "active_budget_usd_before": 372.34,
+  "projected_active_budget_usd_after": 397.34,
+  "checks": {
+    "before_start": true,
+    "campaign_id": true,
+    "campaign_name_date": true,
+    "campaign_paused_before_correction": true,
+    "campaign_budget_usd25": true,
+    "campaign_maxvol": true,
+    "campaign_start_exact": true,
+    "one_adset": true,
+    "adset_active": true,
+    "adset_start_exact": true,
+    "adset_issues_clear": true,
+    "three_ads": true,
+    "ads_active": true,
+    "ads_issues_clear": true,
+    "zero_spend": true,
+    "zero_impressions": true
+  },
+  "logical_calls": 5,
+  "outer_calls": 1
+}
