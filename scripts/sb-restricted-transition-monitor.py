@@ -535,7 +535,7 @@ def main():
             print(block)
     else:
         sheet_rows, sheet_stats = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
-        sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats, history_rows=history_rows)
+        sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats)
         if not sheet_update.get('readback_ok'):
             raise RuntimeError('Google Sheet update returned no successful readback')
         for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:

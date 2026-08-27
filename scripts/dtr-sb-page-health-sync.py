@@ -1011,11 +1011,34 @@ def build_history_dataset(rows):
             raise RuntimeError(f'chave duplicada no histórico de restrições: {key}')
         seen.add(key)
         values.append([
-            str(row.get(header,'') or 0) if header in numeric_headers else row.get(header,'')
+            str(row.get(header) if row.get(header) is not None else '')
+            if header in numeric_headers else row.get(header, '')
             for header in REPORT_HISTORY_HEADERS
         ])
     return values
 
+
+def history_sheet_format_requests(sheet_id, values, include_clear_filter=True):
+    """Return formatting requests for the isolated restriction-history tab."""
+    navy={'red':31/255,'green':78/255,'blue':121/255}
+    white={'red':1,'green':1,'blue':1}
+    cols=len(REPORT_HISTORY_HEADERS)
+    requests=[]
+    if include_clear_filter:
+        requests.append({'clearBasicFilter':{'sheetId':sheet_id}})
+    requests.extend([
+        {'repeatCell':{'range':{'sheetId':sheet_id,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat'}},
+        {'updateSheetProperties':{'properties':{'sheetId':sheet_id,'gridProperties':{'frozenRowCount':1,'hideGridlines':False}},'fields':'gridProperties.frozenRowCount,gridProperties.hideGridlines'}},
+    ])
+    if len(values)>1:
+        requests.extend([
+            {'repeatCell':{'range':{'sheetId':sheet_id,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+            {'setBasicFilter':{'filter':{'range':{'sheetId':sheet_id,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}},
+        ])
+    history_widths=[300,220,170,95,250,210,180,115,115,95,115,150,170,170,140,150]
+    for index,pixels in enumerate(history_widths):
+        requests.append({'updateDimensionProperties':{'range':{'sheetId':sheet_id,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+    return requests
 
 def build_summary_dataset(rows, sheet_stats, updated_at=None):
     updated_at=updated_at or datetime.now(NY)
@@ -1176,6 +1199,56 @@ def ensure_report_tabs(access_token, required_titles):
         raise RuntimeError('Histórico Restrições não ficou imediatamente à direita de Paginas Totais')
     return by_title
 
+
+def write_restriction_history_sheet(history_rows):
+    """Replace only the restriction-history tab and verify exact readback."""
+    REPORT_SHEET_LOCK.parent.mkdir(parents=True,exist_ok=True)
+    with REPORT_SHEET_LOCK.open('a+') as lock_handle:
+        fcntl.flock(lock_handle.fileno(),fcntl.LOCK_EX)
+        access_token=google_access_token()
+        expected=build_history_dataset(history_rows)
+        tabs=ensure_report_tabs(access_token,[REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_HISTORY_TAB])
+        props=tabs[REPORT_HISTORY_TAB]
+        base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
+        target=sheet_a1_title(REPORT_HISTORY_TAB)
+        sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[target+'!A:Z']})
+        needed_rows=max(100,len(expected)+10)
+        needed_cols=max(5,len(REPORT_HISTORY_HEADERS))
+        current=props.get('gridProperties') or {}
+        if current.get('rowCount',0)<needed_rows or current.get('columnCount',0)<needed_cols:
+            sheets_api(access_token,'POST',base+':batchUpdate',{'requests':[
+                {'updateSheetProperties':{'properties':{'sheetId':props['sheetId'],'gridProperties':{'rowCount':max(current.get('rowCount',0),needed_rows),'columnCount':max(current.get('columnCount',0),needed_cols)}},'fields':'gridProperties.rowCount,gridProperties.columnCount'}}
+            ]})
+        sheets_api(access_token,'POST',base+'/values:batchUpdate',{
+            'valueInputOption':'RAW',
+            'data':[{'range':target+'!A1','majorDimension':'ROWS','values':expected}],
+        })
+        sheets_api(access_token,'POST',base+':batchUpdate',{
+            'requests':history_sheet_format_requests(props['sheetId'],expected),
+        })
+        readback=read_report_datasets(access_token,[REPORT_HISTORY_TAB]).get(REPORT_HISTORY_TAB) or []
+        if readback!=expected:
+            raise RuntimeError(f'Google Sheets readback divergente em {REPORT_HISTORY_TAB}: rows={len(readback)} expected_rows={len(expected)}')
+        keys=set()
+        for values_row in readback[1:]:
+            row={header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(readback[0])}
+            key=report_page_identity(row)
+            if key in keys:
+                raise RuntimeError(f'Google Sheets histórico contém chave duplicada: {key}')
+            keys.add(key)
+        tabs_after=ensure_report_tabs(access_token,[REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_HISTORY_TAB])
+        return {
+            'url':REPORT_SHEET_URL,
+            'tab':REPORT_HISTORY_TAB,
+            'rows_historico_restricoes':max(0,len(readback)-1),
+            'unique_keys':len(keys),
+            'history_index':tabs_after[REPORT_HISTORY_TAB]['index'],
+            'total_index':tabs_after[REPORT_TOTAL_TAB]['index'],
+            'updated_tabs':[REPORT_HISTORY_TAB],
+            'readback_ok':True,
+        }
+
+
 def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None, history_rows=None):
     """Clear and rebuild every managed tab from the desired live dataset."""
     REPORT_SHEET_LOCK.parent.mkdir(parents=True,exist_ok=True)
@@ -1273,19 +1346,7 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None, history_rows
                     format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
                 continue
             if title==REPORT_HISTORY_TAB:
-                cols=len(REPORT_HISTORY_HEADERS)
-                format_requests.extend([
-                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat'}},
-                    {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1,'hideGridlines':False}},'fields':'gridProperties.frozenRowCount,gridProperties.hideGridlines'}},
-                ])
-                if len(values)>1:
-                    format_requests.extend([
-                        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
-                        {'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}},
-                    ])
-                history_widths=[300,220,170,95,250,210,180,115,115,95,115,150,170,170,140,150]
-                for index,pixels in enumerate(history_widths):
-                    format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+                format_requests.extend(history_sheet_format_requests(sid,values,include_clear_filter=False))
                 continue
             cols=len(page_headers)
             format_requests.extend([
