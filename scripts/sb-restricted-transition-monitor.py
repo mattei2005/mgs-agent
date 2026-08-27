@@ -9,6 +9,7 @@ and exact time; this monitor never attributes the writer without direct evidence
 
 import argparse
 import asyncio
+import copy
 import importlib.util
 import json
 import os
@@ -28,6 +29,7 @@ SHEET_URL = 'https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF
 NY = ZoneInfo('America/New_York')
 DISCORD_LIMIT = 1900
 EXCLUDED_STATUSES = {'on-hold', 'blocked'}
+HISTORY_COVERAGE_START = '2026-07-15T14:38:01-04:00'
 
 
 def now_iso():
@@ -153,6 +155,141 @@ def report_row(row):
     }
 
 
+def history_public_row(row):
+    """Normalize either a live snapshot row or a report-Sheet row."""
+    return {
+        'page_name': row.get('page_name') or row.get('nome da pagina') or '',
+        'profile_name': row.get('profile_name') or row.get('segurador') or '',
+        'bot_user': str(row.get('bot_user') or row.get('bot user') or '').strip().lower(),
+        'page_id': str(row.get('page_id') or row.get('page id') or '').strip(),
+        'fb_page_id': str(row.get('fb_page_id') or row.get('fb page id') or '').strip(),
+        'sites': row.get('sites') or '',
+        'status': row.get('status') or row.get('status sb') or '',
+        'restricted_until': str(row.get('restricted_until') or row.get('data saida') or '')[:10],
+    }
+
+
+def update_history(history, transitions, confirmed_exits, current, event_at=None):
+    """Update one-row-per-page cycle counters without inventing pre-monitor events."""
+    event_at = event_at or now_iso()
+    result = copy.deepcopy(history) if isinstance(history, dict) else {}
+    result.setdefault('coverage_start', HISTORY_COVERAGE_START)
+    result.setdefault('source', 'SB live transition monitor; exits require live inactive readback')
+    pages = result.setdefault('pages', {})
+    if not isinstance(pages, dict):
+        raise RuntimeError('restriction history pages must be a mapping')
+
+    def ensure(row):
+        public = history_public_row(row)
+        key = stable_key(public)
+        record = pages.setdefault(key, {
+            'entries_detected': 0,
+            'exits_confirmed': 0,
+            'renewals_detected': 0,
+            'status_changes_detected': 0,
+            'first_event_at': '',
+            'last_entry_at': '',
+            'last_exit_at': '',
+            'last_renewal_at': '',
+            'last_status_change_at': '',
+            'currently_restricted': False,
+            'current_restricted_until': '',
+            'current_status': '',
+        })
+        for field in ('page_name', 'profile_name', 'bot_user', 'page_id', 'fb_page_id', 'sites'):
+            if public.get(field):
+                record[field] = public[field]
+        if public.get('status'):
+            record['last_known_status'] = public['status']
+        if public.get('restricted_until'):
+            record['last_known_restricted_until'] = public['restricted_until']
+        return key, record, public
+
+    for record in pages.values():
+        if isinstance(record, dict):
+            record['currently_restricted'] = False
+            record['current_restricted_until'] = ''
+            record['current_status'] = ''
+
+    for item in transitions:
+        _, record, public = ensure(item.get('after') or {})
+        kind = str(item.get('kind') or '').lower()
+        changed = {str(value).lower() for value in item.get('changed') or []}
+        if kind == 'nova':
+            record['entries_detected'] = int(record.get('entries_detected') or 0) + 1
+            record['last_entry_at'] = event_at
+        if 'data' in changed or kind.startswith('renovada'):
+            record['renewals_detected'] = int(record.get('renewals_detected') or 0) + 1
+            record['last_renewal_at'] = event_at
+        if 'status' in changed or kind == 'status alterado':
+            record['status_changes_detected'] = int(record.get('status_changes_detected') or 0) + 1
+            record['last_status_change_at'] = event_at
+        if not record.get('first_event_at'):
+            record['first_event_at'] = event_at
+        record['last_event_at'] = event_at
+        record['last_known_status'] = public.get('status') or record.get('last_known_status', '')
+
+    for row in confirmed_exits:
+        _, record, _ = ensure(row)
+        record['exits_confirmed'] = int(record.get('exits_confirmed') or 0) + 1
+        record['last_exit_at'] = event_at
+        if not record.get('first_event_at'):
+            record['first_event_at'] = event_at
+        record['last_event_at'] = event_at
+
+    for row in current.values():
+        _, record, public = ensure(row)
+        record['currently_restricted'] = True
+        record['current_restricted_until'] = public.get('restricted_until') or ''
+        record['current_status'] = public.get('status') or ''
+
+    result['updated_at'] = event_at
+    result['page_count'] = len(pages)
+    result['totals'] = {
+        'entries_detected': sum(int(row.get('entries_detected') or 0) for row in pages.values()),
+        'exits_confirmed': sum(int(row.get('exits_confirmed') or 0) for row in pages.values()),
+        'renewals_detected': sum(int(row.get('renewals_detected') or 0) for row in pages.values()),
+        'status_changes_detected': sum(int(row.get('status_changes_detected') or 0) for row in pages.values()),
+        'currently_restricted': sum(1 for row in pages.values() if row.get('currently_restricted')),
+    }
+    return result
+
+
+def history_sheet_rows(history):
+    pages = (history or {}).get('pages') or {}
+    coverage = (history or {}).get('coverage_start') or HISTORY_COVERAGE_START
+    rows = []
+    for record in pages.values():
+        fb_page_id = str(record.get('fb_page_id') or '')
+        rows.append({
+            'link da pagina': f'https://facebook.com/{fb_page_id}' if fb_page_id else '',
+            'nome da pagina': record.get('page_name', ''),
+            'fb page id': fb_page_id,
+            'page id': record.get('page_id', ''),
+            'bot user': record.get('bot_user', ''),
+            'segurador': record.get('profile_name', ''),
+            'sites': record.get('sites', ''),
+            'entradas detectadas': int(record.get('entries_detected') or 0),
+            'saidas confirmadas': int(record.get('exits_confirmed') or 0),
+            'renovacoes': int(record.get('renewals_detected') or 0),
+            'mudancas de status': int(record.get('status_changes_detected') or 0),
+            'estado atual': 'Restrita' if record.get('currently_restricted') else 'Fora das restritas monitoradas',
+            'ultima entrada': record.get('last_entry_at', ''),
+            'ultima saida': record.get('last_exit_at', ''),
+            'saida prevista atual': record.get('current_restricted_until', ''),
+            'cobertura desde': coverage,
+        })
+    rows.sort(key=lambda row: (
+        -int(row['entradas detectadas']),
+        -int(row['saidas confirmadas']),
+        -int(row['renovacoes']),
+        str(row['nome da pagina']).lower(),
+        str(row['bot user']).lower(),
+        str(row['page id']),
+    ))
+    return rows
+
+
 def confirmed_resolutions(resolved, raw_rows, daily, sync, tday):
     live = {}
     for raw in raw_rows:
@@ -214,7 +351,7 @@ def load_state():
     return data
 
 
-def save_state(snapshot, counts, transitions, resolved, source):
+def save_state(snapshot, counts, transitions, resolved, source, history=None):
     state = {
         '_meta': {
             'description': 'Live SB restriction transitions independent of the writing agent.',
@@ -229,6 +366,8 @@ def save_state(snapshot, counts, transitions, resolved, source):
         'last_transitions': transitions,
         'active': snapshot,
     }
+    if history is not None:
+        state['history'] = history
     STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp_name = tempfile.mkstemp(prefix=STATE_PATH.name + '.', dir=str(STATE_PATH.parent))
     with os.fdopen(fd, 'w', encoding='utf-8') as handle:
@@ -335,12 +474,12 @@ def main():
     publishers, raw_rows = asyncio.run(audit.get_sb())
     current, counts = build_snapshot(raw_rows, active_users, daily, sync)
 
+    state = load_state()
     if args.reconcile_from_sheet:
         previous = snapshot_from_report_sheet(sync)
         source_label = 'Sheet Paginas Totais anterior → SB live'
         source = 'report-sheet-reconciliation'
     else:
-        state = load_state()
         if state is None:
             raise RuntimeError('state absent; first run must use --reconcile-from-sheet')
         previous = state['active']
@@ -380,6 +519,8 @@ def main():
         for item, target in zip(transitions, revenue_targets):
             item['after'] = target
     confirmed_exits = confirmed_resolutions(removed_from_snapshot, raw_rows, daily, sync, sync.today())
+    history = update_history((state or {}).get('history'), transitions, confirmed_exits, current)
+    history_rows = history_sheet_rows(history)
     transition_blocks = render_blocks(transitions, counts, source_label) if transitions else []
     exit_blocks = sync.build_exited_restrictions_alerts(
         confirmed_exits,
