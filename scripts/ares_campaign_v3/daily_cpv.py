@@ -1281,6 +1281,9 @@ class LiveDailyBackend:
         request_id: str,
     ) -> dict[str, Any]:
         try:
+            source_policy = ((operation.get("daily_new_campaign_routine") or {}).get("clone_source_policy") or {})
+            if not isinstance(source_policy, dict) or "highest Smart Bidding ROI" not in str(source_policy.get("rule") or ""):
+                raise SourceSelectionError("canonical same-vehicle highest-ROI source policy is missing")
             campaign_vehicle_types = asset_group_vehicle_types(asset_refs, campaign_count)
             authorized_type = authorized_request_vehicle_type(operation, request_id)
             if authorized_type and any(value != authorized_type for value in campaign_vehicle_types):
@@ -1313,6 +1316,8 @@ class LiveDailyBackend:
             return {
                 "schema_version": 1,
                 "policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+                "policy_authorized_by": source_policy.get("authorized_by"),
+                "policy_authorization_source": source_policy.get("authorization_source"),
                 "selected_at_utc": utc_now(),
                 "target_date": target_date,
                 "currency": "USD",

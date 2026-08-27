@@ -561,6 +561,16 @@
       "updated_at": "2026-08-27T16:35:20+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-cpv-c25-copy-fix-20260827",
+      "next_step": "Após cooldown, reutilizar os três creative IDs persistidos, atualizar apenas o binding dos anúncios, confirmar por GET copy/status e reconciliar inventário/audit.",
+      "objective": "Corrigir a copy dos três anúncios MOTO ativos da C25 para os textos exatos do screenshot de Rodolfo",
+      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-copy-fix-20260827.json",
+      "state": "in_progress: preflight confirmou copy de carro incorreta nos 3 anúncios. três creatives substitutos com copy moto exata foram validados e criados. atualização dos anúncios aguarda cooldown obrigatório da meta após rate limit code 17/subcode 2446079; processo resumível usa ids persistidos e não repetirá creates.",
+      "thread_id": "1542545166630396027",
+      "updated_at": "2026-08-27T17:04:46+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -1292,5 +1302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:56:00+00:00"
+  "updated_at": "2026-08-27T17:04:46+00:00"
 }

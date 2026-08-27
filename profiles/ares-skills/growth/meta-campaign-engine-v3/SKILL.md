@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.0.20
+version: 3.0.21
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -69,6 +69,7 @@ Carregue somente a referência do branch atual.
 16. Criação programada segue o loop de análise, mas o hold vigente pode ser liberado por Rodolfo ou Nicolas. Para Creditoparaveiculo G006, Rodolfo liberou o hold em 24/08/2026 e reativou o scheduler diário de 17:00 São Paulo; um hold futuro continua sem expiração automática e bloqueia criação/clone até nova liberação explícita.
 17. Em `clone_prestaged`, cada anúncio exige `source_ad_id` não zero e nasce por `POST /{source_ad_id}/copies` com `creative_parameters`; criação direta por `act_{account}/ads` é proibida. Campaign copy, adset copy, normalização de shell, ad copies e normalização de nomes são batches sequenciais; filhos PAUSED permanecem PAUSED até readback e ativação autorizada.
 18. Quando a fonte canônica da operação autorizar reteste, o seletor pode combinar `01_READY` com `03_TESTED` explicitamente elegível. Em CPV G006, o mix é 2 READY + 1 TESTED inconclusivo por subentrega por campanha, máximo de duas tentativas e fallback da terceira vaga para READY. Reteste nunca ignora reserva, uso ativo, lineage ou conciliação Meta×Drive; após readback do novo anúncio, o asset volta a `02_TESTING` e a tentativa é anexada idempotentemente a `test_history`.
+19. Em CPV G006, a origem de `clone_prestaged` é selecionada no preflight do manifest pelo maior ROI Smart Bidding da data operacional dentro da mesma partição de veículo. `MOTO` nunca usa fonte `CARRO`, e `CARRO` nunca usa fonte `MOTO`. C08 não é template fixo: só pode vencer se tiver o maior ROI elegível na partição correta. Persistir IDs da campanha/adset/anúncios fonte, ROI, investimento, receita, data, moeda, fórmula e digest do snapshot antes de selar o manifest; ausência de fonte elegível falha fechado antes de reserva/write.
 
 ## How to run
 
@@ -94,7 +95,7 @@ A execução real está ativa sob `development_access`. Cada pedido autorizado d
 - média/p95 por estágio no audit;
 - nenhuma credencial no manifest/audit;
 - GET final confirma IDs, estrutura, budget, status e `start_time`;
-- audit diário preserva ordem estável e registra `duration_ms` + contadores sanitizados para `meta_preflight`, `drive_preflight`, `reconciliation`, `asset_selection`, `prestage`, `manifest_prevalidation`, `engine`, `postprocess` e total;
+- audit diário preserva ordem estável e registra `duration_ms` + contadores sanitizados para `meta_preflight`, `drive_preflight`, `reconciliation`, `asset_selection`, `source_selection`, `prestage`, `manifest_prevalidation`, `engine`, `postprocess` e total;
 - Token é resolvido cache-first pelo helper canônico; runner/cron nunca usa `force_refresh=True` por padrão;
 - antes do execute, nomes exatos do manifest não colidem com campanhas live não deletadas fora do mapeamento idempotente do mesmo request;
 - títulos de pre-stage incluem `asset_id + checksum curto`, e o registry confirma `account + asset + checksum + IDs` por readback;

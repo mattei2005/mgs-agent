@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.39
+version: 1.0.40
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -111,6 +111,20 @@ ROI Total líquido após SMS =
 Se o SMS Funnel não fornecer `total_sms_sent`, exibir `ROI Total com SMS — antes do custo SMS`; não chamar de lucro líquido.
 
 Pixel, evento, Page/identidade, Instagram e URL de destino devem ser herdados da campanha de referência validada na mesma conta e confirmados por readback antes de criar campanha. Não inferir IDs ou valores por nome.
+
+### Seleção da origem do clone por ROI e tipo de veículo
+
+Por correção permanente de Rodolfo em 27/08/2026, a origem do clone diário não é uma campanha fixa. Antes de selar cada manifest:
+
+1. Resolver o tipo de cada grupo 1×1×3 como `CARRO` ou `MOTO`; os três assets do grupo precisam concordar e uma autorização nominal de tipo prevalece como gate.
+2. Ler o Smart Bidding Adgroup da data operacional até o horário do preflight, em USD e com `Discount revenue share` ativo.
+3. Agregar por campaign ID com `(ΣNET_REVENUE − ΣINVESTIMENT) × 100 ÷ ΣINVESTIMENT` e exigir investimento positivo.
+4. Considerar somente campanhas não terminais, MAXVOL (`LOWEST_COST_WITHOUT_CAP`) e do mesmo tipo: nome com token inteiro `MOTO` para MOTO; sem esse token para CARRO.
+5. Escolher o maior ROI; desempatar por maior investimento e depois campaign ID estável.
+6. Confirmar por Meta GET uma campanha clonável com um adset `OFFSITE_CONVERSIONS` e um conjunto inequívoco `AD01/AD02/AD03`. Anúncios extras não entram quando os três slots canônicos são únicos; ambiguidade bloqueia.
+7. Persistir campanha/adset/anúncios fonte, ROI, investimento, receita, data, moeda, fórmula e digest do snapshot antes do manifest. Retomada reutiliza o snapshot selado e nunca recalcula a fonte depois de possível write.
+
+`MOTO→CARRO` e `CARRO→MOTO` são proibidos. C08 só pode ser escolhida quando realmente liderar o ROI elegível da partição correta. Sem fonte elegível, falhar fechado antes de reservar criativos ou escrever na Meta; nunca usar C08 como fallback. A regra vale para novos manifests e não reabre campanhas concluídas historicamente.
 
 ### Meta Purchase ROAS como proxy
 

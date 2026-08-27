@@ -109,6 +109,10 @@ def operation(*, next_number=14, cap=300, override=True, dynamic=False):
     routine: dict[str, object] = {
         "new_campaign_budget_pool_usd": 60,
         "default_campaign_initial_budget_usd": 30,
+        "clone_source_policy": {
+            "authorized_by": "Rodolfo Mattei",
+            "rule": "always clone from the eligible campaign with the highest Smart Bidding ROI within the same vehicle type",
+        },
     }
     if override:
         routine["one_time_override_20260821"] = {

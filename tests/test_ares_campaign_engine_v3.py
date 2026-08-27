@@ -622,6 +622,93 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert all('asset-' not in ad.name for campaign in built.campaigns for ad in campaign.ads)
 
 
+def test_cpv_adapter_preserves_distinct_car_and_moto_roi_sources(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    assets = []
+    for i in range(6):
+        asset_id = f'vehicle-asset-{i}'
+        checksum = f'vehicle-sum-{i}'
+        registry.register(
+            account_id='1046241194533786', asset_id=asset_id, checksum=checksum,
+            vertical_video_id=f'vehicle-v{i}', square_video_id=f'vehicle-s{i}', ready=True,
+            upload_edge='ad_account_advideos', association_verified=True,
+        )
+        token = 'MOTO' if i >= 3 else 'CARRO'
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_{token}_TEST_PV_{i + 1:03d}.mp4',
+        })
+    sources = selected_sources(1, vehicle_type='CARRO') + selected_sources(1, vehicle_type='MOTO')
+    payload = build_cpv_manifest(
+        registry=registry,
+        asset_refs=assets,
+        campaign_numbers=[40, 41],
+        operational_date='2099-08-21',
+        request_id='cpv-car-moto-sources',
+        source_selections=sources,
+        status='ACTIVE',
+    )
+    built = Manifest.from_dict(payload)
+    assert built.campaigns[0].source_campaign_id == 'source-carro-campaign'
+    assert built.campaigns[1].source_campaign_id == 'source-moto-campaign'
+    assert ' - MOTO - ' not in built.campaigns[0].name
+    assert ' - MOTO - ' in built.campaigns[1].name
+    assert [row['vehicle_type'] for row in payload['source_selections']] == ['CARRO', 'MOTO']
+
+
+def test_cpv_adapter_builds_from_zero_without_clone_lineage(tmp_path):
+    registry = MediaRegistry(tmp_path / 'media.json')
+    assets = []
+    for i in range(3):
+        asset_id = f'moto-zero-{i}'
+        checksum = f'moto-zero-sum-{i}'
+        registry.register(
+            account_id='1046241194533786', asset_id=asset_id, checksum=checksum,
+            vertical_video_id=f'moto-zero-v{i}', square_video_id=f'moto-zero-s{i}', ready=True,
+            upload_edge='ad_account_advideos', association_verified=True,
+        )
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_MOTO_TEST_NV_{i + 1:03d}.mp4',
+        })
+    create_spec = {
+        'campaign_create': {
+            'objective': 'OUTCOME_SALES', 'buying_type': 'AUCTION',
+            'daily_budget': '9999', 'bid_strategy': 'LOWEST_COST_WITHOUT_CAP',
+            'special_ad_categories': ['FINANCIAL_PRODUCTS_SERVICES'],
+            'special_ad_category_country': ['BR'],
+        },
+        'adset_create': {
+            'billing_event': 'IMPRESSIONS', 'optimization_goal': 'OFFSITE_CONVERSIONS',
+            'targeting': {'geo_locations': {'countries': ['BR']}},
+            'promoted_object': {'pixel_id': 'pixel-1', 'custom_event_type': 'SUBSCRIBE'},
+            'attribution_spec': [{'event_type': 'CLICK_THROUGH', 'window_days': 7}],
+            'regional_regulated_categories': ['BRAZIL_REGULATION'],
+            'regional_regulation_identities': {'universal_beneficiary': 'identity-1', 'universal_payer': 'identity-1'},
+            'is_dynamic_creative': True,
+        },
+    }
+    payload = build_cpv_manifest(
+        registry=registry, asset_refs=assets, campaign_numbers=[31],
+        operational_date='2099-08-27', request_id='cpv-c31-zero',
+        source_selections=selected_sources(1, vehicle_type='MOTO'),
+        mode='from_zero_prestaged', from_zero_specs=[create_spec],
+        daily_budget_minor=2500,
+    )
+    built = Manifest.from_dict(payload)
+    campaign = built.campaigns[0]
+    assert payload['execution_mode'] == 'from_zero_prestaged'
+    assert campaign.mode == 'from_zero_prestaged'
+    assert campaign.source_campaign_id is None
+    assert campaign.source_adset_id is None
+    assert campaign.campaign_create['daily_budget'] == '2500'
+    assert all(ad.source_ad_id is None for ad in campaign.ads)
+    plan = Planner(bundle_size=2, max_ads_per_batch=10).build(built)
+    assert not any('/copies' in op.relative_url for stage in plan.lanes['1046241194533786'][0].stages for op in stage.operations)
+
+
 def test_cpv_adapter_accepts_explicit_future_start_for_authorized_canary(tmp_path):
     registry = MediaRegistry(tmp_path / 'media.json')
     assets = []
@@ -846,6 +933,34 @@ def test_from_zero_execution_creates_campaign_adset_creatives_and_ads_without_co
         for op in operations
     )
     assert all(not op.body.get('source_ad_id') for op in transport.operations_by_stage['ad_create'])
+
+
+def test_from_zero_readback_failure_recovers_without_replaying_writes(tmp_path):
+    class FailOnceReadback(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.failed = False
+        def execute(self, operations, stage):
+            if stage == 'consolidated_readback' and not self.failed:
+                self.failed = True
+                raise RuntimeError('synthetic from-zero readback failure')
+            return super().execute(operations, stage)
+
+    transport = FailOnceReadback('100')
+    cfg = config(tmp_path, enabled=True, write_enabled=True)
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    request = manifest([from_zero_campaign(1)], request_id='from-zero-recovery')
+    with pytest.raises(RuntimeError, match='synthetic from-zero readback failure'):
+        engine.execute(request)
+    first_stages = [call['stage'] for call in transport.calls]
+    assert first_stages == [
+        'campaign_create', 'adset_create', 'creative_create', 'ad_create', 'campaign_finalize',
+    ]
+    result = engine.execute(request)
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [call['stage'] for call in transport.calls] == [
+        *first_stages, 'recovery_consolidated_readback',
+    ]
 
 
 def test_engine_executes_accounts_in_independent_lanes(tmp_path):

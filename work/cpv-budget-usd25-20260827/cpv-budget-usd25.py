@@ -184,6 +184,32 @@ def main() -> int:
 
     common = load_common()
     token, token_field = common.get_token_from_1password(item_name=token_item)
+    if args.verify:
+        fields = "id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time,updated_time"
+        requests = [
+            {"name": f"C{number:02d}", "path": expected_ids[number], "params": {"fields": fields}}
+            for number in CAMPAIGN_NUMBERS
+        ]
+        outer_status, results, _ = common.graph_batch_get(token, requests)
+        if outer_status != 200 or not isinstance(results, list) or len(results) != len(CAMPAIGN_NUMBERS):
+            raise RuntimeError("independent batch verification failed at transport level")
+        verified: dict[int, dict[str, Any]] = {}
+        for number, result in zip(CAMPAIGN_NUMBERS, results):
+            body = result.get("body") if isinstance(result, dict) else None
+            if int((result or {}).get("code") or 0) != 200 or not isinstance(body, dict) or body.get("error"):
+                raise RuntimeError(f"C{number:02d} independent batch verification failed")
+            validate_identity(number, body, expected_ids[number])
+            verified[number] = body
+        rows = sanitized(verified)
+        off_target = [row for row in rows if row["daily_budget_minor"] != TARGET_MINOR]
+        print(json.dumps({
+            "status": "VERIFY_OK" if not off_target else "VERIFY_MISMATCH",
+            "request_id": REQUEST_ID,
+            "campaigns": rows,
+            "off_target": off_target,
+            "side_effects": False,
+        }, ensure_ascii=False, indent=2))
+        return 0 if not off_target else 3
     account = graph_get_ok(common, token, ACCOUNT_ACT, {"fields": "id,name,account_status,currency,timezone_name,disable_reason"})
     if (
         str(account.get("id")) != ACCOUNT_ACT
@@ -245,18 +271,6 @@ def main() -> int:
         "status": "DRY_RUN_OK" if not args.execute else "PREFLIGHT_COMPLETE",
         "side_effects": {"campaign_budget_writes": False, "campaign_status_writes": False, "billing_writes": False},
     }
-    if args.verify:
-        off_target = [row for row in sanitized(preflight) if row["daily_budget_minor"] != TARGET_MINOR]
-        print(json.dumps({
-            "status": "VERIFY_OK" if not off_target else "VERIFY_MISMATCH",
-            "request_id": REQUEST_ID,
-            "campaigns": sanitized(preflight),
-            "active_account_budget_minor": active_before,
-            "active_account_budget_usd": active_before / 100,
-            "off_target": off_target,
-            "side_effects": False,
-        }, ensure_ascii=False, indent=2))
-        return 0 if not off_target else 3
     atomic_json(AUDIT_PATH, audit)
 
     if not args.execute:
