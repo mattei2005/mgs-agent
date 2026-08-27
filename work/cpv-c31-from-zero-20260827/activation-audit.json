@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "request_id": "cpv-c31-from-zero-20260827",
+  "action": "activate_future_scheduled_campaign",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1542573475104034936",
+  "status": "COMPLETE_VERIFIED",
+  "started_at_sp": "2026-08-27T14:56:21.761925-03:00",
+  "campaign_id": "120250952825350632",
+  "target_configured_status": "ACTIVE",
+  "target_start_time_sp": "2026-08-28T00:30:00-03:00",
+  "before": {
+    "campaign": {
+      "id": "120250952825350632",
+      "name": "31 - 28-08 - Garagem Brasil - MOTO - (b01fb13c31) event_Subscribe - MAXVOL",
+      "status": "PAUSED",
+      "configured_status": "PAUSED",
+      "effective_status": "PAUSED",
+      "updated_time": "2026-08-27T14:38:28-0300",
+      "start_time": "2026-08-28T00:30:00-0300",
+      "daily_budget": "2500",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "adsets": [
+      {
+        "id": "120250952825540632",
+        "name": "01 - AdGroup - (b01fb13c31g01) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "CAMPAIGN_PAUSED",
+        "start_time": "2026-08-28T00:30:00-0300"
+      }
+    ],
+    "ads": [
+      {
+        "id": "120250952830530632",
+        "name": "AD 02 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "CAMPAIGN_PAUSED"
+      },
+      {
+        "id": "120250952830620632",
+        "name": "AD 01 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "CAMPAIGN_PAUSED"
+      },
+      {
+        "id": "120250952830630632",
+        "name": "AD 03 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "CAMPAIGN_PAUSED"
+      }
+    ],
+    "spend_usd": 0,
+    "impressions": 0,
+    "active_campaign_count": 11,
+    "active_budget_minor": 37234,
+    "logical_calls": 5,
+    "outer_calls": 1
+  },
+  "before_checks": {
+    "campaign_exact": true,
+    "campaign_name_date": true,
+    "campaign_status": true,
+    "campaign_budget_usd25": true,
+    "campaign_maxvol": true,
+    "campaign_start_exact": true,
+    "one_adset_exact": true,
+    "adset_active": true,
+    "adset_start_exact": true,
+    "adset_issues_clear": true,
+    "three_ads_exact": true,
+    "ads_active": true,
+    "ads_issues_clear": true,
+    "zero_spend": true,
+    "zero_impressions": true
+  },
+  "token_report": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "field": "credential (cache 615s)",
+    "len": 196
+  },
+  "meta_write_attempts": 1,
+  "write_http": 200,
+  "write_response": {
+    "success": true
+  },
+  "after": {
+    "campaign": {
+      "id": "120250952825350632",
+      "name": "31 - 28-08 - Garagem Brasil - MOTO - (b01fb13c31) event_Subscribe - MAXVOL",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "updated_time": "2026-08-27T14:56:22-0300",
+      "start_time": "2026-08-28T00:30:00-0300",
+      "daily_budget": "2500",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+    },
+    "adsets": [
+      {
+        "id": "120250952825540632",
+        "name": "01 - AdGroup - (b01fb13c31g01) event_Subscribe - MAXVOL",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "start_time": "2026-08-28T00:30:00-0300"
+      }
+    ],
+    "ads": [
+      {
+        "id": "120250952830530632",
+        "name": "AD 02 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      {
+        "id": "120250952830620632",
+        "name": "AD 01 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      {
+        "id": "120250952830630632",
+        "name": "AD 03 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      }
+    ],
+    "spend_usd": 0,
+    "impressions": 0,
+    "active_campaign_count": 12,
+    "active_budget_minor": 39734,
+    "logical_calls": 5,
+    "outer_calls": 1
+  },
+  "after_checks": {
+    "campaign_exact": true,
+    "campaign_name_date": true,
+    "campaign_status": true,
+    "campaign_budget_usd25": true,
+    "campaign_maxvol": true,
+    "campaign_start_exact": true,
+    "one_adset_exact": true,
+    "adset_active": true,
+    "adset_start_exact": true,
+    "adset_issues_clear": true,
+    "three_ads_exact": true,
+    "ads_active": true,
+    "ads_issues_clear": true,
+    "zero_spend": true,
+    "zero_impressions": true,
+    "active_budget_exact": true
+  },
+  "effective_envelope_minor": 50000,
+  "remaining_within_envelope_minor": 10266,
+  "finished_at_sp": "2026-08-27T14:56:25.788125-03:00"
+}
