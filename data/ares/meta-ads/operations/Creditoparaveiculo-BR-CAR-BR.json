@@ -398,10 +398,10 @@
       "authorization_source": "discord:thread:1539826050765299872",
       "from_zero_prestaged": "criar do zero com campanha, conjunto, creatives e anúncios novos",
       "clone_prestaged": "clonar a melhor campanha elegível da mesma vertical e substituir os três creatives/posts por criativos novos do Drive",
-      "pure_clone": "duplicar a melhor campanha elegível inteira, equivalente ao botão Duplicar do Ads Manager, mantendo anúncios/Creative IDs/posts sem substituição",
+      "pure_clone": "duplicar a melhor campanha elegível inteira, equivalente ao botão Duplicar do Ads Manager, sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs",
       "selection_rule": "o pedido natural escolhe exatamente um dos três modos; clonar com criativos novos e duplicar igual nunca são tratados como sinônimos",
       "source_rule": "quando o pedido disser melhor campanha, recalcular o vencedor elegível dentro de CARRO ou MOTO no preflight; nenhum ID vira template fixo",
-      "social_proof_readback": "pure_clone exige comparar source creative IDs e effective_object_story_id com os objetos duplicados; igualdade preserva o mesmo post/social proof, sem alegar garantia de performance"
+      "social_proof_readback": "pure_clone compara Creative IDs para auditoria, mas confirma preservação do mesmo post/social proof pela igualdade de effective_object_story_id; Creative ID pode ser rematerializado pela Meta sem perder o post"
     },
     "clone_source_policy": {
       "authorized_by": "Rodolfo Mattei",

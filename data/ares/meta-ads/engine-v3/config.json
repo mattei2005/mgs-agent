@@ -30,7 +30,7 @@
   "mode_taxonomy": {
     "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
     "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
-    "pure_clone": "duplicar igual: equivalente operacional ao botão Duplicar do Ads Manager; deep copy da campanha vencedora sem substituir anúncios/creatives, preservando os mesmos posts/social proof quando o readback confirmar os mesmos effective_object_story_id"
+    "pure_clone": "duplicar igual: equivalente operacional ao botão Duplicar do Ads Manager; deep copy da campanha vencedora sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs, e o mesmo post/social proof só é confirmado quando o readback mantém o effective_object_story_id da fonte"
   },
   "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
   "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",

@@ -137,6 +137,25 @@
       "updated_at": "2026-08-22T07:13:20+00:00"
     },
     {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-27",
+      "id": "ARES-CPV-CAMPAIGN-CREATION-MODES-20260827",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV three campaign creation modes",
+      "updated_at": "2026-08-27T17:49:01+00:00"
+    },
+    {
       "canonical_key": "growth.creative-taxonomy.car.vehicle-subtype-naming",
       "canonical_source": "profiles/ares-skills/growth/creative-taxonomy-mgs/references/source-taxonomy-empire.md",
       "consumers": [
@@ -1984,5 +2003,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:56:00+00:00"
+  "updated_at": "2026-08-27T17:49:01+00:00"
 }

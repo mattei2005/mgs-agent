@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.40
+version: 1.0.41
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -434,12 +434,15 @@ A URL base permanece a mesma, mas os parâmetros UTM devem ser substituídos de 
 
 O nome do anúncio preserva o ordinal e o nome canônico do Drive. Inventário/audit também registra `asset_id`, Drive ID, checksum, Meta ad/creative/video ID e linhagem; filename sozinho não prova identidade.
 
-## Criação do zero versus clone
+## Três formas de criar campanha
 
-Os dois métodos são tecnicamente possíveis e ambos geram novos IDs na Meta:
+Rodolfo definiu três operações distintas, todas com novos IDs de campanha e conjunto:
 
-- **Criar do zero:** POST de nova campanha, novo conjunto, novos criativos/anúncios e todos os campos explícitos.
-- **Clonar:** copiar uma campanha/conjunto/anúncios existentes e depois alterar nome, criativos, horários, URLs, orçamento e demais diferenças.
+1. **Criar do zero (`from_zero_prestaged`):** POST de campanha, conjunto, creatives e anúncios novos, com todos os campos explícitos e criativos novos.
+2. **Clonar com criativos novos (`clone_prestaged`):** copiar campanha/conjunto/anúncios da melhor fonte elegível da mesma vertical, preservar lineage e configurações estruturais, mas substituir os três creatives/posts por assets novos do Drive e UTMs do destino.
+3. **Duplicar igual (`pure_clone`):** equivalente operacional ao botão `Duplicar` do Ads Manager; deep copy da campanha vencedora sem substituir o conteúdo criativo. A Meta pode reutilizar ou rematerializar Creative IDs; o readback confirma o mesmo post/social proof pela igualdade de `effective_object_story_id`, embora campanha/adset tenham aprendizado e entrega próprios e a Meta não garanta repetição de performance.
+
+O pedido natural escolhe exatamente uma rota. “Clonar com criativos novos” e “duplicar igual” nunca são sinônimos. Quando o pedido disser “melhor campanha”, a fonte é recalculada no preflight dentro de CARRO ou MOTO; nenhum ID encontrado vira template fixo.
 
 “Clonar” não é apenas renomear o objeto existente; é duplicá-lo em novos objetos. A diferença operacional é que o clone pode herdar configurações antigas ou ocultas. Para uma conta gerenciada 100% pelo Ares, o padrão recomendado é:
 

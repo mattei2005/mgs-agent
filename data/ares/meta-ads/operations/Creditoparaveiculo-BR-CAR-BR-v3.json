@@ -27,10 +27,10 @@
     "defined_at_et": "2026-08-27T13:00:00-04:00",
     "from_zero_prestaged": "criação do zero: campanha, conjunto, creatives e anúncios novos; usa criativos novos",
     "clone_prestaged": "clone com criativos novos: a estrutura vem da melhor fonte elegível da mesma vertical, mas os três creatives/posts são substituídos por assets novos do Drive",
-    "pure_clone": "duplicação igual: a campanha vencedora é copiada inteira por deep copy, sem substituir os anúncios/Creative IDs/posts; social proof é preservado somente quando o readback confirma os mesmos effective_object_story_id",
+    "pure_clone": "duplicação igual: a campanha vencedora é copiada inteira por deep copy, sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs, e o mesmo post/social proof só é confirmado quando o readback mantém o effective_object_story_id da fonte",
     "selection_rule": "the natural-language request selects exactly one mode; never infer pure_clone from the word clone when the request also asks for new Drive creatives, and never replace source creatives when Rodolfo asks to duplicate the campaign identically",
     "performance_rule": "when the request says best campaign, recompute the eligible winner at manifest preflight inside CARRO or MOTO; no campaign ID becomes a permanent template",
-    "learning_caveat": "pure_clone preserves creative/post identity and social proof but creates new campaign/adset delivery objects; similar performance is empirical, not guaranteed by Meta"
+    "learning_caveat": "pure_clone preserves the source creative content and should preserve the post/story when effective_object_story_id is unchanged; Creative ID equality is not required because Meta may rematerialize it; campaign/adset are new delivery objects and similar performance is empirical, not guaranteed by Meta"
   },
   "page_id": "621037101089579",
   "mode": "clone_prestaged",
