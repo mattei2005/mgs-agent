@@ -14,6 +14,7 @@ from .prestage import AdAccountVideoUploader, MediaUploadError, PrestageService
 from .prevalidation import prevalidate_payload
 from .quota import QuotaBlocked
 from .schema import Manifest, ManifestError
+from .source_selection import expand_source_selections
 from .transport import BatchTransportError, FakeBatchTransport, GraphBatchTransport
 
 BASE = Path("/root/mgs-agent")
@@ -94,7 +95,7 @@ def parser() -> argparse.ArgumentParser:
     cpv = sub.add_parser("build-cpv")
     cpv.add_argument("--registry", default=str(DEFAULT_MEDIA))
     cpv.add_argument("--assets-json", required=True)
-    cpv.add_argument("--templates-json")
+    cpv.add_argument("--source-snapshot-json", required=True)
     cpv.add_argument("--campaign-numbers", required=True)
     cpv.add_argument("--operational-date", required=True)
     cpv.add_argument("--request-id", required=True)
@@ -152,13 +153,11 @@ def _main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []
-        templates = None
-        if args.templates_json:
-            templates = load_json(args.templates_json).get("templates") or []
+        source_selections = expand_source_selections(load_json(args.source_snapshot_json))
         numbers = [int(item.strip()) for item in args.campaign_numbers.split(",") if item.strip()]
         payload = build_cpv_manifest(
             registry=MediaRegistry(args.registry), asset_refs=assets, campaign_numbers=numbers,
-            operational_date=args.operational_date, request_id=args.request_id, creative_templates=templates,
+            operational_date=args.operational_date, request_id=args.request_id, source_selections=source_selections,
             status=args.status,
         )
         Manifest.from_dict(payload)

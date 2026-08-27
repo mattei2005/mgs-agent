@@ -1138,6 +1138,7 @@ class LiveDailyBackend:
     def __init__(self, paths: DailyPaths):
         self.paths = paths
         self.common = _load_module(COMMON_PATH, "ares_meta_common_cpv_v3_daily")
+        self.sb_common = _load_module(SB_COMMON_PATH, "ares_sb_common_cpv_v3_daily")
         self.drive_module = _load_module(DRIVE_MODULE_PATH, "ares_drive_cpv_v3_daily")
         self.drive_module.load_env()
         setattr(self.drive_module, "SCOPES", "https://www.googleapis.com/auth/drive")
@@ -1160,6 +1161,157 @@ class LiveDailyBackend:
             raise DailyBlocked("meta_preflight", "Page is missing ADVERTISE or Page token", {"http": page_status})
         self.page_token = str(page["access_token"])
         return {"account": account, "campaigns": campaigns, "token_report": {"item": TOKEN_ITEM, "field": token_field, "len": len(token)}, "page": {"id": PAGE_ID, "tasks": page.get("tasks")}}
+
+    def _source_hierarchy_snapshot(self, winner: dict[str, Any]) -> dict[str, Any]:
+        if not self.token:
+            raise DailyBlocked("source_selection", "Meta token not initialized")
+        campaign_id = str(winner.get("campaign_id") or "")
+        count_call("meta_get")
+        status, campaign, _ = self.common.graph_get(
+            campaign_id,
+            self.token,
+            {
+                "fields": (
+                    "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,"
+                    "objective,buying_type,special_ad_categories,special_ad_category_country"
+                )
+            },
+        )
+        if status != 200 or not isinstance(campaign, dict):
+            raise DailyBlocked("source_selection", "ROI-winning source campaign readback failed", {"campaign_id": campaign_id, "http": status})
+        configured_status = str(campaign.get("configured_status") or campaign.get("status") or "").upper()
+        if configured_status in {"DELETED", "ARCHIVED"}:
+            raise DailyBlocked("source_selection", "ROI-winning source campaign is terminal", {"campaign_id": campaign_id})
+        if str(campaign.get("bid_strategy") or "").upper() != "LOWEST_COST_WITHOUT_CAP":
+            raise DailyBlocked("source_selection", "ROI-winning source campaign is not MAXVOL", {"campaign_id": campaign_id})
+        expected_vehicle = canonical_vehicle_type(winner.get("vehicle_type"))
+        if vehicle_type_from_text(campaign.get("name")) != expected_vehicle:
+            raise DailyBlocked("source_selection", "ROI-winning source vehicle type changed on Meta", {"campaign_id": campaign_id})
+
+        adsets = self._graph_pages(
+            f"{campaign_id}/adsets",
+            {
+                "fields": (
+                    "id,name,status,effective_status,configured_status,billing_event,optimization_goal,"
+                    "targeting,promoted_object,attribution_spec,regional_regulated_categories,"
+                    "regional_regulation_identities,is_dynamic_creative,bid_amount,bid_constraints"
+                ),
+                "limit": 20,
+            },
+        )
+        adsets = [row for row in adsets if str(row.get("configured_status") or row.get("status") or "").upper() not in {"DELETED", "ARCHIVED"}]
+        if len(adsets) != 1:
+            raise DailyBlocked("source_selection", "ROI-winning source must have exactly one non-terminal adset", {"campaign_id": campaign_id, "adset_count": len(adsets)})
+        source_adset = adsets[0]
+        if str(source_adset.get("optimization_goal") or "").upper() != "OFFSITE_CONVERSIONS":
+            raise DailyBlocked("source_selection", "ROI-winning source adset optimization is invalid", {"campaign_id": campaign_id})
+        source_adset_id = str(source_adset.get("id") or "")
+        ads = self._graph_pages(
+            f"{source_adset_id}/ads",
+            {
+                "fields": (
+                    "id,name,status,effective_status,configured_status,adset_id,"
+                    "creative{id,name,status,object_story_spec,asset_feed_spec,degrees_of_freedom_spec}"
+                ),
+                "limit": 50,
+            },
+        )
+        ads = [row for row in ads if str(row.get("configured_status") or row.get("status") or "").upper() not in {"DELETED", "ARCHIVED"}]
+        if len(ads) != 3:
+            raise DailyBlocked("source_selection", "ROI-winning source must have exactly three non-terminal ads", {"campaign_id": campaign_id, "ad_count": len(ads)})
+
+        def ad_order(row: dict[str, Any]) -> tuple[int, str]:
+            match = re.search(r"\bAD\s*0*(\d+)\b", str(row.get("name") or ""), re.IGNORECASE)
+            return (int(match.group(1)) if match else 999, str(row.get("id") or ""))
+
+        templates: list[dict[str, Any]] = []
+        for ad in sorted(ads, key=ad_order):
+            creative = ad.get("creative") or {}
+            if not isinstance(creative, dict):
+                raise DailyBlocked("source_selection", "ROI-winning source creative readback is invalid", {"ad_id": ad.get("id")})
+            creative_payload = {
+                key: creative[key]
+                for key in ("object_story_spec", "asset_feed_spec", "degrees_of_freedom_spec")
+                if isinstance(creative.get(key), dict) and creative.get(key)
+            }
+            videos = list((creative_payload.get("asset_feed_spec") or {}).get("videos") or [])
+            if not creative_payload.get("object_story_spec") or len(videos) < 2:
+                raise DailyBlocked("source_selection", "ROI-winning source creative is incomplete", {"ad_id": ad.get("id")})
+            templates.append({
+                "source_ad_id": str(ad.get("id") or ""),
+                "source_ad_name": str(ad.get("name") or ""),
+                "source_creative_id": str(creative.get("id") or ""),
+                "source_creative_name": str(creative.get("name") or ""),
+                "creative_payload": creative_payload,
+            })
+        return {
+            "vehicle_type": expected_vehicle,
+            "source_campaign_id": campaign_id,
+            "source_adset_id": source_adset_id,
+            "source_campaign": campaign,
+            "source_adset": source_adset,
+            "templates": templates,
+            "roi_evidence": {
+                key: winner.get(key)
+                for key in (
+                    "campaign_id", "campaign_name", "target_date", "currency", "metric", "formula",
+                    "investment_usd", "net_revenue_usd", "roi_pct", "row_count", "candidate_count", "tie_breaker",
+                )
+            },
+        }
+
+    def select_clone_sources(
+        self,
+        *,
+        asset_refs: list[dict[str, Any]],
+        campaign_count: int,
+        meta_campaigns: list[dict[str, Any]],
+        target_date: str,
+        operation: dict[str, Any],
+        request_id: str,
+    ) -> dict[str, Any]:
+        try:
+            campaign_vehicle_types = asset_group_vehicle_types(asset_refs, campaign_count)
+            authorized_type = authorized_request_vehicle_type(operation, request_id)
+            if authorized_type and any(value != authorized_type for value in campaign_vehicle_types):
+                raise SourceSelectionError(f"authorized request is {authorized_type} but selected assets are {campaign_vehicle_types}")
+            payload = {
+                "initialDate": f"{target_date}T00:00:00.000Z",
+                "finalDate": f"{target_date}T23:59:59.999Z",
+                "publishers": [SB_PUBLISHER],
+                "currency": "USD",
+            }
+            count_call("smart_bidding_read")
+            status, rows, _ = self.sb_common.api_request(
+                "POST",
+                "/report/performance_per_campaigns",
+                payload=payload,
+                item_name=SB_TOKEN_ITEM,
+            )
+            if status not in {200, 201} or not isinstance(rows, list):
+                raise DailyBlocked("source_selection", "Smart Bidding source ranking read failed", {"http": status})
+            roi_by_campaign = aggregate_smart_bidding_roi(
+                rows,
+                target_date=target_date,
+                account_id=ACCOUNT_ID,
+                domain=SB_DOMAIN,
+            )
+            sources_by_vehicle: dict[str, dict[str, Any]] = {}
+            for vehicle_type in sorted(set(campaign_vehicle_types)):
+                winner = select_best_roi_campaign(meta_campaigns, roi_by_campaign, vehicle_type=vehicle_type)
+                sources_by_vehicle[vehicle_type] = self._source_hierarchy_snapshot(winner)
+            return {
+                "schema_version": 1,
+                "policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+                "selected_at_utc": utc_now(),
+                "target_date": target_date,
+                "currency": "USD",
+                "request_id": request_id,
+                "campaign_vehicle_types": campaign_vehicle_types,
+                "sources_by_vehicle": sources_by_vehicle,
+            }
+        except SourceSelectionError as exc:
+            raise DailyBlocked("source_selection", str(exc)) from exc
 
     def _graph_pages(self, path: str, params: dict[str, Any]) -> list[dict[str, Any]]:
         if not self.token:
@@ -1620,6 +1772,7 @@ def run_daily(
             drive_info = backend.drive_preflight()
             drive = drive_info["drive"]
             phase_end(audit, "drive_preflight", phase_started, phase_calls, call_counter)
+            assets_were_reserved = bool(selected_ids)
             if not selected:
                 phase_started, phase_calls = phase_begin(call_counter)
                 reconciliation_payload = backend.refresh_reconciliation(inventory_rows, drive, current)
@@ -1641,35 +1794,127 @@ def run_daily(
                 )
                 reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
                 phase_end(audit, "asset_selection", phase_started, phase_calls, call_counter, detail={"selected": len(selected)})
-                if plan_only:
-                    result = {
-                        "status": "DRY_RUN_OK",
-                        "operational_date_sp": day,
-                        "campaign_count": count,
-                        "desired_campaign_count": desired_count,
-                        "campaign_numbers": numbers,
-                        "planner_bundles": [2] * (count // 2) + ([1] if count % 2 else []),
-                        "budget": budget,
-                        "selected_assets": [str(row.get("canonical_filename") or "") for row in selected],
-                        "selected_asset_sources": [str(row.get("status") or "") for row in selected],
-                        "reconciliation": reconciliation,
-                        "drive_counts": drive.get("counts") or {},
-                        "side_effects": {"inventory_reservation": False, "media_upload": False, "campaign_write": False, "drive_move": False},
-                        "audit": str(audit_path),
-                    }
-                    audit.update(stage="DRY_RUN_OK", final=result, completed_at_utc=utc_now())
-                    atomic_json(audit_path, audit)
-                    if not quiet:
-                        print(json.dumps(result, ensure_ascii=False, indent=2))
-                    return result
-                reserve_inventory(paths.inventory, inventory_rows, selected, audit_path)
-                selected_ids = {str(row.get("asset_id") or "") for row in selected}
-                state = {"schema_version": 3, "status": "ASSETS_RESERVED", "operational_date_sp": day, "request_id": request_id, "audit_path": str(audit_path), "desired_campaign_count": desired_count, "campaign_count": count, "campaign_numbers": numbers, "selected_asset_ids": sorted(selected_ids), "reconciliation": reconciliation, "budget_plan": budget, "updated_at_utc": utc_now()}
-                atomic_json(paths.state, state)
             else:
                 phase_started, phase_calls = phase_begin(call_counter)
-                verify_reconciliation(paths.reconciliation, selected, current)
+                reconciliation = verify_reconciliation(paths.reconciliation, selected, current)
                 phase_end(audit, "reconciliation", phase_started, phase_calls, call_counter, detail={"resume_validation": True})
+
+            assets_payload = {
+                "assets": [
+                    {
+                        "asset_id": str(row["asset_id"]),
+                        "checksum": str(row["clean_checksum"]),
+                        "canonical_filename": str(row["canonical_filename"]),
+                    }
+                    for row in selected
+                ]
+            }
+            manifest_dir = paths.work_root / request_id / "manifest"
+            draft_path = manifest_dir / "draft.json"
+            sealed_path = manifest_dir / "sealed.json"
+            source_snapshot_path = Path(
+                state.get("source_snapshot_path")
+                or (paths.work_root / request_id / "source-selection.json")
+            )
+            source_payload: dict[str, Any] = {}
+            source_selections: list[dict[str, Any]] = []
+            source_summary: list[dict[str, Any]] = []
+            phase_started, phase_calls = phase_begin(call_counter)
+            if sealed_path.exists():
+                existing_sealed = load_json(sealed_path)
+                source_summary = list(existing_sealed.get("source_selections") or [])
+                source_detail = {"reused_sealed_manifest": True, "campaigns": len(existing_sealed.get("campaigns") or [])}
+            else:
+                if state.get("source_snapshot_path") and not source_snapshot_path.exists():
+                    raise DailyBlocked("source_selection", "persisted source snapshot is missing; refusing to reselect implicitly")
+                if source_snapshot_path.exists():
+                    source_payload = load_json(source_snapshot_path)
+                else:
+                    source_payload = backend.select_clone_sources(
+                        asset_refs=assets_payload["assets"],
+                        campaign_count=count,
+                        meta_campaigns=meta["campaigns"],
+                        target_date=day,
+                        operation=operation,
+                        request_id=request_id,
+                    )
+                    if not plan_only:
+                        atomic_json(source_snapshot_path, source_payload)
+                if str(source_payload.get("request_id") or "") != request_id or str(source_payload.get("target_date") or "") != day:
+                    raise DailyBlocked("source_selection", "source snapshot identity mismatch")
+                source_selections = expand_source_selections(source_payload)
+                source_summary = [
+                    {
+                        "vehicle_type": vehicle_type,
+                        "source_campaign_id": source.get("source_campaign_id"),
+                        "source_campaign_name": (source.get("source_campaign") or {}).get("name"),
+                        "source_adset_id": source.get("source_adset_id"),
+                        "roi_evidence": source.get("roi_evidence") or {},
+                    }
+                    for vehicle_type, source in sorted((source_payload.get("sources_by_vehicle") or {}).items())
+                ]
+                source_digest = hashlib.sha256(
+                    json.dumps(source_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+                ).hexdigest()
+                if state.get("source_selection_digest") and state.get("source_selection_digest") != source_digest:
+                    raise DailyBlocked("source_selection", "persisted source snapshot digest mismatch")
+                source_detail = {"campaigns": count, "vehicle_types": source_payload.get("campaign_vehicle_types"), "digest": source_digest}
+            phase_end(audit, "source_selection", phase_started, phase_calls, call_counter, detail=source_detail)
+
+            if plan_only:
+                result = {
+                    "status": "DRY_RUN_OK",
+                    "operational_date_sp": day,
+                    "campaign_count": count,
+                    "desired_campaign_count": desired_count,
+                    "campaign_numbers": numbers,
+                    "planner_bundles": [2] * (count // 2) + ([1] if count % 2 else []),
+                    "budget": budget,
+                    "selected_assets": [str(row.get("canonical_filename") or "") for row in selected],
+                    "selected_asset_sources": [str(row.get("status") or "") for row in selected],
+                    "source_selection": source_summary,
+                    "reconciliation": reconciliation,
+                    "drive_counts": drive.get("counts") or {},
+                    "side_effects": {"inventory_reservation": False, "media_upload": False, "campaign_write": False, "drive_move": False},
+                    "audit": str(audit_path),
+                }
+                audit.update(stage="DRY_RUN_OK", source_selection=source_summary, final=result, completed_at_utc=utc_now())
+                atomic_json(audit_path, audit)
+                if not quiet:
+                    print(json.dumps(result, ensure_ascii=False, indent=2))
+                return result
+
+            if not assets_were_reserved:
+                reserve_inventory(paths.inventory, inventory_rows, selected, audit_path)
+                selected_ids = {str(row.get("asset_id") or "") for row in selected}
+                state = {
+                    "schema_version": 3,
+                    "status": "ASSETS_RESERVED",
+                    "operational_date_sp": day,
+                    "request_id": request_id,
+                    "audit_path": str(audit_path),
+                    "desired_campaign_count": desired_count,
+                    "campaign_count": count,
+                    "campaign_numbers": numbers,
+                    "selected_asset_ids": sorted(selected_ids),
+                    "reconciliation": reconciliation,
+                    "budget_plan": budget,
+                    "source_snapshot_path": str(source_snapshot_path),
+                    "source_selection_digest": source_detail.get("digest"),
+                    "source_selection_summary": source_summary,
+                    "updated_at_utc": utc_now(),
+                }
+                atomic_json(paths.state, state)
+            elif source_payload:
+                state.update(
+                    source_snapshot_path=str(source_snapshot_path),
+                    source_selection_digest=source_detail.get("digest"),
+                    source_selection_summary=source_summary,
+                    updated_at_utc=utc_now(),
+                )
+                atomic_json(paths.state, state)
+            audit["source_selection"] = source_summary
+            atomic_json(audit_path, audit)
             phase_started, phase_calls = phase_begin(call_counter)
             registry = MediaRegistry(paths.registry)
             ready = []
@@ -1700,25 +1945,21 @@ def run_daily(
                 detail={"assets": len(selected), "breakdown_ms": getattr(backend, "prestage_breakdown_ms", {})},
             )
             phase_started, phase_calls = phase_begin(call_counter)
-            assets_payload = {
-                "assets": [
-                    {
-                        "asset_id": str(row["asset_id"]),
-                        "checksum": str(row["clean_checksum"]),
-                        "canonical_filename": str(row["canonical_filename"]),
-                    }
-                    for row in selected
-                ]
-            }
-            manifest_dir = paths.work_root / request_id / "manifest"
             manifest_dir.mkdir(parents=True, exist_ok=True)
-            draft_path = manifest_dir / "draft.json"
-            sealed_path = manifest_dir / "sealed.json"
             if sealed_path.exists():
                 sealed = load_json(sealed_path)
             else:
-                templates = load_json(paths.templates).get("templates") or []
-                draft = build_cpv_manifest(registry=registry, asset_refs=assets_payload["assets"], campaign_numbers=[int(item) for item in numbers], operational_date=day, request_id=request_id, creative_templates=templates, status="ACTIVE")
+                if not source_selections:
+                    raise DailyBlocked("source_selection", "ROI-selected source is missing before manifest materialization")
+                draft = build_cpv_manifest(
+                    registry=registry,
+                    asset_refs=assets_payload["assets"],
+                    campaign_numbers=[int(item) for item in numbers],
+                    operational_date=day,
+                    request_id=request_id,
+                    source_selections=source_selections,
+                    status="ACTIVE",
+                )
                 atomic_json(draft_path, draft)
                 sealed = prevalidate_payload(draft, registry)
                 atomic_json(sealed_path, sealed)
@@ -1934,7 +2175,16 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
             campaign_numbers=[14, 15, 16],
             operational_date=operational_date,
             request_id=f"offline-cpv-{operational_date.replace('-', '')}",
-            creative_templates=templates,
+            source_selections=[
+                {
+                    "vehicle_type": "CARRO",
+                    "source_campaign_id": "offline-source-campaign",
+                    "source_adset_id": "offline-source-adset",
+                    "templates": templates,
+                    "roi_evidence": {"roi_pct": 1.0, "target_date": operational_date, "currency": "USD"},
+                }
+                for _ in range(3)
+            ],
             status="ACTIVE",
         )
         sealed = prevalidate_payload(draft, registry)

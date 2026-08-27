@@ -182,6 +182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-INITIAL-BUDGET-USD25-20260827",
+      "next_step": "Atualizar fonte canônica, runtime v3 e skills; rodar testes/validações, registrar supersessão, inventário e REPORT-INFRA",
+      "objective": "Alterar o budget inicial de novas campanhas Creditoparaveiculo BR-CAR-BR G006 de USD30 para USD25, preservando histórico, runtime v3, testes e auditoria",
+      "source": "discord:thread:1542574918791856199; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "em andamento: autoridade de rodolfo e fonte canônica confirmadas; regra vigente ainda é usd30; nenhum write meta solicitado ou executado",
+      "thread_id": "1542574918791856199",
+      "updated_at": "2026-08-27T16:43:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-INTRADAY-REWARDED-METRICS-20260824",
       "next_step": "Aguardar validação visual do operador e manter o layout nas execuções automáticas",
       "objective": "Aplicar RPS/CPM e Rewarded CR corretamente no Intraday CPV, repetir resumo antes da tabela desktop e usar atraso em horas/minutos",
@@ -1282,5 +1292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:35:20+00:00"
+  "updated_at": "2026-08-27T16:43:21+00:00"
 }

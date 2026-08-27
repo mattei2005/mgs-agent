@@ -368,14 +368,21 @@ def run(*, dry_run: bool, execute: bool) -> dict[str, Any]:
                 }
                 for row in selected
             ]
-            templates = load_json(paths.templates).get("templates") or []
+            template_snapshot = load_json(BASE / "data/ares/meta-ads/engine-v3/templates/cpv-c08-source-templates.json")
+            templates = template_snapshot.get("templates") or []
             draft = build_cpv_manifest(
                 registry=registry,
                 asset_refs=assets_payload,
                 campaign_numbers=[20],
                 operational_date=now_sp.date().isoformat(),
                 request_id=REQUEST_ID,
-                creative_templates=templates,
+                source_selections=[{
+                    "vehicle_type": "CARRO",
+                    "source_campaign_id": str((template_snapshot.get("source_campaign") or {}).get("id") or ""),
+                    "source_adset_id": str((template_snapshot.get("source_adset") or {}).get("id") or ""),
+                    "templates": templates,
+                    "roi_evidence": {"legacy_canary_only": True},
+                }],
                 status="ACTIVE",
                 start_time=start_time.isoformat(),
             )
