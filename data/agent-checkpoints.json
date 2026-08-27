@@ -82,6 +82,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-C29-C31-RECOVERY-20260827",
+      "next_step": "Após cooldown, retomar o mesmo request; reconciliar C29/C30 por GET, escrever somente a camada ausente e executar C31 sem refazer o bundle concluído; finalizar Drive, inventário e first-delivery.",
+      "objective": "Concluir C29, C30 e C31 do request cpv-daily-20260827 e institucionalizar recuperação obrigatória sem bloqueio passivo",
+      "source": "discord:thread:1539826050765299872; state:data/ares/meta-ads/engine-v3/state/cpv-daily.json; checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/cpv-daily-20260827-1046241194533786.json",
+      "state": "em recuperação automática após code 17/2446079 no readback consolidado; c29/c30 têm campanhas, adsets e 6 anúncios persistidos; c31 ainda não executada; nenhum post será repetido sem get.",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-27T15:43:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-CAP500-C12-C13-20260822",
       "next_step": "Operação normal sob cap USD500; próxima criação diária calcula pool normal USD100 e exige preflight live.",
       "objective": "Promover o teto operacional diário da conta Creditoparaveiculo BR-CAR-BR G006 de USD300 para USD500 e ativar C12/C13 com readback Meta",
@@ -1262,5 +1272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T15:19:59+00:00"
+  "updated_at": "2026-08-27T15:43:46+00:00"
 }
