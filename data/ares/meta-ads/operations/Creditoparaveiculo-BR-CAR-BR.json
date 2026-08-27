@@ -392,6 +392,17 @@
     "activated_at_et": "2026-08-20T17:06:18-04:00",
     "status": "creation_hold_until_explicit_release",
     "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
+    "campaign_creation_taxonomy": {
+      "authorized_by": "Rodolfo Mattei",
+      "defined_at_et": "2026-08-27T13:00:00-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "from_zero_prestaged": "criar do zero com campanha, conjunto, creatives e anúncios novos",
+      "clone_prestaged": "clonar a melhor campanha elegível da mesma vertical e substituir os três creatives/posts por criativos novos do Drive",
+      "pure_clone": "duplicar a melhor campanha elegível inteira, equivalente ao botão Duplicar do Ads Manager, mantendo anúncios/Creative IDs/posts sem substituição",
+      "selection_rule": "o pedido natural escolhe exatamente um dos três modos; clonar com criativos novos e duplicar igual nunca são tratados como sinônimos",
+      "source_rule": "quando o pedido disser melhor campanha, recalcular o vencedor elegível dentro de CARRO ou MOTO no preflight; nenhum ID vira template fixo",
+      "social_proof_readback": "pure_clone exige comparar source creative IDs e effective_object_story_id com os objetos duplicados; igualdade preserva o mesmo post/social proof, sem alegar garantia de performance"
+    },
     "clone_source_policy": {
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-27T12:00:00-04:00",

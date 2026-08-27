@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.1.0",
+  "release_version": "3.1.1",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -26,7 +26,14 @@
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
   "supported_modes": ["clone_prestaged", "from_zero_prestaged"],
-  "media_policy": "prestage_before campaign manifest; clone_prestaged uses source ad copies with lineage; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID",
+  "explicit_request_modes": ["pure_clone", "clone_prestaged", "from_zero_prestaged"],
+  "mode_taxonomy": {
+    "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
+    "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
+    "pure_clone": "duplicar igual: equivalente operacional ao botão Duplicar do Ads Manager; deep copy da campanha vencedora sem substituir anúncios/creatives, preservando os mesmos posts/social proof quando o readback confirmar os mesmos effective_object_story_id"
+  },
+  "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
+  "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",
   "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
   "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
   "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",

@@ -1,0 +1,111 @@
+{
+  "status": "C31_FINAL_READBACK_VERIFIED",
+  "campaign_id": "120250952825350632",
+  "adset_id": "120250952825540632",
+  "ad_ids": [
+    "120250952830530632",
+    "120250952830630632",
+    "120250952830620632"
+  ],
+  "creative_ids": [
+    "1046760014614615",
+    "1683620913124636",
+    "1426143066280984"
+  ],
+  "checks": {
+    "request_mode_from_zero": true,
+    "campaign_id_new": true,
+    "campaign_name_exact": true,
+    "campaign_paused": true,
+    "campaign_budget_usd25": true,
+    "campaign_maxvol": true,
+    "campaign_start_exact": true,
+    "campaign_structure": true,
+    "old_c31_terminal": true,
+    "account_healthy": true,
+    "active_budget_unchanged_paused": true,
+    "asset_global_assignment_exact": true,
+    "adset_name_exact": true,
+    "adset_under_campaign": true,
+    "adset_active_under_paused": true,
+    "adset_start_exact": true,
+    "adset_event_pixel": true,
+    "adset_maxvol_no_bid": true,
+    "adset_attribution_exact": true,
+    "adset_regional_identity_exact": true,
+    "adset_issues_clear": true,
+    "all_ads_exact": true
+  },
+  "ads": [
+    {
+      "ad_id": "120250952830530632",
+      "ad_name": "AD 02 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006",
+      "creative_id": "1046760014614615",
+      "checks": {
+        "spec_found": true,
+        "direct_create_no_source_lineage": true,
+        "adset_binding": true,
+        "configured_active": true,
+        "creative_binding": true,
+        "copy_bodies": true,
+        "copy_titles": true,
+        "copy_description": true,
+        "copy_cta": true,
+        "url_exact": true,
+        "video_lineage_ready": true,
+        "identity_exact": true,
+        "effective_story_present": true,
+        "standard_enhancements_absent": true,
+        "issues_clear": true
+      }
+    },
+    {
+      "ad_id": "120250952830630632",
+      "ad_name": "AD 03 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007",
+      "creative_id": "1683620913124636",
+      "checks": {
+        "spec_found": true,
+        "direct_create_no_source_lineage": true,
+        "adset_binding": true,
+        "configured_active": true,
+        "creative_binding": true,
+        "copy_bodies": true,
+        "copy_titles": true,
+        "copy_description": true,
+        "copy_cta": true,
+        "url_exact": true,
+        "video_lineage_ready": true,
+        "identity_exact": true,
+        "effective_story_present": true,
+        "standard_enhancements_absent": true,
+        "issues_clear": true
+      }
+    },
+    {
+      "ad_id": "120250952830620632",
+      "ad_name": "AD 01 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005",
+      "creative_id": "1426143066280984",
+      "checks": {
+        "spec_found": true,
+        "direct_create_no_source_lineage": true,
+        "adset_binding": true,
+        "configured_active": true,
+        "creative_binding": true,
+        "copy_bodies": true,
+        "copy_titles": true,
+        "copy_description": true,
+        "copy_cta": true,
+        "url_exact": true,
+        "video_lineage_ready": true,
+        "identity_exact": true,
+        "effective_story_present": true,
+        "standard_enhancements_absent": true,
+        "issues_clear": true
+      }
+    }
+  ],
+  "active_budget_usd_after": 372.34,
+  "projected_if_activated_usd": 397.34,
+  "effective_envelope_usd": 500.0,
+  "remaining_within_envelope_usd": 102.66
+}

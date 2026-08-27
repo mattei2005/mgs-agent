@@ -111,7 +111,17 @@ class GraphBatchTransport:
         failures = [result for result in results if result.code < 200 or result.code >= 300]
         if failures:
             safe = [{"name": row.name, "code": row.code, "error": row.body.get("error")} for row in failures]
-            raise BatchTransportError(stage, {"children": safe, "outer_headers": outer_headers})
+            successful = []
+            for row in results:
+                if row.code < 200 or row.code >= 300:
+                    continue
+                ids = {
+                    key: row.body.get(key)
+                    for key in ("id", "copied_campaign_id", "copied_adset_id", "copied_ad_id", "ad_object_ids")
+                    if row.body.get(key) is not None
+                }
+                successful.append({"name": row.name, "code": row.code, "ids": ids})
+            raise BatchTransportError(stage, {"children": safe, "successful_children": successful, "outer_headers": outer_headers})
         return results
 
 

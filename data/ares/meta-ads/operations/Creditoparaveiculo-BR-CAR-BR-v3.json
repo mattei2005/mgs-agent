@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.1.0",
+  "release_version": "3.1.1",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -21,9 +21,21 @@
     "persistence": "persist source campaign/adset/ad IDs, ROI, investment, revenue, date, currency, formula and source snapshot digest before manifest sealing",
     "historical_scope": "does not rewrite or recreate completed C28-C30, whose audited source remains C08"
   },
+  "campaign_creation_taxonomy": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1539826050765299872",
+    "defined_at_et": "2026-08-27T13:00:00-04:00",
+    "from_zero_prestaged": "criação do zero: campanha, conjunto, creatives e anúncios novos; usa criativos novos",
+    "clone_prestaged": "clone com criativos novos: a estrutura vem da melhor fonte elegível da mesma vertical, mas os três creatives/posts são substituídos por assets novos do Drive",
+    "pure_clone": "duplicação igual: a campanha vencedora é copiada inteira por deep copy, sem substituir os anúncios/Creative IDs/posts; social proof é preservado somente quando o readback confirma os mesmos effective_object_story_id",
+    "selection_rule": "the natural-language request selects exactly one mode; never infer pure_clone from the word clone when the request also asks for new Drive creatives, and never replace source creatives when Rodolfo asks to duplicate the campaign identically",
+    "performance_rule": "when the request says best campaign, recompute the eligible winner at manifest preflight inside CARRO or MOTO; no campaign ID becomes a permanent template",
+    "learning_caveat": "pure_clone preserves creative/post identity and social proof but creates new campaign/adset delivery objects; similar performance is empirical, not guaranteed by Meta"
+  },
   "page_id": "621037101089579",
   "mode": "clone_prestaged",
   "supported_modes": ["clone_prestaged", "from_zero_prestaged"],
+  "explicit_request_modes": ["pure_clone", "clone_prestaged", "from_zero_prestaged"],
   "from_zero_policy": "explicit campaign_create and adset_create payloads; no source campaign, adset or ad IDs; campaign, adset, creatives and ads are new objects; reference readback may supply compliant field values but is never copied",
   "bundle_size": 2,
   "ads_per_campaign": 3,
