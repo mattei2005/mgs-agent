@@ -19,7 +19,8 @@
   "readback_recovery_points_per_campaign": 3,
   "points_per_mode": {
     "pure_clone": 30,
-    "clone_prestaged": 30
+    "clone_prestaged": 30,
+    "from_zero_prestaged": 30
   },
   "quota_scope": "app_key_plus_ad_account_id",
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",

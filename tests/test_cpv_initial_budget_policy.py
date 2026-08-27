@@ -17,11 +17,13 @@ from ares_campaign_v3.media_registry import MediaRegistry
 
 
 OPERATION_PATH = ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json"
+ACCOUNT_PATH = ROOT / "data/ares/meta-ads/accounts/1046241194533786.json"
 
 
 class CpvInitialBudgetPolicyTest(unittest.TestCase):
     def setUp(self) -> None:
         self.operation = json.loads(OPERATION_PATH.read_text(encoding="utf-8"))
+        self.account = json.loads(ACCOUNT_PATH.read_text(encoding="utf-8"))["accounts"][0]
 
     def test_canonical_policy_uses_usd25_only_for_new_campaigns(self) -> None:
         policy = self.operation["daily_budget_policy"]
@@ -29,6 +31,8 @@ class CpvInitialBudgetPolicyTest(unittest.TestCase):
         self.assertEqual(policy["new_campaign_initial_budget_usd"], 25.0)
         self.assertEqual(routine["default_campaign_initial_budget_usd"], 25)
         self.assertEqual(routine["default_campaign_count_when_not_otherwise_specified"], 4)
+        self.assertEqual(self.account["daily_creation_authorized"]["budget_usd_each"], 25)
+        self.assertEqual(self.account["daily_budget_policy"]["new_campaign_initial_budget_usd"], 25.0)
         self.assertIn("new campaigns only", policy["new_campaign_initial_budget_rule"]["scope"])
 
     def test_normal_usd100_pool_plans_four_new_campaigns_at_usd25(self) -> None:

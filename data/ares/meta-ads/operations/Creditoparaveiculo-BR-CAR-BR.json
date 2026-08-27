@@ -392,6 +392,33 @@
     "activated_at_et": "2026-08-20T17:06:18-04:00",
     "status": "creation_hold_until_explicit_release",
     "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
+    "clone_source_policy": {
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T12:00:00-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "rule": "always clone from the eligible campaign with the highest Smart Bidding ROI within the same vehicle type",
+      "roi_window": "operational date, live up to manifest preflight",
+      "roi_source": "Smart Bidding Reports > Adgroup; USD; Discount revenue share enabled",
+      "roi_formula": "(SUM(NET_REVENUE)-SUM(INVESTIMENT))*100/SUM(INVESTIMENT)",
+      "vehicle_resolution": "explicit request vehicle_type or campaign_name_tag when present; otherwise require each 1x1x3 asset group to resolve unanimously from canonical filenames",
+      "vehicle_partition": {
+        "MOTO": "source campaign name must contain the whole token MOTO",
+        "CARRO": "source campaign name must not contain the whole token MOTO"
+      },
+      "candidate_gates": [
+        "same ad account",
+        "non-terminal campaign",
+        "MAXVOL / LOWEST_COST_WITHOUT_CAP",
+        "Smart Bidding investment greater than zero",
+        "one non-terminal OFFSITE_CONVERSIONS adset",
+        "one unambiguous AD01/AD02/AD03 source set"
+      ],
+      "tie_breaker": "higher ROI, then higher investment, then stable campaign ID",
+      "fallback": "fail closed before asset reservation or Meta write when no eligible same-vehicle source exists; never cross CARRO and MOTO and never default to C08",
+      "manifest_evidence": "persist source campaign/adset/ad IDs, ROI, investment, revenue, date, currency, formula and immutable source snapshot digest before manifest sealing",
+      "c08_rule": "C08 is selected only when it actually has the highest eligible ROI inside the correct vehicle partition",
+      "historical_scope": "completed C28-C30 remain audited as clones of C08 and are not reopened by this rule"
+    },
     "creation_hold": {
       "enabled": true,
       "last_one_time_release": {

@@ -167,7 +167,7 @@ Exemplo vigente com piso operacional interno de `USD 500` e budget inicial de `U
 - pool flexível sobre o piso: 30% = `USD 150` = até 6 campanhas;
 - se o total live mais a criação/escala/reativação autorizada ultrapassar USD500, o envelope efetivo sobe ao valor exato necessário e deixa de bloquear o plano somente por esse motivo.
 
-O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. Desde 27/08/2026, somente campanhas novas usam budget inicial de USD25; campanhas existentes e overrides históricos preservam o valor efetivamente autorizado/executado. A quantidade continua dinâmica pelo pool: com USD100 integralmente disponível, cabem até quatro campanhas de USD25. A quantidade final também depende de necessidade do ciclo, criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
+O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. Desde 27/08/2026, campanhas novas usam budget inicial de USD25. Campanha existente só muda de budget mediante pedido nominal explícito; sem esse pedido, seu valor efetivamente autorizado/executado é preservado. A quantidade continua dinâmica pelo pool: com USD100 integralmente disponível, cabem até quatro campanhas de USD25. A quantidade final também depende de necessidade do ciclo, criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
 
 Programar a campanha para começar às `00:30` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 

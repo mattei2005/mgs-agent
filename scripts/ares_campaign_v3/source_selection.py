@@ -6,6 +6,7 @@ from typing import Any
 
 TERMINAL_STATUSES = {"DELETED", "ARCHIVED"}
 MOTO_TOKEN = re.compile(r"(?:^|[^A-Z0-9])MOTO(?:$|[^A-Z0-9])", re.IGNORECASE)
+AD_SLOT_TOKEN = re.compile(r"(?:^|[^A-Z0-9])AD\s*0*([1-3])(?:$|[^A-Z0-9])", re.IGNORECASE)
 MAXVOL_TOKEN = re.compile(r"(?:^|[^A-Z0-9])MAXVOL(?:$|[^A-Z0-9])", re.IGNORECASE)
 
 
@@ -64,6 +65,38 @@ def expand_source_selections(payload: dict[str, Any]) -> list[dict[str, Any]]:
     if not result:
         raise SourceSelectionError("source snapshot has no campaign mappings")
     return result
+
+
+def select_canonical_source_ads(ads: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    eligible = [
+        row
+        for row in ads
+        if str(row.get("configured_status") or row.get("status") or "").upper() not in TERMINAL_STATUSES
+    ]
+    slots: dict[int, list[dict[str, Any]]] = defaultdict(list)
+    for row in eligible:
+        match = AD_SLOT_TOKEN.search(str(row.get("name") or ""))
+        if match:
+            slots[int(match.group(1))].append(row)
+    if set(slots) == {1, 2, 3} and all(len(slots[index]) == 1 for index in (1, 2, 3)):
+        selected = [slots[index][0] for index in (1, 2, 3)]
+    else:
+        active = [
+            row
+            for row in eligible
+            if str(row.get("configured_status") or row.get("status") or "").upper() == "ACTIVE"
+        ]
+        if len(active) == 3:
+            selected = sorted(active, key=lambda row: (str(row.get("name") or ""), str(row.get("id") or "")))
+        elif len(eligible) == 3:
+            selected = sorted(eligible, key=lambda row: (str(row.get("name") or ""), str(row.get("id") or "")))
+        else:
+            raise SourceSelectionError(
+                "ROI-winning source does not expose one unambiguous AD01/AD02/AD03 set"
+            )
+    selected_ids = {str(row.get("id") or "") for row in selected}
+    ignored = [row for row in eligible if str(row.get("id") or "") not in selected_ids]
+    return selected, ignored
 
 
 def aggregate_smart_bidding_roi(

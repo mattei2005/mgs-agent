@@ -563,12 +563,12 @@ class CampaignEngine:
             }
             timing, started = self._timed_start()
             record["timings"]["recovery_consolidated_readback"] = timing
-            readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
+            readbacks = self._batch(bundle, transport, self._readback_ops(readback_campaign_ids), "recovery_consolidated_readback")
             self._timed_finish(timing, started)
             record["readback_children"] = len(readbacks)
             record["recovery"]["finished_at"] = _utc()
             record["stage"] = "readback_complete_recovered"
-            return campaign_ids
+            return readback_campaign_ids
 
         record["recovery"] = {
             "mode": "readback_then_missing_only_from_zero",
@@ -822,14 +822,20 @@ class CampaignEngine:
                 lane_result.setdefault("bundles", []).append(record)
             _atomic_json(checkpoint_path, lane_result)
             try:
+                mode = bundle.campaigns[0].mode
                 if previous_failed is not None:
-                    if bundle.campaigns[0].mode != "clone_prestaged":
-                        raise ExecutionFailed("automatic recovery currently requires clone_prestaged mode")
-                    ids = self._recover_prestaged_bundle(bundle, transport, record)
-                elif bundle.campaigns[0].mode == "pure_clone":
+                    if mode == "clone_prestaged":
+                        ids = self._recover_prestaged_bundle(bundle, transport, record)
+                    elif mode == "from_zero_prestaged":
+                        ids = self._recover_from_zero_bundle(bundle, transport, record)
+                    else:
+                        raise ExecutionFailed("automatic recovery requires a prestaged execution mode")
+                elif mode == "pure_clone":
                     ids = self._run_pure_bundle(bundle, transport, record)
-                else:
+                elif mode == "clone_prestaged":
                     ids = self._run_prestaged_bundle(bundle, transport, record)
+                else:
+                    ids = self._run_from_zero_bundle(bundle, transport, record)
                 record["campaign_ids"] = ids
                 record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
                 record["status"] = "COMPLETE"

@@ -162,7 +162,9 @@ def sanitized(rows: dict[int, dict[str, Any]]) -> list[dict[str, Any]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--execute", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--execute", action="store_true")
+    mode.add_argument("--verify", action="store_true")
     args = parser.parse_args()
 
     operation = load_json(OPERATION_PATH)
@@ -243,6 +245,18 @@ def main() -> int:
         "status": "DRY_RUN_OK" if not args.execute else "PREFLIGHT_COMPLETE",
         "side_effects": {"campaign_budget_writes": False, "campaign_status_writes": False, "billing_writes": False},
     }
+    if args.verify:
+        off_target = [row for row in sanitized(preflight) if row["daily_budget_minor"] != TARGET_MINOR]
+        print(json.dumps({
+            "status": "VERIFY_OK" if not off_target else "VERIFY_MISMATCH",
+            "request_id": REQUEST_ID,
+            "campaigns": sanitized(preflight),
+            "active_account_budget_minor": active_before,
+            "active_account_budget_usd": active_before / 100,
+            "off_target": off_target,
+            "side_effects": False,
+        }, ensure_ascii=False, indent=2))
+        return 0 if not off_target else 3
     atomic_json(AUDIT_PATH, audit)
 
     if not args.execute:

@@ -46,10 +46,15 @@ def build_cpv_manifest(
     operational_date: str,
     request_id: str,
     source_selections: list[dict[str, Any]] | None = None,
+    mode: str = "clone_prestaged",
+    from_zero_specs: list[dict[str, Any]] | None = None,
     status: str = "PAUSED",
     start_time: str | None = None,
     daily_budget_minor: int = 2500,
 ) -> dict[str, Any]:
+    mode = str(mode).strip()
+    if mode not in {"clone_prestaged", "from_zero_prestaged"}:
+        raise ValueError("CPV v3 mode must be clone_prestaged or from_zero_prestaged")
     status = str(status).upper()
     if status not in {"PAUSED", "ACTIVE"}:
         raise ValueError("CPV v3 status must be PAUSED or ACTIVE")
@@ -71,6 +76,8 @@ def build_cpv_manifest(
         start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
     if source_selections is None or len(source_selections) != len(campaign_numbers):
         raise ValueError("CPV v3 requires one ROI-selected source per campaign")
+    if mode == "from_zero_prestaged" and (from_zero_specs is None or len(from_zero_specs) != len(campaign_numbers)):
+        raise ValueError("CPV v3 from-zero mode requires one explicit create spec per campaign")
     asset_vehicle_types = asset_group_vehicle_types(asset_refs, len(campaign_numbers))
     campaigns = []
     selection_audit = []
@@ -81,7 +88,7 @@ def build_cpv_manifest(
         vehicle_type = canonical_vehicle_type(source.get("vehicle_type"))
         if vehicle_type != asset_vehicle_types[campaign_index]:
             raise ValueError(f"CPV v3 source vehicle type mismatch for campaign {number:02d}")
-        if not source_campaign_id or not source_adset_id:
+        if mode == "clone_prestaged" and (not source_campaign_id or not source_adset_id):
             raise ValueError(f"CPV v3 ROI source IDs are required for campaign {number:02d}")
         templates = source.get("templates") or []
         if len(templates) != 3:
@@ -93,7 +100,7 @@ def build_cpv_manifest(
             ready = registry.require_ready(CPV_ACCOUNT_ID, ref["asset_id"], ref["checksum"])
             source_template = templates[ad_index]
             source_ad_id = str(source_template.get("source_ad_id") or "") if isinstance(source_template, dict) else ""
-            if not source_ad_id or source_ad_id == "0":
+            if mode == "clone_prestaged" and (not source_ad_id or source_ad_id == "0"):
                 raise ValueError(f"CPV v3 template AD {ad_index + 1:02d} requires nonzero source_ad_id")
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
             template = _replace_cpv_utm(copy.deepcopy(payload_template if isinstance(payload_template, dict) else source_template), number)
@@ -111,26 +118,37 @@ def build_cpv_manifest(
             template["asset_feed_spec"] = asset_feed
             template.setdefault("object_story_spec", {"page_id": CPV_PAGE_ID})
             template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {canonical_stem}"
-            ads.append({
+            ad_row = {
                 "name": f"AD {ad_index + 1:02d} - {canonical_stem}",
-                "source_ad_id": source_ad_id,
                 "media": ready,
                 "creative_payload": template,
-            })
-        campaigns.append({
+            }
+            if mode == "clone_prestaged":
+                ad_row["source_ad_id"] = source_ad_id
+            ads.append(ad_row)
+        campaign_row = {
             "idempotency_key": f"{request_id}-c{number:02d}",
             "app_key": CPV_APP_KEY,
             "account_id": CPV_ACCOUNT_ID,
-            "mode": "clone_prestaged",
-            "source_campaign_id": source_campaign_id,
-            "source_adset_id": source_adset_id,
+            "mode": mode,
             "name": f"{number:02d} - {start:%d-%m} - Garagem Brasil{' - MOTO' if vehicle_type == 'MOTO' else ''} - (b01fb13c{number:02d}) event_Subscribe - MAXVOL",
             "adset_name": f"01 - AdGroup - (b01fb13c{number:02d}g01) event_Subscribe - MAXVOL",
             "start_time": start.isoformat(),
             "status": status,
             "campaign_updates": {"daily_budget": str(daily_budget_minor), "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
             "ads": ads,
-        })
+        }
+        if mode == "clone_prestaged":
+            campaign_row.update(source_campaign_id=source_campaign_id, source_adset_id=source_adset_id)
+        else:
+            create_spec = copy.deepcopy((from_zero_specs or [])[campaign_index])
+            campaign_create = create_spec.get("campaign_create") or {}
+            adset_create = create_spec.get("adset_create") or {}
+            campaign_create.update(daily_budget=str(daily_budget_minor), bid_strategy="LOWEST_COST_WITHOUT_CAP")
+            campaign_row["campaign_create"] = campaign_create
+            campaign_row["adset_create"] = adset_create
+            campaign_row["campaign_updates"] = {}
+        campaigns.append(campaign_row)
         evidence = dict(source.get("roi_evidence") or {})
         selection_audit.append({
             "campaign_number": number,
@@ -146,7 +164,8 @@ def build_cpv_manifest(
         "graph_version": "v26.0",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "prevalidated": False,
-        "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+        "execution_mode": mode,
+        "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight_reference_only" if mode == "from_zero_prestaged" else "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
         "source_selections": selection_audit,
         "campaigns": campaigns,
     }

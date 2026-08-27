@@ -15,6 +15,7 @@ from ares_campaign_v3.source_selection import (
     asset_group_vehicle_types,
     authorized_request_vehicle_type,
     expand_source_selections,
+    select_canonical_source_ads,
     select_best_roi_campaign,
 )
 
@@ -104,6 +105,29 @@ def test_asset_groups_cannot_mix_car_and_moto():
     ]
     with pytest.raises(SourceSelectionError, match="mixes CARRO and MOTO"):
         asset_group_vehicle_types(assets, 1)
+
+
+def test_source_campaign_with_extra_ad_keeps_unique_canonical_ad01_to_ad03():
+    rows = [
+        {"id": "one", "name": "AD 01 - asset-one", "configured_status": "ACTIVE"},
+        {"id": "two", "name": "AD 02 - asset-two", "configured_status": "ACTIVE"},
+        {"id": "three", "name": "AD 03 - asset-three", "configured_status": "ACTIVE"},
+        {"id": "four", "name": "AD 04 - legacy-extra", "configured_status": "PAUSED"},
+    ]
+    selected, ignored = select_canonical_source_ads(rows)
+    assert [row["id"] for row in selected] == ["one", "two", "three"]
+    assert [row["id"] for row in ignored] == ["four"]
+
+
+def test_source_campaign_with_ambiguous_duplicate_slot_fails_closed():
+    rows = [
+        {"id": "one-a", "name": "AD 01 - a", "configured_status": "ACTIVE"},
+        {"id": "one-b", "name": "AD 01 - b", "configured_status": "ACTIVE"},
+        {"id": "two", "name": "AD 02 - c", "configured_status": "ACTIVE"},
+        {"id": "three", "name": "AD 03 - d", "configured_status": "ACTIVE"},
+    ]
+    with pytest.raises(SourceSelectionError, match="unambiguous"):
+        select_canonical_source_ads(rows)
 
 
 def test_request_vehicle_gate_and_snapshot_expansion_are_deterministic():

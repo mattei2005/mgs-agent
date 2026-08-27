@@ -35,6 +35,7 @@ from .source_selection import (
     authorized_request_vehicle_type,
     canonical_vehicle_type,
     expand_source_selections,
+    select_canonical_source_ads,
     select_best_roi_campaign,
     vehicle_type_from_text,
 )
@@ -1206,7 +1207,7 @@ class LiveDailyBackend:
         if str(source_adset.get("optimization_goal") or "").upper() != "OFFSITE_CONVERSIONS":
             raise DailyBlocked("source_selection", "ROI-winning source adset optimization is invalid", {"campaign_id": campaign_id})
         source_adset_id = str(source_adset.get("id") or "")
-        ads = self._graph_pages(
+        ads_all = self._graph_pages(
             f"{source_adset_id}/ads",
             {
                 "fields": (
@@ -1216,16 +1217,17 @@ class LiveDailyBackend:
                 "limit": 50,
             },
         )
-        ads = [row for row in ads if str(row.get("configured_status") or row.get("status") or "").upper() not in {"DELETED", "ARCHIVED"}]
-        if len(ads) != 3:
-            raise DailyBlocked("source_selection", "ROI-winning source must have exactly three non-terminal ads", {"campaign_id": campaign_id, "ad_count": len(ads)})
-
-        def ad_order(row: dict[str, Any]) -> tuple[int, str]:
-            match = re.search(r"\bAD\s*0*(\d+)\b", str(row.get("name") or ""), re.IGNORECASE)
-            return (int(match.group(1)) if match else 999, str(row.get("id") or ""))
+        try:
+            ads, ignored_ads = select_canonical_source_ads(ads_all)
+        except SourceSelectionError as exc:
+            raise DailyBlocked(
+                "source_selection",
+                str(exc),
+                {"campaign_id": campaign_id, "ad_count": len(ads_all)},
+            ) from exc
 
         templates: list[dict[str, Any]] = []
-        for ad in sorted(ads, key=ad_order):
+        for ad in ads:
             creative = ad.get("creative") or {}
             if not isinstance(creative, dict):
                 raise DailyBlocked("source_selection", "ROI-winning source creative readback is invalid", {"ad_id": ad.get("id")})
@@ -1251,6 +1253,14 @@ class LiveDailyBackend:
             "source_campaign": campaign,
             "source_adset": source_adset,
             "templates": templates,
+            "ignored_source_ads": [
+                {
+                    "id": str(row.get("id") or ""),
+                    "name": str(row.get("name") or ""),
+                    "configured_status": str(row.get("configured_status") or row.get("status") or ""),
+                }
+                for row in ignored_ads
+            ],
             "roi_evidence": {
                 key: winner.get(key)
                 for key in (

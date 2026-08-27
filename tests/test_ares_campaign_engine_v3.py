@@ -184,7 +184,7 @@ def config(tmp_path: Path, **overrides) -> dict:
         'soft_score': 100,
         'hard_score': 120,
         'score_window_seconds': 300,
-        'points_per_mode': {'pure_clone': 20, 'clone_prestaged': 45},
+        'points_per_mode': {'pure_clone': 20, 'clone_prestaged': 45, 'from_zero_prestaged': 30},
         'state_root': str(tmp_path / 'state'),
         'audit_root': str(tmp_path / 'audit'),
     }
@@ -921,7 +921,7 @@ def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path)
     assert audit['status'] == 'FAILED'
     assert audit['manual_reconciliation_required'] is False
     assert audit['automatic_recovery_required'] is True
-    with pytest.raises(ExecutionFailed, match='automatic recovery currently requires clone_prestaged'):
+    with pytest.raises(ExecutionFailed, match='automatic recovery requires a prestaged execution mode'):
         CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
 
 

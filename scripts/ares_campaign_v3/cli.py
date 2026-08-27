@@ -96,6 +96,8 @@ def parser() -> argparse.ArgumentParser:
     cpv.add_argument("--registry", default=str(DEFAULT_MEDIA))
     cpv.add_argument("--assets-json", required=True)
     cpv.add_argument("--source-snapshot-json", required=True)
+    cpv.add_argument("--mode", choices=["clone_prestaged", "from_zero_prestaged"], default="clone_prestaged")
+    cpv.add_argument("--from-zero-specs-json")
     cpv.add_argument("--campaign-numbers", required=True)
     cpv.add_argument("--operational-date", required=True)
     cpv.add_argument("--request-id", required=True)
@@ -154,11 +156,16 @@ def _main(argv: list[str] | None = None) -> int:
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []
         source_selections = expand_source_selections(load_json(args.source_snapshot_json))
+        from_zero_specs = None
+        if args.from_zero_specs_json:
+            from_zero_specs = load_json(args.from_zero_specs_json).get("from_zero_specs") or []
+        if args.mode == "from_zero_prestaged" and from_zero_specs is None:
+            raise SystemExit("from-zero build-cpv requires --from-zero-specs-json")
         numbers = [int(item.strip()) for item in args.campaign_numbers.split(",") if item.strip()]
         payload = build_cpv_manifest(
             registry=MediaRegistry(args.registry), asset_refs=assets, campaign_numbers=numbers,
             operational_date=args.operational_date, request_id=args.request_id, source_selections=source_selections,
-            status=args.status,
+            mode=args.mode, from_zero_specs=from_zero_specs, status=args.status,
         )
         Manifest.from_dict(payload)
         output = Path(args.output)

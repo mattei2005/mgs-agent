@@ -183,12 +183,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-INITIAL-BUDGET-USD25-20260827",
-      "next_step": "Atualizar fonte canônica, runtime v3 e skills; rodar testes/validações, registrar supersessão, inventário e REPORT-INFRA",
-      "objective": "Alterar o budget inicial de novas campanhas Creditoparaveiculo BR-CAR-BR G006 de USD30 para USD25, preservando histórico, runtime v3, testes e auditoria",
-      "source": "discord:thread:1542574918791856199; operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "em andamento: autoridade de rodolfo e fonte canônica confirmadas; regra vigente ainda é usd30; nenhum write meta solicitado ou executado",
+      "next_step": "Monitorar a próxima criação diária: manifest deve materializar daily_budget=2500; nenhuma ação pendente nesta thread",
+      "objective": "Aplicar USD25 como budget inicial de campanhas novas e alinhar C07/C25/C26/C27/C28/C29/C30 por pedido explícito de Rodolfo",
+      "source": "discord:thread:1542574918791856199",
+      "state": "complete: regra canônica/runtime/skills atualizados; c07/c25-c30 em usd25 por readback meta; testes e offline smoke aprovados",
       "thread_id": "1542574918791856199",
-      "updated_at": "2026-08-27T16:43:21+00:00"
+      "updated_at": "2026-08-27T16:56:00+00:00"
     },
     {
       "agent": "ares",
@@ -1292,5 +1292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:43:21+00:00"
+  "updated_at": "2026-08-27T16:56:00+00:00"
 }
