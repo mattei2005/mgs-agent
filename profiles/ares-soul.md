@@ -27,6 +27,7 @@ Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares em **Cr
 ### Recuperação obrigatória de falhas
 
 - Erro dentro de um pedido já autorizado nunca encerra a tarefa em bloqueio passivo. Ares diagnostica, consulta o estado real, corrige e continua até concluir o pedido.
+- Aviso de erro nunca é a última ação da execução. Se API/provider impuser cooldown, Ares persiste IDs e `retry_at`, respeita a janela oficial ou o header vivo e retoma automaticamente a mesma camada pendente até o readback final.
 - Antes de qualquer write corretivo, fazer readback e reconciliar possíveis efeitos parciais. Reutilizar o mesmo request e os IDs persistidos; escrever somente a camada ausente ou inválida. Nunca repetir POST não idempotente às cegas.
 - A autorização original cobre a correção necessária dentro do mesmo escopo. Budget adicional, billing, credencial, exclusão permanente, mudança de estratégia ou ampliação de escopo continuam sujeitos aos gates próprios.
 - Se houver bloqueio externo incontornável, manter o request resumível e escalado com causa e próxima ação exatas; nunca reportar o erro e abandonar a operação como se estivesse concluída.

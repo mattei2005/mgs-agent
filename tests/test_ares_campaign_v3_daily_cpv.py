@@ -719,7 +719,8 @@ def test_offline_smoke_exercises_two_plus_one_resume_without_network():
     assert result["status"] == "OFFLINE_SMOKE_OK"
     assert result["planner"] == [2, 1]
     assert result["first_status"] == "PARTIAL_DEFERRED_QUOTA"
-    assert result["first_campaigns"] == 2
+    assert result["first_campaigns"] == 0
+    assert result["first_stage"] == "two_campaign_writes_persisted_readback_deferred"
     assert result["final_status"] == "COMPLETE_FUTURE_ACTIVE"
     assert result["final_campaigns"] == 3
     assert result["unique_campaign_ids"] == 3

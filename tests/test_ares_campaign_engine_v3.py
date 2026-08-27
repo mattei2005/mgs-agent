@@ -896,6 +896,92 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
     assert checkpoint['bundles'][0]['recovery']['missing_ads_created'] == 1
 
 
+def test_development_bundle_defers_readback_then_resumes_without_any_write_replay(tmp_path):
+    cfg = config(
+        tmp_path,
+        enabled=True,
+        write_enabled=True,
+        soft_score=60,
+        hard_score=60,
+        points_per_mode={'pure_clone': 30, 'clone_prestaged': 30},
+        development_access_readback_cooldown_seconds=305,
+        quota_retry_safety_seconds=5,
+        readback_recovery_points_per_campaign=3,
+    )
+    transport = FakeBatchTransport('100')
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    request = manifest([prestaged_campaign(1), prestaged_campaign(2)], request_id='cooldown-resume')
+
+    first = engine.execute(request)
+    assert first['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert first['campaign_ids'] == []
+    assert first['retry_after_seconds'] == 305
+    stages_before = [row['stage'] for row in transport.calls]
+    assert stages_before == [
+        'campaign_copy',
+        'adset_copy',
+        'campaign_adset_update',
+        'ad_copy_with_creative',
+        'ad_name_update',
+    ]
+    checkpoint_path = next((Path(cfg['state_root']) / 'checkpoints').glob('*.json'))
+    checkpoint = json.loads(checkpoint_path.read_text())
+    assert checkpoint['bundles'][0]['status'] == 'READBACK_DEFERRED'
+    assert checkpoint['bundles'][0]['stage'] == 'children_created_readback_pending'
+    assert checkpoint['deferred']['write_replay_blocked'] is True
+
+    lane_path = next(Path(cfg['state_root']).glob('lane-*.json'))
+    lane_state = json.loads(lane_path.read_text())
+    for event in lane_state['events']:
+        event['at'] = 0
+    lane_path.write_text(json.dumps(lane_state))
+
+    second = engine.execute(request)
+    assert second['status'] == 'COMPLETE_PAUSED'
+    assert len(second['campaign_ids']) == 2
+    assert [row['stage'] for row in transport.calls[len(stages_before):]] == ['recovery_consolidated_readback']
+    checkpoint = json.loads(checkpoint_path.read_text())
+    recovery = checkpoint['bundles'][0]['recovery']
+    assert recovery['mode'] == 'consolidated_readback_only'
+    assert recovery['mutation_calls'] == 0
+    assert recovery['missing_ads_created'] == 0
+
+
+def test_readback_cooldown_honors_live_meta_reset_header_with_safety_margin(tmp_path):
+    cfg = config(
+        tmp_path,
+        enabled=True,
+        write_enabled=True,
+        soft_score=60,
+        hard_score=60,
+        points_per_mode={'pure_clone': 30, 'clone_prestaged': 30},
+        development_access_readback_cooldown_seconds=305,
+        quota_retry_safety_seconds=5,
+    )
+    engine = CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account))
+    engine.quota.observe_headers(
+        ('mgs-main-app', '100'),
+        {'x-ad-account-usage': json.dumps({
+            'acc_id_util_pct': 100,
+            'reset_time_duration': 420,
+            'ads_api_access_tier': 'development_access',
+        })},
+    )
+    result = engine.execute(manifest([prestaged_campaign(1), prestaged_campaign(2)], request_id='header-reset'))
+    assert result['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert result['retry_after_seconds'] == 425
+
+
+def test_production_config_matches_official_development_access_score_window():
+    production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+    assert production['soft_score'] == 60
+    assert production['hard_score'] == 60
+    assert production['score_window_seconds'] == 300
+    assert production['development_access_readback_cooldown_seconds'] == 305
+    assert production['points_per_mode']['clone_prestaged'] == 30
+    assert production['readback_recovery_points_per_campaign'] == 3
+
+
 def test_forty_campaigns_three_accounts_produce_seven_global_waves():
     rows = [pure_campaign(i, str(100 + (i % 3))) for i in range(40)]
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(manifest(rows, request_id='forty'))

@@ -1948,8 +1948,8 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
         transport = FakeBatchTransport(ACCOUNT_ID)
         engine = CampaignEngine(config, transport_factory=lambda account: transport)
         first = engine.execute(manifest)
-        if first.get("status") != "PARTIAL_DEFERRED_QUOTA" or len(first.get("campaign_ids") or []) != 2:
-            raise RuntimeError("offline first wave did not produce guarded 2+deferred plan")
+        if first.get("status") != "PARTIAL_DEFERRED_QUOTA" or len(first.get("campaign_ids") or []) != 0:
+            raise RuntimeError("offline first wave did not defer the two-campaign readback after persisting writes")
         lane_files = list((root / "state").glob("lane-*.json"))
         if len(lane_files) != 1:
             raise RuntimeError("offline lane state missing")
@@ -1965,6 +1965,7 @@ def offline_smoke(campaign_count: int = 3) -> dict[str, Any]:
             "planner": [2, 1],
             "first_status": first["status"],
             "first_campaigns": len(first["campaign_ids"]),
+            "first_stage": "two_campaign_writes_persisted_readback_deferred",
             "final_status": second["status"],
             "final_campaigns": len(second["campaign_ids"]),
             "unique_campaign_ids": len(set(second["campaign_ids"])),

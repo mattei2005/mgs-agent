@@ -195,7 +195,7 @@ Antes de criar adset em campanha `FINANCIAL_PRODUCTS_SERVICES` para BR:
 14. Não repetir cópia/criação de anúncios até o assignment da Página estar corrigido. Depois, repetir somente a camada de anúncios do clone hierárquico e validar 1×1×3 PAUSED.
 15. Async batch mínimo permanece não validado e não contorna falta de permissão da página.
 
-Para leituras Meta, usar o próprio header de usage para decidir a janela. Em `code 17/613`, esperar `estimated_time_to_regain_access` informado pela Meta; sem estimativa, aplicar backoff exponencial limitado. Intervalo fixo de 10 segundos fica somente para HTTP `5xx`. Não repetir erro de parâmetro, compliance, permissão ou validação.
+Para leituras Meta, usar o próprio header de usage para decidir a janela. A documentação oficial vigente define, no limite por ad account, `development_access` com score máximo 60, decaimento 300 segundos e bloqueio 300 segundos; `standard_access` usa máximo 9000, decaimento 300 segundos e bloqueio 60 segundos. Em `code 17/2446079` ou `613/1487742`, esperar `reset_time_duration` ou `estimated_time_to_regain_access` (em minutos) quando informado; sem estimativa, usar 300 segundos mais 5 segundos de margem na conta `development_access`. Depois do cooldown, retomar somente o GET/readback pendente quando campaign/adset/ad IDs já estiverem persistidos; não repetir copies, normalizações ou qualquer POST já confirmado. Intervalo fixo de 10 segundos fica somente para HTTP `5xx`. Não repetir erro de parâmetro, compliance, permissão ou validação.
 
 Para chamadas Meta nesta operação:
 

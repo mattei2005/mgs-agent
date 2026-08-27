@@ -83,12 +83,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-C29-C31-RECOVERY-20260827",
-      "next_step": "Após cooldown, retomar o mesmo request; reconciliar C29/C30 por GET, escrever somente a camada ausente e executar C31 sem refazer o bundle concluído; finalizar Drive, inventário e first-delivery.",
-      "objective": "Concluir C29, C30 e C31 do request cpv-daily-20260827 e institucionalizar recuperação obrigatória sem bloqueio passivo",
-      "source": "discord:thread:1539826050765299872; state:data/ares/meta-ads/engine-v3/state/cpv-daily.json; checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/cpv-daily-20260827-1046241194533786.json",
-      "state": "em recuperação automática após code 17/2446079 no readback consolidado; c29/c30 têm campanhas, adsets e 6 anúncios persistidos; c31 ainda não executada; nenhum post será repetido sem get.",
+      "next_step": "Nenhuma ação pendente neste request; aplicar cooldown/header-aware v3.0.20 nos próximos bundles",
+      "objective": "Reconciliar e concluir C29 C30 C31 após rate limit Meta sem replay cego",
+      "source": "discord:thread:1539826050765299872",
+      "state": "completed",
       "thread_id": "1539826050765299872",
-      "updated_at": "2026-08-27T15:43:46+00:00"
+      "updated_at": "2026-08-27T16:10:22+00:00"
     },
     {
       "agent": "ares",
@@ -543,12 +543,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-c21-c31-20260827",
-      "next_step": "Às 17:00 SP o wrapper determinístico executa dry-run e Campaign Engine v3 para C29-C31, podendo selecionar retestes elegíveis segundo o mix 2 READY + 1 TESTED, retoma o mesmo request se necessário, valida Meta/Drive/inventário/watcher/budget e rearma o hold.",
-      "objective": "Encerrar C21-C23 com classificação criativa, manter C28 substituta e criar C29-C31 às 17:00 SP",
-      "source": "discord:thread:1542545166630396027",
-      "state": "c21, c22 e c23 confirmadas deleted por meta get. nove linhagens classificadas por share de spend: quatro subentregues movidas para 03_tested com retest_eligible=true e tentativa 1; cinco com entrega relevante movidas para 05_rejected. drive e inventário reconciliados pela service account mgs, sem uso meta não terminal conflitante. c28 substituta segue active com início 28/08 00:30. override c29-c31 continua programado para 17:00 sp com hold geral ativo até o tick.",
+      "next_step": "Acompanhar o início de C28-C31 em 28/08 às 00:30 SP pelo guardrail de primeiro gasto; nenhuma nova campanha fica autorizada por este checkpoint.",
+      "objective": "Encerrar C21-C23 com lifecycle criativo, preservar a C28 substituta e concluir C29-C31 para 28/08 com relatórios identificando campanhas de moto",
+      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c29-c31-20260827-complete.json",
+      "state": "complete: c21-c23 deleted com 4 criativos subentregues preservados e 5 rejeitados; c28 substituta active; c29-c31 criadas pelo engine v3 com ids 120250951366720632, 120250951366750632 e 120250951557410632, todas active, usd30 maxvol, 1x1x3, início 28/08/2026 00:30 sp e 9 criativos carro reconciliados em 02_testing. meta validou uma campanha não terminal por número, 3 adsets/9 ads, urls/utms e budget ativo usd428.34. guardrail de primeiro gasto armado nas 3. hold rearmado, override completed_validated, próximo número 32. diário e intraday agora exibem m no camp quando o nome canônico contém token moto; 69 testes e dry-runs reais pass.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T15:19:59+00:00"
+      "updated_at": "2026-08-27T16:09:12+00:00"
     },
     {
       "agent": "zeus",
@@ -1282,5 +1282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T15:49:07+00:00"
+  "updated_at": "2026-08-27T16:10:22+00:00"
 }
