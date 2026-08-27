@@ -739,7 +739,6 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
     paths = DailyPaths(
         config=tmp_path / "config.json",
         operation=tmp_path / "operation.json",
-        templates=tmp_path / "templates.json",
         registry=tmp_path / "registry.json",
         inventory=tmp_path / "inventory.jsonl",
         reconciliation=tmp_path / "reconciliation.json",
@@ -797,6 +796,28 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
             self.calls.append("refresh_reconciliation")
             return json.loads(paths.reconciliation.read_text())
 
+        def select_clone_sources(self, *, asset_refs, campaign_count, meta_campaigns, target_date, operation, request_id):
+            self.calls.append("select_clone_sources")
+            return {
+                "schema_version": 1,
+                "policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+                "selected_at_utc": "2026-08-21T20:00:00+00:00",
+                "target_date": target_date,
+                "currency": "USD",
+                "request_id": request_id,
+                "campaign_vehicle_types": ["CARRO"] * campaign_count,
+                "sources_by_vehicle": {
+                    "CARRO": {
+                        "vehicle_type": "CARRO",
+                        "source_campaign_id": "best-car-campaign",
+                        "source_adset_id": "best-car-adset",
+                        "source_campaign": {"name": "12 - MAXVOL"},
+                        "templates": [],
+                        "roi_evidence": {"roi_pct": 31.5, "target_date": target_date, "currency": "USD"},
+                    }
+                },
+            }
+
         def prepare_and_prestage(self, *args, **kwargs):
             raise AssertionError("plan-only must not prestage")
 
@@ -820,6 +841,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
     assert result["campaign_count"] == 3
     assert result["campaign_numbers"] == [14, 15, 16]
     assert result["planner_bundles"] == [2, 1]
+    assert result["source_selection"][0]["source_campaign_id"] == "best-car-campaign"
     assert result["selected_assets"] == [f"CAR_BR_BR_VID_TEST_PV_{index:03d}.mp4" for index in range(3, 12)]
     assert result["side_effects"] == {
         "inventory_reservation": False,
@@ -836,6 +858,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         "drive_preflight",
         "reconciliation",
         "asset_selection",
+        "source_selection",
         "prestage",
         "manifest_prevalidation",
         "engine",
@@ -847,6 +870,7 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
     assert observability["phases"]["drive_preflight"]["skipped"] is False
     assert observability["phases"]["reconciliation"]["skipped"] is False
     assert observability["phases"]["asset_selection"]["skipped"] is False
+    assert observability["phases"]["source_selection"]["skipped"] is False
     assert observability["phases"]["prestage"]["skipped"] is True
     assert observability["phases"]["engine"]["skipped"] is True
     assert observability["total"]["duration_ms"] >= 0

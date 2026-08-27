@@ -1959,6 +1959,7 @@ def run_daily(
                     request_id=request_id,
                     source_selections=source_selections,
                     status="ACTIVE",
+                    daily_budget_minor=int(budget["initial_minor"]),
                 )
                 atomic_json(draft_path, draft)
                 sealed = prevalidate_payload(draft, registry)
@@ -2084,7 +2085,7 @@ def run_daily(
                 labels = ", ".join(f"C{number:02d}" for number in numbers)
                 audit["discord_readback"] = post_discord(
                     f"✅ V3 CONCLUÍDO — CPV G006 — {operational_date:%d/%m}\n"
-                    f"{labels} · USD 30 cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\n"
+                    f"{labels} · USD {usd_minor_label(budget['initial_minor'])} cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\n"
                     f"Budget ativo: USD {usd_minor_label(budget_after['active_minor'])} · restante: USD {usd_minor_label(budget_after['remaining_minor'])} / cap USD {usd_minor_label(budget_after['cap_minor'])}\n"
                     f"Criativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}"
                 )

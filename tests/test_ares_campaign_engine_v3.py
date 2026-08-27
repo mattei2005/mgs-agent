@@ -67,6 +67,17 @@ def source_templates() -> list[dict]:
     ]
 
 
+def selected_sources(count: int, *, templates: list[dict] | None = None, vehicle_type: str = 'CARRO') -> list[dict]:
+    source = {
+        'vehicle_type': vehicle_type,
+        'source_campaign_id': f'source-{vehicle_type.lower()}-campaign',
+        'source_adset_id': f'source-{vehicle_type.lower()}-adset',
+        'templates': templates or source_templates(),
+        'roi_evidence': {'roi_pct': 42.0, 'target_date': '2099-08-21', 'currency': 'USD'},
+    }
+    return [source for _ in range(count)]
+
+
 def prestaged_campaign(i: int, account: str = '100') -> dict:
     return {
         'idempotency_key': f'pre-{account}-{i}',
@@ -93,6 +104,57 @@ def prestaged_campaign(i: int, account: str = '100') -> dict:
                             {'video_id': f'v-{i * 10 + j}'},
                             {'video_id': f's-{i * 10 + j}'},
                         ]
+                    },
+                },
+            }
+            for j in range(3)
+        ],
+    }
+
+
+def from_zero_campaign(i: int, account: str = '100') -> dict:
+    return {
+        'idempotency_key': f'zero-{account}-{i}',
+        'app_key': 'mgs-main-app',
+        'account_id': account,
+        'mode': 'from_zero_prestaged',
+        'name': f'Campaign {i}',
+        'adset_name': f'Adset {i}',
+        'start_time': future_iso(),
+        'status': 'PAUSED',
+        'campaign_create': {
+            'objective': 'OUTCOME_SALES',
+            'buying_type': 'AUCTION',
+            'daily_budget': '2500',
+            'bid_strategy': 'LOWEST_COST_WITHOUT_CAP',
+            'special_ad_categories': ['FINANCIAL_PRODUCTS_SERVICES'],
+            'special_ad_category_country': ['BR'],
+        },
+        'adset_create': {
+            'billing_event': 'IMPRESSIONS',
+            'optimization_goal': 'OFFSITE_CONVERSIONS',
+            'promoted_object': {'pixel_id': 'pixel-1', 'custom_event_type': 'SUBSCRIBE'},
+            'targeting': {'geo_locations': {'countries': ['BR']}},
+            'attribution_spec': [{'event_type': 'CLICK_THROUGH', 'window_days': 7}],
+            'regional_regulated_categories': ['BRAZIL_REGULATION'],
+            'regional_regulation_identities': {'universal_beneficiary': 'identity-1', 'universal_payer': 'identity-1'},
+            'is_dynamic_creative': True,
+        },
+        'ads': [
+            {
+                'name': f'Ad {i}.{j}',
+                'media': media(i * 10 + j),
+                'creative_payload': {
+                    'name': f'Creative {i}.{j}',
+                    'object_story_spec': {'page_id': 'page-1'},
+                    'asset_feed_spec': {
+                        'videos': [
+                            {'video_id': f'v-{i * 10 + j}'},
+                            {'video_id': f's-{i * 10 + j}'},
+                        ],
+                        'bodies': [{'text': 'Moto sem entrada'}],
+                        'titles': [{'text': 'R$249/MÊS'}],
+                        'call_to_action_types': ['LEARN_MORE'],
                     },
                 },
             }
@@ -159,6 +221,27 @@ def test_prestaged_manifest_requires_nonzero_source_ad_lineage():
         manifest([row])
 
 
+def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_ids():
+    row = from_zero_campaign(1)
+    built = manifest([row]).campaigns[0]
+    assert built.mode == 'from_zero_prestaged'
+    assert built.source_campaign_id is None
+    assert built.source_adset_id is None
+    assert all(ad.source_ad_id is None for ad in built.ads)
+    assert built.campaign_create['daily_budget'] == '2500'
+    assert built.adset_create['promoted_object']['custom_event_type'] == 'SUBSCRIBE'
+
+    missing = from_zero_campaign(2)
+    missing.pop('adset_create')
+    with pytest.raises(ManifestError, match='adset_create'):
+        manifest([missing])
+
+    clone_leak = from_zero_campaign(3)
+    clone_leak['source_campaign_id'] = 'must-not-clone'
+    with pytest.raises(ManifestError, match='forbids source_campaign_id'):
+        manifest([clone_leak])
+
+
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():
     row = prestaged_campaign(1)
     row['ads'][0]['creative_payload']['degrees_of_freedom_spec'] = {
@@ -210,6 +293,21 @@ def test_planner_caps_ad_copy_batch_at_ten_ads_and_preserves_lineage():
     assert all(op.relative_url.startswith('source-ad-') and op.relative_url.endswith('/copies') for op in ad_ops)
     assert all('creative_parameters' in op.body for op in ad_ops)
     assert all(not op.relative_url.startswith('act_') for op in ad_ops)
+
+
+def test_planner_from_zero_uses_direct_create_endpoints_and_never_copies():
+    m = manifest([from_zero_campaign(1), from_zero_campaign(2)], request_id='zero-plan')
+    bundle = Planner(bundle_size=2, max_ads_per_batch=10).build(m).lanes['100'][0]
+    assert [stage.name for stage in bundle.stages] == [
+        'campaign_create', 'adset_create', 'creative_create', 'ad_create',
+        'campaign_finalize', 'consolidated_readback',
+    ]
+    operations = [op for stage in bundle.stages for op in stage.operations]
+    assert not any('/copies' in op.relative_url for op in operations)
+    assert all(op.relative_url == 'act_100/campaigns' for op in bundle.stages[0].operations)
+    assert all(op.relative_url == 'act_100/adsets' for op in bundle.stages[1].operations)
+    assert all(op.relative_url == 'act_100/adcreatives' for op in bundle.stages[2].operations)
+    assert all(op.relative_url == 'act_100/ads' for op in bundle.stages[3].operations)
 
 
 def test_quota_store_accepts_two_prestaged_campaigns_and_blocks_third(tmp_path):
@@ -496,7 +594,7 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
         campaign_numbers=[14, 15],
         operational_date='2099-08-21',
         request_id='cpv-20260821',
-        creative_templates=templates,
+        source_selections=selected_sources(2, templates=templates),
         status='ACTIVE',
     )
     built = Manifest.from_dict(payload)
@@ -547,7 +645,7 @@ def test_cpv_adapter_accepts_explicit_future_start_for_authorized_canary(tmp_pat
         campaign_numbers=[20],
         operational_date='2099-08-23',
         request_id='cpv-c20-canary',
-        creative_templates=source_templates(),
+        source_selections=selected_sources(1),
         status='ACTIVE',
         start_time=explicit,
     )
@@ -572,7 +670,7 @@ def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
             campaign_numbers=[14],
             operational_date='2099-08-21',
             request_id='cpv-invalid-missing-name',
-            creative_templates=source_templates(),
+            source_selections=selected_sources(1),
         )
     assets[0]['canonical_filename'] = 'asset_technical_id.mp4'
     with pytest.raises(ValueError, match='canonical_filename is invalid'):
@@ -582,7 +680,7 @@ def test_cpv_adapter_fails_closed_without_valid_canonical_filename(tmp_path):
             campaign_numbers=[14],
             operational_date='2099-08-21',
             request_id='cpv-invalid-technical-name',
-            creative_templates=source_templates(),
+            source_selections=selected_sources(1),
         )
 
 
@@ -600,7 +698,7 @@ def test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs(tm
         })
     payload = build_cpv_manifest(
         registry=registry, asset_refs=assets, campaign_numbers=[14, 15, 16, 17, 18],
-        operational_date='2099-08-21', request_id='cpv-five', creative_templates=source_templates(), status='ACTIVE',
+        operational_date='2099-08-21', request_id='cpv-five', source_selections=selected_sources(5), status='ACTIVE',
     )
     built = Manifest.from_dict(payload)
     assert len(built.campaigns) == 5
@@ -721,6 +819,33 @@ def test_prestaged_execution_uses_ad_copies_with_creative_and_no_direct_ad_creat
     assert all(op.body['status_option'] == 'PAUSED' for op in copy_ops)
     assert all('creative_parameters' in op.body for op in copy_ops)
     assert all(not op.relative_url.startswith('act_') for op in copy_ops)
+
+
+def test_from_zero_execution_creates_campaign_adset_creatives_and_ads_without_copy(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+
+    transport = CaptureTransport('100')
+    result = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    ).execute(manifest([from_zero_campaign(1)], request_id='from-zero-live-shape'))
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [call['stage'] for call in transport.calls] == [
+        'campaign_create', 'adset_create', 'creative_create', 'ad_create',
+        'campaign_finalize', 'consolidated_readback',
+    ]
+    assert not any(
+        '/copies' in op.relative_url
+        for operations in transport.operations_by_stage.values()
+        for op in operations
+    )
+    assert all(not op.body.get('source_ad_id') for op in transport.operations_by_stage['ad_create'])
 
 
 def test_engine_executes_accounts_in_independent_lanes(tmp_path):

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.38
+version: 1.0.39
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -161,13 +161,13 @@ A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reserva
 quantidade possível = piso(pool diário de testes ÷ budget inicial por campanha)
 ```
 
-Exemplo vigente com piso operacional interno de `USD 500` e budget inicial de `USD 30`:
+Exemplo vigente com piso operacional interno de `USD 500` e budget inicial de `USD 25`:
 
-- pool normal sobre o piso: 20% = `USD 100` = até 3 campanhas de USD30, preservando USD10;
-- pool flexível sobre o piso: 30% = `USD 150` = até 5 campanhas;
+- pool normal sobre o piso: 20% = `USD 100` = até 4 campanhas de USD25;
+- pool flexível sobre o piso: 30% = `USD 150` = até 6 campanhas;
 - se o total live mais a criação/escala/reativação autorizada ultrapassar USD500, o envelope efetivo sobe ao valor exato necessário e deixa de bloquear o plano somente por esse motivo.
 
-O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. O padrão de criação permanece três campanhas de USD30 por ciclo, salvo quantidade diferente autorizada. A quantidade final também depende de criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
+O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. Desde 27/08/2026, somente campanhas novas usam budget inicial de USD25; campanhas existentes e overrides históricos preservam o valor efetivamente autorizado/executado. A quantidade continua dinâmica pelo pool: com USD100 integralmente disponível, cabem até quatro campanhas de USD25. A quantidade final também depende de necessidade do ciclo, criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
 
 Programar a campanha para começar às `00:30` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 
@@ -345,9 +345,9 @@ Parâmetro                                      Valor inicial
 ---------------------------------------------- ----------------------------------
 Piso do envelope operacional interno da conta  USD 500 vigente desde 22/08/2026
 Envelope efetivo da conta                      max(USD500, budget live + deltas autorizados)
-Budget inicial por campanha                    USD 30
+Budget inicial por campanha nova               USD 25
 Pool normal para campanhas novas               20% do piso operacional
-Pool flexível autorizado                       até 30% quando o piso de USD 30 exigir
+Pool flexível autorizado                       até 30% quando o piso de USD 25 exigir
 Quantidade de campanhas novas                  dinâmica, calculada pelo pool
 Escala com ROI geral >20% e <=30%             +10%
 Escala com ROI geral >30% e <=40%             +20%
@@ -361,13 +361,13 @@ Teto diário provisório por campanha            USD 150
 
 Por autorização de Rodolfo em 24/08/2026, Ares recalcula o envelope efetivo em cada preflight como `max(USD500, budget configurado-ativo live + deltas exatos autorizados)`. Os deltas elegíveis são somente:
 
-- campanhas do ciclo diário de 17:00, normalmente três × USD30;
+- campanhas do ciclo diário de 17:00, com USD25 por campanha nova e quantidade dinâmica pelo pool;
 - escalas das faixas de ROI geral já aprovadas às 08:00;
 - reativações de proveniência guardada já autorizadas.
 
 A regra impede que o piso antigo bloqueie criação ou escala válida. Ela não cria budget extra arbitrário, não altera billing/limite de gasto da conta e não afrouxa identidade, saúde da conta, quota, criativos, reconciliação, horário, allowlist, teto USD150 por campanha ou readback. Drift inesperado depois do plano continua fail-closed.
 
-Manter 20% do piso como pool normal de campanhas novas e até 30% quando o piso de USD 30 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
+Manter 20% do piso como pool normal de campanhas novas e até 30% quando o piso de USD 25 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
 
 ### Autoridade de budget nesta operação
 
@@ -557,6 +557,7 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] SMS enviados G006 filtrados por data nas duas linhagens SMS Funnel explícitas de quiz/chat
 - [ ] Custo SMS G006 validado por `envios × R$ 0,08`, exibido em USD via PTAX venda BCB com data/fonte e sem atribuição do consolidado global
 - [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
+- [ ] Toda campanha nova usa budget inicial de USD 25; campanhas existentes não são alteradas por esta regra
 - [ ] Budget anterior/novo, moeda, período e fonte registrados
 - [ ] Todo write confirmado por readback Meta
 - [ ] Pendências desta versão resolvidas antes de automação autônoma

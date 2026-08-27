@@ -17,6 +17,15 @@ Regra central:
 ```text
 Ares cria e organiza criativos. Ares executa campanhas quando envolvido; Kelly, Geizian e gestores também podem usar assets diretamente.
 ```
+
+## Terminologia operacional de Rodolfo
+
+```text
+copy       = textos nos campos do anúncio/campanha Meta (Primary text, Headline, Description e CTA)
+criativos  = imagens e vídeos, inclusive os assets armazenados no Drive
+```
+
+Nunca chamar imagem ou vídeo de `copy`; nunca chamar os textos dos campos Meta de `criativos`.
 ## Quando usar
 
 Use esta skill quando o usuário pedir para o Ares:

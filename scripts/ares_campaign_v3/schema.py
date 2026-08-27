@@ -102,18 +102,20 @@ class MediaSpec:
 @dataclass(frozen=True)
 class AdSpec:
     name: str
-    source_ad_id: str
+    source_ad_id: str | None
     media: MediaSpec
     creative_payload: dict[str, Any]
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> "AdSpec":
+    def from_dict(cls, value: dict[str, Any], *, require_source_lineage: bool = True) -> "AdSpec":
         name = str(value.get("name") or "").strip()
         if not name:
             raise ManifestError("ad name is required")
         source_ad_id = str(value.get("source_ad_id") or "").strip()
-        if not source_ad_id or source_ad_id == "0":
+        if require_source_lineage and (not source_ad_id or source_ad_id == "0"):
             raise ManifestError("clone_prestaged ad requires nonzero source_ad_id")
+        if not require_source_lineage and source_ad_id:
+            raise ManifestError("from_zero_prestaged forbids source_ad_id")
         payload = value.get("creative_payload")
         if not isinstance(payload, dict) or not payload:
             raise ManifestError("creative_payload is required")
@@ -122,7 +124,7 @@ class AdSpec:
         if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
         _validate_video_label_references(payload)
-        return cls(name=name, source_ad_id=source_ad_id, media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
+        return cls(name=name, source_ad_id=(source_ad_id or None), media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
 
 
 @dataclass(frozen=True)
@@ -131,23 +133,25 @@ class CampaignSpec:
     app_key: str
     account_id: str
     mode: str
-    source_campaign_id: str
+    source_campaign_id: str | None
     name: str
     start_time: str
     status: str
     source_adset_id: str | None = None
     adset_name: str | None = None
     campaign_updates: dict[str, Any] = field(default_factory=dict)
+    campaign_create: dict[str, Any] = field(default_factory=dict)
+    adset_create: dict[str, Any] = field(default_factory=dict)
     ads: tuple[AdSpec, ...] = field(default_factory=tuple)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "CampaignSpec":
-        required = ("idempotency_key", "app_key", "account_id", "mode", "source_campaign_id", "name", "start_time", "status")
+        required = ("idempotency_key", "app_key", "account_id", "mode", "name", "start_time", "status")
         missing = [name for name in required if not str(value.get(name) or "").strip()]
         if missing:
             raise ManifestError(f"campaign missing fields: {','.join(missing)}")
         mode = str(value["mode"])
-        if mode not in {"pure_clone", "clone_prestaged"}:
+        if mode not in {"pure_clone", "clone_prestaged", "from_zero_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -155,16 +159,59 @@ class CampaignSpec:
         start = _iso(str(value["start_time"]), "start_time")
         if status == "ACTIVE" and start <= datetime.now(timezone.utc):
             raise ManifestError("ACTIVE requires future start_time")
-        ads = tuple(AdSpec.from_dict(item) for item in (value.get("ads") or []))
+        ads = tuple(
+            AdSpec.from_dict(item, require_source_lineage=(mode == "clone_prestaged"))
+            for item in (value.get("ads") or [])
+        )
+        source_campaign_id = str(value.get("source_campaign_id") or "") or None
         source_adset_id = str(value.get("source_adset_id") or "") or None
         adset_name = str(value.get("adset_name") or "") or None
+        campaign_create = value.get("campaign_create") or {}
+        adset_create = value.get("adset_create") or {}
+        if not isinstance(campaign_create, dict) or not isinstance(adset_create, dict):
+            raise ManifestError("campaign_create and adset_create must be objects")
         if mode == "clone_prestaged":
-            if not source_adset_id:
-                raise ManifestError("clone_prestaged requires source_adset_id")
+            if not source_campaign_id or not source_adset_id:
+                raise ManifestError("clone_prestaged requires source_campaign_id and source_adset_id")
             if len(ads) != 3:
                 raise ManifestError("clone_prestaged requires exactly three ads")
-        elif ads:
-            raise ManifestError("pure_clone must not provide replacement ads")
+            if campaign_create or adset_create:
+                raise ManifestError("clone_prestaged forbids from-zero create payloads")
+        elif mode == "from_zero_prestaged":
+            if source_campaign_id:
+                raise ManifestError("from_zero_prestaged forbids source_campaign_id")
+            if source_adset_id:
+                raise ManifestError("from_zero_prestaged forbids source_adset_id")
+            if len(ads) != 3:
+                raise ManifestError("from_zero_prestaged requires exactly three ads")
+            if not adset_name:
+                raise ManifestError("from_zero_prestaged requires adset_name")
+            if not campaign_create:
+                raise ManifestError("from_zero_prestaged requires campaign_create")
+            if not adset_create:
+                raise ManifestError("from_zero_prestaged requires adset_create")
+            campaign_required = {
+                "objective", "buying_type", "daily_budget", "bid_strategy",
+                "special_ad_categories", "special_ad_category_country",
+            }
+            adset_required = {
+                "billing_event", "optimization_goal", "targeting", "promoted_object",
+                "attribution_spec", "regional_regulated_categories",
+                "regional_regulation_identities", "is_dynamic_creative",
+            }
+            missing_campaign = sorted(campaign_required - set(campaign_create))
+            missing_adset = sorted(adset_required - set(adset_create))
+            if missing_campaign:
+                raise ManifestError(f"campaign_create missing fields: {','.join(missing_campaign)}")
+            if missing_adset:
+                raise ManifestError(f"adset_create missing fields: {','.join(missing_adset)}")
+        else:
+            if not source_campaign_id:
+                raise ManifestError("pure_clone requires source_campaign_id")
+            if ads:
+                raise ManifestError("pure_clone must not provide replacement ads")
+            if campaign_create or adset_create:
+                raise ManifestError("pure_clone forbids from-zero create payloads")
         updates = value.get("campaign_updates") or {}
         if not isinstance(updates, dict):
             raise ManifestError("campaign_updates must be an object")
@@ -173,13 +220,15 @@ class CampaignSpec:
             app_key=str(value["app_key"]),
             account_id=str(value["account_id"]).removeprefix("act_"),
             mode=mode,
-            source_campaign_id=str(value["source_campaign_id"]),
+            source_campaign_id=source_campaign_id,
             name=str(value["name"]),
             start_time=str(value["start_time"]),
             status=status,
             source_adset_id=source_adset_id,
             adset_name=adset_name,
             campaign_updates=updates,
+            campaign_create=campaign_create,
+            adset_create=adset_create,
             ads=ads,
         )
 

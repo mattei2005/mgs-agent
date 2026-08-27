@@ -1,7 +1,7 @@
 ---
 name: creative-operations-mgs
 description: Use quando Ares receber pedidos de criação, adaptação, tratamento, referência, naming, sanitização, inventário ou organização de criativos MGS antes e durante o ciclo de campanhas.
-version: 2.0.2
+version: 2.0.3
 author: MGS Digital Corp
 license: Proprietary
 metadata:

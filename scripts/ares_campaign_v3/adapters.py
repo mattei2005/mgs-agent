@@ -48,12 +48,16 @@ def build_cpv_manifest(
     source_selections: list[dict[str, Any]] | None = None,
     status: str = "PAUSED",
     start_time: str | None = None,
+    daily_budget_minor: int = 2500,
 ) -> dict[str, Any]:
     status = str(status).upper()
     if status not in {"PAUSED", "ACTIVE"}:
         raise ValueError("CPV v3 status must be PAUSED or ACTIVE")
     if not 1 <= len(campaign_numbers) <= 100:
         raise ValueError("CPV v3 requires 1..100 campaign numbers")
+    daily_budget_minor = int(daily_budget_minor)
+    if daily_budget_minor <= 0:
+        raise ValueError("CPV v3 daily budget must be positive")
     required_assets = len(campaign_numbers) * 3
     if len(asset_refs) != required_assets:
         raise ValueError(f"CPV v3 requires exactly {required_assets} pre-staged assets for {len(campaign_numbers)} campaigns")
@@ -124,7 +128,7 @@ def build_cpv_manifest(
             "adset_name": f"01 - AdGroup - (b01fb13c{number:02d}g01) event_Subscribe - MAXVOL",
             "start_time": start.isoformat(),
             "status": status,
-            "campaign_updates": {"daily_budget": "3000", "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
+            "campaign_updates": {"daily_budget": str(daily_budget_minor), "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
             "ads": ads,
         })
         evidence = dict(source.get("roi_evidence") or {})
