@@ -37,7 +37,7 @@ def load_validated_history():
         'exits_confirmed': sum(int(item.get('exits_confirmed') or 0) for item in pages.values()),
         'renewals_detected': sum(int(item.get('renewals_detected') or 0) for item in pages.values()),
         'status_changes_detected': sum(int(item.get('status_changes_detected') or 0) for item in pages.values()),
-        'currently_restricted': sum(1 for item in pages.values() if item.get('current_state') == 'restrita'),
+        'currently_restricted': sum(1 for item in pages.values() if item.get('currently_restricted') is True),
     }
     declared_totals = history.get('totals') or {}
     if totals != declared_totals:

@@ -357,6 +357,52 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'duplicada'):
             sync.build_history_dataset([row, dict(row)])
 
+    def test_isolated_history_writer_touches_only_history_tab_and_reads_back_exactly(self):
+        row = {
+            'link da pagina': 'https://facebook.com/123',
+            'nome da pagina': 'Page Test',
+            'fb page id': '123',
+            'page id': '456',
+            'bot user': 'bot@example.com',
+            'segurador': 'Segurador',
+            'sites': 'openzed',
+            'entradas detectadas': 2,
+            'saidas confirmadas': 1,
+            'renovacoes': 3,
+            'mudancas de status': 0,
+            'estado atual': 'Restrita',
+            'ultima entrada': '2026-08-27T08:00:00-04:00',
+            'ultima saida': '2026-08-20T08:00:00-04:00',
+            'saida prevista atual': '2026-09-24',
+            'cobertura desde': '2026-07-15T14:38:01-04:00',
+        }
+        expected = sync.build_history_dataset([row])
+        tabs = {
+            sync.REPORT_SUMMARY_TAB: {'sheetId': 1, 'index': 0, 'gridProperties': {'rowCount': 100, 'columnCount': 20}},
+            sync.REPORT_TOTAL_TAB: {'sheetId': 2, 'index': 1, 'gridProperties': {'rowCount': 100, 'columnCount': 20}},
+            sync.REPORT_HISTORY_TAB: {'sheetId': 3, 'index': 2, 'gridProperties': {'rowCount': 100, 'columnCount': 20}},
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+             mock.patch.object(sync, 'REPORT_SHEET_LOCK', Path(tmp_dir) / 'sheet.lock'), \
+             mock.patch.object(sync, 'google_access_token', return_value='fixture-token'), \
+             mock.patch.object(sync, 'ensure_report_tabs', side_effect=[tabs, tabs]), \
+             mock.patch.object(sync, 'read_report_datasets', return_value={sync.REPORT_HISTORY_TAB: expected}), \
+             mock.patch.object(sync, 'sheets_api', return_value={}) as sheets_api:
+            result = sync.write_restriction_history_sheet([row])
+
+        self.assertTrue(result['readback_ok'])
+        self.assertEqual(result['rows_historico_restricoes'], 1)
+        self.assertEqual(result['unique_keys'], 1)
+        self.assertEqual(result['updated_tabs'], [sync.REPORT_HISTORY_TAB])
+        payloads = [call.args[3] for call in sheets_api.call_args_list if len(call.args) > 3]
+        clear_payload = next(payload for payload in payloads if 'ranges' in payload)
+        write_payload = next(payload for payload in payloads if 'data' in payload)
+        self.assertEqual(clear_payload['ranges'], [sync.sheet_a1_title(sync.REPORT_HISTORY_TAB) + '!A:Z'])
+        self.assertEqual(len(write_payload['data']), 1)
+        self.assertEqual(write_payload['data'][0]['range'], sync.sheet_a1_title(sync.REPORT_HISTORY_TAB) + '!A1')
+        self.assertNotIn(sync.REPORT_TOTAL_TAB, json.dumps(payloads, ensure_ascii=False))
+        self.assertNotIn(sync.REPORT_SUMMARY_TAB, json.dumps(payloads, ensure_ascii=False))
+
 
 if __name__ == '__main__':
     unittest.main()
