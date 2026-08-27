@@ -30,10 +30,11 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
     media_keys: list[str] = []
     source_ad_ids: list[str] = []
     for campaign in manifest.campaigns:
-        if campaign.mode != "clone_prestaged":
+        if campaign.mode not in {"clone_prestaged", "from_zero_prestaged"}:
             continue
         for ad in campaign.ads:
-            source_ad_ids.append(ad.source_ad_id)
+            if ad.source_ad_id:
+                source_ad_ids.append(ad.source_ad_id)
             record = registry.require_ready(campaign.account_id, ad.media.asset_id, ad.media.checksum)
             if str(record["vertical_video_id"]) != ad.media.vertical_video_id or str(record["square_video_id"]) != ad.media.square_video_id:
                 raise ManifestError(f"manifest media IDs drifted for asset={ad.media.asset_id}")
@@ -43,7 +44,9 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
     if len(media_keys) != len(set(media_keys)):
         raise ManifestError("duplicate media lineage in manifest")
     if media_keys:
-        checks.extend(["media_registry_exact", "media_lineage_unique", "ad_account_video_association", "source_ad_lineage"])
+        checks.extend(["media_registry_exact", "media_lineage_unique", "ad_account_video_association"])
+    if source_ad_ids:
+        checks.append("source_ad_lineage")
     result = copy.deepcopy(payload)
     result.pop("prevalidation", None)
     result["prevalidated"] = True

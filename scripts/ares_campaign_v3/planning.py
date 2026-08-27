@@ -120,6 +120,58 @@ class Planner:
         )
 
     @staticmethod
+    def _from_zero_stages(campaigns: tuple[CampaignSpec, ...]) -> tuple[StagePlan, ...]:
+        account_id = campaigns[0].account_id
+        campaign_ops = []
+        adset_ops = []
+        creative_ops = []
+        ad_ops = []
+        finalize_ops = []
+        for ci, campaign in enumerate(campaigns, 1):
+            campaign_ops.append(BatchOperation(
+                name=f"campaign_create_{ci}", method="POST", relative_url=f"act_{account_id}/campaigns",
+                body={**campaign.campaign_create, "name": campaign.name, "status": "PAUSED"},
+                kind="campaign_create",
+            ))
+            adset_ops.append(BatchOperation(
+                name=f"adset_create_{ci}", method="POST", relative_url=f"act_{account_id}/adsets",
+                body={
+                    **campaign.adset_create,
+                    "name": campaign.adset_name,
+                    "campaign_id": f"{{campaign_id_{ci}}}",
+                    "status": "ACTIVE",
+                    "start_time": campaign.start_time,
+                },
+                kind="adset_create",
+            ))
+            for ai, ad in enumerate(campaign.ads, 1):
+                creative_ops.append(BatchOperation(
+                    name=f"creative_create_{ci}_{ai}", method="POST", relative_url=f"act_{account_id}/adcreatives",
+                    body=ad.creative_payload, kind="creative_create",
+                ))
+                ad_ops.append(BatchOperation(
+                    name=f"ad_create_{ci}_{ai}", method="POST", relative_url=f"act_{account_id}/ads",
+                    body={
+                        "name": ad.name,
+                        "adset_id": f"{{adset_id_{ci}}}",
+                        "creative": {"creative_id": f"{{creative_id_{ci}_{ai}}}"},
+                        "status": "ACTIVE",
+                    },
+                    kind="ad_create",
+                ))
+            finalize_ops.append(BatchOperation(
+                name=f"campaign_finalize_{ci}", method="POST", relative_url=f"{{campaign_id_{ci}}}",
+                body={"status": campaign.status}, kind="campaign_finalize",
+            ))
+        return (
+            StagePlan("campaign_create", tuple(campaign_ops)),
+            StagePlan("adset_create", tuple(adset_ops)),
+            StagePlan("creative_create", tuple(creative_ops)),
+            StagePlan("ad_create", tuple(ad_ops)),
+            StagePlan("campaign_finalize", tuple(finalize_ops)),
+        )
+
+    @staticmethod
     def _readback_placeholders(campaigns: tuple[CampaignSpec, ...]) -> StagePlan:
         ops = []
         for ci, _ in enumerate(campaigns, 1):
@@ -139,11 +191,18 @@ class Planner:
                 modes = {campaign.mode for campaign in chunk}
                 if len(modes) != 1:
                     raise ValueError("a bundle cannot mix execution modes")
-                if next(iter(modes)) == "pure_clone":
+                mode = next(iter(modes))
+                if mode == "pure_clone":
                     stages = (self._pure_stage(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 1
-                else:
+                elif mode == "clone_prestaged":
                     stages = (*self._prestaged_stages(chunk), self._readback_placeholders(chunk))
+                    outer_write_calls = 5
+                    ad_count = sum(len(campaign.ads) for campaign in chunk)
+                    if ad_count > self.max_ads_per_batch:
+                        raise ValueError("ad batch exceeds max_ads_per_batch")
+                else:
+                    stages = (*self._from_zero_stages(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 5
                     ad_count = sum(len(campaign.ads) for campaign in chunk)
                     if ad_count > self.max_ads_per_batch:

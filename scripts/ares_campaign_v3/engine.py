@@ -299,6 +299,114 @@ class CampaignEngine:
         record["readback_children"] = len(readbacks)
         return campaign_ids
 
+    def _run_from_zero_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
+        timing, started = self._timed_start()
+        record["timings"]["campaign_create"] = timing
+        campaign_ops = [
+            BatchOperation(
+                f"campaign_create_{index}", "POST", f"act_{bundle.account_id}/campaigns",
+                body={**campaign.campaign_create, "name": campaign.name, "status": "PAUSED"},
+                kind="campaign_create",
+            )
+            for index, campaign in enumerate(bundle.campaigns, 1)
+        ]
+        campaign_results = self._batch(bundle, transport, campaign_ops, "campaign_create")
+        self._timed_finish(timing, started)
+        campaign_ids = [_copied_id(row, "id") for row in campaign_results]
+        record["campaign_ids"] = campaign_ids
+        record["stage"] = "campaigns_created_from_zero"
+
+        adset_ops = [
+            BatchOperation(
+                f"adset_create_{index}", "POST", f"act_{bundle.account_id}/adsets",
+                body={
+                    **campaign.adset_create,
+                    "name": campaign.adset_name,
+                    "campaign_id": campaign_id,
+                    "status": "ACTIVE",
+                    "start_time": campaign.start_time,
+                },
+                kind="adset_create",
+            )
+            for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1)
+        ]
+        timing, started = self._timed_start()
+        record["timings"]["adset_create"] = timing
+        adset_results = self._batch(bundle, transport, adset_ops, "adset_create")
+        self._timed_finish(timing, started)
+        adset_ids = [_copied_id(row, "id") for row in adset_results]
+        record["adset_ids"] = adset_ids
+        record["stage"] = "adsets_created_from_zero"
+
+        creative_ops = []
+        for ci, campaign in enumerate(bundle.campaigns, 1):
+            for ai, ad in enumerate(campaign.ads, 1):
+                creative_ops.append(BatchOperation(
+                    f"creative_create_{ci}_{ai}", "POST", f"act_{bundle.account_id}/adcreatives",
+                    body=ad.creative_payload, kind="creative_create",
+                ))
+        timing, started = self._timed_start()
+        record["timings"]["creative_create"] = timing
+        creative_results = self._batch(bundle, transport, creative_ops, "creative_create")
+        self._timed_finish(timing, started)
+        creative_ids = [_copied_id(row, "id") for row in creative_results]
+        record["creative_ids"] = creative_ids
+        record["stage"] = "creatives_created_from_zero"
+
+        ad_ops = []
+        offset = 0
+        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
+            for ai, ad in enumerate(campaign.ads, 1):
+                ad_ops.append(BatchOperation(
+                    f"ad_create_{ci}_{ai}", "POST", f"act_{bundle.account_id}/ads",
+                    body={
+                        "name": ad.name,
+                        "adset_id": adset_id,
+                        "creative": {"creative_id": creative_ids[offset]},
+                        "status": "ACTIVE",
+                    },
+                    kind="ad_create",
+                ))
+                offset += 1
+        timing, started = self._timed_start()
+        record["timings"]["ad_create"] = timing
+        ad_results = self._batch(bundle, transport, ad_ops, "ad_create")
+        self._timed_finish(timing, started)
+        ad_ids = [_copied_id(row, "id") for row in ad_results]
+        record["ad_ids"] = ad_ids
+        record["created_children"] = len(ad_ids)
+        record["stage"] = "ads_created_from_zero"
+
+        finalize_ops = [
+            BatchOperation(
+                f"campaign_finalize_{index}", "POST", campaign_id,
+                body={"status": campaign.status}, kind="campaign_finalize",
+            )
+            for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1)
+        ]
+        timing, started = self._timed_start()
+        record["timings"]["campaign_finalize"] = timing
+        self._batch(bundle, transport, finalize_ops, "campaign_finalize")
+        self._timed_finish(timing, started)
+        record["stage"] = "children_created_readback_pending"
+
+        if len(bundle.campaigns) >= 2 and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+            retry_after = self._readback_retry_seconds(bundle)
+            record["readback_cooldown"] = {
+                "reason": "development_access_score_decay",
+                "retry_after_seconds": retry_after,
+                "write_replay_blocked": True,
+                "deferred_at": _utc(),
+            }
+            raise ReadbackCooldownDeferred(retry_after)
+
+        timing, started = self._timed_start()
+        record["timings"]["readback"] = timing
+        readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
+        self._timed_finish(timing, started)
+        record["readback_children"] = len(readbacks)
+        return campaign_ids
+
     def _recover_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         """Reconcile a partial prestaged bundle and create only missing ads."""
         campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
@@ -441,6 +549,228 @@ class CampaignEngine:
         record["recovery"]["finished_at"] = _utc()
         record["stage"] = "readback_complete_recovered"
         return campaign_ids
+
+    def _recover_from_zero_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
+        """Read back every layer and create only missing from-zero objects."""
+        if self._readback_only_record(bundle, record):
+            readback_campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
+            record["recovery"] = {
+                "mode": "consolidated_readback_only",
+                "blind_replay_blocked": True,
+                "write_replay_blocked": True,
+                "started_at": _utc(),
+                "mutation_calls": 0,
+            }
+            timing, started = self._timed_start()
+            record["timings"]["recovery_consolidated_readback"] = timing
+            readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
+            self._timed_finish(timing, started)
+            record["readback_children"] = len(readbacks)
+            record["recovery"]["finished_at"] = _utc()
+            record["stage"] = "readback_complete_recovered"
+            return campaign_ids
+
+        record["recovery"] = {
+            "mode": "readback_then_missing_only_from_zero",
+            "blind_replay_blocked": True,
+            "write_replay_blocked": True,
+            "started_at": _utc(),
+        }
+
+        campaign_list = self._batch(bundle, transport, [BatchOperation(
+            "recovery_campaign_inventory", "GET",
+            f"act_{bundle.account_id}/campaigns?fields=id,name,status,effective_status,configured_status&limit=500",
+            kind="readback",
+        )], "recovery_campaign_inventory")[0].body.get("data") or []
+        campaign_ids: list[str | None] = [None] * len(bundle.campaigns)
+        recorded_campaigns = [str(value) for value in record.get("campaign_ids") or []]
+        if len(recorded_campaigns) == len(bundle.campaigns):
+            campaign_ids = list(recorded_campaigns)
+        missing_campaign_ops = []
+        for ci, campaign in enumerate(bundle.campaigns, 1):
+            if campaign_ids[ci - 1]:
+                continue
+            matches = [
+                row for row in campaign_list
+                if str(row.get("name") or "") == campaign.name
+                and str(row.get("configured_status") or row.get("status") or "").upper() not in {"DELETED", "ARCHIVED"}
+            ]
+            if len(matches) > 1:
+                raise ExecutionFailed(f"from-zero recovery found duplicate campaign name at index {ci}")
+            if matches:
+                campaign_ids[ci - 1] = str(matches[0]["id"])
+            else:
+                missing_campaign_ops.append(BatchOperation(
+                    f"recovery_campaign_create_{ci}", "POST", f"act_{bundle.account_id}/campaigns",
+                    body={**campaign.campaign_create, "name": campaign.name, "status": "PAUSED"},
+                    kind="campaign_create",
+                ))
+        if missing_campaign_ops:
+            results = self._batch(bundle, transport, missing_campaign_ops, "recovery_missing_campaign_create")
+            for result in results:
+                ci = int(result.name.rsplit("_", 1)[1])
+                campaign_ids[ci - 1] = _copied_id(result, "id")
+        if any(not value for value in campaign_ids):
+            raise ExecutionFailed("from-zero recovery could not resolve every campaign")
+        resolved_campaign_ids = [str(value) for value in campaign_ids]
+        record["campaign_ids"] = resolved_campaign_ids
+
+        adset_reads = self._batch(bundle, transport, [
+            BatchOperation(
+                f"recovery_adsets_{ci}", "GET",
+                f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time&limit=50",
+                kind="readback",
+            )
+            for ci, campaign_id in enumerate(resolved_campaign_ids, 1)
+        ], "recovery_adset_inventory")
+        recorded_adsets = [str(value) for value in record.get("adset_ids") or []]
+        adset_ids: list[str | None] = list(recorded_adsets) if len(recorded_adsets) == len(bundle.campaigns) else [None] * len(bundle.campaigns)
+        missing_adset_ops = []
+        for ci, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, resolved_campaign_ids), 1):
+            if adset_ids[ci - 1]:
+                continue
+            rows = next(row for row in adset_reads if row.name == f"recovery_adsets_{ci}").body.get("data") or []
+            matches = [row for row in rows if str(row.get("name") or "") == str(campaign.adset_name)]
+            if len(matches) > 1:
+                raise ExecutionFailed(f"from-zero recovery found duplicate adset name at index {ci}")
+            if matches:
+                adset_ids[ci - 1] = str(matches[0]["id"])
+            else:
+                missing_adset_ops.append(BatchOperation(
+                    f"recovery_adset_create_{ci}", "POST", f"act_{bundle.account_id}/adsets",
+                    body={
+                        **campaign.adset_create,
+                        "name": campaign.adset_name,
+                        "campaign_id": campaign_id,
+                        "status": "ACTIVE",
+                        "start_time": campaign.start_time,
+                    },
+                    kind="adset_create",
+                ))
+        if missing_adset_ops:
+            results = self._batch(bundle, transport, missing_adset_ops, "recovery_missing_adset_create")
+            for result in results:
+                ci = int(result.name.rsplit("_", 1)[1])
+                adset_ids[ci - 1] = _copied_id(result, "id")
+        if any(not value for value in adset_ids):
+            raise ExecutionFailed("from-zero recovery could not resolve every adset")
+        resolved_adset_ids = [str(value) for value in adset_ids]
+        record["adset_ids"] = resolved_adset_ids
+
+        ad_reads = self._batch(bundle, transport, [
+            BatchOperation(
+                f"recovery_ads_{ci}", "GET",
+                f"{campaign_id}/ads?fields=id,name,adset_id,status,configured_status,creative{{id,name}}&limit=100",
+                kind="readback",
+            )
+            for ci, campaign_id in enumerate(resolved_campaign_ids, 1)
+        ], "recovery_ad_inventory")
+        creative_inventory = self._batch(bundle, transport, [BatchOperation(
+            "recovery_creative_inventory", "GET",
+            f"act_{bundle.account_id}/adcreatives?fields=id,name,status&limit=500",
+            kind="readback",
+        )], "recovery_creative_inventory")[0].body.get("data") or []
+
+        resolved_ads: dict[tuple[int, int], str] = {}
+        resolved_creatives: dict[tuple[int, int], str] = {}
+        missing_creative_ops = []
+        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, resolved_adset_ids), 1):
+            rows = next(row for row in ad_reads if row.name == f"recovery_ads_{ci}").body.get("data") or []
+            for ai, ad in enumerate(campaign.ads, 1):
+                matches = [row for row in rows if str(row.get("name") or "") == ad.name and str(row.get("adset_id") or "") == adset_id]
+                if len(matches) > 1:
+                    raise ExecutionFailed(f"from-zero recovery found duplicate ad name at {ci}.{ai}")
+                if matches:
+                    resolved_ads[(ci, ai)] = str(matches[0]["id"])
+                    creative = matches[0].get("creative") or {}
+                    if creative.get("id"):
+                        resolved_creatives[(ci, ai)] = str(creative["id"])
+                    continue
+                creative_name = str(ad.creative_payload.get("name") or "")
+                creative_matches = [row for row in creative_inventory if str(row.get("name") or "") == creative_name]
+                if len(creative_matches) > 1:
+                    raise ExecutionFailed(f"from-zero recovery found duplicate creative name at {ci}.{ai}")
+                if creative_matches:
+                    resolved_creatives[(ci, ai)] = str(creative_matches[0]["id"])
+                else:
+                    missing_creative_ops.append(BatchOperation(
+                        f"recovery_creative_create_{ci}_{ai}", "POST", f"act_{bundle.account_id}/adcreatives",
+                        body=ad.creative_payload, kind="creative_create",
+                    ))
+        if missing_creative_ops:
+            results = self._batch(bundle, transport, missing_creative_ops, "recovery_missing_creative_create")
+            for result in results:
+                match = re.fullmatch(r"recovery_creative_create_(\d+)_(\d+)", result.name)
+                if not match:
+                    raise ExecutionFailed("unexpected from-zero recovery creative result")
+                resolved_creatives[(int(match.group(1)), int(match.group(2)))] = _copied_id(result, "id")
+
+        missing_ad_ops = []
+        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, resolved_adset_ids), 1):
+            for ai, ad in enumerate(campaign.ads, 1):
+                if (ci, ai) in resolved_ads:
+                    continue
+                creative_id = resolved_creatives.get((ci, ai))
+                if not creative_id:
+                    raise ExecutionFailed(f"from-zero recovery missing creative identity at {ci}.{ai}")
+                missing_ad_ops.append(BatchOperation(
+                    f"recovery_ad_create_{ci}_{ai}", "POST", f"act_{bundle.account_id}/ads",
+                    body={"name": ad.name, "adset_id": adset_id, "creative": {"creative_id": creative_id}, "status": "ACTIVE"},
+                    kind="ad_create",
+                ))
+        if missing_ad_ops:
+            results = self._batch(bundle, transport, missing_ad_ops, "recovery_missing_ad_create")
+            for result in results:
+                match = re.fullmatch(r"recovery_ad_create_(\d+)_(\d+)", result.name)
+                if not match:
+                    raise ExecutionFailed("unexpected from-zero recovery ad result")
+                resolved_ads[(int(match.group(1)), int(match.group(2)))] = _copied_id(result, "id")
+
+        expected_count = sum(len(campaign.ads) for campaign in bundle.campaigns)
+        if len(resolved_ads) != expected_count:
+            raise ExecutionFailed("from-zero recovery did not resolve every expected ad")
+        record["creative_ids"] = [
+            resolved_creatives[(ci, ai)]
+            for ci, campaign in enumerate(bundle.campaigns, 1)
+            for ai in range(1, len(campaign.ads) + 1)
+        ]
+        record["ad_ids"] = [
+            resolved_ads[(ci, ai)]
+            for ci, campaign in enumerate(bundle.campaigns, 1)
+            for ai in range(1, len(campaign.ads) + 1)
+        ]
+        record["created_children"] = expected_count
+
+        direct_campaign_reads = self._batch(bundle, transport, [
+            BatchOperation(f"recovery_campaign_status_{ci}", "GET", f"{campaign_id}?fields=id,status,configured_status", kind="readback")
+            for ci, campaign_id in enumerate(resolved_campaign_ids, 1)
+        ], "recovery_campaign_status_readback")
+        finalize_ops = []
+        for ci, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, resolved_campaign_ids), 1):
+            live = next(row for row in direct_campaign_reads if row.name == f"recovery_campaign_status_{ci}").body
+            if str(live.get("configured_status") or live.get("status") or "") != campaign.status:
+                finalize_ops.append(BatchOperation(
+                    f"recovery_campaign_finalize_{ci}", "POST", campaign_id,
+                    body={"status": campaign.status}, kind="campaign_finalize",
+                ))
+        if finalize_ops:
+            self._batch(bundle, transport, finalize_ops, "recovery_campaign_finalize")
+
+        record["recovery"].update({
+            "missing_campaigns_created": len(missing_campaign_ops),
+            "missing_adsets_created": len(missing_adset_ops),
+            "missing_creatives_created": len(missing_creative_ops),
+            "missing_ads_created": len(missing_ad_ops),
+            "campaigns_finalized": len(finalize_ops),
+        })
+        timing, started = self._timed_start()
+        record["timings"]["recovery_consolidated_readback"] = timing
+        readbacks = self._batch(bundle, transport, self._readback_ops(resolved_campaign_ids), "recovery_consolidated_readback")
+        self._timed_finish(timing, started)
+        record["readback_children"] = len(readbacks)
+        record["recovery"]["finished_at"] = _utc()
+        record["stage"] = "readback_complete_recovered"
+        return resolved_campaign_ids
 
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
         transport = self.transport_factory(account)

@@ -134,8 +134,12 @@ class FakeBatchTransport:
         for op in operations:
             if op.kind in {"campaign_copy", "pure_clone"}:
                 body = {"copied_campaign_id": self._id("campaign")}
+            elif op.kind == "campaign_create":
+                body = {"id": self._id("campaign")}
             elif op.kind == "adset_copy":
                 body = {"copied_adset_id": self._id("adset")}
+            elif op.kind == "adset_create":
+                body = {"id": self._id("adset")}
             elif op.kind == "ad_copy_with_creative":
                 body = {"copied_ad_id": self._id("ad")}
             elif op.kind == "ad_name_update":

@@ -343,6 +343,36 @@
       "previous_initial_budget_usd": 30.0,
       "current_initial_budget_usd": 25.0
     },
+    "existing_campaign_budget_alignment_20260827": {
+      "request_id": "cpv-budget-usd25-c07-c25-c30-20260827",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T12:53:51-04:00",
+      "authorization_source": "discord:thread:1542574918791856199",
+      "campaign_numbers": [
+        7,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "previous_budget_usd": {
+        "07": 30.0,
+        "25": 21.0,
+        "26": 30.0,
+        "27": 30.0,
+        "28": 30.0,
+        "29": 30.0,
+        "30": 30.0
+      },
+      "target_budget_usd": 25.0,
+      "status": "complete_readback_verified",
+      "configured_status_preserved": "ACTIVE",
+      "active_account_budget_before_usd": 398.34,
+      "active_account_budget_after_usd": 372.34,
+      "audit": "data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c07-c25-c30-budget-usd25-20260827.json"
+    },
     "campaign_operational_ceiling_usd": 150.0,
     "campaign_ceiling_definition_status": "approved_guardrail",
     "account_cap_scaling_policy_status": "Superseded on 2026-08-24 by Rodolfo: USD500 is the internal floor; the effective envelope increases automatically to the exact live configured-active budget plus authorized creation/ROI-scale/reactivation deltas, without changing billing or account_spend_limit",
