@@ -43,7 +43,12 @@ Para as landing pages desta operação, a fonte canônica é o plugin WordPress 
 - o clique apenas encaminha o visitante ao artigo configurado, preservando os parâmetros recebidos; o artigo de destino é responsável pelo evento Facebook;
 - padrão de entrada: `utm_source=facebook`, `utm_medium=gNNN-s`, `utm_campaign=<id da campanha>` e `utm_adgroup=<id do conjunto>`, com campaign/adgroup definidos na criação da campanha de tráfego direto no Facebook, não no plugin.
 
-Os canários G002 são `yolokfx.com/quiz/us/sh2-g002/` (V2) e `yolokfx.com/quiz/us/sh1-g002/` (V1), antes da replicação para `vizioid.com`.
+Os canários G002 estão ativos nos dois sites:
+
+- Yolokfx: `yolokfx.com/quiz/us/sh2-g002/` (V2) e `yolokfx.com/quiz/us/sh1-g002/` (V1);
+- Vizioid: `vizioid.com/quiz/us/sh2-g002/` (V2) e `vizioid.com/quiz/us/sh1-g002/` (V1).
+
+Em cada site, ambos os CTAs apontam para `/rec-us-app-shein-circle-of-style/` no próprio domínio.
 
 ---
 

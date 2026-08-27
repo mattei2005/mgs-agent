@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.0.0
+version: 1.0.1
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -62,7 +62,7 @@ No painel, usar o menu `Landing SHEIN`:
 5. Ativar e validar versão por WP-CLI.
 6. Limpar cache do WordPress e CDN quando aplicável.
 7. Comparar manifesto SHA-256 da fonte com produção.
-8. Se um arquivo temporário remoto for transferido ao ownership `runcloud`, removê-lo com `sudo rm`; `rm` pelo usuário `zeus` falha com `Operation not permitted` mesmo após deploy bem-sucedido.
+8. Não excluir arquivos temporários sem a confirmação adicional do Critical Subset. Preferir caminhos únicos e mover pacote, script e staging para o diretório de backup/auditoria; se um arquivo remoto estiver sob ownership `runcloud`, usar `sudo mv` para o backup em vez de `rm`.
 
 ## Validação obrigatória
 
@@ -90,12 +90,27 @@ Se um logo quadrado aparecer minúsculo apesar do `max-height`, inspecione as di
 
 Não use geração por IA quando um recorte lossless resolve; geração só é necessária se o arquivo original estiver incompleto ou em baixa qualidade.
 
-## Estado inicial validado
+## QA mobile quando o browser principal falhar
 
-- Piloto: `yolokfx.com`.
-- Plugin: `mgs-direct-quiz` v1.0.7.
+Se o browser harness não iniciar o Chrome, não reduzir a validação a HTML estático. Usar Chromium real em foreground por Playwright ou CDP, sempre sem notificações automáticas no Discord, e validar:
+
+1. viewport mobile 390×844;
+2. screenshot de V1 e V2;
+3. card inteiro e `scrollWidth <= innerWidth`;
+4. clique real em um CTA de cada modelo;
+5. destino HTTP 200 e parâmetros exatamente uma vez;
+6. inspeção visual do logo sobre o fundo real da landing.
+
+Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma variante oficial adequada. Se não houver, criar derivação lossless: preservar símbolo e cores da marca, recolorir apenas o texto branco para tom escuro, recortar o alpha visível, adicionar margem curta, salvar em resolução web/retina, importar como novo attachment e validar por screenshot. Não sobrescrever nem excluir o asset original.
+
+## Estado validado
+
+- Sites ativos: `yolokfx.com` e `vizioid.com`.
+- Plugin canônico: `mgs-direct-quiz` v1.0.7, com código fonte e produção validados por manifesto.
 - Interface administrativa em cards, com Biblioteca de Mídia para o logo e modelos exibidos como V1/V2.
-- G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`, logo YolokFX otimizado para 600×125.
-- G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
-- Destino: `https://yolokfx.com/rec-us-app-shein-circle-of-style/`.
-- `vizioid.com` permanece segunda etapa até aprovação explícita do canário.
+- Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
+- Yolokfx G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`.
+- Vizioid G002 V2: `https://vizioid.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`.
+- Vizioid G002 V1: `https://vizioid.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
+- Destinos por site: `/rec-us-app-shein-circle-of-style/` no próprio domínio.
+- Logo Vizioid para card branco: attachment `62160`, `600×181`, `https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png`.

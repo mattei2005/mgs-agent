@@ -583,12 +583,12 @@
     {
       "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
-      "next_step": "Rodolfo validar a interface; Vizioid permanece sem alteração até nova autorização",
+      "next_step": "Monitorar o primeiro tráfego real; duplicar para outros gestores somente mediante novo escopo de Rodolfo, mantendo cópia inativa e gestor/slug vazios antes da revisão.",
       "objective": "Operar landing SHEIN com interface WordPress, modelos V1/V2 e slugs sh canônicas",
-      "source": "context/acquisition.md#alocação-ativa-de-tráfego-direto",
-      "state": "yolokfx concluído em mgs-direct-quiz v1.0.7: painel exibe v2 e v1, nomes internos shein us — g002 — v2/v1, rotas sh2-g002 e sh1-g002 ativas; código produção=fonte; 10/10 testes",
+      "source": "context/acquisition.md#alocação-ativa-de-tráfego-direto; runtime WordPress yolokfx.com e vizioid.com; discord:thread:1541914123376402452#1542532138703003750",
+      "state": "concluído nos dois sites: yolokfx.com e vizioid.com operam mgs-direct-quiz v1.0.7; g002 v2/v1 ativas em sh2-g002/sh1-g002; destinos no rec shein do próprio domínio; vizioid com logo escuro 600x181; código=produção, 10/10 testes, chromium mobile e cliques reais validados.",
       "thread_id": "1541914123376402452",
-      "updated_at": "2026-08-25T23:21:22+00:00"
+      "updated_at": "2026-08-27T14:11:32+00:00"
     },
     {
       "agent": "zeus",
@@ -1252,5 +1252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T03:21:26+00:00"
+  "updated_at": "2026-08-27T14:11:32+00:00"
 }

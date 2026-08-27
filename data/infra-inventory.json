@@ -10357,6 +10357,157 @@
         "logo_preview": true,
         "responsive": true
       }
+    },
+    {
+      "id": "zeus-mgs-direct-quiz-vizioid-g002-20260827",
+      "agent": "zeus",
+      "type": "wordpress_custom_plugin",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1541914123376402452#1542532138703003750",
+      "site": "vizioid.com",
+      "webroot": "/home/runcloud/webapps/vizioid",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.0.7",
+        "source_path": "/root/mgs-agent/plugins/mgs-direct-quiz",
+        "production_path": "/home/runcloud/webapps/vizioid/wp-content/plugins/mgs-direct-quiz",
+        "package_sha256": "5ae36f8397c10b475b96ee7f62ff94fbbf84a7e9b9d231ebe62b407e49eab62b",
+        "manifest_files": 9,
+        "source_production_manifest_match": true
+      },
+      "variants": [
+        {
+          "name": "SHEIN US — G002 — V2",
+          "route": "https://vizioid.com/quiz/us/sh2-g002/",
+          "manager": "G002",
+          "model": "V2",
+          "stored_layout": "lp2",
+          "active": true
+        },
+        {
+          "name": "SHEIN US — G002 — V1",
+          "route": "https://vizioid.com/quiz/us/sh1-g002/",
+          "manager": "G002",
+          "model": "V1",
+          "stored_layout": "lp1",
+          "active": true
+        }
+      ],
+      "destination": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+      "logo": {
+        "url": "https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png",
+        "attachment_id": 62160,
+        "width": 600,
+        "height": 181,
+        "sha256": "d97dbeabf745934ddcce95c520ca50869ea5dcee66305145f86bb8eb4cebf25e",
+        "derivation": "official current logo cropped by alpha; white brand pixels recolored dark for white-card contrast; orange preserved; original asset retained"
+      },
+      "contract": {
+        "visible_models": [
+          "V2",
+          "V1"
+        ],
+        "slug_pattern": "sh{1|2}-gNNN",
+        "admin_actions": [
+          "create",
+          "edit",
+          "activate_deactivate",
+          "duplicate"
+        ],
+        "query_passthrough": true,
+        "lead_capture": false,
+        "sms": false,
+        "campaign_configuration": false,
+        "tracking_events": false,
+        "destination_article_owns_facebook_event": true
+      },
+      "validation": {
+        "unit_tests": "10/10 passed",
+        "plugin_active_readback": true,
+        "plugin_version": "1.0.7",
+        "source_production_manifest_match": true,
+        "public_routes_http": {
+          "sh2-g002": 200,
+          "sh1-g002": 200
+        },
+        "unknown_and_replaced_routes_http_404": 5,
+        "assets_http_200": 2,
+        "destination_and_legal_http_200": 4,
+        "forms": 0,
+        "inputs": 0,
+        "cta_count_each": 2,
+        "noindex_meta_and_header": true,
+        "query_params_exact_once": [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_adgroup",
+          "fbclid",
+          "custom"
+        ],
+        "chromium": "/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+        "mobile_viewport": "390x844",
+        "mobile_horizontal_overflow": false,
+        "v2_card_bounds": {
+          "left": 14,
+          "right": 376,
+          "width": 362
+        },
+        "v1_card_bounds": {
+          "left": 14,
+          "right": 376,
+          "width": 362
+        },
+        "real_click_v2_destination_http": 200,
+        "real_click_v1_destination_http": 200,
+        "final_visual_qa": {
+          "v2_logo_legible": true,
+          "v2_card_complete": true,
+          "v1_card_complete": true,
+          "overlap": false
+        },
+        "duplicate_runtime_test": "PASS: actual admin handler created a new UUID, inactive copy with blank manager/slug; original option restored with identical serialized SHA-256",
+        "duplicate_original_restored_sha256": "14c57cd9916688aeb2a93a2768c55065b90406c97f4adb521343464bfec765ee",
+        "admin_interface": {
+          "rows": 2,
+          "create": true,
+          "edit": true,
+          "duplicate": true,
+          "media_library": true,
+          "v1_v2_labels": true
+        }
+      },
+      "backups": [
+        {
+          "path": "/home/runcloud/backups/vizioid-mgs-direct-quiz-20260827T135436Z/vizioid-options-pre-deploy.sql",
+          "size_bytes": 947426,
+          "exists_readback": true
+        },
+        {
+          "path": "/home/runcloud/backups/vizioid-mgs-direct-quiz-20260827T135436Z/vizioid-landings-before-dark-logo.json",
+          "exists_readback": true
+        },
+        {
+          "path": "/home/runcloud/backups/vizioid-mgs-direct-quiz-20260827T135436Z/mgs-direct-quiz-1.0.7.tar.gz",
+          "sha256": "5ae36f8397c10b475b96ee7f62ff94fbbf84a7e9b9d231ebe62b407e49eab62b",
+          "exists_readback": true
+        }
+      ],
+      "procedural_source": {
+        "skill": "landing-page-shein",
+        "version": "1.0.1",
+        "live_path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+        "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/landing-page-shein/SKILL.md",
+        "sha256": "5792758d3db469ea6f587ccbda40ccb8160967d6651385fa8f878fd172658c59"
+      },
+      "recovered_issues": [
+        "First deploy attempt stopped before production mutation because package checksum lacked permission after runcloud ownership; pre-state was read back unchanged and retry used sudo checksum.",
+        "Browser harness could not launch Chrome; final mobile and click QA ran in foreground Chromium through CDP.",
+        "Initial official white logo was illegible on the white V2 card; a lossless dark-text derivative was imported and visually revalidated."
+      ],
+      "updated_at": "2026-08-27T14:10:10.003893+00:00"
     }
   ],
   "profile_skill_references": [
