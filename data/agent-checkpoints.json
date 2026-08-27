@@ -473,12 +473,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SB-RESTRICTION-HISTORY-20260827",
-      "next_step": "Implementar histórico persistente, nova aba, testes, backup da Sheet, apply live e readback.",
+      "next_step": "Operação normal pelo cron de 15 minutos; nenhuma ação pendente.",
       "objective": "Adicionar à planilha Paginas Restritas - Atualizacoes uma aba automática com contagem por página de entradas, saídas confirmadas e renovações de restrição.",
-      "source": "discord:thread:1542560548124753920; request:1542560548124753920; runtime:/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "state": "escopo identificado: monitor sb-restricted-transition-monitor.py, writer dtr-sb-page-health-sync.py, sheet 1sibga_chmthf1mwgsvjuhfekvuf3pb9vc5oeg06thsi. backfill disponível desde 2026-07-15: 486 entradas detectadas, 297 saídas confirmadas e 356 renovações; nove lacunas de row no log reconciliadas por backup/discord.",
+      "source": "discord:thread:1542560548124753920; request:1542560548124753920; sheet:1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI#Histórico Restrições; audit:ZEUS-SB-RESTRICTION-HISTORY-20260827; inventory:zeus-sb-restriction-history-sheet-20260827",
+      "state": "concluído e validado: aba histórico restrições ativa no índice 2, imediatamente após paginas totais; cutover com 571 páginas/chaves únicas, 487 entradas detectadas, 297 saídas confirmadas, 357 renovações, 5 mudanças de status e 442 atualmente restritas. cobertura desde 2026-07-15t14:38:01-04:00; restrições herdadas antes da cobertura não foram inventadas como entradas. state e sheet iguais; replay apply idempotente; backup xlsx/state preservado.",
       "thread_id": "1542560548124753920",
-      "updated_at": "2026-08-27T15:49:07+00:00"
+      "updated_at": "2026-08-27T16:14:38+00:00"
     },
     {
       "agent": "zeus",
@@ -1282,5 +1282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:10:22+00:00"
+  "updated_at": "2026-08-27T16:14:38+00:00"
 }
