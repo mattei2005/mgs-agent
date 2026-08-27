@@ -515,10 +515,10 @@
       "id": "ZEUS-SB-RESTRICTION-HISTORY-20260827",
       "next_step": "Operação normal automática às 08:00, 14:00 e 20:00 ET; nenhuma ação pendente.",
       "objective": "Manter na planilha Paginas Restritas - Atualizacoes uma aba por página com contagem de entradas, saídas confirmadas, renovações e estado atual, atualizada exatamente às 08:00, 14:00 e 20:00 ET.",
-      "source": "discord:thread:1542560548124753920; schedule-request:1542609518616248411; sheet:1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI#Histórico Restrições; cron:0 8,14,20 * * *; inventory:zeus-sb-restriction-history-sheet-20260827",
-      "state": "concluído e validado: aba histórico restrições separada do rebuild de 15 minutos; o state continua acumulando transições a cada ciclo, enquanto refresh-sb-restricted-history-sheet.py escreve somente a aba histórica. cron único 0 8,14,20 * * * em america/new_york. readback manual cron-equivalente: 571 linhas/571 chaves únicas, updated_tabs somente histórico restrições, índice 2, totais coerentes com state. 24/24 testes e py_compile passaram.",
+      "source": "discord:thread:1542560548124753920; schedule-request:1542609518616248411; sheet:1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI#Histórico Restrições; cron:0 8,14,20 * * *; audit:ZEUS-SB-RESTRICTION-HISTORY-SCHEDULE-20260827; inventory:zeus-sb-restriction-history-sheet-20260827; report-infra:1542613795602436237",
+      "state": "concluído e validado: aba histórico restrições separada do rebuild de 15 minutos; o state continua acumulando transições a cada ciclo, enquanto refresh-sb-restricted-history-sheet.py escreve somente a aba histórica. cron único 0 8,14,20 * * * em america/new_york. dois applies cron-equivalentes: 571 linhas/571 chaves únicas, updated_tabs somente histórico restrições, índice 2. ciclo real do monitor às 15:14 gravou state e outras abas, não tocou histórico restrições; readback posterior permaneceu state=sheet. 24/24 testes e py_compile passaram. report-infra 1542613795602436237 validado por readback.",
       "thread_id": "1542560548124753920",
-      "updated_at": "2026-08-27T19:12:51+00:00"
+      "updated_at": "2026-08-27T19:17:17+00:00"
     },
     {
       "agent": "zeus",
@@ -1342,5 +1342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T19:12:51+00:00"
+  "updated_at": "2026-08-27T19:17:17+00:00"
 }
