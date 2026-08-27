@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.1.1",
+  "release_version": "3.1.3",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -27,10 +27,20 @@
     "defined_at_et": "2026-08-27T13:00:00-04:00",
     "from_zero_prestaged": "criação do zero: campanha, conjunto, creatives e anúncios novos; usa criativos novos",
     "clone_prestaged": "clone com criativos novos: a estrutura vem da melhor fonte elegível da mesma vertical, mas os três creatives/posts são substituídos por assets novos do Drive",
-    "pure_clone": "duplicação igual: a campanha vencedora é copiada inteira por deep copy, sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs, e o mesmo post/social proof só é confirmado quando o readback mantém o effective_object_story_id da fonte",
+    "pure_clone": "duplicação igual: copiar a campanha vencedora sem trocar mídia, copy, estrutura, público, estratégia ou budget; usar o próximo número sequencial e reescrever somente naming e link/UTMs para o novo número, além dos novos IDs técnicos inevitáveis",
     "selection_rule": "the natural-language request selects exactly one mode; never infer pure_clone from the word clone when the request also asks for new Drive creatives, and never replace source creatives when Rodolfo asks to duplicate the campaign identically",
     "performance_rule": "when the request says best campaign, recompute the eligible winner at manifest preflight inside CARRO or MOTO; no campaign ID becomes a permanent template",
-    "learning_caveat": "pure_clone preserves the source creative content and should preserve the post/story when effective_object_story_id is unchanged; Creative ID equality is not required because Meta may rematerialize it; campaign/adset are new delivery objects and similar performance is empirical, not guaranteed by Meta"
+    "learning_caveat": "pure_clone preserves source media and copy but campaign/adset are new delivery objects; changing URL tags may rematerialize the Creative ID and preservation of the same post/story is confirmed only by effective_object_story_id; similar performance is empirical, not guaranteed by Meta",
+    "tracking_mutations": {
+      "authorized_at_et": "2026-08-27T14:03:23-04:00",
+      "source_example": "duplicating C10 into the next free sequential slot creates C11",
+      "change": "campaign/adset canonical names, target number, utm_campaign, utm_adgroup and final click tracking change from source cN to target cN",
+      "preserve": "base URL, all non-UTM parameters, media, Meta copy fields, campaign/adset structure, audience, placements, event, bid strategy and budget",
+      "lineage": "persist source_campaign_id, immediate source campaign number and target campaign number in manifest/state/audit",
+      "visible_lineage_marker": "append the exact suffix COPY C{immediate_source_number} to the duplicated campaign name; never use DUP",
+      "visible_example": "a new C11 duplicated directly from C10 ends with COPY C10",
+      "readback": "confirm target number and names, exact final URLs/UTMs on every ad, unchanged media/copy equivalence and effective_object_story_id when Meta technically preserves the same post; do not require Creative ID equality"
+    }
   },
   "page_id": "621037101089579",
   "mode": "clone_prestaged",

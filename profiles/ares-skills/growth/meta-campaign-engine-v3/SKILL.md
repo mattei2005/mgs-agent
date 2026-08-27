@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.1.1
+version: 3.1.3
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]
@@ -55,7 +55,7 @@ Carregue somente a referência do branch atual.
 2. Zero busca ampla, skill discovery, patch, teste ou criação de cron durante execução.
 3. Bundle padrão: duas campanhas da mesma conta.
 4. Lanes independentes por `app_key + ad_account_id`; nunca misturar contas no mesmo bundle.
-5. O v3 representa três formas distintas de campanha e nunca as trata como sinônimos: `from_zero_prestaged` = criar do zero, com campanha/adset/creative/ad novos; `clone_prestaged` = clonar estrutura e lineage da melhor fonte elegível, mas substituir os três creatives/posts por mídias novas pre-stageadas do Drive; `pure_clone` = duplicar a campanha inteira igual ao botão Duplicar do Ads Manager, sem substituir o conteúdo criativo. A Meta pode reutilizar ou rematerializar Creative IDs; `pure_clone` preserva o mesmo post/social proof somente quando o readback confirma o mesmo `effective_object_story_id`. Campanha/adset continuam sendo novos objetos e performance semelhante não é garantia da Meta. Quando o pedido disser “melhor campanha”, a origem é recalculada no preflight dentro da mesma vertical. O planner divide qualquer pedido de 1–100 campanhas em bundles 2+2+…+1 por conta.
+5. O v3 representa três formas distintas e nunca as trata como sinônimos: `from_zero_prestaged` = criar do zero; `clone_prestaged` = clonar estrutura/lineage e substituir por criativos novos do Drive; `pure_clone` = duplicar sem trocar mídia, copy, estrutura, público, estratégia ou budget. Em `pure_clone`, usar o próximo número sequencial, reescrever naming e link/UTMs para o número novo e adicionar ao final do nome o sufixo exato `COPY C{número-fonte-imediato}`; nunca usar `DUP`. Exemplo: se C11 for o próximo slot, duplicar C10 cria C11 com UTMs de C11 e nome terminado em `COPY C10`. Novos IDs técnicos são inevitáveis. Alterar `url_tags` pode rematerializar o Creative ID; validar mídia/copy equivalentes, URLs/UTMs e `effective_object_story_id`, sem exigir Creative ID igual. Quando o pedido disser “melhor campanha”, recalcular a origem no preflight dentro da mesma vertical. O planner divide 1–100 campanhas em bundles 2+2+…+1 por conta.
 6. O readback consolidado usa um outer Graph batch por bundle. Em `development_access`, o bundle de duas campanhas persiste todos os IDs após a janela de writes e adia somente esse batch para a janela seguinte; zero GET intermediário e zero replay de write.
 7. Limite oficial Meta por ad account em `development_access`: score máximo 60, decaimento 300s e bloqueio 300s. O bundle `clone_prestaged` reserva 30 por campanha (60 no par); depois dos writes, esperar `max(reset_time_duration, estimated_time_to_regain_access×60, 300)+5s` e retomar com reserva de readback de 3 por campanha. `standard_access` usa máximo 9000, decaimento 300s e bloqueio 60s; headers vivos permanecem soberanos e persistidos por lane.
 8. Canário técnico explícito nasce `PAUSED`; pedido normal de produção usa `ACTIVE` com `start_time` futuro após manifest selado e validação dos guards.

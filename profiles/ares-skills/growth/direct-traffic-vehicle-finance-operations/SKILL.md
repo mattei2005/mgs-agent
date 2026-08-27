@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.41
+version: 1.0.43
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -440,7 +440,7 @@ Rodolfo definiu três operações distintas, todas com novos IDs de campanha e c
 
 1. **Criar do zero (`from_zero_prestaged`):** POST de campanha, conjunto, creatives e anúncios novos, com todos os campos explícitos e criativos novos.
 2. **Clonar com criativos novos (`clone_prestaged`):** copiar campanha/conjunto/anúncios da melhor fonte elegível da mesma vertical, preservar lineage e configurações estruturais, mas substituir os três creatives/posts por assets novos do Drive e UTMs do destino.
-3. **Duplicar igual (`pure_clone`):** equivalente operacional ao botão `Duplicar` do Ads Manager; deep copy da campanha vencedora sem substituir o conteúdo criativo. A Meta pode reutilizar ou rematerializar Creative IDs; o readback confirma o mesmo post/social proof pela igualdade de `effective_object_story_id`, embora campanha/adset tenham aprendizado e entrega próprios e a Meta não garanta repetição de performance.
+3. **Duplicar igual (`pure_clone`):** equivalente operacional ao botão `Duplicar` do Ads Manager, mas com rastreamento da nova campanha. Não trocar mídia, copy, estrutura, público, estratégia de lance ou budget. Usar o próximo número sequencial, reescrever campanha/conjunto, `utm_campaign`, `utm_adgroup` e link final para esse número e adicionar o sufixo exato `COPY C{número-fonte-imediato}` ao final do nome; nunca usar `DUP`. Exemplo: duplicar C10 cria C11, quando C11 for o próximo slot livre, e o nome termina em `COPY C10`. Preservar URL base e parâmetros não UTM. Novos IDs técnicos são inevitáveis; a alteração de `url_tags` pode rematerializar o Creative ID, por isso o readback valida equivalência de mídia/copy, link/UTMs e `effective_object_story_id` sem exigir Creative ID igual.
 
 O pedido natural escolhe exatamente uma rota. “Clonar com criativos novos” e “duplicar igual” nunca são sinônimos. Quando o pedido disser “melhor campanha”, a fonte é recalculada no preflight dentro de CARRO ou MOTO; nenhum ID encontrado vira template fixo.
 

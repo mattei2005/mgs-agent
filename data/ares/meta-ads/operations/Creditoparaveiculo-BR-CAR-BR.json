@@ -398,10 +398,20 @@
       "authorization_source": "discord:thread:1539826050765299872",
       "from_zero_prestaged": "criar do zero com campanha, conjunto, creatives e anúncios novos",
       "clone_prestaged": "clonar a melhor campanha elegível da mesma vertical e substituir os três creatives/posts por criativos novos do Drive",
-      "pure_clone": "duplicar a melhor campanha elegível inteira, equivalente ao botão Duplicar do Ads Manager, sem substituir o conteúdo criativo; a Meta pode reutilizar ou rematerializar Creative IDs",
+      "pure_clone": "duplicar a melhor campanha elegível inteira sem trocar mídia, copy, estrutura, público, estratégia ou budget; usar o próximo número sequencial e reescrever naming e link/UTMs para esse novo número",
       "selection_rule": "o pedido natural escolhe exatamente um dos três modos; clonar com criativos novos e duplicar igual nunca são tratados como sinônimos",
       "source_rule": "quando o pedido disser melhor campanha, recalcular o vencedor elegível dentro de CARRO ou MOTO no preflight; nenhum ID vira template fixo",
-      "social_proof_readback": "pure_clone compara Creative IDs para auditoria, mas confirma preservação do mesmo post/social proof pela igualdade de effective_object_story_id; Creative ID pode ser rematerializado pela Meta sem perder o post"
+      "social_proof_readback": "pure_clone compara Creative IDs para auditoria, mas confirma preservação do mesmo post/social proof pela igualdade de effective_object_story_id; Creative ID pode ser rematerializado pela Meta sem perder o post",
+      "tracking_mutations": {
+        "authorized_at_et": "2026-08-27T14:03:23-04:00",
+        "source_example": "duplicar C10 no próximo slot sequencial cria C11",
+        "change": "número e nomes canônicos da campanha/conjunto, utm_campaign, utm_adgroup e link final de tracking",
+        "preserve": "URL base e parâmetros não UTM, mídia, copy Meta, estrutura, público, placements, evento, estratégia de lance e budget",
+        "lineage": "manifest/state/audit preservam source_campaign_id, número-fonte imediato e número-destino",
+        "visible_lineage_marker": "adicionar o sufixo exato COPY C{numero_fonte_imediato} ao final do nome da campanha duplicada; nunca usar DUP",
+        "visible_example": "uma nova C11 duplicada diretamente da C10 termina com COPY C10",
+        "readback": "validar nomes/número, URLs/UTMs dos anúncios e equivalência de mídia/copy; não exigir Creative ID igual"
+      }
     },
     "clone_source_policy": {
       "authorized_by": "Rodolfo Mattei",

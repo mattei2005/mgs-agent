@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.1.2",
+  "release_version": "3.1.3",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -33,6 +33,7 @@
     "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
   },
   "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
+  "pure_clone_visible_lineage_marker": "append the exact suffix COPY C{source_campaign_number} to the duplicated campaign name; never use DUP; example: a new C11 duplicated directly from C10 ends with COPY C10",
   "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
   "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",
   "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
