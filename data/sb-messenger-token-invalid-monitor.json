@@ -33,7 +33,13 @@
     674621,
     674640,
     674660,
-    674698
+    674698,
+    674881,
+    674926,
+    674943,
+    674962,
+    674982,
+    675003
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -96,9 +102,9 @@
     "digital-trust-2|zuout|11|915": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-08-26T20:07:41.000Z",
+        "created_at": "2026-08-27T20:09:03.000Z",
         "domain": "zuout",
-        "notification_id": 673973,
+        "notification_id": 674881,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 145,
         "segurador_id": "915",
@@ -108,20 +114,22 @@
         "user_id": "11",
         "user_name": "Disparos Zuout US-CC-EN"
       },
-      "last_sent_at": "2026-08-27T14:12:16-04:00",
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
       "message_ids": [
         "1542366078020222997",
         "1542412660128227409",
         "1542457960544866305",
         "1542503260089483297",
         "1542552332905087048",
-        "1542597639088906362"
+        "1542597639088906362",
+        "1542627876204187898"
       ],
       "notification_ids": [
-        673973
+        673973,
+        674881
       ],
       "opened_at": "2026-08-26T22:52:08-04:00",
-      "repeat_count": 5,
+      "repeat_count": 6,
       "resolved_at": null,
       "status": "active"
     },
@@ -213,6 +221,33 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|financeadx|24|339": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-27T20:11:58.000Z",
+        "domain": "financeadx",
+        "notification_id": 675003,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 227,
+        "segurador_id": "339",
+        "segurador_name": "Edi Sangkut",
+        "source": "page_token",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
+      "message_ids": [
+        "1542627898702307472"
+      ],
+      "notification_ids": [
+        675003
+      ],
+      "opened_at": "2026-08-27T16:12:26-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|fincgriffin|104|1529": {
       "alert": {
         "company": "digital-trust",
@@ -244,9 +279,9 @@
     "digital-trust|fincgriffin|105|1530": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-26T20:09:17.000Z",
+        "created_at": "2026-08-27T20:11:11.000Z",
         "domain": "fincgriffin",
-        "notification_id": 674042,
+        "notification_id": 674943,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 1,
         "segurador_id": "1530",
@@ -256,21 +291,17 @@
         "user_id": "105",
         "user_name": "Disparos Fincgriffin US-CAR-EN - G006"
       },
-      "last_sent_at": "2026-08-27T11:12:14-04:00",
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
       "message_ids": [
-        "1542366081031733310",
-        "1542412665274499143",
-        "1542457966006112328",
-        "1542503267622322207",
-        "1542552339339288707"
+        "1542627885016285326"
       ],
       "notification_ids": [
-        674042
+        674943
       ],
-      "opened_at": "2026-08-26T22:52:08-04:00",
-      "repeat_count": 4,
-      "resolved_at": "2026-08-27T12:12:15-04:00",
-      "status": "resolved"
+      "opened_at": "2026-08-27T16:12:26-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|106|1592": {
       "alert": {
@@ -384,12 +415,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|newsoun|14|1689": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-27T20:11:40.000Z",
+        "domain": "newsoun",
+        "notification_id": 674982,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 180,
+        "segurador_id": "1689",
+        "segurador_name": "Milena Macedo",
+        "source": "page_token",
+        "user_email": "disparosnewsoun@gmail.com",
+        "user_id": "14",
+        "user_name": "Disparos Newsoun US-CC-EN"
+      },
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
+      "message_ids": [
+        "1542627893400698932"
+      ],
+      "notification_ids": [
+        674982
+      ],
+      "opened_at": "2026-08-27T16:12:26-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-26T20:09:38.000Z",
+        "created_at": "2026-08-27T20:11:36.000Z",
         "domain": "spe",
-        "notification_id": 674081,
+        "notification_id": 674962,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 48,
         "segurador_id": "72",
@@ -399,29 +457,31 @@
         "user_id": "7",
         "user_name": "Disparos SPE US-JOB-EN-ES"
       },
-      "last_sent_at": "2026-08-27T14:12:16-04:00",
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
       "message_ids": [
         "1542366085087760485",
         "1542412669489913920",
         "1542457970816852039",
         "1542503270927302739",
         "1542552342967357604",
-        "1542597676799885334"
+        "1542597676799885334",
+        "1542627889139286058"
       ],
       "notification_ids": [
-        674081
+        674081,
+        674962
       ],
       "opened_at": "2026-08-26T22:52:08-04:00",
-      "repeat_count": 5,
+      "repeat_count": 6,
       "resolved_at": null,
       "status": "active"
     },
     "digital-trust|topfeed|6|903": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-26T20:09:16.000Z",
+        "created_at": "2026-08-27T20:11:11.000Z",
         "domain": "topfeed",
-        "notification_id": 674031,
+        "notification_id": 674926,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 105,
         "segurador_id": "903",
@@ -431,20 +491,22 @@
         "user_id": "6",
         "user_name": "Disparos FTF US-CC-EN"
       },
-      "last_sent_at": "2026-08-27T14:12:16-04:00",
+      "last_sent_at": "2026-08-27T16:12:32-04:00",
       "message_ids": [
         "1542366079597416479",
         "1542412678360862742",
         "1542457978609733685",
         "1542503277982130193",
         "1542552349594226802",
-        "1542597685352071250"
+        "1542597685352071250",
+        "1542627880557871105"
       ],
       "notification_ids": [
-        674031
+        674031,
+        674926
       ],
       "opened_at": "2026-08-26T22:52:08-04:00",
-      "repeat_count": 5,
+      "repeat_count": 6,
       "resolved_at": null,
       "status": "active"
     },
@@ -509,35 +571,27 @@
       "status": "active"
     }
   },
-  "last_check": "2026-08-27T15:57:25-04:00",
+  "last_check": "2026-08-27T16:12:32-04:00",
   "last_delivery": {
-    "at": "2026-08-27T12:12:27-04:00",
+    "at": "2026-08-27T16:12:32-04:00",
     "message_ids": [
-      "1542567441341620235",
-      "1542567445171011778",
-      "1542567449902448681",
-      "1542567452041551985",
-      "1542567457565450251",
-      "1542567461789114512",
-      "1542567466155253876",
-      "1542567470714462298",
-      "1542567474505973781",
-      "1542567478255681681"
+      "1542627876204187898",
+      "1542627880557871105",
+      "1542627885016285326",
+      "1542627889139286058",
+      "1542627893400698932",
+      "1542627898702307472"
     ],
     "notification_ids": [
-      674521,
-      674528,
-      674536,
-      674566,
-      674584,
-      674603,
-      674621,
-      674640,
-      674660,
-      674698
+      674881,
+      674926,
+      674943,
+      674962,
+      674982,
+      675003
     ]
   },
   "last_error": null,
-  "last_seen_id": 674698,
+  "last_seen_id": 675003,
   "pending": null
 }
