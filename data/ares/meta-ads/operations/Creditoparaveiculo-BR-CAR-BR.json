@@ -502,6 +502,22 @@
         "120250951366720632",
         "120250951366750632",
         "120250951557410632"
+      ],
+      "operator_cancelled_campaigns": [
+        {
+          "campaign_number": 31,
+          "campaign_id": "120250951557410632",
+          "cancelled_at_sp": "2026-08-27T13:31:21-03:00",
+          "cancelled_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1542545166630396027",
+          "reason": "OPERATOR_CANCELLED_BEFORE_DELIVERY",
+          "zero_spend_verified": true,
+          "asset_rollback": {
+            "01_READY": 2,
+            "03_TESTED": 1
+          },
+          "audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-cancel-c31-rollback-assets-20260827.json"
+        }
       ]
     },
     "account_operational_cap_usd": 500,
@@ -1040,7 +1056,15 @@
           "campaign_id": "120250951557410632",
           "cycle_start_date": "2026-08-28",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260827"
+          "request_id": "cpv-daily-20260827",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T13:31:21-03:00",
+          "operator_terminal_reason": "CANCELLED_BEFORE_DELIVERY_AUTHORIZED_BY_RODOLFO",
+          "terminal_request_id": "cpv-operator-cancel-c31-rollback-assets-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "zero_spend_verified": true,
+          "creative_rollback_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-cancel-c31-rollback-assets-20260827.json"
         }
       },
       "required": [

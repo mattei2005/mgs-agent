@@ -543,12 +543,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-c21-c31-20260827",
-      "next_step": "Acompanhar o início de C28-C31 em 28/08 às 00:30 SP pelo guardrail de primeiro gasto; nenhuma nova campanha fica autorizada por este checkpoint.",
-      "objective": "Encerrar campanhas sem futuro com lifecycle criativo, preservar a C28 substituta e concluir C29-C31 para 28/08 com relatórios identificando campanhas de moto",
-      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c24-20260827.json; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c29-c31-20260827-complete.json",
-      "state": "complete: c21-c24 deleted. c24 foi encerrada por decisão expressa de rodolfo; meta confirmou id 120250925308920632 como deleted. antes da exclusão, os 3 criativos moto foram classificados por share de spend acumulado usd40.38: pv_003 3.89% e pv_004 2.45% foram para 03_tested e liberados para reteste; pv_005 93.66% foi para 05_rejected. drive mgs-agents e inventário tiveram readback 3/3. c28 substituta segue active; c29-c31 seguem active, usd30 maxvol, 1x1x3, início 28/08 00:30 sp. hold rearmado e próximo número 32.",
+      "next_step": "Acompanhar o início de C28-C30 em 28/08 às 00:30 SP pelos guardrails vigentes; C31 permanece terminal e não pode reativar automaticamente.",
+      "objective": "Encerrar campanhas sem futuro, preservar/retornar criativos corretamente e manter somente a coorte aprovada para 28/08",
+      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-cancel-c31-rollback-assets-20260827.json",
+      "state": "complete: c21-c24 e c31 estão deleted. c31 120250951557410632 foi cancelada antes da entrega com meta spend=0 e impressions=0; get confirmou deleted. os três assets foram revertidos ao estado pré-seleção com binding c31 preservado como voided/non-attempt: nv_061 e nv_064 voltaram a 01_ready, elegíveis, tentativa 0; pv_050 voltou a 03_tested, elegível para reteste, tentativa 1. drive/inventário 3/3 confirmados pela service account mgs. c29 e c30 seguem active, usd30 maxvol, início 28/08 00:30 sp; first-delivery armed somente para c29-c30. budget ativo live usd398.34; envelope usd500; saldo usd101.66. estoque live: 279 arquivos em 01_ready (42 img/237 vid), 10 criativos inéditos elegíveis e 6 elegíveis para reteste.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T16:22:53+00:00"
+      "updated_at": "2026-08-27T16:35:20+00:00"
     },
     {
       "agent": "zeus",
@@ -1282,5 +1282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:22:53+00:00"
+  "updated_at": "2026-08-27T16:35:20+00:00"
 }
