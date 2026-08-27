@@ -472,6 +472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SB-RESTRICTION-HISTORY-20260827",
+      "next_step": "Implementar histórico persistente, nova aba, testes, backup da Sheet, apply live e readback.",
+      "objective": "Adicionar à planilha Paginas Restritas - Atualizacoes uma aba automática com contagem por página de entradas, saídas confirmadas e renovações de restrição.",
+      "source": "discord:thread:1542560548124753920; request:1542560548124753920; runtime:/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+      "state": "escopo identificado: monitor sb-restricted-transition-monitor.py, writer dtr-sb-page-health-sync.py, sheet 1sibga_chmthf1mwgsvjuhfekvuf3pb9vc5oeg06thsi. backfill disponível desde 2026-07-15: 486 entradas detectadas, 297 saídas confirmadas e 356 renovações; nove lacunas de row no log reconciliadas por backup/discord.",
+      "thread_id": "1542560548124753920",
+      "updated_at": "2026-08-27T15:49:07+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260824",
       "next_step": "Próxima manutenção Hermes: avaliar o commit upstream pós-freeze f14059fa e quaisquer sucessores; não reabrir o cutover encerrado.",
       "objective": "Atualizar a VPS e o Hermes em fases controladas, com rollback, preservação integral dos patches MGS e zero commits upstream conhecidos pendentes no cutover",
@@ -1272,5 +1282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T15:43:46+00:00"
+  "updated_at": "2026-08-27T15:49:07+00:00"
 }

@@ -36,6 +36,7 @@ REPORT_SHEET_ID='1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI'
 REPORT_SHEET_URL=f'https://docs.google.com/spreadsheets/d/{REPORT_SHEET_ID}/edit?gid=0#gid=0'
 REPORT_TOTAL_TAB='Paginas Totais'
 REPORT_SUMMARY_TAB='Resumo'
+REPORT_HISTORY_TAB='Histórico Restrições'
 REPORT_LEGACY_TOTAL_TAB='Paginas'
 REPORT_SHEET_LOCK=Path('/var/lock/sb-restricted-sheet-writer.lock')
 GOOGLE_AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','service_account').strip().lower()
@@ -991,6 +992,27 @@ def build_report_datasets(rows, page_headers):
     return datasets
 
 
+REPORT_HISTORY_HEADERS=[
+    'link da pagina','nome da pagina','fb page id','page id','bot user',
+    'segurador','sites','entradas detectadas','saidas confirmadas',
+    'renovacoes','mudancas de status','estado atual','ultima entrada',
+    'ultima saida','saida prevista atual','cobertura desde',
+]
+
+
+def build_history_dataset(rows):
+    """Build the one-row-per-page restriction-cycle history tab."""
+    values=[REPORT_HISTORY_HEADERS]
+    seen=set()
+    for row in rows or []:
+        key=report_page_identity(row)
+        if key in seen:
+            raise RuntimeError(f'chave duplicada no histórico de restrições: {key}')
+        seen.add(key)
+        values.append([row.get(header,'') for header in REPORT_HISTORY_HEADERS])
+    return values
+
+
 def build_summary_dataset(rows, sheet_stats, updated_at=None):
     updated_at=updated_at or datetime.now(NY)
     page_counts=Counter()
@@ -1094,7 +1116,7 @@ def read_report_datasets(access_token, titles):
     if not titles:
         return {}
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
-    params=[('ranges',sheet_a1_title(title)+'!A:J') for title in titles]
+    params=[('ranges',sheet_a1_title(title)+'!A:Z') for title in titles]
     params.append(('majorDimension','ROWS'))
     result=sheets_api(access_token,'GET',base+'/values:batchGet?'+urllib.parse.urlencode(params))
     ranges=result.get('valueRanges') or []
@@ -1103,7 +1125,7 @@ def read_report_datasets(access_token, titles):
     return {title:(item.get('values') or []) for title,item in zip(titles,ranges)}
 
 def ensure_report_tabs(access_token, required_titles):
-    """Ensure all managed tabs exist and Resumo is immediately left of Paginas Totais."""
+    """Ensure managed tabs exist in canonical summary/total/history order."""
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
     meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
     props=[item['properties'] for item in meta.get('sheets',[])]
@@ -1139,9 +1161,18 @@ def ensure_report_tabs(access_token, required_titles):
         by_title={item['title']:item for item in props}
     if by_title[REPORT_SUMMARY_TAB].get('index')+1 != by_title[REPORT_TOTAL_TAB].get('index'):
         raise RuntimeError('Resumo não ficou imediatamente à esquerda de Paginas Totais')
+    if REPORT_HISTORY_TAB in by_title and by_title[REPORT_HISTORY_TAB].get('index') != by_title[REPORT_TOTAL_TAB].get('index')+1:
+        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':[
+            {'updateSheetProperties':{'properties':{'sheetId':by_title[REPORT_HISTORY_TAB]['sheetId'],'index':by_title[REPORT_TOTAL_TAB]['index']+1},'fields':'index'}}
+        ]})
+        meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
+        props=[item['properties'] for item in meta.get('sheets',[])]
+        by_title={item['title']:item for item in props}
+    if REPORT_HISTORY_TAB in by_title and by_title[REPORT_HISTORY_TAB].get('index') != by_title[REPORT_TOTAL_TAB].get('index')+1:
+        raise RuntimeError('Histórico Restrições não ficou imediatamente à direita de Paginas Totais')
     return by_title
 
-def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
+def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None, history_rows=None):
     """Clear and rebuild every managed tab from the desired live dataset."""
     REPORT_SHEET_LOCK.parent.mkdir(parents=True,exist_ok=True)
     with REPORT_SHEET_LOCK.open('a+') as lock_handle:
@@ -1150,7 +1181,10 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
         page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
         unique_rows,input_duplicates=dedupe_report_rows(rows)
         desired_pages=build_report_datasets(unique_rows,page_headers)
-        tabs=ensure_report_tabs(access_token,[REPORT_SUMMARY_TAB,*desired_pages])
+        required_titles=[REPORT_SUMMARY_TAB,*desired_pages]
+        if history_rows is not None:
+            required_titles.append(REPORT_HISTORY_TAB)
+        tabs=ensure_report_tabs(access_token,required_titles)
         existing_datasets=read_report_datasets(access_token,list(tabs))
         base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
 
@@ -1185,12 +1219,14 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
 
         # Keep every formerly managed site tab, but clear stale rows and rewrite
         # the header. This is a complete rebuild, not an incremental append.
-        site_titles={title for title in tabs if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_LEGACY_TOTAL_TAB}}
+        site_titles={title for title in tabs if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_HISTORY_TAB,REPORT_LEGACY_TOTAL_TAB}}
         expected_pages=dict(desired_pages)
         for title in site_titles:
             expected_pages.setdefault(title,[page_headers])
         summary_values=build_summary_dataset(unique_rows,sheet_stats or {})
         expected_datasets={REPORT_SUMMARY_TAB:summary_values,REPORT_TOTAL_TAB:expected_pages.pop(REPORT_TOTAL_TAB)}
+        if history_rows is not None:
+            expected_datasets[REPORT_HISTORY_TAB]=build_history_dataset(history_rows)
         for title in sorted(expected_pages,key=str.lower):
             expected_datasets[title]=expected_pages[title]
 
@@ -1232,6 +1268,21 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
                 for index,pixels in enumerate([150,90,700]):
                     format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
                 continue
+            if title==REPORT_HISTORY_TAB:
+                cols=len(REPORT_HISTORY_HEADERS)
+                format_requests.extend([
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat'}},
+                    {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1,'hideGridlines':False}},'fields':'gridProperties.frozenRowCount,gridProperties.hideGridlines'}},
+                ])
+                if len(values)>1:
+                    format_requests.extend([
+                        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+                        {'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}},
+                    ])
+                history_widths=[300,220,170,95,250,210,180,115,115,95,115,150,170,170,140,150]
+                for index,pixels in enumerate(history_widths):
+                    format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+                continue
             cols=len(page_headers)
             format_requests.extend([
                 {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
@@ -1261,7 +1312,8 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
         if duplicate_keys:
             raise RuntimeError(f'Google Sheets ainda contém chaves duplicadas: {duplicate_keys!r}')
         tabs_after=ensure_report_tabs(access_token,list(expected_datasets))
-        rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items() if title!=REPORT_SUMMARY_TAB}
+        rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items() if title not in {REPORT_SUMMARY_TAB,REPORT_HISTORY_TAB}}
+        history_rows_written=max(0,len(readback.get(REPORT_HISTORY_TAB) or [])-1) if REPORT_HISTORY_TAB in readback else None
         removed_page_rows=[]
         for key in sorted(removed_keys):
             values_row=old_total[key]
@@ -1272,9 +1324,10 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
             'rows_paginas_totais':rows_by_tab[REPORT_TOTAL_TAB],
             'rows_resumo_dates':max(0,len(readback[REPORT_SUMMARY_TAB])-6),
             'site_tabs':len(rows_by_tab)-1,
+            'rows_historico_restricoes':history_rows_written,
             'rows_by_tab':rows_by_tab,
             'updated_tabs':list(expected_datasets),
-            'updated_site_tabs':[title for title in expected_datasets if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB}],
+            'updated_site_tabs':[title for title in expected_datasets if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_HISTORY_TAB}],
             'added_pages':len(added_keys),
             'removed_pages':len(removed_keys),
             'removed_page_rows':removed_page_rows,
@@ -1289,6 +1342,7 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None):
             'expiry_inclusive':True,
             'summary_index':tabs_after[REPORT_SUMMARY_TAB]['index'],
             'total_index':tabs_after[REPORT_TOTAL_TAB]['index'],
+            'history_index':tabs_after[REPORT_HISTORY_TAB]['index'] if REPORT_HISTORY_TAB in tabs_after else None,
             'readback_ok':True,
         }
 
