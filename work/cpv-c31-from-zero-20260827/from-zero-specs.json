@@ -1,0 +1,67 @@
+{
+  "request_id": "cpv-c31-from-zero-20260827",
+  "from_zero_specs": [
+    {
+      "campaign_create": {
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "daily_budget": "2500",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "BR"
+        ]
+      },
+      "adset_create": {
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "geo_locations": {
+            "countries": [
+              "BR"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE"
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          },
+          {
+            "event_type": "ENGAGED_VIDEO_VIEW",
+            "window_days": 1
+          }
+        ],
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "is_dynamic_creative": false
+      }
+    }
+  ],
+  "spec_digest": "185a07f19003c8f8b43bf54fdb7f702a9e23c48c4f590c8296278f3e7152206a"
+}

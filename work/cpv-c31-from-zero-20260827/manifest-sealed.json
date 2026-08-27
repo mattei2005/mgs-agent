@@ -1,0 +1,797 @@
+{
+  "schema_version": 3,
+  "request_id": "cpv-c31-from-zero-20260827",
+  "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+  "graph_version": "v26.0",
+  "created_at": "2026-08-27T17:33:40.241634+00:00",
+  "prevalidated": true,
+  "execution_mode": "from_zero_prestaged",
+  "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight_reference_only",
+  "source_selections": [
+    {
+      "campaign_number": 31,
+      "vehicle_type": "MOTO",
+      "source_campaign_id": "120250925458300632",
+      "source_adset_id": "120250925458440632",
+      "roi_evidence": {}
+    }
+  ],
+  "campaigns": [
+    {
+      "idempotency_key": "cpv-c31-from-zero-20260827-c31",
+      "app_key": "mgs-meta-app-current",
+      "account_id": "1046241194533786",
+      "mode": "from_zero_prestaged",
+      "name": "31 - 28-08 - Garagem Brasil - MOTO - (b01fb13c31) event_Subscribe - MAXVOL",
+      "adset_name": "01 - AdGroup - (b01fb13c31g01) event_Subscribe - MAXVOL",
+      "start_time": "2026-08-28T00:30:00-03:00",
+      "status": "PAUSED",
+      "campaign_updates": {},
+      "ads": [
+        {
+          "name": "AD 01 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005",
+          "media": {
+            "account_id": "1046241194533786",
+            "asset_id": "asset_5966c098f64de6d561ab",
+            "association_verified": true,
+            "checksum": "ad4c13b56dcac61201d577296fd1f2978f65fc0e491e17d9e2fcfe5f02536905",
+            "ready": true,
+            "source": "v3-ad-account-prestage-meta-readback",
+            "square_video_id": "2074573669845844",
+            "updated_at": "2026-08-27T17:31:46.941361+00:00",
+            "upload_edge": "ad_account_advideos",
+            "vertical_video_id": "1757360908673298"
+          },
+          "creative_payload": {
+            "object_story_spec": {
+              "page_id": "621037101089579",
+              "instagram_user_id": "17841418924864919"
+            },
+            "asset_feed_spec": {
+              "videos": [
+                {
+                  "video_id": "1757360908673298",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                      "id": "120250209360530632"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "2074573669845844",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                      "id": "120250209360470632"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                      "id": "120250209360560632"
+                    },
+                    {
+                      "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                      "id": "120250209360590632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Sem Entrada, Parcelas Acessíveis!"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                      "id": "120250209360560632"
+                    },
+                    {
+                      "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                      "id": "120250209360590632"
+                    }
+                  ],
+                  "text": "✅ Saia de moto nova! Zero entrada e parcelas apartir de R$249."
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                      "id": "120250209360560632"
+                    },
+                    {
+                      "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                      "id": "120250209360590632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Nova Sem Entrada"
+                }
+              ],
+              "call_to_action_types": [
+                "LEARN_MORE"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐⭐⭐⭐⭐"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                      "id": "120250209360540632"
+                    },
+                    {
+                      "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                      "id": "120250209360550632"
+                    }
+                  ],
+                  "website_url": "https://creditoparaveiculo.com/quiz-moto-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c31&utm_adgroup=b01fb13c31g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                      "id": "120250209360480632"
+                    },
+                    {
+                      "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                      "id": "120250209360600632"
+                    }
+                  ],
+                  "text": "✔️ Entrada Zero - Moto Nova - Parcela Baixa"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                      "id": "120250209360480632"
+                    },
+                    {
+                      "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                      "id": "120250209360600632"
+                    }
+                  ],
+                  "text": "✅ R$249/MÊS"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                      "id": "120250209360480632"
+                    },
+                    {
+                      "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                      "id": "120250209360600632"
+                    }
+                  ],
+                  "text": "✅ ZERO ENTRADA"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "placement_asset_f18595cae4b373cc0_1784929815879",
+                    "id": "120250209360470632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_ff9d296d3813719a2_1784929815881",
+                    "id": "120250209360560632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f587898c6645a5f7b_1784929815882",
+                    "id": "120250209360540632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fa1971e2123f77374_1784929815881",
+                    "id": "120250209360600632"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "video_label": {
+                    "name": "placement_asset_fe6ddfd1c7935a467_1784929815876",
+                    "id": "120250209360530632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f1c43fcd4b3f6c5d2_1784929815876",
+                    "id": "120250209360590632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fd26bba9d67710ab6_1784929815878",
+                    "id": "120250209360550632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fbfbc463136a1e4a4_1784929815876",
+                    "id": "120250209360480632"
+                  },
+                  "priority": 2
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            },
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            },
+            "name": "CPV C31 AD01 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_005"
+          }
+        },
+        {
+          "name": "AD 02 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006",
+          "media": {
+            "account_id": "1046241194533786",
+            "asset_id": "asset_dea92e6bba464578897b",
+            "association_verified": true,
+            "checksum": "b10f3b7ecbd09ea18e90dd29cb3066f3c4e786ac5252009263450cda1d871a75",
+            "ready": true,
+            "source": "v3-ad-account-prestage-meta-readback",
+            "square_video_id": "2319932398809819",
+            "updated_at": "2026-08-27T17:32:16.247055+00:00",
+            "upload_edge": "ad_account_advideos",
+            "vertical_video_id": "1608732077287586"
+          },
+          "creative_payload": {
+            "object_story_spec": {
+              "page_id": "621037101089579",
+              "instagram_user_id": "17841418924864919"
+            },
+            "asset_feed_spec": {
+              "videos": [
+                {
+                  "video_id": "1608732077287586",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                      "id": "120250209368650632"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "2319932398809819",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                      "id": "120250209368660632"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                      "id": "120250209368670632"
+                    },
+                    {
+                      "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                      "id": "120250209368680632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Sem Entrada, Parcelas Acessíveis!"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                      "id": "120250209368670632"
+                    },
+                    {
+                      "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                      "id": "120250209368680632"
+                    }
+                  ],
+                  "text": "✅ Saia de moto nova! Zero entrada e parcelas apartir de R$249."
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                      "id": "120250209368670632"
+                    },
+                    {
+                      "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                      "id": "120250209368680632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Nova Sem Entrada"
+                }
+              ],
+              "call_to_action_types": [
+                "LEARN_MORE"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐⭐⭐⭐⭐"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                      "id": "120250209368700632"
+                    },
+                    {
+                      "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                      "id": "120250209368720632"
+                    }
+                  ],
+                  "website_url": "https://creditoparaveiculo.com/quiz-moto-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c31&utm_adgroup=b01fb13c31g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                      "id": "120250209368640632"
+                    },
+                    {
+                      "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                      "id": "120250209368710632"
+                    }
+                  ],
+                  "text": "✔️ Entrada Zero - Moto Nova - Parcela Baixa"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                      "id": "120250209368640632"
+                    },
+                    {
+                      "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                      "id": "120250209368710632"
+                    }
+                  ],
+                  "text": "✅ R$249/MÊS"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                      "id": "120250209368640632"
+                    },
+                    {
+                      "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                      "id": "120250209368710632"
+                    }
+                  ],
+                  "text": "✅ ZERO ENTRADA"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "placement_asset_fb3557f9083a44bfc_1784929930774",
+                    "id": "120250209368660632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_ffc8ed0e8b9d1c0b6_1784929930777",
+                    "id": "120250209368680632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fcf1e0739b4e22f41_1784929930778",
+                    "id": "120250209368700632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fa07e82090bcd0a26_1784929930778",
+                    "id": "120250209368710632"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "video_label": {
+                    "name": "placement_asset_fac566485afdbb86a_1784929930763",
+                    "id": "120250209368650632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f95ef6bf7d0b792bb_1784929930764",
+                    "id": "120250209368670632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fab16f5fe312a7802_1784929930769",
+                    "id": "120250209368720632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fd791fbcbc67c0cae_1784929930765",
+                    "id": "120250209368640632"
+                  },
+                  "priority": 2
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            },
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            },
+            "name": "CPV C31 AD02 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_006"
+          }
+        },
+        {
+          "name": "AD 03 - CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007",
+          "media": {
+            "account_id": "1046241194533786",
+            "asset_id": "asset_303bb59d1847ccd47afe",
+            "association_verified": true,
+            "checksum": "6b9e8ef07c79e231e30433ccc8bd8684817a84c3be6659d57d6149f0c127f58a",
+            "ready": true,
+            "source": "v3-ad-account-prestage-meta-readback",
+            "square_video_id": "1043788035116552",
+            "updated_at": "2026-08-27T17:32:42.564035+00:00",
+            "upload_edge": "ad_account_advideos",
+            "vertical_video_id": "1616201106804804"
+          },
+          "creative_payload": {
+            "object_story_spec": {
+              "page_id": "621037101089579",
+              "instagram_user_id": "17841418924864919"
+            },
+            "asset_feed_spec": {
+              "videos": [
+                {
+                  "video_id": "1616201106804804",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                      "id": "120250209350960632"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "1043788035116552",
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                      "id": "120250209350990632"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                      "id": "120250209351050632"
+                    },
+                    {
+                      "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                      "id": "120250209351070632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Sem Entrada, Parcelas Acessíveis!"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                      "id": "120250209351050632"
+                    },
+                    {
+                      "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                      "id": "120250209351070632"
+                    }
+                  ],
+                  "text": "✅ Saia de moto nova! Zero entrada e parcelas apartir de R$249."
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                      "id": "120250209351050632"
+                    },
+                    {
+                      "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                      "id": "120250209351070632"
+                    }
+                  ],
+                  "text": "🏍️ Moto Nova Sem Entrada"
+                }
+              ],
+              "call_to_action_types": [
+                "LEARN_MORE"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐⭐⭐⭐⭐"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                      "id": "120250209351000632"
+                    },
+                    {
+                      "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                      "id": "120250209351020632"
+                    }
+                  ],
+                  "website_url": "https://creditoparaveiculo.com/quiz-moto-parcelas-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb13c31&utm_adgroup=b01fb13c31g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f65158c940486da78_1784929732069",
+                      "id": "120250209351010632"
+                    },
+                    {
+                      "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                      "id": "120250209351080632"
+                    }
+                  ],
+                  "text": "✔️ Entrada Zero - Moto Nova - Parcela Baixa"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f65158c940486da78_1784929732069",
+                      "id": "120250209351010632"
+                    },
+                    {
+                      "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                      "id": "120250209351080632"
+                    }
+                  ],
+                  "text": "✅ R$249/MÊS"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f65158c940486da78_1784929732069",
+                      "id": "120250209351010632"
+                    },
+                    {
+                      "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                      "id": "120250209351080632"
+                    }
+                  ],
+                  "text": "✅ ZERO ENTRADA"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "placement_asset_ff6d4ecf74ab6e236_1784929732077",
+                    "id": "120250209350990632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f5279caf7c450223b_1784929732083",
+                    "id": "120250209351070632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f43f3b90f8df29746_1784929732086",
+                    "id": "120250209351020632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f7a5d1dec63368f99_1784929732084",
+                    "id": "120250209351080632"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "video_label": {
+                    "name": "placement_asset_f976ee0173425dec0_1784929732067",
+                    "id": "120250209350960632"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f0ac4830b22b3c78a_1784929732068",
+                    "id": "120250209351050632"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f0bb0ea230cda57e3_1784929732072",
+                    "id": "120250209351000632"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f65158c940486da78_1784929732069",
+                    "id": "120250209351010632"
+                  },
+                  "priority": 2
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            },
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            },
+            "name": "CPV C31 AD03 CAR_BR_BR_VID_MOTO_SEM_ENTRADA_NV_007"
+          }
+        }
+      ],
+      "campaign_create": {
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "daily_budget": "2500",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "BR"
+        ]
+      },
+      "adset_create": {
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "geo_locations": {
+            "countries": [
+              "BR"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "1033279451747443",
+          "custom_event_type": "SUBSCRIBE"
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          },
+          {
+            "event_type": "ENGAGED_VIDEO_VIEW",
+            "window_days": 1
+          }
+        ],
+        "regional_regulated_categories": [
+          "BRAZIL_REGULATION",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "1580679396253124",
+          "universal_payer": "1580679396253124"
+        },
+        "is_dynamic_creative": false
+      }
+    }
+  ],
+  "prevalidation": {
+    "engine_version": 3,
+    "validated_at": "2026-08-27T17:33:52.957830+00:00",
+    "checks": [
+      "schema_v3",
+      "unique_idempotency",
+      "timezone_start",
+      "safe_creative_payload",
+      "media_registry_exact",
+      "media_lineage_unique",
+      "ad_account_video_association"
+    ],
+    "content_digest": "5be3c1a7df3671c915fb3a5c1acf4f3a76285a6e521eebfc666bccc106942f39"
+  }
+}
