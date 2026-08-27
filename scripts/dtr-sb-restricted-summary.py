@@ -23,7 +23,7 @@ BASE = Path('/root/mgs-agent')
 DAILY_AUDIT_PATH = BASE / 'scripts/dtr-sb-daily-match-audit.py'
 TARGET_CHANNEL_ID = '1522442220903337984'
 NY = ZoneInfo('America/New_York')
-DISCORD_LIMIT = 2000
+DISCORD_LIMIT = 1900
 
 
 def load_module(name, path):
@@ -187,7 +187,7 @@ def main():
             print(block)
     else:
         for block in blocks:
-            post_statuses.append(sync.post_discord(block))
+            post_statuses.append(sync.post_discord(block, mention_roles=not post_statuses))
         if not post_statuses or any(
             discord_http_status(result) not in (200, 201)
             for result in post_statuses

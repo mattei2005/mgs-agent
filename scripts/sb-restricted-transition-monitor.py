@@ -26,7 +26,7 @@ STATE_PATH = BASE / 'data/sb-restricted-transition-state.json'
 TARGET_CHANNEL_ID = '1522442220903337984'
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0'
 NY = ZoneInfo('America/New_York')
-DISCORD_LIMIT = 2000
+DISCORD_LIMIT = 1900
 EXCLUDED_STATUSES = {'on-hold', 'blocked'}
 
 
@@ -399,7 +399,7 @@ def main():
             raise RuntimeError('Google Sheet update returned no successful readback')
         for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:
             for block in blocks:
-                result = sync.post_discord(block)
+                result = sync.post_discord(block, mention_roles=not post_results)
                 post_results.append({'kind': kind, 'result': result})
                 if discord_status(result) not in (200, 201):
                     raise RuntimeError(f'Discord {kind} delivery failed: {result!r}')

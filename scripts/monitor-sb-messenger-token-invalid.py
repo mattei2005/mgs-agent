@@ -147,15 +147,22 @@ def normalize_alerts(
             user_email = str(item.get('user_email') or '').strip()
             user_name = str(item.get('user_name') or '').strip()
             publisher_id = f'{company}_{domain}'
-            matched_users = [
+            scoped_users = [
                 row for row in users
                 if str(row.get('COMPANY') or '').strip() == company
                 and str(row.get('PUBLISHER_ID') or '').strip() == publisher_id
-                and (
-                    str(row.get('LOGIN') or '').strip().lower() == user_email.lower()
-                    or str(row.get('NAME') or '').strip().lower() == user_name.lower()
-                )
             ]
+            email_matches = [
+                row for row in scoped_users
+                if user_email and str(row.get('LOGIN') or '').strip().lower() == user_email.lower()
+            ]
+            if len(email_matches) == 1:
+                matched_users = email_matches
+            else:
+                matched_users = [
+                    row for row in scoped_users
+                    if user_name and str(row.get('NAME') or '').strip().lower() == user_name.lower()
+                ]
             mapped_user_id = str(matched_users[0].get('ID') or '').strip() if len(matched_users) == 1 else ''
             page_count = page_counts.get(mapped_user_id) if mapped_user_id else None
             alerts.append({
@@ -200,19 +207,34 @@ def build_payloads(
     alerts: list[dict[str, Any]],
     canary: bool = False,
     reminder: bool = False,
+    repeat_counts: list[int] | None = None,
+    opened_ats: list[str | None] | None = None,
+    now_value: datetime | None = None,
 ) -> list[dict[str, Any]]:
+    resolved_repeat_counts = repeat_counts if repeat_counts is not None else [1 if reminder else 0] * len(alerts)
+    resolved_opened_ats: list[str | None] = opened_ats if opened_ats is not None else [None for _ in alerts]
+    if len(resolved_repeat_counts) != len(alerts) or len(resolved_opened_ats) != len(alerts):
+        raise RuntimeError('payload repeat metadata length mismatch')
+    now_value = now_value or datetime.now(NY)
     payloads: list[dict[str, Any]] = []
-    for row in alerts:
+    for row, repeat_count, opened_at in zip(alerts, resolved_repeat_counts, resolved_opened_ats):
+        repeat_count = max(0, int(repeat_count or 0))
         if canary:
             title_prefix = 'CANÁRIO — '
-        elif reminder:
-            title_prefix = 'LEMBRETE — '
+        elif repeat_count > 0:
+            title_prefix = f'LEMBRETE #{repeat_count} — '
         else:
             title_prefix = ''
         site = (row['domain'] or 'SITE DESCONHECIDO').upper()
         user = row['user_email'] or row['user_name'] or f"ID {row['user_id']}"
         segurador = row['segurador_name'] or f"ID {row['segurador_id']}"
         page_count = '—' if row.get('pages') is None else str(row['pages'])
+        if repeat_count > 0:
+            opened = parse_dt(opened_at) if opened_at else now_value
+            elapsed_hours = max(0, int((now_value.astimezone(opened.tzinfo) - opened).total_seconds() // 3600))
+            footer = f"Aberto há {elapsed_hours}h · repetido {repeat_count}x · SB #{row['notification_id']}"
+        else:
+            footer = f"SB #{row['notification_id']} · {row['source']} · ✅ resolve"
         embed = {
             'title': f"{title_prefix}{site} — Token Messenger inválido"[:256],
             'color': 15158332,
@@ -221,7 +243,7 @@ def build_payloads(
                 {'name': 'Segurador', 'value': segurador[:1024] or '—', 'inline': True},
                 {'name': 'Páginas', 'value': page_count, 'inline': True},
             ],
-            'footer': {'text': f"SB #{row['notification_id']} · {row['source']} · ✅ resolve"},
+            'footer': {'text': footer[:2048]},
             'timestamp': row['created_at'],
         }
         payloads.append({
@@ -336,8 +358,29 @@ def verify_message(channel_id: str, message_id: str, payload: dict[str, Any]) ->
     expected_role_mentions = sorted(str(value) for value in ((payload.get('allowed_mentions') or {}).get('roles') or []))
     if actual_role_mentions != expected_role_mentions:
         raise RuntimeError('Discord role-mention readback mismatch')
-    if len(readback.get('embeds') or []) != len(payload.get('embeds') or []):
+    actual_embeds = readback.get('embeds') or []
+    expected_embeds = payload.get('embeds') or []
+    if len(actual_embeds) != len(expected_embeds):
         raise RuntimeError('Discord embed readback mismatch')
+    for actual_embed, expected_embed in zip(actual_embeds, expected_embeds):
+        if actual_embed.get('title') != expected_embed.get('title'):
+            raise RuntimeError('Discord embed title readback mismatch')
+        if int(actual_embed.get('color') or 0) != int(expected_embed.get('color') or 0):
+            raise RuntimeError('Discord embed color readback mismatch')
+        actual_footer = str((actual_embed.get('footer') or {}).get('text') or '')
+        expected_footer = str((expected_embed.get('footer') or {}).get('text') or '')
+        if actual_footer != expected_footer:
+            raise RuntimeError('Discord embed footer readback mismatch')
+        actual_fields = [
+            {'name': str(field.get('name') or ''), 'value': str(field.get('value') or ''), 'inline': bool(field.get('inline'))}
+            for field in (actual_embed.get('fields') or [])
+        ]
+        expected_fields = [
+            {'name': str(field.get('name') or ''), 'value': str(field.get('value') or ''), 'inline': bool(field.get('inline'))}
+            for field in (expected_embed.get('fields') or [])
+        ]
+        if actual_fields != expected_fields:
+            raise RuntimeError('Discord embed fields readback mismatch')
 
 
 def post_and_verify(channel_id: str, payload: dict[str, Any]) -> str:
@@ -376,17 +419,63 @@ def message_has_resolution_reaction(channel_id: str, message_id: str) -> bool:
     )
 
 
+def selected_delivery_specs(
+    state: dict[str, Any],
+    alerts: list[dict[str, Any]],
+    now_value: datetime | None = None,
+) -> list[dict[str, Any]]:
+    now_value = now_value or datetime.now(NY)
+    stamp = now_value.isoformat(timespec='seconds')
+    incidents = state.get('incidents') or {}
+    specs: list[dict[str, Any]] = []
+    for alert in alerts:
+        incident = incidents.get(incident_key(alert))
+        if isinstance(incident, dict) and incident.get('status') == 'active':
+            specs.append({
+                'repeat_count': int(incident.get('repeat_count') or 0) + 1,
+                'opened_at': str(incident.get('opened_at') or stamp),
+                'rendered_at': stamp,
+            })
+        else:
+            specs.append({'repeat_count': 0, 'opened_at': stamp, 'rendered_at': stamp})
+    return specs
+
+
+def build_payloads_from_specs(alerts: list[dict[str, Any]], specs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if len(alerts) != len(specs):
+        raise RuntimeError('delivery specs length mismatch')
+    rendered_values = {str(spec.get('rendered_at') or '') for spec in specs}
+    if len(rendered_values) != 1 or not next(iter(rendered_values), ''):
+        raise RuntimeError('delivery specs require one stable rendered_at timestamp')
+    return build_payloads(
+        alerts,
+        repeat_counts=[int(spec.get('repeat_count') or 0) for spec in specs],
+        opened_ats=[str(spec.get('opened_at') or '') or None for spec in specs],
+        now_value=parse_dt(next(iter(rendered_values))),
+    )
+
+
 def register_incidents(
     state: dict[str, Any],
     alerts: list[dict[str, Any]],
     message_ids: list[str],
     at: str | None = None,
+    repeat_counts: list[int] | None = None,
+    opened_ats: list[str | None] | None = None,
 ) -> None:
     if len(alerts) != len(message_ids):
         raise RuntimeError('incident registration requires one Discord message per alert')
+    resolved_repeat_counts: list[int | None] = []
+    if repeat_counts is None:
+        resolved_repeat_counts.extend(None for _ in alerts)
+    else:
+        resolved_repeat_counts.extend(int(value) for value in repeat_counts)
+    resolved_opened_ats: list[str | None] = opened_ats if opened_ats is not None else [None for _ in alerts]
+    if len(resolved_repeat_counts) != len(alerts) or len(resolved_opened_ats) != len(alerts):
+        raise RuntimeError('incident repeat metadata length mismatch')
     stamp = at or now_iso()
     incidents = state.setdefault('incidents', {})
-    for alert, message_id in zip(alerts, message_ids):
+    for alert, message_id, repeat_count, opened_at in zip(alerts, message_ids, resolved_repeat_counts, resolved_opened_ats):
         key = incident_key(alert)
         existing = incidents.get(key)
         if isinstance(existing, dict) and existing.get('status') == 'active':
@@ -397,13 +486,15 @@ def register_incidents(
                 'notification_ids': notification_ids,
                 'message_ids': (prior_messages + [str(message_id)])[-20:],
                 'last_sent_at': stamp,
+                'repeat_count': int(repeat_count if repeat_count is not None else existing.get('repeat_count') or 0),
             })
         else:
             incidents[key] = {
                 'status': 'active',
-                'opened_at': stamp,
+                'opened_at': opened_at or stamp,
                 'last_sent_at': stamp,
                 'resolved_at': None,
+                'repeat_count': int(repeat_count or 0),
                 'notification_ids': [int(alert['notification_id'])],
                 'message_ids': [str(message_id)],
                 'alert': alert,
@@ -445,10 +536,18 @@ def process_incident_reminders(
         if dry_run:
             stats['would_remind'] += 1
             continue
-        payload = build_payloads([dict(incident['alert'])], reminder=True)[0]
+        next_repeat_count = int(incident.get('repeat_count') or 0) + 1
+        opened_at = str(incident.get('opened_at') or now_value.isoformat(timespec='seconds'))
+        payload = build_payloads(
+            [dict(incident['alert'])],
+            repeat_counts=[next_repeat_count],
+            opened_ats=[opened_at],
+            now_value=now_value,
+        )[0]
         message_id = post_and_verify(channel_id, payload)
         incident['message_ids'] = (message_ids + [message_id])[-20:]
         incident['last_sent_at'] = now_value.isoformat(timespec='seconds')
+        incident['repeat_count'] = next_repeat_count
         stats['reminded'] += 1
     return stats
 
@@ -541,7 +640,13 @@ async def run(args: argparse.Namespace) -> int:
         present_ids = {int(row['notification_id']) for row in pending_alerts}
         if present_ids != pending_ids:
             raise RuntimeError('pending SB notifications are no longer available; refusing cursor advance')
-        pending_payloads = build_payloads(pending_alerts, canary=False)
+        pending_specs = pending.get('delivery_specs')
+        if not isinstance(pending_specs, list) or len(pending_specs) != len(pending_alerts):
+            pending_specs = selected_delivery_specs(state, pending_alerts)
+            state['pending']['delivery_specs'] = pending_specs
+            if not args.dry_run:
+                save_state(state_path, state)
+        pending_payloads = build_payloads_from_specs(pending_alerts, pending_specs)
         existing_ids = [str(value) for value in pending.get('message_ids') or []]
         if len(existing_ids) > len(pending_payloads):
             raise RuntimeError('pending state has more Discord messages than payload chunks')
@@ -555,7 +660,13 @@ async def run(args: argparse.Namespace) -> int:
             state['pending']['message_ids'] = existing_ids
             save_state(state_path, state)
         mark_success(state, pending_alerts, existing_ids)
-        register_incidents(state, pending_alerts, existing_ids)
+        register_incidents(
+            state,
+            pending_alerts,
+            existing_ids,
+            repeat_counts=[int(spec.get('repeat_count') or 0) for spec in pending_specs],
+            opened_ats=[str(spec.get('opened_at') or '') or None for spec in pending_specs],
+        )
         reminder_stats = process_incident_reminders(
             state,
             args.channel_id,
@@ -577,13 +688,19 @@ async def run(args: argparse.Namespace) -> int:
         print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'reminders': reminder_stats}, ensure_ascii=False))
         return 0
 
-    payloads = build_payloads(selected, canary=False)
     ids = sorted({int(row['notification_id']) for row in selected})
+    selected_keys = {incident_key(row) for row in selected}
     if args.dry_run:
+        reminder_stats = process_incident_reminders(state, args.channel_id, True, skip_keys=selected_keys)
+        delivery_specs = selected_delivery_specs(state, selected)
+        payloads = build_payloads_from_specs(selected, delivery_specs)
         deliver_payloads(args.channel_id, payloads, True)
-        print(json.dumps({'ok': True, 'mode': 'dry-run', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': [], 'mentions': 0}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'dry-run', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': [], 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'reminders': reminder_stats}, ensure_ascii=False))
         return 0
-    state['pending'] = {'created_at': now_iso(), 'notification_ids': ids, 'fingerprint': fingerprint(selected, False), 'message_ids': []}
+    reminder_stats = process_incident_reminders(state, args.channel_id, False, skip_keys=selected_keys)
+    delivery_specs = selected_delivery_specs(state, selected)
+    payloads = build_payloads_from_specs(selected, delivery_specs)
+    state['pending'] = {'created_at': now_iso(), 'notification_ids': ids, 'fingerprint': fingerprint(selected, False), 'delivery_specs': delivery_specs, 'message_ids': []}
     save_state(state_path, state)
     message_ids: list[str] = []
     for payload in payloads:
@@ -591,8 +708,15 @@ async def run(args: argparse.Namespace) -> int:
         state['pending']['message_ids'] = message_ids
         save_state(state_path, state)
     mark_success(state, selected, message_ids)
+    register_incidents(
+        state,
+        selected,
+        message_ids,
+        repeat_counts=[int(spec.get('repeat_count') or 0) for spec in delivery_specs],
+        opened_ats=[str(spec.get('opened_at') or '') or None for spec in delivery_specs],
+    )
     save_state(state_path, state)
-    print(json.dumps({'ok': True, 'mode': 'apply', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': message_ids, 'mentions': 0}, ensure_ascii=False))
+    print(json.dumps({'ok': True, 'mode': 'apply', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': message_ids, 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'reminders': reminder_stats}, ensure_ascii=False))
     return 0
 
 

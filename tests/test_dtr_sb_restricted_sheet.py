@@ -75,6 +75,10 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
 
         self.assertEqual(result, {'status': 200, 'message_id': 'message-1', 'attempts': 2})
         self.assertEqual(urlopen.call_count, 2)
+        request = urlopen.call_args_list[0].args[0]
+        payload = json.loads(request.data.decode('utf-8'))
+        self.assertEqual(payload['content'], f'{sync.TEAM_MENTIONS}\nfixture')
+        self.assertEqual(payload['allowed_mentions'], {'parse': [], 'roles': sync.TEAM_ROLE_IDS})
         sleep.assert_called_once_with(0.25)
 
     def test_new_restriction_alert_renders_revenue_7d(self):

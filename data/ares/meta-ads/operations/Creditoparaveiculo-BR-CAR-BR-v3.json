@@ -52,7 +52,7 @@
   },
   "budget_reporting": "every completed scheduled creation reports active account budget, effective dynamic envelope and remaining USD inside that envelope from live Meta preflight plus validated budgets created by the request",
   "creation_lifecycle_gate": "new campaigns are not an unconditional daily output; analyze D1-D3, apply approved pause/scale actions and create a new cohort only when the lifecycle review justifies it and Rodolfo or Nicolas releases the creation hold",
-  "current_creation_hold": "general daily creation hold active since 2026-08-25; one-time request cpv-moto-3x3-20260825 explicitly authorizes only three campaigns with the nine MOTO lineages from thread 1541633215645745202; scheduler remains paused",
+  "current_creation_hold": "general daily creation hold is active; one-time request cpv-c26-c28-20260826 completed C26, C27 and C28 for delivery on 2026-08-27 and did not release future creation",
   "manifest_gate": "prevalidated=true required for execute",
   "write_gate": "config.enabled=true and config.write_enabled=true plus --confirm-execute from an authorized campaign request",
   "first_production_request": "guarded canary automatically: prevalidated manifest, first bundle monitored, fail closed on any drift",

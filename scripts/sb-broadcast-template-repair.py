@@ -551,6 +551,41 @@ def page_label(pages: int) -> str:
     return f'{pages} página' if int(pages) == 1 else f'{pages} páginas'
 
 
+def daily_status_label(item: dict) -> tuple[str, str]:
+    status = str(item.get('status') or '')
+    if status == 'completed':
+        return '✅', 'Concluído'
+    if status == 'blocked':
+        return '⛔', 'Revisão humana necessária'
+    if status == 'eligible_next_day' and not int(item.get('no_progress_cycles') or 0):
+        return '✅', 'Nova rodada amanhã, se necessário'
+    if int(item.get('no_progress_cycles') or 0):
+        return '🟡', 'Sem progresso'
+    return 'ℹ️', 'Processado'
+
+
+def daily_template_field(item: dict) -> dict:
+    icon, next_step = daily_status_label(item)
+    before = item.get('before') or {}
+    after = item.get('after') or {}
+
+    def transition(color: str) -> str:
+        return f"{before.get(color, 0)}→{after.get(color, '-')}"
+
+    counts = (
+        f"🟢 {transition('verde')}   ⚪ {transition('cinza')}   "
+        f"🔴 {transition('vermelho')}   🟣 {transition('roxo')}"
+    )
+    scope = page_label(int(item.get('pages') or 0))
+    if item.get('vertical'):
+        scope += f" • {item['vertical']}"
+    return {
+        'name': f"{icon} {compact_template_name(item.get('template') or '-', 90)}",
+        'value': f"{counts}\n{scope} • {next_step}",
+        'inline': False,
+    }
+
+
 def discord_embed(event: str, item: dict) -> dict:
     name = compact_template_name(item.get('template') or '')
     palette = {
@@ -563,14 +598,20 @@ def discord_embed(event: str, item: dict) -> dict:
     }
     color, label = palette.get(event, (0x95A5A6, event.upper()))
     fields = []
+    description = None
     if event == 'daily':
-        fields = [
-            {'name': 'Templates processados', 'value': str(item.get('processed', 0)), 'inline': True},
-            {'name': 'Concluídos/melhores', 'value': str(item.get('positive', 0)), 'inline': True},
-            {'name': 'Bloqueados', 'value': str(item.get('blocked', 0)), 'inline': True},
-            {'name': 'Resumo', 'value': item.get('summary') or 'Nenhuma alteração.', 'inline': False},
-        ]
-        title = f'Broadcast Templates — {label}'
+        description = (
+            f"**{item.get('processed', 0)}** processados  •  "
+            f"✅ **{item.get('positive', 0)}** melhores  •  "
+            f"⛔ **{item.get('blocked', 0)}** bloqueados\n"
+            "Contagens: **antes → depois**"
+        )
+        digest_items = item.get('templates') or []
+        if digest_items:
+            fields = [daily_template_field(template) for template in digest_items[:12]]
+        else:
+            fields = [{'name': 'Resultado', 'value': 'Nenhum template processado hoje.', 'inline': False}]
+        title = 'Resumo diário • Broadcast Templates'
     else:
         title = f'{label} — {name}'
         fields.append({'name': 'Template', 'value': item.get('template') or '-', 'inline': False})
@@ -588,6 +629,7 @@ def discord_embed(event: str, item: dict) -> dict:
         'embeds': [{
             'title': title[:256],
             'color': color,
+            **({'description': description} if description else {}),
             'fields': fields[:25],
             'footer': {'text': f"Ciclo {item.get('cycle', '-')} • ID {str(item.get('template_id', '-'))[:8]}"},
             'timestamp': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
@@ -616,7 +658,8 @@ def post_event(state: dict, config: dict, event: str, item: dict, dry_run: bool 
     if event == 'daily':
         # A premature empty digest must not suppress the real end-of-day result.
         fingerprint_parts.extend([
-            item.get('processed'), item.get('positive'), item.get('blocked'), item.get('summary'),
+            item.get('processed'), item.get('positive'), item.get('blocked'),
+            item.get('templates'), item.get('summary'),
         ])
     fingerprint_raw = json.dumps(fingerprint_parts, ensure_ascii=False, sort_keys=True)
     fingerprint = hashlib.sha256(fingerprint_raw.encode()).hexdigest()
@@ -961,12 +1004,15 @@ def daily_digest(
     items = [item for item in state.get('templates', {}).values() if str(item.get('approval_started_at_sp') or '').startswith(today)]
     positive = sum(1 for item in items if item.get('status') in {'completed', 'eligible_next_day'} and not item.get('no_progress_cycles'))
     blocked = sum(1 for item in items if item.get('status') == 'blocked')
-    rows = []
-    for item in sorted(items, key=lambda value: value.get('template') or '')[:12]:
-        before = item.get('before') or {}; after = item.get('after') or {}
-        rows.append(f"{compact_template_name(item.get('template') or '', 42):<42} | {before.get('verde',0):>2}→{after.get('verde','-'):>2} Vd | {before.get('vermelho',0):>2}→{after.get('vermelho','-'):>2} Vm | {before.get('roxo',0):>2}→{after.get('roxo','-'):>2} Rx | {item.get('status','-')}")
-    summary = '```\nTemplate                                   | Verde | Verm. | Roxo  | Estado\n' + '\n'.join(rows) + '\n```' if rows else 'Nenhum template processado hoje.'
-    item = {'processed': len(items), 'positive': positive, 'blocked': blocked, 'summary': summary, 'template_id': 'daily', 'cycle': today}
+    digest_items = sorted(items, key=lambda value: value.get('template') or '')[:12]
+    item = {
+        'processed': len(items),
+        'positive': positive,
+        'blocked': blocked,
+        'templates': digest_items,
+        'template_id': 'daily',
+        'cycle': today,
+    }
     message_id = safe_post_event(state, config, 'daily', item, dry_run=dry_notify) if notify else None
     atomic_json(STATE_PATH, state)
     return {'status': 'ok', 'processed': len(items), 'positive': positive, 'blocked': blocked, 'message_id': message_id}

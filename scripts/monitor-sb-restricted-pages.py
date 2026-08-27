@@ -28,6 +28,8 @@ STATE_PATH = BASE / 'data/sb-restricted-pages-monitor.json'
 LOG_PREFIX = 'monitor-sb-restricted-pages'
 SB_STATE = '/root/.local/share/mgs/smartbidding_state_headed.json'
 TARGET_CHANNEL_ID = '1522442220903337984'
+TEAM_ROLE_IDS = ['1496256346994249912', '1496260941787168848']
+TEAM_MENTIONS = ' '.join(f'<@&{role_id}>' for role_id in TEAM_ROLE_IDS)
 NY = ZoneInfo('America/New_York')
 
 
@@ -203,7 +205,8 @@ def build_payload(total_rows: int, active_rows: list[dict], new_rows: list[dict]
     title = 'SB páginas restritas — baseline inicial' if initial else 'SB páginas restritas — alteração detectada'
     color = 3447003 if initial else 15844367
     return {
-        'content': '',
+        'content': TEAM_MENTIONS,
+        'allowed_mentions': {'parse': [], 'roles': TEAM_ROLE_IDS},
         'embeds': [{
             'title': title,
             'color': color,
@@ -312,7 +315,10 @@ APP_DELETED         Aplicação validada foi deletada.
 TOKEN               Token inválido, expirado ou sessão expirada.
 OTHER               Erro não mapeado automaticamente; mensagem exata deve ser registrada.
 ```"""
-    return [{'content': msg1}, {'content': msg2}]
+    return [
+        {'content': f'{TEAM_MENTIONS}\n{msg1}', 'allowed_mentions': {'parse': [], 'roles': TEAM_ROLE_IDS}},
+        {'content': msg2, 'allowed_mentions': {'parse': []}},
+    ]
 
 
 async def run(args: argparse.Namespace) -> int:

@@ -58,6 +58,26 @@ Script: /root/mgs-agent/scripts/dtr-sb-restricted-summary.py
 
 The daily summary reads the current Smart Bidding state after the 07:30 DTR sync, applies the active-user scope and global page ignore list, and groups only restricted `Status SB = Broadcast` pages by `Data saída` with comma-separated `Sites`. `On-hold` appears only as the ignored count. This summary does not replace or suppress the event-driven **NOVAS** report; **NOVAS** remains tied to a new DTR `#2022` apply plus Smart Bidding readback OK. Use `--no-post` for a live validation that must not send a Discord message.
 
+## Team role mentions
+
+Every logical alert/report delivered to `#paginas-restritas` must mention the operational audience once:
+
+```text
+Gestor de Trafego: 1496256346994249912
+Admin:              1496260941787168848
+```
+
+Delivery rules:
+
+```text
+- Prefix only the first Discord block of each logical run with both role mentions.
+- Set allowed_mentions.parse=[] and explicitly allow only those two role IDs.
+- Continuation blocks in the same run must not repeat the mentions or create duplicate notifications.
+- Reserve at least 100 characters below Discord's 2,000-character limit for the mention prefix.
+- Active emitters covered: dtr-sb-page-health-sync.py, dtr-sb-restricted-summary.py and sb-restricted-transition-monitor.py.
+- The retired SB-only monitor keeps the same mention contract if it is ever explicitly re-enabled.
+```
+
 ## Alert table format
 
 The restricted-pages delta report should include:

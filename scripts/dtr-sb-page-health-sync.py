@@ -29,6 +29,8 @@ LOG_DIR=BASE_DIR/'logs'
 REPORT_DIR=BASE_DIR/'reports'
 STATE_PATH=BASE_DIR/'data/dtr-sb-page-health-sync-state.json'
 TARGET_CHANNEL_ID='1522442220903337984'
+TEAM_ROLE_IDS=['1496256346994249912','1496260941787168848']
+TEAM_MENTIONS=' '.join(f'<@&{role_id}>' for role_id in TEAM_ROLE_IDS)
 OP_RESOLVER_PATH=BASE_DIR/'scripts/mgs-op-item-resolver.py'
 REPORT_SHEET_ID='1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI'
 REPORT_SHEET_URL=f'https://docs.google.com/spreadsheets/d/{REPORT_SHEET_ID}/edit?gid=0#gid=0'
@@ -717,13 +719,15 @@ def derive_segurador(row):
     match=re.search(r'PERFIL\s+SEGURADOR\s*-\s*(.+)',notes,re.I)
     return clean(re.split(r'\s+-\s+',match.group(1),maxsplit=1)[0]) if match else ''
 
-def post_discord(content, max_attempts=5):
+def post_discord(content, max_attempts=5, mention_roles=True):
     token=discord_token()
     if not token:
         raise RuntimeError('DISCORD_BOT_TOKEN unavailable')
-    if len(content)>2000:
-        raise RuntimeError(f'Discord content exceeds 2000 characters: {len(content)}')
-    body=json.dumps({'content':content}, ensure_ascii=False).encode('utf-8')
+    rendered=(f'{TEAM_MENTIONS}\n{content}' if mention_roles else content)
+    if len(rendered)>2000:
+        raise RuntimeError(f'Discord content exceeds 2000 characters: {len(rendered)}')
+    allowed_mentions={'parse':[],'roles':TEAM_ROLE_IDS} if mention_roles else {'parse':[]}
+    body=json.dumps({'content':rendered,'allowed_mentions':allowed_mentions}, ensure_ascii=False).encode('utf-8')
     req=urllib.request.Request(
         f'https://discord.com/api/v10/channels/{TARGET_CHANNEL_ID}/messages',
         data=body,
@@ -1507,14 +1511,14 @@ async def main():
                     first_contents=[build_no_new_restrictions_alert(summary)]
                     summary['discord_alert_kind']='no_new_restrictions'
                 for index,content in enumerate(first_contents,start=1):
-                    deliveries.append({'kind':f"{summary['discord_alert_kind']}_{index}",'result':post_discord(content)})
+                    deliveries.append({'kind':f"{summary['discord_alert_kind']}_{index}",'result':post_discord(content,mention_roles=not deliveries)})
                 sheet_ok=bool((summary.get('sheet_update') or {}).get('readback_ok'))
                 if not summary['errors'] and sheet_ok:
                     for index,content in enumerate(build_operational_summary_alerts(restricted_rows,summary),start=1):
-                        deliveries.append({'kind':f'operational_summary_{index}','result':post_discord(content)})
+                        deliveries.append({'kind':f'operational_summary_{index}','result':post_discord(content,mention_roles=not deliveries)})
                     if exited_rows:
                         for index,content in enumerate(build_exited_restrictions_alerts(exited_rows,summary),start=1):
-                            deliveries.append({'kind':f'exited_restrictions_{index}','result':post_discord(content)})
+                            deliveries.append({'kind':f'exited_restrictions_{index}','result':post_discord(content,mention_roles=not deliveries)})
                 summary['discord_deliveries']=deliveries
                 summary['discord_alert_http']=(deliveries[0]['result'] or {}).get('status')
             except Exception as exc:

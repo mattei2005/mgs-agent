@@ -58,6 +58,7 @@ Formato de alertas desse fluxo:
 - um embed de início por template realmente tocado;
 - um embed de resultado positivo, concluído, sem progresso ou bloqueado após o ETA;
 - um único digest diário compacto;
+- no digest diário com até 12 templates, **não** usar tabela monoespaçada larga dentro de um único field: o Discord estreita o embed, quebra cabeçalhos/linhas e trunca nomes. Usar resumo numérico na `description` e um field `inline: false` por template, com nome completo compacto, ícone de situação, uma linha de contagens `antes→depois` para 🟢/⚪/🔴/🟣 e uma segunda linha curta com páginas, vertical e próximo passo humano;
 - mostrar template, páginas/vertical, contagens antes/depois por cor, ação, horário do Approval, ETA e próximo passo;
 - não despejar IDs de todas as mensagens, copies completas, motivos repetidos nem paginação em várias mensagens;
 - fingerprint por template ID + ciclo + evento + contagens para suprimir repetição;

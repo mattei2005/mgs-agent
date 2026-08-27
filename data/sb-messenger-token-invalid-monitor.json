@@ -5,15 +5,211 @@
       "digital-trust-2"
     ],
     "description": "Mirror de alertas SB Messenger user token invalid; sem tokens brutos.",
-    "mentions": "disabled; matches paginas-restritas channel delivery",
+    "mentions": {
+      "roles": [
+        "1496256346994249912",
+        "1496260941787168848"
+      ]
+    },
+    "reminder_hours": 3,
+    "resolution": "reaction ✅ on the incident message",
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
   "consecutive_failures": 0,
-  "delivered_ids": [],
+  "delivered_ids": [
+    673973,
+    674031,
+    674042,
+    674061,
+    674081,
+    674098
+  ],
   "failure_alert_sent_for": 0,
-  "last_check": "2026-08-26T22:12:13-04:00",
-  "last_delivery": null,
+  "incidents": {
+    "digital-trust-2|zuout|11|915": {
+      "alert": {
+        "company": "digital-trust-2",
+        "created_at": "2026-08-26T20:07:41.000Z",
+        "domain": "zuout",
+        "notification_id": 673973,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 145,
+        "segurador_id": "915",
+        "segurador_name": "Maribel Tamboon",
+        "source": "page_token",
+        "user_email": "disparoszuout@gmail.com",
+        "user_id": "11",
+        "user_name": "Disparos Zuout US-CC-EN"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366078020222997"
+      ],
+      "notification_ids": [
+        673973
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|financeadx|24|1614": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-26T20:09:18.000Z",
+        "domain": "financeadx",
+        "notification_id": 674061,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 227,
+        "segurador_id": "1614",
+        "segurador_name": "Nataly Braga",
+        "source": "canary",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366082873172050"
+      ],
+      "notification_ids": [
+        674061
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|fincgriffin|105|1530": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-26T20:09:17.000Z",
+        "domain": "fincgriffin",
+        "notification_id": 674042,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 1,
+        "segurador_id": "1530",
+        "segurador_name": "Raquel Mota",
+        "source": "page_token",
+        "user_email": "disparosfincgriffinuscaren006@gmail.com",
+        "user_id": "105",
+        "user_name": "Disparos Fincgriffin US-CAR-EN - G006"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366081031733310"
+      ],
+      "notification_ids": [
+        674042
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|spe|7|72": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-26T20:09:38.000Z",
+        "domain": "spe",
+        "notification_id": 674081,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 48,
+        "segurador_id": "72",
+        "segurador_name": "ISrael Saucedo",
+        "source": "page_token",
+        "user_email": "disparosspe@gmail.com",
+        "user_id": "7",
+        "user_name": "Disparos SPE US-JOB-EN-ES"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366085087760485"
+      ],
+      "notification_ids": [
+        674081
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|topfeed|6|903": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-26T20:09:16.000Z",
+        "domain": "topfeed",
+        "notification_id": 674031,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 105,
+        "segurador_id": "903",
+        "segurador_name": "Hùng Hợp Tiến",
+        "source": "page_token",
+        "user_email": "disparosfinancetopfeed@gmail.com",
+        "user_id": "6",
+        "user_name": "Disparos FTF US-CC-EN"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366079597416479"
+      ],
+      "notification_ids": [
+        674031
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|zyclor|45|201": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-08-26T20:10:46.000Z",
+        "domain": "zyclor",
+        "notification_id": 674098,
+        "page_count_scope": "mapped-sb-user-id",
+        "pages": 2,
+        "segurador_id": "201",
+        "segurador_name": "Ithaa Djaeng",
+        "source": "page_token",
+        "user_email": "disparoszycloren@gmail.com",
+        "user_id": "45",
+        "user_name": "Disparos Zyclor US-CC-EN"
+      },
+      "last_sent_at": "2026-08-26T22:52:11-04:00",
+      "message_ids": [
+        "1542366086966804523"
+      ],
+      "notification_ids": [
+        674098
+      ],
+      "opened_at": "2026-08-26T22:52:08-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    }
+  },
+  "last_check": "2026-08-26T23:57:15-04:00",
+  "last_delivery": {
+    "at": "2026-08-26T22:52:11-04:00",
+    "message_ids": [
+      "1542366078020222997",
+      "1542366079597416479",
+      "1542366081031733310",
+      "1542366082873172050",
+      "1542366085087760485",
+      "1542366086966804523"
+    ],
+    "notification_ids": [
+      673973,
+      674031,
+      674042,
+      674061,
+      674081,
+      674098
+    ]
+  },
   "last_error": null,
   "last_seen_id": 674098,
   "pending": null

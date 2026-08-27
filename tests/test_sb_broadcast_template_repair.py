@@ -68,7 +68,9 @@ class RepairTests(unittest.TestCase):
 
         ordinary = dict(red, ID='ordinary-id', NAME='Ordinary - US-CC-EN - g001-d Ciro')
         self.assertIsNone(repair.excluded_template(ordinary, config))
-        self.assertEqual(len(repair.classify_rows([ordinary], bank_for([ordinary]), config, repair.default_state())), 1)
+        # Candidate eligibility is independent from the wall clock in this test.
+        with mock.patch.object(repair, 'fits_window', return_value=True):
+            self.assertEqual(len(repair.classify_rows([ordinary], bank_for([ordinary]), config, repair.default_state())), 1)
 
     def test_invalid_exclusion_config_fails_closed(self):
         row = template(['vermelho'] + ['verde'] * 29)
@@ -194,6 +196,48 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(payload['allowed_mentions']['parse'], [])
         self.assertLessEqual(len(payload['embeds'][0]['fields']), 25)
 
+    def test_daily_embed_uses_readable_rows_instead_of_wrapped_table(self):
+        templates = [
+            {
+                'template_id': 'a',
+                'template': 'Eggbev - US-CC-EN/EN-SR - g006-d Nicolas',
+                'vertical': 'US-CC-EN',
+                'pages': 110,
+                'before': {'verde': 0, 'cinza': 0, 'vermelho': 1, 'roxo': 29},
+                'after': {'verde': 14, 'cinza': 16, 'vermelho': 0, 'roxo': 0},
+                'status': 'eligible_next_day',
+                'no_progress_cycles': 0,
+            },
+            {
+                'template_id': 'b',
+                'template': 'Financeadx - MX-CC-ES/ES-ZW-SR - g006-d Nicolas',
+                'vertical': 'MX-CC-ES',
+                'pages': 8,
+                'before': {'verde': 28, 'cinza': 0, 'vermelho': 2, 'roxo': 0},
+                'after': {'verde': 27, 'cinza': 1, 'vermelho': 2, 'roxo': 0},
+                'status': 'blocked',
+                'no_progress_cycles': 7,
+            },
+        ]
+        payload = repair.discord_embed('daily', {
+            'template_id': 'daily', 'cycle': '2026-08-26',
+            'processed': 2, 'positive': 1, 'blocked': 1,
+            'templates': templates,
+        })
+        embed = payload['embeds'][0]
+        raw = json.dumps(payload, ensure_ascii=False)
+        self.assertEqual(embed['title'], 'Resumo diário • Broadcast Templates')
+        self.assertIn('**2** processados', embed['description'])
+        self.assertEqual(len(embed['fields']), 2)
+        self.assertTrue(all(field['inline'] is False for field in embed['fields']))
+        self.assertTrue(embed['fields'][0]['name'].startswith('✅ Eggbev'))
+        self.assertTrue(embed['fields'][1]['name'].startswith('⛔ Financeadx'))
+        self.assertIn('🟢 0→14', embed['fields'][0]['value'])
+        self.assertIn('⚪ 0→16', embed['fields'][0]['value'])
+        self.assertNotIn('```', raw)
+        self.assertNotIn('eligible_next_day', raw)
+        self.assertLess(len(raw), 6000)
+
     def test_notification_failure_does_not_abort_repair_state(self):
         item = {'template_id': '10', 'template': 'Site'}
         with mock.patch.object(repair, 'post_event', side_effect=RuntimeError('http_503')):
@@ -276,6 +320,7 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(result['blocked'], 0)
         self.assertEqual(result['message_id'], '123')
         self.assertEqual(post.call_args.args[3]['cycle'], '2026-08-24')
+        self.assertEqual(len(post.call_args.args[3]['templates']), 1)
 
 
 class CaptureHandler(BaseHTTPRequestHandler):

@@ -37,11 +37,13 @@ from ares_campaign_v3.daily_cpv import (
     failure_resume_state,
     discord_failure_message,
     rollover_completed_state,
+    request_operational_date,
     media_title,
     LiveDailyBackend,
     safe_error,
     BatchTransportError,
     account_budget_summary,
+    resume_budget_plan,
     usd_minor_label,
     corrective_write_authorization,
     assignments_from_readback,
@@ -242,6 +244,17 @@ def test_completed_request_is_not_reused_on_the_next_operational_day():
     assert rollover_completed_state(previous, "2026-08-21") == previous
 
 
+def test_resumable_request_preserves_operational_date_after_midnight():
+    state = {
+        "status": "POSTPROCESS_PENDING",
+        "operational_date_sp": "2026-08-26",
+        "retry_after_epoch": 0,
+    }
+    now_sp = datetime(2026, 8, 27, 0, 14, tzinfo=SP)
+    assert request_operational_date(now_sp, state).isoformat() == "2026-08-26"
+    assert gate_due(now_sp, state) is True
+
+
 def test_discord_failure_explains_cause_impact_and_correction_without_internal_paths():
     message = discord_failure_message(
         {
@@ -312,6 +325,24 @@ def test_account_budget_summary_reports_remaining_operational_cap():
     }
     assert usd_minor_label(summary["active_minor"]) == "405"
     assert usd_minor_label(summary["remaining_minor"]) == "95"
+
+
+def test_resume_budget_plan_does_not_add_budget_when_all_campaigns_exist():
+    campaigns = [
+        {"configured_status": "ACTIVE", "effective_status": "ACTIVE", "daily_budget": "3000"},
+        {"configured_status": "ACTIVE", "effective_status": "ACTIVE", "daily_budget": "3000"},
+    ]
+    operation_payload = {
+        "daily_budget_policy": {
+            "new_campaign_initial_budget_usd": 30,
+            "operational_account_cap_usd": 500,
+            "dynamic_account_cap": {"enabled": True, "allowed_scopes": ["scheduled_creation"]},
+        }
+    }
+    budget = resume_budget_plan(campaigns, count=2, completed_before=2, operation=operation_payload)
+    assert budget["new_minor"] == 0
+    assert budget["projected_minor"] == 6000
+    assert account_budget_summary(budget)["active_minor"] == 6000
 
 
 def test_lifecycle_observation_hold_blocks_new_campaign_count_but_not_analysis_jobs():

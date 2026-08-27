@@ -199,24 +199,37 @@ def safe_error(exc: Exception) -> dict[str, Any]:
     return result
 
 
+RESUME_STATUSES = {
+    "ASSETS_RESERVED",
+    "MEDIA_READY",
+    "MANIFEST_SEALED",
+    "PARTIAL_DEFERRED_QUOTA",
+    "POSTPROCESS_PENDING",
+    "READBACK_DEFERRED",
+    "RECOVERY_PENDING",
+}
+
+
 def is_resume_state(state: dict[str, Any], operational_date: str) -> bool:
     return (
         str(state.get("operational_date_sp") or "") == operational_date
-        and str(state.get("status") or "")
-        in {
-            "ASSETS_RESERVED",
-            "MEDIA_READY",
-            "MANIFEST_SEALED",
-            "PARTIAL_DEFERRED_QUOTA",
-            "POSTPROCESS_PENDING",
-            "READBACK_DEFERRED",
-            "RECOVERY_PENDING",
-        }
+        and str(state.get("status") or "") in RESUME_STATUSES
     )
 
 
+def request_operational_date(now_sp: datetime, state: dict[str, Any]) -> date:
+    """Keep the original delivery contract when recovery crosses midnight."""
+    raw = str(state.get("operational_date_sp") or "")
+    if raw and str(state.get("status") or "") in RESUME_STATUSES:
+        try:
+            return date.fromisoformat(raw)
+        except ValueError as exc:
+            raise DailyBlocked("state", "resumable operational date is invalid", {"operational_date_sp": raw}) from exc
+    return now_sp.date()
+
+
 def gate_due(now_sp: datetime, state: dict[str, Any]) -> bool:
-    day = now_sp.date().isoformat()
+    day = request_operational_date(now_sp, state).isoformat()
     if is_resume_state(state, day):
         retry_after = int(state.get("retry_after_epoch") or 0)
         return retry_after <= int(now_sp.timestamp())
@@ -498,6 +511,36 @@ def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: d
         "deferred_by_budget_count": count - selected,
         "new_minor": selected * initial_minor,
         "projected_minor": after,
+        **envelope,
+    }
+
+
+def resume_budget_plan(
+    campaigns: list[dict[str, Any]],
+    count: int,
+    completed_before: int,
+    operation: dict[str, Any],
+) -> dict[str, int | bool]:
+    """Budget only the missing layer; a fully-created request reports live total."""
+    pending = max(0, count - completed_before)
+    if pending:
+        budget = enforce_budget_cap(campaigns, pending, operation)
+        if int(budget["selected_count"]) < pending:
+            raise DailyBlocked("budget_cap", "remaining resumable campaign no longer fits the operational cap", budget)
+        return budget
+    policy = operation.get("daily_budget_policy") or {}
+    initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
+    active_minor = active_budget_minor(campaigns)
+    envelope = effective_account_cap_minor(policy, active_minor, "scheduled_creation")
+    return {
+        "active_before_minor": active_minor,
+        "available_minor": max(0, int(envelope["cap_minor"]) - active_minor),
+        "initial_minor": initial_minor,
+        "desired_count": count,
+        "selected_count": 0,
+        "deferred_by_budget_count": 0,
+        "new_minor": 0,
+        "projected_minor": active_minor,
         **envelope,
     }
 
@@ -1504,15 +1547,17 @@ def run_daily(
     backend_factory: Callable[[DailyPaths], Any] = LiveDailyBackend,
 ) -> dict[str, Any]:
     current = now_sp.astimezone(SP) if now_sp else datetime.now(SP)
-    operational_date = current.date()
-    day = operational_date.isoformat()
     state = load_json(paths.state) if paths.state.exists() else {}
+    operational_date = request_operational_date(current, state)
+    day = operational_date.isoformat()
     if gate and not gate_due(current, state):
         return {"status": "SILENT_NOT_DUE", "operational_date_sp": day}
     paths.lock.parent.mkdir(parents=True, exist_ok=True)
     with paths.lock.open("a+") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
         state = {} if plan_only else (load_json(paths.state) if paths.state.exists() else {})
+        operational_date = request_operational_date(current, state)
+        day = operational_date.isoformat()
         state = rollover_completed_state(state, day)
         if state.get("completed_operational_date_sp") == day:
             return {"status": "ALREADY_COMPLETE", "operational_date_sp": day, "audit": state.get("audit_path")}
@@ -1554,10 +1599,7 @@ def run_daily(
             completed_before = len(set(str(item) for item in state.get("campaign_ids") or []) | set(checkpoint_campaign_ids))
             if state.get("campaign_count"):
                 count = int(state["campaign_count"])
-                pending_budget_count = max(0, count - completed_before)
-                budget = enforce_budget_cap(meta["campaigns"], max(1, pending_budget_count), operation)
-                if int(budget["selected_count"]) < pending_budget_count:
-                    raise DailyBlocked("budget_cap", "remaining resumable campaign no longer fits the operational cap", budget)
+                budget = resume_budget_plan(meta["campaigns"], count, completed_before, operation)
             else:
                 budget = enforce_budget_cap(meta["campaigns"], desired_count, operation)
                 count = int(budget["selected_count"])
