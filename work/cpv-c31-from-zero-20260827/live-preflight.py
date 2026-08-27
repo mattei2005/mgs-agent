@@ -33,17 +33,25 @@ def main() -> int:
         operation=operation,
         request_id=REQUEST_ID,
     )
-    all_ads = backend._graph_pages(
-        'act_1046241194533786/ads',
-        {
-            'fields': 'id,name,status,effective_status,configured_status,campaign{id,name,status,configured_status},adset{id,name},creative{id,name,effective_object_story_id,asset_feed_spec}',
-            'limit': 500,
-        },
-    )
-    advideos = backend._graph_pages(
+    all_ads = []
+    for needle in sorted({Path(item['canonical_filename']).stem for item in ASSET_REFS}):
+        rows = backend._graph_pages(
+            'act_1046241194533786/ads',
+            {
+                'fields': 'id,name,status,effective_status,configured_status,campaign{id,name,status,configured_status},adset{id,name},creative{id,name,effective_object_story_id}',
+                'filtering': json.dumps([{'field': 'name', 'operator': 'CONTAIN', 'value': needle}], separators=(',', ':')),
+                'limit': 100,
+            },
+        )
+        all_ads.extend(rows)
+    video_status, video_payload, _ = backend.common.graph_get(
         'act_1046241194533786/advideos',
-        {'fields': 'id,title,video_status,created_time,length', 'limit': 500},
+        backend.token,
+        {'fields': 'id,title,video_status,created_time,length', 'limit': 100},
     )
+    if video_status != 200 or not isinstance(video_payload, dict):
+        raise RuntimeError(f'advideos readback failed http={video_status}')
+    advideos = video_payload.get('data') or []
     needles = {Path(item['canonical_filename']).stem for item in ASSET_REFS}
     ad_matches = []
     for ad in all_ads:

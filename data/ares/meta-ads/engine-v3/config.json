@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.0.21",
+  "release_version": "3.1.0",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -25,8 +25,9 @@
   "quota_scope": "app_key_plus_ad_account_id",
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
-  "media_policy": "prestage_before_campaign_manifest; clone_prestaged uses POST source_ad_id/copies with creative_parameters and nonzero lineage readback",
-  "ad_naming_policy": "CPV clone_prestaged requires canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
+  "supported_modes": ["clone_prestaged", "from_zero_prestaged"],
+  "media_policy": "prestage_before campaign manifest; clone_prestaged uses source ad copies with lineage; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID",
+  "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
   "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
   "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",
   "automatic_failure_recovery": {
