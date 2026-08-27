@@ -1004,12 +1004,16 @@ def build_history_dataset(rows):
     """Build the one-row-per-page restriction-cycle history tab."""
     values=[REPORT_HISTORY_HEADERS]
     seen=set()
+    numeric_headers={'entradas detectadas','saidas confirmadas','renovacoes','mudancas de status'}
     for row in rows or []:
         key=report_page_identity(row)
         if key in seen:
             raise RuntimeError(f'chave duplicada no histórico de restrições: {key}')
         seen.add(key)
-        values.append([row.get(header,'') for header in REPORT_HISTORY_HEADERS])
+        values.append([
+            str(row.get(header,'') or 0) if header in numeric_headers else row.get(header,'')
+            for header in REPORT_HISTORY_HEADERS
+        ])
     return values
 
 
@@ -1299,9 +1303,29 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None, history_rows
 
         readback=read_report_datasets(access_token,list(expected_datasets))
         if list(readback.values())!=list(expected_datasets.values()):
+            diffs=[]
+            for title,expected_values in expected_datasets.items():
+                actual_values=readback.get(title) or []
+                if actual_values==expected_values:
+                    continue
+                first='shape-only'
+                for row_index in range(max(len(actual_values),len(expected_values))):
+                    actual_row=actual_values[row_index] if row_index<len(actual_values) else None
+                    expected_row=expected_values[row_index] if row_index<len(expected_values) else None
+                    if actual_row!=expected_row:
+                        first=f'row={row_index} actual_cols={len(actual_row or [])} expected_cols={len(expected_row or [])}'
+                        if actual_row is not None and expected_row is not None:
+                            for column_index in range(max(len(actual_row),len(expected_row))):
+                                actual_cell=actual_row[column_index] if column_index<len(actual_row) else '<missing>'
+                                expected_cell=expected_row[column_index] if column_index<len(expected_row) else '<missing>'
+                                if actual_cell!=expected_cell:
+                                    first+=f' col={column_index} actual_type={type(actual_cell).__name__} expected_type={type(expected_cell).__name__}'
+                                    break
+                        break
+                diffs.append(f'{title}:{first}')
             counts_read=[len(values) for values in readback.values()]
             expected_counts=[len(values) for values in expected_datasets.values()]
-            raise RuntimeError(f'Google Sheets readback divergente: rows={counts_read!r} expected_rows={expected_counts!r}')
+            raise RuntimeError(f'Google Sheets readback divergente: rows={counts_read!r} expected_rows={expected_counts!r}; diffs={diffs!r}')
         duplicate_keys={}
         for title,values in readback.items():
             if title==REPORT_SUMMARY_TAB:

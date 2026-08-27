@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.37
+version: 1.0.38
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -472,6 +472,8 @@ A thread `CPV Regras` (`1540426218405363873`) é manual, deve ser preservada ind
 Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
+
+Na coluna `Camp` do Diário, Intraday e histórico ROI do Intraday, o rótulo padrão é `C{NN}-{DD/MM}`. Quando o nome canônico da campanha Meta contiver o token inteiro `MOTO`, inserir `M` imediatamente após o número: `C{NN}M-{DD/MM}` (exemplo: `C24M-23/08`). O marcador é somente visual; IDs, UTM, número da campanha, status e cálculos permanecem inalterados. Campanhas sem o token inteiro `MOTO` continuam sem o marcador.
 
 Nas tabelas desktop, paginar pela quantidade real de caracteres renderizados, nunca por um número fixo de campanhas. Se título + tabela couberem no payload seguro de 1.875 caracteres, manter todas as linhas na mesma cerca/tabela. Só dividir quando houver overflow real; nesse caso, repetir o cabeçalho e preservar cada campanha exatamente uma vez. Caso de regressão obrigatório: C07–C20, 14 linhas, permanece em uma única tabela e não deixa C20 órfã em outra parte.
 

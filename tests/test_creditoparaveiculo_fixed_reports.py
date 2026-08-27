@@ -652,6 +652,8 @@ def test_campaign_column_is_compact_and_includes_date():
     module = load_reports_module()
     assert module.compact_campaign_label("07", "07 - 20-08 - Garagem Brasil") == "C07-20/08"
     assert module.compact_campaign_label("09", "09 - Garagem Brasil", "2026-08-20") == "C09-20/08"
+    assert module.compact_campaign_label("24", "24 - 23-08 - Garagem Brasil - MOTO - MAXVOL") == "C24M-23/08"
+    assert module.compact_campaign_label("25", "25 - Garagem Brasil - MOTO - MAXVOL", "2026-08-24") == "C25M-24/08"
 
 
 def test_report_scope_discovers_new_live_campaigns_without_expanding_write_allowlist():

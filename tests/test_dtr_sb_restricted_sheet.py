@@ -351,7 +351,7 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         dataset = sync.build_history_dataset([row])
 
         self.assertEqual(dataset[0], sync.REPORT_HISTORY_HEADERS)
-        self.assertEqual(dataset[1][7:11], [2, 1, 3, 0])
+        self.assertEqual(dataset[1][7:11], ['2', '1', '3', '0'])
         self.assertEqual(dataset[1][11], 'Restrita')
         with self.assertRaisesRegex(RuntimeError, 'duplicada'):
             sync.build_history_dataset([row, dict(row)])

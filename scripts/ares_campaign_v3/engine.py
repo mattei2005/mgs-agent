@@ -25,6 +25,12 @@ class ExecutionFailed(RuntimeError):
     pass
 
 
+class ReadbackCooldownDeferred(RuntimeError):
+    def __init__(self, retry_after_seconds: int):
+        self.retry_after_seconds = int(retry_after_seconds)
+        super().__init__("bundle writes completed; consolidated readback deferred to the next quota window")
+
+
 def _utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -86,6 +92,58 @@ class CampaignEngine:
     def _points(self, bundle: BundlePlan) -> int:
         points_by_mode = self.config.get("points_per_mode") or {}
         return sum(int(points_by_mode.get(campaign.mode, 45)) for campaign in bundle.campaigns)
+
+    @staticmethod
+    def _readback_only_record(bundle: BundlePlan, record: dict[str, Any]) -> bool:
+        expected_ads = sum(len(campaign.ads) for campaign in bundle.campaigns)
+        return (
+            str(record.get("stage") or "") == "children_created_readback_pending"
+            and len(record.get("campaign_ids") or []) == len(bundle.campaigns)
+            and len(record.get("adset_ids") or []) == len(bundle.campaigns)
+            and len(record.get("ad_ids") or []) == expected_ads
+            and int(record.get("created_children") or 0) == expected_ads
+        )
+
+    def _recovery_points(self, bundle: BundlePlan, record: dict[str, Any]) -> int:
+        if self._readback_only_record(bundle, record):
+            per_campaign = int(self.config.get("readback_recovery_points_per_campaign", 3))
+            return max(1, per_campaign * len(bundle.campaigns))
+        return self._points(bundle)
+
+    def _readback_retry_seconds(self, bundle: BundlePlan) -> int:
+        safety = max(0, int(self.config.get("quota_retry_safety_seconds", 5)))
+        default = max(
+            int(self.config.get("score_window_seconds", 300)) + safety,
+            int(self.config.get("development_access_readback_cooldown_seconds", 0)),
+        )
+        snapshot = self.quota.snapshot((bundle.app_key, bundle.account_id))
+        live = snapshot.get("live_usage") or {}
+        candidates = [default]
+        try:
+            reset_seconds = int(float(live.get("reset_time_duration") or 0))
+        except (TypeError, ValueError):
+            reset_seconds = 0
+        if reset_seconds > 0:
+            candidates.append(reset_seconds + safety)
+
+        def collect_estimates(value: Any) -> None:
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    if str(key) == "estimated_time_to_regain_access":
+                        try:
+                            minutes = float(child)
+                        except (TypeError, ValueError):
+                            minutes = 0.0
+                        if minutes > 0:
+                            candidates.append(int(minutes * 60) + safety)
+                    else:
+                        collect_estimates(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect_estimates(child)
+
+        collect_estimates(live.get("business_usage"))
+        return max(candidates)
 
     def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
         results = transport.execute(operations, stage)
@@ -224,6 +282,16 @@ class CampaignEngine:
         self._timed_finish(timing, started)
         record["stage"] = "children_created_readback_pending"
 
+        if len(bundle.campaigns) >= 2 and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+            retry_after = self._readback_retry_seconds(bundle)
+            record["readback_cooldown"] = {
+                "reason": "development_access_score_decay",
+                "retry_after_seconds": retry_after,
+                "write_replay_blocked": True,
+                "deferred_at": _utc(),
+            }
+            raise ReadbackCooldownDeferred(retry_after)
+
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
@@ -237,6 +305,25 @@ class CampaignEngine:
         adset_ids = [str(value) for value in record.get("adset_ids") or []]
         if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):
             raise ExecutionFailed("partial prestaged bundle is missing campaign/adset identities")
+
+        if self._readback_only_record(bundle, record):
+            record["recovery"] = {
+                "mode": "consolidated_readback_only",
+                "blind_replay_blocked": True,
+                "write_replay_blocked": True,
+                "started_at": _utc(),
+                "existing_ads": len(record.get("ad_ids") or []),
+                "missing_ads_created": 0,
+                "mutation_calls": 0,
+            }
+            timing, started = self._timed_start()
+            record["timings"]["recovery_consolidated_readback"] = timing
+            readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
+            self._timed_finish(timing, started)
+            record["readback_children"] = len(readbacks)
+            record["recovery"]["finished_at"] = _utc()
+            record["stage"] = "readback_complete_recovered"
+            return campaign_ids
 
         record["recovery"] = {
             "mode": "readback_then_missing_only",
@@ -263,6 +350,7 @@ class CampaignEngine:
             live_by_campaign[index] = list(result.body.get("data") or [])
 
         resolved: dict[tuple[int, int], str] = {}
+        resolved_rows: dict[tuple[int, int], dict[str, Any]] = {}
         missing_ops: list[BatchOperation] = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
             live_rows = live_by_campaign[ci]
@@ -281,6 +369,7 @@ class CampaignEngine:
                     resolved[(ci, ai)] = str(matches[0].get("id") or "")
                     if not resolved[(ci, ai)]:
                         raise ExecutionFailed("recovery readback returned an ad without id")
+                    resolved_rows[(ci, ai)] = matches[0]
                     continue
                 missing_ops.append(BatchOperation(
                     f"recovery_ad_copy_{ci}_{ai}",
@@ -321,8 +410,13 @@ class CampaignEngine:
 
         ad_name_ops: list[BatchOperation] = []
         offset = 0
-        for campaign in bundle.campaigns:
-            for ad in campaign.ads:
+        for ci, campaign in enumerate(bundle.campaigns, 1):
+            for ai, ad in enumerate(campaign.ads, 1):
+                live = resolved_rows.get((ci, ai))
+                configured_status = str((live or {}).get("configured_status") or (live or {}).get("status") or "")
+                if live is not None and str(live.get("name") or "") == ad.name and configured_status == campaign.status:
+                    offset += 1
+                    continue
                 ad_name_ops.append(BatchOperation(
                     f"recovery_ad_name_update_{offset + 1}",
                     "POST",
@@ -331,10 +425,13 @@ class CampaignEngine:
                     kind="ad_name_update",
                 ))
                 offset += 1
-        timing, started = self._timed_start()
-        record["timings"]["recovery_ad_name_normalize"] = timing
-        self._batch(bundle, transport, ad_name_ops, "recovery_ad_name_update")
-        self._timed_finish(timing, started)
+        if ad_name_ops:
+            timing, started = self._timed_start()
+            record["timings"]["recovery_ad_name_normalize"] = timing
+            self._batch(bundle, transport, ad_name_ops, "recovery_ad_name_update")
+            self._timed_finish(timing, started)
+        record["recovery"]["ads_normalized"] = len(ad_name_ops)
+        record["recovery"]["unchanged_ads_skipped"] = expected_count - len(ad_name_ops)
 
         timing, started = self._timed_start()
         record["timings"]["recovery_consolidated_readback"] = timing
@@ -360,14 +457,15 @@ class CampaignEngine:
         failed_by_index = {
             int(row["index"]): row
             for row in (lane_result.get("bundles") or [])
-            if row.get("status") == "FAILED"
+            if row.get("status") in {"FAILED", "READBACK_DEFERRED"}
         }
         _atomic_json(checkpoint_path, lane_result)
         for bundle in bundles:
             if bundle.index in completed_indices:
                 continue
             bundle_request_id = f"{request_id}:{account}:{bundle.index}"
-            points = self._points(bundle)
+            previous_failed = failed_by_index.get(bundle.index)
+            points = self._recovery_points(bundle, previous_failed) if previous_failed is not None else self._points(bundle)
             try:
                 quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
             except QuotaBlocked as exc:
@@ -375,7 +473,6 @@ class CampaignEngine:
                 lane_result["deferred"] = {"next_bundle_index": bundle.index, **exc.detail}
                 _atomic_json(checkpoint_path, lane_result)
                 return lane_result
-            previous_failed = failed_by_index.get(bundle.index)
             if previous_failed is not None:
                 record = previous_failed
                 record["status"] = "RECOVERING"
@@ -411,6 +508,20 @@ class CampaignEngine:
                 lane_result["campaign_ids"].extend(ids)
                 lane_result["manual_reconciliation_required"] = False
                 _atomic_json(checkpoint_path, lane_result)
+            except ReadbackCooldownDeferred as exc:
+                record["status"] = "READBACK_DEFERRED"
+                lane_result["status"] = "DEFERRED_QUOTA"
+                lane_result["manual_reconciliation_required"] = False
+                lane_result["automatic_recovery_required"] = True
+                lane_result["deferred"] = {
+                    "next_bundle_index": bundle.index,
+                    "reason": "development_access_score_decay",
+                    "retry_after_seconds": exc.retry_after_seconds,
+                    "readback_only": True,
+                    "write_replay_blocked": True,
+                }
+                _atomic_json(checkpoint_path, lane_result)
+                return lane_result
             except Exception as exc:
                 record["status"] = "FAILED"
                 error_row: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
