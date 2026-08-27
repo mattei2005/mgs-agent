@@ -4,7 +4,9 @@
 Source of truth: authenticated Smart Bidding notification API. The monitor never
 reads, stores, or validates Facebook tokens itself. It filters MGS companies,
 deduplicates by SB notification ID, enriches each alert with the live Messenger
-page count, and posts through the local Zeus bot with mentions disabled.
+page count, and posts through the local Zeus bot while mentioning the MGS
+traffic/admin roles. Each incident stays active until the team reacts with ✅;
+unresolved incidents are repeated every three hours.
 """
 from __future__ import annotations
 
@@ -40,6 +42,10 @@ NY = ZoneInfo('America/New_York')
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36'
 MAX_EMBEDS = 10
 MAX_DELIVERED_IDS = 1000
+MAX_INCIDENTS = 1000
+REMINDER_HOURS = 3
+TEAM_ROLE_IDS = ['1496256346994249912', '1496260941787168848']
+TEAM_MENTIONS = ' '.join(f'<@&{role_id}>' for role_id in TEAM_ROLE_IDS)
 
 
 def now_iso() -> str:
@@ -64,7 +70,9 @@ def initial_state() -> dict[str, Any]:
             'target_channel_id': TARGET_CHANNEL_ID,
             'source': API_BASE + '/notification',
             'companies': sorted(MGS_COMPANIES),
-            'mentions': 'disabled; matches paginas-restritas channel delivery',
+            'mentions': {'roles': TEAM_ROLE_IDS},
+            'resolution': 'reaction ✅ on the incident message',
+            'reminder_hours': REMINDER_HOURS,
         },
         'last_check': None,
         'last_seen_id': 0,
@@ -74,6 +82,7 @@ def initial_state() -> dict[str, Any]:
         'consecutive_failures': 0,
         'last_error': None,
         'failure_alert_sent_for': 0,
+        'incidents': {},
     }
 
 
@@ -101,22 +110,16 @@ def save_state(path: Path, state: dict[str, Any]) -> None:
             os.unlink(tmp_name)
 
 
-def normalize_alerts(notifications: list[dict[str, Any]], pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    exact_counts: Counter[tuple[str, str, str]] = Counter()
-    user_counts: Counter[str] = Counter()
+def normalize_alerts(
+    notifications: list[dict[str, Any]],
+    users: list[dict[str, Any]],
+    pages: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    page_counts: Counter[str] = Counter()
     for page in pages:
-        user_id = str(page.get('MESSENGER_USER_ID') or '').strip()
-        if not user_id:
-            continue
-        user_counts[user_id] += 1
-        company = str(page.get('COMPANY') or '').strip()
-        publisher = str(page.get('PUBLISHER_ID') or '').strip()
-        domain = ''
-        prefix = company + '_'
-        if company and publisher.startswith(prefix):
-            domain = publisher[len(prefix):]
-        if company and domain:
-            exact_counts[(user_id, company, domain)] += 1
+        mapped_user_id = str(page.get('MESSENGER_USER_ID') or '').strip()
+        if mapped_user_id:
+            page_counts[mapped_user_id] += 1
 
     alerts: list[dict[str, Any]] = []
     for notification in notifications:
@@ -141,21 +144,33 @@ def normalize_alerts(notifications: list[dict[str, Any]], pages: list[dict[str, 
             if not isinstance(item, dict):
                 raise RuntimeError(f'non-object token-alert BODY id={notification_id}')
             user_id = str(item.get('user_id') or '').strip()
-            exact = exact_counts.get((user_id, company, domain), 0)
-            page_count = exact if exact else user_counts.get(user_id, 0)
+            user_email = str(item.get('user_email') or '').strip()
+            user_name = str(item.get('user_name') or '').strip()
+            publisher_id = f'{company}_{domain}'
+            matched_users = [
+                row for row in users
+                if str(row.get('COMPANY') or '').strip() == company
+                and str(row.get('PUBLISHER_ID') or '').strip() == publisher_id
+                and (
+                    str(row.get('LOGIN') or '').strip().lower() == user_email.lower()
+                    or str(row.get('NAME') or '').strip().lower() == user_name.lower()
+                )
+            ]
+            mapped_user_id = str(matched_users[0].get('ID') or '').strip() if len(matched_users) == 1 else ''
+            page_count = page_counts.get(mapped_user_id) if mapped_user_id else None
             alerts.append({
                 'notification_id': notification_id,
                 'created_at': created_at,
                 'company': company,
                 'domain': domain,
                 'user_id': user_id,
-                'user_name': str(item.get('user_name') or '').strip(),
-                'user_email': str(item.get('user_email') or '').strip(),
+                'user_name': user_name,
+                'user_email': user_email,
                 'segurador_id': str(item.get('segurador_id') or '').strip(),
                 'segurador_name': str(item.get('segurador_name') or '').strip(),
                 'source': str(item.get('source') or 'unknown').strip(),
-                'pages': int(page_count),
-                'page_count_scope': 'company-domain-user' if exact else 'user-fallback',
+                'pages': int(page_count) if page_count is not None else None,
+                'page_count_scope': 'mapped-sb-user-id' if mapped_user_id else 'unmatched',
             })
     alerts.sort(key=lambda row: (row['notification_id'], row['user_id']))
     return alerts
