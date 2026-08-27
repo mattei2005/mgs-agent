@@ -232,6 +232,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-RULES-REFRESH-20260827",
+      "next_step": "Manter a thread 1540426218405363873 como referência permanente e editar as mesmas mensagens por supersessão sempre que Rodolfo alterar uma regra; não publicar relatórios recorrentes nela.",
+      "objective": "Atualizar a thread permanente CPV Regras com as decisões das threads 1542573475104034936, 1542545166630396027 e 1539826050765299872 e reconciliar skills/fontes canônicas",
+      "source": "discord:thread:1542573475104034936; discord:thread:1542545166630396027; discord:thread:1539826050765299872; discord:thread:1540426218405363873; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json; data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "state": "complete: 12 mensagens canônicas editadas no lugar e confirmadas por get/import readback exato; 16 mensagens totais preservadas. manual agora registra usd25, hold e cron v3 pausado, três modos do v3, fonte dinâmica por maior roi dentro de carro/moto, duplicação copy c{fonte}, terminologia copy versus criativo, marcador m, recuperação readback-first, estoque elegível e override d1 sem apagar histórico. skill direct-traffic-cbo-operations corrigida para v1.0.60 quanto a side effects de validate_only em /copies; runtime e mirror têm sha idêntico. 99 testes pass e knowledge control status=ok.",
+      "thread_id": "1540426218405363873",
+      "updated_at": "2026-08-27T18:19:39+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-SOURCE-ROI-VEHICLE-20260827",
       "next_step": "Use persisted same-vehicle ROI source snapshot on the next authorized clone manifest; no retroactive change to C28-C30",
       "objective": "Enforce clone source as highest Smart Bidding ROI within CARRO/MOTO partition for future CPV manifests",
@@ -1332,5 +1342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T18:03:44+00:00"
+  "updated_at": "2026-08-27T18:19:39+00:00"
 }
