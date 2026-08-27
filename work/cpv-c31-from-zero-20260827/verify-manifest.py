@@ -46,7 +46,10 @@ def main() -> int:
         'targeting_writable': 'age_range' not in campaign.get('adset_create', {}).get('targeting', {}) and 'brand_safety_content_filter_levels' not in campaign.get('adset_create', {}).get('targeting', {}),
         'regional_identity': campaign.get('adset_create', {}).get('regional_regulation_identities') == {'universal_beneficiary': '1580679396253124', 'universal_payer': '1580679396253124'},
     }
-    registry_rows = {(row['account_id'], row['asset_id'], row['checksum']): row for row in registry.get('records') or []}
+    registry_values = registry.get('records') or {}
+    if not isinstance(registry_values, dict):
+        raise RuntimeError('media registry records must be an object')
+    registry_rows = {(row['account_id'], row['asset_id'], row['checksum']): row for row in registry_values.values()}
     ad_checks = []
     for index, ad in enumerate(campaign['ads'], start=1):
         feed = ad['creative_payload']['asset_feed_spec']

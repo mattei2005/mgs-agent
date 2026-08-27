@@ -150,13 +150,23 @@ def build_cpv_manifest(
             campaign_row["campaign_updates"] = {}
         campaigns.append(campaign_row)
         evidence = dict(source.get("roi_evidence") or {})
-        selection_audit.append({
-            "campaign_number": number,
-            "vehicle_type": vehicle_type,
-            "source_campaign_id": source_campaign_id,
-            "source_adset_id": source_adset_id,
-            "roi_evidence": evidence,
-        })
+        if mode == "clone_prestaged":
+            selection_audit.append({
+                "campaign_number": number,
+                "vehicle_type": vehicle_type,
+                "source_campaign_id": source_campaign_id,
+                "source_adset_id": source_adset_id,
+                "roi_evidence": evidence,
+            })
+        else:
+            selection_audit.append({
+                "campaign_number": number,
+                "vehicle_type": vehicle_type,
+                "reference_campaign_id": source_campaign_id,
+                "reference_adset_id": source_adset_id,
+                "reference_only": True,
+                "clone_edges_permitted": False,
+            })
     return {
         "schema_version": 3,
         "request_id": request_id,
@@ -165,7 +175,7 @@ def build_cpv_manifest(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "prevalidated": False,
         "execution_mode": mode,
-        "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight_reference_only" if mode == "from_zero_prestaged" else "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+        "source_selection_policy": "live_compliant_same_vehicle_reference_only_no_clone" if mode == "from_zero_prestaged" else "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
         "source_selections": selection_audit,
         "campaigns": campaigns,
     }

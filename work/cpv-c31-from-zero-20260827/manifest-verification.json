@@ -1,0 +1,53 @@
+{
+  "status": "C31_SEALED_MANIFEST_VERIFIED",
+  "checks": {
+    "prevalidated": true,
+    "mode_from_zero": true,
+    "no_lineage_keys_in_campaign": true,
+    "campaign_name": true,
+    "adset_name": true,
+    "start_time": true,
+    "campaign_status_paused": true,
+    "budget_25_usd": true,
+    "maxvol": true,
+    "one_by_one_by_three": true,
+    "adset_event_subscribe": true,
+    "adset_pixel": true,
+    "targeting_writable": true,
+    "regional_identity": true,
+    "all_ad_checks": true
+  },
+  "ads": [
+    {
+      "slot": 1,
+      "name_exact": true,
+      "bodies_exact": true,
+      "titles_exact": true,
+      "description_exact": true,
+      "cta_exact": true,
+      "url_exact": true,
+      "media_registry_exact": true
+    },
+    {
+      "slot": 2,
+      "name_exact": true,
+      "bodies_exact": true,
+      "titles_exact": true,
+      "description_exact": true,
+      "cta_exact": true,
+      "url_exact": true,
+      "media_registry_exact": true
+    },
+    {
+      "slot": 3,
+      "name_exact": true,
+      "bodies_exact": true,
+      "titles_exact": true,
+      "description_exact": true,
+      "cta_exact": true,
+      "url_exact": true,
+      "media_registry_exact": true
+    }
+  ],
+  "content_digest": null
+}

@@ -581,6 +581,16 @@
       "updated_at": "2026-08-27T17:20:22+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-cpv-c25-d1-override-20260827",
+      "next_step": "Tratar 28/08 como D2 e 29/08 como D3 da C25 nos relatórios/guardrails; manter nome/data Meta original C25M-26/08 sem alteração.",
+      "objective": "Aplicar 27/08/2026 como D1 operacional da C25 por decisão de Rodolfo",
+      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-d1-override-20260827.json",
+      "state": "complete: cycle_start_date operacional da c25 120250925458300632 alterado de 2026-08-26 para 2026-08-27 no contrato e guardrail. métricas de 26/08 foram preservadas como pre_d1_baseline; snapshots de 27/08 foram reclassificados de d2 para d1. intraday dry-run/report-only confirmou c25m-26/08 com dia=d1 e ação aprendizado d1/d2; zero meta writes.",
+      "thread_id": "1542545166630396027",
+      "updated_at": "2026-08-27T17:36:53+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -1312,5 +1322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T17:20:22+00:00"
+  "updated_at": "2026-08-27T17:36:53+00:00"
 }

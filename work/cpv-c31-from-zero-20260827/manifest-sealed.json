@@ -3,17 +3,18 @@
   "request_id": "cpv-c31-from-zero-20260827",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "graph_version": "v26.0",
-  "created_at": "2026-08-27T17:33:40.241634+00:00",
+  "created_at": "2026-08-27T17:36:18.944036+00:00",
   "prevalidated": true,
   "execution_mode": "from_zero_prestaged",
-  "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight_reference_only",
+  "source_selection_policy": "live_compliant_same_vehicle_reference_only_no_clone",
   "source_selections": [
     {
       "campaign_number": 31,
       "vehicle_type": "MOTO",
-      "source_campaign_id": "120250925458300632",
-      "source_adset_id": "120250925458440632",
-      "roi_evidence": {}
+      "reference_campaign_id": "120250925458300632",
+      "reference_adset_id": "120250925458440632",
+      "reference_only": true,
+      "clone_edges_permitted": false
     }
   ],
   "campaigns": [
@@ -782,7 +783,7 @@
   ],
   "prevalidation": {
     "engine_version": 3,
-    "validated_at": "2026-08-27T17:33:52.957830+00:00",
+    "validated_at": "2026-08-27T17:36:19.072812+00:00",
     "checks": [
       "schema_v3",
       "unique_idempotency",
@@ -792,6 +793,6 @@
       "media_lineage_unique",
       "ad_account_video_association"
     ],
-    "content_digest": "5be3c1a7df3671c915fb3a5c1acf4f3a76285a6e521eebfc666bccc106942f39"
+    "content_digest": "18dcc491823d073b794741adf142e78d80f76437b6ca8350930ec54e41ecc7f0"
   }
 }

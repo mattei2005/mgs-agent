@@ -710,6 +710,10 @@ def test_cpv_adapter_builds_from_zero_without_clone_lineage(tmp_path):
     built = Manifest.from_dict(payload)
     campaign = built.campaigns[0]
     assert payload['execution_mode'] == 'from_zero_prestaged'
+    assert payload['source_selection_policy'] == 'live_compliant_same_vehicle_reference_only_no_clone'
+    assert payload['source_selections'][0]['reference_only'] is True
+    assert payload['source_selections'][0]['clone_edges_permitted'] is False
+    assert 'source_campaign_id' not in payload['source_selections'][0]
     assert campaign.mode == 'from_zero_prestaged'
     assert campaign.source_campaign_id is None
     assert campaign.source_adset_id is None
