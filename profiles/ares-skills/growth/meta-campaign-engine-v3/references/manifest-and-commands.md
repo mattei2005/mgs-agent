@@ -3,11 +3,12 @@
 ## Manifest modes
 
 ```text
-pure_clone         source campaign copied deeply; no replacement ads
-clone_prestaged    campaign/adset shell + exactly 3 ready replacement media assets
+pure_clone              source campaign copied deeply; no replacement ads
+clone_prestaged         campaign/adset/ad copy lineage + exactly 3 ready replacement media assets
+from_zero_prestaged     new campaign + adset + creatives + ads; exactly 3 ready media assets; no clone IDs
 ```
 
-O alcance do registry é específico ao modo: `pure_clone` reutiliza os creatives/mídias já existentes e pode executar mesmo com o v3 media registry vazio; `clone_prestaged` exige exatamente três registros `ready` por campanha. Não é necessário prepopular o registry sem pedido: quando houver mídia crua, o próprio pedido autorizado pode executar pre-stage/upload/readback, registrar os IDs e só então materializar e selar o manifest.
+O alcance do registry é específico ao modo: `pure_clone` reutiliza os creatives/mídias já existentes e pode executar com registry vazio. Os dois modos prestageados exigem exatamente três registros `ready` por campanha. `clone_prestaged` exige IDs fonte e usa `/copies`; `from_zero_prestaged` proíbe `source_campaign_id`, `source_adset_id` e `source_ad_id`, exige objetos `campaign_create` e `adset_create` completos e usa somente os edges diretos da conta. Não é necessário prepopular o registry sem pedido: quando houver mídia crua, o próprio pedido autorizado executa pre-stage/upload/readback antes de materializar e selar o manifest.
 
 Every campaign requires:
 
@@ -16,13 +17,12 @@ idempotency_key
 app_key
 account_id
 mode
-source_campaign_id
 name
 start_time with timezone
 status PAUSED or future ACTIVE
 ```
 
-`clone_prestaged` also requires `source_adset_id`, exactly three ads, and for each media: asset ID, checksum, vertical video ID, square video ID, `ready=true`, `upload_edge=ad_account_advideos` and `association_verified=true`.
+`pure_clone` exige `source_campaign_id`. `clone_prestaged` exige `source_campaign_id`, `source_adset_id`, exatamente três ads e `source_ad_id` não zero em cada ad. `from_zero_prestaged` exige `campaign_create`, `adset_create`, exatamente três ads e ausência total de IDs fonte. Para cada mídia prestageada: asset ID, checksum, vertical video ID, square video ID, `ready=true`, `upload_edge=ad_account_advideos` e `association_verified=true`.
 
 Payloads containing `standard_enhancements` or external `https://fb.com/messenger_doc/` are rejected before transport.
 
@@ -51,12 +51,25 @@ The v3 pre-stage uploader is active but still requires `--confirm-upload`, adver
 Build CPV manifests only when every campaign has three ready media records and the source creative templates are current. `--campaign-numbers` accepts 1–100 values; the planner chunks them into bundles of two automatically:
 
 ```text
+# Clone com mídia prestageada
 python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py build-cpv \
-  --assets-json <six-assets.json> \
-  --templates-json /root/mgs-agent/data/ares/meta-ads/engine-v3/templates/cpv-c08-source-templates.json \
+  --assets-json <assets.json> \
+  --source-snapshot-json <source-selection.json> \
+  --mode clone_prestaged \
   --campaign-numbers 14,15 --operational-date YYYY-MM-DD \
   --request-id <unique-id> --status ACTIVE --output <manifest.json>
+
+# Criação do zero com mídia prestageada
+python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py build-cpv \
+  --assets-json <assets.json> \
+  --source-snapshot-json <reference-selection.json> \
+  --mode from_zero_prestaged \
+  --from-zero-specs-json <explicit-create-specs.json> \
+  --campaign-numbers 31 --operational-date YYYY-MM-DD \
+  --request-id <unique-id> --status PAUSED --output <manifest.json>
 ```
+
+No modo do zero, `source-snapshot-json` fornece somente templates/campos de referência já lidos; seus IDs fonte ficam fora das campanhas do manifest e nunca entram no executor. `from-zero-specs-json` contém `from_zero_specs[]`, cada item com `campaign_create` e `adset_create` completos.
 
 Use `--status PAUSED` only for an explicitly requested technical canary; normal production uses `ACTIVE` with the future `start_time` sealed in the manifest.
 
