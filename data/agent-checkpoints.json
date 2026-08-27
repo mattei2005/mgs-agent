@@ -544,11 +544,11 @@
       "agent": "ares",
       "id": "ares-cpv-c21-c31-20260827",
       "next_step": "Acompanhar o início de C28-C31 em 28/08 às 00:30 SP pelo guardrail de primeiro gasto; nenhuma nova campanha fica autorizada por este checkpoint.",
-      "objective": "Encerrar C21-C23 com lifecycle criativo, preservar a C28 substituta e concluir C29-C31 para 28/08 com relatórios identificando campanhas de moto",
-      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c29-c31-20260827-complete.json",
-      "state": "complete: c21-c23 deleted com 4 criativos subentregues preservados e 5 rejeitados; c28 substituta active; c29-c31 criadas pelo engine v3 com ids 120250951366720632, 120250951366750632 e 120250951557410632, todas active, usd30 maxvol, 1x1x3, início 28/08/2026 00:30 sp e 9 criativos carro reconciliados em 02_testing. meta validou uma campanha não terminal por número, 3 adsets/9 ads, urls/utms e budget ativo usd428.34. guardrail de primeiro gasto armado nas 3. hold rearmado, override completed_validated, próximo número 32. diário e intraday agora exibem m no camp quando o nome canônico contém token moto; 69 testes e dry-runs reais pass.",
+      "objective": "Encerrar campanhas sem futuro com lifecycle criativo, preservar a C28 substituta e concluir C29-C31 para 28/08 com relatórios identificando campanhas de moto",
+      "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c24-20260827.json; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c29-c31-20260827-complete.json",
+      "state": "complete: c21-c24 deleted. c24 foi encerrada por decisão expressa de rodolfo; meta confirmou id 120250925308920632 como deleted. antes da exclusão, os 3 criativos moto foram classificados por share de spend acumulado usd40.38: pv_003 3.89% e pv_004 2.45% foram para 03_tested e liberados para reteste; pv_005 93.66% foi para 05_rejected. drive mgs-agents e inventário tiveram readback 3/3. c28 substituta segue active; c29-c31 seguem active, usd30 maxvol, 1x1x3, início 28/08 00:30 sp. hold rearmado e próximo número 32.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T16:09:12+00:00"
+      "updated_at": "2026-08-27T16:22:53+00:00"
     },
     {
       "agent": "zeus",
@@ -1282,5 +1282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:14:38+00:00"
+  "updated_at": "2026-08-27T16:22:53+00:00"
 }
