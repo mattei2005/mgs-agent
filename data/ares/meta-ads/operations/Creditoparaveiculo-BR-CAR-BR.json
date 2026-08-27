@@ -361,7 +361,11 @@
         "authorized_at_et": "2026-08-26T22:46:47-04:00",
         "authorization_source": "discord:thread:1539826050765299872",
         "completed_at_utc": "2026-08-27T03:16:24.344422+00:00",
-        "campaign_numbers": [26, 27, 28]
+        "campaign_numbers": [
+          26,
+          27,
+          28
+        ]
       },
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-25T16:01:37-04:00",
@@ -911,19 +915,43 @@
           "campaign_id": "120250910426410632",
           "cycle_start_date": "2026-08-25",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260824"
+          "request_id": "cpv-daily-20260824",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
         },
         "22": {
           "campaign_id": "120250910426420632",
           "cycle_start_date": "2026-08-25",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260824"
+          "request_id": "cpv-daily-20260824",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
         },
         "23": {
           "campaign_id": "120250925308930632",
           "cycle_start_date": "2026-08-26",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-moto-3x3-20260825-corrected-state"
+          "request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
         },
         "24": {
           "campaign_id": "120250925308920632",

@@ -523,12 +523,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-c21-c31-20260827",
-      "next_step": "Às 17:00 SP o wrapper determinístico libera somente o override, roda dry-run e Campaign Engine v3 para C29-C31, retoma o mesmo request em ticks horários se necessário, valida Meta/Drive/inventário/watcher/budget, rearma o hold e publica o resumo sanitizado na thread fixa de criação.",
-      "objective": "Pausar C21-C23, substituir C28 para entrega em 28/08 e criar C29-C31 às 17:00 SP",
+      "next_step": "Às 17:00 SP o wrapper determinístico executa dry-run e Campaign Engine v3 para C29-C31, podendo selecionar retestes elegíveis segundo o mix 2 READY + 1 TESTED, retoma o mesmo request se necessário, valida Meta/Drive/inventário/watcher/budget e rearma o hold.",
+      "objective": "Encerrar C21-C23 com classificação criativa, manter C28 substituta e criar C29-C31 às 17:00 SP",
       "source": "discord:thread:1542545166630396027",
-      "state": "c21-c23 paused por get. c28 antiga 120250942552200632 deleted; c28 substituta 120250950375430632 active, 1x1x3, start 2026-08-28 00:30 sp e watcher armado. override cpv-daily-20260827 registrado para c29-c31; cron e0344a16b30c script-only/no-agent/local habilitado, com hold geral ainda ativo até 17:00.",
+      "state": "c21, c22 e c23 confirmadas deleted por meta get. nove linhagens classificadas por share de spend: quatro subentregues movidas para 03_tested com retest_eligible=true e tentativa 1; cinco com entrega relevante movidas para 05_rejected. drive e inventário reconciliados pela service account mgs, sem uso meta não terminal conflitante. c28 substituta segue active com início 28/08 00:30. override c29-c31 continua programado para 17:00 sp com hold geral ativo até o tick.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T15:07:48+00:00"
+      "updated_at": "2026-08-27T15:19:59+00:00"
     },
     {
       "agent": "zeus",
@@ -1262,5 +1262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T15:07:48+00:00"
+  "updated_at": "2026-08-27T15:19:59+00:00"
 }
