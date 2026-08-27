@@ -222,6 +222,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-SOURCE-ROI-VEHICLE-20260827",
+      "next_step": "Use persisted same-vehicle ROI source snapshot on the next authorized clone manifest; no retroactive change to C28-C30",
+      "objective": "Enforce clone source as highest Smart Bidding ROI within CARRO/MOTO partition for future CPV manifests",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "state": "completed",
+      "thread_id": "1539826050765299872",
+      "updated_at": "2026-08-27T17:19:37+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-V3-AD-NAMING-C14-C16-20260822",
       "next_step": "Operação normal; próximos manifests CPV só selam com naming canônico e qualquer ausência/invalidez falha fechado antes do write.",
       "objective": "Corrigir os nomes dos nove anúncios C14/C15/C16 e impedir recorrência no Campaign Engine v3",
@@ -563,12 +573,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-c25-copy-fix-20260827",
-      "next_step": "Após cooldown, reutilizar os três creative IDs persistidos, atualizar apenas o binding dos anúncios, confirmar por GET copy/status e reconciliar inventário/audit.",
+      "next_step": "Executar somente GET consolidado após cooldown; confirmar binding, copy exata, optimize text disabled, status/review dos três anúncios e reconciliar inventário/audit.",
       "objective": "Corrigir a copy dos três anúncios MOTO ativos da C25 para os textos exatos do screenshot de Rodolfo",
       "source": "discord:thread:1542545166630396027; /root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-copy-fix-20260827.json",
-      "state": "in_progress: preflight confirmou copy de carro incorreta nos 3 anúncios. três creatives substitutos com copy moto exata foram validados e criados. atualização dos anúncios aguarda cooldown obrigatório da meta após rate limit code 17/subcode 2446079; processo resumível usa ids persistidos e não repetirá creates.",
+      "state": "readback_pending: os três creatives substitutos foram criados e o batch de atualização dos três anúncios retornou sucesso por child response. meta impôs cooldown de quota antes do get consolidado; o processo permanece resumível e não repetirá os writes.",
       "thread_id": "1542545166630396027",
-      "updated_at": "2026-08-27T17:04:46+00:00"
+      "updated_at": "2026-08-27T17:17:07+00:00"
     },
     {
       "agent": "zeus",
@@ -1302,5 +1312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T17:04:46+00:00"
+  "updated_at": "2026-08-27T17:19:37+00:00"
 }
