@@ -19,6 +19,7 @@ MUTATED=0
 
 rollback() {
   rc=$?
+  trap - ERR
   set +e
   if [[ "$MUTATED" == 1 ]]; then
     sudo -u runcloud wp --path="$WP" plugin deactivate "$PLUGIN_SLUG" --quiet --allow-root
@@ -47,10 +48,12 @@ OPTION_STATE=$(sudo -u runcloud wp --path="$WP" eval '$v=get_option("mgs_direct_
 [[ "$OPTION_STATE" == "absent" ]]
 
 sudo mkdir -p "$BACKUP_ROOT" "$STAGE"
-sudo mv "$PACKAGE_INBOX" "$PACKAGE"
-sudo mv "$MIGRATION_INBOX" "$MIGRATION"
+if [[ -f "$PACKAGE_INBOX" ]]; then sudo mv "$PACKAGE_INBOX" "$PACKAGE"; fi
+if [[ -f "$MIGRATION_INBOX" ]]; then sudo mv "$MIGRATION_INBOX" "$MIGRATION"; fi
+sudo test -f "$PACKAGE"
+sudo test -f "$MIGRATION"
 sudo chown -R runcloud:runcloud "$BACKUP_ROOT"
-ACTUAL_PACKAGE_SHA=$(sha256sum "$PACKAGE" | awk '{print $1}')
+ACTUAL_PACKAGE_SHA=$(sudo sha256sum "$PACKAGE" | awk '{print $1}')
 [[ "$ACTUAL_PACKAGE_SHA" == "$EXPECTED_PACKAGE_SHA" ]]
 
 PREFIX=$(sudo -u runcloud wp --path="$WP" db prefix --allow-root)
