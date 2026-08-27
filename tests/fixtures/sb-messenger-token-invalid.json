@@ -1,0 +1,33 @@
+{
+  "notifications": [
+    {
+      "ID": 100,
+      "CREATED_AT": "2026-08-26T20:09:00.000Z",
+      "COMPANY": "digital-trust",
+      "DOMAIN": "financeadx",
+      "TITLE": "Messenger user token invalid",
+      "BODY": "[{\"user_id\":\"24\",\"user_name\":\"Disparos Financeadx\",\"user_email\":\"disparos@example.com\",\"segurador_id\":\"1614\",\"segurador_name\":\"Segurador Exemplo\",\"source\":\"canary\"}]"
+    },
+    {
+      "ID": 101,
+      "CREATED_AT": "2026-08-26T20:09:30.000Z",
+      "COMPANY": "empresa-externa",
+      "DOMAIN": "externo",
+      "TITLE": "Messenger user token invalid",
+      "BODY": "[{\"user_id\":\"999\",\"user_name\":\"Externo\",\"user_email\":\"externo@example.com\",\"segurador_id\":\"9\",\"segurador_name\":\"Externo\",\"source\":\"page_token\"}]"
+    },
+    {
+      "ID": 102,
+      "CREATED_AT": "2026-08-26T20:10:00.000Z",
+      "COMPANY": "digital-trust-2",
+      "DOMAIN": "zuout",
+      "TITLE": "Outro alerta",
+      "BODY": "[]"
+    }
+  ],
+  "pages": [
+    {"MESSENGER_USER_ID": "24", "COMPANY": "digital-trust", "PUBLISHER_ID": "digital-trust_financeadx"},
+    {"MESSENGER_USER_ID": "24", "COMPANY": "digital-trust", "PUBLISHER_ID": "digital-trust_financeadx"},
+    {"MESSENGER_USER_ID": "24", "COMPANY": "digital-trust", "PUBLISHER_ID": "digital-trust_outro"}
+  ]
+}

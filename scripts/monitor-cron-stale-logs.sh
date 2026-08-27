@@ -64,6 +64,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     if script == 'monitor-hermes-memory-capacity.py':
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60
+    if script == 'monitor-sb-messenger-token-invalid.py':
+        # Agenda explícita 12,27,42,57: quatro ciclos de 15 minutos.
+        return 60 * 60
     if script == 'hermes-news-explainer-watchdog.py':
         # Watchdog por minuto: cinco ciclos sem sinal já indicam perda de proteção.
         return 5 * 60

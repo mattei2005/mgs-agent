@@ -31,6 +31,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Centralização Zeus para Honcho, Google Drive e transporte Discord sem webhook do 1Password** → `references/mgs-runtime-centralization-2026-07-11.md`
 - **Filas humanas de aprovação: aging, metadata-only alerts, anti-spam, unknown-state preservation e resumo não bloqueante no REPORT-INFRA** → `references/approval-queue-aging-monitor.md`
 - **Auditoria de alertas Discord por janela: embeds completos, agrupamento por incidente, reconciliação com resoluções/live state e anti-spam de guardrail** → `references/discord-alert-history-audit-and-incident-reconciliation.md`
+- **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
 ## MGS transport and telemetry invariants
 

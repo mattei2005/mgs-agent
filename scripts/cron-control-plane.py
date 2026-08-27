@@ -53,6 +53,7 @@ DESCRIPTIONS = {
     'monitor-hermes-memory-capacity.py': 'Compacta USER/MEMORY automaticamente de >=90% para <=85% com backup, validação semântica, rollback/readback e alerta metadata-only em #limites-90.',
     'sync-sb-sms-revenue-daily.sh': 'Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert/readback e uma retentativa automática após 5 minutos para falhas transitórias.',
     'sync-sb-messenger-revenue-sheet.py': 'Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.',
+    'monitor-sb-messenger-token-invalid.py': 'Espelha alertas de token Messenger inválido da API Smart Bidding para o canal dedicado, com filtro MGS, dedupe, contagem de páginas e readback Discord sem menções.',
 }
 
 RISK = {
@@ -86,6 +87,7 @@ RISK = {
     'monitor-hermes-memory-capacity.py': 'médio: reescreve USER/MEMORY somente após gates fail-closed e backup protegido',
     'sync-sb-sms-revenue-daily.sh': 'médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback',
     'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
+    'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada e publica somente novos alertas deduplicados no Discord',
 }
 
 OWNER = {
@@ -101,6 +103,7 @@ OWNER = {
     'hermes-context-cost-audit.py': 'Zeus/Infra',
     'sync-sb-sms-revenue-daily.sh': 'Zeus/Revenue Tech',
     'sync-sb-messenger-revenue-sheet.py': 'Zeus/Revenue Tech',
+    'monitor-sb-messenger-token-invalid.py': 'Zeus/Revenue Tech',
 }
 
 
