@@ -1,16 +1,16 @@
 {
-  "schema_version": 2,
+  "schema_version": 1,
   "status": "valid",
   "account_id": "1046241194533786",
-  "generated_at_utc": "2026-08-27T15:34:59.141603+00:00",
-  "valid_until_utc": "2026-08-27T21:34:59.141603+00:00",
+  "generated_at_utc": "2026-08-27T16:38:57.461439+00:00",
+  "valid_until_utc": "2026-08-27T16:53:57.461439+00:00",
   "source": {
-    "mode": "v3_live_separate_reconciliation",
+    "mode": "live_separate_reconciliation",
     "current_and_archived": true
   },
   "meta_counts": {
     "ads_scanned": 235,
-    "video_ids_scanned": 336
+    "video_ids_scanned": 344
   },
   "assets": [
     {
@@ -19,56 +19,41 @@
       "asset_drive_id": "15ThulSrFWCrSlMC8PYhONxp_QjUhlBQn",
       "clean_checksum": "787ac8d6e81b6e9299a8cdbabf24ba502592c8304c5cfabac3a6359eacdcaa91",
       "perceptual_fingerprint": "dhash64:62c9452279e1c1bb/0ae97dcc88d10ffc/92d83143aedcc004",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": false,
       "meta_conflicts": [
         {
           "asset_id": "asset_72d02154acdc78dd8a27",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
           "match_kind": "video",
           "match_id": "1385468879612425",
           "exact_name": false,
-          "source_sequence": "182",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "182"
         },
         {
           "asset_id": "asset_72d02154acdc78dd8a27",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
           "match_kind": "video",
           "match_id": "1608462290858539",
           "exact_name": false,
-          "source_sequence": "182",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "182"
         },
         {
           "asset_id": "asset_72d02154acdc78dd8a27",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
           "match_kind": "video",
           "match_id": "1742740430350048",
           "exact_name": false,
-          "source_sequence": "182",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "182"
         },
         {
           "asset_id": "asset_72d02154acdc78dd8a27",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
           "match_kind": "video",
           "match_id": "28084462051246584",
           "exact_name": false,
-          "source_sequence": "182",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "182"
         }
-      ],
-      "expected_prior_test_conflicts": []
+      ]
     },
     {
       "asset_id": "asset_14632aeffadbd1efad14",
@@ -76,23 +61,17 @@
       "asset_drive_id": "1fbpYrEORMJsFIvOg0MsWlp2VeaKPPv0i",
       "clean_checksum": "f8375dfa58d081d97f0dda5943bdaf48a1d6943c9db5b814ae665b94075480ad",
       "perceptual_fingerprint": "dhash64:791f583fc2c4fcef/0f29bc7b8ec6dcf9/9e1f86022578e884",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": false,
       "meta_conflicts": [
         {
           "asset_id": "asset_14632aeffadbd1efad14",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_032.mp4",
           "match_kind": "video",
           "match_id": "1470194311805072",
           "exact_name": false,
-          "source_sequence": "162",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "162"
         }
-      ],
-      "expected_prior_test_conflicts": []
+      ]
     },
     {
       "asset_id": "asset_daf26c7ac563237dccba",
@@ -100,67 +79,49 @@
       "asset_drive_id": "111QNFEjYqMzXJNQsWsCA1A307ZFvT7L8",
       "clean_checksum": "b6c2c845319d8fb2a72eadccef22b691edd354147a28bdd5dfa12aa56ecb2109",
       "perceptual_fingerprint": "dhash64:a83a1823265e32cc/31011c9c0e3c310d/4066c4359f3631ca",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": false,
       "meta_conflicts": [
         {
           "asset_id": "asset_daf26c7ac563237dccba",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
           "match_kind": "video",
           "match_id": "1311950807472232",
           "exact_name": false,
-          "source_sequence": "165",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "165"
         },
         {
           "asset_id": "asset_daf26c7ac563237dccba",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
           "match_kind": "video",
           "match_id": "1353405776903434",
           "exact_name": false,
-          "source_sequence": "165",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "165"
         },
         {
           "asset_id": "asset_daf26c7ac563237dccba",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
           "match_kind": "video",
           "match_id": "1357552583199295",
           "exact_name": false,
-          "source_sequence": "165",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "165"
         },
         {
           "asset_id": "asset_daf26c7ac563237dccba",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
           "match_kind": "video",
           "match_id": "1585092216962348",
           "exact_name": false,
-          "source_sequence": "165",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "165"
         },
         {
           "asset_id": "asset_daf26c7ac563237dccba",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
           "match_kind": "video",
           "match_id": "28150374781248705",
           "exact_name": false,
-          "source_sequence": "165",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "165"
         }
-      ],
-      "expected_prior_test_conflicts": []
+      ]
     },
     {
       "asset_id": "asset_3b1870da16be143c8fa0",
@@ -168,131 +129,17 @@
       "asset_drive_id": "14qHJemsZl03zN4Zkw4vupNjRRaf-JjKA",
       "clean_checksum": "9bdb4928e14e72e9f028b7d39df63c26de571f1ed21e40ee58c2ec3099ce1b68",
       "perceptual_fingerprint": "dhash64:373765c5eaeecc5c/7f5633c06167e1f2/fcfca777e3e3b1a8",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": false,
       "meta_conflicts": [
         {
           "asset_id": "asset_3b1870da16be143c8fa0",
+          "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_046.mp4",
           "match_kind": "video",
           "match_id": "2487009425144636",
           "exact_name": false,
-          "source_sequence": "209",
-          "configured_status": null,
-          "effective_status": null,
-          "campaign_id": null,
-          "campaign_status": null
+          "source_sequence": "209"
         }
-      ],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_4b0ce685c544cd54d263",
-      "canonical_filename": "CAR_BR_BR_VID_SCORE_BAIXO_PV_021.mp4",
-      "asset_drive_id": "1aP4j7ztiEpzyXqT-XNTJW849NU-gaxsf",
-      "clean_checksum": "7309f43333ae1ac85b279f90f5a0a71d6edd9a369e39007411eb475fba6ba78c",
-      "perceptual_fingerprint": "dhash64:e4007800021a9e98/8c71f48302221210/fce4b411414383c3",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_6f0ca5ff2c698ac3ebd6",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_048.mp4",
-      "asset_drive_id": "1q4TjMx0QafrHS1nB55R5Ehz1WyB1FKXG",
-      "clean_checksum": "abd67109a2ce38315da1989626c524994c4d174ddb8174c993c92539eebfd16d",
-      "perceptual_fingerprint": "dhash64:ff6513d3e66ced7e/0089636c88726363/8059d4f4393072e6",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_ead9d4079c011e9e6a75",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_050.mp4",
-      "asset_drive_id": "1LdA6PU156hjcM4j34PZ2_ohyFsyGk-RG",
-      "clean_checksum": "2551b2d1905ede708f8f4a01717af9dbe6a33f47fff7ef8dfc5b30c4da5902e5",
-      "perceptual_fingerprint": "dhash64:cdb8bc89cfa6efe4/1219250743cf3773/cbaefa99978e8fcf",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_079a774f77ee982aff75",
-      "canonical_filename": "CAR_BR_BR_VID_SCORE_BAIXO_PV_023.mp4",
-      "asset_drive_id": "1CzJCtuCpgswKnIX3_GQOMgMwXTKiiLAF",
-      "clean_checksum": "b840c177a3cbf54e1d218cea16e945bdd6c033ab6d32e6d874795bb40520c1ea",
-      "perceptual_fingerprint": "dhash64:6b08213b86b073b3/29d9d8f447e0e2cc/82129abe932730b0",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_1bdc295a5f163353e2f4",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_053.mp4",
-      "asset_drive_id": "1odCepm9KjcBkQ9V6SoKm382pTyhIOpin",
-      "clean_checksum": "381186583ff3b180556c73412fcbcbdd6499e6b3cfeb05421bb1f07e07e4f8b0",
-      "perceptual_fingerprint": "dhash64:93911d1f86f07e8e/13f7f4ff5b3bb0c0/f3e980c1971f78e1",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_bf648ce4e1740b87f9b3",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_054.mp4",
-      "asset_drive_id": "1UMToaV9IR1UdN-jHlZRCJkrk5w8P_6YU",
-      "clean_checksum": "902b2df53d8bd5c3880eb7906f9adea7b16383bfc29e088b193c30b4dd1512f9",
-      "perceptual_fingerprint": "dhash64:3d747cefa66c20c3/b61626f967c08024/cfcd5e039f30c10c",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_01e41b211fe19a2d4cb8",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_058.mp4",
-      "asset_drive_id": "1FLmVx0PbfjtDy4djFLMtMNHhtffGjgYo",
-      "clean_checksum": "4fd9f1d63b9ecaaf5e183c6cc05e1df810ef55cdcd9200153570672537ea4f2a",
-      "perceptual_fingerprint": "dhash64:9ccde1a0cff5ffff/26361f69f8fe4f3e/0fe78eb47c7cf5f1",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_e2f8fc30da62c5bbe52e",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_059.mp4",
-      "asset_drive_id": "1P1FbThUhM1g-CQwO8A9bTJQpDyDrzH9W",
-      "clean_checksum": "d1e31137cdefc670cd7ee30ab16ce754d1cbc62a4a42cf7ada8c87594d70d930",
-      "perceptual_fingerprint": "dhash64:4a373c07a390f0f0/933b787fd7ac2c80/092f9f8ad86ce888",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_2b336b2547c61764d8e2",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_060.mp4",
-      "asset_drive_id": "1Mm-T7YTq5P3dXT-QXMsOJWTPaVArtwel",
-      "clean_checksum": "4768be5969b6f86b6cb315f7044fa38b7c774f0e8f327942292ae01b92f32864",
-      "perceptual_fingerprint": "dhash64:80a76afe0e3c70f9/3232c1ce7c20000f/410400a4c5e43367",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
+      ]
     },
     {
       "asset_id": "asset_45255658cbbc3d8beb74",
@@ -300,35 +147,8 @@
       "asset_drive_id": "1vn8JLDGnM5OV3Z50_ZkQfyzE1TV78kht",
       "clean_checksum": "e7f23b70d7a1f8de1f922afbc7424b0fbcda1b78b98657369d41ab94db6dbc62",
       "perceptual_fingerprint": "dhash64:1048d9731528008e/803c9ba39e172b1c/42c8d8d1481ae8c0",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_0ac6383cdcfafc036d30",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_062.mp4",
-      "asset_drive_id": "1JOB_ARKSfaJxEbxvnG3OLk_GFWOlANau",
-      "clean_checksum": "62a7d8ea5890174635af4b08b0fdb8e3c8a1197f2b863ce6c70cd35f8725f39c",
-      "perceptual_fingerprint": "dhash64:ef3b7b7e97c3c0f8/e63b7891effc6004/3c6d3d5df9f89898",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_f078839e6addbf6d7715",
-      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_063.mp4",
-      "asset_drive_id": "1PXBYn-wJTT-bqTnkL0vHoPhnQublIp-f",
-      "clean_checksum": "596f28fdbec4d478f59cf55f7b8778f54a6a3df217ef4864781342869f409707",
-      "perceptual_fingerprint": "dhash64:657f3e33c8b1f09c/238a4efe4e0a0080/05f691f93d99886c",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
+      "meta_conflicts": []
     },
     {
       "asset_id": "asset_3a5f1c7b130335bd75ba",
@@ -336,11 +156,8 @@
       "asset_drive_id": "1ABq9sRlqWMmm-TQU-VEDAycqlooJKAI_",
       "clean_checksum": "561e9464598f17559bbd798a8f281bc08e06247ac72a4f342bdac8ad69b86191",
       "perceptual_fingerprint": "dhash64:cfcb5464643ea7ee/8f06f6e7fb3a6868/79cdef3a39c8d818",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
+      "meta_conflicts": []
     },
     {
       "asset_id": "asset_9d179d948845ed931737",
@@ -348,11 +165,26 @@
       "asset_drive_id": "1khM73fcglU25CgH9yqJsjNCyei2wr_Jp",
       "clean_checksum": "269a86ef9c04f80b74b5f18aa5590724775b9904a2784e75dc248c95b28fb4b0",
       "perceptual_fingerprint": "dhash64:89b127a6e64bcbc2/1a62676cc653cec2/87cf984e0e9b8b89",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
+      "meta_conflicts": []
+    },
+    {
+      "asset_id": "asset_f078839e6addbf6d7715",
+      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_063.mp4",
+      "asset_drive_id": "1PXBYn-wJTT-bqTnkL0vHoPhnQublIp-f",
+      "clean_checksum": "596f28fdbec4d478f59cf55f7b8778f54a6a3df217ef4864781342869f409707",
+      "perceptual_fingerprint": "dhash64:657f3e33c8b1f09c/238a4efe4e0a0080/05f691f93d99886c",
+      "approved": true,
+      "meta_conflicts": []
+    },
+    {
+      "asset_id": "asset_0ac6383cdcfafc036d30",
+      "canonical_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_062.mp4",
+      "asset_drive_id": "1JOB_ARKSfaJxEbxvnG3OLk_GFWOlANau",
+      "clean_checksum": "62a7d8ea5890174635af4b08b0fdb8e3c8a1197f2b863ce6c70cd35f8725f39c",
+      "perceptual_fingerprint": "dhash64:ef3b7b7e97c3c0f8/e63b7891effc6004/3c6d3d5df9f89898",
+      "approved": true,
+      "meta_conflicts": []
     },
     {
       "asset_id": "asset_a3cb72d6856cc5054b33",
@@ -360,23 +192,8 @@
       "asset_drive_id": "1ZH6_61yImY3IAN-AYRrPkFr6wYmUfb30",
       "clean_checksum": "3641f4832ad1efbe00c5dcee17b258f25c6118a22918b874f0330305378a2989",
       "perceptual_fingerprint": "dhash64:8d941c510e585820/4a2b700de7b00006/e423199b7031f168",
-      "candidate_status": "01_READY",
-      "retest_eligible": false,
       "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
-    },
-    {
-      "asset_id": "asset_a9177a4946e5c1f69836",
-      "canonical_filename": "CAR_BR_BR_VID_MOTO_SCORE_BAIXO_PV_036.mp4",
-      "asset_drive_id": "1aECdB6w-CxLoQsyccRRdd8KOa4A2vyiR",
-      "clean_checksum": "3a917abdb58332e050767466929655d2f96cf5286c4855c124334f094749ac95",
-      "perceptual_fingerprint": "dhash64:e0989ce2aebaf8a0/d4be9296e8e0e0e0/c4a69298e4e4e4f2",
-      "candidate_status": "03_TESTED",
-      "retest_eligible": true,
-      "approved": true,
-      "meta_conflicts": [],
-      "expected_prior_test_conflicts": []
+      "meta_conflicts": []
     }
   ]
 }

@@ -8,11 +8,10 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from .media_registry import MediaRegistry
+from .source_selection import asset_group_vehicle_types, canonical_vehicle_type
 
 CPV_ACCOUNT_ID = "1046241194533786"
 CPV_APP_KEY = "mgs-meta-app-current"
-CPV_SOURCE_CAMPAIGN_ID = "120250209380780632"
-CPV_SOURCE_ADSET_ID = "120250209380820632"
 CPV_PAGE_ID = "621037101089579"
 SP = ZoneInfo("America/Sao_Paulo")
 CPV_CANONICAL_VIDEO_RE = re.compile(
@@ -31,7 +30,7 @@ def _cpv_canonical_stem(ref: dict[str, str]) -> str:
 
 def _replace_cpv_utm(value: Any, number: int) -> Any:
     if isinstance(value, str):
-        return re.sub(r"b01fb13c08", f"b01fb13c{number:02d}", value)
+        return re.sub(r"b01fb13c\d+", f"b01fb13c{number:02d}", value, flags=re.IGNORECASE)
     if isinstance(value, list):
         return [_replace_cpv_utm(item, number) for item in value]
     if isinstance(value, dict):
@@ -46,7 +45,7 @@ def build_cpv_manifest(
     campaign_numbers: list[int],
     operational_date: str,
     request_id: str,
-    creative_templates: list[dict[str, Any]] | None = None,
+    source_selections: list[dict[str, Any]] | None = None,
     status: str = "PAUSED",
     start_time: str | None = None,
 ) -> dict[str, Any]:
@@ -66,13 +65,23 @@ def build_cpv_manifest(
         start = start.astimezone(SP)
     else:
         start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
-    if creative_templates is None:
-        raise ValueError("CPV v3 requires creative_templates with source_ad_id lineage")
-    templates = creative_templates
-    if len(templates) != 3:
-        raise ValueError("CPV v3 requires three creative templates")
+    if source_selections is None or len(source_selections) != len(campaign_numbers):
+        raise ValueError("CPV v3 requires one ROI-selected source per campaign")
+    asset_vehicle_types = asset_group_vehicle_types(asset_refs, len(campaign_numbers))
     campaigns = []
+    selection_audit = []
     for campaign_index, number in enumerate(campaign_numbers):
+        source = source_selections[campaign_index]
+        source_campaign_id = str(source.get("source_campaign_id") or "").strip()
+        source_adset_id = str(source.get("source_adset_id") or "").strip()
+        vehicle_type = canonical_vehicle_type(source.get("vehicle_type"))
+        if vehicle_type != asset_vehicle_types[campaign_index]:
+            raise ValueError(f"CPV v3 source vehicle type mismatch for campaign {number:02d}")
+        if not source_campaign_id or not source_adset_id:
+            raise ValueError(f"CPV v3 ROI source IDs are required for campaign {number:02d}")
+        templates = source.get("templates") or []
+        if len(templates) != 3:
+            raise ValueError(f"CPV v3 ROI source requires three creative templates for campaign {number:02d}")
         ads = []
         for ad_index in range(3):
             ref = asset_refs[campaign_index * 3 + ad_index]
@@ -109,14 +118,22 @@ def build_cpv_manifest(
             "app_key": CPV_APP_KEY,
             "account_id": CPV_ACCOUNT_ID,
             "mode": "clone_prestaged",
-            "source_campaign_id": CPV_SOURCE_CAMPAIGN_ID,
-            "source_adset_id": CPV_SOURCE_ADSET_ID,
-            "name": f"{number:02d} - {start:%d-%m} - Garagem Brasil - (b01fb13c{number:02d}) event_Subscribe - MAXVOL",
+            "source_campaign_id": source_campaign_id,
+            "source_adset_id": source_adset_id,
+            "name": f"{number:02d} - {start:%d-%m} - Garagem Brasil{' - MOTO' if vehicle_type == 'MOTO' else ''} - (b01fb13c{number:02d}) event_Subscribe - MAXVOL",
             "adset_name": f"01 - AdGroup - (b01fb13c{number:02d}g01) event_Subscribe - MAXVOL",
             "start_time": start.isoformat(),
             "status": status,
             "campaign_updates": {"daily_budget": "3000", "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
             "ads": ads,
+        })
+        evidence = dict(source.get("roi_evidence") or {})
+        selection_audit.append({
+            "campaign_number": number,
+            "vehicle_type": vehicle_type,
+            "source_campaign_id": source_campaign_id,
+            "source_adset_id": source_adset_id,
+            "roi_evidence": evidence,
         })
     return {
         "schema_version": 3,
@@ -125,5 +142,7 @@ def build_cpv_manifest(
         "graph_version": "v26.0",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "prevalidated": False,
+        "source_selection_policy": "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+        "source_selections": selection_audit,
         "campaigns": campaigns,
     }

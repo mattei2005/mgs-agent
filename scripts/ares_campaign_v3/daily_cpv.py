@@ -28,6 +28,16 @@ from .media_registry import MediaRegistry
 from .prestage import AdAccountVideoUploader
 from .prevalidation import prevalidate_payload
 from .schema import Manifest
+from .source_selection import (
+    SourceSelectionError,
+    aggregate_smart_bidding_roi,
+    asset_group_vehicle_types,
+    authorized_request_vehicle_type,
+    canonical_vehicle_type,
+    expand_source_selections,
+    select_best_roi_campaign,
+    vehicle_type_from_text,
+)
 from .transport import BatchTransportError, FakeBatchTransport
 
 BASE = Path("/root/mgs-agent")
@@ -41,13 +51,16 @@ PAGE_ID = CPV_PAGE_ID
 DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
 FOLDER_MIME = "application/vnd.google-apps.folder"
 TOKEN_ITEM = "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"
+SB_TOKEN_ITEM = "Ares - Smartbidding Dashboard"
+SB_PUBLISHER = "digital-trust_creditoparaveiculo"
+SB_DOMAIN = "creditoparaveiculo"
 THREAD_CREATION = "1539826050765299872"
 COMMON_PATH = BASE / "scripts/ares-meta-common.py"
+SB_COMMON_PATH = BASE / "scripts/ares-smartbidding-common.py"
 DRIVE_MODULE_PATH = BASE / "scripts/ares-drive-upload-manual-inventory.py"
 SANITIZER = BASE / "scripts/clean-creative-metadata.sh"
 CONFIG_PATH = BASE / "data/ares/meta-ads/engine-v3/config.json"
 OPERATION_PATH = BASE / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json"
-TEMPLATES_PATH = BASE / "data/ares/meta-ads/engine-v3/templates/cpv-c08-source-templates.json"
 REGISTRY_PATH = BASE / "data/ares/meta-ads/engine-v3/media-registry.json"
 INVENTORY_PATH = BASE / "data/ares/creative-ops/inventory/assets.jsonl"
 RECONCILIATION_PATH = BASE / "data/ares/meta-ads/reconciliation/Creditoparaveiculo-BR-CAR-BR.json"
@@ -56,7 +69,7 @@ LOCK_PATH = BASE / "data/ares/meta-ads/engine-v3/state/cpv-daily.lock"
 AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit/daily"
 WORK_ROOT = PROFILE / "work/creditoparaveiculo-v3-daily"
 FIRST_DELIVERY_GUARDRAIL_SCRIPT = PROFILE / "scripts/creditoparaveiculo-first-delivery-guardrail.py"
-PHASE_ORDER = ["meta_preflight", "drive_preflight", "reconciliation", "asset_selection", "prestage", "manifest_prevalidation", "engine", "postprocess"]
+PHASE_ORDER = ["meta_preflight", "drive_preflight", "reconciliation", "asset_selection", "source_selection", "prestage", "manifest_prevalidation", "engine", "postprocess"]
 _CALL_COUNTER: ContextVar[dict[str, int] | None] = ContextVar("cpv_v3_daily_call_counter", default=None)
 
 
@@ -71,7 +84,6 @@ class DailyBlocked(RuntimeError):
 class DailyPaths:
     config: Path = CONFIG_PATH
     operation: Path = OPERATION_PATH
-    templates: Path = TEMPLATES_PATH
     registry: Path = REGISTRY_PATH
     inventory: Path = INVENTORY_PATH
     reconciliation: Path = RECONCILIATION_PATH
