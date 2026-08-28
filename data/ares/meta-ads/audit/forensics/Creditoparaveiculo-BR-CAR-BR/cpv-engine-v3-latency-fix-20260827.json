@@ -79,6 +79,18 @@
     "extra_upper_per_partial_recovery_human": "6m05s",
     "interpretation": "the Meta 300-second development_access windows remain structural; the correction removes the duplicate cooldown, premature code-17 readback cycle, hourly resume delay and monolithic foreground wait"
   },
+  "governance": {
+    "skill_version": "3.1.5",
+    "skill_live_mirror_sha256": "2b19a85f9a906862fccc4b2b9f66fd46acb9fbe09a4288b8ef51dc45d957fc0f",
+    "report_infra": {
+      "channel_id": "1498132022634483894",
+      "message_id": "1542735123009511445",
+      "http": 200,
+      "content_empty": true,
+      "embed_count": 1,
+      "readback": "verified"
+    }
+  },
   "production_meta_writes_during_fix": 0,
   "real_campaigns_replayed": false,
   "files_changed": [
