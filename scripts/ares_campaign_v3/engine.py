@@ -17,6 +17,9 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
+ENGINE_RELEASE_VERSION = "3.1.5"
+
+
 class EngineDisabled(RuntimeError):
     pass
 
@@ -935,6 +938,7 @@ class CampaignEngine:
                     raise ExecutionFailed("failed request has no checkpoint for recovery")
         audit: dict[str, Any] = {
             "engine_version": 3,
+            "engine_release_version": ENGINE_RELEASE_VERSION,
             "request_id": manifest.request_id,
             "manifest_digest": manifest.digest,
             "operation": manifest.operation,

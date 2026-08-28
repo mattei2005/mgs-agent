@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.1.3",
+  "release_version": "3.1.5",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -63,6 +63,8 @@
   "readback_cooldown_seconds": 305,
   "readback_recovery_points_per_campaign": 3,
   "readback": "after a two-campaign write window, persist all IDs, wait the live header reset or 305 seconds, then run one consolidated Graph batch without replaying writes",
+  "recovery_after_partial_write": "when missing children are created during recovery, persist every resolved ID, return READBACK_DEFERRED with a fresh cooldown and perform only consolidated readback on the next resume; never read back in the same quota window",
+  "resume_scheduler": "every minute with retry_after_epoch gate and nonblocking flock; no in-process cooldown sleep; the general creation hold and job enabled state remain independent",
   "intermediate_gets": 0,
   "media_gate": "three ready assets per campaign in v3 media registry before manifest; planner chunks 1-100 campaigns into bundles of two",
   "ad_naming_gate": "every asset_ref requires canonical_filename; ad=AD NN - canonical stem; creative=CPV CNN ADNN canonical stem; asset_id is forbidden as display name",

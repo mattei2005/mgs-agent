@@ -996,6 +996,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
+    assert audit['engine_release_version'] == '3.1.5'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 

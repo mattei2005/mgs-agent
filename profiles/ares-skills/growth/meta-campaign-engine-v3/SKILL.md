@@ -1,7 +1,7 @@
 ---
 name: meta-campaign-engine-v3
 description: "Executa campanhas Meta em lotes determinísticos v3."
-version: 3.1.4
+version: 3.1.5
 author: Rodolfo Mattei, Ares, Zeus
 license: internal
 platforms: [linux]

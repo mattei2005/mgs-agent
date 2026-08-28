@@ -737,7 +737,14 @@ def test_wrapper_points_only_to_v3_runner_and_does_not_reactivate_v2():
     assert "ares-creditoparaveiculo-v3-daily.py" in wrapper
     assert "creditoparaveiculo-daily-create.sh" not in wrapper
     assert "--gate --post-discord --quiet" in wrapper
-    assert "flock -E 75 -n /run/lock/ares-cpv-v3-daily-create.lock" in wrapper
+    assert "flock -E 75 -n /run/lock/ares-cpv-meta-lane-1046241194533786.lock" in wrapper
+    assert "sleep " not in wrapper
+
+
+def test_intraday_shares_the_account_lane_and_defers_during_campaign_write():
+    wrapper = Path("/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh").read_text()
+    assert "flock -s -E 75 -n /run/lock/ares-cpv-meta-lane-1046241194533786.lock" in wrapper
+    assert "--mode intraday --actions-only --gate" in wrapper
     assert "sleep " not in wrapper
 
 
