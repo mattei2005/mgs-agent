@@ -390,7 +390,7 @@
     "authorized_by": "Rodolfo Mattei",
     "reconfirmed_at_et": "2026-08-25T16:01:37-04:00",
     "activated_at_et": "2026-08-20T17:06:18-04:00",
-    "status": "one_time_release_in_progress_cpv_daily_20260828",
+    "status": "creation_hold_until_explicit_release",
     "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
     "campaign_creation_taxonomy": {
       "authorized_by": "Rodolfo Mattei",
@@ -441,17 +441,23 @@
       "historical_scope": "completed C28-C30 remain audited as clones of C08 and are not reopened by this rule"
     },
     "creation_hold": {
-      "enabled": false,
+      "enabled": true,
       "last_one_time_release": {
         "request_id": "cpv-daily-20260828",
         "authorized_by": "Rodolfo Mattei",
         "authorized_at_et": "2026-08-27T23:38:03-04:00",
         "authorization_source": "discord:thread:1542725181787603004",
-        "status": "authorized_in_progress",
+        "status": "completed_validated",
+        "completed_at_utc": "2026-08-28T04:23:25.139690+00:00",
         "campaign_numbers": [
           36,
           37,
           38
+        ],
+        "campaign_ids": [
+          "120250957458380632",
+          "120250957458400632",
+          "120250957605760632"
         ]
       },
       "authorized_by": "Rodolfo Mattei",
@@ -679,7 +685,7 @@
       }
     },
     "one_time_override_20260828": {
-      "status": "authorized_in_progress",
+      "status": "completed_validated",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-27T23:38:03-04:00",
       "authorization_source": "discord:thread:1542725181787603004",
@@ -700,7 +706,34 @@
       "vehicle_type_gate": "all nine selected creative filenames must omit the _MOTO_ subtype token",
       "delivery_start_sp": "2026-08-29T00:30:00-03:00",
       "general_creation_hold_preserved": true,
-      "scheduler_remains_paused_after_completion": true
+      "scheduler_remains_paused_after_completion": true,
+      "completed_at_utc": "2026-08-28T04:23:25.139690+00:00",
+      "duration_from_order_seconds": 2722,
+      "duration_from_order_human": "45m22s",
+      "engine_runner_duration_seconds": 2402,
+      "engine_runner_duration_human": "40m02s",
+      "campaign_ids": [
+        "120250957458380632",
+        "120250957458400632",
+        "120250957605760632"
+      ],
+      "asset_ids": [
+        "asset_079a774f77ee982aff75",
+        "asset_0ac6383cdcfafc036d30",
+        "asset_3a5f1c7b130335bd75ba",
+        "asset_45255658cbbc3d8beb74",
+        "asset_9d179d948845ed931737",
+        "asset_a3cb72d6856cc5054b33",
+        "asset_bf648ce4e1740b87f9b3",
+        "asset_ead9d4079c011e9e6a75",
+        "asset_f078839e6addbf6d7715"
+      ],
+      "asset_mix": {
+        "01_READY": 6,
+        "03_TESTED_retest": 3
+      },
+      "assets_moved_to_02_TESTING": 9,
+      "first_delivery_armed": 3
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
@@ -857,7 +890,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 38,
+    "next_required_campaign_number": 39,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -1311,6 +1344,12 @@
         },
         "37": {
           "campaign_id": "120250957458400632",
+          "cycle_start_date": "2026-08-29",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260828"
+        },
+        "38": {
+          "campaign_id": "120250957605760632",
           "cycle_start_date": "2026-08-29",
           "source": "campaign_engine_v3_daily_readback",
           "request_id": "cpv-daily-20260828"
