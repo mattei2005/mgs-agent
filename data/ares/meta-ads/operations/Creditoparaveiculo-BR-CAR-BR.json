@@ -2385,6 +2385,18 @@
         "last_scope_update_at": "2026-08-28T10:56:00-03:00",
         "last_scope_update_content_sha256": "c79c2edaa5384902c560ffcfd16533f4d202a2ba083329b81e3e4c578bfb7bb8",
         "last_scope_update_readback_http": 200,
+        "account05_strategy_message_readbacks": [
+          {
+            "message_id": "1540474875053871175",
+            "content_sha256": "83358ddb1863ccb47ba1e433d41453de31139532e93f19f721344af8a2a6664d",
+            "readback_http": 200
+          },
+          {
+            "message_id": "1540474901457141832",
+            "content_sha256": "e31d40c82d988e3b116a4c1343e01d550366b1bb45d4d1c65b0f1b07b9378b80",
+            "readback_http": 200
+          }
+        ],
         "retention": "preserve indefinitely; never auto-delete",
         "update_policy": "when Rodolfo explicitly changes a rule, update the canonical operation/skills with supersession and publish the revised rule in this same thread",
         "authorized_by": "Rodolfo Mattei",
