@@ -583,12 +583,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
-      "next_step": "Rodolfo cria as threads Intraday, Diario e Criar campanhas; depois Ares faz readback da conta 05 e completa onboarding antes de qualquer write ou cron",
-      "objective": "Documentar e preparar onboarding da estrategia CREATIVE_CUT_24H na conta operacional 05 do Creditoparaveiculo BR-CAR-BR",
-      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
-      "state": "strategy_documented_not_activated; account_13_unchanged; operation_contract_created; thread_ids_and_live_account_identity_pending",
-      "thread_id": "1542597966400065536",
-      "updated_at": "2026-08-28T06:25:23+00:00"
+      "next_step": "Fazer readback live da conta Meta 05, confirmar alias/moeda/timezone e o Auto-thread member sync das três threads; concluir os demais gates antes de qualquer write ou cron",
+      "objective": "Documentar e completar o onboarding da estratégia CREATIVE_CUT_24H na conta operacional 05 do Creditoparaveiculo BR-CAR-BR",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json; discord:thread:1542892943352799242; discord:thread:1542892955315081246; discord:thread:1542892971186454719; discord:thread:1540426218405363873",
+      "state": "strategy_documented_not_activated; all_three_account_threads_registered; intraday=1542892943352799242; daily=1542892955315081246; campaign_creation=1542892971186454719; shared_rules=1540426218405363873; live_account_identity_pending; member_sync_readback_pending",
+      "thread_id": "1542892955315081246",
+      "updated_at": "2026-08-28T13:50:58+00:00"
     },
     {
       "agent": "ares",
@@ -1392,5 +1392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T06:25:23+00:00"
+  "updated_at": "2026-08-28T13:50:58+00:00"
 }

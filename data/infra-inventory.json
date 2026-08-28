@@ -10844,6 +10844,31 @@
         }
       },
       "updated_at": "2026-08-28T01:40:32.042295-04:00"
+    },
+    {
+      "id": "ares-cpv-account05-creative-cut24h-onboarding",
+      "agent": "ares",
+      "type": "operational_config",
+      "owner": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1542597966400065536",
+      "operation": {
+        "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+        "size_bytes": 4792,
+        "sha256": "4c79ceec15f903c8a7172aae26fc2e8f06dd9b12140cb7344b31662decda26a9",
+        "status": "documented_not_activated"
+      },
+      "discord_threads": {
+        "intraday": "1542892943352799242",
+        "daily": "1542892955315081246",
+        "campaign_creation": "1542892971186454719",
+        "rules": "1540426218405363873",
+        "registration_status": "all_three_account_threads_registered_with_shared_rules_pending_member_sync_readback"
+      },
+      "meta_writes": 0,
+      "crons": 0,
+      "purpose": "Track the fail-closed onboarding of CREATIVE_CUT_24H for CPV account 05 without activating campaigns, writes or schedules.",
+      "status": "threads_registered_onboarding_pending",
+      "updated_at": "2026-08-28T13:50:08Z"
     }
   ],
   "profile_skill_references": [

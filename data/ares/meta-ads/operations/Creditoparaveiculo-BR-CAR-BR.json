@@ -2376,9 +2376,11 @@
       {
         "key": "rules",
         "title": "CPV Regras",
-        "purpose": "manual permanente da estratégia de tráfego direto para financiamento veicular; ponto de consulta dos gestores para regras vigentes",
+        "purpose": "manual permanente da estratégia de tráfego direto para financiamento veicular; ponto único de consulta dos gestores para regras vigentes de todas as contas de anúncio Creditoparaveiculo BR-CAR-BR",
         "delivery": "manual only; no recurring report or automated campaign action targets this thread",
         "thread_id": "1540426218405363873",
+        "scope": "all Creditoparaveiculo BR-CAR-BR ad accounts",
+        "single_thread_policy": "one shared CPV Regras thread; do not create a duplicate per ad account; label account-specific exceptions inside this thread",
         "retention": "preserve indefinitely; never auto-delete",
         "update_policy": "when Rodolfo explicitly changes a rule, update the canonical operation/skills with supersession and publish the revised rule in this same thread",
         "authorized_by": "Rodolfo Mattei",

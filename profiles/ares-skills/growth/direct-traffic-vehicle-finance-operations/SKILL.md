@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.44
+version: 1.0.45
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -495,7 +495,7 @@ CPV Regras              manual permanente da estratégia; consulta dos gestores
 Checkpoint de ação     08:00 (escala + D3), 12:00 (recheck D3 v2) e 16:00 (pós-escala), separados e sem relatório extra
 ```
 
-A thread `CPV Regras` (`1540426218405363873`) é manual, deve ser preservada indefinidamente e não recebe relatório recorrente nem ação automática de campanha. Quando Rodolfo alterar uma regra, atualizar a operação/skills por supersessão e publicar a regra revisada nessa mesma thread.
+A thread `CPV Regras` (`1540426218405363873`) é manual, deve ser preservada indefinidamente e não recebe relatório recorrente nem ação automática de campanha. Ela é a única thread de regras para todas as contas de anúncio `Creditoparaveiculo BR-CAR-BR`; não criar uma cópia por conta. Exceções específicas de conta entram como seções claramente identificadas dentro dessa mesma thread. Quando Rodolfo alterar uma regra, atualizar a operação/skills por supersessão e publicar a regra revisada nessa mesma thread.
 
 Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no inventário canônico e são citados nos registros de criação/intraday quando relevantes.
 

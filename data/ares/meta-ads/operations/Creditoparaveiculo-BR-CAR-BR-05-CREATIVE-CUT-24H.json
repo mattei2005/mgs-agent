@@ -65,16 +65,27 @@
     "reason": "Rodolfo explicitly selected account 05, not account 13, for the new strategy"
   },
   "discord_threads": {
-    "intraday": null,
-    "daily": null,
+    "intraday": "1542892943352799242",
+    "daily": "1542892955315081246",
     "campaign_creation": "1542892971186454719",
-    "status": "campaign_creation_registered_pending_intraday_daily_and_member_readback"
+    "rules": "1540426218405363873",
+    "status": "all_three_account_threads_registered; campaign_creation_member_sync_verified; intraday_daily_member_readback_pending",
+    "intraday_source": "discord:thread:1542892943352799242",
+    "intraday_confirmed_by": "Rodolfo Mattei",
+    "intraday_registered_at_utc": "2026-08-28T13:48:23Z",
+    "daily_source": "discord:thread:1542892955315081246",
+    "daily_confirmed_by": "Rodolfo Mattei",
+    "daily_registered_at_utc": "2026-08-28T13:47:36Z",
+    "campaign_creation_source": "discord:thread:1542892971186454719",
+    "rules_source": "discord:thread:1540426218405363873",
+    "rules_scope": "single permanent CPV Regras thread shared by every Creditoparaveiculo BR-CAR-BR ad account",
+    "rules_thread_policy": "do not create a separate rules thread per ad account; record account-specific exceptions as clearly labeled sections in the shared thread"
   },
   "activation_gates": [
     "confirm account 05 Meta account_id and exact alias by live API",
     "confirm account currency and timezone by live API",
     "register the 1Password item reference without copying credentials",
-    "record and read back Intraday, Daily and Campaign Creation thread IDs",
+    "confirm Auto-thread member sync/readback for Intraday, Daily and Campaign Creation threads",
     "close budget, write mode and campaign activation authority for account 05",
     "assign CREATIVE_CUT_24H explicitly to named pilot campaigns",
     "implement resumable state and deterministic dry-run tests",
@@ -88,7 +99,8 @@
   "notes": [
     "Documentation closure does not authorize campaign creation, activation, budget changes or cron creation.",
     "No placeholder thread ID may be used for delivery.",
+    "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-28T13:47:04Z"
+  "updated_at": "2026-08-28T13:48:55Z"
 }
