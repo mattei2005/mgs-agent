@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-28T17:43:55-04:00",
+  "updated_at": "2026-08-28T17:47:16-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
   "source_message_id": "1543012433138810990",
@@ -133,12 +133,6 @@
     "credential_runtime_fail": [],
     "metadata_drift": [],
     "credential_drift": [
-      {
-        "app": "B001-3",
-        "item_title": "BOT B001-2 Token - Adriano Alves",
-        "item_app_name": "B001-3",
-        "status": "non_blocking_title_drift"
-      },
       {
         "app": "B006-3",
         "item_title_profile": "Isidoro Cristina Barbosa Martins",
@@ -299,23 +293,67 @@
         ],
         "scheduled_cycle_at": "2026-08-24T09:56:29-04:00",
         "source_message_id": "1541442725608558623"
+      },
+      {
+        "app": "B001-4",
+        "item_title": "BOT B001-4 Token - Aline Rosse",
+        "app_name": "B001-4",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 2,
+        "roles_resolved_names": 2,
+        "expected_sheet_roles": 16,
+        "pending_role_acceptances": 14,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Aline Rosse",
+        "sheet_no_app_rows": 16,
+        "sheet_blank_names": 0,
+        "sheet_duplicate_names": 0,
+        "sheet_writes": 0,
+        "production_baseline_status": "active_fail_closed_pending_expected_roles",
+        "source_message_id": "1543012433138810990"
+      },
+      {
+        "app": "B002-3",
+        "item_title": "BOT B002-3 Token - Khánh Chi Phùng",
+        "app_name": "B002-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 1,
+        "roles_resolved_names": 1,
+        "expected_sheet_roles": 10,
+        "pending_role_acceptances": 9,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Khánh Chi Phùng",
+        "sheet_no_app_rows": 10,
+        "sheet_blank_names": 0,
+        "sheet_duplicate_names": 0,
+        "sheet_writes": 0,
+        "production_baseline_status": "active_fail_closed_pending_expected_roles",
+        "source_message_id": "1543012433138810990"
       }
     ],
     "secrets_exposed": false,
     "report": "reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "b001_4_b002_3_cutover_baseline_pending",
+    "status": "b001_4_b002_3_active_pending_role_acceptances",
     "authorized_by": "Rodolfo Mattei",
     "source_message_id": "1543012433138810990",
-    "planned_check": "B001-4 and B002-3 credentials are live; baseline new app-scoped roles, preserve Sheet fail-closed until expected roles are accepted, then unpause notifications.",
+    "planned_check": "Monitor accepted-role growth for B001-4 from 2/16 and B002-3 from 1/10. Keep Sheet reconciliation fail-closed until each app reaches its expected count with every identity resolved.",
     "required_before_reactivation": [
-      "fresh app metadata /roles /me/debug_token readback",
-      "exact reconciliation against current Sheet NO APP assignments",
-      "new app-scoped state baseline without predecessor IDs",
-      "zero Sheet writes while accepted roles are below expected count"
+      "B001-4 reaches 16 accepted and resolved roles",
+      "B002-3 reaches 10 accepted and resolved roles",
+      "fresh full Sheet reconciliation reports safe_for_sheet=true for each app",
+      "zero unexpected identities and zero errors"
     ],
-    "reactivate_only_when": "new app credentials and fail-closed production baseline validated",
-    "current_runtime_note": "B001-4 has 16 Sheet assignments and 2 currently accepted roles; B002-3 has 10 Sheet assignments and 1 currently accepted role. Both remain fail-closed until the production monitor baseline validates."
+    "reactivate_only_when": "automatic per-app gate reaches expected accepted/resolved roles",
+    "current_runtime_note": "B001-4 and B002-3 are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed because 14 and 9 expected roles are still pending acceptance."
   }
 }
