@@ -857,7 +857,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 36,
+    "next_required_campaign_number": 38,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -1302,6 +1302,18 @@
           "cycle_start_date": "2026-08-28",
           "source": "campaign_engine_v3_daily_readback",
           "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "36": {
+          "campaign_id": "120250957458380632",
+          "cycle_start_date": "2026-08-29",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260828"
+        },
+        "37": {
+          "campaign_id": "120250957458400632",
+          "cycle_start_date": "2026-08-29",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260828"
         }
       },
       "required": [
