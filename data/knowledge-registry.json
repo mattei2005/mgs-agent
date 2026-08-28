@@ -899,10 +899,29 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V2-20260828",
+      "title": "Creditoparaveiculo permanent rules reference thread",
+      "updated_at": "2026-08-28T13:52:02+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.rules-thread",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-28T10:48:55-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V2-20260828",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Creditoparaveiculo permanent rules reference thread",
-      "updated_at": "2026-08-21T21:13:17+00:00"
+      "title": "Creditoparaveiculo usa uma única CPV Regras para todas as contas de anúncio",
+      "updated_at": "2026-08-28T13:52:02+00:00"
     },
     {
       "canonical_key": "ares.discord.threads.mandatory-zeus-member",
@@ -2099,5 +2118,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T06:23:33+00:00"
+  "updated_at": "2026-08-28T13:52:02+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-28T05:00:01-04:00",
+    "updated_at": "2026-08-28T09:53:31-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -10853,8 +10853,8 @@
       "authorization_source": "discord:thread:1542597966400065536",
       "operation": {
         "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
-        "size_bytes": 4792,
-        "sha256": "4c79ceec15f903c8a7172aae26fc2e8f06dd9b12140cb7344b31662decda26a9",
+        "size_bytes": 5764,
+        "sha256": "a33e520415eb23d860a3fbdb6755322d22e7766452283fd3d494176f567a2aa9",
         "status": "documented_not_activated"
       },
       "discord_threads": {
@@ -10862,13 +10862,18 @@
         "daily": "1542892955315081246",
         "campaign_creation": "1542892971186454719",
         "rules": "1540426218405363873",
-        "registration_status": "all_three_account_threads_registered_with_shared_rules_pending_member_sync_readback"
+        "registration_status": "all_three_account_threads_registered_and_member_sync_verified",
+        "member_sync_verified": {
+          "intraday": true,
+          "daily": true,
+          "campaign_creation": true
+        }
       },
       "meta_writes": 0,
       "crons": 0,
       "purpose": "Track the fail-closed onboarding of CREATIVE_CUT_24H for CPV account 05 without activating campaigns, writes or schedules.",
-      "status": "threads_registered_onboarding_pending",
-      "updated_at": "2026-08-28T13:50:08Z"
+      "status": "threads_and_member_sync_verified_onboarding_pending",
+      "updated_at": "2026-08-28T13:52:02Z"
     }
   ],
   "profile_skill_references": [
@@ -11336,12 +11341,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md",
-      "size_bytes": 36819,
-      "modified_at": "2026-08-22T01:16:36-04:00",
-      "sha256": "4d324f7a47e82ec4f18f783401077ba6b7b5f0820630981d43d702daa67f9836",
+      "size_bytes": 52616,
+      "modified_at": "2026-08-28T09:50:40-04:00",
+      "sha256": "9fee9393a9d4abaa98d49895602a58563d168f4c6c493c813fdb1d17b1a29184",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-08-22T02:17:42-03:00",
-      "validation": "Skill v1.0.24 live/mirror SHA match. CPV cap vigente USD500; pool normal USD100 (3xUSD30) e flexível USD150 (5xUSD30); escala continua limitada a USD150 por campanha e GET/readback."
+      "updated_at": "2026-08-28T09:53:30-04:00",
+      "validation": "Skill v1.0.45 live/mirror SHA match. CPV Regras 1540426218405363873 é a referência única para todas as contas de anúncio Creditoparaveiculo BR-CAR-BR; exceções por conta ficam rotuladas dentro da mesma thread."
     },
     {
       "id": "zeus-smartbidding-persistent-runtime-reference-20260711",
@@ -11585,14 +11590,16 @@
       "source_config_sha256_normalized_redirect": "233186f9de13ec69224bdff30e360c63ecc5820f261a56154c8b42f3f2010f67",
       "sms_presets_sha256": "e7d9f9894679515991f8eb061438319bb821caabe5ea2dd45a9ecc717622b32c",
       "plugin_tree_sha256": "45a421d4908398d1c191040e6aa8dd49d66fcc7bf43446b1edfcf87f030861a1",
-      "target_redirect": "https://financiarveiculo.com/rec-br-financiamento-sem-entrada-seu-carro-novo-rapido/",
+      "target_redirect": "https://financiarveiculo.com/rec-br-financiamento-de-carro-sem-entrada/",
       "lead_rows_migrated": 0,
       "sms_revenue_rows_migrated": 0,
       "backup_path": "/home/runcloud2/backups/mgs-quiz-rollout-20260827T144331Z/financiarveiculo-before.sql",
       "backup_sha256": "a0c56775ba3d15cb27732ace5b5ab6b9f08309905871e52d92a886a31e7d5190",
-      "validation": "Plugin active v1.7.10; plugin/config/preset hashes match source after redirect normalization; admin lists 15/15 slugs; all 15 public routes HTTP 200 with plugin asset v1.7.10 and target redirect; four mobile browser smokes cover default, FMYBC, Quiz Maker SB and moto with visible UI, zero overflow, zero JS errors; lead and SMS revenue tables remain empty.",
-      "source_authorization": "Discord message 1542544673145364601",
-      "updated_at": "2026-08-27T10:50:11-04:00"
+      "redirect_correction_backup_path": "/home/runcloud2/mgs-backups/mgs-quiz-redirect-correction-20260827T190141Z/financiarveiculo.com-mgs-quiz-config-before.sql",
+      "redirect_correction_backup_sha256": "d98e13331233463445588a4113b3e938a04d0a1faa1c3165f9f11172f5c990b3",
+      "validation": "Plugin active v1.7.10; database readback shows 15/15 unique quiz configs using the requested redirect, empty variants and weight 100; WP Fastest Cache 1.5.1 was cleared after critical confirmation; all 15 bare public routes return HTTP 200, expose plugin asset v1.7.10 and the requested redirect, and contain no previous redirect; destination returns HTTP 200; Cloudflare status DYNAMIC on 15/15 routes.",
+      "source_authorization": "Discord messages 1542544673145364601, 1542609072606674986 and 1542894381374382101",
+      "updated_at": "2026-08-28T09:53:31-04:00"
     }
   ],
   "systemd_services": [

@@ -583,12 +583,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
-      "next_step": "Fazer readback live da conta Meta 05, confirmar alias/moeda/timezone e o Auto-thread member sync das três threads; concluir os demais gates antes de qualquer write ou cron",
+      "next_step": "Fazer readback live da conta Meta 05, confirmar account_id/alias/moeda/timezone e concluir credencial por referência, budget/write mode e campanhas piloto antes de qualquer write ou cron",
       "objective": "Documentar e completar o onboarding da estratégia CREATIVE_CUT_24H na conta operacional 05 do Creditoparaveiculo BR-CAR-BR",
-      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json; discord:thread:1542892943352799242; discord:thread:1542892955315081246; discord:thread:1542892971186454719; discord:thread:1540426218405363873",
-      "state": "strategy_documented_not_activated; all_three_account_threads_registered; intraday=1542892943352799242; daily=1542892955315081246; campaign_creation=1542892971186454719; shared_rules=1540426218405363873; live_account_identity_pending; member_sync_readback_pending",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json; discord:thread:1542892943352799242; discord:thread:1542892955315081246; discord:thread:1542892971186454719; discord:thread:1540426218405363873; validation:2026-08-28T13:52:58.987942+00:00",
+      "state": "strategy_documented_not_activated; fixed_threads_registered_and_member_sync_verified: intraday=1542892943352799242, daily=1542892955315081246, campaign_creation=1542892971186454719; shared_rules=1540426218405363873 for all cpv ad accounts; live_account_identity_pending; write_enabled=false; activation_enabled=false; crons=0",
       "thread_id": "1542892955315081246",
-      "updated_at": "2026-08-28T13:50:58+00:00"
+      "updated_at": "2026-08-28T13:53:13+00:00"
     },
     {
       "agent": "ares",
@@ -1392,5 +1392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T13:50:58+00:00"
+  "updated_at": "2026-08-28T13:53:13+00:00"
 }
