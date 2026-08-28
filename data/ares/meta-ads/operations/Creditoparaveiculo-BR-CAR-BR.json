@@ -390,7 +390,7 @@
     "authorized_by": "Rodolfo Mattei",
     "reconfirmed_at_et": "2026-08-25T16:01:37-04:00",
     "activated_at_et": "2026-08-20T17:06:18-04:00",
-    "status": "creation_hold_until_explicit_release",
+    "status": "one_time_release_in_progress_cpv_daily_20260828",
     "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
     "campaign_creation_taxonomy": {
       "authorized_by": "Rodolfo Mattei",
@@ -441,22 +441,17 @@
       "historical_scope": "completed C28-C30 remain audited as clones of C08 and are not reopened by this rule"
     },
     "creation_hold": {
-      "enabled": true,
+      "enabled": false,
       "last_one_time_release": {
-        "request_id": "cpv-daily-20260827",
+        "request_id": "cpv-daily-20260828",
         "authorized_by": "Rodolfo Mattei",
-        "authorized_at_et": "2026-08-27T10:58:45-04:00",
-        "authorization_source": "discord:thread:1542545166630396027",
-        "completed_at_utc": "2026-08-27T16:00:10.598505+00:00",
+        "authorized_at_et": "2026-08-27T23:38:03-04:00",
+        "authorization_source": "discord:thread:1542725181787603004",
+        "status": "authorized_in_progress",
         "campaign_numbers": [
-          29,
-          30,
-          31
-        ],
-        "campaign_ids": [
-          "120250951366720632",
-          "120250951366750632",
-          "120250951557410632"
+          36,
+          37,
+          38
         ]
       },
       "authorized_by": "Rodolfo Mattei",
@@ -682,6 +677,30 @@
         "newly_armed_count": 4,
         "audit": "/root/mgs-agent/data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/auto-arm-20260828T023257491591Z.json"
       }
+    },
+    "one_time_override_20260828": {
+      "status": "authorized_in_progress",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T23:38:03-04:00",
+      "authorization_source": "discord:thread:1542725181787603004",
+      "request_id": "cpv-daily-20260828",
+      "scope": "create exactly three normal CARRO CPV G006 production campaigns C36, C37 and C38 with three new Drive creatives per campaign and measure end-to-end completion time",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        36,
+        37,
+        38
+      ],
+      "budget_per_campaign_usd": 25,
+      "total_new_budget_usd": 75,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "mode": "clone_prestaged",
+      "vehicle_type": "CARRO",
+      "vehicle_type_gate": "all nine selected creative filenames must omit the _MOTO_ subtype token",
+      "delivery_start_sp": "2026-08-29T00:30:00-03:00",
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
