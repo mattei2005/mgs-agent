@@ -447,7 +447,7 @@
         "authorized_by": "Rodolfo Mattei",
         "authorized_at_et": "2026-08-27T23:38:03-04:00",
         "authorization_source": "discord:thread:1542725181787603004",
-        "status": "completed_validated",
+        "status": "deleted_and_assets_restored_after_test",
         "completed_at_utc": "2026-08-28T04:23:25.139690+00:00",
         "campaign_numbers": [
           36,
@@ -458,7 +458,11 @@
           "120250957458380632",
           "120250957458400632",
           "120250957605760632"
-        ]
+        ],
+        "cleanup_authorized_by": "Rodolfo Mattei",
+        "cleanup_authorization_source": "discord:thread:1542725181787603004",
+        "cleanup_completed_at_utc": "2026-08-28T05:18:52+00:00",
+        "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
       },
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-25T16:01:37-04:00",
@@ -685,7 +689,7 @@
       }
     },
     "one_time_override_20260828": {
-      "status": "completed_validated",
+      "status": "deleted_and_assets_restored_after_test",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-27T23:38:03-04:00",
       "authorization_source": "discord:thread:1542725181787603004",
@@ -733,7 +737,14 @@
         "03_TESTED_retest": 3
       },
       "assets_moved_to_02_TESTING": 9,
-      "first_delivery_armed": 3
+      "first_delivery_armed": 3,
+      "cleanup_authorized_by": "Rodolfo Mattei",
+      "cleanup_authorization_source": "discord:thread:1542725181787603004",
+      "cleanup_completed_at_utc": "2026-08-28T05:18:52+00:00",
+      "campaigns_deleted": 3,
+      "assets_restored_to_01_READY": 6,
+      "assets_restored_to_03_TESTED": 3,
+      "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
@@ -1340,19 +1351,34 @@
           "campaign_id": "120250957458380632",
           "cycle_start_date": "2026-08-29",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260828"
+          "request_id": "cpv-daily-20260828",
+          "status": "deleted_test_cleanup",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-08-28T02:18:52-03:00",
+          "cleanup_authorization_source": "discord:thread:1542725181787603004",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
         },
         "37": {
           "campaign_id": "120250957458400632",
           "cycle_start_date": "2026-08-29",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260828"
+          "request_id": "cpv-daily-20260828",
+          "status": "deleted_test_cleanup",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-08-28T02:18:52-03:00",
+          "cleanup_authorization_source": "discord:thread:1542725181787603004",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
         },
         "38": {
           "campaign_id": "120250957605760632",
           "cycle_start_date": "2026-08-29",
           "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260828"
+          "request_id": "cpv-daily-20260828",
+          "status": "deleted_test_cleanup",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-08-28T02:18:52-03:00",
+          "cleanup_authorization_source": "discord:thread:1542725181787603004",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
         }
       },
       "required": [
@@ -1787,7 +1813,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-25T09:51:43-04:00",
+  "updated_at": "2026-08-28T02:18:52-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",

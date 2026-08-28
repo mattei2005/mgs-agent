@@ -622,6 +622,16 @@
     },
     {
       "agent": "zeus",
+      "id": "campaign-engine-throughput-20260828",
+      "next_step": "Criar testes RED para coordenação reader/writer, retry seguro code 2, quota tier-aware e versão única; então corrigir código e wrappers.",
+      "objective": "Eliminar esperas artificiais do Campaign Engine v3, impedir concorrência de readers Meta durante writes e sincronizar versão",
+      "source": "discord:1542725181787603004:1542764003443613758",
+      "state": "diagnóstico confirmado: limite 120 existiu na instalação; runtime ativo foi reduzido para 60. c36-c38 perderam ads por oauth code 2 na meta, não por ausência no drive. implementação autorizada iniciada.",
+      "thread_id": "1542725181787603004",
+      "updated_at": "2026-08-28T05:15:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "car-br-offer-copy-rollout-20260731",
       "next_step": "Nenhuma ação pendente; usar os backups inventariados caso Rodolfo peça rollback futuro.",
       "objective": "Replicar nos 8 sites e nas rotas legacy+SMS a copy de três cards CAR-BR mostrada por Rodolfo, preservando URLs, providers e tracking.",
@@ -1372,5 +1382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T04:35:40+00:00"
+  "updated_at": "2026-08-28T05:15:39+00:00"
 }
