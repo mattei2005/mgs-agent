@@ -607,6 +607,46 @@
         }
       ]
     },
+    "one_time_override_20260827_second_moto": {
+      "status": "IN_PROGRESS",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T21:18:00-04:00",
+      "authorization_source": "discord:thread:1542705476976902154",
+      "request_id": "cpv-c32-c35-moto-20260827",
+      "scope": "create exactly four MOTO CPV G006 production campaigns C32, C33, C34 and C35 using the twelve explicitly selected Kelly creative lineages and cloning C25M",
+      "campaign_count": 4,
+      "campaign_numbers": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "budget_per_campaign_usd": 25,
+      "total_new_budget_usd": 100,
+      "bid_strategy": "MAXVOL inherited from C25M",
+      "structure": "CBO 1x1x3",
+      "mode": "clone_prestaged",
+      "vehicle_type": "MOTO",
+      "explicit_source_campaign_label": "C25M",
+      "explicit_source_campaign_id": "120250925458300632",
+      "delivery_start_sp": "2026-08-28T00:30:00-03:00",
+      "asset_ids": [
+        "asset_494513b3982be1ca12de",
+        "asset_08e6bfd5e47749aacb33",
+        "asset_56d606a7bccfc72e89e8",
+        "asset_04f6f53eea9bec5c7a65",
+        "asset_a1c133d8007cddcb49fa",
+        "asset_582600eb1b79c0084c63",
+        "asset_c8798e7b5101bee323c5",
+        "asset_cf5a38a9eeb06f83a665",
+        "asset_da34a109b79ae4ac06cd",
+        "asset_54b518ce64851145279c",
+        "asset_5a46fbdc7782bf68badf",
+        "asset_c72511ea37538625f809"
+      ],
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true
+    },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
     "new_campaign_budget_pool_usd": 100,
