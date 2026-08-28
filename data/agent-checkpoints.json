@@ -663,12 +663,12 @@
     {
       "agent": "ares",
       "id": "cpv-c32-c35-moto-20260827",
-      "next_step": "Concluir pre-stage, selar manifest, executar bundles C32-C33 e C34-C35, fazer readback Meta/Drive/inventário e fechar auditoria",
+      "next_step": "Retomar o mesmo manifest após cooldown, criar somente C32 AD03 e C33 AD01, validar bundle 1, executar C34-C35 e concluir pós-processamento",
       "objective": "Criar quatro campanhas MOTO C32-C35 para início em 28/08 00:30 SP, clonadas da C25M com os 12 criativos indicados por Rodolfo",
       "source": "discord:thread:1542705476976902154",
-      "state": "preflight concluído; 12 assets drive validados, liberados e reservados; pre-stage meta em andamento; fonte c25m e budget live reconciliados",
+      "state": "meta materializou c32 e c33 com conjuntos e 4/6 anúncios; dois copies retornaram erro transitório code 2. readback confirmou c32 ad03 e c33 ad01 como únicas camadas ausentes; recuperação automática do mesmo request aguarda cooldown de quota",
       "thread_id": "1542705476976902154",
-      "updated_at": "2026-08-28T01:29:33+00:00"
+      "updated_at": "2026-08-28T01:39:41+00:00"
     },
     {
       "agent": "zeus",
@@ -1352,5 +1352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T01:29:33+00:00"
+  "updated_at": "2026-08-28T01:39:41+00:00"
 }
