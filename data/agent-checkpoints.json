@@ -663,12 +663,12 @@
     {
       "agent": "ares",
       "id": "cpv-c32-c35-moto-20260827",
-      "next_step": "Após cooldown, executar somente o readback consolidado do bundle 1; depois materializar C34-C35 no mesmo request e concluir pós-processamento",
+      "next_step": "Retomar o mesmo request após 305s para materializar e validar somente o bundle C34-C35, sem replay de C32-C33",
       "objective": "Criar quatro campanhas MOTO C32-C35 para início em 28/08 00:30 SP, clonadas da C25M com os 12 criativos indicados por Rodolfo",
       "source": "discord:thread:1542705476976902154",
-      "state": "recuperação criou exclusivamente c32 ad03 e c33 ad01; agora c32-c33 têm 6/6 ad ids persistidos. o readback consolidado foi limitado pela meta (code 17), sem replay de write; bundle 2 ainda não iniciou",
+      "state": "bundle 1 concluído e validado: c32 e c33 com 2 campanhas, 2 conjuntos e 6 anúncios. o motor retornou partial_deferred_quota saudável; c34-c35 ainda não foram escritos",
       "thread_id": "1542705476976902154",
-      "updated_at": "2026-08-28T01:43:49+00:00"
+      "updated_at": "2026-08-28T02:04:40+00:00"
     },
     {
       "agent": "zeus",
@@ -1352,5 +1352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T01:43:49+00:00"
+  "updated_at": "2026-08-28T02:04:40+00:00"
 }
