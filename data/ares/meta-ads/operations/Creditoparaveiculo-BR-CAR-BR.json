@@ -2178,7 +2178,7 @@
     "scheduled_creation_budget_reporting": "completion message always includes active account budget and remaining USD operational cap",
     "readback_policy": "persist IDs after writes; development_access honors Meta reset headers or waits 305 seconds before consolidated readback; standard_access skips that fixed cooldown and follows live utilization",
     "reader_exclusion_policy": "Diário, Intraday, Snapshot, first-delivery and guardrail reactivation defer silently whenever the per-account writer lease or cpv-daily state is resumable",
-    "transient_code2_retry_policy": "one-campaign bundles can resume after the 5-second safety margin when the development lane retains a full recovery reservation; full two-campaign lanes wait for reset; missing-only reconciliation remains mandatory",
+    "transient_code2_retry_policy": "write/recovery/readback reservations are distinct; missing-only recovery starts only with effective capacity and performs the final readback in the same fresh reservation when its estimated total cost fits, eliminating the duplicated post-recovery cooldown",
     "intermediate_get_calls": 0,
     "write_enabled": true,
     "media_upload_enabled": true,

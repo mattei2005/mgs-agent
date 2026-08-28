@@ -45,6 +45,8 @@ window                     300s
 
 `X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` are persisted separately, including headers returned by an outer batch whose child failed. Unknown tier keeps the configured 100/120 ceiling; `development_access` caps it at 60; `standard_access` uses 9000 and skips the fixed development readback cooldown. Do not infer server capacity only from a local number. A request that does not fit returns `PARTIAL_DEFERRED_QUOTA`, persists completed IDs and resumes without replay.
 
+Each bundle uses separate quota reservation identities for initial write, missing-only recovery and readback-only resume. This prevents an old write reservation from authorizing immediate recovery. Once a fresh recovery reservation exists, its estimate includes targeted reconciliation GETs, missing mutations, required name normalization and the final consolidated readback; fitting recoveries finish in one wave instead of paying a redundant second 305-second cooldown.
+
 Every writer claims a persisted per-account lease before preflight and keeps it across quota/readback deferrals. Diário, Intraday, Snapshot, first-delivery and guardrail reactivation all pass one centralized reader gate and a shared OS lock. They resume only after the writer lease and operation state are complete.
 
 ## Media
