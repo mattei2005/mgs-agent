@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-08-28T18:06:21-04:00",
+  "updated_at": "2026-08-28T18:15:57-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1543017636894343219",
+  "source_message_id": "1543020500979163196",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -96,11 +96,12 @@
       "onepassword_item_title": "BOT B010-2 Token - Erik Sabar"
     },
     {
-      "app": "B011",
+      "app": "B011-2",
       "channel_id": "1537256907373289575",
       "channel_name": "b011-app-status",
-      "admin": "Maria Silva Nobrega",
-      "onepassword_item_title": "BOT B011 Token - Maria Silva Nobrega"
+      "admin": "Ashley Comf",
+      "onepassword_item_title": "BOT B011-2 Token - Ashley Comf",
+      "expected_sheet_roles": 17
     },
     {
       "app": "B012",
@@ -382,6 +383,28 @@
         "sheet_writes": 0,
         "production_baseline_status": "active_fail_closed_pending_expected_roles",
         "source_message_id": "1543017636894343219"
+      },
+      {
+        "app": "B011-2",
+        "item_title": "BOT B011-2 Token - Ashley Comf",
+        "app_name": "B011-2",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 1,
+        "roles_resolved_names": 1,
+        "expected_sheet_roles": 17,
+        "pending_role_acceptances": 16,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Ashley Comf",
+        "sheet_no_app_rows": 17,
+        "sheet_blank_names": 0,
+        "sheet_duplicate_names": 0,
+        "sheet_writes": 0,
+        "production_baseline_status": "active_fail_closed_pending_expected_roles",
+        "source_message_id": "1543020500979163196"
       }
     ],
     "secrets_exposed": false,
@@ -390,17 +413,18 @@
   "reactivation_gate": {
     "status": "replacement_apps_active_pending_role_acceptances",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1543017636894343219",
-    "planned_check": "Monitor B001-4 at 2/16, B002-3 at current live count/10, B004-4 at 1/12 and B009-3 at 1/17. Keep each Sheet reconciliation fail-closed until its expected accepted/resolved role count is reached.",
+    "source_message_id": "1543020500979163196",
+    "planned_check": "Monitor all Rodolfo replacement apps via exact registry-pinned 1Password items and live Graph. Keep each Sheet reconciliation fail-closed until its expected accepted/resolved role count is reached.",
     "required_before_reactivation": [
       "B001-4 reaches 16 accepted/resolved roles",
       "B002-3 reaches 10 accepted/resolved roles",
       "B004-4 reaches 12 accepted/resolved roles",
       "B009-3 reaches 17 accepted/resolved roles",
+      "B011-2 reaches 17 accepted/resolved roles",
       "fresh per-app Sheet reconciliation reports safe_for_sheet=true",
       "zero unexpected identities and zero errors"
     ],
     "reactivate_only_when": "automatic per-app gate reaches expected accepted/resolved roles",
-    "current_runtime_note": "B001-4, B002-3, B004-4 and B009-3 are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed while expected roles are pending acceptance."
+    "current_runtime_note": "B001-4, B002-3, B004-4, B009-3 and B011-2 have exact/readable 1Password items and are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed while expected roles are pending acceptance."
   }
 }
