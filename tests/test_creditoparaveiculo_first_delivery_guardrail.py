@@ -265,7 +265,7 @@ def test_first_spend_pauses_once_and_queues_next_0030(monkeypatch, tmp_path):
     assert result["status"] == "PAUSED_AND_QUEUED"
     assert fake_meta.posts[0] == (campaign_id, {"status": "PAUSED"})
     assert result["results"][0]["verified"] is True
-    due = (datetime.now(ZoneInfo("America/Sao_Paulo")).date() + timedelta(days=1)).isoformat()
+    due = (FixedDatetime.now(ZoneInfo("America/Sao_Paulo")).date() + timedelta(days=1)).isoformat()
     performance = json.loads(guardrail_state.read_text())["campaigns"][campaign_id]
     assert performance["pending_reactivation"]["provenance"] == "first_delivery_guardrail"
     assert performance["pending_reactivation"]["due_date"] == due

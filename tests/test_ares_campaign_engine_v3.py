@@ -361,11 +361,11 @@ def test_full_access_lane_releases_completed_bundle_but_development_keeps_window
 
     development = LaneQuotaStore(tmp_path / 'dev', soft_score=100, hard_score=120, window_seconds=300)
     development.observe_headers(lane, {'x-ad-account-usage': json.dumps({'acc_id_util_pct': 10, 'ads_api_access_tier': 'development_access'})}, now=1000)
-    development.reserve(lane, 90, request_id='bundle-1', now=1000)
+    development.reserve(lane, 60, request_id='bundle-1', now=1000)
     kept = development.complete(lane, 'bundle-1', now=1001)
     assert kept['released'] is False
     with pytest.raises(QuotaBlocked):
-        development.reserve(lane, 90, request_id='bundle-2', now=1002)
+        development.reserve(lane, 1, request_id='bundle-2', now=1002)
 
 
 def test_media_registry_roundtrip_and_fail_closed(tmp_path):
@@ -1307,6 +1307,49 @@ def test_standard_access_skips_development_readback_cooldown(tmp_path):
     result = engine.execute(manifest([prestaged_campaign(1), prestaged_campaign(2)], request_id='standard-fast'))
     assert result['status'] == 'COMPLETE_PAUSED'
     assert [row['stage'] for row in transport.calls][-1] == 'consolidated_readback'
+
+
+@pytest.mark.parametrize(('campaign_count', 'expected_retry'), [(1, 5), (2, 305)])
+def test_transient_code2_retry_uses_remaining_development_lane_capacity(tmp_path, campaign_count, expected_retry):
+    class TransientAdCopy(FakeBatchTransport):
+        def execute(self, operations, stage):
+            if stage == 'ad_copy_with_creative':
+                raise BatchTransportError(stage, {
+                    'children': [{
+                        'name': operation.name,
+                        'code': 500,
+                        'error': {'code': 2, 'is_transient': True},
+                    } for operation in operations],
+                })
+            return super().execute(operations, stage)
+
+    cfg = config(
+        tmp_path,
+        enabled=True,
+        write_enabled=True,
+        soft_score=100,
+        hard_score=120,
+        development_access_score_max=60,
+        standard_access_score_max=9000,
+        development_access_readback_cooldown_seconds=305,
+        quota_retry_safety_seconds=5,
+        points_per_mode={'pure_clone': 30, 'clone_prestaged': 30},
+    )
+    transport = TransientAdCopy('100')
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    engine.quota.observe_headers(
+        ('mgs-main-app', '100'),
+        {'x-business-use-case-usage': json.dumps({
+            '100': [{'ads_api_access_tier': 'development_access'}],
+        })},
+    )
+    request = manifest(
+        [prestaged_campaign(index) for index in range(1, campaign_count + 1)],
+        request_id=f'transient-{campaign_count}',
+    )
+    with pytest.raises(BatchTransportError) as exc:
+        engine.execute(request)
+    assert exc.value.detail['recommended_retry_after_seconds'] == expected_retry
 
 
 def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():

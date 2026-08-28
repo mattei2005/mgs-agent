@@ -6,6 +6,7 @@
 schema.py          validates immutable manifests
 planning.py        groups two campaigns per account bundle
 quota.py           per-app+account rolling score/headers
+coordination.py    persisted writer lease and reader exclusion
 media_registry.py  checksum→vertical/square video IDs
 transport.py       Graph Batch + appsecret_proof support
 engine.py          independent account lanes and consolidated readback
@@ -31,17 +32,20 @@ No intermediate GET occurs. `pure_clone` is one copy batch plus one readback bat
 
 Quota/state is keyed by `app_key + ad_account_id`, protected with OS file locks and atomic JSON. Distinct accounts may run concurrently; bundles within one account are sequential.
 
-Initial local safety budget:
+Tier-aware local safety budget:
 
 ```text
-soft score                 100
-hard score                 120
-clone_prestaged estimate    45/campaign
-bundle estimate             90/two campaigns
+unknown tier ceiling       100 soft / 120 hard
+development_access ceiling  60 hard
+standard_access ceiling   9000 hard
+clone_prestaged estimate    30/campaign
+bundle estimate             60/two campaigns
 window                     300s
 ```
 
-`X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` are persisted separately when Meta returns them. Do not infer server capacity only from the local counter. In `development_access` the rolling reservation remains for 300 seconds: if a request has more bundles than fit, the engine returns `PARTIAL_DEFERRED_QUOTA`, persists completed IDs and next bundle, and resumes the same request after the window without replaying completed bundles. In live `standard_access`, a completed bundle releases its local reservation only when the latest account usage is below 80%; server headers remain the controlling safety signal for the next wave.
+`X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` are persisted separately, including headers returned by an outer batch whose child failed. Unknown tier keeps the configured 100/120 ceiling; `development_access` caps it at 60; `standard_access` uses 9000 and skips the fixed development readback cooldown. Do not infer server capacity only from a local number. A request that does not fit returns `PARTIAL_DEFERRED_QUOTA`, persists completed IDs and resumes without replay.
+
+Every writer claims a persisted per-account lease before preflight and keeps it across quota/readback deferrals. Diário, Intraday, Snapshot, first-delivery and guardrail reactivation all pass one centralized reader gate and a shared OS lock. They resume only after the writer lease and operation state are complete.
 
 ## Media
 
