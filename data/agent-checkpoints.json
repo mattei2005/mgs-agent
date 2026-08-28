@@ -671,6 +671,16 @@
       "updated_at": "2026-08-28T02:33:36+00:00"
     },
     {
+      "agent": "ares",
+      "id": "cpv-engine-v3-latency-fix-20260827",
+      "next_step": "Adicionar testes de regressão, corrigir engine/runner, executar suite e smoke offline, validar diff e reportar infra",
+      "objective": "Corrigir imediatamente a latência excessiva do Campaign Engine v3 e do pós-processamento CPV",
+      "source": "discord:thread:1542725181787603004",
+      "state": "autorização estrutural explícita recebida; auditoria identificou readback indevido após recovery write, cooldown duplicado e pós-processamento monolítico",
+      "thread_id": "1542725181787603004",
+      "updated_at": "2026-08-28T03:05:55+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "digitaltrchat-portfolio-audit-write-pilot-20260716",
       "next_step": "Aguardar próximo escopo explícito de Rodolfo e, para a auditoria global, receber catálogo canônico de links por site/funil/vertical/língua; manter backup→dry-run→Save→readback independente em cada write",
@@ -1352,5 +1362,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T02:33:36+00:00"
+  "updated_at": "2026-08-28T03:05:55+00:00"
 }

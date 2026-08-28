@@ -1124,6 +1124,9 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
         write_enabled=True,
         soft_score=1000,
         hard_score=1000,
+        development_access_readback_cooldown_seconds=305,
+        quota_retry_safety_seconds=5,
+        readback_recovery_points_per_campaign=3,
     )
     transport = PartialAdCopyTransport('100')
     engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
@@ -1134,6 +1137,15 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
         engine.execute(request)
     assert len(transport.ads) == 5
     assert transport.initial_copy_calls == 1
+
+    deferred = engine.execute(request)
+    assert deferred['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert deferred['campaign_ids'] == []
+    assert deferred['retry_after_seconds'] == 305
+    assert len(transport.ads) == 6
+    assert transport.initial_copy_calls == 1
+    assert transport.recovery_copy_calls == 1
+    assert 'recovery_consolidated_readback' not in [call['stage'] for call in transport.calls]
 
     result = engine.execute(request)
     assert result['status'] == 'COMPLETE_PAUSED'
@@ -1148,6 +1160,8 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
     assert checkpoint['manual_reconciliation_required'] is False
     assert checkpoint['bundles'][0]['recovery']['existing_ads'] == 5
     assert checkpoint['bundles'][0]['recovery']['missing_ads_created'] == 1
+    assert checkpoint['bundles'][0]['recovery']['mode'] == 'consolidated_readback_only'
+    assert checkpoint['bundles'][0]['recovery']['mutation_calls'] == 0
 
 
 def test_development_bundle_defers_readback_then_resumes_without_any_write_replay(tmp_path):
