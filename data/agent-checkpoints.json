@@ -673,12 +673,12 @@
     {
       "agent": "ares",
       "id": "cpv-engine-v3-latency-fix-20260827",
-      "next_step": "Adicionar testes de regressão, corrigir engine/runner, executar suite e smoke offline, validar diff e reportar infra",
-      "objective": "Corrigir imediatamente a latência excessiva do Campaign Engine v3 e do pós-processamento CPV",
+      "next_step": "Monitorar o próximo request autorizado; job diário permanece pausado até nova liberação explícita",
+      "objective": "Corrigir imediatamente a latência do Campaign Engine v3 sem novos writes Meta",
       "source": "discord:thread:1542725181787603004",
-      "state": "autorização estrutural explícita recebida; auditoria identificou readback indevido após recovery write, cooldown duplicado e pós-processamento monolítico",
+      "state": "complete",
       "thread_id": "1542725181787603004",
-      "updated_at": "2026-08-28T03:05:55+00:00"
+      "updated_at": "2026-08-28T03:17:29+00:00"
     },
     {
       "agent": "zeus",
@@ -1362,5 +1362,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T03:05:55+00:00"
+  "updated_at": "2026-08-28T03:17:29+00:00"
 }

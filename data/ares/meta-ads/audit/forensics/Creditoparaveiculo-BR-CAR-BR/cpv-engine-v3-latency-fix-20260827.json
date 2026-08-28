@@ -1,0 +1,95 @@
+{
+  "status": "COMPLETE",
+  "audit_type": "campaign_engine_latency_correction",
+  "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+  "incident_request_id": "cpv-c32-c35-moto-20260827",
+  "correlation_id": "cpv-engine-v3-latency-fix-20260827",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1542725181787603004",
+  "corrected_at_et": "2026-08-27T23:16:35-04:00",
+  "release": {
+    "engine": "ares-campaign-engine-v3",
+    "engine_version": 3,
+    "release_version": "3.1.5"
+  },
+  "root_causes_corrected": [
+    "recovery wrote missing children and attempted consolidated readback in the same development_access quota window",
+    "resume cadence was hourly, so an already-expired 305-second cooldown could wait almost another hour",
+    "writer and Intraday read path did not share an account-lane execution lock",
+    "manual foreground cooldown/postprocess execution could hit command timeout and invite duplicate sleeps"
+  ],
+  "implementation": {
+    "partial_write_recovery": "after any missing-child or normalization write, persist all resolved IDs, set children_created_readback_pending, return READBACK_DEFERRED with a fresh cooldown, and resume with readback-only reservation",
+    "recovery_audit": "preserve the write-recovery event in recovery_history before the final readback-only record",
+    "from_zero_recovery": "apply the same fresh-cooldown/readback-deferred rule after corrective mutations",
+    "resume_scheduler": "changed from hourly to every minute with retry_after_epoch gate; no in-process cooldown sleep",
+    "overlap_control": "nonblocking exclusive writer lock and nonblocking shared Intraday lock on the same ad-account lane",
+    "postprocess": "runner remains checkpointed and resumable; wrapper contains no sleep and overlapping ticks exit cleanly",
+    "live_job_state_preserved": "scheduler definition updated but the general creation job remains paused/disabled; no hold or campaign authorization was widened"
+  },
+  "verification": {
+    "unit_and_fake_integration": {
+      "command": "pytest test_ares_campaign_engine_v3.py test_ares_campaign_v3_daily_cpv.py",
+      "result": "93 passed",
+      "network_writes": 0
+    },
+    "partial_failure_regression": {
+      "result": "first attempt FAILED after partial ad-copy side effects; recovery created only two missing ads and returned PARTIAL_DEFERRED_QUOTA; next resume executed only recovery_consolidated_readback; final COMPLETE",
+      "blind_replay": false,
+      "premature_readback_after_recovery_write": false
+    },
+    "offline_smoke": {
+      "status": "OFFLINE_SMOKE_OK",
+      "campaign_count": 3,
+      "planner": [2, 1],
+      "first_status": "PARTIAL_DEFERRED_QUOTA",
+      "final_status": "COMPLETE_FUTURE_ACTIVE",
+      "unique_campaign_ids": 3,
+      "intermediate_get_calls": 0,
+      "external_network_calls": 0
+    },
+    "syntax_and_diff": {
+      "py_compile": "PASS",
+      "bash_n": "PASS",
+      "git_diff_check": "PASS"
+    },
+    "lane_contention_smoke": {
+      "intraday_while_writer_locked": "exit 0 in 8 ms without Meta call",
+      "writer_while_reader_locked": "exit 0 in 5 ms without Meta call"
+    },
+    "knowledge_control": {
+      "validate": "status ok, 0 errors",
+      "regression": "10 passed, 0 failed"
+    },
+    "cron_readback": {
+      "job_id": "2cf8115a4f8b",
+      "schedule": "* * * * *",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": false,
+      "state": "paused"
+    }
+  },
+  "expected_timing": {
+    "scope": "four campaigns in one development_access ad-account lane, excluding media upload and live API transport time",
+    "quota_wait_normal_seconds": 910,
+    "quota_wait_normal_human": "15m10s",
+    "scheduler_jitter_upper_seconds": 180,
+    "quota_plus_scheduler_upper_human": "18m10s",
+    "extra_upper_per_partial_recovery_human": "6m05s",
+    "interpretation": "the Meta 300-second development_access windows remain structural; the correction removes the duplicate cooldown, premature code-17 readback cycle, hourly resume delay and monolithic foreground wait"
+  },
+  "production_meta_writes_during_fix": 0,
+  "real_campaigns_replayed": false,
+  "files_changed": [
+    "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+    "/root/mgs-agent/tests/test_ares_campaign_engine_v3.py",
+    "/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-v3-daily-create.sh",
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh",
+    "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+    "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+    "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md",
+    "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md"
+  ]
+}
