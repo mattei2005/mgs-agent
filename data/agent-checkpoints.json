@@ -423,12 +423,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "B013-3 sem pendências: escalar apenas nova mudança real. Para B001-3, fechar o gate quando Adriano Alves e Alnashri Lumandung Maja aparecerem em roles e o live readback chegar a 17/17.",
-      "objective": "Manter os 13 apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-3 via DTR/Graph.",
-      "source": "Discord authorization 1540372238467862579; registry data/meta-app-registry.json; scripts b013-dtr-link-watch.sh e meta-app-roles-watch.sh; Sheet Migracao 22/06 gid 542936436; Discord channel 1522830283240505385; cron 498fb0d95e10.",
-      "state": "b013-3 cutover concluído e recorrente validado. app/token/roles saudáveis; produção convergiu a 31/31 linked, zero pendentes/unknown, 324 páginas dtr, 316 graph e 302 subscribed. primeiro force-live mostrou william nogueira temporariamente unlinked em 30/31; ciclo seguinte confirmou recovery 31/31. durante a troca, o generic roles monitor ainda excluía b013-2 e marcou 30 linhas b013-3 com x; exclusão corrigida para b013-3 nos três guards e ciclo dedicado limpou todos os x. primeiro ciclo agendado falhou antes de writes por timeout sheets metadata; sheets_request recebeu retry bounded 3x, smoke dry-run passou e o próximo ciclo agendado terminou ok em 11:27 et, alerts_sent=0, writes=0. cron 498fb0d95e10 enabled/scheduled. alertas: primeira família 1540374844380553238..1540374850030403674; recovery/final 1540376653388189878..1540376658110980257. b001-3 segue 15/17.",
-      "thread_id": "1540340806341099540",
-      "updated_at": "2026-08-21T15:29:48+00:00"
+      "next_step": "Após Rodolfo atualizar o item canônico com app_name=B001-4 e novas credenciais, executar preflight Graph/roles/debug_token + Sheet NO APP=B001-4, migrar registry/state sem reaproveitar IDs do predecessor, reconciliar Sheet fail-closed, despausar e validar ciclo agendado.",
+      "objective": "Manter os apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-3 via DTR/Graph.",
+      "source": "Discord message 1543008173294747729; thread 1543008173294747729; data/meta-app-registry.json; data/meta-app-role-monitor-state.json; 1Password item djpxxg3liqdo5l7rynj32fxar4 (metadata-only readback).",
+      "state": "rodolfo declarou b001-3 substituído por b001-4. o item 1password canônico ainda lê app_name=b001-3 e app_id antigo, embora token/secret estejam presentes; b001-3 acumulou 17 falhas de app excluído. alertas do b001-3 foram pausados manualmente, sem parar o cron compartilhado e sem promover b001-4 ao registry ativo.",
+      "thread_id": "1543008173294747729",
+      "updated_at": "2026-08-28T21:26:16+00:00"
     },
     {
       "agent": "zeus",
@@ -1392,5 +1392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T14:03:02+00:00"
+  "updated_at": "2026-08-28T21:26:16+00:00"
 }
