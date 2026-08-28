@@ -1158,8 +1158,10 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
     )
     checkpoint = json.loads(next((Path(cfg['state_root']) / 'checkpoints').glob('*.json')).read_text())
     assert checkpoint['manual_reconciliation_required'] is False
-    assert checkpoint['bundles'][0]['recovery']['existing_ads'] == 5
-    assert checkpoint['bundles'][0]['recovery']['missing_ads_created'] == 1
+    previous_recovery = checkpoint['bundles'][0]['recovery_history'][-1]
+    assert previous_recovery['existing_ads'] == 5
+    assert previous_recovery['missing_ads_created'] == 1
+    assert previous_recovery['readback_deferred_after_mutation'] is True
     assert checkpoint['bundles'][0]['recovery']['mode'] == 'consolidated_readback_only'
     assert checkpoint['bundles'][0]['recovery']['mutation_calls'] == 0
 

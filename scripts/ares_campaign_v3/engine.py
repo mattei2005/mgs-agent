@@ -415,6 +415,9 @@ class CampaignEngine:
             raise ExecutionFailed("partial prestaged bundle is missing campaign/adset identities")
 
         if self._readback_only_record(bundle, record):
+            previous_recovery = record.get("recovery")
+            if isinstance(previous_recovery, dict) and previous_recovery:
+                record.setdefault("recovery_history", []).append(previous_recovery)
             record["recovery"] = {
                 "mode": "consolidated_readback_only",
                 "blind_replay_blocked": True,
@@ -541,6 +544,20 @@ class CampaignEngine:
         record["recovery"]["ads_normalized"] = len(ad_name_ops)
         record["recovery"]["unchanged_ads_skipped"] = expected_count - len(ad_name_ops)
 
+        recovery_mutations = len(missing_ops) + len(ad_name_ops)
+        record["recovery"]["mutation_calls"] = recovery_mutations
+        if recovery_mutations and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+            retry_after = self._readback_retry_seconds(bundle)
+            record["stage"] = "children_created_readback_pending"
+            record["readback_cooldown"] = {
+                "reason": "recovery_write_requires_fresh_score_decay",
+                "retry_after_seconds": retry_after,
+                "write_replay_blocked": True,
+                "deferred_at": _utc(),
+            }
+            record["recovery"]["readback_deferred_after_mutation"] = True
+            raise ReadbackCooldownDeferred(retry_after)
+
         timing, started = self._timed_start()
         record["timings"]["recovery_consolidated_readback"] = timing
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
@@ -554,6 +571,9 @@ class CampaignEngine:
         """Read back every layer and create only missing from-zero objects."""
         if self._readback_only_record(bundle, record):
             readback_campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
+            previous_recovery = record.get("recovery")
+            if isinstance(previous_recovery, dict) and previous_recovery:
+                record.setdefault("recovery_history", []).append(previous_recovery)
             record["recovery"] = {
                 "mode": "consolidated_readback_only",
                 "blind_replay_blocked": True,
@@ -763,6 +783,25 @@ class CampaignEngine:
             "missing_ads_created": len(missing_ad_ops),
             "campaigns_finalized": len(finalize_ops),
         })
+        recovery_mutations = sum(map(len, (
+            missing_campaign_ops,
+            missing_adset_ops,
+            missing_creative_ops,
+            missing_ad_ops,
+            finalize_ops,
+        )))
+        record["recovery"]["mutation_calls"] = recovery_mutations
+        if recovery_mutations and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+            retry_after = self._readback_retry_seconds(bundle)
+            record["stage"] = "children_created_readback_pending"
+            record["readback_cooldown"] = {
+                "reason": "recovery_write_requires_fresh_score_decay",
+                "retry_after_seconds": retry_after,
+                "write_replay_blocked": True,
+                "deferred_at": _utc(),
+            }
+            record["recovery"]["readback_deferred_after_mutation"] = True
+            raise ReadbackCooldownDeferred(retry_after)
         timing, started = self._timed_start()
         record["timings"]["recovery_consolidated_readback"] = timing
         readbacks = self._batch(bundle, transport, self._readback_ops(resolved_campaign_ids), "recovery_consolidated_readback")

@@ -737,6 +737,8 @@ def test_wrapper_points_only_to_v3_runner_and_does_not_reactivate_v2():
     assert "ares-creditoparaveiculo-v3-daily.py" in wrapper
     assert "creditoparaveiculo-daily-create.sh" not in wrapper
     assert "--gate --post-discord --quiet" in wrapper
+    assert "flock -E 75 -n /run/lock/ares-cpv-v3-daily-create.lock" in wrapper
+    assert "sleep " not in wrapper
 
 
 def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
