@@ -37,6 +37,7 @@ from ares_campaign_v3.daily_cpv import (
     failure_resume_state,
     discord_failure_message,
     rollover_completed_state,
+    finalize_completed_state,
     request_operational_date,
     media_title,
     LiveDailyBackend,
@@ -246,6 +247,25 @@ def test_completed_request_is_not_reused_on_the_next_operational_day():
     }
     assert rollover_completed_state(previous, "2026-08-22") == {}
     assert rollover_completed_state(previous, "2026-08-21") == previous
+
+
+def test_finalize_completed_state_clears_stale_recovery_markers():
+    state = {
+        "status": "READBACK_DEFERRED",
+        "failure": {"type": "BatchTransportError"},
+        "retry_after_epoch": 123,
+        "operator_authorization": {"required": False},
+        "automatic_recovery_required": True,
+        "manual_reconciliation_required": True,
+    }
+    completed = finalize_completed_state(state, status="COMPLETE", campaign_ids=["1"])
+    assert completed["status"] == "COMPLETE"
+    assert completed["campaign_ids"] == ["1"]
+    assert completed["automatic_recovery_required"] is False
+    assert completed["manual_reconciliation_required"] is False
+    assert "failure" not in completed
+    assert "retry_after_epoch" not in completed
+    assert "operator_authorization" not in completed
 
 
 def test_resumable_request_preserves_operational_date_after_midnight():

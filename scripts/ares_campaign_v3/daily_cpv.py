@@ -257,6 +257,17 @@ def rollover_completed_state(state: dict[str, Any], operational_date: str) -> di
     return state
 
 
+def finalize_completed_state(state: dict[str, Any], **values: Any) -> dict[str, Any]:
+    """Close a resumable request without stale recovery markers."""
+    completed = dict(state)
+    for key in ("failure", "retry_after_epoch", "operator_authorization"):
+        completed.pop(key, None)
+    completed.update(values)
+    completed["manual_reconciliation_required"] = False
+    completed["automatic_recovery_required"] = False
+    return completed
+
+
 def discord_failure_message(
     failure: dict[str, Any],
     failure_status: str,
@@ -2094,7 +2105,14 @@ def run_daily(
             final = {"status": "COMPLETE_FUTURE_ACTIVE", "request_id": request_id, "campaign_numbers": numbers, "campaign_ids": campaign_ids, "start_time_sp": (operational_date + timedelta(days=1)).isoformat() + "T00:30:00-03:00", "assets_used": len(selected), "stock_remaining": stock, "account_budget_after_creation": budget_after, "audit": str(audit_path)}
             audit.update(stage="COMPLETE", final=final, completed_at_utc=utc_now())
             atomic_json(audit_path, audit)
-            state.update(status="COMPLETE", completed_operational_date_sp=day, campaign_ids=campaign_ids, stock_remaining=stock, updated_at_utc=utc_now())
+            state = finalize_completed_state(
+                state,
+                status="COMPLETE",
+                completed_operational_date_sp=day,
+                campaign_ids=campaign_ids,
+                stock_remaining=stock,
+                updated_at_utc=utc_now(),
+            )
             atomic_json(paths.state, state)
             if post_report:
                 labels = ", ".join(f"C{number:02d}" for number in numbers)
