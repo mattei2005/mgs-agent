@@ -30,6 +30,8 @@ NY = ZoneInfo('America/New_York')
 DISCORD_LIMIT = 1900
 EXCLUDED_STATUSES = {'on-hold', 'blocked'}
 HISTORY_COVERAGE_START = '2026-07-15T14:38:01-04:00'
+SB_FETCH_RETRY_ATTEMPTS = 3
+SB_FETCH_RETRY_DELAYS = (5, 10)
 
 
 def now_iso():
@@ -49,6 +51,39 @@ def load_module(name, path):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
+
+
+def transient_sb_error(exc):
+    text = f'{type(exc).__name__}: {exc}'.lower()
+    transient_markers = (
+        'timeout',
+        'timed out',
+        'bad response 429',
+        'bad response 500',
+        'bad response 502',
+        'bad response 503',
+        'bad response 504',
+    )
+    return any(marker in text for marker in transient_markers)
+
+
+async def get_sb_with_retry(getter, attempts=SB_FETCH_RETRY_ATTEMPTS, sleep_fn=asyncio.sleep):
+    """Retry only transient SB/API failures; preserve fail-closed scope checks."""
+    attempts = max(1, int(attempts))
+    for attempt in range(1, attempts + 1):
+        try:
+            return await getter()
+        except Exception as exc:
+            if attempt >= attempts or not transient_sb_error(exc):
+                raise
+            delay = SB_FETCH_RETRY_DELAYS[min(attempt - 1, len(SB_FETCH_RETRY_DELAYS) - 1)]
+            print(
+                f'WARN transient SB fetch failure attempt={attempt}/{attempts}; '
+                f'retrying_in={delay}s; error={type(exc).__name__}: {exc}',
+                flush=True,
+            )
+            await sleep_fn(delay)
+    raise RuntimeError('SB fetch retry loop ended without result')
 
 
 def stable_key(row):
@@ -471,7 +506,7 @@ def main():
     audit = daily.load_audit_mod()
     sync = audit.sync
     active_users = set(sync.active_users_from_sheet(sync.sheet_rows()))
-    publishers, raw_rows = asyncio.run(audit.get_sb())
+    publishers, raw_rows = asyncio.run(get_sb_with_retry(audit.get_sb))
     current, counts = build_snapshot(raw_rows, active_users, daily, sync)
 
     state = load_state()

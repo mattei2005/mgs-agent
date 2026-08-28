@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import importlib.util
+import asyncio
 import json
 import tempfile
 import unittest
@@ -30,6 +31,37 @@ def row(page_id, date, status='Broadcast', name=None):
 
 
 class TransitionComparisonTest(unittest.TestCase):
+    def test_sb_fetch_retries_transient_504_then_succeeds(self):
+        calls = []
+        sleeps = []
+
+        async def getter():
+            calls.append(len(calls) + 1)
+            if len(calls) < 3:
+                raise RuntimeError('SB /company bad response 504: gateway timeout')
+            return ['publisher'], [{'ID': 'row'}]
+
+        async def fake_sleep(seconds):
+            sleeps.append(seconds)
+
+        result = asyncio.run(monitor.get_sb_with_retry(getter, sleep_fn=fake_sleep))
+
+        self.assertEqual(result, (['publisher'], [{'ID': 'row'}]))
+        self.assertEqual(calls, [1, 2, 3])
+        self.assertEqual(sleeps, [5, 10])
+
+    def test_sb_fetch_does_not_retry_fail_closed_scope_error(self):
+        calls = []
+
+        async def getter():
+            calls.append(1)
+            raise RuntimeError('SB scope incomplete for PAGE ID audit')
+
+        with self.assertRaisesRegex(RuntimeError, 'scope incomplete'):
+            asyncio.run(monitor.get_sb_with_retry(getter))
+
+        self.assertEqual(calls, [1])
+
     def test_new_renewed_status_change_and_resolved(self):
         previous = {
             monitor.stable_key(row(1, '2026-07-14')): row(1, '2026-07-14'),

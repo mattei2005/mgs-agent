@@ -11499,7 +11499,7 @@
         "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py"
       ],
       "script_sha256": {
-        "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py": "cd64ee38fdeb1d409ca506369b27eea2fa5c1b4a1f41bbcb396cfc39b4fce379",
+        "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py": "dcaf8dde478a0e6e14740c4c31d937e2ab512de41ab1e25ce07d9bdbdacfff88",
         "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py": "9e4da80e44e47cbbb8e038b87aa053571f0bf841039682d61777c9d7996ac904",
         "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py": "6e02c3a7fd32f1f68f4404e01b73f0fa03e66a442b7e135715efb1bc0b215207"
       },
@@ -11555,7 +11555,14 @@
       "report_infra_mentions": false,
       "report_infra_readback": true,
       "report_infra_previous_message_id": "1542568255657480363",
-      "updated_at": "2026-08-27T15:16:49-04:00"
+      "latest_incident_recovery": {
+        "alert_message_id": "1542911649982451765",
+        "root_cause": "Transient Smart Bidding /company HTTP 504 from Cloudflare/origin.",
+        "change": "Three-attempt bounded retry for transient 429/5xx/timeouts; fail-closed scope errors remain non-retryable.",
+        "validation": "8/8 focused unittests PASS in sb-venv; py_compile PASS; cron-equivalent --apply exit 0; Sheet readback_ok=true; state written; Discord transition delivery HTTP 200.",
+        "recovery_at": "2026-08-28T11:03:59-04:00"
+      },
+      "updated_at": "2026-08-28T11:04:29-04:00"
     },
     {
       "id": "financiamentoautoadx-mgs-quiz-carro-1.7.10-20260827",
