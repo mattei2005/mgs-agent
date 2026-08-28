@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
+  "status": "documented_not_activated",
+  "documented_at_utc": "2026-08-28T06:22:01Z",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1542597966400065536",
+  "site": {
+    "domain": "creditoparaveiculo.com",
+    "country": "BR",
+    "vertical": "CAR",
+    "language": "BR",
+    "channel": "DirectTraffic"
+  },
+  "manager": {
+    "code": "G006",
+    "name": "Nicolas",
+    "discord_id": "1055570806945620030"
+  },
+  "account": {
+    "account_number": 5,
+    "account_id": null,
+    "provisional_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+    "exact_meta_alias": null,
+    "currency": null,
+    "timezone": null,
+    "identity_status": "pending_live_meta_readback"
+  },
+  "strategy": {
+    "management_strategy": "CREATIVE_CUT_24H",
+    "strategy_version": "1.0.0",
+    "procedure_source": "profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/references/creative-cut-24h-strategy.md",
+    "campaign_structure": "CBO_1x1x3",
+    "intermediate_write_level": "ad",
+    "terminal_write_level": "campaign",
+    "window_hours": 24,
+    "stage_a_concentration": {
+      "dominant_spend_share_gte_pct": 80.0,
+      "each_other_ad_spend_share_lte_pct": 10.0
+    },
+    "stage_b_concentration": {
+      "dominant_spend_share_gte_pct": 90.0,
+      "other_ad_spend_share_lte_pct": 10.0
+    },
+    "decision_metric": "Smart Bidding campaign real ROI for the current intervention window",
+    "positive_action": "keep active ads and return to the authorized scale process at the next checkpoint",
+    "zero_action": "observe_without_write",
+    "negative_without_concentration": "manual_review_without_write",
+    "terminal_condition": "one active ad completes 24h and current-window real ROI remains negative"
+  },
+  "campaign_strategy_assignment": {
+    "required": true,
+    "persist_before_first_decision_window": true,
+    "supported_campaign_creation_modes": [
+      "from_zero_prestaged",
+      "clone_prestaged",
+      "pure_clone"
+    ],
+    "existing_campaign_migration": "explicit_instruction_only; start a new window and never reinterpret earlier delivery"
+  },
+  "account_13_scope": {
+    "operation_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+    "management_strategy": "CAMPAIGN_LEVEL_D1_D3",
+    "creative_cut_24h_enabled": false,
+    "reason": "Rodolfo explicitly selected account 05, not account 13, for the new strategy"
+  },
+  "discord_threads": {
+    "intraday": null,
+    "daily": null,
+    "campaign_creation": null,
+    "status": "pending_creation_by_rodolfo_and_readback"
+  },
+  "activation_gates": [
+    "confirm account 05 Meta account_id and exact alias by live API",
+    "confirm account currency and timezone by live API",
+    "register the 1Password item reference without copying credentials",
+    "record and read back Intraday, Daily and Campaign Creation thread IDs",
+    "close budget, write mode and campaign activation authority for account 05",
+    "assign CREATIVE_CUT_24H explicitly to named pilot campaigns",
+    "implement resumable state and deterministic dry-run tests",
+    "validate ad-level pause and GET readback in a PAUSED canary before production"
+  ],
+  "write_mode": "disabled_pending_onboarding",
+  "write_enabled": false,
+  "activation_enabled": false,
+  "crons": [],
+  "meta_writes_performed": 0,
+  "notes": [
+    "Documentation closure does not authorize campaign creation, activation, budget changes or cron creation.",
+    "No placeholder thread ID may be used for delivery.",
+    "ChatPion is historical inspiration only and is outside this operation."
+  ],
+  "updated_at": "2026-08-28T06:22:01Z"
+}

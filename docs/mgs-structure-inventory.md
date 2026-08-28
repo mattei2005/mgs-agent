@@ -106,6 +106,7 @@ profiles/ares-soul.md                     config        Growth / Ares           
 profiles/ares-config.yaml                 config        Growth / Ares               ativo         não tocar sem plano Hermes
 profiles/ares-skills/                     skill         Growth / Ares               ativo         manter
 profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/ skill Growth / Ares ativo contrato CPV/Diário; manter em paridade com runtime
+profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/references/creative-cut-24h-strategy.md procedure Growth / Ares ativo estratégia CREATIVE_CUT_24H documentada para conta 05; ativação depende de onboarding/readback
 profiles/*bak*                            backup        Agents / Hermes             histórico     manter por enquanto
 ```
 
@@ -128,6 +129,7 @@ data/*-state.json                        runtime       Monitores / crons        
 data/infra-inventory.json                inventário    Tech / Infra                ativo         manter; atualizar via script
 data/knowledge-registry.json             registro      MGS OS / conhecimento       ativo         ponteiro canônico; validar via mgs-knowledge-control
 data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json runtime/config Growth / Ares ativo fonte canônica da operação CPV G006
+data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json runtime/config Growth / Ares documentado não ativo contrato da estratégia 24h na conta 05; sem writes/crons até gates
 data/pendencias.db.json                  runtime       Executive / Ops             ativo         não tocar sem plano
 data/discord-thread-imports/             histórico     Agents / Discord            histórico     manter
 data/chat-logs/                          histórico     Agents / Discord            histórico     manter

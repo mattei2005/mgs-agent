@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.43
+version: 1.0.44
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -156,7 +156,18 @@ Conclusão: criação, dias rodados, dias positivos/negativos e viradas fecham p
 
 Para status de campanha nesta operação, usar o rótulo do Ads Manager como status humano. O filtro `Campaign delivery = Deleted` pode corresponder a `ARCHIVED` nos edges de listagem, enquanto o GET direto após um write `status=DELETED` também pode devolver `status/effective_status/configured_status=DELETED` — readback vivo da C23 em 25/08/2026 confirmou esse caso. Aceitar ambos como terminais, exibir `DELETED` no relatório operacional e preservar o literal real em `api_raw_status` no audit técnico.
 
-Pausa, corte, reativação e encerramento operacional devem ocorrer **somente no nível da campanha**. Não pausar conjunto ou anúncios como substituto. Relatórios usam o status da campanha (`ACTIVE`, `PAUSED` ou `DELETED`) sem criar classificação adicional. Se existir legado com campanha ativa e filhos pausados, mencionar apenas como observação quando relevante; Rodolfo já orientou Nicolas a corrigir o procedimento.
+A unidade de intervenção depende da estratégia explicitamente atribuída à campanha:
+
+```text
+CAMPAIGN_LEVEL_D1_D3  pausas, reativações e encerramento somente no nível da campanha
+CREATIVE_CUT_24H      pausas intermediárias no nível do anúncio; encerramento terminal no nível da campanha
+```
+
+Para `CREATIVE_CUT_24H`, carregar obrigatoriamente `references/creative-cut-24h-strategy.md`. A estratégia pertence à campanha e é independente de criar do zero, clonar com criativos novos ou duplicar igual. Campanha sem atribuição explícita permanece no modo canônico de sua operação; silêncio nunca migra estratégia.
+
+Decisão de Rodolfo em 28/08/2026: a nova estratégia é destinada à conta operacional **05** do Creditoparaveiculo BR-CAR-BR. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita. A documentação não ativa conta, campanha, cron ou write; onboarding da 05 exige Meta account ID/alias/moeda/timezone e três threads fixas confirmadas.
+
+Nunca pausar conjunto como substituto. Relatórios usam o status real da campanha e, em `CREATIVE_CUT_24H`, também exibem o estado dos anúncios e da janela. Se existir legado com campanha ativa e filhos pausados sem atribuição dessa estratégia, mencionar como observação e não inferir autorização.
 
 ## Estrutura padrão de lançamento
 
