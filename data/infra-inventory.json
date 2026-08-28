@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-27T15:11:26-04:00",
+    "updated_at": "2026-08-28T00:54:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -10572,6 +10572,32 @@
       "report_infra_status": "sent",
       "report_infra_message_id": "1542582258785976382",
       "updated_at": "2026-08-27T17:10:12+00:00"
+    },
+    {
+      "id": "zeus-global-discord-mention-routing-20260828",
+      "agent": "zeus",
+      "type": "discord_gateway_routing_config",
+      "profile_config": "/root/.hermes/profiles/zeus/config.yaml",
+      "versioned_config": "/root/mgs-agent/profiles/zeus-config.yaml",
+      "environment_file": "/root/.hermes/profiles/zeus/.env",
+      "settings": {
+        "discord.allowed_channels": "*",
+        "discord.require_mention": true,
+        "discord.thread_require_mention": true,
+        "discord.free_response_channels": "1496267442899521627"
+      },
+      "scope": "Rodolfo can wake Zeus with a direct mention in any Discord channel or thread visible to Zeus; free response remains restricted to the Zeus home channel.",
+      "authorization_message_id": "1542757766790123520",
+      "sha256": {
+        "live_config": "f4661f66cd734a98078531fe83bf60f02bf4d85a37f4876c3a752e056b043b0b",
+        "versioned_config": "f4661f66cd734a98078531fe83bf60f02bf4d85a37f4876c3a752e056b043b0b"
+      },
+      "validation": "Live and mirror YAML string readback matched; active .env readback DISCORD_ALLOWED_CHANNELS=*; mention gates remained true; free-response channel unchanged; Hermes config check exit 0; Discord routing tests 26/26 PASS.",
+      "status": "configured_restart_scheduled",
+      "restart_unit": "mgs-gateway-restart-20260828T045322Z-415357",
+      "restart_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260828T045322Z-415357.log",
+      "rollback_backup": "/root/.hermes/secure-backups/zeus-discord-global-mention-20260828T045034Z",
+      "updated_at": "2026-08-28T00:54:39-04:00"
     }
   ],
   "profile_skill_references": [
@@ -11214,7 +11240,11 @@
       "schedule": {
         "cron": "0 8,14,20 * * *",
         "timezone": "America/New_York",
-        "times": ["08:00", "14:00", "20:00"],
+        "times": [
+          "08:00",
+          "14:00",
+          "20:00"
+        ],
         "entry_occurrences_readback": 1,
         "log": "/root/mgs-agent/logs/refresh-sb-restricted-history-sheet.log"
       },
@@ -11228,7 +11258,9 @@
         "status_changes_detected": 5,
         "currently_restricted": 442,
         "history_index": 2,
-        "updated_tabs": ["Histórico Restrições"],
+        "updated_tabs": [
+          "Histórico Restrições"
+        ],
         "readback_ok": true
       },
       "validation": "24/24 focused unittests PASS; py_compile PASS; dry-run PASS; two cron-equivalent isolated applies PASS; each apply updated only Histórico Restrições with 571/571 unique-key exact readback; cron readback has one entry at 08:00/14:00/20:00 America/New_York; monitor de 15 minutos preserves the history tab; live/versioned skill hashes match.",
