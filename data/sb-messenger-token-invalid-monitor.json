@@ -16,7 +16,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 0,
+  "consecutive_failures": 1,
   "delivered_ids": [
     673973,
     674031,
@@ -991,7 +991,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-08-28T19:42:35-04:00",
+  "last_check": "2026-08-28T19:57:25-04:00",
   "last_delivery": {
     "at": "2026-08-28T16:12:45-04:00",
     "message_ids": [
@@ -1035,7 +1035,11 @@
       675804
     ]
   },
-  "last_error": null,
+  "last_error": {
+    "at": "2026-08-28T19:57:25-04:00",
+    "message": "Discord HTTP 503 GET /channels/1521350832426188961/messages/1543039391642034360",
+    "type": "RuntimeError"
+  },
   "last_seen_id": 675804,
   "pending": null
 }
