@@ -663,12 +663,12 @@
     {
       "agent": "ares",
       "id": "cpv-c32-c35-moto-20260827",
-      "next_step": "Retomar o mesmo request após 305s para materializar e validar somente o bundle C34-C35, sem replay de C32-C33",
+      "next_step": "Watcher first-delivery acompanhar gasto a partir de 00:30 SP; nenhuma ação manual necessária agora",
       "objective": "Criar quatro campanhas MOTO C32-C35 para início em 28/08 00:30 SP, clonadas da C25M com os 12 criativos indicados por Rodolfo",
       "source": "discord:thread:1542705476976902154",
-      "state": "bundle 1 concluído e validado: c32 e c33 com 2 campanhas, 2 conjuntos e 6 anúncios. o motor retornou partial_deferred_quota saudável; c34-c35 ainda não foram escritos",
+      "state": "complete: c32-c35 active futuras, 4 conjuntos, 12 anúncios, 12 assets em 02_testing com inventário atualizado e 4 campanhas auto-armadas no first-delivery; budget ativo usd497,34 no envelope usd500",
       "thread_id": "1542705476976902154",
-      "updated_at": "2026-08-28T02:04:40+00:00"
+      "updated_at": "2026-08-28T02:33:36+00:00"
     },
     {
       "agent": "zeus",
@@ -1352,5 +1352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T02:04:40+00:00"
+  "updated_at": "2026-08-28T02:33:36+00:00"
 }

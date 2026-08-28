@@ -608,7 +608,7 @@
       ]
     },
     "one_time_override_20260827_second_moto": {
-      "status": "IN_PROGRESS",
+      "status": "completed_validated",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-27T21:18:00-04:00",
       "authorization_source": "discord:thread:1542705476976902154",
@@ -645,7 +645,43 @@
         "asset_c72511ea37538625f809"
       ],
       "general_creation_hold_preserved": true,
-      "scheduler_remains_paused_after_completion": true
+      "scheduler_remains_paused_after_completion": true,
+      "completed_at_utc": "2026-08-28T02:32:57.507916+00:00",
+      "campaign_ids": [
+        "120250956477790632",
+        "120250956477800632",
+        "120250956759620632",
+        "120250956759600632"
+      ],
+      "assets_used": 12,
+      "first_delivery_armed": true,
+      "first_delivery_readback": {
+        "status": "AUTO_ARMED",
+        "authorized_by": "Rodolfo Mattei",
+        "request_id": "cpv-c32-c35-moto-20260827",
+        "operational_date": "2026-08-28",
+        "campaign_ids": [
+          "120250956477790632",
+          "120250956477800632",
+          "120250956759620632",
+          "120250956759600632"
+        ],
+        "campaign_numbers": [
+          "32",
+          "33",
+          "34",
+          "35"
+        ],
+        "armed_count": 4,
+        "meta_writes": 0,
+        "token_report": {
+          "item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+          "field": "token (cache 139s)",
+          "len": 197
+        },
+        "newly_armed_count": 4,
+        "audit": "/root/mgs-agent/data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/auto-arm-20260828T023257491591Z.json"
+      }
     },
     "account_operational_cap_usd": 500,
     "new_campaign_budget_share": 0.2,
@@ -802,7 +838,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 32,
+    "next_required_campaign_number": 36,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -1223,6 +1259,30 @@
           "replaced_terminal_request_id": "cpv-operator-cancel-c31-rollback-assets-20260827",
           "zero_spend_verified_before_activation": true,
           "activation_target_sp": "2026-08-28T00:30:00-03:00"
+        },
+        "32": {
+          "campaign_id": "120250956477790632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "33": {
+          "campaign_id": "120250956477800632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "34": {
+          "campaign_id": "120250956759620632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "35": {
+          "campaign_id": "120250956759600632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
         }
       },
       "required": [
