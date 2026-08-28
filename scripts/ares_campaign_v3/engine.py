@@ -10,6 +10,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Any, Callable
 
+from .coordination import AccountWriterLeaseStore
 from .planning import BundlePlan, Planner
 from .prevalidation import verify_prevalidation
 from .quota import LaneQuotaStore, QuotaBlocked
@@ -17,7 +18,7 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
-ENGINE_RELEASE_VERSION = "3.1.5"
+ENGINE_RELEASE_VERSION = "3.2.0"
 
 
 class EngineDisabled(RuntimeError):
@@ -75,7 +76,10 @@ class CampaignEngine:
             soft_score=int(config.get("soft_score", 100)),
             hard_score=int(config.get("hard_score", 120)),
             window_seconds=int(config.get("score_window_seconds", 300)),
+            development_score_max=int(config.get("development_access_score_max", 60)),
+            standard_score_max=int(config.get("standard_access_score_max", 9000)),
         )
+        self.writer_leases = AccountWriterLeaseStore(config["state_root"])
         self.audit_root = Path(config["audit_root"])
         self._audit_lock = threading.Lock()
 
@@ -148,12 +152,20 @@ class CampaignEngine:
         collect_estimates(live.get("business_usage"))
         return max(candidates)
 
+    def _requires_development_cooldown(self, bundle: BundlePlan) -> bool:
+        if int(self.config.get("development_access_readback_cooldown_seconds", 0)) <= 0:
+            return False
+        snapshot = self.quota.snapshot((bundle.app_key, bundle.account_id))
+        tier = str(((snapshot.get("live_usage") or {}).get("ads_api_access_tier") or "")).lower()
+        return tier != "standard_access"
+
     def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
-        results = transport.execute(operations, stage)
-        headers = getattr(transport, "last_outer_headers", None)
-        if isinstance(headers, dict) and headers:
-            self.quota.observe_headers((bundle.app_key, bundle.account_id), headers)
-        return results
+        try:
+            return transport.execute(operations, stage)
+        finally:
+            headers = getattr(transport, "last_outer_headers", None)
+            if isinstance(headers, dict) and headers:
+                self.quota.observe_headers((bundle.app_key, bundle.account_id), headers)
 
     @staticmethod
     def _timed_start() -> tuple[dict[str, Any], float]:
@@ -285,7 +297,7 @@ class CampaignEngine:
         self._timed_finish(timing, started)
         record["stage"] = "children_created_readback_pending"
 
-        if len(bundle.campaigns) >= 2 and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+        if len(bundle.campaigns) >= 2 and self._requires_development_cooldown(bundle):
             retry_after = self._readback_retry_seconds(bundle)
             record["readback_cooldown"] = {
                 "reason": "development_access_score_decay",
@@ -393,7 +405,7 @@ class CampaignEngine:
         self._timed_finish(timing, started)
         record["stage"] = "children_created_readback_pending"
 
-        if len(bundle.campaigns) >= 2 and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+        if len(bundle.campaigns) >= 2 and self._requires_development_cooldown(bundle):
             retry_after = self._readback_retry_seconds(bundle)
             record["readback_cooldown"] = {
                 "reason": "development_access_score_decay",
@@ -549,7 +561,7 @@ class CampaignEngine:
 
         recovery_mutations = len(missing_ops) + len(ad_name_ops)
         record["recovery"]["mutation_calls"] = recovery_mutations
-        if recovery_mutations and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+        if recovery_mutations and self._requires_development_cooldown(bundle):
             retry_after = self._readback_retry_seconds(bundle)
             record["stage"] = "children_created_readback_pending"
             record["readback_cooldown"] = {
@@ -794,7 +806,7 @@ class CampaignEngine:
             finalize_ops,
         )))
         record["recovery"]["mutation_calls"] = recovery_mutations
-        if recovery_mutations and int(self.config.get("development_access_readback_cooldown_seconds", 0)) > 0:
+        if recovery_mutations and self._requires_development_cooldown(bundle):
             retry_after = self._readback_retry_seconds(bundle)
             record["stage"] = "children_created_readback_pending"
             record["readback_cooldown"] = {
@@ -815,6 +827,7 @@ class CampaignEngine:
         return resolved_campaign_ids
 
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
+        self.writer_leases.claim(account, request_id, status="IN_PROGRESS")
         transport = self.transport_factory(account)
         checkpoint_path = Path(self.config["state_root"]) / "checkpoints" / f"{_safe_name(request_id)}-{_safe_name(account)}.json"
         if checkpoint_path.exists():
@@ -843,6 +856,7 @@ class CampaignEngine:
             except QuotaBlocked as exc:
                 lane_result["status"] = "DEFERRED_QUOTA"
                 lane_result["deferred"] = {"next_bundle_index": bundle.index, **exc.detail}
+                self.writer_leases.mark(account, request_id, "DEFERRED_QUOTA")
                 _atomic_json(checkpoint_path, lane_result)
                 return lane_result
             if previous_failed is not None:
@@ -898,6 +912,7 @@ class CampaignEngine:
                     "readback_only": True,
                     "write_replay_blocked": True,
                 }
+                self.writer_leases.mark(account, request_id, "READBACK_DEFERRED")
                 _atomic_json(checkpoint_path, lane_result)
                 return lane_result
             except Exception as exc:
@@ -910,9 +925,11 @@ class CampaignEngine:
                 lane_result["status"] = "FAILED"
                 lane_result["manual_reconciliation_required"] = False
                 lane_result["automatic_recovery_required"] = True
+                self.writer_leases.mark(account, request_id, "RECOVERY_PENDING")
                 _atomic_json(checkpoint_path, lane_result)
                 raise
         lane_result["status"] = "COMPLETE"
+        self.writer_leases.release(account, request_id)
         _atomic_json(checkpoint_path, lane_result)
         return lane_result
 

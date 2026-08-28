@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from types import SimpleNamespace
 from datetime import date, datetime
@@ -761,20 +762,82 @@ def test_wrapper_points_only_to_v3_runner_and_does_not_reactivate_v2():
     assert "sleep " not in wrapper
 
 
-def test_intraday_shares_the_account_lane_and_defers_during_campaign_write():
-    wrapper = Path("/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh").read_text()
-    assert "flock -s -E 75 -n /run/lock/ares-cpv-meta-lane-1046241194533786.lock" in wrapper
-    assert "PARTIAL_DEFERRED_QUOTA" in wrapper
-    assert "--mode intraday --actions-only --gate" in wrapper
-    assert "sleep " not in wrapper
-
-
-def test_daily_and_first_delivery_defer_while_campaign_request_is_resumable():
-    for name in ("creditoparaveiculo-daily.sh", "creditoparaveiculo-first-delivery-guardrail.sh"):
-        wrapper = Path("/root/.hermes/profiles/ares/scripts") / name
-        content = wrapper.read_text()
-        assert "PARTIAL_DEFERRED_QUOTA" in content
+def test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane():
+    wrappers = (
+        "creditoparaveiculo-intraday.sh",
+        "creditoparaveiculo-daily.sh",
+        "creditoparaveiculo-snapshot.sh",
+        "creditoparaveiculo-first-delivery-guardrail.sh",
+        "creditoparaveiculo-guardrail-reactivate.sh",
+    )
+    for name in wrappers:
+        content = (Path("/root/.hermes/profiles/ares/scripts") / name).read_text()
+        assert "ares-cpv-meta-reader-gate.py" in content
         assert "flock -s -E 75 -n /run/lock/ares-cpv-meta-lane-1046241194533786.lock" in content
+        assert "sleep " not in content
+
+    intraday = (Path("/root/.hermes/profiles/ares/scripts") / wrappers[0]).read_text()
+    assert "--mode intraday --actions-only --gate" in intraday
+
+
+def test_reader_gate_blocks_engine_lease_and_resumable_daily_state(tmp_path):
+    script = ROOT / "scripts/ares-cpv-meta-reader-gate.py"
+    state_root = tmp_path / "engine-state"
+    operation_state = tmp_path / "cpv-daily.json"
+    lease_dir = state_root / "writer-leases"
+    lease_dir.mkdir(parents=True)
+    lease = lease_dir / "1046241194533786.json"
+
+    def run_gate():
+        return subprocess.run(
+            [
+                sys.executable,
+                str(script),
+                "--account-id", "1046241194533786",
+                "--state-root", str(state_root),
+                "--operation-state", str(operation_state),
+            ],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+    lease.write_text(json.dumps({
+        "account_id": "1046241194533786",
+        "request_id": "test-request",
+        "status": "IN_PROGRESS",
+        "blocks_readers": True,
+    }))
+    assert run_gate().returncode == 75
+
+    lease.write_text(json.dumps({
+        "account_id": "1046241194533786",
+        "request_id": "test-request",
+        "status": "COMPLETE",
+        "blocks_readers": False,
+    }))
+    operation_state.write_text(json.dumps({"status": "READBACK_DEFERRED"}))
+    assert run_gate().returncode == 75
+
+    operation_state.write_text(json.dumps({"status": "COMPLETE"}))
+    assert run_gate().returncode == 0
+
+
+def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
+    expected = "3.2.0"
+    engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()
+    config = json.loads((ROOT / "data/ares/meta-ads/engine-v3/config.json").read_text())
+    operation_v3 = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())
+    operation = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json").read_text())
+    canonical_skill = (ROOT / "profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md").read_text()
+    live_skill = Path("/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md").read_text()
+
+    assert f'ENGINE_RELEASE_VERSION = "{expected}"' in engine
+    assert config["release_version"] == expected
+    assert operation_v3["release_version"] == expected
+    assert operation["campaign_engine_v3"]["version"] == expected
+    assert f"version: {expected}" in canonical_skill
+    assert canonical_skill == live_skill
 
 
 def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):

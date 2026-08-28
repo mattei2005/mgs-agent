@@ -23,6 +23,7 @@ from zoneinfo import ZoneInfo
 
 from .adapters import CPV_ACCOUNT_ID, CPV_PAGE_ID, build_cpv_manifest
 from .cli import real_transport_factory
+from .coordination import AccountWriterLeaseStore
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
 from .prestage import AdAccountVideoUploader
@@ -1777,10 +1778,14 @@ def run_daily(
         inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
         selected_ids = set(str(item) for item in state.get("selected_asset_ids") or [])
         selected = [row for row in inventory_rows if str(row.get("asset_id") or "") in selected_ids]
+        writer_leases: AccountWriterLeaseStore | None = None
         try:
             operation = load_json(paths.operation)
             config = load_json(paths.config)
             validate_engine_config(config)
+            if not plan_only:
+                writer_leases = AccountWriterLeaseStore(config["state_root"])
+                writer_leases.claim(ACCOUNT_ID, request_id, status="PREFLIGHT_ACTIVE")
             desired_count = int(state.get("desired_campaign_count") or requested_campaign_count(operation, operational_date))
             phase_started, phase_calls = phase_begin(call_counter)
             meta = backend.meta_preflight()
@@ -2114,6 +2119,8 @@ def run_daily(
                 updated_at_utc=utc_now(),
             )
             atomic_json(paths.state, state)
+            if writer_leases is not None:
+                writer_leases.release(ACCOUNT_ID, request_id)
             if post_report:
                 labels = ", ".join(f"C{number:02d}" for number in numbers)
                 audit["discord_readback"] = post_discord(
@@ -2147,6 +2154,8 @@ def run_daily(
                     updated_at_utc=utc_now(),
                 )
                 atomic_json(paths.state, state)
+                if writer_leases is not None:
+                    writer_leases.mark(ACCOUNT_ID, request_id, failure_status)
             if post_report:
                 try:
                     post_discord(discord_failure_message(failure, failure_status, operational_date, list(state.get("campaign_numbers") or [])))

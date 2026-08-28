@@ -996,7 +996,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
-    assert audit['engine_release_version'] == '3.1.5'
+    assert audit['engine_release_version'] == '3.2.0'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
@@ -1243,10 +1243,79 @@ def test_readback_cooldown_honors_live_meta_reset_header_with_safety_margin(tmp_
     assert result['retry_after_seconds'] == 425
 
 
-def test_production_config_matches_official_development_access_score_window():
+def test_business_usage_header_exposes_marketing_api_access_tier(tmp_path):
+    quota = LaneQuotaStore(tmp_path, soft_score=100, hard_score=120, window_seconds=300)
+    live = quota.observe_headers(
+        ('mgs-main-app', '100'),
+        {'x-business-use-case-usage': json.dumps({
+            '100': [{
+                'type': 'ads_management',
+                'call_count': 3,
+                'total_cputime': 2,
+                'total_time': 2,
+                'estimated_time_to_regain_access': 0,
+                'ads_api_access_tier': 'development_access',
+            }],
+        })},
+    )
+    assert live['ads_api_access_tier'] == 'development_access'
+
+
+def test_development_tier_caps_original_120_lane_at_60(tmp_path):
+    quota = LaneQuotaStore(
+        tmp_path,
+        soft_score=100,
+        hard_score=120,
+        window_seconds=300,
+        development_score_max=60,
+        standard_score_max=9000,
+    )
+    lane = ('mgs-main-app', '100')
+    quota.observe_headers(
+        lane,
+        {'x-business-use-case-usage': json.dumps({
+            '100': [{'ads_api_access_tier': 'development_access'}],
+        })},
+    )
+    first = quota.reserve(lane, 60, request_id='first', now=1000)
+    assert first['hard_score'] == 60
+    with pytest.raises(QuotaBlocked) as exc:
+        quota.reserve(lane, 1, request_id='second', now=1000)
+    assert exc.value.detail['hard_score'] == 60
+
+
+def test_standard_access_skips_development_readback_cooldown(tmp_path):
+    cfg = config(
+        tmp_path,
+        enabled=True,
+        write_enabled=True,
+        soft_score=100,
+        hard_score=120,
+        development_access_score_max=60,
+        standard_access_score_max=9000,
+        development_access_readback_cooldown_seconds=305,
+        quota_retry_safety_seconds=5,
+    )
+    transport = FakeBatchTransport('100')
+    engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    engine.quota.observe_headers(
+        ('mgs-main-app', '100'),
+        {'x-business-use-case-usage': json.dumps({
+            '100': [{'ads_api_access_tier': 'standard_access'}],
+        })},
+    )
+    result = engine.execute(manifest([prestaged_campaign(1), prestaged_campaign(2)], request_id='standard-fast'))
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [row['stage'] for row in transport.calls][-1] == 'consolidated_readback'
+
+
+def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():
     production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    assert production['soft_score'] == 60
-    assert production['hard_score'] == 60
+    assert production['release_version'] == '3.2.0'
+    assert production['soft_score'] == 100
+    assert production['hard_score'] == 120
+    assert production['development_access_score_max'] == 60
+    assert production['standard_access_score_max'] == 9000
     assert production['score_window_seconds'] == 300
     assert production['development_access_readback_cooldown_seconds'] == 305
     assert production['points_per_mode']['clone_prestaged'] == 30
