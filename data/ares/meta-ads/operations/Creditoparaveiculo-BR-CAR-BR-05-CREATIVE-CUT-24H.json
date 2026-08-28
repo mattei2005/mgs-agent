@@ -112,7 +112,15 @@
     },
     "rules_source": "discord:thread:1540426218405363873",
     "rules_scope": "single permanent CPV Regras thread shared by every Creditoparaveiculo BR-CAR-BR ad account",
-    "rules_thread_policy": "do not create a separate rules thread per ad account; record account-specific exceptions as clearly labeled sections in the shared thread"
+    "rules_thread_policy": "do not create a separate rules thread per ad account; record account-specific exceptions as clearly labeled sections in the shared thread",
+    "rules_message_readback": {
+      "message_id": "1540474032598683669",
+      "edited_at": "2026-08-28T10:56:00-03:00",
+      "content_sha256": "c79c2edaa5384902c560ffcfd16533f4d202a2ba083329b81e3e4c578bfb7bb8",
+      "patch_http": 200,
+      "readback_http": 200,
+      "mentions": 0
+    }
   },
   "activation_gates": [
     "confirm account 05 Meta account_id and exact alias by live API",
@@ -134,5 +142,5 @@
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-28T13:52:02Z"
+  "updated_at": "2026-08-28T13:56:00Z"
 }
