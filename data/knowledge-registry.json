@@ -134,10 +134,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-2-0-20260828",
+      "title": "Ares Campaign Engine v3.1.1 suporta clone e criação integral do zero com recuperação readback-first",
+      "updated_at": "2026-08-28T05:39:00+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-08-28",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-2-0-20260828",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3.1.1 suporta clone e criação integral do zero com recuperação readback-first",
-      "updated_at": "2026-08-27T18:03:44+00:00"
+      "title": "Ares Campaign Engine v3.2.0 usa tier Meta vivo, recovery missing-only sem cooldown duplicado e exclusão de readers",
+      "updated_at": "2026-08-28T05:39:00+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -2062,5 +2080,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-27T18:09:04+00:00"
+  "updated_at": "2026-08-28T05:39:00+00:00"
 }

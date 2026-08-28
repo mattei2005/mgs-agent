@@ -10598,6 +10598,252 @@
       "restart_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260828T045322Z-415357.log",
       "rollback_backup": "/root/.hermes/secure-backups/zeus-discord-global-mention-20260828T045034Z",
       "updated_at": "2026-08-28T00:54:39-04:00"
+    },
+    {
+      "id": "ares-cpv-campaign-engine-v3-2-0-throughput-and-reader-exclusion",
+      "type": "runtime_release",
+      "agent": "ares",
+      "release_version": "3.2.0",
+      "authorization_source": "discord:thread:1542725181787603004:message:1542764003443613758",
+      "authorized_by": "Rodolfo Mattei",
+      "scope": "Tier-aware quota, missing-only code=2 recovery without duplicate post-recovery cooldown, per-account persisted writer lease, and fail-closed exclusion of every recurring CPV Meta reader during resumable campaign requests.",
+      "quota": {
+        "configured_unknown_soft_score": 100,
+        "configured_unknown_hard_score": 120,
+        "live_access_tier": "development_access",
+        "live_effective_soft_score": 60,
+        "live_effective_hard_score": 60,
+        "standard_access_score_max": 9000,
+        "live_probe": "HTTP 200; account ID match; X-Business-Use-Case-Usage present"
+      },
+      "reader_exclusion": {
+        "account_id": "1046241194533786",
+        "lease_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/writer-leases",
+        "operation_state": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/cpv-daily.json",
+        "gated_wrappers": [
+          "Diário",
+          "Intraday",
+          "Snapshot",
+          "First Delivery",
+          "Guardrail Reactivation"
+        ],
+        "policy": "All five defer silently while the per-account lease or operation state is resumable; shared flock remains a second process-level guard.",
+        "cron_jobs": [
+          {
+            "profile": "ares",
+            "id": "41712f74f949",
+            "name": "Creditoparaveiculo 13 G006 Diario",
+            "schedule": {
+              "kind": "cron",
+              "expr": "0 * * * *",
+              "display": "0 * * * *"
+            },
+            "script": "creditoparaveiculo-daily.sh",
+            "next_run_at": "2026-08-28T02:00:00-04:00",
+            "enabled": true,
+            "state": "scheduled",
+            "no_agent": true,
+            "deliver": "local"
+          },
+          {
+            "profile": "ares",
+            "id": "69dfca2b9719",
+            "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+            "schedule": {
+              "kind": "cron",
+              "expr": "0 * * * *",
+              "display": "0 * * * *"
+            },
+            "script": "creditoparaveiculo-intraday.sh",
+            "next_run_at": "2026-08-28T02:00:00-04:00",
+            "enabled": true,
+            "state": "scheduled",
+            "no_agent": true,
+            "deliver": "local"
+          },
+          {
+            "profile": "ares",
+            "id": "f45eed5047b9",
+            "name": "Creditoparaveiculo 13 G006 Snapshot",
+            "schedule": {
+              "kind": "cron",
+              "expr": "0 * * * *",
+              "display": "0 * * * *"
+            },
+            "script": "creditoparaveiculo-snapshot.sh",
+            "next_run_at": "2026-08-28T02:00:00-04:00",
+            "enabled": true,
+            "state": "scheduled",
+            "no_agent": true,
+            "deliver": "local"
+          },
+          {
+            "profile": "ares",
+            "id": "5d0974e97ebd",
+            "name": "CPV Guardrail Reactivation 00h30",
+            "schedule": {
+              "kind": "cron",
+              "expr": "30 * * * *",
+              "display": "30 * * * *"
+            },
+            "script": "creditoparaveiculo-guardrail-reactivate.sh",
+            "next_run_at": "2026-08-28T02:30:00-04:00",
+            "enabled": true,
+            "state": "scheduled",
+            "no_agent": true,
+            "deliver": "local"
+          },
+          {
+            "profile": "ares",
+            "id": "990b3e644f36",
+            "name": "CPV primeiro gasto 15min",
+            "schedule": {
+              "kind": "cron",
+              "expr": "*/15 * * * *",
+              "display": "*/15 * * * *"
+            },
+            "script": "creditoparaveiculo-first-delivery-guardrail.sh",
+            "next_run_at": "2026-08-28T01:45:00-04:00",
+            "enabled": true,
+            "state": "scheduled",
+            "no_agent": true,
+            "deliver": "local"
+          }
+        ]
+      },
+      "recovery": {
+        "quota_reservations": [
+          "write",
+          "recovery",
+          "readback"
+        ],
+        "reconcile_before_write": true,
+        "retry_scope": "children proven missing only",
+        "successful_children_preserved": true,
+        "fresh_recovery_reservation_includes_final_readback": true
+      },
+      "validation": {
+        "pytest": "177 passed",
+        "offline_smoke": "OFFLINE_SMOKE_OK; 3 campaigns; planner 2+1; zero network calls; 3 unique campaign IDs",
+        "py_compile": "PASS",
+        "bash_n": "PASS for all five wrappers",
+        "json_tool": "PASS for config and both operation files",
+        "git_diff_check": "PASS",
+        "profile_skill_mirror_match": true,
+        "reader_gate_live_readback": "allowed=true with cpv-daily COMPLETE and no active lease"
+      },
+      "projection_from_20260828_observation": {
+        "basis": "observed non-wait time 12m06s; projections are not measured post-release production runs",
+        "same_two_code2_waves": "22m21s",
+        "clean_development": "17m11s",
+        "standard_access_fresh_media": "12m06s",
+        "standard_access_prestaged_media": "8m39s"
+      },
+      "artifacts": {
+        "engine": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+          "sha256": "b3c0f837e9a25a623bff030d45f7e95682be5731497e8feb4feab00aefde8669",
+          "size_bytes": 55028,
+          "mode": "0o644"
+        },
+        "quota": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/quota.py",
+          "sha256": "1d03600e4e95b0d3dc9c0871ec8839d9e7f0bb98a5c4a2ae63454cca92e19195",
+          "size_bytes": 10505,
+          "mode": "0o644"
+        },
+        "coordination": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/coordination.py",
+          "sha256": "8c06b7256e228eaadffa5a47c605ef7a0803b0578497f4ff753ac0977b312456",
+          "size_bytes": 4614,
+          "mode": "0o644"
+        },
+        "daily": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "sha256": "7b38e08332348f672c9720daeaeba892511379084cba8d7eae3167c82cb7fb5e",
+          "size_bytes": 120518,
+          "mode": "0o644"
+        },
+        "reader_gate": {
+          "path": "/root/mgs-agent/scripts/ares-cpv-meta-reader-gate.py",
+          "sha256": "cb92fefb8e72e14746a0ec23ae6bdf32615d5f7248a2dd622edf8d036ae7d234",
+          "size_bytes": 1118,
+          "mode": "0o755"
+        },
+        "config": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "508cc64cbe1ac2cc653ecfdd845e7f89ad77143f6b4c59631744266c986890b8",
+          "size_bytes": 7558,
+          "mode": "0o644"
+        },
+        "operation_v3": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+          "sha256": "282c407cd405da59c5a9407ed921768ad1518f77fc7c7d2e5ce9a642c877b30c",
+          "size_bytes": 10093,
+          "mode": "0o644"
+        },
+        "operation_main": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+          "sha256": "7c5bb7e529d285ee003f982f07304edb0f75f48621fbdd0e9d80602257843aee",
+          "size_bytes": 156097,
+          "mode": "0o600"
+        },
+        "skill_canonical": {
+          "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
+          "sha256": "4accc7ec08d9dc9c112fa689e9c3dad643b94f08d3899bde9d065d9ace488320",
+          "size_bytes": 20216,
+          "mode": "0o644"
+        },
+        "architecture_canonical": {
+          "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/references/architecture-and-runtime.md",
+          "sha256": "d64df5d48ff91f997f605077688a81e593c878b98e54ebd35c20abc17ac86f4c",
+          "size_bytes": 4510,
+          "mode": "0o644"
+        },
+        "skill_live": {
+          "path": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md",
+          "sha256": "4accc7ec08d9dc9c112fa689e9c3dad643b94f08d3899bde9d065d9ace488320",
+          "size_bytes": 20216,
+          "mode": "0o644"
+        },
+        "architecture_live": {
+          "path": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/architecture-and-runtime.md",
+          "sha256": "d64df5d48ff91f997f605077688a81e593c878b98e54ebd35c20abc17ac86f4c",
+          "size_bytes": 4510,
+          "mode": "0o644"
+        },
+        "wrapper_intraday": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh",
+          "sha256": "c281347953baa01b0068741dd6193c795dfbd55d1d586e6c7ee21cc04a5d9768",
+          "size_bytes": 867,
+          "mode": "0o755"
+        },
+        "wrapper_daily": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh",
+          "sha256": "c5940179b046189ec24e7140b6eb21b2757791f00d3842bddd4278fffd8a3c8e",
+          "size_bytes": 675,
+          "mode": "0o755"
+        },
+        "wrapper_snapshot": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-snapshot.sh",
+          "sha256": "5cb7e003e69bd098ca70ff2183d114b8ff32aac734124b3e6cf22ad18254c3e2",
+          "size_bytes": 678,
+          "mode": "0o755"
+        },
+        "wrapper_first-delivery-guardrail": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.sh",
+          "sha256": "1e9ae428efa6d3d5ca8b93eb13f7b782824419d94240f5bf49f12990c2920d8f",
+          "size_bytes": 682,
+          "mode": "0o755"
+        },
+        "wrapper_guardrail-reactivate": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
+          "sha256": "d286beeb511306835e41ce660369d15ea02429f5497f0eb2caed56b92f9d3f67",
+          "size_bytes": 680,
+          "mode": "0o755"
+        }
+      },
+      "updated_at": "2026-08-28T01:40:32.042295-04:00"
     }
   ],
   "profile_skill_references": [

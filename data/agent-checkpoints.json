@@ -623,12 +623,12 @@
     {
       "agent": "zeus",
       "id": "campaign-engine-throughput-20260828",
-      "next_step": "Criar testes RED para coordenação reader/writer, retry seguro code 2, quota tier-aware e versão única; então corrigir código e wrappers.",
-      "objective": "Eliminar esperas artificiais do Campaign Engine v3, impedir concorrência de readers Meta durante writes e sincronizar versão",
-      "source": "discord:1542725181787603004:1542764003443613758",
-      "state": "diagnóstico confirmado: limite 120 existiu na instalação; runtime ativo foi reduzido para 60. c36-c38 perderam ads por oauth code 2 na meta, não por ausência no drive. implementação autorizada iniciada.",
+      "next_step": "Executar próximo pedido autorizado como canário de produção e comparar elapsed/esperas; Full Access permanece ação externa até o header vivo mudar para standard_access",
+      "objective": "Eliminar esperas artificiais do Campaign Engine v3, reconciliar tier/quota e impedir readers concorrentes",
+      "source": "discord:thread:1542725181787603004:message:1542764003443613758;report-infra:1542770535241490504",
+      "state": "complete: v3.2.0 validada; live meta development_access 60/60; recovery missing-only sem cooldown duplicado; cinco readers bloqueados por lease/state; versão sincronizada; inventário/audit/registry/report-infra concluídos",
       "thread_id": "1542725181787603004",
-      "updated_at": "2026-08-28T05:15:39+00:00"
+      "updated_at": "2026-08-28T05:39:50+00:00"
     },
     {
       "agent": "zeus",
@@ -1382,5 +1382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T05:20:51+00:00"
+  "updated_at": "2026-08-28T05:39:50+00:00"
 }
