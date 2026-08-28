@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-28T18:02:38-04:00",
+  "updated_at": "2026-08-28T18:06:21-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
   "source_message_id": "1543017636894343219",
@@ -360,24 +360,47 @@
         "sheet_writes": 0,
         "production_baseline_status": "active_fail_closed_pending_expected_roles",
         "source_message_id": "1543012433138810990"
+      },
+      {
+        "app": "B009-3",
+        "item_title": "BOT B009-3 Token - Amoey Pnr",
+        "app_name": "B009-3",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_count": 1,
+        "roles_resolved_names": 1,
+        "expected_sheet_roles": 17,
+        "pending_role_acceptances": 16,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Amoey Pnr",
+        "sheet_no_app_rows": 17,
+        "sheet_blank_names": 0,
+        "sheet_duplicate_names": 0,
+        "sheet_writes": 0,
+        "production_baseline_status": "active_fail_closed_pending_expected_roles",
+        "source_message_id": "1543017636894343219"
       }
     ],
     "secrets_exposed": false,
     "report": "reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "b001_4_b002_3_b004_4_active_pending_role_acceptances",
+    "status": "replacement_apps_active_pending_role_acceptances",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1543012433138810990",
-    "planned_check": "Monitor B001-4 at 2/16, B002-3 at 1/10 and B004-4 at 1/12. Keep each Sheet reconciliation fail-closed until its expected accepted/resolved role count is reached.",
+    "source_message_id": "1543017636894343219",
+    "planned_check": "Monitor B001-4 at 2/16, B002-3 at current live count/10, B004-4 at 1/12 and B009-3 at 1/17. Keep each Sheet reconciliation fail-closed until its expected accepted/resolved role count is reached.",
     "required_before_reactivation": [
       "B001-4 reaches 16 accepted/resolved roles",
       "B002-3 reaches 10 accepted/resolved roles",
       "B004-4 reaches 12 accepted/resolved roles",
+      "B009-3 reaches 17 accepted/resolved roles",
       "fresh per-app Sheet reconciliation reports safe_for_sheet=true",
       "zero unexpected identities and zero errors"
     ],
     "reactivate_only_when": "automatic per-app gate reaches expected accepted/resolved roles",
-    "current_runtime_note": "B001-4, B002-3 and B004-4 are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed while 14, 9 and 11 roles are pending acceptance."
+    "current_runtime_note": "B001-4, B002-3, B004-4 and B009-3 are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed while expected roles are pending acceptance."
   }
 }
