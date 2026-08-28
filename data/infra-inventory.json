@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-28T09:53:31-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-08-28T17:30:42-04:00",
+    "generated_by": "infra-discovery.sh + Zeus verified B001-4 pre-cutover containment"
   },
   "system_packages": [
     {
@@ -1559,22 +1559,25 @@
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 348,
-      "modified_at": "2026-08-24T09:53:29-04:00",
-      "sha256": "e2851492aaed297d414a10e34c6c7a5b70347f11ddd7c5b4f1e0b94a125dd034",
+      "size_bytes": 385,
+      "modified_at": "2026-08-28T17:26:04-04:00",
+      "sha256": "7c41789cd20c791b11a2df4ac63104cd76c38ca63ce1f16894eb4237cbaf5389",
       "mode": "manual",
-      "scope": [],
+      "scope": [
+        "B001-3"
+      ],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1541442725608558623",
-      "validation": "JSON PASS; B007-2 containment pause was active during the fresh baseline, then cleared only after 18 roles, 18 present Sheet rows, one preserved X, zero writes, zero errors and zero Discord messages. Force-live and the next scheduled full cycle both read back with no active app pause.",
-      "updated_at": "2026-08-24T09:56:29-04:00",
-      "source_report": "REPORT-INFRA Zeus B007-2 cutover 2026-08-24",
-      "backup": "/root/mgs-agent/backups/meta-app-b0072-cutover-20260824-094920/meta-app-role-alert-pause.json.before",
-      "backup_sha256": "9ab60fa7e33de8d3d66e0e3637b6dc9b8e9073f933e94200b58b095d7ad45619",
-      "resume_condition": "None; B007-2 is active and unpaused.",
-      "description": "Canonical generic-app alert pause file; no app is paused after validated B007-2 activation.",
-      "last_change": "2026-08-24: temporary B007-2 containment pause cleared after baseline, Sheet reconciliation and real alert readback."
+      "authorization_message_id": "1543008173294747729",
+      "validation": "JSON/readback PASS; manual pause scope is exactly B001-3; shared cron remains enabled and all other app alerts remain active. 1Password metadata still reports app_name=B001-3/app_id=885334677733917, so B001-4 was not promoted to the active registry.",
+      "updated_at": "2026-08-28T17:28:55-04:00",
+      "source_report": "discord:#alerts-infra/1543009764903092286",
+      "backup": "/root/mgs-agent/backups/meta-app-b0014-pending-20260828-172603/meta-app-role-alert-pause.json.before",
+      "backup_sha256": "e2851492aaed297d414a10e34c6c7a5b70347f11ddd7c5b4f1e0b94a125dd034",
+      "resume_condition": "Only after the canonical 1Password item identifies B001-4 and live Graph/roles/debug_token plus Sheet reconciliation pass.",
+      "description": "Canonical generic-app alert pause file; only retired B001-3 app-channel deliveries are contained while B001-4 awaits credential and live preflight.",
+      "last_change": "2026-08-28T17:28:55-04:00: B001-3 alert delivery paused after Rodolfo declared replacement by B001-4; no registry/Sheet/credential mutation performed.",
+      "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -15125,9 +15128,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 125749,
-      "md5": "d80c6af3d5f1358458598760cacd3a8d",
-      "modified_at": "2026-08-28T02:25:23-04:00"
+      "size_bytes": 125745,
+      "md5": "e237e9e0b5c32b85853c54fc4378d57c",
+      "modified_at": "2026-08-28T17:26:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -15292,6 +15295,12 @@
       "modified_at": "2026-08-28T01:44:11-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/knowledge-inbox.jsonl",
+      "size_bytes": 8935,
+      "md5": "d8812ce2278f1a29490ab4449f75faef",
+      "modified_at": "2026-08-28T17:26:16-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
       "size_bytes": 80554,
       "md5": "234c05dfa81e688b9fc88ca321a96c04",
@@ -15323,9 +15332,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 348,
-      "md5": "188c7db33d084a1c80e50d31973bd36d",
-      "modified_at": "2026-08-24T09:53:29-04:00"
+      "size_bytes": 385,
+      "md5": "ebdd9e8e92819af91419b12128e76f4e",
+      "modified_at": "2026-08-28T17:26:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
