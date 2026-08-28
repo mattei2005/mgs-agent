@@ -582,6 +582,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpv-account05-creative-cut24h",
+      "next_step": "Rodolfo cria as threads Intraday, Diario e Criar campanhas; depois Ares faz readback da conta 05 e completa onboarding antes de qualquer write ou cron",
+      "objective": "Documentar e preparar onboarding da estrategia CREATIVE_CUT_24H na conta operacional 05 do Creditoparaveiculo BR-CAR-BR",
+      "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+      "state": "strategy_documented_not_activated; account_13_unchanged; operation_contract_created; thread_ids_and_live_account_identity_pending",
+      "thread_id": "1542597966400065536",
+      "updated_at": "2026-08-28T06:25:23+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-c21-c31-20260827",
       "next_step": "Acompanhar o início de C28-C30 em 28/08 às 00:30 SP pelos guardrails vigentes; C31 permanece terminal e não pode reativar automaticamente.",
       "objective": "Encerrar campanhas sem futuro, preservar/retornar criativos corretamente e manter somente a coorte aprovada para 28/08",
@@ -1382,5 +1392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T05:39:50+00:00"
+  "updated_at": "2026-08-28T06:25:23+00:00"
 }
