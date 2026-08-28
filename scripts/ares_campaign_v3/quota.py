@@ -107,6 +107,7 @@ class LaneQuotaStore:
                 current = sum(int(row.get("points") or 0) for row in events)
                 return {
                     "points": current,
+                    "reserved_points": int((reservations.get(request_id) or {}).get("points") or points),
                     "idempotent": True,
                     "path": str(path),
                     "soft_score": effective_soft,
@@ -147,6 +148,7 @@ class LaneQuotaStore:
             fcntl.flock(fh, fcntl.LOCK_UN)
         return {
             "points": projected,
+            "reserved_points": points,
             "idempotent": False,
             "path": str(path),
             "soft_score": effective_soft,

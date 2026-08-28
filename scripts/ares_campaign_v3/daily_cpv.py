@@ -184,6 +184,8 @@ def safe_error(exc: Exception) -> dict[str, Any]:
             safe_detail["message"] = detail["message"][:300]
         if isinstance(detail.get("error"), str):
             safe_detail["error"] = detail["error"][:120]
+        if isinstance(detail.get("recommended_retry_after_seconds"), int):
+            safe_detail["recommended_retry_after_seconds"] = max(1, detail["recommended_retry_after_seconds"])
         payload_error = (detail.get("payload") or {}).get("error") if isinstance(detail.get("payload"), dict) else None
         if isinstance(payload_error, dict):
             safe_detail["error_response"] = {
@@ -2147,7 +2149,10 @@ def run_daily(
                 state.update(
                     status=failure_status,
                     failure=failure,
-                    retry_after_epoch=int(time.time()) + 300,
+                    retry_after_epoch=int(time.time()) + max(
+                        5,
+                        int((failure.get("detail") or {}).get("recommended_retry_after_seconds") or 300),
+                    ),
                     manual_reconciliation_required=False,
                     automatic_recovery_required=True,
                     operator_authorization=authorization,

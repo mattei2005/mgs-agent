@@ -60,6 +60,7 @@
   "hard_score": 120,
   "development_access_score_max": 60,
   "standard_access_score_max": 9000,
+  "transient_code2_retry_policy": "remaining effective lane capacity decides retry timing; preserve successful child IDs, reconcile by slot/lineage and retry only children proven missing",
   "projected_points_per_campaign": 30,
   "projected_points_per_bundle": 60,
   "readback_cooldown_seconds": 305,

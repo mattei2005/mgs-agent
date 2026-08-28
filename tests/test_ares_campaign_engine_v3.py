@@ -1123,14 +1123,23 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
         tmp_path,
         enabled=True,
         write_enabled=True,
-        soft_score=1000,
-        hard_score=1000,
+        soft_score=100,
+        hard_score=120,
+        development_access_score_max=60,
+        standard_access_score_max=9000,
         development_access_readback_cooldown_seconds=305,
         quota_retry_safety_seconds=5,
         readback_recovery_points_per_campaign=3,
+        points_per_mode={'pure_clone': 30, 'clone_prestaged': 30},
     )
     transport = PartialAdCopyTransport('100')
     engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+    engine.quota.observe_headers(
+        ('mgs-main-app', '100'),
+        {'x-business-use-case-usage': json.dumps({
+            '100': [{'ads_api_access_tier': 'development_access'}],
+        })},
+    )
     expected = [prestaged_campaign(1), prestaged_campaign(2)]
     request = manifest(expected, request_id='partial-prestaged')
 
@@ -1139,32 +1148,33 @@ def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(t
     assert len(transport.ads) == 5
     assert transport.initial_copy_calls == 1
 
-    deferred = engine.execute(request)
-    assert deferred['status'] == 'PARTIAL_DEFERRED_QUOTA'
-    assert deferred['campaign_ids'] == []
-    assert deferred['retry_after_seconds'] == 305
-    assert len(transport.ads) == 6
-    assert transport.initial_copy_calls == 1
-    assert transport.recovery_copy_calls == 1
-    assert 'recovery_consolidated_readback' not in [call['stage'] for call in transport.calls]
+    blocked = engine.execute(request)
+    assert blocked['status'] == 'PARTIAL_DEFERRED_QUOTA'
+    assert transport.recovery_copy_calls == 0
 
-    result = engine.execute(request)
-    assert result['status'] == 'COMPLETE_PAUSED'
-    assert len(result['campaign_ids']) == 2
+    lane_path = next(Path(cfg['state_root']).glob('lane-*.json'))
+    lane_state = json.loads(lane_path.read_text())
+    for event in lane_state['events']:
+        event['at'] = 0
+    lane_path.write_text(json.dumps(lane_state))
+
+    recovered = engine.execute(request)
+    assert recovered['status'] == 'COMPLETE_PAUSED'
+    assert len(recovered['campaign_ids']) == 2
     assert len(transport.ads) == 6
     assert transport.initial_copy_calls == 1
     assert transport.recovery_copy_calls == 1
+    assert 'recovery_consolidated_readback' in [call['stage'] for call in transport.calls]
     assert sorted(row['name'] for row in transport.ads) == sorted(
         ad['name'] for campaign in expected for ad in campaign['ads']
     )
     checkpoint = json.loads(next((Path(cfg['state_root']) / 'checkpoints').glob('*.json')).read_text())
     assert checkpoint['manual_reconciliation_required'] is False
-    previous_recovery = checkpoint['bundles'][0]['recovery_history'][-1]
-    assert previous_recovery['existing_ads'] == 5
-    assert previous_recovery['missing_ads_created'] == 1
-    assert previous_recovery['readback_deferred_after_mutation'] is True
-    assert checkpoint['bundles'][0]['recovery']['mode'] == 'consolidated_readback_only'
-    assert checkpoint['bundles'][0]['recovery']['mutation_calls'] == 0
+    recovery = checkpoint['bundles'][0]['recovery']
+    assert recovery['existing_ads'] == 5
+    assert recovery['missing_ads_created'] == 1
+    assert recovery['readback_deferred_after_mutation'] is False
+    assert recovery['reservation_covered_readback'] is True
 
 
 def test_development_bundle_defers_readback_then_resumes_without_any_write_replay(tmp_path):

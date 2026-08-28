@@ -27,6 +27,7 @@
   "quota_scope": "app_key_plus_ad_account_id",
   "quota_tier_policy": "unknown uses configured 100/120 ceiling; live development_access caps the lane at 60; live standard_access uses 9000 and skips the fixed development readback cooldown",
   "reader_exclusion_policy": "all recurring CPV Meta readers defer while the persisted per-account writer lease or cpv-daily operation state is resumable",
+  "transient_code2_retry_policy": "initial write, missing-only recovery and readback use distinct quota reservation IDs; retry only after effective capacity exists; a fresh recovery reservation includes targeted reconciliation, missing writes, required name normalization and final readback, so no second fixed cooldown is added when the estimated recovery cost fits",
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
   "supported_modes": ["clone_prestaged", "from_zero_prestaged"],

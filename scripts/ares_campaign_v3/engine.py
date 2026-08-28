@@ -159,6 +159,29 @@ class CampaignEngine:
         tier = str(((snapshot.get("live_usage") or {}).get("ads_api_access_tier") or "")).lower()
         return tier != "standard_access"
 
+    def _recommended_transient_retry_seconds(
+        self,
+        bundle: BundlePlan,
+        quota: dict[str, Any],
+        exc: BatchTransportError,
+    ) -> int | None:
+        children = [row for row in (exc.detail.get("children") or []) if isinstance(row, dict)]
+        if not children:
+            return None
+        transient_code2 = all(
+            int(((row.get("error") or {}).get("code") or 0)) == 2
+            and (row.get("error") or {}).get("is_transient") is True
+            for row in children
+        )
+        if not transient_code2:
+            return None
+        hard_score = int(quota.get("hard_score") or self.config.get("hard_score", 120))
+        current = int(quota.get("points") or 0)
+        remaining = max(0, hard_score - current)
+        if remaining >= self._points(bundle):
+            return max(1, int(self.config.get("quota_retry_safety_seconds", 5)))
+        return self._readback_retry_seconds(bundle)
+
     def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
         try:
             return transport.execute(operations, stage)
@@ -561,7 +584,21 @@ class CampaignEngine:
 
         recovery_mutations = len(missing_ops) + len(ad_name_ops)
         record["recovery"]["mutation_calls"] = recovery_mutations
-        if recovery_mutations and self._requires_development_cooldown(bundle):
+        estimated_recovery_points = (
+            len(bundle.campaigns)
+            + 3 * len(missing_ops)
+            + 3 * len(ad_name_ops)
+            + 3 * len(bundle.campaigns)
+        )
+        quota_recovery = record.get("quota_recovery") or {}
+        reservation_covered_readback = (
+            quota_recovery.get("idempotent") is False
+            and int(quota_recovery.get("reserved_points") or 0) >= estimated_recovery_points
+        )
+        record["recovery"]["estimated_recovery_points"] = estimated_recovery_points
+        record["recovery"]["reservation_covered_readback"] = reservation_covered_readback
+        record["recovery"]["readback_deferred_after_mutation"] = False
+        if recovery_mutations and self._requires_development_cooldown(bundle) and not reservation_covered_readback:
             retry_after = self._readback_retry_seconds(bundle)
             record["stage"] = "children_created_readback_pending"
             record["readback_cooldown"] = {
@@ -848,8 +885,14 @@ class CampaignEngine:
         for bundle in bundles:
             if bundle.index in completed_indices:
                 continue
-            bundle_request_id = f"{request_id}:{account}:{bundle.index}"
             previous_failed = failed_by_index.get(bundle.index)
+            if previous_failed is None:
+                quota_stage = "write"
+            elif self._readback_only_record(bundle, previous_failed):
+                quota_stage = "readback"
+            else:
+                quota_stage = "recovery"
+            bundle_request_id = f"{request_id}:{account}:{bundle.index}:{quota_stage}"
             points = self._recovery_points(bundle, previous_failed) if previous_failed is not None else self._points(bundle)
             try:
                 quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
@@ -919,6 +962,9 @@ class CampaignEngine:
                 record["status"] = "FAILED"
                 error_row: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
                 if isinstance(exc, BatchTransportError):
+                    recommended_retry = self._recommended_transient_retry_seconds(bundle, quota, exc)
+                    if recommended_retry is not None:
+                        exc.detail["recommended_retry_after_seconds"] = recommended_retry
                     error_row["stage"] = exc.stage
                     error_row["detail"] = exc.detail
                 record["error"] = error_row
