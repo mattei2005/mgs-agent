@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-08-24T09:56:29-04:00",
+  "updated_at": "2026-08-28T17:43:55-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1541442725608558623",
+  "source_message_id": "1543012433138810990",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -21,19 +21,20 @@
   },
   "apps": [
     {
-      "app": "B001-3",
+      "app": "B001-4",
       "channel_id": "1521251196294135858",
       "channel_name": "b001-2-app-status",
-      "admin": "Adriano Alves",
-      "onepassword_item_title": "BOT B001-2 Token - Adriano Alves",
-      "expected_sheet_roles": 17
+      "admin": "Aline Rosse",
+      "onepassword_item_title": "BOT B001-4 Token - Aline Rosse",
+      "expected_sheet_roles": 16
     },
     {
-      "app": "B002-2",
+      "app": "B002-3",
       "channel_id": "1521251220130496723",
       "channel_name": "b002-2-app-status",
-      "admin": "Ninda Nak Mapa",
-      "onepassword_item_title": "BOT B002-2 Token - Ninda Nak Mapa"
+      "admin": "Khánh Chi Phùng",
+      "onepassword_item_title": "BOT B002-3 Token - Khánh Chi Phùng",
+      "expected_sheet_roles": 10
     },
     {
       "app": "B003-2",
@@ -304,19 +305,17 @@
     "report": "reports/meta-app-onepassword-access-audit-20260813.json"
   },
   "reactivation_gate": {
-    "status": "b001_3_pending_b007_2_active_b013_3_active_validated",
+    "status": "b001_4_b002_3_cutover_baseline_pending",
     "authorized_by": "Rodolfo Mattei",
-    "source_message_id": "1541442725608558623",
-    "planned_check": "B001-3 segue no gate fail-closed registrado; B007-2 está ativo com 18/18 roles atuais reconciliadas e An Na preservada como único X; B013-3 permanece ativo e validado.",
+    "source_message_id": "1543012433138810990",
+    "planned_check": "B001-4 and B002-3 credentials are live; baseline new app-scoped roles, preserve Sheet fail-closed until expected roles are accepted, then unpause notifications.",
     "required_before_reactivation": [
-      "fresh /roles readback for all 13 apps",
-      "exact reconciliation against the current Sheet order and assignments",
-      "zero missing expected admins",
-      "zero unexpected operational admins after owner exceptions",
-      "all app/token/debug checks healthy",
-      "explicitly preserve B001-3/B004-3/B006-3/B007-2/B013-3 routing semantics"
+      "fresh app metadata /roles /me/debug_token readback",
+      "exact reconciliation against current Sheet NO APP assignments",
+      "new app-scoped state baseline without predecessor IDs",
+      "zero Sheet writes while accepted roles are below expected count"
     ],
-    "reactivate_only_when": "explicit Rodolfo instruction or 100 percent reconciled",
-    "current_runtime_note": "Generic role monitoring is active and includes B007-2 at 18 roles, 18 present Sheet rows, one preserved X (An Na), zero errors and no active app pause; B013-3 remains excluded on its dedicated healthy route; B001-3 keeps its existing fail-closed gate."
+    "reactivate_only_when": "new app credentials and fail-closed production baseline validated",
+    "current_runtime_note": "B001-4 has 16 Sheet assignments and 2 currently accepted roles; B002-3 has 10 Sheet assignments and 1 currently accepted role. Both remain fail-closed until the production monitor baseline validates."
   }
 }

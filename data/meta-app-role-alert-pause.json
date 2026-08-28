@@ -2,11 +2,14 @@
   "version": 2,
   "mode": "manual",
   "apps": [
-    "B001-3"
+    "B001-3",
+    "B001-4",
+    "B002-2",
+    "B002-3"
   ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1543008173294747729",
-  "updated_at": "2026-08-28T17:26:03-04:00",
-  "reason": "B001-3 foi substituído por B001-4; alertas do app aposentado contidos até o item 1Password e o cutover B001-4 passarem no preflight live."
+  "source_message_id": "1543012433138810990",
+  "updated_at": "2026-08-28T17:43:55-04:00",
+  "reason": "Containment during live cutover from B001-3/B002-2 to B001-4/B002-3; shared cron remains enabled."
 }
