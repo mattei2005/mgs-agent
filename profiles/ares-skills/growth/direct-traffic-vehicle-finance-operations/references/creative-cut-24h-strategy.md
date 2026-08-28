@@ -20,7 +20,9 @@ O ChatPion não integra esta estratégia. A prática externa foi apenas a origem
 - Conta-alvo: conta operacional **05** do Creditoparaveiculo BR-CAR-BR.
 - A conta **13 não recebe esta estratégia** por esta decisão e preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita.
 - Estado inicial: `DOCUMENTED_NOT_ACTIVATED`.
-- Ativação depende do readback da conta 05, dos IDs das três threads fixas, do contrato de budget/write e da atribuição explícita da estratégia às campanhas.
+- As três threads fixas da conta 05 estão registradas e o member sync de Zeus, Rodolfo, Nicolas e Geizian foi confirmado por readback: Intraday `1542892943352799242`, Diário `1542892955315081246` e Criar campanhas `1542892971186454719`.
+- A thread `CPV Regras` `1540426218405363873` é única e compartilhada por todas as contas de anúncio Creditoparaveiculo BR-CAR-BR; não criar uma thread de regras por conta.
+- Ativação ainda depende do readback live da conta 05, account ID/alias/moeda/timezone, referência de credencial, contrato de budget/write e atribuição explícita da estratégia às campanhas.
 - Documentar a estratégia não cria campanha, cron, write Meta ou migração de campanha existente.
 
 ## Seleção por campanha
@@ -150,15 +152,15 @@ TERMINAL_COMPLETE
 
 ## Threads e reporting da conta 05
 
-A conta 05 terá três threads fixas separadas:
+A conta 05 usa estas três threads operacionais fixas:
 
 ```text
-Intraday
-Diário
-Criar campanhas
+Intraday         1542892943352799242
+Diário           1542892955315081246
+Criar campanhas  1542892971186454719
 ```
 
-Os IDs permanecem pendentes até Rodolfo criá-las e informá-las/readback real. Nenhum cron ou roteamento pode ser ativado com placeholders.
+A referência de regras não é duplicada por conta: `CPV Regras` `1540426218405363873` atende todas as contas de anúncio Creditoparaveiculo BR-CAR-BR, com exceções específicas claramente rotuladas. O readback das três threads operacionais confirmou Zeus, Rodolfo, Nicolas e Geizian. Nenhum cron ou roteamento da conta 05 fica autorizado apenas por esse registro.
 
 Diário e Intraday devem exibir `management_strategy`, estágio, início da janela, próximo checkpoint, anúncios ativos/pausados, ROI da janela e concentração por spend. Dados acumulados ficam separados dos dados da janela decisória.
 
@@ -167,7 +169,7 @@ Diário e Intraday devem exibir `management_strategy`, estágio, início da jane
 - [ ] Meta account ID e alias exato da conta 05 confirmados por API
 - [ ] moeda e timezone confirmados por API
 - [ ] referência 1Password da conta registrada sem copiar segredo
-- [ ] IDs das threads Intraday, Diário e Criar campanhas confirmados
+- [x] IDs das threads Intraday, Diário e Criar campanhas confirmados; member sync validado nas três
 - [ ] manager, budget, write mode e autoridade registrados
 - [ ] campanha(s) piloto explicitamente atribuída(s) à estratégia
 - [ ] state store e idempotência implementados

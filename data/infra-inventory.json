@@ -10853,8 +10853,8 @@
       "authorization_source": "discord:thread:1542597966400065536",
       "operation": {
         "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
-        "size_bytes": 5764,
-        "sha256": "a33e520415eb23d860a3fbdb6755322d22e7766452283fd3d494176f567a2aa9",
+        "size_bytes": 6059,
+        "sha256": "6cdaba20bcc5dfe7a02c04871a5028cb52fcd2919bc2c02837a77789e9058d4a",
         "status": "documented_not_activated"
       },
       "discord_threads": {
@@ -10867,13 +10867,19 @@
           "intraday": true,
           "daily": true,
           "campaign_creation": true
+        },
+        "rules_message_readback": {
+          "message_id": "1540474032598683669",
+          "content_sha256": "c79c2edaa5384902c560ffcfd16533f4d202a2ba083329b81e3e4c578bfb7bb8",
+          "http": 200,
+          "mentions": 0
         }
       },
       "meta_writes": 0,
       "crons": 0,
       "purpose": "Track the fail-closed onboarding of CREATIVE_CUT_24H for CPV account 05 without activating campaigns, writes or schedules.",
-      "status": "threads_and_member_sync_verified_onboarding_pending",
-      "updated_at": "2026-08-28T13:52:02Z"
+      "status": "threads_rules_and_member_sync_verified_onboarding_pending",
+      "updated_at": "2026-08-28T13:58:08Z"
     }
   ],
   "profile_skill_references": [

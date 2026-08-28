@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.45
+version: 1.0.46
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
