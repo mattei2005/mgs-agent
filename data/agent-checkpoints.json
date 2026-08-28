@@ -423,12 +423,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Acompanhar os ciclos automáticos até B001-4 atingir 16/16, B002-3 10/10 e B004-4 12/12 roles aceitas/resolvidas; validar safe_for_sheet=true, reconciliação integral e ausência de erros/escritas indevidas por app.",
+      "next_step": "Acompanhar os ciclos automáticos até B009-3 atingir 17/17 roles aceitas/resolvidas; validar safe_for_sheet=true, reconciliação integral e ausência de erros/escritas indevidas. Manter acompanhamento separado do B011.",
       "objective": "Manter os apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-3 via DTR/Graph.",
-      "source": "Discord thread 1543008173294747729; message 1543012433138810990 plus mid-turn B002-3/B004-4 instructions; data/meta-app-registry.json; data/meta-app-role-monitor-state.json; Sheet Migracao 22/06; Meta Graph live preflights.",
-      "state": "b001-4, b002-3 e b004-4 substituíram b001-3, b002-2 e b004-3. registry, credenciais roteadas e estados app-scoped foram migrados. os três estão ativos, sem pausa e com quatro checks graph http 200. b001-4 está em 2/16, b002-3 em 1/10 e b004-4 em 1/12; safe_for_sheet=false bloqueia x/escritas até as aceitações pendentes.",
+      "source": "Discord thread 1543008173294747729; message 1543017636894343219; data/meta-app-registry.json; data/meta-app-role-monitor-state.json; Sheet Migracao 22/06; Meta Graph live preflight.",
+      "state": "b009-3 substituiu b009-2. registry, credencial roteada e estado app-scoped foram migrados. b009-3 está ativo, sem pausa, com quatro checks graph http 200 e 1/17 role aceita; safe_for_sheet=false bloqueia x/escritas até 17/17. b001-4, b002-3 e b004-4 permanecem ativos. b011 segue como único deleted-app error.",
       "thread_id": "1543008173294747729",
-      "updated_at": "2026-08-28T21:55:50+00:00"
+      "updated_at": "2026-08-28T22:09:43+00:00"
     },
     {
       "agent": "zeus",
@@ -1392,5 +1392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-28T21:55:50+00:00"
+  "updated_at": "2026-08-28T22:09:43+00:00"
 }

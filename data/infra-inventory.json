@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-08-28T17:58:12-04:00",
-    "generated_by": "infra-discovery.sh + Zeus B004-4 cutover readback"
+    "updated_at": "2026-08-28T18:11:27-04:00",
+    "generated_by": "infra-discovery.sh + Zeus B009-3 cutover readback"
   },
   "system_packages": [
     {
@@ -1560,21 +1560,21 @@
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
       "size_bytes": 367,
-      "modified_at": "2026-08-28T17:53:09-04:00",
-      "sha256": "ad86f257efdcc8225fc8fb6780ab5da272b75f8b95697a0bc98302113d65bf43",
+      "modified_at": "2026-08-28T18:03:12-04:00",
+      "sha256": "b28d1a0fed2ab0e04f814506ce51196bb5561415e176f2ea726c7dbace757fcb",
       "mode": "manual",
       "scope": [],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1543012433138810990",
-      "validation": "JSON PASS; B004-3/B004-4 contained during baseline; pause cleared only after two scoped cycles proved zero errors, zero alerts and zero Sheet writes.",
-      "updated_at": "2026-08-28T17:56:40-04:00",
-      "source_report": "discord:#alerts-infra/1543016747085340774",
-      "backup": "/root/mgs-agent/backups/meta-app-b0044-cutover-20260828-175238/meta-app-role-alert-pause.json.before",
+      "authorization_message_id": "1543017636894343219",
+      "validation": "JSON PASS; B009-2/B009-3 contained during baseline; pause cleared only after two scoped cycles proved zero errors, zero alerts and zero Sheet writes.",
+      "updated_at": "2026-08-28T18:10:23-04:00",
+      "source_report": "discord:#alerts-infra/1543020111542100031",
+      "backup": "/root/mgs-agent/backups/meta-app-b0093-cutover-20260828-180238/meta-app-role-alert-pause.json.before",
       "backup_sha256": "e2851492aaed297d414a10e34c6c7a5b70347f11ddd7c5b4f1e0b94a125dd034",
-      "resume_condition": "None; B004-4 is active and unpaused.",
-      "description": "Canonical app-alert pause file; no app is paused after validated B004-4 cutover.",
-      "last_change": "Temporary B004-3/B004-4 containment cleared after B004-4 live baseline and second-cycle readback.",
+      "resume_condition": "None; B009-3 is active and unpaused.",
+      "description": "Canonical app-alert pause file; no app is paused after validated B009-3 cutover.",
+      "last_change": "Temporary B009-2/B009-3 containment cleared after B009-3 live baseline and second-cycle readback.",
       "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
     },
     {
@@ -2036,11 +2036,11 @@
       "schedule": "*/3 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for the current B001-B012 replacement lineage including B001-4/B002-3/B004-4/B005-3/B006-3/B007-2; B013-3 remains on the dedicated DTR route.",
-      "validation": "Enabled/scheduled. Two scoped B004-4 cycles returned zero errors/alerts/writes. Scheduled 12-item cycle at 2026-08-28T17:55:43-04:00 loaded B001-4/B002-3/B004-4 exact items; all three replacements stayed healthy with zero consecutive errors. Full-cycle errors_count=2 and alerts_sent=1 came only from pre-existing B009-2/B011 deleted-app incidents.",
-      "updated_at": "2026-08-28T17:56:40-04:00",
-      "last_observed_status": "scheduled_ok_with_2_unrelated_existing_deleted_app_errors_at_2026-08-28T17:55:43-04:00",
-      "reconciliation": "B001-4 active 2/16, B002-3 active 1/10, B004-4 active 1/12; all unpaused and fail-closed for Sheet writes until expected roles are accepted.",
+      "purpose": "Registry-driven Meta app roles/admin and Sheet reconciliation for the current B001-B012 replacement lineage including B001-4/B002-3/B004-4/B005-3/B006-3/B007-2/B009-3; B013-3 remains on the dedicated DTR route.",
+      "validation": "Enabled/scheduled. Two scoped B009-3 cycles returned zero errors/alerts/writes. Full 12-item cycle at 2026-08-28T18:07:49-04:00 loaded exact B009-3 item and kept consecutive_errors=0; only remaining deleted-app error is the pre-existing B011 incident.",
+      "updated_at": "2026-08-28T18:10:23-04:00",
+      "last_observed_status": "scheduled_ok_b0093_healthy_with_1_unrelated_existing_deleted_app_error_at_2026-08-28T18:07:49-04:00",
+      "reconciliation": "B009-3 active 1/17, unpaused and fail-closed for Sheet writes until expected roles are accepted.",
       "state": "scheduled",
       "next_run_at": "2026-08-28T17:57:00-04:00"
     },
@@ -4023,17 +4023,17 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 45443,
-      "modified_at": "2026-08-28T17:55:27-04:00",
-      "sha256": "fbdfebe98efa907a8362a7e7f6952ad15e1fc40a68d53719a302aecfae067374",
+      "size_bytes": 47026,
+      "modified_at": "2026-08-28T18:09:19-04:00",
+      "sha256": "aedf79ca78c45254d3d60383d9848ccd839e054854b5b2f0c0ebe6044e9a2273",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Current production route pack for B001-4/B002-3/B004-4 replacement cutovers, registry-driven B001-B012 monitoring and dedicated B013-3 routing.",
-      "validation": "Runtime and versioned mirror SHA match; current 11-app set/channel map use B001-4/B002-3/B004-4; live Graph/Sheet and scoped production cycles validated.",
-      "updated_at": "2026-08-28T17:56:40-04:00",
-      "source_report": "discord:#alerts-infra/1543016747085340774",
-      "last_change": "Superseded B004-3 current-route references with B004-4 while preserving B004-3 as historical context.",
+      "description": "Current production route pack for B001-4/B002-3/B004-4/B009-3 replacement cutovers, registry-driven B001-B012 monitoring and dedicated B013-3 routing.",
+      "validation": "Runtime and versioned mirror SHA match; current 11-app set/channel map use B001-4/B002-3/B004-4/B009-3; live Graph/Sheet, two scoped cycles and one full scheduled cycle validated.",
+      "updated_at": "2026-08-28T18:10:23-04:00",
+      "source_report": "discord:#alerts-infra/1543020111542100031",
+      "last_change": "Superseded B009-2 current-route references with B009-3 while preserving B009-2 as historical context.",
       "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
     },
     {
@@ -6259,13 +6259,13 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 12696,
-      "modified_at": "2026-08-28T17:54:00-04:00",
-      "sha256": "6a33e463b4078655b4429e87fe94b778efd925467ecc74bbb16c99bfcd66d448",
+      "size_bytes": 13556,
+      "modified_at": "2026-08-28T18:07:51-04:00",
+      "sha256": "62e81d1f79d5486599161d6a328036211e32ba907f57d7dcd1e8650865b9ce36",
       "mode": "manual-authorized",
-      "source_report": "discord:#alerts-infra/1543016747085340774",
+      "source_report": "discord:#alerts-infra/1543020111542100031",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1543012433138810990",
+      "authorization_message_id": "1543017636894343219",
       "scope": [
         "B001-4",
         "B002-3",
@@ -6275,16 +6275,16 @@
         "B006-3",
         "B007-2",
         "B008-2",
-        "B009-2",
+        "B009-3",
         "B010-2",
         "B011",
         "B012",
         "B013-3"
       ],
-      "validation": "JSON PASS; B004-4 exact 1Password metadata and four Graph checks HTTP 200; production baseline 1/12 with visible identity resolved; safe_for_sheet=false; two scoped cycles had zero errors/alerts/Sheet writes; scheduled 12-item cycle loaded exact B004-4 item and kept consecutive_errors=0.",
-      "updated_at": "2026-08-28T17:56:40-04:00",
-      "last_change": "Replaced active B004-3 with B004-4, updated exact 1Password routing/admin/expected roles, reset predecessor app-scoped state and activated fail-closed monitoring.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0044-cutover-20260828-175238/meta-app-registry.json.before",
+      "validation": "JSON PASS; B009-3 exact 1Password metadata and four Graph checks HTTP 200; production baseline 1/17 with visible identity resolved; safe_for_sheet=false; two scoped cycles had zero errors/alerts/Sheet writes; full 12-item scheduled cycle loaded exact B009-3 item and kept consecutive_errors=0.",
+      "updated_at": "2026-08-28T18:10:23-04:00",
+      "last_change": "Replaced active B009-2 with B009-3, updated exact 1Password routing/admin/expected roles, reset predecessor app-scoped state and activated fail-closed monitoring.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0093-cutover-20260828-180238/meta-app-registry.json.before",
       "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
     },
     {
@@ -15129,9 +15129,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 125721,
-      "md5": "b77b11d4a5c81692c3f65a9c8cf9bd33",
-      "modified_at": "2026-08-28T17:55:50-04:00"
+      "size_bytes": 125666,
+      "md5": "3f284589220583d70fdcddcc559e0355",
+      "modified_at": "2026-08-28T18:09:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -15297,9 +15297,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-inbox.jsonl",
-      "size_bytes": 9899,
-      "md5": "ff08c51b4edf76c28904a6c8f81dc27e",
-      "modified_at": "2026-08-28T17:55:50-04:00"
+      "size_bytes": 10370,
+      "md5": "32d7dbc425c42fd80fa71487386eac4a",
+      "modified_at": "2026-08-28T18:09:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -15327,15 +15327,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 12696,
-      "md5": "cd79d3958ce0ad5be267cf030723ae36",
-      "modified_at": "2026-08-28T17:54:00-04:00"
+      "size_bytes": 13556,
+      "md5": "fafa6c700e72f9119980608493211346",
+      "modified_at": "2026-08-28T18:07:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
       "size_bytes": 367,
-      "md5": "71d9c7398af0f7f2ac0699160c229145",
-      "modified_at": "2026-08-28T17:53:09-04:00"
+      "md5": "1aaa4cbecbf94fb8dd48363485713208",
+      "modified_at": "2026-08-28T18:03:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
@@ -15351,9 +15351,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 79384,
-      "md5": "bc315c45114d48054db321d919e72b92",
-      "modified_at": "2026-08-28T17:55:44-04:00"
+      "size_bytes": 76633,
+      "md5": "33329f975d622d5c28db9ac5ec45e1ba",
+      "modified_at": "2026-08-28T18:07:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -15591,9 +15591,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 45443,
-      "md5": "efad431e0ecdc108af5a5c02fa0d1a13",
-      "modified_at": "2026-08-28T17:55:27-04:00"
+      "size_bytes": 47026,
+      "md5": "7fd7191c77ff99c797f134afe24c5759",
+      "modified_at": "2026-08-28T18:09:19-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",

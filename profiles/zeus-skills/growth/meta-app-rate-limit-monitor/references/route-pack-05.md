@@ -63,6 +63,24 @@ Rodolfo explicitly replaced retired `B004-3` with `B004-4`. Current canonical ru
 
 Historical note: B004-3 previously completed 12/12, but that app and its role IDs are retired and must not be treated as current.
 
+### Current B009-3 cutover — 2026-08-28
+
+Rodolfo explicitly replaced retired `B009-2` with `B009-3`. Current canonical runtime:
+
+- app key: `B009-3`;
+- 1Password item: `BOT B009-3 Token - Amoey Pnr`, with `app_name=B009-3`;
+- Discord channel ID remains `1521252284623884288`; the live channel name remains `b009-2-app-status` until a separate rename is authorized;
+- live token profile is `Amoey Pnr`;
+- app metadata, `/roles`, `/me`, and `debug_token` return HTTP 200; token is valid and bound to the exact B009-3 app ID;
+- the canonical Sheet has 17 `NO APP = B009-3` assignments, with no blank or duplicate segurador identity;
+- the first production baseline exposes 1/17 accepted role, resolved to Amoey Pnr. Store `expected_sheet_roles=17`; while 16 roles remain pending, `safe_for_sheet=false` blocks Sheet X writes;
+- production state was reset and rebuilt from B009-3 app-scoped IDs; never reuse the deleted B009-2 app state, IDs, errors or cooldowns;
+- temporary B009-2/B009-3 notification containment was cleared only after two scoped cycles proved four healthy Graph checks, zero errors, zero alerts and zero Sheet writes;
+- the next full registry-driven cycle loaded the exact B009-3 item and kept it healthy with `consecutive_errors=0`; the only remaining deleted-app error is B011;
+- B009-3 is active and unpaused so future accepted roles alert normally.
+
+Historical note: B009-2 had entered Meta restriction/deletion and accumulated 29 errors before replacement. It is retired and must not remain in the active registry.
+
 Identity-resolution correction: Meta can return HTTP 500 for the multi-ID user-token lookup even while each individual `/{role_id}?fields=id,name` succeeds. The monitor now tries bounded multi-ID first, reuses exact same-ID names from prior state, and individually resolves only genuinely new unresolved IDs up to a hard cap of 20. This makes replacement-app onboarding self-healing without creating a per-cycle N+1 quota drain. Persist `cache_resolved_count`, individual request/resolution counts and statuses in state; when unresolved identities exceed the cap, fail closed for Sheet reconciliation.
 
 ### Current B006-3 cutover — 2026-08-17
@@ -94,7 +112,7 @@ Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
 Scope          Registry-driven current B001-B010 replacement lineage, including B001-4/B002-3/B004-4/B005-3/B006-3. B013-3 is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
-Channels       B001-4 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-2 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-3 1521251961662341160; B006-3 1521252068319297666; B007-2 1520510823426949313; B008-2 1521252172929564744; B009-2 1521252284623884288; B010-2 1521252369331916902
+Channels       B001-4 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-2 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-3 1521251961662341160; B006-3 1521252068319297666; B007-2 1520510823426949313; B008-2 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-2 1521252369331916902
 ```
 
 Use the Meta roles cron for the current registry-driven B001–B012 app lineage. B013-3 remains on the separate DTR/ChatPion route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`.
@@ -156,7 +174,7 @@ If the same B013 run detects material link changes and `FORCE_LIVE_ALERT=1`, the
 
 B013 summary cards must visually follow the accepted B010 native embed: title `Meta APP - B013`, one concise live-data description, yellow `ATENÇÃO` only when pending profiles exist, and compact inline fields in this order: `ESTADO`, `CONTAGEM`, `PENDENTES`, `PÁGINAS`, `DTR`, `META`. Keep DTR/Graph diagnostics out of the prose. The three-message layout remains: native summary embed, complete current-user table, then movements/confirmed removals. A force-live snapshot must not replay cached additions; show `ADICIONADOS AGORA` as `Nenhum.` unless that same fresh run proves a real addition. Omit the entire inconclusive section when there are no inconclusive profiles.
 
-For “todos os 11 canais”, validate the registry-driven current set: `B001-4`, `B002-3`, `B003-2`, `B004-4`, `B005-3`, `B006-3`, `B007-2`, `B008-2`, `B009-2`, `B010-2`, and `B013-3`. B013-3 routes to the dedicated DTR/ChatPion monitor at channel ID `1522830283240505385`; there must be no stale alternate runtime state, script, Sheet label, or alert title.
+For “todos os 11 canais”, validate the registry-driven current set: `B001-4`, `B002-3`, `B003-2`, `B004-4`, `B005-3`, `B006-3`, `B007-2`, `B008-2`, `B009-3`, `B010-2`, and `B013-3`. B013-3 routes to the dedicated DTR/ChatPion monitor at channel ID `1522830283240505385`; there must be no stale alternate runtime state, script, Sheet label, or alert title.
 
 On 2026-08-06 Rodolfo retired B012 after the Meta app became inactive and activated B013 as the DTR/ChatPion replacement. The existing Discord channel retained ID `1522830283240505385` and was renamed to `#b013-app-status`. The current `BOT B013 Token` item reuses the immutable production item ID previously pinned by the B012 monitor; the old B012 runtime therefore had to be paused before cutover to prevent it from evaluating B012 rows with B013 credentials. The separate `BOT B013` reserve item remains non-operational. Production pins the unique current `BOT B013 Token` item by immutable ID and fails closed on title/identity drift. B013 is one of the 11 operational channels, not a reserve or a `/roles` app.
 
@@ -171,7 +189,7 @@ Rodolfo approved one human-readable production pattern for every current registr
 - The embed uses plain manager-facing sections: `O que pode acontecer`, `O que fazer agora`, and `Confirmação do monitor`. Keep the raw Meta phrase only in the final confirmation section; do not expose the generic technical monitor error as the main explanation.
 - Discord cannot render regular message content below an embed in the same message. Send the lower `🚨🚨🚨🚨🚨.` as the immediately following message; the final period prevents Discord jumbo-emoji sizing.
 - Use a dedicated `app_restricted` cooldown key with the daily blocked-app cooldown. Do not change presentation or recipients for unrelated rate-limit, transient API, role-delta, recovery, or generic script-error alerts.
-- Scope is the current 12-app role registry: B001-4, B002-3, B003-2, B004-4, B005-3, B006-3, B007-2, B008-2, B009-2, B010-2, B011, and B012. B013-3 remains excluded on its dedicated DTR/ChatPion route.
+- Scope is the current 12-app role registry: B001-4, B002-3, B003-2, B004-4, B005-3, B006-3, B007-2, B008-2, B009-3, B010-2, B011, and B012. B013-3 remains excluded on its dedicated DTR/ChatPion route.
 - Preview/canary must use the real embed in the current review thread with role notifications suppressed, then compare production-render helper output against Discord readback. Do not send a validation alert to an app-status channel unless Rodolfo explicitly asks.
 
 The production monitor cadence is:
@@ -230,7 +248,7 @@ Implementation rules:
 - Auto-discover 1Password items matching BOT Bxxx Token when MGS_META_APP_ROLE_ITEMS is unset.
 - Use the 1Password item code (B001/B002/etc.) as the state key; do not trust copied/stale app_name fields. Replacement apps may be named with a suffix like `BOT B005-2 Token`; keep the replacement label visible in alert titles/`App` field/state (`B005-2`), while mapping it to the same operational Discord channel (`#b005-app-rate-limit`). Do not silently display it as `B005`.
 - B013-3 is the current canonical dedicated DTR app name. Use the exact registry-pinned 1Password item, current `NO APP = B013-3`, `b013-dtr-link-watch.sh`, and state `/root/mgs-agent/data/b013-dtr-link-monitor-state.json`. The script must fail closed unless credential metadata and channel routing still match the registry. Retired B011/B012/B013/B013-2 labels are historical only and must remain excluded from generic `/roles` and Sheet reconciliation.
-- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope is registry-driven: the current B001–B010 replacement lineage plus B013-3. As of 2026-08-28 this is exactly `B001-4`, `B002-3`, `B003-2`, `B004-4`, `B005-3`, `B006-3`, `B007-2`, `B008-2`, `B009-2`, `B010-2`, and `B013-3`. B013-3 must route through the dedicated DTR monitor, never the Meta `/roles` monitor.
+- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope is registry-driven: the current B001–B010 replacement lineage plus B013-3. As of 2026-08-28 this is exactly `B001-4`, `B002-3`, `B003-2`, `B004-4`, `B005-3`, `B006-3`, `B007-2`, `B008-2`, `B009-3`, `B010-2`, and `B013-3`. B013-3 must route through the dedicated DTR monitor, never the Meta `/roles` monitor.
 - Current Sheet assignment parsing must preserve alpha and hyphen suffixes such as `B001-4`, `B002-3`, `B004-4`, `B005-3`, `B006-3`, `B007-2`, and `B013-3`. The live assignment header is `NO APP` after the 2026-08-13 rebuild; do not normalize replacement labels to predecessor app keys, and do not fall back to blank `APP PROVISORIO` rows.
 - B013 is an Advanced Access + ChatPion connection app: seguradores are not expected to be app roles/admins. Do not mark B013 sheet rows as removed based on `/roles`; preserve them in `ROLE_RECONCILIATION_EXCLUDED_APPS`. The separate DTR page-token monitor owns B013 reconciliation.
 - The default B013 source set is every Sheet row with current `NO APP = B013`, including rows already marked `X`; each row must remain monitored so a valid reconnection clears `X` automatically. `Migracao` is informational unless Rodolfo explicitly requests a filtered audit.
@@ -275,7 +293,7 @@ B005-3  #b005-3-app-status  1521251961662341160
 B006-3  #b006-2-app-status  1521252068319297666
 B007-2  #b007-app-rate-limit  1520510823426949313
 B008  #b008-app-rate-limit  1521252172929564744
-B009  #b009-app-rate-limit  1521252284623884288
+B009-3  #b009-2-app-status  1521252284623884288
 B010  #b010-app-rate-limit  1521252369331916902
 ```
 
