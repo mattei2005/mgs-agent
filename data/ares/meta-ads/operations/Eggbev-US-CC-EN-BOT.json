@@ -85,6 +85,88 @@
   "campaign_creation_policy": "pending_review",
   "creative_policy": "pending_review",
   "smart_bidding_reconciliation": "pending_review",
+  "page_lead_guardrail": {
+    "policy_approved": true,
+    "status": "approved_pending_fixed_thread_route_and_scheduler_runtime",
+    "authorized_by": "Nicolas",
+    "authorized_by_discord_id": "1055570806945620030",
+    "authorized_at_et": "2026-08-29T13:21:16-04:00",
+    "authorization_source": "discord:thread:1543280854024060999",
+    "purpose": "No campaign may remain active and able to spend on a page whose Smart Bidding LEADS is strictly greater than 5000.",
+    "scope": {
+      "account_id": "1034081997659047",
+      "account_alias": "Eggbev-US-CC-EN-01-G006",
+      "campaign_selection": "all effectively ACTIVE campaigns with at least one effectively ACTIVE ad",
+      "action_level": "campaign",
+      "action": "set status PAUSED",
+      "budget_write": false,
+      "delete": false,
+      "auto_reactivate": false
+    },
+    "source": {
+      "system": "Smart Bidding Messenger live API",
+      "credential_item": "Ares - Smartbidding Dashboard",
+      "publisher_name": "Eggbev",
+      "endpoint": "/campaigns/Messenger",
+      "metric": "LEADS",
+      "operator": ">",
+      "threshold": 5000,
+      "join_keys": [
+        "UTM_CAMPAIGN exact pg_XXXXX",
+        "FB_PAGE_ID exact readback against Meta creative page_id"
+      ],
+      "ambiguous_or_missing_mapping": "fail_closed_no_write",
+      "leads_total_is_not_the_action_metric": true
+    },
+    "restriction_reporting": {
+      "field": "RESTRICTED_UNTIL",
+      "active_definition": "RESTRICTED_UNTIL date greater than or equal to current America/New_York date",
+      "label": "Smart Bidding restriction state; not independent proof of a live DTR #2022 restriction"
+    },
+    "latest_intraday_reporting": {
+      "meta_date_preset": "today",
+      "level": "campaign",
+      "fields": [
+        "Amount spent",
+        "Purchase ROAS",
+        "Messaging results",
+        "Cost per messaging conversation started",
+        "CPM",
+        "CTR"
+      ],
+      "missing_metrics": "report N/D; do not invent"
+    },
+    "schedule": {
+      "frequency_minutes": 15,
+      "timezone": "America/New_York",
+      "run_all_day": true
+    },
+    "discord": {
+      "thread_name": "Limite de Leads — Eggbev",
+      "thread_id": null,
+      "separate_from_intraday": true,
+      "required_fields": [
+        "page name",
+        "UTM_CAMPAIGN",
+        "LEADS",
+        "restriction state",
+        "campaigns paused",
+        "America/New_York timestamp",
+        "latest intraday snapshot",
+        "Meta readback count"
+      ]
+    },
+    "runtime": {
+      "write_enabled": false,
+      "blocked_reason": "missing_fixed_discord_thread_id_and_scheduler_gateway_not_running",
+      "runner": "/root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py",
+      "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh",
+      "cron_name": "Eggbev limite de leads 15min",
+      "cron_id": null,
+      "no_agent": true,
+      "deliver": "local"
+    }
+  },
   "scheduler_jobs": {},
   "write_enabled": false,
   "activation_enabled": false,
