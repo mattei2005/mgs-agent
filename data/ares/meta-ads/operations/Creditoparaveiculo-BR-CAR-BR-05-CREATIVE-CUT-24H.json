@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "onboarding_pilot_paused_authorized",
+  "status": "onboarding_paused_media_gate",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -149,8 +149,8 @@
     "implement resumable state and deterministic dry-run tests",
     "validate ad-level pause and GET readback in a PAUSED canary before production"
   ],
-  "write_mode": "controlled_write_paused_pilot",
-  "write_enabled": true,
+  "write_mode": "controlled_write_paused_pilot_pending_media",
+  "write_enabled": false,
   "activation_enabled": false,
   "pilot_request": {
     "request_id": "cpv05-first3-20260828",
@@ -165,7 +165,36 @@
     "account_budget_before_usd": 0.0,
     "account_budget_after_creation_if_paused_usd": 0.0,
     "operational_envelope_floor_usd": 500.0,
-    "activation_requires_remaining_strategy_gates": true
+    "activation_requires_remaining_strategy_gates": true,
+    "execution_state": "BLOCKED_MEDIA_SUPPLY",
+    "resume_policy": "same request_id; revalidate sequence, media and Meta state before any write"
+  },
+  "media_gate": {
+    "required_unique_assets": 9,
+    "ready_unique_assets": 4,
+    "missing_unique_assets": 5,
+    "ready_canonical_filenames": [
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_032.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_046.mp4"
+    ],
+    "excluded_by_drive_reconciliation": [
+      "CAR_BR_BR_VID_SEM_ENTRADA_NV_052.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_034.mp4"
+    ],
+    "excluded_retest_attempt_limit": [
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_023.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_NV_054.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_050.mp4"
+    ],
+    "generation_backend": {
+      "provider": "Grok/xAI",
+      "available": false,
+      "reason": "no xAI credentials available for profile ares",
+      "fallback_used": false
+    },
+    "checked_at_utc": "2026-08-29T01:45:32Z"
   },
   "token_reference": {
     "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
