@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.4.0-draft
+version: 0.5.0-draft
 author: Ares
 license: internal
 metadata:
@@ -38,11 +38,12 @@ O estado vivo está nos arquivos canônicos de operação e conta em `data/ares/
 ```text
 Tipo              Thread ID
 ----------------  -------------------
-Regras            1541578622106865815
-Intraday          1541578606076231750
-Diário            1541578596253175858
-Criar campanhas   1541578556037927053
-Limite de Leads   1543312825890381865
+Regras             1541578622106865815
+Intraday           1541578606076231750
+Diário             1541578596253175858
+Criar campanhas    1541578556037927053
+Clonar campanhas   1543333373945053184
+Limite de Leads    1543312825890381865
 ```
 
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente.
@@ -188,6 +189,17 @@ Quando Nicolas pedir relatório, executar leitura real e mostrar todas as págin
 ```
 
 A proximidade percentual é `LEADS / 5000`. O check automático permanece silencioso quando não há ação; relatório de status completo é enviado sob pedido do gestor.
+
+## Thread dedicada — Clonar campanhas
+
+Thread fixa: `Eggbev-US-CC-EN Clonar Campanhas` (`1543333373945053184`). Criada por pedido explícito de Nicolas, com Nicolas, Zeus e Rodolfo confirmados por readback e três mensagens de contrato confirmadas.
+
+Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Criar Campanhas`. Executor obrigatório: `meta-campaign-engine-v3`. Modos não intercambiáveis:
+
+- `pure_clone`: preserva estrutura, público, budget, copy e mídia; reescreve próximo sequencial, naming e tracking; sufixo `COPY C{fonte}`;
+- `clone_prestaged`: preserva lineage/estrutura e usa criativos novos aprovados, reconciliados e pre-stageados.
+
+Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e, quando aplicável, criativos/copy. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
 
 ## Runtime ROAS e reporting construído
 
