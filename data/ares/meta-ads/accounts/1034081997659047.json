@@ -19,7 +19,17 @@
         "nicolas_discord_id": "1055570806945620030",
         "budget_write_authority": "pending_explicit_eggbev_rule_review"
       },
-      "write_mode": "disabled_pending_operational_contract",
+      "write_mode": "disabled_pending_operational_contract_with_scoped_guardrail_pending_activation",
+      "scoped_write_exceptions": {
+        "page_lead_guardrail": {
+          "policy_approved": true,
+          "runtime_enabled": false,
+          "action": "pause campaign when live Smart Bidding LEADS > 5000 after exact UTM_CAMPAIGN + FB_PAGE_ID reconciliation",
+          "blocked_reason": "missing fixed Discord thread ID and scheduler gateway not running",
+          "authorized_by": "Nicolas",
+          "authorized_at_et": "2026-08-29T13:21:16-04:00"
+        }
+      },
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",
       "credential_storage_policy": "reference_only; secret remains in 1Password and must never be copied into config, skill, audit or chat",
