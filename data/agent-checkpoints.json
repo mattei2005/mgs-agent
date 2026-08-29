@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Fechar com Nicolas as decisões de zero-insight Phase 2, status inicial de criação, política de escala, precedência/freshness Meta versus Smart Bidding e intervenção manual; depois aprovar onboarding/extensão Eggbev no Engine v3 e validar offline/plan antes de canário.",
-      "objective": "Auditar o funcionamento completo Eggbev do briefing aos resultados, corrigir furos seguros e preparar a atualização de produção",
+      "next_step": "Nicolas deve definir frequência/cooldown/teto da escala +30% e esclarecer o status da criação normal versus canário técnico. Engine v3 e Smart Bidding conta 01 seguem blockers; nenhum budget write ou cron novo autorizado.",
+      "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento e recovery",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "auditoria ponta a ponta concluída. live: conta ativa usd/et, zero campanhas/ads/spend, smart bidding sem conta 01, ads zero results ativa, engine sem eggbev. fase 1/fase 2/diário/leads executados read-only; 47 testes pass. furo corrigido: rollover diário preserva proveniência de pausas ares. contrato registra 15 gaps: 4 críticos, 4 altos, 6 médios e 1 baixo. criação/clones/roas write/roas-diário cron continuam bloqueados; zero meta write e zero cron change.",
+      "state": "decisões nicolas 2026-08-29 persistidas: fase 2 sem linha corta como n/d; meta purchase roas vence divergência; freshness smart bidding 2h; intervenção manual preserva proveniência e exige revisão do conjunto; ads on 1.1 ausente por readback; escala +30% possui planner dry-run, write bloqueado. 55 testes pass. guardrail lauren tucker pg_13829 em 5239 leads pausou 1 campanha com get confirmado; 0 ads ativos; alerta entregue; segunda execução idempotente sem write/post.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T19:42:34+00:00"
+      "updated_at": "2026-08-29T21:17:46+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T19:42:34+00:00"
+  "updated_at": "2026-08-29T21:17:46+00:00"
 }

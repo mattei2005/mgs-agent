@@ -806,7 +806,7 @@
       "ADS ON 1.1": "absent; Nicolas had already removed the remaining target, so Ares performed no DELETE",
       "ADS ZERO RESULTS": "DISABLED; no Ares write in this update"
     },
-    "live_state": {
+    "pre_guardrail_live_state": {
       "campaign": "123 - Lauren Tucker - ENG - US - (pg_13829) 666666",
       "campaign_status": "ACTIVE",
       "active_ads": 3,
@@ -820,6 +820,22 @@
       "lead_guardrail_next_approved_check": "20:00 America/New_York",
       "lead_guardrail_action_if_state_persists": "pause campaign and confirm by GET readback",
       "write_performed_during_audit": false
+    },
+    "latest_guardrail_action": {
+      "at_et": "2026-08-29T17:15:53-04:00",
+      "reason": "Lauren Tucker / pg_13829 had 5239 LEADS, strictly above 5000, while campaign and ads were effectively active",
+      "mode": "approved scoped controlled_write",
+      "campaigns_planned": 1,
+      "campaigns_paused_confirmed": 1,
+      "alerts_delivered": 1,
+      "mapping_issues": 0,
+      "post_readback": {
+        "campaign_status": "PAUSED",
+        "campaign_effective_status": "PAUSED",
+        "active_ads": 0,
+        "http_status": 200
+      },
+      "automatic_reactivation": false
     },
     "current_open_gap_keys": [
       "engine_onboarding",
@@ -847,5 +863,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T17:08:20-04:00"
+  "updated_at": "2026-08-29T17:16:35-04:00"
 }

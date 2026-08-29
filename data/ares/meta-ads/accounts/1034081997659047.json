@@ -31,7 +31,7 @@
         "nicolas_discord_id": "1055570806945620030",
         "budget_write_authority": "Nicolas approved USD 45 only for clone_page_switch after explicit approval of the final per-request summary; other budgets remain request-scoped and gated"
       },
-      "write_mode": "disabled_pending_operational_contract_with_scoped_guardrail_pending_activation",
+      "write_mode": "disabled_general_with_scoped_page_lead_guardrail_active",
       "runtime_routes": {
         "campaign_creation": {
           "contract_approved": true,
@@ -79,7 +79,9 @@
           "action": "pause campaign when live Smart Bidding LEADS > 5000 after exact UTM_CAMPAIGN + FB_PAGE_ID reconciliation",
           "blocked_reason": "scheduler gateway not running",
           "authorized_by": "Nicolas",
-          "authorized_at_et": "2026-08-29T13:21:16-04:00"
+          "authorized_at_et": "2026-08-29T13:21:16-04:00",
+          "last_controlled_write_at_et": "2026-08-29T17:15:53-04:00",
+          "last_result": "Lauren Tucker pg_13829 at 5239 LEADS; one campaign pause confirmed by GET; zero active ads after action; one alert delivered"
         }
       },
       "scheduler_readback": {

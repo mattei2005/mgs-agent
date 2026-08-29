@@ -20,7 +20,7 @@ Use quando Rodolfo ou Nicolas pedir revisão de regras, análise, relatório, ca
 ## Estado atual
 
 ```text
-Status do contrato       runners ROAS/Diário construídos; aguardando dados reconciliados e dry-run com entrega
+Status do contrato       runners ROAS/Diário observando entrega live; ROAS e budget writes seguem bloqueados
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
@@ -91,7 +91,8 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 5. Diário com volume: layout final card único versus card + tabela por campanha.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
-7. Regra nativa `ADS ON 1.1` em `HAS_ISSUES`: manter, desativar ou remover exige decisão específica.
+7. Escala: Nicolas aprovou recomendação de +30% para todas as campanhas com Meta Purchase ROAS estritamente acima do threshold; frequência, cooldown, máximo de execuções/dia e teto/envelope de budget ainda precisam ser definidos antes de qualquer write.
+8. Criação do zero: esclarecer com Nicolas se produção aprovada nasce `ACTIVE` com `start_time` futuro e se um canário técnico separado permanece `PAUSED`.
 
 Cada pendência bloqueia somente a ação dependente; não reabre regras já aprovadas.
 
@@ -128,7 +129,7 @@ Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
 23:00–00:00         sem novo corte/reativação
 ```
 
-Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Fonte indisponível, atrasada ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
+Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Por decisão explícita de Nicolas, ausência completa da linha de insight do anúncio na Fase 2 também é `N/D` e corta. Fonte indisponível, com freshness superior a 2h, sem timestamp verificável ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 
 A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. Se um ad pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente o ad e a campanha no mesmo ciclo, sempre com pré-leitura e readback pós-write.
 
@@ -137,7 +138,7 @@ A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar tod
 - Intraday: um relatório por ciclo e qualquer atualização sob demanda.
 - Núcleo Meta: CPM, Purchase ROAS, custo por resultado/conversa, Results, Budget, Amount spent e CTR.
 - Núcleo Smart Bidding solicitado: Leads/UTM, RPS, ROI drip, performance completa, investimento, receita, receita líquida/estimada e ROI real/estimado.
-- Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva.
+- Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva. Quando Meta Purchase ROAS e Smart Bidding ROI discordarem, **Meta Purchase ROAS vence**; fonte Smart Bidding ausente, sem timestamp verificável ou acima de 2h continua fail-closed para economic writes.
 - Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 - Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.
@@ -198,7 +199,7 @@ Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Cr
 
 Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. O Engine v3 atual não aceita `clone_page_switch`; a regra está aprovada no contrato, mas a execução permanece bloqueada até uma extensão explícita do manifest/executor com testes. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e os campos específicos do modo. Em `clone_page_switch`, mostrar também evidência `LEADS`, Page/`pg_XXXXX`, nome final, links/UTMs, JSON Messenger integral, budget USD 45, início 00:00 ET e todos os status. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
 
-## Auditoria pré-simulação — 2026-08-29
+## Auditoria pré-simulação — 2026-08-29 (histórica)
 
 Todas as seis rotas fixas foram atualizadas com regras, riscos e testes; a thread de status também foi atualizada e duas threads históricas receberam aviso de supersessão mantendo o estado arquivado. Readback confirmou 16/16 mensagens e Nicolas, Zeus e Rodolfo em todos os nove alvos da API. Um HTTP 429 ocorreu após efeito parcial: o recovery fez GET de todas as threads, pulou membros/posts já confirmados e publicou apenas as camadas ausentes; zero duplicatas no readback final.
 
@@ -232,7 +233,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        47 incluindo regressões do guardrail, rollover de proveniência e contrato clone_page_switch
+Testes aprovados        55 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual e escala +30% dry-run
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente
@@ -242,7 +243,7 @@ O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reati
 
 Na leitura real da construção, a conta Meta estava ativa em USD/ET, mas sem campanha/ad/insight; Smart Bidding só expôs a conta 03 e não a conta alvo 01. Portanto, o live dry-run com entrega permanece pendente. Nicolas autorizou desativar `ADS ZERO RESULTS` somente no futuro gate de ativação, com readback exato antes/depois.
 
-## Auditoria ponta a ponta — 2026-08-29
+## Auditoria ponta a ponta — 2026-08-29 15:37 ET (histórica; supersedida abaixo)
 
 Estado comprovado: conta Meta ativa em USD/ET, zero campanhas/ads ativos, zero spend; Fase 1 e Fase 2 executadas em dry-run; Diário live read-only e relatório de LEADS executados; 47 testes aprovados. Smart Bidding continua sem a conta 01 e `ADS ZERO RESULTS` continua ativa, então ROAS write permanece fail-closed.
 
