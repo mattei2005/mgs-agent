@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.2.0-draft
+version: 0.3.0-draft
 author: Ares
 license: internal
 metadata:
@@ -111,8 +111,9 @@ Confirmação identidade FB_PAGE_ID da SB = page_id do creative Meta
 Escopo Meta            campanha efetivamente ACTIVE com ad efetivamente ACTIVE
 Ação                   pausar a campanha inteira; sem budget/delete
 Reativação             nunca automática
-Frequência aprovada    15 minutos, America/New_York
-Thread planejada       Limite de Leads — Eggbev, separada da Intraday
+Frequência aprovada    08:00 e 20:00, America/New_York
+Relatório automático   silencioso sem ação; publicar quando houver pausa ou erro
+Relatório sob pedido   todas as páginas ativas reconciliadas, com LEADS e proximidade por emoji
 ```
 
 Este guardrail é exceção explícita à regra de cortes por ROAS: ROAS atua em anúncios; limite de leads atua na campanha inteira. Mapeamento ausente, duplicado ou divergente é `fail_closed_no_write`. Antes do POST, ler o estado real; depois do POST, fazer GET/readback. POST falho é reconciliado por GET e nunca repetido às cegas.
@@ -126,9 +127,20 @@ Thread fixa           Limite de Leads — Eggbev (`1543312825890381865`)
 Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
 Modo                   dry-run e controlled-write preflight validados
-Cron                   `*/15 * * * *`, no_agent=true, deliver=local, enabled/scheduled
+Cron                   `0 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled
 Estado do scheduler    gateway parado; job salvo, ainda sem disparo automático
 ```
+
+Quando Nicolas pedir relatório, executar leitura real e mostrar todas as páginas exatamente reconciliadas com campanhas e anúncios ativos. Usar **proximidade ao limite**, sem chamar de previsão estatística:
+
+```text
+🟢 0–3.999 LEADS      abaixo de 4k
+🟡 4.000–4.499 LEADS  atenção
+🟠 4.500–5.000 LEADS  muito próxima
+🔴 >5.000 LEADS       pausar campanha e reportar com readback
+```
+
+A proximidade percentual é `LEADS / 5000`. O check automático permanece silencioso quando não há ação; relatório de status completo é enviado sob pedido do gestor.
 
 ## Sequência de implementação
 
