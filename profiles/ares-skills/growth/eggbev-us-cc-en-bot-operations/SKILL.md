@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.12.0-draft
+version: 0.13.0-draft
 author: Ares
 license: internal
 metadata:
@@ -73,9 +73,12 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
 - Nunca reutilizar números de mensagens antigas como estado atual.
 - Horários aprovados: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 em `America/New_York`; aprovação do plano não significa cron aprovado.
+- Renderer v2: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
+- Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; tabela desktop indexada preserva todas as campanhas com paginação Discord fence-safe.
+- Campos por campanha: status atual, `start_time` ET, Budget USD, spend, Purchase ROAS, resultados, custo por conversa, CPM, CTR e observação de reconciliação.
+- Freshness Smart Bidding aparece com timestamp/idade/campo ou `N/D`; sem timestamp ou acima de 2h, métricas SB permanecem `N/D`, nunca zero.
+- RPS, ROI real e ROI estimado continuam `N/D` até fórmula Eggbev aprovada.
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
-- Smart Bidding sem timestamp verificável ou acima de 2h aparece `N/D`, nunca zero.
-- O renderer ainda não mostra Budget, status atual e `start_time` por campanha; layout híbrido final aguarda volume. Declarar essas lacunas e não chamar o relatório de completo.
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
 
@@ -118,7 +121,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
 3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
-5. Diário com volume: layout final card único versus card + tabela por campanha.
+5. Diário: renderer híbrido v2 validado com fixture de 25 campanhas e live read-only; permanecem somente fórmula RPS/ROI, timestamp Smart Bidding e aprovação de automação.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
 7. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
@@ -266,7 +269,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        68 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, criação ACTIVE futura, escala +10%, rota Criar Campanhas e escopo/runtime da thread Diário
+Testes aprovados        73 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, criação ACTIVE futura, escala +10%, rotas Criar Campanhas/Diário e renderer v2 sem omissão/truncamento
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente

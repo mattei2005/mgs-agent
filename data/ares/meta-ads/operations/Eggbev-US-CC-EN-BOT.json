@@ -194,19 +194,22 @@
           "stale campaign or scheduler snapshots"
         ],
         "latest_correction": {
-          "corrected_at_et": "2026-08-29T18:37:15-04:00",
-          "reason": "the Daily thread incorrectly answered a generic rules/automation request with the full Eggbev operation and stale runtime snapshots",
+          "corrected_at_et": "2026-08-29T19:08:30-04:00",
+          "reason": "final renderer review confirmed and corrected ACTIVE-without-insight invisibility, silent 20-row limit, 27-character name truncation, incomplete campaign metrics and hidden Smart Bidding freshness",
           "historical_report_superseded": true,
+          "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
+          "active_prompt_sha256": "252f67ba4ad672bfd60edb2f8695757263c338031009cba4d0d124891660333f",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
-          "tests_passed": 68,
-          "renderer_complete": false,
+          "tests_passed": 73,
+          "renderer_complete_for_read_only": true,
+          "renderer_version": "hybrid_v2",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
-          "audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json"
+          "audit": "data/ares/meta-ads/audit/eggbev/daily-renderer-v2-review-20260829T190830-0400.json"
         }
       }
     }
