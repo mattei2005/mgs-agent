@@ -64,9 +64,15 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     if script == 'monitor-hermes-memory-capacity.py':
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60
-    if script == 'monitor-sb-messenger-token-invalid.py':
-        # Agenda explícita 12,27,42,57: quatro ciclos de 15 minutos.
-        return 60 * 60
+    if (
+        script == 'monitor-sb-messenger-token-invalid.py'
+        and minute == '12,27,42,57'
+        and hour == '*'
+    ):
+        # Agenda principal explícita 12,27,42,57: tolerância de 75 minutos.
+        # O mesmo script também executa retenção diária às 00:05; essa entrada
+        # deve seguir a janela diária genérica, não a cadência do monitor.
+        return 75 * 60
     if script == 'hermes-news-explainer-watchdog.py':
         # Watchdog por minuto: cinco ciclos sem sinal já indicam perda de proteção.
         return 5 * 60
