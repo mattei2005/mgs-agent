@@ -104,6 +104,19 @@
       "required_members_confirmed_on_every_api_updated_thread": ["Nicolas", "Zeus", "Rodolfo"],
       "rate_limit_recovery": "HTTP 429 after partial effects; reconciled all members/messages by GET, skipped confirmed layers, resumed missing posts only, then re-read every target",
       "duplicates_after_recovery": 0
+    },
+    "latest_route_refresh": {
+      "at_et": "2026-08-29T15:24:29-04:00",
+      "requested_by": "Nicolas",
+      "canonical_rules_thread": "1543280854024060999",
+      "previous_rules_thread_superseded": "1541578622106865815",
+      "functional_routes_updated_via_api": 5,
+      "supersession_route_updated_via_api": 1,
+      "api_update_messages_confirmed": 7,
+      "current_rules_thread_updated_by_response": true,
+      "new_clone_mode": "clone_page_switch",
+      "meta_writes": 0,
+      "cron_changes": 0
     }
   },
   "inheritance_policy": {
@@ -256,6 +269,7 @@
       "created": true,
       "archived": false,
       "seed_messages_confirmed": 3,
+      "clone_page_switch_update_messages_confirmed": 2,
       "members_confirmed": ["Nicolas", "Zeus", "Rodolfo"]
     },
     "executor": "meta-campaign-engine-v3",
@@ -673,5 +687,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T15:20:08-04:00"
+  "updated_at": "2026-08-29T15:24:29-04:00"
 }

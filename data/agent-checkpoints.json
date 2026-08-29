@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Nicolas revisar dúvidas no relatório mestre; executar em ordem fixtures ROAS, fixtures LEADS, fórmula/layout Diário, onboarding v3, validate/plan criação, validate/plan clone, canário aprovado, comparação API/Ads Manager/Smart Bidding, dry-run final, controlled-write e só depois crons.",
-      "objective": "Preparar operação Eggbev BOT para teste sequencial e simulação com regras distribuídas nas threads corretas",
+      "next_step": "Implementar extensão explícita do manifest/executor v3 para clone_page_switch somente após aprovação de arquitetura; criar testes offline, validate/plan e apresentar simulação antes de qualquer clone.",
+      "objective": "Consolidar todas as rotas Eggbev e adicionar terceiro modo de clonagem com troca de página/nome",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "inventário encontrou 10 threads no canal. nove foram atualizadas via discord api: seis rotas fixas, uma de status e duas históricas; esta thread recebe o relatório mestre. foram confirmadas 16/16 mensagens, membros nicolas/zeus/rodolfo em todos os nove alvos, e as duas históricas permaneceram arquivadas. recovery de http 429 reconciliou efeitos parciais e publicou somente mensagens ausentes, sem duplicatas. 45 testes passaram. bloqueios: gateway parado, smart bidding sem conta 01, ads zero results ativa, ads on 1.1 has_issues, eggbev ausente do engine v3/media registry, zero campanhas ativas, fórmulas roi/rps e recomendação de threshold pendentes, comando de mudança intraday não implementado.",
+      "state": "rota regras movida por nicolas para a thread atual; antiga regras marcada supersedida. cinco rotas funcionais receberam updates e a rota antiga recebeu redirecionamento: 7/7 mensagens confirmadas. modo clone_page_switch aprovado: duplica integralmente fonte, preserva estrutura/público/placements/estratégia/copy/mídia, troca page, próximo sequencial/nome/pg/utms/json, escolhe menor leads somente quando delegada e reconciliada, usd45, próximo dia 00:00 et, campanha/adset/ads active. engine v3 ainda não suporta o novo modo; zero meta write e zero cron change.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T19:11:39+00:00"
+      "updated_at": "2026-08-29T19:25:20+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T19:11:39+00:00"
+  "updated_at": "2026-08-29T19:25:20+00:00"
 }

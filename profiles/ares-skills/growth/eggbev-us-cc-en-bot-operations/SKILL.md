@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.6.0-draft
+version: 0.7.0-draft
 author: Ares
 license: internal
 metadata:
@@ -38,7 +38,7 @@ O estado vivo está nos arquivos canônicos de operação e conta em `data/ares/
 ```text
 Tipo              Thread ID
 ----------------  -------------------
-Regras             1541578622106865815
+Regras             1543280854024060999
 Intraday           1541578606076231750
 Diário             1541578596253175858
 Criar campanhas    1541578556037927053
@@ -47,6 +47,8 @@ Limite de Leads    1543312825890381865
 ```
 
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente.
+
+Por instrução explícita de Nicolas em 29/08/2026, a rota canônica de **Regras** passou a ser a thread atual `1543280854024060999`. A antiga `Eggbev-US-CC-EN Regras` (`1541578622106865815`) fica supersedida e não recebe novas regras ativas.
 
 ## Escopo Ares
 
@@ -84,8 +86,8 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
 1. Smart Bidding: mapping inequívoco da conta 01, atraso e fórmulas Eggbev de ROI/RPS/receita líquida.
-2. Engine v3: onboarding da conta Eggbev e media registry pre-stageado.
-3. Clonagem: exceção `pure_clone` à regra de criativo novo, naming final sem duplicidade e política de início/status.
+2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
+3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 5. Diário com volume: layout final card único versus card + tabela por campanha.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
@@ -137,7 +139,7 @@ A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar tod
 - Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva.
 - Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
-- Padrão obrigatório das threads fixas: prefixo `Eggbev-US-CC-EN` antes da função, preservando o padrão criado por Rodolfo.
+- Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.
 
 ## Guardrail aprovado — limite de leads por página
 
@@ -190,9 +192,10 @@ Thread fixa: `Eggbev-US-CC-EN Clonar Campanhas` (`1543333373945053184`). Criada 
 Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Criar Campanhas`. Executor obrigatório: `meta-campaign-engine-v3`. Modos não intercambiáveis:
 
 - `pure_clone`: preserva estrutura, público, budget, copy e mídia; reescreve próximo sequencial, naming e tracking; sufixo `COPY C{fonte}`;
-- `clone_prestaged`: preserva lineage/estrutura e usa criativos novos aprovados, reconciliados e pre-stageados.
+- `clone_prestaged`: preserva lineage/estrutura e usa criativos novos aprovados, reconciliados e pre-stageados;
+- `clone_page_switch`: duplica integralmente a fonte, preservando estrutura, público, placements, estratégia, copy e mídia, mas muda a Facebook Page para a página-alvo, reescreve próximo sequencial, nome, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página é indicada por Nicolas; quando Nicolas delegar a escolha, usar a página elegível em entrega com menor `LEADS` no Messenger Pages da Smart Bidding, após match único `UTM_CAMPAIGN + FB_PAGE_ID`. Empate, fonte stale ou mapping inválido bloqueia a escolha automática. Neste modo, budget = USD 45, início = dia seguinte 00:00 `America/New_York` e campanha/ad set/todos os ads ficam `ACTIVE` para o início aprovado.
 
-Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e, quando aplicável, criativos/copy. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
+Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. O Engine v3 atual não aceita `clone_page_switch`; a regra está aprovada no contrato, mas a execução permanece bloqueada até uma extensão explícita do manifest/executor com testes. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e os campos específicos do modo. Em `clone_page_switch`, mostrar também evidência `LEADS`, Page/`pg_XXXXX`, nome final, links/UTMs, JSON Messenger integral, budget USD 45, início 00:00 ET e todos os status. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
 
 ## Auditoria pré-simulação — 2026-08-29
 
@@ -209,13 +212,13 @@ Bloqueios reais antes do canário:
 7. ROI/RPS/receita líquida e recomendação de threshold sem fórmula aprovada;
 8. comando de mudança intraday do threshold ainda não implementado.
 
-Ambiguidades a fechar antes de clone/criação:
+Decisões de clonagem atualizadas:
 
-- `pure_clone` reutiliza mídia/copy, enquanto campanhas novas exigem criativo novo;
-- naming base termina em `Copy`, mas pure clone exige `COPY C{fonte}`;
-- clone deve preservar início/status da fonte ou usar próximo dia 00:00 ET;
-- status final de criação/clone deve ser explicitado no resumo: PAUSED ou ACTIVE com início futuro;
-- layout Diário com volume: card único ou card + tabela por campanha.
+- `pure_clone` e `clone_page_switch` são exceções aprovadas que preservam mídia/copy; campanhas novas e `clone_prestaged` continuam exigindo criativos novos;
+- `pure_clone` usa o sufixo `COPY C{fonte}`; `clone_page_switch` usa o naming canônico com próximo sequencial, página-alvo e novo `pg_XXXXX`;
+- `clone_page_switch` usa USD 45, próximo dia 00:00 ET e campanha/ad set/ads `ACTIVE` para o início aprovado;
+- permanecem pendentes somente o suporte do v3, os campos exatos de JSON/Page no payload e o canário live;
+- layout Diário com volume continua pendente: card único ou card + tabela por campanha.
 
 Ordem de testes: fixtures ROAS → fixtures LEADS → fórmulas/layout Diário → onboarding v3 → validate/plan criação → validate/plan clone → campanha canário aprovada → API×Ads Manager×Smart Bidding → dry-run apresentado → controlled-write/readback → crons.
 
