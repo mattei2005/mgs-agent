@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
-      "next_step": "Zeus deve iniciar o scheduler gateway por fluxo seguro fora desta sessão; depois validar o primeiro disparo automático das 20:00 ET. Enquanto isso, o guardrail permanece executável manualmente.",
-      "objective": "Operar guardrail determinístico Eggbev duas vezes ao dia e pausar campanhas quando a página reconciliada tiver LEADS > 5000",
+      "next_step": "Implementar por testes, validar runtime e publicar consolidado com readback na thread 1543280854024060999.",
+      "objective": "Corrigir integralmente os pontos auditados do guardrail Eggbev LEADS > 5000 e atualizar a thread canônica de Regras",
       "source": "discord:thread:1543312825890381865; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; cron:c3d2499d8c33",
-      "state": "atualização concluída: cron substituído de 15 minutos por 08:00 e 20:00 et; relatório sob pedido mostra todas as páginas ativas com proximidade por emoji; ciclo live validou zero campanhas ativas, zero páginas acima do limite e zero pendências de mapeamento; scheduler hermes continua parado.",
+      "state": "em correção autorizada por nicolas: prompt dedicado, freshness, alertas, gate de horário, auditoria, drift documental, scheduler, testes e publicação canônica.",
       "thread_id": "1543312825890381865",
-      "updated_at": "2026-08-29T17:53:53+00:00"
+      "updated_at": "2026-08-29T23:51:25+00:00"
     },
     {
       "agent": "ares",
@@ -1422,5 +1422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:35:10+00:00"
+  "updated_at": "2026-08-29T23:51:25+00:00"
 }
