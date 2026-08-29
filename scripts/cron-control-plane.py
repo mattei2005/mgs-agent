@@ -131,6 +131,13 @@ def parse_cron_line(line: str) -> dict[str, Any] | None:
     script_name = m.group(1) if m else ''
     log_match = re.search(r'>>\s*([^\s]+)', command)
     log_path = log_match.group(1) if log_match else ''
+    retention_mode = '--cleanup-old-messages' in command
+    owner = OWNER.get(script_name, 'Zeus/Infra')
+    risk = RISK.get(script_name, 'não classificado')
+    description = DESCRIPTIONS.get(script_name, 'Sem descrição cadastrada.')
+    if retention_mode:
+        risk = 'médio: exclusão limitada de mensagens Discord anteriores ao dia anterior, com readback'
+        description = 'Executa retenção diária dos alertas Token Messenger inválido; preserva o dia atual, o dia anterior e mensagens não relacionadas.'
     return {
         'schedule': schedule,
         'command': command,
@@ -138,9 +145,9 @@ def parse_cron_line(line: str) -> dict[str, Any] | None:
         'script_path': f'/root/mgs-agent/scripts/{script_name}' if script_name else '',
         'log_path': log_path,
         'uses_flock': 'flock -n' in command,
-        'owner': OWNER.get(script_name, 'Zeus/Infra'),
-        'risk': RISK.get(script_name, 'não classificado'),
-        'description': DESCRIPTIONS.get(script_name, 'Sem descrição cadastrada.'),
+        'owner': owner,
+        'risk': risk,
+        'description': description,
     }
 
 

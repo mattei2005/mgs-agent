@@ -11,11 +11,16 @@ from pathlib import Path
 from unittest.mock import patch
 
 SCRIPT = Path('/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py')
+CRON_CONTROL = Path('/root/mgs-agent/scripts/cron-control-plane.py')
 FIXTURE = Path('/root/mgs-agent/tests/fixtures/sb-messenger-token-invalid.json')
 spec = importlib.util.spec_from_file_location('sb_token_monitor', SCRIPT)
 assert spec and spec.loader
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
+cron_spec = importlib.util.spec_from_file_location('cron_control_plane', CRON_CONTROL)
+assert cron_spec and cron_spec.loader
+cron_mod = importlib.util.module_from_spec(cron_spec)
+cron_spec.loader.exec_module(cron_mod)
 
 
 class TokenMonitorTests(unittest.TestCase):
@@ -184,6 +189,16 @@ class TokenMonitorTests(unittest.TestCase):
             args = mod.parse_args()
         self.assertTrue(args.cleanup_old_messages)
         self.assertTrue(args.dry_run)
+
+    def test_cron_inventory_labels_retention_mode_accurately(self):
+        job = cron_mod.parse_cron_line(
+            '5 0 * * * flock -n /var/lock/cleanup.lock '
+            '/root/.local/share/mgs/sb-venv/bin/python '
+            '/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py '
+            '--cleanup-old-messages --apply >> /root/mgs-agent/logs/monitor.log 2>&1'
+        )
+        self.assertIn('retenção diária', job['description'])
+        self.assertIn('exclusão', job['risk'])
 
     def test_discord_request_retries_seven_rate_limits_before_success(self):
         attempts = []

@@ -48,6 +48,10 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 ## Schedule and validation
 
 - Canonical cadence: `12,27,42,57 * * * *` with `flock -n` and durable `/root/.local/share/mgs/sb-venv/bin/python` under `xvfb-run -a`.
+- Daily channel retention runs at `5 0 * * *` in the host timezone `America/New_York` with a separate `flock` and `--cleanup-old-messages --apply`.
+- Retention keeps the current ET calendar day plus the complete previous ET calendar day. It deletes only messages whose embed title normalizes to `Token Messenger inválido` and whose Discord timestamp is before yesterday at `00:00 ET`; unrelated/manual messages are preserved.
+- Retention must paginate the full channel, preflight exact IDs, delete sequentially with about 0.45 seconds between requests, honor numeric `retry_after + 0.25s` for up to eight attempts, and repaginate after deletion. Success requires zero eligible messages remaining.
+- Retention status is stored independently under `state.retention`; normal monitor success must not erase its failure counter. After three consecutive retention failures, alert Rodolfo in `#alerts-infra` with the exact blocker.
 - Stale-log watchdog tolerance: 75 minutes for the explicit 15-minute list.
-- Validate with `py_compile`, unit fixtures, mocked Discord POST/GET/reaction handling, live no-op and one authorized canary.
+- Validate with `py_compile`, unit fixtures, mocked Discord POST/GET/reaction/retention handling, live retention dry-run, live retention no-op apply and one authorized canary when delivery itself changes.
 - Production channel reset validated 2026-08-26: six current incidents resent as initial alerts (`1542366078020222997` through `1542366086966804523`), all with both role mentions, exact embed readback, `repeat_count=0`, six active incidents and `pending=null`.

@@ -1195,5 +1195,22 @@
   },
   "last_error": null,
   "last_seen_id": 676207,
-  "pending": null
+  "pending": null,
+  "retention": {
+    "consecutive_failures": 0,
+    "failure_alert_sent_for": 0,
+    "last_check": "2026-08-29T02:07:42-04:00",
+    "last_error": null,
+    "last_result": {
+      "already_missing": 0,
+      "cutoff": "2026-08-28T00:00:00-04:00",
+      "deleted": 0,
+      "eligible": 0,
+      "message_ids": [],
+      "remaining": 0,
+      "scanned": 0,
+      "would_delete": 0
+    },
+    "last_success_date": "2026-08-29"
+  }
 }

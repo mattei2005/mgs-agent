@@ -330,7 +330,7 @@ def discord_request(method: str, path: str, payload: dict[str, Any] | None = Non
     body = None if payload is None else json.dumps(payload, ensure_ascii=False).encode('utf-8')
     headers = {'Authorization': 'Bot ' + token, 'Content-Type': 'application/json', 'User-Agent': 'MGS-Zeus-SB-Token-Monitor/1.0'}
     url = 'https://discord.com/api/v10' + path
-    for attempt in range(4):
+    for attempt in range(8):
         request = urllib.request.Request(url, data=body, method=method, headers=headers)
         try:
             with urllib.request.urlopen(request, timeout=20) as response:
@@ -338,16 +338,24 @@ def discord_request(method: str, path: str, payload: dict[str, Any] | None = Non
                 return response.status, json.loads(raw) if raw else None
         except urllib.error.HTTPError as exc:
             raw = exc.read().decode(errors='ignore')
-            if exc.code == 429 and attempt < 3:
+            if exc.code == 429 and attempt < 7:
                 try:
-                    delay = float(json.loads(raw).get('retry_after', 1.0)) + 0.15
+                    delay = float(json.loads(raw).get('retry_after', 1.0)) + 0.25
                 except Exception:
-                    delay = 1.15
+                    delay = 1.25
                 time.sleep(delay)
+                continue
+            if 500 <= exc.code < 600 and attempt < 7:
+                time.sleep(min(0.5 * (2 ** attempt), 8.0))
                 continue
             if allow_404 and exc.code == 404:
                 return 404, None
             raise RuntimeError(f'Discord HTTP {exc.code} {method} {path}') from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            if attempt < 7:
+                time.sleep(min(0.5 * (2 ** attempt), 8.0))
+                continue
+            raise RuntimeError(f'Discord transport error {method} {path}') from exc
     raise RuntimeError('Discord retry loop exhausted')
 
 
