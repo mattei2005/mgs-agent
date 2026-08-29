@@ -322,6 +322,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
+      "next_step": "Criar a thread Limite de Leads — Eggbev, registrar o thread ID, validar auto-add Zeus+Nicolas, habilitar o runtime scoped e criar cron no_agent=true a cada 15 minutos",
+      "objective": "Ativar guardrail determinístico que pausa campanhas Eggbev quando a página reconciliada tem LEADS > 5000",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "runner, wrapper, contrato e testes concluídos; dry-run live validado; controlled-write bloqueado sem thread fixa e com scheduler gateway parado",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-29T17:30:35+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
       "next_step": "Definir fluxo final do BOT, objetivo/optimization Meta, métrica principal e fonte de resultado antes de estruturar campanhas, regras Intraday/Diário ou crons",
       "objective": "Reconstruir do zero a arquitetura Campaign Ops BOT/Messenger Eggbev US-CC-EN, sem herdar regras de tráfego direto ou da operação anterior",
@@ -1392,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T04:57:11+00:00"
+  "updated_at": "2026-08-29T17:30:35+00:00"
 }

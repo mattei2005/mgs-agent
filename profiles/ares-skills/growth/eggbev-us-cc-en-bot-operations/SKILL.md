@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.1.0-draft
+version: 0.2.0-draft
 author: Ares
 license: internal
 metadata:
@@ -24,8 +24,8 @@ Status do contrato       architecture_review_in_progress
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                disabled_pending_operational_contract
-Crons Eggbev              nenhum
+Write Meta                disabled globally; lead guardrail scoped write approved but runtime blocked
+Crons Eggbev              nenhum; guardrail 15 min pending thread ID + scheduler runtime
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
 ```
@@ -96,6 +96,36 @@ Antes de criar runners ou crons, registrar explicitamente:
 14. Política de campanha nova: sempre PAUSED até gate explícito.
 
 Campos não decididos permanecem `pending_review` e bloqueiam somente a ação dependente.
+
+## Guardrail aprovado — limite de leads por página
+
+Nicolas aprovou o guardrail específico da conta `Eggbev-US-CC-EN-01-G006`:
+
+```text
+Fonte                 Smart Bidding /campaigns/Messenger, publisher Eggbev
+Métrica de ação        LEADS (não LEADS_TOTAL)
+Operador               estritamente > 5000
+Chave primária         UTM_CAMPAIGN exato no padrão pg_XXXXX
+Confirmação identidade FB_PAGE_ID da SB = page_id do creative Meta
+Escopo Meta            campanha efetivamente ACTIVE com ad efetivamente ACTIVE
+Ação                   pausar a campanha inteira; sem budget/delete
+Reativação             nunca automática
+Frequência aprovada    15 minutos, America/New_York
+Thread planejada       Limite de Leads — Eggbev, separada da Intraday
+```
+
+Este guardrail é exceção explícita à regra de cortes por ROAS: ROAS atua em anúncios; limite de leads atua na campanha inteira. Mapeamento ausente, duplicado ou divergente é `fail_closed_no_write`. Antes do POST, ler o estado real; depois do POST, fazer GET/readback. POST falho é reconciliado por GET e nunca repetido às cegas.
+
+O alerta obrigatório inclui página, UTM, LEADS, estado `RESTRICTED_UNTIL` da Smart Bidding, campanhas pausadas, horário ET, snapshot Meta de hoje e contagem de readbacks. `RESTRICTED_UNTIL` é estado da Smart Bidding e não deve ser descrito como prova independente de uma restrição DTR `#2022`.
+
+Runtime:
+
+```text
+Runner   /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
+Wrapper  /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
+Modo     dry-run validado; controlled-write bloqueado até thread ID + runtime
+Cron     não criar/ativar sem thread ID real e gateway scheduler operacional
+```
 
 ## Sequência de implementação
 

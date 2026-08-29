@@ -112,6 +112,51 @@ class EggbevPageLeadGuardrailTests(unittest.TestCase):
         self.assertIn('Reativação automática: não', message)
         self.assertIn('pg_5083', message)
 
+    def test_pause_uses_one_post_and_requires_get_readback(self):
+        class FakeCommon:
+            def __init__(self):
+                self.gets = 0
+                self.posts = 0
+
+            def graph_get(self, path, token, params):
+                self.gets += 1
+                if self.gets == 1:
+                    return 200, {'status': 'ACTIVE', 'effective_status': 'ACTIVE'}, {}
+                return 200, {'status': 'PAUSED', 'effective_status': 'PAUSED'}, {}
+
+            def graph_post_once(self, path, token, params):
+                self.posts += 1
+                return 200, {'success': True}, {}
+
+        fake = FakeCommon()
+        result = mod.reconcile_pause(fake, 'secret-never-printed', {'campaign_id': 'c1', 'campaign_name': 'C1'})
+        self.assertTrue(result['ok'])
+        self.assertEqual(result['stage'], 'paused_confirmed')
+        self.assertEqual(fake.posts, 1)
+        self.assertEqual(fake.gets, 2)
+
+    def test_failed_post_is_reconciled_by_get_without_blind_retry(self):
+        class FakeCommon:
+            def __init__(self):
+                self.gets = 0
+                self.posts = 0
+
+            def graph_get(self, path, token, params):
+                self.gets += 1
+                if self.gets == 1:
+                    return 200, {'status': 'ACTIVE', 'effective_status': 'ACTIVE'}, {}
+                return 200, {'status': 'PAUSED', 'effective_status': 'PAUSED'}, {}
+
+            def graph_post_once(self, path, token, params):
+                self.posts += 1
+                return 500, {'error': {'message': 'transient'}}, {}
+
+        fake = FakeCommon()
+        result = mod.reconcile_pause(fake, 'secret-never-printed', {'campaign_id': 'c1', 'campaign_name': 'C1'})
+        self.assertTrue(result['ok'])
+        self.assertEqual(fake.posts, 1)
+        self.assertEqual(fake.gets, 2)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
