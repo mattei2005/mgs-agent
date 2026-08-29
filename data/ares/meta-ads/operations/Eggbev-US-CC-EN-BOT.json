@@ -148,7 +148,17 @@
           "global security flags",
           "other operations",
           "historical rules superseded by latest_policy_update"
-        ]
+        ],
+        "latest_correction": {
+          "corrected_at_et": "2026-08-29T18:04:46-04:00",
+          "reason": "a generic configuration request in the creation thread was incorrectly answered with global Ares/Hermes configuration",
+          "exact_thread_prompt_active": true,
+          "active_prompt_readback_equal": true,
+          "configuration_report_verified": true,
+          "tests_passed": 63,
+          "creation_write_enabled": false,
+          "audit": "data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json"
+        }
       }
     }
   },

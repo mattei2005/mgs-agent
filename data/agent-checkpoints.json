@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Obter aprovação de Rodolfo ou Geizian e teto/envelope se desejarem ativar budget write; corrigir fonte Smart Bidding para expor timestamp; concluir onboarding Engine v3 antes de criação live.",
+      "next_step": "Importar e validar a lista exata de placements aprovada, cadastrar a conta 01 no Engine v3 e pre-stagear mídia antes de manifest/dry-run executável; budget write continua sujeito aos gates vigentes.",
       "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento, escala e recovery",
-      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "nicolas definiu: criação normal active com start_time futuro após resumo final aprovado; canário técnico paused. escala por meta purchase roas agregado: em todo ciclo roas, >0,50 recomenda +10% composto; 0,50 ou 0,40–0,50 mantém. planner/report/testes atualizados, 58 pass. budget write false: matriz exige rodolfo/geizian e teto/envelope. smart bidding conta 01 agora tem 1 linha, mas sem timestamp; freshness 2h não verificável e economic writes fail-closed. zero cron e zero meta write neste update.",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json; discord:thread:1541578556037927053",
+      "state": "rota criar campanhas 1541578556037927053 corrigida após relatório global indevido: prompt exato ativo e confirmado por readback, contrato/account/skill v0.11.0 e registry sincronizados, gerador determinístico de configuração criado, 63/63 testes pass. relatório correto separa criação do zero dos três clones, usa budget variável, criativos novos, copy meta, json messenger, active futuro e gates completos. manual_only está aprovado, mas a lista exata de placements não está materializada; engine v3 sem conta eggbev e media registry sem mídia, portanto criação write=false. zero meta/budget/cron/restart.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T21:31:58+00:00"
+      "updated_at": "2026-08-29T22:07:42+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T21:31:58+00:00"
+  "updated_at": "2026-08-29T22:07:42+00:00"
 }
