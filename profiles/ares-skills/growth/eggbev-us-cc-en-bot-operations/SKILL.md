@@ -98,6 +98,50 @@ Antes de criar runners ou crons, registrar explicitamente:
 
 Campos não decididos permanecem `pending_review` e bloqueiam somente a ação dependente.
 
+## Contrato confirmado em blocos — criação, ciclos e reporting
+
+Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json` v0.2-draft. Este resumo não substitui o JSON vivo.
+
+### Criação de campanha
+
+```text
+Campaign  Auction | Sales | CBO | Highest volume | Standard | Financial products/services US
+Ad set   AdG1 | Messenger | next day 00:00 America/New_York | ongoing | US 18+ All
+Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
+Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
+Payer    DIGITAL TRUST; sempre nesta operação
+Budget   variável; confirmar por campanha
+```
+
+Placements são manuais conforme a lista do contrato; nunca converter para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
+
+O template Messenger é obrigatório. Qualquer mudança de texto, botão, payload ou flags exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
+
+### Ciclos ROAS
+
+```text
+00:00               reset diário do threshold para 0,40
+00:00–06:00         formação de dados; sem corte/reativação
+Fase 1              06:00, 08:00, 10:00, 12:00
+Corte Fase 1        Spend > USD 2 E Purchase ROAS < threshold
+Fase 2              13:00, 14:00, 16:00, 18:00, 20:00, 22:00, 23:00
+Corte Fase 2        Purchase ROAS < threshold; sem gate de gasto
+Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
+23:00–00:00         sem novo corte/reativação
+```
+
+Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Fonte indisponível, atrasada ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
+
+A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. A regra para reativar a campanha quando um ad recuperar ROAS ainda exige confirmação explícita.
+
+### Reporting
+
+- Intraday: um relatório por ciclo e qualquer atualização sob demanda.
+- Núcleo Meta: CPM, Purchase ROAS, custo por resultado/conversa, Results, Budget, Amount spent e CTR.
+- Núcleo Smart Bidding solicitado: Leads/UTM, RPS, ROI drip, performance completa, investimento, receita, receita líquida/estimada e ROI real/estimado.
+- Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva.
+- Diário em múltiplos horários, inspirado na distribuição do Crédito para Veículo, sem copiar timezone nem regras. Proposta pendente: 07:00, 09:00, 12:30, 16:30, 20:30 e 23:30 ET; não automatizar antes do OK de Nicolas.
+
 ## Guardrail aprovado — limite de leads por página
 
 Nicolas aprovou o guardrail específico da conta `Eggbev-US-CC-EN-01-G006`:
