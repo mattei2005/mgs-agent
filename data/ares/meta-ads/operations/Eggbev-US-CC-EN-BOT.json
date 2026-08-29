@@ -341,30 +341,46 @@
     "other_times": "current-day partial reports",
     "sources": {
       "meta": "Meta API live for the requested period",
-      "smart_bidding": "Smart Bidding Messenger target account only after identity and freshness reconciliation"
+      "smart_bidding": "Smart Bidding Messenger target account only after identity and freshness reconciliation",
+      "pricing": "campaign-scoped monetization fields from the Smart Bidding Messenger row joined by exact UTM_CAMPAIGN; global Pricing path/slot payload is never attributed to a campaign because it has no UTM and uses BRL"
     },
-    "required_meta_metrics": ["Amount spent", "Purchase ROAS", "Results/messaging conversations", "Cost per conversation", "CPM", "CTR", "Budget"],
-    "requested_smart_bidding_metrics": ["target rows", "Investment", "Revenue", "Drip revenue", "Broadcast revenue", "Leads", "RPS", "Real ROI", "Estimated ROI"],
+    "required_meta_metrics": ["Amount spent", "Purchase ROAS", "messaging_conversation_started_7d", "Cost per messaging conversation started", "CPM", "CTR", "Budget"],
+    "requested_smart_bidding_metrics": ["target rows", "Investment", "Revenue", "Drip revenue", "Broadcast revenue", "Leads", "AVG_PRICE", "Sessions", "Acquisition clicks", "Gross RPS", "Gross EPC", "Real ROI", "Estimated ROI"],
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "hybrid v2: one vertical card per campaign with the full name plus an indexed consolidated desktop table; fence-safe Discord pagination",
+    "layout": "hybrid v3: one vertical card per campaign plus one unified Pricing + Meta Ads + Smart Bidding desktop table; fence-safe Discord pagination",
     "automation_change": "none_until_dry_run_is_shown_and_nicolas_explicitly_approves_cron_write",
     "schedule_approval_is_not_cron_approval": true,
     "renderer_contract": {
-      "status": "hybrid_v2_implemented_and_live_read_only_verified",
+      "status": "hybrid_v3_unified_sources_implemented_and_live_read_only_verified",
       "campaign_scope": "all currently effective ACTIVE campaigns even without an insight row, plus every campaign with insight in the requested period; historical campaigns with neither condition remain excluded",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
-      "per_campaign_fields": ["full name", "current status", "start_time America/New_York", "Budget USD", "Amount spent USD", "Purchase ROAS", "Results/conversations", "Cost per conversation", "CPM", "CTR", "observation/reconciliation reason"],
+      "per_campaign_fields": ["full name", "current status", "start_time America/New_York", "UTM_CAMPAIGN", "source join status", "Budget USD", "Amount spent USD", "messaging_conversation_started_7d", "Cost per messaging conversation started", "Purchase ROAS", "Meta CPM", "CTR", "Smart Bidding investment", "Smart Bidding revenue", "Smart Bidding LEADS", "AVG_PRICE", "Gross RPS", "Gross EPC", "observation/reconciliation reason"],
       "smart_bidding_freshness_visible": ["latest source timestamp or N/D", "source age or N/D", "maximum age 2h", "timestamp field or N/D", "reconciliation reason"],
-      "layout": "vertical mobile cards plus indexed consolidated desktop table",
+      "layout": "vertical mobile cards plus one indexed unified Pricing + Meta Ads + Smart Bidding desktop table",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
-      "high_volume_fixture_campaigns": 25
+      "high_volume_fixture_campaigns": 25,
+      "source_join": {
+        "primary": "Meta creative utm_campaign exact equals Smart Bidding UTM_CAMPAIGN",
+        "identity_confirmation": "Meta creative object_story_spec.page_id exact equals Smart Bidding FB_PAGE_ID",
+        "fallback": "a single pg_XXXXX token in the campaign name may identify the UTM for reporting, but external metrics remain N/D unless Page ID is also read back and matches",
+        "fail_closed": ["missing or multiple Meta UTM", "missing or multiple Smart Bidding page row", "missing Meta Page ID", "Page ID mismatch", "Smart Bidding source stale or without verifiable timestamp"]
+      },
+      "metric_formulas": {
+        "cost_per_messaging_started": "Meta Amount spent / onsite_conversion.messaging_conversation_started_7d",
+        "meta_cpm": "Meta Amount spent * 1000 / Meta impressions",
+        "gross_rps": "Smart Bidding REVENUE * 1000 / SESSIONS",
+        "gross_epc": "Smart Bidding REVENUE / ACQUISITION_CLICKS",
+        "avg_price": "Smart Bidding AVG_PRICE weighted by SESSIONS when multiple rows share the same exact UTM"
+      },
+      "global_pricing_exclusion": "The /pricing publisher payload is BRL and keyed by operation/path/slot rather than UTM_CAMPAIGN; it is audited as a separate source and is not repeated per campaign."
     },
     "remaining_limitations": [
-      "RPS, real ROI and estimated ROI remain N/D until Nicolas approves Eggbev formulas",
+      "real ROI and estimated ROI remain N/D until Nicolas approves Eggbev formulas and the required net/estimated revenue fields are available",
       "the current Smart Bidding schema exposes no accepted update timestamp, so freshness is displayed as unverifiable and Smart Bidding monetary metrics remain N/D",
+      "the global Pricing endpoint cannot be joined per campaign because it has no UTM_CAMPAIGN and its payload currency is BRL",
       "automatic posting and Daily cron remain disabled until Nicolas approves a real dry-run and the automation plan"
     ],
     "runtime": {

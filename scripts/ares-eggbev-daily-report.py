@@ -339,14 +339,31 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
             'page_mapping_issue': ('sb_page_missing' if not pages else 'sb_page_duplicate_or_ambiguous' if len(pages) != 1 or len(page_ids) != 1 else None),
             **({key: value for key, value in raw_metrics.items()} if ready else {key: None for key in raw_metrics}),
         }
+    revenue_total = sum_field(rows, 'REVENUE') if ready else None
+    sessions_total = sum_field(rows, 'SESSIONS') if ready else None
+    clicks_total = sum_field(rows, 'ACQUISITION_CLICKS') if ready else None
+    avg_pairs_global = [
+        (common.finite_float(row.get('AVG_PRICE')), common.finite_float(row.get('SESSIONS')) or 0.0)
+        for row in rows
+        if common.finite_float(row.get('AVG_PRICE')) is not None
+    ]
+    avg_weight_global = sum(weight for _, weight in avg_pairs_global)
+    avg_price_global = (
+        sum(value * weight for value, weight in avg_pairs_global) / avg_weight_global
+        if ready and avg_weight_global > 0
+        else None
+    )
     return {
         'ready': ready, 'reason': bundle.get('reason'), 'rows': len(rows),
         'investment': sum_field(rows, 'INVESTIMENT') if ready else None,
-        'revenue': sum_field(rows, 'REVENUE') if ready else None,
+        'revenue': revenue_total,
         'drip_revenue': sum_field(rows, 'DRIP_REVENUE') if ready else None,
         'broadcast_revenue': sum_field(rows, 'BD_REVENUE') if ready else None,
         'leads': sum_field(rows, 'LEADS') if ready else None,
         'leads_total': sum_field(rows, 'LEADS_TOTAL') if ready else None,
+        'avg_price': avg_price_global,
+        'rps_gross': revenue_total * 1000.0 / sessions_total if revenue_total is not None and sessions_total and sessions_total > 0 else None,
+        'epc_gross': revenue_total / clicks_total if revenue_total is not None and clicks_total and clicks_total > 0 else None,
         'available_account_names': bundle.get('available_account_names'),
         'freshness': dict(bundle.get('freshness') or {}),
         'by_utm': by_utm,
@@ -378,7 +395,7 @@ def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str
             status = 'meta_sb_page_id_mismatch'
         elif not sb.get('ready'):
             status = common.norm(sb.get('reason')) or 'smart_bidding_not_ready'
-        external = sb_row if status == 'matched' else {}
+        external: dict[str, Any] = sb_row if status == 'matched' and isinstance(sb_row, dict) else {}
         row.update({
             'join_status': status,
             'sb_investment': external.get('investment'),
@@ -406,8 +423,8 @@ def render_period(period: dict[str, Any]) -> list[str]:
         '----------------------------  ------------',
         f"Amount spent                 {common.fmt_money(meta.get('spend')):>12}",
         f"Purchase ROAS                {common.fmt_number(meta.get('purchase_roas')):>12}",
-        f"Results/conversas            {common.fmt_number(meta.get('messaging_results'), 0):>12}",
-        f"Custo por conversa           {common.fmt_money(meta.get('cost_per_message')):>12}",
+        f"Mensagens iniciadas          {common.fmt_number(meta.get('messaging_started'), 0):>12}",
+        f"Custo/msg iniciada           {common.fmt_money(meta.get('cost_per_messaging_started')):>12}",
         f"CPM                           {common.fmt_money(meta.get('cpm')):>12}",
         f"CTR                           {format_percent(meta.get('ctr')):>12}",
         f"Budget ACTIVE total           {common.fmt_money(meta.get('active_budget')):>12}",
@@ -421,7 +438,9 @@ def render_period(period: dict[str, Any]) -> list[str]:
         f"Receita drip                  {common.fmt_money(sb.get('drip_revenue')):>12}",
         f"Receita broadcast             {common.fmt_money(sb.get('broadcast_revenue')):>12}",
         f"Leads                         {common.fmt_number(sb.get('leads'), 0):>12}",
-        f"RPS                           {'N/D':>12}",
+        f"AVG_PRICE                    {common.fmt_money(sb.get('avg_price')):>12}",
+        f"RPS bruto                    {common.fmt_money(sb.get('rps_gross')):>12}",
+        f"EPC bruto                    {common.fmt_money(sb.get('epc_gross')):>12}",
         f"ROI real                      {'N/D':>12}",
         f"ROI estimado                  {'N/D':>12}",
         f"Última atualização            {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D':>12}",
@@ -442,27 +461,39 @@ def render_period(period: dict[str, Any]) -> list[str]:
                 f"**{index}. {row.get('name') or row.get('campaign_id') or 'N/D'}**",
                 '```text',
                 f"Status    {row.get('status') or 'N/D':<12}  Início       {format_start_time(row.get('start_time'))}",
+                f"UTM       {row.get('utm_campaign') or 'N/D':<12}  Join         {row.get('join_status') or 'N/D'}",
                 f"Budget    {common.fmt_money(row.get('budget_usd')):<12}  Spend        {common.fmt_money(row.get('spend'))}",
-                f"ROAS      {common.fmt_number(row.get('purchase_roas')):<12}  Resultados   {common.fmt_number(row.get('messaging_results'), 0)}",
-                f"Custo/conv {common.fmt_money(row.get('cost_per_message')):<11}  CPM          {common.fmt_money(row.get('cpm'))}",
+                f"Msg inic. {common.fmt_number(row.get('messaging_started'), 0):<12}  Custo/msg    {common.fmt_money(row.get('cost_per_messaging_started'))}",
+                f"ROAS      {common.fmt_number(row.get('purchase_roas')):<12}  Meta CPM     {common.fmt_money(row.get('cpm'))}",
                 f"CTR       {format_percent(row.get('ctr'))}",
+                f"SB Invest {common.fmt_money(row.get('sb_investment')):<12}  SB Receita   {common.fmt_money(row.get('sb_revenue'))}",
+                f"SB LEADS  {common.fmt_number(row.get('sb_leads'), 0):<12}  AVG_PRICE    {common.fmt_money(row.get('pricing_avg'))}",
+                f"RPS bruto {common.fmt_money(row.get('pricing_rps')):<12}  EPC bruto    {common.fmt_money(row.get('pricing_epc'))}",
                 f"Obs       {row.get('note') or 'N/D'}",
                 '```',
             ])
-        lines.extend(['', '**Tabela consolidada — visão desktop**', '```text', '#   Status        Budget     Spend    ROAS   Res   Custo/conv      CPM      CTR'])
-        lines.append('--  ------------  --------  --------  ------  ----  ----------  --------  -------')
+        lines.extend(['', '**Tabela única — Pricing + Meta Ads + Smart Bidding**', '```text', '#  Status  UTM       Spend  Msg  C/msg  ROAS  M.CPM  SB Inv  SB Rev  Leads  AvgP   RPS    EPC   Join'])
+        lines.append('-- ------- --------- ------ ---- ------ ----- ------ ------- ------- ------ ------ ------ ----- ----------------')
         for index, row in enumerate(campaigns, start=1):
             lines.append(
-                f"{index:<2}  {(row.get('status') or 'N/D'):<12}  {common.fmt_money(row.get('budget_usd')):>8}  "
-                f"{common.fmt_money(row.get('spend')):>8}  {common.fmt_number(row.get('purchase_roas')):>6}  "
-                f"{common.fmt_number(row.get('messaging_results'), 0):>4}  {common.fmt_money(row.get('cost_per_message')):>10}  "
-                f"{common.fmt_money(row.get('cpm')):>8}  {format_percent(row.get('ctr')):>7}"
+                f"{index:<2} {(row.get('status') or 'N/D')[:7]:<7} {(row.get('utm_campaign') or 'N/D'):<9} "
+                f"{common.fmt_money(row.get('spend')):>6} {common.fmt_number(row.get('messaging_started'), 0):>4} "
+                f"{common.fmt_money(row.get('cost_per_messaging_started')):>6} {common.fmt_number(row.get('purchase_roas')):>5} "
+                f"{common.fmt_money(row.get('cpm')):>6} {common.fmt_money(row.get('sb_investment')):>7} "
+                f"{common.fmt_money(row.get('sb_revenue')):>7} {common.fmt_number(row.get('sb_leads'), 0):>6} "
+                f"{common.fmt_money(row.get('pricing_avg')):>6} {common.fmt_money(row.get('pricing_rps')):>6} "
+                f"{common.fmt_money(row.get('pricing_epc')):>5} {(row.get('join_status') or 'N/D')}"
             )
         lines.append('```')
+        lines.append('`C/msg` = Meta spend ÷ `messaging_conversation_started_7d`; `M.CPM` = CPM Meta.')
+        lines.append('`RPS bruto` = SB REVENUE × 1.000 ÷ SESSIONS; `EPC bruto` = SB REVENUE ÷ ACQUISITION_CLICKS.')
+        lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_insight'):
             lines.append(f"ℹ️ ACTIVE sem insight no período: {meta.get('active_without_insight')}; campanhas mantidas visíveis com métricas `N/D`.")
         if meta.get('campaign_readback_errors'):
             lines.append(f"⚠️ Status/budget não reconciliados para {len(meta.get('campaign_readback_errors') or [])} campanha(s) com insight.")
+        if meta.get('ad_readback_errors'):
+            lines.append(f"⚠️ Criativo/UTM/Page ID não relidos para {len(meta.get('ad_readback_errors') or [])} anúncio(s).")
     else:
         lines.append('Nenhuma campanha ACTIVE e nenhuma campanha com insight Meta no período.')
     return lines
@@ -472,7 +503,7 @@ def render_report(run: dict[str, Any]) -> str:
     lines = [
         '📊 **Eggbev-US-CC-EN — Diário**',
         f"Gerado: {run.get('started_at_et')} | Conta: Eggbev-US-CC-EN-01-G006 | Moeda: USD",
-        'Fonte Meta: API live | Fonte externa: Smart Bidding Messenger',
+        'Fontes: Meta Ads API + Smart Bidding Messenger + Pricing/monetização reconciliados por UTM e Page ID',
         '',
     ]
     for index, period in enumerate(run.get('periods') or []):
@@ -519,16 +550,22 @@ def main() -> int:
                 sb_bundle = common.fetch_sb_bundle(sb, operation, report_date)
             except Exception as exc:
                 sb_bundle = {'ready': False, 'reason': f'{type(exc).__name__}: {exc}', 'target_report_rows': [], 'available_account_names': []}
+            meta_aggregate = aggregate_meta(meta_bundle)
+            sb_aggregate = aggregate_sb(sb_bundle)
+            meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
             run['periods'].append({
                 'date': report_date, 'label': label,
-                'meta': aggregate_meta(meta_bundle),
-                'smart_bidding': aggregate_sb(sb_bundle),
+                'meta': meta_aggregate,
+                'smart_bidding': sb_aggregate,
                 'readback': {
                     'meta_insight_rows': len(meta_bundle.get('insights') or []),
                     'meta_campaign_readbacks': len(meta_bundle.get('campaign_readbacks') or []),
                     'meta_campaign_readback_errors': len(meta_bundle.get('campaign_readback_errors') or []),
+                    'meta_ad_readbacks': len(meta_bundle.get('ad_readbacks') or []),
+                    'meta_ad_readback_errors': len(meta_bundle.get('ad_readback_errors') or []),
                     'smart_bidding_target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'smart_bidding_available_accounts': sb_bundle.get('available_account_names'),
+                    'source_join_counts': meta_aggregate.get('source_join_counts'),
                 },
             })
             common.atomic_json(audit_path, run)

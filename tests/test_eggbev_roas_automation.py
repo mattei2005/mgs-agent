@@ -245,12 +245,13 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(daily.report_dates('auto', at), [('2026-08-29', 'Parcial atual')])
 
     def test_smart_bidding_aggregation_does_not_invent_roi(self):
-        bundle = {'ready': True, 'target_report_rows': [{'INVESTIMENT': 10, 'REVENUE': 20, 'LEADS': 5}], 'available_account_names': ['Eggbev-US-CC-EN-01']}
+        bundle = {'ready': True, 'target_report_rows': [{'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 10, 'REVENUE': 20, 'LEADS': 5, 'SESSIONS': 40, 'ACQUISITION_CLICKS': 10, 'AVG_PRICE': 6.2}], 'available_account_names': ['Eggbev-US-CC-EN-01']}
         result = daily.aggregate_sb(bundle)
         self.assertEqual(result['investment'], 10)
         self.assertEqual(result['revenue'], 20)
         self.assertIsNone(result['roi_real'])
-        self.assertIsNone(result['rps'])
+        self.assertEqual(result['rps_gross'], 500)
+        self.assertEqual(result['epc_gross'], 2)
 
     def test_unreconciled_smart_bidding_metrics_are_nd_not_zero(self):
         result = daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': []})
@@ -263,6 +264,77 @@ class ReportingTests(unittest.TestCase):
         result = daily.aggregate_meta(bundle)
         self.assertAlmostEqual(result['purchase_roas'], 0.4)
         self.assertAlmostEqual(result['cost_per_message'], 2.0)
+
+    def test_cost_per_started_message_uses_exact_meta_action(self):
+        bundle = {'insights': [{
+            'campaign_id': 'c1', 'campaign_name': 'C', 'spend': '12', 'impressions': '1000', 'ctr': '2',
+            'actions': [
+                {'action_type': 'onsite_conversion.messaging_first_reply', 'value': '6'},
+                {'action_type': 'onsite_conversion.messaging_conversation_started_7d', 'value': '4'},
+            ],
+        }]}
+        result = daily.aggregate_meta(bundle)
+        self.assertEqual(result['messaging_started'], 4)
+        self.assertEqual(result['cost_per_messaging_started'], 3)
+        self.assertEqual(result['campaigns'][0]['messaging_started'], 4)
+        self.assertEqual(result['campaigns'][0]['cost_per_messaging_started'], 3)
+
+    def test_unified_join_uses_exact_utm_and_page_id(self):
+        meta_bundle = {
+            'insights': [{
+                'ad_id': 'a1', 'campaign_id': 'c1', 'campaign_name': 'Campaign pg_12345',
+                'spend': '12', 'impressions': '1000', 'ctr': '2',
+                'actions': [{'action_type': 'onsite_conversion.messaging_conversation_started_7d', 'value': '4'}],
+            }],
+            'campaign_readbacks': [{'id': 'c1', 'name': 'Campaign pg_12345', 'status': 'ACTIVE', 'effective_status': 'ACTIVE', 'daily_budget': '4500'}],
+            'ad_readbacks': [{
+                'id': 'a1', 'campaign': {'id': 'c1'},
+                'creative': {'url_tags': 'utm_campaign=pg_12345', 'object_story_spec': {'page_id': 'page1'}},
+            }],
+        }
+        sb_bundle = {
+            'ready': True,
+            'target_report_rows': [{
+                'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 11, 'REVENUE': 10,
+                'LEADS': 20, 'SESSIONS': 20, 'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
+            }],
+            'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One'}]},
+        }
+        meta = daily.aggregate_meta(meta_bundle)
+        sb = daily.aggregate_sb(sb_bundle)
+        row = daily.merge_campaign_sources(meta, sb)['campaigns'][0]
+        self.assertEqual(row['join_status'], 'matched')
+        self.assertEqual(row['cost_per_messaging_started'], 3)
+        self.assertEqual(row['sb_investment'], 11)
+        self.assertEqual(row['sb_revenue'], 10)
+        self.assertEqual(row['sb_leads'], 20)
+        self.assertEqual(row['pricing_avg'], 6.2)
+        self.assertEqual(row['pricing_rps'], 500)
+        self.assertEqual(row['pricing_epc'], 2)
+
+    def test_unified_join_page_mismatch_is_fail_closed(self):
+        meta = {'campaigns': [{'utm_campaign': 'pg_12345', 'meta_page_id': 'page1'}]}
+        sb = {
+            'ready': True,
+            'by_utm': {'pg_12345': {
+                'sb_page_id': 'page2', 'investment': 11, 'revenue': 10, 'leads': 20,
+                'avg_price': 6.2, 'rps_gross': 500, 'epc_gross': 2,
+            }},
+        }
+        row = daily.merge_campaign_sources(meta, sb)['campaigns'][0]
+        self.assertEqual(row['join_status'], 'meta_sb_page_id_mismatch')
+        self.assertIsNone(row['sb_revenue'])
+        self.assertIsNone(row['pricing_rps'])
+
+    def test_unified_join_stale_source_is_fail_closed(self):
+        meta = {'campaigns': [{'utm_campaign': 'pg_12345', 'meta_page_id': 'page1'}]}
+        sb = {
+            'ready': False, 'reason': 'smart_bidding_freshness_unverifiable',
+            'by_utm': {'pg_12345': {'sb_page_id': 'page1'}},
+        }
+        row = daily.merge_campaign_sources(meta, sb)['campaigns'][0]
+        self.assertEqual(row['join_status'], 'smart_bidding_freshness_unverifiable')
+        self.assertIsNone(row['pricing_epc'])
 
     def test_active_campaign_without_insight_remains_visible(self):
         bundle = {

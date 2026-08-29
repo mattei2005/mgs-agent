@@ -71,9 +71,13 @@ def build_report() -> str:
         f"- Meta: {policy['sources']['meta']}.",
         f"- Métricas Meta contratadas: {meta_metrics}.",
         f"- Smart Bidding: {policy['sources']['smart_bidding']}.",
+        f"- Pricing/monetização por campanha: {policy['sources']['pricing']}.",
         f"- Métricas Smart Bidding solicitadas: {sb_metrics}.",
         f"- Gate Smart Bidding: {policy['smart_bidding_policy']}.",
-        "- ROI/RPS sem fórmula aprovada ou dados sem freshness verificável aparecem `N/D`; nunca zero inventado.",
+        "- `Custo/msg iniciada` usa somente `onsite_conversion.messaging_conversation_started_7d` da Meta.",
+        "- RPS bruto = `REVENUE × 1.000 / SESSIONS`; EPC bruto = `REVENUE / ACQUISITION_CLICKS`.",
+        "- ROI real/estimado ou dados sem freshness verificável aparecem `N/D`; nunca zero inventado.",
+        "- Join da tabela única exige UTM Meta = UTM Smart Bidding e Page ID Meta = FB_PAGE_ID Smart Bidding.",
         "- Em divergência válida, Meta Purchase ROAS vence ROI Smart Bidding; fonte ausente não vira divergência válida.",
         "",
         "## Runtime atual",
@@ -97,9 +101,7 @@ def build_report() -> str:
         f"- Freshness Smart Bidding visível: {', '.join(renderer['smart_bidding_freshness_visible'])}.",
         f"- Paginação: {renderer['pagination']}.",
         f"- Fixture de alto volume: {renderer['high_volume_fixture_campaigns']} campanhas, todas preservadas.",
-        f"- Limitação 1: {limitations[0]}.",
-        f"- Limitação 2: {limitations[1]}.",
-        f"- Limitação 3: {limitations[2]}.",
+        *[f"- Limitação {index}: {limitation}." for index, limitation in enumerate(limitations, start=1)],
     ]
     return "\n".join(lines).rstrip() + "\n"
 
