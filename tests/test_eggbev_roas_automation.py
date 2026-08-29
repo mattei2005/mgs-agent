@@ -264,6 +264,103 @@ class ReportingTests(unittest.TestCase):
         self.assertAlmostEqual(result['purchase_roas'], 0.4)
         self.assertAlmostEqual(result['cost_per_message'], 2.0)
 
+    def test_active_campaign_without_insight_remains_visible(self):
+        bundle = {
+            'insights': [],
+            'campaigns': [{
+                'id': 'c1', 'name': '125 - Full Name - ENG - US - (pg_99999)',
+                'status': 'ACTIVE', 'effective_status': 'ACTIVE',
+                'daily_budget': '4500', 'start_time': '2026-08-30T00:00:00-0400',
+            }],
+        }
+        result = daily.aggregate_meta(bundle)
+        self.assertEqual(result['campaigns_in_scope'], 1)
+        self.assertEqual(result['active_without_insight'], 1)
+        row = result['campaigns'][0]
+        self.assertFalse(row['has_insight'])
+        self.assertIsNone(row['spend'])
+        self.assertEqual(row['budget_usd'], 45.0)
+        self.assertEqual(row['status'], 'ACTIVE')
+
+    def test_campaign_row_has_all_approved_metrics(self):
+        bundle = {
+            'insights': [{
+                'campaign_id': 'c1', 'campaign_name': 'Long campaign name',
+                'spend': '10', 'impressions': '1000', 'ctr': '2',
+                'actions': [{'action_type': 'onsite_conversion.messaging_first_reply', 'value': '5'}],
+                'action_values': [{'action_type': 'purchase', 'value': '4'}],
+            }],
+            'campaign_readbacks': [{
+                'id': 'c1', 'name': 'Long campaign name', 'status': 'PAUSED',
+                'effective_status': 'PAUSED', 'daily_budget': '7000',
+                'start_time': '2026-08-03T13:16:33-0400',
+            }],
+        }
+        row = daily.aggregate_meta(bundle)['campaigns'][0]
+        self.assertEqual(row['status'], 'PAUSED')
+        self.assertEqual(row['budget_usd'], 70.0)
+        self.assertAlmostEqual(row['purchase_roas'], 0.4)
+        self.assertAlmostEqual(row['cost_per_message'], 2.0)
+        self.assertAlmostEqual(row['cpm'], 10.0)
+        self.assertAlmostEqual(row['ctr'], 2.0)
+        self.assertIn('estado atual PAUSED', row['note'])
+
+    def test_render_has_all_25_full_names_without_silent_limit(self):
+        names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
+        campaigns = [{
+            'name': name, 'status': 'ACTIVE', 'start_time': '2026-08-30T00:00:00-0400',
+            'budget_usd': 45.0, 'spend': 1.0, 'purchase_roas': 0.5,
+            'messaging_results': 1.0, 'cost_per_message': 1.0, 'cpm': 10.0,
+            'ctr': 2.0, 'has_insight': True, 'note': 'Entrega no período',
+        } for name in names]
+        period = {
+            'label': 'Parcial atual', 'date': '2026-08-29',
+            'meta': {'campaigns': campaigns, 'campaigns_in_scope': 25},
+            'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
+        }
+        rendered = '\n'.join(daily.render_period(period))
+        self.assertIn('Campanhas no escopo — 25', rendered)
+        for name in names:
+            self.assertEqual(rendered.count(name), 1)
+
+    def test_smart_bidding_freshness_is_explicit_and_nd_is_not_percent(self):
+        period = {
+            'label': 'Parcial atual', 'date': '2026-08-29',
+            'meta': {'campaigns': [], 'ctr': None},
+            'smart_bidding': daily.aggregate_sb({
+                'ready': False, 'reason': 'smart_bidding_freshness_unverifiable',
+                'target_report_rows': [{}],
+                'freshness': {'ready': False, 'reason': 'smart_bidding_freshness_unverifiable', 'max_age_hours': 2.0, 'timestamp_field': None},
+            }),
+        }
+        rendered = '\n'.join(daily.render_period(period))
+        self.assertIn('Última atualização', rendered)
+        self.assertIn('Campo timestamp', rendered)
+        self.assertIn('Freshness máx.', rendered)
+        self.assertNotIn('N/D%', rendered)
+
+    def test_discord_split_keeps_fences_balanced_without_omitting_names(self):
+        names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
+        campaigns = [{
+            'name': name, 'status': 'ACTIVE', 'start_time': '2026-08-30T00:00:00-0400',
+            'budget_usd': 45.0, 'spend': 1.0, 'purchase_roas': 0.5,
+            'messaging_results': 1.0, 'cost_per_message': 1.0, 'cpm': 10.0,
+            'ctr': 2.0, 'has_insight': True, 'note': 'Entrega no período',
+        } for name in names]
+        period = {
+            'label': 'Parcial atual', 'date': '2026-08-29',
+            'meta': {'campaigns': campaigns, 'campaigns_in_scope': 25},
+            'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
+        }
+        report = '\n'.join(daily.render_period(period))
+        chunks = common.split_messages(report, limit=500)
+        self.assertGreater(len(chunks), 1)
+        self.assertTrue(all(len(chunk) <= 500 for chunk in chunks))
+        self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
+        joined = '\n'.join(chunks)
+        for name in names:
+            self.assertEqual(joined.count(name), 1)
+
 
 class ContractTests(unittest.TestCase):
     @classmethod

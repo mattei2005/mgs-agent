@@ -260,7 +260,7 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
     if live_account.get('currency') != 'USD' or live_account.get('timezone_name') != 'America/New_York' or int(live_account.get('account_status') or 0) != 1:
         raise RuntimeError('Meta identity/currency/timezone/status preflight failed')
     campaigns = fetch_all_meta(meta, token, act + '/campaigns', {
-        'fields': 'id,name,status,effective_status,configured_status,daily_budget,updated_time',
+        'fields': 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time',
         'effective_status': ['ACTIVE'],
         'limit': 200,
     })
@@ -276,7 +276,7 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
             tracked_ads.append(row)
     tracked_campaigns: list[dict[str, Any]] = []
     for campaign_id in sorted((state.get('paused_campaigns') or {}).keys()):
-        cstatus, row, _ = meta.graph_get(campaign_id, token, {'fields': 'id,name,status,effective_status,configured_status,daily_budget,updated_time'})
+        cstatus, row, _ = meta.graph_get(campaign_id, token, {'fields': 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time'})
         if cstatus == 200 and isinstance(row, dict):
             tracked_campaigns.append(row)
     fields = 'ad_id,ad_name,campaign_id,campaign_name,spend,impressions,cpm,ctr,actions,action_values,cost_per_action_type,purchase_roas'
@@ -603,18 +603,35 @@ def fmt_money(value: Any) -> str:
 
 
 def split_messages(text: str, limit: int = 1900) -> list[str]:
+    """Split Discord messages without leaving Markdown code fences unbalanced."""
     lines = text.splitlines()
     chunks: list[str] = []
     current: list[str] = []
     size = 0
+    in_fence = False
+    fence_opener = '```text'
     for line in lines:
         cost = len(line) + 1
-        if current and size + cost > limit:
+        close_cost = 4 if in_fence else 0
+        if current and size + cost + close_cost > limit:
+            if in_fence:
+                current.append('```')
             chunks.append('\n'.join(current))
-            current, size = [], 0
+            current = [fence_opener] if in_fence else []
+            size = len(fence_opener) + 1 if in_fence else 0
         current.append(line)
         size += cost
+        stripped = line.strip()
+        if stripped.startswith('```'):
+            if in_fence:
+                in_fence = False
+                fence_opener = '```text'
+            else:
+                in_fence = True
+                fence_opener = stripped
     if current:
+        if in_fence:
+            current.append('```')
         chunks.append('\n'.join(current))
     return chunks
 

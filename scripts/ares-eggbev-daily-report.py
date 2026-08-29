@@ -59,6 +59,60 @@ def sum_field(rows: list[dict[str, Any]], key: str) -> float:
     return sum(common.finite_float(row.get(key)) or 0.0 for row in rows)
 
 
+def campaign_status(row: dict[str, Any]) -> str:
+    return common.norm(row.get('effective_status') or row.get('status') or row.get('configured_status')) or 'N/D'
+
+
+def campaign_budget_usd(row: dict[str, Any]) -> float | None:
+    minor = common.finite_float(row.get('daily_budget'))
+    if minor is None:
+        minor = common.finite_float(row.get('lifetime_budget'))
+    return minor / 100.0 if minor is not None else None
+
+
+def format_start_time(value: Any) -> str:
+    raw = common.norm(value)
+    if not raw:
+        return 'N/D'
+    try:
+        parsed = dt.datetime.fromisoformat(raw.replace('Z', '+00:00'))
+    except ValueError:
+        return 'N/D'
+    if parsed.tzinfo is None:
+        return 'N/D'
+    return parsed.astimezone(common.ET).strftime('%d/%m %H:%M')
+
+
+def format_percent(value: Any) -> str:
+    number = common.finite_float(value)
+    return 'N/D' if number is None else common.fmt_number(number) + '%'
+
+
+def enrich_campaign_readbacks(meta, token: str, bundle: dict[str, Any]) -> dict[str, Any]:
+    """Add active campaigns and read back insight campaigns without loading account history."""
+    enriched = dict(bundle)
+    by_id: dict[str, dict[str, Any]] = {}
+    for source in ('campaigns', 'tracked_campaigns'):
+        for row in bundle.get(source) or []:
+            campaign_id = common.norm(row.get('id'))
+            if campaign_id:
+                by_id[campaign_id] = row
+    insight_ids = sorted({common.norm(row.get('campaign_id')) for row in bundle.get('insights') or [] if common.norm(row.get('campaign_id'))})
+    errors: list[dict[str, Any]] = []
+    fields = 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time'
+    for campaign_id in insight_ids:
+        if campaign_id in by_id:
+            continue
+        status, row, _ = meta.graph_get(campaign_id, token, {'fields': fields})
+        if status == 200 and isinstance(row, dict):
+            by_id[campaign_id] = row
+        else:
+            errors.append({'campaign_id': campaign_id, 'http_status': status})
+    enriched['campaign_readbacks'] = list(by_id.values())
+    enriched['campaign_readback_errors'] = errors
+    return enriched
+
+
 def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
     rows = bundle.get('insights') or []
     spends = sum(common.finite_float(row.get('spend')) or 0.0 for row in rows)
@@ -70,7 +124,10 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
     cost_per_message = spends / messaging_results if messaging_results > 0 else None
     weighted_ctr_numerator = sum((common.finite_float(row.get('ctr')) or 0.0) * (common.finite_float(row.get('impressions')) or 0.0) for row in rows)
     ctr = weighted_ctr_numerator / impressions if impressions > 0 else None
-    by_campaign: dict[str, dict[str, Any]] = defaultdict(lambda: {'name': '', 'spend': 0.0, 'purchase_value': 0.0, 'messaging_results': 0.0})
+    by_campaign: dict[str, dict[str, Any]] = defaultdict(lambda: {
+        'name': '', 'spend': 0.0, 'purchase_value': 0.0, 'messaging_results': 0.0,
+        'impressions': 0.0, 'ctr_weighted': 0.0, 'has_insight': False,
+    })
     for row in rows:
         campaign_id = common.norm(row.get('campaign_id')) or 'unknown'
         target = by_campaign[campaign_id]
@@ -78,20 +135,62 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         target['spend'] += common.finite_float(row.get('spend')) or 0.0
         target['purchase_value'] += common.action_value(row.get('action_values'), common.PURCHASE_ACTIONS) or 0.0
         target['messaging_results'] += common.action_value(row.get('actions'), common.MESSAGING_ACTIONS) or 0.0
+        row_impressions = common.finite_float(row.get('impressions')) or 0.0
+        target['impressions'] += row_impressions
+        target['ctr_weighted'] += (common.finite_float(row.get('ctr')) or 0.0) * row_impressions
+        target['has_insight'] = True
+
+    readbacks = bundle.get('campaign_readbacks')
+    if readbacks is None:
+        readbacks = list(bundle.get('campaigns') or []) + list(bundle.get('tracked_campaigns') or [])
+    readback_by_id = {common.norm(row.get('id')): row for row in readbacks if common.norm(row.get('id'))}
+    for campaign_id, row in readback_by_id.items():
+        if campaign_status(row) == 'ACTIVE' and campaign_id not in by_campaign:
+            by_campaign[campaign_id]['name'] = common.norm(row.get('name'))
+
     campaigns = []
     for campaign_id, row in by_campaign.items():
-        spend = row['spend']
+        live = readback_by_id.get(campaign_id) or {}
+        has_insight = bool(row['has_insight'])
+        spend = row['spend'] if has_insight else None
+        results = row['messaging_results'] if has_insight else None
+        impressions_campaign = row['impressions'] if has_insight else None
+        status = campaign_status(live)
+        if has_insight and status == 'N/D':
+            note = 'Entrega no período; status/budget não reconciliados'
+        elif has_insight and status == 'ACTIVE':
+            note = 'Entrega no período'
+        elif has_insight:
+            note = f'Entrega no período; estado atual {status}'
+        else:
+            note = 'ACTIVE sem linha de insight no período'
         campaigns.append({
-            'campaign_id': campaign_id, 'name': row['name'], 'spend': spend,
-            'purchase_roas': row['purchase_value'] / spend if spend > 0 else None,
-            'messaging_results': row['messaging_results'],
-            'cost_per_message': spend / row['messaging_results'] if row['messaging_results'] > 0 else None,
+            'campaign_id': campaign_id,
+            'name': common.norm(live.get('name')) or row['name'] or campaign_id,
+            'status': status,
+            'start_time': live.get('start_time'),
+            'budget_usd': campaign_budget_usd(live),
+            'spend': spend,
+            'purchase_roas': row['purchase_value'] / spend if spend is not None and spend > 0 else None,
+            'messaging_results': results,
+            'cost_per_message': spend / results if spend is not None and results is not None and results > 0 else None,
+            'impressions': impressions_campaign,
+            'cpm': spend * 1000.0 / impressions_campaign if spend is not None and impressions_campaign is not None and impressions_campaign > 0 else None,
+            'ctr': row['ctr_weighted'] / impressions_campaign if impressions_campaign is not None and impressions_campaign > 0 else None,
+            'has_insight': has_insight,
+            'note': note,
         })
-    campaigns.sort(key=lambda row: (-row['spend'], row['name']))
+    campaigns.sort(key=lambda row: (row['status'] != 'ACTIVE', -(row['spend'] or 0.0), row['name']))
+    active_budget = sum(campaign_budget_usd(row) or 0.0 for row in readback_by_id.values() if campaign_status(row) == 'ACTIVE')
     return {
         'spend': spends, 'purchase_value': purchases_value, 'purchase_roas': roas,
         'messaging_results': messaging_results, 'cost_per_message': cost_per_message,
-        'impressions': impressions, 'cpm': cpm, 'ctr': ctr, 'campaigns': campaigns,
+        'impressions': impressions, 'cpm': cpm, 'ctr': ctr,
+        'active_budget': active_budget,
+        'campaigns': campaigns,
+        'campaigns_in_scope': len(campaigns),
+        'active_without_insight': sum(1 for row in campaigns if row['status'] == 'ACTIVE' and not row['has_insight']),
+        'campaign_readback_errors': list(bundle.get('campaign_readback_errors') or []),
     }
 
 
@@ -107,6 +206,7 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
         'leads': sum_field(rows, 'LEADS') if ready else None,
         'leads_total': sum_field(rows, 'LEADS_TOTAL') if ready else None,
         'available_account_names': bundle.get('available_account_names'),
+        'freshness': dict(bundle.get('freshness') or {}),
         'roi_real': None, 'roi_estimated': None, 'rps': None,
         'formula_note': 'ROI/RPS N/D: nenhuma fórmula Eggbev aprovada; valores brutos preservados.',
     }
@@ -125,7 +225,8 @@ def render_period(period: dict[str, Any]) -> list[str]:
         f"Results/conversas            {common.fmt_number(meta.get('messaging_results'), 0):>12}",
         f"Custo por conversa           {common.fmt_money(meta.get('cost_per_message')):>12}",
         f"CPM                           {common.fmt_money(meta.get('cpm')):>12}",
-        f"CTR                           {(common.fmt_number(meta.get('ctr')) + '%'):>12}",
+        f"CTR                           {format_percent(meta.get('ctr')):>12}",
+        f"Budget ACTIVE total           {common.fmt_money(meta.get('active_budget')):>12}",
         '```',
         '```text',
         'Smart Bidding (USD)           Valor',
@@ -139,6 +240,10 @@ def render_period(period: dict[str, Any]) -> list[str]:
         f"RPS                           {'N/D':>12}",
         f"ROI real                      {'N/D':>12}",
         f"ROI estimado                  {'N/D':>12}",
+        f"Última atualização            {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D':>12}",
+        f"Atraso da fonte               {(str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D':>12}",
+        f"Freshness máx.                 {str((sb.get('freshness') or {}).get('max_age_hours') or 2.0) + 'h':>12}",
+        f"Campo timestamp               {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D':>12}",
         '```',
     ]
     if not sb.get('ready'):
@@ -146,14 +251,36 @@ def render_period(period: dict[str, Any]) -> list[str]:
     lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
-        lines.extend(['', '**Campanhas com entrega**', '```text', 'Campanha                     Spend      ROAS  Resultados'])
-        lines.append('---------------------------  --------  ------  ----------')
-        for row in campaigns[:20]:
-            name = (row.get('name') or row.get('campaign_id') or 'N/D')[:27]
-            lines.append(f"{name:<27}  {common.fmt_money(row.get('spend')):>8}  {common.fmt_number(row.get('purchase_roas')):>6}  {common.fmt_number(row.get('messaging_results'), 0):>10}")
+        lines.extend(['', f"**Campanhas no escopo — {len(campaigns)}**", 'Escopo: campanhas atualmente ACTIVE + campanhas com insight no período.'])
+        for index, row in enumerate(campaigns, start=1):
+            lines.extend([
+                '',
+                f"**{index}. {row.get('name') or row.get('campaign_id') or 'N/D'}**",
+                '```text',
+                f"Status    {row.get('status') or 'N/D':<12}  Início       {format_start_time(row.get('start_time'))}",
+                f"Budget    {common.fmt_money(row.get('budget_usd')):<12}  Spend        {common.fmt_money(row.get('spend'))}",
+                f"ROAS      {common.fmt_number(row.get('purchase_roas')):<12}  Resultados   {common.fmt_number(row.get('messaging_results'), 0)}",
+                f"Custo/conv {common.fmt_money(row.get('cost_per_message')):<11}  CPM          {common.fmt_money(row.get('cpm'))}",
+                f"CTR       {format_percent(row.get('ctr'))}",
+                f"Obs       {row.get('note') or 'N/D'}",
+                '```',
+            ])
+        lines.extend(['', '**Tabela consolidada — visão desktop**', '```text', '#   Status        Budget     Spend    ROAS   Res   Custo/conv      CPM      CTR'])
+        lines.append('--  ------------  --------  --------  ------  ----  ----------  --------  -------')
+        for index, row in enumerate(campaigns, start=1):
+            lines.append(
+                f"{index:<2}  {(row.get('status') or 'N/D'):<12}  {common.fmt_money(row.get('budget_usd')):>8}  "
+                f"{common.fmt_money(row.get('spend')):>8}  {common.fmt_number(row.get('purchase_roas')):>6}  "
+                f"{common.fmt_number(row.get('messaging_results'), 0):>4}  {common.fmt_money(row.get('cost_per_message')):>10}  "
+                f"{common.fmt_money(row.get('cpm')):>8}  {format_percent(row.get('ctr')):>7}"
+            )
         lines.append('```')
+        if meta.get('active_without_insight'):
+            lines.append(f"ℹ️ ACTIVE sem insight no período: {meta.get('active_without_insight')}; campanhas mantidas visíveis com métricas `N/D`.")
+        if meta.get('campaign_readback_errors'):
+            lines.append(f"⚠️ Status/budget não reconciliados para {len(meta.get('campaign_readback_errors') or [])} campanha(s) com insight.")
     else:
-        lines.append('Sem entrega Meta no período.')
+        lines.append('Nenhuma campanha ACTIVE e nenhuma campanha com insight Meta no período.')
     return lines
 
 
@@ -203,6 +330,7 @@ def main() -> int:
         account_id = common.norm((operation.get('account') or {}).get('account_id'))
         for report_date, label in report_dates(args.period, at):
             meta_bundle = common.fetch_meta_bundle(meta, token, account_id, state, report_date)
+            meta_bundle = enrich_campaign_readbacks(meta, token, meta_bundle)
             try:
                 sb_bundle = common.fetch_sb_bundle(sb, operation, report_date)
             except Exception as exc:
@@ -213,6 +341,8 @@ def main() -> int:
                 'smart_bidding': aggregate_sb(sb_bundle),
                 'readback': {
                     'meta_insight_rows': len(meta_bundle.get('insights') or []),
+                    'meta_campaign_readbacks': len(meta_bundle.get('campaign_readbacks') or []),
+                    'meta_campaign_readback_errors': len(meta_bundle.get('campaign_readback_errors') or []),
                     'smart_bidding_target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'smart_bidding_available_accounts': sb_bundle.get('available_account_names'),
                 },
