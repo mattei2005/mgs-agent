@@ -90,6 +90,11 @@ class DecisionTests(unittest.TestCase):
         result = self.decide([active_ad()], insights={'a1': metric(0.0, None)}, phase='PHASE_2')
         self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
 
+    def test_phase2_missing_insight_row_is_cut_as_approved_nd(self):
+        result = common.decide_cycle([active_ad()], [], {}, common.default_state(dt.date(2026, 8, 29)), 'PHASE_2', 0.40)
+        self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
+        self.assertEqual(result['decisions'][0]['reason'], 'roas_below_or_nd')
+
     def test_exact_threshold_never_changes_state(self):
         result = self.decide([active_ad()], insights={'a1': metric(10.0, 0.40)}, phase='PHASE_2')
         self.assertEqual(result['decisions'][0]['action'], 'KEEP')
@@ -157,6 +162,61 @@ class SourceGateTests(unittest.TestCase):
     def test_reset_is_not_action_cycle(self):
         gate = common.source_gate(self.meta(False), {'ready': True}, 'RESET')
         self.assertIn('not_an_action_cycle', gate['reasons'])
+
+    def test_manual_intervention_requires_review_instead_of_discarding_provenance(self):
+        state = common.default_state(dt.date(2026, 8, 29))
+        state['paused_ads']['a1'] = {'reason': 'roas_cycle', 'meta_updated_time': '2026-08-29T10:00:00+0000'}
+        review = common.detect_manual_interventions(
+            state,
+            [{'id': 'a1', 'updated_time': '2026-08-29T11:00:00+0000'}],
+            [],
+        )
+        self.assertEqual(review[0]['action'], 'ASK_NICOLAS_FOR_ORIENTATION')
+        gate = common.source_gate({'native_rules': {'conflict': {'enabled': False}}, 'manual_review': review}, {'ready': True}, 'PHASE_2')
+        self.assertIn('manual_intervention_review_required', gate['reasons'])
+        self.assertIn('a1', state['paused_ads'])
+
+    def test_freshness_accepts_source_timestamp_within_two_hours(self):
+        observed = dt.datetime(2026, 8, 29, 14, 0, tzinfo=ET)
+        result = common.evaluate_sb_freshness([{'UPDATED_AT': '2026-08-29T13:00:00-04:00'}], observed, 2.0)
+        self.assertTrue(result['ready'])
+
+    def test_freshness_rejects_source_timestamp_older_than_two_hours(self):
+        observed = dt.datetime(2026, 8, 29, 14, 0, tzinfo=ET)
+        result = common.evaluate_sb_freshness([{'UPDATED_AT': '2026-08-29T11:59:00-04:00'}], observed, 2.0)
+        self.assertFalse(result['ready'])
+        self.assertEqual(result['reason'], 'smart_bidding_data_stale_over_2h')
+
+    def test_freshness_without_timestamp_is_fail_closed(self):
+        result = common.evaluate_sb_freshness([{'DATE': '2026-08-29'}], dt.datetime(2026, 8, 29, 14, 0, tzinfo=ET), 2.0)
+        self.assertFalse(result['ready'])
+        self.assertEqual(result['reason'], 'smart_bidding_freshness_unverifiable')
+
+
+class ScalingTests(unittest.TestCase):
+    def campaign(self, cid='c1', budget='1000', status='ACTIVE'):
+        return {'id': cid, 'name': cid, 'daily_budget': budget, 'status': status, 'configured_status': status, 'effective_status': status}
+
+    def decision(self, cid='c1', spend=10.0, roas=0.41):
+        return {**common.normalize_ad(active_ad(campaign_id=cid)), 'spend': spend, 'purchase_roas': roas, 'purchase_value': spend * roas}
+
+    def test_all_active_campaigns_above_threshold_receive_30_percent_recommendation(self):
+        result = common.plan_campaign_budget_scales(
+            [self.campaign('c1', '1000'), self.campaign('c2', '2000')],
+            [self.decision('c1', 10, .41), self.decision('c2', 10, .80)], .40, 30,
+        )
+        self.assertEqual([row['target_daily_budget_minor'] for row in result], [1300, 2600])
+        self.assertTrue(all(row['write_enabled'] is False for row in result))
+
+    def test_equal_or_below_threshold_does_not_scale(self):
+        result = common.plan_campaign_budget_scales(
+            [self.campaign('c1'), self.campaign('c2')],
+            [self.decision('c1', 10, .40), self.decision('c2', 10, .39)], .40, 30,
+        )
+        self.assertEqual(result, [])
+
+    def test_zero_spend_does_not_scale(self):
+        self.assertEqual(common.plan_campaign_budget_scales([self.campaign()], [self.decision(spend=0, roas=9)], .40, 30), [])
 
 
 class ReportingTests(unittest.TestCase):

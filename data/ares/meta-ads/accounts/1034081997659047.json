@@ -59,7 +59,17 @@
         "native_rule_transition": {
           "rule_name": "ADS ZERO RESULTS",
           "disable_authorized_only_at_future_activation": true,
-          "execute_now": false
+          "execute_now": false,
+          "latest_live_status": "DISABLED",
+          "changed_by_ares_in_latest_update": false
+        },
+        "campaign_scaling": {
+          "metric": "Meta Purchase ROAS",
+          "threshold": "current ROAS threshold number",
+          "increase_percent": 30,
+          "planner_enabled": true,
+          "write_enabled": false,
+          "blocked_reason": "frequency, cooldown, daily execution limit and maximum budget/envelope pending Nicolas"
         }
       },
       "scoped_write_exceptions": {
@@ -105,7 +115,7 @@
       "account_currency": "USD",
       "region": "United States",
       "gdpr_sensitive": false,
-      "metrics_policy": "Meta core approved; Smart Bidding ROI/RPS/net-revenue formulas, freshness and source-precedence pending approval"
+      "metrics_policy": "Meta core approved; Meta Purchase ROAS wins over Smart Bidding ROI on disagreement; Smart Bidding maximum freshness 2h; ROI/RPS/net-revenue formulas and timestamp evidence remain pending"
     }
   ]
 }

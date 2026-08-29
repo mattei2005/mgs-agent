@@ -355,6 +355,10 @@
     "expected_account_names": ["Eggbev-US-CC-EN-01", "Eggbev-US-CC-EN-01-G006"],
     "page_join": ["UTM_CAMPAIGN", "FB_PAGE_ID"],
     "ad_level_economic_join": "pending_live_validation",
+    "maximum_freshness_hours": 2,
+    "freshness_policy": "a timezone-aware source data timestamp must be no older than 2 hours; missing or unverifiable timestamp is fail-closed for economic writes",
+    "source_precedence_on_disagreement": "Meta Purchase ROAS wins over Smart Bidding ROI",
+    "source_absent_or_stale": "no_write_and_alert; precedence does not convert unavailable data into a disagreement",
     "source_unavailable_stale_or_unreconciled": "no_write_and_alert_data_unavailable",
     "metric_empty_but_source_valid": "apply null metric policy; do not confuse with source outage"
   },
@@ -390,6 +394,7 @@
     "after_23_until_midnight": "no_new_cut_or_reactivation",
     "null_purchase_roas": {
       "valid_source_empty_metric": "treat as cut-eligible and report N/D",
+      "missing_entire_ad_insight_row_in_phase_2": "treat as N/D and cut; explicitly approved by Nicolas on 2026-08-29",
       "phase_1_spend_gate_still_applies": true,
       "phase_2_spend_gate": false
     },
@@ -401,6 +406,12 @@
       "campaign_reactivation_when_an_ad_recovers": "automatic_with_the_recovered_ad_after_pre-read_and_post-write_readback"
     },
     "recovery": "readback-first; never repeat non-idempotent writes blindly",
+    "manual_intervention_policy": {
+      "permanently_discard_ares_provenance": false,
+      "behavior": "evaluate the full campaign/adset/ad set, detect Meta updated_time divergence from Ares readback, block automation for the affected set and ask Nicolas for orientation",
+      "implemented_in_dry_run_runner": true,
+      "write_enabled": false
+    },
     "provenance_retention": {
       "policy": "daily threshold reset must preserve Ares paused ad and campaign provenance across dates until reactivation or explicit reconciliation removes it",
       "implemented_at_et": "2026-08-29T15:37:33-04:00",
@@ -419,8 +430,25 @@
       "authorized_by": "Nicolas",
       "authorization_source": "discord:thread:1543280854024060999",
       "execute_now": false,
-      "require_exact_live_rule_readback_before_and_after": true
+      "require_exact_live_rule_readback_before_and_after": true,
+      "latest_live_status": "DISABLED",
+      "latest_live_readback_at_et": "2026-08-29T17:08:20-04:00",
+      "changed_by_ares_in_this_update": false
     }
+  },
+  "campaign_scaling_policy": {
+    "status": "metric_and_percentage_approved_dry_run_frequency_pending",
+    "metric": "Meta Purchase ROAS aggregated at campaign level",
+    "source_precedence": "Meta Purchase ROAS wins over Smart Bidding ROI",
+    "threshold": "current ROAS threshold number",
+    "operator": ">",
+    "exactly_equal": "no_scale",
+    "scope": "all effectively ACTIVE CBO campaigns with positive spend, valid Meta purchase value/ROAS and current daily budget",
+    "increase_percent": 30,
+    "planner_enabled": true,
+    "budget_write_enabled": false,
+    "pending_before_write": ["frequency", "cooldown per campaign", "maximum executions per day", "maximum daily budget or envelope"],
+    "approval_source": "Nicolas in discord thread 1543280854024060999 on 2026-08-29"
   },
   "next_stage_plan": {
     "status": "runners_built_and_verified_awaiting_reconciled_live_data_and_activation_approval",
@@ -730,7 +758,7 @@
       "Smart Bidding ROI/RPS/economic formulas",
       "post-launch serving watcher"
     ],
-    "open_gaps": [
+    "gaps_at_audit_time": [
       {"severity": "critical", "key": "engine_onboarding", "gap": "The Eggbev account is absent from Engine v3 account registration, so no Eggbev lane can be planned or executed."},
       {"severity": "critical", "key": "campaign_materializer", "gap": "No Eggbev creation/clone materializer exists to convert an approved request into a mode-specific manifest and reach validate/plan."},
       {"severity": "critical", "key": "smart_bidding_account_mapping", "gap": "Smart Bidding report does not expose account 01; ROAS writes and economic reconciliation remain fail-closed."},
@@ -754,9 +782,70 @@
       "tests": 2
     }
   },
+  "latest_policy_update": {
+    "at_et": "2026-08-29T17:08:20-04:00",
+    "authorized_by": "Nicolas",
+    "tests_passed": 55,
+    "decisions": {
+      "phase_2_missing_entire_insight_row": "cut as N/D",
+      "campaign_scaling": "recommend +30 percent for every eligible campaign with Meta Purchase ROAS strictly above the current threshold number",
+      "meta_vs_smart_bidding_disagreement": "Meta Purchase ROAS wins",
+      "manual_intervention": "do not permanently discard provenance; inspect the full set and ask Nicolas for orientation",
+      "smart_bidding_maximum_freshness_hours": 2,
+      "ads_on_1_1": "remove"
+    },
+    "implemented": [
+      "Phase 2 missing-row regression",
+      "campaign-level +30 percent scale planner in dry-run only",
+      "2-hour freshness evaluator with fail-closed missing timestamp",
+      "manual updated_time divergence detector and automation review gate",
+      "Meta Purchase ROAS precedence in the contract"
+    ],
+    "native_rules_readback": {
+      "total": 14,
+      "ADS ON 1.1": "absent; Nicolas had already removed the remaining target, so Ares performed no DELETE",
+      "ADS ZERO RESULTS": "DISABLED; no Ares write in this update"
+    },
+    "live_state": {
+      "campaign": "123 - Lauren Tucker - ENG - US - (pg_13829) 666666",
+      "campaign_status": "ACTIVE",
+      "active_ads": 3,
+      "daily_budget_usd": 70,
+      "spend_today_usd": 76,
+      "meta_purchase_roas": 0,
+      "messaging_results": 0,
+      "page": "Lauren Tucker",
+      "utm_campaign": "pg_13829",
+      "leads": 5239,
+      "lead_guardrail_next_approved_check": "20:00 America/New_York",
+      "lead_guardrail_action_if_state_persists": "pause campaign and confirm by GET readback",
+      "write_performed_during_audit": false
+    },
+    "current_open_gap_keys": [
+      "engine_onboarding",
+      "campaign_materializer",
+      "smart_bidding_account_mapping",
+      "clone_page_switch_runtime",
+      "serving_verification",
+      "scheduler_observer_disagreement",
+      "high_performance_frequency_cooldown_and_cap",
+      "smart_bidding_time_window",
+      "page_freshness_timestamp_evidence",
+      "creation_final_status"
+    ],
+    "resolved_or_superseded_gap_keys": [
+      "native_rule_conflict",
+      "external_manual_override_reconciliation",
+      "economic_source_precedence",
+      "no_data_phase2",
+      "ads_on_rule"
+    ],
+    "budget_scale_write_enabled": false,
+    "cron_changes": 0
+  },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T15:37:33-04:00"
+  "updated_at": "2026-08-29T17:08:20-04:00"
 }

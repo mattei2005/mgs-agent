@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.8.0-draft
+version: 0.9.0-draft
 author: Ares
 license: internal
 metadata:
@@ -26,7 +26,7 @@ Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
 Write Meta                ROAS disabled; lead guardrail scoped write enabled
 Crons Eggbev              somente guardrail de leads; nenhum cron ROAS/Diário
-Regra nativa              ADS ZERO RESULTS segue ativa; Nicolas autorizou desativá-la somente na futura ativação
+Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
 ```
@@ -85,7 +85,7 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
-1. Smart Bidding: mapping inequívoco da conta 01, atraso e fórmulas Eggbev de ROI/RPS/receita líquida.
+1. Smart Bidding: mapping inequívoco da conta 01, timestamp de dados verificável com atraso máximo de 2h e fórmulas Eggbev de ROI/RPS/receita líquida.
 2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
 3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
