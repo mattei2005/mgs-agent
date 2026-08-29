@@ -362,7 +362,9 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
             else:
                 reason = 'roas_at_or_above_threshold'
         elif phase in {'PHASE_1', 'PHASE_2'} and is_tracked_paused:
-            if roas is not None and roas > threshold:
+            if ad.get('adset_status') != 'ACTIVE':
+                reason = 'tracked_adset_not_configured_active'
+            elif roas is not None and roas > threshold:
                 action, reason = 'REACTIVATE_AD', 'ares_paused_and_roas_above_threshold'
             else:
                 reason = 'paused_ad_not_above_threshold'
