@@ -23,9 +23,9 @@
       "scoped_write_exceptions": {
         "page_lead_guardrail": {
           "policy_approved": true,
-          "runtime_enabled": false,
+          "runtime_enabled": true,
           "action": "pause campaign when live Smart Bidding LEADS > 5000 after exact UTM_CAMPAIGN + FB_PAGE_ID reconciliation",
-          "blocked_reason": "missing fixed Discord thread ID and scheduler gateway not running",
+          "blocked_reason": "scheduler gateway not running",
           "authorized_by": "Nicolas",
           "authorized_at_et": "2026-08-29T13:21:16-04:00"
         }

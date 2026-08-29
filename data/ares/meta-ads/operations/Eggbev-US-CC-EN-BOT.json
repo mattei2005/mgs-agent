@@ -87,7 +87,7 @@
   "smart_bidding_reconciliation": "pending_review",
   "page_lead_guardrail": {
     "policy_approved": true,
-    "status": "approved_pending_fixed_thread_route_and_scheduler_runtime",
+    "status": "active_scheduled_waiting_scheduler_gateway",
     "authorized_by": "Nicolas",
     "authorized_by_discord_id": "1055570806945620030",
     "authorized_at_et": "2026-08-29T13:21:16-04:00",
@@ -143,7 +143,7 @@
     },
     "discord": {
       "thread_name": "Limite de Leads — Eggbev",
-      "thread_id": null,
+      "thread_id": "1543312825890381865",
       "separate_from_intraday": true,
       "required_fields": [
         "page name",
@@ -157,20 +157,33 @@
       ]
     },
     "runtime": {
-      "write_enabled": false,
-      "blocked_reason": "missing_fixed_discord_thread_id_and_scheduler_gateway_not_running",
+      "write_enabled": true,
+      "blocked_reason": "scheduler_gateway_not_running",
       "runner": "/root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py",
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh",
       "cron_name": "Eggbev limite de leads 15min",
-      "cron_id": null,
+      "cron_id": "c3d2499d8c33",
       "no_agent": true,
       "deliver": "local"
     }
   },
-  "scheduler_jobs": {},
+  "scheduler_jobs": {
+    "page_lead_guardrail": {
+      "job_id": "c3d2499d8c33",
+      "name": "Eggbev limite de leads 15min",
+      "schedule": "*/15 * * * *",
+      "script": "eggbev-page-lead-guardrail.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "state": "scheduled",
+      "gateway_running": false,
+      "readback_at_et": "2026-08-29T13:36:19-04:00"
+    }
+  },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T13:31:23-04:00"
+  "updated_at": "2026-08-29T13:36:19-04:00"
 }
