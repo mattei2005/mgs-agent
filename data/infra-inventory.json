@@ -11777,7 +11777,7 @@
       "entry": "12,27,42,57 * * * * flock -n /var/lock/monitor_sb_messenger_token_invalid.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --apply >> /root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log 2>&1"
     },
     {
-      "entry": "5 0 * * * flock -n /var/lock/cleanup_sb_messenger_token_messages.lock /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --cleanup-old-messages --apply >> /root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log 2>&1"
+      "entry": "5 0 * * * flock -n /var/lock/cleanup_sb_messenger_token_messages.lock /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --cleanup-old-messages --apply >> /root/mgs-agent/logs/cleanup-sb-messenger-token-messages.log 2>&1"
     }
   ],
   "scripts": [
@@ -12073,8 +12073,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
-      "size_bytes": 16367,
-      "modified_at": "2026-08-26T21:12:46-04:00"
+      "size_bytes": 16775,
+      "modified_at": "2026-08-29T02:10:23-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
@@ -15433,8 +15433,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 37474,
-      "md5": "3580b5f8d169948b117297ab8c12200f",
-      "modified_at": "2026-08-29T02:07:42-04:00"
+      "md5": "d4e693f9140ffd3e69690988aa06ae78",
+      "modified_at": "2026-08-29T02:11:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
