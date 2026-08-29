@@ -36,6 +36,7 @@ ET = ZoneInfo('America/New_York')
 DISCORD_API = 'https://discord.com/api/v10'
 PURCHASE_ACTIONS = ('omni_purchase', 'purchase')
 MESSAGING_ACTIONS = ('onsite_conversion.messaging_first_reply', 'onsite_conversion.messaging_conversation_started_7d')
+MESSAGING_STARTED_ACTIONS = ('onsite_conversion.messaging_conversation_started_7d',)
 
 
 def load_module(name: str, path: Path):

@@ -9,7 +9,9 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import sys
+import urllib.parse
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -89,7 +91,7 @@ def format_percent(value: Any) -> str:
 
 
 def enrich_campaign_readbacks(meta, token: str, bundle: dict[str, Any]) -> dict[str, Any]:
-    """Add active campaigns and read back insight campaigns without loading account history."""
+    """Read back campaigns and ads needed for exact UTM/Page reconciliation."""
     enriched = dict(bundle)
     by_id: dict[str, dict[str, Any]] = {}
     for source in ('campaigns', 'tracked_campaigns'):
@@ -110,7 +112,89 @@ def enrich_campaign_readbacks(meta, token: str, bundle: dict[str, Any]) -> dict[
             errors.append({'campaign_id': campaign_id, 'http_status': status})
     enriched['campaign_readbacks'] = list(by_id.values())
     enriched['campaign_readback_errors'] = errors
+    ad_by_id: dict[str, dict[str, Any]] = {}
+    for source in ('ads', 'tracked_ads'):
+        for row in bundle.get(source) or []:
+            ad_id = common.norm(row.get('id'))
+            if ad_id:
+                ad_by_id[ad_id] = row
+    insight_ad_ids = sorted({common.norm(row.get('ad_id')) for row in bundle.get('insights') or [] if common.norm(row.get('ad_id'))})
+    ad_errors: list[dict[str, Any]] = []
+    ad_fields = 'id,name,campaign{id,name},creative{id,url_tags,object_story_spec}'
+    for ad_id in insight_ad_ids:
+        if ad_id in ad_by_id:
+            continue
+        status, row, _ = meta.graph_get(ad_id, token, {'fields': ad_fields})
+        if status == 200 and isinstance(row, dict):
+            ad_by_id[ad_id] = row
+        else:
+            ad_errors.append({'ad_id': ad_id, 'http_status': status})
+    enriched['ad_readbacks'] = list(ad_by_id.values())
+    enriched['ad_readback_errors'] = ad_errors
     return enriched
+
+
+PG_TOKEN = re.compile(r'(?i)(?:^|[^a-z0-9])(pg_\d+)(?:$|[^a-z0-9])')
+
+
+def normalize_utm_campaign(value: Any) -> str:
+    token = common.norm(value).lower()
+    return token if re.fullmatch(r'pg_\d+', token) else ''
+
+
+def utms_from_text(value: Any) -> set[str]:
+    raw = common.norm(value)
+    if not raw:
+        return set()
+    candidates: list[str] = []
+    try:
+        parsed = urllib.parse.urlparse(raw)
+        query = parsed.query if parsed.query else raw.lstrip('?')
+        candidates.extend(urllib.parse.parse_qs(query, keep_blank_values=True).get('utm_campaign') or [])
+    except ValueError:
+        pass
+    candidates.extend(match.group(1) for match in PG_TOKEN.finditer(raw))
+    return {token for value in candidates if (token := normalize_utm_campaign(value))}
+
+
+def recursive_strings(value: Any):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from recursive_strings(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from recursive_strings(item)
+
+
+def meta_campaign_identities(bundle: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    grouped: dict[str, dict[str, set[str]]] = defaultdict(lambda: {'utms': set(), 'page_ids': set()})
+    for ad in bundle.get('ad_readbacks') or bundle.get('ads') or []:
+        campaign_id = common.norm((ad.get('campaign') or {}).get('id'))
+        if not campaign_id:
+            continue
+        creative = ad.get('creative') or {}
+        grouped[campaign_id]['utms'].update(utms_from_text(creative.get('url_tags')))
+        story = creative.get('object_story_spec') or {}
+        page_id = common.norm(story.get('page_id'))
+        if page_id:
+            grouped[campaign_id]['page_ids'].add(page_id)
+        for raw in recursive_strings(story):
+            grouped[campaign_id]['utms'].update(utms_from_text(raw))
+    result: dict[str, dict[str, Any]] = {}
+    for campaign_id, values in grouped.items():
+        utms = sorted(values['utms'])
+        page_ids = sorted(values['page_ids'])
+        result[campaign_id] = {
+            'utm_campaign': utms[0] if len(utms) == 1 else None,
+            'meta_page_id': page_ids[0] if len(page_ids) == 1 else None,
+            'utm_candidates': utms,
+            'page_id_candidates': page_ids,
+            'identity_issue': ('multiple_meta_utms' if len(utms) > 1 else 'multiple_meta_page_ids' if len(page_ids) > 1 else None),
+            'utm_source': 'creative',
+        }
+    return result
 
 
 def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
@@ -119,13 +203,16 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
     impressions = sum(common.finite_float(row.get('impressions')) or 0.0 for row in rows)
     purchases_value = sum(common.action_value(row.get('action_values'), common.PURCHASE_ACTIONS) or 0.0 for row in rows)
     messaging_results = sum(common.action_value(row.get('actions'), common.MESSAGING_ACTIONS) or 0.0 for row in rows)
+    messaging_started = sum(common.action_value(row.get('actions'), common.MESSAGING_STARTED_ACTIONS) or 0.0 for row in rows)
     roas = purchases_value / spends if spends > 0 else None
     cpm = spends * 1000.0 / impressions if impressions > 0 else None
     cost_per_message = spends / messaging_results if messaging_results > 0 else None
+    cost_per_messaging_started = spends / messaging_started if messaging_started > 0 else None
     weighted_ctr_numerator = sum((common.finite_float(row.get('ctr')) or 0.0) * (common.finite_float(row.get('impressions')) or 0.0) for row in rows)
     ctr = weighted_ctr_numerator / impressions if impressions > 0 else None
     by_campaign: dict[str, dict[str, Any]] = defaultdict(lambda: {
         'name': '', 'spend': 0.0, 'purchase_value': 0.0, 'messaging_results': 0.0,
+        'messaging_started': 0.0,
         'impressions': 0.0, 'ctr_weighted': 0.0, 'has_insight': False,
     })
     for row in rows:
@@ -135,6 +222,7 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         target['spend'] += common.finite_float(row.get('spend')) or 0.0
         target['purchase_value'] += common.action_value(row.get('action_values'), common.PURCHASE_ACTIONS) or 0.0
         target['messaging_results'] += common.action_value(row.get('actions'), common.MESSAGING_ACTIONS) or 0.0
+        target['messaging_started'] += common.action_value(row.get('actions'), common.MESSAGING_STARTED_ACTIONS) or 0.0
         row_impressions = common.finite_float(row.get('impressions')) or 0.0
         target['impressions'] += row_impressions
         target['ctr_weighted'] += (common.finite_float(row.get('ctr')) or 0.0) * row_impressions
@@ -148,12 +236,14 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         if campaign_status(row) == 'ACTIVE' and campaign_id not in by_campaign:
             by_campaign[campaign_id]['name'] = common.norm(row.get('name'))
 
+    identities = meta_campaign_identities(bundle)
     campaigns = []
     for campaign_id, row in by_campaign.items():
         live = readback_by_id.get(campaign_id) or {}
         has_insight = bool(row['has_insight'])
         spend = row['spend'] if has_insight else None
         results = row['messaging_results'] if has_insight else None
+        started = row['messaging_started'] if has_insight else None
         impressions_campaign = row['impressions'] if has_insight else None
         status = campaign_status(live)
         if has_insight and status == 'N/D':
@@ -164,6 +254,12 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
             note = f'Entrega no período; estado atual {status}'
         else:
             note = 'ACTIVE sem linha de insight no período'
+        identity = dict(identities.get(campaign_id) or {})
+        if not identity.get('utm_campaign'):
+            name_tokens = sorted({match.group(1).lower() for match in PG_TOKEN.finditer(common.norm(live.get('name')) or row['name'])})
+            if len(name_tokens) == 1:
+                identity['utm_campaign'] = name_tokens[0]
+                identity['utm_source'] = 'campaign_name_fallback'
         campaigns.append({
             'campaign_id': campaign_id,
             'name': common.norm(live.get('name')) or row['name'] or campaign_id,
@@ -174,29 +270,75 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
             'purchase_roas': row['purchase_value'] / spend if spend is not None and spend > 0 else None,
             'messaging_results': results,
             'cost_per_message': spend / results if spend is not None and results is not None and results > 0 else None,
+            'messaging_started': started,
+            'cost_per_messaging_started': spend / started if spend is not None and started is not None and started > 0 else None,
             'impressions': impressions_campaign,
             'cpm': spend * 1000.0 / impressions_campaign if spend is not None and impressions_campaign is not None and impressions_campaign > 0 else None,
             'ctr': row['ctr_weighted'] / impressions_campaign if impressions_campaign is not None and impressions_campaign > 0 else None,
             'has_insight': has_insight,
             'note': note,
+            **identity,
         })
     campaigns.sort(key=lambda row: (row['status'] != 'ACTIVE', -(row['spend'] or 0.0), row['name']))
     active_budget = sum(campaign_budget_usd(row) or 0.0 for row in readback_by_id.values() if campaign_status(row) == 'ACTIVE')
     return {
         'spend': spends, 'purchase_value': purchases_value, 'purchase_roas': roas,
         'messaging_results': messaging_results, 'cost_per_message': cost_per_message,
+        'messaging_started': messaging_started, 'cost_per_messaging_started': cost_per_messaging_started,
         'impressions': impressions, 'cpm': cpm, 'ctr': ctr,
         'active_budget': active_budget,
         'campaigns': campaigns,
         'campaigns_in_scope': len(campaigns),
         'active_without_insight': sum(1 for row in campaigns if row['status'] == 'ACTIVE' and not row['has_insight']),
         'campaign_readback_errors': list(bundle.get('campaign_readback_errors') or []),
+        'ad_readback_errors': list(bundle.get('ad_readback_errors') or []),
     }
 
 
 def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
     rows = bundle.get('target_report_rows') or []
     ready = bool(bundle.get('ready'))
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        utm = normalize_utm_campaign(row.get('UTM_CAMPAIGN'))
+        if utm:
+            grouped[utm].append(row)
+    page_index = bundle.get('page_index') or {}
+    by_utm: dict[str, dict[str, Any]] = {}
+    for utm, source_rows in sorted(grouped.items()):
+        def total(key: str) -> float | None:
+            values = [common.finite_float(row.get(key)) for row in source_rows]
+            valid = [value for value in values if value is not None]
+            return sum(valid) if valid else None
+        investment = total('INVESTIMENT')
+        revenue = total('REVENUE')
+        sessions = total('SESSIONS')
+        acquisition_clicks = total('ACQUISITION_CLICKS')
+        avg_values = [(common.finite_float(row.get('AVG_PRICE')), common.finite_float(row.get('SESSIONS'))) for row in source_rows]
+        avg_pairs = [(value, weight or 0.0) for value, weight in avg_values if value is not None]
+        avg_weight = sum(weight for _, weight in avg_pairs)
+        avg_price = (sum(value * weight for value, weight in avg_pairs) / avg_weight if avg_weight > 0 else (sum(value for value, _ in avg_pairs) / len(avg_pairs) if avg_pairs else None))
+        pages = list(page_index.get(utm) or page_index.get(utm.lower()) or [])
+        page_ids = sorted({common.norm(row.get('FB_PAGE_ID')) for row in pages if common.norm(row.get('FB_PAGE_ID'))})
+        raw_metrics = {
+            'investment': investment,
+            'revenue': revenue,
+            'leads': total('LEADS'),
+            'sessions': sessions,
+            'acquisition_clicks': acquisition_clicks,
+            'avg_price': avg_price,
+            'rps_gross': revenue * 1000.0 / sessions if revenue is not None and sessions and sessions > 0 else None,
+            'epc_gross': revenue / acquisition_clicks if revenue is not None and acquisition_clicks and acquisition_clicks > 0 else None,
+        }
+        by_utm[utm] = {
+            'utm_campaign': utm,
+            'report_row_count': len(source_rows),
+            'page_row_count': len(pages),
+            'sb_page_id': page_ids[0] if len(page_ids) == 1 else None,
+            'page_name': common.norm(pages[0].get('PAGE_NAME')) if len(pages) == 1 else None,
+            'page_mapping_issue': ('sb_page_missing' if not pages else 'sb_page_duplicate_or_ambiguous' if len(pages) != 1 or len(page_ids) != 1 else None),
+            **({key: value for key, value in raw_metrics.items()} if ready else {key: None for key in raw_metrics}),
+        }
     return {
         'ready': ready, 'reason': bundle.get('reason'), 'rows': len(rows),
         'investment': sum_field(rows, 'INVESTIMENT') if ready else None,
@@ -207,9 +349,51 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
         'leads_total': sum_field(rows, 'LEADS_TOTAL') if ready else None,
         'available_account_names': bundle.get('available_account_names'),
         'freshness': dict(bundle.get('freshness') or {}),
-        'roi_real': None, 'roi_estimated': None, 'rps': None,
-        'formula_note': 'ROI/RPS N/D: nenhuma fórmula Eggbev aprovada; valores brutos preservados.',
+        'by_utm': by_utm,
+        'roi_real': None, 'roi_estimated': None,
+        'formula_note': 'ROI real/estimado N/D. Pricing: RPS bruto = REVENUE×1.000/SESSIONS; EPC bruto = REVENUE/ACQUISITION_CLICKS.',
     }
+
+
+def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str, Any]:
+    merged = dict(meta)
+    campaigns: list[dict[str, Any]] = []
+    counts: dict[str, int] = defaultdict(int)
+    for source in meta.get('campaigns') or []:
+        row = dict(source)
+        utm = normalize_utm_campaign(row.get('utm_campaign'))
+        sb_row = (sb.get('by_utm') or {}).get(utm) if utm else None
+        status = 'matched'
+        if row.get('identity_issue'):
+            status = common.norm(row.get('identity_issue'))
+        elif not utm:
+            status = 'meta_utm_missing'
+        elif not sb_row:
+            status = 'sb_utm_not_found'
+        elif sb_row.get('page_mapping_issue'):
+            status = common.norm(sb_row.get('page_mapping_issue'))
+        elif not row.get('meta_page_id'):
+            status = 'meta_page_id_missing'
+        elif common.norm(row.get('meta_page_id')) != common.norm(sb_row.get('sb_page_id')):
+            status = 'meta_sb_page_id_mismatch'
+        elif not sb.get('ready'):
+            status = common.norm(sb.get('reason')) or 'smart_bidding_not_ready'
+        external = sb_row if status == 'matched' else {}
+        row.update({
+            'join_status': status,
+            'sb_investment': external.get('investment'),
+            'sb_revenue': external.get('revenue'),
+            'sb_leads': external.get('leads'),
+            'pricing_avg': external.get('avg_price'),
+            'pricing_rps': external.get('rps_gross'),
+            'pricing_epc': external.get('epc_gross'),
+        })
+        counts[status] += 1
+        campaigns.append(row)
+    merged['campaigns'] = campaigns
+    merged['source_join_counts'] = dict(sorted(counts.items()))
+    merged['source_join_matched'] = counts.get('matched', 0)
+    return merged
 
 
 def render_period(period: dict[str, Any]) -> list[str]:
