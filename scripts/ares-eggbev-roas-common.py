@@ -503,7 +503,7 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
     }
 
 
-def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list[dict[str, Any]], threshold: float, increase_percent: float = 30.0) -> list[dict[str, Any]]:
+def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list[dict[str, Any]], threshold: float = 0.50, increase_percent: float = 10.0) -> list[dict[str, Any]]:
     """Plan, but never execute, campaign-level CBO increases from Meta ROAS."""
     by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in decisions:
@@ -547,9 +547,10 @@ def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list
             'target_daily_budget_minor': target_minor,
             'current_daily_budget_usd': current_minor / 100.0,
             'target_daily_budget_usd': target_minor / 100.0,
-            'action': 'RECOMMEND_INCREASE_BUDGET_30_PERCENT',
+            'action': 'RECOMMEND_INCREASE_BUDGET',
+            'frequency': 'EVERY_ROAS_ACTION_CYCLE',
             'write_enabled': False,
-            'blocked_reason': 'scale_frequency_and_cooldown_pending_nicolas',
+            'blocked_reason': 'budget_write_requires_rodolfo_or_geizian_and_budget_envelope',
         })
     return candidates
 

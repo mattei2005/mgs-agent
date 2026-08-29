@@ -37,6 +37,8 @@
           "contract_approved": true,
           "runner_built": false,
           "engine_account_registered": false,
+          "normal_production_status": "ACTIVE with future start_time after final summary approval",
+          "technical_canary_status": "PAUSED until separate activation approval",
           "write_enabled": false
         },
         "campaign_cloning": {
@@ -65,11 +67,14 @@
         },
         "campaign_scaling": {
           "metric": "Meta Purchase ROAS",
-          "threshold": "current ROAS threshold number",
-          "increase_percent": 30,
+          "roas_threshold": 0.50,
+          "operator": ">",
+          "increase_percent": 10,
+          "frequency": "every approved ROAS action cycle",
+          "roas_0_40_through_0_50": "keep current budget",
           "planner_enabled": true,
           "write_enabled": false,
-          "blocked_reason": "frequency, cooldown, daily execution limit and maximum budget/envelope pending Nicolas"
+          "blocked_reason": "budget write requires Rodolfo or Geizian approval and a maximum daily budget or account envelope"
         }
       },
       "scoped_write_exceptions": {
@@ -117,7 +122,7 @@
       "account_currency": "USD",
       "region": "United States",
       "gdpr_sensitive": false,
-      "metrics_policy": "Meta core approved; Meta Purchase ROAS wins over Smart Bidding ROI on disagreement; Smart Bidding maximum freshness 2h; ROI/RPS/net-revenue formulas and timestamp evidence remain pending"
+      "metrics_policy": "Meta core approved; Meta Purchase ROAS wins over Smart Bidding ROI on disagreement; Smart Bidding target account row observed but source timestamp is absent, so maximum freshness 2h remains unverifiable and economic writes stay fail-closed; ROI/RPS/net-revenue formulas remain pending"
     }
   ]
 }

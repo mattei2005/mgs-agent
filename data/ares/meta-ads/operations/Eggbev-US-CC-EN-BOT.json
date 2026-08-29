@@ -126,6 +126,12 @@
   },
   "campaign_structure": {
     "status": "approved_by_nicolas_pending_implementation",
+    "delivery_state_policy": {
+      "normal_production_after_final_summary_approval": "ACTIVE with future start_time; Meta delivery begins only at the approved scheduled time",
+      "technical_canary": "PAUSED until a separate explicit activation approval",
+      "approved_by": "Nicolas",
+      "approved_at_et": "2026-08-29T17:27:17-04:00"
+    },
     "campaign": {
       "buying_type": "AUCTION",
       "objective": "SALES",
@@ -437,17 +443,22 @@
     }
   },
   "campaign_scaling_policy": {
-    "status": "metric_and_percentage_approved_dry_run_frequency_pending",
+    "status": "metric_percentage_threshold_and_frequency_approved_dry_run_budget_write_requires_rodolfo_or_geizian",
     "metric": "Meta Purchase ROAS aggregated at campaign level",
     "source_precedence": "Meta Purchase ROAS wins over Smart Bidding ROI",
-    "threshold": "current ROAS threshold number",
+    "roas_threshold": 0.50,
     "operator": ">",
-    "exactly_equal": "no_scale",
+    "exactly_equal_0_50": "keep_current_budget",
+    "roas_above_cut_threshold_through_0_50": "keep_current_budget",
     "scope": "all effectively ACTIVE CBO campaigns with positive spend, valid Meta purchase value/ROAS and current daily budget",
-    "increase_percent": 30,
+    "increase_percent": 10,
+    "frequency": "every approved ROAS action cycle while campaign ROAS remains strictly above 0.50",
+    "compounding": true,
     "planner_enabled": true,
     "budget_write_enabled": false,
-    "pending_before_write": ["frequency", "cooldown per campaign", "maximum executions per day", "maximum daily budget or envelope"],
+    "budget_write_gate": "Rodolfo or Geizian approval required by permissions-matrix",
+    "pending_before_write": ["Rodolfo or Geizian activation approval", "maximum daily budget or account envelope"],
+    "supersedes": "30 percent above the current cut threshold with frequency pending",
     "approval_source": "Nicolas in discord thread 1543280854024060999 on 2026-08-29"
   },
   "next_stage_plan": {
@@ -782,7 +793,7 @@
       "tests": 2
     }
   },
-  "latest_policy_update": {
+  "policy_update_20260829_170820": {
     "at_et": "2026-08-29T17:08:20-04:00",
     "authorized_by": "Nicolas",
     "tests_passed": 56,
@@ -859,9 +870,60 @@
     "budget_scale_write_enabled": false,
     "cron_changes": 0
   },
+  "latest_policy_update": {
+    "at_et": "2026-08-29T17:27:17-04:00",
+    "authorized_by": "Nicolas",
+    "tests_passed": 58,
+    "decisions": {
+      "normal_creation": "ACTIVE with future start_time after the final summary is explicitly approved",
+      "technical_canary": "PAUSED until separate activation approval",
+      "scale_metric": "campaign-level Meta Purchase ROAS",
+      "scale_threshold": "> 0.50",
+      "scale_at_exactly_0_50": "keep current budget",
+      "scale_increase_percent": 10,
+      "scale_frequency": "every approved ROAS action cycle while still strictly above 0.50",
+      "scale_compounding": true
+    },
+    "implementation": {
+      "planner": "updated and verified",
+      "report_label": "+10 percent",
+      "budget_write_enabled": false,
+      "budget_write_gate": "Rodolfo or Geizian approval plus a maximum budget/account envelope",
+      "cron_changes": 0,
+      "meta_writes": 0
+    },
+    "boundary_readback": {
+      "roas_0_50": "KEEP_BUDGET",
+      "roas_0_51": "RECOMMEND_INCREASE_10_PERCENT",
+      "example_budget_usd": "100.00 to 110.00"
+    },
+    "smart_bidding_live_readback": {
+      "target_account_rows": 1,
+      "account_name": "Eggbev-US-CC-EN-01",
+      "freshness_status": "unverifiable",
+      "source_timestamp_field_present": false,
+      "economic_write_status": "fail_closed"
+    },
+    "current_open_gap_keys": [
+      "engine_onboarding",
+      "campaign_materializer",
+      "clone_page_switch_runtime",
+      "serving_verification",
+      "scheduler_observer_disagreement",
+      "smart_bidding_timestamp_evidence",
+      "smart_bidding_time_window",
+      "page_freshness_timestamp_evidence",
+      "budget_write_rodolfo_or_geizian_approval_and_envelope"
+    ],
+    "resolved_or_superseded_gap_keys": [
+      "smart_bidding_account_mapping",
+      "high_performance_frequency_cooldown_and_cap",
+      "creation_final_status"
+    ]
+  },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T17:16:35-04:00"
+  "updated_at": "2026-08-29T17:29:12-04:00"
 }

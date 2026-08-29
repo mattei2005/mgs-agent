@@ -215,23 +215,23 @@ class ScalingTests(unittest.TestCase):
     def decision(self, cid='c1', spend=10.0, roas=0.41):
         return {**common.normalize_ad(active_ad(campaign_id=cid)), 'spend': spend, 'purchase_roas': roas, 'purchase_value': spend * roas}
 
-    def test_all_active_campaigns_above_threshold_receive_30_percent_recommendation(self):
+    def test_all_active_campaigns_above_0_50_receive_10_percent_recommendation(self):
         result = common.plan_campaign_budget_scales(
             [self.campaign('c1', '1000'), self.campaign('c2', '2000')],
-            [self.decision('c1', 10, .41), self.decision('c2', 10, .80)], .40, 30,
+            [self.decision('c1', 10, .51), self.decision('c2', 10, .80)], .50, 10,
         )
-        self.assertEqual([row['target_daily_budget_minor'] for row in result], [1300, 2600])
+        self.assertEqual([row['target_daily_budget_minor'] for row in result], [1100, 2200])
         self.assertTrue(all(row['write_enabled'] is False for row in result))
 
-    def test_equal_or_below_threshold_does_not_scale(self):
+    def test_0_40_through_0_50_keeps_current_budget(self):
         result = common.plan_campaign_budget_scales(
             [self.campaign('c1'), self.campaign('c2')],
-            [self.decision('c1', 10, .40), self.decision('c2', 10, .39)], .40, 30,
+            [self.decision('c1', 10, .50), self.decision('c2', 10, .41)], .50, 10,
         )
         self.assertEqual(result, [])
 
     def test_zero_spend_does_not_scale(self):
-        self.assertEqual(common.plan_campaign_budget_scales([self.campaign()], [self.decision(spend=0, roas=9)], .40, 30), [])
+        self.assertEqual(common.plan_campaign_budget_scales([self.campaign()], [self.decision(spend=0, roas=9)], .50, 10), [])
 
 
 class ReportingTests(unittest.TestCase):
@@ -297,6 +297,20 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(mode['media_and_copy'], 'preserve source media and copy')
         self.assertEqual(mode['engine_support'], 'contract_approved_pending_v3_manifest_and_executor_extension')
         self.assertFalse(cloning['engine_readback']['eggbev_account_registered'])
+
+    def test_normal_creation_is_active_future_and_canary_remains_paused(self):
+        policy = self.operation['campaign_structure']['delivery_state_policy']
+        self.assertIn('ACTIVE', policy['normal_production_after_final_summary_approval'])
+        self.assertIn('future start_time', policy['normal_production_after_final_summary_approval'])
+        self.assertIn('PAUSED', policy['technical_canary'])
+
+    def test_scaling_is_10_percent_every_cycle_strictly_above_0_50_but_write_disabled(self):
+        policy = self.operation['campaign_scaling_policy']
+        self.assertEqual(policy['roas_threshold'], 0.50)
+        self.assertEqual(policy['operator'], '>')
+        self.assertEqual(policy['increase_percent'], 10)
+        self.assertIn('every approved ROAS action cycle', policy['frequency'])
+        self.assertFalse(policy['budget_write_enabled'])
 
 
 if __name__ == '__main__':

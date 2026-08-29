@@ -66,7 +66,7 @@ def render_report(run: dict[str, Any]) -> str:
         f"Reativar anúncios            {counts.get('reactivate_ads', 0):>3}",
         f"Pausar campanhas             {counts.get('pause_campaigns', 0):>3}",
         f"Reativar campanhas           {counts.get('reactivate_campaigns', 0):>3}",
-        f"Escalas +30% recomendadas    {counts.get('budget_scale_candidates', 0):>3}",
+        f"Escalas +10% recomendadas    {counts.get('budget_scale_candidates', 0):>3}",
         '```',
     ])
     actionable = [row for row in plan.get('decisions') or [] if row.get('action') != 'KEEP']
@@ -88,9 +88,10 @@ def render_report(run: dict[str, Any]) -> str:
         for row in scale_candidates[:25]:
             lines.append(
                 f"📈 {row.get('campaign_name') or row.get('campaign_id')} — ROAS {common.fmt_number(row.get('purchase_roas'))} | "
-                f"{common.fmt_money(row.get('current_daily_budget_usd'))} → {common.fmt_money(row.get('target_daily_budget_usd'))} (+30%)"
+                f"{common.fmt_money(row.get('current_daily_budget_usd'))} → {common.fmt_money(row.get('target_daily_budget_usd'))} "
+                f"(+{common.fmt_number(row.get('increase_percent'), 0)}%)"
             )
-        lines.append('Budget write bloqueado até Nicolas definir frequência/cooldown da escala.')
+        lines.append('Budget write bloqueado: exige aprovação de Rodolfo/Geizian e teto/envelope de budget.')
     writes = run.get('writes') or []
     if writes:
         confirmed = sum(1 for row in writes if row.get('ok'))
@@ -276,8 +277,9 @@ def main() -> int:
             )
             scale_policy = operation.get('campaign_scaling_policy') or {}
             scale_candidates = common.plan_campaign_budget_scales(
-                meta_bundle.get('campaigns') or [], plan.get('decisions') or [], run['threshold'],
-                common.finite_float(scale_policy.get('increase_percent')) or 30.0,
+                meta_bundle.get('campaigns') or [], plan.get('decisions') or [],
+                common.finite_float(scale_policy.get('roas_threshold')) or 0.50,
+                common.finite_float(scale_policy.get('increase_percent')) or 10.0,
             )
             plan['budget_scale_candidates'] = scale_candidates
             plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
