@@ -91,6 +91,11 @@ def initial_state() -> dict[str, Any]:
             'last_error': None,
             'failure_alert_sent_for': 0,
         },
+        'daily': {
+            'date': None,
+            'pending': None,
+            'last_result': None,
+        },
         'incidents': {},
     }
 
@@ -697,6 +702,190 @@ def register_incidents(
         state['incidents'] = dict(keep)
 
 
+def classify_new_alerts(
+    state: dict[str, Any],
+    alerts: list[dict[str, Any]],
+    channel_id: str,
+    dry_run: bool,
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for alert in alerts:
+        grouped.setdefault(incident_key(alert), []).append(alert)
+    latest_alerts = [
+        max(rows, key=lambda row: int(row['notification_id']))
+        for _, rows in sorted(grouped.items())
+    ]
+    incidents = state.setdefault('incidents', {})
+    deliverable: list[dict[str, Any]] = []
+    stats = {
+        'source_rows': len(alerts),
+        'deduped_incidents': len(latest_alerts),
+        'suppressed_active': 0,
+        'resolved': 0,
+        'deliverable': 0,
+    }
+    for alert in latest_alerts:
+        key = incident_key(alert)
+        rows = grouped[key]
+        incident = incidents.get(key)
+        if isinstance(incident, dict) and incident.get('status') == 'active':
+            message_ids = [str(value) for value in incident.get('message_ids') or []]
+            reacted = bool(
+                not dry_run
+                and message_ids
+                and message_has_resolution_reaction(channel_id, message_ids[-1])
+            )
+            if reacted:
+                incident['status'] = 'resolved'
+                incident['resolved_at'] = now_iso()
+                stats['resolved'] += 1
+                deliverable.append(alert)
+                continue
+            source_ids = {int(value) for value in incident.get('notification_ids') or []}
+            source_ids.update(int(row['notification_id']) for row in rows)
+            incident['notification_ids'] = sorted(source_ids)
+            incident['alert'] = alert
+            stats['suppressed_active'] += 1
+            continue
+        deliverable.append(alert)
+    stats['deliverable'] = len(deliverable)
+    return deliverable, stats
+
+
+def process_daily_incident_cycle(
+    state: dict[str, Any],
+    channel_id: str,
+    dry_run: bool,
+    now_value: datetime | None = None,
+    state_path: Path | None = None,
+    sleep_func=time.sleep,
+) -> dict[str, Any]:
+    now_value = (now_value or datetime.now(NY)).astimezone(NY)
+    today = now_value.date().isoformat()
+    daily = state.setdefault('daily', {'date': None, 'pending': None, 'last_result': None})
+    stats: dict[str, Any] = {
+        'date': today,
+        'rollover': daily.get('date') != today,
+        'active': 0,
+        'resolved': 0,
+        'daily_sent': 0,
+        'would_send': 0,
+    }
+    if not stats['rollover'] and not daily.get('pending'):
+        return stats
+
+    def persist() -> None:
+        if state_path is not None and not dry_run:
+            save_state(state_path, state)
+
+    pending = daily.get('pending')
+    if isinstance(pending, dict) and pending.get('alerts'):
+        pending_alerts = [dict(row) for row in pending.get('alerts') or []]
+        payloads = build_payloads(pending_alerts, repeat_counts=[0] * len(pending_alerts), now_value=now_value)
+        existing_ids = [str(value) for value in pending.get('message_ids') or []]
+        if len(existing_ids) > len(payloads):
+            raise RuntimeError('daily pending has more Discord messages than payloads')
+        for index, message_id in enumerate(existing_ids):
+            verify_message(channel_id, message_id, payloads[index])
+        if dry_run:
+            stats['would_send'] = len(payloads) - len(existing_ids)
+            return stats
+        for index, payload in enumerate(payloads[len(existing_ids):], start=len(existing_ids)):
+            existing_ids.append(post_and_verify(channel_id, payload))
+            daily['pending']['message_ids'] = existing_ids
+            persist()
+            if index + 1 < len(payloads):
+                sleep_func(0.45)
+        register_incidents(
+            state,
+            pending_alerts,
+            existing_ids,
+            at=now_value.isoformat(timespec='seconds'),
+            repeat_counts=[0] * len(pending_alerts),
+        )
+        daily.update({
+            'date': str(pending.get('date') or today),
+            'pending': None,
+            'last_result': {
+                'at': now_value.isoformat(timespec='seconds'),
+                'sent': len(existing_ids),
+                'resolved': 0,
+            },
+        })
+        stats['daily_sent'] += len(existing_ids)
+        persist()
+        if daily['date'] == today:
+            return stats
+        stats['rollover'] = True
+
+    active_alerts: list[dict[str, Any]] = []
+    for incident in (state.get('incidents') or {}).values():
+        if not isinstance(incident, dict) or incident.get('status') != 'active':
+            continue
+        stats['active'] += 1
+        message_ids = [str(value) for value in incident.get('message_ids') or []]
+        if not dry_run and message_ids and message_has_resolution_reaction(channel_id, message_ids[-1]):
+            incident['status'] = 'resolved'
+            incident['resolved_at'] = now_value.isoformat(timespec='seconds')
+            stats['resolved'] += 1
+            continue
+        alert = incident.get('alert')
+        if isinstance(alert, dict):
+            active_alerts.append(dict(alert))
+
+    active_alerts.sort(key=incident_key)
+    if dry_run:
+        stats['would_send'] = len(active_alerts)
+        return stats
+    if not active_alerts:
+        daily.update({
+            'date': today,
+            'pending': None,
+            'last_result': {
+                'at': now_value.isoformat(timespec='seconds'),
+                'sent': 0,
+                'resolved': stats['resolved'],
+            },
+        })
+        persist()
+        return stats
+
+    daily['pending'] = {
+        'date': today,
+        'created_at': now_value.isoformat(timespec='seconds'),
+        'alerts': active_alerts,
+        'message_ids': [],
+    }
+    persist()
+    payloads = build_payloads(active_alerts, repeat_counts=[0] * len(active_alerts), now_value=now_value)
+    message_ids: list[str] = []
+    for index, payload in enumerate(payloads):
+        message_ids.append(post_and_verify(channel_id, payload))
+        daily['pending']['message_ids'] = message_ids
+        persist()
+        if index + 1 < len(payloads):
+            sleep_func(0.45)
+    register_incidents(
+        state,
+        active_alerts,
+        message_ids,
+        at=now_value.isoformat(timespec='seconds'),
+        repeat_counts=[0] * len(active_alerts),
+    )
+    daily.update({
+        'date': today,
+        'pending': None,
+        'last_result': {
+            'at': now_value.isoformat(timespec='seconds'),
+            'sent': len(message_ids),
+            'resolved': stats['resolved'],
+        },
+    })
+    stats['daily_sent'] = len(message_ids)
+    persist()
+    return stats
+
+
 def process_incident_reminders(
     state: dict[str, Any],
     channel_id: str,
@@ -741,8 +930,17 @@ def process_incident_reminders(
     return stats
 
 
-def mark_success(state: dict[str, Any], alerts: list[dict[str, Any]], message_ids: list[str]) -> None:
+def mark_success(
+    state: dict[str, Any],
+    alerts: list[dict[str, Any]],
+    message_ids: list[str],
+    delivered_alerts: list[dict[str, Any]] | None = None,
+) -> None:
     ids = sorted({int(row['notification_id']) for row in alerts})
+    delivery_ids = sorted({
+        int(row['notification_id'])
+        for row in (alerts if delivered_alerts is None else delivered_alerts)
+    })
     delivered = [int(value) for value in state.get('delivered_ids') or []]
     delivered = sorted(set(delivered).union(ids))[-MAX_DELIVERED_IDS:]
     state.update({
@@ -750,7 +948,12 @@ def mark_success(state: dict[str, Any], alerts: list[dict[str, Any]], message_id
         'last_seen_id': max([int(state.get('last_seen_id') or 0), *ids]),
         'delivered_ids': delivered,
         'pending': None,
-        'last_delivery': {'at': now_iso(), 'notification_ids': ids, 'message_ids': message_ids},
+        'last_delivery': {
+            'at': now_iso(),
+            'notification_ids': delivery_ids,
+            'cursor_ids': ids,
+            'message_ids': message_ids,
+        },
         'consecutive_failures': 0,
         'last_error': None,
         'failure_alert_sent_for': 0,
@@ -832,18 +1035,41 @@ async def run(args: argparse.Namespace) -> int:
         return 0
 
     state.setdefault('incidents', {})
+    state.setdefault('daily', {'date': None, 'pending': None, 'last_result': None})
     state['_meta'] = initial_state()['_meta']
 
     pending = state.get('pending')
     if isinstance(pending, dict) and pending.get('notification_ids'):
         pending_ids = {int(value) for value in pending.get('notification_ids') or []}
-        pending_alerts = [row for row in alerts if int(row['notification_id']) in pending_ids]
+        stored_alerts = pending.get('alerts')
+        if isinstance(stored_alerts, list) and stored_alerts:
+            pending_alerts = [dict(row) for row in stored_alerts]
+            live_rows = {
+                (int(row['notification_id']), incident_key(row))
+                for row in alerts
+            }
+            expected_rows = {
+                (int(row['notification_id']), incident_key(row))
+                for row in pending_alerts
+            }
+            if not expected_rows.issubset(live_rows):
+                raise RuntimeError('pending SB incident rows are no longer available; refusing cursor advance')
+        else:
+            pending_alerts = [row for row in alerts if int(row['notification_id']) in pending_ids]
         present_ids = {int(row['notification_id']) for row in pending_alerts}
         if present_ids != pending_ids:
             raise RuntimeError('pending SB notifications are no longer available; refusing cursor advance')
+        cursor_ids = {int(value) for value in pending.get('cursor_ids') or pending_ids}
+        cursor_alerts = [row for row in alerts if int(row['notification_id']) in cursor_ids]
+        if {int(row['notification_id']) for row in cursor_alerts} != cursor_ids:
+            raise RuntimeError('pending SB cursor rows are no longer available; refusing cursor advance')
         pending_specs = pending.get('delivery_specs')
         if not isinstance(pending_specs, list) or len(pending_specs) != len(pending_alerts):
-            pending_specs = selected_delivery_specs(state, pending_alerts)
+            stamp = now_iso()
+            pending_specs = [
+                {'repeat_count': 0, 'opened_at': stamp, 'rendered_at': stamp}
+                for _ in pending_alerts
+            ]
             state['pending']['delivery_specs'] = pending_specs
             if not args.dry_run:
                 save_state(state_path, state)
@@ -860,7 +1086,7 @@ async def run(args: argparse.Namespace) -> int:
             existing_ids.append(post_and_verify(args.channel_id, payload))
             state['pending']['message_ids'] = existing_ids
             save_state(state_path, state)
-        mark_success(state, pending_alerts, existing_ids)
+        mark_success(state, cursor_alerts, existing_ids, delivered_alerts=pending_alerts)
         register_incidents(
             state,
             pending_alerts,
@@ -868,56 +1094,75 @@ async def run(args: argparse.Namespace) -> int:
             repeat_counts=[int(spec.get('repeat_count') or 0) for spec in pending_specs],
             opened_ats=[str(spec.get('opened_at') or '') or None for spec in pending_specs],
         )
-        reminder_stats = process_incident_reminders(
-            state,
-            args.channel_id,
-            False,
-            skip_keys={incident_key(row) for row in pending_alerts},
-        )
         save_state(state_path, state)
-        print(json.dumps({'ok': True, 'mode': 'pending-reconciled', 'notification_ids': sorted(pending_ids), 'message_ids': existing_ids, 'role_mentions': TEAM_ROLE_IDS, 'reminders': reminder_stats}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'pending-reconciled', 'notification_ids': sorted(pending_ids), 'cursor_ids': sorted(cursor_ids), 'message_ids': existing_ids, 'role_mentions': TEAM_ROLE_IDS}, ensure_ascii=False))
         return 0
 
     delivered = {int(value) for value in state.get('delivered_ids') or []}
     last_seen = int(state.get('last_seen_id') or 0)
     selected = [row for row in alerts if int(row['notification_id']) > last_seen and int(row['notification_id']) not in delivered]
+    deliverable, classification = classify_new_alerts(state, selected, args.channel_id, args.dry_run)
+    daily_stats = process_daily_incident_cycle(
+        state,
+        args.channel_id,
+        args.dry_run,
+        state_path=state_path,
+    )
     if not selected:
-        reminder_stats = process_incident_reminders(state, args.channel_id, args.dry_run)
         state.update({'last_check': now_iso(), 'consecutive_failures': 0, 'last_error': None})
         if not args.dry_run:
             save_state(state_path, state)
-        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'reminders': reminder_stats}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'daily': daily_stats}, ensure_ascii=False))
         return 0
 
     ids = sorted({int(row['notification_id']) for row in selected})
-    selected_keys = {incident_key(row) for row in selected}
-    if args.dry_run:
-        reminder_stats = process_incident_reminders(state, args.channel_id, True, skip_keys=selected_keys)
-        delivery_specs = selected_delivery_specs(state, selected)
-        payloads = build_payloads_from_specs(selected, delivery_specs)
-        deliver_payloads(args.channel_id, payloads, True)
-        print(json.dumps({'ok': True, 'mode': 'dry-run', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': [], 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'reminders': reminder_stats}, ensure_ascii=False))
+    deliverable_ids = sorted({int(row['notification_id']) for row in deliverable})
+    if not deliverable:
+        if args.dry_run:
+            print(json.dumps({'ok': True, 'mode': 'suppressed-dry-run', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': 0, 'classification': classification, 'daily': daily_stats}, ensure_ascii=False))
+            return 0
+        mark_success(state, selected, [], delivered_alerts=[])
+        save_state(state_path, state)
+        print(json.dumps({'ok': True, 'mode': 'suppressed', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': 0, 'classification': classification, 'daily': daily_stats}, ensure_ascii=False))
         return 0
-    reminder_stats = process_incident_reminders(state, args.channel_id, False, skip_keys=selected_keys)
-    delivery_specs = selected_delivery_specs(state, selected)
-    payloads = build_payloads_from_specs(selected, delivery_specs)
-    state['pending'] = {'created_at': now_iso(), 'notification_ids': ids, 'fingerprint': fingerprint(selected, False), 'delivery_specs': delivery_specs, 'message_ids': []}
+
+    rendered_at = now_iso()
+    delivery_specs = [
+        {'repeat_count': 0, 'opened_at': rendered_at, 'rendered_at': rendered_at}
+        for _ in deliverable
+    ]
+    payloads = build_payloads_from_specs(deliverable, delivery_specs)
+    if args.dry_run:
+        deliver_payloads(args.channel_id, payloads, True)
+        print(json.dumps({'ok': True, 'mode': 'dry-run', 'new_alerts': len(selected), 'notification_ids': ids, 'deliverable_ids': deliverable_ids, 'payloads': len(payloads), 'message_ids': [], 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'classification': classification, 'daily': daily_stats}, ensure_ascii=False))
+        return 0
+    state['pending'] = {
+        'created_at': now_iso(),
+        'notification_ids': deliverable_ids,
+        'cursor_ids': ids,
+        'alerts': deliverable,
+        'fingerprint': fingerprint(deliverable, False),
+        'delivery_specs': delivery_specs,
+        'message_ids': [],
+    }
     save_state(state_path, state)
     message_ids: list[str] = []
-    for payload in payloads:
+    for index, payload in enumerate(payloads):
         message_ids.append(post_and_verify(args.channel_id, payload))
         state['pending']['message_ids'] = message_ids
         save_state(state_path, state)
-    mark_success(state, selected, message_ids)
+        if index + 1 < len(payloads):
+            time.sleep(0.45)
+    mark_success(state, selected, message_ids, delivered_alerts=deliverable)
     register_incidents(
         state,
-        selected,
+        deliverable,
         message_ids,
         repeat_counts=[int(spec.get('repeat_count') or 0) for spec in delivery_specs],
         opened_ats=[str(spec.get('opened_at') or '') or None for spec in delivery_specs],
     )
     save_state(state_path, state)
-    print(json.dumps({'ok': True, 'mode': 'apply', 'new_alerts': len(selected), 'notification_ids': ids, 'payloads': len(payloads), 'message_ids': message_ids, 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'reminders': reminder_stats}, ensure_ascii=False))
+    print(json.dumps({'ok': True, 'mode': 'apply', 'new_alerts': len(selected), 'notification_ids': ids, 'deliverable_ids': deliverable_ids, 'payloads': len(payloads), 'message_ids': message_ids, 'role_mentions': TEAM_ROLE_IDS, 'delivery_specs': delivery_specs, 'classification': classification, 'daily': daily_stats}, ensure_ascii=False))
     return 0
 
 
