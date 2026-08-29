@@ -81,7 +81,9 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         prompt = config["discord"]["channel_prompts"]["1541578556037927053"]
         self.assertIn("configuracao operacional da criacao Eggbev", prompt)
         self.assertIn("ares-eggbev-creation-config-report.py", prompt)
-        self.assertTrue(PROMPT.read_text().startswith("INSTRUCAO ESPECIFICA"))
+        prompt_source = PROMPT.read_text().strip()
+        self.assertTrue(prompt_source.startswith("INSTRUCAO ESPECIFICA"))
+        self.assertEqual(prompt.strip(), prompt_source)
 
 
 if __name__ == "__main__":

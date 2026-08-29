@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.10.0-draft
+version: 0.11.0-draft
 author: Ares
 license: internal
 metadata:
@@ -49,6 +49,20 @@ Limite de Leads    1543312825890381865
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente.
 
 Por instrução explícita de Nicolas em 29/08/2026, a rota canônica de **Regras** passou a ser a thread atual `1543280854024060999`. A antiga `Eggbev-US-CC-EN Regras` (`1541578622106865815`) fica supersedida e não recebe novas regras ativas.
+
+### Roteamento obrigatório — Criar Campanhas
+
+Na thread `1541578556037927053`, pedidos genéricos como “sua configuração”, “como está configurada” ou “relatório da configuração” significam **a configuração operacional da criação Eggbev**, não a configuração global de Hermes/Ares. Só mostrar modelo, provider, OAuth, ferramentas ou flags globais quando o usuário disser explicitamente que quer a configuração global.
+
+Antes de responder naquela thread:
+
+1. ler o contrato e a conta canônicos;
+2. executar `python3 scripts/ares-eggbev-creation-config-report.py --check` ou usar exatamente os mesmos campos;
+3. separar criação do zero dos três modos de clone;
+4. informar readiness real e bloqueios, sem tratar contrato aprovado como runner pronto;
+5. não misturar ROAS, Diário ou Limite de Leads na configuração de criação, salvo nota curta de pós-lançamento.
+
+A correção de 29/08/2026 supersede o relatório que respondeu com configuração global do agente na rota de criação. O prompt exato da thread vive em `data/ares/discord/thread-prompts/1541578556037927053.txt` e em `discord.channel_prompts.1541578556037927053`.
 
 ## Escopo Ares
 
@@ -112,7 +126,9 @@ Budget   variável; confirmar por campanha
 Exceção  clone_page_switch = USD 45, somente após o resumo final daquela solicitação ser aprovado
 ```
 
-Placements são manuais conforme a lista do contrato; nunca converter para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
+Placements são `MANUAL_ONLY`, mas a lista exata de posições ainda não está materializada no contrato canônico. Nunca converter para Advantage+ Placements, copiar a lista de outra operação ou montar manifest/write sem importar e validar o payload aprovado por readback. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
+
+Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
 
 O template Messenger é obrigatório. Qualquer mudança de texto, botão, payload ou flags exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
 

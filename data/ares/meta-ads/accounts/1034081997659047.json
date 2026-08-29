@@ -34,12 +34,22 @@
       "write_mode": "disabled_general_with_scoped_page_lead_guardrail_active",
       "runtime_routes": {
         "campaign_creation": {
+          "thread_id": "1541578556037927053",
+          "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
           "contract_approved": true,
           "runner_built": false,
           "engine_account_registered": false,
+          "media_registry_ready": false,
+          "placements_mode": "MANUAL_ONLY",
+          "placements_payload_materialized": false,
           "normal_production_status": "ACTIVE with future start_time after final summary approval",
           "technical_canary_status": "PAUSED until separate activation approval",
-          "write_enabled": false
+          "write_enabled": false,
+          "blocked_reasons": [
+            "Eggbev account is not registered in Campaign Engine v3",
+            "Eggbev media is not pre-staged in the v3 media registry",
+            "the exact approved manual placements payload is not materialized in the canonical operation contract"
+          ]
         },
         "campaign_cloning": {
           "contract_modes": ["pure_clone", "clone_prestaged", "clone_page_switch"],
