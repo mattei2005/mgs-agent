@@ -183,7 +183,8 @@ def main() -> int:
     account_file = common.load_json(common.ACCOUNT_PATH)
     account = (account_file.get('accounts') or [{}])[0]
     runtime = (operation.get('daily_reporting_policy') or {}).get('runtime') or {}
-    state, _ = common.load_state(at.date(), common.finite_float((operation.get('roas_cycle_policy') or {}).get('daily_reset_value')) or 0.40)
+    threshold_policy = (operation.get('roas_cycle_policy') or {}).get('threshold') or {}
+    state, _ = common.load_state(at.date(), common.finite_float(threshold_policy.get('daily_reset_value')) or 0.40)
     run: dict[str, Any] = {
         'ok': False, 'mode': 'read_only', 'run_id': run_id, 'started_at_et': at.isoformat(),
         'period_request': args.period, 'periods': [], 'writes_attempted': 0,
