@@ -343,12 +343,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
-      "next_step": "Nicolas revisar o layout; post/cron Diário permanecem desabilitados e ROI continua N/D.",
+      "next_step": "Materializar em read-only o seletor de rota vertical/Messenger Pages/domain com readback de endpoint, campo, moeda, período, freshness e identidade; depois apresentar novo dry-run a Nicolas.",
       "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
-      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/daily-report/change-20260829T193410-0400.json",
-      "state": "concluído: renderer v3 com custo por mensagem iniciada, join utm+page id, tabela única, rps/epc brutos e fail-closed; 80 testes pass; live read-only reconciliou 1 campanha e bloqueou métricas externas por freshness sem timestamp; zero write, postagem ou cron.",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/daily-report/smart-bidding-direct-source-policy-20260829T195629-0400.json",
+      "state": "concluído com correção de fonte por nicolas: layout v3 preservado; rps, cpm, epc, avg_price, receita, roi e demais métricas disponíveis devem preferir campos diretos smart bidding via vertical, messenger pages ou domain. fórmula local é fallback rotulado. contrato e skill atualizados; extrator multi-rota permanece pendente; zero write, postagem ou cron.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-29T23:35:10+00:00"
+      "updated_at": "2026-08-29T23:57:01+00:00"
     },
     {
       "agent": "ares",
@@ -1422,5 +1422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:51:25+00:00"
+  "updated_at": "2026-08-29T23:57:01+00:00"
 }

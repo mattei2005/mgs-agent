@@ -23,8 +23,9 @@ def ad(cid='c1', page_id='123', url_tags='utm_campaign=pg_5083'):
     }
 
 
-def sb_row(leads=5001, utm='pg_5083', page_id='123', restricted_until=None):
-    return {
+def sb_row(leads=5001, utm='pg_5083', page_id='123', restricted_until=None,
+           updated_at: str | None = '2026-08-29T12:00:00-04:00'):
+    row = {
         'UTM_CAMPAIGN': utm,
         'FB_PAGE_ID': page_id,
         'PAGE_NAME': 'Jolie',
@@ -33,6 +34,9 @@ def sb_row(leads=5001, utm='pg_5083', page_id='123', restricted_until=None):
         'STATUS': 'Campaign',
         'RESTRICTED_UNTIL': restricted_until,
     }
+    if updated_at is not None:
+        row['UPDATED_AT'] = updated_at
+    return row
 
 
 def evaluate(leads=5001, **kwargs):
@@ -42,6 +46,9 @@ def evaluate(leads=5001, **kwargs):
         [sb_row(leads=leads, utm=kwargs.get('sb_utm', 'pg_5083'), page_id=kwargs.get('sb_page_id', '123'))],
         5000,
         dt.date(2026, 8, 29),
+        run_at=dt.datetime(2026, 8, 29, 13, 0, tzinfo=mod.NY),
+        freshness_max_age_hours=2,
+        freshness_fields=('UPDATED_AT',),
     )
 
 
@@ -178,6 +185,55 @@ class EggbevPageLeadGuardrailTests(unittest.TestCase):
         self.assertTrue(result['ok'])
         self.assertEqual(fake.posts, 1)
         self.assertEqual(fake.gets, 2)
+
+    def test_missing_smart_bidding_freshness_fails_closed(self):
+        result = mod.evaluate_campaigns(
+            [campaign()], [ad()], [sb_row(leads=6000, updated_at=None)],
+            5000, dt.date(2026, 8, 29),
+            run_at=dt.datetime(2026, 8, 29, 13, 0, tzinfo=mod.NY),
+            freshness_max_age_hours=2,
+            freshness_fields=('UPDATED_AT',),
+        )
+        self.assertEqual(result['eligible_groups'], [])
+        self.assertEqual(result['issues'][0]['issue'], 'smart_bidding_freshness_unverifiable')
+
+    def test_stale_smart_bidding_row_fails_closed(self):
+        result = mod.evaluate_campaigns(
+            [campaign()], [ad()], [sb_row(leads=6000, updated_at='2026-08-29T09:00:00-04:00')],
+            5000, dt.date(2026, 8, 29),
+            run_at=dt.datetime(2026, 8, 29, 13, 0, tzinfo=mod.NY),
+            freshness_max_age_hours=2,
+            freshness_fields=('UPDATED_AT',),
+        )
+        self.assertEqual(result['eligible_groups'], [])
+        self.assertEqual(result['issues'][0]['issue'], 'smart_bidding_source_stale')
+
+    def test_scheduled_mode_only_allows_approved_times(self):
+        approved = ('08:00', '20:00')
+        self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 0, tzinfo=mod.NY), approved))
+        self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 20, 0, tzinfo=mod.NY), approved))
+        self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 19, 59, tzinfo=mod.NY), approved))
+
+    def test_auto_reactivate_is_read_from_scope(self):
+        self.assertFalse(mod.policy_auto_reactivate({'scope': {'auto_reactivate': False}}))
+
+    def test_mapping_issue_report_is_visible_and_delivery_failure_is_fatal(self):
+        evaluated = mod.evaluate_campaigns(
+            [campaign()], [ad()], [sb_row(leads=6000, updated_at=None)],
+            5000, dt.date(2026, 8, 29),
+            run_at=dt.datetime(2026, 8, 29, 13, 0, tzinfo=mod.NY),
+            freshness_max_age_hours=2,
+            freshness_fields=('UPDATED_AT',),
+        )
+        message = mod.build_issue_alert(
+            evaluated['issues'],
+            dt.datetime(2026, 8, 29, 13, 0, tzinfo=mod.NY),
+            'Eggbev-US-CC-EN-01-G006',
+        )
+        self.assertIn('FRESHNESS', message)
+        self.assertIn('smart_bidding_freshness_unverifiable', message)
+        with self.assertRaises(mod.GuardrailError):
+            mod.require_delivery({'ok': False}, 'mapping_issue_alert')
 
 
 if __name__ == '__main__':

@@ -58,8 +58,9 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "Cost per messaging conversation started",
             "UTM_CAMPAIGN",
             "FB_PAGE_ID",
-            "RPS bruto = `REVENUE × 1.000 / SESSIONS`",
-            "real ROI and estimated ROI remain N/D",
+            "RPS, CPM, EPC e demais métricas de monetização preferem campos diretos",
+            "vertical, Messenger Pages or domain",
+            "implementation gap, not a Smart Bidding data-availability limitation",
             "25 campanhas, todas preservadas",
         ]
         for value in required:

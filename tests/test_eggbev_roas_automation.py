@@ -481,9 +481,12 @@ class ContractTests(unittest.TestCase):
         self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])
         self.assertIn('FB_PAGE_ID', renderer['source_join']['identity_confirmation'])
         self.assertIn('messaging_conversation_started_7d', renderer['metric_formulas']['cost_per_messaging_started'])
-        self.assertEqual(renderer['metric_formulas']['gross_rps'], 'Smart Bidding REVENUE * 1000 / SESSIONS')
-        self.assertEqual(renderer['metric_formulas']['gross_epc'], 'Smart Bidding REVENUE / ACQUISITION_CLICKS')
-        self.assertIn('BRL', renderer['global_pricing_exclusion'])
+        self.assertIn('fallback', renderer['metric_formulas']['gross_rps_fallback_only'])
+        self.assertIn('fallback', renderer['metric_formulas']['gross_epc_fallback_only'])
+        direct = renderer['smart_bidding_direct_sources']
+        self.assertEqual(direct['accepted_routes'], ['vertical', 'Messenger Pages', 'domain'])
+        self.assertIn('prefer the direct Smart Bidding metric value', direct['direct_field_policy'])
+        self.assertIn('currency', direct['required_readback'])
 
     def test_daily_reporting_change_does_not_enable_any_write(self):
         policy = self.operation['daily_reporting_policy']

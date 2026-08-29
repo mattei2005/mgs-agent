@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.14.0-draft
+version: 0.14.1-draft
 author: Ares
 license: internal
 metadata:
@@ -80,7 +80,9 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Campos Smart Bidding/Pricing por campanha: investimento, receita, LEADS, `AVG_PRICE`, RPS bruto e EPC bruto. `RPS bruto = REVENUE × 1.000 / SESSIONS`; `EPC bruto = REVENUE / ACQUISITION_CLICKS`.
 - Freshness Smart Bidding aparece com timestamp/idade/campo ou `N/D`; sem timestamp ou acima de 2h, todas as métricas externas por campanha permanecem `N/D`, nunca zero.
 - UTM ausente/múltipla, página ausente/duplicada, Page ID divergente ou fonte stale falha fechado e expõe o motivo no campo `Join`.
-- O endpoint global `/pricing` não é atribuído por campanha: não possui UTM, trabalha por operação/path/slot e o payload vivo Eggbev está em BRL. Meta CPM permanece a coluna CPM da tabela.
+- As métricas de Pricing/monetização podem ser extraídas diretamente da Smart Bidding pela rota compatível de **vertical, Messenger Pages ou domain**. Selecionar pela granularidade da métrica e exigir mapping explícito de operação/UTM/página/domain, mesmo período, moeda e freshness.
+- RPS, CPM, EPC, `AVG_PRICE`, receita, ROI e demais campos devem preferir o valor direto da Smart Bidding. Cálculo local de RPS/EPC é apenas fallback explícito e rotulado quando a rota selecionada não expuser o campo direto.
+- O payload global `/pricing` não é a única fonte e sua ausência de UTM não significa indisponibilidade da métrica; consultar vertical, Messenger Pages ou domain antes de concluir `N/D`.
 - ROI real e ROI estimado continuam `N/D` até fórmula Eggbev aprovada e campos líquidos/estimados disponíveis.
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
 
