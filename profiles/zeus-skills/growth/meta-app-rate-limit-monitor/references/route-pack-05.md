@@ -256,6 +256,8 @@ Write policy Read the tab once through Sheets API, update A2:A{last_row} only wh
 Alerting     Sheet read/write failure is CRITICAL: send Discord alert with Rodolfo mention, sheet ID, GID, auth mode, sanitized error, and cooldown. Do not only store `_sheet_removed_sync.error` in state.
 ```
 
+Positive-evidence rule: an exact current Meta role match by app-scoped ID or normalized `Segurador` name must always clear that row's stale `X`, even while the app remains below `expected_sheet_roles` or otherwise has `safe_for_sheet=false`. The fail-closed gate protects only absent or unattributed rows: preserve their existing marker and never create a new removal from an incomplete role set. This asymmetric behavior lets recovered seguradores leave `Removidos acumulado` immediately without turning pending role acceptances into false removals. B011-2 and B012 are part of the generic role reconciliation; only B013-3 is excluded on the dedicated DTR/page-token route.
+
 If Google auth fails for this cron, validate the canonical Service Account item, `roles/serviceusage.serviceUsageConsumer`, Sheets metadata, sentinel write/readback/restore and `_sheet_removed_sync`. Do not recreate the retired Ares OAuth files.
 
 Implementation rules:
