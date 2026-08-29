@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "onboarding_paused_media_gate",
+  "status": "controlled_write_authorized_manifest_prevalidated",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -141,43 +141,55 @@
     ]
   },
   "activation_gates": [
-    "confirm account 05 Meta account_id and exact alias by live API",
-    "confirm account currency and timezone by live API",
-    "register the 1Password item reference without copying credentials",
-    "close budget, write mode and campaign activation authority for account 05",
-    "assign CREATIVE_CUT_24H explicitly to named pilot campaigns",
-    "implement resumable state and deterministic dry-run tests",
-    "validate ad-level pause and GET readback in a PAUSED canary before production"
+    "closed: account 05 id, alias, currency and America/Sao_Paulo timezone confirmed by live API",
+    "closed: 1Password token reference registered without copying credentials",
+    "closed: Nicolas authorized C51-C53 creation, USD25 budgets, ACTIVE publication and start on 2026-08-29",
+    "closed: CREATIVE_CUT_24H assigned to C51-C53",
+    "closed: 9 unique assets sanitized, Drive-reconciled, reserved and Meta pre-staged",
+    "closed: manifest validated, planned and prevalidated by Campaign Engine v3"
   ],
-  "write_mode": "controlled_write_paused_pilot_pending_media",
-  "write_enabled": false,
-  "activation_enabled": false,
+  "write_mode": "controlled_write_authorized_first_launch",
+  "write_enabled": true,
+  "activation_enabled": true,
   "pilot_request": {
-    "request_id": "cpv05-first3-20260828",
+    "request_id": "cpv05-c51-c53-20260829-nicolas",
+    "supersedes_request_id": "cpv05-first3-20260828",
     "requested_by": "Nicolas Holanda",
     "authorization_source": "discord:thread:1543069402440671333",
     "campaign_numbers": [51, 52, 53],
-    "creation_mode": "from_zero_prestaged",
-    "campaign_status": "PAUSED",
+    "creation_mode": "clone_prestaged",
+    "source_campaign_id": "120247422013610046",
+    "source_adset_id": "120247422013660046",
+    "campaign_status": "ACTIVE",
+    "requested_start_time": "2026-08-29T00:00:00-03:00",
+    "effective_start_time": "2026-08-29T01:45:00-03:00",
+    "start_time_adjustment_reason": "requested time was retroactive when media recovery began; first future safe time used",
     "management_strategy": "CREATIVE_CUT_24H",
     "budget_usd_each": 25.0,
     "bid_strategy": "MAXVOL",
     "account_budget_before_usd": 0.0,
-    "account_budget_after_creation_if_paused_usd": 0.0,
+    "account_budget_after_creation_usd": 75.0,
     "operational_envelope_floor_usd": 500.0,
-    "activation_requires_remaining_strategy_gates": true,
-    "execution_state": "BLOCKED_MEDIA_SUPPLY",
-    "resume_policy": "same request_id; revalidate sequence, media and Meta state before any write"
+    "operational_envelope_balance_after_creation_usd": 425.0,
+    "activation_requires_remaining_strategy_gates": false,
+    "execution_state": "MANIFEST_PREVALIDATED_READY_TO_EXECUTE",
+    "prevalidation_digest": "c7e196ba4f93a75dce61d4398a0bb36e26a87b41b2c6b7c3b1dd5fb7c60ac620",
+    "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect"
   },
   "media_gate": {
     "required_unique_assets": 9,
-    "ready_unique_assets": 4,
-    "missing_unique_assets": 5,
+    "ready_unique_assets": 9,
+    "missing_unique_assets": 0,
     "ready_canonical_filenames": [
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_032.mp4",
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
-      "CAR_BR_BR_VID_SEM_ENTRADA_PV_046.mp4"
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_046.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_098.mp4",
+      "CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_100.mp4",
+      "CAR_BR_BR_VID_CARRO_ELETRICO_PV_101.mp4",
+      "CAR_BR_BR_VID_SUPER_OFERTA_PV_102.mp4"
     ],
     "excluded_by_drive_reconciliation": [
       "CAR_BR_BR_VID_SEM_ENTRADA_NV_052.mp4",
@@ -189,12 +201,14 @@
       "CAR_BR_BR_VID_SEM_ENTRADA_PV_050.mp4"
     ],
     "generation_backend": {
-      "provider": "Grok/xAI",
-      "available": false,
-      "reason": "no xAI credentials available for profile ares",
-      "fallback_used": false
+      "xai_preflight": "authenticated corporate key; rejected by provider because team has no credits or licenses",
+      "provider_used": "Google Veo 3.1 Fast",
+      "provider_preflight_passed": true,
+      "fallback_used": true,
+      "generated_unique_assets": 5,
+      "visual_qa_approved_assets": 5
     },
-    "checked_at_utc": "2026-08-29T01:45:32Z"
+    "checked_at_utc": "2026-08-29T04:04:36Z"
   },
   "token_reference": {
     "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
@@ -216,10 +230,11 @@
   "crons": [],
   "meta_writes_performed": 0,
   "notes": [
-    "Nicolas authorized the one-time creation of the three PAUSED pilot campaigns C51-C53 in the current operational thread; activation, budget changes after creation and cron creation remain disabled.",
+    "Nicolas authorized the one-time creation and ACTIVE publication of C51-C53 at USD25 each in the current operational thread.",
+    "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
     "No placeholder thread ID may be used for delivery.",
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-29T01:45:32Z"
+  "updated_at": "2026-08-29T04:04:36Z"
 }
