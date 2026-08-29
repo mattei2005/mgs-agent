@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.11.0-draft
+version: 0.12.0-draft
 author: Ares
 license: internal
 metadata:
@@ -63,6 +63,21 @@ Antes de responder naquela thread:
 5. não misturar ROAS, Diário ou Limite de Leads na configuração de criação, salvo nota curta de pós-lançamento.
 
 A correção de 29/08/2026 supersede o relatório que respondeu com configuração global do agente na rota de criação. O prompt exato da thread vive em `data/ares/discord/thread-prompts/1541578556037927053.txt` e em `discord.channel_prompts.1541578556037927053`.
+
+### Roteamento obrigatório — Diário
+
+Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automações”, “como está configurado” ou “mostre tudo” significam **somente a configuração do Diário**: horários, períodos, fontes, métricas, runtime, limitações e modo read-only. Não responder com toda a operação Eggbev, configuração global do agente, criação, clones, cortes ROAS, limite de leads ou inventário de Automated Rules.
+
+- Configuração da rota: `python3 scripts/ares-eggbev-daily-config-report.py --check`.
+- Relatório vivo hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.
+- Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
+- Nunca reutilizar números de mensagens antigas como estado atual.
+- Horários aprovados: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 em `America/New_York`; aprovação do plano não significa cron aprovado.
+- Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
+- Smart Bidding sem timestamp verificável ou acima de 2h aparece `N/D`, nunca zero.
+- O renderer ainda não mostra Budget, status atual e `start_time` por campanha; layout híbrido final aguarda volume. Declarar essas lacunas e não chamar o relatório de completo.
+
+O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
 
 ## Escopo Ares
 
@@ -251,7 +266,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        63 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo, criação ACTIVE futura, escala +10% acima de 0,50 por ciclo e escopo/readiness da thread Criar Campanhas
+Testes aprovados        68 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, criação ACTIVE futura, escala +10%, rota Criar Campanhas e escopo/runtime da thread Diário
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente
