@@ -141,7 +141,8 @@ A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar tod
 - Núcleo Smart Bidding solicitado: Leads/UTM, RPS, ROI drip, performance completa, investimento, receita, receita líquida/estimada e ROI real/estimado.
 - Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva.
 - Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
-- Thread Intraday fixa: `Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
+- Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
+- Padrão obrigatório das threads fixas: prefixo `Eggbev-US-CC-EN` antes da função, preservando o padrão criado por Rodolfo.
 
 ## Guardrail aprovado — limite de leads por página
 
@@ -168,7 +169,7 @@ O alerta obrigatório inclui página, UTM, LEADS, estado `RESTRICTED_UNTIL` da S
 Runtime:
 
 ```text
-Thread fixa           Limite de Leads — Eggbev (`1543312825890381865`)
+Thread fixa           Eggbev-US-CC-EN Limite de Leads (`1543312825890381865`)
 Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
 Modo                   dry-run e controlled-write preflight validados
