@@ -287,7 +287,7 @@
     "recovery": "readback-first; never repeat non-idempotent writes blindly"
   },
   "next_stage_plan": {
-    "status": "awaiting_nicolas_explicit_approval_before_cron_or_runner_write",
+    "status": "read_only_audit_completed_awaiting_nicolas_decisions_before_build_or_cron_write",
     "goal": "Implement deterministic ROAS cycles, Intraday action reporting and Daily reporting without using native Meta Automated Rules as authority.",
     "step_1_read_only": [
       "inventory native Meta Automated Rules and identify conflicts without changing them",
@@ -334,7 +334,43 @@
       "no native Meta rule change",
       "no threshold write",
       "no campaign/ad/adset write"
-    ]
+    ],
+    "read_only_audit": {
+      "at_et": "2026-08-29T14:15:22-04:00",
+      "writes_attempted": 0,
+      "meta_account_readback": "ACTIVE, USD, America/New_York",
+      "active_campaigns": 0,
+      "active_ads": 0,
+      "ad_insight_rows_today": 0,
+      "ad_insight_rows_last_7d": 0,
+      "native_meta_rules": {
+        "total": 15,
+        "enabled_conflict": {
+          "name": "ADS ZERO RESULTS",
+          "action": "PAUSE ad",
+          "condition": "today spend > USD 2 and messaging first reply < 1",
+          "schedule": "SEMI_HOURLY"
+        },
+        "has_issues": {
+          "name": "ADS ON 1.1",
+          "action": "UNPAUSE ad",
+          "status": "HAS_ISSUES"
+        }
+      },
+      "smart_bidding": {
+        "messenger_page_rows_for_eggbev_publisher": 344,
+        "messenger_report_rows_today": 238,
+        "account_names_available": ["Eggbev-US-CC-EN-03 (FAX-US-02)"],
+        "target_account_name_available": false,
+        "target_account": "Eggbev-US-CC-EN-01-G006",
+        "consequence": "live Meta x Smart Bidding calibration for the target account cannot yet be completed"
+      },
+      "blocking_decisions": [
+        "whether ADS ZERO RESULTS should be disabled before Ares ROAS automation is activated",
+        "which Smart Bidding account/source exposes the target Eggbev-US-CC-EN-01 operation",
+        "approval to build runners/tests and later create the proposed crons after dry-run"
+      ]
+    }
   },
   "page_lead_guardrail": {
     "policy_approved": true,
@@ -503,5 +539,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T14:12:09-04:00"
+  "updated_at": "2026-08-29T14:17:08-04:00"
 }
