@@ -67,6 +67,19 @@
       "campaign_creation": "1541578556037927053",
       "page_lead_guardrail": "1543312825890381865"
     },
+    "thread_naming_policy": {
+      "prefix": "Eggbev-US-CC-EN",
+      "pattern": "Eggbev-US-CC-EN [function]",
+      "approved_by": "Nicolas",
+      "reference": "names originally created by Rodolfo",
+      "fixed_thread_names": {
+        "rules": "Eggbev-US-CC-EN Regras",
+        "intraday": "Eggbev-US-CC-EN Corte e ROAS",
+        "daily": "Eggbev-US-CC-EN Diario",
+        "campaign_creation": "Eggbev-US-CC-EN Criar Campanhas",
+        "page_lead_guardrail": "Eggbev-US-CC-EN Limite de Leads"
+      }
+    },
     "thread_membership": {
       "automatic_manager": {
         "name": "Nicolas",
@@ -160,7 +173,7 @@
   "intraday_policy": {
     "status": "layout_and_cycles_approved_pending_implementation",
     "thread_id": "1541578606076231750",
-    "thread_name": "Corte e ROAS",
+    "thread_name": "Eggbev-US-CC-EN Corte e ROAS",
     "thread_name_status": "approved_and_readback_confirmed",
     "report_every_cycle": true,
     "report_on_demand": true,
@@ -387,7 +400,7 @@
       ]
     },
     "discord": {
-      "thread_name": "Limite de Leads — Eggbev",
+      "thread_name": "Eggbev-US-CC-EN Limite de Leads",
       "thread_id": "1543312825890381865",
       "separate_from_intraday": true,
       "required_fields": [

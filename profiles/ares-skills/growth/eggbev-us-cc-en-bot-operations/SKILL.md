@@ -132,7 +132,7 @@ Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
 
 Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Fonte indisponível, atrasada ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 
-A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. A regra para reativar a campanha quando um ad recuperar ROAS ainda exige confirmação explícita.
+A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. Se um ad pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente o ad e a campanha no mesmo ciclo, sempre com pré-leitura e readback pós-write.
 
 ### Reporting
 
@@ -140,7 +140,8 @@ A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar tod
 - Núcleo Meta: CPM, Purchase ROAS, custo por resultado/conversa, Results, Budget, Amount spent e CTR.
 - Núcleo Smart Bidding solicitado: Leads/UTM, RPS, ROI drip, performance completa, investimento, receita, receita líquida/estimada e ROI real/estimado.
 - Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva.
-- Diário em múltiplos horários, inspirado na distribuição do Crédito para Veículo, sem copiar timezone nem regras. Proposta pendente: 07:00, 09:00, 12:30, 16:30, 20:30 e 23:30 ET; não automatizar antes do OK de Nicolas.
+- Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
+- Thread Intraday fixa: `Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 
 ## Guardrail aprovado — limite de leads por página
 
