@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Receber na thread a campanha-fonte, modo pure_clone ou clone_prestaged, página/UTM, budget, início, estrutura e criativos/copy; depois obter autorização estrutural para onboarding Eggbev no v3, validar manifest e mostrar resumo final antes do OK de execução.",
-      "objective": "Operar clonagem de campanhas Eggbev em thread dedicada e via Campaign Engine v3",
+      "next_step": "Nicolas revisar dúvidas no relatório mestre; executar em ordem fixtures ROAS, fixtures LEADS, fórmula/layout Diário, onboarding v3, validate/plan criação, validate/plan clone, canário aprovado, comparação API/Ads Manager/Smart Bidding, dry-run final, controlled-write e só depois crons.",
+      "objective": "Preparar operação Eggbev BOT para teste sequencial e simulação com regras distribuídas nas threads corretas",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "thread eggbev-us-cc-en clonar campanhas criada e alimentada com três mensagens de contrato. nicolas, zeus e rodolfo confirmados por readback. escopo separado de criação do zero. engine v3 global ativo, porém conta eggbev ainda não cadastrada no v3; nenhum clone, manifest, campanha ou cron foi criado.",
-      "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-29T18:58:03+00:00"
+      "state": "inventário encontrou 10 threads no canal. nove foram atualizadas via discord api: seis rotas fixas, uma de status e duas históricas; esta thread recebe o relatório mestre. foram confirmadas 16/16 mensagens, membros nicolas/zeus/rodolfo em todos os nove alvos, e as duas históricas permaneceram arquivadas. recovery de http 429 reconciliou efeitos parciais e publicou somente mensagens ausentes, sem duplicatas. 45 testes passaram. bloqueios: gateway parado, smart bidding sem conta 01, ads zero results ativa, ads on 1.1 has_issues, eggbev ausente do engine v3/media registry, zero campanhas ativas, fórmulas roi/rps e recomendação de threshold pendentes, comando de mudança intraday não implementado.",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-29T19:11:39+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T18:58:03+00:00"
+  "updated_at": "2026-08-29T19:11:39+00:00"
 }
