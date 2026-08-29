@@ -710,10 +710,14 @@ def main() -> int:
                 status_message = build_status_report(evaluated, started, lead_limit, account_alias)
                 run["status_report"] = {
                     "requested": True,
-                    "rows": sum(
-                        1 for row in evaluated.get("safe") or []
+                    "rows": len({
+                        norm(row.get("utm_campaign"))
+                        for row in (evaluated.get("safe") or [])
                         if row.get("utm_campaign") and finite_float(row.get("leads")) is not None
-                    ) + len(groups),
+                    } | {
+                        norm(group.get("utm_campaign"))
+                        for group in groups if group.get("utm_campaign")
+                    }),
                     "message_sha256": hashlib.sha256(status_message.encode()).hexdigest(),
                 }
                 if args.post_status_report:

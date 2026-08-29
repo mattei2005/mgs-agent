@@ -137,9 +137,66 @@
       "missing_metrics": "report N/D; do not invent"
     },
     "schedule": {
-      "frequency_minutes": 15,
+      "mode": "twice_daily",
+      "times_local": [
+        "08:00",
+        "20:00"
+      ],
+      "cron": "0 8,20 * * *",
       "timezone": "America/New_York",
-      "run_all_day": true
+      "run_all_day": false,
+      "authorized_by": "Nicolas",
+      "authorized_by_discord_id": "1055570806945620030",
+      "authorized_at_et": "2026-08-29T13:50:10-04:00",
+      "authorization_source": "discord:thread:1543312825890381865",
+      "supersedes": {
+        "frequency_minutes": 15,
+        "run_all_day": true,
+        "effective_until_et": "2026-08-29T13:50:10-04:00"
+      }
+    },
+    "status_reporting": {
+      "trigger": "on_explicit_manager_request",
+      "scope": "all Smart Bidding pages exactly reconciled to effectively ACTIVE Meta campaigns and ads",
+      "metric": "LEADS",
+      "threshold": 5000,
+      "proximity_formula": "LEADS / 5000; risk indicator, not a statistical forecast",
+      "bands": [
+        {
+          "emoji": "🟢",
+          "minimum": 0,
+          "maximum_exclusive": 4000,
+          "label": "below 4k"
+        },
+        {
+          "emoji": "🟡",
+          "minimum": 4000,
+          "maximum_exclusive": 4500,
+          "label": "attention"
+        },
+        {
+          "emoji": "🟠",
+          "minimum": 4500,
+          "maximum_inclusive": 5000,
+          "label": "very close"
+        },
+        {
+          "emoji": "🔴",
+          "minimum_exclusive": 5000,
+          "label": "over limit; pause campaign and report"
+        }
+      ],
+      "scheduled_delivery": "silent when no page is over the limit; publish only action/error reports",
+      "requested_report_fields": [
+        "page name",
+        "UTM_CAMPAIGN",
+        "LEADS",
+        "proximity percentage",
+        "risk emoji",
+        "active campaign count",
+        "mapping issue count",
+        "America/New_York timestamp"
+      ]
     },
     "discord": {
       "thread_name": "Limite de Leads — Eggbev",
@@ -161,7 +218,7 @@
       "blocked_reason": "scheduler_gateway_not_running",
       "runner": "/root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py",
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh",
-      "cron_name": "Eggbev limite de leads 15min",
+      "cron_name": "Eggbev limite de leads 08h e 20h ET",
       "cron_id": "c3d2499d8c33",
       "no_agent": true,
       "deliver": "local"
@@ -170,20 +227,30 @@
   "scheduler_jobs": {
     "page_lead_guardrail": {
       "job_id": "c3d2499d8c33",
-      "name": "Eggbev limite de leads 15min",
-      "schedule": "*/15 * * * *",
+      "name": "Eggbev limite de leads 08h e 20h ET",
+      "schedule": "0 8,20 * * *",
       "script": "eggbev-page-lead-guardrail.sh",
       "no_agent": true,
       "deliver": "local",
       "enabled": true,
       "state": "scheduled",
       "gateway_running": false,
-      "readback_at_et": "2026-08-29T13:36:19-04:00"
+      "next_run_at_et": "2026-08-29T20:00:00-04:00",
+      "readback_at_et": "2026-08-29T13:52:48-04:00"
     }
+  },
+  "last_live_validation": {
+    "at_et": "2026-08-29T13:52:48-04:00",
+    "mode": "controlled_write_then_read_only_status",
+    "ok": true,
+    "active_campaigns": 0,
+    "eligible_pages_over_limit": 0,
+    "campaigns_paused_confirmed": 0,
+    "mapping_issues": 0
   },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T13:36:19-04:00"
+  "updated_at": "2026-08-29T13:52:48-04:00"
 }
