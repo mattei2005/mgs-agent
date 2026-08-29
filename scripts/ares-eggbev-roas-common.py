@@ -203,6 +203,29 @@ def read_native_rules(meta, token: str, act: str) -> dict[str, Any]:
     }
 
 
+def detect_manual_interventions(state: dict[str, Any], tracked_ads: list[dict[str, Any]], tracked_campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Flag tracked objects changed after Ares' recorded write; never discard provenance automatically."""
+    review: list[dict[str, Any]] = []
+    groups = (
+        ('ad', state.get('paused_ads') or {}, tracked_ads),
+        ('campaign', state.get('paused_campaigns') or {}, tracked_campaigns),
+    )
+    for kind, entries, rows in groups:
+        by_id = {norm(row.get('id')): row for row in rows if norm(row.get('id'))}
+        for object_id, entry in entries.items():
+            expected = norm((entry or {}).get('meta_updated_time')) if isinstance(entry, dict) else ''
+            current = norm((by_id.get(str(object_id)) or {}).get('updated_time'))
+            if expected and current and current != expected:
+                review.append({
+                    'kind': kind,
+                    'object_id': str(object_id),
+                    'expected_updated_time': expected,
+                    'current_updated_time': current,
+                    'action': 'ASK_NICOLAS_FOR_ORIENTATION',
+                })
+    return review
+
+
 def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], since: str = 'today') -> dict[str, Any]:
     act = 'act_' + account_id
     status, live_account, _ = meta.graph_get(act, token, {'fields': 'id,name,account_status,currency,timezone_name,disable_reason'})
@@ -509,6 +532,8 @@ def source_gate(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], phase: s
         reasons.append('not_an_action_cycle')
     if (meta_bundle.get('native_rules') or {}).get('conflict', {}).get('enabled'):
         reasons.append('native_rule_ADS_ZERO_RESULTS_enabled')
+    if meta_bundle.get('manual_review'):
+        reasons.append('manual_intervention_review_required')
     if not sb_bundle.get('ready'):
         reasons.append(sb_bundle.get('reason') or 'smart_bidding_not_ready')
     return {'write_ready': not reasons, 'reasons': reasons}

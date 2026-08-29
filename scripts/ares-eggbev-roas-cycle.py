@@ -66,6 +66,7 @@ def render_report(run: dict[str, Any]) -> str:
         f"Reativar anúncios            {counts.get('reactivate_ads', 0):>3}",
         f"Pausar campanhas             {counts.get('pause_campaigns', 0):>3}",
         f"Reativar campanhas           {counts.get('reactivate_campaigns', 0):>3}",
+        f"Escalas +30% recomendadas    {counts.get('budget_scale_candidates', 0):>3}",
         '```',
     ])
     actionable = [row for row in plan.get('decisions') or [] if row.get('action') != 'KEEP']
@@ -81,6 +82,15 @@ def render_report(run: dict[str, Any]) -> str:
             lines.append(f"…mais {len(actionable) - 25} decisões no audit.")
     else:
         lines.extend(['', 'Nenhuma mudança de anúncio planejada neste ciclo.'])
+    scale_candidates = plan.get('budget_scale_candidates') or []
+    if scale_candidates:
+        lines.extend(['', '**Escala de budget — recomendação dry-run**'])
+        for row in scale_candidates[:25]:
+            lines.append(
+                f"📈 {row.get('campaign_name') or row.get('campaign_id')} — ROAS {common.fmt_number(row.get('purchase_roas'))} | "
+                f"{common.fmt_money(row.get('current_daily_budget_usd'))} → {common.fmt_money(row.get('target_daily_budget_usd'))} (+30%)"
+            )
+        lines.append('Budget write bloqueado até Nicolas definir frequência/cooldown da escala.')
     writes = run.get('writes') or []
     if writes:
         confirmed = sum(1 for row in writes if row.get('ok'))
@@ -136,6 +146,7 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
                 'paused_at_et': run.get('started_at_et'), 'phase': run.get('phase'),
                 'threshold': run.get('threshold'), 'purchase_roas': row.get('purchase_roas'),
                 'spend': row.get('spend'),
+                'meta_updated_time': (result.get('after') or {}).get('updated_time'),
             }
         common.atomic_json(Path(run['audit_path']), run)
 
@@ -153,6 +164,7 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
         if result.get('ok') and result.get('stage') == 'confirmed':
             state.setdefault('paused_campaigns', {})[row['campaign_id']] = {
                 'reason': 'roas_zero_active_ads', 'paused_at_et': run.get('started_at_et'),
+                'meta_updated_time': (result.get('after') or {}).get('updated_time'),
             }
         common.atomic_json(Path(run['audit_path']), run)
 
@@ -256,15 +268,24 @@ def main() -> int:
                 meta_bundle.get('ads') or [], meta_bundle.get('tracked_ads') or [],
                 meta_bundle.get('insights_by_ad') or {}, state, phase, run['threshold'],
             )
+            scale_policy = operation.get('campaign_scaling_policy') or {}
+            scale_candidates = common.plan_campaign_budget_scales(
+                meta_bundle.get('campaigns') or [], plan.get('decisions') or [], run['threshold'],
+                common.finite_float(scale_policy.get('increase_percent')) or 30.0,
+            )
+            plan['budget_scale_candidates'] = scale_candidates
+            plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
             gate = common.source_gate(meta_bundle, sb_bundle, phase)
             run.update({
                 'meta_readback': {
                     'account': meta_bundle.get('account'), 'active_campaigns': len(meta_bundle.get('campaigns') or []),
                     'active_ads': len(meta_bundle.get('ads') or []), 'tracked_ads': len(meta_bundle.get('tracked_ads') or []),
                     'insight_rows': len(meta_bundle.get('insights') or []), 'native_rules': meta_bundle.get('native_rules'),
+                    'manual_review': meta_bundle.get('manual_review') or [],
                 },
                 'smart_bidding_readback': {
                     'ready': sb_bundle.get('ready'), 'reason': sb_bundle.get('reason'),
+                    'freshness': sb_bundle.get('freshness'),
                     'target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'available_account_names': sb_bundle.get('available_account_names'),
                 },
