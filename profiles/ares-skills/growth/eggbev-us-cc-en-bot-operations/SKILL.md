@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.9.0-draft
+version: 0.10.0-draft
 author: Ares
 license: internal
 metadata:
@@ -91,8 +91,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 5. Diário com volume: layout final card único versus card + tabela por campanha.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
-7. Escala: Nicolas aprovou recomendação de +30% para todas as campanhas com Meta Purchase ROAS estritamente acima do threshold; frequência, cooldown, máximo de execuções/dia e teto/envelope de budget ainda precisam ser definidos antes de qualquer write.
-8. Criação do zero: esclarecer com Nicolas se produção aprovada nasce `ACTIVE` com `start_time` futuro e se um canário técnico separado permanece `PAUSED`.
+7. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
 Cada pendência bloqueia somente a ação dependente; não reabre regras já aprovadas.
 
@@ -104,6 +103,7 @@ Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json` v0.2-d
 
 ```text
 Campaign  Auction | Sales | CBO | Highest volume | Standard | Financial products/services US
+Status    produção normal = ACTIVE com start_time futuro após resumo final aprovado; canário técnico = PAUSED até aprovação separada
 Ad set   AdG1 | Messenger | next day 00:00 America/New_York | ongoing | US 18+ All
 Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
 Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
@@ -132,6 +132,8 @@ Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
 Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Por decisão explícita de Nicolas, ausência completa da linha de insight do anúncio na Fase 2 também é `N/D` e corta. Fonte indisponível, com freshness superior a 2h, sem timestamp verificável ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 
 A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. Se um ad pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente o ad e a campanha no mesmo ciclo, sempre com pré-leitura e readback pós-write.
+
+Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Meta Purchase ROAS no nível da campanha. `ROAS > 0,50` recomenda aumentar o budget CBO atual em `10%`; `0,40 < ROAS <= 0,50` mantém; `ROAS = 0,50` mantém. A regra é composta ciclo a ciclo. O planner é dry-run; write real depende de Rodolfo/Geizian e de teto/envelope aprovado.
 
 ### Reporting
 
@@ -233,7 +235,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        56 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo e escala +30% dry-run
+Testes aprovados        58 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo, criação ACTIVE futura e escala +10% acima de 0,50 por ciclo
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente
@@ -269,7 +271,7 @@ Gaps que bloqueiam produção:
 
 O comportamento implementado para performance é: abaixo do threshold corta conforme a fase; igual mantém; acima mantém ou reativa somente objetos pausados pelo Ares; todos os ads cortados pausam a campanha; `LEADS > 5000` pausa a campanha terminalmente. Alta performance não escala budget automaticamente.
 
-## Policy update — 2026-08-29 17:08 ET
+## Policy update — 2026-08-29 17:08 ET (histórico; supersedido abaixo)
 
 Decisões aprovadas por Nicolas e persistidas no contrato:
 
@@ -298,6 +300,19 @@ Smart Bidding report    conta 01 ausente; ROAS write permanece bloqueado
 O guardrail autorizado foi executado em controlled-write porque `LEADS > 5.000` e o scheduler não era confiável: 1 campanha planejada, 1 pausa confirmada por GET, 1 alerta entregue e 0 mapping issues. Readback independente final: campanha `PAUSED`, effective status `PAUSED`, 0 ads efetivamente ativos. Nunca reativar automaticamente essa campanha pelo runner ROAS.
 
 Validação: 56 testes, `py_compile`, dry-run Fase 2 e `git diff --check` aprovados. O dry-run classificou os três ads sem insight como `PAUSE_AD` e a campanha como `PAUSE_CAMPAIGN`, mas executou zero writes devido ao gate Smart Bidding. O gate de intervenção manual compara `updated_time` de campanha, ad set e anúncio e nunca apaga proveniência automaticamente.
+
+## Policy update — 2026-08-29 17:27 ET
+
+Nicolas fechou os dois pontos pendentes:
+
+- criação normal: após o resumo final aprovado, campanha/ad set/ads nascem `ACTIVE` com `start_time` futuro; canário técnico separado permanece `PAUSED` até aprovação de ativação;
+- escala: em cada ciclo ROAS, toda campanha CBO efetivamente ativa com Meta Purchase ROAS agregado `> 0,50` recebe recomendação de `+10%` no budget atual. `ROAS = 0,50` mantém; entre o threshold de corte e `0,50` mantém. O aumento é composto a cada ciclo elegível.
+
+Limite de autoridade: Nicolas aprovou a política, mas a matriz MGS exige Rodolfo ou Geizian para budget write. Portanto o planner e o relatório foram atualizados, enquanto execução de budget permanece `false` até aprovação e teto/envelope.
+
+Validação: 58 testes PASS. Fixture de limite confirmou `0,50 → KEEP`; `0,51 → +10%`; exemplo `USD 100 → USD 110`. Dry-run vivo mostrou o rótulo `Escalas +10% recomendadas` e zero writes/crons.
+
+Smart Bidding avançou parcialmente: a conta `Eggbev-US-CC-EN-01` agora aparece com 1 linha, mas o schema não expõe timestamp de atualização. Como freshness máxima é 2h, o gate retorna `smart_bidding_freshness_unverifiable` e mantém economic writes fail-closed.
 
 ## Sequência de implementação
 
