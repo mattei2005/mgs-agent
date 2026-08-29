@@ -332,6 +332,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
+      "next_step": "Validar schema/chaves, implementar reconciliação fail-closed, testar fixture e live read-only, atualizar contrato/skill e REPORT-INFRA.",
+      "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-daily-report.py",
+      "state": "em implementação autorizada por nicolas; fontes e chaves em validação; zero cron, postagem, budget ou meta write.",
+      "thread_id": "1541578596253175858",
+      "updated_at": "2026-08-29T23:21:13+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
       "next_step": "Obter timestamp verificavel da Smart Bidding e aprovar formulas Eggbev de RPS/ROI; somente depois apresentar o dry-run real e o plano de automacao Diario para OK explicito de Nicolas. Em paralelo, placements exatos e onboarding Engine v3 continuam bloqueando criacao/clone",
       "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento, escala e recovery",
@@ -1402,5 +1412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:10:54+00:00"
+  "updated_at": "2026-08-29T23:21:13+00:00"
 }
