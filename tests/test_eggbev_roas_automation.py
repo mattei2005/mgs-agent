@@ -166,6 +166,12 @@ class ReportingTests(unittest.TestCase):
         self.assertIsNone(result['roi_real'])
         self.assertIsNone(result['rps'])
 
+    def test_unreconciled_smart_bidding_metrics_are_nd_not_zero(self):
+        result = daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': []})
+        self.assertIsNone(result['investment'])
+        self.assertIsNone(result['revenue'])
+        self.assertIsNone(result['leads'])
+
     def test_meta_aggregation_uses_purchase_value_over_spend(self):
         bundle = {'insights': [{'campaign_id': 'c1', 'campaign_name': 'C', 'spend': '10', 'impressions': '1000', 'ctr': '2', 'actions': [{'action_type': 'onsite_conversion.messaging_first_reply', 'value': '5'}], 'action_values': [{'action_type': 'purchase', 'value': '4'}]}]}
         result = daily.aggregate_meta(bundle)

@@ -32,6 +32,24 @@
         "budget_write_authority": "pending_explicit_eggbev_rule_review"
       },
       "write_mode": "disabled_pending_operational_contract_with_scoped_guardrail_pending_activation",
+      "runtime_routes": {
+        "roas_cycle": {
+          "runner_built": true,
+          "write_enabled": false,
+          "cron_enabled": false,
+          "target_meta_account": "act_1034081997659047"
+        },
+        "daily_reporting": {
+          "runner_built": true,
+          "post_enabled": false,
+          "cron_enabled": false
+        },
+        "native_rule_transition": {
+          "rule_name": "ADS ZERO RESULTS",
+          "disable_authorized_only_at_future_activation": true,
+          "execute_now": false
+        }
+      },
       "scoped_write_exceptions": {
         "page_lead_guardrail": {
           "policy_approved": true,

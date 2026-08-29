@@ -97,11 +97,15 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
 
 def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
     rows = bundle.get('target_report_rows') or []
+    ready = bool(bundle.get('ready'))
     return {
-        'ready': bundle.get('ready'), 'reason': bundle.get('reason'), 'rows': len(rows),
-        'investment': sum_field(rows, 'INVESTIMENT'), 'revenue': sum_field(rows, 'REVENUE'),
-        'drip_revenue': sum_field(rows, 'DRIP_REVENUE'), 'broadcast_revenue': sum_field(rows, 'BD_REVENUE'),
-        'leads': sum_field(rows, 'LEADS'), 'leads_total': sum_field(rows, 'LEADS_TOTAL'),
+        'ready': ready, 'reason': bundle.get('reason'), 'rows': len(rows),
+        'investment': sum_field(rows, 'INVESTIMENT') if ready else None,
+        'revenue': sum_field(rows, 'REVENUE') if ready else None,
+        'drip_revenue': sum_field(rows, 'DRIP_REVENUE') if ready else None,
+        'broadcast_revenue': sum_field(rows, 'BD_REVENUE') if ready else None,
+        'leads': sum_field(rows, 'LEADS') if ready else None,
+        'leads_total': sum_field(rows, 'LEADS_TOTAL') if ready else None,
         'available_account_names': bundle.get('available_account_names'),
         'roi_real': None, 'roi_estimated': None, 'rps': None,
         'formula_note': 'ROI/RPS N/D: nenhuma fórmula Eggbev aprovada; valores brutos preservados.',

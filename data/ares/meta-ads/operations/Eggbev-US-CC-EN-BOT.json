@@ -192,7 +192,7 @@
     ]
   },
   "daily_reporting_policy": {
-    "status": "runner_build_authorized_no_cron_no_post",
+    "status": "runner_built_and_live_read_only_verified_no_cron_no_post",
     "thread_id": "1541578596253175858",
     "timezone": "America/New_York",
     "basis": "distributed during the day like Creditoparaveiculo, adapted to Eggbev BOT",
@@ -254,7 +254,7 @@
     "metric_empty_but_source_valid": "apply null metric policy; do not confuse with source outage"
   },
   "roas_cycle_policy": {
-    "status": "runner_and_tests_authorized_no_cron_no_meta_write",
+    "status": "runner_built_and_live_dry_run_verified_no_cron_no_meta_write",
     "policy_approved": true,
     "executor": "Ares",
     "native_meta_rules_authority": false,
@@ -313,7 +313,7 @@
     }
   },
   "next_stage_plan": {
-    "status": "runner_and_tests_build_authorized_no_cron_no_external_write",
+    "status": "runners_built_and_verified_awaiting_reconciled_live_data_and_activation_approval",
     "goal": "Implement deterministic ROAS cycles, Intraday action reporting and Daily reporting without using native Meta Automated Rules as authority.",
     "step_1_read_only": [
       "inventory native Meta Automated Rules and identify conflicts without changing them",
@@ -392,10 +392,34 @@
         "consequence": "live Meta x Smart Bidding calibration for the target account cannot yet be completed"
       },
       "blocking_decisions": [
-        "whether ADS ZERO RESULTS should be disabled before Ares ROAS automation is activated",
-        "which Smart Bidding account/source exposes the target Eggbev-US-CC-EN-01 operation",
-        "approval to build runners/tests and later create the proposed crons after dry-run"
+        "Smart Bidding must expose the target Eggbev-US-CC-EN-01 operation before controlled-write",
+        "a live dry-run with active delivery must be reviewed before cron or write enablement"
       ]
+    },
+    "build_readback": {
+      "completed_at_et": "2026-08-29T14:40:19-04:00",
+      "authorization": "Nicolas approved runner/tests only; no cron or external write",
+      "artifacts": [
+        "shared Meta/Smart Bidding read and decision runtime",
+        "Corte e ROAS dry-run/controlled-write runner",
+        "Daily and on-demand read-only reporter",
+        "safe no-cron wrappers",
+        "unit and regression test suite"
+      ],
+      "tests_passed": 45,
+      "py_compile": "passed",
+      "shell_syntax": "passed",
+      "live_dry_run": {
+        "meta_account": "Eggbev-US-CC-EN-01; ACTIVE; USD; America/New_York",
+        "active_campaigns": 0,
+        "active_ads": 0,
+        "smart_bidding_target_rows": 0,
+        "native_conflict": "ADS ZERO RESULTS remains ENABLED until future activation",
+        "planned_meta_writes": 0,
+        "performed_meta_writes": 0,
+        "performed_discord_posts": 0
+      },
+      "cron_readback": "no ROAS or Daily cron exists"
     }
   },
   "page_lead_guardrail": {
@@ -565,5 +589,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T14:17:08-04:00"
+  "updated_at": "2026-08-29T14:40:19-04:00"
 }

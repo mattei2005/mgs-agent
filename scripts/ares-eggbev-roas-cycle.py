@@ -50,7 +50,9 @@ def render_report(run: dict[str, Any]) -> str:
         f"Modo: {'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED-WRITE'} | Meta: {run.get('meta_status')} | Smart Bidding: {run.get('smart_bidding_status')}",
     ]
     reasons = source.get('reasons') or []
-    if reasons:
+    if run.get('phase') == 'RESET':
+        lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
+    elif reasons:
         lines.append('🚫 Write bloqueado: ' + '; '.join(reasons))
     else:
         lines.append('✅ Fontes reconciliadas e regra nativa sem conflito.')
@@ -215,6 +217,31 @@ def main() -> int:
                     raise RuntimeError(runtime.get('blocked_reason') or 'ROAS cycle write disabled')
                 if not args.post_report:
                     raise RuntimeError('controlled write requires --post-report')
+                if phase == 'NO_CYCLE':
+                    raise RuntimeError('controlled write requested outside an approved cycle time')
+            if phase == 'RESET':
+                run.update({
+                    'meta_status': 'not_required_for_local_reset',
+                    'smart_bidding_status': 'not_required_for_local_reset',
+                    'source_gate': {'write_ready': False, 'reset_ready': True, 'reasons': ['reset_only_no_meta_write']},
+                    'plan': {
+                        'phase': 'RESET', 'threshold': reset_value, 'decisions': [], 'campaign_actions': [],
+                        'counts': {'ads_considered': 0, 'pause_ads': 0, 'reactivate_ads': 0, 'pause_campaigns': 0, 'reactivate_campaigns': 0},
+                    },
+                })
+                if args.apply:
+                    common.atomic_json(common.ROAS_STATE_PATH, state)
+                report = render_report(run)
+                if args.post_report:
+                    run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report)
+                    if not run['delivery'].get('ok'):
+                        raise RuntimeError('Discord reset report delivery/readback failed')
+                run['ok'] = True
+                run['finished_at_et'] = common.now_et().isoformat()
+                common.atomic_json(audit_path, run)
+                if not args.quiet:
+                    print(report if not args.post_report else json.dumps(sanitized_summary(run), ensure_ascii=False, indent=2))
+                return 0
             meta, sb, token, credential_readback = common.load_runtime_modules(account)
             run['credential_readback'] = credential_readback
             meta_bundle = common.fetch_meta_bundle(meta, token, norm_id(operation), state, 'today')
@@ -248,9 +275,7 @@ def main() -> int:
                 report = render_report(run)
                 run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report)
                 raise RuntimeError('source/native-rule gate blocked controlled writes')
-            if args.apply and phase == 'RESET':
-                common.atomic_json(common.ROAS_STATE_PATH, state)
-            elif args.apply and phase in {'PHASE_1', 'PHASE_2'}:
+            if args.apply and phase in {'PHASE_1', 'PHASE_2'}:
                 execute_plan(meta, token, plan, state, run)
                 state['last_cycle'] = {'run_id': run_id, 'at_et': started.isoformat(), 'phase': phase}
                 common.atomic_json(common.ROAS_STATE_PATH, state)
