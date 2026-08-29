@@ -10,7 +10,19 @@
       "strategy": "BOT",
       "currency_expected": "USD",
       "timezone_source": "meta_ad_account_timezone",
-      "cut_level": "campaign",
+      "cut_policy": {
+        "roas_default": "ad",
+        "roas_zero_active_ads_exception": "pause_campaign",
+        "adset_action": "none",
+        "page_lead_guardrail": "pause_campaign"
+      },
+      "conversion_assets": {
+        "pixel_name": "Eggbev-US-CC-EN",
+        "pixel_id": "935354115143283",
+        "pixel_scope": "entire Eggbev card operation",
+        "advertiser_payer": "DIGITAL TRUST",
+        "advertiser_payer_scope": "always"
+      },
       "management": {
         "owners": [
           "Rodolfo Mattei",

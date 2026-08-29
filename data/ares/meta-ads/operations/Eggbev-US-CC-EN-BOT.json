@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1-draft",
+  "schema_version": "0.2-draft",
   "status": "architecture_review_in_progress",
   "operation_skill": "eggbev-us-cc-en-bot-operations",
   "operation_id": "Eggbev-US-CC-EN-BOT",
@@ -12,7 +12,12 @@
   "strategy_family": "chatpion_bot_messenger",
   "channel": "Messenger",
   "destination": "messenger_conversation",
-  "cut_level": "campaign",
+  "cut_level": {
+    "roas_default": "ad",
+    "roas_zero_active_ads_exception": "campaign",
+    "roas_adset_action": "none",
+    "page_lead_guardrail": "campaign"
+  },
   "account_currency": "USD",
   "account_timezone": "America/New_York",
   "account": {
@@ -59,7 +64,8 @@
       "rules": "1541578622106865815",
       "intraday": "1541578606076231750",
       "daily": "1541578596253175858",
-      "campaign_creation": "1541578556037927053"
+      "campaign_creation": "1541578556037927053",
+      "page_lead_guardrail": "1543312825890381865"
     },
     "thread_membership": {
       "automatic_manager": {
@@ -75,16 +81,198 @@
     "inherit_direct_traffic_rules": false,
     "reuse_only_generic_guardrails_after_explicit_fit_review": true
   },
-  "campaign_structure": "pending_review",
-  "campaign_naming": "pending_review",
-  "objective_and_optimization": "pending_review",
-  "budget_policy": "pending_review",
-  "metrics": "pending_review",
-  "intraday_policy": "pending_review",
-  "daily_reporting_policy": "pending_review",
-  "campaign_creation_policy": "pending_review",
-  "creative_policy": "pending_review",
-  "smart_bidding_reconciliation": "pending_review",
+  "campaign_structure": {
+    "status": "approved_by_nicolas_pending_implementation",
+    "campaign": {
+      "buying_type": "AUCTION",
+      "objective": "SALES",
+      "budget_level": "CBO",
+      "budget_scheduling": false,
+      "bid_strategy": "HIGHEST_VOLUME",
+      "delivery_type": "STANDARD",
+      "special_ad_category": "FINANCIAL_PRODUCTS_AND_SERVICES",
+      "special_ad_category_country": "US",
+      "adsets_per_campaign": 1
+    },
+    "adset": {
+      "name": "AdG1",
+      "conversion_location": "MESSENGER",
+      "start": "next_day_00:00_America/New_York",
+      "end": "ongoing",
+      "country": "US",
+      "minimum_age": 18,
+      "gender": "ALL",
+      "targeting_expansion": true,
+      "performance_goal": "MAXIMIZE_NUMBER_OF_CONVERSIONS",
+      "conversion_count": "ALL_CONVERSIONS",
+      "bid_strategy": "HIGHEST_VOLUME",
+      "value_rules": false,
+      "delivery_type": "STANDARD",
+      "placements_mode": "MANUAL_ONLY"
+    },
+    "ads_per_adset": [3, 5]
+  },
+  "campaign_naming": {
+    "status": "approved_by_nicolas",
+    "pattern": "[sequential_number] - [page_name] - ENG - US - (pg_XXXX) C0XX para [person_name] - Copy",
+    "ad_name": "provided_per_creative; missing name blocks publication"
+  },
+  "objective_and_optimization": {
+    "status": "approved_by_nicolas",
+    "destination": "Messenger",
+    "pixel_name": "Eggbev-US-CC-EN",
+    "pixel_id": "935354115143283",
+    "pixel_scope": "same pixel for the entire Eggbev card operation",
+    "advertiser_payer": "DIGITAL TRUST",
+    "advertiser_payer_scope": "always for this operation"
+  },
+  "budget_policy": {
+    "status": "approved_by_nicolas",
+    "daily_budget": "variable_per_campaign",
+    "must_be_confirmed_before_creation": true,
+    "never_assume_reference_values": true
+  },
+  "metrics": {
+    "status": "approved_core_pending_live_field_mapping",
+    "meta_ads": [
+      "CPM",
+      "Purchase ROAS",
+      "Cost per result or Cost per messaging conversation started",
+      "Results",
+      "Budget",
+      "Amount spent",
+      "CTR"
+    ],
+    "smart_bidding_requested": [
+      "Leads by Messenger page and UTM",
+      "RPS",
+      "ROI do drip",
+      "Performance completa",
+      "Investimento",
+      "Receita",
+      "Receita líquida",
+      "Receita estimada",
+      "ROI real",
+      "ROI estimado"
+    ],
+    "formula_policy": "validate live fields and formulas with Nicolas; never invent calculations"
+  },
+  "intraday_policy": {
+    "status": "layout_and_cycles_approved_pending_implementation",
+    "thread_id": "1541578606076231750",
+    "thread_name_proposal": "Ciclos de ROAS — Eggbev",
+    "thread_name_status": "pending_nicolas_confirmation",
+    "report_every_cycle": true,
+    "report_on_demand": true,
+    "period": "Today in America/New_York",
+    "required_summary": [
+      "phase and cycle time",
+      "threshold",
+      "active before and after",
+      "cut ads",
+      "reactivated ads",
+      "untested ads",
+      "Meta Purchase ROAS",
+      "Smart Bidding reconciliation",
+      "next-threshold recommendation",
+      "write readbacks"
+    ]
+  },
+  "daily_reporting_policy": {
+    "status": "schedule_proposed_pending_nicolas_confirmation",
+    "thread_id": "1541578596253175858",
+    "timezone": "America/New_York",
+    "basis": "distributed during the day like Creditoparaveiculo, but offset from ROAS cycle writes to avoid simultaneous duplicate posts",
+    "proposed_times": ["07:00", "09:00", "12:30", "16:30", "20:30", "23:30"],
+    "07:00": "previous-day closed report",
+    "other_times": "current-day partial reports",
+    "automation_change": "none_until_nicolas_approves_exact_schedule"
+  },
+  "campaign_creation_policy": {
+    "status": "approved_by_nicolas_pending_runner",
+    "dependency_checklist": [
+      "confirm selected page",
+      "confirm next-day 00:00 ET and 1x1x3 or 1x1x5",
+      "confirm exact daily budget",
+      "confirm new creatives, ad names and copy angle"
+    ],
+    "prepublication_double_gate": true,
+    "publish_only_after_nicolas_explicit_ok_on_final_summary": true,
+    "current_instruction_overrides_reference_print": true,
+    "message_template": {
+      "required": true,
+      "template_type": "text_with_buttons/button",
+      "text": "💳 Hi, I just reviewed your access…\n\nDo you want to see your approved card? ⤵️",
+      "button_type": "postback",
+      "button_payload": "GET_STARTED_PAYLOAD",
+      "button_title": "🟢 YES, SHOW ME",
+      "performance_booster_enabled": false,
+      "ctm_deprecate_quick_replies_enabled": false,
+      "change_gate": "show full new version and obtain Nicolas approval"
+    }
+  },
+  "creative_policy": {
+    "status": "approved_by_nicolas_pending_inventory_runner",
+    "drive_operation": "CC_US_EN",
+    "source": "01_READY after reservation and Meta x Drive reconciliation",
+    "creative_source": "MANUAL_UPLOAD",
+    "always_new_never_reuse": true,
+    "partnership_ad": false,
+    "instagram_account": "USE_FACEBOOK_PAGE",
+    "advantage_plus_creative": false,
+    "multi_advertiser_ads": false,
+    "copy_angle": "confirmed with Nicolas per campaign"
+  },
+  "smart_bidding_reconciliation": {
+    "status": "approved_fail_closed_pending_full_metric_mapping",
+    "page_join": ["UTM_CAMPAIGN", "FB_PAGE_ID"],
+    "ad_level_economic_join": "pending_live_validation",
+    "source_unavailable_stale_or_unreconciled": "no_write_and_alert_data_unavailable",
+    "metric_empty_but_source_valid": "apply null metric policy; do not confuse with source outage"
+  },
+  "roas_cycle_policy": {
+    "status": "approved_by_nicolas_pending_final_plan_and_implementation",
+    "executor": "Ares",
+    "native_meta_rules_authority": false,
+    "timezone": "America/New_York",
+    "threshold": {
+      "daily_reset_at": "00:00",
+      "daily_reset_value": 0.40,
+      "symmetric_cut_and_reactivation": true,
+      "exactly_equal": "no_change",
+      "change_requires_nicolas_approval": true
+    },
+    "formation_window": {
+      "from": "00:00",
+      "to": "06:00",
+      "cuts": false,
+      "reactivations": false
+    },
+    "phase_1": {
+      "times": ["06:00", "08:00", "10:00", "12:00"],
+      "cut": "Amount spent > USD 2.00 AND Purchase ROAS < threshold",
+      "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
+    },
+    "phase_2": {
+      "times": ["13:00", "14:00", "16:00", "18:00", "20:00", "22:00", "23:00"],
+      "cut": "Purchase ROAS < threshold; no spend gate",
+      "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
+    },
+    "after_23_until_midnight": "no_new_cut_or_reactivation",
+    "null_purchase_roas": {
+      "valid_source_empty_metric": "treat as cut-eligible and report N/D",
+      "phase_1_spend_gate_still_applies": true,
+      "phase_2_spend_gate": false
+    },
+    "zero_active_ads_after_cycle": {
+      "cut_all_eligible_ads": true,
+      "pause_campaign": true,
+      "pause_adset": false,
+      "supersedes_previous_never_pause_campaign_invariant": true,
+      "campaign_reactivation_when_an_ad_recovers": "pending_nicolas_confirmation"
+    },
+    "recovery": "readback-first; never repeat non-idempotent writes blindly"
+  },
   "page_lead_guardrail": {
     "policy_approved": true,
     "status": "active_scheduled_waiting_scheduler_gateway",
@@ -252,5 +440,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T13:52:48-04:00"
+  "updated_at": "2026-08-29T13:59:14-04:00"
 }
