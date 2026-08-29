@@ -1,0 +1,83 @@
+{
+  "status": "dry_run_pass",
+  "authorization_message_id": "1543130476099932171",
+  "planned_replacements": 42,
+  "preflight": {
+    "drip": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "routes": 30,
+      "old_counts": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "new_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "targeted": 24
+    },
+    "broadcast": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "routes": 23,
+      "old_counts": [
+        4,
+        5,
+        5,
+        4
+      ],
+      "new_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "targeted": 18
+    }
+  },
+  "target_ids": [
+    605,
+    606,
+    1080,
+    1081,
+    1082,
+    1083,
+    1084,
+    1085,
+    1086,
+    1087,
+    1088
+  ],
+  "new_urls_http_200": true,
+  "operations": {
+    "FACEBOOK": {
+      "https://zytiva.com/rec-gb-cc-santander-all-in-one-card": "facebook_gb_cc_santander-d_rec",
+      "https://zytiva.com/rec-gb-cc-fluid-the-flexible-credit-builder-card": "facebook_gb_cc_fluid-d_rec",
+      "https://zytiva.com/rec-gb-cc-chase-credit-card-simple-credit-approval": "facebook_gb_cc_chase-d_rec",
+      "https://zytiva.com/rec-gb-cc-aib-options-two-credit-card-no-fee": "facebook_gb_cc_options-d_rec"
+    },
+    "MCT": {
+      "https://zytiva.com/rec-gb-cc-santander-all-in-one-card": "mct_gb_cc_santander_rec",
+      "https://zytiva.com/rec-gb-cc-fluid-the-flexible-credit-builder-card": "mct_gb_cc_fluid_rec",
+      "https://zytiva.com/rec-gb-cc-chase-credit-card-simple-credit-approval": "mct_gb_cc_chase_rec",
+      "https://zytiva.com/rec-gb-cc-aib-options-two-credit-card-no-fee": "mct_gb_cc_options_rec"
+    }
+  },
+  "backup_dir": "/root/mgs-agent/backups/sb-smart-routing/20260829T013020-0400-zytiva-gb-cc-en-four-url-replacement"
+}
