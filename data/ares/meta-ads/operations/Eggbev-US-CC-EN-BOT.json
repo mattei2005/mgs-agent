@@ -160,8 +160,8 @@
   "intraday_policy": {
     "status": "layout_and_cycles_approved_pending_implementation",
     "thread_id": "1541578606076231750",
-    "thread_name_proposal": "Ciclos de ROAS — Eggbev",
-    "thread_name_status": "pending_nicolas_confirmation",
+    "thread_name": "Corte e ROAS",
+    "thread_name_status": "approved_and_readback_confirmed",
     "report_every_cycle": true,
     "report_on_demand": true,
     "period": "Today in America/New_York",
@@ -179,14 +179,14 @@
     ]
   },
   "daily_reporting_policy": {
-    "status": "schedule_proposed_pending_nicolas_confirmation",
+    "status": "schedule_approved_by_nicolas_pending_implementation",
     "thread_id": "1541578596253175858",
     "timezone": "America/New_York",
-    "basis": "distributed during the day like Creditoparaveiculo, but offset from ROAS cycle writes to avoid simultaneous duplicate posts",
-    "proposed_times": ["07:00", "09:00", "12:30", "16:30", "20:30", "23:30"],
-    "07:00": "previous-day closed report",
+    "basis": "distributed during the day like Creditoparaveiculo, adapted to Eggbev BOT",
+    "approved_times": ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
+    "06:00": "previous-day closed report plus reference to the current first-cycle state",
     "other_times": "current-day partial reports",
-    "automation_change": "none_until_nicolas_approves_exact_schedule"
+    "automation_change": "none_until_final_plan_is_shown_and_nicolas_explicitly_approves_cron_write"
   },
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_pending_runner",
@@ -269,7 +269,7 @@
       "pause_campaign": true,
       "pause_adset": false,
       "supersedes_previous_never_pause_campaign_invariant": true,
-      "campaign_reactivation_when_an_ad_recovers": "pending_nicolas_confirmation"
+      "campaign_reactivation_when_an_ad_recovers": "automatic_with_the_recovered_ad_after_pre-read_and_post-write_readback"
     },
     "recovery": "readback-first; never repeat non-idempotent writes blindly"
   },
@@ -440,5 +440,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T13:59:14-04:00"
+  "updated_at": "2026-08-29T14:05:37-04:00"
 }

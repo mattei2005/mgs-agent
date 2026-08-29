@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Nicolas confirmar os horários propostos do Diário, o nome da thread Intraday e se a campanha deve ser reativada quando um ad pausado recuperar ROAS; depois Ares apresenta plano final antes de qualquer mudança de cron.",
+      "next_step": "Ares deve apresentar o plano final de runners e crons dos ciclos/relatórios; aguardar OK explícito de Nicolas antes de qualquer mudança de automação.",
       "objective": "Construir a arquitetura Campaign Ops BOT/Messenger Eggbev US-CC-EN sem herdar parâmetros de tráfego direto",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "contrato v0.2 materializado: campaign/adset/ad, pixel universal, payer digital trust, ciclos roas em duas fases, reset diário 0.40, métrica vazia n/d elegível a corte, fail-closed para fonte indisponível e pausa da campanha quando o ciclo deixa zero ads ativos. nenhum cron roas/intraday/diário foi criado ou alterado nesta atualização.",
+      "state": "contrato v0.2 atualizado: diário aprovado às 06/08/10/12/14/16/18/20/22 et; campanha e ad recuperado reativam automaticamente juntos; thread intraday renomeada para corte e roas com readback e membros obrigatórios confirmados. nenhum cron roas/intraday/diário foi criado ou alterado.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T18:00:24+00:00"
+      "updated_at": "2026-08-29T18:06:50+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T18:00:24+00:00"
+  "updated_at": "2026-08-29T18:06:50+00:00"
 }
