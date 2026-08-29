@@ -286,6 +286,56 @@
     },
     "recovery": "readback-first; never repeat non-idempotent writes blindly"
   },
+  "next_stage_plan": {
+    "status": "awaiting_nicolas_explicit_approval_before_cron_or_runner_write",
+    "goal": "Implement deterministic ROAS cycles, Intraday action reporting and Daily reporting without using native Meta Automated Rules as authority.",
+    "step_1_read_only": [
+      "inventory native Meta Automated Rules and identify conflicts without changing them",
+      "validate live Meta fields at ad level",
+      "validate Smart Bidding fields, formulas, granularity and latency",
+      "prove the ad/campaign/page reconciliation keys"
+    ],
+    "step_2_build_and_test": [
+      "implement one deterministic ROAS-cycle runner with ET date state, threshold reset, provenance, locks and audit",
+      "implement one deterministic Daily reporter",
+      "implement an on-demand report command using the same read path",
+      "test phase gates, N/D ROAS, source failure, zero-active-ads campaign pause, automatic campaign reactivation and readback recovery"
+    ],
+    "step_3_live_dry_run": [
+      "run against the real Eggbev account with zero Meta writes",
+      "publish no operational message during calibration unless explicitly requested",
+      "show Nicolas the planned cuts, reactivations, campaign transitions and report layouts"
+    ],
+    "step_4_activation_gate": "Only after Nicolas approves the dry-run summary, create or enable controlled-write cron jobs and validate their readbacks.",
+    "proposed_jobs": {
+      "roas_cycle": {
+        "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
+        "timezone_guard": "America/New_York",
+        "00:00_action": "reset threshold state to 0.40; no Meta cut/reactivation",
+        "delivery": "wrapper posts directly to Eggbev-US-CC-EN Corte e ROAS",
+        "no_agent": true,
+        "deliver": "local"
+      },
+      "daily_reporting": {
+        "schedule": "0 6,8,10,12,14,16,18,20,22 * * *",
+        "timezone_guard": "America/New_York",
+        "delivery": "wrapper posts directly to Eggbev-US-CC-EN Diario",
+        "no_agent": true,
+        "deliver": "local"
+      },
+      "campaign_creation": {
+        "schedule": "none",
+        "mode": "on-demand manifest/plan with final Nicolas approval before publish"
+      },
+      "page_lead_guardrail": "preserve the current independently approved schedule and runner"
+    },
+    "no_change_before_approval": [
+      "no ROAS or Daily cron creation/update",
+      "no native Meta rule change",
+      "no threshold write",
+      "no campaign/ad/adset write"
+    ]
+  },
   "page_lead_guardrail": {
     "policy_approved": true,
     "status": "active_scheduled_waiting_scheduler_gateway",
@@ -453,5 +503,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T14:05:37-04:00"
+  "updated_at": "2026-08-29T14:12:09-04:00"
 }
