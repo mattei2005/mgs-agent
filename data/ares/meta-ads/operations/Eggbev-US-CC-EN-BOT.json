@@ -117,6 +117,39 @@
       "new_clone_mode": "clone_page_switch",
       "meta_writes": 0,
       "cron_changes": 0
+    },
+    "route_contracts": {
+      "campaign_creation": {
+        "thread_id": "1541578556037927053",
+        "thread_name": "Eggbev-US-CC-EN Criar Campanhas",
+        "scope": "creation from zero only; cloning belongs to thread 1543333373945053184",
+        "required_skill": "eggbev-us-cc-en-bot-operations",
+        "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
+        "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
+        "generic_configuration_question_means": "the operational configuration for creating Eggbev campaigns, not global Hermes/Ares model, tools, security or gateway configuration",
+        "global_agent_configuration_exception": "only when the user explicitly says global Ares/Hermes configuration",
+        "mandatory_report_sections": [
+          "scope, account, strategy, currency and timezone",
+          "current runtime readiness and blockers",
+          "fixed campaign and ad set structure",
+          "variable request fields",
+          "ad, creative and copy policy",
+          "Messenger template and change gate",
+          "naming and tracking",
+          "budget and authority gates",
+          "preflight, final summary, approval, creation and readback sequence",
+          "explicit separation from clone, ROAS, Daily and lead guardrail routes"
+        ],
+        "forbidden_default_report_topics": [
+          "model/provider and OAuth",
+          "Hermes version/update",
+          "global tool inventory",
+          "global security flags",
+          "other operations",
+          "historical rules superseded by latest_policy_update"
+        ]
+      }
     }
   },
   "inheritance_policy": {
@@ -253,6 +286,13 @@
   },
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_pending_runner",
+    "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
+    "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
+    "tracking_policy": {
+      "page_token": "pg_XXXXX aligned to the selected Facebook Page",
+      "links_and_utms": "must be confirmed and shown in the final summary for each request; never infer from another operation",
+      "readback": "validate destination, url_tags/UTMs and Page identity after creation"
+    },
     "dependency_checklist": [
       "confirm selected page",
       "confirm next-day 00:00 ET and 1x1x3 or 1x1x5",

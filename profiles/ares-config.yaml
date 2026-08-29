@@ -562,13 +562,24 @@ discord:
       - Conta atual validada: alias Eggbev-US-CC-EN-01-G006; IDs tecnicos ficam no
       audit.
 
-      - Threads fixas: regras 1541578622106865815; Intraday 1541578606076231750; Diario
-      1541578596253175858; criar campanhas 1541578556037927053.
+      - Threads fixas: Regras 1543280854024060999; Corte e ROAS 1541578606076231750;
+      Diario 1541578596253175858; Criar Campanhas 1541578556037927053; Clonar Campanhas
+      1543333373945053184; Limite de Leads 1543312825890381865.
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
       titulo manual.'
+    '1541578556037927053': |-
+      INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
+
+      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006. Clonagem usa a thread 1543333373945053184.
+      - Antes de responder, carregar eggbev-us-cc-en-bot-operations e ler data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json e data/ares/meta-ads/accounts/1034081997659047.json.
+      - Nesta thread, pedidos genericos como sua configuracao, como esta configurada ou relatorio da configuracao significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
+      - Para relatorio de configuracao, executar scripts/ares-eggbev-creation-config-report.py ou usar exatamente os mesmos campos canonicos. Informar conta/estrategia/timezone, readiness real, estrutura Campaign/Ad set/Ads, variaveis, criativos versus copy, JSON Messenger, naming/UTMs, budget/autoridade, resumo final/OK, ACTIVE futuro, readback e bloqueios do Engine v3.
+      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. latest_policy_update e campos ativos vencem secoes historicas.
+      - Nunca publicar diretamente. Primeiro preflight/manifest/plan, depois resumo final e OK explicito. Sucesso exige GET/readback.
+      - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.
     '1539432300364824607': 'INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR
 
 
