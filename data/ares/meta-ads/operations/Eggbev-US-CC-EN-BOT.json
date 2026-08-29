@@ -159,6 +159,40 @@
           "creation_write_enabled": false,
           "audit": "data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json"
         }
+      },
+      "daily_reporting": {
+        "thread_id": "1541578596253175858",
+        "thread_name": "Eggbev-US-CC-EN Diario",
+        "scope": "Daily and on-demand read-only reporting for account Eggbev-US-CC-EN-01-G006",
+        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-ads-intraday-operations"],
+        "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
+        "configuration_report_script": "scripts/ares-eggbev-daily-config-report.py",
+        "live_report_script": "scripts/ares-eggbev-daily-report.py",
+        "generic_rules_or_automation_question_means": "Daily reporting rules, schedule, sources, metrics, runtime and blockers only; never the full Eggbev operation or global Ares/Hermes configuration",
+        "live_report_request_mapping": {
+          "today_or_now": "--period today",
+          "yesterday": "--period yesterday",
+          "specific_date": "--period YYYY-MM-DD",
+          "scheduled_06_00": "--period auto at 06:00 America/New_York; previous-day close plus current-day 06:00 reference",
+          "other_scheduled_times": "--period auto; current-day partial"
+        },
+        "live_data_policy": "run the live report at request time; never reuse campaign, spend, ROAS, result, Smart Bidding or rule counts from an old thread message",
+        "mandatory_report_sections": [
+          "account alias, local generation time, period, USD, sources and read_only mode",
+          "Meta metrics and campaign rows supported by the current renderer",
+          "Smart Bidding target-row count, freshness/reconciliation and N/D limitations",
+          "runtime truth for on-demand, post and cron",
+          "known renderer gaps when the report is not yet complete"
+        ],
+        "forbidden_default_report_topics": [
+          "campaign creation or cloning configuration",
+          "ROAS cut/reactivation rules",
+          "lead guardrail rules",
+          "native Meta rules inventory",
+          "global model/provider/tools/security configuration",
+          "stale campaign or scheduler snapshots"
+        ]
       }
     }
   },
@@ -281,11 +315,29 @@
     "status": "runner_built_and_live_read_only_verified_no_cron_no_post",
     "thread_id": "1541578596253175858",
     "timezone": "America/New_York",
+    "mode": "read_only",
+    "report_on_demand": true,
     "basis": "distributed during the day like Creditoparaveiculo, adapted to Eggbev BOT",
     "approved_times": ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
     "06:00": "previous-day closed report plus reference to the current first-cycle state",
     "other_times": "current-day partial reports",
+    "sources": {
+      "meta": "Meta API live for the requested period",
+      "smart_bidding": "Smart Bidding Messenger target account only after identity and freshness reconciliation"
+    },
+    "required_meta_metrics": ["Amount spent", "Purchase ROAS", "Results/messaging conversations", "Cost per conversation", "CPM", "CTR", "Budget"],
+    "requested_smart_bidding_metrics": ["target rows", "Investment", "Revenue", "Drip revenue", "Broadcast revenue", "Leads", "RPS", "Real ROI", "Estimated ROI"],
+    "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
+    "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
+    "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
+    "layout": "aligned consolidated text table for desktop plus vertical mobile cards when volume requires; final high-volume layout remains pending",
     "automation_change": "none_until_dry_run_is_shown_and_nicolas_explicitly_approves_cron_write",
+    "schedule_approval_is_not_cron_approval": true,
+    "known_renderer_gaps": [
+      "Budget is required by the contract but is not yet rendered in the campaign table",
+      "current campaign status and start time are not yet rendered in the campaign table",
+      "the final hybrid mobile-card plus desktop-table layout is pending validation with campaign volume"
+    ],
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-daily-report.py",
       "thread_id": "1541578596253175858",

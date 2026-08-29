@@ -64,9 +64,24 @@
           "target_meta_account": "act_1034081997659047"
         },
         "daily_reporting": {
+          "thread_id": "1541578596253175858",
+          "configuration_report_script": "scripts/ares-eggbev-daily-config-report.py",
+          "live_report_script": "scripts/ares-eggbev-daily-report.py",
           "runner_built": true,
+          "mode": "read_only",
+          "report_on_demand": true,
           "post_enabled": false,
-          "cron_enabled": false
+          "cron_enabled": false,
+          "writes_enabled": false,
+          "latest_live_read_only_result": {
+            "checked_at_et": "2026-08-29T18:30:27-04:00",
+            "meta_spend_usd": 80.13,
+            "meta_purchase_roas": 0.25,
+            "meta_messaging_results": 41,
+            "smart_bidding_target_rows": 1,
+            "smart_bidding_status": "smart_bidding_freshness_unverifiable",
+            "note": "evidence only; never reuse as current truth on a future request"
+          }
         },
         "native_rule_transition": {
           "rule_name": "ADS ZERO RESULTS",
