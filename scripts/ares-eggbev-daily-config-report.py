@@ -40,7 +40,8 @@ def build_report() -> str:
     times = ", ".join(policy["approved_times"])
     meta_metrics = ", ".join(policy["required_meta_metrics"])
     sb_metrics = ", ".join(policy["requested_smart_bidding_metrics"])
-    gaps = policy["known_renderer_gaps"]
+    renderer = policy["renderer_contract"]
+    limitations = policy["remaining_limitations"]
 
     lines = [
         "# Eggbev-US-CC-EN — configuração do Diário",
@@ -87,12 +88,18 @@ def build_report() -> str:
         f"- {policy['action_policy']}.",
         "- Criação, clone, cortes/reativações ROAS, limite de leads e Automated Rules pertencem às respectivas threads.",
         "",
-        "## Layout e lacunas conhecidas",
+        "## Renderer, cobertura e limitações",
         f"- Layout contratado: {policy['layout']}.",
-        f"- Lacuna 1: {gaps[0]}.",
-        f"- Lacuna 2: {gaps[1]}.",
-        f"- Lacuna 3: {gaps[2]}.",
-        "- Enquanto essas lacunas permanecerem, o relatório live é válido como leitura parcial, mas não deve ser descrito como layout final completo nem receber auto-post/cron.",
+        f"- Escopo de campanhas: {renderer['campaign_scope']}.",
+        f"- Limite silencioso de linhas: {state(bool(renderer['silent_row_limit']))}.",
+        f"- Truncamento do nome da campanha: {state(bool(renderer['campaign_name_truncation']))}.",
+        f"- Campos por campanha: {', '.join(renderer['per_campaign_fields'])}.",
+        f"- Freshness Smart Bidding visível: {', '.join(renderer['smart_bidding_freshness_visible'])}.",
+        f"- Paginação: {renderer['pagination']}.",
+        f"- Fixture de alto volume: {renderer['high_volume_fixture_campaigns']} campanhas, todas preservadas.",
+        f"- Limitação 1: {limitations[0]}.",
+        f"- Limitação 2: {limitations[1]}.",
+        f"- Limitação 3: {limitations[2]}.",
     ]
     return "\n".join(lines).rstrip() + "\n"
 

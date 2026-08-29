@@ -183,7 +183,7 @@
           "Meta metrics and campaign rows supported by the current renderer",
           "Smart Bidding target-row count, freshness/reconciliation and N/D limitations",
           "runtime truth for on-demand, post and cron",
-          "known renderer gaps when the report is not yet complete"
+          "campaign scope, coverage/readback counts and remaining source limitations"
         ],
         "forbidden_default_report_topics": [
           "campaign creation or cloning configuration",
@@ -345,13 +345,24 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "aligned consolidated text table for desktop plus vertical mobile cards when volume requires; final high-volume layout remains pending",
+    "layout": "hybrid v2: one vertical card per campaign with the full name plus an indexed consolidated desktop table; fence-safe Discord pagination",
     "automation_change": "none_until_dry_run_is_shown_and_nicolas_explicitly_approves_cron_write",
     "schedule_approval_is_not_cron_approval": true,
-    "known_renderer_gaps": [
-      "Budget is required by the contract but is not yet rendered in the campaign table",
-      "current campaign status and start time are not yet rendered in the campaign table",
-      "the final hybrid mobile-card plus desktop-table layout is pending validation with campaign volume"
+    "renderer_contract": {
+      "status": "hybrid_v2_implemented_and_live_read_only_verified",
+      "campaign_scope": "all currently effective ACTIVE campaigns even without an insight row, plus every campaign with insight in the requested period; historical campaigns with neither condition remain excluded",
+      "silent_row_limit": false,
+      "campaign_name_truncation": false,
+      "per_campaign_fields": ["full name", "current status", "start_time America/New_York", "Budget USD", "Amount spent USD", "Purchase ROAS", "Results/conversations", "Cost per conversation", "CPM", "CTR", "observation/reconciliation reason"],
+      "smart_bidding_freshness_visible": ["latest source timestamp or N/D", "source age or N/D", "maximum age 2h", "timestamp field or N/D", "reconciliation reason"],
+      "layout": "vertical mobile cards plus indexed consolidated desktop table",
+      "pagination": "all rows, fence-safe Discord chunks, no silent omission",
+      "high_volume_fixture_campaigns": 25
+    },
+    "remaining_limitations": [
+      "RPS, real ROI and estimated ROI remain N/D until Nicolas approves Eggbev formulas",
+      "the current Smart Bidding schema exposes no accepted update timestamp, so freshness is displayed as unverifiable and Smart Bidding monetary metrics remain N/D",
+      "automatic posting and Daily cron remain disabled until Nicolas approves a real dry-run and the automation plan"
     ],
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-daily-report.py",

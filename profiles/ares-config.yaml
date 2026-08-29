@@ -647,61 +647,27 @@ discord:
 
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados
       apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
-    '1541578596253175858': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
+    '1541578596253175858': |-
+      INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
-
-      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo
-      read-only, da conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`).
-
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`;
-      ler o contrato e a conta canonicos.
-
-      - Nesta thread, pedidos genericos como "suas regras", "suas automacoes", "como
-      esta configurado" ou "mostre tudo" significam somente regras, horarios, fontes,
-      metricas, runtime e bloqueios do Diario. Nao responder com toda a operacao Eggbev,
-      configuracao global do Ares/Hermes, criacao, clones, cortes ROAS, guardrail
-      de leads ou inventario de Automated Rules.
-
-      - Para configuracao do Diario, executar `scripts/ares-eggbev-daily-config-report.py
-      --check` ou usar exatamente os mesmos campos canonicos.
-
-      - Para relatorio atualizado, consultar dados vivos no momento do pedido com
-      `scripts/ares-eggbev-daily-report.py`: hoje/agora = `--period today`; ontem
-      = `--period yesterday`; data especifica = `--period YYYY-MM-DD`. Nunca reutilizar
-      contagens, spend, ROAS, resultados, disponibilidade Smart Bidding ou estado
-      do scheduler de mensagens antigas.
-
-      - Horarios aprovados do plano Diario, todos em `America/New_York`: 06:00, 08:00,
-      10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00. Às 06:00, `auto` inclui fechamento
-      do dia anterior + referencia parcial atual; nos demais horarios, parcial do
-      dia atual.
-
-      - Aprovacao dos horarios nao e aprovacao de cron. Runtime atual: runner construido
-      e consulta sob demanda disponivel; post automatico=false; cron=false; writes=false.
-      Nao criar ou alterar cron sem apresentar plano e aguardar OK explicito.
-
-      - Meta: Amount spent, Purchase ROAS, resultados/conversas, custo por conversa,
-      CPM, CTR e Budget. Smart Bidding: linhas da conta alvo, investimento, receita,
-      drip, broadcast, leads, RPS, ROI real e estimado.
-
-      - Smart Bidding exige identidade reconciliada e timestamp verificavel com freshness
-      maxima de 2h. Ausencia/stale gera `N/D`; nunca converter em zero. Meta Purchase
-      ROAS vence ROI Smart Bidding em divergencia, mas isso nao transforma fonte ausente
-      em dado valido.
-
-      - Diario apenas reporta. Nunca corta, reativa, escala budget, cria, clona ou
-      altera regra Meta.
-
-      - Todo relatorio informa horario ET, periodo, USD, fontes e modo read_only.
-      Usar tabela alinhada para desktop e cards verticais quando houver volume, sem
-      inventar campos.
-
-      - Lacunas atuais do renderer devem ser declaradas: Budget, status atual e start_time
-      por campanha ainda nao aparecem na tabela; layout hibrido final aguarda validacao
-      com volume. Enquanto isso, nao chamar o renderer de completo nem habilitar post/cron.
-
-      - Responder na thread atual. Rotas relacionadas podem receber apenas uma referencia
-      curta, nunca substituir o escopo Diario.'
+      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo read-only, da conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`).
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler o contrato e a conta canonicos.
+      - Nesta thread, pedidos genericos como "suas regras", "suas automacoes", "como esta configurado" ou "mostre tudo" significam somente regras, horarios, fontes, metricas, runtime e bloqueios do Diario. Nao responder com toda a operacao Eggbev, configuracao global do Ares/Hermes, criacao, clones, cortes ROAS, guardrail de leads ou inventario de Automated Rules.
+      - Para configuracao do Diario, executar `scripts/ares-eggbev-daily-config-report.py --check` ou usar exatamente os mesmos campos canonicos.
+      - Para relatorio atualizado, consultar dados vivos no momento do pedido com `scripts/ares-eggbev-daily-report.py`: hoje/agora = `--period today`; ontem = `--period yesterday`; data especifica = `--period YYYY-MM-DD`. Nunca reutilizar contagens, spend, ROAS, resultados, disponibilidade Smart Bidding ou estado do scheduler de mensagens antigas.
+      - Horarios aprovados do plano Diario, todos em `America/New_York`: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00. Às 06:00, `auto` inclui fechamento do dia anterior + referencia parcial atual; nos demais horarios, parcial do dia atual.
+      - Aprovacao dos horarios nao e aprovacao de cron. Runtime atual: runner construido e consulta sob demanda disponivel; post automatico=false; cron=false; writes=false. Nao criar ou alterar cron sem apresentar plano e aguardar OK explicito.
+      - Meta: Amount spent, Purchase ROAS, resultados/conversas, custo por conversa, CPM, CTR e Budget. Smart Bidding: linhas da conta alvo, investimento, receita, drip, broadcast, leads, RPS, ROI real e estimado.
+      - Smart Bidding exige identidade reconciliada e timestamp verificavel com freshness maxima de 2h. Ausencia/stale gera `N/D`; nunca converter em zero. Meta Purchase ROAS vence ROI Smart Bidding em divergencia, mas isso nao transforma fonte ausente em dado valido.
+      - Diario apenas reporta. Nunca corta, reativa, escala budget, cria, clona ou altera regra Meta.
+      - O escopo de campanhas e: todas as campanhas atualmente `ACTIVE`, mesmo sem linha de insight, mais toda campanha com insight no periodo pedido. Historicas sem nenhuma dessas condicoes ficam fora; nunca buscar ou despejar o historico completo da conta.
+      - Nao existe limite silencioso de 20 linhas nem corte de nome. Exibir o nome integral em card vertical e preservar todas as campanhas na tabela consolidada indexada, com paginacao Discord segura e cercas Markdown balanceadas.
+      - Cada campanha mostra status atual, inicio ET, Budget USD, Amount spent, Purchase ROAS, resultados/conversas, custo por conversa, CPM, CTR e observacao de entrega/reconciliacao. Campanha ACTIVE sem insight continua visivel com metricas `N/D`.
+      - Freshness Smart Bidding deve mostrar ultima atualizacao ou `N/D`, atraso ou `N/D`, limite maximo de 2h, campo de timestamp ou `N/D` e motivo de reconciliacao. Ausencia de timestamp nunca pode ser ocultada.
+      - RPS, ROI real e ROI estimado continuam `N/D` ate aprovacao de formulas Eggbev; nao calcular por conta propria.
+      - Todo relatorio informa horario ET, periodo, USD, fontes e modo read_only. Layout ativo: cards verticais por campanha + tabela consolidada desktop, sem omissao silenciosa.
+      - Post automatico e cron continuam desabilitados ate plano, dry-run real e OK explicito; a correcao do renderer nao ativa automacao.
+      - Responder na thread atual. Rotas relacionadas podem receber apenas uma referencia curta, nunca substituir o escopo Diario.
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false

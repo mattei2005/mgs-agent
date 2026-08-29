@@ -45,12 +45,22 @@ class EggbevDailyRouteTests(unittest.TestCase):
         for value in required:
             self.assertIn(value, self.report)
 
-    def test_report_discloses_smart_bidding_and_renderer_gaps(self):
-        self.assertIn("freshness", self.report)
-        self.assertIn("`N/D`", self.report)
-        self.assertIn("Budget is required", self.report)
-        self.assertIn("status and start time", self.report)
-        self.assertIn("layout", self.report.lower())
+    def test_report_discloses_renderer_coverage_and_remaining_limitations(self):
+        required = [
+            "freshness",
+            "`N/D`",
+            "currently effective ACTIVE campaigns",
+            "Limite silencioso de linhas: não",
+            "Truncamento do nome da campanha: não",
+            "full name",
+            "current status",
+            "start_time America/New_York",
+            "Budget USD",
+            "25 campanhas, todas preservadas",
+            "RPS, real ROI and estimated ROI remain N/D",
+        ]
+        for value in required:
+            self.assertIn(value, self.report)
 
     def test_daily_scope_excludes_global_and_other_route_detail(self):
         forbidden = [
