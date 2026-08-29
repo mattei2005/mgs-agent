@@ -112,6 +112,28 @@ class EggbevPageLeadGuardrailTests(unittest.TestCase):
         self.assertIn('Reativação automática: não', message)
         self.assertIn('pg_5083', message)
 
+    def test_proximity_buckets_use_requested_4k_yellow_boundary(self):
+        self.assertEqual(mod.lead_proximity(3999, 5000)['emoji'], '🟢')
+        self.assertEqual(mod.lead_proximity(4000, 5000)['emoji'], '🟡')
+        self.assertEqual(mod.lead_proximity(4499, 5000)['emoji'], '🟡')
+        self.assertEqual(mod.lead_proximity(4500, 5000)['emoji'], '🟠')
+        self.assertEqual(mod.lead_proximity(5000, 5000)['emoji'], '🟠')
+        self.assertEqual(mod.lead_proximity(5001, 5000)['emoji'], '🔴')
+
+    def test_status_report_shows_active_pages_and_non_statistical_proximity(self):
+        evaluated = evaluate(leads=4000)
+        message = mod.build_status_report(
+            evaluated,
+            dt.datetime(2026, 8, 29, 8, 0, tzinfo=mod.NY),
+            5000,
+            'Eggbev-US-CC-EN-01-G006',
+        )
+        self.assertIn('🟡', message)
+        self.assertIn('4.000', message)
+        self.assertIn('80%', message)
+        self.assertIn('não previsão estatística', message)
+        self.assertIn('pg_5083', message)
+
     def test_pause_uses_one_post_and_requires_get_readback(self):
         class FakeCommon:
             def __init__(self):

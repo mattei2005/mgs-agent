@@ -431,6 +431,87 @@ def fmt_money(value: Any) -> str:
     return "N/D" if number is None else f"${number:,.2f}"
 
 
+def lead_proximity(value: Any, lead_limit: float) -> dict[str, Any]:
+    """Classify proximity to the lead limit without claiming a forecast."""
+    number = finite_float(value)
+    if number is None or lead_limit <= 0:
+        return {"emoji": "⚪", "label": "N/D", "percentage": None}
+    percentage = number / lead_limit * 100.0
+    if number > lead_limit:
+        return {"emoji": "🔴", "label": "ACIMA DO LIMITE", "percentage": percentage}
+    if percentage >= 90:
+        return {"emoji": "🟠", "label": "MUITO PRÓXIMA", "percentage": percentage}
+    if percentage >= 80:
+        return {"emoji": "🟡", "label": "ATENÇÃO", "percentage": percentage}
+    return {"emoji": "🟢", "label": "ABAIXO DE 4K", "percentage": percentage}
+
+
+def build_status_report(
+    evaluated: dict[str, Any],
+    run_at: dt.datetime,
+    lead_limit: float,
+    account_alias: str,
+) -> str:
+    """Render mapped pages with active delivery and their limit proximity."""
+    pages: dict[str, dict[str, Any]] = {}
+    for group in evaluated.get("eligible_groups") or []:
+        utm = norm(group.get("utm_campaign"))
+        if not utm:
+            continue
+        pages[utm] = {
+            "utm_campaign": utm,
+            "page_name": group.get("page_name"),
+            "leads": group.get("leads"),
+            "campaigns": list(group.get("campaigns") or []),
+        }
+    for row in evaluated.get("safe") or []:
+        utm = norm(row.get("utm_campaign"))
+        if not utm or finite_float(row.get("leads")) is None:
+            continue
+        page = pages.setdefault(utm, {
+            "utm_campaign": utm,
+            "page_name": row.get("page_name"),
+            "leads": row.get("leads"),
+            "campaigns": [],
+        })
+        page["campaigns"].append(row)
+
+    rows = sorted(
+        pages.values(),
+        key=lambda row: finite_float(row.get("leads")) or -1,
+        reverse=True,
+    )
+    lines = [
+        "```text",
+        f"{account_alias} — {run_at.strftime('%d/%m/%Y %H:%M')} ET — STATUS DAS PÁGINAS",
+        f"Fonte: Smart Bidding LEADS + Meta ACTIVE | Limite de ação: > {fmt_number(lead_limit, 0)}",
+        "",
+        "Risco  Página                       UTM            Leads   Proxim.  Camp. ativas",
+        "-----  ---------------------------  -------------  ------  -------  ------------",
+    ]
+    if not rows:
+        lines.append("⚪     Nenhuma página reconciliada com campanha e anúncio ativos neste momento.")
+    for row in rows:
+        proximity = lead_proximity(row.get("leads"), lead_limit)
+        page_name = norm(row.get("page_name")) or "N/D"
+        if len(page_name) > 27:
+            page_name = page_name[:24] + "..."
+        percentage = proximity.get("percentage")
+        percentage_text = "N/D" if percentage is None else f"{percentage:.0f}%"
+        lines.append(
+            f"{proximity['emoji']}     {page_name:<27}  {norm(row.get('utm_campaign')):<13}  "
+            f"{fmt_number(row.get('leads'), 0):>6}  {percentage_text:>7}  {len(row.get('campaigns') or []):>12}"
+        )
+    lines += [
+        "",
+        "Legenda: 🟢 <4.000 | 🟡 4.000–4.499 | 🟠 4.500–5.000 | 🔴 >5.000",
+        "Proximidade = LEADS ÷ 5.000; é indicador de risco, não previsão estatística.",
+        f"Mapeamentos com pendência: {len(evaluated.get('issues') or [])}",
+        "```",
+    ]
+    return "\n".join(lines)
+
+
 def build_alert(group: dict[str, Any], actions: list[dict[str, Any]], insights: dict[str, dict[str, Any]], run_at: dt.datetime, lead_limit: float) -> str:
     confirmed = [row for row in actions if row.get("ok")]
     failed = [row for row in actions if not row.get("ok")]
@@ -526,6 +607,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true", help="perform the approved scoped campaign pauses")
     parser.add_argument("--post-alerts", action="store_true", help="post action reports to the approved fixed thread")
+    parser.add_argument("--status-report", action="store_true", help="render all mapped active pages with lead-limit proximity")
+    parser.add_argument("--post-status-report", action="store_true", help="post the status report to the approved fixed thread")
     parser.add_argument("--quiet", action="store_true", help="stay silent on successful no-action runs")
     args = parser.parse_args()
 
@@ -622,6 +705,21 @@ def main() -> int:
                 "mapping_issues": len(evaluated["issues"]),
                 "evaluation": evaluated,
             })
+            status_message = None
+            if args.status_report or args.post_status_report:
+                status_message = build_status_report(evaluated, started, lead_limit, account_alias)
+                run["status_report"] = {
+                    "requested": True,
+                    "rows": sum(
+                        1 for row in evaluated.get("safe") or []
+                        if row.get("utm_campaign") and finite_float(row.get("leads")) is not None
+                    ) + len(groups),
+                    "message_sha256": hashlib.sha256(status_message.encode()).hexdigest(),
+                }
+                if args.post_status_report:
+                    if not thread_id:
+                        raise GuardrailError("status report requires the fixed Discord thread ID")
+                    run["status_report"]["delivery"] = post_to_thread(thread_id, status_message)
             campaign_ids = [norm(campaign.get("campaign_id")) for group in groups for campaign in group.get("campaigns") or []]
             insights = fetch_today_insights(meta_common, token, campaign_ids) if campaign_ids else {}
             run["latest_intraday_snapshot"] = insights
@@ -663,7 +761,9 @@ def main() -> int:
                 "audit_path": str(audit_path),
             })
             summary = sanitized_summary(run)
-            if not args.quiet or groups or evaluated["issues"]:
+            if args.status_report and not args.post_status_report and status_message:
+                print(status_message)
+            elif not args.quiet or groups or evaluated["issues"]:
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
             return 0
         except Exception as exc:
