@@ -1,10 +1,14 @@
 import importlib.util
+import io
 import json
+import os
 import stat
+import sys
 import tempfile
 import unittest
 from datetime import datetime
 from pathlib import Path
+from unittest.mock import patch
 
 SCRIPT = Path('/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py')
 FIXTURE = Path('/root/mgs-agent/tests/fixtures/sb-messenger-token-invalid.json')
@@ -61,6 +65,157 @@ class TokenMonitorTests(unittest.TestCase):
             loaded = mod.load_state(path)
             self.assertEqual(loaded['last_seen_id'], 0)
             self.assertEqual(loaded['_meta']['reminder_hours'], 3)
+
+    def test_retention_cutoff_keeps_only_previous_day_and_current_day(self):
+        cutoff = mod.retention_cutoff(
+            datetime.fromisoformat('2026-08-29T00:05:00-04:00')
+        )
+        self.assertEqual(cutoff.isoformat(), '2026-08-28T00:00:00-04:00')
+
+    def test_retention_targets_only_token_messenger_alert_embeds(self):
+        target = {
+            'embeds': [{'title': 'LEMBRETE #2 — FINANCEADX — Token Messenger inválido'}]
+        }
+        unrelated = {
+            'embeds': [{'title': 'Monitor SB de token Messenger com falha'}]
+        }
+        manual = {'content': 'mensagem manual', 'embeds': []}
+        self.assertTrue(mod.is_retention_target_message(target))
+        self.assertFalse(mod.is_retention_target_message(unrelated))
+        self.assertFalse(mod.is_retention_target_message(manual))
+
+    def test_retention_dry_run_does_not_delete(self):
+        messages = [
+            {'id': '3', 'timestamp': '2026-08-29T01:00:00+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+            {'id': '2', 'timestamp': '2026-08-28T12:00:00+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+            {'id': '1', 'timestamp': '2026-08-27T03:59:59+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+        ]
+        calls = []
+        def fake_request(method, path, body=None, allow_404=False):
+            calls.append((method, path))
+            return 200, list(messages)
+        original = mod.discord_request
+        setattr(mod, 'discord_request', fake_request)
+        try:
+            result = mod.cleanup_old_messages(
+                '123',
+                dry_run=True,
+                now_value=datetime.fromisoformat('2026-08-29T00:05:00-04:00'),
+                sleep_func=lambda _: None,
+            )
+        finally:
+            setattr(mod, 'discord_request', original)
+        self.assertEqual(result['eligible'], 1)
+        self.assertEqual(result['would_delete'], 1)
+        self.assertEqual(result['deleted'], 0)
+        self.assertEqual([method for method, _ in calls], ['GET'])
+
+    def test_retention_deletes_old_target_and_preserves_other_messages(self):
+        messages = [
+            {'id': '4', 'timestamp': '2026-08-29T01:00:00+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+            {'id': '3', 'timestamp': '2026-08-28T12:00:00+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+            {'id': '2', 'timestamp': '2026-08-27T03:59:59+00:00', 'embeds': [{'title': 'SITE — Token Messenger inválido'}]},
+            {'id': '1', 'timestamp': '2026-08-26T12:00:00+00:00', 'content': 'mensagem manual', 'embeds': []},
+        ]
+        calls = []
+        def fake_request(method, path, body=None, allow_404=False):
+            calls.append((method, path))
+            if method == 'DELETE':
+                message_id = path.rsplit('/', 1)[-1]
+                messages[:] = [row for row in messages if row['id'] != message_id]
+                return 204, None
+            return 200, list(messages)
+        original = mod.discord_request
+        setattr(mod, 'discord_request', fake_request)
+        try:
+            result = mod.cleanup_old_messages(
+                '123',
+                dry_run=False,
+                now_value=datetime.fromisoformat('2026-08-29T00:05:00-04:00'),
+                sleep_func=lambda _: None,
+            )
+        finally:
+            setattr(mod, 'discord_request', original)
+        self.assertEqual(result['eligible'], 1)
+        self.assertEqual(result['deleted'], 1)
+        self.assertEqual(result['remaining'], 0)
+        self.assertEqual([row['id'] for row in messages], ['4', '3', '1'])
+        self.assertEqual([method for method, _ in calls], ['GET', 'DELETE', 'GET'])
+
+    def test_retention_success_is_recorded_without_changing_monitor_failures(self):
+        state = mod.initial_state()
+        state['consecutive_failures'] = 2
+        mod.record_retention_success(
+            state,
+            {
+                'cutoff': '2026-08-28T00:00:00-04:00',
+                'scanned': 10,
+                'eligible': 3,
+                'deleted': 3,
+                'already_missing': 0,
+                'remaining': 0,
+                'message_ids': ['1', '2', '3'],
+            },
+            at='2026-08-29T00:05:00-04:00',
+        )
+        self.assertEqual(state['consecutive_failures'], 2)
+        self.assertEqual(state['retention']['last_success_date'], '2026-08-29')
+        self.assertEqual(state['retention']['consecutive_failures'], 0)
+        self.assertEqual(state['retention']['last_result']['deleted'], 3)
+
+    def test_retention_failure_persists_independent_counter(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'state.json'
+            state = mod.initial_state()
+            mod.record_retention_failure(
+                path,
+                state,
+                RuntimeError('discord unavailable'),
+                dry_run=False,
+                at='2026-08-29T00:05:00-04:00',
+            )
+            loaded = mod.load_state(path)
+        self.assertEqual(loaded['consecutive_failures'], 0)
+        self.assertEqual(loaded['retention']['consecutive_failures'], 1)
+        self.assertEqual(loaded['retention']['last_error']['type'], 'RuntimeError')
+
+    def test_parse_args_accepts_cleanup_old_messages_mode(self):
+        with patch.object(sys, 'argv', ['monitor', '--cleanup-old-messages', '--dry-run']):
+            args = mod.parse_args()
+        self.assertTrue(args.cleanup_old_messages)
+        self.assertTrue(args.dry_run)
+
+    def test_discord_request_retries_seven_rate_limits_before_success(self):
+        attempts = []
+        delays = []
+        class Response:
+            status = 200
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                return False
+            def read(self):
+                return b'{}'
+        def fake_urlopen(request, timeout):
+            attempts.append(request.full_url)
+            if len(attempts) <= 7:
+                raise mod.urllib.error.HTTPError(
+                    request.full_url,
+                    429,
+                    'rate limited',
+                    {},
+                    io.BytesIO(b'{"retry_after":0}'),
+                )
+            return Response()
+        with patch.object(mod, 'load_env'), \
+             patch.dict(os.environ, {'DISCORD_BOT_TOKEN': 'test-token'}), \
+             patch.object(mod.urllib.request, 'urlopen', fake_urlopen), \
+             patch.object(mod.time, 'sleep', delays.append):
+            status, body = mod.discord_request('GET', '/test')
+        self.assertEqual(status, 200)
+        self.assertEqual(body, {})
+        self.assertEqual(len(attempts), 8)
+        self.assertEqual(delays, [0.25] * 7)
 
     def test_post_readback_validates_role_mentions(self):
         calls = []

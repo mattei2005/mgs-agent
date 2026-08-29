@@ -17,6 +17,7 @@ import json
 import os
 import tempfile
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -82,6 +83,14 @@ def initial_state() -> dict[str, Any]:
         'consecutive_failures': 0,
         'last_error': None,
         'failure_alert_sent_for': 0,
+        'retention': {
+            'last_check': None,
+            'last_success_date': None,
+            'last_result': None,
+            'consecutive_failures': 0,
+            'last_error': None,
+            'failure_alert_sent_for': 0,
+        },
         'incidents': {},
     }
 
@@ -340,6 +349,178 @@ def discord_request(method: str, path: str, payload: dict[str, Any] | None = Non
                 return 404, None
             raise RuntimeError(f'Discord HTTP {exc.code} {method} {path}') from exc
     raise RuntimeError('Discord retry loop exhausted')
+
+
+def retention_cutoff(now_value: datetime | None = None) -> datetime:
+    local_now = (now_value or datetime.now(NY)).astimezone(NY)
+    previous_day = local_now.date() - timedelta(days=1)
+    return datetime(previous_day.year, previous_day.month, previous_day.day, tzinfo=NY)
+
+
+def _normalized_text(value: str) -> str:
+    return ''.join(
+        character
+        for character in unicodedata.normalize('NFKD', value or '')
+        if not unicodedata.combining(character)
+    ).lower()
+
+
+def is_retention_target_message(message: dict[str, Any]) -> bool:
+    return any(
+        'token messenger invalido' in _normalized_text(str(embed.get('title') or ''))
+        for embed in (message.get('embeds') or [])
+        if isinstance(embed, dict)
+    )
+
+
+def fetch_channel_messages(channel_id: str) -> list[dict[str, Any]]:
+    messages: list[dict[str, Any]] = []
+    before: str | None = None
+    while True:
+        path = f'/channels/{channel_id}/messages?limit=100'
+        if before:
+            path += '&before=' + urllib.parse.quote(before)
+        status, batch = discord_request('GET', path)
+        if status != 200 or not isinstance(batch, list):
+            raise RuntimeError(f'Discord channel pagination failed status={status}')
+        messages.extend(row for row in batch if isinstance(row, dict))
+        if len(batch) < 100:
+            return messages
+        before = str(batch[-1].get('id') or '')
+        if not before:
+            raise RuntimeError('Discord pagination cursor missing')
+
+
+def _discord_message_timestamp(message: dict[str, Any]) -> datetime:
+    raw = str(message.get('timestamp') or '')
+    if not raw:
+        raise RuntimeError(f"Discord message timestamp missing id={message.get('id')}")
+    try:
+        parsed = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+    except ValueError as error:
+        raise RuntimeError(f"Discord message timestamp malformed id={message.get('id')}") from error
+    if parsed.tzinfo is None:
+        raise RuntimeError(f"Discord message timestamp lacks timezone id={message.get('id')}")
+    return parsed
+
+
+def cleanup_old_messages(
+    channel_id: str,
+    dry_run: bool,
+    now_value: datetime | None = None,
+    sleep_func=time.sleep,
+) -> dict[str, Any]:
+    cutoff = retention_cutoff(now_value)
+    messages = fetch_channel_messages(channel_id)
+    eligible = [
+        message
+        for message in messages
+        if is_retention_target_message(message)
+        and _discord_message_timestamp(message) < cutoff
+    ]
+    result: dict[str, Any] = {
+        'cutoff': cutoff.isoformat(),
+        'scanned': len(messages),
+        'eligible': len(eligible),
+        'would_delete': len(eligible) if dry_run else 0,
+        'deleted': 0,
+        'already_missing': 0,
+        'remaining': len(eligible) if dry_run else 0,
+        'message_ids': [str(message.get('id') or '') for message in eligible],
+    }
+    if dry_run:
+        return result
+
+    for index, message in enumerate(eligible):
+        message_id = str(message.get('id') or '')
+        if not message_id:
+            raise RuntimeError('Discord retention message ID missing')
+        status, _ = discord_request(
+            'DELETE',
+            f'/channels/{channel_id}/messages/{message_id}',
+            allow_404=True,
+        )
+        if status in (200, 204):
+            result['deleted'] += 1
+        elif status == 404:
+            result['already_missing'] += 1
+        else:
+            raise RuntimeError(f'Discord retention delete failed status={status} id={message_id}')
+        if index + 1 < len(eligible):
+            sleep_func(0.45)
+
+    remaining = [
+        message
+        for message in fetch_channel_messages(channel_id)
+        if is_retention_target_message(message)
+        and _discord_message_timestamp(message) < cutoff
+    ]
+    result['remaining'] = len(remaining)
+    if remaining:
+        raise RuntimeError(f'Discord retention readback found {len(remaining)} old messages')
+    return result
+
+
+def record_retention_success(
+    state: dict[str, Any],
+    result: dict[str, Any],
+    at: str | None = None,
+) -> None:
+    stamp = at or now_iso()
+    parsed = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+    if parsed.tzinfo is None:
+        raise RuntimeError('retention success timestamp lacks timezone')
+    retention = state.setdefault('retention', {})
+    retention.update({
+        'last_check': stamp,
+        'last_success_date': parsed.astimezone(NY).date().isoformat(),
+        'last_result': dict(result),
+        'consecutive_failures': 0,
+        'last_error': None,
+        'failure_alert_sent_for': 0,
+    })
+
+
+def record_retention_failure(
+    path: Path,
+    state: dict[str, Any] | None,
+    error: Exception,
+    dry_run: bool,
+    at: str | None = None,
+) -> None:
+    state = state or initial_state()
+    stamp = at or now_iso()
+    retention = state.setdefault('retention', {})
+    count = int(retention.get('consecutive_failures') or 0) + 1
+    retention['last_check'] = stamp
+    retention['consecutive_failures'] = count
+    retention['last_error'] = {
+        'at': stamp,
+        'type': type(error).__name__,
+        'message': str(error)[:500],
+    }
+    if not dry_run:
+        save_state(path, state)
+    if count >= 3 and int(retention.get('failure_alert_sent_for') or 0) < count and not dry_run:
+        payload = {
+            'content': f'<@{RODOLFO_ID}> retenção do canal de token Messenger falhando',
+            'allowed_mentions': {'users': [RODOLFO_ID]},
+            'embeds': [{
+                'title': 'Limpeza diária de alertas Messenger com falha',
+                'color': 15158332,
+                'fields': [
+                    {'name': 'Falhas consecutivas', 'value': str(count), 'inline': True},
+                    {'name': 'Erro', 'value': f"```text\n{str(error)[:700]}\n```", 'inline': False},
+                    {'name': 'Ação', 'value': 'Zeus deve validar paginação, permissão e rate limit do Discord.', 'inline': False},
+                ],
+            }],
+        }
+        try:
+            post_and_verify(INFRA_CHANNEL_ID, payload)
+            retention['failure_alert_sent_for'] = count
+            save_state(path, state)
+        except Exception:
+            pass
 
 
 def verify_message(channel_id: str, message_id: str, payload: dict[str, Any]) -> None:
@@ -601,6 +782,18 @@ def record_failure(path: Path, state: dict[str, Any] | None, error: Exception, d
 async def run(args: argparse.Namespace) -> int:
     state_path = Path(args.state_path)
     state = load_state(state_path)
+    if args.cleanup_old_messages:
+        state = state or initial_state()
+        result = cleanup_old_messages(args.channel_id, args.dry_run)
+        if not args.dry_run:
+            record_retention_success(state, result)
+            save_state(state_path, state)
+        print(json.dumps({
+            'ok': True,
+            'mode': 'retention-dry-run' if args.dry_run else 'retention-apply',
+            **result,
+        }, ensure_ascii=False))
+        return 0
     if args.fixture:
         fixture = json.loads(Path(args.fixture).read_text(encoding='utf-8'))
         notifications = fixture.get('notifications') or []
@@ -724,6 +917,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', action='store_true', help='Compatibility marker; normal mode applies unless --dry-run.')
     parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('--cleanup-old-messages', action='store_true')
     parser.add_argument('--baseline', action='store_true')
     parser.add_argument('--test-alert', action='store_true')
     parser.add_argument('--fixture')
@@ -739,7 +933,10 @@ def main() -> int:
         state = load_state(Path(args.state_path))
         return asyncio.run(run(args))
     except Exception as error:
-        record_failure(Path(args.state_path), state, error, args.dry_run or bool(args.fixture))
+        if args.cleanup_old_messages:
+            record_retention_failure(Path(args.state_path), state, error, args.dry_run or bool(args.fixture))
+        else:
+            record_failure(Path(args.state_path), state, error, args.dry_run or bool(args.fixture))
         print(json.dumps({'ok': False, 'error': type(error).__name__, 'detail': str(error)[:500]}, ensure_ascii=False))
         return 1
 
