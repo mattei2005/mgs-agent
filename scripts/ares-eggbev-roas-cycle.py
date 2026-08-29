@@ -199,7 +199,7 @@ def main() -> int:
         state, state_reset = common.load_state(started.date(), reset_value)
         phase = common.phase_for_time(started)
         if phase == 'RESET':
-            state = common.default_state(started.date(), reset_value)
+            state = common.rollover_state(state, started.date(), reset_value)
             state_reset = True
         run: dict[str, Any] = {
             'ok': False, 'run_id': run_id, 'started_at_et': started.isoformat(),

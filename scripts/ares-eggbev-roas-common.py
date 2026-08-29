@@ -103,13 +103,27 @@ def default_state(local_date: dt.date, threshold: float = 0.40) -> dict[str, Any
     }
 
 
+def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_value: float = 0.40) -> dict[str, Any]:
+    """Reset daily decision fields without losing Ares pause provenance."""
+    previous = state if isinstance(state, dict) else {}
+    rolled = default_state(local_date, reset_value)
+    for key in ('paused_ads', 'paused_campaigns'):
+        value = previous.get(key)
+        if isinstance(value, dict):
+            rolled[key] = dict(value)
+    previous_date = norm(previous.get('date_et'))
+    if previous_date and previous_date != local_date.isoformat():
+        rolled['provenance_rolled_from_date_et'] = previous_date
+    return rolled
+
+
 def load_state(local_date: dt.date, reset_value: float = 0.40) -> tuple[dict[str, Any], bool]:
     try:
         state = load_json(ROAS_STATE_PATH)
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         return default_state(local_date, reset_value), True
     if state.get('date_et') != local_date.isoformat():
-        return default_state(local_date, reset_value), True
+        return rollover_state(state, local_date, reset_value), True
     state.setdefault('paused_ads', {})
     state.setdefault('paused_campaigns', {})
     state.setdefault('threshold', reset_value)

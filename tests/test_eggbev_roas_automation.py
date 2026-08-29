@@ -54,6 +54,17 @@ class PhaseTests(unittest.TestCase):
     def test_non_cycle_time(self):
         self.assertEqual(common.phase_for_time(self.at(7)), 'NO_CYCLE')
 
+    def test_daily_rollover_resets_threshold_but_preserves_pause_provenance(self):
+        previous = common.default_state(dt.date(2026, 8, 28), 0.55)
+        previous['paused_ads']['a1'] = {'reason': 'roas_cycle', 'campaign_id': 'c1'}
+        previous['paused_campaigns']['c1'] = {'reason': 'roas_zero_active_ads'}
+        rolled = common.rollover_state(previous, dt.date(2026, 8, 29), 0.40)
+        self.assertEqual(rolled['date_et'], '2026-08-29')
+        self.assertEqual(rolled['threshold'], 0.40)
+        self.assertIn('a1', rolled['paused_ads'])
+        self.assertIn('c1', rolled['paused_campaigns'])
+        self.assertEqual(rolled['provenance_rolled_from_date_et'], '2026-08-28')
+
 
 class DecisionTests(unittest.TestCase):
     def decide(self, active=None, tracked=None, insights=None, state=None, phase='PHASE_1'):
@@ -201,6 +212,16 @@ class ContractTests(unittest.TestCase):
         transition = self.operation['roas_cycle_policy']['native_rule_transition']
         self.assertTrue(transition['disable_authorized_at_future_activation'])
         self.assertFalse(transition['execute_now'])
+
+    def test_clone_page_switch_contract_is_scoped_and_not_engine_ready(self):
+        cloning = self.operation['campaign_cloning_policy']
+        mode = cloning['allowed_modes']['clone_page_switch']
+        self.assertEqual(mode['daily_budget_usd'], 45)
+        self.assertEqual(mode['start_time'], 'next_day_00:00_America/New_York')
+        self.assertIn('ACTIVE', mode['delivery_state'])
+        self.assertEqual(mode['media_and_copy'], 'preserve source media and copy')
+        self.assertEqual(mode['engine_support'], 'contract_approved_pending_v3_manifest_and_executor_extension')
+        self.assertFalse(cloning['engine_readback']['eggbev_account_registered'])
 
 
 if __name__ == '__main__':
