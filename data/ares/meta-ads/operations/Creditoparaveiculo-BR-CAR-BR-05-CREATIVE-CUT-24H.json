@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "controlled_write_recovery_manifest_prevalidated",
+  "status": "campaigns_active_readback_validated_first_delivery_runtime_pending_account05",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -60,7 +60,27 @@
       "clone_prestaged",
       "pure_clone"
     ],
-    "existing_campaign_migration": "explicit_instruction_only; start a new window and never reinterpret earlier delivery"
+    "existing_campaign_migration": "explicit_instruction_only; start a new window and never reinterpret earlier delivery",
+    "assignments": {
+      "120248477978700046": {
+        "campaign_number": 51,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248477978730046": {
+        "campaign_number": 52,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248478066030046": {
+        "campaign_number": 53,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      }
+    }
   },
   "account_13_scope": {
     "operation_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
@@ -174,8 +194,21 @@
     "operational_envelope_floor_usd": 500.0,
     "operational_envelope_balance_after_creation_usd": 425.0,
     "activation_requires_remaining_strategy_gates": false,
-    "execution_state": "RECOVERY1_MANIFEST_PREVALIDATED_READY_TO_EXECUTE",
-    "prevalidation_digest": "7c825c615cd10735aad958fc0dfb3c3456434527564d7e757305f38221ae90a6",
+    "execution_state": "COMPLETE_META_READBACK_ASSETS_TESTING_FIRST_DELIVERY_RUNTIME_PENDING",
+    "prevalidation_digest": "5817bc1c11656ce23771cb8dae6f65f482c91ce63734081e8ff7aa9329d86cdc",
+    "engine_manifest_digest": "8f47184748d9a0ddc70da888ace3a402f3b580dd52604d08c19d3a801e27eebc",
+    "campaign_ids": ["120248477978700046", "120248477978730046", "120248478066030046"],
+    "adset_ids": ["120248477979350046", "120248477979250046", "120248478066170046"],
+    "meta_readback": {
+      "campaigns_active": 3,
+      "adsets_active": 3,
+      "ads_configured_active": 9,
+      "ads_effective_active": 7,
+      "ads_pending_review": 2,
+      "account_active_budget_usd": 75.0,
+      "actual_adset_start_time": "2026-08-29T01:45:00-03:00",
+      "checked_at_utc": "2026-08-29T04:55:32Z"
+    },
     "failed_shells_archived": ["120248477878560046", "120248477878580046"],
     "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect"
   },
@@ -211,7 +244,10 @@
       "generated_unique_assets": 5,
       "visual_qa_approved_assets": 5
     },
-    "checked_at_utc": "2026-08-29T04:04:36Z"
+    "selected_assets_testing": 9,
+    "rejected_assets": ["CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4"],
+    "replacement_asset": "CAR_BR_BR_VID_VARIOS_CARROS_PV_103.mp4",
+    "checked_at_utc": "2026-08-29T04:55:32Z"
   },
   "token_reference": {
     "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
@@ -231,14 +267,25 @@
     "active_campaign_count": 0
   },
   "crons": [],
-  "meta_writes_performed": 0,
+  "meta_writes_performed": 1,
+  "first_delivery_enrollment": {
+    "status": "PENDING_ACCOUNT05_RUNTIME",
+    "reason": "the installed watcher is hardcoded to account 13 and correctly rejects account 05 campaign IDs",
+    "last_manual_check_sp": "2026-08-29T01:54:43-03:00",
+    "spend_usd_by_campaign": {"C51": 0.0, "C52": 0.0, "C53": 0.0},
+    "impressions_by_campaign": {"C51": 0, "C52": 0, "C53": 0},
+    "within_grace_window_at_check": true,
+    "requires_owner": "Rodolfo/Zeus architecture approval for account05-specific deterministic watcher"
+  },
   "notes": [
     "Nicolas authorized the one-time creation and ACTIVE publication of C51-C53 at USD25 each in the current operational thread.",
     "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
     "The initial account05 clone source lacked verified BRAZIL_REGULATION identities; two empty shells were archived after zero-child readback and recovery switched to from_zero_prestaged using account13 C12 as a CARRO compliance reference.",
+    "Asset 099 failed Meta creative_create twice and was moved to 05_REJECTED; asset 103 replaced it and is live as C53 AD03.",
+    "Campaign creation/readback and creative lifecycle are complete; first-delivery auto-enrollment remains pending because the installed watcher is account13-only.",
     "No placeholder thread ID may be used for delivery.",
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-29T04:16:20Z"
+  "updated_at": "2026-08-29T04:55:32Z"
 }
