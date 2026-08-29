@@ -222,7 +222,7 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
     })
     tracked_ads: list[dict[str, Any]] = []
     for ad_id in sorted((state.get('paused_ads') or {}).keys()):
-        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,campaign{id,name,status,effective_status},adset{id,name,status,effective_status},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
+        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status},adset{id,name,status,effective_status},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
         if ad_status == 200 and isinstance(row, dict):
             tracked_ads.append(row)
     tracked_campaigns: list[dict[str, Any]] = []
@@ -262,6 +262,7 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
         'ads': ads,
         'tracked_ads': tracked_ads,
         'tracked_campaigns': tracked_campaigns,
+        'manual_review': detect_manual_interventions(state, tracked_ads, tracked_campaigns),
         'insights': insights,
         'insights_by_ad': insights_by_ad,
         'native_rules': read_native_rules(meta, token, act),
@@ -307,14 +308,16 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
         raise RuntimeError(f'Smart Bidding report failed: HTTP {report_status}')
     expected_names = [norm(value).lower() for value in ((policy.get('smart_bidding_reconciliation') or {}).get('expected_account_names') or ['Eggbev-US-CC-EN-01', 'Eggbev-US-CC-EN-01-G006'])]
     target_rows = [row for row in report_rows if any(name and name in norm(row.get('ACCOUNT_NAME')).lower() for name in expected_names)]
+    freshness = evaluate_sb_freshness(target_rows, now_et(), 2.0)
     page_index: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in pages:
         utm = norm(row.get('UTM_CAMPAIGN')).lower()
         if utm:
             page_index[utm].append(row)
     return {
-        'ready': bool(target_rows),
-        'reason': None if target_rows else 'target_account_absent_from_smart_bidding_report',
+        'ready': bool(target_rows) and freshness.get('ready') is True,
+        'reason': ('target_account_absent_from_smart_bidding_report' if not target_rows else freshness.get('reason')),
+        'freshness': freshness,
         'publisher_count': len(publishers),
         'page_rows': pages,
         'page_index': dict(page_index),
@@ -323,6 +326,42 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
         'available_account_names': sorted({norm(row.get('ACCOUNT_NAME')) for row in report_rows if norm(row.get('ACCOUNT_NAME'))}),
         'schema_keys': sorted({key for row in report_rows for key in row.keys()}),
         'credential_readback': {'item': token_report.get('credential_item'), 'token_len': token_report.get('token_len')},
+    }
+
+
+def evaluate_sb_freshness(rows: list[dict[str, Any]], observed_at: dt.datetime, max_age_hours: float) -> dict[str, Any]:
+    """Require a timezone-aware source timestamp before economic automation."""
+    fields = ('UPDATED_AT', 'UPDATED_TIME', 'LAST_UPDATED', 'LAST_UPDATE', 'DATA_UPDATED_AT')
+    parsed: list[tuple[str, dt.datetime]] = []
+    for row in rows:
+        for field in fields:
+            raw = norm(row.get(field))
+            if not raw:
+                continue
+            try:
+                value = dt.datetime.fromisoformat(raw.replace('Z', '+00:00'))
+            except ValueError:
+                continue
+            if value.tzinfo is None:
+                continue
+            parsed.append((field, value.astimezone(ET)))
+    if not parsed:
+        return {
+            'ready': False,
+            'reason': 'smart_bidding_freshness_unverifiable',
+            'max_age_hours': float(max_age_hours),
+            'timestamp_field': None,
+        }
+    field, latest = max(parsed, key=lambda item: item[1])
+    age_seconds = max(0.0, (observed_at.astimezone(ET) - latest).total_seconds())
+    ready = age_seconds <= float(max_age_hours) * 3600.0
+    return {
+        'ready': ready,
+        'reason': None if ready else 'smart_bidding_data_stale_over_2h',
+        'max_age_hours': float(max_age_hours),
+        'timestamp_field': field,
+        'latest_at_et': latest.isoformat(),
+        'age_minutes': round(age_seconds / 60.0, 2),
     }
 
 
@@ -413,6 +452,57 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
     }
 
 
+def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list[dict[str, Any]], threshold: float, increase_percent: float = 30.0) -> list[dict[str, Any]]:
+    """Plan, but never execute, campaign-level CBO increases from Meta ROAS."""
+    by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in decisions:
+        if row.get('campaign_id'):
+            by_campaign[row['campaign_id']].append(row)
+    candidates: list[dict[str, Any]] = []
+    for campaign in campaigns:
+        campaign_id = norm(campaign.get('id'))
+        configured = norm(campaign.get('configured_status') or campaign.get('status'))
+        if not campaign_id or configured != 'ACTIVE' or norm(campaign.get('effective_status')) != 'ACTIVE':
+            continue
+        spend = 0.0
+        purchase_value = 0.0
+        valid_value = False
+        for row in by_campaign.get(campaign_id, []):
+            if row.get('effective_status') != 'ACTIVE' or row.get('configured_status') != 'ACTIVE':
+                continue
+            row_spend = finite_float(row.get('spend')) or 0.0
+            row_value = finite_float(row.get('purchase_value'))
+            row_roas = finite_float(row.get('purchase_roas'))
+            if row_value is None and row_roas is not None and row_spend > 0:
+                row_value = row_roas * row_spend
+            spend += row_spend
+            if row_value is not None:
+                purchase_value += row_value
+                valid_value = True
+        current_minor = finite_float(campaign.get('daily_budget'))
+        if spend <= 0 or not valid_value or current_minor is None or current_minor <= 0:
+            continue
+        campaign_roas = purchase_value / spend
+        if campaign_roas <= threshold:
+            continue
+        target_minor = int(current_minor * (1.0 + float(increase_percent) / 100.0) + 0.5)
+        candidates.append({
+            'campaign_id': campaign_id,
+            'campaign_name': norm(campaign.get('name')),
+            'purchase_roas': campaign_roas,
+            'threshold': threshold,
+            'increase_percent': float(increase_percent),
+            'current_daily_budget_minor': int(current_minor),
+            'target_daily_budget_minor': target_minor,
+            'current_daily_budget_usd': current_minor / 100.0,
+            'target_daily_budget_usd': target_minor / 100.0,
+            'action': 'RECOMMEND_INCREASE_BUDGET_30_PERCENT',
+            'write_enabled': False,
+            'blocked_reason': 'scale_frequency_and_cooldown_pending_nicolas',
+        })
+    return candidates
+
+
 def source_gate(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], phase: str) -> dict[str, Any]:
     reasons: list[str] = []
     if phase not in {'PHASE_1', 'PHASE_2'}:
@@ -430,7 +520,7 @@ def reconcile_status_write(meta, token: str, object_id: str, desired: str, field
         return {'object_id': object_id, 'ok': False, 'stage': 'pre_readback', 'http_status': pre_status}
     configured = norm(before.get('configured_status') or before.get('status'))
     if configured == desired:
-        return {'object_id': object_id, 'ok': True, 'stage': 'already_desired', 'before': {'status': before.get('status'), 'effective_status': before.get('effective_status')}}
+        return {'object_id': object_id, 'ok': True, 'stage': 'already_desired', 'before': {'status': before.get('status'), 'effective_status': before.get('effective_status'), 'updated_time': before.get('updated_time')}}
     post_status, post_body, _ = meta.graph_post_once(object_id, token, {'status': desired})
     read_status, after, _ = meta.graph_get(object_id, token, {'fields': fields})
     after_configured = norm((after or {}).get('configured_status') or (after or {}).get('status')) if isinstance(after, dict) else ''
@@ -441,8 +531,8 @@ def reconcile_status_write(meta, token: str, object_id: str, desired: str, field
         'post_http_status': post_status,
         'post_response_success': bool(isinstance(post_body, dict) and post_body.get('success') is True),
         'readback_http_status': read_status,
-        'before': {'status': before.get('status'), 'effective_status': before.get('effective_status')},
-        'after': {'status': after.get('status') if isinstance(after, dict) else None, 'effective_status': after.get('effective_status') if isinstance(after, dict) else None},
+        'before': {'status': before.get('status'), 'effective_status': before.get('effective_status'), 'updated_time': before.get('updated_time')},
+        'after': {'status': after.get('status') if isinstance(after, dict) else None, 'effective_status': after.get('effective_status') if isinstance(after, dict) else None, 'updated_time': after.get('updated_time') if isinstance(after, dict) else None},
     }
 
 
