@@ -233,7 +233,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        55 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual e escala +30% dry-run
+Testes aprovados        56 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo e escala +30% dry-run
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente
@@ -297,7 +297,7 @@ Smart Bidding report    conta 01 ausente; ROAS write permanece bloqueado
 
 O guardrail autorizado foi executado em controlled-write porque `LEADS > 5.000` e o scheduler não era confiável: 1 campanha planejada, 1 pausa confirmada por GET, 1 alerta entregue e 0 mapping issues. Readback independente final: campanha `PAUSED`, effective status `PAUSED`, 0 ads efetivamente ativos. Nunca reativar automaticamente essa campanha pelo runner ROAS.
 
-Validação: 55 testes, `py_compile`, dry-run Fase 2 e `git diff --check` aprovados. O dry-run classificou os três ads sem insight como `PAUSE_AD` e a campanha como `PAUSE_CAMPAIGN`, mas executou zero writes devido ao gate Smart Bidding.
+Validação: 56 testes, `py_compile`, dry-run Fase 2 e `git diff --check` aprovados. O dry-run classificou os três ads sem insight como `PAUSE_AD` e a campanha como `PAUSE_CAMPAIGN`, mas executou zero writes devido ao gate Smart Bidding. O gate de intervenção manual compara `updated_time` de campanha, ad set e anúncio e nunca apaga proveniência automaticamente.
 
 ## Sequência de implementação
 
