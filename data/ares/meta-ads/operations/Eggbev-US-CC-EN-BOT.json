@@ -89,6 +89,20 @@
       },
       "other_managers": [],
       "success_evidence": "Auto-thread member sync/readback real"
+    },
+    "latest_full_thread_update": {
+      "at_et": "2026-08-29T15:10:07-04:00",
+      "channel_threads_discovered": 10,
+      "threads_updated_via_discord_api": 9,
+      "current_architecture_thread_updated_by_final_report": true,
+      "route_threads_updated": 6,
+      "status_threads_updated": 1,
+      "legacy_threads_marked_superseded": 2,
+      "legacy_archive_state_preserved": true,
+      "update_messages_confirmed": 16,
+      "required_members_confirmed_on_every_api_updated_thread": ["Nicolas", "Zeus", "Rodolfo"],
+      "rate_limit_recovery": "HTTP 429 after partial effects; reconciled all members/messages by GET, skipped confirmed layers, resumed missing posts only, then re-read every target",
+      "duplicates_after_recovery": 0
     }
   },
   "inheritance_policy": {
@@ -638,5 +652,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T14:57:19-04:00"
+  "updated_at": "2026-08-29T15:10:07-04:00"
 }
