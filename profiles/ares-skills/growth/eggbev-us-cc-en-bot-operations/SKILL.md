@@ -251,7 +251,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        58 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo, criação ACTIVE futura e escala +10% acima de 0,50 por ciclo
+Testes aprovados        63 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual do conjunto completo, criação ACTIVE futura, escala +10% acima de 0,50 por ciclo e escopo/readiness da thread Criar Campanhas
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente
