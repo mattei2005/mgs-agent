@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "documented_not_activated",
+  "status": "onboarding_pilot_paused_authorized",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -19,12 +19,16 @@
   },
   "account": {
     "account_number": 5,
-    "account_id": null,
+    "account_id": "2039876850230678",
     "provisional_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
-    "exact_meta_alias": null,
-    "currency": null,
-    "timezone": null,
-    "identity_status": "pending_live_meta_readback"
+    "exact_meta_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+    "currency": "USD",
+    "timezone": "America/Sao_Paulo",
+    "timezone_offset_hours_utc": -3,
+    "account_status": 1,
+    "identity_status": "confirmed_live_meta_readback",
+    "next_sequential_campaign_number": 51,
+    "active_campaign_budget_usd_at_preflight": 0.0
   },
   "strategy": {
     "management_strategy": "CREATIVE_CUT_24H",
@@ -145,16 +149,48 @@
     "implement resumable state and deterministic dry-run tests",
     "validate ad-level pause and GET readback in a PAUSED canary before production"
   ],
-  "write_mode": "disabled_pending_onboarding",
-  "write_enabled": false,
+  "write_mode": "controlled_write_paused_pilot",
+  "write_enabled": true,
   "activation_enabled": false,
+  "pilot_request": {
+    "request_id": "cpv05-first3-20260828",
+    "requested_by": "Nicolas Holanda",
+    "authorization_source": "discord:thread:1543069402440671333",
+    "campaign_numbers": [51, 52, 53],
+    "creation_mode": "from_zero_prestaged",
+    "campaign_status": "PAUSED",
+    "management_strategy": "CREATIVE_CUT_24H",
+    "budget_usd_each": 25.0,
+    "bid_strategy": "MAXVOL",
+    "account_budget_before_usd": 0.0,
+    "account_budget_after_creation_if_paused_usd": 0.0,
+    "operational_envelope_floor_usd": 500.0,
+    "activation_requires_remaining_strategy_gates": true
+  },
+  "token_reference": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "type": "user_access_token",
+    "secret_copied_to_operation": false
+  },
+  "live_identity_readback": {
+    "validated_at_utc": "2026-08-29T01:45:32Z",
+    "page_id": "621037101089579",
+    "page_name": "Garagem Brasil",
+    "page_advertise_task": true,
+    "instagram_user_id": "17841418924864919",
+    "pixel_id": "1033279451747443",
+    "pixel_name": "BR-CAR-BR-01",
+    "event": "SUBSCRIBE",
+    "campaign_count": 49,
+    "active_campaign_count": 0
+  },
   "crons": [],
   "meta_writes_performed": 0,
   "notes": [
-    "Documentation closure does not authorize campaign creation, activation, budget changes or cron creation.",
+    "Nicolas authorized the one-time creation of the three PAUSED pilot campaigns C51-C53 in the current operational thread; activation, budget changes after creation and cron creation remain disabled.",
     "No placeholder thread ID may be used for delivery.",
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-28T14:02:00Z"
+  "updated_at": "2026-08-29T01:45:32Z"
 }

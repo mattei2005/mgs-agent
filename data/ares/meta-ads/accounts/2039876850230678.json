@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "accounts": [
+    {
+      "account_id": "2039876850230678",
+      "meta_account_ref": "act_2039876850230678",
+      "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
+      "site_name": "Creditoparaveiculo",
+      "country": "BR",
+      "vertical": "CAR",
+      "language": "BR",
+      "account_number": 5,
+      "manager": {
+        "code": "G006",
+        "name": "Nicolas",
+        "discord_id": "1055570806945620030"
+      },
+      "channel": "DirectTraffic",
+      "currency_expected": "USD",
+      "timezone_source": "meta_ad_account_timezone",
+      "management_strategy": "CREATIVE_CUT_24H",
+      "budget_type": "daily",
+      "write_mode": "controlled_write_paused_pilot",
+      "activation_enabled": false,
+      "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "meta_detected": {
+        "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "timezone_offset_hours_utc": -3,
+        "account_status": 1
+      },
+      "technical_access": {
+        "validated": true,
+        "validated_at_utc": "2026-08-29T01:45:32Z",
+        "account_http_status": 200,
+        "campaign_read_http_status": 200,
+        "page_id": "621037101089579",
+        "page_name": "Garagem Brasil",
+        "page_tasks": ["MANAGE", "CREATE_CONTENT", "MODERATE", "MESSAGING", "ADVERTISE", "ANALYZE"],
+        "instagram_user_id": "17841418924864919",
+        "pixel_id": "1033279451747443",
+        "pixel_name": "BR-CAR-BR-01",
+        "pixel_last_fired_time": "2026-08-28T19:59:59-0400"
+      },
+      "live_preflight": {
+        "campaign_count": 49,
+        "active_campaign_count": 0,
+        "active_campaign_budget_usd": 0.0,
+        "existing_campaign_numbers": "01-50 with historical gaps",
+        "next_sequential_campaign_number": 51
+      },
+      "daily_budget_policy": {
+        "operational_account_floor_usd": 500.0,
+        "new_campaign_initial_budget_usd": 25.0,
+        "campaign_count_requested": 3,
+        "requested_budget_total_usd": 75.0,
+        "campaign_operational_ceiling_usd": 150.0
+      }
+    }
+  ]
+}
