@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.3.0-draft
+version: 0.4.0-draft
 author: Ares
 license: internal
 metadata:
@@ -20,12 +20,13 @@ Use quando Rodolfo ou Nicolas pedir revisão de regras, análise, relatório, ca
 ## Estado atual
 
 ```text
-Status do contrato       architecture_review_in_progress
+Status do contrato       runners ROAS/Diário construídos; aguardando dados reconciliados e dry-run com entrega
 Operation ID             Eggbev-US-CC-EN-BOT
-Conta Meta               alias Eggbev-US-CC-EN-01-G006
+Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                disabled globally; lead guardrail scoped write enabled
-Crons Eggbev              guardrail de leads criado; salvo/enabled, aguardando scheduler gateway
+Write Meta                ROAS disabled; lead guardrail scoped write enabled
+Crons Eggbev              somente guardrail de leads; nenhum cron ROAS/Diário
+Regra nativa              ADS ZERO RESULTS segue ativa; Nicolas autorizou desativá-la somente na futura ativação
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
 ```
@@ -187,6 +188,25 @@ Quando Nicolas pedir relatório, executar leitura real e mostrar todas as págin
 ```
 
 A proximidade percentual é `LEADS / 5000`. O check automático permanece silencioso quando não há ação; relatório de status completo é enviado sob pedido do gestor.
+
+## Runtime ROAS e reporting construído
+
+Autorização de Nicolas: construir runners e testes sem cron, sem postagem e sem write Meta. Readback atual:
+
+```text
+Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
+Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
+Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
+Testes                  tests/test_eggbev_roas_automation.py
+Testes aprovados        45 incluindo regressões do guardrail de leads
+Write ROAS              false
+Post Diário             false
+Cron ROAS/Diário        inexistente
+```
+
+O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Em ciclo de ação, Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa bloqueia writes. Métricas Smart Bidding indisponíveis aparecem `N/D`, nunca zero inventado.
+
+Na leitura real da construção, a conta Meta estava ativa em USD/ET, mas sem campanha/ad/insight; Smart Bidding só expôs a conta 03 e não a conta alvo 01. Portanto, o live dry-run com entrega permanece pendente. Nicolas autorizou desativar `ADS ZERO RESULTS` somente no futuro gate de ativação, com readback exato antes/depois.
 
 ## Sequência de implementação
 
