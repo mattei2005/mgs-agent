@@ -61,7 +61,7 @@
     "campaign_ops_channel_id": "1539422731727147079",
     "campaign_ops_channel_label": "eggbev-us-cc-en-01-g006",
     "fixed_threads": {
-      "rules": "1541578622106865815",
+      "rules": "1543280854024060999",
       "intraday": "1541578606076231750",
       "daily": "1541578596253175858",
       "campaign_creation": "1541578556037927053",
@@ -74,13 +74,14 @@
       "approved_by": "Nicolas",
       "reference": "names originally created by Rodolfo",
       "fixed_thread_names": {
-        "rules": "Eggbev-US-CC-EN Regras",
+        "rules": "Vamos Uma Atualização Massiva nos - Nicolas",
         "intraday": "Eggbev-US-CC-EN Corte e ROAS",
         "daily": "Eggbev-US-CC-EN Diario",
         "campaign_creation": "Eggbev-US-CC-EN Criar Campanhas",
         "campaign_cloning": "Eggbev-US-CC-EN Clonar Campanhas",
         "page_lead_guardrail": "Eggbev-US-CC-EN Limite de Leads"
-      }
+      },
+      "rules_route_exception": "Nicolas explicitly reassigned Rules to the current architecture thread on 2026-08-29; the previous Eggbev-US-CC-EN Regras thread is superseded"
     },
     "thread_membership": {
       "automatic_manager": {
@@ -263,7 +264,7 @@
       "global_write_enabled": true,
       "release_version": "3.2.0",
       "eggbev_account_registered": false,
-      "consequence": "no Eggbev clone plan or write until account onboarding and validated manifest"
+      "consequence": "no Eggbev clone plan or write until account onboarding and validated manifest; clone_page_switch also requires an explicit v3 manifest/executor extension because the current engine supports only pure_clone, clone_prestaged and from_zero_prestaged"
     },
     "scope_separation": {
       "thread": "clone requests only",
@@ -271,7 +272,24 @@
     },
     "allowed_modes": {
       "pure_clone": "same structure, audience, budget, copy and media; only next sequence, naming and destination tracking are rewritten; suffix COPY C{source}",
-      "clone_prestaged": "copy source lineage and structure while replacing ads with new approved reconciled pre-staged creatives"
+      "clone_prestaged": "copy source lineage and structure while replacing ads with new approved reconciled pre-staged creatives",
+      "clone_page_switch": {
+        "label": "Clone com alteração de página e nome",
+        "definition": "duplicate the full source campaign while preserving structure, audience, placements, bid strategy, copy and media; replace the destination Facebook Page identity, next sequential naming, page token and links/UTMs for the selected target page",
+        "target_page_selection": {
+          "default": "page explicitly selected by Nicolas",
+          "when_selection_is_delegated": "choose the eligible running Messenger page with the lowest active LEADS in the live Smart Bidding Messenger Pages dashboard",
+          "reconciliation": "require unique UTM_CAMPAIGN pg_XXXXX plus FB_PAGE_ID match",
+          "tie_or_invalid_source": "ask Nicolas; never choose by assumption"
+        },
+        "messenger_json": "update the mandatory Messenger JSON for the selected target page and validate the complete version before execution",
+        "daily_budget_usd": 45,
+        "start_time": "next_day_00:00_America/New_York",
+        "delivery_state": "campaign, ad set and every ad configured ACTIVE for the approved scheduled start",
+        "media_and_copy": "preserve source media and copy",
+        "prepublication_gate": "show source, target page, LEADS evidence, naming, pg token, links/UTMs, full Messenger JSON, USD 45 budget, start time and statuses; wait for Nicolas explicit OK",
+        "engine_support": "contract_approved_pending_v3_manifest_and_executor_extension"
+      }
     },
     "required_request_fields": [
       "exact source campaign",
@@ -281,6 +299,8 @@
       "start date/time America/New_York",
       "1x1x3 or 1x1x5",
       "new assets, ad names and copy when clone_prestaged",
+      "target page and Smart Bidding LEADS evidence when clone_page_switch selection is delegated",
+      "updated full Messenger JSON when clone_page_switch",
       "every requested exception to audience, placements, structure or strategy"
     ],
     "execution_gates": [
@@ -299,7 +319,8 @@
     "drive_operation": "CC_US_EN",
     "source": "01_READY after reservation and Meta x Drive reconciliation",
     "creative_source": "MANUAL_UPLOAD",
-    "always_new_never_reuse": true,
+    "always_new_never_reuse": "required_for_campaign_creation_and_clone_prestaged",
+    "approved_media_copy_reuse_modes": ["pure_clone", "clone_page_switch"],
     "partnership_ad": false,
     "instagram_account": "USE_FACEBOOK_PAGE",
     "advantage_plus_creative": false,
@@ -652,5 +673,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T15:10:07-04:00"
+  "updated_at": "2026-08-29T15:20:08-04:00"
 }

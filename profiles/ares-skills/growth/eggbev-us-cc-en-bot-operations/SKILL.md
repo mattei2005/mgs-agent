@@ -79,26 +79,19 @@ Não copiar automaticamente para BOT/Messenger:
 
 Somente guardrails genéricos de segurança, idempotência, autorização e readback podem ser compartilhados após revisão de compatibilidade.
 
-## Contrato pendente — fechar com Rodolfo/Nicolas
+## Pendências residuais antes do canário
 
-Antes de criar runners ou crons, registrar explicitamente:
+O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
-1. Fluxo real do usuário: anúncio → Messenger → BOT → qual ação final.
-2. Objetivo Meta, conversion location, destination e optimization goal.
-3. Métrica principal e ordem de fallback: conversa, subscriber, lead, registration, purchase, revenue/ROI.
-4. Fonte externa, join key, atraso e fórmula de receita/ROI, se aplicável.
-5. Estrutura por campanha: CBO/ABO, quantidade de adsets e ads, públicos e placements.
-6. Naming de campanha/adset/ad e data operacional.
-7. Budget inicial, nível do budget, moeda e gates de alteração.
-8. Bid strategy, cost cap/lowest cost e regras de learning/carência.
-9. País/geo, idade, gênero, idioma e exclusões.
-10. Criativos: origem, formato, quantidade, rotação, reserva e replacement.
-11. Horários e conteúdo do Intraday e do Diário em America/New_York.
-12. Quem pode criar, pausar, reativar, editar budget e ativar.
-13. Thresholds, persistência, exceções e rollback.
-14. Política de campanha nova: sempre PAUSED até gate explícito.
+1. Smart Bidding: mapping inequívoco da conta 01, atraso e fórmulas Eggbev de ROI/RPS/receita líquida.
+2. Engine v3: onboarding da conta Eggbev e media registry pre-stageado.
+3. Clonagem: exceção `pure_clone` à regra de criativo novo, naming final sem duplicidade e política de início/status.
+4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
+5. Diário com volume: layout final card único versus card + tabela por campanha.
+6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
+7. Regra nativa `ADS ON 1.1` em `HAS_ISSUES`: manter, desativar ou remover exige decisão específica.
 
-Campos não decididos permanecem `pending_review` e bloqueiam somente a ação dependente.
+Cada pendência bloqueia somente a ação dependente; não reabre regras já aprovadas.
 
 ## Contrato confirmado em blocos — criação, ciclos e reporting
 
