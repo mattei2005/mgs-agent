@@ -343,22 +343,22 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
-      "next_step": "Validar schema/chaves, implementar reconciliação fail-closed, testar fixture e live read-only, atualizar contrato/skill e REPORT-INFRA.",
+      "next_step": "Nicolas revisar o layout; post/cron Diário permanecem desabilitados e ROI continua N/D.",
       "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
-      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-daily-report.py",
-      "state": "em implementação autorizada por nicolas; fontes e chaves em validação; zero cron, postagem, budget ou meta write.",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/daily-report/change-20260829T193410-0400.json",
+      "state": "concluído: renderer v3 com custo por mensagem iniciada, join utm+page id, tabela única, rps/epc brutos e fail-closed; 80 testes pass; live read-only reconciliou 1 campanha e bloqueou métricas externas por freshness sem timestamp; zero write, postagem ou cron.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-29T23:21:13+00:00"
+      "updated_at": "2026-08-29T23:35:10+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Obter timestamp verificavel da Smart Bidding e aprovar formulas Eggbev de RPS/ROI; somente depois apresentar o dry-run real e o plano de automacao Diario para OK explicito de Nicolas. Em paralelo, placements exatos e onboarding Engine v3 continuam bloqueando criacao/clone",
-      "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento, escala e recovery",
-      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/daily-renderer-v2-review-20260829T190830-0400.json; discord:thread:1541578596253175858",
-      "state": "renderer diario hybrid_v2 concluido e live read_only validado: inclui campanhas effective active sem insight mais campanhas com insight no periodo; historico fora do escopo; zero limite silencioso e zero truncamento; cards com nome completo/status/start/budget/spend/roas/resultados/custo/cpm/ctr/observacao; tabela desktop indexada e paginacao fence-safe; freshness sb visivel; rps/roi seguem n/d; prompt exato ativo, skill v0.13.0, 73/73 testes pass; post=false cron=false writes=false",
-      "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T23:10:54+00:00"
+      "next_step": "Zeus iniciar ou recuperar o scheduler gateway fora desta sessão e confirmar o primeiro tick programado; Rodolfo ou Geizian aprovarem teto/envelope antes de qualquer aumento real de budget.",
+      "objective": "Operar Corte e ROAS Eggbev com pausa, reativação, relatório e futura escala de budget sob autoridade vigente",
+      "source": "discord:thread:1541578606076231750; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/roas-thread-operational-activation-20260829T192934-0400.json",
+      "state": "contrato e runtime liberados para status writes de anúncio/campanha e postagem automática nos ciclos et; cron script-only está enabled/scheduled/repeat forever. budget write continua bloqueado a rodolfo/geizian mais teto/envelope. scheduler reporta gateway_running=false e smart bidding sem timestamp verificável, portanto o primeiro tick e qualquer write permanecem fail-closed.",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-29T23:33:09+00:00"
     },
     {
       "agent": "ares",
@@ -1422,5 +1422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:30:40+00:00"
+  "updated_at": "2026-08-29T23:35:10+00:00"
 }

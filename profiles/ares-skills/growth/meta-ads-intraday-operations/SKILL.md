@@ -104,16 +104,16 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 9. Criar crons apenas em read-only/dry-run e validar entrega.
 10. Liberar controlled-write ou autonomia somente por decisão explícita e readback.
 
-## Operação Eggbev em revisão
+## Operação Eggbev
 
-O contrato em elaboração está em:
+O contrato vivo está em:
 
 ```text
 /root/mgs-agent/data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json
 /root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json
 ```
 
-Enquanto houver campos `pending_review`, não criar crons Eggbev nem herdar regras de tráfego direto ou de outra operação. A skill específica planejada é `eggbev-us-cc-en-bot-operations`.
+A skill específica é `eggbev-us-cc-en-bot-operations`. Corte/reativação de anúncios, transições necessárias da campanha e postagem dos ciclos ROAS estão autorizados em controlled-write fail-closed e possuem cron script-only; budget write continua bloqueado até Rodolfo ou Geizian aprovarem teto/envelope. Daily continua read-only sem cron. Campos ainda pendentes bloqueiam somente a ação dependente; nunca herdar regras de tráfego direto ou de outra operação.
 
 ## Segurança e autoridade
 

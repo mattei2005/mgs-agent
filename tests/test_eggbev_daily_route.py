@@ -55,9 +55,12 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "full name",
             "current status",
             "start_time America/New_York",
-            "Budget USD",
+            "Cost per messaging conversation started",
+            "UTM_CAMPAIGN",
+            "FB_PAGE_ID",
+            "RPS bruto = `REVENUE × 1.000 / SESSIONS`",
+            "real ROI and estimated ROI remain N/D",
             "25 campanhas, todas preservadas",
-            "RPS, real ROI and estimated ROI remain N/D",
         ]
         for value in required:
             self.assertIn(value, self.report)

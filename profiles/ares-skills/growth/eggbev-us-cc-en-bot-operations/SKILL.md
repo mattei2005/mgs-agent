@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.13.0-draft
+version: 0.14.0-draft
 author: Ares
 license: internal
 metadata:
@@ -20,12 +20,12 @@ Use quando Rodolfo ou Nicolas pedir revisão de regras, análise, relatório, ca
 ## Estado atual
 
 ```text
-Status do contrato       runners ROAS/Diário observando entrega live; ROAS e budget writes seguem bloqueados
+Status do contrato       Corte/reativação e postagem ROAS autorizados em modo fail-closed; budget write segue gated
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                ROAS disabled; lead guardrail scoped write enabled
-Crons Eggbev              somente guardrail de leads; nenhum cron ROAS/Diário
+Write Meta                status de ad/campanha no ciclo ROAS habilitado; budget write bloqueado; guardrail de leads habilitado
+Crons Eggbev              Corte e ROAS nos ciclos ET + guardrail de leads 08:00/20:00; scheduler gateway ainda requer validação de tick
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
@@ -73,11 +73,15 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
 - Nunca reutilizar números de mensagens antigas como estado atual.
 - Horários aprovados: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 em `America/New_York`; aprovação do plano não significa cron aprovado.
-- Renderer v2: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
-- Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; tabela desktop indexada preserva todas as campanhas com paginação Discord fence-safe.
-- Campos por campanha: status atual, `start_time` ET, Budget USD, spend, Purchase ROAS, resultados, custo por conversa, CPM, CTR e observação de reconciliação.
-- Freshness Smart Bidding aparece com timestamp/idade/campo ou `N/D`; sem timestamp ou acima de 2h, métricas SB permanecem `N/D`, nunca zero.
-- RPS, ROI real e ROI estimado continuam `N/D` até fórmula Eggbev aprovada.
+- Renderer v3: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
+- Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; a tabela desktop única preserva todas as campanhas com paginação Discord fence-safe.
+- A tabela única combina Meta Ads + Smart Bidding + Pricing/monetização por campanha. O join exige `utm_campaign` do creative Meta = `UTM_CAMPAIGN` Smart Bidding e `object_story_spec.page_id` Meta = `FB_PAGE_ID` Smart Bidding.
+- Campos Meta por campanha: status, `start_time` ET, Budget, spend, `messaging_conversation_started_7d`, custo por mensagem iniciada, Purchase ROAS, CPM e CTR.
+- Campos Smart Bidding/Pricing por campanha: investimento, receita, LEADS, `AVG_PRICE`, RPS bruto e EPC bruto. `RPS bruto = REVENUE × 1.000 / SESSIONS`; `EPC bruto = REVENUE / ACQUISITION_CLICKS`.
+- Freshness Smart Bidding aparece com timestamp/idade/campo ou `N/D`; sem timestamp ou acima de 2h, todas as métricas externas por campanha permanecem `N/D`, nunca zero.
+- UTM ausente/múltipla, página ausente/duplicada, Page ID divergente ou fonte stale falha fechado e expõe o motivo no campo `Join`.
+- O endpoint global `/pricing` não é atribuído por campanha: não possui UTM, trabalha por operação/path/slot e o payload vivo Eggbev está em BRL. Meta CPM permanece a coluna CPM da tabela.
+- ROI real e ROI estimado continuam `N/D` até fórmula Eggbev aprovada e campos líquidos/estimados disponíveis.
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
@@ -121,7 +125,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
 3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
-5. Diário: renderer híbrido v2 validado com fixture de 25 campanhas e live read-only; permanecem somente fórmula RPS/ROI, timestamp Smart Bidding e aprovação de automação.
+5. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem timestamp Smart Bidding, fórmulas de ROI e aprovação de automação.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
 7. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
@@ -172,9 +176,11 @@ Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Me
 ### Reporting
 
 - Intraday: um relatório por ciclo e qualquer atualização sob demanda.
-- Núcleo Meta: CPM, Purchase ROAS, custo por resultado/conversa, Results, Budget, Amount spent e CTR.
-- Núcleo Smart Bidding solicitado: Leads/UTM, RPS, ROI drip, performance completa, investimento, receita, receita líquida/estimada e ROI real/estimado.
-- Não inventar fórmulas; validar campo, granularidade e atraso na fonte viva. Quando Meta Purchase ROAS e Smart Bidding ROI discordarem, **Meta Purchase ROAS vence**; fonte Smart Bidding ausente, sem timestamp verificável ou acima de 2h continua fail-closed para economic writes.
+- Núcleo Meta: CPM, Purchase ROAS, `messaging_conversation_started_7d`, custo por mensagem iniciada, Budget, Amount spent e CTR.
+- Tabela unificada por campanha: Meta + Smart Bidding + Pricing/monetização, usando UTM exata e confirmação de Page ID.
+- Núcleo Smart Bidding solicitado: investimento, receita, Leads/UTM, `AVG_PRICE`, RPS bruto, EPC bruto, ROI drip, receita líquida/estimada e ROI real/estimado.
+- Fórmulas report-only aprovadas por Nicolas: custo/msg iniciada = spend Meta ÷ `messaging_conversation_started_7d`; RPS bruto = `REVENUE × 1.000 / SESSIONS`; EPC bruto = `REVENUE / ACQUISITION_CLICKS`. ROI real/estimado permanece N/D.
+- Não inventar denominador, atribuição ou moeda. O `/pricing` global Eggbev não entra por campanha porque não expõe UTM e está em BRL.
 - Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 - Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.
@@ -262,17 +268,19 @@ Ordem de testes: fixtures ROAS → fixtures LEADS → fórmulas/layout Diário �
 
 ## Runtime ROAS e reporting construído
 
-Autorização de Nicolas: construir runners e testes sem cron, sem postagem e sem write Meta. Readback atual:
+A autorização inicial de Nicolas para somente runner/testes foi supersedida em 29/08/2026: status writes de anúncio/campanha e postagem dos ciclos ROAS estão autorizados em modo fail-closed; budget write permanece sujeito ao gate Rodolfo/Geizian. Readback atual:
 
 ```text
 Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        73 incluindo guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, criação ACTIVE futura, escala +10%, rotas Criar Campanhas/Diário e renderer v2 sem omissão/truncamento
-Write ROAS              false
-Post Diário             false
-Cron ROAS/Diário        inexistente
+Testes aprovados        56 no módulo ROAS atual; suíte ampliada cobre guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, escala +10% e rotas de reporting
+Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
+Budget write            false; exige Rodolfo/Geizian + teto/envelope
+Post ciclo ROAS         habilitado na thread fixa
+Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; cadastro enabled/scheduled, tick pendente porque gateway_running=false
+Post/Cron Diário         false
 ```
 
 O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Em ciclo de ação, Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa bloqueia writes. Métricas Smart Bidding indisponíveis aparecem `N/D`, nunca zero inventado.
