@@ -223,6 +223,32 @@ def detect_manual_interventions(state: dict[str, Any], tracked_ads: list[dict[st
                     'current_updated_time': current,
                     'action': 'ASK_NICOLAS_FOR_ORIENTATION',
                 })
+    tracked_ad_rows = {norm(row.get('id')): row for row in tracked_ads if norm(row.get('id'))}
+    paused_campaigns = state.get('paused_campaigns') or {}
+    for ad_id, entry in (state.get('paused_ads') or {}).items():
+        if not isinstance(entry, dict):
+            continue
+        row = tracked_ad_rows.get(str(ad_id)) or {}
+        adset = row.get('adset') or {}
+        campaign = row.get('campaign') or {}
+        checks = [
+            ('adset', entry.get('adset_id'), entry.get('adset_updated_time'), adset.get('updated_time')),
+        ]
+        campaign_id = norm(entry.get('campaign_id'))
+        if campaign_id not in paused_campaigns:
+            checks.append(('campaign', campaign_id, entry.get('campaign_updated_time'), campaign.get('updated_time')))
+        for kind, object_id, expected_raw, current_raw in checks:
+            expected = norm(expected_raw)
+            current = norm(current_raw)
+            if object_id and expected and current and current != expected:
+                review.append({
+                    'kind': kind,
+                    'object_id': norm(object_id),
+                    'expected_updated_time': expected,
+                    'current_updated_time': current,
+                    'tracked_through_ad_id': str(ad_id),
+                    'action': 'ASK_NICOLAS_FOR_ORIENTATION',
+                })
     return review
 
 
@@ -239,13 +265,13 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
         'limit': 200,
     })
     ads = fetch_all_meta(meta, token, act + '/ads', {
-        'fields': 'id,name,status,effective_status,configured_status,campaign{id,name,status,effective_status},adset{id,name,status,effective_status},creative{id,name,object_story_spec,url_tags,effective_object_story_id}',
+        'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,updated_time},adset{id,name,status,effective_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}',
         'effective_status': ['ACTIVE'],
         'limit': 200,
     })
     tracked_ads: list[dict[str, Any]] = []
     for ad_id in sorted((state.get('paused_ads') or {}).keys()):
-        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status},adset{id,name,status,effective_status},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
+        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,updated_time},adset{id,name,status,effective_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
         if ad_status == 200 and isinstance(row, dict):
             tracked_ads.append(row)
     tracked_campaigns: list[dict[str, Any]] = []
@@ -401,9 +427,11 @@ def normalize_ad(ad: dict[str, Any], tracked: bool = False) -> dict[str, Any]:
         'campaign_name': norm(campaign.get('name')),
         'campaign_status': norm(campaign.get('status')),
         'campaign_effective_status': norm(campaign.get('effective_status')),
+        'campaign_updated_time': norm(campaign.get('updated_time')),
         'adset_id': norm(adset.get('id')),
         'adset_status': norm(adset.get('status')),
         'adset_effective_status': norm(adset.get('effective_status')),
+        'adset_updated_time': norm(adset.get('updated_time')),
         'tracked_by_ares': tracked,
     }
 

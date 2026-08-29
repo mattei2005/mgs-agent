@@ -336,9 +336,9 @@
       "next_step": "Nicolas deve definir frequência/cooldown/teto da escala +30% e esclarecer o status da criação normal versus canário técnico. Engine v3 e Smart Bidding conta 01 seguem blockers; nenhum budget write ou cron novo autorizado.",
       "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento e recovery",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "decisões nicolas 2026-08-29 persistidas: fase 2 sem linha corta como n/d; meta purchase roas vence divergência; freshness smart bidding 2h; intervenção manual preserva proveniência e exige revisão do conjunto; ads on 1.1 ausente por readback; escala +30% possui planner dry-run, write bloqueado. 55 testes pass. guardrail lauren tucker pg_13829 em 5239 leads pausou 1 campanha com get confirmado; 0 ads ativos; alerta entregue; segunda execução idempotente sem write/post.",
+      "state": "decisões nicolas persistidas: fase 2 sem linha corta como n/d; meta purchase roas vence divergência; freshness smart bidding 2h; intervenção manual compara conjunto campanha/adset/ad, preserva proveniência e exige orientação; ads on 1.1 ausente; escala +30% possui planner dry-run e write bloqueado. 56 testes pass. guardrail lauren tucker pg_13829 em 5239 leads pausou 1 campanha com get; 0 ads ativos; alerta entregue; repetição idempotente sem write/post.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T21:17:46+00:00"
+      "updated_at": "2026-08-29T21:20:35+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T21:17:46+00:00"
+  "updated_at": "2026-08-29T21:20:35+00:00"
 }

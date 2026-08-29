@@ -269,6 +269,36 @@ Gaps que bloqueiam produção:
 
 O comportamento implementado para performance é: abaixo do threshold corta conforme a fase; igual mantém; acima mantém ou reativa somente objetos pausados pelo Ares; todos os ads cortados pausam a campanha; `LEADS > 5000` pausa a campanha terminalmente. Alta performance não escala budget automaticamente.
 
+## Policy update — 2026-08-29 17:08 ET
+
+Decisões aprovadas por Nicolas e persistidas no contrato:
+
+- ausência completa de linha de insight na Fase 2 é `N/D` e corta;
+- quando Meta Purchase ROAS e Smart Bidding ROI discordarem, Meta Purchase ROAS vence;
+- Smart Bidding aceita atraso máximo de 2h e exige timestamp verificável; ausência/stale continua fail-closed;
+- alteração manual não apaga permanentemente a proveniência Ares: comparar o conjunto campanha/adset/ad, bloquear a automação afetada e pedir orientação a Nicolas;
+- `ADS ON 1.1` deve ser removida; readback encontrou a regra já ausente, então Ares não executou DELETE;
+- `ADS ZERO RESULTS` está `DISABLED` por readback e não foi alterada pelo Ares neste update;
+- escala aprovada em princípio: todas as campanhas elegíveis com Meta Purchase ROAS estritamente acima do threshold recebem recomendação de budget `+30%`. O planner existe em dry-run, mas budget write segue bloqueado até fechar frequência, cooldown, máximo de execuções/dia e teto/envelope.
+
+Readback vivo antes do guardrail:
+
+```text
+Campanha ativa          123 - Lauren Tucker - ENG - US - (pg_13829) 666666
+Ads ativos              3
+Budget diário           USD 70
+Spend do dia            USD 76
+Meta Purchase ROAS      0,00
+Resultados Messenger    0
+Página / UTM            Lauren Tucker / pg_13829
+LEADS                    5.239
+Smart Bidding report    conta 01 ausente; ROAS write permanece bloqueado
+```
+
+O guardrail autorizado foi executado em controlled-write porque `LEADS > 5.000` e o scheduler não era confiável: 1 campanha planejada, 1 pausa confirmada por GET, 1 alerta entregue e 0 mapping issues. Readback independente final: campanha `PAUSED`, effective status `PAUSED`, 0 ads efetivamente ativos. Nunca reativar automaticamente essa campanha pelo runner ROAS.
+
+Validação: 55 testes, `py_compile`, dry-run Fase 2 e `git diff --check` aprovados. O dry-run classificou os três ads sem insight como `PAUSE_AD` e a campanha como `PAUSE_CAMPAIGN`, mas executou zero writes devido ao gate Smart Bidding.
+
 ## Sequência de implementação
 
 1. Fechar o contrato em conversa com Rodolfo/Nicolas.

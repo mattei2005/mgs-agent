@@ -176,6 +176,21 @@ class SourceGateTests(unittest.TestCase):
         self.assertIn('manual_intervention_review_required', gate['reasons'])
         self.assertIn('a1', state['paused_ads'])
 
+    def test_manual_adset_intervention_requires_full_set_review(self):
+        state = common.default_state(dt.date(2026, 8, 29))
+        state['paused_ads']['a1'] = {
+            'reason': 'roas_cycle',
+            'adset_id': 's1',
+            'adset_updated_time': '2026-08-29T10:00:00+0000',
+        }
+        review = common.detect_manual_interventions(
+            state,
+            [{'id': 'a1', 'adset': {'id': 's1', 'updated_time': '2026-08-29T11:00:00+0000'}}],
+            [],
+        )
+        self.assertEqual(review[0]['kind'], 'adset')
+        self.assertEqual(review[0]['action'], 'ASK_NICOLAS_FOR_ORIENTATION')
+
     def test_freshness_accepts_source_timestamp_within_two_hours(self):
         observed = dt.datetime(2026, 8, 29, 14, 0, tzinfo=ET)
         result = common.evaluate_sb_freshness([{'UPDATED_AT': '2026-08-29T13:00:00-04:00'}], observed, 2.0)

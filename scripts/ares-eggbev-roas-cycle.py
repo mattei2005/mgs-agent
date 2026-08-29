@@ -147,6 +147,9 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
                 'threshold': run.get('threshold'), 'purchase_roas': row.get('purchase_roas'),
                 'spend': row.get('spend'),
                 'meta_updated_time': (result.get('after') or {}).get('updated_time'),
+                'adset_id': row.get('adset_id'),
+                'adset_updated_time': row.get('adset_updated_time'),
+                'campaign_updated_time': row.get('campaign_updated_time'),
             }
         common.atomic_json(Path(run['audit_path']), run)
 
@@ -166,6 +169,9 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
                 'reason': 'roas_zero_active_ads', 'paused_at_et': run.get('started_at_et'),
                 'meta_updated_time': (result.get('after') or {}).get('updated_time'),
             }
+            for paused_ad in (state.get('paused_ads') or {}).values():
+                if isinstance(paused_ad, dict) and paused_ad.get('campaign_id') == row['campaign_id']:
+                    paused_ad['campaign_updated_time'] = (result.get('after') or {}).get('updated_time')
         common.atomic_json(Path(run['audit_path']), run)
 
 
