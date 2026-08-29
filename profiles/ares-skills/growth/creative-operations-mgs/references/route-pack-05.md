@@ -82,8 +82,9 @@ Etapa  Regra
 1      Capturar/analisar a referência real: vídeo, frames ou anexo.
 2      Se o vídeo externo exigir login/cookie/anti-bot, tentar rotas técnicas razoáveis; se continuar bloqueado, parar e reportar o bloqueio antes de criar.
 3      Validar backend solicitado: GPT/OpenAI via image_generate; Grok/xAI via `/root/mgs-agent/scripts/mgs-grok-generate.py --profile ares`, conforme pedido. O wrapper deve resolver o profile explícito no contexto Hermes, não apenas por `HERMES_HOME`.
-4      Se Grok/xAI estiver sem autenticação, não substituir por GPT/local e não rotular como Grok.
-5      Só produzir a versão final depois que referência e backends mínimos estiverem resolvidos ou o usuário aprovar explicitamente seguir com fallback.
+4      Separar autenticação de capacidade comercial. Antes de lançar job longo/background xAI, fazer preflight bounded: confirmar credencial no profile e executar um canário pequeno. `403 team has no credits` é bloqueio de billing/licença, mesmo com chave válida; não repetir a submissão.
+5      Se Grok/xAI estiver sem autenticação ou créditos e o usuário tiver exigido Grok, não substituir por GPT/local/Veo sem autorização explícita e nunca rotular fallback como Grok. Se Grok foi apenas escolha interna do Ares e o usuário pediu o resultado, é permitido usar um backend corporativo já aprovado: listar modelos disponíveis, gerar um canário, validar o arquivo por ffprobe/contact sheet e registrar o provider real.
+6      Só produzir a versão final depois que referência e backends mínimos estiverem resolvidos ou o fallback permitido tiver passado no canário.
 ```
 
 Regra prática: se o pedido é “faça igual/ inspirado neste link” e o link não foi visto de verdade, o status correto é `bloqueado`, não `em_criacao`. Entregue evidência curta do bloqueio e a ação necessária para desbloquear.
