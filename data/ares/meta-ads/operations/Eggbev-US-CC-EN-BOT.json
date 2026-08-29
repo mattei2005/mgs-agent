@@ -731,7 +731,8 @@
       "post-launch serving watcher"
     ],
     "open_gaps": [
-      {"severity": "critical", "key": "engine_onboarding", "gap": "Eggbev account, operation manifest and mode-specific payloads are absent from Engine v3; creation and clone cannot reach validate/plan."},
+      {"severity": "critical", "key": "engine_onboarding", "gap": "The Eggbev account is absent from Engine v3 account registration, so no Eggbev lane can be planned or executed."},
+      {"severity": "critical", "key": "campaign_materializer", "gap": "No Eggbev creation/clone materializer exists to convert an approved request into a mode-specific manifest and reach validate/plan."},
       {"severity": "critical", "key": "smart_bidding_account_mapping", "gap": "Smart Bidding report does not expose account 01; ROAS writes and economic reconciliation remain fail-closed."},
       {"severity": "critical", "key": "clone_page_switch_runtime", "gap": "Engine schema rejects clone_page_switch and no page selector or JSON/Page transformer exists."},
       {"severity": "high", "key": "serving_verification", "gap": "No Eggbev watcher confirms first impression/spend after scheduled start; ACTIVE status alone does not prove delivery."},

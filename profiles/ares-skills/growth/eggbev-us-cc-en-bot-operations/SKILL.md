@@ -242,6 +242,32 @@ O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reati
 
 Na leitura real da construção, a conta Meta estava ativa em USD/ET, mas sem campanha/ad/insight; Smart Bidding só expôs a conta 03 e não a conta alvo 01. Portanto, o live dry-run com entrega permanece pendente. Nicolas autorizou desativar `ADS ZERO RESULTS` somente no futuro gate de ativação, com readback exato antes/depois.
 
+## Auditoria ponta a ponta — 2026-08-29
+
+Estado comprovado: conta Meta ativa em USD/ET, zero campanhas/ads ativos, zero spend; Fase 1 e Fase 2 executadas em dry-run; Diário live read-only e relatório de LEADS executados; 47 testes aprovados. Smart Bidding continua sem a conta 01 e `ADS ZERO RESULTS` continua ativa, então ROAS write permanece fail-closed.
+
+Furo corrigido: o reset de 00:00 apagava `paused_ads`/`paused_campaigns` e impossibilitava recuperação em outro dia. O rollover agora reseta threshold/campos diários e preserva a proveniência Ares até reativação ou reconciliação explícita.
+
+Gaps que bloqueiam produção:
+
+1. conta/operação Eggbev ausente do Engine v3;
+2. criação e os três clones sem manifest/runner Eggbev;
+3. `clone_page_switch` ausente do schema/executor, sem seletor de página nem transformer JSON/Page;
+4. Smart Bidding sem conta 01;
+5. sem watcher de primeira impressão/gasto;
+6. conflito nativo `ADS ZERO RESULTS`;
+7. scheduler com observadores divergentes;
+8. sem reconciliação durável de intervenção manual versus proveniência Ares;
+9. sem política de escala para alta performance;
+10. sem precedência/freshness aprovada entre Meta ROAS e Smart Bidding ROI;
+11. janela Smart Bidding enviada com limites `Z` precisa ser validada contra o dia ET;
+12. runner de LEADS não possui gate de freshness da linha;
+13. Phase 2 trata ausência total de insight do ad como `N/D` válido e corta; confirmar esse comportamento para zero-delivery;
+14. criação do zero sem política final Eggbev de `PAUSED` técnico versus `ACTIVE` futuro;
+15. `ADS ON 1.1` segue `HAS_ISSUES` sem decisão.
+
+O comportamento implementado para performance é: abaixo do threshold corta conforme a fase; igual mantém; acima mantém ou reativa somente objetos pausados pelo Ares; todos os ads cortados pausam a campanha; `LEADS > 5000` pausa a campanha terminalmente. Alta performance não escala budget automaticamente.
+
 ## Sequência de implementação
 
 1. Fechar o contrato em conversa com Rodolfo/Nicolas.

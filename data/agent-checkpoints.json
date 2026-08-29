@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Implementar extensão explícita do manifest/executor v3 para clone_page_switch somente após aprovação de arquitetura; criar testes offline, validate/plan e apresentar simulação antes de qualquer clone.",
-      "objective": "Consolidar todas as rotas Eggbev e adicionar terceiro modo de clonagem com troca de página/nome",
+      "next_step": "Fechar com Nicolas as decisões de zero-insight Phase 2, status inicial de criação, política de escala, precedência/freshness Meta versus Smart Bidding e intervenção manual; depois aprovar onboarding/extensão Eggbev no Engine v3 e validar offline/plan antes de canário.",
+      "objective": "Auditar o funcionamento completo Eggbev do briefing aos resultados, corrigir furos seguros e preparar a atualização de produção",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "rota regras movida por nicolas para a thread atual; antiga regras marcada supersedida. cinco rotas funcionais receberam updates e a rota antiga recebeu redirecionamento: 7/7 mensagens confirmadas. modo clone_page_switch aprovado: duplica integralmente fonte, preserva estrutura/público/placements/estratégia/copy/mídia, troca page, próximo sequencial/nome/pg/utms/json, escolhe menor leads somente quando delegada e reconciliada, usd45, próximo dia 00:00 et, campanha/adset/ads active. engine v3 ainda não suporta o novo modo; zero meta write e zero cron change.",
+      "state": "auditoria ponta a ponta concluída. live: conta ativa usd/et, zero campanhas/ads/spend, smart bidding sem conta 01, ads zero results ativa, engine sem eggbev. fase 1/fase 2/diário/leads executados read-only; 47 testes pass. furo corrigido: rollover diário preserva proveniência de pausas ares. contrato registra 15 gaps: 4 críticos, 4 altos, 6 médios e 1 baixo. criação/clones/roas write/roas-diário cron continuam bloqueados; zero meta write e zero cron change.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T19:25:20+00:00"
+      "updated_at": "2026-08-29T19:42:34+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T19:25:20+00:00"
+  "updated_at": "2026-08-29T19:42:34+00:00"
 }
