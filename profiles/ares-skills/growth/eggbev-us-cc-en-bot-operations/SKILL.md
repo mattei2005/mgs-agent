@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.5.0-draft
+version: 0.6.0-draft
 author: Ares
 license: internal
 metadata:
@@ -200,6 +200,31 @@ Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Cr
 - `clone_prestaged`: preserva lineage/estrutura e usa criativos novos aprovados, reconciliados e pre-stageados.
 
 Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e, quando aplicável, criativos/copy. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
+
+## Auditoria pré-simulação — 2026-08-29
+
+Todas as seis rotas fixas foram atualizadas com regras, riscos e testes; a thread de status também foi atualizada e duas threads históricas receberam aviso de supersessão mantendo o estado arquivado. Readback confirmou 16/16 mensagens e Nicolas, Zeus e Rodolfo em todos os nove alvos da API. Um HTTP 429 ocorreu após efeito parcial: o recovery fez GET de todas as threads, pulou membros/posts já confirmados e publicou apenas as camadas ausentes; zero duplicatas no readback final.
+
+Bloqueios reais antes do canário:
+
+1. scheduler Hermes parado; cron de LEADS salvo não dispara;
+2. Smart Bidding sem conta 01 no report;
+3. `ADS ZERO RESULTS` ainda ENABLED; desativar somente no gate futuro já autorizado;
+4. `ADS ON 1.1` em `HAS_ISSUES`, sem decisão de remoção/desativação;
+5. conta Eggbev ausente do Engine v3 e do media registry;
+6. zero campanhas/ads ativos impede validação live de métricas/serving/readback;
+7. ROI/RPS/receita líquida e recomendação de threshold sem fórmula aprovada;
+8. comando de mudança intraday do threshold ainda não implementado.
+
+Ambiguidades a fechar antes de clone/criação:
+
+- `pure_clone` reutiliza mídia/copy, enquanto campanhas novas exigem criativo novo;
+- naming base termina em `Copy`, mas pure clone exige `COPY C{fonte}`;
+- clone deve preservar início/status da fonte ou usar próximo dia 00:00 ET;
+- status final de criação/clone deve ser explicitado no resumo: PAUSED ou ACTIVE com início futuro;
+- layout Diário com volume: card único ou card + tabela por campanha.
+
+Ordem de testes: fixtures ROAS → fixtures LEADS → fórmulas/layout Diário → onboarding v3 → validate/plan criação → validate/plan clone → campanha canário aprovada → API×Ads Manager×Smart Bidding → dry-run apresentado → controlled-write/readback → crons.
 
 ## Runtime ROAS e reporting construído
 
