@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Importar e validar a lista exata de placements aprovada, cadastrar a conta 01 no Engine v3 e pre-stagear mídia antes de manifest/dry-run executável; budget write continua sujeito aos gates vigentes.",
+      "next_step": "Completar e validar o renderer Diario com Budget/status/start_time e layout híbrido antes de apresentar qualquer plano de cron; importar a lista exata de placements e cadastrar a conta 01 no Engine v3 antes de criação/clone executável; budget write continua sujeito aos gates vigentes",
       "objective": "Consolidar e testar Campaign Ops Eggbev US-CC-EN BOT da conta 01, do pedido ao acompanhamento, escala e recovery",
-      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json; discord:thread:1541578556037927053",
-      "state": "rota criar campanhas 1541578556037927053 corrigida após relatório global indevido: prompt exato ativo e confirmado por readback, contrato/account/skill v0.11.0 e registry sincronizados, gerador determinístico de configuração criado, 63/63 testes pass. relatório correto separa criação do zero dos três clones, usa budget variável, criativos novos, copy meta, json messenger, active futuro e gates completos. manual_only está aprovado, mas a lista exata de placements não está materializada; engine v3 sem conta eggbev e media registry sem mídia, portanto criação write=false. zero meta/budget/cron/restart.",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json; data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json; discord:thread:1541578556037927053; discord:thread:1541578596253175858",
+      "state": "rotas criar campanhas e diario corrigidas após relatórios fora de escopo: prompts exatos ativos e confirmados por readback; contrato, account e skill v0.12.0 sincronizados; relatórios determinísticos separados; diario exclusivamente read_only e sob demanda, com plano 06:00-22:00 et, post=false, cron=false, writes=false; números antigos não são verdade ativa; 68/68 testes pass; renderer diario ainda omite budget/status/start_time e layout híbrido final segue pendente",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-29T22:07:42+00:00"
+      "updated_at": "2026-08-29T22:43:00+00:00"
     },
     {
       "agent": "ares",
@@ -1402,5 +1402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T22:07:42+00:00"
+  "updated_at": "2026-08-29T22:43:00+00:00"
 }

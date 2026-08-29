@@ -192,7 +192,22 @@
           "native Meta rules inventory",
           "global model/provider/tools/security configuration",
           "stale campaign or scheduler snapshots"
-        ]
+        ],
+        "latest_correction": {
+          "corrected_at_et": "2026-08-29T18:37:15-04:00",
+          "reason": "the Daily thread incorrectly answered a generic rules/automation request with the full Eggbev operation and stale runtime snapshots",
+          "historical_report_superseded": true,
+          "exact_thread_prompt_active": true,
+          "active_prompt_readback_equal": true,
+          "configuration_report_verified": true,
+          "live_read_only_report_verified": true,
+          "tests_passed": 68,
+          "renderer_complete": false,
+          "post_enabled": false,
+          "cron_enabled": false,
+          "writes_enabled": false,
+          "audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json"
+        }
       }
     }
   },
