@@ -255,15 +255,16 @@ class TokenMonitorTests(unittest.TestCase):
             setattr(mod, 'discord_request', original)
         self.assertEqual([method for method, _ in calls], ['POST', 'GET'])
 
-    def test_unresolved_incident_counts_repeats_and_open_age(self):
+    def test_active_incident_is_sent_once_on_next_day_and_not_repeated_intraday(self):
         alert = self.alerts()[0]
         state = mod.initial_state()
         mod.register_incidents(state, [alert], ['111'], at='2026-08-26T10:00:00-04:00')
+        state['daily']['date'] = '2026-08-26'
         posted = {}
         post_order = []
         def fake_request(method, path, body=None, allow_404=False):
             if method == 'POST':
-                message_id = str(222 + 111 * len(post_order))
+                message_id = str(222 + len(post_order))
                 posted[message_id] = body
                 post_order.append(message_id)
                 return 200, {'id': message_id}
@@ -283,50 +284,64 @@ class TokenMonitorTests(unittest.TestCase):
         original = mod.discord_request
         setattr(mod, 'discord_request', fake_request)
         try:
-            first = mod.process_incident_reminders(
+            same_day = mod.process_daily_incident_cycle(
                 state,
                 '123',
                 False,
-                now_value=datetime.fromisoformat('2026-08-26T13:00:01-04:00'),
+                now_value=datetime.fromisoformat('2026-08-26T16:00:01-04:00'),
+                sleep_func=lambda _: None,
             )
-            second = mod.process_incident_reminders(
+            next_day = mod.process_daily_incident_cycle(
                 state,
                 '123',
                 False,
-                now_value=datetime.fromisoformat('2026-08-26T16:00:02-04:00'),
+                now_value=datetime.fromisoformat('2026-08-27T00:12:00-04:00'),
+                sleep_func=lambda _: None,
+            )
+            again_next_day = mod.process_daily_incident_cycle(
+                state,
+                '123',
+                False,
+                now_value=datetime.fromisoformat('2026-08-27T12:00:00-04:00'),
+                sleep_func=lambda _: None,
             )
         finally:
             setattr(mod, 'discord_request', original)
-        self.assertEqual(first['reminded'], 1)
-        self.assertEqual(second['reminded'], 1)
+        self.assertEqual(same_day['daily_sent'], 0)
+        self.assertEqual(next_day['daily_sent'], 1)
+        self.assertEqual(again_next_day['daily_sent'], 0)
         incident = next(iter(state['incidents'].values()))
-        self.assertEqual(incident['message_ids'], ['111', '222', '333'])
-        self.assertEqual(incident['repeat_count'], 2)
-        self.assertEqual(posted['222']['embeds'][0]['title'], 'LEMBRETE #1 — FINANCEADX — Token Messenger inválido')
-        self.assertEqual(posted['222']['embeds'][0]['footer']['text'], 'Aberto há 3h · repetido 1x · SB #100')
-        self.assertEqual(posted['333']['embeds'][0]['title'], 'LEMBRETE #2 — FINANCEADX — Token Messenger inválido')
-        self.assertEqual(posted['333']['embeds'][0]['footer']['text'], 'Aberto há 6h · repetido 2x · SB #100')
+        self.assertEqual(incident['message_ids'], ['111', '222'])
+        self.assertEqual(incident['repeat_count'], 0)
+        self.assertEqual(posted['222']['embeds'][0]['title'], 'FINANCEADX — Token Messenger inválido')
+        self.assertEqual(state['daily']['date'], '2026-08-27')
 
-    def test_new_source_alert_for_active_incident_is_counted_as_repeat(self):
+    def test_new_source_alert_for_active_incident_is_suppressed_intraday(self):
         alert = self.alerts()[0]
         state = mod.initial_state()
         mod.register_incidents(state, [alert], ['111'], at='2026-08-26T10:00:00-04:00')
         newer = dict(alert)
         newer['notification_id'] = 101
-        specs = mod.selected_delivery_specs(
-            state,
-            [newer],
-            now_value=datetime.fromisoformat('2026-08-26T11:00:00-04:00'),
-        )
-        payload = mod.build_payloads_from_specs([newer], specs)[0]
-        self.assertEqual(specs[0]['repeat_count'], 1)
-        self.assertEqual(payload['embeds'][0]['title'], 'LEMBRETE #1 — FINANCEADX — Token Messenger inválido')
-        self.assertEqual(payload['embeds'][0]['footer']['text'], 'Aberto há 1h · repetido 1x · SB #101')
+        def fake_request(method, path, body=None, allow_404=False):
+            return 200, {'id': '111', 'channel_id': '123', 'reactions': []}
+        original = mod.discord_request
+        setattr(mod, 'discord_request', fake_request)
+        try:
+            deliverable, stats = mod.classify_new_alerts(state, [newer], '123', False)
+        finally:
+            setattr(mod, 'discord_request', original)
+        self.assertEqual(deliverable, [])
+        self.assertEqual(stats['suppressed_active'], 1)
+        incident = next(iter(state['incidents'].values()))
+        self.assertEqual(incident['alert']['notification_id'], 101)
+        self.assertEqual(incident['notification_ids'], [100, 101])
 
-    def test_checkmark_resolves_incident_and_stops_reminder(self):
+    def test_reacted_incident_reopens_only_for_new_source_alert(self):
         alert = self.alerts()[0]
         state = mod.initial_state()
         mod.register_incidents(state, [alert], ['111'], at='2026-08-26T10:00:00-04:00')
+        newer = dict(alert)
+        newer['notification_id'] = 101
         def fake_request(method, path, body=None, allow_404=False):
             return 200, {
                 'id': '111',
@@ -336,19 +351,13 @@ class TokenMonitorTests(unittest.TestCase):
         original = mod.discord_request
         setattr(mod, 'discord_request', fake_request)
         try:
-            stats = mod.process_incident_reminders(
-                state,
-                '123',
-                False,
-                now_value=datetime.fromisoformat('2026-08-26T13:00:01-04:00'),
-            )
+            deliverable, stats = mod.classify_new_alerts(state, [newer], '123', False)
         finally:
             setattr(mod, 'discord_request', original)
         self.assertEqual(stats['resolved'], 1)
         incident = next(iter(state['incidents'].values()))
         self.assertEqual(incident['status'], 'resolved')
-        newer = dict(alert)
-        newer['notification_id'] = 101
+        self.assertEqual([row['notification_id'] for row in deliverable], [101])
         mod.register_incidents(state, [newer], ['222'], at='2026-08-26T18:00:00-04:00')
         reopened = next(iter(state['incidents'].values()))
         self.assertEqual(reopened['status'], 'active')
@@ -356,6 +365,22 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(reopened['opened_at'], '2026-08-26T18:00:00-04:00')
         self.assertEqual(reopened['message_ids'], ['222'])
         self.assertEqual(reopened['notification_ids'], [101])
+
+    def test_duplicate_new_source_rows_deliver_only_latest_incident_snapshot(self):
+        alert = self.alerts()[0]
+        first = dict(alert)
+        first['notification_id'] = 101
+        second = dict(alert)
+        second['notification_id'] = 102
+        deliverable, stats = mod.classify_new_alerts(
+            mod.initial_state(),
+            [first, second],
+            '123',
+            True,
+        )
+        self.assertEqual([row['notification_id'] for row in deliverable], [102])
+        self.assertEqual(stats['source_rows'], 2)
+        self.assertEqual(stats['deduped_incidents'], 1)
 
     def test_malformed_body_fails_closed(self):
         data = self.fixture()
