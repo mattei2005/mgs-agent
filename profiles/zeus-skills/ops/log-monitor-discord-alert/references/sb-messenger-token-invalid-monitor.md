@@ -23,22 +23,22 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 
 - Dedicated channel: `#seguradores-token-fb` (`1521350832426188961`).
 - Zeus bot transport; exactly one Discord message and one embed per affected Messenger user so a ✅ reaction resolves one incident only.
-- Every alert and reminder mentions both team roles once: Gestor de Trafego (`1496256346994249912`) and Admin (`1496260941787168848`). Set `allowed_mentions.parse=[]` and explicitly list only those two role IDs.
+- Every initial/new-incident and ET-date-rollover delivery mentions both team roles once: Gestor de Trafego (`1496256346994249912`) and Admin (`1496260941787168848`). Set `allowed_mentions.parse=[]` and explicitly list only those two role IDs.
 - Keep the embed compact: put the uppercased site/domain first in the title (`SITE — Token Messenger inválido`).
 - Show only three fields: `User`, `Segurador` and `Páginas`. Do not add explanatory description, company, visible source or a separate detection-time field.
 - Keep the short content line `<roles> · Reaja ✅ quando resolver.` and compact footer/timestamp metadata for audit and dedupe.
-- Canary titles start with `CANÁRIO`. Initial production alerts have no repetition badge. Repeated deliveries use `LEMBRETE #N — SITE — Token Messenger inválido`, where `N` counts only repetitions after the initial alert.
-- Repeated-alert footers show `Aberto há Hh · repetido Nx · SB #ID`; keep the initial alert footer compact.
+- Canary titles start with `CANÁRIO`. Production alerts always use the unbadged `SITE — Token Messenger inválido` form.
+- Never emit numbered or three-hour reminders. The same stable incident can appear at most once per ET calendar day.
 - After POST, GET the exact message and verify target channel, exact content, title, color, footer, fields, one embed and both `mention_roles` IDs.
 
 ## State, resolution and idempotency
 
-- Deduplicate initial deliveries by numeric SB notification ID.
-- Stable incident key: `company + domain + user_id + segurador_id`.
-- A ✅ reaction on the latest Discord message is the explicit resolution signal. Mark the incident resolved and stop reminders.
-- If no ✅ exists, repeat the alert after three hours; every repeated message mentions both team roles again and increments `repeat_count` exactly once. A newer SB notification for the same still-active incident is also rendered as the next numbered repetition and resets the three-hour timer.
+- Deduplicate source processing by numeric SB notification ID and delivery by stable incident key `company + domain + user_id + segurador_id`.
+- A ✅ reaction on the latest Discord message is the explicit resolution signal. At ET rollover and when a newer source notification arrives, read the latest message before deciding whether the lifecycle remains active.
+- On the first monitor run after an ET date rollover, send exactly one fresh, unbadged message for every still-active incident. Store the ET date and a resumable daily outbox before delivery so a crash cannot create an uncontrolled duplicate batch.
+- During the same ET day, a newer SB notification for an already-active stable key is suppressed from Discord but updates the incident's latest sanitized snapshot and notification-ID history. A genuinely new key is delivered once.
 - After ✅, a later SB notification with the same stable key opens a new lifecycle with `repeat_count=0`; the prior acknowledgement never becomes a permanent ignore.
-- Keep `opened_at`, `last_sent_at`, `resolved_at`, `repeat_count`, notification IDs, recent message IDs and the latest sanitized alert snapshot per incident.
+- Keep `opened_at`, `last_sent_at`, `resolved_at`, notification IDs, recent message IDs and the latest sanitized alert snapshot per incident. `repeat_count` remains zero under the daily-only policy.
 - On first production run, seed a baseline at the maximum current ID and do not replay historical alerts or create incidents from history.
 - Persist an outbox/pending intent before delivery. After every delivered message, persist its Discord message ID.
 - On restart, GET and verify already delivered messages, then resume only missing messages.
@@ -47,9 +47,9 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 
 ## Schedule and validation
 
-- Canonical cadence: `12,27,42,57 * * * *` with `flock -n` and durable `/root/.local/share/mgs/sb-venv/bin/python` under `xvfb-run -a`.
+- Canonical monitor cadence: `12,27,42,57 * * * *` with `flock -n` and durable `/root/.local/share/mgs/sb-venv/bin/python` under `xvfb-run -a`. The `00:12 ET` run is the normal first daily sweep: it resends each still-active incident once; later runs that day emit only genuinely new/reopened incident keys.
 - Daily channel retention runs at `5 0 * * *` in the host timezone `America/New_York` with a separate `flock` and `--cleanup-old-messages --apply`.
-- Retention keeps the current ET calendar day plus the complete previous ET calendar day. It deletes only messages whose embed title normalizes to `Token Messenger inválido` and whose Discord timestamp is before yesterday at `00:00 ET`; unrelated/manual messages are preserved.
+- Retention keeps the current ET calendar day plus the complete previous ET calendar day. It deletes only messages whose embed title normalizes to `Token Messenger inválido` and whose Discord timestamp is before yesterday at `00:00 ET`; unrelated/manual messages are preserved. Example: messages from day 29 remain through day 30 and are deleted at `00:05 ET` on day 31.
 - Retention must paginate the full channel, preflight exact IDs, delete sequentially with about 0.45 seconds between requests, honor numeric `retry_after + 0.25s` for up to eight attempts, and repaginate after deletion. Success requires zero eligible messages remaining.
 - Retention status is stored independently under `state.retention`; normal monitor success must not erase its failure counter. After three consecutive retention failures, alert Rodolfo in `#alerts-infra` with the exact blocker.
 - Stale-log watchdog tolerance: 75 minutes for the explicit 15-minute list.

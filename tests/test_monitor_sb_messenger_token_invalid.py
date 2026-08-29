@@ -1,3 +1,4 @@
+import asyncio
 import importlib.util
 import io
 import json
@@ -8,6 +9,7 @@ import tempfile
 import unittest
 from datetime import datetime
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 SCRIPT = Path('/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py')
@@ -69,7 +71,10 @@ class TokenMonitorTests(unittest.TestCase):
             self.assertEqual(stat.S_IMODE(path.stat().st_mode), 0o600)
             loaded = mod.load_state(path)
             self.assertEqual(loaded['last_seen_id'], 0)
-            self.assertEqual(loaded['_meta']['reminder_hours'], 3)
+            self.assertEqual(
+                loaded['_meta']['daily_cycle'],
+                'one fresh delivery per active incident after ET date rollover; no intraday repeats',
+            )
 
     def test_retention_cutoff_keeps_only_previous_day_and_current_day(self):
         cutoff = mod.retention_cutoff(
@@ -381,6 +386,43 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual([row['notification_id'] for row in deliverable], [102])
         self.assertEqual(stats['source_rows'], 2)
         self.assertEqual(stats['deduped_incidents'], 1)
+
+    def test_run_suppresses_active_incident_intraday_and_advances_cursor(self):
+        alert = self.alerts()[0]
+        calls = []
+        def fake_request(method, path, body=None, allow_404=False):
+            calls.append((method, path))
+            return 200, {'id': '111', 'channel_id': '123', 'reactions': []}
+        with tempfile.TemporaryDirectory() as directory:
+            state_path = Path(directory) / 'state.json'
+            state = mod.initial_state()
+            mod.register_incidents(state, [alert], ['111'], at=mod.now_iso())
+            state['last_seen_id'] = 99
+            state['daily']['date'] = datetime.now(mod.NY).date().isoformat()
+            mod.save_state(state_path, state)
+            args = SimpleNamespace(
+                cleanup_old_messages=False,
+                fixture=str(FIXTURE),
+                test_alert=False,
+                baseline=False,
+                dry_run=False,
+                state_path=str(state_path),
+                channel_id='123',
+            )
+            output = io.StringIO()
+            original = mod.discord_request
+            setattr(mod, 'discord_request', fake_request)
+            try:
+                with patch('sys.stdout', output):
+                    result = asyncio.run(mod.run(args))
+            finally:
+                setattr(mod, 'discord_request', original)
+            loaded = mod.load_state(state_path)
+        self.assertEqual(result, 0)
+        self.assertEqual(json.loads(output.getvalue())['mode'], 'suppressed')
+        self.assertEqual(loaded['last_seen_id'], 100)
+        self.assertEqual(loaded['last_delivery']['message_ids'], [])
+        self.assertEqual([method for method, _ in calls], ['GET'])
 
     def test_malformed_body_fails_closed(self):
         data = self.fixture()

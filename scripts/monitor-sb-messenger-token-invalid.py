@@ -44,7 +44,6 @@ UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 MAX_EMBEDS = 10
 MAX_DELIVERED_IDS = 1000
 MAX_INCIDENTS = 1000
-REMINDER_HOURS = 3
 TEAM_ROLE_IDS = ['1496256346994249912', '1496260941787168848']
 TEAM_MENTIONS = ' '.join(f'<@&{role_id}>' for role_id in TEAM_ROLE_IDS)
 
@@ -73,7 +72,7 @@ def initial_state() -> dict[str, Any]:
             'companies': sorted(MGS_COMPANIES),
             'mentions': {'roles': TEAM_ROLE_IDS},
             'resolution': 'reaction ✅ on the incident message',
-            'reminder_hours': REMINDER_HOURS,
+            'daily_cycle': 'one fresh delivery per active incident after ET date rollover; no intraday repeats',
         },
         'last_check': None,
         'last_seen_id': 0,
@@ -613,28 +612,6 @@ def message_has_resolution_reaction(channel_id: str, message_id: str) -> bool:
     )
 
 
-def selected_delivery_specs(
-    state: dict[str, Any],
-    alerts: list[dict[str, Any]],
-    now_value: datetime | None = None,
-) -> list[dict[str, Any]]:
-    now_value = now_value or datetime.now(NY)
-    stamp = now_value.isoformat(timespec='seconds')
-    incidents = state.get('incidents') or {}
-    specs: list[dict[str, Any]] = []
-    for alert in alerts:
-        incident = incidents.get(incident_key(alert))
-        if isinstance(incident, dict) and incident.get('status') == 'active':
-            specs.append({
-                'repeat_count': int(incident.get('repeat_count') or 0) + 1,
-                'opened_at': str(incident.get('opened_at') or stamp),
-                'rendered_at': stamp,
-            })
-        else:
-            specs.append({'repeat_count': 0, 'opened_at': stamp, 'rendered_at': stamp})
-    return specs
-
-
 def build_payloads_from_specs(alerts: list[dict[str, Any]], specs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if len(alerts) != len(specs):
         raise RuntimeError('delivery specs length mismatch')
@@ -883,50 +860,6 @@ def process_daily_incident_cycle(
     })
     stats['daily_sent'] = len(message_ids)
     persist()
-    return stats
-
-
-def process_incident_reminders(
-    state: dict[str, Any],
-    channel_id: str,
-    dry_run: bool,
-    skip_keys: set[str] | None = None,
-    now_value: datetime | None = None,
-) -> dict[str, int]:
-    now_value = now_value or datetime.now(NY)
-    skip_keys = skip_keys or set()
-    stats = {'active': 0, 'resolved': 0, 'reminded': 0, 'would_remind': 0}
-    for key, incident in list((state.get('incidents') or {}).items()):
-        if not isinstance(incident, dict) or incident.get('status') != 'active':
-            continue
-        stats['active'] += 1
-        message_ids = [str(value) for value in incident.get('message_ids') or []]
-        if not dry_run and message_ids and message_has_resolution_reaction(channel_id, message_ids[-1]):
-            incident['status'] = 'resolved'
-            incident['resolved_at'] = now_value.isoformat(timespec='seconds')
-            stats['resolved'] += 1
-            continue
-        if key in skip_keys:
-            continue
-        last_sent = parse_dt(str(incident.get('last_sent_at') or incident.get('opened_at') or now_value.isoformat()))
-        if now_value.astimezone(last_sent.tzinfo) - last_sent < timedelta(hours=REMINDER_HOURS):
-            continue
-        if dry_run:
-            stats['would_remind'] += 1
-            continue
-        next_repeat_count = int(incident.get('repeat_count') or 0) + 1
-        opened_at = str(incident.get('opened_at') or now_value.isoformat(timespec='seconds'))
-        payload = build_payloads(
-            [dict(incident['alert'])],
-            repeat_counts=[next_repeat_count],
-            opened_ats=[opened_at],
-            now_value=now_value,
-        )[0]
-        message_id = post_and_verify(channel_id, payload)
-        incident['message_ids'] = (message_ids + [message_id])[-20:]
-        incident['last_sent_at'] = now_value.isoformat(timespec='seconds')
-        incident['repeat_count'] = next_repeat_count
-        stats['reminded'] += 1
     return stats
 
 

@@ -4,6 +4,7 @@
       "digital-trust",
       "digital-trust-2"
     ],
+    "daily_cycle": "one fresh delivery per active incident after ET date rollover; no intraday repeats",
     "description": "Mirror de alertas SB Messenger user token invalid; sem tokens brutos.",
     "mentions": {
       "roles": [
@@ -11,12 +12,20 @@
         "1496260941787168848"
       ]
     },
-    "reminder_hours": 3,
     "resolution": "reaction ✅ on the incident message",
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
   "consecutive_failures": 0,
+  "daily": {
+    "date": "2026-08-29",
+    "last_result": {
+      "at": "2026-08-29T02:27:14-04:00",
+      "resolved": 0,
+      "sent": 0
+    },
+    "pending": null
+  },
   "delivered_ids": [
     673973,
     674031,
@@ -1169,7 +1178,7 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-08-29T02:12:14-04:00",
+  "last_check": "2026-08-29T02:29:31-04:00",
   "last_delivery": {
     "at": "2026-08-28T20:12:47-04:00",
     "message_ids": [
