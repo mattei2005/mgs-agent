@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "controlled_write_authorized_manifest_prevalidated",
+  "status": "controlled_write_recovery_manifest_prevalidated",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -152,14 +152,16 @@
   "write_enabled": true,
   "activation_enabled": true,
   "pilot_request": {
-    "request_id": "cpv05-c51-c53-20260829-nicolas",
+    "request_id": "cpv05-c51-c53-20260829-nicolas-r1",
+    "parent_request_id": "cpv05-c51-c53-20260829-nicolas",
     "supersedes_request_id": "cpv05-first3-20260828",
     "requested_by": "Nicolas Holanda",
     "authorization_source": "discord:thread:1543069402440671333",
     "campaign_numbers": [51, 52, 53],
-    "creation_mode": "clone_prestaged",
-    "source_campaign_id": "120247422013610046",
-    "source_adset_id": "120247422013660046",
+    "creation_mode": "from_zero_prestaged",
+    "source_campaign_id": "120250888205860632",
+    "source_adset_id": "120250888205580632",
+    "source_role": "CARRO compliant reference only; no clone edges",
     "campaign_status": "ACTIVE",
     "requested_start_time": "2026-08-29T00:00:00-03:00",
     "effective_start_time": "2026-08-29T01:45:00-03:00",
@@ -172,8 +174,9 @@
     "operational_envelope_floor_usd": 500.0,
     "operational_envelope_balance_after_creation_usd": 425.0,
     "activation_requires_remaining_strategy_gates": false,
-    "execution_state": "MANIFEST_PREVALIDATED_READY_TO_EXECUTE",
-    "prevalidation_digest": "c7e196ba4f93a75dce61d4398a0bb36e26a87b41b2c6b7c3b1dd5fb7c60ac620",
+    "execution_state": "RECOVERY1_MANIFEST_PREVALIDATED_READY_TO_EXECUTE",
+    "prevalidation_digest": "7c825c615cd10735aad958fc0dfb3c3456434527564d7e757305f38221ae90a6",
+    "failed_shells_archived": ["120248477878560046", "120248477878580046"],
     "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect"
   },
   "media_gate": {
@@ -232,9 +235,10 @@
   "notes": [
     "Nicolas authorized the one-time creation and ACTIVE publication of C51-C53 at USD25 each in the current operational thread.",
     "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
+    "The initial account05 clone source lacked verified BRAZIL_REGULATION identities; two empty shells were archived after zero-child readback and recovery switched to from_zero_prestaged using account13 C12 as a CARRO compliance reference.",
     "No placeholder thread ID may be used for delivery.",
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-29T04:04:36Z"
+  "updated_at": "2026-08-29T04:16:20Z"
 }
