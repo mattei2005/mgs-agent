@@ -87,7 +87,7 @@ RISK = {
     'monitor-hermes-memory-capacity.py': 'médio: reescreve USER/MEMORY somente após gates fail-closed e backup protegido',
     'sync-sb-sms-revenue-daily.sh': 'médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback',
     'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
-    'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada e publica somente novos alertas deduplicados no Discord',
+    'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada, republica incidentes ativos uma vez por dia e envia novos/reabertos sem repetição intradiária',
 }
 
 OWNER = {
@@ -138,6 +138,8 @@ def parse_cron_line(line: str) -> dict[str, Any] | None:
     if retention_mode:
         risk = 'médio: exclusão limitada de mensagens Discord anteriores ao dia anterior, com readback'
         description = 'Executa retenção diária dos alertas Token Messenger inválido; preserva o dia atual, o dia anterior e mensagens não relacionadas.'
+    elif script_name == 'monitor-sb-messenger-token-invalid.py':
+        description = 'Na virada ET republica cada incidente ainda ativo uma vez; depois envia somente incidentes novos ou reabertos, sem repetição intradiária.'
     return {
         'schedule': schedule,
         'command': command,

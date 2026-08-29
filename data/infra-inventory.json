@@ -1388,26 +1388,26 @@
       "agent": "zeus",
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
       "type": "script",
-      "sha256": "4b98a461c7b2dd92b4847e556d943101f15a056f697f23367850f41521271440",
-      "size_bytes": 13155,
+      "sha256": "14649995e69a9fbc0e5cfa91c77078d5d8efba45759b36ff5d0eced0dd93bf04",
+      "size_bytes": 17047,
       "source": "monarx restart hardening",
-      "validation": "syntax/read validation OK",
+      "validation": "py_compile + monitor cron-policy unit test OK",
       "git_tracked": true,
-      "updated_at": "2026-06-23T10:29:56-04:00"
+      "updated_at": "2026-08-29T02:33:46-04:00"
     },
     {
       "id": "doc-cdba12816d",
       "agent": "zeus",
       "path": "/root/mgs-agent/docs/CRONS.md",
       "type": "ops_doc",
-      "sha256": "009dc4fcb1a917bc7c1b3e4a57941c605dc2641845c1cf56e8f45b08e775bbc0",
-      "size_bytes": 21909,
+      "sha256": "72bd8d854be06cc96acc4e638842d657241dd41bdf76e87d96f91b4ca1ee9e26",
+      "size_bytes": 41957,
       "source": "monarx restart hardening",
       "validation": "syntax/read validation OK",
       "git_tracked": true,
-      "updated_at": "2026-07-04T07:23:47-04:00",
-      "modified_at": "2026-07-04T07:16:13-04:00",
-      "description": "B011 DTR route/canonical alert/cache-clean rules updated."
+      "updated_at": "2026-08-29T02:33:46-04:00",
+      "modified_at": "2026-08-29T02:33:46-04:00",
+      "description": "Cron inventory regenerated with the daily-only SB Messenger incident delivery policy."
     },
     {
       "type": "wordpress_plugin",
@@ -12073,8 +12073,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
-      "size_bytes": 16775,
-      "modified_at": "2026-08-29T02:10:23-04:00"
+      "size_bytes": 17047,
+      "modified_at": "2026-08-29T02:33:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
@@ -12423,8 +12423,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
-      "size_bytes": 44236,
-      "modified_at": "2026-08-29T02:06:58-04:00"
+      "size_bytes": 50610,
+      "modified_at": "2026-08-29T02:27:57-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-restricted-pages.py",
@@ -15432,9 +15432,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 37474,
-      "md5": "d4e693f9140ffd3e69690988aa06ae78",
-      "modified_at": "2026-08-29T02:11:35-04:00"
+      "size_bytes": 37724,
+      "md5": "2ebf7b817174b9f2d277bdad7c1ea1d4",
+      "modified_at": "2026-08-29T02:29:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",

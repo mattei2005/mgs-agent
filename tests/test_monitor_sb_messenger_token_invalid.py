@@ -205,6 +205,16 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertIn('retenção diária', job['description'])
         self.assertIn('exclusão', job['risk'])
 
+    def test_cron_inventory_labels_daily_only_monitor_policy(self):
+        job = cron_mod.parse_cron_line(
+            '12,27,42,57 * * * * flock -n /var/lock/monitor.lock '
+            'xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python '
+            '/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --apply'
+        )
+        self.assertIn('virada ET', job['description'])
+        self.assertIn('sem repetição intradiária', job['description'])
+        self.assertIn('uma vez por dia', job['risk'])
+
     def test_discord_request_retries_seven_rate_limits_before_success(self):
         attempts = []
         delays = []
