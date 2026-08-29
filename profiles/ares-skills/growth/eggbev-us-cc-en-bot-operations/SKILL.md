@@ -24,8 +24,8 @@ Status do contrato       architecture_review_in_progress
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                disabled globally; lead guardrail scoped write approved but runtime blocked
-Crons Eggbev              nenhum; guardrail 15 min pending thread ID + scheduler runtime
+Write Meta                disabled globally; lead guardrail scoped write enabled
+Crons Eggbev              guardrail de leads criado; salvo/enabled, aguardando scheduler gateway
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
 ```
@@ -41,6 +41,7 @@ Regras            1541578622106865815
 Intraday          1541578606076231750
 Diário            1541578596253175858
 Criar campanhas   1541578556037927053
+Limite de Leads   1543312825890381865
 ```
 
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente.
@@ -121,10 +122,12 @@ O alerta obrigatório inclui página, UTM, LEADS, estado `RESTRICTED_UNTIL` da S
 Runtime:
 
 ```text
-Runner   /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
-Wrapper  /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
-Modo     dry-run validado; controlled-write bloqueado até thread ID + runtime
-Cron     não criar/ativar sem thread ID real e gateway scheduler operacional
+Thread fixa           Limite de Leads — Eggbev (`1543312825890381865`)
+Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
+Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
+Modo                   dry-run e controlled-write preflight validados
+Cron                   `*/15 * * * *`, no_agent=true, deliver=local, enabled/scheduled
+Estado do scheduler    gateway parado; job salvo, ainda sem disparo automático
 ```
 
 ## Sequência de implementação
