@@ -411,6 +411,27 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('Freshness máx.', rendered)
         self.assertNotIn('N/D%', rendered)
 
+    def test_unified_renderer_exposes_meta_sb_and_pricing_columns(self):
+        campaign = {
+            'name': 'Campaign pg_12345', 'status': 'ACTIVE', 'utm_campaign': 'pg_12345',
+            'join_status': 'matched', 'spend': 12.0, 'messaging_started': 4.0,
+            'cost_per_messaging_started': 3.0, 'purchase_roas': 0.5, 'cpm': 10.0,
+            'sb_investment': 11.0, 'sb_revenue': 10.0, 'sb_leads': 20.0,
+            'pricing_avg': 6.2, 'pricing_rps': 500.0, 'pricing_epc': 2.0,
+        }
+        period = {
+            'label': 'Parcial atual', 'date': '2026-08-29',
+            'meta': {'campaigns': [campaign], 'source_join_matched': 1},
+            'smart_bidding': daily.aggregate_sb({'ready': True, 'target_report_rows': []}),
+        }
+        rendered = '\n'.join(daily.render_period(period))
+        self.assertIn('Tabela única — Pricing + Meta Ads + Smart Bidding', rendered)
+        self.assertIn('C/msg', rendered)
+        self.assertIn('M.CPM', rendered)
+        self.assertIn('RPS bruto', rendered)
+        self.assertIn('EPC bruto', rendered)
+        self.assertIn('1/1 campanhas', rendered)
+
     def test_discord_split_keeps_fences_balanced_without_omitting_names(self):
         names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
         campaigns = [{
@@ -442,15 +463,34 @@ class ContractTests(unittest.TestCase):
     def test_meta_account_is_exact(self):
         self.assertEqual(self.operation['smart_bidding_reconciliation']['target_meta_account_id'], 'act_1034081997659047')
 
-    def test_runner_build_does_not_enable_writes_or_crons(self):
+    def test_roas_status_writes_and_cron_are_enabled_but_budget_write_is_not(self):
         runtime = self.operation['roas_cycle_policy']['runtime']
-        self.assertFalse(runtime['write_enabled'])
-        self.assertFalse(runtime['cron_enabled'])
+        self.assertTrue(runtime['write_enabled'])
+        self.assertTrue(runtime['post_enabled'])
+        self.assertTrue(runtime['cron_enabled'])
+        self.assertFalse(runtime['budget_write_enabled'])
 
     def test_daily_build_does_not_enable_post_or_cron(self):
         runtime = self.operation['daily_reporting_policy']['runtime']
         self.assertFalse(runtime['post_enabled'])
         self.assertFalse(runtime['cron_enabled'])
+
+    def test_daily_unified_table_contract_uses_exact_keys_and_formulas(self):
+        renderer = self.operation['daily_reporting_policy']['renderer_contract']
+        self.assertIn('unified_sources', renderer['status'])
+        self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])
+        self.assertIn('FB_PAGE_ID', renderer['source_join']['identity_confirmation'])
+        self.assertIn('messaging_conversation_started_7d', renderer['metric_formulas']['cost_per_messaging_started'])
+        self.assertEqual(renderer['metric_formulas']['gross_rps'], 'Smart Bidding REVENUE * 1000 / SESSIONS')
+        self.assertEqual(renderer['metric_formulas']['gross_epc'], 'Smart Bidding REVENUE / ACQUISITION_CLICKS')
+        self.assertIn('BRL', renderer['global_pricing_exclusion'])
+
+    def test_daily_reporting_change_does_not_enable_any_write(self):
+        policy = self.operation['daily_reporting_policy']
+        self.assertEqual(policy['mode'], 'read_only')
+        self.assertFalse(policy['runtime']['post_enabled'])
+        self.assertFalse(policy['runtime']['cron_enabled'])
+        self.assertIn('never cuts', policy['action_policy'])
 
     def test_native_rule_disable_is_future_only(self):
         transition = self.operation['roas_cycle_policy']['native_rule_transition']

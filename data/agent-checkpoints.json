@@ -322,6 +322,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
+      "next_step": "Manter intake e resumo disponíveis. Antes de qualquer validate/plan/write, materializar placements aprovados, cadastrar a conta no Engine v3, pre-stagear mídia e construir/validar o runner; apresentar resumo final e obter OK específico do request.",
+      "objective": "Preservar a configuração operacional aprovada para criação do zero Eggbev US-CC-EN e sua readiness real",
+      "source": "discord:thread:1541578556037927053; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-creation-config-report.py",
+      "state": "nicolas holanda revisou o relatório canônico de criação e confirmou que a configuração atual parece ok e deve ser salva. a confirmação foi persistida na campaign_creation_policy sem ampliar autoridade: creation_write=false e budget_write=false. contrato aprovado; runner eggbev, onboarding engine v3, mídia pre-stageada e placements exatos continuam pendentes.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-08-29T23:30:40+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
       "next_step": "Zeus deve iniciar o scheduler gateway por fluxo seguro fora desta sessão; depois validar o primeiro disparo automático das 20:00 ET. Enquanto isso, o guardrail permanece executável manualmente.",
       "objective": "Operar guardrail determinístico Eggbev duas vezes ao dia e pausar campanhas quando a página reconciliada tiver LEADS > 5000",
@@ -1412,5 +1422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:21:13+00:00"
+  "updated_at": "2026-08-29T23:30:40+00:00"
 }

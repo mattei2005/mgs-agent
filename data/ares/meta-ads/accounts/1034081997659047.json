@@ -31,7 +31,7 @@
         "nicolas_discord_id": "1055570806945620030",
         "budget_write_authority": "Nicolas approved USD 45 only for clone_page_switch after explicit approval of the final per-request summary; other budgets remain request-scoped and gated"
       },
-      "write_mode": "disabled_general_with_scoped_page_lead_guardrail_active",
+      "write_mode": "disabled_general_with_scoped_roas_status_and_page_lead_guardrail_active",
       "runtime_routes": {
         "campaign_creation": {
           "thread_id": "1541578556037927053",
@@ -59,8 +59,12 @@
         },
         "roas_cycle": {
           "runner_built": true,
-          "write_enabled": false,
-          "cron_enabled": false,
+          "write_enabled": true,
+          "post_enabled": true,
+          "cron_enabled": true,
+          "scope": "pause bad ads, reactivate recovered ads paused by Ares, reconcile campaign state and publish every approved cycle",
+          "budget_write_enabled": false,
+          "budget_write_gate": "Rodolfo or Geizian approval plus maximum daily budget or account envelope",
           "target_meta_account": "act_1034081997659047"
         },
         "daily_reporting": {
@@ -111,6 +115,15 @@
         }
       },
       "scoped_write_exceptions": {
+        "roas_status_cycle": {
+          "policy_approved": true,
+          "runtime_enabled": true,
+          "authorized_by": "Nicolas",
+          "authorized_at_et": "2026-08-29T19:29:34-04:00",
+          "actions": ["pause ad", "reactivate Ares-paused ad", "pause campaign when no active ads remain", "reactivate campaign with recovered ad", "post cycle report"],
+          "fail_closed_on": ["source identity or freshness failure", "native rule conflict", "manual intervention", "readback failure"],
+          "budget_write_enabled": false
+        },
         "page_lead_guardrail": {
           "policy_approved": true,
           "runtime_enabled": true,
@@ -123,12 +136,17 @@
         }
       },
       "scheduler_readback": {
-        "checked_at_et": "2026-08-29T15:37:33-04:00",
+        "checked_at_et": "2026-08-29T19:31:11-04:00",
         "gateway_process_running": true,
         "cron_tool_gateway_running": false,
+        "roas_job_enabled": true,
+        "roas_job_state": "scheduled",
+        "roas_job_schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
+        "roas_job_no_agent": true,
+        "roas_job_deliver": "local",
         "lead_job_enabled": true,
         "lead_job_state": "scheduled",
-        "conclusion": "automatic firing unproven until a scheduled post-audit tick is confirmed"
+        "conclusion": "both Eggbev jobs are saved and enabled, but automatic firing is blocked until the scheduler gateway is running and a scheduled tick is confirmed"
       },
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",

@@ -393,6 +393,16 @@
   },
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_pending_runner",
+    "latest_manager_review": {
+      "reviewed_at_et": "2026-08-29T19:29:53-04:00",
+      "reviewed_by": "Nicolas Holanda",
+      "source_thread": "discord:thread:1541578556037927053",
+      "decision": "current operational creation configuration reviewed and accepted for persistence",
+      "review_scope": "output of scripts/ares-eggbev-creation-config-report.py --check",
+      "authority_effect": "no scope or authority expansion",
+      "creation_write_enabled": false,
+      "budget_write_enabled": false
+    },
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
     "tracking_policy": {
@@ -516,7 +526,7 @@
     "metric_empty_but_source_valid": "apply null metric policy; do not confuse with source outage"
   },
   "roas_cycle_policy": {
-    "status": "runner_built_and_live_dry_run_verified_no_cron_no_meta_write",
+    "status": "controlled_write_and_automatic_reporting_authorized_fail_closed",
     "policy_approved": true,
     "executor": "Ares",
     "native_meta_rules_authority": false,
@@ -573,9 +583,13 @@
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-roas-cycle.py",
       "thread_id": "1541578606076231750",
-      "write_enabled": false,
-      "cron_enabled": false,
-      "blocked_reason": "Nicolas authorized runner/tests only; controlled-write and cron await approved live dry-run"
+      "write_enabled": true,
+      "post_enabled": true,
+      "cron_enabled": true,
+      "execution_scope": ["pause_bad_ads", "reactivate_ares_paused_recovered_ads", "pause_or_reactivate_campaign_only_when_required_by_ad_state", "post_every_approved_cycle"],
+      "fail_closed_gates": ["approved_cycle_time", "Meta live readback", "Smart Bidding target identity and freshness", "native rule conflict absent", "manual intervention absent", "pre-read and post-write readback"],
+      "budget_write_enabled": false,
+      "budget_write_blocked_reason": "Nicolas assigned budget-scaling responsibility to this thread, but actual budget writes still require Rodolfo or Geizian approval plus a maximum daily budget or account envelope"
     },
     "native_rule_transition": {
       "rule_name": "ADS ZERO RESULTS",
@@ -609,7 +623,7 @@
     "approval_source": "Nicolas in discord thread 1543280854024060999 on 2026-08-29"
   },
   "next_stage_plan": {
-    "status": "runners_built_and_verified_awaiting_reconciled_live_data_and_activation_approval",
+    "status": "roas_controlled_write_and_reporting_activated_fail_closed_budget_scale_write_pending_financial_gate",
     "goal": "Implement deterministic ROAS cycles, Intraday action reporting and Daily reporting without using native Meta Automated Rules as authority.",
     "step_1_read_only": [
       "inventory native Meta Automated Rules and identify conflicts without changing them",
@@ -628,7 +642,7 @@
       "publish no operational message during calibration unless explicitly requested",
       "show Nicolas the planned cuts, reactivations, campaign transitions and report layouts"
     ],
-    "step_4_activation_gate": "Only after Nicolas approves the dry-run summary, create or enable controlled-write cron jobs and validate their readbacks.",
+    "step_4_activation_gate": "Satisfied for ad/campaign status writes and automatic cycle reporting by Nicolas on 2026-08-29T19:29:34-04:00; budget writes remain separately gated to Rodolfo or Geizian plus an approved envelope.",
     "proposed_jobs": {
       "roas_cycle": {
         "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
@@ -651,11 +665,12 @@
       },
       "page_lead_guardrail": "preserve the current independently approved schedule and runner"
     },
-    "no_change_before_approval": [
-      "no ROAS or Daily cron creation/update",
+    "remaining_no_change_without_separate_approval": [
+      "no Daily cron creation/update",
       "no native Meta rule change",
       "no threshold write",
-      "no campaign/ad/adset write"
+      "no budget write",
+      "no ad set write"
     ],
     "read_only_audit": {
       "at_et": "2026-08-29T14:15:22-04:00",
@@ -858,6 +873,21 @@
     }
   },
   "scheduler_jobs": {
+    "roas_cycle": {
+      "job_id": "51ae40b5a6ef",
+      "name": "Eggbev Corte e ROAS ciclos ET",
+      "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "script": "eggbev-roas-cycle-controlled.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "state": "scheduled",
+      "repeat": "forever",
+      "gateway_running": false,
+      "next_run_at_et": "2026-08-29T20:00:00-04:00",
+      "readback_at_et": "2026-08-29T19:31:11-04:00",
+      "activation_conclusion": "saved and enabled but automatic firing is blocked until the Hermes scheduler gateway is running and a scheduled tick is confirmed"
+    },
     "page_lead_guardrail": {
       "job_id": "c3d2499d8c33",
       "name": "Eggbev limite de leads 08h e 20h ET",
@@ -1068,9 +1098,23 @@
       "creation_final_status"
     ]
   },
+  "intraday_automation_update_20260829_192934": {
+    "at_et": "2026-08-29T19:29:34-04:00",
+    "authorized_by": "Nicolas",
+    "authorization_scope": "make the fixed Corte e ROAS thread responsible for automatic ad pausing, recovery reactivation, required campaign state transitions and cycle reporting",
+    "enabled_actions": ["pause_bad_ads", "reactivate_recovered_ads_paused_by_ares", "pause_campaign_when_no_active_ads_remain", "reactivate_campaign_with_recovered_ad", "post_each_approved_cycle"],
+    "budget_responsibility": "this thread owns budget scale evaluation and reporting",
+    "budget_write_enabled": false,
+    "budget_write_gate": "Rodolfo or Geizian approval plus maximum daily budget or account envelope",
+    "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * * America/New_York",
+    "cron_readback": "enabled, scheduled, script-only, no_agent=true, deliver=local, repeat=forever",
+    "gateway_readback": "false; no restart attempted inside the active session",
+    "live_dry_run": "Meta ok; Smart Bidding freshness unverifiable; zero planned status writes",
+    "tests_passed": 56
+  },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T17:29:12-04:00"
+  "updated_at": "2026-08-29T19:31:11-04:00"
 }
