@@ -145,6 +145,8 @@ Conclusão: o validador retorna `VALID` e confirma que o prefixo de `utm_adgroup
 
 ### 4. Gate read-only antes de recomendar
 
+Em conta que receberá as primeiras campanhas criadas pelo Ares, ou em conta sem campanha ativa no preflight, listar também `act_<ACCOUNT_ID>/adrules_library` e reconciliar toda regra `ENABLED` que possa pausar/alterar campanha, conjunto ou anúncio. Não basta validar apenas a nova hierarquia. Regra histórica ou de teste precisa estar ausente, desativada pelo responsável autorizado ou ter escopo comprovadamente incompatível com os novos IDs antes da ativação. Se houver desligamento inesperado, consultar `act_<ACCOUNT_ID>/activities` e correlacionar `event_time`, `object_id`, `event_type` e `extra_data.rule_info` antes de atribuir a causa à Meta, ao criativo ou ao campaign writer.
+
 Coletar fontes reais do mesmo período/timezone:
 
 ```text
