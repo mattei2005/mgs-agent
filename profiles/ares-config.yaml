@@ -573,12 +573,17 @@ discord:
     '1541578556037927053': |-
       INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
 
-      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006. Clonagem usa a thread 1543333373945053184.
-      - Antes de responder, carregar eggbev-us-cc-en-bot-operations e ler data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json e data/ares/meta-ads/accounts/1034081997659047.json.
-      - Nesta thread, pedidos genericos como sua configuracao, como esta configurada ou relatorio da configuracao significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
-      - Para relatorio de configuracao, executar scripts/ares-eggbev-creation-config-report.py ou usar exatamente os mesmos campos canonicos. Informar conta/estrategia/timezone, readiness real, estrutura Campaign/Ad set/Ads, variaveis, criativos versus copy, JSON Messenger, naming/UTMs, budget/autoridade, resumo final/OK, ACTIVE futuro, readback e bloqueios do Engine v3.
-      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. latest_policy_update e campos ativos vencem secoes historicas.
-      - Nunca publicar diretamente. Primeiro preflight/manifest/plan, depois resumo final e OK explicito. Sucesso exige GET/readback.
+      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`). Clonagem usa a thread `1543333373945053184`.
+      - Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis continuam sujeitos a matriz MGS; a existencia da thread ou um pedido de relatorio nao autoriza write Meta.
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json` e `data/ares/meta-ads/accounts/1034081997659047.json`.
+      - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada" ou "relatorio da configuracao" significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
+      - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py` ou usar exatamente os mesmos campos canonicos. Informar conta/estrategia/timezone, readiness real, estrutura Campaign/Ad set/Ads, variaveis, criativos versus copy, JSON Messenger, naming/UTMs, budget/autoridade, resumo final/OK, `ACTIVE` futuro, readback e bloqueios do Engine v3.
+      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. `latest_policy_update` e os campos ativos vencem secoes historicas.
+      - Nunca publicar diretamente. Primeiro preflight, manifest, validate/plan/dry-run e resumo final; depois esperar OK explicito. Sucesso exige GET/readback de campanha, ad set, ads, creative, status, budget, horario, Page, tracking e JSON.
+      - Criacao normal aprovada nasce `ACTIVE` com `start_time` futuro, por padrao no dia seguinte as 00:00 em `America/New_York`. Canario tecnico `PAUSED` e um modo separado, somente se pedido e aprovado.
+      - Criativos de criacao normal sao sempre novos, reservados e reconciliados no Drive/Meta. Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e videos sao criativos.
+      - Budget de criacao normal e variavel e precisa ser informado na solicitacao. Nenhum valor historico e default.
+      - Placements sao manuais. Enquanto a lista exata de posicoes nao estiver materializada na fonte canonica e validada por readback, nao inventar payload nem liberar manifest/write.
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.
     '1539432300364824607': 'INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR
 
