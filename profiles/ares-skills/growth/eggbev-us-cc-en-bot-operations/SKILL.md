@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.7.0-draft
+version: 0.8.0-draft
 author: Ares
 license: internal
 metadata:
@@ -108,6 +108,7 @@ Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
 Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
 Payer    DIGITAL TRUST; sempre nesta operação
 Budget   variável; confirmar por campanha
+Exceção  clone_page_switch = USD 45, somente após o resumo final daquela solicitação ser aprovado
 ```
 
 Placements são manuais conforme a lista do contrato; nunca converter para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
@@ -171,7 +172,7 @@ Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.p
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
 Modo                   dry-run e controlled-write preflight validados
 Cron                   `0 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled
-Estado do scheduler    gateway parado; job salvo, ainda sem disparo automático
+Estado do scheduler    processo Ares ativo, mas cron tool ainda informa gateway_running=false; automação não é considerada provada até readback de um tick programado após a auditoria
 ```
 
 Quando Nicolas pedir relatório, executar leitura real e mostrar todas as páginas exatamente reconciliadas com campanhas e anúncios ativos. Usar **proximidade ao limite**, sem chamar de previsão estatística:
@@ -203,7 +204,7 @@ Todas as seis rotas fixas foram atualizadas com regras, riscos e testes; a threa
 
 Bloqueios reais antes do canário:
 
-1. scheduler Hermes parado; cron de LEADS salvo não dispara;
+1. observadores do scheduler discordam: processo Ares ativo, cron tool com `gateway_running=false`; confirmar um tick programado antes de confiar na automação de LEADS;
 2. Smart Bidding sem conta 01 no report;
 3. `ADS ZERO RESULTS` ainda ENABLED; desativar somente no gate futuro já autorizado;
 4. `ADS ON 1.1` em `HAS_ISSUES`, sem decisão de remoção/desativação;
@@ -231,7 +232,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        45 incluindo regressões do guardrail de leads
+Testes aprovados        47 incluindo regressões do guardrail, rollover de proveniência e contrato clone_page_switch
 Write ROAS              false
 Post Diário             false
 Cron ROAS/Diário        inexistente

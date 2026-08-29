@@ -39,7 +39,7 @@
       }
     ],
     "other_managers": [],
-    "budget_write_rule": "pending_explicit_eggbev_review; global MGS gates remain in force until superseded by Rodolfo"
+    "budget_write_rule": "USD 45 is approved only for clone_page_switch after Nicolas approves the final per-request summary; every other creation, clone or budget change requires the exact budget confirmed for that request and the global MGS gates remain in force"
   },
   "ares_scope": {
     "included": [
@@ -173,7 +173,14 @@
     "status": "approved_by_nicolas",
     "daily_budget": "variable_per_campaign",
     "must_be_confirmed_before_creation": true,
-    "never_assume_reference_values": true
+    "never_assume_reference_values": true,
+    "mode_exception": {
+      "clone_page_switch": {
+        "daily_budget_usd": 45,
+        "authority": "Nicolas",
+        "scope": "only after the final summary for the specific request is explicitly approved; not a default for creation, pure_clone or clone_prestaged"
+      }
+    }
   },
   "metrics": {
     "status": "approved_core_pending_live_field_mapping",
@@ -394,6 +401,11 @@
       "campaign_reactivation_when_an_ad_recovers": "automatic_with_the_recovered_ad_after_pre-read_and_post-write_readback"
     },
     "recovery": "readback-first; never repeat non-idempotent writes blindly",
+    "provenance_retention": {
+      "policy": "daily threshold reset must preserve Ares paused ad and campaign provenance across dates until reactivation or explicit reconciliation removes it",
+      "implemented_at_et": "2026-08-29T15:37:33-04:00",
+      "regression_tested": true
+    },
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-roas-cycle.py",
       "thread_id": "1541578606076231750",
@@ -683,9 +695,67 @@
     "campaigns_paused_confirmed": 0,
     "mapping_issues": 0
   },
+  "end_to_end_audit": {
+    "at_et": "2026-08-29T15:37:33-04:00",
+    "requested_by": "Nicolas",
+    "tests_passed": 47,
+    "live_readbacks": {
+      "account": "ACTIVE, USD, America/New_York",
+      "active_campaigns": 0,
+      "active_ads": 0,
+      "spend_today_usd": 0,
+      "smart_bidding_target_account_rows": 0,
+      "native_ads_zero_results": "ENABLED",
+      "engine_account_registered": false,
+      "engine_clone_page_switch_supported": false,
+      "roas_daily_post_crons": 0,
+      "lead_guardrail_job": "enabled and scheduled with a previous successful execution recorded",
+      "gateway_process": "running",
+      "cron_tool_gateway_flag": false,
+      "scheduler_conclusion": "observer disagreement; do not trust future automatic firing until a scheduled tick is confirmed after this audit"
+    },
+    "implemented_now": [
+      "ROAS phase decisions and campaign transitions in dry-run",
+      "Daily live read-only report",
+      "page lead guardrail runner with scoped controlled-write",
+      "readback-first write recovery",
+      "cross-day preservation of Ares pause provenance"
+    ],
+    "contract_only_or_blocked": [
+      "campaign creation runner for Eggbev",
+      "all three Eggbev clone modes in Engine v3",
+      "clone_page_switch target-page selector and Messenger JSON transformer",
+      "ROAS controlled-write and automatic posting",
+      "ROAS and Daily crons",
+      "Smart Bidding ROI/RPS/economic formulas",
+      "post-launch serving watcher"
+    ],
+    "open_gaps": [
+      {"severity": "critical", "key": "engine_onboarding", "gap": "Eggbev account, operation manifest and mode-specific payloads are absent from Engine v3; creation and clone cannot reach validate/plan."},
+      {"severity": "critical", "key": "smart_bidding_account_mapping", "gap": "Smart Bidding report does not expose account 01; ROAS writes and economic reconciliation remain fail-closed."},
+      {"severity": "critical", "key": "clone_page_switch_runtime", "gap": "Engine schema rejects clone_page_switch and no page selector or JSON/Page transformer exists."},
+      {"severity": "high", "key": "serving_verification", "gap": "No Eggbev watcher confirms first impression/spend after scheduled start; ACTIVE status alone does not prove delivery."},
+      {"severity": "high", "key": "native_rule_conflict", "gap": "ADS ZERO RESULTS remains enabled and blocks ROAS writes until the approved activation transition."},
+      {"severity": "high", "key": "scheduler_observer_disagreement", "gap": "Gateway runtime is alive but the cron subsystem reports gateway_running=false; automatic LEADS protection is not considered proven until a scheduled tick readback."},
+      {"severity": "high", "key": "external_manual_override_reconciliation", "gap": "A durable rule to detect and retire stale Ares provenance after manager/external status changes is not implemented."},
+      {"severity": "medium", "key": "high_performance_action", "gap": "ROAS above threshold only keeps delivery; no approved budget scaling or winner expansion policy exists."},
+      {"severity": "medium", "key": "economic_source_precedence", "gap": "No approved arbitration rule exists when Meta Purchase ROAS and Smart Bidding ROI disagree or have different freshness."},
+      {"severity": "medium", "key": "smart_bidding_time_window", "gap": "Smart Bidding date payload uses UTC Z boundaries while decisions are ET; source semantics must be validated before economic automation."},
+      {"severity": "medium", "key": "page_freshness", "gap": "The page-lead runner does not validate a source freshness timestamp; clone_page_switch explicitly requires stale pages to be ineligible."},
+      {"severity": "medium", "key": "no_data_phase2", "gap": "An active ad with no insight row is treated as valid N/D and paused in Phase 2; Nicolas should confirm this includes true zero-delivery ads, not only rows returned with an empty ROAS field."},
+      {"severity": "medium", "key": "creation_final_status", "gap": "Creation from zero has no explicit operation-specific final status policy, although the engine default distinguishes technical PAUSED canary from future ACTIVE production."},
+      {"severity": "low", "key": "ads_on_rule", "gap": "Native rule ADS ON 1.1 remains HAS_ISSUES without a keep/disable/remove decision."}
+    ],
+    "resolved_gap": {
+      "key": "daily_provenance_loss",
+      "before": "00:00 reset replaced state and lost the IDs paused by Ares, preventing later automatic recovery",
+      "after": "threshold and daily fields reset while paused ad/campaign provenance survives date rollover",
+      "tests": 2
+    }
+  },
   "write_enabled": false,
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T15:24:29-04:00"
+  "updated_at": "2026-08-29T15:37:33-04:00"
 }

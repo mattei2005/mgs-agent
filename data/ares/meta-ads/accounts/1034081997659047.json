@@ -29,10 +29,22 @@
           "Nicolas"
         ],
         "nicolas_discord_id": "1055570806945620030",
-        "budget_write_authority": "pending_explicit_eggbev_rule_review"
+        "budget_write_authority": "Nicolas approved USD 45 only for clone_page_switch after explicit approval of the final per-request summary; other budgets remain request-scoped and gated"
       },
       "write_mode": "disabled_pending_operational_contract_with_scoped_guardrail_pending_activation",
       "runtime_routes": {
+        "campaign_creation": {
+          "contract_approved": true,
+          "runner_built": false,
+          "engine_account_registered": false,
+          "write_enabled": false
+        },
+        "campaign_cloning": {
+          "contract_modes": ["pure_clone", "clone_prestaged", "clone_page_switch"],
+          "engine_account_registered": false,
+          "clone_page_switch_engine_supported": false,
+          "write_enabled": false
+        },
         "roas_cycle": {
           "runner_built": true,
           "write_enabled": false,
@@ -60,6 +72,14 @@
           "authorized_at_et": "2026-08-29T13:21:16-04:00"
         }
       },
+      "scheduler_readback": {
+        "checked_at_et": "2026-08-29T15:37:33-04:00",
+        "gateway_process_running": true,
+        "cron_tool_gateway_running": false,
+        "lead_job_enabled": true,
+        "lead_job_state": "scheduled",
+        "conclusion": "automatic firing unproven until a scheduled post-audit tick is confirmed"
+      },
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",
       "credential_storage_policy": "reference_only; secret remains in 1Password and must never be copied into config, skill, audit or chat",
@@ -85,7 +105,7 @@
       "account_currency": "USD",
       "region": "United States",
       "gdpr_sensitive": false,
-      "metrics_policy": "pending_review_with_rodolfo"
+      "metrics_policy": "Meta core approved; Smart Bidding ROI/RPS/net-revenue formulas, freshness and source-precedence pending approval"
     }
   ]
 }
