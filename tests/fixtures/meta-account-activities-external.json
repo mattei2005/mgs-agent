@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "event_time": "2026-08-30T15:00:00+0000",
+      "event_type": "update_campaign_budget",
+      "object_id": "999001",
+      "object_name": "99 - fixture external campaign",
+      "object_type": "CAMPAIGN_GROUP",
+      "actor_id": "2983592665336693",
+      "actor_name": "Fixture External User",
+      "application_id": "119211728144504",
+      "application_name": "Power Editor",
+      "translated_event_type": "Campaign budget updated",
+      "extra_data": "{\"old_value\":{\"type\":\"payment_amount\",\"currency\":\"USD\",\"old_value\":2500},\"new_value\":{\"type\":\"payment_amount\",\"currency\":\"USD\",\"new_value\":3000}}"
+    },
+    {
+      "event_time": "2026-08-30T15:00:01+0000",
+      "event_type": "update_ad_run_status",
+      "object_id": "999002",
+      "object_name": "fixture ad",
+      "object_type": "AD",
+      "actor_id": "0",
+      "actor_name": "Meta",
+      "application_id": null,
+      "application_name": null,
+      "translated_event_type": "Ad status updated",
+      "extra_data": "{\"old_value\":\"Pending Review\",\"new_value\":\"Active\"}"
+    }
+  ]
+}

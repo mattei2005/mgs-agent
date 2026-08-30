@@ -2316,6 +2316,40 @@
       "other accounts/operations"
     ]
   },
+  "account_activity_monitor": {
+    "enabled": true,
+    "mode": "account_wide_external_change_alert",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_et": "2026-08-30T12:50:09-04:00",
+    "authorization_source": "discord:thread:1543659546093027519",
+    "scope": "all material account, campaign, ad set, ad, budget, status, targeting, bid, schedule, audience and funding changes on account 1046241194533786",
+    "graph_version": "v26.0",
+    "schedule": "every 5 minutes",
+    "destination_thread_id": "1543659546093027519",
+    "destination_thread_title": "Campanha Camp28 Acho Geizian Mexeu",
+    "alert_policy": "alert only external/manual, Meta/native-rule material changes, or trusted API app changes without matching local Ares audit; never auto-correct",
+    "overlap_seconds": 600,
+    "baseline_days": 2,
+    "retention_days": 14,
+    "max_pages": 8,
+    "audit_match_window_seconds": 1800,
+    "state_path": "data/ares/meta-ads/state/activity-monitors/Creditoparaveiculo-BR-CAR-BR.json",
+    "audit_dir": "data/ares/meta-ads/audit/activity-monitors/Creditoparaveiculo-BR-CAR-BR",
+    "trusted_api_sources": [
+      {
+        "actor_id": "10229590004590742",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "163163106580854",
+        "application_name": "minibot rod"
+      },
+      {
+        "actor_id": "122171858450667280",
+        "actor_name": "Rafael Lucas Oliveira",
+        "application_id": "860397696767230",
+        "application_name": "BrightPath done"
+      }
+    ]
+  },
   "discord_operational_structure": {
     "status": "active_validated_http_200_post_readback",
     "parent_channel": "ares-creditoparaveiculo-br-car-br",
