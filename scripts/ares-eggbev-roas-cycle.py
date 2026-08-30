@@ -89,13 +89,23 @@ def _fmt_signed_percent(value: Any) -> str:
 
 
 def _display_width(value: Any) -> int:
-    text = common.norm(value)
-    return sum(
-        0 if unicodedata.combining(char) or char == '\ufe0f'
-        else 2 if unicodedata.east_asian_width(char) in {'W', 'F'}
-        else 1
-        for char in text
-    )
+    # Preserve generated padding: common.norm() collapses repeated spaces and
+    # made the separator shorter than the rendered table. Discord also renders
+    # a narrow Unicode symbol followed by VS16 as a two-column emoji.
+    text = '' if value is None else str(value)
+    width = 0
+    previous_base_width = 0
+    for char in text:
+        if char == '\ufe0f':
+            if previous_base_width == 1:
+                width += 1
+                previous_base_width = 2
+            continue
+        if char == '\ufe0e' or char == '\u200d' or unicodedata.combining(char):
+            continue
+        previous_base_width = 2 if unicodedata.east_asian_width(char) in {'W', 'F'} else 1
+        width += previous_base_width
+    return width
 
 
 def _fit(value: Any, width: int, align: str = 'left') -> str:

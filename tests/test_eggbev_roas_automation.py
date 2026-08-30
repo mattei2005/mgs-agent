@@ -413,6 +413,31 @@ class ReportingTests(unittest.TestCase):
         self.assertLess(header.index('Entrega'), header.index('Ação'))
         self.assertLess(header.index('Ação'), header.index('Custo por'))
 
+    def test_roas_cycle_dashboard_keeps_unicode_columns_and_spaces_aligned(self):
+        top, bottom, separator = cycle._dashboard_header()
+        base = {
+            'status': 'ACTIVE', 'name': '123 - Campaign - ENG - US - (pg_12345)',
+            'utm_campaign': 'pg_12345', 'sb_page_name': 'Page One',
+            'action_label': 'MANTER', 'cost_per_messaging_started': 3,
+            'cost_per_message': 2, 'messaging_results': 6, 'budget_usd': 45,
+            'spend': 12, 'cpm': 12, 'ctr': 2, 'cpc_link': .4,
+            'sb_cost_subscriber': 1.5, 'sb_revenue': 40, 'sb_profit': 28,
+            'sb_roi_percent': 233.3, 'sb_leads': 20,
+            'sb_drip_roi_percent': 50, 'sb_broadcast_revenue': 18,
+            'roi_real': 12.3, 'roi_estimated': -5.5,
+        }
+        rows = []
+        for roas in (.3, .4, .5, None):
+            row = dict(base, purchase_roas=roas)
+            rows.append(cycle._dashboard_row(1, row, .4))
+        expected_width = cycle._display_width(top)
+        self.assertEqual(cycle._display_width(bottom), expected_width)
+        self.assertEqual(cycle._display_width(separator), expected_width)
+        self.assertTrue(all(cycle._display_width(row) == expected_width for row in rows))
+        self.assertEqual(cycle._display_width('⬇️'), 2)
+        self.assertEqual(cycle._display_width('⬆️'), 2)
+        self.assertEqual(len(separator), expected_width)
+
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
             '## 🛑 CORTE & ROAS',
