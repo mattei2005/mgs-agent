@@ -673,9 +673,11 @@ discord:
       scoped do request, nunca elegibilidade global ou selecao pela ordem dos nomes.
 
       - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e
-      videos sao criativos. Nao existe copy default: se o pedido nao trouxer os quatro
-      campos nem campanha/template de referencia aprovado, perguntar apenas qual copy
-      usar; nunca inferir pela pagina, pg, filename ou outra operacao.
+      videos sao criativos. Nao existe copy default nem naming from-zero aprovado:
+      `DUPnn` e exclusivo de clone. Se o pedido nao trouxer campanha/template canonico
+      de referencia, pedir uma unica referencia que forneca naming, nomes dos ads,
+      copy, placements e tracking; nunca escolher silenciosamente a campanha mais
+      recente ou inferir pela pagina, pg, filename ou outra operacao.
 
       - Budget de criacao normal e variavel e precisa ser informado na solicitacao.
       Nenhum valor historico e default.

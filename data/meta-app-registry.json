@@ -405,6 +405,36 @@
         "sheet_writes": 0,
         "production_baseline_status": "active_fail_closed_pending_expected_roles",
         "source_message_id": "1543020500979163196"
+      },
+      {
+        "app": "B013-4",
+        "item_title": "BOT B013-4 Token - Dayanna Regis",
+        "app_name": "B013-4",
+        "app_metadata_http": 200,
+        "roles_http": 200,
+        "roles_auth": "app_access_token",
+        "roles_count": 4,
+        "user_me_http": 200,
+        "debug_token_http": 200,
+        "token_valid": true,
+        "app_id_match": true,
+        "live_token_profile": "Dayanna Regis",
+        "sheet_no_app_rows": 31,
+        "dtr_targets": 31,
+        "dtr_linked_first_scheduled": 7,
+        "dtr_unlinked_confirmed_first_scheduled": 24,
+        "dtr_unknown_first_scheduled": 0,
+        "dtr_pages_visible_first_scheduled": 40,
+        "graph_pages_visible_first_scheduled": 26,
+        "connected_pages_first_scheduled": 26,
+        "sheet_x_first_scheduled": 24,
+        "scheduled_alert_message_ids": [
+          "1543425383423148085",
+          "1543425384865857607",
+          "1543425385620967507",
+          "1543425386896166944"
+        ],
+        "source_message_id": "1543419014657605735"
       }
     ],
     "secrets_exposed": false,

@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.15.0-draft
+version: 0.15.1-draft
 author: Ares
 license: internal
 metadata:
@@ -162,9 +162,19 @@ Payer    DIGITAL TRUST; sempre nesta operação
 Budget   variável; gestor autorizado escolhe e confirma por campanha; write financeiro mantém gate Rodolfo/Geizian
 ```
 
-Placements são `MANUAL_ONLY`, mas a lista exata de posições ainda não está materializada no contrato canônico. Nunca converter para Advantage+ Placements, copiar a lista de outra operação ou montar manifest/write sem importar e validar o payload aprovado por readback. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
+Placements são `MANUAL_ONLY`, mas a lista exata de posições ainda não está materializada no contrato canônico. Nunca converter para Advantage+ Placements, copiar a lista de outra operação ou montar manifest/write sem importar e validar o payload aprovado por readback. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.
 
-Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
+Interpretação determinística de pedido mínimo:
+
+- `cc en us` normaliza para `CC_US_EN`;
+- “3 campanhas com 3 criativos” = três campanhas, cada uma `1×1×3`, total de nove criativos únicos no lote; nunca reutilizar os mesmos três entre campanhas sem instrução explícita;
+- sem override, aplicar o início no dia seguinte às `00:00 America/New_York` e status de produção `ACTIVE` após o resumo final aprovado, sem perguntar novamente pelo horário;
+- `pg_XXXXX` deve resolver para uma única linha Messenger da Smart Bidding e a Page precisa passar GET Meta;
+- pedir para “puxar da pasta” autoriza a revisão/liberação scoped dos candidatos daquele request, não elegibilidade global nem seleção por ordem de filename.
+
+Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Não existe copy default ativo. Se o pedido não trouxer os quatro campos nem campanha/template de referência aprovado, perguntar somente qual copy usar; nunca inferir pela Page, `pg_XXXXX`, filename ou outra operação. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
+
+O simulador read-only canônico é `python3 scripts/ares-eggbev-creation-intake-simulate.py`. Ele aplica defaults, consulta Page/inventário/media registry e enumera inputs/bloqueios; nunca reserva asset, pre-stageia mídia ou faz write Meta.
 
 O template Messenger é obrigatório. Qualquer mudança de texto, botão, payload ou flags exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
 
@@ -265,7 +275,9 @@ A conta `1034081997659047` está cadastrada no Engine v3 release 3.3.0. `pure_cl
 
 Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, 00:00 ET, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
 
-## Auditoria pré-simulação — 2026-08-29 (histórica)
+## Apêndice histórico não autoritativo — auditoria pré-simulação de 2026-08-29
+
+> **NÃO USAR COMO REGRA OU READINESS ATUAL.** Este apêndice é preservado somente para rastrear o diagnóstico daquele momento. Todas as afirmações de status, naming, budget, Engine, Smart Bidding, layout e bloqueios abaixo foram supersedidas pelas seções ativas anteriores e pelos arquivos canônicos vivos.
 
 Todas as seis rotas fixas foram atualizadas com regras, riscos e testes; a thread de status também foi atualizada e duas threads históricas receberam aviso de supersessão mantendo o estado arquivado. Readback confirmou 16/16 mensagens e Nicolas, Zeus e Rodolfo em todos os nove alvos da API. Um HTTP 429 ocorreu após efeito parcial: o recovery fez GET de todas as threads, pulou membros/posts já confirmados e publicou apenas as camadas ausentes; zero duplicatas no readback final.
 
@@ -319,7 +331,9 @@ O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reati
 
 Na leitura live do renderer v4, a conta Meta estava ativa em USD/ET e sem campanha/anúncio ativo no ciclo porque a campanha disponível estava pausada pelo guardrail de LEADS. A Smart Bidding expôs a conta 01 na rota Messenger e 1 linha econômica exata em `/report/performance_per_campaigns`; `/estimated/delay` retornou freshness válida. O Messenger continua sem timestamp aceito, portanto writes ROAS permanecem fail-closed mesmo quando as métricas econômicas informativas podem ser exibidas.
 
-## Auditoria ponta a ponta — 2026-08-29 15:37 ET (histórica; supersedida abaixo)
+## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
+
+> **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.
 
 Estado comprovado: conta Meta ativa em USD/ET, zero campanhas/ads ativos, zero spend; Fase 1 e Fase 2 executadas em dry-run; Diário live read-only e relatório de LEADS executados; 47 testes aprovados. Smart Bidding continua sem a conta 01 e `ADS ZERO RESULTS` continua ativa, então ROAS write permanece fail-closed.
 

@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 OP_PATH = ROOT / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json"
+OP_V3_PATH = ROOT / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json"
 ACCOUNT_PATH = ROOT / "data/ares/meta-ads/accounts/1034081997659047.json"
 INVENTORY_PATH = ROOT / "data/ares/creative-ops/inventory/assets.jsonl"
 MEDIA_REGISTRY_PATH = ROOT / "data/ares/meta-ads/engine-v3/media-registry.json"
@@ -130,6 +131,7 @@ def next_midnight(now: dt.datetime | None = None) -> str:
 
 def simulate(args: argparse.Namespace) -> dict[str, Any]:
     operation = load_json(OP_PATH)
+    operation_v3 = load_json(OP_V3_PATH)
     account = account_entry()
     account_id = str(account.get("account_id") or "").replace("act_", "")
     required_assets = args.campaign_count * args.creatives_per_campaign
@@ -140,14 +142,27 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
     missing_inputs = []
     if args.daily_budget_usd is None:
         missing_inputs.append("daily_budget_usd_per_campaign")
-    if not args.copy_reference_campaign and not all([args.primary_text, args.headline, args.description, args.cta]):
-        missing_inputs.append("copy_source_or_all_four_copy_fields")
+    explicit_creation_package = all([
+        args.primary_text,
+        args.headline,
+        args.description,
+        args.cta,
+        args.campaign_name_template,
+        args.ad_name_template,
+        args.tracking_reference,
+        args.placements_reference,
+    ])
+    if not args.creation_reference and not explicit_creation_package:
+        missing_inputs.append("canonical_creation_reference_or_explicit_naming_copy_tracking_placements_package")
 
     readiness_blockers = []
-    if operation.get("campaign_creation_contract", {}).get("creation_write_enabled") is not True:
+    runtime_creation = (account.get("runtime_routes") or {}).get("campaign_creation") or {}
+    if runtime_creation.get("write_enabled") is not True:
         readiness_blockers.append("creation_write_disabled")
-    if operation.get("campaign_creation_contract", {}).get("runner_built") is not True:
+    if runtime_creation.get("runner_built") is not True:
         readiness_blockers.append("eggbev_from_zero_runner_not_built")
+    if "from_zero_prestaged" not in (operation_v3.get("supported_modes") or []):
+        readiness_blockers.append("operation_v3_from_zero_mode_not_onboarded")
     adset = operation.get("campaign_structure", {}).get("adset", {})
     if adset.get("placements_mode") == "MANUAL_ONLY" and not adset.get("manual_positions"):
         readiness_blockers.append("exact_manual_placements_not_materialized")
@@ -185,8 +200,9 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
         },
         "provided_inputs": {
             "daily_budget_usd": args.daily_budget_usd,
-            "copy_reference_campaign": args.copy_reference_campaign,
+            "creation_reference": args.creation_reference,
             "copy_complete": all([args.primary_text, args.headline, args.description, args.cta]),
+            "explicit_creation_package_complete": explicit_creation_package,
         },
         "page_preflight": page,
         "creative_inventory": inventory,
@@ -205,11 +221,15 @@ def main() -> int:
     parser.add_argument("--creatives-per-campaign", type=int, choices=[3, 5], required=True)
     parser.add_argument("--source-folder", default="cc en us")
     parser.add_argument("--daily-budget-usd", type=float)
-    parser.add_argument("--copy-reference-campaign")
+    parser.add_argument("--creation-reference")
     parser.add_argument("--primary-text")
     parser.add_argument("--headline")
     parser.add_argument("--description")
     parser.add_argument("--cta")
+    parser.add_argument("--campaign-name-template")
+    parser.add_argument("--ad-name-template")
+    parser.add_argument("--tracking-reference")
+    parser.add_argument("--placements-reference")
     parser.add_argument("--live-page-check", action="store_true")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

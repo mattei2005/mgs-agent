@@ -2080,10 +2080,29 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-dtr-app-b0134-20260829",
+      "title": "B013 substitui B012 no monitor DTR/ChatPion",
+      "updated_at": "2026-08-30T01:06:11+00:00"
+    },
+    {
+      "canonical_key": "meta-app.dtr.current-app",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "meta-app-rate-limit-monitor",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-29T20:40:50-04:00",
+      "id": "decision-meta-dtr-app-b0134-20260829",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B013 substitui B012 no monitor DTR/ChatPion",
-      "updated_at": "2026-08-06T22:56:55+00:00"
+      "title": "B013-4 substitui B013-3 no monitor DTR/ChatPion",
+      "updated_at": "2026-08-30T01:06:11+00:00"
     },
     {
       "canonical_key": "wordpress.access.fincgriffin",
@@ -2334,10 +2353,28 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei / Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "title": "Padrão humano B013-3 para possível restrição em validação persistente",
+      "updated_at": "2026-08-30T01:06:23+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-29T20:40:50-04:00",
+      "id": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Padrão humano B013-3 para possível restrição em validação persistente",
-      "updated_at": "2026-08-21T16:42:29+00:00"
+      "title": "Padrão humano B013-4 para possível restrição em validação persistente",
+      "updated_at": "2026-08-30T01:06:23+00:00"
     },
     {
       "canonical_key": "sb.utility-template-repair.self-healing",
@@ -2377,5 +2414,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:41:54+00:00"
+  "updated_at": "2026-08-30T01:06:23+00:00"
 }
