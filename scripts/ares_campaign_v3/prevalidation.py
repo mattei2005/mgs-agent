@@ -111,7 +111,8 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             raise ManifestError(f"account campaign policy requires status {required_status}")
 
         required_local_time = policy.get("start_local_time")
-        if required_local_time:
+        immediate_override_ids = {str(value) for value in (policy.get("immediate_start_request_ids") or [])}
+        if required_local_time and manifest.request_id not in immediate_override_ids:
             start = datetime.fromisoformat(campaign.start_time.replace("Z", "+00:00"))
             local = start.astimezone(ZoneInfo(str(account.get("timezone") or "UTC")))
             if local.strftime("%H:%M") != str(required_local_time):

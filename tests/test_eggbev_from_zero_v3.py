@@ -145,6 +145,16 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         with self.assertRaisesRegex(ManifestError, "naming policy"):
             validate_account_policy(Manifest.from_dict(payload), CONFIG)
 
+    def test_immediate_start_override_is_scoped_to_the_first_request_only(self) -> None:
+        payload = self._build(campaigns=1)
+        immediate = datetime.now(ZoneInfo("America/New_York")) + timedelta(minutes=10)
+        payload["campaigns"][0]["start_time"] = immediate.isoformat()
+        payload["request_id"] = "another-request"
+        with self.assertRaisesRegex(ManifestError, "start_time 00:00"):
+            validate_account_policy(Manifest.from_dict(payload), CONFIG)
+        payload["request_id"] = "eggbev-pg-5024-20260830-nicolas-01"
+        validate_account_policy(Manifest.from_dict(payload), CONFIG)
+
     def test_policy_rejects_advantage_placements(self) -> None:
         payload = self._build(campaigns=1)
         payload["campaigns"][0]["adset_create"]["targeting"]["publisher_platforms"].append("audience_network")

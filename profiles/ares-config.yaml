@@ -637,7 +637,10 @@ discord:
       - Criacao normal aprovada nasce `ACTIVE` com `start_time` futuro, por padrao no
       dia seguinte as 00:00 em `America/New_York`. Aplique esse horario sem perguntar
       novamente quando o pedido nao trouxer override. Canario tecnico `PAUSED` e um modo
-      separado, somente se pedido e aprovado.
+      separado, somente se pedido e aprovado. Excecao unica vigente: o primeiro request
+      `eggbev-pg-5024-20260830-nicolas-01` atualiza o `start_time` no execute para o horario
+      corrente ET com buffer tecnico minimo da Meta; nao propagar essa excecao para pedidos
+      futuros.
 
       - Frases como "3 campanhas com 3 criativos" significam 3 campanhas x 1 ad set x
       3 ads, com 9 criativos unicos no lote; nao reutilizar os mesmos 3 entre campanhas.
@@ -649,11 +652,12 @@ discord:
       ou consumir/reservar assets antes do pedido real.
 
       - O call natural `criar N campanha(s) pagina X` aplica automaticamente `1x1x3`,
-      pasta `CC_US_EN`, tres criativos ineditos por campanha, referencia canonica `155
-      - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`, naming `[page_sequence]
-      - [Page] - ENG - US - (pg_XXXXX) C0XX para [Primeiro nome] - Copy`, copy aprovada,
-      JSON Messenger, tracking, placements manuais e nomes `AD NN - {canonical_stem}`.
-      `DUPnn` continua exclusivo de clone. Overrides explicitos vencem esses defaults.
+      pasta `CC_US_EN`, tres criativos ineditos por campanha, referencia canonica de copy/estrutura
+      `155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`, naming `[page_sequence]
+      - [Page] - ENG - US - (pg_XXXXX) C0XX`, copy aprovada, JSON Messenger, tracking,
+      placements manuais e nomes `AD NN - {canonical_stem}`. Em lote, a sequencia avanca
+      C001, C002, C003...; `DUPnn` continua exclusivo de clone. Overrides explicitos vencem
+      esses defaults.
 
       - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e videos
       sao criativos. Por compatibilidade API validada, cada ad recebe uma das tres headlines
@@ -682,6 +686,12 @@ discord:
       - O payload direto de campaign, adset, creative e ad passou Meta `validate_only`
       com zero objeto criado; isso nao substitui os gates nem o readback do primeiro write
       real.
+
+      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page, `url_tags`
+      e o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message` correspondem
+      exatamente ao manifest aprovado. Divergencia deixa o request em `POSTPROCESS_PENDING`,
+      preserva IDs e bloqueia a movimentacao dos assets para `02_TESTING`; nunca repetir
+      a criacao.
 
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados apenas
       como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
