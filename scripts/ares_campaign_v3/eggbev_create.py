@@ -206,13 +206,9 @@ def build_eggbev_from_zero_manifest(
     headlines = headlines or ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]
     if not headlines or any(not str(item).strip() for item in headlines):
         raise ValueError("at least one nonempty headline is required")
-    first_name = page_name.split()[0]
     campaigns: list[dict[str, Any]] = []
     for campaign_index, sequence in enumerate(campaign_sequences):
-        campaign_name = (
-            f"{page_sequence} - {page_name} - ENG - US - ({page_token}) "
-            f"C{sequence:03d} para {first_name} - Copy"
-        )
+        campaign_name = f"{page_sequence} - {page_name} - ENG - US - ({page_token}) C{sequence:03d}"
         ads: list[dict[str, Any]] = []
         for ad_index in range(ads_per_campaign):
             global_index = campaign_index * ads_per_campaign + ad_index

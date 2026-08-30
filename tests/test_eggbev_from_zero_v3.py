@@ -78,7 +78,15 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         validate_account_policy(manifest, CONFIG)
         self.assertEqual(len(manifest.campaigns), 3)
         self.assertEqual(sum(len(row.ads) for row in manifest.campaigns), 9)
-        self.assertEqual(manifest.campaigns[0].name, "162 - Amy Shook - ENG - US - (pg_5024) C001 para Amy - Copy")
+        self.assertEqual(manifest.campaigns[0].name, "162 - Amy Shook - ENG - US - (pg_5024) C001")
+        self.assertEqual(
+            [campaign.name for campaign in manifest.campaigns],
+            [
+                "162 - Amy Shook - ENG - US - (pg_5024) C001",
+                "162 - Amy Shook - ENG - US - (pg_5024) C002",
+                "162 - Amy Shook - ENG - US - (pg_5024) C003",
+            ],
+        )
 
     def test_one_by_five_is_supported(self) -> None:
         payload = self._build(campaigns=1, ads_per_campaign=5)

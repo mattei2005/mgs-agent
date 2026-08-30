@@ -95,7 +95,7 @@
         "pure_clone_allowed_update_keys": ["daily_budget"],
         "by_mode": {
           "from_zero_prestaged": {
-            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) C[0-9]{3} para .+ - Copy",
+            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) C[0-9]{3}",
             "budget_source": "campaign_create",
             "allowed_ad_counts": [3, 5],
             "required_campaign_create": {

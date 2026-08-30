@@ -355,10 +355,10 @@
     "ad_name": "provided_per_creative; missing name blocks publication",
     "creation_from_zero": {
       "status": "approved_by_nicolas_and_materialized",
-      "pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX para [Page first name] - Copy",
+      "pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX",
       "page_sequence": "for a Page not found in the cross-account Eggbev EN naming scan, allocate the next global free numeric prefix immediately before manifest sealing; an existing Page with conflicting prefixes fails closed",
       "campaign_sequence": "use the next free C001, C002, C003... for the exact pg token after a cross-account non-deleted collision scan",
-      "reference_example": "155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy",
+      "reference_example": "162 - Amy Shook - ENG - US - (pg_5024) C001",
       "ad_name": "provided_per_creative; if missing ask once before manifest/publication",
       "forbidden": "do not append DUPnn because there is no source campaign in from-zero creation"
     }
@@ -521,7 +521,7 @@
     "creation_reference_policy": {
       "default_reference_campaign": "155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy",
       "source_account": "Eggbev-US-CC-EN-03 (FAX-US-02)",
-      "reference_scope": ["from-zero campaign naming", "ad set name", "copy fields", "manual placements enum mapping", "Messenger creative structure"],
+      "reference_scope": ["ad set name", "copy fields", "manual placements enum mapping", "Messenger creative structure"],
       "override_policy": "current request instructions and the separately approved Messenger flags win over any conflicting reference field",
       "can_supply_when_explicitly_approved": ["copy", "from-zero naming template", "individual ad naming rule", "manual placements payload", "tracking/url_tags structure"],
       "duplicate_name_policy": "never select an arbitrary campaign ID; use only fields consistent with the approved reference/readback and explicit later overrides"
