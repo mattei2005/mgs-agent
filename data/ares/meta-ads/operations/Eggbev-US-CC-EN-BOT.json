@@ -998,7 +998,8 @@
           "relevant_tests": "68/68 passed",
           "meta_writes": 0
         },
-        "scope": "report presentation only; no change to campaign identity in Meta, naming writes, metrics, ROAS decisions, writes, schedules or budget authority"
+        "scope": "report presentation only; no change to campaign identity in Meta, naming writes, metrics, ROAS decisions, writes, schedules or budget authority",
+        "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/campaign-key-pagination-v17-20260830.json"
       },
       "purpose": "replicate the organized, spaced and visible CPV 13 Intraday desktop table for Eggbev ROAS reporting",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",

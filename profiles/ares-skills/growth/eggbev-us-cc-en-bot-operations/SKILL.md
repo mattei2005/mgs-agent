@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.21.0-draft
+version: 0.22.0-draft
 author: Ares
 license: internal
 metadata:
@@ -416,6 +416,12 @@ Por instrução explícita de Nicolas em `2026-08-30`, o relatório não exibe m
 Por confirmação de Nicolas em `2026-08-30`, `R/E` mostra sempre dois sinais nesta ordem: **ROI atual / ROI estimado futuro**. O estimado do Ares vem de `Smart Bidding /estimated/revenue/utm_adgroup`, o mesmo backend de estimativa que alimenta a segunda linha de ROI na tela **Messenger Pages**; Ares consulta a API, não raspa a interface. A composição validada da tela é: `/campaigns/Messenger` para identidade e LEADS, `/report/messenger` para economia atual da página, `/estimated/revenue/utm_adgroup` para receita futura e `/estimated/delay` para freshness. No relatório por campanha, o estimado continua exigindo o join exato de conta + campanha + UTM e UTM única.
 
 As duas posições de `R/E` usam as mesmas faixas: `🟢` ROI `>= 0%`; `🟡` ROI `< 0%` e `> -20%`; `🔴` ROI `<= -20%`; `⚪` indisponível. Exemplos do print do gestor: `20,74% / 31,19% → 🟢🟢`; `-11,34% / 8,36% → 🟡🟢`; `-9,52% / -7,31% → 🟡🟡`; `-24,75% / -16,52% → 🔴🟡`. Esta revisão altera somente a apresentação e a documentação da fonte; não muda Purchase ROAS, corte, reativação, writes, schedules, budget ou autoridade.
+
+### Refinamento visual v17 — variantes de campanha e escala para 50+ linhas
+
+Por instrução de Nicolas em `2026-08-30`, a coluna `Camp` preserva a sequência, a campanha `Cnnn`, a duplicação `DUPnn` e a UTM em uma chave compacta. Exemplo: `162·C001·D01/pg_5024` significa sequência `162`, campanha `C001`, duplicação `DUP01` e UTM `pg_5024`. A base sem duplicação aparece como `162·C001/pg_5024`; `DUP02`, `DUP03` e `DUP04` aparecem como `D02`, `D03` e `D04`. Componentes ausentes no nome Meta real são omitidos, nunca inventados.
+
+Para antecipar relatórios com mais de 50 campanhas, o renderer ordena naturalmente por sequência, UTM, `Cnnn` e `DUPnn`, mantendo a família junta. Cada bloco mostra no máximo dez campanhas e também respeita o limite de caracteres do Discord; o cabeçalho completo se repete com `Parte N/T`, nenhuma linha é dividida e nenhuma campanha é omitida. Fixture de 55 variantes confirmou 55 chaves únicas, ordem `D01 → D55`, seis blocos, até 1.385 caracteres por bloco e fences balanceadas. A mudança é somente visual e não altera nome na Meta, métricas, corte, reativação, writes, schedules, budget ou autoridade.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

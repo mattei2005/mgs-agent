@@ -1487,10 +1487,29 @@
       "kind": "decision",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V17-20260830",
+      "title": "Eggbev Corte e ROAS v16 confirma Messenger Pages e três faixas R/E",
+      "updated_at": "2026-08-30T23:44:58+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T19:36:24-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V17-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev Corte e ROAS v16 confirma Messenger Pages e três faixas R/E",
-      "updated_at": "2026-08-30T23:28:45+00:00"
+      "title": "Eggbev Corte e ROAS v17 diferencia C/DUP e pagina em blocos de dez",
+      "updated_at": "2026-08-30T23:44:58+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -2739,5 +2758,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T23:28:45+00:00"
+  "updated_at": "2026-08-30T23:44:58+00:00"
 }
