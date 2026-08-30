@@ -363,12 +363,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PG5024-STANDARDIZATION-20260830",
-      "next_step": "Após OK explícito no resumo: reconciliar live, executar o mesmo request no Engine v3, fazer readback completo da sucessora e somente então deletar a fonte inequívoca com readback DELETED",
+      "next_step": "Nenhuma ação pendente; acompanhar delivery após o início programado no reporting operacional",
       "objective": "Substituir a campanha pg_5024 pela DUP01 com evento Eggbev PV U e copy padrão de três headlines por anúncio",
-      "source": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-review.json",
-      "state": "awaiting_nicolas_final_ok; manifest clone_prestaged selado em dry-run; zero meta writes; campanha fonte preservada e não deletada",
+      "source": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
+      "state": "completed; dup01 active; adset custom_event_str=eggbev-pv-u confirmed; 3 ads and creatives active; source deleted; live readback 22/22 passed",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-30T18:14:47+00:00"
+      "updated_at": "2026-08-30T21:38:01+00:00"
     },
     {
       "agent": "ares",
@@ -1472,5 +1472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T18:58:22+00:00"
+  "updated_at": "2026-08-30T21:38:01+00:00"
 }
