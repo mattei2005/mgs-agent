@@ -1,39 +1,39 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-08-30T08:10:01-04:00`
+Gerado em: `2026-08-30T12:57:26-04:00`
 Fonte: `root crontab + script/log stat, read-only`
-Total MGS ativo no root crontab: **45**
+Total MGS ativo no root crontab: **46**
 
 ## Resumo executivo
 
 ```text
 Frequência               | Script                                     | Owner             | Risco                                                                                                                         | Flock | Último log
 ------------------------ | ------------------------------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/5 * * * *              | sync-souls.sh                              | Zeus/Infra        | baixo                                                                                                                         | sim   | 2026-08-30T08:05:01-04:00 synced ares skills/ops/log-monitor-discord-alert
-11,26,41,56 * * * *      | monitor-auto-push.sh                       | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-30T07:57:28-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=9dd8d3ab
-23 10 * * *              | monitor-yoast-health-eggbev.sh             | Atena/Conteúdo    | baixo                                                                                                                         | sim   | [2026-08-29T10:23:07-04:00] monitor-yoast-health-eggbev: === Concluído (silencioso). SEO: 🟢216/🟡39/🔴0 / Read: 🟢212/🟡39/🔴39 ===
-7,22,37,52 * * * *       | check-pending-reports.sh                   | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-30 08:07:01] check-pending-reports.sh concluído
-1-56/5 * * * *           | monitor-service-restarts.sh                | Zeus/Infra        | baixo                                                                                                                         | sim   | 2026-08-30T08:06:01-04:00 [monitor-service-restarts] OK
-54 11 * * *              | monitor-gpt55-oauth-cost.sh                | Zeus/Infra        | baixo                                                                                                                         | sim   | Monitor GPT-5.6 OAuth enviado: calls=966 sessions=23 input=7806497 output=603806 actual_usd=0.00 hypothetical_usd=67.33 config_ok=True billing_ok=False message_id=1543287620014964802
+*/5 * * * *              | sync-souls.sh                              | Zeus/Infra        | baixo                                                                                                                         | sim   | 2026-08-30T12:55:02-04:00 synced ares skills/ops/log-monitor-discord-alert
+11,26,41,56 * * * *      | monitor-auto-push.sh                       | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-30T12:42:44-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=69701ed1
+23 10 * * *              | monitor-yoast-health-eggbev.sh             | Atena/Conteúdo    | baixo                                                                                                                         | sim   | [2026-08-30T10:23:08-04:00] monitor-yoast-health-eggbev: === Concluído (silencioso). SEO: 🟢216/🟡39/🔴0 / Read: 🟢212/🟡39/🔴39 ===
+7,22,37,52 * * * *       | check-pending-reports.sh                   | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-30 12:52:01] check-pending-reports.sh concluído
+1-56/5 * * * *           | monitor-service-restarts.sh                | Zeus/Infra        | baixo                                                                                                                         | sim   | 2026-08-30T12:56:01-04:00 [monitor-service-restarts] OK
+54 11 * * *              | monitor-gpt55-oauth-cost.sh                | Zeus/Infra        | baixo                                                                                                                         | sim   | Monitor GPT-5.6 OAuth enviado: calls=2394 sessions=22 input=15685157 output=1500180 actual_usd=0.00 hypothetical_usd=141.30 config_ok=True billing_ok=False message_id=1543650007490502837
 3-58/5 * * * *           | monitor-tool-loops.sh                      | Zeus/Infra        | baixo                                                                                                                         | sim   | Loop detector: 0 alertas enviados
-0 5 * * *                | infra-discovery.sh                         | Zeus/Infra        | médio: sobrescreve infra-inventory.json                                                                                       | sim   | [05:00:11] === infra-discovery.sh DONE ===
-37 8,14,20 * * *         | monitor-hermes-updates.sh                  | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-29T20:37:02-04:00] OK no_changes upstream=4209d371aa (last_notified=4209d37)
-*/15 * * * *             | track-article-cost.sh                      | Atena/Conteúdo    | baixo/médio: escreve SQLite local                                                                                             | sim   | [2026-08-30T08:00:02-0400] Nothing to process. Exit.
-0 * * * *                | cleanup-zombie-sessions.sh                 | Zeus/Infra        | médio: fecha sessões Hermes inativas                                                                                          | sim   | [2026-08-30T08:00:01-0400] OK total closed zombie sessions: 0 (grace=180min)
+0 5 * * *                | infra-discovery.sh                         | Zeus/Infra        | médio: sobrescreve infra-inventory.json                                                                                       | sim   | [12:56:40] === infra-discovery.sh DONE ===
+37 8,14,20 * * *         | monitor-hermes-updates.sh                  | Zeus/Infra        | baixo                                                                                                                         | sim   | [2026-08-30T08:37:05-04:00] OK notified upstream=66666f6e2e local=3eb5b8bc8f behind=1230 new_since_last=144 days=5 feat=135 fix=709 breaking=0
+*/15 * * * *             | track-article-cost.sh                      | Atena/Conteúdo    | baixo/médio: escreve SQLite local                                                                                             | sim   | [2026-08-30T12:45:01-0400] Nothing to process. Exit.
+0 * * * *                | cleanup-zombie-sessions.sh                 | Zeus/Infra        | médio: fecha sessões Hermes inativas                                                                                          | sim   | [2026-08-30T12:00:01-0400] DONE total closed zombie sessions: 3 (grace=180min)
 44 20 * * 2,5            | housekeeping-bak-cleanup.sh                | Zeus/Infra        | alto: deleta backups antigos, preservando último por família                                                                  | sim   | [2026-08-28T20:44:08-04:00] housekeeping: === END (no-op) ===
 0 8 * * *                | pendencia-render-md.sh                     | Zeus/Ops          | baixo: re-renderiza docs/PENDENCIAS.md                                                                                        | sim   | Tamanho: 16671 bytes
 0 * * * *                | chat-log.sh                                | Zeus/Ops          | baixo: re-renderiza índice                                                                                                    | sim   | 2 sessões indexadas
-10 8 * * *               | cron-control-plane.py                      | Zeus/Ops          | baixo: re-renderiza docs/CRONS.md                                                                                             | sim   | OK wrote /root/mgs-agent/docs/CRONS.md jobs=45 generated_at=2026-08-29T08:10:02-04:00
-*/15 * * * *             | monitor-cron-stale-logs.sh                 | Zeus/Infra        | baixo: read-only + alerta Discord                                                                                             | sim   | [2026-08-30T12:00:02Z] cron-stale check: jobs=45 problems=1 resolved=0 alerts_sent=1
-*/5 * * * *              | hermes-news-explainer.py                   | Zeus/Infra        | baixo/médio: consulta Discord e pode postar explicação automática                                                             | sim   | 2026-08-30T12:05:01.446724Z done posted=0 skipped=0 candidates=0 last_seen_id=1543329483409334352
+10 8 * * *               | cron-control-plane.py                      | Zeus/Ops          | baixo: re-renderiza docs/CRONS.md                                                                                             | sim   | OK wrote /root/mgs-agent/docs/CRONS.md jobs=45 generated_at=2026-08-30T08:10:01-04:00
+*/15 * * * *             | monitor-cron-stale-logs.sh                 | Zeus/Infra        | baixo: read-only + alerta Discord                                                                                             | sim   | [2026-08-30T16:45:01Z] cron-stale check: jobs=45 problems=0 resolved=0 alerts_sent=0
+*/5 * * * *              | hermes-news-explainer.py                   | Zeus/Infra        | baixo/médio: consulta Discord e pode postar explicação automática                                                             | sim   | 2026-08-30T16:55:02.914458Z done posted=0 skipped=0 candidates=0 last_seen_id=1543601284937031711
 7 8,14,20 * * *          | monitor-webshare-status.sh                 | Zeus/Infra        | baixo: consulta status público + alerta Discord se anomalia                                                                   | sim   | [2026-08-30T08:07:01-04:00] monitor-webshare-status: OK completed mode=normal
 41 3 * * *               | mgs-safety-backup.sh                       | Zeus/Infra        | alto: cria snapshot e remove automaticamente safety backups além do mais recente                                              | sim   | [2026-08-27T03:42:04-04:00] mgs-safety-backup: END OK archive=/root/mgs-agent/backups/safety/mgs-safety-20260827-034101.tar.gz size=1279.84MB manifest=/root/mgs-agent/backups/safety/mgs-safety-20260827-034101.manifest.tx
-54 8,13,18,22 * * *      | monitor-honcho-health.sh                   | Zeus/Infra        | não classificado                                                                                                              | sim   | [2026-08-29T22:54:24-04:00] monitor-honcho-health: DONE status=ok failures=0
-16 9 * * *               | monitor-discord-thread-archive-warnings.py | Zeus/Infra        | baixo: consulta Discord + keepalive automático antes de auto-archive                                                          | sim   | monitor-discord-thread-archive-warnings: OK candidates=0 pending_alerts=0 bumped=0 failed_bumps=0 errors=0
-*/15 * * * *             | discord-archive-stale-agent-threads.py     | Zeus/Infra        | não classificado                                                                                                              | não   | {"summary": {"mode": "apply", "profiles": ["zeus", "atena", "ares"], "checked": 27, "stale": 0, "archived": 0, "skipped_recent": 27, "errors": 0}}
-*/5 * * * *              | monitor-vps-health.py                      | Zeus/Infra        | baixo: read-only + alerta Discord em anomalia da VPS                                                                          | sim   | [2026-08-30T08:05:03-0400] monitor-vps-health: DONE status=ok issues=0 resolved=0
+54 8,13,18,22 * * *      | monitor-honcho-health.sh                   | Zeus/Infra        | não classificado                                                                                                              | sim   | [2026-08-30T08:54:23-04:00] monitor-honcho-health: DONE status=ok failures=0
+16 9 * * *               | monitor-discord-thread-archive-warnings.py | Zeus/Infra        | baixo: consulta Discord + keepalive automático antes de auto-archive                                                          | sim   | monitor-discord-thread-archive-warnings: OK candidates=2 pending_alerts=2 bumped=2 failed_bumps=0 errors=0
+*/15 * * * *             | discord-archive-stale-agent-threads.py     | Zeus/Infra        | não classificado                                                                                                              | não   | {"summary": {"mode": "apply", "profiles": ["zeus", "atena", "ares"], "checked": 26, "stale": 0, "archived": 0, "skipped_recent": 26, "errors": 0}}
+*/5 * * * *              | monitor-vps-health.py                      | Zeus/Infra        | baixo: read-only + alerta Discord em anomalia da VPS                                                                          | sim   | [2026-08-30T12:55:03-0400] monitor-vps-health: DONE status=ok issues=0 resolved=0
 30 7,15 * * *            | dtr-sb-page-health-sync.sh                 | Zeus/Infra        | não classificado                                                                                                              | sim   | (sem log útil ainda)
-2-57/5 * * * *           | alerts-infra-failed-alert-resolver.py      | Zeus/Infra        | não classificado                                                                                                              | sim   | [2026-08-30T12:07:59Z] alerts-infra-failed-alert-resolver: DONE candidates=1 handled=1 skipped=0 last_seen_id=1543591131072176298
+2-57/5 * * * *           | alerts-infra-failed-alert-resolver.py      | Zeus/Infra        | não classificado                                                                                                              | sim   | [2026-08-30T16:57:01Z] alerts-infra-failed-alert-resolver: DONE candidates=1 handled=0 skipped=1 last_seen_id=1543665512926543913
 20 6 * * *               | dtr-sb-daily-match-audit.sh                | Zeus/Infra        | não classificado                                                                                                              | sim   | "errors": []
 39 * * * *               | monitor-op-rate-limit.py                   | Zeus/Infra        | baixo: consulta read-only + alerta Discord por transição                                                                      | sim   | OK level=normal transition_sent=false token:write=0.00% token:read=0.00% account:read_write=0.01%
 19,49 * * * *            | monitor-drive-auth-unified.py              | Zeus/Infra        | não classificado                                                                                                              | sim   | drive_auth status=ok primary=service_account sa=root_access_ok guard=legacy_runtime_clean guard_hits=0 sa_checked=0 dry_run=0
@@ -41,19 +41,20 @@ Frequência               | Script                                     | Owner  
 * * * * *                | monitor_hermes_pending_writes.py           | Zeus/Infra        | não classificado                                                                                                              | sim   | {"action":"none","reason":"healthy","summary":"total=0 / >=24h=0 / mais antiga=0.0h / dead-letter=0 / memória>=90%=0","discord":"not_sent","compaction_proposals":[],"dry_run":false}
 * * * * *                | finalize-hermes-structural-write.py        | Zeus/Infra        | não classificado                                                                                                              | sim   | {"scanned": 353, "processed": 0, "status_counts": {"already_closed": 284, "already_quarantined": 69}, "log_rotated": false}
 5 8 * * *                | dtr-sb-restricted-summary.py               | Zeus/Infra        | não classificado                                                                                                              | sim   | }
-14,29,44,59 * * * *      | sb-restricted-transition-monitor.py        | Zeus/Infra        | não classificado                                                                                                              | sim   | }
+14,29,44,59 * * * *      | sb-restricted-transition-monitor.py        | Zeus/Infra        | não classificado                                                                                                              | sim   | "readback_ok": true
 0 8,14,20 * * *          | refresh-sb-restricted-history-sheet.py     | Zeus/Infra        | não classificado                                                                                                              | sim   | {"coverage_start": "2026-07-15T14:38:01-04:00", "history_rows": 577, "mode": "apply", "ok": true, "sheet_update": {"history_index": 2, "readback_ok": true, "rows_historico_restricoes": 577, "tab": "Histórico Restrições",
-24 0,1,7-23 * * *        | monitor-sms-funnel-balance.py              | Zeus/Infra        | não classificado                                                                                                              | sim   | OK level=normal credits=63256 sent=473244 notification=none message_id=none
-*/5 13,14 * * 5          | monitor-sms-funnel-balance.py              | Zeus/Infra        | não classificado                                                                                                              | sim   | OK level=normal credits=63256 sent=473244 notification=none message_id=none
+24 0,1,7-23 * * *        | monitor-sms-funnel-balance.py              | Zeus/Infra        | não classificado                                                                                                              | sim   | OK level=normal credits=56284 sent=480216 notification=none message_id=none
+*/5 13,14 * * 5          | monitor-sms-funnel-balance.py              | Zeus/Infra        | não classificado                                                                                                              | sim   | OK level=normal credits=56284 sent=480216 notification=none message_id=none
 4,14,24,34,44,54 * * * * | monitor-hermes-memory-capacity.py          | Zeus/Infra        | médio: reescreve USER/MEMORY somente após gates fail-closed e backup protegido                                                | sim   | {"success":true,"dry_run":false,"profiles":["ares","atena","zeus"],"stores_checked":6,"threshold_count":0,"compacted_count":0,"failure_count":0,"delivery_failures":0,"outbox_pending":0}
-* * * * *                | hermes-news-explainer-watchdog.py          | Zeus/Infra        | baixo/médio: consulta Discord a cada minuto e só posta ao recuperar explicação órfã                                           | sim   | 2026-08-30T12:09:01.202829Z watchdog done dry_run=0 healthy=50 waiting=0 orphan=0 recovered=0 fallback=0 failed=0 busy=0 reconciled=0 sla_seconds=600
+* * * * *                | hermes-news-explainer-watchdog.py          | Zeus/Infra        | baixo/médio: consulta Discord a cada minuto e só posta ao recuperar explicação órfã                                           | sim   | 2026-08-30T16:57:01.344497Z watchdog done dry_run=0 healthy=50 waiting=0 orphan=0 recovered=0 fallback=0 failed=0 busy=0 reconciled=0 sla_seconds=600
 47 4 * * *               | hermes-context-cost-audit.py               | Zeus/Infra        | baixo: leitura local + escrita atômica de estado agregado sem conteúdo das conversas                                          | sim   | 2026-08-30T08:47:02.092216+00:00 status=ok profiles=3 errors=0 max_context_percent=52.36 state=/root/mgs-agent/data/hermes-context-cost-audit-state.json
-0 8 * * *                | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "error", "error": "CalledProcessError:Command '['op', 'item', 'get', 'Zeus - Smartbidding Dashboard', '--vault', 'MGS Conteúdo', '--field', 'username', '--reveal']' returned non-zero exit status 1."}
-*/15 * * * *             | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "error", "error": "CalledProcessError:Command '['op', 'item', 'get', 'Zeus - Smartbidding Dashboard', '--vault', 'MGS Conteúdo', '--field', 'username', '--reveal']' returned non-zero exit status 1."}
-10 * * * *               | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "error", "error": "CalledProcessError:Command '['op', 'item', 'get', 'Zeus - Smartbidding Dashboard', '--vault', 'MGS Conteúdo', '--field', 'username', '--reveal']' returned non-zero exit status 1."}
-17 8 * * *               | sync-sb-messenger-revenue-sheet.py         | Zeus/Revenue Tech | médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback                          | sim   | {"status":"SYNC_OK","started_at_et":"2026-08-29T08:17:01-04:00","completed_at_et":"2026-08-29T08:17:09-04:00","period_start":"2026-08-23","period_end":"2026-08-29","publishers":45,"api_rows":7290,"named_profiles":154,"da
-12,27,42,57 * * * *      | monitor-sb-messenger-token-invalid.py      | Zeus/Revenue Tech | baixo/médio: lê SB autenticada, republica incidentes ativos uma vez por dia e envia novos/reabertos sem repetição intradiária | sim   | {"ok": true, "mode": "noop", "last_seen_id": 677224, "alerts_seen": 329, "new_alerts": 0, "daily": {"date": "2026-08-30", "rollover": false, "active": 0, "resolved": 0, "daily_sent": 0, "would_send": 0}}
+0 8 * * *                | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "ok", "checked": 0, "reason": "nothing_due"}
+*/15 * * * *             | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "ok", "checked": 0, "reason": "nothing_due"}
+10 * * * *               | sb-broadcast-template-repair.sh            | Zeus/Infra        | não classificado                                                                                                              | não   | {"status": "ok", "checked": 0, "reason": "nothing_due"}
+17 8 * * *               | sync-sb-messenger-revenue-sheet.py         | Zeus/Revenue Tech | médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback                          | sim   | {"status":"SYNC_OK","started_at_et":"2026-08-30T08:17:01-04:00","completed_at_et":"2026-08-30T08:17:10-04:00","period_start":"2026-08-24","period_end":"2026-08-30","publishers":45,"api_rows":7290,"named_profiles":154,"da
+12,27,42,57 * * * *      | monitor-sb-messenger-token-invalid.py      | Zeus/Revenue Tech | baixo/médio: lê SB autenticada, republica incidentes ativos uma vez por dia e envia novos/reabertos sem repetição intradiária | sim   | {"ok": true, "mode": "noop", "last_seen_id": 677224, "alerts_seen": 328, "new_alerts": 0, "daily": {"date": "2026-08-30", "rollover": false, "active": 0, "resolved": 0, "daily_sent": 0, "would_send": 0}}
 5 0 * * *                | monitor-sb-messenger-token-invalid.py      | Zeus/Revenue Tech | médio: exclusão limitada de mensagens Discord anteriores ao dia anterior, com readback                                        | sim   | {"ok": true, "mode": "retention-apply", "cutoff": "2026-08-29T00:00:00-04:00", "scanned": 19, "eligible": 0, "would_delete": 0, "deleted": 0, "already_missing": 0, "remaining": 0, "message_ids": []}
+2-57/5 * * * *           | ares-meta-account-activity-monitor.py      | Ares/Campaign Ops | baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração externa/não auditada               | sim   | {"ok":true,"mode":"apply","events_fetched":0,"new_external":0,"pending_after":0,"delivery_ok":null,"classifications":{},"audit_path":"data/ares/meta-ads/audit/activity-monitors/Creditoparaveiculo-BR-CAR-BR/run-20260830T1
 ```
 
 ## Pontos de atenção
@@ -82,7 +83,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.
 - **Comando:** `flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sync-souls.log`
-- **Último log:** 2026-08-30T08:05:01-04:00 (11549813 bytes)
+- **Último log:** 2026-08-30T12:55:02-04:00 (11602245 bytes)
 
 ### `monitor-auto-push.sh`
 - **Frequência:** `11,26,41,56 * * * *`
@@ -91,7 +92,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.
 - **Comando:** `flock -n /var/lock/monitor_auto_push.lock /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-auto-push.log`
-- **Último log:** 2026-08-30T07:57:28-04:00 (1971666 bytes)
+- **Último log:** 2026-08-30T12:42:44-04:00 (1978528 bytes)
 
 ### `monitor-yoast-health-eggbev.sh`
 - **Frequência:** `23 10 * * *`
@@ -100,7 +101,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.
 - **Comando:** `flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-yoast-health-eggbev.log`
-- **Último log:** 2026-08-29T10:23:07-04:00 (84147 bytes)
+- **Último log:** 2026-08-30T10:23:08-04:00 (85580 bytes)
 
 ### `check-pending-reports.sh`
 - **Frequência:** `7,22,37,52 * * * *`
@@ -109,7 +110,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no #alerts-infra.
 - **Comando:** `flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/check-pending-reports.log`
-- **Último log:** 2026-08-30T08:07:03-04:00 (908038 bytes)
+- **Último log:** 2026-08-30T12:52:03-04:00 (910508 bytes)
 
 ### `monitor-service-restarts.sh`
 - **Frequência:** `1-56/5 * * * *`
@@ -118,7 +119,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Detecta restarts inesperados dos services zeus-gateway, atena-gateway, ares-gateway e mgs-autocommit.
 - **Comando:** `flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-service-restarts.log`
-- **Último log:** 2026-08-30T08:06:01-04:00 (12286822 bytes)
+- **Último log:** 2026-08-30T12:56:01-04:00 (12317852 bytes)
 
 ### `monitor-gpt55-oauth-cost.sh`
 - **Frequência:** `54 11 * * *`
@@ -127,7 +128,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Calcula uso hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.
 - **Comando:** `flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-gpt55-oauth-cost.log`
-- **Último log:** 2026-08-29T11:54:01-04:00 (10585 bytes)
+- **Último log:** 2026-08-30T11:54:01-04:00 (10772 bytes)
 
 ### `monitor-tool-loops.sh`
 - **Frequência:** `3-58/5 * * * *`
@@ -136,7 +137,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Detecta loops de tool_calls nas sessões Hermes e alerta infra.
 - **Comando:** `flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-tool-loops.log`
-- **Último log:** 2026-08-30T08:08:01-04:00 (717944 bytes)
+- **Último log:** 2026-08-30T12:53:01-04:00 (719882 bytes)
 
 ### `infra-discovery.sh`
 - **Frequência:** `0 5 * * *`
@@ -145,7 +146,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Regenera data/infra-inventory.json a partir do estado real do sistema.
 - **Comando:** `flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/infra-discovery.log`
-- **Último log:** 2026-08-30T05:00:11-04:00 (34356 bytes)
+- **Último log:** 2026-08-30T12:56:40-04:00 (34937 bytes)
 
 ### `monitor-hermes-updates.sh`
 - **Frequência:** `37 8,14,20 * * *`
@@ -154,7 +155,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Verifica updates upstream do Hermes Agent e alerta quando há nova versão.
 - **Comando:** `flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-hermes-updates.log`
-- **Último log:** 2026-08-29T20:37:02-04:00 (46989 bytes)
+- **Último log:** 2026-08-30T08:37:05-04:00 (47263 bytes)
 
 ### `track-article-cost.sh`
 - **Frequência:** `*/15 * * * *`
@@ -163,7 +164,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Calcula custo hipotético por artigo publicado e grava data/article-tracker.db.
 - **Comando:** `flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/track-article-cost-cron.log`
-- **Último log:** 2026-08-30T08:00:02-04:00 (1728661 bytes)
+- **Último log:** 2026-08-30T12:45:01-04:00 (1733316 bytes)
 
 ### `cleanup-zombie-sessions.sh`
 - **Frequência:** `0 * * * *`
@@ -172,7 +173,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Fecha sessões Hermes zumbis/inativas usando última atividade real, com grace padrão de 180 minutos.
 - **Comando:** `flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh >> /root/mgs-agent/logs/cleanup-zombie-sessions.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cleanup-zombie-sessions.log`
-- **Último log:** 2026-08-30T08:00:02-04:00 (78647 bytes)
+- **Último log:** 2026-08-30T12:00:01-04:00 (80352 bytes)
 
 ### `housekeeping-bak-cleanup.sh`
 - **Frequência:** `44 20 * * 2,5`
@@ -199,7 +200,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Mantém índice Markdown de data/chat-logs/INDEX.md.
 - **Comando:** `flock -n /var/lock/chat_log_rebuild.lock /root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/chat-log-rebuild.log`
-- **Último log:** 2026-08-30T08:00:02-04:00 (151274 bytes)
+- **Último log:** 2026-08-30T12:00:01-04:00 (151618 bytes)
 
 ### `cron-control-plane.py`
 - **Frequência:** `10 8 * * *`
@@ -208,7 +209,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Regenera docs/CRONS.md com inventário/status dos crons MGS.
 - **Comando:** `flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cron-control-plane.log`
-- **Último log:** 2026-08-29T08:10:02-04:00 (3870 bytes)
+- **Último log:** 2026-08-30T08:10:01-04:00 (3956 bytes)
 
 ### `monitor-cron-stale-logs.sh`
 - **Frequência:** `*/15 * * * *`
@@ -217,7 +218,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Watchdog que alerta quando logs de crons MGS deixam de atualizar dentro da tolerância esperada.
 - **Comando:** `flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-cron-stale-logs.log`
-- **Último log:** 2026-08-30T08:00:04-04:00 (598485 bytes)
+- **Último log:** 2026-08-30T12:45:01-04:00 (600100 bytes)
 
 ### `hermes-news-explainer.py`
 - **Frequência:** `*/5 * * * *`
@@ -226,7 +227,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Lê anúncios no canal Hermes News e posta explicação executiva do Zeus em PT-BR, com estado anti-duplicata.
 - **Comando:** `flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/hermes-news-explainer.log`
-- **Último log:** 2026-08-30T08:05:01-04:00 (3196748 bytes)
+- **Último log:** 2026-08-30T12:55:02-04:00 (3206666 bytes)
 
 ### `monitor-webshare-status.sh`
 - **Frequência:** `7 8,14,20 * * *`
@@ -253,7 +254,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/monitor_honcho_health.lock /root/mgs-agent/scripts/monitor-honcho-health.sh >> /root/mgs-agent/logs/monitor-honcho-health.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-honcho-health.log`
-- **Último log:** 2026-08-29T22:54:24-04:00 (635120 bytes)
+- **Último log:** 2026-08-30T08:54:23-04:00 (635403 bytes)
 
 ### `monitor-discord-thread-archive-warnings.py`
 - **Frequência:** `16 9 * * *`
@@ -262,7 +263,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares e posta keepalive quando faltam até 24h para ficarem ocultas.
 - **Comando:** `flock -n /var/lock/monitor_discord_thread_archive_warnings.lock /root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py >> /root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log`
-- **Último log:** 2026-08-29T09:16:02-04:00 (6807 bytes)
+- **Último log:** 2026-08-30T09:16:02-04:00 (6914 bytes)
 
 ### `discord-archive-stale-agent-threads.py`
 - **Frequência:** `*/15 * * * *`
@@ -271,7 +272,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py --apply --grace-minutes 30 --summary-only >> /root/mgs-agent/logs/discord-archive-stale-agent-threads.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/discord-archive-stale-agent-threads.log`
-- **Último log:** 2026-08-30T08:00:04-04:00 (858652 bytes)
+- **Último log:** 2026-08-30T12:45:02-04:00 (861445 bytes)
 
 ### `monitor-vps-health.py`
 - **Frequência:** `*/5 * * * *`
@@ -280,7 +281,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Monitora saúde bruta da VPS: disco, inodes, memória disponível, load, reboot recente, tamanho de backups e services MGS ativos.
 - **Comando:** `flock -n /var/lock/monitor_vps_health.lock /root/mgs-agent/scripts/monitor-vps-health.py --channel-id 1522444367292268565 >> /root/mgs-agent/logs/monitor-vps-health.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-vps-health.log`
-- **Último log:** 2026-08-30T08:05:03-04:00 (1391956 bytes)
+- **Último log:** 2026-08-30T12:55:03-04:00 (1396712 bytes)
 
 ### `dtr-sb-page-health-sync.sh`
 - **Frequência:** `30 7,15 * * *`
@@ -298,7 +299,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log`
-- **Último log:** 2026-08-30T08:07:59-04:00 (2104536 bytes)
+- **Último log:** 2026-08-30T12:57:01-04:00 (2112076 bytes)
 
 ### `dtr-sb-daily-match-audit.sh`
 - **Frequência:** `20 6 * * *`
@@ -316,7 +317,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.
 - **Comando:** `flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-op-rate-limit.log`
-- **Último log:** 2026-08-30T07:39:01-04:00 (118876 bytes)
+- **Último log:** 2026-08-30T12:39:01-04:00 (119366 bytes)
 
 ### `monitor-drive-auth-unified.py`
 - **Frequência:** `19,49 * * * *`
@@ -325,7 +326,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/monitor_drive_auth_unified.lock /root/mgs-agent/scripts/monitor-drive-auth-unified.py >> /root/mgs-agent/logs/monitor-drive-auth-unified.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-drive-auth-unified.log`
-- **Último log:** 2026-08-30T07:49:02-04:00 (292005 bytes)
+- **Último log:** 2026-08-30T12:49:02-04:00 (293265 bytes)
 
 ### `sync-sb-sms-revenue-daily.sh`
 - **Frequência:** `0 8 * * *`
@@ -343,7 +344,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-hermes-pending-writes.log`
-- **Último log:** 2026-08-30T08:09:01-04:00 (12934512 bytes)
+- **Último log:** 2026-08-30T12:57:01-04:00 (12987216 bytes)
 
 ### `finalize-hermes-structural-write.py`
 - **Frequência:** `* * * * *`
@@ -352,7 +353,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/finalize-hermes-structural-write.lock /root/mgs-agent/scripts/finalize-hermes-structural-write.py >> /root/mgs-agent/logs/hermes-structural-write-finalizer.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/hermes-structural-write-finalizer.log`
-- **Último log:** 2026-08-30T08:10:01-04:00 (4887154 bytes)
+- **Último log:** 2026-08-30T12:57:01-04:00 (4922742 bytes)
 
 ### `dtr-sb-restricted-summary.py`
 - **Frequência:** `5 8 * * *`
@@ -370,7 +371,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/sb_restricted_transition_monitor.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/sb-restricted-transition-monitor.py --apply >> /root/mgs-agent/logs/sb-restricted-transition-monitor.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sb-restricted-transition-monitor.log`
-- **Último log:** 2026-08-30T08:05:53-04:00 (15048505 bytes)
+- **Último log:** 2026-08-30T12:44:16-04:00 (15126024 bytes)
 
 ### `refresh-sb-restricted-history-sheet.py`
 - **Frequência:** `0 8,14,20 * * *`
@@ -388,7 +389,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/monitor_sms_funnel_balance.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-sms-funnel-balance.log`
-- **Último log:** 2026-08-30T07:24:03-04:00 (75905 bytes)
+- **Último log:** 2026-08-30T12:24:03-04:00 (76285 bytes)
 
 ### `monitor-sms-funnel-balance.py`
 - **Frequência:** `*/5 13,14 * * 5`
@@ -397,7 +398,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-sms-funnel-balance.log`
-- **Último log:** 2026-08-30T07:24:03-04:00 (75905 bytes)
+- **Último log:** 2026-08-30T12:24:03-04:00 (76285 bytes)
 
 ### `monitor-hermes-memory-capacity.py`
 - **Frequência:** `4,14,24,34,44,54 * * * *`
@@ -406,7 +407,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Compacta USER/MEMORY automaticamente de >=90% para <=85% com backup, validação semântica, rollback/readback e alerta metadata-only em #limites-90.
 - **Comando:** `flock -n /run/lock/mgs-hermes-memory-capacity.lock /root/mgs-agent/scripts/monitor-hermes-memory-capacity.py >> /root/mgs-agent/logs/monitor-hermes-memory-capacity.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-hermes-memory-capacity.log`
-- **Último log:** 2026-08-30T08:04:01-04:00 (1173943 bytes)
+- **Último log:** 2026-08-30T12:54:01-04:00 (1179337 bytes)
 
 ### `hermes-news-explainer-watchdog.py`
 - **Frequência:** `* * * * *`
@@ -415,7 +416,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Confere diretamente no Discord se cada anúncio recebeu explicação; reconcilia state inconsistente e recupera órfãos com readback e fallback antes do SLA de 10 minutos.
 - **Comando:** `flock -n /var/lock/hermes_news_explainer_watchdog.lock /root/mgs-agent/scripts/hermes-news-explainer-watchdog.py >> /root/mgs-agent/logs/hermes-news-explainer-watchdog.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/hermes-news-explainer-watchdog.log`
-- **Último log:** 2026-08-30T08:09:01-04:00 (11634975 bytes)
+- **Último log:** 2026-08-30T12:57:01-04:00 (11693439 bytes)
 
 ### `hermes-context-cost-audit.py`
 - **Frequência:** `47 4 * * *`
@@ -433,7 +434,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `/root/mgs-agent/scripts/sb-broadcast-template-repair.sh dispatch >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log`
-- **Último log:** 2026-08-30T08:00:08-04:00 (557681 bytes)
+- **Último log:** 2026-08-30T12:45:02-04:00 (561083 bytes)
 
 ### `sb-broadcast-template-repair.sh`
 - **Frequência:** `*/15 * * * *`
@@ -442,7 +443,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `/root/mgs-agent/scripts/sb-broadcast-template-repair.sh check >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log`
-- **Último log:** 2026-08-30T08:00:08-04:00 (557681 bytes)
+- **Último log:** 2026-08-30T12:45:02-04:00 (561083 bytes)
 
 ### `sb-broadcast-template-repair.sh`
 - **Frequência:** `10 * * * *`
@@ -451,7 +452,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Sem descrição cadastrada.
 - **Comando:** `/root/mgs-agent/scripts/sb-broadcast-template-repair.sh digest --scheduled >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log`
-- **Último log:** 2026-08-30T08:00:08-04:00 (557681 bytes)
+- **Último log:** 2026-08-30T12:45:02-04:00 (561083 bytes)
 
 ### `sync-sb-messenger-revenue-sheet.py`
 - **Frequência:** `17 8 * * *`
@@ -460,7 +461,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.
 - **Comando:** `flock -n /var/lock/sync_sb_messenger_revenue_sheet.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py --apply >> /root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log`
-- **Último log:** 2026-08-29T08:17:11-04:00 (16355 bytes)
+- **Último log:** 2026-08-30T08:17:12-04:00 (17169 bytes)
 
 ### `monitor-sb-messenger-token-invalid.py`
 - **Frequência:** `12,27,42,57 * * * *`
@@ -469,7 +470,7 @@ Frequência               | Script                                     | Owner  
 - **Função:** Na virada ET republica cada incidente ainda ativo uma vez; depois envia somente incidentes novos ou reabertos, sem repetição intradiária.
 - **Comando:** `flock -n /var/lock/monitor_sb_messenger_token_invalid.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --apply >> /root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log`
-- **Último log:** 2026-08-30T07:57:14-04:00 (69195 bytes)
+- **Último log:** 2026-08-30T12:57:13-04:00 (73275 bytes)
 
 ### `monitor-sb-messenger-token-invalid.py`
 - **Frequência:** `5 0 * * *`
@@ -479,6 +480,15 @@ Frequência               | Script                                     | Owner  
 - **Comando:** `flock -n /var/lock/cleanup_sb_messenger_token_messages.lock /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --cleanup-old-messages --apply >> /root/mgs-agent/logs/cleanup-sb-messenger-token-messages.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cleanup-sb-messenger-token-messages.log`
 - **Último log:** 2026-08-30T00:05:01-04:00 (397 bytes)
+
+### `ares-meta-account-activity-monitor.py`
+- **Frequência:** `2-57/5 * * * *`
+- **Owner:** Ares/Campaign Ops
+- **Risco:** baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração externa/não auditada
+- **Função:** Monitora alterações materiais na conta Meta Creditoparaveiculo 13, cruza writes do Ares com audit local e alerta somente mudanças externas ou não auditadas.
+- **Comando:** `flock -n /var/lock/ares_meta_account_activity_monitor_cpv.lock /root/mgs-agent/scripts/ares-meta-account-activity-monitor.py --apply >> /root/mgs-agent/logs/ares-meta-account-activity-monitor-cpv.log 2>&1`
+- **Log:** `/root/mgs-agent/logs/ares-meta-account-activity-monitor-cpv.log`
+- **Último log:** 2026-08-30T12:57:01-04:00 (480 bytes)
 
 ## Comandos úteis
 
