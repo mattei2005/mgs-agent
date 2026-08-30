@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.20.0-draft
+version: 0.21.0-draft
 author: Ares
 license: internal
 metadata:
@@ -410,6 +410,12 @@ Após Nicolas enviar o print canônico em `2026-08-30`, o renderer abandonou os 
 ### Refinamento visual v15 — sinais compactos e legenda curta
 
 Por instrução explícita de Nicolas em `2026-08-30`, o relatório não exibe mais o bloco longo **Cortes e reativações por anúncio**, os nomes individuais dos anúncios nem os códigos internos de motivo, como `roas_below_or_nd`. A coluna `Ação` mostra apenas sinais compactos: `🛑n` para `n` cortes de anúncios, `♻️n` para `n` reativações, `✅` manter, `👁️` observar e `🚀` recomendação de escala. Abaixo da tabela há somente uma legenda curta com esses sinais e `R/E`: `🟢` ROI maior ou igual a zero, `🔴` ROI negativo e `⚪` indisponível. Esta revisão supersede apenas a lista detalhada e a ausência total de legenda do v14; mantém a tabela CPV 13 e não altera fontes, fórmulas, threshold, decisões, writes, schedules, budget ou autoridade.
+
+### Refinamento visual v16 — fonte Messenger Pages e três faixas de ROI
+
+Por confirmação de Nicolas em `2026-08-30`, `R/E` mostra sempre dois sinais nesta ordem: **ROI atual / ROI estimado futuro**. O estimado do Ares vem de `Smart Bidding /estimated/revenue/utm_adgroup`, o mesmo backend de estimativa que alimenta a segunda linha de ROI na tela **Messenger Pages**; Ares consulta a API, não raspa a interface. A composição validada da tela é: `/campaigns/Messenger` para identidade e LEADS, `/report/messenger` para economia atual da página, `/estimated/revenue/utm_adgroup` para receita futura e `/estimated/delay` para freshness. No relatório por campanha, o estimado continua exigindo o join exato de conta + campanha + UTM e UTM única.
+
+As duas posições de `R/E` usam as mesmas faixas: `🟢` ROI `>= 0%`; `🟡` ROI `< 0%` e `> -20%`; `🔴` ROI `<= -20%`; `⚪` indisponível. Exemplos do print do gestor: `20,74% / 31,19% → 🟢🟢`; `-11,34% / 8,36% → 🟡🟢`; `-9,52% / -7,31% → 🟡🟡`; `-24,75% / -16,52% → 🔴🟡`. Esta revisão altera somente a apresentação e a documentação da fonte; não muda Purchase ROAS, corte, reativação, writes, schedules, budget ou autoridade.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

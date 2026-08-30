@@ -790,10 +790,10 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v14_is_approved_locked_and_keeps_roas_semantics(self):
+    def test_roas_reporting_v16_keeps_layout_and_confirms_roi_source_and_bands(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('cpv13_intraday_desktop_table_v14_approved_and_locked_by_nicolas', reporting_policy['status'])
-        self.assertIn('no recurring explanatory legend', reporting_policy['layout'])
+        self.assertIn('v16_messenger_pages_source_confirmed_roi_bands_active', reporting_policy['status'])
+        self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         desktop = reporting_policy['cpv13_intraday_print_correction']
         self.assertEqual(desktop['manager_approval']['approved_by'], 'Nicolas Holanda')
@@ -830,8 +830,14 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'target marker')
         self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'up arrow; not positive ROI')
         self.assertIn('only ROI below 0 percent is labeled negative', reporting_policy['semantic_distinction'])
-        self.assertEqual(reporting_policy['roi_visual_policy']['positive'], 'green with signed percentage')
-        self.assertEqual(reporting_policy['roi_visual_policy']['negative'], 'red with signed percentage')
+        self.assertIn('greater than or equal to 0', reporting_policy['roi_visual_policy']['positive_or_zero'])
+        self.assertIn('above -20', reporting_policy['roi_visual_policy']['negative_warning'])
+        self.assertIn('less than or equal to -20', reporting_policy['roi_visual_policy']['negative_critical'])
+        source_correction = reporting_policy['roi_pair_source_and_color_correction']
+        self.assertEqual(source_correction['display_order'], 'R/E always shows current ROI first and estimated future ROI second')
+        self.assertIn('/estimated/revenue/utm_adgroup', source_correction['source_confirmation'])
+        self.assertEqual(source_correction['color_bands']['yellow'], 'ROI < 0% and > -20%')
+        self.assertIn('same future-estimate backend', reporting_policy['source_routes']['economics_estimated'])
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
             self.assertIn(key, formulas)
