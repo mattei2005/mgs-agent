@@ -1,0 +1,66 @@
+{
+  "status": "dry_run_pass_with_adops_pending",
+  "authorization_message_id": "1543434594362331246",
+  "planned_replacements": 11,
+  "preflight": {
+    "drip": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "routes": 30,
+      "old_counts": [
+        6
+      ],
+      "new_counts": [
+        0
+      ],
+      "targeted": 6
+    },
+    "broadcast": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "routes": 23,
+      "old_counts": [
+        5
+      ],
+      "new_counts": [
+        0
+      ],
+      "targeted": 5
+    }
+  },
+  "target_ids": [
+    605,
+    606,
+    1080,
+    1081,
+    1082,
+    1083,
+    1084,
+    1085,
+    1086,
+    1087,
+    1088
+  ],
+  "new_urls_http_200": true,
+  "operations": {
+    "FACEBOOK": {
+      "https://zytiva.com/rec-gb-cc-aib-visa-gold-card": ""
+    },
+    "MCT": {
+      "https://zytiva.com/rec-gb-cc-aib-visa-gold-card": ""
+    }
+  },
+  "adops_pending_routes": 11,
+  "backup_dir": "/root/mgs-agent/backups/sb-smart-routing/20260829T214010-0400-zytiva-gb-cc-en-aib-visa-url-replacement"
+}

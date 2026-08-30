@@ -10964,6 +10964,36 @@
       "authorization_message_id": "1543419014657605735",
       "source_report": "discord:#alerts-infra/1543430260727619746",
       "updated_at": "2026-08-29T21:09:19-04:00"
+    },
+    {
+      "id": "zeus-zytiva-gb-cc-en-aib-visa-url-replacement-20260829",
+      "agent": "zeus",
+      "type": "smartbidding_smart_routing_url_replacement",
+      "external_system": "SmartBidding Smart Routing",
+      "publisher": "digital-trust_zytiva",
+      "authorization_source": "discord:thread:1543124952142843944:message:1543434594362331246",
+      "scope": {
+        "old_url": "https://zytiva.com/rec-gb-cc-aib-visa-gold",
+        "new_url": "https://zytiva.com/rec-gb-cc-aib-visa-gold-card",
+        "drip_pools": 6,
+        "broadcast_pools": 5,
+        "replacements": 11
+      },
+      "status": "success_with_adops_pending",
+      "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260829T214010-0400-zytiva-gb-cc-en-aib-visa-url-replacement",
+      "backup_dir": "/root/mgs-agent/backups/sb-smart-routing/20260829T214010-0400-zytiva-gb-cc-en-aib-visa-url-replacement",
+      "validation": "New URL HTTP 200; canary plus 10 rollout writes HTTP 201; old URL 0; new URL 11; 53/53 routes preserved; freeze=false 53/53; immediate and independent readback PASS; no pool creation or deletion.",
+      "adops_pending": "11/11 replaced routes have blank jbf_operation because the exact new REC pathname is absent from both FACEBOOK and MCT live operation catalogs; unrelated 42/42 routes retain nonblank operations.",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1543436353008705611",
+        "http_readback": 200,
+        "content_empty": true,
+        "embed": true,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "updated_at": "2026-08-29T21:45:02-04:00"
     }
   ],
   "profile_skill_references": [

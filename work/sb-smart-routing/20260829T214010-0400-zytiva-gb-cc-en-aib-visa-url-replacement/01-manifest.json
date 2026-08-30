@@ -1,0 +1,155 @@
+{
+  "mode": "apply",
+  "authorization_message_id": "1543434594362331246",
+  "at_et": "2026-08-29T21:42:13-04:00",
+  "list_http": 201,
+  "operations_http": 200,
+  "url_checks": [
+    {
+      "url": "https://zytiva.com/rec-gb-cc-aib-visa-gold-card",
+      "http": 200,
+      "final_url": "https://zytiva.com/rec-gb-cc-aib-visa-gold-card/"
+    }
+  ],
+  "operations": {
+    "FACEBOOK": {
+      "https://zytiva.com/rec-gb-cc-aib-visa-gold-card": ""
+    },
+    "MCT": {
+      "https://zytiva.com/rec-gb-cc-aib-visa-gold-card": ""
+    }
+  },
+  "preflight": {
+    "drip": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "routes": 30,
+      "old_counts": [
+        6
+      ],
+      "new_counts": [
+        0
+      ],
+      "targeted": 6
+    },
+    "broadcast": {
+      "distribution": [
+        5,
+        5,
+        5,
+        5,
+        3
+      ],
+      "routes": 23,
+      "old_counts": [
+        5
+      ],
+      "new_counts": [
+        0
+      ],
+      "targeted": 5
+    }
+  },
+  "target_ids": [
+    605,
+    606,
+    1080,
+    1081,
+    1082,
+    1083,
+    1084,
+    1085,
+    1086,
+    1087,
+    1088
+  ],
+  "before_target_sha256": "9078fec58454775a1a76e1fa884b855e69f24897d735eec7b871064d4faa0795",
+  "before_unrelated_sha256": "297e7d22727a25f12cb1acb42c30988df11c0cfd56f402e8ae39ad164ee311bc",
+  "plans": [
+    {
+      "id": 605,
+      "name": "zy-gb-cc-en-drip 001",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1084,
+      "name": "zy-gb-cc-en-drip 002",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1085,
+      "name": "zy-gb-cc-en-drip 003",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1086,
+      "name": "zy-gb-cc-en-drip 004",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1087,
+      "name": "zy-gb-cc-en-drip 005",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1088,
+      "name": "zy-gb-cc-en-drip 006",
+      "family": "drip",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 606,
+      "name": "zy-gb-cc-en-mct broadcast 001",
+      "family": "broadcast",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1080,
+      "name": "zy-gb-cc-en-mct broadcast 002",
+      "family": "broadcast",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1081,
+      "name": "zy-gb-cc-en-mct broadcast 003",
+      "family": "broadcast",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1082,
+      "name": "zy-gb-cc-en-mct broadcast 004",
+      "family": "broadcast",
+      "changed": 1,
+      "route_count": 5
+    },
+    {
+      "id": 1083,
+      "name": "zy-gb-cc-en-mct broadcast 005",
+      "family": "broadcast",
+      "changed": 1,
+      "route_count": 3
+    }
+  ],
+  "planned_replacements": 11,
+  "freeze_policy": "preserve false"
+}

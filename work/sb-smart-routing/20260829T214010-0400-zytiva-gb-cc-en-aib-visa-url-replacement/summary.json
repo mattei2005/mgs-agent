@@ -1,0 +1,236 @@
+{
+  "status": "success_with_adops_pending",
+  "authorization_message_id": "1543434594362331246",
+  "completed_at_et": "2026-08-29T21:42:37-04:00",
+  "writes": [
+    {
+      "phase": "canary",
+      "id": 605,
+      "name": "zy-gb-cc-en-drip 001",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1084,
+      "name": "zy-gb-cc-en-drip 002",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1085,
+      "name": "zy-gb-cc-en-drip 003",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1086,
+      "name": "zy-gb-cc-en-drip 004",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1087,
+      "name": "zy-gb-cc-en-drip 005",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1088,
+      "name": "zy-gb-cc-en-drip 006",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 606,
+      "name": "zy-gb-cc-en-mct broadcast 001",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1080,
+      "name": "zy-gb-cc-en-mct broadcast 002",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1081,
+      "name": "zy-gb-cc-en-mct broadcast 003",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1082,
+      "name": "zy-gb-cc-en-mct broadcast 004",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    },
+    {
+      "phase": "rollout",
+      "id": 1083,
+      "name": "zy-gb-cc-en-mct broadcast 005",
+      "http": 201,
+      "changed": 1,
+      "readback": "PASS"
+    }
+  ],
+  "updated_pool_count": 11,
+  "replacements": 11,
+  "created": 0,
+  "deleted": 0,
+  "adops_pending_routes": 11,
+  "immediate_readback": "PASS",
+  "independent_readback": "PASS",
+  "metrics": {
+    "rows": [
+      {
+        "id": 605,
+        "name": "zy-gb-cc-en-drip 001",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1084,
+        "name": "zy-gb-cc-en-drip 002",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1085,
+        "name": "zy-gb-cc-en-drip 003",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1086,
+        "name": "zy-gb-cc-en-drip 004",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1087,
+        "name": "zy-gb-cc-en-drip 005",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1088,
+        "name": "zy-gb-cc-en-drip 006",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 606,
+        "name": "zy-gb-cc-en-mct broadcast 001",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1080,
+        "name": "zy-gb-cc-en-mct broadcast 002",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1081,
+        "name": "zy-gb-cc-en-mct broadcast 003",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1082,
+        "name": "zy-gb-cc-en-mct broadcast 004",
+        "route_count": 5,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      },
+      {
+        "id": 1083,
+        "name": "zy-gb-cc-en-mct broadcast 005",
+        "route_count": 3,
+        "new_counts": [
+          1
+        ],
+        "old_count": 0,
+        "blank_operations": 1,
+        "freeze_true": 0
+      }
+    ],
+    "old_total": 0,
+    "new_totals": [
+      11
+    ],
+    "route_total": 53,
+    "blank_operations": 11,
+    "freeze_true": 0
+  },
+  "backup_dir": "/root/mgs-agent/backups/sb-smart-routing/20260829T214010-0400-zytiva-gb-cc-en-aib-visa-url-replacement",
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/20260829T214010-0400-zytiva-gb-cc-en-aib-visa-url-replacement"
+}
