@@ -95,7 +95,7 @@ class Planner:
                 name=f"pure_clone_update_{index}",
                 method="POST",
                 relative_url=f"{{campaign_id_{index}}}",
-                body={"name": campaign.name, **campaign.campaign_updates, "status": campaign.status},
+                body={"name": campaign.name, **campaign.campaign_updates, "start_time": campaign.start_time, "status": campaign.status},
                 kind="campaign_update",
             ))
         return StagePlan("pure_clone_update", tuple(ops))

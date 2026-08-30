@@ -12,7 +12,7 @@ from typing import Any, Callable
 
 from .coordination import AccountWriterLeaseStore
 from .planning import BundlePlan, Planner
-from .prevalidation import verify_prevalidation
+from .prevalidation import validate_account_policy, verify_prevalidation
 from .quota import LaneQuotaStore, QuotaBlocked
 from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
@@ -37,6 +37,15 @@ class ReadbackCooldownDeferred(RuntimeError):
 
 def _utc() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _same_iso_instant(left: Any, right: Any) -> bool:
+    try:
+        a = datetime.fromisoformat(str(left).replace("Z", "+00:00"))
+        b = datetime.fromisoformat(str(right).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return False
+    return a.astimezone(timezone.utc) == b.astimezone(timezone.utc)
 
 
 def _safe_name(value: str) -> str:
@@ -84,6 +93,7 @@ class CampaignEngine:
         self._audit_lock = threading.Lock()
 
     def dry_run(self, manifest: Manifest) -> dict[str, Any]:
+        validate_account_policy(manifest, self.config)
         plan = self.planner.build(manifest)
         summary = plan.summary()
         return {
@@ -226,7 +236,7 @@ class CampaignEngine:
         update_ops = [
             BatchOperation(
                 f"pure_clone_update_{index}", "POST", campaign_id,
-                body={"name": campaign.name, **campaign.campaign_updates, "status": campaign.status},
+                body={"name": campaign.name, **campaign.campaign_updates, "start_time": campaign.start_time, "status": campaign.status},
                 kind="campaign_update",
             )
             for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1)
@@ -279,10 +289,11 @@ class CampaignEngine:
             updates = []
             for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1):
                 live = next(row for row in direct_reads if row.name == f"recovery_campaign_{index}").body
-                desired = {"name": campaign.name, **campaign.campaign_updates, "status": campaign.status}
+                desired = {"name": campaign.name, **campaign.campaign_updates, "start_time": campaign.start_time, "status": campaign.status}
                 budget_matches = "daily_budget" not in desired or str(live.get("daily_budget") or "") == str(desired["daily_budget"])
                 status_matches = str(live.get("configured_status") or live.get("status") or "").upper() == campaign.status
-                if str(live.get("name") or "") != campaign.name or not budget_matches or not status_matches:
+                start_matches = _same_iso_instant(live.get("start_time"), campaign.start_time)
+                if str(live.get("name") or "") != campaign.name or not budget_matches or not status_matches or not start_matches:
                     updates.append(BatchOperation(
                         f"recovery_pure_clone_update_{index}", "POST", campaign_id,
                         body=desired, kind="campaign_update",
@@ -1064,6 +1075,7 @@ class CampaignEngine:
         return lane_result
 
     def execute(self, manifest: Manifest) -> dict[str, Any]:
+        validate_account_policy(manifest, self.config)
         if self.config.get("enabled") is not True or self.config.get("write_enabled") is not True:
             raise EngineDisabled("v3 execute is disabled; use dry_run until the canary gate is approved")
         if self.config.get("require_prevalidated_manifest") is True and not verify_prevalidation(manifest.raw):

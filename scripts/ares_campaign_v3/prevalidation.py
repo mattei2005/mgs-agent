@@ -3,8 +3,10 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 from datetime import datetime, timezone
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from .media_registry import MediaRegistry
 from .schema import Manifest, ManifestError
@@ -22,6 +24,60 @@ def verify_prevalidation(payload: dict[str, Any]) -> bool:
     prevalidation = payload.get("prevalidation") or {}
     expected = str(prevalidation.get("content_digest") or "")
     return payload.get("prevalidated") is True and bool(expected) and expected == content_digest(payload)
+
+
+def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
+    accounts = config.get("accounts") or {}
+    require_registration = config.get("require_account_registration") is True
+    for campaign in manifest.campaigns:
+        account = accounts.get(campaign.account_id)
+        if account is None:
+            if require_registration:
+                raise ManifestError(f"account {campaign.account_id} is not registered in engine v3")
+            continue
+        if str(account.get("app_key") or "") != campaign.app_key:
+            raise ManifestError(f"account {campaign.account_id} app_key mismatch")
+
+        supported_modes = set(account.get("supported_modes") or [])
+        if supported_modes and campaign.mode not in supported_modes:
+            raise ManifestError(
+                f"account {campaign.account_id} does not support mode {campaign.mode}"
+            )
+
+        policy = account.get("campaign_policy") or {}
+        name_regex = policy.get("name_regex")
+        if name_regex and re.fullmatch(str(name_regex), campaign.name) is None:
+            raise ManifestError(f"campaign name violates account naming policy: {campaign.name}")
+
+        if policy.get("budget_update_required"):
+            raw_budget = campaign.campaign_updates.get("daily_budget")
+            try:
+                budget_minor = int(str(raw_budget))
+            except (TypeError, ValueError) as exc:
+                raise ManifestError("account campaign policy requires explicit daily_budget") from exc
+            if budget_minor <= 0:
+                raise ManifestError("daily_budget must be a positive minor-unit integer")
+
+        required_status = str(policy.get("configured_status") or "").upper()
+        if required_status and campaign.status != required_status:
+            raise ManifestError(f"account campaign policy requires status {required_status}")
+
+        required_local_time = policy.get("start_local_time")
+        if required_local_time:
+            start = datetime.fromisoformat(campaign.start_time.replace("Z", "+00:00"))
+            local = start.astimezone(ZoneInfo(str(account.get("timezone") or "UTC")))
+            if local.strftime("%H:%M") != str(required_local_time):
+                raise ManifestError(
+                    f"account campaign policy requires start_time {required_local_time} {account.get('timezone') or 'UTC'}"
+                )
+
+        if campaign.mode == "pure_clone":
+            allowed = set(policy.get("pure_clone_allowed_update_keys") or [])
+            unexpected = set(campaign.campaign_updates) - allowed
+            if unexpected:
+                raise ManifestError(
+                    f"pure_clone account policy forbids campaign_updates: {sorted(unexpected)}"
+                )
 
 
 def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dict[str, Any]:

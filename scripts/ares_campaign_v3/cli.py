@@ -11,7 +11,7 @@ from .adapters import build_cpv_manifest
 from .engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from .media_registry import MediaNotReady, MediaRegistry
 from .prestage import AdAccountVideoUploader, MediaUploadError, PrestageService
-from .prevalidation import prevalidate_payload
+from .prevalidation import prevalidate_payload, validate_account_policy
 from .quota import QuotaBlocked
 from .schema import Manifest, ManifestError
 from .source_selection import expand_source_selections
@@ -174,7 +174,9 @@ def _main(argv: list[str] | None = None) -> int:
         print(json.dumps({"status": "MANIFEST_BUILT_NOT_PREVALIDATED", "output": str(output), "campaigns": len(payload["campaigns"])}))
         return 0
     if args.command == "prevalidate":
-        payload = prevalidate_payload(load_json(args.manifest), MediaRegistry(args.registry))
+        source_payload = load_json(args.manifest)
+        validate_account_policy(Manifest.from_dict(source_payload), load_json(args.config))
+        payload = prevalidate_payload(source_payload, MediaRegistry(args.registry))
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
@@ -184,6 +186,7 @@ def _main(argv: list[str] | None = None) -> int:
     config = load_json(args.config)
     manifest = Manifest.from_dict(load_json(args.manifest))
     if args.command == "validate":
+        validate_account_policy(manifest, config)
         print(json.dumps({"status": "VALID", "request_id": manifest.request_id, "campaigns": len(manifest.campaigns), "digest": manifest.digest}))
         return 0
     if args.command == "plan":
