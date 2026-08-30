@@ -1087,7 +1087,7 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; every campaign appears exactly once; each table block has at most ten rows and also respects actual rendered character count; campaign families remain naturally ordered, every heading repeats and every code fence stays balanced",
+      "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count plus a maximum of ten rows per table block, never splits a campaign row, keeps campaign families naturally ordered, repeats every heading and keeps every code fence balanced",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

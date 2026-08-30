@@ -828,10 +828,16 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v16_keeps_layout_and_confirms_roi_source_and_bands(self):
+    def test_roas_reporting_v17_keeps_layout_and_scales_campaign_identity(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('v16_messenger_pages_source_confirmed_roi_bands_active', reporting_policy['status'])
+        self.assertIn('v17_compact_campaign_variants_and_ten_row_pages_active', reporting_policy['status'])
         self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
+        self.assertIn('Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024', reporting_policy['layout'])
+        large_table = reporting_policy['campaign_identity_and_large_table_correction']
+        self.assertEqual(large_table['validation']['high_volume_fixture_campaigns'], 55)
+        self.assertEqual(large_table['validation']['unique_compact_keys'], 55)
+        self.assertEqual(large_table['validation']['expected_table_parts'], 6)
+        self.assertIn('maximum ten campaign rows', large_table['pagination'])
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         desktop = reporting_policy['cpv13_intraday_print_correction']
         self.assertEqual(desktop['manager_approval']['approved_by'], 'Nicolas Holanda')
@@ -847,7 +853,7 @@ class ContractTests(unittest.TestCase):
         self.assertIn('one campaign per row with direct semantic headings instead of generic metric/value headings', reporting_policy['layout'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
-            'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
+            'Ligada with visual yes/no signal', 'Campanha compact sequence plus C/DUP variant plus UTM',
             'Entrega', 'Ação from the Ares cycle decision', 'Página name',
             'Cost per messaging conversation started',
             'Meta Purchase ROAS with directional below/equal/above/unavailable threshold marker',
@@ -860,7 +866,7 @@ class ContractTests(unittest.TestCase):
         ):
             self.assertIn(expected, fields)
         self.assertNotIn('Smart Bidding Page ID', fields)
-        self.assertLess(fields.index('Campanha operational prefix plus UTM'), fields.index('Página name'))
+        self.assertLess(fields.index('Campanha compact sequence plus C/DUP variant plus UTM'), fields.index('Página name'))
         self.assertLess(fields.index('Página name'), fields.index('Entrega'))
         self.assertIn('Page ID is hidden', reporting_policy['display_exclusions'][0])
         self.assertIn('$1,86', reporting_policy['display_currency_format'])
