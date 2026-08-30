@@ -384,51 +384,18 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append('✅ Fontes reconciliadas e regra nativa sem conflito.')
 
     if campaigns:
-        lines.extend(['', '**📱 CAMPANHAS • leitura rápida**'])
-        for index, row in enumerate(campaigns, start=1):
-            lines.extend([
-                '',
-                f"**{index:02d}. {row.get('action_emoji')} {row.get('action_label')} • {row.get('name') or row.get('campaign_id')}**",
-                '```text',
-                f"UTM        {row.get('utm_campaign') or 'N/D':<12} Status       {row.get('status') or 'N/D'}",
-                f"Budget     {common.fmt_money(row.get('budget_usd')):<12} Spend        {common.fmt_money(row.get('spend'))}",
-                f"Msg inic.  {common.fmt_number(row.get('messaging_started'), 0):<12} Custo/msg    {common.fmt_money(row.get('cost_per_messaging_started'))}",
-                f"CTR        {_fmt_percent(row.get('ctr')):<12} ROAS         {common.fmt_number(row.get('purchase_roas'))}",
-                f"Meta CPM   {common.fmt_money(row.get('cpm')):<12} LEADS        {common.fmt_number(row.get('sb_leads'), 0)}",
-                f"ROI real*  {_fmt_percent(row.get('roi_real')):<12} ROI estim.*  {_fmt_percent(row.get('roi_estimated'))}",
-                f"CPM bloco* {common.fmt_money(row.get('block_cpm')):<12} RPS*          {common.fmt_money(row.get('rps'))}",
-                f"Ação       {row.get('action_detail')}",
-                f"Join LEADS {row.get('join_status') or 'N/D'}",
-                f"Join econ. {row.get('economic_join_status') or 'N/D'}",
-                '```',
-            ])
-
-        meta_rows: list[str] = []
-        for index, row in enumerate(campaigns, start=1):
-            meta_rows.append(
-                f"{index:<2} {(row.get('action_label') or 'N/D')[:8]:<8} {(row.get('utm_campaign') or 'N/D')[:9]:<9} "
-                f"{common.fmt_money(row.get('spend')):>7} {common.fmt_number(row.get('messaging_started'), 0):>4} "
-                f"{common.fmt_money(row.get('cost_per_messaging_started')):>6} {_fmt_percent(row.get('ctr')):>6} "
-                f"{common.fmt_number(row.get('purchase_roas')):>6} {common.fmt_money(row.get('cpm')):>6}"
-            )
-        _append_table_pages(
-            lines, '🖥️ META • decisão consolidada',
-            '#  Ação     UTM         Spend  Msg  C/msg    CTR   ROAS  M.CPM',
-            '-- -------- --------- ------- ---- ------ ------ ------ ------',
-            meta_rows,
+        dashboard_header = (
+            'R/E  On  #  Camp/Pg        Delivery Ação      C/msg  ROAS  C/res  Res  Budget   Spend    CPM    CTR    CPC '
+            '│ Page ID         Page               C/Sub      Rev   Profit     ROI%  Leads  ROI Drip   Rev BC'
         )
-        sb_rows: list[str] = []
-        for index, row in enumerate(campaigns, start=1):
-            sb_rows.append(
-                f"{index:<2} {common.fmt_number(row.get('sb_leads'), 0):>6} {_fmt_percent(row.get('roi_real')):>9} "
-                f"{_fmt_percent(row.get('roi_estimated')):>9} {common.fmt_money(row.get('block_cpm')):>10} "
-                f"{common.fmt_money(row.get('rps')):>7} {row.get('join_status') or 'N/D'}"
-            )
+        dashboard_rows = [_dashboard_row(index, row) for index, row in enumerate(campaigns, start=1)]
         _append_table_pages(
-            lines, '💰 SMART BIDDING / MONETIZAÇÃO',
-            '#  LEADS  ROI real* ROI est.* CPM bloco*   RPS*  Join econômico',
-            '-- ------ --------- --------- ---------- ------- ----------------',
-            sb_rows,
+            lines,
+            '📊 PAINEL ÚNICO • Meta Ads + Smart Bidding',
+            dashboard_header,
+            '-' * len(dashboard_header),
+            dashboard_rows,
+            page_size=6,
         )
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
@@ -460,12 +427,11 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append(f"\n**✅ Readback de writes:** {confirmed}/{len(writes)} confirmados.")
     lines.extend([
         '',
-        '**ℹ️ LEGENDA E LIMITAÇÕES**',
-        '`🛑 corte` • `♻️ reativação` • `🚀 escala` • `✅ manter` • `👁️ observar`',
-        '`C/msg` = Spend Meta ÷ mensagens iniciadas. `M.CPM` = CPM Meta.',
-        '`ROI real*` = `(NET_REVENUE−INVESTIMENT)÷INVESTIMENT`; `ROI est.*` usa `estimatedRevenue`.',
-        '`RPS*` = `NET_REVENUE×1.000÷SESSIONS`; `CPM bloco*` = `NET_REVENUE×1.000÷GAM_IMPRESSIONS`.',
-        'Métricas econômicas são somente informativas; `N/D` indica fonte, identidade, freshness ou denominador insuficiente e não altera a regra de corte por Meta Purchase ROAS.',
+        '**ℹ️ LEGENDA**',
+        '`R/E` = sinais do ROI real/estimado • `On` = campanha ACTIVE • `Camp/Pg` = prefixo da campanha + UTM.',
+        '`C/msg` = spend ÷ conversa iniciada • `C/res` = spend ÷ resultado • `CPC` = spend ÷ link click.',
+        '`C/Sub*` = investimento ÷ SUBSCRIBED • `Profit*` = REVENUE − INVESTIMENT • `ROI%*` e `ROI Drip*` usam o mesmo investimento.',
+        'Campos SB ficam `N/D` sem UTM + Page ID + freshness válidos. São informativos; Meta Purchase ROAS continua decidindo corte/reativação.',
     ])
     if run.get('phase') == 'RESET':
         lines.append('Reset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')

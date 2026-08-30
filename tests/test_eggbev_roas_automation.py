@@ -250,7 +250,7 @@ class ReportingTests(unittest.TestCase):
             }],
             'insights': [{
                 'ad_id': 'a1', 'campaign_id': 'c1', 'campaign_name': '123 - Full Campaign - ENG - US - (pg_12345)',
-                'spend': '12', 'impressions': '1000', 'ctr': '2',
+                'spend': '12', 'impressions': '1000', 'inline_link_clicks': '3', 'ctr': '2',
                 'actions': [{'action_type': 'onsite_conversion.messaging_conversation_started_7d', 'value': '4'}],
                 'action_values': [{'action_type': 'purchase', 'value': '6'}],
             }],
@@ -259,7 +259,8 @@ class ReportingTests(unittest.TestCase):
             'ready': True,
             'target_report_rows': [{
                 'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 11, 'REVENUE': 10,
-                'LEADS': 20, 'SESSIONS': 20, 'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
+                'LEADS': 20, 'SUBSCRIBED': 5, 'DRIP_REVENUE': 6, 'BD_REVENUE': 4,
+                'SESSIONS': 20, 'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
             }],
             'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One'}]},
             'freshness': {'ready': True, 'latest_at_et': '2026-08-29T20:00:00-04:00'},
@@ -290,6 +291,16 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(row['purchase_roas'], 0.5)
         self.assertEqual(row['cpm'], 12)
         self.assertEqual(row['ctr'], 2)
+        self.assertEqual(row['cpc_link'], 4)
+        self.assertEqual(row['messaging_results'], 4)
+        self.assertEqual(row['cost_per_message'], 3)
+        self.assertEqual(row['sb_page_id'], 'page1')
+        self.assertEqual(row['sb_page_name'], 'Page One')
+        self.assertEqual(row['sb_cost_subscriber'], 2.2)
+        self.assertEqual(row['sb_profit'], -1)
+        self.assertAlmostEqual(row['sb_roi_percent'], -100 / 11)
+        self.assertAlmostEqual(row['sb_drip_roi_percent'], -500 / 11)
+        self.assertEqual(row['sb_broadcast_revenue'], 4)
         self.assertEqual(row['rps'], 500)
         self.assertEqual(row['roi_real'], 50)
         self.assertEqual(row['roi_estimated'], 100)
@@ -321,13 +332,18 @@ class ReportingTests(unittest.TestCase):
         self.assertFalse(result['ready'])
         self.assertEqual(result['by_campaign_utm'], {})
 
-    def test_roas_cycle_renderer_has_organized_title_cards_and_two_tables(self):
+    def test_roas_cycle_renderer_has_one_visual_meta_sb_dashboard(self):
         campaign = {
             'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
             'action_emoji': '🛑', 'action_label': 'CORTAR', 'action_detail': '1 anúncio(s)',
             'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
             'spend': 12, 'messaging_started': 4, 'cost_per_messaging_started': 3,
+            'messaging_results': 6, 'cost_per_message': 2, 'cpc_link': .4,
             'ctr': 2, 'purchase_roas': .5, 'cpm': 12, 'sb_leads': 20,
+            'sb_page_id': '123456789012345', 'sb_page_name': 'Page One',
+            'sb_cost_subscriber': 1.5, 'sb_revenue': 40, 'sb_profit': 28,
+            'sb_roi_percent': 233.3, 'sb_drip_roi_percent': 50,
+            'sb_broadcast_revenue': 18,
             'roi_real': None, 'roi_estimated': None, 'block_cpm': None, 'rps': 500,
             'join_status': 'matched',
         }
