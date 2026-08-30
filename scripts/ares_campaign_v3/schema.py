@@ -39,25 +39,6 @@ def _has_text(value: Any, target: str) -> bool:
     return False
 
 
-def _valid_internal_messenger_doc(value: dict[str, Any]) -> bool:
-    """Allow Meta's internal Messenger placeholder only for PBIA creatives."""
-    story = value.get("object_story_spec") or {}
-    asset_feed = value.get("asset_feed_spec") or {}
-    links = asset_feed.get("link_urls") or []
-    additional = asset_feed.get("additional_data") or {}
-    if not isinstance(story, dict) or not isinstance(asset_feed, dict):
-        return False
-    if not story.get("page_id") or not story.get("instagram_user_id"):
-        return False
-    if asset_feed.get("call_to_action_types") != ["APPLY_NOW"]:
-        return False
-    if not isinstance(links, list) or len(links) != 1 or not isinstance(links[0], dict):
-        return False
-    if links[0].get("website_url") != "https://fb.com/messenger_doc/":
-        return False
-    return isinstance(additional, dict) and bool(additional.get("page_welcome_message"))
-
-
 def _label_identity(value: Any) -> str:
     if not isinstance(value, dict):
         return ""
@@ -146,7 +127,7 @@ class AdSpec:
             raise ManifestError("creative_payload is required")
         if _has_key(payload, "standard_enhancements"):
             raise ManifestError("standard_enhancements is prohibited")
-        if _has_text(payload, "https://fb.com/messenger_doc/") and not _valid_internal_messenger_doc(payload):
+        if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
         _validate_video_label_references(payload)
         media_value = value.get("media")

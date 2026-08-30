@@ -109,7 +109,8 @@ def _creative_payload(
             "titles": [{"text": item} for item in headlines],
             "descriptions": [{"text": description}],
             "call_to_action_types": [cta],
-            "link_urls": [{"website_url": "https://fb.com/messenger_doc/", "display_url": ""}],
+            "call_to_actions": [{"type": cta, "value": {"app_destination": "MESSENGER"}}],
+            "link_urls": [{"website_url": f"https://m.me/{page_id}", "display_url": ""}],
             "asset_customization_rules": [
                 {
                     "customization_spec": {

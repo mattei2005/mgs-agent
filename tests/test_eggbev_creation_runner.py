@@ -40,7 +40,14 @@ class EggbevCreationRunnerTests(unittest.TestCase):
                     )
                     self.assertEqual(
                         creative["asset_feed_spec"]["link_urls"],
-                        [{"website_url": "https://fb.com/messenger_doc/", "display_url": ""}],
+                        [{
+                            "website_url": f"https://m.me/{creative['object_story_spec']['page_id']}",
+                            "display_url": "",
+                        }],
+                    )
+                    self.assertEqual(
+                        creative["asset_feed_spec"]["call_to_actions"],
+                        [{"type": "APPLY_NOW", "value": {"app_destination": "MESSENGER"}}],
                     )
 
     def test_scoped_selection_is_deterministic_and_not_filename_order(self):
