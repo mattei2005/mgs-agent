@@ -25,7 +25,7 @@ Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
 Write Meta                status de ad/campanha no ciclo ROAS habilitado; budget write bloqueado; guardrail de leads habilitado
-Crons Eggbev              Corte e ROAS nos ciclos ET + guardrail de leads 08:00/20:00; scheduler gateway ainda requer validação de tick
+Crons Eggbev              Corte/ROAS e guardrail de leads ativos; tick LEADS 20:00 ET confirmado. Flag cron gateway_running=false é falso negativo do observador; execução real vence.
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
@@ -87,6 +87,17 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
+
+### Roteamento obrigatório — Limite de Leads
+
+Na thread `1543312825890381865`, pedidos como “sua configuração”, “como está configurado”, “mostre tudo” ou “relatório” significam **somente a rota de limite de LEADS por página**: fonte, métrica, threshold, reconciliação, freshness, horários, runtime, alertas, readbacks e limitações. Nunca responder com configuração global do Hermes/Ares ou misturar ROAS, criação, clones, Diário e Intraday.
+
+- Prompt canônico: `data/ares/discord/thread-prompts/1543312825890381865.txt` e `discord.channel_prompts.1543312825890381865`.
+- A configuração está persistida; a ativação em novas sessões depende do próximo restart seguro do gateway. Nunca reiniciar o gateway dentro da sessão ativa.
+- Smart Bidding exige timestamp verificável com idade máxima de 2h. Ausente, inválido, futuro ou stale bloqueia somente o item afetado e gera alerta; `BROADCAST_TIME` e `DATE_START` não provam atualização.
+- O wrapper automático usa `--scheduled` e aceita apenas 08:00/20:00 `America/New_York`; execução manual autorizada é separada.
+- Mapping/freshness inválidos geram mensagem na thread; toda postagem exige GET/readback exato. Falha primária tenta uma vez a thread Regras `1543280854024060999`; falha total termina o run com erro.
+- O tick agendado de 20:00 ET em 29/08/2026 foi confirmado `ok`. A flag `gateway_running=false` do cron tool é falso negativo do observador e não prevalece sobre o histórico real de execução.
 
 ## Escopo Ares
 
@@ -216,9 +227,12 @@ Runtime:
 Thread fixa           Eggbev-US-CC-EN Limite de Leads (`1543312825890381865`)
 Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
-Modo                   dry-run e controlled-write preflight validados
+Modo                   dry-run e controlled-write com preflight/readback
 Cron                   `0 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled
-Estado do scheduler    processo Ares ativo, mas cron tool ainda informa gateway_running=false; automação não é considerada provada até readback de um tick programado após a auditoria
+Estado do scheduler    ativo; tick 20:00 ET confirmado ok em 29/08/2026; gateway_running=false é falso negativo do observador
+Freshness              timestamp Smart Bidding verificável, máximo 2h; ausente/stale = no_write + alerta
+Discord                GET/readback exato; fallback único para Regras; falha total torna o run erro
+Horário interno        wrapper agendado exige `--scheduled` e permite apenas 08:00/20:00 ET
 ```
 
 Quando Nicolas pedir relatório, executar leitura real e mostrar todas as páginas exatamente reconciliadas com campanhas e anúncios ativos. Usar **proximidade ao limite**, sem chamar de previsão estatística:
@@ -282,7 +296,7 @@ Testes aprovados        56 no módulo ROAS atual; suíte ampliada cobre guardrai
 Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
 Budget write            false; exige Rodolfo/Geizian + teto/envelope
 Post ciclo ROAS         habilitado na thread fixa
-Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; cadastro enabled/scheduled, tick pendente porque gateway_running=false
+Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; scheduler ativo e tick 20:00 alcançou o runner; o ciclo terminou fail-closed por freshness Smart Bidding, não por falha do scheduler
 Post/Cron Diário         false
 ```
 
@@ -358,6 +372,19 @@ Limite de autoridade: Nicolas aprovou a política, mas a matriz MGS exige Rodolf
 Validação: 58 testes PASS. Fixture de limite confirmou `0,50 → KEEP`; `0,51 → +10%`; exemplo `USD 100 → USD 110`. Dry-run vivo mostrou o rótulo `Escalas +10% recomendadas` e zero writes/crons.
 
 Smart Bidding avançou parcialmente: a conta `Eggbev-US-CC-EN-01` agora aparece com 1 linha, mas o schema não expõe timestamp de atualização. Como freshness máxima é 2h, o gate retorna `smart_bidding_freshness_unverifiable` e mantém economic writes fail-closed.
+
+## Hardening do Limite de Leads — 2026-08-29 20:00 ET
+
+Os gaps históricos de scheduler e freshness da rota Limite de Leads foram supersedidos:
+
+- tick `c3d2499d8c33` de 20:00 ET confirmado `ok`; próximo 08:00 ET;
+- source gate por timestamp com máximo 2h implementado; schema vivo atual não expõe campo aceito, então qualquer campanha ativa reconciliada fica `no_write` e gera alerta até a Smart Bidding fornecer timestamp verificável;
+- erros de mapping/freshness são publicados, não ficam apenas no audit;
+- posts usam GET/readback exato e falha total termina o run com erro;
+- fallback único de erro vai para Regras `1543280854024060999`;
+- wrapper automático tem gate interno `--scheduled` para 08:00/20:00 ET;
+- auditoria lê `auto_reactivate=false` do escopo correto;
+- prompt canônico da thread foi persistido; ativação no gateway depende do próximo restart seguro externo à sessão.
 
 ## Sequência de implementação
 

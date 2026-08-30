@@ -950,13 +950,22 @@
     }
   },
   "last_live_validation": {
-    "at_et": "2026-08-29T13:52:48-04:00",
-    "mode": "controlled_write_then_read_only_status",
+    "at_et": "2026-08-29T20:09:46-04:00",
+    "mode": "live_read_only_after_hardening",
     "ok": true,
     "active_campaigns": 0,
+    "active_ads": 0,
     "eligible_pages_over_limit": 0,
     "campaigns_paused_confirmed": 0,
-    "mapping_issues": 0
+    "mapping_issues": 0,
+    "meta_writes": 0,
+    "discord_posts": 0,
+    "smart_bidding_rows_read": 344,
+    "auto_reactivate_audit_readback": false,
+    "freshness_max_age_hours_audit_readback": 2.0,
+    "targeted_tests_passed": 24,
+    "full_tests_passed": 281,
+    "audit": "data/ares/meta-ads/audit/guardrails/Eggbev-US-CC-EN-BOT/page-leads/run-20260829T200942-0400.json"
   },
   "end_to_end_audit": {
     "at_et": "2026-08-29T15:37:33-04:00",
