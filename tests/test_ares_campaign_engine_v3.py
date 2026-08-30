@@ -996,7 +996,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
-    assert audit['engine_release_version'] == '3.3.0'
+    assert audit['engine_release_version'] == '3.4.0'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
@@ -1368,7 +1368,7 @@ def test_transient_code2_retry_uses_remaining_development_lane_capacity(tmp_path
 
 def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():
     production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    assert production['release_version'] == '3.3.0'
+    assert production['release_version'] == '3.4.0'
     assert production['soft_score'] == 100
     assert production['hard_score'] == 120
     assert production['development_access_score_max'] == 60

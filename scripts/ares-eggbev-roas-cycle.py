@@ -122,8 +122,34 @@ def _roi_signal(value: Any) -> str:
     return '⚪' if number is None else '🟢' if number >= 0 else '🔴'
 
 
-def _delivery_signal(status: Any) -> str:
-    return '🟢' if common.norm(status).upper() == 'ACTIVE' else '🔴'
+def _delivery_visual(status: Any) -> str:
+    return '🟢 SIM' if common.norm(status).upper() == 'ACTIVE' else '🔴 NÃO'
+
+
+def _delivery_label(status: Any) -> str:
+    normalized = common.norm(status).upper()
+    return {
+        'ACTIVE': 'ATIVA',
+        'PAUSED': 'PAUSADA',
+        'DELETED': 'EXCLUÍDA',
+        'ARCHIVED': 'EXCLUÍDA',
+    }.get(normalized, normalized or 'N/D')
+
+
+def _roas_visual(value: Any, threshold: Any) -> str:
+    number = common.finite_float(value)
+    cutoff = common.finite_float(threshold)
+    if number is None:
+        return '⚪ N/D'
+    if cutoff is None:
+        signal = '🔵'
+    elif number < cutoff:
+        signal = '🔴'
+    elif abs(number - cutoff) <= 1e-9:
+        signal = '🟡'
+    else:
+        signal = '🟢'
+    return f'{signal} {common.fmt_number(number)}'
 
 
 def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str, str, str]:
