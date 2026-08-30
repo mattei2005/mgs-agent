@@ -211,6 +211,24 @@
           "writes_enabled": false,
           "audit": "data/ares/meta-ads/audit/eggbev/daily-renderer-v2-review-20260829T190830-0400.json"
         }
+      },
+      "page_lead_guardrail": {
+        "thread_id": "1543312825890381865",
+        "thread_name": "Eggbev-US-CC-EN Limite de Leads",
+        "scope": "Page lead guardrail configuration, live status and action/error reporting only",
+        "canonical_prompt_source": "data/ares/discord/thread-prompts/1543312825890381865.txt",
+        "exact_thread_prompt_configured": true,
+        "activation_pending_gateway_reload": true,
+        "generic_configuration_question_means": "configuration of this page-lead route only; never global Ares/Hermes configuration",
+        "freshness_required": true,
+        "freshness_maximum_age_hours": 2,
+        "mapping_errors_visible": true,
+        "discord_get_readback_required": true,
+        "delivery_failure_is_fatal": true,
+        "fallback_error_thread_id": "1543280854024060999",
+        "scheduled_window_gate": ["08:00", "20:00"],
+        "scheduled_timezone": "America/New_York",
+        "auto_reactivate": false
       }
     }
   },
@@ -740,7 +758,7 @@
   },
   "page_lead_guardrail": {
     "policy_approved": true,
-    "status": "active_scheduled_waiting_scheduler_gateway",
+    "status": "active_scheduled_tick_confirmed",
     "authorized_by": "Nicolas",
     "authorized_by_discord_id": "1055570806945620030",
     "authorized_at_et": "2026-08-29T13:21:16-04:00",
@@ -769,7 +787,21 @@
         "FB_PAGE_ID exact readback against Meta creative page_id"
       ],
       "ambiguous_or_missing_mapping": "fail_closed_no_write",
-      "leads_total_is_not_the_action_metric": true
+      "leads_total_is_not_the_action_metric": true,
+      "freshness": {
+        "required": true,
+        "maximum_age_hours": 2,
+        "timestamp_fields": [
+          "UPDATED_AT",
+          "updated_at",
+          "LAST_UPDATED",
+          "last_updated",
+          "DATA_UPDATED_AT",
+          "data_updated_at"
+        ],
+        "unverifiable_or_stale": "fail_closed_no_write_and_post_error",
+        "rejected_as_update_timestamps": ["BROADCAST_TIME", "DATE_START"]
+      }
     },
     "restriction_reporting": {
       "field": "RESTRICTED_UNTIL",
@@ -854,7 +886,11 @@
     "discord": {
       "thread_name": "Eggbev-US-CC-EN Limite de Leads",
       "thread_id": "1543312825890381865",
+      "fallback_error_thread_id": "1543280854024060999",
       "separate_from_intraday": true,
+      "post_requires_get_readback": true,
+      "post_failure_fails_run": true,
+      "mapping_and_freshness_errors_are_posted": true,
       "required_fields": [
         "page name",
         "UTM_CAMPAIGN",
@@ -868,9 +904,11 @@
     },
     "runtime": {
       "write_enabled": true,
-      "blocked_reason": "scheduler_gateway_not_running",
+      "blocked_reason": null,
       "runner": "/root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py",
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh",
+      "scheduled_wrapper_requires_internal_time_gate": true,
+      "scheduled_flag": "--scheduled",
       "cron_name": "Eggbev limite de leads 08h e 20h ET",
       "cron_id": "c3d2499d8c33",
       "no_agent": true,
@@ -902,9 +940,13 @@
       "deliver": "local",
       "enabled": true,
       "state": "scheduled",
-      "gateway_running": false,
-      "next_run_at_et": "2026-08-29T20:00:00-04:00",
-      "readback_at_et": "2026-08-29T13:52:48-04:00"
+      "gateway_running_observer": false,
+      "scheduler_tick_confirmed": true,
+      "last_run_at_et": "2026-08-29T20:00:05.226965-04:00",
+      "last_status": "ok",
+      "next_run_at_et": "2026-08-30T08:00:00-04:00",
+      "readback_at_et": "2026-08-29T20:02:14-04:00",
+      "activation_conclusion": "active; the 20:00 scheduled tick completed successfully. gateway_running=false is an observer false negative and does not override execution history."
     }
   },
   "last_live_validation": {

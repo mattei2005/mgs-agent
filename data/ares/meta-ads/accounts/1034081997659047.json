@@ -128,7 +128,10 @@
           "policy_approved": true,
           "runtime_enabled": true,
           "action": "pause campaign when live Smart Bidding LEADS > 5000 after exact UTM_CAMPAIGN + FB_PAGE_ID reconciliation",
-          "blocked_reason": "scheduler gateway not running",
+          "blocked_reason": null,
+          "freshness_requirement": "timestamp verifiable and at most 2 hours old; missing or stale fails closed and posts an error",
+          "discord_delivery_requirement": "GET readback required; primary failure falls back once to Rules; total delivery failure fails the run",
+          "scheduled_window_gate": "08:00 and 20:00 America/New_York",
           "authorized_by": "Nicolas",
           "authorized_at_et": "2026-08-29T13:21:16-04:00",
           "last_controlled_write_at_et": "2026-08-29T17:15:53-04:00",
@@ -136,7 +139,7 @@
         }
       },
       "scheduler_readback": {
-        "checked_at_et": "2026-08-29T19:31:11-04:00",
+        "checked_at_et": "2026-08-29T20:02:14-04:00",
         "gateway_process_running": true,
         "cron_tool_gateway_running": false,
         "roas_job_enabled": true,
@@ -146,7 +149,10 @@
         "roas_job_deliver": "local",
         "lead_job_enabled": true,
         "lead_job_state": "scheduled",
-        "conclusion": "both Eggbev jobs are saved and enabled, but automatic firing is blocked until the scheduler gateway is running and a scheduled tick is confirmed"
+        "lead_job_last_run_at_et": "2026-08-29T20:00:05.226965-04:00",
+        "lead_job_last_status": "ok",
+        "lead_job_next_run_at_et": "2026-08-30T08:00:00-04:00",
+        "conclusion": "the page-lead scheduler is active because the 20:00 tick completed successfully; cron_tool_gateway_running=false is an observer false negative. ROAS has its own independent source-gate error state."
       },
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",
