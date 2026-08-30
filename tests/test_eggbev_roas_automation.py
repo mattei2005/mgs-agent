@@ -362,6 +362,7 @@ class ReportingTests(unittest.TestCase):
         campaign = {
             'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
             'action_emoji': '🛑', 'action_label': 'CORTAR', 'action_detail': '1 anúncio(s)',
+            'pause_ads': 1, 'reactivate_ads': 0,
             'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
             'spend': 12, 'messaging_started': 4, 'cost_per_messaging_started': 3,
             'messaging_results': 6, 'cost_per_message': 2, 'cpc_link': .4,
@@ -388,7 +389,8 @@ class ReportingTests(unittest.TestCase):
         rendered = cycle.render_report(run)
         self.assertIn('## 🛑 Corte & ROAS •', rendered)
         self.assertIn('🎯 `1 camp`', rendered)
-        self.assertNotIn('**ℹ️ LEGENDA**', rendered)
+        self.assertIn('**Legenda:** 🛑n cortes • ♻️n reativações', rendered)
+        self.assertIn('R/E (ROI real/est.): 🟢 ≥0% | 🔴 <0% | ⚪ N/D', rendered)
         self.assertNotIn('Custo por conversa` =', rendered)
         self.assertIn('**📊 Tabela consolidada — visão desktop**', rendered)
         self.assertEqual(rendered.count('```text'), 1)
@@ -404,6 +406,11 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('+12,3%', rendered)
         self.assertIn('-5,5%', rendered)
         self.assertIn('🟢🔴', rendered)
+        self.assertIn('🛑1', rendered)
+        self.assertNotIn('🛑 CORTAR', rendered)
+        self.assertNotIn('CORTES E ♻️ REATIVAÇÕES POR ANÚNCIO', rendered)
+        self.assertNotIn('roas_below_or_nd', rendered)
+        self.assertNotIn('Ad a1', rendered)
         self.assertIn('$3,00', rendered)
         self.assertNotIn('$3.00', rendered)
         self.assertNotIn(' │ ', rendered)
@@ -411,6 +418,16 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('**📌 Decisão e identidade**', rendered)
         self.assertNotIn('**📣 Meta Ads**', rendered)
         self.assertNotIn('**💰 Smart Bidding**', rendered)
+
+    def test_roas_cycle_table_compacts_ad_action_counts(self):
+        row = {
+            'action_label': 'CORTAR', 'pause_ads': 3, 'reactivate_ads': 1,
+            'roi_real': None, 'roi_estimated': None,
+        }
+        self.assertEqual(cycle._intraday_action_visual(row), '🛑3 ♻️1')
+        self.assertEqual(cycle._intraday_action_visual({'action_label': 'MANTER'}), '✅')
+        self.assertEqual(cycle._intraday_action_visual({'action_label': 'OBSERVAR'}), '👁️')
+        self.assertEqual(cycle._intraday_action_visual({'action_label': 'ESCALA +10%'}), '🚀')
 
     def test_roas_cycle_desktop_table_aligns_without_wrapping_or_cut_labels(self):
         base = {

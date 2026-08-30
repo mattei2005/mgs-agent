@@ -628,18 +628,33 @@ def _append_unified_dashboard(
 
 
 def _intraday_action_visual(row: dict[str, Any]) -> str:
-    """Use the concise action style from CPV 13 Intraday."""
+    """Render only compact action signals inside the desktop table."""
+    pause_count = int(common.finite_float(row.get('pause_ads')) or 0)
+    reactivate_count = int(common.finite_float(row.get('reactivate_ads')) or 0)
+    signals: list[str] = []
+    if pause_count:
+        signals.append(f'🛑{pause_count}')
+    if reactivate_count:
+        signals.append(f'♻️{reactivate_count}')
+    if signals:
+        return ' '.join(signals)
+
     action = common.norm(row.get('action_label')) or 'N/D'
-    explicit = common.norm(row.get('action_emoji'))
-    if explicit:
-        return f'{explicit} {action}'
-    icon = {
+    if row.get('scale') or action == 'ESCALA +10%':
+        return '🚀'
+    return {
         'CORTAR': '🛑',
         'REATIVAR': '♻️',
         'MANTER': '✅',
         'OBSERVAR': '👁️',
     }.get(action, '👁️')
-    return f'{icon} {action}'
+
+
+def _compact_legend() -> str:
+    return (
+        '**Legenda:** 🛑n cortes • ♻️n reativações • ✅ manter • 👁️ observar • 🚀 escala • '
+        'R/E (ROI real/est.): 🟢 ≥0% | 🔴 <0% | ⚪ N/D'
+    )
 
 
 def _dashboard_desktop_rows(
@@ -754,18 +769,9 @@ def render_report(run: dict[str, Any]) -> str:
 
     if campaigns:
         _append_desktop_dashboard(lines, campaigns, run.get('threshold'))
+        lines.extend(['', _compact_legend()])
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
-
-    actionable = [row for row in plan.get('decisions') or [] if row.get('action') != 'KEEP']
-    if actionable:
-        lines.extend(['', '**🛑 CORTES E ♻️ REATIVAÇÕES POR ANÚNCIO**'])
-        for row in actionable:
-            emoji = '🛑' if row.get('action') == 'PAUSE_AD' else '♻️'
-            lines.append(
-                f"{emoji} **{row.get('ad_name') or row.get('ad_id')}** • Spend {common.fmt_money(row.get('spend'))} • "
-                f"ROAS {common.fmt_number(row.get('purchase_roas'))} • `{row.get('reason')}`"
-            )
 
     scale_candidates = plan.get('budget_scale_candidates') or []
     if scale_candidates:
