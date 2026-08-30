@@ -1431,10 +1431,29 @@
       "kind": "decision",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V15-20260830",
+      "title": "Nicolas aprova e congela o renderer v14 até nova alteração explícita",
+      "updated_at": "2026-08-30T22:55:15+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T18:51:48-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V15-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Nicolas aprova e congela o renderer v14 até nova alteração explícita",
-      "updated_at": "2026-08-30T15:55:59+00:00"
+      "title": "Eggbev Corte e ROAS v15 usa sinais compactos e legenda curta",
+      "updated_at": "2026-08-30T22:55:15+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -2683,5 +2702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T22:25:10+00:00"
+  "updated_at": "2026-08-30T22:55:15+00:00"
 }

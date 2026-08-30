@@ -407,6 +407,10 @@ Por instrução direta de Nicolas em `2026-08-30`, Decisão/Identidade, Meta Ads
 
 Após Nicolas enviar o print canônico em `2026-08-30`, o renderer abandonou os cabeçalhos genéricos `Bloco/Métrica/Valor` e passou a usar uma campanha por linha, com a ordem direta `R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | ROI real | ROI est. | Leads | RPS | CPM | Ação`. As larguras são dinâmicas, há dois espaços entre colunas, um único divisor e paginação somente por overflow real, como no Intraday CPV 13. A amostra live ficou alinhada em 122 colunas visuais. ROAS permanece numérico; os sinais de ROI ficam em `R/E`. Nicolas aprovou este layout às `11:54 ET` e determinou mantê-lo sem alterações até um novo pedido explícito do gestor. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
 
+### Refinamento visual v15 — sinais compactos e legenda curta
+
+Por instrução explícita de Nicolas em `2026-08-30`, o relatório não exibe mais o bloco longo **Cortes e reativações por anúncio**, os nomes individuais dos anúncios nem os códigos internos de motivo, como `roas_below_or_nd`. A coluna `Ação` mostra apenas sinais compactos: `🛑n` para `n` cortes de anúncios, `♻️n` para `n` reativações, `✅` manter, `👁️` observar e `🚀` recomendação de escala. Abaixo da tabela há somente uma legenda curta com esses sinais e `R/E`: `🟢` ROI maior ou igual a zero, `🔴` ROI negativo e `⚪` indisponível. Esta revisão supersede apenas a lista detalhada e a ausência total de legenda do v14; mantém a tabela CPV 13 e não altera fontes, fórmulas, threshold, decisões, writes, schedules, budget ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.

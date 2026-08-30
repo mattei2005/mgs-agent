@@ -929,6 +929,25 @@
           "meta_writes": 0
         }
       },
+      "compact_action_signals_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T18:51:48-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "decision": "remove the long ad-level cut/reactivation explanation, keep only compact action signals inside the consolidated table and add one short direct legend",
+        "table_action_format": "🛑n for n ad cuts; ♻️n for n ad reactivations; ✅ keep; 👁️ observe; 🚀 scale recommendation",
+        "legend": "one short line below the table covering action signals and R/E ROI colors",
+        "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
+        "validation": {
+          "eggbev_relevant_tests": "65/65 passed",
+          "targeted_layout_tests": "4/4 passed",
+          "latest_audit_rerender": "run-20260830T180012-0400.json",
+          "long_ad_detail_present": false,
+          "internal_reason_exposed": false,
+          "compact_action_sample": "🛑3",
+          "meta_writes": 0
+        }
+      },
       "purpose": "replicate the organized, spaced and visible CPV 13 Intraday desktop table for Eggbev ROAS reporting",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
@@ -940,8 +959,8 @@
         "dynamic column widths with two spaces between columns and no vertical bars",
         "ROAS shown as a plain numeric value like the CPV 13 reference; threshold semantics remain in the action logic",
         "R/E contains the real and estimated ROI signals while ROI real and ROI est. remain signed numeric percentages",
-        "ad-level cut/reactivation list only when actions exist",
-        "no recurring explanatory legend"
+        "ad-level cut/reactivation counts appear only as compact signals in the Ação column",
+        "one short direct legend below the table; no long explanatory block"
       ],
       "action_emojis": {
         "cut": "🛑",
