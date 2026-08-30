@@ -152,7 +152,10 @@ def main() -> int:
 
     meta = load_module(META_COMMON, "eggbev_meta_reconcile")
     account = load_account()
-    token, _ = meta.get_token_from_1password(item_name=str(account["token_item"]))
+    token_item = str(account.get("token_1password_item") or "").strip()
+    if not token_item:
+        raise RuntimeError("account has no canonical Meta token reference")
+    token, _ = meta.get_token_from_1password(item_name=token_item)
     meta_snapshot = meta_video_titles(meta, token)
     title_rows = [(row, norm(row.get("title"))) for row in meta_snapshot["videos"]]
     used_video_ids = {str(row.get("id")) for row in meta_snapshot["videos"] if row.get("id")}
