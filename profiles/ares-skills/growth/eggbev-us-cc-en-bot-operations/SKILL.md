@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.15.2-draft
+version: 0.16.0-draft
 author: Ares
 license: internal
 metadata:
@@ -137,8 +137,8 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
-2. Engine v3: conta Eggbev cadastrada na release 3.3.0; `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam validate/plan. Permanecem dependentes de mídia pre-stageada somente os pedidos `clone_prestaged` com assets novos.
-3. Criação do zero: `from_zero_prestaged` ainda não está nos modos da operação v3; runner Eggbev, payload exato de placements, referência canônica de criação, pre-stage e elegibilidade reconciliada continuam pendentes. O intake e a simulação read-only estão prontos, mas manifest/dry-run/write não.
+2. Engine v3: conta Eggbev cadastrada na release 3.4.0; `from_zero_prestaged`, `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam schema/prevalidation/plan. Mídia nova continua pre-stageada sob demanda antes de selar o manifest.
+3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. Os quatro payloads diretos campaign/adset/adcreative/ad passaram Meta `validate_only` com GET antes/depois e zero objeto criado. Reconciliação read-only encontrou 63 linhagens aptas à liberação scoped; nenhuma foi reservada ou pre-stageada antes do pedido real. Permanecem como inputs do request apenas budget e nomes individuais dos ads, além dos gates finais de Nicolas e Rodolfo/Geizian.
 4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
 5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 6. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
@@ -163,7 +163,7 @@ Payer    DIGITAL TRUST; sempre nesta operação
 Budget   variável; gestor autorizado escolhe e confirma por campanha; write financeiro mantém gate Rodolfo/Geizian
 ```
 
-Placements são `MANUAL_ONLY`, mas a lista exata de posições ainda não está materializada no contrato canônico. Nunca converter para Advantage+ Placements, copiar a lista de outra operação ou montar manifest/write sem importar e validar o payload aprovado por readback. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.
+Placements são `MANUAL_ONLY` e estão materializados no contrato: Facebook `feed`, `story`, `search`, `marketplace`, `video_feeds`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `profile_feed`; Instagram `stream`, `story`, `reels`, `explore`, `explore_home`, `profile_feed`; Messenger `story`; devices `mobile` e `desktop`. `explore` é dependência obrigatória da API quando `explore_home` está ativo. Audience Network é proibida e nunca se converte o payload para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.
 
 Interpretação determinística de pedido mínimo:
 
@@ -173,9 +173,9 @@ Interpretação determinística de pedido mínimo:
 - `pg_XXXXX` deve resolver para uma única linha Messenger da Smart Bidding e a Page precisa passar GET Meta;
 - pedir para “puxar da pasta” autoriza a revisão/liberação scoped dos candidatos daquele request, não elegibilidade global nem seleção por ordem de filename.
 
-Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Não existe copy default nem naming from-zero aprovado; `DUPnn` é exclusivo de clone. Se o pedido não trouxer uma campanha/template canônico de referência, perguntar uma única vez qual referência deve fornecer naming da campanha, nomes dos ads, copy, placements e tracking. Nunca escolher silenciosamente a campanha mais recente ou inferir pela Page, `pg_XXXXX`, filename ou outra operação. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
+Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. A referência canônica padrão é `155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`: Primary text vazio, headlines `APPLY NOW ✅`, `CARD APPROVED`, `✔️ APPLY CARD`, Description `⭐⭐⭐⭐⭐` e CTA `APPLY_NOW`. Por compatibilidade API validada, cada ad usa uma headline aprovada em rotação determinística. Naming from-zero é `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX para [Primeiro nome] - Copy`; `DUPnn` permanece exclusivo de clone. `url_tags` usa `utm_campaign=pg_XXXXX`. A instrução atual do gestor vence a referência. Budget e nomes dos ads não têm default e continuam obrigatórios.
 
-O simulador read-only canônico é `python3 scripts/ares-eggbev-creation-intake-simulate.py`. Ele aplica defaults, consulta Page/inventário/media registry e enumera inputs/bloqueios; nunca reserva asset, pre-stageia mídia ou faz write Meta.
+O simulador read-only canônico é `python3 scripts/ares-eggbev-creation-intake-simulate.py`. O runner real é `python3 scripts/ares-eggbev-creation.py`: reserva assets somente após pedido scoped, faz pre-stage resumível registry-first, sela manifest, mostra resumo+digest e delega writes ao Engine v3. Depois do readback completo, move o tratado `01_READY → 02_TESTING` e registra IDs/linhagem; falha fica `RECOVERY_PENDING` ou `POSTPROCESS_PENDING`, nunca repete POST cegamente.
 
 O template Messenger é obrigatório. Qualquer mudança de texto, botão, payload ou flags exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
 
@@ -272,7 +272,7 @@ Naming obrigatório: preservar o nome-base integral e adicionar o próximo núme
 
 Gestores autorizados escolhem e confirmam o budget diário de cada duplicação; essa seleção é input obrigatório, mas não amplia autoridade financeira. O write de budget permanece sujeito ao gate vigente Rodolfo/Geizian. Default de produção: campanha, ad set e todos os ads `ACTIVE`, com início no dia seguinte às 00:00 `America/New_York`; `PAUSED` somente para canário técnico explicitamente pedido.
 
-A conta `1034081997659047` está cadastrada no Engine v3 release 3.3.0. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
+A conta `1034081997659047` está cadastrada no Engine v3 release 3.4.0. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
 
 Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, 00:00 ET, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
 
@@ -341,6 +341,18 @@ ROI% | Leads | ROI Drip | Rev BC
 O renderer mantém também campanhas com insight Meta no dia mesmo quando não entram no plano de write: faz GET exato da campanha, mostra o estado Off/On real e usa `OBSERVAR`, sem criar decisão. A lista por anúncio aparece somente quando há corte/reativação. Não há limite silencioso; a tabela repete o cabeçalho a cada 6 linhas, e mensagens multipart continuam fence-safe com `⚔️ Corte & ROAS • Parte N/T`.
 
 O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa mantém writes fail-closed; métrica indisponível aparece `N/D`, nunca zero inventado.
+
+### Refinamento visual v6 — 2026-08-30
+
+Por correção de Nicolas na thread `1541578606076231750`, a tabela humana não mostra mais Page ID; esse ID permanece somente no join técnico e no audit. A ordem visual ativa é:
+
+```text
+Ligada | Campanha | Entrega | Ação | Página ║ Meta Ads ║ Smart Bidding
+```
+
+`Página` fica imediatamente após `Ação` e antes de `Custo por conversa`. Os cabeçalhos usam palavras completas em português, divididas em duas linhas quando necessário; não voltar para `Camp/Pg`, `C/msg`, `C/res`, `C/Sub`, `Rev BC` ou `Page ID`. Os grupos **Decisão e Identidade**, **Meta Ads — ROAS em destaque** e **Smart Bidding** usam títulos Markdown em negrito, `║` entre grupos e `│` entre colunas.
+
+ROAS é a única coluna com sinal visual dependente do threshold do ciclo: `🔴` abaixo, `🟡` exatamente igual, `🟢` acima e `⚪` indisponível. O sinal é apresentação; não altera a fórmula nem a lógica de corte/reativação. A largura ampliada usa até 3 campanhas por bloco e repete o cabeçalho completo de duas linhas sem limite silencioso.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

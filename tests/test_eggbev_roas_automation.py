@@ -724,27 +724,34 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v5_has_requested_visual_columns_and_does_not_change_decisions(self):
+    def test_roas_reporting_v6_has_full_labels_page_order_and_roas_emphasis_without_decision_change(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('desktop_unified_v5', reporting_policy['status'])
+        self.assertIn('desktop_unified_v6', reporting_policy['status'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
-            'Off/On signal', 'compact Campaign prefix plus UTM', 'Delivery',
-            'Actions from the Ares cycle decision', 'Cost per messaging conversation started',
-            'Meta Purchase ROAS', 'Cost per result', 'Results', 'Budget USD',
-            'Amount spent USD', 'Meta CPM', 'Meta CTR link click-through rate',
-            'Meta CPC link click', 'Smart Bidding Page ID', 'Smart Bidding Page Name',
+            'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
+            'Entrega', 'Ação from the Ares cycle decision', 'Página name',
+            'Cost per messaging conversation started',
+            'Meta Purchase ROAS with threshold-aware red/yellow/green/gray signal',
+            'Cost per result', 'Results', 'Budget USD', 'Amount spent USD',
+            'Meta CPM', 'Meta CTR link click-through rate', 'Meta CPC link click',
             'Smart Bidding Cost Subscriber', 'Smart Bidding Revenue', 'Smart Bidding Profit',
             'Smart Bidding ROI percent', 'Smart Bidding LEADS',
             'Smart Bidding DRIP ROI percent', 'Smart Bidding Broadcast Revenue',
+            'report-only real and estimated return signals',
         ):
             self.assertIn(expected, fields)
+        self.assertNotIn('Smart Bidding Page ID', fields)
+        self.assertIn('Page ID is hidden', reporting_policy['display_exclusions'][0])
+        self.assertEqual(reporting_policy['roas_visual_policy']['below_threshold'], 'red')
+        self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'yellow')
+        self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'green')
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
             self.assertIn(key, formulas)
         self.assertIn('Meta Purchase ROAS remains', reporting_policy['decision_separation'])
         self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
-        self.assertIn('every 6 rows', reporting_policy['pagination'])
+        self.assertIn('every 3 rows', reporting_policy['pagination'])
         self.assertFalse(self.operation['roas_cycle_policy']['runtime']['budget_write_enabled'])
 
     def test_native_rule_disable_is_future_only(self):

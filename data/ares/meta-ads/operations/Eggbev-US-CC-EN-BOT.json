@@ -1,8 +1,27 @@
 {
-  "schema_version": "0.2-draft",
-  "status": "architecture_review_in_progress",
+  "schema_version": "0.3-draft",
+  "status": "operational_gated_creation_ready_for_request",
   "operation_skill": "eggbev-us-cc-en-bot-operations",
   "operation_id": "Eggbev-US-CC-EN-BOT",
+  "latest_creation_remediation": {
+    "completed_at_et": "2026-08-30T01:00:00-04:00",
+    "authorized_by": "Nicolas Holanda",
+    "scope": "remove technical blockers and prepare the six fixed routes before the first creation-thread test",
+    "engine_release": "3.4.0",
+    "creation_mode": "from_zero_prestaged",
+    "runner": "scripts/ares-eggbev-creation.py",
+    "reference_readback": "data/ares/meta-ads/audit/eggbev/jolie-c001-reference-readback-20260830.json",
+    "reconciliation_readback": "data/ares/meta-ads/reconciliation/Eggbev-US-CC-EN-BOT.json",
+    "meta_validate_only_evidence": [
+      "data/ares/meta-ads/audit/eggbev/from-zero-creative-validate-only-20260830.json",
+      "data/ares/meta-ads/audit/eggbev/from-zero-structure-validate-only-20260830.json"
+    ],
+    "validated_layers": ["campaign", "adset", "adcreative", "ad"],
+    "readiness": "ready_for_scoped_request_prestage_plan_and_final_summary",
+    "inputs_still_required_per_request": ["daily_budget_usd_per_campaign", "individual_ad_names_or_approved_template"],
+    "gates_after_summary": ["Nicolas explicit OK", "Rodolfo or Geizian financial write approval", "Engine v3 confirm-execute", "consolidated Meta readback"],
+    "writes_during_remediation": {"meta_objects_created": 0, "drive_moves": 0, "inventory_reservations": 0, "media_prestage": 0, "cron_changes": 0}
+  },
   "site_name": "Eggbev",
   "site_domain": "eggbev.com",
   "country": "US",
@@ -715,16 +734,16 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "desktop_unified_v5_requested_by_nicolas_validated_live_read_only_no_decision_change",
+      "status": "desktop_unified_v6_requested_by_nicolas_validated_live_read_only_no_decision_change",
       "requested_by": "Nicolas Holanda",
-      "requested_at_et": "2026-08-30T00:55:55-04:00",
+      "requested_at_et": "2026-08-30T01:21:04-04:00",
       "manager_confirmation": {
         "confirmed_by": "Nicolas Holanda",
         "confirmed_by_discord_id": "1055570806945620030",
-        "confirmed_at_et": "2026-08-30T00:55:55-04:00",
+        "confirmed_at_et": "2026-08-30T01:21:04-04:00",
         "source": "discord:thread:1541578606076231750",
-        "decision": "supersede the renderer v4 cards and separate tables with a shorter CPV-inspired single visual dashboard combining Meta Ads and Smart Bidding columns",
-        "scope": "Corte e ROAS presentation and report-only derived fields; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates"
+        "decision": "refine the unified dashboard: remove Page ID from display, move Page immediately after Action, replace compact abbreviations with full labels, improve spacing/group dividers and emphasize ROAS visually",
+        "scope": "Corte e ROAS presentation only; Page ID remains available for technical join/audit; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates"
       },
       "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
@@ -732,7 +751,11 @@
       "layout": [
         "single-line cycle and source summary",
         "one paginated unified Meta Ads plus Smart Bidding table",
-        "compact R/E and On visual signals",
+        "bold Decision and Identity, Meta Ads ROAS, and Smart Bidding group titles",
+        "full Portuguese labels split across two header lines instead of compact abbreviations",
+        "Page immediately after Action and before Cost per messaging conversation started",
+        "strong vertical separators between groups and lighter separators between columns",
+        "ROAS value prefixed by a threshold-aware color signal",
         "ad-level cut/reactivation list only when actions exist",
         "short source and formula legend"
       ],
@@ -745,13 +768,13 @@
         "source_or_write_gate_blocked": "⚠️"
       },
       "per_campaign_metrics": [
-        "R/E signals from report-only real ROI and estimated ROI",
-        "Off/On signal",
-        "compact Campaign prefix plus UTM",
-        "Delivery",
-        "Actions from the Ares cycle decision",
+        "Ligada with visual yes/no signal",
+        "Campanha operational prefix plus UTM",
+        "Entrega",
+        "Ação from the Ares cycle decision",
+        "Página name",
         "Cost per messaging conversation started",
-        "Meta Purchase ROAS",
+        "Meta Purchase ROAS with threshold-aware red/yellow/green/gray signal",
         "Cost per result",
         "Results",
         "Budget USD",
@@ -759,8 +782,6 @@
         "Meta CPM",
         "Meta CTR link click-through rate",
         "Meta CPC link click",
-        "Smart Bidding Page ID",
-        "Smart Bidding Page Name",
         "Smart Bidding Cost Subscriber",
         "Smart Bidding Revenue",
         "Smart Bidding Profit",
@@ -768,9 +789,17 @@
         "Smart Bidding LEADS",
         "Smart Bidding DRIP ROI percent",
         "Smart Bidding Broadcast Revenue",
+        "report-only real and estimated return signals",
         "LEADS join status",
         "economic join status"
       ],
+      "display_exclusions": ["Page ID is hidden from the human table and remains available only for exact join and audit"],
+      "roas_visual_policy": {
+        "below_threshold": "red",
+        "equal_threshold": "yellow",
+        "above_threshold": "green",
+        "unavailable": "gray"
+      },
       "source_routes": {
         "leads": "Smart Bidding /report/messenger plus /campaigns/Messenger Pages; exact UTM_CAMPAIGN and FB_PAGE_ID; remains N/D when the Messenger freshness timestamp is absent or stale",
         "economics_actual": "Smart Bidding /report/performance_per_campaigns filtered by exact CUSTOMER_ID act_1034081997659047, DOMAIN eggbev, requested DATE, exact CAMPAIGN_ID and exact UTM_ADGROUP; currency USD",
@@ -791,10 +820,10 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; the unified table repeats its complete header every 6 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
+      "pagination": "no silent campaign limit; the wide full-label table repeats its complete two-line header every 3 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
       "validation": {
         "live_dry_run": true,
-        "validated_at_et": "2026-08-30T01:03:55-04:00",
+        "validated_at_et": "2026-08-30T01:21:04-04:00",
         "live_current_cycle_campaigns": 0,
         "live_current_cycle_account_status": "ACTIVE_USD_America/New_York",
         "live_current_cycle_meta_status": "ok",
@@ -803,7 +832,7 @@
         "live_read_only_reference_date": "2026-08-29",
         "live_read_only_reference_campaigns": 1,
         "live_read_only_reference_join_status": "smart_bidding_freshness_unverifiable",
-        "live_read_only_reference_fields_verified": ["Delivery", "Cost per messaging conversation started", "Purchase ROAS", "Cost per result", "Results", "Budget", "Amount spent", "CPM", "CTR link", "CPC link", "Page ID", "Page Name"],
+        "live_read_only_reference_fields_verified": ["Ligada", "Campanha", "Entrega", "Ação", "Página", "Cost per messaging conversation started", "Purchase ROAS visual signal", "Cost per result", "Results", "Budget", "Amount spent", "CPM", "CTR link", "CPC link"],
         "smart_bidding_unverified_values_render_as": "N/D",
         "live_meta_writes": 0,
         "live_discord_posts": 0,
