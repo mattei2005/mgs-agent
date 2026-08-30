@@ -152,6 +152,11 @@ def next_midnight() -> str:
     return datetime.combine(now.date() + timedelta(days=1), datetime.min.time(), tzinfo=ET).isoformat()
 
 
+def immediate_execute_start() -> str:
+    """Return a small Meta-safe future buffer for a one-time immediate launch."""
+    return (datetime.now(ET) + timedelta(minutes=5)).replace(microsecond=0).isoformat()
+
+
 def graph_pages(meta, token: str, path: str, params: dict[str, Any], max_pages: int = 20) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     after = None
@@ -400,15 +405,23 @@ def automatic_ad_names(selected: list[dict[str, Any]], creatives_per_campaign: i
     return names
 
 
-def build_summary(page: dict[str, Any], manifest: dict[str, Any], selected: list[dict[str, Any]]) -> dict[str, Any]:
+def build_summary(
+    page: dict[str, Any],
+    manifest: dict[str, Any],
+    selected: list[dict[str, Any]],
+    *,
+    start_mode: str = "NEXT_DAY_00_00_ET",
+) -> dict[str, Any]:
     operation = load_json(OP_PATH)
     policy = operation["campaign_creation_policy"]
+    immediate = start_mode == "IMMEDIATE_ON_EXECUTE"
     return {
         "operation": "Eggbev-US-CC-EN-BOT",
         "account": "Eggbev-US-CC-EN-01-G006",
         "page": {"name": page.get("name"), "token": page.get("page_token"), "meta_readback": True, "leads_snapshot": page.get("leads_snapshot")},
         "status": "ACTIVE with future start_time",
-        "start_time": manifest["campaigns"][0]["start_time"],
+        "start_time": "IMMEDIATE_ON_EXECUTE" if immediate else manifest["campaigns"][0]["start_time"],
+        "start_policy": "one-time first-campaign override; refresh to current ET plus Meta-safe buffer only at execute" if immediate else "standard next-day 00:00 America/New_York",
         "campaigns": [
             {"name": row["name"], "budget_usd": int(row["campaign_create"]["daily_budget"]) / 100, "adset": row["adset_name"], "ads": [ad["name"] for ad in row["ads"]]}
             for row in manifest["campaigns"]
@@ -416,10 +429,126 @@ def build_summary(page: dict[str, Any], manifest: dict[str, Any], selected: list
         "assets": [row.get("canonical_filename") for row in selected],
         "copy": policy["copy_source_policy"]["template"],
         "messenger_template": policy["message_template"],
+        "messenger_json_postcreation_check": "required per ad creative; exact Page, url_tags and parsed page_welcome_message readback before postprocess completion",
         "placements": policy["manual_placements_payload"],
         "tracking": manifest["campaigns"][0]["ads"][0]["creative_payload"]["url_tags"],
-        "gates": ["Nicolas explicit OK on this exact summary", "Rodolfo/Geizian financial write approval", "Engine v3 --confirm-execute", "consolidated Meta readback"],
+        "gates": ["Nicolas explicit OK on this exact summary", "Rodolfo/Geizian financial write approval", "Engine v3 --confirm-execute", "consolidated Meta readback", "Messenger JSON installed readback per creative"],
     }
+
+
+def seal_manifest_from_state(state: dict[str, Any], start_time: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    selected = list(state.get("selected_assets") or [])
+    refs = [
+        {"asset_id": str(row["asset_id"]), "checksum": str(row["clean_checksum"])}
+        for row in selected
+    ]
+    registry = MediaRegistry(REGISTRY_PATH)
+    payload = build_eggbev_from_zero_manifest(
+        registry=registry,
+        request_id=str(state["request_id"]),
+        page_id=str(state["page"]["id"]),
+        page_name=str(state["page"]["name"]),
+        page_token=str(state["page"]["page_token"]),
+        page_sequence=int(state["page_sequence"]),
+        campaign_sequences=[int(value) for value in state["campaign_sequences"]],
+        daily_budgets_minor=[int(value) for value in state["budgets_minor"]],
+        start_time=start_time,
+        asset_refs=refs,
+        ad_names=[str(value) for value in state["ad_names"]],
+    )
+    config = load_json(CONFIG_PATH)
+    validate_account_policy(Manifest.from_dict(payload), config)
+    sealed = prevalidate_payload(payload, registry)
+    plan = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account)).dry_run(Manifest.from_dict(sealed))
+    return sealed, plan
+
+
+def revise_request(args: argparse.Namespace) -> dict[str, Any]:
+    if not args.confirm_revision:
+        raise CreationBlocked("revision", "--confirm-revision is required")
+    if not args.start_immediately:
+        raise CreationBlocked("revision", "this revision command requires --start-immediately")
+    request_state_path = state_path(args.request_id)
+    state = load_json(request_state_path)
+    if state.get("phase") != "AWAITING_FINAL_APPROVAL":
+        raise CreationBlocked("revision", f"request cannot be revised from phase {state.get('phase')}")
+    sealed, plan = seal_manifest_from_state(state, immediate_execute_start())
+    manifest_path = Path(str(state.get("manifest_path") or (AUDIT_ROOT / f"{request_state_path.stem}-manifest.json")))
+    atomic_json(manifest_path, sealed)
+    summary = build_summary(state["page"], sealed, list(state["selected_assets"]), start_mode="IMMEDIATE_ON_EXECUTE")
+    summary_digest = hashlib.sha256(json.dumps(summary, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    state.setdefault("revision_history", []).append({
+        "at_utc": datetime.now(timezone.utc).isoformat(),
+        "requested_by": args.revised_by,
+        "previous_summary_digest": state.get("summary_digest"),
+        "changes": ["canonical campaign naming without para/Copy suffix", "one-time immediate start at execute"],
+    })
+    state.update({
+        "phase": "AWAITING_FINAL_APPROVAL",
+        "start_mode": "IMMEDIATE_ON_EXECUTE",
+        "manifest_path": str(manifest_path),
+        "manifest_digest": Manifest.from_dict(sealed).digest,
+        "summary": summary,
+        "summary_digest": summary_digest,
+        "plan": plan,
+        "campaign_writes": 0,
+        "revised_at_utc": datetime.now(timezone.utc).isoformat(),
+    })
+    atomic_json(request_state_path, state)
+    atomic_json(AUDIT_ROOT / f"{request_state_path.stem}.json", state)
+    return {
+        "status": "AWAITING_FINAL_APPROVAL",
+        "request_id": args.request_id,
+        "summary_digest": summary_digest,
+        "summary": summary,
+        "plan": plan["plan"],
+        "campaign_writes": 0,
+    }
+
+
+def parsed_json_object(value: Any) -> dict[str, Any]:
+    if isinstance(value, dict):
+        return value
+    if isinstance(value, str):
+        try:
+            parsed = json.loads(value)
+        except json.JSONDecodeError as exc:
+            raise CreationBlocked("messenger_json_readback", "page_welcome_message is not valid JSON") from exc
+        if isinstance(parsed, dict):
+            return parsed
+    raise CreationBlocked("messenger_json_readback", "page_welcome_message is missing or is not a JSON object")
+
+
+def verify_messenger_json_installation(state: dict[str, Any], assignments: list[dict[str, str]]) -> dict[str, Any]:
+    manifest = load_json(Path(str(state["manifest_path"])))
+    expected_ads = [ad for campaign in manifest.get("campaigns") or [] for ad in campaign.get("ads") or []]
+    if len(expected_ads) != len(assignments):
+        raise CreationBlocked("messenger_json_readback", "manifest and Meta creative counts differ")
+    account = account_entry()
+    common = load_module(COMMON_PATH, "eggbev_creation_json_readback")
+    meta, _, token, _ = common.load_runtime_modules(account)
+    checked = []
+    fields = "id,name,status,object_story_spec,asset_feed_spec,url_tags"
+    for expected_ad, assignment in zip(expected_ads, assignments):
+        creative_id = str(assignment["creative_id"])
+        status, creative, _ = meta.graph_get(creative_id, token, {"fields": fields})
+        if status != 200 or not isinstance(creative, dict) or str(creative.get("id")) != creative_id:
+            raise CreationBlocked("messenger_json_readback", {"creative_readback_http": status})
+        expected_creative = expected_ad["creative_payload"]
+        expected_page = str((expected_creative.get("object_story_spec") or {}).get("page_id") or "")
+        actual_page = str((creative.get("object_story_spec") or {}).get("page_id") or "")
+        expected_tags = str(expected_creative.get("url_tags") or "")
+        actual_tags = str(creative.get("url_tags") or "")
+        expected_welcome = (((expected_creative.get("asset_feed_spec") or {}).get("additional_data") or {}).get("page_welcome_message"))
+        actual_welcome = (((creative.get("asset_feed_spec") or {}).get("additional_data") or {}).get("page_welcome_message"))
+        if expected_page != actual_page:
+            raise CreationBlocked("messenger_json_readback", "creative Page does not match the approved manifest")
+        if expected_tags != actual_tags:
+            raise CreationBlocked("messenger_json_readback", "creative url_tags do not match the approved manifest")
+        if parsed_json_object(expected_welcome) != parsed_json_object(actual_welcome):
+            raise CreationBlocked("messenger_json_readback", "installed Messenger JSON does not match the approved manifest")
+        checked.append({"ad_id": str(assignment["ad_id"]), "creative_id": creative_id, "page_ok": True, "url_tags_ok": True, "messenger_json_ok": True})
+    return {"checked_creatives": len(checked), "all_installed": len(checked) == len(assignments), "readbacks": checked}
 
 
 def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
@@ -490,6 +619,7 @@ def engine_assignments(engine_result: dict[str, Any], state: dict[str, Any]) -> 
 def finalize_assets(state: dict[str, Any], engine_result: dict[str, Any]) -> dict[str, Any]:
     selected = list(state.get("selected_assets") or [])
     assignments = engine_assignments(engine_result, state)
+    messenger_json_readback = verify_messenger_json_installation(state, assignments)
     _, _, drive_token, drive = drive_runtime(write=True)
     ready_id = str(drive["ready"]["id"])
     testing_id = str(drive["testing"]["id"])
@@ -530,7 +660,12 @@ def finalize_assets(state: dict[str, Any], engine_result: dict[str, Any]) -> dic
         if not any(isinstance(item, dict) and item.get("request_id") == event["request_id"] and item.get("ad_id") == event["ad_id"] for item in history):
             history.append(event)
     atomic_inventory(rows)
-    return {"assets_finalized": len(selected), "drive_moves_confirmed": len(drive_readbacks), "inventory_status": "02_TESTING"}
+    return {
+        "assets_finalized": len(selected),
+        "drive_moves_confirmed": len(drive_readbacks),
+        "inventory_status": "02_TESTING",
+        "messenger_json_readback": messenger_json_readback,
+    }
 
 
 def offline_smoke(output: Path | None) -> dict[str, Any]:
@@ -590,6 +725,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         "naming_history_matches": len(history),
         "budgets_minor": budgets,
         "ad_names": ad_names,
+        "start_mode": "NEXT_DAY_00_00_ET",
         "phase": "RESERVED_PRESTAGE_PENDING",
     }
     atomic_json(request_state_path, state)
@@ -676,6 +812,15 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     if args.summary_digest != state.get("summary_digest"):
         raise CreationBlocked("approval", "summary digest mismatch")
     manifest_path = Path(str(state.get("manifest_path") or ""))
+    if state.get("start_mode") == "IMMEDIATE_ON_EXECUTE" and state.get("phase") == "AWAITING_FINAL_APPROVAL":
+        sealed, plan = seal_manifest_from_state(state, immediate_execute_start())
+        atomic_json(manifest_path, sealed)
+        state["manifest_digest"] = Manifest.from_dict(sealed).digest
+        state["plan"] = plan
+        state["execution_start_time"] = sealed["campaigns"][0]["start_time"]
+        state["execution_start_policy"] = "one-time immediate override with five-minute Meta-safe buffer"
+        atomic_json(path, state)
+        atomic_json(AUDIT_ROOT / f"{path.stem}.json", state)
     manifest = load_json(manifest_path)
     if Manifest.from_dict(manifest).digest != state.get("manifest_digest"):
         raise CreationBlocked("manifest", "sealed manifest digest drift")
@@ -735,6 +880,11 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_parser.add_argument("--authorized-by", required=True)
     prepare_parser.add_argument("--confirm-scoped-release", action="store_true")
     prepare_parser.add_argument("--max-assets-per-run", type=int, default=3)
+    revise_parser = sub.add_parser("revise")
+    revise_parser.add_argument("--request-id", required=True)
+    revise_parser.add_argument("--revised-by", required=True)
+    revise_parser.add_argument("--start-immediately", action="store_true")
+    revise_parser.add_argument("--confirm-revision", action="store_true")
     execute_parser = sub.add_parser("execute")
     execute_parser.add_argument("--request-id", required=True)
     execute_parser.add_argument("--summary-digest", required=True)
@@ -757,6 +907,8 @@ def main() -> int:
             if args.max_assets_per_run < 1 or args.max_assets_per_run > 5:
                 raise CreationBlocked("max_assets_per_run", "must be 1..5")
             payload = prepare(args)
+        elif args.command == "revise":
+            payload = revise_request(args)
         else:
             payload = execute_request(args)
         print(json.dumps(payload, ensure_ascii=False, indent=2))
