@@ -201,6 +201,33 @@ def post_message(target_channel: str, token: str, content: str) -> tuple[int, di
     return discord_request('POST', f'/channels/{target_channel}/messages', token, {'content': content})
 
 
+def verify_message_readbacks(
+    target_channel: str,
+    token: str,
+    expected: list[tuple[str, str]],
+    *,
+    request=discord_request,
+) -> dict:
+    confirmed = 0
+    failures: list[dict] = []
+    for message_id, expected_content in expected:
+        status, payload = request('GET', f'/channels/{target_channel}/messages/{message_id}', token)
+        if status == 200 and payload.get('id') == message_id and payload.get('content') == expected_content:
+            confirmed += 1
+        else:
+            failures.append({
+                'message_id': message_id,
+                'status': status,
+                'content_equal': payload.get('content') == expected_content,
+            })
+    return {
+        'ok': confirmed == len(expected),
+        'confirmed': confirmed,
+        'expected': len(expected),
+        'failures': failures,
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--channel-id', default=DEFAULT_CHANNEL_ID)
@@ -208,6 +235,7 @@ def main() -> int:
     ap.add_argument('--fallback-title', default='Ares Meta Ads')
     ap.add_argument('--archive-minutes', type=int, default=DEFAULT_ARCHIVE_MINUTES)
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--verify-readback', action='store_true')
     args = ap.parse_args()
 
     msg = sys.stdin.read()

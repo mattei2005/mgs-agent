@@ -46,6 +46,14 @@ ACTION_MESSAGING = (
     "messaging_conversation_started",
 )
 ACTION_PURCHASE = ("omni_purchase", "purchase")
+DEFAULT_FRESHNESS_FIELDS = (
+    "UPDATED_AT",
+    "updated_at",
+    "LAST_UPDATED",
+    "last_updated",
+    "DATA_UPDATED_AT",
+    "data_updated_at",
+)
 
 
 class GuardrailError(RuntimeError):
@@ -136,6 +144,76 @@ def finite_float(value: Any) -> float | None:
 def strict_over(value: Any, limit: float) -> bool:
     number = finite_float(value)
     return bool(number is not None and number > limit)
+
+
+def parse_source_timestamp(value: Any) -> dt.datetime | None:
+    raw = norm(value)
+    if not raw:
+        return None
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = dt.datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return None
+    return parsed.astimezone(NY)
+
+
+def row_freshness(
+    row: dict[str, Any],
+    run_at: dt.datetime,
+    max_age_hours: float,
+    fields: tuple[str, ...],
+) -> dict[str, Any]:
+    for field in fields:
+        if row.get(field) in (None, ""):
+            continue
+        timestamp = parse_source_timestamp(row.get(field))
+        if timestamp is None:
+            return {
+                "ready": False,
+                "reason": "smart_bidding_freshness_unverifiable",
+                "field": field,
+                "timestamp": None,
+                "age_hours": None,
+                "max_age_hours": max_age_hours,
+            }
+        age_hours = (run_at.astimezone(NY) - timestamp).total_seconds() / 3600.0
+        if age_hours < -(5 / 60):
+            return {
+                "ready": False,
+                "reason": "smart_bidding_freshness_unverifiable",
+                "field": field,
+                "timestamp": timestamp.isoformat(),
+                "age_hours": age_hours,
+                "max_age_hours": max_age_hours,
+            }
+        return {
+            "ready": age_hours <= max_age_hours,
+            "reason": "fresh" if age_hours <= max_age_hours else "smart_bidding_source_stale",
+            "field": field,
+            "timestamp": timestamp.isoformat(),
+            "age_hours": age_hours,
+            "max_age_hours": max_age_hours,
+        }
+    return {
+        "ready": False,
+        "reason": "smart_bidding_freshness_unverifiable",
+        "field": None,
+        "timestamp": None,
+        "age_hours": None,
+        "max_age_hours": max_age_hours,
+    }
+
+
+def scheduled_window_allowed(run_at: dt.datetime, approved_times: tuple[str, ...]) -> bool:
+    return run_at.astimezone(NY).strftime("%H:%M") in set(approved_times)
+
+
+def policy_auto_reactivate(policy: dict[str, Any]) -> bool:
+    return bool((policy.get("scope") or {}).get("auto_reactivate", False))
 
 
 def active_restriction(row: dict[str, Any], local_date: dt.date) -> dict[str, Any]:
@@ -281,7 +359,12 @@ def evaluate_campaigns(
     sb_rows: list[dict[str, Any]],
     lead_limit: float,
     local_date: dt.date,
+    *,
+    run_at: dt.datetime | None = None,
+    freshness_max_age_hours: float = 2.0,
+    freshness_fields: tuple[str, ...] = DEFAULT_FRESHNESS_FIELDS,
 ) -> dict[str, Any]:
+    evaluated_at = run_at or now_et()
     ads_by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for ad in ads:
         campaign_id = norm((ad.get("campaign") or {}).get("id"))
@@ -333,8 +416,16 @@ def evaluate_campaigns(
             "leads_total": finite_float(sb_row.get("LEADS_TOTAL")),
             "smart_bidding_status": sb_row.get("STATUS"),
             "restriction": active_restriction(sb_row, local_date),
+            "freshness": row_freshness(
+                sb_row,
+                evaluated_at,
+                freshness_max_age_hours,
+                freshness_fields,
+            ),
         }
-        if leads is None:
+        if not base["freshness"]["ready"]:
+            issues.append({**base, "issue": base["freshness"]["reason"]})
+        elif leads is None:
             issues.append({**base, "issue": "smart_bidding_leads_not_numeric"})
         elif strict_over(leads, lead_limit):
             eligible.append(base)
@@ -512,6 +603,52 @@ def build_status_report(
     return "\n".join(lines)
 
 
+def build_issue_alert(
+    issues: list[dict[str, Any]],
+    run_at: dt.datetime,
+    account_alias: str,
+) -> str:
+    codes: dict[str, int] = defaultdict(int)
+    for row in issues:
+        code = norm(row.get("issue"))
+        if not code and row.get("issues"):
+            code = ",".join(str(value) for value in row.get("issues") or [])
+        codes[code or "unknown_mapping_issue"] += 1
+    lines = [
+        "```text",
+        "⚠️ LIMITE DE LEADS — ERRO DE MAPEAMENTO/FRESHNESS",
+        "",
+        f"Conta: {account_alias}",
+        f"Horário: {run_at.strftime('%d/%m/%Y %H:%M')} America/New_York",
+        f"Campanhas/páginas bloqueadas: {len(issues)}",
+        "Ação Meta nesses itens: nenhuma (fail-closed)",
+        "",
+        "Motivos:",
+    ]
+    for code, count in sorted(codes.items()):
+        lines.append(f"- {code}: {count}")
+    lines += [
+        "",
+        "FRESHNESS exige timestamp verificável com idade máxima de 2h.",
+        "O erro precisa ser corrigido antes de confiar na proteção automática.",
+        "```",
+    ]
+    return "\n".join(lines)
+
+
+def build_runtime_error_alert(run_at: dt.datetime, account_alias: str, reason: str) -> str:
+    return "\n".join([
+        "```text",
+        "⚠️ LIMITE DE LEADS — FALHA OPERACIONAL",
+        "",
+        f"Conta: {account_alias}",
+        f"Horário: {run_at.strftime('%d/%m/%Y %H:%M')} America/New_York",
+        f"Motivo: {reason}",
+        "Ação Meta não confirmada; reconciliação necessária.",
+        "```",
+    ])
+
+
 def build_alert(group: dict[str, Any], actions: list[dict[str, Any]], insights: dict[str, dict[str, Any]], run_at: dt.datetime, lead_limit: float) -> str:
     confirmed = [row for row in actions if row.get("ok")]
     failed = [row for row in actions if not row.get("ok")]
@@ -563,7 +700,7 @@ def build_alert(group: dict[str, Any], actions: list[dict[str, Any]], insights: 
 
 def post_to_thread(thread_id: str, message: str) -> dict[str, Any]:
     process = subprocess.run(
-        [sys.executable, str(DISCORD_POSTER), "--thread-id", thread_id, "--fallback-title", "Limite de Leads — Eggbev"],
+        [sys.executable, str(DISCORD_POSTER), "--thread-id", thread_id, "--fallback-title", "Limite de Leads — Eggbev", "--verify-readback"],
         input=message,
         text=True,
         stdout=subprocess.PIPE,
@@ -571,11 +708,41 @@ def post_to_thread(thread_id: str, message: str) -> dict[str, Any]:
         timeout=90,
         check=False,
     )
+    payload: dict[str, Any] = {}
+    if process.stdout.strip():
+        try:
+            parsed = json.loads(process.stdout)
+            if isinstance(parsed, dict):
+                payload = parsed
+        except json.JSONDecodeError:
+            payload = {}
     return {
         "ok": process.returncode == 0,
         "returncode": process.returncode,
+        "readbacks_confirmed": payload.get("readbacks_confirmed", 0),
+        "chunks": payload.get("chunks", 0),
         "stderr": process.stderr[-1000:] if process.returncode else "",
     }
+
+
+def post_with_fallback(primary_thread_id: str, fallback_thread_id: str, message: str) -> dict[str, Any]:
+    primary = post_to_thread(primary_thread_id, message)
+    if primary.get("ok"):
+        return {**primary, "target": "primary", "fallback_used": False}
+    if fallback_thread_id and fallback_thread_id != primary_thread_id:
+        fallback = post_to_thread(fallback_thread_id, message)
+        return {
+            **fallback,
+            "target": "fallback",
+            "fallback_used": True,
+            "primary_delivery": primary,
+        }
+    return {**primary, "target": "primary", "fallback_used": False}
+
+
+def require_delivery(delivery: dict[str, Any], label: str) -> None:
+    if not delivery.get("ok"):
+        raise GuardrailError(f"{label}_delivery_failed")
 
 
 def event_id(group: dict[str, Any], actions: list[dict[str, Any]]) -> str:
