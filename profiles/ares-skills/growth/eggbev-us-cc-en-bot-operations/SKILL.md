@@ -388,6 +388,10 @@ Por correção de Nicolas em `2026-08-30`, o painel unificado preserva todos os 
 
 Após evidência visual enviada por Nicolas em `2026-08-30`, o renderer deixou de usar a tabela horizontal de 283 colunas, porque o Discord quebrava os cabeçalhos, separadores e valores em linhas diferentes mesmo com a largura Unicode calculada corretamente. O formato ativo usa um cartão Markdown vertical por campanha, com uma métrica completa por linha e seções separadas de decisão, Meta Ads e Smart Bidding. Não há bloco de código, barras verticais, padding manual, coluna fixa nem truncamento de rótulo. Todas as campanhas continuam presentes sem limite silencioso e os chunks Discord são divididos apenas em linhas Markdown normais. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
 
+### Refinamento visual v12 — tabelas compactas no padrão CPV 13
+
+Por correção de Nicolas em `2026-08-30`, os cartões v11 foram substituídos por três tabelas compactas alinhadas no mesmo padrão técnico do Intraday Creditoparaveiculo 13: largura dinâmica pelas células reais, duas colunas de espaço entre campos, cabeçalhos curtos em uma linha, divisor Unicode e bloco `text` monoespaçado. As tabelas separam Decisão/Identidade, Meta Ads e Smart Bidding para preservar todas as métricas sem recriar a linha única de 283 colunas. O maior bloco validado tem 96 colunas visuais; a paginação usa o tamanho renderizado real, repete o cabeçalho e mantém fences balanceadas. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.
