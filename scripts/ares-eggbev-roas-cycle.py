@@ -345,42 +345,95 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
     }
 
 
-def _dashboard_row(index: int, row: dict[str, Any]) -> str:
-    action = {
-        'ESCALA +10%': 'ESCALA',
-        'REATIVAR': 'REATIVAR',
-        'CORTAR': 'CORTAR',
-        'MANTER': 'MANTER',
-        'OBSERVAR': 'OBSERVAR',
-    }.get(common.norm(row.get('action_label')), common.norm(row.get('action_label')) or 'N/D')
-    values = [
-        _fit(_roi_signal(row.get('roi_real')) + _roi_signal(row.get('roi_estimated')), 4),
-        _fit(_delivery_signal(row.get('status')), 2),
-        _fit(index, 2, 'right'),
-        _fit(_campaign_key(row, index), 14),
-        _fit(row.get('status'), 8),
-        _fit(action, 8),
-        _fit(common.fmt_number(row.get('cost_per_messaging_started')), 6, 'right'),
-        _fit(common.fmt_number(row.get('purchase_roas')), 5, 'right'),
-        _fit(common.fmt_number(row.get('cost_per_message')), 6, 'right'),
-        _fit(common.fmt_number(row.get('messaging_results'), 0), 4, 'right'),
-        _fit(common.fmt_number(row.get('budget_usd')), 7, 'right'),
-        _fit(common.fmt_number(row.get('spend')), 7, 'right'),
-        _fit(common.fmt_number(row.get('cpm')), 6, 'right'),
-        _fit(_fmt_percent(row.get('ctr')), 6, 'right'),
-        _fit(common.fmt_number(row.get('cpc_link')), 6, 'right'),
-        '│',
-        _fit(row.get('sb_page_id') or row.get('meta_page_id'), 15),
-        _fit(row.get('sb_page_name'), 16),
-        _fit(common.fmt_number(row.get('sb_cost_subscriber')), 7, 'right'),
-        _fit(common.fmt_number(row.get('sb_revenue')), 8, 'right'),
-        _fit(common.fmt_number(row.get('sb_profit')), 8, 'right'),
-        _fit(_fmt_signed_percent(row.get('sb_roi_percent')), 8, 'right'),
-        _fit(common.fmt_number(row.get('sb_leads'), 0), 6, 'right'),
-        _fit(_fmt_signed_percent(row.get('sb_drip_roi_percent')), 9, 'right'),
-        _fit(common.fmt_number(row.get('sb_broadcast_revenue')), 8, 'right'),
+def _dashboard_header() -> tuple[str, str, str]:
+    decision_top = [
+        _fit('Ligada', 7),
+        _fit('Campanha', 14),
+        _fit('Entrega', 8),
+        _fit('Ação', 12),
+        _fit('Página', 14),
     ]
-    return ' '.join(values)
+    decision_bottom = [
+        ' ' * 7, ' ' * 14, ' ' * 8, ' ' * 12, ' ' * 14,
+    ]
+    meta_top = [
+        _fit('Custo por', 9),
+        _fit('ROAS', 9),
+        _fit('Custo por', 9),
+        _fit('Resultados', 10),
+        _fit('Orçamento', 9),
+        _fit('Gasto', 8),
+        _fit('Custo por', 9),
+        _fit('Taxa de', 9),
+        _fit('Custo por', 9),
+    ]
+    meta_bottom = [
+        _fit('conversa', 9),
+        ' ' * 9,
+        _fit('resultado', 9),
+        ' ' * 10,
+        ' ' * 9,
+        ' ' * 8,
+        _fit('mil', 9),
+        _fit('clique', 9),
+        _fit('clique', 9),
+    ]
+    bidding_top = [
+        _fit('Custo por', 9),
+        _fit('Receita', 9),
+        _fit('Lucro', 9),
+        _fit('Retorno', 9),
+        _fit('Leads', 7),
+        _fit('Retorno', 9),
+        _fit('Receita', 9),
+        _fit('Retorno', 13),
+    ]
+    bidding_bottom = [
+        _fit('assinante', 9),
+        ' ' * 9,
+        ' ' * 9,
+        ' ' * 9,
+        ' ' * 7,
+        _fit('Drip', 9),
+        _fit('Broadcast', 9),
+        _fit('Real/Estimado', 13),
+    ]
+    top = ' │ '.join(decision_top) + ' ║ ' + ' │ '.join(meta_top) + ' ║ ' + ' │ '.join(bidding_top)
+    bottom = ' │ '.join(decision_bottom) + ' ║ ' + ' │ '.join(meta_bottom) + ' ║ ' + ' │ '.join(bidding_bottom)
+    return top, bottom, '═' * _display_width(top)
+
+
+def _dashboard_row(index: int, row: dict[str, Any], threshold: Any) -> str:
+    action = common.norm(row.get('action_label')) or 'N/D'
+    decision = [
+        _fit(_delivery_visual(row.get('status')), 7),
+        _fit(_campaign_key(row, index), 14),
+        _fit(_delivery_label(row.get('status')), 8),
+        _fit(action, 12),
+        _fit(row.get('sb_page_name'), 14),
+    ]
+    meta = [
+        _fit(common.fmt_money(row.get('cost_per_messaging_started')), 9, 'right'),
+        _fit(_roas_visual(row.get('purchase_roas'), threshold), 9, 'right'),
+        _fit(common.fmt_money(row.get('cost_per_message')), 9, 'right'),
+        _fit(common.fmt_number(row.get('messaging_results'), 0), 10, 'right'),
+        _fit(common.fmt_money(row.get('budget_usd')), 9, 'right'),
+        _fit(common.fmt_money(row.get('spend')), 8, 'right'),
+        _fit(common.fmt_money(row.get('cpm')), 9, 'right'),
+        _fit(_fmt_percent(row.get('ctr')), 9, 'right'),
+        _fit(common.fmt_money(row.get('cpc_link')), 9, 'right'),
+    ]
+    bidding = [
+        _fit(common.fmt_money(row.get('sb_cost_subscriber')), 9, 'right'),
+        _fit(common.fmt_money(row.get('sb_revenue')), 9, 'right'),
+        _fit(common.fmt_money(row.get('sb_profit')), 9, 'right'),
+        _fit(_fmt_signed_percent(row.get('sb_roi_percent')), 9, 'right'),
+        _fit(common.fmt_number(row.get('sb_leads'), 0), 7, 'right'),
+        _fit(_fmt_signed_percent(row.get('sb_drip_roi_percent')), 9, 'right'),
+        _fit(common.fmt_money(row.get('sb_broadcast_revenue')), 9, 'right'),
+        _fit(_roi_signal(row.get('roi_real')) + '/' + _roi_signal(row.get('roi_estimated')), 13),
+    ]
+    return ' │ '.join(decision) + ' ║ ' + ' │ '.join(meta) + ' ║ ' + ' │ '.join(bidding)
 
 
 def render_report(run: dict[str, Any]) -> str:
@@ -415,18 +468,23 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append('✅ Fontes reconciliadas e regra nativa sem conflito.')
 
     if campaigns:
-        dashboard_header = (
-            'R/E  On  #  Camp/Pg        Delivery Ação      C/msg  ROAS  C/res  Res  Budget   Spend    CPM    CTR    CPC '
-            '│ Page ID         Page               C/Sub      Rev   Profit     ROI%  Leads  ROI Drip   Rev BC'
-        )
-        dashboard_rows = [_dashboard_row(index, row) for index, row in enumerate(campaigns, start=1)]
+        dashboard_top, dashboard_bottom, dashboard_separator = _dashboard_header()
+        dashboard_header = dashboard_top + '\n' + dashboard_bottom
+        dashboard_rows = [
+            _dashboard_row(index, row, run.get('threshold'))
+            for index, row in enumerate(campaigns, start=1)
+        ]
+        lines.extend([
+            '',
+            '**📌 DECISÃO E IDENTIDADE**  ║  **📣 META ADS — ROAS EM DESTAQUE**  ║  **💰 SMART BIDDING**',
+        ])
         _append_table_pages(
             lines,
             '📊 PAINEL ÚNICO • Meta Ads + Smart Bidding',
             dashboard_header,
-            '-' * len(dashboard_header),
+            dashboard_separator,
             dashboard_rows,
-            page_size=6,
+            page_size=3,
         )
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
@@ -459,10 +517,11 @@ def render_report(run: dict[str, Any]) -> str:
     lines.extend([
         '',
         '**ℹ️ LEGENDA**',
-        '`R/E` = sinais do ROI real/estimado • `On` = campanha ACTIVE • `Camp/Pg` = prefixo da campanha + UTM.',
-        '`C/msg` = spend ÷ conversa iniciada • `C/res` = spend ÷ resultado • `CPC` = spend ÷ link click.',
-        '`C/Sub*` = investimento ÷ SUBSCRIBED • `Profit*` = REVENUE − INVESTIMENT • `ROI%*` e `ROI Drip*` usam o mesmo investimento.',
-        'Campos SB ficam `N/D` sem UTM + Page ID + freshness válidos. São informativos; Meta Purchase ROAS continua decidindo corte/reativação.',
+        '**🔥 ROAS:** 🔴 abaixo do threshold • 🟡 exatamente no threshold • 🟢 acima do threshold • ⚪ indisponível.',
+        '`Ligada` mostra o estado On/Off da campanha. `Retorno Real/Estimado` mantém os dois sinais econômicos informativos.',
+        '`Custo por conversa` = gasto ÷ conversa iniciada • `Custo por resultado` = gasto ÷ resultados • `Custo por clique` = gasto ÷ cliques no link.',
+        '`Custo por assinante` = investimento ÷ assinantes • `Lucro` = receita − investimento • retornos usam o mesmo investimento.',
+        'Campos Smart Bidding ficam `N/D` sem UTM + página + atualização válida. Meta Purchase ROAS continua decidindo corte/reativação.',
     ])
     if run.get('phase') == 'RESET':
         lines.append('Reset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')

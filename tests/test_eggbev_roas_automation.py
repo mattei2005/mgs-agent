@@ -365,7 +365,7 @@ class ReportingTests(unittest.TestCase):
             'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
             'spend': 12, 'messaging_started': 4, 'cost_per_messaging_started': 3,
             'messaging_results': 6, 'cost_per_message': 2, 'cpc_link': .4,
-            'ctr': 2, 'purchase_roas': .5, 'cpm': 12, 'sb_leads': 20,
+            'ctr': 2, 'purchase_roas': .3, 'cpm': 12, 'sb_leads': 20,
             'sb_page_id': '123456789012345', 'sb_page_name': 'Page One',
             'sb_cost_subscriber': 1.5, 'sb_revenue': 40, 'sb_profit': 28,
             'sb_roi_percent': 233.3, 'sb_drip_roi_percent': 50,
@@ -389,12 +389,21 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('## 🛑 CORTE & ROAS', rendered)
         self.assertIn('🎯 CICLO', rendered)
         self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding', rendered)
+        self.assertIn('**📌 DECISÃO E IDENTIDADE**', rendered)
+        self.assertIn('**📣 META ADS — ROAS EM DESTAQUE**', rendered)
+        self.assertIn('**💰 SMART BIDDING**', rendered)
         self.assertNotIn('📱 CAMPANHAS • leitura rápida', rendered)
-        for label in ('R/E', 'On', 'Camp/Pg', 'Delivery', 'Ação', 'C/msg', 'ROAS', 'C/res', 'Res', 'Budget', 'Spend', 'CPM', 'CTR', 'CPC', 'Page ID', 'Page', 'C/Sub', 'Rev', 'Profit', 'ROI%', 'Leads', 'ROI Drip', 'Rev BC'):
+        for label in ('Ligada', 'Campanha', 'Entrega', 'Ação', 'Página', 'Custo por', 'conversa', 'ROAS', 'resultado', 'Resultados', 'Orçamento', 'Gasto', 'mil', 'Taxa de', 'clique', 'assinante', 'Receita', 'Lucro', 'Retorno', 'Leads', 'Drip', 'Broadcast', 'Real/Estimado'):
             self.assertIn(label, rendered)
+        for abbreviation in ('Camp/Pg', 'C/msg', 'C/res', 'C/Sub', 'Rev BC', 'Page ID'):
+            self.assertNotIn(abbreviation, rendered)
         self.assertIn('123/pg_12345', rendered)
-        self.assertIn('123456789012345', rendered)
+        self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
+        self.assertIn('🔴 0,30', rendered)
+        header = rendered.split('```text', 1)[1].split('```', 1)[0]
+        self.assertLess(header.index('Ação'), header.index('Página'))
+        self.assertLess(header.index('Página'), header.index('Custo por'))
 
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
@@ -448,9 +457,9 @@ class ReportingTests(unittest.TestCase):
         rendered = cycle.render_report(run)
         for index, row in enumerate(campaigns, start=1):
             self.assertEqual(rendered.count(f'{index:03d}/{row["utm_campaign"]}'), 1)
-        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 1/5', rendered)
-        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 5/5', rendered)
-        self.assertEqual(rendered.count('R/E  On  #  Camp/Pg'), 5)
+        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 1/9', rendered)
+        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 9/9', rendered)
+        self.assertEqual(rendered.count('Ligada  │ Campanha'), 9)
         chunks = common.split_messages(rendered, limit=1750)
         self.assertTrue(all(len(chunk) <= 1750 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))

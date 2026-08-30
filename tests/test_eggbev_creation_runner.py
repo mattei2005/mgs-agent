@@ -75,6 +75,26 @@ class EggbevCreationRunnerTests(unittest.TestCase):
             RUNNER.execute_request(args)
         self.assertEqual(caught.exception.stage, "financial_gate")
 
+    def test_engine_assignment_mapping_uses_bundle_order_and_exact_counts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            audit = Path(tmp) / "audit.json"
+            audit.write_text(json.dumps({
+                "lanes": {
+                    RUNNER.ACCOUNT_ID: {
+                        "bundles": [
+                            {"index": 1, "status": "COMPLETE", "campaign_ids": ["c1", "c2"], "adset_ids": ["s1", "s2"], "creative_ids": [f"cr{i}" for i in range(1, 7)], "ad_ids": [f"a{i}" for i in range(1, 7)]},
+                            {"index": 2, "status": "COMPLETE", "campaign_ids": ["c3"], "adset_ids": ["s3"], "creative_ids": [f"cr{i}" for i in range(7, 10)], "ad_ids": [f"a{i}" for i in range(7, 10)]},
+                        ]
+                    }
+                }
+            }))
+            state = {"campaign_sequences": [1, 2, 3], "selected_assets": [{"asset_id": f"asset-{i}"} for i in range(9)]}
+            rows = RUNNER.engine_assignments({"audit_path": str(audit)}, state)
+            self.assertEqual(len(rows), 9)
+            self.assertEqual(rows[0], {"campaign_id": "c1", "adset_id": "s1", "creative_id": "cr1", "ad_id": "a1"})
+            self.assertEqual(rows[3]["campaign_id"], "c2")
+            self.assertEqual(rows[8], {"campaign_id": "c3", "adset_id": "s3", "creative_id": "cr9", "ad_id": "a9"})
+
     def test_prestage_is_registry_first_and_titles_include_checksum(self):
         class Uploader:
             def __init__(self):

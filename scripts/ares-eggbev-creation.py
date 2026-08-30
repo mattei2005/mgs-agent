@@ -323,13 +323,15 @@ def reserve_inventory(selected: list[dict[str, Any]], request_id: str, authorize
     atomic_inventory(rows)
 
 
-def drive_runtime():
+def drive_runtime(*, write: bool = False):
     reconciler = load_module(RECONCILER_PATH, "eggbev_creation_reconciler")
     drive_mod = load_module(DRIVE_MODULE_PATH, "eggbev_creation_drive")
     drive_mod.load_env()
     service_account = drive_mod.extract_service_account(drive_mod.get_op_item_json())
     if service_account.get("client_email") != "mgsagent@mgs-core-prod.iam.gserviceaccount.com" or service_account.get("project_id") != "mgs-core-prod":
         raise CreationBlocked("drive_identity", "canonical service account mismatch")
+    if write:
+        setattr(drive_mod, "SCOPES", "https://www.googleapis.com/auth/drive")
     token = drive_mod.get_access_token(service_account)
     drive = reconciler.drive_inventory(token)
     return reconciler, drive_mod, token, drive
@@ -403,6 +405,117 @@ def build_summary(page: dict[str, Any], manifest: dict[str, Any], selected: list
         "tracking": manifest["campaigns"][0]["ads"][0]["creative_payload"]["url_tags"],
         "gates": ["Nicolas explicit OK on this exact summary", "Rodolfo/Geizian financial write approval", "Engine v3 --confirm-execute", "consolidated Meta readback"],
     }
+
+
+def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
+    params = urllib.parse.urlencode({"fields": "id,name,size,md5Checksum,driveId,parents,trashed", "supportsAllDrives": "true"})
+    request = urllib.request.Request(
+        f"https://www.googleapis.com/drive/v3/files/{file_id}?{params}",
+        headers={"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-Eggbev-Create/1.0"},
+    )
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return json.loads(response.read())
+
+
+def move_to_testing(token: str, file_id: str, ready_id: str, testing_id: str, expected: dict[str, Any]) -> dict[str, Any]:
+    before = drive_file_readback(token, file_id)
+    parents = set(str(value) for value in before.get("parents") or [])
+    if testing_id not in parents:
+        if ready_id not in parents:
+            raise CreationBlocked("drive_postprocess", f"asset parent is neither READY nor TESTING: {file_id}")
+        params = urllib.parse.urlencode({"addParents": testing_id, "removeParents": ready_id, "supportsAllDrives": "true", "fields": "id,name,size,md5Checksum,driveId,parents,trashed"})
+        request = urllib.request.Request(
+            f"https://www.googleapis.com/drive/v3/files/{file_id}?{params}",
+            data=b"{}",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": "MGS-Ares-Eggbev-Create/1.0"},
+            method="PATCH",
+        )
+        with urllib.request.urlopen(request, timeout=120) as response:
+            json.loads(response.read())
+    after = drive_file_readback(token, file_id)
+    expected_drive = expected.get("drive_readback") or {}
+    if after.get("driveId") != DRIVE_ID or after.get("trashed") or testing_id not in set(after.get("parents") or []):
+        raise CreationBlocked("drive_postprocess", f"TESTING readback failed: {file_id}")
+    if expected_drive.get("md5Checksum") and after.get("md5Checksum") != expected_drive.get("md5Checksum"):
+        raise CreationBlocked("drive_postprocess", f"Drive MD5 changed: {file_id}")
+    if expected_drive.get("size") and str(after.get("size")) != str(expected_drive.get("size")):
+        raise CreationBlocked("drive_postprocess", f"Drive size changed: {file_id}")
+    return after
+
+
+def engine_assignments(engine_result: dict[str, Any], state: dict[str, Any]) -> list[dict[str, str]]:
+    audit_path = Path(str(engine_result.get("audit_path") or ""))
+    if not audit_path.is_file():
+        raise CreationBlocked("postprocess", "Engine audit is missing")
+    audit = load_json(audit_path)
+    lane = (audit.get("lanes") or {}).get(ACCOUNT_ID) or {}
+    bundles = sorted(lane.get("bundles") or [], key=lambda row: int(row.get("index") or 0))
+    campaign_ids: list[str] = []
+    adset_ids: list[str] = []
+    creative_ids: list[str] = []
+    ad_ids: list[str] = []
+    for bundle in bundles:
+        if bundle.get("status") != "COMPLETE":
+            raise CreationBlocked("postprocess", "Engine bundle is not COMPLETE")
+        campaign_ids.extend(str(value) for value in bundle.get("campaign_ids") or [])
+        adset_ids.extend(str(value) for value in bundle.get("adset_ids") or [])
+        creative_ids.extend(str(value) for value in bundle.get("creative_ids") or [])
+        ad_ids.extend(str(value) for value in bundle.get("ad_ids") or [])
+    selected = list(state.get("selected_assets") or [])
+    campaigns = len(state.get("campaign_sequences") or [])
+    if not campaigns or len(campaign_ids) != campaigns or len(adset_ids) != campaigns or len(ad_ids) != len(selected) or len(creative_ids) != len(selected):
+        raise CreationBlocked("postprocess", "Engine audit identity counts do not match the selected lineage")
+    ads_per_campaign = len(selected) // campaigns
+    return [
+        {"campaign_id": campaign_ids[index // ads_per_campaign], "adset_id": adset_ids[index // ads_per_campaign], "creative_id": creative_ids[index], "ad_id": ad_ids[index]}
+        for index in range(len(selected))
+    ]
+
+
+def finalize_assets(state: dict[str, Any], engine_result: dict[str, Any]) -> dict[str, Any]:
+    selected = list(state.get("selected_assets") or [])
+    assignments = engine_assignments(engine_result, state)
+    _, _, drive_token, drive = drive_runtime(write=True)
+    ready_id = str(drive["ready"]["id"])
+    testing_id = str(drive["testing"]["id"])
+    drive_readbacks = [
+        move_to_testing(drive_token, str(row["asset_drive_id"]), ready_id, testing_id, row)
+        for row in selected
+    ]
+    registry = MediaRegistry(REGISTRY_PATH)
+    media = [registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), str(row["clean_checksum"])) for row in selected]
+    rows = load_inventory()
+    index_by_id = {str(row.get("asset_id")): index for index, row in enumerate(rows)}
+    stamp = datetime.now(timezone.utc).isoformat()
+    for selected_row, assignment, media_row, drive_row in zip(selected, assignments, media, drive_readbacks):
+        asset_id = str(selected_row["asset_id"])
+        inventory_index = index_by_id.get(asset_id)
+        if inventory_index is None:
+            raise CreationBlocked("postprocess", f"inventory row disappeared: {asset_id}")
+        row = rows[inventory_index]
+        if str(row.get("reservation_request_id") or "") != str(state["request_id"]):
+            raise CreationBlocked("postprocess", f"reservation request drift: {asset_id}")
+        row.update({
+            "status": "02_TESTING",
+            "reservation_status": "USED_BY_REQUEST",
+            "ares_eligible": False,
+            "used_by": str(state["request_id"]),
+            "meta_account_id": ACCOUNT_ID,
+            "meta_campaign_id": assignment["campaign_id"],
+            "meta_adset_id": assignment["adset_id"],
+            "meta_creative_id": assignment["creative_id"],
+            "meta_ad_id": assignment["ad_id"],
+            "meta_prestage_video_ids": [media_row["vertical_video_id"], media_row["square_video_id"]],
+            "drive_folder": "02_TESTING",
+            "drive_readback_after_use": drive_row,
+            "used_at": stamp,
+        })
+        history = row.setdefault("test_history", [])
+        event = {"request_id": str(state["request_id"]), **assignment, "used_at": stamp}
+        if not any(isinstance(item, dict) and item.get("request_id") == event["request_id"] and item.get("ad_id") == event["ad_id"] for item in history):
+            history.append(event)
+    atomic_inventory(rows)
+    return {"assets_finalized": len(selected), "drive_moves_confirmed": len(drive_readbacks), "inventory_status": "02_TESTING"}
 
 
 def offline_smoke(output: Path | None) -> dict[str, Any]:
@@ -564,6 +677,17 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     if payload.get("status") == "PARTIAL_DEFERRED_QUOTA":
         state.update({"phase": "EXECUTION_DEFERRED", "automatic_recovery_required": True})
     elif payload.get("status") in {"COMPLETE_FUTURE_ACTIVE", "COMPLETE_PAUSED"}:
+        try:
+            state["postprocess"] = finalize_assets(state, payload)
+        except Exception as exc:
+            state.update({
+                "phase": "POSTPROCESS_PENDING",
+                "automatic_recovery_required": True,
+                "postprocess_error": {"type": type(exc).__name__, "message": str(exc)[:500]},
+            })
+            atomic_json(path, state)
+            raise CreationBlocked("postprocess", state["postprocess_error"]) from exc
+        state.pop("postprocess_error", None)
         state.update({"phase": "COMPLETE", "automatic_recovery_required": False, "completed_at_utc": datetime.now(timezone.utc).isoformat()})
         registry = load_json(PAGE_SEQUENCE_PATH)
         allocation = (registry.get("allocations") or {}).get(str(state["page"]["page_token"]))
