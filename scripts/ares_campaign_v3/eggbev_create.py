@@ -111,7 +111,7 @@ def _creative_payload(
             "asset_customization_rules": [
                 {
                     "customization_spec": {
-                        "age_min": 13,
+                        "age_min": 18,
                         "age_max": 65,
                         "publisher_platforms": ["facebook", "instagram"],
                         "facebook_positions": SQUARE_RULE_FACEBOOK,
@@ -121,7 +121,7 @@ def _creative_payload(
                     "priority": 1,
                 },
                 {
-                    "customization_spec": {"age_min": 13, "age_max": 65},
+                    "customization_spec": {"age_min": 18, "age_max": 65},
                     "video_label": vertical_label,
                     "priority": 2,
                 },
@@ -229,7 +229,7 @@ def build_eggbev_from_zero_manifest(
                         page_token=page_token,
                         label_prefix=label_prefix,
                         primary_text=str(primary_text),
-                        headlines=[str(item) for item in headlines],
+                        headlines=[str(headlines[global_index % len(headlines)])],
                         description=str(description),
                         cta=str(cta),
                     ),

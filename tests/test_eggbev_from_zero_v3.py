@@ -96,11 +96,15 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
 
     def test_copy_and_messenger_flags_match_approved_template(self) -> None:
         payload = self._build(campaigns=1)
-        creative = payload["campaigns"][0]["ads"][0]["creative_payload"]
+        ad_creatives = [row["creative_payload"] for row in payload["campaigns"][0]["ads"]]
+        creative = ad_creatives[0]
         feed = creative["asset_feed_spec"]
         welcome = json.loads(feed["additional_data"]["page_welcome_message"])
         self.assertEqual(feed["bodies"], [{"text": ""}])
-        self.assertEqual([row["text"] for row in feed["titles"]], ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"])
+        self.assertEqual(
+            [[row["text"] for row in item["asset_feed_spec"]["titles"]] for item in ad_creatives],
+            [["APPLY NOW ✅"], ["CARD APPROVED"], ["✔️ APPLY CARD"]],
+        )
         self.assertEqual(feed["call_to_action_types"], ["APPLY_NOW"])
         self.assertIs(welcome["performance_booster_enabled"], False)
         self.assertIs(welcome["message_data"]["performance_booster_enabled"], False)
