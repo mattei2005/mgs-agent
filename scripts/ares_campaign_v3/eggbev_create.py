@@ -109,6 +109,7 @@ def _creative_payload(
             "titles": [{"text": item} for item in headlines],
             "descriptions": [{"text": description}],
             "call_to_action_types": [cta],
+            "link_urls": [{"website_url": "https://fb.com/messenger_doc/", "display_url": ""}],
             "asset_customization_rules": [
                 {
                     "customization_spec": {
