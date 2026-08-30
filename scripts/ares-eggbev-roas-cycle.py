@@ -77,6 +77,10 @@ def _fmt_percent(value: Any) -> str:
     return 'N/D' if common.finite_float(value) is None else common.fmt_number(value) + '%'
 
 
+def _fmt_usd(value: Any) -> str:
+    return 'N/D' if common.finite_float(value) is None else '$' + common.fmt_number(value)
+
+
 def _fmt_signed_percent(value: Any) -> str:
     number = common.finite_float(value)
     if number is None:
@@ -150,6 +154,14 @@ def _roas_visual(value: Any, threshold: Any) -> str:
     else:
         signal = '🟢'
     return f'{signal} {common.fmt_number(number)}'
+
+
+def _roi_visual(value: Any) -> str:
+    number = common.finite_float(value)
+    if number is None:
+        return '⚪ N/D'
+    signal = '🟢' if number > 0 else '🟡' if abs(number) <= 1e-9 else '🔴'
+    return f'{signal} {_fmt_signed_percent(number)}'
 
 
 def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str, str, str]:
@@ -386,7 +398,8 @@ def _dashboard_header() -> tuple[str, str, str]:
         _fit('Leads', 7),
         _fit('Retorno', 9),
         _fit('Receita', 9),
-        _fit('Retorno', 13),
+        _fit('ROI', 10),
+        _fit('ROI', 10),
     ]
     bidding_bottom = [
         _fit('assinante', 9),
@@ -396,7 +409,8 @@ def _dashboard_header() -> tuple[str, str, str]:
         ' ' * 7,
         _fit('Drip', 9),
         _fit('Broadcast', 9),
-        _fit('Real/Estimado', 13),
+        _fit('atual', 10),
+        _fit('estimado', 10),
     ]
     top = ' │ '.join(decision_top) + ' ║ ' + ' │ '.join(meta_top) + ' ║ ' + ' │ '.join(bidding_top)
     bottom = ' │ '.join(decision_bottom) + ' ║ ' + ' │ '.join(meta_bottom) + ' ║ ' + ' │ '.join(bidding_bottom)
@@ -413,25 +427,26 @@ def _dashboard_row(index: int, row: dict[str, Any], threshold: Any) -> str:
         _fit(row.get('sb_page_name'), 14),
     ]
     meta = [
-        _fit(common.fmt_money(row.get('cost_per_messaging_started')), 9, 'right'),
+        _fit(_fmt_usd(row.get('cost_per_messaging_started')), 9, 'right'),
         _fit(_roas_visual(row.get('purchase_roas'), threshold), 9, 'right'),
-        _fit(common.fmt_money(row.get('cost_per_message')), 9, 'right'),
+        _fit(_fmt_usd(row.get('cost_per_message')), 9, 'right'),
         _fit(common.fmt_number(row.get('messaging_results'), 0), 10, 'right'),
-        _fit(common.fmt_money(row.get('budget_usd')), 9, 'right'),
-        _fit(common.fmt_money(row.get('spend')), 8, 'right'),
-        _fit(common.fmt_money(row.get('cpm')), 9, 'right'),
+        _fit(_fmt_usd(row.get('budget_usd')), 9, 'right'),
+        _fit(_fmt_usd(row.get('spend')), 8, 'right'),
+        _fit(_fmt_usd(row.get('cpm')), 9, 'right'),
         _fit(_fmt_percent(row.get('ctr')), 9, 'right'),
-        _fit(common.fmt_money(row.get('cpc_link')), 9, 'right'),
+        _fit(_fmt_usd(row.get('cpc_link')), 9, 'right'),
     ]
     bidding = [
-        _fit(common.fmt_money(row.get('sb_cost_subscriber')), 9, 'right'),
-        _fit(common.fmt_money(row.get('sb_revenue')), 9, 'right'),
-        _fit(common.fmt_money(row.get('sb_profit')), 9, 'right'),
+        _fit(_fmt_usd(row.get('sb_cost_subscriber')), 9, 'right'),
+        _fit(_fmt_usd(row.get('sb_revenue')), 9, 'right'),
+        _fit(_fmt_usd(row.get('sb_profit')), 9, 'right'),
         _fit(_fmt_signed_percent(row.get('sb_roi_percent')), 9, 'right'),
         _fit(common.fmt_number(row.get('sb_leads'), 0), 7, 'right'),
         _fit(_fmt_signed_percent(row.get('sb_drip_roi_percent')), 9, 'right'),
-        _fit(common.fmt_money(row.get('sb_broadcast_revenue')), 9, 'right'),
-        _fit(_roi_signal(row.get('roi_real')) + '/' + _roi_signal(row.get('roi_estimated')), 13),
+        _fit(_fmt_usd(row.get('sb_broadcast_revenue')), 9, 'right'),
+        _fit(_roi_visual(row.get('roi_real')), 10, 'right'),
+        _fit(_roi_visual(row.get('roi_estimated')), 10, 'right'),
     ]
     return ' │ '.join(decision) + ' ║ ' + ' │ '.join(meta) + ' ║ ' + ' │ '.join(bidding)
 
@@ -518,7 +533,7 @@ def render_report(run: dict[str, Any]) -> str:
         '',
         '**ℹ️ LEGENDA**',
         '**🔥 ROAS:** 🔴 abaixo do threshold • 🟡 exatamente no threshold • 🟢 acima do threshold • ⚪ indisponível.',
-        '`Ligada` mostra o estado On/Off da campanha. `Retorno Real/Estimado` mantém os dois sinais econômicos informativos.',
+        '`Ligada` mostra o estado On/Off da campanha. `ROI atual` e `ROI estimado` mostram os percentuais econômicos informativos: 🟢 positivo, 🟡 zero, 🔴 negativo e ⚪ indisponível.',
         '`Custo por conversa` = gasto ÷ conversa iniciada • `Custo por resultado` = gasto ÷ resultados • `Custo por clique` = gasto ÷ cliques no link.',
         '`Custo por assinante` = investimento ÷ assinantes • `Lucro` = receita − investimento • retornos usam o mesmo investimento.',
         'Campos Smart Bidding ficam `N/D` sem UTM + página + atualização válida. Meta Purchase ROAS continua decidindo corte/reativação.',

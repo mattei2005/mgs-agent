@@ -323,12 +323,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
-      "next_step": "Nicolas definir o budget do request e uma referência/template canônico de criação. Depois implementar from_zero_prestaged Eggbev, importar placements por readback, reconciliar/liberar 9 assets, pre-stagear e apresentar validate/plan/dry-run e resumo final; publicar só após novo OK explícito e gate financeiro.",
-      "objective": "Preservar o contrato de criação do zero Eggbev e sua readiness real sem misturar clone",
-      "source": "discord:thread:1543280854024060999; discord:thread:1541578556037927053; data/ares/meta-ads/audit/eggbev/creation-intake-pg5024-3x3-20260829.json; scripts/ares-eggbev-creation-intake-simulate.py",
-      "state": "auditoria final: pedido mínimo pg_5024 + 3 campanhas + 3 criativos foi simulado read-only. default correto: 3x1x3, 9 assets únicos, active, próximo dia 00:00 et. page amy shook passou get meta. inputs ainda ausentes: budget e referência/template canônico que forneça naming, ad names, copy, placements e tracking. conta v3 está onboarded para clones, mas from_zero_prestaged não está; runner, placements, pre-stage e elegibilidade reconciliada permanecem bloqueadores. dupnn foi removido do escopo de criação. zero meta/drive/reservation writes.",
+      "next_step": "Nicolas sends the real request in Criar Campanhas with exact daily budget and nine ad names or an approved naming template; Ares then reconciles/reserves/prestages only that request, presents the digest summary and waits Nicolas OK plus Rodolfo/Geizian financial gate before execute",
+      "objective": "Create Eggbev US-CC-EN campaigns from zero through Engine v3 with scoped new media, final summary and explicit approval gates",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "engine v3.4.0 and eggbev from_zero_prestaged runner operational; campaign/adset/adcreative/ad payloads accepted by meta validate_only with zero side effects; 63 cc_us_en lineages eligible for scoped request review; six fixed threads stable 6/6; no asset reserved or prestaged and no campaign created during remediation",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-08-30T01:10:35+00:00"
+      "updated_at": "2026-08-30T05:26:51+00:00"
     },
     {
       "agent": "ares",
@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ROAS-VISUAL-DASHBOARD-20260830",
-      "next_step": "Observar o próximo ciclo com campanha no dia e coletar feedback visual do gestor; nenhuma ação técnica pendente",
-      "objective": "Substituir o renderer textual do Corte e ROAS por painel visual único Meta Ads + Smart Bidding solicitado por Nicolas",
-      "source": "data/ares/meta-ads/audit/eggbev/reporting-contract/update-20260830T010355-0400.json",
+      "next_step": "Observar o próximo ciclo com campanha no dia e coletar somente feedback visual adicional do gestor",
+      "objective": "Refinar o painel Corte e ROAS v6 com labels completos, Page após Ação e ROAS visual solicitado por Nicolas",
+      "source": "data/ares/meta-ads/audit/eggbev/reporting-contract/update-20260830T012104-0400-v6.json",
       "state": "completed",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-30T05:05:26+00:00"
+      "updated_at": "2026-08-30T05:25:12+00:00"
     },
     {
       "agent": "ares",
@@ -1452,5 +1452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T05:05:26+00:00"
+  "updated_at": "2026-08-30T05:26:51+00:00"
 }

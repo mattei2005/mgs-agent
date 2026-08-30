@@ -1,0 +1,78 @@
+# Eggbev-US-CC-EN — configuração de Criar Campanhas
+
+## Escopo e readiness
+- Thread: `Eggbev-US-CC-EN Criar Campanhas` (`1541578556037927053`).
+- Escopo: criação normal do zero. Clonagem fica exclusivamente na thread `1543333373945053184`.
+- Conta: `Eggbev-US-CC-EN-01-G006` (`act_1034081997659047`), ativa, USD, `America/New_York`.
+- Estratégia/destino: `BOT` / `Messenger`.
+- Contrato de criação aprovado: sim.
+- Runner Eggbev de criação construído: sim.
+- Conta cadastrada no Engine v3: sim.
+- Modo `from_zero_prestaged` onboarded para Eggbev: sim.
+- Mídia Eggbev já pre-stageada no registry v3 neste instante: não; o pre-stage é on-demand por request e não é blocker estático.
+- Write de criação habilitado: sim.
+- Estado real: `from_zero_prestaged`, runner, placements, referência/copy e reconcile/pre-stage on-demand estão materializados. O pedido avança até o resumo final quando traz budget e nomes dos ads; publicação continua bloqueada pelo OK explícito e pelo gate financeiro.
+
+## Estrutura fixa
+- Campaign: `AUCTION` | `SALES` | `CBO` | `HIGHEST_VOLUME` | `STANDARD`.
+- Categoria especial: `FINANCIAL_PRODUCTS_AND_SERVICES` — `US`.
+- Estrutura: 1 campanha × 1 ad set × 3 ou 5 anúncios (`1×1×3` ou `1×1×5`).
+- Ad set: `AdG1` | destino `MESSENGER` | início padrão `next_day_00:00_America/New_York` | `ongoing`.
+- Público: `US`, 18+, gênero `ALL`, expansão=true.
+- Otimização: `MAXIMIZE_NUMBER_OF_CONVERSIONS` | `ALL_CONVERSIONS` | bid `HIGHEST_VOLUME` | value rules=false.
+- Placements: MANUAL_ONLY; payload exato materializado por readback, com Facebook + Instagram + Messenger e Audience Network proibida.
+- Pixel: `Eggbev-US-CC-EN` (`935354115143283`), universal para esta operação.
+- Advertiser/Payer: `DIGITAL TRUST`.
+
+## Variáveis obrigatórias por solicitação
+1. Página Facebook e token `pg_XXXXX` reconciliados.
+2. Data/hora; padrão = próximo dia às `00:00` em `America/New_York`.
+3. Estrutura `1×1×3` ou `1×1×5`.
+4. Budget diário exato; criação normal não possui valor default.
+5. Criativos novos e linhagem Drive → Meta.
+6. Nomes individuais dos anúncios; quando ausentes, perguntar uma vez antes do manifest.
+7. Overrides de copy/tracking/placements, se o pedido quiser divergir dos defaults aprovados.
+
+## Criativos e copy
+- Fonte: `CC_US_EN/01_READY`, após reserva e reconciliação Meta × Drive.
+- Origem: `MANUAL_UPLOAD`; criação normal exige criativo sempre novo e nunca reutilizado.
+- Instagram: `USE_FACEBOOK_PAGE`; partnership ad=false.
+- Advantage+ creative=false; multi-advertiser=false.
+- Copy não é criativo: copy são os quatro campos textuais do anúncio; imagens e vídeos são os assets criativos.
+- Naming de criação do zero: `approved_by_nicolas_and_materialized`; `DUPnn` é somente clone.
+- Naming materializado: `[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX para [Page first name] - Copy`; nomes dos ads continuam input obrigatório.
+- Referência canônica default: `155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`; a instrução atual do pedido vence qualquer campo conflitante.
+- Copy default: `approved_jolie_c001_reference_template` — Primary text vazio, 3 headlines aprovadas, descrição cinco estrelas e CTA `APPLY_NOW`.
+- Tracking: show Messenger destination and exact url_tags in the final summary; request-time explicit tracking overrides the template after validation; validate destination, url_tags/UTMs and Page identity after creation.
+
+## Messenger JSON obrigatório
+- Tipo: `text_with_buttons/button`.
+- Texto: `💳 Hi, I just reviewed your access… /  / Do you want to see your approved card? ⤵️`.
+- Botão: `postback` | payload `GET_STARTED_PAYLOAD` | título `🟢 YES, SHOW ME`.
+- Performance booster=false; deprecate quick replies=false.
+- Qualquer mudança no template exige mostrar a versão integral e obter aprovação de Nicolas.
+
+## Budget, status e publicação
+- Budget: `selected_and_confirmed_by_authorized_campaign_manager_per_campaign`; confirmar antes da criação e nunca assumir valor de referência.
+- Não existe budget fixo por modo: criação e clones exigem valor selecionado/confirmado pelo gestor para o pedido; o write financeiro continua sujeito ao gate vigente de Rodolfo/Geizian.
+- Produção normal aprovada: campanha, ad set e anúncios configurados `ACTIVE` com `start_time` futuro; entrega começa somente no horário aprovado.
+- Canário técnico: `PAUSED` até aprovação separada; não usar como padrão de produção.
+- Nunca publicar diretamente. A instrução atual do pedido vence prints e referências históricas.
+
+## Fluxo obrigatório
+1. Receber a solicitação e confirmar conta 01/autoridade.
+2. Validar página, `pg_XXXXX`, estrutura, budget, horário, copy e criativos novos.
+3. Validar pixel, payer, destino Messenger, JSON e placements exatos.
+4. Fazer preflight read-only e snapshot da conta/estado relevante.
+5. Reconciliar Drive × Meta, reserva, naming, sequência, links e UTMs.
+6. Materializar manifest idempotente com lock e request ID.
+7. Executar reconcile scoped, pre-stage on-demand, prevalidate e plan pelo runner `scripts/ares-eggbev-creation.py`.
+8. Mostrar resumo final: página, horário/estrutura, budget, criativos, copy, JSON, naming, tracking e status.
+9. Esperar o OK explícito de Nicolas; existência da thread não autoriza write.
+10. Criar somente após todos os gates; recuperar falhas por readback-first, sem repetir POST às cegas.
+11. Fazer GET/readback de campanha, ad set, anúncios, creatives, status, start_time, budget, Page, tracking e JSON.
+12. Só então reportar sucesso e persistir auditoria/recovery data.
+
+## Separação de rotas
+- `pure_clone`, `clone_prestaged` e `clone_page_switch` não são criação normal e não são executados nesta thread.
+- Corte/ROAS, Diário e Limite de Leads entram apenas depois do lançamento e têm threads próprias.

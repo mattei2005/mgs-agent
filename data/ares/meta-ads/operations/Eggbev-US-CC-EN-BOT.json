@@ -4,7 +4,7 @@
   "operation_skill": "eggbev-us-cc-en-bot-operations",
   "operation_id": "Eggbev-US-CC-EN-BOT",
   "latest_creation_remediation": {
-    "completed_at_et": "2026-08-30T01:00:00-04:00",
+    "completed_at_et": "2026-08-30T01:24:51-04:00",
     "authorized_by": "Nicolas Holanda",
     "scope": "remove technical blockers and prepare the six fixed routes before the first creation-thread test",
     "engine_release": "3.4.0",
@@ -794,6 +794,7 @@
         "economic join status"
       ],
       "display_exclusions": ["Page ID is hidden from the human table and remains available only for exact join and audit"],
+      "display_currency_format": "USD with dollar sign and decimal comma, for example $1,86",
       "roas_visual_policy": {
         "below_threshold": "red",
         "equal_threshold": "yellow",

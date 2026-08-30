@@ -1130,6 +1130,23 @@
       "updated_at": "2026-08-30T01:11:06+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.campaign_creation.runtime.v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign_ops.eggbev",
+      "effective_at": "2026-08-30T01:24:51-04:00",
+      "id": "ARES-EGGBEV-FROM-ZERO-V3-20260830",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev from-zero gated creation on Campaign Engine v3.4.0",
+      "updated_at": "2026-08-30T05:26:52+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.page-leads",
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "consumers": [
@@ -2448,5 +2465,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T01:11:07+00:00"
+  "updated_at": "2026-08-30T05:26:52+00:00"
 }

@@ -350,7 +350,7 @@ Por correção de Nicolas na thread `1541578606076231750`, a tabela humana não 
 Ligada | Campanha | Entrega | Ação | Página ║ Meta Ads ║ Smart Bidding
 ```
 
-`Página` fica imediatamente após `Ação` e antes de `Custo por conversa`. Os cabeçalhos usam palavras completas em português, divididas em duas linhas quando necessário; não voltar para `Camp/Pg`, `C/msg`, `C/res`, `C/Sub`, `Rev BC` ou `Page ID`. Os grupos **Decisão e Identidade**, **Meta Ads — ROAS em destaque** e **Smart Bidding** usam títulos Markdown em negrito, `║` entre grupos e `│` entre colunas.
+`Página` fica imediatamente após `Ação` e antes de `Custo por conversa`. Os cabeçalhos usam palavras completas em português, divididas em duas linhas quando necessário; não voltar para `Camp/Pg`, `C/msg`, `C/res`, `C/Sub`, `Rev BC` ou `Page ID`. Valores USD usam cifrão e vírgula decimal, por exemplo `$1,86`. Os grupos **Decisão e Identidade**, **Meta Ads — ROAS em destaque** e **Smart Bidding** usam títulos Markdown em negrito, `║` entre grupos e `│` entre colunas.
 
 ROAS é a única coluna com sinal visual dependente do threshold do ciclo: `🔴` abaixo, `🟡` exatamente igual, `🟢` acima e `⚪` indisponível. O sinal é apresentação; não altera a fórmula nem a lógica de corte/reativação. A largura ampliada usa até 3 campanhas por bloco e repete o cabeçalho completo de duas linhas sem limite silencioso.
 

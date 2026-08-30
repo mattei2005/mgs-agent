@@ -401,6 +401,8 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
         self.assertIn('🔴 0,30', rendered)
+        self.assertIn('$3,00', rendered)
+        self.assertNotIn('$3.00', rendered)
         header = rendered.split('```text', 1)[1].split('```', 1)[0]
         self.assertLess(header.index('Ação'), header.index('Página'))
         self.assertLess(header.index('Página'), header.index('Custo por'))
@@ -743,6 +745,7 @@ class ContractTests(unittest.TestCase):
             self.assertIn(expected, fields)
         self.assertNotIn('Smart Bidding Page ID', fields)
         self.assertIn('Page ID is hidden', reporting_policy['display_exclusions'][0])
+        self.assertIn('$1,86', reporting_policy['display_currency_format'])
         self.assertEqual(reporting_policy['roas_visual_policy']['below_threshold'], 'red')
         self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'yellow')
         self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'green')
