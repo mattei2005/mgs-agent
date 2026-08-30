@@ -76,7 +76,7 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Relatório vivo hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.
 - Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
 - Nunca reutilizar números de mensagens antigas como estado atual.
-- Horários aprovados: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 em `America/New_York`; aprovação do plano não significa cron aprovado.
+- Horários e rotas do Diário ainda não foram definidos nem aprovados. Os ciclos 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS. O Diário não herda esses horários; aguarda desenho separado de Nicolas antes de qualquer cron.
 - Renderer v3: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
 - Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; a tabela desktop única preserva todas as campanhas com paginação Discord fence-safe.
 - A tabela única combina Meta Ads + Smart Bidding + Pricing/monetização por campanha. O join exige `utm_campaign` do creative Meta = `UTM_CAMPAIGN` Smart Bidding e `object_story_spec.page_id` Meta = `FB_PAGE_ID` Smart Bidding.
@@ -216,7 +216,7 @@ Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Me
 - Fonte aprovada por Nicolas: extrair diretamente da rota Smart Bidding compatível — vertical, Messenger Pages ou domain — com readback do endpoint, campo, moeda, período, freshness e identidade. Não existe precedência implícita; usar a granularidade que reconcilia corretamente a linha.
 - `Custo/msg iniciada` = spend Meta ÷ `messaging_conversation_started_7d`. Para RPS/EPC, campo direto Smart Bidding vence cálculo local; fórmulas locais são fallback-only, rotuladas e não substituem um campo direto disponível.
 - Não inventar denominador, atribuição ou moeda. A ausência de UTM no `/pricing` global não prova indisponibilidade: tentar vertical, Messenger Pages ou domain antes de publicar `N/D`.
-- Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
+- Diário ainda sem horários ou rotas aprovados. Não reutilizar os horários do Corte e ROAS; aguardar Nicolas definir o desenho do Diário e, depois, apresentar plano/dry-run antes de qualquer automação.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 - Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.
 

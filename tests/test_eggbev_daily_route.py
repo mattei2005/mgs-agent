@@ -28,9 +28,11 @@ class EggbevDailyRouteTests(unittest.TestCase):
         cls.account = json.loads(ACCOUNT.read_text())["accounts"][0]
 
     def test_schedule_and_period_semantics(self):
-        for value in ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]:
-            self.assertIn(value, self.report)
-        self.assertIn("fechamento anterior + referência parcial atual", self.report)
+        policy = self.operation["daily_reporting_policy"]
+        self.assertEqual(policy["approved_times"], [])
+        self.assertEqual(policy["schedule_status"], "not_defined_pending_nicolas_design")
+        self.assertIn("Horários do Diário: ainda não definidos nem aprovados", self.report)
+        self.assertIn("pertencem exclusivamente ao Corte e ROAS", self.report)
         self.assertIn("Relatório sob demanda a qualquer momento: sim", self.report)
 
     def test_runtime_is_read_only_and_not_automated(self):

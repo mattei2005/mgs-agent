@@ -37,7 +37,6 @@ def build_report() -> str:
     if policy["timezone"] != "America/New_York":
         raise RuntimeError("timezone Diário divergente")
 
-    times = ", ".join(policy["approved_times"])
     meta_metrics = ", ".join(policy["required_meta_metrics"])
     sb_metrics = ", ".join(policy["requested_smart_bidding_metrics"])
     renderer = policy["renderer_contract"]
@@ -53,18 +52,17 @@ def build_report() -> str:
         f"- Estratégia/destino: `{account['strategy']}` / `{account['channel']}`.",
         f"- Modo: `{policy['mode']}`; o Diário não executa qualquer write Meta.",
         "",
-        "## Horários aprovados",
-        f"- Plano Diário: `{times}` em `America/New_York`.",
-        f"- 06:00: {policy['06:00']}.",
-        f"- Demais horários: {policy['other_times']}.",
+        "## Horários e rotas",
+        "- Horários do Diário: ainda não definidos nem aprovados.",
+        f"- Estado do schedule: `{policy['schedule_status']}`.",
+        f"- Separação obrigatória: {policy['schedule_policy']}",
         f"- Relatório sob demanda a qualquer momento: {state(bool(policy['report_on_demand']))}.",
-        "- Horários aprovados não significam cron aprovado ou instalado.",
+        "- Não existe cron Diário aprovado ou instalado.",
         "",
         "## Como obter dados atuais",
         "- Hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.",
         "- Ontem: `python3 scripts/ares-eggbev-daily-report.py --period yesterday`.",
         "- Data específica: `python3 scripts/ares-eggbev-daily-report.py --period YYYY-MM-DD`.",
-        "- 06:00 programado: `--period auto` produz fechamento anterior + referência parcial atual.",
         "- Nunca reutilizar números de mensagens antigas; cada pedido consulta as fontes vivas.",
         "",
         "## Fontes e métricas",

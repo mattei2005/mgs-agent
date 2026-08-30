@@ -247,9 +247,7 @@
         "live_report_request_mapping": {
           "today_or_now": "--period today",
           "yesterday": "--period yesterday",
-          "specific_date": "--period YYYY-MM-DD",
-          "scheduled_06_00": "--period auto at 06:00 America/New_York; previous-day close plus current-day 06:00 reference",
-          "other_scheduled_times": "--period auto; current-day partial"
+          "specific_date": "--period YYYY-MM-DD"
         },
         "live_data_policy": "run the live report at request time; never reuse campaign, spend, ROAS, result, Smart Bidding or rule counts from an old thread message",
         "mandatory_report_sections": [
@@ -274,7 +272,7 @@
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "252f67ba4ad672bfd60edb2f8695757263c338031009cba4d0d124891660333f",
+          "active_prompt_sha256": "fc0759b8de3c38f1719298c462a11b1134f76031ffdb18fade1b2631ef73c3b1",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
           "tests_passed": 73,
@@ -444,10 +442,15 @@
     "timezone": "America/New_York",
     "mode": "read_only",
     "report_on_demand": true,
-    "basis": "distributed during the day like Creditoparaveiculo, adapted to Eggbev BOT",
-    "approved_times": ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
-    "06:00": "previous-day closed report plus reference to the current first-cycle state",
-    "other_times": "current-day partial reports",
+    "schedule_status": "not_defined_pending_nicolas_design",
+    "approved_times": [],
+    "schedule_policy": "Nenhum horário de relatório Diário está aprovado. Os ciclos 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS e nunca podem ser herdados pelo Diário.",
+    "schedule_correction": {
+      "corrected_at_et": "2026-08-30T19:05:28-04:00",
+      "corrected_by": "Nicolas Holanda",
+      "source_thread": "discord:thread:1541578596253175858",
+      "decision": "Daily routes will be designed separately later; no Daily schedule is currently defined or approved."
+    },
     "sources": {
       "meta": "Meta API live for the requested period",
       "smart_bidding": "Smart Bidding direct metrics may be read from the compatible vertical, Messenger Pages or domain route after exact scope, identity, period and freshness reconciliation",
@@ -459,7 +462,7 @@
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
     "layout": "hybrid v3: one vertical card per campaign plus one unified Pricing + Meta Ads + Smart Bidding desktop table; fence-safe Discord pagination",
-    "automation_change": "none_until_dry_run_is_shown_and_nicolas_explicitly_approves_cron_write",
+    "automation_change": "none_until Daily routes and times are designed, a dry-run is shown and Nicolas explicitly approves cron write",
     "schedule_approval_is_not_cron_approval": true,
     "renderer_contract": {
       "status": "hybrid_v3_unified_sources_layout_verified_direct_smart_bidding_extractor_pending",
@@ -495,14 +498,14 @@
       "RPS, CPM, EPC, real ROI, estimated ROI and other available monetization metrics should be consumed directly from a compatible Smart Bidding vertical, Messenger Pages or domain route; the runner still needs exact endpoint/field readback for each metric before publishing live values",
       "the current Smart Bidding schema exposes no accepted update timestamp, so freshness is displayed as unverifiable and Smart Bidding monetary metrics remain N/D",
       "source-route selection and identity mapping for vertical, Messenger Pages and domain are not yet materialized in the Daily runner; this is an implementation gap, not a Smart Bidding data-availability limitation",
-      "automatic posting and Daily cron remain disabled until Nicolas approves a real dry-run and the automation plan"
+      "Daily routes and times are not yet defined; automatic posting and Daily cron remain disabled until Nicolas defines them and approves a real dry-run and automation plan"
     ],
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-daily-report.py",
       "thread_id": "1541578596253175858",
       "post_enabled": false,
       "cron_enabled": false,
-      "blocked_reason": "Nicolas authorized runner/tests only; posting and cron await approved live dry-run"
+      "blocked_reason": "Daily routes and times are not yet defined; posting and cron await Nicolas design plus an approved live dry-run"
     }
   },
   "campaign_creation_policy": {
@@ -1133,9 +1136,9 @@
         "deliver": "local"
       },
       "daily_reporting": {
-        "schedule": "0 6,8,10,12,14,16,18,20,22 * * *",
+        "schedule": "none_pending_nicolas_design",
         "timezone_guard": "America/New_York",
-        "delivery": "wrapper posts directly to Eggbev-US-CC-EN Diario",
+        "delivery": "not configured",
         "no_agent": true,
         "deliver": "local"
       },

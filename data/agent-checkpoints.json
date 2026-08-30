@@ -342,6 +342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-DAILY-ROUTES-DESIGN-20260830",
+      "next_step": "Quando Nicolas iniciar o desenho, coletar horários/períodos/formato, materializar plano separado do Corte e ROAS, executar dry-run real e só então solicitar/aplicar aprovação explícita de cron/post.",
+      "objective": "Definir com Nicolas as rotas, horários, períodos e automação futura do Diário Eggbev",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "correção canônica aplicada: os horários existentes pertencem ao corte e roas; diário permanece read-only sob demanda, sem horários definidos, sem cron, sem post automático e sem writes.",
+      "thread_id": "1541578596253175858",
+      "updated_at": "2026-08-30T23:08:08+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-MESSENGER-JSON-STANDARDIZATION-20260830",
       "next_step": "For each future creation, load the canonical file, require the normal final OK, verify every manifest ad immediately before execute, and close only after creative-by-creative Meta-to-file readback",
       "objective": "Make Nicolas approved complete Messenger JSON a fixed canonical file for every new Eggbev campaign and verify it before and after Meta writes",
@@ -1492,5 +1502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T22:55:34+00:00"
+  "updated_at": "2026-08-30T23:08:08+00:00"
 }

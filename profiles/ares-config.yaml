@@ -730,9 +730,11 @@ discord:
       yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como
       estado atual.
 
-      - Plano de horarios em America/New_York: 06:00, 08:00, 10:00, 12:00, 14:00,
-      16:00, 18:00, 20:00 e 22:00. Às 06:00, fechamento anterior + referencia parcial
-      atual; demais horarios, parcial atual. Plano nao autoriza cron.
+      - Horarios e rotas do Diario ainda nao foram definidos nem aprovados. Os ciclos
+      06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e
+      23:00 pertencem exclusivamente ao Corte e ROAS e nunca devem ser apresentados
+      como schedule do Diario. Aguardar o desenho separado de Nicolas antes de propor
+      ou criar cron.
 
       - Escopo de campanhas: toda campanha efetivamente ACTIVE mesmo sem insight +
       toda campanha com insight no periodo. Historicas sem nenhuma dessas condicoes
