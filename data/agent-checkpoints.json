@@ -323,12 +323,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
-      "next_step": "Nicolas sends a real pg_XXXXX and budget in the creation thread; Ares runs live Page preflight, scoped reconciliation, reservation, prestage and plan, then returns the final digest summary. Execute only after Nicolas OK plus valid financial approval or pre-approved envelope.",
-      "objective": "Operate deterministic from-zero Eggbev campaign creation from a minimal natural-language call",
-      "source": "discord:thread:1543280854024060999; canonical-route:1541578556037927053",
-      "state": "call standard materialized: criar n campanha pagina x defaults to 1x1x3, cc_us_en, unique creatives, automatic ad nn canonical-stem names and next-day 00:00 et. only exact daily budget remains a request input. nicolas ok and rodolfo/geizian financial authority remain execute-only gates. 134 eggbev tests pass; six routes 6/6 stable; zero meta writes/reservations/prestage in simulation.",
+      "next_step": "Aguardar OK do resumo corrigido e aprovação financeira de Rodolfo ou Geizian; então executar o mesmo request, atualizar start_time no execute, concluir readback Meta consolidado e confirmar JSON Messenger 3/3 antes do pós-processamento.",
+      "objective": "Criar a primeira campanha Eggbev pg_5024 com naming corrigido, início imediato one-time e readback obrigatório do JSON Messenger",
+      "source": "discord:thread:1541578556037927053; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; state:data/ares/meta-ads/state/eggbev-creation/eggbev-pg-5024-20260830-nicolas-01.json",
+      "state": "request eggbev-pg-5024-20260830-nicolas-01 rematerializado e prevalidado: nome 162 - amy shook - eng - us - (pg_5024) c001; budget usd45; 1x1x3; três criativos reservados/prestageados; start_mode immediate_on_execute; campaign_writes=0; resumo corrigido aguarda confirmação e gate financeiro. padrão futuro usa c001/c002/c003 sem sufixo e volta ao próximo dia 00:00 et. pós-criação exige get de cada creative e igualdade de page, url_tags e page_welcome_message json antes de 02_testing.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-08-30T05:49:37+00:00"
+      "updated_at": "2026-08-30T11:43:48+00:00"
     },
     {
       "agent": "ares",
@@ -1452,5 +1452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T10:33:59+00:00"
+  "updated_at": "2026-08-30T11:43:48+00:00"
 }
