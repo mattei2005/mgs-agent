@@ -102,7 +102,7 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         self.assertIn("ares-eggbev-creation-config-report.py", prompt)
         self.assertIn("pg_5024_dup01_live_validated_v1", prompt)
         self.assertIn("todas as tres headlines", prompt)
-        self.assertIn("sem `explore`", prompt)
+        self.assertIn("nao enviar `explore`", prompt)
         prompt_source = PROMPT.read_text().strip()
         self.assertTrue(prompt_source.startswith("INSTRUCAO ESPECIFICA"))
         self.assertEqual(prompt.strip(), prompt_source)

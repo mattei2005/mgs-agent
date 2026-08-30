@@ -363,12 +363,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PG5024-STANDARDIZATION-20260830",
-      "next_step": "Nenhuma ação pendente; acompanhar delivery após o início programado no reporting operacional",
-      "objective": "Substituir a campanha pg_5024 pela DUP01 com evento Eggbev PV U e copy padrão de três headlines por anúncio",
-      "source": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
-      "state": "completed; dup01 active; adset custom_event_str=eggbev-pv-u confirmed; 3 ads and creatives active; source deleted; live readback 22/22 passed",
+      "next_step": "Aplicar este modelo por default no próximo pedido da thread 1541578556037927053, mantendo Page, budget, quantidade e novos criativos como variáveis e exigindo resumo final mais OK",
+      "objective": "Promover a configuração live validada da pg_5024 DUP01 a padrão da thread Eggbev Criar Campanhas",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "completed; canonical model pg_5024_dup01_live_validated_v1 active in operation sources, engine v3 contract, creation report, skill and resolved thread prompt; source/versioned/runtime prompt equal; 90 tests passed",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-30T21:38:01+00:00"
+      "updated_at": "2026-08-30T22:12:01+00:00"
     },
     {
       "agent": "ares",
@@ -1472,5 +1472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T21:38:01+00:00"
+  "updated_at": "2026-08-30T22:12:01+00:00"
 }
