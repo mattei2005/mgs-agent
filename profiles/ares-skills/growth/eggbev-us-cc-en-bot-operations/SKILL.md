@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.16.1-draft
+version: 0.17.0-draft
 author: Ares
 license: internal
 metadata:
@@ -138,7 +138,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
 2. Engine v3: conta Eggbev cadastrada na release 3.4.0; `from_zero_prestaged`, `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam schema/prevalidation/plan. Mídia nova continua pre-stageada sob demanda antes de selar o manifest.
-3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. Os quatro payloads diretos campaign/adset/adcreative/ad passaram Meta `validate_only` com GET antes/depois e zero objeto criado. Reconciliação read-only encontrou 63 linhagens aptas à liberação scoped; nenhuma foi reservada ou pre-stageada antes do pedido real. Permanecem como inputs do request apenas budget e nomes individuais dos ads, além dos gates finais de Nicolas e Rodolfo/Geizian.
+3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. Os quatro payloads diretos campaign/adset/adcreative/ad passaram Meta `validate_only` com GET antes/depois e zero objeto criado. Reconciliação read-only encontrou 63 linhagens aptas à liberação scoped; nenhuma foi reservada ou pre-stageada antes do pedido real. O call mínimo exige somente budget; nomes dos ads são automáticos. OK final de Nicolas e autoridade financeira Rodolfo/Geizian continuam gates distintos do execute.
 4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
 5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 6. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
@@ -168,12 +168,13 @@ Placements são `MANUAL_ONLY` e estão materializados no contrato: Facebook `fee
 Interpretação determinística de pedido mínimo:
 
 - `cc en us` normaliza para `CC_US_EN`;
+- `criar N campanha(s) pagina X` aplica por padrão `1×1×3`, pasta `CC_US_EN`, três criativos inéditos por campanha e nomes `AD NN - {canonical_stem}`; a resposta confirma os defaults e pergunta somente o budget diário;
 - “3 campanhas com 3 criativos” = três campanhas, cada uma `1×1×3`, total de nove criativos únicos no lote; nunca reutilizar os mesmos três entre campanhas sem instrução explícita;
 - sem override, aplicar o início no dia seguinte às `00:00 America/New_York` e status de produção `ACTIVE` após o resumo final aprovado, sem perguntar novamente pelo horário;
 - `pg_XXXXX` deve resolver para uma única linha Messenger da Smart Bidding e a Page precisa passar GET Meta;
 - pedir para “puxar da pasta” autoriza a revisão/liberação scoped dos candidatos daquele request, não elegibilidade global nem seleção por ordem de filename.
 
-Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. A referência canônica padrão é `155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`: Primary text vazio, headlines `APPLY NOW ✅`, `CARD APPROVED`, `✔️ APPLY CARD`, Description `⭐⭐⭐⭐⭐` e CTA `APPLY_NOW`. Por compatibilidade API validada, cada ad usa uma headline aprovada em rotação determinística. Naming from-zero é `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX para [Primeiro nome] - Copy`; `DUPnn` permanece exclusivo de clone. `url_tags` usa `utm_campaign=pg_XXXXX`. A instrução atual do gestor vence a referência. Budget e nomes dos ads não têm default e continuam obrigatórios.
+Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. A referência canônica padrão é `155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy`: Primary text vazio, headlines `APPLY NOW ✅`, `CARD APPROVED`, `✔️ APPLY CARD`, Description `⭐⭐⭐⭐⭐` e CTA `APPLY_NOW`. Por compatibilidade API validada, cada ad usa uma headline aprovada em rotação determinística. Naming from-zero é `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX para [Primeiro nome] - Copy`; `DUPnn` permanece exclusivo de clone. `url_tags` usa `utm_campaign=pg_XXXXX`. A instrução atual do gestor vence a referência. Budget não tem default e continua obrigatório; nomes dos ads são derivados automaticamente do slot e do nome canônico do criativo.
 
 O simulador read-only canônico é `python3 scripts/ares-eggbev-creation-intake-simulate.py`. O runner real é `python3 scripts/ares-eggbev-creation.py`: reserva assets somente após pedido scoped, faz pre-stage resumível registry-first, sela manifest, mostra resumo+digest e delega writes ao Engine v3. Depois do readback completo, move o tratado `01_READY → 02_TESTING` e registra IDs/linhagem; falha fica `RECOVERY_PENDING` ou `POSTPROCESS_PENDING`, nunca repete POST cegamente.
 
@@ -364,6 +365,12 @@ No final do grupo Smart Bidding, exibir duas colunas numéricas distintas:
 - `ROI estimado`: valor de `roi_estimated`, calculado por `(estimatedRevenue − INVESTIMENT) / INVESTIMENT × 100` após join exato e estimativa não ambígua.
 
 Ambas mostram percentual com sinal: `🟢` positivo, `🟡` zero, `🔴` negativo e `⚪ N/D` quando indisponível. São informativas e nunca substituem Meta Purchase ROAS na decisão de corte/reativação.
+
+### Refinamento visual v8 — ROAS não é ROI negativo
+
+Por correção explícita de Nicolas em `2026-08-30`, Purchase ROAS abaixo de `0,40` significa somente que está abaixo do threshold operacional; não significa resultado econômico negativo. A apresentação de ROAS usa marcadores de posição: `⬇️` abaixo, `🎯` igual, `⬆️` acima e `⚪ N/D` indisponível. Não usar vermelho/verde no ROAS como semântica de prejuízo/lucro.
+
+A classificação `negativo` pertence somente ao ROI: `ROI atual < 0%` ou `ROI estimado < 0%` aparece `🔴`; ROI positivo aparece `🟢`, zero `🟡` e indisponível `⚪ N/D`. Esta distinção visual não altera o threshold nem a lógica de corte/reativação por Meta Purchase ROAS.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

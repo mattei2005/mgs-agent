@@ -58,6 +58,21 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         with self.assertRaises(RUNNER.CreationBlocked):
             RUNNER.usd_minor_list("0", 3)
 
+    def test_automatic_ad_names_reset_slots_per_campaign_and_use_asset_stem(self):
+        selected = [
+            {"canonical_filename": f"CC_US_EN_VID_TEST_{index:03d}.mp4"}
+            for index in range(1, 7)
+        ]
+        names = RUNNER.automatic_ad_names(selected, 3)
+        self.assertEqual(names[0], "AD 01 - CC_US_EN_VID_TEST_001")
+        self.assertEqual(names[2], "AD 03 - CC_US_EN_VID_TEST_003")
+        self.assertEqual(names[3], "AD 01 - CC_US_EN_VID_TEST_004")
+        self.assertEqual(len(names), len(set(names)))
+
+    def test_automatic_ad_names_fail_closed_without_canonical_filename(self):
+        with self.assertRaises(RUNNER.CreationBlocked):
+            RUNNER.automatic_ad_names([{"asset_id": "asset-1"}], 3)
+
     def test_execute_requires_both_human_and_financial_gates_before_state_read(self):
         args = argparse.Namespace(
             request_id="not-created",

@@ -146,13 +146,13 @@ def _roas_visual(value: Any, threshold: Any) -> str:
     if number is None:
         return '⚪ N/D'
     if cutoff is None:
-        signal = '🔵'
+        signal = '↔️'
     elif number < cutoff:
-        signal = '🔴'
+        signal = '⬇️'
     elif abs(number - cutoff) <= 1e-9:
-        signal = '🟡'
+        signal = '🎯'
     else:
-        signal = '🟢'
+        signal = '⬆️'
     return f'{signal} {common.fmt_number(number)}'
 
 
@@ -532,7 +532,8 @@ def render_report(run: dict[str, Any]) -> str:
     lines.extend([
         '',
         '**ℹ️ LEGENDA**',
-        '**🔥 ROAS:** 🔴 abaixo do threshold • 🟡 exatamente no threshold • 🟢 acima do threshold • ⚪ indisponível.',
+        '**🔥 ROAS:** ⬇️ abaixo do threshold • 🎯 exatamente no threshold • ⬆️ acima do threshold • ⚪ indisponível.',
+        '`ROAS` mostra posição em relação ao threshold, não lucro ou prejuízo. Negativo é indicado somente quando `ROI atual` ou `ROI estimado` está abaixo de 0%.',
         '`Ligada` mostra o estado On/Off da campanha. `ROI atual` e `ROI estimado` mostram os percentuais econômicos informativos: 🟢 positivo, 🟡 zero, 🔴 negativo e ⚪ indisponível.',
         '`Custo por conversa` = gasto ÷ conversa iniciada • `Custo por resultado` = gasto ÷ resultados • `Custo por clique` = gasto ÷ cliques no link.',
         '`Custo por assinante` = investimento ÷ assinantes • `Lucro` = receita − investimento • retornos usam o mesmo investimento.',

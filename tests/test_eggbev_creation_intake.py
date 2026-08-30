@@ -67,8 +67,9 @@ class EggbevCreationIntakeTests(unittest.TestCase):
         self.assertEqual(result["status"], "NEEDS_INPUT")
         self.assertEqual(
             result["missing_user_inputs"],
-            ["daily_budget_usd_per_campaign", "ad_names_or_approved_ad_name_template"],
+            ["daily_budget_usd_per_campaign"],
         )
+        self.assertEqual(result["provided_inputs"]["automatic_ad_name_template"], "AD NN - {canonical_stem}")
         self.assertEqual(result["meta_writes"], 0)
         self.assertEqual(result["reservations_written"], 0)
 
@@ -79,7 +80,6 @@ class EggbevCreationIntakeTests(unittest.TestCase):
             self.make_args(
                 daily_budget_usd=50.0,
                 creation_reference="approved-fixture-reference",
-                ad_name_template="AD {index}",
             )
         )
         self.assertEqual(result["missing_user_inputs"], [])

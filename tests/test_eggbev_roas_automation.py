@@ -400,7 +400,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('123/pg_12345', rendered)
         self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
-        self.assertIn('🔴 0,30', rendered)
+        self.assertIn('⬇️ 0,30', rendered)
         self.assertIn('🟢 +12,3%', rendered)
         self.assertIn('🔴 -5,5%', rendered)
         self.assertIn('$3,00', rendered)
@@ -730,15 +730,15 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v7_has_page_after_campaign_and_numeric_current_estimated_roi(self):
+    def test_roas_reporting_v8_keeps_roas_threshold_position_distinct_from_negative_roi(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('desktop_unified_v7', reporting_policy['status'])
+        self.assertIn('desktop_unified_v8', reporting_policy['status'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
             'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
             'Entrega', 'Ação from the Ares cycle decision', 'Página name',
             'Cost per messaging conversation started',
-            'Meta Purchase ROAS with threshold-aware red/yellow/green/gray signal',
+            'Meta Purchase ROAS with directional below/equal/above/unavailable threshold marker',
             'Cost per result', 'Results', 'Budget USD', 'Amount spent USD',
             'Meta CPM', 'Meta CTR link click-through rate', 'Meta CPC link click',
             'Smart Bidding Cost Subscriber', 'Smart Bidding Revenue', 'Smart Bidding Profit',
@@ -752,9 +752,10 @@ class ContractTests(unittest.TestCase):
         self.assertLess(fields.index('Página name'), fields.index('Entrega'))
         self.assertIn('Page ID is hidden', reporting_policy['display_exclusions'][0])
         self.assertIn('$1,86', reporting_policy['display_currency_format'])
-        self.assertEqual(reporting_policy['roas_visual_policy']['below_threshold'], 'red')
-        self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'yellow')
-        self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'green')
+        self.assertEqual(reporting_policy['roas_visual_policy']['below_threshold'], 'down arrow; not negative')
+        self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'target marker')
+        self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'up arrow; not positive ROI')
+        self.assertIn('only ROI below 0 percent is labeled negative', reporting_policy['semantic_distinction'])
         self.assertEqual(reporting_policy['roi_visual_policy']['positive'], 'green with signed percentage')
         self.assertEqual(reporting_policy['roi_visual_policy']['negative'], 'red with signed percentage')
         formulas = reporting_policy['report_only_formulas']

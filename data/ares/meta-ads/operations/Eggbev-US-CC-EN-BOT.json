@@ -739,15 +739,15 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "desktop_unified_v7_requested_by_nicolas_validated_live_read_only_no_decision_change",
+      "status": "desktop_unified_v8_requested_by_nicolas_validated_live_read_only_no_decision_change",
       "requested_by": "Nicolas Holanda",
-      "requested_at_et": "2026-08-30T01:32:36-04:00",
+      "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
         "confirmed_by": "Nicolas Holanda",
         "confirmed_by_discord_id": "1055570806945620030",
-        "confirmed_at_et": "2026-08-30T01:32:36-04:00",
+        "confirmed_at_et": "2026-08-30T01:45:23-04:00",
         "source": "discord:thread:1541578606076231750",
-        "decision": "add numeric ROI atual and ROI estimado columns and move Página immediately after Campanha, before Entrega",
+        "decision": "ROAS below 0.40 is below the operational threshold, not negative; negative applies only when ROI is below 0 percent",
         "scope": "Corte e ROAS presentation only; Page ID remains available for technical join/audit; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates"
       },
       "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
@@ -760,7 +760,7 @@
         "full Portuguese labels split across two header lines instead of compact abbreviations",
         "Página immediately after Campanha and before Entrega",
         "strong vertical separators between groups and lighter separators between columns",
-        "ROAS value prefixed by a threshold-aware color signal",
+        "ROAS value prefixed by a threshold-position marker without positive or negative semantics",
         "ROI atual and ROI estimado values prefixed by sign-aware color signals",
         "ad-level cut/reactivation list only when actions exist",
         "short source and formula legend"
@@ -780,7 +780,7 @@
         "Entrega",
         "Ação from the Ares cycle decision",
         "Cost per messaging conversation started",
-        "Meta Purchase ROAS with threshold-aware red/yellow/green/gray signal",
+        "Meta Purchase ROAS with directional below/equal/above/unavailable threshold marker",
         "Cost per result",
         "Results",
         "Budget USD",
@@ -803,11 +803,12 @@
       "display_exclusions": ["Page ID is hidden from the human table and remains available only for exact join and audit"],
       "display_currency_format": "USD with dollar sign and decimal comma, for example $1,86",
       "roas_visual_policy": {
-        "below_threshold": "red",
-        "equal_threshold": "yellow",
-        "above_threshold": "green",
+        "below_threshold": "down arrow; not negative",
+        "equal_threshold": "target marker",
+        "above_threshold": "up arrow; not positive ROI",
         "unavailable": "gray"
       },
+      "semantic_distinction": "Purchase ROAS indicates position relative to the cycle threshold; only ROI below 0 percent is labeled negative",
       "roi_visual_policy": {
         "positive": "green with signed percentage",
         "zero": "yellow with zero percentage",
@@ -837,7 +838,7 @@
       "pagination": "no silent campaign limit; the wide full-label table repeats its complete two-line header every 3 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
       "validation": {
         "live_dry_run": true,
-        "validated_at_et": "2026-08-30T01:32:36-04:00",
+        "validated_at_et": "2026-08-30T01:45:23-04:00",
         "live_current_cycle_campaigns": 0,
         "live_current_cycle_account_status": "ACTIVE_USD_America/New_York",
         "live_current_cycle_meta_status": "ok",

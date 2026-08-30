@@ -74,7 +74,7 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         self.assertIn("Conta cadastrada no Engine v3: sim", self.report)
         self.assertIn("Modo `from_zero_prestaged` onboarded para Eggbev: sim", self.report)
         self.assertIn("Write de criação habilitado: sim", self.report)
-        self.assertIn("publicação continua bloqueada pelo OK explícito e pelo gate financeiro", self.report)
+        self.assertIn("Publicação continua bloqueada pelo OK explícito e pela autoridade financeira vigente no execute", self.report)
         self.assertNotIn("USD 45 não é default", self.report)
 
     def test_route_contract_and_versioned_thread_prompt(self):
