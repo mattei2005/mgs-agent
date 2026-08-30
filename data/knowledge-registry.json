@@ -1092,10 +1092,27 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V7-20260830",
+      "title": "DUP01 live model promoted to Eggbev creation-thread default",
+      "updated_at": "2026-08-30T22:25:10+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T18:21:24-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V7-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "DUP01 live model promoted to Eggbev creation-thread default",
-      "updated_at": "2026-08-30T22:12:01+00:00"
+      "title": "Eggbev fixed Messenger JSON file with prewrite and postwrite verification",
+      "updated_at": "2026-08-30T22:25:10+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation-thread-routing",
@@ -2666,5 +2683,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T22:12:01+00:00"
+  "updated_at": "2026-08-30T22:25:10+00:00"
 }
