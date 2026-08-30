@@ -111,13 +111,33 @@ def main() -> int:
     adset_result = validate_named(meta, token, endpoint=f"act_{ACCOUNT}/adsets", inventory_path=f"{parent_campaign['id']}/adsets", inventory_fields="id,name,status,configured_status", name=adset_name, body={**row["adset_create"], "name": adset_name, "campaign_id": str(parent_campaign["id"]), "status": "PAUSED", "start_time": start})
     ad_result = validate_named(meta, token, endpoint=f"act_{ACCOUNT}/ads", inventory_path=f"{parent_adset['id']}/ads", inventory_fields="id,name,status,configured_status", name=ad_name, body={"name": ad_name, "adset_id": str(parent_adset["id"]), "creative": {"creative_id": str(source_ad["creative"]["id"])}, "status": "PAUSED"})
 
+    instagram_positions = set(((row["adset_create"].get("targeting") or {}).get("instagram_positions") or []))
+    known_explore_contradiction = (
+        adset_result["status"] == "VALIDATE_ONLY_REJECTED"
+        and adset_result["error"].get("subcode") == 2490392
+        and not adset_result["side_effect_ids"]
+        and "explore_home" in instagram_positions
+        and "explore" not in instagram_positions
+    )
+    if known_explore_contradiction:
+        adset_result["status"] = "KNOWN_VALIDATE_ONLY_CONTRADICTION"
+        adset_result["interpretation"] = (
+            "Graph v26 validate_only requires deprecated explore with explore_home, while the real "
+            "Eggbev adset update rejects explore with subcode 2490589 and the live ACTIVE readback "
+            "contains explore_home without explore. Runtime write/readback is authoritative."
+        )
+
     checks = {"campaign": campaign_result, "adset": adset_result, "ad": ad_result}
-    status = "VALIDATE_ONLY_OK" if all(row["status"] == "VALIDATE_ONLY_OK" for row in checks.values()) else ("SIDE_EFFECT_DETECTED" if any(row["status"] == "SIDE_EFFECT_DETECTED" for row in checks.values()) else "VALIDATE_ONLY_REJECTED")
+    accepted_statuses = {"VALIDATE_ONLY_OK", "KNOWN_VALIDATE_ONLY_CONTRADICTION"}
+    if all(item["status"] in accepted_statuses for item in checks.values()):
+        status = "VALIDATE_ONLY_OK_WITH_KNOWN_CONTRADICTION" if known_explore_contradiction else "VALIDATE_ONLY_OK"
+    else:
+        status = "SIDE_EFFECT_DETECTED" if any(item["status"] == "SIDE_EFFECT_DETECTED" for item in checks.values()) else "VALIDATE_ONLY_REJECTED"
     result = {"operation": "Eggbev-US-CC-EN-BOT", "tested_at_utc": datetime.now(timezone.utc).isoformat(), "page_token": "pg_5024", "checks": checks, "status": status}
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if status == "VALIDATE_ONLY_OK" else 2
+    return 0 if status in {"VALIDATE_ONLY_OK", "VALIDATE_ONLY_OK_WITH_KNOWN_CONTRADICTION"} else 2
 
 
 if __name__ == "__main__":
