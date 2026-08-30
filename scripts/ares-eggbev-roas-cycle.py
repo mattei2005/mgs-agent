@@ -361,12 +361,12 @@ def _dashboard_header() -> tuple[str, str, str]:
     decision_top = [
         _fit('Ligada', 7),
         _fit('Campanha', 14),
+        _fit('Página', 14),
         _fit('Entrega', 8),
         _fit('Ação', 12),
-        _fit('Página', 14),
     ]
     decision_bottom = [
-        ' ' * 7, ' ' * 14, ' ' * 8, ' ' * 12, ' ' * 14,
+        ' ' * 7, ' ' * 14, ' ' * 14, ' ' * 8, ' ' * 12,
     ]
     meta_top = [
         _fit('Custo por', 9),
@@ -422,9 +422,9 @@ def _dashboard_row(index: int, row: dict[str, Any], threshold: Any) -> str:
     decision = [
         _fit(_delivery_visual(row.get('status')), 7),
         _fit(_campaign_key(row, index), 14),
+        _fit(row.get('sb_page_name'), 14),
         _fit(_delivery_label(row.get('status')), 8),
         _fit(action, 12),
-        _fit(row.get('sb_page_name'), 14),
     ]
     meta = [
         _fit(_fmt_usd(row.get('cost_per_messaging_started')), 9, 'right'),

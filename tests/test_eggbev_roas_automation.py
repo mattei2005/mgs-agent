@@ -370,7 +370,7 @@ class ReportingTests(unittest.TestCase):
             'sb_cost_subscriber': 1.5, 'sb_revenue': 40, 'sb_profit': 28,
             'sb_roi_percent': 233.3, 'sb_drip_roi_percent': 50,
             'sb_broadcast_revenue': 18,
-            'roi_real': None, 'roi_estimated': None, 'block_cpm': None, 'rps': 500,
+            'roi_real': 12.3, 'roi_estimated': -5.5, 'block_cpm': None, 'rps': 500,
             'join_status': 'matched',
         }
         run = {
@@ -393,7 +393,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('**📣 META ADS — ROAS EM DESTAQUE**', rendered)
         self.assertIn('**💰 SMART BIDDING**', rendered)
         self.assertNotIn('📱 CAMPANHAS • leitura rápida', rendered)
-        for label in ('Ligada', 'Campanha', 'Entrega', 'Ação', 'Página', 'Custo por', 'conversa', 'ROAS', 'resultado', 'Resultados', 'Orçamento', 'Gasto', 'mil', 'Taxa de', 'clique', 'assinante', 'Receita', 'Lucro', 'Retorno', 'Leads', 'Drip', 'Broadcast', 'Real/Estimado'):
+        for label in ('Ligada', 'Campanha', 'Entrega', 'Ação', 'Página', 'Custo por', 'conversa', 'ROAS', 'resultado', 'Resultados', 'Orçamento', 'Gasto', 'mil', 'Taxa de', 'clique', 'assinante', 'Receita', 'Lucro', 'Retorno', 'Leads', 'Drip', 'Broadcast', 'ROI', 'atual', 'estimado'):
             self.assertIn(label, rendered)
         for abbreviation in ('Camp/Pg', 'C/msg', 'C/res', 'C/Sub', 'Rev BC', 'Page ID'):
             self.assertNotIn(abbreviation, rendered)
@@ -401,11 +401,15 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
         self.assertIn('🔴 0,30', rendered)
+        self.assertIn('🟢 +12,3%', rendered)
+        self.assertIn('🔴 -5,5%', rendered)
         self.assertIn('$3,00', rendered)
         self.assertNotIn('$3.00', rendered)
         header = rendered.split('```text', 1)[1].split('```', 1)[0]
-        self.assertLess(header.index('Ação'), header.index('Página'))
-        self.assertLess(header.index('Página'), header.index('Custo por'))
+        self.assertLess(header.index('Campanha'), header.index('Página'))
+        self.assertLess(header.index('Página'), header.index('Entrega'))
+        self.assertLess(header.index('Entrega'), header.index('Ação'))
+        self.assertLess(header.index('Ação'), header.index('Custo por'))
 
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
@@ -726,9 +730,9 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v6_has_full_labels_page_order_and_roas_emphasis_without_decision_change(self):
+    def test_roas_reporting_v7_has_page_after_campaign_and_numeric_current_estimated_roi(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('desktop_unified_v6', reporting_policy['status'])
+        self.assertIn('desktop_unified_v7', reporting_policy['status'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
             'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
@@ -740,15 +744,19 @@ class ContractTests(unittest.TestCase):
             'Smart Bidding Cost Subscriber', 'Smart Bidding Revenue', 'Smart Bidding Profit',
             'Smart Bidding ROI percent', 'Smart Bidding LEADS',
             'Smart Bidding DRIP ROI percent', 'Smart Bidding Broadcast Revenue',
-            'report-only real and estimated return signals',
+            'ROI atual report-only percentage', 'ROI estimado report-only percentage',
         ):
             self.assertIn(expected, fields)
         self.assertNotIn('Smart Bidding Page ID', fields)
+        self.assertLess(fields.index('Campanha operational prefix plus UTM'), fields.index('Página name'))
+        self.assertLess(fields.index('Página name'), fields.index('Entrega'))
         self.assertIn('Page ID is hidden', reporting_policy['display_exclusions'][0])
         self.assertIn('$1,86', reporting_policy['display_currency_format'])
         self.assertEqual(reporting_policy['roas_visual_policy']['below_threshold'], 'red')
         self.assertEqual(reporting_policy['roas_visual_policy']['equal_threshold'], 'yellow')
         self.assertEqual(reporting_policy['roas_visual_policy']['above_threshold'], 'green')
+        self.assertEqual(reporting_policy['roi_visual_policy']['positive'], 'green with signed percentage')
+        self.assertEqual(reporting_policy['roi_visual_policy']['negative'], 'red with signed percentage')
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
             self.assertIn(key, formulas)

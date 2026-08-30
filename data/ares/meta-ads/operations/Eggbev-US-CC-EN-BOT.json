@@ -734,15 +734,15 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "desktop_unified_v6_requested_by_nicolas_validated_live_read_only_no_decision_change",
+      "status": "desktop_unified_v7_requested_by_nicolas_validated_live_read_only_no_decision_change",
       "requested_by": "Nicolas Holanda",
-      "requested_at_et": "2026-08-30T01:21:04-04:00",
+      "requested_at_et": "2026-08-30T01:32:36-04:00",
       "manager_confirmation": {
         "confirmed_by": "Nicolas Holanda",
         "confirmed_by_discord_id": "1055570806945620030",
-        "confirmed_at_et": "2026-08-30T01:21:04-04:00",
+        "confirmed_at_et": "2026-08-30T01:32:36-04:00",
         "source": "discord:thread:1541578606076231750",
-        "decision": "refine the unified dashboard: remove Page ID from display, move Page immediately after Action, replace compact abbreviations with full labels, improve spacing/group dividers and emphasize ROAS visually",
+        "decision": "add numeric ROI atual and ROI estimado columns and move Página immediately after Campanha, before Entrega",
         "scope": "Corte e ROAS presentation only; Page ID remains available for technical join/audit; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates"
       },
       "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
@@ -753,9 +753,10 @@
         "one paginated unified Meta Ads plus Smart Bidding table",
         "bold Decision and Identity, Meta Ads ROAS, and Smart Bidding group titles",
         "full Portuguese labels split across two header lines instead of compact abbreviations",
-        "Page immediately after Action and before Cost per messaging conversation started",
+        "Página immediately after Campanha and before Entrega",
         "strong vertical separators between groups and lighter separators between columns",
         "ROAS value prefixed by a threshold-aware color signal",
+        "ROI atual and ROI estimado values prefixed by sign-aware color signals",
         "ad-level cut/reactivation list only when actions exist",
         "short source and formula legend"
       ],
@@ -770,9 +771,9 @@
       "per_campaign_metrics": [
         "Ligada with visual yes/no signal",
         "Campanha operational prefix plus UTM",
+        "Página name",
         "Entrega",
         "Ação from the Ares cycle decision",
-        "Página name",
         "Cost per messaging conversation started",
         "Meta Purchase ROAS with threshold-aware red/yellow/green/gray signal",
         "Cost per result",
@@ -789,7 +790,8 @@
         "Smart Bidding LEADS",
         "Smart Bidding DRIP ROI percent",
         "Smart Bidding Broadcast Revenue",
-        "report-only real and estimated return signals",
+        "ROI atual report-only percentage",
+        "ROI estimado report-only percentage",
         "LEADS join status",
         "economic join status"
       ],
@@ -800,6 +802,12 @@
         "equal_threshold": "yellow",
         "above_threshold": "green",
         "unavailable": "gray"
+      },
+      "roi_visual_policy": {
+        "positive": "green with signed percentage",
+        "zero": "yellow with zero percentage",
+        "negative": "red with signed percentage",
+        "unavailable": "gray N/D"
       },
       "source_routes": {
         "leads": "Smart Bidding /report/messenger plus /campaigns/Messenger Pages; exact UTM_CAMPAIGN and FB_PAGE_ID; remains N/D when the Messenger freshness timestamp is absent or stale",
@@ -824,7 +832,7 @@
       "pagination": "no silent campaign limit; the wide full-label table repeats its complete two-line header every 3 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
       "validation": {
         "live_dry_run": true,
-        "validated_at_et": "2026-08-30T01:21:04-04:00",
+        "validated_at_et": "2026-08-30T01:32:36-04:00",
         "live_current_cycle_campaigns": 0,
         "live_current_cycle_account_status": "ACTIVE_USD_America/New_York",
         "live_current_cycle_meta_status": "ok",
@@ -833,7 +841,7 @@
         "live_read_only_reference_date": "2026-08-29",
         "live_read_only_reference_campaigns": 1,
         "live_read_only_reference_join_status": "smart_bidding_freshness_unverifiable",
-        "live_read_only_reference_fields_verified": ["Ligada", "Campanha", "Entrega", "Ação", "Página", "Cost per messaging conversation started", "Purchase ROAS visual signal", "Cost per result", "Results", "Budget", "Amount spent", "CPM", "CTR link", "CPC link"],
+        "live_read_only_reference_fields_verified": ["Ligada", "Campanha", "Página", "Entrega", "Ação", "Cost per messaging conversation started", "Purchase ROAS visual signal", "Cost per result", "Results", "Budget", "Amount spent", "CPM", "CTR link", "CPC link", "ROI atual", "ROI estimado"],
         "smart_bidding_unverified_values_render_as": "N/D",
         "live_meta_writes": 0,
         "live_discord_posts": 0,
