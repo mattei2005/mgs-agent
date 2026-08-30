@@ -3,8 +3,8 @@
   "status": "valid",
   "operation": "Eggbev-US-CC-EN-BOT",
   "account_id": "1034081997659047",
-  "generated_at_utc": "2026-08-30T04:49:04.464401+00:00",
-  "valid_until_utc": "2026-08-30T10:49:04.464401+00:00",
+  "generated_at_utc": "2026-08-30T11:22:59.042328+00:00",
+  "valid_until_utc": "2026-08-30T17:22:59.042328+00:00",
   "read_only": true,
   "writes": {
     "meta": 0,
@@ -24,14 +24,14 @@
       "Eggbev-US-CC-EN-03 (FAX-US-02)",
       "Eggbev-US-CC-EN-02 (FAX-US-03)"
     ],
-    "advideos_scanned": 150,
-    "advideos_limit_per_account": 50,
+    "advideos_scanned": 261,
+    "advideos_limit_per_account": 100,
     "coverage": "bounded_recent_window_per_account",
     "matching_policy": "known Meta IDs plus asset/checksum/canonical/original markers in ad-account video titles",
     "limitation": "no downloadable Meta visual fingerprint was generated; scoped manager release plus title/ID/current-inventory checks remain mandatory"
   },
   "summary": {
-    "required": 9,
+    "required": 3,
     "inventory_candidates": 70,
     "approved_for_scoped_request": 63,
     "conflicted": 7,

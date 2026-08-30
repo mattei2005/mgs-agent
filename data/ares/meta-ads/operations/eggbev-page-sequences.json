@@ -4,15 +4,49 @@
   "source_audit": "data/ares/meta-ads/audit/eggbev/global-naming-sequence-readback-20260830.json",
   "observed_at_et": "2026-08-30T00:00:00-04:00",
   "max_observed_page_sequence": 161,
-  "allocations": {},
+  "allocations": {
+    "pg_5024": {
+      "page_sequence": 162,
+      "request_id": "eggbev-pg-5024-20260830-nicolas-01",
+      "status": "RESERVED",
+      "reserved_at_utc": "2026-08-30T11:22:28.773629+00:00"
+    }
+  },
   "conflicting_page_tokens": {
-    "pg_11049": [133, 153],
-    "pg_13829": [133, 139, 151, 152, 156],
-    "pg_19180": [140, 146, 151, 156],
-    "pg_19181": [132, 161],
-    "pg_22299": [141, 143],
-    "pg_22306": [144, 147],
-    "pg_22340": [149, 152, 153]
+    "pg_11049": [
+      133,
+      153
+    ],
+    "pg_13829": [
+      133,
+      139,
+      151,
+      152,
+      156
+    ],
+    "pg_19180": [
+      140,
+      146,
+      151,
+      156
+    ],
+    "pg_19181": [
+      132,
+      161
+    ],
+    "pg_22299": [
+      141,
+      143
+    ],
+    "pg_22306": [
+      144,
+      147
+    ],
+    "pg_22340": [
+      149,
+      152,
+      153
+    ]
   },
   "allocation_policy": "For an unseen pg token, allocate max(observed and prior allocations)+1 only inside an authorized creation request; for an existing token with conflicting prefixes, fail closed.",
   "reserved_before_request": false
