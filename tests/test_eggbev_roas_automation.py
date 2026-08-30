@@ -390,7 +390,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('## 🛑 Corte & ROAS •', rendered)
         self.assertIn('🎯 `1 camp`', rendered)
         self.assertIn('**Legenda:** 🛑n cortes • ♻️n reativações', rendered)
-        self.assertIn('R/E (ROI real/est.): 🟢 ≥0% | 🔴 <0% | ⚪ N/D', rendered)
+        self.assertIn('R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% a >-20% | 🔴 ≤-20% | ⚪ N/D', rendered)
         self.assertNotIn('Custo por conversa` =', rendered)
         self.assertIn('**📊 Tabela consolidada — visão desktop**', rendered)
         self.assertEqual(rendered.count('```text'), 1)
@@ -405,7 +405,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('0,30', rendered)
         self.assertIn('+12,3%', rendered)
         self.assertIn('-5,5%', rendered)
-        self.assertIn('🟢🔴', rendered)
+        self.assertIn('🟢🟡', rendered)
         self.assertIn('🛑1', rendered)
         self.assertNotIn('🛑 CORTAR', rendered)
         self.assertNotIn('CORTES E ♻️ REATIVAÇÕES POR ANÚNCIO', rendered)
@@ -428,6 +428,16 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'MANTER'}), '✅')
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'OBSERVAR'}), '👁️')
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'ESCALA +10%'}), '🚀')
+
+    def test_roas_cycle_roi_signal_uses_current_and_future_color_bands(self):
+        self.assertEqual(cycle._roi_signal(None), '⚪')
+        self.assertEqual(cycle._roi_signal(0), '🟢')
+        self.assertEqual(cycle._roi_signal(8.36), '🟢')
+        self.assertEqual(cycle._roi_signal(-7.31), '🟡')
+        self.assertEqual(cycle._roi_signal(-16.52), '🟡')
+        self.assertEqual(cycle._roi_signal(-19.99), '🟡')
+        self.assertEqual(cycle._roi_signal(-20), '🔴')
+        self.assertEqual(cycle._roi_signal(-24.75), '🔴')
 
     def test_roas_cycle_desktop_table_aligns_without_wrapping_or_cut_labels(self):
         base = {

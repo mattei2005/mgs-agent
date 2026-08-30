@@ -133,7 +133,13 @@ def _campaign_key(row: dict[str, Any], index: int) -> str:
 
 def _roi_signal(value: Any) -> str:
     number = common.finite_float(value)
-    return '⚪' if number is None else '🟢' if number >= 0 else '🔴'
+    if number is None:
+        return '⚪'
+    if number >= 0:
+        return '🟢'
+    if number <= -20:
+        return '🔴'
+    return '🟡'
 
 
 def _delivery_visual(status: Any) -> str:
@@ -653,7 +659,7 @@ def _intraday_action_visual(row: dict[str, Any]) -> str:
 def _compact_legend() -> str:
     return (
         '**Legenda:** 🛑n cortes • ♻️n reativações • ✅ manter • 👁️ observar • 🚀 escala • '
-        'R/E (ROI real/est.): 🟢 ≥0% | 🔴 <0% | ⚪ N/D'
+        'R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% a >-20% | 🔴 ≤-20% | ⚪ N/D'
     )
 
 

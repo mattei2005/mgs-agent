@@ -791,7 +791,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v14_approved_and_locked_by_nicolas",
+      "status": "cpv13_intraday_desktop_table_v16_messenger_pages_source_confirmed_roi_bands_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -951,6 +951,29 @@
           "meta_writes": 0
         }
       },
+      "roi_pair_source_and_color_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T19:24:32-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "visual_reference": "Smart Bidding Messenger Pages ROI column with current value on the first line and estimated future value on the second line",
+        "source_confirmation": "the Ares estimated ROI uses Smart Bidding /estimated/revenue/utm_adgroup, the same estimate backend that supplies the future line in Messenger Pages; Ares reads the API rather than scraping the UI",
+        "messenger_pages_composition": {
+          "identity_and_leads": "GET /campaigns/Messenger",
+          "current_page_economics": "POST /report/messenger",
+          "future_estimated_revenue": "POST /estimated/revenue/utm_adgroup",
+          "estimate_freshness": "POST /estimated/delay"
+        },
+        "display_order": "R/E always shows current ROI first and estimated future ROI second",
+        "color_bands": {
+          "green": "ROI >= 0%",
+          "yellow": "ROI < 0% and > -20%",
+          "red": "ROI <= -20%",
+          "gray": "N/D"
+        },
+        "scope": "report presentation and source clarification only; no change to Meta Purchase ROAS decisions, cut/reactivation logic, writes, schedules or budget authority",
+        "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-source-color-v16-20260830.json"
+      },
       "purpose": "replicate the organized, spaced and visible CPV 13 Intraday desktop table for Eggbev ROAS reporting",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
@@ -1010,15 +1033,16 @@
       },
       "semantic_distinction": "Purchase ROAS indicates position relative to the cycle threshold; only ROI below 0 percent is labeled negative",
       "roi_visual_policy": {
-        "positive": "green with signed percentage",
-        "zero": "yellow with zero percentage",
-        "negative": "red with signed percentage",
+        "positive_or_zero": "green when ROI is greater than or equal to 0 percent",
+        "negative_warning": "yellow when ROI is below 0 percent and above -20 percent",
+        "negative_critical": "red when ROI is less than or equal to -20 percent",
         "unavailable": "gray N/D"
       },
       "source_routes": {
         "leads": "Smart Bidding /report/messenger plus /campaigns/Messenger Pages; exact UTM_CAMPAIGN and FB_PAGE_ID; remains N/D when the Messenger freshness timestamp is absent or stale",
+        "messenger_pages_ui": "Messenger Pages is composed from /campaigns/Messenger identity and leads, /report/messenger current page economics, /estimated/revenue/utm_adgroup future revenue, and /estimated/delay freshness",
         "economics_actual": "Smart Bidding /report/performance_per_campaigns filtered by exact CUSTOMER_ID act_1034081997659047, DOMAIN eggbev, requested DATE, exact CAMPAIGN_ID and exact UTM_ADGROUP; currency USD",
-        "economics_estimated": "Smart Bidding /estimated/revenue/utm_adgroup joined only after the exact account campaign+UTM performance row exists and the UTM is unique inside the target account",
+        "economics_estimated": "Smart Bidding /estimated/revenue/utm_adgroup, the same future-estimate backend shown on the second line of Messenger Pages; joined only after the exact account campaign+UTM performance row exists and the UTM is unique inside the target account",
         "economics_freshness": "Smart Bidding /estimated/delay; currentFillTime required and totalMinutes must be <= 120"
       },
       "report_only_formulas": {
