@@ -332,13 +332,23 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-CLONING-V3-HARDENING-20260829",
+      "next_step": "Atualizar contrato e testes, implementar schema/planner/recovery clone_page_switch, cadastrar a conta, instalar prompt dedicado, validar parser/plan/suítes e emitir REPORT-INFRA.",
+      "objective": "Corrigir integralmente a clonagem Eggbev: duplicação fiel, naming DUP sequencial, budget escolhido pelo gestor sob gate financeiro, início 00:00 ET, prompt dedicado, rotas atuais, onboarding e clone_page_switch no Engine v3",
+      "source": "discord:thread:1543333373945053184; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/engine-v3/config.json",
+      "state": "em implementação autorizada por nicolas; inventário concluído; alterações pré-existentes de outros módulos preservadas; nenhum write meta solicitado nesta mudança estrutural.",
+      "thread_id": "1543333373945053184",
+      "updated_at": "2026-08-30T00:14:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
-      "next_step": "Implementar por testes, validar runtime e publicar consolidado com readback na thread 1543280854024060999.",
-      "objective": "Corrigir integralmente os pontos auditados do guardrail Eggbev LEADS > 5000 e atualizar a thread canônica de Regras",
-      "source": "discord:thread:1543312825890381865; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; cron:c3d2499d8c33",
-      "state": "em correção autorizada por nicolas: prompt dedicado, freshness, alertas, gate de horário, auditoria, drift documental, scheduler, testes e publicação canônica.",
+      "next_step": "Smart Bidding/dev expor timestamp confiável; ativar prompt no próximo restart seguro externo; então validar campanha ativa em dry-run antes de confiar no write.",
+      "objective": "Hardening completo da regra Eggbev LEADS > 5000 e atualização da thread de Regras.",
+      "source": "discord:thread:1543312825890381865",
+      "state": "concluído: freshness fail-closed, alertas visíveis, get readback discord, fallback, gate 08/20 et, auditoria auto_reactivate, prompt/rota, scheduler tick confirmado, 281 testes, publicação 3/3 readbacks.",
       "thread_id": "1543312825890381865",
-      "updated_at": "2026-08-29T23:51:25+00:00"
+      "updated_at": "2026-08-30T00:14:31+00:00"
     },
     {
       "agent": "ares",
@@ -1422,5 +1432,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:57:01+00:00"
+  "updated_at": "2026-08-30T00:14:53+00:00"
 }

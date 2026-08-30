@@ -299,7 +299,9 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
             'cpm': finite_float(row.get('cpm')),
             'ctr': finite_float(row.get('ctr')),
             'messaging_results': action_value(row.get('actions'), MESSAGING_ACTIONS),
+            'messaging_started': action_value(row.get('actions'), MESSAGING_STARTED_ACTIONS),
             'cost_per_messaging_result': action_value(row.get('cost_per_action_type'), MESSAGING_ACTIONS),
+            'cost_per_messaging_started': action_value(row.get('cost_per_action_type'), MESSAGING_STARTED_ACTIONS),
             'purchase_roas': action_value(row.get('purchase_roas'), PURCHASE_ACTIONS),
             'purchase_value': action_value(row.get('action_values'), PURCHASE_ACTIONS),
         }
@@ -666,9 +668,17 @@ def discord_request(method: str, path: str, body: dict[str, Any] | None = None) 
         return exc.code, None
 
 
-def post_to_thread(thread_id: str, message: str) -> dict[str, Any]:
+def post_to_thread(thread_id: str, message: str, part_label: str | None = None) -> dict[str, Any]:
+    raw_chunks = split_messages(message, limit=1750 if part_label else 1900)
+    if part_label and len(raw_chunks) > 1:
+        total = len(raw_chunks)
+        chunks = [f'**{part_label} • Parte {index}/{total}**\n{chunk}' for index, chunk in enumerate(raw_chunks, start=1)]
+    else:
+        chunks = raw_chunks
+    if any(len(chunk) >= 2000 or chunk.count('```') % 2 for chunk in chunks):
+        return {'ok': False, 'stage': 'discord_chunk_preflight', 'posted_count': 0}
     posted: list[str] = []
-    for chunk in split_messages(message):
+    for chunk in chunks:
         status, body = discord_request('POST', f'/channels/{thread_id}/messages', {'content': chunk, 'allowed_mentions': {'parse': []}})
         message_id = norm((body or {}).get('id')) if isinstance(body, dict) else ''
         if status not in {200, 201} or not message_id:

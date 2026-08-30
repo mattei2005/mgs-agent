@@ -3,6 +3,7 @@ import datetime as dt
 import importlib.util
 import json
 import unittest
+from unittest import mock
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -20,6 +21,7 @@ def load(name, path):
 
 common = load('eggbev_roas_common_test', BASE / 'scripts/ares-eggbev-roas-common.py')
 daily = load('eggbev_daily_test', BASE / 'scripts/ares-eggbev-daily-report.py')
+cycle = load('eggbev_cycle_test', BASE / 'scripts/ares-eggbev-roas-cycle.py')
 ET = ZoneInfo('America/New_York')
 
 
@@ -235,6 +237,109 @@ class ScalingTests(unittest.TestCase):
 
 
 class ReportingTests(unittest.TestCase):
+    def test_roas_cycle_reporting_has_requested_metrics_and_cut_emoji(self):
+        meta_bundle = {
+            'campaigns': [{
+                'id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
+                'status': 'ACTIVE', 'effective_status': 'ACTIVE', 'configured_status': 'ACTIVE',
+                'daily_budget': '4500',
+            }],
+            'ads': [{
+                'id': 'a1', 'campaign': {'id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)'},
+                'creative': {'url_tags': 'utm_campaign=pg_12345', 'object_story_spec': {'page_id': 'page1'}},
+            }],
+            'insights': [{
+                'ad_id': 'a1', 'campaign_id': 'c1', 'campaign_name': '123 - Full Campaign - ENG - US - (pg_12345)',
+                'spend': '12', 'impressions': '1000', 'ctr': '2',
+                'actions': [{'action_type': 'onsite_conversion.messaging_conversation_started_7d', 'value': '4'}],
+                'action_values': [{'action_type': 'purchase', 'value': '6'}],
+            }],
+        }
+        sb_bundle = {
+            'ready': True,
+            'target_report_rows': [{
+                'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 11, 'REVENUE': 10,
+                'LEADS': 20, 'SESSIONS': 20, 'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
+            }],
+            'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One'}]},
+            'freshness': {'ready': True, 'latest_at_et': '2026-08-29T20:00:00-04:00'},
+        }
+        plan = {
+            'decisions': [{
+                'campaign_id': 'c1', 'campaign_name': '123 - Full Campaign - ENG - US - (pg_12345)',
+                'ad_id': 'a1', 'ad_name': 'Ad a1', 'action': 'PAUSE_AD', 'reason': 'roas_below_or_nd',
+            }],
+            'budget_scale_candidates': [],
+        }
+        report = cycle.build_campaign_reporting(meta_bundle, sb_bundle, plan)
+        row = report['campaigns'][0]
+        self.assertEqual(row['action_emoji'], '🛑')
+        self.assertEqual(row['action_label'], 'CORTAR')
+        self.assertEqual(row['sb_leads'], 20)
+        self.assertEqual(row['cost_per_messaging_started'], 3)
+        self.assertEqual(row['purchase_roas'], 0.5)
+        self.assertEqual(row['cpm'], 12)
+        self.assertEqual(row['ctr'], 2)
+        self.assertEqual(row['rps'], 500)
+        self.assertIsNone(row['roi_real'])
+        self.assertIsNone(row['roi_estimated'])
+        self.assertIsNone(row['block_cpm'])
+
+    def test_roas_cycle_renderer_has_organized_title_cards_and_two_tables(self):
+        campaign = {
+            'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
+            'action_emoji': '🛑', 'action_label': 'CORTAR', 'action_detail': '1 anúncio(s)',
+            'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
+            'spend': 12, 'messaging_started': 4, 'cost_per_messaging_started': 3,
+            'ctr': 2, 'purchase_roas': .5, 'cpm': 12, 'sb_leads': 20,
+            'roi_real': None, 'roi_estimated': None, 'block_cpm': None, 'rps': 500,
+            'join_status': 'matched',
+        }
+        run = {
+            'started_at_et': '2026-08-29T20:00:00-04:00', 'phase': 'PHASE_2',
+            'threshold': .4, 'mode': 'controlled_write', 'meta_status': 'ok', 'smart_bidding_status': 'ok',
+            'source_gate': {'write_ready': True, 'reasons': []},
+            'plan': {
+                'counts': {'ads_considered': 1, 'pause_ads': 1, 'reactivate_ads': 0, 'budget_scale_candidates': 0},
+                'decisions': [{'ad_name': 'Ad a1', 'action': 'PAUSE_AD', 'spend': 12, 'purchase_roas': .5, 'reason': 'roas_below_or_nd'}],
+                'budget_scale_candidates': [],
+            },
+            'reporting': {'campaigns': [campaign], 'campaign_count': 1, 'source_join_matched': 1, 'leads_total': 20},
+            'writes': [],
+        }
+        rendered = cycle.render_report(run)
+        self.assertIn('## 🛑 CORTE & ROAS', rendered)
+        self.assertIn('📌 RESUMO DO CICLO', rendered)
+        self.assertIn('📱 CAMPANHAS • leitura rápida', rendered)
+        self.assertIn('🖥️ META • decisão consolidada', rendered)
+        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO', rendered)
+        for label in ('Volume de LEADS', 'Custo/msg', 'CTR', 'ROAS', 'Meta CPM', 'ROI real', 'ROI estim.', 'CPM bloco', 'RPS*'):
+            self.assertIn(label, rendered)
+        self.assertEqual(rendered.count('123 - Full Campaign - ENG - US - (pg_12345)'), 1)
+
+    def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
+        report = '\n'.join([
+            '## 🛑 CORTE & ROAS',
+            *['```text\n' + ('row ' + str(index) + ' ' + 'x' * 180) + '\n```' for index in range(20)],
+        ])
+        stored = {}
+        def fake_request(method, path, body=None):
+            if method == 'POST':
+                self.assertIsInstance(body, dict)
+                message_id = str(len(stored) + 1)
+                stored[message_id] = body['content']  # type: ignore[index]
+                return 200, {'id': message_id}
+            message_id = path.rsplit('/', 1)[-1]
+            return 200, {'id': message_id, 'content': stored[message_id]}
+        with mock.patch.object(common, 'discord_request', side_effect=fake_request):
+            result = common.post_to_thread('thread', report, '⚔️ Corte & ROAS')
+        self.assertTrue(result['ok'])
+        self.assertGreater(result['posted_count'], 1)
+        for content in stored.values():
+            self.assertLess(len(content), 2000)
+            self.assertEqual(content.count('```') % 2, 0)
+            self.assertTrue(content.startswith('**⚔️ Corte & ROAS • Parte '))
+
     def test_auto_0600_returns_previous_and_current(self):
         at = dt.datetime(2026, 8, 29, 6, 0, tzinfo=ET)
         dates = daily.report_dates('auto', at)

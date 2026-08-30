@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 COMMON_PATH = Path('/root/mgs-agent/scripts/ares-eggbev-roas-common.py')
+REPORTING_PATH = Path('/root/mgs-agent/scripts/ares-eggbev-daily-report.py')
 
 
 def _load_common():
@@ -31,6 +32,19 @@ def _load_common():
 common = _load_common()
 
 
+def _load_reporting():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('ares_eggbev_cycle_reporting', REPORTING_PATH)
+    if spec is None or spec.loader is None:
+        raise RuntimeError('cannot load Eggbev reporting helpers')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+reporting = _load_reporting()
+
+
 def parse_at(value: str | None) -> dt.datetime:
     if not value:
         return common.now_et()
@@ -40,64 +54,240 @@ def parse_at(value: str | None) -> dt.datetime:
     return parsed.astimezone(common.ET)
 
 
+def _cycle_at(value: Any) -> dt.datetime | None:
+    try:
+        parsed = dt.datetime.fromisoformat(common.norm(value))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return None
+    return parsed.astimezone(common.ET)
+
+
+def _phase_label(value: Any) -> str:
+    return {
+        'PHASE_1': 'Fase 1', 'PHASE_2': 'Fase 2',
+        'RESET': 'Reset diário', 'NO_CYCLE': 'Fora de ciclo',
+    }.get(common.norm(value), common.norm(value) or 'N/D')
+
+
+def _fmt_percent(value: Any) -> str:
+    return 'N/D' if common.finite_float(value) is None else common.fmt_number(value) + '%'
+
+
+def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str, str, str]:
+    pause_count = sum(1 for row in decisions if row.get('action') == 'PAUSE_AD')
+    reactivate_count = sum(1 for row in decisions if row.get('action') == 'REACTIVATE_AD')
+    if pause_count:
+        return '🛑', 'CORTAR', f'{pause_count} anúncio(s)'
+    if reactivate_count:
+        return '♻️', 'REATIVAR', f'{reactivate_count} anúncio(s)'
+    if scaled:
+        return '🚀', 'ESCALA +10%', 'recomendação; budget write gated'
+    if decisions and all(row.get('action') == 'KEEP' for row in decisions):
+        return '✅', 'MANTER', f'{len(decisions)} anúncio(s)'
+    return '👁️', 'OBSERVAR', 'sem decisão executável'
+
+
+def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+    """Build reconciled campaign rows for the ROAS renderer without changing decisions."""
+    meta = reporting.aggregate_meta(meta_bundle)
+    sb = reporting.aggregate_sb(sb_bundle)
+    merged = reporting.merge_campaign_sources(meta, sb)
+    by_id = {common.norm(row.get('campaign_id')): dict(row) for row in merged.get('campaigns') or []}
+    decisions_by_campaign: dict[str, list[dict[str, Any]]] = {}
+    ordered_ids: list[str] = []
+    for decision in plan.get('decisions') or []:
+        campaign_id = common.norm(decision.get('campaign_id'))
+        if not campaign_id:
+            continue
+        if campaign_id not in decisions_by_campaign:
+            decisions_by_campaign[campaign_id] = []
+            ordered_ids.append(campaign_id)
+        decisions_by_campaign[campaign_id].append(decision)
+    scale_by_id = {
+        common.norm(row.get('campaign_id')): row
+        for row in plan.get('budget_scale_candidates') or []
+        if common.norm(row.get('campaign_id'))
+    }
+    live_campaigns = {
+        common.norm(row.get('id')): row
+        for source in ('campaigns', 'tracked_campaigns')
+        for row in meta_bundle.get(source) or []
+        if common.norm(row.get('id'))
+    }
+    identities = reporting.meta_campaign_identities(meta_bundle)
+    rows: list[dict[str, Any]] = []
+    for campaign_id in ordered_ids:
+        decisions = decisions_by_campaign[campaign_id]
+        row = dict(by_id.get(campaign_id) or {})
+        live = live_campaigns.get(campaign_id) or {}
+        if not row:
+            spend = sum(common.finite_float(item.get('spend')) or 0.0 for item in decisions)
+            purchase_value = sum(common.finite_float(item.get('purchase_value')) or 0.0 for item in decisions)
+            impressions = sum(common.finite_float(item.get('impressions')) or 0.0 for item in decisions)
+            started = sum(common.finite_float(item.get('messaging_started')) or 0.0 for item in decisions)
+            weighted_ctr = sum((common.finite_float(item.get('ctr')) or 0.0) * (common.finite_float(item.get('impressions')) or 0.0) for item in decisions)
+            row.update({
+                'campaign_id': campaign_id,
+                'name': common.norm(live.get('name')) or common.norm(decisions[0].get('campaign_name')) or campaign_id,
+                'status': reporting.campaign_status(live),
+                'budget_usd': reporting.campaign_budget_usd(live),
+                'spend': spend,
+                'messaging_started': started,
+                'cost_per_messaging_started': spend / started if started > 0 else None,
+                'purchase_roas': purchase_value / spend if spend > 0 else None,
+                'cpm': spend * 1000.0 / impressions if impressions > 0 else None,
+                'ctr': weighted_ctr / impressions if impressions > 0 else None,
+                'join_status': 'campaign_reporting_row_not_reconciled',
+                **(identities.get(campaign_id) or {}),
+            })
+        emoji, action, action_detail = _campaign_action(decisions, campaign_id in scale_by_id)
+        row.update({
+            'action_emoji': emoji,
+            'action_label': action,
+            'action_detail': action_detail,
+            'pause_ads': sum(1 for item in decisions if item.get('action') == 'PAUSE_AD'),
+            'reactivate_ads': sum(1 for item in decisions if item.get('action') == 'REACTIVATE_AD'),
+            'keep_ads': sum(1 for item in decisions if item.get('action') == 'KEEP'),
+            'decision_reasons': sorted({common.norm(item.get('reason')) for item in decisions if common.norm(item.get('reason'))}),
+            'roi_real': None,
+            'roi_estimated': None,
+            'block_cpm': None,
+            'rps': row.get('pricing_rps'),
+            'scale': scale_by_id.get(campaign_id),
+        })
+        rows.append(row)
+    return {
+        'campaigns': rows,
+        'campaign_count': len(rows),
+        'source_join_matched': sum(1 for row in rows if row.get('join_status') == 'matched'),
+        'leads_total': (sum(common.finite_float(row.get('sb_leads')) or 0.0 for row in rows) if any(common.finite_float(row.get('sb_leads')) is not None for row in rows) else None),
+        'smart_bidding_freshness': dict(sb.get('freshness') or {}),
+        'smart_bidding_reason': sb.get('reason'),
+        'metric_notes': {
+            'rps': 'Smart Bidding direct field preferred; current local fallback is REVENUE×1.000/SESSIONS and is labeled RPS*.',
+            'roi': 'ROI real and estimated remain N/D until direct reconciled fields/formulas are approved.',
+            'block_cpm': 'CPM do bloco remains N/D until pricing rule/slot identity is reconciled to the campaign.',
+        },
+    }
+
+
 def render_report(run: dict[str, Any]) -> str:
     source = run.get('source_gate') or {}
     plan = run.get('plan') or {}
     counts = plan.get('counts') or {}
-    lines = [
-        '⚔️ **Eggbev-US-CC-EN — Corte e ROAS**',
-        f"Horário: {run.get('started_at_et')} | Fase: {run.get('phase')} | Threshold: {common.fmt_number(run.get('threshold'))}",
-        f"Modo: {'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED-WRITE'} | Meta: {run.get('meta_status')} | Smart Bidding: {run.get('smart_bidding_status')}",
-    ]
+    campaign_report = run.get('reporting') or {}
+    campaigns = campaign_report.get('campaigns') or []
     reasons = source.get('reasons') or []
+    started = _cycle_at(run.get('started_at_et'))
+    date_label = started.strftime('%d/%m/%Y') if started else 'N/D'
+    time_label = started.strftime('%H:%M') if started else 'N/D'
+    mode = 'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED WRITE'
+    title_emoji = '⚠️' if reasons else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'
+    lines = [
+        f"## {title_emoji} CORTE & ROAS",
+        f"**Eggbev US-CC-EN • {date_label} • {time_label} ET • {_phase_label(run.get('phase'))}**",
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        f"`{mode}`  •  Threshold `{common.fmt_number(run.get('threshold'))}`  •  Moeda `USD`",
+        '',
+        '**📌 RESUMO DO CICLO**',
+        '```text',
+        f"Campanhas no ciclo       {campaign_report.get('campaign_count', 0):>5}",
+        f"Anúncios avaliados       {counts.get('ads_considered', 0):>5}",
+        f"🛑 Cortes                 {counts.get('pause_ads', 0):>5}",
+        f"♻️ Reativações            {counts.get('reactivate_ads', 0):>5}",
+        f"🚀 Escalas +10%           {counts.get('budget_scale_candidates', 0):>5}",
+        f"✅ Mantidos               {sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP'):>5}",
+        f"Volume de LEADS          {common.fmt_number(campaign_report.get('leads_total'), 0):>5}",
+        '```',
+        '**🛡️ FONTES E SEGURANÇA**',
+        f"Meta `{run.get('meta_status') or 'N/D'}` • Smart Bidding `{run.get('smart_bidding_status') or 'N/D'}` • Join `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
+    ]
     if run.get('phase') == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
     elif reasons:
-        lines.append('🚫 Write bloqueado: ' + '; '.join(reasons))
+        lines.append('⚠️ **Ações bloqueadas:** ' + '; '.join(reasons))
     else:
         lines.append('✅ Fontes reconciliadas e regra nativa sem conflito.')
-    lines.extend([
-        '',
-        '```text',
-        'Ação                         Qtd',
-        '---------------------------  ---',
-        f"Anúncios avaliados           {counts.get('ads_considered', 0):>3}",
-        f"Pausar anúncios              {counts.get('pause_ads', 0):>3}",
-        f"Reativar anúncios            {counts.get('reactivate_ads', 0):>3}",
-        f"Pausar campanhas             {counts.get('pause_campaigns', 0):>3}",
-        f"Reativar campanhas           {counts.get('reactivate_campaigns', 0):>3}",
-        f"Escalas +10% recomendadas    {counts.get('budget_scale_candidates', 0):>3}",
-        '```',
-    ])
+
+    if campaigns:
+        lines.extend(['', '**📱 CAMPANHAS • leitura rápida**'])
+        for index, row in enumerate(campaigns, start=1):
+            lines.extend([
+                '',
+                f"**{index:02d}. {row.get('action_emoji')} {row.get('action_label')} • {row.get('name') or row.get('campaign_id')}**",
+                '```text',
+                f"UTM        {row.get('utm_campaign') or 'N/D':<12} Status       {row.get('status') or 'N/D'}",
+                f"Budget     {common.fmt_money(row.get('budget_usd')):<12} Spend        {common.fmt_money(row.get('spend'))}",
+                f"Msg inic.  {common.fmt_number(row.get('messaging_started'), 0):<12} Custo/msg    {common.fmt_money(row.get('cost_per_messaging_started'))}",
+                f"CTR        {_fmt_percent(row.get('ctr')):<12} ROAS         {common.fmt_number(row.get('purchase_roas'))}",
+                f"Meta CPM   {common.fmt_money(row.get('cpm')):<12} LEADS        {common.fmt_number(row.get('sb_leads'), 0)}",
+                f"ROI real   {_fmt_percent(row.get('roi_real')):<12} ROI estim.   {_fmt_percent(row.get('roi_estimated'))}",
+                f"CPM bloco  {common.fmt_money(row.get('block_cpm')):<12} RPS*          {common.fmt_money(row.get('rps'))}",
+                f"Ação       {row.get('action_detail')}",
+                f"Join       {row.get('join_status') or 'N/D'}",
+                '```',
+            ])
+
+        lines.extend(['', '**🖥️ META • decisão consolidada**', '```text'])
+        lines.append('#  Ação     UTM         Spend  Msg  C/msg    CTR   ROAS  M.CPM')
+        lines.append('-- -------- --------- ------- ---- ------ ------ ------ ------')
+        for index, row in enumerate(campaigns, start=1):
+            lines.append(
+                f"{index:<2} {(row.get('action_label') or 'N/D')[:8]:<8} {(row.get('utm_campaign') or 'N/D')[:9]:<9} "
+                f"{common.fmt_money(row.get('spend')):>7} {common.fmt_number(row.get('messaging_started'), 0):>4} "
+                f"{common.fmt_money(row.get('cost_per_messaging_started')):>6} {_fmt_percent(row.get('ctr')):>6} "
+                f"{common.fmt_number(row.get('purchase_roas')):>6} {common.fmt_money(row.get('cpm')):>6}"
+            )
+        lines.extend(['```', '', '**💰 SMART BIDDING / MONETIZAÇÃO**', '```text'])
+        lines.append('#  LEADS  ROI real  ROI est.  CPM bloco    RPS*  Join')
+        lines.append('-- ------ --------- --------- ---------- ------- ----------------')
+        for index, row in enumerate(campaigns, start=1):
+            lines.append(
+                f"{index:<2} {common.fmt_number(row.get('sb_leads'), 0):>6} {_fmt_percent(row.get('roi_real')):>9} "
+                f"{_fmt_percent(row.get('roi_estimated')):>9} {common.fmt_money(row.get('block_cpm')):>10} "
+                f"{common.fmt_money(row.get('rps')):>7} {row.get('join_status') or 'N/D'}"
+            )
+        lines.append('```')
+    else:
+        lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
+
     actionable = [row for row in plan.get('decisions') or [] if row.get('action') != 'KEEP']
     if actionable:
-        lines.extend(['', '**Decisões por anúncio**'])
-        for row in actionable[:25]:
-            emoji = '⏸️' if row.get('action') == 'PAUSE_AD' else '▶️'
+        lines.extend(['', '**🛑 CORTES E ♻️ REATIVAÇÕES POR ANÚNCIO**'])
+        for row in actionable:
+            emoji = '🛑' if row.get('action') == 'PAUSE_AD' else '♻️'
             lines.append(
-                f"{emoji} {row.get('ad_name') or row.get('ad_id')} — Spend {common.fmt_money(row.get('spend'))} | "
-                f"ROAS {common.fmt_number(row.get('purchase_roas'))} | {row.get('reason')}"
+                f"{emoji} **{row.get('ad_name') or row.get('ad_id')}** • Spend {common.fmt_money(row.get('spend'))} • "
+                f"ROAS {common.fmt_number(row.get('purchase_roas'))} • `{row.get('reason')}`"
             )
-        if len(actionable) > 25:
-            lines.append(f"…mais {len(actionable) - 25} decisões no audit.")
-    else:
-        lines.extend(['', 'Nenhuma mudança de anúncio planejada neste ciclo.'])
+
     scale_candidates = plan.get('budget_scale_candidates') or []
     if scale_candidates:
-        lines.extend(['', '**Escala de budget — recomendação dry-run**'])
-        for row in scale_candidates[:25]:
+        lines.extend(['', '**🚀 ESCALA DE BUDGET • recomendação**'])
+        for row in scale_candidates:
             lines.append(
-                f"📈 {row.get('campaign_name') or row.get('campaign_id')} — ROAS {common.fmt_number(row.get('purchase_roas'))} | "
+                f"🚀 **{row.get('campaign_name') or row.get('campaign_id')}** • ROAS {common.fmt_number(row.get('purchase_roas'))} • "
                 f"{common.fmt_money(row.get('current_daily_budget_usd'))} → {common.fmt_money(row.get('target_daily_budget_usd'))} "
                 f"(+{common.fmt_number(row.get('increase_percent'), 0)}%)"
             )
-        lines.append('Budget write bloqueado: exige aprovação de Rodolfo/Geizian e teto/envelope de budget.')
+        lines.append('⚠️ Budget write permanece bloqueado até aprovação de Rodolfo/Geizian e teto/envelope.')
+
     writes = run.get('writes') or []
     if writes:
         confirmed = sum(1 for row in writes if row.get('ok'))
-        lines.append(f"\nReadback de writes: {confirmed}/{len(writes)} confirmados.")
+        lines.append(f"\n**✅ Readback de writes:** {confirmed}/{len(writes)} confirmados.")
+    lines.extend([
+        '',
+        '**ℹ️ LEGENDA E LIMITAÇÕES**',
+        '`🛑 corte` • `♻️ reativação` • `🚀 escala` • `✅ manter` • `👁️ observar`',
+        '`C/msg` = Spend Meta ÷ mensagens iniciadas. `M.CPM` = CPM Meta.',
+        '`RPS*` = fallback rotulado `REVENUE×1.000/SESSIONS` quando não houver campo direto reconciliado.',
+        'ROI real, ROI estimado e CPM do bloco aparecem `N/D` até campo/fórmula e identidade de regra/slot serem validados.',
+    ])
     if run.get('phase') == 'RESET':
-        lines.append('\nReset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')
+        lines.append('Reset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')
     return '\n'.join(lines)
 
 
@@ -252,7 +442,7 @@ def main() -> int:
                     common.atomic_json(common.ROAS_STATE_PATH, state)
                 report = render_report(run)
                 if args.post_report:
-                    run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report)
+                    run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, '⚔️ Corte & ROAS')
                     if not run['delivery'].get('ok'):
                         raise RuntimeError('Discord reset report delivery/readback failed')
                 run['ok'] = True
@@ -284,6 +474,7 @@ def main() -> int:
             plan['budget_scale_candidates'] = scale_candidates
             plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
             gate = common.source_gate(meta_bundle, sb_bundle, phase)
+            campaign_reporting = build_campaign_reporting(meta_bundle, sb_bundle, plan)
             run.update({
                 'meta_readback': {
                     'account': meta_bundle.get('account'), 'active_campaigns': len(meta_bundle.get('campaigns') or []),
@@ -297,12 +488,12 @@ def main() -> int:
                     'target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'available_account_names': sb_bundle.get('available_account_names'),
                 },
-                'source_gate': gate, 'plan': plan,
+                'source_gate': gate, 'plan': plan, 'reporting': campaign_reporting,
             })
             common.atomic_json(audit_path, run)
             if args.apply and not gate.get('write_ready'):
                 report = render_report(run)
-                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report)
+                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, '⚔️ Corte & ROAS')
                 raise RuntimeError('source/native-rule gate blocked controlled writes')
             if args.apply and phase in {'PHASE_1', 'PHASE_2'}:
                 execute_plan(meta, token, plan, state, run)
@@ -310,7 +501,7 @@ def main() -> int:
                 common.atomic_json(common.ROAS_STATE_PATH, state)
             report = render_report(run)
             if args.post_report:
-                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report)
+                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, '⚔️ Corte & ROAS')
                 if not run['delivery'].get('ok'):
                     raise RuntimeError('Discord cycle report delivery/readback failed')
             run['ok'] = True
