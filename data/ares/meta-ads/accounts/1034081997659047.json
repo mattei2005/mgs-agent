@@ -38,18 +38,19 @@
           "thread_id": "1541578556037927053",
           "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
           "contract_approved": true,
-          "runner_built": false,
+          "runner_built": true,
+          "runner": "scripts/ares-eggbev-creation.py",
           "engine_account_registered": true,
-          "media_registry_ready": false,
+          "engine_mode": "from_zero_prestaged",
+          "media_registry_ready": "on_demand_per_request_after_scoped_reconciliation",
           "placements_mode": "MANUAL_ONLY",
-          "placements_payload_materialized": false,
+          "placements_payload_materialized": true,
+          "validate_plan_enabled": true,
           "normal_production_status": "ACTIVE with future start_time after final summary approval",
           "technical_canary_status": "PAUSED until separate activation approval",
-          "write_enabled": false,
-          "blocked_reasons": [
-            "Eggbev media is not pre-staged in the v3 media registry",
-            "the exact approved manual placements payload is not materialized in the canonical operation contract"
-          ]
+          "write_enabled": true,
+          "write_gate": "request inputs complete, scoped Drive-Meta reconciliation, on-demand prestage, prevalidated manifest, final summary, Nicolas explicit OK, Rodolfo/Geizian financial gate and --confirm-execute",
+          "blocked_reasons": []
         },
         "campaign_cloning": {
           "contract_modes": ["pure_clone", "clone_prestaged", "clone_page_switch"],

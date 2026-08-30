@@ -57,6 +57,7 @@ def inventory_summary(required: int) -> dict[str, Any]:
         "manager_reserved_now": len(reserved),
         "required_unique_assets": required,
         "sufficient_eligible_now": len(eligible) >= required,
+        "sufficient_for_scoped_release_review": len(ready) >= required,
         "request_can_trigger_scoped_release_review": True,
         "selection_policy": "reconcile Drive x Meta, skip used/conflicting assets, reserve exactly the selected unique lineage; never select by filename order alone",
     }
@@ -142,18 +143,8 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
     missing_inputs = []
     if args.daily_budget_usd is None:
         missing_inputs.append("daily_budget_usd_per_campaign")
-    explicit_creation_package = all([
-        args.primary_text,
-        args.headline,
-        args.description,
-        args.cta,
-        args.campaign_name_template,
-        args.ad_name_template,
-        args.tracking_reference,
-        args.placements_reference,
-    ])
-    if not args.creation_reference and not explicit_creation_package:
-        missing_inputs.append("canonical_creation_reference_or_explicit_naming_copy_tracking_placements_package")
+    if not args.ad_name_template:
+        missing_inputs.append("ad_names_or_approved_ad_name_template")
 
     readiness_blockers = []
     runtime_creation = (account.get("runtime_routes") or {}).get("campaign_creation") or {}
@@ -164,18 +155,17 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
     if "from_zero_prestaged" not in (operation_v3.get("supported_modes") or []):
         readiness_blockers.append("operation_v3_from_zero_mode_not_onboarded")
     adset = operation.get("campaign_structure", {}).get("adset", {})
-    if adset.get("placements_mode") == "MANUAL_ONLY" and not adset.get("manual_positions"):
+    creation_policy = operation.get("campaign_creation_policy") or {}
+    if adset.get("placements_mode") == "MANUAL_ONLY" and not creation_policy.get("manual_placements_payload"):
         readiness_blockers.append("exact_manual_placements_not_materialized")
-    if not media["prestage_ready"]:
-        readiness_blockers.append("eggbev_media_not_prestaged_in_v3")
-    if not inventory["sufficient_eligible_now"]:
-        readiness_blockers.append("insufficient_currently_eligible_unique_assets")
+    if not inventory["sufficient_for_scoped_release_review"]:
+        readiness_blockers.append("insufficient_technically_ready_unique_assets_for_scoped_review")
     if args.live_page_check and not page.get("unique_page_identity"):
         readiness_blockers.append("page_token_not_uniquely_reconciled")
     if args.live_page_check and not page.get("meta_page_accessible"):
         readiness_blockers.append("meta_page_access_not_verified")
 
-    status = "NEEDS_INPUT" if missing_inputs else ("BLOCKED_READINESS" if readiness_blockers else "READY_FOR_FINAL_SUMMARY")
+    status = "NEEDS_INPUT" if missing_inputs else ("BLOCKED_READINESS" if readiness_blockers else "READY_FOR_SCOPED_RECONCILIATION_AND_PRESTAGE")
     return {
         "mode": "read_only_simulation",
         "meta_writes": 0,
@@ -202,11 +192,13 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
             "daily_budget_usd": args.daily_budget_usd,
             "creation_reference": args.creation_reference,
             "copy_complete": all([args.primary_text, args.headline, args.description, args.cta]),
-            "explicit_creation_package_complete": explicit_creation_package,
+            "default_reference": (operation.get("campaign_creation_policy") or {}).get("creation_reference_policy", {}).get("default_reference_campaign"),
+            "ad_name_template": args.ad_name_template,
         },
         "page_preflight": page,
         "creative_inventory": inventory,
         "media_registry": media,
+        "automatic_request_steps_pending": ["scoped Drive-Meta reconciliation", "reserve unique lineages", "download and verify clean", "generate clean square variants", "prestage to act_1034081997659047/advideos", "manifest prevalidation and plan"],
         "missing_user_inputs": missing_inputs,
         "readiness_blockers": readiness_blockers,
         "final_approval_gate": "not_reached; show full Page/start/budget/assets/copy/JSON/tracking/placements/status summary and wait for explicit OK",
