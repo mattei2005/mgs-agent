@@ -750,7 +750,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "responsive_vertical_cards_v11_no_fixed_columns_requested_by_nicolas",
+      "status": "cpv13_style_compact_tables_v12_requested_by_nicolas",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -813,16 +813,39 @@
           "meta_writes": 0
         }
       },
-      "purpose": "let a campaign manager read status, action, Meta efficiency and Smart Bidding economics in responsive vertical cards without horizontal tables",
+      "cpv13_table_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T08:35:22-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "reference": "Creditoparaveiculo 13 G006 Intraday aligned_table renderer",
+        "decision": "replace vertical cards with compact visible tables using the same dynamic-width, two-space-separated, monospace technique as CPV 13 Intraday",
+        "implementation": "three compact tables preserve decision/identity, Meta Ads and Smart Bidding metrics; headings remain on one line and pagination uses actual rendered character count",
+        "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
+        "validation": {
+          "eggbev_tests": "65/65 passed",
+          "targeted_table_tests": "3/3 passed",
+          "live_dry_run_campaigns": 1,
+          "twenty_five_campaign_fixture": true,
+          "decision_table_display_width": 54,
+          "meta_table_display_width": 70,
+          "smart_bidding_table_display_width": 96,
+          "max_table_display_width": 96,
+          "aligned_rows": true,
+          "vertical_bar_separators": false,
+          "meta_writes": 0
+        }
+      },
+      "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in compact aligned CPV-style tables",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
       "layout": [
         "three-line mobile-first opening: title, phase/mode/threshold, and action counts",
-        "one responsive vertical Markdown card per campaign",
-        "one complete metric per line with no fixed-width columns, code fence, padding or vertical bar",
-        "full Portuguese labels without truncation",
-        "campaign identity followed by Página, Ligada, Entrega and Ação",
-        "separate Meta Ads and Smart Bidding sections inside every card",
+        "three compact aligned monospace tables modeled on Creditoparaveiculo 13 Intraday",
+        "Decision and identity table with On, Camp, Página, Entrega and Ação",
+        "Meta Ads table with compact single-line headings and all Meta metrics",
+        "Smart Bidding table with R/E, compact single-line headings and all external metrics",
+        "dynamic column widths with two spaces between columns and no vertical bars",
         "ROAS value prefixed by a threshold-position marker without positive or negative semantics",
         "ROI atual and ROI estimado values prefixed by sign-aware color signals",
         "ad-level cut/reactivation list only when actions exist",
@@ -898,7 +921,7 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; every campaign is rendered once as a vertical card; Discord chunks split only on normal Markdown lines and repeat the report title with Part N/T",
+      "pagination": "no silent campaign limit; every campaign appears once in each applicable table; each table paginates by actual rendered character count, repeats its heading and keeps every code fence balanced",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

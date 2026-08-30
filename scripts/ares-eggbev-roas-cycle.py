@@ -496,6 +496,94 @@ def _dashboard_card_lines(index: int, row: dict[str, Any], threshold: Any) -> li
     ]
 
 
+def _aligned_table(headers: list[str], rows: list[list[str]]) -> str:
+    """Render the compact two-space table used by CPV 13 Intraday."""
+    material = [headers, *rows]
+    widths = [max(_display_width(row[index]) for row in material) for index in range(len(headers))]
+
+    def pad(value: Any, width: int) -> str:
+        text = str(value)
+        return text + ' ' * max(0, width - _display_width(text))
+
+    header = '  '.join(pad(value, widths[index]) for index, value in enumerate(headers))
+    divider = '  '.join('─' * width for width in widths)
+    body = ['  '.join(pad(value, widths[index]) for index, value in enumerate(row)) for row in rows]
+    return '```text\n' + '\n'.join([header, divider, *body]) + '\n```'
+
+
+def _compact_table_pages(headers: list[str], rows: list[list[str]], max_chars: int = 1500) -> list[str]:
+    """Paginate compact tables by actual rendered Discord length."""
+    pages: list[str] = []
+    page_rows: list[list[str]] = []
+    for row in rows:
+        candidate = _aligned_table(headers, [*page_rows, row])
+        if len(candidate) <= max_chars:
+            page_rows.append(row)
+            continue
+        if not page_rows:
+            raise RuntimeError('single compact table row exceeds safe Discord page length')
+        pages.append(_aligned_table(headers, page_rows))
+        page_rows = [row]
+        if len(_aligned_table(headers, page_rows)) > max_chars:
+            raise RuntimeError('single compact table row exceeds safe Discord page length')
+    if page_rows:
+        pages.append(_aligned_table(headers, page_rows))
+    return pages
+
+
+def _append_compact_table(
+    lines: list[str], title: str, headers: list[str], rows: list[list[str]], max_chars: int = 1500,
+) -> None:
+    pages = _compact_table_pages(headers, rows, max_chars=max_chars)
+    for index, page in enumerate(pages, start=1):
+        label = f'{title} • {index}/{len(pages)}' if len(pages) > 1 else title
+        lines.extend(['', f'**{label}**', page])
+
+
+def _dashboard_table_rows(
+    campaigns: list[dict[str, Any]], threshold: Any,
+) -> tuple[list[list[str]], list[list[str]], list[list[str]]]:
+    """Build three compact CPV-style tables while preserving every metric."""
+    decision_rows: list[list[str]] = []
+    meta_rows: list[list[str]] = []
+    bidding_rows: list[list[str]] = []
+    for index, row in enumerate(campaigns, start=1):
+        key = _campaign_key(row, index)
+        decision_rows.append([
+            _delivery_visual(row.get('status')),
+            key,
+            common.norm(row.get('sb_page_name')) or 'N/D',
+            _delivery_label(row.get('status')),
+            common.norm(row.get('action_label')) or 'N/D',
+        ])
+        meta_rows.append([
+            key,
+            _fmt_usd(row.get('cost_per_messaging_started')),
+            _roas_visual(row.get('purchase_roas'), threshold),
+            _fmt_usd(row.get('cost_per_message')),
+            common.fmt_number(row.get('messaging_results'), 0),
+            _fmt_usd(row.get('budget_usd')),
+            _fmt_usd(row.get('spend')),
+            _fmt_usd(row.get('cpm')),
+            _fmt_percent(row.get('ctr')),
+            _fmt_usd(row.get('cpc_link')),
+        ])
+        bidding_rows.append([
+            f"{_roi_signal(row.get('roi_real'))}{_roi_signal(row.get('roi_estimated'))}",
+            key,
+            _fmt_usd(row.get('sb_cost_subscriber')),
+            _fmt_usd(row.get('sb_revenue')),
+            _fmt_usd(row.get('sb_profit')),
+            _fmt_signed_percent(row.get('sb_roi_percent')),
+            common.fmt_number(row.get('sb_leads'), 0),
+            _fmt_signed_percent(row.get('sb_drip_roi_percent')),
+            _fmt_usd(row.get('sb_broadcast_revenue')),
+            _roi_visual(row.get('roi_real')),
+            _roi_visual(row.get('roi_estimated')),
+        ])
+    return decision_rows, meta_rows, bidding_rows
+
+
 def render_report(run: dict[str, Any]) -> str:
     source = run.get('source_gate') or {}
     plan = run.get('plan') or {}
@@ -523,11 +611,25 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
     if campaigns:
-        lines.extend(['', '**📊 CAMPANHAS • leitura simples**'])
-        for index, row in enumerate(campaigns, start=1):
-            if index > 1:
-                lines.extend(['', '---', ''])
-            lines.extend(_dashboard_card_lines(index, row, run.get('threshold')))
+        decision_rows, meta_rows, bidding_rows = _dashboard_table_rows(campaigns, run.get('threshold'))
+        _append_compact_table(
+            lines,
+            '📌 Decisão e identidade',
+            ['On', 'Camp', 'Página', 'Entrega', 'Ação'],
+            decision_rows,
+        )
+        _append_compact_table(
+            lines,
+            '📣 Meta Ads',
+            ['Camp', 'C/conv', 'ROAS', 'C/res', 'Res', 'Budget', 'Spend', 'CPM', 'CTR', 'CPC'],
+            meta_rows,
+        )
+        _append_compact_table(
+            lines,
+            '💰 Smart Bidding',
+            ['R/E', 'Camp', 'C/sub', 'Receita', 'Lucro', 'Retorno', 'Leads', 'ROI Drip', 'Rev BC', 'ROI atual', 'ROI est.'],
+            bidding_rows,
+        )
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 
