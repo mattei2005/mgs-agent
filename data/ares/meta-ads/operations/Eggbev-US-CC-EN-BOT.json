@@ -791,7 +791,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v16_messenger_pages_source_confirmed_roi_bands_active",
+      "status": "cpv13_intraday_desktop_table_v17_compact_campaign_variants_and_ten_row_pages_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -974,6 +974,32 @@
         "scope": "report presentation and source clarification only; no change to Meta Purchase ROAS decisions, cut/reactivation logic, writes, schedules or budget authority",
         "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-source-color-v16-20260830.json"
       },
+      "campaign_identity_and_large_table_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T19:36:24-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "decision": "differentiate campaigns with the same leading sequence by showing C and DUP variants in a compact key, then keep large reports readable with natural family sorting and at most ten campaign rows per table block",
+        "campaign_key_format": "{sequence}·C{campaign_3d}·D{dup_2d}/{utm_campaign}; omit C or D only when absent from the real Meta name",
+        "examples": [
+          "162·C001/pg_5024",
+          "162·C001·D01/pg_5024",
+          "162·C001·D02/pg_5024",
+          "162·C001·D03/pg_5024",
+          "162·C001·D04/pg_5024"
+        ],
+        "ordering": "natural order by leading sequence, UTM, C number, DUP number, status and full name; related campaign variants stay adjacent",
+        "pagination": "maximum ten campaign rows per table block plus the existing Discord character limit; repeat the complete heading and show part N/T; never hide or silently drop rows",
+        "validation": {
+          "high_volume_fixture_campaigns": 55,
+          "unique_compact_keys": 55,
+          "expected_table_parts": 6,
+          "targeted_tests": "4/4 passed",
+          "relevant_tests": "68/68 passed",
+          "meta_writes": 0
+        },
+        "scope": "report presentation only; no change to campaign identity in Meta, naming writes, metrics, ROAS decisions, writes, schedules or budget authority"
+      },
       "purpose": "replicate the organized, spaced and visible CPV 13 Intraday desktop table for Eggbev ROAS reporting",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
@@ -981,6 +1007,8 @@
         "three-line mobile-first opening: title, phase/mode/threshold, and action counts",
         "one single compact aligned monospace desktop table modeled directly on Creditoparaveiculo 13 Intraday",
         "one campaign per row with direct semantic headings instead of generic metric/value headings",
+        "Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024",
+        "campaign families are naturally sorted and each table block contains at most ten rows",
         "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, ROI real, ROI est., Leads, RPS, CPM, Ação",
         "dynamic column widths with two spaces between columns and no vertical bars",
         "ROAS shown as a plain numeric value like the CPV 13 reference; threshold semantics remain in the action logic",
@@ -998,7 +1026,7 @@
       },
       "per_campaign_metrics": [
         "Ligada with visual yes/no signal",
-        "Campanha operational prefix plus UTM",
+        "Campanha compact sequence plus C/DUP variant plus UTM",
         "Página name",
         "Entrega",
         "Ação from the Ares cycle decision",
@@ -1059,7 +1087,7 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count, never splits a campaign row, repeats the same desktop heading and keeps every code fence balanced",
+      "pagination": "no silent campaign limit; every campaign appears exactly once; each table block has at most ten rows and also respects actual rendered character count; campaign families remain naturally ordered, every heading repeats and every code fence stays balanced",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

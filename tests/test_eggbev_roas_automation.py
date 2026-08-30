@@ -439,6 +439,44 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(cycle._roi_signal(-20), '🔴')
         self.assertEqual(cycle._roi_signal(-24.75), '🔴')
 
+    def test_roas_cycle_campaign_key_distinguishes_c_and_dup_variants(self):
+        names = [
+            '162 - Amy Shook - ENG - US - (pg_5024) C001',
+            '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
+            '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP02',
+            '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP03',
+            '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP04',
+        ]
+        keys = [cycle._campaign_key({'name': name, 'utm_campaign': 'pg_5024'}, index) for index, name in enumerate(names, 1)]
+        self.assertEqual(keys, [
+            '162·C001/pg_5024',
+            '162·C001·D01/pg_5024',
+            '162·C001·D02/pg_5024',
+            '162·C001·D03/pg_5024',
+            '162·C001·D04/pg_5024',
+        ])
+        self.assertEqual(len(keys), len(set(keys)))
+
+    def test_roas_cycle_fifty_five_variants_are_sorted_and_paginated_ten_per_page(self):
+        campaigns = []
+        for duplicate in range(55, 0, -1):
+            campaigns.append({
+                'name': f'162 - Amy Shook - ENG - US - (pg_5024) C001 DUP{duplicate:02d}',
+                'utm_campaign': 'pg_5024', 'sb_page_name': 'Amy Shook', 'status': 'ACTIVE',
+                'action_label': 'MANTER', 'roi_real': 1, 'roi_estimated': -10,
+            })
+        rows = cycle._dashboard_desktop_rows(campaigns, .4)
+        keys = [row[1] for row in rows]
+        self.assertEqual(keys[0], '162·C001·D01/pg_5024')
+        self.assertEqual(keys[-1], '162·C001·D55/pg_5024')
+        self.assertEqual(len(keys), 55)
+        self.assertEqual(len(set(keys)), 55)
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        pages = cycle._compact_table_pages(headers, rows, max_chars=1750, max_rows=10)
+        self.assertEqual(len(pages), 6)
+        self.assertTrue(all(page.count('\n') <= 13 for page in pages))
+        self.assertTrue(all(page.count('```') == 2 for page in pages))
+
     def test_roas_cycle_desktop_table_aligns_without_wrapping_or_cut_labels(self):
         base = {
             'status': 'ACTIVE', 'name': '123 - Campaign - ENG - US - (pg_12345)',

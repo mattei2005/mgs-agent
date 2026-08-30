@@ -126,9 +126,37 @@ def _campaign_key(row: dict[str, Any], index: int) -> str:
     name = common.norm(row.get('name'))
     utm = common.norm(row.get('utm_campaign'))
     leading = re.match(r'^\s*(\d{1,4})\s*[-–]', name)
-    sequence = re.search(r'\bC\d{1,3}\b', name, flags=re.IGNORECASE)
-    prefix = leading.group(1) if leading else sequence.group(0).upper() if sequence else f'{index:02d}'
-    return f'{prefix}/{utm}' if utm else prefix
+    campaign = re.search(r'\bC0*(\d{1,3})\b', name, flags=re.IGNORECASE)
+    duplicate = re.search(r'\bDUP\s*0*(\d{1,3})\b', name, flags=re.IGNORECASE)
+    parts = [leading.group(1) if leading else f'{index:02d}']
+    if campaign:
+        parts.append(f'C{int(campaign.group(1)):03d}')
+    if duplicate:
+        parts.append(f'D{int(duplicate.group(1)):02d}')
+    key = '·'.join(parts)
+    return f'{key}/{utm}' if utm else key
+
+
+def _campaign_sort_key(row: dict[str, Any], index: int) -> tuple[Any, ...]:
+    """Keep campaign families together and order C/DUP variants naturally."""
+    name = common.norm(row.get('name'))
+    leading = re.match(r'^\s*(\d{1,4})\s*[-–]', name)
+    campaign = re.search(r'\bC0*(\d{1,3})\b', name, flags=re.IGNORECASE)
+    duplicate = re.search(r'\bDUP\s*0*(\d{1,3})\b', name, flags=re.IGNORECASE)
+    utm = common.norm(row.get('utm_campaign')).lower()
+    utm_number = re.search(r'(\d+)', utm)
+    status_rank = {'ACTIVE': 0, 'PAUSED': 1, 'DELETED': 2, 'ARCHIVED': 2}.get(
+        common.norm(row.get('status')).upper(), 3,
+    )
+    return (
+        int(leading.group(1)) if leading else 10**9,
+        int(utm_number.group(1)) if utm_number else 10**9,
+        int(campaign.group(1)) if campaign else -1,
+        int(duplicate.group(1)) if duplicate else -1,
+        status_rank,
+        name.lower(),
+        index,
+    )
 
 
 def _roi_signal(value: Any) -> str:
@@ -517,11 +545,16 @@ def _aligned_table(headers: list[str], rows: list[list[str]]) -> str:
     return '```text\n' + '\n'.join([header, divider, *body]) + '\n```'
 
 
-def _compact_table_pages(headers: list[str], rows: list[list[str]], max_chars: int = 1500) -> list[str]:
-    """Paginate compact tables by actual rendered Discord length."""
+def _compact_table_pages(
+    headers: list[str], rows: list[list[str]], max_chars: int = 1500, max_rows: int | None = None,
+) -> list[str]:
+    """Paginate compact tables by rendered length and optional row cap."""
     pages: list[str] = []
     page_rows: list[list[str]] = []
     for row in rows:
+        if max_rows is not None and page_rows and len(page_rows) >= max_rows:
+            pages.append(_aligned_table(headers, page_rows))
+            page_rows = []
         candidate = _aligned_table(headers, [*page_rows, row])
         if len(candidate) <= max_chars:
             page_rows.append(row)
@@ -663,12 +696,20 @@ def _compact_legend() -> str:
     )
 
 
+def _campaign_key_legend() -> str:
+    return '**Camp:** `162·C001·D01/pg_5024` = sequência 162 • C001 • DUP01'
+
+
 def _dashboard_desktop_rows(
     campaigns: list[dict[str, Any]], threshold: Any,
 ) -> list[list[str]]:
     """Build one campaign per row with the CPV 13 Intraday hierarchy."""
     rows: list[list[str]] = []
-    for index, row in enumerate(campaigns, start=1):
+    ordered = sorted(
+        enumerate(campaigns, start=1),
+        key=lambda item: _campaign_sort_key(item[1], item[0]),
+    )
+    for index, row in ordered:
         rows.append([
             f"{_roi_signal(row.get('roi_real'))}{_roi_signal(row.get('roi_estimated'))}",
             _campaign_key(row, index),
@@ -695,7 +736,9 @@ def _append_desktop_dashboard(
         'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
         'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação',
     ]
-    pages = _compact_table_pages(headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars)
+    pages = _compact_table_pages(
+        headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars, max_rows=10,
+    )
     for index, page in enumerate(pages, start=1):
         label = '📊 Tabela consolidada — visão desktop'
         if len(pages) > 1:
@@ -775,7 +818,7 @@ def render_report(run: dict[str, Any]) -> str:
 
     if campaigns:
         _append_desktop_dashboard(lines, campaigns, run.get('threshold'))
-        lines.extend(['', _compact_legend()])
+        lines.extend(['', _campaign_key_legend(), _compact_legend()])
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 
