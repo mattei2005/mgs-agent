@@ -750,7 +750,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "desktop_unified_v10_unicode_spacing_corrected_by_nicolas",
+      "status": "responsive_vertical_cards_v11_no_fixed_columns_requested_by_nicolas",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -794,17 +794,35 @@
           "meta_writes": 0
         }
       },
-      "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
+      "simple_layout_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T08:19:33-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "visual_evidence": "the 283-column fixed-width table wrapped inside Discord and split complete labels and campaign values across unrelated lines",
+        "decision": "replace the wide table with one responsive vertical card per campaign and one complete metric per line",
+        "implementation": "plain Discord Markdown without code fences, fixed-width columns, vertical bars, manual padding or label truncation",
+        "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
+        "validation": {
+          "eggbev_tests": "65/65 passed",
+          "one_campaign_card": true,
+          "twenty_five_campaign_fixture": true,
+          "fixed_width_columns": false,
+          "code_fences": false,
+          "label_truncation": false,
+          "meta_writes": 0
+        }
+      },
+      "purpose": "let a campaign manager read status, action, Meta efficiency and Smart Bidding economics in responsive vertical cards without horizontal tables",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
       "layout": [
         "three-line mobile-first opening: title, phase/mode/threshold, and action counts",
-        "one paginated unified Meta Ads plus Smart Bidding table",
-        "bold Decision and Identity, Meta Ads ROAS, and Smart Bidding group titles",
-        "full Portuguese labels split across two header lines instead of compact abbreviations",
-        "Página immediately after Campanha and before Entrega",
-        "strong vertical separators between groups and lighter separators between columns",
-        "generated padding is preserved and Unicode emoji presentation sequences use their Discord display width so every header, row and separator ends at the same column",
+        "one responsive vertical Markdown card per campaign",
+        "one complete metric per line with no fixed-width columns, code fence, padding or vertical bar",
+        "full Portuguese labels without truncation",
+        "campaign identity followed by Página, Ligada, Entrega and Ação",
+        "separate Meta Ads and Smart Bidding sections inside every card",
         "ROAS value prefixed by a threshold-position marker without positive or negative semantics",
         "ROI atual and ROI estimado values prefixed by sign-aware color signals",
         "ad-level cut/reactivation list only when actions exist",
@@ -880,7 +898,7 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; the wide full-label table repeats its complete two-line header every 3 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
+      "pagination": "no silent campaign limit; every campaign is rendered once as a vertical card; Discord chunks split only on normal Markdown lines and repeat the report title with Part N/T",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

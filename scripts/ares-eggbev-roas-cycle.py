@@ -461,6 +461,41 @@ def _dashboard_row(index: int, row: dict[str, Any], threshold: Any) -> str:
     return ' │ '.join(decision) + ' ║ ' + ' │ '.join(meta) + ' ║ ' + ' │ '.join(bidding)
 
 
+def _dashboard_card_lines(index: int, row: dict[str, Any], threshold: Any) -> list[str]:
+    """Render one responsive campaign card without fixed-width columns."""
+    action = common.norm(row.get('action_label')) or 'N/D'
+    page = common.norm(row.get('sb_page_name')) or 'N/D'
+    return [
+        f"### 📊 Campanha {_campaign_key(row, index)}",
+        f"- **Página:** {page}",
+        f"- **Ligada:** {_delivery_visual(row.get('status'))}",
+        f"- **Entrega:** {_delivery_label(row.get('status'))}",
+        f"- **Ação:** {action}",
+        '',
+        '**📣 Meta Ads**',
+        f"- **Custo por conversa:** {_fmt_usd(row.get('cost_per_messaging_started'))}",
+        f"- **ROAS:** {_roas_visual(row.get('purchase_roas'), threshold)}",
+        f"- **Custo por resultado:** {_fmt_usd(row.get('cost_per_message'))}",
+        f"- **Resultados:** {common.fmt_number(row.get('messaging_results'), 0)}",
+        f"- **Orçamento:** {_fmt_usd(row.get('budget_usd'))}",
+        f"- **Gasto:** {_fmt_usd(row.get('spend'))}",
+        f"- **Custo por mil (CPM):** {_fmt_usd(row.get('cpm'))}",
+        f"- **Taxa de clique (CTR):** {_fmt_percent(row.get('ctr'))}",
+        f"- **Custo por clique (CPC):** {_fmt_usd(row.get('cpc_link'))}",
+        '',
+        '**💰 Smart Bidding**',
+        f"- **Custo por assinante:** {_fmt_usd(row.get('sb_cost_subscriber'))}",
+        f"- **Receita:** {_fmt_usd(row.get('sb_revenue'))}",
+        f"- **Lucro:** {_fmt_usd(row.get('sb_profit'))}",
+        f"- **Retorno:** {_fmt_signed_percent(row.get('sb_roi_percent'))}",
+        f"- **Leads:** {common.fmt_number(row.get('sb_leads'), 0)}",
+        f"- **Retorno Drip:** {_fmt_signed_percent(row.get('sb_drip_roi_percent'))}",
+        f"- **Receita Broadcast:** {_fmt_usd(row.get('sb_broadcast_revenue'))}",
+        f"- **ROI atual:** {_roi_visual(row.get('roi_real'))}",
+        f"- **ROI estimado:** {_roi_visual(row.get('roi_estimated'))}",
+    ]
+
+
 def render_report(run: dict[str, Any]) -> str:
     source = run.get('source_gate') or {}
     plan = run.get('plan') or {}
@@ -488,24 +523,11 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
     if campaigns:
-        dashboard_top, dashboard_bottom, dashboard_separator = _dashboard_header()
-        dashboard_header = dashboard_top + '\n' + dashboard_bottom
-        dashboard_rows = [
-            _dashboard_row(index, row, run.get('threshold'))
-            for index, row in enumerate(campaigns, start=1)
-        ]
-        lines.extend([
-            '',
-            '**📌 DECISÃO E IDENTIDADE**  ║  **📣 META ADS — ROAS EM DESTAQUE**  ║  **💰 SMART BIDDING**',
-        ])
-        _append_table_pages(
-            lines,
-            '📊 PAINEL ÚNICO • Meta Ads + Smart Bidding',
-            dashboard_header,
-            dashboard_separator,
-            dashboard_rows,
-            page_size=3,
-        )
+        lines.extend(['', '**📊 CAMPANHAS • leitura simples**'])
+        for index, row in enumerate(campaigns, start=1):
+            if index > 1:
+                lines.extend(['', '---', ''])
+            lines.extend(_dashboard_card_lines(index, row, run.get('threshold')))
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 

@@ -384,6 +384,10 @@ Por instrução de Nicolas em `2026-08-30`, o relatório Corte e ROAS começa co
 
 Por correção de Nicolas em `2026-08-30`, o painel unificado preserva todos os espaços de padding ao calcular a largura visual e trata sequências emoji com VS16, como `⬇️` e `⬆️`, como duas colunas no Discord. Cabeçalho superior, cabeçalho inferior, separador e todas as linhas devem terminar na mesma coluna visual. A regressão cobre ROAS abaixo, igual, acima e indisponível. Esta revisão é somente de apresentação e não altera fontes, seleção de campanhas, threshold, corte, reativação, budget, cron ou autoridade.
 
+### Refinamento visual v11 — cartões simples sem colunas fixas
+
+Após evidência visual enviada por Nicolas em `2026-08-30`, o renderer deixou de usar a tabela horizontal de 283 colunas, porque o Discord quebrava os cabeçalhos, separadores e valores em linhas diferentes mesmo com a largura Unicode calculada corretamente. O formato ativo usa um cartão Markdown vertical por campanha, com uma métrica completa por linha e seções separadas de decisão, Meta Ads e Smart Bidding. Não há bloco de código, barras verticais, padding manual, coluna fixa nem truncamento de rótulo. Todas as campanhas continuam presentes sem limite silencioso e os chunks Discord são divididos apenas em linhas Markdown normais. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.
