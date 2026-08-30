@@ -352,6 +352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ROAS-VISUAL-DASHBOARD-20260830",
+      "next_step": "Materializar hierarquia visual, implementar campos e tabela unificada, testar fixtures e executar dry-run vivo read-only antes do fechamento.",
+      "objective": "Substituir o renderer textual do Corte e ROAS Eggbev por uma visualização compacta e unificada de Meta Ads + Smart Bidding, baseada nos prints enviados por Nicolas.",
+      "source": "discord:thread:1541578606076231750; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-roas-cycle.py",
+      "state": "em execução: contrato, renderer v4, prints e fontes meta/smart bidding reconciliados; nenhuma alteração meta, budget ou cron.",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-30T04:46:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
       "next_step": "Não criar substitutas. Rodar o reconciliador em checks de release. Fechar com Nicolas a referência/template e budget da criação; implementar from_zero, placements e pre-stage. Resolver timestamp Messenger; depois validar canário aprovado e somente então avaliar automação do Diário/budget.",
       "objective": "Manter as seis rotas Eggbev fixas, separadas, auditáveis e reconciliadas com o contrato/runtime real",
@@ -1442,5 +1452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T01:17:20+00:00"
+  "updated_at": "2026-08-30T04:46:33+00:00"
 }

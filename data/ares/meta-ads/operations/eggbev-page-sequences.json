@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "source_audit": "data/ares/meta-ads/audit/eggbev/global-naming-sequence-readback-20260830.json",
+  "observed_at_et": "2026-08-30T00:00:00-04:00",
+  "max_observed_page_sequence": 161,
+  "allocations": {},
+  "conflicting_page_tokens": {
+    "pg_11049": [133, 153],
+    "pg_13829": [133, 139, 151, 152, 156],
+    "pg_19180": [140, 146, 151, 156],
+    "pg_19181": [132, 161],
+    "pg_22299": [141, 143],
+    "pg_22306": [144, 147],
+    "pg_22340": [149, 152, 153]
+  },
+  "allocation_policy": "For an unseen pg token, allocate max(observed and prior allocations)+1 only inside an authorized creation request; for an existing token with conflicting prefixes, fail closed.",
+  "reserved_before_request": false
+}

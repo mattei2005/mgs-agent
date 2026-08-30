@@ -16,13 +16,17 @@ class MediaUploadError(RuntimeError):
 
 
 class AdAccountVideoUploader:
-    def __init__(self, *, common: Any, user_token: str, account_id: str, graph_version: str = "v26.0", attempts: int = 12, interval_seconds: int = 5):
+    def __init__(self, *, common: Any, user_token: str, account_id: str, graph_version: str = "v26.0", attempts: int = 12, interval_seconds: int = 5, title_scan_pages: int = 20, title_scan_page_size: int = 500, association_scan_pages: int = 20, association_scan_page_size: int = 500):
         self.common = common
         self.user_token = user_token
         self.account_id = str(account_id).removeprefix("act_")
         self.graph_version = graph_version
         self.attempts = int(attempts)
         self.interval_seconds = int(interval_seconds)
+        self.title_scan_pages = max(1, int(title_scan_pages))
+        self.title_scan_page_size = max(1, min(500, int(title_scan_page_size)))
+        self.association_scan_pages = max(1, int(association_scan_pages))
+        self.association_scan_page_size = max(1, min(500, int(association_scan_page_size)))
 
     def upload(self, path: Path | str, title: str) -> str:
         source = Path(path)
@@ -65,8 +69,8 @@ class AdAccountVideoUploader:
     def find_by_title(self, title: str) -> list[dict[str, Any]]:
         matches: list[dict[str, Any]] = []
         after: str | None = None
-        for _ in range(20):
-            params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
+        for _ in range(self.title_scan_pages):
+            params: dict[str, Any] = {"fields": "id,title,length,status", "limit": self.title_scan_page_size}
             if after:
                 params["after"] = after
             status, payload, _ = self.common.graph_get(
@@ -112,8 +116,8 @@ class AdAccountVideoUploader:
         found: dict[str, dict[str, Any]] = {}
         for attempt in range(self.attempts):
             after: str | None = None
-            for _ in range(20):
-                params: dict[str, Any] = {"fields": "id,title,length,status", "limit": 500}
+            for _ in range(self.association_scan_pages):
+                params: dict[str, Any] = {"fields": "id,title,length,status", "limit": self.association_scan_page_size}
                 if after:
                     params["after"] = after
                 status, payload, _ = self.common.graph_get(
@@ -153,8 +157,13 @@ class PrestageService:
         actual_checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
         if actual_checksum != checksum:
             raise MediaNotReady("vertical media checksum mismatch")
-        vertical_id = str(self.uploader.upload(vertical, f"V3 VERTICAL {asset_id}"))
-        square_id = str(self.uploader.upload(square, f"V3 SQUARE {asset_id}"))
+        try:
+            return self.registry.require_ready(account_id, asset_id, checksum)
+        except MediaNotReady:
+            pass
+        suffix = checksum[:12]
+        vertical_id = str(self.uploader.upload(vertical, f"V3 VERTICAL {asset_id} {suffix}"))
+        square_id = str(self.uploader.upload(square, f"V3 SQUARE {asset_id} {suffix}"))
         processing = self.uploader.wait_ready([vertical_id, square_id])
         if not processing or any((processing.get(video_id) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
             raise MediaNotReady("both uploaded videos must be ready before registry commit")

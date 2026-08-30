@@ -280,7 +280,7 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
         cstatus, row, _ = meta.graph_get(campaign_id, token, {'fields': 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time'})
         if cstatus == 200 and isinstance(row, dict):
             tracked_campaigns.append(row)
-    fields = 'ad_id,ad_name,campaign_id,campaign_name,spend,impressions,cpm,ctr,actions,action_values,cost_per_action_type,purchase_roas'
+    fields = 'ad_id,ad_name,campaign_id,campaign_name,spend,impressions,inline_link_clicks,cost_per_inline_link_click,cpm,ctr,actions,action_values,cost_per_action_type,purchase_roas'
     insight_params = {'level': 'ad', 'fields': fields, 'limit': 200}
     if since == 'today':
         insight_params['date_preset'] = 'today'
@@ -296,6 +296,8 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
             'status': 'ok',
             'spend': finite_float(row.get('spend')) or 0.0,
             'impressions': finite_float(row.get('impressions')),
+            'link_clicks': finite_float(row.get('inline_link_clicks')),
+            'cpc_link': finite_float(row.get('cost_per_inline_link_click')),
             'cpm': finite_float(row.get('cpm')),
             'ctr': finite_float(row.get('ctr')),
             'messaging_results': action_value(row.get('actions'), MESSAGING_ACTIONS),

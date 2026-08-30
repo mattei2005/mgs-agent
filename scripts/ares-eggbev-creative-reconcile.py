@@ -85,34 +85,43 @@ def drive_inventory(token: str) -> dict[str, Any]:
     return {"root": root, "operation": operation, "ready": ready, "testing": testing, "files": files}
 
 
-def graph_pages(meta, token: str, path: str, fields: str) -> list[dict[str, Any]]:
+def graph_pages(meta, token: str, path: str, fields: str, *, max_rows: int | None = None, page_size: int = 100) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     after = None
     for _ in range(100):
-        params: dict[str, Any] = {"fields": fields, "limit": 500}
+        params: dict[str, Any] = {"fields": fields, "limit": min(100, max(1, page_size))}
         if after:
             params["after"] = after
         status, payload, _ = meta.graph_get(path, token, params)
         if status != 200 or not isinstance(payload, dict):
             raise RuntimeError(f"Meta GET {path} failed http={status}")
         rows.extend(payload.get("data") or [])
+        if max_rows is not None and len(rows) >= max_rows:
+            return rows[:max_rows]
         after = (((payload.get("paging") or {}).get("cursors") or {}).get("after"))
         if not after:
             return rows
     raise RuntimeError(f"Meta pagination exceeded safety limit for {path}")
 
 
-def meta_video_titles(meta, token: str) -> dict[str, Any]:
+def meta_video_titles(meta, token: str, limit_per_account: int) -> dict[str, Any]:
     accounts = graph_pages(meta, token, "me/adaccounts", "id,name,account_status")
     accounts = [row for row in accounts if "eggbev-us-cc-en" in str(row.get("name") or "").lower()]
     videos: list[dict[str, Any]] = []
     for account in accounts:
-        rows = graph_pages(meta, token, f"{account['id']}/advideos", "id,title,status,created_time")
+        rows = graph_pages(
+            meta,
+            token,
+            f"{account['id']}/advideos",
+            "id,title,status,created_time",
+            max_rows=limit_per_account,
+            page_size=25,
+        )
         for row in rows:
             row["account_id"] = str(account["id"]).removeprefix("act_")
             row["account_name"] = account.get("name")
         videos.extend(rows)
-    return {"accounts": accounts, "videos": videos}
+    return {"accounts": accounts, "videos": videos, "limit_per_account": limit_per_account}
 
 
 def norm(value: Any) -> str:
@@ -137,6 +146,7 @@ def main() -> int:
     parser.add_argument("--required", type=int, default=9)
     parser.add_argument("--valid-seconds", type=int, default=21600)
     parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--meta-video-limit-per-account", type=int, default=100)
     args = parser.parse_args()
     if args.required < 1 or args.required > 500:
         parser.error("required must be 1..500")
@@ -156,7 +166,7 @@ def main() -> int:
     if not token_item:
         raise RuntimeError("account has no canonical Meta token reference")
     token, _ = meta.get_token_from_1password(item_name=token_item)
-    meta_snapshot = meta_video_titles(meta, token)
+    meta_snapshot = meta_video_titles(meta, token, max(25, args.meta_video_limit_per_account))
     title_rows = [(row, norm(row.get("title"))) for row in meta_snapshot["videos"]]
     used_video_ids = {str(row.get("id")) for row in meta_snapshot["videos"] if row.get("id")}
 
@@ -243,6 +253,8 @@ def main() -> int:
         "meta": {
             "accounts_scanned": [row.get("name") for row in meta_snapshot["accounts"]],
             "advideos_scanned": len(meta_snapshot["videos"]),
+            "advideos_limit_per_account": meta_snapshot["limit_per_account"],
+            "coverage": "bounded_recent_window_per_account",
             "matching_policy": "known Meta IDs plus asset/checksum/canonical/original markers in ad-account video titles",
             "limitation": "no downloadable Meta visual fingerprint was generated; scoped manager release plus title/ID/current-inventory checks remain mandatory",
         },

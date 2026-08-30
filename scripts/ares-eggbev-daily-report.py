@@ -61,6 +61,14 @@ def sum_field(rows: list[dict[str, Any]], key: str) -> float:
     return sum(common.finite_float(row.get(key)) or 0.0 for row in rows)
 
 
+def roi_percent(revenue: Any, investment: Any) -> float | None:
+    revenue_value = common.finite_float(revenue)
+    investment_value = common.finite_float(investment)
+    if revenue_value is None or investment_value is None or investment_value <= 0:
+        return None
+    return (revenue_value - investment_value) * 100.0 / investment_value
+
+
 def campaign_status(row: dict[str, Any]) -> str:
     return common.norm(row.get('effective_status') or row.get('status') or row.get('configured_status')) or 'N/D'
 
@@ -201,11 +209,13 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
     rows = bundle.get('insights') or []
     spends = sum(common.finite_float(row.get('spend')) or 0.0 for row in rows)
     impressions = sum(common.finite_float(row.get('impressions')) or 0.0 for row in rows)
+    link_clicks = sum(common.finite_float(row.get('inline_link_clicks')) or 0.0 for row in rows)
     purchases_value = sum(common.action_value(row.get('action_values'), common.PURCHASE_ACTIONS) or 0.0 for row in rows)
     messaging_results = sum(common.action_value(row.get('actions'), common.MESSAGING_ACTIONS) or 0.0 for row in rows)
     messaging_started = sum(common.action_value(row.get('actions'), common.MESSAGING_STARTED_ACTIONS) or 0.0 for row in rows)
     roas = purchases_value / spends if spends > 0 else None
     cpm = spends * 1000.0 / impressions if impressions > 0 else None
+    cpc_link = spends / link_clicks if link_clicks > 0 else None
     cost_per_message = spends / messaging_results if messaging_results > 0 else None
     cost_per_messaging_started = spends / messaging_started if messaging_started > 0 else None
     weighted_ctr_numerator = sum((common.finite_float(row.get('ctr')) or 0.0) * (common.finite_float(row.get('impressions')) or 0.0) for row in rows)
@@ -213,7 +223,7 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
     by_campaign: dict[str, dict[str, Any]] = defaultdict(lambda: {
         'name': '', 'spend': 0.0, 'purchase_value': 0.0, 'messaging_results': 0.0,
         'messaging_started': 0.0,
-        'impressions': 0.0, 'ctr_weighted': 0.0, 'has_insight': False,
+        'impressions': 0.0, 'link_clicks': 0.0, 'ctr_weighted': 0.0, 'has_insight': False,
     })
     for row in rows:
         campaign_id = common.norm(row.get('campaign_id')) or 'unknown'
@@ -225,6 +235,7 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         target['messaging_started'] += common.action_value(row.get('actions'), common.MESSAGING_STARTED_ACTIONS) or 0.0
         row_impressions = common.finite_float(row.get('impressions')) or 0.0
         target['impressions'] += row_impressions
+        target['link_clicks'] += common.finite_float(row.get('inline_link_clicks')) or 0.0
         target['ctr_weighted'] += (common.finite_float(row.get('ctr')) or 0.0) * row_impressions
         target['has_insight'] = True
 
@@ -245,6 +256,7 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         results = row['messaging_results'] if has_insight else None
         started = row['messaging_started'] if has_insight else None
         impressions_campaign = row['impressions'] if has_insight else None
+        link_clicks_campaign = row['link_clicks'] if has_insight else None
         status = campaign_status(live)
         if has_insight and status == 'N/D':
             note = 'Entrega no período; status/budget não reconciliados'
@@ -273,8 +285,10 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
             'messaging_started': started,
             'cost_per_messaging_started': spend / started if spend is not None and started is not None and started > 0 else None,
             'impressions': impressions_campaign,
+            'link_clicks': link_clicks_campaign,
             'cpm': spend * 1000.0 / impressions_campaign if spend is not None and impressions_campaign is not None and impressions_campaign > 0 else None,
             'ctr': row['ctr_weighted'] / impressions_campaign if impressions_campaign is not None and impressions_campaign > 0 else None,
+            'cpc_link': spend / link_clicks_campaign if spend is not None and link_clicks_campaign is not None and link_clicks_campaign > 0 else None,
             'has_insight': has_insight,
             'note': note,
             **identity,
@@ -285,7 +299,7 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
         'spend': spends, 'purchase_value': purchases_value, 'purchase_roas': roas,
         'messaging_results': messaging_results, 'cost_per_message': cost_per_message,
         'messaging_started': messaging_started, 'cost_per_messaging_started': cost_per_messaging_started,
-        'impressions': impressions, 'cpm': cpm, 'ctr': ctr,
+        'impressions': impressions, 'link_clicks': link_clicks, 'cpm': cpm, 'ctr': ctr, 'cpc_link': cpc_link,
         'active_budget': active_budget,
         'campaigns': campaigns,
         'campaigns_in_scope': len(campaigns),
@@ -312,6 +326,9 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
             return sum(valid) if valid else None
         investment = total('INVESTIMENT')
         revenue = total('REVENUE')
+        drip_revenue = total('DRIP_REVENUE')
+        broadcast_revenue = total('BD_REVENUE')
+        subscribed = total('SUBSCRIBED')
         sessions = total('SESSIONS')
         acquisition_clicks = total('ACQUISITION_CLICKS')
         avg_values = [(common.finite_float(row.get('AVG_PRICE')), common.finite_float(row.get('SESSIONS'))) for row in source_rows]
@@ -323,6 +340,13 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
         raw_metrics = {
             'investment': investment,
             'revenue': revenue,
+            'profit': revenue - investment if revenue is not None and investment is not None else None,
+            'roi_percent': roi_percent(revenue, investment),
+            'drip_revenue': drip_revenue,
+            'drip_roi_percent': roi_percent(drip_revenue, investment),
+            'broadcast_revenue': broadcast_revenue,
+            'subscribed': subscribed,
+            'cost_per_subscriber': investment / subscribed if investment is not None and subscribed and subscribed > 0 else None,
             'leads': total('LEADS'),
             'sessions': sessions,
             'acquisition_clicks': acquisition_clicks,
@@ -357,8 +381,13 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
         'ready': ready, 'reason': bundle.get('reason'), 'rows': len(rows),
         'investment': sum_field(rows, 'INVESTIMENT') if ready else None,
         'revenue': revenue_total,
+        'profit': (revenue_total - sum_field(rows, 'INVESTIMENT')) if ready and revenue_total is not None else None,
+        'roi_percent': roi_percent(revenue_total, sum_field(rows, 'INVESTIMENT')) if ready else None,
         'drip_revenue': sum_field(rows, 'DRIP_REVENUE') if ready else None,
+        'drip_roi_percent': roi_percent(sum_field(rows, 'DRIP_REVENUE'), sum_field(rows, 'INVESTIMENT')) if ready else None,
         'broadcast_revenue': sum_field(rows, 'BD_REVENUE') if ready else None,
+        'subscribed': sum_field(rows, 'SUBSCRIBED') if ready else None,
+        'cost_per_subscriber': (sum_field(rows, 'INVESTIMENT') / sum_field(rows, 'SUBSCRIBED')) if ready and sum_field(rows, 'SUBSCRIBED') > 0 else None,
         'leads': sum_field(rows, 'LEADS') if ready else None,
         'leads_total': sum_field(rows, 'LEADS_TOTAL') if ready else None,
         'avg_price': avg_price_global,
@@ -398,8 +427,17 @@ def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str
         external: dict[str, Any] = sb_row if status == 'matched' and isinstance(sb_row, dict) else {}
         row.update({
             'join_status': status,
+            'sb_page_id': (sb_row or {}).get('sb_page_id') if isinstance(sb_row, dict) else None,
+            'sb_page_name': (sb_row or {}).get('page_name') if isinstance(sb_row, dict) else None,
             'sb_investment': external.get('investment'),
             'sb_revenue': external.get('revenue'),
+            'sb_profit': external.get('profit'),
+            'sb_roi_percent': external.get('roi_percent'),
+            'sb_drip_revenue': external.get('drip_revenue'),
+            'sb_drip_roi_percent': external.get('drip_roi_percent'),
+            'sb_broadcast_revenue': external.get('broadcast_revenue'),
+            'sb_subscribed': external.get('subscribed'),
+            'sb_cost_subscriber': external.get('cost_per_subscriber'),
             'sb_leads': external.get('leads'),
             'pricing_avg': external.get('avg_price'),
             'pricing_rps': external.get('rps_gross'),

@@ -11,7 +11,9 @@ import argparse
 import datetime as dt
 import fcntl
 import json
+import re
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -73,6 +75,55 @@ def _phase_label(value: Any) -> str:
 
 def _fmt_percent(value: Any) -> str:
     return 'N/D' if common.finite_float(value) is None else common.fmt_number(value) + '%'
+
+
+def _fmt_signed_percent(value: Any) -> str:
+    number = common.finite_float(value)
+    if number is None:
+        return 'N/D'
+    return ('+' if number > 0 else '') + common.fmt_number(number, 1) + '%'
+
+
+def _display_width(value: Any) -> int:
+    text = common.norm(value)
+    return sum(
+        0 if unicodedata.combining(char) or char == '\ufe0f'
+        else 2 if unicodedata.east_asian_width(char) in {'W', 'F'}
+        else 1
+        for char in text
+    )
+
+
+def _fit(value: Any, width: int, align: str = 'left') -> str:
+    text = common.norm(value) or 'N/D'
+    if _display_width(text) > width:
+        clipped = ''
+        for char in text:
+            suffix = '…'
+            if _display_width(clipped + char + suffix) > width:
+                break
+            clipped += char
+        text = clipped + '…'
+    padding = max(0, width - _display_width(text))
+    return (' ' * padding + text) if align == 'right' else (text + ' ' * padding)
+
+
+def _campaign_key(row: dict[str, Any], index: int) -> str:
+    name = common.norm(row.get('name'))
+    utm = common.norm(row.get('utm_campaign'))
+    leading = re.match(r'^\s*(\d{1,4})\s*[-–]', name)
+    sequence = re.search(r'\bC\d{1,3}\b', name, flags=re.IGNORECASE)
+    prefix = leading.group(1) if leading else sequence.group(0).upper() if sequence else f'{index:02d}'
+    return f'{prefix}/{utm}' if utm else prefix
+
+
+def _roi_signal(value: Any) -> str:
+    number = common.finite_float(value)
+    return '⚪' if number is None else '🟢' if number >= 0 else '🔴'
+
+
+def _delivery_signal(status: Any) -> str:
+    return '🟢' if common.norm(status).upper() == 'ACTIVE' else '🔴'
 
 
 def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str, str, str]:
@@ -204,6 +255,8 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             spend = sum(common.finite_float(item.get('spend')) or 0.0 for item in decisions)
             purchase_value = sum(common.finite_float(item.get('purchase_value')) or 0.0 for item in decisions)
             impressions = sum(common.finite_float(item.get('impressions')) or 0.0 for item in decisions)
+            link_clicks = sum(common.finite_float(item.get('link_clicks')) or 0.0 for item in decisions)
+            results = sum(common.finite_float(item.get('messaging_results')) or 0.0 for item in decisions)
             started = sum(common.finite_float(item.get('messaging_started')) or 0.0 for item in decisions)
             weighted_ctr = sum((common.finite_float(item.get('ctr')) or 0.0) * (common.finite_float(item.get('impressions')) or 0.0) for item in decisions)
             row.update({
@@ -212,8 +265,12 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
                 'status': reporting.campaign_status(live),
                 'budget_usd': reporting.campaign_budget_usd(live),
                 'spend': spend,
+                'messaging_results': results,
+                'cost_per_message': spend / results if results > 0 else None,
                 'messaging_started': started,
                 'cost_per_messaging_started': spend / started if started > 0 else None,
+                'link_clicks': link_clicks,
+                'cpc_link': spend / link_clicks if link_clicks > 0 else None,
                 'purchase_roas': purchase_value / spend if spend > 0 else None,
                 'cpm': spend * 1000.0 / impressions if impressions > 0 else None,
                 'ctr': weighted_ctr / impressions if impressions > 0 else None,
@@ -257,6 +314,44 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
     }
 
 
+def _dashboard_row(index: int, row: dict[str, Any]) -> str:
+    action = {
+        'ESCALA +10%': 'ESCALA',
+        'REATIVAR': 'REATIVAR',
+        'CORTAR': 'CORTAR',
+        'MANTER': 'MANTER',
+        'OBSERVAR': 'OBSERVAR',
+    }.get(common.norm(row.get('action_label')), common.norm(row.get('action_label')) or 'N/D')
+    values = [
+        _fit(_roi_signal(row.get('roi_real')) + _roi_signal(row.get('roi_estimated')), 4),
+        _fit(_delivery_signal(row.get('status')), 2),
+        _fit(index, 2, 'right'),
+        _fit(_campaign_key(row, index), 14),
+        _fit(row.get('status'), 8),
+        _fit(action, 8),
+        _fit(common.fmt_number(row.get('cost_per_messaging_started')), 6, 'right'),
+        _fit(common.fmt_number(row.get('purchase_roas')), 5, 'right'),
+        _fit(common.fmt_number(row.get('cost_per_message')), 6, 'right'),
+        _fit(common.fmt_number(row.get('messaging_results'), 0), 4, 'right'),
+        _fit(common.fmt_number(row.get('budget_usd')), 7, 'right'),
+        _fit(common.fmt_number(row.get('spend')), 7, 'right'),
+        _fit(common.fmt_number(row.get('cpm')), 6, 'right'),
+        _fit(_fmt_percent(row.get('ctr')), 6, 'right'),
+        _fit(common.fmt_number(row.get('cpc_link')), 6, 'right'),
+        '│',
+        _fit(row.get('sb_page_id') or row.get('meta_page_id'), 15),
+        _fit(row.get('sb_page_name'), 16),
+        _fit(common.fmt_number(row.get('sb_cost_subscriber')), 7, 'right'),
+        _fit(common.fmt_number(row.get('sb_revenue')), 8, 'right'),
+        _fit(common.fmt_number(row.get('sb_profit')), 8, 'right'),
+        _fit(_fmt_signed_percent(row.get('sb_roi_percent')), 8, 'right'),
+        _fit(common.fmt_number(row.get('sb_leads'), 0), 6, 'right'),
+        _fit(_fmt_signed_percent(row.get('sb_drip_roi_percent')), 9, 'right'),
+        _fit(common.fmt_number(row.get('sb_broadcast_revenue')), 8, 'right'),
+    ]
+    return ' '.join(values)
+
+
 def render_report(run: dict[str, Any]) -> str:
     source = run.get('source_gate') or {}
     plan = run.get('plan') or {}
@@ -273,21 +368,13 @@ def render_report(run: dict[str, Any]) -> str:
         f"## {title_emoji} CORTE & ROAS",
         f"**Eggbev US-CC-EN • {date_label} • {time_label} ET • {_phase_label(run.get('phase'))}**",
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        f"`{mode}`  •  Threshold `{common.fmt_number(run.get('threshold'))}`  •  Moeda `USD`",
+        f"`{mode}` • Threshold `{common.fmt_number(run.get('threshold'))}` • `USD`",
         '',
-        '**📌 RESUMO DO CICLO**',
-        '```text',
-        f"Campanhas no ciclo       {campaign_report.get('campaign_count', 0):>5}",
-        f"Anúncios avaliados       {counts.get('ads_considered', 0):>5}",
-        f"🛑 Cortes                 {counts.get('pause_ads', 0):>5}",
-        f"♻️ Reativações            {counts.get('reactivate_ads', 0):>5}",
-        f"🚀 Escalas +10%           {counts.get('budget_scale_candidates', 0):>5}",
-        f"✅ Mantidos               {sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP'):>5}",
-        f"Volume de LEADS          {common.fmt_number(campaign_report.get('leads_total'), 0):>5}",
-        '```',
-        '**🛡️ FONTES E SEGURANÇA**',
-        f"Meta `{run.get('meta_status') or 'N/D'}` • Smart Bidding `{run.get('smart_bidding_status') or 'N/D'}`",
-        f"Join LEADS `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}` • Join econômico `{campaign_report.get('economic_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
+        f"**🎯 CICLO**  `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
+        f"🛑 `{counts.get('pause_ads', 0)}` • ♻️ `{counts.get('reactivate_ads', 0)}` • "
+        f"🚀 `{counts.get('budget_scale_candidates', 0)}` • ✅ `{sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP')}`",
+        f"**🛡️ FONTES**  Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}` • "
+        f"Join `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}` • Econ `{campaign_report.get('economic_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
     ]
     if run.get('phase') == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
