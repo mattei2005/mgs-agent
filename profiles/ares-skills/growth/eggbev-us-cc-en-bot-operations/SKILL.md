@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.17.0-draft
+version: 0.18.0-draft
 author: Ares
 license: internal
 metadata:
@@ -46,7 +46,7 @@ Clonar campanhas   1543333373945053184
 Limite de Leads    1543312825890381865
 ```
 
-Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente.
+Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente. A identidade das seis rotas vive em `thread_id + prompt_file + registry`; não publicar nem recriar mensagens operacionais de banner/pin em cada thread.
 
 Por instrução explícita de Nicolas em 29/08/2026, a rota canônica de **Regras** passou a ser a thread atual `1543280854024060999`. A antiga `Eggbev-US-CC-EN Regras` (`1541578622106865815`) fica supersedida e não recebe novas regras ativas.
 
@@ -371,6 +371,10 @@ Ambas mostram percentual com sinal: `🟢` positivo, `🟡` zero, `🔴` negativ
 Por correção explícita de Nicolas em `2026-08-30`, Purchase ROAS abaixo de `0,40` significa somente que está abaixo do threshold operacional; não significa resultado econômico negativo. A apresentação de ROAS usa marcadores de posição: `⬇️` abaixo, `🎯` igual, `⬆️` acima e `⚪ N/D` indisponível. Não usar vermelho/verde no ROAS como semântica de prejuízo/lucro.
 
 A classificação `negativo` pertence somente ao ROI: `ROI atual < 0%` ou `ROI estimado < 0%` aparece `🔴`; ROI positivo aparece `🟢`, zero `🟡` e indisponível `⚪ N/D`. Esta distinção visual não altera o threshold nem a lógica de corte/reativação por Meta Purchase ROAS.
+
+### Refinamento visual v9 — abertura mobile e sem legenda recorrente
+
+Por instrução de Nicolas em `2026-08-30`, o relatório Corte e ROAS começa com uma abertura curta para mobile: título com estado e horário ET; uma linha com fase, modo e threshold; uma linha com contagens de campanhas, anúncios, cortes, reativações, escalas e manutenções. A legenda explicativa longa foi removida integralmente do fim do relatório. A tabela e a semântica do v8 permanecem inalteradas; fontes inválidas continuam aparecendo como bloqueio curto no início.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
