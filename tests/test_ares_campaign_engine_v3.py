@@ -221,6 +221,30 @@ def test_prestaged_manifest_requires_nonzero_source_ad_lineage():
         manifest([row])
 
 
+def test_manifest_allows_internal_messenger_doc_only_for_page_backed_messenger_creative():
+    row = from_zero_campaign(1)
+    creative = row['ads'][0]['creative_payload']
+    creative['object_story_spec']['instagram_user_id'] = '17841400000000000'
+    creative['asset_feed_spec'].update({
+        'call_to_action_types': ['APPLY_NOW'],
+        'link_urls': [{'website_url': 'https://fb.com/messenger_doc/', 'display_url': ''}],
+        'additional_data': {'page_welcome_message': '{"type":"JSON_SETUP"}'},
+    })
+    manifest([row])
+
+
+def test_manifest_rejects_messenger_doc_without_page_backed_instagram_identity():
+    row = from_zero_campaign(1)
+    creative = row['ads'][0]['creative_payload']
+    creative['asset_feed_spec'].update({
+        'call_to_action_types': ['APPLY_NOW'],
+        'link_urls': [{'website_url': 'https://fb.com/messenger_doc/', 'display_url': ''}],
+        'additional_data': {'page_welcome_message': '{"type":"JSON_SETUP"}'},
+    })
+    with pytest.raises(ManifestError, match='messenger_doc'):
+        manifest([row])
+
+
 def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_ids():
     row = from_zero_campaign(1)
     built = manifest([row]).campaigns[0]

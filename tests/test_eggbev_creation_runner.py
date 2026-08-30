@@ -30,6 +30,18 @@ class EggbevCreationRunnerTests(unittest.TestCase):
             self.assertEqual(result["network_calls"], 0)
             self.assertEqual(result["writes"], 0)
             self.assertTrue(output.is_file())
+            payload = json.loads(output.read_text())
+            for campaign in payload["manifest"]["campaigns"]:
+                for ad in campaign["ads"]:
+                    creative = ad["creative_payload"]
+                    self.assertEqual(
+                        creative["object_story_spec"]["instagram_user_id"],
+                        "17841400000000000",
+                    )
+                    self.assertEqual(
+                        creative["asset_feed_spec"]["link_urls"],
+                        [{"website_url": "https://fb.com/messenger_doc/", "display_url": ""}],
+                    )
 
     def test_scoped_selection_is_deterministic_and_not_filename_order(self):
         rows = []
