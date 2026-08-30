@@ -285,7 +285,7 @@ def test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns()
     m = manifest([pure_campaign(1), pure_campaign(2)])
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(m)
     bundle = plan.lanes['100'][0]
-    assert bundle.outer_write_calls == 1
+    assert bundle.outer_write_calls == 2
     assert bundle.outer_readback_calls == 1
     assert bundle.intermediate_get_calls == 0
     assert len(bundle.stages[0].operations) == 2
@@ -869,7 +869,7 @@ def test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback(tmp_pa
     result = engine.execute(manifest([pure_campaign(1), pure_campaign(2)]))
     assert result['status'] == 'COMPLETE_PAUSED'
     assert len(result['campaign_ids']) == 2
-    assert [call['stage'] for call in transport.calls] == ['pure_clone_copy', 'consolidated_readback']
+    assert [call['stage'] for call in transport.calls] == ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback']
     assert result['metrics']['intermediate_get_calls'] == 0
     assert result['metrics']['outer_readback_calls'] == 1
 
@@ -996,7 +996,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
-    assert audit['engine_release_version'] == '3.2.0'
+    assert audit['engine_release_version'] == '3.3.0'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
@@ -1051,8 +1051,12 @@ def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path)
     assert audit['status'] == 'FAILED'
     assert audit['manual_reconciliation_required'] is False
     assert audit['automatic_recovery_required'] is True
-    with pytest.raises(ExecutionFailed, match='automatic recovery requires a prestaged execution mode'):
-        CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
+    recovered = CampaignEngine(cfg, transport_factory=lambda account: FakeBatchTransport(account)).execute(m)
+    assert recovered['status'] == 'COMPLETE_PAUSED'
+    recovered_audit = json.loads(audit_path.read_text())
+    recovery = recovered_audit['lanes']['100']['bundles'][0]['recovery']
+    assert recovery['mode'] == 'consolidated_readback_only'
+    assert recovery['write_replay_blocked'] is True
 
 
 def test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay(tmp_path):
@@ -1364,7 +1368,7 @@ def test_transient_code2_retry_uses_remaining_development_lane_capacity(tmp_path
 
 def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():
     production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    assert production['release_version'] == '3.2.0'
+    assert production['release_version'] == '3.3.0'
     assert production['soft_score'] == 100
     assert production['hard_score'] == 120
     assert production['development_access_score_max'] == 60

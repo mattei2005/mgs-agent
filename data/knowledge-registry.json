@@ -1094,10 +1094,10 @@
       "kind": "policy",
       "owner": "Nicolas",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V4-20260829",
       "title": "Eggbev Corte e ROAS executa status writes e publica ciclos em modo fail-closed",
-      "updated_at": "2026-08-29T23:33:09+00:00"
+      "updated_at": "2026-08-30T00:30:20+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -1115,6 +1115,25 @@
       "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-AUTOMATION-V2-20260829",
       "title": "Eggbev BOT ciclos ROAS em duas fases com reset diário",
       "updated_at": "2026-08-29T23:33:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:28:30-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V4-20260829",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Corte e ROAS usa renderer v4 híbrido e métricas econômicas report-only reconciliadas",
+      "updated_at": "2026-08-30T00:30:20+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.thread-naming",
@@ -2290,5 +2309,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-29T23:33:09+00:00"
+  "updated_at": "2026-08-30T00:30:20+00:00"
 }

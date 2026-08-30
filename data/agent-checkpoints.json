@@ -373,12 +373,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Zeus iniciar ou recuperar o scheduler gateway fora desta sessão e confirmar o primeiro tick programado; Rodolfo ou Geizian aprovarem teto/envelope antes de qualquer aumento real de budget.",
+      "next_step": "No próximo ciclo com campanha ativa, confirmar a postagem automática e o join por campanha; Smart Bidding deve expor timestamp verificável no Messenger para liberar LEADS e manter writes ROAS fail-closed até lá. Rodolfo/Geizian + teto continuam obrigatórios para budget.",
       "objective": "Operar Corte e ROAS Eggbev com pausa, reativação, relatório e futura escala de budget sob autoridade vigente",
-      "source": "discord:thread:1541578606076231750; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/roas-thread-operational-activation-20260829T192934-0400.json",
-      "state": "contrato e runtime liberados para status writes de anúncio/campanha e postagem automática nos ciclos et; cron script-only está enabled/scheduled/repeat forever. budget write continua bloqueado a rodolfo/geizian mais teto/envelope. scheduler reporta gateway_running=false e smart bidding sem timestamp verificável, portanto o primeiro tick e qualquer write permanecem fail-closed.",
+      "source": "discord:thread:1541578606076231750; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/roas-cycle-renderer-v4-20260829T202830-0400.json",
+      "state": "renderer v4 concluído e validado: título hierárquico, resumo executivo, cards mobile, tabelas desktop paginadas, emojis de decisão e métricas meta/leads/roi real estimado/rps/cpm bloco. a rota econômica read-only está reconciliada por campaign_id+utm com freshness <=120min e não altera decisões. messenger leads continua sem timestamp verificável; budget write segue bloqueado.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-29T23:33:09+00:00"
+      "updated_at": "2026-08-30T00:30:20+00:00"
     },
     {
       "agent": "ares",
@@ -1442,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:24:04+00:00"
+  "updated_at": "2026-08-30T00:30:20+00:00"
 }

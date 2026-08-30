@@ -68,8 +68,10 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
 
     def test_runtime_truth_is_explicit(self):
         self.assertIn("Runner Eggbev de criação construído: não", self.report)
-        self.assertIn("Conta cadastrada no Engine v3: não", self.report)
+        self.assertIn("Conta cadastrada no Engine v3: sim", self.report)
         self.assertIn("Write de criação habilitado: não", self.report)
+        self.assertIn("onboarding v3 da conta já está concluído", self.report)
+        self.assertNotIn("USD 45 não é default", self.report)
 
     def test_route_contract_and_versioned_thread_prompt(self):
         operation = json.loads(OP.read_text())

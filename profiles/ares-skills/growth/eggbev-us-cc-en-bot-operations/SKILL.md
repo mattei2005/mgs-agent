@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.14.1-draft
+version: 0.14.2-draft
 author: Ares
 license: internal
 metadata:
@@ -83,7 +83,9 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - As métricas de Pricing/monetização podem ser extraídas diretamente da Smart Bidding pela rota compatível de **vertical, Messenger Pages ou domain**. Selecionar pela granularidade da métrica e exigir mapping explícito de operação/UTM/página/domain, mesmo período, moeda e freshness.
 - RPS, CPM, EPC, `AVG_PRICE`, receita, ROI e demais campos devem preferir o valor direto da Smart Bidding. Cálculo local de RPS/EPC é apenas fallback explícito e rotulado quando a rota selecionada não expuser o campo direto.
 - O payload global `/pricing` não é a única fonte e sua ausência de UTM não significa indisponibilidade da métrica; consultar vertical, Messenger Pages ou domain antes de concluir `N/D`.
-- ROI real e ROI estimado devem vir diretamente da rota Smart Bidding compatível; até o endpoint/campo/freshness serem materializados e relidos, aparecem `N/D`.
+- ROI real e ROI estimado do **Corte e ROAS** podem ser exibidos como cálculos locais explicitamente rotulados e somente informativos após join econômico exato: `ROI real* = (NET_REVENUE−INVESTIMENT) / INVESTIMENT`; `ROI est.* = (estimatedRevenue−INVESTIMENT) / INVESTIMENT`. O denominador zero/ausente ou estimate ambíguo permanece `N/D`.
+- RPS* e CPM bloco* do **Corte e ROAS** usam, respectivamente, `NET_REVENUE×1.000/SESSIONS` e `NET_REVENUE×1.000/GAM_IMPRESSIONS`, sempre rotulados como cálculo report-only. Esses campos não alteram corte, reativação ou budget; Meta Purchase ROAS continua sendo a métrica de decisão.
+- A rota econômica materializada é `/report/performance_per_campaigns`, filtrada por `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, com estimativa em `/estimated/revenue/utm_adgroup` e freshness em `/estimated/delay` (`currentFillTime` presente e `totalMinutes <= 120`). O join da estimativa falha fechado quando a UTM não é única na conta-alvo.
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
@@ -134,7 +136,7 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
-1. Smart Bidding: materializar no runner a seleção read-only entre vertical, Messenger Pages e domain, com mapping inequívoco da conta 01, endpoint/campo/moeda/período, timestamp verificável com atraso máximo de 2h e identidade compatível por métrica.
+1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
 2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
 3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
@@ -292,7 +294,7 @@ Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
 Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
-Testes aprovados        56 no módulo ROAS atual; suíte ampliada cobre guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, escala +10% e rotas de reporting
+Testes aprovados        63 no módulo ROAS atual; suíte ampliada cobre guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, escala +10%, layout híbrido, paginação de 25 campanhas e rotas econômicas report-only
 Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
 Budget write            false; exige Rodolfo/Geizian + teto/envelope
 Post ciclo ROAS         habilitado na thread fixa
@@ -300,9 +302,15 @@ Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 
 Post/Cron Diário         false
 ```
 
+### Renderer Corte e ROAS v4
+
+Cada ciclo usa título grande com emoji de estado, data/hora ET, fase, modo e threshold. O corpo combina resumo executivo, um card vertical por campanha, tabela Meta/decisão, tabela Smart Bidding/monetização, lista de cortes/reativações por anúncio e legenda de fontes/fórmulas. Emojis: `🛑` corte, `♻️` reativação, `🚀` escala recomendada, `✅` manter, `👁️` observar e `⚠️` gate/fonte bloqueada.
+
+Não há limite silencioso de campanhas nem truncamento do nome completo. Tabelas repetem o cabeçalho a cada 12 linhas; mensagens multipart repetem `⚔️ Corte & ROAS • Parte N/T`; blocos `text` permanecem fence-safe. O join de LEADS e o join econômico aparecem separadamente, porque a ausência de freshness do Messenger não invalida automaticamente uma leitura econômica com freshness própria — e nenhuma das duas amplia a autoridade de write.
+
 O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Em ciclo de ação, Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa bloqueia writes. Métricas Smart Bidding indisponíveis aparecem `N/D`, nunca zero inventado.
 
-Na leitura real da construção, a conta Meta estava ativa em USD/ET, mas sem campanha/ad/insight; Smart Bidding só expôs a conta 03 e não a conta alvo 01. Portanto, o live dry-run com entrega permanece pendente. Nicolas autorizou desativar `ADS ZERO RESULTS` somente no futuro gate de ativação, com readback exato antes/depois.
+Na leitura live do renderer v4, a conta Meta estava ativa em USD/ET e sem campanha/anúncio ativo no ciclo porque a campanha disponível estava pausada pelo guardrail de LEADS. A Smart Bidding expôs a conta 01 na rota Messenger e 1 linha econômica exata em `/report/performance_per_campaigns`; `/estimated/delay` retornou freshness válida. O Messenger continua sem timestamp aceito, portanto writes ROAS permanecem fail-closed mesmo quando as métricas econômicas informativas podem ser exibidas.
 
 ## Auditoria ponta a ponta — 2026-08-29 15:37 ET (histórica; supersedida abaixo)
 
