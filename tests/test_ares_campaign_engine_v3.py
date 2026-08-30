@@ -283,6 +283,40 @@ def test_manifest_rejects_video_customization_label_missing_from_replacement_vid
         manifest([row])
 
 
+def test_manifest_rejects_title_customization_label_missing_from_titles():
+    row = prestaged_campaign(1)
+    row['ads'][0]['creative_payload']['asset_feed_spec'].update({
+        'titles': [{'text': 'APPLY NOW ✅'}],
+        'asset_customization_rules': [{'title_label': {'name': 'title-square'}}],
+    })
+    with pytest.raises(ManifestError, match='title_label'):
+        manifest([row])
+
+
+def test_clone_adset_updates_are_explicit_and_engine_owned_fields_are_blocked():
+    row = prestaged_campaign(1)
+    row['adset_updates'] = {
+        'promoted_object': {
+            'pixel_id': 'pixel-1',
+            'custom_event_type': 'OTHER',
+            'custom_event_str': 'eggbev-pv-u',
+            'page_id': 'page-1',
+        }
+    }
+    built = manifest([row]).campaigns[0]
+    assert built.adset_updates['promoted_object']['custom_event_str'] == 'eggbev-pv-u'
+
+    forbidden = prestaged_campaign(2)
+    forbidden['adset_updates'] = {'campaign_id': 'not-allowed'}
+    with pytest.raises(ManifestError, match='engine-owned fields'):
+        manifest([forbidden])
+
+    from_zero = from_zero_campaign(3)
+    from_zero['adset_updates'] = {'promoted_object': {'custom_event_type': 'OTHER'}}
+    with pytest.raises(ManifestError, match='forbids adset_updates'):
+        manifest([from_zero])
+
+
 def test_planner_bundles_two_campaigns_per_account_without_cross_account_mix():
     m = manifest([
         pure_campaign(1, '100'), pure_campaign(2, '100'), pure_campaign(3, '100'),
@@ -305,9 +339,21 @@ def test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns()
 
 
 def test_planner_caps_ad_copy_batch_at_ten_ads_and_preserves_lineage():
-    m = manifest([prestaged_campaign(1), prestaged_campaign(2)])
+    first = prestaged_campaign(1)
+    first['adset_updates'] = {
+        'promoted_object': {
+            'pixel_id': 'pixel-1',
+            'custom_event_type': 'OTHER',
+            'custom_event_str': 'eggbev-pv-u',
+            'page_id': 'page-1',
+        }
+    }
+    m = manifest([first, prestaged_campaign(2)])
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(m)
     bundle = plan.lanes['100'][0]
+    shell_stage = next(stage for stage in bundle.stages if stage.name == 'campaign_adset_update')
+    adset_update = next(op for op in shell_stage.operations if op.name == 'adset_update_1')
+    assert adset_update.body['promoted_object']['custom_event_str'] == 'eggbev-pv-u'
     create_stage = next(stage for stage in bundle.stages if stage.name == 'ad_copy_with_creative')
     ad_ops = [op for op in create_stage.operations if op.kind == 'ad_copy_with_creative']
     assert len(ad_ops) == 6

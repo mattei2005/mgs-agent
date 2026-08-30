@@ -368,6 +368,9 @@
     "destination": "Messenger",
     "pixel_name": "Eggbev-US-CC-EN",
     "pixel_id": "935354115143283",
+    "conversion_event_display_name": "Eggbev PV U",
+    "conversion_event_technical_name": "eggbev-pv-u",
+    "promoted_object_contract": {"custom_event_type": "OTHER", "custom_event_str": "eggbev-pv-u"},
     "pixel_scope": "same pixel for the entire Eggbev card operation",
     "advertiser_payer": "DIGITAL TRUST",
     "advertiser_payer_scope": "always for this operation"
@@ -502,6 +505,15 @@
   },
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_materialized_for_engine_v3",
+    "latest_standardization": {
+      "reviewed_at_et": "2026-08-30T14:04:12-04:00",
+      "reviewed_by": "Nicolas Holanda",
+      "source_thread": "discord:thread:1543280854024060999",
+      "conversion_event": "use pixel Eggbev-US-CC-EN with custom event eggbev-pv-u (UI: Eggbev PV U) in every new ad set",
+      "copy": {"primary_text": "", "headlines_on_every_ad": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"], "description": "⭐️⭐️⭐️⭐️⭐️", "cta": "APPLY_NOW"},
+      "publication_gate": "materialize and validate the final manifest, show Nicolas the full structure, and publish only after his explicit OK",
+      "replacement_order": "do not delete the source until the replacement is created and fully read back; delete only the unequivocal superseded campaign after the approved replacement path succeeds"
+    },
     "latest_manager_review": {
       "reviewed_at_et": "2026-08-30T07:29:34-04:00",
       "reviewed_by": "Nicolas Holanda",
@@ -523,6 +535,7 @@
       "template": {
         "primary_text": "",
         "headlines": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"],
+        "headline_application": "all three headline options on every ad",
         "description": "⭐️⭐️⭐️⭐️⭐️",
         "cta": "APPLY_NOW"
       },
@@ -560,10 +573,10 @@
       "readback": "validate destination, url_tags/UTMs and Page identity after creation"
     },
     "manual_placements_payload": {
-      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference; Instagram explore was removed after Meta Graph v26 returned subcode 2490589 (deprecated), while explore_home remains active",
+      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference; live Graph v26 validate-only on 2026-08-30 required explore together with explore_home (subcode 2490392 without the parent) and accepted both with HTTP 200 and zero side effect",
       "publisher_platforms": ["facebook", "instagram", "messenger"],
       "facebook_positions": ["feed", "instream_video", "marketplace", "story", "search", "biz_disco_feed", "facebook_reels", "facebook_reels_overlay", "profile_feed"],
-      "instagram_positions": ["stream", "story", "reels", "explore_home", "profile_feed"],
+      "instagram_positions": ["stream", "story", "reels", "explore", "explore_home", "profile_feed"],
       "messenger_positions": ["story"],
       "device_platforms": ["mobile", "desktop"],
       "audience_network": "forbidden",

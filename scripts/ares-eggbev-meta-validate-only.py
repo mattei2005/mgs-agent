@@ -76,10 +76,11 @@ def main() -> int:
     payload = create._creative_payload(
         media={"vertical_video_id": ready[0], "square_video_id": ready[1]},
         page_id=str(page["id"]),
+        instagram_user_id=str(page["instagram_user_id"]),
         page_token="pg_5024",
         label_prefix=f"validate_{unique}",
         primary_text="",
-        headlines=["APPLY NOW ✅"],
+        headlines=["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"],
         description="⭐️⭐️⭐️⭐️⭐️",
         cta="APPLY_NOW",
     )
