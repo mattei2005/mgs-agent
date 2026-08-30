@@ -102,7 +102,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(targeting["facebook_positions"], FACEBOOK_POSITIONS)
         self.assertEqual(targeting["instagram_positions"], INSTAGRAM_POSITIONS)
         self.assertEqual(targeting["messenger_positions"], MESSENGER_POSITIONS)
-        self.assertIn("explore", targeting["instagram_positions"])
+        self.assertNotIn("explore", targeting["instagram_positions"])
         self.assertIn("explore_home", targeting["instagram_positions"])
         self.assertNotIn("audience_network", json.dumps(targeting))
 
@@ -254,7 +254,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(campaign.source_adset_id, "source-adset")
         self.assertEqual(campaign.campaign_updates["daily_budget"], "4500")
         self.assertEqual(campaign.adset_updates["promoted_object"]["custom_event_str"], "eggbev-pv-u")
-        self.assertIn("explore", campaign.adset_updates["targeting"]["instagram_positions"])
+        self.assertNotIn("explore", campaign.adset_updates["targeting"]["instagram_positions"])
         self.assertIn("explore_home", campaign.adset_updates["targeting"]["instagram_positions"])
         self.assertEqual([ad.source_ad_id for ad in campaign.ads], ["source-ad-1", "source-ad-2", "source-ad-3"])
         self.assertTrue(

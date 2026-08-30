@@ -573,10 +573,10 @@
       "readback": "validate destination, url_tags/UTMs and Page identity after creation"
     },
     "manual_placements_payload": {
-      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference; live Graph v26 validate-only on 2026-08-30 required explore together with explore_home (subcode 2490392 without the parent) and accepted both with HTTP 200 and zero side effect",
+      "source": "Nicolas exact approved UI list plus live Graph v26 replacement write/readback on 2026-08-30; the real adset update rejected explore with subcode 2490589 (deprecated), while explore_home remained accepted and active. The real controlled write supersedes the contradictory validate-only result 2490392.",
       "publisher_platforms": ["facebook", "instagram", "messenger"],
       "facebook_positions": ["feed", "instream_video", "marketplace", "story", "search", "biz_disco_feed", "facebook_reels", "facebook_reels_overlay", "profile_feed"],
-      "instagram_positions": ["stream", "story", "reels", "explore", "explore_home", "profile_feed"],
+      "instagram_positions": ["stream", "story", "reels", "explore_home", "profile_feed"],
       "messenger_positions": ["story"],
       "device_platforms": ["mobile", "desktop"],
       "audience_network": "forbidden",

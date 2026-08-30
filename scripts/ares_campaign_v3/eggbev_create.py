@@ -25,7 +25,7 @@ FACEBOOK_POSITIONS = [
     "facebook_reels_overlay",
     "profile_feed",
 ]
-INSTAGRAM_POSITIONS = ["stream", "story", "reels", "explore", "explore_home", "profile_feed"]
+INSTAGRAM_POSITIONS = ["stream", "story", "reels", "explore_home", "profile_feed"]
 MESSENGER_POSITIONS = ["story"]
 SQUARE_RULE_FACEBOOK = ["feed", "instream_video", "marketplace", "biz_disco_feed", "profile_feed"]
 SQUARE_RULE_INSTAGRAM = ["stream", "explore_home", "profile_feed"]
