@@ -343,12 +343,22 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
-      "next_step": "Smart Bidding/dev expor timestamp confiável; ativar prompt no próximo restart seguro externo; então validar campanha ativa em dry-run antes de confiar no write.",
-      "objective": "Hardening completo da regra Eggbev LEADS > 5000 e atualização da thread de Regras.",
+      "next_step": "Smart Bidding/dev expor timestamp confiável; ativar prompt no próximo restart seguro externo; validar campanha ativa em dry-run.",
+      "objective": "Baseline aceito do guardrail Eggbev LEADS > 5000.",
       "source": "discord:thread:1543312825890381865",
-      "state": "concluído: freshness fail-closed, alertas visíveis, get readback discord, fallback, gate 08/20 et, auditoria auto_reactivate, prompt/rota, scheduler tick confirmado, 281 testes, publicação 3/3 readbacks.",
+      "state": "nicolas confirmou ok e solicitou salvar em 29/08/2026 20:23 et; contrato e audit registram aceite do hardening atual.",
       "thread_id": "1543312825890381865",
-      "updated_at": "2026-08-30T00:14:31+00:00"
+      "updated_at": "2026-08-30T00:24:04+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
+      "next_step": "Aguardar autorização específica para corrigir em sequência: roteamento/prompts, flags do contrato, decisão única de naming/budget da clonagem, conclusão do onboarding e testes v3, timestamp Smart Bidding, placements/mídia da criação e registry. Antes de qualquer write, reler runtime e preservar mudanças paralelas.",
+      "objective": "Preservar a auditoria completa das regras e da configuração Eggbev US-CC-EN, distinguindo regras ativas, estado runtime e inconsistências sem promover hipóteses a política.",
+      "source": "discord:thread:1541578622106865815; canonical-rules-thread:1543280854024060999; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; engine:data/ares/meta-ads/engine-v3/config.json; runtime:/root/.hermes/profiles/ares/config.yaml; tests:tests/test_eggbev_clone_v3.py,tests/test_eggbev_roas_automation.py",
+      "state": "auditoria aceita por nicolas e salva como checkpoint operacional. a thread atual é histórica e a rota canônica de regras é 1543280854024060999. achados pendentes: prompts específicos ausentes em regras, corte/roas e clonar; clonagem v3 parcial com dois testes falhando, conta ainda não onboardada e clone_page_switch ausente do config ativo; conflito dup versus copy c{fonte} e budget selecionado versus usd45; flags globais de write/activation contradizem writes controlados por módulo; ciclo roas fail-closed por freshness smart bidding não verificável com zero writes; criação bloqueada por runner, placements, onboarding e mídia; registry ainda descreve quatro threads embora existam seis; alterações não relacionadas permanecem separadas. nenhuma regra, campanha, budget, credencial ou script foi alterado por esta auditoria.",
+      "thread_id": "1541578622106865815",
+      "updated_at": "2026-08-30T00:23:46+00:00"
     },
     {
       "agent": "ares",
@@ -1432,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:14:53+00:00"
+  "updated_at": "2026-08-30T00:24:04+00:00"
 }

@@ -160,6 +160,38 @@
           "audit": "data/ares/meta-ads/audit/eggbev/creation-thread-correction-20260829T180446-0400.json"
         }
       },
+      "campaign_cloning": {
+        "thread_id": "1543333373945053184",
+        "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
+        "scope": "on-demand campaign duplication only; creation from zero remains in thread 1541578556037927053",
+        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-campaign-engine-v3"],
+        "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "canonical_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+        "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
+        "configuration_report_script": "scripts/ares-eggbev-clone-config-report.py",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+        "generic_duplication_request_means": "start the short missing-fields intake for mode, number of duplicates and manager-selected budget; ask mode-specific Page/UTM/JSON or new-media fields only when applicable",
+        "defaults": {
+          "naming": "original base name plus next free DUPnn",
+          "status": "ACTIVE",
+          "start_time": "next_day_00:00_America/New_York"
+        },
+        "mandatory_report_sections": [
+          "source campaign or campaigns",
+          "duplication mode",
+          "duplicate count and DUPnn names",
+          "manager-selected budget and financial write gate",
+          "preserved versus changed fields",
+          "ACTIVE next-day 00:00 ET delivery",
+          "manifest/preflight/readback readiness"
+        ],
+        "forbidden_default_report_topics": [
+          "global model/provider/OAuth/tools configuration",
+          "creation from zero",
+          "ROAS, Daily or lead-guardrail configuration",
+          "stale campaign performance snapshots"
+        ]
+      },
       "daily_reporting": {
         "thread_id": "1541578596253175858",
         "thread_name": "Eggbev-US-CC-EN Diario",
@@ -602,6 +634,75 @@
       "implemented_at_et": "2026-08-29T15:37:33-04:00",
       "regression_tested": true
     },
+    "reporting": {
+      "status": "hybrid_v4_verified_live_read_only_economic_routes_no_decision_change",
+      "requested_by": "Nicolas Holanda",
+      "requested_at_et": "2026-08-29",
+      "purpose": "improve title hierarchy, mobile readability, desktop consolidation and decision context for every Corte e ROAS cycle",
+      "title": "large Discord heading with cycle state emoji, Eggbev US-CC-EN, date, ET time, phase, mode and threshold",
+      "layout": [
+        "executive summary with campaign/ad/action counts and LEADS volume",
+        "one full-name vertical card per campaign for mobile",
+        "paginated Meta decision table for desktop",
+        "paginated Smart Bidding/monetization table for desktop",
+        "ad-level cut/reactivation list with action emojis",
+        "source, join, formula and limitation legend"
+      ],
+      "action_emojis": {
+        "cut": "🛑",
+        "reactivate": "♻️",
+        "scale_recommendation": "🚀",
+        "keep": "✅",
+        "observe_or_unreconciled": "👁️",
+        "source_or_write_gate_blocked": "⚠️"
+      },
+      "per_campaign_metrics": [
+        "full campaign name",
+        "status",
+        "UTM",
+        "Budget USD",
+        "Amount spent USD",
+        "messaging_conversation_started_7d",
+        "Cost per messaging conversation started",
+        "CTR",
+        "Meta Purchase ROAS",
+        "Meta CPM",
+        "Smart Bidding LEADS",
+        "report-only real ROI",
+        "report-only estimated ROI",
+        "report-only block CPM",
+        "report-only RPS",
+        "LEADS join status",
+        "economic join status"
+      ],
+      "source_routes": {
+        "leads": "Smart Bidding /report/messenger plus /campaigns/Messenger Pages; exact UTM_CAMPAIGN and FB_PAGE_ID; remains N/D when the Messenger freshness timestamp is absent or stale",
+        "economics_actual": "Smart Bidding /report/performance_per_campaigns filtered by exact CUSTOMER_ID act_1034081997659047, DOMAIN eggbev, requested DATE, exact CAMPAIGN_ID and exact UTM_ADGROUP; currency USD",
+        "economics_estimated": "Smart Bidding /estimated/revenue/utm_adgroup joined only after the exact account campaign+UTM performance row exists and the UTM is unique inside the target account",
+        "economics_freshness": "Smart Bidding /estimated/delay; currentFillTime required and totalMinutes must be <= 120"
+      },
+      "report_only_formulas": {
+        "real_roi_percent": "(NET_REVENUE - INVESTIMENT) * 100 / INVESTIMENT; N/D when investment <= 0",
+        "estimated_roi_percent": "(estimatedRevenue - INVESTIMENT) * 100 / INVESTIMENT; N/D when estimate is missing/ambiguous or investment <= 0",
+        "rps_usd": "NET_REVENUE * 1000 / SESSIONS; N/D when sessions <= 0",
+        "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
+      },
+      "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
+      "pagination": "no silent campaign limit; tables repeat headers every 12 rows; Discord chunks preserve complete code fences and repeat the report title with Part N/T",
+      "validation": {
+        "live_dry_run": true,
+        "live_economic_routes_http": 201,
+        "live_target_account_rows": 1,
+        "live_economic_freshness_ready": true,
+        "live_economic_delay_minutes": 81,
+        "live_meta_writes": 0,
+        "live_discord_posts": 0,
+        "high_volume_fixture_campaigns": 25,
+        "unit_tests_passed": 63,
+        "py_compile": "passed",
+        "git_diff_check": "passed"
+      }
+    },
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-roas-cycle.py",
       "thread_id": "1541578606076231750",
@@ -758,6 +859,17 @@
   "page_lead_guardrail": {
     "policy_approved": true,
     "status": "active_scheduled_tick_confirmed",
+    "manager_confirmation": {
+      "confirmed_by": "Nicolas Holanda",
+      "confirmed_by_discord_id": "1055570806945620030",
+      "confirmed_at_et": "2026-08-29T20:23:23-04:00",
+      "source": "discord:thread:1543312825890381865",
+      "decision": "save the current page-lead hardening and configuration as the accepted operational baseline",
+      "remaining_external_dependencies_preserved": [
+        "Smart Bidding must expose a verifiable update timestamp",
+        "the exact thread prompt activates on the next safe external gateway restart"
+      ]
+    },
     "authorized_by": "Nicolas",
     "authorized_by_discord_id": "1055570806945620030",
     "authorized_at_et": "2026-08-29T13:21:16-04:00",

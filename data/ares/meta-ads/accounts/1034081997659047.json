@@ -47,16 +47,21 @@
           "technical_canary_status": "PAUSED until separate activation approval",
           "write_enabled": false,
           "blocked_reasons": [
-            "Eggbev account is not registered in Campaign Engine v3",
             "Eggbev media is not pre-staged in the v3 media registry",
             "the exact approved manual placements payload is not materialized in the canonical operation contract"
           ]
         },
         "campaign_cloning": {
           "contract_modes": ["pure_clone", "clone_prestaged", "clone_page_switch"],
-          "engine_account_registered": false,
-          "clone_page_switch_engine_supported": false,
-          "write_enabled": false
+          "engine_account_registered": true,
+          "engine_release_version": "3.3.0",
+          "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+          "clone_page_switch_engine_supported": true,
+          "validate_plan_enabled": true,
+          "write_enabled": true,
+          "write_gate": "live source preflight, prevalidated manifest, final summary, explicit per-request OK, current Rodolfo/Geizian financial gate and --confirm-execute",
+          "default_delivery": "ACTIVE at next-day 00:00 America/New_York",
+          "naming": "preserve original base and append the next free DUPnn"
         },
         "roas_cycle": {
           "runner_built": true,

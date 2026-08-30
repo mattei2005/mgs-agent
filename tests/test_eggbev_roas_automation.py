@@ -263,6 +263,16 @@ class ReportingTests(unittest.TestCase):
             }],
             'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One'}]},
             'freshness': {'ready': True, 'latest_at_et': '2026-08-29T20:00:00-04:00'},
+            'economic_ready': True,
+            'economic_performance_rows': [{
+                'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_12345', 'INVESTIMENT': 10,
+                'NET_REVENUE': 15, 'REVENUE_ESTIMATED': 0, 'SESSIONS': 30,
+                'GAM_IMPRESSIONS': 50,
+            }],
+            'economic_estimated': {'grouped': [{
+                'utm_adgroup': 'pg_12345', 'estimatedRevenue': 20, 'confidence': .95,
+            }]},
+            'economic_freshness': {'ready': True, 'age_minutes': 45},
         }
         plan = {
             'decisions': [{
@@ -281,9 +291,35 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(row['cpm'], 12)
         self.assertEqual(row['ctr'], 2)
         self.assertEqual(row['rps'], 500)
-        self.assertIsNone(row['roi_real'])
-        self.assertIsNone(row['roi_estimated'])
-        self.assertIsNone(row['block_cpm'])
+        self.assertEqual(row['roi_real'], 50)
+        self.assertEqual(row['roi_estimated'], 100)
+        self.assertEqual(row['block_cpm'], 300)
+        self.assertEqual(row['economic_join_status'], 'matched')
+
+    def test_economic_estimate_fails_closed_when_utm_maps_to_multiple_campaigns(self):
+        bundle = {
+            'economic_ready': True,
+            'economic_performance_rows': [
+                {'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_1', 'INVESTIMENT': 10, 'NET_REVENUE': 15, 'SESSIONS': 30, 'GAM_IMPRESSIONS': 50},
+                {'CAMPAIGN_ID': 'c2', 'UTM_ADGROUP': 'pg_1', 'INVESTIMENT': 20, 'NET_REVENUE': 15, 'SESSIONS': 30, 'GAM_IMPRESSIONS': 50},
+            ],
+            'economic_estimated': {'grouped': [{'utm_adgroup': 'pg_1', 'estimatedRevenue': 99}]},
+            'economic_freshness': {'ready': True, 'age_minutes': 20},
+        }
+        result = cycle.aggregate_economic_reporting(bundle)
+        first = result['by_campaign_utm'][('c1', 'pg_1')]
+        self.assertEqual(first['roi_real'], 50)
+        self.assertIsNone(first['roi_estimated'])
+        self.assertEqual(first['estimated_join_status'], 'ambiguous_utm')
+
+    def test_economic_reporting_stays_unavailable_when_freshness_gate_is_closed(self):
+        result = cycle.aggregate_economic_reporting({
+            'economic_ready': False,
+            'economic_reason': 'economic_freshness_unverifiable_or_stale',
+            'economic_performance_rows': [{'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_1'}],
+        })
+        self.assertFalse(result['ready'])
+        self.assertEqual(result['by_campaign_utm'], {})
 
     def test_roas_cycle_renderer_has_organized_title_cards_and_two_tables(self):
         campaign = {
@@ -636,6 +672,20 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['post_enabled'])
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
+
+    def test_roas_reporting_v4_has_requested_metrics_and_does_not_change_decisions(self):
+        reporting_policy = self.operation['roas_cycle_policy']['reporting']
+        fields = reporting_policy['per_campaign_metrics']
+        for expected in (
+            'Smart Bidding LEADS', 'report-only real ROI', 'report-only estimated ROI',
+            'report-only block CPM', 'report-only RPS', 'CTR', 'Meta Purchase ROAS',
+            'Meta CPM', 'Cost per messaging conversation started',
+        ):
+            self.assertIn(expected, fields)
+        self.assertIn('Meta Purchase ROAS remains', reporting_policy['decision_separation'])
+        self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
+        self.assertIn('Part N/T', reporting_policy['pagination'])
+        self.assertFalse(self.operation['roas_cycle_policy']['runtime']['budget_write_enabled'])
 
     def test_native_rule_disable_is_future_only(self):
         transition = self.operation['roas_cycle_policy']['native_rule_transition']

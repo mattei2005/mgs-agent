@@ -581,6 +581,11 @@ def main() -> int:
                     'freshness': sb_bundle.get('freshness'),
                     'target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'available_account_names': sb_bundle.get('available_account_names'),
+                    'economic_ready': sb_bundle.get('economic_ready'),
+                    'economic_reason': sb_bundle.get('economic_reason'),
+                    'economic_freshness': sb_bundle.get('economic_freshness'),
+                    'economic_target_rows': len(sb_bundle.get('economic_performance_rows') or []),
+                    'economic_http_statuses': sb_bundle.get('economic_http_statuses'),
                 },
                 'source_gate': gate, 'plan': plan, 'reporting': campaign_reporting,
             })
