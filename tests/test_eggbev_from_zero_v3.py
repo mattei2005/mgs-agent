@@ -139,6 +139,12 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         with self.assertRaisesRegex(ManifestError, "naming policy"):
             validate_account_policy(Manifest.from_dict(payload), CONFIG)
 
+    def test_policy_rejects_superseded_para_copy_suffix(self) -> None:
+        payload = self._build(campaigns=1)
+        payload["campaigns"][0]["name"] += " para Amy - Copy"
+        with self.assertRaisesRegex(ManifestError, "naming policy"):
+            validate_account_policy(Manifest.from_dict(payload), CONFIG)
+
     def test_policy_rejects_advantage_placements(self) -> None:
         payload = self._build(campaigns=1)
         payload["campaigns"][0]["adset_create"]["targeting"]["publisher_platforms"].append("audience_network")

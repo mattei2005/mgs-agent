@@ -73,6 +73,22 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         with self.assertRaises(RUNNER.CreationBlocked):
             RUNNER.automatic_ad_names([{"asset_id": "asset-1"}], 3)
 
+    def test_immediate_start_is_future_and_does_not_change_default_midnight(self):
+        immediate = RUNNER.datetime.fromisoformat(RUNNER.immediate_execute_start())
+        default = RUNNER.datetime.fromisoformat(RUNNER.next_midnight())
+        now = RUNNER.datetime.now(RUNNER.ET)
+        self.assertGreater(immediate, now)
+        self.assertLessEqual((immediate - now).total_seconds(), 301)
+        self.assertEqual((default.hour, default.minute, default.second), (0, 0, 0))
+
+    def test_messenger_json_readback_parser_ignores_key_order_and_rejects_invalid(self):
+        self.assertEqual(
+            RUNNER.parsed_json_object('{"b":2,"a":1}'),
+            RUNNER.parsed_json_object({"a": 1, "b": 2}),
+        )
+        with self.assertRaises(RUNNER.CreationBlocked):
+            RUNNER.parsed_json_object("not-json")
+
     def test_execute_requires_both_human_and_financial_gates_before_state_read(self):
         args = argparse.Namespace(
             request_id="not-created",

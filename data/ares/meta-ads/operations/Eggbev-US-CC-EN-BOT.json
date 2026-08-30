@@ -495,12 +495,14 @@
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_materialized_for_engine_v3",
     "latest_manager_review": {
-      "reviewed_at_et": "2026-08-30T01:40:36-04:00",
+      "reviewed_at_et": "2026-08-30T07:29:34-04:00",
       "reviewed_by": "Nicolas Holanda",
       "source_thread": "discord:thread:1541578556037927053",
-      "decision": "standardize the natural creation call so criar N campanha pagina X defaults to 1x1x3, CC_US_EN, automatic ad names and one budget question",
-      "review_scope": "creation-thread intake and deterministic response; financial gate removal request checked against permissions-matrix",
-      "authority_effect": "Nicolas manages campaign requests; the Rodolfo/Geizian budget-write gate remains institutional and is checked only at final execute",
+      "supersedes_reviewed_at_et": "2026-08-30T01:40:36-04:00",
+      "decision": "standardize from-zero names as [page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX, advancing C001/C002/C003 in request order; remove the para [first name] - Copy suffix",
+      "start_override": "only request eggbev-pg-5024-20260830-nicolas-01 launches immediately after execute with a Meta-safe buffer; future requests retain next-day 00:00 America/New_York unless explicitly overridden",
+      "postcreation_json_check": "after every future Eggbev creation, GET every creative and confirm Page, url_tags and parsed asset_feed_spec.additional_data.page_welcome_message match the approved manifest before postprocess completes",
+      "authority_effect": "Nicolas approved the naming, one-time start override and readback standard; the Rodolfo/Geizian budget-write gate remains institutional and is checked only at final execute",
       "creation_write_enabled": true,
       "budget_write_enabled": false
     },
@@ -530,7 +532,9 @@
       "source_folder_aliases": {"cc en us": "CC_US_EN", "CC_US_EN": "CC_US_EN"},
       "campaigns_with_n_creatives": "N campaigns, each with one ad set and N requested ads; creatives are unique across the whole batch unless Nicolas explicitly says reuse",
       "example_3_campaigns_3_creatives": "3 campaigns x 1 ad set x 3 ads = 9 unique creatives from CC_US_EN",
+      "campaign_name_template": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX; allocate C001, C002, C003... in request order and never append para [first name] - Copy",
       "start_default": "next day at 00:00 America/New_York; apply without asking again when the request gives no override",
+      "one_time_start_override": "eggbev-pg-5024-20260830-nicolas-01 only: refresh start_time at execute to current America/New_York time plus a five-minute Meta-safe buffer",
       "status_default": "ACTIVE with future start_time after final summary approval",
       "creative_count_default": 3,
       "source_folder_default": "CC_US_EN",
@@ -584,6 +588,13 @@
       "performance_booster_enabled": false,
       "ctm_deprecate_quick_replies_enabled": false,
       "change_gate": "show full new version and obtain Nicolas approval"
+    },
+    "postcreation_readback": {
+      "required_for_every_creation": true,
+      "scope": "every created ad creative",
+      "graph_fields": ["id", "name", "status", "object_story_spec", "asset_feed_spec", "url_tags"],
+      "checks": ["object_story_spec.page_id equals the approved Page", "url_tags equals the approved pg_XXXXX UTM", "parsed asset_feed_spec.additional_data.page_welcome_message equals the approved Messenger JSON"],
+      "failure_behavior": "mark POSTPROCESS_PENDING, preserve IDs/request, do not move assets to 02_TESTING, re-read before any corrective write and never replay campaign creation"
     }
   },
   "campaign_cloning_policy": {

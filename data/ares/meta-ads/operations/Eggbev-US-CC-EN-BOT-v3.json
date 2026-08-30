@@ -104,8 +104,10 @@
   "delivery_policy": {
     "status": "ACTIVE",
     "start_time": "next_day_00:00_America/New_York",
+    "one_time_immediate_override": "eggbev-pg-5024-20260830-nicolas-01 only; refresh at execute to current ET plus five-minute Meta-safe buffer",
     "canary_exception": "PAUSED only when the request explicitly says technical canary and separately approves later activation",
-    "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success"
+    "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success",
+    "messenger_json_readback": "after every creation, GET every creative and confirm Page, url_tags and parsed asset_feed_spec.additional_data.page_welcome_message match the sealed manifest before postprocess completes"
   },
   "intake_questions": [
     "Qual campanha ou campanhas você quer duplicar?",
