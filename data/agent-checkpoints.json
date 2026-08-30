@@ -473,12 +473,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Acompanhar ciclos automáticos até B001-4 16/16, B004-4 12/12, B009-3 17/17 e B011-2 17/17; validar safe_for_sheet=true por app. Manter o cron compartilhado ativo e alertas reais sem pausa.",
-      "objective": "Manter os apps Meta reconciliados e monitorados; apps tradicionais via roles e B013-3 via DTR/Graph.",
-      "source": "Discord thread 1543008173294747729; messages 1543008173294747729, 1543017636894343219, 1543020500979163196 and Rodolfo mid-turn aggregate verification; Meta Graph live; 1Password canonical items; Sheet Migracao 22/06; data/meta-app-registry.json.",
-      "state": "b011-2 substituiu b011 e os cinco replacements informados por rodolfo (b001-4, b002-3, b004-4, b009-3 e b011-2) foram relidos no 1password com título/app_name exatos e todos os campos obrigatórios presentes. o ciclo completo carregou os itens exatos, passou os quatro checks graph nos cinco, terminou com zero erros e alertas reais ativos. b002-3 está 10/10 safe_for_sheet=true; os demais seguem fail-closed enquanto aguardam roles.",
-      "thread_id": "1543008173294747729",
-      "updated_at": "2026-08-28T22:18:41+00:00"
+      "next_step": "Conter as duas rotas, atualizar script/registry/estado para B013-4, executar dry-run completo, então reativar e validar ciclo real.",
+      "objective": "Concluir o cutover B013-3 para B013-4, manter B013 na rota dedicada DTR/Graph e reativar o cron após validação real.",
+      "source": "Discord thread 1543419014657605735; message 1543419014657605735; 1Password item BOT B013-4 Token - Dayanna Regis; Meta Graph live; Sheet Migracao 22/06; cron 498fb0d95e10.",
+      "state": "rodolfo confirmou b013-3 substituído por b013-4 e credenciais atualizadas no 1password. cron dedicado 498fb0d95e10 permanece pausado. preflight b013-4: item exato e campos presentes; app metadata, /me e debug_token http 200 com identidade válida; /roles http 200 com app token e 4 roles; sheet no app possui 31 linhas b013-4 e zero b013-3. nenhuma mudança produtiva do cutover aplicada ainda.",
+      "thread_id": "1543419014657605735",
+      "updated_at": "2026-08-30T00:39:10+00:00"
     },
     {
       "agent": "zeus",
@@ -1442,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:37:57+00:00"
+  "updated_at": "2026-08-30T00:39:10+00:00"
 }

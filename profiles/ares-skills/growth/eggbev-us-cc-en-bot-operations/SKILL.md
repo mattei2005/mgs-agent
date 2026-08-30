@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.14.2-draft
+version: 0.15.0-draft
 author: Ares
 license: internal
 metadata:
@@ -137,8 +137,8 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
-2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
-3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
+2. Engine v3: conta Eggbev cadastrada na release 3.3.0; `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam validate/plan. Permanecem dependentes de mídia pre-stageada somente os pedidos `clone_prestaged` com assets novos.
+3. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 5. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
@@ -159,8 +159,7 @@ Ad set   AdG1 | Messenger | next day 00:00 America/New_York | ongoing | US 18+ A
 Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
 Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
 Payer    DIGITAL TRUST; sempre nesta operação
-Budget   variável; confirmar por campanha
-Exceção  clone_page_switch = USD 45, somente após o resumo final daquela solicitação ser aprovado
+Budget   variável; gestor autorizado escolhe e confirma por campanha; write financeiro mantém gate Rodolfo/Geizian
 ```
 
 Placements são `MANUAL_ONLY`, mas a lista exata de posições ainda não está materializada no contrato canônico. Nunca converter para Advantage+ Placements, copiar a lista de outra operação ou montar manifest/write sem importar e validar o payload aprovado por readback. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive. Se faltar nome individual do ad, página, budget, estrutura, criativo ou copy, perguntar apenas o campo ausente.
@@ -254,11 +253,17 @@ Thread fixa: `Eggbev-US-CC-EN Clonar Campanhas` (`1543333373945053184`). Criada 
 
 Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Criar Campanhas`. Executor obrigatório: `meta-campaign-engine-v3`. Modos não intercambiáveis:
 
-- `pure_clone`: preserva estrutura, público, budget, copy e mídia; reescreve próximo sequencial, naming e tracking; sufixo `COPY C{fonte}`;
-- `clone_prestaged`: preserva lineage/estrutura e usa criativos novos aprovados, reconciliados e pre-stageados;
-- `clone_page_switch`: duplica integralmente a fonte, preservando estrutura, público, placements, estratégia, copy e mídia, mas muda a Facebook Page para a página-alvo, reescreve próximo sequencial, nome, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página é indicada por Nicolas; quando Nicolas delegar a escolha, usar a página elegível em entrega com menor `LEADS` no Messenger Pages da Smart Bidding, após match único `UTM_CAMPAIGN + FB_PAGE_ID`. Empate, fonte stale ou mapping inválido bloqueia a escolha automática. Neste modo, budget = USD 45, início = dia seguinte 00:00 `America/New_York` e campanha/ad set/todos os ads ficam `ACTIVE` para o início aprovado.
+- `pure_clone` (**duplicação exata**): preserva estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs; mudam apenas IDs técnicos inevitáveis, budget escolhido pelo gestor, nome `DUPnn` e início/status;
+- `clone_prestaged`: preserva lineage/estrutura e usa de 1 a 5 criativos novos aprovados, reconciliados e pre-stageados;
+- `clone_page_switch`: preserva estrutura, público, placements, estratégia, copy e mídia, mas troca Facebook Page, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página é indicada por Nicolas; quando ele delegar a escolha, usar a página elegível em entrega com menor `LEADS` após match único `UTM_CAMPAIGN + FB_PAGE_ID`. Empate, fonte stale ou mapping inválido bloqueia a escolha automática.
 
-Antes do primeiro plan/write Eggbev, cadastrar a conta no v3 e validar manifest. O Engine v3 atual não aceita `clone_page_switch`; a regra está aprovada no contrato, mas a execução permanece bloqueada até uma extensão explícita do manifest/executor com testes. A thread deve receber campanha-fonte, modo, página/UTM, budget, início ET, estrutura 1×1×3 ou 1×1×5 e os campos específicos do modo. Em `clone_page_switch`, mostrar também evidência `LEADS`, Page/`pg_XXXXX`, nome final, links/UTMs, JSON Messenger integral, budget USD 45, início 00:00 ET e todos os status. Mostrar resumo final e esperar OK explícito de Nicolas; nunca publicar direto. Não existe cron de clonagem.
+Naming obrigatório: preservar o nome-base integral e adicionar o próximo número livre `DUP01`, `DUP02`, `DUP03`… Se a fonte já terminar em `DUPnn`, remover apenas esse sufixo para recuperar o mesmo nome-base e usar o próximo número livre após scan das campanhas não deletadas.
+
+Gestores autorizados escolhem e confirmam o budget diário de cada duplicação; essa seleção é input obrigatório, mas não amplia autoridade financeira. O write de budget permanece sujeito ao gate vigente Rodolfo/Geizian. Default de produção: campanha, ad set e todos os ads `ACTIVE`, com início no dia seguinte às 00:00 `America/New_York`; `PAUSED` somente para canário técnico explicitamente pedido.
+
+A conta `1034081997659047` está cadastrada no Engine v3 release 3.3.0. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
+
+Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, 00:00 ET, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
 
 ## Auditoria pré-simulação — 2026-08-29 (histórica)
 
@@ -303,6 +308,8 @@ Post/Cron Diário         false
 ```
 
 ### Renderer Corte e ROAS v4
+
+Aceite explícito: Nicolas Holanda confirmou em `2026-08-29T20:36:20-04:00`, na thread `1541578606076231750`, que o renderer v4 deve ser salvo como baseline atual. O aceite cobre organização visual, métricas solicitadas, joins, fórmulas report-only rotuladas e paginação; não amplia autoridade Meta ou de budget.
 
 Cada ciclo usa título grande com emoji de estado, data/hora ET, fase, modo e threshold. O corpo combina resumo executivo, um card vertical por campanha, tabela Meta/decisão, tabela Smart Bidding/monetização, lista de cortes/reativações por anúncio e legenda de fontes/fórmulas. Emojis: `🛑` corte, `♻️` reativação, `🚀` escala recomendada, `✅` manter, `👁️` observar e `⚠️` gate/fonte bloqueada.
 

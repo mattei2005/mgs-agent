@@ -10886,6 +10886,57 @@
       "purpose": "Track the fail-closed onboarding of CREATIVE_CUT_24H for CPV account 05 without activating campaigns, writes or schedules.",
       "status": "threads_rules_and_member_sync_verified_onboarding_pending",
       "updated_at": "2026-08-28T13:58:08Z"
+    },
+    {
+      "id": "ares-eggbev-campaign-cloning-engine-v3-3-0",
+      "agent": "ares",
+      "type": "runtime_release",
+      "owner": "Nicolas Holanda",
+      "authorization_source": "discord:thread:1543333373945053184",
+      "release_version": "3.3.0",
+      "operation": "Eggbev-US-CC-EN-BOT",
+      "account_id": "1034081997659047",
+      "account_alias": "Eggbev-US-CC-EN-01-G006",
+      "scope": "Onboard Eggbev in Campaign Engine v3; support pure_clone, clone_prestaged with 1-5 ads and clone_page_switch; enforce DUPnn naming, explicit manager-selected budget, ACTIVE status and 00:00 America/New_York start; install a dedicated thread prompt and deterministic configuration report.",
+      "artifacts": {
+        "engine_config": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "size_bytes": 8610,
+          "sha256": "f50a553c97c0e0361f2cd5f6419f10c0209c8289503881d5c7d599f8e44a1815"
+        },
+        "operation_v3": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+          "size_bytes": 5146,
+          "sha256": "eedefaf821ce6b000cdebab02edf2d1e16a6285932926bea3a2d2fd564dd2d1f"
+        },
+        "thread_prompt": {
+          "path": "/root/mgs-agent/data/ares/discord/thread-prompts/1543333373945053184.txt",
+          "size_bytes": 3173,
+          "sha256": "eada9053ceecffa35fc8079168e80dd538567db023dba6c4d6fd0825c3f1411e"
+        },
+        "configuration_report": {
+          "path": "/root/mgs-agent/scripts/ares-eggbev-clone-config-report.py",
+          "size_bytes": 4388,
+          "sha256": "0cfe5ad74a952b302b9928b9b388aa4041bb9f0554a6ea08bd27d4fb04c37a71"
+        }
+      },
+      "validation": {
+        "pytest": "62 passed",
+        "py_compile": "passed",
+        "configuration_report": "status ok; 12/12 checks true",
+        "pure_clone_validate_plan": "VALID and DRY_RUN_OK; zero network calls; zero writes",
+        "clone_page_switch_validate_plan": "VALID and DRY_RUN_OK; zero network calls; zero writes",
+        "hermes_prompt_readback": "resolved value equals canonical prompt after normalizing the CLI print newline"
+      },
+      "safety": {
+        "meta_writes": 0,
+        "crons_created": 0,
+        "gateway_restart": false,
+        "budget_selection": "campaign managers select and confirm",
+        "budget_write_gate": "current Rodolfo/Geizian financial authority remains mandatory"
+      },
+      "status": "validate_plan_ready_write_per_request_gated_live_canary_pending",
+      "updated_at": "2026-08-29T20:39:38-04:00"
     }
   ],
   "profile_skill_references": [

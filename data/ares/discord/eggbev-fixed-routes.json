@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "parent_channel_id": "1539422731727147079",
+  "account_alias": "Eggbev-US-CC-EN-01-G006",
+  "preservation_policy": {
+    "never_create_replacement_when_id_is_recoverable": true,
+    "never_delete": true,
+    "archive_preserves_history": true,
+    "auto_archive_duration_minutes": 10080,
+    "manual_title_protection": true,
+    "required_member_ids": [
+      "1055570806945620030",
+      "1496296175014252634",
+      "344196393512075265"
+    ]
+  },
+  "routes": {
+    "rules": {
+      "thread_id": "1543280854024060999",
+      "canonical_label": "Eggbev-US-CC-EN Regras",
+      "current_manual_title_allowed": "Vamos Uma Atualização Massiva nos - Nicolas",
+      "prompt_file": "data/ares/discord/thread-prompts/1543280854024060999.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:rules:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — REGRAS**\n`EGGBEV_ROUTE_CANONICAL:rules:v1`\n\n**Conta:** Eggbev-US-CC-EN-01-G006 • BOT/Messenger • USD • America/New_York.\n**Escopo:** contrato geral, decisões, precedência e índices das seis rotas. Execução operacional deve seguir Limite de Leads, Clonar Campanhas, Corte e ROAS, Diário ou Criar Campanhas.\n**Persistência:** esta thread é a rota fixa; arquivamento automático preserva histórico e não autoriza criar substituta. O título manual atual é preservado.\n**Gates:** esta thread, mensagens e pins não autorizam campanha, budget, cron ou publicação. Estado vivo vem de API/runtime; contrato canônico define regra e autoridade."
+    },
+    "page_lead_guardrail": {
+      "thread_id": "1543312825890381865",
+      "canonical_label": "Eggbev-US-CC-EN Limite de Leads",
+      "prompt_file": "data/ares/discord/thread-prompts/1543312825890381865.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:page_lead_guardrail:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — LIMITE DE LEADS**\n`EGGBEV_ROUTE_CANONICAL:page_lead_guardrail:v1`\n\n**Escopo exclusivo:** guardrail por página. `LEADS > 5.000` pausa a campanha após match único `UTM_CAMPAIGN + FB_PAGE_ID`; exatamente 5.000 mantém. Sem reativação automática.\n**Freshness:** timestamp Smart Bidding verificável, máximo 2h; ausente/stale = zero write + alerta.\n**Runtime:** checks 08:00 e 20:00 ET; silencioso sem ação/erro; sucesso de pausa e postagem exige GET/readback.\n**Persistência:** rota fixa; não criar substituta. Não misturar com ROAS, Diário, criação ou clone."
+    },
+    "campaign_cloning": {
+      "thread_id": "1543333373945053184",
+      "canonical_label": "Eggbev-US-CC-EN Clonar Campanhas",
+      "prompt_file": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:campaign_cloning:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — CLONAR CAMPANHAS**\n`EGGBEV_ROUTE_CANONICAL:campaign_cloning:v1`\n\n**Modos:** duplicação exata, com criativos novos ou troca de página. Engine v3.3.0 onboarded para validate/plan.\n**Default de produção:** `ACTIVE`, próximo dia 00:00 America/New_York; budget exato escolhido por gestor; naming `DUPnn`.\n**Gates:** preflight Meta vivo, manifest prevalidado, resumo final, OK explícito, autoridade financeira vigente, execução e readback consolidado. Nunca publicar direto; não há cron de clone.\n**Persistência:** rota fixa; criação do zero permanece em Criar Campanhas."
+    },
+    "roas_cycle": {
+      "thread_id": "1541578606076231750",
+      "canonical_label": "Eggbev-US-CC-EN Corte e ROAS",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578606076231750.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:roas_cycle:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — CORTE E ROAS**\n`EGGBEV_ROUTE_CANONICAL:roas_cycle:v1`\n\n**Decisão:** Meta Purchase ROAS no anúncio; threshold diário 0,40; exatamente igual mantém. Fase 1 usa Spend > USD 2; Fase 2 não usa gate de gasto. Zero anúncios ativos permite pausar a campanha; nunca pausar ad set.\n**Recovery:** só reativa objetos pausados pelo Ares; pausa por LEADS/manual é terminal para este runner.\n**Escala:** ROAS de campanha > 0,50 recomenda +10%; budget write continua bloqueado.\n**Runtime:** ciclos automáticos e posts habilitados em fail-closed; fonte/freshness inválida = zero write + alerta. Rota fixa; não misturar com Diário."
+    },
+    "daily_reporting": {
+      "thread_id": "1541578596253175858",
+      "canonical_label": "Eggbev-US-CC-EN Diario",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578596253175858.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:daily_reporting:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — DIÁRIO**\n`EGGBEV_ROUTE_CANONICAL:daily_reporting:v1`\n\n**Escopo exclusivo:** reporting read-only e sob demanda; nenhuma criação, clone, corte, reativação, escala ou regra Meta.\n**Cobertura:** campanhas `ACTIVE` mesmo sem insight + campanhas com insight no período; nomes completos, sem limite silencioso. Layout móvel + tabela desktop unificada.\n**Fontes:** Meta live e Smart Bidding reconciliada por UTM/Page/freshness. Métrica sem fonte válida aparece `N/D`, nunca zero inventado.\n**Runtime:** runner disponível; post automático=false; cron=false; writes=false. Rota fixa; horários planejados não autorizam automação."
+    },
+    "campaign_creation": {
+      "thread_id": "1541578556037927053",
+      "canonical_label": "Eggbev-US-CC-EN Criar Campanhas",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578556037927053.txt",
+      "pin_marker": "EGGBEV_ROUTE_CANONICAL:campaign_creation:v1",
+      "pin_content": "🔒 **ROTA CANÔNICA — CRIAR CAMPANHAS**\n`EGGBEV_ROUTE_CANONICAL:campaign_creation:v1`\n\n**Escopo exclusivo:** criação do zero, conta Eggbev-US-CC-EN-01-G006. Default aprovado: produção `ACTIVE` com início no próximo dia 00:00 America/New_York.\n**Obrigatórios:** página/pg, 1×1×3 ou 1×1×5, budget, criativos novos reconciliados, copy completa, tracking, placements manuais e JSON Messenger.\n**Gates:** preflight, manifest, validate/plan/dry-run, resumo final e OK explícito antes de qualquer publicação; sucesso só com GET/readback.\n**Readiness atual:** intake funciona, mas write está bloqueado por runner de criação ausente, placements exatos não materializados e mídia Eggbev ainda não pre-stageada. Rota fixa; clonagem usa a thread própria."
+    }
+  }
+}
