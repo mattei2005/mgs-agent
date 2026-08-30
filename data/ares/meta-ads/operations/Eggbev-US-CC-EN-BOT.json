@@ -750,6 +750,22 @@
         "decision": "ROAS below 0.40 is below the operational threshold, not negative; negative applies only when ROI is below 0 percent",
         "scope": "Corte e ROAS presentation only; Page ID remains available for technical join/audit; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates"
       },
+      "mobile_refinement": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T07:09:51-04:00",
+        "source": "discord:thread:1543280854024060999",
+        "decision": "remove the recurring explanatory legend and use a short pleasant mobile-first opening",
+        "scope": "report presentation only; no change to ROAS decisions, sources, schedules, writes or budget authority",
+        "validation": {
+          "scoped_tests": "68/68 passed",
+          "live_dry_run": true,
+          "live_report_campaigns": 1,
+          "live_meta_writes": 0,
+          "legend_present": false,
+          "summary_lines_before_dashboard": 4
+        }
+      },
       "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
