@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CLONING-V3-HARDENING-20260829",
-      "next_step": "Atualizar contrato e testes, implementar schema/planner/recovery clone_page_switch, cadastrar a conta, instalar prompt dedicado, validar parser/plan/suítes e emitir REPORT-INFRA.",
-      "objective": "Corrigir integralmente a clonagem Eggbev: duplicação fiel, naming DUP sequencial, budget escolhido pelo gestor sob gate financeiro, início 00:00 ET, prompt dedicado, rotas atuais, onboarding e clone_page_switch no Engine v3",
-      "source": "discord:thread:1543333373945053184; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/engine-v3/config.json",
-      "state": "em implementação autorizada por nicolas; inventário concluído; alterações pré-existentes de outros módulos preservadas; nenhum write meta solicitado nesta mudança estrutural.",
+      "next_step": "Executar validações finais, reconciliar diff concorrente, emitir REPORT-INFRA e reportar readiness sem Meta write",
+      "objective": "Corrigir integralmente a clonagem Eggbev conforme pedido de Nicolas",
+      "source": "discord:thread:1543333373945053184",
+      "state": "engine v3.3.0 implementado e testado; conta cadastrada; prompt/rotas/contratos/skills/registry atualizados; falta validação final, report-infra e fechamento do checkpoint",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-30T00:14:53+00:00"
+      "updated_at": "2026-08-30T00:42:01+00:00"
     },
     {
       "agent": "ares",
@@ -1442,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:39:10+00:00"
+  "updated_at": "2026-08-30T00:42:01+00:00"
 }

@@ -973,10 +973,27 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V2-20260829",
+      "title": "Thread dedicada de clonagem Eggbev",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V2-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Thread dedicada de clonagem Eggbev",
-      "updated_at": "2026-08-29T18:58:03+00:00"
+      "title": "Thread de clonagem Eggbev com prompt e Engine v3.3.0",
+      "updated_at": "2026-08-30T00:41:54+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
@@ -1022,10 +1039,27 @@
       "kind": "procedure",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V2-20260829",
+      "title": "Clone Eggbev com alteração de página e nome",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V2-20260829",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Clone Eggbev com alteração de página e nome",
-      "updated_at": "2026-08-29T19:25:20+00:00"
+      "title": "Clone Eggbev com troca de página suportado no v3.3.0",
+      "updated_at": "2026-08-30T00:41:54+00:00"
     },
     {
       "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
@@ -1181,10 +1215,27 @@
       "kind": "decision",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V2",
+      "title": "Eggbev US-CC-EN BOT usa canal dedicado e quatro threads fixas",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V2",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev US-CC-EN BOT usa canal dedicado e quatro threads fixas",
-      "updated_at": "2026-08-24T23:17:24+00:00"
+      "title": "Eggbev US-CC-EN BOT usa canal dedicado e seis threads fixas",
+      "updated_at": "2026-08-30T00:41:54+00:00"
     },
     {
       "canonical_key": "ares.failure-recovery",
@@ -2326,5 +2377,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:41:37+00:00"
+  "updated_at": "2026-08-30T00:41:54+00:00"
 }

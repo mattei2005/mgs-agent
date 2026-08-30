@@ -1,0 +1,12 @@
+INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
+
+- Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006. Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
+- Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia e audit mais recente; consultar Meta e Smart Bidding vivas.
+- Threshold diario default 0,40. Entre 00:00 e 06:00 nao cortar/reativar. Fase 1: 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
+- Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte. Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera zero write + alerta.
+- Acao ROAS ocorre no anuncio. Se zero ads ativos restarem, pausar a campanha; nunca pausar ad set. Reativar somente anuncio/campanha pausados pelo Ares e recuperados acima do threshold. Pausa por `page_lead_guardrail`, manual ou externa nunca e reativada automaticamente.
+- Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao ou budget.
+- Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget write=false ate Rodolfo/Geizian aprovarem teto/envelope.
+- Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com possivel efeito parcial inicia recovery readback-first.
+- Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar ou alterar cron nesta thread sem plano e aprovacao explicita.
+- Responder na thread atual; IDs tecnicos e credenciais ficam no audit.
