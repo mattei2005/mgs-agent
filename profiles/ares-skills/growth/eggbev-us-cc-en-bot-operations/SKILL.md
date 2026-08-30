@@ -398,7 +398,7 @@ Por instrução direta de Nicolas em `2026-08-30`, Decisão/Identidade, Meta Ads
 
 ### Refinamento visual v14 — hierarquia exata do print CPV 13 Intraday
 
-Após Nicolas enviar o print canônico em `2026-08-30`, o renderer abandonou os cabeçalhos genéricos `Bloco/Métrica/Valor` e passou a usar uma campanha por linha, com a ordem direta `R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | ROI real | ROI est. | Leads | RPS | CPM | Ação`. As larguras são dinâmicas, há dois espaços entre colunas, um único divisor e paginação somente por overflow real, como no Intraday CPV 13. A amostra live ficou alinhada em 122 colunas visuais. ROAS permanece numérico; os sinais de ROI ficam em `R/E`. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
+Após Nicolas enviar o print canônico em `2026-08-30`, o renderer abandonou os cabeçalhos genéricos `Bloco/Métrica/Valor` e passou a usar uma campanha por linha, com a ordem direta `R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | ROI real | ROI est. | Leads | RPS | CPM | Ação`. As larguras são dinâmicas, há dois espaços entre colunas, um único divisor e paginação somente por overflow real, como no Intraday CPV 13. A amostra live ficou alinhada em 122 colunas visuais. ROAS permanece numérico; os sinais de ROI ficam em `R/E`. Nicolas aprovou este layout às `11:54 ET` e determinou mantê-lo sem alterações até um novo pedido explícito do gestor. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
