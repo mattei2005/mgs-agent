@@ -42,6 +42,8 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
             "DIGITAL TRUST",
             "ACTIVE",
             "GET/readback",
+            "pg_5024_dup01_live_validated_v1",
+            "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01",
         ]
         for value in required:
             with self.subTest(value=value):
@@ -68,6 +70,17 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         payload = operation["campaign_creation_policy"]["manual_placements_payload"]
         self.assertEqual(payload["publisher_platforms"], ["facebook", "instagram", "messenger"])
         self.assertEqual(payload["audience_network"], "forbidden")
+        self.assertNotIn("explore", payload["instagram_positions"])
+        self.assertIn("explore_home", payload["instagram_positions"])
+
+    def test_dup01_is_the_canonical_creation_model_without_media_reuse(self):
+        operation = json.loads(OP.read_text())
+        creation = operation["campaign_creation_policy"]
+        self.assertEqual(creation["latest_standardization"]["canonical_creation_model"], "pg_5024_dup01_live_validated_v1")
+        self.assertEqual(creation["copy_source_policy"]["default"], "pg_5024_dup01_live_validated_v1")
+        self.assertEqual(creation["creation_reference_policy"]["default_reference_campaign"], "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01")
+        self.assertIn("never reuse", creation["latest_standardization"]["application_scope"])
+        self.assertIn("configuração, não mídia nem IDs", self.report)
 
     def test_runtime_truth_is_explicit(self):
         self.assertIn("Runner Eggbev de criação construído: sim", self.report)
@@ -87,6 +100,9 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         prompt = config["discord"]["channel_prompts"]["1541578556037927053"]
         self.assertIn("configuracao operacional da criacao Eggbev", prompt)
         self.assertIn("ares-eggbev-creation-config-report.py", prompt)
+        self.assertIn("pg_5024_dup01_live_validated_v1", prompt)
+        self.assertIn("todas as tres headlines", prompt)
+        self.assertIn("sem `explore`", prompt)
         prompt_source = PROMPT.read_text().strip()
         self.assertTrue(prompt_source.startswith("INSTRUCAO ESPECIFICA"))
         self.assertEqual(prompt.strip(), prompt_source)

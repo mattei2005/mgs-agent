@@ -167,6 +167,8 @@
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
         "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
+        "canonical_creation_model": "pg_5024_dup01_live_validated_v1",
+        "canonical_creation_model_evidence": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
         "generic_configuration_question_means": "the operational configuration for creating Eggbev campaigns, not global Hermes/Ares model, tools, security or gateway configuration",
         "global_agent_configuration_exception": "only when the user explicitly says global Ares/Hermes configuration",
         "mandatory_report_sections": [
@@ -506,9 +508,15 @@
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_materialized_for_engine_v3",
     "latest_standardization": {
-      "reviewed_at_et": "2026-08-30T14:04:12-04:00",
+      "reviewed_at_et": "2026-08-30T18:08:07-04:00",
       "reviewed_by": "Nicolas Holanda",
       "source_thread": "discord:thread:1543280854024060999",
+      "canonical_creation_model": "pg_5024_dup01_live_validated_v1",
+      "live_reference_campaign": "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01",
+      "live_reference_readback": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
+      "application_scope": "default for future from-zero requests made by Nicolas in thread 1541578556037927053; never reuse the reference campaign media, IDs or DUP suffix",
+      "fixed_model_fields": ["Sales/CBO/Highest volume/Finance US", "AdG1", "pixel 935354115143283 + OTHER + eggbev-pv-u", "manual Facebook + Instagram + Messenger placements with explore_home and without explore or Audience Network", "Page-backed Instagram identity", "Messenger destination and approved welcome-message JSON", "empty Primary text + all three approved headlines on every ad + five-star description + APPLY_NOW", "Advantage+ creative off", "multi-advertiser ads off", "ACTIVE next-day 00:00 America/New_York after final approval"],
+      "request_variables": ["Facebook Page and pg_XXXXX", "exact daily budget", "campaign count", "three or five unique new creatives per campaign", "explicitly requested overrides"],
       "conversion_event": "use pixel Eggbev-US-CC-EN with custom event eggbev-pv-u (UI: Eggbev PV U) in every new ad set",
       "copy": {"primary_text": "", "headlines_on_every_ad": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"], "description": "⭐️⭐️⭐️⭐️⭐️", "cta": "APPLY_NOW"},
       "publication_gate": "materialize and validate the final manifest, show Nicolas the full structure, and publish only after his explicit OK",
@@ -529,7 +537,7 @@
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
     "copy_source_policy": {
-      "default": "approved_jolie_c001_reference_template",
+      "default": "pg_5024_dup01_live_validated_v1",
       "accepted_inputs": ["all four copy fields supplied in the request", "an explicitly identified and approved source campaign", "a future operation-level copy template approved by Nicolas"],
       "override_policy": "request-time explicit copy wins over the default template",
       "template": {
@@ -539,15 +547,17 @@
         "description": "⭐️⭐️⭐️⭐️⭐️",
         "cta": "APPLY_NOW"
       },
-      "evidence": "Nicolas named the Jolie C001 campaign as the creation reference; Graph readback of exact-name objects confirmed these text fields, while later operation flags override reference enhancements"
+      "evidence": "Nicolas explicitly promoted the successful pg_5024 DUP01 configuration to the creation-thread standard. Graph live readback confirmed the three-headline copy, empty Primary text, five-star Description, APPLY_NOW, PBIA, Messenger destination, UTM and event before the source campaign was deleted."
     },
     "creation_reference_policy": {
-      "default_reference_campaign": "155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy",
-      "source_account": "Eggbev-US-CC-EN-03 (FAX-US-02)",
-      "reference_scope": ["ad set name", "copy fields", "manual placements enum mapping", "Messenger creative structure"],
+      "default_reference_campaign": "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01",
+      "reference_model_id": "pg_5024_dup01_live_validated_v1",
+      "source_account": "Eggbev-US-CC-EN-01-G006",
+      "reference_readback": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
+      "reference_scope": ["campaign/ad set structure", "conversion event", "copy fields", "manual placements enum mapping", "Page-backed Instagram identity", "Messenger creative structure", "tracking and readback gates"],
       "override_policy": "current request instructions and the separately approved Messenger flags win over any conflicting reference field",
       "can_supply_when_explicitly_approved": ["copy", "from-zero naming template", "individual ad naming rule", "manual placements payload", "tracking/url_tags structure"],
-      "duplicate_name_policy": "never select an arbitrary campaign ID; use only fields consistent with the approved reference/readback and explicit later overrides"
+      "duplicate_name_policy": "the DUP01 is a configuration model only. Future from-zero campaigns use their normal C0XX naming, new IDs and unique new media; never copy the DUP suffix or treat the reference media as reusable candidates"
     },
     "minimal_request_semantics": {
       "source_folder_aliases": {"cc en us": "CC_US_EN", "CC_US_EN": "CC_US_EN"},
