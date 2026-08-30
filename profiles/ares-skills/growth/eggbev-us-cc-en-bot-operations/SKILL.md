@@ -392,6 +392,10 @@ Após evidência visual enviada por Nicolas em `2026-08-30`, o renderer deixou d
 
 Por correção de Nicolas em `2026-08-30`, os cartões v11 foram substituídos por três tabelas compactas alinhadas no mesmo padrão técnico do Intraday Creditoparaveiculo 13: largura dinâmica pelas células reais, duas colunas de espaço entre campos, cabeçalhos curtos em uma linha, divisor Unicode e bloco `text` monoespaçado. As tabelas separam Decisão/Identidade, Meta Ads e Smart Bidding para preservar todas as métricas sem recriar a linha única de 283 colunas. O maior bloco validado tem 96 colunas visuais; a paginação usa o tamanho renderizado real, repete o cabeçalho e mantém fences balanceadas. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
 
+### Refinamento visual v13 — tudo em uma tabela única
+
+Por instrução direta de Nicolas em `2026-08-30`, Decisão/Identidade, Meta Ads e Smart Bidding passam a compartilhar uma única tabela compacta no padrão CPV 13. Cada campanha ocupa um grupo indivisível de oito linhas, com colunas `Camp`, `Bloco` e três pares `Métrica/Valor`; a chave da campanha aparece uma vez. A paginação usa o tamanho renderizado real, repete o mesmo cabeçalho e nunca divide o grupo da campanha. A amostra live ficou com 87 colunas visuais e todos os rótulos completos. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.

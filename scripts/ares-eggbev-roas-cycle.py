@@ -540,6 +540,93 @@ def _append_compact_table(
         lines.extend(['', f'**{label}**', page])
 
 
+def _compact_grouped_table_pages(
+    headers: list[str], groups: list[list[list[str]]], max_chars: int = 1500,
+) -> list[str]:
+    """Paginate without splitting the rows that belong to one campaign."""
+    pages: list[str] = []
+    page_rows: list[list[str]] = []
+    for group in groups:
+        candidate = _aligned_table(headers, [*page_rows, *group])
+        if len(candidate) <= max_chars:
+            page_rows.extend(group)
+            continue
+        if page_rows:
+            pages.append(_aligned_table(headers, page_rows))
+            page_rows = []
+        single = _aligned_table(headers, group)
+        if len(single) > max_chars:
+            raise RuntimeError('single campaign table group exceeds safe Discord page length')
+        page_rows.extend(group)
+    if page_rows:
+        pages.append(_aligned_table(headers, page_rows))
+    return pages
+
+
+def _dashboard_unified_groups(
+    campaigns: list[dict[str, Any]], threshold: Any,
+) -> list[list[list[str]]]:
+    """Build one unified table with compact metric rows per campaign."""
+    groups: list[list[list[str]]] = []
+    for index, row in enumerate(campaigns, start=1):
+        key = _campaign_key(row, index)
+        roi_pair = f"{_roi_signal(row.get('roi_real'))}{_roi_signal(row.get('roi_estimated'))}"
+        groups.append([
+            [
+                key, 'Decisão', 'Página', common.norm(row.get('sb_page_name')) or 'N/D',
+                'Ligada', _delivery_visual(row.get('status')),
+                'Entrega', _delivery_label(row.get('status')),
+            ],
+            [
+                '', 'Decisão', 'Ação', common.norm(row.get('action_label')) or 'N/D',
+                'R/E', roi_pair, '', '',
+            ],
+            [
+                '', 'Meta', 'C/conv', _fmt_usd(row.get('cost_per_messaging_started')),
+                'ROAS', _roas_visual(row.get('purchase_roas'), threshold),
+                'C/res', _fmt_usd(row.get('cost_per_message')),
+            ],
+            [
+                '', 'Meta', 'Res', common.fmt_number(row.get('messaging_results'), 0),
+                'Budget', _fmt_usd(row.get('budget_usd')),
+                'Spend', _fmt_usd(row.get('spend')),
+            ],
+            [
+                '', 'Meta', 'CPM', _fmt_usd(row.get('cpm')),
+                'CTR', _fmt_percent(row.get('ctr')),
+                'CPC', _fmt_usd(row.get('cpc_link')),
+            ],
+            [
+                '', 'SB', 'C/sub', _fmt_usd(row.get('sb_cost_subscriber')),
+                'Receita', _fmt_usd(row.get('sb_revenue')),
+                'Lucro', _fmt_usd(row.get('sb_profit')),
+            ],
+            [
+                '', 'SB', 'Retorno', _fmt_signed_percent(row.get('sb_roi_percent')),
+                'Leads', common.fmt_number(row.get('sb_leads'), 0),
+                'ROI Drip', _fmt_signed_percent(row.get('sb_drip_roi_percent')),
+            ],
+            [
+                '', 'SB', 'Rev BC', _fmt_usd(row.get('sb_broadcast_revenue')),
+                'ROI atual', _roi_visual(row.get('roi_real')),
+                'ROI est.', _roi_visual(row.get('roi_estimated')),
+            ],
+        ])
+    return groups
+
+
+def _append_unified_dashboard(
+    lines: list[str], campaigns: list[dict[str, Any]], threshold: Any, max_chars: int = 1500,
+) -> None:
+    headers = ['Camp', 'Bloco', 'Métrica 1', 'Valor 1', 'Métrica 2', 'Valor 2', 'Métrica 3', 'Valor 3']
+    pages = _compact_grouped_table_pages(
+        headers, _dashboard_unified_groups(campaigns, threshold), max_chars=max_chars,
+    )
+    for index, page in enumerate(pages, start=1):
+        label = f'📊 Painel único • {index}/{len(pages)}' if len(pages) > 1 else '📊 Painel único'
+        lines.extend(['', f'**{label}**', page])
+
+
 def _dashboard_table_rows(
     campaigns: list[dict[str, Any]], threshold: Any,
 ) -> tuple[list[list[str]], list[list[str]], list[list[str]]]:
@@ -611,25 +698,7 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
     if campaigns:
-        decision_rows, meta_rows, bidding_rows = _dashboard_table_rows(campaigns, run.get('threshold'))
-        _append_compact_table(
-            lines,
-            '📌 Decisão e identidade',
-            ['On', 'Camp', 'Página', 'Entrega', 'Ação'],
-            decision_rows,
-        )
-        _append_compact_table(
-            lines,
-            '📣 Meta Ads',
-            ['Camp', 'C/conv', 'ROAS', 'C/res', 'Res', 'Budget', 'Spend', 'CPM', 'CTR', 'CPC'],
-            meta_rows,
-        )
-        _append_compact_table(
-            lines,
-            '💰 Smart Bidding',
-            ['R/E', 'Camp', 'C/sub', 'Receita', 'Lucro', 'Retorno', 'Leads', 'ROI Drip', 'Rev BC', 'ROI atual', 'ROI est.'],
-            bidding_rows,
-        )
+        _append_unified_dashboard(lines, campaigns, run.get('threshold'))
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 

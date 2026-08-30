@@ -1287,10 +1287,29 @@
       "kind": "policy",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V13-20260830",
+      "title": "Eggbev Corte e ROAS v12 usa tabelas compactas no padrão CPV 13 Intraday",
+      "updated_at": "2026-08-30T15:00:50+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T10:58:38-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V13-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev Corte e ROAS v12 usa tabelas compactas no padrão CPV 13 Intraday",
-      "updated_at": "2026-08-30T12:37:42+00:00"
+      "title": "Eggbev Corte e ROAS v13 usa uma tabela única no padrão CPV 13",
+      "updated_at": "2026-08-30T15:00:50+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -2539,5 +2558,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T12:37:42+00:00"
+  "updated_at": "2026-08-30T15:00:50+00:00"
 }
