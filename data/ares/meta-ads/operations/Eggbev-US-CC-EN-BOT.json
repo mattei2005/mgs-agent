@@ -456,6 +456,20 @@
     },
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
+    "copy_source_policy": {
+      "default": null,
+      "accepted_inputs": ["all four copy fields supplied in the request", "an explicitly identified and approved source campaign", "a future operation-level copy template approved by Nicolas"],
+      "missing_behavior": "ask one short natural-language question for the copy source; never infer the correct copy from the Page, pg token, creative filename or another operation"
+    },
+    "minimal_request_semantics": {
+      "source_folder_aliases": {"cc en us": "CC_US_EN", "CC_US_EN": "CC_US_EN"},
+      "campaigns_with_n_creatives": "N campaigns, each with one ad set and N requested ads; creatives are unique across the whole batch unless Nicolas explicitly says reuse",
+      "example_3_campaigns_3_creatives": "3 campaigns x 1 ad set x 3 ads = 9 unique creatives from CC_US_EN",
+      "start_default": "next day at 00:00 America/New_York; apply without asking again when the request gives no override",
+      "status_default": "ACTIVE with future start_time after final summary approval",
+      "page_token_resolution": "resolve pg_XXXXX to one Smart Bidding Messenger Page row and verify the Page by Meta GET; ambiguous or inaccessible Page blocks",
+      "manager_folder_request": "authorizes scoped reconciliation/release review for this request but never global eligibility or filename-order selection"
+    },
     "tracking_policy": {
       "page_token": "pg_XXXXX aligned to the selected Facebook Page",
       "links_and_utms": "must be confirmed and shown in the final summary for each request; never infer from another operation",
@@ -463,10 +477,18 @@
     },
     "dependency_checklist": [
       "confirm selected page",
-      "confirm next-day 00:00 ET and 1x1x3 or 1x1x5",
+      "apply next-day 00:00 ET and 1x1x3 or 1x1x5 defaults when the natural request already determines them; ask only on a real ambiguity or override",
       "confirm exact daily budget",
-      "confirm new creatives, ad names and copy angle"
+      "reconcile and reserve the required number of unique new creatives",
+      "confirm ad names and an explicit copy source or all four copy fields"
     ],
+    "intake_simulator": {
+      "script": "scripts/ares-eggbev-creation-intake-simulate.py",
+      "mode": "read_only",
+      "latest_fixture": "pg_5024; 3 campaigns; 3 creatives each; CC_US_EN",
+      "latest_result": "page Amy Shook verified by Meta GET; next-day 00:00 ET applied; 9 unique assets required; budget and copy missing; technical readiness blockers remain",
+      "writes": 0
+    },
     "prepublication_double_gate": true,
     "publish_only_after_nicolas_explicit_ok_on_final_summary": true,
     "current_instruction_overrides_reference_print": true,
