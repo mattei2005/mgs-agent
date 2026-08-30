@@ -77,13 +77,13 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; a tabela desktop única preserva todas as campanhas com paginação Discord fence-safe.
 - A tabela única combina Meta Ads + Smart Bidding + Pricing/monetização por campanha. O join exige `utm_campaign` do creative Meta = `UTM_CAMPAIGN` Smart Bidding e `object_story_spec.page_id` Meta = `FB_PAGE_ID` Smart Bidding.
 - Campos Meta por campanha: status, `start_time` ET, Budget, spend, `messaging_conversation_started_7d`, custo por mensagem iniciada, Purchase ROAS, CPM e CTR.
-- Campos Smart Bidding/Pricing por campanha: investimento, receita, LEADS, `AVG_PRICE`, RPS bruto e EPC bruto. `RPS bruto = REVENUE × 1.000 / SESSIONS`; `EPC bruto = REVENUE / ACQUISITION_CLICKS`.
+- Campos Smart Bidding/Pricing por campanha: investimento, receita, LEADS, `AVG_PRICE`, RPS, CPM, EPC e ROI quando expostos pela rota direta compatível. Fórmula local é apenas fallback rotulado.
 - Freshness Smart Bidding aparece com timestamp/idade/campo ou `N/D`; sem timestamp ou acima de 2h, todas as métricas externas por campanha permanecem `N/D`, nunca zero.
 - UTM ausente/múltipla, página ausente/duplicada, Page ID divergente ou fonte stale falha fechado e expõe o motivo no campo `Join`.
 - As métricas de Pricing/monetização podem ser extraídas diretamente da Smart Bidding pela rota compatível de **vertical, Messenger Pages ou domain**. Selecionar pela granularidade da métrica e exigir mapping explícito de operação/UTM/página/domain, mesmo período, moeda e freshness.
 - RPS, CPM, EPC, `AVG_PRICE`, receita, ROI e demais campos devem preferir o valor direto da Smart Bidding. Cálculo local de RPS/EPC é apenas fallback explícito e rotulado quando a rota selecionada não expuser o campo direto.
 - O payload global `/pricing` não é a única fonte e sua ausência de UTM não significa indisponibilidade da métrica; consultar vertical, Messenger Pages ou domain antes de concluir `N/D`.
-- ROI real e ROI estimado continuam `N/D` até fórmula Eggbev aprovada e campos líquidos/estimados disponíveis.
+- ROI real e ROI estimado devem vir diretamente da rota Smart Bidding compatível; até o endpoint/campo/freshness serem materializados e relidos, aparecem `N/D`.
 - Runtime: runner read-only construído; sob demanda disponível; post automático, cron e writes desabilitados.
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
@@ -123,11 +123,11 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
-1. Smart Bidding: mapping inequívoco da conta 01, timestamp de dados verificável com atraso máximo de 2h e fórmulas Eggbev de ROI/RPS/receita líquida.
+1. Smart Bidding: materializar no runner a seleção read-only entre vertical, Messenger Pages e domain, com mapping inequívoco da conta 01, endpoint/campo/moeda/período, timestamp verificável com atraso máximo de 2h e identidade compatível por métrica.
 2. Engine v3: onboarding da conta Eggbev, media registry pre-stageado e extensão explícita do manifest/executor para `clone_page_switch`.
 3. `clone_page_switch`: validar no canário os campos exatos do JSON Messenger e a troca da Page/identidade no creative; a regra operacional já está aprovada.
 4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
-5. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem timestamp Smart Bidding, fórmulas de ROI e aprovação de automação.
+5. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
 6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
 7. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
@@ -180,9 +180,10 @@ Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Me
 - Intraday: um relatório por ciclo e qualquer atualização sob demanda.
 - Núcleo Meta: CPM, Purchase ROAS, `messaging_conversation_started_7d`, custo por mensagem iniciada, Budget, Amount spent e CTR.
 - Tabela unificada por campanha: Meta + Smart Bidding + Pricing/monetização, usando UTM exata e confirmação de Page ID.
-- Núcleo Smart Bidding solicitado: investimento, receita, Leads/UTM, `AVG_PRICE`, RPS bruto, EPC bruto, ROI drip, receita líquida/estimada e ROI real/estimado.
-- Fórmulas report-only aprovadas por Nicolas: custo/msg iniciada = spend Meta ÷ `messaging_conversation_started_7d`; RPS bruto = `REVENUE × 1.000 / SESSIONS`; EPC bruto = `REVENUE / ACQUISITION_CLICKS`. ROI real/estimado permanece N/D.
-- Não inventar denominador, atribuição ou moeda. O `/pricing` global Eggbev não entra por campanha porque não expõe UTM e está em BRL.
+- Núcleo Smart Bidding solicitado: investimento, receita, Leads/UTM, `AVG_PRICE`, RPS, CPM, EPC, ROI drip, receita líquida/estimada e ROI real/estimado.
+- Fonte aprovada por Nicolas: extrair diretamente da rota Smart Bidding compatível — vertical, Messenger Pages ou domain — com readback do endpoint, campo, moeda, período, freshness e identidade. Não existe precedência implícita; usar a granularidade que reconcilia corretamente a linha.
+- `Custo/msg iniciada` = spend Meta ÷ `messaging_conversation_started_7d`. Para RPS/EPC, campo direto Smart Bidding vence cálculo local; fórmulas locais são fallback-only, rotuladas e não substituem um campo direto disponível.
+- Não inventar denominador, atribuição ou moeda. A ausência de UTM no `/pricing` global não prova indisponibilidade: tentar vertical, Messenger Pages ou domain antes de publicar `N/D`.
 - Diário aprovado em múltiplos horários, inspirado na distribuição do Crédito para Veículo e adaptado ao BOT: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00 ET. Não automatizar antes de apresentar o plano final e obter OK explícito de Nicolas.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 - Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.

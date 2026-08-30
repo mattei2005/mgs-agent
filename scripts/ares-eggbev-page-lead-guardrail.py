@@ -777,6 +777,7 @@ def main() -> int:
     parser.add_argument("--status-report", action="store_true", help="render all mapped active pages with lead-limit proximity")
     parser.add_argument("--post-status-report", action="store_true", help="post the status report to the approved fixed thread")
     parser.add_argument("--quiet", action="store_true", help="stay silent on successful no-action runs")
+    parser.add_argument("--scheduled", action="store_true", help="enforce the approved 08:00/20:00 America/New_York windows")
     args = parser.parse_args()
 
     with open_lock() as lock:
@@ -799,6 +800,11 @@ def main() -> int:
         account_alias = norm((operation.get("account") or {}).get("account_alias"))
         lead_limit = finite_float(source.get("threshold")) or 5000.0
         thread_id = norm(discord.get("thread_id"))
+        fallback_thread_id = norm((((operation.get("discord") or {}).get("fixed_threads") or {}).get("rules")))
+        approved_times = tuple(str(value) for value in ((policy.get("schedule") or {}).get("times_local") or []))
+        freshness = source.get("freshness") or {}
+        freshness_max_age_hours = finite_float(freshness.get("maximum_age_hours")) or 2.0
+        freshness_fields = tuple(str(value) for value in (freshness.get("timestamp_fields") or DEFAULT_FRESHNESS_FIELDS))
         mode = "controlled_write" if args.apply else "dry_run"
         run: dict[str, Any] = {
             "ok": False,
@@ -813,7 +819,9 @@ def main() -> int:
                 "operator": source.get("operator"),
                 "threshold": lead_limit,
                 "join_keys": source.get("join_keys"),
-                "auto_reactivate": policy.get("auto_reactivate"),
+                "auto_reactivate": policy_auto_reactivate(policy),
+                "freshness_max_age_hours": freshness_max_age_hours,
+                "freshness_fields": list(freshness_fields),
             },
             "audit_path": str(audit_path),
             "writes": [],
@@ -823,6 +831,9 @@ def main() -> int:
         try:
             if source.get("metric") != "LEADS" or source.get("operator") != ">":
                 raise GuardrailError("guardrail source contract is not strict LEADS > threshold")
+            if args.scheduled and not scheduled_window_allowed(started, approved_times):
+                run["blocked_reason"] = "scheduled_window_not_approved"
+                raise GuardrailError(run["blocked_reason"])
             if args.apply:
                 if not policy.get("policy_approved"):
                     raise GuardrailError("guardrail policy is not approved")
@@ -860,7 +871,16 @@ def main() -> int:
                 publisher_name=norm(source.get("publisher_name") or "Eggbev"),
                 credential_item=norm(source.get("credential_item") or "Ares - Smartbidding Dashboard"),
             )
-            evaluated = evaluate_campaigns(campaigns, ads, sb_rows, lead_limit, started.date())
+            evaluated = evaluate_campaigns(
+                campaigns,
+                ads,
+                sb_rows,
+                lead_limit,
+                started.date(),
+                run_at=started,
+                freshness_max_age_hours=freshness_max_age_hours,
+                freshness_fields=freshness_fields,
+            )
             groups = evaluated["eligible_groups"]
             run.update({
                 "meta_account_readback": {"name": live_account.get("name"), "currency": live_account.get("currency"), "timezone_name": live_account.get("timezone_name"), "account_status": live_account.get("account_status")},
@@ -890,13 +910,26 @@ def main() -> int:
                 if args.post_status_report:
                     if not thread_id:
                         raise GuardrailError("status report requires the fixed Discord thread ID")
-                    run["status_report"]["delivery"] = post_to_thread(thread_id, status_message)
+                    status_delivery = post_with_fallback(thread_id, fallback_thread_id, status_message)
+                    run["status_report"]["delivery"] = status_delivery
+                    require_delivery(status_delivery, "status_report")
             campaign_ids = [norm(campaign.get("campaign_id")) for group in groups for campaign in group.get("campaigns") or []]
             insights = fetch_today_insights(meta_common, token, campaign_ids) if campaign_ids else {}
             run["latest_intraday_snapshot"] = insights
             alerts_delivered = 0
             paused_confirmed = 0
             if args.apply:
+                if evaluated["issues"]:
+                    issue_message = build_issue_alert(evaluated["issues"], started, account_alias)
+                    issue_delivery = post_with_fallback(thread_id, fallback_thread_id, issue_message)
+                    run["alerts"].append({
+                        "type": "mapping_or_freshness",
+                        "delivery": issue_delivery,
+                        "issues": len(evaluated["issues"]),
+                    })
+                    atomic_json(audit_path, run)
+                    require_delivery(issue_delivery, "mapping_or_freshness_alert")
+                    alerts_delivered += 1
                 for group in groups:
                     actions: list[dict[str, Any]] = []
                     for campaign in group.get("campaigns") or []:
@@ -908,15 +941,18 @@ def main() -> int:
                         run["campaigns_paused_confirmed"] = paused_confirmed
                         atomic_json(audit_path, run)
                     message = build_alert(group, actions, insights, started, lead_limit)
-                    delivery = post_to_thread(thread_id, message)
+                    delivery = post_with_fallback(thread_id, fallback_thread_id, message)
                     alert = {"event_id": event_id(group, actions), "utm_campaign": group.get("utm_campaign"), "delivery": delivery, "confirmed_pauses": sum(1 for action in actions if action.get("ok")), "total_campaigns": len(actions)}
                     run["alerts"].append(alert)
                     if delivery.get("ok"):
                         alerts_delivered += 1
                     atomic_json(audit_path, run)
+                    require_delivery(delivery, "page_pause_alert")
             run["campaigns_paused_confirmed"] = paused_confirmed
             run["alerts_delivered"] = alerts_delivered
-            run["ok"] = True
+            run["ok"] = not bool(evaluated["issues"])
+            if evaluated["issues"]:
+                run["blocked_reason"] = "mapping_or_freshness_issues"
             run["finished_at_et"] = now_et().isoformat()
             atomic_json(audit_path, run)
             atomic_json(STATE_PATH, {
@@ -924,7 +960,7 @@ def main() -> int:
                 "last_run_id": run_id,
                 "last_run_at_et": run["finished_at_et"],
                 "last_mode": mode,
-                "last_ok": True,
+                "last_ok": run["ok"],
                 "active_campaigns": len(campaigns),
                 "eligible_pages": len(groups),
                 "campaigns_paused_confirmed": paused_confirmed,
@@ -936,11 +972,14 @@ def main() -> int:
                 print(status_message)
             elif not args.quiet or groups or evaluated["issues"]:
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
-            return 0
+            return 0 if run["ok"] else 2
         except Exception as exc:
             run["ok"] = False
             run["error"] = {"type": type(exc).__name__, "message": str(exc)}
             run["finished_at_et"] = now_et().isoformat()
+            if args.apply and args.post_alerts and thread_id and not run.get("alerts"):
+                error_message = build_runtime_error_alert(started, account_alias, str(exc))
+                run["error_notification"] = post_with_fallback(thread_id, fallback_thread_id, error_message)
             atomic_json(audit_path, run)
             atomic_json(STATE_PATH, {
                 "operation_id": operation.get("operation_id"),

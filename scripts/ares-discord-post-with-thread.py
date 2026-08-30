@@ -275,18 +275,35 @@ def main() -> int:
     if st not in (200, 201):
         print(json.dumps({'ok': False, 'stage': 'post_message', 'target_channel': target_channel, 'status': st, 'chunk': 1, 'chunks': len(chunks), 'error': payload}, ensure_ascii=False), file=sys.stderr)
         return 3
+    message_id = payload.get('id')
+    if not message_id:
+        print(json.dumps({'ok': False, 'stage': 'post_message', 'error': 'missing_message_id'}, ensure_ascii=False), file=sys.stderr)
+        return 4
+    posted: list[tuple[str, str]] = [(str(message_id), chunks[0])]
     if args.thread_id:
         for idx, chunk in enumerate(chunks[1:], 2):
             st_next, payload_next = post_message(target_channel, token, chunk)
             if st_next not in (200, 201):
                 print(json.dumps({'ok': False, 'stage': 'post_message_chunk', 'target_channel': target_channel, 'status': st_next, 'chunk': idx, 'chunks': len(chunks), 'error': payload_next}, ensure_ascii=False), file=sys.stderr)
                 return 6
+            next_message_id = payload_next.get('id')
+            if not next_message_id:
+                print(json.dumps({'ok': False, 'stage': 'post_message_chunk', 'target_channel': target_channel, 'chunk': idx, 'error': 'missing_message_id'}, ensure_ascii=False), file=sys.stderr)
+                return 4
+            posted.append((str(next_message_id), chunk))
+        if args.verify_readback:
+            verification = verify_message_readbacks(target_channel, token, posted)
+            if not verification['ok']:
+                print(json.dumps({'ok': False, 'stage': 'readback', **verification}, ensure_ascii=False), file=sys.stderr)
+                return 9
+            print(json.dumps({
+                'ok': True,
+                'target_channel': target_channel,
+                'chunks': len(chunks),
+                'readbacks_confirmed': verification['confirmed'],
+                'message_ids': [item[0] for item in posted],
+            }, ensure_ascii=False))
         return 0
-
-    message_id = payload.get('id')
-    if not message_id:
-        print(json.dumps({'ok': False, 'stage': 'post_message', 'error': 'missing_message_id'}, ensure_ascii=False), file=sys.stderr)
-        return 4
 
     st2, payload2 = discord_request('POST', f'/channels/{args.channel_id}/messages/{message_id}/threads', token, {
         'name': title,
