@@ -1547,7 +1547,7 @@
       "description": "Registry-driven B001–B012 Meta roles/Sheet monitor. Every B013 replacement generation is excluded by registry lineage and remains owned by the dedicated DTR route.",
       "validation": "Shell and embedded-Python PASS. Registry route readback: 13 total apps, 12 generic and one dedicated B013-4. Fresh generic production cycle loaded exactly the 12 non-B013 items, created no B013-4 state, completed with errors=0 and left B013-4 Sheet reconciliation to the dedicated monitor.",
       "updated_at": "2026-08-29T21:09:19-04:00",
-      "source_report": "discord:#alerts-infra/1543151259786420345",
+      "source_report": "discord:#alerts-infra/1543430260727619746",
       "last_change": "2026-08-29: replaced hard-coded B013-3 exclusions with a registry-derived B013 lineage predicate before exposing B013-4, preventing future replacement suffixes from entering generic /roles reconciliation.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/meta-app-roles-watch.sh.before",
       "backup_validation": "SHA256SUMS manifest verified all cutover artifacts before mutation.",
@@ -2043,7 +2043,7 @@
       "reconciliation": "All 12 app assignments now mirror live roles. Current X: B001-4 Adriano Alves/Emen; B004-4 Beatriz Santos; B009-3 Riza Gabiola/Leticia Silva; B011-2 Maria Silva Nobrega. Recovered Lorena Santos Cardoso and Maribel Tamboon are blank.",
       "state": "scheduled",
       "next_run_at": "2026-08-29T21:09:00-04:00",
-      "source_report": "discord:#alerts-infra/1543151259786420345"
+      "source_report": "discord:#alerts-infra/1543430260727619746"
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -2065,7 +2065,7 @@
       "last_status": "ok",
       "replaces": "b012-dtr-link-watch",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023",
-      "source_report": "discord:#alerts-infra/1543149549357633577"
+      "source_report": "discord:#alerts-infra/1543430260727619746"
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -4032,9 +4032,9 @@
       "description": "Production route pack for the current B013-4 dedicated DTR cutover plus registry-lineage exclusion from generic /roles monitoring.",
       "validation": "Runtime/versioned SHA-256 match. Procedure records exact B013-4 item, 31-row Sheet target, fresh-state baseline, three successful scheduled cycles, Discord readback and closure snapshot of 29 linked/two confirmed unlinked/zero unknown.",
       "updated_at": "2026-08-29T21:18:35-04:00",
-      "source_report": "discord:#alerts-infra/1543151259786420345",
+      "source_report": "discord:#alerts-infra/1543430260727619746",
       "last_change": "Added current B013-4 cutover procedure, marked B013-3 historical and changed active instructions from one hard-coded B013 suffix to registry-lineage routing.",
-      "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
+      "report_readback": "HTTP 200; message 1543430260727619746; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title REPORT-INFRA — modificada and 8 canonical fields PASS."
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -5332,7 +5332,7 @@
       "description": "Dedicated B013-4 DTR/ChatPion monitor using the exact registry-pinned item, NO APP=B013-4 and the existing B013 app-status channel.",
       "validation": "Shell and embedded-Python PASS; one-target and full 31-target dry-runs passed; fresh live baseline and three scheduled cycles completed ok. Closure scheduled readback: 29 linked, two confirmed unlinked, zero unknown, capability healthy, two Sheet X and one four-message addition family verified in Discord.",
       "updated_at": "2026-08-29T21:18:35-04:00",
-      "source_report": "discord:#alerts-infra/1540401445910872109",
+      "source_report": "discord:#alerts-infra/1543430260727619746",
       "last_change": "2026-08-29: cut over exact credential, identity guard, Sheet selector and manager-facing labels from B013-3 to B013-4; production state rebuilt from empty baseline.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/b013-dtr-link-watch.sh.before",
       "backup_validation": "Cutover SHA256SUMS manifest verified before mutation.",
@@ -6263,7 +6263,7 @@
       "modified_at": "2026-08-29T21:18:22-04:00",
       "sha256": "b3989db48ddce32cb669e4e578f7893f973c3f6a16b972b28c2667f7d740e6b5",
       "mode": "manual-authorized",
-      "source_report": "discord:#alerts-infra/1543022410570141807",
+      "source_report": "discord:#alerts-infra/1543430260727619746",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1543419014657605735",
       "scope": [
@@ -6285,7 +6285,7 @@
       "updated_at": "2026-08-29T21:18:35-04:00",
       "last_change": "Replaced active B013-3 registry row with B013-4/Dayanna Regis, preserved channel 1522830283240505385 and appended sanitized live validation evidence.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/meta-app-registry.json.before",
-      "report_readback": "HTTP 200; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title and 8 canonical fields PASS."
+      "report_readback": "HTTP 200; message 1543430260727619746; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title REPORT-INFRA — modificada and 8 canonical fields PASS."
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
@@ -10962,6 +10962,7 @@
       "purpose": "Rollback/audit snapshot before replacing active B013-3 routing, credentials metadata, Sheet selector and production baseline with B013-4.",
       "validation": "SHA256SUMS verified all five pre-cutover artifacts; manifest SHA-256 5b042cda3203ebb9eaf077c7af09fb3a72640e550d57c3e151292c31f5d66e50.",
       "authorization_message_id": "1543419014657605735",
+      "source_report": "discord:#alerts-infra/1543430260727619746",
       "updated_at": "2026-08-29T21:09:19-04:00"
     }
   ],
