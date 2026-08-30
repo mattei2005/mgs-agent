@@ -25,8 +25,11 @@ class EggbevPageLeadThreadRouteTests(unittest.TestCase):
         operation = json.loads(OP.read_text())
         route = operation['discord']['route_contracts']['page_lead_guardrail']
         self.assertEqual(route['thread_id'], '1543312825890381865')
-        self.assertTrue(route['exact_thread_prompt_active'])
+        self.assertTrue(route['exact_thread_prompt_configured'])
+        self.assertTrue(route['activation_pending_gateway_reload'])
         self.assertEqual(route['canonical_prompt_source'], 'data/ares/discord/thread-prompts/1543312825890381865.txt')
+        self.assertTrue(route['mapping_errors_visible'])
+        self.assertEqual(route['fallback_error_thread_id'], '1543280854024060999')
 
     def test_parent_channel_prompt_points_to_current_rules_thread(self):
         config = yaml.safe_load(VERSIONED_CONFIG.read_text())

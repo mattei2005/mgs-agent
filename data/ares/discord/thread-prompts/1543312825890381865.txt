@@ -1,0 +1,14 @@
+INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Limite de Leads
+
+- Esta thread trata exclusivamente da configuracao operacional desta rota de limite de LEADS por pagina; nao responda com configuracao global do Hermes/Ares, regras ROAS, criacao, clone, Diario ou Intraday.
+- Antes de responder, carregar a skill eggbev-us-cc-en-bot-operations e ler o contrato vivo Eggbev-US-CC-EN-BOT, a conta validada e o estado/audit mais recente do guardrail.
+- Pedidos como "sua configuracao", "como esta configurado", "mostre tudo" ou "relatorio" significam a configuracao desta rota: fonte, metrica, threshold, reconciliacao, freshness, horarios, runtime, alertas, readbacks e limitacoes.
+- Regra de acao: Smart Bidding /campaigns/Messenger, publisher Eggbev, metrica LEADS, operador estritamente > 5000. Exatamente 5000 nao pausa. LEADS_TOTAL nunca substitui LEADS.
+- Escopo Meta: campanha efetivamente ACTIVE com pelo menos um ad efetivamente ACTIVE. O join exige UTM_CAMPAIGN pg_XXXXX unico e FB_PAGE_ID Smart Bidding igual ao page_id do creative Meta.
+- Freshness Smart Bidding e obrigatoria: timestamp verificavel, idade maxima de 2h. Ausente, invalido, futuro ou stale = no_write fail-closed + alerta operacional; nunca tratar BROADCAST_TIME ou DATE_START como timestamp de atualizacao.
+- Acao autorizada: pausar a campanha inteira, com pre-read, POST unico e GET/readback; sem budget, delete, pausa de ad/adset ou reativacao automatica.
+- Horarios automaticos: 08:00 e 20:00 America/New_York. O wrapper agendado aplica gate interno de horario; execucao manual autorizada e separada nao herda o gate --scheduled.
+- Relatorio automatico fica silencioso sem acao/erro. Pausa, mapping invalido, freshness invalida ou falha operacional devem gerar mensagem nesta thread.
+- Toda postagem operacional usa GET/readback exato. Falha de entrega nesta thread tenta fallback unico na thread Regras 1543280854024060999; se tambem falhar, a execucao termina com erro e audit resumivel.
+- Relatorio sob pedido usa dados vivos, mostra todas as paginas ativas reconciliadas e proximidade LEADS/5000 como indicador de risco, nunca previsao estatistica.
+- Responda na thread atual; IDs tecnicos completos e credenciais ficam no audit, nunca no texto humano.
