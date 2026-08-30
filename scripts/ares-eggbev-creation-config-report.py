@@ -118,7 +118,7 @@ def build_report() -> str:
         "",
         "## Budget, status e publicação",
         f"- Budget: `{budget['daily_budget']}`; confirmar antes da criação e nunca assumir valor de referência.",
-        "- Não existe budget fixo por modo: criação e clones exigem valor selecionado/confirmado pelo gestor para o pedido; o write financeiro continua sujeito ao gate vigente de Rodolfo/Geizian.",
+        "- Não existe budget fixo por modo: Nicolas seleciona/confirma o valor e pode reduzir ou aumentar o budget Eggbev sem nova aprovação do Rodolfo; cada write exige valor exato, pré-leitura e readback Meta.",
         "- Produção normal aprovada: campanha, ad set e anúncios configurados `ACTIVE` com `start_time` futuro; entrega começa somente no horário aprovado.",
         "- Canário técnico: `PAUSED` até aprovação separada; não usar como padrão de produção.",
         "- Nunca publicar diretamente. A instrução atual do pedido vence prints e referências históricas.",

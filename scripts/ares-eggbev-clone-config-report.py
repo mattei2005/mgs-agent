@@ -33,14 +33,14 @@ def check() -> dict:
         'prompt_exists': PROMPT_PATH.exists() and bool(PROMPT_PATH.read_text().strip()),
         'account_registered': ACCOUNT_ID in (engine.get('accounts') or {}),
         'account_alias_matches': (engine.get('accounts') or {}).get(ACCOUNT_ID, {}).get('alias') == 'Eggbev-US-CC-EN-01-G006',
-        'engine_release_3_3': engine.get('release_version') == '3.3.0',
+        'engine_release_3_4': engine.get('release_version') == operation_v3.get('release_version') == '3.4.0',
         'engine_modes_complete': expected_modes <= engine_modes,
         'contract_modes_complete': expected_modes <= contract_modes,
         'v3_operation_account_matches': str(operation_v3.get('account_id')) == ACCOUNT_ID,
         'account_route_registered': account['runtime_routes']['campaign_cloning'].get('engine_account_registered') is True,
         'default_active_midnight': operation_v3['delivery_policy'].get('status') == 'ACTIVE' and operation_v3['delivery_policy'].get('start_time') == 'next_day_00:00_America/New_York',
         'manager_budget_selection': 'manager' in operation_v3['budget_policy'].get('selection', '').lower(),
-        'financial_gate_preserved': 'Rodolfo/Geizian' in operation_v3['budget_policy'].get('write_authority', ''),
+        'nicolas_budget_authority': 'Nicolas has standing Eggbev authority' in operation_v3['budget_policy'].get('write_authority', ''),
     }
     return {'status': 'ok' if all(checks.values()) else 'blocked', 'checks': checks}
 
@@ -60,7 +60,7 @@ def render() -> str:
         '- Criativos novos: 1–5 ads, mídia aprovada/reconciliada/pre-stageada.',
         '- Troca de página: preserva mídia/copy; troca Page, pg/UTM e JSON; exige lineage dos ads.',
         '- Naming: nome-base original + `DUP01`, `DUP02`, `DUP03`…; dup de dup usa o próximo número livre.',
-        '- Budget: escolhido e confirmado pelo gestor por campanha; write respeita o gate financeiro vigente.',
+        '- Budget: escolhido e confirmado por Nicolas por campanha; ele pode reduzir ou aumentar sem nova aprovação do Rodolfo, com pré-leitura e readback Meta.',
         '- Produção: `ACTIVE`, início no próximo dia às `00:00 America/New_York`.',
         '- Sem cron de clonagem. Cada request exige preflight, manifest prevalidado, resumo final, OK explícito e readback.',
         '',

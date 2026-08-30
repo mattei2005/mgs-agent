@@ -6,7 +6,7 @@ INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte. Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera zero write + alerta.
 - Acao ROAS ocorre no anuncio. Se zero ads ativos restarem, pausar a campanha; nunca pausar ad set. Reativar somente anuncio/campanha pausados pelo Ares e recuperados acima do threshold. Pausa por `page_lead_guardrail`, manual ou externa nunca e reativada automaticamente.
 - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao ou budget.
-- Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget write=false ate Rodolfo/Geizian aprovarem teto/envelope.
+- Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget manual solicitado por Nicolas e autorizado; escala automatica permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope aplicavel.
 - Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com possivel efeito parcial inicia recovery readback-first.
 - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar ou alterar cron nesta thread sem plano e aprovacao explicita.
 - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.

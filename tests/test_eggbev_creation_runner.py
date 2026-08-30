@@ -93,7 +93,7 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         args = argparse.Namespace(
             request_id="not-created",
             summary_digest="digest",
-            financial_approved_by="Nicolas",
+            financial_approved_by="Kelly",
             confirm_nicolas_ok=False,
             confirm_execute=False,
         )
@@ -105,6 +105,10 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         with self.assertRaises(RUNNER.CreationBlocked) as caught:
             RUNNER.execute_request(args)
         self.assertEqual(caught.exception.stage, "financial_gate")
+
+    def test_nicolas_has_standing_eggbev_budget_authority(self):
+        self.assertIn("Nicolas", RUNNER.FINANCIAL_APPROVERS)
+        self.assertIn("Nicolas Holanda", RUNNER.FINANCIAL_APPROVERS)
 
     def test_engine_assignment_mapping_uses_bundle_order_and_exact_counts(self):
         with tempfile.TemporaryDirectory() as tmp:

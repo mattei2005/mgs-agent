@@ -29,8 +29,8 @@
           "Nicolas"
         ],
         "nicolas_discord_id": "1055570806945620030",
-        "budget_selection_policy": "Authorized campaign managers select and confirm the exact daily budget per campaign request.",
-        "budget_write_authority": "Manager selection does not expand financial authority; actual budget write remains subject to the current Rodolfo/Geizian gate."
+        "budget_selection_policy": "Nicolas selects and confirms the exact daily budget per Eggbev campaign request.",
+        "budget_write_authority": "Standing authority granted by Rodolfo on 2026-08-30: Nicolas may set, decrease, or increase Eggbev campaign budgets, including the USD45 baseline, without separate Rodolfo approval. Exact value, pre-read and Meta readback remain required; billing, account_spend_limit, credentials, and automatic scaling remain separately gated."
       },
       "write_mode": "disabled_general_with_scoped_roas_status_and_page_lead_guardrail_active",
       "runtime_routes": {
@@ -50,7 +50,7 @@
           "normal_production_status": "ACTIVE with future start_time after final summary approval",
           "technical_canary_status": "PAUSED until separate activation approval",
           "write_enabled": true,
-          "write_gate": "request inputs complete, scoped Drive-Meta reconciliation, on-demand prestage, prevalidated manifest, final summary, Nicolas explicit OK, Rodolfo/Geizian financial gate and --confirm-execute",
+          "write_gate": "request inputs complete, scoped Drive-Meta reconciliation, on-demand prestage, prevalidated manifest, Nicolas explicit OK with exact budget and --confirm-execute",
           "blocked_reasons": []
         },
         "campaign_cloning": {
@@ -61,7 +61,7 @@
           "clone_page_switch_engine_supported": true,
           "validate_plan_enabled": true,
           "write_enabled": true,
-          "write_gate": "live source preflight, prevalidated manifest, final summary, explicit per-request OK, current Rodolfo/Geizian financial gate and --confirm-execute",
+          "write_gate": "live source preflight, prevalidated manifest, final summary, Nicolas explicit per-request OK with exact budget and --confirm-execute",
           "default_delivery": "ACTIVE at next-day 00:00 America/New_York",
           "naming": "preserve original base and append the next free DUPnn"
         },
@@ -72,7 +72,7 @@
           "cron_enabled": true,
           "scope": "pause bad ads, reactivate recovered ads paused by Ares, reconcile campaign state and publish every approved cycle",
           "budget_write_enabled": false,
-          "budget_write_gate": "Rodolfo or Geizian approval plus maximum daily budget or account envelope",
+          "budget_write_gate": "manual budget write by Nicolas is authorized; automatic scaling requires Nicolas approval plus maximum daily budget or account envelope when applicable",
           "target_meta_account": "act_1034081997659047"
         },
         "daily_reporting": {
@@ -119,7 +119,7 @@
           "roas_0_40_through_0_50": "keep current budget",
           "planner_enabled": true,
           "write_enabled": false,
-          "blocked_reason": "budget write requires Rodolfo or Geizian approval and a maximum daily budget or account envelope"
+          "blocked_reason": "automatic budget scaling requires Nicolas approval of the automation policy and a maximum daily budget or account envelope; manual writes requested by Nicolas are authorized"
         }
       },
       "scoped_write_exceptions": {

@@ -323,12 +323,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
-      "next_step": "Aguardar aprovação financeira explícita de Rodolfo ou Geizian para USD45/dia; então executar o mesmo request, atualizar start_time no execute, concluir readback Meta consolidado e confirmar JSON Messenger 3/3 antes do pós-processamento.",
+      "next_step": "Executar o mesmo request com Nicolas como aprovador financeiro, atualizar start_time com buffer Meta, concluir readback consolidado e confirmar Page/UTM/JSON Messenger 3/3 antes do pós-processamento.",
       "objective": "Criar a primeira campanha Eggbev pg_5024 com naming corrigido, início imediato one-time e readback obrigatório do JSON Messenger",
-      "source": "discord:thread:1541578556037927053; request:eggbev-pg-5024-20260830-nicolas-01",
-      "state": "nicolas aprovou explicitamente o resumo corrigido do request eggbev-pg-5024-20260830-nicolas-01, digest 1f9d9558e5bd88802413d7ede3c2265201cf7a20e22f82509759215f44ed7a54. request permanece awaiting_final_approval, prevalidado, 1x1x3, budget usd45, campaign_writes=0 e start_mode immediate_on_execute. falta somente autorização financeira de rodolfo ou geizian; nenhuma campanha foi criada.",
+      "source": "discord:thread:1541578556037927053; request:eggbev-pg-5024-20260830-nicolas-01; policy:ARES-EGGBEV-NICOLAS-BUDGET-AUTHORITY-V1-20260830",
+      "state": "rodolfo concedeu a nicolas autoridade permanente para definir, reduzir ou aumentar budget eggbev sem nova aprovação; gate usd45 do request eggbev-pg-5024-20260830-nicolas-01 está satisfeito. fontes, runner e prompts foram atualizados e testados; execução do mesmo request é o próximo passo.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-08-30T12:03:49+00:00"
+      "updated_at": "2026-08-30T16:26:16+00:00"
     },
     {
       "agent": "ares",
@@ -1452,5 +1452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T12:03:49+00:00"
+  "updated_at": "2026-08-30T16:26:16+00:00"
 }

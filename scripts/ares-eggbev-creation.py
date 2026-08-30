@@ -53,7 +53,7 @@ ENGINE_CLI = BASE / "scripts/ares-campaign-engine-v3.py"
 SANITIZER = BASE / "scripts/clean-creative-metadata.sh"
 ET = ZoneInfo("America/New_York")
 DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
-FINANCIAL_APPROVERS = {"Rodolfo", "Rodolfo Mattei", "Geizian"}
+FINANCIAL_APPROVERS = {"Rodolfo", "Rodolfo Mattei", "Geizian", "Nicolas", "Nicolas Holanda"}
 
 
 class CreationBlocked(RuntimeError):
@@ -432,7 +432,7 @@ def build_summary(
         "messenger_json_postcreation_check": "required per ad creative; exact Page, url_tags and parsed page_welcome_message readback before postprocess completion",
         "placements": policy["manual_placements_payload"],
         "tracking": manifest["campaigns"][0]["ads"][0]["creative_payload"]["url_tags"],
-        "gates": ["Nicolas explicit OK on this exact summary", "Rodolfo/Geizian financial write approval", "Engine v3 --confirm-execute", "consolidated Meta readback", "Messenger JSON installed readback per creative"],
+        "gates": ["Nicolas explicit OK on this exact summary and budget", "Engine v3 --confirm-execute", "consolidated Meta readback", "Messenger JSON installed readback per creative"],
     }
 
 
@@ -804,7 +804,7 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     if not args.confirm_nicolas_ok or not args.confirm_execute:
         raise CreationBlocked("approval", "Nicolas OK and --confirm-execute are required")
     if args.financial_approved_by not in FINANCIAL_APPROVERS:
-        raise CreationBlocked("financial_gate", "Rodolfo or Geizian approval is required")
+        raise CreationBlocked("financial_gate", "an authorized Eggbev budget approver is required")
     path = state_path(args.request_id)
     state = load_json(path)
     if state.get("phase") not in {"AWAITING_FINAL_APPROVAL", "EXECUTION_DEFERRED", "POSTPROCESS_PENDING"}:

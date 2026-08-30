@@ -20,16 +20,20 @@ Use quando Rodolfo ou Nicolas pedir revisão de regras, análise, relatório, ca
 ## Estado atual
 
 ```text
-Status do contrato       Corte/reativação e postagem ROAS autorizados em modo fail-closed; budget write segue gated
+Status do contrato       Corte/reativação e postagem ROAS autorizados em modo fail-closed; budget manual por Nicolas autorizado
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                status de ad/campanha no ciclo ROAS habilitado; budget write bloqueado; guardrail de leads habilitado
+Write Meta                status de ad/campanha no ciclo ROAS habilitado; budget manual por Nicolas habilitado; guardrail de leads habilitado
 Crons Eggbev              Corte/ROAS e guardrail de leads ativos; tick LEADS 20:00 ET confirmado. Flag cron gateway_running=false é falso negativo do observador; execução real vence.
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
 ```
+
+### Autoridade de budget — decisão de Rodolfo em 30/08/2026
+
+Nicolas tem autoridade permanente nesta operação para definir, reduzir ou aumentar budgets de campanha, inclusive a baseline de USD45, sem nova aprovação do Rodolfo. O valor exato continua obrigatório no pedido/manifest, com pré-leitura e readback Meta. Esta delegação não autoriza billing, `account_spend_limit`, credenciais nem escala automática sem política própria aprovada por Nicolas. Qualquer referência histórica nesta skill ao gate Rodolfo/Geizian para budget Eggbev está supersedida por esta seção.
 
 O estado vivo está nos arquivos canônicos de operação e conta em `data/ares/meta-ads/`. IDs técnicos completos e referência de credencial ficam nesses arquivos/audits, nunca no relatório humano.
 
@@ -160,7 +164,7 @@ Ad set   AdG1 | Messenger | next day 00:00 America/New_York | ongoing | US 18+ A
 Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
 Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
 Payer    DIGITAL TRUST; sempre nesta operação
-Budget   variável; gestor autorizado escolhe e confirma por campanha; write financeiro mantém gate Rodolfo/Geizian
+Budget   variável; Nicolas escolhe/confirma e pode aumentar ou reduzir sem nova aprovação do Rodolfo; valor exato + pré-leitura + readback obrigatórios
 ```
 
 Placements são `MANUAL_ONLY` e estão materializados no contrato: Facebook `feed`, `story`, `search`, `marketplace`, `video_feeds`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `profile_feed`; Instagram `stream`, `story`, `reels`, `explore`, `explore_home`, `profile_feed`; Messenger `story`; devices `mobile` e `desktop`. `explore` é dependência obrigatória da API quando `explore_home` está ativo. Audience Network é proibida e nunca se converte o payload para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.

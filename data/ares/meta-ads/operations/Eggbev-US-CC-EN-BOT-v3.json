@@ -77,7 +77,7 @@
       "ads": "exactly three or five per campaign",
       "media_registry_required": true,
       "default_status": "ACTIVE with future next-day 00:00 America/New_York start_time after final approval",
-      "budget": "manager-selected input; write remains gated by Rodolfo/Geizian",
+      "budget": "Nicolas-selected input; standing Eggbev budget-write authority granted by Rodolfo, with exact value, pre-read and Meta readback required",
       "naming": "[page sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX; batches advance C001, C002, C003...",
       "placements": "manual operation payload; Audience Network forbidden",
       "copy_template": "Jolie C001 reference fields with later operation flags taking precedence",
@@ -98,7 +98,7 @@
   "budget_policy": {
     "selection": "an authorized campaign manager selects and confirms the exact daily budget for every duplicate request",
     "manifest": "materialize the confirmed value explicitly in daily_budget minor units; never inherit or guess silently",
-    "write_authority": "selection does not expand financial authority; actual budget write remains subject to the current Rodolfo/Geizian gate in permissions-matrix",
+    "write_authority": "Nicolas has standing Eggbev authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval; billing, account_spend_limit, credentials, and automatic scaling remain separately gated",
     "reporting": "show manager-selected budget in the final summary and confirm it by Meta readback"
   },
   "delivery_policy": {
@@ -128,7 +128,7 @@
     "Drive-Meta reservation and pre-stage for clone_prestaged",
     "prevalidated manifest with content digest",
     "final human summary and explicit per-request OK",
-    "current financial write authority satisfied",
+    "Nicolas exact budget instruction or approved Eggbev operation policy satisfied",
     "--confirm-execute",
     "consolidated Meta readback"
   ],

@@ -19,7 +19,7 @@
     "validated_layers": ["campaign", "adset", "adcreative", "ad"],
     "readiness": "ready_for_scoped_request_prestage_plan_and_final_summary",
     "inputs_still_required_per_request": ["daily_budget_usd_per_campaign"],
-    "gates_after_summary": ["Nicolas explicit OK", "Rodolfo or Geizian financial write approval", "Engine v3 confirm-execute", "consolidated Meta readback"],
+    "gates_after_summary": ["Nicolas explicit OK with exact budget", "Engine v3 confirm-execute", "consolidated Meta readback"],
     "writes_during_remediation": {"meta_objects_created": 0, "drive_moves": 0, "inventory_reservations": 0, "media_prestage": 0, "cron_changes": 0}
   },
   "site_name": "Eggbev",
@@ -58,7 +58,7 @@
       }
     ],
     "other_managers": [],
-    "budget_write_rule": "Authorized campaign managers select and confirm the exact daily budget for each campaign request. Selection is a required manifest input and never expands financial authority: the actual budget write remains subject to the current Rodolfo/Geizian gate in permissions-matrix."
+    "budget_write_rule": "For Eggbev-US-CC-EN-BOT, Nicolas has standing authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval. The exact value remains an explicit manifest input. Every write requires Nicolas instruction or an approved operation policy, pre-read and Meta readback. Billing, account_spend_limit, credentials, and automatic scaling remain separately gated."
   },
   "ares_scope": {
     "included": [
@@ -377,7 +377,15 @@
     "daily_budget": "selected_and_confirmed_by_authorized_campaign_manager_per_campaign",
     "must_be_confirmed_before_creation": true,
     "never_assume_reference_values": true,
-    "selection_vs_write_authority": "manager selection is an operational input; actual budget write remains subject to the current Rodolfo/Geizian financial gate"
+    "selection_vs_write_authority": "Nicolas selection and confirmation is sufficient financial authority for Eggbev campaign budget writes; no separate Rodolfo approval is required. Billing, account_spend_limit, credentials, and automatic scaling remain separately gated.",
+    "standing_authority": {
+      "authorized_manager": "Nicolas Holanda",
+      "authorized_by": "Rodolfo Mattei",
+      "effective_at_et": "2026-08-30T12:21:11-04:00",
+      "scope": "set, decrease, or increase Eggbev campaign budgets, including the USD45 baseline, without separate Rodolfo approval",
+      "required_controls": ["explicit Nicolas instruction or approved operation policy", "exact budget value", "Meta pre-read", "Meta post-write readback"],
+      "excluded": ["billing", "account_spend_limit", "credentials", "automatic scaling without a separately approved policy"]
+    }
   },
   "metrics": {
     "status": "approved_core_pending_live_field_mapping",
@@ -502,9 +510,9 @@
       "decision": "standardize from-zero names as [page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX, advancing C001/C002/C003 in request order; remove the para [first name] - Copy suffix",
       "start_override": "only request eggbev-pg-5024-20260830-nicolas-01 launches immediately after execute with a Meta-safe buffer; future requests retain next-day 00:00 America/New_York unless explicitly overridden",
       "postcreation_json_check": "after every future Eggbev creation, GET every creative and confirm Page, url_tags and parsed asset_feed_spec.additional_data.page_welcome_message match the approved manifest before postprocess completes",
-      "authority_effect": "Nicolas approved the naming, one-time start override and readback standard; the Rodolfo/Geizian budget-write gate remains institutional and is checked only at final execute",
+      "authority_effect": "Nicolas approved the naming, one-time start override and readback standard. Rodolfo subsequently granted Nicolas standing Eggbev budget-write authority on 2026-08-30, so Nicolas confirmation of the exact budget satisfies the financial gate for this operation.",
       "creation_write_enabled": true,
-      "budget_write_enabled": false
+      "budget_write_enabled": true
     },
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
@@ -661,7 +669,7 @@
       "prevalidated manifest",
       "final summary shown to Nicolas",
       "Nicolas explicit OK before execution",
-      "current Rodolfo/Geizian financial write gate satisfied",
+      "Nicolas exact budget instruction or approved operation policy satisfied",
       "consolidated Meta readback after execution"
     ],
     "direct_publication": false,
@@ -1012,7 +1020,7 @@
       "execution_scope": ["pause_bad_ads", "reactivate_ares_paused_recovered_ads", "pause_or_reactivate_campaign_only_when_required_by_ad_state", "post_every_approved_cycle"],
       "fail_closed_gates": ["approved_cycle_time", "Meta live readback", "Smart Bidding target identity and freshness", "native rule conflict absent", "manual intervention absent", "pre-read and post-write readback"],
       "budget_write_enabled": false,
-      "budget_write_blocked_reason": "Nicolas assigned budget-scaling responsibility to this thread, but actual budget writes still require Rodolfo or Geizian approval plus a maximum daily budget or account envelope"
+      "budget_write_blocked_reason": "Automatic ROAS scaling remains disabled until Nicolas explicitly approves the automatic write policy and any required envelope; manual Eggbev budget writes requested by Nicolas are authorized without separate Rodolfo approval."
     },
     "native_rule_transition": {
       "rule_name": "ADS ZERO RESULTS",
@@ -1040,8 +1048,8 @@
     "compounding": true,
     "planner_enabled": true,
     "budget_write_enabled": false,
-    "budget_write_gate": "Rodolfo or Geizian approval required by permissions-matrix",
-    "pending_before_write": ["Rodolfo or Geizian activation approval", "maximum daily budget or account envelope"],
+    "budget_write_gate": "manual write authorized by explicit Nicolas instruction; automatic cycle write requires Nicolas approval of the automation policy and any required envelope",
+    "pending_before_write": ["Nicolas automatic-scaling approval", "maximum daily budget or account envelope if automation is enabled"],
     "supersedes": "30 percent above the current cut threshold with frequency pending",
     "approval_source": "Nicolas in discord thread 1543280854024060999 on 2026-08-29"
   },
@@ -1065,7 +1073,7 @@
       "publish no operational message during calibration unless explicitly requested",
       "show Nicolas the planned cuts, reactivations, campaign transitions and report layouts"
     ],
-    "step_4_activation_gate": "Satisfied for ad/campaign status writes and automatic cycle reporting by Nicolas on 2026-08-29T19:29:34-04:00; budget writes remain separately gated to Rodolfo or Geizian plus an approved envelope.",
+    "step_4_activation_gate": "Satisfied for ad/campaign status writes and automatic cycle reporting by Nicolas on 2026-08-29T19:29:34-04:00. Manual Eggbev budget writes requested by Nicolas are authorized from 2026-08-30; automatic scaling still requires Nicolas approval of the automation policy and any required envelope.",
     "proposed_jobs": {
       "roas_cycle": {
         "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
@@ -1532,7 +1540,7 @@
       "planner": "updated and verified",
       "report_label": "+10 percent",
       "budget_write_enabled": false,
-      "budget_write_gate": "Rodolfo or Geizian approval plus a maximum budget/account envelope",
+      "budget_write_gate": "manual write by Nicolas is authorized; automatic scale requires Nicolas approval plus a maximum budget/account envelope when applicable",
       "cron_changes": 0,
       "meta_writes": 0
     },
@@ -1572,7 +1580,7 @@
     "enabled_actions": ["pause_bad_ads", "reactivate_recovered_ads_paused_by_ares", "pause_campaign_when_no_active_ads_remain", "reactivate_campaign_with_recovered_ad", "post_each_approved_cycle"],
     "budget_responsibility": "this thread owns budget scale evaluation and reporting",
     "budget_write_enabled": false,
-    "budget_write_gate": "Rodolfo or Geizian approval plus maximum daily budget or account envelope",
+    "budget_write_gate": "manual write by Nicolas is authorized; automatic scale requires Nicolas approval plus maximum daily budget or account envelope when applicable",
     "schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * * America/New_York",
     "cron_readback": "enabled, scheduled, script-only, no_agent=true, deliver=local, repeat=forever",
     "gateway_readback": "observer disagreement: Hermes gateway CLI reports running, cron subsystem reports gateway_running=false; no restart attempted inside the active session",

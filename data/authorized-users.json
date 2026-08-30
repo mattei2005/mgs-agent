@@ -1,6 +1,6 @@
 {
   "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-08-24",
+  "_updated": "2026-08-30",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -299,7 +299,7 @@
               "campaign_reports",
               "creative_operations"
             ],
-            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+            "budget_rule": "For Eggbev-US-CC-EN-BOT / account Eggbev-US-CC-EN-01-G006, Nicolas has standing authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval. Each write still requires an explicit Nicolas instruction or an approved operation policy, pre-read and Meta readback; billing, account spend limit, credentials, and automatic scaling remain separately gated. Other operations continue under their own budget gates."
           }
         }
       ],
