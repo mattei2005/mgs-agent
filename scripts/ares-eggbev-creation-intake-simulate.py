@@ -143,8 +143,7 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
     missing_inputs = []
     if args.daily_budget_usd is None:
         missing_inputs.append("daily_budget_usd_per_campaign")
-    if not args.ad_name_template:
-        missing_inputs.append("ad_names_or_approved_ad_name_template")
+
 
     readiness_blockers = []
     runtime_creation = (account.get("runtime_routes") or {}).get("campaign_creation") or {}
@@ -194,6 +193,7 @@ def simulate(args: argparse.Namespace) -> dict[str, Any]:
             "copy_complete": all([args.primary_text, args.headline, args.description, args.cta]),
             "default_reference": (operation.get("campaign_creation_policy") or {}).get("creation_reference_policy", {}).get("default_reference_campaign"),
             "ad_name_template": args.ad_name_template,
+            "automatic_ad_name_template": "AD NN - {canonical_stem}",
         },
         "page_preflight": page,
         "creative_inventory": inventory,

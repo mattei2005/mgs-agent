@@ -18,7 +18,7 @@
     ],
     "validated_layers": ["campaign", "adset", "adcreative", "ad"],
     "readiness": "ready_for_scoped_request_prestage_plan_and_final_summary",
-    "inputs_still_required_per_request": ["daily_budget_usd_per_campaign", "individual_ad_names_or_approved_template"],
+    "inputs_still_required_per_request": ["daily_budget_usd_per_campaign"],
     "gates_after_summary": ["Nicolas explicit OK", "Rodolfo or Geizian financial write approval", "Engine v3 confirm-execute", "consolidated Meta readback"],
     "writes_during_remediation": {"meta_objects_created": 0, "drive_moves": 0, "inventory_reservations": 0, "media_prestage": 0, "cron_changes": 0}
   },
@@ -495,13 +495,13 @@
   "campaign_creation_policy": {
     "status": "approved_by_nicolas_materialized_for_engine_v3",
     "latest_manager_review": {
-      "reviewed_at_et": "2026-08-29T19:29:53-04:00",
+      "reviewed_at_et": "2026-08-30T01:40:36-04:00",
       "reviewed_by": "Nicolas Holanda",
       "source_thread": "discord:thread:1541578556037927053",
-      "decision": "current operational creation configuration reviewed and accepted for persistence",
-      "review_scope": "output of scripts/ares-eggbev-creation-config-report.py --check",
-      "authority_effect": "no scope or authority expansion",
-      "creation_write_enabled": false,
+      "decision": "standardize the natural creation call so criar N campanha pagina X defaults to 1x1x3, CC_US_EN, automatic ad names and one budget question",
+      "review_scope": "creation-thread intake and deterministic response; financial gate removal request checked against permissions-matrix",
+      "authority_effect": "Nicolas manages campaign requests; the Rodolfo/Geizian budget-write gate remains institutional and is checked only at final execute",
+      "creation_write_enabled": true,
       "budget_write_enabled": false
     },
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
@@ -532,6 +532,11 @@
       "example_3_campaigns_3_creatives": "3 campaigns x 1 ad set x 3 ads = 9 unique creatives from CC_US_EN",
       "start_default": "next day at 00:00 America/New_York; apply without asking again when the request gives no override",
       "status_default": "ACTIVE with future start_time after final summary approval",
+      "creative_count_default": 3,
+      "source_folder_default": "CC_US_EN",
+      "automatic_ad_name_template": "AD NN - {canonical_stem}; numbering resets inside each campaign",
+      "simple_call_pattern": "criar N campanha(s) pagina X",
+      "simple_call_response": "confirm interpreted Page/structure/creatives/start/defaults, ask only exact daily budget, then run preflight/reconcile/prestage/plan and return the final digest summary for Nicolas OK",
       "page_token_resolution": "resolve pg_XXXXX to one Smart Bidding Messenger Page row and verify the Page by Meta GET; ambiguous or inaccessible Page blocks",
       "manager_folder_request": "authorizes scoped reconciliation/release review for this request but never global eligibility or filename-order selection"
     },
@@ -557,13 +562,13 @@
       "apply next-day 00:00 ET and 1x1x3 or 1x1x5 defaults when the natural request already determines them; ask only on a real ambiguity or override",
       "confirm exact daily budget",
       "reconcile and reserve the required number of unique new creatives",
-      "confirm a canonical creation reference/template or explicit campaign/ad names, copy, placements and tracking"
+      "apply the canonical creation reference, automatic ad names, copy, placements and tracking unless Nicolas supplies an explicit override"
     ],
     "intake_simulator": {
       "script": "scripts/ares-eggbev-creation-intake-simulate.py",
       "mode": "read_only",
       "latest_fixture": "pg_5024; 3 campaigns; 3 creatives each; CC_US_EN",
-      "latest_result": "page Amy Shook verified by Meta GET; next-day 00:00 ET applied; 9 unique assets required; budget and copy missing; technical readiness blockers remain",
+      "latest_result": "page Amy Shook verified by Meta GET; next-day 00:00 ET, canonical reference and automatic ad names applied; only exact daily budget remains an input; zero readiness blockers",
       "writes": 0
     },
     "prepublication_double_gate": true,

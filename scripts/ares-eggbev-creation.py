@@ -385,6 +385,21 @@ def parse_ad_names(path: Path, required: int) -> list[str]:
     return [str(item) for item in names]
 
 
+def automatic_ad_names(selected: list[dict[str, Any]], creatives_per_campaign: int) -> list[str]:
+    if creatives_per_campaign not in {3, 5}:
+        raise CreationBlocked("ad_names", "automatic ad names require three or five creatives per campaign")
+    names = []
+    for index, row in enumerate(selected):
+        filename = str(row.get("canonical_filename") or "").strip()
+        if not filename:
+            raise CreationBlocked("ad_names", "canonical filename is required for automatic ad naming")
+        slot = (index % creatives_per_campaign) + 1
+        names.append(f"AD {slot:02d} - {Path(filename).stem}")
+    if len(set(names)) != len(names):
+        raise CreationBlocked("ad_names", "automatic ad names are not unique within the request")
+    return names
+
+
 def build_summary(page: dict[str, Any], manifest: dict[str, Any], selected: list[dict[str, Any]]) -> dict[str, Any]:
     operation = load_json(OP_PATH)
     policy = operation["campaign_creation_policy"]
@@ -548,7 +563,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         raise CreationBlocked("authorization", "authorized-by is required")
     required = args.campaign_count * args.creatives_per_campaign
     budgets = usd_minor_list(args.daily_budgets_usd, args.campaign_count)
-    ad_names = parse_ad_names(args.ad_names_json, required)
+    ad_names = parse_ad_names(args.ad_names_json, required) if args.ad_names_json else None
     request_state_path = state_path(args.request_id)
     audit_path = AUDIT_ROOT / f"{request_state_path.stem}.json"
     existing = load_json(request_state_path) if request_state_path.exists() else None
@@ -559,6 +574,8 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     page_sequence, campaign_sequences, history = naming_for_request(meta, token, args.page_token, args.campaign_count, args.request_id)
     reconciliation = load_reconciliation(required)
     selected = select_assets(reconciliation, args.request_id, required)
+    if ad_names is None:
+        ad_names = automatic_ad_names(selected, args.creatives_per_campaign)
     reserve_inventory(selected, args.request_id, args.authorized_by, audit_path)
     state = existing or {
         "schema_version": 1,
@@ -714,7 +731,7 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_parser.add_argument("--campaign-count", type=int, required=True)
     prepare_parser.add_argument("--creatives-per-campaign", type=int, choices=[3, 5], required=True)
     prepare_parser.add_argument("--daily-budgets-usd", required=True)
-    prepare_parser.add_argument("--ad-names-json", type=Path, required=True)
+    prepare_parser.add_argument("--ad-names-json", type=Path)
     prepare_parser.add_argument("--authorized-by", required=True)
     prepare_parser.add_argument("--confirm-scoped-release", action="store_true")
     prepare_parser.add_argument("--max-assets-per-run", type=int, default=3)
