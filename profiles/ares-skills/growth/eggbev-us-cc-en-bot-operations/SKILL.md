@@ -161,7 +161,7 @@ Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json` v0.2-d
 Campaign  Auction | Sales | CBO | Highest volume | Standard | Financial products/services US
 Status    produção normal = ACTIVE com start_time futuro após resumo final aprovado; canário técnico = PAUSED até aprovação separada
 Ad set   AdG1 | Messenger | next day 00:00 America/New_York | ongoing | US 18+ All
-Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page
+Ads      1x1x3 ou 1x1x5 | manual upload | Instagram usa Facebook Page: resolver por Page Access Token o `page_backed_instagram_account` existente da página selecionada e enviar seu ID em `object_story_spec.instagram_user_id`; nunca usar conta Instagram alheia
 Pixel    Eggbev-US-CC-EN; mesmo pixel para toda a operação
 Payer    DIGITAL TRUST; sempre nesta operação
 Budget   variável; Nicolas escolhe/confirma e pode aumentar ou reduzir sem nova aprovação do Rodolfo; valor exato + pré-leitura + readback obrigatórios
