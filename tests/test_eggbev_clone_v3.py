@@ -14,8 +14,8 @@ if str(ROOT / 'scripts') not in sys.path:
 from ares_campaign_v3.eggbev_clone import duplicate_names, next_midnight_et
 from ares_campaign_v3.media_registry import MediaRegistry
 from ares_campaign_v3.planning import Planner
-from ares_campaign_v3.prevalidation import prevalidate_payload
-from ares_campaign_v3.schema import Manifest
+from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
+from ares_campaign_v3.schema import Manifest, ManifestError
 
 
 ACCOUNT_ID = '1034081997659047'
@@ -166,7 +166,12 @@ class EggbevCloneV3Tests(unittest.TestCase):
         bundle = Planner(bundle_size=2, max_ads_per_batch=10).build(Manifest.from_dict(manifest_payload(campaign))).lanes[ACCOUNT_ID][0]
         self.assertEqual([stage.name for stage in bundle.stages], ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback'])
         update = bundle.stages[1].operations[0]
-        self.assertEqual(update.body, {'name': 'Original Campaign DUP01', 'daily_budget': '5500', 'status': 'ACTIVE'})
+        self.assertEqual(update.body, {
+            'name': 'Original Campaign DUP01',
+            'daily_budget': '5500',
+            'start_time': campaign['start_time'],
+            'status': 'ACTIVE',
+        })
 
     def test_eggbev_account_prompt_and_operation_are_installed(self):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
@@ -175,6 +180,50 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertIn('clone_page_switch', config['supported_modes'])
         self.assertTrue((ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json').exists())
         self.assertTrue((ROOT / 'data/ares/discord/thread-prompts/1543333373945053184.txt').exists())
+
+    def test_account_policy_accepts_active_midnight_dup_with_budget(self):
+        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+        campaign = {
+            'idempotency_key': 'policy-valid',
+            'app_key': 'mgs-meta-app-current',
+            'account_id': ACCOUNT_ID,
+            'mode': 'pure_clone',
+            'source_campaign_id': 'source-campaign',
+            'name': 'Original Campaign DUP01',
+            'start_time': future_midnight(),
+            'status': 'ACTIVE',
+            'campaign_updates': {'daily_budget': '4500'},
+        }
+        validate_account_policy(Manifest.from_dict(manifest_payload(campaign)), config)
+
+    def test_account_policy_blocks_wrong_name_missing_budget_and_wrong_time(self):
+        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+        base = {
+            'idempotency_key': 'policy-invalid',
+            'app_key': 'mgs-meta-app-current',
+            'account_id': ACCOUNT_ID,
+            'mode': 'pure_clone',
+            'source_campaign_id': 'source-campaign',
+            'name': 'Original Campaign DUP01',
+            'start_time': future_midnight(),
+            'status': 'ACTIVE',
+            'campaign_updates': {'daily_budget': '4500'},
+        }
+
+        wrong_name = json.loads(json.dumps(base))
+        wrong_name['name'] = 'Original Campaign'
+        with self.assertRaisesRegex(ManifestError, 'naming policy'):
+            validate_account_policy(Manifest.from_dict(manifest_payload(wrong_name)), config)
+
+        no_budget = json.loads(json.dumps(base))
+        no_budget['campaign_updates'] = {}
+        with self.assertRaisesRegex(ManifestError, 'daily_budget'):
+            validate_account_policy(Manifest.from_dict(manifest_payload(no_budget)), config)
+
+        wrong_time = json.loads(json.dumps(base))
+        wrong_time['start_time'] = next_midnight_et(datetime.now(ZoneInfo('America/New_York'))).replace(hour=1).isoformat()
+        with self.assertRaisesRegex(ManifestError, '00:00'):
+            validate_account_policy(Manifest.from_dict(manifest_payload(wrong_time)), config)
 
 
 if __name__ == '__main__':
