@@ -732,6 +732,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-roas-campaign-key-pagination-v17-20260830",
+      "next_step": "implementar chave compacta, ordenação natural e paginação de dez linhas",
+      "objective": "Diferenciar campanhas C/DUP no relatório e manter legibilidade com mais de 50 linhas",
+      "source": "discord:thread:1541578606076231750",
+      "state": "design_selected",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-30T23:36:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-roas-layout-compact-signals-20260830",
       "next_step": "usar automaticamente o renderer v15 no próximo ciclo Corte e ROAS",
       "objective": "Remover lista longa por anúncio, compactar sinais na tabela e adicionar legenda curta",
@@ -1512,5 +1522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T23:28:45+00:00"
+  "updated_at": "2026-08-30T23:36:36+00:00"
 }
