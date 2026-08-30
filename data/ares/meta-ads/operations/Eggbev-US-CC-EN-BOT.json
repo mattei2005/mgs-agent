@@ -868,6 +868,14 @@
         "columns": ["R/E", "Camp", "Página", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Leads", "RPS", "CPM", "Ação"],
         "implementation": "dynamic content widths, two spaces between columns, one Unicode divider, one campaign per row and actual-length pagination",
         "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
+        "manager_approval": {
+          "approved_by": "Nicolas Holanda",
+          "approved_by_discord_id": "1055570806945620030",
+          "approved_at_et": "2026-08-30T11:54:19-04:00",
+          "source": "discord:thread:1541578606076231750",
+          "decision": "approved; save now and keep this exact layout until the manager explicitly requests the next change",
+          "change_control": "locked_until_explicit_manager_change"
+        },
         "validation": {
           "eggbev_tests": "65/65 passed",
           "targeted_desktop_table_tests": "3/3 passed",

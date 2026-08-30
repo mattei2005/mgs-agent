@@ -763,12 +763,15 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v14_matches_cpv13_intraday_print_and_keeps_roas_semantics(self):
+    def test_roas_reporting_v14_is_approved_locked_and_keeps_roas_semantics(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('cpv13_intraday_desktop_table_v14', reporting_policy['status'])
+        self.assertIn('cpv13_intraday_desktop_table_v14_approved_and_locked_by_nicolas', reporting_policy['status'])
         self.assertIn('no recurring explanatory legend', reporting_policy['layout'])
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         desktop = reporting_policy['cpv13_intraday_print_correction']
+        self.assertEqual(desktop['manager_approval']['approved_by'], 'Nicolas Holanda')
+        self.assertEqual(desktop['manager_approval']['change_control'], 'locked_until_explicit_manager_change')
+        self.assertIn('until the manager explicitly requests the next change', desktop['manager_approval']['decision'])
         self.assertTrue(desktop['validation']['single_table'])
         self.assertTrue(desktop['validation']['one_row_per_campaign'])
         self.assertEqual(desktop['validation']['single_campaign_display_width'], 122)
