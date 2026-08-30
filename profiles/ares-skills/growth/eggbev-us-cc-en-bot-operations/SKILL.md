@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.16.0-draft
+version: 0.16.1-draft
 author: Ares
 license: internal
 metadata:
@@ -353,6 +353,17 @@ Ligada | Campanha | Entrega | Ação | Página ║ Meta Ads ║ Smart Bidding
 `Página` fica imediatamente após `Ação` e antes de `Custo por conversa`. Os cabeçalhos usam palavras completas em português, divididas em duas linhas quando necessário; não voltar para `Camp/Pg`, `C/msg`, `C/res`, `C/Sub`, `Rev BC` ou `Page ID`. Valores USD usam cifrão e vírgula decimal, por exemplo `$1,86`. Os grupos **Decisão e Identidade**, **Meta Ads — ROAS em destaque** e **Smart Bidding** usam títulos Markdown em negrito, `║` entre grupos e `│` entre colunas.
 
 ROAS é a única coluna com sinal visual dependente do threshold do ciclo: `🔴` abaixo, `🟡` exatamente igual, `🟢` acima e `⚪` indisponível. O sinal é apresentação; não altera a fórmula nem a lógica de corte/reativação. A largura ampliada usa até 3 campanhas por bloco e repete o cabeçalho completo de duas linhas sem limite silencioso.
+
+### Refinamento visual v7 — ROI e nova posição da Página
+
+Por instrução de Nicolas em `2026-08-30`, a ordem inicial fica `Ligada | Campanha | Página | Entrega | Ação`. Esta regra supersede a posição da Página descrita no v6.
+
+No final do grupo Smart Bidding, exibir duas colunas numéricas distintas:
+
+- `ROI atual`: valor de `roi_real`, calculado por `(NET_REVENUE − INVESTIMENT) / INVESTIMENT × 100` após join econômico exato;
+- `ROI estimado`: valor de `roi_estimated`, calculado por `(estimatedRevenue − INVESTIMENT) / INVESTIMENT × 100` após join exato e estimativa não ambígua.
+
+Ambas mostram percentual com sinal: `🟢` positivo, `🟡` zero, `🔴` negativo e `⚪ N/D` quando indisponível. São informativas e nunca substituem Meta Purchase ROAS na decisão de corte/reativação.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
