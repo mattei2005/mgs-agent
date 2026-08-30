@@ -473,12 +473,12 @@
     {
       "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
-      "next_step": "Conter as duas rotas, atualizar script/registry/estado para B013-4, executar dry-run completo, então reativar e validar ciclo real.",
-      "objective": "Concluir o cutover B013-3 para B013-4, manter B013 na rota dedicada DTR/Graph e reativar o cron após validação real.",
-      "source": "Discord thread 1543419014657605735; message 1543419014657605735; 1Password item BOT B013-4 Token - Dayanna Regis; Meta Graph live; Sheet Migracao 22/06; cron 498fb0d95e10.",
-      "state": "rodolfo confirmou b013-3 substituído por b013-4 e credenciais atualizadas no 1password. cron dedicado 498fb0d95e10 permanece pausado. preflight b013-4: item exato e campos presentes; app metadata, /me e debug_token http 200 com identidade válida; /roles http 200 com app token e 4 roles; sheet no app possui 31 linhas b013-4 e zero b013-3. nenhuma mudança produtiva do cutover aplicada ainda.",
+      "next_step": "Cron B013-4 monitora as 13 conexões ainda pendentes e limpa X/alerta automaticamente quando reconectarem",
+      "objective": "B013-3 substituída por B013-4; atualizar rota dedicada completa e reativar cron",
+      "source": "discord:1543419014657605735",
+      "state": "completed",
       "thread_id": "1543419014657605735",
-      "updated_at": "2026-08-30T00:39:10+00:00"
+      "updated_at": "2026-08-30T01:17:20+00:00"
     },
     {
       "agent": "zeus",
@@ -1442,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T01:10:36+00:00"
+  "updated_at": "2026-08-30T01:17:20+00:00"
 }

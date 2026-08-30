@@ -138,11 +138,12 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
 2. Engine v3: conta Eggbev cadastrada na release 3.3.0; `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam validate/plan. Permanecem dependentes de mídia pre-stageada somente os pedidos `clone_prestaged` com assets novos.
-3. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
-4. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
-5. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
-6. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
-7. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
+3. Criação do zero: `from_zero_prestaged` ainda não está nos modos da operação v3; runner Eggbev, payload exato de placements, referência canônica de criação, pre-stage e elegibilidade reconciliada continuam pendentes. O intake e a simulação read-only estão prontos, mas manifest/dry-run/write não.
+4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
+5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
+6. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
+7. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
+8. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
 Cada pendência bloqueia somente a ação dependente; não reabre regras já aprovadas.
 
@@ -172,7 +173,7 @@ Interpretação determinística de pedido mínimo:
 - `pg_XXXXX` deve resolver para uma única linha Messenger da Smart Bidding e a Page precisa passar GET Meta;
 - pedir para “puxar da pasta” autoriza a revisão/liberação scoped dos candidatos daquele request, não elegibilidade global nem seleção por ordem de filename.
 
-Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Não existe copy default ativo. Se o pedido não trouxer os quatro campos nem campanha/template de referência aprovado, perguntar somente qual copy usar; nunca inferir pela Page, `pg_XXXXX`, filename ou outra operação. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
+Copy significa exclusivamente os campos Meta `Primary text`, `Headline`, `Description` e `CTA`; imagens e vídeos são criativos. Não existe copy default nem naming from-zero aprovado; `DUPnn` é exclusivo de clone. Se o pedido não trouxer uma campanha/template canônico de referência, perguntar uma única vez qual referência deve fornecer naming da campanha, nomes dos ads, copy, placements e tracking. Nunca escolher silenciosamente a campanha mais recente ou inferir pela Page, `pg_XXXXX`, filename ou outra operação. Página/`pg_XXXXX`, links e `url_tags`/UTMs precisam constar no resumo final e no readback.
 
 O simulador read-only canônico é `python3 scripts/ares-eggbev-creation-intake-simulate.py`. Ele aplica defaults, consulta Page/inventário/media registry e enumera inputs/bloqueios; nunca reserva asset, pre-stageia mídia ou faz write Meta.
 

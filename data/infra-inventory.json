@@ -10945,6 +10945,24 @@
       },
       "status": "validate_plan_ready_write_per_request_gated_live_canary_pending",
       "updated_at": "2026-08-29T20:39:38-04:00"
+    },
+    {
+      "id": "zeus-meta-app-b0133-to-b0134-cutover-backup-20260829",
+      "agent": "zeus",
+      "type": "rollback_backup",
+      "path": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023",
+      "artifacts": [
+        "b013-dtr-link-monitor-state.json.before",
+        "b013-dtr-link-watch.sh.before",
+        "meta-app-registry.json.before",
+        "meta-app-roles-watch.sh.before",
+        "route-pack-05.md.before",
+        "SHA256SUMS"
+      ],
+      "purpose": "Rollback/audit snapshot before replacing active B013-3 routing, credentials metadata, Sheet selector and production baseline with B013-4.",
+      "validation": "SHA256SUMS verified all five pre-cutover artifacts; manifest SHA-256 5b042cda3203ebb9eaf077c7af09fb3a72640e550d57c3e151292c31f5d66e50.",
+      "authorization_message_id": "1543419014657605735",
+      "updated_at": "2026-08-29T21:09:19-04:00"
     }
   ],
   "profile_skill_references": [
@@ -11101,8 +11119,8 @@
       "skill": "meta-app-rate-limit-monitor",
       "md5": "167ad4c3fad161b338349c76c4ad09b9",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
-      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
+      "description": "Meta app monitor procedure for generic B001–B012 roles plus dedicated B013 DTR routing.",
+      "last_change": "2026-08-29: trigger coverage expanded to B013 and current B013-4 production route documented."
     },
     {
       "profile": "ares",
@@ -11238,18 +11256,18 @@
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
       "size_bytes": 1928,
-      "sha256": "6b6c4c127ca5dd22d5da4c7e10509135a1903a91e9ea35ff684a61c404ea0247",
+      "sha256": "e0a70da5e3785525943287243cc578cc495b402db4ea02420e0ee1a1f4264c6c",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-08-18T11:56:53-04:00",
-      "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT.",
-      "modified_at": "2026-08-18T11:43:07-04:00",
+      "updated_at": "2026-08-29T21:09:19-04:00",
+      "validation": "Runtime/versioned SKILL.md SHA-256 match; B013-4 route pack and scheduled production cycle validated.",
+      "modified_at": "2026-08-29T21:03:04-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "agent": "zeus",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
-      "md5": "4c8036a77db6614596c95749e2a6e39e",
+      "purpose": "Router for B001–B013 Meta roles, DTR/ChatPion and app-health monitoring procedures.",
+      "md5": "167ad4c3fad161b338349c76c4ad09b9",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
-      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
+      "description": "Meta app monitor procedure for generic B001–B012 roles plus dedicated B013 DTR routing.",
+      "last_change": "2026-08-29: trigger coverage expanded to B013 and current B013-4 production route documented."
     },
     {
       "profile": "zeus",
