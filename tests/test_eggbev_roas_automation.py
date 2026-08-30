@@ -757,10 +757,11 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v9_keeps_roas_threshold_position_distinct_from_negative_roi(self):
+    def test_roas_reporting_v10_keeps_roas_threshold_position_distinct_from_negative_roi(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('desktop_unified_v9', reporting_policy['status'])
+        self.assertIn('desktop_unified_v10', reporting_policy['status'])
         self.assertIn('no recurring explanatory legend', reporting_policy['layout'])
+        self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
             'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',

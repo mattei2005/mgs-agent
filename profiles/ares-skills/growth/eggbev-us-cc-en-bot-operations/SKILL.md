@@ -378,6 +378,10 @@ A classificação `negativo` pertence somente ao ROI: `ROI atual < 0%` ou `ROI e
 
 Por instrução de Nicolas em `2026-08-30`, o relatório Corte e ROAS começa com uma abertura curta para mobile: título com estado e horário ET; uma linha com fase, modo e threshold; uma linha com contagens de campanhas, anúncios, cortes, reativações, escalas e manutenções. A legenda explicativa longa foi removida integralmente do fim do relatório. A tabela e a semântica do v8 permanecem inalteradas; fontes inválidas continuam aparecendo como bloqueio curto no início.
 
+### Refinamento visual v10 — alinhamento Unicode e espaços
+
+Por correção de Nicolas em `2026-08-30`, o painel unificado preserva todos os espaços de padding ao calcular a largura visual e trata sequências emoji com VS16, como `⬇️` e `⬆️`, como duas colunas no Discord. Cabeçalho superior, cabeçalho inferior, separador e todas as linhas devem terminar na mesma coluna visual. A regressão cobre ROAS abaixo, igual, acima e indisponível. Esta revisão é somente de apresentação e não altera fontes, seleção de campanhas, threshold, corte, reativação, budget, cron ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.
