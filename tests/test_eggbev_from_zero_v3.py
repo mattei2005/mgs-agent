@@ -114,8 +114,13 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(feed["bodies"], [{"text": ""}])
         self.assertEqual(
             [[row["text"] for row in item["asset_feed_spec"]["titles"]] for item in ad_creatives],
-            [["APPLY NOW ✅"], ["CARD APPROVED"], ["✔️ APPLY CARD"]],
+            [["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]] * 3,
         )
+        for item in ad_creatives:
+            feed = item["asset_feed_spec"]
+            self.assertEqual(len(feed["titles"]), 3)
+            self.assertTrue(all(len(title["adlabels"]) == 2 for title in feed["titles"]))
+            self.assertTrue(all(rule.get("title_label") for rule in feed["asset_customization_rules"]))
         self.assertEqual(feed["call_to_action_types"], ["APPLY_NOW"])
         self.assertIs(welcome["performance_booster_enabled"], False)
         self.assertIs(welcome["message_data"]["performance_booster_enabled"], False)
@@ -127,6 +132,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         campaign = payload["campaigns"][0]
         creative = campaign["ads"][0]["creative_payload"]
         self.assertEqual(campaign["adset_create"]["promoted_object"]["page_id"], "123456789012345")
+        self.assertEqual(campaign["adset_create"]["promoted_object"]["custom_event_str"], "eggbev-pv-u")
         self.assertEqual(creative["object_story_spec"], {"page_id": "123456789012345", "instagram_user_id": "17841400000000000"})
         self.assertEqual(creative["url_tags"], "utm_campaign=pg_5024")
 

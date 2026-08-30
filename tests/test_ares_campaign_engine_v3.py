@@ -91,6 +91,7 @@ def prestaged_campaign(i: int, account: str = '100') -> dict:
         'start_time': future_iso(),
         'status': 'PAUSED',
         'campaign_updates': {'daily_budget': '3000'},
+        'adset_updates': {},
         'ads': [
             {
                 'name': f'Ad {i}.{j}',

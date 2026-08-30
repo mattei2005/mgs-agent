@@ -95,6 +95,8 @@ def _creative_payload(
 ) -> dict[str, Any]:
     vertical_label = {"name": f"{label_prefix}_vertical"}
     square_label = {"name": f"{label_prefix}_square"}
+    vertical_title_label = {"name": f"{label_prefix}_title_vertical"}
+    square_title_label = {"name": f"{label_prefix}_title_square"}
     return {
         "name": f"Eggbev {page_token} {label_prefix}",
         "object_story_spec": {"page_id": page_id, "instagram_user_id": instagram_user_id},
@@ -106,7 +108,13 @@ def _creative_payload(
                 {"video_id": str(media["square_video_id"]), "adlabels": [square_label]},
             ],
             "bodies": [{"text": primary_text}],
-            "titles": [{"text": item} for item in headlines],
+            "titles": [
+                {
+                    "text": item,
+                    "adlabels": [square_title_label, vertical_title_label],
+                }
+                for item in headlines
+            ],
             "descriptions": [{"text": description}],
             "call_to_action_types": [cta],
             "call_to_actions": [{"type": cta, "value": {"app_destination": "MESSENGER"}}],
@@ -121,11 +129,13 @@ def _creative_payload(
                         "instagram_positions": SQUARE_RULE_INSTAGRAM,
                     },
                     "video_label": square_label,
+                    "title_label": square_title_label,
                     "priority": 1,
                 },
                 {
                     "customization_spec": {"age_min": 18, "age_max": 65},
                     "video_label": vertical_label,
+                    "title_label": vertical_title_label,
                     "priority": 2,
                 },
             ],
@@ -231,7 +241,7 @@ def build_eggbev_from_zero_manifest(
                         page_token=page_token,
                         label_prefix=label_prefix,
                         primary_text=str(primary_text),
-                        headlines=[str(headlines[global_index % len(headlines)])],
+                        headlines=[str(item) for item in headlines],
                         description=str(description),
                         cta=str(cta),
                     ),
@@ -277,6 +287,7 @@ def build_eggbev_from_zero_manifest(
                     "promoted_object": {
                         "pixel_id": "935354115143283",
                         "custom_event_type": "OTHER",
+                        "custom_event_str": "eggbev-pv-u",
                         "page_id": page_id,
                         "smart_pse_enabled": False,
                     },

@@ -68,6 +68,29 @@ def _validate_video_label_references(payload: dict[str, Any]) -> None:
         raise ManifestError(f"asset_customization_rules video_label missing from videos: {','.join(missing)}")
 
 
+def _validate_title_label_references(payload: dict[str, Any]) -> None:
+    asset_feed = payload.get("asset_feed_spec") or {}
+    rules = asset_feed.get("asset_customization_rules") or []
+    referenced = {
+        _label_identity(rule.get("title_label"))
+        for rule in rules
+        if isinstance(rule, dict) and rule.get("title_label")
+    }
+    referenced.discard("")
+    if not referenced:
+        return
+    available = {
+        _label_identity(label)
+        for title in (asset_feed.get("titles") or [])
+        if isinstance(title, dict)
+        for label in (title.get("adlabels") or [])
+    }
+    available.discard("")
+    missing = sorted(referenced - available)
+    if missing:
+        raise ManifestError(f"asset_customization_rules title_label missing from titles: {','.join(missing)}")
+
+
 @dataclass(frozen=True)
 class MediaSpec:
     asset_id: str
@@ -130,6 +153,7 @@ class AdSpec:
         if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
         _validate_video_label_references(payload)
+        _validate_title_label_references(payload)
         media_value = value.get("media")
         if require_media:
             media = MediaSpec.from_dict(media_value or {})
@@ -153,6 +177,7 @@ class CampaignSpec:
     source_adset_id: str | None = None
     adset_name: str | None = None
     campaign_updates: dict[str, Any] = field(default_factory=dict)
+    adset_updates: dict[str, Any] = field(default_factory=dict)
     campaign_create: dict[str, Any] = field(default_factory=dict)
     adset_create: dict[str, Any] = field(default_factory=dict)
     ads: tuple[AdSpec, ...] = field(default_factory=tuple)
@@ -252,6 +277,18 @@ class CampaignSpec:
         reserved_updates = sorted(set(updates) & {"id", "name", "status", "start_time", "campaign_id"})
         if reserved_updates:
             raise ManifestError(f"campaign_updates contains engine-owned fields: {','.join(reserved_updates)}")
+        adset_updates = value.get("adset_updates") or {}
+        if not isinstance(adset_updates, dict):
+            raise ManifestError("adset_updates must be an object")
+        reserved_adset_updates = sorted(
+            set(adset_updates) & {"id", "name", "status", "start_time", "campaign_id", "adset_id"}
+        )
+        if reserved_adset_updates:
+            raise ManifestError(
+                f"adset_updates contains engine-owned fields: {','.join(reserved_adset_updates)}"
+            )
+        if mode in {"pure_clone", "from_zero_prestaged"} and adset_updates:
+            raise ManifestError(f"{mode} forbids adset_updates")
         return cls(
             idempotency_key=str(value["idempotency_key"]),
             app_key=str(value["app_key"]),
@@ -264,6 +301,7 @@ class CampaignSpec:
             source_adset_id=source_adset_id,
             adset_name=adset_name,
             campaign_updates=updates,
+            adset_updates=adset_updates,
             campaign_create=campaign_create,
             adset_create=adset_create,
             ads=ads,

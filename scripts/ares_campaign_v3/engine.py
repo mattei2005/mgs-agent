@@ -220,7 +220,7 @@ class CampaignEngine:
         for index, campaign_id in enumerate(campaign_ids, 1):
             operations.extend([
                 BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
-                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy&limit=20", kind="readback"),
+                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy,promoted_object&limit=20", kind="readback"),
                 BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,effective_object_story_id}}&limit=50", kind="readback"),
             ])
         return operations
@@ -361,7 +361,11 @@ class CampaignEngine:
                 ),
                 BatchOperation(
                     f"adset_update_{index}", "POST", adset_id,
-                    body={"name": campaign.adset_name or campaign.name, "status": campaign.status},
+                    body={
+                        "name": campaign.adset_name or campaign.name,
+                        "status": campaign.status,
+                        **campaign.adset_updates,
+                    },
                     kind="adset_update",
                 ),
             ])
