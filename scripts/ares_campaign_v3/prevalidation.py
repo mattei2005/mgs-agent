@@ -12,6 +12,22 @@ from .media_registry import MediaRegistry
 from .schema import Manifest, ManifestError
 
 
+def _require_subset(actual: Any, expected: Any, path: str) -> None:
+    """Require an operation policy subset without rejecting extra API fields."""
+    if isinstance(expected, dict):
+        if not isinstance(actual, dict):
+            raise ManifestError(f"account campaign policy requires object at {path}")
+        for key, value in expected.items():
+            if key not in actual:
+                raise ManifestError(f"account campaign policy missing {path}.{key}")
+            _require_subset(actual[key], value, f"{path}.{key}")
+        return
+    if actual != expected:
+        raise ManifestError(
+            f"account campaign policy requires {path}={json.dumps(expected, ensure_ascii=False, sort_keys=True)}"
+        )
+
+
 def content_digest(payload: dict[str, Any]) -> str:
     clean = copy.deepcopy(payload)
     clean.pop("prevalidated", None)
@@ -44,19 +60,51 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 f"account {campaign.account_id} does not support mode {campaign.mode}"
             )
 
-        policy = account.get("campaign_policy") or {}
+        base_policy = dict(account.get("campaign_policy") or {})
+        mode_policies = base_policy.pop("by_mode", {}) or {}
+        policy = {**base_policy, **dict(mode_policies.get(campaign.mode) or {})}
+        required_operation = str(account.get("operation") or "").strip()
+        if required_operation and manifest.operation != required_operation:
+            raise ManifestError(
+                f"account {campaign.account_id} requires operation {required_operation}"
+            )
         name_regex = policy.get("name_regex")
         if name_regex and re.fullmatch(str(name_regex), campaign.name) is None:
             raise ManifestError(f"campaign name violates account naming policy: {campaign.name}")
 
         if policy.get("budget_update_required"):
-            raw_budget = campaign.campaign_updates.get("daily_budget")
+            budget_source = str(policy.get("budget_source") or "campaign_updates")
+            if budget_source == "campaign_create":
+                raw_budget = campaign.campaign_create.get("daily_budget")
+            elif budget_source == "campaign_updates":
+                raw_budget = campaign.campaign_updates.get("daily_budget")
+            else:
+                raise ManifestError(f"unsupported campaign policy budget_source: {budget_source}")
             try:
                 budget_minor = int(str(raw_budget))
             except (TypeError, ValueError) as exc:
                 raise ManifestError("account campaign policy requires explicit daily_budget") from exc
             if budget_minor <= 0:
                 raise ManifestError("daily_budget must be a positive minor-unit integer")
+
+        allowed_ad_counts = {int(item) for item in (policy.get("allowed_ad_counts") or [])}
+        if allowed_ad_counts and len(campaign.ads) not in allowed_ad_counts:
+            raise ManifestError(
+                f"account campaign policy allows ad counts {sorted(allowed_ad_counts)}; got {len(campaign.ads)}"
+            )
+
+        if policy.get("required_campaign_create"):
+            _require_subset(
+                campaign.campaign_create,
+                policy["required_campaign_create"],
+                "campaign_create",
+            )
+        if policy.get("required_adset_create"):
+            _require_subset(
+                campaign.adset_create,
+                policy["required_adset_create"],
+                "adset_create",
+            )
 
         required_status = str(policy.get("configured_status") or "").upper()
         if required_status and campaign.status != required_status:

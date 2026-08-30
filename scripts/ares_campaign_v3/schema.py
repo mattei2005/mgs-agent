@@ -216,8 +216,8 @@ class CampaignSpec:
                 raise ManifestError(f"campaign_create contains engine-owned fields: {','.join(campaign_reserved)}")
             if adset_reserved:
                 raise ManifestError(f"adset_create contains engine-owned fields: {','.join(adset_reserved)}")
-            if len(ads) != 3:
-                raise ManifestError("from_zero_prestaged requires exactly three ads")
+            if len(ads) not in {3, 5}:
+                raise ManifestError("from_zero_prestaged requires exactly three or five ads")
             if not adset_name:
                 raise ManifestError("from_zero_prestaged requires adset_name")
             if not campaign_create:
