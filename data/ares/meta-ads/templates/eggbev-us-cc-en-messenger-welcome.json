@@ -1,0 +1,21 @@
+{
+  "message": {
+    "template_type": "text_with_buttons",
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "💳 Hi, I just reviewed your access…\n\nDo you want to see your approved card? ⤵️",
+        "buttons": [
+          {
+            "type": "postback",
+            "payload": "GET_STARTED_PAYLOAD",
+            "title": "🟢 YES, SHOW ME"
+          }
+        ]
+      }
+    }
+  },
+  "performance_booster_enabled": false,
+  "ctm_deprecate_quick_replies_enabled": false
+}
