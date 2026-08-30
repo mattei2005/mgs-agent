@@ -3,8 +3,8 @@
   "status": "valid",
   "operation": "Eggbev-US-CC-EN-BOT",
   "account_id": "1034081997659047",
-  "generated_at_utc": "2026-08-30T11:22:59.042328+00:00",
-  "valid_until_utc": "2026-08-30T17:22:59.042328+00:00",
+  "generated_at_utc": "2026-08-30T22:42:37.189166+00:00",
+  "valid_until_utc": "2026-08-31T04:42:37.189166+00:00",
   "read_only": true,
   "writes": {
     "meta": 0,
@@ -16,7 +16,7 @@
     "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
     "project_id": "mgs-core-prod",
     "drive_id": "0AEwt4Ye690ocUk9PVA",
-    "ready_files": 68
+    "ready_files": 119
   },
   "meta": {
     "accounts_scanned": [
@@ -24,18 +24,18 @@
       "Eggbev-US-CC-EN-03 (FAX-US-02)",
       "Eggbev-US-CC-EN-02 (FAX-US-03)"
     ],
-    "advideos_scanned": 261,
-    "advideos_limit_per_account": 100,
+    "advideos_scanned": 661,
+    "advideos_limit_per_account": 300,
     "coverage": "bounded_recent_window_per_account",
     "matching_policy": "known Meta IDs plus asset/checksum/canonical/original markers in ad-account video titles",
     "limitation": "no downloadable Meta visual fingerprint was generated; scoped manager release plus title/ID/current-inventory checks remain mandatory"
   },
   "summary": {
-    "required": 3,
-    "inventory_candidates": 70,
-    "approved_for_scoped_request": 63,
-    "conflicted": 7,
-    "manager_release_required": 63
+    "required": 36,
+    "inventory_candidates": 121,
+    "approved_for_scoped_request": 110,
+    "conflicted": 11,
+    "manager_release_required": 110
   },
   "assets": [
     {
@@ -815,36 +815,6 @@
       "approved_for_scoped_request": true
     },
     {
-      "asset_id": "asset_0e26b67a2405c06f6d9f",
-      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_027.mp4",
-      "asset_drive_id": "1o44yZXGVzWV7Qc2SYuXWo2YSRB3N6kjX",
-      "clean_checksum": "87e0b648301b8417c0dd0d063d4ba50aa5dbb003de1d8077949f65209854cd84",
-      "perceptual_fingerprint": "dhash64:c29cccf5714f0b89/c29cd4f5714f0b89/c29cdcf5734f0f89",
-      "angle": "AVAILABLE_LIMIT",
-      "orientation": "PV",
-      "first_seen_at": "2026-08-03T22:13:09.607Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
-      "requires_scoped_manager_release": true,
-      "drive_readback": {
-        "id": "1o44yZXGVzWV7Qc2SYuXWo2YSRB3N6kjX",
-        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_027.mp4",
-        "size": "7116838",
-        "md5Checksum": "c0bac9adf53925c60c2326343fdf3c2f",
-        "driveId": "0AEwt4Ye690ocUk9PVA",
-        "parents": [
-          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
-        ],
-        "videoMediaMetadata": {
-          "width": 1080,
-          "height": 1920,
-          "durationMillis": "15066"
-        }
-      },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
-    },
-    {
       "asset_id": "asset_9fa007315c9f717ec17f",
       "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_028.mp4",
       "asset_drive_id": "1rI2c2Xg2PAduj8EYXbugWSlN41_qzoj1",
@@ -1130,36 +1100,6 @@
         "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_037.mp4",
         "size": "5281229",
         "md5Checksum": "2e26ae91d002d35b9f08e100cb4fb3dc",
-        "driveId": "0AEwt4Ye690ocUk9PVA",
-        "parents": [
-          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
-        ],
-        "videoMediaMetadata": {
-          "width": 1080,
-          "height": 1920,
-          "durationMillis": "7999"
-        }
-      },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
-    },
-    {
-      "asset_id": "asset_c291097af33aa8456d69",
-      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_038.mp4",
-      "asset_drive_id": "1uvuSlRtAgTgx3GroXmzGSsC7_tP31XT0",
-      "clean_checksum": "0a806a69e6da71234f7995449556e4b6bf5040a199c00fe803fdc1bcef27e9ac",
-      "perceptual_fingerprint": "dhash64:9492662574060302/9486666534060102/94c6666524040302",
-      "angle": "AVAILABLE_LIMIT",
-      "orientation": "PV",
-      "first_seen_at": "2026-08-20T19:44:17.632Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
-      "requires_scoped_manager_release": true,
-      "drive_readback": {
-        "id": "1uvuSlRtAgTgx3GroXmzGSsC7_tP31XT0",
-        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_038.mp4",
-        "size": "4879380",
-        "md5Checksum": "1ba63ef9f8b24c32d8971a94cb555e89",
         "driveId": "0AEwt4Ye690ocUk9PVA",
         "parents": [
           "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
@@ -1795,36 +1735,6 @@
       "approved_for_scoped_request": true
     },
     {
-      "asset_id": "asset_1071347ab3d4d8796069",
-      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_062.mp4",
-      "asset_drive_id": "1h0hexc74HIcCea1OV2tp0a6wiDkXBRkr",
-      "clean_checksum": "302dd73b9a5977168a644f7522c1f3901b742a5cf019413054544dfcab497634",
-      "perceptual_fingerprint": "dhash64:726044c4e8a8c884/726064e4e8a8c884/726844e4e8a8c884",
-      "angle": "AVAILABLE_LIMIT",
-      "orientation": "PV",
-      "first_seen_at": "2026-08-22T20:12:07.112Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
-      "requires_scoped_manager_release": true,
-      "drive_readback": {
-        "id": "1h0hexc74HIcCea1OV2tp0a6wiDkXBRkr",
-        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_062.mp4",
-        "size": "6148801",
-        "md5Checksum": "72cdb020879a169a18395b99aa9d6215",
-        "driveId": "0AEwt4Ye690ocUk9PVA",
-        "parents": [
-          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
-        ],
-        "videoMediaMetadata": {
-          "width": 1080,
-          "height": 1920,
-          "durationMillis": "15033"
-        }
-      },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
-    },
-    {
       "asset_id": "asset_7fdc51ee5042252f4c86",
       "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_064.mp4",
       "asset_drive_id": "1ceSDIefYol9TT6jBeYAiTdAGczzT6KfM",
@@ -2123,9 +2033,1721 @@
       "meta_title_matches": [],
       "conflicts": [],
       "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_e272fdd296c3cdc1865d",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_083.mp4",
+      "asset_drive_id": "19jbqNvfHDMWb4ga-W7kqmWvp9ioJifAu",
+      "clean_checksum": "9d4df5e8625a44588c7a584b7ab86163bd487acb9ded92b7181bf8da7b298870",
+      "perceptual_fingerprint": "dhash64:ccf0f8e8a8a8b8ec/c4f0f8e8a8a0b8ec/ccf0f8e8aaa0b8ec",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:51.697Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "19jbqNvfHDMWb4ga-W7kqmWvp9ioJifAu",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_083.mp4",
+        "size": "3622638",
+        "md5Checksum": "8daaa880e3c28bc404c39ee54890497e",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_07660f6475c340a03c09",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_084.mp4",
+      "asset_drive_id": "1z8TvL7gZTnSZtE1ATYnQ2wZt3zxuVXwX",
+      "clean_checksum": "feddf9b75a63b3b3cee5ba227869f6ba646862ff20a3ca32d91087b8780fd91c",
+      "perceptual_fingerprint": "dhash64:3e2c2c61f0c4b119/3e6c2c68e0e0f11d/1a6e0c2ce0c4f19c",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:41.847Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1z8TvL7gZTnSZtE1ATYnQ2wZt3zxuVXwX",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_084.mp4",
+        "size": "9260136",
+        "md5Checksum": "3e48bc63332afd26adc5efda78df677d",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "52233"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_ad24c8a1b8437274dab6",
+      "canonical_filename": "CC_US_EN_VID_APPROVAL_BONUS_NV_001.mp4",
+      "asset_drive_id": "1Yqy3k05x0xhsATGZGB8ftIIIHO3t-wvY",
+      "clean_checksum": "b86126c6509e7fdee4e666db2bcf100b65009b6d07b6a3fc0b45384495216dcd",
+      "perceptual_fingerprint": "dhash64:0078f0d038cccc00/0078f0d03ccccc00/0078f0d03ccccc00",
+      "angle": "APPROVAL_BONUS",
+      "orientation": "NV",
+      "first_seen_at": "2026-08-30T21:34:08.739Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1Yqy3k05x0xhsATGZGB8ftIIIHO3t-wvY",
+        "name": "CC_US_EN_VID_APPROVAL_BONUS_NV_001.mp4",
+        "size": "592318",
+        "md5Checksum": "83cb378a89dba2e7d9681d2b7ed6eff3",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "9199"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_6f846cc8fb44ecea9183",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_085.mp4",
+      "asset_drive_id": "1fAnH22l3nYCHOD5-HZPngx6QXfjbOj8O",
+      "clean_checksum": "9ec3b3ed5009b8cfe38ae337b69c677d5a4746f6287a640622f88b6613684fa1",
+      "perceptual_fingerprint": "dhash64:8c8f63e4c8e08fc1/cdc6f0c03ee63ec3/c607316192d9c6c0",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:34:36.534Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1fAnH22l3nYCHOD5-HZPngx6QXfjbOj8O",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_085.mp4",
+        "size": "2698340",
+        "md5Checksum": "46d255b45d048706d2a2e848ef0f0f12",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "12033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_a314fb81f20307a9771b",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_086.mp4",
+      "asset_drive_id": "1xAPtvu0UEK6eS9lXfl5eTVa_yR7zqNAv",
+      "clean_checksum": "df8294ab5634e33228b6cb36a088f8293fa37bd109957c990cb33d6d8024ef5f",
+      "perceptual_fingerprint": "dhash64:464ecac8386c6888/664e4bc9282169c8/7646c5ed6c6666e4",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:36:15.084Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1xAPtvu0UEK6eS9lXfl5eTVa_yR7zqNAv",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_086.mp4",
+        "size": "8388156",
+        "md5Checksum": "1fa75106da25788860f1cdada1259d2d",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "10033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_20f56c5ec3a48997f8e8",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_087.mp4",
+      "asset_drive_id": "11I3sMTTg9AIHpqkN4VYEN9AeDnER1rDj",
+      "clean_checksum": "3c8f36e3150b235431f19c6bec7354c6ea794620c1a36694f70afac23c1da65c",
+      "perceptual_fingerprint": "dhash64:46cecaf8386c6888/664e4bc9e6c658c8/764e45cde86666ec",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:18.358Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "11I3sMTTg9AIHpqkN4VYEN9AeDnER1rDj",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_087.mp4",
+        "size": "4312971",
+        "md5Checksum": "5c41a8927209de112cba3693c04762d5",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "9099"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_50a47306467375844106",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_088.mp4",
+      "asset_drive_id": "1iESGkfXGfs-F7NFsS4a-DUM7wv6u8lVS",
+      "clean_checksum": "6a5851005f8f7e16c399f05ad98522150238d0043737acc81636cc03b7e5b2fe",
+      "perceptual_fingerprint": "dhash64:8cf4b8b080a0c0c8/9cf4b8b088a0c0c8/9cfcb8a888a0e0c8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:52.931Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1iESGkfXGfs-F7NFsS4a-DUM7wv6u8lVS",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_088.mp4",
+        "size": "5470220",
+        "md5Checksum": "5ed8574c93071332721bde1518d4b428",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_41e0d6eaab686b874066",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_089.mp4",
+      "asset_drive_id": "1BTWX4EVRdPIg5xb26miT9vTwVc5BJJ9h",
+      "clean_checksum": "f832ea835dffeaf57be13890c2d093fa294512b5dd30d33c2c73dd1fa5cadae3",
+      "perceptual_fingerprint": "dhash64:b034e68238e86240/b034a6a63ce86240/b034a6863cf8e2f8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:04.264Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1BTWX4EVRdPIg5xb26miT9vTwVc5BJJ9h",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_089.mp4",
+        "size": "4308878",
+        "md5Checksum": "a31d1f4f5a8eba8a1f69eadad6a49948",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f0bf3cfb7fa2c0f6b75a",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_090.mp4",
+      "asset_drive_id": "12B_nrlrfz03erQ4RUGMDhLcv7bVvBWmg",
+      "clean_checksum": "d5478b031e7b7bdf84d88f7dd1a87205f95362c7133631773330fed7df4030d4",
+      "perceptual_fingerprint": "dhash64:8ce8a8a0e4b0f0c8/8c9ca494e4b0f0c8/8c9ca494e0b0f0c8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:01.796Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "12B_nrlrfz03erQ4RUGMDhLcv7bVvBWmg",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_090.mp4",
+        "size": "6356483",
+        "md5Checksum": "a28a8ccb0d7fb015433a4517582b0a90",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_8440aa2946e96ba0037f",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_091.mp4",
+      "asset_drive_id": "15XrC7ObLsSCD75YYEKv2Pf7qV5n9SrrD",
+      "clean_checksum": "c080e09e88e64f87751062db720252d60776cca7749107cb12076a49fee218a8",
+      "perceptual_fingerprint": "dhash64:c8cc8c473f9c1838/c8cc8c473f1c1838/c8cc8c473f1c1838",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:30:59.453Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "15XrC7ObLsSCD75YYEKv2Pf7qV5n9SrrD",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_091.mp4",
+        "size": "4474164",
+        "md5Checksum": "2a7a4d350cd278ef7016ea3bddecbc69",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_13ce3c6ab54b2d78a621",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_092.mp4",
+      "asset_drive_id": "1wsztnoYAonEKMgxH9BDebPQJYKLbk_dp",
+      "clean_checksum": "9d14f9ba5bfe141fd4b5468a9a14b60e2d113a07945f4e9a1680f5561799136e",
+      "perceptual_fingerprint": "dhash64:c0c0c4e4a680c0e0/c0c0c6e6a28080c8/c0c0e2e6e2d0b4a2",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:04.177Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1wsztnoYAonEKMgxH9BDebPQJYKLbk_dp",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_092.mp4",
+        "size": "6067261",
+        "md5Checksum": "a4d850304bbbf262b7d535d4955be1f0",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_b155c1938934c66f424d",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_093.mp4",
+      "asset_drive_id": "1WO0COdh3K89qHN3OqYW_yRKHSmc275hK",
+      "clean_checksum": "3f83603e4a6d8522ae82c296de66b96c20532cffc6f52dc57cc2ad361e965c98",
+      "perceptual_fingerprint": "dhash64:666663273c3864c6/c66663273c3864c6/c67263273c7864c4",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:01.842Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1WO0COdh3K89qHN3OqYW_yRKHSmc275hK",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_093.mp4",
+        "size": "4301318",
+        "md5Checksum": "9cf11e9cd575a90ff253480173d2f8ec",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_89bb0cee48f1e77c4efc",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_094.mp4",
+      "asset_drive_id": "1TtpHfp8QqeoXCZ5Ftj_Qzb9Yby3Glr8L",
+      "clean_checksum": "acc234dd27fff4e1657028deb83c642b3ee8d3a0a159647fbff4237125d4a2bc",
+      "perceptual_fingerprint": "dhash64:dae6e2e6e2d8d4f2/dae6e2e6e2b898f2/cce6e2c6e2f8b8d2",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:36.994Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1TtpHfp8QqeoXCZ5Ftj_Qzb9Yby3Glr8L",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_094.mp4",
+        "size": "6168352",
+        "md5Checksum": "560d8e049d7f6729cd5a68269fd54206",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_8a481a98cdbfdff92b01",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_095.mp4",
+      "asset_drive_id": "1S46IK_bBDtqAvvNHVp5PSXnriyIhBHHg",
+      "clean_checksum": "19d235fcd235dfd55c870e8202d8f12c84781e81a562270caf889c5cc3f78e09",
+      "perceptual_fingerprint": "dhash64:b030e6823ae86240/b034a6a63aea6240/b034a6863cc8e2f8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:22.519Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1S46IK_bBDtqAvvNHVp5PSXnriyIhBHHg",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_095.mp4",
+        "size": "2292403",
+        "md5Checksum": "8f4b295798432e61076059845d447959",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_4b79001d0e4ffadb0efe",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_096.mp4",
+      "asset_drive_id": "10-x5L-iIgp42_QL75CFPoaRvC49_W2tH",
+      "clean_checksum": "1984448327d5f2b180a57e0acda7c85fd03b1e04017bfabeaac19340465cbcdf",
+      "perceptual_fingerprint": "dhash64:c8cc8c473f0c1838/c8cc8c473f1c1838/c8cc8c473b1c1838",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:26.746Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "10-x5L-iIgp42_QL75CFPoaRvC49_W2tH",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_096.mp4",
+        "size": "2357444",
+        "md5Checksum": "2a95ed2ec5b6861505476568f59c8b9b",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_055f68692af11cf4415e",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_097.mp4",
+      "asset_drive_id": "15eMQLiebdhUEWyx0bO9V8CiW6rpzxeLy",
+      "clean_checksum": "ab3e2d485e8ba7bf9ce0e869d6ac300698a107050344800b05a90dfa1b798958",
+      "perceptual_fingerprint": "dhash64:66662327183864c6/c66663271c2c64c6/c6722327186864c4",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:24.575Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "15eMQLiebdhUEWyx0bO9V8CiW6rpzxeLy",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_097.mp4",
+        "size": "2305411",
+        "md5Checksum": "85708f67e3bd11be7974feb7ddb61c76",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_2220769f1afe6e76b65c",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_098.mp4",
+      "asset_drive_id": "1dCydU1uTZ-yfcjUeWVxQIpns3WAAuSPo",
+      "clean_checksum": "d372a8a180133ce6c68a357bab60cf24e946b4302b10a2f7f711a9660197e3d8",
+      "perceptual_fingerprint": "dhash64:c4b0b8f8d8f0f0da/c0b0b8e8d8f0f0d2/c4b0b8e8d8f0f0da",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:49.355Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1dCydU1uTZ-yfcjUeWVxQIpns3WAAuSPo",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_098.mp4",
+        "size": "3771685",
+        "md5Checksum": "2af260870f8b51bd5282dc269d768e3a",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_94f6d0f7c9ac1960eb26",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_099.mp4",
+      "asset_drive_id": "1-saCSUYqUC-IYNYeZL_ASLuCVr7q8a8T",
+      "clean_checksum": "69ea55ac8cb3a21ac344fec078c0fb016b9cd55ce4fb9271551a7c537544a7ba",
+      "perceptual_fingerprint": "dhash64:7668ec68f99cc0c4/7268cc68619840c4/6268cc68691840c4",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:23.792Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1-saCSUYqUC-IYNYeZL_ASLuCVr7q8a8T",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_099.mp4",
+        "size": "7278480",
+        "md5Checksum": "37d3d2c611247cdd57518de05dac812b",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_0e5e62c6ab71648df820",
+      "canonical_filename": "CC_US_EN_VID_APPROVAL_BONUS_NV_002.mp4",
+      "asset_drive_id": "16hEQirDGYy-yq38E5a_g57_UFhZ14H8_",
+      "clean_checksum": "42104f6e661312e7509a057239eb90301ac02575d26992a691ec5b344fb205b5",
+      "perceptual_fingerprint": "dhash64:0068e8d068c40000/0068e8d078c4f400/0068e8d068c4f400",
+      "angle": "APPROVAL_BONUS",
+      "orientation": "NV",
+      "first_seen_at": "2026-08-30T21:34:08.846Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "16hEQirDGYy-yq38E5a_g57_UFhZ14H8_",
+        "name": "CC_US_EN_VID_APPROVAL_BONUS_NV_002.mp4",
+        "size": "641637",
+        "md5Checksum": "1cde8a1962d906775304ae647ce5092b",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "9199"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_d12d08f4f3de1e4092d4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_100.mp4",
+      "asset_drive_id": "1w4H3lHZCRzb0fcX1e_shiv4qW3CfP9b5",
+      "clean_checksum": "9d59503f809b88c17a69343873517c6c6325b5249db30569d52c8de1c6bd2bde",
+      "perceptual_fingerprint": "dhash64:9c18c3044c5c2aa8/1810c122aea83965/1820c26c352cccd8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:34:40.845Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1w4H3lHZCRzb0fcX1e_shiv4qW3CfP9b5",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_100.mp4",
+        "size": "2816612",
+        "md5Checksum": "62fd82a60808f12153449897b9e5e62f",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "12033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_8f1d250a295126b09f2c",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_101.mp4",
+      "asset_drive_id": "1WAuMPR63S3eNiKiKbDCCUnmM_8Qf97Uf",
+      "clean_checksum": "0a444eba6bbe4c6e6025179f220db18d1e2e21605334b7fff4f1a9d11dbe0dfb",
+      "perceptual_fingerprint": "dhash64:80cd8ccce1cc0c1e/808c8ecdecccc31e/809d9cc9c8cccf0e",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:36:10.518Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1WAuMPR63S3eNiKiKbDCCUnmM_8Qf97Uf",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_101.mp4",
+        "size": "8520613",
+        "md5Checksum": "70d078edf00cf4b2272a8e6513dbb0c0",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "10033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_9caa9bc1e89a1c85695b",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_102.mp4",
+      "asset_drive_id": "1SZVZ2libv4PtGi1OX5K9EKM44_oUHvyI",
+      "clean_checksum": "4cf2b2debed20f08038ca6c36c686e0bc0e7a6b26a99223c1c6f9a0e6100bf71",
+      "perceptual_fingerprint": "dhash64:80cd8ccce1cc0c1e/808c9ce9ecc6c11e/809d9c99c8c8c30e",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:11.137Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1SZVZ2libv4PtGi1OX5K9EKM44_oUHvyI",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_102.mp4",
+        "size": "4441458",
+        "md5Checksum": "be5b8bd1b8e0b2f3b70d2f0a46b70059",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "9099"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f59a0913d51273ee75f7",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_103.mp4",
+      "asset_drive_id": "1DqFjQGrYVr4HrQe0sJOORr-vJAPLYH7q",
+      "clean_checksum": "e6081e8b3a44cb177be09c0d9842a21d75975f3bf198605a8c4f08d48d55a8eb",
+      "perceptual_fingerprint": "dhash64:c4f0c8eacacce0c2/c0f0c8eac2cce8e2/c4f0c8eacacee8c2",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:54.586Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1DqFjQGrYVr4HrQe0sJOORr-vJAPLYH7q",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_103.mp4",
+        "size": "3014124",
+        "md5Checksum": "04fbb57c7cf497b859647a85c02e1acb",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_5bf5d09c6c9a00f54712",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_104.mp4",
+      "asset_drive_id": "1cmDsT5USbeCcPy2odoXGwZjliRtCc4Z_",
+      "clean_checksum": "8c8f691233a98d521bd53d2bf2c4c9e717b8288e4cb8adc771da55ce44d9d20b",
+      "perceptual_fingerprint": "dhash64:83c68ea6e6ae9382/83ce8e66e6aa9386/93ce8ea5e6aa9386",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:39.130Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1cmDsT5USbeCcPy2odoXGwZjliRtCc4Z_",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_104.mp4",
+        "size": "7743896",
+        "md5Checksum": "7c23873bbc779dced1bf8e20c4e52636",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f4722dfb16c4359dad5e",
+      "canonical_filename": "CC_US_EN_VID_APPROVAL_BONUS_NV_003.mp4",
+      "asset_drive_id": "1RhTWk7CuHfzpHSMAx0XWV0B3jBHvce7U",
+      "clean_checksum": "0457c5da260bb4e13c1b2dc4e0595f0a667161e37f98d4776fd933acd4926327",
+      "perceptual_fingerprint": "dhash64:0060f8d0fecc0000/0060f8d0beccd400/0060f8d0beccd400",
+      "angle": "APPROVAL_BONUS",
+      "orientation": "NV",
+      "first_seen_at": "2026-08-30T21:34:08.789Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1RhTWk7CuHfzpHSMAx0XWV0B3jBHvce7U",
+        "name": "CC_US_EN_VID_APPROVAL_BONUS_NV_003.mp4",
+        "size": "573250",
+        "md5Checksum": "fa12c942a90c718eec816c85a6d6ea63",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "9199"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f775061335fbacc99547",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_105.mp4",
+      "asset_drive_id": "1Jd7s6xnQxrG__jFBlJy16kfsoKZZr_sp",
+      "clean_checksum": "8b9128f1a5e21ee9ba69f66e15ca02b9a33f437625713e8b0b4a2a4df6438612",
+      "perceptual_fingerprint": "dhash64:b918b8e0c186cd8c/f8183234c6cb8f99/0880329b29c1248e",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:34:34.607Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1Jd7s6xnQxrG__jFBlJy16kfsoKZZr_sp",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_105.mp4",
+        "size": "2509465",
+        "md5Checksum": "0d89bf7174e412a6b03ab45c5f326b7f",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "12033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f3fc05489b4be78ab523",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_106.mp4",
+      "asset_drive_id": "1Rbyn686frVAvftro28tTdhAv4NpuqVpo",
+      "clean_checksum": "5d65af082b5497c2939d7703e61ef4c75d59208408d1f4860d4634d017ad94ca",
+      "perceptual_fingerprint": "dhash64:624e467474f52f28/62ce4c69686c2b12/624e4ee968682f12",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:36:04.290Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1Rbyn686frVAvftro28tTdhAv4NpuqVpo",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_106.mp4",
+        "size": "8517380",
+        "md5Checksum": "47a28cf23c9d73b250e5d0b80d6bad7b",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "10033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_c96c6f865e02dfa8c85f",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_107.mp4",
+      "asset_drive_id": "1vyGWTvoPwZ38nA8ODHZVusiSq5D-bLIn",
+      "clean_checksum": "c45418f08b8bb39b87dae1331360adb8b40dd586cb0fb71e20ac0d8529bc8733",
+      "perceptual_fingerprint": "dhash64:624f477464f52728/62cf4fec68692b18/624f4f6b626b0b30",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:06.842Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1vyGWTvoPwZ38nA8ODHZVusiSq5D-bLIn",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_107.mp4",
+        "size": "4301178",
+        "md5Checksum": "1fb88da16ca9708840591e3a7f16fd94",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "9099"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_b615c3ab6b887dc2f953",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_108.mp4",
+      "asset_drive_id": "1RP2SGpBiQRtdjsNiBskQMRLfBy67Np5P",
+      "clean_checksum": "f4199e3a27a5d40a6c51248f0ec5396c2525c7f0485621da2bceff6e8bcfb1cc",
+      "perceptual_fingerprint": "dhash64:f8f0e8e8f8f8b0c8/b0f0a8e8f2d0b0c8/b0f0b8e8f0d0b0e8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:56.732Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1RP2SGpBiQRtdjsNiBskQMRLfBy67Np5P",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_108.mp4",
+        "size": "3232052",
+        "md5Checksum": "4a22b3c253a901d44c1bcbde232df68c",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_7dff2c75d501ad7236ea",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_109.mp4",
+      "asset_drive_id": "1ViSMiv-VN0DYDGWAg9gfGZLw_O7DIhdY",
+      "clean_checksum": "df571756332091d8ded72aea9d9efc176e6521d086be73175942bbaa5c8341de",
+      "perceptual_fingerprint": "dhash64:786c4c6120869c8f/78646c6030a69c8f/7864642030a69c8f",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:44.477Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1ViSMiv-VN0DYDGWAg9gfGZLw_O7DIhdY",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_109.mp4",
+        "size": "6549176",
+        "md5Checksum": "875d1151eae40923a6ad7fe3e3212dee",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_ade9ac23089a9c31e6ca",
+      "canonical_filename": "CC_US_EN_VID_APPROVAL_BONUS_NV_004.mp4",
+      "asset_drive_id": "1kJPB5lIivsJDAmkkMh_0NzYcT4X-Vkui",
+      "clean_checksum": "2254defefbd73134a4f8d5951ac9e241912704173fa4fc3b3a70f9c1c6f790e9",
+      "perceptual_fingerprint": "dhash64:0060f0cccc780400/0060f0cccc780400/0060f0cccc710400",
+      "angle": "APPROVAL_BONUS",
+      "orientation": "NV",
+      "first_seen_at": "2026-08-30T21:34:08.842Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1kJPB5lIivsJDAmkkMh_0NzYcT4X-Vkui",
+        "name": "CC_US_EN_VID_APPROVAL_BONUS_NV_004.mp4",
+        "size": "647971",
+        "md5Checksum": "a88d89381c524543963f95da46b37998",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "9199"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_9645cbf9bd1048bf8e79",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_110.mp4",
+      "asset_drive_id": "16Tp-j1wGe9kJtqQ-T8Jx21p4uAYJFb5C",
+      "clean_checksum": "f3daf255b211b619174aa7188939c7d94d314a13d781eebb47bc6734b60ea469",
+      "perceptual_fingerprint": "dhash64:f48cb0f8fcdb1f1b/5e0230e8e0d6cff9/ce02323c74fcecf9",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:34:38.755Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "16Tp-j1wGe9kJtqQ-T8Jx21p4uAYJFb5C",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_110.mp4",
+        "size": "2426973",
+        "md5Checksum": "c81e897c189c978aebec0525a3126402",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "12033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_03fcdf51bac47948fe11",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_111.mp4",
+      "asset_drive_id": "1wmShGbMC2Ed-BixkHjLhQ_FU4dOaA98K",
+      "clean_checksum": "d485bcbf24bbe002777bb465c3261474bcc03c543aca5933312d72aea7d09125",
+      "perceptual_fingerprint": "dhash64:9087cfd56de3e4cb/8887c7c56d6466cb/908fcf89ede2c3cb",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:36:18.511Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1wmShGbMC2Ed-BixkHjLhQ_FU4dOaA98K",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_111.mp4",
+        "size": "7742416",
+        "md5Checksum": "bf0328e817b773dd47107d56c1d1e3bc",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "10033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_911df3c03714099223c3",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_112.mp4",
+      "asset_drive_id": "1xaWiAf769NIbV_5OJ9yuVHGklF7k4ieM",
+      "clean_checksum": "f819f624107d8acecf61849678f87fde94c8f207a50930e2c7c9e2e83cf4d8cf",
+      "perceptual_fingerprint": "dhash64:908dcfc56563e4ca/808fc7ed6d6466cb/908dcf89e9e8cecb",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:20.767Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1xaWiAf769NIbV_5OJ9yuVHGklF7k4ieM",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_112.mp4",
+        "size": "3949407",
+        "md5Checksum": "c5082216e51499e4c3073b99c408f546",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "9099"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_a7edde5e86a56e87212d",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_113.mp4",
+      "asset_drive_id": "1ldYnkYQbOl18oxMDQhCGO0xhEYpawyhS",
+      "clean_checksum": "12e21c99f8852094c916a0a26ef0979c421d9ced455c2141b691b9e741aff5cf",
+      "perceptual_fingerprint": "dhash64:3861696829213130/1061694839313130/1861694829313130",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:47.231Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1ldYnkYQbOl18oxMDQhCGO0xhEYpawyhS",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_113.mp4",
+        "size": "3262494",
+        "md5Checksum": "6bf7367843d5a4ffd9508e3aea90a4d2",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_8c85d78a62603ba128f9",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_114.mp4",
+      "asset_drive_id": "1Ktdyw_dUmNbt5t4U60NHbkrVHy54u6rl",
+      "clean_checksum": "8dcc29f33634efdbd3e5c0f13219d2df3d08d75a6a0edc7a59307e0d343715ad",
+      "perceptual_fingerprint": "dhash64:5687a33632e1c217/5686a33632e1c217/4487a33632e9c217",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:28.725Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1Ktdyw_dUmNbt5t4U60NHbkrVHy54u6rl",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_114.mp4",
+        "size": "8328362",
+        "md5Checksum": "ff7d2fb7d8ac99dd5804a46b4dd008f4",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_e21387b0ed2a8d9b5fe2",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_115.mp4",
+      "asset_drive_id": "1uClvgFx3VYtIqF-ydMTJbKWPhFwIhywF",
+      "clean_checksum": "f1ea08b891875538dc1ccd0467c9b087a1bd584aa40a960314f1729b8a1a8b93",
+      "perceptual_fingerprint": "dhash64:190d0ee46c383000/1907063434383002/190506b464722402",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:36:07.210Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1uClvgFx3VYtIqF-ydMTJbKWPhFwIhywF",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_115.mp4",
+        "size": "7140131",
+        "md5Checksum": "23cecfe15ba89ab35b908b2f0b55ac65",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "10033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_94c04f6a1da3adc7a5fe",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_116.mp4",
+      "asset_drive_id": "10DjEs26g3Urbfkk_gqj7FqjBPwO85gmk",
+      "clean_checksum": "99346015e5db9657e3180bfe9ba535c8ea138dee6676b4e32fc09ad3e70bee0c",
+      "perceptual_fingerprint": "dhash64:190d4ce464383000/1905863434303000/190d4cece4eb4c08",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:13.323Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "10DjEs26g3Urbfkk_gqj7FqjBPwO85gmk",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_116.mp4",
+        "size": "3615804",
+        "md5Checksum": "6859a7fa991440899ba5adf10b22b9c2",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "9099"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_9d14973162dd3cc9e9ec",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_117.mp4",
+      "asset_drive_id": "1n3xkXNNBdDfEvh8G8YTcYZEfdZZgiK5U",
+      "clean_checksum": "43c77631d6d27f6f4ee838cea1a587d0b4c84ee642e99f402fe6b6271f748b6e",
+      "perceptual_fingerprint": "dhash64:19357469c9051f17/19347469610d1f17/19356469e90d1f17",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:01.759Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1n3xkXNNBdDfEvh8G8YTcYZEfdZZgiK5U",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_117.mp4",
+        "size": "7278675",
+        "md5Checksum": "296ee7bf7a9ea26670d93b2b3bf26dfe",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13666"
+        }
+      },
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 167)_width_1080px_height_1081px_55 - Story ( ingles)  (1).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 202)_width_1080px_height_1081px_55 - Story ( ingles)  (1).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 243)_width_1080px_height_1081px_55 - Story ( ingles)  (1).mp4"
+        }
+      ],
+      "conflicts": [
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
+    },
+    {
+      "asset_id": "asset_b66bb76ddd09f2fcd1f4",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_118.mp4",
+      "asset_drive_id": "1OA8Q8ja30eaz-svuV-4FHNZN-Efc3yUg",
+      "clean_checksum": "86bdeebc01e421d3f5b3e6b63ff3070d239fb73baede74d27ee3e8c4bbd10038",
+      "perceptual_fingerprint": "dhash64:18347478c98d9f16/18347478e18d9e96/18346468e18d9f96",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:04.077Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1OA8Q8ja30eaz-svuV-4FHNZN-Efc3yUg",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_118.mp4",
+        "size": "7129264",
+        "md5Checksum": "5d7d46a5b02431c3a11bd814254b4866",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": null
+      },
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 152)_width_1080px_height_1081px_55 - Story ( ingles)  (2).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 141)_width_1080px_height_1081px_55 - Story ( ingles)  (2).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 202)_width_1080px_height_1081px_55 - Story ( ingles)  (2).mp4"
+        }
+      ],
+      "conflicts": [
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
+    },
+    {
+      "asset_id": "asset_eab855ba7eea18051a72",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_119.mp4",
+      "asset_drive_id": "1iPxr-SiGNaA8npNKlFSHcPDjgMc2AwWR",
+      "clean_checksum": "f9d90747df425cab6e413e2aed14749cb3f644c06739b4687af7b4de43bee76d",
+      "perceptual_fingerprint": "dhash64:18347478c18d9f16/1834746ce18d9e96/18346468e18d9f96",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:05.788Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1iPxr-SiGNaA8npNKlFSHcPDjgMc2AwWR",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_119.mp4",
+        "size": "2201787",
+        "md5Checksum": "91500c200b0c0001786a43c882233119",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 480,
+          "height": 854,
+          "durationMillis": "12633"
+        }
+      },
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 85)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 81)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 94)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 112)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        }
+      ],
+      "conflicts": [
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
+    },
+    {
+      "asset_id": "asset_c7e7671f0b826eee4648",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_120.mp4",
+      "asset_drive_id": "1lGT6uVEu6GurQ0NHuCcInXxzmKUIkR79",
+      "clean_checksum": "ca70fbb3bc80662de3edc22f2283d83cda152ad17c7e145adc61ba2f1ad76248",
+      "perceptual_fingerprint": "dhash64:18347468c98c9e16/1834746ce8849e96/18346478e08c9e96",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:32:59.291Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1lGT6uVEu6GurQ0NHuCcInXxzmKUIkR79",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_120.mp4",
+        "size": "7643772",
+        "md5Checksum": "4265188d3fd694ca5c51eeaf134aa0e0",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15066"
+        }
+      },
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 187)_width_1080px_height_1081px_55 - Story ( ingles) .mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 85)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 152)_width_1080px_height_1081px_55 - Story ( ingles)  (2).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 167)_width_1080px_height_1081px_55 - Story ( ingles)  (1).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 141)_width_1080px_height_1081px_55 - Story ( ingles)  (2).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 192)_width_1080px_height_1081px_55 - Story ( ingles) .mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 202)_width_1080px_height_1081px_55 - Story ( ingles)  (1).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 136)_width_1080px_height_1081px_55 - Story ( ingles) .mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 81)_width_480px_height_481px_55 - Story ( ingles)  (3).mp4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+          "title": "cropped_1X1_(x, y)_(0, 152)_width_1080px_height_1081px_55 - Story ( ingles) .mp4"
+        }
+      ],
+      "conflicts": [
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
+    },
+    {
+      "asset_id": "asset_44b471eacfeed45a7837",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_121.mp4",
+      "asset_drive_id": "1oKgAczLHPBptKp5nno3rqrXQVvxuBEES",
+      "clean_checksum": "ac161d7c38e21312d1301a4164561b2bfc418a3299018815806ef343a3c55b03",
+      "perceptual_fingerprint": "dhash64:bedef69890a4f0e0/bedefeb090a4f0e0/bedef6b890b4f0e0",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:55.756Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1oKgAczLHPBptKp5nno3rqrXQVvxuBEES",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_121.mp4",
+        "size": "5555250",
+        "md5Checksum": "995b52a865f62bfaa587bcb6d44bee58",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_2d2ad6ce594b40ebf3c5",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_122.mp4",
+      "asset_drive_id": "1M-Hsxf2qz43iaPnfRPVIzBHr-4EBk1Lj",
+      "clean_checksum": "c98657e8ee9fc3be953dd317eb62fde5d91d97b75a11020d6a3216d145e16eff",
+      "perceptual_fingerprint": "dhash64:e25a4c7cb4b6439a/e25a5cf4b4b6438a/635a5474b4b6538a",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:26.363Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1M-Hsxf2qz43iaPnfRPVIzBHr-4EBk1Lj",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_122.mp4",
+        "size": "7893950",
+        "md5Checksum": "65bd45c19fe4b090f5d949ec0dd891a0",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_a73b3be711f45aa29ae6",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_123.mp4",
+      "asset_drive_id": "1ddnFtoExilGDCU8yrLu5L63Caok-Pkms",
+      "clean_checksum": "d75f610b0d63c26471292bb937d2e321a896b390da06443481a75587600c145e",
+      "perceptual_fingerprint": "dhash64:18346478e18c9e16/18347478e08c9e96/18346478e08c9e96",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:09.048Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1ddnFtoExilGDCU8yrLu5L63Caok-Pkms",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_123.mp4",
+        "size": "3660633",
+        "md5Checksum": "cb5bac85afa5866ab9ffad8a4592de7a",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "13666"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_c8cb3489ce37feecf8bb",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_124.mp4",
+      "asset_drive_id": "1K5SW4L0_91gJqHUaVCXV0ThthjuxJm_f",
+      "clean_checksum": "db26655d40894568c82e1d9079ac8922cb339ba9519ab5374afd3a690c5cfeec",
+      "perceptual_fingerprint": "dhash64:a6e6a694b8e4c4c2/eee6a694b8e4c4c2/eee6a698b8e4c4c2",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:47.689Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1K5SW4L0_91gJqHUaVCXV0ThthjuxJm_f",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_124.mp4",
+        "size": "6195026",
+        "md5Checksum": "867136411b5c0edd3bc1d35c1ff0ad6a",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_8e427a97bf83d6a6e6dd",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_125.mp4",
+      "asset_drive_id": "13r8AYvVOPxVE0r_prMfN0sNzsUN7Nd83",
+      "clean_checksum": "2c90e2cf00c1b287f79a3705ffd13af0e781856535f7b845ca39f8291cc0bb88",
+      "perceptual_fingerprint": "dhash64:93b9ad69edb7a3e9/93b9ad6965b7b3e1/93b9ad6d65b7b3e9",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:33.677Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "13r8AYvVOPxVE0r_prMfN0sNzsUN7Nd83",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_125.mp4",
+        "size": "6755222",
+        "md5Checksum": "e4eaf71cec33ab88415c62b23288403d",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_5ada4202a92847fcba28",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_126.mp4",
+      "asset_drive_id": "1ff0xoLvSkKe5bNRZ7xoq4Q4D2mgCE_xu",
+      "clean_checksum": "901325a941eccf94fa8f00fbf51a738a94aa464225b870abb16fc4346d8744ab",
+      "perceptual_fingerprint": "dhash64:b3e8242435b42666/b0b3ec6c7c746647/b0b3ed6c6c606243",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:15.937Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1ff0xoLvSkKe5bNRZ7xoq4Q4D2mgCE_xu",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_126.mp4",
+        "size": "4396721",
+        "md5Checksum": "e3a49a297e95913b0a13d7ca7ad008c6",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "13666"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_f3c84ed23008ee2a04a7",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_127.mp4",
+      "asset_drive_id": "15BybiS2RuQjBZGfzQ6g7G9E3uMlQ_XS5",
+      "clean_checksum": "ba06c9e1345a125bf4eeede108adbba1de9421cc9e3e81155225910780100516",
+      "perceptual_fingerprint": "dhash64:c0cccca69c9898f4/c0cccca69c9898f4/c8cccce69c9898b0",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:50.580Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "15BybiS2RuQjBZGfzQ6g7G9E3uMlQ_XS5",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_127.mp4",
+        "size": "6379736",
+        "md5Checksum": "2fac129eaa8bb30d8d28cb029ff1edd5",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_581933248acc7c53bb3e",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_128.mp4",
+      "asset_drive_id": "1BKcJajcVoBRpvCnFdcDTxTAu_yh6iPyg",
+      "clean_checksum": "0ab4c48b9244a1996d24858819e27fa5b55d2494ba3888208bf3bc0f3d12f65d",
+      "perceptual_fingerprint": "dhash64:646c6d6941d39cec/656d6969c1931ccc/616d4949c1911dce",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:36.118Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1BKcJajcVoBRpvCnFdcDTxTAu_yh6iPyg",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_128.mp4",
+        "size": "7759226",
+        "md5Checksum": "289f9bb3c80fbbe11d5cffd69e9a8ff6",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_b861c68c8d62825d625b",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_129.mp4",
+      "asset_drive_id": "1VpiANFav7W_vNlm_PN_pNVu4AUHsiN-T",
+      "clean_checksum": "d3d906d22141518cb0b7631997b6bf5761812678b874e86e9d90bd53045cdf9a",
+      "perceptual_fingerprint": "dhash64:38a8a9696967c6c3/30a8a9696967c6c3/30a8a9694967c6c3",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:25.245Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1VpiANFav7W_vNlm_PN_pNVu4AUHsiN-T",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_129.mp4",
+        "size": "3275345",
+        "md5Checksum": "62df8fce482ee5afb9893cf90df80e69",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "13699"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_bb93f236bc82cd8e1a41",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_130.mp4",
+      "asset_drive_id": "1w3-gdF3ek_IC97I1g_5G-Xhh26x6rkgW",
+      "clean_checksum": "0d1960b46d1813eab075a7bca927c510038b375fdb20ad6b5e7b9d22138dd8d4",
+      "perceptual_fingerprint": "dhash64:d0dce4c4b8e0e0c8/f0d4e4c4b8e0e0c8/d0dce4c4b8e0f0f8",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:58.536Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1w3-gdF3ek_IC97I1g_5G-Xhh26x6rkgW",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_130.mp4",
+        "size": "6294337",
+        "md5Checksum": "3330d5f0bc06091cd482b82d3055bd28",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "15033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_d07b92ece94d512cdd23",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_131.mp4",
+      "asset_drive_id": "14PXwb1UFzlkFPGEKtQTPWTKaVzL67t3G",
+      "clean_checksum": "b93fb063da8eebe9907576aa7c963b69929fa179b6cdbae01ff322e82cb188cc",
+      "perceptual_fingerprint": "dhash64:93b9ad69edb7a3e9/93b9ad6965b7b3e1/93b9a56d65b7b3e9",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:33:31.128Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "14PXwb1UFzlkFPGEKtQTPWTKaVzL67t3G",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_131.mp4",
+        "size": "6728177",
+        "md5Checksum": "d9c5a3f46664b39f7e2b17f46554dcc7",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "13033"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
+    },
+    {
+      "asset_id": "asset_16b0078738083d3ae2f3",
+      "canonical_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_132.mp4",
+      "asset_drive_id": "1rnT6RWeFYqkAK8Xb7tvKm6H0uIX9rDxv",
+      "clean_checksum": "ae25ad7a5c79528ddbeddbcb7a696b132d4e89077374a71eea7fcf156d90845b",
+      "perceptual_fingerprint": "dhash64:16aa8c2d7c40630e/12ba8c6dedc0630c/16ba8c6d6d456308",
+      "angle": "AVAILABLE_LIMIT",
+      "orientation": "PV",
+      "first_seen_at": "2026-08-30T21:31:23.046Z",
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "requires_scoped_manager_release": true,
+      "drive_readback": {
+        "id": "1rnT6RWeFYqkAK8Xb7tvKm6H0uIX9rDxv",
+        "name": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_132.mp4",
+        "size": "4259149",
+        "md5Checksum": "8d4bb265517a31f30def895e3dd6fb86",
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "parents": [
+          "1gVUw5RCY7LocNC-cPj_eWZvwvzPLjifh"
+        ],
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "13666"
+        }
+      },
+      "meta_title_matches": [],
+      "conflicts": [],
+      "approved_for_scoped_request": true
     }
   ],
   "approved_selection_order": [
+    "asset_ad24c8a1b8437274dab6",
+    "asset_f4722dfb16c4359dad5e",
+    "asset_ade9ac23089a9c31e6ca",
+    "asset_0e5e62c6ab71648df820",
     "asset_c34b192bf8d0b06e6803",
     "asset_b19088b05bd8b82ea054",
     "asset_9fc1c71aa8d4dc63aa0c",
@@ -2147,7 +3769,6 @@
     "asset_57de9d30f928e4875165",
     "asset_02b28c0716b4e086cd52",
     "asset_2442281bc5a2081ce510",
-    "asset_0e26b67a2405c06f6d9f",
     "asset_7e70d439e1c1a6974174",
     "asset_9fa007315c9f717ec17f",
     "asset_c1b3d8b861861f6d6263",
@@ -2164,7 +3785,6 @@
     "asset_62fb35aa3ba846ad19ea",
     "asset_fd3f3c714a407e9d7c57",
     "asset_4c00e866ba0d37869733",
-    "asset_c291097af33aa8456d69",
     "asset_e42057ba01eb6cd5b401",
     "asset_04cc088dfedd2fcf4770",
     "asset_3559648d61a11e66f1ec",
@@ -2178,7 +3798,6 @@
     "asset_99d53807e165d2a0e7a0",
     "asset_8ac56c31e1f1e8fed791",
     "asset_86db71a67d1d3d7ae51a",
-    "asset_1071347ab3d4d8796069",
     "asset_664a89bbfb61a99fa9e8",
     "asset_e0c2ed5af9037e49854d",
     "asset_b5a9eb86364592120459",
@@ -2188,6 +3807,52 @@
     "asset_b58ebf2338cfabddd0a1",
     "asset_459e99b4ae5b40e2864d",
     "asset_863575174c1c46bd7d79",
-    "asset_ebdd0f32e037bf190b15"
+    "asset_ebdd0f32e037bf190b15",
+    "asset_8440aa2946e96ba0037f",
+    "asset_b155c1938934c66f424d",
+    "asset_41e0d6eaab686b874066",
+    "asset_c96c6f865e02dfa8c85f",
+    "asset_a73b3be711f45aa29ae6",
+    "asset_9caa9bc1e89a1c85695b",
+    "asset_94c04f6a1da3adc7a5fe",
+    "asset_5ada4202a92847fcba28",
+    "asset_20f56c5ec3a48997f8e8",
+    "asset_911df3c03714099223c3",
+    "asset_16b0078738083d3ae2f3",
+    "asset_b861c68c8d62825d625b",
+    "asset_89bb0cee48f1e77c4efc",
+    "asset_c8cb3489ce37feecf8bb",
+    "asset_f3c84ed23008ee2a04a7",
+    "asset_50a47306467375844106",
+    "asset_44b471eacfeed45a7837",
+    "asset_bb93f236bc82cd8e1a41",
+    "asset_f0bf3cfb7fa2c0f6b75a",
+    "asset_13ce3c6ab54b2d78a621",
+    "asset_8a481a98cdbfdff92b01",
+    "asset_055f68692af11cf4415e",
+    "asset_4b79001d0e4ffadb0efe",
+    "asset_a7edde5e86a56e87212d",
+    "asset_2220769f1afe6e76b65c",
+    "asset_e272fdd296c3cdc1865d",
+    "asset_f59a0913d51273ee75f7",
+    "asset_b615c3ab6b887dc2f953",
+    "asset_94f6d0f7c9ac1960eb26",
+    "asset_2d2ad6ce594b40ebf3c5",
+    "asset_8c85d78a62603ba128f9",
+    "asset_d07b92ece94d512cdd23",
+    "asset_8e427a97bf83d6a6e6dd",
+    "asset_581933248acc7c53bb3e",
+    "asset_5bf5d09c6c9a00f54712",
+    "asset_07660f6475c340a03c09",
+    "asset_7dff2c75d501ad7236ea",
+    "asset_f775061335fbacc99547",
+    "asset_6f846cc8fb44ecea9183",
+    "asset_9645cbf9bd1048bf8e79",
+    "asset_d12d08f4f3de1e4092d4",
+    "asset_f3fc05489b4be78ab523",
+    "asset_e21387b0ed2a8d9b5fe2",
+    "asset_8f1d250a295126b09f2c",
+    "asset_a314fb81f20307a9771b",
+    "asset_03fcdf51bac47948fe11"
   ]
 }
