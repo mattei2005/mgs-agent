@@ -90,8 +90,8 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         template_path = BASE / template["canonical_file"]
         self.assertTrue(template_path.is_file())
         self.assertEqual(template["semantic_sha256"], "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad")
-        self.assertIn("cada creative", template["injection_policy"])
-        self.assertIn("comparado diretamente", template["readback_policy"])
+        self.assertIn("creative loads this file", template["injection_policy"])
+        self.assertIn("compared directly", template["readback_policy"])
         self.assertIn("Toda campanha nova carrega esse arquivo", self.report)
 
     def test_runtime_truth_is_explicit(self):
