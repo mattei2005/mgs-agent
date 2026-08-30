@@ -684,6 +684,7 @@
     "approved_media_copy_reuse_modes": ["pure_clone", "clone_page_switch"],
     "partnership_ad": false,
     "instagram_account": "USE_FACEBOOK_PAGE",
+    "instagram_identity_implementation": "Resolve the selected Page's existing page_backed_instagram_account by Page access token and pass its ID as object_story_spec.instagram_user_id; never substitute an unrelated Instagram account.",
     "advantage_plus_creative": false,
     "multi_advertiser_ads": false,
     "copy_angle": "confirmed with Nicolas per campaign"

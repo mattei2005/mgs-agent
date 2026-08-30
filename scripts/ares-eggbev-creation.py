@@ -190,6 +190,21 @@ def live_page_and_token(page_token: str) -> tuple[dict[str, Any], Any, str]:
     status, page, _ = meta.graph_get(page_id, token, {"fields": "id,name,link"})
     if status != 200 or not isinstance(page, dict) or str(page.get("id")) != page_id:
         raise CreationBlocked("page_meta_readback", {"http": status})
+    status, pages, _ = meta.graph_get("me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200})
+    page_rows = list((pages or {}).get("data") or []) if status == 200 and isinstance(pages, dict) else []
+    page_auth = next((row for row in page_rows if str(row.get("id") or "") == page_id), None)
+    if not page_auth or not page_auth.get("access_token"):
+        raise CreationBlocked("page_access_token", {"http": status, "page_found": bool(page_auth)})
+    status, pbia, _ = meta.graph_get(
+        f"{page_id}/page_backed_instagram_accounts",
+        str(page_auth["access_token"]),
+        {"fields": "id,username", "limit": 10},
+    )
+    pbia_rows = list((pbia or {}).get("data") or []) if status == 200 and isinstance(pbia, dict) else []
+    if len(pbia_rows) != 1 or not pbia_rows[0].get("id"):
+        raise CreationBlocked("page_backed_instagram_identity", {"http": status, "count": len(pbia_rows)})
+    page["instagram_user_id"] = str(pbia_rows[0]["id"])
+    page["instagram_identity_mode"] = "PAGE_BACKED_INSTAGRAM_ACCOUNT"
     page["page_token"] = page_token
     page["leads_snapshot"] = rows[0].get("LEADS")
     page["messenger_source_ready"] = bundle.get("ready")
@@ -448,6 +463,7 @@ def seal_manifest_from_state(state: dict[str, Any], start_time: str) -> tuple[di
         registry=registry,
         request_id=str(state["request_id"]),
         page_id=str(state["page"]["id"]),
+        instagram_user_id=str(state["page"]["instagram_user_id"]),
         page_name=str(state["page"]["name"]),
         page_token=str(state["page"]["page_token"]),
         page_sequence=int(state["page_sequence"]),
@@ -679,7 +695,7 @@ def offline_smoke(output: Path | None) -> dict[str, Any]:
         registry.register(account_id=ACCOUNT_ID, asset_id=asset_id, checksum=checksum, vertical_video_id=f"v-{index + 1:02d}", square_video_id=f"s-{index + 1:02d}", ready=True, source="offline-smoke", upload_edge="ad_account_advideos", association_verified=True)
         refs.append({"asset_id": asset_id, "checksum": checksum})
     start = (datetime.now(ET) + timedelta(days=2)).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
-    payload = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-offline-smoke", page_id="123456789012345", page_name="Amy Shook", page_token="pg_5024", page_sequence=162, campaign_sequences=[1, 2, 3], daily_budgets_minor=[5000, 5000, 5000], start_time=start, asset_refs=refs, ad_names=[f"AMY AD {index + 1:02d}" for index in range(9)])
+    payload = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-offline-smoke", page_id="123456789012345", instagram_user_id="17841400000000000", page_name="Amy Shook", page_token="pg_5024", page_sequence=162, campaign_sequences=[1, 2, 3], daily_budgets_minor=[5000, 5000, 5000], start_time=start, asset_refs=refs, ad_names=[f"AMY AD {index + 1:02d}" for index in range(9)])
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(payload), config)
     sealed = prevalidate_payload(payload, registry)
@@ -784,7 +800,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         atomic_json(audit_path, state)
         return {"status": "PRESTAGE_DEFERRED", "request_id": args.request_id, "ready": len(ready_refs), "required": required, "writes": {"campaign": 0, "media_uploads_possible": processed_now * 2}, "next_action": "rerun prepare with the same request_id after quota capacity is available"}
 
-    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, request_id=args.request_id, page_id=str(page["id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names)
+    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, request_id=args.request_id, page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names)
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(manifest_payload), config)
     sealed = prevalidate_payload(manifest_payload, registry)

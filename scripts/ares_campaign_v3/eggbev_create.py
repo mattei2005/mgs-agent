@@ -85,6 +85,7 @@ def _creative_payload(
     *,
     media: dict[str, Any],
     page_id: str,
+    instagram_user_id: str,
     page_token: str,
     label_prefix: str,
     primary_text: str,
@@ -96,7 +97,7 @@ def _creative_payload(
     square_label = {"name": f"{label_prefix}_square"}
     return {
         "name": f"Eggbev {page_token} {label_prefix}",
-        "object_story_spec": {"page_id": page_id},
+        "object_story_spec": {"page_id": page_id, "instagram_user_id": instagram_user_id},
         "asset_feed_spec": {
             "ad_formats": ["AUTOMATIC_FORMAT"],
             "optimization_type": "PLACEMENT",
@@ -158,6 +159,7 @@ def build_eggbev_from_zero_manifest(
     registry: MediaRegistry,
     request_id: str,
     page_id: str,
+    instagram_user_id: str,
     page_name: str,
     page_token: str,
     page_sequence: int,
@@ -174,6 +176,7 @@ def build_eggbev_from_zero_manifest(
 ) -> dict[str, Any]:
     request_id = _clean_display(request_id, "request_id")
     page_id = _clean_display(page_id, "page_id")
+    instagram_user_id = _clean_display(instagram_user_id, "instagram_user_id")
     page_name = _clean_display(page_name, "page_name")
     page_token = str(page_token or "").strip().lower()
     if PAGE_TOKEN_RE.fullmatch(page_token) is None:
@@ -222,6 +225,7 @@ def build_eggbev_from_zero_manifest(
                     "creative_payload": _creative_payload(
                         media=ready,
                         page_id=page_id,
+                        instagram_user_id=instagram_user_id,
                         page_token=page_token,
                         label_prefix=label_prefix,
                         primary_text=str(primary_text),

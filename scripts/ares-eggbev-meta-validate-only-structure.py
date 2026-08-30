@@ -100,7 +100,7 @@ def main() -> int:
             registry.register(account_id=ACCOUNT, asset_id=asset, checksum=checksum, vertical_video_id=f"vertical-{index + 1}", square_video_id=f"square-{index + 1}", ready=True, source="validate-only", upload_edge="ad_account_advideos", association_verified=True)
             refs.append({"asset_id": asset, "checksum": checksum})
         start = (datetime.now(ET) + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
-        manifest = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-structure-validate", page_id=str(page["id"]), page_name=str(page["name"]), page_token="pg_5024", page_sequence=162, campaign_sequences=[1], daily_budgets_minor=[5000], start_time=start, asset_refs=refs, ad_names=["VALIDATE AD 1", "VALIDATE AD 2", "VALIDATE AD 3"])
+        manifest = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-structure-validate", page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token="pg_5024", page_sequence=162, campaign_sequences=[1], daily_budgets_minor=[5000], start_time=start, asset_refs=refs, ad_names=["VALIDATE AD 1", "VALIDATE AD 2", "VALIDATE AD 3"])
     row = manifest["campaigns"][0]
     unique = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     campaign_name = f"VALIDATE ONLY EGGBEV CAMPAIGN {unique}"

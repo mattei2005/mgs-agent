@@ -62,6 +62,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
             registry=self.registry,
             request_id="eggbev-test-request",
             page_id="123456789012345",
+            instagram_user_id="17841400000000000",
             page_name="Amy Shook",
             page_token="pg_5024",
             page_sequence=162,
@@ -126,7 +127,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         campaign = payload["campaigns"][0]
         creative = campaign["ads"][0]["creative_payload"]
         self.assertEqual(campaign["adset_create"]["promoted_object"]["page_id"], "123456789012345")
-        self.assertEqual(creative["object_story_spec"], {"page_id": "123456789012345"})
+        self.assertEqual(creative["object_story_spec"], {"page_id": "123456789012345", "instagram_user_id": "17841400000000000"})
         self.assertEqual(creative["url_tags"], "utm_campaign=pg_5024")
 
     def test_from_zero_forbids_source_ids(self) -> None:
@@ -203,7 +204,8 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
             build_eggbev_from_zero_manifest(
                 registry=self.registry,
                 request_id="missing-names",
-                page_id="123",
+                page_id="123456789012345",
+                instagram_user_id="17841400000000000",
                 page_name="Amy Shook",
                 page_token="pg_5024",
                 page_sequence=162,
