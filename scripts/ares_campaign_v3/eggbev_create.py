@@ -317,3 +317,132 @@ def build_eggbev_from_zero_manifest(
     }
     Manifest.from_dict(payload)
     return payload
+
+
+def build_eggbev_revised_clone_manifest(
+    *,
+    registry: MediaRegistry,
+    request_id: str,
+    source_campaign_id: str,
+    source_adset_id: str,
+    source_ads: list[dict[str, Any]],
+    campaign_name: str,
+    page_id: str,
+    instagram_user_id: str,
+    page_token: str,
+    daily_budget_minor: int,
+    start_time: str,
+    adset_name: str = "AdG1",
+    primary_text: str = "",
+    headlines: list[str] | None = None,
+    description: str = "⭐️⭐️⭐️⭐️⭐️",
+    cta: str = "APPLY_NOW",
+    status: str = "ACTIVE",
+) -> dict[str, Any]:
+    """Build a source-lineage clone with revised Eggbev copy/event policy."""
+    request_id = _clean_display(request_id, "request_id")
+    source_campaign_id = _clean_display(source_campaign_id, "source_campaign_id")
+    source_adset_id = _clean_display(source_adset_id, "source_adset_id")
+    campaign_name = _clean_display(campaign_name, "campaign_name")
+    adset_name = _clean_display(adset_name, "adset_name")
+    page_id = _clean_display(page_id, "page_id")
+    instagram_user_id = _clean_display(instagram_user_id, "instagram_user_id")
+    page_token = str(page_token or "").strip().lower()
+    if PAGE_TOKEN_RE.fullmatch(page_token) is None:
+        raise ValueError("page_token must match pg_XXXXX")
+    budget = _positive_int(daily_budget_minor, "daily_budget_minor")
+    if status != "ACTIVE":
+        raise ValueError("Eggbev production revised clone requires ACTIVE")
+    parsed_start = datetime.fromisoformat(str(start_time).replace("Z", "+00:00"))
+    if parsed_start.tzinfo is None or parsed_start <= datetime.now(timezone.utc):
+        raise ValueError("start_time must be a future timezone-aware datetime")
+    if len(source_ads) < 1 or len(source_ads) > 5:
+        raise ValueError("revised clone requires between one and five source ads")
+    headlines = headlines or ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]
+    if not headlines or any(not str(item).strip() for item in headlines):
+        raise ValueError("at least one nonempty headline is required")
+
+    ads: list[dict[str, Any]] = []
+    seen_source_ads: set[str] = set()
+    seen_media: set[tuple[str, str]] = set()
+    for index, source in enumerate(source_ads, 1):
+        source_ad_id = _clean_display(source.get("source_ad_id"), "source_ad_id")
+        if source_ad_id in seen_source_ads:
+            raise ValueError("source_ad_id must be unique")
+        seen_source_ads.add(source_ad_id)
+        asset_id = _clean_display(source.get("asset_id"), "asset_id")
+        checksum = _clean_display(source.get("checksum"), "checksum")
+        media_key = (asset_id, checksum)
+        if media_key in seen_media:
+            raise ValueError("source media lineage must be unique")
+        seen_media.add(media_key)
+        ready = registry.require_ready(ACCOUNT_ID, asset_id, checksum)
+        ads.append(
+            {
+                "name": _clean_display(source.get("name"), "ad_name"),
+                "source_ad_id": source_ad_id,
+                "media": ready,
+                "creative_payload": _creative_payload(
+                    media=ready,
+                    page_id=page_id,
+                    instagram_user_id=instagram_user_id,
+                    page_token=page_token,
+                    label_prefix=f"revised_ad{index:02d}",
+                    primary_text=str(primary_text),
+                    headlines=[str(item) for item in headlines],
+                    description=str(description),
+                    cta=str(cta),
+                ),
+            }
+        )
+
+    payload = {
+        "schema_version": 3,
+        "request_id": request_id,
+        "operation": OPERATION,
+        "graph_version": "v26.0",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "prevalidated": False,
+        "execution_mode": "clone_prestaged",
+        "campaigns": [
+            {
+                "idempotency_key": f"{request_id}-c001",
+                "app_key": APP_KEY,
+                "account_id": ACCOUNT_ID,
+                "mode": "clone_prestaged",
+                "source_campaign_id": source_campaign_id,
+                "source_adset_id": source_adset_id,
+                "name": campaign_name,
+                "adset_name": adset_name,
+                "start_time": str(start_time),
+                "status": status,
+                "campaign_updates": {"daily_budget": str(budget)},
+                "adset_updates": {
+                    "targeting": {
+                        "age_min": 18,
+                        "age_max": 65,
+                        "geo_locations": {
+                            "countries": ["US"],
+                            "location_types": ["frequently_in", "home", "recent"],
+                        },
+                        "targeting_automation": {"advantage_audience": 1},
+                        "publisher_platforms": ["facebook", "instagram", "messenger"],
+                        "facebook_positions": FACEBOOK_POSITIONS,
+                        "instagram_positions": INSTAGRAM_POSITIONS,
+                        "messenger_positions": MESSENGER_POSITIONS,
+                        "device_platforms": ["mobile", "desktop"],
+                    },
+                    "promoted_object": {
+                        "pixel_id": "935354115143283",
+                        "custom_event_type": "OTHER",
+                        "custom_event_str": "eggbev-pv-u",
+                        "page_id": page_id,
+                        "smart_pse_enabled": False,
+                    },
+                },
+                "ads": ads,
+            }
+        ],
+    }
+    Manifest.from_dict(payload)
+    return payload

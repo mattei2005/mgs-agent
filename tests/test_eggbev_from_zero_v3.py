@@ -14,6 +14,7 @@ from scripts.ares_campaign_v3.eggbev_create import (
     INSTAGRAM_POSITIONS,
     MESSENGER_POSITIONS,
     build_eggbev_from_zero_manifest,
+    build_eggbev_revised_clone_manifest,
 )
 from scripts.ares_campaign_v3.engine import CampaignEngine
 from scripts.ares_campaign_v3.media_registry import MediaRegistry
@@ -221,6 +222,48 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
                 asset_refs=self._assets(3),
                 ad_names=[],
             )
+
+    def test_revised_clone_preserves_lineage_and_applies_new_standard(self) -> None:
+        refs = self._assets(3)
+        start = (datetime.now(ZoneInfo("America/New_York")) + timedelta(days=2)).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        payload = build_eggbev_revised_clone_manifest(
+            registry=self.registry,
+            request_id="eggbev-revised-clone-test",
+            source_campaign_id="source-campaign",
+            source_adset_id="source-adset",
+            source_ads=[
+                {
+                    "source_ad_id": f"source-ad-{index + 1}",
+                    "name": f"AD {index + 1:02d} - SOURCE",
+                    **ref,
+                }
+                for index, ref in enumerate(refs)
+            ],
+            campaign_name="162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01",
+            page_id="123456789012345",
+            instagram_user_id="17841400000000000",
+            page_token="pg_5024",
+            daily_budget_minor=4500,
+            start_time=start.isoformat(),
+        )
+        campaign = Manifest.from_dict(payload).campaigns[0]
+        self.assertEqual(campaign.mode, "clone_prestaged")
+        self.assertEqual(campaign.source_campaign_id, "source-campaign")
+        self.assertEqual(campaign.source_adset_id, "source-adset")
+        self.assertEqual(campaign.campaign_updates["daily_budget"], "4500")
+        self.assertEqual(campaign.adset_updates["promoted_object"]["custom_event_str"], "eggbev-pv-u")
+        self.assertIn("explore", campaign.adset_updates["targeting"]["instagram_positions"])
+        self.assertIn("explore_home", campaign.adset_updates["targeting"]["instagram_positions"])
+        self.assertEqual([ad.source_ad_id for ad in campaign.ads], ["source-ad-1", "source-ad-2", "source-ad-3"])
+        self.assertTrue(
+            all(
+                [title["text"] for title in ad.creative_payload["asset_feed_spec"]["titles"]]
+                == ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]
+                for ad in campaign.ads
+            )
+        )
 
 
 if __name__ == "__main__":
