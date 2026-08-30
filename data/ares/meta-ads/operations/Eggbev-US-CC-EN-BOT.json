@@ -619,7 +619,7 @@
     }
   },
   "campaign_cloning_policy": {
-    "status": "engine_v3_3_onboarded_validate_plan_ready_write_per_request_gated",
+    "status": "engine_v3_4_onboarded_validate_plan_ready_write_per_request_gated",
     "thread_id": "1543333373945053184",
     "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
     "thread_readback": {
@@ -633,7 +633,7 @@
     "engine_readback": {
       "global_enabled": true,
       "global_write_enabled": true,
-      "release_version": "3.3.0",
+      "release_version": "3.4.0",
       "eggbev_account_registered": true,
       "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
       "clone_page_switch_engine_supported": true,
@@ -646,6 +646,7 @@
     "allowed_modes": {
       "pure_clone": "duplicate the source exactly: preserve structure, audience, placements, strategy, Page, Messenger JSON, media, copy, links and UTMs; change only unavoidable technical IDs, manager-selected budget, ACTIVE next-day 00:00 ET start and the sequential DUPnn campaign name",
       "clone_prestaged": "copy source lineage and structure while replacing one through five ads with new approved reconciled pre-staged creatives",
+      "replacement_revision": "operation-specific branch of clone_prestaged for an explicitly authorized source→successor replacement: preserve the same visual lineage while rematerializing revised ads/creatives and explicit adset_updates; source and successor are one lineage, not independent candidates; delete the source only after full successor readback and only after the final publication OK",
       "clone_page_switch": {
         "label": "Clone com alteração de página e nome",
         "definition": "duplicate the full source campaign while preserving structure, audience, placements, bid strategy, copy and media; replace the destination Facebook Page identity, next sequential naming, page token and links/UTMs for the selected target page",
@@ -670,6 +671,7 @@
       "number of duplicates per source campaign",
       "exact daily budget",
       "new assets, ad names and copy when clone_prestaged",
+      "exact source, revised copy/event/targeting delta and deletion order when replacement_revision",
       "target page, pg_XXXXX and Smart Bidding LEADS evidence when clone_page_switch selection is delegated",
       "updated full Messenger JSON when clone_page_switch",
       "every requested exception to audience, placements, structure or strategy"
@@ -693,8 +695,8 @@
     "drive_operation": "CC_US_EN",
     "source": "01_READY after reservation and Meta x Drive reconciliation",
     "creative_source": "MANUAL_UPLOAD",
-    "always_new_never_reuse": "required_for_campaign_creation_and_clone_prestaged",
-    "approved_media_copy_reuse_modes": ["pure_clone", "clone_page_switch"],
+    "always_new_never_reuse": "required_for campaign_creation and ordinary clone_prestaged; replacement_revision is an explicit source-successor lineage migration, never an independent retest candidate",
+    "approved_media_copy_reuse_modes": ["pure_clone", "clone_page_switch", "replacement_revision"],
     "partnership_ad": false,
     "instagram_account": "USE_FACEBOOK_PAGE",
     "instagram_identity_implementation": "Resolve the selected Page's existing page_backed_instagram_account by Page access token and pass its ID as object_story_spec.instagram_user_id; never substitute an unrelated Instagram account.",

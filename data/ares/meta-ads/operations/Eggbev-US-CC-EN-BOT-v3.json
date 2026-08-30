@@ -52,7 +52,15 @@
         "ads/creatives with approved reconciled pre-staged media",
         "copy only when explicitly supplied and approved"
       ],
-      "ads": "one through five, matching the approved request"
+      "ads": "one through five, matching the approved request",
+      "replacement_revision": {
+        "trigger": "explicit source-to-successor replacement authorized by the manager",
+        "media": "may preserve the source visual lineage while rematerializing revised creatives and ads",
+        "required_updates": "materialize every approved copy, conversion-event, Page or targeting delta in creative_payload/adset_updates",
+        "identity": "source and successor remain one creative lineage, never two independent test candidates",
+        "deletion_order": "create and fully read back the successor first; delete only the unequivocal source afterward",
+        "publication_gate": "show the complete sealed plan and wait for the manager's explicit OK before any Meta write"
+      }
     },
     "clone_page_switch": {
       "label": "duplicação com troca de página",
@@ -98,7 +106,7 @@
   },
   "budget_policy": {
     "selection": "an authorized campaign manager selects and confirms the exact daily budget for every duplicate request",
-    "manifest": "materialize the confirmed value explicitly in daily_budget minor units; never inherit or guess silently",
+    "manifest": "materialize the confirmed value explicitly in daily_budget minor units; in replacement_revision the source budget may be proposed in the final summary, but it becomes authorized only through the explicit OK on that exact value",
     "write_authority": "Nicolas has standing Eggbev authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval; billing, account_spend_limit, credentials, and automatic scaling remain separately gated",
     "reporting": "show manager-selected budget in the final summary and confirm it by Meta readback"
   },

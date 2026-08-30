@@ -1041,10 +1041,27 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V4-20260830",
+      "title": "Eggbev from-zero naming sequencial e readback JSON Messenger",
+      "updated_at": "2026-08-30T18:14:47+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T14:04:12-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V4-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev from-zero naming sequencial e readback JSON Messenger",
-      "updated_at": "2026-08-30T11:43:48+00:00"
+      "title": "Eggbev event, three-headline copy and replacement revision standard",
+      "updated_at": "2026-08-30T18:14:47+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation-thread-routing",
@@ -2615,5 +2632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T16:26:16+00:00"
+  "updated_at": "2026-08-30T18:14:47+00:00"
 }
