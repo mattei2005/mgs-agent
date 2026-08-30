@@ -119,6 +119,27 @@
       "cron_changes": 0
     },
     "route_contracts": {
+      "rules": {
+        "thread_id": "1543280854024060999",
+        "thread_name": "Vamos Uma Atualização Massiva nos - Nicolas",
+        "canonical_label": "Eggbev-US-CC-EN Regras",
+        "manual_title_preserved": true,
+        "scope": "operation-level decisions, precedence, readiness and routing only; functional execution stays in the five dedicated routes",
+        "required_skill": "eggbev-us-cc-en-bot-operations",
+        "canonical_route_registry": "data/ares/discord/eggbev-fixed-routes.json",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1543280854024060999.txt",
+        "write_authority": "none by route existence or pinned message"
+      },
+      "roas_cycle": {
+        "thread_id": "1541578606076231750",
+        "thread_name": "Eggbev-US-CC-EN Corte e ROAS",
+        "scope": "scheduled and on-demand ROAS cut/reactivation cycles, report-only economics and gated budget recommendations",
+        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-ads-intraday-operations"],
+        "runner": "scripts/ares-eggbev-roas-cycle.py",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578606076231750.txt",
+        "runtime": "status writes and direct posts enabled fail-closed; budget write disabled",
+        "source_gate": "Messenger Smart Bidding freshness must be verifiable within two hours for action writes; invalid source means zero write plus alert"
+      },
       "campaign_creation": {
         "thread_id": "1541578556037927053",
         "thread_name": "Eggbev-US-CC-EN Criar Campanhas",

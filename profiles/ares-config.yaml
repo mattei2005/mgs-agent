@@ -602,32 +602,6 @@ discord:
       titulo manual.
 
       - Nao adicionar outros gestores automaticamente.'
-    '1543280854024060999': |-
-      INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
-
-      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger, conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar uma thread substituta.
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
-      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia, readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho de Limite de Leads, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de Regras.
-      - Rotas fixas: Regras `1543280854024060999`; Limite de Leads `1543312825890381865`; Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
-      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra supersedida.
-      - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha, budget, cron ou publicacao. Budget write segue Rodolfo/Geizian; publicacao de criacao/clone exige resumo final e OK explicito do request.
-      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar arquivada.
-      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional, indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes ativas da mesma regra.
-
-    '1541578606076231750': |-
-      INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
-
-      - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006. Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
-      - Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia e audit mais recente; consultar Meta e Smart Bidding vivas.
-      - Threshold diario default 0,40. Entre 00:00 e 06:00 nao cortar/reativar. Fase 1: 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
-      - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte. Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera zero write + alerta.
-      - Acao ROAS ocorre no anuncio. Se zero ads ativos restarem, pausar a campanha; nunca pausar ad set. Reativar somente anuncio/campanha pausados pelo Ares e recuperados acima do threshold. Pausa por `page_lead_guardrail`, manual ou externa nunca e reativada automaticamente.
-      - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao ou budget.
-      - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget write=false ate Rodolfo/Geizian aprovarem teto/envelope.
-      - Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com possivel efeito parcial inicia recovery readback-first.
-      - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar ou alterar cron nesta thread sem plano e aprovacao explicita.
-      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.
-
     '1541578556037927053': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
 
 
@@ -672,8 +646,8 @@ discord:
       Drive/Meta. Um pedido do gestor para puxar da pasta autoriza apenas a revisao/liberacao
       scoped do request, nunca elegibilidade global ou selecao pela ordem dos nomes.
 
-      - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e
-      videos sao criativos. Nao existe copy default nem naming from-zero aprovado:
+      - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens
+      e videos sao criativos. Nao existe copy default nem naming from-zero aprovado:
       `DUPnn` e exclusivo de clone. Se o pedido nao trouxer campanha/template canonico
       de referencia, pedir uma unica referencia que forneca naming, nomes dos ads,
       copy, placements e tracking; nunca escolher silenciosamente a campanha mais
@@ -682,8 +656,8 @@ discord:
       - Budget de criacao normal e variavel e precisa ser informado na solicitacao.
       Nenhum valor historico e default.
 
-      - `pg_XXXXX` deve resolver para uma unica linha Messenger da Smart Bidding e a
-      Page precisa passar GET Meta; mapping ambiguo ou Page inacessivel bloqueia.
+      - `pg_XXXXX` deve resolver para uma unica linha Messenger da Smart Bidding e
+      a Page precisa passar GET Meta; mapping ambiguo ou Page inacessivel bloqueia.
 
       - Para simular o intake sem writes, executar `scripts/ares-eggbev-creation-intake-simulate.py`
       com os parametros do pedido.
@@ -694,22 +668,58 @@ discord:
 
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados
       apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
-    '1541578596253175858': |-
-      INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
+    '1541578596253175858': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
-      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem nas rotas proprias.
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
-      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou "mostre tudo" significam somente horarios, periodos, fontes, metricas, renderer, runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
-      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como estado atual.
-      - Plano de horarios em America/New_York: 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 e 22:00. Às 06:00, fechamento anterior + referencia parcial atual; demais horarios, parcial atual. Plano nao autoriza cron.
-      - Escopo de campanhas: toda campanha efetivamente ACTIVE mesmo sem insight + toda campanha com insight no periodo. Historicas sem nenhuma dessas condicoes ficam fora. Nao truncar nomes, nao limitar linhas silenciosamente.
-      - Layout: card vertical por campanha + uma tabela desktop unificada Meta/Smart Bidding/Pricing, com paginacao Discord fence-safe. Campos ausentes aparecem `N/D`, nunca zero inventado.
-      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding e Page Meta = `FB_PAGE_ID`. UTM/Page ausente, multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
-      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
-      - No renderer Corte e ROAS, `ROI real*`, `ROI est.*`, `RPS*` e `CPM bloco*` podem ser calculos report-only apos join economico exato; isso nao altera decisoes. No Diario, publicar somente valores cuja rota/campo e reconciliacao estejam implementados; caso contrario `N/D`.
-      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
-      - Runtime atual: runner read-only e sob demanda; post automatico=false; cron=false; writes=false. Nao alterar automacao sem plano, dry-run real e OK explicito.
-      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.
+
+      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo
+      read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem
+      nas rotas proprias.
+
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`;
+      ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
+
+      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou
+      "mostre tudo" significam somente horarios, periodos, fontes, metricas, renderer,
+      runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
+
+      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio
+      atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period
+      yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como
+      estado atual.
+
+      - Plano de horarios em America/New_York: 06:00, 08:00, 10:00, 12:00, 14:00,
+      16:00, 18:00, 20:00 e 22:00. Às 06:00, fechamento anterior + referencia parcial
+      atual; demais horarios, parcial atual. Plano nao autoriza cron.
+
+      - Escopo de campanhas: toda campanha efetivamente ACTIVE mesmo sem insight +
+      toda campanha com insight no periodo. Historicas sem nenhuma dessas condicoes
+      ficam fora. Nao truncar nomes, nao limitar linhas silenciosamente.
+
+      - Layout: card vertical por campanha + uma tabela desktop unificada Meta/Smart
+      Bidding/Pricing, com paginacao Discord fence-safe. Campos ausentes aparecem
+      `N/D`, nunca zero inventado.
+
+      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding e Page
+      Meta = `FB_PAGE_ID`. UTM/Page ausente, multipla, divergente ou fonte stale falha
+      fechado para a linha e mostra motivo.
+
+      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger
+      Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness
+      e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC
+      e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
+
+      - No renderer Corte e ROAS, `ROI real*`, `ROI est.*`, `RPS*` e `CPM bloco*`
+      podem ser calculos report-only apos join economico exato; isso nao altera decisoes.
+      No Diario, publicar somente valores cuja rota/campo e reconciliacao estejam
+      implementados; caso contrario `N/D`.
+
+      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem
+      aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
+
+      - Runtime atual: runner read-only e sob demanda; post automatico=false; cron=false;
+      writes=false. Nao alterar automacao sem plano, dry-run real e OK explicito.
+
+      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
     '1543312825890381865': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Limite de
       Leads
 
@@ -797,6 +807,81 @@ discord:
       \ request; nunca repetir POST não idempotente às cegas.\n- Perguntas sobre “sua\
       \ configuração”, “como está configurado” ou “mostre tudo” significam somente\
       \ esta rota de clonagem, não configuração global do Hermes/Ares.\n"
+    '1543280854024060999': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
+
+
+      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger,
+      conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar
+      uma thread substituta.
+
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato
+      vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint
+      canonico.
+
+      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia,
+      readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho
+      de Limite de Leads, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de
+      Regras.
+
+      - Rotas fixas: Regras `1543280854024060999`; Limite de Leads `1543312825890381865`;
+      Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`;
+      Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
+
+      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance.
+      Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica
+      ou mensagem antiga nunca reativa regra supersedida.
+
+      - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha,
+      budget, cron ou publicacao. Budget write segue Rodolfo/Geizian; publicacao de
+      criacao/clone exige resumo final e OK explicito do request.
+
+      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem
+      nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar
+      arquivada.
+
+      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional,
+      indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes
+      ativas da mesma regra.'
+    '1541578606076231750': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
+
+
+      - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006.
+      Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
+
+      - Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations`
+      e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia
+      e audit mais recente; consultar Meta e Smart Bidding vivas.
+
+      - Threshold diario default 0,40. Entre 00:00 e 06:00 nao cortar/reativar. Fase
+      1: 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold.
+      Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase ROAS < threshold
+      sem gate de gasto. Exatamente no threshold mantem.
+
+      - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica
+      da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte.
+      Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera
+      zero write + alerta.
+
+      - Acao ROAS ocorre no anuncio. Se zero ads ativos restarem, pausar a campanha;
+      nunca pausar ad set. Reativar somente anuncio/campanha pausados pelo Ares e
+      recuperados acima do threshold. Pausa por `page_lead_guardrail`, manual ou externa
+      nunca e reativada automaticamente.
+
+      - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding
+      e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao
+      ou budget.
+
+      - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou
+      abaixo mantem. Budget write=false ate Rodolfo/Geizian aprovarem teto/envelope.
+
+      - Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao
+      habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com
+      possivel efeito parcial inicia recovery readback-first.
+
+      - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar
+      ou alterar cron nesta thread sem plano e aprovacao explicita.
+
+      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false

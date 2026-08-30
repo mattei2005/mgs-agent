@@ -1007,10 +1007,27 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V2-20260829",
+      "title": "Eggbev BOT contrato de criação Campaign AdSet Ad",
+      "updated_at": "2026-08-30T01:11:07+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T21:10:50-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V2-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev BOT contrato de criação Campaign AdSet Ad",
-      "updated_at": "2026-08-29T18:00:24+00:00"
+      "title": "Eggbev from-zero intake mínimo e readiness real",
+      "updated_at": "2026-08-30T01:11:07+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation-thread-routing",
@@ -1094,6 +1111,23 @@
       "superseded_by": null,
       "title": "Roteamento e relatório da thread Diário Eggbev",
       "updated_at": "2026-08-29T22:42:39+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T21:10:50-04:00",
+      "id": "ARES-EGGBEV-FIXED-ROUTES-V1-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Seis rotas fixas Eggbev com pin, prompt e reconciliador",
+      "updated_at": "2026-08-30T01:11:06+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.page-leads",
@@ -2414,5 +2448,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T01:06:23+00:00"
+  "updated_at": "2026-08-30T01:11:07+00:00"
 }

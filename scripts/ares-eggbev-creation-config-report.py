@@ -13,6 +13,7 @@ OP_PATH = BASE / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json"
 ACCOUNT_PATH = BASE / "data/ares/meta-ads/accounts/1034081997659047.json"
 ENGINE_PATH = BASE / "data/ares/meta-ads/engine-v3/config.json"
 MEDIA_PATH = BASE / "data/ares/meta-ads/engine-v3/media-registry.json"
+OP_V3_PATH = BASE / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json"
 
 
 def load_json(path: Path) -> Any:
@@ -29,6 +30,7 @@ def build_report() -> str:
     account_doc = load_json(ACCOUNT_PATH)
     engine = load_json(ENGINE_PATH)
     media = load_json(MEDIA_PATH)
+    op_v3 = load_json(OP_V3_PATH)
 
     account = account_doc["accounts"][0]
     route = op["discord"]["route_contracts"]["campaign_creation"]
@@ -52,6 +54,7 @@ def build_report() -> str:
         raise RuntimeError("timezone canônico divergente")
 
     engine_registered = expected_id in engine.get("accounts", {})
+    from_zero_onboarded = "from_zero_prestaged" in (op_v3.get("supported_modes") or [])
     media_serialized = json.dumps(media, sort_keys=True)
     media_registered = expected_id in media_serialized or expected_ref in media_serialized or op["operation_id"] in media_serialized
     write_enabled = bool(runtime.get("write_enabled")) and engine_registered and media_registered
@@ -73,9 +76,10 @@ def build_report() -> str:
         f"- Contrato de criação aprovado: {yes_no(bool(runtime['contract_approved']))}.",
         f"- Runner Eggbev de criação construído: {yes_no(bool(runtime['runner_built']))}.",
         f"- Conta cadastrada no Engine v3: {yes_no(engine_registered)}.",
+        f"- Modo `from_zero_prestaged` onboarded para Eggbev: {yes_no(from_zero_onboarded)}.",
         f"- Mídia Eggbev pre-stageada no registry v3: {yes_no(media_registered)}.",
         f"- Write de criação habilitado: {yes_no(write_enabled)}.",
-        "- Estado real: a conta está onboarded no Engine v3; intake, validação do briefing e preparação do resumo são possíveis. Manifest executável, dry-run e write continuam bloqueados até o runner de criação, payload completo de placements e mídia pre-stageada estarem prontos.",
+        "- Estado real: a conta está onboarded no Engine v3 para clones. Intake, validação do briefing e preparação do resumo from-zero são possíveis, mas manifest executável/dry-run/write continuam bloqueados até onboardar `from_zero_prestaged`, construir o runner, materializar placements e pre-stagear a mídia.",
         "",
         "## Estrutura fixa",
         f"- Campaign: `{campaign['buying_type']}` | `{campaign['objective']}` | `{campaign['budget_level']}` | `{campaign['bid_strategy']}` | `{campaign['delivery_type']}`.",
@@ -106,7 +110,7 @@ def build_report() -> str:
         "- Copy não é criativo: copy são os quatro campos textuais do anúncio; imagens e vídeos são os assets criativos.",
         f"- Naming de criação do zero: `{op['campaign_naming']['creation_from_zero']['status']}`; `DUPnn` é somente clone.",
         f"- Requisitos de naming: {', '.join(op['campaign_naming']['creation_from_zero']['required_before_manifest'])}.",
-        f"- Referência canônica default: `{creation['creation_reference_policy']['default_reference_campaign']}`; ausente, pedir uma referência/template explícito sem escolher campanha silenciosamente.",
+        f"- Referência canônica default: `{'N/D' if creation['creation_reference_policy']['default_reference_campaign'] is None else creation['creation_reference_policy']['default_reference_campaign']}`; ausente, pedir uma referência/template explícito sem escolher campanha silenciosamente.",
         "- Copy default: nenhuma; pedir campanha/template de referência ou os quatro campos.",
         f"- Tracking: {creation['tracking_policy']['links_and_utms']}; {creation['tracking_policy']['readback']}.",
         "",

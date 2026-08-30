@@ -323,12 +323,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
-      "next_step": "Manter intake e resumo disponíveis. Antes de qualquer validate/plan/write, materializar placements aprovados, cadastrar a conta no Engine v3, pre-stagear mídia e construir/validar o runner; apresentar resumo final e obter OK específico do request.",
-      "objective": "Preservar a configuração operacional aprovada para criação do zero Eggbev US-CC-EN e sua readiness real",
-      "source": "discord:thread:1541578556037927053; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-creation-config-report.py",
-      "state": "nicolas holanda revisou o relatório canônico de criação e confirmou que a configuração atual parece ok e deve ser salva. a confirmação foi persistida na campaign_creation_policy sem ampliar autoridade: creation_write=false e budget_write=false. contrato aprovado; runner eggbev, onboarding engine v3, mídia pre-stageada e placements exatos continuam pendentes.",
+      "next_step": "Nicolas definir o budget do request e uma referência/template canônico de criação. Depois implementar from_zero_prestaged Eggbev, importar placements por readback, reconciliar/liberar 9 assets, pre-stagear e apresentar validate/plan/dry-run e resumo final; publicar só após novo OK explícito e gate financeiro.",
+      "objective": "Preservar o contrato de criação do zero Eggbev e sua readiness real sem misturar clone",
+      "source": "discord:thread:1543280854024060999; discord:thread:1541578556037927053; data/ares/meta-ads/audit/eggbev/creation-intake-pg5024-3x3-20260829.json; scripts/ares-eggbev-creation-intake-simulate.py",
+      "state": "auditoria final: pedido mínimo pg_5024 + 3 campanhas + 3 criativos foi simulado read-only. default correto: 3x1x3, 9 assets únicos, active, próximo dia 00:00 et. page amy shook passou get meta. inputs ainda ausentes: budget e referência/template canônico que forneça naming, ad names, copy, placements e tracking. conta v3 está onboarded para clones, mas from_zero_prestaged não está; runner, placements, pre-stage e elegibilidade reconciliada permanecem bloqueadores. dupnn foi removido do escopo de criação. zero meta/drive/reservation writes.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-08-29T23:30:40+00:00"
+      "updated_at": "2026-08-30T01:10:35+00:00"
     },
     {
       "agent": "ares",
@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
-      "next_step": "Aguardar autorização específica para corrigir em sequência: roteamento/prompts, flags do contrato, decisão única de naming/budget da clonagem, conclusão do onboarding e testes v3, timestamp Smart Bidding, placements/mídia da criação e registry. Antes de qualquer write, reler runtime e preservar mudanças paralelas.",
-      "objective": "Preservar a auditoria completa das regras e da configuração Eggbev US-CC-EN, distinguindo regras ativas, estado runtime e inconsistências sem promover hipóteses a política.",
-      "source": "discord:thread:1541578622106865815; canonical-rules-thread:1543280854024060999; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; engine:data/ares/meta-ads/engine-v3/config.json; runtime:/root/.hermes/profiles/ares/config.yaml; tests:tests/test_eggbev_clone_v3.py,tests/test_eggbev_roas_automation.py",
-      "state": "auditoria aceita por nicolas e salva como checkpoint operacional. a thread atual é histórica e a rota canônica de regras é 1543280854024060999. achados pendentes: prompts específicos ausentes em regras, corte/roas e clonar; clonagem v3 parcial com dois testes falhando, conta ainda não onboardada e clone_page_switch ausente do config ativo; conflito dup versus copy c{fonte} e budget selecionado versus usd45; flags globais de write/activation contradizem writes controlados por módulo; ciclo roas fail-closed por freshness smart bidding não verificável com zero writes; criação bloqueada por runner, placements, onboarding e mídia; registry ainda descreve quatro threads embora existam seis; alterações não relacionadas permanecem separadas. nenhuma regra, campanha, budget, credencial ou script foi alterado por esta auditoria.",
-      "thread_id": "1541578622106865815",
-      "updated_at": "2026-08-30T00:23:46+00:00"
+      "next_step": "Não criar substitutas. Rodar o reconciliador em checks de release. Fechar com Nicolas a referência/template e budget da criação; implementar from_zero, placements e pre-stage. Resolver timestamp Messenger; depois validar canário aprovado e somente então avaliar automação do Diário/budget.",
+      "objective": "Manter as seis rotas Eggbev fixas, separadas, auditáveis e reconciliadas com o contrato/runtime real",
+      "source": "discord:thread:1543280854024060999; data/ares/discord/eggbev-fixed-routes.json; data/ares/meta-ads/audit/eggbev/six-fixed-routes-final-readback-20260829.json; tests/test_eggbev_fixed_routes.py; tests/test_eggbev_creation_intake.py",
+      "state": "auditoria final concluída: seis threads existem no parent correto, abertas/desbloqueadas, autoarchive 7 dias, nicolas+zeus+rodolfo presentes, um cabeçalho canônico pinado por rota e prompts dedicados idênticos em fonte/config versionado/runtime. registry e discord_threads têm os seis ids; operation.route_contracts agora tem as seis rotas. regras preserva título manual. reconciliador idempotente recupera 429 e usa zeus apenas para pin quando ares recebe 403. 111 testes passaram. clone v3.3 validate/plan está pronto; diário read-only; roas/leads seguem fail-closed por freshness messenger; criação from-zero ainda não está pronta.",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-30T01:10:35+00:00"
     },
     {
       "agent": "ares",
@@ -373,12 +373,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Usar o renderer v4 nos próximos ciclos. No primeiro ciclo com campanha ativa, confirmar postagem e join por campanha; Messenger continua exigindo timestamp verificável e budget write continua sujeito a Rodolfo/Geizian mais teto.",
-      "objective": "Operar Corte e ROAS Eggbev com pausa, reativação, relatório e futura escala de budget sob autoridade vigente",
-      "source": "discord:thread:1541578606076231750; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/roas-cycle-renderer-v4-20260829T202830-0400.json",
-      "state": "nicolas holanda aceitou e mandou salvar o renderer v4 como baseline atual em 2026-08-29 20:36 et. contrato, audit e skill 0.14.3 registram o aceite de título, organização, métricas, joins, fórmulas report-only e paginação. 63 testes passaram. nenhuma autoridade meta ou de budget foi ampliada.",
-      "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-30T00:37:57+00:00"
+      "next_step": "Executar a sequência: Nicolas fecha referência/template + budget; Ares implementa from-zero e placements/pre-stage; validar um canário explicitamente aprovado; resolver freshness Messenger; apresentar dry-run do Diário multi-rota; qualquer cron ou budget write exige plano e aprovação própria.",
+      "objective": "Finalizar a arquitetura Campaign Ops Eggbev com seis rotas e gates honestos por módulo",
+      "source": "discord:thread:1543280854024060999; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/discord/eggbev-fixed-routes.json",
+      "state": "baseline final revisada: threads 6/6 fixas e recuperáveis; 111 testes e py_compile pass; clone v3.3 pronto para requests gated; roas e limite agendados, mas roas termina fail-closed quando freshness messenger é não verificável; diário permanece read-only sem cron; criação from-zero aplica defaults corretos no intake mas está bloqueada por referência/budget, modo v3, runner, placements, pre-stage e elegibilidade.",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-30T01:10:36+00:00"
     },
     {
       "agent": "ares",
@@ -1442,5 +1442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T00:44:53+00:00"
+  "updated_at": "2026-08-30T01:10:36+00:00"
 }
