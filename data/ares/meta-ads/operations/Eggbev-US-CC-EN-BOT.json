@@ -524,10 +524,10 @@
       "readback": "validate destination, url_tags/UTMs and Page identity after creation"
     },
     "manual_placements_payload": {
-      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference",
+      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference; Instagram explore added as the API-required parent of explore_home after validate-only subcode 2490392",
       "publisher_platforms": ["facebook", "instagram", "messenger"],
       "facebook_positions": ["feed", "instream_video", "marketplace", "story", "search", "biz_disco_feed", "facebook_reels", "facebook_reels_overlay", "profile_feed"],
-      "instagram_positions": ["stream", "story", "reels", "explore_home", "profile_feed"],
+      "instagram_positions": ["stream", "story", "reels", "explore", "explore_home", "profile_feed"],
       "messenger_positions": ["story"],
       "device_platforms": ["mobile", "desktop"],
       "audience_network": "forbidden",
