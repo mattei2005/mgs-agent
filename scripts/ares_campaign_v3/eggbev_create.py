@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from datetime import datetime, timezone
@@ -13,6 +14,9 @@ ACCOUNT_ID = "1034081997659047"
 APP_KEY = "mgs-meta-app-current"
 OPERATION = "Eggbev-US-CC-EN-BOT"
 PAGE_TOKEN_RE = re.compile(r"^pg_[0-9]+$")
+BASE = Path(__file__).resolve().parents[2]
+MESSENGER_TEMPLATE_PATH = BASE / "data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json"
+MESSENGER_TEMPLATE_SEMANTIC_SHA256 = "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad"
 
 FACEBOOK_POSITIONS = [
     "feed",
@@ -50,31 +54,59 @@ def _clean_display(value: Any, name: str) -> str:
     return text
 
 
-def messenger_welcome_message() -> str:
+def _semantic_json_sha256(payload: dict[str, Any]) -> str:
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def load_messenger_template(path: Path = MESSENGER_TEMPLATE_PATH) -> dict[str, Any]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"canonical Messenger JSON file is invalid: {path}") from exc
+    if not isinstance(payload, dict):
+        raise ValueError("canonical Messenger JSON must be an object")
+    expected_keys = {"message", "performance_booster_enabled", "ctm_deprecate_quick_replies_enabled"}
+    if set(payload) != expected_keys:
+        raise ValueError("canonical Messenger JSON has unexpected top-level fields")
+    if payload.get("performance_booster_enabled") is not False or payload.get("ctm_deprecate_quick_replies_enabled") is not False:
+        raise ValueError("canonical Messenger JSON feature flags must remain false")
+    message = payload.get("message")
+    attachment = message.get("attachment") if isinstance(message, dict) else None
+    attachment_payload = attachment.get("payload") if isinstance(attachment, dict) else None
+    buttons = attachment_payload.get("buttons") if isinstance(attachment_payload, dict) else None
+    if not (
+        isinstance(message, dict)
+        and message.get("template_type") == "text_with_buttons"
+        and isinstance(attachment, dict)
+        and attachment.get("type") == "template"
+        and isinstance(attachment_payload, dict)
+        and attachment_payload.get("template_type") == "button"
+        and isinstance(attachment_payload.get("text"), str)
+        and attachment_payload.get("text")
+        and isinstance(buttons, list)
+        and len(buttons) == 1
+        and isinstance(buttons[0], dict)
+        and buttons[0].get("type") == "postback"
+        and buttons[0].get("payload") == "GET_STARTED_PAYLOAD"
+        and isinstance(buttons[0].get("title"), str)
+        and buttons[0].get("title")
+    ):
+        raise ValueError("canonical Messenger JSON schema is invalid")
+    digest = _semantic_json_sha256(payload)
+    if digest != MESSENGER_TEMPLATE_SEMANTIC_SHA256:
+        raise ValueError("canonical Messenger JSON semantic digest does not match the approved fixed template")
+    return payload
+
+
+def messenger_welcome_message(path: Path = MESSENGER_TEMPLATE_PATH) -> str:
+    message_data = load_messenger_template(path)
     payload = {
-        "performance_booster_enabled": False,
-        "ctm_deprecate_quick_replies_enabled": False,
-        "message_data": {
-            "message": {
-                "template_type": "text_with_buttons",
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "button",
-                        "text": "💳 Hi, I just reviewed your access…\n\nDo you want to see your approved card? ⤵️",
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "payload": "GET_STARTED_PAYLOAD",
-                                "title": "🟢 YES, SHOW ME",
-                            }
-                        ],
-                    },
-                },
-            },
-            "performance_booster_enabled": False,
-            "ctm_deprecate_quick_replies_enabled": False,
-        },
+        "performance_booster_enabled": message_data["performance_booster_enabled"],
+        "ctm_deprecate_quick_replies_enabled": message_data["ctm_deprecate_quick_replies_enabled"],
+        "message_data": message_data,
         "type": "JSON_SETUP",
         "is_user_editing": False,
     }

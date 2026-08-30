@@ -611,6 +611,10 @@
     "current_instruction_overrides_reference_print": true,
     "message_template": {
       "required": true,
+      "canonical_file": "data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json",
+      "semantic_sha256": "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad",
+      "injection_policy": "every new from-zero ad creative loads this file and materializes it in asset_feed_spec.additional_data.page_welcome_message; missing, invalid or divergent content blocks before Meta write",
+      "readback_policy": "after creation, every Meta creative is parsed and compared directly with the canonical file; divergence leaves POSTPROCESS_PENDING and blocks inventory movement",
       "template_type": "text_with_buttons/button",
       "text": "💳 Hi, I just reviewed your access…\n\nDo you want to see your approved card? ⤵️",
       "button_type": "postback",
@@ -624,7 +628,7 @@
       "required_for_every_creation": true,
       "scope": "every created ad creative",
       "graph_fields": ["id", "name", "status", "object_story_spec", "asset_feed_spec", "url_tags"],
-      "checks": ["object_story_spec.page_id equals the approved Page", "url_tags equals the approved pg_XXXXX UTM", "parsed asset_feed_spec.additional_data.page_welcome_message equals the approved Messenger JSON"],
+      "checks": ["object_story_spec.page_id equals the approved Page", "url_tags equals the approved pg_XXXXX UTM", "manifest page_welcome_message equals the canonical Messenger JSON file", "parsed Meta asset_feed_spec.additional_data.page_welcome_message equals the canonical Messenger JSON file"],
       "failure_behavior": "mark POSTPROCESS_PENDING, preserve IDs/request, do not move assets to 02_TESTING, re-read before any corrective write and never replay campaign creation"
     }
   },

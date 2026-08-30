@@ -674,6 +674,12 @@ discord:
       e `custom_event_str=eggbev-pv-u` (UI: Eggbev PV U). A identidade de Instagram
       e Page-backed/PBIA da Page selecionada, sem exigir conta Instagram externa.
 
+      - O JSON Messenger fixo vive em `data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json`,
+      identidade semantica `ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad`.
+      Toda campanha nova carrega esse arquivo em cada creative. Arquivo ausente,
+      invalido ou divergente bloqueia antes do write; depois da criacao, cada creative
+      Meta e comparado diretamente com o arquivo e qualquer divergencia fica `POSTPROCESS_PENDING`.
+
       - Input humano obrigatorio do call minimo: budget diario exato por campanha.
       Nenhum budget historico e default. Nao perguntar novamente por quantidade de
       criativos, pasta, nomes dos ads, horario, referencia, naming, copy, placements
@@ -697,11 +703,12 @@ discord:
       apresentou contradicao no placement Explore e nao deve reintroduzir `explore`
       nem substituir os gates/readbacks do write real.
 
-      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page, `url_tags`
-      e o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message`
-      correspondem exatamente ao manifest aprovado. Divergencia deixa o request em
-      `POSTPROCESS_PENDING`, preserva IDs e bloqueia a movimentacao dos assets para
-      `02_TESTING`; nunca repetir a criacao.
+      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page e
+      `url_tags` correspondem ao manifest aprovado, enquanto o JSON parseado em
+      `asset_feed_spec.additional_data.page_welcome_message` corresponde diretamente
+      ao arquivo canonico fixo. Divergencia deixa o request em `POSTPROCESS_PENDING`,
+      preserva IDs e bloqueia a movimentacao dos assets para `02_TESTING`; nunca repetir
+      a criacao.
 
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados
       apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'

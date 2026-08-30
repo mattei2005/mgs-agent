@@ -108,6 +108,35 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         with self.assertRaises(RUNNER.CreationBlocked):
             RUNNER.parsed_json_object("not-json")
 
+    def test_messenger_json_readback_requires_the_canonical_file(self):
+        canonical = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)
+        parsed = RUNNER.require_canonical_messenger_json(canonical, "test")
+        self.assertEqual(parsed["message_data"], RUNNER.load_messenger_template(RUNNER.MESSENGER_TEMPLATE_PATH))
+        changed = json.loads(canonical)
+        changed["message_data"]["message"]["attachment"]["payload"]["text"] = "changed"
+        with self.assertRaises(RUNNER.CreationBlocked) as caught:
+            RUNNER.require_canonical_messenger_json(changed, "installed")
+        self.assertEqual(caught.exception.stage, "messenger_json_readback")
+
+    def test_preexecute_checks_every_manifest_ad_against_the_canonical_file(self):
+        welcome = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)
+        manifest = {
+            "campaigns": [
+                {
+                    "ads": [
+                        {"creative_payload": {"asset_feed_spec": {"additional_data": {"page_welcome_message": welcome}}}},
+                        {"creative_payload": {"asset_feed_spec": {"additional_data": {"page_welcome_message": welcome}}}},
+                    ]
+                }
+            ]
+        }
+        result = RUNNER.verify_manifest_messenger_json_against_canonical(manifest)
+        self.assertEqual(result["checked_creatives"], 2)
+        self.assertTrue(result["all_match"])
+        manifest["campaigns"][0]["ads"][1]["creative_payload"]["asset_feed_spec"]["additional_data"]["page_welcome_message"] = "{}"
+        with self.assertRaises(RUNNER.CreationBlocked):
+            RUNNER.verify_manifest_messenger_json_against_canonical(manifest)
+
     def test_execute_requires_both_human_and_financial_gates_before_state_read(self):
         args = argparse.Namespace(
             request_id="not-created",

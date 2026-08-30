@@ -39,6 +39,8 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
             "America/New_York",
             "Primary text",
             "GET_STARTED_PAYLOAD",
+            "eggbev-us-cc-en-messenger-welcome.json",
+            "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad",
             "DIGITAL TRUST",
             "ACTIVE",
             "GET/readback",
@@ -81,6 +83,16 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         self.assertEqual(creation["creation_reference_policy"]["default_reference_campaign"], "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01")
         self.assertIn("never reuse", creation["latest_standardization"]["application_scope"])
         self.assertIn("configuração, não mídia nem IDs", self.report)
+
+    def test_canonical_messenger_json_file_is_mandatory_and_checked(self):
+        operation = json.loads(OP.read_text())
+        template = operation["campaign_creation_policy"]["message_template"]
+        template_path = BASE / template["canonical_file"]
+        self.assertTrue(template_path.is_file())
+        self.assertEqual(template["semantic_sha256"], "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad")
+        self.assertIn("cada creative", template["injection_policy"])
+        self.assertIn("comparado diretamente", template["readback_policy"])
+        self.assertIn("Toda campanha nova carrega esse arquivo", self.report)
 
     def test_runtime_truth_is_explicit(self):
         self.assertIn("Runner Eggbev de criação construído: sim", self.report)

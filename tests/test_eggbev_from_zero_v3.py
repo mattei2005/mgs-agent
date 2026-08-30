@@ -12,9 +12,13 @@ from scripts.ares_campaign_v3.eggbev_create import (
     ACCOUNT_ID,
     FACEBOOK_POSITIONS,
     INSTAGRAM_POSITIONS,
+    MESSENGER_TEMPLATE_PATH,
+    MESSENGER_TEMPLATE_SEMANTIC_SHA256,
     MESSENGER_POSITIONS,
     build_eggbev_from_zero_manifest,
     build_eggbev_revised_clone_manifest,
+    load_messenger_template,
+    messenger_welcome_message,
 )
 from scripts.ares_campaign_v3.engine import CampaignEngine
 from scripts.ares_campaign_v3.media_registry import MediaRegistry
@@ -127,6 +131,43 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertIs(welcome["message_data"]["performance_booster_enabled"], False)
         self.assertNotIn("template_id", welcome)
         self.assertNotIn("standard_enhancements", json.dumps(creative))
+
+    def test_canonical_messenger_json_file_is_the_single_source_for_every_ad(self) -> None:
+        expected = {
+            "message": {
+                "template_type": "text_with_buttons",
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": "💳 Hi, I just reviewed your access…\n\nDo you want to see your approved card? ⤵️",
+                        "buttons": [{"type": "postback", "payload": "GET_STARTED_PAYLOAD", "title": "🟢 YES, SHOW ME"}],
+                    },
+                },
+            },
+            "performance_booster_enabled": False,
+            "ctm_deprecate_quick_replies_enabled": False,
+        }
+        self.assertEqual(load_messenger_template(), expected)
+        wrapped = json.loads(messenger_welcome_message())
+        self.assertEqual(wrapped["message_data"], expected)
+        self.assertEqual(MESSENGER_TEMPLATE_PATH.name, "eggbev-us-cc-en-messenger-welcome.json")
+        self.assertEqual(MESSENGER_TEMPLATE_SEMANTIC_SHA256, "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad")
+        payload = self._build(campaigns=1)
+        installed = [
+            json.loads(ad["creative_payload"]["asset_feed_spec"]["additional_data"]["page_welcome_message"])
+            for ad in payload["campaigns"][0]["ads"]
+        ]
+        self.assertEqual(installed, [wrapped, wrapped, wrapped])
+
+    def test_canonical_messenger_json_drift_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            changed = copy.deepcopy(load_messenger_template())
+            changed["message"]["attachment"]["payload"]["buttons"][0]["title"] = "CHANGED"
+            path = Path(tmp) / "changed.json"
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "semantic digest"):
+                load_messenger_template(path)
 
     def test_page_and_tracking_are_materialized(self) -> None:
         payload = self._build(campaigns=1)

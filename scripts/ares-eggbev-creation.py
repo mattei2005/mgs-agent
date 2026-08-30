@@ -25,7 +25,14 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from ares_campaign_v3.eggbev_create import ACCOUNT_ID, build_eggbev_from_zero_manifest
+from ares_campaign_v3.eggbev_create import (
+    ACCOUNT_ID,
+    MESSENGER_TEMPLATE_PATH,
+    MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+    build_eggbev_from_zero_manifest,
+    load_messenger_template,
+    messenger_welcome_message,
+)
 from ares_campaign_v3.engine import CampaignEngine
 from ares_campaign_v3.media_registry import MediaNotReady, MediaRegistry
 from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
@@ -536,6 +543,30 @@ def parsed_json_object(value: Any) -> dict[str, Any]:
     raise CreationBlocked("messenger_json_readback", "page_welcome_message is missing or is not a JSON object")
 
 
+def require_canonical_messenger_json(value: Any, source: str) -> dict[str, Any]:
+    load_messenger_template(MESSENGER_TEMPLATE_PATH)
+    expected = parsed_json_object(messenger_welcome_message(MESSENGER_TEMPLATE_PATH))
+    actual = parsed_json_object(value)
+    if actual != expected:
+        raise CreationBlocked("messenger_json_readback", f"{source} Messenger JSON does not match the canonical fixed file")
+    return actual
+
+
+def verify_manifest_messenger_json_against_canonical(manifest: dict[str, Any]) -> dict[str, Any]:
+    ads = [ad for campaign in manifest.get("campaigns") or [] for ad in campaign.get("ads") or []]
+    if not ads:
+        raise CreationBlocked("messenger_json_preexecute", "sealed manifest has no ads")
+    for ad in ads:
+        welcome = (((ad.get("creative_payload") or {}).get("asset_feed_spec") or {}).get("additional_data") or {}).get("page_welcome_message")
+        require_canonical_messenger_json(welcome, "sealed manifest")
+    return {
+        "checked_creatives": len(ads),
+        "canonical_template": str(MESSENGER_TEMPLATE_PATH),
+        "canonical_template_semantic_sha256": MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+        "all_match": True,
+    }
+
+
 def verify_messenger_json_installation(state: dict[str, Any], assignments: list[dict[str, str]]) -> dict[str, Any]:
     manifest = load_json(Path(str(state["manifest_path"])))
     expected_ads = [ad for campaign in manifest.get("campaigns") or [] for ad in campaign.get("ads") or []]
@@ -562,10 +593,16 @@ def verify_messenger_json_installation(state: dict[str, Any], assignments: list[
             raise CreationBlocked("messenger_json_readback", "creative Page does not match the approved manifest")
         if expected_tags != actual_tags:
             raise CreationBlocked("messenger_json_readback", "creative url_tags do not match the approved manifest")
-        if parsed_json_object(expected_welcome) != parsed_json_object(actual_welcome):
-            raise CreationBlocked("messenger_json_readback", "installed Messenger JSON does not match the approved manifest")
+        require_canonical_messenger_json(expected_welcome, "manifest")
+        require_canonical_messenger_json(actual_welcome, "installed")
         checked.append({"ad_id": str(assignment["ad_id"]), "creative_id": creative_id, "page_ok": True, "url_tags_ok": True, "messenger_json_ok": True})
-    return {"checked_creatives": len(checked), "all_installed": len(checked) == len(assignments), "readbacks": checked}
+    return {
+        "checked_creatives": len(checked),
+        "all_installed": len(checked) == len(assignments),
+        "canonical_template": str(MESSENGER_TEMPLATE_PATH),
+        "canonical_template_semantic_sha256": MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+        "readbacks": checked,
+    }
 
 
 def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
@@ -841,6 +878,9 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     manifest = load_json(manifest_path)
     if Manifest.from_dict(manifest).digest != state.get("manifest_digest"):
         raise CreationBlocked("manifest", "sealed manifest digest drift")
+    state["messenger_json_preexecute"] = verify_manifest_messenger_json_against_canonical(manifest)
+    atomic_json(path, state)
+    atomic_json(AUDIT_ROOT / f"{path.stem}.json", state)
     command = ["python3", str(ENGINE_CLI), "execute", "--manifest", str(manifest_path), "--confirm-execute"]
     result = subprocess.run(command, capture_output=True, text=True, timeout=1800, check=False)
     try:
