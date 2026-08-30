@@ -45,20 +45,18 @@ class EggbevFixedRoutesTests(unittest.TestCase):
             {"1055570806945620030", "1496296175014252634", "344196393512075265"},
         )
 
-    def test_every_route_has_prompt_pin_and_versioned_prompt_match(self):
+    def test_every_route_has_prompt_and_no_operational_banner_message(self):
         prompts = self.config["discord"]["channel_prompts"]
-        message_ids = []
+        self.assertFalse(self.registry["preservation_policy"]["pinned_route_messages"])
         for route in self.registry["routes"].values():
             thread_id = str(route["thread_id"])
             prompt_path = ROOT / route["prompt_file"]
             self.assertTrue(prompt_path.exists())
             self.assertTrue(prompt_path.read_text(encoding="utf-8").strip())
             self.assertEqual(prompt_path.read_text(encoding="utf-8").strip(), str(prompts[thread_id]).strip())
-            self.assertIn("EGGBEV_ROUTE_CANONICAL:", route["pin_marker"])
-            self.assertIn(route["pin_marker"], route["pin_content"])
-            self.assertTrue(str(route["canonical_message_id"]).isdigit())
-            message_ids.append(str(route["canonical_message_id"]))
-        self.assertEqual(len(message_ids), len(set(message_ids)))
+            self.assertNotIn("pin_marker", route)
+            self.assertNotIn("pin_content", route)
+            self.assertNotIn("canonical_message_id", route)
 
     def test_operation_route_ids_match_registry(self):
         contracts = self.operation["discord"]["route_contracts"]

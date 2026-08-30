@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import time
@@ -20,6 +19,14 @@ THREAD_REGISTRY = PROFILE / "discord_threads.json"
 ENV_PATH = PROFILE / ".env"
 ZEUS_ENV_PATH = Path("/root/.hermes/profiles/zeus/.env")
 API = "https://discord.com/api/v10"
+LEGACY_BANNERS = {
+    "1543280854024060999": "1543421467851620372",
+    "1543312825890381865": "1543421473769783367",
+    "1543333373945053184": "1543421482166657166",
+    "1541578606076231750": "1543421488399515680",
+    "1541578596253175858": "1543421495223787571",
+    "1541578556037927053": "1543421502433525884",
+}
 
 
 def load_registry() -> dict[str, Any]:
@@ -41,7 +48,8 @@ def load_zeus_token() -> str:
             value = raw.split("=", 1)[1].strip().strip('"').strip("'")
             if value:
                 return value
-    raise RuntimeError("Zeus Discord token unavailable for pin fallback")
+    raise RuntimeError("Zeus Discord token unavailable for legacy banner removal")
+
 
 
 def request(token: str, method: str, path: str, body: dict[str, Any] | None = None) -> tuple[int, Any]:
@@ -98,11 +106,41 @@ def ensure_thread_registry(thread_ids: list[str], repair: bool) -> dict[str, Any
     return {"missing_before": missing, "complete": not missing or repair}
 
 
-def find_canonical_message(messages: list[dict[str, Any]], pins: list[dict[str, Any]], marker: str) -> dict[str, Any] | None:
-    for row in pins + messages:
-        if marker in str(row.get("content") or ""):
-            return row
-    return None
+def remove_legacy_banner(token: str, thread_id: str, message_id: str) -> dict[str, Any]:
+    message_status, _ = request(token, "GET", f"/channels/{thread_id}/messages/{message_id}")
+    pins_status, pins = request(token, "GET", f"/channels/{thread_id}/pins")
+    if pins_status != 200 or not isinstance(pins, list):
+        return {"thread_id": thread_id, "message_id": message_id, "ok": False, "stage": "pins_pre_read", "http": pins_status}
+    pinned_before = any(str(row.get("id")) == message_id for row in pins)
+    changed: list[str] = []
+    if pinned_before:
+        unpin_status, _ = request(token, "DELETE", f"/channels/{thread_id}/pins/{message_id}")
+        if unpin_status == 403:
+            unpin_status, _ = request(load_zeus_token(), "DELETE", f"/channels/{thread_id}/pins/{message_id}")
+        if unpin_status not in {200, 204, 404}:
+            return {"thread_id": thread_id, "message_id": message_id, "ok": False, "stage": "unpin", "http": unpin_status}
+        changed.append("unpin")
+    if message_status == 200:
+        delete_status, _ = request(token, "DELETE", f"/channels/{thread_id}/messages/{message_id}")
+        if delete_status == 403:
+            delete_status, _ = request(load_zeus_token(), "DELETE", f"/channels/{thread_id}/messages/{message_id}")
+        if delete_status not in {200, 204, 404}:
+            return {"thread_id": thread_id, "message_id": message_id, "ok": False, "stage": "message_delete", "http": delete_status}
+        changed.append("delete_message")
+    message_after_status, _ = request(token, "GET", f"/channels/{thread_id}/messages/{message_id}")
+    pins_after_status, pins_after = request(token, "GET", f"/channels/{thread_id}/pins")
+    pinned_after = any(str(row.get("id")) == message_id for row in (pins_after if isinstance(pins_after, list) else []))
+    return {
+        "thread_id": thread_id,
+        "message_id": message_id,
+        "existed_before": message_status == 200,
+        "pinned_before": pinned_before,
+        "changed": changed,
+        "message_absent_after": message_after_status == 404,
+        "pin_absent_after": pins_after_status == 200 and not pinned_after,
+        "ok": message_after_status == 404 and pins_after_status == 200 and not pinned_after,
+    }
+
 
 
 def reconcile_route(token: str, label: str, route: dict[str, Any], policy: dict[str, Any], repair: bool) -> dict[str, Any]:
@@ -134,34 +172,11 @@ def reconcile_route(token: str, label: str, route: dict[str, Any], policy: dict[
                 return {"label": label, "thread_id": thread_id, "ok": False, "stage": "member_add", "user_id": user_id, "http": add_status}
             changed.append("member:" + user_id)
 
-    pins_status, pins = request(token, "GET", f"/channels/{thread_id}/pins")
-    history_status, messages = request(token, "GET", f"/channels/{thread_id}/messages?limit=100")
-    if pins_status != 200 or not isinstance(pins, list) or history_status != 200 or not isinstance(messages, list):
-        return {"label": label, "thread_id": thread_id, "ok": False, "stage": "pin_or_history_read", "pins_http": pins_status, "history_http": history_status}
-    marker = str(route["pin_marker"])
-    canonical = find_canonical_message(messages, pins, marker)
-    if repair and canonical is None:
-        post_status, canonical = request(token, "POST", f"/channels/{thread_id}/messages", {"content": route["pin_content"], "allowed_mentions": {"parse": []}})
-        if post_status not in {200, 201} or not isinstance(canonical, dict) or not canonical.get("id"):
-            return {"label": label, "thread_id": thread_id, "ok": False, "stage": "canonical_post", "http": post_status}
-        changed.append("canonical_message")
-        time.sleep(0.35)
-    pinned_ids = {str(row.get("id")) for row in pins}
-    if repair and canonical is not None and str(canonical.get("id")) not in pinned_ids:
-        pin_status, _ = request(token, "PUT", f"/channels/{thread_id}/pins/{canonical['id']}")
-        if pin_status == 403:
-            pin_status, _ = request(load_zeus_token(), "PUT", f"/channels/{thread_id}/pins/{canonical['id']}")
-        if pin_status not in {204, 200}:
-            return {"label": label, "thread_id": thread_id, "ok": False, "stage": "canonical_pin", "http": pin_status}
-        changed.append("pin")
-
     # Exact post-write readback.
     channel_status, channel_after = request(token, "GET", f"/channels/{thread_id}")
     members_status, members_after = request(token, "GET", f"/channels/{thread_id}/thread-members?with_member=true&limit=100")
-    pins_status, pins_after = request(token, "GET", f"/channels/{thread_id}/pins")
     metadata_after = dict((channel_after or {}).get("thread_metadata") or {}) if isinstance(channel_after, dict) else {}
     member_ids_after = {str(row.get("user_id") or ((row.get("member") or {}).get("user") or {}).get("id") or "") for row in (members_after if isinstance(members_after, list) else [])}
-    canonical_pins = [row for row in (pins_after if isinstance(pins_after, list) else []) if marker in str(row.get("content") or "")]
     prompt = ROOT / str(route["prompt_file"])
     checks = {
         "channel_http": channel_status == 200,
@@ -170,7 +185,6 @@ def reconcile_route(token: str, label: str, route: dict[str, Any], policy: dict[
         "archive_preserved": isinstance(metadata_after.get("archived"), bool),
         "auto_archive_7d": int(metadata_after.get("auto_archive_duration") or 0) == wanted_archive,
         "required_members": all(str(value) in member_ids_after for value in policy["required_member_ids"]),
-        "canonical_pin": len(canonical_pins) == 1,
         "prompt_file": prompt.exists() and bool(prompt.read_text().strip()),
     }
     return {
@@ -180,28 +194,29 @@ def reconcile_route(token: str, label: str, route: dict[str, Any], policy: dict[
         "archived": metadata_after.get("archived"),
         "changed": changed,
         "checks": checks,
-        "canonical_message_id": str(canonical_pins[0].get("id")) if canonical_pins else None,
-        "pin_content_sha256": hashlib.sha256(str(route["pin_content"]).encode()).hexdigest(),
         "ok": all(checks.values()),
     }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repair", action="store_true", help="repair members, 7-day archive setting, route message and pin")
+    parser.add_argument("--repair", action="store_true", help="repair members, registry and 7-day archive setting")
+    parser.add_argument("--remove-legacy-banners", action="store_true", help="remove the six superseded pinned route banner messages")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     registry = load_registry()
     policy = registry["preservation_policy"]
     token = load_token()
+    removals = [remove_legacy_banner(token, thread_id, message_id) for thread_id, message_id in LEGACY_BANNERS.items()] if args.remove_legacy_banners else []
     results = [reconcile_route(token, label, route, policy, args.repair) for label, route in registry["routes"].items()]
     thread_registry = ensure_thread_registry([str(route["thread_id"]) for route in registry["routes"].values()], args.repair)
     payload = {
-        "ok": all(row.get("ok") for row in results) and thread_registry["complete"],
-        "mode": "repair" if args.repair else "check",
+        "ok": all(row.get("ok") for row in results) and thread_registry["complete"] and all(row.get("ok") for row in removals),
+        "mode": "remove_legacy_banners" if args.remove_legacy_banners else "repair" if args.repair else "check",
         "routes_expected": len(registry["routes"]),
         "routes_ok": sum(1 for row in results if row.get("ok")),
         "thread_registry": thread_registry,
+        "legacy_banner_removals": removals,
         "routes": results,
     }
     if args.output:

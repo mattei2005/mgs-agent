@@ -464,23 +464,18 @@ def render_report(run: dict[str, Any]) -> str:
     mode = 'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED WRITE'
     title_emoji = '⚠️' if reasons else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'
     lines = [
-        f"## {title_emoji} CORTE & ROAS",
-        f"**Eggbev US-CC-EN • {date_label} • {time_label} ET • {_phase_label(run.get('phase'))}**",
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        f"`{mode}` • Threshold `{common.fmt_number(run.get('threshold'))}` • `USD`",
-        '',
-        f"**🎯 CICLO**  `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
+        f"## {title_emoji} Corte & ROAS • {time_label} ET",
+        f"**{_phase_label(run.get('phase'))} • {mode} • limite {common.fmt_number(run.get('threshold'))}**",
+        f"🎯 `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
         f"🛑 `{counts.get('pause_ads', 0)}` • ♻️ `{counts.get('reactivate_ads', 0)}` • "
         f"🚀 `{counts.get('budget_scale_candidates', 0)}` • ✅ `{sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP')}`",
-        f"**🛡️ FONTES**  Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}` • "
-        f"Join `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}` • Econ `{campaign_report.get('economic_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
     ]
     if run.get('phase') == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
     elif reasons:
         lines.append('⚠️ **Ações bloqueadas:** ' + '; '.join(reasons))
     else:
-        lines.append('✅ Fontes reconciliadas e regra nativa sem conflito.')
+        lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
     if campaigns:
         dashboard_top, dashboard_bottom, dashboard_separator = _dashboard_header()
@@ -529,16 +524,6 @@ def render_report(run: dict[str, Any]) -> str:
     if writes:
         confirmed = sum(1 for row in writes if row.get('ok'))
         lines.append(f"\n**✅ Readback de writes:** {confirmed}/{len(writes)} confirmados.")
-    lines.extend([
-        '',
-        '**ℹ️ LEGENDA**',
-        '**🔥 ROAS:** ⬇️ abaixo do threshold • 🎯 exatamente no threshold • ⬆️ acima do threshold • ⚪ indisponível.',
-        '`ROAS` mostra posição em relação ao threshold, não lucro ou prejuízo. Negativo é indicado somente quando `ROI atual` ou `ROI estimado` está abaixo de 0%.',
-        '`Ligada` mostra o estado On/Off da campanha. `ROI atual` e `ROI estimado` mostram os percentuais econômicos informativos: 🟢 positivo, 🟡 zero, 🔴 negativo e ⚪ indisponível.',
-        '`Custo por conversa` = gasto ÷ conversa iniciada • `Custo por resultado` = gasto ÷ resultados • `Custo por clique` = gasto ÷ cliques no link.',
-        '`Custo por assinante` = investimento ÷ assinantes • `Lucro` = receita − investimento • retornos usam o mesmo investimento.',
-        'Campos Smart Bidding ficam `N/D` sem UTM + página + atualização válida. Meta Purchase ROAS continua decidindo corte/reativação.',
-    ])
     if run.get('phase') == 'RESET':
         lines.append('Reset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')
     return '\n'.join(lines)

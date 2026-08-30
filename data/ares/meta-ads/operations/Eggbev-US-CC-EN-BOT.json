@@ -739,7 +739,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "desktop_unified_v8_requested_by_nicolas_validated_live_read_only_no_decision_change",
+      "status": "desktop_unified_v9_mobile_short_intro_no_legend_requested_by_nicolas",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -752,9 +752,9 @@
       },
       "purpose": "let a campaign manager scan status, action, Meta efficiency and Smart Bidding economics in one compact desktop table with minimal surrounding text",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
-      "title": "large Discord heading with cycle state emoji, Eggbev US-CC-EN, date, ET time, phase, mode and threshold",
+      "title": "short mobile-first Discord heading with cycle state and ET time",
       "layout": [
-        "single-line cycle and source summary",
+        "three-line mobile-first opening: title, phase/mode/threshold, and action counts",
         "one paginated unified Meta Ads plus Smart Bidding table",
         "bold Decision and Identity, Meta Ads ROAS, and Smart Bidding group titles",
         "full Portuguese labels split across two header lines instead of compact abbreviations",
@@ -763,7 +763,7 @@
         "ROAS value prefixed by a threshold-position marker without positive or negative semantics",
         "ROI atual and ROI estimado values prefixed by sign-aware color signals",
         "ad-level cut/reactivation list only when actions exist",
-        "short source and formula legend"
+        "no recurring explanatory legend"
       ],
       "action_emojis": {
         "cut": "🛑",

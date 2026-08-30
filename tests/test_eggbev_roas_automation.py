@@ -386,8 +386,10 @@ class ReportingTests(unittest.TestCase):
             'writes': [],
         }
         rendered = cycle.render_report(run)
-        self.assertIn('## 🛑 CORTE & ROAS', rendered)
-        self.assertIn('🎯 CICLO', rendered)
+        self.assertIn('## 🛑 Corte & ROAS •', rendered)
+        self.assertIn('🎯 `1 camp`', rendered)
+        self.assertNotIn('**ℹ️ LEGENDA**', rendered)
+        self.assertNotIn('Custo por conversa` =', rendered)
         self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding', rendered)
         self.assertIn('**📌 DECISÃO E IDENTIDADE**', rendered)
         self.assertIn('**📣 META ADS — ROAS EM DESTAQUE**', rendered)
@@ -730,9 +732,10 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v8_keeps_roas_threshold_position_distinct_from_negative_roi(self):
+    def test_roas_reporting_v9_keeps_roas_threshold_position_distinct_from_negative_roi(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('desktop_unified_v8', reporting_policy['status'])
+        self.assertIn('desktop_unified_v9', reporting_policy['status'])
+        self.assertIn('no recurring explanatory legend', reporting_policy['layout'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
             'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
