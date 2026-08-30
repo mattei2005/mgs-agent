@@ -396,6 +396,10 @@ Por correção de Nicolas em `2026-08-30`, os cartões v11 foram substituídos p
 
 Por instrução direta de Nicolas em `2026-08-30`, Decisão/Identidade, Meta Ads e Smart Bidding passam a compartilhar uma única tabela compacta no padrão CPV 13. Cada campanha ocupa um grupo indivisível de oito linhas, com colunas `Camp`, `Bloco` e três pares `Métrica/Valor`; a chave da campanha aparece uma vez. A paginação usa o tamanho renderizado real, repete o mesmo cabeçalho e nunca divide o grupo da campanha. A amostra live ficou com 87 colunas visuais e todos os rótulos completos. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
 
+### Refinamento visual v14 — hierarquia exata do print CPV 13 Intraday
+
+Após Nicolas enviar o print canônico em `2026-08-30`, o renderer abandonou os cabeçalhos genéricos `Bloco/Métrica/Valor` e passou a usar uma campanha por linha, com a ordem direta `R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | ROI real | ROI est. | Leads | RPS | CPM | Ação`. As larguras são dinâmicas, há dois espaços entre colunas, um único divisor e paginação somente por overflow real, como no Intraday CPV 13. A amostra live ficou alinhada em 122 colunas visuais. ROAS permanece numérico; os sinais de ROI ficam em `R/E`. Esta revisão é somente visual e não altera fontes, fórmulas, threshold, corte, reativação, budget, cron ou autoridade.
+
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
 > **NÃO USAR COMO ESTADO ATUAL.** Os policy updates e hardenings subsequentes deste apêndice explicam a evolução, mas as seções ativas anteriores e os arquivos canônicos vivos são a única regra/readiness aplicável.

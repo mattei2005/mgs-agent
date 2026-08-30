@@ -750,7 +750,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "single_unified_cpv13_style_table_v13_requested_by_nicolas",
+      "status": "cpv13_intraday_desktop_table_v14_requested_by_nicolas",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -858,18 +858,42 @@
           "meta_writes": 0
         }
       },
-      "purpose": "let a campaign manager scan every decision, Meta and Smart Bidding metric in one compact aligned CPV-style table",
+      "cpv13_intraday_print_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T11:43:29-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "visual_reference": "Intraday Creditoparaveiculo 13 G006 desktop screenshot",
+        "decision": "replace generic metric/value headings with the same direct one-row-per-campaign hierarchy used by CPV 13 Intraday",
+        "columns": ["R/E", "Camp", "Página", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Leads", "RPS", "CPM", "Ação"],
+        "implementation": "dynamic content widths, two spaces between columns, one Unicode divider, one campaign per row and actual-length pagination",
+        "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
+        "validation": {
+          "eggbev_tests": "65/65 passed",
+          "targeted_desktop_table_tests": "3/3 passed",
+          "live_dry_run_campaigns": 1,
+          "twenty_five_campaign_fixture": true,
+          "single_table": true,
+          "one_row_per_campaign": true,
+          "single_campaign_display_width": 122,
+          "aligned_rows": true,
+          "generic_metric_value_headers": false,
+          "vertical_bar_separators": false,
+          "balanced_code_fences": true,
+          "meta_writes": 0
+        }
+      },
+      "purpose": "replicate the organized, spaced and visible CPV 13 Intraday desktop table for Eggbev ROAS reporting",
       "campaign_scope": "all campaigns evaluated by the ROAS plan plus every campaign with a Meta insight row in the current ET day; insight-only campaigns receive an exact campaign GET and display OBSERVAR without creating a write decision",
       "title": "short mobile-first Discord heading with cycle state and ET time",
       "layout": [
         "three-line mobile-first opening: title, phase/mode/threshold, and action counts",
-        "one single compact aligned monospace table modeled on Creditoparaveiculo 13 Intraday",
-        "Camp and Bloco identify each campaign section inside the same table",
-        "three metric/value pairs per line preserve decision, identity, Meta Ads and Smart Bidding data",
-        "each campaign remains an indivisible eight-row group during pagination",
+        "one single compact aligned monospace desktop table modeled directly on Creditoparaveiculo 13 Intraday",
+        "one campaign per row with direct semantic headings instead of generic metric/value headings",
+        "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, ROI real, ROI est., Leads, RPS, CPM, Ação",
         "dynamic column widths with two spaces between columns and no vertical bars",
-        "ROAS value prefixed by a threshold-position marker without positive or negative semantics",
-        "ROI atual and ROI estimado values prefixed by sign-aware color signals",
+        "ROAS shown as a plain numeric value like the CPV 13 reference; threshold semantics remain in the action logic",
+        "R/E contains the real and estimated ROI signals while ROI real and ROI est. remain signed numeric percentages",
         "ad-level cut/reactivation list only when actions exist",
         "no recurring explanatory legend"
       ],
@@ -943,7 +967,7 @@
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
-      "pagination": "no silent campaign limit; every campaign key appears once in the unified table; pagination uses actual rendered character count, never splits the eight-row campaign group, repeats the same unified heading and keeps every code fence balanced",
+      "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count, never splits a campaign row, repeats the same desktop heading and keeps every code fence balanced",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

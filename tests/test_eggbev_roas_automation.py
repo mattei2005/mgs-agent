@@ -763,18 +763,20 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v13_uses_one_unified_table_and_keeps_roas_semantics(self):
+    def test_roas_reporting_v14_matches_cpv13_intraday_print_and_keeps_roas_semantics(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('single_unified_cpv13_style_table_v13', reporting_policy['status'])
+        self.assertIn('cpv13_intraday_desktop_table_v14', reporting_policy['status'])
         self.assertIn('no recurring explanatory legend', reporting_policy['layout'])
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
-        unified = reporting_policy['single_unified_table_correction']
-        self.assertTrue(unified['validation']['single_table'])
-        self.assertEqual(unified['validation']['single_campaign_display_width'], 87)
-        self.assertTrue(unified['validation']['aligned_rows'])
-        self.assertFalse(unified['validation']['campaign_group_split_across_pages'])
-        self.assertFalse(unified['validation']['vertical_bar_separators'])
-        self.assertIn('one single compact aligned monospace table modeled on Creditoparaveiculo 13 Intraday', reporting_policy['layout'])
+        desktop = reporting_policy['cpv13_intraday_print_correction']
+        self.assertTrue(desktop['validation']['single_table'])
+        self.assertTrue(desktop['validation']['one_row_per_campaign'])
+        self.assertEqual(desktop['validation']['single_campaign_display_width'], 122)
+        self.assertTrue(desktop['validation']['aligned_rows'])
+        self.assertFalse(desktop['validation']['generic_metric_value_headers'])
+        self.assertFalse(desktop['validation']['vertical_bar_separators'])
+        self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'])
+        self.assertIn('one campaign per row with direct semantic headings instead of generic metric/value headings', reporting_policy['layout'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
             'Ligada with visual yes/no signal', 'Campanha operational prefix plus UTM',
@@ -806,7 +808,7 @@ class ContractTests(unittest.TestCase):
         self.assertIn('Meta Purchase ROAS remains', reporting_policy['decision_separation'])
         self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
         self.assertIn('pagination uses actual rendered character count', reporting_policy['pagination'])
-        self.assertIn('never splits the eight-row campaign group', reporting_policy['pagination'])
+        self.assertIn('never splits a campaign row', reporting_policy['pagination'])
         self.assertIn('keeps every code fence balanced', reporting_policy['pagination'])
         self.assertFalse(self.operation['roas_cycle_policy']['runtime']['budget_write_enabled'])
 
