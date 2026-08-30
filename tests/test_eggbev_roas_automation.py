@@ -361,13 +361,14 @@ class ReportingTests(unittest.TestCase):
         }
         rendered = cycle.render_report(run)
         self.assertIn('## 🛑 CORTE & ROAS', rendered)
-        self.assertIn('📌 RESUMO DO CICLO', rendered)
-        self.assertIn('📱 CAMPANHAS • leitura rápida', rendered)
-        self.assertIn('🖥️ META • decisão consolidada', rendered)
-        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO', rendered)
-        for label in ('Volume de LEADS', 'Custo/msg', 'CTR', 'ROAS', 'Meta CPM', 'ROI real', 'ROI estim.', 'CPM bloco', 'RPS*'):
+        self.assertIn('🎯 CICLO', rendered)
+        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding', rendered)
+        self.assertNotIn('📱 CAMPANHAS • leitura rápida', rendered)
+        for label in ('R/E', 'On', 'Camp/Pg', 'Delivery', 'Ação', 'C/msg', 'ROAS', 'C/res', 'Res', 'Budget', 'Spend', 'CPM', 'CTR', 'CPC', 'Page ID', 'Page', 'C/Sub', 'Rev', 'Profit', 'ROI%', 'Leads', 'ROI Drip', 'Rev BC'):
             self.assertIn(label, rendered)
-        self.assertEqual(rendered.count('123 - Full Campaign - ENG - US - (pg_12345)'), 1)
+        self.assertIn('123/pg_12345', rendered)
+        self.assertIn('123456789012345', rendered)
+        self.assertIn('Page One', rendered)
 
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
@@ -392,7 +393,7 @@ class ReportingTests(unittest.TestCase):
             self.assertEqual(content.count('```') % 2, 0)
             self.assertTrue(content.startswith('**⚔️ Corte & ROAS • Parte '))
 
-    def test_roas_cycle_high_volume_keeps_all_names_and_repeats_table_headers(self):
+    def test_roas_cycle_high_volume_keeps_all_campaign_keys_and_repeats_table_headers(self):
         campaigns = []
         decisions = []
         for index in range(1, 26):
@@ -419,12 +420,11 @@ class ReportingTests(unittest.TestCase):
             'writes': [],
         }
         rendered = cycle.render_report(run)
-        for row in campaigns:
-            self.assertEqual(rendered.count(row['name']), 1)
-        self.assertIn('🖥️ META • decisão consolidada • 1/3', rendered)
-        self.assertIn('🖥️ META • decisão consolidada • 3/3', rendered)
-        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO • 1/3', rendered)
-        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO • 3/3', rendered)
+        for index, row in enumerate(campaigns, start=1):
+            self.assertEqual(rendered.count(f'{index:03d}/{row["utm_campaign"]}'), 1)
+        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 1/5', rendered)
+        self.assertIn('📊 PAINEL ÚNICO • Meta Ads + Smart Bidding • 5/5', rendered)
+        self.assertEqual(rendered.count('R/E  On  #  Camp/Pg'), 5)
         chunks = common.split_messages(rendered, limit=1750)
         self.assertTrue(all(len(chunk) <= 1750 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
@@ -689,18 +689,27 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v4_has_requested_metrics_and_does_not_change_decisions(self):
+    def test_roas_reporting_v5_has_requested_visual_columns_and_does_not_change_decisions(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
+        self.assertIn('desktop_unified_v5', reporting_policy['status'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
-            'Smart Bidding LEADS', 'report-only real ROI', 'report-only estimated ROI',
-            'report-only block CPM', 'report-only RPS', 'CTR', 'Meta Purchase ROAS',
-            'Meta CPM', 'Cost per messaging conversation started',
+            'Off/On signal', 'compact Campaign prefix plus UTM', 'Delivery',
+            'Actions from the Ares cycle decision', 'Cost per messaging conversation started',
+            'Meta Purchase ROAS', 'Cost per result', 'Results', 'Budget USD',
+            'Amount spent USD', 'Meta CPM', 'Meta CTR link click-through rate',
+            'Meta CPC link click', 'Smart Bidding Page ID', 'Smart Bidding Page Name',
+            'Smart Bidding Cost Subscriber', 'Smart Bidding Revenue', 'Smart Bidding Profit',
+            'Smart Bidding ROI percent', 'Smart Bidding LEADS',
+            'Smart Bidding DRIP ROI percent', 'Smart Bidding Broadcast Revenue',
         ):
             self.assertIn(expected, fields)
+        formulas = reporting_policy['report_only_formulas']
+        for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
+            self.assertIn(key, formulas)
         self.assertIn('Meta Purchase ROAS remains', reporting_policy['decision_separation'])
         self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
-        self.assertIn('Part N/T', reporting_policy['pagination'])
+        self.assertIn('every 6 rows', reporting_policy['pagination'])
         self.assertFalse(self.operation['roas_cycle_policy']['runtime']['budget_write_enabled'])
 
     def test_native_rule_disable_is_future_only(self):

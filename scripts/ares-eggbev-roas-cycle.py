@@ -234,6 +234,11 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             decisions_by_campaign[campaign_id] = []
             ordered_ids.append(campaign_id)
         decisions_by_campaign[campaign_id].append(decision)
+    for merged_row in merged.get('campaigns') or []:
+        campaign_id = common.norm(merged_row.get('campaign_id'))
+        if campaign_id and campaign_id not in decisions_by_campaign:
+            decisions_by_campaign[campaign_id] = []
+            ordered_ids.append(campaign_id)
     scale_by_id = {
         common.norm(row.get('campaign_id')): row
         for row in plan.get('budget_scale_candidates') or []
@@ -241,14 +246,14 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
     }
     live_campaigns = {
         common.norm(row.get('id')): row
-        for source in ('campaigns', 'tracked_campaigns')
+        for source in ('campaigns', 'tracked_campaigns', 'campaign_readbacks')
         for row in meta_bundle.get(source) or []
         if common.norm(row.get('id'))
     }
     identities = reporting.meta_campaign_identities(meta_bundle)
     rows: list[dict[str, Any]] = []
     for campaign_id in ordered_ids:
-        decisions = decisions_by_campaign[campaign_id]
+        decisions = decisions_by_campaign.get(campaign_id) or []
         row = dict(by_id.get(campaign_id) or {})
         live = live_campaigns.get(campaign_id) or {}
         if not row:
@@ -601,6 +606,7 @@ def main() -> int:
             meta, sb, token, credential_readback = common.load_runtime_modules(account)
             run['credential_readback'] = credential_readback
             meta_bundle = common.fetch_meta_bundle(meta, token, norm_id(operation), state, 'today')
+            meta_bundle = reporting.enrich_campaign_readbacks(meta, token, meta_bundle)
             run['meta_status'] = 'ok'
             try:
                 sb_bundle = common.fetch_sb_bundle(sb, operation, started.date().isoformat())

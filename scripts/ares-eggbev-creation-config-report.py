@@ -57,13 +57,9 @@ def build_report() -> str:
     from_zero_onboarded = "from_zero_prestaged" in (op_v3.get("supported_modes") or [])
     media_serialized = json.dumps(media, sort_keys=True)
     media_registered = expected_id in media_serialized or expected_ref in media_serialized or op["operation_id"] in media_serialized
-    write_enabled = bool(runtime.get("write_enabled")) and engine_registered and media_registered
+    write_enabled = bool(runtime.get("write_enabled")) and engine_registered and from_zero_onboarded and bool(runtime.get("runner_built")) and bool(runtime.get("placements_payload_materialized"))
 
-    placements_status = (
-        "MANUAL_ONLY; a lista exata de posições ainda não está materializada no contrato "
-        "canônico. Isso bloqueia manifest/write até importar e validar o payload aprovado; "
-        "não copiar placements de outra operação."
-    )
+    placements_status = "MANUAL_ONLY; payload exato materializado por readback, com Facebook + Instagram + Messenger e Audience Network proibida."
 
     lines = [
         "# Eggbev-US-CC-EN — configuração de Criar Campanhas",
@@ -77,9 +73,9 @@ def build_report() -> str:
         f"- Runner Eggbev de criação construído: {yes_no(bool(runtime['runner_built']))}.",
         f"- Conta cadastrada no Engine v3: {yes_no(engine_registered)}.",
         f"- Modo `from_zero_prestaged` onboarded para Eggbev: {yes_no(from_zero_onboarded)}.",
-        f"- Mídia Eggbev pre-stageada no registry v3: {yes_no(media_registered)}.",
+        f"- Mídia Eggbev já pre-stageada no registry v3 neste instante: {yes_no(media_registered)}; o pre-stage é on-demand por request e não é blocker estático.",
         f"- Write de criação habilitado: {yes_no(write_enabled)}.",
-        "- Estado real: a conta está onboarded no Engine v3 para clones. Intake, validação do briefing e preparação do resumo from-zero são possíveis, mas manifest executável/dry-run/write continuam bloqueados até onboardar `from_zero_prestaged`, construir o runner, materializar placements e pre-stagear a mídia.",
+        "- Estado real: `from_zero_prestaged`, runner, placements, referência/copy e reconcile/pre-stage on-demand estão materializados. O pedido avança até o resumo final quando traz budget e nomes dos ads; publicação continua bloqueada pelo OK explícito e pelo gate financeiro.",
         "",
         "## Estrutura fixa",
         f"- Campaign: `{campaign['buying_type']}` | `{campaign['objective']}` | `{campaign['budget_level']}` | `{campaign['bid_strategy']}` | `{campaign['delivery_type']}`.",
@@ -98,9 +94,8 @@ def build_report() -> str:
         "3. Estrutura `1×1×3` ou `1×1×5`.",
         "4. Budget diário exato; criação normal não possui valor default.",
         "5. Criativos novos e linhagem Drive → Meta.",
-        "6. Referência/template canônico de criação ou nomes de campanha/anúncios, copy completa, placements e tracking explicitamente fornecidos.",
-        "7. Copy completa significa `Primary text`, `Headline`, `Description` e `CTA`.",
-        "8. Links, `url_tags`/UTMs e qualquer exceção de público, placement ou estratégia.",
+        "6. Nomes individuais dos anúncios; quando ausentes, perguntar uma vez antes do manifest.",
+        "7. Overrides de copy/tracking/placements, se o pedido quiser divergir dos defaults aprovados.",
         "",
         "## Criativos e copy",
         f"- Fonte: `{creative['drive_operation']}/01_READY`, após reserva e reconciliação Meta × Drive.",
@@ -109,9 +104,9 @@ def build_report() -> str:
         f"- Advantage+ creative={str(creative['advantage_plus_creative']).lower()}; multi-advertiser={str(creative['multi_advertiser_ads']).lower()}.",
         "- Copy não é criativo: copy são os quatro campos textuais do anúncio; imagens e vídeos são os assets criativos.",
         f"- Naming de criação do zero: `{op['campaign_naming']['creation_from_zero']['status']}`; `DUPnn` é somente clone.",
-        f"- Requisitos de naming: {', '.join(op['campaign_naming']['creation_from_zero']['required_before_manifest'])}.",
-        f"- Referência canônica default: `{'N/D' if creation['creation_reference_policy']['default_reference_campaign'] is None else creation['creation_reference_policy']['default_reference_campaign']}`; ausente, pedir uma referência/template explícito sem escolher campanha silenciosamente.",
-        "- Copy default: nenhuma; pedir campanha/template de referência ou os quatro campos.",
+        f"- Naming materializado: `{op['campaign_naming']['creation_from_zero']['pattern']}`; nomes dos ads continuam input obrigatório.",
+        f"- Referência canônica default: `{creation['creation_reference_policy']['default_reference_campaign']}`; a instrução atual do pedido vence qualquer campo conflitante.",
+        f"- Copy default: `{creation['copy_source_policy']['default']}` — Primary text vazio, 3 headlines aprovadas, descrição cinco estrelas e CTA `APPLY_NOW`.",
         f"- Tracking: {creation['tracking_policy']['links_and_utms']}; {creation['tracking_policy']['readback']}.",
         "",
         "## Messenger JSON obrigatório",
@@ -135,7 +130,7 @@ def build_report() -> str:
         "4. Fazer preflight read-only e snapshot da conta/estado relevante.",
         "5. Reconciliar Drive × Meta, reserva, naming, sequência, links e UTMs.",
         "6. Materializar manifest idempotente com lock e request ID.",
-        "7. Executar validate/plan/dry-run quando o runner, placements e mídia pre-stageada estiverem prontos; o onboarding v3 da conta já está concluído.",
+        "7. Executar reconcile scoped, pre-stage on-demand, prevalidate e plan pelo runner `scripts/ares-eggbev-creation.py`.",
         "8. Mostrar resumo final: página, horário/estrutura, budget, criativos, copy, JSON, naming, tracking e status.",
         "9. Esperar o OK explícito de Nicolas; existência da thread não autoriza write.",
         "10. Criar somente após todos os gates; recuperar falhas por readback-first, sem repetir POST às cegas.",
