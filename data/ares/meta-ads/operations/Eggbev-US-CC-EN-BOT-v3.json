@@ -15,7 +15,8 @@
   "supported_modes": [
     "pure_clone",
     "clone_prestaged",
-    "clone_page_switch"
+    "clone_page_switch",
+    "from_zero_prestaged"
   ],
   "mode_contract": {
     "pure_clone": {
@@ -64,6 +65,19 @@
       ],
       "media_registry_required": false,
       "source_ad_lineage_required": true
+    },
+    "from_zero_prestaged": {
+      "label": "criação do zero com criativos novos pre-stageados",
+      "source_clone_ids_forbidden": true,
+      "create_edges": ["campaign_create", "adset_create", "creative_create", "ad_create"],
+      "ads": "exactly three or five per campaign",
+      "media_registry_required": true,
+      "default_status": "ACTIVE with future next-day 00:00 America/New_York start_time after final approval",
+      "budget": "manager-selected input; write remains gated by Rodolfo/Geizian",
+      "naming": "[page sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX para [Page first name] - Copy",
+      "placements": "manual operation payload; Audience Network forbidden",
+      "copy_template": "Jolie C001 reference fields with later operation flags taking precedence",
+      "final_summary_and_ok_required": true
     }
   },
   "naming_policy": {

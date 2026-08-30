@@ -335,9 +335,12 @@
     "collision_gate": "read all non-deleted live campaign names and choose the first free DUP number before manifest sealing",
     "ad_name": "provided_per_creative; missing name blocks publication",
     "creation_from_zero": {
-      "status": "pending_nicolas_reference_or_explicit_names",
-      "live_examples_are_not_defaults": true,
-      "required_before_manifest": ["campaign name or approved naming template", "individual ad names or approved deterministic ad naming rule"],
+      "status": "approved_by_nicolas_and_materialized",
+      "pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX para [Page first name] - Copy",
+      "page_sequence": "for a Page not found in the cross-account Eggbev EN naming scan, allocate the next global free numeric prefix immediately before manifest sealing; an existing Page with conflicting prefixes fails closed",
+      "campaign_sequence": "use the next free C001, C002, C003... for the exact pg token after a cross-account non-deleted collision scan",
+      "reference_example": "155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy",
+      "ad_name": "provided_per_creative; if missing ask once before manifest/publication",
       "forbidden": "do not append DUPnn because there is no source campaign in from-zero creation"
     }
   },
@@ -471,7 +474,7 @@
     }
   },
   "campaign_creation_policy": {
-    "status": "approved_by_nicolas_pending_runner",
+    "status": "approved_by_nicolas_materialized_for_engine_v3",
     "latest_manager_review": {
       "reviewed_at_et": "2026-08-29T19:29:53-04:00",
       "reviewed_by": "Nicolas Holanda",
@@ -485,14 +488,24 @@
     "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
     "copy_source_policy": {
-      "default": null,
+      "default": "approved_jolie_c001_reference_template",
       "accepted_inputs": ["all four copy fields supplied in the request", "an explicitly identified and approved source campaign", "a future operation-level copy template approved by Nicolas"],
-      "missing_behavior": "ask one short natural-language question for the copy source; never infer the correct copy from the Page, pg token, creative filename or another operation"
+      "override_policy": "request-time explicit copy wins over the default template",
+      "template": {
+        "primary_text": "",
+        "headlines": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"],
+        "description": "⭐️⭐️⭐️⭐️⭐️",
+        "cta": "APPLY_NOW"
+      },
+      "evidence": "Nicolas named the Jolie C001 campaign as the creation reference; Graph readback of exact-name objects confirmed these text fields, while later operation flags override reference enhancements"
     },
     "creation_reference_policy": {
-      "default_reference_campaign": null,
+      "default_reference_campaign": "155 - Jolie Caruthers - ENG - US - (pg_5083) C001 para Jolie - Copy",
+      "source_account": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "reference_scope": ["from-zero campaign naming", "ad set name", "copy fields", "manual placements enum mapping", "Messenger creative structure"],
+      "override_policy": "current request instructions and the separately approved Messenger flags win over any conflicting reference field",
       "can_supply_when_explicitly_approved": ["copy", "from-zero naming template", "individual ad naming rule", "manual placements payload", "tracking/url_tags structure"],
-      "missing_behavior": "ask Nicolas for one canonical creation reference/template; do not silently select the latest or a high-performing campaign"
+      "duplicate_name_policy": "never select an arbitrary campaign ID; use only fields consistent with the approved reference/readback and explicit later overrides"
     },
     "minimal_request_semantics": {
       "source_folder_aliases": {"cc en us": "CC_US_EN", "CC_US_EN": "CC_US_EN"},
@@ -505,8 +518,20 @@
     },
     "tracking_policy": {
       "page_token": "pg_XXXXX aligned to the selected Facebook Page",
-      "links_and_utms": "must be confirmed and shown in the final summary for each request; never infer from another operation",
+      "destination": "Messenger for the selected Page",
+      "url_tags_template": "utm_campaign={pg_XXXXX}",
+      "links_and_utms": "show Messenger destination and exact url_tags in the final summary; request-time explicit tracking overrides the template after validation",
       "readback": "validate destination, url_tags/UTMs and Page identity after creation"
+    },
+    "manual_placements_payload": {
+      "source": "Nicolas exact approved UI list plus Graph enum readback from the Jolie reference",
+      "publisher_platforms": ["facebook", "instagram", "messenger"],
+      "facebook_positions": ["feed", "instream_video", "marketplace", "story", "search", "biz_disco_feed", "facebook_reels", "facebook_reels_overlay", "profile_feed"],
+      "instagram_positions": ["stream", "story", "reels", "explore_home", "profile_feed"],
+      "messenger_positions": ["story"],
+      "device_platforms": ["mobile", "desktop"],
+      "audience_network": "forbidden",
+      "advantage_plus_placements": false
     },
     "dependency_checklist": [
       "confirm selected page",
