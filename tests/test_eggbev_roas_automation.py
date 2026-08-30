@@ -332,6 +332,32 @@ class ReportingTests(unittest.TestCase):
         self.assertFalse(result['ready'])
         self.assertEqual(result['by_campaign_utm'], {})
 
+    def test_reporting_keeps_insight_only_paused_campaign_visible_without_write_decision(self):
+        meta_bundle = {
+            'campaign_readbacks': [{
+                'id': 'c1', 'name': '123 - Page - ENG - US - (pg_12345)',
+                'status': 'PAUSED', 'effective_status': 'PAUSED', 'daily_budget': '4500',
+            }],
+            'ad_readbacks': [{
+                'id': 'a1', 'campaign': {'id': 'c1'},
+                'creative': {'url_tags': 'utm_campaign=pg_12345', 'object_story_spec': {'page_id': 'page1'}},
+            }],
+            'insights': [{
+                'ad_id': 'a1', 'campaign_id': 'c1', 'campaign_name': '123 - Page - ENG - US - (pg_12345)',
+                'spend': '5', 'impressions': '500', 'inline_link_clicks': '10', 'ctr': '2',
+            }],
+        }
+        report = cycle.build_campaign_reporting(
+            meta_bundle,
+            {'ready': False, 'reason': 'smart_bidding_freshness_unverifiable', 'target_report_rows': []},
+            {'decisions': [], 'budget_scale_candidates': []},
+        )
+        self.assertEqual(report['campaign_count'], 1)
+        row = report['campaigns'][0]
+        self.assertEqual(row['status'], 'PAUSED')
+        self.assertEqual(row['action_label'], 'OBSERVAR')
+        self.assertEqual(row['cpc_link'], .5)
+
     def test_roas_cycle_renderer_has_one_visual_meta_sb_dashboard(self):
         campaign = {
             'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',

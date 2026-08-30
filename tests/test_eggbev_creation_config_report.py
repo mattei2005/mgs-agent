@@ -61,16 +61,20 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
             with self.subTest(value=value):
                 self.assertNotIn(value, self.report)
 
-    def test_unresolved_placements_are_fail_closed(self):
-        self.assertIn("lista exata de posições ainda não está materializada", self.report)
-        self.assertIn("bloqueia manifest/write", self.report)
-        self.assertIn("não copiar placements de outra operação", self.report)
+    def test_manual_placements_are_materialized_and_audience_network_is_forbidden(self):
+        self.assertIn("payload exato materializado por readback", self.report)
+        self.assertIn("Audience Network proibida", self.report)
+        operation = json.loads(OP.read_text())
+        payload = operation["campaign_creation_policy"]["manual_placements_payload"]
+        self.assertEqual(payload["publisher_platforms"], ["facebook", "instagram", "messenger"])
+        self.assertEqual(payload["audience_network"], "forbidden")
 
     def test_runtime_truth_is_explicit(self):
-        self.assertIn("Runner Eggbev de criação construído: não", self.report)
+        self.assertIn("Runner Eggbev de criação construído: sim", self.report)
         self.assertIn("Conta cadastrada no Engine v3: sim", self.report)
-        self.assertIn("Write de criação habilitado: não", self.report)
-        self.assertIn("onboarding v3 da conta já está concluído", self.report)
+        self.assertIn("Modo `from_zero_prestaged` onboarded para Eggbev: sim", self.report)
+        self.assertIn("Write de criação habilitado: sim", self.report)
+        self.assertIn("publicação continua bloqueada pelo OK explícito e pelo gate financeiro", self.report)
         self.assertNotIn("USD 45 não é default", self.report)
 
     def test_route_contract_and_versioned_thread_prompt(self):

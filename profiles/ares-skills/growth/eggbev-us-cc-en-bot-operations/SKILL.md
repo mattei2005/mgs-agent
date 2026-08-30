@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.15.1-draft
+version: 0.15.2-draft
 author: Ares
 license: internal
 metadata:
@@ -320,17 +320,27 @@ Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 
 Post/Cron Diário         false
 ```
 
-### Renderer Corte e ROAS v4
+### Renderer Corte e ROAS v5 — painel único
 
-Aceite explícito: Nicolas Holanda confirmou em `2026-08-29T20:36:20-04:00`, na thread `1541578606076231750`, que o renderer v4 deve ser salvo como baseline atual. O aceite cobre organização visual, métricas solicitadas, joins, fórmulas report-only rotuladas e paginação; não amplia autoridade Meta ou de budget.
+Nicolas Holanda solicitou em `2026-08-30`, na thread `1541578606076231750`, substituir os cards e as duas tabelas do v4 por uma leitura curta, visual e inspirada no Intraday CPV. O v5 é a baseline ativa de apresentação; não altera corte, reativação, escala, budget, cron ou autoridade.
 
-Cada ciclo usa título grande com emoji de estado, data/hora ET, fase, modo e threshold. O corpo combina resumo executivo, um card vertical por campanha, tabela Meta/decisão, tabela Smart Bidding/monetização, lista de cortes/reativações por anúncio e legenda de fontes/fórmulas. Emojis: `🛑` corte, `♻️` reativação, `🚀` escala recomendada, `✅` manter, `👁️` observar e `⚠️` gate/fonte bloqueada.
+A hierarquia da única tabela é: sinais `R/E` → `On` → `Camp/Pg` → `Delivery` → `Ação` → eficiência Meta → identidade/economia Smart Bidding. As colunas, nesta ordem, são:
 
-Não há limite silencioso de campanhas nem truncamento do nome completo. Tabelas repetem o cabeçalho a cada 12 linhas; mensagens multipart repetem `⚔️ Corte & ROAS • Parte N/T`; blocos `text` permanecem fence-safe. O join de LEADS e o join econômico aparecem separadamente, porque a ausência de freshness do Messenger não invalida automaticamente uma leitura econômica com freshness própria — e nenhuma das duas amplia a autoridade de write.
+```text
+R/E | On | # | Camp/Pg | Delivery | Ação | C/msg | ROAS | C/res | Res |
+Budget | Spend | CPM | CTR | CPC | Page ID | Page | C/Sub | Rev | Profit |
+ROI% | Leads | ROI Drip | Rev BC
+```
 
-O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Em ciclo de ação, Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa bloqueia writes. Métricas Smart Bidding indisponíveis aparecem `N/D`, nunca zero inventado.
+- `Camp/Pg` usa o prefixo operacional real do nome e a UTM `pg_XXXXX`; nunca inventa campanha.
+- `C/msg` = spend ÷ `messaging_conversation_started_7d`; `C/res` = spend ÷ resultado Messenger; `CPC` = spend ÷ `inline_link_clicks`.
+- `C/Sub*` = `INVESTIMENT ÷ SUBSCRIBED`; `Profit*` = `REVENUE − INVESTIMENT`; `ROI%*` e `ROI Drip*` usam o mesmo investimento como denominador.
+- Page ID/Name podem permanecer visíveis por identidade reconciliada mesmo quando as métricas externas ficam `N/D`; valores Smart Bidding exigem UTM + Page ID + freshness válidos.
+- `R/E` conserva os sinais dos ROIs real/estimado da rota econômica report-only. Meta Purchase ROAS continua sendo a única métrica de decisão do ciclo.
 
-Na leitura live do renderer v4, a conta Meta estava ativa em USD/ET e sem campanha/anúncio ativo no ciclo porque a campanha disponível estava pausada pelo guardrail de LEADS. A Smart Bidding expôs a conta 01 na rota Messenger e 1 linha econômica exata em `/report/performance_per_campaigns`; `/estimated/delay` retornou freshness válida. O Messenger continua sem timestamp aceito, portanto writes ROAS permanecem fail-closed mesmo quando as métricas econômicas informativas podem ser exibidas.
+O renderer mantém também campanhas com insight Meta no dia mesmo quando não entram no plano de write: faz GET exato da campanha, mostra o estado Off/On real e usa `OBSERVAR`, sem criar decisão. A lista por anúncio aparece somente quando há corte/reativação. Não há limite silencioso; a tabela repete o cabeçalho a cada 6 linhas, e mensagens multipart continuam fence-safe com `⚔️ Corte & ROAS • Parte N/T`.
+
+O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa mantém writes fail-closed; métrica indisponível aparece `N/D`, nunca zero inventado.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

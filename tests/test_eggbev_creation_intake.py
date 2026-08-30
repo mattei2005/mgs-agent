@@ -67,27 +67,27 @@ class EggbevCreationIntakeTests(unittest.TestCase):
         self.assertEqual(result["status"], "NEEDS_INPUT")
         self.assertEqual(
             result["missing_user_inputs"],
-            ["daily_budget_usd_per_campaign", "canonical_creation_reference_or_explicit_naming_copy_tracking_placements_package"],
+            ["daily_budget_usd_per_campaign", "ad_names_or_approved_ad_name_template"],
         )
         self.assertEqual(result["meta_writes"], 0)
         self.assertEqual(result["reservations_written"], 0)
 
     @mock.patch.object(MODULE, "live_page_check")
-    def test_complete_user_inputs_still_expose_technical_readiness_blockers(self, page_check):
+    def test_complete_user_inputs_are_ready_for_scoped_prestage(self, page_check):
         page_check.return_value = self.page_fixture()
         result = MODULE.simulate(
             self.make_args(
                 daily_budget_usd=50.0,
                 creation_reference="approved-fixture-reference",
+                ad_name_template="AD {index}",
             )
         )
         self.assertEqual(result["missing_user_inputs"], [])
-        self.assertEqual(result["status"], "BLOCKED_READINESS")
-        self.assertIn("eggbev_from_zero_runner_not_built", result["readiness_blockers"])
-        self.assertIn("operation_v3_from_zero_mode_not_onboarded", result["readiness_blockers"])
-        self.assertIn("exact_manual_placements_not_materialized", result["readiness_blockers"])
-        self.assertIn("eggbev_media_not_prestaged_in_v3", result["readiness_blockers"])
-        self.assertIn("insufficient_currently_eligible_unique_assets", result["readiness_blockers"])
+        self.assertEqual(result["status"], "READY_FOR_SCOPED_RECONCILIATION_AND_PRESTAGE")
+        self.assertEqual(result["readiness_blockers"], [])
+        self.assertIn("prestage to act_1034081997659047/advideos", result["automatic_request_steps_pending"])
+        self.assertEqual(result["meta_writes"], 0)
+        self.assertEqual(result["reservations_written"], 0)
 
     def test_inventory_is_ready_but_not_globally_released(self):
         result = MODULE.inventory_summary(9)
