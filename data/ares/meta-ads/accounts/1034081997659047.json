@@ -29,7 +29,8 @@
           "Nicolas"
         ],
         "nicolas_discord_id": "1055570806945620030",
-        "budget_write_authority": "Nicolas approved USD 45 only for clone_page_switch after explicit approval of the final per-request summary; other budgets remain request-scoped and gated"
+        "budget_selection_policy": "Authorized campaign managers select and confirm the exact daily budget per campaign request.",
+        "budget_write_authority": "Manager selection does not expand financial authority; actual budget write remains subject to the current Rodolfo/Geizian gate."
       },
       "write_mode": "disabled_general_with_scoped_roas_status_and_page_lead_guardrail_active",
       "runtime_routes": {
@@ -38,7 +39,7 @@
           "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
           "contract_approved": true,
           "runner_built": false,
-          "engine_account_registered": false,
+          "engine_account_registered": true,
           "media_registry_ready": false,
           "placements_mode": "MANUAL_ONLY",
           "placements_payload_materialized": false,

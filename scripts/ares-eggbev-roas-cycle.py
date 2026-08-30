@@ -100,11 +100,78 @@ def _append_table_pages(
         lines.extend(['', f'**{label}**', '```text', header, separator, *page, '```'])
 
 
+def _roi_percent(revenue: Any, investment: Any) -> float | None:
+    revenue_value = common.finite_float(revenue)
+    investment_value = common.finite_float(investment)
+    if revenue_value is None or investment_value is None or investment_value <= 0:
+        return None
+    return (revenue_value - investment_value) * 100.0 / investment_value
+
+
+def aggregate_economic_reporting(sb_bundle: dict[str, Any]) -> dict[str, Any]:
+    """Aggregate report-only economics by exact Meta campaign ID + UTM."""
+    if not sb_bundle.get('economic_ready'):
+        return {
+            'ready': False,
+            'reason': sb_bundle.get('economic_reason') or 'economic_source_not_ready',
+            'by_campaign_utm': {},
+            'freshness': dict(sb_bundle.get('economic_freshness') or {}),
+        }
+    grouped: dict[tuple[str, str], dict[str, Any]] = {}
+    utm_campaigns: dict[str, set[str]] = {}
+    for source in sb_bundle.get('economic_performance_rows') or []:
+        campaign_id = common.norm(source.get('CAMPAIGN_ID'))
+        utm = reporting.normalize_utm_campaign(source.get('UTM_ADGROUP'))
+        if not campaign_id or not utm:
+            continue
+        key = (campaign_id, utm)
+        item = grouped.setdefault(key, {
+            'campaign_id': campaign_id, 'utm_campaign': utm,
+            'investment': 0.0, 'net_revenue': 0.0, 'estimated_revenue_direct': 0.0,
+            'sessions': 0.0, 'gam_impressions': 0.0, 'source_rows': 0,
+        })
+        item['investment'] += common.finite_float(source.get('INVESTIMENT')) or 0.0
+        item['net_revenue'] += common.finite_float(source.get('NET_REVENUE')) or 0.0
+        item['estimated_revenue_direct'] += common.finite_float(source.get('REVENUE_ESTIMATED')) or 0.0
+        item['sessions'] += common.finite_float(source.get('SESSIONS')) or 0.0
+        item['gam_impressions'] += common.finite_float(source.get('GAM_IMPRESSIONS')) or 0.0
+        item['source_rows'] += 1
+        utm_campaigns.setdefault(utm, set()).add(campaign_id)
+    estimated_by_utm = {
+        reporting.normalize_utm_campaign(row.get('utm_adgroup')): row
+        for row in ((sb_bundle.get('economic_estimated') or {}).get('grouped') or [])
+        if reporting.normalize_utm_campaign(row.get('utm_adgroup'))
+    }
+    for (_, utm), item in grouped.items():
+        estimate = estimated_by_utm.get(utm) if len(utm_campaigns.get(utm) or set()) == 1 else None
+        estimated_revenue = common.finite_float((estimate or {}).get('estimatedRevenue'))
+        if estimated_revenue is None and item['estimated_revenue_direct'] > 0:
+            estimated_revenue = item['estimated_revenue_direct']
+        item.update({
+            'roi_real': _roi_percent(item['net_revenue'], item['investment']),
+            'roi_estimated': _roi_percent(estimated_revenue, item['investment']),
+            'rps': item['net_revenue'] * 1000.0 / item['sessions'] if item['sessions'] > 0 else None,
+            'block_cpm': item['net_revenue'] * 1000.0 / item['gam_impressions'] if item['gam_impressions'] > 0 else None,
+            'estimated_revenue': estimated_revenue,
+            'estimate_confidence': common.finite_float((estimate or {}).get('confidence')),
+            'estimated_join_status': 'matched' if estimate else ('ambiguous_utm' if len(utm_campaigns.get(utm) or set()) > 1 else 'estimate_missing'),
+            'source_route': 'Smart Bidding /report/performance_per_campaigns + /estimated/revenue/utm_adgroup',
+            'currency': 'USD',
+        })
+    return {
+        'ready': True,
+        'reason': None,
+        'by_campaign_utm': grouped,
+        'freshness': dict(sb_bundle.get('economic_freshness') or {}),
+    }
+
+
 def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
     """Build reconciled campaign rows for the ROAS renderer without changing decisions."""
     meta = reporting.aggregate_meta(meta_bundle)
     sb = reporting.aggregate_sb(sb_bundle)
     merged = reporting.merge_campaign_sources(meta, sb)
+    economics = aggregate_economic_reporting(sb_bundle)
     by_id = {common.norm(row.get('campaign_id')): dict(row) for row in merged.get('campaigns') or []}
     decisions_by_campaign: dict[str, list[dict[str, Any]]] = {}
     ordered_ids: list[str] = []
@@ -153,6 +220,7 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
                 'join_status': 'campaign_reporting_row_not_reconciled',
                 **(identities.get(campaign_id) or {}),
             })
+        economic = (economics.get('by_campaign_utm') or {}).get((campaign_id, reporting.normalize_utm_campaign(row.get('utm_campaign'))))
         emoji, action, action_detail = _campaign_action(decisions, campaign_id in scale_by_id)
         row.update({
             'action_emoji': emoji,
@@ -162,10 +230,14 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             'reactivate_ads': sum(1 for item in decisions if item.get('action') == 'REACTIVATE_AD'),
             'keep_ads': sum(1 for item in decisions if item.get('action') == 'KEEP'),
             'decision_reasons': sorted({common.norm(item.get('reason')) for item in decisions if common.norm(item.get('reason'))}),
-            'roi_real': None,
-            'roi_estimated': None,
-            'block_cpm': None,
-            'rps': row.get('pricing_rps'),
+            'roi_real': (economic or {}).get('roi_real'),
+            'roi_estimated': (economic or {}).get('roi_estimated'),
+            'block_cpm': (economic or {}).get('block_cpm'),
+            'rps': (economic or {}).get('rps') if economic else row.get('pricing_rps'),
+            'economic_join_status': 'matched' if economic else (economics.get('reason') or 'economic_campaign_utm_not_found'),
+            'economic_source': (economic or {}).get('source_route'),
+            'economic_freshness': dict(economics.get('freshness') or {}),
+            'estimate_confidence': (economic or {}).get('estimate_confidence'),
             'scale': scale_by_id.get(campaign_id),
         })
         rows.append(row)
@@ -173,13 +245,14 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
         'campaigns': rows,
         'campaign_count': len(rows),
         'source_join_matched': sum(1 for row in rows if row.get('join_status') == 'matched'),
+        'economic_join_matched': sum(1 for row in rows if row.get('economic_join_status') == 'matched'),
         'leads_total': (sum(common.finite_float(row.get('sb_leads')) or 0.0 for row in rows) if any(common.finite_float(row.get('sb_leads')) is not None for row in rows) else None),
         'smart_bidding_freshness': dict(sb.get('freshness') or {}),
         'smart_bidding_reason': sb.get('reason'),
         'metric_notes': {
-            'rps': 'Smart Bidding direct field preferred; current local fallback is REVENUE×1.000/SESSIONS and is labeled RPS*.',
-            'roi': 'ROI real and estimated remain N/D until direct reconciled fields/formulas are approved.',
-            'block_cpm': 'CPM do bloco remains N/D until pricing rule/slot identity is reconciled to the campaign.',
+            'rps': 'RPS* report-only = Smart Bidding NET_REVENUE×1.000/SESSIONS.',
+            'roi': 'ROI real* = (NET_REVENUE−INVESTIMENT)/INVESTIMENT; ROI est.* uses estimatedRevenue with the same denominator.',
+            'block_cpm': 'CPM bloco* = Smart Bidding NET_REVENUE×1.000/GAM_IMPRESSIONS.',
         },
     }
 
@@ -213,7 +286,8 @@ def render_report(run: dict[str, Any]) -> str:
         f"Volume de LEADS          {common.fmt_number(campaign_report.get('leads_total'), 0):>5}",
         '```',
         '**🛡️ FONTES E SEGURANÇA**',
-        f"Meta `{run.get('meta_status') or 'N/D'}` • Smart Bidding `{run.get('smart_bidding_status') or 'N/D'}` • Join `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
+        f"Meta `{run.get('meta_status') or 'N/D'}` • Smart Bidding `{run.get('smart_bidding_status') or 'N/D'}`",
+        f"Join LEADS `{campaign_report.get('source_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}` • Join econômico `{campaign_report.get('economic_join_matched', 0)}/{campaign_report.get('campaign_count', 0)}`",
     ]
     if run.get('phase') == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
@@ -234,10 +308,11 @@ def render_report(run: dict[str, Any]) -> str:
                 f"Msg inic.  {common.fmt_number(row.get('messaging_started'), 0):<12} Custo/msg    {common.fmt_money(row.get('cost_per_messaging_started'))}",
                 f"CTR        {_fmt_percent(row.get('ctr')):<12} ROAS         {common.fmt_number(row.get('purchase_roas'))}",
                 f"Meta CPM   {common.fmt_money(row.get('cpm')):<12} LEADS        {common.fmt_number(row.get('sb_leads'), 0)}",
-                f"ROI real   {_fmt_percent(row.get('roi_real')):<12} ROI estim.   {_fmt_percent(row.get('roi_estimated'))}",
-                f"CPM bloco  {common.fmt_money(row.get('block_cpm')):<12} RPS*          {common.fmt_money(row.get('rps'))}",
+                f"ROI real*  {_fmt_percent(row.get('roi_real')):<12} ROI estim.*  {_fmt_percent(row.get('roi_estimated'))}",
+                f"CPM bloco* {common.fmt_money(row.get('block_cpm')):<12} RPS*          {common.fmt_money(row.get('rps'))}",
                 f"Ação       {row.get('action_detail')}",
-                f"Join       {row.get('join_status') or 'N/D'}",
+                f"Join LEADS {row.get('join_status') or 'N/D'}",
+                f"Join econ. {row.get('economic_join_status') or 'N/D'}",
                 '```',
             ])
 
@@ -264,7 +339,7 @@ def render_report(run: dict[str, Any]) -> str:
             )
         _append_table_pages(
             lines, '💰 SMART BIDDING / MONETIZAÇÃO',
-            '#  LEADS  ROI real  ROI est.  CPM bloco    RPS*  Join',
+            '#  LEADS  ROI real* ROI est.* CPM bloco*   RPS*  Join econômico',
             '-- ------ --------- --------- ---------- ------- ----------------',
             sb_rows,
         )
@@ -301,8 +376,9 @@ def render_report(run: dict[str, Any]) -> str:
         '**ℹ️ LEGENDA E LIMITAÇÕES**',
         '`🛑 corte` • `♻️ reativação` • `🚀 escala` • `✅ manter` • `👁️ observar`',
         '`C/msg` = Spend Meta ÷ mensagens iniciadas. `M.CPM` = CPM Meta.',
-        '`RPS*` = fallback rotulado `REVENUE×1.000/SESSIONS` quando não houver campo direto reconciliado.',
-        'ROI real, ROI estimado e CPM do bloco aparecem `N/D` até campo/fórmula e identidade de regra/slot serem validados.',
+        '`ROI real*` = `(NET_REVENUE−INVESTIMENT)÷INVESTIMENT`; `ROI est.*` usa `estimatedRevenue`.',
+        '`RPS*` = `NET_REVENUE×1.000÷SESSIONS`; `CPM bloco*` = `NET_REVENUE×1.000÷GAM_IMPRESSIONS`.',
+        'Métricas econômicas são somente informativas; `N/D` indica fonte, identidade, freshness ou denominador insuficiente e não altera a regra de corte por Meta Purchase ROAS.',
     ])
     if run.get('phase') == 'RESET':
         lines.append('Reset diário: threshold voltou para 0,40; nenhum corte ou reativação Meta.')

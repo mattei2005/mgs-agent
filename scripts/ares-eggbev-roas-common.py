@@ -361,6 +361,51 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
     expected_names = [norm(value).lower() for value in ((policy.get('smart_bidding_reconciliation') or {}).get('expected_account_names') or ['Eggbev-US-CC-EN-01', 'Eggbev-US-CC-EN-01-G006'])]
     target_rows = [row for row in report_rows if any(name and name in norm(row.get('ACCOUNT_NAME')).lower() for name in expected_names)]
     freshness = evaluate_sb_freshness(target_rows, now_et(), 2.0)
+
+    target_account_id = norm((policy.get('smart_bidding_reconciliation') or {}).get('target_meta_account_id')).replace('act_', '')
+    economic_rows: list[dict[str, Any]] = []
+    economic_estimated: dict[str, Any] = {}
+    economic_delay: dict[str, Any] = {}
+    economic_statuses: dict[str, int] = {}
+    economic_error: str | None = None
+    try:
+        performance_status, performance_rows, _ = sb.api_request(
+            'POST', '/report/performance_per_campaigns', payload=payload, item_name=credential_item,
+        )
+        economic_statuses['performance_per_campaigns'] = performance_status
+        if performance_status not in {200, 201} or not isinstance(performance_rows, list):
+            raise RuntimeError(f'Smart Bidding performance report failed: HTTP {performance_status}')
+        economic_rows = [
+            row for row in performance_rows
+            if norm(row.get('CUSTOMER_ID')).replace('act_', '') == target_account_id
+            and norm(row.get('DOMAIN')).lower() == 'eggbev'
+            and norm(row.get('DATE'))[:10] == report_date
+        ]
+        estimated_payload = {'publisherIds': publishers, 'currency': 'USD'}
+        delay_status, delay_body, _ = sb.api_request(
+            'POST', '/estimated/delay', payload=estimated_payload, item_name=credential_item,
+        )
+        estimated_status, estimated_body, _ = sb.api_request(
+            'POST', '/estimated/revenue/utm_adgroup', payload=estimated_payload, item_name=credential_item,
+        )
+        economic_statuses['estimated_delay'] = delay_status
+        economic_statuses['estimated_revenue_utm_adgroup'] = estimated_status
+        if delay_status in {200, 201} and isinstance(delay_body, dict):
+            economic_delay = delay_body
+        if estimated_status in {200, 201} and isinstance(estimated_body, dict):
+            economic_estimated = estimated_body
+    except Exception as exc:
+        economic_error = f'{type(exc).__name__}: {exc}'
+    delay_minutes = finite_float(economic_delay.get('totalMinutes'))
+    current_fill_time = norm(economic_delay.get('currentFillTime'))
+    economic_freshness_ready = delay_minutes is not None and delay_minutes <= 120.0 and bool(current_fill_time)
+    economic_ready = bool(economic_rows) and economic_freshness_ready
+    economic_reason = (
+        None if economic_ready else
+        economic_error or
+        ('target_account_absent_from_performance_report' if not economic_rows else 'economic_freshness_unverifiable_or_stale')
+    )
+
     page_index: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in pages:
         utm = norm(row.get('UTM_CAMPAIGN')).lower()
@@ -377,6 +422,20 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
         'target_report_rows': target_rows,
         'available_account_names': sorted({norm(row.get('ACCOUNT_NAME')) for row in report_rows if norm(row.get('ACCOUNT_NAME'))}),
         'schema_keys': sorted({key for row in report_rows for key in row.keys()}),
+        'economic_ready': economic_ready,
+        'economic_reason': economic_reason,
+        'economic_performance_rows': economic_rows,
+        'economic_estimated': economic_estimated,
+        'economic_delay': economic_delay,
+        'economic_freshness': {
+            'ready': economic_freshness_ready,
+            'age_minutes': delay_minutes,
+            'current_fill_time': current_fill_time or None,
+            'max_age_minutes': 120,
+            'evidence': 'Smart Bidding /estimated/delay',
+        },
+        'economic_http_statuses': economic_statuses,
+        'economic_schema_keys': sorted({key for row in economic_rows for key in row.keys()}),
         'credential_readback': {'item': token_report.get('credential_item'), 'token_len': token_report.get('token_len')},
     }
 

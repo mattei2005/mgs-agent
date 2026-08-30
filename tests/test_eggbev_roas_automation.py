@@ -642,15 +642,16 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(transition['disable_authorized_at_future_activation'])
         self.assertFalse(transition['execute_now'])
 
-    def test_clone_page_switch_contract_is_scoped_and_not_engine_ready(self):
+    def test_clone_page_switch_contract_is_engine_ready_but_write_gated(self):
         cloning = self.operation['campaign_cloning_policy']
         mode = cloning['allowed_modes']['clone_page_switch']
-        self.assertEqual(mode['daily_budget_usd'], 45)
+        self.assertIn('selected and confirmed', mode['daily_budget'])
         self.assertEqual(mode['start_time'], 'next_day_00:00_America/New_York')
         self.assertIn('ACTIVE', mode['delivery_state'])
         self.assertEqual(mode['media_and_copy'], 'preserve source media and copy')
-        self.assertEqual(mode['engine_support'], 'contract_approved_pending_v3_manifest_and_executor_extension')
-        self.assertFalse(cloning['engine_readback']['eggbev_account_registered'])
+        self.assertEqual(mode['engine_support'], 'supported_in_v3_3_manifest_planner_prevalidation_and_recovery')
+        self.assertTrue(cloning['engine_readback']['eggbev_account_registered'])
+        self.assertIn('financial write gate', ' '.join(cloning['execution_gates']))
 
     def test_normal_creation_is_active_future_and_canary_remains_paused(self):
         policy = self.operation['campaign_structure']['delivery_state_policy']

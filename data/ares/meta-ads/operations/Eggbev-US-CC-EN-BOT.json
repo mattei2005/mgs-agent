@@ -39,7 +39,7 @@
       }
     ],
     "other_managers": [],
-    "budget_write_rule": "USD 45 is approved only for clone_page_switch after Nicolas approves the final per-request summary; every other creation, clone or budget change requires the exact budget confirmed for that request and the global MGS gates remain in force"
+    "budget_write_rule": "Authorized campaign managers select and confirm the exact daily budget for each campaign request. Selection is a required manifest input and never expands financial authority: the actual budget write remains subject to the current Rodolfo/Geizian gate in permissions-matrix."
   },
   "ares_scope": {
     "included": [
@@ -276,7 +276,9 @@
   },
   "campaign_naming": {
     "status": "approved_by_nicolas",
-    "pattern": "[sequential_number] - [page_name] - ENG - US - (pg_XXXX) C0XX para [person_name] - Copy",
+    "pattern": "preserve the complete original campaign base name and append DUPnn",
+    "duplicate_sequence": "first duplicate DUP01; then DUP02, DUP03 and so on; duplicating a campaign already ending in DUPnn reuses the same base and advances to the next free number",
+    "collision_gate": "read all non-deleted live campaign names and choose the first free DUP number before manifest sealing",
     "ad_name": "provided_per_creative; missing name blocks publication"
   },
   "objective_and_optimization": {
@@ -290,16 +292,10 @@
   },
   "budget_policy": {
     "status": "approved_by_nicolas",
-    "daily_budget": "variable_per_campaign",
+    "daily_budget": "selected_and_confirmed_by_authorized_campaign_manager_per_campaign",
     "must_be_confirmed_before_creation": true,
     "never_assume_reference_values": true,
-    "mode_exception": {
-      "clone_page_switch": {
-        "daily_budget_usd": 45,
-        "authority": "Nicolas",
-        "scope": "only after the final summary for the specific request is explicitly approved; not a default for creation, pure_clone or clone_prestaged"
-      }
-    }
+    "selection_vs_write_authority": "manager selection is an operational input; actual budget write remains subject to the current Rodolfo/Geizian financial gate"
   },
   "metrics": {
     "status": "approved_core_pending_live_field_mapping",
@@ -455,7 +451,7 @@
     }
   },
   "campaign_cloning_policy": {
-    "status": "dedicated_thread_created_and_seeded_pending_eggbev_v3_onboarding",
+    "status": "engine_v3_3_onboarded_validate_plan_ready_write_per_request_gated",
     "thread_id": "1543333373945053184",
     "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
     "thread_readback": {
@@ -469,17 +465,19 @@
     "engine_readback": {
       "global_enabled": true,
       "global_write_enabled": true,
-      "release_version": "3.2.0",
-      "eggbev_account_registered": false,
-      "consequence": "no Eggbev clone plan or write until account onboarding and validated manifest; clone_page_switch also requires an explicit v3 manifest/executor extension because the current engine supports only pure_clone, clone_prestaged and from_zero_prestaged"
+      "release_version": "3.3.0",
+      "eggbev_account_registered": true,
+      "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "clone_page_switch_engine_supported": true,
+      "consequence": "validate/plan are available; real write remains per-request and requires live source readback, prevalidated manifest, final summary, current financial authority and --confirm-execute"
     },
     "scope_separation": {
       "thread": "clone requests only",
       "creation_from_zero_thread": "1541578556037927053"
     },
     "allowed_modes": {
-      "pure_clone": "same structure, audience, budget, copy and media; only next sequence, naming and destination tracking are rewritten; suffix COPY C{source}",
-      "clone_prestaged": "copy source lineage and structure while replacing ads with new approved reconciled pre-staged creatives",
+      "pure_clone": "duplicate the source exactly: preserve structure, audience, placements, strategy, Page, Messenger JSON, media, copy, links and UTMs; change only unavoidable technical IDs, manager-selected budget, ACTIVE next-day 00:00 ET start and the sequential DUPnn campaign name",
+      "clone_prestaged": "copy source lineage and structure while replacing one through five ads with new approved reconciled pre-staged creatives",
       "clone_page_switch": {
         "label": "Clone com alteração de página e nome",
         "definition": "duplicate the full source campaign while preserving structure, audience, placements, bid strategy, copy and media; replace the destination Facebook Page identity, next sequential naming, page token and links/UTMs for the selected target page",
@@ -490,32 +488,33 @@
           "tie_or_invalid_source": "ask Nicolas; never choose by assumption"
         },
         "messenger_json": "update the mandatory Messenger JSON for the selected target page and validate the complete version before execution",
-        "daily_budget_usd": 45,
+        "daily_budget": "selected and confirmed by the authorized campaign manager for the request",
         "start_time": "next_day_00:00_America/New_York",
         "delivery_state": "campaign, ad set and every ad configured ACTIVE for the approved scheduled start",
         "media_and_copy": "preserve source media and copy",
-        "prepublication_gate": "show source, target page, LEADS evidence, naming, pg token, links/UTMs, full Messenger JSON, USD 45 budget, start time and statuses; wait for Nicolas explicit OK",
-        "engine_support": "contract_approved_pending_v3_manifest_and_executor_extension"
+        "prepublication_gate": "show source, target page, LEADS evidence, naming, pg token, links/UTMs, full Messenger JSON, manager-selected budget, start time and statuses; wait for explicit per-request OK",
+        "engine_support": "supported_in_v3_3_manifest_planner_prevalidation_and_recovery"
       }
     },
     "required_request_fields": [
       "exact source campaign",
       "clone mode",
-      "page and pg_XXXXX",
+      "number of duplicates per source campaign",
       "exact daily budget",
-      "start date/time America/New_York",
-      "1x1x3 or 1x1x5",
       "new assets, ad names and copy when clone_prestaged",
-      "target page and Smart Bidding LEADS evidence when clone_page_switch selection is delegated",
+      "target page, pg_XXXXX and Smart Bidding LEADS evidence when clone_page_switch selection is delegated",
       "updated full Messenger JSON when clone_page_switch",
       "every requested exception to audience, placements, structure or strategy"
     ],
     "execution_gates": [
       "live source/account preflight",
       "Eggbev account onboarded in engine v3",
+      "non-deleted live DUP name collision scan",
+      "manager-selected budget materialized explicitly",
       "prevalidated manifest",
       "final summary shown to Nicolas",
       "Nicolas explicit OK before execution",
+      "current Rodolfo/Geizian financial write gate satisfied",
       "consolidated Meta readback after execution"
     ],
     "direct_publication": false,

@@ -18,7 +18,7 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
-ENGINE_RELEASE_VERSION = "3.2.0"
+ENGINE_RELEASE_VERSION = "3.3.0"
 
 
 class EngineDisabled(RuntimeError):
@@ -102,6 +102,11 @@ class CampaignEngine:
 
     @staticmethod
     def _readback_only_record(bundle: BundlePlan, record: dict[str, Any]) -> bool:
+        if bundle.campaigns[0].mode == "pure_clone":
+            return (
+                str(record.get("stage") or "") == "copies_updated_readback_pending"
+                and len(record.get("campaign_ids") or []) == len(bundle.campaigns)
+            )
         expected_ads = sum(len(campaign.ads) for campaign in bundle.campaigns)
         return (
             str(record.get("stage") or "") == "children_created_readback_pending"
@@ -217,12 +222,89 @@ class CampaignEngine:
         self._timed_finish(timing, started)
         campaign_ids = [_copied_id(row, "copied_campaign_id", "copied_campaigns") for row in copy_results]
         record["campaign_ids"] = campaign_ids
-        record["stage"] = "copies_created_readback_pending"
+        record["stage"] = "copies_created_update_pending"
+        update_ops = [
+            BatchOperation(
+                f"pure_clone_update_{index}", "POST", campaign_id,
+                body={"name": campaign.name, **campaign.campaign_updates, "status": campaign.status},
+                kind="campaign_update",
+            )
+            for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1)
+        ]
+        timing, started = self._timed_start()
+        record["timings"]["pure_clone_update"] = timing
+        self._batch(bundle, transport, update_ops, "pure_clone_update")
+        self._timed_finish(timing, started)
+        record["stage"] = "copies_updated_readback_pending"
         timing, started = self._timed_start()
         record["timings"]["readback"] = timing
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        return campaign_ids
+
+    def _recover_pure_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
+        campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
+        if len(campaign_ids) != len(bundle.campaigns):
+            inventory = self._batch(bundle, transport, [BatchOperation(
+                "recovery_campaign_inventory", "GET",
+                f"act_{bundle.account_id}/campaigns?fields=id,name,status,effective_status,configured_status&limit=500",
+                kind="readback",
+            )], "recovery_campaign_inventory")[0].body.get("data") or []
+            campaign_ids = []
+            for campaign in bundle.campaigns:
+                matches = [row for row in inventory if str(row.get("name") or "") == campaign.name]
+                if len(matches) != 1:
+                    raise ExecutionFailed("pure clone recovery cannot safely identify every partial copy by exact target name")
+                campaign_ids.append(str(matches[0]["id"]))
+            record["campaign_ids"] = campaign_ids
+
+        if self._readback_only_record(bundle, record):
+            record["recovery"] = {
+                "mode": "consolidated_readback_only",
+                "blind_replay_blocked": True,
+                "write_replay_blocked": True,
+                "started_at": _utc(),
+                "mutation_calls": 0,
+            }
+        else:
+            direct_reads = self._batch(bundle, transport, [
+                BatchOperation(
+                    f"recovery_campaign_{index}", "GET",
+                    f"{campaign_id}?fields=id,name,status,configured_status,daily_budget,start_time",
+                    kind="readback",
+                )
+                for index, campaign_id in enumerate(campaign_ids, 1)
+            ], "recovery_campaign_readback")
+            updates = []
+            for index, (campaign, campaign_id) in enumerate(zip(bundle.campaigns, campaign_ids), 1):
+                live = next(row for row in direct_reads if row.name == f"recovery_campaign_{index}").body
+                desired = {"name": campaign.name, **campaign.campaign_updates, "status": campaign.status}
+                budget_matches = "daily_budget" not in desired or str(live.get("daily_budget") or "") == str(desired["daily_budget"])
+                status_matches = str(live.get("configured_status") or live.get("status") or "").upper() == campaign.status
+                if str(live.get("name") or "") != campaign.name or not budget_matches or not status_matches:
+                    updates.append(BatchOperation(
+                        f"recovery_pure_clone_update_{index}", "POST", campaign_id,
+                        body=desired, kind="campaign_update",
+                    ))
+            if updates:
+                self._batch(bundle, transport, updates, "recovery_pure_clone_update")
+            record["stage"] = "copies_updated_readback_pending"
+            record["recovery"] = {
+                "mode": "readback_then_missing_only_pure_clone",
+                "blind_replay_blocked": True,
+                "write_replay_blocked": True,
+                "started_at": _utc(),
+                "mutation_calls": len(updates),
+            }
+
+        timing, started = self._timed_start()
+        record["timings"]["recovery_consolidated_readback"] = timing
+        readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
+        self._timed_finish(timing, started)
+        record["readback_children"] = len(readbacks)
+        record["recovery"]["finished_at"] = _utc()
+        record["stage"] = "readback_complete_recovered"
         return campaign_ids
 
     def _run_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
@@ -923,15 +1005,17 @@ class CampaignEngine:
             try:
                 mode = bundle.campaigns[0].mode
                 if previous_failed is not None:
-                    if mode == "clone_prestaged":
+                    if mode in {"clone_prestaged", "clone_page_switch"}:
                         ids = self._recover_prestaged_bundle(bundle, transport, record)
                     elif mode == "from_zero_prestaged":
                         ids = self._recover_from_zero_bundle(bundle, transport, record)
+                    elif mode == "pure_clone":
+                        ids = self._recover_pure_bundle(bundle, transport, record)
                     else:
-                        raise ExecutionFailed("automatic recovery requires a prestaged execution mode")
+                        raise ExecutionFailed("automatic recovery requires a supported execution mode")
                 elif mode == "pure_clone":
                     ids = self._run_pure_bundle(bundle, transport, record)
-                elif mode == "clone_prestaged":
+                elif mode in {"clone_prestaged", "clone_page_switch"}:
                     ids = self._run_prestaged_bundle(bundle, transport, record)
                 else:
                     ids = self._run_from_zero_bundle(bundle, transport, record)

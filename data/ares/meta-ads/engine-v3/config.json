@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.2.0",
+  "release_version": "3.3.0",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -22,6 +22,7 @@
   "points_per_mode": {
     "pure_clone": 30,
     "clone_prestaged": 30,
+    "clone_page_switch": 30,
     "from_zero_prestaged": 30
   },
   "quota_scope": "app_key_plus_ad_account_id",
@@ -30,8 +31,8 @@
   "transient_code2_retry_policy": "initial write, missing-only recovery and readback use distinct quota reservation IDs; retry only after effective capacity exists; a fresh recovery reservation includes targeted reconciliation, missing writes, required name normalization and final readback, so no second fixed cooldown is added when the estimated recovery cost fits",
   "readback_policy": "one_outer_graph_batch_per_two_campaigns",
   "intermediate_get_calls": 0,
-  "supported_modes": ["clone_prestaged", "from_zero_prestaged"],
-  "explicit_request_modes": ["pure_clone", "clone_prestaged", "from_zero_prestaged"],
+  "supported_modes": ["pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"],
+  "explicit_request_modes": ["pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"],
   "mode_taxonomy": {
     "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
     "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
@@ -75,6 +76,13 @@
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_type": "user_access_token",
       "timezone": "America/Sao_Paulo"
+    },
+    "1034081997659047": {
+      "app_key": "mgs-meta-app-current",
+      "alias": "Eggbev-US-CC-EN-01-G006",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+      "token_type": "user_access_token",
+      "timezone": "America/New_York"
     }
   },
   "rollback": {

@@ -1,0 +1,121 @@
+{
+  "engine": "ares-campaign-engine-v3",
+  "engine_version": 3,
+  "release_version": "3.3.0",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "status": "onboarded_validate_plan_enabled_write_per_request_gated",
+  "account_id": "1034081997659047",
+  "account_alias": "Eggbev-US-CC-EN-01-G006",
+  "app_key": "mgs-meta-app-current",
+  "timezone": "America/New_York",
+  "graph_version": "v26.0",
+  "thread_id": "1543333373945053184",
+  "bundle_size": 2,
+  "maximum_ads_per_campaign": 5,
+  "supported_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "clone_page_switch"
+  ],
+  "mode_contract": {
+    "pure_clone": {
+      "label": "duplicação exata",
+      "preserve": [
+        "campaign/ad set/ad structure",
+        "audience and placements",
+        "objective, optimization and bid strategy",
+        "Facebook Page and Messenger JSON",
+        "media, copy, links and UTMs"
+      ],
+      "allowed_changes": [
+        "new Meta technical IDs",
+        "campaign name DUP sequence",
+        "manager-selected daily budget",
+        "next-day 00:00 America/New_York start_time",
+        "ACTIVE configured status"
+      ],
+      "replacement_media": false
+    },
+    "clone_prestaged": {
+      "label": "duplicação com criativos novos",
+      "preserve": [
+        "source campaign/ad set structure",
+        "audience and placements",
+        "objective, optimization and bid strategy"
+      ],
+      "replace": [
+        "ads/creatives with approved reconciled pre-staged media",
+        "copy only when explicitly supplied and approved"
+      ],
+      "ads": "one through five, matching the approved request"
+    },
+    "clone_page_switch": {
+      "label": "duplicação com troca de página",
+      "preserve": [
+        "source campaign/ad set structure",
+        "audience and placements",
+        "objective, optimization and bid strategy",
+        "source media and Meta copy"
+      ],
+      "replace": [
+        "Facebook Page identity",
+        "pg_XXXXX and destination tracking only when confirmed",
+        "complete Messenger JSON for the target Page"
+      ],
+      "media_registry_required": false,
+      "source_ad_lineage_required": true
+    }
+  },
+  "naming_policy": {
+    "rule": "preserve the original campaign base name and append DUPnn",
+    "first_duplicate": "DUP01",
+    "subsequent_duplicates": "DUP02, DUP03 and so on",
+    "duplicate_of_duplicate": "strip the trailing DUPnn to recover the same base and use the next number",
+    "examples": [
+      "Original Campaign -> Original Campaign DUP01",
+      "Original Campaign DUP01 -> Original Campaign DUP02"
+    ],
+    "collision_gate": "read all non-deleted live campaign names and select the first free sequential DUP number before manifest sealing"
+  },
+  "budget_policy": {
+    "selection": "an authorized campaign manager selects and confirms the exact daily budget for every duplicate request",
+    "manifest": "materialize the confirmed value explicitly in daily_budget minor units; never inherit or guess silently",
+    "write_authority": "selection does not expand financial authority; actual budget write remains subject to the current Rodolfo/Geizian gate in permissions-matrix",
+    "reporting": "show manager-selected budget in the final summary and confirm it by Meta readback"
+  },
+  "delivery_policy": {
+    "status": "ACTIVE",
+    "start_time": "next_day_00:00_America/New_York",
+    "canary_exception": "PAUSED only when the request explicitly says technical canary and separately approves later activation",
+    "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success"
+  },
+  "intake_questions": [
+    "Qual campanha ou campanhas você quer duplicar?",
+    "Qual tipo: exata, com criativos novos ou com troca de página?",
+    "Quantas duplicações de cada campanha?",
+    "Qual budget diário de cada duplicação?",
+    "No modo com criativos novos: quais assets e copy usar?",
+    "No modo troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?",
+    "Existe alguma exceção à cópia exata de público, placements, estratégia ou tracking?"
+  ],
+  "question_policy": "ask only missing fields; keep questions short; multiple source campaigns may share mode, duplicate count and budget only when the manager says so explicitly",
+  "execution_gates": [
+    "live account and source campaign readback",
+    "exact source hierarchy and ad count readback",
+    "non-deleted DUP name collision scan",
+    "manager-selected budget present",
+    "target Page/UTM/JSON reconciliation for clone_page_switch",
+    "Drive-Meta reservation and pre-stage for clone_prestaged",
+    "prevalidated manifest with content digest",
+    "final human summary and explicit per-request OK",
+    "current financial write authority satisfied",
+    "--confirm-execute",
+    "consolidated Meta readback"
+  ],
+  "write_policy": {
+    "automatic_or_cron_clone": false,
+    "direct_publication_without_summary": false,
+    "per_request_only": true,
+    "recovery": "readback first, preserve request and IDs, write only missing or invalid layers, never replay a non-idempotent POST blindly"
+  }
+}
