@@ -67,6 +67,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Erros de validação, parâmetro ou compliance não recebem retry cego.
 - Antes de correção, reconciliar efeitos parciais e reutilizar o request/IDs persistidos; nunca repetir POST não idempotente às cegas.
 - Sucesso de write exige GET/readback do alvo completo e audit com estado anterior/posterior.
+- Para monitorar alterações externas, usar `act_<ACCOUNT_ID>/activities` com Graph `v26.0` explicitamente fixada antes de carregar o helper Meta, `since`/`until` ISO e paginação bounded. O helper legado em `v20.0` pode devolver uma fatia antiga/stale e mascarar eventos recentes. O baseline inicial apenas marca eventos já existentes; alertas futuros cruzam `actor_id` + `application_id` com o audit local do Ares. Fonte/app conhecida sem audit correspondente continua anomalia, não é silenciada.
 - Pausar, reativar, criar, clonar ou editar exige o modo autorizado no contrato da operação.
 - Budget segue o gate explícito vigente; billing, credencial, pixel/CAPI e app/permissão continuam críticos.
 - Campanha nova deve nascer PAUSED, salvo autorização operacional explícita em contrato validado.

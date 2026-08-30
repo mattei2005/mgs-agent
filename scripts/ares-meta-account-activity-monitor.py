@@ -483,12 +483,14 @@ def main() -> int:
     new_items: list[dict[str, Any]] = []
     for event in events:
         key = event_key(event)
+        if args.baseline:
+            label = "baseline_observed"
+            run["classifications"][label] = int(run["classifications"].get(label) or 0) + 1
+            state["seen"][key] = {"event_time": event.get("event_time"), "classification": label}
+            continue
         result = classify_event(event, config, audit_lookup=not args.skip_audit_lookup)
         label = result["classification"]
         run["classifications"][label] = int(run["classifications"].get(label) or 0) + 1
-        if args.baseline:
-            state["seen"][key] = {"event_time": event.get("event_time"), "classification": label}
-            continue
         if key in state.get("seen", {}):
             continue
         state.setdefault("seen", {})[key] = {"event_time": event.get("event_time"), "classification": label}
