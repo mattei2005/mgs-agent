@@ -277,7 +277,9 @@ Gestores autorizados escolhem e confirmam o budget diário de cada duplicação;
 
 A conta `1034081997659047` está cadastrada no Engine v3 release 3.4.0. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
 
-Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, 00:00 ET, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
+Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, início aprovado, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
+
+Fail-closed para troca de Page/placements: o preflight deve comparar `promoted_object.page_id`, targeting e placements do ad set fonte com o alvo. Se o pedido trocar Page ou exigir normalização de placements, o plan só é válido quando o executor materializar essas mudanças no ad set copiado e o readback confirmar a Page e os placements exatos. `creative_parameters` no anúncio não corrige sozinho o `promoted_object` do ad set. Enquanto o runtime não representar essa atualização, não executar `clone_page_switch` nem `clone_prestaged` combinado com troca de Page; usar outra rota somente após o gestor aprovar explicitamente a mudança de método.
 
 ## Apêndice histórico não autoritativo — auditoria pré-simulação de 2026-08-29
 
