@@ -81,11 +81,24 @@ class Planner:
                     "deep_copy": "true",
                     "status_option": campaign.status,
                     "start_time": campaign.start_time,
-                    "rename_options": json.dumps({"rename_strategy": "ONLY_TOP_LEVEL_RENAME", "rename_suffix": f" - {campaign.name}"}, separators=(",", ":")),
+                    "rename_options": json.dumps({"rename_strategy": "NO_RENAME"}, separators=(",", ":")),
                 },
                 kind="pure_clone",
             ))
         return StagePlan("pure_clone_copy", tuple(ops))
+
+    @staticmethod
+    def _pure_update_stage(campaigns: tuple[CampaignSpec, ...]) -> StagePlan:
+        ops = []
+        for index, campaign in enumerate(campaigns, 1):
+            ops.append(BatchOperation(
+                name=f"pure_clone_update_{index}",
+                method="POST",
+                relative_url=f"{{campaign_id_{index}}}",
+                body={"name": campaign.name, **campaign.campaign_updates, "status": campaign.status},
+                kind="campaign_update",
+            ))
+        return StagePlan("pure_clone_update", tuple(ops))
 
     @staticmethod
     def _prestaged_stages(campaigns: tuple[CampaignSpec, ...]) -> tuple[StagePlan, ...]:
@@ -193,9 +206,9 @@ class Planner:
                     raise ValueError("a bundle cannot mix execution modes")
                 mode = next(iter(modes))
                 if mode == "pure_clone":
-                    stages = (self._pure_stage(chunk), self._readback_placeholders(chunk))
-                    outer_write_calls = 1
-                elif mode == "clone_prestaged":
+                    stages = (self._pure_stage(chunk), self._pure_update_stage(chunk), self._readback_placeholders(chunk))
+                    outer_write_calls = 2
+                elif mode in {"clone_prestaged", "clone_page_switch"}:
                     stages = (*self._prestaged_stages(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 5
                     ad_count = sum(len(campaign.ads) for campaign in chunk)

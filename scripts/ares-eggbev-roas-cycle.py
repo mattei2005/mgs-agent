@@ -89,6 +89,17 @@ def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str
     return '👁️', 'OBSERVAR', 'sem decisão executável'
 
 
+def _append_table_pages(
+    lines: list[str], title: str, header: str, separator: str,
+    rows: list[str], page_size: int = 12,
+) -> None:
+    pages = [rows[index:index + page_size] for index in range(0, len(rows), page_size)] or [[]]
+    total = len(pages)
+    for index, page in enumerate(pages, start=1):
+        label = f'{title} • {index}/{total}' if total > 1 else title
+        lines.extend(['', f'**{label}**', '```text', header, separator, *page, '```'])
+
+
 def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
     """Build reconciled campaign rows for the ROAS renderer without changing decisions."""
     meta = reporting.aggregate_meta(meta_bundle)
@@ -230,26 +241,33 @@ def render_report(run: dict[str, Any]) -> str:
                 '```',
             ])
 
-        lines.extend(['', '**🖥️ META • decisão consolidada**', '```text'])
-        lines.append('#  Ação     UTM         Spend  Msg  C/msg    CTR   ROAS  M.CPM')
-        lines.append('-- -------- --------- ------- ---- ------ ------ ------ ------')
+        meta_rows: list[str] = []
         for index, row in enumerate(campaigns, start=1):
-            lines.append(
+            meta_rows.append(
                 f"{index:<2} {(row.get('action_label') or 'N/D')[:8]:<8} {(row.get('utm_campaign') or 'N/D')[:9]:<9} "
                 f"{common.fmt_money(row.get('spend')):>7} {common.fmt_number(row.get('messaging_started'), 0):>4} "
                 f"{common.fmt_money(row.get('cost_per_messaging_started')):>6} {_fmt_percent(row.get('ctr')):>6} "
                 f"{common.fmt_number(row.get('purchase_roas')):>6} {common.fmt_money(row.get('cpm')):>6}"
             )
-        lines.extend(['```', '', '**💰 SMART BIDDING / MONETIZAÇÃO**', '```text'])
-        lines.append('#  LEADS  ROI real  ROI est.  CPM bloco    RPS*  Join')
-        lines.append('-- ------ --------- --------- ---------- ------- ----------------')
+        _append_table_pages(
+            lines, '🖥️ META • decisão consolidada',
+            '#  Ação     UTM         Spend  Msg  C/msg    CTR   ROAS  M.CPM',
+            '-- -------- --------- ------- ---- ------ ------ ------ ------',
+            meta_rows,
+        )
+        sb_rows: list[str] = []
         for index, row in enumerate(campaigns, start=1):
-            lines.append(
+            sb_rows.append(
                 f"{index:<2} {common.fmt_number(row.get('sb_leads'), 0):>6} {_fmt_percent(row.get('roi_real')):>9} "
                 f"{_fmt_percent(row.get('roi_estimated')):>9} {common.fmt_money(row.get('block_cpm')):>10} "
                 f"{common.fmt_money(row.get('rps')):>7} {row.get('join_status') or 'N/D'}"
             )
-        lines.append('```')
+        _append_table_pages(
+            lines, '💰 SMART BIDDING / MONETIZAÇÃO',
+            '#  LEADS  ROI real  ROI est.  CPM bloco    RPS*  Join',
+            '-- ------ --------- --------- ---------- ------- ----------------',
+            sb_rows,
+        )
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 

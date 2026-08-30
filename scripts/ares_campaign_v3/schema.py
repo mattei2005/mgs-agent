@@ -103,11 +103,17 @@ class MediaSpec:
 class AdSpec:
     name: str
     source_ad_id: str | None
-    media: MediaSpec
+    media: MediaSpec | None
     creative_payload: dict[str, Any]
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any], *, require_source_lineage: bool = True) -> "AdSpec":
+    def from_dict(
+        cls,
+        value: dict[str, Any],
+        *,
+        require_source_lineage: bool = True,
+        require_media: bool = True,
+    ) -> "AdSpec":
         name = str(value.get("name") or "").strip()
         if not name:
             raise ManifestError("ad name is required")
@@ -124,7 +130,14 @@ class AdSpec:
         if _has_text(payload, "https://fb.com/messenger_doc/"):
             raise ManifestError("messenger_doc external URL is prohibited")
         _validate_video_label_references(payload)
-        return cls(name=name, source_ad_id=(source_ad_id or None), media=MediaSpec.from_dict(value.get("media") or {}), creative_payload=payload)
+        media_value = value.get("media")
+        if require_media:
+            media = MediaSpec.from_dict(media_value or {})
+        else:
+            if media_value is not None and media_value != {}:
+                raise ManifestError("clone_page_switch must preserve source media and must not provide replacement media")
+            media = None
+        return cls(name=name, source_ad_id=(source_ad_id or None), media=media, creative_payload=payload)
 
 
 @dataclass(frozen=True)
@@ -151,7 +164,7 @@ class CampaignSpec:
         if missing:
             raise ManifestError(f"campaign missing fields: {','.join(missing)}")
         mode = str(value["mode"])
-        if mode not in {"pure_clone", "clone_prestaged", "from_zero_prestaged"}:
+        if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -160,7 +173,11 @@ class CampaignSpec:
         if status == "ACTIVE" and start <= datetime.now(timezone.utc):
             raise ManifestError("ACTIVE requires future start_time")
         ads = tuple(
-            AdSpec.from_dict(item, require_source_lineage=(mode == "clone_prestaged"))
+            AdSpec.from_dict(
+                item,
+                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch"}),
+                require_media=(mode in {"clone_prestaged", "from_zero_prestaged"}),
+            )
             for item in (value.get("ads") or [])
         )
         source_campaign_id = str(value.get("source_campaign_id") or "") or None
@@ -173,10 +190,17 @@ class CampaignSpec:
         if mode == "clone_prestaged":
             if not source_campaign_id or not source_adset_id:
                 raise ManifestError("clone_prestaged requires source_campaign_id and source_adset_id")
-            if len(ads) != 3:
-                raise ManifestError("clone_prestaged requires exactly three ads")
+            if len(ads) < 1 or len(ads) > 5:
+                raise ManifestError("clone_prestaged requires between one and five ads")
             if campaign_create or adset_create:
                 raise ManifestError("clone_prestaged forbids from-zero create payloads")
+        elif mode == "clone_page_switch":
+            if not source_campaign_id or not source_adset_id:
+                raise ManifestError("clone_page_switch requires source_campaign_id and source_adset_id")
+            if len(ads) < 1 or len(ads) > 5:
+                raise ManifestError("clone_page_switch requires between one and five source ads")
+            if campaign_create or adset_create:
+                raise ManifestError("clone_page_switch forbids from-zero create payloads")
         elif mode == "from_zero_prestaged":
             if source_campaign_id:
                 raise ManifestError("from_zero_prestaged forbids source_campaign_id")
@@ -225,6 +249,9 @@ class CampaignSpec:
         updates = value.get("campaign_updates") or {}
         if not isinstance(updates, dict):
             raise ManifestError("campaign_updates must be an object")
+        reserved_updates = sorted(set(updates) & {"id", "name", "status", "start_time", "campaign_id"})
+        if reserved_updates:
+            raise ManifestError(f"campaign_updates contains engine-owned fields: {','.join(reserved_updates)}")
         return cls(
             idempotency_key=str(value["idempotency_key"]),
             app_key=str(value["app_key"]),

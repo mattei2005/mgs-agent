@@ -340,6 +340,43 @@ class ReportingTests(unittest.TestCase):
             self.assertEqual(content.count('```') % 2, 0)
             self.assertTrue(content.startswith('**⚔️ Corte & ROAS • Parte '))
 
+    def test_roas_cycle_high_volume_keeps_all_names_and_repeats_table_headers(self):
+        campaigns = []
+        decisions = []
+        for index in range(1, 26):
+            name = f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})'
+            campaigns.append({
+                'campaign_id': f'c{index}', 'name': name, 'action_emoji': '✅',
+                'action_label': 'MANTER', 'action_detail': '1 anúncio(s)',
+                'utm_campaign': f'pg_{index:05d}', 'status': 'ACTIVE', 'budget_usd': 45,
+                'spend': 1, 'messaging_started': 1, 'cost_per_messaging_started': 1,
+                'ctr': 2, 'purchase_roas': .5, 'cpm': 10, 'sb_leads': index,
+                'roi_real': None, 'roi_estimated': None, 'block_cpm': None, 'rps': 500,
+                'join_status': 'matched',
+            })
+            decisions.append({'action': 'KEEP'})
+        run = {
+            'started_at_et': '2026-08-29T20:00:00-04:00', 'phase': 'PHASE_2',
+            'threshold': .4, 'mode': 'dry_run', 'meta_status': 'ok', 'smart_bidding_status': 'ok',
+            'source_gate': {'write_ready': True, 'reasons': []},
+            'plan': {
+                'counts': {'ads_considered': 25, 'pause_ads': 0, 'reactivate_ads': 0, 'budget_scale_candidates': 0},
+                'decisions': decisions, 'budget_scale_candidates': [],
+            },
+            'reporting': {'campaigns': campaigns, 'campaign_count': 25, 'source_join_matched': 25, 'leads_total': 325},
+            'writes': [],
+        }
+        rendered = cycle.render_report(run)
+        for row in campaigns:
+            self.assertEqual(rendered.count(row['name']), 1)
+        self.assertIn('🖥️ META • decisão consolidada • 1/3', rendered)
+        self.assertIn('🖥️ META • decisão consolidada • 3/3', rendered)
+        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO • 1/3', rendered)
+        self.assertIn('💰 SMART BIDDING / MONETIZAÇÃO • 3/3', rendered)
+        chunks = common.split_messages(rendered, limit=1750)
+        self.assertTrue(all(len(chunk) <= 1750 for chunk in chunks))
+        self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
+
     def test_auto_0600_returns_previous_and_current(self):
         at = dt.datetime(2026, 8, 29, 6, 0, tzinfo=ET)
         dates = daily.report_dates('auto', at)
