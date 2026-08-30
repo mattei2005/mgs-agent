@@ -358,7 +358,7 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(row['action_label'], 'OBSERVAR')
         self.assertEqual(row['cpc_link'], .5)
 
-    def test_roas_cycle_renderer_uses_one_unified_cpv13_style_table(self):
+    def test_roas_cycle_renderer_matches_cpv13_intraday_desktop_table(self):
         campaign = {
             'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
             'action_emoji': '🛑', 'action_label': 'CORTAR', 'action_detail': '1 anúncio(s)',
@@ -390,19 +390,20 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('🎯 `1 camp`', rendered)
         self.assertNotIn('**ℹ️ LEGENDA**', rendered)
         self.assertNotIn('Custo por conversa` =', rendered)
-        self.assertIn('**📊 Painel único**', rendered)
+        self.assertIn('**📊 Tabela consolidada — visão desktop**', rendered)
         self.assertEqual(rendered.count('```text'), 1)
         self.assertEqual(rendered.count('```'), 2)
-        for label in ('Camp', 'Bloco', 'Métrica 1', 'Valor 1', 'Página', 'Ligada', 'Entrega', 'Ação', 'C/conv', 'ROAS', 'C/res', 'Res', 'Budget', 'Spend', 'CPM', 'CTR', 'CPC', 'R/E', 'C/sub', 'Receita', 'Lucro', 'Retorno', 'Leads', 'ROI Drip', 'Rev BC', 'ROI atual', 'ROI est.'):
+        for label in ('R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'):
             self.assertIn(label, rendered)
-        for abbreviation in ('Camp/Pg', 'C/msg', 'C/Sub', 'Page ID'):
+        for abbreviation in ('Bloco', 'Métrica 1', 'Valor 1', 'Camp/Pg', 'C/msg', 'C/Sub', 'Page ID'):
             self.assertNotIn(abbreviation, rendered)
         self.assertIn('123/pg_12345', rendered)
         self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
-        self.assertIn('⬇️ 0,30', rendered)
-        self.assertIn('🟢 +12,3%', rendered)
-        self.assertIn('🔴 -5,5%', rendered)
+        self.assertIn('0,30', rendered)
+        self.assertIn('+12,3%', rendered)
+        self.assertIn('-5,5%', rendered)
+        self.assertIn('🟢🔴', rendered)
         self.assertIn('$3,00', rendered)
         self.assertNotIn('$3.00', rendered)
         self.assertNotIn(' │ ', rendered)
@@ -411,7 +412,7 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('**📣 Meta Ads**', rendered)
         self.assertNotIn('**💰 Smart Bidding**', rendered)
 
-    def test_roas_cycle_unified_table_aligns_without_wrapping_or_cut_labels(self):
+    def test_roas_cycle_desktop_table_aligns_without_wrapping_or_cut_labels(self):
         base = {
             'status': 'ACTIVE', 'name': '123 - Campaign - ENG - US - (pg_12345)',
             'utm_campaign': 'pg_12345', 'sb_page_name': 'Page One',
@@ -424,9 +425,8 @@ class ReportingTests(unittest.TestCase):
             'roi_real': 12.3, 'roi_estimated': -5.5,
         }
         campaigns = [dict(base, purchase_roas=roas) for roas in (.3, .4, .5, None)]
-        headers = ['Camp', 'Bloco', 'Métrica 1', 'Valor 1', 'Métrica 2', 'Valor 2', 'Métrica 3', 'Valor 3']
-        groups = cycle._dashboard_unified_groups(campaigns, .4)
-        pages = cycle._compact_grouped_table_pages(headers, groups)
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        pages = cycle._compact_table_pages(headers, cycle._dashboard_desktop_rows(campaigns, .4), max_chars=1750)
         self.assertGreaterEqual(len(pages), 1)
         for table in pages:
             body = table.splitlines()[1:-1]
@@ -437,8 +437,8 @@ class ReportingTests(unittest.TestCase):
             self.assertNotIn('║', table)
             self.assertEqual(table.count('```'), 2)
         joined = '\n'.join(pages)
-        self.assertIn('C/conv', joined)
-        self.assertIn('C/res', joined)
+        self.assertIn('Custo', joined)
+        self.assertNotIn('Métrica 1', joined)
         self.assertIn('ROI est.', joined)
 
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
@@ -464,7 +464,7 @@ class ReportingTests(unittest.TestCase):
             self.assertEqual(content.count('```') % 2, 0)
             self.assertTrue(content.startswith('**⚔️ Corte & ROAS • Parte '))
 
-    def test_roas_cycle_high_volume_keeps_campaign_groups_in_one_table_structure(self):
+    def test_roas_cycle_high_volume_keeps_each_campaign_once_in_desktop_table(self):
         campaigns = []
         decisions = []
         for index in range(1, 26):
@@ -493,7 +493,7 @@ class ReportingTests(unittest.TestCase):
         rendered = cycle.render_report(run)
         for index, row in enumerate(campaigns, start=1):
             self.assertEqual(rendered.count(f'{index:03d}/{row["utm_campaign"]}'), 1)
-        self.assertIn('**📊 Painel único • 1/', rendered)
+        self.assertIn('**📊 Tabela consolidada — visão desktop • 1/', rendered)
         self.assertNotIn('**📌 Decisão e identidade', rendered)
         self.assertNotIn('**📣 Meta Ads', rendered)
         self.assertNotIn('**💰 Smart Bidding', rendered)

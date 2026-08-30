@@ -627,6 +627,61 @@ def _append_unified_dashboard(
         lines.extend(['', f'**{label}**', page])
 
 
+def _intraday_action_visual(row: dict[str, Any]) -> str:
+    """Use the concise action style from CPV 13 Intraday."""
+    action = common.norm(row.get('action_label')) or 'N/D'
+    explicit = common.norm(row.get('action_emoji'))
+    if explicit:
+        return f'{explicit} {action}'
+    icon = {
+        'CORTAR': '🛑',
+        'REATIVAR': '♻️',
+        'MANTER': '✅',
+        'OBSERVAR': '👁️',
+    }.get(action, '👁️')
+    return f'{icon} {action}'
+
+
+def _dashboard_desktop_rows(
+    campaigns: list[dict[str, Any]], threshold: Any,
+) -> list[list[str]]:
+    """Build one campaign per row with the CPV 13 Intraday hierarchy."""
+    rows: list[list[str]] = []
+    for index, row in enumerate(campaigns, start=1):
+        rows.append([
+            f"{_roi_signal(row.get('roi_real'))}{_roi_signal(row.get('roi_estimated'))}",
+            _campaign_key(row, index),
+            common.norm(row.get('sb_page_name')) or 'N/D',
+            _delivery_label(row.get('status')),
+            _fmt_usd(row.get('budget_usd')),
+            _fmt_usd(row.get('spend')),
+            _fmt_usd(row.get('cost_per_messaging_started')),
+            common.fmt_number(row.get('purchase_roas')),
+            _fmt_signed_percent(row.get('roi_real')),
+            _fmt_signed_percent(row.get('roi_estimated')),
+            common.fmt_number(row.get('sb_leads'), 0),
+            _fmt_usd(row.get('rps')),
+            _fmt_usd(row.get('cpm')),
+            _intraday_action_visual(row),
+        ])
+    return rows
+
+
+def _append_desktop_dashboard(
+    lines: list[str], campaigns: list[dict[str, Any]], threshold: Any, max_chars: int = 1750,
+) -> None:
+    headers = [
+        'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
+        'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação',
+    ]
+    pages = _compact_table_pages(headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars)
+    for index, page in enumerate(pages, start=1):
+        label = '📊 Tabela consolidada — visão desktop'
+        if len(pages) > 1:
+            label += f' • {index}/{len(pages)}'
+        lines.extend(['', f'**{label}**', page])
+
+
 def _dashboard_table_rows(
     campaigns: list[dict[str, Any]], threshold: Any,
 ) -> tuple[list[list[str]], list[list[str]], list[list[str]]]:
@@ -698,7 +753,7 @@ def render_report(run: dict[str, Any]) -> str:
         lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
     if campaigns:
-        _append_unified_dashboard(lines, campaigns, run.get('threshold'))
+        _append_desktop_dashboard(lines, campaigns, run.get('threshold'))
     else:
         lines.extend(['', 'ℹ️ Nenhuma campanha/anúncio entrou no ciclo.'])
 
