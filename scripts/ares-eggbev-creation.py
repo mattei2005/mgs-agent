@@ -54,6 +54,7 @@ SANITIZER = BASE / "scripts/clean-creative-metadata.sh"
 ET = ZoneInfo("America/New_York")
 DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
 FINANCIAL_APPROVERS = {"Rodolfo", "Rodolfo Mattei", "Geizian", "Nicolas", "Nicolas Holanda"}
+EXECUTABLE_PHASES = {"AWAITING_FINAL_APPROVAL", "EXECUTION_DEFERRED", "RECOVERY_PENDING", "POSTPROCESS_PENDING"}
 
 
 class CreationBlocked(RuntimeError):
@@ -807,7 +808,7 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
         raise CreationBlocked("financial_gate", "an authorized Eggbev budget approver is required")
     path = state_path(args.request_id)
     state = load_json(path)
-    if state.get("phase") not in {"AWAITING_FINAL_APPROVAL", "EXECUTION_DEFERRED", "POSTPROCESS_PENDING"}:
+    if state.get("phase") not in EXECUTABLE_PHASES:
         raise CreationBlocked("state", f"request is not executable: {state.get('phase')}")
     if args.summary_digest != state.get("summary_digest"):
         raise CreationBlocked("approval", "summary digest mismatch")

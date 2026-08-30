@@ -110,6 +110,9 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         self.assertIn("Nicolas", RUNNER.FINANCIAL_APPROVERS)
         self.assertIn("Nicolas Holanda", RUNNER.FINANCIAL_APPROVERS)
 
+    def test_recovery_pending_is_resumable(self):
+        self.assertIn("RECOVERY_PENDING", RUNNER.EXECUTABLE_PHASES)
+
     def test_engine_assignment_mapping_uses_bundle_order_and_exact_counts(self):
         with tempfile.TemporaryDirectory() as tmp:
             audit = Path(tmp) / "audit.json"

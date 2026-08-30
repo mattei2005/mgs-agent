@@ -167,7 +167,7 @@ Payer    DIGITAL TRUST; sempre nesta operação
 Budget   variável; Nicolas escolhe/confirma e pode aumentar ou reduzir sem nova aprovação do Rodolfo; valor exato + pré-leitura + readback obrigatórios
 ```
 
-Placements são `MANUAL_ONLY` e estão materializados no contrato: Facebook `feed`, `story`, `search`, `marketplace`, `video_feeds`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `profile_feed`; Instagram `stream`, `story`, `reels`, `explore`, `explore_home`, `profile_feed`; Messenger `story`; devices `mobile` e `desktop`. `explore` é dependência obrigatória da API quando `explore_home` está ativo. Audience Network é proibida e nunca se converte o payload para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.
+Placements são `MANUAL_ONLY` e estão materializados no contrato: Facebook `feed`, `story`, `search`, `marketplace`, `video_feeds`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `profile_feed`; Instagram `stream`, `story`, `reels`, `explore_home`, `profile_feed`; Messenger `story`; devices `mobile` e `desktop`. Em Graph v26, `explore` foi removido após erro live `code=100/subcode=2490589` informar que o placement está depreciado; `explore_home` permanece. Audience Network é proibida e nunca se converte o payload para Advantage+ Placements. Criativo sempre novo de `CC_US_EN`, após reserva e conciliação Meta × Drive.
 
 Interpretação determinística de pedido mínimo:
 

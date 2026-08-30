@@ -100,6 +100,8 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(targeting["facebook_positions"], FACEBOOK_POSITIONS)
         self.assertEqual(targeting["instagram_positions"], INSTAGRAM_POSITIONS)
         self.assertEqual(targeting["messenger_positions"], MESSENGER_POSITIONS)
+        self.assertNotIn("explore", targeting["instagram_positions"])
+        self.assertIn("explore_home", targeting["instagram_positions"])
         self.assertNotIn("audience_network", json.dumps(targeting))
 
     def test_copy_and_messenger_flags_match_approved_template(self) -> None:
