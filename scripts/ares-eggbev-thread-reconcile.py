@@ -18,6 +18,7 @@ REGISTRY_PATH = ROOT / "data/ares/discord/eggbev-fixed-routes.json"
 PROFILE = Path("/root/.hermes/profiles/ares")
 THREAD_REGISTRY = PROFILE / "discord_threads.json"
 ENV_PATH = PROFILE / ".env"
+ZEUS_ENV_PATH = Path("/root/.hermes/profiles/zeus/.env")
 API = "https://discord.com/api/v10"
 
 
@@ -34,29 +35,48 @@ def load_token() -> str:
     raise RuntimeError("Ares Discord token unavailable")
 
 
+def load_zeus_token() -> str:
+    for raw in ZEUS_ENV_PATH.read_text(errors="ignore").splitlines():
+        if raw.startswith("DISCORD_BOT_TOKEN="):
+            value = raw.split("=", 1)[1].strip().strip('"').strip("'")
+            if value:
+                return value
+    raise RuntimeError("Zeus Discord token unavailable for pin fallback")
+
+
 def request(token: str, method: str, path: str, body: dict[str, Any] | None = None) -> tuple[int, Any]:
     data = None if body is None else json.dumps(body, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        API + path,
-        data=data,
-        method=method,
-        headers={
-            "Authorization": "Bot " + token,
-            "Content-Type": "application/json",
-            "User-Agent": "MGS-Ares-Eggbev-Thread-Reconcile/1.0",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as response:
-            raw = response.read().decode(errors="ignore")
-            return response.status, json.loads(raw) if raw else None
-    except urllib.error.HTTPError as exc:
-        raw = exc.read().decode(errors="ignore")
+    for attempt in range(4):
+        req = urllib.request.Request(
+            API + path,
+            data=data,
+            method=method,
+            headers={
+                "Authorization": "Bot " + token,
+                "Content-Type": "application/json",
+                "User-Agent": "MGS-Ares-Eggbev-Thread-Reconcile/1.0",
+            },
+        )
         try:
-            parsed = json.loads(raw) if raw else {}
-        except json.JSONDecodeError:
-            parsed = {}
-        return exc.code, {"code": parsed.get("code"), "message": parsed.get("message")}
+            with urllib.request.urlopen(req, timeout=30) as response:
+                raw = response.read().decode(errors="ignore")
+                return response.status, json.loads(raw) if raw else None
+        except urllib.error.HTTPError as exc:
+            raw = exc.read().decode(errors="ignore")
+            try:
+                parsed = json.loads(raw) if raw else {}
+            except json.JSONDecodeError:
+                parsed = {}
+            if exc.code == 429 and attempt < 3:
+                retry_after = parsed.get("retry_after", 1.0)
+                try:
+                    delay = max(0.5, min(float(retry_after), 30.0))
+                except (TypeError, ValueError):
+                    delay = 1.0
+                time.sleep(delay + 0.25)
+                continue
+            return exc.code, {"code": parsed.get("code"), "message": parsed.get("message"), "retry_after": parsed.get("retry_after")}
+    return 429, {"message": "rate_limit_retry_exhausted"}
 
 
 def atomic_json(path: Path, payload: Any) -> None:
@@ -129,6 +149,8 @@ def reconcile_route(token: str, label: str, route: dict[str, Any], policy: dict[
     pinned_ids = {str(row.get("id")) for row in pins}
     if repair and canonical is not None and str(canonical.get("id")) not in pinned_ids:
         pin_status, _ = request(token, "PUT", f"/channels/{thread_id}/pins/{canonical['id']}")
+        if pin_status == 403:
+            pin_status, _ = request(load_zeus_token(), "PUT", f"/channels/{thread_id}/pins/{canonical['id']}")
         if pin_status not in {204, 200}:
             return {"label": label, "thread_id": thread_id, "ok": False, "stage": "canonical_pin", "http": pin_status}
         changed.append("pin")
