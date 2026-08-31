@@ -811,6 +811,16 @@
       "updated_at": "2026-08-30T23:28:45+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-eggbev-roi-colors-v20-20260830",
+      "next_step": "alterar renderer, testes e contrato",
+      "objective": "Corrigir faixas de cor R/E para verde >=0, amarelo negativo acima de -15 e vermelho <=-15",
+      "source": "discord:thread:1541578606076231750",
+      "state": "authorized_by_nicolas",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-31T02:22:27+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "campaign-engine-throughput-20260828",
       "next_step": "Executar próximo pedido autorizado como canário de produção e comparar elapsed/esperas; Full Access permanece ação externa até o header vivo mudar para standard_access",
@@ -1582,5 +1592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:12:59+00:00"
+  "updated_at": "2026-08-31T02:22:27+00:00"
 }
