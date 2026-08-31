@@ -8,6 +8,8 @@ INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao ou budget.
 - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget manual solicitado por Nicolas e autorizado; escala automatica permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope aplicavel.
 - Runtime atual: somente status writes de anuncio, posts e cron dos ciclos estao habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com possivel efeito parcial inicia recovery readback-first.
-- Na tabela, `Ads ↓` mostra os anuncios abreviados por slot e ordenados do maior ROAS para o menor: `03·0,92✅` manter ligado, `01·0,35🛑` desligar, `02·0,56♻️` religar e `04·N/D⏸` ja desligado. Nunca mostrar nome completo ou ID tecnico do anuncio no relatorio humano.
+- Na tabela, `Ads ↓` mostra os anuncios abreviados por slot e ordenados do maior ROAS para o menor: `03·0,92✅` manter ligado, `01·0,35🛑` desligar, `02·0,56♻️` religar e `04·N/D⏸` ja desligado. Nunca mostrar nome completo ou ID tecnico do anuncio no relatorio humano. Manter a coluna `CTR` da campanha depois de `CPM` e antes de `Acao`, em percentual; indisponivel fica `N/D`.
+- Em `R/E`, a primeira posicao e ROI atual e a segunda e ROI estimado futuro. Aplicar as mesmas faixas nas duas: `🟢 >=0%`, `🟡 <0% e >-15%`, `🔴 <=-15%`, `⚪ N/D`; exatamente `-15%` ja e vermelho.
+- Insights futuros devem priorizar leituras compactas, comprovadas e uteis para decisao dentro da tabela existente, como `Ads ↓`; nao adicionar blocos especulativos ou longos.
 - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar ou alterar cron nesta thread sem plano e aprovacao explicita.
 - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.

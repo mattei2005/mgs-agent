@@ -433,7 +433,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('**📊 Tabela consolidada — visão desktop**', rendered)
         self.assertEqual(rendered.count('```text'), 1)
         self.assertEqual(rendered.count('```'), 2)
-        for label in ('R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'):
+        for label in ('R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação'):
             self.assertIn(label, rendered)
         for abbreviation in ('Bloco', 'Métrica 1', 'Valor 1', 'Camp/Pg', 'C/msg', 'C/Sub', 'Page ID'):
             self.assertNotIn(abbreviation, rendered)
@@ -451,6 +451,7 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('roas_below_or_nd', rendered)
         self.assertNotIn('Ad a1', rendered)
         self.assertIn('$3,00', rendered)
+        self.assertIn('2,00%', rendered)
         self.assertNotIn('$3.00', rendered)
         self.assertNotIn(' │ ', rendered)
         self.assertNotIn(' ║ ', rendered)
@@ -525,7 +526,7 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(keys[-1], '162·C001·D55/pg_5024')
         self.assertEqual(len(keys), 55)
         self.assertEqual(len(set(keys)), 55)
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação']
         pages = cycle._compact_table_pages(headers, rows, max_chars=1750, max_rows=10)
         self.assertEqual(len(pages), 6)
         self.assertTrue(all(page.count('\n') <= 13 for page in pages))
@@ -544,7 +545,7 @@ class ReportingTests(unittest.TestCase):
             'roi_real': 12.3, 'roi_estimated': -5.5,
         }
         campaigns = [dict(base, purchase_roas=roas) for roas in (.3, .4, .5, None)]
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação']
         pages = cycle._compact_table_pages(headers, cycle._dashboard_desktop_rows(campaigns, .4), max_chars=1750)
         self.assertGreaterEqual(len(pages), 1)
         for table in pages:
@@ -882,9 +883,9 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v18_is_ad_only_and_shows_descending_ad_roas(self):
+    def test_roas_reporting_v21_is_ad_only_shows_ad_roas_ctr_and_new_roi_bands(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('v18_ad_only_descending_ad_roas_active', reporting_policy['status'])
+        self.assertIn('v21_roi_minus15_ctr_compact_insights_active', reporting_policy['status'])
         self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
         self.assertIn('Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024', reporting_policy['layout'])
         large_table = reporting_policy['campaign_identity_and_large_table_correction']
@@ -895,7 +896,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         desktop = reporting_policy['cpv13_intraday_print_correction']
         self.assertEqual(desktop['manager_approval']['approved_by'], 'Nicolas Holanda')
-        self.assertEqual(desktop['manager_approval']['change_control'], 'locked_until_explicit_manager_change')
+        self.assertEqual(desktop['manager_approval']['change_control'], 'superseded_by_explicit_manager_changes_v18_v20_v21')
         self.assertIn('until the manager explicitly requests the next change', desktop['manager_approval']['decision'])
         self.assertTrue(desktop['validation']['single_table'])
         self.assertTrue(desktop['validation']['one_row_per_campaign'])
@@ -903,7 +904,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(desktop['validation']['aligned_rows'])
         self.assertFalse(desktop['validation']['generic_metric_value_headers'])
         self.assertFalse(desktop['validation']['vertical_bar_separators'])
-        self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'])
+        self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação'])
         ad_only = reporting_policy['ad_only_and_compact_ad_roas_correction']
         self.assertIn('ad status only', ad_only['decision'])
         self.assertIn('highest-to-lowest ROAS', ad_only['table_format'])
@@ -945,6 +946,11 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(source_correction['display_order'], 'R/E always shows current ROI first and estimated future ROI second')
         self.assertIn('/estimated/revenue/utm_adgroup', source_correction['source_confirmation'])
         self.assertEqual(source_correction['color_bands']['yellow'], 'ROI < 0% and > -15%')
+        roi_v20 = reporting_policy['roi_color_bands_v20']
+        self.assertIn('fractional negatives such as -0.1% in yellow', roi_v20['deterministic_continuous_interpretation'])
+        ctr_v21 = reporting_policy['ctr_and_compact_insight_v21']
+        self.assertEqual(ctr_v21['column_position'], 'after CPM and before Ação')
+        self.assertIn('compact decision-useful derived views', ctr_v21['future_insight_rule'])
         self.assertIn('same future-estimate backend', reporting_policy['source_routes']['economics_estimated'])
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):

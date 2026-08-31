@@ -1075,7 +1075,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v20_roi_minus15_bands_active",
+      "status": "cpv13_intraday_desktop_table_v21_roi_minus15_ctr_compact_insights_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -1205,6 +1205,7 @@
           "Leads",
           "RPS",
           "CPM",
+          "CTR",
           "Ação"
         ],
         "implementation": "dynamic content widths, two spaces between columns, one Unicode divider, one campaign per row and actual-length pagination",
@@ -1215,7 +1216,7 @@
           "approved_at_et": "2026-08-30T11:54:19-04:00",
           "source": "discord:thread:1541578606076231750",
           "decision": "approved; save now and keep this exact layout until the manager explicitly requests the next change",
-          "change_control": "locked_until_explicit_manager_change"
+          "change_control": "superseded_by_explicit_manager_changes_v18_v20_v21"
         },
         "validation": {
           "eggbev_tests": "65/65 passed",
@@ -1493,6 +1494,25 @@
           "meta_writes": 0
         },
         "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-colors-v20-20260830.json"
+      },
+      "ctr_and_compact_insight_v21": {
+        "decision_id": "ARES-EGGBEV-ROAS-CTR-INSIGHTS-V21-20260830",
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T22:22:27-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "decision": "add campaign-level Meta CTR to the compact consolidated table while preserving Ads ↓ and all existing columns",
+        "column_position": "after CPM and before Ação",
+        "format": "percentage with decimal comma; N/D when unavailable",
+        "manager_feedback": "visualization is perfect; the compact ad-level ROAS insight is useful and should guide future report insights",
+        "future_insight_rule": "when evidence supports it, proactively surface compact decision-useful derived views inside the existing report hierarchy; preserve clarity, lineage and source labels; do not add speculative or verbose blocks",
+        "scope": "presentation only; CTR remains informational and does not change Purchase ROAS decisions, cuts, reactivations, budgets or schedules",
+        "validation": {
+          "targeted_tests": "pending",
+          "relevant_tests": "pending",
+          "high_volume_fixture": "pending",
+          "meta_writes": 0
+        }
       }
     },
     "runtime": {
