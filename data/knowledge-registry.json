@@ -2272,6 +2272,24 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "campaign_engine_v3.ad_serving_route.cpv_lineage_required",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-31T01:34:02Z",
+      "id": "cpv-meta-ad-serving-route-lineage-20260831",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV accounts require nonzero Ad Copies lineage for new media",
+      "updated_at": "2026-08-31T01:40:55+00:00"
+    },
+    {
       "canonical_key": "meta-app.b013.admin-recovery-roles",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
       "consumers": [
@@ -2777,5 +2795,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:37:18+00:00"
+  "updated_at": "2026-08-31T01:40:55+00:00"
 }

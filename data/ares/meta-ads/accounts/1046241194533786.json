@@ -16,6 +16,12 @@
         "discord_id": "1055570806945620030"
       },
       "channel": "DirectTraffic",
+      "ad_serving_policy": {
+        "supported_modes": ["pure_clone", "clone_prestaged"],
+        "ad_serving_route": "lineage_required_for_new_media",
+        "from_zero_prestaged": false,
+        "evidence": "data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json"
+      },
       "currency_expected": "USD",
       "timezone_source": "meta_ad_account_timezone",
       "cut_level": "campaign",

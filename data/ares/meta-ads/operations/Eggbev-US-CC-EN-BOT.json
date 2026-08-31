@@ -650,7 +650,7 @@
     "engine_readback": {
       "global_enabled": true,
       "global_write_enabled": true,
-      "release_version": "3.4.0",
+      "release_version": "3.4.1",
       "eggbev_account_registered": true,
       "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
       "clone_page_switch_engine_supported": true,
@@ -1181,7 +1181,7 @@
     "step_4_activation_gate": "Satisfied for ad/campaign status writes and automatic cycle reporting by Nicolas on 2026-08-29T19:29:34-04:00. Manual Eggbev budget writes requested by Nicolas are authorized from 2026-08-30; automatic scaling still requires Nicolas approval of the automation policy and any required envelope.",
     "proposed_jobs": {
       "roas_cycle": {
-        "schedule": "9 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+        "schedule": "0 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
         "timezone_guard": "America/New_York",
         "00:00_action": "reset threshold state to 0.40; no Meta cut/reactivation",
         "delivery": "wrapper posts directly to Eggbev-US-CC-EN Corte e ROAS",
@@ -1443,9 +1443,9 @@
     "roas_cycle": {
       "job_id": "51ae40b5a6ef",
       "name": "Eggbev Corte e ROAS ciclos ET",
-      "schedule": "9 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "schedule": "0 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
       "logical_cycle_times": ["00:00", "05:00", "06:00", "08:00", "10:00", "12:00", "13:00", "14:00", "16:00", "18:00", "20:00", "22:00", "23:00"],
-      "physical_offset_minute": 9,
+      "physical_offset_minute": 0,
       "script": "eggbev-roas-cycle-controlled.sh",
       "no_agent": true,
       "deliver": "local",

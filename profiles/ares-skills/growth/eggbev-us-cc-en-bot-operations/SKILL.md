@@ -251,11 +251,11 @@ Thread fixa           Eggbev-US-CC-EN Limite de Leads (`1543312825890381865`)
 Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
 Modo                   dry-run e controlled-write com preflight/readback
-Cron                   `0 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled
+Cron                   `14 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled; horários lógicos 08:00/20:00 ET
 Estado do scheduler    ativo; tick 20:00 ET confirmado ok em 29/08/2026; gateway_running=false é falso negativo do observador
 Freshness              timestamp Smart Bidding verificável, máximo 2h; ausente/stale = no_write + alerta
 Discord                GET/readback exato; fallback único para Regras; falha total torna o run erro
-Horário interno        wrapper agendado exige `--scheduled` e permite apenas 08:00/20:00 ET
+Horário interno        wrapper agendado exige `--scheduled`, reconcilia atraso físico de até 15 minutos e mantém somente os ciclos lógicos 08:00/20:00 ET
 ```
 
 Quando Nicolas pedir relatório, executar leitura real e mostrar todas as páginas exatamente reconciliadas com campanhas e anúncios ativos. Usar **proximidade ao limite**, sem chamar de previsão estatística:
@@ -330,7 +330,7 @@ Testes aprovados        63 no módulo ROAS atual; suíte ampliada cobre guardrai
 Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
 Budget write            false; exige Rodolfo/Geizian + teto/envelope
 Post ciclo ROAS         habilitado na thread fixa
-Cron ROAS               00:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; scheduler ativo e tick 20:00 alcançou o runner; o ciclo terminou fail-closed por freshness Smart Bidding, não por falha do scheduler
+Cron ROAS               horários lógicos 00:00, 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; disparo físico em :09; scheduler ativo e tick 20:00 alcançou o runner; o ciclo terminou fail-closed por freshness Smart Bidding, não por falha do scheduler
 Post/Cron Diário         false
 ```
 

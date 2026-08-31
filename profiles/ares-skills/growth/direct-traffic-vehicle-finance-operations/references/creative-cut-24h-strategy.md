@@ -19,12 +19,12 @@ O ChatPion não integra esta estratégia. A prática externa foi apenas a origem
 
 - Conta-alvo: conta operacional **05** do Creditoparaveiculo BR-CAR-BR, account ID `2039876850230678`, alias `Creditoparaveiculo-BR-CAR-BR-05-G006`, USD e `America/Sao_Paulo`, confirmados por API.
 - A conta **13 não recebe esta estratégia** e preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita.
-- Estado operacional: `ACTIVE_ACCOUNT05_READ_ONLY_REPORTING`; C51, C52 e C53 foram criadas/ativadas e estão nominalmente atribuídas a `CREATIVE_CUT_24H`.
+- Estado operacional: `ACTIVE_ACCOUNT05_READ_ONLY_REPORTING`; as três campanhas de IDs técnicos persistidos foram atribuídas a `CREATIVE_CUT_24H` e reconciliadas pontualmente como C01, C02 e C03.
 - As três threads fixas da conta 05 são Intraday `1542892943352799242`, Diário `1542892955315081246` e Criar campanhas `1542892971186454719`; o member sync de Zeus, Rodolfo, Nicolas e Geizian foi confirmado por readback.
 - A thread `CPV Regras` `1540426218405363873` é única e compartilhada por todas as contas de anúncio Creditoparaveiculo BR-CAR-BR; não criar uma thread de regras por conta.
 - O watcher de primeiro gasto da conta 05 roda a cada 15 minutos: primeiro spend entre 00:30 e 02:00 SP inicia a primeira janela de 24h; primeiro spend posterior pausa a campanha uma vez e agenda uma única reativação dentro da próxima janela 00:30–02:00, sempre com GET/readback.
 - Diário e Intraday da conta 05 são automações determinísticas read-only; ativar os relatórios não autoriza automaticamente pausas intermediárias da estratégia. Um runner de decisão/corte separado exige implementação, testes, state/idempotência e autorização/readback próprios.
-- A mudança pontual do prefixo visível das campanhas da conta 05 para `01`, `02`, `03` não altera a taxonomia/naming geral, os IDs, wrappers `b01fb05c51–c53` nem a regra de numeração de campanhas novas.
+- A renumeração pontual das três campanhas da conta 05 para `01`, `02`, `03`, incluindo wrappers account-05 `b01fb05c01–c03` reconciliados pela tarefa específica, não altera a taxonomia/naming geral nem estabelece regra para campanhas novas; os Meta campaign IDs e a auditoria original permanecem preservados.
 
 ## Seleção por campanha
 
@@ -172,7 +172,7 @@ Diário e Intraday devem exibir `management_strategy`, estágio, início da jane
 - [x] referência 1Password da conta registrada sem copiar segredo
 - [x] IDs das threads Intraday, Diário e Criar campanhas confirmados; member sync validado nas três
 - [x] manager, budget do lançamento e controlled write registrados
-- [x] C51, C52 e C53 atribuídas nominalmente à estratégia
+- [x] C01, C02 e C03 atribuídas nominalmente à estratégia, com IDs técnicos/origem anterior preservados em audit
 - [ ] watcher de primeiro gasto account-scoped com state/idempotência, testes, dry-run live e cron readback
 - [ ] Diário e Intraday read-only com tabelas desktop, testes, dry-run live, crons script-only e threads fixas
 - [ ] runner automático de corte por criativo permanece desabilitado até existir implementação, fixtures 80/10/10 e 90/10, canário PAUSED e autorização específica

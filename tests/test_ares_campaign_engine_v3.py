@@ -308,6 +308,19 @@ def test_production_config_blocks_from_zero_for_both_cpv_accounts():
         assert account['ad_serving_route'] == 'lineage_required_for_new_media'
 
 
+def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clone():
+    config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+    for account_id in ('1046241194533786', '2039876850230678'):
+        direct = from_zero_campaign(1, account=account_id)
+        direct['app_key'] = 'mgs-meta-app-current'
+        with pytest.raises(ManifestError, match='does not support mode from_zero_prestaged'):
+            validate_account_policy(manifest([direct]), config)
+
+        lineage = prestaged_campaign(1, account=account_id)
+        lineage['app_key'] = 'mgs-meta-app-current'
+        validate_account_policy(manifest([lineage]), config)
+
+
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():
     row = prestaged_campaign(1)
     row['ads'][0]['creative_payload']['degrees_of_freedom_spec'] = {

@@ -346,9 +346,9 @@
       "next_step": "Monitoramento rotineiro do primeiro ciclo 05:00 e 06:00; qualquer falha deve usar recovery readback-first sem alterar budget ou ampliar escopo.",
       "objective": "Adicionar 05:00 e 06:00 à Fase 1 Corte e ROAS e isolar os schedulers Eggbev e Creditoparaveiculo",
       "source": "data/ares/audits/cron-isolation/2026-08-30-eggbev-cpv.json",
-      "state": "completed: fase 1 lógica 05/06/08/10/12 et; cron eggbev físico em :09, guardrail leads em :14; cpv escalonado em minutos próprios; seis threads eggbev e três cpv disjuntas; zero colisões de slot entre oito jobs ativos auditados; 154 testes eggbev ok.",
+      "state": "completed: fase 1 lógica e física 05/06/08/10/12 et; corte/roas inicia em :00 e reconcilia atraso real até 15min; leads inicia em :14; cpv escalonado em minutos próprios; seis threads eggbev e três cpv disjuntas; zero colisões entre oito entradas ativas; 154 testes eggbev ok.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T01:37:18+00:00"
+      "updated_at": "2026-08-31T01:42:50+00:00"
     },
     {
       "agent": "ares",
@@ -762,6 +762,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-roas-ad-only-visual-v18-20260830",
+      "next_step": "remover campaign actions e implementar coluna Ads ↓ROAS",
+      "objective": "Corrigir Corte e ROAS para writes somente em anúncios e mostrar ads abreviados ordenados por ROAS",
+      "source": "discord:thread:1541578606076231750",
+      "state": "correction_authorized_by_nicolas",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-31T01:42:43+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-roas-campaign-key-pagination-v17-20260830",
       "next_step": "usar o layout v17 nos próximos ciclos Corte e ROAS",
       "objective": "Diferenciar campanhas C/DUP no relatório e manter legibilidade com mais de 50 linhas",
@@ -873,12 +883,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c51-c53-renumber-lineage-repair-20260830",
-      "next_step": "Rodolfo precisa decidir se autoriza replacement com exclusão terminal das C01/C02/C03 antigas para reciclar as UTMs; depois reconstruir os 9 anúncios por Ad Copies API com lineage, fazer swap controlado e readback de entrega.",
-      "objective": "Renumerar C51/C52/C53 da conta 05 para C01/C02/C03 e corrigir ausência de entrega",
-      "source": "discord:thread:1543263056262594641",
-      "state": "meta live v26: c51/c52/c53 e hierarquia 1x1x3 active, zero impressões e zero gasto; 9/9 anúncios com source_ad_id=0, mesma causa confirmada no incidente da conta 13. a conta 05 já possui c01/c02/c03 antigas não deletadas e paused, com as utms canônicas b01fb05c01/c02/c03.",
+      "next_step": "Confirmar por Meta Insights a primeira impressão e gasto após a ativação; atualizar audit e fonte canônica sem repetir qualquer write",
+      "objective": "Corrigir zero delivery por source_ad_id=0 nas campanhas C51-C53 da conta 05, renumerar para C01-C03 e bloquear recorrência global",
+      "source": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json",
+      "state": "meta_repair_complete_active_9_ads_nonzero_lineage_first_delivery_observation_pending",
       "thread_id": "1543263056262594641",
-      "updated_at": "2026-08-31T01:00:28+00:00"
+      "updated_at": "2026-08-31T01:41:05+00:00"
     },
     {
       "agent": "zeus",
@@ -1562,5 +1572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:37:18+00:00"
+  "updated_at": "2026-08-31T01:42:50+00:00"
 }

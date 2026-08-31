@@ -1,6 +1,6 @@
 {
-  "audit_version": "1.0",
-  "generated_at_et": "2026-08-30T21:34:26-04:00",
+  "audit_version": "1.1",
+  "generated_at_et": "2026-08-30T21:42:07-04:00",
   "scope": "active recurring Ares Campaign Ops jobs plus Ares campaign-related root cron entries",
   "checks": {
     "active_start_slot_collisions": {
@@ -91,7 +91,7 @@
       "source": "hermes_ares",
       "job_id": "51ae40b5a6ef",
       "name": "Eggbev Corte e ROAS ciclos ET",
-      "schedule": "9 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "schedule": "0 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
       "script": "eggbev-roas-cycle-controlled.sh",
       "deliver": "local",
       "no_agent": true
@@ -123,8 +123,9 @@
   },
   "collisions": [],
   "notes": [
-    "Logical operation hours are preserved; physical scheduler minute offsets prevent equal start slots.",
-    "CPV shared account lane and Eggbev operation-specific locks are distinct, so neither operation can block the other through a shared lock.",
-    "Paused/completed one-time and retired jobs were excluded because they cannot fire."
+    "Eggbev Corte/ROAS starts exactly on approved full hours; bounded scheduler delay is mapped back to the logical hour.",
+    "Other Ares Campaign Ops jobs use distinct physical minutes, so exact start slots do not collide.",
+    "CPV shared account lane and Eggbev operation-specific locks are distinct.",
+    "Paused/completed one-time and retired jobs are excluded because they cannot fire."
   ]
 }

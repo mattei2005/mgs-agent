@@ -213,7 +213,8 @@ class EggbevPageLeadGuardrailTests(unittest.TestCase):
         self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 0, tzinfo=mod.NY), approved))
         self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 14, tzinfo=mod.NY), approved))
         self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 20, 0, tzinfo=mod.NY), approved))
-        self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 16, tzinfo=mod.NY), approved))
+        self.assertTrue(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 29, tzinfo=mod.NY), approved))
+        self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 30, tzinfo=mod.NY), approved))
         self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 19, 59, tzinfo=mod.NY), approved))
 
     def test_auto_reactivate_is_read_from_scope(self):

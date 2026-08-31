@@ -211,10 +211,10 @@ def row_freshness(
 def scheduled_window_allowed(
     run_at: dt.datetime,
     approved_times: tuple[str, ...],
-    max_delay_minutes: int = 15,
+    max_actual_minute: int = 29,
 ) -> bool:
     local = run_at.astimezone(NY)
-    if local.minute > max_delay_minutes:
+    if local.minute > max_actual_minute:
         return False
     logical = local.replace(minute=0, second=0, microsecond=0)
     return logical.strftime("%H:%M") in set(approved_times)

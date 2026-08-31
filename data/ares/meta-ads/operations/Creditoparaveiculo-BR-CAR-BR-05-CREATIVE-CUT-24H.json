@@ -211,7 +211,33 @@
       "checked_at_utc": "2026-08-29T04:55:32Z"
     },
     "failed_shells_archived": ["120248477878560046", "120248477878580046"],
-    "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect"
+    "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect",
+    "lineage_repair": {
+      "request_id": "cpv05-c51-c53-lineage-renumber-repair-20260831-r1",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1543263056262594641",
+      "cause": "direct ads had source_ad_id=0 and zero delivery; same confirmed class as account 13",
+      "campaign_number_map": {"51": 1, "52": 2, "53": 3},
+      "replacement_ad_ids": [
+        "120248498974990046", "120248498974960046", "120248498975000046",
+        "120248498974920046", "120248498974950046", "120248498975310046",
+        "120248499019600046", "120248499014560046", "120248499014380046"
+      ],
+      "source_ad_ids": ["120247105296140046", "120247105296120046", "120247105296100046"],
+      "old_direct_ads_terminal": 9,
+      "legacy_campaign_ids_deleted": ["120246928388760046", "120246887105500046", "120247083649930046"],
+      "meta_readback": {
+        "campaigns_configured_active": 3,
+        "campaigns_effective_active": 3,
+        "adsets_configured_active": 3,
+        "replacement_ads_configured_active": 9,
+        "replacement_ads_nonzero_source_ad_id": 9,
+        "issues": 0,
+        "checked_at_utc": "2026-08-31T01:34:02.935893+00:00"
+      },
+      "delivery_observation": "pending_first_delivery_after_activation",
+      "audit": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json"
+    }
   },
   "media_gate": {
     "required_unique_assets": 9,
@@ -273,20 +299,23 @@
     "manual_holds": [],
     "autonomous_action_scope": {
       "allowed_campaigns": {
-        "51": {
+        "1": {
           "campaign_id": "120248477978700046",
+          "original_campaign_number": 51,
           "cycle_start_date": "2026-08-29",
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
         },
-        "52": {
+        "2": {
           "campaign_id": "120248477978730046",
+          "original_campaign_number": 52,
           "cycle_start_date": "2026-08-29",
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
         },
-        "53": {
+        "3": {
           "campaign_id": "120248478066030046",
+          "original_campaign_number": 53,
           "cycle_start_date": "2026-08-29",
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
