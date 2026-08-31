@@ -107,7 +107,9 @@
         "cycle_start_date": "2026-09-01",
         "management_strategy": "CREATIVE_CUT_24H",
         "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1",
-        "assigned_at_utc": "2026-08-31T07:10:23Z"
+        "assigned_at_utc": "2026-08-31T07:10:23Z",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01"
       }
     }
   },
@@ -688,7 +690,7 @@
   ],
   "meta_writes_performed": 1,
   "first_delivery_enrollment": {
-    "status": "ARMED_ACCOUNT05_RUNTIME_C01_C06",
+    "status": "ARMED_ACCOUNT05_RUNTIME_C01_C07",
     "runtime": "creditoparaveiculo-account05-first-delivery.py",
     "cron_job_id": "23edda4c310c",
     "schedule": "9,24,39,54 * * * *",
@@ -698,7 +700,22 @@
       "C03": "120248478066030046",
       "C04": "120248500821400046",
       "C05": "120248500821410046",
-      "C06": "120248500979140046"
+      "C06": "120248500979140046",
+      "C07": {
+        "campaign_id": "120248503317050046",
+        "campaign_number": 7,
+        "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1",
+        "cycle_start_date": "2026-09-01",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248503349420046",
+          "120248503319650046",
+          "120248503319410046"
+        ],
+        "armed_at_sp": "2026-08-31T04:12:08.561602-03:00",
+        "meta_writes": 0
+      }
     },
     "spend_usd_by_campaign_at_arm": {
       "C01": 0.0,
@@ -717,10 +734,16 @@
       "C06": 0
     },
     "armed_at_sp": "2026-08-31T03:12:31.367171-03:00",
-    "latest_dry_run_sp": "2026-08-31T03:13:34.607832-03:00",
-    "latest_dry_run_result": "OK; C04-C06 armed; zero Meta writes; future-date Insights range clamped to current date",
+    "latest_dry_run_sp": "2026-08-31T04:12:44.833793-03:00",
+    "latest_dry_run_result": {
+      "status": "OK",
+      "armed_count": 4,
+      "meta_writes": 0,
+      "c07_verified": true
+    },
     "policy": "first spend 00:30-02:00 SP starts the first strategy window; later first spend pauses once and queues one next healthy-window reactivation",
-    "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+    "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3",
+    "latest_arm_readback_sp": "2026-08-31T04:12:08.561602-03:00"
   },
   "notes": [
     "Nicolas authorized the original one-time creation and ACTIVE publication of the three account-05 campaigns at USD25 each; their Meta campaign IDs remain preserved and the later authorized lineage task reconciled them as C01-C03.",
@@ -733,5 +756,5 @@
     "ChatPion is historical inspiration only and is outside this operation.",
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment."
   ],
-  "updated_at": "2026-08-31T07:10:23Z"
+  "updated_at": "2026-08-31T07:13:27Z"
 }
