@@ -743,12 +743,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv05-rules-runtime-20260830",
-      "next_step": "Implementar runtimes determinísticos account05, testar, criar crons e editar CPV Regras",
-      "objective": "Ativar watcher de primeiro gasto e relatórios Diário/Intraday da conta 05, atualizar fontes canônicas e CPV Regras, validar por readback",
+      "next_step": "Se Rodolfo quiser cortes 80/10/10 e 90/10 automáticos, autorizar separadamente runner de decisão CREATIVE_CUT_24H; hoje relatórios são read-only. SMS e monitor account-wide da conta 05 continuam pendentes de arquitetura/escopo próprios.",
+      "objective": "Ativar watcher de primeiro gasto e relatórios Diário/Intraday da conta 05; atualizar CPV Regras e declarar Campaign Engine v2 retired",
       "source": "discord:thread:1543778490610884679",
-      "state": "in_progress",
+      "state": "completed: conta 05 reconciliada como c01-c03 com ids meta preservados; watcher armado e primeiro tick agendado ok; diário/intraday read-only ativos; cpv regras 12/12 mensagens confirmadas; skills e contratos atualizados; v2 sem rota ativa.",
       "thread_id": "1543778490610884679",
-      "updated_at": "2026-08-31T01:04:08+00:00"
+      "updated_at": "2026-08-31T01:56:10+00:00"
     },
     {
       "agent": "zeus",
@@ -1572,5 +1572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:42:50+00:00"
+  "updated_at": "2026-08-31T01:56:10+00:00"
 }

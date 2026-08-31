@@ -16,11 +16,28 @@
       "data/ares/meta-ads/audit/eggbev/from-zero-creative-validate-only-20260830.json",
       "data/ares/meta-ads/audit/eggbev/from-zero-structure-validate-only-20260830.json"
     ],
-    "validated_layers": ["campaign", "adset", "adcreative", "ad"],
+    "validated_layers": [
+      "campaign",
+      "adset",
+      "adcreative",
+      "ad"
+    ],
     "readiness": "ready_for_scoped_request_prestage_plan_and_final_summary",
-    "inputs_still_required_per_request": ["daily_budget_usd_per_campaign"],
-    "gates_after_summary": ["Nicolas explicit OK with exact budget", "Engine v3 confirm-execute", "consolidated Meta readback"],
-    "writes_during_remediation": {"meta_objects_created": 0, "drive_moves": 0, "inventory_reservations": 0, "media_prestage": 0, "cron_changes": 0}
+    "inputs_still_required_per_request": [
+      "daily_budget_usd_per_campaign"
+    ],
+    "gates_after_summary": [
+      "Nicolas explicit OK with exact budget",
+      "Engine v3 confirm-execute",
+      "consolidated Meta readback"
+    ],
+    "writes_during_remediation": {
+      "meta_objects_created": 0,
+      "drive_moves": 0,
+      "inventory_reservations": 0,
+      "media_prestage": 0,
+      "cron_changes": 0
+    }
   },
   "site_name": "Eggbev",
   "site_domain": "eggbev.com",
@@ -33,9 +50,10 @@
   "destination": "messenger_conversation",
   "cut_level": {
     "roas_default": "ad",
-    "roas_zero_active_ads_exception": "campaign",
+    "roas_zero_active_ads_exception": "none",
     "roas_adset_action": "none",
-    "page_lead_guardrail": "campaign"
+    "page_lead_guardrail": "campaign",
+    "roas_campaign_action": "none"
   },
   "account_currency": "USD",
   "account_timezone": "America/New_York",
@@ -120,7 +138,11 @@
       "legacy_threads_marked_superseded": 2,
       "legacy_archive_state_preserved": true,
       "update_messages_confirmed": 16,
-      "required_members_confirmed_on_every_api_updated_thread": ["Nicolas", "Zeus", "Rodolfo"],
+      "required_members_confirmed_on_every_api_updated_thread": [
+        "Nicolas",
+        "Zeus",
+        "Rodolfo"
+      ],
       "rate_limit_recovery": "HTTP 429 after partial effects; reconciled all members/messages by GET, skipped confirmed layers, resumed missing posts only, then re-read every target",
       "duplicates_after_recovery": 0
     },
@@ -153,7 +175,10 @@
         "thread_id": "1541578606076231750",
         "thread_name": "Eggbev-US-CC-EN Corte e ROAS",
         "scope": "scheduled and on-demand ROAS cut/reactivation cycles, report-only economics and gated budget recommendations",
-        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-ads-intraday-operations"],
+        "required_skills": [
+          "eggbev-us-cc-en-bot-operations",
+          "meta-ads-intraday-operations"
+        ],
         "runner": "scripts/ares-eggbev-roas-cycle.py",
         "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578606076231750.txt",
         "runtime": "status writes and direct posts enabled fail-closed; budget write disabled",
@@ -206,7 +231,10 @@
         "thread_id": "1543333373945053184",
         "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
         "scope": "on-demand campaign duplication only; creation from zero remains in thread 1541578556037927053",
-        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-campaign-engine-v3"],
+        "required_skills": [
+          "eggbev-us-cc-en-bot-operations",
+          "meta-campaign-engine-v3"
+        ],
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
@@ -238,7 +266,10 @@
         "thread_id": "1541578596253175858",
         "thread_name": "Eggbev-US-CC-EN Diario",
         "scope": "Daily and on-demand read-only reporting for account Eggbev-US-CC-EN-01-G006",
-        "required_skills": ["eggbev-us-cc-en-bot-operations", "meta-ads-intraday-operations"],
+        "required_skills": [
+          "eggbev-us-cc-en-bot-operations",
+          "meta-ads-intraday-operations"
+        ],
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
         "configuration_report_script": "scripts/ares-eggbev-daily-config-report.py",
@@ -298,7 +329,10 @@
         "discord_get_readback_required": true,
         "delivery_failure_is_fatal": true,
         "fallback_error_thread_id": "1543280854024060999",
-        "scheduled_window_gate": ["08:00", "20:00"],
+        "scheduled_window_gate": [
+          "08:00",
+          "20:00"
+        ],
         "scheduled_timezone": "America/New_York",
         "auto_reactivate": false
       }
@@ -344,7 +378,10 @@
       "delivery_type": "STANDARD",
       "placements_mode": "MANUAL_ONLY"
     },
-    "ads_per_adset": [3, 5]
+    "ads_per_adset": [
+      3,
+      5
+    ]
   },
   "campaign_naming": {
     "status": "approved_by_nicolas_for_clone_only",
@@ -370,7 +407,10 @@
     "pixel_id": "935354115143283",
     "conversion_event_display_name": "Eggbev PV U",
     "conversion_event_technical_name": "eggbev-pv-u",
-    "promoted_object_contract": {"custom_event_type": "OTHER", "custom_event_str": "eggbev-pv-u"},
+    "promoted_object_contract": {
+      "custom_event_type": "OTHER",
+      "custom_event_str": "eggbev-pv-u"
+    },
     "pixel_scope": "same pixel for the entire Eggbev card operation",
     "advertiser_payer": "DIGITAL TRUST",
     "advertiser_payer_scope": "always for this operation"
@@ -386,8 +426,18 @@
       "authorized_by": "Rodolfo Mattei",
       "effective_at_et": "2026-08-30T12:21:11-04:00",
       "scope": "set, decrease, or increase Eggbev campaign budgets, including the USD45 baseline, without separate Rodolfo approval",
-      "required_controls": ["explicit Nicolas instruction or approved operation policy", "exact budget value", "Meta pre-read", "Meta post-write readback"],
-      "excluded": ["billing", "account_spend_limit", "credentials", "automatic scaling without a separately approved policy"]
+      "required_controls": [
+        "explicit Nicolas instruction or approved operation policy",
+        "exact budget value",
+        "Meta pre-read",
+        "Meta post-write readback"
+      ],
+      "excluded": [
+        "billing",
+        "account_spend_limit",
+        "credentials",
+        "automatic scaling without a separately approved policy"
+      ]
     }
   },
   "metrics": {
@@ -456,8 +506,29 @@
       "smart_bidding": "Smart Bidding direct metrics may be read from the compatible vertical, Messenger Pages or domain route after exact scope, identity, period and freshness reconciliation",
       "pricing": "RPS, CPM, EPC, AVG_PRICE, revenue and other monetization metrics must prefer direct Smart Bidding fields from vertical, Messenger Pages or domain; do not treat the global /pricing payload as the only available source and do not derive a metric locally when a direct compatible field is available"
     },
-    "required_meta_metrics": ["Amount spent", "Purchase ROAS", "messaging_conversation_started_7d", "Cost per messaging conversation started", "CPM", "CTR", "Budget"],
-    "requested_smart_bidding_metrics": ["target rows", "Investment", "Revenue", "Drip revenue", "Broadcast revenue", "Leads", "AVG_PRICE", "RPS", "CPM", "EPC", "Real ROI", "Estimated ROI"],
+    "required_meta_metrics": [
+      "Amount spent",
+      "Purchase ROAS",
+      "messaging_conversation_started_7d",
+      "Cost per messaging conversation started",
+      "CPM",
+      "CTR",
+      "Budget"
+    ],
+    "requested_smart_bidding_metrics": [
+      "target rows",
+      "Investment",
+      "Revenue",
+      "Drip revenue",
+      "Broadcast revenue",
+      "Leads",
+      "AVG_PRICE",
+      "RPS",
+      "CPM",
+      "EPC",
+      "Real ROI",
+      "Estimated ROI"
+    ],
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
@@ -469,8 +540,35 @@
       "campaign_scope": "all currently effective ACTIVE campaigns even without an insight row, plus every campaign with insight in the requested period; historical campaigns with neither condition remain excluded",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
-      "per_campaign_fields": ["full name", "current status", "start_time America/New_York", "UTM_CAMPAIGN", "source join status", "Budget USD", "Amount spent USD", "messaging_conversation_started_7d", "Cost per messaging conversation started", "Purchase ROAS", "Meta CPM", "CTR", "Smart Bidding investment", "Smart Bidding revenue", "Smart Bidding LEADS", "Smart Bidding AVG_PRICE", "Smart Bidding RPS", "Smart Bidding CPM", "Smart Bidding EPC", "observation/reconciliation reason"],
-      "smart_bidding_freshness_visible": ["latest source timestamp or N/D", "source age or N/D", "maximum age 2h", "timestamp field or N/D", "reconciliation reason"],
+      "per_campaign_fields": [
+        "full name",
+        "current status",
+        "start_time America/New_York",
+        "UTM_CAMPAIGN",
+        "source join status",
+        "Budget USD",
+        "Amount spent USD",
+        "messaging_conversation_started_7d",
+        "Cost per messaging conversation started",
+        "Purchase ROAS",
+        "Meta CPM",
+        "CTR",
+        "Smart Bidding investment",
+        "Smart Bidding revenue",
+        "Smart Bidding LEADS",
+        "Smart Bidding AVG_PRICE",
+        "Smart Bidding RPS",
+        "Smart Bidding CPM",
+        "Smart Bidding EPC",
+        "observation/reconciliation reason"
+      ],
+      "smart_bidding_freshness_visible": [
+        "latest source timestamp or N/D",
+        "source age or N/D",
+        "maximum age 2h",
+        "timestamp field or N/D",
+        "reconciliation reason"
+      ],
       "layout": "vertical mobile cards plus one indexed unified Pricing + Meta Ads + Smart Bidding desktop table",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
@@ -478,7 +576,13 @@
         "primary": "Meta creative utm_campaign exact equals Smart Bidding UTM_CAMPAIGN",
         "identity_confirmation": "Meta creative object_story_spec.page_id exact equals Smart Bidding FB_PAGE_ID",
         "fallback": "a single pg_XXXXX token in the campaign name may identify the UTM for reporting, but external metrics remain N/D unless Page ID is also read back and matches",
-        "fail_closed": ["missing or multiple Meta UTM", "missing or multiple Smart Bidding page row", "missing Meta Page ID", "Page ID mismatch", "Smart Bidding source stale or without verifiable timestamp"]
+        "fail_closed": [
+          "missing or multiple Meta UTM",
+          "missing or multiple Smart Bidding page row",
+          "missing Meta Page ID",
+          "Page ID mismatch",
+          "Smart Bidding source stale or without verifiable timestamp"
+        ]
       },
       "metric_formulas": {
         "cost_per_messaging_started": "Meta Amount spent / onsite_conversion.messaging_conversation_started_7d",
@@ -488,10 +592,21 @@
         "avg_price": "Smart Bidding AVG_PRICE weighted by SESSIONS when multiple rows share the same exact UTM"
       },
       "smart_bidding_direct_sources": {
-        "accepted_routes": ["vertical", "Messenger Pages", "domain"],
+        "accepted_routes": [
+          "vertical",
+          "Messenger Pages",
+          "domain"
+        ],
         "selection_policy": "select the route whose live schema matches the requested metric granularity and can be reconciled to the report row by an explicit operation/page/UTM/domain mapping and the same reporting period; no implicit precedence between routes",
         "direct_field_policy": "prefer the direct Smart Bidding metric value; local derivation is fallback-only and must be labeled",
-        "required_readback": ["endpoint/route", "field name", "currency", "period", "source timestamp or freshness evidence", "identity mapping"]
+        "required_readback": [
+          "endpoint/route",
+          "field name",
+          "currency",
+          "period",
+          "source timestamp or freshness evidence",
+          "identity mapping"
+        ]
       }
     },
     "remaining_limitations": [
@@ -518,10 +633,36 @@
       "live_reference_campaign": "162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01",
       "live_reference_readback": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
       "application_scope": "default for future from-zero requests made by Nicolas in thread 1541578556037927053; never reuse the reference campaign media, IDs or DUP suffix",
-      "fixed_model_fields": ["Sales/CBO/Highest volume/Finance US", "AdG1", "pixel 935354115143283 + OTHER + eggbev-pv-u", "manual Facebook + Instagram + Messenger placements with explore_home and without explore or Audience Network", "Page-backed Instagram identity", "Messenger destination and approved welcome-message JSON", "empty Primary text + all three approved headlines on every ad + five-star description + APPLY_NOW", "Advantage+ creative off", "multi-advertiser ads off", "ACTIVE next-day 00:00 America/New_York after final approval"],
-      "request_variables": ["Facebook Page and pg_XXXXX", "exact daily budget", "campaign count", "three or five unique new creatives per campaign", "explicitly requested overrides"],
+      "fixed_model_fields": [
+        "Sales/CBO/Highest volume/Finance US",
+        "AdG1",
+        "pixel 935354115143283 + OTHER + eggbev-pv-u",
+        "manual Facebook + Instagram + Messenger placements with explore_home and without explore or Audience Network",
+        "Page-backed Instagram identity",
+        "Messenger destination and approved welcome-message JSON",
+        "empty Primary text + all three approved headlines on every ad + five-star description + APPLY_NOW",
+        "Advantage+ creative off",
+        "multi-advertiser ads off",
+        "ACTIVE next-day 00:00 America/New_York after final approval"
+      ],
+      "request_variables": [
+        "Facebook Page and pg_XXXXX",
+        "exact daily budget",
+        "campaign count",
+        "three or five unique new creatives per campaign",
+        "explicitly requested overrides"
+      ],
       "conversion_event": "use pixel Eggbev-US-CC-EN with custom event eggbev-pv-u (UI: Eggbev PV U) in every new ad set",
-      "copy": {"primary_text": "", "headlines_on_every_ad": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"], "description": "⭐️⭐️⭐️⭐️⭐️", "cta": "APPLY_NOW"},
+      "copy": {
+        "primary_text": "",
+        "headlines_on_every_ad": [
+          "APPLY NOW ✅",
+          "CARD APPROVED",
+          "✔️ APPLY CARD"
+        ],
+        "description": "⭐️⭐️⭐️⭐️⭐️",
+        "cta": "APPLY_NOW"
+      },
       "publication_gate": "materialize and validate the final manifest, show Nicolas the full structure, and publish only after his explicit OK",
       "replacement_order": "do not delete the source until the replacement is created and fully read back; delete only the unequivocal superseded campaign after the approved replacement path succeeds"
     },
@@ -537,15 +678,28 @@
       "creation_write_enabled": true,
       "budget_write_enabled": true
     },
-    "copy_fields": ["Primary text", "Headline", "Description", "CTA"],
+    "copy_fields": [
+      "Primary text",
+      "Headline",
+      "Description",
+      "CTA"
+    ],
     "copy_definition": "copy means the Meta ad text fields; images and videos are creatives and follow the separate creative policy",
     "copy_source_policy": {
       "default": "pg_5024_dup01_live_validated_v1",
-      "accepted_inputs": ["all four copy fields supplied in the request", "an explicitly identified and approved source campaign", "a future operation-level copy template approved by Nicolas"],
+      "accepted_inputs": [
+        "all four copy fields supplied in the request",
+        "an explicitly identified and approved source campaign",
+        "a future operation-level copy template approved by Nicolas"
+      ],
       "override_policy": "request-time explicit copy wins over the default template",
       "template": {
         "primary_text": "",
-        "headlines": ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"],
+        "headlines": [
+          "APPLY NOW ✅",
+          "CARD APPROVED",
+          "✔️ APPLY CARD"
+        ],
         "headline_application": "all three headline options on every ad",
         "description": "⭐️⭐️⭐️⭐️⭐️",
         "cta": "APPLY_NOW"
@@ -557,13 +711,30 @@
       "reference_model_id": "pg_5024_dup01_live_validated_v1",
       "source_account": "Eggbev-US-CC-EN-01-G006",
       "reference_readback": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
-      "reference_scope": ["campaign/ad set structure", "conversion event", "copy fields", "manual placements enum mapping", "Page-backed Instagram identity", "Messenger creative structure", "tracking and readback gates"],
+      "reference_scope": [
+        "campaign/ad set structure",
+        "conversion event",
+        "copy fields",
+        "manual placements enum mapping",
+        "Page-backed Instagram identity",
+        "Messenger creative structure",
+        "tracking and readback gates"
+      ],
       "override_policy": "current request instructions and the separately approved Messenger flags win over any conflicting reference field",
-      "can_supply_when_explicitly_approved": ["copy", "from-zero naming template", "individual ad naming rule", "manual placements payload", "tracking/url_tags structure"],
+      "can_supply_when_explicitly_approved": [
+        "copy",
+        "from-zero naming template",
+        "individual ad naming rule",
+        "manual placements payload",
+        "tracking/url_tags structure"
+      ],
       "duplicate_name_policy": "the DUP01 is a configuration model only. Future from-zero campaigns use their normal C0XX naming, new IDs and unique new media; never copy the DUP suffix or treat the reference media as reusable candidates"
     },
     "minimal_request_semantics": {
-      "source_folder_aliases": {"cc en us": "CC_US_EN", "CC_US_EN": "CC_US_EN"},
+      "source_folder_aliases": {
+        "cc en us": "CC_US_EN",
+        "CC_US_EN": "CC_US_EN"
+      },
       "campaigns_with_n_creatives": "N campaigns, each with one ad set and N requested ads; creatives are unique across the whole batch unless Nicolas explicitly says reuse",
       "example_3_campaigns_3_creatives": "3 campaigns x 1 ad set x 3 ads = 9 unique creatives from CC_US_EN",
       "campaign_name_template": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX; allocate C001, C002, C003... in request order and never append para [first name] - Copy",
@@ -587,11 +758,36 @@
     },
     "manual_placements_payload": {
       "source": "Nicolas exact approved UI list plus live Graph v26 replacement write/readback on 2026-08-30; the real adset update rejected explore with subcode 2490589 (deprecated), while explore_home remained accepted and active. The real controlled write supersedes the contradictory validate-only result 2490392.",
-      "publisher_platforms": ["facebook", "instagram", "messenger"],
-      "facebook_positions": ["feed", "instream_video", "marketplace", "story", "search", "biz_disco_feed", "facebook_reels", "facebook_reels_overlay", "profile_feed"],
-      "instagram_positions": ["stream", "story", "reels", "explore_home", "profile_feed"],
-      "messenger_positions": ["story"],
-      "device_platforms": ["mobile", "desktop"],
+      "publisher_platforms": [
+        "facebook",
+        "instagram",
+        "messenger"
+      ],
+      "facebook_positions": [
+        "feed",
+        "instream_video",
+        "marketplace",
+        "story",
+        "search",
+        "biz_disco_feed",
+        "facebook_reels",
+        "facebook_reels_overlay",
+        "profile_feed"
+      ],
+      "instagram_positions": [
+        "stream",
+        "story",
+        "reels",
+        "explore_home",
+        "profile_feed"
+      ],
+      "messenger_positions": [
+        "story"
+      ],
+      "device_platforms": [
+        "mobile",
+        "desktop"
+      ],
       "audience_network": "forbidden",
       "advantage_plus_placements": false
     },
@@ -630,8 +826,20 @@
     "postcreation_readback": {
       "required_for_every_creation": true,
       "scope": "every created ad creative",
-      "graph_fields": ["id", "name", "status", "object_story_spec", "asset_feed_spec", "url_tags"],
-      "checks": ["object_story_spec.page_id equals the approved Page", "url_tags equals the approved pg_XXXXX UTM", "manifest page_welcome_message equals the canonical Messenger JSON file", "parsed Meta asset_feed_spec.additional_data.page_welcome_message equals the canonical Messenger JSON file"],
+      "graph_fields": [
+        "id",
+        "name",
+        "status",
+        "object_story_spec",
+        "asset_feed_spec",
+        "url_tags"
+      ],
+      "checks": [
+        "object_story_spec.page_id equals the approved Page",
+        "url_tags equals the approved pg_XXXXX UTM",
+        "manifest page_welcome_message equals the canonical Messenger JSON file",
+        "parsed Meta asset_feed_spec.additional_data.page_welcome_message equals the canonical Messenger JSON file"
+      ],
       "failure_behavior": "mark POSTPROCESS_PENDING, preserve IDs/request, do not move assets to 02_TESTING, re-read before any corrective write and never replay campaign creation"
     }
   },
@@ -644,7 +852,11 @@
       "archived": false,
       "seed_messages_confirmed": 3,
       "clone_page_switch_update_messages_confirmed": 2,
-      "members_confirmed": ["Nicolas", "Zeus", "Rodolfo"]
+      "members_confirmed": [
+        "Nicolas",
+        "Zeus",
+        "Rodolfo"
+      ]
     },
     "executor": "meta-campaign-engine-v3",
     "engine_readback": {
@@ -713,7 +925,11 @@
     "source": "01_READY after reservation and Meta x Drive reconciliation",
     "creative_source": "MANUAL_UPLOAD",
     "always_new_never_reuse": "required_for campaign_creation and ordinary clone_prestaged; replacement_revision is an explicit source-successor lineage migration, never an independent retest candidate",
-    "approved_media_copy_reuse_modes": ["pure_clone", "clone_page_switch", "replacement_revision"],
+    "approved_media_copy_reuse_modes": [
+      "pure_clone",
+      "clone_page_switch",
+      "replacement_revision"
+    ],
     "partnership_ad": false,
     "instagram_account": "USE_FACEBOOK_PAGE",
     "instagram_identity_implementation": "Resolve the selected Page's existing page_backed_instagram_account by Page access token and pass its ID as object_story_spec.instagram_user_id; never substitute an unrelated Instagram account.",
@@ -725,8 +941,14 @@
     "status": "approved_fail_closed_pending_full_metric_mapping",
     "target_meta_account_id": "act_1034081997659047",
     "target_meta_account_alias": "Eggbev-US-CC-EN-01-G006",
-    "expected_account_names": ["Eggbev-US-CC-EN-01", "Eggbev-US-CC-EN-01-G006"],
-    "page_join": ["UTM_CAMPAIGN", "FB_PAGE_ID"],
+    "expected_account_names": [
+      "Eggbev-US-CC-EN-01",
+      "Eggbev-US-CC-EN-01-G006"
+    ],
+    "page_join": [
+      "UTM_CAMPAIGN",
+      "FB_PAGE_ID"
+    ],
     "ad_level_economic_join": "pending_live_validation",
     "maximum_freshness_hours": 2,
     "freshness_policy": "a timezone-aware source data timestamp must be no older than 2 hours; missing or unverifiable timestamp is fail-closed for economic writes",
@@ -743,7 +965,7 @@
     "timezone": "America/New_York",
     "threshold": {
       "daily_reset_at": "00:00",
-      "daily_reset_value": 0.40,
+      "daily_reset_value": 0.4,
       "symmetric_cut_and_reactivation": true,
       "exactly_equal": "no_change",
       "change_requires_nicolas_approval": true
@@ -755,12 +977,26 @@
       "reactivations": false
     },
     "phase_1": {
-      "times": ["05:00", "06:00", "08:00", "10:00", "12:00"],
+      "times": [
+        "05:00",
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00"
+      ],
       "cut": "Amount spent > USD 2.00 AND Purchase ROAS < threshold",
       "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
     },
     "phase_2": {
-      "times": ["13:00", "14:00", "16:00", "18:00", "20:00", "22:00", "23:00"],
+      "times": [
+        "13:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "22:00",
+        "23:00"
+      ],
       "cut": "Purchase ROAS < threshold; no spend gate",
       "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
     },
@@ -773,10 +1009,11 @@
     },
     "zero_active_ads_after_cycle": {
       "cut_all_eligible_ads": true,
-      "pause_campaign": true,
+      "pause_campaign": false,
       "pause_adset": false,
-      "supersedes_previous_never_pause_campaign_invariant": true,
-      "campaign_reactivation_when_an_ad_recovers": "automatic_with_the_recovered_ad_after_pre-read_and_post-write_readback"
+      "campaign_reactivation": "never_by_roas_cycle",
+      "manager_correction": "Nicolas Holanda confirmed on 2026-08-30 that ROAS cuts and reactivations are exclusively ad-level, even when zero ads remain active",
+      "source": "discord:thread:1541578606076231750"
     },
     "recovery": "readback-first; never repeat non-idempotent writes blindly",
     "manual_intervention_policy": {
@@ -786,12 +1023,13 @@
       "write_enabled": false
     },
     "provenance_retention": {
-      "policy": "daily threshold reset must preserve Ares paused ad and campaign provenance across dates until reactivation or explicit reconciliation removes it",
-      "implemented_at_et": "2026-08-29T15:37:33-04:00",
-      "regression_tested": true
+      "policy": "daily threshold reset preserves only Ares-paused ad provenance across dates until ad reactivation or explicit reconciliation removes it",
+      "campaign_provenance": "retired; ROAS cycle never pauses or reactivates campaigns",
+      "corrected_at_et": "2026-08-30T21:53:28-04:00",
+      "regression_tested": false
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v17_compact_campaign_variants_and_ten_row_pages_active",
+      "status": "cpv13_intraday_desktop_table_v18_ad_only_descending_ad_roas_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -906,7 +1144,23 @@
         "source": "discord:thread:1541578606076231750",
         "visual_reference": "Intraday Creditoparaveiculo 13 G006 desktop screenshot",
         "decision": "replace generic metric/value headings with the same direct one-row-per-campaign hierarchy used by CPV 13 Intraday",
-        "columns": ["R/E", "Camp", "Página", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "Leads", "RPS", "CPM", "Ação"],
+        "columns": [
+          "R/E",
+          "Camp",
+          "Página",
+          "Status",
+          "Budget",
+          "Spend",
+          "Custo",
+          "ROAS",
+          "Ads ↓",
+          "ROI real",
+          "ROI est.",
+          "Leads",
+          "RPS",
+          "CPM",
+          "Ação"
+        ],
         "implementation": "dynamic content widths, two spaces between columns, one Unicode divider, one campaign per row and actual-length pagination",
         "scope": "report presentation only; no change to campaign selection, metrics, formulas, ROAS threshold, cut/reactivation decisions, writes, schedules or budget authority",
         "manager_approval": {
@@ -1010,11 +1264,12 @@
         "one campaign per row with direct semantic headings instead of generic metric/value headings",
         "Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024",
         "campaign families are naturally sorted and each table block contains at most ten rows",
-        "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, ROI real, ROI est., Leads, RPS, CPM, Ação",
+        "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, Ads ↓, ROI real, ROI est., Leads, RPS, CPM, Ação",
         "dynamic column widths with two spaces between columns and no vertical bars",
         "ROAS shown as a plain numeric value like the CPV 13 reference; threshold semantics remain in the action logic",
         "R/E contains the real and estimated ROI signals while ROI real and ROI est. remain signed numeric percentages",
         "ad-level cut/reactivation counts appear only as compact signals in the Ação column",
+        "Ads ↓ shows abbreviated ad slots sorted by Purchase ROAS descending, with ✅ keep active, 🛑 pause now, ♻️ reactivate now and ⏸ already paused",
         "one short direct legend below the table; no long explanatory block"
       ],
       "action_emojis": {
@@ -1023,7 +1278,8 @@
         "scale_recommendation": "🚀",
         "keep": "✅",
         "observe_or_unreconciled": "👁️",
-        "source_or_write_gate_blocked": "⚠️"
+        "source_or_write_gate_blocked": "⚠️",
+        "already_paused_ad": "⏸"
       },
       "per_campaign_metrics": [
         "Ligada with visual yes/no signal",
@@ -1033,6 +1289,7 @@
         "Ação from the Ares cycle decision",
         "Cost per messaging conversation started",
         "Meta Purchase ROAS with directional below/equal/above/unavailable threshold marker",
+        "Abbreviated ad slots with Purchase ROAS and ad action/status, sorted descending by ROAS",
         "Cost per result",
         "Results",
         "Budget USD",
@@ -1052,7 +1309,9 @@
         "LEADS join status",
         "economic join status"
       ],
-      "display_exclusions": ["Page ID is hidden from the human table and remains available only for exact join and audit"],
+      "display_exclusions": [
+        "Page ID is hidden from the human table and remains available only for exact join and audit"
+      ],
       "display_currency_format": "USD with dollar sign and decimal comma, for example $1,86",
       "roas_visual_policy": {
         "below_threshold": "down arrow; not negative",
@@ -1087,7 +1346,7 @@
         "rps_usd": "NET_REVENUE * 1000 / SESSIONS; N/D when sessions <= 0",
         "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
-      "decision_separation": "economic formulas are informative only and do not change cuts, reactivations or budget decisions; Meta Purchase ROAS remains the ROAS-cycle decision metric",
+      "decision_separation": "Meta Purchase ROAS decides only ad-level cuts/reactivations; economic formulas are informative only; ROAS cycle never changes campaign or ad-set status and never changes budget",
       "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count plus a maximum of ten rows per table block, never splits a campaign row, keeps campaign families naturally ordered, repeats every heading and keeps every code fence balanced",
       "validation": {
         "live_dry_run": true,
@@ -1100,20 +1359,71 @@
         "live_read_only_reference_date": "2026-08-29",
         "live_read_only_reference_campaigns": 1,
         "live_read_only_reference_join_status": "smart_bidding_freshness_unverifiable",
-        "live_read_only_reference_fields_verified": ["Ligada", "Campanha", "Página", "Entrega", "Ação", "Cost per messaging conversation started", "Purchase ROAS visual signal", "Cost per result", "Results", "Budget", "Amount spent", "CPM", "CTR link", "CPC link", "ROI atual", "ROI estimado"],
+        "live_read_only_reference_fields_verified": [
+          "Ligada",
+          "Campanha",
+          "Página",
+          "Entrega",
+          "Ação",
+          "Cost per messaging conversation started",
+          "Purchase ROAS visual signal",
+          "Cost per result",
+          "Results",
+          "Budget",
+          "Amount spent",
+          "CPM",
+          "CTR link",
+          "CPC link",
+          "ROI atual",
+          "ROI estimado"
+        ],
         "smart_bidding_unverified_values_render_as": "N/D",
         "live_meta_writes": 0,
         "live_discord_posts": 0,
         "high_volume_fixture_campaigns": 25,
         "unit_tests_passed": 64,
         "regression_suite_passed": 95,
-        "regression_suite_scope": ["ROAS", "Daily", "fixed routes", "page-lead thread route", "page-lead guardrail"],
-        "known_out_of_scope_suite_failures": ["test_eggbev_creation_config_report: placement contract contains an explicit audience_network=forbidden marker while the legacy test forbids the substring", "test_eggbev_creation_intake: runtime returns READY_FOR_SCOPED_RECONCILIATION_AND_PRESTAGE while the legacy test expects READY_FOR_PRESTAGE"],
+        "regression_suite_scope": [
+          "ROAS",
+          "Daily",
+          "fixed routes",
+          "page-lead thread route",
+          "page-lead guardrail"
+        ],
+        "known_out_of_scope_suite_failures": [
+          "test_eggbev_creation_config_report: placement contract contains an explicit audience_network=forbidden marker while the legacy test forbids the substring",
+          "test_eggbev_creation_intake: runtime returns READY_FOR_SCOPED_RECONCILIATION_AND_PRESTAGE while the legacy test expects READY_FOR_PRESTAGE"
+        ],
         "py_compile": "passed",
         "git_diff_check": "passed",
         "knowledge_control_validation": "ok",
         "knowledge_control_regression": "10/10 passed",
         "skill_runtime_mirror": "identical"
+      },
+      "ad_only_and_compact_ad_roas_correction": {
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T21:53:28-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "visual_reference": "Meta Ads Manager at ad level sorted by Purchase ROAS descending",
+        "decision": "ROAS cuts and reactivations change ad status only; campaign and ad set status are never changed by the ROAS cycle, including when zero ads remain active",
+        "table_format": "Ads ↓ shows abbreviated ad slot + Purchase ROAS + status/action signal, ordered highest-to-lowest ROAS; example 03·0,92✅ 02·0,56♻️ 01·0,35🛑 04·N/D⏸",
+        "signals": {
+          "keep_active": "✅",
+          "pause_now": "🛑",
+          "reactivate_now": "♻️",
+          "already_paused": "⏸"
+        },
+        "full_ad_name_visible": false,
+        "technical_ad_id_visible": false,
+        "scope": "ROAS policy correction plus report presentation; no change to threshold, phase times, metrics, budget, lead guardrail or cron schedule",
+        "validation": {
+          "targeted_tests": "pending",
+          "relevant_tests": "pending",
+          "campaign_status_writes_from_roas": 0,
+          "adset_status_writes_from_roas": 0,
+          "meta_writes_during_change": 0
+        }
       }
     },
     "runtime": {
@@ -1122,8 +1432,20 @@
       "write_enabled": true,
       "post_enabled": true,
       "cron_enabled": true,
-      "execution_scope": ["pause_bad_ads", "reactivate_ares_paused_recovered_ads", "pause_or_reactivate_campaign_only_when_required_by_ad_state", "post_every_approved_cycle"],
-      "fail_closed_gates": ["approved_cycle_time", "Meta live readback", "Smart Bidding target identity and freshness", "native rule conflict absent", "manual intervention absent", "pre-read and post-write readback"],
+      "execution_scope": [
+        "pause_bad_ads",
+        "reactivate_only_ares_paused_recovered_ads",
+        "never_change_campaign_or_adset_status",
+        "post_every_approved_cycle"
+      ],
+      "fail_closed_gates": [
+        "approved_cycle_time",
+        "Meta live readback",
+        "Smart Bidding target identity and freshness",
+        "native rule conflict absent",
+        "manual intervention absent",
+        "pre-read and post-write readback"
+      ],
       "budget_write_enabled": false,
       "budget_write_blocked_reason": "Automatic ROAS scaling remains disabled until Nicolas explicitly approves the automatic write policy and any required envelope; manual Eggbev budget writes requested by Nicolas are authorized without separate Rodolfo approval."
     },
@@ -1143,7 +1465,7 @@
     "status": "metric_percentage_threshold_and_frequency_approved_dry_run_budget_write_requires_rodolfo_or_geizian",
     "metric": "Meta Purchase ROAS aggregated at campaign level",
     "source_precedence": "Meta Purchase ROAS wins over Smart Bidding ROI",
-    "roas_threshold": 0.50,
+    "roas_threshold": 0.5,
     "operator": ">",
     "exactly_equal_0_50": "keep_current_budget",
     "roas_above_cut_threshold_through_0_50": "keep_current_budget",
@@ -1154,7 +1476,10 @@
     "planner_enabled": true,
     "budget_write_enabled": false,
     "budget_write_gate": "manual write authorized by explicit Nicolas instruction; automatic cycle write requires Nicolas approval of the automation policy and any required envelope",
-    "pending_before_write": ["Nicolas automatic-scaling approval", "maximum daily budget or account envelope if automation is enabled"],
+    "pending_before_write": [
+      "Nicolas automatic-scaling approval",
+      "maximum daily budget or account envelope if automation is enabled"
+    ],
     "supersedes": "30 percent above the current cut threshold with frequency pending",
     "approval_source": "Nicolas in discord thread 1543280854024060999 on 2026-08-29"
   },
@@ -1233,7 +1558,9 @@
       "smart_bidding": {
         "messenger_page_rows_for_eggbev_publisher": 344,
         "messenger_report_rows_today": 238,
-        "account_names_available": ["Eggbev-US-CC-EN-03 (FAX-US-02)"],
+        "account_names_available": [
+          "Eggbev-US-CC-EN-03 (FAX-US-02)"
+        ],
         "target_account_name_available": false,
         "target_account": "Eggbev-US-CC-EN-01-G006",
         "consequence": "live Meta x Smart Bidding calibration for the target account cannot yet be completed"
@@ -1324,7 +1651,10 @@
           "data_updated_at"
         ],
         "unverifiable_or_stale": "fail_closed_no_write_and_post_error",
-        "rejected_as_update_timestamps": ["BROADCAST_TIME", "DATE_START"]
+        "rejected_as_update_timestamps": [
+          "BROADCAST_TIME",
+          "DATE_START"
+        ]
       }
     },
     "restriction_reporting": {
@@ -1444,7 +1774,21 @@
       "job_id": "51ae40b5a6ef",
       "name": "Eggbev Corte e ROAS ciclos ET",
       "schedule": "0 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
-      "logical_cycle_times": ["00:00", "05:00", "06:00", "08:00", "10:00", "12:00", "13:00", "14:00", "16:00", "18:00", "20:00", "22:00", "23:00"],
+      "logical_cycle_times": [
+        "00:00",
+        "05:00",
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "22:00",
+        "23:00"
+      ],
       "physical_offset_minute": 0,
       "script": "eggbev-roas-cycle-controlled.sh",
       "no_agent": true,
@@ -1461,7 +1805,10 @@
       "job_id": "c3d2499d8c33",
       "name": "Eggbev limite de leads 08h e 20h ET",
       "schedule": "14 8,20 * * *",
-      "logical_cycle_times": ["08:00", "20:00"],
+      "logical_cycle_times": [
+        "08:00",
+        "20:00"
+      ],
       "physical_offset_minute": 14,
       "script": "eggbev-page-lead-guardrail.sh",
       "no_agent": true,
@@ -1531,21 +1878,81 @@
       "post-launch serving watcher"
     ],
     "gaps_at_audit_time": [
-      {"severity": "critical", "key": "engine_onboarding", "gap": "The Eggbev account is absent from Engine v3 account registration, so no Eggbev lane can be planned or executed."},
-      {"severity": "critical", "key": "campaign_materializer", "gap": "No Eggbev creation/clone materializer exists to convert an approved request into a mode-specific manifest and reach validate/plan."},
-      {"severity": "critical", "key": "smart_bidding_account_mapping", "gap": "Smart Bidding report does not expose account 01; ROAS writes and economic reconciliation remain fail-closed."},
-      {"severity": "critical", "key": "clone_page_switch_runtime", "gap": "Engine schema rejects clone_page_switch and no page selector or JSON/Page transformer exists."},
-      {"severity": "high", "key": "serving_verification", "gap": "No Eggbev watcher confirms first impression/spend after scheduled start; ACTIVE status alone does not prove delivery."},
-      {"severity": "high", "key": "native_rule_conflict", "gap": "ADS ZERO RESULTS remains enabled and blocks ROAS writes until the approved activation transition."},
-      {"severity": "high", "key": "scheduler_observer_disagreement", "gap": "Gateway runtime is alive but the cron subsystem reports gateway_running=false; automatic LEADS protection is not considered proven until a scheduled tick readback."},
-      {"severity": "high", "key": "external_manual_override_reconciliation", "gap": "A durable rule to detect and retire stale Ares provenance after manager/external status changes is not implemented."},
-      {"severity": "medium", "key": "high_performance_action", "gap": "ROAS above threshold only keeps delivery; no approved budget scaling or winner expansion policy exists."},
-      {"severity": "medium", "key": "economic_source_precedence", "gap": "No approved arbitration rule exists when Meta Purchase ROAS and Smart Bidding ROI disagree or have different freshness."},
-      {"severity": "medium", "key": "smart_bidding_time_window", "gap": "Smart Bidding date payload uses UTC Z boundaries while decisions are ET; source semantics must be validated before economic automation."},
-      {"severity": "medium", "key": "page_freshness", "gap": "The page-lead runner does not validate a source freshness timestamp; clone_page_switch explicitly requires stale pages to be ineligible."},
-      {"severity": "medium", "key": "no_data_phase2", "gap": "An active ad with no insight row is treated as valid N/D and paused in Phase 2; Nicolas should confirm this includes true zero-delivery ads, not only rows returned with an empty ROAS field."},
-      {"severity": "medium", "key": "creation_final_status", "gap": "Creation from zero has no explicit operation-specific final status policy, although the engine default distinguishes technical PAUSED canary from future ACTIVE production."},
-      {"severity": "low", "key": "ads_on_rule", "gap": "Native rule ADS ON 1.1 remains HAS_ISSUES without a keep/disable/remove decision."}
+      {
+        "severity": "critical",
+        "key": "engine_onboarding",
+        "gap": "The Eggbev account is absent from Engine v3 account registration, so no Eggbev lane can be planned or executed."
+      },
+      {
+        "severity": "critical",
+        "key": "campaign_materializer",
+        "gap": "No Eggbev creation/clone materializer exists to convert an approved request into a mode-specific manifest and reach validate/plan."
+      },
+      {
+        "severity": "critical",
+        "key": "smart_bidding_account_mapping",
+        "gap": "Smart Bidding report does not expose account 01; ROAS writes and economic reconciliation remain fail-closed."
+      },
+      {
+        "severity": "critical",
+        "key": "clone_page_switch_runtime",
+        "gap": "Engine schema rejects clone_page_switch and no page selector or JSON/Page transformer exists."
+      },
+      {
+        "severity": "high",
+        "key": "serving_verification",
+        "gap": "No Eggbev watcher confirms first impression/spend after scheduled start; ACTIVE status alone does not prove delivery."
+      },
+      {
+        "severity": "high",
+        "key": "native_rule_conflict",
+        "gap": "ADS ZERO RESULTS remains enabled and blocks ROAS writes until the approved activation transition."
+      },
+      {
+        "severity": "high",
+        "key": "scheduler_observer_disagreement",
+        "gap": "Gateway runtime is alive but the cron subsystem reports gateway_running=false; automatic LEADS protection is not considered proven until a scheduled tick readback."
+      },
+      {
+        "severity": "high",
+        "key": "external_manual_override_reconciliation",
+        "gap": "A durable rule to detect and retire stale Ares provenance after manager/external status changes is not implemented."
+      },
+      {
+        "severity": "medium",
+        "key": "high_performance_action",
+        "gap": "ROAS above threshold only keeps delivery; no approved budget scaling or winner expansion policy exists."
+      },
+      {
+        "severity": "medium",
+        "key": "economic_source_precedence",
+        "gap": "No approved arbitration rule exists when Meta Purchase ROAS and Smart Bidding ROI disagree or have different freshness."
+      },
+      {
+        "severity": "medium",
+        "key": "smart_bidding_time_window",
+        "gap": "Smart Bidding date payload uses UTC Z boundaries while decisions are ET; source semantics must be validated before economic automation."
+      },
+      {
+        "severity": "medium",
+        "key": "page_freshness",
+        "gap": "The page-lead runner does not validate a source freshness timestamp; clone_page_switch explicitly requires stale pages to be ineligible."
+      },
+      {
+        "severity": "medium",
+        "key": "no_data_phase2",
+        "gap": "An active ad with no insight row is treated as valid N/D and paused in Phase 2; Nicolas should confirm this includes true zero-delivery ads, not only rows returned with an empty ROAS field."
+      },
+      {
+        "severity": "medium",
+        "key": "creation_final_status",
+        "gap": "Creation from zero has no explicit operation-specific final status policy, although the engine default distinguishes technical PAUSED canary from future ACTIVE production."
+      },
+      {
+        "severity": "low",
+        "key": "ads_on_rule",
+        "gap": "Native rule ADS ON 1.1 remains HAS_ISSUES without a keep/disable/remove decision."
+      }
     ],
     "resolved_gap": {
       "key": "daily_provenance_loss",
@@ -1686,7 +2093,13 @@
     "at_et": "2026-08-29T19:29:34-04:00",
     "authorized_by": "Nicolas",
     "authorization_scope": "make the fixed Corte e ROAS thread responsible for automatic ad pausing, recovery reactivation, required campaign state transitions and cycle reporting",
-    "enabled_actions": ["pause_bad_ads", "reactivate_recovered_ads_paused_by_ares", "pause_campaign_when_no_active_ads_remain", "reactivate_campaign_with_recovered_ad", "post_each_approved_cycle"],
+    "enabled_actions": [
+      "pause_bad_ads",
+      "reactivate_recovered_ads_paused_by_ares",
+      "pause_campaign_when_no_active_ads_remain",
+      "reactivate_campaign_with_recovered_ad",
+      "post_each_approved_cycle"
+    ],
     "budget_responsibility": "this thread owns budget scale evaluation and reporting",
     "budget_write_enabled": false,
     "budget_write_gate": "manual write by Nicolas is authorized; automatic scale requires Nicolas approval plus maximum daily budget or account envelope when applicable",

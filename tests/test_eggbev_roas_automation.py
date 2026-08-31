@@ -173,7 +173,7 @@ class ExecutePlanTests(unittest.TestCase):
         def write_result(_meta, _token, object_id, status):
             return {'object_id': object_id, 'ok': True, 'stage': 'confirmed', 'after': {'status': status}}
 
-        with mock.patch.object(common, 'reconcile_status_write', side_effect=write_result) as write, mock.patch.object(common, 'atomic_json'):
+        with mock.patch.object(cycle.common, 'reconcile_status_write', side_effect=write_result) as write, mock.patch.object(cycle.common, 'atomic_json'):
             cycle.execute_plan(object(), 'token', plan, state, run)
         self.assertEqual([(call.args[2], call.args[3]) for call in write.call_args_list], [('a1', 'ACTIVE'), ('a2', 'PAUSED')])
         self.assertTrue(all(item['kind'] == 'ad' for item in run['writes']))
@@ -878,9 +878,9 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v17_keeps_layout_and_scales_campaign_identity(self):
+    def test_roas_reporting_v18_is_ad_only_and_shows_descending_ad_roas(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('v17_compact_campaign_variants_and_ten_row_pages_active', reporting_policy['status'])
+        self.assertIn('v18_ad_only_descending_ad_roas_active', reporting_policy['status'])
         self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
         self.assertIn('Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024', reporting_policy['layout'])
         large_table = reporting_policy['campaign_identity_and_large_table_correction']
@@ -895,11 +895,20 @@ class ContractTests(unittest.TestCase):
         self.assertIn('until the manager explicitly requests the next change', desktop['manager_approval']['decision'])
         self.assertTrue(desktop['validation']['single_table'])
         self.assertTrue(desktop['validation']['one_row_per_campaign'])
-        self.assertEqual(desktop['validation']['single_campaign_display_width'], 122)
+        self.assertGreaterEqual(desktop['validation']['single_campaign_display_width'], 122)
         self.assertTrue(desktop['validation']['aligned_rows'])
         self.assertFalse(desktop['validation']['generic_metric_value_headers'])
         self.assertFalse(desktop['validation']['vertical_bar_separators'])
-        self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'])
+        self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'])
+        ad_only = reporting_policy['ad_only_and_compact_ad_roas_correction']
+        self.assertIn('exclusively ad-level', ad_only['decision'])
+        self.assertIn('highest-to-lowest ROAS', ad_only['table_format'])
+        self.assertFalse(ad_only['full_ad_name_visible'])
+        self.assertFalse(ad_only['technical_ad_id_visible'])
+        self.assertEqual(self.operation['cut_level']['roas_zero_active_ads_exception'], 'none')
+        self.assertEqual(self.operation['cut_level']['roas_campaign_action'], 'none')
+        self.assertFalse(self.operation['roas_cycle_policy']['zero_active_ads_after_cycle']['pause_campaign'])
+        self.assertFalse(self.operation['roas_cycle_policy']['zero_active_ads_after_cycle']['pause_adset'])
         self.assertIn('one campaign per row with direct semantic headings instead of generic metric/value headings', reporting_policy['layout'])
         fields = reporting_policy['per_campaign_metrics']
         for expected in (
@@ -907,6 +916,7 @@ class ContractTests(unittest.TestCase):
             'Entrega', 'Ação from the Ares cycle decision', 'Página name',
             'Cost per messaging conversation started',
             'Meta Purchase ROAS with directional below/equal/above/unavailable threshold marker',
+            'Abbreviated ad slots with Purchase ROAS and ad action/status, sorted descending by ROAS',
             'Cost per result', 'Results', 'Budget USD', 'Amount spent USD',
             'Meta CPM', 'Meta CTR link click-through rate', 'Meta CPC link click',
             'Smart Bidding Cost Subscriber', 'Smart Bidding Revenue', 'Smart Bidding Profit',

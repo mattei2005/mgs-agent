@@ -505,6 +505,8 @@ Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no i
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
 
+O monitor de alterações externas da conta 13 roda a cada cinco minutos sobre `act_<ACCOUNT_ID>/activities` em Graph v26.0. Ele alerta mudanças materiais manuais, Meta/native-rule ou de app confiável sem audit Ares correspondente — status, budget, lance, público, programação, regras, campanha, conjunto e anúncio — e nunca desfaz/corrige automaticamente. É uma rotina distinta do watcher de primeiro gasto. A conta 05 não herda esse monitor account-wide sem inclusão explícita no contrato.
+
 Na coluna `Camp` do Diário, Intraday e histórico ROI do Intraday, o rótulo padrão é `C{NN}-{DD/MM}`. Quando o nome canônico da campanha Meta contiver o token inteiro `MOTO`, inserir `M` imediatamente após o número: `C{NN}M-{DD/MM}` (exemplo: `C24M-23/08`). O marcador é somente visual; IDs, UTM, número da campanha, status e cálculos permanecem inalterados. Campanhas sem o token inteiro `MOTO` continuam sem o marcador.
 
 Nas tabelas desktop, paginar pela quantidade real de caracteres renderizados, nunca por um número fixo de campanhas. Se título + tabela couberem no payload seguro de 1.875 caracteres, manter todas as linhas na mesma cerca/tabela. Só dividir quando houver overflow real; nesse caso, repetir o cabeçalho e preservar cada campanha exatamente uma vez. Caso de regressão obrigatório: C07–C20, 14 linhas, permanece em uma única tabela e não deixa C20 órfã em outra parte.

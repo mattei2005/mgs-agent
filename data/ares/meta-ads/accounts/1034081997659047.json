@@ -12,9 +12,10 @@
       "timezone_source": "meta_ad_account_timezone",
       "cut_policy": {
         "roas_default": "ad",
-        "roas_zero_active_ads_exception": "pause_campaign",
+        "roas_zero_active_ads_exception": "none",
         "adset_action": "none",
-        "page_lead_guardrail": "pause_campaign"
+        "page_lead_guardrail": "pause_campaign",
+        "roas_campaign_action": "none"
       },
       "conversion_assets": {
         "pixel_name": "Eggbev-US-CC-EN",
@@ -32,7 +33,7 @@
         "budget_selection_policy": "Nicolas selects and confirms the exact daily budget per Eggbev campaign request.",
         "budget_write_authority": "Standing authority granted by Rodolfo on 2026-08-30: Nicolas may set, decrease, or increase Eggbev campaign budgets, including the USD45 baseline, without separate Rodolfo approval. Exact value, pre-read and Meta readback remain required; billing, account_spend_limit, credentials, and automatic scaling remain separately gated."
       },
-      "write_mode": "disabled_general_with_scoped_roas_status_and_page_lead_guardrail_active",
+      "write_mode": "disabled_general_with_scoped_roas_ad_status_and_page_lead_campaign_guardrail_active",
       "runtime_routes": {
         "campaign_creation": {
           "thread_id": "1541578556037927053",
@@ -54,7 +55,11 @@
           "blocked_reasons": []
         },
         "campaign_cloning": {
-          "contract_modes": ["pure_clone", "clone_prestaged", "clone_page_switch"],
+          "contract_modes": [
+            "pure_clone",
+            "clone_prestaged",
+            "clone_page_switch"
+          ],
           "engine_account_registered": true,
           "engine_release_version": "3.4.1",
           "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
@@ -70,7 +75,7 @@
           "write_enabled": true,
           "post_enabled": true,
           "cron_enabled": true,
-          "scope": "pause bad ads, reactivate recovered ads paused by Ares, reconcile campaign state and publish every approved cycle",
+          "scope": "pause bad ads and reactivate recovered ads previously paused by Ares; never change campaign or ad-set status; publish every approved cycle",
           "budget_write_enabled": false,
           "budget_write_gate": "manual budget write by Nicolas is authorized; automatic scaling requires Nicolas approval plus maximum daily budget or account envelope when applicable",
           "target_meta_account": "act_1034081997659047"
@@ -112,7 +117,7 @@
         },
         "campaign_scaling": {
           "metric": "Meta Purchase ROAS",
-          "roas_threshold": 0.50,
+          "roas_threshold": 0.5,
           "operator": ">",
           "increase_percent": 10,
           "frequency": "every approved ROAS action cycle",
@@ -128,9 +133,26 @@
           "runtime_enabled": true,
           "authorized_by": "Nicolas",
           "authorized_at_et": "2026-08-29T19:29:34-04:00",
-          "actions": ["pause ad", "reactivate Ares-paused ad", "pause campaign when no active ads remain", "reactivate campaign with recovered ad", "post cycle report"],
-          "fail_closed_on": ["source identity or freshness failure", "native rule conflict", "manual intervention", "readback failure"],
-          "budget_write_enabled": false
+          "actions": [
+            "pause ad",
+            "reactivate Ares-paused ad",
+            "post cycle report"
+          ],
+          "fail_closed_on": [
+            "source identity or freshness failure",
+            "native rule conflict",
+            "manual intervention",
+            "readback failure"
+          ],
+          "budget_write_enabled": false,
+          "forbidden_actions": [
+            "pause campaign",
+            "reactivate campaign",
+            "pause ad set",
+            "reactivate ad set"
+          ],
+          "corrected_by": "Nicolas Holanda",
+          "corrected_at_et": "2026-08-30T21:53:28-04:00"
         },
         "page_lead_guardrail": {
           "policy_approved": true,
