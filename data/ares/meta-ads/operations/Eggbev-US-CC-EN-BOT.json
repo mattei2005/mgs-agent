@@ -926,9 +926,10 @@
         "label": "Clone com alteração de página e nome",
         "definition": "duplicate the full source campaign while preserving structure, audience, placements, bid strategy, copy and media; replace the destination Facebook Page identity, next sequential naming, page token and links/UTMs for the selected target page",
         "target_page_selection": {
-          "default": "page explicitly selected by Nicolas",
-          "when_selection_is_delegated": "choose the eligible running Messenger page with the lowest active LEADS in the live Smart Bidding Messenger Pages dashboard",
-          "reconciliation": "require unique UTM_CAMPAIGN pg_XXXXX plus FB_PAGE_ID match",
+          "default": "when Nicolas does not specify the target Page in a clone_page_switch request, pause the intake and ask which exact Page/pg_XXXXX must be used",
+          "automatic_selection": "forbidden unless Nicolas gives a new explicit per-request instruction delegating the choice after being asked",
+          "reconciliation": "after Nicolas identifies the target, require unique UTM_CAMPAIGN pg_XXXXX plus FB_PAGE_ID match",
+          "missing_page_behavior": "no manifest sealing, no Meta write and no inferred Page; ask Nicolas in normal conversation",
           "tie_or_invalid_source": "ask Nicolas; never choose by assumption"
         },
         "messenger_json": "update the mandatory Messenger JSON for the selected target page and validate the complete version before execution",
@@ -947,7 +948,7 @@
       "exact daily budget",
       "new assets, ad names and copy when clone_prestaged",
       "exact source, revised copy/event/targeting delta and deletion order when replacement_revision",
-      "target page, pg_XXXXX and Smart Bidding LEADS evidence when clone_page_switch selection is delegated",
+      "target page and pg_XXXXX are mandatory for clone_page_switch; if Nicolas explicitly delegates selection only after being asked, require live eligible-page and LEADS evidence",
       "updated full Messenger JSON when clone_page_switch",
       "every requested exception to audience, placements, structure or strategy"
     ],

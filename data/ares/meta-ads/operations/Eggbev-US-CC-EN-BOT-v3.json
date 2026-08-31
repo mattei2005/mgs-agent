@@ -75,6 +75,13 @@
         "pg_XXXXX and destination tracking only when confirmed",
         "complete Messenger JSON for the target Page"
       ],
+      "target_page_policy": {
+        "required_from_manager": true,
+        "when_omitted": "pause the intake and ask Nicolas which exact Page/pg_XXXXX must be used",
+        "automatic_inference": false,
+        "delegation": "only a new explicit per-request instruction from Nicolas after the question may delegate selection",
+        "write_gate": "without the exact target Page there is no manifest sealing and no Meta write"
+      },
       "media_registry_required": false,
       "source_ad_lineage_required": true
     },

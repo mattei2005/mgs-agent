@@ -9,6 +9,7 @@ INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas
   4. Com criativos novos: quais assets e qual copy usar?
   5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?
   6. Existe alguma exceção de público, placements, estratégia ou tracking?
+- Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma nova instrução explícita de Nicolas no próprio pedido.
 - Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma que os valores são iguais sem o gestor dizer.
 - Duplicação exata preserva integralmente estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget escolhido pelo gestor, nome DUPnn e início/status.
 - Naming: preserve o nome-base integral da campanha e adicione DUP01. Duplicações seguintes usam DUP02, DUP03 etc. Se a fonte já terminar em DUPnn, recupere o mesmo nome-base e use o próximo número livre após ler todas as campanhas não deletadas.

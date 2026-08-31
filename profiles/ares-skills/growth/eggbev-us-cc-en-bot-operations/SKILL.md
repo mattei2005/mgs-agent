@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.26.0-draft
+version: 0.18.1-draft
 author: Ares
 license: internal
 metadata:
@@ -296,7 +296,7 @@ Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Cr
 
 - `pure_clone` (**duplicação exata**): preserva estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs; mudam apenas IDs técnicos inevitáveis, budget escolhido pelo gestor, nome `DUPnn` e início/status;
 - `clone_prestaged`: preserva lineage/estrutura e usa de 1 a 5 criativos novos aprovados, reconciliados e pre-stageados;
-- `clone_page_switch`: preserva estrutura, público, placements, estratégia, copy e mídia, mas troca Facebook Page, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página é indicada por Nicolas; quando ele delegar a escolha, usar a página elegível em entrega com menor `LEADS` após match único `UTM_CAMPAIGN + FB_PAGE_ID`. Empate, fonte stale ou mapping inválido bloqueia a escolha automática.
+- `clone_page_switch`: preserva estrutura, público, placements, estratégia, copy e mídia, mas troca Facebook Page, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página deve ser indicada por Nicolas. Se o pedido omitir a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada; nunca inferir nem selecionar automaticamente. Uma escolha delegada só pode ocorrer após nova instrução explícita de Nicolas no próprio pedido. Sem Page exata, não selar manifest e não fazer write Meta.
 - `clone_prestaged` em **substituição revisada explicitamente autorizada**: pode rematerializar novos creatives/ads a partir da mesma linhagem visual da fonte para corrigir copy, evento ou outro campo materializado, desde que o manifest identifique a campanha fonte, a sucessora `DUPnn`, os `source_ad_id`, as mudanças exatas e a exclusão posterior da fonte. Fonte e sucessora nunca viram dois candidatos independentes; a fonte só é deletada após readback completo da sucessora, e a sucessora só publica após o OK final do gestor.
 
 Naming obrigatório: preservar o nome-base integral e adicionar o próximo número livre `DUP01`, `DUP02`, `DUP03`… Se a fonte já terminar em `DUPnn`, remover apenas esse sufixo para recuperar o mesmo nome-base e usar o próximo número livre após scan das campanhas não deletadas.

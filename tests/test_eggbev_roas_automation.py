@@ -526,7 +526,7 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(keys[-1], '162·C001·D55/pg_5024')
         self.assertEqual(len(keys), 55)
         self.assertEqual(len(set(keys)), 55)
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação']
+        headers = list(cycle.CANONICAL_DESKTOP_HEADERS)
         pages = cycle._compact_table_pages(headers, rows, max_chars=1750, max_rows=10)
         self.assertEqual(len(pages), 6)
         self.assertTrue(all(page.count('\n') <= 13 for page in pages))
@@ -545,7 +545,7 @@ class ReportingTests(unittest.TestCase):
             'roi_real': 12.3, 'roi_estimated': -5.5,
         }
         campaigns = [dict(base, purchase_roas=roas) for roas in (.3, .4, .5, None)]
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação']
+        headers = list(cycle.CANONICAL_DESKTOP_HEADERS)
         pages = cycle._compact_table_pages(headers, cycle._dashboard_desktop_rows(campaigns, .4), max_chars=1750)
         self.assertGreaterEqual(len(pages), 1)
         for table in pages:

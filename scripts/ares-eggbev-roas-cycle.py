@@ -46,6 +46,11 @@ def _load_reporting():
 
 reporting = _load_reporting()
 
+CANONICAL_DESKTOP_HEADERS = (
+    'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
+    'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação',
+)
+
 
 def parse_at(value: str | None) -> dt.datetime:
     if not value:
@@ -574,6 +579,8 @@ def _dashboard_card_lines(index: int, row: dict[str, Any], threshold: Any) -> li
 
 def _aligned_table(headers: list[str], rows: list[list[str]]) -> str:
     """Render the compact two-space table used by CPV 13 Intraday."""
+    if any(len(row) != len(headers) for row in rows):
+        raise ValueError('compact table row must preserve every canonical column')
     material = [headers, *rows]
     widths = [max(_display_width(row[index]) for row in material) for index in range(len(headers))]
 
@@ -777,10 +784,7 @@ def _dashboard_desktop_rows(
 def _append_desktop_dashboard(
     lines: list[str], campaigns: list[dict[str, Any]], threshold: Any, max_chars: int = 1750,
 ) -> None:
-    headers = [
-        'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
-        'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação',
-    ]
+    headers: list[str] = [str(value) for value in CANONICAL_DESKTOP_HEADERS]
     pages = _compact_table_pages(
         headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars, max_rows=10,
     )
