@@ -1025,7 +1025,7 @@ def post_to_thread(thread_id: str, message: str, part_label: str | None = None) 
         if status not in {200, 201} or not message_id:
             return {'ok': False, 'http_status': status, 'posted_count': len(posted)}
         read_status, read_body = discord_request('GET', f'/channels/{thread_id}/messages/{message_id}')
-        if read_status != 200 or not isinstance(read_body, dict) or norm(read_body.get('content')) != chunk:
+        if read_status != 200 or not isinstance(read_body, dict) or norm(read_body.get('content')) != norm(chunk):
             return {'ok': False, 'http_status': read_status, 'posted_count': len(posted), 'stage': 'readback'}
         posted.append(message_id)
     return {'ok': True, 'posted_count': len(posted), 'message_ids': posted, 'content_sha256': hashlib.sha256(message.encode()).hexdigest()}

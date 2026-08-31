@@ -772,6 +772,25 @@ class ReportingTests(unittest.TestCase):
             self.assertEqual(content.count('```') % 2, 0)
             self.assertTrue(content.startswith('**⚔️ Corte & ROAS • Parte '))
 
+    def test_roas_cycle_discord_readback_accepts_trimmed_trailing_newline(self):
+        stored = {}
+
+        def fake_request(method, path, body=None):
+            if method == 'POST':
+                self.assertIsInstance(body, dict)
+                assert isinstance(body, dict)
+                message_id = str(len(stored) + 1)
+                stored[message_id] = body['content']
+                return 200, {'id': message_id}
+            message_id = path.rsplit('/', 1)[-1]
+            return 200, {'id': message_id, 'content': stored[message_id].rstrip()}
+
+        with mock.patch.object(common, 'discord_request', side_effect=fake_request):
+            result = common.post_to_thread('thread', 'relatório\n', None)
+
+        self.assertTrue(result['ok'])
+        self.assertEqual(result['posted_count'], 1)
+
     def test_roas_cycle_high_volume_keeps_each_campaign_once_in_desktop_table(self):
         campaigns = []
         decisions = []
