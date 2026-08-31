@@ -145,6 +145,10 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertIn('source_ad_lineage', sealed['prevalidation']['checks'])
         self.assertNotIn('media_registry_exact', sealed['prevalidation']['checks'])
 
+        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+        with self.assertRaisesRegex(ManifestError, 'does not support mode clone_page_switch'):
+            validate_account_policy(Manifest.from_dict(sealed), config)
+
         stages = Planner(bundle_size=2, max_ads_per_batch=10).build(Manifest.from_dict(sealed)).lanes[ACCOUNT_ID][0].stages
         self.assertEqual(
             [stage.name for stage in stages],
@@ -178,7 +182,10 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertIn(ACCOUNT_ID, config['accounts'])
         self.assertEqual(config['accounts'][ACCOUNT_ID]['alias'], 'Eggbev-US-CC-EN-01-G006')
         self.assertIn('clone_page_switch', config['supported_modes'])
-        self.assertTrue((ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json').exists())
+        self.assertNotIn('clone_page_switch', config['accounts'][ACCOUNT_ID]['supported_modes'])
+        operation_v3 = json.loads((ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json').read_text())
+        self.assertNotIn('clone_page_switch', operation_v3['supported_modes'])
+        self.assertFalse(operation_v3['mode_contract']['clone_page_switch']['write_enabled'])
         self.assertTrue((ROOT / 'data/ares/discord/thread-prompts/1543333373945053184.txt').exists())
 
     def test_account_policy_accepts_active_midnight_dup_with_budget(self):

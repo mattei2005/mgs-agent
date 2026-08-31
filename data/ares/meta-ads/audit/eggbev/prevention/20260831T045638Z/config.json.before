@@ -92,7 +92,7 @@
       "token_type": "user_access_token",
       "timezone": "America/New_York",
       "ad_serving_route": "direct_and_lineage_verified",
-      "supported_modes": ["pure_clone", "clone_prestaged", "from_zero_prestaged"],
+      "supported_modes": ["pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"],
       "campaign_policy": {
         "name_regex": ".+ DUP[0-9]{2,}$",
         "budget_update_required": true,

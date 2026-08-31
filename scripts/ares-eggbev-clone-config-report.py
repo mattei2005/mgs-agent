@@ -27,6 +27,7 @@ def check() -> dict:
     cloning = operation['campaign_cloning_policy']
     expected_modes = {'pure_clone', 'clone_prestaged', 'clone_page_switch'}
     engine_modes = set(engine.get('supported_modes') or [])
+    account_modes = set(((engine.get('accounts') or {}).get(ACCOUNT_ID) or {}).get('supported_modes') or [])
     contract_modes = set(cloning.get('allowed_modes') or {})
     main_page_policy = ((cloning.get('allowed_modes') or {}).get('clone_page_switch') or {}).get('target_page_selection') or {}
     v3_page_policy = ((operation_v3.get('mode_contract') or {}).get('clone_page_switch') or {}).get('target_page_policy') or {}
@@ -38,6 +39,12 @@ def check() -> dict:
         'account_alias_matches': (engine.get('accounts') or {}).get(ACCOUNT_ID, {}).get('alias') == 'Eggbev-US-CC-EN-01-G006',
         'engine_release_3_4': engine.get('release_version') == operation_v3.get('release_version') == '3.4.1',
         'engine_modes_complete': expected_modes <= engine_modes,
+        'account_safe_modes_enabled': {'pure_clone', 'clone_prestaged'} <= account_modes,
+        'page_switch_fail_closed_before_write': (
+            'clone_page_switch' not in account_modes
+            and operation_v3['mode_contract']['clone_page_switch'].get('write_enabled') is False
+            and account['runtime_routes']['campaign_cloning'].get('clone_page_switch_write_enabled') is False
+        ),
         'contract_modes_complete': expected_modes <= contract_modes,
         'v3_operation_account_matches': str(operation_v3.get('account_id')) == ACCOUNT_ID,
         'account_route_registered': account['runtime_routes']['campaign_cloning'].get('engine_account_registered') is True,
@@ -62,10 +69,10 @@ def render() -> str:
         f"- Thread: `Eggbev-US-CC-EN Clonar Campanhas` (`{operation_v3['thread_id']}`).",
         f"- Conta: `{operation_v3['account_alias']}` | USD | `{operation_v3['timezone']}`.",
         f"- Engine: v{operation_v3['release_version']} | onboarding: {'OK' if result['checks']['account_registered'] else 'PENDENTE'}.",
-        '- Modos: `duplicação exata`, `criativos novos`, `troca de página`; a substituição revisada é um branch explícito de `clone_prestaged`.',
+        '- Modos com write: `duplicação exata` e `criativos novos`; a substituição revisada é um branch explícito de `clone_prestaged`.',
         '- Exata: preserva estrutura, público, placements, estratégia, Page, JSON, mídia, copy, links e UTMs.',
         '- Criativos novos: 1–5 ads, mídia aprovada/reconciliada/pre-stageada.',
-        '- Troca de página: preserva mídia/copy; troca Page, pg/UTM e JSON; exige lineage dos ads.',
+        '- Troca de página: **fail-closed antes de qualquer write Meta**. O modo saiu da allowlist desta conta após os erros live 1885090/2238280; permanece bloqueado até arquitetura determinística aprovada por Rodolfo.',
         '- Page obrigatória: se não vier no pedido, pausar e perguntar qual Page/pg exata será usada; nunca inferir automaticamente.',
         '- Substituição revisada: preserva a linhagem visual, rematerializa copy/evento/targeting aprovados e só deleta a fonte após readback completo da sucessora.',
         '- Naming: nome-base original + `DUP01`, `DUP02`, `DUP03`…; dup de dup usa o próximo número livre.',

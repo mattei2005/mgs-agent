@@ -19,6 +19,7 @@
   "supported_modes": [
     "pure_clone",
     "clone_prestaged",
+    "clone_page_switch",
     "from_zero_prestaged"
   ],
   "mode_contract": {
@@ -82,9 +83,7 @@
         "write_gate": "without the exact target Page there is no manifest sealing and no Meta write"
       },
       "media_registry_required": false,
-      "source_ad_lineage_required": true,
-      "write_enabled": false,
-      "blocked_reason": "Fail-closed after live Meta evidence on 2026-08-31: copied ad sets reject promoted_object Page updates (1885090), cross-Page ad copies reject conflicting PBIA identities (2238280), and the current v3 manifest does not materialize the approved direct target-adset/direct-ad recovery as a deterministic mode. The incident request was recovered separately by exact manager authorization and readback; new clone_page_switch manifests must fail before any Meta write until Rodolfo approves the global engine architecture change."
+      "source_ad_lineage_required": true
     },
     "from_zero_prestaged": {
       "label": "criação do zero com criativos novos pre-stageados",

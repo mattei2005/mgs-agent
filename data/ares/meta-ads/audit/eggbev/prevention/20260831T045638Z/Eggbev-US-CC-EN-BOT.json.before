@@ -1010,16 +1010,14 @@
         "delivery_state": "campaign, ad set and every ad configured ACTIVE for the approved scheduled start",
         "media_and_copy": "preserve source media and copy",
         "prepublication_gate": "show source, target page, LEADS evidence, naming, pg token, links/UTMs, full Messenger JSON, manager-selected budget, start time and statuses; wait for explicit per-request OK",
-        "engine_support": "schema and planner remain for audit compatibility, but write is fail-closed at Engine v3 account prevalidation because clone_page_switch was removed from the Eggbev supported_modes allowlist after live Meta failures",
+        "engine_support": "schema, manifest planner, prevalidation and resumable checkpoints exist, but the copied-adset write method is blocked by live Meta promoted_object immutability",
       "live_runtime_evidence_20260831": {
         "source_request": "eggbev-clone-tina-c003-all-modes-20260830-nicolas-01",
         "pure_clone": "live validated through shallow exact recovery after deep-copy limit; complete direct readback",
         "clone_prestaged": "live validated with three new creatives; ad/copies rematerialized video IDs and lineage was reconciled by marker, checksum, orientation and duration",
         "copied_adset_page_switch": "blocked for write: Meta rejected promoted_object.page_id update with subcode 1885090",
         "partial_shell": "resumable campaign plus copied ad set with old Page and zero ads; no delivery possible",
-        "manager_approved_recovery_completed": "Nicolas explicitly authorized correction and immediate publication on 2026-08-31. The persisted campaign shell was reused; a new target-Page ad set and three target-Page creatives/ads were created, the old wrong-Page ad set was paused, and the corrected hierarchy was activated after exact readback; no deletion or budget/billing change.",
-        "additional_live_failures": "fresh target-adset creation required removing explore_home after Graph 2490392; cross-Page /ad copies then failed with PBIA conflict 2238280, so the scoped recovery used Eggbev direct creative/ad creation with exact source media/copy/Page/UTM/Messenger payload.",
-        "prevention": "clone_page_switch is excluded from the Eggbev Engine v3 account supported_modes allowlist. New manifests fail before any Meta write until Rodolfo approves and the central engine implements/tests a deterministic target-adset/direct-ad architecture.",
+        "approved_recovery_required": "before any further write, obtain explicit manager approval to create a new ad set already carrying the target Page, pause the old ad set and rematerialize ads with target Page/UTM/JSON; never delete without a separate gate",
         "readback_recovery": "when outer batch readback is limited after completed writes, use checkpoint IDs and direct GETs; never replay creation"
       }
       }

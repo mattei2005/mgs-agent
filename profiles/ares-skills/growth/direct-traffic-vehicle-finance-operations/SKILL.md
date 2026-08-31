@@ -167,6 +167,19 @@ Para `CREATIVE_CUT_24H`, carregar obrigatoriamente `references/creative-cut-24h-
 
 Decisão de Rodolfo consolidada em 30–31/08/2026: a estratégia `CREATIVE_CUT_24H` pertence à conta operacional **05** (`2039876850230678`) e está atribuída às três campanhas de IDs técnicos preservados, agora identificadas pontualmente como C01, C02 e C03. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3`. A conta 05 possui watcher de primeiro gasto, relatórios Diário/Intraday read-only e runner separado de corte automático explicitamente autorizado: após cada janela completa e reconciliação Meta×SB, pode pausar o anúncio dominante nos gates `80/10/10` e `90/10` ou pausar a campanha no estágio terminal; nunca altera budget/adset, reativa anúncio ou exclui campanha. A renumeração pontual `01/02/03` dessas três campanhas — inclusive wrappers account-05 `b01fb05c01–c03` reconciliados na tarefa própria — não redefine o padrão geral de naming/numeração de campanhas futuras.
 
+### Conta 05 — sequência nova e prioridade do acervo histórico
+
+Por decisão explícita de Rodolfo em 31/08/2026, a sequência de produção nova da conta 05 continua em `C04`, `C05`, `C06`... após as novas C01–C03. As campanhas históricas desativadas com números C04–C48 são legado anterior e **não ocupam nem bloqueiam** esses números para a sequência nova. Preservar os objetos antigos e nunca executar replacement ou exclusão apenas por colisão nominal; a repetição do número/wrapper entre uma campanha histórica desativada e uma nova campanha é intencional nesta conta. A identidade decisória e a auditoria usam sempre os IDs Meta exatos.
+
+Antes de buscar criativos no Shared Drive para novas campanhas da conta 05:
+
+1. Abrir Smart Bidding `Reports > Adgroup`, filtrar `ACCOUNT_NAME=Creditoparaveiculo-BR-CAR-BR-05-G006`, usar USD e `NET_REVENUE` com `Discount revenue share` habilitado.
+2. Considerar as campanhas históricas desativadas C04–C48; excluir artefatos de cópia cuja linha não represente a campanha histórica original.
+3. Agregar ROI por `CAMPAIGN_ID + UTM_ADGROUP` com `(ΣNET_REVENUE − ΣINVESTIMENT) × 100 ÷ ΣINVESTIMENT`, exigindo investimento positivo, e priorizar os adgroups de melhor ROI. Empates usam maior investimento e ID estável.
+4. Ler os anúncios do adgroup vencedor por Meta API, preservar apenas os três slots canônicos e deduplicar a mídia por `creative_id`, `video_id`, `image_hash` e fingerprint antes da reserva.
+5. Reaproveitar primeiro esse acervo Meta histórico desativado, preservando lineage e sem reativar a campanha antiga. Só depois que todos os criativos históricos elegíveis tiverem sido testados — ou forem tecnicamente inelegíveis — voltar ao pool do Drive.
+6. Copy/headlines, estrutura 1×1×3, budget, MAXVOL, evento, data e demais campos seguem o padrão vigente da conta; “criativo” aqui significa somente imagem/vídeo, não autoriza herdar copy histórica divergente.
+
 Nunca pausar conjunto como substituto. Relatórios usam o status real da campanha e, em `CREATIVE_CUT_24H`, também exibem o estado dos anúncios e da janela. Se existir legado com campanha ativa e filhos pausados sem atribuição dessa estratégia, mencionar como observação e não inferir autorização.
 
 ## Estrutura padrão de lançamento
