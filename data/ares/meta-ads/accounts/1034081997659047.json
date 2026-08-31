@@ -51,6 +51,8 @@
           "normal_production_status": "ACTIVE with future start_time after final summary approval",
           "technical_canary_status": "PAUSED until separate activation approval",
           "write_enabled": true,
+          "messenger_template_name": "JSON-AGT",
+          "messenger_template_name_scope": "all future Ares-created or rematerialized Messenger JSON creatives; no retroactive update",
           "write_gate": "request inputs complete, scoped Drive-Meta reconciliation, on-demand prestage, prevalidated manifest, Nicolas explicit OK with exact budget and --confirm-execute",
           "blocked_reasons": []
         },
@@ -68,6 +70,7 @@
           "clone_page_switch_blocked_reason": "Live Meta evidence: copied adset promoted_object Page is immutable (1885090) and cross-Page ad copy conflicts on PBIA (2238280). Engine account allowlist excludes clone_page_switch, so prevalidation fails before writes until a Rodolfo-approved deterministic target-adset/direct-ad architecture is released.",
           "validate_plan_enabled": true,
           "write_enabled": true,
+          "messenger_template_name": "JSON-AGT when clone mode rematerializes JSON; pure_clone preserves source without rewrite",
           "write_gate": "live source preflight, prevalidated manifest, final summary, Nicolas explicit per-request OK with exact budget and --confirm-execute",
           "default_delivery": "ACTIVE at next-day 00:00 America/New_York",
           "naming": "preserve original base and append the next free DUPnn"

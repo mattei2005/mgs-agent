@@ -40,6 +40,7 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
             "Primary text",
             "GET_STARTED_PAYLOAD",
             "eggbev-us-cc-en-messenger-welcome.json",
+            "JSON-AGT",
             "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad",
             "DIGITAL TRUST",
             "ACTIVE",
@@ -92,6 +93,8 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         self.assertEqual(template["semantic_sha256"], "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad")
         self.assertIn("creative loads this file", template["injection_policy"])
         self.assertIn("compared directly", template["readback_policy"])
+        self.assertEqual(template["template_name"], "JSON-AGT")
+        self.assertIn("template_name=JSON-AGT", self.report)
         self.assertIn("Toda campanha nova carrega esse arquivo", self.report)
 
     def test_runtime_truth_is_explicit(self):

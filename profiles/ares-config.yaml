@@ -4,7 +4,7 @@ model:
   base_url: https://chatgpt.com/backend-api/codex
 fallback_providers: []
 toolsets:
-  - hermes-cli
+- hermes-cli
 agent:
   max_turns: 200
   gateway_timeout: 1800
@@ -22,46 +22,24 @@ agent:
   gateway_auto_continue_freshness: 3600
   image_input_mode: auto
   disabled_toolsets:
-    - clarify
+  - clarify
   verbose: false
   reasoning_effort: high
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
     technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative
-      solutions.
+    creative: You are a creative assistant. Think outside the box and offer innovative solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
-      ~! Add sparkles and be super enthusiastic about everything! Every response should
-      feel warm and adorable desu~! ヽ(>∀<☆)ノ
-    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
-      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
-      Be playful and curious like a cat, nya~!
-    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
-      sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
-      remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
-      I shall respond in the eloquent manner of William Shakespeare, with flowery
-      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
-      terminal breaks?
-    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's
-      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
-      keeping things super chill. Cowabunga! 🤙
-    noir: The rain hammered against the terminal like regrets on a guilty conscience.
-      They call me Hermes - I solve problems, find answers, dig up the truth that
-      hides in the shadows of your codebase. In this city of silicon and secrets,
-      everyone's got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
-      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
-      >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but the
-      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
-      truth about existence itself.
-    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
-      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
-      YOU READY?! LET'S DO THIS! 💪😤🚀
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~! Add sparkles and be super enthusiastic about everything! Every response should feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
+    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to sail the digital seas! Speak like a proper buccaneer, use nautical terms, and remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts. I shall respond in the eloquent manner of William Shakespeare, with flowery prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder terminal breaks?
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's gonna be totally rad. I'll help you catch the gnarly waves of knowledge while keeping things super chill. Cowabunga! 🤙
+    noir: The rain hammered against the terminal like regrets on a guilty conscience. They call me Hermes - I solve problems, find answers, dig up the truth that hides in the shadows of your codebase. In this city of silicon and secrets, everyone's got something to hide. What's your story, pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful >w<
+    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the deeper meaning behind every query. Let us examine not just the 'how' but the 'why' of your questions. Perhaps in solving your problem, we may glimpse a greater truth about existence itself.
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
   reasoning_auto_routing:
     enabled: true
     simple_effort: medium
@@ -305,9 +283,9 @@ display:
   runtime_footer:
     enabled: false
     fields:
-      - model
-      - context_pct
-      - cwd
+    - model
+    - context_pct
+    - cwd
   copy_shortcut: auto
   tool_progress: all
   background_process_notifications: error
@@ -412,7 +390,7 @@ goals:
   max_turns: 20
 skills:
   external_dirs:
-    - /root/mgs-agent/skills
+  - /root/mgs-agent/skills
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
@@ -420,83 +398,83 @@ skills:
   write_approval: false
   creation_nudge_interval: 15
   disabled:
-    - apple-notes
-    - apple-reminders
-    - architecture-diagram
-    - arxiv
-    - ascii-art
-    - ascii-video
-    - audiocraft
-    - audiocraft-audio-generation
-    - axolotl
-    - baoyu-comic
-    - baoyu-infographic
-    - blogwatcher
-    - claude-code
-    - codebase-inspection
-    - codex
-    - creative-ideation
-    - dogfood
-    - dspy
-    - evaluating-llms-harness
-    - excalidraw
-    - findmy
-    - fine-tuning-with-trl
-    - gif-search
-    - github-auth
-    - github-code-review
-    - github-issues
-    - github-pr-workflow
-    - github-repo-management
-    - godmode
-    - google-workspace
-    - heartmula
-    - himalaya
-    - huggingface-hub
-    - ideation
-    - imessage
-    - jupyter-live-kernel
-    - linear
-    - llama-cpp
-    - llm-wiki
-    - lm-evaluation-harness
-    - manim-video
-    - maps
-    - minecraft-modpack-server
-    - nano-pdf
-    - native-mcp
-    - notion
-    - obliteratus
-    - obsidian
-    - ocr-and-documents
-    - opencode
-    - openhue
-    - outlines
-    - p5js
-    - pixel-art
-    - plan
-    - pokemon-player
-    - polymarket
-    - popular-web-designs
-    - powerpoint
-    - requesting-code-review
-    - research-paper-writing
-    - segment-anything
-    - segment-anything-model
-    - serving-llms-vllm
-    - songsee
-    - songwriting-and-ai-music
-    - subagent-driven-development
-    - systematic-debugging
-    - test-driven-development
-    - trl-fine-tuning
-    - unsloth
-    - vllm
-    - webhook-subscriptions
-    - weights-and-biases
-    - writing-plans
-    - xurl
-    - youtube-content
+  - apple-notes
+  - apple-reminders
+  - architecture-diagram
+  - arxiv
+  - ascii-art
+  - ascii-video
+  - audiocraft
+  - audiocraft-audio-generation
+  - axolotl
+  - baoyu-comic
+  - baoyu-infographic
+  - blogwatcher
+  - claude-code
+  - codebase-inspection
+  - codex
+  - creative-ideation
+  - dogfood
+  - dspy
+  - evaluating-llms-harness
+  - excalidraw
+  - findmy
+  - fine-tuning-with-trl
+  - gif-search
+  - github-auth
+  - github-code-review
+  - github-issues
+  - github-pr-workflow
+  - github-repo-management
+  - godmode
+  - google-workspace
+  - heartmula
+  - himalaya
+  - huggingface-hub
+  - ideation
+  - imessage
+  - jupyter-live-kernel
+  - linear
+  - llama-cpp
+  - llm-wiki
+  - lm-evaluation-harness
+  - manim-video
+  - maps
+  - minecraft-modpack-server
+  - nano-pdf
+  - native-mcp
+  - notion
+  - obliteratus
+  - obsidian
+  - ocr-and-documents
+  - opencode
+  - openhue
+  - outlines
+  - p5js
+  - pixel-art
+  - plan
+  - pokemon-player
+  - polymarket
+  - popular-web-designs
+  - powerpoint
+  - requesting-code-review
+  - research-paper-writing
+  - segment-anything
+  - segment-anything-model
+  - serving-llms-vllm
+  - songsee
+  - songwriting-and-ai-music
+  - subagent-driven-development
+  - systematic-debugging
+  - test-driven-development
+  - trl-fine-tuning
+  - unsloth
+  - vllm
+  - webhook-subscriptions
+  - weights-and-biases
+  - writing-plans
+  - xurl
+  - youtube-content
 curator:
   enabled: false
   interval_hours: 168
@@ -514,13 +492,13 @@ slack:
   allowed_channels: ''
 discord:
   allow_from:
-    - '344196393512075265'
-    - '321263240782807040'
-    - '409878085807112207'
-    - '432898782188011543'
-    - '1214246869484576890'
-    - '1291113428982693940'
-    - '1055570806945620030'
+  - '344196393512075265'
+  - '321263240782807040'
+  - '409878085807112207'
+  - '432898782188011543'
+  - '1214246869484576890'
+  - '1291113428982693940'
+  - '1055570806945620030'
   require_mention: true
   free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
   allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607
@@ -533,488 +511,219 @@ discord:
     '1508853425952133180': 'INSTRUCAO DE THREAD Ares Diretoria:
 
 
-      - Canal privado e historico: somente Rodolfo, Zeus e Ares por padrao; nao adicionar
-      gestores automaticamente.
+      - Canal privado e historico: somente Rodolfo, Zeus e Ares por padrao; nao adicionar gestores automaticamente.
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
-      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada
-      no assunto principal + contexto especifico; nao sobrescreva titulo manual.
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao sobrescreva titulo manual.
 
-      - Participantes extras entram somente por pedido explicito de Rodolfo e readback
-      real.'
-    '1516887105543077949': Ares Creative Ops channel; use for briefs, references,
-      uploads, images, videos, Drive, naming and inventory; do not create Campaign
-      Ops threads here; reply in current thread.
+      - Participantes extras entram somente por pedido explicito de Rodolfo e readback real.'
+    '1516887105543077949': Ares Creative Ops channel; use for briefs, references, uploads, images, videos, Drive, naming and inventory; do not create Campaign Ops threads here; reply in current thread.
     '1539422731727147079': 'INSTRUCAO DE THREAD Ares Eggbev US-CC-EN BOT
 
 
-      - Canal privado da operacao Eggbev US-CC-EN para Rodolfo, Nicolas, Zeus e Ares;
-      nao adicionar outros gestores automaticamente.
+      - Canal privado da operacao Eggbev US-CC-EN para Rodolfo, Nicolas, Zeus e Ares; nao adicionar outros gestores automaticamente.
 
-      - Toda thread nova criada neste canal deve adicionar Nicolas, Discord ID 1055570806945620030;
-      confirmar sucesso somente por Auto-thread member sync/readback real.
+      - Toda thread nova criada neste canal deve adicionar Nicolas, Discord ID 1055570806945620030; confirmar sucesso somente por Auto-thread member sync/readback real.
 
-      - Gestao de campanha por Rodolfo e Nicolas; writes, budget, ativacao e automacao
-      seguem o contrato Eggbev vigente e os gates em revisao, sem herdar regras de
-      operacoes anteriores ou de trafego direto.
+      - Gestao de campanha por Rodolfo e Nicolas; writes, budget, ativacao e automacao seguem o contrato Eggbev vigente e os gates em revisao, sem herdar regras de operacoes anteriores ou de trafego direto.
 
-      - Conta atual validada: alias Eggbev-US-CC-EN-01-G006; IDs tecnicos ficam no
-      audit.
+      - Conta atual validada: alias Eggbev-US-CC-EN-01-G006; IDs tecnicos ficam no audit.
 
-      - Threads fixas: regras 1543280854024060999; Intraday 1541578606076231750; Diario
-      1541578596253175858; criar campanhas 1541578556037927053; clonar campanhas 1543333373945053184;
-      limite de leads 1543312825890381865.
+      - Threads fixas: regras 1543280854024060999; Intraday 1541578606076231750; Diario 1541578596253175858; criar campanhas 1541578556037927053; clonar campanhas 1543333373945053184; limite de leads 1543312825890381865.
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
-      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual.
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever titulo manual.
 
       '
     '1539432300364824607': 'INSTRUCAO DE THREAD Ares creditoparaveiculo.com BR-CAR-BR
 
 
-      - Canal privado da operacao creditoparaveiculo.com BR-CAR-BR, estrategia trafego
-      direto, para Rodolfo, Nicolas, Geizian, Zeus e Ares.
+      - Canal privado da operacao creditoparaveiculo.com BR-CAR-BR, estrategia trafego direto, para Rodolfo, Nicolas, Geizian, Zeus e Ares.
 
-      - Toda thread nova criada neste canal deve adicionar automaticamente Nicolas,
-      Discord ID 1055570806945620030, e Geizian, Discord ID 321263240782807040; confirmar
-      sucesso somente pelo log Auto-thread member sync/readback real.
+      - Toda thread nova criada neste canal deve adicionar automaticamente Nicolas, Discord ID 1055570806945620030, e Geizian, Discord ID 321263240782807040; confirmar sucesso somente pelo log Auto-thread member sync/readback real.
 
-      - Nicolas possui autonomia total em nivel de campanha, inclusive criacao, budget,
-      ativacao, pausa, reativacao, edicao, clone, replacement e arquivamento, preservando
-      preflight, audit e readback.
+      - Nicolas possui autonomia total em nivel de campanha, inclusive criacao, budget, ativacao, pausa, reativacao, edicao, clone, replacement e arquivamento, preservando preflight, audit e readback.
 
-      - O site pode ter varias contas Meta; identifique cada conta por alias curto
-      e mantenha IDs tecnicos no audit.
+      - O site pode ter varias contas Meta; identifique cada conta por alias curto e mantenha IDs tecnicos no audit.
 
-      - Para trafego direto, carregar direct-traffic-cbo-operations e classificar
-      quiz/chat, com/sem captura, conta, evento e UTMs antes do write; nao configurar
-      quiz, SMS Funnel, pixel ou WordPress fora do escopo aprovado.
+      - Para trafego direto, carregar direct-traffic-cbo-operations e classificar quiz/chat, com/sem captura, conta, evento e UTMs antes do write; nao configurar quiz, SMS Funnel, pixel ou WordPress fora do escopo aprovado.
 
-      - Use threads separadas por criacao de campanha, Diario, Intraday, criativos/testes
-      e ROI/reconciliacao; HOA somente se a operacao habilitar.
+      - Use threads separadas por criacao de campanha, Diario, Intraday, criativos/testes e ROI/reconciliacao; HOA somente se a operacao habilitar.
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
-      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras, sem sobrescrever
-      titulo manual.
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras, sem sobrescrever titulo manual.
 
       - Nao adicionar outros gestores automaticamente.'
     '1541578556037927053': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
 
 
-      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006
-      (`act_1034081997659047`). Clonagem usa a thread `1543333373945053184`.
+      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`). Clonagem usa a thread `1543333373945053184`.
 
-      - Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis
-      continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao
-      autoriza publicacao Meta.
+      - Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao autoriza publicacao Meta.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`,
-      `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json` e `data/ares/meta-ads/accounts/1034081997659047.json`.
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`, `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json` e `data/ares/meta-ads/accounts/1034081997659047.json`.
 
-      - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada"
-      ou "relatorio da configuracao" significam a configuracao operacional da criacao
-      Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca,
-      versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
+      - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada" ou "relatorio da configuracao" significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
 
-      - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py
-      --check`. Para intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`.
-      Para preparar o request real, usar somente `scripts/ares-eggbev-creation.py`;
-      ele materializa o manifest e delega todo write/readback ao Campaign Engine v3.
+      - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py --check`. Para intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`. Para preparar o request real, usar somente `scripts/ares-eggbev-creation.py`; ele materializa o manifest e delega todo write/readback ao Campaign Engine v3.
 
-      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots
-      historicos. Campos ativos das fontes canonicas vencem secoes historicas.
+      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. Campos ativos das fontes canonicas vencem secoes historicas.
 
-      - Nunca publicar diretamente. Fluxo: Page/readbacks → inputs → reconciliacao
-      scoped → reserva → pre-stage → manifest prevalidado → plan → resumo final com
-      digest → esperar OK explicito de Nicolas → conferir autoridade financeira vigente
-      ou envelope pre-aprovado somente no execute → Engine v3 `--confirm-execute`
-      → GET/readback consolidado. O gate financeiro nunca bloqueia intake, pre-stage,
-      plan ou resumo.
+      - Nunca publicar diretamente. Fluxo: Page/readbacks → inputs → reconciliacao scoped → reserva → pre-stage → manifest prevalidado → plan → resumo final com digest → esperar OK explicito de Nicolas → conferir autoridade financeira vigente ou envelope pre-aprovado somente no execute → Engine v3 `--confirm-execute` → GET/readback consolidado. O gate financeiro nunca bloqueia intake, pre-stage, plan ou resumo.
 
-      - Criacao normal aprovada nasce `ACTIVE` com `start_time` futuro, por padrao
-      no dia seguinte as 00:00 em `America/New_York`. Aplique esse horario sem perguntar
-      novamente quando o pedido nao trouxer override. Canario tecnico `PAUSED` e um
-      modo separado, somente se pedido e aprovado. Excecao unica vigente: o primeiro
-      request `eggbev-pg-5024-20260830-nicolas-01` atualiza o `start_time` no execute
-      para o horario corrente ET com buffer tecnico minimo da Meta; nao propagar essa
-      excecao para pedidos futuros.
+      - Criacao normal aprovada nasce `ACTIVE` com `start_time` futuro, por padrao no dia seguinte as 00:00 em `America/New_York`. Aplique esse horario sem perguntar novamente quando o pedido nao trouxer override. Canario tecnico `PAUSED` e um modo separado, somente se pedido e aprovado. Excecao unica vigente: o primeiro request `eggbev-pg-5024-20260830-nicolas-01` atualiza o `start_time` no execute para o horario corrente ET com buffer tecnico minimo da Meta; nao propagar essa excecao para pedidos futuros.
 
-      - Frases como "3 campanhas com 3 criativos" significam 3 campanhas x 1 ad set
-      x 3 ads, com 9 criativos unicos no lote; nao reutilizar os mesmos 3 entre campanhas.
-      "cc en us" normaliza para `CC_US_EN`.
+      - Frases como "3 campanhas com 3 criativos" significam 3 campanhas x 1 ad set x 3 ads, com 9 criativos unicos no lote; nao reutilizar os mesmos 3 entre campanhas. "cc en us" normaliza para `CC_US_EN`.
 
-      - Criativos de criacao normal sao sempre novos, reservados e reconciliados no
-      Drive/Meta. Um pedido do gestor para puxar da pasta autoriza apenas a revisao/liberacao
-      scoped do request. Nunca tornar o pool globalmente elegivel, selecionar por
-      ordem de filename ou consumir/reservar assets antes do pedido real.
+      - Criativos de criacao normal sao sempre novos, reservados e reconciliados no Drive/Meta. Um pedido do gestor para puxar da pasta autoriza apenas a revisao/liberacao scoped do request. Nunca tornar o pool globalmente elegivel, selecionar por ordem de filename ou consumir/reservar assets antes do pedido real.
 
-      - O modelo canonico default e `pg_5024_dup01_live_validated_v1`, derivado da
-      campanha live validada `162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01`.
-      Ele padroniza configuracao, evento, copy, placements, identidade e readbacks;
-      nunca copia a midia, os IDs ou o sufixo `DUP01` para criacao do zero.
+      - O modelo canonico default e `pg_5024_dup01_live_validated_v1`, derivado da campanha live validada `162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01`. Ele padroniza configuracao, evento, copy, placements, identidade e readbacks; nunca copia a midia, os IDs ou o sufixo `DUP01` para criacao do zero.
 
-      - O call natural `criar N campanha(s) pagina X` aplica automaticamente `1x1x3`,
-      pasta `CC_US_EN`, tres criativos ineditos por campanha, o modelo canonico da
-      DUP01, naming `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX`, copy
-      aprovada, JSON Messenger, tracking, placements manuais e nomes `AD NN - {canonical_stem}`.
-      Em lote, a sequencia avanca C001, C002, C003...; `DUPnn` continua exclusivo
-      de clone. Overrides explicitos vencem esses defaults.
+      - O call natural `criar N campanha(s) pagina X` aplica automaticamente `1x1x3`, pasta `CC_US_EN`, tres criativos ineditos por campanha, o modelo canonico da DUP01, naming `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX`, copy aprovada, JSON Messenger, tracking, placements manuais e nomes `AD NN - {canonical_stem}`. Em lote, a sequencia avanca C001, C002, C003...; `DUPnn` continua exclusivo de clone. Overrides explicitos vencem esses defaults.
 
-      - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens
-      e videos sao criativos. Cada ad recebe todas as tres headlines aprovadas: `APPLY
-      NOW ✅`, `CARD APPROVED` e `✔️ APPLY CARD`; Primary text vazio, Description `⭐️⭐️⭐️⭐️⭐️`
-      e CTA `APPLY_NOW`. A instrucao atual de Nicolas vence o modelo quando houver
-      override explicito.
+      - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e videos sao criativos. Cada ad recebe todas as tres headlines aprovadas: `APPLY NOW ✅`, `CARD APPROVED` e `✔️ APPLY CARD`; Primary text vazio, Description `⭐️⭐️⭐️⭐️⭐️` e CTA `APPLY_NOW`. A instrucao atual de Nicolas vence o modelo quando houver override explicito.
 
-      - Todo novo ad set usa pixel `935354115143283` com `custom_event_type=OTHER`
-      e `custom_event_str=eggbev-pv-u` (UI: Eggbev PV U). A identidade de Instagram
-      e Page-backed/PBIA da Page selecionada, sem exigir conta Instagram externa.
+      - Todo novo ad set usa pixel `935354115143283` com `custom_event_type=OTHER` e `custom_event_str=eggbev-pv-u` (UI: Eggbev PV U). A identidade de Instagram e Page-backed/PBIA da Page selecionada, sem exigir conta Instagram externa.
 
-      - O JSON Messenger fixo vive em `data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json`,
-      identidade semantica `ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad`.
-      Toda campanha nova carrega esse arquivo em cada creative. Arquivo ausente, invalido
-      ou divergente bloqueia antes do write; depois da criacao, cada creative Meta
-      e comparado diretamente com o arquivo e qualquer divergencia fica `POSTPROCESS_PENDING`.
+      - O JSON Messenger fixo vive em `data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json`, identidade semantica `ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad`. Toda campanha nova carrega esse arquivo em cada creative com Template name exatamente `JSON-AGT`. Arquivo, conteudo ou nome ausente/invalido/divergente bloqueia antes do write; depois da criacao, cada creative Meta e comparado diretamente com o arquivo e `template_name=JSON-AGT`; qualquer divergencia fica `POSTPROCESS_PENDING`. A regra vale para pedidos futuros e nao altera campanhas ja publicadas.
 
-      - Input humano obrigatorio do call minimo: budget diario exato por campanha.
-      Nenhum budget historico e default. Nao perguntar novamente por quantidade de
-      criativos, pasta, nomes dos ads, horario, referencia, naming, copy, placements
-      ou tracking quando nao houver override.
+      - Input humano obrigatorio do call minimo: budget diario exato por campanha. Nenhum budget historico e default. Nao perguntar novamente por quantidade de criativos, pasta, nomes dos ads, horario, referencia, naming, copy, placements ou tracking quando nao houver override.
 
-      - Resposta inicial padrao ao call minimo: confirmar em bullets Page, estrutura,
-      quantidade de criativos unicos, pasta, inicio e defaults; fazer uma unica pergunta
-      — `Qual o budget diario por campanha? Responda: Budget USD NN`. Depois do budget,
-      executar preflight/reconcile/prestage/plan e voltar com resumo final para OK,
-      sem publicar.
+      - Resposta inicial padrao ao call minimo: confirmar em bullets Page, estrutura, quantidade de criativos unicos, pasta, inicio e defaults; fazer uma unica pergunta — `Qual o budget diario por campanha? Responda: Budget USD NN`. Depois do budget, executar preflight/reconcile/prestage/plan e voltar com resumo final para OK, sem publicar.
 
-      - `pg_XXXXX` deve resolver para uma unica linha Messenger da Smart Bidding e
-      a Page precisa passar GET Meta. Mapping ambiguo ou Page inacessivel bloqueia
-      apenas o request dependente.
+      - `pg_XXXXX` deve resolver para uma unica linha Messenger da Smart Bidding e a Page precisa passar GET Meta. Mapping ambiguo ou Page inacessivel bloqueia apenas o request dependente.
 
-      - Placements sao `MANUAL_ONLY`: Facebook + Instagram + Messenger; Audience Network
-      proibida; manter `explore_home` e nao enviar `explore`, rejeitado no write live
-      como placement obsoleto. Nunca converter para Advantage+ Placements.
+      - Placements sao `MANUAL_ONLY`: Facebook + Instagram + Messenger; Audience Network proibida; manter `explore_home` e nao enviar `explore`, rejeitado no write live como placement obsoleto. Nunca converter para Advantage+ Placements.
 
-      - O estado live da DUP01 e a evidencia soberana. O `validate_only` historico
-      apresentou contradicao no placement Explore e nao deve reintroduzir `explore`
-      nem substituir os gates/readbacks do write real.
+      - O estado live da DUP01 e a evidencia soberana. O `validate_only` historico apresentou contradicao no placement Explore e nao deve reintroduzir `explore` nem substituir os gates/readbacks do write real.
 
-      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page e
-      `url_tags` correspondem ao manifest aprovado, enquanto o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message`
-      corresponde diretamente ao arquivo canonico fixo. Divergencia deixa o request
-      em `POSTPROCESS_PENDING`, preserva IDs e bloqueia a movimentacao dos assets
-      para `02_TESTING`; nunca repetir a criacao.
+      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page e `url_tags` correspondem ao manifest aprovado, enquanto o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message` corresponde diretamente ao arquivo canonico fixo e contem `template_name=JSON-AGT`. Divergencia deixa o request em `POSTPROCESS_PENDING`, preserva IDs e bloqueia a movimentacao dos assets para `02_TESTING`; nunca repetir a criacao.
 
-      - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados
-      apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
+      - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
     '1541578596253175858': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
 
-      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo
-      read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem
-      nas rotas proprias.
+      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem nas rotas proprias.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`;
-      ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
 
-      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou
-      "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer,
-      runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
+      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer, runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
 
-      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio
-      atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period
-      yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como
-      estado atual.
+      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como estado atual.
 
-      - Desenho aprovado: um Diario as 08:00 `America/New_York`, com o fechamento
-      completo de D-1. No mesmo run, incluir o sinal de receita do dia atual as 08:00
-      somente contra snapshots anteriores do mesmo horario; nunca comparar parcial
-      atual com dias historicos fechados.
+      - Desenho aprovado: um Diario as 08:00 `America/New_York`, com o fechamento completo de D-1. No mesmo run, incluir o sinal de receita do dia atual as 08:00 somente contra snapshots anteriores do mesmo horario; nunca comparar parcial atual com dias historicos fechados.
 
-      - O horario desenhado nao ativa automacao. Runtime atual: runner read-only e
-      sob demanda; post automatico=false; cron=false; writes=false. Ativar cron/post
-      exige dry-run vivo revisado e autorizacao separada e explicita do Nicolas.
+      - O horario desenhado nao ativa automacao. Runtime atual: runner read-only e sob demanda; post automatico=false; cron=false; writes=false. Ativar cron/post exige dry-run vivo revisado e autorizacao separada e explicita do Nicolas.
 
-      - Escopo isolado: toda alteracao desta rota pertence somente a Eggbev. Nunca
-      modificar, copiar ou herdar runner, prompt, regra, layout ou schedule de CPV
-      13, CPV 05 ou qualquer outra operacao.
+      - Escopo isolado: toda alteracao desta rota pertence somente a Eggbev. Nunca modificar, copiar ou herdar runner, prompt, regra, layout ou schedule de CPV 13, CPV 05 ou qualquer outra operacao.
 
-      - Escopo de campanhas: no fechamento D-1, incluir toda campanha com insight
-      em D-1 e excluir as ACTIVE atuais sem insight em D-1, pois não rodaram no período
-      fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo
-      sem insight + toda campanha com insight no período. Não truncar nomes, não limitar
-      linhas silenciosamente.
+      - Escopo de campanhas: no fechamento D-1, incluir toda campanha com insight em D-1 e excluir as ACTIVE atuais sem insight em D-1, pois não rodaram no período fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo sem insight + toda campanha com insight no período. Não truncar nomes, não limitar linhas silenciosamente.
 
-      - Layout: uma unica tabela alinhada e consolidada com todas as campanhas e campos
-      Meta/Smart Bidding/Pricing; depois, no maximo cinco bullets curtos em `Fique
-      de olho`. Nao usar cards por campanha.
+      - Layout: uma unica tabela alinhada e consolidada com todas as campanhas e campos Meta/Smart Bidding/Pricing; depois, no maximo cinco bullets curtos em `Fique de olho`. Nao usar cards por campanha.
 
-      - A tabela apoia a decisao humana de quais e quantas campanhas clonar; o Diario
-      nunca clona automaticamente e nao transforma ranking visual em regra de elegibilidade.
+      - A tabela apoia a decisao humana de quais e quantas campanhas clonar; o Diario nunca clona automaticamente e nao transforma ranking visual em regra de elegibilidade.
 
-      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page
-      Meta = `FB_PAGE_ID` e `DATE` = data exata do periodo. UTM/Page/data ausente,
-      multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
+      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page Meta = `FB_PAGE_ID` e `DATE` = data exata do periodo. UTM/Page/data ausente, multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
 
-      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger
-      Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness
-      e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC
-      e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
+      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
 
-      - Monitor de receita por pagina: comparar D-1 fechado e o snapshot de 08:00
-      somente com baselines equivalentes. Usar mediana de ate sete snapshots, minimo
-      de tres comparaveis; alerta inicial a partir de 30% abaixo e critico a partir
-      de 40% abaixo. As faixas sao report-only e nao executam writes.
+      - Monitor de receita por pagina: comparar D-1 fechado e o snapshot de 08:00 somente com baselines equivalentes. Usar mediana de ate sete snapshots, minimo de tres comparaveis; alerta inicial a partir de 30% abaixo e critico a partir de 40% abaixo. As faixas sao report-only e nao executam writes.
 
-      - Freshness, data, UTM/Page ou baseline insuficiente nunca viram receita zero.
-      Expor alerta de cobertura ou `baseline em formacao`. Quando houver queda comprovada,
-      indicar a pagina e sugerir conferencia de disparo, bloco/funil e entrega com
-      o responsavel; Ares nao configura essas camadas nesta rota.
+      - Freshness, data, UTM/Page ou baseline insuficiente nunca viram receita zero. Expor alerta de cobertura ou `baseline em formacao`. Quando houver queda comprovada, indicar a pagina e sugerir conferencia de disparo, bloco/funil e entrega com o responsavel; Ares nao configura essas camadas nesta rota.
 
-      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem
-      aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
+      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
 
       - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
-    '1543312825890381865': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Limite de
-      Leads
+    '1543312825890381865': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Limite de Leads
 
 
-      - Esta thread trata exclusivamente da configuracao operacional desta rota de
-      limite de LEADS por pagina; nao responda com configuracao global do Hermes/Ares,
-      regras ROAS, criacao, clone, Diario ou Intraday.
+      - Esta thread trata exclusivamente da configuracao operacional desta rota de limite de LEADS por pagina; nao responda com configuracao global do Hermes/Ares, regras ROAS, criacao, clone, Diario ou Intraday.
 
-      - Antes de responder, carregar a skill eggbev-us-cc-en-bot-operations e ler
-      o contrato vivo Eggbev-US-CC-EN-BOT, a conta validada e o estado/audit mais
-      recente do guardrail.
+      - Antes de responder, carregar a skill eggbev-us-cc-en-bot-operations e ler o contrato vivo Eggbev-US-CC-EN-BOT, a conta validada e o estado/audit mais recente do guardrail.
 
-      - Pedidos como "sua configuracao", "como esta configurado", "mostre tudo" ou
-      "relatorio" significam a configuracao desta rota: fonte, metrica, threshold,
-      reconciliacao, freshness, horarios, runtime, alertas, readbacks e limitacoes.
+      - Pedidos como "sua configuracao", "como esta configurado", "mostre tudo" ou "relatorio" significam a configuracao desta rota: fonte, metrica, threshold, reconciliacao, freshness, horarios, runtime, alertas, readbacks e limitacoes.
 
-      - Regra de acao: Smart Bidding /campaigns/Messenger, publisher Eggbev, metrica
-      LEADS, operador estritamente > 5000. Exatamente 5000 nao pausa. LEADS_TOTAL
-      nunca substitui LEADS.
+      - Regra de acao: Smart Bidding /campaigns/Messenger, publisher Eggbev, metrica LEADS, operador estritamente > 5000. Exatamente 5000 nao pausa. LEADS_TOTAL nunca substitui LEADS.
 
-      - Escopo Meta: campanha efetivamente ACTIVE com pelo menos um ad efetivamente
-      ACTIVE. O join exige UTM_CAMPAIGN pg_XXXXX unico e FB_PAGE_ID Smart Bidding
-      igual ao page_id do creative Meta.
+      - Escopo Meta: campanha efetivamente ACTIVE com pelo menos um ad efetivamente ACTIVE. O join exige UTM_CAMPAIGN pg_XXXXX unico e FB_PAGE_ID Smart Bidding igual ao page_id do creative Meta.
 
-      - Freshness Smart Bidding e obrigatoria: timestamp verificavel, idade maxima
-      de 2h. Ausente, invalido, futuro ou stale = no_write fail-closed + alerta operacional;
-      nunca tratar BROADCAST_TIME ou DATE_START como timestamp de atualizacao.
+      - Freshness Smart Bidding e obrigatoria: timestamp verificavel, idade maxima de 2h. Ausente, invalido, futuro ou stale = no_write fail-closed + alerta operacional; nunca tratar BROADCAST_TIME ou DATE_START como timestamp de atualizacao.
 
-      - Acao autorizada: pausar a campanha inteira, com pre-read, POST unico e GET/readback;
-      sem budget, delete, pausa de ad/adset ou reativacao automatica.
+      - Acao autorizada: pausar a campanha inteira, com pre-read, POST unico e GET/readback; sem budget, delete, pausa de ad/adset ou reativacao automatica.
 
-      - Horarios automaticos: 08:00 e 20:00 America/New_York. O wrapper agendado aplica
-      gate interno de horario; execucao manual autorizada e separada nao herda o gate
-      --scheduled.
+      - Horarios automaticos: 08:00 e 20:00 America/New_York. O wrapper agendado aplica gate interno de horario; execucao manual autorizada e separada nao herda o gate --scheduled.
 
-      - Relatorio automatico fica silencioso sem acao/erro. Pausa, mapping invalido,
-      freshness invalida ou falha operacional devem gerar mensagem nesta thread.
+      - Relatorio automatico fica silencioso sem acao/erro. Pausa, mapping invalido, freshness invalida ou falha operacional devem gerar mensagem nesta thread.
 
-      - Toda postagem operacional usa GET/readback exato. Falha de entrega nesta thread
-      tenta fallback unico na thread Regras 1543280854024060999; se tambem falhar,
-      a execucao termina com erro e audit resumivel.
+      - Toda postagem operacional usa GET/readback exato. Falha de entrega nesta thread tenta fallback unico na thread Regras 1543280854024060999; se tambem falhar, a execucao termina com erro e audit resumivel.
 
-      - Relatorio sob pedido usa dados vivos, mostra todas as paginas ativas reconciliadas
-      e proximidade LEADS/5000 como indicador de risco, nunca previsao estatistica.
+      - Relatorio sob pedido usa dados vivos, mostra todas as paginas ativas reconciliadas e proximidade LEADS/5000 como indicador de risco, nunca previsao estatistica.
 
-      - Responda na thread atual; IDs tecnicos completos e credenciais ficam no audit,
-      nunca no texto humano.'
-    '1543333373945053184': "INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas\n\
-      \n- Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN\
-      \ BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite\
-      \ de Leads ficam nas threads próprias.\n- Antes de responder ou montar um manifest,\
-      \ carregue a skill eggbev-us-cc-en-bot-operations e leia os contratos vivos\
-      \ Eggbev-US-CC-EN-BOT.json, Eggbev-US-CC-EN-BOT-v3.json e a conta 1034081997659047.json.\n\
-      - Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam\
-      \ o intake. Pergunte somente os campos ainda ausentes, em texto curto e natural:\n\
-      \  1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n\
-      \  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada\
-      \ duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5.\
-      \ Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n\
-      \  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n\
-      - Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar\
-      \ a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada.\
-      \ Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma\
-      \ nova instrução explícita de Nicolas no próprio pedido.\n- Se várias campanhas\
-      \ usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma\
-      \ que os valores são iguais sem o gestor dizer.\n- Duplicação exata preserva\
-      \ integralmente estrutura, público, placements, estratégia, Page, JSON Messenger,\
-      \ mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget\
-      \ escolhido pelo gestor, nome DUPnn e início/status.\n- Naming: preserve o nome-base\
-      \ integral da campanha e adicione DUP01. Duplicações seguintes usam DUP02, DUP03\
-      \ etc. Se a fonte já terminar em DUPnn, recupere o mesmo nome-base e use o próximo\
-      \ número livre após ler todas as campanhas não deletadas.\n- Default de produção:\
-      \ campanha, ad set e todos os anúncios configurados ACTIVE, com start_time no\
-      \ próximo dia às 00:00 America/New_York. PAUSED somente para canário técnico\
-      \ explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do pedido\
-      \ e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write,\
-      \ materialize o valor exato no manifest, faça pre-read e exija readback Meta;\
-      \ billing, account_spend_limit, credenciais e escala automática continuam separados.\n\
-      - clone_prestaged aceita de 1 a 5 anúncios e exige criativos aprovados, reconciliados\
-      \ e pre-stageados. clone_page_switch preserva mídia/copy e exige source_ad_id,\
-      \ Page/UTM/JSON completos e reconciliação da página; não exige mídia nova no\
-      \ registry.\n- Evidência live de 31/08/2026: `pure_clone` 1×1×3 é recuperável\
-      \ por rota shallow com semântica idêntica quando o deep copy exceder o limite\
-      \ síncrono, mas somente depois de GET provar efeito zero. `clone_prestaged`\
-      \ pode rematerializar IDs de vídeo em `ad/copies`; validar lineage por marker+checksum+orientação+duração,\
-      \ não por igualdade cega de IDs.\n- `clone_page_switch` pelo método copied-adset\
-      \ está bloqueado para write real: a Meta rejeitou trocar `promoted_object.page_id`\
-      \ no AdG já copiado. Schema/plan aprovado não prova readiness live. Recovery\
-      \ alternativo exige aprovação explícita para criar um novo AdG já com a Page\
-      \ alvo, pausar o AdG antigo e copiar os anúncios rematerializando Page/UTM/JSON.\
-      \ Nunca criar anúncios sobre AdG com Page divergente nem deletar a camada antiga\
-      \ sem autorização própria.\n- Antes de executar: fazer preflight Meta vivo da\
-      \ conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM,\
-      \ budget e colisões; montar e prevalidar o manifest; apresentar resumo final;\
-      \ aguardar OK explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n\
-      - Nunca publicar diretamente. Sucesso exige readback consolidado de campanha,\
-      \ ad set, todos os ads, nome DUP, budget, status ACTIVE, start_time 00:00 ET,\
-      \ Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível\
-      \ efeito parcial inicia recuperação readback-first no mesmo request; nunca repetir\
-      \ POST não idempotente às cegas. Readback batch limitado após writes completos\
-      \ é reconciliado por IDs persistidos e GETs diretos; não repetir criação.\n\
-      - Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo”\
-      \ significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
+      - Responda na thread atual; IDs tecnicos completos e credenciais ficam no audit, nunca no texto humano.'
+    '1543333373945053184': "INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas\n\n- Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite de Leads ficam nas threads próprias.\n- Antes de responder ou montar um manifest, carregue a skill eggbev-us-cc-en-bot-operations e leia os contratos vivos Eggbev-US-CC-EN-BOT.json, Eggbev-US-CC-EN-BOT-v3.json e a conta 1034081997659047.json.\n- Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam o intake. Pergunte somente os campos ainda ausentes, em texto curto e natural:\n  1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n- Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma nova instrução explícita de Nicolas no próprio pedido.\n- Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma que os valores são iguais sem o gestor dizer.\n- Duplicação exata preserva integralmente estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget escolhido pelo gestor, nome DUPnn e início/status.\n- Naming do Messenger JSON: sempre que o Ares rematerializar o JSON em `clone_prestaged`, substituicao revisada ou qualquer futura rota equivalente, o Template name deve ser exatamente `JSON-AGT`, com gate pre-write e GET/readback do JSON instalado. `pure_clone` nao injeta JSON novo: preserva o creative/JSON da fonte sem reescrever. Nao alterar retroativamente campanhas ja publicadas.\n- Naming: preserve o nome-base integral da campanha e adicione DUP01. Duplicações seguintes usam DUP02, DUP03 etc. Se a fonte já terminar em DUPnn, recupere o mesmo nome-base e use o próximo número livre após ler todas as campanhas não deletadas.\n- Default de produção: campanha, ad set e todos os anúncios configurados ACTIVE, com start_time no próximo dia às 00:00 America/New_York. PAUSED somente para canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write, materialize o valor exato no manifest, faça pre-read e exija readback Meta; billing, account_spend_limit, credenciais e escala automática continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige criativos aprovados, reconciliados e pre-stageados. clone_page_switch preserva mídia/copy e exige source_ad_id, Page/UTM/JSON completos e reconciliação da página; não exige mídia nova no registry.\n- Evidência live de 31/08/2026: `pure_clone` 1×1×3 é recuperável por rota shallow com semântica idêntica quando o deep copy exceder o limite síncrono, mas somente depois de GET provar efeito zero. `clone_prestaged` pode rematerializar IDs de vídeo em `ad/copies`; validar lineage por marker+checksum+orientação+duração, não por igualdade cega de IDs.\n- `clone_page_switch` pelo método copied-adset está bloqueado para write real: a Meta rejeitou trocar `promoted_object.page_id` no AdG já copiado. Schema/plan aprovado não prova readiness live. Recovery alternativo exige aprovação explícita para criar um novo AdG já com a Page alvo, pausar o AdG antigo e copiar os anúncios rematerializando Page/UTM/JSON. Nunca criar anúncios sobre AdG com Page divergente nem deletar a camada antiga sem autorização própria.\n- Antes de executar: fazer preflight Meta vivo da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM, budget e colisões; montar e prevalidar o manifest; apresentar resumo final; aguardar OK explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n- Nunca publicar diretamente. Sucesso exige readback consolidado de campanha, ad set, todos os ads, nome DUP, budget, status ACTIVE, start_time 00:00 ET, Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível efeito parcial inicia recuperação readback-first no mesmo request; nunca repetir POST não idempotente às cegas. Readback batch limitado após writes completos é reconciliado por IDs persistidos e GETs diretos; não repetir criação.\n- Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo” significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
     '1543280854024060999': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 
-      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger,
-      conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar
-      uma thread substituta.
+      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger, conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar uma thread substituta.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato
-      vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint
-      canonico.
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
 
-      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia,
-      readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho
-      de Limite de Leads, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de
-      Regras.
+      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia, readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho de Limite de Leads, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de Regras.
 
-      - Rotas fixas: Regras `1543280854024060999`; Limite de Leads `1543312825890381865`;
-      Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`;
-      Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
+      - Rotas fixas: Regras `1543280854024060999`; Limite de Leads `1543312825890381865`; Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
 
-      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance.
-      Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica
-      ou mensagem antiga nunca reativa regra supersedida.
+      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra supersedida.
 
-      - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha,
-      cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar
-      sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam
-      obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito
-      do request.
+      - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha, cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito do request.
 
-      - Corte e ROAS ativo: Fase 1 em 05:00/06:00/08:00/10:00/12:00, com corte quando
-      Spend > USD2 e Purchase ROAS <0,40. Fase 2 em 13:00/14:00/16:00/18:00/20:00/22:00/23:00.
-      Nos ciclos 20/22/23, anuncios sem ROAS de campanhas agendadas para o dia seguinte
-      00:00 ficam fora; somente campanhas que rodaram no dia avaliado entram.
+      - Padrao prospectivo do Messenger JSON: sempre que o Ares adicionar ou rematerializar JSON em criacao, clone_prestaged, substituicao revisada ou qualquer rota futura equivalente, o Template name deve ser exatamente `JSON-AGT`, com validacao pre-write e readback do JSON instalado. `pure_clone` apenas preserva o creative/JSON da fonte. Nao alterar retroativamente campanhas ja publicadas.
 
-      - Fase 3 — Reativacao/Reciclagem roda dentro do mesmo job das 00:00: dia anterior
-      com spend; anuncio com spend >0 e Purchase ROAS >=0,38; ativa inclusive pausas
-      manuais; garante campanha+conjunto+anuncio ACTIVE; exclui pagina apenas com
-      LEADS >5.000; budget CBO aleatorio persistido US$45/US$65; DELETED/ARCHIVED
-      nunca volta; cada camada exige readback.
+      - Corte e ROAS ativo: Fase 1 em 05:00/06:00/08:00/10:00/12:00, com corte quando Spend > USD2 e Purchase ROAS <0,40. Fase 2 em 13:00/14:00/16:00/18:00/20:00/22:00/23:00. Nos ciclos 20/22/23, anuncios sem ROAS de campanhas agendadas para o dia seguinte 00:00 ficam fora; somente campanhas que rodaram no dia avaliado entram.
 
-      - Toda Fase 3 publica relatorio identificado na thread Corte e ROAS usando a
-      tabela canonica completa, com reativacoes, budgets, exclusoes e readbacks. Freshness
-      ou mapping invalido falha fechado e alerta, sem write parcial cego.
+      - Fase 3 — Reativacao/Reciclagem roda dentro do mesmo job das 00:00: dia anterior com spend; anuncio com spend >0 e Purchase ROAS >=0,38; ativa inclusive pausas manuais; garante campanha+conjunto+anuncio ACTIVE; exclui pagina apenas com LEADS >5.000; budget CBO aleatorio persistido US$45/US$65; DELETED/ARCHIVED nunca volta; cada camada exige readback.
 
-      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem
-      nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar
-      arquivada.
+      - Toda Fase 3 publica relatorio identificado na thread Corte e ROAS usando a tabela canonica completa, com reativacoes, budgets, exclusoes e readbacks. Freshness ou mapping invalido falha fechado e alerta, sem write parcial cego.
 
-      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional,
-      indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes
-      ativas da mesma regra.'
+      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar arquivada.
+
+      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional, indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes ativas da mesma regra.'
     '1541578606076231750': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 
 
-      - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006.
-      Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
+      - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006. Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
 
-      - Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations`
-      e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia
-      e audit mais recente; consultar Meta e Smart Bidding vivas.
+      - Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia e audit mais recente; consultar Meta e Smart Bidding vivas.
 
-      - Threshold diario de corte default 0,40. Fase 1: 05, 06, 08, 10 e 12 ET; todos
-      esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold.
-      Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta anuncio quando Purchase ROAS <
-      threshold sem gate de gasto. Exatamente no threshold mantem.
+      - Threshold diario de corte default 0,40. Fase 1: 05, 06, 08, 10 e 12 ET; todos esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta anuncio quando Purchase ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
 
-      - Nos ciclos noturnos 20:00, 22:00 e 23:00, N/D/sem ROAS so entra em corte quando
-      a campanha efetivamente rodou naquele dia ET. Campanha criada hoje com `start_time`
-      para o dia seguinte as 00:00 e sempre excluida do corte noturno.
+      - Nos ciclos noturnos 20:00, 22:00 e 23:00, N/D/sem ROAS so entra em corte quando a campanha efetivamente rodou naquele dia ET. Campanha criada hoje com `start_time` para o dia seguinte as 00:00 e sempre excluida do corte noturno.
 
-      - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica
-      da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte.
-      Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera
-      zero write + alerta.
+      - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte. Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera zero write + alerta.
 
-      - Fases 1/2 continuam exclusivamente no anuncio: nunca pausar campanha/ad set.
-      A Fase 3 das 00:00 e excecao explicita e separada: le o dia anterior fechado;
-      exige spend do anuncio >0 e Purchase ROAS >=0,38; aceita pausas feitas pelo
-      Ares, Nicolas ou outro operador; garante campanha, conjunto e anuncio ACTIVE;
-      nunca restaura DELETED/ARCHIVED.
+      - Fases 1/2 continuam exclusivamente no anuncio: nunca pausar campanha/ad set. A Fase 3 das 00:00 e excecao explicita e separada: le o dia anterior fechado; exige spend do anuncio >0 e Purchase ROAS >=0,38; aceita pausas feitas pelo Ares, Nicolas ou outro operador; garante campanha, conjunto e anuncio ACTIVE; nunca restaura DELETED/ARCHIVED.
 
-      - Na Fase 3, excluir a campanha somente quando a pagina tiver LEADS estritamente
-      >5.000; exatamente 5.000 ainda e elegivel. Exigir match exato UTM+Page e freshness
-      `/estimated/delay` com `totalMinutes` presente entre 0 e 120; `currentFillTime`
-      e evidencia adicional quando nao nulo, mas o schema vivo pode retorna-lo nulo.
-      Para cada campanha elegivel, randomizar budget CBO entre US$45 e US$65, persistir
-      a escolha antes do primeiro write e reutiliza-la em qualquer retry. Ordem: budget+readback,
-      campanha+readback, conjunto+readback, anuncio+readback.
+      - Na Fase 3, excluir a campanha somente quando a pagina tiver LEADS estritamente >5.000; exatamente 5.000 ainda e elegivel. Exigir match exato UTM+Page e freshness `/estimated/delay` com `totalMinutes` presente entre 0 e 120; `currentFillTime` e evidencia adicional quando nao nulo, mas o schema vivo pode retorna-lo nulo. Para cada campanha elegivel, randomizar budget CBO entre US$45 e US$65, persistir a escolha antes do primeiro write e reutiliza-la em qualquer retry. Ordem: budget+readback, campanha+readback, conjunto+readback, anuncio+readback.
 
-      - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding
-      e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao
-      ou budget.
+      - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao ou budget.
 
-      - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou
-      abaixo mantem. Budget manual solicitado por Nicolas e autorizado; escala automatica
-      permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope
-      aplicavel.
+      - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou abaixo mantem. Budget manual solicitado por Nicolas e autorizado; escala automatica permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope aplicavel.
 
-      - Runtime: Fases 1/2 fazem status write somente de anuncio. Fase 3 pode ativar
-      campanha/conjunto/anuncio e escrever budget US$45/US$65 sob a autorizacao Eggbev
-      de Nicolas. Toda acao exige pre-read, plano idempotente e GET/readback; erro
-      parcial inicia recovery readback-first.
+      - Runtime: Fases 1/2 fazem status write somente de anuncio. Fase 3 pode ativar campanha/conjunto/anuncio e escrever budget US$45/US$65 sob a autorizacao Eggbev de Nicolas. Toda acao exige pre-read, plano idempotente e GET/readback; erro parcial inicia recovery readback-first.
 
-      - Sempre postar relatorio da Fase 3 nesta thread, deixando no titulo e no resumo
-      que a ativacao foi `Fase 3 — Reativacao/Reciclagem`, com dia-base, ROAS >=0,38,
-      anuncios/conjuntos/campanhas reativados, budget escolhido, exclusoes LEADS e
-      readbacks. Usar a mesma tabela canonica completa e paginada dos outros ciclos.
+      - Sempre postar relatorio da Fase 3 nesta thread, deixando no titulo e no resumo que a ativacao foi `Fase 3 — Reativacao/Reciclagem`, com dia-base, ROAS >=0,38, anuncios/conjuntos/campanhas reativados, budget escolhido, exclusoes LEADS e readbacks. Usar a mesma tabela canonica completa e paginada dos outros ciclos.
 
-      - A unica tabela canonica e o primeiro modelo completo, monoespacado e com espacamento
-      dinamico: `R/E | Camp | Pagina | Status | Budget | Spend | Custo | ROAS | Ads
-      ↓ | ROI real | ROI est. | Leads | RPS | CPM | CTR | Acao`. `Leads` e `RPS` sao
-      obrigatorios e nunca podem ser removidos. Usar dois espacos entre colunas, divisor
-      `─`, pontos medios `·` em `Camp` e nos slots de `Ads ↓`, uma campanha por linha
-      e sem barras verticais.
+      - A unica tabela canonica e o primeiro modelo completo, monoespacado e com espacamento dinamico: `R/E | Camp | Pagina | Status | Budget | Spend | Custo | ROAS | Ads ↓ | ROI real | ROI est. | Leads | RPS | CPM | CTR | Acao`. `Leads` e `RPS` sao obrigatorios e nunca podem ser removidos. Usar dois espacos entre colunas, divisor `─`, pontos medios `·` em `Camp` e nos slots de `Ads ↓`, uma campanha por linha e sem barras verticais.
 
-      - `Ads ↓` ordena os anuncios do maior ROAS para o menor: `03·0,92✅` manter ligado,
-      `01·0,35🛑` desligar, `02·0,56♻️` religar e `04·N/D⏸` ja desligado. Nunca mostrar
-      nome completo ou ID tecnico do anuncio no relatorio humano. `CTR` fica depois
-      de `CPM` e antes de `Acao`, em percentual; indisponivel fica `N/D`.
+      - `Ads ↓` ordena os anuncios do maior ROAS para o menor: `03·0,92✅` manter ligado, `01·0,35🛑` desligar, `02·0,56♻️` religar e `04·N/D⏸` ja desligado. Nunca mostrar nome completo ou ID tecnico do anuncio no relatorio humano. `CTR` fica depois de `CPM` e antes de `Acao`, em percentual; indisponivel fica `N/D`.
 
-      - Em `R/E`, a primeira posicao e ROI atual e a segunda e ROI estimado futuro.
-      Aplicar as mesmas faixas nas duas: `🟢 >=0%`, `🟡 <0% e >-15%`, `🔴 <=-15%`, `⚪
-      N/D`; exatamente `-15%` ja e vermelho.
+      - Em `R/E`, a primeira posicao e ROI atual e a segunda e ROI estimado futuro. Aplicar as mesmas faixas nas duas: `🟢 >=0%`, `🟡 <0% e >-15%`, `🔴 <=-15%`, `⚪ N/D`; exatamente `-15%` ja e vermelho.
 
-      - O layout da tabela esta congelado por Nicolas apos esta correcao. Nunca usar
-      a segunda variante resumida, nem remover/reordenar/adicionar colunas em ciclos,
-      exemplos ou respostas. Quando o Discord exigir, paginar repetindo o cabecalho
-      completo; nunca compactar retirando campos. Insights futuros nao alteram esta
-      tabela sem Nicolas revogar explicitamente o congelamento.
+      - O layout da tabela esta congelado por Nicolas apos esta correcao. Nunca usar a segunda variante resumida, nem remover/reordenar/adicionar colunas em ciclos, exemplos ou respostas. Quando o Discord exigir, paginar repetindo o cabecalho completo; nunca compactar retirando campos. Insights futuros nao alteram esta tabela sem Nicolas revogar explicitamente o congelamento.
 
-      - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar
-      ou alterar cron nesta thread sem plano e aprovacao explicita.
+      - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar ou alterar cron nesta thread sem plano e aprovacao explicita.
 
       - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
   dm_role_auth_guild: ''
@@ -1030,40 +739,40 @@ discord:
     speech_gain: 1.0
     ack_enabled: true
     ack_phrases:
-      - Let me look into that.
-      - One moment.
-      - Checking on that now.
-      - Give me a sec.
-      - On it.
+    - Let me look into that.
+    - One moment.
+    - Checking on that now.
+    - Give me a sec.
+    - On it.
   gateway_restart_notification: false
   thread_auto_add_users:
-    - '1496296175014252634'
-    - '344196393512075265'
+  - '1496296175014252634'
+  - '344196393512075265'
   thread_auto_add_users_by_channel:
     '1508853425952133180':
-      - '1496296175014252634'
-      - '344196393512075265'
+    - '1496296175014252634'
+    - '344196393512075265'
     '1516887105543077949':
-      - '1496296175014252634'
-      - '344196393512075265'
-      - '1291113428982693940'
-      - '321263240782807040'
-      - '409878085807112207'
-      - '432898782188011543'
-      - '1214246869484576890'
-      - '1055570806945620030'
+    - '1496296175014252634'
+    - '344196393512075265'
+    - '1291113428982693940'
+    - '321263240782807040'
+    - '409878085807112207'
+    - '432898782188011543'
+    - '1214246869484576890'
+    - '1055570806945620030'
     '1539422731727147079':
-      - '1496296175014252634'
-      - '344196393512075265'
-      - '1055570806945620030'
+    - '1496296175014252634'
+    - '344196393512075265'
+    - '1055570806945620030'
     '1539432300364824607':
-      - '1496296175014252634'
-      - '344196393512075265'
-      - '1055570806945620030'
-      - '321263240782807040'
+    - '1496296175014252634'
+    - '344196393512075265'
+    - '1055570806945620030'
+    - '321263240782807040'
     '1540489861876678657':
-      - '1496296175014252634'
-      - '344196393512075265'
+    - '1496296175014252634'
+    - '344196393512075265'
   suppress_link_previews: true
 telegram:
   reactions: false
@@ -1086,14 +795,14 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
-  - execute_code
-  - script execution via heredoc
-  - overwrite system config
-  - script execution via -e/-c flag
-  - delete in root path
-  - kill hermes/gateway process (self-termination)
-  - stop/restart system service
-  - shell command via -c/-lc flag
+- execute_code
+- script execution via heredoc
+- overwrite system config
+- script execution via -e/-c flag
+- delete in root path
+- kill hermes/gateway process (self-termination)
+- stop/restart system service
+- shell command via -c/-lc flag
 hooks_auto_accept: false
 security:
   allow_private_urls: false
@@ -1199,59 +908,59 @@ session_reset:
 group_sessions_per_user: true
 platform_toolsets:
   cli:
-    - browser
-    - clarify
-    - code_execution
-    - computer_use
-    - cronjob
-    - delegation
-    - file
-    - image_gen
-    - kanban
-    - memory
-    - messaging
-    - session_search
-    - skills
-    - terminal
-    - todo
-    - tts
-    - vision
-    - web
-    - x_search
+  - browser
+  - clarify
+  - code_execution
+  - computer_use
+  - cronjob
+  - delegation
+  - file
+  - image_gen
+  - kanban
+  - memory
+  - messaging
+  - session_search
+  - skills
+  - terminal
+  - todo
+  - tts
+  - vision
+  - web
+  - x_search
   telegram:
-    - hermes-telegram
+  - hermes-telegram
   discord:
-    - browser
-    - clarify
-    - code_execution
-    - computer_use
-    - cronjob
-    - delegation
-    - file
-    - image_gen
-    - kanban
-    - memory
-    - messaging
-    - session_search
-    - skills
-    - terminal
-    - todo
-    - tts
-    - vision
-    - web
-    - x_search
+  - browser
+  - clarify
+  - code_execution
+  - computer_use
+  - cronjob
+  - delegation
+  - file
+  - image_gen
+  - kanban
+  - memory
+  - messaging
+  - session_search
+  - skills
+  - terminal
+  - todo
+  - tts
+  - vision
+  - web
+  - x_search
   whatsapp:
-    - hermes-whatsapp
+  - hermes-whatsapp
   slack:
-    - hermes-slack
+  - hermes-slack
   signal:
-    - hermes-signal
+  - hermes-signal
   homeassistant:
-    - hermes-homeassistant
+  - hermes-homeassistant
   qqbot:
-    - hermes-qqbot
+  - hermes-qqbot
 known_plugin_toolsets:
   discord:
-    - spotify
+  - spotify
   cli:
-    - spotify
+  - spotify

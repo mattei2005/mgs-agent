@@ -102,7 +102,8 @@
       "conversion_event": "Eggbev PV U / technical event eggbev-pv-u",
       "canonical_messenger_json_file": "data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json",
       "canonical_messenger_json_semantic_sha256": "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad",
-      "messenger_json_policy": "mandatory on every new ad creative and compared Meta-to-file after creation; fail closed before write on file drift and POSTPROCESS_PENDING on installed drift",
+      "messenger_template_name": "JSON-AGT",
+      "messenger_json_policy": "mandatory on every new ad creative and compared Meta-to-file after creation; wrapper template_name must be exactly JSON-AGT; fail closed before write on file/name drift and POSTPROCESS_PENDING on installed drift",
       "final_summary_and_ok_required": true
     }
   },
@@ -129,7 +130,14 @@
     "one_time_immediate_override": "eggbev-pg-5024-20260830-nicolas-01 only; refresh at execute to current ET plus five-minute Meta-safe buffer",
     "canary_exception": "PAUSED only when the request explicitly says technical canary and separately approves later activation",
     "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success",
-    "messenger_json_readback": "after every creation, GET every creative and confirm Page and url_tags match the sealed manifest, while parsed asset_feed_spec.additional_data.page_welcome_message matches the canonical fixed JSON file before postprocess completes"
+    "messenger_json_readback": "after every creation or creative rematerialization, GET every creative and confirm Page and url_tags match the sealed manifest, while parsed asset_feed_spec.additional_data.page_welcome_message matches the canonical fixed JSON file and template_name equals JSON-AGT before postprocess completes"
+  },
+  "messenger_template_naming_policy": {
+    "exact_name": "JSON-AGT",
+    "applies_when_ares_adds_json": ["from_zero_prestaged", "clone_prestaged", "replacement_revision", "future_enabled_clone_page_switch_or_other_rematerialization"],
+    "pure_clone": "preserve source creative and JSON without rewriting",
+    "historical_campaigns": "do not retrofit already-published campaigns",
+    "gate": "missing or different template_name fails closed before write; installed drift remains POSTPROCESS_PENDING with IDs preserved"
   },
   "intake_questions": [
     "Qual campanha ou campanhas você quer duplicar?",

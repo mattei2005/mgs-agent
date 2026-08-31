@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.20.2-draft
+version: 0.20.3-draft
 author: Ares
 license: internal
 metadata:
@@ -208,7 +208,11 @@ Para `asset_feed_spec` CTM com CTA visível `APPLY_NOW`, o payload canônico usa
 
 O início padrão continua no dia seguinte às 00:00 `America/New_York`. Exceção única aprovada para o primeiro request `eggbev-pg-5024-20260830-nicolas-01`: no execute, atualizar o `start_time` para o horário corrente ET com buffer técnico mínimo da Meta. Não propagar essa exceção para campanhas futuras sem novo override explícito.
 
-O template Messenger é obrigatório. Qualquer mudança de texto, botão, payload ou flags exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
+O template Messenger é obrigatório. **Padrão prospectivo de naming:** sempre que o Ares adicionar ou rematerializar Messenger JSON em `from_zero_prestaged`, `clone_prestaged`, substituição revisada ou qualquer futura rota equivalente, o wrapper instalado deve conter `template_name` exatamente `JSON-AGT`. O manifest e o GET pós-criação falham fechado se o campo faltar ou divergir; o request fica `POSTPROCESS_PENDING` com IDs preservados, sem replay de criação. `pure_clone` não injeta JSON novo e apenas preserva o creative/JSON da fonte. Não alterar retroativamente campanhas já publicadas.
+
+A API pública Graph v26 aceita o marcador dentro de `asset_feed_spec.additional_data.page_welcome_message`, mas não expõe `template_name` como field separado do creative nem por edge público da Page/conta. Portanto, o readback automatizado comprova o marcador no JSON instalado; na primeira campanha futura sob esta política, complementar com conferência visual do campo **Template name** no Ads Manager e registrar a evidência antes de declarar a camada visual calibrada. Nunca afirmar que o rótulo visual foi confirmado apenas pelo GET do wrapper.
+
+Qualquer mudança de texto, botão, payload, flags ou do nome `JSON-AGT` exige versão integral + aprovação de Nicolas. Antes de qualquer publicação, apresentar o resumo final e esperar OK explícito; a instrução atual da campanha vence o print de referência.
 
 ### Ciclos ROAS
 

@@ -309,6 +309,11 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
                 for ad in campaign.ads
             )
         )
+        installed = [
+            json.loads(ad.creative_payload["asset_feed_spec"]["additional_data"]["page_welcome_message"])
+            for ad in campaign.ads
+        ]
+        self.assertEqual([row["template_name"] for row in installed], ["JSON-AGT"] * 3)
 
 
 if __name__ == "__main__":
