@@ -342,6 +342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ARIA-C003-2X-IMMEDIATE-20260831",
+      "next_step": "Obter aprovação exata de Rodolfo para o override one-time de início imediato deste request e o OK final de Nicolas sobre o resumo; então atualizar somente a allowlist canônica com inventário/REPORT-INFRA, repetir preflight/collision scan, refrescar start_time para o primeiro instante Meta-safe, selar o manifest e executar/reconciliar via Engine v3 sem replay cego.",
+      "objective": "Clonar exatamente duas vezes a campanha 163 - Aria Kensington - ENG - US - (pg_8348) C003, com USD45 por clone e início imediato sem schedule.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; live-preflight:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-live-preflight.json",
+      "state": "preflight e dry-run concluídos sem writes: conta usd/et ativa; fonte única active, 1x1x3, budget usd45, page e utm conciliadas; inventário completo de 1350 campanhas e zero dups não deletados para a base, portanto nomes dup01 e dup02. manifest tracking-aware pure_clone de duas campanhas passou prevalidation e plan apenas com overlay validate-only; config canônico permaneceu inalterado. o pedido de início imediato falha no gate canônico start_time 00:00 et, pois somente o request histórico one-time está allowlisted. meta writes=0.",
+      "thread_id": "1543333373945053184",
+      "updated_at": "2026-08-31T09:56:45+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
       "next_step": "Executar o mesmo request com Nicolas como aprovador financeiro, atualizar start_time com buffer Meta, concluir readback consolidado e confirmar Page/UTM/JSON Messenger 3/3 antes do pós-processamento.",
       "objective": "Criar a primeira campanha Eggbev pg_5024 com naming corrigido, início imediato one-time e readback obrigatório do JSON Messenger",
@@ -1722,5 +1732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T07:14:46+00:00"
+  "updated_at": "2026-08-31T09:56:45+00:00"
 }

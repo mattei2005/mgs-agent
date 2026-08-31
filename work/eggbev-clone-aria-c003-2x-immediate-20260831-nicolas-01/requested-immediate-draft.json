@@ -1,0 +1,1185 @@
+{
+  "schema_version": 3,
+  "request_id": "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "graph_version": "v26.0",
+  "created_at": "2026-08-31T09:55:22.723922+00:00",
+  "prevalidated": false,
+  "execution_mode": "pure_clone",
+  "campaigns": [
+    {
+      "app_key": "mgs-meta-app-current",
+      "account_id": "1034081997659047",
+      "mode": "pure_clone",
+      "source_campaign_id": "120249812034090629",
+      "source_adset_id": "120249812034390629",
+      "adset_name": "AdG1",
+      "start_time": "2026-08-31T06:25:00-04:00",
+      "status": "ACTIVE",
+      "campaign_updates": {
+        "daily_budget": "4500"
+      },
+      "ads": [
+        {
+          "name": "AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_051",
+          "source_ad_id": "120249812035100629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad01",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1653210899715420",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "1077040604740239",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad01_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad01_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad01_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad01_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_012",
+          "source_ad_id": "120249812035200629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad02",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1122717803666217",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "968931166212045",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad02_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad02_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad02_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad02_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_114",
+          "source_ad_id": "120249812035300629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad03",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1569774611549911",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "967006219766661",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad03_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad03_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad03_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad03_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "idempotency_key": "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-dup01",
+      "name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP01"
+    },
+    {
+      "app_key": "mgs-meta-app-current",
+      "account_id": "1034081997659047",
+      "mode": "pure_clone",
+      "source_campaign_id": "120249812034090629",
+      "source_adset_id": "120249812034390629",
+      "adset_name": "AdG1",
+      "start_time": "2026-08-31T06:25:00-04:00",
+      "status": "ACTIVE",
+      "campaign_updates": {
+        "daily_budget": "4500"
+      },
+      "ads": [
+        {
+          "name": "AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_051",
+          "source_ad_id": "120249812035100629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad01",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1653210899715420",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "1077040604740239",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad01_title_square"
+                    },
+                    {
+                      "name": "c003_ad01_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad01_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad01_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad01_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad01_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_012",
+          "source_ad_id": "120249812035200629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad02",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1122717803666217",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "968931166212045",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad02_title_square"
+                    },
+                    {
+                      "name": "c003_ad02_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad02_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad02_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad02_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad02_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_114",
+          "source_ad_id": "120249812035300629",
+          "creative_payload": {
+            "name": "Eggbev pg_8348 c003_ad03",
+            "object_story_spec": {
+              "page_id": "804761166056807",
+              "instagram_user_id": "17841477857448319"
+            },
+            "asset_feed_spec": {
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "optimization_type": "PLACEMENT",
+              "videos": [
+                {
+                  "video_id": "1569774611549911",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_vertical"
+                    }
+                  ]
+                },
+                {
+                  "video_id": "967006219766661",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_square"
+                    }
+                  ]
+                }
+              ],
+              "bodies": [
+                {
+                  "text": ""
+                }
+              ],
+              "titles": [
+                {
+                  "text": "APPLY NOW ✅",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "CARD APPROVED",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                },
+                {
+                  "text": "✔️ APPLY CARD",
+                  "adlabels": [
+                    {
+                      "name": "c003_ad03_title_square"
+                    },
+                    {
+                      "name": "c003_ad03_title_vertical"
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "call_to_action_types": [
+                "APPLY_NOW"
+              ],
+              "call_to_actions": [
+                {
+                  "type": "APPLY_NOW",
+                  "value": {
+                    "app_destination": "MESSENGER"
+                  }
+                }
+              ],
+              "link_urls": [
+                {
+                  "website_url": "https://m.me/804761166056807",
+                  "display_url": ""
+                }
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "instream_video",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "profile_feed"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ]
+                  },
+                  "video_label": {
+                    "name": "c003_ad03_square"
+                  },
+                  "title_label": {
+                    "name": "c003_ad03_title_square"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_min": 18,
+                    "age_max": 65
+                  },
+                  "video_label": {
+                    "name": "c003_ad03_vertical"
+                  },
+                  "title_label": {
+                    "name": "c003_ad03_title_vertical"
+                  },
+                  "priority": 2
+                }
+              ],
+              "additional_data": {
+                "multi_share_end_card": false,
+                "page_welcome_message": "{\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"💳 Hi, I just reviewed your access…\\n\\nDo you want to see your approved card? ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"🟢 YES, SHOW ME\"}]}}},\"performance_booster_enabled\":false,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"is_user_editing\":false}",
+                "is_click_to_message": false
+              }
+            },
+            "url_tags": "utm_campaign=pg_8348",
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "advantage_plus_creative": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_brightness_and_contrast": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_templates": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "image_touchups": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "inline_comment": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "pac_relaxation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "replace_media_text": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "reveal_details_over_time": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_destination_blurbs": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "show_summary": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_optimizations": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "idempotency_key": "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-dup02",
+      "name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP02"
+    }
+  ]
+}

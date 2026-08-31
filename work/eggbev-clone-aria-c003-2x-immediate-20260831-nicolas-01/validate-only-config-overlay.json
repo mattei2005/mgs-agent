@@ -1,0 +1,259 @@
+{
+  "engine_version": 3,
+  "release_version": "3.4.2",
+  "status": "active_guarded_development_access",
+  "enabled": true,
+  "write_enabled": true,
+  "require_account_registration": true,
+  "require_explicit_account_modes": true,
+  "require_explicit_ad_serving_route": true,
+  "media_upload_enabled": true,
+  "require_prevalidated_manifest": true,
+  "require_appsecret_proof": false,
+  "graph_version": "v26.0",
+  "bundle_size": 2,
+  "max_ads_per_batch": 10,
+  "max_account_workers": 8,
+  "soft_score": 100,
+  "hard_score": 120,
+  "development_access_score_max": 60,
+  "standard_access_score_max": 9000,
+  "score_window_seconds": 300,
+  "development_access_readback_cooldown_seconds": 305,
+  "quota_retry_safety_seconds": 5,
+  "readback_recovery_points_per_campaign": 3,
+  "points_per_mode": {
+    "pure_clone": 30,
+    "clone_prestaged": 30,
+    "clone_page_switch": 30,
+    "from_zero_prestaged": 30
+  },
+  "quota_scope": "app_key_plus_ad_account_id",
+  "quota_tier_policy": "unknown uses configured 100/120 ceiling; live development_access caps the lane at 60; live standard_access uses 9000 and skips the fixed development readback cooldown",
+  "reader_exclusion_policy": "all recurring CPV Meta readers defer while the persisted per-account writer lease or cpv-daily operation state is resumable",
+  "transient_code2_retry_policy": "initial write, missing-only recovery and readback use distinct quota reservation IDs; retry only after effective capacity exists; a fresh recovery reservation includes targeted reconciliation, missing writes, required name normalization and final readback, so no second fixed cooldown is added when the estimated recovery cost fits",
+  "readback_policy": "one_outer_graph_batch_per_two_campaigns",
+  "intermediate_get_calls": 0,
+  "supported_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "clone_page_switch",
+    "from_zero_prestaged"
+  ],
+  "explicit_request_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "clone_page_switch",
+    "from_zero_prestaged"
+  ],
+  "mode_taxonomy": {
+    "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
+    "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
+    "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
+  },
+  "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
+  "pure_clone_visible_lineage_marker": "append the exact suffix COPY C{source_campaign_number} to the duplicated campaign name; never use DUP; example: a new C11 duplicated directly from C10 ends with COPY C10",
+  "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
+  "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",
+  "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
+  "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
+  "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",
+  "automatic_failure_recovery": {
+    "enabled": true,
+    "readback_before_write": true,
+    "missing_layer_only": true,
+    "blind_replay_blocked": true,
+    "preserve_request_id": true,
+    "preserve_original_scope": true
+  },
+  "scheduled_creation_budget_reporting": "every completed scheduled creation reports active account budget, effective dynamic envelope, remaining amount inside that envelope and USD source basis",
+  "creation_lifecycle_gate": "scheduled creation is a conditional phase after D1-D3 analysis, pause and scale decisions; a creation_hold blocks all new campaign writes until Rodolfo or Nicolas releases it",
+  "appsecret_proof": {
+    "required": false,
+    "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"
+  },
+  "state_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state",
+  "audit_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit",
+  "media_registry": "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json",
+  "accounts": {
+    "1046241194533786": {
+      "app_key": "mgs-meta-app-current",
+      "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_route": "lineage_required_for_new_media",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_type": "user_access_token",
+      "timezone": "America/Sao_Paulo"
+    },
+    "2039876850230678": {
+      "app_key": "mgs-meta-app-current",
+      "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_route": "lineage_required_for_new_media",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_type": "user_access_token",
+      "timezone": "America/Sao_Paulo"
+    },
+    "1034081997659047": {
+      "app_key": "mgs-meta-app-current",
+      "alias": "Eggbev-US-CC-EN-01-G006",
+      "operation": "Eggbev-US-CC-EN-BOT",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+      "token_type": "user_access_token",
+      "timezone": "America/New_York",
+      "ad_serving_route": "direct_and_lineage_verified",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "campaign_policy": {
+        "name_regex": ".+ DUP[0-9]{2,}$",
+        "budget_update_required": true,
+        "budget_source": "campaign_updates",
+        "configured_status": "ACTIVE",
+        "start_local_time": "00:00",
+        "immediate_start_request_ids": [
+          "eggbev-pg-5024-20260830-nicolas-01",
+          "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01"
+        ],
+        "pure_clone_allowed_update_keys": [
+          "daily_budget"
+        ],
+        "by_mode": {
+          "from_zero_prestaged": {
+            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) C[0-9]{3}",
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3,
+              5
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "US"
+              ]
+            },
+            "required_adset_create": {
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "is_dynamic_creative": false,
+              "attribution_spec": [
+                {
+                  "event_type": "CLICK_THROUGH",
+                  "window_days": 7
+                },
+                {
+                  "event_type": "VIEW_THROUGH",
+                  "window_days": 1
+                }
+              ],
+              "targeting": {
+                "age_min": 18,
+                "age_max": 65,
+                "geo_locations": {
+                  "countries": [
+                    "US"
+                  ],
+                  "location_types": [
+                    "frequently_in",
+                    "home",
+                    "recent"
+                  ]
+                },
+                "targeting_automation": {
+                  "advantage_audience": 1
+                },
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "story",
+                  "search",
+                  "biz_disco_feed",
+                  "facebook_reels",
+                  "facebook_reels_overlay",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "story",
+                  "reels",
+                  "explore_home",
+                  "profile_feed"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "device_platforms": [
+                  "mobile",
+                  "desktop"
+                ]
+              },
+              "promoted_object": {
+                "pixel_id": "935354115143283",
+                "custom_event_type": "OTHER",
+                "custom_event_str": "eggbev-pv-u",
+                "smart_pse_enabled": false
+              },
+              "regional_regulated_categories": [
+                "VOLUNTARY_VERIFICATION"
+              ],
+              "regional_regulation_identities": {
+                "universal_beneficiary": "1919111075424645",
+                "universal_payer": "1919111075424645"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rollback": {
+    "engine": "v2",
+    "runner": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+    "backup": "/root/mgs-agent/backups/ares-campaign-engine-v3-20260821T033736Z",
+    "deletion_performed": false
+  },
+  "official_meta_sources": [
+    "https://developers.facebook.com/ads/blog/post/v2/2018/07/02/marketing-api-tier-simplification/",
+    "https://developers.facebook.com/docs/app-review/",
+    "https://developers.facebook.com/docs/development/release/business-verification/",
+    "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
+    "https://developers.facebook.com/docs/facebook-login/guides/access-tokens/",
+    "https://developers.facebook.com/docs/features-reference/",
+    "https://developers.facebook.com/docs/features-reference#marketing-api-access-tier",
+    "https://developers.facebook.com/docs/graph-api/batch-requests",
+    "https://developers.facebook.com/docs/graph-api/guides/secure-requests/",
+    "https://developers.facebook.com/docs/marketing-api/access/",
+    "https://developers.facebook.com/docs/marketing-api/asyncrequests",
+    "https://developers.facebook.com/docs/marketing-api/guides/videoads",
+    "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies",
+    "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/",
+    "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
+    "https://developers.facebook.com/docs/permissions/"
+  ]
+}
