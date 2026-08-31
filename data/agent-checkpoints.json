@@ -453,12 +453,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
-      "next_step": "Nicolas revisa a campanha no Gerenciador e traz feedbacks. Quando desejar retomar o teste, informa a Page/pg_XXXXX exata do DUP03; então Ares reconcilia Page/JSON, renova preflight/assets, apresenta resumo final e só executa após OK explícito.",
+      "next_step": "Apresentar ao Nicolas o resumo final exato com digest b38601bd3b54c872f8b9b13fcb52b7426b78ac27194f226b40a157abaaccf108 e aguardar OK explícito para executar DUP01, DUP02 e DUP03 pelo Engine v3. Antes do write, renovar scan de colisão e start_time se 31/08 00:00 ET tiver deixado de ser futuro.",
       "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; policy:ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
-      "state": "pausado corretamente antes de qualquer meta write. readback live confirmou zero campanhas dup01/dup02/dup03. nicolas aprovou a regra de que clone_page_switch sem page deve pausar e perguntar; contrato/prompt/skill atualizados. fonte canônica e três assets do clone_prestaged seguem apenas preparados em read-only.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; summary:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-final-summary.json",
+      "state": "awaiting_final_approval. pg_5024 reconciliada como amy shook com page/pbia meta. fonte canônica 1x1x3, usd45 e active reconciliada; dois homônimos continuam preservados, sem uso da variante copy. três assets do dup02 reservados e pre-stageados com associação à conta confirmada. três manifests prevalidated e cli validate/plan concluídos com zero campaign writes.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T02:56:19+00:00"
+      "updated_at": "2026-08-31T03:30:49+00:00"
     },
     {
       "agent": "ares",
@@ -943,12 +943,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c51-c53-renumber-lineage-repair-20260830",
-      "next_step": "Timer systemd detached executa o watcher às 00:30 São Paulo; validar ACTIVE e início da primeira janela CREATIVE_CUT_24H por readback do runtime",
+      "next_step": "Acompanhar a primeira janela CREATIVE_CUT_24H até 01/09 00:30 São Paulo; nenhum write corretivo pendente",
       "objective": "Corrigir zero delivery por source_ad_id=0 nas campanhas C51-C53 da conta 05, renumerar para C01-C03 e bloquear recorrência global",
       "source": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json",
-      "state": "delivery_confirmed_late_first_spend_paused_verified_reactivation_20260831_0030_sp_scheduled",
+      "state": "complete_delivery_confirmed_reactivated_running_20260831_0030_sp",
       "thread_id": "1543263056262594641",
-      "updated_at": "2026-08-31T02:06:05+00:00"
+      "updated_at": "2026-08-31T03:31:18+00:00"
     },
     {
       "agent": "zeus",
@@ -1632,5 +1632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:27:32+00:00"
+  "updated_at": "2026-08-31T03:31:18+00:00"
 }

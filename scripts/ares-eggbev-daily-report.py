@@ -10,6 +10,7 @@ import argparse
 import datetime as dt
 import json
 import re
+import statistics
 import sys
 import urllib.parse
 from collections import defaultdict
@@ -31,6 +32,7 @@ def _load_common():
 
 common = _load_common()
 AUDIT_DIR = common.BASE / 'data/ares/meta-ads/audit/eggbev/daily-report'
+ANOMALY_STATE_PATH = common.BASE / 'data/ares/meta-ads/state/eggbev/daily-revenue-baseline.json'
 
 
 def parse_at(value: str | None) -> dt.datetime:
@@ -44,8 +46,11 @@ def parse_at(value: str | None) -> dt.datetime:
 
 def report_dates(period: str, at: dt.datetime) -> list[tuple[str, str]]:
     if period == 'auto':
-        if at.strftime('%H:%M') == '06:00':
-            return [((at.date() - dt.timedelta(days=1)).isoformat(), 'Fechamento anterior'), (at.date().isoformat(), 'Parcial atual 06:00')]
+        if at.strftime('%H:%M') == '08:00':
+            return [
+                ((at.date() - dt.timedelta(days=1)).isoformat(), 'Fechamento D-1'),
+                (at.date().isoformat(), 'Sinal atual 08:00'),
+            ]
         return [(at.date().isoformat(), 'Parcial atual')]
     if period == 'today':
         return [(at.date().isoformat(), 'Parcial atual')]
@@ -311,7 +316,8 @@ def aggregate_meta(bundle: dict[str, Any]) -> dict[str, Any]:
 
 def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
     rows = bundle.get('target_report_rows') or []
-    ready = bool(bundle.get('ready'))
+    ready = bool(bundle.get('daily_reporting_ready', bundle.get('ready')))
+    ready_reason = bundle.get('daily_reporting_reason', bundle.get('reason'))
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         utm = normalize_utm_campaign(row.get('UTM_CAMPAIGN'))
@@ -378,7 +384,7 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
         else None
     )
     return {
-        'ready': ready, 'reason': bundle.get('reason'), 'rows': len(rows),
+        'ready': ready, 'reason': ready_reason, 'rows': len(rows),
         'investment': sum_field(rows, 'INVESTIMENT') if ready else None,
         'revenue': revenue_total,
         'profit': (revenue_total - sum_field(rows, 'INVESTIMENT')) if ready and revenue_total is not None else None,
