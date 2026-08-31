@@ -972,6 +972,13 @@ def roi_marker(value: Any) -> str:
     return '🔴'
 
 
+def format_roi_cell(value: Any) -> str:
+    number = common.finite_float(value)
+    if number is None:
+        return '⚪N/D'
+    return f'{roi_marker(number)}{common.fmt_number(number, 1)}%'
+
+
 def reconciliation_signal(meta_spend: Any, sb_investment: Any) -> tuple[str, float | None]:
     meta_value = common.finite_float(meta_spend)
     sb_value = common.finite_float(sb_investment)
@@ -1132,7 +1139,7 @@ def render_grouped_page_tables(
         indexed[key].append((original_index, campaign))
 
     lines: list[str] = []
-    headers = ['ID', 'Fonte', 'Ent.', 'St', 'Budget', 'Spend', 'Msg', '$/Msg', 'ROAS', 'CPM', 'CTR']
+    headers = ['ID', 'Fonte', 'Ent.', 'St', 'Budget', 'Spend', 'Msg', '$/Msg', 'ROAS', 'ROI R', 'ROI E', 'CPM', 'CTR']
     for page in pages:
         key = common.norm(page.get('utm_campaign')).lower() or common.norm(page.get('page_name')).lower()
         page_campaigns = sorted(
@@ -1147,10 +1154,8 @@ def render_grouped_page_tables(
         noun = 'campanha' if count == 1 else 'campanhas'
         identity_ok = sum(1 for _, row in page_campaigns if common.norm(row.get('identity_signal')) == '🧬')
         lines.extend([
-            '', f"{roi_marker(page.get('sb_roi_percent'))} **{label}** · {count} {noun} · {page.get('delivered') or 0} entregando · 🧬 {identity_ok}/{count}",
-            f"`Meta {format_money_br(page.get('spend'))} · {common.fmt_number(page.get('messaging_started'), 0)} Msg · {format_money_br(page.get('cost_per_messaging_started'))}/msg · ROAS {common.fmt_number(page.get('purchase_roas'))}`",
-            f"`SB Inv {format_money_br(page.get('sb_investment'))} · Rec {format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_percent(page.get('sb_roi_percent'))} · Leads {common.fmt_number(page.get('sb_leads'), 0)}`",
-            f"`💧 Drip {format_money_br(page.get('sb_drip_revenue'))} · 📣 BC agora {format_money_br(page.get('sb_broadcast_current'))} · RPS* {format_money_br(page.get('pricing_rps'))}`",
+            '', f"{roi_marker(page.get('sb_roi_percent'))} **{label}** · {count} {noun} · {page.get('delivered') or 0}● · 🧬 {identity_ok}/{count}",
+            f"`💵 {format_money_br(page.get('spend'))} · 💬 {common.fmt_number(page.get('messaging_started'), 0)}/{format_money_br(page.get('cost_per_messaging_started'))} · ROAS {common.fmt_number(page.get('purchase_roas'))} │ 🧾 {format_money_br(page.get('sb_investment'))}→{format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_roi_cell(page.get('sb_roi_percent'))} · 💧 {format_money_br(page.get('sb_drip_revenue'))} · 📣 {format_money_br(page.get('sb_broadcast_current'))}`",
         ])
         rows: list[list[str]] = []
         for _, row in page_campaigns:
@@ -1161,7 +1166,8 @@ def render_grouped_page_tables(
                 '●' if delivered else '○', status_label(row.get('status')),
                 format_money_br(row.get('budget_usd')), format_money_br(row.get('spend')),
                 common.fmt_number(row.get('messaging_started'), 0), format_money_br(row.get('cost_per_messaging_started')),
-                common.fmt_number(row.get('purchase_roas')), format_money_br(row.get('cpm')), format_percent(row.get('ctr')),
+                common.fmt_number(row.get('purchase_roas')), format_roi_cell(row.get('roi_real')),
+                format_roi_cell(row.get('roi_estimated')), format_money_br(row.get('cpm')), format_percent(row.get('ctr')),
             ])
         chunks = [rows[offset:offset + 10] for offset in range(0, len(rows), 10)] or [[]]
         for chunk_index, chunk in enumerate(chunks, start=1):
@@ -1194,8 +1200,9 @@ def render_period(period: dict[str, Any]) -> list[str]:
             *render_grouped_page_tables(pages, campaigns),
         ])
         lines.append('🧬 identidade conciliada · 🟡 revisar cobertura · ⚠️ conflito de nome/UTM/Página. `Fonte` é o alias para levar à thread Clonar Campanhas; todo clone ainda exige preflight.')
-        lines.append('`Msg` = messaging_conversation_started_7d. `ROI pág.*` e `RPS*` são da Smart Bidding no nível Página/UTM, nunca ROI individual da campanha.')
+        lines.append('`Msg` = messaging_conversation_started_7d. `ROI R/E` = ROI real/estimado da Smart Bidding por campanha+UTM exatas; `ROI pág.*` permanece no nível Página/UTM.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
+        lines.append(f"Conciliação ROI campanha×UTM: {meta.get('economic_join_matched', 0)}/{len(campaigns)} com fonte econômica fresca e match exato.")
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
         if meta.get('active_without_insight'):

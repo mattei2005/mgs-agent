@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ARIA-C003-2X-IMMEDIATE-20260831",
-      "next_step": "Aguardar Rodolfo aprovar expressamente o override pontual de início imediato para estes dois clones; após o aceite, atualizar somente a allowlist canônica com inventário/REPORT-INFRA, repetir preflight/collision scan, refrescar start_time Meta-safe, selar e executar/reconciliar via Engine v3 sem replay cego.",
+      "next_step": "Materializar start_time Meta-safe, selar e executar o mesmo request no Engine v3; em falha, reconciliar IDs e efeitos antes de qualquer retry; concluir com GET direto de campanha, AdG, ads, creatives e tracking.",
       "objective": "Clonar exatamente duas vezes a campanha 163 - Aria Kensington - ENG - US - (pg_8348) C003, com USD45 por clone e início imediato sem schedule.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; live-preflight:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-live-preflight.json",
-      "state": "preflight e dry-run concluídos sem writes; nicolas confirmou ok no resumo final. conta usd/et ativa; fonte única active, 1x1x3, budget usd45, page e utm conciliadas; inventário completo de 1350 campanhas e zero dups não deletados, nomes dup01 e dup02. manifest imediato passou somente com overlay validate-only e o config canônico continua inalterado. gate pendente exclusivo: aprovação exata de rodolfo para o override one-time de início imediato; sem ela o prevalidator canônico exige 00:00 et. meta writes=0.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; preflight:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-preexecute-full.json",
+      "state": "rodolfo delegou ao nicolas autoridade permanente por pedido para início imediato eggbev sem aprovação adicional; decisão persistida em permissões, contratos, config, skills, registry, audit e report-infra. nicolas já deu ok final. preflight live 13:36 utc: 1351 campanhas, fonte exata única active, 1x1x3, três ads active, budget usd45 e zero colisões dup01/dup02. meta writes deste request ainda zero.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T10:14:58+00:00"
+      "updated_at": "2026-08-31T13:40:25+00:00"
     },
     {
       "agent": "ares",
@@ -1772,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:34:26+00:00"
+  "updated_at": "2026-08-31T13:40:25+00:00"
 }

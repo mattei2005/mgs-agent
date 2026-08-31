@@ -449,10 +449,13 @@ class ReportingTests(unittest.TestCase):
         }
         sb_bundle = {
             'ready': True,
+            'report_date': cycle.common.now_et().date().isoformat(),
             'target_report_rows': [{
+                'COMPANY': 'digital-trust', 'DOMAIN': 'eggbev',
                 'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 11, 'REVENUE': 10,
                 'LEADS': 20, 'SUBSCRIBED': 5, 'DRIP_REVENUE': 6, 'BD_REVENUE': 4,
-                'SESSIONS': 20, 'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
+                'SESSIONS': 20, 'GAM_IMPRESSIONS': 50,
+                'ACQUISITION_CLICKS': 5, 'AVG_PRICE': 6.2,
             }],
             'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One'}]},
             'freshness': {'ready': True, 'latest_at_et': '2026-08-29T20:00:00-04:00'},
@@ -463,7 +466,8 @@ class ReportingTests(unittest.TestCase):
                 'GAM_IMPRESSIONS': 50,
             }],
             'economic_estimated': {'grouped': [{
-                'utm_adgroup': 'pg_12345', 'estimatedRevenue': 20, 'confidence': .95,
+                'publisher': 'digital-trust_eggbev', 'utm_adgroup': 'pg_12345',
+                'estimatedRevenue': 20, 'confidence': .95,
             }]},
             'economic_freshness': {'ready': True, 'age_minutes': 45},
         }
@@ -494,35 +498,88 @@ class ReportingTests(unittest.TestCase):
         self.assertAlmostEqual(row['sb_drip_roi_percent'], -500 / 11)
         self.assertEqual(row['sb_broadcast_revenue'], 4)
         self.assertEqual(row['rps'], 500)
-        self.assertEqual(row['roi_real'], 50)
-        self.assertEqual(row['roi_estimated'], 100)
-        self.assertEqual(row['block_cpm'], 300)
+        self.assertAlmostEqual(row['roi_real'], -100 / 11)
+        self.assertAlmostEqual(row['roi_estimated'], 900 / 11)
+        self.assertEqual(row['block_cpm'], 200)
         self.assertEqual(row['economic_join_status'], 'matched')
+        self.assertIn('Messenger Pages', row['economic_source'])
 
-    def test_economic_estimate_fails_closed_when_utm_maps_to_multiple_campaigns(self):
+    def test_messenger_pages_estimate_uses_exact_publisher_plus_utm(self):
         bundle = {
-            'economic_ready': True,
-            'economic_performance_rows': [
-                {'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_1', 'INVESTIMENT': 10, 'NET_REVENUE': 15, 'SESSIONS': 30, 'GAM_IMPRESSIONS': 50},
-                {'CAMPAIGN_ID': 'c2', 'UTM_ADGROUP': 'pg_1', 'INVESTIMENT': 20, 'NET_REVENUE': 15, 'SESSIONS': 30, 'GAM_IMPRESSIONS': 50},
-            ],
-            'economic_estimated': {'grouped': [{'utm_adgroup': 'pg_1', 'estimatedRevenue': 99}]},
+            'report_date': cycle.common.now_et().date().isoformat(),
+            'target_report_rows': [{
+                'COMPANY': 'digital-trust', 'DOMAIN': 'eggbev', 'UTM_CAMPAIGN': 'pg_1',
+                'INVESTIMENT': 10, 'REVENUE': 15, 'SESSIONS': 30, 'GAM_IMPRESSIONS': 50,
+            }],
+            'page_index': {'pg_1': [{'FB_PAGE_ID': 'page1'}]},
+            'economic_estimated': {'grouped': [
+                {'publisher': 'other_eggbev', 'utm_adgroup': 'pg_1', 'estimatedRevenue': 99},
+                {'publisher': 'digital-trust_eggbev', 'utm_adgroup': 'pg_1', 'estimatedRevenue': 20},
+            ]},
             'economic_freshness': {'ready': True, 'age_minutes': 20},
         }
         result = cycle.aggregate_economic_reporting(bundle)
-        first = result['by_campaign_utm'][('c1', 'pg_1')]
+        first = result['by_utm']['pg_1']
         self.assertEqual(first['roi_real'], 50)
-        self.assertIsNone(first['roi_estimated'])
-        self.assertEqual(first['estimated_join_status'], 'ambiguous_utm')
+        self.assertEqual(first['roi_estimated'], 100)
+        self.assertEqual(first['estimated_join_status'], 'matched')
 
-    def test_economic_reporting_stays_unavailable_when_freshness_gate_is_closed(self):
+    def test_messenger_pages_report_only_values_survive_stale_write_gate(self):
         result = cycle.aggregate_economic_reporting({
-            'economic_ready': False,
-            'economic_reason': 'economic_freshness_unverifiable_or_stale',
-            'economic_performance_rows': [{'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_1'}],
+            'report_date': cycle.common.now_et().date().isoformat(),
+            'target_report_rows': [{
+                'COMPANY': 'digital-trust', 'DOMAIN': 'eggbev', 'UTM_CAMPAIGN': 'pg_1',
+                'INVESTIMENT': 100, 'REVENUE': 50,
+            }],
+            'page_index': {'pg_1': [{'FB_PAGE_ID': 'page1'}]},
+            'economic_freshness': {'ready': False, 'age_minutes': 121},
         })
-        self.assertFalse(result['ready'])
-        self.assertEqual(result['by_campaign_utm'], {})
+        self.assertTrue(result['ready'])
+        self.assertEqual(result['by_utm']['pg_1']['roi_real'], -50)
+        self.assertFalse(result['freshness']['ready'])
+
+    def test_messenger_pages_screenshot_values_match_dashboard_formula(self):
+        today = cycle.common.now_et().date().isoformat()
+        samples = [
+            ('pg_5072', 'Celia Draper', 92.64, 29.10, 39.26, -68.59, -57.62),
+            ('pg_5071', 'Tina Walter', 193.07, 57.05, 57.84, -70.45, -70.04),
+            ('pg_5024', 'Amy Shook', 116.53, 48.91, 57.31, -58.03, -50.82),
+        ]
+        for utm, page, investment, revenue, estimate, current_roi, estimated_roi in samples:
+            result = cycle.aggregate_economic_reporting({
+                'report_date': today,
+                'target_report_rows': [{
+                    'COMPANY': 'digital-trust', 'DOMAIN': 'eggbev',
+                    'UTM_CAMPAIGN': utm, 'PAGE_NAME': page,
+                    'INVESTIMENT': investment, 'REVENUE': revenue,
+                }],
+                'page_index': {utm: [{'FB_PAGE_ID': 'page1'}]},
+                'economic_estimated': {'grouped': [{
+                    'publisher': 'digital-trust_eggbev', 'utm_adgroup': utm,
+                    'estimatedRevenue': estimate,
+                }]},
+            })
+            row = result['by_utm'][utm]
+            self.assertEqual(round(row['roi_real'], 2), current_roi)
+            self.assertEqual(round(row['roi_estimated'], 2), estimated_roi)
+
+    def test_messenger_pages_historical_period_has_no_future_estimate(self):
+        result = cycle.aggregate_economic_reporting({
+            'report_date': '2026-08-30',
+            'target_report_rows': [{
+                'COMPANY': 'digital-trust', 'DOMAIN': 'eggbev', 'UTM_CAMPAIGN': 'pg_1',
+                'INVESTIMENT': 100, 'REVENUE': 50,
+            }],
+            'page_index': {'pg_1': [{'FB_PAGE_ID': 'page1'}]},
+            'economic_estimated': {'grouped': [{
+                'publisher': 'digital-trust_eggbev', 'utm_adgroup': 'pg_1',
+                'estimatedRevenue': 200,
+            }]},
+        })
+        row = result['by_utm']['pg_1']
+        self.assertEqual(row['roi_real'], -50)
+        self.assertIsNone(row['roi_estimated'])
+        self.assertEqual(row['estimated_join_status'], 'not_applicable_historical_period')
 
     def test_reporting_keeps_insight_only_paused_campaign_visible_without_write_decision(self):
         meta_bundle = {

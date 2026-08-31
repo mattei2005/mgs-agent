@@ -472,7 +472,9 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
                 economic_join_status = 'matched'
         elif not economic_join_status:
             economic_join_status = economics.get('reason') or 'messenger_pages_utm_not_found'
-        visible_economic = economic if economic_join_status == 'matched' else {}
+        visible_economic: dict[str, Any] = (
+            dict(economic) if economic_join_status == 'matched' and isinstance(economic, dict) else {}
+        )
         emoji, action, action_detail = _campaign_action(decisions, campaign_id in scale_by_id)
         row.update({
             'action_emoji': emoji,
