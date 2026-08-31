@@ -114,7 +114,7 @@ O contrato vivo está em:
 /root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json
 ```
 
-A skill específica é `eggbev-us-cc-en-bot-operations`. Corte/reativação de anúncios, transições necessárias da campanha e postagem dos ciclos ROAS estão autorizados em controlled-write fail-closed e possuem cron script-only; budget write continua bloqueado até Rodolfo ou Geizian aprovarem teto/envelope. Daily continua read-only sem cron. Campos ainda pendentes bloqueiam somente a ação dependente; nunca herdar regras de tráfego direto ou de outra operação.
+A skill específica é `eggbev-us-cc-en-bot-operations`. No ciclo ROAS, somente cortes/reativações de anúncios e a postagem dos relatórios estão autorizados em controlled-write fail-closed; campanha e ad set nunca recebem status write desse ciclo. O guardrail separado de LEADS pode pausar campanha conforme contrato próprio. Budget write automático continua bloqueado até o gate vigente. Daily continua read-only sem cron. Campos ainda pendentes bloqueiam somente a ação dependente; nunca herdar regras de tráfego direto ou de outra operação.
 
 ## Segurança e autoridade
 

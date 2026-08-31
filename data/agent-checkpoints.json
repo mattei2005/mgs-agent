@@ -883,12 +883,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c51-c53-renumber-lineage-repair-20260830",
-      "next_step": "Confirmar por Meta Insights a primeira impressão e gasto após a ativação; atualizar audit e fonte canônica sem repetir qualquer write",
+      "next_step": "Acompanhar desempenho normal na rotina CREATIVE_CUT_24H; nenhum write corretivo pendente",
       "objective": "Corrigir zero delivery por source_ad_id=0 nas campanhas C51-C53 da conta 05, renumerar para C01-C03 e bloquear recorrência global",
       "source": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json",
-      "state": "meta_repair_complete_active_9_ads_nonzero_lineage_first_delivery_observation_pending",
+      "state": "complete_meta_repair_and_first_delivery_confirmed",
       "thread_id": "1543263056262594641",
-      "updated_at": "2026-08-31T01:41:05+00:00"
+      "updated_at": "2026-08-31T01:57:16+00:00"
     },
     {
       "agent": "zeus",
@@ -1572,5 +1572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:56:10+00:00"
+  "updated_at": "2026-08-31T01:57:16+00:00"
 }

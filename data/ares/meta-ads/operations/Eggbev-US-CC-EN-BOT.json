@@ -1178,7 +1178,7 @@
           "twenty_five_campaign_fixture": true,
           "single_table": true,
           "one_row_per_campaign": true,
-          "single_campaign_display_width": 122,
+          "single_campaign_display_width": 147,
           "aligned_rows": true,
           "generic_metric_value_headers": false,
           "vertical_bar_separators": false,
@@ -1404,6 +1404,7 @@
         "requested_by": "Nicolas Holanda",
         "requested_by_discord_id": "1055570806945620030",
         "requested_at_et": "2026-08-30T21:53:28-04:00",
+        "decision_id": "ARES-EGGBEV-ROAS-CYCLE-AD-ONLY-V19-20260830",
         "source": "discord:thread:1541578606076231750",
         "visual_reference": "Meta Ads Manager at ad level sorted by Purchase ROAS descending",
         "decision": "ROAS cuts and reactivations change ad status only; campaign and ad set status are never changed by the ROAS cycle, including when zero ads remain active",
@@ -1418,11 +1419,16 @@
         "technical_ad_id_visible": false,
         "scope": "ROAS policy correction plus report presentation; no change to threshold, phase times, metrics, budget, lead guardrail or cron schedule",
         "validation": {
-          "targeted_tests": "pending",
-          "relevant_tests": "pending",
+          "targeted_tests": "6/6 passed",
+          "relevant_tests": "73/73 passed",
           "campaign_status_writes_from_roas": 0,
           "adset_status_writes_from_roas": 0,
-          "meta_writes_during_change": 0
+          "meta_writes_during_change": 0,
+          "high_volume_fixture_campaigns": 55,
+          "high_volume_fixture_pages": 6,
+          "maximum_campaign_rows_per_page": 10,
+          "maximum_page_characters": 1727,
+          "display_width_with_three_ad_tokens": 147
         }
       }
     },

@@ -178,7 +178,11 @@
     "supersedes_request_id": "cpv05-first3-20260828",
     "requested_by": "Nicolas Holanda",
     "authorization_source": "discord:thread:1543069402440671333",
-    "campaign_numbers": [51, 52, 53],
+    "campaign_numbers": [
+      51,
+      52,
+      53
+    ],
     "creation_mode": "from_zero_prestaged",
     "source_campaign_id": "120250888205860632",
     "source_adset_id": "120250888205580632",
@@ -198,8 +202,16 @@
     "execution_state": "COMPLETE_META_READBACK_LINEAGE_REPAIRED_ASSETS_TESTING_FIRST_DELIVERY_ARMED_REPORTS_ACTIVE",
     "prevalidation_digest": "5817bc1c11656ce23771cb8dae6f65f482c91ce63734081e8ff7aa9329d86cdc",
     "engine_manifest_digest": "8f47184748d9a0ddc70da888ace3a402f3b580dd52604d08c19d3a801e27eebc",
-    "campaign_ids": ["120248477978700046", "120248477978730046", "120248478066030046"],
-    "adset_ids": ["120248477979350046", "120248477979250046", "120248478066170046"],
+    "campaign_ids": [
+      "120248477978700046",
+      "120248477978730046",
+      "120248478066030046"
+    ],
+    "adset_ids": [
+      "120248477979350046",
+      "120248477979250046",
+      "120248478066170046"
+    ],
     "meta_readback": {
       "campaigns_active": 3,
       "adsets_active": 3,
@@ -210,22 +222,43 @@
       "actual_adset_start_time": "2026-08-29T01:45:00-03:00",
       "checked_at_utc": "2026-08-29T04:55:32Z"
     },
-    "failed_shells_archived": ["120248477878560046", "120248477878580046"],
+    "failed_shells_archived": [
+      "120248477878560046",
+      "120248477878580046"
+    ],
     "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect",
     "lineage_repair": {
       "request_id": "cpv05-c51-c53-lineage-renumber-repair-20260831-r1",
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1543263056262594641",
       "cause": "direct ads had source_ad_id=0 and zero delivery; same confirmed class as account 13",
-      "campaign_number_map": {"51": 1, "52": 2, "53": 3},
+      "campaign_number_map": {
+        "51": 1,
+        "52": 2,
+        "53": 3
+      },
       "replacement_ad_ids": [
-        "120248498974990046", "120248498974960046", "120248498975000046",
-        "120248498974920046", "120248498974950046", "120248498975310046",
-        "120248499019600046", "120248499014560046", "120248499014380046"
+        "120248498974990046",
+        "120248498974960046",
+        "120248498975000046",
+        "120248498974920046",
+        "120248498974950046",
+        "120248498975310046",
+        "120248499019600046",
+        "120248499014560046",
+        "120248499014380046"
       ],
-      "source_ad_ids": ["120247105296140046", "120247105296120046", "120247105296100046"],
+      "source_ad_ids": [
+        "120247105296140046",
+        "120247105296120046",
+        "120247105296100046"
+      ],
       "old_direct_ads_terminal": 9,
-      "legacy_campaign_ids_deleted": ["120246928388760046", "120246887105500046", "120247083649930046"],
+      "legacy_campaign_ids_deleted": [
+        "120246928388760046",
+        "120246887105500046",
+        "120247083649930046"
+      ],
       "meta_readback": {
         "campaigns_configured_active": 3,
         "campaigns_effective_active": 3,
@@ -235,7 +268,42 @@
         "issues": 0,
         "checked_at_utc": "2026-08-31T01:34:02.935893+00:00"
       },
-      "delivery_observation": "pending_first_delivery_after_activation",
+      "delivery_observation": {
+        "status": "first_delivery_confirmed",
+        "checked_at_utc": "2026-08-31T01:57:16.662848+00:00",
+        "date_sp": "2026-08-30",
+        "spend_usd": 114.48,
+        "impressions": 17452,
+        "by_campaign": {
+          "C01": {
+            "campaign_id": "120248477978700046",
+            "name": "01 - 29-08 - Garagem Brasil - (b01fb05c01) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 43.75,
+            "impressions": 9351,
+            "clicks": 173
+          },
+          "C02": {
+            "campaign_id": "120248477978730046",
+            "name": "02 - 29-08 - Garagem Brasil - (b01fb05c02) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 40.27,
+            "impressions": 4342,
+            "clicks": 84
+          },
+          "C03": {
+            "campaign_id": "120248478066030046",
+            "name": "03 - 29-08 - Garagem Brasil - (b01fb05c03) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 30.46,
+            "impressions": 3759,
+            "clicks": 22
+          }
+        }
+      },
       "audit": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json"
     }
   },
@@ -272,7 +340,9 @@
       "visual_qa_approved_assets": 5
     },
     "selected_assets_testing": 9,
-    "rejected_assets": ["CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4"],
+    "rejected_assets": [
+      "CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4"
+    ],
     "replacement_asset": "CAR_BR_BR_VID_VARIOS_CARROS_PV_103.mp4",
     "checked_at_utc": "2026-08-29T04:55:32Z"
   },
@@ -352,9 +422,38 @@
     "layout": "desktop_aligned_tables_only",
     "daily_thread_id": "1542892955315081246",
     "intraday_thread_id": "1542892943352799242",
-    "daily_schedule": ["07:00 previous closed day", "08:00", "12:00", "14:00", "16:00", "20:00 current day"],
-    "intraday_schedule": ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"],
-    "strategy_fields": ["management_strategy", "current_stage", "window_started_at", "next_checkpoint_at", "active_ads", "paused_ads", "real_roi", "spend_concentration"],
+    "daily_schedule": [
+      "07:00 previous closed day",
+      "08:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "20:00 current day"
+    ],
+    "intraday_schedule": [
+      "01:00",
+      "03:00",
+      "05:00",
+      "07:00",
+      "09:00",
+      "11:00",
+      "13:00",
+      "15:00",
+      "17:00",
+      "19:00",
+      "21:00",
+      "23:00"
+    ],
+    "strategy_fields": [
+      "management_strategy",
+      "current_stage",
+      "window_started_at",
+      "next_checkpoint_at",
+      "active_ads",
+      "paused_ads",
+      "real_roi",
+      "spend_concentration"
+    ],
     "sms_policy": "G006 SMS revenue/cost is not attributable between account 13 and account 05; do not duplicate it into the account-05 ROI"
   },
   "crons": [
@@ -394,9 +493,21 @@
     "runtime": "creditoparaveiculo-account05-first-delivery.py",
     "cron_job_id": "23edda4c310c",
     "schedule": "9,24,39,54 * * * *",
-    "armed_campaigns": {"C01": "120248477978700046", "C02": "120248477978730046", "C03": "120248478066030046"},
-    "spend_usd_by_campaign_at_arm": {"C01": 0.0, "C02": 0.0, "C03": 0.0},
-    "impressions_by_campaign_at_arm": {"C01": 0, "C02": 0, "C03": 0},
+    "armed_campaigns": {
+      "C01": "120248477978700046",
+      "C02": "120248477978730046",
+      "C03": "120248478066030046"
+    },
+    "spend_usd_by_campaign_at_arm": {
+      "C01": 0.0,
+      "C02": 0.0,
+      "C03": 0.0
+    },
+    "impressions_by_campaign_at_arm": {
+      "C01": 0,
+      "C02": 0,
+      "C03": 0
+    },
     "armed_at_sp": "2026-08-30T22:40:00-03:00",
     "latest_dry_run_sp": "2026-08-30T22:40:48-03:00",
     "latest_dry_run_result": "OK; 3 armed; zero Meta writes",
@@ -412,5 +523,5 @@
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-31T01:48:24Z"
+  "updated_at": "2026-08-31T01:57:16.662848+00:00"
 }

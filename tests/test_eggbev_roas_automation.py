@@ -901,7 +901,7 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(desktop['validation']['vertical_bar_separators'])
         self.assertEqual(desktop['columns'], ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'])
         ad_only = reporting_policy['ad_only_and_compact_ad_roas_correction']
-        self.assertIn('exclusively ad-level', ad_only['decision'])
+        self.assertIn('ad status only', ad_only['decision'])
         self.assertIn('highest-to-lowest ROAS', ad_only['table_format'])
         self.assertFalse(ad_only['full_ad_name_visible'])
         self.assertFalse(ad_only['technical_ad_id_visible'])
@@ -945,7 +945,7 @@ class ContractTests(unittest.TestCase):
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
             self.assertIn(key, formulas)
-        self.assertIn('Meta Purchase ROAS remains', reporting_policy['decision_separation'])
+        self.assertIn('Meta Purchase ROAS decides only ad-level cuts/reactivations', reporting_policy['decision_separation'])
         self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
         self.assertIn('pagination uses actual rendered character count', reporting_policy['pagination'])
         self.assertIn('never splits a campaign row', reporting_policy['pagination'])

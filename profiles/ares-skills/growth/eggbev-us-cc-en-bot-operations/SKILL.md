@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.23.0-draft
+version: 0.24.0-draft
 author: Ares
 license: internal
 metadata:
@@ -24,7 +24,7 @@ Status do contrato       Corte/reativação e postagem ROAS autorizados em modo 
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                status de ad/campanha no ciclo ROAS habilitado; budget manual por Nicolas habilitado; guardrail de leads habilitado
+Write Meta                somente status de anúncio no ciclo ROAS; campanha/ad set imutáveis nesse ciclo; budget manual por Nicolas habilitado; guardrail de leads habilitado
 Crons Eggbev              Corte/ROAS e guardrail de leads ativos; tick LEADS 20:00 ET confirmado. Flag cron gateway_running=false é falso negativo do observador; execução real vence.
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
@@ -205,7 +205,7 @@ O wrapper de produção usa modo `--scheduled`: atraso do scheduler de até 15 m
 
 Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Por decisão explícita de Nicolas, ausência completa da linha de insight do anúncio na Fase 2 também é `N/D` e corta. Fonte indisponível, com freshness superior a 2h, sem timestamp verificável ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 
-A ação padrão de ROAS é no ad. Se o ciclo deixar zero ads ativos, cortar todos os elegíveis e pausar a campanha; não pausar o ad set. Essa decisão supersede a invariante anterior de nunca pausar campanha. Se um ad pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente o ad e a campanha no mesmo ciclo, sempre com pré-leitura e readback pós-write.
+A ação de ROAS é exclusivamente no anúncio. Mesmo que o ciclo deixe zero anúncios ativos, cortar todos os elegíveis sem pausar ou reativar campanha/ad set. Se um anúncio pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente somente esse anúncio, sempre com pré-leitura e readback pós-write. Campanhas pausadas pelo guardrail de LEADS, manualmente ou por outra origem nunca são reativadas pelo ciclo ROAS.
 
 Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Meta Purchase ROAS no nível da campanha. `ROAS > 0,50` recomenda aumentar o budget CBO atual em `10%`; `0,40 < ROAS <= 0,50` mantém; `ROAS = 0,50` mantém. A regra é composta ciclo a ciclo. O planner é dry-run; write real depende de Rodolfo/Geizian e de teto/envelope aprovado.
 
@@ -319,7 +319,7 @@ Ordem de testes: fixtures ROAS → fixtures LEADS → fórmulas/layout Diário �
 
 ## Runtime ROAS e reporting construído
 
-A autorização inicial de Nicolas para somente runner/testes foi supersedida em 29/08/2026: status writes de anúncio/campanha e postagem dos ciclos ROAS estão autorizados em modo fail-closed; budget write permanece sujeito ao gate Rodolfo/Geizian. Readback atual:
+A autorização inicial de Nicolas para somente runner/testes foi supersedida em 29/08/2026: status writes exclusivamente de anúncio e postagem dos ciclos ROAS estão autorizados em modo fail-closed; campanha/ad set nunca recebem write desse ciclo; budget write permanece sujeito ao gate vigente. Readback atual:
 
 ```text
 Módulo comum            /root/mgs-agent/scripts/ares-eggbev-roas-common.py
@@ -327,7 +327,7 @@ Corte e ROAS            /root/mgs-agent/scripts/ares-eggbev-roas-cycle.py
 Diário/sob demanda      /root/mgs-agent/scripts/ares-eggbev-daily-report.py
 Testes                  tests/test_eggbev_roas_automation.py
 Testes aprovados        63 no módulo ROAS atual; suíte ampliada cobre guardrail, rollover, Fase 2 sem linha, freshness 2h, intervenção manual, escala +10%, layout híbrido, paginação de 25 campanhas e rotas econômicas report-only
-Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
+Write ROAS              somente status de anúncio habilitado sob gates fail-closed e readback; campanha/ad set imutáveis
 Budget write            false; exige Rodolfo/Geizian + teto/envelope
 Post ciclo ROAS         habilitado na thread fixa
 Cron ROAS               horários lógicos e físicos 00:00, 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; atraso real de até 15 minutos é reconciliado ao horário lógico; scheduler ativo e tick 20:00 alcançou o runner
@@ -354,7 +354,7 @@ ROI% | Leads | ROI Drip | Rev BC
 
 O renderer mantém também campanhas com insight Meta no dia mesmo quando não entram no plano de write: faz GET exato da campanha, mostra o estado Off/On real e usa `OBSERVAR`, sem criar decisão. A lista por anúncio aparece somente quando há corte/reativação. Não há limite silencioso; a tabela repete o cabeçalho a cada 6 linhas, e mensagens multipart continuam fence-safe com `⚔️ Corte & ROAS • Parte N/T`.
 
-O runner controla proveniência de ads/campanhas pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa mantém writes fail-closed; métrica indisponível aparece `N/D`, nunca zero inventado.
+O runner controla proveniência somente dos anúncios pausados pelo Ares, nunca reativa pausa manual ou do guardrail de leads, não altera campanha/ad set e exige pré-leitura + readback. Às 00:00 o reset local para `0,40` independe das fontes e não faz write Meta. Smart Bidding ausente/irreconciliável ou `ADS ZERO RESULTS` ativa mantém writes fail-closed; métrica indisponível aparece `N/D`, nunca zero inventado.
 
 ### Refinamento visual v6 — 2026-08-30
 
@@ -424,6 +424,12 @@ As duas posições de `R/E` usam as mesmas faixas: `🟢` ROI `>= 0%`; `🟡` RO
 Por instrução de Nicolas em `2026-08-30`, a coluna `Camp` preserva a sequência, a campanha `Cnnn`, a duplicação `DUPnn` e a UTM em uma chave compacta. Exemplo: `162·C001·D01/pg_5024` significa sequência `162`, campanha `C001`, duplicação `DUP01` e UTM `pg_5024`. A base sem duplicação aparece como `162·C001/pg_5024`; `DUP02`, `DUP03` e `DUP04` aparecem como `D02`, `D03` e `D04`. Componentes ausentes no nome Meta real são omitidos, nunca inventados.
 
 Para antecipar relatórios com mais de 50 campanhas, o renderer ordena naturalmente por sequência, UTM, `Cnnn` e `DUPnn`, mantendo a família junta. Cada bloco mostra no máximo dez campanhas e também respeita o limite de caracteres do Discord; o cabeçalho completo se repete com `Parte N/T`, nenhuma linha é dividida e nenhuma campanha é omitida. Fixture de 55 variantes confirmou 55 chaves únicas, ordem `D01 → D55`, seis blocos, até 1.385 caracteres por bloco e fences balanceadas. A mudança é somente visual e não altera nome na Meta, métricas, corte, reativação, writes, schedules, budget ou autoridade.
+
+### Política e renderer v18 — ROAS somente em anúncios
+
+Por correção explícita de Nicolas em `2026-08-30`, o ciclo Corte e ROAS pausa e reativa **somente anúncios**. Campanhas e conjuntos nunca recebem status write desse ciclo, inclusive quando todos os anúncios ficam desligados. A proveniência persistida é somente dos anúncios pausados pelo Ares; uma campanha pausada pelo guardrail de LEADS, manualmente ou por outra origem não é reativada pelo ROAS.
+
+A tabela ganhou a coluna compacta `Ads ↓`, inspirada no print do Ads Manager no nível de anúncio e ordenada do maior Purchase ROAS para o menor. Cada item usa apenas o slot curto, ROAS e ação/estado: `03·0,92✅` mantém ligado; `01·0,35🛑` desliga; `02·0,56♻️` religa; `04·N/D⏸` já está desligado. Nome completo e ID técnico permanecem fora do relatório humano. A coluna `Ação` continua agregando `🛑n` e `♻️n` como contagens de anúncios. Esta revisão não muda threshold, fases, métricas, budget, guardrail de LEADS ou horários.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
