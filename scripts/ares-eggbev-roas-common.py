@@ -948,6 +948,9 @@ def fmt_money(value: Any) -> str:
 
 def split_messages(text: str, limit: int = 1900) -> list[str]:
     """Split Discord messages without leaving Markdown code fences unbalanced."""
+    # Reserve a tiny structural margin for a closing fence and newline joins.
+    # The public limit remains exact: every returned chunk must be <= limit.
+    split_limit = max(32, limit - 8)
     lines = text.splitlines()
     chunks: list[str] = []
     current: list[str] = []
@@ -957,7 +960,7 @@ def split_messages(text: str, limit: int = 1900) -> list[str]:
     for line in lines:
         cost = len(line) + 1
         close_cost = 4 if in_fence else 0
-        if current and size + cost + close_cost > limit:
+        if current and size + cost + close_cost > split_limit:
             if in_fence:
                 current.append('```')
             chunks.append('\n'.join(current))

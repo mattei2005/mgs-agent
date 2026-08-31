@@ -1022,13 +1022,12 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Tabela consolidada — visão desktop', rendered)
-        self.assertIn('N/D — 25 campanhas', rendered)
-        self.assertIn('ordem decrescente pelo nome (Z→A)', rendered)
+        self.assertIn('Visão unificada · Página → fonte de clone', rendered)
+        self.assertIn('**N/D** · 25 campanhas', rendered)
         self.assertIn('Tabela da página • 1/3', rendered)
         self.assertIn('Tabela da página • 3/3', rendered)
-        for index in range(1, 26):
-            self.assertRegex(rendered, rf'(?m)^{index}\s+●\s+{index:03d}\s+')
+        for name in names:
+            self.assertIn(daily.source_alias(name, None), rendered)
 
     def test_smart_bidding_freshness_is_explicit_and_nd_is_not_percent(self):
         period = {
@@ -1041,9 +1040,9 @@ class ReportingTests(unittest.TestCase):
             }),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Última atualização', rendered)
-        self.assertIn('Campo timestamp', rendered)
-        self.assertIn('Freshness máx.', rendered)
+        self.assertIn('⏱ SB', rendered)
+        self.assertIn('campo N/D', rendered)
+        self.assertIn('máx. 2h', rendered)
         self.assertNotIn('N/D%', rendered)
 
     def test_compact_renderer_exposes_meta_sb_and_pricing_columns(self):
@@ -1060,9 +1059,9 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': True, 'target_report_rows': []}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Tabela consolidada — visão desktop', rendered)
+        self.assertIn('Visão unificada · Página → fonte de clone', rendered)
         self.assertIn('BC agora', rendered)
-        self.assertIn('Custo', rendered)
+        self.assertIn('$/Msg', rendered)
         self.assertIn('CPM', rendered)
         self.assertIn('RPS', rendered)
         self.assertIn('1/1 campanhas', rendered)
@@ -1089,7 +1088,7 @@ class ReportingTests(unittest.TestCase):
         self.assertLess(rendered.index('Tina Walter'), rendered.index('Celia Draper'))
         self.assertLess(rendered.index('Celia Draper'), rendered.index('Amy Shook'))
         self.assertLess(rendered.index('Amy Shook'), rendered.index('pg_9'))
-        self.assertIn('BC agora $5.00', rendered)
+        self.assertIn('BC agora $5,00', rendered)
 
     def test_revenue_anomaly_uses_equivalent_median_and_30_40_bands(self):
         state = daily.default_anomaly_state()
@@ -1166,8 +1165,21 @@ class ReportingTests(unittest.TestCase):
         self.assertTrue(all(len(chunk) <= 500 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
         joined = '\n'.join(chunks)
-        for index in range(1, 26):
-            self.assertRegex(joined, rf'(?m)^{index}\s+●\s+{index:03d}\s+')
+        for name in names:
+            self.assertIn(daily.source_alias(name, None), joined)
+
+    def test_source_alias_is_stable_and_tracking_conflicts_are_visible(self):
+        name = '165 - Tina Walter - ENG - US - (pg_5071) C003 DUP01'
+        self.assertEqual(daily.source_alias(name, 'campaign-1'), daily.source_alias(name, 'campaign-1'))
+        annotated = daily.annotate_campaign_display_identities({'campaigns': [{
+            'campaign_id': 'campaign-1', 'name': name, 'utm_campaign': 'pg_5024',
+            'sb_page_name': 'Amy Shook', 'join_status': 'matched',
+        }]})
+        row = annotated['campaigns'][0]
+        self.assertTrue(row['source_alias'].startswith('SRC-165-C003-D01-'))
+        self.assertEqual(row['identity_signal'], '⚠️')
+        self.assertIn('name_utm_mismatch', row['identity_reasons'])
+        self.assertIn('name_page_mismatch', row['identity_reasons'])
 
 
 class ContractTests(unittest.TestCase):
