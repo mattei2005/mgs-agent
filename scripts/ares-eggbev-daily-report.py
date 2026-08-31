@@ -848,14 +848,17 @@ def build_page_summary(
             else None
         )
         summaries.append(group)
-    summaries.sort(
+    named = [row for row in summaries if common.norm(row.get('page_name'))]
+    unnamed = [row for row in summaries if not common.norm(row.get('page_name'))]
+    named.sort(
         key=lambda row: (
-            common.norm(row.get('page_name') or row.get('page_label')).casefold(),
+            common.norm(row.get('page_name')).casefold(),
             common.norm(row.get('utm_campaign')).casefold(),
         ),
         reverse=True,
     )
-    return summaries
+    unnamed.sort(key=lambda row: common.norm(row.get('utm_campaign')).casefold())
+    return [*named, *unnamed]
 
 
 def render_page_meta_table(pages: list[dict[str, Any]]) -> list[str]:
@@ -959,7 +962,11 @@ def render_grouped_page_tables(
                 common.fmt_number(row.get('purchase_roas')), common.fmt_number(row.get('messaging_started'), 0),
                 common.fmt_money(row.get('cpm')), format_percent(row.get('ctr')),
             ])
-        lines.extend(['```text', *aligned_table(headers, rows), '```'])
+        chunks = [rows[offset:offset + 10] for offset in range(0, len(rows), 10)] or [[]]
+        for chunk_index, chunk in enumerate(chunks, start=1):
+            if len(chunks) > 1:
+                lines.append(f"**Tabela da página • {chunk_index}/{len(chunks)}**")
+            lines.extend(['```text', *aligned_table(headers, chunk), '```'])
     return lines
 
 

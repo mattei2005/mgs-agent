@@ -1299,10 +1299,29 @@
       "kind": "procedure",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831",
+      "title": "Diário Eggbev mobile-first por página e campanha",
+      "updated_at": "2026-08-31T06:10:03+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "scripts/ares-eggbev-daily-report.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T02:09:54-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Diário Eggbev mobile-first por página e campanha",
-      "updated_at": "2026-08-31T05:27:37+00:00"
+      "title": "Diário Eggbev por Página Z-A com Broadcast atual",
+      "updated_at": "2026-08-31T06:10:03+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
@@ -3049,5 +3068,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:31:04+00:00"
+  "updated_at": "2026-08-31T06:10:03+00:00"
 }

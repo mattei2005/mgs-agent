@@ -751,11 +751,13 @@ discord:
       sem insight + toda campanha com insight no período. Não limitar linhas silenciosamente.
 
       - Layout consolidado v6 inspirado em Corte e ROAS: uma visão desktop organizada
-      em grupos de Página/UTM. Ordenar sempre os grupos pelo nome completo da página
-      em ordem decrescente `Z→A`; dentro de cada grupo, listar todas as campanhas da
-      página em tabela compacta com `Ent.`, chave `sequência·Cnnn·Dnn`, status, Budget,
-      Spend, Custo, ROAS, mensagens, CPM e CTR. O nome Meta integral fica no audit e
-      aparece em alertas de ambiguidade/divergência.
+      em grupos de Página/UTM. Ordenar sempre os grupos com nome conciliado pelo nome
+      completo da página em ordem decrescente `Z→A`; grupos sem nome conciliado ficam
+      ao final como UTM/`N/D`. Dentro de cada grupo, listar todas as campanhas da página
+      em tabela compacta com `Ent.`, chave `sequência·Cnnn·Dnn`, status, Budget, Spend,
+      Custo, ROAS, mensagens, CPM e CTR. Acima de dez campanhas na mesma página, dividir
+      em partes de no máximo dez linhas, repetir o cabeçalho e mostrar `parte/total`.
+      O nome Meta integral fica no audit e aparece em alertas de ambiguidade/divergência.
 
       - Antes de renderizar qualquer período, consultar a dash atual via `/report/messenger`
       e mostrar `BD_REVENUE` como `BC agora` no cabeçalho de cada Página/UTM, inclusive

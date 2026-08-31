@@ -1006,6 +1006,8 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('Tabela consolidada — visão desktop', rendered)
         self.assertIn('N/D — 25 campanhas', rendered)
         self.assertIn('ordem decrescente pelo nome (Z→A)', rendered)
+        self.assertIn('Tabela da página • 1/3', rendered)
+        self.assertIn('Tabela da página • 3/3', rendered)
         for index in range(1, 26):
             self.assertRegex(rendered, rf'(?m)^{index}\s+●\s+{index:03d}\s+')
 
@@ -1051,6 +1053,7 @@ class ReportingTests(unittest.TestCase):
             {'name': '001 C001', 'campaign_id': '1', 'utm_campaign': 'pg_1', 'sb_page_name': 'Amy Shook', 'status': 'ACTIVE', 'spend': 1, 'has_insight': True},
             {'name': '002 C001', 'campaign_id': '2', 'utm_campaign': 'pg_2', 'sb_page_name': 'Tina Walter', 'status': 'ACTIVE', 'spend': 2, 'has_insight': True},
             {'name': '003 C001', 'campaign_id': '3', 'utm_campaign': 'pg_3', 'sb_page_name': 'Celia Draper', 'status': 'ACTIVE', 'spend': 3, 'has_insight': True},
+            {'name': '004 C001', 'campaign_id': '4', 'utm_campaign': 'pg_9', 'sb_page_name': None, 'status': 'PAUSED', 'spend': 0, 'has_insight': True},
         ]
         current = {
             'ready': True, 'date': '2026-08-31', 'broadcast_revenue': 9.0,
@@ -1062,10 +1065,11 @@ class ReportingTests(unittest.TestCase):
             },
         }
         pages = daily.build_page_summary(campaigns, current)
-        self.assertEqual([row['page_name'] for row in pages], ['Tina Walter', 'Celia Draper', 'Amy Shook'])
+        self.assertEqual([row['page_name'] for row in pages], ['Tina Walter', 'Celia Draper', 'Amy Shook', ''])
         rendered = '\n'.join(daily.render_grouped_page_tables(pages, campaigns))
         self.assertLess(rendered.index('Tina Walter'), rendered.index('Celia Draper'))
         self.assertLess(rendered.index('Celia Draper'), rendered.index('Amy Shook'))
+        self.assertLess(rendered.index('Amy Shook'), rendered.index('pg_9'))
         self.assertIn('BC agora $5.00', rendered)
 
     def test_revenue_anomaly_uses_equivalent_median_and_30_40_bands(self):

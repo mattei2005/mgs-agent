@@ -383,12 +383,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-D1-ANOMALY-DESIGN-20260831",
-      "next_step": "Aguardar feedback visual de Nicolas sobre o v5. Cron/post Diário continuam desabilitados até enablement separado; monitor 08:00 segue dependente de baseline comparável.",
+      "next_step": "Usar o renderer v6 em todo relatório Diário. Cron/post continuam desabilitados até enablement separado; monitor 08:00 segue dependente de baseline comparável.",
       "objective": "Manter o Diário Eggbev D-1 às 08:00 ET legível para decisão de clonagem e alertas de receita, sem tocar CPV 13/05",
-      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; registry:ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
-      "state": "renderer v5 mobile-first concluído após correção de nicolas: quatro blocos compactos por página/campanha substituem a linha horizontal gigante. live read-only 01:26 et: 4 páginas, 14 campanhas com entrega, 3 sem entrega, 17/17 representadas; blocos com 60/93/87/56 colunas; 51 testes pass; zero post/write/cron.",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; registry:ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831; audit:run-20260831T020653-0400.json",
+      "state": "renderer v6 concluído após segunda correção de nicolas: visão desktop inspirada em corte e roas, grupos por página/utm ordenados sempre pelo nome completo em z→a, tabelas de até 10 campanhas com cabeçalho repetido, e bc agora lido da dash atual via /report/messenger.bd_revenue mesmo no d-1. live d-1 02:06 et confirmou dashboard atual 31/08, broadcast total usd0.00, freshness 64 min; live atual mostrou tina/celia/aria/amy em z→a e 17/17 campanhas. 52 testes pass; zero post/write/cron/baseline write.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-31T05:27:46+00:00"
+      "updated_at": "2026-08-31T06:10:46+00:00"
     },
     {
       "agent": "ares",
@@ -839,6 +839,16 @@
       "state": "completed: runner creative_cut_24h account-scoped ativo a cada 15 min para c01-c03, com 80/10/10 e 90/10 no anúncio e pause terminal da campanha sem delete; diários 05/13 aquisição-only; cpv diário geral publicado/automatizado; monitor conta 05 ativo; contratos, skill, cpv regras, 93 testes, crons, knowledge control e report-infra reconciliados.",
       "thread_id": "1543778490610884679",
       "updated_at": "2026-08-31T04:16:25+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-cpv05-c04-c06-legacy-reuse-20260831",
+      "next_step": "Retomar o mesmo request após cooldown: ler C06 por lineage, criar somente AD01 se ainda ausente, normalizar os três ads e fazer readback consolidado. Depois concluir inventário, assignments, first-delivery e CREATIVE_CUT_24H.",
+      "objective": "Criar C04-C06 na conta 05 com mídia histórica C04-C48 priorizada por ROI Smart Bidding, mantendo copy/estrutura vigentes e lineage não zero.",
+      "source": "discord:thread:1542892971186454719; /root/.hermes/profiles/ares/work/cpv05-c04-c06-legacy-reuse-20260831/manifest.prevalidated.json; data/ares/meta-ads/engine-v3/state/checkpoints/cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3-2039876850230678.json",
+      "state": "RECOVERY_PENDING_C06: C04 e C05 estão COMPLETE no Engine v3 com campaign IDs 120248500821400046/120248500821410046, adsets 120248500822080046/120248500822060046 e seis ads reconciliados, normalizados e validados. O bundle C06 criou campaign 120248500979140046, adset 120248500979280046 e dois dos três ads (120248500981910046/120248500981800046); somente AD01 falhou com code 2 transitório. Nenhum objeto confirmado será repetido. Lease permanece ativa e a recuperação missing-only está agendada após cooldown.",
+      "thread_id": "1542892971186454719",
+      "updated_at": "2026-08-31T05:47:12+00:00"
     },
     {
       "agent": "ares",
@@ -1699,18 +1709,8 @@
       "state": "concluído: lyzmo e zytiva corrigidos; 6 pools e 30 rotas por publisher; m0/nm nos slots 1/2 do 001; url+jbf_operation por slot preservadas; sessão independente sem erros; backups e audit gravados.",
       "thread_id": "1540454000577745076",
       "updated_at": "2026-08-21T20:39:16+00:00"
-    },
-    {
-      "agent": "ares",
-      "id": "ares-cpv05-c04-c06-legacy-reuse-20260831",
-      "objective": "Criar C04-C06 na conta 05 com mídia histórica C04-C48 priorizada por ROI Smart Bidding, mantendo copy/estrutura vigentes e lineage não zero.",
-      "state": "RECOVERY_PENDING_C06: C04 e C05 estão COMPLETE no Engine v3 com campaign IDs 120248500821400046/120248500821410046, adsets 120248500822080046/120248500822060046 e seis ads reconciliados, normalizados e validados. O bundle C06 criou campaign 120248500979140046, adset 120248500979280046 e dois dos três ads (120248500981910046/120248500981800046); somente AD01 falhou com code 2 transitório. Nenhum objeto confirmado será repetido. Lease permanece ativa e a recuperação missing-only está agendada após cooldown.",
-      "next_step": "Retomar o mesmo request após cooldown: ler C06 por lineage, criar somente AD01 se ainda ausente, normalizar os três ads e fazer readback consolidado. Depois concluir inventário, assignments, first-delivery e CREATIVE_CUT_24H.",
-      "source": "discord:thread:1542892971186454719; /root/.hermes/profiles/ares/work/cpv05-c04-c06-legacy-reuse-20260831/manifest.prevalidated.json; data/ares/meta-ads/engine-v3/state/checkpoints/cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3-2039876850230678.json",
-      "thread_id": "1542892971186454719",
-      "updated_at": "2026-08-31T05:47:12+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:47:12+00:00"
+  "updated_at": "2026-08-31T06:10:46+00:00"
 }

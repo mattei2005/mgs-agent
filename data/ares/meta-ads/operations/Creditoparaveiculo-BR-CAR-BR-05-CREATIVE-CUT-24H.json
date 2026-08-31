@@ -27,8 +27,8 @@
     "timezone_offset_hours_utc": -3,
     "account_status": 1,
     "identity_status": "confirmed_live_meta_readback",
-    "next_sequential_campaign_number": 4,
-    "active_campaign_budget_usd_at_preflight": 0.0
+    "next_sequential_campaign_number": 7,
+    "active_campaign_budget_usd_at_preflight": 150.0
   },
   "strategy": {
     "management_strategy": "CREATIVE_CUT_24H",
@@ -80,6 +80,24 @@
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-08-29",
         "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248500821400046": {
+        "campaign_number": 4,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248500821410046": {
+        "campaign_number": 5,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248500979140046": {
+        "campaign_number": 6,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
       }
     }
   },
@@ -204,7 +222,8 @@
     "closed: Nicolas authorized the original C51-C53 creation, USD25 budgets, ACTIVE publication and start on 2026-08-29; Rodolfo later authorized the isolated lineage renumber to C01-C03 without changing the global naming rule",
     "closed: CREATIVE_CUT_24H assigned to the same three Meta campaign IDs, now C01-C03",
     "closed: 9 unique assets sanitized, Drive-reconciled, reserved and Meta pre-staged",
-    "closed: manifest validated, planned and prevalidated by Campaign Engine v3"
+    "closed: manifest validated, planned and prevalidated by Campaign Engine v3",
+    "closed: cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3 C04-C06 complete by Meta readback as ACTIVE 1x1x3, USD25 MAXVOL, start 2026-09-01 00:30 SP, lineage nonzero and valid UTMs"
   ],
   "write_mode": "controlled_write_authorized_first_launch",
   "write_enabled": true,
@@ -426,6 +445,27 @@
           "cycle_start_date": "2026-08-29",
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "4": {
+          "campaign_id": "120248500821400046",
+          "original_campaign_number": 4,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "5": {
+          "campaign_id": "120248500821410046",
+          "original_campaign_number": 5,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "6": {
+          "campaign_id": "120248500979140046",
+          "original_campaign_number": 6,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
         }
       },
       "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
@@ -437,7 +477,10 @@
         "allowed_campaign_ids": [
           "120248477978700046",
           "120248477978730046",
-          "120248478066030046"
+          "120248478066030046",
+          "120248500821400046",
+          "120248500821410046",
+          "120248500979140046"
         ],
         "allowed_actions": [
           "pause_dominant_ad_stage_a",
@@ -661,5 +704,5 @@
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-31T04:14:15Z"
+  "updated_at": "2026-08-31T06:11:33.109491Z"
 }
