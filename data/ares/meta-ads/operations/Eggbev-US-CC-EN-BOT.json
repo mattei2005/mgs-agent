@@ -160,24 +160,27 @@
       "cron_changes": 0
     },
     "thread_information_architecture": {
-      "status": "published_and_readback_verified",
+      "status": "v2_published_and_readback_verified",
       "requested_by": "Nicolas Holanda",
-      "updated_at_et": "2026-08-30T22:09:59-04:00",
+      "updated_at_et": "2026-08-31T00:53:44-04:00",
       "review_scope": {
-        "channel_threads_reviewed": 12,
-        "messages_reviewed": 1434,
+        "channel_threads_reviewed": 13,
+        "messages_reviewed": 1595,
+        "new_messages_since_v1": 150,
+        "new_human_messages_since_v1": 15,
         "canonical_routes": 6,
-        "historical_or_ad_hoc_threads": 6,
+        "historical_or_ad_hoc_threads": 7,
         "history_preserved": true
       },
-      "publication_source": "data/ares/discord/eggbev-thread-organization-20260830.json",
-      "publication_audit": "data/ares/meta-ads/audit/eggbev/thread-organization-publish-20260830.json",
+      "publication_source": "data/ares/discord/eggbev-thread-organization-20260831-v2.json",
+      "publication_audit": "data/ares/meta-ads/audit/eggbev/thread-organization-publish-v2-20260831.json",
       "publication_verification": {
         "routes_published": 6,
         "messages_published": 18,
         "exact_message_readbacks": 18,
         "nicolas_member_readback": "6/6",
         "zeus_member_readback": "6/6",
+        "rodolfo_member_readback": "6/6",
         "meta_writes": 0,
         "cron_changes": 0
       },

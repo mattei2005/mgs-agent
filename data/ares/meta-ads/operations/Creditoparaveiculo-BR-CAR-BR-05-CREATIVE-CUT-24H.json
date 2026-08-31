@@ -27,7 +27,7 @@
     "timezone_offset_hours_utc": -3,
     "account_status": 1,
     "identity_status": "confirmed_live_meta_readback",
-    "next_sequential_campaign_number": 51,
+    "next_sequential_campaign_number": 4,
     "active_campaign_budget_usd_at_preflight": 0.0
   },
   "strategy": {
@@ -82,6 +82,43 @@
         "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
       }
     }
+  },
+  "historical_creative_reuse_policy": {
+    "status": "ACTIVE_AUTHORIZED_BY_RODOLFO",
+    "authorized_at_sp": "2026-08-31T01:00:00-03:00",
+    "authorization_source": "discord:thread:1542892971186454719",
+    "new_production_sequence": {
+      "starts_at": 4,
+      "after_campaigns": [
+        1,
+        2,
+        3
+      ],
+      "historical_numbers_ignored_for_collision": {
+        "from": 4,
+        "through": 48
+      },
+      "historical_campaign_action": "preserve_disabled; never delete, replace or reactivate solely because a new campaign reuses the number",
+      "identity_rule": "Meta campaign IDs are authoritative when historical and new objects share the same campaign number or UTM wrapper"
+    },
+    "creative_source_priority": [
+      "eligible media from historical disabled account-05 campaigns C04-C48, ranked in Smart Bidding Reports > Adgroup",
+      "Shared Drive only after the eligible historical Meta creative pool is exhausted or technically ineligible"
+    ],
+    "smart_bidding_ranking": {
+      "account_name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "customer_id": "2039876850230678",
+      "currency": "USD",
+      "revenue_share": "Discount revenue share enabled",
+      "revenue_metric": "NET_REVENUE",
+      "grouping": "CAMPAIGN_ID + UTM_ADGROUP",
+      "formula": "(sum(NET_REVENUE) - sum(INVESTIMENT)) * 100 / sum(INVESTIMENT)",
+      "minimum_evidence": "positive INVESTIMENT; exclude copy artifacts that are not the original historical campaign",
+      "tie_break": "higher INVESTIMENT, then stable campaign/adgroup ID"
+    },
+    "creative_semantics": "creative means image/video only; current account copy/headlines, 1x1x3 structure, MAXVOL, USD25 budget, event, schedule and UTMs remain governed by the active production pattern",
+    "lineage_requirement": "reuse media through nonzero ad lineage without reactivating the historical source campaign",
+    "drive_fallback_gate": "all eligible historical creatives tested or reconciled technically ineligible"
   },
   "account_13_scope": {
     "operation_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",

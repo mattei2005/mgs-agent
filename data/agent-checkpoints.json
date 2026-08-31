@@ -482,6 +482,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-THREAD-ORGANIZATION-V2-20260831",
+      "next_step": "Daily cron/post remains pending a separate Nicolas approval after live dry-run review; clone_page_switch copied-adset remains blocked until Nicolas explicitly approves the alternate new-AdG recovery method",
+      "objective": "Reread every live/archived Eggbev thread after Nicolas updates and republish each canonical route with current approved information",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "completed",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-31T04:54:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
       "next_step": "Aguardar Nicolas aprovar explicitamente mudança de método do DUP03: criar novo AdG no shell existente com promoted_object pg_5024, pausar AdG copiado de Page antiga, copiar 3 anúncios com mídia/copy preservadas e tracking/JSON pg_5024, validar por GET; sem deletar o AdG antigo.",
       "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
@@ -1672,5 +1682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T04:30:32+00:00"
+  "updated_at": "2026-08-31T04:54:20+00:00"
 }
