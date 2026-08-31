@@ -366,7 +366,7 @@
           "live_read_only_report_verified": true,
           "tests_passed": 49,
           "renderer_complete_for_read_only": true,
-          "renderer_version": "single_unified_table_v4",
+          "renderer_version": "mobile_split_tables_v5",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
@@ -604,7 +604,7 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "single consolidated aligned table covering every campaign in scope, followed by at most five short Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "layout": "mobile-first split view: page-level Meta summary, page-level Smart Bidding economics, compact delivered-campaign table, separate no-delivery table, then at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
     "automation_change": "08:00 Daily design is approved; cron and automatic posting stay disabled until a live dry-run is reviewed and Nicolas explicitly authorizes enablement",
     "schedule_approval_is_not_cron_approval": true,
     "revenue_anomaly_detection": {
@@ -633,31 +633,48 @@
       }
     },
     "renderer_contract": {
-      "status": "single_unified_table_v4_clone_decision_and_revenue_alerts_materialized",
+      "status": "mobile_split_tables_v5_page_first_clone_decision_and_revenue_alerts_materialized",
       "campaign_scope": "for the 08:00 D-1 table, every campaign with an insight row in D-1 and no current ACTIVE campaign that lacks D-1 insight; for today/on-demand views, every currently effective ACTIVE campaign even without insight plus every campaign with insight in the requested period",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
+      "campaign_identity_display": "the table uses deterministic sequence·Cnnn·Dnn plus row number and compact Page/UTM; the full Meta name remains in audit and appears in alerts when ambiguity or mismatch exists",
       "per_campaign_fields": [
-        "full name",
+        "deterministic compact campaign key sequence·Cnnn·Dnn",
         "current status",
-        "start_time America/New_York",
-        "UTM_CAMPAIGN",
-        "source join status",
+        "compact Page/UTM identity",
         "Budget USD",
         "Amount spent USD",
         "messaging_conversation_started_7d",
         "Cost per messaging conversation started",
         "Purchase ROAS",
         "Meta CPM",
-        "CTR",
+        "CTR"
+      ],
+      "no_delivery_fields": [
+        "deterministic compact campaign key sequence·Cnnn·Dnn",
+        "compact Page/UTM identity",
+        "start_time America/New_York",
+        "Budget USD",
+        "current status"
+      ],
+      "per_page_meta_fields": [
+        "full Page name plus UTM",
+        "campaign count",
+        "delivered campaign count",
+        "Meta Amount spent aggregated by page",
+        "spend-weighted Meta Purchase ROAS",
+        "Meta Cost per messaging conversation started aggregated by page"
+      ],
+      "per_page_smart_bidding_fields": [
+        "full Page name plus UTM",
         "Smart Bidding investment",
         "Smart Bidding revenue",
+        "Smart Bidding Broadcast revenue",
+        "Smart Bidding Drip revenue",
+        "Smart Bidding ROI",
         "Smart Bidding LEADS",
-        "Smart Bidding AVG_PRICE",
         "Smart Bidding RPS",
-        "Smart Bidding CPM",
-        "Smart Bidding EPC",
-        "observation/reconciliation reason"
+        "Smart Bidding EPC"
       ],
       "smart_bidding_freshness_visible": [
         "latest source timestamp or N/D",
@@ -666,7 +683,7 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "one indexed aligned table only, with full campaign name, Page/UTM, Meta, Smart Bidding, Pricing and join fields; followed by a maximum of five short alerts",
+      "layout": "four compact mobile-first blocks: Page/UTM Meta, Page/UTM Smart Bidding, campaigns with delivery, and ACTIVE without delivery; Smart Bidding economics appears once per Page/UTM and is never repeated across campaign rows; followed by a maximum of five short alerts",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "source_join": {
@@ -708,7 +725,7 @@
     },
     "remaining_limitations": [
       "RPS, CPM, EPC, real ROI, estimated ROI and other available monetization metrics should be consumed directly from a compatible Smart Bidding vertical, Messenger Pages or domain route; the runner still needs exact endpoint/field readback for each metric before publishing live values",
-      "the current Smart Bidding schema exposes no accepted update timestamp, so freshness is displayed as unverifiable and Smart Bidding monetary metrics remain N/D",
+      "Smart Bidding freshness is accepted only when /estimated/delay exposes currentFillTime within 2h; the live on-demand run at 2026-08-31 01:16 ET verified currentFillTime with age 78 minutes, while any future missing/stale timestamp still forces N/D",
       "source-route selection and identity mapping for vertical, Messenger Pages and domain are not yet materialized in the Daily runner; this is an implementation gap, not a Smart Bidding data-availability limitation",
       "the 08:00 ET Daily design is defined, but automatic posting and Daily cron remain disabled until Nicolas reviews a live dry-run and separately authorizes enablement",
       "same-clock anomaly alerts require at least three valid 08:00 snapshots per page; until then the report explicitly says baseline em formação"

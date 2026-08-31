@@ -989,7 +989,7 @@ class ReportingTests(unittest.TestCase):
         self.assertAlmostEqual(row['ctr'], 2.0)
         self.assertIn('estado atual PAUSED', row['note'])
 
-    def test_render_has_all_25_full_names_without_silent_limit(self):
+    def test_render_has_all_25_compact_campaign_keys_without_silent_limit(self):
         names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
         campaigns = [{
             'name': name, 'status': 'ACTIVE', 'start_time': '2026-08-30T00:00:00-0400',
@@ -1003,9 +1003,11 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Tabela única consolidada — 25 campanhas', rendered)
-        for name in names:
-            self.assertEqual(rendered.count(name), 1)
+        self.assertIn('Campanhas com entrega — 25', rendered)
+        self.assertIn('Páginas — Meta Ads', rendered)
+        self.assertIn('Páginas — Smart Bidding', rendered)
+        for index in range(1, 26):
+            self.assertRegex(rendered, rf'(?m)^{index}\s+{index:03d}\s+')
 
     def test_smart_bidding_freshness_is_explicit_and_nd_is_not_percent(self):
         period = {
@@ -1023,7 +1025,7 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('Freshness máx.', rendered)
         self.assertNotIn('N/D%', rendered)
 
-    def test_unified_renderer_exposes_meta_sb_and_pricing_columns(self):
+    def test_compact_renderer_exposes_meta_sb_and_pricing_columns(self):
         campaign = {
             'name': 'Campaign pg_12345', 'status': 'ACTIVE', 'utm_campaign': 'pg_12345',
             'join_status': 'matched', 'spend': 12.0, 'messaging_started': 4.0,
@@ -1037,9 +1039,11 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': True, 'target_report_rows': []}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Tabela única consolidada', rendered)
+        self.assertIn('Páginas — Meta Ads', rendered)
+        self.assertIn('Páginas — Smart Bidding', rendered)
+        self.assertIn('Campanhas com entrega', rendered)
         self.assertIn('C/msg', rendered)
-        self.assertIn('M.CPM', rendered)
+        self.assertIn('CPM', rendered)
         self.assertIn('RPS', rendered)
         self.assertIn('EPC', rendered)
         self.assertIn('1/1 campanhas', rendered)
@@ -1100,7 +1104,7 @@ class ReportingTests(unittest.TestCase):
         self.assertTrue(any('Nome duplicado' in bullet for bullet in bullets))
         self.assertTrue(any('Naming/UTM divergente' in bullet and 'pg_5024' in bullet for bullet in bullets))
 
-    def test_discord_split_keeps_fences_balanced_without_omitting_names(self):
+    def test_discord_split_keeps_fences_balanced_without_omitting_compact_keys(self):
         names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
         campaigns = [{
             'name': name, 'status': 'ACTIVE', 'start_time': '2026-08-30T00:00:00-0400',
@@ -1119,8 +1123,8 @@ class ReportingTests(unittest.TestCase):
         self.assertTrue(all(len(chunk) <= 500 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
         joined = '\n'.join(chunks)
-        for name in names:
-            self.assertEqual(joined.count(name), 1)
+        for index in range(1, 26):
+            self.assertRegex(joined, rf'(?m)^{index}\s+{index:03d}\s+')
 
 
 class ContractTests(unittest.TestCase):

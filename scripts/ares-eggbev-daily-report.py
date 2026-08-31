@@ -869,11 +869,13 @@ def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
             continue
         rows.append([
             str(index), compact_campaign_key(row.get('name'), row.get('campaign_id')), compact_page_label(row),
-            common.norm(row.get('status')) or 'N/D', common.fmt_money(row.get('spend')),
-            common.fmt_number(row.get('purchase_roas')), common.fmt_money(row.get('cost_per_messaging_started')),
-            common.fmt_number(row.get('messaging_started'), 0), format_percent(row.get('ctr')),
+            common.norm(row.get('status')) or 'N/D', common.fmt_money(row.get('budget_usd')),
+            common.fmt_money(row.get('spend')), common.fmt_number(row.get('purchase_roas')),
+            common.fmt_money(row.get('cost_per_messaging_started')),
+            common.fmt_number(row.get('messaging_started'), 0), common.fmt_money(row.get('cpm')),
+            format_percent(row.get('ctr')),
         ])
-    return aligned_table(['#', 'Camp', 'Página', 'St', 'Spend', 'ROAS', 'C/msg', 'Msg', 'CTR'], rows)
+    return aligned_table(['#', 'Camp', 'Página', 'St', 'Budget', 'Spend', 'ROAS', 'C/msg', 'Msg', 'CPM', 'CTR'], rows)
 
 
 def render_no_delivery_table(campaigns: list[dict[str, Any]]) -> list[str]:
