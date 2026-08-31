@@ -342,6 +342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ACTION-HOLD-20260831",
+      "next_step": "Manter report-only até nova instrução explícita de Nicolas; ao liberar, reconciliar Meta ao vivo e desabilitar o hold antes de restaurar controlled-write.",
+      "objective": "Manter todos os ciclos Eggbev em visualização sem writes durante o teste manual de Nicolas",
+      "source": "discord:thread:1541578606076231750; /root/.hermes/profiles/ares/state/eggbev-action-hold.json",
+      "state": "hold ativo sem expiração automática: corte e roas continua agendado e publicando a tabela em dry-run; ações planejadas aparecem apenas como visualização. pausas/reativações roas, fase 3, budget e pausa por limite de leads estão suprimidos. o ciclo 05:00 anterior ao pedido já confirmou 30 pausas de anúncios; nenhuma reativação foi feita pelo ares após o pedido.",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-31T09:58:14+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-ARIA-C003-2X-IMMEDIATE-20260831",
       "next_step": "Obter aprovação exata de Rodolfo para o override one-time de início imediato deste request e o OK final de Nicolas sobre o resumo; então atualizar somente a allowlist canônica com inventário/REPORT-INFRA, repetir preflight/collision scan, refrescar start_time para o primeiro instante Meta-safe, selar o manifest e executar/reconciliar via Engine v3 sem replay cego.",
       "objective": "Clonar exatamente duas vezes a campanha 163 - Aria Kensington - ENG - US - (pg_8348) C003, com USD45 por clone e início imediato sem schedule.",
@@ -1732,5 +1742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T09:56:45+00:00"
+  "updated_at": "2026-08-31T09:58:14+00:00"
 }
