@@ -352,6 +352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-NAMING-20260831",
+      "next_step": "On any future clone_page_switch request, resolve exact target Page sequence/name/pg, scan next free DUPnn and materialize the name through page_switch_campaign_name; the mode itself remains write-blocked until Rodolfo approves the deterministic target-AdG architecture",
+      "objective": "Make selected-Page campaign renaming mandatory and automatic for every Eggbev clone_page_switch",
+      "source": "data/ares/meta-ads/audit/eggbev/clone-page-switch-naming-thread-20260831.json",
+      "state": "complete: canonical helper materialized; fail-closed config check; operation v3 account prompt and skills updated; active prompt synced; thread update published and read back; 180/180 tests and 10/10 knowledge regressions pass; zero meta writes",
+      "thread_id": "1543333373945053184",
+      "updated_at": "2026-08-31T05:33:11+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-CLONING-V3-HARDENING-20260829",
       "next_step": "Ao receber campanhas fonte reais, executar intake curto, preflight Meta vivo, scan de DUP, manifest prevalidado, resumo final, gates de autoridade e somente então execute/readback",
       "objective": "Corrigir integralmente a clonagem Eggbev conforme pedido de Nicolas",
@@ -1692,5 +1702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:27:46+00:00"
+  "updated_at": "2026-08-31T05:33:11+00:00"
 }
