@@ -503,12 +503,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-SB-REPORT-PARITY-20260831",
-      "next_step": "Consultar payload vivo, materializar join Página/UTM com valores diretos Messenger Pages, testar e reemitir relatório corrigido na thread Intraday com readback.",
-      "objective": "Corrigir o Intraday Eggbev para usar a Smart Bidding Messenger Pages como fonte econômica canônica e garantir paridade em relatórios futuros",
-      "source": "discord:thread:1543974826891280394; target-thread:1541578606076231750; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "diagnóstico iniciado: print do gestor mostra roi atual/estimado por página/utm na messenger pages; runner atual calcula roi por performance_per_campaigns e estimated/revenue/utm_adgroup, gerando divergência.",
+      "next_step": "Executar os próximos relatórios Corte e ROAS pela política v25 e manter o gate de writes fail-closed",
+      "objective": "Corrigir todos os relatórios Corte e ROAS Eggbev para espelhar Smart Bidding Messenger Pages",
+      "source": "discord:thread:1543974826891280394",
+      "state": "completed: v25 materializada; 100 testes pass; dry-run vivo 19 campanhas; 4/4 page/utm com paridade exata; zero writes",
       "thread_id": "1543974826891280394",
-      "updated_at": "2026-08-31T13:27:26+00:00"
+      "updated_at": "2026-08-31T13:57:44+00:00"
     },
     {
       "agent": "ares",
@@ -1772,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:40:25+00:00"
+  "updated_at": "2026-08-31T13:57:44+00:00"
 }

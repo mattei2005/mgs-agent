@@ -1451,12 +1451,12 @@ class ContractTests(unittest.TestCase):
         self.assertIn('reduced explanatory subset', full_v22['rejected_reference'])
         self.assertIn('shortened table subsets are forbidden', full_v22['manual_examples'])
         self.assertIn('no future table modification', full_v22['layout_lock'])
-        self.assertIn('same future-estimate backend', reporting_policy['source_routes']['economics_estimated'])
+        self.assertIn('applied only to the current ET day', reporting_policy['source_routes']['economics_estimated'])
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
             self.assertIn(key, formulas)
         self.assertIn('Meta Purchase ROAS decides only ad-level cuts/reactivations', reporting_policy['decision_separation'])
-        self.assertIn('performance_per_campaigns', reporting_policy['source_routes']['economics_actual'])
+        self.assertIn('/report/messenger', reporting_policy['source_routes']['economics_actual'])
         self.assertIn('pagination uses actual rendered character count', reporting_policy['pagination'])
         self.assertIn('never splits a campaign row', reporting_policy['pagination'])
         self.assertIn('keeps every code fence balanced', reporting_policy['pagination'])
