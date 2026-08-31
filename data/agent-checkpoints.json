@@ -763,12 +763,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-roas-ad-only-visual-v18-20260830",
-      "next_step": "REPORT-INFRA e exemplo final ao Nicolas",
+      "next_step": "usar o novo layout no próximo ciclo; campanha e ad set permanecem imutáveis pelo ROAS",
       "objective": "Corrigir Corte e ROAS para writes somente em anúncios e mostrar ads abreviados ordenados por ROAS",
       "source": "discord:thread:1541578606076231750",
-      "state": "validated_73_tests_dry_run_zero_campaign_writes",
+      "state": "completed_ad_only_policy_renderer_v18_report_infra_readback_ok",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T02:05:24+00:00"
+      "updated_at": "2026-08-31T02:08:11+00:00"
     },
     {
       "agent": "ares",
@@ -883,12 +883,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c51-c53-renumber-lineage-repair-20260830",
-      "next_step": "Acompanhar desempenho normal na rotina CREATIVE_CUT_24H; nenhum write corretivo pendente",
+      "next_step": "Timer systemd detached executa o watcher às 00:30 São Paulo; validar ACTIVE e início da primeira janela CREATIVE_CUT_24H por readback do runtime",
       "objective": "Corrigir zero delivery por source_ad_id=0 nas campanhas C51-C53 da conta 05, renumerar para C01-C03 e bloquear recorrência global",
       "source": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json",
-      "state": "complete_meta_repair_and_first_delivery_confirmed",
+      "state": "delivery_confirmed_late_first_spend_paused_verified_reactivation_20260831_0030_sp_scheduled",
       "thread_id": "1543263056262594641",
-      "updated_at": "2026-08-31T01:57:16+00:00"
+      "updated_at": "2026-08-31T02:06:05+00:00"
     },
     {
       "agent": "zeus",
@@ -1572,5 +1572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:05:24+00:00"
+  "updated_at": "2026-08-31T02:08:11+00:00"
 }
