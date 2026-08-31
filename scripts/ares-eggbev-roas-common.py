@@ -99,7 +99,6 @@ def default_state(local_date: dt.date, threshold: float = 0.40) -> dict[str, Any
         'date_et': local_date.isoformat(),
         'threshold': round(float(threshold), 4),
         'paused_ads': {},
-        'paused_campaigns': {},
         'last_cycle': None,
     }
 
@@ -108,10 +107,9 @@ def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_valu
     """Reset daily decision fields without losing Ares pause provenance."""
     previous = state if isinstance(state, dict) else {}
     rolled = default_state(local_date, reset_value)
-    for key in ('paused_ads', 'paused_campaigns'):
-        value = previous.get(key)
-        if isinstance(value, dict):
-            rolled[key] = dict(value)
+    value = previous.get('paused_ads')
+    if isinstance(value, dict):
+        rolled['paused_ads'] = dict(value)
     previous_date = norm(previous.get('date_et'))
     if previous_date and previous_date != local_date.isoformat():
         rolled['provenance_rolled_from_date_et'] = previous_date
@@ -126,7 +124,9 @@ def load_state(local_date: dt.date, reset_value: float = 0.40) -> tuple[dict[str
     if state.get('date_et') != local_date.isoformat():
         return rollover_state(state, local_date, reset_value), True
     state.setdefault('paused_ads', {})
-    state.setdefault('paused_campaigns', {})
+    # Retire legacy ROAS campaign provenance. This cycle is ad-only and must
+    # never use a historical campaign entry to plan or execute a status write.
+    state.pop('paused_campaigns', None)
     state.setdefault('threshold', reset_value)
     return state, False
 
@@ -207,10 +207,7 @@ def read_native_rules(meta, token: str, act: str) -> dict[str, Any]:
 def detect_manual_interventions(state: dict[str, Any], tracked_ads: list[dict[str, Any]], tracked_campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Flag tracked objects changed after Ares' recorded write; never discard provenance automatically."""
     review: list[dict[str, Any]] = []
-    groups = (
-        ('ad', state.get('paused_ads') or {}, tracked_ads),
-        ('campaign', state.get('paused_campaigns') or {}, tracked_campaigns),
-    )
+    groups = (('ad', state.get('paused_ads') or {}, tracked_ads),)
     for kind, entries, rows in groups:
         by_id = {norm(row.get('id')): row for row in rows if norm(row.get('id'))}
         for object_id, entry in entries.items():
@@ -225,7 +222,6 @@ def detect_manual_interventions(state: dict[str, Any], tracked_ads: list[dict[st
                     'action': 'ASK_NICOLAS_FOR_ORIENTATION',
                 })
     tracked_ad_rows = {norm(row.get('id')): row for row in tracked_ads if norm(row.get('id'))}
-    paused_campaigns = state.get('paused_campaigns') or {}
     for ad_id, entry in (state.get('paused_ads') or {}).items():
         if not isinstance(entry, dict):
             continue
@@ -236,8 +232,7 @@ def detect_manual_interventions(state: dict[str, Any], tracked_ads: list[dict[st
             ('adset', entry.get('adset_id'), entry.get('adset_updated_time'), adset.get('updated_time')),
         ]
         campaign_id = norm(entry.get('campaign_id'))
-        if campaign_id not in paused_campaigns:
-            checks.append(('campaign', campaign_id, entry.get('campaign_updated_time'), campaign.get('updated_time')))
+        checks.append(('campaign', campaign_id, entry.get('campaign_updated_time'), campaign.get('updated_time')))
         for kind, object_id, expected_raw, current_raw in checks:
             expected = norm(expected_raw)
             current = norm(current_raw)
@@ -276,10 +271,6 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
         if ad_status == 200 and isinstance(row, dict):
             tracked_ads.append(row)
     tracked_campaigns: list[dict[str, Any]] = []
-    for campaign_id in sorted((state.get('paused_campaigns') or {}).keys()):
-        cstatus, row, _ = meta.graph_get(campaign_id, token, {'fields': 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time'})
-        if cstatus == 200 and isinstance(row, dict):
-            tracked_campaigns.append(row)
     fields = 'ad_id,ad_name,campaign_id,campaign_name,spend,impressions,inline_link_clicks,cost_per_inline_link_click,cpm,ctr,actions,action_values,cost_per_action_type,purchase_roas'
     insight_params = {'level': 'ad', 'fields': fields, 'limit': 200}
     if since == 'today':

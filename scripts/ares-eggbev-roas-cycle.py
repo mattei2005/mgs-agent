@@ -3,7 +3,7 @@
 
 Default mode is dry-run. Controlled writes require operation runtime enablement,
 --apply, --post-report, reconciled sources, no conflicting native rule, and
-pre/post Meta readbacks. This script never changes budget, ad set, or creative.
+pre/post Meta readbacks. This script never changes campaign, budget, ad set, or creative.
 """
 from __future__ import annotations
 
@@ -232,6 +232,37 @@ def _campaign_action(decisions: list[dict[str, Any]], scaled: bool) -> tuple[str
     return '👁️', 'OBSERVAR', 'sem decisão executável'
 
 
+def _ad_short_label(decision: dict[str, Any], fallback_index: int) -> str:
+    """Return the AD NN slot when available, without exposing the full name or ID."""
+    match = re.search(r'\bAD\s*0*(\d+)\b', common.norm(decision.get('ad_name')), flags=re.IGNORECASE)
+    if match:
+        return f'{int(match.group(1)):02d}'
+    return f'#{fallback_index:02d}'
+
+
+def _ad_action_signal(decision: dict[str, Any]) -> str:
+    action = common.norm(decision.get('action')).upper()
+    if action == 'PAUSE_AD':
+        return '🛑'
+    if action == 'REACTIVATE_AD':
+        return '♻️'
+    configured = common.norm(decision.get('configured_status')).upper()
+    effective = common.norm(decision.get('effective_status')).upper()
+    return '✅' if configured == 'ACTIVE' and effective == 'ACTIVE' else '⏸'
+
+
+def _ads_roas_visual(decisions: list[dict[str, Any]]) -> str:
+    """Compact ad slots ordered from highest ROAS to lowest, as in Ads Manager."""
+    items: list[tuple[tuple[Any, ...], str]] = []
+    for fallback_index, decision in enumerate(decisions, start=1):
+        roas = common.finite_float(decision.get('purchase_roas'))
+        label = _ad_short_label(decision, fallback_index)
+        roas_text = common.fmt_number(roas) if roas is not None else 'N/D'
+        token = f'{label}·{roas_text}{_ad_action_signal(decision)}'
+        items.append(((roas is None, -(roas or 0.0), label), token))
+    return ' '.join(token for _, token in sorted(items, key=lambda item: item[0]))
+
+
 def _append_table_pages(
     lines: list[str], title: str, header: str, separator: str,
     rows: list[str], page_size: int = 12,
@@ -383,6 +414,7 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             'pause_ads': sum(1 for item in decisions if item.get('action') == 'PAUSE_AD'),
             'reactivate_ads': sum(1 for item in decisions if item.get('action') == 'REACTIVATE_AD'),
             'keep_ads': sum(1 for item in decisions if item.get('action') == 'KEEP'),
+            'ads_roas': _ads_roas_visual(decisions),
             'decision_reasons': sorted({common.norm(item.get('reason')) for item in decisions if common.norm(item.get('reason'))}),
             'roi_real': (economic or {}).get('roi_real'),
             'roi_estimated': (economic or {}).get('roi_estimated'),
@@ -701,7 +733,8 @@ def _intraday_action_visual(row: dict[str, Any]) -> str:
 
 def _compact_legend() -> str:
     return (
-        '**Legenda:** 🛑n cortes • ♻️n reativações • ✅ manter • 👁️ observar • 🚀 escala • '
+        '**Legenda:** Ads ↓ = maior→menor ROAS: ✅ manter ligado • 🛑 desligar • ♻️ religar • ⏸ já desligado • '
+        'Ação: 🛑n/♻️n = quantidade de anúncios • 👁️ observar • 🚀 escala • '
         'R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% a >-20% | 🔴 ≤-20% | ⚪ N/D'
     )
 
@@ -729,6 +762,7 @@ def _dashboard_desktop_rows(
             _fmt_usd(row.get('spend')),
             _fmt_usd(row.get('cost_per_messaging_started')),
             common.fmt_number(row.get('purchase_roas')),
+            common.norm(row.get('ads_roas')) or 'N/D',
             _fmt_signed_percent(row.get('roi_real')),
             _fmt_signed_percent(row.get('roi_estimated')),
             common.fmt_number(row.get('sb_leads'), 0),
@@ -744,7 +778,7 @@ def _append_desktop_dashboard(
 ) -> None:
     headers = [
         'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
-        'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação',
+        'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação',
     ]
     pages = _compact_table_pages(
         headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars, max_rows=10,

@@ -173,6 +173,6 @@ Diário e Intraday devem exibir `management_strategy`, estágio, início da jane
 - [x] IDs das threads Intraday, Diário e Criar campanhas confirmados; member sync validado nas três
 - [x] manager, budget do lançamento e controlled write registrados
 - [x] C01, C02 e C03 atribuídas nominalmente à estratégia, com IDs técnicos/origem anterior preservados em audit
-- [ ] watcher de primeiro gasto account-scoped com state/idempotência, testes, dry-run live e cron readback
-- [ ] Diário e Intraday read-only com tabelas desktop, testes, dry-run live, crons script-only e threads fixas
+- [x] watcher de primeiro gasto account-scoped com state/idempotência, testes, dry-run live e cron readback
+- [x] Diário e Intraday read-only com tabelas desktop, testes, dry-run live, crons script-only e threads fixas
 - [ ] runner automático de corte por criativo permanece desabilitado até existir implementação, fixtures 80/10/10 e 90/10, canário PAUSED e autorização específica

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "campaigns_active_reports_and_first_delivery_authorized_pending_runtime_readback",
+  "status": "ACTIVE_ACCOUNT05_WATCHER_AND_READ_ONLY_REPORTS",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -164,8 +164,8 @@
   "activation_gates": [
     "closed: account 05 id, alias, currency and America/Sao_Paulo timezone confirmed by live API",
     "closed: 1Password token reference registered without copying credentials",
-    "closed: Nicolas authorized C51-C53 creation, USD25 budgets, ACTIVE publication and start on 2026-08-29",
-    "closed: CREATIVE_CUT_24H assigned to C51-C53",
+    "closed: Nicolas authorized the original C51-C53 creation, USD25 budgets, ACTIVE publication and start on 2026-08-29; Rodolfo later authorized the isolated lineage renumber to C01-C03 without changing the global naming rule",
+    "closed: CREATIVE_CUT_24H assigned to the same three Meta campaign IDs, now C01-C03",
     "closed: 9 unique assets sanitized, Drive-reconciled, reserved and Meta pre-staged",
     "closed: manifest validated, planned and prevalidated by Campaign Engine v3"
   ],
@@ -195,7 +195,7 @@
     "operational_envelope_floor_usd": 500.0,
     "operational_envelope_balance_after_creation_usd": 425.0,
     "activation_requires_remaining_strategy_gates": false,
-    "execution_state": "COMPLETE_META_READBACK_ASSETS_TESTING_FIRST_DELIVERY_RUNTIME_PENDING",
+    "execution_state": "COMPLETE_META_READBACK_LINEAGE_REPAIRED_ASSETS_TESTING_FIRST_DELIVERY_ARMED_REPORTS_ACTIVE",
     "prevalidation_digest": "5817bc1c11656ce23771cb8dae6f65f482c91ce63734081e8ff7aa9329d86cdc",
     "engine_manifest_digest": "8f47184748d9a0ddc70da888ace3a402f3b580dd52604d08c19d3a801e27eebc",
     "campaign_ids": ["120248477978700046", "120248477978730046", "120248478066030046"],
@@ -330,7 +330,7 @@
     "authorized_by": "Rodolfo Mattei",
     "authorization_source": "discord:thread:1543778490610884679",
     "watch_interval_minutes": 15,
-    "scope": "C51-C53 and every future account-05 production campaign explicitly assigned to CREATIVE_CUT_24H after validated readback",
+    "scope": "C01-C03 and every future account-05 production campaign explicitly assigned to CREATIVE_CUT_24H after validated readback",
     "grace_window": "00:30 through 02:00 inclusive America/Sao_Paulo",
     "grace_action": "first observed spend in the healthy window starts the first CREATIVE_CUT_24H window without pause",
     "late_action": "first observed spend outside the healthy window pauses the campaign once with GET readback",
@@ -406,11 +406,11 @@
     "Nicolas authorized the original one-time creation and ACTIVE publication of the three account-05 campaigns at USD25 each; their Meta campaign IDs remain preserved and the later authorized lineage task reconciled them as C01-C03.",
     "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
     "The initial account05 clone source lacked verified BRAZIL_REGULATION identities; two empty shells were archived after zero-child readback and recovery switched to from_zero_prestaged using account13 C12 as a CARRO compliance reference.",
-    "Asset 099 failed Meta creative_create twice and was moved to 05_REJECTED; asset 103 replaced it and is live as C53 AD03.",
-    "Campaign creation/readback and creative lifecycle are complete; first-delivery auto-enrollment remains pending because the installed watcher is account13-only.",
+    "Asset 099 failed Meta creative_create twice and was moved to 05_REJECTED; asset 103 replaced it and remains in the third campaign, now C03 AD03.",
+    "Campaign creation/readback, creative lifecycle and first-delivery account-05 enrollment are complete; Daily and Intraday are active read-only runtimes.",
     "No placeholder thread ID may be used for delivery.",
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-29T04:55:32Z"
+  "updated_at": "2026-08-31T01:48:24Z"
 }

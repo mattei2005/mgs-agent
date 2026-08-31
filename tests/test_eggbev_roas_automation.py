@@ -64,15 +64,15 @@ class PhaseTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             cycle.scheduled_cycle_at(self.at(5, 16))
 
-    def test_daily_rollover_resets_threshold_but_preserves_pause_provenance(self):
+    def test_daily_rollover_preserves_only_ad_pause_provenance(self):
         previous = common.default_state(dt.date(2026, 8, 28), 0.55)
         previous['paused_ads']['a1'] = {'reason': 'roas_cycle', 'campaign_id': 'c1'}
-        previous['paused_campaigns']['c1'] = {'reason': 'roas_zero_active_ads'}
+        previous['paused_campaigns'] = {'c1': {'reason': 'legacy_roas_zero_active_ads'}}
         rolled = common.rollover_state(previous, dt.date(2026, 8, 29), 0.40)
         self.assertEqual(rolled['date_et'], '2026-08-29')
         self.assertEqual(rolled['threshold'], 0.40)
         self.assertIn('a1', rolled['paused_ads'])
-        self.assertIn('c1', rolled['paused_campaigns'])
+        self.assertNotIn('paused_campaigns', rolled)
         self.assertEqual(rolled['provenance_rolled_from_date_et'], '2026-08-28')
 
 
@@ -116,11 +116,11 @@ class DecisionTests(unittest.TestCase):
     def test_ares_paused_ad_reactivates_above_threshold(self):
         state = common.default_state(dt.date(2026, 8, 29))
         state['paused_ads']['a1'] = {'reason': 'roas_cycle', 'campaign_id': 'c1'}
-        state['paused_campaigns']['c1'] = {'reason': 'roas_zero_active_ads'}
         tracked = [active_ad(effective='PAUSED', configured='PAUSED')]
         result = self.decide(tracked=tracked, insights={'a1': metric(5.0, 0.41)}, state=state, phase='PHASE_2')
         self.assertEqual(result['decisions'][0]['action'], 'REACTIVATE_AD')
-        self.assertEqual(result['campaign_actions'][0]['action'], 'REACTIVATE_CAMPAIGN')
+        self.assertFalse(result['campaign_actions'])
+        self.assertEqual(result['counts']['reactivate_campaigns'], 0)
 
     def test_paused_ad_equal_threshold_does_not_reactivate(self):
         state = common.default_state(dt.date(2026, 8, 29))
@@ -139,9 +139,11 @@ class DecisionTests(unittest.TestCase):
         result = self.decide(tracked=tracked, insights={'a1': metric(5.0, 9.0)}, state=state, phase='PHASE_2')
         self.assertEqual(result['decisions'][0]['reason'], 'tracked_adset_not_configured_active')
 
-    def test_last_active_ad_cut_pauses_campaign(self):
+    def test_last_active_ad_cut_never_pauses_campaign_or_adset(self):
         result = self.decide([active_ad()], insights={'a1': metric(3.0, 0.10)}, phase='PHASE_2')
-        self.assertEqual(result['campaign_actions'][0]['action'], 'PAUSE_CAMPAIGN')
+        self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
+        self.assertFalse(result['campaign_actions'])
+        self.assertEqual(result['counts']['pause_campaigns'], 0)
 
     def test_campaign_stays_active_when_another_ad_survives(self):
         ads = [active_ad('a1'), active_ad('a2')]
@@ -151,6 +153,32 @@ class DecisionTests(unittest.TestCase):
     def test_no_cycle_never_plans_actions(self):
         result = self.decide([active_ad()], insights={'a1': metric(100.0, None)}, phase='NO_CYCLE')
         self.assertEqual(result['counts']['pause_ads'], 0)
+
+
+class ExecutePlanTests(unittest.TestCase):
+    def test_execute_plan_ignores_campaign_actions_and_writes_only_ads(self):
+        plan = {
+            'decisions': [
+                {'ad_id': 'a1', 'ad_name': 'AD 01', 'campaign_id': 'c1', 'adset_status': 'ACTIVE', 'action': 'REACTIVATE_AD'},
+                {'ad_id': 'a2', 'ad_name': 'AD 02', 'campaign_id': 'c1', 'adset_status': 'ACTIVE', 'action': 'PAUSE_AD'},
+            ],
+            'campaign_actions': [
+                {'campaign_id': 'c1', 'action': 'REACTIVATE_CAMPAIGN'},
+                {'campaign_id': 'c1', 'action': 'PAUSE_CAMPAIGN'},
+            ],
+        }
+        state = {'paused_ads': {'a1': {'reason': 'roas_cycle'}}}
+        run = {'writes': [], 'audit_path': '/tmp/ignored.json', 'started_at_et': '2026-08-30T20:00:00-04:00', 'phase': 'PHASE_2', 'threshold': .4}
+
+        def write_result(_meta, _token, object_id, status):
+            return {'object_id': object_id, 'ok': True, 'stage': 'confirmed', 'after': {'status': status}}
+
+        with mock.patch.object(common, 'reconcile_status_write', side_effect=write_result) as write, mock.patch.object(common, 'atomic_json'):
+            cycle.execute_plan(object(), 'token', plan, state, run)
+        self.assertEqual([(call.args[2], call.args[3]) for call in write.call_args_list], [('a1', 'ACTIVE'), ('a2', 'PAUSED')])
+        self.assertTrue(all(item['kind'] == 'ad' for item in run['writes']))
+        self.assertNotIn('a1', state['paused_ads'])
+        self.assertIn('a2', state['paused_ads'])
 
 
 class SourceGateTests(unittest.TestCase):
@@ -371,6 +399,7 @@ class ReportingTests(unittest.TestCase):
             'campaign_id': 'c1', 'name': '123 - Full Campaign - ENG - US - (pg_12345)',
             'action_emoji': '🛑', 'action_label': 'CORTAR', 'action_detail': '1 anúncio(s)',
             'pause_ads': 1, 'reactivate_ads': 0,
+            'ads_roas': '03·0,92✅ 02·0,76✅ 01·0,30🛑',
             'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
             'spend': 12, 'messaging_started': 4, 'cost_per_messaging_started': 3,
             'messaging_results': 6, 'cost_per_message': 2, 'cpc_link': .4,
@@ -397,13 +426,14 @@ class ReportingTests(unittest.TestCase):
         rendered = cycle.render_report(run)
         self.assertIn('## 🛑 Corte & ROAS •', rendered)
         self.assertIn('🎯 `1 camp`', rendered)
-        self.assertIn('**Legenda:** 🛑n cortes • ♻️n reativações', rendered)
+        self.assertIn('**Legenda:** Ads ↓ = maior→menor ROAS', rendered)
+        self.assertIn('🛑n/♻️n = quantidade de anúncios', rendered)
         self.assertIn('R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% a >-20% | 🔴 ≤-20% | ⚪ N/D', rendered)
         self.assertNotIn('Custo por conversa` =', rendered)
         self.assertIn('**📊 Tabela consolidada — visão desktop**', rendered)
         self.assertEqual(rendered.count('```text'), 1)
         self.assertEqual(rendered.count('```'), 2)
-        for label in ('R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'):
+        for label in ('R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação'):
             self.assertIn(label, rendered)
         for abbreviation in ('Bloco', 'Métrica 1', 'Valor 1', 'Camp/Pg', 'C/msg', 'C/Sub', 'Page ID'):
             self.assertNotIn(abbreviation, rendered)
@@ -411,6 +441,7 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('123456789012345', rendered)
         self.assertIn('Page One', rendered)
         self.assertIn('0,30', rendered)
+        self.assertIn('03·0,92✅ 02·0,76✅ 01·0,30🛑', rendered)
         self.assertIn('+12,3%', rendered)
         self.assertIn('-5,5%', rendered)
         self.assertIn('🟢🟡', rendered)
@@ -436,6 +467,17 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'MANTER'}), '✅')
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'OBSERVAR'}), '👁️')
         self.assertEqual(cycle._intraday_action_visual({'action_label': 'ESCALA +10%'}), '🚀')
+
+    def test_ads_roas_visual_is_abbreviated_sorted_descending_and_action_aware(self):
+        decisions = [
+            {'ad_name': 'AD 01 - full creative name', 'purchase_roas': .35, 'action': 'PAUSE_AD', 'configured_status': 'ACTIVE', 'effective_status': 'ACTIVE'},
+            {'ad_name': 'AD 03 - full creative name', 'purchase_roas': .92, 'action': 'KEEP', 'configured_status': 'ACTIVE', 'effective_status': 'ACTIVE'},
+            {'ad_name': 'AD 02 - full creative name', 'purchase_roas': .56, 'action': 'REACTIVATE_AD', 'configured_status': 'PAUSED', 'effective_status': 'PAUSED'},
+            {'ad_name': 'AD 04 - full creative name', 'purchase_roas': None, 'action': 'KEEP', 'configured_status': 'PAUSED', 'effective_status': 'PAUSED'},
+        ]
+        visual = cycle._ads_roas_visual(decisions)
+        self.assertEqual(visual, '03·0,92✅ 02·0,56♻️ 01·0,35🛑 04·N/D⏸')
+        self.assertNotIn('full creative name', visual)
 
     def test_roas_cycle_roi_signal_uses_current_and_future_color_bands(self):
         self.assertEqual(cycle._roi_signal(None), '⚪')
@@ -479,7 +521,7 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(keys[-1], '162·C001·D55/pg_5024')
         self.assertEqual(len(keys), 55)
         self.assertEqual(len(set(keys)), 55)
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
         pages = cycle._compact_table_pages(headers, rows, max_chars=1750, max_rows=10)
         self.assertEqual(len(pages), 6)
         self.assertTrue(all(page.count('\n') <= 13 for page in pages))
@@ -498,14 +540,14 @@ class ReportingTests(unittest.TestCase):
             'roi_real': 12.3, 'roi_estimated': -5.5,
         }
         campaigns = [dict(base, purchase_roas=roas) for roas in (.3, .4, .5, None)]
-        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
+        headers = ['R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação']
         pages = cycle._compact_table_pages(headers, cycle._dashboard_desktop_rows(campaigns, .4), max_chars=1750)
         self.assertGreaterEqual(len(pages), 1)
         for table in pages:
             body = table.splitlines()[1:-1]
             expected_width = cycle._display_width(body[0])
             self.assertTrue(all(cycle._display_width(line) == expected_width for line in body))
-            self.assertLessEqual(expected_width, 120)
+            self.assertLessEqual(expected_width, 160)
             self.assertNotIn('│', table)
             self.assertNotIn('║', table)
             self.assertEqual(table.count('```'), 2)
