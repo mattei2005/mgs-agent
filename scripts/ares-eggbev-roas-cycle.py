@@ -852,32 +852,11 @@ def render_report(run: dict[str, Any]) -> str:
     return '\n'.join(lines)
 
 
-def _active_ads_for_campaign(meta, token: str, campaign_id: str) -> list[dict[str, Any]]:
-    return common.fetch_all_meta(meta, token, campaign_id + '/ads', {
-        'fields': 'id,name,status,effective_status,configured_status',
-        'effective_status': ['ACTIVE'],
-        'limit': 200,
-    })
-
-
 def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], run: dict[str, Any]) -> None:
+    """Execute only ad status writes; campaign and ad-set status are immutable here."""
     writes = run['writes']
-    campaign_reactivations = [row for row in plan.get('campaign_actions') or [] if row.get('action') == 'REACTIVATE_CAMPAIGN']
-    blocked_campaigns: set[str] = set()
-    for row in campaign_reactivations:
-        result = common.reconcile_status_write(meta, token, row['campaign_id'], 'ACTIVE')
-        result.update({'kind': 'campaign', 'action': 'REACTIVATE_CAMPAIGN', 'name': row.get('campaign_name')})
-        writes.append(result)
-        if result.get('ok'):
-            state.get('paused_campaigns', {}).pop(row['campaign_id'], None)
-        else:
-            blocked_campaigns.add(row['campaign_id'])
-        common.atomic_json(Path(run['audit_path']), run)
 
     for row in [item for item in plan.get('decisions') or [] if item.get('action') == 'REACTIVATE_AD']:
-        if row.get('campaign_id') in blocked_campaigns:
-            writes.append({'object_id': row.get('ad_id'), 'kind': 'ad', 'action': 'REACTIVATE_AD', 'ok': False, 'stage': 'blocked_by_campaign_reactivation_failure'})
-            continue
         if row.get('adset_status') != 'ACTIVE':
             writes.append({'object_id': row.get('ad_id'), 'kind': 'ad', 'action': 'REACTIVATE_AD', 'ok': False, 'stage': 'adset_not_configured_active'})
             continue
@@ -903,27 +882,6 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
                 'adset_updated_time': row.get('adset_updated_time'),
                 'campaign_updated_time': row.get('campaign_updated_time'),
             }
-        common.atomic_json(Path(run['audit_path']), run)
-
-    for row in [item for item in plan.get('campaign_actions') or [] if item.get('action') == 'PAUSE_CAMPAIGN']:
-        active = _active_ads_for_campaign(meta, token, row['campaign_id'])
-        if active:
-            writes.append({
-                'object_id': row['campaign_id'], 'kind': 'campaign', 'action': 'PAUSE_CAMPAIGN',
-                'ok': False, 'stage': 'blocked_active_ads_remain', 'active_ads_readback': len(active),
-            })
-            continue
-        result = common.reconcile_status_write(meta, token, row['campaign_id'], 'PAUSED')
-        result.update({'kind': 'campaign', 'action': 'PAUSE_CAMPAIGN', 'name': row.get('campaign_name'), 'active_ads_readback': 0})
-        writes.append(result)
-        if result.get('ok') and result.get('stage') == 'confirmed':
-            state.setdefault('paused_campaigns', {})[row['campaign_id']] = {
-                'reason': 'roas_zero_active_ads', 'paused_at_et': run.get('started_at_et'),
-                'meta_updated_time': (result.get('after') or {}).get('updated_time'),
-            }
-            for paused_ad in (state.get('paused_ads') or {}).values():
-                if isinstance(paused_ad, dict) and paused_ad.get('campaign_id') == row['campaign_id']:
-                    paused_ad['campaign_updated_time'] = (result.get('after') or {}).get('updated_time')
         common.atomic_json(Path(run['audit_path']), run)
 
 

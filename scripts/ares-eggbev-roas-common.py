@@ -537,32 +537,19 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
             else:
                 reason = 'paused_ad_not_above_threshold'
         decisions.append({**ad, **metric, 'spend': spend, 'purchase_roas': roas, 'threshold': threshold, 'phase': phase, 'action': action, 'reason': reason})
-    by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in decisions:
-        if row.get('campaign_id'):
-            by_campaign[row['campaign_id']].append(row)
-    campaign_actions: list[dict[str, Any]] = []
-    tracked_campaigns = state.get('paused_campaigns') or {}
-    for campaign_id, rows in sorted(by_campaign.items()):
-        active_before = sum(1 for row in rows if row.get('effective_status') == 'ACTIVE' and row.get('configured_status') == 'ACTIVE')
-        pauses = sum(1 for row in rows if row.get('action') == 'PAUSE_AD')
-        reactivations = sum(1 for row in rows if row.get('action') == 'REACTIVATE_AD')
-        active_after = active_before - pauses + reactivations
-        if active_before > 0 and pauses > 0 and active_after == 0:
-            campaign_actions.append({'campaign_id': campaign_id, 'campaign_name': rows[0].get('campaign_name'), 'action': 'PAUSE_CAMPAIGN', 'reason': 'zero_active_ads_after_cycle'})
-        if campaign_id in tracked_campaigns and reactivations > 0:
-            campaign_actions.append({'campaign_id': campaign_id, 'campaign_name': rows[0].get('campaign_name'), 'action': 'REACTIVATE_CAMPAIGN', 'reason': 'tracked_ad_recovered_above_threshold'})
     return {
         'phase': phase,
         'threshold': threshold,
         'decisions': decisions,
-        'campaign_actions': campaign_actions,
+        # ROAS writes are ad-only by explicit manager policy. Campaign and ad-set
+        # status are never changed by this cycle, even when every ad is paused.
+        'campaign_actions': [],
         'counts': {
             'ads_considered': len(decisions),
             'pause_ads': sum(1 for row in decisions if row['action'] == 'PAUSE_AD'),
             'reactivate_ads': sum(1 for row in decisions if row['action'] == 'REACTIVATE_AD'),
-            'pause_campaigns': sum(1 for row in campaign_actions if row['action'] == 'PAUSE_CAMPAIGN'),
-            'reactivate_campaigns': sum(1 for row in campaign_actions if row['action'] == 'REACTIVATE_CAMPAIGN'),
+            'pause_campaigns': 0,
+            'reactivate_campaigns': 0,
         },
     }
 

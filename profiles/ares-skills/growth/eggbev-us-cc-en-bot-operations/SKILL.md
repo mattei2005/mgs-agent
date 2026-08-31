@@ -330,7 +330,7 @@ Testes aprovados        63 no módulo ROAS atual; suíte ampliada cobre guardrai
 Write ROAS              status de ad/campanha habilitado sob gates fail-closed e readback
 Budget write            false; exige Rodolfo/Geizian + teto/envelope
 Post ciclo ROAS         habilitado na thread fixa
-Cron ROAS               horários lógicos 00:00, 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; disparo físico em :09; scheduler ativo e tick 20:00 alcançou o runner; o ciclo terminou fail-closed por freshness Smart Bidding, não por falha do scheduler
+Cron ROAS               horários lógicos e físicos 00:00, 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 ET; atraso real de até 15 minutos é reconciliado ao horário lógico; scheduler ativo e tick 20:00 alcançou o runner
 Post/Cron Diário         false
 ```
 
