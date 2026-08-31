@@ -2190,14 +2190,15 @@
         "sb-restricted-transition-monitor.py"
       ],
       "purpose": "Keep Smart Bidding/DigitalTRChat Playwright automation and authenticated storage outside ephemeral /tmp across VPS restarts.",
-      "validation": "2026-08-30 session refresh via canonical headed/Xvfb login: live /company HTTP 200 with 7 companies and authorization captured; exact consumer dry-run exit 0; apply exit 0 with 52 publishers, 431 monitored rows and one real transition processed; Google Sheet readback PASS; Discord transition post HTTP 200; storage state mode 0600; stale-log dry-run reports this consumer OK and problems=0.",
-      "last_session_refresh": "2026-08-30T08:04:25-04:00",
+      "validation": "2026-08-31 session refresh via canonical headed/Xvfb login: live /company HTTP 200 with 7 companies and authorization captured; bounded consumer dry-run exit 0 with 52 publishers and 437 monitored rows; a subsequent apply observed a new HTTP 401, so the session was refreshed again and the exact locked apply completed exit 0; Google Sheet readback PASS; state written with 437 active rows; storage state mode 0600; unittest 8/8 PASS; stale-log dry-run reports this consumer OK and problems=0.",
+      "last_session_refresh": "2026-08-31T08:25:33-04:00",
       "last_session_refresh_authorization_message_ids": [
-        "1543591131072176298"
+        "1543591131072176298",
+        "1543957291143929918"
       ],
-      "last_session_refresh_source_message_id": "1543591131072176298",
-      "last_session_refresh_backup": null,
-      "updated_at": "2026-08-30T08:05:53-04:00"
+      "last_session_refresh_source_message_id": "1543957291143929918",
+      "last_session_refresh_backup": "/root/mgs-agent/backups/sb-session-refresh/smartbidding_state_headed.before-20260831T082025-0400.json",
+      "updated_at": "2026-08-31T08:26:44-04:00"
     },
     {
       "id": "dtr-sb-daily-match-audit-transitive-helper",

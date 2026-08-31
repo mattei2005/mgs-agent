@@ -16,7 +16,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 1,
+  "consecutive_failures": 0,
   "daily": {
     "date": "2026-08-31",
     "last_result": {
@@ -96,7 +96,12 @@
     677205,
     677224,
     677883,
-    677908
+    677908,
+    678374,
+    678391,
+    678412,
+    678435,
+    678458
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -339,9 +344,9 @@
     "digital-trust|financeadx|24|273": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:09:09.000Z",
+        "created_at": "2026-08-31T12:12:43.000Z",
         "domain": "financeadx",
-        "notification_id": 677181,
+        "notification_id": 678435,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 227,
         "segurador_id": "273",
@@ -358,7 +363,8 @@
         "1543835871810428949"
       ],
       "notification_ids": [
-        677181
+        677181,
+        678435
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -528,9 +534,9 @@
     "digital-trust|fincgriffin|105|1530": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:08:04.000Z",
+        "created_at": "2026-08-31T12:11:18.000Z",
         "domain": "fincgriffin",
-        "notification_id": 677110,
+        "notification_id": 678374,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 1,
         "segurador_id": "1530",
@@ -547,7 +553,8 @@
         "1543835879007584326"
       ],
       "notification_ids": [
-        677110
+        677110,
+        678374
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -945,9 +952,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:08:28.000Z",
+        "created_at": "2026-08-31T12:11:49.000Z",
         "domain": "spe",
-        "notification_id": 677140,
+        "notification_id": 678412,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 48,
         "segurador_id": "72",
@@ -957,25 +964,24 @@
         "user_id": "7",
         "user_name": "Disparos SPE US-JOB-EN-ES"
       },
-      "last_sent_at": "2026-08-30T00:12:14-04:00",
+      "last_sent_at": "2026-08-31T08:27:18-04:00",
       "message_ids": [
-        "1543413021710360617",
-        "1543473529771532349"
+        "1543960368362037249"
       ],
       "notification_ids": [
-        677140
+        678412
       ],
-      "opened_at": "2026-08-29T20:12:13-04:00",
+      "opened_at": "2026-08-31T08:27:17-04:00",
       "repeat_count": 0,
-      "resolved_at": "2026-08-31T00:12:14-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|topfeed|6|903": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:08:06.000Z",
+        "created_at": "2026-08-31T12:11:19.000Z",
         "domain": "topfeed",
-        "notification_id": 677129,
+        "notification_id": 678391,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 105,
         "segurador_id": "903",
@@ -992,7 +998,8 @@
         "1543835913119862825"
       ],
       "notification_ids": [
-        677129
+        677129,
+        678391
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -1031,9 +1038,9 @@
     "digital-trust|zyclor|45|201": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:09:40.000Z",
+        "created_at": "2026-08-31T12:13:27.000Z",
         "domain": "zyclor",
-        "notification_id": 677205,
+        "notification_id": 678458,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 2,
         "segurador_id": "201",
@@ -1043,37 +1050,40 @@
         "user_id": "45",
         "user_name": "Disparos Zyclor US-CC-EN"
       },
-      "last_sent_at": "2026-08-31T00:12:14-04:00",
+      "last_sent_at": "2026-08-31T08:27:18-04:00",
       "message_ids": [
-        "1543413029872476212",
-        "1543473548327395359",
-        "1543835920409563148"
+        "1543960372044898376"
       ],
       "notification_ids": [
-        677205
+        678458
       ],
-      "opened_at": "2026-08-29T20:12:13-04:00",
+      "opened_at": "2026-08-31T08:27:17-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
     }
   },
-  "last_check": "2026-08-31T08:12:09-04:00",
+  "last_check": "2026-08-31T08:27:18-04:00",
   "last_delivery": {
-    "at": "2026-08-30T20:12:14-04:00",
+    "at": "2026-08-31T08:27:18-04:00",
     "cursor_ids": [
-      677883,
-      677908
+      678374,
+      678391,
+      678412,
+      678435,
+      678458
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1543960368362037249",
+      "1543960372044898376"
+    ],
+    "notification_ids": [
+      678412,
+      678458
+    ]
   },
-  "last_error": {
-    "at": "2026-08-31T08:12:09-04:00",
-    "message": "Smart Bidding authorization header not captured",
-    "type": "RuntimeError"
-  },
-  "last_seen_id": 677908,
+  "last_error": null,
+  "last_seen_id": 678458,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,
