@@ -1080,14 +1080,40 @@ def main() -> int:
         meta, sb, token, credential = common.load_runtime_modules(account)
         run['credential_readback'] = credential
         account_id = common.norm((operation.get('account') or {}).get('account_id'))
+        current_date = at.date().isoformat()
+        sb_cache: dict[str, dict[str, Any]] = {}
+        try:
+            current_bundle = common.fetch_sb_bundle(sb, operation, current_date)
+        except Exception as exc:
+            current_bundle = {
+                'ready': False, 'reason': f'{type(exc).__name__}: {exc}',
+                'target_report_rows': [], 'available_account_names': [],
+            }
+        current_bundle = prepare_daily_sb_bundle(current_bundle, current_date)
+        sb_cache[current_date] = current_bundle
+        current_dashboard = aggregate_sb(current_bundle)
+        current_dashboard['date'] = current_date
+        current_dashboard['source_route'] = '/report/messenger BD_REVENUE'
+        run['current_dashboard_readback'] = {
+            'date': current_date,
+            'source_route': current_dashboard['source_route'],
+            'ready': current_dashboard.get('ready'),
+            'broadcast_revenue': current_dashboard.get('broadcast_revenue'),
+            'page_rows': len(current_dashboard.get('by_utm') or {}),
+            'freshness': current_dashboard.get('freshness'),
+        }
         for report_date, label in report_dates(args.period, at):
             meta_bundle = common.fetch_meta_bundle(meta, token, account_id, state, report_date)
             meta_bundle = enrich_campaign_readbacks(meta, token, meta_bundle)
-            try:
-                sb_bundle = common.fetch_sb_bundle(sb, operation, report_date)
-            except Exception as exc:
-                sb_bundle = {'ready': False, 'reason': f'{type(exc).__name__}: {exc}', 'target_report_rows': [], 'available_account_names': []}
-            sb_bundle = prepare_daily_sb_bundle(sb_bundle, report_date)
+            if report_date in sb_cache:
+                sb_bundle = sb_cache[report_date]
+            else:
+                try:
+                    sb_bundle = common.fetch_sb_bundle(sb, operation, report_date)
+                except Exception as exc:
+                    sb_bundle = {'ready': False, 'reason': f'{type(exc).__name__}: {exc}', 'target_report_rows': [], 'available_account_names': []}
+                sb_bundle = prepare_daily_sb_bundle(sb_bundle, report_date)
+                sb_cache[report_date] = sb_bundle
             meta_aggregate = aggregate_meta(meta_bundle)
             sb_aggregate = aggregate_sb(sb_bundle)
             meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
@@ -1106,6 +1132,7 @@ def main() -> int:
                 'date': report_date, 'label': label,
                 'meta': meta_aggregate,
                 'smart_bidding': sb_aggregate,
+                'current_dashboard': current_dashboard,
                 'revenue_anomaly': anomaly,
                 'readback': {
                     'meta_insight_rows': len(meta_bundle.get('insights') or []),

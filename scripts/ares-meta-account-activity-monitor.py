@@ -208,6 +208,13 @@ def matching_subtrees(value: Any, object_id: str) -> list[Any]:
     return matches
 
 
+def audit_path_label(path: Path) -> str:
+    try:
+        return str(path.relative_to(BASE))
+    except ValueError:
+        return str(path)
+
+
 def recent_audit_files(event_time: dt.datetime, max_files: int = 300) -> list[Path]:
     lower = event_time.timestamp() - 86400
     upper = event_time.timestamp() + 86400
@@ -247,13 +254,13 @@ def local_audit_match(event: dict[str, Any], window_seconds: int = 1800) -> dict
         subtrees = matching_subtrees(payload, object_id)
         times = [stamp for subtree in subtrees for stamp in collect_times(subtree)]
         if any(abs((stamp - when).total_seconds()) <= window_seconds for stamp in times):
-            return {"path": str(path.relative_to(BASE)), "basis": "object_and_timestamp"}
+            return {"path": audit_path_label(path), "basis": "object_and_timestamp"}
         try:
             mtime = dt.datetime.fromtimestamp(path.stat().st_mtime, dt.timezone.utc)
         except OSError:
             continue
         if abs((mtime - when).total_seconds()) <= window_seconds:
-            return {"path": str(path.relative_to(BASE)), "basis": "object_and_file_mtime"}
+            return {"path": audit_path_label(path), "basis": "object_and_file_mtime"}
     return None
 
 
