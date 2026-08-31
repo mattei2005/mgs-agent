@@ -443,12 +443,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
-      "next_step": "Nicolas informar a Page/pg_XXXXX alvo do clone_page_switch. Depois resolver Page/JSON, pre-stagear os três assets selecionados, montar/prevalidar os três manifests, apresentar resumo final com USD45 por clone e executar somente após OK explícito.",
+      "next_step": "Nicolas revisa a campanha no Gerenciador e traz feedbacks. Quando desejar retomar o teste, informa a Page/pg_XXXXX exata do DUP03; então Ares reconcilia Page/JSON, renova preflight/assets, apresenta resumo final e só executa após OK explícito.",
       "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; canonical-source:data/ares/meta-ads/state/eggbev-creation/eggbev-12c-20260830-nicolas-pg_5071-00002.json",
-      "state": "preflight meta concluído. a fonte canônica foi reconciliada pelo audit de criação; existe outra campanha ativa de mesmo nome que será preservada e ignorada. dup01-dup03 estão livres. budget proposto usd45 por clone. reconciliação drive-meta válida, 73 assets aprovados e três assets inéditos selecionados para clone_prestaged. a seleção automática de page falhou fechado porque não há página reconciliada com campanha e anúncio efetivamente ativos; zero meta writes.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; policy:ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
+      "state": "pausado corretamente antes de qualquer meta write. readback live confirmou zero campanhas dup01/dup02/dup03. nicolas aprovou a regra de que clone_page_switch sem page deve pausar e perguntar; contrato/prompt/skill atualizados. fonte canônica e três assets do clone_prestaged seguem apenas preparados em read-only.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T02:41:19+00:00"
+      "updated_at": "2026-08-31T02:56:19+00:00"
     },
     {
       "agent": "ares",
@@ -783,12 +783,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-full-spaced-table-v22-20260830",
-      "next_step": "centralizar cabeçalhos, bloquear variante resumida e testar espaçamento/pontos/paginação",
+      "next_step": "usar sempre a tabela v22 completa; paginar sem remover colunas; não modificar o layout",
       "objective": "Fixar o primeiro modelo completo e espaçado como única tabela canônica do Corte e ROAS",
       "source": "discord:thread:1541578606076231750",
-      "state": "authorized_by_nicolas_with_two_visual_references",
+      "state": "completed_v22_full_spaced_table_locked_with_leads_rps_ctr",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T02:54:44+00:00"
+      "updated_at": "2026-08-31T03:00:00+00:00"
     },
     {
       "agent": "ares",
@@ -1612,5 +1612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:54:44+00:00"
+  "updated_at": "2026-08-31T03:00:00+00:00"
 }

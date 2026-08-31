@@ -1076,7 +1076,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v21_roi_minus15_ctr_compact_insights_active",
+      "status": "cpv13_intraday_desktop_table_v22_full_spaced_locked_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -1217,10 +1217,10 @@
           "approved_at_et": "2026-08-30T11:54:19-04:00",
           "source": "discord:thread:1541578606076231750",
           "decision": "approved; save now and keep this exact layout until the manager explicitly requests the next change",
-          "change_control": "superseded_by_explicit_manager_changes_v18_v20_v21"
+          "change_control": "locked_after_v22_no_further_table_changes"
         },
         "validation": {
-          "eggbev_tests": "73/73 passed after v21",
+          "eggbev_tests": "74/74 passed after v22 layout lock",
           "targeted_desktop_table_tests": "3/3 passed",
           "live_dry_run_campaigns": 1,
           "twenty_five_campaign_fixture": true,
@@ -1515,7 +1515,7 @@
         "column_position": "after CPM and before Ação",
         "format": "percentage with decimal comma; N/D when unavailable",
         "manager_feedback": "visualization is perfect; the compact ad-level ROAS insight is useful and should guide future report insights",
-        "future_insight_rule": "when evidence supports it, proactively surface compact decision-useful derived views inside the existing report hierarchy; preserve clarity, lineage and source labels; do not add speculative or verbose blocks",
+        "future_insight_rule": "superseded for table layout by v22 lock; future insights cannot add, remove, reorder or compress table columns unless Nicolas explicitly revokes the lock",
         "scope": "presentation only; CTR remains informational and does not change Purchase ROAS decisions, cuts, reactivations, budgets or schedules",
         "validation": {
           "targeted_tests": "5/5 passed",
@@ -1531,6 +1531,79 @@
           "meta_writes": 0
         },
         "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/ctr-compact-insights-v21-20260830.json"
+      },
+      "canonical_full_spaced_table_v22": {
+        "decision_id": "ARES-EGGBEV-ROAS-FULL-SPACED-TABLE-V22-20260830",
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T22:54:44-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "visual_references": [
+          "/root/.hermes/profiles/ares/cache/images/img_883d1264bb23.png",
+          "/root/.hermes/profiles/ares/cache/images/img_93d5702c88de.png"
+        ],
+        "canonical_reference": "first image: complete one-row-per-campaign table with dynamic spacing and full metric set",
+        "rejected_reference": "second image: reduced explanatory subset; never use as report, example or preview",
+        "columns": [
+          "R/E",
+          "Camp",
+          "Página",
+          "Status",
+          "Budget",
+          "Spend",
+          "Custo",
+          "ROAS",
+          "Ads ↓",
+          "ROI real",
+          "ROI est.",
+          "Leads",
+          "RPS",
+          "CPM",
+          "CTR",
+          "Ação"
+        ],
+        "mandatory_columns": [
+          "Página",
+          "Status",
+          "Budget",
+          "Spend",
+          "Custo",
+          "Leads",
+          "RPS",
+          "CTR"
+        ],
+        "spacing": {
+          "column_separator": "exactly two ASCII spaces after dynamic cell padding",
+          "header_divider": "Unicode U+2500 box drawing light horizontal",
+          "identifier_separator": "Unicode U+00B7 middle dot in Camp and Ads ↓ tokens",
+          "vertical_bars": false,
+          "monospace_text_fence": true,
+          "one_campaign_per_row": true
+        },
+        "pagination": "repeat the complete header and every column on each page; paginate rows instead of dropping, reordering or compressing columns",
+        "manual_examples": "must use the complete canonical table or no table at all; shortened table subsets are forbidden",
+        "layout_lock": "frozen by Nicolas after restoring Leads and RPS; no future table modification unless Nicolas explicitly revokes this lock",
+        "scope": "presentation lock only; no change to metrics, sources, Purchase ROAS decisions, writes, budgets, schedules or authority",
+        "validation": {
+          "targeted_tests": "4/4 passed",
+          "relevant_tests": "74/74 passed",
+          "canonical_header_count": 16,
+          "canonical_row_cell_count": 16,
+          "sample_display_width": 168,
+          "high_volume_fixture_campaigns": 55,
+          "high_volume_fixture_pages": 6,
+          "maximum_campaign_rows_per_page": 10,
+          "maximum_page_characters": 1553,
+          "all_pages_repeat_complete_header": true,
+          "balanced_code_fences": true,
+          "short_row_rejected": true,
+          "dry_run_campaigns": 16,
+          "dry_run_ads_considered": 42,
+          "dry_run_campaign_actions": [],
+          "dry_run_writes": 0,
+          "meta_writes": 0
+        },
+        "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/full-spaced-table-lock-v22-20260830.json"
       }
     },
     "runtime": {

@@ -1158,10 +1158,27 @@
       "kind": "procedure",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
+      "title": "Clone Eggbev com troca de página suportado no v3.3.0",
+      "updated_at": "2026-08-31T02:56:19+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:56:18-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Clone Eggbev com troca de página suportado no v3.3.0",
-      "updated_at": "2026-08-30T00:41:54+00:00"
+      "title": "Clone Eggbev sem Page pausa e pergunta ao gestor",
+      "updated_at": "2026-08-31T02:56:19+00:00"
     },
     {
       "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
@@ -1318,10 +1335,10 @@
       "kind": "decision",
       "owner": "Nicolas Holanda",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-FULL-SPACED-TABLE-V22-20260830",
       "title": "Eggbev Corte e ROAS v21 inclui CTR e preserva insights compactos",
-      "updated_at": "2026-08-31T02:34:19+00:00"
+      "updated_at": "2026-08-31T02:59:27+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -1567,6 +1584,25 @@
       "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V10-20260830",
       "title": "Eggbev Corte e ROAS usa renderer v4 híbrido e métricas econômicas report-only reconciliadas",
       "updated_at": "2026-08-30T12:14:37+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:54:44-04:00",
+      "id": "ARES-EGGBEV-ROAS-FULL-SPACED-TABLE-V22-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev v22 congela primeira tabela completa com Leads RPS e CTR",
+      "updated_at": "2026-08-31T02:59:27+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -2869,5 +2905,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:34:19+00:00"
+  "updated_at": "2026-08-31T02:59:27+00:00"
 }

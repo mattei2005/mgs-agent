@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.18.1-draft
+version: 0.19.0-draft
 author: Ares
 license: internal
 metadata:
@@ -160,7 +160,7 @@ Somente guardrails genéricos de segurança, idempotência, autorização e read
 O contrato de estrutura, horários, threshold, guardrail, publicação e reporting já foi consolidado nas seções seguintes. Permanecem pendentes somente as camadas dependentes de evidência ou decisão ainda ausente:
 
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
-2. Engine v3: conta Eggbev cadastrada na release 3.4.0; `from_zero_prestaged`, `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam schema/prevalidation/plan. Mídia nova continua pre-stageada sob demanda antes de selar o manifest.
+2. Engine v3: conta Eggbev cadastrada na release 3.4.1; `from_zero_prestaged`, `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam schema/prevalidation/plan. Mídia nova continua pre-stageada sob demanda antes de selar o manifest.
 3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. A substituição live `pg_5024 C001 → DUP01` concluiu com a sucessora `ACTIVE`, pixel `935354115143283`, evento `eggbev-pv-u`, PBIA/Page, UTM/Messenger, três anúncios e copy completos por readback; a fonte foi confirmada `DELETED` somente depois da validação. Por decisão de Nicolas, essa configuração `pg_5024_dup01_live_validated_v1` é o padrão de futuros pedidos na thread Criar Campanhas. O padrão reaproveita somente configuração: mídia, IDs e sufixo `DUPnn` nunca são reutilizados em criação do zero. Reconciliação read-only e reserva scoped permanecem obrigatórias. O call mínimo exige somente budget; nomes dos ads são automáticos. OK final de Nicolas, valor exato, Engine v3 e readback continuam gates; Nicolas possui autoridade financeira permanente para budget Eggbev sem novo OK de Rodolfo.
 4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
 5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
@@ -303,7 +303,7 @@ Naming obrigatório: preservar o nome-base integral e adicionar o próximo núme
 
 Gestores autorizados escolhem e confirmam o budget diário de cada duplicação. Para Nicolas, a autorização permanente concedida por Rodolfo em 30/08/2026 cobre aumentar ou reduzir o budget Eggbev sem novo OK de Rodolfo; valor exato, pré-leitura e readback Meta continuam obrigatórios. Billing, `account_spend_limit`, credenciais e escala automática continuam separados. Default de produção: campanha, ad set e todos os ads `ACTIVE`, com início no dia seguinte às 00:00 `America/New_York`; `PAUSED` somente para canário técnico explicitamente pedido.
 
-A conta `1034081997659047` está cadastrada no Engine v3 release 3.4.0. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
+A conta `1034081997659047` está cadastrada no Engine v3 release 3.4.1. `pure_clone` e `clone_page_switch` não exigem mídia nova no registry; `clone_prestaged` continua exigindo pre-stage dos assets do pedido. Pedidos genéricos de “dup” iniciam perguntas curtas apenas para campos ausentes: modo, quantidade de duplicações e budget; depois, assets/copy ou Page/UTM/JSON conforme o modo. Prompt canônico: `data/ares/discord/thread-prompts/1543333373945053184.txt`. Relatório determinístico: `python3 scripts/ares-eggbev-clone-config-report.py --check`.
 
 Antes de cada plan/write, fazer preflight da fonte e da conta, scan de colisão `DUPnn`, materializar e prevalidar o manifest, mostrar resumo final e aguardar OK explícito. Write real usa somente v3 com `--confirm-execute` e o gate financeiro vigente. Sucesso exige readback consolidado de nome, budget, `ACTIVE`, início aprovado, Page/tracking/mídia/copy e IDs. Não existe cron de clonagem.
 
@@ -456,7 +456,30 @@ Por correção explícita de Nicolas em `2026-08-30`, as duas posições de `R/E
 
 No pedido imediatamente seguinte, Nicolas aprovou a visualização e adicionou `CTR` da campanha à tabela compacta, depois de `CPM` e antes de `Ação`. Exibir percentual com vírgula decimal e `N/D` quando indisponível. CTR permanece informativo: Meta Purchase ROAS continua decidindo cortes e reativações exclusivamente no nível de anúncio.
 
-Nicolas também determinou preservar, em refinamentos futuros, insights como `Ads ↓`: leituras compactas, comprovadas e diretamente úteis para decisão devem ser propostas ou incorporadas dentro da hierarquia existente, sem criar blocos longos, especulativos ou sem fonte. Clareza, origem da métrica, auditabilidade e paginação sem omissões continuam obrigatórias.
+Nicolas também determinou preservar, em refinamentos futuros, insights como `Ads ↓`: leituras compactas, comprovadas e diretamente úteis para decisão devem ser propostas ou incorporadas dentro da hierarquia existente, sem criar blocos longos, especulativos ou sem fonte. Clareza, origem da métrica, auditabilidade e paginação sem omissões continuam obrigatórias. A possibilidade de alterar a hierarquia da tabela foi posteriormente congelada pelo v22 abaixo.
+
+### Congelamento v22 — primeiro modelo completo e espaçado
+
+Após comparar os dois prints em `2026-08-30`, Nicolas definiu o **primeiro modelo** como a única tabela canônica e proibiu novas alterações após restaurar `Leads` e `RPS`. A tabela obrigatória, agora também com `CTR` aprovado no v21, mantém exatamente esta ordem:
+
+```text
+R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | Ads ↓ |
+ROI real | ROI est. | Leads | RPS | CPM | CTR | Ação
+```
+
+Regras congeladas:
+
+- uma campanha por linha em bloco monoespaçado `text`;
+- largura dinâmica por conteúdo e dois espaços ASCII entre colunas;
+- divisor de cabeçalho com `─` e nenhum `|`, `│` ou `║` na tabela renderizada;
+- ponto médio `·` obrigatório na chave `Camp` e nos tokens de `Ads ↓`;
+- `Página`, `Status`, `Budget`, `Spend`, `Custo`, `Leads`, `RPS` e `CTR` nunca podem ser removidos;
+- a segunda imagem, com subconjunto resumido, é somente evidência do formato rejeitado e não pode ser usada em relatório, exemplo ou preview;
+- quando houver overflow do Discord, paginar linhas e repetir o cabeçalho completo; nunca reduzir, reordenar, adicionar ou retirar colunas;
+- exemplo manual deve mostrar a tabela completa ou não mostrar tabela;
+- insights futuros não alteram essa tabela sem Nicolas revogar explicitamente o congelamento.
+
+Este congelamento é somente visual. Não altera fontes, fórmulas, Purchase ROAS, cortes/reativações de anúncios, budgets, schedules, guardrail de LEADS ou autoridade.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

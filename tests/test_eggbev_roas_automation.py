@@ -561,6 +561,38 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('Métrica 1', joined)
         self.assertIn('ROI est.', joined)
 
+    def test_roas_cycle_first_full_spaced_model_is_the_only_canonical_table(self):
+        expected = (
+            'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
+            'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação',
+        )
+        self.assertEqual(cycle.CANONICAL_DESKTOP_HEADERS, expected)
+        campaign = {
+            'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
+            'utm_campaign': 'pg_5024', 'sb_page_name': 'Amy Shook', 'status': 'ACTIVE',
+            'budget_usd': 45, 'spend': 86.25, 'cost_per_messaging_started': 1.17,
+            'purchase_roas': .58,
+            'ads_roas': '03·0,92✅ 02·0,56✅ 01·0,35🛑 04·N/D⏸',
+            'roi_real': -9.52, 'roi_estimated': -16.52, 'sb_leads': 119,
+            'rps': .92, 'cpm': 40.82, 'ctr': 2.34,
+            'action_label': 'CORTAR', 'pause_ads': 1, 'reactivate_ads': 0,
+        }
+        rows = cycle._dashboard_desktop_rows([campaign], .4)
+        self.assertEqual(len(rows[0]), len(expected))
+        table = cycle._aligned_table(list(expected), rows)
+        header, divider, data = table.splitlines()[1:4]
+        self.assertRegex(header, r'^R/E {2,}Camp')
+        self.assertEqual(set(divider), {'─', ' '})
+        self.assertIn('162·C001·D01/pg_5024', data)
+        self.assertIn('03·0,92✅', data)
+        self.assertIn('119', data)
+        self.assertIn('$0,92', data)
+        self.assertIn('2,34%', data)
+        self.assertNotIn('|', table)
+        self.assertNotIn('│', table)
+        with self.assertRaisesRegex(ValueError, 'preserve every canonical column'):
+            cycle._aligned_table(list(expected), [rows[0][:-1]])
+
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
             '## 🛑 CORTE & ROAS',
@@ -883,9 +915,9 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v21_is_ad_only_shows_ad_roas_ctr_and_new_roi_bands(self):
+    def test_roas_reporting_v22_locks_full_spaced_table_with_leads_rps_and_ctr(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('v21_roi_minus15_ctr_compact_insights_active', reporting_policy['status'])
+        self.assertIn('v22_full_spaced_locked_active', reporting_policy['status'])
         self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
         self.assertIn('Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024', reporting_policy['layout'])
         large_table = reporting_policy['campaign_identity_and_large_table_correction']
@@ -896,7 +928,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(reporting_policy['unicode_spacing_correction']['validation']['unicode_alignment_regression'])
         desktop = reporting_policy['cpv13_intraday_print_correction']
         self.assertEqual(desktop['manager_approval']['approved_by'], 'Nicolas Holanda')
-        self.assertEqual(desktop['manager_approval']['change_control'], 'superseded_by_explicit_manager_changes_v18_v20_v21')
+        self.assertEqual(desktop['manager_approval']['change_control'], 'locked_after_v22_no_further_table_changes')
         self.assertIn('until the manager explicitly requests the next change', desktop['manager_approval']['decision'])
         self.assertTrue(desktop['validation']['single_table'])
         self.assertTrue(desktop['validation']['one_row_per_campaign'])
@@ -950,7 +982,14 @@ class ContractTests(unittest.TestCase):
         self.assertIn('fractional negatives such as -0.1% in yellow', roi_v20['deterministic_continuous_interpretation'])
         ctr_v21 = reporting_policy['ctr_and_compact_insight_v21']
         self.assertEqual(ctr_v21['column_position'], 'after CPM and before Ação')
-        self.assertIn('compact decision-useful derived views', ctr_v21['future_insight_rule'])
+        self.assertIn('future insights cannot add, remove, reorder or compress table columns', ctr_v21['future_insight_rule'])
+        full_v22 = reporting_policy['canonical_full_spaced_table_v22']
+        self.assertEqual(full_v22['columns'], list(cycle.CANONICAL_DESKTOP_HEADERS))
+        self.assertIn('Leads', full_v22['mandatory_columns'])
+        self.assertIn('RPS', full_v22['mandatory_columns'])
+        self.assertIn('reduced explanatory subset', full_v22['rejected_reference'])
+        self.assertIn('shortened table subsets are forbidden', full_v22['manual_examples'])
+        self.assertIn('no future table modification', full_v22['layout_lock'])
         self.assertIn('same future-estimate backend', reporting_policy['source_routes']['economics_estimated'])
         formulas = reporting_policy['report_only_formulas']
         for key in ('cpc_link_usd', 'cost_subscriber_usd', 'profit_usd', 'smart_bidding_roi_percent', 'drip_roi_percent'):
@@ -974,6 +1013,10 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(mode['start_time'], 'next_day_00:00_America/New_York')
         self.assertIn('ACTIVE', mode['delivery_state'])
         self.assertEqual(mode['media_and_copy'], 'preserve source media and copy')
+        page_policy = mode['target_page_selection']
+        self.assertIn('pause the intake', page_policy['default'])
+        self.assertIn('forbidden', page_policy['automatic_selection'])
+        self.assertIn('no manifest sealing, no Meta write', page_policy['missing_page_behavior'])
         self.assertEqual(mode['engine_support'], 'supported_in_v3_3_manifest_planner_prevalidation_and_recovery')
         self.assertTrue(cloning['engine_readback']['eggbev_account_registered'])
         self.assertIn('manager-selected budget materialized explicitly', cloning['execution_gates'])
