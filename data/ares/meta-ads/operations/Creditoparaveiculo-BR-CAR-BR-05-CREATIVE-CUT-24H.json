@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "ACTIVE_ACCOUNT05_WATCHER_AND_READ_ONLY_REPORTS",
+  "status": "ACTIVE_ACCOUNT05_WATCHER_REPORTS_MONITOR_AND_CREATIVE_CUT_RUNNER",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -392,7 +392,44 @@
         }
       },
       "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
-      "creative_cut_writes": "not enabled by report activation; reports remain read-only until a separate deterministic strategy runner is authorized and validated"
+      "creative_cut_writes": {
+        "enabled": true,
+        "status": "ACTIVE_AUTOMATED_CUTS_ACCOUNT05",
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1543778490610884679",
+        "allowed_campaign_ids": [
+          "120248477978700046",
+          "120248477978730046",
+          "120248478066030046"
+        ],
+        "allowed_actions": [
+          "pause_dominant_ad_stage_a",
+          "pause_dominant_ad_stage_b",
+          "pause_campaign_terminal_stage_c"
+        ],
+        "never_actions": [
+          "delete_campaign",
+          "change_budget",
+          "pause_adset",
+          "reactivate_paused_ad"
+        ],
+        "window_hours": 24,
+        "decision_metric": "Smart Bidding real ROI delta for the current window",
+        "meta_concentration_metric": "Meta ad spend delta for the current window",
+        "max_meta_sb_diff_pct": 5.0,
+        "max_meta_sb_diff_floor_usd": 1.0,
+        "ambiguous_write_policy": "persist in_flight before one POST; GET only on recovery; never replay automatically",
+        "terminal_policy": "pause campaign and enter TERMINAL_PENDING_CREATIVE_FINALIZATION; never delete automatically",
+        "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.py",
+        "wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.sh",
+        "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-creative-cut24h.json",
+        "cron_job_id": "e855303c883c",
+        "cron_schedule": "14,29,44,59 * * * *",
+        "first_live_preflight_at_sp": "2026-08-31T01:09:26.551083-03:00",
+        "first_live_preflight_result": "OK: 3 campaigns and 9 strategy ads; zero writes",
+        "activation_readback_at_sp": "2026-08-31T01:10:12.649997-03:00",
+        "activation_readback_result": "OK: all campaigns THREE_ADS_ACTIVE; first checkpoint 2026-09-01 00:30 SP; zero writes"
+      }
     }
   },
   "first_delivery_guardrail": {
@@ -536,6 +573,17 @@
       "enabled": true,
       "mode": "alert_only_never_auto_correct",
       "direct_thread_post": "1542892943352799242"
+    },
+    {
+      "job_id": "e855303c883c",
+      "name": "Creditoparaveiculo 05 CREATIVE CUT 24H",
+      "schedule": "14,29,44,59 * * * *",
+      "script": "creditoparaveiculo-account05-creative-cut24h.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "mode": "controlled_write_allowlisted_fail_closed",
+      "direct_thread_post_on_action": "1542892943352799242"
     }
   ],
   "meta_writes_performed": 1,

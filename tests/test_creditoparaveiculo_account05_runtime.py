@@ -37,7 +37,10 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(op['reporting']['daily_thread_id'], '1542892955315081246')
         self.assertEqual(op['reporting']['intraday_thread_id'], '1542892943352799242')
         self.assertEqual(op['reporting']['layout'], 'desktop_aligned_tables_only')
-        self.assertTrue(op['management_scope']['autonomous_action_scope']['creative_cut_writes'].startswith('not enabled'))
+        cut_cfg = op['management_scope']['autonomous_action_scope']['creative_cut_writes']
+        self.assertIsInstance(cut_cfg, dict)
+        self.assertEqual(cut_cfg['status'], 'ACTIVE_AUTOMATED_CUTS_ACCOUNT05')
+        self.assertIs(cut_cfg['enabled'], True)
 
     def test_first_delivery_safe_window_and_date_only_rename(self):
         module = load(WATCHER, 'cpv05_watcher_test')
