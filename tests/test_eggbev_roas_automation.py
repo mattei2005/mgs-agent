@@ -45,12 +45,8 @@ class PhaseTests(unittest.TestCase):
     def test_midnight_is_phase3_recycling(self):
         self.assertEqual(common.phase_for_time(self.at(0)), 'PHASE_3')
 
-    def test_05_and_06_are_observation_only(self):
-        for hour in (5, 6):
-            self.assertEqual(common.phase_for_time(self.at(hour)), 'OBSERVE')
-
     def test_phase_1_times(self):
-        for hour in (8, 10, 12):
+        for hour in (5, 6, 8, 10, 12):
             self.assertEqual(common.phase_for_time(self.at(hour)), 'PHASE_1')
 
     def test_phase_2_times(self):
@@ -124,9 +120,11 @@ class DecisionTests(unittest.TestCase):
         )
         self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
 
-    def test_observation_before_08_never_cuts(self):
-        result = self.decide([active_ad()], insights={'a1': metric(50, None)}, phase='OBSERVE')
-        self.assertEqual(result['decisions'][0]['action'], 'KEEP')
+    def test_phase1_at_05_and_06_cuts_when_spend_gate_and_roas_fail(self):
+        for hour in (5, 6):
+            self.assertEqual(common.phase_for_time(dt.datetime(2026, 8, 29, hour, 0, tzinfo=ET)), 'PHASE_1')
+            result = self.decide([active_ad()], insights={'a1': metric(2.01, .39)}, phase='PHASE_1')
+            self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
 
     def test_exact_threshold_never_changes_state(self):
         result = self.decide([active_ad()], insights={'a1': metric(10.0, 0.40)}, phase='PHASE_2')
@@ -1128,8 +1126,8 @@ class ContractTests(unittest.TestCase):
     def test_phase3_contract_matches_nicolas_exact_recycling_policy(self):
         roas = self.operation['roas_cycle_policy']
         phase3 = roas['phase_3_recycling']
-        self.assertEqual(roas['formation_window']['to_exclusive'], '08:00')
-        self.assertEqual(roas['phase_1']['times'], ['08:00', '10:00', '12:00'])
+        self.assertEqual(roas['formation_window']['to_exclusive'], '05:00')
+        self.assertEqual(roas['phase_1']['times'], ['05:00', '06:00', '08:00', '10:00', '12:00'])
         self.assertEqual(roas['phase_2']['night_no_roas_scope']['times'], ['20:00', '22:00', '23:00'])
         self.assertEqual(phase3['time'], '00:00')
         self.assertTrue(phase3['ordered_inside_existing_midnight_job'])
@@ -1140,6 +1138,7 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(phase3['page_leads_exclusion']['threshold'], 5000)
         self.assertEqual(phase3['campaign_budget']['choices_usd'], [45, 65])
         self.assertTrue(phase3['campaign_budget']['write_enabled'])
+        self.assertEqual(phase3['normal_cut_resume_at'], '05:00')
         self.assertTrue(phase3['reporting']['title_must_identify_phase3'])
 
     def test_daily_build_does_not_enable_post_or_cron(self):

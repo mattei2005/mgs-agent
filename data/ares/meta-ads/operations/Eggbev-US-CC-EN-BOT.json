@@ -1088,27 +1088,21 @@
     },
     "formation_window": {
       "from": "00:00",
-      "to_exclusive": "08:00",
+      "to_exclusive": "05:00",
       "cuts": false,
       "reactivations": false,
-      "report_only_times": [
-        "05:00",
-        "06:00"
-      ],
-      "manager_decision": "Phase 3 winners must spend through the early morning; normal cuts start at 08:00 ET."
+      "manager_correction": "Fase 1 starts at 05:00; 05:00 and 06:00 are action cycles and do cut eligible ads."
     },
     "phase_1": {
       "times": [
+        "05:00",
+        "06:00",
         "08:00",
         "10:00",
         "12:00"
       ],
-      "cut": "Amount spent > USD 2.00 AND Purchase ROAS < threshold",
-      "reactivate": "Ares-paused ad with Purchase ROAS > threshold",
-      "observation_only_times": [
-        "05:00",
-        "06:00"
-      ]
+      "cut": "Amount spent > USD 2.00 AND Purchase ROAS < threshold; applies at 05:00, 06:00, 08:00, 10:00 and 12:00 ET",
+      "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
     },
     "phase_2": {
       "times": [
@@ -1783,7 +1777,7 @@
         "activate/readback ad set",
         "activate/readback ad"
       ],
-      "normal_cut_resume_at": "08:00",
+      "normal_cut_resume_at": "05:00",
       "reporting": {
         "post_when_ads_activated": true,
         "post_every_phase3_run": true,
@@ -1803,7 +1797,8 @@
       },
       "requested_by": "Nicolas Holanda",
       "source": "discord:thread:1541578606076231750",
-      "approved_at_et": "2026-08-30T23:49:15-04:00"
+      "approved_at_et": "2026-08-30T23:49:15-04:00",
+      "schedule_correction_at_et": "2026-08-31T00:14:52-04:00"
     }
   },
   "campaign_scaling_policy": {
@@ -2458,5 +2453,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-31T00:02:00-04:00"
+  "updated_at": "2026-08-31T00:14:52-04:00"
 }

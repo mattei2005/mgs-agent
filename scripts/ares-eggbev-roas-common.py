@@ -142,9 +142,7 @@ def phase_for_time(local_time: dt.datetime) -> str:
     hhmm = local_time.strftime('%H:%M')
     if hhmm == '00:00':
         return 'PHASE_3'
-    if hhmm in {'05:00', '06:00'}:
-        return 'OBSERVE'
-    if hhmm in {'08:00', '10:00', '12:00'}:
+    if hhmm in {'05:00', '06:00', '08:00', '10:00', '12:00'}:
         return 'PHASE_1'
     if hhmm in {'13:00', '14:00', '16:00', '18:00', '20:00', '22:00', '23:00'}:
         return 'PHASE_2'

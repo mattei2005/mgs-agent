@@ -876,7 +876,7 @@ def render_report(run: dict[str, Any]) -> str:
             f"♻️ `{counts.get('reactivate_ads', 0)} ads` • 🏗️ `{counts.get('reactivate_adsets', 0)} conjuntos` • "
             f"📣 `{counts.get('reactivate_campaigns', 0)} campanhas` • 💵 `{counts.get('budget_updates', 0)} budgets` • "
             f"⛔ `{counts.get('excluded_campaigns', 0)} excluídas`",
-            '🔁 **Ação da Fase 3:** reciclagem dos vencedores do dia anterior; cortes normais retornam às 08:00 ET.',
+            '🔁 **Ação da Fase 3:** reciclagem dos vencedores do dia anterior; Fase 1 e cortes normais retornam às 05:00 ET.',
         ]
     else:
         title_emoji = '⚠️' if (reasons and phase != 'OBSERVE') else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'

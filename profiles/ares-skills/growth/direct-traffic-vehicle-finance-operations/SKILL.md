@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.48
+version: 1.0.49
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -165,7 +165,7 @@ CREATIVE_CUT_24H      pausas intermediárias no nível do anúncio; encerramento
 
 Para `CREATIVE_CUT_24H`, carregar obrigatoriamente `references/creative-cut-24h-strategy.md`. A estratégia pertence à campanha e é independente de criar do zero, clonar com criativos novos ou duplicar igual. Campanha sem atribuição explícita permanece no modo canônico de sua operação; silêncio nunca migra estratégia.
 
-Decisão de Rodolfo consolidada em 30/08/2026: a estratégia `CREATIVE_CUT_24H` pertence à conta operacional **05** (`2039876850230678`) e está atribuída às três campanhas de IDs técnicos preservados, agora identificadas pontualmente como C01, C02 e C03. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3`. A conta 05 possui watcher de primeiro gasto autorizado e relatórios Diário/Intraday read-only nas threads próprias; a automação de corte por criativo continua separada e não nasce implicitamente da ativação dos relatórios. A renumeração pontual `01/02/03` dessas três campanhas — inclusive wrappers account-05 `b01fb05c01–c03` reconciliados na tarefa própria — não redefine o padrão geral de naming/numeração de campanhas futuras.
+Decisão de Rodolfo consolidada em 30–31/08/2026: a estratégia `CREATIVE_CUT_24H` pertence à conta operacional **05** (`2039876850230678`) e está atribuída às três campanhas de IDs técnicos preservados, agora identificadas pontualmente como C01, C02 e C03. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3`. A conta 05 possui watcher de primeiro gasto, relatórios Diário/Intraday read-only e runner separado de corte automático explicitamente autorizado: após cada janela completa e reconciliação Meta×SB, pode pausar o anúncio dominante nos gates `80/10/10` e `90/10` ou pausar a campanha no estágio terminal; nunca altera budget/adset, reativa anúncio ou exclui campanha. A renumeração pontual `01/02/03` dessas três campanhas — inclusive wrappers account-05 `b01fb05c01–c03` reconciliados na tarefa própria — não redefine o padrão geral de naming/numeração de campanhas futuras.
 
 Nunca pausar conjunto como substituto. Relatórios usam o status real da campanha e, em `CREATIVE_CUT_24H`, também exibem o estado dos anúncios e da janela. Se existir legado com campanha ativa e filhos pausados sem atribuição dessa estratégia, mencionar como observação e não inferir autorização.
 

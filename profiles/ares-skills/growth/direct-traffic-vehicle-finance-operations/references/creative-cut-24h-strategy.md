@@ -19,11 +19,11 @@ O ChatPion não integra esta estratégia. A prática externa foi apenas a origem
 
 - Conta-alvo: conta operacional **05** do Creditoparaveiculo BR-CAR-BR, account ID `2039876850230678`, alias `Creditoparaveiculo-BR-CAR-BR-05-G006`, USD e `America/Sao_Paulo`, confirmados por API.
 - A conta **13 não recebe esta estratégia** e preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita.
-- Estado operacional: `ACTIVE_ACCOUNT05_READ_ONLY_REPORTING`; as três campanhas de IDs técnicos persistidos foram atribuídas a `CREATIVE_CUT_24H` e reconciliadas pontualmente como C01, C02 e C03.
+- Estado operacional: `ACTIVE_ACCOUNT05_WATCHER_REPORTS_MONITOR_AND_CREATIVE_CUT_RUNNER`; as três campanhas de IDs técnicos persistidos foram atribuídas a `CREATIVE_CUT_24H` e reconciliadas pontualmente como C01, C02 e C03.
 - As três threads fixas da conta 05 são Intraday `1542892943352799242`, Diário `1542892955315081246` e Criar campanhas `1542892971186454719`; o member sync de Zeus, Rodolfo, Nicolas e Geizian foi confirmado por readback.
 - A thread `CPV Regras` `1540426218405363873` é única e compartilhada por todas as contas de anúncio Creditoparaveiculo BR-CAR-BR; não criar uma thread de regras por conta.
 - O watcher de primeiro gasto da conta 05 roda a cada 15 minutos: primeiro spend entre 00:30 e 02:00 SP inicia a primeira janela de 24h; primeiro spend posterior pausa a campanha uma vez e agenda uma única reativação dentro da próxima janela 00:30–02:00, sempre com GET/readback.
-- Diário e Intraday da conta 05 são automações determinísticas read-only; o Diário individual exibe somente aquisição da conta 05, sem valores de SMS, e aponta para o `CPV Diário Geral` `1543826231831560343`, que consolida contas 05+13 e SMS G006 exatamente uma vez. Ativar os relatórios não autoriza automaticamente pausas intermediárias da estratégia. Um runner de decisão/corte separado exige implementação, testes, state/idempotência e autorização/readback próprios.
+- Diário e Intraday da conta 05 são automações determinísticas read-only; o Diário individual exibe somente aquisição da conta 05, sem valores de SMS, e aponta para o `CPV Diário Geral` `1543826231831560343`, que consolida contas 05+13 e SMS G006 exatamente uma vez. Os relatórios nunca executam cortes. O runner separado `creditoparaveiculo-account05-creative-cut24h.py` está ativo a cada 15 minutos somente para C01–C03 allowlisted: persiste `in_flight` antes de um POST, faz GET/readback e nunca repete write ambíguo automaticamente.
 - O monitor account-wide de alterações externas da conta 05 roda a cada cinco minutos em Graph v26.0, usa state/audit account-scoped e publica apenas alertas na thread Intraday; nunca autocorrige e não se confunde com o watcher de primeiro gasto.
 - A renumeração pontual das três campanhas da conta 05 para `01`, `02`, `03`, incluindo wrappers account-05 `b01fb05c01–c03` reconciliados pela tarefa específica, não altera a taxonomia/naming geral nem estabelece regra para campanhas novas; os Meta campaign IDs e a auditoria original permanecem preservados.
 
@@ -93,11 +93,12 @@ Após 24 horas completas desde o segundo pause confirmado:
 
 1. Se `ROI real > 0`, manter a campanha e retomar a escala normal no próximo checkpoint autorizado.
 2. Se `ROI real = 0`, observar; nenhuma decisão automática.
-3. Se `ROI real < 0`, executar corte terminal no nível da campanha:
+3. Se `ROI real < 0`, executar o corte terminal no nível da campanha:
    - persistir a decisão;
    - pausar a campanha e confirmar por GET;
-   - finalizar classificação, Drive e inventário dos três criativos;
-   - somente depois enviar `status=DELETED` uma vez;
+   - entrar em `TERMINAL_PENDING_CREATIVE_FINALIZATION` e interromper o runner automático;
+   - finalizar classificação, Drive e inventário dos três criativos por fluxo próprio autorizado;
+   - somente depois, e nunca pelo runner automático de cortes, enviar `status=DELETED` uma vez quando houver autorização/gate aplicável;
    - aceitar `DELETED` ou `ARCHIVED` no readback terminal.
 
 ## Classificação dos criativos
@@ -176,4 +177,4 @@ Diário e Intraday devem exibir `management_strategy`, estágio, início da jane
 - [x] C01, C02 e C03 atribuídas nominalmente à estratégia, com IDs técnicos/origem anterior preservados em audit
 - [x] watcher de primeiro gasto account-scoped com state/idempotência, testes, dry-run live e cron readback
 - [x] Diário e Intraday read-only com tabelas desktop, testes, dry-run live, crons script-only e threads fixas
-- [ ] runner automático de corte por criativo permanece desabilitado até existir implementação, fixtures 80/10/10 e 90/10, canário PAUSED e autorização específica
+- [x] runner automático de corte por criativo implementado com fixtures 80/10/10 e 90/10, baseline cumulativa por janela, reconciliação Meta×SB, state/idempotência, dry-run/preflight live, cron script-only e readback; corte terminal pausa a campanha e nunca a exclui automaticamente

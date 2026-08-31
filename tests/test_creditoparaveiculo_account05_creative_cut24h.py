@@ -108,6 +108,38 @@ def test_verified_ad_pause_opens_new_24h_window_and_baselines(tmp_path):
     assert saved['campaigns']['c1']['next_checkpoint_at_sp'].startswith('2026-09-02T00:30:00')
 
 
+def test_recovery_uses_get_readback_without_replaying_post(tmp_path):
+    m = load()
+    setattr(m, 'STATE_PATH', tmp_path / 'state.json')
+    setattr(m, 'AUDIT_ROOT', tmp_path / 'audit')
+    now = datetime(2026, 9, 1, 0, 31, tzinfo=ZoneInfo('America/Sao_Paulo'))
+    pending = {
+        'target_type': 'ad', 'target_id': 'a', 'action_key': 'recover-k',
+        'window_metrics': {'roi_pct': -20},
+        'cumulative_snapshot': {
+            'meta_by_ad': {'a': 80, 'b': 10, 'c': 10},
+            'sb_by_campaign': {'c1': {'investment': 100, 'net_revenue': 80}},
+        },
+    }
+    state = {'campaigns': {'c1': {
+        'active_ad_ids': ['a', 'b', 'c'], 'paused_ad_ids': [],
+        'current_stage': 'THREE_ADS_ACTIVE', 'in_flight': pending,
+    }}}
+
+    class Meta:
+        calls = []
+        def graph_get(self, object_id, token, params):
+            self.calls.append(('GET', object_id))
+            return 200, {'id': object_id, 'configured_status': 'PAUSED'}, {}
+
+    fake = Meta()
+    result = m.reconcile_in_flight(fake, 'token', state, now)
+    assert result[0]['status'] == 'RECONCILED_VERIFIED'
+    assert fake.calls == [('GET', 'a')]
+    assert state['campaigns']['c1']['current_stage'] == 'TWO_ADS_ACTIVE'
+    assert state['campaigns']['c1']['in_flight'] is None
+
+
 def test_runner_scope_has_no_delete_budget_or_adset_write():
     source = RUNNER.read_text()
     assert "graph_post_once(target_id, token, {'status': 'PAUSED'})" in source
