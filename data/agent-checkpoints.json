@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ARIA-C003-2X-IMMEDIATE-20260831",
-      "next_step": "Após cooldown, o Engine v3 deve ler os dois shells, confirmar zero ads, criar somente os seis ads faltantes com call_to_actions Messenger e fazer readback consolidado; depois executar GET direto de campanhas/AdGs/ads/creatives/tracking e fechar checkpoint.",
+      "next_step": "Nenhuma ação do operador necessária. Aguardar revisão automática da Meta para o anúncio ainda PENDING_REVIEW em cada clone; monitoramento operacional normal confirma serving quando houver impressão/gasto.",
       "objective": "Clonar exatamente duas vezes a campanha 163 - Aria Kensington - ENG - US - (pg_8348) C003, com USD45 por clone e início imediato sem schedule.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-1034081997659047.json",
-      "state": "write iniciou no engine v3. readback confirmou exatamente dois shells de campanha e dois adgs messenger active, budget usd45, page correta, start 09:46 et e zero ads. a primeira cópia de anúncios falhou 1815675 porque o get normalizado omitiu call_to_actions. recovery manifest preserva payload live e restaura somente cta messenger canônico; zero replay de shells. o primeiro recovery foi bloqueado por quota meta 2446079 antes de write. lease recovery_pending; retomada técnica após decaimento de quota está armada com o mesmo request.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; direct-readback:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-final-direct-readback.json; recovery-summary:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-recovery-summary.json",
+      "state": "complete. engine v3/checkpoint/bundle complete e lease liberada. dup01 e dup02 existem com nomes exatos, usd45/dia, início 31/08/2026 09:46 et, campanha e adg active, estrutura 1x1x3 cada. seis ads configurados active, zero issues; no último get, por clone 2 ads estavam effective active e 1 pending_review. page, pbia, utm pg_8348, copy, messenger json, mídia e source_ad_id reconciliados contra a fonte. spend/impressões ainda 0 no instante do readback, portanto serving não foi declarado. recovery preservou os 2 shells e criou somente os 6 ads faltantes após restaurar call_to_actions messenger; zero replay cego.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T13:59:00+00:00"
+      "updated_at": "2026-08-31T14:17:05+00:00"
     },
     {
       "agent": "ares",
@@ -1772,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T14:06:18+00:00"
+  "updated_at": "2026-08-31T14:17:05+00:00"
 }
