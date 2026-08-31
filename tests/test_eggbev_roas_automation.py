@@ -1224,9 +1224,12 @@ class ContractTests(unittest.TestCase):
 
     def test_daily_page_grouped_contract_uses_exact_keys_and_formulas(self):
         renderer = self.operation['daily_reporting_policy']['renderer_contract']
-        self.assertIn('page_grouped_desktop_v6', renderer['status'])
+        self.assertIn('unified_daily_v7', renderer['status'])
         self.assertIn('descending Z-to-A', renderer['layout'])
-        self.assertIn('sequence·Cnnn·Dnn', renderer['per_campaign_fields'][0])
+        self.assertEqual(renderer['per_campaign_fields'][0], 'stable deterministic SRC source alias')
+        self.assertEqual(renderer['per_campaign_fields'][1], 'identity integrity signal')
+        self.assertIn('messaging_conversation_started_7d', renderer['metric_semantics']['Msg'])
+        self.assertIn('never campaign-level ROI', renderer['metric_semantics']['page_roi_and_rps'])
         self.assertIn('current dashboard Broadcast revenue from /report/messenger BD_REVENUE', renderer['per_page_smart_bidding_fields'])
         self.assertIn('spend-weighted Meta Purchase ROAS', renderer['per_page_meta_fields'])
         self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])

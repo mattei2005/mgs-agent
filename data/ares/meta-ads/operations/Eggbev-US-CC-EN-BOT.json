@@ -606,7 +606,7 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "one consolidated desktop view inspired by Corte e ROAS, grouped by Page/UTM with reconciled full Page names in descending Z-to-A order and unnamed groups last; each page shows current dashboard Broadcast revenue plus one compact campaign table, followed by at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "layout": "unified Daily v7 with three short account lines, Page/UTM summaries in descending Z-to-A order, separate revenue/Drip/current Broadcast, stable SRC aliases for clone intake, visible identity integrity signals and one compact campaign table per Page; maximum five Fique de olho bullets and fence-safe Discord pagination",
     "layout_correction": {
       "status": "active",
       "requested_by": "Nicolas Holanda",
@@ -641,13 +641,26 @@
       }
     },
     "renderer_contract": {
-      "status": "page_grouped_desktop_v6_cut_roas_inspired_current_broadcast_materialized",
+      "status": "unified_daily_v7_page_source_alias_tracking_integrity_materialized",
       "campaign_scope": "for the 08:00 D-1 table, every campaign with an insight row in D-1 and no current ACTIVE campaign that lacks D-1 insight; for today/on-demand views, every currently effective ACTIVE campaign even without insight plus every campaign with insight in the requested period",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
-      "campaign_identity_display": "each Page/UTM has one Cut-and-ROAS-inspired compact campaign table; rows use deterministic sequence·Cnnn·Dnn plus visible row number, while the full Meta name remains in audit and appears in alerts when ambiguity or mismatch exists",
+      "campaign_identity_display": "each Page/UTM has one compact campaign table; every row uses a stable SRC-{sequence-Cnnn-Dnn}-{short digest} alias persisted in audit, while the full Meta name remains in audit and appears in alerts when ambiguity or mismatch exists",
+      "source_alias_policy": "Daily aliases are read-only references for the fixed Clone thread; they never trigger a clone or prove eligibility, and every requested alias requires live campaign/Page/UTM/status/DUP preflight before a manifest",
+      "identity_signals": {
+        "🧬": "Meta name, UTM and Smart Bidding Page reconciled",
+        "🟡": "coverage incomplete or external join unavailable",
+        "⚠️": "duplicate campaign name or Meta name versus UTM/Page divergence"
+      },
+      "metric_semantics": {
+        "Msg": "Meta messaging_conversation_started_7d",
+        "cost_per_msg": "Meta spend divided by messaging_conversation_started_7d",
+        "page_roi_and_rps": "Smart Bidding Page/UTM-level indicators; never campaign-level ROI",
+        "revenue_breakdown": "total revenue, Drip revenue and current Broadcast revenue are displayed separately"
+      },
       "per_campaign_fields": [
-        "deterministic compact campaign key sequence·Cnnn·Dnn",
+        "stable deterministic SRC source alias",
+        "identity integrity signal",
         "current status",
         "delivery signal for the requested period",
         "Budget USD",
@@ -685,7 +698,7 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "one consolidated desktop view inspired by Corte e ROAS, divided into Page/UTM groups with reconciled full Page names sorted descending Z-to-A and unnamed groups placed last; each page shows one compact Meta and Smart Bidding summary with current dashboard Broadcast revenue, followed by its campaign table; Smart Bidding economics is never repeated on campaign rows; maximum five short alerts below",
+      "layout": "three short account summary lines followed by Page/UTM groups sorted descending Z-to-A with unnamed groups last; each page shows separate Meta and Smart Bidding summaries, current Broadcast and Drip, then one source-alias campaign table; economics is never repeated as campaign ROI; maximum five short alerts below",
       "pagination": "maximum ten campaign rows per Page table part with header repeated and visible part count, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "latest_visual_validation": {
