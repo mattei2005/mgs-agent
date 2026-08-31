@@ -442,6 +442,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
+      "next_step": "Nicolas informar a Page/pg_XXXXX alvo do clone_page_switch. Depois resolver Page/JSON, pre-stagear os três assets selecionados, montar/prevalidar os três manifests, apresentar resumo final com USD45 por clone e executar somente após OK explícito.",
+      "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; canonical-source:data/ares/meta-ads/state/eggbev-creation/eggbev-12c-20260830-nicolas-pg_5071-00002.json",
+      "state": "preflight meta concluído. a fonte canônica foi reconciliada pelo audit de criação; existe outra campanha ativa de mesmo nome que será preservada e ignorada. dup01-dup03 estão livres. budget proposto usd45 por clone. reconciliação drive-meta válida, 73 assets aprovados e três assets inéditos selecionados para clone_prestaged. a seleção automática de page falhou fechado porque não há página reconciliada com campanha e anúncio efetivamente ativos; zero meta writes.",
+      "thread_id": "1543333373945053184",
+      "updated_at": "2026-08-31T02:41:19+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
       "next_step": "Materializar em read-only o seletor de rota vertical/Messenger Pages/domain com readback de endpoint, campo, moeda, período, freshness e identidade; depois apresentar novo dry-run a Nicolas.",
       "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
@@ -1592,5 +1602,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:35:03+00:00"
+  "updated_at": "2026-08-31T02:41:19+00:00"
 }
