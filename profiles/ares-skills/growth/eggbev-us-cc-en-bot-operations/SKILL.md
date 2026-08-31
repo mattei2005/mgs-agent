@@ -24,7 +24,7 @@ Status do contrato       Corte/reativação e postagem ROAS autorizados em modo 
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                somente status de anúncio no ciclo ROAS; campanha/ad set imutáveis nesse ciclo; budget manual por Nicolas habilitado; guardrail de leads habilitado
+Write Meta                Fases 1/2: somente status de anúncio; Fase 3 00:00: budget US$45/US$65 e campanha/ad set/ad ACTIVE sob gates fail-closed; budget manual por Nicolas habilitado; guardrail de leads habilitado
 Crons Eggbev              Corte/ROAS e guardrail de leads ativos; tick LEADS 20:00 ET confirmado. Flag cron gateway_running=false é falso negativo do observador; execução real vence.
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
@@ -229,7 +229,7 @@ O wrapper de produção usa modo `--scheduled`: atraso do scheduler de até 15 m
 
 Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Por decisão explícita de Nicolas, ausência completa da linha de insight do anúncio na Fase 2 também é `N/D` e corta. Fonte indisponível, com freshness superior a 2h, sem timestamp verificável ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 
-A ação de ROAS é exclusivamente no anúncio. Mesmo que o ciclo deixe zero anúncios ativos, cortar todos os elegíveis sem pausar ou reativar campanha/ad set. Se um anúncio pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente somente esse anúncio, sempre com pré-leitura e readback pós-write. Campanhas pausadas pelo guardrail de LEADS, manualmente ou por outra origem nunca são reativadas pelo ciclo ROAS.
+Nas Fases 1/2, a ação de ROAS é exclusivamente no anúncio. Mesmo que o ciclo deixe zero anúncios ativos, cortar todos os elegíveis sem pausar ou reativar campanha/ad set. Se um anúncio pausado pelo Ares recuperar Purchase ROAS acima do threshold, reativar automaticamente somente esse anúncio, sempre com pré-leitura e readback pós-write. Campanhas pausadas pelo guardrail de LEADS, manualmente ou por outra origem nunca são reativadas pelas Fases 1/2. A Fase 3 das 00:00 é a exceção separada documentada em Política v23: ela pode garantir campanha, ad set e anúncio ACTIVE inclusive após pausa manual, quando todos os gates próprios forem satisfeitos.
 
 Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Meta Purchase ROAS no nível da campanha. `ROAS > 0,50` recomenda aumentar o budget CBO atual em `10%`; `0,40 < ROAS <= 0,50` mantém; `ROAS = 0,50` mantém. A regra é composta ciclo a ciclo. O planner é dry-run; write real depende de Rodolfo/Geizian e de teto/envelope aprovado.
 
