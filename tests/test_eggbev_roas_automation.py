@@ -1162,7 +1162,7 @@ class ReportingTests(unittest.TestCase):
         }
         rendered = '\n'.join(daily.render_period(period))
         self.assertIn('Visão unificada · Página → fonte de clone', rendered)
-        self.assertIn('BC agora', rendered)
+        self.assertIn('📣', rendered)
         self.assertIn('$/Msg', rendered)
         self.assertIn('ROI real', rendered)
         self.assertIn('ROI est.', rendered)
@@ -1194,7 +1194,7 @@ class ReportingTests(unittest.TestCase):
         self.assertLess(rendered.index('Tina Walter'), rendered.index('Celia Draper'))
         self.assertLess(rendered.index('Celia Draper'), rendered.index('Amy Shook'))
         self.assertLess(rendered.index('Amy Shook'), rendered.index('pg_9'))
-        self.assertIn('BC agora $5,00', rendered)
+        self.assertIn('📣 $5,00', rendered)
 
     def test_revenue_anomaly_uses_equivalent_median_and_30_40_bands(self):
         state = daily.default_anomaly_state()
@@ -1330,12 +1330,17 @@ class ContractTests(unittest.TestCase):
 
     def test_daily_page_grouped_contract_uses_exact_keys_and_formulas(self):
         renderer = self.operation['daily_reporting_policy']['renderer_contract']
-        self.assertIn('unified_daily_v7', renderer['status'])
+        self.assertIn('unified_daily_v8', renderer['status'])
         self.assertIn('descending Z-to-A', renderer['layout'])
         self.assertEqual(renderer['per_campaign_fields'][0], 'stable deterministic SRC source alias')
         self.assertEqual(renderer['per_campaign_fields'][1], 'identity integrity signal')
         self.assertIn('messaging_conversation_started_7d', renderer['metric_semantics']['Msg'])
-        self.assertIn('never campaign-level ROI', renderer['metric_semantics']['page_roi_and_rps'])
+        self.assertIn('never copied into a campaign row', renderer['metric_semantics']['page_roi_and_rps'])
+        self.assertIn('NET_REVENUE', renderer['metric_semantics']['campaign_roi_real'])
+        self.assertIn('estimatedRevenue', renderer['metric_semantics']['campaign_roi_estimated'])
+        self.assertIn('Smart Bidding ROI real', renderer['per_campaign_fields'])
+        self.assertIn('Smart Bidding ROI estimated', renderer['per_campaign_fields'])
+        self.assertIn('every requested report performs new API reads', renderer['smart_bidding_live_query_policy'])
         self.assertIn('current dashboard Broadcast revenue from /report/messenger BD_REVENUE', renderer['per_page_smart_bidding_fields'])
         self.assertIn('spend-weighted Meta Purchase ROAS', renderer['per_page_meta_fields'])
         self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])

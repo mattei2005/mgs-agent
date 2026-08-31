@@ -1155,7 +1155,7 @@ def render_grouped_page_tables(
         identity_ok = sum(1 for _, row in page_campaigns if common.norm(row.get('identity_signal')) == '🧬')
         lines.extend([
             '', f"{roi_marker(page.get('sb_roi_percent'))} **{label}** · {count} {noun} · {page.get('delivered') or 0}● · 🧬 {identity_ok}/{count}",
-            f"`💵 {format_money_br(page.get('spend'))} · 💬 {common.fmt_number(page.get('messaging_started'), 0)}/{format_money_br(page.get('cost_per_messaging_started'))} · ROAS {common.fmt_number(page.get('purchase_roas'))} │ 🧾 {format_money_br(page.get('sb_investment'))}→{format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_roi_cell(page.get('sb_roi_percent'))} · RPS {format_money_br(page.get('pricing_rps'))} · 💧 {format_money_br(page.get('sb_drip_revenue'))} · 📣 BC agora {format_money_br(page.get('sb_broadcast_current'))}`",
+            f"`💵 {format_money_br(page.get('spend'))} · 💬 {common.fmt_number(page.get('messaging_started'), 0)}/{format_money_br(page.get('cost_per_messaging_started'))} · ROAS {common.fmt_number(page.get('purchase_roas'))} │ 🧾 {format_money_br(page.get('sb_investment'))}→{format_money_br(page.get('sb_revenue'))} · ROI* {format_roi_cell(page.get('sb_roi_percent'))} · 💧 {format_money_br(page.get('sb_drip_revenue'))} · 📣 {format_money_br(page.get('sb_broadcast_current'))}`",
         ])
         rows: list[list[str]] = []
         for _, row in page_campaigns:

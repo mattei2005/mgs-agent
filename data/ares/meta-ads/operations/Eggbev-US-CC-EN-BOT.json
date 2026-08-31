@@ -608,7 +608,7 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "unified Daily v7 with three short account lines, Page/UTM summaries in descending Z-to-A order, separate revenue/Drip/current Broadcast, stable SRC aliases for clone intake, visible identity integrity signals and one compact campaign table per Page; maximum five Fique de olho bullets and fence-safe Discord pagination",
+    "layout": "unified Daily v8 with three short account lines, two compact emoji-led lines per Page/UTM, exact campaign-level ROI real and ROI estimated columns, stable SRC aliases, visible identity integrity signals, maximum five Fique de olho bullets and fence-safe Discord pagination; every run performs fresh Smart Bidding API reads",
     "layout_correction": {
       "status": "active",
       "requested_by": "Nicolas Holanda",
@@ -643,7 +643,7 @@
       }
     },
     "renderer_contract": {
-      "status": "unified_daily_v7_page_source_alias_tracking_integrity_materialized",
+      "status": "unified_daily_v8_campaign_roi_live_smart_bidding_materialized",
       "campaign_scope": "for the 08:00 D-1 table, every campaign with an insight row in D-1 and no current ACTIVE campaign that lacks D-1 insight; for today/on-demand views, every currently effective ACTIVE campaign even without insight plus every campaign with insight in the requested period",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
@@ -657,7 +657,9 @@
       "metric_semantics": {
         "Msg": "Meta messaging_conversation_started_7d",
         "cost_per_msg": "Meta spend divided by messaging_conversation_started_7d",
-        "page_roi_and_rps": "Smart Bidding Page/UTM-level indicators; never campaign-level ROI",
+        "page_roi_and_rps": "Smart Bidding Page/UTM-level context; never copied into a campaign row",
+        "campaign_roi_real": "report-only (NET_REVENUE - INVESTIMENT) / INVESTIMENT after exact CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP join and fresh /estimated/delay evidence",
+        "campaign_roi_estimated": "report-only (estimatedRevenue - INVESTIMENT) / INVESTIMENT; current reports prefer fresh /estimated/revenue/utm_adgroup only when the UTM maps to one campaign, while historical reports use date-scoped performance_per_campaigns.REVENUE_ESTIMATED; ambiguous or stale data is N/D",
         "revenue_breakdown": "total revenue, Drip revenue and current Broadcast revenue are displayed separately"
       },
       "per_campaign_fields": [
@@ -670,6 +672,8 @@
         "messaging_conversation_started_7d",
         "Cost per messaging conversation started",
         "Purchase ROAS",
+        "Smart Bidding ROI real with health emoji",
+        "Smart Bidding ROI estimated with health emoji",
         "Meta CPM",
         "CTR"
       ],
@@ -700,7 +704,8 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "three short account summary lines followed by Page/UTM groups sorted descending Z-to-A with unnamed groups last; each page shows separate Meta and Smart Bidding summaries, current Broadcast and Drip, then one source-alias campaign table; economics is never repeated as campaign ROI; maximum five short alerts below",
+      "layout": "three short account summary lines followed by Page/UTM groups sorted descending Z-to-A with unnamed groups last; each page begins with only a compact health line plus one emoji-led Meta/Smart Bidding line, then one source-alias campaign table with exact campaign-level ROI real and ROI estimated columns; page economics is never copied into campaign ROI; maximum five short alerts below",
+      "smart_bidding_live_query_policy": "every requested report performs new API reads of /campaigns/Messenger, /report/messenger, /report/performance_per_campaigns, /estimated/revenue/utm_adgroup and /estimated/delay as applicable; previous messages, audits and snapshots are never reused as current values; age over 120 minutes, missing freshness, identity ambiguity or period mismatch renders the affected values N/D",
       "pagination": "maximum ten campaign rows per Page table part with header repeated and visible part count, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "latest_visual_validation": {
