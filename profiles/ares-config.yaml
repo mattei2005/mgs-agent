@@ -731,8 +731,8 @@ discord:
       estado atual.
 
       - Horarios e rotas do Diario ainda nao foram definidos nem aprovados. Os ciclos
-      05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e
-      23:00 pertencem exclusivamente ao Corte e ROAS e nunca devem ser apresentados
+      05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00
+      e 23:00 pertencem exclusivamente ao Corte e ROAS e nunca devem ser apresentados
       como schedule do Diario. Aguardar o desenho separado de Nicolas antes de propor
       ou criar cron.
 
@@ -835,23 +835,24 @@ discord:
       \ e use o próximo número livre após ler todas as campanhas não deletadas.\n\
       - Default de produção: campanha, ad set e todos os anúncios configurados ACTIVE,\
       \ com start_time no próximo dia às 00:00 America/New_York. PAUSED somente para\
-      \ canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do\
-      \ pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write, materialize\
-      \ o valor exato no manifest, faça pre-read e exija readback Meta; billing, account_spend_limit,\
-      \ credenciais e escala automática continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige\
-      \ criativos aprovados, reconciliados e pre-stageados. clone_page_switch preserva\
-      \ mídia/copy e exige source_ad_id, Page/UTM/JSON completos e reconciliação da\
-      \ página; não exige mídia nova no registry.\n- Antes de executar: fazer preflight\
-      \ Meta vivo da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes,\
-      \ Page/UTM, budget e colisões; montar e prevalidar o manifest; apresentar resumo\
-      \ final; aguardar OK explícito do pedido; usar somente o Campaign Engine v3\
-      \ com --confirm-execute.\n- Nunca publicar diretamente. Sucesso exige readback\
-      \ consolidado de campanha, ad set, todos os ads, nome DUP, budget, status ACTIVE,\
-      \ start_time 00:00 ET, Page, tracking, mídia/copy e IDs técnicos no audit.\n\
-      - Falha após possível efeito parcial inicia recuperação readback-first no mesmo\
-      \ request; nunca repetir POST não idempotente às cegas.\n- Perguntas sobre “sua\
-      \ configuração”, “como está configurado” ou “mostre tudo” significam somente\
-      \ esta rota de clonagem, não configuração global do Hermes/Ares.\n"
+      \ canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o\
+      \ budget do pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo.\
+      \ Antes do write, materialize o valor exato no manifest, faça pre-read e exija\
+      \ readback Meta; billing, account_spend_limit, credenciais e escala automática\
+      \ continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige criativos\
+      \ aprovados, reconciliados e pre-stageados. clone_page_switch preserva mídia/copy\
+      \ e exige source_ad_id, Page/UTM/JSON completos e reconciliação da página; não\
+      \ exige mídia nova no registry.\n- Antes de executar: fazer preflight Meta vivo\
+      \ da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM,\
+      \ budget e colisões; montar e prevalidar o manifest; apresentar resumo final;\
+      \ aguardar OK explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n\
+      - Nunca publicar diretamente. Sucesso exige readback consolidado de campanha,\
+      \ ad set, todos os ads, nome DUP, budget, status ACTIVE, start_time 00:00 ET,\
+      \ Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível\
+      \ efeito parcial inicia recuperação readback-first no mesmo request; nunca repetir\
+      \ POST não idempotente às cegas.\n- Perguntas sobre “sua configuração”, “como\
+      \ está configurado” ou “mostre tudo” significam somente esta rota de clonagem,\
+      \ não configuração global do Hermes/Ares."
     '1543280854024060999': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 
@@ -879,8 +880,8 @@ discord:
       - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha,
       cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar
       sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam
-      obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito do
-      request.
+      obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito
+      do request.
 
       - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem
       nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar
@@ -900,19 +901,19 @@ discord:
       e audit mais recente; consultar Meta e Smart Bidding vivas.
 
       - Threshold diario default 0,40. Entre 00:00 e antes de 05:00 nao cortar/reativar.
-      Fase 1: 05, 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold.
-      Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase ROAS < threshold
-      sem gate de gasto. Exatamente no threshold mantem.
+      Fase 1: 05, 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS
+      < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase
+      ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
 
       - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica
       da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte.
       Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera
       zero write + alerta.
 
-      - Acao ROAS ocorre no anuncio. Se zero ads ativos restarem, pausar a campanha;
-      nunca pausar ad set. Reativar somente anuncio/campanha pausados pelo Ares e
-      recuperados acima do threshold. Pausa por `page_lead_guardrail`, manual ou externa
-      nunca e reativada automaticamente.
+      - Acao ROAS ocorre exclusivamente no anuncio. Mesmo que zero ads ativos restem,
+      nunca pausar ou reativar campanha/ad set por este ciclo. Reativar somente o
+      anuncio pausado pelo Ares que recuperar acima do threshold. Pausa de campanha
+      por `page_lead_guardrail`, manual ou externa nunca e reativada pelo ciclo ROAS.
 
       - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding
       e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao
@@ -923,9 +924,14 @@ discord:
       permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope
       aplicavel.
 
-      - Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao
+      - Runtime atual: somente status writes de anuncio, posts e cron dos ciclos estao
       habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com
       possivel efeito parcial inicia recovery readback-first.
+
+      - Na tabela, `Ads ↓` mostra os anuncios abreviados por slot e ordenados do maior
+      ROAS para o menor: `03·0,92✅` manter ligado, `01·0,35🛑` desligar, `02·0,56♻️`
+      religar e `04·N/D⏸` ja desligado. Nunca mostrar nome completo ou ID tecnico
+      do anuncio no relatorio humano.
 
       - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar
       ou alterar cron nesta thread sem plano e aprovacao explicita.

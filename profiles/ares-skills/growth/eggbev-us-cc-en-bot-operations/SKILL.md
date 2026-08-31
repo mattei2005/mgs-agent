@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.24.0-draft
+version: 0.25.0-draft
 author: Ares
 license: internal
 metadata:
@@ -53,6 +53,25 @@ Limite de Leads    1543312825890381865
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente. A identidade das seis rotas vive em `thread_id + prompt_file + registry`; não publicar nem recriar mensagens operacionais de banner/pin em cada thread.
 
 Por instrução explícita de Nicolas em 29/08/2026, a rota canônica de **Regras** passou a ser a thread atual `1543280854024060999`. A antiga `Eggbev-US-CC-EN Regras` (`1541578622106865815`) fica supersedida e não recebe novas regras ativas.
+
+### Arquitetura da informação e workflow canônico
+
+Quando Nicolas pedir organização geral ou “como o agente funciona”, a thread Regras deve abrir com o workflow operacional em até dez passos, nesta ordem:
+
+1. pedir a criação do zero em Criar Campanhas;
+2. confirmar Page, budget exato e exceções explícitas;
+3. preparar mídia, copy, naming, Messenger, evento e tracking;
+4. mostrar resumo final e aguardar OK explícito;
+5. publicar via Engine v3 e validar por readback;
+6. permitir a primeira janela/dia de performance antes de escolher vencedoras para clonagem;
+7. pedir o consolidado na thread Diário — horários, cadência e formato final permanecem pendentes do desenho de Nicolas;
+8. clonar as vencedoras na thread Clonar Campanhas;
+9. usar Corte e ROAS como rota mestre intraday para threshold, ações exclusivamente por anúncio e visão Meta + Smart Bidding;
+10. usar Limite de Leads para `LEADS > 5.000`, pausa da campanha inteira da página e alerta.
+
+Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only ainda sem schedule aprovado; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Limite de Leads = proteção por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
+
+A publicação organizada validada vive em `data/ares/discord/eggbev-thread-organization-20260830.json` e o mapa institucional em `discord_topology.thread_information_architecture` do contrato da operação.
 
 ### Roteamento obrigatório — Criar Campanhas
 

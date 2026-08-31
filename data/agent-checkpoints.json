@@ -432,6 +432,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-THREAD-ORGANIZATION-20260830",
+      "next_step": "When Nicolas finishes the Daily design, update only the Daily route and the Rules workflow summary with approved schedule, cadence and ranking criteria",
+      "objective": "Deep-review all Eggbev channel threads and publish organized canonical updates by functional route",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "completed",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-31T02:12:59+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
       "next_step": "Materializar em read-only o seletor de rota vertical/Messenger Pages/domain com readback de endpoint, campo, moeda, período, freshness e identidade; depois apresentar novo dry-run a Nicolas.",
       "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
@@ -1572,5 +1582,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:08:11+00:00"
+  "updated_at": "2026-08-31T02:12:59+00:00"
 }
