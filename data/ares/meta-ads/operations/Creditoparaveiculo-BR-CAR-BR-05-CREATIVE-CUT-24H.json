@@ -27,8 +27,10 @@
     "timezone_offset_hours_utc": -3,
     "account_status": 1,
     "identity_status": "confirmed_live_meta_readback",
-    "next_sequential_campaign_number": 7,
-    "active_campaign_budget_usd_at_preflight": 150.0
+    "next_sequential_campaign_number": 8,
+    "active_campaign_budget_usd_at_preflight": 150.0,
+    "active_campaign_budget_readback_usd": 175.0,
+    "active_campaign_budget_readback_at_utc": "2026-08-31T07:10:23Z"
   },
   "strategy": {
     "management_strategy": "CREATIVE_CUT_24H",
@@ -98,6 +100,14 @@
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-09-01",
         "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248503317050046": {
+        "campaign_number": 7,
+        "original_campaign_number": 7,
+        "cycle_start_date": "2026-09-01",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1",
+        "assigned_at_utc": "2026-08-31T07:10:23Z"
       }
     }
   },
@@ -466,6 +476,13 @@
           "cycle_start_date": "2026-09-01",
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "7": {
+          "campaign_id": "120248503317050046",
+          "original_campaign_number": 7,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1"
         }
       },
       "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
@@ -480,7 +497,8 @@
           "120248478066030046",
           "120248500821400046",
           "120248500821410046",
-          "120248500979140046"
+          "120248500979140046",
+          "120248503317050046"
         ],
         "allowed_actions": [
           "pause_dominant_ad_stage_a",
@@ -715,5 +733,5 @@
     "ChatPion is historical inspiration only and is outside this operation.",
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment."
   ],
-  "updated_at": "2026-08-31T06:14:15.822802Z"
+  "updated_at": "2026-08-31T07:10:23Z"
 }
