@@ -18,7 +18,7 @@ from ares_campaign_v3.cli import main as cli_main
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
 from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
-from ares_campaign_v3.prevalidation import prevalidate_payload
+from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
 from ares_campaign_v3.schema import Manifest, ManifestError
@@ -263,6 +263,29 @@ def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_
     owned_field['adset_create']['campaign_id'] = 'must-be-engine-owned'
     with pytest.raises(ManifestError, match='engine-owned fields'):
         manifest([owned_field])
+
+
+def test_registered_accounts_fail_closed_without_explicit_supported_modes():
+    payload = manifest([pure_campaign(1)])
+    config = {
+        'require_account_registration': True,
+        'require_explicit_account_modes': True,
+        'accounts': {
+            '100': {'app_key': 'mgs-main-app'},
+        },
+    }
+    with pytest.raises(ManifestError, match='must explicitly declare supported_modes'):
+        validate_account_policy(payload, config)
+
+
+def test_production_config_blocks_from_zero_for_both_cpv_accounts():
+    config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+    assert config['require_explicit_account_modes'] is True
+    for account_id in ('1046241194533786', '2039876850230678'):
+        modes = set(config['accounts'][account_id]['supported_modes'])
+        assert 'clone_prestaged' in modes
+        assert 'pure_clone' in modes
+        assert 'from_zero_prestaged' not in modes
 
 
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():

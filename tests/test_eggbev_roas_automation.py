@@ -46,7 +46,7 @@ class PhaseTests(unittest.TestCase):
         self.assertEqual(common.phase_for_time(self.at(0)), 'RESET')
 
     def test_phase_1_times(self):
-        for hour in (6, 8, 10, 12):
+        for hour in (5, 6, 8, 10, 12):
             self.assertEqual(common.phase_for_time(self.at(hour)), 'PHASE_1')
 
     def test_phase_2_times(self):
@@ -55,6 +55,14 @@ class PhaseTests(unittest.TestCase):
 
     def test_non_cycle_time(self):
         self.assertEqual(common.phase_for_time(self.at(7)), 'NO_CYCLE')
+
+    def test_scheduled_tick_maps_bounded_delay_to_logical_hour(self):
+        actual = self.at(5, 11)
+        self.assertEqual(cycle.scheduled_cycle_at(actual), self.at(5, 0))
+
+    def test_scheduled_tick_rejects_excessive_delay(self):
+        with self.assertRaises(RuntimeError):
+            cycle.scheduled_cycle_at(self.at(5, 16))
 
     def test_daily_rollover_resets_threshold_but_preserves_pause_provenance(self):
         previous = common.default_state(dt.date(2026, 8, 28), 0.55)

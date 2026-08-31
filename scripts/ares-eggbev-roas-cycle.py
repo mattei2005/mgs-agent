@@ -56,6 +56,16 @@ def parse_at(value: str | None) -> dt.datetime:
     return parsed.astimezone(common.ET)
 
 
+def scheduled_cycle_at(actual: dt.datetime, max_delay_minutes: int = 15) -> dt.datetime:
+    """Map a delayed scheduler tick to its approved logical hour."""
+    actual = actual.astimezone(common.ET)
+    if actual.minute > max_delay_minutes:
+        raise RuntimeError(
+            f'scheduled tick delay {actual.minute}m exceeds {max_delay_minutes}m safety window'
+        )
+    return actual.replace(minute=0, second=0, microsecond=0)
+
+
 def _cycle_at(value: Any) -> dt.datetime | None:
     try:
         parsed = dt.datetime.fromisoformat(common.norm(value))
@@ -936,18 +946,22 @@ def main() -> int:
     parser.add_argument('--apply', action='store_true', help='execute approved controlled writes')
     parser.add_argument('--post-report', action='store_true', help='post the cycle report to the fixed thread')
     parser.add_argument('--at', help='dry-run-only ISO timestamp in America/New_York')
+    parser.add_argument('--scheduled', action='store_true', help='use the current approved logical hour with a bounded scheduler-delay window')
     parser.add_argument('--quiet', action='store_true')
     args = parser.parse_args()
     if args.apply and args.at:
         parser.error('--at is forbidden with --apply')
+    if args.scheduled and args.at:
+        parser.error('--scheduled and --at are mutually exclusive')
 
     with common.open_lock() as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             return 0
-        started = parse_at(args.at)
-        run_id = started.strftime('%Y%m%dT%H%M%S%z')
+        actual_started = parse_at(args.at)
+        started = scheduled_cycle_at(actual_started) if args.scheduled else actual_started
+        run_id = actual_started.strftime('%Y%m%dT%H%M%S%z')
         audit_path = common.AUDIT_DIR / f'run-{run_id}.json'
         operation = common.load_json(common.OP_PATH)
         account_file = common.load_json(common.ACCOUNT_PATH)
@@ -963,6 +977,8 @@ def main() -> int:
             state_reset = True
         run: dict[str, Any] = {
             'ok': False, 'run_id': run_id, 'started_at_et': started.isoformat(),
+            'actual_started_at_et': actual_started.isoformat(),
+            'scheduled_mode': bool(args.scheduled),
             'mode': 'controlled_write' if args.apply else 'dry_run', 'phase': phase,
             'threshold': common.finite_float(state.get('threshold')) or reset_value,
             'state_reset': state_reset, 'operation_id': operation.get('operation_id'),
