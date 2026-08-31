@@ -658,8 +658,8 @@
         "Msg": "Meta messaging_conversation_started_7d",
         "cost_per_msg": "Meta spend divided by messaging_conversation_started_7d",
         "page_roi_and_rps": "Smart Bidding Page/UTM-level context; never copied into a campaign row",
-        "campaign_roi_real": "report-only (NET_REVENUE - INVESTIMENT) / INVESTIMENT after exact CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP join and fresh /estimated/delay evidence",
-        "campaign_roi_estimated": "report-only (estimatedRevenue - INVESTIMENT) / INVESTIMENT; current reports prefer fresh /estimated/revenue/utm_adgroup only when the UTM maps to one campaign, while historical reports use date-scoped performance_per_campaigns.REVENUE_ESTIMATED; ambiguous or stale data is N/D",
+        "campaign_roi_real": "report-only (NET_REVENUE - INVESTIMENT) / INVESTIMENT after exact CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP join and fresh /estimated/delay evidence; a zero-only NET_REVENUE column across the source result is unavailable coverage and renders N/D, not -100%",
+        "campaign_roi_estimated": "report-only (estimatedRevenue - INVESTIMENT) / INVESTIMENT; current reports prefer fresh /estimated/revenue/utm_adgroup only when the UTM maps to one campaign, while historical reports use date-scoped performance_per_campaigns.REVENUE_ESTIMATED; ambiguous, stale or zero-only placeholder coverage is N/D, not -100%",
         "revenue_breakdown": "total revenue, Drip revenue and current Broadcast revenue are displayed separately"
       },
       "per_campaign_fields": [

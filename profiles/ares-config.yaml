@@ -791,6 +791,10 @@ discord:
       com UTM única, e histórico usa `performance_per_campaigns.REVENUE_ESTIMATED`
       da data exata. Denominador ausente/zero, estimativa ambígua ou fonte stale = `N/D`.
 
+      - Se `NET_REVENUE` ou `REVENUE_ESTIMATED` vier zero em todas as linhas econômicas
+      enquanto a página possui receita, tratar como cobertura zero-only: `N/D`, nunca
+      `-100%`.
+
       - Todo pedido de report executa novas leituras Smart Bidding das rotas aplicáveis.
       Nunca reutilizar como atual um valor de mensagem, audit ou snapshot anterior.
       Validar `/estimated/delay` em toda geração; acima de 120 minutos ou sem evidência

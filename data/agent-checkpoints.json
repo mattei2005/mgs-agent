@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ARIA-C003-2X-IMMEDIATE-20260831",
-      "next_step": "Materializar start_time Meta-safe, selar e executar o mesmo request no Engine v3; em falha, reconciliar IDs e efeitos antes de qualquer retry; concluir com GET direto de campanha, AdG, ads, creatives e tracking.",
+      "next_step": "Após cooldown, o Engine v3 deve ler os dois shells, confirmar zero ads, criar somente os seis ads faltantes com call_to_actions Messenger e fazer readback consolidado; depois executar GET direto de campanhas/AdGs/ads/creatives/tracking e fechar checkpoint.",
       "objective": "Clonar exatamente duas vezes a campanha 163 - Aria Kensington - ENG - US - (pg_8348) C003, com USD45 por clone e início imediato sem schedule.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; preflight:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-preexecute-full.json",
-      "state": "rodolfo delegou ao nicolas autoridade permanente por pedido para início imediato eggbev sem aprovação adicional; decisão persistida em permissões, contratos, config, skills, registry, audit e report-infra. nicolas já deu ok final. preflight live 13:36 utc: 1351 campanhas, fonte exata única active, 1x1x3, três ads active, budget usd45 e zero colisões dup01/dup02. meta writes deste request ainda zero.",
+      "source": "discord:thread:1543333373945053184; request:eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01; checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-1034081997659047.json",
+      "state": "write iniciou no engine v3. readback confirmou exatamente dois shells de campanha e dois adgs messenger active, budget usd45, page correta, start 09:46 et e zero ads. a primeira cópia de anúncios falhou 1815675 porque o get normalizado omitiu call_to_actions. recovery manifest preserva payload live e restaura somente cta messenger canônico; zero replay de shells. o primeiro recovery foi bloqueado por quota meta 2446079 antes de write. lease recovery_pending; retomada técnica após decaimento de quota está armada com o mesmo request.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T13:40:25+00:00"
+      "updated_at": "2026-08-31T13:59:00+00:00"
     },
     {
       "agent": "ares",
@@ -1772,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:57:44+00:00"
+  "updated_at": "2026-08-31T13:59:00+00:00"
 }
