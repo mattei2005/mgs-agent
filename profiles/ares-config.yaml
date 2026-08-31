@@ -731,7 +731,7 @@ discord:
       estado atual.
 
       - Horarios e rotas do Diario ainda nao foram definidos nem aprovados. Os ciclos
-      06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e
+      05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e
       23:00 pertencem exclusivamente ao Corte e ROAS e nunca devem ser apresentados
       como schedule do Diario. Aguardar o desenho separado de Nicolas antes de propor
       ou criar cron.
@@ -835,10 +835,10 @@ discord:
       \ e use o próximo número livre após ler todas as campanhas não deletadas.\n\
       - Default de produção: campanha, ad set e todos os anúncios configurados ACTIVE,\
       \ com start_time no próximo dia às 00:00 America/New_York. PAUSED somente para\
-      \ canário técnico explicitamente solicitado.\n- Gestores autorizados escolhem\
-      \ e confirmam o budget do pedido. Essa escolha não amplia autoridade financeira:\
-      \ antes do write, respeite o gate vigente de Rodolfo/Geizian e materialize o\
-      \ valor exato no manifest.\n- clone_prestaged aceita de 1 a 5 anúncios e exige\
+      \ canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do\
+      \ pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write, materialize\
+      \ o valor exato no manifest, faça pre-read e exija readback Meta; billing, account_spend_limit,\
+      \ credenciais e escala automática continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige\
       \ criativos aprovados, reconciliados e pre-stageados. clone_page_switch preserva\
       \ mídia/copy e exige source_ad_id, Page/UTM/JSON completos e reconciliação da\
       \ página; não exige mídia nova no registry.\n- Antes de executar: fazer preflight\
@@ -877,8 +877,10 @@ discord:
       ou mensagem antiga nunca reativa regra supersedida.
 
       - Regras desta thread, mensagens, pin e existencia da rota nao autorizam campanha,
-      budget, cron ou publicacao. Budget write segue Rodolfo/Geizian; publicacao de
-      criacao/clone exige resumo final e OK explicito do request.
+      cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar
+      sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam
+      obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito do
+      request.
 
       - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem
       nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar
@@ -897,8 +899,8 @@ discord:
       e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia
       e audit mais recente; consultar Meta e Smart Bidding vivas.
 
-      - Threshold diario default 0,40. Entre 00:00 e 06:00 nao cortar/reativar. Fase
-      1: 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold.
+      - Threshold diario default 0,40. Entre 00:00 e antes de 05:00 nao cortar/reativar.
+      Fase 1: 05, 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS < threshold.
       Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase ROAS < threshold
       sem gate de gasto. Exatamente no threshold mantem.
 
@@ -917,7 +919,9 @@ discord:
       ou budget.
 
       - Escala separada: ROAS agregado da campanha > 0,50 recomenda +10%; igual ou
-      abaixo mantem. Budget write=false ate Rodolfo/Geizian aprovarem teto/envelope.
+      abaixo mantem. Budget manual solicitado por Nicolas e autorizado; escala automatica
+      permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope
+      aplicavel.
 
       - Runtime atual: status writes de ad/campanha, posts e cron dos ciclos estao
       habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com

@@ -914,7 +914,8 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(mode['media_and_copy'], 'preserve source media and copy')
         self.assertEqual(mode['engine_support'], 'supported_in_v3_3_manifest_planner_prevalidation_and_recovery')
         self.assertTrue(cloning['engine_readback']['eggbev_account_registered'])
-        self.assertIn('financial write gate', ' '.join(cloning['execution_gates']))
+        self.assertIn('manager-selected budget materialized explicitly', cloning['execution_gates'])
+        self.assertIn('Nicolas exact budget instruction or approved operation policy satisfied', cloning['execution_gates'])
 
     def test_normal_creation_is_active_future_and_canary_remains_paused(self):
         policy = self.operation['campaign_structure']['delivery_state_policy']

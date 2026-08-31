@@ -56,26 +56,27 @@
     "required": true,
     "persist_before_first_decision_window": true,
     "supported_campaign_creation_modes": [
-      "from_zero_prestaged",
       "clone_prestaged",
       "pure_clone"
     ],
+    "ad_serving_route": "lineage_required_for_new_media",
+    "from_zero_prestaged": "forbidden_after_confirmed_zero_delivery_source_ad_id_0",
     "existing_campaign_migration": "explicit_instruction_only; start a new window and never reinterpret earlier delivery",
     "assignments": {
       "120248477978700046": {
-        "campaign_number": 51,
+        "campaign_number": 1,
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-08-29",
         "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
       },
       "120248477978730046": {
-        "campaign_number": 52,
+        "campaign_number": 2,
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-08-29",
         "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
       },
       "120248478066030046": {
-        "campaign_number": 53,
+        "campaign_number": 3,
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-08-29",
         "request_id": "cpv05-c51-c53-20260829-nicolas-r1"

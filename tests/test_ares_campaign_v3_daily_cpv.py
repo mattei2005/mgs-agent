@@ -824,7 +824,7 @@ def test_reader_gate_blocks_engine_lease_and_resumable_daily_state(tmp_path):
 
 
 def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
-    expected = "3.4.0"
+    expected = "3.4.1"
     engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()
     config = json.loads((ROOT / "data/ares/meta-ads/engine-v3/config.json").read_text())
     operation_v3 = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())
