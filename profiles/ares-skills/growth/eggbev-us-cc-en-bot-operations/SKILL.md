@@ -71,9 +71,9 @@ Quando Nicolas pedir organização geral ou “como o agente funciona”, a thre
 7. receber/pedir o consolidado na thread Diário — desenho 08:00 ET com D-1 completo, sinal atual 08:00, visão desktop agrupada por Página/UTM em ordem Z→A, Broadcast atual da dash e alertas curtos; cron/post continuam pendentes de enablement separado;
 8. clonar as vencedoras na thread Clonar Campanhas;
 9. usar Corte e ROAS como rota mestre intraday para threshold, ações exclusivamente por anúncio e visão Meta + Smart Bidding;
-10. usar Limite de Leads para `LEADS > 5.000`, pausa da campanha inteira da página e alerta.
+10. usar Página e Limites para `LEADS > 5.000` e para restrição DTR #2022 confirmada, ambas com pausa da campanha inteira e alerta curto.
 
-Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only desenhado para 08:00 ET, D-1 completo, sinal atual 08:00, visão desktop agrupada por Página/UTM em ordem Z→A, Broadcast atual da dash e alertas, com cron/post ainda desabilitados; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Limite de Leads = proteção por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
+Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only desenhado para 08:00 ET, D-1 completo, sinal atual 08:00, visão desktop agrupada por Página/UTM em ordem Z→A, Broadcast atual da dash e alertas, com cron/post ainda desabilitados; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Página e Limites = proteções por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
 
 A publicação organizada v2 validada vive em `data/ares/discord/eggbev-thread-organization-20260831-v2.json` e o mapa institucional em `discord.thread_information_architecture` do contrato da operação. Ela supersede a fotografia v1 de 30/08 somente para organização e conteúdo das rotas; históricos, audits e decisões canônicas continuam preservados.
 
@@ -125,16 +125,17 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 
 O relatório histórico que misturou todas as regras/automação da operação dentro do Diário foi supersedido em 29/08/2026. O prompt exato vive em `data/ares/discord/thread-prompts/1541578596253175858.txt` e em `discord.channel_prompts.1541578596253175858`.
 
-### Roteamento obrigatório — Limite de Leads
+### Roteamento obrigatório — Página e Limites
 
-Na thread `1543312825890381865`, pedidos como “sua configuração”, “como está configurado”, “mostre tudo” ou “relatório” significam **somente a rota de limite de LEADS por página**: fonte, métrica, threshold, reconciliação, freshness, horários, runtime, alertas, readbacks e limitações. Nunca responder com configuração global do Hermes/Ares ou misturar ROAS, criação, clones, Diário e Intraday.
+Na thread `1543312825890381865`, pedidos como “sua configuração”, “como está configurado”, “mostre tudo” ou “relatório” significam **somente as proteções por página**: limite de LEADS e restrição DTR #2022, com fontes, thresholds, reconciliação, freshness, horários, runtime, alertas, readbacks e limitações. Nunca responder com configuração global do Hermes/Ares ou misturar ROAS, criação, clones, Diário e Intraday.
 
 - Prompt canônico: `data/ares/discord/thread-prompts/1543312825890381865.txt` e `discord.channel_prompts.1543312825890381865`.
-- A configuração está persistida; a ativação em novas sessões depende do próximo restart seguro do gateway. Nunca reiniciar o gateway dentro da sessão ativa.
-- Smart Bidding exige timestamp verificável com idade máxima de 2h. Ausente, inválido, futuro ou stale bloqueia somente o item afetado e gera alerta; `BROADCAST_TIME` e `DATE_START` não provam atualização.
-- O wrapper automático usa `--scheduled` e aceita apenas 08:00/20:00 `America/New_York`; execução manual autorizada é separada.
-- Mapping/freshness inválidos geram mensagem na thread; toda postagem exige GET/readback exato. Falha primária tenta uma vez a thread Regras `1543280854024060999`; falha total termina o run com erro.
-- O tick agendado de 20:00 ET em 29/08/2026 foi confirmado `ok`. A flag `gateway_running=false` do cron tool é falso negativo do observador e não prevalece sobre o histórico real de execução.
+- Nome da rota confirmado por readback: `Página e Limites`.
+- LEADS continua em 08:00/20:00 ET, com freshness de até 2h e `LEADS > 5000` estrito.
+- Restrição atua somente quando o state canônico registra novo DTR `#2022` e a mesma página está atualmente restrita no state Smart Bidding; transição somente SB e texto Discord nunca autorizam write.
+- O cron de restrição roda a cada 5 minutos via root crontab, wrapper determinístico e lock. O baseline inicial marca o histórico como processado; cada novo evento usa dedupe persistente e falha permanece resumível para retry.
+- Os dois guardrails podem pausar a campanha inteira após match exato UTM+Page, pre-read, POST único e GET/readback. Não alteram budget, não deletam e nunca reativam automaticamente.
+- Alertas automáticos têm no máximo quatro linhas, sem tabela longa; ficam silenciosos sem ação/erro e toda postagem exige GET/readback. Falha primária tenta uma vez a thread Regras `1543280854024060999`; falha total termina o run com erro.
 
 ## Escopo Ares
 
@@ -278,17 +279,17 @@ Relatório sob pedido   todas as páginas ativas reconciliadas, com LEADS e prox
 
 Este guardrail é exceção explícita à regra de cortes por ROAS: ROAS atua em anúncios; limite de leads atua na campanha inteira. Mapeamento ausente, duplicado ou divergente é `fail_closed_no_write`. Antes do POST, ler o estado real; depois do POST, fazer GET/readback. POST falho é reconciliado por GET e nunca repetido às cegas.
 
-O alerta obrigatório inclui página, UTM, LEADS, estado `RESTRICTED_UNTIL` da Smart Bidding, campanhas pausadas, horário ET, snapshot Meta de hoje e contagem de readbacks. `RESTRICTED_UNTIL` é estado da Smart Bidding e não deve ser descrito como prova independente de uma restrição DTR `#2022`.
+O alerta automático de LEADS tem quatro linhas no máximo: título/severidade; página+UTM+LEADS; campanhas ativas/pausadas/pendentes; regra+horário ET+sem reativação. `RESTRICTED_UNTIL` é estado da Smart Bidding e não deve ser descrito como prova independente de uma restrição DTR `#2022`. Relatórios sob pedido podem ser detalhados, mas o alerta de ação/erro permanece curto.
 
 Runtime:
 
 ```text
-Thread fixa           Eggbev-US-CC-EN Limite de Leads (`1543312825890381865`)
+Thread fixa           Página e Limites (`1543312825890381865`)
 Runner                 /root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py
 Wrapper                /root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh
 Modo                   dry-run e controlled-write com preflight/readback
 Cron                   `14 8,20 * * *`, no_agent=true, deliver=local, enabled/scheduled; horários lógicos 08:00/20:00 ET
-Estado do scheduler    ativo; tick 20:00 ET confirmado ok em 29/08/2026; gateway_running=false é falso negativo do observador
+Estado do scheduler    ativo; ticks reais confirmados; gateway_running=false é falso negativo do observador
 Freshness              timestamp Smart Bidding verificável, máximo 2h; ausente/stale = no_write + alerta
 Discord                GET/readback exato; fallback único para Regras; falha total torna o run erro
 Horário interno        wrapper agendado exige `--scheduled`, reconcilia atraso físico de até 15 minutos e mantém somente os ciclos lógicos 08:00/20:00 ET
@@ -304,6 +305,38 @@ Quando Nicolas pedir relatório, executar leitura real e mostrar todas as págin
 ```
 
 A proximidade percentual é `LEADS / 5000`. O check automático permanece silencioso quando não há ação; relatório de status completo é enviado sob pedido do gestor.
+
+## Guardrail aprovado — restrição de página DTR #2022
+
+Nicolas autorizou uma proteção independente do limite de LEADS:
+
+```text
+Evento de ação         novo registro do monitor canônico DTR #2022
+Confirmação obrigatória mesma página atualmente restrita no state Smart Bidding
+Discord como fonte     proibido; texto da mensagem não autoriza write
+SB sem DTR #2022       no_write
+Escopo Meta            conta Eggbev; campanha efetivamente ACTIVE
+Join                   UTM_CAMPAIGN pg_XXXXX + FB_PAGE_ID = creative page_id, ambos exatos
+Ação                   pausar a campanha inteira
+Outros writes          sem budget, delete ou reativação automática
+Cron                   root crontab `3-58/5 * * * *`, America/New_York
+Baseline               histórico existente marcado como processado, sem replay
+Dedupe/recovery         event ID persistente; evento falho não é marcado e volta no próximo ciclo
+Alerta                  máximo quatro linhas, GET/readback, fallback único para Regras
+```
+
+Runtime:
+
+```text
+Runner    /root/mgs-agent/scripts/ares-eggbev-page-restriction-guardrail.py
+Wrapper   /root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh
+State     data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/page-restriction-guardrail.json
+Audit     data/ares/meta-ads/audit/guardrails/Eggbev-US-CC-EN-BOT/page-restrictions/
+Lock      /var/lock/ares_eggbev_page_restriction_guardrail.lock
+Log       /root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log
+```
+
+O primeiro tick root-cron foi confirmado `ok` em 31/08/2026 19:08 ET, com zero replay e zero writes. O job Hermes temporário foi removido porque o gateway Ares ativo não o recarregou sem restart; o gateway não foi reiniciado.
 
 ## Thread dedicada — Clonar campanhas
 

@@ -452,6 +452,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-PAGE-LIMITS-ALERTS-20260831",
+      "next_step": "Operação automática: novos eventos DTR #2022 + Smart Bidding serão reconciliados por UTM+Page e campanhas ativas pausadas com readback; nenhuma ação manual pendente",
+      "objective": "Renomear rota Página e Limites, padronizar alertas curtos e ativar proteção automática por restrição DTR #2022 confirmada",
+      "source": "discord:thread:1544056503185580042#1544115097910386830",
+      "state": "concluído: thread renomeada por readback; alertas em 4 linhas; cron root a cada 5 min com tick confirmado; teste discord sem write confirmado; leads 08h/20h preservado",
+      "thread_id": "1544056503185580042",
+      "updated_at": "2026-08-31T23:13:55+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-PG5024-PV038-REPLACEMENT-20260830",
       "next_step": "Operação normal; em novos casos, repetir o mesmo fluxo create/readback/delete e invalidar somente a linhagem apontada pelo gestor.",
       "objective": "Substituir o anúncio visualmente bugado PV_038 na campanha Amy Shook pg_5024 por um criativo novo validado, sem alterar budget ou estrutura",
@@ -1782,5 +1792,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T22:34:05+00:00"
+  "updated_at": "2026-08-31T23:13:55+00:00"
 }

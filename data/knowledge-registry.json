@@ -1467,6 +1467,23 @@
       "updated_at": "2026-08-29T17:53:52+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.page_restriction_guardrail",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "eggbev-us-cc-en-bot-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T18:42:07-04:00",
+      "id": "ARES-EGGBEV-PAGE-RESTRICTION-GUARDRAIL-20260831",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev pausa campanha por restrição DTR #2022 confirmada",
+      "updated_at": "2026-08-31T23:13:55+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "consumers": [
@@ -3146,5 +3163,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T23:04:13+00:00"
+  "updated_at": "2026-08-31T23:13:55+00:00"
 }
