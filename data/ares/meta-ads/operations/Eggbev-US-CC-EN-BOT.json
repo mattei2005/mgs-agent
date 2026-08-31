@@ -361,7 +361,7 @@
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "3094434ef5ff309fdb1d7ee66dcf1828897b09aae99b43641c59e00631b4f0b3",
+          "active_prompt_sha256": "d8f90b05b565ac520dc448feab32900769bd7204b7b2c7b83102706fe35bbaba",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
           "tests_passed": 52,
@@ -606,7 +606,7 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "one consolidated desktop view inspired by Corte e ROAS, grouped by Page/UTM in descending full Page-name order Z-to-A; each page shows current dashboard Broadcast revenue plus one compact campaign table, followed by at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "layout": "one consolidated desktop view inspired by Corte e ROAS, grouped by Page/UTM with reconciled full Page names in descending Z-to-A order and unnamed groups last; each page shows current dashboard Broadcast revenue plus one compact campaign table, followed by at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
     "layout_correction": {
       "status": "active",
       "requested_by": "Nicolas Holanda",
@@ -685,7 +685,7 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "one consolidated desktop view inspired by Corte e ROAS, divided into Page/UTM groups sorted by full Page name descending Z-to-A; each page shows one compact Meta and Smart Bidding summary with current dashboard Broadcast revenue, followed by its campaign table; Smart Bidding economics is never repeated on campaign rows; maximum five short alerts below",
+      "layout": "one consolidated desktop view inspired by Corte e ROAS, divided into Page/UTM groups with reconciled full Page names sorted descending Z-to-A and unnamed groups placed last; each page shows one compact Meta and Smart Bidding summary with current dashboard Broadcast revenue, followed by its campaign table; Smart Bidding economics is never repeated on campaign rows; maximum five short alerts below",
       "pagination": "maximum ten campaign rows per Page table part with header repeated and visible part count, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "latest_visual_validation": {
