@@ -1257,7 +1257,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(transition['disable_authorized_at_future_activation'])
         self.assertFalse(transition['execute_now'])
 
-    def test_clone_page_switch_contract_is_engine_ready_but_write_gated(self):
+    def test_clone_page_switch_schema_ready_but_copied_adset_write_blocked(self):
         cloning = self.operation['campaign_cloning_policy']
         mode = cloning['allowed_modes']['clone_page_switch']
         self.assertIn('selected and confirmed', mode['daily_budget'])
@@ -1268,7 +1268,13 @@ class ContractTests(unittest.TestCase):
         self.assertIn('pause the intake', page_policy['default'])
         self.assertIn('forbidden', page_policy['automatic_selection'])
         self.assertIn('no manifest sealing, no Meta write', page_policy['missing_page_behavior'])
-        self.assertEqual(mode['engine_support'], 'supported_in_v3_3_manifest_planner_prevalidation_and_recovery')
+        self.assertIn('schema, manifest planner, prevalidation', mode['engine_support'])
+        self.assertIn('copied-adset write method is blocked', mode['engine_support'])
+        live = mode['live_runtime_evidence_20260831']
+        self.assertIn('1885090', live['copied_adset_page_switch'])
+        self.assertIn('zero ads', live['partial_shell'])
+        self.assertIn('explicit manager approval', live['approved_recovery_required'])
+        self.assertIn('direct GETs', live['readback_recovery'])
         self.assertTrue(cloning['engine_readback']['eggbev_account_registered'])
         self.assertIn('manager-selected budget materialized explicitly', cloning['execution_gates'])
         self.assertIn('Nicolas exact budget instruction or approved operation policy satisfied', cloning['execution_gates'])

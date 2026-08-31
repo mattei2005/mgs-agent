@@ -1175,10 +1175,27 @@
       "kind": "procedure",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V4-20260831",
+      "title": "Clone Eggbev sem Page pausa e pergunta ao gestor",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T00:23:52-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V4-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Clone Eggbev sem Page pausa e pergunta ao gestor",
-      "updated_at": "2026-08-31T02:56:19+00:00"
+      "title": "Eggbev clone Page switch copied-adset live blocker and approved recovery gate",
+      "updated_at": "2026-08-31T04:51:09+00:00"
     },
     {
       "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
@@ -1711,10 +1728,27 @@
       "kind": "procedure",
       "owner": "Ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-THREAD-INFORMATION-ARCHITECTURE-V2-20260831",
+      "title": "Eggbev canonical Discord route information architecture and 10-step workflow",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign-ops.eggbev.discord-thread-information-architecture",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T00:43:54-04:00",
+      "id": "ARES-EGGBEV-THREAD-INFORMATION-ARCHITECTURE-V2-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev canonical Discord route information architecture and 10-step workflow",
-      "updated_at": "2026-08-31T02:06:49+00:00"
+      "title": "Eggbev Discord route architecture v2 after live thread reread",
+      "updated_at": "2026-08-31T04:51:09+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.thread-naming",
@@ -2962,5 +2996,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T04:17:54+00:00"
+  "updated_at": "2026-08-31T04:51:09+00:00"
 }

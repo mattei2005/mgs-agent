@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.19.1-draft
+version: 0.20.2-draft
 author: Ares
 license: internal
 metadata:
@@ -71,7 +71,7 @@ Quando Nicolas pedir organização geral ou “como o agente funciona”, a thre
 
 Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only desenhado para 08:00 ET, D-1 completo, sinal atual 08:00, tabela única e alertas, com cron/post ainda desabilitados; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Limite de Leads = proteção por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
 
-A publicação organizada validada vive em `data/ares/discord/eggbev-thread-organization-20260830.json` e o mapa institucional em `discord_topology.thread_information_architecture` do contrato da operação.
+A publicação organizada v2 validada vive em `data/ares/discord/eggbev-thread-organization-20260831-v2.json` e o mapa institucional em `discord.thread_information_architecture` do contrato da operação. Ela supersede a fotografia v1 de 30/08 somente para organização e conteúdo das rotas; históricos, audits e decisões canônicas continuam preservados.
 
 ### Roteamento obrigatório — Criar Campanhas
 

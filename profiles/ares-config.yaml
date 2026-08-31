@@ -711,25 +711,74 @@ discord:
 
       - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados
       apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
-    '1541578596253175858': |
-      INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
+    '1541578596253175858': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
-      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem nas rotas proprias.
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`; ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
-      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer, runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
-      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como estado atual.
-      - Desenho aprovado: um Diario as 08:00 `America/New_York`, com o fechamento completo de D-1. No mesmo run, incluir o sinal de receita do dia atual as 08:00 somente contra snapshots anteriores do mesmo horario; nunca comparar parcial atual com dias historicos fechados.
-      - O horario desenhado nao ativa automacao. Runtime atual: runner read-only e sob demanda; post automatico=false; cron=false; writes=false. Ativar cron/post exige dry-run vivo revisado e autorizacao separada e explicita do Nicolas.
-      - Escopo isolado: toda alteracao desta rota pertence somente a Eggbev. Nunca modificar, copiar ou herdar runner, prompt, regra, layout ou schedule de CPV 13, CPV 05 ou qualquer outra operacao.
-      - Escopo de campanhas: no fechamento D-1, incluir toda campanha com insight em D-1 e excluir as ACTIVE atuais sem insight em D-1, pois não rodaram no período fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo sem insight + toda campanha com insight no período. Não truncar nomes, não limitar linhas silenciosamente.
-      - Layout: uma unica tabela alinhada e consolidada com todas as campanhas e campos Meta/Smart Bidding/Pricing; depois, no maximo cinco bullets curtos em `Fique de olho`. Nao usar cards por campanha.
-      - A tabela apoia a decisao humana de quais e quantas campanhas clonar; o Diario nunca clona automaticamente e nao transforma ranking visual em regra de elegibilidade.
-      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page Meta = `FB_PAGE_ID` e `DATE` = data exata do periodo. UTM/Page/data ausente, multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
-      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
-      - Monitor de receita por pagina: comparar D-1 fechado e o snapshot de 08:00 somente com baselines equivalentes. Usar mediana de ate sete snapshots, minimo de tres comparaveis; alerta inicial a partir de 30% abaixo e critico a partir de 40% abaixo. As faixas sao report-only e nao executam writes.
-      - Freshness, data, UTM/Page ou baseline insuficiente nunca viram receita zero. Expor alerta de cobertura ou `baseline em formacao`. Quando houver queda comprovada, indicar a pagina e sugerir conferencia de disparo, bloco/funil e entrega com o responsavel; Ares nao configura essas camadas nesta rota.
-      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
-      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.
+
+      - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo
+      read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem
+      nas rotas proprias.
+
+      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`;
+      ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
+
+      - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou
+      "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer,
+      runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
+
+      - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio
+      atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period
+      yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como
+      estado atual.
+
+      - Desenho aprovado: um Diario as 08:00 `America/New_York`, com o fechamento
+      completo de D-1. No mesmo run, incluir o sinal de receita do dia atual as 08:00
+      somente contra snapshots anteriores do mesmo horario; nunca comparar parcial
+      atual com dias historicos fechados.
+
+      - O horario desenhado nao ativa automacao. Runtime atual: runner read-only e
+      sob demanda; post automatico=false; cron=false; writes=false. Ativar cron/post
+      exige dry-run vivo revisado e autorizacao separada e explicita do Nicolas.
+
+      - Escopo isolado: toda alteracao desta rota pertence somente a Eggbev. Nunca
+      modificar, copiar ou herdar runner, prompt, regra, layout ou schedule de CPV
+      13, CPV 05 ou qualquer outra operacao.
+
+      - Escopo de campanhas: no fechamento D-1, incluir toda campanha com insight
+      em D-1 e excluir as ACTIVE atuais sem insight em D-1, pois não rodaram no período
+      fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo
+      sem insight + toda campanha com insight no período. Não truncar nomes, não limitar
+      linhas silenciosamente.
+
+      - Layout: uma unica tabela alinhada e consolidada com todas as campanhas e campos
+      Meta/Smart Bidding/Pricing; depois, no maximo cinco bullets curtos em `Fique
+      de olho`. Nao usar cards por campanha.
+
+      - A tabela apoia a decisao humana de quais e quantas campanhas clonar; o Diario
+      nunca clona automaticamente e nao transforma ranking visual em regra de elegibilidade.
+
+      - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page
+      Meta = `FB_PAGE_ID` e `DATE` = data exata do periodo. UTM/Page/data ausente,
+      multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
+
+      - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger
+      Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness
+      e identidade. `/pricing` global nao e a unica fonte. Calculo local de RPS/EPC
+      e apenas fallback rotulado quando a rota selecionada nao expuser o campo direto.
+
+      - Monitor de receita por pagina: comparar D-1 fechado e o snapshot de 08:00
+      somente com baselines equivalentes. Usar mediana de ate sete snapshots, minimo
+      de tres comparaveis; alerta inicial a partir de 30% abaixo e critico a partir
+      de 40% abaixo. As faixas sao report-only e nao executam writes.
+
+      - Freshness, data, UTM/Page ou baseline insuficiente nunca viram receita zero.
+      Expor alerta de cobertura ou `baseline em formacao`. Quando houver queda comprovada,
+      indicar a pagina e sugerir conferencia de disparo, bloco/funil e entrega com
+      o responsavel; Ares nao configura essas camadas nesta rota.
+
+      - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem
+      aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
+
+      - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
     '1543312825890381865': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Limite de
       Leads
 
@@ -790,34 +839,49 @@ discord:
       \ duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5.\
       \ Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n\
       \  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n\
-      - Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma\
-      \ vez; nunca presuma que os valores são iguais sem o gestor dizer.\n- Duplicação\
-      \ exata preserva integralmente estrutura, público, placements, estratégia, Page,\
-      \ JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis,\
-      \ budget escolhido pelo gestor, nome DUPnn e início/status.\n- Naming: preserve\
-      \ o nome-base integral da campanha e adicione DUP01. Duplicações seguintes usam\
-      \ DUP02, DUP03 etc. Se a fonte já terminar em DUPnn, recupere o mesmo nome-base\
-      \ e use o próximo número livre após ler todas as campanhas não deletadas.\n\
-      - Default de produção: campanha, ad set e todos os anúncios configurados ACTIVE,\
-      \ com start_time no próximo dia às 00:00 America/New_York. PAUSED somente para\
-      \ canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o\
-      \ budget do pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo.\
-      \ Antes do write, materialize o valor exato no manifest, faça pre-read e exija\
-      \ readback Meta; billing, account_spend_limit, credenciais e escala automática\
-      \ continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige criativos\
-      \ aprovados, reconciliados e pre-stageados. clone_page_switch preserva mídia/copy\
-      \ e exige source_ad_id, Page/UTM/JSON completos e reconciliação da página; não\
-      \ exige mídia nova no registry.\n- Antes de executar: fazer preflight Meta vivo\
-      \ da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM,\
+      - Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar\
+      \ a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada.\
+      \ Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma\
+      \ nova instrução explícita de Nicolas no próprio pedido.\n- Se várias campanhas\
+      \ usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma\
+      \ que os valores são iguais sem o gestor dizer.\n- Duplicação exata preserva\
+      \ integralmente estrutura, público, placements, estratégia, Page, JSON Messenger,\
+      \ mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget\
+      \ escolhido pelo gestor, nome DUPnn e início/status.\n- Naming: preserve o nome-base\
+      \ integral da campanha e adicione DUP01. Duplicações seguintes usam DUP02, DUP03\
+      \ etc. Se a fonte já terminar em DUPnn, recupere o mesmo nome-base e use o próximo\
+      \ número livre após ler todas as campanhas não deletadas.\n- Default de produção:\
+      \ campanha, ad set e todos os anúncios configurados ACTIVE, com start_time no\
+      \ próximo dia às 00:00 America/New_York. PAUSED somente para canário técnico\
+      \ explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do pedido\
+      \ e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write,\
+      \ materialize o valor exato no manifest, faça pre-read e exija readback Meta;\
+      \ billing, account_spend_limit, credenciais e escala automática continuam separados.\n\
+      - clone_prestaged aceita de 1 a 5 anúncios e exige criativos aprovados, reconciliados\
+      \ e pre-stageados. clone_page_switch preserva mídia/copy e exige source_ad_id,\
+      \ Page/UTM/JSON completos e reconciliação da página; não exige mídia nova no\
+      \ registry.\n- Evidência live de 31/08/2026: `pure_clone` 1×1×3 é recuperável\
+      \ por rota shallow com semântica idêntica quando o deep copy exceder o limite\
+      \ síncrono, mas somente depois de GET provar efeito zero. `clone_prestaged`\
+      \ pode rematerializar IDs de vídeo em `ad/copies`; validar lineage por marker+checksum+orientação+duração,\
+      \ não por igualdade cega de IDs.\n- `clone_page_switch` pelo método copied-adset\
+      \ está bloqueado para write real: a Meta rejeitou trocar `promoted_object.page_id`\
+      \ no AdG já copiado. Schema/plan aprovado não prova readiness live. Recovery\
+      \ alternativo exige aprovação explícita para criar um novo AdG já com a Page\
+      \ alvo, pausar o AdG antigo e copiar os anúncios rematerializando Page/UTM/JSON.\
+      \ Nunca criar anúncios sobre AdG com Page divergente nem deletar a camada antiga\
+      \ sem autorização própria.\n- Antes de executar: fazer preflight Meta vivo da\
+      \ conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM,\
       \ budget e colisões; montar e prevalidar o manifest; apresentar resumo final;\
       \ aguardar OK explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n\
       - Nunca publicar diretamente. Sucesso exige readback consolidado de campanha,\
       \ ad set, todos os ads, nome DUP, budget, status ACTIVE, start_time 00:00 ET,\
       \ Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível\
       \ efeito parcial inicia recuperação readback-first no mesmo request; nunca repetir\
-      \ POST não idempotente às cegas.\n- Perguntas sobre “sua configuração”, “como\
-      \ está configurado” ou “mostre tudo” significam somente esta rota de clonagem,\
-      \ não configuração global do Hermes/Ares."
+      \ POST não idempotente às cegas. Readback batch limitado após writes completos\
+      \ é reconciliado por IDs persistidos e GETs diretos; não repetir criação.\n\
+      - Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo”\
+      \ significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
     '1543280854024060999': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 
@@ -848,6 +912,21 @@ discord:
       obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito
       do request.
 
+      - Corte e ROAS ativo: Fase 1 em 05:00/06:00/08:00/10:00/12:00, com corte quando
+      Spend > USD2 e Purchase ROAS <0,40. Fase 2 em 13:00/14:00/16:00/18:00/20:00/22:00/23:00.
+      Nos ciclos 20/22/23, anuncios sem ROAS de campanhas agendadas para o dia seguinte
+      00:00 ficam fora; somente campanhas que rodaram no dia avaliado entram.
+
+      - Fase 3 — Reativacao/Reciclagem roda dentro do mesmo job das 00:00: dia anterior
+      com spend; anuncio com spend >0 e Purchase ROAS >=0,38; ativa inclusive pausas
+      manuais; garante campanha+conjunto+anuncio ACTIVE; exclui pagina apenas com
+      LEADS >5.000; budget CBO aleatorio persistido US$45/US$65; DELETED/ARCHIVED
+      nunca volta; cada camada exige readback.
+
+      - Toda Fase 3 publica relatorio identificado na thread Corte e ROAS usando a
+      tabela canonica completa, com reativacoes, budgets, exclusoes e readbacks. Freshness
+      ou mapping invalido falha fechado e alerta, sem write parcial cego.
+
       - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem
       nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar
       arquivada.
@@ -865,20 +944,33 @@ discord:
       e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia
       e audit mais recente; consultar Meta e Smart Bidding vivas.
 
-      - Threshold diario default 0,40. Entre 00:00 e antes de 05:00 nao cortar/reativar.
-      Fase 1: 05, 06, 08, 10 e 12 ET; corta ad quando Spend > USD 2 e Purchase ROAS
-      < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta ad quando Purchase
-      ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
+      - Threshold diario de corte default 0,40. Fase 1: 05, 06, 08, 10 e 12 ET; todos
+      esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold.
+      Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta anuncio quando Purchase ROAS <
+      threshold sem gate de gasto. Exatamente no threshold mantem.
+
+      - Nos ciclos noturnos 20:00, 22:00 e 23:00, N/D/sem ROAS so entra em corte quando
+      a campanha efetivamente rodou naquele dia ET. Campanha criada hoje com `start_time`
+      para o dia seguinte as 00:00 e sempre excluida do corte noturno.
 
       - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica
       da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte.
       Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera
       zero write + alerta.
 
-      - Acao ROAS ocorre exclusivamente no anuncio. Mesmo que zero ads ativos restem,
-      nunca pausar ou reativar campanha/ad set por este ciclo. Reativar somente o
-      anuncio pausado pelo Ares que recuperar acima do threshold. Pausa de campanha
-      por `page_lead_guardrail`, manual ou externa nunca e reativada pelo ciclo ROAS.
+      - Fases 1/2 continuam exclusivamente no anuncio: nunca pausar campanha/ad set.
+      A Fase 3 das 00:00 e excecao explicita e separada: le o dia anterior fechado;
+      exige spend do anuncio >0 e Purchase ROAS >=0,38; aceita pausas feitas pelo
+      Ares, Nicolas ou outro operador; garante campanha, conjunto e anuncio ACTIVE;
+      nunca restaura DELETED/ARCHIVED.
+
+      - Na Fase 3, excluir a campanha somente quando a pagina tiver LEADS estritamente
+      >5.000; exatamente 5.000 ainda e elegivel. Exigir match exato UTM+Page e freshness
+      `/estimated/delay` com `totalMinutes` presente entre 0 e 120; `currentFillTime`
+      e evidencia adicional quando nao nulo, mas o schema vivo pode retorna-lo nulo.
+      Para cada campanha elegivel, randomizar budget CBO entre US$45 e US$65, persistir
+      a escolha antes do primeiro write e reutiliza-la em qualquer retry. Ordem: budget+readback,
+      campanha+readback, conjunto+readback, anuncio+readback.
 
       - Meta Purchase ROAS e a metrica de decisao. Metricas economicas Smart Bidding
       e formulas marcadas com `*` sao report-only e nao alteram corte, reativacao
@@ -889,14 +981,37 @@ discord:
       permanece write=false ate Nicolas aprovar a politica automatica e o teto/envelope
       aplicavel.
 
-      - Runtime atual: somente status writes de anuncio, posts e cron dos ciclos estao
-      habilitados em fail-closed. Toda acao exige pre-read e GET/readback; erro com
-      possivel efeito parcial inicia recovery readback-first.
+      - Runtime: Fases 1/2 fazem status write somente de anuncio. Fase 3 pode ativar
+      campanha/conjunto/anuncio e escrever budget US$45/US$65 sob a autorizacao Eggbev
+      de Nicolas. Toda acao exige pre-read, plano idempotente e GET/readback; erro
+      parcial inicia recovery readback-first.
 
-      - Na tabela, `Ads ↓` mostra os anuncios abreviados por slot e ordenados do maior
-      ROAS para o menor: `03·0,92✅` manter ligado, `01·0,35🛑` desligar, `02·0,56♻️`
-      religar e `04·N/D⏸` ja desligado. Nunca mostrar nome completo ou ID tecnico
-      do anuncio no relatorio humano.
+      - Sempre postar relatorio da Fase 3 nesta thread, deixando no titulo e no resumo
+      que a ativacao foi `Fase 3 — Reativacao/Reciclagem`, com dia-base, ROAS >=0,38,
+      anuncios/conjuntos/campanhas reativados, budget escolhido, exclusoes LEADS e
+      readbacks. Usar a mesma tabela canonica completa e paginada dos outros ciclos.
+
+      - A unica tabela canonica e o primeiro modelo completo, monoespacado e com espacamento
+      dinamico: `R/E | Camp | Pagina | Status | Budget | Spend | Custo | ROAS | Ads
+      ↓ | ROI real | ROI est. | Leads | RPS | CPM | CTR | Acao`. `Leads` e `RPS` sao
+      obrigatorios e nunca podem ser removidos. Usar dois espacos entre colunas, divisor
+      `─`, pontos medios `·` em `Camp` e nos slots de `Ads ↓`, uma campanha por linha
+      e sem barras verticais.
+
+      - `Ads ↓` ordena os anuncios do maior ROAS para o menor: `03·0,92✅` manter ligado,
+      `01·0,35🛑` desligar, `02·0,56♻️` religar e `04·N/D⏸` ja desligado. Nunca mostrar
+      nome completo ou ID tecnico do anuncio no relatorio humano. `CTR` fica depois
+      de `CPM` e antes de `Acao`, em percentual; indisponivel fica `N/D`.
+
+      - Em `R/E`, a primeira posicao e ROI atual e a segunda e ROI estimado futuro.
+      Aplicar as mesmas faixas nas duas: `🟢 >=0%`, `🟡 <0% e >-15%`, `🔴 <=-15%`, `⚪
+      N/D`; exatamente `-15%` ja e vermelho.
+
+      - O layout da tabela esta congelado por Nicolas apos esta correcao. Nunca usar
+      a segunda variante resumida, nem remover/reordenar/adicionar colunas em ciclos,
+      exemplos ou respostas. Quando o Discord exigir, paginar repetindo o cabecalho
+      completo; nunca compactar retirando campos. Insights futuros nao alteram esta
+      tabela sem Nicolas revogar explicitamente o congelamento.
 
       - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar
       ou alterar cron nesta thread sem plano e aprovacao explicita.
