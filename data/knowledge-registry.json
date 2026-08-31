@@ -1147,6 +1147,23 @@
       "updated_at": "2026-08-30T00:41:54+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.clone_page_switch_campaign_naming",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "eggbev-us-cc-en-bot-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T01:30:52-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-NAMING-V1-20260831",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev clone page switch renames campaign to selected Page",
+      "updated_at": "2026-08-31T05:31:04+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
       "consumers": [
@@ -1263,10 +1280,29 @@
       "kind": "procedure",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
+      "title": "Diário Eggbev 08:00 ET com D-1, tabela única e alertas de receita",
+      "updated_at": "2026-08-31T05:27:37+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "scripts/ares-eggbev-daily-report.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T01:27:30-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Diário Eggbev 08:00 ET com D-1, tabela única e alertas de receita",
-      "updated_at": "2026-08-31T03:45:09+00:00"
+      "title": "Diário Eggbev mobile-first por página e campanha",
+      "updated_at": "2026-08-31T05:27:37+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
@@ -3013,5 +3049,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:14:03+00:00"
+  "updated_at": "2026-08-31T05:31:04+00:00"
 }

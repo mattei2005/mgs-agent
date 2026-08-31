@@ -11,7 +11,7 @@ ROOT = Path('/root/mgs-agent')
 if str(ROOT / 'scripts') not in sys.path:
     sys.path.insert(0, str(ROOT / 'scripts'))
 
-from ares_campaign_v3.eggbev_clone import duplicate_names, next_midnight_et
+from ares_campaign_v3.eggbev_clone import duplicate_names, next_midnight_et, page_switch_campaign_name
 from ares_campaign_v3.media_registry import MediaRegistry
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
@@ -81,6 +81,36 @@ class EggbevCloneV3Tests(unittest.TestCase):
                 '123 - Lauren Tucker - ENG - US DUP04',
             ],
         )
+
+    def test_page_switch_name_uses_selected_page_and_preserves_only_c_sequence(self):
+        self.assertEqual(
+            page_switch_campaign_name(
+                '165 - Tina Walter - ENG - US - (pg_5071) C003 DUP02',
+                target_page_sequence=162,
+                target_page_name='Amy Shook',
+                target_page_token='pg_5024',
+                duplicate_number=3,
+            ),
+            '162 - Amy Shook - ENG - US - (pg_5024) C003 DUP03',
+        )
+
+    def test_page_switch_name_fails_closed_without_canonical_source_or_target(self):
+        with self.assertRaisesRegex(ValueError, 'canonical Eggbev pattern'):
+            page_switch_campaign_name(
+                'Tina campaign',
+                target_page_sequence=162,
+                target_page_name='Amy Shook',
+                target_page_token='pg_5024',
+                duplicate_number=3,
+            )
+        with self.assertRaisesRegex(ValueError, 'pg_XXXXX'):
+            page_switch_campaign_name(
+                '165 - Tina Walter - ENG - US - (pg_5071) C003',
+                target_page_sequence=162,
+                target_page_name='Amy Shook',
+                target_page_token='wrong-token',
+                duplicate_number=3,
+            )
 
     def test_next_midnight_et_is_next_calendar_day_and_active_future(self):
         now = datetime(2026, 8, 29, 22, 15, tzinfo=ZoneInfo('America/New_York'))
@@ -186,6 +216,10 @@ class EggbevCloneV3Tests(unittest.TestCase):
         operation_v3 = json.loads((ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json').read_text())
         self.assertNotIn('clone_page_switch', operation_v3['supported_modes'])
         self.assertFalse(operation_v3['mode_contract']['clone_page_switch']['write_enabled'])
+        naming = operation_v3['mode_contract']['clone_page_switch']['target_page_policy']['campaign_naming']
+        self.assertTrue(naming['automatic'])
+        self.assertEqual(naming['preserve'], 'source Cnnn only')
+        self.assertIn('target_page_sequence', naming['pattern'])
         self.assertTrue((ROOT / 'data/ares/discord/thread-prompts/1543333373945053184.txt').exists())
 
     def test_account_policy_accepts_active_midnight_dup_with_budget(self):

@@ -361,10 +361,10 @@
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "bbd221005b3ef3537af56aad7ea1769f8700dd7cfd4cdbee0472983cae9cbc7d",
+          "active_prompt_sha256": "22b2fdcc26f20fa85002ed57e7ed38fb5073fb7df053d643c9318f52d8b5eeab",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
-          "tests_passed": 49,
+          "tests_passed": 51,
           "renderer_complete_for_read_only": true,
           "renderer_version": "mobile_split_tables_v5",
           "post_enabled": false,
@@ -444,7 +444,7 @@
   "campaign_naming": {
     "status": "approved_by_nicolas_for_clone_only",
     "scope": "campaign_cloning_policy only; never use DUPnn for from-zero creation",
-    "pattern": "preserve the complete original campaign base name and append DUPnn",
+    "pattern": "pure_clone and clone_prestaged preserve the complete original campaign base name and append DUPnn; clone_page_switch must replace the visible page sequence, Page name and pg_XXXXX with the selected target Page while preserving only the source Cnnn and appending the next free DUPnn",
     "duplicate_sequence": "first duplicate DUP01; then DUP02, DUP03 and so on; duplicating a campaign already ending in DUPnn reuses the same base and advances to the next free number",
     "collision_gate": "read all non-deleted live campaign names and choose the first free DUP number before manifest sealing",
     "ad_name": "provided_per_creative; missing name blocks publication",
@@ -686,6 +686,24 @@
       "layout": "four compact mobile-first blocks: Page/UTM Meta, Page/UTM Smart Bidding, campaigns with delivery, and ACTIVE without delivery; Smart Bidding economics appears once per Page/UTM and is never repeated across campaign rows; followed by a maximum of five short alerts",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
+      "latest_visual_validation": {
+        "at_et": "2026-08-31T01:26:32-04:00",
+        "mode": "live_read_only_on_demand",
+        "page_rows": 4,
+        "delivered_campaign_rows": 14,
+        "no_delivery_rows": 3,
+        "all_17_campaigns_represented": true,
+        "maximum_block_widths": {
+          "page_meta": 60,
+          "page_smart_bidding": 93,
+          "campaigns_with_delivery": 87,
+          "active_without_delivery": 56
+        },
+        "tests_passed": 51,
+        "post_used": false,
+        "writes_attempted": 0,
+        "baseline_snapshots_written": 0
+      },
       "source_join": {
         "primary": "Meta creative utm_campaign exact equals Smart Bidding UTM_CAMPAIGN",
         "identity_confirmation": "Meta creative object_story_spec.page_id exact equals Smart Bidding FB_PAGE_ID",
@@ -1016,6 +1034,15 @@
       "clone_page_switch": {
         "label": "Clone com alteração de página e nome",
         "definition": "duplicate the full source campaign while preserving structure, audience, placements, bid strategy, copy and media; replace the destination Facebook Page identity, next sequential naming, page token and links/UTMs for the selected target page",
+        "campaign_naming": {
+          "automatic": true,
+          "pattern": "[target_page_sequence] - [target Page name] - ENG - US - ([target pg_XXXXX]) [source Cnnn] [next free DUPnn]",
+          "replace_from_source": ["visible page sequence", "Page display name", "pg_XXXXX"],
+          "preserve_from_source": ["Cnnn campaign sequence only"],
+          "duplicate_suffix": "next free DUPnn after live non-deleted collision scan",
+          "example": "165 - Tina Walter - ENG - US - (pg_5071) C003 DUP02 -> 162 - Amy Shook - ENG - US - (pg_5024) C003 DUP03",
+          "fail_closed": "do not seal the manifest when target sequence, exact Meta Page name, reconciled pg_XXXXX, source Cnnn or next free DUPnn cannot be proven"
+        },
         "target_page_selection": {
           "default": "when Nicolas does not specify the target Page in a clone_page_switch request, pause the intake and ask which exact Page/pg_XXXXX must be used",
           "automatic_selection": "forbidden unless Nicolas gives a new explicit per-request instruction delegating the choice after being asked",
@@ -1051,6 +1078,7 @@
       "new assets, ad names and copy when clone_prestaged",
       "exact source, revised copy/event/targeting delta and deletion order when replacement_revision",
       "target page and pg_XXXXX are mandatory for clone_page_switch; if Nicolas explicitly delegates selection only after being asked, require live eligible-page and LEADS evidence",
+      "target Page sequence and exact Meta Page display name for automatic clone_page_switch campaign renaming",
       "updated full Messenger JSON when clone_page_switch",
       "every requested exception to audience, placements, structure or strategy"
     ],
@@ -1058,6 +1086,7 @@
       "live source/account preflight",
       "Eggbev account onboarded in engine v3",
       "non-deleted live DUP name collision scan",
+      "clone_page_switch exact target-Page campaign name materialized and checked before manifest sealing",
       "manager-selected budget materialized explicitly",
       "prevalidated manifest",
       "final summary shown to Nicolas",

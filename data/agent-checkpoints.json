@@ -373,12 +373,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-D1-ANOMALY-DESIGN-20260831",
-      "next_step": "Nicolas revisa o dry-run. Se aprovar enablement, criar somente o cron/post Eggbev Diário em no_agent=true/deliver=local, validar readback e começar a formar snapshots 08:00; não tocar CPV 13/05.",
-      "objective": "Materializar somente no Diário Eggbev o fechamento D-1 às 08:00 ET, suporte à decisão de clonagem e alertas de anomalia de receita por página, sem tocar CPV 13/05",
-      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; audit:data/ares/meta-ads/audit/eggbev/daily-report/daily-d1-anomaly-design-20260831.json; registry:ARES-EGGBEV-DAILY-THREAD-ROUTING-V3-20260831",
-      "state": "concluído e validado em modo read-only: desenho 08:00 et + d-1, uma tabela consolidada, sinal 08:00 audit-only e detector 30%/40% com baseline mínimo 3. dry-run live passou com uma tabela, zero post/write/cron; fonte smart bidding segue freshness_unverifiable e por isso alertas econômicos ficam fail-closed.",
+      "next_step": "Aguardar feedback visual de Nicolas sobre o v5. Cron/post Diário continuam desabilitados até enablement separado; monitor 08:00 segue dependente de baseline comparável.",
+      "objective": "Manter o Diário Eggbev D-1 às 08:00 ET legível para decisão de clonagem e alertas de receita, sem tocar CPV 13/05",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; registry:ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
+      "state": "renderer v5 mobile-first concluído após correção de nicolas: quatro blocos compactos por página/campanha substituem a linha horizontal gigante. live read-only 01:26 et: 4 páginas, 14 campanhas com entrega, 3 sem entrega, 17/17 representadas; blocos com 60/93/87/56 colunas; 51 testes pass; zero post/write/cron.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-31T03:47:17+00:00"
+      "updated_at": "2026-08-31T05:27:46+00:00"
     },
     {
       "agent": "ares",
@@ -1692,5 +1692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:16:31+00:00"
+  "updated_at": "2026-08-31T05:27:46+00:00"
 }

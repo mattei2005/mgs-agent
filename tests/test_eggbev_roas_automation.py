@@ -1167,9 +1167,12 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(runtime['post_enabled'])
         self.assertFalse(runtime['cron_enabled'])
 
-    def test_daily_unified_table_contract_uses_exact_keys_and_formulas(self):
+    def test_daily_mobile_split_contract_uses_exact_keys_and_formulas(self):
         renderer = self.operation['daily_reporting_policy']['renderer_contract']
-        self.assertIn('single_unified_table', renderer['status'])
+        self.assertIn('mobile_split_tables_v5', renderer['status'])
+        self.assertIn('sequence·Cnnn·Dnn', renderer['per_campaign_fields'][0])
+        self.assertIn('Smart Bidding investment', renderer['per_page_smart_bidding_fields'])
+        self.assertIn('spend-weighted Meta Purchase ROAS', renderer['per_page_meta_fields'])
         self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])
         self.assertIn('FB_PAGE_ID', renderer['source_join']['identity_confirmation'])
         self.assertIn('messaging_conversation_started_7d', renderer['metric_formulas']['cost_per_messaging_started'])

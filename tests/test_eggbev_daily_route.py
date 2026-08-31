@@ -55,7 +55,7 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "currently effective ACTIVE campaign",
             "Limite silencioso de linhas: não",
             "Truncamento do nome da campanha: não",
-            "full name",
+            "full Meta name",
             "current status",
             "start_time America/New_York",
             "Cost per messaging conversation started",
@@ -65,7 +65,7 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "vertical, Messenger Pages or domain",
             "implementation gap, not a Smart Bidding data-availability limitation",
             "25 campanhas, todas preservadas",
-            "tabela única completa",
+            "quatro blocos compactos mobile-first",
             "Baseline: até 7 snapshots; mínimo de 3",
             "atenção a partir de 30% abaixo; crítico a partir de 40% abaixo",
         ]

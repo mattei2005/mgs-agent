@@ -71,6 +71,7 @@
       ],
       "replace": [
         "Facebook Page identity",
+        "campaign visible page sequence, Page name and pg_XXXXX naming components",
         "pg_XXXXX and destination tracking only when confirmed",
         "complete Messenger JSON for the target Page"
       ],
@@ -79,7 +80,15 @@
         "when_omitted": "pause the intake and ask Nicolas which exact Page/pg_XXXXX must be used",
         "automatic_inference": false,
         "delegation": "only a new explicit per-request instruction from Nicolas after the question may delegate selection",
-        "write_gate": "without the exact target Page there is no manifest sealing and no Meta write"
+        "write_gate": "without the exact target Page there is no manifest sealing and no Meta write",
+        "campaign_naming": {
+          "automatic": true,
+          "pattern": "[target_page_sequence] - [target Page name] - ENG - US - ([target pg_XXXXX]) [source Cnnn] [next free DUPnn]",
+          "replace": ["source page sequence", "source Page name", "source pg_XXXXX"],
+          "preserve": "source Cnnn only",
+          "collision_policy": "append the next free DUPnn after scanning non-deleted live campaigns",
+          "fail_closed": "target sequence, exact Meta Page name, reconciled pg_XXXXX, source Cnnn and free DUPnn are all mandatory before manifest sealing"
+        }
       },
       "media_registry_required": false,
       "source_ad_lineage_required": true,
@@ -108,7 +117,7 @@
     }
   },
   "naming_policy": {
-    "rule": "preserve the original campaign base name and append DUPnn",
+    "rule": "pure_clone and clone_prestaged preserve the original campaign base name and append DUPnn; clone_page_switch automatically replaces the visible page sequence, Page name and pg_XXXXX with the selected target Page, preserves only source Cnnn and appends the next free DUPnn",
     "first_duplicate": "DUP01",
     "subsequent_duplicates": "DUP02, DUP03 and so on",
     "duplicate_of_duplicate": "strip the trailing DUPnn to recover the same base and use the next number",

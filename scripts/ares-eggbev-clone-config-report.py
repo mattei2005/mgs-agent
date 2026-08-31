@@ -31,6 +31,7 @@ def check() -> dict:
     contract_modes = set(cloning.get('allowed_modes') or {})
     main_page_policy = ((cloning.get('allowed_modes') or {}).get('clone_page_switch') or {}).get('target_page_selection') or {}
     v3_page_policy = ((operation_v3.get('mode_contract') or {}).get('clone_page_switch') or {}).get('target_page_policy') or {}
+    page_switch_naming = v3_page_policy.get('campaign_naming') or {}
     prompt_text = PROMPT_PATH.read_text() if PROMPT_PATH.exists() else ''
     checks = {
         'thread_id': cloning.get('thread_id') == '1543333373945053184',
@@ -55,6 +56,12 @@ def check() -> dict:
         'page_switch_automatic_inference_disabled': v3_page_policy.get('automatic_inference') is False and 'forbidden' in str(main_page_policy.get('automatic_selection') or '').lower(),
         'page_switch_missing_page_pauses': 'pause' in str(v3_page_policy.get('when_omitted') or '').lower() and 'pausar o intake' in prompt_text.lower(),
         'page_switch_missing_page_blocks_write': 'no Meta write' in str(v3_page_policy.get('write_gate') or ''),
+        'page_switch_automatic_target_page_naming': (
+            page_switch_naming.get('automatic') is True
+            and 'target_page_sequence' in str(page_switch_naming.get('pattern') or '')
+            and page_switch_naming.get('preserve') == 'source Cnnn only'
+            and 'não selar manifest' in prompt_text.lower()
+        ),
     }
     return {'status': 'ok' if all(checks.values()) else 'blocked', 'checks': checks}
 
@@ -75,7 +82,8 @@ def render() -> str:
         '- Troca de página: **fail-closed antes de qualquer write Meta**. O modo saiu da allowlist desta conta após os erros live 1885090/2238280; permanece bloqueado até arquitetura determinística aprovada por Rodolfo.',
         '- Page obrigatória: se não vier no pedido, pausar e perguntar qual Page/pg exata será usada; nunca inferir automaticamente.',
         '- Substituição revisada: preserva a linhagem visual, rematerializa copy/evento/targeting aprovados e só deleta a fonte após readback completo da sucessora.',
-        '- Naming: nome-base original + `DUP01`, `DUP02`, `DUP03`…; dup de dup usa o próximo número livre.',
+        '- Naming comum: `pure_clone`/`clone_prestaged` preservam o nome-base e usam o próximo `DUPnn` livre.',
+        '- Naming com troca de Page: automático para `[sequência da Page alvo] - [Page alvo] - ENG - US - ([pg alvo]) [Cnnn da fonte] [próximo DUPnn]`; sequência/Page/pg antigos são substituídos e somente `Cnnn` é preservado.',
         '- Budget: escolhido e confirmado por Nicolas por campanha; ele pode reduzir ou aumentar sem nova aprovação do Rodolfo, com pré-leitura e readback Meta.',
         '- Produção: `ACTIVE`, início no próximo dia às `00:00 America/New_York`.',
         '- Sem cron de clonagem. Cada request exige preflight, manifest prevalidado, resumo final, OK explícito e readback.',
