@@ -352,6 +352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-DAILY-D1-ANOMALY-DESIGN-20260831",
+      "next_step": "Atualizar contrato, runner, prompt e testes exclusivamente Eggbev; executar suíte focada e dry-run vivo; não modificar nenhum arquivo CPV.",
+      "objective": "Materializar somente no Diário Eggbev o fechamento D-1 às 08:00 ET, suporte à decisão de clonagem e alertas de anomalia de receita por página, sem tocar CPV 13/05",
+      "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; scripts/ares-eggbev-daily-report.py",
+      "state": "em implementação read-only/dry-run; escopo congelado em arquivos eggbev; cron, post automático e writes meta permanecem desabilitados.",
+      "thread_id": "1541578596253175858",
+      "updated_at": "2026-08-31T03:27:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-ROUTES-DESIGN-20260830",
       "next_step": "Quando Nicolas iniciar o desenho, coletar horários/períodos/formato, materializar plano separado do Corte e ROAS, executar dry-run real e só então solicitar/aplicar aprovação explícita de cron/post.",
       "objective": "Definir com Nicolas as rotas, horários, períodos e automação futura do Diário Eggbev",
@@ -1622,5 +1632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:19:22+00:00"
+  "updated_at": "2026-08-31T03:27:32+00:00"
 }
