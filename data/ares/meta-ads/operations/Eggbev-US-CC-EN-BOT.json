@@ -1219,13 +1219,13 @@
           "change_control": "superseded_by_explicit_manager_changes_v18_v20_v21"
         },
         "validation": {
-          "eggbev_tests": "65/65 passed",
+          "eggbev_tests": "73/73 passed after v21",
           "targeted_desktop_table_tests": "3/3 passed",
           "live_dry_run_campaigns": 1,
           "twenty_five_campaign_fixture": true,
           "single_table": true,
           "one_row_per_campaign": true,
-          "single_campaign_display_width": 147,
+          "single_campaign_display_width": 168,
           "aligned_rows": true,
           "generic_metric_value_headers": false,
           "vertical_bar_separators": false,
@@ -1489,8 +1489,17 @@
         "applies_to": "both positions of R/E in order current ROI / estimated future ROI",
         "scope": "presentation only; no change to Purchase ROAS decisions, thresholds, cuts, reactivations, budgets, schedules or source reconciliation",
         "validation": {
-          "targeted_tests": "pending",
-          "relevant_tests": "pending",
+          "targeted_tests": "5/5 passed",
+          "relevant_tests": "73/73 passed",
+          "boundary_cases": [
+            "0 green",
+            "-0.01 yellow",
+            "-1 yellow",
+            "-14.99 yellow",
+            "-15 red",
+            "-16.52 red",
+            "N/D gray"
+          ],
           "meta_writes": 0
         },
         "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-colors-v20-20260830.json"
@@ -1508,11 +1517,19 @@
         "future_insight_rule": "when evidence supports it, proactively surface compact decision-useful derived views inside the existing report hierarchy; preserve clarity, lineage and source labels; do not add speculative or verbose blocks",
         "scope": "presentation only; CTR remains informational and does not change Purchase ROAS decisions, cuts, reactivations, budgets or schedules",
         "validation": {
-          "targeted_tests": "pending",
-          "relevant_tests": "pending",
-          "high_volume_fixture": "pending",
+          "targeted_tests": "5/5 passed",
+          "relevant_tests": "73/73 passed",
+          "high_volume_fixture_campaigns": 55,
+          "high_volume_fixture_pages": 6,
+          "maximum_campaign_rows_per_page": 10,
+          "maximum_page_characters": 1553,
+          "sample_display_width": 168,
+          "balanced_code_fences": true,
+          "live_dry_run_campaigns": 16,
+          "live_dry_run_ctr_available": 1,
           "meta_writes": 0
-        }
+        },
+        "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/ctr-compact-insights-v21-20260830.json"
       }
     },
     "runtime": {

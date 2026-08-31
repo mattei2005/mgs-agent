@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.25.0-draft
+version: 0.26.0-draft
 author: Ares
 license: internal
 metadata:
@@ -449,6 +449,14 @@ Para antecipar relatórios com mais de 50 campanhas, o renderer ordena naturalme
 Por correção explícita de Nicolas em `2026-08-30`, o ciclo Corte e ROAS pausa e reativa **somente anúncios**. Campanhas e conjuntos nunca recebem status write desse ciclo, inclusive quando todos os anúncios ficam desligados. A proveniência persistida é somente dos anúncios pausados pelo Ares; uma campanha pausada pelo guardrail de LEADS, manualmente ou por outra origem não é reativada pelo ROAS.
 
 A tabela ganhou a coluna compacta `Ads ↓`, inspirada no print do Ads Manager no nível de anúncio e ordenada do maior Purchase ROAS para o menor. Cada item usa apenas o slot curto, ROAS e ação/estado: `03·0,92✅` mantém ligado; `01·0,35🛑` desliga; `02·0,56♻️` religa; `04·N/D⏸` já está desligado. Nome completo e ID técnico permanecem fora do relatório humano. A coluna `Ação` continua agregando `🛑n` e `♻️n` como contagens de anúncios. Esta revisão não muda threshold, fases, métricas, budget, guardrail de LEADS ou horários.
+
+### Refinamentos v20–v21 — faixas de ROI, CTR e insights compactos
+
+Por correção explícita de Nicolas em `2026-08-30`, as duas posições de `R/E` — ROI atual / ROI estimado futuro — usam a política contínua: `🟢 ROI >= 0%`; `🟡 -15% < ROI < 0%`; `🔴 ROI <= -15%`; `⚪ N/D`. Assim, `-0,01%` e `-1%` são amarelos, `-14,99%` é amarelo e exatamente `-15%` já é vermelho. Esta política supersede as faixas de `-20%` documentadas no v16.
+
+No pedido imediatamente seguinte, Nicolas aprovou a visualização e adicionou `CTR` da campanha à tabela compacta, depois de `CPM` e antes de `Ação`. Exibir percentual com vírgula decimal e `N/D` quando indisponível. CTR permanece informativo: Meta Purchase ROAS continua decidindo cortes e reativações exclusivamente no nível de anúncio.
+
+Nicolas também determinou preservar, em refinamentos futuros, insights como `Ads ↓`: leituras compactas, comprovadas e diretamente úteis para decisão devem ser propostas ou incorporadas dentro da hierarquia existente, sem criar blocos longos, especulativos ou sem fonte. Clareza, origem da métrica, auditabilidade e paginação sem omissões continuam obrigatórias.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

@@ -813,12 +813,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-roi-colors-v20-20260830",
-      "next_step": "alterar renderer, testes e contrato",
-      "objective": "Corrigir faixas de cor R/E para verde >=0, amarelo negativo acima de -15 e vermelho <=-15",
+      "next_step": "usar o layout v21 nos próximos ciclos: R/E com crítico em -15, CTR por campanha e Ads ↓ preservado",
+      "objective": "Corrigir faixas de cor R/E, adicionar CTR e preservar insights compactos úteis",
       "source": "discord:thread:1541578606076231750",
-      "state": "authorized_by_nicolas",
+      "state": "completed_v21_roi_minus15_ctr_renderer_validated",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T02:22:27+00:00"
+      "updated_at": "2026-08-31T02:35:03+00:00"
     },
     {
       "agent": "zeus",
@@ -1592,5 +1592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T02:22:27+00:00"
+  "updated_at": "2026-08-31T02:35:03+00:00"
 }
