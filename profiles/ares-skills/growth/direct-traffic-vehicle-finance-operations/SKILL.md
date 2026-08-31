@@ -589,7 +589,7 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] Todo corte terminal confirma PAUSED, classifica/move três criativos com readback e conclui em DELETED/ARCHIVED sem retenção de 24 horas
 - [ ] Falha de identidade/Drive/inventário mantém PAUSED e bloqueia a exclusão até a camada faltante ser reconciliada
 - [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping
-- [ ] SMS enviados G006 filtrados por data nas duas linhagens SMS Funnel explícitas de quiz/chat
+- [ ] SMS enviados G006 filtrados por data em todas as linhagens SMS Funnel que contenham token inteiro `G006`, `CREDITOPARAVEICULO` e experiência `QUIZ`/`CHAT`, com breakdown preservado
 - [ ] Custo SMS G006 validado por `envios × R$ 0,08`, exibido em USD via PTAX venda BCB com data/fonte e sem atribuição do consolidado global
 - [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
 - [ ] Toda campanha nova usa budget inicial de USD 25; campanhas existentes não são alteradas por esta regra
