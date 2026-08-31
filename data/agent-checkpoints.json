@@ -372,6 +372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-PG5024-PV038-REPLACEMENT-20260830",
+      "next_step": "Reservar e pre-stagear PV_028; criar o substituto com copy/UTM/Page/Messenger preservados; validar por GET; somente então marcar o anúncio PV_038 DELETED e invalidar a linhagem no inventário/Drive.",
+      "objective": "Substituir o anúncio visualmente bugado PV_038 na campanha Amy Shook pg_5024 por um criativo novo validado, sem alterar budget ou estrutura",
+      "source": "discord:thread:1543769929390628915; meta-campaign:120249811433300629; target-ad:120249811442930629; drive-invalid:1uvuSlRtAgTgx3GroXmzGSsC7_tP31XT0; drive-replacement:1rI2c2Xg2PAduj8EYXbugWSlN41_qzoj1",
+      "state": "preflight meta e drive concluído: campanha c001 dup01 active, anúncio pv_038 active e único; candidato pv_028 limpo, visualmente válido, sem conflito no snapshot de reconciliação vigente. nenhum write de campanha ainda.",
+      "thread_id": "1543769929390628915",
+      "updated_at": "2026-08-31T00:18:17+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-PG5024-RECOVERY-20260830",
       "next_step": "Monitorar delivery e performance pelos ciclos Eggbev; nenhuma nova ação de recovery e nenhuma nova autorização de budget necessária",
       "objective": "Concluir o request Eggbev pg_5024 C001 USD45 usando a autoridade permanente do Nicolas, com recuperação readback-first após rate limit Meta",
@@ -1522,5 +1532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-30T23:46:00+00:00"
+  "updated_at": "2026-08-31T00:18:17+00:00"
 }
