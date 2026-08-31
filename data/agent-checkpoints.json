@@ -1402,6 +1402,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-digital-trust-adaccounts-40-20260831",
+      "next_step": "Executar lote serializado, persistir cada Ad Account ID e parar em qualquer gate ou divergência",
+      "objective": "Criar 40 contas de anúncio 001 na BM Digital Trust com cadência fixa de 2 minutos e readback individual",
+      "source": "discord:1185714635991679006/1544113212075548683#1544126425336914061",
+      "state": "in_progress: 0/40; conta piloto anterior 2235938116947880 não integra o lote",
+      "thread_id": "1544113212075548683",
+      "updated_at": "2026-08-31T23:33:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-honcho-all-agents-rollout-20260717",
       "next_step": "Operação normal: Zeus monitora provider + copilot; sessões Discord já abertas adotam Honcho somente em sessão nova/reset.",
       "objective": "Integrar o memory provider nativo Honcho managed nos agentes operacionais MGS com isolamento, contexto limitado e persistência autorizada",
@@ -1792,5 +1802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T23:13:55+00:00"
+  "updated_at": "2026-08-31T23:33:30+00:00"
 }
