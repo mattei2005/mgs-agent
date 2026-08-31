@@ -822,6 +822,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-roas-phase3-recycling-20260830",
+      "next_step": "obter de Nicolas as definições exatas; então atualizar runner, contrato, prompts Intraday/Regras, testes, cron 00:00, audit e fazer readback",
+      "objective": "Persistir a exclusão noturna de campanhas agendadas para o dia seguinte e materializar a Fase 3 de reativação/reciclagem às 00:00",
+      "source": "discord:thread:1541578606076231750",
+      "state": "manager_rule_received; active_night_scope_understood; phase3_pending_exact_threshold_budget_status_origin_leads_boundary_and_0000_order",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-31T03:19:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-roas-ri-colors-source-v16-20260830",
       "next_step": "usar automaticamente o renderer v16 no próximo ciclo Corte e ROAS",
       "objective": "Confirmar fonte Messenger Pages do ROI estimado e adicionar amarelo ao par R/E atual/estimado",
@@ -1612,5 +1622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:00:00+00:00"
+  "updated_at": "2026-08-31T03:19:22+00:00"
 }
