@@ -1802,10 +1802,10 @@
       "kind": "policy",
       "owner": "Nicolas Holanda",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831",
       "title": "Eggbev Corte e ROAS v25 espelha Smart Bidding Messenger Pages",
-      "updated_at": "2026-08-31T13:57:44+00:00"
+      "updated_at": "2026-08-31T22:22:20+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -1825,6 +1825,28 @@
       "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-AD-ONLY-V19-20260830",
       "title": "Eggbev Corte e ROAS inclui 05h e 06h na Fase 1 com scheduler isolado",
       "updated_at": "2026-08-31T01:58:28+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations",
+        "scripts/ares-eggbev-roas-common.py",
+        "scripts/ares-eggbev-roas-cycle.py",
+        "tests/test_eggbev_roas_automation.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T18:19:26-04:00",
+      "id": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev v26 garante emojis e tabela sem linhas cortadas",
+      "updated_at": "2026-08-31T22:22:20+00:00"
     },
     {
       "canonical_key": "ares.campaign-ops.eggbev.discord-thread-information-architecture",
@@ -3106,5 +3128,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:57:44+00:00"
+  "updated_at": "2026-08-31T22:22:20+00:00"
 }

@@ -1261,7 +1261,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v22_full_spaced_locked_active",
+      "status": "cpv13_intraday_desktop_table_v26_visual_integrity_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -1485,6 +1485,59 @@
           "live_meta_writes": 0
         }
       },
+      "visual_integrity_v26": {
+        "decision_id": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831",
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-31T18:19:26-04:00",
+        "source": "discord:thread:1543836757529985024",
+        "affected_report_thread": "discord:thread:1541578606076231750",
+        "decision": "keep one canonical complete table schema on every Corte e ROAS run, never omit the visual emojis, and never split campaign rows away from the complete table header",
+        "columns_unchanged": [
+          "R/E",
+          "Camp",
+          "Página",
+          "Status",
+          "Budget",
+          "Spend",
+          "Custo",
+          "ROAS",
+          "Ads ↓",
+          "ROI real",
+          "ROI est.",
+          "Leads",
+          "RPS",
+          "CPM",
+          "CTR",
+          "Ação"
+        ],
+        "emoji_invariants": {
+          "roi_pair": "R/E always contains exactly two health emojis in current/estimated order",
+          "roi_cells": "ROI real and ROI est. each repeat their own health emoji immediately beside the signed percentage or N/D",
+          "ads_unavailable": "Ads ↓ with no reconciled ad detail renders ⚪ N/D, never bare N/D",
+          "action": "Ação always renders one of 🛑n, ♻️n, ✅, 👁️ or 🚀"
+        },
+        "pagination_invariants": {
+          "logical_table": "one canonical table schema across the whole report; no alternate or reduced table",
+          "discord_limit": "when the hard Discord message limit requires multiple parts, every part containing campaign rows repeats the full title, all 16 headers and the divider",
+          "atomic_fence": "a monospace table fence is indivisible and can never continue in another message without its header",
+          "no_orphan_rows": true,
+          "no_silent_omission": true
+        },
+        "change_control": "this v26 visual integrity contract supersedes the v22 lock only for emoji adjacency and atomic pagination; any later format change requires a new explicit Nicolas instruction and regression update",
+        "scope": "report presentation and delivery integrity only; no change to sources, formulas, campaign selection, ROAS decisions, writes, schedules, budget or authority",
+        "validation": {
+          "unit_tests": "103/103 passed",
+          "latest_audit_rerender_campaigns": 19,
+          "latest_audit_rerender_table_parts": 3,
+          "latest_audit_rerender_discord_chunks": 4,
+          "all_table_chunks_have_complete_header": true,
+          "all_table_fences_balanced": true,
+          "bare_ads_nd_rows": 0,
+          "roi_cells_with_adjacent_health_emoji": true,
+          "live_meta_writes": 0
+        }
+      },
       "campaign_identity_and_large_table_correction": {
         "requested_by": "Nicolas Holanda",
         "requested_by_discord_id": "1055570806945620030",
@@ -1521,12 +1574,12 @@
         "one campaign per row with direct semantic headings instead of generic metric/value headings",
         "Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024",
         "campaign families are naturally sorted and each table block contains at most ten rows",
-        "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, Ads ↓, ROI real, ROI est., Leads, RPS, CPM, Ação",
+        "column order: R/E, Camp, Página, Status, Budget, Spend, Custo, ROAS, Ads ↓, ROI real, ROI est., Leads, RPS, CPM, CTR, Ação",
         "dynamic column widths with two spaces between columns and no vertical bars",
         "ROAS shown as a plain numeric value like the CPV 13 reference; threshold semantics remain in the action logic",
-        "R/E contains the real and estimated ROI signals while ROI real and ROI est. remain signed numeric percentages",
+        "R/E contains the real and estimated ROI signals, and ROI real plus ROI est. repeat the corresponding emoji immediately beside each signed percentage or N/D",
         "ad-level cut/reactivation counts appear only as compact signals in the Ação column",
-        "Ads ↓ shows abbreviated ad slots sorted by Purchase ROAS descending, with ✅ keep active, 🛑 pause now, ♻️ reactivate now and ⏸ already paused",
+        "Ads ↓ shows abbreviated ad slots sorted by Purchase ROAS descending, with ✅ keep active, 🛑 pause now, ♻️ reactivate now and ⏸ already paused; unavailable detail is always ⚪ N/D",
         "one short direct legend below the table; no long explanatory block"
       ],
       "action_emojis": {
@@ -1604,7 +1657,7 @@
         "block_cpm_usd": "Messenger Pages parity: REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "Meta Purchase ROAS decides only ad-level cuts/reactivations; economic formulas are informative only; ROAS cycle never changes campaign or ad-set status and never changes budget",
-      "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count plus a maximum of ten rows per table block, never splits a campaign row, keeps campaign families naturally ordered, repeats every heading and keeps every code fence balanced",
+      "pagination": "one canonical complete table schema with no reduced alternative; no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count plus a maximum of ten rows per table block, never splits a campaign row or code fence, keeps campaign families naturally ordered, keeps every code fence balanced, and every Discord part containing rows repeats the table title, all 16 headers and divider",
       "validation": {
         "live_dry_run": true,
         "validated_at_et": "2026-08-30T01:45:23-04:00",

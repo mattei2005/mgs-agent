@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.19.5-draft
+version: 0.19.6-draft
 author: Ares
 license: internal
 metadata:
@@ -536,6 +536,20 @@ Por instrução explícita de Nicolas em `2026-08-31`, Smart Bidding Messenger P
 - Freshness: aparece no audit/report; Meta writes continuam fail-closed por stale/mapping, sem impedir que o relatório read-only espelhe o readback visível da Smart Bidding.
 
 Validação real: 100 testes aprovados; três fixtures extraídas do print; dry-run vivo com 19 campanhas e zero writes; quatro Page/UTM comparadas contra as rotas vivas, com `4/4` matches numéricos exatos e zero divergências. Decisão canônica: `ARES-EGGBEV-ROAS-SB-PARITY-V25-20260831`.
+
+### Refinamento visual v26 — emojis obrigatórios e paginação atômica
+
+Por correção explícita de Nicolas em `2026-08-31`, o relatório Corte e ROAS mantém uma única tabela canônica completa e passa a tratar seus sinais visuais e a integridade de cada parte como invariantes testados:
+
+- `R/E` sempre contém exatamente dois emojis na ordem ROI atual/ROI estimado;
+- `ROI real` e `ROI est.` repetem o emoji correspondente imediatamente antes do percentual ou de `N/D`, para que o sinal não fique visualmente separado do valor;
+- `Ads ↓` sem detalhe reconciliado mostra `⚪ N/D`, nunca `N/D` puro;
+- `Ação` sempre mostra `🛑n`, `♻️n`, `✅`, `👁️` ou `🚀`;
+- a tabela preserva exatamente as 16 colunas `R/E | Camp | Página | Status | Budget | Spend | Custo | ROAS | Ads ↓ | ROI real | ROI est. | Leads | RPS | CPM | CTR | Ação`;
+- quando o limite duro do Discord exigir múltiplas partes, toda parte que contenha campanhas repete título, os 16 cabeçalhos e divisor completos; o bloco monoespaçado é atômico e nunca continua em outra mensagem sem cabeçalho;
+- nenhuma linha ou campanha pode ser omitida silenciosamente, e nenhuma variante resumida é permitida.
+
+O v26 supersede o congelamento v22 somente para adicionar a proximidade dos emojis e impedir o corte estrutural de blocos; não altera fontes, fórmulas, métricas, decisões, writes, schedules, budget ou autoridade. Mudança visual futura exige nova instrução explícita de Nicolas e atualização dos testes. Decisão canônica: `ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831`.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 

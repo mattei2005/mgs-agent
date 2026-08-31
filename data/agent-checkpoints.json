@@ -492,6 +492,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-20260831",
+      "next_step": "Executar dry-run vivo com post na thread 1541578606076231750, validar cada parte por readback e emitir REPORT-INFRA",
+      "objective": "Padronizar emojis e impedir corte estrutural das tabelas Corte e ROAS Eggbev",
+      "source": "discord:thread:1543836757529985024; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "implementado: renderer v26 com emojis inline e placeholder visual; splitter atômico; contrato, prompt e skills atualizados; 103 testes aprovados; falta dry-run vivo, postagem/readback e report-infra",
+      "thread_id": "1543836757529985024",
+      "updated_at": "2026-08-31T22:22:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
       "next_step": "Não criar substitutas. Rodar o reconciliador em checks de release. Fechar com Nicolas a referência/template e budget da criação; implementar from_zero, placements e pre-stage. Resolver timestamp Messenger; depois validar canário aprovado e somente então avaliar automação do Diário/budget.",
       "objective": "Manter as seis rotas Eggbev fixas, separadas, auditáveis e reconciliadas com o contrato/runtime real",
@@ -1772,5 +1782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T14:17:05+00:00"
+  "updated_at": "2026-08-31T22:22:20+00:00"
 }

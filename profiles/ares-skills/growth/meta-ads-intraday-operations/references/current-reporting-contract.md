@@ -33,7 +33,10 @@ Regras:
 
 - Usar bloco `text` com colunas alinhadas para consolidação desktop.
 - Para operação que exigir visualização móvel, acrescentar cards verticais responsivos sem eliminar a tabela consolidada.
-- Dividir mensagens por capacidade real do Discord sem cortar uma linha no meio.
+- Um bloco de tabela cercado por code fence é uma unidade visual atômica: nunca dividir suas linhas entre mensagens.
+- Se o limite duro do Discord exigir múltiplas partes, cada parte com linhas de campanha repete título, cabeçalho completo e divisor; nenhuma parte pode começar por linhas órfãs.
+- O contrato da operação define os emojis obrigatórios. Placeholders indisponíveis preservam o sinal visual aprovado (`⚪ N/D` quando aplicável), nunca removem silenciosamente o emoji.
+- Dividir mensagens por capacidade real do Discord sem cortar uma linha, campanha ou code fence no meio.
 - Usar a thread fixa do tipo de relatório quando registrada no contrato.
 - Wrapper que publica diretamente usa cron `deliver=local` e stdout vazio para evitar duplicidade.
 - Erro visível deve ser curto e sanitizado; detalhes técnicos ficam no audit/REPORT-INFRA.

@@ -1423,9 +1423,9 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy['runtime']['cron_enabled'])
         self.assertIn('never cuts', policy['action_policy'])
 
-    def test_roas_reporting_v22_locks_full_spaced_table_with_leads_rps_and_ctr(self):
+    def test_roas_reporting_v26_preserves_full_table_and_visual_integrity(self):
         reporting_policy = self.operation['roas_cycle_policy']['reporting']
-        self.assertIn('v22_full_spaced_locked_active', reporting_policy['status'])
+        self.assertIn('v26_visual_integrity_active', reporting_policy['status'])
         self.assertIn('one short direct legend below the table; no long explanatory block', reporting_policy['layout'])
         self.assertIn('Camp uses a compact unique sequence+C+DUP+UTM key such as 162·C001·D01/pg_5024', reporting_policy['layout'])
         large_table = reporting_policy['campaign_identity_and_large_table_correction']
@@ -1496,6 +1496,12 @@ class ContractTests(unittest.TestCase):
         self.assertIn('Leads', full_v22['mandatory_columns'])
         self.assertIn('RPS', full_v22['mandatory_columns'])
         self.assertIn('reduced explanatory subset', full_v22['rejected_reference'])
+        visual_v26 = reporting_policy['visual_integrity_v26']
+        self.assertEqual(visual_v26['columns_unchanged'], list(cycle.CANONICAL_DESKTOP_HEADERS))
+        self.assertIn('⚪ N/D', visual_v26['emoji_invariants']['ads_unavailable'])
+        self.assertTrue(visual_v26['pagination_invariants']['no_orphan_rows'])
+        self.assertTrue(visual_v26['pagination_invariants']['no_silent_omission'])
+        self.assertIn('all 16 headers', visual_v26['pagination_invariants']['discord_limit'])
         self.assertIn('shortened table subsets are forbidden', full_v22['manual_examples'])
         self.assertIn('no future table modification', full_v22['layout_lock'])
         self.assertIn('applied only to the current ET day', reporting_policy['source_routes']['economics_estimated'])
