@@ -843,12 +843,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-roas-phase3-recycling-20260830",
-      "next_step": "obter de Nicolas as definições exatas; então atualizar runner, contrato, prompts Intraday/Regras, testes, cron 00:00, audit e fazer readback",
-      "objective": "Persistir a exclusão noturna de campanhas agendadas para o dia seguinte e materializar a Fase 3 de reativação/reciclagem às 00:00",
+      "next_step": "observar tick 00:00; se freshness atualizar, validar relatório e writes por readback; se permanecer stale, recuperar fonte sem relaxar gate",
+      "objective": "Implementar exclusão noturna de campanhas do dia seguinte e Fase 3 de reciclagem às 00:00",
       "source": "discord:thread:1541578606076231750",
-      "state": "manager_rule_received; active_night_scope_understood; phase3_pending_exact_threshold_budget_status_origin_leads_boundary_and_0000_order",
+      "state": "implemented_v23; 91_tests_passed; live_dry_run_zero_writes_blocked_by_stale_estimated_delay; cron_same_job_enabled_scheduled_for_0000",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T03:19:22+00:00"
+      "updated_at": "2026-08-31T03:55:07+00:00"
     },
     {
       "agent": "ares",
@@ -1642,5 +1642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:47:17+00:00"
+  "updated_at": "2026-08-31T03:55:07+00:00"
 }

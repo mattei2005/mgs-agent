@@ -114,7 +114,7 @@ O contrato vivo está em:
 /root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json
 ```
 
-A skill específica é `eggbev-us-cc-en-bot-operations`. No ciclo ROAS, somente cortes/reativações de anúncios e a postagem dos relatórios estão autorizados em controlled-write fail-closed; campanha e ad set nunca recebem status write desse ciclo. O guardrail separado de LEADS pode pausar campanha conforme contrato próprio. Budget write automático continua bloqueado até o gate vigente. Daily continua read-only sem cron. Campos ainda pendentes bloqueiam somente a ação dependente; nunca herdar regras de tráfego direto ou de outra operação.
+A skill específica é `eggbev-us-cc-en-bot-operations`. Nas Fases 1/2 do ciclo ROAS, somente cortes/reativações de anúncios e a postagem dos relatórios estão autorizados em controlled-write fail-closed; campanha e ad set nunca recebem status write nessas fases. A Fase 3 Eggbev das 00:00 é uma exceção contratual separada: pode ajustar budget CBO para a escolha idempotente US$45/US$65 e garantir campanha, ad set e anúncios vencedores `ACTIVE`, inclusive quando pausados manualmente, sempre com pre-read e GET/readback. O guardrail separado de LEADS pode pausar campanha conforme contrato próprio. A escala automática genérica de +10% continua bloqueada; a autorização de budget da Fase 3 não a libera. Daily continua read-only sem cron. Campos ainda pendentes bloqueiam somente a ação dependente; nunca herdar regras de tráfego direto ou de outra operação.
 
 ## Segurança e autoridade
 

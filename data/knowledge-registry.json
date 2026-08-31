@@ -1618,10 +1618,29 @@
       "kind": "decision",
       "owner": "Nicolas Holanda",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-PHASE3-RECYCLING-V23-20260830",
+      "title": "Eggbev v22 congela primeira tabela completa com Leads RPS e CTR",
+      "updated_at": "2026-08-31T03:55:06+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "discord:thread:1541578606076231750",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T23:49:15-04:00",
+      "id": "ARES-EGGBEV-ROAS-PHASE3-RECYCLING-V23-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev v22 congela primeira tabela completa com Leads RPS e CTR",
-      "updated_at": "2026-08-31T02:59:27+00:00"
+      "title": "Eggbev v23 ativa corte noturno seguro e Fase 3 de reciclagem",
+      "updated_at": "2026-08-31T03:55:06+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -2924,5 +2943,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:45:09+00:00"
+  "updated_at": "2026-08-31T03:55:06+00:00"
 }

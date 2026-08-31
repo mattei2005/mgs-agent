@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.47
+version: 1.0.48
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -489,13 +489,14 @@ Conclusão: os três anúncios têm assets distintos ou variações explicitamen
 
 ## Relatórios Discord e continuidade
 
-Para tráfego direto desta operação, usar três threads operacionais fixas por conta e uma thread permanente de referência:
+Para tráfego direto desta operação, usar três threads operacionais fixas por conta, uma thread permanente de referência e um Diário Geral da operação:
 
 ```text
 Criação de Campanhas   registros por evento: pedido, dry-run, write, IDs e readback
-Diário Consolidado     07:00 dia anterior; 08:00/12:00/14:00/16:00/20:00 mesmo dia
+Diário por conta       aquisição atribuível à própria conta; sem valores de SMS
+CPV Diário Geral       contas 05+13 + SMS G006 exatamente uma vez; thread 1543826231831560343
 Intraday               01/03/05/07/09/11/13/15/17/19/21/23 São Paulo
-CPV Regras              manual permanente da estratégia; consulta dos gestores
+CPV Regras             manual permanente da estratégia; consulta dos gestores
 Checkpoint de ação     08:00 (escala + D3), 12:00 (recheck D3 v2) e 16:00 (pós-escala), separados e sem relatório extra
 ```
 

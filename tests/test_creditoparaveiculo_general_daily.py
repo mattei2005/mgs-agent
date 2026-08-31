@@ -24,6 +24,7 @@ def test_account_daily_reports_exclude_sms_values_and_point_to_general():
     account05_source = inspect.getsource(account05.render_daily)
     assert 'fetch_sms_vendor_totals' not in fixed_source
     assert 'fetch_bcb_usd_brl_ptax' not in fixed_source
+    assert 'include_sms=False' in fixed_source
     assert 'SMS não atribuído por conta — consultar CPV Diário Geral.' in fixed_source
     assert 'SMS não atribuído por conta — consultar CPV Diário Geral.' in account05_source
     assert 'Custo SMS G006' not in fixed_source
