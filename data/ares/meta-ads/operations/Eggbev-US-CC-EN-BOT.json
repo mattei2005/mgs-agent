@@ -1712,7 +1712,7 @@
         "Meta live pre-read and post-write GET",
         "exact prior-day spend and ad Purchase ROAS",
         "exact UTM_CAMPAIGN plus FB_PAGE_ID",
-        "Smart Bidding /estimated/delay freshness <=120 minutes",
+        "Smart Bidding /estimated/delay totalMinutes present in [0,120] minutes",
         "strict LEADS >5000 exclusion",
         "native rule conflict absent",
         "persisted idempotent random budget assignment"
@@ -1758,7 +1758,7 @@
         "exactly_5000": "eligible",
         "strictly_over_5000": "exclude campaign from Phase 3",
         "mapping": "exact UTM_CAMPAIGN plus FB_PAGE_ID",
-        "freshness": "Smart Bidding /estimated/delay currentFillTime present and totalMinutes <= 120; fail closed otherwise"
+        "freshness": "Smart Bidding /estimated/delay totalMinutes present and between 0 and 120; currentFillTime is corroborating when non-null but the live API may return it null; fail closed when totalMinutes is absent/out of range"
       },
       "campaign_budget": {
         "level": "campaign CBO",
@@ -2458,5 +2458,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-30T23:49:15-04:00"
+  "updated_at": "2026-08-31T00:02:00-04:00"
 }

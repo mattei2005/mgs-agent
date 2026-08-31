@@ -268,6 +268,16 @@ class SourceGateTests(unittest.TestCase):
         self.assertFalse(result['ready'])
         self.assertEqual(result['reason'], 'smart_bidding_freshness_unverifiable')
 
+    def test_estimated_delay_total_minutes_is_valid_without_fill_timestamp(self):
+        result = common.evaluate_economic_freshness({'totalMinutes': 0, 'currentFillTime': None})
+        self.assertTrue(result['ready'])
+        self.assertEqual(result['evidence_mode'], 'totalMinutes')
+
+    def test_estimated_delay_over_two_hours_still_blocks(self):
+        result = common.evaluate_economic_freshness({'totalMinutes': 121, 'currentFillTime': None})
+        self.assertFalse(result['ready'])
+        self.assertEqual(result['reason'], 'delay_minutes_out_of_range')
+
 
 class Phase3RecyclingTests(unittest.TestCase):
     def fixture(self, roas=.38, spend=10, leads=5000, campaign_status='PAUSED', adset_status='PAUSED', ad_status='PAUSED', campaign_id='c1', ad_id='a1', adset_id='s1'):

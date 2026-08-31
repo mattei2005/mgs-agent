@@ -402,9 +402,10 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
             economic_estimated = estimated_body
     except Exception as exc:
         economic_error = f'{type(exc).__name__}: {exc}'
-    delay_minutes = finite_float(economic_delay.get('totalMinutes'))
-    current_fill_time = norm(economic_delay.get('currentFillTime'))
-    economic_freshness_ready = delay_minutes is not None and delay_minutes <= 120.0 and bool(current_fill_time)
+    economic_freshness = evaluate_economic_freshness(economic_delay, 120.0)
+    delay_minutes = economic_freshness.get('age_minutes')
+    current_fill_time = economic_freshness.get('current_fill_time')
+    economic_freshness_ready = bool(economic_freshness.get('ready'))
     economic_ready = bool(economic_rows) and economic_freshness_ready
     economic_reason = (
         None if economic_ready else
@@ -434,11 +435,8 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
         'economic_estimated': economic_estimated,
         'economic_delay': economic_delay,
         'economic_freshness': {
-            'ready': economic_freshness_ready,
-            'age_minutes': delay_minutes,
-            'current_fill_time': current_fill_time or None,
-            'max_age_minutes': 120,
-            'evidence': 'Smart Bidding /estimated/delay',
+            **economic_freshness,
+            'evidence': f"Smart Bidding /estimated/delay {economic_freshness.get('evidence_mode') or ''}".strip(),
         },
         'economic_http_statuses': economic_statuses,
         'economic_schema_keys': sorted({key for row in economic_rows for key in row.keys()}),
@@ -479,6 +477,21 @@ def evaluate_sb_freshness(rows: list[dict[str, Any]], observed_at: dt.datetime, 
         'timestamp_field': field,
         'latest_at_et': latest.isoformat(),
         'age_minutes': round(age_seconds / 60.0, 2),
+    }
+
+
+def evaluate_economic_freshness(delay: dict[str, Any], max_age_minutes: float = 120.0) -> dict[str, Any]:
+    """Use the explicit delay counter; fill timestamp is optional in the live schema."""
+    delay_minutes = finite_float(delay.get('totalMinutes'))
+    current_fill_time = norm(delay.get('currentFillTime')) or None
+    ready = delay_minutes is not None and 0.0 <= delay_minutes <= float(max_age_minutes)
+    return {
+        'ready': ready,
+        'age_minutes': delay_minutes,
+        'max_age_minutes': float(max_age_minutes),
+        'current_fill_time': current_fill_time,
+        'evidence_mode': 'currentFillTime+totalMinutes' if current_fill_time else ('totalMinutes' if delay_minutes is not None else None),
+        'reason': None if ready else ('delay_minutes_missing' if delay_minutes is None else 'delay_minutes_out_of_range'),
     }
 
 
