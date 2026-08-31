@@ -843,12 +843,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-roas-phase3-recycling-20260830",
-      "next_step": "observar tick 00:00; se freshness atualizar, validar relatório e writes por readback; se permanecer stale, recuperar fonte sem relaxar gate",
+      "next_step": "cron segue enabled/scheduled; observar 05:00 em modo observação e o próximo 00:00 para candidatos elegíveis",
       "objective": "Implementar exclusão noturna de campanhas do dia seguinte e Fase 3 de reciclagem às 00:00",
       "source": "discord:thread:1541578606076231750",
-      "state": "implemented_v23; 91_tests_passed; live_dry_run_zero_writes_blocked_by_stale_estimated_delay; cron_same_job_enabled_scheduled_for_0000",
+      "state": "implemented_v23; 93_tests_passed; tick_0000_failed_closed_on_null_currentfilltime; live_schema_reconciled_totalminutes_0; controlled_recovery_ok; zero_eligible_ads; zero_meta_writes; phase3_report_readback_confirmed",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T03:55:07+00:00"
+      "updated_at": "2026-08-31T04:05:27+00:00"
     },
     {
       "agent": "ares",
@@ -1642,5 +1642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:58:23+00:00"
+  "updated_at": "2026-08-31T04:05:27+00:00"
 }
