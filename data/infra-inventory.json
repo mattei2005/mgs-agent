@@ -10995,6 +10995,37 @@
         "thread_created": false
       },
       "updated_at": "2026-08-29T21:45:02-04:00"
+    },
+    {
+      "id": "ares-financeadx-lyzmo-discord-routing-20260831",
+      "agent": "ares",
+      "type": "discord_gateway_channel_routing",
+      "external_system": "Discord/Hermes gateway",
+      "authorization_source": "discord:thread:1544118558315782186:message:1544121351298752572",
+      "channels": [
+        {
+          "channel_id": "1544117442589106328",
+          "channel_name": "bot-fax-us-cc-en-01-g006",
+          "site": "financeadx.com"
+        },
+        {
+          "channel_id": "1544117058982248448",
+          "channel_name": "bot-lyzmo-us-cc-en-01-g006",
+          "site": "lyzmo.com"
+        }
+      ],
+      "config_paths": [
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/.hermes/profiles/ares/.env"
+      ],
+      "config_sha256": "1cd9237efad41e6341e9ca838f1038159c090573e5f6915633148bf694fd5176",
+      "backup": "/root/.hermes/secure-backups/ares-new-discord-channels-20260831T231121Z",
+      "status": "configured_restart_scheduled",
+      "restart_unit": "mgs-gateway-restart-20260831T231718Z-885003",
+      "restart_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260831T231718Z-885003.log",
+      "validation": "Staged config validation PASS; live/mirror byte-identical; resolved allowed/free-response values include both channels; channel prompts and per-channel auto-add users present in config and environment file; unrelated .env lines unchanged. Runtime activation awaits detached Ares restart.",
+      "updated_at": "2026-08-31T23:17:07Z"
     }
   ],
   "profile_skill_references": [
