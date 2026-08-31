@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
-  "status": "campaigns_active_readback_validated_first_delivery_runtime_pending_account05",
+  "status": "campaigns_active_reports_and_first_delivery_authorized_pending_runtime_readback",
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",
@@ -265,6 +265,67 @@
     "event": "SUBSCRIBE",
     "campaign_count": 49,
     "active_campaign_count": 0
+  },
+  "management_scope": {
+    "write_enabled": true,
+    "reporting_mode": "read_only_strategy_reporting",
+    "manual_holds": [],
+    "autonomous_action_scope": {
+      "allowed_campaigns": {
+        "51": {
+          "campaign_id": "120248477978700046",
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "52": {
+          "campaign_id": "120248477978730046",
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "53": {
+          "campaign_id": "120248478066030046",
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        }
+      },
+      "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
+      "creative_cut_writes": "not enabled by report activation; reports remain read-only until a separate deterministic strategy runner is authorized and validated"
+    }
+  },
+  "first_delivery_guardrail": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "watch_interval_minutes": 15,
+    "scope": "C51-C53 and every future account-05 production campaign explicitly assigned to CREATIVE_CUT_24H after validated readback",
+    "grace_window": "00:30 through 02:00 inclusive America/Sao_Paulo",
+    "grace_action": "first observed spend in the healthy window starts the first CREATIVE_CUT_24H window without pause",
+    "late_action": "first observed spend outside the healthy window pauses the campaign once with GET readback",
+    "reactivation": "one verified ACTIVE write in the next 00:30-02:00 America/Sao_Paulo window; missed window fails closed",
+    "renaming": "update only the DD-MM operational date segment; preserve the current prefix, wrapper, budget, UTM and hierarchy",
+    "one_shot": true,
+    "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.py",
+    "wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.sh",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-first-delivery.json",
+    "strategy_state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-creative-cut24h.json"
+  },
+  "reporting": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "mode": "read_only_strategy_reporting",
+    "currency": "USD",
+    "timezone": "America/Sao_Paulo",
+    "layout": "desktop_aligned_tables_only",
+    "daily_thread_id": "1542892955315081246",
+    "intraday_thread_id": "1542892943352799242",
+    "daily_schedule": ["07:00 previous closed day", "08:00", "12:00", "14:00", "16:00", "20:00 current day"],
+    "intraday_schedule": ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"],
+    "strategy_fields": ["management_strategy", "current_stage", "window_started_at", "next_checkpoint_at", "active_ads", "paused_ads", "real_roi", "spend_concentration"],
+    "sms_policy": "G006 SMS revenue/cost is not attributable between account 13 and account 05; do not duplicate it into the account-05 ROI"
   },
   "crons": [],
   "meta_writes_performed": 1,
