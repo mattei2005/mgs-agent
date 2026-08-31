@@ -81,6 +81,11 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             raise ManifestError(
                 f"account {campaign.account_id} requires ad copy lineage for new media; from_zero_prestaged is forbidden"
             )
+        if account.get("pure_clone_tracking_required") is True and campaign.mode == "pure_clone":
+            if not campaign.source_adset_id or not campaign.adset_name or not campaign.ads:
+                raise ManifestError(
+                    f"account {campaign.account_id} requires tracking-aware pure_clone with source adset, ad names and creative payloads"
+                )
 
         base_policy = dict(account.get("campaign_policy") or {})
         mode_policies = base_policy.pop("by_mode", {}) or {}

@@ -18,7 +18,7 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
-ENGINE_RELEASE_VERSION = "3.4.1"
+ENGINE_RELEASE_VERSION = "3.4.2"
 
 
 class EngineDisabled(RuntimeError):
@@ -112,7 +112,7 @@ class CampaignEngine:
 
     @staticmethod
     def _readback_only_record(bundle: BundlePlan, record: dict[str, Any]) -> bool:
-        if bundle.campaigns[0].mode == "pure_clone":
+        if bundle.campaigns[0].mode == "pure_clone" and not bundle.campaigns[0].ads:
             return (
                 str(record.get("stage") or "") == "copies_updated_readback_pending"
                 and len(record.get("campaign_ids") or []) == len(bundle.campaigns)
@@ -1024,13 +1024,15 @@ class CampaignEngine:
                         ids = self._recover_prestaged_bundle(bundle, transport, record)
                     elif mode == "from_zero_prestaged":
                         ids = self._recover_from_zero_bundle(bundle, transport, record)
-                    elif mode == "pure_clone":
+                    elif mode == "pure_clone" and not bundle.campaigns[0].ads:
                         ids = self._recover_pure_bundle(bundle, transport, record)
+                    elif mode == "pure_clone":
+                        ids = self._recover_prestaged_bundle(bundle, transport, record)
                     else:
                         raise ExecutionFailed("automatic recovery requires a supported execution mode")
-                elif mode == "pure_clone":
+                elif mode == "pure_clone" and not bundle.campaigns[0].ads:
                     ids = self._run_pure_bundle(bundle, transport, record)
-                elif mode in {"clone_prestaged", "clone_page_switch"}:
+                elif mode in {"clone_prestaged", "clone_page_switch", "pure_clone"}:
                     ids = self._run_prestaged_bundle(bundle, transport, record)
                 else:
                     ids = self._run_from_zero_bundle(bundle, transport, record)

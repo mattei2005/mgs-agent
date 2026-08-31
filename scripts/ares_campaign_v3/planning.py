@@ -215,10 +215,14 @@ class Planner:
                 if len(modes) != 1:
                     raise ValueError("a bundle cannot mix execution modes")
                 mode = next(iter(modes))
-                if mode == "pure_clone":
+                tracking_aware_pure_clone = mode == "pure_clone" and all(campaign.ads for campaign in chunk)
+                legacy_pure_clone = mode == "pure_clone" and all(not campaign.ads for campaign in chunk)
+                if mode == "pure_clone" and not (tracking_aware_pure_clone or legacy_pure_clone):
+                    raise ValueError("a pure_clone bundle cannot mix legacy deep-copy and tracking-aware routes")
+                if legacy_pure_clone:
                     stages = (self._pure_stage(chunk), self._pure_update_stage(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 2
-                elif mode in {"clone_prestaged", "clone_page_switch"}:
+                elif mode in {"clone_prestaged", "clone_page_switch"} or tracking_aware_pure_clone:
                     stages = (*self._prestaged_stages(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 5
                     ad_count = sum(len(campaign.ads) for campaign in chunk)

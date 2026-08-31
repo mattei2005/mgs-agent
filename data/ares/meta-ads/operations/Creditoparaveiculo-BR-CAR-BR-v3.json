@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.4.1",
+  "release_version": "3.4.2",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "status": "active_guarded_development_access",
   "account_id": "1046241194533786",
@@ -40,7 +40,8 @@
       "visible_lineage_marker": "append the exact suffix COPY C{immediate_source_number} to the duplicated campaign name; never use DUP",
       "visible_example": "a new C11 duplicated directly from C10 ends with COPY C10",
       "readback": "confirm target number and names, exact final URLs/UTMs on every ad, unchanged media/copy equivalence and effective_object_story_id when Meta technically preserves the same post; do not require Creative ID equality"
-    }
+    },
+    "execution_route": "tracking-aware pure_clone uses shallow campaign copy, shallow adset copy and lineage ad copies with creative_parameters; media and copy remain source-equivalent while names and url_tags are rematerialized for the target number; legacy deep campaign copy is fail-closed for CPV accounts"
   },
   "page_id": "621037101089579",
   "mode": "clone_prestaged",

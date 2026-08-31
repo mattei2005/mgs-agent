@@ -197,10 +197,11 @@ class CampaignSpec:
         start = _iso(str(value["start_time"]), "start_time")
         if status == "ACTIVE" and start <= datetime.now(timezone.utc):
             raise ManifestError("ACTIVE requires future start_time")
+        tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(
             AdSpec.from_dict(
                 item,
-                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch"}),
+                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch"} or tracking_aware_pure_clone),
                 require_media=(mode in {"clone_prestaged", "from_zero_prestaged"}),
             )
             for item in (value.get("ads") or [])
@@ -267,8 +268,12 @@ class CampaignSpec:
         else:
             if not source_campaign_id:
                 raise ManifestError("pure_clone requires source_campaign_id")
-            if ads:
-                raise ManifestError("pure_clone must not provide replacement ads")
+            if ads and (not source_adset_id or not adset_name):
+                raise ManifestError(
+                    "tracking-aware pure_clone requires source_campaign_id, source_adset_id and adset_name"
+                )
+            if len(ads) > 5:
+                raise ManifestError("tracking-aware pure_clone allows at most five lineage ads")
             if campaign_create or adset_create:
                 raise ManifestError("pure_clone forbids from-zero create payloads")
         updates = value.get("campaign_updates") or {}

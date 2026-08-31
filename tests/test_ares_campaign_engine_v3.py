@@ -348,10 +348,12 @@ def test_production_cpv_policy_rejects_legacy_deep_pure_clone_without_tracking_p
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     account_id = '1046241194533786'
     legacy = pure_campaign(36, account=account_id)
+    legacy['app_key'] = 'mgs-meta-app-current'
     with pytest.raises(ManifestError, match='requires tracking-aware pure_clone'):
         validate_account_policy(manifest([legacy]), config)
 
     tracked = tracked_pure_campaign(36, account=account_id)
+    tracked['app_key'] = 'mgs-meta-app-current'
     validate_account_policy(manifest([tracked]), config)
 
 
@@ -1187,7 +1189,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
-    assert audit['engine_release_version'] == '3.4.1'
+    assert audit['engine_release_version'] == '3.4.2'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
@@ -1559,7 +1561,7 @@ def test_transient_code2_retry_uses_remaining_development_lane_capacity(tmp_path
 
 def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():
     production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    assert production['release_version'] == '3.4.1'
+    assert production['release_version'] == '3.4.2'
     assert production['soft_score'] == 100
     assert production['hard_score'] == 120
     assert production['development_access_score_max'] == 60

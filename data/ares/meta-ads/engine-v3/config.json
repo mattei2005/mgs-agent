@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.4.1",
+  "release_version": "3.4.2",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -70,6 +70,7 @@
       "app_key": "mgs-meta-app-current",
       "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
       "supported_modes": ["pure_clone", "clone_prestaged"],
+      "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_type": "user_access_token",
@@ -79,6 +80,7 @@
       "app_key": "mgs-meta-app-current",
       "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
       "supported_modes": ["pure_clone", "clone_prestaged"],
+      "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_type": "user_access_token",
