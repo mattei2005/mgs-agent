@@ -948,39 +948,62 @@ def fmt_money(value: Any) -> str:
 
 
 def split_messages(text: str, limit: int = 1900) -> list[str]:
-    """Split Discord messages without leaving Markdown code fences unbalanced."""
-    # Reserve a tiny structural margin for a closing fence and newline joins.
-    # The public limit remains exact: every returned chunk must be <= limit.
-    split_limit = max(32, limit - 8)
+    """Split Discord messages while keeping every rendered table indivisible.
+
+    A code-fence table is an atomic visual unit.  Splitting inside it creates
+    orphan campaign rows without their header, which looks like a truncated
+    report in Discord.  The table title immediately before a fence is kept in
+    the same atomic block as the fence.
+    """
     lines = text.splitlines()
+    blocks: list[str] = []
+    plain: list[str] = []
+    index = 0
+
+    def flush_plain() -> None:
+        if plain:
+            blocks.append('\n'.join(plain).strip('\n'))
+            plain.clear()
+
+    while index < len(lines):
+        line = lines[index]
+        if line.strip().startswith('```'):
+            title = ''
+            if plain and plain[-1].startswith('**📊 Tabela consolidada'):
+                title = plain.pop()
+            flush_plain()
+            fence = [line]
+            index += 1
+            while index < len(lines):
+                fence.append(lines[index])
+                if lines[index].strip() == '```':
+                    break
+                index += 1
+            if not fence[-1].strip() == '```':
+                raise ValueError('unbalanced Discord code fence')
+            block = '\n'.join(([title] if title else []) + fence)
+            if len(block) > limit:
+                raise ValueError('atomic Discord table exceeds message limit')
+            blocks.append(block)
+        else:
+            plain.append(line)
+        index += 1
+    flush_plain()
+
     chunks: list[str] = []
-    current: list[str] = []
-    size = 0
-    in_fence = False
-    fence_opener = '```text'
-    for line in lines:
-        cost = len(line) + 1
-        close_cost = 4 if in_fence else 0
-        if current and size + cost + close_cost > split_limit:
-            if in_fence:
-                current.append('```')
-            chunks.append('\n'.join(current))
-            current = [fence_opener] if in_fence else []
-            size = len(fence_opener) + 1 if in_fence else 0
-        current.append(line)
-        size += cost
-        stripped = line.strip()
-        if stripped.startswith('```'):
-            if in_fence:
-                in_fence = False
-                fence_opener = '```text'
-            else:
-                in_fence = True
-                fence_opener = stripped
+    current = ''
+    for block in (item for item in blocks if item):
+        candidate = block if not current else current + '\n' + block
+        if len(candidate) <= limit:
+            current = candidate
+            continue
+        if current:
+            chunks.append(current)
+        if len(block) > limit:
+            raise ValueError('atomic Discord block exceeds message limit')
+        current = block
     if current:
-        if in_fence:
-            current.append('```')
-        chunks.append('\n'.join(current))
+        chunks.append(current)
     return chunks
 
 
@@ -1014,7 +1037,10 @@ def discord_request(method: str, path: str, body: dict[str, Any] | None = None) 
 
 
 def post_to_thread(thread_id: str, message: str, part_label: str | None = None) -> dict[str, Any]:
-    raw_chunks = split_messages(message, limit=1750 if part_label else 1900)
+    try:
+        raw_chunks = split_messages(message, limit=1900)
+    except ValueError as exc:
+        return {'ok': False, 'stage': 'discord_chunk_preflight', 'posted_count': 0, 'reason': str(exc)}
     if part_label and len(raw_chunks) > 1:
         total = len(raw_chunks)
         chunks = [f'**{part_label} • Parte {index}/{total}**\n{chunk}' for index, chunk in enumerate(raw_chunks, start=1)]

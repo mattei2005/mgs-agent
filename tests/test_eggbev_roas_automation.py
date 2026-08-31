@@ -798,6 +798,8 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(set(divider), {'─', ' '})
         self.assertIn('162·C001·D01/pg_5024', data)
         self.assertIn('03·0,92✅', data)
+        self.assertIn('🟡 -9,5%', data)
+        self.assertIn('🔴 -16,5%', data)
         self.assertIn('119', data)
         self.assertIn('$0,92', data)
         self.assertIn('2,34%', data)
@@ -805,6 +807,51 @@ class ReportingTests(unittest.TestCase):
         self.assertNotIn('│', table)
         with self.assertRaisesRegex(ValueError, 'preserve every canonical column'):
             cycle._aligned_table(list(expected), [rows[0][:-1]])
+
+    def test_roas_cycle_visual_signals_are_never_missing_from_table_rows(self):
+        campaigns = [{
+            'name': '163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP02',
+            'utm_campaign': 'pg_8348', 'sb_page_name': 'Aria Kensington',
+            'status': 'PAUSED', 'budget_usd': 45, 'spend': 17.67,
+            'cost_per_messaging_started': 1.77, 'purchase_roas': .36,
+            'ads_roas': '', 'roi_real': -49.5, 'roi_estimated': None,
+            'sb_leads': 216, 'rps': 726.16, 'cpm': 85.78, 'ctr': 10.19,
+            'action_label': 'OBSERVAR',
+        }]
+        row = cycle._dashboard_desktop_rows(campaigns, .4)[0]
+        self.assertEqual(row[0], '🔴⚪')
+        self.assertEqual(row[8], '⚪ N/D')
+        self.assertEqual(row[9], '🔴 -49,5%')
+        self.assertEqual(row[10], '⚪ N/D')
+        self.assertEqual(row[15], '👁️')
+
+    def test_latest_shape_never_splits_table_rows_away_from_their_header(self):
+        campaigns = []
+        for index in range(1, 20):
+            campaigns.append({
+                'name': f'{index:03d} - Full Campaign {index} - ENG - US - (pg_{index:05d}) C001',
+                'utm_campaign': f'pg_{index:05d}', 'sb_page_name': f'Page {index}',
+                'status': 'ACTIVE', 'budget_usd': 45, 'spend': index,
+                'cost_per_messaging_started': 1.5, 'purchase_roas': .3,
+                'ads_roas': '03·0,50✅ 02·0,30🛑 01·N/D⏸',
+                'roi_real': -20, 'roi_estimated': -10, 'sb_leads': index,
+                'rps': 700, 'cpm': 90, 'ctr': 8, 'action_label': 'MANTER',
+            })
+        run = {
+            'started_at_et': '2026-08-31T18:00:00-04:00', 'phase': 'PHASE_2',
+            'threshold': .4, 'mode': 'dry_run', 'meta_status': 'ok', 'smart_bidding_status': 'ok',
+            'source_gate': {'write_ready': False, 'reasons': ['fixture']},
+            'plan': {'counts': {'ads_considered': 57, 'pause_ads': 0, 'reactivate_ads': 0, 'budget_scale_candidates': 0}, 'decisions': [], 'budget_scale_candidates': []},
+            'reporting': {'campaigns': campaigns, 'campaign_count': 19}, 'writes': [],
+        }
+        chunks = common.split_messages(cycle.render_report(run), limit=1900)
+        self.assertGreater(len(chunks), 1)
+        for chunk in chunks:
+            self.assertLessEqual(len(chunk), 1900)
+            self.assertEqual(chunk.count('```') % 2, 0)
+            if '```text' in chunk:
+                self.assertIn('**📊 Tabela consolidada — visão desktop', chunk)
+                self.assertRegex(chunk, r'(?m)^R/E\s{2,}Camp')
 
     def test_roas_cycle_multipart_posts_repeat_title_and_keep_fences_balanced(self):
         report = '\n'.join([
@@ -1282,9 +1329,9 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
         }
         report = '\n'.join(daily.render_period(period))
-        chunks = common.split_messages(report, limit=500)
+        chunks = common.split_messages(report, limit=1900)
         self.assertGreater(len(chunks), 1)
-        self.assertTrue(all(len(chunk) <= 500 for chunk in chunks))
+        self.assertTrue(all(len(chunk) <= 1900 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
         joined = '\n'.join(chunks)
         for name in names:
