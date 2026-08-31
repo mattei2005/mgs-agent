@@ -1704,13 +1704,13 @@
       "agent": "ares",
       "id": "ares-cpv05-c04-c06-legacy-reuse-20260831",
       "objective": "Criar C04-C06 na conta 05 com mídia histórica C04-C48 priorizada por ROI Smart Bidding, mantendo copy/estrutura vigentes e lineage não zero.",
-      "state": "RECOVERY_PENDING: 9 assets históricos únicos foram selecionados por ROI SB, sanitizados, reservados e pre-stageados com 18 vídeos Meta associados. Manifest v3 2+1 foi selado. Bundle C04-C05 criou 2 campanhas, 2 adsets e 6 ads; dois ad copies transitórios foram recuperados sem replay dos quatro existentes e todos os seis nomes foram normalizados. Readback consolidado falhou apenas nos dois GETs de adset por code 17/2446079; campaign+ads readback passou. C06 ainda não foi escrita. Lease da conta permanece ativa e o mesmo request está agendado para retomar após cooldown.",
-      "next_step": "Retomar o mesmo request após cooldown; reconciliar C04-C05 somente por readback/lineage e executar o bundle final C06. Depois fazer readback 1x1x3, budget/UTM/start_time, registrar IDs na operação/inventário, armar first-delivery e CREATIVE_CUT_24H. Nunca repetir campaign/adset/ads já confirmados.",
+      "state": "RECOVERY_PENDING_C06: C04 e C05 estão COMPLETE no Engine v3 com campaign IDs 120248500821400046/120248500821410046, adsets 120248500822080046/120248500822060046 e seis ads reconciliados, normalizados e validados. O bundle C06 criou campaign 120248500979140046, adset 120248500979280046 e dois dos três ads (120248500981910046/120248500981800046); somente AD01 falhou com code 2 transitório. Nenhum objeto confirmado será repetido. Lease permanece ativa e a recuperação missing-only está agendada após cooldown.",
+      "next_step": "Retomar o mesmo request após cooldown: ler C06 por lineage, criar somente AD01 se ainda ausente, normalizar os três ads e fazer readback consolidado. Depois concluir inventário, assignments, first-delivery e CREATIVE_CUT_24H.",
       "source": "discord:thread:1542892971186454719; /root/.hermes/profiles/ares/work/cpv05-c04-c06-legacy-reuse-20260831/manifest.prevalidated.json; data/ares/meta-ads/engine-v3/state/checkpoints/cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3-2039876850230678.json",
       "thread_id": "1542892971186454719",
-      "updated_at": "2026-08-31T05:41:37+00:00"
+      "updated_at": "2026-08-31T05:47:12+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:41:37+00:00"
+  "updated_at": "2026-08-31T05:47:12+00:00"
 }
