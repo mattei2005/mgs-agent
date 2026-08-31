@@ -912,6 +912,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-daily-roi-columns-20260831",
+      "next_step": "Materializar join econômico exato campanha+UTM com freshness, atualizar renderer/contrato, testar e gerar leitura viva.",
+      "objective": "Adicionar ROI real e ROI estimado por campanha ao Diário v7, reduzir cabeçalhos de Página/UTM e forçar leitura Smart Bidding viva em toda geração.",
+      "source": "discord:1543926440238514176",
+      "state": "implementação autorizada por nicolas; renderer v7 atual validado; cron/post automático/writes permanecem desabilitados.",
+      "thread_id": "1541578596253175858",
+      "updated_at": "2026-08-31T13:34:26+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-daily-unified-report-20260831",
       "next_step": "Aguardar nova leitura Smart Bidding dentro de 120min; cron e post automático continuam desabilitados até autorização separada.",
       "objective": "Implementar e publicar visual unificado do Diário Eggbev com aliases SRC, economia por página e alertas de tracking, sem writes Meta.",
@@ -1762,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:27:26+00:00"
+  "updated_at": "2026-08-31T13:34:26+00:00"
 }

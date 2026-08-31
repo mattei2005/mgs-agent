@@ -101,7 +101,14 @@
         "budget_source": "campaign_updates",
         "configured_status": "ACTIVE",
         "start_local_time": "00:00",
-        "immediate_start_request_ids": ["eggbev-pg-5024-20260830-nicolas-01"],
+        "immediate_start_request_ids": [
+          "eggbev-pg-5024-20260830-nicolas-01",
+          "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01"
+        ],
+        "immediate_start_authorized_managers": ["Nicolas Holanda"],
+        "immediate_start_approval_scope": "Eggbev creation and clone requests explicitly instructed and finally approved by Nicolas; no separate Rodolfo approval is required",
+        "immediate_start_requires_request_allowlist": true,
+        "immediate_start_requires_final_ok": true,
         "pure_clone_allowed_update_keys": ["daily_budget"],
         "by_mode": {
           "from_zero_prestaged": {

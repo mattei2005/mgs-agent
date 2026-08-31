@@ -292,59 +292,97 @@ def _roi_percent(revenue: Any, investment: Any) -> float | None:
 
 
 def aggregate_economic_reporting(sb_bundle: dict[str, Any]) -> dict[str, Any]:
-    """Aggregate report-only economics by exact Meta campaign ID + UTM."""
-    if not sb_bundle.get('economic_ready'):
-        return {
-            'ready': False,
-            'reason': sb_bundle.get('economic_reason') or 'economic_source_not_ready',
-            'by_campaign_utm': {},
-            'freshness': dict(sb_bundle.get('economic_freshness') or {}),
-        }
-    grouped: dict[tuple[str, str], dict[str, Any]] = {}
-    utm_campaigns: dict[str, set[str]] = {}
-    for source in sb_bundle.get('economic_performance_rows') or []:
-        campaign_id = common.norm(source.get('CAMPAIGN_ID'))
-        utm = reporting.normalize_utm_campaign(source.get('UTM_ADGROUP'))
-        if not campaign_id or not utm:
+    """Mirror the Smart Bidding Messenger Pages economics by Page/UTM.
+
+    The dashboard calculates current ROI from REVENUE and INVESTIMENT returned
+    by /report/messenger.  For the current day only, it joins estimatedRevenue
+    by exact COMPANY_DOMAIN + UTM_CAMPAIGN.  These are Page/UTM metrics, not
+    campaign economics; campaign rows may display the same reconciled value.
+    """
+    report_rows = list(sb_bundle.get('target_report_rows') or [])
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for source in report_rows:
+        utm = reporting.normalize_utm_campaign(source.get('UTM_CAMPAIGN'))
+        if utm:
+            grouped.setdefault(utm, []).append(source)
+
+    report_date = common.norm(sb_bundle.get('report_date'))
+    if not report_date and report_rows:
+        report_date = common.norm(report_rows[0].get('DATE'))[:10]
+    estimate_applicable = report_date == common.now_et().date().isoformat()
+    estimated_index: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    if estimate_applicable:
+        for estimate in ((sb_bundle.get('economic_estimated') or {}).get('grouped') or []):
+            publisher = common.norm(estimate.get('publisher')).lower()
+            utm = reporting.normalize_utm_campaign(estimate.get('utm_adgroup'))
+            if publisher and utm:
+                estimated_index.setdefault((publisher, utm), []).append(estimate)
+
+    page_index = sb_bundle.get('page_index') or {}
+    by_utm: dict[str, dict[str, Any]] = {}
+    issues: dict[str, str] = {}
+    for utm, source_rows in sorted(grouped.items()):
+        if len(source_rows) != 1:
+            issues[utm] = 'messenger_pages_report_row_ambiguous'
             continue
-        key = (campaign_id, utm)
-        item = grouped.setdefault(key, {
-            'campaign_id': campaign_id, 'utm_campaign': utm,
-            'investment': 0.0, 'net_revenue': 0.0, 'estimated_revenue_direct': 0.0,
-            'sessions': 0.0, 'gam_impressions': 0.0, 'source_rows': 0,
-        })
-        item['investment'] += common.finite_float(source.get('INVESTIMENT')) or 0.0
-        item['net_revenue'] += common.finite_float(source.get('NET_REVENUE')) or 0.0
-        item['estimated_revenue_direct'] += common.finite_float(source.get('REVENUE_ESTIMATED')) or 0.0
-        item['sessions'] += common.finite_float(source.get('SESSIONS')) or 0.0
-        item['gam_impressions'] += common.finite_float(source.get('GAM_IMPRESSIONS')) or 0.0
-        item['source_rows'] += 1
-        utm_campaigns.setdefault(utm, set()).add(campaign_id)
-    estimated_by_utm = {
-        reporting.normalize_utm_campaign(row.get('utm_adgroup')): row
-        for row in ((sb_bundle.get('economic_estimated') or {}).get('grouped') or [])
-        if reporting.normalize_utm_campaign(row.get('utm_adgroup'))
-    }
-    for (_, utm), item in grouped.items():
-        estimate = estimated_by_utm.get(utm) if len(utm_campaigns.get(utm) or set()) == 1 else None
+        source = source_rows[0]
+        company = common.norm(source.get('COMPANY')).lower()
+        domain = common.norm(source.get('DOMAIN')).lower()
+        publisher = f'{company}_{domain}' if company and domain else ''
+        estimates = estimated_index.get((publisher, utm), []) if publisher else []
+        estimate = estimates[0] if len(estimates) == 1 else None
+        investment = common.finite_float(source.get('INVESTIMENT'))
+        revenue = common.finite_float(source.get('REVENUE'))
         estimated_revenue = common.finite_float((estimate or {}).get('estimatedRevenue'))
-        if estimated_revenue is None and item['estimated_revenue_direct'] > 0:
-            estimated_revenue = item['estimated_revenue_direct']
-        item.update({
-            'roi_real': _roi_percent(item['net_revenue'], item['investment']),
-            'roi_estimated': _roi_percent(estimated_revenue, item['investment']),
-            'rps': item['net_revenue'] * 1000.0 / item['sessions'] if item['sessions'] > 0 else None,
-            'block_cpm': item['net_revenue'] * 1000.0 / item['gam_impressions'] if item['gam_impressions'] > 0 else None,
+        if estimate_applicable and estimated_revenue is None:
+            estimated_revenue = common.finite_float(source.get('NET_REVENUE'))
+        sessions = common.finite_float(source.get('SESSIONS'))
+        gam_impressions = common.finite_float(source.get('GAM_IMPRESSIONS'))
+        pages = list(page_index.get(utm) or page_index.get(utm.lower()) or [])
+        page_ids = sorted({common.norm(row.get('FB_PAGE_ID')) for row in pages if common.norm(row.get('FB_PAGE_ID'))})
+        estimated_join_status = (
+            'not_applicable_historical_period' if not estimate_applicable else
+            'matched' if estimate is not None else
+            'ambiguous_publisher_utm' if len(estimates) > 1 else
+            'estimate_missing'
+        )
+        # The dashboard emits 0% when the current-day estimate is absent/zero.
+        roi_estimated = (
+            None if not estimate_applicable else
+            _roi_percent(estimated_revenue, investment) if estimated_revenue else 0.0
+        )
+        by_utm[utm] = {
+            'utm_campaign': utm,
+            'publisher': publisher or None,
+            'page_name': common.norm(source.get('PAGE_NAME')) or None,
+            'sb_page_id': page_ids[0] if len(page_ids) == 1 else None,
+            'page_mapping_issue': (
+                'sb_page_missing' if not pages else
+                'sb_page_duplicate_or_ambiguous' if len(pages) != 1 or len(page_ids) != 1 else
+                None
+            ),
+            'investment': investment,
+            'revenue': revenue,
+            'profit': revenue - investment if revenue is not None and investment is not None else None,
+            'roi_real': _roi_percent(revenue, investment),
             'estimated_revenue': estimated_revenue,
+            'roi_estimated': roi_estimated,
             'estimate_confidence': common.finite_float((estimate or {}).get('confidence')),
-            'estimated_join_status': 'matched' if estimate else ('ambiguous_utm' if len(utm_campaigns.get(utm) or set()) > 1 else 'estimate_missing'),
-            'source_route': 'Smart Bidding /report/performance_per_campaigns + /estimated/revenue/utm_adgroup',
+            'estimated_join_status': estimated_join_status,
+            'estimate_applicable': estimate_applicable,
+            'leads': common.finite_float(source.get('LEADS')),
+            'rps': revenue * 1000.0 / sessions if revenue is not None and sessions and sessions > 0 else None,
+            'block_cpm': revenue * 1000.0 / gam_impressions if revenue is not None and gam_impressions and gam_impressions > 0 else None,
+            'source_route': 'Smart Bidding Messenger Pages: /report/messenger + /estimated/revenue/utm_adgroup',
             'currency': 'USD',
-        })
+        }
     return {
-        'ready': True,
-        'reason': None,
-        'by_campaign_utm': grouped,
+        'ready': bool(by_utm),
+        'reason': None if by_utm else (sb_bundle.get('reason') or 'messenger_pages_rows_not_ready'),
+        'by_utm': by_utm,
+        'issues': issues,
+        'report_date': report_date,
+        'estimate_applicable': estimate_applicable,
         'freshness': dict(sb_bundle.get('economic_freshness') or {}),
     }
 
@@ -420,7 +458,21 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
                 'join_status': 'campaign_reporting_row_not_reconciled',
                 **(identities.get(campaign_id) or {}),
             })
-        economic = (economics.get('by_campaign_utm') or {}).get((campaign_id, reporting.normalize_utm_campaign(row.get('utm_campaign'))))
+        utm = reporting.normalize_utm_campaign(row.get('utm_campaign'))
+        economic = (economics.get('by_utm') or {}).get(utm)
+        economic_join_status = economics.get('issues', {}).get(utm) if utm else 'meta_utm_missing'
+        if economic and not economic_join_status:
+            if economic.get('page_mapping_issue'):
+                economic_join_status = economic.get('page_mapping_issue')
+            elif not common.norm(row.get('meta_page_id')):
+                economic_join_status = 'meta_page_id_missing'
+            elif common.norm(row.get('meta_page_id')) != common.norm(economic.get('sb_page_id')):
+                economic_join_status = 'meta_sb_page_id_mismatch'
+            else:
+                economic_join_status = 'matched'
+        elif not economic_join_status:
+            economic_join_status = economics.get('reason') or 'messenger_pages_utm_not_found'
+        visible_economic = economic if economic_join_status == 'matched' else {}
         emoji, action, action_detail = _campaign_action(decisions, campaign_id in scale_by_id)
         row.update({
             'action_emoji': emoji,
@@ -431,14 +483,22 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             'keep_ads': sum(1 for item in decisions if item.get('action') == 'KEEP'),
             'ads_roas': _ads_roas_visual(decisions),
             'decision_reasons': sorted({common.norm(item.get('reason')) for item in decisions if common.norm(item.get('reason'))}),
-            'roi_real': (economic or {}).get('roi_real'),
-            'roi_estimated': (economic or {}).get('roi_estimated'),
-            'block_cpm': (economic or {}).get('block_cpm'),
-            'rps': (economic or {}).get('rps') if economic else row.get('pricing_rps'),
-            'economic_join_status': 'matched' if economic else (economics.get('reason') or 'economic_campaign_utm_not_found'),
-            'economic_source': (economic or {}).get('source_route'),
+            'sb_page_id': (economic or {}).get('sb_page_id') or row.get('sb_page_id'),
+            'sb_page_name': (economic or {}).get('page_name') or row.get('sb_page_name'),
+            'sb_investment': visible_economic.get('investment'),
+            'sb_revenue': visible_economic.get('revenue'),
+            'sb_profit': visible_economic.get('profit'),
+            'sb_leads': visible_economic.get('leads'),
+            'roi_real': visible_economic.get('roi_real'),
+            'roi_estimated': visible_economic.get('roi_estimated'),
+            'block_cpm': visible_economic.get('block_cpm'),
+            'rps': visible_economic.get('rps'),
+            'economic_join_status': economic_join_status,
+            'economic_source': visible_economic.get('source_route'),
             'economic_freshness': dict(economics.get('freshness') or {}),
-            'estimate_confidence': (economic or {}).get('estimate_confidence'),
+            'estimate_confidence': visible_economic.get('estimate_confidence'),
+            'estimated_join_status': visible_economic.get('estimated_join_status'),
+            'estimated_revenue': visible_economic.get('estimated_revenue'),
             'scale': scale_by_id.get(campaign_id),
         })
         phase3 = phase3_by_id.get(campaign_id)
@@ -457,9 +517,9 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
         'smart_bidding_freshness': dict(sb.get('freshness') or {}),
         'smart_bidding_reason': sb.get('reason'),
         'metric_notes': {
-            'rps': 'RPS* report-only = Smart Bidding NET_REVENUE×1.000/SESSIONS.',
-            'roi': 'ROI real* = (NET_REVENUE−INVESTIMENT)/INVESTIMENT; ROI est.* uses estimatedRevenue with the same denominator.',
-            'block_cpm': 'CPM bloco* = Smart Bidding NET_REVENUE×1.000/GAM_IMPRESSIONS.',
+            'rps': 'RPS report-only mirrors Messenger Pages: REVENUE×1.000/SESSIONS.',
+            'roi': 'ROI atual mirrors Messenger Pages: (REVENUE−INVESTIMENT)/INVESTIMENT; current-day ROI est. uses exact publisher+UTM estimatedRevenue.',
+            'block_cpm': 'CPM bloco report-only mirrors Messenger Pages: REVENUE×1.000/GAM_IMPRESSIONS.',
         },
     }
 

@@ -415,6 +415,124 @@ def aggregate_sb(bundle: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def aggregate_campaign_economics(bundle: dict[str, Any], report_date: str, current_date: str) -> dict[str, Any]:
+    """Build fresh Smart Bidding economics by exact campaign ID + UTM."""
+    freshness = dict(bundle.get('economic_freshness') or {})
+    if not bundle.get('economic_ready'):
+        return {
+            'ready': False,
+            'reason': bundle.get('economic_reason') or 'economic_source_not_ready',
+            'by_campaign_utm': {},
+            'freshness': freshness,
+        }
+    grouped: dict[tuple[str, str], dict[str, Any]] = {}
+    utm_campaigns: dict[str, set[str]] = defaultdict(set)
+    for source in bundle.get('economic_performance_rows') or []:
+        campaign_id = common.norm(source.get('CAMPAIGN_ID'))
+        utm = normalize_utm_campaign(source.get('UTM_ADGROUP'))
+        if not campaign_id or not utm:
+            continue
+        key = (campaign_id, utm)
+        item = grouped.setdefault(key, {
+            'campaign_id': campaign_id,
+            'utm_campaign': utm,
+            'investment': 0.0,
+            'net_revenue': 0.0,
+            'estimated_revenue_direct': 0.0,
+            'has_investment': False,
+            'has_net_revenue': False,
+            'has_estimated_revenue_direct': False,
+            'source_rows': 0,
+        })
+        investment = common.finite_float(source.get('INVESTIMENT'))
+        net_revenue = common.finite_float(source.get('NET_REVENUE'))
+        estimated_direct = common.finite_float(source.get('REVENUE_ESTIMATED'))
+        if investment is not None:
+            item['investment'] += investment
+            item['has_investment'] = True
+        if net_revenue is not None:
+            item['net_revenue'] += net_revenue
+            item['has_net_revenue'] = True
+        if estimated_direct is not None:
+            item['estimated_revenue_direct'] += estimated_direct
+            item['has_estimated_revenue_direct'] = True
+        item['source_rows'] += 1
+        utm_campaigns[utm].add(campaign_id)
+
+    estimated_by_utm = {
+        normalize_utm_campaign(row.get('utm_adgroup')): row
+        for row in ((bundle.get('economic_estimated') or {}).get('grouped') or [])
+        if normalize_utm_campaign(row.get('utm_adgroup'))
+    }
+    for (_, utm), item in grouped.items():
+        # The live estimate endpoint is current-state only. Historical reports use
+        # the date-scoped REVENUE_ESTIMATED field from performance_per_campaigns.
+        estimate = (
+            estimated_by_utm.get(utm)
+            if report_date == current_date and len(utm_campaigns.get(utm) or set()) == 1
+            else None
+        )
+        estimated_revenue = common.finite_float((estimate or {}).get('estimatedRevenue'))
+        estimate_source = 'estimated/revenue/utm_adgroup'
+        if estimated_revenue is None and item['has_estimated_revenue_direct']:
+            estimated_revenue = item['estimated_revenue_direct']
+            estimate_source = 'performance_per_campaigns.REVENUE_ESTIMATED'
+        investment = item['investment'] if item['has_investment'] else None
+        net_revenue = item['net_revenue'] if item['has_net_revenue'] else None
+        item.update({
+            'roi_real': roi_percent(net_revenue, investment),
+            'roi_estimated': roi_percent(estimated_revenue, investment),
+            'estimated_revenue': estimated_revenue,
+            'estimate_confidence': common.finite_float((estimate or {}).get('confidence')),
+            'estimate_source': estimate_source if estimated_revenue is not None else None,
+            'source_route': 'Smart Bidding /report/performance_per_campaigns + /estimated/revenue/utm_adgroup',
+            'currency': 'USD',
+        })
+    return {
+        'ready': True,
+        'reason': None,
+        'by_campaign_utm': grouped,
+        'freshness': freshness,
+    }
+
+
+def merge_campaign_economics(meta: dict[str, Any], economics: dict[str, Any]) -> dict[str, Any]:
+    merged = dict(meta)
+    campaigns: list[dict[str, Any]] = []
+    counts: dict[str, int] = defaultdict(int)
+    by_key = economics.get('by_campaign_utm') or {}
+    for source in meta.get('campaigns') or []:
+        row = dict(source)
+        campaign_id = common.norm(row.get('campaign_id'))
+        utm = normalize_utm_campaign(row.get('utm_campaign'))
+        economic = by_key.get((campaign_id, utm)) if campaign_id and utm else None
+        if not economics.get('ready'):
+            status = common.norm(economics.get('reason')) or 'economic_source_not_ready'
+        elif not campaign_id:
+            status = 'campaign_id_missing'
+        elif not utm:
+            status = 'economic_utm_missing'
+        elif not economic:
+            status = 'economic_campaign_utm_not_found'
+        else:
+            status = 'matched'
+        row.update({
+            'roi_real': (economic or {}).get('roi_real'),
+            'roi_estimated': (economic or {}).get('roi_estimated'),
+            'economic_join_status': status,
+            'economic_source': (economic or {}).get('source_route'),
+            'estimated_revenue_source': (economic or {}).get('estimate_source'),
+            'estimate_confidence': (economic or {}).get('estimate_confidence'),
+        })
+        counts[status] += 1
+        campaigns.append(row)
+    merged['campaigns'] = campaigns
+    merged['economic_join_counts'] = dict(sorted(counts.items()))
+    merged['economic_join_matched'] = counts.get('matched', 0)
+    merged['economic_freshness'] = dict(economics.get('freshness') or {})
+    return merged
+
+
 def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str, Any]:
     merged = dict(meta)
     campaigns: list[dict[str, Any]] = []

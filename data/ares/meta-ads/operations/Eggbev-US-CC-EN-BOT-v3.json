@@ -136,7 +136,9 @@
   "delivery_policy": {
     "status": "ACTIVE",
     "start_time": "next_day_00:00_America/New_York",
-    "one_time_immediate_override": "eggbev-pg-5024-20260830-nicolas-01 only; refresh at execute to current ET plus five-minute Meta-safe buffer",
+    "immediate_start_authority": "By explicit Rodolfo decision on 2026-08-31, Nicolas may instruct and finally approve per-request immediate start without separate Rodolfo approval",
+    "immediate_start_controls": "default remains next-day 00:00 ET; every immediate request requires explicit Nicolas instruction, final per-request OK, request_id allowlisting, execute-time refresh to current ET plus a Meta-safe buffer, and exact readback; this does not authorize recurring scheduling",
+    "historical_one_time_override": "eggbev-pg-5024-20260830-nicolas-01 remains preserved as the first one-time immediate request",
     "canary_exception": "PAUSED only when the request explicitly says technical canary and separately approves later activation",
     "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success",
     "messenger_json_readback": "after every creation or creative rematerialization, GET every creative and confirm Page and url_tags match the sealed manifest, while parsed asset_feed_spec.additional_data.page_welcome_message matches the canonical fixed JSON file and template_name equals JSON-AGT before postprocess completes"

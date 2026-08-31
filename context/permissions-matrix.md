@@ -49,7 +49,7 @@ Criar agente novo                       Zeus/Rodolfo             Rodolfo.
 
 ### Exceção ativa por operação
 
-- **Eggbev-US-CC-EN-BOT / Eggbev-US-CC-EN-01-G006:** por decisão explícita de Rodolfo em 30/08/2026, Nicolas pode definir, reduzir ou aumentar budgets de campanha — inclusive a baseline de USD45 — sem nova aprovação do Rodolfo. Cada write continua exigindo instrução explícita do Nicolas ou política operacional aprovada, pré-leitura e readback Meta. A delegação não autoriza billing, `account_spend_limit`, credenciais nem escala automática sem regra própria aprovada.
+- **Eggbev-US-CC-EN-BOT / Eggbev-US-CC-EN-01-G006:** por decisões explícitas de Rodolfo em 30/08/2026 e 31/08/2026, Nicolas pode definir, reduzir ou aumentar budgets de campanha — inclusive a baseline de USD45 — e autorizar, por pedido, início imediato sem schedule para criação ou clone, sem nova aprovação do Rodolfo. Cada write continua exigindo instrução explícita do Nicolas ou política operacional aprovada, resumo final/OK do pedido, pré-leitura e readback Meta. O início padrão permanece no próximo dia às 00:00 ET; pedidos imediatos exigem request ID allowlisted e horário Meta-safe atualizado no execute. A delegação não autoriza billing, `account_spend_limit`, credenciais, automação recorrente nem escala automática sem regra própria aprovada.
 
 ## Segurança
 

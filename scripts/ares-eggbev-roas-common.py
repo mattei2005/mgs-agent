@@ -417,6 +417,7 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
         if utm:
             page_index[utm].append(row)
     return {
+        'report_date': report_date,
         'ready': bool(target_rows) and freshness.get('ready') is True,
         'reason': ('target_account_absent_from_smart_bidding_report' if not target_rows else freshness.get('reason')),
         'freshness': freshness,

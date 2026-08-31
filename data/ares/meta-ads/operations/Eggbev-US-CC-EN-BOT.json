@@ -76,7 +76,8 @@
       }
     ],
     "other_managers": [],
-    "budget_write_rule": "For Eggbev-US-CC-EN-BOT, Nicolas has standing authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval. The exact value remains an explicit manifest input. Every write requires Nicolas instruction or an approved operation policy, pre-read and Meta readback. Billing, account_spend_limit, credentials, and automatic scaling remain separately gated."
+    "budget_write_rule": "For Eggbev-US-CC-EN-BOT, Nicolas has standing authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval. The exact value remains an explicit manifest input. Every write requires Nicolas instruction or an approved operation policy, pre-read and Meta readback. Billing, account_spend_limit, credentials, and automatic scaling remain separately gated.",
+    "delivery_timing_write_rule": "By Rodolfo decision on 2026-08-31, Nicolas has standing authority to instruct and finally approve per-request immediate start without separate Rodolfo approval. The default remains next-day 00:00 ET. Immediate requests require explicit scope, final OK, request_id allowlisting, a Meta-safe execute-time start buffer, pre-read and exact readback. This does not authorize recurring scheduling or unrelated structural changes."
   },
   "ares_scope": {
     "included": [
@@ -295,13 +296,14 @@
           "status": "ACTIVE",
           "start_time": "next_day_00:00_America/New_York"
         },
+        "immediate_start_exception": "Nicolas may explicitly request and finally approve immediate start without separate Rodolfo approval; each request remains individually allowlisted and read back",
         "mandatory_report_sections": [
           "source campaign or campaigns",
           "duplication mode",
           "duplicate count and DUPnn names",
           "manager-selected budget and financial write gate",
           "preserved versus changed fields",
-          "ACTIVE next-day 00:00 ET delivery",
+          "ACTIVE delivery at next-day 00:00 ET by default, or the exact Nicolas-approved immediate timing",
           "manifest/preflight/readback readiness"
         ],
         "forbidden_default_report_topics": [
