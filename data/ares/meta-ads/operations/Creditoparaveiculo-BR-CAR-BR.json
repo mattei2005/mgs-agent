@@ -1447,7 +1447,11 @@
     ],
     "daily_alignment": "Unicode display-width aware; every metric row has an explicit signal and blank separator rows divide acquisition, SMS, totals and reconciliation",
     "daily_account_summary": {
-      "status": "canonical_default",
+      "status": "canonical_for_cpv_general_daily_only",
+      "scope": "CPV Diário Geral thread 1543826231831560343; account-specific Daily 05 and 13 show acquisition only and the redirect notice",
+      "superseded_account_specific_sms_attribution_at": "2026-08-31",
+      "superseded_by": "Rodolfo Mattei",
+      "supersession_source": "discord:thread:1543778490610884679",
       "approved_by": "Rodolfo Mattei",
       "approved_at": "2026-08-24T19:02:37-04:00",
       "source_thread_id": "1541568072048054322",
@@ -1641,6 +1645,27 @@
         "requested_at": "2026-08-21",
         "source_thread_id": "1540379584124555334"
       }
+    },
+    "general_daily": {
+      "internal_job_id": "d8663df2fa30",
+      "name": "Creditoparaveiculo CPV Diario Geral",
+      "scheduler": "hourly minute 12; physical offset only, logical timezone gates unchanged",
+      "timezone_gate": [
+        "07:00 previous closed day",
+        "08:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "20:00 current day America/Sao_Paulo"
+      ],
+      "script": "creditoparaveiculo-general-daily.sh",
+      "runtime": "creditoparaveiculo-general-daily.py",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1543826231831560343",
+      "enabled": true,
+      "scope": "Meta/SB acquisition totals from accounts 13 and 05 plus SMS G006 exactly once",
+      "account_specific_sms_policy": "Daily 05 and Daily 13 show no SMS values; both point to CPV Diário Geral"
     },
     "intraday": {
       "internal_job_id": "69dfca2b9719",
@@ -2414,11 +2439,29 @@
       {
         "key": "daily",
         "title": "Creditoparaveiculo 13 G006 Diario",
-        "purpose": "slot-based spend, acquisition revenue, SMS block, ROI acquisition/total and anomalies: previous closed day at 07:00; current day at 08:00/12:00/14:00/16:00/20:00",
+        "purpose": "slot-based spend and acquisition revenue/ROI for account 13 only; SMS values are excluded and redirected to CPV Diário Geral: previous closed day at 07:00; current day at 08:00/12:00/14:00/16:00/20:00",
         "delivery": "recurring script-only report",
         "thread_id": "1539831487719800872",
         "schedule": "07:00 America/Sao_Paulo for the previous closed day; 08:00, 12:00, 14:00, 16:00 and 20:00 for the current day through dispatch time",
         "period": "slot-dependent: previous closed day only at 07:00; current day at 08:00/12:00/14:00/16:00/20:00"
+      },
+      {
+        "key": "general_daily",
+        "title": "CPV Diario Geral",
+        "purpose": "operation-wide consolidation of account 13 + account 05 acquisition plus SMS G006 exactly once",
+        "delivery": "recurring script-only report",
+        "thread_id": "1543826231831560343",
+        "schedule": "07:00 America/Sao_Paulo for previous closed day; 08:00, 12:00, 14:00, 16:00 and 20:00 for current day",
+        "member_sync_readback": {
+          "verified": true,
+          "http_status": 200,
+          "required_member_ids": [
+            "1496296175014252634",
+            "344196393512075265",
+            "1055570806945620030",
+            "321263240782807040"
+          ]
+        }
       },
       {
         "key": "intraday",

@@ -11,8 +11,8 @@ ACCOUNT05 = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account
 
 def load(path: Path, name: str):
     spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
     assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 

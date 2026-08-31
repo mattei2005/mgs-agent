@@ -25,12 +25,12 @@ cycle = load('eggbev_cycle_test', BASE / 'scripts/ares-eggbev-roas-cycle.py')
 ET = ZoneInfo('America/New_York')
 
 
-def active_ad(ad_id='a1', campaign_id='c1', effective='ACTIVE', configured='ACTIVE', adset_status='ACTIVE'):
+def active_ad(ad_id='a1', campaign_id='c1', effective='ACTIVE', configured='ACTIVE', adset_status='ACTIVE', campaign_start=None):
     return {
         'id': ad_id, 'name': f'Ad {ad_id}', 'status': configured,
         'effective_status': effective, 'configured_status': configured,
-        'campaign': {'id': campaign_id, 'name': f'Campaign {campaign_id}', 'status': 'ACTIVE', 'effective_status': 'ACTIVE'},
-        'adset': {'id': 's1', 'name': 'AdG1', 'status': adset_status, 'effective_status': adset_status},
+        'campaign': {'id': campaign_id, 'name': f'Campaign {campaign_id}', 'status': 'ACTIVE', 'configured_status': 'ACTIVE', 'effective_status': 'ACTIVE', 'start_time': campaign_start},
+        'adset': {'id': 's1', 'name': 'AdG1', 'status': adset_status, 'configured_status': adset_status, 'effective_status': adset_status},
     }
 
 
@@ -42,11 +42,15 @@ class PhaseTests(unittest.TestCase):
     def at(self, hour, minute=0):
         return dt.datetime(2026, 8, 29, hour, minute, tzinfo=ET)
 
-    def test_midnight_is_reset(self):
-        self.assertEqual(common.phase_for_time(self.at(0)), 'RESET')
+    def test_midnight_is_phase3_recycling(self):
+        self.assertEqual(common.phase_for_time(self.at(0)), 'PHASE_3')
+
+    def test_05_and_06_are_observation_only(self):
+        for hour in (5, 6):
+            self.assertEqual(common.phase_for_time(self.at(hour)), 'OBSERVE')
 
     def test_phase_1_times(self):
-        for hour in (5, 6, 8, 10, 12):
+        for hour in (8, 10, 12):
             self.assertEqual(common.phase_for_time(self.at(hour)), 'PHASE_1')
 
     def test_phase_2_times(self):
@@ -77,8 +81,8 @@ class PhaseTests(unittest.TestCase):
 
 
 class DecisionTests(unittest.TestCase):
-    def decide(self, active=None, tracked=None, insights=None, state=None, phase='PHASE_1'):
-        return common.decide_cycle(active or [], tracked or [], insights or {}, state or common.default_state(dt.date(2026, 8, 29)), phase, 0.40)
+    def decide(self, active=None, tracked=None, insights=None, state=None, phase='PHASE_1', cycle_at=None):
+        return common.decide_cycle(active or [], tracked or [], insights or {}, state or common.default_state(dt.date(2026, 8, 29)), phase, 0.40, cycle_at)
 
     def test_phase1_pauses_below_threshold_after_spend_gate(self):
         result = self.decide([active_ad()], insights={'a1': metric(2.01, 0.39)})
@@ -104,6 +108,25 @@ class DecisionTests(unittest.TestCase):
         result = common.decide_cycle([active_ad()], [], {}, common.default_state(dt.date(2026, 8, 29)), 'PHASE_2', 0.40)
         self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
         self.assertEqual(result['decisions'][0]['reason'], 'roas_below_or_nd')
+
+    def test_night_cycle_excludes_campaign_scheduled_for_next_midnight(self):
+        result = self.decide(
+            [active_ad(campaign_start='2026-08-30T00:00:00-04:00')],
+            insights={}, phase='PHASE_2', cycle_at=dt.datetime(2026, 8, 29, 20, 0, tzinfo=ET),
+        )
+        self.assertEqual(result['decisions'][0]['action'], 'KEEP')
+        self.assertEqual(result['decisions'][0]['reason'], 'night_excluded_campaign_scheduled_for_next_day')
+
+    def test_night_cycle_still_cuts_nd_from_campaign_that_ran_that_day(self):
+        result = self.decide(
+            [active_ad(campaign_start='2026-08-29T00:00:00-04:00')],
+            insights={}, phase='PHASE_2', cycle_at=dt.datetime(2026, 8, 29, 22, 0, tzinfo=ET),
+        )
+        self.assertEqual(result['decisions'][0]['action'], 'PAUSE_AD')
+
+    def test_observation_before_08_never_cuts(self):
+        result = self.decide([active_ad()], insights={'a1': metric(50, None)}, phase='OBSERVE')
+        self.assertEqual(result['decisions'][0]['action'], 'KEEP')
 
     def test_exact_threshold_never_changes_state(self):
         result = self.decide([active_ad()], insights={'a1': metric(10.0, 0.40)}, phase='PHASE_2')
@@ -244,6 +267,131 @@ class SourceGateTests(unittest.TestCase):
         result = common.evaluate_sb_freshness([{'DATE': '2026-08-29'}], dt.datetime(2026, 8, 29, 14, 0, tzinfo=ET), 2.0)
         self.assertFalse(result['ready'])
         self.assertEqual(result['reason'], 'smart_bidding_freshness_unverifiable')
+
+
+class Phase3RecyclingTests(unittest.TestCase):
+    def fixture(self, roas=.38, spend=10, leads=5000, campaign_status='PAUSED', adset_status='PAUSED', ad_status='PAUSED', campaign_id='c1', ad_id='a1', adset_id='s1'):
+        ad = {
+            'id': ad_id, 'name': 'AD 01 - Winner', 'status': ad_status,
+            'configured_status': ad_status, 'effective_status': ad_status,
+            'campaign': {
+                'id': campaign_id, 'name': '162 - Page One - ENG - US - (pg_12345) C001',
+                'status': campaign_status, 'configured_status': campaign_status,
+                'effective_status': campaign_status, 'start_time': '2026-08-29T00:00:00-04:00',
+            },
+            'adset': {'id': adset_id, 'name': 'AdG1', 'status': adset_status, 'configured_status': adset_status, 'effective_status': adset_status},
+            'creative': {'url_tags': 'utm_campaign=pg_12345', 'object_story_spec': {'page_id': 'page1'}},
+        }
+        meta = {
+            'phase3_ads': [ad],
+            'phase3_adsets': [ad['adset']],
+            'phase3_campaigns': [{
+                'id': campaign_id, 'name': ad['campaign']['name'], 'status': campaign_status,
+                'configured_status': campaign_status, 'effective_status': campaign_status,
+                'daily_budget': '5000', 'start_time': '2026-08-29T00:00:00-04:00',
+            }],
+            'insights_by_ad': {ad_id: metric(spend, roas)},
+            'insights': [{'ad_id': ad_id, 'campaign_id': campaign_id, 'spend': str(spend)}],
+            'native_rules': {'conflict': {'enabled': False}},
+            'phase3_object_errors': [],
+        }
+        sb = {
+            'page_rows': [{'UTM_CAMPAIGN': 'pg_12345'}],
+            'page_index': {'pg_12345': [{'UTM_CAMPAIGN': 'pg_12345', 'FB_PAGE_ID': 'page1', 'PAGE_NAME': 'Page One', 'LEADS': leads}]},
+            'economic_ready': True,
+            'economic_freshness': {'ready': True, 'age_minutes': 30, 'current_fill_time': '2026-08-30T23:30:00-04:00'},
+        }
+        return meta, sb
+
+    def plan(self, **kwargs):
+        meta, sb = self.fixture(**kwargs)
+        state = common.default_state(dt.date(2026, 8, 30))
+        return common.plan_phase3_recycling(meta, sb, state, '2026-08-29', .38, chooser=lambda values: 4500)
+
+    def test_roas_0_38_is_inclusive_and_reactivates_manual_pauses(self):
+        plan = self.plan(roas=.38)
+        self.assertEqual(plan['decisions'][0]['action'], 'REACTIVATE_AD')
+        self.assertEqual(plan['campaign_actions'][0]['action'], 'ACTIVATE_CAMPAIGN')
+        self.assertEqual(plan['adset_actions'][0]['action'], 'ACTIVATE_ADSET')
+        self.assertEqual(plan['budget_assignments_minor'], {'c1': 4500})
+
+    def test_roas_below_0_38_is_not_recycled(self):
+        plan = self.plan(roas=.3799)
+        self.assertEqual(plan['decisions'], [])
+        self.assertEqual(plan['campaign_actions'], [])
+
+    def test_exactly_5000_leads_is_allowed_but_over_5000_is_excluded(self):
+        allowed = self.plan(leads=5000)
+        blocked = self.plan(leads=5000.01)
+        self.assertEqual(len(allowed['campaign_actions']), 1)
+        self.assertEqual(blocked['campaign_actions'], [])
+        self.assertEqual(blocked['excluded_campaigns'][0]['reason'], 'page_leads_strictly_over_5000')
+
+    def test_zero_spend_never_enters_previous_day_recycling(self):
+        plan = self.plan(spend=0, roas=9)
+        self.assertEqual(plan['decisions'], [])
+
+    def test_random_budget_assignment_is_only_45_or_65_and_reused_on_retry(self):
+        state = common.default_state(dt.date(2026, 8, 30))
+        choices = iter((4500, 6500))
+        first = common.materialize_phase3_budget_assignment(state, '2026-08-29', ['c1', 'c2'], chooser=lambda values: next(choices))
+        second = common.materialize_phase3_budget_assignment(state, '2026-08-29', ['c1', 'c2'], chooser=lambda values: self.fail('retry must reuse persisted choice'))
+        self.assertEqual(first, {'c1': 4500, 'c2': 6500})
+        self.assertEqual(second, first)
+        self.assertTrue(set(first.values()) <= {4500, 6500})
+
+    def test_phase3_source_gate_uses_estimated_delay_and_allows_manual_pause_override(self):
+        meta, sb = self.fixture()
+        meta['manual_review'] = [{'kind': 'ad', 'object_id': 'a1'}]
+        gate = common.source_gate(meta, sb, 'PHASE_3')
+        self.assertTrue(gate['write_ready'])
+        self.assertEqual(gate['freshness_evidence'], 'Smart Bidding /estimated/delay')
+
+    def test_execute_phase3_orders_budget_campaign_adset_then_ad(self):
+        plan = self.plan()
+        state = common.default_state(dt.date(2026, 8, 30))
+        state['paused_ads']['a1'] = {'reason': 'roas_cycle'}
+        run = {'writes': [], 'audit_path': '/tmp/phase3-test.json'}
+        order = []
+
+        def budget(*args):
+            order.append(('budget', args[2]))
+            return {'object_id': args[2], 'ok': True, 'stage': 'confirmed', 'after': {'daily_budget': args[3]}}
+
+        def status(*args):
+            order.append(('status', args[2]))
+            return {'object_id': args[2], 'ok': True, 'stage': 'confirmed', 'after': {'status': args[3]}}
+
+        with mock.patch.object(cycle.common, 'reconcile_campaign_budget_write', side_effect=budget), mock.patch.object(cycle.common, 'reconcile_status_write', side_effect=status), mock.patch.object(cycle.common, 'atomic_json'):
+            ok = cycle.execute_phase3_plan(object(), 'token', plan, state, run)
+        self.assertTrue(ok)
+        self.assertEqual(order, [('budget', 'c1'), ('status', 'c1'), ('status', 's1'), ('status', 'a1')])
+        self.assertNotIn('a1', state['paused_ads'])
+
+    def test_phase3_report_is_explicit_and_keeps_frozen_quality_table(self):
+        campaign = {
+            'campaign_id': 'c1', 'name': '162 - Page One - ENG - US - (pg_12345) C001',
+            'utm_campaign': 'pg_12345', 'status': 'ACTIVE', 'budget_usd': 45,
+            'spend': 10, 'cost_per_messaging_started': 2, 'purchase_roas': .38,
+            'ads_roas': '01·0,38♻️', 'roi_real': 1, 'roi_estimated': 2,
+            'sb_page_name': 'Page One', 'sb_leads': 5000, 'rps': 5, 'cpm': 20, 'ctr': 2,
+            'pause_ads': 0, 'reactivate_ads': 1, 'action_label': 'REATIVAR',
+        }
+        run = {
+            'started_at_et': '2026-08-30T00:00:00-04:00', 'phase': 'PHASE_3', 'threshold': .38,
+            'mode': 'controlled_write', 'meta_status': 'ok', 'smart_bidding_status': 'ok',
+            'source_gate': {'write_ready': True, 'reasons': []},
+            'plan': {'source_date': '2026-08-29', 'counts': {'ads_considered': 1, 'reactivate_ads': 1, 'reactivate_adsets': 1, 'reactivate_campaigns': 1, 'budget_updates': 1, 'excluded_campaigns': 0}, 'decisions': [{'action': 'REACTIVATE_AD'}], 'budget_scale_candidates': []},
+            'reporting': {'campaigns': [campaign], 'campaign_count': 1}, 'writes': [],
+        }
+        rendered = cycle.render_report(run)
+        self.assertIn('Fase 3 — Reativação/Reciclagem', rendered)
+        self.assertIn('Purchase ROAS ≥ 0,38', rendered)
+        self.assertIn('budget aleatório US$45/US$65', rendered)
+        self.assertIn('Ação da Fase 3', rendered)
+        for label in cycle.CANONICAL_DESKTOP_HEADERS:
+            self.assertIn(label, rendered)
+        self.assertIn('01·0,38♻️', rendered)
 
 
 class ScalingTests(unittest.TestCase):

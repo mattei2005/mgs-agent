@@ -358,16 +358,16 @@
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "fc0759b8de3c38f1719298c462a11b1134f76031ffdb18fade1b2631ef73c3b1",
+          "active_prompt_sha256": "bbd221005b3ef3537af56aad7ea1769f8700dd7cfd4cdbee0472983cae9cbc7d",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
-          "tests_passed": 73,
+          "tests_passed": 49,
           "renderer_complete_for_read_only": true,
           "renderer_version": "single_unified_table_v4",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
-          "audit": "data/ares/meta-ads/audit/eggbev/daily-renderer-v2-review-20260829T190830-0400.json"
+          "audit": "data/ares/meta-ads/audit/eggbev/daily-report/daily-d1-anomaly-design-20260831.json"
         }
       },
       "page_lead_guardrail": {
@@ -542,7 +542,7 @@
     ]
   },
   "daily_reporting_policy": {
-    "status": "runner_built_and_live_read_only_verified_no_cron_no_post",
+    "status": "d1_0800_single_table_anomaly_detector_live_read_only_verified_no_cron_no_post",
     "thread_id": "1541578596253175858",
     "timezone": "America/New_York",
     "mode": "read_only",
@@ -716,6 +716,26 @@
       "post_enabled": false,
       "cron_enabled": false,
       "blocked_reason": "08:00 Daily design is approved, but posting and cron await review of a live dry-run and separate explicit enablement by Nicolas"
+    },
+    "latest_live_dry_run": {
+      "at_et": "2026-08-30T08:00:00-04:00",
+      "mode": "read_only_no_baseline_write",
+      "periods": [
+        "D-1 2026-08-29",
+        "same-clock current-day 08:00 2026-08-30"
+      ],
+      "visible_tables": 1,
+      "d1_campaigns_that_ran": 1,
+      "current_active_without_d1_insight_excluded": 14,
+      "same_clock_campaigns_audit_only": 16,
+      "smart_bidding_anomaly_status": "source_unavailable_smart_bidding_freshness_unverifiable",
+      "visible_behavior": "two short coverage alerts; no invented revenue and no performance drop claim",
+      "writes_attempted": 0,
+      "post_used": false,
+      "cron_changed": false,
+      "baseline_snapshots_written": 0,
+      "audit": "data/ares/meta-ads/audit/eggbev/daily-report/run-20260830T080000-0400.json",
+      "note": "evidence only; never reuse campaign counts or metrics as current truth"
     }
   },
   "campaign_creation_policy": {
@@ -1068,20 +1088,27 @@
     },
     "formation_window": {
       "from": "00:00",
-      "to_exclusive": "05:00",
+      "to_exclusive": "08:00",
       "cuts": false,
-      "reactivations": false
+      "reactivations": false,
+      "report_only_times": [
+        "05:00",
+        "06:00"
+      ],
+      "manager_decision": "Phase 3 winners must spend through the early morning; normal cuts start at 08:00 ET."
     },
     "phase_1": {
       "times": [
-        "05:00",
-        "06:00",
         "08:00",
         "10:00",
         "12:00"
       ],
       "cut": "Amount spent > USD 2.00 AND Purchase ROAS < threshold",
-      "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
+      "reactivate": "Ares-paused ad with Purchase ROAS > threshold",
+      "observation_only_times": [
+        "05:00",
+        "06:00"
+      ]
     },
     "phase_2": {
       "times": [
@@ -1094,9 +1121,20 @@
         "23:00"
       ],
       "cut": "Purchase ROAS < threshold; no spend gate",
-      "reactivate": "Ares-paused ad with Purchase ROAS > threshold"
+      "reactivate": "Ares-paused ad with Purchase ROAS > threshold",
+      "night_no_roas_scope": {
+        "times": [
+          "20:00",
+          "22:00",
+          "23:00"
+        ],
+        "eligible": "ads from campaigns that actually ran on the evaluated ET day",
+        "excluded": "campaigns scheduled to start the next day at 00:00 ET",
+        "evidence": "campaign start_time plus current-day Meta delivery/insight context",
+        "scope": "ad status only; never pause campaign or ad set"
+      }
     },
-    "after_23_until_midnight": "no_new_cut_or_reactivation",
+    "after_23_until_midnight": "no_new_phase2_action; Phase 3 runs inside the existing 00:00 job against the previous closed ET day",
     "null_purchase_roas": {
       "valid_source_empty_metric": "treat as cut-eligible and report N/D",
       "missing_entire_ad_insight_row_in_phase_2": "treat as N/D and cut; explicitly approved by Nicolas on 2026-08-29",
@@ -1662,21 +1700,28 @@
       "post_enabled": true,
       "cron_enabled": true,
       "execution_scope": [
-        "pause_bad_ads",
-        "reactivate_only_ares_paused_recovered_ads",
-        "never_change_campaign_or_adset_status",
-        "post_every_approved_cycle"
+        "phase1_phase2_pause_and_reactivate_ads_only",
+        "night_20_22_23_excludes_campaigns_scheduled_for_next_day_0000",
+        "phase3_activate_previous_day_winner_campaigns_adsets_ads_including_manual_pauses",
+        "phase3_random_campaign_budget_usd_45_or_65",
+        "never_restore_deleted_or_archived_objects",
+        "post_every_approved_cycle_and_explicit_phase3_report"
       ],
       "fail_closed_gates": [
         "approved_cycle_time",
-        "Meta live readback",
-        "Smart Bidding target identity and freshness",
+        "Meta live pre-read and post-write GET",
+        "exact prior-day spend and ad Purchase ROAS",
+        "exact UTM_CAMPAIGN plus FB_PAGE_ID",
+        "Smart Bidding /estimated/delay freshness <=120 minutes",
+        "strict LEADS >5000 exclusion",
         "native rule conflict absent",
-        "manual intervention absent",
-        "pre-read and post-write readback"
+        "persisted idempotent random budget assignment"
       ],
       "budget_write_enabled": false,
-      "budget_write_blocked_reason": "Automatic ROAS scaling remains disabled until Nicolas explicitly approves the automatic write policy and any required envelope; manual Eggbev budget writes requested by Nicolas are authorized without separate Rodolfo approval."
+      "budget_write_blocked_reason": "Automatic ROAS scaling remains disabled until Nicolas explicitly approves the automatic write policy and any required envelope; manual Eggbev budget writes requested by Nicolas are authorized without separate Rodolfo approval.",
+      "phase3_budget_write_enabled": true,
+      "phase3_parent_status_write_enabled": true,
+      "phase3_manual_pause_override_authorized": true
     },
     "native_rule_transition": {
       "rule_name": "ADS ZERO RESULTS",
@@ -1688,6 +1733,77 @@
       "latest_live_status": "DISABLED",
       "latest_live_readback_at_et": "2026-08-29T17:08:20-04:00",
       "changed_by_ares_in_this_update": false
+    },
+    "phase_3_recycling": {
+      "status": "ACTIVE_APPROVED",
+      "name": "Fase 3 — Reativação/Reciclagem",
+      "time": "00:00",
+      "timezone": "America/New_York",
+      "ordered_inside_existing_midnight_job": true,
+      "source_period": "previous closed ET calendar day",
+      "campaign_eligibility": "previous-day campaign spend > 0 and at least one ad with previous-day spend > 0 and Meta Purchase ROAS >= 0.38",
+      "activation_roas_minimum": 0.38,
+      "activation_roas_operator": ">=",
+      "activation_scope": {
+        "campaign": "ensure ACTIVE even when manually paused by Nicolas or another operator",
+        "adset": "ensure ACTIVE even when manually paused by Nicolas or another operator",
+        "ad": "ensure ACTIVE for every eligible previous-day winner even when manually paused by Nicolas or another operator",
+        "deleted_or_archived": "never restore"
+      },
+      "manual_pause_override_authorized": true,
+      "page_leads_exclusion": {
+        "metric": "LEADS",
+        "operator": ">",
+        "threshold": 5000,
+        "exactly_5000": "eligible",
+        "strictly_over_5000": "exclude campaign from Phase 3",
+        "mapping": "exact UTM_CAMPAIGN plus FB_PAGE_ID",
+        "freshness": "Smart Bidding /estimated/delay currentFillTime present and totalMinutes <= 120; fail closed otherwise"
+      },
+      "campaign_budget": {
+        "level": "campaign CBO",
+        "choices_minor_usd": [
+          4500,
+          6500
+        ],
+        "choices_usd": [
+          45,
+          65
+        ],
+        "selection": "random per eligible campaign at decision time",
+        "idempotency": "persist source-date+campaign assignment before writes and reuse it on every retry/recovery",
+        "write_enabled": true,
+        "authority": "Nicolas permanent Eggbev budget delegation",
+        "pre_read_and_get_readback_required": true
+      },
+      "write_order": [
+        "persist random budget plan",
+        "set/readback campaign budget",
+        "activate/readback campaign",
+        "activate/readback ad set",
+        "activate/readback ad"
+      ],
+      "normal_cut_resume_at": "08:00",
+      "reporting": {
+        "post_when_ads_activated": true,
+        "post_every_phase3_run": true,
+        "thread_id": "1541578606076231750",
+        "title_must_identify_phase3": true,
+        "layout": "canonical full spaced v22 table, all columns, Ads descending ROAS, pagination without omission",
+        "required_summary": [
+          "source date",
+          "ROAS >= 0.38",
+          "reactivated ads",
+          "reactivated ad sets",
+          "reactivated campaigns",
+          "USD45/USD65 budgets",
+          "LEADS exclusions",
+          "write readbacks"
+        ]
+      },
+      "requested_by": "Nicolas Holanda",
+      "source": "discord:thread:1541578606076231750",
+      "approved_at_et": "2026-08-30T23:49:15-04:00"
     }
   },
   "campaign_scaling_policy": {
@@ -2342,5 +2458,5 @@
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "authorization_source": "discord:thread:1541581677602545825",
-  "updated_at": "2026-08-29T19:31:11-04:00"
+  "updated_at": "2026-08-30T23:49:15-04:00"
 }

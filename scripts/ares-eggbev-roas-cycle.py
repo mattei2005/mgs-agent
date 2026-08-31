@@ -366,11 +366,12 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             decisions_by_campaign[campaign_id] = []
             ordered_ids.append(campaign_id)
         decisions_by_campaign[campaign_id].append(decision)
-    for merged_row in merged.get('campaigns') or []:
-        campaign_id = common.norm(merged_row.get('campaign_id'))
-        if campaign_id and campaign_id not in decisions_by_campaign:
-            decisions_by_campaign[campaign_id] = []
-            ordered_ids.append(campaign_id)
+    if common.norm(plan.get('phase')) != 'PHASE_3':
+        for merged_row in merged.get('campaigns') or []:
+            campaign_id = common.norm(merged_row.get('campaign_id'))
+            if campaign_id and campaign_id not in decisions_by_campaign:
+                decisions_by_campaign[campaign_id] = []
+                ordered_ids.append(campaign_id)
     scale_by_id = {
         common.norm(row.get('campaign_id')): row
         for row in plan.get('budget_scale_candidates') or []
@@ -1178,19 +1179,39 @@ def main() -> int:
                 'source_gate': gate, 'plan': plan, 'reporting': campaign_reporting,
             })
             common.atomic_json(audit_path, run)
-            if args.apply and not gate.get('write_ready'):
+            action_phase = phase in {'PHASE_1', 'PHASE_2', 'PHASE_3'}
+            if args.apply and action_phase and not gate.get('write_ready'):
                 report = render_report(run)
-                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, '⚔️ Corte & ROAS')
+                label = '♻️ Fase 3 — Reativação' if phase == 'PHASE_3' else '⚔️ Corte & ROAS'
+                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, label)
                 raise RuntimeError('source/native-rule gate blocked controlled writes')
+            phase3_execution_ok = True
             if args.apply and phase in {'PHASE_1', 'PHASE_2'}:
                 execute_plan(meta, token, plan, state, run)
                 state['last_cycle'] = {'run_id': run_id, 'at_et': started.isoformat(), 'phase': phase}
                 common.atomic_json(common.ROAS_STATE_PATH, state)
+            elif args.apply and phase == 'PHASE_3':
+                phase3_execution_ok = execute_phase3_plan(meta, token, plan, state, run)
+                state['last_cycle'] = {'run_id': run_id, 'at_et': started.isoformat(), 'phase': phase, 'source_date': plan.get('source_date')}
+                common.atomic_json(common.ROAS_STATE_PATH, state)
+                # Exact post-write object readback feeds the human report.
+                meta_bundle = common.fetch_phase3_meta_objects(meta, token, meta_bundle)
+                run['reporting'] = build_campaign_reporting(meta_bundle, sb_bundle, plan)
+                run['phase3_post_readback'] = {
+                    'campaigns': len(meta_bundle.get('phase3_campaigns') or []),
+                    'adsets': len(meta_bundle.get('phase3_adsets') or []),
+                    'ads': len(meta_bundle.get('phase3_ads') or []),
+                    'errors': meta_bundle.get('phase3_object_errors') or [],
+                }
+                common.atomic_json(audit_path, run)
             report = render_report(run)
             if args.post_report:
-                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, '⚔️ Corte & ROAS')
+                label = '♻️ Fase 3 — Reativação' if phase == 'PHASE_3' else '⚔️ Corte & ROAS'
+                run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578606076231750', report, label)
                 if not run['delivery'].get('ok'):
                     raise RuntimeError('Discord cycle report delivery/readback failed')
+            if args.apply and phase == 'PHASE_3' and not phase3_execution_ok:
+                raise RuntimeError('Phase 3 had unconfirmed writes; report delivered with exact failure readback')
             run['ok'] = True
             run['finished_at_et'] = common.now_et().isoformat()
             common.atomic_json(audit_path, run)
