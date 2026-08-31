@@ -623,86 +623,35 @@ def build_issue_alert(
             code = ",".join(str(value) for value in row.get("issues") or [])
         codes[code or "unknown_mapping_issue"] += 1
     lines = [
-        "```text",
-        "⚠️ LIMITE DE LEADS — ERRO DE MAPEAMENTO/FRESHNESS",
-        "",
-        f"Conta: {account_alias}",
-        f"Horário: {run_at.strftime('%d/%m/%Y %H:%M')} America/New_York",
-        f"Campanhas/páginas bloqueadas: {len(issues)}",
-        "Ação Meta nesses itens: nenhuma (fail-closed)",
-        "",
-        "Motivos:",
-    ]
-    for code, count in sorted(codes.items()):
-        lines.append(f"- {code}: {count}")
-    lines += [
-        "",
-        "FRESHNESS exige timestamp verificável com idade máxima de 2h.",
-        "O erro precisa ser corrigido antes de confiar na proteção automática.",
-        "```",
+        "⚠️ **PÁGINA E LIMITES — AÇÃO BLOQUEADA**",
+        f"Conta: **{account_alias}** · itens: **{len(issues)}**",
+        "Ação Meta: **nenhuma** · modo: **fail-closed**",
+        "Motivos: " + ", ".join(f"`{code}` ×{count}" for code, count in sorted(codes.items())),
+        f"Verificação: `{run_at.strftime('%H:%M ET')}`",
     ]
     return "\n".join(lines)
 
 
 def build_runtime_error_alert(run_at: dt.datetime, account_alias: str, reason: str) -> str:
     return "\n".join([
-        "```text",
-        "⚠️ LIMITE DE LEADS — FALHA OPERACIONAL",
-        "",
-        f"Conta: {account_alias}",
-        f"Horário: {run_at.strftime('%d/%m/%Y %H:%M')} America/New_York",
-        f"Motivo: {reason}",
-        "Ação Meta não confirmada; reconciliação necessária.",
-        "```",
+        "⚠️ **PÁGINA E LIMITES — FALHA OPERACIONAL**",
+        f"Conta: **{account_alias}** · `{run_at.strftime('%H:%M ET')}`",
+        "Ação Meta: **não confirmada** · reconciliação necessária",
+        f"Motivo: `{reason}`",
     ])
 
 
 def build_alert(group: dict[str, Any], actions: list[dict[str, Any]], insights: dict[str, dict[str, Any]], run_at: dt.datetime, lead_limit: float) -> str:
     confirmed = [row for row in actions if row.get("ok")]
     failed = [row for row in actions if not row.get("ok")]
-    restriction = group.get("restriction") or {}
-    if restriction.get("active") is True:
-        restriction_text = f"Sim, até {restriction.get('restricted_until')} (Smart Bidding)"
-    elif restriction.get("active") is False:
-        restriction_text = "Não indicada como ativa na Smart Bidding"
-    else:
-        restriction_text = "Não confirmada"
+    icon = "⚠️" if failed else "⛔"
+    title = "LIMITE DE LEADS — PENDÊNCIA" if failed else "LIMITE DE LEADS — CAMPANHAS PAUSADAS"
     lines = [
-        "```text",
-        "⛔ LIMITE DE LEADS — PÁGINA DESATIVADA",
-        "",
-        f"Página: {group.get('page_name') or 'N/D'}",
-        f"UTM Campaign: {group.get('utm_campaign')}",
-        f"Leads: {fmt_number(group.get('leads'), 0)}",
-        f"Limite: > {fmt_number(lead_limit, 0)}",
-        f"Status Smart Bidding: {group.get('smart_bidding_status') or 'N/D'}",
-        f"Restrição: {restriction_text}",
-        f"Horário: {run_at.strftime('%d/%m/%Y %H:%M')} America/New_York",
-        "",
-        f"Campanhas encontradas: {len(actions)}",
-        f"Campanhas confirmadas PAUSED: {len(confirmed)}",
-        f"Falhas/pendências: {len(failed)}",
-        "",
-        "Campanha                                              Spend    ROAS   Res.   CPM    CTR    Estado",
-        "----------------------------------------------------  -------  -----  -----  -----  -----  --------",
+        f"{icon} **{title}**",
+        f"**{group.get('page_name') or 'N/D'}** · `{group.get('utm_campaign')}` · LEADS **{fmt_number(group.get('leads'), 0)}**",
+        f"Campanhas ativas: **{len(actions)}** · pausadas: **{len(confirmed)}**" + (f" · pendentes: **{len(failed)}**" if failed else " ✅"),
+        f"Regra: `LEADS > {fmt_number(lead_limit, 0)}` · `{run_at.strftime('%H:%M ET')}` · reativação automática: **não**",
     ]
-    for campaign in group.get("campaigns") or []:
-        campaign_id = norm(campaign.get("campaign_id"))
-        metric = insights.get(campaign_id) or {}
-        action = next((row for row in actions if row.get("campaign_id") == campaign_id), {})
-        name = norm(campaign.get("campaign_name"))
-        if len(name) > 52:
-            name = name[:49] + "..."
-        state = "PAUSED" if action.get("ok") else "PENDENTE"
-        lines.append(
-            f"{name:<52}  {fmt_money(metric.get('spend')):>7}  {fmt_number(metric.get('purchase_roas')):>5}  {fmt_number(metric.get('messaging_results'),0):>5}  {fmt_money(metric.get('cpm')):>5}  {fmt_number(metric.get('ctr')):>5}  {state:>8}"
-        )
-    lines += ["", f"Readback Meta: {len(confirmed)}/{len(actions)} campanhas confirmadas como PAUSED"]
-    if failed:
-        lines.append("⚠️ Estado parcial: há campanha ainda não confirmada; reconciliação necessária.")
-    else:
-        lines.append("✅ Nenhuma campanha mapeada desta página permanece ativa neste ciclo.")
-    lines += ["Reativação automática: não", "```"]
     return "\n".join(lines)
 
 
