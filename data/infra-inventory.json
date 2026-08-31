@@ -15368,6 +15368,57 @@
       "authorized_by": "Rodolfo Mattei (344196393512075265), Discord messages 1542337029998903416, 1542354042708295750, 1542361186777956362 and 1542364457274187877",
       "validated_at": "2026-08-26T22:54:00-04:00",
       "validation": "Authorized purge removed all six prior alerts and empty-channel readback passed; six initial alerts were resent and exact readback validated content, both role mentions, title, color, footer and fields; state readback confirmed six active incidents with repeat_count=0 and pending=null; live monitor dry-run returned noop active=6; 9 token-monitor tests passed including repeat #1/#2 age, source-repeat numbering and post-✅ lifecycle reset."
+    },
+    {
+      "type": "discord_channel_overwrites_clone",
+      "platform": "discord",
+      "guild_id": "1185714635991679006",
+      "source_channel_id": "1539422731727147079",
+      "source_channel_name": "bot-eggbev-us-cc-en-01-g006",
+      "target_channels": [
+        {
+          "channel_id": "1544117442589106328",
+          "channel_name": "bot-fax-us-cc-en-01-g006"
+        },
+        {
+          "channel_id": "1544117058982248448",
+          "channel_name": "bot-lyzmo-us-cc-en-01-g006"
+        }
+      ],
+      "overwrite_count": 4,
+      "copied_overwrites": [
+        {
+          "id": "1185714635991679006",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1508882671202336771",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1055570806945620030",
+          "type": 1,
+          "allow": "17179870208",
+          "deny": "0"
+        },
+        {
+          "id": "1496296175014252634",
+          "type": 1,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ],
+      "scope": "Permission overwrites only; target names, categories and every other channel field preserved.",
+      "authorized_by": "Rodolfo Mattei (344196393512075265)",
+      "source_message_id": "1544117844256759858",
+      "handoff_message_id": "1544118558315782186",
+      "validated_at": "2026-08-31T23:01:02Z",
+      "validation": "Discord API PUT/DELETE HTTP 204; GET readback exact semantic equality with source on both targets; source unchanged; all non-overwrite target fields unchanged.",
+      "rollback_snapshot": "/root/mgs-agent/backups/discord-permission-overwrites-copy-pre-1544117844256759858.json"
     }
   ],
   "oauth_auth_states": [],

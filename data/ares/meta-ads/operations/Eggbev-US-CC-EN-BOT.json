@@ -2413,6 +2413,23 @@
       "next_run_at_et": "2026-08-30T08:00:00-04:00",
       "readback_at_et": "2026-08-29T20:02:14-04:00",
       "activation_conclusion": "active; the 20:00 scheduled tick completed successfully. gateway_running=false is an observer false negative and does not override execution history."
+    },
+    "page_restriction_guardrail": {
+      "job_id": "109229dcb42e",
+      "name": "Eggbev páginas restritas DTR 5min",
+      "schedule": "3,8,13,18,23,28,33,38,43,48,53,58 * * * *",
+      "timezone": "America/New_York",
+      "maximum_detection_delay_minutes": 5,
+      "script": "eggbev-page-restriction-guardrail.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "state": "scheduled",
+      "gateway_running_observer": false,
+      "scheduler_tick_confirmed": false,
+      "next_run_at_et": "2026-08-31T19:03:00-04:00",
+      "readback_at_et": "2026-08-31T18:59:00-04:00",
+      "activation_conclusion": "saved and enabled; baseline initialized without history replay; scheduled tick still requires runtime confirmation"
     }
   },
   "last_live_validation": {
