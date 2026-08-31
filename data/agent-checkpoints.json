@@ -902,6 +902,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-daily-unified-report-20260831",
+      "next_step": "Editar renderer e contrato, testar, gerar relatório vivo e publicar com readback na thread Diário.",
+      "objective": "Implementar e publicar visual unificado do Diário Eggbev com aliases SRC, economia por página e alertas de tracking, sem writes Meta.",
+      "source": "discord:1543926440238514176",
+      "state": "implementação autorizada por nicolas; estado atual reconciliado; nenhum write meta; arquivos preexistentes deletados no working tree serão preservados.",
+      "thread_id": "1541578596253175858",
+      "updated_at": "2026-08-31T12:57:40+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-full-spaced-table-v22-20260830",
       "next_step": "usar sempre a tabela v22 completa; paginar sem remover colunas; não modificar o layout",
       "objective": "Fixar o primeiro modelo completo e espaçado como única tabela canônica do Corte e ROAS",
@@ -1742,5 +1752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T10:21:35+00:00"
+  "updated_at": "2026-08-31T12:57:40+00:00"
 }
