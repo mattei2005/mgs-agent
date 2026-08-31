@@ -94,7 +94,9 @@
     677161,
     677181,
     677205,
-    677224
+    677224,
+    677883,
+    677908
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -259,9 +261,9 @@
     "digital-trust|eggbev|12|1662": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:10:07.000Z",
+        "created_at": "2026-08-31T00:05:57.000Z",
         "domain": "eggbev",
-        "notification_id": 676742,
+        "notification_id": 677883,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 101,
         "segurador_id": "1662",
@@ -277,7 +279,8 @@
         "1543473486675185747"
       ],
       "notification_ids": [
-        676742
+        676742,
+        677883
       ],
       "opened_at": "2026-08-29T16:12:14-04:00",
       "repeat_count": 0,
@@ -664,9 +667,9 @@
     "digital-trust|infinitynexx|26|497": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:11:47.000Z",
+        "created_at": "2026-08-31T00:06:44.000Z",
         "domain": "infinitynexx",
-        "notification_id": 676798,
+        "notification_id": 677908,
         "page_count_scope": "mapped-sb-user-id",
         "pages": 130,
         "segurador_id": "497",
@@ -682,7 +685,8 @@
         "1543473508959658095"
       ],
       "notification_ids": [
-        676798
+        676798,
+        677908
       ],
       "opened_at": "2026-08-29T16:12:14-04:00",
       "repeat_count": 0,
@@ -1036,45 +1040,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-08-30T19:57:14-04:00",
+  "last_check": "2026-08-30T20:12:14-04:00",
   "last_delivery": {
-    "at": "2026-08-29T20:12:21-04:00",
+    "at": "2026-08-30T20:12:14-04:00",
     "cursor_ids": [
-      677039,
-      677084,
-      677110,
-      677129,
-      677140,
-      677161,
-      677181,
-      677205,
-      677224
+      677883,
+      677908
     ],
-    "message_ids": [
-      "1543412997865865289",
-      "1543413002496114739",
-      "1543413006107549756",
-      "1543413009903255686",
-      "1543413013623738566",
-      "1543413017570443297",
-      "1543413021710360617",
-      "1543413025564921917",
-      "1543413029872476212"
-    ],
-    "notification_ids": [
-      677039,
-      677084,
-      677110,
-      677129,
-      677140,
-      677161,
-      677181,
-      677205,
-      677224
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 677224,
+  "last_seen_id": 677908,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,
