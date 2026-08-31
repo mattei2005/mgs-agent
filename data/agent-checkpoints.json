@@ -452,6 +452,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-SERVING-REVIEW-20260831",
+      "next_step": "Comparar campanha, ad set, anúncios, serving, review, spend/impressões e regras; corrigir apenas divergências confirmadas com readback",
+      "objective": "Auditar campanhas Eggbev criadas pelo Ares, corrigir qualquer condição de não entrega e publicar dentro da autorização de Nicolas",
+      "source": "discord:thread:1543836757529985024; references:1543778490610884679,1543263056262594641; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "state": "in_progress: reconstruindo precedentes cpv e iniciando pre-read meta completo da conta eggbev antes de qualquer write",
+      "thread_id": "1543836757529985024",
+      "updated_at": "2026-08-31T04:18:28+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-THREAD-ORGANIZATION-20260830",
       "next_step": "When Nicolas finishes the Daily design, update only the Daily route and the Rules workflow summary with approved schedule, cadence and ranking criteria",
       "objective": "Deep-review all Eggbev channel threads and publish organized canonical updates by functional route",
@@ -853,12 +863,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-roas-phase3-recycling-20260830",
-      "next_step": "cron segue enabled/scheduled; observar 05:00 em modo observação e o próximo 00:00 para candidatos elegíveis",
-      "objective": "Implementar exclusão noturna de campanhas do dia seguinte e Fase 3 de reciclagem às 00:00",
+      "next_step": "tick 05:00 executa Fase 1 fail-closed com Spend >USD2 e Purchase ROAS <0,40",
+      "objective": "Operar Fase 3 00:00 e ciclos ROAS completos com correção da Fase 1",
       "source": "discord:thread:1541578606076231750",
-      "state": "implemented_v23; 93_tests_passed; tick_0000_failed_closed_on_null_currentfilltime; live_schema_reconciled_totalminutes_0; controlled_recovery_ok; zero_eligible_ads; zero_meta_writes; phase3_report_readback_confirmed",
+      "state": "v24_corrected; phase1_times_05_06_08_10_12; 05_and_06_cut_enabled; 92_tests_passed; dry_runs_05_06_phase1_zero_writes; cron_schedule_unchanged_enabled",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T04:05:27+00:00"
+      "updated_at": "2026-08-31T04:17:54+00:00"
     },
     {
       "agent": "ares",
@@ -1652,5 +1662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T04:16:25+00:00"
+  "updated_at": "2026-08-31T04:18:28+00:00"
 }

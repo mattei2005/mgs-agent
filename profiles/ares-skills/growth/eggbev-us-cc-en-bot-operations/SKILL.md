@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.20.0-draft
+version: 0.20.1-draft
 author: Ares
 license: internal
 metadata:
@@ -214,9 +214,8 @@ O template Messenger é obrigatório. Qualquer mudança de texto, botão, payloa
 
 ```text
 00:00               Fase 3 + reset diário do threshold de corte para 0,40
-05:00 e 06:00       relatório/observação; sem corte ou reativação
-Fase 1              08:00, 10:00, 12:00
-Corte Fase 1        Spend > USD 2 E Purchase ROAS < threshold
+Fase 1              05:00, 06:00, 08:00, 10:00, 12:00
+Corte Fase 1        Spend > USD 2 E Purchase ROAS < threshold em todos os cinco ciclos
 Fase 2              13:00, 14:00, 16:00, 18:00, 20:00, 22:00, 23:00
 Corte Fase 2        Purchase ROAS < threshold; sem gate de gasto
 Noite 20/22/23      N/D só corta campanha que rodou no dia; excluir start_time do dia seguinte 00:00
@@ -494,7 +493,7 @@ O mesmo job das 00:00 executa, em ordem, a **Fase 3 — Reativação/Reciclagem*
 
 Página com exatamente 5.000 LEADS continua elegível; somente `LEADS >5.000` exclui a campanha. O match exige UTM+Page exatos e freshness `/estimated/delay` com `totalMinutes` presente entre 0 e 120. `currentFillTime` é corroborante quando não nulo, mas o schema vivo pode retornar `null`; `totalMinutes` ausente ou fora da faixa bloqueia. Cada campanha elegível recebe budget CBO aleatório de US$45 ou US$65. A escolha é persistida por dia-base+campanha antes do primeiro write e reutilizada em retry/recovery. A ordem fail-closed é budget → campanha → ad set → anúncio, com pre-read e GET/readback em cada camada.
 
-Às 05:00 e 06:00 o cron continua publicando em modo observação, sem ações; os cortes recomeçam às 08:00. Todo run das 00:00 publica relatório identificado como Fase 3 na thread Corte e ROAS, usando a tabela v22 congelada, com dia-base, reativações, budgets, exclusões e readbacks.
+Por correção explícita de Nicolas em `2026-08-31`, os ciclos das `05:00` e `06:00` pertencem à Fase 1 e executam cortes normalmente. A Fase 1 completa é `05:00, 06:00, 08:00, 10:00, 12:00`, sempre com `Spend > USD2` e Purchase ROAS `<0,40`. Esta correção supersede a interpretação anterior de observação até 08:00. Todo run das 00:00 publica relatório identificado como Fase 3 na thread Corte e ROAS, usando a tabela v22 congelada, com dia-base, reativações, budgets, exclusões e readbacks.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
