@@ -102,5 +102,5 @@ def test_account05_activity_monitor_contract_is_alert_only():
     assert monitor['mode'] == 'account_wide_external_change_alert'
     assert monitor['graph_version'] == 'v26.0'
     assert monitor['schedule'] == 'every 5 minutes'
-    assert monitor['destination_thread_id'] == '1542892943352799242'
+    assert monitor['destination_thread_id'] == '1542892971186454719'
     assert 'never auto-correct' in monitor['alert_policy']

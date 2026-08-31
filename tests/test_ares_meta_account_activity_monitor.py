@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -87,6 +88,81 @@ class ActivityMonitorTests(unittest.TestCase):
         self.assertIn('USD 25.00', text)
         self.assertIn('USD 30.00', text)
         self.assertIn('Power Editor', text)
+        self.assertIn('Eventos agrupados: 1 em 1 objeto(s).', text)
+
+    def test_alert_groups_events_for_same_object_without_raw_targeting(self):
+        targeting = event(
+            event_type='update_ad_set_target_spec',
+            object_id='adset-1',
+            object_name='AdGroup C04',
+            extra_data=json.dumps({'old_value': [], 'new_value': [{'content': 'Brasil'}]}),
+        )
+        created = event(
+            event_type='create_ad_set',
+            object_id='adset-1',
+            object_name='AdGroup C04',
+            extra_data=json.dumps({'old_value': None, 'new_value': None}),
+        )
+        items = [
+            {'event': targeting, 'classification': 'external_or_manual_change'},
+            {'event': created, 'classification': 'external_or_manual_change'},
+        ]
+        text = monitor.build_alert(items, CONFIG, 'America/Sao_Paulo')
+        self.assertIn('Eventos agrupados: 2 em 1 objeto(s).', text)
+        self.assertIn('segmentação atualizada; detalhes preservados no audit', text)
+        self.assertNotIn("{'content': 'Brasil'}", text)
+
+    def test_account05_alias_falls_back_to_exact_meta_alias(self):
+        operation = {'account': {'exact_meta_alias': 'Creditoparaveiculo-BR-CAR-BR-05-G006'}, 'account_activity_monitor': {}}
+        account = {'meta_detected': {'name': 'fallback'}}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            operation_path = root / 'operation.json'
+            account_path = root / 'account.json'
+            operation_path.write_text(json.dumps(operation))
+            account_path.write_text(json.dumps({'accounts': [account]}))
+            _, _, config = monitor.load_inputs(operation_path, account_path)
+        self.assertEqual(config['account_alias'], 'Creditoparaveiculo-BR-CAR-BR-05-G006')
+
+    def test_engine_checkpoint_reconciles_trusted_ares_write(self):
+        row = event(
+            event_time='2026-08-31T05:32:53+0000',
+            object_id='120248500821400046',
+            actor_id='122171910794667280',
+            application_id='860397696767230',
+        )
+        config = {
+            'trusted_api_sources': [
+                {'actor_id': '122171910794667280', 'application_id': '860397696767230'}
+            ],
+            'audit_match_window_seconds': 1800,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            audit = root / 'audit'
+            engine_audit = root / 'engine-audit'
+            checkpoints = root / 'checkpoints'
+            audit.mkdir()
+            engine_audit.mkdir()
+            checkpoints.mkdir()
+            checkpoint = checkpoints / 'request.json'
+            checkpoint.write_text(json.dumps({
+                'campaign_ids': ['120248500821400046'],
+                'started_at': '2026-08-31T05:32:53+00:00',
+            }))
+            timestamp = 1788154373
+            os.utime(checkpoint, (timestamp, timestamp))
+            root_names = ('AUDIT_ROOT', 'ENGINE_AUDIT_ROOT', 'ENGINE_CHECKPOINT_ROOT')
+            old_roots = tuple(getattr(monitor, name) for name in root_names)
+            for name, value in zip(root_names, (audit, engine_audit, checkpoints), strict=True):
+                setattr(monitor, name, value)
+            try:
+                result = monitor.classify_event(row, config)
+            finally:
+                for name, value in zip(root_names, old_roots, strict=True):
+                    setattr(monitor, name, value)
+        self.assertFalse(result['alert'])
+        self.assertEqual(result['classification'], 'trusted_ares_audited')
 
     def test_fixture_validation(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -28,6 +28,8 @@ DEFAULT_ACCOUNT = BASE / "data/ares/meta-ads/accounts/1046241194533786.json"
 META_COMMON = BASE / "scripts/ares-meta-common.py"
 POSTER = BASE / "scripts/ares-discord-post-with-thread.py"
 AUDIT_ROOT = BASE / "data/ares/meta-ads/audit"
+ENGINE_AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit"
+ENGINE_CHECKPOINT_ROOT = BASE / "data/ares/meta-ads/engine-v3/state/checkpoints"
 EVENT_AUDIT = BASE / "logs/events-audit.jsonl"
 
 SYSTEM_LIFECYCLE_EVENTS = {
@@ -210,13 +212,16 @@ def recent_audit_files(event_time: dt.datetime, max_files: int = 300) -> list[Pa
     lower = event_time.timestamp() - 86400
     upper = event_time.timestamp() + 86400
     candidates: list[tuple[float, Path]] = []
-    for path in AUDIT_ROOT.rglob("*.json"):
-        try:
-            stamp = path.stat().st_mtime
-        except OSError:
+    for root in (AUDIT_ROOT, ENGINE_AUDIT_ROOT, ENGINE_CHECKPOINT_ROOT):
+        if not root.exists():
             continue
-        if lower <= stamp <= upper:
-            candidates.append((stamp, path))
+        for path in root.rglob("*.json"):
+            try:
+                stamp = path.stat().st_mtime
+            except OSError:
+                continue
+            if lower <= stamp <= upper:
+                candidates.append((stamp, path))
     candidates.sort(reverse=True)
     return [path for _, path in candidates[:max_files]]
 
@@ -317,12 +322,21 @@ def change_label(event: dict[str, Any]) -> str:
     extra = safe_extra(event.get("extra_data"))
     old = extra.get("old_value")
     new = extra.get("new_value")
+    event_type = str(event.get("event_type") or "")
+    if old is None and new is None and event_type.startswith("create_"):
+        return "objeto criado"
+    if event_type == "update_ad_set_target_spec" and (isinstance(old, (dict, list)) or isinstance(new, (dict, list))):
+        return "segmentação atualizada; detalhes preservados no audit"
     if isinstance(old, dict) and old.get("type") == "payment_amount":
         old_text = amount_label(old)
+    elif isinstance(old, (dict, list)):
+        old_text = "configuração anterior"
     else:
         old_text = str(old) if old is not None else "—"
     if isinstance(new, dict) and new.get("type") == "payment_amount":
         new_text = amount_label(new)
+    elif isinstance(new, (dict, list)):
+        new_text = "configuração definida"
     else:
         new_text = str(new) if new is not None else "—"
     if len(old_text) > 120:
@@ -334,27 +348,50 @@ def change_label(event: dict[str, Any]) -> str:
 
 def build_alert(items: list[dict[str, Any]], config: dict[str, Any], timezone_name: str) -> str:
     tz = ZoneInfo(timezone_name)
+    classifications = {str(item.get("classification") or "") for item in items}
+    title = "ALTERAÇÃO EXTERNA NA CONTA META" if classifications == {"external_or_manual_change"} else "ALTERAÇÃO NÃO RECONCILIADA NA CONTA META"
     lines = [
-        "<@344196393512075265> ⚠️ **ALTERAÇÃO EXTERNA NA CONTA META**",
-        f"Conta: **{config.get('account_alias')}**",
+        f"<@344196393512075265> ⚠️ **{title}**",
+        f"Conta: **{config.get('account_alias') or 'alias não resolvido'}**",
         "",
     ]
-    for item in items[:12]:
+    grouped: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    for item in items:
         event = item["event"]
+        key = (
+            str(event.get("actor_name") or "Meta/desconhecido"),
+            str(event.get("application_name") or "aplicativo não informado"),
+            str(event.get("object_id") or ""),
+            str(event.get("object_name") or event.get("object_type") or "objeto sem nome"),
+        )
+        group = grouped.setdefault(key, {"events": [], "times": []})
+        group["events"].append(event)
         when = parse_time(event.get("event_time"))
-        local = when.astimezone(tz).strftime("%d/%m %H:%M") if when else "horário n/d"
-        actor = str(event.get("actor_name") or "Meta/desconhecido")
-        app = str(event.get("application_name") or "aplicativo não informado")
-        action = str(event.get("translated_event_type") or event.get("event_type") or "alteração")
-        obj = str(event.get("object_name") or event.get("object_type") or "objeto sem nome")
+        if when:
+            group["times"].append(when)
+    groups = list(grouped.items())
+    for (actor, app, _object_id, obj), group in groups[:8]:
+        times = group["times"]
+        local = min(times).astimezone(tz).strftime("%d/%m %H:%M") if times else "horário n/d"
+        actions = []
+        changes = []
+        for event in group["events"]:
+            action = str(event.get("translated_event_type") or event.get("event_type") or "alteração")
+            if action not in actions:
+                actions.append(action)
+            change = change_label(event)
+            if change not in changes and change not in {"objeto criado", "— → —"}:
+                changes.append(change)
         lines.extend([
-            f"- **{local} SP — {action}**",
+            f"- **{local} SP — {obj}**",
             f"  Ator: **{actor}** · Origem: **{app}**",
-            f"  Objeto: {obj}",
-            f"  Mudança: `{change_label(event)}`",
+            f"  Eventos: {', '.join(actions[:4])}{'…' if len(actions) > 4 else ''}",
         ])
-    if len(items) > 12:
-        lines.append(f"- ... e mais {len(items) - 12} alterações no mesmo lote.")
+        if changes:
+            lines.append(f"  Mudança: `{changes[0]}`")
+    if len(groups) > 8:
+        lines.append(f"- ... e mais {len(groups) - 8} objetos no mesmo lote.")
+    lines.append(f"Eventos agrupados: {len(items)} em {len(groups)} objeto(s).")
     lines.extend(["", "Nenhuma correção automática foi aplicada; alteração preservada para revisão."])
     return "\n".join(lines)
 
@@ -404,7 +441,15 @@ def load_inputs(operation_path: Path, account_path: Path) -> tuple[dict[str, Any
     operation = json.loads(operation_path.read_text())
     account = json.loads(account_path.read_text())["accounts"][0]
     config = dict(operation.get("account_activity_monitor") or {})
-    config.setdefault("account_alias", (operation.get("account") or {}).get("account_alias"))
+    operation_account = operation.get("account") or {}
+    alias = (
+        operation_account.get("account_alias")
+        or operation_account.get("exact_meta_alias")
+        or operation_account.get("provisional_alias")
+        or (account.get("meta_detected") or {}).get("name")
+    )
+    if not config.get("account_alias"):
+        config["account_alias"] = alias
     return operation, account, config
 
 

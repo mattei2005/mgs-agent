@@ -789,7 +789,9 @@ def compact_page_label(row: dict[str, Any]) -> str:
     return page or utm or 'N/D'
 
 
-def build_page_summary(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def build_page_summary(
+    campaigns: list[dict[str, Any]], current_dashboard: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
     groups: dict[str, dict[str, Any]] = {}
     sb_fields = (
         'sb_investment', 'sb_revenue', 'sb_broadcast_revenue', 'sb_drip_revenue',
@@ -837,8 +839,22 @@ def build_page_summary(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if group.get('page_name') and group.get('utm_campaign')
             else group.get('page_name') or group.get('utm_campaign') or 'N/D'
         )
+        current_row = ((current_dashboard or {}).get('by_utm') or {}).get(
+            common.norm(group.get('utm_campaign')).lower()
+        )
+        group['sb_broadcast_current'] = (
+            common.finite_float((current_row or {}).get('broadcast_revenue'))
+            if (current_dashboard or {}).get('ready') and isinstance(current_row, dict)
+            else None
+        )
         summaries.append(group)
-    summaries.sort(key=lambda row: (-(row.get('spend') or 0.0), common.norm(row.get('page_label'))))
+    summaries.sort(
+        key=lambda row: (
+            common.norm(row.get('page_name') or row.get('page_label')).casefold(),
+            common.norm(row.get('utm_campaign')).casefold(),
+        ),
+        reverse=True,
+    )
     return summaries
 
 
@@ -891,17 +907,78 @@ def render_no_delivery_table(campaigns: list[dict[str, Any]]) -> list[str]:
     return aligned_table(['#', 'Camp', 'Página', 'Início', 'Budget', 'St'], rows)
 
 
+def status_label(value: Any) -> str:
+    return {
+        'ACTIVE': 'ATIVA',
+        'PAUSED': 'PAUSADA',
+        'ARCHIVED': 'ARQUIV.',
+        'DELETED': 'EXCLUÍDA',
+    }.get(common.norm(value).upper(), common.norm(value) or 'N/D')
+
+
+def render_grouped_page_tables(
+    pages: list[dict[str, Any]], campaigns: list[dict[str, Any]],
+) -> list[str]:
+    """Render Cut/ROAS-inspired compact tables grouped Page Z→A."""
+    indexed: dict[str, list[tuple[int, dict[str, Any]]]] = defaultdict(list)
+    for original_index, campaign in enumerate(campaigns, start=1):
+        utm = common.norm(campaign.get('utm_campaign')).lower()
+        key = utm or common.norm(campaign.get('sb_page_name')).lower() or common.norm(campaign.get('campaign_id'))
+        indexed[key].append((original_index, campaign))
+
+    lines: list[str] = []
+    headers = ['#', 'Ent.', 'Camp', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Msg', 'CPM', 'CTR']
+    visible_index = 0
+    for page in pages:
+        key = common.norm(page.get('utm_campaign')).lower() or common.norm(page.get('page_name')).lower()
+        page_campaigns = sorted(
+            indexed.get(key) or [],
+            key=lambda item: (
+                compact_campaign_key(item[1].get('name'), item[1].get('campaign_id')).casefold(),
+                common.norm(item[1].get('campaign_id')),
+            ),
+        )
+        label = common.norm(page.get('page_label')) or 'Página N/D'
+        count = len(page_campaigns)
+        noun = 'campanha' if count == 1 else 'campanhas'
+        lines.extend([
+            '', f"**▼ {label} — {count} {noun}**",
+            f"`META  Spend {common.fmt_money(page.get('spend'))} • ROAS {common.fmt_number(page.get('purchase_roas'))} • Custo {common.fmt_money(page.get('cost_per_messaging_started'))}`",
+            f"`SB    Inv {common.fmt_money(page.get('sb_investment'))} • Receita {common.fmt_money(page.get('sb_revenue'))} • BC agora {common.fmt_money(page.get('sb_broadcast_current'))} • Drip {common.fmt_money(page.get('sb_drip_revenue'))}`",
+            f"`      ROI {format_percent(page.get('sb_roi_percent'))} • Leads {common.fmt_number(page.get('sb_leads'), 0)} • RPS {common.fmt_money(page.get('pricing_rps'))}`",
+        ])
+        rows: list[list[str]] = []
+        for _, row in page_campaigns:
+            visible_index += 1
+            delivered = bool(row.get('has_insight') or common.finite_float(row.get('spend')) is not None)
+            rows.append([
+                str(visible_index), '●' if delivered else '○',
+                compact_campaign_key(row.get('name'), row.get('campaign_id')),
+                status_label(row.get('status')), common.fmt_money(row.get('budget_usd')),
+                common.fmt_money(row.get('spend')), common.fmt_money(row.get('cost_per_messaging_started')),
+                common.fmt_number(row.get('purchase_roas')), common.fmt_number(row.get('messaging_started'), 0),
+                common.fmt_money(row.get('cpm')), format_percent(row.get('ctr')),
+            ])
+        lines.extend(['```text', *aligned_table(headers, rows), '```'])
+    return lines
+
+
 def render_period(period: dict[str, Any]) -> list[str]:
     meta = period['meta']
     sb = period['smart_bidding']
+    current_dashboard = period.get('current_dashboard') or {}
+    current_freshness = current_dashboard.get('freshness') or {}
     lines = [
         f"**{period['label']} — {period['date']}**",
         f"- Meta: Spend {common.fmt_money(meta.get('spend'))} | ROAS {common.fmt_number(meta.get('purchase_roas'))} | "
         f"Mensagens {common.fmt_number(meta.get('messaging_started'), 0)} | Custo/msg {common.fmt_money(meta.get('cost_per_messaging_started'))} | "
         f"CPM {common.fmt_money(meta.get('cpm'))} | CTR {format_percent(meta.get('ctr'))}.",
         f"- Smart Bidding: Investimento {common.fmt_money(sb.get('investment'))} | Receita {common.fmt_money(sb.get('revenue'))} | "
-        f"Broadcast {common.fmt_money(sb.get('broadcast_revenue'))} | Drip {common.fmt_money(sb.get('drip_revenue'))} | "
+        f"Broadcast do período {common.fmt_money(sb.get('broadcast_revenue'))} | Drip {common.fmt_money(sb.get('drip_revenue'))} | "
         f"Leads {common.fmt_number(sb.get('leads'), 0)} | RPS {common.fmt_money(sb.get('rps_gross'))}.",
+        f"- Dash atual ({common.norm(current_dashboard.get('date')) or 'N/D'}): Broadcast {common.fmt_money(current_dashboard.get('broadcast_revenue'))} | "
+        f"Atualização {common.norm(current_freshness.get('latest_at_et')) or 'N/D'} | "
+        f"Atraso {((str(current_freshness.get('age_minutes')) + ' min') if current_freshness.get('age_minutes') is not None else 'N/D')}.",
         f"- Fonte SB: Última atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
         f"Atraso da fonte {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
         f"Freshness máx. {(sb.get('freshness') or {}).get('max_age_hours') or 2.0}h | "
@@ -912,27 +989,14 @@ def render_period(period: dict[str, Any]) -> list[str]:
     lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
-        pages = build_page_summary(campaigns)
-        campaign_table = render_campaign_table(campaigns)
-        no_delivery_table = render_no_delivery_table(campaigns)
+        pages = build_page_summary(campaigns, current_dashboard)
         lines.extend([
-            '', '**📍 Páginas — Meta Ads**',
-            '```text', *render_page_meta_table(pages), '```',
-            '', '**💵 Páginas — Smart Bidding**',
-            '```text', *render_page_economics_table(pages), '```',
+            '', '**📊 Tabela consolidada — visão desktop**',
+            'Páginas em ordem decrescente pelo nome (Z→A); todas as campanhas ficam consolidadas dentro da respectiva página.',
+            *render_grouped_page_tables(pages, campaigns),
         ])
-        if campaign_table:
-            lines.extend([
-                '', f"**📣 Campanhas com entrega — {len(campaign_table) - 2}**",
-                '```text', *campaign_table, '```',
-            ])
-        if no_delivery_table:
-            lines.extend([
-                '', f"**⏳ ACTIVE sem entrega no período — {len(no_delivery_table) - 2}**",
-                '```text', *no_delivery_table, '```',
-            ])
-        lines.append('`Camp` = sequência·Cnnn·Dnn. `C/msg` = Meta spend ÷ mensagens iniciadas.')
-        lines.append('Smart Bidding aparece uma vez por Página/UTM; os valores não são repetidos nem somados entre campanhas.')
+        lines.append('`Ent.` = ● com entrega no período • ○ sem entrega. `Camp` = sequência·Cnnn·Dnn. `Custo` = Meta spend ÷ mensagens iniciadas.')
+        lines.append('`BC agora` = receita Broadcast lida da dash atual; Smart Bidding aparece uma vez no cabeçalho da Página/UTM e não é repetida por campanha.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
