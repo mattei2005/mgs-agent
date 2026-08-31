@@ -361,7 +361,7 @@
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "22b2fdcc26f20fa85002ed57e7ed38fb5073fb7df053d643c9318f52d8b5eeab",
+          "active_prompt_sha256": "fdfe3272d8acf369477421d1952a7a7e24ffac25d1580a19d8431256a4cba8f5",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
           "tests_passed": 52,
@@ -576,7 +576,8 @@
     "sources": {
       "meta": "Meta API live for the requested period",
       "smart_bidding": "Smart Bidding direct metrics may be read from the compatible vertical, Messenger Pages or domain route after exact scope, identity, period and freshness reconciliation",
-      "pricing": "RPS, CPM, EPC, AVG_PRICE, revenue and other monetization metrics must prefer direct Smart Bidding fields from vertical, Messenger Pages or domain; do not treat the global /pricing payload as the only available source and do not derive a metric locally when a direct compatible field is available"
+      "pricing": "RPS, CPM, EPC, AVG_PRICE, revenue and other monetization metrics must prefer direct Smart Bidding fields from vertical, Messenger Pages or domain; do not treat the global /pricing payload as the only available source and do not derive a metric locally when a direct compatible field is available",
+      "current_dashboard_broadcast": "live /report/messenger BD_REVENUE for the report generation date, reconciled by UTM_CAMPAIGN and Page ID with freshness evidence; shown as BC agora even when the main table is D-1"
     },
     "required_meta_metrics": [
       "Amount spent",
@@ -592,7 +593,8 @@
       "Investment",
       "Revenue",
       "Drip revenue",
-      "Broadcast revenue",
+      "Broadcast revenue for the requested period",
+      "current dashboard Broadcast revenue by Page/UTM",
       "Leads",
       "AVG_PRICE",
       "RPS",
@@ -604,7 +606,13 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "mobile-first split view: page-level Meta summary, page-level Smart Bidding economics, compact delivered-campaign table, separate no-delivery table, then at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "layout": "one consolidated desktop view inspired by Corte e ROAS, grouped by Page/UTM in descending full Page-name order Z-to-A; each page shows current dashboard Broadcast revenue plus one compact campaign table, followed by at most five Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "layout_correction": {
+      "status": "active",
+      "requested_by": "Nicolas Holanda",
+      "source_thread": "discord:thread:1541578596253175858",
+      "decision": "always sort Page groups descending by full Page name and show current dashboard Broadcast revenue in every Daily table"
+    },
     "automation_change": "08:00 Daily design is approved; cron and automatic posting stay disabled until a live dry-run is reviewed and Nicolas explicitly authorizes enablement",
     "schedule_approval_is_not_cron_approval": true,
     "revenue_anomaly_detection": {
@@ -704,6 +712,14 @@
           "Amy Shook": 0.0
         },
         "current_dashboard_freshness_minutes": 75.0,
+        "d1_current_broadcast_readback": {
+          "verified_at_et": "2026-08-31T02:06:53-04:00",
+          "main_period": "2026-08-30",
+          "current_dashboard_date": "2026-08-31",
+          "current_dashboard_broadcast_total_usd": 0.0,
+          "current_dashboard_freshness_minutes": 64.0,
+          "audit": "data/ares/meta-ads/audit/eggbev/daily-report/run-20260831T020653-0400.json"
+        },
         "tests_passed": 52,
         "post_used": false,
         "writes_attempted": 0,

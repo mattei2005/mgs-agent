@@ -57,7 +57,7 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "Truncamento do nome da campanha: não",
             "full Meta name",
             "current status",
-            "start_time America/New_York",
+            "hollow delivery signal",
             "Cost per messaging conversation started",
             "UTM_CAMPAIGN",
             "FB_PAGE_ID",
@@ -65,7 +65,8 @@ class EggbevDailyRouteTests(unittest.TestCase):
             "vertical, Messenger Pages or domain",
             "implementation gap, not a Smart Bidding data-availability limitation",
             "25 campanhas, todas preservadas",
-            "quatro blocos compactos mobile-first",
+            "visão desktop consolidada em grupos de Página/UTM Z→A",
+            "current dashboard Broadcast revenue from /report/messenger BD_REVENUE",
             "Baseline: até 7 snapshots; mínimo de 3",
             "atenção a partir de 30% abaixo; crítico a partir de 40% abaixo",
         ]

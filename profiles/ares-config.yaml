@@ -750,18 +750,23 @@ discord:
       fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo
       sem insight + toda campanha com insight no período. Não limitar linhas silenciosamente.
 
-      - Layout mobile-first v5: blocos compactos separados para `Páginas — Meta Ads`,
-      `Páginas — Smart Bidding`, `Campanhas com entrega` e `ACTIVE sem entrega`; depois,
-      no máximo cinco bullets `Fique de olho`. Na tabela de campanhas usar a chave
-      semântica `sequência·Cnnn·Dnn` e Página/UTM compacta; o nome integral fica no
-      audit e aparece em alertas de ambiguidade/divergência. Não usar cards por campanha
-      nem recriar uma linha horizontal gigante.
+      - Layout consolidado v6 inspirado em Corte e ROAS: uma visão desktop organizada
+      em grupos de Página/UTM. Ordenar sempre os grupos pelo nome completo da página
+      em ordem decrescente `Z→A`; dentro de cada grupo, listar todas as campanhas da
+      página em tabela compacta com `Ent.`, chave `sequência·Cnnn·Dnn`, status, Budget,
+      Spend, Custo, ROAS, mensagens, CPM e CTR. O nome Meta integral fica no audit e
+      aparece em alertas de ambiguidade/divergência.
 
-      - Smart Bidding econômico aparece uma única vez por Página/UTM; nunca repetir
-      ou somar investimento, receita, broadcast, drip, ROI ou leads em cada campanha
-      da mesma página.
+      - Antes de renderizar qualquer período, consultar a dash atual via `/report/messenger`
+      e mostrar `BD_REVENUE` como `BC agora` no cabeçalho de cada Página/UTM, inclusive
+      quando a tabela principal for D-1. Declarar data/freshness da leitura atual; ausência
+      ou staleness vira `N/D`, nunca zero inventado.
 
-      - Os blocos apoiam a decisão humana de quais e quantas campanhas clonar; o Diário
+      - Smart Bidding econômico aparece uma única vez no cabeçalho da Página/UTM; nunca
+      repetir ou somar investimento, receita, broadcast atual, drip, ROI ou leads em cada
+      campanha da mesma página.
+
+      - Os grupos apoiam a decisão humana de quais e quantas campanhas clonar; o Diário
       nunca clona automaticamente e não transforma ordenação visual em regra de elegibilidade.
 
       - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page
