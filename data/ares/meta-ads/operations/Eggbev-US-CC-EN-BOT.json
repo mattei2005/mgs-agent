@@ -159,6 +159,42 @@
       "meta_writes": 0,
       "cron_changes": 0
     },
+    "thread_information_architecture": {
+      "status": "organized_canonical_route_updates_prepared",
+      "requested_by": "Nicolas Holanda",
+      "updated_at_et": "2026-08-30T22:02:00-04:00",
+      "review_scope": {
+        "channel_threads_reviewed": 12,
+        "messages_reviewed": 1434,
+        "canonical_routes": 6,
+        "historical_or_ad_hoc_threads": 6,
+        "history_preserved": true
+      },
+      "publication_source": "data/ares/discord/eggbev-thread-organization-20260830.json",
+      "overview_workflow": [
+        "create campaign from zero in the creation route",
+        "confirm Page, exact budget and explicit exceptions",
+        "prepare media, copy, naming, Messenger, event and tracking",
+        "show final summary and wait for explicit approval",
+        "publish through Engine v3 and validate by readback",
+        "allow the first performance day/window before winner selection for cloning",
+        "request the consolidated Daily report; its schedule and final ritual remain pending Nicolas design",
+        "clone selected winners in the cloning route",
+        "use Corte e ROAS as the master intraday route for ad-level actions and unified metrics",
+        "use Limite de Leads for LEADS > 5000 campaign-level protection and alerts"
+      ],
+      "route_ownership": {
+        "rules": "overview, definitions, authority, precedence, readiness and routing",
+        "roas_cycle": "thresholds, scheduled/on-demand ad-level cuts/reactivations, unified Meta plus Smart Bidding view and gated scale recommendation",
+        "daily_reporting": "read-only consolidated reporting; automation design remains pending Nicolas",
+        "campaign_creation": "from-zero structure, media, copy, naming, budget, Messenger JSON, approval and readbacks",
+        "campaign_cloning": "winner duplication, clone modes, DUP naming, budgets, approval and readbacks",
+        "page_lead_guardrail": "page LEADS > 5000 campaign pause, proximity reporting, reconciliation, freshness and alerts"
+      },
+      "supersession_policy": "latest live evidence and the current canonical contract win; old and ad-hoc threads are preserved but their useful decisions are promoted to exactly one canonical route",
+      "meta_write_authorized_by_organization_update": false,
+      "cron_change_authorized_by_organization_update": false
+    },
     "route_contracts": {
       "rules": {
         "thread_id": "1543280854024060999",
@@ -1026,7 +1062,7 @@
       "policy": "daily threshold reset preserves only Ares-paused ad provenance across dates until ad reactivation or explicit reconciliation removes it",
       "campaign_provenance": "retired; ROAS cycle never pauses or reactivates campaigns",
       "corrected_at_et": "2026-08-30T21:53:28-04:00",
-      "regression_tested": false
+      "regression_tested": true
     },
     "reporting": {
       "status": "cpv13_intraday_desktop_table_v18_ad_only_descending_ad_roas_active",
