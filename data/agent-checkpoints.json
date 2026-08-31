@@ -343,12 +343,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ACTION-HOLD-20260831",
-      "next_step": "Se Nicolas pedir antes de 00:00, desabilitar o hold após reconciliação live. Caso contrário, o ciclo de 01/09 00:00 ET restaura automaticamente os writes aprovados e deve ser validado pelo audit/readback normal.",
-      "objective": "Manter os ciclos Eggbev em visualização durante 31/08 e restaurar automaticamente a automação em 01/09 00:00 ET salvo liberação antecipada de Nicolas",
+      "next_step": "Se Nicolas pedir antes de 00:00, antecipar somente o release do ROAS. Caso contrário, o ciclo de 01/09 00:00 ET restaura automaticamente o ROAS; manter o guardrail de LEADS sem write até ordem explícita separada.",
+      "objective": "Manter Corte e ROAS em visualização durante 31/08 e restaurar automaticamente apenas esse cron em 01/09 00:00 ET, salvo liberação antecipada de Nicolas",
       "source": "discord:thread:1541578606076231750; /root/.hermes/profiles/ares/state/eggbev-action-hold.json; /root/.hermes/profiles/ares/scripts/eggbev-action-hold-active.py",
-      "state": "hold report-only ativo em 31/08. auto-release materializado para 2026-09-01t00:00:00-04:00 no wrapper dos ciclos roas e do guardrail de leads. verificação determinística: 23:59:59 active=true; 00:00:00 e 00:00:01 active=false; estado inválido falha fechado. cron roas permanece enabled/scheduled/no_agent/local e executará o ciclo das 00:00 em controlled-write sob os gates canônicos, salvo instrução antecipada do gestor.",
+      "state": "hold report-only ativo em 31/08. auto-release restrito ao escopo roas_cycle em 2026-09-01t00:00:00-04:00. verificação determinística: roas 23:59:59 active=true; roas 00:00:00 active=false; page_lead_guardrail 00:00:01 continua active=true e exige liberação explícita; estado inválido falha fechado. cron roas permanece enabled/scheduled/no_agent/local e volta a controlled-write sob os gates canônicos no ciclo 00:00.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T10:17:46+00:00"
+      "updated_at": "2026-08-31T10:21:35+00:00"
     },
     {
       "agent": "ares",
@@ -1742,5 +1742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T10:17:46+00:00"
+  "updated_at": "2026-08-31T10:21:35+00:00"
 }
