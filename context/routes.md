@@ -45,7 +45,10 @@ Autorizar usuário externo               Rodolfo / Security             Zeus    
 Alterar credencial/token                 Security / Rodolfo             Zeus         Rodolfo confirma.
 Erro Hermes/VPS/agente                  Tech / Zeus                    Zeus         Rodolfo se crítico.
 Inventário/reorganização estrutural      Tech / Zeus                    Zeus         Rodolfo aprova blocos.
+Criar/alterar cron global/operacional   Domínio + Tech/Zeus           Agente dono   Política anti-colisão obrigatória.
 ```
+
+Toda criação ou alteração de cron, por qualquer agente ou scheduler, segue `context/cron-scheduling-policy.md`. O agente dono do domínio define a semântica; Zeus governa o inventário global quando houver conflito, mas ninguém pode gravar o schedule antes de escolher um minuto de início livre entre jobs agendáveis e validar duração, lock e recursos compartilhados.
 
 ## Content Operations
 

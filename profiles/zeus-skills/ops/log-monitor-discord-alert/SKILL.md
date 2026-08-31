@@ -22,6 +22,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Quando usar** → `references/route-pack-01.md`
 - **Convenção de canal Discord por tipo de alerta → Template do script monitor** → `references/route-pack-02.md`
 - **Cron entry → Atualizar infra-inventory.json** → `references/route-pack-03.md`
+- **Alocação global de minuto e prevenção de colisão entre agentes/schedulers** → `/root/mgs-agent/context/cron-scheduling-policy.md`
 - **Pitfalls** → `references/route-pack-04.md`
 - **SEÇÃO B — Monitor de Restarts de Services Systemd → Fluxo completo esperado** → `references/route-pack-05.md`
 - **SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório) → Exemplo real — monitor-auto-push.sh** → `references/route-pack-06.md`

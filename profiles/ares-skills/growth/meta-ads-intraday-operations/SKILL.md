@@ -83,6 +83,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 
 ## Crons e Discord
 
+- Antes de criar ou alterar qualquer cron, aplicar `context/cron-scheduling-policy.md`: inventariar root/systemd/Hermes de todos os profiles e schedulers próprios, normalizar timezones, escolher minuto de início livre entre jobs agendáveis e repetir a auditoria depois do readback. Watchdogs contínuos são baseline; ainda exigem análise de lock, duração, conta/API e recurso compartilhado.
 - Crons operacionais determinísticos usam `script` + `no_agent=true`.
 - Em Discord operacional, preferir `deliver=local` quando o wrapper publica diretamente; stdout vazio evita duplicidade.
 - Não usar cron com agente e `deliver=origin/all` para conclusão diferida pós-restart.

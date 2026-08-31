@@ -74,6 +74,31 @@ class EggbevFixedRoutesTests(unittest.TestCase):
                 str(contracts[operation_key]["thread_id"]),
             )
 
+    def test_functional_routes_resolve_to_one_dedicated_skill(self):
+        expected = {
+            "rules": "eggbev-us-cc-en-bot-operations",
+            "page_lead_guardrail": "eggbev-page-guardrails",
+            "campaign_cloning": "eggbev-campaign-cloning",
+            "roas_cycle": "eggbev-roas-operations",
+            "daily_reporting": "eggbev-daily-reporting",
+            "campaign_creation": "eggbev-campaign-creation",
+        }
+        contracts = self.operation["discord"]["route_contracts"]
+        prompts = self.config["discord"]["channel_prompts"]
+        for route_key, skill_name in expected.items():
+            with self.subTest(route=route_key):
+                registry_route = self.registry["routes"][route_key]
+                self.assertEqual(registry_route["required_skill"], skill_name)
+                self.assertEqual(contracts[route_key]["required_skill"], skill_name)
+                thread_id = str(registry_route["thread_id"])
+                self.assertIn(skill_name, prompts[thread_id])
+                skill_path = ROOT / "profiles/ares-skills/growth" / skill_name / "SKILL.md"
+                self.assertTrue(skill_path.is_file())
+
+        for route_key in expected.keys() - {"rules"}:
+            contract = contracts[route_key]
+            self.assertNotIn("required_skills", contract)
+
 
 if __name__ == "__main__":
     unittest.main()
