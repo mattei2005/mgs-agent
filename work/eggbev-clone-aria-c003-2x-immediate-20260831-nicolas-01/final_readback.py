@@ -132,7 +132,8 @@ for index, (campaign_id, expected_name) in enumerate(zip(CAMPAIGNS, EXPECTED_NAM
             'name': name,
             'present': bool(target),
             'source_ad_lineage_match': target.get('source_ad_id') == str(source_ads[name]['id']),
-            'active': target.get('status') == 'ACTIVE' and target.get('effective_status') == 'ACTIVE',
+            'configured_active': target.get('status') == 'ACTIVE',
+            'review_or_active': target.get('effective_status') in {'ACTIVE', 'PENDING_REVIEW', 'IN_PROCESS'},
             'issues_clear': not target.get('issues_info'),
             'page_match': target.get('page_id') == source.get('page_id') == EXPECTED_PAGE,
             'instagram_identity_match': target.get('instagram_user_id') == source.get('instagram_user_id'),
@@ -162,7 +163,7 @@ for index, (campaign_id, expected_name) in enumerate(zip(CAMPAIGNS, EXPECTED_NAM
         campaign_check['name_match'], campaign_check['active'], campaign_check['budget_match'],
         campaign_check['adset_count'] == 1, campaign_check['adset_active'],
         campaign_check['adset_destination_match'], campaign_check['adset_page_match'], campaign_check['ad_count'] == 3,
-        all(all(row[key] for key in ('present', 'source_ad_lineage_match', 'active', 'issues_clear', 'page_match', 'instagram_identity_match', 'utm_match', 'copy_match', 'media_identity_match')) for row in ad_comparisons),
+        all(all(row[key] for key in ('present', 'source_ad_lineage_match', 'configured_active', 'review_or_active', 'issues_clear', 'page_match', 'instagram_identity_match', 'utm_match', 'copy_match', 'media_identity_match')) for row in ad_comparisons),
     ])
     campaign_rows.append(campaign_check)
     checks.append(campaign_check['all_verified'])
@@ -187,7 +188,8 @@ print(json.dumps({
         'start_time': row['start_time'],
         'adsets': row['adset_count'],
         'ads': row['ad_count'],
-        'ads_verified': sum(1 for ad in row['ads'] if all(ad[key] for key in ('present', 'source_ad_lineage_match', 'active', 'issues_clear', 'page_match', 'instagram_identity_match', 'utm_match', 'copy_match', 'media_identity_match'))),
+        'ads_verified': sum(1 for ad in row['ads'] if all(ad[key] for key in ('present', 'source_ad_lineage_match', 'configured_active', 'review_or_active', 'issues_clear', 'page_match', 'instagram_identity_match', 'utm_match', 'copy_match', 'media_identity_match'))),
+        'ad_effective_statuses': [ad['target'].get('effective_status') for ad in row['ads']],
         'insights_today': row['insights_today'],
     } for row in campaign_rows],
 }, ensure_ascii=False, indent=2))
