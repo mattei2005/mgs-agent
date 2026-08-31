@@ -42,6 +42,26 @@ def pure_campaign(i: int, account: str = '100') -> dict:
     }
 
 
+def tracked_pure_campaign(i: int, account: str = '100') -> dict:
+    row = pure_campaign(i, account)
+    row['source_adset_id'] = f'source-adset-{i}'
+    row['adset_name'] = f'Adset {i}'
+    row['ads'] = [
+        {
+            'name': f'Ad {i}.{j}',
+            'source_ad_id': f'source-ad-{i}-{j}',
+            'creative_payload': {
+                'name': f'Creative {i}.{j}',
+                'object_story_spec': {'page_id': 'page-1'},
+                'asset_feed_spec': {'videos': [{'video_id': f'video-{i}-{j}'}]},
+                'url_tags': f'utm_campaign=b01fb13c{i:02d}&utm_adgroup=b01fb13c{i:02d}g01',
+            },
+        }
+        for j in range(1, 4)
+    ]
+    return row
+
+
 def media(i: int) -> dict:
     return {
         'asset_id': f'asset-{i}',
@@ -208,6 +228,21 @@ def test_manifest_rejects_active_campaign_without_future_start():
         manifest([row])
 
 
+def test_tracking_aware_pure_clone_requires_source_adset_and_lineage_ads():
+    row = tracked_pure_campaign(36)
+    parsed = manifest([row]).campaigns[0]
+    assert parsed.mode == 'pure_clone'
+    assert parsed.source_adset_id == 'source-adset-36'
+    assert len(parsed.ads) == 3
+    assert parsed.ads[0].source_ad_id == 'source-ad-36-1'
+    assert parsed.ads[0].media is None
+
+    missing_adset = tracked_pure_campaign(36)
+    missing_adset.pop('source_adset_id')
+    with pytest.raises(ManifestError, match='tracking-aware pure_clone requires source_campaign_id, source_adset_id and adset_name'):
+        manifest([missing_adset])
+
+
 def test_prestaged_manifest_requires_three_ready_media_assets():
     row = prestaged_campaign(1)
     row['ads'][1]['media']['ready'] = False
@@ -306,6 +341,18 @@ def test_production_config_blocks_from_zero_for_both_cpv_accounts():
         assert 'pure_clone' in modes
         assert 'from_zero_prestaged' not in modes
         assert account['ad_serving_route'] == 'lineage_required_for_new_media'
+        assert account['pure_clone_tracking_required'] is True
+
+
+def test_production_cpv_policy_rejects_legacy_deep_pure_clone_without_tracking_payload():
+    config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+    account_id = '1046241194533786'
+    legacy = pure_campaign(36, account=account_id)
+    with pytest.raises(ManifestError, match='requires tracking-aware pure_clone'):
+        validate_account_policy(manifest([legacy]), config)
+
+    tracked = tracked_pure_campaign(36, account=account_id)
+    validate_account_policy(manifest([tracked]), config)
 
 
 def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clone():
@@ -987,6 +1034,35 @@ def test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback(tmp_pa
     assert [call['stage'] for call in transport.calls] == ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback']
     assert result['metrics']['intermediate_get_calls'] == 0
     assert result['metrics']['outer_readback_calls'] == 1
+
+
+def test_tracking_aware_pure_clone_uses_ad_copy_route_and_rewrites_url_tags(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+
+    row = tracked_pure_campaign(36)
+    transport = CaptureTransport('100')
+    result = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    ).execute(manifest([row], request_id='cpv-tracked-pure-clone'))
+
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [call['stage'] for call in transport.calls] == [
+        'campaign_copy', 'adset_copy', 'campaign_adset_update',
+        'ad_copy_with_creative', 'ad_name_update', 'consolidated_readback',
+    ]
+    campaign_copy = transport.operations_by_stage['campaign_copy'][0]
+    assert campaign_copy.body['deep_copy'] == 'false'
+    ad_copies = transport.operations_by_stage['ad_copy_with_creative']
+    assert len(ad_copies) == 3
+    assert all(op.body['creative_parameters']['url_tags'].startswith('utm_campaign=b01fb13c36') for op in ad_copies)
+    assert all(op.relative_url.startswith('source-ad-36-') for op in ad_copies)
 
 
 def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_path):
