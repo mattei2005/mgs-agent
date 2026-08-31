@@ -1075,7 +1075,7 @@
       "regression_tested": true
     },
     "reporting": {
-      "status": "cpv13_intraday_desktop_table_v18_ad_only_descending_ad_roas_active",
+      "status": "cpv13_intraday_desktop_table_v20_roi_minus15_bands_active",
       "requested_by": "Nicolas Holanda",
       "requested_at_et": "2026-08-30T01:45:23-04:00",
       "manager_confirmation": {
@@ -1267,8 +1267,8 @@
         "display_order": "R/E always shows current ROI first and estimated future ROI second",
         "color_bands": {
           "green": "ROI >= 0%",
-          "yellow": "ROI < 0% and > -20%",
-          "red": "ROI <= -20%",
+          "yellow": "ROI < 0% and > -15%",
+          "red": "ROI <= -15%",
           "gray": "N/D"
         },
         "scope": "report presentation and source clarification only; no change to Meta Purchase ROAS decisions, cut/reactivation logic, writes, schedules or budget authority",
@@ -1368,8 +1368,8 @@
       "semantic_distinction": "Purchase ROAS indicates position relative to the cycle threshold; only ROI below 0 percent is labeled negative",
       "roi_visual_policy": {
         "positive_or_zero": "green when ROI is greater than or equal to 0 percent",
-        "negative_warning": "yellow when ROI is below 0 percent and above -20 percent",
-        "negative_critical": "red when ROI is less than or equal to -20 percent",
+        "negative_warning": "yellow when ROI is below 0 percent and above -15 percent",
+        "negative_critical": "red when ROI is less than or equal to -15 percent",
         "unavailable": "gray N/D"
       },
       "source_routes": {
@@ -1476,6 +1476,23 @@
           "maximum_page_characters": 1727,
           "display_width_with_three_ad_tokens": 147
         }
+      },
+      "roi_color_bands_v20": {
+        "decision_id": "ARES-EGGBEV-ROAS-ROI-COLORS-V20-20260830",
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-30T22:22:27-04:00",
+        "source": "discord:thread:1541578606076231750",
+        "manager_wording": "ROI: green >=0%; yellow between -1% and -15%; red <=-15%; gray N/D",
+        "deterministic_continuous_interpretation": "green ROI >= 0%; yellow -15% < ROI < 0%; red ROI <= -15%; gray unavailable. This includes fractional negatives such as -0.1% in yellow and places exactly -15% in red.",
+        "applies_to": "both positions of R/E in order current ROI / estimated future ROI",
+        "scope": "presentation only; no change to Purchase ROAS decisions, thresholds, cuts, reactivations, budgets, schedules or source reconciliation",
+        "validation": {
+          "targeted_tests": "pending",
+          "relevant_tests": "pending",
+          "meta_writes": 0
+        },
+        "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-colors-v20-20260830.json"
       }
     },
     "runtime": {

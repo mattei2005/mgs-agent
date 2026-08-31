@@ -175,7 +175,7 @@ def _roi_signal(value: Any) -> str:
         return '⚪'
     if number >= 0:
         return '🟢'
-    if number <= -20:
+    if number <= -15:
         return '🔴'
     return '🟡'
 
@@ -735,7 +735,7 @@ def _compact_legend() -> str:
     return (
         '**Legenda:** Ads ↓ = maior→menor ROAS: ✅ manter ligado • 🛑 desligar • ♻️ religar • ⏸ já desligado • '
         'Ação: 🛑n/♻️n = quantidade de anúncios • 👁️ observar • 🚀 escala • '
-        'R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% a >-20% | 🔴 ≤-20% | ⚪ N/D'
+        'R/E (atual/estimado): 🟢 ≥0% | 🟡 <0% e >-15% | 🔴 ≤-15% | ⚪ N/D'
     )
 
 
@@ -768,6 +768,7 @@ def _dashboard_desktop_rows(
             common.fmt_number(row.get('sb_leads'), 0),
             _fmt_usd(row.get('rps')),
             _fmt_usd(row.get('cpm')),
+            _fmt_percent(row.get('ctr')),
             _intraday_action_visual(row),
         ])
     return rows
@@ -778,7 +779,7 @@ def _append_desktop_dashboard(
 ) -> None:
     headers = [
         'R/E', 'Camp', 'Página', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS',
-        'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'Ação',
+        'Ads ↓', 'ROI real', 'ROI est.', 'Leads', 'RPS', 'CPM', 'CTR', 'Ação',
     ]
     pages = _compact_table_pages(
         headers, _dashboard_desktop_rows(campaigns, threshold), max_chars=max_chars, max_rows=10,
