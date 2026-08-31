@@ -392,6 +392,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-JSON-AGT-STANDARD-20260831",
+      "next_step": "On the first future approved campaign or rematerialized clone, verify template_name=JSON-AGT by Graph wrapper readback and visually confirm the Ads Manager Template name field before declaring visual calibration complete",
+      "objective": "Make JSON-AGT the exact prospective Messenger Template name whenever Ares injects or rematerializes Eggbev JSON, without altering already-published campaigns",
+      "source": "data/ares/meta-ads/audit/eggbev/json-agt-thread-publish-20260831.json",
+      "state": "complete: runtime helper, prewrite/readback gates, contracts, account route, prompts, skills and knowledge registry updated; 3/3 canonical route posts independently read back; 178/178 tests and 10/10 knowledge regressions pass; zero meta writes",
+      "thread_id": "1543280854024060999",
+      "updated_at": "2026-08-31T05:15:48+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-MESSENGER-JSON-STANDARDIZATION-20260830",
       "next_step": "For each future creation, load the canonical file, require the normal final OK, verify every manifest ad immediately before execute, and close only after creative-by-creative Meta-to-file readback",
       "objective": "Make Nicolas approved complete Messenger JSON a fixed canonical file for every new Eggbev campaign and verify it before and after Meta writes",
@@ -463,12 +473,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-SERVING-REVIEW-20260831",
-      "next_step": "Comparar campanha, ad set, anúncios, serving, review, spend/impressões e regras; corrigir apenas divergências confirmadas com readback",
+      "next_step": "Aguardar e validar primeira impressão/gasto da DUP03 por Insights Meta; depois fechar audit/checkpoint e reportar o resultado ao Nicolas.",
       "objective": "Auditar campanhas Eggbev criadas pelo Ares, corrigir qualquer condição de não entrega e publicar dentro da autorização de Nicolas",
-      "source": "discord:thread:1543836757529985024; references:1543778490610884679,1543263056262594641; operation:data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "in_progress: reconstruindo precedentes cpv e iniciando pre-read meta completo da conta eggbev antes de qualquer write",
+      "source": "discord:thread:1543836757529985024; references:1543778490610884679,1543263056262594641; data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-dup03-lineage-serving-recovery.json",
+      "state": "recovery_monitoring: 17 campanhas auditadas; 14 já tinham spend/impressões e 2 estão futuras com hierarquia pronta. dup03 foi corrigida para page/utm/json alvo e ativada; após 16 checks sem impressão na rota direta, os três ads foram rematerializados por same-page ad copies com lineage, os diretos ficaram paused e os lineage active sem issues, delete, budget ou billing.",
       "thread_id": "1543836757529985024",
-      "updated_at": "2026-08-31T04:18:28+00:00"
+      "updated_at": "2026-08-31T05:16:31+00:00"
     },
     {
       "agent": "ares",
@@ -1682,5 +1692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T04:54:20+00:00"
+  "updated_at": "2026-08-31T05:16:31+00:00"
 }

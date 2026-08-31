@@ -753,35 +753,140 @@ def operational_alert_bullets(period: dict[str, Any]) -> list[str]:
     return bullets
 
 
-def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
-    headers = [
-        '#', 'Campanha', 'Página/UTM', 'St', 'Início', 'Budget', 'Spend', 'Msg', 'C/msg', 'ROAS',
-        'SB Inv', 'Receita', 'Broadcast', 'Drip', 'ROI', 'Leads', 'AvgP', 'RPS', 'EPC',
-        'M.CPM', 'CTR', 'Join',
-    ]
-    rows: list[list[str]] = []
-    for index, row in enumerate(campaigns, start=1):
-        page = common.norm(row.get('sb_page_name')) or common.norm(row.get('utm_campaign')) or 'N/D'
-        utm = common.norm(row.get('utm_campaign'))
-        if utm and utm not in page:
-            page = f'{page}/{utm}'
-        rows.append([
-            str(index), common.norm(row.get('name')) or common.norm(row.get('campaign_id')) or 'N/D',
-            page, common.norm(row.get('status')) or 'N/D', format_start_time(row.get('start_time')),
-            common.fmt_money(row.get('budget_usd')),
-            common.fmt_money(row.get('spend')), common.fmt_number(row.get('messaging_started'), 0),
-            common.fmt_money(row.get('cost_per_messaging_started')), common.fmt_number(row.get('purchase_roas')),
-            common.fmt_money(row.get('sb_investment')), common.fmt_money(row.get('sb_revenue')),
-            common.fmt_money(row.get('sb_broadcast_revenue')), common.fmt_money(row.get('sb_drip_revenue')),
-            format_percent(row.get('sb_roi_percent')), common.fmt_number(row.get('sb_leads'), 0),
-            common.fmt_money(row.get('pricing_avg')), common.fmt_money(row.get('pricing_rps')),
-            common.fmt_money(row.get('pricing_epc')), common.fmt_money(row.get('cpm')),
-            format_percent(row.get('ctr')), common.norm(row.get('join_status')) or 'N/D',
-        ])
+def aligned_table(headers: list[str], rows: list[list[str]]) -> list[str]:
+    if not rows:
+        return []
     widths = [max(len(headers[index]), *(len(row[index]) for row in rows)) for index in range(len(headers))]
+
     def line(values: list[str]) -> str:
         return '  '.join(value.ljust(widths[index]) for index, value in enumerate(values)).rstrip()
+
     return [line(headers), line(['─' * width for width in widths]), *[line(row) for row in rows]]
+
+
+def compact_campaign_key(name: Any, fallback: Any = None) -> str:
+    text = common.norm(name)
+    sequence = re.match(r'^\s*(\d+)', text)
+    campaign = re.search(r'\bC(\d+)\b', text, flags=re.I)
+    duplicate = re.search(r'\bDUP(\d+)\b', text, flags=re.I)
+    parts: list[str] = []
+    if sequence:
+        parts.append(sequence.group(1))
+    if campaign:
+        parts.append(f"C{int(campaign.group(1)):03d}")
+    if duplicate:
+        parts.append(f"D{int(duplicate.group(1)):02d}")
+    return '·'.join(parts) or text or common.norm(fallback) or 'N/D'
+
+
+def compact_page_label(row: dict[str, Any]) -> str:
+    page = common.norm(row.get('sb_page_name'))
+    first_name = page.split()[0] if page else ''
+    utm = common.norm(row.get('utm_campaign'))
+    utm_short = utm.removeprefix('pg_') if utm else ''
+    if first_name and utm_short:
+        return f'{first_name}/{utm_short}'
+    return page or utm or 'N/D'
+
+
+def build_page_summary(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups: dict[str, dict[str, Any]] = {}
+    sb_fields = (
+        'sb_investment', 'sb_revenue', 'sb_broadcast_revenue', 'sb_drip_revenue',
+        'sb_roi_percent', 'sb_leads', 'pricing_avg', 'pricing_rps', 'pricing_epc',
+    )
+    for campaign in campaigns:
+        utm = common.norm(campaign.get('utm_campaign')).lower()
+        key = utm or common.norm(campaign.get('sb_page_name')).lower() or common.norm(campaign.get('campaign_id'))
+        group = groups.setdefault(key, {
+            'utm_campaign': common.norm(campaign.get('utm_campaign')),
+            'page_name': common.norm(campaign.get('sb_page_name')),
+            'campaigns': 0,
+            'delivered': 0,
+            'spend': 0.0,
+            'messaging_started': 0.0,
+            'roas_value': 0.0,
+            'roas_spend': 0.0,
+            **{field: None for field in sb_fields},
+        })
+        group['campaigns'] += 1
+        spend = common.finite_float(campaign.get('spend'))
+        messaging = common.finite_float(campaign.get('messaging_started'))
+        roas = common.finite_float(campaign.get('purchase_roas'))
+        if campaign.get('has_insight') or spend is not None:
+            group['delivered'] += 1
+        if spend is not None:
+            group['spend'] += spend
+            if roas is not None:
+                group['roas_value'] += spend * roas
+                group['roas_spend'] += spend
+        if messaging is not None:
+            group['messaging_started'] += messaging
+        for field in sb_fields:
+            value = common.finite_float(campaign.get(field))
+            if group.get(field) is None and value is not None:
+                group[field] = value
+    summaries: list[dict[str, Any]] = []
+    for group in groups.values():
+        spend = group['spend']
+        messaging = group['messaging_started']
+        group['purchase_roas'] = group['roas_value'] / group['roas_spend'] if group['roas_spend'] > 0 else None
+        group['cost_per_messaging_started'] = spend / messaging if messaging > 0 else None
+        group['page_label'] = (
+            f"{group.get('page_name')} · {group.get('utm_campaign')}"
+            if group.get('page_name') and group.get('utm_campaign')
+            else group.get('page_name') or group.get('utm_campaign') or 'N/D'
+        )
+        summaries.append(group)
+    summaries.sort(key=lambda row: (-(row.get('spend') or 0.0), common.norm(row.get('page_label'))))
+    return summaries
+
+
+def render_page_meta_table(pages: list[dict[str, Any]]) -> list[str]:
+    rows = [[
+        common.norm(page.get('page_label')), str(page.get('campaigns') or 0), str(page.get('delivered') or 0),
+        common.fmt_money(page.get('spend')), common.fmt_number(page.get('purchase_roas')),
+        common.fmt_money(page.get('cost_per_messaging_started')),
+    ] for page in pages]
+    return aligned_table(['Página / UTM', 'Camp', 'Entr.', 'Spend', 'ROAS', 'C/msg'], rows)
+
+
+def render_page_economics_table(pages: list[dict[str, Any]]) -> list[str]:
+    rows = [[
+        common.norm(page.get('page_label')), common.fmt_money(page.get('sb_investment')),
+        common.fmt_money(page.get('sb_revenue')), common.fmt_money(page.get('sb_broadcast_revenue')),
+        common.fmt_money(page.get('sb_drip_revenue')), format_percent(page.get('sb_roi_percent')),
+        common.fmt_number(page.get('sb_leads'), 0), common.fmt_money(page.get('pricing_rps')),
+        common.fmt_money(page.get('pricing_epc')),
+    ] for page in pages]
+    return aligned_table(['Página / UTM', 'SB Inv', 'Receita', 'BC', 'Drip', 'ROI', 'Leads', 'RPS', 'EPC'], rows)
+
+
+def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
+    rows: list[list[str]] = []
+    for index, row in enumerate(campaigns, start=1):
+        if not (row.get('has_insight') or common.finite_float(row.get('spend')) is not None):
+            continue
+        rows.append([
+            str(index), compact_campaign_key(row.get('name'), row.get('campaign_id')), compact_page_label(row),
+            common.norm(row.get('status')) or 'N/D', common.fmt_money(row.get('spend')),
+            common.fmt_number(row.get('purchase_roas')), common.fmt_money(row.get('cost_per_messaging_started')),
+            common.fmt_number(row.get('messaging_started'), 0), format_percent(row.get('ctr')),
+        ])
+    return aligned_table(['#', 'Camp', 'Página', 'St', 'Spend', 'ROAS', 'C/msg', 'Msg', 'CTR'], rows)
+
+
+def render_no_delivery_table(campaigns: list[dict[str, Any]]) -> list[str]:
+    rows: list[list[str]] = []
+    for index, row in enumerate(campaigns, start=1):
+        if row.get('has_insight') or common.finite_float(row.get('spend')) is not None:
+            continue
+        rows.append([
+            str(index), compact_campaign_key(row.get('name'), row.get('campaign_id')), compact_page_label(row),
+            format_start_time(row.get('start_time')), common.fmt_money(row.get('budget_usd')),
+            common.norm(row.get('status')) or 'N/D',
+        ])
+    return aligned_table(['#', 'Camp', 'Página', 'Início', 'Budget', 'St'], rows)
 
 
 def render_period(period: dict[str, Any]) -> list[str]:
@@ -805,15 +910,27 @@ def render_period(period: dict[str, Any]) -> list[str]:
     lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
-        campaign_word = 'campanha' if len(campaigns) == 1 else 'campanhas'
+        pages = build_page_summary(campaigns)
+        campaign_table = render_campaign_table(campaigns)
+        no_delivery_table = render_no_delivery_table(campaigns)
         lines.extend([
-            '', f"**Tabela única consolidada — {len(campaigns)} {campaign_word}**",
-            'Escopo: campanhas atualmente ACTIVE + campanhas com insight no período. A tabela apoia a decisão humana de quais e quantas campanhas clonar; não clona automaticamente.',
-            '```text', *render_campaign_table(campaigns), '```',
+            '', '**📍 Páginas — Meta Ads**',
+            '```text', *render_page_meta_table(pages), '```',
+            '', '**💵 Páginas — Smart Bidding**',
+            '```text', *render_page_economics_table(pages), '```',
         ])
-        lines.append('`C/msg` = Meta spend ÷ `messaging_conversation_started_7d`; `M.CPM` = CPM Meta.')
-        lines.append('`RPS`/`EPC` locais são fallback rotulado; campo direto Smart Bidding vence quando reconciliado.')
-        lines.append('`SB Inv/Receita/Broadcast/Drip/ROI/Leads` são totais da Página/UTM e podem se repetir nas campanhas da mesma página; nunca somar essas células entre linhas.')
+        if campaign_table:
+            lines.extend([
+                '', f"**📣 Campanhas com entrega — {len(campaign_table) - 2}**",
+                '```text', *campaign_table, '```',
+            ])
+        if no_delivery_table:
+            lines.extend([
+                '', f"**⏳ ACTIVE sem entrega no período — {len(no_delivery_table) - 2}**",
+                '```text', *no_delivery_table, '```',
+            ])
+        lines.append('`Camp` = sequência·Cnnn·Dnn. `C/msg` = Meta spend ÷ mensagens iniciadas.')
+        lines.append('Smart Bidding aparece uma vez por Página/UTM; os valores não são repetidos nem somados entre campanhas.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
