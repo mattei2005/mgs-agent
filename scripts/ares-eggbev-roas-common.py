@@ -352,7 +352,11 @@ def fetch_sb_bundle(sb, policy: dict[str, Any], report_date: str) -> dict[str, A
     if report_status not in {200, 201} or not isinstance(report_rows, list):
         raise RuntimeError(f'Smart Bidding report failed: HTTP {report_status}')
     expected_names = [norm(value).lower() for value in ((policy.get('smart_bidding_reconciliation') or {}).get('expected_account_names') or ['Eggbev-US-CC-EN-01', 'Eggbev-US-CC-EN-01-G006'])]
-    target_rows = [row for row in report_rows if any(name and name in norm(row.get('ACCOUNT_NAME')).lower() for name in expected_names)]
+    target_rows = [
+        row for row in report_rows
+        if any(name and name in norm(row.get('ACCOUNT_NAME')).lower() for name in expected_names)
+        and norm(row.get('DATE'))[:10] == report_date
+    ]
     freshness = evaluate_sb_freshness(target_rows, now_et(), 2.0)
 
     target_account_id = norm((policy.get('smart_bidding_reconciliation') or {}).get('target_meta_account_id')).replace('act_', '')

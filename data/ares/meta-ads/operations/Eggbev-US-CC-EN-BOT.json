@@ -188,7 +188,7 @@
         "show final summary and wait for explicit approval",
         "publish through Engine v3 and validate by readback",
         "allow the first performance day/window before winner selection for cloning",
-        "request the consolidated Daily report; its schedule and final ritual remain pending Nicolas design",
+        "receive the consolidated Daily at 08:00 ET for D-1, with the current 08:00 revenue signal; cron/post enablement remains separately gated",
         "clone selected winners in the cloning route",
         "use Corte e ROAS as the master intraday route for ad-level actions and unified metrics",
         "use Limite de Leads for LEADS > 5000 campaign-level protection and alerts"
@@ -196,7 +196,7 @@
       "route_ownership": {
         "rules": "overview, definitions, authority, precedence, readiness and routing",
         "roas_cycle": "thresholds, scheduled/on-demand ad-level cuts/reactivations, unified Meta plus Smart Bidding view and gated scale recommendation",
-        "daily_reporting": "read-only consolidated reporting; automation design remains pending Nicolas",
+        "daily_reporting": "read-only consolidated D-1 reporting at the 08:00 ET design point, with clone-decision visibility and revenue anomaly alerts; cron/post remain disabled",
         "campaign_creation": "from-zero structure, media, copy, naming, budget, Messenger JSON, approval and readbacks",
         "campaign_cloning": "winner duplication, clone modes, DUP naming, budgets, approval and readbacks",
         "page_lead_guardrail": "page LEADS > 5000 campaign pause, proximity reporting, reconciliation, freshness and alerts"
@@ -327,6 +327,15 @@
           "specific_date": "--period YYYY-MM-DD"
         },
         "live_data_policy": "run the live report at request time; never reuse campaign, spend, ROAS, result, Smart Bidding or rule counts from an old thread message",
+        "schedule_design": {
+          "time": "08:00",
+          "timezone": "America/New_York",
+          "primary_period": "previous calendar day",
+          "same_clock_signal": "current-day revenue at 08:00 versus prior 08:00 snapshots only",
+          "cron_enabled": false,
+          "post_enabled": false,
+          "enablement_gate": "live dry-run review plus separate explicit Nicolas approval"
+        },
         "mandatory_report_sections": [
           "account alias, local generation time, period, USD, sources and read_only mode",
           "Meta metrics and campaign rows supported by the current renderer",
@@ -343,8 +352,8 @@
           "stale campaign or scheduler snapshots"
         ],
         "latest_correction": {
-          "corrected_at_et": "2026-08-29T19:08:30-04:00",
-          "reason": "final renderer review confirmed and corrected ACTIVE-without-insight invisibility, silent 20-row limit, 27-character name truncation, incomplete campaign metrics and hidden Smart Bidding freshness",
+          "corrected_at_et": "2026-08-30T23:35:00-04:00",
+          "reason": "Nicolas defined the Daily as an 08:00 ET D-1 management report, a single complete table supporting clone decisions, and short page-revenue anomaly alerts; runtime automation remains disabled",
           "historical_report_superseded": true,
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
@@ -354,7 +363,7 @@
           "live_read_only_report_verified": true,
           "tests_passed": 73,
           "renderer_complete_for_read_only": true,
-          "renderer_version": "hybrid_v2",
+          "renderer_version": "single_unified_table_v4",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
@@ -538,9 +547,13 @@
     "timezone": "America/New_York",
     "mode": "read_only",
     "report_on_demand": true,
-    "schedule_status": "not_defined_pending_nicolas_design",
-    "approved_times": [],
-    "schedule_policy": "Nenhum horário de relatório Diário está aprovado. Os ciclos 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS e nunca podem ser herdados pelo Diário.",
+    "schedule_status": "daily_design_approved_0800_et_cron_and_post_pending_separate_enable",
+    "approved_times": [
+      "08:00"
+    ],
+    "primary_period": "previous_calendar_day 00:00-23:59 America/New_York",
+    "same_clock_signal": "at the 08:00 Daily run, include a current-day 08:00 revenue snapshot only for comparison against prior 08:00 snapshots; never compare a current partial day with full prior days",
+    "schedule_policy": "The Daily design uses one 08:00 America/New_York report with the complete previous calendar day and an 08:00 current-day revenue signal. This time belongs only to the Eggbev Daily route and does not inherit or change any Corte e ROAS or CPV schedule. Cron and automatic posting remain disabled until a separate enable decision after a live dry-run.",
     "schedule_correction": {
       "corrected_at_et": "2026-08-30T19:05:28-04:00",
       "corrected_by": "Nicolas Holanda",
@@ -578,11 +591,36 @@
     "smart_bidding_policy": "maximum freshness 2h with verifiable timestamp; missing or stale timestamp reports N/D and never invents zero",
     "action_policy": "Daily is reporting-only; it never cuts, reactivates, scales budget, creates, clones or changes Meta rules",
     "historical_snapshot_policy": "never reuse old campaign counts, spend, ROAS, Smart Bidding availability or scheduler state as current truth",
-    "layout": "hybrid v3: one vertical card per campaign plus one unified Pricing + Meta Ads + Smart Bidding desktop table; fence-safe Discord pagination",
-    "automation_change": "none_until Daily routes and times are designed, a dry-run is shown and Nicolas explicitly approves cron write",
+    "layout": "single consolidated aligned table covering every campaign in scope, followed by at most five short Fique de olho bullets; fence-safe Discord pagination and no per-campaign cards",
+    "automation_change": "08:00 Daily design is approved; cron and automatic posting stay disabled until a live dry-run is reviewed and Nicolas explicitly authorizes enablement",
     "schedule_approval_is_not_cron_approval": true,
+    "revenue_anomaly_detection": {
+      "status": "read_only_detector_materialized_baseline_pending",
+      "scope": "Eggbev Daily only; no CPV source, runner, schedule, prompt or policy is read or modified",
+      "source": "Smart Bidding Messenger page revenue after exact report date, account, UTM, Page ID and freshness reconciliation",
+      "comparisons": {
+        "closed_day": "D-1 page revenue versus the median of up to seven prior comparable closed-day snapshots",
+        "same_clock": "current-day revenue at 08:00 versus the median of up to seven prior 08:00 snapshots"
+      },
+      "baseline_days": 7,
+      "minimum_comparable_samples": 3,
+      "warning_drop_percent": 30,
+      "critical_drop_percent": 40,
+      "threshold_status": "initial read-only alert bands requested by Nicolas; they create no campaign, budget, funnel or source write",
+      "retention_days": 45,
+      "failure_policy": "missing/stale freshness, date mismatch, missing UTM/Page join or insufficient baseline never becomes zero revenue; expose a short coverage/baseline alert and make no performance claim",
+      "human_follow_up": "flag the affected page and suggest checking broadcast/disparo, block or funnel and delivery with the responsible operator; Ares does not configure those systems from the Daily route",
+      "maximum_visible_bullets": 5,
+      "writes": {
+        "meta": false,
+        "smart_bidding": false,
+        "chatpion_or_funnel": false,
+        "budget": false,
+        "local_baseline_state_only": true
+      }
+    },
     "renderer_contract": {
-      "status": "hybrid_v3_unified_sources_layout_verified_direct_smart_bidding_extractor_pending",
+      "status": "single_unified_table_v4_clone_decision_and_revenue_alerts_materialized",
       "campaign_scope": "all currently effective ACTIVE campaigns even without an insight row, plus every campaign with insight in the requested period; historical campaigns with neither condition remain excluded",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
@@ -615,7 +653,7 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "vertical mobile cards plus one indexed unified Pricing + Meta Ads + Smart Bidding desktop table",
+      "layout": "one indexed aligned table only, with full campaign name, Page/UTM, Meta, Smart Bidding, Pricing and join fields; followed by a maximum of five short alerts",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "source_join": {
@@ -659,14 +697,15 @@
       "RPS, CPM, EPC, real ROI, estimated ROI and other available monetization metrics should be consumed directly from a compatible Smart Bidding vertical, Messenger Pages or domain route; the runner still needs exact endpoint/field readback for each metric before publishing live values",
       "the current Smart Bidding schema exposes no accepted update timestamp, so freshness is displayed as unverifiable and Smart Bidding monetary metrics remain N/D",
       "source-route selection and identity mapping for vertical, Messenger Pages and domain are not yet materialized in the Daily runner; this is an implementation gap, not a Smart Bidding data-availability limitation",
-      "Daily routes and times are not yet defined; automatic posting and Daily cron remain disabled until Nicolas defines them and approves a real dry-run and automation plan"
+      "the 08:00 ET Daily design is defined, but automatic posting and Daily cron remain disabled until Nicolas reviews a live dry-run and separately authorizes enablement",
+      "same-clock anomaly alerts require at least three valid 08:00 snapshots per page; until then the report explicitly says baseline em formação"
     ],
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-daily-report.py",
       "thread_id": "1541578596253175858",
       "post_enabled": false,
       "cron_enabled": false,
-      "blocked_reason": "Daily routes and times are not yet defined; posting and cron await Nicolas design plus an approved live dry-run"
+      "blocked_reason": "08:00 Daily design is approved, but posting and cron await review of a live dry-run and separate explicit enablement by Nicolas"
     }
   },
   "campaign_creation_policy": {

@@ -457,80 +457,302 @@ def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str
     return merged
 
 
+def prepare_daily_sb_bundle(bundle: dict[str, Any], report_date: str) -> dict[str, Any]:
+    """Apply Daily-only date and freshness gates without changing ROAS writes."""
+    prepared = dict(bundle)
+    rows = [
+        row for row in bundle.get('target_report_rows') or []
+        if common.norm(row.get('DATE'))[:10] == report_date
+    ]
+    prepared['target_report_rows'] = rows
+    legacy_ready = bool(bundle.get('ready'))
+    delay = dict(bundle.get('economic_freshness') or {})
+    delay_ready = delay.get('ready') is True
+    prepared['daily_reporting_ready'] = bool(rows) and (legacy_ready or delay_ready)
+    if not rows:
+        prepared['daily_reporting_reason'] = 'target_account_absent_for_exact_report_date'
+    elif prepared['daily_reporting_ready']:
+        prepared['daily_reporting_reason'] = None
+    else:
+        prepared['daily_reporting_reason'] = (
+            common.norm(bundle.get('reason'))
+            or common.norm(bundle.get('economic_reason'))
+            or 'smart_bidding_freshness_unverifiable'
+        )
+    if delay_ready and not legacy_ready:
+        prepared['freshness'] = {
+            'ready': True,
+            'reason': None,
+            'latest_at_et': delay.get('current_fill_time'),
+            'age_minutes': delay.get('age_minutes'),
+            'max_age_hours': 2.0,
+            'timestamp_field': 'estimated.delay.currentFillTime',
+            'evidence': delay.get('evidence'),
+        }
+    return prepared
+
+
+def default_anomaly_state() -> dict[str, Any]:
+    return {
+        'schema_version': 1,
+        'operation_id': 'Eggbev-US-CC-EN-BOT',
+        'snapshots': [],
+    }
+
+
+def load_anomaly_state(path: Path = ANOMALY_STATE_PATH) -> dict[str, Any]:
+    if not path.exists():
+        return default_anomaly_state()
+    try:
+        payload = common.load_json(path)
+    except Exception:
+        return default_anomaly_state()
+    if not isinstance(payload, dict) or not isinstance(payload.get('snapshots'), list):
+        return default_anomaly_state()
+    return payload
+
+
+def snapshot_kind(label: str) -> tuple[str | None, str | None]:
+    if label == 'Fechamento D-1' or label == 'Fechamento anterior':
+        return 'closed_day', '23:59'
+    if label == 'Sinal atual 08:00':
+        return 'same_clock', '08:00'
+    return None, None
+
+
+def build_revenue_snapshot(
+    sb: dict[str, Any], report_date: str, label: str, observed_at_et: str,
+) -> dict[str, Any]:
+    kind, cutoff = snapshot_kind(label)
+    if kind is None:
+        return {'eligible': False, 'reason': 'period_not_anomaly_comparable'}
+    if not sb.get('ready'):
+        return {
+            'eligible': False,
+            'date': report_date,
+            'kind': kind,
+            'cutoff': cutoff,
+            'reason': common.norm(sb.get('reason')) or 'smart_bidding_not_ready',
+        }
+    pages: list[dict[str, Any]] = []
+    coverage_issues: list[dict[str, str]] = []
+    for utm, row in sorted((sb.get('by_utm') or {}).items()):
+        issue = common.norm(row.get('page_mapping_issue'))
+        revenue = common.finite_float(row.get('revenue'))
+        if issue or revenue is None:
+            coverage_issues.append({
+                'utm_campaign': utm,
+                'reason': issue or 'revenue_missing',
+            })
+            continue
+        pages.append({
+            'utm_campaign': utm,
+            'page_id': common.norm(row.get('sb_page_id')) or None,
+            'page_name': common.norm(row.get('page_name')) or None,
+            'revenue': revenue,
+            'broadcast_revenue': common.finite_float(row.get('broadcast_revenue')),
+            'drip_revenue': common.finite_float(row.get('drip_revenue')),
+            'leads': common.finite_float(row.get('leads')),
+        })
+    if not pages:
+        return {
+            'eligible': False,
+            'date': report_date,
+            'kind': kind,
+            'cutoff': cutoff,
+            'reason': 'no_reconciled_page_revenue_rows',
+            'coverage_issues': coverage_issues,
+        }
+    return {
+        'eligible': True,
+        'date': report_date,
+        'kind': kind,
+        'cutoff': cutoff,
+        'observed_at_et': observed_at_et,
+        'pages': pages,
+        'coverage_issues': coverage_issues,
+    }
+
+
+def anomaly_page_key(row: dict[str, Any]) -> str:
+    return common.norm(row.get('page_id')) or common.norm(row.get('utm_campaign')).lower()
+
+
+def analyze_revenue_snapshot(
+    snapshot: dict[str, Any], state: dict[str, Any], policy: dict[str, Any],
+) -> dict[str, Any]:
+    if not snapshot.get('eligible'):
+        return {
+            'status': 'source_unavailable',
+            'reason': snapshot.get('reason'),
+            'alerts': [],
+            'coverage_issues': snapshot.get('coverage_issues') or [],
+        }
+    window = int(policy.get('baseline_days') or 7)
+    minimum = int(policy.get('minimum_comparable_samples') or 3)
+    warning = common.finite_float(policy.get('warning_drop_percent')) or 30.0
+    critical = common.finite_float(policy.get('critical_drop_percent')) or 40.0
+    history = [
+        row for row in state.get('snapshots') or []
+        if row.get('eligible')
+        and row.get('kind') == snapshot.get('kind')
+        and row.get('cutoff') == snapshot.get('cutoff')
+        and common.norm(row.get('date')) < common.norm(snapshot.get('date'))
+    ]
+    history.sort(key=lambda row: common.norm(row.get('date')), reverse=True)
+    history = history[:window]
+    samples_by_page: dict[str, list[float]] = defaultdict(list)
+    for historical in history:
+        for page in historical.get('pages') or []:
+            value = common.finite_float(page.get('revenue'))
+            key = anomaly_page_key(page)
+            if key and value is not None:
+                samples_by_page[key].append(value)
+    alerts: list[dict[str, Any]] = []
+    insufficient = 0
+    for page in snapshot.get('pages') or []:
+        key = anomaly_page_key(page)
+        samples = samples_by_page.get(key, [])[:window]
+        current = common.finite_float(page.get('revenue'))
+        if current is None or len(samples) < minimum:
+            insufficient += 1
+            continue
+        baseline = statistics.median(samples)
+        if baseline <= 0:
+            insufficient += 1
+            continue
+        drop = (baseline - current) * 100.0 / baseline
+        severity = 'critical' if drop >= critical else 'warning' if drop >= warning else 'ok'
+        if severity != 'ok':
+            alerts.append({
+                'severity': severity,
+                'utm_campaign': page.get('utm_campaign'),
+                'page_name': page.get('page_name'),
+                'current_revenue': current,
+                'baseline_median_revenue': baseline,
+                'drop_percent': drop,
+                'sample_count': len(samples),
+                'comparison': f"{snapshot.get('kind')}@{snapshot.get('cutoff')}",
+            })
+    alerts.sort(key=lambda row: (row.get('severity') != 'critical', -(row.get('drop_percent') or 0.0)))
+    return {
+        'status': 'alert' if alerts else 'baseline_forming' if insufficient else 'ok',
+        'alerts': alerts,
+        'pages_evaluated': len(snapshot.get('pages') or []),
+        'pages_without_baseline': insufficient,
+        'history_snapshots': len(history),
+        'minimum_comparable_samples': minimum,
+        'coverage_issues': snapshot.get('coverage_issues') or [],
+    }
+
+
+def upsert_anomaly_snapshot(
+    state: dict[str, Any], snapshot: dict[str, Any], observed_at_et: str,
+    retention_days: int = 45,
+) -> dict[str, Any]:
+    updated = dict(state)
+    snapshots = [dict(row) for row in state.get('snapshots') or []]
+    if snapshot.get('eligible'):
+        key = (snapshot.get('date'), snapshot.get('kind'), snapshot.get('cutoff'))
+        snapshots = [
+            row for row in snapshots
+            if (row.get('date'), row.get('kind'), row.get('cutoff')) != key
+        ]
+        snapshots.append(dict(snapshot))
+    snapshots.sort(key=lambda row: (common.norm(row.get('date')), common.norm(row.get('kind')), common.norm(row.get('cutoff'))))
+    if snapshots:
+        latest = dt.date.fromisoformat(max(common.norm(row.get('date')) for row in snapshots))
+        floor = latest - dt.timedelta(days=retention_days)
+        snapshots = [row for row in snapshots if dt.date.fromisoformat(common.norm(row.get('date'))) >= floor]
+    updated['snapshots'] = snapshots
+    updated['updated_at_et'] = observed_at_et
+    return updated
+
+
+def anomaly_bullets(analysis: dict[str, Any], maximum: int = 5) -> list[str]:
+    if analysis.get('status') == 'source_unavailable':
+        return [
+            '⚪ Monitor de receita sem leitura confiável: '
+            + (common.norm(analysis.get('reason')) or 'fonte indisponível')
+            + '. A ausência do sinal é tratada como alerta de cobertura, não como receita zero.'
+        ]
+    bullets: list[str] = []
+    for alert in analysis.get('alerts') or []:
+        icon = '🔴' if alert.get('severity') == 'critical' else '🟠'
+        page = common.norm(alert.get('page_name')) or common.norm(alert.get('utm_campaign')) or 'página N/D'
+        bullets.append(
+            f"{icon} {page} ({alert.get('utm_campaign') or 'UTM N/D'}): receita {common.fmt_money(alert.get('current_revenue'))} "
+            f"vs mediana {common.fmt_money(alert.get('baseline_median_revenue'))} "
+            f"({alert.get('drop_percent'):.1f}% abaixo; n={alert.get('sample_count')}). "
+            'Verificar disparo, bloco/funil e entrega da página com o responsável.'
+        )
+    if not bullets and analysis.get('status') == 'baseline_forming':
+        bullets.append(
+            f"⚪ Baseline de receita em formação: {analysis.get('history_snapshots', 0)}/"
+            f"{analysis.get('minimum_comparable_samples', 3)} snapshots comparáveis; nenhuma queda é inferida antes do mínimo."
+        )
+    if analysis.get('coverage_issues'):
+        bullets.append(f"⚪ {len(analysis.get('coverage_issues') or [])} página(s) sem join/fonte suficiente; revisar cobertura antes de concluir performance.")
+    return bullets[:maximum]
+
+
+def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
+    headers = [
+        '#', 'Campanha', 'Página/UTM', 'St', 'Budget', 'Spend', 'Msg', 'C/msg', 'ROAS',
+        'SB Inv', 'Receita', 'Broadcast', 'Drip', 'ROI', 'Leads', 'AvgP', 'RPS', 'EPC',
+        'M.CPM', 'CTR', 'Join',
+    ]
+    rows: list[list[str]] = []
+    for index, row in enumerate(campaigns, start=1):
+        page = common.norm(row.get('sb_page_name')) or common.norm(row.get('utm_campaign')) or 'N/D'
+        utm = common.norm(row.get('utm_campaign'))
+        if utm and utm not in page:
+            page = f'{page}/{utm}'
+        rows.append([
+            str(index), common.norm(row.get('name')) or common.norm(row.get('campaign_id')) or 'N/D',
+            page, common.norm(row.get('status')) or 'N/D', common.fmt_money(row.get('budget_usd')),
+            common.fmt_money(row.get('spend')), common.fmt_number(row.get('messaging_started'), 0),
+            common.fmt_money(row.get('cost_per_messaging_started')), common.fmt_number(row.get('purchase_roas')),
+            common.fmt_money(row.get('sb_investment')), common.fmt_money(row.get('sb_revenue')),
+            common.fmt_money(row.get('sb_broadcast_revenue')), common.fmt_money(row.get('sb_drip_revenue')),
+            format_percent(row.get('sb_roi_percent')), common.fmt_number(row.get('sb_leads'), 0),
+            common.fmt_money(row.get('pricing_avg')), common.fmt_money(row.get('pricing_rps')),
+            common.fmt_money(row.get('pricing_epc')), common.fmt_money(row.get('cpm')),
+            format_percent(row.get('ctr')), common.norm(row.get('join_status')) or 'N/D',
+        ])
+    widths = [max(len(headers[index]), *(len(row[index]) for row in rows)) for index in range(len(headers))]
+    def line(values: list[str]) -> str:
+        return '  '.join(value.ljust(widths[index]) for index, value in enumerate(values)).rstrip()
+    return [line(headers), line(['─' * width for width in widths]), *[line(row) for row in rows]]
+
+
 def render_period(period: dict[str, Any]) -> list[str]:
     meta = period['meta']
     sb = period['smart_bidding']
     lines = [
         f"**{period['label']} — {period['date']}**",
-        '```text',
-        'Meta (USD)                    Valor',
-        '----------------------------  ------------',
-        f"Amount spent                 {common.fmt_money(meta.get('spend')):>12}",
-        f"Purchase ROAS                {common.fmt_number(meta.get('purchase_roas')):>12}",
-        f"Mensagens iniciadas          {common.fmt_number(meta.get('messaging_started'), 0):>12}",
-        f"Custo/msg iniciada           {common.fmt_money(meta.get('cost_per_messaging_started')):>12}",
-        f"CPM                           {common.fmt_money(meta.get('cpm')):>12}",
-        f"CTR                           {format_percent(meta.get('ctr')):>12}",
-        f"Budget ACTIVE total           {common.fmt_money(meta.get('active_budget')):>12}",
-        '```',
-        '```text',
-        'Smart Bidding (USD)           Valor',
-        '----------------------------  ------------',
-        f"Linhas conta alvo             {sb.get('rows', 0):>12}",
-        f"Investimento                  {common.fmt_money(sb.get('investment')):>12}",
-        f"Receita                       {common.fmt_money(sb.get('revenue')):>12}",
-        f"Receita drip                  {common.fmt_money(sb.get('drip_revenue')):>12}",
-        f"Receita broadcast             {common.fmt_money(sb.get('broadcast_revenue')):>12}",
-        f"Leads                         {common.fmt_number(sb.get('leads'), 0):>12}",
-        f"AVG_PRICE                    {common.fmt_money(sb.get('avg_price')):>12}",
-        f"RPS bruto                    {common.fmt_money(sb.get('rps_gross')):>12}",
-        f"EPC bruto                    {common.fmt_money(sb.get('epc_gross')):>12}",
-        f"ROI real                      {'N/D':>12}",
-        f"ROI estimado                  {'N/D':>12}",
-        f"Última atualização            {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D':>12}",
-        f"Atraso da fonte               {(str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D':>12}",
-        f"Freshness máx.                 {str((sb.get('freshness') or {}).get('max_age_hours') or 2.0) + 'h':>12}",
-        f"Campo timestamp               {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D':>12}",
-        '```',
+        f"- Meta: Spend {common.fmt_money(meta.get('spend'))} | ROAS {common.fmt_number(meta.get('purchase_roas'))} | "
+        f"Mensagens {common.fmt_number(meta.get('messaging_started'), 0)} | Custo/msg {common.fmt_money(meta.get('cost_per_messaging_started'))} | "
+        f"CPM {common.fmt_money(meta.get('cpm'))} | CTR {format_percent(meta.get('ctr'))}.",
+        f"- Smart Bidding: Investimento {common.fmt_money(sb.get('investment'))} | Receita {common.fmt_money(sb.get('revenue'))} | "
+        f"Broadcast {common.fmt_money(sb.get('broadcast_revenue'))} | Drip {common.fmt_money(sb.get('drip_revenue'))} | "
+        f"Leads {common.fmt_number(sb.get('leads'), 0)} | RPS {common.fmt_money(sb.get('rps_gross'))}.",
+        f"- Fonte SB: atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
+        f"idade {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
+        f"campo {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'}.",
     ]
     if not sb.get('ready'):
         lines.append('⚠️ Smart Bidding não reconciliada: ' + common.norm(sb.get('reason')) + '.')
     lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
-        lines.extend(['', f"**Campanhas no escopo — {len(campaigns)}**", 'Escopo: campanhas atualmente ACTIVE + campanhas com insight no período.'])
-        for index, row in enumerate(campaigns, start=1):
-            lines.extend([
-                '',
-                f"**{index}. {row.get('name') or row.get('campaign_id') or 'N/D'}**",
-                '```text',
-                f"Status    {row.get('status') or 'N/D':<12}  Início       {format_start_time(row.get('start_time'))}",
-                f"UTM       {row.get('utm_campaign') or 'N/D':<12}  Join         {row.get('join_status') or 'N/D'}",
-                f"Budget    {common.fmt_money(row.get('budget_usd')):<12}  Spend        {common.fmt_money(row.get('spend'))}",
-                f"Msg inic. {common.fmt_number(row.get('messaging_started'), 0):<12}  Custo/msg    {common.fmt_money(row.get('cost_per_messaging_started'))}",
-                f"ROAS      {common.fmt_number(row.get('purchase_roas')):<12}  Meta CPM     {common.fmt_money(row.get('cpm'))}",
-                f"CTR       {format_percent(row.get('ctr'))}",
-                f"SB Invest {common.fmt_money(row.get('sb_investment')):<12}  SB Receita   {common.fmt_money(row.get('sb_revenue'))}",
-                f"SB LEADS  {common.fmt_number(row.get('sb_leads'), 0):<12}  AVG_PRICE    {common.fmt_money(row.get('pricing_avg'))}",
-                f"RPS bruto {common.fmt_money(row.get('pricing_rps')):<12}  EPC bruto    {common.fmt_money(row.get('pricing_epc'))}",
-                f"Obs       {row.get('note') or 'N/D'}",
-                '```',
-            ])
-        lines.extend(['', '**Tabela única — Pricing + Meta Ads + Smart Bidding**', '```text', '#  Status  UTM       Spend  Msg  C/msg  ROAS  M.CPM  SB Inv  SB Rev  Leads  AvgP   RPS    EPC   Join'])
-        lines.append('-- ------- --------- ------ ---- ------ ----- ------ ------- ------- ------ ------ ------ ----- ----------------')
-        for index, row in enumerate(campaigns, start=1):
-            lines.append(
-                f"{index:<2} {(row.get('status') or 'N/D')[:7]:<7} {(row.get('utm_campaign') or 'N/D'):<9} "
-                f"{common.fmt_money(row.get('spend')):>6} {common.fmt_number(row.get('messaging_started'), 0):>4} "
-                f"{common.fmt_money(row.get('cost_per_messaging_started')):>6} {common.fmt_number(row.get('purchase_roas')):>5} "
-                f"{common.fmt_money(row.get('cpm')):>6} {common.fmt_money(row.get('sb_investment')):>7} "
-                f"{common.fmt_money(row.get('sb_revenue')):>7} {common.fmt_number(row.get('sb_leads'), 0):>6} "
-                f"{common.fmt_money(row.get('pricing_avg')):>6} {common.fmt_money(row.get('pricing_rps')):>6} "
-                f"{common.fmt_money(row.get('pricing_epc')):>5} {(row.get('join_status') or 'N/D')}"
-            )
-        lines.append('```')
+        lines.extend([
+            '', f"**Tabela única consolidada — {len(campaigns)} campanhas**",
+            'Escopo: campanhas atualmente ACTIVE + campanhas com insight no período. A tabela apoia a decisão humana de quais e quantas campanhas clonar; não clona automaticamente.',
+            '```text', *render_campaign_table(campaigns), '```',
+        ])
         lines.append('`C/msg` = Meta spend ÷ `messaging_conversation_started_7d`; `M.CPM` = CPM Meta.')
-        lines.append('`RPS bruto` = SB REVENUE × 1.000 ÷ SESSIONS; `EPC bruto` = SB REVENUE ÷ ACQUISITION_CLICKS.')
+        lines.append('`RPS`/`EPC` locais são fallback rotulado; campo direto Smart Bidding vence quando reconciliado.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_insight'):
             lines.append(f"ℹ️ ACTIVE sem insight no período: {meta.get('active_without_insight')}; campanhas mantidas visíveis com métricas `N/D`.")
@@ -540,6 +762,9 @@ def render_period(period: dict[str, Any]) -> list[str]:
             lines.append(f"⚠️ Criativo/UTM/Page ID não relidos para {len(meta.get('ad_readback_errors') or [])} anúncio(s).")
     else:
         lines.append('Nenhuma campanha ACTIVE e nenhuma campanha com insight Meta no período.')
+    bullets = anomaly_bullets(period.get('revenue_anomaly') or {})
+    if bullets:
+        lines.extend(['', '**Fique de olho**', *[f'- {bullet}' for bullet in bullets]])
     return lines
 
 
@@ -562,6 +787,7 @@ def main() -> int:
     parser.add_argument('--period', default='auto', help='auto, today, yesterday or YYYY-MM-DD')
     parser.add_argument('--post', action='store_true', help='post to fixed Daily thread when runtime is enabled')
     parser.add_argument('--at', help='read-only ISO timestamp for deterministic auto-period selection')
+    parser.add_argument('--no-baseline-write', action='store_true', help='do not persist local revenue baseline snapshots')
     parser.add_argument('--quiet', action='store_true')
     args = parser.parse_args()
     if args.post and args.at:
@@ -572,12 +798,18 @@ def main() -> int:
     operation = common.load_json(common.OP_PATH)
     account_file = common.load_json(common.ACCOUNT_PATH)
     account = (account_file.get('accounts') or [{}])[0]
-    runtime = (operation.get('daily_reporting_policy') or {}).get('runtime') or {}
+    daily_policy = operation.get('daily_reporting_policy') or {}
+    runtime = daily_policy.get('runtime') or {}
+    anomaly_policy = daily_policy.get('revenue_anomaly_detection') or {}
     threshold_policy = (operation.get('roas_cycle_policy') or {}).get('threshold') or {}
     state, _ = common.load_state(at.date(), common.finite_float(threshold_policy.get('daily_reset_value')) or 0.40)
+    anomaly_state = load_anomaly_state()
+    anomaly_snapshots_written = 0
     run: dict[str, Any] = {
         'ok': False, 'mode': 'read_only', 'run_id': run_id, 'started_at_et': at.isoformat(),
         'period_request': args.period, 'periods': [], 'writes_attempted': 0,
+        'anomaly_state_path': str(ANOMALY_STATE_PATH),
+        'anomaly_snapshots_written': 0,
         'audit_path': str(audit_path),
     }
     common.atomic_json(audit_path, run)
@@ -594,13 +826,25 @@ def main() -> int:
                 sb_bundle = common.fetch_sb_bundle(sb, operation, report_date)
             except Exception as exc:
                 sb_bundle = {'ready': False, 'reason': f'{type(exc).__name__}: {exc}', 'target_report_rows': [], 'available_account_names': []}
+            sb_bundle = prepare_daily_sb_bundle(sb_bundle, report_date)
             meta_aggregate = aggregate_meta(meta_bundle)
             sb_aggregate = aggregate_sb(sb_bundle)
             meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
+            snapshot = build_revenue_snapshot(sb_aggregate, report_date, label, at.isoformat())
+            anomaly = analyze_revenue_snapshot(snapshot, anomaly_state, anomaly_policy)
+            if snapshot.get('eligible'):
+                anomaly_state = upsert_anomaly_snapshot(
+                    anomaly_state,
+                    snapshot,
+                    at.isoformat(),
+                    int(anomaly_policy.get('retention_days') or 45),
+                )
+                anomaly_snapshots_written += 1
             run['periods'].append({
                 'date': report_date, 'label': label,
                 'meta': meta_aggregate,
                 'smart_bidding': sb_aggregate,
+                'revenue_anomaly': anomaly,
                 'readback': {
                     'meta_insight_rows': len(meta_bundle.get('insights') or []),
                     'meta_campaign_readbacks': len(meta_bundle.get('campaign_readbacks') or []),
@@ -613,6 +857,10 @@ def main() -> int:
                 },
             })
             common.atomic_json(audit_path, run)
+        if anomaly_snapshots_written and not args.no_baseline_write:
+            common.atomic_json(ANOMALY_STATE_PATH, anomaly_state)
+        run['anomaly_snapshots_written'] = 0 if args.no_baseline_write else anomaly_snapshots_written
+        run['anomaly_snapshots_observed'] = anomaly_snapshots_written
         report = render_report(run)
         if args.post:
             run['delivery'] = common.post_to_thread(runtime.get('thread_id') or '1541578596253175858', report)
