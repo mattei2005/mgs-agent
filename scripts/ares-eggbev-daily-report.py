@@ -425,9 +425,23 @@ def aggregate_campaign_economics(bundle: dict[str, Any], report_date: str, curre
             'by_campaign_utm': {},
             'freshness': freshness,
         }
+    economic_rows = list(bundle.get('economic_performance_rows') or [])
+    net_source_values = [
+        value for value in (common.finite_float(row.get('NET_REVENUE')) for row in economic_rows)
+        if value is not None
+    ]
+    estimated_source_values = [
+        value for value in (common.finite_float(row.get('REVENUE_ESTIMATED')) for row in economic_rows)
+        if value is not None
+    ]
+    # The current Smart Bidding schema can expose a numeric zero placeholder for
+    # every campaign while page-level revenue is positive. A zero-only column is
+    # therefore unavailable coverage, not evidence of a -100% campaign ROI.
+    net_revenue_zero_only = bool(net_source_values) and all(value == 0 for value in net_source_values)
+    estimated_revenue_zero_only = bool(estimated_source_values) and all(value == 0 for value in estimated_source_values)
     grouped: dict[tuple[str, str], dict[str, Any]] = {}
     utm_campaigns: dict[str, set[str]] = defaultdict(set)
-    for source in bundle.get('economic_performance_rows') or []:
+    for source in economic_rows:
         campaign_id = common.norm(source.get('CAMPAIGN_ID'))
         utm = normalize_utm_campaign(source.get('UTM_ADGROUP'))
         if not campaign_id or not utm:
@@ -474,11 +488,11 @@ def aggregate_campaign_economics(bundle: dict[str, Any], report_date: str, curre
         )
         estimated_revenue = common.finite_float((estimate or {}).get('estimatedRevenue'))
         estimate_source = 'estimated/revenue/utm_adgroup'
-        if estimated_revenue is None and item['has_estimated_revenue_direct']:
+        if estimated_revenue is None and item['has_estimated_revenue_direct'] and not estimated_revenue_zero_only:
             estimated_revenue = item['estimated_revenue_direct']
             estimate_source = 'performance_per_campaigns.REVENUE_ESTIMATED'
         investment = item['investment'] if item['has_investment'] else None
-        net_revenue = item['net_revenue'] if item['has_net_revenue'] else None
+        net_revenue = item['net_revenue'] if item['has_net_revenue'] and not net_revenue_zero_only else None
         item.update({
             'roi_real': roi_percent(net_revenue, investment),
             'roi_estimated': roi_percent(estimated_revenue, investment),
@@ -493,6 +507,10 @@ def aggregate_campaign_economics(bundle: dict[str, Any], report_date: str, curre
         'reason': None,
         'by_campaign_utm': grouped,
         'freshness': freshness,
+        'coverage': {
+            'net_revenue_zero_only': net_revenue_zero_only,
+            'estimated_revenue_zero_only': estimated_revenue_zero_only,
+        },
     }
 
 
@@ -529,7 +547,10 @@ def merge_campaign_economics(meta: dict[str, Any], economics: dict[str, Any]) ->
     merged['campaigns'] = campaigns
     merged['economic_join_counts'] = dict(sorted(counts.items()))
     merged['economic_join_matched'] = counts.get('matched', 0)
+    merged['economic_roi_real_available'] = sum(1 for row in campaigns if common.finite_float(row.get('roi_real')) is not None)
+    merged['economic_roi_estimated_available'] = sum(1 for row in campaigns if common.finite_float(row.get('roi_estimated')) is not None)
     merged['economic_freshness'] = dict(economics.get('freshness') or {})
+    merged['economic_coverage'] = dict(economics.get('coverage') or {})
     return merged
 
 
@@ -855,8 +876,20 @@ def anomaly_bullets(analysis: dict[str, Any], maximum: int = 5) -> list[str]:
 
 
 def operational_alert_bullets(period: dict[str, Any]) -> list[str]:
-    campaigns = (period.get('meta') or {}).get('campaigns') or []
+    meta = period.get('meta') or {}
+    campaigns = meta.get('campaigns') or []
     bullets: list[str] = []
+    coverage = meta.get('economic_coverage') or {}
+    if coverage.get('net_revenue_zero_only') or coverage.get('estimated_revenue_zero_only'):
+        missing = []
+        if coverage.get('net_revenue_zero_only'):
+            missing.append('NET_REVENUE')
+        if coverage.get('estimated_revenue_zero_only'):
+            missing.append('REVENUE_ESTIMATED')
+        bullets.append(
+            f"⚪ ROI campanha N/D: Smart Bidding retornou cobertura zero-only em {', '.join(missing)}; "
+            'não interpretar como -100%.'
+        )
     names: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for campaign in campaigns:
         names[common.norm(campaign.get('name'))].append(campaign)
@@ -1202,7 +1235,10 @@ def render_period(period: dict[str, Any]) -> list[str]:
         lines.append('🧬 identidade conciliada · 🟡 revisar cobertura · ⚠️ conflito de nome/UTM/Página. `Fonte` é o alias para levar à thread Clonar Campanhas; todo clone ainda exige preflight.')
         lines.append('`Msg` = messaging_conversation_started_7d. `ROI real/est.` = Smart Bidding por campanha+UTM exatas; `ROI pág.*` permanece no nível Página/UTM.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
-        lines.append(f"Conciliação ROI campanha×UTM: {meta.get('economic_join_matched', 0)}/{len(campaigns)} com fonte econômica fresca e match exato.")
+        lines.append(
+            f"ROI campanha×UTM: {meta.get('economic_join_matched', 0)}/{len(campaigns)} match · "
+            f"real {meta.get('economic_roi_real_available', 0)} · est. {meta.get('economic_roi_estimated_available', 0)}."
+        )
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
         if meta.get('active_without_insight'):

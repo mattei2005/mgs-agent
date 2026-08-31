@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.19.4-draft
+version: 0.19.5-draft
 author: Ares
 license: internal
 metadata:

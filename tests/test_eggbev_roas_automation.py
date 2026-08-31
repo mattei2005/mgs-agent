@@ -968,6 +968,22 @@ class ReportingTests(unittest.TestCase):
         self.assertIsNone(row['roi_estimated'])
         self.assertEqual(row['economic_join_status'], 'economic_freshness_unverifiable_or_stale')
 
+    def test_daily_campaign_roi_does_not_treat_zero_only_coverage_as_minus_100(self):
+        economics = daily.aggregate_campaign_economics({
+            'economic_ready': True,
+            'economic_freshness': {'ready': True, 'age_minutes': 10},
+            'economic_performance_rows': [{
+                'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_12345',
+                'INVESTIMENT': 10, 'NET_REVENUE': 0, 'REVENUE_ESTIMATED': 0,
+            }],
+            'economic_estimated': {'grouped': []},
+        }, '2026-08-31', '2026-08-31')
+        row = economics['by_campaign_utm'][('c1', 'pg_12345')]
+        self.assertIsNone(row['roi_real'])
+        self.assertIsNone(row['roi_estimated'])
+        self.assertTrue(economics['coverage']['net_revenue_zero_only'])
+        self.assertTrue(economics['coverage']['estimated_revenue_zero_only'])
+
     def test_unreconciled_smart_bidding_metrics_are_nd_not_zero(self):
         result = daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': []})
         self.assertIsNone(result['investment'])
@@ -1338,8 +1354,8 @@ class ContractTests(unittest.TestCase):
         self.assertIn('never copied into a campaign row', renderer['metric_semantics']['page_roi_and_rps'])
         self.assertIn('NET_REVENUE', renderer['metric_semantics']['campaign_roi_real'])
         self.assertIn('estimatedRevenue', renderer['metric_semantics']['campaign_roi_estimated'])
-        self.assertIn('Smart Bidding ROI real', renderer['per_campaign_fields'])
-        self.assertIn('Smart Bidding ROI estimated', renderer['per_campaign_fields'])
+        self.assertIn('Smart Bidding ROI real with health emoji', renderer['per_campaign_fields'])
+        self.assertIn('Smart Bidding ROI estimated with health emoji', renderer['per_campaign_fields'])
         self.assertIn('every requested report performs new API reads', renderer['smart_bidding_live_query_policy'])
         self.assertIn('current dashboard Broadcast revenue from /report/messenger BD_REVENUE', renderer['per_page_smart_bidding_fields'])
         self.assertIn('spend-weighted Meta Purchase ROAS', renderer['per_page_meta_fields'])

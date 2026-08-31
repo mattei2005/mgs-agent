@@ -1461,6 +1461,30 @@
         "scope": "report presentation and source clarification only; no change to Meta Purchase ROAS decisions, cut/reactivation logic, writes, schedules or budget authority",
         "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/roi-source-color-v16-20260830.json"
       },
+      "smart_bidding_messenger_pages_parity_v25": {
+        "decision_id": "ARES-EGGBEV-ROAS-SB-PARITY-V25-20260831",
+        "requested_by": "Nicolas Holanda",
+        "requested_by_discord_id": "1055570806945620030",
+        "requested_at_et": "2026-08-31T09:52:15-04:00",
+        "source": "discord:thread:1543974826891280394",
+        "affected_report_thread": "discord:thread:1541578606076231750",
+        "decision": "Smart Bidding Messenger Pages is the source of truth for current and estimated ROI in every Corte e ROAS report; Ares must reproduce its routes, joins, period semantics and formulas exactly.",
+        "current_roi": "POST /report/messenger REVENUE and INVESTIMENT; (REVENUE - INVESTIMENT) * 100 / INVESTIMENT",
+        "estimated_roi": "for the current ET day only, POST /estimated/revenue/utm_adgroup estimatedRevenue joined by exact COMPANY_DOMAIN + UTM_CAMPAIGN; (estimatedRevenue - INVESTIMENT) * 100 / INVESTIMENT",
+        "granularity": "Page/UTM. Campaign rows with the same reconciled Page/UTM may display the same page value and must never aggregate or attribute NET_REVENUE by campaign for this field.",
+        "historical_period": "the Messenger Pages frontend does not apply the live estimate to historical dates; ROI estimated remains N/D for historical Corte e ROAS periods",
+        "freshness_separation": "report-only values mirror the Smart Bidding readback and retain freshness evidence; stale or unverifiable data continues to block Meta writes through the existing source gate",
+        "scope": "Corte e ROAS reporting source and formulas only; Meta Purchase ROAS decisions, ad-level actions, budgets, schedules and table layout are unchanged",
+        "validation": {
+          "unit_tests": "100/100 passed",
+          "screenshot_fixture_rows": 3,
+          "live_page_rows_checked": 4,
+          "live_exact_matches": 4,
+          "live_mismatches": 0,
+          "live_dry_run_campaigns": 19,
+          "live_meta_writes": 0
+        }
+      },
       "campaign_identity_and_large_table_correction": {
         "requested_by": "Nicolas Holanda",
         "requested_by_discord_id": "1055570806945620030",
@@ -1562,9 +1586,9 @@
       "source_routes": {
         "leads": "Smart Bidding /report/messenger plus /campaigns/Messenger Pages; exact UTM_CAMPAIGN and FB_PAGE_ID; remains N/D when the Messenger freshness timestamp is absent or stale",
         "messenger_pages_ui": "Messenger Pages is composed from /campaigns/Messenger identity and leads, /report/messenger current page economics, /estimated/revenue/utm_adgroup future revenue, and /estimated/delay freshness",
-        "economics_actual": "Smart Bidding /report/performance_per_campaigns filtered by exact CUSTOMER_ID act_1034081997659047, DOMAIN eggbev, requested DATE, exact CAMPAIGN_ID and exact UTM_ADGROUP; currency USD",
-        "economics_estimated": "Smart Bidding /estimated/revenue/utm_adgroup, the same future-estimate backend shown on the second line of Messenger Pages; joined only after the exact account campaign+UTM performance row exists and the UTM is unique inside the target account",
-        "economics_freshness": "Smart Bidding /estimated/delay; currentFillTime required and totalMinutes must be <= 120"
+        "economics_actual": "Smart Bidding /report/messenger filtered to Eggbev-US-CC-EN-01 and exact UTM_CAMPAIGN; current ROI uses the row's REVENUE and INVESTIMENT exactly as Messenger Pages; currency USD",
+        "economics_estimated": "Smart Bidding /estimated/revenue/utm_adgroup, joined by exact COMPANY_DOMAIN + UTM_CAMPAIGN and applied only to the current ET day, exactly as Messenger Pages",
+        "economics_freshness": "Smart Bidding /estimated/delay; freshness remains visible in reporting and continues to fail-close Meta writes when unverifiable or over 120 minutes"
       },
       "report_only_formulas": {
         "cost_per_messaging_started_usd": "Meta Amount spent / onsite_conversion.messaging_conversation_started_7d; N/D when result count <= 0",
@@ -1574,10 +1598,10 @@
         "profit_usd": "Smart Bidding REVENUE - INVESTIMENT",
         "smart_bidding_roi_percent": "(REVENUE - INVESTIMENT) * 100 / INVESTIMENT; N/D when investment <= 0",
         "drip_roi_percent": "(DRIP_REVENUE - INVESTIMENT) * 100 / INVESTIMENT; N/D when investment <= 0",
-        "real_roi_percent": "(NET_REVENUE - INVESTIMENT) * 100 / INVESTIMENT; N/D when investment <= 0",
-        "estimated_roi_percent": "(estimatedRevenue - INVESTIMENT) * 100 / INVESTIMENT; N/D when estimate is missing/ambiguous or investment <= 0",
-        "rps_usd": "NET_REVENUE * 1000 / SESSIONS; N/D when sessions <= 0",
-        "block_cpm_usd": "NET_REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
+        "real_roi_percent": "Messenger Pages parity: (REVENUE - INVESTIMENT) * 100 / INVESTIMENT from /report/messenger; N/D when investment <= 0",
+        "estimated_roi_percent": "Messenger Pages parity on the current ET day: (estimatedRevenue - INVESTIMENT) * 100 / INVESTIMENT after exact COMPANY_DOMAIN + UTM_CAMPAIGN join; historical periods are N/D",
+        "rps_usd": "Messenger Pages parity: REVENUE * 1000 / SESSIONS; N/D when sessions <= 0",
+        "block_cpm_usd": "Messenger Pages parity: REVENUE * 1000 / GAM_IMPRESSIONS; N/D when GAM_IMPRESSIONS <= 0"
       },
       "decision_separation": "Meta Purchase ROAS decides only ad-level cuts/reactivations; economic formulas are informative only; ROAS cycle never changes campaign or ad-set status and never changes budget",
       "pagination": "no silent campaign limit; every campaign appears exactly once; pagination uses actual rendered character count plus a maximum of ten rows per table block, never splits a campaign row, keeps campaign families naturally ordered, repeats every heading and keeps every code fence balanced",
