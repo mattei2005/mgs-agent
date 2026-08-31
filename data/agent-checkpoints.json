@@ -483,12 +483,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-SERVING-REVIEW-20260831",
-      "next_step": "Aguardar e validar primeira impressão/gasto da DUP03 por Insights Meta; depois fechar audit/checkpoint e reportar o resultado ao Nicolas.",
+      "next_step": "Somente acompanhamento operacional normal; novos clone_page_switch permanecem fail-closed até arquitetura global aprovada por Rodolfo.",
       "objective": "Auditar campanhas Eggbev criadas pelo Ares, corrigir qualquer condição de não entrega e publicar dentro da autorização de Nicolas",
-      "source": "discord:thread:1543836757529985024; references:1543778490610884679,1543263056262594641; data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-dup03-lineage-serving-recovery.json",
-      "state": "recovery_monitoring: 17 campanhas auditadas; 14 já tinham spend/impressões e 2 estão futuras com hierarquia pronta. dup03 foi corrigida para page/utm/json alvo e ativada; após 16 checks sem impressão na rota direta, os três ads foram rematerializados por same-page ad copies com lineage, os diretos ficaram paused e os lineage active sem issues, delete, budget ou billing.",
+      "source": "discord:thread:1543836757529985024; references:1543778490610884679,1543263056262594641; data/ares/meta-ads/audit/eggbev/eggbev-all-ares-campaigns-serving-final-20260831.json",
+      "state": "complete: 17 campanhas reconciliadas; 15 serving e 2 future_ready, zero inválidas. a dup03 foi recuperada com target adg e três same-page lineage ads; os três diretos e o adg de page incorreta ficaram paused. readback final: campanha/adg/três lineage ads active, zero issues, spend usd37.75, 621 impressões. sem delete, budget ou billing. clone_page_switch bloqueado na account prevalidation para impedir nova shell parcial.",
       "thread_id": "1543836757529985024",
-      "updated_at": "2026-08-31T05:16:31+00:00"
+      "updated_at": "2026-08-31T05:40:43+00:00"
     },
     {
       "agent": "ares",
@@ -1699,8 +1699,18 @@
       "state": "concluído: lyzmo e zytiva corrigidos; 6 pools e 30 rotas por publisher; m0/nm nos slots 1/2 do 001; url+jbf_operation por slot preservadas; sessão independente sem erros; backups e audit gravados.",
       "thread_id": "1540454000577745076",
       "updated_at": "2026-08-21T20:39:16+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-cpv05-c04-c06-legacy-reuse-20260831",
+      "objective": "Criar C04-C06 na conta 05 com mídia histórica C04-C48 priorizada por ROI Smart Bidding, mantendo copy/estrutura vigentes e lineage não zero.",
+      "state": "RECOVERY_PENDING: 9 assets históricos únicos foram selecionados por ROI SB, sanitizados, reservados e pre-stageados com 18 vídeos Meta associados. Manifest v3 2+1 foi selado. Bundle C04-C05 criou 2 campanhas, 2 adsets e 6 ads; dois ad copies transitórios foram recuperados sem replay dos quatro existentes e todos os seis nomes foram normalizados. Readback consolidado falhou apenas nos dois GETs de adset por code 17/2446079; campaign+ads readback passou. C06 ainda não foi escrita. Lease da conta permanece ativa e o mesmo request está agendado para retomar após cooldown.",
+      "next_step": "Retomar o mesmo request após cooldown; reconciliar C04-C05 somente por readback/lineage e executar o bundle final C06. Depois fazer readback 1x1x3, budget/UTM/start_time, registrar IDs na operação/inventário, armar first-delivery e CREATIVE_CUT_24H. Nunca repetir campaign/adset/ads já confirmados.",
+      "source": "discord:thread:1542892971186454719; /root/.hermes/profiles/ares/work/cpv05-c04-c06-legacy-reuse-20260831/manifest.prevalidated.json; data/ares/meta-ads/engine-v3/state/checkpoints/cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3-2039876850230678.json",
+      "thread_id": "1542892971186454719",
+      "updated_at": "2026-08-31T05:41:37+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T05:33:11+00:00"
+  "updated_at": "2026-08-31T05:41:37+00:00"
 }
