@@ -1528,6 +1528,7 @@
         "scope": "report presentation and delivery integrity only; no change to sources, formulas, campaign selection, ROAS decisions, writes, schedules, budget or authority",
         "validation": {
           "unit_tests": "103/103 passed",
+          "fixed_route_tests": "4/4 passed",
           "latest_audit_rerender_campaigns": 19,
           "latest_audit_rerender_table_parts": 3,
           "latest_audit_rerender_discord_chunks": 4,
@@ -1538,6 +1539,8 @@
           "live_run_audit": "data/ares/meta-ads/audit/eggbev/roas-cycle/run-20260831T182357-0400.json",
           "live_report_delivery_readback": true,
           "live_standard_update_readback": true,
+          "thread_prompt_source_live_equal": true,
+          "thread_prompt_source_versioned_equal": true,
           "audit": "data/ares/meta-ads/audit/eggbev/roas-reporting/visual-integrity-v26-20260831.json",
           "live_meta_writes": 0
         }

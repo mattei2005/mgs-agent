@@ -493,12 +493,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-20260831",
-      "next_step": "Executar dry-run vivo com post na thread 1541578606076231750, validar cada parte por readback e emitir REPORT-INFRA",
+      "next_step": "Aplicar automaticamente o mesmo renderer v26 nos próximos ciclos; qualquer mudança futura exige nova instrução explícita de Nicolas e atualização dos testes",
       "objective": "Padronizar emojis e impedir corte estrutural das tabelas Corte e ROAS Eggbev",
-      "source": "discord:thread:1543836757529985024; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "implementado: renderer v26 com emojis inline e placeholder visual; splitter atômico; contrato, prompt e skills atualizados; 103 testes aprovados; falta dry-run vivo, postagem/readback e report-infra",
+      "source": "discord:thread:1543836757529985024; discord:thread:1541578606076231750; data/ares/meta-ads/audit/eggbev/roas-reporting/visual-integrity-v26-20260831.json",
+      "state": "completed: renderer v26 com emojis obrigatórios e splitter atômico; 103/103 testes roas, 4/4 rotas fixas, 9/9 knowledge e 10/10 regressões; dry-run vivo 19 campanhas em 3 tabelas completas/4 mensagens, readback total; prompt fonte=versionado=runtime; padrão publicado na thread; zero meta/budget write",
       "thread_id": "1543836757529985024",
-      "updated_at": "2026-08-31T22:22:20+00:00"
+      "updated_at": "2026-08-31T22:34:05+00:00"
     },
     {
       "agent": "ares",
@@ -1782,5 +1782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T22:22:20+00:00"
+  "updated_at": "2026-08-31T22:34:05+00:00"
 }
