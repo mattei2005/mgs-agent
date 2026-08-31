@@ -913,12 +913,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-daily-roi-columns-20260831",
-      "next_step": "Materializar join econômico exato campanha+UTM com freshness, atualizar renderer/contrato, testar e gerar leitura viva.",
-      "objective": "Adicionar ROI real e ROI estimado por campanha ao Diário v7, reduzir cabeçalhos de Página/UTM e forçar leitura Smart Bidding viva em toda geração.",
+      "next_step": "Em todo novo report, consultar novamente Meta e Smart Bidding; preencher ROI real/estimado somente quando a fonte granular estiver fresca, reconciliada e não zero-only; cron e post automático permanecem desabilitados.",
+      "objective": "Adicionar ROI real e ROI estimado por campanha ao Diário v8, reduzir os cabeçalhos Página/UTM e exigir leitura Smart Bidding viva em toda geração.",
       "source": "discord:1543926440238514176",
-      "state": "implementação autorizada por nicolas; renderer v7 atual validado; cron/post automático/writes permanecem desabilitados.",
+      "state": "concluído: renderer v8 persistido; 105 testes aprovados; config e knowledge validate ok; leitura viva 09:56 et com 19 campanhas, smart bidding fresco em 113 min e 16/19 joins econômicos exatos; net_revenue e revenue_estimated zero-only foram exibidos como n/d, sem falso -100%; 0 writes meta.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-31T13:34:26+00:00"
+      "updated_at": "2026-08-31T14:06:18+00:00"
     },
     {
       "agent": "ares",
@@ -1772,5 +1772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T13:59:00+00:00"
+  "updated_at": "2026-08-31T14:06:18+00:00"
 }

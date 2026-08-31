@@ -28,7 +28,7 @@ if old_digest != manifest.digest:
         'from_digest': old_digest,
         'to_digest': manifest.digest,
         'reason': 'readback proved campaign/adset shells exist and zero ads; recovery changes only missing-ad creative payload to restore canonical Messenger call_to_actions while blocking shell replay',
-        'manifest': str(manifest_path.relative_to(BASE)),
+        'manifest': str(manifest_path.resolve().relative_to(BASE)),
     })
 tmp = AUDIT.with_suffix('.json.tmp')
 tmp.write_text(json.dumps(audit, ensure_ascii=False, indent=2, sort_keys=True) + '\n')
