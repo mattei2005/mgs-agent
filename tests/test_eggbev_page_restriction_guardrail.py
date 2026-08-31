@@ -66,6 +66,7 @@ class EggbevPageRestrictionGuardrailTests(unittest.TestCase):
             'initialized_at_et': '2026-08-31T17:00:00-04:00',
             'cursor_last_seen_at': '2026-08-31T17:59:00-04:00',
             'cursor_event_ids': [eid],
+            'processed_event_ids': [eid],
         }
         self.assertEqual(restriction.collect_confirmed_events(self.dtr, self.transition, state, self.now), [])
 

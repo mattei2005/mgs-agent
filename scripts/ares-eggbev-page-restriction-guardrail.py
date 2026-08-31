@@ -155,8 +155,7 @@ def collect_confirmed_events(
     state: dict[str, Any],
     run_at: dt.datetime,
 ) -> list[dict[str, Any]]:
-    cursor = parse_iso(state.get("cursor_last_seen_at"))
-    cursor_ids = set(state.get("cursor_event_ids") or [])
+    processed_ids = set(state.get("processed_event_ids") or [])
     transitions = transition_index(transition_state)
     events: list[dict[str, Any]] = []
     for key, row in (dtr_state.get("alerted_restricted_pages") or {}).items():
@@ -166,7 +165,7 @@ def collect_confirmed_events(
         if seen is None:
             continue
         eid = event_id(str(key), row)
-        if cursor is not None and (seen < cursor or (seen == cursor and eid in cursor_ids)):
+        if eid in processed_ids:
             continue
         page_id = page_id_from_key(str(key))
         bot_user = norm(row.get("bot_user")).lower()
@@ -213,6 +212,14 @@ def advance_cursor(state: dict[str, Any], dtr_state: dict[str, Any]) -> None:
     latest = max(seen for seen, _ in candidates)
     state["cursor_last_seen_at"] = latest.isoformat()
     state["cursor_event_ids"] = sorted(eid for seen, eid in candidates if seen == latest)
+
+
+def all_source_event_ids(dtr_state: dict[str, Any]) -> list[str]:
+    ids: list[str] = []
+    for key, row in (dtr_state.get("alerted_restricted_pages") or {}).items():
+        if isinstance(row, dict) and parse_iso(row.get("last_seen")) is not None:
+            ids.append(event_id(str(key), row))
+    return sorted(set(ids))
 
 
 def exact_meta_matches(
@@ -397,6 +404,7 @@ def main() -> int:
                 "last_ok": True,
                 "source": str(DTR_STATE_PATH),
                 "meta_writes": 0,
+                "processed_event_ids": all_source_event_ids(dtr_state),
             })
             atomic_json(STATE_PATH, state)
             run.update({"ok": True, "initialized": True, "events_seen": 0, "finished_at_et": now_et().isoformat()})
@@ -466,6 +474,10 @@ def main() -> int:
                 if actions and not event_result["ok"]:
                     overall_ok = False
                 run["events"].append(event_result)
+                if event_result["ok"]:
+                    processed = set(state.get("processed_event_ids") or [])
+                    processed.add(event["event_id"])
+                    state["processed_event_ids"] = sorted(processed)
             except Exception as exc:
                 overall_ok = False
                 error_delivery = None
