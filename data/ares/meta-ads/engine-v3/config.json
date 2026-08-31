@@ -1,10 +1,12 @@
 {
   "engine_version": 3,
-  "release_version": "3.4.0",
+  "release_version": "3.4.1",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
   "require_account_registration": true,
+  "require_explicit_account_modes": true,
+  "require_explicit_ad_serving_route": true,
   "media_upload_enabled": true,
   "require_prevalidated_manifest": true,
   "require_appsecret_proof": false,
@@ -67,6 +69,8 @@
     "1046241194533786": {
       "app_key": "mgs-meta-app-current",
       "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "supported_modes": ["pure_clone", "clone_prestaged"],
+      "ad_serving_route": "lineage_required_for_new_media",
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_type": "user_access_token",
       "timezone": "America/Sao_Paulo"
@@ -74,6 +78,8 @@
     "2039876850230678": {
       "app_key": "mgs-meta-app-current",
       "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "supported_modes": ["pure_clone", "clone_prestaged"],
+      "ad_serving_route": "lineage_required_for_new_media",
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_type": "user_access_token",
       "timezone": "America/Sao_Paulo"
@@ -85,6 +91,7 @@
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_type": "user_access_token",
       "timezone": "America/New_York",
+      "ad_serving_route": "direct_and_lineage_verified",
       "supported_modes": ["pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"],
       "campaign_policy": {
         "name_regex": ".+ DUP[0-9]{2,}$",

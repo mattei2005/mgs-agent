@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.22.0-draft
+version: 0.23.0-draft
 author: Ares
 license: internal
 metadata:
@@ -76,7 +76,7 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Relatório vivo hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.
 - Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
 - Nunca reutilizar números de mensagens antigas como estado atual.
-- Horários e rotas do Diário ainda não foram definidos nem aprovados. Os ciclos 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS. O Diário não herda esses horários; aguarda desenho separado de Nicolas antes de qualquer cron.
+- Horários e rotas do Diário ainda não foram definidos nem aprovados. Os ciclos 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS. O Diário não herda esses horários; aguarda desenho separado de Nicolas antes de qualquer cron.
 - Renderer v3: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
 - Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; a tabela desktop única preserva todas as campanhas com paginação Discord fence-safe.
 - A tabela única combina Meta Ads + Smart Bidding + Pricing/monetização por campanha. O join exige `utm_campaign` do creative Meta = `UTM_CAMPAIGN` Smart Bidding e `object_story_spec.page_id` Meta = `FB_PAGE_ID` Smart Bidding.
@@ -192,14 +192,16 @@ O template Messenger é obrigatório. Qualquer mudança de texto, botão, payloa
 
 ```text
 00:00               reset diário do threshold para 0,40
-00:00–06:00         formação de dados; sem corte/reativação
-Fase 1              06:00, 08:00, 10:00, 12:00
+00:00–04:59         formação de dados; sem corte/reativação
+Fase 1              05:00, 06:00, 08:00, 10:00, 12:00
 Corte Fase 1        Spend > USD 2 E Purchase ROAS < threshold
 Fase 2              13:00, 14:00, 16:00, 18:00, 20:00, 22:00, 23:00
 Corte Fase 2        Purchase ROAS < threshold; sem gate de gasto
 Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
 23:00–00:00         sem novo corte/reativação
 ```
+
+O wrapper de produção usa modo `--scheduled`: atraso do scheduler de até 15 minutos é reconciliado ao horário lógico cheio do ciclo; atraso maior falha fechado. Assim, um tick físico às 05:11 continua sendo auditado e reportado como ciclo 05:00, sem contaminar a fase nem executar fora da janela.
 
 Threshold é simétrico; valor exatamente igual não muda estado. Mudança intraday depende do OK de Nicolas. Purchase ROAS vazio com fonte válida é elegível a corte e aparece `N/D`: na Fase 1 o gate `Spend > USD 2` continua; na Fase 2 não há gate de gasto. Por decisão explícita de Nicolas, ausência completa da linha de insight do anúncio na Fase 2 também é `N/D` e corta. Fonte indisponível, com freshness superior a 2h, sem timestamp verificável ou irreconciliável gera `no_write + alerta`, não deve ser confundida com métrica individual vazia.
 

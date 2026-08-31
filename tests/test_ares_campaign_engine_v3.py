@@ -278,14 +278,34 @@ def test_registered_accounts_fail_closed_without_explicit_supported_modes():
         validate_account_policy(payload, config)
 
 
+def test_registered_accounts_fail_closed_without_explicit_serving_route():
+    payload = manifest([pure_campaign(1)])
+    config = {
+        'require_account_registration': True,
+        'require_explicit_account_modes': True,
+        'require_explicit_ad_serving_route': True,
+        'accounts': {
+            '100': {
+                'app_key': 'mgs-main-app',
+                'supported_modes': ['pure_clone'],
+            },
+        },
+    }
+    with pytest.raises(ManifestError, match='must explicitly declare ad_serving_route'):
+        validate_account_policy(payload, config)
+
+
 def test_production_config_blocks_from_zero_for_both_cpv_accounts():
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     assert config['require_explicit_account_modes'] is True
+    assert config['require_explicit_ad_serving_route'] is True
     for account_id in ('1046241194533786', '2039876850230678'):
-        modes = set(config['accounts'][account_id]['supported_modes'])
+        account = config['accounts'][account_id]
+        modes = set(account['supported_modes'])
         assert 'clone_prestaged' in modes
         assert 'pure_clone' in modes
         assert 'from_zero_prestaged' not in modes
+        assert account['ad_serving_route'] == 'lineage_required_for_new_media'
 
 
 def test_manifest_rejects_legacy_standard_enhancements_anywhere():

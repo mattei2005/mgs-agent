@@ -50,7 +50,7 @@ Não use como dona da configuração do quiz, ChatPion, SMS Funnel, pixel ou Wor
 
 ### Campaign Engine v3
 
-Toda criação/clonagem nova usa o executor central v3. Esta skill define estratégia CBO, evento, naming, UTM, ROI e regras da operação; ela não implementa outro campaign writer. O v3 está ativo como rota de produção sob guards de `development_access`; v2 existe somente como rollback explícito.
+Toda criação/clonagem nova usa exclusivamente o executor central v3. Esta skill define estratégia CBO, evento, naming, UTM, ROI e regras da operação; ela não implementa outro campaign writer. O v3 está ativo como rota de produção sob guards de `development_access`. O Campaign Engine v2 está `RETIRED_DO_NOT_USE`: não é fallback nem rollback e não pode ter cron ativo.
 
 Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source, budget, status e horário estão fechados; durante o hot path não existe `Searching`, patch, teste, criação de cron ou releitura global de portfólio.
 

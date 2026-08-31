@@ -208,8 +208,16 @@ def row_freshness(
     }
 
 
-def scheduled_window_allowed(run_at: dt.datetime, approved_times: tuple[str, ...]) -> bool:
-    return run_at.astimezone(NY).strftime("%H:%M") in set(approved_times)
+def scheduled_window_allowed(
+    run_at: dt.datetime,
+    approved_times: tuple[str, ...],
+    max_delay_minutes: int = 15,
+) -> bool:
+    local = run_at.astimezone(NY)
+    if local.minute > max_delay_minutes:
+        return False
+    logical = local.replace(minute=0, second=0, microsecond=0)
+    return logical.strftime("%H:%M") in set(approved_times)
 
 
 def policy_auto_reactivate(policy: dict[str, Any]) -> bool:

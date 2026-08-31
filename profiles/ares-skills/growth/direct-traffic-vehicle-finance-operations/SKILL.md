@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.46
+version: 1.0.47
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -31,7 +31,7 @@ Não use para configurar quiz, SMS Funnel, ChatPion, WordPress, pixel crítico, 
 
 ## Executor de campanhas
 
-Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O hot path recebe mídia Meta pre-stageada, bundle de duas campanhas e um readback consolidado. V3 é a rota ativa sob guards de `development_access`; v2 permanece rollback explícito.
+Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O v3 é a única rota de campanha autorizada sob guards de `development_access`. O Campaign Engine v2 está `RETIRED_DO_NOT_USE`: não é fallback nem rollback; seus arquivos históricos podem permanecer apenas para auditoria, sem cron ou execução.
 
 ## Fontes de verdade
 
@@ -165,7 +165,7 @@ CREATIVE_CUT_24H      pausas intermediárias no nível do anúncio; encerramento
 
 Para `CREATIVE_CUT_24H`, carregar obrigatoriamente `references/creative-cut-24h-strategy.md`. A estratégia pertence à campanha e é independente de criar do zero, clonar com criativos novos ou duplicar igual. Campanha sem atribuição explícita permanece no modo canônico de sua operação; silêncio nunca migra estratégia.
 
-Decisão de Rodolfo em 28/08/2026: a nova estratégia é destinada à conta operacional **05** do Creditoparaveiculo BR-CAR-BR. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita. A documentação não ativa conta, campanha, cron ou write; onboarding da 05 exige Meta account ID/alias/moeda/timezone e três threads fixas confirmadas.
+Decisão de Rodolfo consolidada em 30/08/2026: a estratégia `CREATIVE_CUT_24H` pertence à conta operacional **05** (`2039876850230678`) e está atribuída às campanhas C51, C52 e C53. A conta **13** preserva `CAMPAIGN_LEVEL_D1_D3`. A conta 05 possui watcher de primeiro gasto autorizado e relatórios Diário/Intraday read-only nas threads próprias; a automação de corte por criativo continua separada e não nasce implicitamente da ativação dos relatórios. A mudança pontual do prefixo visível dessas três campanhas para `01/02/03` não altera o padrão geral de naming nem os wrappers/IDs técnicos.
 
 Nunca pausar conjunto como substituto. Relatórios usam o status real da campanha e, em `CREATIVE_CUT_24H`, também exibem o estado dos anúncios e da janela. Se existir legado com campanha ativa e filhos pausados sem atribuição dessa estratégia, mencionar como observação e não inferir autorização.
 
@@ -179,6 +179,8 @@ Conjunto    1                   evento/UTMs validados
 Anúncios    3                   criativos distintos e elegíveis
 Lote diário dinâmica            calculada pelo pool de testes aprovado
 ```
+
+**Nível de orçamento não é nível de intervenção:** `CBO` significa budget configurado na campanha; `ABO` significa budget configurado no conjunto. As contas 13 e 05 usam CBO. A conta 13 também intervém no nível campanha por `CAMPAIGN_LEVEL_D1_D3`; a conta 05 continua CBO mesmo quando `CREATIVE_CUT_24H` pausa anúncios intermediariamente e encerra terminalmente a campanha.
 
 A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reservado a testes e pelo budget inicial mínimo aprovado:
 
@@ -446,6 +448,8 @@ A URL base permanece a mesma, mas os parâmetros UTM devem ser substituídos de 
 O nome do anúncio preserva o ordinal e o nome canônico do Drive. Inventário/audit também registra `asset_id`, Drive ID, checksum, Meta ad/creative/video ID e linhagem; filename sozinho não prova identidade.
 
 ## Três formas de criar campanha
+
+A taxonomia geral do Engine continua representando três formas distintas. Porém, após a confirmação live de zero delivery em anúncios diretos com `source_ad_id=0`, as contas Creditoparaveiculo 05 e 13 usam `ad_serving_route=lineage_required_for_new_media`: `from_zero_prestaged` fica proibido em produção, e criativos novos entram por `clone_prestaged` com Ad Copies API e readback de lineage não zero. A configuração central exige `supported_modes` + `ad_serving_route` explícitos para toda conta registrada; conta nova sem rota comprovada falha fechado.
 
 Rodolfo definiu três operações distintas, todas com novos IDs de campanha e conjunto:
 

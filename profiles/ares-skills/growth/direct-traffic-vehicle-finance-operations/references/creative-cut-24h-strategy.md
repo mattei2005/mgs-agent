@@ -15,15 +15,16 @@ Esta referência formaliza uma estratégia de gerenciamento por campanha. Ela n�
 
 O ChatPion não integra esta estratégia. A prática externa foi apenas a origem histórica da hipótese; a execução pertence exclusivamente ao tráfego direto do Creditoparaveiculo.
 
-## Escopo aprovado em 28/08/2026
+## Escopo ativado para a conta 05
 
-- Conta-alvo: conta operacional **05** do Creditoparaveiculo BR-CAR-BR.
-- A conta **13 não recebe esta estratégia** por esta decisão e preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita.
-- Estado inicial: `DOCUMENTED_NOT_ACTIVATED`.
-- As três threads fixas da conta 05 estão registradas e o member sync de Zeus, Rodolfo, Nicolas e Geizian foi confirmado por readback: Intraday `1542892943352799242`, Diário `1542892955315081246` e Criar campanhas `1542892971186454719`.
+- Conta-alvo: conta operacional **05** do Creditoparaveiculo BR-CAR-BR, account ID `2039876850230678`, alias `Creditoparaveiculo-BR-CAR-BR-05-G006`, USD e `America/Sao_Paulo`, confirmados por API.
+- A conta **13 não recebe esta estratégia** e preserva `CAMPAIGN_LEVEL_D1_D3` até nova instrução explícita.
+- Estado operacional: `ACTIVE_ACCOUNT05_READ_ONLY_REPORTING`; C51, C52 e C53 foram criadas/ativadas e estão nominalmente atribuídas a `CREATIVE_CUT_24H`.
+- As três threads fixas da conta 05 são Intraday `1542892943352799242`, Diário `1542892955315081246` e Criar campanhas `1542892971186454719`; o member sync de Zeus, Rodolfo, Nicolas e Geizian foi confirmado por readback.
 - A thread `CPV Regras` `1540426218405363873` é única e compartilhada por todas as contas de anúncio Creditoparaveiculo BR-CAR-BR; não criar uma thread de regras por conta.
-- Ativação ainda depende do readback live da conta 05, account ID/alias/moeda/timezone, referência de credencial, contrato de budget/write e atribuição explícita da estratégia às campanhas.
-- Documentar a estratégia não cria campanha, cron, write Meta ou migração de campanha existente.
+- O watcher de primeiro gasto da conta 05 roda a cada 15 minutos: primeiro spend entre 00:30 e 02:00 SP inicia a primeira janela de 24h; primeiro spend posterior pausa a campanha uma vez e agenda uma única reativação dentro da próxima janela 00:30–02:00, sempre com GET/readback.
+- Diário e Intraday da conta 05 são automações determinísticas read-only; ativar os relatórios não autoriza automaticamente pausas intermediárias da estratégia. Um runner de decisão/corte separado exige implementação, testes, state/idempotência e autorização/readback próprios.
+- A mudança pontual do prefixo visível das campanhas da conta 05 para `01`, `02`, `03` não altera a taxonomia/naming geral, os IDs, wrappers `b01fb05c51–c53` nem a regra de numeração de campanhas novas.
 
 ## Seleção por campanha
 
@@ -34,7 +35,7 @@ CAMPAIGN_LEVEL_D1_D3  estratégia tradicional no nível campanha
 CREATIVE_CUT_24H      eliminação sequencial de anúncios por janelas de 24h
 ```
 
-O modo de criação é independente da estratégia de gerenciamento. `from_zero_prestaged`, `clone_prestaged` e `pure_clone` podem receber qualquer modo autorizado, mas a atribuição precisa estar explícita no manifest/state/audit.
+O modo de criação é independente da estratégia de gerenciamento, mas obedece à rota de serving da conta. Nas contas Creditoparaveiculo 05 e 13, `ad_serving_route=lineage_required_for_new_media`: `from_zero_prestaged` é proibido após o incidente confirmado de zero delivery com `source_ad_id=0`; criativos novos usam `clone_prestaged` e anúncios nascem por Ad Copies API com lineage não zero. `pure_clone` permanece disponível quando solicitado. A atribuição precisa estar explícita no manifest/state/audit.
 
 Campanha existente só entra em `CREATIVE_CUT_24H` após instrução explícita. A mudança começa uma janela nova e não reinterpreta dados anteriores como se já pertencessem à estratégia.
 
@@ -164,15 +165,14 @@ A referência de regras não é duplicada por conta: `CPV Regras` `1540426218405
 
 Diário e Intraday devem exibir `management_strategy`, estágio, início da janela, próximo checkpoint, anúncios ativos/pausados, ROI da janela e concentração por spend. Dados acumulados ficam separados dos dados da janela decisória.
 
-## Checklist de ativação
+## Checklist operacional
 
-- [ ] Meta account ID e alias exato da conta 05 confirmados por API
-- [ ] moeda e timezone confirmados por API
-- [ ] referência 1Password da conta registrada sem copiar segredo
+- [x] Meta account ID `2039876850230678` e alias da conta 05 confirmados por API
+- [x] moeda USD e timezone `America/Sao_Paulo` confirmados por API
+- [x] referência 1Password da conta registrada sem copiar segredo
 - [x] IDs das threads Intraday, Diário e Criar campanhas confirmados; member sync validado nas três
-- [ ] manager, budget, write mode e autoridade registrados
-- [ ] campanha(s) piloto explicitamente atribuída(s) à estratégia
-- [ ] state store e idempotência implementados
-- [ ] dry-run com fixture 80/10/10, 90/10, recuperação e terminal aprovado
-- [ ] readback Meta de pausa ad-level validado em canário PAUSED antes de produção
-- [ ] crons permanecem ausentes/desabilitados até liberação específica
+- [x] manager, budget do lançamento e controlled write registrados
+- [x] C51, C52 e C53 atribuídas nominalmente à estratégia
+- [ ] watcher de primeiro gasto account-scoped com state/idempotência, testes, dry-run live e cron readback
+- [ ] Diário e Intraday read-only com tabelas desktop, testes, dry-run live, crons script-only e threads fixas
+- [ ] runner automático de corte por criativo permanece desabilitado até existir implementação, fixtures 80/10/10 e 90/10, canário PAUSED e autorização específica

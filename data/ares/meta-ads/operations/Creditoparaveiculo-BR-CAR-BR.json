@@ -1615,7 +1615,7 @@
     "daily": {
       "internal_job_id": "41712f74f949",
       "name": "Creditoparaveiculo 13 G006 Diario",
-      "scheduler": "hourly minute 0",
+      "scheduler": "hourly minute 1; physical offset only, logical timezone gates unchanged",
       "timezone_gate": [
         "07:00",
         "08:00",
@@ -1645,7 +1645,7 @@
     "intraday": {
       "internal_job_id": "69dfca2b9719",
       "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
-      "scheduler": "hourly minute 0",
+      "scheduler": "hourly minute 6; physical offset only, logical timezone gates unchanged",
       "timezone_gate": [
         "01:00",
         "03:00",
@@ -1762,7 +1762,7 @@
       "deliver": "local",
       "direct_thread_post": "1539826050765299872",
       "enabled": false,
-      "paused_reason": "Campaign Engine v3 uses native future scheduling; this recurring v2 activation job is frozen",
+      "paused_reason": "RETIRED_DO_NOT_USE: native future scheduling and Campaign Engine v3 replaced this legacy activation route; no fallback or rollback is authorized",
       "action_level": "campaign_only",
       "preflight": "campaign PAUSED, one adset ACTIVE, three ads ACTIVE, no hold, combined active budget plus targets <= USD500",
       "partial_failure_policy": "rollback only campaigns proven activated by the current attempt; ambiguous readback persists and retries after cooldown"
@@ -1770,7 +1770,7 @@
     "snapshot": {
       "internal_job_id": "f45eed5047b9",
       "name": "Creditoparaveiculo 13 G006 Snapshot",
-      "scheduler": "hourly minute 0",
+      "scheduler": "hourly minute 11; physical offset only, logical timezone gate unchanged",
       "timezone_gate": "03:00 America/Sao_Paulo daily",
       "script": "creditoparaveiculo-snapshot.sh",
       "no_agent": true,
@@ -1805,7 +1805,7 @@
     "first_delivery_watch": {
       "internal_job_id": "990b3e644f36",
       "name": "CPV primeiro gasto 15min",
-      "scheduler": "*/15 * * * *",
+      "scheduler": "4,19,34,49 * * * *",
       "script": "creditoparaveiculo-first-delivery-guardrail.sh",
       "no_agent": true,
       "deliver": "local",
@@ -2192,7 +2192,9 @@
     "media_upload_enabled": true,
     "production_status": "ACTIVE_with_future_start_time",
     "development_access_guard": "bundles execute sequentially per account with 300-second reservation until live tier becomes standard_access",
-    "v2_rollback_preserved": true,
+    "campaign_engine_v2_status": "RETIRED_DO_NOT_USE",
+    "v2_rollback_preserved": false,
+    "v2_execution_authorized": false,
     "legacy_deletion_performed": false,
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true

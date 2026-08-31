@@ -55,9 +55,31 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             raise ManifestError(f"account {campaign.account_id} app_key mismatch")
 
         supported_modes = set(account.get("supported_modes") or [])
+        if config.get("require_explicit_account_modes") is True and not supported_modes:
+            raise ManifestError(
+                f"account {campaign.account_id} must explicitly declare supported_modes"
+            )
         if supported_modes and campaign.mode not in supported_modes:
             raise ManifestError(
                 f"account {campaign.account_id} does not support mode {campaign.mode}"
+            )
+
+        serving_route = str(account.get("ad_serving_route") or "").strip()
+        allowed_serving_routes = {
+            "lineage_required_for_new_media",
+            "direct_and_lineage_verified",
+        }
+        if config.get("require_explicit_ad_serving_route") is True and not serving_route:
+            raise ManifestError(
+                f"account {campaign.account_id} must explicitly declare ad_serving_route"
+            )
+        if serving_route and serving_route not in allowed_serving_routes:
+            raise ManifestError(
+                f"account {campaign.account_id} has unsupported ad_serving_route {serving_route}"
+            )
+        if serving_route == "lineage_required_for_new_media" and campaign.mode == "from_zero_prestaged":
+            raise ManifestError(
+                f"account {campaign.account_id} requires ad copy lineage for new media; from_zero_prestaged is forbidden"
             )
 
         base_policy = dict(account.get("campaign_policy") or {})

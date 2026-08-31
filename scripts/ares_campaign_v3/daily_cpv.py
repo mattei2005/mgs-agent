@@ -27,7 +27,7 @@ from .coordination import AccountWriterLeaseStore
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
 from .prestage import AdAccountVideoUploader
-from .prevalidation import prevalidate_payload
+from .prevalidation import prevalidate_payload, validate_account_policy
 from .schema import Manifest
 from .source_selection import (
     SourceSelectionError,
@@ -1995,6 +1995,7 @@ def run_daily(
                     daily_budget_minor=int(budget["initial_minor"]),
                 )
                 atomic_json(draft_path, draft)
+                validate_account_policy(Manifest.from_dict(draft), config)
                 sealed = prevalidate_payload(draft, registry)
                 atomic_json(sealed_path, sealed)
                 state.update(status="MANIFEST_SEALED", manifest_path=str(sealed_path), manifest_digest=sealed["prevalidation"]["content_digest"], updated_at_utc=utc_now())
