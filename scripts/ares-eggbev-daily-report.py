@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import re
 import statistics
@@ -101,6 +102,13 @@ def format_start_time(value: Any) -> str:
 def format_percent(value: Any) -> str:
     number = common.finite_float(value)
     return 'N/D' if number is None else common.fmt_number(number) + '%'
+
+
+def format_money_br(value: Any) -> str:
+    number = common.finite_float(value)
+    if number is None:
+        return 'N/D'
+    return '$' + f'{number:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
 
 
 def enrich_campaign_readbacks(meta, token: str, bundle: dict[str, Any]) -> dict[str, Any]:
@@ -779,6 +787,82 @@ def compact_campaign_key(name: Any, fallback: Any = None) -> str:
     return '·'.join(parts) or text or common.norm(fallback) or 'N/D'
 
 
+def source_alias(name: Any, campaign_id: Any) -> str:
+    """Stable human alias for carrying a Daily row to Clone preflight."""
+    compact = compact_campaign_key(name, campaign_id).replace('·', '-')
+    identity = common.norm(campaign_id) or common.norm(name) or compact
+    digest = hashlib.sha256(identity.encode('utf-8')).hexdigest()[:4].upper()
+    return f'SRC-{compact}-{digest}'
+
+
+def campaign_name_page(value: Any) -> str:
+    match = re.match(r'^\s*\d+\s*-\s*(.*?)\s*-\s*(?:ENG|EN)\b', common.norm(value), flags=re.I)
+    return common.norm(match.group(1)) if match else ''
+
+
+def annotate_campaign_display_identities(meta: dict[str, Any]) -> dict[str, Any]:
+    """Persist report-only source aliases and visible tracking integrity signals."""
+    annotated = dict(meta)
+    campaigns = [dict(row) for row in meta.get('campaigns') or []]
+    name_counts: dict[str, int] = defaultdict(int)
+    for row in campaigns:
+        name_counts[common.norm(row.get('name')).casefold()] += 1
+    counts: dict[str, int] = defaultdict(int)
+    for row in campaigns:
+        name = common.norm(row.get('name'))
+        actual_utm = common.norm(row.get('utm_campaign')).lower()
+        name_match = re.search(r'\((pg_\d+)\)', name, flags=re.I)
+        name_utm = name_match.group(1).lower() if name_match else ''
+        expected_page = campaign_name_page(name)
+        actual_page = common.norm(row.get('sb_page_name'))
+        reasons: list[str] = []
+        if name and name_counts[name.casefold()] > 1:
+            reasons.append('duplicate_name')
+        if name_utm and actual_utm and name_utm != actual_utm:
+            reasons.append('name_utm_mismatch')
+        if expected_page and actual_page and expected_page.casefold() != actual_page.casefold():
+            reasons.append('name_page_mismatch')
+        join_status = common.norm(row.get('join_status'))
+        if join_status and join_status != 'matched':
+            reasons.append(join_status)
+        if any(reason in {'duplicate_name', 'name_utm_mismatch', 'name_page_mismatch'} for reason in reasons):
+            signal = '⚠️'
+            category = 'warning'
+        elif reasons or not actual_utm or not actual_page:
+            signal = '🟡'
+            category = 'review'
+        else:
+            signal = '🧬'
+            category = 'reconciled'
+        row['source_alias'] = source_alias(name, row.get('campaign_id'))
+        row['identity_signal'] = signal
+        row['identity_reasons'] = sorted(set(reasons))
+        counts[category] += 1
+    annotated['campaigns'] = campaigns
+    annotated['identity_signal_counts'] = dict(sorted(counts.items()))
+    return annotated
+
+
+def roi_marker(value: Any) -> str:
+    number = common.finite_float(value)
+    if number is None:
+        return '⚪'
+    if number >= 0:
+        return '🟢'
+    if number > -15:
+        return '🟡'
+    return '🔴'
+
+
+def reconciliation_signal(meta_spend: Any, sb_investment: Any) -> tuple[str, float | None]:
+    meta_value = common.finite_float(meta_spend)
+    sb_value = common.finite_float(sb_investment)
+    if meta_value is None or sb_value is None or meta_value <= 0:
+        return '⚪', None
+    score = max(0.0, 100.0 - abs(sb_value - meta_value) * 100.0 / meta_value)
+    return ('✅' if score >= 98 else '🟡' if score >= 95 else '🔴'), score
+
+
 def compact_page_label(row: dict[str, Any]) -> str:
     page = common.norm(row.get('sb_page_name'))
     first_name = page.split()[0] if page else ''
@@ -922,7 +1006,7 @@ def status_label(value: Any) -> str:
 def render_grouped_page_tables(
     pages: list[dict[str, Any]], campaigns: list[dict[str, Any]],
 ) -> list[str]:
-    """Render Cut/ROAS-inspired compact tables grouped Page Z→A."""
+    """Render one short decision block per Page with clone-source aliases."""
     indexed: dict[str, list[tuple[int, dict[str, Any]]]] = defaultdict(list)
     for original_index, campaign in enumerate(campaigns, start=1):
         utm = common.norm(campaign.get('utm_campaign')).lower()
@@ -930,8 +1014,7 @@ def render_grouped_page_tables(
         indexed[key].append((original_index, campaign))
 
     lines: list[str] = []
-    headers = ['#', 'Ent.', 'Camp', 'Status', 'Budget', 'Spend', 'Custo', 'ROAS', 'Msg', 'CPM', 'CTR']
-    visible_index = 0
+    headers = ['ID', 'Fonte', 'Ent.', 'St', 'Budget', 'Spend', 'Msg', '$/Msg', 'ROAS', 'CPM', 'CTR']
     for page in pages:
         key = common.norm(page.get('utm_campaign')).lower() or common.norm(page.get('page_name')).lower()
         page_campaigns = sorted(
@@ -944,23 +1027,23 @@ def render_grouped_page_tables(
         label = common.norm(page.get('page_label')) or 'Página N/D'
         count = len(page_campaigns)
         noun = 'campanha' if count == 1 else 'campanhas'
+        identity_ok = sum(1 for _, row in page_campaigns if common.norm(row.get('identity_signal')) == '🧬')
         lines.extend([
-            '', f"**▼ {label} — {count} {noun}**",
-            f"`META  Spend {common.fmt_money(page.get('spend'))} • ROAS {common.fmt_number(page.get('purchase_roas'))} • Custo {common.fmt_money(page.get('cost_per_messaging_started'))}`",
-            f"`SB    Inv {common.fmt_money(page.get('sb_investment'))} • Receita {common.fmt_money(page.get('sb_revenue'))} • BC agora {common.fmt_money(page.get('sb_broadcast_current'))} • Drip {common.fmt_money(page.get('sb_drip_revenue'))}`",
-            f"`      ROI {format_percent(page.get('sb_roi_percent'))} • Leads {common.fmt_number(page.get('sb_leads'), 0)} • RPS {common.fmt_money(page.get('pricing_rps'))}`",
+            '', f"{roi_marker(page.get('sb_roi_percent'))} **{label}** · {count} {noun} · {page.get('delivered') or 0} entregando · 🧬 {identity_ok}/{count}",
+            f"`Meta {format_money_br(page.get('spend'))} · {common.fmt_number(page.get('messaging_started'), 0)} Msg · {format_money_br(page.get('cost_per_messaging_started'))}/msg · ROAS {common.fmt_number(page.get('purchase_roas'))}`",
+            f"`SB Inv {format_money_br(page.get('sb_investment'))} · Rec {format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_percent(page.get('sb_roi_percent'))} · Leads {common.fmt_number(page.get('sb_leads'), 0)}`",
+            f"`💧 Drip {format_money_br(page.get('sb_drip_revenue'))} · 📣 BC agora {format_money_br(page.get('sb_broadcast_current'))} · RPS* {format_money_br(page.get('pricing_rps'))}`",
         ])
         rows: list[list[str]] = []
         for _, row in page_campaigns:
-            visible_index += 1
             delivered = bool(row.get('has_insight') or common.finite_float(row.get('spend')) is not None)
             rows.append([
-                str(visible_index), '●' if delivered else '○',
-                compact_campaign_key(row.get('name'), row.get('campaign_id')),
-                status_label(row.get('status')), common.fmt_money(row.get('budget_usd')),
-                common.fmt_money(row.get('spend')), common.fmt_money(row.get('cost_per_messaging_started')),
-                common.fmt_number(row.get('purchase_roas')), common.fmt_number(row.get('messaging_started'), 0),
-                common.fmt_money(row.get('cpm')), format_percent(row.get('ctr')),
+                common.norm(row.get('identity_signal')) or '🟡',
+                common.norm(row.get('source_alias')) or source_alias(row.get('name'), row.get('campaign_id')),
+                '●' if delivered else '○', status_label(row.get('status')),
+                format_money_br(row.get('budget_usd')), format_money_br(row.get('spend')),
+                common.fmt_number(row.get('messaging_started'), 0), format_money_br(row.get('cost_per_messaging_started')),
+                common.fmt_number(row.get('purchase_roas')), format_money_br(row.get('cpm')), format_percent(row.get('ctr')),
             ])
         chunks = [rows[offset:offset + 10] for offset in range(0, len(rows), 10)] or [[]]
         for chunk_index, chunk in enumerate(chunks, start=1):
@@ -975,35 +1058,25 @@ def render_period(period: dict[str, Any]) -> list[str]:
     sb = period['smart_bidding']
     current_dashboard = period.get('current_dashboard') or {}
     current_freshness = current_dashboard.get('freshness') or {}
+    reconciliation_icon, reconciliation = reconciliation_signal(meta.get('spend'), sb.get('investment'))
+    reconciliation_text = 'N/D' if reconciliation is None else common.fmt_number(reconciliation) + '%'
     lines = [
-        f"**{period['label']} — {period['date']}**",
-        f"- Meta: Spend {common.fmt_money(meta.get('spend'))} | ROAS {common.fmt_number(meta.get('purchase_roas'))} | "
-        f"Mensagens {common.fmt_number(meta.get('messaging_started'), 0)} | Custo/msg {common.fmt_money(meta.get('cost_per_messaging_started'))} | "
-        f"CPM {common.fmt_money(meta.get('cpm'))} | CTR {format_percent(meta.get('ctr'))}.",
-        f"- Smart Bidding: Investimento {common.fmt_money(sb.get('investment'))} | Receita {common.fmt_money(sb.get('revenue'))} | "
-        f"Broadcast do período {common.fmt_money(sb.get('broadcast_revenue'))} | Drip {common.fmt_money(sb.get('drip_revenue'))} | "
-        f"Leads {common.fmt_number(sb.get('leads'), 0)} | RPS {common.fmt_money(sb.get('rps_gross'))}.",
-        f"- Dash atual ({common.norm(current_dashboard.get('date')) or 'N/D'}): Broadcast {common.fmt_money(current_dashboard.get('broadcast_revenue'))} | "
-        f"Atualização {common.norm(current_freshness.get('latest_at_et')) or 'N/D'} | "
-        f"Atraso {((str(current_freshness.get('age_minutes')) + ' min') if current_freshness.get('age_minutes') is not None else 'N/D')}.",
-        f"- Fonte SB: Última atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
-        f"Atraso da fonte {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
-        f"Freshness máx. {(sb.get('freshness') or {}).get('max_age_hours') or 2.0}h | "
-        f"Campo timestamp {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'}.",
+        f"**{period['label']} · {period['date']}**",
+        f"{reconciliation_icon} Meta×SB {reconciliation_text} · 💵 Meta {format_money_br(meta.get('spend'))} · 🧾 SB {format_money_br(sb.get('investment'))} · 💰 Receita {format_money_br(sb.get('revenue'))}",
+        f"💬 {common.fmt_number(meta.get('messaging_started'), 0)} Msg · {format_money_br(meta.get('cost_per_messaging_started'))}/msg · 💧 Drip {format_money_br(sb.get('drip_revenue'))} · 📣 BC agora {format_money_br(current_dashboard.get('broadcast_revenue'))}",
+        f"⏱ SB {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} · Dash {((str(current_freshness.get('age_minutes')) + ' min') if current_freshness.get('age_minutes') is not None else 'N/D')} · campo {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'} · máx. 2h",
     ]
     if not sb.get('ready'):
         lines.append('⚠️ Smart Bidding não reconciliada: ' + common.norm(sb.get('reason')) + '.')
-    lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
         pages = build_page_summary(campaigns, current_dashboard)
         lines.extend([
-            '', '**📊 Tabela consolidada — visão desktop**',
-            'Páginas em ordem decrescente pelo nome (Z→A); todas as campanhas ficam consolidadas dentro da respectiva página.',
+            '', '**📊 Visão unificada · Página → fonte de clone**',
             *render_grouped_page_tables(pages, campaigns),
         ])
-        lines.append('`Ent.` = ● com entrega no período • ○ sem entrega. `Camp` = sequência·Cnnn·Dnn. `Custo` = Meta spend ÷ mensagens iniciadas.')
-        lines.append('`BC agora` = receita Broadcast lida da dash atual; Smart Bidding aparece uma vez no cabeçalho da Página/UTM e não é repetida por campanha.')
+        lines.append('🧬 identidade conciliada · 🟡 revisar cobertura · ⚠️ conflito de nome/UTM/Página. `Fonte` é o alias para levar à thread Clonar Campanhas; todo clone ainda exige preflight.')
+        lines.append('`Msg` = messaging_conversation_started_7d. `ROI pág.*` e `RPS*` são da Smart Bidding no nível Página/UTM, nunca ROI individual da campanha.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
@@ -1125,6 +1198,7 @@ def main() -> int:
             sb_aggregate = aggregate_sb(sb_bundle)
             meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
             meta_aggregate = apply_period_campaign_scope(meta_aggregate, label)
+            meta_aggregate = annotate_campaign_display_identities(meta_aggregate)
             snapshot = build_revenue_snapshot(sb_aggregate, report_date, label, at.isoformat())
             anomaly = analyze_revenue_snapshot(snapshot, anomaly_state, anomaly_policy)
             if snapshot.get('eligible'):
