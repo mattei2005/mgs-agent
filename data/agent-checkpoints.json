@@ -342,6 +342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-CRON-ISOLATION-20260830",
+      "next_step": "Monitoramento rotineiro do primeiro ciclo 05:00 e 06:00; qualquer falha deve usar recovery readback-first sem alterar budget ou ampliar escopo.",
+      "objective": "Adicionar 05:00 e 06:00 à Fase 1 Corte e ROAS e isolar os schedulers Eggbev e Creditoparaveiculo",
+      "source": "data/ares/audits/cron-isolation/2026-08-30-eggbev-cpv.json",
+      "state": "completed: fase 1 lógica 05/06/08/10/12 et; cron eggbev físico em :09, guardrail leads em :14; cpv escalonado em minutos próprios; seis threads eggbev e três cpv disjuntas; zero colisões de slot entre oito jobs ativos auditados; 154 testes eggbev ok.",
+      "thread_id": "1541578606076231750",
+      "updated_at": "2026-08-31T01:37:18+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-ROUTES-DESIGN-20260830",
       "next_step": "Quando Nicolas iniciar o desenho, coletar horários/períodos/formato, materializar plano separado do Corte e ROAS, executar dry-run real e só então solicitar/aplicar aprovação explícita de cron/post.",
       "objective": "Definir com Nicolas as rotas, horários, períodos e automação futura do Diário Eggbev",
@@ -1552,5 +1562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:04:46+00:00"
+  "updated_at": "2026-08-31T01:37:18+00:00"
 }
