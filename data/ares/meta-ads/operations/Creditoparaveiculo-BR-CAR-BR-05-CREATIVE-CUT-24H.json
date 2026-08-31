@@ -454,7 +454,47 @@
       "real_roi",
       "spend_concentration"
     ],
-    "sms_policy": "G006 SMS revenue/cost is not attributable between account 13 and account 05; do not duplicate it into the account-05 ROI"
+    "sms_policy": {
+      "status": "excluded_from_account_report",
+      "reason": "G006 SMS revenue/cost is not attributable between account 13 and account 05",
+      "visible_notice": "SMS não atribuído por conta — consultar CPV Diário Geral.",
+      "general_daily_thread_id": "1543826231831560343",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1543778490610884679"
+    }
+  },
+  "account_activity_monitor": {
+    "enabled": true,
+    "mode": "account_wide_external_change_alert",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "scope": "all material account, campaign, ad set, ad, budget, status, targeting, bid, schedule, audience and funding changes on account 2039876850230678",
+    "graph_version": "v26.0",
+    "schedule": "every 5 minutes",
+    "destination_thread_id": "1542892943352799242",
+    "destination_thread_title": "Creditoparaveiculo 05 G006 Intraday",
+    "alert_policy": "alert only external/manual, Meta/native-rule material changes, or trusted API app changes without matching local Ares audit; never auto-correct",
+    "overlap_seconds": 600,
+    "baseline_days": 2,
+    "retention_days": 14,
+    "max_pages": 8,
+    "audit_match_window_seconds": 1800,
+    "state_path": "data/ares/meta-ads/state/activity-monitors/Creditoparaveiculo-BR-CAR-BR-05.json",
+    "audit_dir": "data/ares/meta-ads/audit/activity-monitors/Creditoparaveiculo-BR-CAR-BR-05",
+    "trusted_api_sources": [
+      {
+        "actor_id": "10229590004590742",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "163163106580854",
+        "application_name": "minibot rod"
+      },
+      {
+        "actor_id": "122171858450667280",
+        "actor_name": "Rafael Lucas Oliveira",
+        "application_id": "860397696767230",
+        "application_name": "BrightPath done"
+      }
+    ]
   },
   "crons": [
     {

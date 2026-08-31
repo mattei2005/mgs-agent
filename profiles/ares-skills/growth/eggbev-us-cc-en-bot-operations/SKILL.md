@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.19.0-draft
+version: 0.19.1-draft
 author: Ares
 license: internal
 metadata:
@@ -64,12 +64,12 @@ Quando Nicolas pedir organização geral ou “como o agente funciona”, a thre
 4. mostrar resumo final e aguardar OK explícito;
 5. publicar via Engine v3 e validar por readback;
 6. permitir a primeira janela/dia de performance antes de escolher vencedoras para clonagem;
-7. pedir o consolidado na thread Diário — horários, cadência e formato final permanecem pendentes do desenho de Nicolas;
+7. receber/pedir o consolidado na thread Diário — desenho 08:00 ET com D-1 completo, sinal atual 08:00, tabela única e alertas curtos; cron/post continuam pendentes de enablement separado;
 8. clonar as vencedoras na thread Clonar Campanhas;
 9. usar Corte e ROAS como rota mestre intraday para threshold, ações exclusivamente por anúncio e visão Meta + Smart Bidding;
 10. usar Limite de Leads para `LEADS > 5.000`, pausa da campanha inteira da página e alerta.
 
-Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only ainda sem schedule aprovado; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Limite de Leads = proteção por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
+Cada definição operacional deve existir em uma única rota canônica: Regras = visão geral/precedência; Corte e ROAS = threshold, ciclos e ações por anúncio; Diário = relatório read-only desenhado para 08:00 ET, D-1 completo, sinal atual 08:00, tabela única e alertas, com cron/post ainda desabilitados; Criar Campanhas = criação do zero; Clonar Campanhas = DUP e modos de clone; Limite de Leads = proteção por página. Conteúdo útil de thread ad hoc ou histórica é promovido à rota correta, enquanto o histórico original permanece preservado e não reativa regra supersedida.
 
 A publicação organizada validada vive em `data/ares/discord/eggbev-thread-organization-20260830.json` e o mapa institucional em `discord_topology.thread_information_architecture` do contrato da operação.
 
@@ -95,9 +95,12 @@ Na thread `1541578596253175858`, pedidos como “suas regras”, “suas automa�
 - Relatório vivo hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.
 - Ontem: `--period yesterday`; data específica: `--period YYYY-MM-DD`.
 - Nunca reutilizar números de mensagens antigas como estado atual.
-- Horários e rotas do Diário ainda não foram definidos nem aprovados. Os ciclos 05:00, 06:00, 08:00, 10:00, 12:00, 13:00, 14:00, 16:00, 18:00, 20:00, 22:00 e 23:00 pertencem exclusivamente ao Corte e ROAS. O Diário não herda esses horários; aguarda desenho separado de Nicolas antes de qualquer cron.
-- Renderer v3: inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período; histórico sem nenhuma dessas condições fica fora.
-- Não há limite silencioso de linhas nem truncamento do nome. Cards verticais mostram o nome integral e todos os campos; a tabela desktop única preserva todas as campanhas com paginação Discord fence-safe.
+- Desenho do Diário aprovado por Nicolas: um relatório às `08:00 America/New_York` com o fechamento completo de D-1 e um sinal de receita do dia atual às 08:00 comparado somente com snapshots anteriores do mesmo horário. O horário pertence exclusivamente ao Diário Eggbev; não herda nem altera Corte e ROAS, CPV 13, CPV 05 ou outra operação. **Cron e post automático continuam desabilitados** até review do dry-run vivo e autorização separada de enablement.
+- Renderer v4: no fechamento D-1, inclui toda campanha com insight em D-1 e exclui campanhas ACTIVE atuais sem insight em D-1, pois elas não rodaram no período fechado. Em hoje/sob demanda, inclui toda campanha efetivamente `ACTIVE` mesmo sem insight e toda campanha com insight no período. Usa uma única tabela alinhada e consolidada Meta + Smart Bidding + Pricing, com nome integral, Page/UTM e todos os campos contratados; não usa cards por campanha.
+- A tabela é braço read-only da clonagem: dá visibilidade para o gestor decidir quais e quantas campanhas clonar, mas nunca executa clone nem transforma ordenação visual em elegibilidade automática.
+- Monitor de receita por página: D-1 fechado compara com mediana de até sete fechamentos equivalentes; o sinal de 08:00 compara apenas com até sete snapshots anteriores de 08:00. Exige no mínimo três amostras. Faixas iniciais report-only: atenção a partir de 30% abaixo e crítico a partir de 40% abaixo. Freshness/data/UTM/Page inválidos ou baseline insuficiente aparecem como alerta de cobertura/`baseline em formação`, nunca como receita zero.
+- Abaixo da tabela, mostrar no máximo cinco bullets `Fique de olho`. Queda comprovada identifica Page/UTM, valor atual, mediana, percentual e amostras, sugerindo conferência de disparo, bloco/funil e entrega com o responsável; Ares não configura essas camadas nesta rota.
+- Não há limite silencioso de linhas nem truncamento do nome; a paginação Discord permanece fence-safe.
 - A tabela única combina Meta Ads + Smart Bidding + Pricing/monetização por campanha. O join exige `utm_campaign` do creative Meta = `UTM_CAMPAIGN` Smart Bidding e `object_story_spec.page_id` Meta = `FB_PAGE_ID` Smart Bidding.
 - Campos Meta por campanha: status, `start_time` ET, Budget, spend, `messaging_conversation_started_7d`, custo por mensagem iniciada, Purchase ROAS, CPM e CTR.
 - Campos Smart Bidding/Pricing por campanha: investimento, receita, LEADS, `AVG_PRICE`, RPS, CPM, EPC e ROI quando expostos pela rota direta compatível. Fórmula local é apenas fallback rotulado.
@@ -164,7 +167,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. A substituição live `pg_5024 C001 → DUP01` concluiu com a sucessora `ACTIVE`, pixel `935354115143283`, evento `eggbev-pv-u`, PBIA/Page, UTM/Messenger, três anúncios e copy completos por readback; a fonte foi confirmada `DELETED` somente depois da validação. Por decisão de Nicolas, essa configuração `pg_5024_dup01_live_validated_v1` é o padrão de futuros pedidos na thread Criar Campanhas. O padrão reaproveita somente configuração: mídia, IDs e sufixo `DUPnn` nunca são reutilizados em criação do zero. Reconciliação read-only e reserva scoped permanecem obrigatórias. O call mínimo exige somente budget; nomes dos ads são automáticos. OK final de Nicolas, valor exato, Engine v3 e readback continuam gates; Nicolas possui autoridade financeira permanente para budget Eggbev sem novo OK de Rodolfo.
 4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
 5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
-6. Diário: renderer híbrido v3 e tabela única Pricing + Meta Ads + Smart Bidding validados com fixture de 25 campanhas e live read-only; permanecem seleção direta vertical/Messenger Pages/domain, timestamp Smart Bidding e aprovação de automação.
+6. Diário: renderer v4 em uma única tabela Pricing + Meta Ads + Smart Bidding, apoio read-only à clonagem e detector de anomalia de receita por página materializados; permanecem seleção direta vertical/Messenger Pages/domain, timestamp/freshness Smart Bidding, formação de baseline e aprovação separada de cron/post.
 7. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
 8. Escala: Nicolas aprovou `+10%` em todo ciclo ROAS para cada campanha com Meta Purchase ROAS estritamente acima de `0,50`; de `0,40` até `0,50` mantém o budget. Planner está pronto, mas budget write exige Rodolfo/Geizian e um teto/envelope aprovado.
 
@@ -237,7 +240,7 @@ Escala de budget é uma camada separada: em cada ciclo ROAS aprovado, agregar Me
 - Fonte aprovada por Nicolas: extrair diretamente da rota Smart Bidding compatível — vertical, Messenger Pages ou domain — com readback do endpoint, campo, moeda, período, freshness e identidade. Não existe precedência implícita; usar a granularidade que reconcilia corretamente a linha.
 - `Custo/msg iniciada` = spend Meta ÷ `messaging_conversation_started_7d`. Para RPS/EPC, campo direto Smart Bidding vence cálculo local; fórmulas locais são fallback-only, rotuladas e não substituem um campo direto disponível.
 - Não inventar denominador, atribuição ou moeda. A ausência de UTM no `/pricing` global não prova indisponibilidade: tentar vertical, Messenger Pages ou domain antes de publicar `N/D`.
-- Diário ainda sem horários ou rotas aprovados. Não reutilizar os horários do Corte e ROAS; aguardar Nicolas definir o desenho do Diário e, depois, apresentar plano/dry-run antes de qualquer automação.
+- Diário desenhado para 08:00 ET com D-1 completo e sinal de receita atual 08:00 contra baselines do mesmo horário. Esse desenho não altera Corte e ROAS nem qualquer CPV. Cron e post automático continuam `false` até dry-run vivo revisado e autorização separada de Nicolas.
 - Thread Intraday fixa: `Eggbev-US-CC-EN Corte e ROAS` (`1541578606076231750`), nome confirmado por readback.
 - Padrão das rotas funcionais: prefixo `Eggbev-US-CC-EN` antes da função. Exceção aprovada por Nicolas: Regras usa a thread atual `1543280854024060999`; a antiga thread de Regras foi supersedida.
 

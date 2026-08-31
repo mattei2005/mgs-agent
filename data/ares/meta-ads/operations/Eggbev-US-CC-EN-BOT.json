@@ -631,7 +631,7 @@
     },
     "renderer_contract": {
       "status": "single_unified_table_v4_clone_decision_and_revenue_alerts_materialized",
-      "campaign_scope": "all currently effective ACTIVE campaigns even without an insight row, plus every campaign with insight in the requested period; historical campaigns with neither condition remain excluded",
+      "campaign_scope": "for the 08:00 D-1 table, every campaign with an insight row in D-1 and no current ACTIVE campaign that lacks D-1 insight; for today/on-demand views, every currently effective ACTIVE campaign even without insight plus every campaign with insight in the requested period",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
       "per_campaign_fields": [

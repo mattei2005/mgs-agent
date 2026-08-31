@@ -793,6 +793,23 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(row['budget_usd'], 45.0)
         self.assertEqual(row['status'], 'ACTIVE')
 
+    def test_d1_scope_keeps_only_campaigns_that_ran_in_d1(self):
+        meta = {
+            'campaigns': [
+                {'campaign_id': 'ran', 'has_insight': True, 'join_status': 'matched'},
+                {'campaign_id': 'future-active', 'has_insight': False, 'join_status': 'sb_utm_not_found'},
+            ],
+            'active_without_insight': 1,
+            'source_join_matched': 1,
+        }
+        scoped = daily.apply_period_campaign_scope(meta, 'Fechamento D-1')
+        self.assertEqual([row['campaign_id'] for row in scoped['campaigns']], ['ran'])
+        self.assertEqual(scoped['active_without_d1_insight_excluded'], 1)
+        self.assertEqual(scoped['campaigns_in_scope'], 1)
+        self.assertEqual(scoped['source_join_matched'], 1)
+        current = daily.apply_period_campaign_scope(meta, 'Parcial atual')
+        self.assertEqual(len(current['campaigns']), 2)
+
     def test_campaign_row_has_all_approved_metrics(self):
         bundle = {
             'insights': [{

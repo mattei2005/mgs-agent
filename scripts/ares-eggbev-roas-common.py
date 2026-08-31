@@ -673,6 +673,130 @@ def materialize_phase3_budget_assignment(
     return {campaign_id: int(choices[campaign_id]) for campaign_id in sorted(set(campaign_ids))}
 
 
+def plan_phase3_recycling(
+    meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], state: dict[str, Any],
+    source_date: str, threshold: float = 0.38, chooser=None,
+) -> dict[str, Any]:
+    """Plan previous-day winners, parent activation and randomized CBO budgets."""
+    insights = meta_bundle.get('insights_by_ad') or {}
+    ads_by_id = {norm(row.get('id')): row for row in meta_bundle.get('phase3_ads') or [] if norm(row.get('id'))}
+    campaigns_by_id = {norm(row.get('id')): row for row in meta_bundle.get('phase3_campaigns') or [] if norm(row.get('id'))}
+    adsets_by_id = {norm(row.get('id')): row for row in meta_bundle.get('phase3_adsets') or [] if norm(row.get('id'))}
+    by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for ad_id, metric in insights.items():
+        ad = ads_by_id.get(ad_id)
+        if not ad:
+            continue
+        normalized = normalize_ad(ad)
+        spend = finite_float(metric.get('spend')) or 0.0
+        roas = finite_float(metric.get('purchase_roas'))
+        if spend <= 0 or roas is None or roas < threshold:
+            continue
+        by_campaign[normalized['campaign_id']].append({
+            **normalized, **metric, 'spend': spend, 'purchase_roas': roas,
+            'phase': 'PHASE_3', 'threshold': threshold,
+        })
+
+    eligible_campaigns: list[dict[str, Any]] = []
+    excluded_campaigns: list[dict[str, Any]] = []
+    for campaign_id, candidate_ads in sorted(by_campaign.items()):
+        campaign = campaigns_by_id.get(campaign_id) or {}
+        campaign_status = norm(campaign.get('configured_status') or campaign.get('status')).upper()
+        if not campaign or campaign_status in {'DELETED', 'ARCHIVED'}:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'campaign_missing_deleted_or_archived'})
+            continue
+        identities = {_phase3_ad_identity(ads_by_id[row['ad_id']]) for row in candidate_ads}
+        if len(identities) != 1:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'campaign_page_or_utm_ambiguous'})
+            continue
+        page_id, utm = next(iter(identities))
+        if not page_id or not utm:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'campaign_page_or_utm_missing'})
+            continue
+        page_rows = [
+            row for row in (sb_bundle.get('page_index') or {}).get(utm, [])
+            if norm(row.get('FB_PAGE_ID')) == page_id
+        ]
+        if len(page_rows) != 1:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'smart_bidding_page_mapping_not_unique', 'utm_campaign': utm})
+            continue
+        leads = finite_float(page_rows[0].get('LEADS'))
+        if leads is None:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'smart_bidding_leads_missing', 'utm_campaign': utm})
+            continue
+        if leads > 5000.0:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'page_leads_strictly_over_5000', 'utm_campaign': utm, 'leads': leads})
+            continue
+        eligible_campaigns.append({
+            'campaign_id': campaign_id, 'campaign': campaign, 'ads': candidate_ads,
+            'page_id': page_id, 'utm_campaign': utm,
+            'page_name': norm(page_rows[0].get('PAGE_NAME')), 'leads': leads,
+        })
+
+    budgets = materialize_phase3_budget_assignment(
+        state, source_date, [row['campaign_id'] for row in eligible_campaigns], chooser=chooser,
+    )
+    decisions: list[dict[str, Any]] = []
+    campaign_actions: list[dict[str, Any]] = []
+    adset_actions: dict[str, dict[str, Any]] = {}
+    for item in eligible_campaigns:
+        campaign_id = item['campaign_id']
+        campaign = item['campaign']
+        campaign_status = norm(campaign.get('configured_status') or campaign.get('status')).upper()
+        campaign_actions.append({
+            'campaign_id': campaign_id, 'campaign_name': norm(campaign.get('name')),
+            'action': 'ACTIVATE_CAMPAIGN' if campaign_status != 'ACTIVE' else 'KEEP_CAMPAIGN_ACTIVE',
+            'current_status': campaign_status,
+            'target_daily_budget_minor': budgets[campaign_id],
+            'current_daily_budget_minor': int(finite_float(campaign.get('daily_budget')) or 0),
+            'page_id': item['page_id'], 'page_name': item['page_name'],
+            'utm_campaign': item['utm_campaign'], 'leads': item['leads'],
+        })
+        for row in item['ads']:
+            adset = adsets_by_id.get(row['adset_id']) or {}
+            adset_status = norm(adset.get('configured_status') or adset.get('status')).upper()
+            if not adset or adset_status in {'DELETED', 'ARCHIVED'}:
+                decisions.append({**row, 'action': 'KEEP', 'reason': 'phase3_adset_missing_deleted_or_archived'})
+                continue
+            ad_status = norm(row.get('configured_status')).upper()
+            if ad_status in {'DELETED', 'ARCHIVED'}:
+                decisions.append({**row, 'action': 'KEEP', 'reason': 'phase3_ad_deleted_or_archived'})
+                continue
+            adset_actions[row['adset_id']] = {
+                'adset_id': row['adset_id'], 'adset_name': norm(adset.get('name')),
+                'campaign_id': campaign_id,
+                'action': 'ACTIVATE_ADSET' if adset_status != 'ACTIVE' else 'KEEP_ADSET_ACTIVE',
+                'current_status': adset_status,
+            }
+            needs_activation = (
+                ad_status != 'ACTIVE' or norm(row.get('effective_status')).upper() != 'ACTIVE'
+                or adset_status != 'ACTIVE' or campaign_status != 'ACTIVE'
+            )
+            decisions.append({
+                **row,
+                'action': 'REACTIVATE_AD' if needs_activation else 'KEEP',
+                'reason': 'phase3_previous_day_roas_at_or_above_0_38' if needs_activation else 'phase3_winner_already_active',
+                'page_id': item['page_id'], 'page_name': item['page_name'],
+                'utm_campaign': item['utm_campaign'], 'leads': item['leads'],
+                'target_daily_budget_minor': budgets[campaign_id],
+            })
+    return {
+        'phase': 'PHASE_3', 'source_date': source_date, 'threshold': threshold,
+        'decisions': decisions, 'campaign_actions': campaign_actions,
+        'adset_actions': list(adset_actions.values()), 'excluded_campaigns': excluded_campaigns,
+        'budget_assignments_minor': budgets,
+        'counts': {
+            'ads_considered': len(decisions), 'pause_ads': 0,
+            'reactivate_ads': sum(1 for row in decisions if row.get('action') == 'REACTIVATE_AD'),
+            'pause_campaigns': 0,
+            'reactivate_campaigns': sum(1 for row in campaign_actions if row.get('action') == 'ACTIVATE_CAMPAIGN'),
+            'reactivate_adsets': sum(1 for row in adset_actions.values() if row.get('action') == 'ACTIVATE_ADSET'),
+            'budget_updates': sum(1 for row in campaign_actions if row.get('current_daily_budget_minor') != row.get('target_daily_budget_minor')),
+            'excluded_campaigns': len(excluded_campaigns),
+        },
+    }
+
+
 def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list[dict[str, Any]], threshold: float = 0.50, increase_percent: float = 10.0) -> list[dict[str, Any]]:
     """Plan, but never execute, campaign-level CBO increases from Meta ROAS."""
     by_campaign: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -727,15 +851,23 @@ def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list
 
 def source_gate(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], phase: str) -> dict[str, Any]:
     reasons: list[str] = []
-    if phase not in {'PHASE_1', 'PHASE_2'}:
-        reasons.append('not_an_action_cycle')
+    if phase not in {'PHASE_1', 'PHASE_2', 'PHASE_3'}:
+        reasons.append('observation_only_before_08' if phase == 'OBSERVE' else 'not_an_action_cycle')
     if (meta_bundle.get('native_rules') or {}).get('conflict', {}).get('enabled'):
         reasons.append('native_rule_ADS_ZERO_RESULTS_enabled')
-    if meta_bundle.get('manual_review'):
+    if phase in {'PHASE_1', 'PHASE_2'} and meta_bundle.get('manual_review'):
         reasons.append('manual_intervention_review_required')
-    if not sb_bundle.get('ready'):
-        reasons.append(sb_bundle.get('reason') or 'smart_bidding_not_ready')
-    return {'write_ready': not reasons, 'reasons': reasons}
+    economic_freshness_ready = bool((sb_bundle.get('economic_freshness') or {}).get('ready'))
+    if phase in {'PHASE_1', 'PHASE_2'} and not (sb_bundle.get('ready') or sb_bundle.get('economic_ready')):
+        reasons.append(sb_bundle.get('reason') or sb_bundle.get('economic_reason') or 'smart_bidding_not_ready')
+    if phase == 'PHASE_3':
+        if not economic_freshness_ready:
+            reasons.append(sb_bundle.get('economic_reason') or 'smart_bidding_estimated_delay_not_ready')
+        if not sb_bundle.get('page_rows'):
+            reasons.append('smart_bidding_messenger_pages_absent')
+        if meta_bundle.get('phase3_object_errors'):
+            reasons.append('phase3_meta_object_readback_incomplete')
+    return {'write_ready': not reasons, 'reasons': reasons, 'freshness_evidence': 'Smart Bidding /estimated/delay' if economic_freshness_ready else None}
 
 
 def reconcile_status_write(meta, token: str, object_id: str, desired: str, fields: str = 'id,name,status,effective_status,configured_status,updated_time') -> dict[str, Any]:
@@ -757,6 +889,37 @@ def reconcile_status_write(meta, token: str, object_id: str, desired: str, field
         'readback_http_status': read_status,
         'before': {'status': before.get('status'), 'effective_status': before.get('effective_status'), 'updated_time': before.get('updated_time')},
         'after': {'status': after.get('status') if isinstance(after, dict) else None, 'effective_status': after.get('effective_status') if isinstance(after, dict) else None, 'updated_time': after.get('updated_time') if isinstance(after, dict) else None},
+    }
+
+
+def reconcile_campaign_budget_write(meta, token: str, campaign_id: str, desired_minor: int) -> dict[str, Any]:
+    fields = 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,updated_time'
+    pre_status, before, _ = meta.graph_get(campaign_id, token, {'fields': fields})
+    if pre_status != 200 or not isinstance(before, dict):
+        return {'object_id': campaign_id, 'ok': False, 'stage': 'pre_readback', 'http_status': pre_status}
+    current = finite_float(before.get('daily_budget'))
+    if current is not None and int(current) == int(desired_minor):
+        return {
+            'object_id': campaign_id, 'ok': True, 'stage': 'already_desired',
+            'before': {'daily_budget': int(current), 'status': before.get('status'), 'updated_time': before.get('updated_time')},
+            'after': {'daily_budget': int(current), 'status': before.get('status'), 'updated_time': before.get('updated_time')},
+        }
+    post_status, post_body, _ = meta.graph_post_once(campaign_id, token, {'daily_budget': str(int(desired_minor))})
+    read_status, after, _ = meta.graph_get(campaign_id, token, {'fields': fields})
+    after_budget = finite_float((after or {}).get('daily_budget')) if isinstance(after, dict) else None
+    confirmed = read_status == 200 and after_budget is not None and int(after_budget) == int(desired_minor)
+    return {
+        'object_id': campaign_id, 'ok': confirmed,
+        'stage': 'confirmed' if confirmed else 'not_confirmed',
+        'post_http_status': post_status,
+        'post_response_success': bool(isinstance(post_body, dict) and post_body.get('success') is True),
+        'readback_http_status': read_status,
+        'before': {'daily_budget': int(current) if current is not None else None, 'status': before.get('status'), 'updated_time': before.get('updated_time')},
+        'after': {
+            'daily_budget': int(after_budget) if after_budget is not None else None,
+            'status': after.get('status') if isinstance(after, dict) else None,
+            'updated_time': after.get('updated_time') if isinstance(after, dict) else None,
+        },
     }
 
 

@@ -457,6 +457,26 @@ def merge_campaign_sources(meta: dict[str, Any], sb: dict[str, Any]) -> dict[str
     return merged
 
 
+def apply_period_campaign_scope(meta: dict[str, Any], label: str) -> dict[str, Any]:
+    """D-1 shows campaigns that actually produced an insight row in D-1."""
+    scoped = dict(meta)
+    campaigns = list(meta.get('campaigns') or [])
+    if label not in {'Fechamento D-1', 'Fechamento anterior'}:
+        return scoped
+    excluded = [row for row in campaigns if not row.get('has_insight')]
+    campaigns = [row for row in campaigns if row.get('has_insight')]
+    counts: dict[str, int] = defaultdict(int)
+    for row in campaigns:
+        counts[common.norm(row.get('join_status')) or 'N/D'] += 1
+    scoped['campaigns'] = campaigns
+    scoped['campaigns_in_scope'] = len(campaigns)
+    scoped['active_without_insight'] = 0
+    scoped['active_without_d1_insight_excluded'] = len(excluded)
+    scoped['source_join_counts'] = dict(sorted(counts.items()))
+    scoped['source_join_matched'] = counts.get('matched', 0)
+    return scoped
+
+
 def prepare_daily_sb_bundle(bundle: dict[str, Any], report_date: str) -> dict[str, Any]:
     """Apply Daily-only date and freshness gates without changing ROAS writes."""
     prepared = dict(bundle)
@@ -740,6 +760,7 @@ def render_period(period: dict[str, Any]) -> list[str]:
         f"Leads {common.fmt_number(sb.get('leads'), 0)} | RPS {common.fmt_money(sb.get('rps_gross'))}.",
         f"- Fonte SB: Última atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
         f"Atraso da fonte {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
+        f"Freshness máx. {(sb.get('freshness') or {}).get('max_age_hours') or 2.0}h | "
         f"Campo timestamp {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'}.",
     ]
     if not sb.get('ready'):
@@ -747,14 +768,17 @@ def render_period(period: dict[str, Any]) -> list[str]:
     lines.append(sb.get('formula_note'))
     campaigns = meta.get('campaigns') or []
     if campaigns:
+        campaign_word = 'campanha' if len(campaigns) == 1 else 'campanhas'
         lines.extend([
-            '', f"**Tabela única consolidada — {len(campaigns)} campanhas**",
+            '', f"**Tabela única consolidada — {len(campaigns)} {campaign_word}**",
             'Escopo: campanhas atualmente ACTIVE + campanhas com insight no período. A tabela apoia a decisão humana de quais e quantas campanhas clonar; não clona automaticamente.',
             '```text', *render_campaign_table(campaigns), '```',
         ])
         lines.append('`C/msg` = Meta spend ÷ `messaging_conversation_started_7d`; `M.CPM` = CPM Meta.')
         lines.append('`RPS`/`EPC` locais são fallback rotulado; campo direto Smart Bidding vence quando reconciliado.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
+        if meta.get('active_without_d1_insight_excluded'):
+            lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
         if meta.get('active_without_insight'):
             lines.append(f"ℹ️ ACTIVE sem insight no período: {meta.get('active_without_insight')}; campanhas mantidas visíveis com métricas `N/D`.")
         if meta.get('campaign_readback_errors'):
@@ -763,9 +787,6 @@ def render_period(period: dict[str, Any]) -> list[str]:
             lines.append(f"⚠️ Criativo/UTM/Page ID não relidos para {len(meta.get('ad_readback_errors') or [])} anúncio(s).")
     else:
         lines.append('Nenhuma campanha ACTIVE e nenhuma campanha com insight Meta no período.')
-    bullets = anomaly_bullets(period.get('revenue_anomaly') or {})
-    if bullets:
-        lines.extend(['', '**Fique de olho**', *[f'- {bullet}' for bullet in bullets]])
     return lines
 
 
@@ -776,10 +797,21 @@ def render_report(run: dict[str, Any]) -> str:
         'Fontes: Meta Ads API + Smart Bidding Messenger + Pricing/monetização reconciliados por UTM e Page ID',
         '',
     ]
-    for index, period in enumerate(run.get('periods') or []):
+    rendered_periods = [
+        period for period in run.get('periods') or []
+        if period.get('label') != 'Sinal atual 08:00'
+    ]
+    for index, period in enumerate(rendered_periods):
         if index:
             lines.append('\n──────────')
         lines.extend(render_period(period))
+    alerts: list[str] = []
+    for period in run.get('periods') or []:
+        prefix = 'Hoje 08:00 — ' if period.get('label') == 'Sinal atual 08:00' else 'D-1 — '
+        for bullet in anomaly_bullets(period.get('revenue_anomaly') or {}):
+            alerts.append(prefix + bullet)
+    if alerts:
+        lines.extend(['', '**Fique de olho**', *[f'- {bullet}' for bullet in alerts[:5]]])
     return '\n'.join(lines)
 
 
@@ -831,6 +863,7 @@ def main() -> int:
             meta_aggregate = aggregate_meta(meta_bundle)
             sb_aggregate = aggregate_sb(sb_bundle)
             meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
+            meta_aggregate = apply_period_campaign_scope(meta_aggregate, label)
             snapshot = build_revenue_snapshot(sb_aggregate, report_date, label, at.isoformat())
             anomaly = analyze_revenue_snapshot(snapshot, anomaly_state, anomaly_policy)
             if snapshot.get('eligible'):

@@ -3,7 +3,9 @@
 
 Default mode is dry-run. Controlled writes require operation runtime enablement,
 --apply, --post-report, reconciled sources, no conflicting native rule, and
-pre/post Meta readbacks. This script never changes campaign, budget, ad set, or creative.
+pre/post Meta readbacks. Phases 1/2 remain ad-only. The explicit midnight
+Phase 3 exception may activate campaigns/ad sets/ads and set a persisted random
+USD 45/65 CBO budget; it never changes creatives.
 """
 from __future__ import annotations
 
@@ -84,6 +86,8 @@ def _cycle_at(value: Any) -> dt.datetime | None:
 def _phase_label(value: Any) -> str:
     return {
         'PHASE_1': 'Fase 1', 'PHASE_2': 'Fase 2',
+        'PHASE_3': 'Fase 3 — Reativação/Reciclagem',
+        'OBSERVE': 'Formação até 08:00',
         'RESET': 'Reset diário', 'NO_CYCLE': 'Fora de ciclo',
     }.get(common.norm(value), common.norm(value) or 'N/D')
 
@@ -372,6 +376,11 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
         for row in plan.get('budget_scale_candidates') or []
         if common.norm(row.get('campaign_id'))
     }
+    phase3_by_id = {
+        common.norm(row.get('campaign_id')): row
+        for row in plan.get('campaign_actions') or []
+        if common.norm(row.get('campaign_id'))
+    }
     live_campaigns = {
         common.norm(row.get('id')): row
         for source in ('campaigns', 'tracked_campaigns', 'campaign_readbacks')
@@ -431,6 +440,12 @@ def build_campaign_reporting(meta_bundle: dict[str, Any], sb_bundle: dict[str, A
             'estimate_confidence': (economic or {}).get('estimate_confidence'),
             'scale': scale_by_id.get(campaign_id),
         })
+        phase3 = phase3_by_id.get(campaign_id)
+        if phase3:
+            row['budget_usd'] = (common.finite_float(phase3.get('target_daily_budget_minor')) or 0.0) / 100.0
+            row['sb_page_name'] = common.norm(phase3.get('page_name')) or row.get('sb_page_name')
+            row['sb_leads'] = common.finite_float(phase3.get('leads'))
+            row['utm_campaign'] = common.norm(phase3.get('utm_campaign')) or row.get('utm_campaign')
         rows.append(row)
     return {
         'campaigns': rows,
@@ -850,15 +865,30 @@ def render_report(run: dict[str, Any]) -> str:
     date_label = started.strftime('%d/%m/%Y') if started else 'N/D'
     time_label = started.strftime('%H:%M') if started else 'N/D'
     mode = 'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED WRITE'
-    title_emoji = '⚠️' if reasons else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'
-    lines = [
-        f"## {title_emoji} Corte & ROAS • {time_label} ET",
-        f"**{_phase_label(run.get('phase'))} • {mode} • limite {common.fmt_number(run.get('threshold'))}**",
-        f"🎯 `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
-        f"🛑 `{counts.get('pause_ads', 0)}` • ♻️ `{counts.get('reactivate_ads', 0)}` • "
-        f"🚀 `{counts.get('budget_scale_candidates', 0)}` • ✅ `{sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP')}`",
-    ]
-    if run.get('phase') == 'RESET':
+    phase = common.norm(run.get('phase'))
+    if phase == 'PHASE_3':
+        title_emoji = '⚠️' if reasons else '♻️'
+        lines = [
+            f"## {title_emoji} Fase 3 — Reativação/Reciclagem • {time_label} ET",
+            f"**Dia-base {plan.get('source_date') or 'N/D'} • Purchase ROAS ≥ {common.fmt_number(run.get('threshold'))} • budget aleatório US$45/US$65**",
+            f"🎯 `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads vencedores` • "
+            f"♻️ `{counts.get('reactivate_ads', 0)} ads` • 🏗️ `{counts.get('reactivate_adsets', 0)} conjuntos` • "
+            f"📣 `{counts.get('reactivate_campaigns', 0)} campanhas` • 💵 `{counts.get('budget_updates', 0)} budgets` • "
+            f"⛔ `{counts.get('excluded_campaigns', 0)} excluídas`",
+            '🔁 **Ação da Fase 3:** reciclagem dos vencedores do dia anterior; cortes normais retornam às 08:00 ET.',
+        ]
+    else:
+        title_emoji = '⚠️' if (reasons and phase != 'OBSERVE') else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'
+        lines = [
+            f"## {title_emoji} Corte & ROAS • {time_label} ET",
+            f"**{_phase_label(phase)} • {mode} • limite {common.fmt_number(run.get('threshold'))}**",
+            f"🎯 `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
+            f"🛑 `{counts.get('pause_ads', 0)}` • ♻️ `{counts.get('reactivate_ads', 0)}` • "
+            f"🚀 `{counts.get('budget_scale_candidates', 0)}` • ✅ `{sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP')}`",
+        ]
+    if phase == 'OBSERVE':
+        lines.append('👁️ Formação de dados: às 05:00/06:00 o relatório continua, mas nenhum corte ou reativação é executado; ações começam às 08:00 ET.')
+    elif phase == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
     elif reasons:
         lines.append('⚠️ **Ações bloqueadas:** ' + '; '.join(reasons))
@@ -924,6 +954,70 @@ def execute_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], 
         common.atomic_json(Path(run['audit_path']), run)
 
 
+def execute_phase3_plan(meta, token: str, plan: dict[str, Any], state: dict[str, Any], run: dict[str, Any]) -> bool:
+    """Apply the ordered midnight exception with per-campaign fail-closed recovery."""
+    writes = run['writes']
+    adsets_by_campaign: dict[str, list[dict[str, Any]]] = {}
+    ads_by_campaign: dict[str, list[dict[str, Any]]] = {}
+    for row in plan.get('adset_actions') or []:
+        adsets_by_campaign.setdefault(common.norm(row.get('campaign_id')), []).append(row)
+    for row in plan.get('decisions') or []:
+        ads_by_campaign.setdefault(common.norm(row.get('campaign_id')), []).append(row)
+    failed: list[dict[str, Any]] = []
+
+    def record(result: dict[str, Any], **extra: Any) -> bool:
+        result.update(extra)
+        writes.append(result)
+        if not result.get('ok'):
+            failed.append({'kind': result.get('kind'), 'object_id': result.get('object_id'), 'stage': result.get('stage')})
+        common.atomic_json(Path(run['audit_path']), run)
+        return bool(result.get('ok'))
+
+    for campaign in plan.get('campaign_actions') or []:
+        campaign_id = common.norm(campaign.get('campaign_id'))
+        budget_ok = record(
+            common.reconcile_campaign_budget_write(meta, token, campaign_id, int(campaign['target_daily_budget_minor'])),
+            kind='campaign_budget', action='SET_PHASE3_RANDOM_BUDGET', name=campaign.get('campaign_name'),
+            target_daily_budget_minor=int(campaign['target_daily_budget_minor']),
+        )
+        if not budget_ok:
+            continue
+        campaign_ok = record(
+            common.reconcile_status_write(meta, token, campaign_id, 'ACTIVE'),
+            kind='campaign', action='ACTIVATE_PHASE3_CAMPAIGN', name=campaign.get('campaign_name'),
+        )
+        if not campaign_ok:
+            continue
+        ready_adsets: set[str] = set()
+        for adset in adsets_by_campaign.get(campaign_id, []):
+            adset_id = common.norm(adset.get('adset_id'))
+            if record(
+                common.reconcile_status_write(meta, token, adset_id, 'ACTIVE'),
+                kind='adset', action='ACTIVATE_PHASE3_ADSET', name=adset.get('adset_name'),
+                campaign_id=campaign_id,
+            ):
+                ready_adsets.add(adset_id)
+        for ad in ads_by_campaign.get(campaign_id, []):
+            if common.norm(ad.get('reason')).endswith('deleted_or_archived'):
+                continue
+            if common.norm(ad.get('adset_id')) not in ready_adsets:
+                failed.append({'kind': 'ad', 'object_id': ad.get('ad_id'), 'stage': 'phase3_parent_adset_not_confirmed'})
+                continue
+            result = common.reconcile_status_write(meta, token, ad['ad_id'], 'ACTIVE')
+            if record(
+                result, kind='ad', action='REACTIVATE_PHASE3_AD', name=ad.get('ad_name'),
+                campaign_id=campaign_id, purchase_roas=ad.get('purchase_roas'),
+            ):
+                state.get('paused_ads', {}).pop(ad['ad_id'], None)
+    run['phase3_execution'] = {
+        'ok': not failed,
+        'failed': failed,
+        'writes_confirmed': sum(1 for row in writes if row.get('ok')),
+        'writes_total': len(writes),
+    }
+    return not failed
+
+
 def sanitized_summary(run: dict[str, Any]) -> dict[str, Any]:
     return {
         'ok': run.get('ok'), 'mode': run.get('mode'), 'run_id': run.get('run_id'),
@@ -969,15 +1063,17 @@ def main() -> int:
         reset_value = common.finite_float(threshold_policy.get('daily_reset_value')) or 0.40
         state, state_reset = common.load_state(started.date(), reset_value)
         phase = common.phase_for_time(started)
-        if phase == 'RESET':
+        if phase == 'PHASE_3':
             state = common.rollover_state(state, started.date(), reset_value)
             state_reset = True
+        phase3_policy = policy.get('phase_3_recycling') or {}
+        phase3_threshold = common.finite_float(phase3_policy.get('activation_roas_minimum')) or 0.38
         run: dict[str, Any] = {
             'ok': False, 'run_id': run_id, 'started_at_et': started.isoformat(),
             'actual_started_at_et': actual_started.isoformat(),
             'scheduled_mode': bool(args.scheduled),
             'mode': 'controlled_write' if args.apply else 'dry_run', 'phase': phase,
-            'threshold': common.finite_float(state.get('threshold')) or reset_value,
+            'threshold': phase3_threshold if phase == 'PHASE_3' else (common.finite_float(state.get('threshold')) or reset_value),
             'state_reset': state_reset, 'operation_id': operation.get('operation_id'),
             'account_id': norm_id(operation), 'writes': [], 'audit_path': str(audit_path),
         }
@@ -1017,27 +1113,48 @@ def main() -> int:
                 return 0
             meta, sb, token, credential_readback = common.load_runtime_modules(account)
             run['credential_readback'] = credential_readback
-            meta_bundle = common.fetch_meta_bundle(meta, token, norm_id(operation), state, 'today')
-            meta_bundle = reporting.enrich_campaign_readbacks(meta, token, meta_bundle)
+            source_date = (
+                (started.date() - dt.timedelta(days=1)).isoformat()
+                if phase == 'PHASE_3' else 'today'
+            )
+            meta_bundle = common.fetch_meta_bundle(meta, token, norm_id(operation), state, source_date)
+            if phase == 'PHASE_3':
+                meta_bundle = common.fetch_phase3_meta_objects(meta, token, meta_bundle)
+            else:
+                meta_bundle = reporting.enrich_campaign_readbacks(meta, token, meta_bundle)
             run['meta_status'] = 'ok'
+            sb_report_date = (started.date() - dt.timedelta(days=1)).isoformat() if phase == 'PHASE_3' else started.date().isoformat()
             try:
-                sb_bundle = common.fetch_sb_bundle(sb, operation, started.date().isoformat())
-                run['smart_bidding_status'] = 'ok' if sb_bundle.get('ready') else sb_bundle.get('reason')
+                sb_bundle = common.fetch_sb_bundle(sb, operation, sb_report_date)
+                run['smart_bidding_status'] = 'ok' if (sb_bundle.get('ready') or sb_bundle.get('economic_ready')) else sb_bundle.get('reason')
             except Exception as exc:
                 sb_bundle = {'ready': False, 'reason': f'{type(exc).__name__}: {exc}', 'target_report_rows': [], 'available_account_names': []}
                 run['smart_bidding_status'] = 'unavailable'
-            plan = common.decide_cycle(
-                meta_bundle.get('ads') or [], meta_bundle.get('tracked_ads') or [],
-                meta_bundle.get('insights_by_ad') or {}, state, phase, run['threshold'],
-            )
-            scale_policy = operation.get('campaign_scaling_policy') or {}
-            scale_candidates = common.plan_campaign_budget_scales(
-                meta_bundle.get('campaigns') or [], plan.get('decisions') or [],
-                common.finite_float(scale_policy.get('roas_threshold')) or 0.50,
-                common.finite_float(scale_policy.get('increase_percent')) or 10.0,
-            )
-            plan['budget_scale_candidates'] = scale_candidates
-            plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
+            if phase == 'PHASE_3':
+                plan_state = state if args.apply else json.loads(json.dumps(state))
+                plan = common.plan_phase3_recycling(
+                    meta_bundle, sb_bundle, plan_state, sb_report_date, run['threshold'],
+                )
+                plan['budget_scale_candidates'] = []
+                plan.setdefault('counts', {})['budget_scale_candidates'] = 0
+                if args.apply:
+                    # Persist the random assignment before any external write.
+                    common.atomic_json(common.ROAS_STATE_PATH, state)
+            else:
+                plan = common.decide_cycle(
+                    meta_bundle.get('ads') or [], meta_bundle.get('tracked_ads') or [],
+                    meta_bundle.get('insights_by_ad') or {}, state, phase, run['threshold'], started,
+                )
+                scale_candidates: list[dict[str, Any]] = []
+                if phase in {'PHASE_1', 'PHASE_2'}:
+                    scale_policy = operation.get('campaign_scaling_policy') or {}
+                    scale_candidates = common.plan_campaign_budget_scales(
+                        meta_bundle.get('campaigns') or [], plan.get('decisions') or [],
+                        common.finite_float(scale_policy.get('roas_threshold')) or 0.50,
+                        common.finite_float(scale_policy.get('increase_percent')) or 10.0,
+                    )
+                plan['budget_scale_candidates'] = scale_candidates
+                plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
             gate = common.source_gate(meta_bundle, sb_bundle, phase)
             campaign_reporting = build_campaign_reporting(meta_bundle, sb_bundle, plan)
             run.update({

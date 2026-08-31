@@ -52,7 +52,7 @@ class EggbevDailyRouteTests(unittest.TestCase):
         required = [
             "freshness",
             "`N/D`",
-            "currently effective ACTIVE campaigns",
+            "currently effective ACTIVE campaign",
             "Limite silencioso de linhas: não",
             "Truncamento do nome da campanha: não",
             "full name",
