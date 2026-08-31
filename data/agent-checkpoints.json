@@ -851,6 +851,16 @@
       "updated_at": "2026-08-28T03:17:29+00:00"
     },
     {
+      "agent": "ares",
+      "id": "cpv05-c51-c53-renumber-lineage-repair-20260830",
+      "next_step": "Rodolfo precisa decidir se autoriza replacement com exclusão terminal das C01/C02/C03 antigas para reciclar as UTMs; depois reconstruir os 9 anúncios por Ad Copies API com lineage, fazer swap controlado e readback de entrega.",
+      "objective": "Renumerar C51/C52/C53 da conta 05 para C01/C02/C03 e corrigir ausência de entrega",
+      "source": "discord:thread:1543263056262594641",
+      "state": "meta live v26: c51/c52/c53 e hierarquia 1x1x3 active, zero impressões e zero gasto; 9/9 anúncios com source_ad_id=0, mesma causa confirmada no incidente da conta 13. a conta 05 já possui c01/c02/c03 antigas não deletadas e paused, com as utms canônicas b01fb05c01/c02/c03.",
+      "thread_id": "1543263056262594641",
+      "updated_at": "2026-08-31T01:00:28+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "digitaltrchat-portfolio-audit-write-pilot-20260716",
       "next_step": "Aguardar próximo escopo explícito de Rodolfo e, para a auditoria global, receber catálogo canônico de links por site/funil/vertical/língua; manter backup→dry-run→Save→readback independente em cada write",
@@ -1532,5 +1542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T00:18:17+00:00"
+  "updated_at": "2026-08-31T01:00:28+00:00"
 }
