@@ -14,6 +14,7 @@ from scripts.ares_campaign_v3.eggbev_create import (
     INSTAGRAM_POSITIONS,
     MESSENGER_TEMPLATE_PATH,
     MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+    MESSENGER_TEMPLATE_NAME,
     MESSENGER_POSITIONS,
     build_eggbev_from_zero_manifest,
     build_eggbev_revised_clone_manifest,
@@ -129,6 +130,8 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(feed["call_to_action_types"], ["APPLY_NOW"])
         self.assertIs(welcome["performance_booster_enabled"], False)
         self.assertIs(welcome["message_data"]["performance_booster_enabled"], False)
+        self.assertEqual(welcome["template_name"], "JSON-AGT")
+        self.assertEqual(MESSENGER_TEMPLATE_NAME, "JSON-AGT")
         self.assertNotIn("template_id", welcome)
         self.assertNotIn("standard_enhancements", json.dumps(creative))
 
@@ -151,6 +154,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         self.assertEqual(load_messenger_template(), expected)
         wrapped = json.loads(messenger_welcome_message())
         self.assertEqual(wrapped["message_data"], expected)
+        self.assertEqual(wrapped["template_name"], "JSON-AGT")
         self.assertEqual(MESSENGER_TEMPLATE_PATH.name, "eggbev-us-cc-en-messenger-welcome.json")
         self.assertEqual(MESSENGER_TEMPLATE_SEMANTIC_SHA256, "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad")
         payload = self._build(campaigns=1)

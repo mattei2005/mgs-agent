@@ -1083,6 +1083,23 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(baseline['status'], 'baseline_forming')
         self.assertIn('Baseline de receita em formação', daily.anomaly_bullets(baseline)[0])
 
+        not_comparable = daily.analyze_revenue_snapshot(
+            {'eligible': False, 'reason': 'period_not_anomaly_comparable'},
+            daily.default_anomaly_state(), {},
+        )
+        self.assertEqual(not_comparable['status'], 'not_comparable_window')
+        self.assertIn('não aplicado nesta parcial', daily.anomaly_bullets(not_comparable)[0])
+
+    def test_operational_alerts_flag_duplicate_names_and_name_utm_mismatch(self):
+        period = {'meta': {'campaigns': [
+            {'name': '165 - Tina - (pg_5071) C003', 'utm_campaign': 'pg_5071', 'sb_page_name': 'Tina'},
+            {'name': '165 - Tina - (pg_5071) C003', 'utm_campaign': 'pg_5071', 'sb_page_name': 'Tina'},
+            {'name': '165 - Tina - (pg_5071) C003 DUP03', 'utm_campaign': 'pg_5024', 'sb_page_name': 'Amy'},
+        ]}}
+        bullets = daily.operational_alert_bullets(period)
+        self.assertTrue(any('Nome duplicado' in bullet for bullet in bullets))
+        self.assertTrue(any('Naming/UTM divergente' in bullet and 'pg_5024' in bullet for bullet in bullets))
+
     def test_discord_split_keeps_fences_balanced_without_omitting_names(self):
         names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
         campaigns = [{

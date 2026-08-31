@@ -112,11 +112,23 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         canonical = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)
         parsed = RUNNER.require_canonical_messenger_json(canonical, "test")
         self.assertEqual(parsed["message_data"], RUNNER.load_messenger_template(RUNNER.MESSENGER_TEMPLATE_PATH))
+        self.assertEqual(parsed["template_name"], "JSON-AGT")
         changed = json.loads(canonical)
         changed["message_data"]["message"]["attachment"]["payload"]["text"] = "changed"
         with self.assertRaises(RUNNER.CreationBlocked) as caught:
             RUNNER.require_canonical_messenger_json(changed, "installed")
         self.assertEqual(caught.exception.stage, "messenger_json_readback")
+
+    def test_messenger_json_readback_rejects_missing_or_changed_json_agt_name(self):
+        canonical = json.loads(RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH))
+        for value in (None, "Start conversations 08/30/26", "JSON AGT"):
+            changed = dict(canonical)
+            if value is None:
+                changed.pop("template_name", None)
+            else:
+                changed["template_name"] = value
+            with self.subTest(value=value), self.assertRaises(RUNNER.CreationBlocked):
+                RUNNER.require_canonical_messenger_json(changed, "installed")
 
     def test_preexecute_checks_every_manifest_ad_against_the_canonical_file(self):
         welcome = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)

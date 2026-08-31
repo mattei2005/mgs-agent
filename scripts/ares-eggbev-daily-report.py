@@ -602,9 +602,17 @@ def analyze_revenue_snapshot(
     snapshot: dict[str, Any], state: dict[str, Any], policy: dict[str, Any],
 ) -> dict[str, Any]:
     if not snapshot.get('eligible'):
+        reason = snapshot.get('reason')
+        if reason == 'period_not_anomaly_comparable':
+            return {
+                'status': 'not_comparable_window',
+                'reason': reason,
+                'alerts': [],
+                'coverage_issues': snapshot.get('coverage_issues') or [],
+            }
         return {
             'status': 'source_unavailable',
-            'reason': snapshot.get('reason'),
+            'reason': reason,
             'alerts': [],
             'coverage_issues': snapshot.get('coverage_issues') or [],
         }
@@ -690,6 +698,10 @@ def upsert_anomaly_snapshot(
 
 
 def anomaly_bullets(analysis: dict[str, Any], maximum: int = 5) -> list[str]:
+    if analysis.get('status') == 'not_comparable_window':
+        return [
+            '⚪ Monitor de anomalia não aplicado nesta parcial. Comparações válidas usam D-1 fechado ou o snapshot exato das 08:00 contra snapshots anteriores de 08:00.'
+        ]
     if analysis.get('status') == 'source_unavailable':
         return [
             '⚪ Monitor de receita sem leitura confiável: '
@@ -714,6 +726,31 @@ def anomaly_bullets(analysis: dict[str, Any], maximum: int = 5) -> list[str]:
     if analysis.get('coverage_issues'):
         bullets.append(f"⚪ {len(analysis.get('coverage_issues') or [])} página(s) sem join/fonte suficiente; revisar cobertura antes de concluir performance.")
     return bullets[:maximum]
+
+
+def operational_alert_bullets(period: dict[str, Any]) -> list[str]:
+    campaigns = (period.get('meta') or {}).get('campaigns') or []
+    bullets: list[str] = []
+    names: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for campaign in campaigns:
+        names[common.norm(campaign.get('name'))].append(campaign)
+    for name, rows in sorted(names.items()):
+        if name and len(rows) > 1:
+            bullets.append(
+                f"🟠 Nome duplicado: {len(rows)} campanhas distintas aparecem como `{name}`. "
+                'Confirmar a origem antes de clonar.'
+            )
+    for campaign in campaigns:
+        name = common.norm(campaign.get('name'))
+        name_utm_match = re.search(r'\((pg_\d+)\)', name, flags=re.I)
+        actual_utm = common.norm(campaign.get('utm_campaign'))
+        if name_utm_match and actual_utm and name_utm_match.group(1).lower() != actual_utm.lower():
+            bullets.append(
+                f"🟠 Naming/UTM divergente: `{name}` indica `{name_utm_match.group(1)}`, "
+                f"mas o criativo ativo reconcilia com `{actual_utm}`/{common.norm(campaign.get('sb_page_name')) or 'página N/D'}. "
+                'Não usar como fonte de clone sem conferência.'
+            )
+    return bullets
 
 
 def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
@@ -776,6 +813,7 @@ def render_period(period: dict[str, Any]) -> list[str]:
         ])
         lines.append('`C/msg` = Meta spend ÷ `messaging_conversation_started_7d`; `M.CPM` = CPM Meta.')
         lines.append('`RPS`/`EPC` locais são fallback rotulado; campo direto Smart Bidding vence quando reconciliado.')
+        lines.append('`SB Inv/Receita/Broadcast/Drip/ROI/Leads` são totais da Página/UTM e podem se repetir nas campanhas da mesma página; nunca somar essas células entre linhas.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         if meta.get('active_without_d1_insight_excluded'):
             lines.append(f"ℹ️ ACTIVE atuais sem insight em D-1: {meta.get('active_without_d1_insight_excluded')}; fora da tabela D-1 porque não rodaram no período fechado.")
@@ -807,9 +845,16 @@ def render_report(run: dict[str, Any]) -> str:
         lines.extend(render_period(period))
     alerts: list[str] = []
     for period in run.get('periods') or []:
-        prefix = 'Hoje 08:00 — ' if period.get('label') == 'Sinal atual 08:00' else 'D-1 — '
+        label = period.get('label')
+        if label == 'Sinal atual 08:00':
+            prefix = 'Hoje 08:00 — '
+        elif label in {'Fechamento D-1', 'Fechamento anterior'}:
+            prefix = 'D-1 — '
+        else:
+            prefix = f"{common.norm(label) or 'Período'} — "
         for bullet in anomaly_bullets(period.get('revenue_anomaly') or {}):
             alerts.append(prefix + bullet)
+        alerts.extend(operational_alert_bullets(period))
     if alerts:
         lines.extend(['', '**Fique de olho**', *[f'- {bullet}' for bullet in alerts[:5]]])
     return '\n'.join(lines)

@@ -17,6 +17,7 @@ PAGE_TOKEN_RE = re.compile(r"^pg_[0-9]+$")
 BASE = Path(__file__).resolve().parents[2]
 MESSENGER_TEMPLATE_PATH = BASE / "data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json"
 MESSENGER_TEMPLATE_SEMANTIC_SHA256 = "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad"
+MESSENGER_TEMPLATE_NAME = "JSON-AGT"
 
 FACEBOOK_POSITIONS = [
     "feed",
@@ -104,6 +105,7 @@ def load_messenger_template(path: Path = MESSENGER_TEMPLATE_PATH) -> dict[str, A
 def messenger_welcome_message(path: Path = MESSENGER_TEMPLATE_PATH) -> str:
     message_data = load_messenger_template(path)
     payload = {
+        "template_name": MESSENGER_TEMPLATE_NAME,
         "performance_booster_enabled": message_data["performance_booster_enabled"],
         "ctm_deprecate_quick_replies_enabled": message_data["ctm_deprecate_quick_replies_enabled"],
         "message_data": message_data,

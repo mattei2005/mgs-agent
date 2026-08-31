@@ -29,6 +29,7 @@ from ares_campaign_v3.eggbev_create import (
     ACCOUNT_ID,
     MESSENGER_TEMPLATE_PATH,
     MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+    MESSENGER_TEMPLATE_NAME,
     build_eggbev_from_zero_manifest,
     load_messenger_template,
     messenger_welcome_message,
@@ -452,7 +453,8 @@ def build_summary(
         "assets": [row.get("canonical_filename") for row in selected],
         "copy": policy["copy_source_policy"]["template"],
         "messenger_template": policy["message_template"],
-        "messenger_json_postcreation_check": "required per ad creative; exact Page, url_tags and parsed page_welcome_message readback before postprocess completion",
+        "messenger_template_name": MESSENGER_TEMPLATE_NAME,
+        "messenger_json_postcreation_check": "required per ad creative; exact Page, url_tags, template_name=JSON-AGT and parsed page_welcome_message readback before postprocess completion",
         "placements": policy["manual_placements_payload"],
         "tracking": manifest["campaigns"][0]["ads"][0]["creative_payload"]["url_tags"],
         "gates": ["Nicolas explicit OK on this exact summary and budget", "Engine v3 --confirm-execute", "consolidated Meta readback", "Messenger JSON installed readback per creative"],
@@ -549,6 +551,8 @@ def require_canonical_messenger_json(value: Any, source: str) -> dict[str, Any]:
     actual = parsed_json_object(value)
     if actual != expected:
         raise CreationBlocked("messenger_json_readback", f"{source} Messenger JSON does not match the canonical fixed file")
+    if actual.get("template_name") != MESSENGER_TEMPLATE_NAME:
+        raise CreationBlocked("messenger_json_readback", f"{source} Messenger template_name must be {MESSENGER_TEMPLATE_NAME}")
     return actual
 
 
@@ -563,6 +567,7 @@ def verify_manifest_messenger_json_against_canonical(manifest: dict[str, Any]) -
         "checked_creatives": len(ads),
         "canonical_template": str(MESSENGER_TEMPLATE_PATH),
         "canonical_template_semantic_sha256": MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+        "template_name": MESSENGER_TEMPLATE_NAME,
         "all_match": True,
     }
 
@@ -595,12 +600,13 @@ def verify_messenger_json_installation(state: dict[str, Any], assignments: list[
             raise CreationBlocked("messenger_json_readback", "creative url_tags do not match the approved manifest")
         require_canonical_messenger_json(expected_welcome, "manifest")
         require_canonical_messenger_json(actual_welcome, "installed")
-        checked.append({"ad_id": str(assignment["ad_id"]), "creative_id": creative_id, "page_ok": True, "url_tags_ok": True, "messenger_json_ok": True})
+        checked.append({"ad_id": str(assignment["ad_id"]), "creative_id": creative_id, "page_ok": True, "url_tags_ok": True, "messenger_json_ok": True, "template_name": MESSENGER_TEMPLATE_NAME, "template_name_ok": True})
     return {
         "checked_creatives": len(checked),
         "all_installed": len(checked) == len(assignments),
         "canonical_template": str(MESSENGER_TEMPLATE_PATH),
         "canonical_template_semantic_sha256": MESSENGER_TEMPLATE_SEMANTIC_SHA256,
+        "template_name": MESSENGER_TEMPLATE_NAME,
         "readbacks": checked,
     }
 
