@@ -355,22 +355,22 @@
           "stale campaign or scheduler snapshots"
         ],
         "latest_correction": {
-          "corrected_at_et": "2026-08-30T23:35:00-04:00",
-          "reason": "Nicolas defined the Daily as an 08:00 ET D-1 management report, a single complete table supporting clone decisions, and short page-revenue anomaly alerts; runtime automation remains disabled",
+          "corrected_at_et": "2026-08-31T09:14:14-04:00",
+          "reason": "Nicolas approved and requested Daily v7: three-line account summary, Page/UTM economics, stable SRC clone-intake aliases and visible Name×UTM×Page integrity signals; runtime automation remains disabled",
           "historical_report_superseded": true,
           "prior_audit": "data/ares/meta-ads/audit/eggbev/daily-thread-correction-20260829T183715-0400.json",
           "exact_thread_prompt_active": true,
           "active_prompt_readback_equal": true,
-          "active_prompt_sha256": "d8f90b05b565ac520dc448feab32900769bd7204b7b2c7b83102706fe35bbaba",
+          "active_prompt_sha256": "5a24c0443ad2d19151107028cd49a8708e4db6b354db4882b886d41568a86c32",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
-          "tests_passed": 52,
+          "tests_passed": 100,
           "renderer_complete_for_read_only": true,
-          "renderer_version": "page_grouped_desktop_v6",
+          "renderer_version": "unified_daily_v7",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
-          "audit": "data/ares/meta-ads/audit/eggbev/daily-report/daily-d1-anomaly-design-20260831.json"
+          "audit": "data/ares/meta-ads/audit/eggbev/daily-report/run-20260831T091015-0400.json"
         }
       },
       "page_lead_guardrail": {
