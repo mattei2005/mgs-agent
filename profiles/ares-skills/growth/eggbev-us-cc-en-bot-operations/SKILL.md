@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.20.1-draft
+version: 0.19.1-draft
 author: Ares
 license: internal
 metadata:
@@ -165,7 +165,7 @@ O contrato de estrutura, horários, threshold, guardrail, publicação e reporti
 1. Smart Bidding: no Corte e ROAS, a rota econômica read-only foi materializada com match exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`, estimativa por UTM única e freshness `/estimated/delay`. Permanece pendente o timestamp verificável da rota Messenger para LEADS e a seleção multi-rota específica do Diário.
 2. Engine v3: conta Eggbev cadastrada na release 3.4.1; `from_zero_prestaged`, `pure_clone`, `clone_prestaged` de 1–5 ads e `clone_page_switch` passam schema/prevalidation/plan. Mídia nova continua pre-stageada sob demanda antes de selar o manifest.
 3. Criação do zero: runner `scripts/ares-eggbev-creation.py`, policy por modo, naming, copy, tracking, Messenger JSON, placements e pós-processamento estão materializados. A substituição live `pg_5024 C001 → DUP01` concluiu com a sucessora `ACTIVE`, pixel `935354115143283`, evento `eggbev-pv-u`, PBIA/Page, UTM/Messenger, três anúncios e copy completos por readback; a fonte foi confirmada `DELETED` somente depois da validação. Por decisão de Nicolas, essa configuração `pg_5024_dup01_live_validated_v1` é o padrão de futuros pedidos na thread Criar Campanhas. O padrão reaproveita somente configuração: mídia, IDs e sufixo `DUPnn` nunca são reutilizados em criação do zero. Reconciliação read-only e reserva scoped permanecem obrigatórias. O call mínimo exige somente budget; nomes dos ads são automáticos. OK final de Nicolas, valor exato, Engine v3 e readback continuam gates; Nicolas possui autoridade financeira permanente para budget Eggbev sem novo OK de Rodolfo.
-4. `clone_page_switch`: schema, planner, prevalidation e recovery implementados; antes do primeiro write real, validar em canário aprovado os campos exatos do JSON Messenger, Page/UTM, delivery e readbacks Meta.
+4. `clone_page_switch`: schema/planner/prevalidation/recovery existem, mas o primeiro write real de 31/08/2026 provou que o AdG copiado não aceita troca de `promoted_object.page_id` (`1885090`). O modo copied-adset permanece bloqueado; a retomada exige aprovação explícita do método alternativo que cria um novo AdG já com a Page alvo, pausa o AdG incorreto e preserva mídia/copy/UTM/JSON por lineage.
 5. ROAS: comando aprovado de alteração intraday e eventual fórmula de recomendação de threshold.
 6. Diário: renderer v4 em uma única tabela Pricing + Meta Ads + Smart Bidding, apoio read-only à clonagem e detector de anomalia de receita por página materializados; permanecem seleção direta vertical/Messenger Pages/domain, timestamp/freshness Smart Bidding, formação de baseline e aprovação separada de cron/post.
 7. Canário live: validar payload, serving, métricas e readbacks com uma campanha aprovada.
@@ -301,6 +301,14 @@ Escopo exclusivo de clonagem; criação do zero permanece em `Eggbev-US-CC-EN Cr
 - `pure_clone` (**duplicação exata**): preserva estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs; mudam apenas IDs técnicos inevitáveis, budget escolhido pelo gestor, nome `DUPnn` e início/status;
 - `clone_prestaged`: preserva lineage/estrutura e usa de 1 a 5 criativos novos aprovados, reconciliados e pre-stageados;
 - `clone_page_switch`: preserva estrutura, público, placements, estratégia, copy e mídia, mas troca Facebook Page, `pg_XXXXX`, links/UTMs e o JSON Messenger. A página deve ser indicada por Nicolas. Se o pedido omitir a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada; nunca inferir nem selecionar automaticamente. Uma escolha delegada só pode ocorrer após nova instrução explícita de Nicolas no próprio pedido. Sem Page exata, não selar manifest e não fazer write Meta.
+
+### Recovery live dos clones — evidência de 31/08/2026
+
+- `pure_clone` com `deep_copy=true` falhou na fonte `1×1×3` com Meta subcode `1885194`: o total de campanha + AdG + anúncios excedeu o limite síncrono. Após GET confirmar zero efeito, a duplicação exata foi recuperada no v3 pela rota shallow com lineage, preservando Page, mídia, copy, público, placements, JSON e UTM. Nunca repetir o deep-copy falho às cegas.
+- O `clone_page_switch` atual não consegue trocar Page no AdG copiado: a Meta rejeita o POST de `promoted_object.page_id` com subcode `1885090`, pois o promoted object é imutável. Schema/plan não provam readiness live. Enquanto o executor não criar o novo AdG já com a Page alvo, o modo copied-adset fica bloqueado para write real.
+- A única recuperação aceitável do `clone_page_switch` parcial exige aprovação explícita do gestor para mudar o método: reutilizar a campanha-shell persistida, criar um novo AdG já com `promoted_object` da Page alvo, pausar o AdG copiado de Page antiga, copiar os anúncios com mídia/copy preservadas e rematerializar Page/UTM/JSON; não deletar o AdG antigo sem nova autorização.
+- O readback batch pode falhar com subcode `2446079` depois de todos os writes terem concluído. Nesse caso, usar IDs persistidos no checkpoint, fazer GET direto de campanha/AdG/anúncios/creatives, registrar reconciliação separada e liberar somente o lease daquele request. Nunca repetir a criação. Em `ad/copies`, os IDs de vídeo podem ser rematerializados; reconciliar os novos IDs por title marker de asset+checksum, orientação, duração e status `ready`, além do manifest prevalidated.
+
 - `clone_prestaged` em **substituição revisada explicitamente autorizada**: pode rematerializar novos creatives/ads a partir da mesma linhagem visual da fonte para corrigir copy, evento ou outro campo materializado, desde que o manifest identifique a campanha fonte, a sucessora `DUPnn`, os `source_ad_id`, as mudanças exatas e a exclusão posterior da fonte. Fonte e sucessora nunca viram dois candidatos independentes; a fonte só é deletada após readback completo da sucessora, e a sucessora só publica após o OK final do gestor.
 
 Naming obrigatório: preservar o nome-base integral e adicionar o próximo número livre `DUP01`, `DUP02`, `DUP03`… Se a fonte já terminar em `DUPnn`, remover apenas esse sufixo para recuperar o mesmo nome-base e usar o próximo número livre após scan das campanhas não deletadas.

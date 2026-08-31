@@ -473,12 +473,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
-      "next_step": "Apresentar ao Nicolas o resumo final exato com digest b38601bd3b54c872f8b9b13fcb52b7426b78ac27194f226b40a157abaaccf108 e aguardar OK explícito para executar DUP01, DUP02 e DUP03 pelo Engine v3. Antes do write, renovar scan de colisão e start_time se 31/08 00:00 ET tiver deixado de ser futuro.",
+      "next_step": "Aguardar Nicolas aprovar explicitamente mudança de método do DUP03: criar novo AdG no shell existente com promoted_object pg_5024, pausar AdG copiado de Page antiga, copiar 3 anúncios com mídia/copy preservadas e tracking/JSON pg_5024, validar por GET; sem deletar o AdG antigo.",
       "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
-      "source": "discord:thread:1543333373945053184; request:eggbev-clone-tina-c003-all-modes-20260830-nicolas-01; summary:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-final-summary.json",
-      "state": "awaiting_final_approval. pg_5024 reconciliada como amy shook com page/pbia meta. fonte canônica 1x1x3, usd45 e active reconciliada; dois homônimos continuam preservados, sem uso da variante copy. três assets do dup02 reservados e pre-stageados com associação à conta confirmada. três manifests prevalidated e cli validate/plan concluídos com zero campaign writes.",
+      "source": "discord:thread:1543333373945053184; state:data/ares/meta-ads/state/eggbev-clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01.json; audit:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-dup03-partial-shell.json",
+      "state": "dup01 completo por shallow exact recovery e readback direto 1x1x3 active usd45. dup02 completo com assets 054/085/113, linhagem meta por title+checksum+orientation+duration, e drive 02_testing. dup03 parcial resumível: campanha e adg active, start 01/09 00:00 et, adg ainda page pg_5071, zero ads e zero possibilidade de delivery. meta rejeitou atualização de promoted_object page no adg copiado (subcode 1885090). lease liberado.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T03:30:49+00:00"
+      "updated_at": "2026-08-31T04:23:52+00:00"
     },
     {
       "agent": "ares",
@@ -1662,5 +1662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T04:18:28+00:00"
+  "updated_at": "2026-08-31T04:23:52+00:00"
 }
