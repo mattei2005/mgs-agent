@@ -555,10 +555,20 @@
     "same_clock_signal": "at the 08:00 Daily run, include a current-day 08:00 revenue snapshot only for comparison against prior 08:00 snapshots; never compare a current partial day with full prior days",
     "schedule_policy": "The Daily design uses one 08:00 America/New_York report with the complete previous calendar day and an 08:00 current-day revenue signal. This time belongs only to the Eggbev Daily route and does not inherit or change any Corte e ROAS or CPV schedule. Cron and automatic posting remain disabled until a separate enable decision after a live dry-run.",
     "schedule_correction": {
+      "status": "superseded",
+      "superseded_by": "daily_0800_d1_design_20260830",
       "corrected_at_et": "2026-08-30T19:05:28-04:00",
       "corrected_by": "Nicolas Holanda",
       "source_thread": "discord:thread:1541578596253175858",
       "decision": "Daily routes will be designed separately later; no Daily schedule is currently defined or approved."
+    },
+    "schedule_design_decision": {
+      "id": "daily_0800_d1_design_20260830",
+      "status": "active",
+      "decided_at_et": "2026-08-30T23:35:00-04:00",
+      "decided_by": "Nicolas Holanda",
+      "source_thread": "discord:thread:1541578596253175858",
+      "decision": "Daily report design is 08:00 America/New_York with the complete previous day, a same-clock current-day revenue signal, one complete table and short anomaly bullets. Cron and automatic posting require separate enablement."
     },
     "sources": {
       "meta": "Meta API live for the requested period",

@@ -655,14 +655,33 @@ class ReportingTests(unittest.TestCase):
         self.assertTrue(all(len(chunk) <= 1750 for chunk in chunks))
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
 
-    def test_auto_0600_returns_previous_and_current(self):
-        at = dt.datetime(2026, 8, 29, 6, 0, tzinfo=ET)
+    def test_auto_0800_returns_previous_and_current(self):
+        at = dt.datetime(2026, 8, 29, 8, 0, tzinfo=ET)
         dates = daily.report_dates('auto', at)
         self.assertEqual([row[0] for row in dates], ['2026-08-28', '2026-08-29'])
+        self.assertEqual([row[1] for row in dates], ['Fechamento D-1', 'Sinal atual 08:00'])
 
     def test_auto_other_time_returns_current_only(self):
-        at = dt.datetime(2026, 8, 29, 8, 0, tzinfo=ET)
+        at = dt.datetime(2026, 8, 29, 6, 0, tzinfo=ET)
         self.assertEqual(daily.report_dates('auto', at), [('2026-08-29', 'Parcial atual')])
+
+    def test_daily_source_filters_exact_date_and_accepts_verified_delay(self):
+        bundle = {
+            'ready': False,
+            'reason': 'smart_bidding_freshness_unverifiable',
+            'economic_freshness': {
+                'ready': True, 'age_minutes': 12, 'current_fill_time': '2026-08-30T08:00:00-04:00',
+                'evidence': 'Smart Bidding /estimated/delay',
+            },
+            'target_report_rows': [
+                {'DATE': '2026-08-29', 'UTM_CAMPAIGN': 'pg_1', 'REVENUE': 100},
+                {'DATE': '2026-08-30', 'UTM_CAMPAIGN': 'pg_2', 'REVENUE': 200},
+            ],
+        }
+        prepared = daily.prepare_daily_sb_bundle(bundle, '2026-08-30')
+        self.assertTrue(prepared['daily_reporting_ready'])
+        self.assertEqual([row['UTM_CAMPAIGN'] for row in prepared['target_report_rows']], ['pg_2'])
+        self.assertEqual(prepared['freshness']['timestamp_field'], 'estimated.delay.currentFillTime')
 
     def test_smart_bidding_aggregation_does_not_invent_roi(self):
         bundle = {'ready': True, 'target_report_rows': [{'UTM_CAMPAIGN': 'pg_12345', 'INVESTIMENT': 10, 'REVENUE': 20, 'LEADS': 5, 'SESSIONS': 40, 'ACQUISITION_CLICKS': 10, 'AVG_PRICE': 6.2}], 'available_account_names': ['Eggbev-US-CC-EN-01']}
@@ -811,7 +830,7 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Campanhas no escopo — 25', rendered)
+        self.assertIn('Tabela única consolidada — 25 campanhas', rendered)
         for name in names:
             self.assertEqual(rendered.count(name), 1)
 
@@ -845,12 +864,51 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': True, 'target_report_rows': []}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Tabela única — Pricing + Meta Ads + Smart Bidding', rendered)
+        self.assertIn('Tabela única consolidada', rendered)
         self.assertIn('C/msg', rendered)
         self.assertIn('M.CPM', rendered)
-        self.assertIn('RPS bruto', rendered)
-        self.assertIn('EPC bruto', rendered)
+        self.assertIn('RPS', rendered)
+        self.assertIn('EPC', rendered)
         self.assertIn('1/1 campanhas', rendered)
+
+    def test_revenue_anomaly_uses_equivalent_median_and_30_40_bands(self):
+        state = daily.default_anomaly_state()
+        for date, revenue in [('2026-08-26', 90), ('2026-08-27', 100), ('2026-08-28', 110)]:
+            state = daily.upsert_anomaly_snapshot(state, {
+                'eligible': True, 'date': date, 'kind': 'same_clock', 'cutoff': '08:00',
+                'pages': [{'page_id': 'page1', 'utm_campaign': 'pg_1', 'page_name': 'Page One', 'revenue': revenue}],
+            }, date + 'T08:00:00-04:00')
+        policy = {
+            'baseline_days': 7, 'minimum_comparable_samples': 3,
+            'warning_drop_percent': 30, 'critical_drop_percent': 40,
+        }
+        critical = daily.analyze_revenue_snapshot({
+            'eligible': True, 'date': '2026-08-29', 'kind': 'same_clock', 'cutoff': '08:00',
+            'pages': [{'page_id': 'page1', 'utm_campaign': 'pg_1', 'page_name': 'Page One', 'revenue': 60}],
+        }, state, policy)
+        self.assertEqual(critical['status'], 'alert')
+        self.assertEqual(critical['alerts'][0]['severity'], 'critical')
+        self.assertAlmostEqual(critical['alerts'][0]['baseline_median_revenue'], 100)
+        self.assertAlmostEqual(critical['alerts'][0]['drop_percent'], 40)
+        warning = daily.analyze_revenue_snapshot({
+            'eligible': True, 'date': '2026-08-29', 'kind': 'same_clock', 'cutoff': '08:00',
+            'pages': [{'page_id': 'page1', 'utm_campaign': 'pg_1', 'page_name': 'Page One', 'revenue': 70}],
+        }, state, policy)
+        self.assertEqual(warning['alerts'][0]['severity'], 'warning')
+
+    def test_revenue_anomaly_fails_visible_when_source_or_baseline_is_missing(self):
+        source_missing = daily.analyze_revenue_snapshot(
+            {'eligible': False, 'reason': 'smart_bidding_freshness_unverifiable'},
+            daily.default_anomaly_state(), {},
+        )
+        self.assertEqual(source_missing['status'], 'source_unavailable')
+        self.assertIn('sem leitura confiável', daily.anomaly_bullets(source_missing)[0])
+        baseline = daily.analyze_revenue_snapshot({
+            'eligible': True, 'date': '2026-08-29', 'kind': 'same_clock', 'cutoff': '08:00',
+            'pages': [{'page_id': 'page1', 'utm_campaign': 'pg_1', 'revenue': 80}],
+        }, daily.default_anomaly_state(), {'minimum_comparable_samples': 3})
+        self.assertEqual(baseline['status'], 'baseline_forming')
+        self.assertIn('Baseline de receita em formação', daily.anomaly_bullets(baseline)[0])
 
     def test_discord_split_keeps_fences_balanced_without_omitting_names(self):
         names = [f'{index:03d} - Full Campaign Name {index} - ENG - US - (pg_{index:05d})' for index in range(1, 26)]
@@ -897,7 +955,7 @@ class ContractTests(unittest.TestCase):
 
     def test_daily_unified_table_contract_uses_exact_keys_and_formulas(self):
         renderer = self.operation['daily_reporting_policy']['renderer_contract']
-        self.assertIn('unified_sources', renderer['status'])
+        self.assertIn('single_unified_table', renderer['status'])
         self.assertIn('UTM_CAMPAIGN', renderer['source_join']['primary'])
         self.assertIn('FB_PAGE_ID', renderer['source_join']['identity_confirmation'])
         self.assertIn('messaging_conversation_started_7d', renderer['metric_formulas']['cost_per_messaging_started'])

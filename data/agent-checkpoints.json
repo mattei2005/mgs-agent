@@ -772,6 +772,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpv-general-daily-monitor05-20260830",
+      "next_step": "Auditar scripts existentes e implementar camadas read-only/idempotentes com testes e readback.",
+      "objective": "Separar SMS dos Diários 05/13, ativar CPV Diário Geral consolidado e monitor alert-only na conta 05",
+      "source": "discord:thread:1543778490610884679",
+      "state": "in_progress: thread geral fornecida por rodolfo; preflight de runtimes, contratos, fontes meta/sb/sms e monitor em andamento.",
+      "thread_id": "1543778490610884679",
+      "updated_at": "2026-08-31T03:36:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv05-rules-runtime-20260830",
       "next_step": "Se Rodolfo quiser cortes 80/10/10 e 90/10 automáticos, autorizar separadamente runner de decisão CREATIVE_CUT_24H; hoje relatórios são read-only. SMS e monitor account-wide da conta 05 continuam pendentes de arquitetura/escopo próprios.",
       "objective": "Ativar watcher de primeiro gasto e relatórios Diário/Intraday da conta 05; atualizar CPV Regras e declarar Campaign Engine v2 retired",
@@ -1632,5 +1642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:31:18+00:00"
+  "updated_at": "2026-08-31T03:36:10+00:00"
 }

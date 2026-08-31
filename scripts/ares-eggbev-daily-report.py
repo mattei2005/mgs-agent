@@ -698,7 +698,7 @@ def anomaly_bullets(analysis: dict[str, Any], maximum: int = 5) -> list[str]:
 
 def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
     headers = [
-        '#', 'Campanha', 'Página/UTM', 'St', 'Budget', 'Spend', 'Msg', 'C/msg', 'ROAS',
+        '#', 'Campanha', 'Página/UTM', 'St', 'Início', 'Budget', 'Spend', 'Msg', 'C/msg', 'ROAS',
         'SB Inv', 'Receita', 'Broadcast', 'Drip', 'ROI', 'Leads', 'AvgP', 'RPS', 'EPC',
         'M.CPM', 'CTR', 'Join',
     ]
@@ -710,7 +710,8 @@ def render_campaign_table(campaigns: list[dict[str, Any]]) -> list[str]:
             page = f'{page}/{utm}'
         rows.append([
             str(index), common.norm(row.get('name')) or common.norm(row.get('campaign_id')) or 'N/D',
-            page, common.norm(row.get('status')) or 'N/D', common.fmt_money(row.get('budget_usd')),
+            page, common.norm(row.get('status')) or 'N/D', format_start_time(row.get('start_time')),
+            common.fmt_money(row.get('budget_usd')),
             common.fmt_money(row.get('spend')), common.fmt_number(row.get('messaging_started'), 0),
             common.fmt_money(row.get('cost_per_messaging_started')), common.fmt_number(row.get('purchase_roas')),
             common.fmt_money(row.get('sb_investment')), common.fmt_money(row.get('sb_revenue')),
@@ -737,9 +738,9 @@ def render_period(period: dict[str, Any]) -> list[str]:
         f"- Smart Bidding: Investimento {common.fmt_money(sb.get('investment'))} | Receita {common.fmt_money(sb.get('revenue'))} | "
         f"Broadcast {common.fmt_money(sb.get('broadcast_revenue'))} | Drip {common.fmt_money(sb.get('drip_revenue'))} | "
         f"Leads {common.fmt_number(sb.get('leads'), 0)} | RPS {common.fmt_money(sb.get('rps_gross'))}.",
-        f"- Fonte SB: atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
-        f"idade {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
-        f"campo {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'}.",
+        f"- Fonte SB: Última atualização {common.norm((sb.get('freshness') or {}).get('latest_at_et')) or 'N/D'} | "
+        f"Atraso da fonte {((str((sb.get('freshness') or {}).get('age_minutes')) + ' min') if (sb.get('freshness') or {}).get('age_minutes') is not None else 'N/D')} | "
+        f"Campo timestamp {common.norm((sb.get('freshness') or {}).get('timestamp_field')) or 'N/D'}.",
     ]
     if not sb.get('ready'):
         lines.append('⚠️ Smart Bidding não reconciliada: ' + common.norm(sb.get('reason')) + '.')

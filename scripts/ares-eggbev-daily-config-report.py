@@ -40,6 +40,7 @@ def build_report() -> str:
     meta_metrics = ", ".join(policy["required_meta_metrics"])
     sb_metrics = ", ".join(policy["requested_smart_bidding_metrics"])
     renderer = policy["renderer_contract"]
+    anomaly = policy["revenue_anomaly_detection"]
     limitations = policy["remaining_limitations"]
 
     lines = [
@@ -53,11 +54,14 @@ def build_report() -> str:
         f"- Modo: `{policy['mode']}`; o Diário não executa qualquer write Meta.",
         "",
         "## Horários e rotas",
-        "- Horários do Diário: ainda não definidos nem aprovados.",
+        "- Horário desenhado e aprovado para o Diário: `08:00 America/New_York`.",
+        f"- Período principal: `{policy['primary_period']}`.",
+        "- No mesmo run, o sinal atual de 08:00 compara somente snapshots de 08:00; nunca compara parcial atual com dia histórico fechado.",
         f"- Estado do schedule: `{policy['schedule_status']}`.",
         f"- Separação obrigatória: {policy['schedule_policy']}",
         f"- Relatório sob demanda a qualquer momento: {state(bool(policy['report_on_demand']))}.",
-        "- Não existe cron Diário aprovado ou instalado.",
+        "- O desenho de horário não liga automação: cron e post automático permanecem desabilitados até review do dry-run e autorização separada do Nicolas.",
+        "- Escopo isolado em Eggbev; nenhum runner, prompt, regra ou schedule CPV é alterado.",
         "",
         "## Como obter dados atuais",
         "- Hoje/agora: `python3 scripts/ares-eggbev-daily-report.py --period today`.",
@@ -78,6 +82,16 @@ def build_report() -> str:
         "- ROI real/estimado ou dados sem freshness verificável aparecem `N/D`; nunca zero inventado.",
         "- A rota Messenger por campanha exige UTM Meta = UTM Smart Bidding e Meta Page ID = Smart Bidding `FB_PAGE_ID`; vertical/domain exigem mapping explícito equivalente de operação, identidade e período.",
         "- Em divergência válida, Meta Purchase ROAS vence ROI Smart Bidding; fonte ausente não vira divergência válida.",
+        "",
+        "## Fique de olho — anomalias de receita",
+        f"- Estado: `{anomaly['status']}`; modo somente leitura.",
+        f"- D-1 fechado: {anomaly['comparisons']['closed_day']}.",
+        f"- Mesmo horário: {anomaly['comparisons']['same_clock']}.",
+        f"- Baseline: até {anomaly['baseline_days']} snapshots; mínimo de {anomaly['minimum_comparable_samples']} comparáveis por página.",
+        f"- Faixas iniciais de alerta: atenção a partir de {anomaly['warning_drop_percent']}% abaixo; crítico a partir de {anomaly['critical_drop_percent']}% abaixo.",
+        "- As faixas geram somente alerta humano; não clonam, pausam, alteram budget nem configuram disparo/bloco/funil.",
+        "- Freshness, data, UTM ou Page ID inválidos geram alerta de cobertura e `N/D`, nunca receita zero inventada.",
+        f"- Saída visível: tabela única completa + no máximo {anomaly['maximum_visible_bullets']} bullets curtos abaixo.",
         "",
         "## Runtime atual",
         f"- Runner construído: {state(bool(runtime['runner_built']))}.",

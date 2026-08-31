@@ -14,6 +14,8 @@ import importlib.util
 import json
 import math
 import os
+import re
+import secrets
 import tempfile
 import urllib.error
 import urllib.parse
@@ -110,6 +112,11 @@ def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_valu
     value = previous.get('paused_ads')
     if isinstance(value, dict):
         rolled['paused_ads'] = dict(value)
+    phase3_assignment = previous.get('phase3_budget_assignment')
+    if isinstance(phase3_assignment, dict):
+        # Preserve the materialized random choice so a same-source-day recovery
+        # never changes USD 45/65 after a partial write.
+        rolled['phase3_budget_assignment'] = dict(phase3_assignment)
     previous_date = norm(previous.get('date_et'))
     if previous_date and previous_date != local_date.isoformat():
         rolled['provenance_rolled_from_date_et'] = previous_date
@@ -134,8 +141,10 @@ def load_state(local_date: dt.date, reset_value: float = 0.40) -> tuple[dict[str
 def phase_for_time(local_time: dt.datetime) -> str:
     hhmm = local_time.strftime('%H:%M')
     if hhmm == '00:00':
-        return 'RESET'
-    if hhmm in {'05:00', '06:00', '08:00', '10:00', '12:00'}:
+        return 'PHASE_3'
+    if hhmm in {'05:00', '06:00'}:
+        return 'OBSERVE'
+    if hhmm in {'08:00', '10:00', '12:00'}:
         return 'PHASE_1'
     if hhmm in {'13:00', '14:00', '16:00', '18:00', '20:00', '22:00', '23:00'}:
         return 'PHASE_2'
@@ -261,13 +270,13 @@ def fetch_meta_bundle(meta, token: str, account_id: str, state: dict[str, Any], 
         'limit': 200,
     })
     ads = fetch_all_meta(meta, token, act + '/ads', {
-        'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,updated_time},adset{id,name,status,effective_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}',
+        'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,configured_status,start_time,updated_time},adset{id,name,status,effective_status,configured_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}',
         'effective_status': ['ACTIVE'],
         'limit': 200,
     })
     tracked_ads: list[dict[str, Any]] = []
     for ad_id in sorted((state.get('paused_ads') or {}).keys()):
-        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,updated_time},adset{id,name,status,effective_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
+        ad_status, row, _ = meta.graph_get(ad_id, token, {'fields': 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,configured_status,start_time,updated_time},adset{id,name,status,effective_status,configured_status,updated_time},creative{id,name,object_story_spec,url_tags,effective_object_story_id}'})
         if ad_status == 200 and isinstance(row, dict):
             tracked_ads.append(row)
     tracked_campaigns: list[dict[str, Any]] = []
@@ -486,6 +495,8 @@ def normalize_ad(ad: dict[str, Any], tracked: bool = False) -> dict[str, Any]:
         'campaign_name': norm(campaign.get('name')),
         'campaign_status': norm(campaign.get('status')),
         'campaign_effective_status': norm(campaign.get('effective_status')),
+        'campaign_configured_status': norm(campaign.get('configured_status') or campaign.get('status')),
+        'campaign_start_time': norm(campaign.get('start_time')),
         'campaign_updated_time': norm(campaign.get('updated_time')),
         'adset_id': norm(adset.get('id')),
         'adset_status': norm(adset.get('status')),
@@ -495,7 +506,24 @@ def normalize_ad(ad: dict[str, Any], tracked: bool = False) -> dict[str, Any]:
     }
 
 
-def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, Any]], insights_by_ad: dict[str, dict[str, Any]], state: dict[str, Any], phase: str, threshold: float) -> dict[str, Any]:
+def _future_campaign_for_cycle(start_time: Any, cycle_at: dt.datetime | None) -> bool:
+    raw = norm(start_time)
+    if not raw or cycle_at is None:
+        return False
+    try:
+        parsed = dt.datetime.fromisoformat(raw.replace('Z', '+00:00'))
+    except ValueError:
+        return True
+    if parsed.tzinfo is None:
+        return True
+    return parsed.astimezone(ET).date() > cycle_at.astimezone(ET).date()
+
+
+def decide_cycle(
+    active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, Any]],
+    insights_by_ad: dict[str, dict[str, Any]], state: dict[str, Any],
+    phase: str, threshold: float, cycle_at: dt.datetime | None = None,
+) -> dict[str, Any]:
     all_ads: dict[str, dict[str, Any]] = {}
     for ad in active_ads:
         row = normalize_ad(ad, False)
@@ -514,13 +542,17 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
         is_tracked_paused = ad_id in (state.get('paused_ads') or {}) and ad.get('configured_status') == 'PAUSED'
         action = 'KEEP'
         reason = 'outside_action_gate'
+        night_cycle = bool(cycle_at and cycle_at.astimezone(ET).hour in {20, 22, 23})
+        future_campaign = _future_campaign_for_cycle(ad.get('campaign_start_time'), cycle_at)
         if phase == 'PHASE_1' and is_active:
             if spend > 2.0 and (roas is None or roas < threshold):
                 action, reason = 'PAUSE_AD', 'spent_gt_2_and_roas_below_or_nd'
             else:
                 reason = 'phase1_gate_not_met'
         elif phase == 'PHASE_2' and is_active:
-            if roas is None or roas < threshold:
+            if night_cycle and future_campaign:
+                reason = 'night_excluded_campaign_scheduled_for_next_day'
+            elif roas is None or roas < threshold:
                 action, reason = 'PAUSE_AD', 'roas_below_or_nd'
             else:
                 reason = 'roas_at_or_above_threshold'
@@ -547,6 +579,98 @@ def decide_cycle(active_ads: list[dict[str, Any]], tracked_ads: list[dict[str, A
             'reactivate_campaigns': 0,
         },
     }
+
+
+def fetch_phase3_meta_objects(meta, token: str, bundle: dict[str, Any]) -> dict[str, Any]:
+    """Read every prior-day-spend object, including manually paused parents."""
+    enriched = dict(bundle)
+    insight_ad_ids = sorted({
+        norm(row.get('ad_id')) for row in bundle.get('insights') or []
+        if norm(row.get('ad_id')) and (finite_float(row.get('spend')) or 0.0) > 0
+    })
+    ad_fields = (
+        'id,name,status,effective_status,configured_status,updated_time,'
+        'campaign{id,name,status,effective_status,configured_status,start_time,updated_time},'
+        'adset{id,name,status,effective_status,configured_status,updated_time},'
+        'creative{id,name,object_story_spec,url_tags,effective_object_story_id}'
+    )
+    ads: list[dict[str, Any]] = []
+    errors: list[dict[str, Any]] = []
+    for ad_id in insight_ad_ids:
+        status, row, _ = meta.graph_get(ad_id, token, {'fields': ad_fields})
+        if status == 200 and isinstance(row, dict):
+            ads.append(row)
+        else:
+            errors.append({'kind': 'ad', 'object_id': ad_id, 'http_status': status})
+
+    campaign_ids = sorted({norm((row.get('campaign') or {}).get('id')) for row in ads if norm((row.get('campaign') or {}).get('id'))})
+    adset_ids = sorted({norm((row.get('adset') or {}).get('id')) for row in ads if norm((row.get('adset') or {}).get('id'))})
+    campaign_fields = 'id,name,status,effective_status,configured_status,daily_budget,lifetime_budget,start_time,updated_time'
+    adset_fields = 'id,name,status,effective_status,configured_status,updated_time,campaign{id,name,status,effective_status,configured_status,start_time,updated_time}'
+    campaigns: list[dict[str, Any]] = []
+    adsets: list[dict[str, Any]] = []
+    for campaign_id in campaign_ids:
+        status, row, _ = meta.graph_get(campaign_id, token, {'fields': campaign_fields})
+        if status == 200 and isinstance(row, dict):
+            campaigns.append(row)
+        else:
+            errors.append({'kind': 'campaign', 'object_id': campaign_id, 'http_status': status})
+    for adset_id in adset_ids:
+        status, row, _ = meta.graph_get(adset_id, token, {'fields': adset_fields})
+        if status == 200 and isinstance(row, dict):
+            adsets.append(row)
+        else:
+            errors.append({'kind': 'adset', 'object_id': adset_id, 'http_status': status})
+
+    enriched.update({
+        'phase3_ads': ads, 'phase3_adsets': adsets, 'phase3_campaigns': campaigns,
+        'phase3_object_errors': errors, 'ad_readbacks': ads, 'campaign_readbacks': campaigns,
+    })
+    return enriched
+
+
+def _phase3_ad_identity(ad: dict[str, Any]) -> tuple[str | None, str | None]:
+    creative = ad.get('creative') or {}
+    story = creative.get('object_story_spec') or {}
+    page_ids: set[str] = set()
+    for candidate in (
+        story.get('page_id'), (story.get('link_data') or {}).get('page_id'),
+        (story.get('video_data') or {}).get('page_id'), (story.get('photo_data') or {}).get('page_id'),
+    ):
+        value = norm(candidate)
+        if value:
+            page_ids.add(value)
+    tags = norm(creative.get('url_tags'))
+    parsed = urllib.parse.parse_qs(tags, keep_blank_values=True) if tags else {}
+    utms = {
+        norm(value).lower().replace('-', '_')
+        for value in (parsed.get('utm_campaign') or parsed.get('UTM_CAMPAIGN') or [])
+        if re.fullmatch(r'pg[_-]?\d+', norm(value), flags=re.IGNORECASE)
+    }
+    normalized_utms = {re.sub(r'^pg[_-]?', 'pg_', value, flags=re.IGNORECASE) for value in utms}
+    return (
+        next(iter(page_ids)) if len(page_ids) == 1 else None,
+        next(iter(normalized_utms)) if len(normalized_utms) == 1 else None,
+    )
+
+
+def materialize_phase3_budget_assignment(
+    state: dict[str, Any], source_date: str, campaign_ids: list[str], chooser=None,
+) -> dict[str, int]:
+    """Randomize once, then persist/reuse the exact USD 45/65 assignment."""
+    chooser = chooser or secrets.choice
+    current = state.get('phase3_budget_assignment')
+    if not isinstance(current, dict) or norm(current.get('source_date')) != source_date:
+        current = {'source_date': source_date, 'choices_minor': {}}
+    choices = current.get('choices_minor')
+    if not isinstance(choices, dict):
+        choices = {}
+    for campaign_id in sorted(set(campaign_ids)):
+        if campaign_id not in choices:
+            choices[campaign_id] = int(chooser((4500, 6500)))
+    current['choices_minor'] = choices
+    state['phase3_budget_assignment'] = current
+    return {campaign_id: int(choices[campaign_id]) for campaign_id in sorted(set(campaign_ids))}
 
 
 def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list[dict[str, Any]], threshold: float = 0.50, increase_percent: float = 10.0) -> list[dict[str, Any]]:
