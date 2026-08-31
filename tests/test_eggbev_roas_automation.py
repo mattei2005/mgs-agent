@@ -1003,11 +1003,11 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': [], 'freshness': {'ready': False, 'max_age_hours': 2.0}}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Campanhas com entrega — 25', rendered)
-        self.assertIn('Páginas — Meta Ads', rendered)
-        self.assertIn('Páginas — Smart Bidding', rendered)
+        self.assertIn('Tabela consolidada — visão desktop', rendered)
+        self.assertIn('N/D — 25 campanhas', rendered)
+        self.assertIn('ordem decrescente pelo nome (Z→A)', rendered)
         for index in range(1, 26):
-            self.assertRegex(rendered, rf'(?m)^{index}\s+{index:03d}\s+')
+            self.assertRegex(rendered, rf'(?m)^{index}\s+●\s+{index:03d}\s+')
 
     def test_smart_bidding_freshness_is_explicit_and_nd_is_not_percent(self):
         period = {
@@ -1039,14 +1039,34 @@ class ReportingTests(unittest.TestCase):
             'smart_bidding': daily.aggregate_sb({'ready': True, 'target_report_rows': []}),
         }
         rendered = '\n'.join(daily.render_period(period))
-        self.assertIn('Páginas — Meta Ads', rendered)
-        self.assertIn('Páginas — Smart Bidding', rendered)
-        self.assertIn('Campanhas com entrega', rendered)
-        self.assertIn('C/msg', rendered)
+        self.assertIn('Tabela consolidada — visão desktop', rendered)
+        self.assertIn('BC agora', rendered)
+        self.assertIn('Custo', rendered)
         self.assertIn('CPM', rendered)
         self.assertIn('RPS', rendered)
-        self.assertIn('EPC', rendered)
         self.assertIn('1/1 campanhas', rendered)
+
+    def test_daily_groups_pages_z_to_a_and_uses_current_dashboard_broadcast(self):
+        campaigns = [
+            {'name': '001 C001', 'campaign_id': '1', 'utm_campaign': 'pg_1', 'sb_page_name': 'Amy Shook', 'status': 'ACTIVE', 'spend': 1, 'has_insight': True},
+            {'name': '002 C001', 'campaign_id': '2', 'utm_campaign': 'pg_2', 'sb_page_name': 'Tina Walter', 'status': 'ACTIVE', 'spend': 2, 'has_insight': True},
+            {'name': '003 C001', 'campaign_id': '3', 'utm_campaign': 'pg_3', 'sb_page_name': 'Celia Draper', 'status': 'ACTIVE', 'spend': 3, 'has_insight': True},
+        ]
+        current = {
+            'ready': True, 'date': '2026-08-31', 'broadcast_revenue': 9.0,
+            'freshness': {'latest_at_et': '2026-08-31T04:42:00Z', 'age_minutes': 66},
+            'by_utm': {
+                'pg_1': {'broadcast_revenue': 1.0},
+                'pg_2': {'broadcast_revenue': 5.0},
+                'pg_3': {'broadcast_revenue': 3.0},
+            },
+        }
+        pages = daily.build_page_summary(campaigns, current)
+        self.assertEqual([row['page_name'] for row in pages], ['Tina Walter', 'Celia Draper', 'Amy Shook'])
+        rendered = '\n'.join(daily.render_grouped_page_tables(pages, campaigns))
+        self.assertLess(rendered.index('Tina Walter'), rendered.index('Celia Draper'))
+        self.assertLess(rendered.index('Celia Draper'), rendered.index('Amy Shook'))
+        self.assertIn('BC agora $5.00', rendered)
 
     def test_revenue_anomaly_uses_equivalent_median_and_30_40_bands(self):
         state = daily.default_anomaly_state()
@@ -1124,7 +1144,7 @@ class ReportingTests(unittest.TestCase):
         self.assertTrue(all(chunk.count('```') % 2 == 0 for chunk in chunks))
         joined = '\n'.join(chunks)
         for index in range(1, 26):
-            self.assertRegex(joined, rf'(?m)^{index}\s+{index:03d}\s+')
+            self.assertRegex(joined, rf'(?m)^{index}\s+●\s+{index:03d}\s+')
 
 
 class ContractTests(unittest.TestCase):

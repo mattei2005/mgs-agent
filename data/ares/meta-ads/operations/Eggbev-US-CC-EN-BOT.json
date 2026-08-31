@@ -364,9 +364,9 @@
           "active_prompt_sha256": "22b2fdcc26f20fa85002ed57e7ed38fb5073fb7df053d643c9318f52d8b5eeab",
           "configuration_report_verified": true,
           "live_read_only_report_verified": true,
-          "tests_passed": 51,
+          "tests_passed": 52,
           "renderer_complete_for_read_only": true,
-          "renderer_version": "mobile_split_tables_v5",
+          "renderer_version": "page_grouped_desktop_v6",
           "post_enabled": false,
           "cron_enabled": false,
           "writes_enabled": false,
@@ -633,15 +633,15 @@
       }
     },
     "renderer_contract": {
-      "status": "mobile_split_tables_v5_page_first_clone_decision_and_revenue_alerts_materialized",
+      "status": "page_grouped_desktop_v6_cut_roas_inspired_current_broadcast_materialized",
       "campaign_scope": "for the 08:00 D-1 table, every campaign with an insight row in D-1 and no current ACTIVE campaign that lacks D-1 insight; for today/on-demand views, every currently effective ACTIVE campaign even without insight plus every campaign with insight in the requested period",
       "silent_row_limit": false,
       "campaign_name_truncation": false,
-      "campaign_identity_display": "the table uses deterministic sequence·Cnnn·Dnn plus row number and compact Page/UTM; the full Meta name remains in audit and appears in alerts when ambiguity or mismatch exists",
+      "campaign_identity_display": "each Page/UTM has one Cut-and-ROAS-inspired compact campaign table; rows use deterministic sequence·Cnnn·Dnn plus visible row number, while the full Meta name remains in audit and appears in alerts when ambiguity or mismatch exists",
       "per_campaign_fields": [
         "deterministic compact campaign key sequence·Cnnn·Dnn",
         "current status",
-        "compact Page/UTM identity",
+        "delivery signal for the requested period",
         "Budget USD",
         "Amount spent USD",
         "messaging_conversation_started_7d",
@@ -650,13 +650,7 @@
         "Meta CPM",
         "CTR"
       ],
-      "no_delivery_fields": [
-        "deterministic compact campaign key sequence·Cnnn·Dnn",
-        "compact Page/UTM identity",
-        "start_time America/New_York",
-        "Budget USD",
-        "current status"
-      ],
+      "no_delivery_policy": "ACTIVE campaigns without delivery stay inside their Page/UTM group with a hollow delivery signal and N/D period metrics; D-1 still excludes ACTIVE campaigns that had no D-1 insight",
       "per_page_meta_fields": [
         "full Page name plus UTM",
         "campaign count",
@@ -669,7 +663,7 @@
         "full Page name plus UTM",
         "Smart Bidding investment",
         "Smart Bidding revenue",
-        "Smart Bidding Broadcast revenue",
+        "current dashboard Broadcast revenue from /report/messenger BD_REVENUE",
         "Smart Bidding Drip revenue",
         "Smart Bidding ROI",
         "Smart Bidding LEADS",
@@ -683,23 +677,34 @@
         "timestamp field or N/D",
         "reconciliation reason"
       ],
-      "layout": "four compact mobile-first blocks: Page/UTM Meta, Page/UTM Smart Bidding, campaigns with delivery, and ACTIVE without delivery; Smart Bidding economics appears once per Page/UTM and is never repeated across campaign rows; followed by a maximum of five short alerts",
+      "layout": "one consolidated desktop view inspired by Corte e ROAS, divided into Page/UTM groups sorted by full Page name descending Z-to-A; each page shows one compact Meta and Smart Bidding summary with current dashboard Broadcast revenue, followed by its campaign table; Smart Bidding economics is never repeated on campaign rows; maximum five short alerts below",
       "pagination": "all rows, fence-safe Discord chunks, no silent omission",
       "high_volume_fixture_campaigns": 25,
       "latest_visual_validation": {
-        "at_et": "2026-08-31T01:26:32-04:00",
+        "at_et": "2026-08-31T01:59:59-04:00",
         "mode": "live_read_only_on_demand",
         "page_rows": 4,
-        "delivered_campaign_rows": 14,
-        "no_delivery_rows": 3,
+        "page_order_descending": [
+          "Tina Walter",
+          "Celia Draper",
+          "Aria Kensington",
+          "Amy Shook"
+        ],
+        "page_campaign_counts": [6, 3, 3, 5],
+        "delivered_campaign_rows": 15,
+        "no_delivery_rows": 2,
         "all_17_campaigns_represented": true,
-        "maximum_block_widths": {
-          "page_meta": 60,
-          "page_smart_bidding": 93,
-          "campaigns_with_delivery": 87,
-          "active_without_delivery": 56
+        "maximum_campaign_table_width": 80,
+        "current_dashboard_broadcast_source": "/report/messenger BD_REVENUE",
+        "current_dashboard_broadcast_total_usd": 0.0,
+        "current_dashboard_broadcast_by_page_usd": {
+          "Tina Walter": 0.0,
+          "Celia Draper": 0.0,
+          "Aria Kensington": 0.0,
+          "Amy Shook": 0.0
         },
-        "tests_passed": 51,
+        "current_dashboard_freshness_minutes": 75.0,
+        "tests_passed": 52,
         "post_used": false,
         "writes_attempted": 0,
         "baseline_snapshots_written": 0
