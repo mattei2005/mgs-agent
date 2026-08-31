@@ -67,7 +67,7 @@
           "operation_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
           "clone_page_switch_engine_supported": false,
           "clone_page_switch_write_enabled": false,
-          "clone_page_switch_blocked_reason": "Live Meta evidence: copied adset promoted_object Page is immutable (1885090) and cross-Page ad copy conflicts on PBIA (2238280). Engine account allowlist excludes clone_page_switch, so prevalidation fails before writes until a Rodolfo-approved deterministic target-adset/direct-ad architecture is released.",
+          "clone_page_switch_blocked_reason": "Live Meta evidence: copied adset promoted_object Page is immutable (1885090), cross-Page ad copy conflicts on PBIA (2238280), and the scoped direct target-ad route remained at zero delivery until same-Page lineage copies were activated and Insights confirmed spend/impressions. Engine account allowlist excludes clone_page_switch, so prevalidation fails before writes until a Rodolfo-approved deterministic architecture represents the complete proven recovery route.",
           "clone_page_switch_campaign_naming": "automatic target identity: [target page sequence] - [target Page name] - ENG - US - ([target pg_XXXXX]) [source Cnnn] [next free DUPnn]; fail closed if any component is unproven",
           "validate_plan_enabled": true,
           "write_enabled": true,

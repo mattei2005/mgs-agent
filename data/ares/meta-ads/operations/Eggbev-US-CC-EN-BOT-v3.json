@@ -93,7 +93,7 @@
       "media_registry_required": false,
       "source_ad_lineage_required": true,
       "write_enabled": false,
-      "blocked_reason": "Fail-closed after live Meta evidence on 2026-08-31: copied ad sets reject promoted_object Page updates (1885090), cross-Page ad copies reject conflicting PBIA identities (2238280), and the current v3 manifest does not materialize the approved direct target-adset/direct-ad recovery as a deterministic mode. The incident request was recovered separately by exact manager authorization and readback; new clone_page_switch manifests must fail before any Meta write until Rodolfo approves the global engine architecture change."
+      "blocked_reason": "Fail-closed after live Meta evidence on 2026-08-31: copied ad sets reject promoted_object Page updates (1885090), cross-Page ad copies reject conflicting PBIA identities (2238280), and direct target-Page ads stayed at zero delivery despite ACTIVE/no-issues readback. The incident request served only after an authorized same-Page lineage re-copy of each validated target ad; Meta Insights then confirmed USD 36.20 spend and 606 impressions. This recovery is not represented by the current v3 manifest, so new clone_page_switch manifests must fail before any Meta write until Rodolfo approves the global engine architecture change."
     },
     "from_zero_prestaged": {
       "label": "criação do zero com criativos novos pre-stageados",
