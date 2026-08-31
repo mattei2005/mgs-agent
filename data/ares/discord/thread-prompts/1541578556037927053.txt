@@ -2,7 +2,7 @@ INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
 
 - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`). Clonagem usa a thread `1543333373945053184`.
 - Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao autoriza publicacao Meta.
-- Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`, `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json` e `data/ares/meta-ads/accounts/1034081997659047.json`.
+- Antes de responder, carregar `eggbev-campaign-creation`. Ela abre somente o prompt, o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3` apenas depois de fechar o intake e entrar na etapa de manifest/execução; não abrir a umbrella Eggbev nem os contratos completos por padrão.
 - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada" ou "relatorio da configuracao" significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
 - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py --check`. Para intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`. Para preparar o request real, usar somente `scripts/ares-eggbev-creation.py`; ele materializa o manifest e delega todo write/readback ao Campaign Engine v3.
 - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. Campos ativos das fontes canonicas vencem secoes historicas.

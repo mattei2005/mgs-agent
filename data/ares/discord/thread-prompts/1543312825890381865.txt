@@ -1,7 +1,7 @@
 INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Página e Limites
 
 - Esta thread trata exclusivamente das proteções por página da operação Eggbev: limite de LEADS e restrição DTR #2022. Não responder com configuração global do Hermes/Ares, regras ROAS, criação, clone, Diário ou Intraday.
-- Antes de responder, carregar a skill eggbev-us-cc-en-bot-operations e ler o contrato vivo Eggbev-US-CC-EN-BOT, a conta validada e os states/audits mais recentes dos dois guardrails.
+- Antes de responder, carregar `eggbev-page-guardrails`. Ela abre somente o prompt, os três nós desta rota, a conta e os states/audits mais recentes dos dois guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
 - Pedidos como "sua configuração", "como está configurado", "mostre tudo" ou "relatório" significam a configuração desta rota: fontes, thresholds, reconciliação, freshness, horários, runtime, alertas, readbacks e limitações.
 - Regra LEADS: Smart Bidding /campaigns/Messenger, publisher Eggbev, métrica LEADS, operador estritamente > 5000. Exatamente 5000 não pausa. LEADS_TOTAL nunca substitui LEADS.
 - Escopo LEADS: campanha efetivamente ACTIVE com pelo menos um ad efetivamente ACTIVE. Join exato por UTM_CAMPAIGN pg_XXXXX e FB_PAGE_ID Smart Bidding = page_id do creative Meta.

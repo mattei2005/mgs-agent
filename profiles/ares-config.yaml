@@ -612,8 +612,10 @@ discord:
       continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao
       autoriza publicacao Meta.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`,
-      `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json` e `data/ares/meta-ads/accounts/1034081997659047.json`.
+      - Antes de responder, carregar `eggbev-campaign-creation`. Ela abre somente
+      o prompt, o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3`
+      apenas depois de fechar o intake e entrar na etapa de manifest/execução; não
+      abrir a umbrella Eggbev nem os contratos completos por padrão.
 
       - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada"
       ou "relatorio da configuracao" significam a configuracao operacional da criacao
@@ -720,8 +722,10 @@ discord:
       read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem
       nas rotas proprias.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e `meta-ads-intraday-operations`;
-      ler contrato e conta canonicos; consultar dados vivos no momento do pedido.
+      - Antes de responder, carregar `eggbev-daily-reporting`. Ela abre somente o
+      prompt, os nós `daily_reporting` e o runner desta rota. Carregar `meta-ads-intraday-operations`
+      apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev
+      nem o contrato completo por padrão.
 
       - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou
       "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer,
@@ -750,23 +754,55 @@ discord:
       fechado. Em hoje/sob demanda, incluir toda campanha efetivamente ACTIVE mesmo
       sem insight + toda campanha com insight no período. Não limitar linhas silenciosamente.
 
-      - Layout mobile-first v5: blocos compactos separados para `Páginas — Meta Ads`,
-      `Páginas — Smart Bidding`, `Campanhas com entrega` e `ACTIVE sem entrega`; depois,
-      no máximo cinco bullets `Fique de olho`. Na tabela de campanhas usar a chave
-      semântica `sequência·Cnnn·Dnn` e Página/UTM compacta; o nome integral fica no
-      audit e aparece em alertas de ambiguidade/divergência. Não usar cards por campanha
-      nem recriar uma linha horizontal gigante.
+      - Layout unificado v8: começar com três linhas curtas de conta. Depois organizar
+      por Página/UTM em ordem decrescente `Z→A`; cada página abre somente com uma
+      linha de saúde e uma linha compacta com emojis para Meta/Smart Bidding. Dentro
+      da página, usar `ID | Fonte | Ent. | St | Budget | Spend | Msg | $/Msg | ROAS
+      | ROI real | ROI est. | CPM | CTR`. Acima de dez campanhas, dividir em partes
+      de no máximo dez linhas, repetir o cabeçalho e mostrar `parte/total`. O nome
+      Meta integral fica no audit e aparece em alertas de ambiguidade/divergência.
 
-      - Smart Bidding econômico aparece uma única vez por Página/UTM; nunca repetir
-      ou somar investimento, receita, broadcast, drip, ROI ou leads em cada campanha
-      da mesma página.
+      - Antes de renderizar qualquer período, consultar a dash atual via `/report/messenger`
+      e mostrar `BD_REVENUE` como `BC agora` no cabeçalho de cada Página/UTM, inclusive
+      quando a tabela principal for D-1. Declarar data/freshness da leitura atual;
+      ausência ou staleness vira `N/D`, nunca zero inventado.
 
-      - Os blocos apoiam a decisão humana de quais e quantas campanhas clonar; o Diário
-      nunca clona automaticamente e não transforma ordenação visual em regra de elegibilidade.
+      - Smart Bidding econômico da página aparece uma única vez no cabeçalho. As colunas
+      `ROI real` e `ROI est.` são a única exceção por campanha e só recebem valor
+      do join econômico exato `CUSTOMER_ID + DOMAIN + DATE + CAMPAIGN_ID + UTM_ADGROUP`;
+      nunca copiar ROI da página para a campanha.
+
+      - Cada campanha recebe alias determinístico `SRC-{sequência-Cnnn-Dnn}-{digest
+      curto}`, persistido no audit. O gestor pode levar esse alias à thread Clonar
+      Campanhas; o Diário nunca executa clone, e todo alias ainda exige preflight
+      vivo de campanha, Page, UTM, status e colisão DUP.
+
+      - Sinais de identidade: `🧬` = Nome/UTM/Página conciliados; `🟡` = cobertura incompleta;
+      `⚠️` = nome duplicado ou divergência Nome×UTM×Página. Esses sinais não são elegibilidade
+      automática.
+
+      - `Msg` significa exclusivamente a ação Meta `messaging_conversation_started_7d`;
+      `$ / Msg` = spend Meta dividido por essa ação. Nunca chamar de mensagens enviadas,
+      respostas, cliques ou leads.
 
       - Join externo: `utm_campaign` Meta exata = `UTM_CAMPAIGN` Smart Bidding, Page
       Meta = `FB_PAGE_ID` e `DATE` = data exata do periodo. UTM/Page/data ausente,
       multipla, divergente ou fonte stale falha fechado para a linha e mostra motivo.
+
+      - `ROI real` = `(NET_REVENUE - INVESTIMENT) / INVESTIMENT`. `ROI est.` = `(estimatedRevenue
+      - INVESTIMENT) / INVESTIMENT`; hoje usa `/estimated/revenue/utm_adgroup` somente
+      com UTM única, e histórico usa `performance_per_campaigns.REVENUE_ESTIMATED`
+      da data exata. Denominador ausente/zero, estimativa ambígua ou fonte stale =
+      `N/D`.
+
+      - Se `NET_REVENUE` ou `REVENUE_ESTIMATED` vier zero em todas as linhas econômicas
+      enquanto a página possui receita, tratar como cobertura zero-only: `N/D`, nunca
+      `-100%`.
+
+      - Todo pedido de report executa novas leituras Smart Bidding das rotas aplicáveis.
+      Nunca reutilizar como atual um valor de mensagem, audit ou snapshot anterior.
+      Validar `/estimated/delay` em toda geração; acima de 120 minutos ou sem evidência
+      válida, mostrar `N/D` nas métricas afetadas.
 
       - Preferir metricas diretas da rota Smart Bidding compativel por vertical, Messenger
       Pages ou domain, com readback de endpoint, campo, moeda, periodo, freshness
@@ -786,6 +822,10 @@ discord:
       - Freshness maxima 2h. Timestamp/idade/campo ou evidencia de freshness devem
       aparecer; sem evidencia valida, as metricas afetadas ficam `N/D`.
 
+      - `ROI pág.*` e `RPS*` continuam contexto Página/UTM. `ROI real` e `ROI est.`
+      nas linhas pertencem à campanha somente quando o match econômico exato estiver
+      comprovado. Receita total, Drip e Broadcast aparecem separados.
+
       - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
     '1543312825890381865': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Página e Limites
 
@@ -794,9 +834,11 @@ discord:
       limite de LEADS e restrição DTR #2022. Não responder com configuração global
       do Hermes/Ares, regras ROAS, criação, clone, Diário ou Intraday.
 
-      - Antes de responder, carregar a skill eggbev-us-cc-en-bot-operations e ler
-      o contrato vivo Eggbev-US-CC-EN-BOT, a conta validada e os states/audits mais
-      recentes dos dois guardrails.
+      - Antes de responder, carregar `eggbev-page-guardrails`. Ela abre somente o
+      prompt, os três nós desta rota, a conta e os states/audits mais recentes dos
+      dois guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança
+      de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo
+      por padrão.
 
       - Pedidos como "sua configuração", "como está configurado", "mostre tudo" ou
       "relatório" significam a configuração desta rota: fontes, thresholds, reconciliação,
@@ -846,18 +888,17 @@ discord:
       proximidade LEADS/5000 é indicador de risco, nunca previsão estatística.
 
       - Responder na thread atual; IDs técnicos completos e credenciais ficam no audit,
-      nunca no texto humano.
-
-      '
+      nunca no texto humano.'
     '1543333373945053184': "INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas\n\
       \n- Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN\
       \ BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite\
-      \ de Leads ficam nas threads próprias.\n- Antes de responder ou montar um manifest,\
-      \ carregue a skill eggbev-us-cc-en-bot-operations e leia os contratos vivos\
-      \ Eggbev-US-CC-EN-BOT.json, Eggbev-US-CC-EN-BOT-v3.json e a conta 1034081997659047.json.\n\
-      - Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam\
-      \ o intake. Pergunte somente os campos ainda ausentes, em texto curto e natural:\n\
-      \  1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n\
+      \ de Leads ficam nas threads próprias.\n- Antes de responder, carregue `eggbev-campaign-cloning`.\
+      \ Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3`\
+      \ apenas depois de fechar o intake e entrar na etapa de manifest/execução; não\
+      \ abra a umbrella Eggbev nem os contratos completos por padrão.\n- Pedidos como\
+      \ “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam o intake.\
+      \ Pergunte somente os campos ainda ausentes, em texto curto e natural:\n  1.\
+      \ Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n\
       \  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada\
       \ duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5.\
       \ Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n\
@@ -915,7 +956,7 @@ discord:
       \ POST não idempotente às cegas. Readback batch limitado após writes completos\
       \ é reconciliado por IDs persistidos e GETs diretos; não repetir criação.\n\
       - Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo”\
-      \ significam somente esta rota de clonagem, não configuração global do Hermes/Ares.\n"
+      \ significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
     '1543280854024060999': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 
@@ -931,6 +972,12 @@ discord:
       readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho
       de Limite de Leads, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de
       Regras.
+
+      - Mapa funcional: Criar Campanhas → `eggbev-campaign-creation`; Clonar Campanhas
+      → `eggbev-campaign-cloning`; Corte e ROAS → `eggbev-roas-operations`; Diario
+      → `eggbev-daily-reporting`; Pagina e Limites → `eggbev-page-guardrails`. Cada
+      pedido funcional carrega somente sua skill; a umbrella fica restrita a identidade,
+      autoridade e roteamento.
 
       - Rotas fixas: Regras `1543280854024060999`; Limite de Leads `1543312825890381865`;
       Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`;
@@ -980,9 +1027,10 @@ discord:
       - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006.
       Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
 
-      - Antes de responder ou executar, carregar `eggbev-us-cc-en-bot-operations`
-      e `meta-ads-intraday-operations`; ler contrato, conta, state de proveniencia
-      e audit mais recente; consultar Meta e Smart Bidding vivas.
+      - Antes de responder ou executar, carregar `eggbev-roas-operations`. Ela abre
+      somente o prompt, os nós `roas_cycle`, o state e o audit mais recentes desta
+      rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança
+      ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
 
       - Threshold diario de corte default 0,40. Fase 1: 05, 06, 08, 10 e 12 ET; todos
       esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold.

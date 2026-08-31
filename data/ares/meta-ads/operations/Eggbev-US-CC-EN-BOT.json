@@ -225,10 +225,7 @@
         "thread_id": "1541578606076231750",
         "thread_name": "Eggbev-US-CC-EN Corte e ROAS",
         "scope": "scheduled and on-demand ROAS cut/reactivation cycles, report-only economics and gated budget recommendations",
-        "required_skills": [
-          "eggbev-us-cc-en-bot-operations",
-          "meta-ads-intraday-operations"
-        ],
+        "required_skill": "eggbev-roas-operations",
         "runner": "scripts/ares-eggbev-roas-cycle.py",
         "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578606076231750.txt",
         "runtime": "status writes and direct posts enabled fail-closed; budget write disabled",
@@ -238,7 +235,7 @@
         "thread_id": "1541578556037927053",
         "thread_name": "Eggbev-US-CC-EN Criar Campanhas",
         "scope": "creation from zero only; cloning belongs to thread 1543333373945053184",
-        "required_skill": "eggbev-us-cc-en-bot-operations",
+        "required_skill": "eggbev-campaign-creation",
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
         "configuration_report_script": "scripts/ares-eggbev-creation-config-report.py",
@@ -281,10 +278,7 @@
         "thread_id": "1543333373945053184",
         "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
         "scope": "on-demand campaign duplication only; creation from zero remains in thread 1541578556037927053",
-        "required_skills": [
-          "eggbev-us-cc-en-bot-operations",
-          "meta-campaign-engine-v3"
-        ],
+        "required_skill": "eggbev-campaign-cloning",
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_v3_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
@@ -317,10 +311,7 @@
         "thread_id": "1541578596253175858",
         "thread_name": "Eggbev-US-CC-EN Diario",
         "scope": "Daily and on-demand read-only reporting for account Eggbev-US-CC-EN-01-G006",
-        "required_skills": [
-          "eggbev-us-cc-en-bot-operations",
-          "meta-ads-intraday-operations"
-        ],
+        "required_skill": "eggbev-daily-reporting",
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
         "configuration_report_script": "scripts/ares-eggbev-daily-config-report.py",
@@ -379,6 +370,7 @@
         "thread_id": "1543312825890381865",
         "thread_name": "Página e Limites",
         "scope": "Proteções por página: LEADS > 5000 nos ciclos 08:00/20:00 ET e restrição DTR #2022 confirmada com pausa imediata da campanha; alertas curtos e readback obrigatório",
+        "required_skill": "eggbev-page-guardrails",
         "canonical_prompt_source": "data/ares/discord/thread-prompts/1543312825890381865.txt",
         "exact_thread_prompt_configured": true,
         "activation_pending_gateway_reload": true,
