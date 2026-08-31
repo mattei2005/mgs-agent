@@ -373,12 +373,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PG5024-PV038-REPLACEMENT-20260830",
-      "next_step": "Reservar e pre-stagear PV_028; criar o substituto com copy/UTM/Page/Messenger preservados; validar por GET; somente então marcar o anúncio PV_038 DELETED e invalidar a linhagem no inventário/Drive.",
+      "next_step": "Operação normal; em novos casos, repetir o mesmo fluxo create/readback/delete e invalidar somente a linhagem apontada pelo gestor.",
       "objective": "Substituir o anúncio visualmente bugado PV_038 na campanha Amy Shook pg_5024 por um criativo novo validado, sem alterar budget ou estrutura",
-      "source": "discord:thread:1543769929390628915; meta-campaign:120249811433300629; target-ad:120249811442930629; drive-invalid:1uvuSlRtAgTgx3GroXmzGSsC7_tP31XT0; drive-replacement:1rI2c2Xg2PAduj8EYXbugWSlN41_qzoj1",
-      "state": "preflight meta e drive concluído: campanha c001 dup01 active, anúncio pv_038 active e único; candidato pv_028 limpo, visualmente válido, sem conflito no snapshot de reconciliação vigente. nenhum write de campanha ainda.",
+      "source": "discord:thread:1543769929390628915; meta-campaign:120249811433300629; new-ad:120249812370070629; lifecycle:data/ares/creative-ops/audit/lifecycle/eggbev-ad-replace-pg_5024-pv038-20260830-nicolas-01.json",
+      "state": "concluído: anúncio substituto pv_028 active com creative/lineage/vídeos/copy/page/utm/messenger validados; anúncio pv_038 deleted por get; campanha mantém três ads active e usd45. pv_028 movido para 02_testing; pv_038 invalidado por nicolas e movido para 05_rejected; inventário e drive reconciliados.",
       "thread_id": "1543769929390628915",
-      "updated_at": "2026-08-31T00:18:17+00:00"
+      "updated_at": "2026-08-31T01:04:46+00:00"
     },
     {
       "agent": "ares",
@@ -729,6 +729,16 @@
       "state": "complete: cycle_start_date operacional da c25 120250925458300632 alterado de 2026-08-26 para 2026-08-27 no contrato e guardrail. métricas de 26/08 foram preservadas como pre_d1_baseline; snapshots de 27/08 foram reclassificados de d2 para d1. intraday dry-run/report-only confirmou c25m-26/08 com dia=d1 e ação aprendizado d1/d2; zero meta writes.",
       "thread_id": "1542545166630396027",
       "updated_at": "2026-08-27T17:36:53+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-cpv05-rules-runtime-20260830",
+      "next_step": "Implementar runtimes determinísticos account05, testar, criar crons e editar CPV Regras",
+      "objective": "Ativar watcher de primeiro gasto e relatórios Diário/Intraday da conta 05, atualizar fontes canônicas e CPV Regras, validar por readback",
+      "source": "discord:thread:1543778490610884679",
+      "state": "in_progress",
+      "thread_id": "1543778490610884679",
+      "updated_at": "2026-08-31T01:04:08+00:00"
     },
     {
       "agent": "zeus",
@@ -1542,5 +1552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T01:00:28+00:00"
+  "updated_at": "2026-08-31T01:04:46+00:00"
 }
