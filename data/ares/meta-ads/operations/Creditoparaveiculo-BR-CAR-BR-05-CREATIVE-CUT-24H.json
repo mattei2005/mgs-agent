@@ -525,6 +525,17 @@
       "no_agent": true,
       "deliver": "local",
       "enabled": true
+    },
+    {
+      "job_id": "cc5b8882df89",
+      "name": "Creditoparaveiculo 05 atividade Meta 5min",
+      "schedule": "*/5 * * * *",
+      "script": "creditoparaveiculo-account05-activity-monitor.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "mode": "alert_only_never_auto_correct",
+      "direct_thread_post": "1542892943352799242"
     }
   ],
   "meta_writes_performed": 1,
@@ -563,5 +574,5 @@
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation."
   ],
-  "updated_at": "2026-08-31T01:57:16.662848+00:00"
+  "updated_at": "2026-08-31T03:50:01Z"
 }

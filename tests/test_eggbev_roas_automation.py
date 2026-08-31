@@ -1112,6 +1112,25 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(runtime['post_enabled'])
         self.assertTrue(runtime['cron_enabled'])
         self.assertFalse(runtime['budget_write_enabled'])
+        self.assertTrue(runtime['phase3_budget_write_enabled'])
+        self.assertTrue(runtime['phase3_parent_status_write_enabled'])
+
+    def test_phase3_contract_matches_nicolas_exact_recycling_policy(self):
+        roas = self.operation['roas_cycle_policy']
+        phase3 = roas['phase_3_recycling']
+        self.assertEqual(roas['formation_window']['to_exclusive'], '08:00')
+        self.assertEqual(roas['phase_1']['times'], ['08:00', '10:00', '12:00'])
+        self.assertEqual(roas['phase_2']['night_no_roas_scope']['times'], ['20:00', '22:00', '23:00'])
+        self.assertEqual(phase3['time'], '00:00')
+        self.assertTrue(phase3['ordered_inside_existing_midnight_job'])
+        self.assertEqual(phase3['activation_roas_minimum'], .38)
+        self.assertEqual(phase3['activation_roas_operator'], '>=')
+        self.assertTrue(phase3['manual_pause_override_authorized'])
+        self.assertEqual(phase3['page_leads_exclusion']['operator'], '>')
+        self.assertEqual(phase3['page_leads_exclusion']['threshold'], 5000)
+        self.assertEqual(phase3['campaign_budget']['choices_usd'], [45, 65])
+        self.assertTrue(phase3['campaign_budget']['write_enabled'])
+        self.assertTrue(phase3['reporting']['title_must_identify_phase3'])
 
     def test_daily_build_does_not_enable_post_or_cron(self):
         runtime = self.operation['daily_reporting_policy']['runtime']

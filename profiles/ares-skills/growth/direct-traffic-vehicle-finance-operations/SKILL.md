@@ -63,11 +63,11 @@ Relatório de SMS        Smart Bidding > Reports > SMS
 
 O endpoint SMS atual usa `UTM_CAMPAIGN=s01c01g006` para o bucket de Nicolas/G006 e não expõe `CAMPAIGN_ID`, `b01fb13cNN` ou `UTM_ADGROUP`. Portanto, até existir ponte confiável, o relatório mostra um bloco separado `Receita SMS G006 — não atribuída por campanha`; nunca repetir o mesmo total em cada linha de campanha. Atribuição por campanha exige mapping adicional no tracking/backend.
 
-No final do relatório da conta/G006, exibir:
+Nos Diários individuais das contas 05 e 13, exibir somente aquisição atribuível à própria conta e a linha `SMS não atribuído por conta — consultar CPV Diário Geral.`; não mostrar valores, receita, custo ou ROI de SMS. No `CPV Diário Geral` (`1543826231831560343`), somar a aquisição Meta/SB das contas 05+13 e incluir o SMS G006 exatamente uma vez, exibindo:
 
 ```text
-Spend Meta
-Receita Aquisição SB (NET_REVENUE)
+Spend Meta consolidado 05+13
+Receita Aquisição SB consolidada (NET_REVENUE)
 ROI Aquisição = (Receita Aquisição − Spend) / Spend × 100
 
 Custo SMS G006 em USD = custo BRL ÷ PTAX venda BCB
@@ -90,8 +90,8 @@ Custo real informado por Rodolfo: `R$ 0,08 × SMS efetivamente enviados`. Para C
 
 1. Resolver internamente o item 1Password `SMS Funnel Dashboard` e autenticar somente em modo read-only.
 2. Listar as campanhas do SMS Funnel filtrando o gestor exato `G006`.
-3. Aceitar exclusivamente as linhagens `AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006` e `AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006`.
-4. Abrir o drill-down `funnel-performance/{campaignId}/sequences` de cada linhagem.
+3. Aceitar exclusivamente campanhas cujo nome contenha o token inteiro `G006`, `CREDITOPARAVEICULO` e uma experiência `QUIZ` ou `CHAT`; isso inclui novas linhagens explícitas da mesma operação, como `QUIZ MOTO`, sem misturar campanhas de outro gestor/site.
+4. Abrir o drill-down `funnel-performance/{campaignId}/sequences` de cada linhagem retornada e preservar o breakdown por campaign ID/nome/experiência.
 5. Para um dia, enviar a mesma data em `start_date` e `end_date`; esse drill-down usa intervalo inclusivo.
 6. Somar `sms_sent` e `cost`, separar quiz/chat e validar `sms_sent × R$ 0,08 = cost` com tolerância máxima de R$ 0,02.
 7. O consolidado global apresentou `end_date` exclusivo no readback vivo; usar `dia+1` somente para auditoria global e nunca para atribuir custo ao G006.
@@ -505,7 +505,7 @@ Não criar thread fixa de HOA nem de criativos/testes. Criativos permanecem no i
 
 Os relatórios automáticos devem ser script-only/no-agent, consultar Meta/SB ao vivo, postar diretamente na thread fixa, dividir mensagens abaixo de 2.000 caracteres e deixar stdout vazio após sucesso. Nunca depender do histórico de chat para valores operacionais.
 
-O monitor de alterações externas da conta 13 roda a cada cinco minutos sobre `act_<ACCOUNT_ID>/activities` em Graph v26.0. Ele alerta mudanças materiais manuais, Meta/native-rule ou de app confiável sem audit Ares correspondente — status, budget, lance, público, programação, regras, campanha, conjunto e anúncio — e nunca desfaz/corrige automaticamente. É uma rotina distinta do watcher de primeiro gasto. A conta 05 não herda esse monitor account-wide sem inclusão explícita no contrato.
+Os monitores de alterações externas das contas 13 e 05 rodam de forma account-scoped a cada cinco minutos sobre `act_<ACCOUNT_ID>/activities` em Graph v26.0. Eles alertam mudanças materiais manuais, Meta/native-rule ou de app confiável sem audit Ares correspondente — status, budget, lance, público, programação, regras, campanha, conjunto e anúncio — e nunca desfazem/corrigem automaticamente. São rotinas distintas dos watchers de primeiro gasto. Na conta 05, o destino alert-only é a thread Intraday `1542892943352799242`; estado, audit e lock são separados da conta 13.
 
 Na coluna `Camp` do Diário, Intraday e histórico ROI do Intraday, o rótulo padrão é `C{NN}-{DD/MM}`. Quando o nome canônico da campanha Meta contiver o token inteiro `MOTO`, inserir `M` imediatamente após o número: `C{NN}M-{DD/MM}` (exemplo: `C24M-23/08`). O marcador é somente visual; IDs, UTM, número da campanha, status e cálculos permanecem inalterados. Campanhas sem o token inteiro `MOTO` continuam sem o marcador.
 

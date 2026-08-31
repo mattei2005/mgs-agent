@@ -1,7 +1,7 @@
 ---
 name: eggbev-us-cc-en-bot-operations
 description: "Use em Campaign Ops BOT/Messenger da Eggbev US-CC-EN."
-version: 0.19.1-draft
+version: 0.20.0-draft
 author: Ares
 license: internal
 metadata:
@@ -213,14 +213,16 @@ O template Messenger é obrigatório. Qualquer mudança de texto, botão, payloa
 ### Ciclos ROAS
 
 ```text
-00:00               reset diário do threshold para 0,40
-00:00–04:59         formação de dados; sem corte/reativação
-Fase 1              05:00, 06:00, 08:00, 10:00, 12:00
+00:00               Fase 3 + reset diário do threshold de corte para 0,40
+05:00 e 06:00       relatório/observação; sem corte ou reativação
+Fase 1              08:00, 10:00, 12:00
 Corte Fase 1        Spend > USD 2 E Purchase ROAS < threshold
 Fase 2              13:00, 14:00, 16:00, 18:00, 20:00, 22:00, 23:00
 Corte Fase 2        Purchase ROAS < threshold; sem gate de gasto
-Reativação          ad pausado pelo Ares com Purchase ROAS > mesmo threshold
-23:00–00:00         sem novo corte/reativação
+Noite 20/22/23      N/D só corta campanha que rodou no dia; excluir start_time do dia seguinte 00:00
+Fase 3              dia anterior com spend; ad spend >0 e Purchase ROAS >=0,38
+Fase 3 writes       budget aleatório US$45/US$65 + campanha/adset/ad ACTIVE, com readback
+Fase 3 LEADS        excluir somente página estritamente >5.000; exatamente 5.000 elegível
 ```
 
 O wrapper de produção usa modo `--scheduled`: atraso do scheduler de até 15 minutos é reconciliado ao horário lógico cheio do ciclo; atraso maior falha fechado. Assim, um tick físico às 05:11 continua sendo auditado e reportado como ciclo 05:00, sem contaminar a fase nem executar fora da janela.
@@ -483,6 +485,16 @@ Regras congeladas:
 - insights futuros não alteram essa tabela sem Nicolas revogar explicitamente o congelamento.
 
 Este congelamento é somente visual. Não altera fontes, fórmulas, Purchase ROAS, cortes/reativações de anúncios, budgets, schedules, guardrail de LEADS ou autoridade.
+
+### Política v23 — corte noturno e Fase 3 de reciclagem
+
+Por decisão explícita de Nicolas em `2026-08-30`, os ciclos 20:00, 22:00 e 23:00 só tratam `N/D` como elegível a corte quando a campanha efetivamente rodou no dia ET avaliado. Campanha criada hoje com `start_time` para o dia seguinte às 00:00 fica fora. Fases 1/2 continuam ad-only.
+
+O mesmo job das 00:00 executa, em ordem, a **Fase 3 — Reativação/Reciclagem** sobre o dia anterior fechado. A campanha precisa ter spend, e cada anúncio precisa ter spend >0 e Meta Purchase ROAS `>=0,38`. Pausas do Ares, Nicolas ou outro operador são elegíveis; `DELETED`/`ARCHIVED` nunca são restaurados. A Fase 3 garante campanha, ad set e anúncio `ACTIVE`, sendo exceção explícita à política ad-only das Fases 1/2.
+
+Página com exatamente 5.000 LEADS continua elegível; somente `LEADS >5.000` exclui a campanha. O match exige UTM+Page exatos e freshness `/estimated/delay` de no máximo 120 minutos. Cada campanha elegível recebe budget CBO aleatório de US$45 ou US$65. A escolha é persistida por dia-base+campanha antes do primeiro write e reutilizada em retry/recovery. A ordem fail-closed é budget → campanha → ad set → anúncio, com pre-read e GET/readback em cada camada.
+
+Às 05:00 e 06:00 o cron continua publicando em modo observação, sem ações; os cortes recomeçam às 08:00. Todo run das 00:00 publica relatório identificado como Fase 3 na thread Corte e ROAS, usando a tabela v22 congelada, com dia-base, reativações, budgets, exclusões e readbacks.
 
 ## Apêndice histórico não autoritativo — auditoria ponta a ponta de 2026-08-29 15:37 ET
 
