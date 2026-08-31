@@ -773,12 +773,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv-general-daily-monitor05-20260830",
-      "next_step": "Auditar scripts existentes e implementar camadas read-only/idempotentes com testes e readback.",
-      "objective": "Separar SMS dos Diários 05/13, ativar CPV Diário Geral consolidado e monitor alert-only na conta 05",
-      "source": "discord:thread:1543778490610884679",
-      "state": "in_progress: thread geral fornecida por rodolfo; preflight de runtimes, contratos, fontes meta/sb/sms e monitor em andamento.",
+      "next_step": "Operação recorrente: acompanhar somente os ticks normais; quando o SMS Funnel separar a origem por UTM, reavaliar atribuição individual por conta mediante novo readback e decisão explícita.",
+      "objective": "Separar SMS dos Diários individuais 05/13, ativar o CPV Diário Geral 05+13+SMS e estender monitor alert-only à conta 05.",
+      "source": "discord:thread:1543778490610884679;discord:thread:1543826231831560343;discord:thread:1540426218405363873",
+      "state": "completed: diários 05/13 aquisição-only com aviso de redirecionamento; cpv diário geral thread 1543826231831560343 publicado e automatizado nos seis horários sp; monitor conta 05 baselineado e ativo a cada 5 min; contratos, skill, cpv regras, testes e report-infra reconciliados.",
       "thread_id": "1543778490610884679",
-      "updated_at": "2026-08-31T03:36:10+00:00"
+      "updated_at": "2026-08-31T03:58:23+00:00"
     },
     {
       "agent": "ares",
@@ -1642,5 +1642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-31T03:55:07+00:00"
+  "updated_at": "2026-08-31T03:58:23+00:00"
 }
