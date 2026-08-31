@@ -924,6 +924,50 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(result['rps_gross'], 500)
         self.assertEqual(result['epc_gross'], 2)
 
+    def test_daily_campaign_roi_uses_fresh_exact_campaign_and_utm_join(self):
+        bundle = {
+            'economic_ready': True,
+            'economic_freshness': {'ready': True, 'age_minutes': 8},
+            'economic_performance_rows': [{
+                'CAMPAIGN_ID': 'c1', 'UTM_ADGROUP': 'pg_12345',
+                'INVESTIMENT': 10, 'NET_REVENUE': 15, 'REVENUE_ESTIMATED': 18,
+            }],
+            'economic_estimated': {'grouped': [{
+                'utm_adgroup': 'pg_12345', 'estimatedRevenue': 20, 'confidence': .91,
+            }]},
+        }
+        current = daily.aggregate_campaign_economics(bundle, '2026-08-31', '2026-08-31')
+        current_row = current['by_campaign_utm'][('c1', 'pg_12345')]
+        self.assertEqual(current_row['roi_real'], 50)
+        self.assertEqual(current_row['roi_estimated'], 100)
+        self.assertEqual(current_row['estimate_source'], 'estimated/revenue/utm_adgroup')
+        historical = daily.aggregate_campaign_economics(bundle, '2026-08-30', '2026-08-31')
+        historical_row = historical['by_campaign_utm'][('c1', 'pg_12345')]
+        self.assertEqual(historical_row['roi_estimated'], 80)
+        self.assertEqual(historical_row['estimate_source'], 'performance_per_campaigns.REVENUE_ESTIMATED')
+        merged = daily.merge_campaign_economics(
+            {'campaigns': [{'campaign_id': 'c1', 'utm_campaign': 'pg_12345'}]},
+            current,
+        )
+        self.assertEqual(merged['economic_join_matched'], 1)
+        self.assertEqual(merged['campaigns'][0]['roi_real'], 50)
+        self.assertEqual(merged['campaigns'][0]['roi_estimated'], 100)
+
+    def test_daily_campaign_roi_fails_closed_when_smart_bidding_is_stale(self):
+        economics = daily.aggregate_campaign_economics({
+            'economic_ready': False,
+            'economic_reason': 'economic_freshness_unverifiable_or_stale',
+            'economic_freshness': {'ready': False, 'age_minutes': 129},
+        }, '2026-08-31', '2026-08-31')
+        merged = daily.merge_campaign_economics(
+            {'campaigns': [{'campaign_id': 'c1', 'utm_campaign': 'pg_12345'}]},
+            economics,
+        )
+        row = merged['campaigns'][0]
+        self.assertIsNone(row['roi_real'])
+        self.assertIsNone(row['roi_estimated'])
+        self.assertEqual(row['economic_join_status'], 'economic_freshness_unverifiable_or_stale')
+
     def test_unreconciled_smart_bidding_metrics_are_nd_not_zero(self):
         result = daily.aggregate_sb({'ready': False, 'reason': 'target_missing', 'target_report_rows': []})
         self.assertIsNone(result['investment'])
@@ -1109,6 +1153,7 @@ class ReportingTests(unittest.TestCase):
             'cost_per_messaging_started': 3.0, 'purchase_roas': 0.5, 'cpm': 10.0,
             'sb_investment': 11.0, 'sb_revenue': 10.0, 'sb_leads': 20.0,
             'pricing_avg': 6.2, 'pricing_rps': 500.0, 'pricing_epc': 2.0,
+            'roi_real': -12.5, 'roi_estimated': 8.0,
         }
         period = {
             'label': 'Parcial atual', 'date': '2026-08-29',
@@ -1119,9 +1164,13 @@ class ReportingTests(unittest.TestCase):
         self.assertIn('Visão unificada · Página → fonte de clone', rendered)
         self.assertIn('BC agora', rendered)
         self.assertIn('$/Msg', rendered)
+        self.assertIn('ROI real', rendered)
+        self.assertIn('ROI est.', rendered)
+        self.assertIn('🟡-12,5%', rendered)
+        self.assertIn('🟢8,0%', rendered)
         self.assertIn('CPM', rendered)
-        self.assertIn('RPS', rendered)
         self.assertIn('1/1 campanhas', rendered)
+        self.assertNotIn('SB Inv', rendered)
 
     def test_daily_groups_pages_z_to_a_and_uses_current_dashboard_broadcast(self):
         campaigns = [

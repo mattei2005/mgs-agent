@@ -1139,7 +1139,7 @@ def render_grouped_page_tables(
         indexed[key].append((original_index, campaign))
 
     lines: list[str] = []
-    headers = ['ID', 'Fonte', 'Ent.', 'St', 'Budget', 'Spend', 'Msg', '$/Msg', 'ROAS', 'ROI R', 'ROI E', 'CPM', 'CTR']
+    headers = ['ID', 'Fonte', 'Ent.', 'St', 'Budget', 'Spend', 'Msg', '$/Msg', 'ROAS', 'ROI real', 'ROI est.', 'CPM', 'CTR']
     for page in pages:
         key = common.norm(page.get('utm_campaign')).lower() or common.norm(page.get('page_name')).lower()
         page_campaigns = sorted(
@@ -1155,7 +1155,7 @@ def render_grouped_page_tables(
         identity_ok = sum(1 for _, row in page_campaigns if common.norm(row.get('identity_signal')) == '🧬')
         lines.extend([
             '', f"{roi_marker(page.get('sb_roi_percent'))} **{label}** · {count} {noun} · {page.get('delivered') or 0}● · 🧬 {identity_ok}/{count}",
-            f"`💵 {format_money_br(page.get('spend'))} · 💬 {common.fmt_number(page.get('messaging_started'), 0)}/{format_money_br(page.get('cost_per_messaging_started'))} · ROAS {common.fmt_number(page.get('purchase_roas'))} │ 🧾 {format_money_br(page.get('sb_investment'))}→{format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_roi_cell(page.get('sb_roi_percent'))} · 💧 {format_money_br(page.get('sb_drip_revenue'))} · 📣 {format_money_br(page.get('sb_broadcast_current'))}`",
+            f"`💵 {format_money_br(page.get('spend'))} · 💬 {common.fmt_number(page.get('messaging_started'), 0)}/{format_money_br(page.get('cost_per_messaging_started'))} · ROAS {common.fmt_number(page.get('purchase_roas'))} │ 🧾 {format_money_br(page.get('sb_investment'))}→{format_money_br(page.get('sb_revenue'))} · ROI pág.* {format_roi_cell(page.get('sb_roi_percent'))} · RPS {format_money_br(page.get('pricing_rps'))} · 💧 {format_money_br(page.get('sb_drip_revenue'))} · 📣 BC agora {format_money_br(page.get('sb_broadcast_current'))}`",
         ])
         rows: list[list[str]] = []
         for _, row in page_campaigns:
@@ -1200,7 +1200,7 @@ def render_period(period: dict[str, Any]) -> list[str]:
             *render_grouped_page_tables(pages, campaigns),
         ])
         lines.append('🧬 identidade conciliada · 🟡 revisar cobertura · ⚠️ conflito de nome/UTM/Página. `Fonte` é o alias para levar à thread Clonar Campanhas; todo clone ainda exige preflight.')
-        lines.append('`Msg` = messaging_conversation_started_7d. `ROI R/E` = ROI real/estimado da Smart Bidding por campanha+UTM exatas; `ROI pág.*` permanece no nível Página/UTM.')
+        lines.append('`Msg` = messaging_conversation_started_7d. `ROI real/est.` = Smart Bidding por campanha+UTM exatas; `ROI pág.*` permanece no nível Página/UTM.')
         lines.append(f"Conciliação Meta×SB×Pricing: {meta.get('source_join_matched', 0)}/{len(campaigns)} campanhas com UTM + Page ID + freshness válidos.")
         lines.append(f"Conciliação ROI campanha×UTM: {meta.get('economic_join_matched', 0)}/{len(campaigns)} com fonte econômica fresca e match exato.")
         if meta.get('active_without_d1_insight_excluded'):
@@ -1323,6 +1323,8 @@ def main() -> int:
             sb_aggregate = aggregate_sb(sb_bundle)
             meta_aggregate = merge_campaign_sources(meta_aggregate, sb_aggregate)
             meta_aggregate = apply_period_campaign_scope(meta_aggregate, label)
+            economics = aggregate_campaign_economics(sb_bundle, report_date, current_date)
+            meta_aggregate = merge_campaign_economics(meta_aggregate, economics)
             meta_aggregate = annotate_campaign_display_identities(meta_aggregate)
             snapshot = build_revenue_snapshot(sb_aggregate, report_date, label, at.isoformat())
             anomaly = analyze_revenue_snapshot(snapshot, anomaly_state, anomaly_policy)
@@ -1349,6 +1351,8 @@ def main() -> int:
                     'smart_bidding_target_rows': len(sb_bundle.get('target_report_rows') or []),
                     'smart_bidding_available_accounts': sb_bundle.get('available_account_names'),
                     'source_join_counts': meta_aggregate.get('source_join_counts'),
+                    'economic_join_counts': meta_aggregate.get('economic_join_counts'),
+                    'economic_freshness': meta_aggregate.get('economic_freshness'),
                 },
             })
             common.atomic_json(audit_path, run)
