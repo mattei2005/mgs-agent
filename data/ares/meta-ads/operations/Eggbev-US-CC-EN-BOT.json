@@ -117,7 +117,7 @@
         "daily": "Eggbev-US-CC-EN Diario",
         "campaign_creation": "Eggbev-US-CC-EN Criar Campanhas",
         "campaign_cloning": "Eggbev-US-CC-EN Clonar Campanhas",
-        "page_lead_guardrail": "Eggbev-US-CC-EN Limite de Leads"
+        "page_lead_guardrail": "Página e Limites"
       },
       "rules_route_exception": "Nicolas explicitly reassigned Rules to the current architecture thread on 2026-08-29; the previous Eggbev-US-CC-EN Regras thread is superseded"
     },
@@ -377,8 +377,8 @@
       },
       "page_lead_guardrail": {
         "thread_id": "1543312825890381865",
-        "thread_name": "Eggbev-US-CC-EN Limite de Leads",
-        "scope": "Page lead guardrail configuration, live status and action/error reporting only",
+        "thread_name": "Página e Limites",
+        "scope": "Proteções por página: LEADS > 5000 nos ciclos 08:00/20:00 ET e restrição DTR #2022 confirmada com pausa imediata da campanha; alertas curtos e readback obrigatório",
         "canonical_prompt_source": "data/ares/discord/thread-prompts/1543312825890381865.txt",
         "exact_thread_prompt_configured": true,
         "activation_pending_gateway_reload": true,
@@ -2266,7 +2266,7 @@
       ]
     },
     "discord": {
-      "thread_name": "Eggbev-US-CC-EN Limite de Leads",
+      "thread_name": "Página e Limites",
       "thread_id": "1543312825890381865",
       "fallback_error_thread_id": "1543280854024060999",
       "separate_from_intraday": true,
@@ -2293,6 +2293,69 @@
       "scheduled_flag": "--scheduled",
       "cron_name": "Eggbev limite de leads 08h e 20h ET",
       "cron_id": "c3d2499d8c33",
+      "no_agent": true,
+      "deliver": "local"
+    }
+  },
+  "page_restriction_guardrail": {
+    "policy_approved": true,
+    "authorized_by": "Nicolas Holanda",
+    "authorized_by_discord_id": "1055570806945620030",
+    "authorized_at_et": "2026-08-31T18:42:07-04:00",
+    "authorization_source": "discord:thread:1544056503185580042#1544115097910386830",
+    "purpose": "Quando o monitor canônico confirmar DTR #2022 e a mesma página estiver restrita na Smart Bidding, nenhuma campanha Eggbev exatamente reconciliada pode permanecer ativa.",
+    "source": {
+      "confirmed_events": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
+      "live_restriction_readback": "/root/mgs-agent/data/sb-restricted-transition-state.json",
+      "confirmation_required": "DTR #2022 confirmed plus current Smart Bidding restriction",
+      "discord_message_parsing": false,
+      "smart_bidding_only_transition": "no_write",
+      "event_dedupe": "bot_user + page_id + restricted_until + source last_seen"
+    },
+    "scope": {
+      "account_id": "1034081997659047",
+      "account_alias": "Eggbev-US-CC-EN-01-G006",
+      "join_keys": [
+        "UTM_CAMPAIGN exact pg_XXXXX",
+        "FB_PAGE_ID exact readback against Meta creative page_id"
+      ],
+      "action_level": "campaign",
+      "action": "set status PAUSED",
+      "budget_write": false,
+      "delete": false,
+      "auto_reactivate": false,
+      "partial_or_ambiguous_match": "fail_closed_no_write_and_short_alert"
+    },
+    "schedule": {
+      "mode": "every_5_minutes",
+      "cron": "3,8,13,18,23,28,33,38,43,48,53,58 * * * *",
+      "timezone": "America/New_York",
+      "maximum_detection_delay_minutes": 5,
+      "independent_from_page_lead_guardrail": true
+    },
+    "alert_layout": {
+      "maximum_lines": 4,
+      "long_tables": false,
+      "required_fields": [
+        "severity/title",
+        "page and UTM and restriction expiry",
+        "active/paused/pending campaign counts",
+        "source and ET time and no-auto-reactivation"
+      ],
+      "test_alert_must_be_no_write": true
+    },
+    "discord": {
+      "thread_name": "Página e Limites",
+      "thread_id": "1543312825890381865",
+      "fallback_error_thread_id": "1543280854024060999",
+      "post_requires_get_readback": true,
+      "post_failure_fails_run": true
+    },
+    "runtime": {
+      "write_enabled": true,
+      "runner": "/root/mgs-agent/scripts/ares-eggbev-page-restriction-guardrail.py",
+      "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
+      "cron_name": "Eggbev páginas restritas DTR 5min",
       "no_agent": true,
       "deliver": "local"
     }
