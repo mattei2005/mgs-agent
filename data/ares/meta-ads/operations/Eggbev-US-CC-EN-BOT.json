@@ -2328,7 +2328,7 @@
     },
     "schedule": {
       "mode": "every_5_minutes",
-      "cron": "3,8,13,18,23,28,33,38,43,48,53,58 * * * *",
+      "cron": "3-58/5 * * * *",
       "timezone": "America/New_York",
       "maximum_detection_delay_minutes": 5,
       "independent_from_page_lead_guardrail": true
@@ -2355,9 +2355,12 @@
       "write_enabled": true,
       "runner": "/root/mgs-agent/scripts/ares-eggbev-page-restriction-guardrail.py",
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
-      "cron_name": "Eggbev páginas restritas DTR 5min",
-      "no_agent": true,
-      "deliver": "local"
+      "scheduler_backend": "root_crontab",
+      "cron_marker": "ARES EGGBEV PAGE RESTRICTION",
+      "lock": "/var/lock/ares_eggbev_page_restriction_guardrail.lock",
+      "log": "/root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log",
+      "hermes_no_agent_job_removed": true,
+      "reason": "The live Ares gateway did not hot-reload the newly created Hermes job; root crontab activates the deterministic wrapper without restarting the active gateway."
     }
   },
   "scheduler_jobs": {
@@ -2415,21 +2418,24 @@
       "activation_conclusion": "active; the 20:00 scheduled tick completed successfully. gateway_running=false is an observer false negative and does not override execution history."
     },
     "page_restriction_guardrail": {
-      "job_id": "109229dcb42e",
       "name": "Eggbev páginas restritas DTR 5min",
-      "schedule": "3,8,13,18,23,28,33,38,43,48,53,58 * * * *",
+      "scheduler_backend": "root_crontab",
+      "cron_marker": "ARES EGGBEV PAGE RESTRICTION",
+      "schedule": "3-58/5 * * * *",
       "timezone": "America/New_York",
       "maximum_detection_delay_minutes": 5,
-      "script": "eggbev-page-restriction-guardrail.sh",
-      "no_agent": true,
-      "deliver": "local",
+      "script": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
+      "lock": "/var/lock/ares_eggbev_page_restriction_guardrail.lock",
+      "log": "/root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log",
       "enabled": true,
       "state": "scheduled",
-      "gateway_running_observer": false,
-      "scheduler_tick_confirmed": false,
-      "next_run_at_et": "2026-08-31T19:03:00-04:00",
-      "readback_at_et": "2026-08-31T18:59:00-04:00",
-      "activation_conclusion": "saved and enabled; baseline initialized without history replay; scheduled tick still requires runtime confirmation"
+      "scheduler_tick_confirmed": true,
+      "last_run_at_et": "2026-08-31T19:08:01.302934-04:00",
+      "last_status": "ok",
+      "last_events_seen": 0,
+      "last_meta_writes": 0,
+      "readback_at_et": "2026-08-31T19:08:03-04:00",
+      "activation_conclusion": "active; scheduled root-cron tick completed successfully with zero history replay and zero Meta writes."
     }
   },
   "last_live_validation": {

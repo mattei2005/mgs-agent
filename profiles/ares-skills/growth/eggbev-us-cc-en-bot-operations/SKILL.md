@@ -24,8 +24,8 @@ Status do contrato       Corte/reativação e postagem ROAS autorizados em modo 
 Operation ID             Eggbev-US-CC-EN-BOT
 Conta Meta               act_1034081997659047; alias Eggbev-US-CC-EN-01-G006
 Gestão                    Rodolfo Mattei + Nicolas
-Write Meta                Fases 1/2: somente status de anúncio; Fase 3 00:00: budget US$45/US$65 e campanha/ad set/ad ACTIVE sob gates fail-closed; budget manual por Nicolas habilitado; guardrail de leads habilitado
-Crons Eggbev              Corte/ROAS e guardrail de leads ativos; tick LEADS 20:00 ET confirmado. Flag cron gateway_running=false é falso negativo do observador; execução real vence.
+Write Meta                Fases 1/2: somente status de anúncio; Fase 3 00:00: budget US$45/US$65 e campanha/ad set/ad ACTIVE sob gates fail-closed; budget manual por Nicolas habilitado; guardrails de página habilitados
+Crons Eggbev              Corte/ROAS, LEADS 08:00/20:00 ET e restrição DTR #2022 a cada 5 min ativos; restrição usa root cron determinístico para não reiniciar o gateway Ares ativo.
 Regra nativa              ADS ZERO RESULTS está DISABLED por readback; ADS ON 1.1 ausente
 Herança tráfego direto    proibida sem revisão explícita
 Herança operação anterior proibida
@@ -51,7 +51,7 @@ Intraday           1541578606076231750
 Diário             1541578596253175858
 Criar campanhas    1541578556037927053
 Clonar campanhas   1543333373945053184
-Limite de Leads    1543312825890381865
+Página e Limites  1543312825890381865
 ```
 
 Nunca criar uma thread substituta quando uma dessas rotas se aplicar. Toda thread nova do canal deve incluir Zeus e Nicolas conforme a política Discord vigente. A identidade das seis rotas vive em `thread_id + prompt_file + registry`; não publicar nem recriar mensagens operacionais de banner/pin em cada thread.
