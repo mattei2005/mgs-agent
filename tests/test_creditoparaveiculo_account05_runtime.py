@@ -38,6 +38,9 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(op['reporting']['daily_thread_id'], '1542892955315081246')
         self.assertEqual(op['reporting']['intraday_thread_id'], '1542892943352799242')
         self.assertEqual(op['reporting']['layout'], 'desktop_aligned_tables_only')
+        self.assertEqual(op['reporting']['daily_columns'][3], 'Dia')
+        self.assertEqual(op['reporting']['intraday_columns'][3], 'Dia')
+        self.assertEqual(op['reporting']['cycle_day_column']['applies_to'], ['daily', 'intraday'])
         cut_cfg = op['management_scope']['autonomous_action_scope']['creative_cut_writes']
         self.assertIsInstance(cut_cfg, dict)
         self.assertEqual(cut_cfg['status'], 'ACTIVE_AUTOMATED_CUTS_ACCOUNT05')

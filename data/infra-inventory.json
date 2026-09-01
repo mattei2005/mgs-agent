@@ -1,9 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-01T10:17:02-04:00",
-    "generated_by": "infra-discovery.sh",
-    "generated_at": "2026-09-01T11:16:17-04:00"
+    "updated_at": "2026-09-01T11:19:57-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -1548,12 +1547,13 @@
       "description": "Registry-driven B001–B012 Meta roles/Sheet monitor. Current B012 generation is B012-2; every B013 replacement generation remains on the dedicated DTR route.",
       "validation": "Shell and embedded-Python PASS. Fresh B012-2 isolated preflight and scheduled full production cycle passed app metadata, /roles, /me and debug_token with eight resolved roles, zero errors, zero alerts and no Sheet write.",
       "updated_at": "2026-09-01T11:16:17-04:00",
-      "source_report": "pending: B012-to-B012-2 cutover REPORT-INFRA",
+      "source_report": "discord:#alerts-infra/1544365803283943596",
       "last_change": "2026-09-01: registry cutover replaced B012 with B012-2 without changing monitor code; registry-driven discovery loaded the new exact item and retired the predecessor state.",
       "backup": "/root/mgs-agent/backups/meta-app-b012-to-b0122-cutover-20260901-110638/meta-app-roles-watch.sh.before",
       "backup_validation": "SHA256SUMS verified.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
-      "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before"
+      "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
+      "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS."
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -2044,7 +2044,8 @@
       "reconciliation": "All 12 app assignments now mirror live roles. Current X: B001-4 Adriano Alves/Emen; B004-4 Beatriz Santos; B009-3 Riza Gabiola/Leticia Silva; B011-2 Maria Silva Nobrega. Recovered Lorena Santos Cardoso and Maribel Tamboon are blank.",
       "state": "scheduled",
       "next_run_at": "2026-08-29T21:09:00-04:00",
-      "source_report": "pending: B012-to-B012-2 cutover REPORT-INFRA"
+      "source_report": "discord:#alerts-infra/1544365803283943596",
+      "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS."
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -4034,9 +4035,9 @@
       "description": "Production route pack for the current B012-2 generic Meta roles cutover and the current B013-4 dedicated DTR route.",
       "validation": "Runtime/versioned SHA-256 match. B012-2 section records exact non-secret item/channel labels, healthy four-check preflight, eight resolved roles, 8/8 Sheet parity, fresh predecessor-free baseline and silent scheduled-cycle readback.",
       "updated_at": "2026-09-01T11:16:17-04:00",
-      "source_report": "pending: B012-to-B012-2 cutover REPORT-INFRA",
+      "source_report": "discord:#alerts-infra/1544365803283943596",
       "last_change": "Added the current B012-2 cutover, changed current 12-app scope and positive-reconciliation wording from B012 to B012-2, and preserved predecessor alerts as undeleted history pending any Critical Subset confirmation.",
-      "report_readback": "HTTP 200; message 1543430260727619746; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title REPORT-INFRA — modificada and 8 canonical fields PASS.",
+      "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS.",
       "backup": "/root/mgs-agent/backups/meta-app-b012-to-b0122-cutover-20260901-110638/route-pack-05.md.before"
     },
     {
@@ -6266,7 +6267,7 @@
       "modified_at": "2026-09-01T11:08:07-04:00",
       "sha256": "c535ea1e96b74466c3ee6ad98d8e5a1f0499390622f147e471992ed47bccb23b",
       "mode": "manual-authorized",
-      "source_report": "pending: B012-to-B012-2 cutover REPORT-INFRA",
+      "source_report": "discord:#alerts-infra/1544365803283943596",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1543419014657605735",
       "scope": [
@@ -6288,7 +6289,7 @@
       "updated_at": "2026-09-01T11:16:17-04:00",
       "last_change": "Replaced active B013-3 registry row with B013-4/Dayanna Regis, preserved channel 1522830283240505385 and appended sanitized live validation evidence.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/meta-app-registry.json.before",
-      "report_readback": "HTTP 200; message 1543430260727619746; channel 1498132022634483894; content empty; one embed; zero user/role mentions; title REPORT-INFRA — modificada and 8 canonical fields PASS.",
+      "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS.",
       "description": "Canonical current Meta app routing registry: B012-2 replaces B012, reuses channel 1537256951879172136 as b012-2-app-status, and pins the exact current 1Password title; B013-4 remains dedicated DTR."
     },
     {
@@ -11046,7 +11047,8 @@
       "purpose": "Rollback snapshot before replacing active generic Meta app B012 with B012-2.",
       "validation": "sha256sum -c SHA256SUMS passed for all five pre-change artifacts; manifest SHA-256 6bf4eed4a1ece18de576f47a0778166be9a72fcdf6b3455328f51d5f741ca972.",
       "updated_at": "2026-09-01T11:16:17-04:00",
-      "source_report": "pending: B012-to-B012-2 cutover REPORT-INFRA"
+      "source_report": "discord:#alerts-infra/1544365803283943596",
+      "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS."
     }
   ],
   "profile_skill_references": [
@@ -12105,13 +12107,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-roas-common.py",
-      "size_bytes": 55491,
-      "modified_at": "2026-08-31T20:35:45-04:00"
+      "size_bytes": 55558,
+      "modified_at": "2026-09-01T11:17:18-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-roas-cycle.py",
-      "size_bytes": 63680,
-      "modified_at": "2026-08-31T18:17:06-04:00"
+      "size_bytes": 64199,
+      "modified_at": "2026-09-01T11:17:39-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-thread-reconcile.py",
@@ -15530,8 +15532,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 30363,
-      "md5": "be53ef58d37e68d47a1b52ae5ccd5806",
-      "modified_at": "2026-09-01T10:17:01-04:00"
+      "md5": "8d10363db5a6b931da85238c32c0a027",
+      "modified_at": "2026-09-01T11:17:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -15548,8 +15550,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "f5795cc2b7d1816eb7a02afc5816d74f",
-      "modified_at": "2026-09-01T10:12:41-04:00"
+      "md5": "12550f5da54e9be6f94d45e4fe67ed5a",
+      "modified_at": "2026-09-01T11:12:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -15565,9 +15567,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 28934,
-      "md5": "c87b9a0756dd53303f8024e681142b13",
-      "modified_at": "2026-09-01T10:02:53-04:00"
+      "size_bytes": 29800,
+      "md5": "d8ee189ecae8a29da2111ee73b409b3c",
+      "modified_at": "2026-09-01T11:17:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -15578,8 +15580,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 460,
-      "md5": "43097a0b153905f4ceff95243c1e76a8",
-      "modified_at": "2026-09-01T10:15:02-04:00"
+      "md5": "76018e9f95fdf7b54bc0323010143f90",
+      "modified_at": "2026-09-01T11:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -15590,8 +15592,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "35a831412ed7dc0548d297f94e790dfd",
-      "modified_at": "2026-09-01T09:49:02-04:00"
+      "md5": "ed38258fdf27a3c0f6b9f6857f01f2fb",
+      "modified_at": "2026-09-01T11:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -15626,8 +15628,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6395,
-      "md5": "8d6c281980df649e7e1cf5474843efdf",
-      "modified_at": "2026-09-01T10:14:01-04:00"
+      "md5": "5cf11978460e9073aac0c3e426182f61",
+      "modified_at": "2026-09-01T11:14:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -15638,20 +15640,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 50974,
-      "md5": "0f442d996027615fa682ae9ced6e4a97",
-      "modified_at": "2026-09-01T10:15:01-04:00"
+      "md5": "84a1eaf5c02ce433440b52a523152acb",
+      "modified_at": "2026-09-01T11:20:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 55558,
-      "md5": "5a8d59fca9d818b55588aec3a0aadc9a",
-      "modified_at": "2026-09-01T10:17:02-04:00"
+      "md5": "f41aa65f3612ed22a2d2c9f9f7eec29a",
+      "modified_at": "2026-09-01T11:20:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "d8bc3b00a0b7d5a6a8dc9c448a950f59",
-      "modified_at": "2026-09-01T10:17:01-04:00"
+      "md5": "37570ffdb29bb309a1b335bf97fec7b5",
+      "modified_at": "2026-09-01T11:20:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -15685,15 +15687,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 703602,
-      "md5": "0fc3a1f2e5ef9231277ba97a0f8f3608",
-      "modified_at": "2026-09-01T06:34:37-04:00"
+      "size_bytes": 704619,
+      "md5": "f64161b06da0595d58d9a03e9f122a15",
+      "modified_at": "2026-09-01T11:17:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 124315,
-      "md5": "67f601908375bf0e08823908d3a2e6ae",
-      "modified_at": "2026-08-31T20:28:35-04:00"
+      "size_bytes": 124972,
+      "md5": "231209d55119020e30fbbb6784195d7c",
+      "modified_at": "2026-09-01T11:12:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -15740,8 +15742,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 87473,
-      "md5": "dc1172b0f7054bc5e2776f2d8406c29e",
-      "modified_at": "2026-09-01T11:13:59-04:00"
+      "md5": "1a04f37c7b4452535d8e317e71eaf14c",
+      "modified_at": "2026-09-01T11:19:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -15757,9 +15759,9 @@
     },
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
-      "size_bytes": 7109,
-      "md5": "958142dadc5920d8e52ea178a8a4ae34",
-      "modified_at": "2026-09-01T09:24:35-04:00"
+      "size_bytes": 7108,
+      "md5": "7cad71f1217d2f5fa5146305cee415e7",
+      "modified_at": "2026-09-01T10:24:38-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -15769,9 +15771,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1049,
-      "md5": "6398d7dd200a65e9416112d881d3124a",
-      "modified_at": "2026-09-01T09:39:01-04:00"
+      "size_bytes": 1109,
+      "md5": "9899fbb4b648387d1e43117c4866f003",
+      "modified_at": "2026-09-01T10:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -15783,7 +15785,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-01T10:07:03-04:00"
+      "modified_at": "2026-09-01T11:07:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -15805,9 +15807,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 386758,
-      "md5": "920cda2753f8e8e87b8c524f8ffeb334",
-      "modified_at": "2026-09-01T10:15:20-04:00"
+      "size_bytes": 387251,
+      "md5": "02a6f25361d5a77814cd40e505344409",
+      "modified_at": "2026-09-01T11:15:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -15818,8 +15820,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 35010,
-      "md5": "2ee7976943c1a10801cae44b17bb20a7",
-      "modified_at": "2026-09-01T10:12:14-04:00"
+      "md5": "3c263e2283c10bb82cf61c7df5aa24bd",
+      "modified_at": "2026-09-01T11:12:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -15829,9 +15831,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 765718,
-      "md5": "a756dd8edb0cd6a7c083269422ddd865",
-      "modified_at": "2026-09-01T10:14:17-04:00"
+      "size_bytes": 767026,
+      "md5": "e8aabb7e529c14e5f0bf39c21cedca03",
+      "modified_at": "2026-09-01T11:14:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -15891,7 +15893,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "849bc279b95a0f9976f8c6a35b0181ea",
-      "modified_at": "2026-09-01T10:16:01-04:00"
+      "modified_at": "2026-09-01T11:16:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -15901,9 +15903,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17251,
-      "md5": "c15af402012356439d9e298432a87731",
-      "modified_at": "2026-09-01T09:24:04-04:00"
+      "size_bytes": 17372,
+      "md5": "81548a8a4870768ed932fa6dd5a7cf0e",
+      "modified_at": "2026-09-01T10:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -15919,9 +15921,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 15799621,
-      "md5": "9dc9af238d119b53cfd97745d53acf4f",
-      "modified_at": "2026-09-01T10:15:20-04:00"
+      "size_bytes": 15802250,
+      "md5": "27267b7dfdbc0d85ca93ed97b779b375",
+      "modified_at": "2026-09-01T11:15:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -15932,8 +15934,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2118,
-      "md5": "a1ac3f8b231131e25117f1cc0be7cf28",
-      "modified_at": "2026-09-01T10:15:03-04:00"
+      "md5": "cbf600e712f849bdf1c59a19d4fda1c1",
+      "modified_at": "2026-09-01T11:20:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -15950,8 +15952,8 @@
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
       "size_bytes": 33172,
-      "md5": "2f1d688a2e49aa3702dd248344a59c76",
-      "modified_at": "2026-08-31T10:23:08-04:00"
+      "md5": "74101a70e03ca1b1c501bbcda7c52033",
+      "modified_at": "2026-09-01T10:23:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

@@ -344,6 +344,8 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert "CR" not in operation["reporting_presentation"]["intraday_columns"]
     desktop_summary = operation["reporting_presentation"]["intraday_desktop_summary"]
     assert operation["reporting_presentation"]["daily_mobile_cards_enabled"] is False
+    assert operation["reporting_presentation"]["daily_columns"][3] == "Dia"
+    assert operation["reporting_presentation"]["daily_cycle_day"]["applies_to_thread"] == "1539831487719800872"
     assert operation["reporting_presentation"]["intraday_mobile_cards_enabled"] is False
     assert desktop_summary["repeat_summary_after_mobile_cards"] is False
     assert desktop_summary["cr_campaign_column_required"] is False
