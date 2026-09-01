@@ -140,28 +140,53 @@ def promoted_object_matches(adset: dict[str, Any], policy: dict[str, Any]) -> bo
     ))
 
 
-def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
-    """Read account, active objects and today's campaign insights in one batch."""
+def metric_risk_campaign_ids(
+    campaigns: list[dict[str, Any]],
+    insight_rows: list[dict[str, Any]],
+    policy: dict[str, Any],
+) -> list[str]:
+    threshold = finite_float(policy.get('spend_threshold_usd')) or 2.0
+    action_type = norm((policy.get('pixel_event') or {}).get('insights_action_type')) or PIXEL_ACTION_TYPE
+    insights = aggregate_campaign_insights(insight_rows, action_type)
+    result: list[str] = []
+    for campaign in campaigns:
+        campaign_id = norm(campaign.get('id'))
+        configured = norm(campaign.get('configured_status') or campaign.get('status')).upper()
+        effective = norm(campaign.get('effective_status')).upper()
+        metric = insights.get(campaign_id) or {}
+        spend = finite_float(metric.get('spend')) or 0.0
+        pixel_results = finite_float(metric.get('pixel_results')) or 0.0
+        if campaign_id and configured == 'ACTIVE' and effective == 'ACTIVE' and spend > threshold and pixel_results <= 0:
+            result.append(campaign_id)
+    return result
+
+
+def fetch_live_snapshot(meta, token: str, act: str, policy: dict[str, Any]) -> dict[str, Any]:
+    """Use two normal-path batch children; preflight/mapping only for metric risk."""
+
+    def parse_batch(responses: Any, expected: list[str]) -> dict[str, dict[str, Any]]:
+        if not isinstance(responses, list):
+            raise ZeroPixelGuardrailError('Meta batch returned invalid outer payload')
+        by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
+        parsed: dict[str, dict[str, Any]] = {}
+        for name in expected:
+            response = by_name.get(name) or {}
+            code = int(response.get('code') or 0)
+            body = response.get('body')
+            if code != 200 or not isinstance(body, dict):
+                detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
+                raise ZeroPixelGuardrailError(
+                    f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
+                )
+            parsed[name] = body
+        return parsed
+
     status, responses, _ = meta.graph_batch_get(token, [
-        {
-            'name': 'account',
-            'path': act,
-            'params': {'fields': 'id,name,account_status,currency,timezone_name,disable_reason'},
-        },
         {
             'name': 'campaigns',
             'path': act + '/campaigns',
             'params': {
                 'fields': 'id,name,status,effective_status,configured_status,daily_budget,updated_time',
-                'effective_status': ['ACTIVE'],
-                'limit': 200,
-            },
-        },
-        {
-            'name': 'adsets',
-            'path': act + '/adsets',
-            'params': {
-                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
                 'effective_status': ['ACTIVE'],
                 'limit': 200,
             },
@@ -177,29 +202,61 @@ def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
             },
         },
     ])
-    if status != 200 or not isinstance(responses, list):
-        raise ZeroPixelGuardrailError(f'Meta batch preflight failed: HTTP {status}')
-    by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
-    result: dict[str, Any] = {}
-    for name in ('account', 'campaigns', 'adsets', 'insights'):
-        response = by_name.get(name) or {}
-        code = int(response.get('code') or 0)
-        body = response.get('body')
-        if code != 200 or not isinstance(body, dict):
-            detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
-            raise ZeroPixelGuardrailError(
-                f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
-            )
-        if name == 'account':
-            result[name] = body
-            continue
-        if (body.get('paging') or {}).get('next'):
+    if status != 200:
+        raise ZeroPixelGuardrailError(f'Meta metric batch failed: HTTP {status}')
+    primary = parse_batch(responses, ['campaigns', 'insights'])
+    for name in ('campaigns', 'insights'):
+        if (primary[name].get('paging') or {}).get('next'):
             raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
-        data = body.get('data')
-        if not isinstance(data, list):
-            raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
-        result[name] = data
-    return result
+    campaigns = primary['campaigns'].get('data')
+    insights = primary['insights'].get('data')
+    if not isinstance(campaigns, list) or not isinstance(insights, list):
+        raise ZeroPixelGuardrailError('Meta campaign/insight batch returned invalid data')
+
+    metric_risk_ids = metric_risk_campaign_ids(campaigns, insights, policy)
+    live_account: dict[str, Any] | None = None
+    adsets: list[dict[str, Any]] = []
+    if metric_risk_ids:
+        requests = [{
+            'name': 'account',
+            'path': act,
+            'params': {'fields': 'id,name,account_status,currency,timezone_name,disable_reason'},
+        }]
+        requests.extend({
+            'name': f'adsets:{campaign_id}',
+            'path': campaign_id + '/adsets',
+            'params': {
+                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
+                'limit': 50,
+            },
+        } for campaign_id in metric_risk_ids)
+        status, responses, _ = meta.graph_batch_get(token, requests)
+        if status != 200:
+            raise ZeroPixelGuardrailError(f'Meta risk-preflight batch failed: HTTP {status}')
+        risk_readback = parse_batch(responses, [request['name'] for request in requests])
+        live_account = risk_readback['account']
+        for campaign_id in metric_risk_ids:
+            name = f'adsets:{campaign_id}'
+            body = risk_readback[name]
+            if (body.get('paging') or {}).get('next'):
+                raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
+            rows = body.get('data')
+            if not isinstance(rows, list):
+                raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
+            adsets.extend(
+                row for row in rows
+                if isinstance(row, dict)
+                and norm(row.get('configured_status') or row.get('status')).upper() == 'ACTIVE'
+                and norm(row.get('effective_status')).upper() == 'ACTIVE'
+            )
+    return {
+        'account': live_account,
+        'account_preflight_performed': live_account is not None,
+        'campaigns': campaigns,
+        'adsets': adsets,
+        'insights': insights,
+        'metric_risk_campaign_ids': metric_risk_ids,
+    }
 
 
 def plan_guardrail(
@@ -405,21 +462,28 @@ def main() -> int:
             }
             account_id = norm((operation.get('account') or {}).get('account_id'))
             act = 'act_' + account_id
-            snapshot = fetch_live_snapshot(meta, token, act)
-            live_account = snapshot['account']
-            if live_account.get('currency') != 'USD' or live_account.get('timezone_name') != 'America/New_York' or int(live_account.get('account_status') or 0) != 1:
+            snapshot = fetch_live_snapshot(meta, token, act, policy)
+            live_account = snapshot.get('account')
+            if snapshot.get('metric_risk_campaign_ids') and not isinstance(live_account, dict):
+                raise ZeroPixelGuardrailError('Meta account preflight missing for metric-risk campaigns')
+            if isinstance(live_account, dict) and (
+                live_account.get('currency') != 'USD'
+                or live_account.get('timezone_name') != 'America/New_York'
+                or int(live_account.get('account_status') or 0) != 1
+            ):
                 raise ZeroPixelGuardrailError('Meta account identity/currency/timezone/status preflight failed')
             campaigns = snapshot['campaigns']
             adsets = snapshot['adsets']
             insights = snapshot['insights']
             plan = plan_guardrail(campaigns, adsets, insights, policy)
             run['meta_readback'] = {
-                'account_http_status': 200,
+                'account_http_status': 200 if isinstance(live_account, dict) else 'deferred_no_metric_risk',
+                'account_preflight_performed': isinstance(live_account, dict),
                 'active_campaigns': len(campaigns),
                 'active_adsets': len(adsets),
                 'campaign_insight_rows': len(insights),
-                'currency': live_account.get('currency'),
-                'timezone_name': live_account.get('timezone_name'),
+                'currency': live_account.get('currency') if isinstance(live_account, dict) else 'USD (contract; no write planned)',
+                'timezone_name': live_account.get('timezone_name') if isinstance(live_account, dict) else 'America/New_York (contract; no write planned)',
             }
             run['plan'] = plan
             atomic_json(audit_path, run)

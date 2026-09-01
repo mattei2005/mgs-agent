@@ -2,6 +2,8 @@
 
 Plugin WordPress simples para criar e duplicar landing pages de uma pergunta usadas em tráfego direto.
 
+O WordPress é apenas o painel de controle. Cada landing ativa é publicada como um `index.html` físico na própria rota; o servidor entrega esse arquivo sem inicializar WordPress/PHP. Criar, editar, ativar ou desativar sincroniza a entrega estática automaticamente e valida o conteúdo por readback.
+
 ## Contrato
 
 - LP2: `/quiz/{pais}/sh2-gNNN/`, por exemplo `sh2-g002`.
@@ -17,8 +19,12 @@ Plugin WordPress simples para criar e duplicar landing pages de uma pergunta usa
 - `page_id` e `p` não são encaminhados.
 - Não coleta dados, não chama APIs externas e não implementa tracking de campanha.
 - Duplicação copia somente a configuração, deixa a cópia inativa e exige novo gestor/slug.
+- Cópias inativas não geram arquivo público; a ativação publica o `index.html`.
+- Edições regeneram o `index.html` de forma atômica.
+- Para trocar país, gestor, modelo ou slug de uma landing ativa, desative primeiro; isso impede duas rotas públicas concorrentes.
+- O JavaScript do arquivo estático preserva UTMs, `fbclid` e parâmetros personalizados nos CTAs.
 - Não implementa exclusão; desative a landing quando ela não deve mais responder.
 
 ## Rollback
 
-Desativar o plugin interrompe as rotas sem apagar a option `mgs_direct_quiz_landings`.
+Desativar o plugin retira os diretórios estáticos das rotas públicas de forma reversível e não apaga a option `mgs_direct_quiz_landings`.

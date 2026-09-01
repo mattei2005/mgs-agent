@@ -194,6 +194,33 @@ final class MGS_Direct_Quiz {
         return $archived;
     }
 
+    public static function sync_static_transition( $before, $after ) {
+        $before_active = is_array( $before ) && ! empty( $before['active'] );
+        $after_active  = is_array( $after ) && ! empty( $after['active'] );
+
+        if ( $before_active && $after_active ) {
+            $before_path = self::static_index_path( $before );
+            $after_path  = self::static_index_path( $after );
+            if ( is_wp_error( $before_path ) ) {
+                return $before_path;
+            }
+            if ( is_wp_error( $after_path ) ) {
+                return $after_path;
+            }
+            if ( $before_path !== $after_path ) {
+                return new WP_Error( 'mgs_dq_static_route_change', 'Desative a landing antes de trocar gestor, país, modelo ou slug.' );
+            }
+            return self::publish_static_item( $after );
+        }
+        if ( $before_active && ! $after_active ) {
+            return self::unpublish_static_item( $before );
+        }
+        if ( ! $before_active && $after_active ) {
+            return self::publish_static_item( $after );
+        }
+        return true;
+    }
+
     public static function find_by_id( $id ) {
         foreach ( self::items() as $item ) {
             if ( isset( $item['id'] ) && hash_equals( (string) $item['id'], (string) $id ) ) {
@@ -409,12 +436,32 @@ final class MGS_Direct_Quiz {
             'updated_at'        => $now,
         );
 
+        if ( $existing && ! empty( $existing['active'] ) && ! empty( $data['active'] ) ) {
+            $old_path = self::static_index_path( $existing );
+            $new_path = self::static_index_path( $data );
+            if ( is_wp_error( $old_path ) || is_wp_error( $new_path ) || $old_path !== $new_path ) {
+                self::admin_fail( $id, 'deactivate_first' );
+            }
+        }
+
+        $before_items = $items;
         if ( null === $index ) {
             $items[] = $data;
         } else {
             $items[ $index ] = $data;
         }
-        self::save_items( $items );
+        if ( ! self::save_items( $items ) ) {
+            self::admin_fail( $id, 'database' );
+        }
+        $static_result = self::sync_static_transition( $existing, $data );
+        if ( is_wp_error( $static_result ) ) {
+            self::save_items( $before_items );
+            if ( $existing && ! empty( $existing['active'] ) ) {
+                self::publish_static_item( $existing );
+            }
+            self::admin_fail( $id, 'static' );
+        }
+        update_option( self::STATIC_VERSION_OPTION, MGS_DQ_VERSION, false );
         wp_safe_redirect( add_query_arg( array( 'page' => 'mgs-direct-quiz-edit', 'id' => rawurlencode( $id ), 'saved' => 1 ), admin_url( 'admin.php' ) ) );
         exit;
     }
@@ -550,9 +597,12 @@ final class MGS_Direct_Quiz {
             <?php if ( $id ) : ?><span class="mgs-dq-badge <?php echo ! empty( $item['active'] ) ? 'mgs-dq-badge-active' : 'mgs-dq-badge-inactive'; ?>"><span class="mgs-dq-status-dot"></span><?php echo ! empty( $item['active'] ) ? 'Ativa' : 'Inativa'; ?></span><?php endif; ?>
           </section>
 
-          <?php if ( isset( $_GET['saved'] ) ) : ?><div class="notice notice-success is-dismissible mgs-dq-notice"><p><strong>Landing salva.</strong> As alterações foram registradas.</p></div><?php endif; ?>
+          <?php if ( isset( $_GET['saved'] ) ) : ?><div class="notice notice-success is-dismissible mgs-dq-notice"><p><strong>Landing salva.</strong> O index.html foi sincronizado e validado.</p></div><?php endif; ?>
           <?php if ( isset( $_GET['duplicated'] ) ) : ?><div class="notice notice-info mgs-dq-notice"><p><strong>Cópia criada inativa.</strong> Defina o novo gestor e slug antes de ativar.</p></div><?php endif; ?>
-          <?php if ( isset( $_GET['error'] ) ) : ?><div class="notice notice-error mgs-dq-notice"><p><strong>Não foi possível salvar.</strong> Revise os campos obrigatórios e as URLs HTTPS.</p></div><?php endif; ?>
+          <?php if ( isset( $_GET['error'] ) ) : ?>
+            <?php $error_code = sanitize_key( wp_unslash( $_GET['error'] ) ); ?>
+            <div class="notice notice-error mgs-dq-notice"><p><strong>Não foi possível salvar.</strong> <?php echo 'deactivate_first' === $error_code ? 'Desative a landing antes de trocar gestor, país, modelo ou slug.' : ( 'static' === $error_code ? 'O index.html não pôde ser sincronizado; a configuração anterior foi restaurada.' : 'Revise os campos obrigatórios e as URLs HTTPS.' ); ?></p></div>
+          <?php endif; ?>
 
           <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
             <input type="hidden" name="action" value="mgs_dq_save">
@@ -568,7 +618,7 @@ final class MGS_Direct_Quiz {
                     <label class="mgs-dq-field"><span>País</span><input id="mgsdq-country" name="country" required pattern="[a-zA-Z]{2}" maxlength="2" value="<?php echo esc_attr( self::field( $item, 'country', 'us' ) ); ?>" placeholder="us"><small>Código de duas letras.</small></label>
                     <label class="mgs-dq-field"><span>Gestor</span><input id="mgsdq-manager" name="manager_code" required pattern="G[0-9]{3,}" value="<?php echo esc_attr( self::field( $item, 'manager_code' ) ); ?>" placeholder="G002"><small>Use o padrão G + número.</small></label>
                     <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: V2 usa sh2-g002 e V1 usa sh1-g002.</small></label>
-                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option></select><small>Você pode trocar o modelo sem alterar a URL.</small></label>
+                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option></select><small>Em landing ativa, desative antes de trocar modelo e slug.</small></label>
                   </div>
                 </section>
 
@@ -614,7 +664,7 @@ final class MGS_Direct_Quiz {
 
               <aside class="mgs-dq-form-sidebar">
                 <section class="mgs-dq-form-card mgs-dq-publish-card">
-                  <header><div><h2>Publicação</h2><p>Controle quando a landing fica disponível.</p></div></header>
+                  <header><div><h2>Publicação</h2><p>O painel gera e atualiza o index.html automaticamente.</p></div></header>
                   <label class="mgs-dq-toggle-row"><span><strong>Landing ativa</strong><small>Publica a URL para receber tráfego.</small></span><span class="mgs-dq-switch"><input type="checkbox" name="active" value="1" <?php checked( ! empty( $item['active'] ) ); ?>><span></span></span></label>
                   <label class="mgs-dq-toggle-row"><span><strong>Bloquear indexação</strong><small>Aplica noindex e nofollow.</small></span><span class="mgs-dq-switch"><input type="checkbox" name="noindex" value="1" <?php checked( ! empty( $item['noindex'] ) ); ?>><span></span></span></label>
                   <?php if ( $public_url ) : ?><div class="mgs-dq-public-url"><span>URL pública</span><a href="<?php echo esc_url( $public_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $public_url ); ?><span class="dashicons dashicons-external"></span></a></div><?php endif; ?>

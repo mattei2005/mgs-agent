@@ -1806,7 +1806,7 @@
     "decision_source": {
       "period": "current America/New_York calendar day",
       "query_level": "campaign",
-      "read_strategy": "single bounded Graph batch for account + active campaigns + active ad sets + campaign insights; any child error or pagination requirement fails closed",
+      "read_strategy": "normal path uses one bounded Graph batch with only active campaigns + campaign insights; live account preflight and exact target-campaign ad sets are fetched in a second bounded batch only when spend/result metrics identify risk. Any child error or pagination requirement fails closed",
       "route": "Meta Ads Insights date_preset=today",
       "spend_field": "spend"
     },

@@ -1,6 +1,7 @@
 import json
 import re
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -32,6 +33,46 @@ class DirectQuizContractTests(unittest.TestCase):
         self.assertIn("'lp2'", php)
         self.assertIn('admin_post_mgs_dq_duplicate', php)
         self.assertIn('admin_post_mgs_dq_save', php)
+
+    def test_static_generation_contract_is_wired_to_admin_lifecycle(self):
+        php = read('includes/class-mgs-direct-quiz.php')
+        main = read('mgs-direct-quiz.php')
+        readme = read('README.md')
+        self.assertIn("Version: 1.1.0", main)
+        self.assertIn("define( 'MGS_DQ_VERSION', '1.1.0' )", main)
+        for marker in [
+            'maybe_sync_static_pages',
+            'publish_static_item',
+            'unpublish_static_item',
+            'sync_static_transition',
+            'STATIC_MARKER',
+            "file_put_contents( $temp, $html, LOCK_EX )",
+            "rename( $temp, $index )",
+            "self::sync_static_transition( $existing, $data )",
+            "update_option( self::STATIC_VERSION_OPTION, MGS_DQ_VERSION, false )",
+        ]:
+            self.assertIn(marker, php)
+        self.assertIn('`index.html` físico', readme)
+        self.assertIn('Cópias inativas não geram arquivo público', readme)
+
+    def test_static_runtime_publish_edit_disable_duplicate_and_reactivate(self):
+        fixture = Path('/root/mgs-agent/tests/fixtures/direct-quiz-static-runtime.php')
+        with tempfile.TemporaryDirectory(prefix='mgs-dq-static-') as root:
+            out = subprocess.check_output(['php', str(fixture), root], text=True)
+        result = json.loads(out)
+        self.assertTrue(all([
+            result['first_marker'],
+            result['first_raw_destination'],
+            result['first_assets_versioned'],
+            result['edit_replaced'],
+            result['edit_path_same'],
+            result['inactive_removed_public_path'],
+            result['inactive_archived'],
+            result['inactive_copy_unpublished'],
+            result['reactivated'],
+            result['readback_sha_match'],
+        ]), result)
+        self.assertEqual('mgs_dq_static_route_change', result['route_guard_code'])
 
     def test_admin_writes_are_capability_and_nonce_protected(self):
         php = read('includes/class-mgs-direct-quiz.php')
@@ -130,6 +171,10 @@ console.log(JSON.stringify({dest}));
     def test_php_lint_all_plugin_files(self):
         for php in ROOT.rglob('*.php'):
             subprocess.check_call(['php', '-l', str(php)], stdout=subprocess.DEVNULL)
+        subprocess.check_call(
+            ['php', '-l', '/root/mgs-agent/tests/fixtures/direct-quiz-static-runtime.php'],
+            stdout=subprocess.DEVNULL,
+        )
 
 
 if __name__ == '__main__':

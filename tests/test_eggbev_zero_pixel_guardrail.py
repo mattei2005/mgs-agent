@@ -126,7 +126,7 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
         self.assertNotIn('secret-trace', message)
         self.assertIn('novos writes: **bloqueados**', message)
 
-    def test_live_snapshot_uses_one_bounded_batch(self):
+    def test_live_snapshot_normal_path_uses_two_batch_children(self):
         class FakeMeta:
             requests = []
 
@@ -143,9 +143,46 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
                     responses.append({'name': request['name'], 'code': 200, 'body': body})
                 return 200, responses, {}
 
-        snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
-        self.assertEqual(len(FakeMeta.requests), 4)
-        self.assertEqual(set(snapshot), {'account', 'campaigns', 'adsets', 'insights'})
+        snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1', self.policy)
+        self.assertEqual(len(FakeMeta.requests), 2)
+        self.assertEqual(set(snapshot), {'account', 'account_preflight_performed', 'campaigns', 'adsets', 'insights', 'metric_risk_campaign_ids'})
+        self.assertFalse(snapshot['account_preflight_performed'])
+
+    def test_live_snapshot_reads_account_and_target_adsets_only_after_metric_risk(self):
+        campaign = self.campaign
+        adset = self.adset
+
+        class FakeMeta:
+            calls = []
+
+            @staticmethod
+            def safe_meta_error(body):
+                return body
+
+            @classmethod
+            def graph_batch_get(cls, token, requests):
+                cls.calls.append(requests)
+                rows = []
+                for request in requests:
+                    name = request['name']
+                    if name == 'campaigns':
+                        body = {'data': [campaign]}
+                    elif name == 'insights':
+                        body = {'data': [{'campaign_id': 'c1', 'spend': '2.01', 'actions': []}]}
+                    elif name == 'account':
+                        body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'}
+                    else:
+                        body = {'data': [adset]}
+                    rows.append({'name': name, 'code': 200, 'body': body})
+                return 200, rows, {}
+
+        snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1', self.policy)
+        self.assertEqual(len(FakeMeta.calls), 2)
+        self.assertEqual([request['name'] for request in FakeMeta.calls[0]], ['campaigns', 'insights'])
+        self.assertEqual([request['name'] for request in FakeMeta.calls[1]], ['account', 'adsets:c1'])
+        self.assertTrue(snapshot['account_preflight_performed'])
+        self.assertEqual(snapshot['metric_risk_campaign_ids'], ['c1'])
+        self.assertEqual(len(snapshot['adsets']), 1)
 
     def test_live_snapshot_fails_closed_when_batch_page_is_incomplete(self):
         class FakeMeta:
@@ -160,7 +197,7 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
                 return 200, responses, {}
 
         with self.assertRaises(guardrail.ZeroPixelGuardrailError):
-            guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
+            guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1', self.policy)
 
 
 if __name__ == '__main__':
