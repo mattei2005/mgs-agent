@@ -32,16 +32,18 @@ Normalizar todos os horários para o timezone do job e expandir as próximas oit
 4. Se não existir minuto livre compatível, apresentar o conflito e obter uma alternativa antes de criar o cron.
 5. Separar o minuto não substitui `flock`, lease, idempotência, timeout, quota ou reconciliação.
 
-## 4. Baselines contínuas
+## 4. Baselines contínuas e densas
 
-Jobs `* * * * *`, watchdogs contínuos e schedules equivalentes executam em todos os minutos; portanto, não podem tornar todos os minutos indisponíveis.
+Jobs `* * * * *`, watchdogs contínuos e schedules densos de infraestrutura (por exemplo, a cada 3/5/9/15 minutos) podem, em conjunto, ocupar todos os 60 resíduos de minuto. O inventário MGS de 31/08/2026 confirmou que não existe minuto absolutamente vazio quando essas baselines são somadas.
 
-Eles são baseline excepcional e obrigatória no relatório de colisão. Um novo cron ainda deve:
+Eles são baseline excepcional e obrigatória no relatório de colisão. A exceção não permite colisão silenciosa com outro job operacional. Um novo cron ainda deve:
 
-- evitar o minuto de início de outros jobs agendáveis não contínuos;
+- ter zero colisão com outro job operacional/agendável fora das baselines densas;
+- usar o minuto com menor contenção de baseline quando nenhum minuto absolutamente livre existir;
 - provar que não disputa o mesmo lock, arquivo, conta, API, browser, state ou writer;
 - possuir lock/lease próprio quando houver risco de sobreposição;
-- não adotar frequência a cada minuto ou outra cadência densa sem necessidade explícita e isolamento comprovado.
+- registrar no audit quais baselines inevitáveis coincidem;
+- não adotar frequência a cada minuto ou outra cadência densa sem necessidade explícita, aprovação operacional e isolamento comprovado.
 
 ## 5. Write seguro e readback
 
