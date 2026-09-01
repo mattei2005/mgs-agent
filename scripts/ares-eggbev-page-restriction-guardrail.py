@@ -24,6 +24,8 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
+from ares_campaign_v3.eggbev_page_eligibility import sync_denylist
+
 BASE = Path("/root/mgs-agent")
 OP_PATH = BASE / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json"
 ACCOUNT_PATH = BASE / "data/ares/meta-ads/accounts/1034081997659047.json"
@@ -396,6 +398,13 @@ def main() -> int:
 
         dtr_state = load_json(DTR_STATE_PATH)
         transition_state = load_json(SB_TRANSITION_STATE_PATH)
+        denylist = sync_denylist(transition_state)
+        run["page_eligibility_denylist"] = {
+            "page_count": denylist.get("page_count"),
+            "updated_at": denylist.get("updated_at"),
+            "readback": True,
+        }
+        atomic_json(audit_path, run)
         if args.initialize or not state.get("initialized_at_et"):
             advance_cursor(state, dtr_state)
             state.update({

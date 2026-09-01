@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from typing import Any
 from zoneinfo import ZoneInfo
 
+from .eggbev_page_eligibility import PageEligibilityError, require_page_eligible
 from .media_registry import MediaRegistry
 from .schema import Manifest, ManifestError
 
@@ -95,6 +96,21 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             raise ManifestError(
                 f"account {campaign.account_id} requires operation {required_operation}"
             )
+        if manifest.operation == "Eggbev-US-CC-EN-BOT":
+            page_ids: set[str] = set()
+            promoted = (campaign.adset_create or {}).get("promoted_object") or {}
+            if promoted.get("page_id"):
+                page_ids.add(str(promoted["page_id"]))
+            for ad in campaign.ads:
+                story = (ad.creative_payload or {}).get("object_story_spec") or {}
+                if story.get("page_id"):
+                    page_ids.add(str(story["page_id"]))
+            if len(page_ids) > 1:
+                raise ManifestError("Eggbev Page identity is ambiguous in manifest")
+            try:
+                require_page_eligible(campaign.name, meta_page_id=next(iter(page_ids), None))
+            except PageEligibilityError as exc:
+                raise ManifestError(str(exc)) from exc
         name_regex = policy.get("name_regex")
         if name_regex and re.fullmatch(str(name_regex), campaign.name) is None:
             raise ManifestError(f"campaign name violates account naming policy: {campaign.name}")

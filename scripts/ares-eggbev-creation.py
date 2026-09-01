@@ -35,6 +35,7 @@ from ares_campaign_v3.eggbev_create import (
     messenger_welcome_message,
 )
 from ares_campaign_v3.engine import CampaignEngine
+from ares_campaign_v3.eggbev_page_eligibility import PageEligibilityError, require_page_eligible
 from ares_campaign_v3.media_registry import MediaNotReady, MediaRegistry
 from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
 from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
@@ -195,6 +196,10 @@ def live_page_and_token(page_token: str) -> tuple[dict[str, Any], Any, str]:
     if len(rows) != 1 or len(page_ids) != 1:
         raise CreationBlocked("page_reconciliation", {"page_rows": len(rows), "page_ids": len(page_ids)})
     page_id = next(iter(page_ids))
+    try:
+        require_page_eligible(page_token, meta_page_id=page_id)
+    except PageEligibilityError as exc:
+        raise CreationBlocked("page_eligibility", str(exc)) from exc
     status, page, _ = meta.graph_get(page_id, token, {"fields": "id,name,link"})
     if status != 200 or not isinstance(page, dict) or str(page.get("id")) != page_id:
         raise CreationBlocked("page_meta_readback", {"http": status})

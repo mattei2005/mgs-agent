@@ -1152,6 +1152,16 @@
     },
     {
       "agent": "ares",
+      "id": "eggbev-cron-reallocation-20260831",
+      "next_step": "Inventariar schedules, locks e execuções antes de qualquer write",
+      "objective": "Reorganizar os três schedules Eggbev para eliminar colisões operacionais",
+      "source": "discord:thread:1544122069933887628",
+      "state": "preflight_global_inventory",
+      "thread_id": "1544122069933887628",
+      "updated_at": "2026-09-01T00:19:47+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "eggbev-skill-route-cron-governance-20260831",
       "next_step": "Rodolfo decide se deseja uma mudança separada dos três schedules Eggbev atuais; nenhuma agenda foi alterada nesta iniciativa",
       "objective": "Separar rotas Eggbev em skills funcionais e institucionalizar política global de anti-colisão de cron",
@@ -1812,5 +1822,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T00:03:13+00:00"
+  "updated_at": "2026-09-01T00:19:47+00:00"
 }

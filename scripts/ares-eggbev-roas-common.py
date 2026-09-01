@@ -25,6 +25,8 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
+from ares_campaign_v3.eggbev_page_eligibility import PageEligibilityError, load_denylist, page_eligibility
+
 BASE = Path('/root/mgs-agent')
 OP_PATH = BASE / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json'
 ACCOUNT_PATH = BASE / 'data/ares/meta-ads/accounts/1034081997659047.json'
@@ -711,6 +713,12 @@ def plan_phase3_recycling(
 
     eligible_campaigns: list[dict[str, Any]] = []
     excluded_campaigns: list[dict[str, Any]] = []
+    try:
+        page_denylist = load_denylist()
+        page_denylist_error = None
+    except PageEligibilityError as exc:
+        page_denylist = None
+        page_denylist_error = str(exc)
     for campaign_id, candidate_ads in sorted(by_campaign.items()):
         campaign = campaigns_by_id.get(campaign_id) or {}
         campaign_status = norm(campaign.get('configured_status') or campaign.get('status')).upper()
@@ -724,6 +732,19 @@ def plan_phase3_recycling(
         page_id, utm = next(iter(identities))
         if not page_id or not utm:
             excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'campaign_page_or_utm_missing'})
+            continue
+        if page_denylist_error:
+            excluded_campaigns.append({'campaign_id': campaign_id, 'reason': 'restricted_page_denylist_unavailable_fail_closed'})
+            continue
+        eligibility = page_eligibility(utm, meta_page_id=page_id, denylist=page_denylist)
+        if not eligibility.get('eligible'):
+            excluded_campaigns.append({
+                'campaign_id': campaign_id,
+                'reason': 'page_restriction_history_permanent_ineligible',
+                'utm_campaign': utm,
+                'page_name': eligibility.get('page_name'),
+                'current_restricted_until': eligibility.get('current_restricted_until'),
+            })
             continue
         page_rows = [
             row for row in (sb_bundle.get('page_index') or {}).get(utm, [])
