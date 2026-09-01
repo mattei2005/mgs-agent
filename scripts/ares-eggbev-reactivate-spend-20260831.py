@@ -106,7 +106,8 @@ def collect_scope(common, meta, token: str) -> tuple[list[dict[str, Any]], list[
     insights = campaign_insights(common, meta, token)
     account_campaigns = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/campaigns', {
         'fields': 'id,name,status,effective_status,configured_status,start_time,daily_budget,updated_time',
-        'limit': 500,
+        'filtering': json.dumps([{'field': 'id', 'operator': 'IN', 'value': sorted(insights)}]),
+        'limit': 100,
     })
     campaigns_by_id = {str(row.get('id') or ''): row for row in account_campaigns if row.get('id')}
     missing_campaign_ids = sorted(set(insights) - set(campaigns_by_id))
@@ -131,11 +132,13 @@ def collect_scope(common, meta, token: str) -> tuple[list[dict[str, Any]], list[
         live_campaigns[campaign_id] = campaign
     account_adsets = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/adsets', {
         'fields': 'id,name,status,effective_status,configured_status,campaign_id,updated_time',
-        'limit': 500,
+        'filtering': json.dumps([{'field': 'campaign.id', 'operator': 'IN', 'value': sorted(live_campaigns)}]),
+        'limit': 100,
     })
     account_ads = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/ads', {
         'fields': 'id,name,status,effective_status,configured_status,adset_id,campaign_id,updated_time,creative{id,object_story_spec,url_tags}',
-        'limit': 500,
+        'filtering': json.dumps([{'field': 'campaign.id', 'operator': 'IN', 'value': sorted(live_campaigns)}]),
+        'limit': 100,
     })
     adsets_by_campaign: dict[str, list[dict[str, Any]]] = {}
     ads_by_campaign: dict[str, list[dict[str, Any]]] = {}
@@ -224,15 +227,22 @@ def final_readback(common, meta, token: str, scope: list[dict[str, Any]]) -> dic
         'adsets': {str(row['id']) for item in scope for row in item['adsets']},
         'ads': {str(row['id']) for item in scope for row in item['ads']},
     }
+    target_campaign_ids = sorted(target_ids['campaigns'])
     rows_by_kind = {
         'campaigns': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/campaigns', {
-            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+            'fields': 'id,status,effective_status,configured_status,updated_time',
+            'filtering': json.dumps([{'field': 'id', 'operator': 'IN', 'value': target_campaign_ids}]),
+            'limit': 100,
         }),
         'adsets': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/adsets', {
-            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+            'fields': 'id,status,effective_status,configured_status,updated_time',
+            'filtering': json.dumps([{'field': 'campaign.id', 'operator': 'IN', 'value': target_campaign_ids}]),
+            'limit': 100,
         }),
         'ads': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/ads', {
-            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+            'fields': 'id,status,effective_status,configured_status,updated_time',
+            'filtering': json.dumps([{'field': 'campaign.id', 'operator': 'IN', 'value': target_campaign_ids}]),
+            'limit': 100,
         }),
     }
     counts = {'campaigns': 0, 'adsets': 0, 'ads': 0}
