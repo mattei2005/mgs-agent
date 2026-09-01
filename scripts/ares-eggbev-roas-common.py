@@ -896,7 +896,8 @@ def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list
             'action': 'RECOMMEND_INCREASE_BUDGET',
             'frequency': 'EVERY_ROAS_ACTION_CYCLE',
             'write_enabled': False,
-            'blocked_reason': 'budget_write_requires_rodolfo_or_geizian_and_budget_envelope',
+            'blocked_reason': 'automatic_budget_scale_awaits_nicolas_instruction_or_policy',
+            'manual_budget_write_authorized_by': 'Nicolas Holanda',
         })
     return candidates
 

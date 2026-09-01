@@ -954,7 +954,14 @@ def render_report(run: dict[str, Any]) -> str:
     elif phase == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
     elif reasons:
-        lines.append('⚠️ **Ações bloqueadas:** ' + '; '.join(reasons))
+        reason_labels = {
+            'manual_intervention_review_required': 'alterações manuais/externas detectadas; revisão do Nicolas necessária',
+            'smart_bidding_freshness_unverifiable': 'Smart Bidding sem atualização verificável dentro do limite de 2h',
+        }
+        lines.append('⚠️ **Ações bloqueadas:** ' + '; '.join(
+            reason_labels.get(common.norm(reason), common.norm(reason) or 'motivo não informado')
+            for reason in reasons
+        ))
     else:
         lines.append(f"✅ Dados conciliados • Meta `{run.get('meta_status') or 'N/D'}` • SB `{run.get('smart_bidding_status') or 'N/D'}`")
 
@@ -973,7 +980,7 @@ def render_report(run: dict[str, Any]) -> str:
                 f"{common.fmt_money(row.get('current_daily_budget_usd'))} → {common.fmt_money(row.get('target_daily_budget_usd'))} "
                 f"(+{common.fmt_number(row.get('increase_percent'), 0)}%)"
             )
-        lines.append('⚠️ Budget write permanece bloqueado até aprovação de Rodolfo/Geizian e teto/envelope.')
+        lines.append('✅ Budget liberado para Nicolas, sem nova aprovação de Rodolfo/Geizian. A escala automática +10% continua apenas como recomendação até instrução ou política definida pelo Nicolas.')
 
     writes = run.get('writes') or []
     if writes:

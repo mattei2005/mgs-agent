@@ -1454,6 +1454,7 @@
       "Sinal",
       "Camp",
       "Lance",
+      "Dia",
       "Status",
       "Budget",
       "Spend",
@@ -1461,6 +1462,16 @@
       "ROI SB",
       "ROAS"
     ],
+    "daily_cycle_day": {
+      "label": "Dia",
+      "position_after": "Lance",
+      "value": "Dn from the report target date minus the canonical operational cycle start; PREP before D1",
+      "source": "management_scope.autonomous_action_scope.allowed_campaigns.cycle_start_date, with canonical Meta name/start fallback",
+      "applies_to_thread": "1539831487719800872",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544363089678303305",
+      "authorized_at_utc": "2026-09-01T15:14:54Z"
+    },
     "daily_alignment": "Unicode display-width aware; every metric row has an explicit signal and blank separator rows divide acquisition, SMS, totals and reconciliation",
     "daily_account_summary": {
       "status": "canonical_for_cpv_general_daily_only",

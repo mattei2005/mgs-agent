@@ -415,7 +415,7 @@
     "roas_threshold": 0.5,
     "scope": "all effectively ACTIVE CBO campaigns with positive spend, valid Meta purchase value/ROAS and current daily budget",
     "source_precedence": "Meta Purchase ROAS wins over Smart Bidding ROI",
-    "status": "metric_percentage_threshold_and_frequency_approved_dry_run_budget_write_requires_rodolfo_or_geizian",
+    "status": "metric_percentage_threshold_and_frequency_approved_manual_budget_control_delegated_to_nicolas_automatic_write_disabled",
     "supersedes": "30 percent above the current cut threshold with frequency pending"
   },
   "campaign_structure": {
@@ -1301,7 +1301,7 @@
       "smart_bidding_timestamp_evidence",
       "smart_bidding_time_window",
       "page_freshness_timestamp_evidence",
-      "budget_write_rodolfo_or_geizian_approval_and_envelope"
+      "automatic_budget_scale_requires_nicolas_instruction_or_approved_policy_and_envelope"
     ],
     "decisions": {
       "normal_creation": "ACTIVE with future start_time after the final summary is explicitly approved",

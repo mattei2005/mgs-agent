@@ -1584,6 +1584,48 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(policy['increase_percent'], 10)
         self.assertIn('every approved ROAS action cycle', policy['frequency'])
         self.assertFalse(policy['budget_write_enabled'])
+        self.assertIn('manual write authorized by explicit Nicolas instruction', policy['budget_write_gate'])
+        self.assertNotIn('rodolfo_or_geizian', policy['status'])
+
+    def test_scale_report_recognizes_nicolas_budget_authority_and_translates_blockers(self):
+        run = {
+            'started_at_et': '2026-09-01T10:00:00-04:00',
+            'phase': 'PHASE_1',
+            'threshold': .4,
+            'mode': 'controlled_write',
+            'meta_status': 'ok',
+            'smart_bidding_status': 'smart_bidding_freshness_unverifiable',
+            'source_gate': {
+                'write_ready': False,
+                'reasons': [
+                    'manual_intervention_review_required',
+                    'smart_bidding_freshness_unverifiable',
+                ],
+            },
+            'plan': {
+                'counts': {
+                    'ads_considered': 1,
+                    'pause_ads': 0,
+                    'reactivate_ads': 0,
+                    'budget_scale_candidates': 1,
+                },
+                'decisions': [{'action': 'KEEP'}],
+                'budget_scale_candidates': [{
+                    'campaign_name': '162 - Amy Shook - ENG - US - (pg_5024) C002',
+                    'purchase_roas': .51,
+                    'current_daily_budget_usd': 45,
+                    'target_daily_budget_usd': 49.5,
+                    'increase_percent': 10,
+                }],
+            },
+            'reporting': {'campaigns': [], 'campaign_count': 1},
+            'writes': [],
+        }
+        rendered = cycle.render_report(run)
+        self.assertIn('alterações manuais/externas detectadas', rendered)
+        self.assertIn('Smart Bidding sem atualização verificável dentro do limite de 2h', rendered)
+        self.assertIn('Budget liberado para Nicolas', rendered)
+        self.assertNotIn('Budget write permanece bloqueado', rendered)
 
 
 if __name__ == '__main__':

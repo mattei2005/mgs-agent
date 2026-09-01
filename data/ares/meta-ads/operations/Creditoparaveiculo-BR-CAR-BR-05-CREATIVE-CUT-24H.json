@@ -559,6 +559,45 @@
     "currency": "USD",
     "timezone": "America/Sao_Paulo",
     "layout": "desktop_aligned_tables_only",
+    "cycle_day_column": {
+      "label": "Dia",
+      "position_after": "Lance",
+      "value": "Dn from the report target date minus the assigned operational cycle start; PREP before D1",
+      "source": "campaign_strategy_assignment.assignments.cycle_start_date or operational_date_sp",
+      "applies_to": [
+        "daily",
+        "intraday"
+      ],
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544363089678303305",
+      "authorized_at_utc": "2026-09-01T15:14:54Z"
+    },
+    "daily_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "ROI SB",
+      "Estágio",
+      "Conc."
+    ],
+    "intraday_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "ROI SB",
+      "Estágio",
+      "Conc.",
+      "Próx. 24h",
+      "Ação"
+    ],
     "daily_thread_id": "1542892955315081246",
     "intraday_thread_id": "1542892943352799242",
     "daily_schedule": [
@@ -756,5 +795,5 @@
     "ChatPion is historical inspiration only and is outside this operation.",
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment."
   ],
-  "updated_at": "2026-08-31T07:13:27Z"
+  "updated_at": "2026-09-01T15:14:54Z"
 }
