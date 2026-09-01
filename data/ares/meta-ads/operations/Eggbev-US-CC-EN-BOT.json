@@ -2719,6 +2719,18 @@
       "state": "scheduled",
       "timezone": "America/New_York"
     },
+    "one_time_reactivation_20260831": {
+      "enabled": true,
+      "job_id": "186277a70030",
+      "lock_scope": "own request lock plus the common Eggbev ROAS operation lock",
+      "name": "Eggbev reativação lote 31-08 sem Pages restritas",
+      "readback_at_et": "2026-08-31T20:35:55-04:00",
+      "schedule": "once at 2026-09-01 00:16 America/New_York",
+      "schedule_reason": "moved from 00:13 to avoid the 00:10 ROAS run and the 00:13:30 page-restriction tick",
+      "script": "eggbev-reactivate-created-for-20260831.py",
+      "state": "scheduled",
+      "write_window": "2026-09-01 00:12-00:28 America/New_York"
+    },
     "roas_cycle": {
       "activation_conclusion": "saved and enabled; Hermes gateway CLI reports running while the cron subsystem reports gateway_running=false, so automatic firing remains unproven until a scheduled tick is confirmed",
       "deliver": "local",
