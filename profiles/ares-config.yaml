@@ -840,14 +840,14 @@ discord:
 
 
       - Esta thread trata exclusivamente das proteções por página da operação Eggbev:
-      Limite de Leads (LEADS) e restrição DTR #2022. Não responder com configuração
-      global do Hermes/Ares, regras ROAS, criação, clone, Diário ou Intraday.
+      Limite de Leads (LEADS), restrição DTR #2022 e fallback pós-03:00 de gasto sem
+      resultado de pixel. Não responder com configuração global do Hermes/Ares, regras
+      ROAS, criação, clone, Diário ou Intraday.
 
       - Antes de responder, carregar `eggbev-page-guardrails`. Ela abre somente o
-      prompt, os três nós desta rota, a conta e os states/audits mais recentes dos
-      dois guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança
-      de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo
-      por padrão.
+      prompt, os nós desta rota, a conta e os states/audits mais recentes dos três
+      guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança de governança
+      ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
 
       - Pedidos como "sua configuração", "como está configurado", "mostre tudo" ou
       "relatório" significam a configuracao operacional desta rota: fontes, thresholds,
@@ -888,9 +888,28 @@ discord:
       espera sem criar fila duplicada. O state inicial é baseline e nunca reprocessa
       histórico.
 
-      - Ação autorizada dos dois guardrails: status da campanha para PAUSED, sempre
+      - Guardrail de resultado do pixel: a partir de 03:00 ET, em cada tick de proteção
+      já existente, consultar spend de hoje no nível campanha e contar exclusivamente
+      `offsite_conversion.fb_pixel_custom` do evento Eggbev PV U. Campanha configurada/efetivamente
+      ACTIVE com `spend > US$2` e resultado Eggbev PV U igual a zero é pausada imediatamente.
+      Exatamente US$2 não pausa; qualquer resultado maior que zero mantém.
+
+      - O guardrail de pixel valida todos os ad sets efetivamente ativos da campanha
+      contra o `promoted_object` exato do pixel Eggbev, `custom_event_type=OTHER`,
+      `custom_event_str=eggbev-pv-u` e `optimization_goal=OFFSITE_CONVERSIONS`. Mapping
+      ausente, parcial ou divergente = no_write + alerta; nenhuma outra action_type
+      substitui o resultado de pixel.
+
+      - Essa etapa independe de chegar aviso no canal de páginas restritas: é o fallback
+      de segurança contra Page restrita silenciosa. Executa como etapa 2 do wrapper
+      já agendado, no mesmo offset `:03/:08/.../:58`, com gate interno pós-03:00 e
+      lock compartilhado; não cria cron novo nem colisão. O primeiro check diário
+      ocorre em `03:03:30` ET e a detecção máxima normal continua 5min30s após um
+      tick-base.
+
+      - Ação autorizada dos três guardrails: status da campanha para PAUSED, sempre
       com pre-read, POST único e GET/readback. Match parcial/ambíguo = no_write +
-      alerta curto.
+      alerta curto. Nenhum dos guardrails reativa automaticamente.
 
       - Alertas automáticos têm no máximo quatro linhas: severidade/título; página+UTM;
       campanhas ativas/pausadas/pendentes; fonte+horário ET+sem reativação. Sem tabela
@@ -1073,10 +1092,14 @@ discord:
       a campanha efetivamente rodou naquele dia ET. Campanha criada hoje com `start_time`
       para o dia seguinte as 00:00 e sempre excluida do corte noturno.
 
-      - Purchase ROAS individual vazio com fonte valida aparece `N/D` e segue a politica
-      da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel a corte.
-      Fonte indisponivel/stale/irreconciliavel e diferente de metrica vazia: gera
-      zero write + alerta.
+      - Purchase ROAS individual vazio com leitura Meta valida aparece `N/D` e segue
+      a politica da fase; ausencia total da linha na Fase 2 tambem e `N/D` elegivel
+      a corte. Atraso, staleness ou indisponibilidade da dashboard Smart Bidding nao
+      bloqueia cortes das Fases 1/2: o corte usa o Purchase ROAS vivo da Meta e ocorre
+      imediatamente abaixo do threshold vigente. Nessas condicoes, somente reativacoes
+      e campos dependentes da Smart Bidding falham fechados com alerta/N/D. Falha
+      da propria leitura Meta continua fail-closed porque nao existe metrica segura
+      para decidir o corte.
 
       - Fases 1/2 continuam exclusivamente no anuncio: nunca pausar campanha/ad set.
       A Fase 3 das 00:00 e excecao explicita e separada: le o dia anterior fechado;
@@ -1110,6 +1133,18 @@ discord:
       campanha/conjunto/anuncio e escrever budget US$45/US$65 sob a autorizacao Eggbev
       de Nicolas. Toda acao exige pre-read, plano idempotente e GET/readback; erro
       parcial inicia recovery readback-first.
+
+      - Todo relatorio de Corte e ROAS, inclusive Fase 3, mostra no cabecalho `Atraso
+      da dash` a partir de `/estimated/delay.totalMinutes`: abaixo de 60 minutos usar
+      `Nmin`; a partir de 60 usar `Xh YYmin`; ausente/invalido usar `N/D`. Exibir
+      junto o limite de 2h e se esta dentro, acima ou nao verificavel, no mesmo padrao
+      visual da Intraday Creditoparaveiculo.
+
+      - Correcao aprovada por Nicolas em 01/09/2026: o limite informativo de freshness
+      de 2h nunca interrompe a medida de seguranca. Em todos os cronogramas ja aprovados,
+      se o Purchase ROAS do anuncio estiver abaixo do threshold atual, cortar imediatamente.
+      Cortes pela thread Corte e ROAS nunca param por atraso da dashboard; nenhuma
+      mudanca de horario foi feita por esta correcao.
 
       - Sempre postar relatorio da Fase 3 nesta thread, deixando no titulo e no resumo
       que a ativacao foi `Fase 3 — Reativacao/Reciclagem`, com dia-base, ROAS >=0,38,
