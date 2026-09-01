@@ -1832,6 +1832,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-hermes-update-20260901",
+      "next_step": "Congelar refs, runtime, patches, mirrors e superfície local antes de criar stage isolado.",
+      "objective": "Atualizar Hermes de forma controlada para a última release estável, preservando todas as customizações MGS.",
+      "source": "discord:message:1544491501520691302",
+      "state": "authorized_freeze_preflight",
+      "thread_id": "1544371507491242044",
+      "updated_at": "2026-09-01T23:38:56+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-memory-autocompact-90",
       "next_step": "Operação normal automática. Zeus só escala falha fechada, source_unchanged não comprovado, entrega Discord pendente ou store que permaneça >=90% após tentativa.",
       "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
@@ -1862,5 +1872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T23:04:04+00:00"
+  "updated_at": "2026-09-01T23:38:56+00:00"
 }
