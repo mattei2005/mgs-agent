@@ -21,6 +21,9 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertEqual(restriction["stagger_seconds"], 30)
         self.assertEqual(restriction["base_maximum_detection_delay_seconds"], 330)
         self.assertTrue(restriction["shared_operation_lock"].endswith("roas-cycle.lock"))
+        one_time = jobs["one_time_reactivation_20260831"]
+        self.assertEqual(one_time["schedule"], "once at 2026-09-01 00:16 America/New_York")
+        self.assertIn("common Eggbev ROAS operation lock", one_time["lock_scope"])
 
         roas_prompt = (ROOT / "data/ares/discord/thread-prompts/1541578606076231750.txt").read_text()
         page_prompt = (ROOT / "data/ares/discord/thread-prompts/1543312825890381865.txt").read_text()

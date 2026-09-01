@@ -963,12 +963,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-reactivation-created-for-20260831",
-      "next_step": "Criar one-shot 01/09 00:13 ET, validar scheduler/readback e confirmar retorno do Corte/ROAS.",
-      "objective": "Reativar em execução única somente o lote Eggbev criado pelo Ares para 31/08, excluindo qualquer Page restrita, e preservar Corte/ROAS.",
+      "next_step": "Às 00:16 ET executar pre-read, revalidar denylist, ativar somente objetos necessários, readback batch e entregar resumo curto na thread.",
+      "objective": "Reativar em execução única todas as campanhas Eggbev com gasto em 31/08, excluindo Page restrita, e preservar Corte/ROAS.",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "dry-run vivo confirmou 9 campanhas elegíveis, 9 ad sets, 27 ads, todas com gasto; pg_5071/tina e suas 3 campanhas excluídas; regra permanente persistida; agendamento ainda pendente.",
+      "state": "dry-run vivo por insights: 18 campanhas com gasto; 13 elegíveis não arquivadas, 13 ad sets e 39 ads; 3 campanhas pg_5071 excluídas por restrição e 2 arquivadas ignoradas; job determinístico no_agent agendado para 01/09 00:16 et; corte/roas ativo.",
       "thread_id": "1544132397300449280",
-      "updated_at": "2026-09-01T00:28:35+00:00"
+      "updated_at": "2026-09-01T01:01:44+00:00"
     },
     {
       "agent": "ares",
@@ -1163,12 +1163,12 @@
     {
       "agent": "ares",
       "id": "eggbev-cron-reallocation-20260831",
-      "next_step": "Inventariar schedules, locks e execuções antes de qualquer write",
-      "objective": "Reorganizar os três schedules Eggbev para eliminar colisões operacionais",
+      "next_step": "Observar os próximos ticks naturais; o vídeo do Nicolas será analisado separadamente para resolver a fonte de freshness",
+      "objective": "Reorganizar os schedules Eggbev para eliminar colisões operacionais",
       "source": "discord:thread:1544122069933887628",
-      "state": "preflight_global_inventory",
+      "state": "implemented_validated_zero_exact_target_collisions",
       "thread_id": "1544122069933887628",
-      "updated_at": "2026-09-01T00:19:47+00:00"
+      "updated_at": "2026-09-01T00:59:40+00:00"
     },
     {
       "agent": "ares",
@@ -1832,5 +1832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T00:28:35+00:00"
+  "updated_at": "2026-09-01T01:01:44+00:00"
 }
