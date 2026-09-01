@@ -1756,12 +1756,14 @@
       "write_enabled": true
     },
     "schedule": {
+      "base_maximum_detection_delay_seconds": 330,
       "cron": "3-58/5 * * * *",
       "independent_from_page_lead_guardrail": true,
-      "maximum_detection_delay_seconds": 330,
       "mode": "every_5_minutes",
+      "shared_operation_lock": "data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock",
       "stagger_seconds": 30,
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "writer_overlap_policy": "wait behind ROAS or one-time Eggbev writer while the outer guardrail lock prevents duplicate queued runs"
     },
     "scope": {
       "account_alias": "Eggbev-US-CC-EN-01-G006",
@@ -2708,12 +2710,13 @@
       "last_status": "ok",
       "lock": "/var/lock/ares_eggbev_page_restriction_guardrail.lock",
       "log": "/root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log",
-      "maximum_detection_delay_seconds": 330,
+      "base_maximum_detection_delay_seconds": 330,
       "name": "Eggbev páginas restritas DTR 5min",
       "readback_at_et": "2026-08-31T20:30:41-04:00",
       "schedule": "3-58/5 * * * *",
       "scheduler_backend": "root_crontab",
       "scheduler_tick_confirmed": true,
+      "shared_operation_lock": "/root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock",
       "script": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
       "stagger_seconds": 30,
       "state": "scheduled",

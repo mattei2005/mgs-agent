@@ -19,13 +19,15 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         restriction = jobs["page_restriction_guardrail"]
         self.assertEqual(restriction["schedule"], "3-58/5 * * * *")
         self.assertEqual(restriction["stagger_seconds"], 30)
-        self.assertEqual(restriction["maximum_detection_delay_seconds"], 330)
+        self.assertEqual(restriction["base_maximum_detection_delay_seconds"], 330)
+        self.assertTrue(restriction["shared_operation_lock"].endswith("roas-cycle.lock"))
 
         roas_prompt = (ROOT / "data/ares/discord/thread-prompts/1541578606076231750.txt").read_text()
         page_prompt = (ROOT / "data/ares/discord/thread-prompts/1543312825890381865.txt").read_text()
         self.assertIn("minuto `:10`", roas_prompt)
         self.assertIn("`08:16` e `20:16`", page_prompt)
         self.assertIn("stagger determinístico de 30 segundos", page_prompt)
+        self.assertIn("lock compartilhado com ROAS", page_prompt)
 
     def test_canonical_policy_covers_all_schedulers_and_minute_allocation(self):
         policy = (ROOT / "context/cron-scheduling-policy.md").read_text(encoding="utf-8")

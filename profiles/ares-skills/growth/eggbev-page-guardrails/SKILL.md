@@ -54,7 +54,7 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 
 ## Guardrails
 
-- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; restrição usa offset de cinco minutos `:03/:08/.../:58` com stagger de 30 segundos e `flock` exclusivo.
+- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; restrição usa offset de cinco minutos `:03/:08/.../:58`, stagger de 30 segundos, lock próprio e o lock comum `roas-cycle.lock`, serializando ROAS, restrição e reativação one-time sem fila duplicada.
 - Match parcial/ambíguo ou freshness não verificável = zero write.
 - Nunca substituir `LEADS` por `LEADS_TOTAL`.
 - Não reativar automaticamente.
