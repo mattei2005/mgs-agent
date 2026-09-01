@@ -39,6 +39,9 @@ Para as landing pages desta operação, a fonte canônica é o plugin WordPress 
 - o número após `sh` corresponde ao modelo visual selecionado;
 - modelos visuais configuráveis `V1` e `V2`;
 - painel restrito a criar, editar e duplicar configurações de landing;
+- desde 2026-09-01, WordPress funciona como plano de controle: cada landing ativa é publicada como `index.html` físico e o request público não inicializa WordPress/PHP;
+- criar, editar ou ativar sincroniza o arquivo estático de forma atômica com readback; duplicar mantém a cópia sem rota física até a ativação; desativar retira a rota estática de forma reversível;
+- CSS e JavaScript do HTML gerado devem usar HTTPS; o JavaScript preserva UTMs, `fbclid` e parâmetros personalizados exatamente uma vez;
 - nenhuma coleta de lead, SMS, evento Facebook ou configuração de campanha no plugin;
 - o clique apenas encaminha o visitante ao artigo configurado, preservando os parâmetros recebidos; o artigo de destino é responsável pelo evento Facebook;
 - padrão de entrada: `utm_source=facebook`, `utm_medium=gNNN-s`, `utm_campaign=<id da campanha>` e `utm_adgroup=<id do conjunto>`, com campaign/adgroup definidos na criação da campanha de tráfego direto no Facebook, não no plugin.
@@ -49,6 +52,8 @@ Os canários G002 estão ativos nos dois sites:
 - Vizioid: `vizioid.com/quiz/us/sh2-g002/` (V2) e `vizioid.com/quiz/us/sh1-g002/` (V1).
 
 Em cada site, ambos os CTAs apontam para `/rec-us-app-shein-circle-of-style/` no próprio domínio.
+
+Runtime validado: `mgs-direct-quiz` v1.1.1 nos dois sites, com as quatro rotas G002 entregues por arquivos estáticos e WordPress mantido apenas para edição, duplicação e publicação.
 
 ---
 

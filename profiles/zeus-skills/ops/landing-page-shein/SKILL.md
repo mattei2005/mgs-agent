@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.0.1
+version: 1.1.0
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -52,6 +52,20 @@ No painel, usar o menu `Landing SHEIN`:
 6. Manter ambos os destinos iguais quando esse for o desenho aprovado.
 7. Salvar ainda inativa e validar a configuração por readback.
 8. Ativar somente após conferir URL pública, mobile, CTAs e parâmetros.
+
+## Entrega estática gerada pelo painel
+
+Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregue por um `index.html` físico na rota pública. O request da landing não inicializa WordPress/PHP.
+
+- Criar ou ativar publica o `index.html`.
+- Editar regenera o arquivo por escrita temporária + rename atômico e valida readback/hash.
+- Duplicar mantém a cópia inativa e não cria rota física.
+- Desativar move o diretório gerado para arquivo reversível e devolve a rota ao 404 do WordPress; não apagar resíduos sem a confirmação exigida pelo Critical Subset.
+- Alteração de país, gestor, modelo ou slug em landing ativa fica bloqueada; desativar primeiro, editar e então reativar. Isso evita duas rotas públicas concorrentes.
+- O HTML estático deve carregar CSS/JS por HTTPS mesmo quando `plugin_dir_url()` é calculado dentro de WP-CLI atrás de proxy. Testar explicitamente mixed content; HTML 200 sozinho não prova CSS/JS funcionando.
+- UTMs, `fbclid` e parâmetros personalizados continuam no JavaScript do arquivo estático, exatamente uma vez.
+- Em deploy de upgrade, chamar `MGS_Direct_Quiz::sync_static_pages()` e validar no HTML público o marker `MGS Direct Quiz static`, versão, dois CTAs, zero formulário/input, zero `wp-includes`/tema e assets HTTPS.
+- O browser deve provar largura mobile, execução do JavaScript e clique real; HTML estático sem CSS/JS pode parecer aprovado em checks de texto, mas falha no produto.
 
 ## Implantação segura
 
@@ -106,7 +120,7 @@ Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma va
 ## Estado validado
 
 - Sites ativos: `yolokfx.com` e `vizioid.com`.
-- Plugin canônico: `mgs-direct-quiz` v1.0.7, com código fonte e produção validados por manifesto.
+- Plugin canônico: `mgs-direct-quiz` v1.1.1, com código fonte e produção validados por manifesto; frontend entregue por `index.html` físico gerado pelo painel.
 - Interface administrativa em cards, com Biblioteca de Mídia para o logo e modelos exibidos como V1/V2.
 - Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
 - Yolokfx G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`.
