@@ -1853,14 +1853,14 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-maintenance-20260901",
-      "next_step": "Finalizador detached reiniciará o host; validador one-shot fará a conclusão e notificará a thread.",
+      "next_step": "Nenhum; manutenção da VPS encerrada.",
       "objective": "Atualizar todos os pacotes pendentes e Corepack da VPS e concluir reboot validado",
-      "source": "discord:message:1544473492148457583",
-      "state": "reboot_validator_enabled_authorized",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260901T190009Z-vps-full-update/post-reboot-validation.json",
+      "state": "pass: 20 pacotes, corepack 0.36.0 e reboot validados",
       "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-01T22:46:21+00:00"
+      "updated_at": "2026-09-01T23:04:04+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T22:46:21+00:00"
+  "updated_at": "2026-09-01T23:04:04+00:00"
 }
