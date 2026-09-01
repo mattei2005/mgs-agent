@@ -141,25 +141,7 @@ def promoted_object_matches(adset: dict[str, Any], policy: dict[str, Any]) -> bo
 
 
 def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
-    """Read account/campaign insights, then active-campaign ad sets in two batches."""
-
-    def parse_batch(responses: Any, expected: list[str]) -> dict[str, dict[str, Any]]:
-        if not isinstance(responses, list):
-            raise ZeroPixelGuardrailError('Meta batch returned invalid outer payload')
-        by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
-        result: dict[str, dict[str, Any]] = {}
-        for name in expected:
-            response = by_name.get(name) or {}
-            code = int(response.get('code') or 0)
-            body = response.get('body')
-            if code != 200 or not isinstance(body, dict):
-                detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
-                raise ZeroPixelGuardrailError(
-                    f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
-                )
-            result[name] = body
-        return result
-
+    """Read account, active objects and today's campaign insights in one batch."""
     status, responses, _ = meta.graph_batch_get(token, [
         {
             'name': 'account',
@@ -176,61 +158,48 @@ def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
             },
         },
         {
+            'name': 'adsets',
+            'path': act + '/adsets',
+            'params': {
+                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
+                'effective_status': ['ACTIVE'],
+                'limit': 200,
+            },
+        },
+        {
             'name': 'insights',
             'path': act + '/insights',
             'params': {
                 'level': 'campaign',
                 'date_preset': 'today',
                 'fields': 'campaign_id,campaign_name,spend,actions',
-                'action_breakdowns': 'action_target_id',
                 'limit': 200,
             },
         },
     ])
-    if status != 200:
+    if status != 200 or not isinstance(responses, list):
         raise ZeroPixelGuardrailError(f'Meta batch preflight failed: HTTP {status}')
-    primary = parse_batch(responses, ['account', 'campaigns', 'insights'])
-    for name in ('campaigns', 'insights'):
-        if (primary[name].get('paging') or {}).get('next'):
-            raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
-    campaigns = primary['campaigns'].get('data')
-    insights = primary['insights'].get('data')
-    if not isinstance(campaigns, list) or not isinstance(insights, list):
-        raise ZeroPixelGuardrailError('Meta campaign/insight batch returned invalid data')
-
-    active_campaign_ids = [norm(row.get('id')) for row in campaigns if norm(row.get('id'))]
-    adsets: list[dict[str, Any]] = []
-    if active_campaign_ids:
-        requests = [{
-            'name': f'adsets:{campaign_id}',
-            'path': campaign_id + '/adsets',
-            'params': {
-                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
-                'limit': 50,
-            },
-        } for campaign_id in active_campaign_ids]
-        status, responses, _ = meta.graph_batch_get(token, requests)
-        if status != 200:
-            raise ZeroPixelGuardrailError(f'Meta ad-set batch failed: HTTP {status}')
-        adset_bodies = parse_batch(responses, [request['name'] for request in requests])
-        for name, body in adset_bodies.items():
-            if (body.get('paging') or {}).get('next'):
-                raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
-            rows = body.get('data')
-            if not isinstance(rows, list):
-                raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
-            adsets.extend(
-                row for row in rows
-                if isinstance(row, dict)
-                and norm(row.get('configured_status') or row.get('status')).upper() == 'ACTIVE'
-                and norm(row.get('effective_status')).upper() == 'ACTIVE'
+    by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
+    result: dict[str, Any] = {}
+    for name in ('account', 'campaigns', 'adsets', 'insights'):
+        response = by_name.get(name) or {}
+        code = int(response.get('code') or 0)
+        body = response.get('body')
+        if code != 200 or not isinstance(body, dict):
+            detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
+            raise ZeroPixelGuardrailError(
+                f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
             )
-    return {
-        'account': primary['account'],
-        'campaigns': campaigns,
-        'adsets': adsets,
-        'insights': insights,
-    }
+        if name == 'account':
+            result[name] = body
+            continue
+        if (body.get('paging') or {}).get('next'):
+            raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
+        data = body.get('data')
+        if not isinstance(data, list):
+            raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
+        result[name] = data
+    return result
 
 
 def plan_guardrail(
@@ -330,6 +299,26 @@ def build_issue_alert(issues: list[dict[str, Any]], run_at: dt.datetime) -> str:
     ])
 
 
+def classify_runtime_error(error: str) -> tuple[str, str]:
+    text = norm(error).lower()
+    if any(marker in text for marker in ('code": 17', 'error_subcode": 2446079', 'too many api calls', 'user request limit reached')):
+        return 'meta_read_rate_limited', 'Meta limitou temporariamente as leituras; o próximo tick tenta de novo sem repetir write.'
+    if 'requires pagination' in text:
+        return 'meta_snapshot_pagination_incomplete', 'Snapshot Meta excedeu o limite bounded; nenhum write foi autorizado.'
+    return 'source_or_runtime_unavailable', 'Leitura/mapping operacional incompleto; nenhum write novo foi autorizado.'
+
+
+def build_runtime_error_alert(run_at: dt.datetime, account_alias: str, error: str, confirmed_writes: int = 0) -> tuple[str, str]:
+    code, reason = classify_runtime_error(error)
+    message = '\n'.join([
+        '⚠️ **PIXEL ZERO — FALHA OPERACIONAL**',
+        f'Conta: **{account_alias}** · `{run_at.strftime("%H:%M ET")}`',
+        f'Pausas já confirmadas neste run: **{confirmed_writes}** · novos writes: **bloqueados**',
+        f'Motivo: `{code}` · {reason}',
+    ])
+    return code, message
+
+
 def post_with_fallback(lead_module, primary_thread_id: str, fallback_thread_id: str, message: str) -> dict[str, Any]:
     return lead_module.post_with_fallback(primary_thread_id, fallback_thread_id, message)
 
@@ -367,6 +356,10 @@ def main() -> int:
             'audit_path': str(audit_path),
         }
         atomic_json(audit_path, run)
+        lead_module = None
+        primary_thread_id = ''
+        fallback_thread_id = ''
+        account_alias = norm((operation.get('account') or {}).get('account_alias')) or 'Eggbev-US-CC-EN-01-G006'
         try:
             if not after_daily_gate(run_at, int(policy.get('after_hour_et') or 3)):
                 run.update({'ok': True, 'status': 'before_03_noop', 'finished_at_et': now_et().isoformat()})
@@ -474,6 +467,8 @@ def main() -> int:
                 'last_candidates': len(plan['candidates']),
                 'last_campaigns_paused_confirmed': run['campaigns_paused_confirmed'],
                 'last_audit_path': str(audit_path),
+                'last_runtime_error_key': None,
+                'last_runtime_error_alert_at_et': None,
             })
             atomic_json(STATE_PATH, state)
             atomic_json(audit_path, run)
@@ -490,7 +485,34 @@ def main() -> int:
                 }, ensure_ascii=False))
             return 0 if writes_ok else 2
         except Exception as exc:
-            run.update({'ok': False, 'error': f'{type(exc).__name__}: {exc}', 'finished_at_et': now_et().isoformat()})
+            error_text = f'{type(exc).__name__}: {exc}'
+            run.update({'ok': False, 'error': error_text, 'finished_at_et': now_et().isoformat()})
+            if args.apply and args.post_alerts and lead_module is not None and primary_thread_id and not (state.get('pending_alerts') or []):
+                error_key, error_message = build_runtime_error_alert(
+                    run_at,
+                    account_alias,
+                    error_text,
+                    sum(1 for row in run.get('writes') or [] if row.get('ok')),
+                )
+                last_alert_at = None
+                try:
+                    if state.get('last_runtime_error_alert_at_et'):
+                        last_alert_at = dt.datetime.fromisoformat(norm(state.get('last_runtime_error_alert_at_et'))).astimezone(NY)
+                except (TypeError, ValueError):
+                    last_alert_at = None
+                should_alert = (
+                    state.get('last_runtime_error_key') != error_key
+                    or last_alert_at is None
+                    or (run_at - last_alert_at).total_seconds() >= 21600
+                )
+                if should_alert:
+                    delivery = post_with_fallback(lead_module, primary_thread_id, fallback_thread_id, error_message)
+                    run['deliveries'].append({'type': 'runtime_error', **delivery})
+                    if delivery.get('ok'):
+                        state['last_runtime_error_key'] = error_key
+                        state['last_runtime_error_alert_at_et'] = run_at.isoformat()
+                    else:
+                        state.setdefault('pending_alerts', []).append({'message': error_message, 'created_at_et': run_at.isoformat()})
             atomic_json(audit_path, run)
             state.update({'last_run_at_et': run_at.isoformat(), 'last_ok': False, 'last_error': str(exc), 'last_audit_path': str(audit_path)})
             atomic_json(STATE_PATH, state)

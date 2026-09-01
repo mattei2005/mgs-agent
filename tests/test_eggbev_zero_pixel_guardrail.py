@@ -115,9 +115,20 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
         self.assertIn('Eggbev PV U = 0', message)
         self.assertIn('Pausadas/readback: **1/1**', message)
 
-    def test_live_snapshot_uses_two_bounded_batches(self):
+    def test_runtime_rate_limit_alert_is_sanitized_and_four_lines(self):
+        code, message = guardrail.build_runtime_error_alert(
+            dt.datetime(2026, 9, 1, 3, 8, tzinfo=NY),
+            'Eggbev-US-CC-EN-01-G006',
+            'Meta batch child insights failed: HTTP 400; {"code": 17, "fbtrace_id": "secret-trace"}',
+        )
+        self.assertEqual(code, 'meta_read_rate_limited')
+        self.assertEqual(len(message.splitlines()), 4)
+        self.assertNotIn('secret-trace', message)
+        self.assertIn('novos writes: **bloqueados**', message)
+
+    def test_live_snapshot_uses_one_bounded_batch(self):
         class FakeMeta:
-            request_batches = []
+            requests = []
 
             @staticmethod
             def safe_meta_error(body):
@@ -125,31 +136,16 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
 
             @classmethod
             def graph_batch_get(cls, token, requests):
-                cls.request_batches.append(requests)
+                cls.requests = requests
                 responses = []
                 for request in requests:
-                    if request['name'] == 'account':
-                        body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'}
-                    elif request['name'] == 'campaigns':
-                        body = {'data': [{'id': 'c1'}]}
-                    elif request['name'] == 'insights':
-                        body = {'data': []}
-                    else:
-                        body = {'data': [{
-                            'id': 's1',
-                            'campaign_id': 'c1',
-                            'status': 'ACTIVE',
-                            'configured_status': 'ACTIVE',
-                            'effective_status': 'ACTIVE',
-                        }]}
+                    body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'} if request['name'] == 'account' else {'data': []}
                     responses.append({'name': request['name'], 'code': 200, 'body': body})
                 return 200, responses, {}
 
         snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
-        self.assertEqual(len(FakeMeta.request_batches), 2)
-        self.assertEqual([len(batch) for batch in FakeMeta.request_batches], [3, 1])
+        self.assertEqual(len(FakeMeta.requests), 4)
         self.assertEqual(set(snapshot), {'account', 'campaigns', 'adsets', 'insights'})
-        self.assertEqual(len(snapshot['adsets']), 1)
 
     def test_live_snapshot_fails_closed_when_batch_page_is_incomplete(self):
         class FakeMeta:
