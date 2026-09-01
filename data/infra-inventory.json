@@ -11049,6 +11049,21 @@
       "updated_at": "2026-09-01T11:16:17-04:00",
       "source_report": "discord:#alerts-infra/1544365803283943596",
       "report_readback": "HTTP 200; message/channel match; content empty; one embed; zero user/role mentions; canonical 8 fields PASS."
+    },
+    {
+      "id": "zeus-vps-backup-governance-npm-cache-verify-pitfall-20260901",
+      "agent": "zeus",
+      "type": "skill_reference_update",
+      "skill": "vps-maintenance-and-backup-governance",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md"
+      ],
+      "purpose": "Prevent treating npm cache verify as read-only during VPS storage audits because npm may garbage-collect stale cache objects.",
+      "sha256": "0e1b329714308fc4e56a4fe66da87a0cd7da2bff5f5154dee0b8fea396b1c918",
+      "status": "active_synced",
+      "validation": "Live and versioned mirror byte-identical; marker count 1/1; SHA-256 readback matched.",
+      "updated_at": "2026-09-01T12:15:11-04:00"
     }
   ],
   "profile_skill_references": [
