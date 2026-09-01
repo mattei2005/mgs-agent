@@ -140,6 +140,70 @@ def promoted_object_matches(adset: dict[str, Any], policy: dict[str, Any]) -> bo
     ))
 
 
+def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
+    """Read account, active objects and today's campaign insights in one batch."""
+    status, responses, _ = meta.graph_batch_get(token, [
+        {
+            'name': 'account',
+            'path': act,
+            'params': {'fields': 'id,name,account_status,currency,timezone_name,disable_reason'},
+        },
+        {
+            'name': 'campaigns',
+            'path': act + '/campaigns',
+            'params': {
+                'fields': 'id,name,status,effective_status,configured_status,daily_budget,updated_time',
+                'effective_status': ['ACTIVE'],
+                'limit': 200,
+            },
+        },
+        {
+            'name': 'adsets',
+            'path': act + '/adsets',
+            'params': {
+                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
+                'effective_status': ['ACTIVE'],
+                'limit': 200,
+            },
+        },
+        {
+            'name': 'insights',
+            'path': act + '/insights',
+            'params': {
+                'level': 'campaign',
+                'date_preset': 'today',
+                'fields': 'campaign_id,campaign_name,spend,actions',
+                'action_breakdowns': 'action_target_id',
+                'limit': 200,
+            },
+        },
+    ])
+    if status != 200 or not isinstance(responses, list):
+        raise ZeroPixelGuardrailError(f'Meta batch preflight failed: HTTP {status}')
+    by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
+    result: dict[str, Any] = {}
+    for name in ('account', 'campaigns', 'adsets', 'insights'):
+        response = by_name.get(name) or {}
+        code = int(response.get('code') or 0)
+        body = response.get('body')
+        if code != 200 or not isinstance(body, dict):
+            detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
+            raise ZeroPixelGuardrailError(
+                f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
+            )
+        if name == 'account':
+            result[name] = body
+            continue
+        paging = body.get('paging') or {}
+        if paging.get('next'):
+            raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
+        data = body.get('data')
+        if not isinstance(data, list):
+            raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
+        result[name] = data
+    return result
+
+
 def plan_guardrail(
     campaigns: list[dict[str, Any]],
     adsets: list[dict[str, Any]],
@@ -318,34 +382,16 @@ def main() -> int:
             }
             account_id = norm((operation.get('account') or {}).get('account_id'))
             act = 'act_' + account_id
-            status, live_account, _ = meta.graph_get(act, token, {
-                'fields': 'id,name,account_status,currency,timezone_name,disable_reason',
-            })
-            if status != 200 or not isinstance(live_account, dict):
-                raise ZeroPixelGuardrailError(f'Meta account preflight failed: HTTP {status}')
+            snapshot = fetch_live_snapshot(meta, token, act)
+            live_account = snapshot['account']
             if live_account.get('currency') != 'USD' or live_account.get('timezone_name') != 'America/New_York' or int(live_account.get('account_status') or 0) != 1:
                 raise ZeroPixelGuardrailError('Meta account identity/currency/timezone/status preflight failed')
-
-            campaigns = lead_module.fetch_all_meta(meta, token, act + '/campaigns', {
-                'fields': 'id,name,status,effective_status,configured_status,daily_budget,updated_time',
-                'effective_status': ['ACTIVE'],
-                'limit': 200,
-            })
-            adsets = lead_module.fetch_all_meta(meta, token, act + '/adsets', {
-                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
-                'effective_status': ['ACTIVE'],
-                'limit': 200,
-            })
-            insights = lead_module.fetch_all_meta(meta, token, act + '/insights', {
-                'level': 'campaign',
-                'date_preset': 'today',
-                'fields': 'campaign_id,campaign_name,spend,actions',
-                'action_breakdowns': 'action_target_id',
-                'limit': 200,
-            })
+            campaigns = snapshot['campaigns']
+            adsets = snapshot['adsets']
+            insights = snapshot['insights']
             plan = plan_guardrail(campaigns, adsets, insights, policy)
             run['meta_readback'] = {
-                'account_http_status': status,
+                'account_http_status': 200,
                 'active_campaigns': len(campaigns),
                 'active_adsets': len(adsets),
                 'campaign_insight_rows': len(insights),

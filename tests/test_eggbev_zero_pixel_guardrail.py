@@ -115,6 +115,38 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
         self.assertIn('Eggbev PV U = 0', message)
         self.assertIn('Pausadas/readback: **1/1**', message)
 
+    def test_live_snapshot_uses_one_bounded_batch(self):
+        class FakeMeta:
+            requests = []
+
+            @classmethod
+            def graph_batch_get(cls, token, requests):
+                cls.requests = requests
+                responses = []
+                for request in requests:
+                    body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'} if request['name'] == 'account' else {'data': []}
+                    responses.append({'name': request['name'], 'code': 200, 'body': body})
+                return 200, responses, {}
+
+        snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
+        self.assertEqual(len(FakeMeta.requests), 4)
+        self.assertEqual(set(snapshot), {'account', 'campaigns', 'adsets', 'insights'})
+
+    def test_live_snapshot_fails_closed_when_batch_page_is_incomplete(self):
+        class FakeMeta:
+            @staticmethod
+            def graph_batch_get(token, requests):
+                responses = []
+                for request in requests:
+                    body: dict = {'id': 'account'} if request['name'] == 'account' else {'data': [], 'paging': {}}
+                    if request['name'] == 'campaigns':
+                        body['paging'] = {'next': 'redacted'}
+                    responses.append({'name': request['name'], 'code': 200, 'body': body})
+                return 200, responses, {}
+
+        with self.assertRaises(guardrail.ZeroPixelGuardrailError):
+            guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
+
 
 if __name__ == '__main__':
     unittest.main()
