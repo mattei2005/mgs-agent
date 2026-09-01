@@ -265,6 +265,21 @@ class EggbevCloneV3Tests(unittest.TestCase):
         wrong_time['start_time'] = next_midnight_et(datetime.now(ZoneInfo('America/New_York'))).replace(hour=1).isoformat()
         with self.assertRaisesRegex(ManifestError, '00:00'):
             validate_account_policy(Manifest.from_dict(manifest_payload(wrong_time)), config)
+    def test_account_policy_blocks_restricted_page_before_execute(self):
+        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+        campaign = {
+            'idempotency_key': 'policy-restricted-page',
+            'app_key': 'mgs-meta-app-current',
+            'account_id': ACCOUNT_ID,
+            'mode': 'pure_clone',
+            'source_campaign_id': 'source-campaign',
+            'name': '165 - Tina Walter - ENG - US - (pg_5071) C003 DUP04',
+            'start_time': future_midnight(),
+            'status': 'ACTIVE',
+            'campaign_updates': {'daily_budget': '4500'},
+        }
+        with self.assertRaisesRegex(ManifestError, 'inelegível por histórico de restrição'):
+            validate_account_policy(Manifest.from_dict(manifest_payload(campaign)), config)
 
 
 if __name__ == '__main__':

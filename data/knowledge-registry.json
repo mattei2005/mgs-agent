@@ -2854,6 +2854,27 @@
       "updated_at": "2026-08-30T01:06:11+00:00"
     },
     {
+      "canonical_key": "eggbev.page_eligibility.restricted_history",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning",
+        "eggbev-campaign-creation",
+        "eggbev-roas-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops/eggbev",
+      "effective_at": "2026-08-31T20:12:35-04:00",
+      "id": "eggbev-page-restriction-eligibility-policy-v1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev restricted Page permanent eligibility gate",
+      "updated_at": "2026-09-01T00:28:35+00:00"
+    },
+    {
       "canonical_key": "strategy.eggbev-us-cc-en-bot.route-skill-map",
       "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
       "consumers": [
@@ -3199,5 +3220,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T00:03:13+00:00"
+  "updated_at": "2026-09-01T00:28:35+00:00"
 }

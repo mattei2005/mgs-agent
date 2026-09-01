@@ -335,6 +335,23 @@ class Phase3RecyclingTests(unittest.TestCase):
         self.assertEqual(blocked['campaign_actions'], [])
         self.assertEqual(blocked['excluded_campaigns'][0]['reason'], 'page_leads_strictly_over_5000')
 
+    def test_restricted_page_history_overrides_roas_and_leads_eligibility(self):
+        meta, sb = self.fixture(roas=9.0, leads=0)
+        meta['phase3_ads'][0]['creative']['url_tags'] = 'utm_campaign=pg_5071'
+        meta['phase3_ads'][0]['creative']['object_story_spec']['page_id'] = '632774769923890'
+        sb['page_index'] = {
+            'pg_5071': [{
+                'UTM_CAMPAIGN': 'pg_5071',
+                'FB_PAGE_ID': '632774769923890',
+                'PAGE_NAME': 'Tina Walter',
+                'LEADS': 0,
+            }]
+        }
+        state = common.default_state(dt.date(2026, 8, 30))
+        plan = common.plan_phase3_recycling(meta, sb, state, '2026-08-29', .38, chooser=lambda values: 4500)
+        self.assertEqual(plan['campaign_actions'], [])
+        self.assertEqual(plan['excluded_campaigns'][0]['reason'], 'page_restriction_history_permanent_ineligible')
+
     def test_zero_spend_never_enters_previous_day_recycling(self):
         plan = self.plan(spend=0, roas=9)
         self.assertEqual(plan['decisions'], [])
