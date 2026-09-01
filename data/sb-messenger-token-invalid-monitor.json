@@ -102,7 +102,11 @@
     678412,
     678435,
     678458,
-    678670
+    678670,
+    679023,
+    679040,
+    679061,
+    679080
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -374,9 +378,9 @@
     "digital-trust|financeadx|24|273": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-31T12:12:43.000Z",
+        "created_at": "2026-09-01T16:11:48.000Z",
         "domain": "financeadx",
-        "notification_id": 678435,
+        "notification_id": 679080,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 2,
@@ -402,7 +406,8 @@
       ],
       "notification_ids": [
         677181,
-        678435
+        678435,
+        679080
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -576,9 +581,9 @@
     "digital-trust|fincgriffin|105|1530": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-31T12:11:18.000Z",
+        "created_at": "2026-09-01T16:10:31.000Z",
         "domain": "fincgriffin",
-        "notification_id": 678374,
+        "notification_id": 679023,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -600,7 +605,8 @@
       ],
       "notification_ids": [
         677110,
-        678374
+        678374,
+        679023
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -1038,9 +1044,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-31T12:11:49.000Z",
+        "created_at": "2026-09-01T16:10:54.000Z",
         "domain": "spe",
-        "notification_id": 678412,
+        "notification_id": 679061,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1062,7 +1068,8 @@
         "1544198299081379932"
       ],
       "notification_ids": [
-        678412
+        678412,
+        679061
       ],
       "opened_at": "2026-08-31T08:27:17-04:00",
       "repeat_count": 0,
@@ -1072,9 +1079,9 @@
     "digital-trust|topfeed|6|903": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-31T12:11:19.000Z",
+        "created_at": "2026-09-01T16:10:32.000Z",
         "domain": "topfeed",
-        "notification_id": 678391,
+        "notification_id": 679040,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -1099,7 +1106,8 @@
       ],
       "notification_ids": [
         677129,
-        678391
+        678391,
+        679040
       ],
       "opened_at": "2026-08-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -1174,17 +1182,20 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-01T11:57:15-04:00",
+  "last_check": "2026-09-01T12:12:19-04:00",
   "last_delivery": {
-    "at": "2026-08-31T20:12:14-04:00",
+    "at": "2026-09-01T12:12:19-04:00",
     "cursor_ids": [
-      678670
+      679023,
+      679040,
+      679061,
+      679080
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 678670,
+  "last_seen_id": 679080,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,

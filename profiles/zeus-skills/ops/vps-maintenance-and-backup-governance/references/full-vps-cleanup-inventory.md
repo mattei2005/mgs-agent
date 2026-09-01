@@ -129,6 +129,8 @@ For creative/media staging, remote existence is proven by the canonical Shared D
 
 ## 6. Housekeeping dry-run pitfalls
 
+`npm cache verify` is **not** a read-only verification command: npm may garbage-collect stale cache objects while validating the cache. During discovery, size npm caches with metadata-only filesystem reads and use non-mutating listings where needed. Run `npm cache verify` only inside an authorized cache-cleanup scope, capture its reported garbage-collected bytes, and verify the post-command cache size and filesystem delta before reporting the effect.
+
 With `set -Eeuo pipefail`:
 
 - `producer | head -N` can fail when `head` closes early and the producer receives SIGPIPE. Bound output inside the producer instead, e.g. `awk 'condition && shown < N { print; shown++ }'`.
