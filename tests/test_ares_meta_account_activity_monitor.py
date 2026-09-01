@@ -171,6 +171,23 @@ class ActivityMonitorTests(unittest.TestCase):
             rows = monitor.fixture_events(path)
             self.assertEqual(len(rows), 1)
 
+    def test_fetch_activities_defers_meta_429(self):
+        class FakeMeta:
+            @staticmethod
+            def graph_get(path, token, params):
+                return 429, {
+                    'error': {
+                        'reason': 'business_usage_soft_limit',
+                        'retry_after_seconds': 321,
+                    }
+                }, {}
+
+        now = monitor.parse_time('2026-09-01T21:00:00Z')
+        with self.assertRaises(monitor.MetaActivitiesDeferred) as caught:
+            monitor.fetch_activities(FakeMeta, 'redacted', '123', now, now, 1)
+        self.assertEqual(caught.exception.reason, 'business_usage_soft_limit')
+        self.assertEqual(caught.exception.retry_after_seconds, 321)
+
 
 if __name__ == '__main__':
     unittest.main()

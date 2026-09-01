@@ -32,6 +32,13 @@ ENGINE_AUDIT_ROOT = BASE / "data/ares/meta-ads/engine-v3/audit"
 ENGINE_CHECKPOINT_ROOT = BASE / "data/ares/meta-ads/engine-v3/state/checkpoints"
 EVENT_AUDIT = BASE / "logs/events-audit.jsonl"
 
+
+class MetaActivitiesDeferred(RuntimeError):
+    def __init__(self, retry_after_seconds: int = 0, reason: str = "meta_rate_limit") -> None:
+        self.retry_after_seconds = max(0, int(retry_after_seconds or 0))
+        self.reason = str(reason or "meta_rate_limit")
+        super().__init__(f"Meta activities deferred: {self.reason}")
+
 SYSTEM_LIFECYCLE_EVENTS = {
     "first_delivery_event",
     "ad_review_approved",
@@ -295,6 +302,11 @@ def fetch_activities(meta, token: str, account_id: str, since: dt.datetime, unti
         if after:
             params["after"] = after
         status, body, _ = meta.graph_get(path, token, params)
+        if status == 429:
+            error = body.get("error") if isinstance(body, dict) else None
+            retry_after = int((error.get("retry_after_seconds") if isinstance(error, dict) else 0) or 0)
+            reason = str((error.get("reason") if isinstance(error, dict) else "meta_rate_limit") or "meta_rate_limit")
+            raise MetaActivitiesDeferred(retry_after, reason)
         if status != 200 or not isinstance(body, dict):
             raise RuntimeError(f"Meta activities failed: HTTP {status}")
         batch = body.get("data") or []
@@ -515,7 +527,30 @@ def main() -> int:
         meta = load_module(META_COMMON, "ares_meta_activity_common")
         token, field = meta.get_token_from_1password(account.get("token_1password_item"))
         credential_report = {"item": account.get("token_1password_item"), "field": field, "token_len": len(token)}
-        events, pages = fetch_activities(meta, token, account_id, since, now, int(config.get("max_pages") or 8))
+        try:
+            events, pages = fetch_activities(meta, token, account_id, since, now, int(config.get("max_pages") or 8))
+        except MetaActivitiesDeferred as exc:
+            mode_name = "baseline" if args.baseline else ("apply" if args.apply else "dry_run")
+            if not args.dry_run:
+                append_jsonl(EVENT_AUDIT, {
+                    "ts": iso_utc(now),
+                    "event": "meta_account_activity_monitor_deferred",
+                    "agent": "ares",
+                    "operation_id": operation.get("operation_id"),
+                    "account_id": account_id,
+                    "mode": mode_name,
+                    "reason": exc.reason,
+                    "retry_after_seconds": exc.retry_after_seconds,
+                })
+            print(json.dumps({
+                "ok": True,
+                "mode": mode_name,
+                "status": "deferred",
+                "reason": exc.reason,
+                "retry_after_seconds": exc.retry_after_seconds,
+                "last_successful_fetch_at": state.get("last_successful_fetch_at"),
+            }, ensure_ascii=False, separators=(",", ":")))
+            return 0
 
     run = {
         "schema_version": "1.0",
