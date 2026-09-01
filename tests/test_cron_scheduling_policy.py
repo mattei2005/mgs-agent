@@ -19,6 +19,7 @@ class CronSchedulingPolicyTests(unittest.TestCase):
             "Baselines contínuas e densas",
             "todos os 60 resíduos de minuto",
             "menor contenção de baseline",
+            "stagger determinístico em segundos",
             "duração",
             "lock",
             "readback exato",

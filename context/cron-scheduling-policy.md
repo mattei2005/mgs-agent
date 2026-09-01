@@ -43,6 +43,7 @@ Eles são baseline excepcional e obrigatória no relatório de colisão. A exce�
 - provar que não disputa o mesmo lock, arquivo, conta, API, browser, state ou writer;
 - possuir lock/lease próprio quando houver risco de sobreposição;
 - registrar no audit quais baselines inevitáveis coincidem;
+- quando baselines densas tornarem a separação por minuto impossível, aplicar stagger determinístico em segundos somente se preservar a janela operacional, o timeout e o lock; registrar o atraso físico no contrato e no readback;
 - não adotar frequência a cada minuto ou outra cadência densa sem necessidade explícita, aprovação operacional e isolamento comprovado.
 
 ## 5. Write seguro e readback
