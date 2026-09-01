@@ -903,16 +903,42 @@ def plan_campaign_budget_scales(campaigns: list[dict[str, Any]], decisions: list
 
 
 def source_gate(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], phase: str) -> dict[str, Any]:
+    """Gate write lanes without allowing Smart Bidding lag to stop ROAS cuts.
+
+    Phase 1/2 cuts are decided exclusively from live Meta Purchase ROAS and keep
+    running when Smart Bidding reporting is stale or unavailable. Reactivations
+    remain fail-closed because they depend on reconciliation/eligibility context.
+    Phase 3 keeps the full Smart Bidding freshness and Page mapping gate.
+    """
+    if phase in {'PHASE_1', 'PHASE_2'}:
+        reactivation_reasons: list[str] = []
+        if (meta_bundle.get('native_rules') or {}).get('conflict', {}).get('enabled'):
+            reactivation_reasons.append('native_rule_ADS_ZERO_RESULTS_enabled')
+        if meta_bundle.get('manual_review'):
+            reactivation_reasons.append('manual_intervention_review_required')
+        if not (sb_bundle.get('ready') or sb_bundle.get('economic_ready')):
+            reactivation_reasons.append(
+                sb_bundle.get('reason') or sb_bundle.get('economic_reason') or 'smart_bidding_not_ready'
+            )
+        return {
+            'write_ready': True,
+            'cut_write_ready': True,
+            'reactivation_write_ready': not reactivation_reasons,
+            'reasons': reactivation_reasons,
+            'partial_write_policy': 'Meta Purchase ROAS cuts continue; only reactivations and Smart Bidding indicators fail closed',
+            'freshness_evidence': (
+                'Smart Bidding /estimated/delay'
+                if bool((sb_bundle.get('economic_freshness') or {}).get('ready'))
+                else None
+            ),
+        }
+
     reasons: list[str] = []
-    if phase not in {'PHASE_1', 'PHASE_2', 'PHASE_3'}:
+    if phase != 'PHASE_3':
         reasons.append('observation_only_before_08' if phase == 'OBSERVE' else 'not_an_action_cycle')
     if (meta_bundle.get('native_rules') or {}).get('conflict', {}).get('enabled'):
         reasons.append('native_rule_ADS_ZERO_RESULTS_enabled')
-    if phase in {'PHASE_1', 'PHASE_2'} and meta_bundle.get('manual_review'):
-        reasons.append('manual_intervention_review_required')
     economic_freshness_ready = bool((sb_bundle.get('economic_freshness') or {}).get('ready'))
-    if phase in {'PHASE_1', 'PHASE_2'} and not (sb_bundle.get('ready') or sb_bundle.get('economic_ready')):
-        reasons.append(sb_bundle.get('reason') or sb_bundle.get('economic_reason') or 'smart_bidding_not_ready')
     if phase == 'PHASE_3':
         if not economic_freshness_ready:
             reasons.append(sb_bundle.get('economic_reason') or 'smart_bidding_estimated_delay_not_ready')
@@ -920,7 +946,37 @@ def source_gate(meta_bundle: dict[str, Any], sb_bundle: dict[str, Any], phase: s
             reasons.append('smart_bidding_messenger_pages_absent')
         if meta_bundle.get('phase3_object_errors'):
             reasons.append('phase3_meta_object_readback_incomplete')
-    return {'write_ready': not reasons, 'reasons': reasons, 'freshness_evidence': 'Smart Bidding /estimated/delay' if economic_freshness_ready else None}
+    return {
+        'write_ready': not reasons,
+        'cut_write_ready': False,
+        'reactivation_write_ready': not reasons,
+        'reasons': reasons,
+        'freshness_evidence': 'Smart Bidding /estimated/delay' if economic_freshness_ready else None,
+    }
+
+
+def apply_action_lane_gate(plan: dict[str, Any], gate: dict[str, Any]) -> dict[str, Any]:
+    """Materialize selective no-writes before execution and human reporting."""
+    gated = dict(plan)
+    decisions: list[dict[str, Any]] = []
+    blockers = list(gate.get('reasons') or [])
+    for source in plan.get('decisions') or []:
+        row = dict(source)
+        if row.get('action') == 'REACTIVATE_AD' and not gate.get('reactivation_write_ready'):
+            row.update({
+                'planned_action': 'REACTIVATE_AD',
+                'action': 'KEEP',
+                'reason': 'reactivation_blocked_fail_closed',
+                'reactivation_blockers': blockers,
+            })
+        decisions.append(row)
+    gated['decisions'] = decisions
+    counts = dict(plan.get('counts') or {})
+    counts['pause_ads'] = sum(1 for row in decisions if row.get('action') == 'PAUSE_AD')
+    counts['reactivate_ads'] = sum(1 for row in decisions if row.get('action') == 'REACTIVATE_AD')
+    counts['reactivations_blocked'] = sum(1 for row in decisions if row.get('planned_action') == 'REACTIVATE_AD')
+    gated['counts'] = counts
+    return gated
 
 
 def reconcile_status_write(meta, token: str, object_id: str, desired: str, fields: str = 'id,name,status,effective_status,configured_status,updated_time') -> dict[str, Any]:

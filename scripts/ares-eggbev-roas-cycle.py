@@ -970,7 +970,7 @@ def render_report(run: dict[str, Any]) -> str:
             '🔁 **Ação da Fase 3:** reciclagem dos vencedores do dia anterior; Fase 1 e cortes normais retornam às 05:00 ET.',
         ]
     else:
-        title_emoji = '⚠️' if (reasons and phase != 'OBSERVE') else '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '🚀' if counts.get('budget_scale_candidates') else '✅'
+        title_emoji = '🛑' if counts.get('pause_ads') else '♻️' if counts.get('reactivate_ads') else '⚠️' if (reasons and phase != 'OBSERVE') else '🚀' if counts.get('budget_scale_candidates') else '✅'
         lines = [
             f"## {title_emoji} Corte & ROAS • {time_label} ET",
             f"**{_phase_label(phase)} • {mode} • limite {common.fmt_number(run.get('threshold'))}**",
@@ -980,9 +980,19 @@ def render_report(run: dict[str, Any]) -> str:
             f"⏱️ **Atraso da dash:** `{dashboard_delay_label}` • limite `{dashboard_limit_label}` • {dashboard_delay_status}",
         ]
     if phase == 'OBSERVE':
-        lines.append('👁️ Formação de dados: às 05:00/06:00 o relatório continua, mas nenhum corte ou reativação é executado; ações começam às 08:00 ET.')
+        lines.append('👁️ Formação de dados até 05:00 ET; nenhum corte ou reativação é executado fora dos horários aprovados.')
     elif phase == 'RESET':
         lines.append('🔄 Reset local do threshold; nenhuma leitura ou alteração Meta necessária.')
+    elif reasons and phase in {'PHASE_1', 'PHASE_2'}:
+        reason_labels = {
+            'manual_intervention_review_required': 'alterações manuais/externas detectadas; revisão do Nicolas necessária',
+            'smart_bidding_freshness_unverifiable': 'Smart Bidding sem atualização verificável dentro do limite de 2h',
+            'smart_bidding_data_stale_over_2h': 'Smart Bidding acima do atraso informativo de 2h',
+        }
+        lines.append('⚠️ **Reativações/indicadores SB bloqueados:** ' + '; '.join(
+            reason_labels.get(common.norm(reason), common.norm(reason) or 'motivo não informado')
+            for reason in reasons
+        ) + '. **Os cortes por Meta Purchase ROAS continuam ativos.**')
     elif reasons:
         reason_labels = {
             'manual_intervention_review_required': 'alterações manuais/externas detectadas; revisão do Nicolas necessária',
@@ -1256,6 +1266,8 @@ def main() -> int:
                 plan['budget_scale_candidates'] = scale_candidates
                 plan.setdefault('counts', {})['budget_scale_candidates'] = len(scale_candidates)
             gate = common.source_gate(meta_bundle, sb_bundle, phase)
+            if phase in {'PHASE_1', 'PHASE_2'}:
+                plan = common.apply_action_lane_gate(plan, gate)
             campaign_reporting = build_campaign_reporting(meta_bundle, sb_bundle, plan)
             run.update({
                 'meta_readback': {

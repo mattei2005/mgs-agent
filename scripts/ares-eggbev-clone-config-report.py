@@ -38,7 +38,7 @@ def check() -> dict:
         'prompt_exists': PROMPT_PATH.exists() and bool(PROMPT_PATH.read_text().strip()),
         'account_registered': ACCOUNT_ID in (engine.get('accounts') or {}),
         'account_alias_matches': (engine.get('accounts') or {}).get(ACCOUNT_ID, {}).get('alias') == 'Eggbev-US-CC-EN-01-G006',
-        'engine_release_3_4': engine.get('release_version') == operation_v3.get('release_version') == '3.4.1',
+        'engine_release_3_4': engine.get('release_version') == operation_v3.get('release_version') == '3.4.2',
         'engine_modes_complete': expected_modes <= engine_modes,
         'account_safe_modes_enabled': {'pure_clone', 'clone_prestaged'} <= account_modes,
         'page_switch_fail_closed_before_write': (

@@ -1833,14 +1833,14 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-maintenance-20260901",
-      "next_step": "Congelar versões APT/Corepack e criar rollback validado antes da mutação.",
+      "next_step": "Aguardar Rodolfo confirmar o grafo atualizado de 20 pacotes APT mais Corepack 0.36.0; nenhuma mutação em /usr foi feita.",
       "objective": "Atualizar todos os pacotes pendentes da VPS de forma controlada, preservando Hermes.",
       "source": "discord:message:1544419069690904686",
-      "state": "authorized_preflight",
+      "state": "blocked_scope_drift_confirmation",
       "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-01T18:52:01+00:00"
+      "updated_at": "2026-09-01T18:53:40+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T18:52:01+00:00"
+  "updated_at": "2026-09-01T18:53:40+00:00"
 }
