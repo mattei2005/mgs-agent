@@ -95,29 +95,6 @@ def campaign_insights(common, meta, token: str) -> dict[str, dict[str, Any]]:
     return result
 
 
-def batch_get_required(meta, token: str, requests: list[dict[str, Any]]) -> dict[str, Any]:
-    if not requests:
-        return {}
-    status, rows, _headers = meta.graph_batch_get(token, requests)
-    if status != 200 or not isinstance(rows, list) or len(rows) != len(requests):
-        raise RuntimeError('Graph batch readback incompleto')
-    by_name = {str(item['name']): item for item in requests}
-    result: dict[str, Any] = {}
-    for row in rows:
-        name = str(row.get('name') or '')
-        code = int(row.get('code') or 0)
-        body = row.get('body')
-        if code != 200 or not isinstance(body, dict):
-            request = by_name.get(name)
-            if not request:
-                raise RuntimeError(f'Graph batch child desconhecido: {name}')
-            code, body, _child_headers = meta.graph_get(request['path'], token, request.get('params') or {})
-        if code != 200 or not isinstance(body, dict):
-            raise RuntimeError(f'Graph child readback inválido: {name}; HTTP {code}')
-        result[name] = body
-    return result
-
-
 def non_deleted(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [row for row in rows if exact_status(row) not in {'DELETED', 'ARCHIVED'}]
 
@@ -127,18 +104,21 @@ def collect_scope(common, meta, token: str) -> tuple[list[dict[str, Any]], list[
     if int(account.get('account_status') or 0) != 1 or account.get('currency') != 'USD' or account.get('timezone_name') != 'America/New_York':
         raise RuntimeError('identidade da conta não confere')
     insights = campaign_insights(common, meta, token)
-    campaign_reads = batch_get_required(meta, token, [
-        {
-            'name': f'campaign:{campaign_id}',
-            'path': campaign_id,
-            'params': {'fields': 'id,name,status,effective_status,configured_status,start_time,daily_budget,updated_time'},
-        }
-        for campaign_id in sorted(insights)
-    ])
+    account_campaigns = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/campaigns', {
+        'fields': 'id,name,status,effective_status,configured_status,start_time,daily_budget,updated_time',
+        'limit': 500,
+    })
+    campaigns_by_id = {str(row.get('id') or ''): row for row in account_campaigns if row.get('id')}
+    missing_campaign_ids = sorted(set(insights) - set(campaigns_by_id))
+    for campaign_id in missing_campaign_ids:
+        campaigns_by_id[campaign_id] = graph_get_required(
+            meta, token, campaign_id,
+            'id,name,status,effective_status,configured_status,start_time,daily_budget,updated_time',
+        )
     live_campaigns: dict[str, dict[str, Any]] = {}
     excluded: list[dict[str, Any]] = []
     for campaign_id in sorted(insights):
-        campaign = campaign_reads[f'campaign:{campaign_id}']
+        campaign = campaigns_by_id[campaign_id]
         status = exact_status(campaign)
         if status in {'DELETED', 'ARCHIVED'}:
             excluded.append({
@@ -149,26 +129,29 @@ def collect_scope(common, meta, token: str) -> tuple[list[dict[str, Any]], list[
             })
             continue
         live_campaigns[campaign_id] = campaign
-    hierarchy_requests: list[dict[str, Any]] = []
-    for campaign_id in sorted(live_campaigns):
-        hierarchy_requests.extend([
-            {
-                'name': f'adsets:{campaign_id}',
-                'path': f'{campaign_id}/adsets',
-                'params': {'fields': 'id,name,status,effective_status,configured_status,updated_time', 'limit': 100},
-            },
-            {
-                'name': f'ads:{campaign_id}',
-                'path': f'{campaign_id}/ads',
-                'params': {'fields': 'id,name,status,effective_status,configured_status,adset_id,campaign_id,updated_time,creative{id,object_story_spec,url_tags}', 'limit': 100},
-            },
-        ])
-    hierarchy = batch_get_required(meta, token, hierarchy_requests)
+    account_adsets = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/adsets', {
+        'fields': 'id,name,status,effective_status,configured_status,campaign_id,updated_time',
+        'limit': 500,
+    })
+    account_ads = common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/ads', {
+        'fields': 'id,name,status,effective_status,configured_status,adset_id,campaign_id,updated_time,creative{id,object_story_spec,url_tags}',
+        'limit': 500,
+    })
+    adsets_by_campaign: dict[str, list[dict[str, Any]]] = {}
+    ads_by_campaign: dict[str, list[dict[str, Any]]] = {}
+    for row in account_adsets:
+        campaign_id = str(row.get('campaign_id') or '')
+        if campaign_id in live_campaigns:
+            adsets_by_campaign.setdefault(campaign_id, []).append(row)
+    for row in account_ads:
+        campaign_id = str(row.get('campaign_id') or '')
+        if campaign_id in live_campaigns:
+            ads_by_campaign.setdefault(campaign_id, []).append(row)
     denylist = load_denylist()
     scope: list[dict[str, Any]] = []
     for campaign_id, campaign in sorted(live_campaigns.items()):
-        adsets = non_deleted([row for row in hierarchy[f'adsets:{campaign_id}'].get('data') or [] if isinstance(row, dict)])
-        ads = non_deleted([row for row in hierarchy[f'ads:{campaign_id}'].get('data') or [] if isinstance(row, dict)])
+        adsets = non_deleted([row for row in adsets_by_campaign.get(campaign_id, []) if isinstance(row, dict)])
+        ads = non_deleted([row for row in ads_by_campaign.get(campaign_id, []) if isinstance(row, dict)])
         if not adsets or not ads:
             raise RuntimeError('campanha com gasto sem hierarquia elegível')
         adset_ids = {str(row.get('id') or '') for row in adsets}
@@ -235,31 +218,35 @@ def reconcile_status(common, meta, token: str, object_id: str, preflight: dict[s
     return retry
 
 
-def final_readback(meta, token: str, scope: list[dict[str, Any]]) -> dict[str, Any]:
-    objects: list[tuple[str, str]] = []
-    for item in scope:
-        objects.append(('campaigns', str(item['campaign']['id'])))
-        objects.extend(('adsets', str(row['id'])) for row in item['adsets'])
-        objects.extend(('ads', str(row['id'])) for row in item['ads'])
-    live_by_key: dict[str, Any] = {}
-    for offset in range(0, len(objects), 50):
-        chunk = objects[offset:offset + 50]
-        live_by_key.update(batch_get_required(meta, token, [
-            {
-                'name': f'{kind}:{object_id}',
-                'path': object_id,
-                'params': {'fields': 'id,name,status,effective_status,configured_status,updated_time'},
-            }
-            for kind, object_id in chunk
-        ]))
+def final_readback(common, meta, token: str, scope: list[dict[str, Any]]) -> dict[str, Any]:
+    target_ids = {
+        'campaigns': {str(item['campaign']['id']) for item in scope},
+        'adsets': {str(row['id']) for item in scope for row in item['adsets']},
+        'ads': {str(row['id']) for item in scope for row in item['ads']},
+    }
+    rows_by_kind = {
+        'campaigns': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/campaigns', {
+            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+        }),
+        'adsets': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/adsets', {
+            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+        }),
+        'ads': common.fetch_all_meta(meta, token, f'act_{ACCOUNT_ID}/ads', {
+            'fields': 'id,status,effective_status,configured_status,updated_time', 'limit': 500,
+        }),
+    }
     counts = {'campaigns': 0, 'adsets': 0, 'ads': 0}
     failures: list[dict[str, str]] = []
-    for kind, object_id in objects:
-        live = live_by_key[f'{kind}:{object_id}']
-        if exact_status(live) == 'ACTIVE':
-            counts[kind] += 1
-        else:
-            failures.append({'kind': kind, 'object_id': object_id, 'status': exact_status(live)})
+    for kind in ('campaigns', 'adsets', 'ads'):
+        live_map = {str(row.get('id') or ''): row for row in rows_by_kind[kind] if row.get('id')}
+        for object_id in sorted(target_ids[kind]):
+            live = live_map.get(object_id)
+            if live is None:
+                live = graph_get_required(meta, token, object_id, 'id,status,effective_status,configured_status,updated_time')
+            if exact_status(live) == 'ACTIVE':
+                counts[kind] += 1
+            else:
+                failures.append({'kind': kind, 'object_id': object_id, 'status': exact_status(live)})
     return {'ok': not failures, 'counts': counts, 'failures': failures}
 
 
@@ -392,7 +379,7 @@ def main() -> int:
                     result.update({'kind': 'ad', 'campaign_id': campaign_id})
                     audit['writes'].append(result)
                     common.atomic_json(audit_path, audit)
-            readback = final_readback(meta, token, scope)
+            readback = final_readback(common, meta, token, scope)
             audit['final_readback'] = readback
             if not readback['ok']:
                 raise RuntimeError('readback final não confirmou toda a hierarquia')
