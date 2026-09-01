@@ -1,5 +1,19 @@
 ## Production Cron Implementation
 
+### Current B012-2 cutover — 2026-09-01
+
+Rodolfo explicitly replaced retired `B012` with `B012-2`, updated the exact 1Password item and renamed the existing app-status channel.
+
+- Current app key: `B012-2`; predecessor `B012` is retired from the active registry.
+- Current item: `BOT B012-2 Token - Bình Hòa Trần`; `app_name=B012-2` and the required credential fields are readable without exposing values.
+- Existing channel ID remains `1537256951879172136`; live channel name and registry mapping are `b012-2-app-status`.
+- Fresh isolated preflight proved app metadata, `/roles`, `/me` and `debug_token` healthy; the token is valid and app-bound; all eight roles resolve to names with zero unresolved identities and `safe_for_sheet=true`.
+- The canonical Service Account Sheet was already migrated before the runtime cutover: `NO APP=B012-2` has eight rows, `NO APP=B012` has zero, all eight assignments match the fresh role set, there are zero duplicates/blanks and zero `X` markers. No Sheet write was required.
+- Store `expected_sheet_roles=8`. Production must start B012-2 from a fresh state and must not reuse B012 app-scoped role IDs or its restriction/error cooldowns. Preserve the predecessor only in the verified cutover backup and retired-state metadata.
+- Cron job `0cc7ed1e587e` remains the shared registry-driven `meta-app-roles-watch`; B012-2 uses the normal B001–B012 `/roles` and Sheet-reconciliation path. The first baseline must be silent, error-free and write-free when the live Sheet is already converged; future real role changes alert normally.
+- Pre-cutover B012 restriction and missing-item alerts are predecessor history. Do not delete those Discord messages without the Critical Subset confirmation.
+- Cutover backup: `/root/mgs-agent/backups/meta-app-b012-to-b0122-cutover-20260901-110638/`, with SHA-256 manifest verified.
+
 ### Current B013-4 cutover — 2026-08-29
 
 Rodolfo explicitly replaced `B013-3` with `B013-4`, updated the new 1Password item and authorized Zeus to update the complete dedicated route and reactivate its cron.
@@ -150,7 +164,7 @@ Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
 Scope          Registry-driven current B001-B012 replacement lineage. Every B013 generation is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
-Channels       B001-4 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-2 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-3 1521251961662341160; B006-3 1521252068319297666; B007-2 1520510823426949313; B008-2 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-2 1521252369331916902
+Channels       B001-4 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-2 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-3 1521251961662341160; B006-3 1521252068319297666; B007-2 1520510823426949313; B008-2 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-2 1521252369331916902; B011-2 1537256907373289575; B012-2 1537256951879172136
 ```
 
 Use the Meta roles cron for the current registry-driven B001–B012 app lineage. B013-4 remains on the separate DTR/ChatPion route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`. Future B013 replacement suffixes remain on that same dedicated route by lineage.
