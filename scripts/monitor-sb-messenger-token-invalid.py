@@ -46,6 +46,16 @@ MAX_DELIVERED_IDS = 1000
 MAX_INCIDENTS = 1000
 TEAM_ROLE_IDS = ['1496256346994249912', '1496260941787168848']
 TEAM_MENTIONS = ' '.join(f'<@&{role_id}>' for role_id in TEAM_ROLE_IDS)
+PAGE_STATUS_ORDER = ['Broadcast', 'On-hold', 'Blocked', 'Ready', 'Campaign']
+PAGE_STATUS_ALIASES = {
+    'broadcast': 'Broadcast',
+    'on-hold': 'On-hold',
+    'on hold': 'On-hold',
+    'onhold': 'On-hold',
+    'blocked': 'Blocked',
+    'ready': 'Ready',
+    'campaign': 'Campaign',
+}
 
 
 def now_iso() -> str:
@@ -129,10 +139,14 @@ def normalize_alerts(
     pages: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     page_counts: Counter[str] = Counter()
+    page_status_counts: dict[str, Counter[str]] = {}
     for page in pages:
         mapped_user_id = str(page.get('MESSENGER_USER_ID') or '').strip()
         if mapped_user_id:
             page_counts[mapped_user_id] += 1
+            raw_status = str(page.get('STATUS') or '').strip()
+            status = PAGE_STATUS_ALIASES.get(raw_status.lower(), raw_status or 'Sem status')
+            page_status_counts.setdefault(mapped_user_id, Counter())[status] += 1
 
     alerts: list[dict[str, Any]] = []
     for notification in notifications:
@@ -178,6 +192,7 @@ def normalize_alerts(
                 ]
             mapped_user_id = str(matched_users[0].get('ID') or '').strip() if len(matched_users) == 1 else ''
             page_count = page_counts.get(mapped_user_id) if mapped_user_id else None
+            status_counts = page_status_counts.get(mapped_user_id) if mapped_user_id else None
             alerts.append({
                 'notification_id': notification_id,
                 'created_at': created_at,
@@ -190,6 +205,7 @@ def normalize_alerts(
                 'segurador_name': str(item.get('segurador_name') or '').strip(),
                 'source': str(item.get('source') or 'unknown').strip(),
                 'pages': int(page_count) if page_count is not None else None,
+                'page_statuses': dict(status_counts) if status_counts is not None else None,
                 'page_count_scope': 'mapped-sb-user-id' if mapped_user_id else 'unmatched',
             })
     alerts.sort(key=lambda row: (row['notification_id'], row['user_id']))
@@ -211,9 +227,42 @@ def latest_batch(alerts: list[dict[str, Any]], minutes: int = 5) -> list[dict[st
 def fingerprint(alerts: list[dict[str, Any]], canary: bool) -> str:
     material = json.dumps({
         'canary': canary,
-        'rows': [(row['notification_id'], row['user_id'], row['pages']) for row in alerts],
+        'rows': [
+            (
+                row['notification_id'],
+                row['user_id'],
+                row['pages'],
+                sorted((row.get('page_statuses') or {}).items()),
+            )
+            for row in alerts
+        ],
     }, sort_keys=True, separators=(',', ':'))
     return hashlib.sha256(material.encode()).hexdigest()[:16]
+
+
+def format_page_summary(row: dict[str, Any]) -> str:
+    page_total = row.get('pages')
+    if page_total is None:
+        return 'Total —\nStatus —'
+    status_counts = row.get('page_statuses')
+    if not isinstance(status_counts, dict):
+        return f'Total {int(page_total)}\nStatus indisponível no alerta legado'
+    normalized_counts = {
+        str(status): int(count)
+        for status, count in status_counts.items()
+        if int(count) > 0
+    }
+    if sum(normalized_counts.values()) != int(page_total):
+        raise RuntimeError('page status breakdown does not match total page count')
+    if not normalized_counts:
+        return f'Total {int(page_total)}\nSem páginas vinculadas'
+    order = {status: index for index, status in enumerate(PAGE_STATUS_ORDER)}
+    ordered = sorted(
+        normalized_counts.items(),
+        key=lambda item: (order.get(item[0], len(order)), item[0].lower()),
+    )
+    breakdown = ' + '.join(f'{count} {status}' for status, count in ordered)
+    return f'Total {int(page_total)}\n{breakdown}'
 
 
 def build_payloads(
@@ -241,7 +290,7 @@ def build_payloads(
         site = (row['domain'] or 'SITE DESCONHECIDO').upper()
         user = row['user_email'] or row['user_name'] or f"ID {row['user_id']}"
         segurador = row['segurador_name'] or f"ID {row['segurador_id']}"
-        page_count = '—' if row.get('pages') is None else str(row['pages'])
+        page_summary = format_page_summary(row)
         if repeat_count > 0:
             opened = parse_dt(opened_at) if opened_at else now_value
             elapsed_hours = max(0, int((now_value.astimezone(opened.tzinfo) - opened).total_seconds() // 3600))
@@ -254,7 +303,7 @@ def build_payloads(
             'fields': [
                 {'name': 'User', 'value': user[:1024] or '—', 'inline': False},
                 {'name': 'Segurador', 'value': segurador[:1024] or '—', 'inline': True},
-                {'name': 'Páginas', 'value': page_count, 'inline': True},
+                {'name': 'Páginas', 'value': page_summary[:1024], 'inline': False},
             ],
             'footer': {'text': footer[:2048]},
             'timestamp': row['created_at'],

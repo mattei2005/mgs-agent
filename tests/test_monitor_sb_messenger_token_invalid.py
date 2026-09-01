@@ -38,6 +38,7 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(len(alerts), 1)
         self.assertEqual(alerts[0]['notification_id'], 100)
         self.assertEqual(alerts[0]['pages'], 2)
+        self.assertEqual(alerts[0]['page_statuses'], {'Broadcast': 1, 'On-hold': 1})
         self.assertEqual(alerts[0]['page_count_scope'], 'mapped-sb-user-id')
         self.assertEqual(alerts[0]['source'], 'canary')
 
@@ -49,7 +50,30 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(embed['title'], 'CANÁRIO — FINANCEADX — Token Messenger inválido')
         self.assertNotIn('description', embed)
         self.assertEqual([field['name'] for field in embed['fields']], ['User', 'Segurador', 'Páginas'])
-        self.assertEqual(embed['fields'][2]['value'], '2')
+        self.assertEqual(embed['fields'][2]['value'], 'Total 2\n1 Broadcast + 1 On-hold')
+        self.assertFalse(embed['fields'][2]['inline'])
+
+    def test_page_summary_uses_operational_status_order(self):
+        row = {
+            'pages': 390,
+            'page_statuses': {
+                'Ready': 5,
+                'Blocked': 14,
+                'On-hold': 101,
+                'Broadcast': 270,
+            },
+        }
+        self.assertEqual(
+            mod.format_page_summary(row),
+            'Total 390\n270 Broadcast + 101 On-hold + 14 Blocked + 5 Ready',
+        )
+
+    def test_page_summary_fails_closed_on_total_mismatch(self):
+        with self.assertRaisesRegex(RuntimeError, 'does not match'):
+            mod.format_page_summary({
+                'pages': 3,
+                'page_statuses': {'Broadcast': 1, 'On-hold': 1},
+            })
 
     def test_one_discord_message_per_incident(self):
         alert = self.alerts()[0]

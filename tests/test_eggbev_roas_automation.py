@@ -29,7 +29,7 @@ def active_ad(ad_id='a1', campaign_id='c1', effective='ACTIVE', configured='ACTI
     return {
         'id': ad_id, 'name': f'Ad {ad_id}', 'status': configured,
         'effective_status': effective, 'configured_status': configured,
-        'campaign': {'id': campaign_id, 'name': f'Campaign {campaign_id}', 'status': 'ACTIVE', 'configured_status': 'ACTIVE', 'effective_status': 'ACTIVE', 'start_time': campaign_start},
+        'campaign': {'id': campaign_id, 'name': f'162 - Page - ENG - US - (pg_5024) {campaign_id.upper()}', 'status': 'ACTIVE', 'configured_status': 'ACTIVE', 'effective_status': 'ACTIVE', 'start_time': campaign_start},
         'adset': {'id': 's1', 'name': 'AdG1', 'status': adset_status, 'configured_status': adset_status, 'effective_status': adset_status},
     }
 
@@ -142,6 +142,16 @@ class DecisionTests(unittest.TestCase):
         self.assertEqual(result['decisions'][0]['action'], 'REACTIVATE_AD')
         self.assertFalse(result['campaign_actions'])
         self.assertEqual(result['counts']['reactivate_campaigns'], 0)
+
+    def test_restricted_page_ad_never_reactivates_in_phase1_or_phase2(self):
+        state = common.default_state(dt.date(2026, 8, 29))
+        state['paused_ads']['a1'] = {'reason': 'roas_cycle', 'campaign_id': 'c1'}
+        tracked = active_ad(effective='PAUSED', configured='PAUSED')
+        tracked['campaign']['name'] = '165 - Tina Walter - ENG - US - (pg_5071) C003'
+        for phase in ('PHASE_1', 'PHASE_2'):
+            result = self.decide(tracked=[tracked], insights={'a1': metric(5.0, 9.0)}, state=state, phase=phase)
+            self.assertEqual(result['decisions'][0]['action'], 'KEEP')
+            self.assertEqual(result['decisions'][0]['reason'], 'page_restriction_history_permanent_ineligible')
 
     def test_paused_ad_equal_threshold_does_not_reactivate(self):
         state = common.default_state(dt.date(2026, 8, 29))

@@ -16,8 +16,8 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 2. Read `/users/Messenger` for `digital-trust` and `digital-trust-2`.
 3. Map each alert to the SB Messenger user inside the exact `COMPANY + PUBLISHER_ID` scope. Match `LOGIN == user_email` first; only if there is no unique email match, fall back to a unique `NAME == user_name`. Never combine email and name candidates with one OR because duplicated display names can make an otherwise exact email match look ambiguous. The numeric `user_id` inside the notification body is not the UUID used by campaign rows.
 4. Read `/company`, collect active `publisherId` values, then read `/campaigns/Messenger` for the complete publisher scope.
-5. Count campaign rows by the matched user UUID in `MESSENGER_USER_ID`. If the user cannot be mapped uniquely, render `Páginas: —` instead of inventing a count.
-6. Persist only aggregate counts, not campaign rows or password/token fields.
+5. Count campaign rows by the matched user UUID in `MESSENGER_USER_ID` and aggregate the same rows by `STATUS`. Normalize known statuses to `Broadcast`, `On-hold`, `Blocked`, `Ready` and `Campaign`; preserve any unknown non-empty status and label blanks as `Sem status`. The status counts must sum exactly to the total or rendering fails closed. If the user cannot be mapped uniquely, render `Total —` and `Status —` instead of inventing a count.
+6. Persist only the total and aggregate status counts, not campaign rows or password/token fields.
 
 ## Delivery contract
 
@@ -25,7 +25,7 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 - Zeus bot transport; exactly one Discord message and one embed per affected Messenger user so a ✅ reaction resolves one incident only.
 - Every initial/new-incident and ET-date-rollover delivery mentions both team roles once: Gestor de Trafego (`1496256346994249912`) and Admin (`1496260941787168848`). Set `allowed_mentions.parse=[]` and explicitly list only those two role IDs.
 - Keep the embed compact: put the uppercased site/domain first in the title (`SITE — Token Messenger inválido`).
-- Show only three fields: `User`, `Segurador` and `Páginas`. Do not add explanatory description, company, visible source or a separate detection-time field.
+- Show only three fields: `User`, `Segurador` and `Páginas`. Keep `Páginas` full-width with exactly two compact lines: `Total N`, then `N Broadcast + N On-hold + N Blocked + N Ready + N Campaign`, omitting zero statuses and placing unknown statuses after the known operational order. Do not add explanatory description, company, visible source or a separate detection-time field.
 - Keep the short content line `<roles> · Reaja ✅ quando resolver.` and compact footer/timestamp metadata for audit and dedupe.
 - Canary titles start with `CANÁRIO`. Production alerts always use the unbadged `SITE — Token Messenger inválido` form.
 - Never emit numbered or three-hour reminders. The same stable incident can appear at most once per ET calendar day.

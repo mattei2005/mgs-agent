@@ -548,6 +548,12 @@ def decide_cycle(
         if row['ad_id']:
             all_ads[row['ad_id']] = row
     decisions: list[dict[str, Any]] = []
+    try:
+        page_denylist = load_denylist()
+        page_denylist_error = None
+    except PageEligibilityError as exc:
+        page_denylist = None
+        page_denylist_error = str(exc)
     for ad_id, ad in sorted(all_ads.items()):
         metric = insights_by_ad.get(ad_id) or {'status': 'no_data_today', 'spend': 0.0, 'purchase_roas': None}
         spend = finite_float(metric.get('spend')) or 0.0
@@ -558,6 +564,13 @@ def decide_cycle(
         reason = 'outside_action_gate'
         night_cycle = bool(cycle_at and cycle_at.astimezone(ET).hour in {20, 22, 23})
         future_campaign = _future_campaign_for_cycle(ad.get('campaign_start_time'), cycle_at)
+        if page_denylist_error:
+            page_gate = {'eligible': False, 'reason': 'page_eligibility_unverifiable', 'detail': page_denylist_error}
+        else:
+            try:
+                page_gate = page_eligibility(ad.get('campaign_name'), denylist=page_denylist)
+            except PageEligibilityError as exc:
+                page_gate = {'eligible': False, 'reason': 'page_eligibility_unverifiable', 'detail': str(exc)}
         if phase == 'PHASE_1' and is_active:
             if spend > 2.0 and (roas is None or roas < threshold):
                 action, reason = 'PAUSE_AD', 'spent_gt_2_and_roas_below_or_nd'
@@ -571,13 +584,19 @@ def decide_cycle(
             else:
                 reason = 'roas_at_or_above_threshold'
         elif phase in {'PHASE_1', 'PHASE_2'} and is_tracked_paused:
-            if ad.get('adset_status') != 'ACTIVE':
+            if not page_gate.get('eligible'):
+                reason = (
+                    'page_restriction_history_permanent_ineligible'
+                    if page_gate.get('reason') == 'restricted_page_history'
+                    else 'page_eligibility_unverifiable'
+                )
+            elif ad.get('adset_status') != 'ACTIVE':
                 reason = 'tracked_adset_not_configured_active'
             elif roas is not None and roas > threshold:
                 action, reason = 'REACTIVATE_AD', 'ares_paused_and_roas_above_threshold'
             else:
                 reason = 'paused_ad_not_above_threshold'
-        decisions.append({**ad, **metric, 'spend': spend, 'purchase_roas': roas, 'threshold': threshold, 'phase': phase, 'action': action, 'reason': reason})
+        decisions.append({**ad, **metric, 'spend': spend, 'purchase_roas': roas, 'threshold': threshold, 'phase': phase, 'action': action, 'reason': reason, 'page_eligibility': page_gate})
     return {
         'phase': phase,
         'threshold': threshold,
