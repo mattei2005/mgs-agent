@@ -115,22 +115,41 @@ class EggbevZeroPixelGuardrailTests(unittest.TestCase):
         self.assertIn('Eggbev PV U = 0', message)
         self.assertIn('Pausadas/readback: **1/1**', message)
 
-    def test_live_snapshot_uses_one_bounded_batch(self):
+    def test_live_snapshot_uses_two_bounded_batches(self):
         class FakeMeta:
-            requests = []
+            request_batches = []
+
+            @staticmethod
+            def safe_meta_error(body):
+                return body
 
             @classmethod
             def graph_batch_get(cls, token, requests):
-                cls.requests = requests
+                cls.request_batches.append(requests)
                 responses = []
                 for request in requests:
-                    body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'} if request['name'] == 'account' else {'data': []}
+                    if request['name'] == 'account':
+                        body = {'id': 'account', 'account_status': 1, 'currency': 'USD', 'timezone_name': 'America/New_York'}
+                    elif request['name'] == 'campaigns':
+                        body = {'data': [{'id': 'c1'}]}
+                    elif request['name'] == 'insights':
+                        body = {'data': []}
+                    else:
+                        body = {'data': [{
+                            'id': 's1',
+                            'campaign_id': 'c1',
+                            'status': 'ACTIVE',
+                            'configured_status': 'ACTIVE',
+                            'effective_status': 'ACTIVE',
+                        }]}
                     responses.append({'name': request['name'], 'code': 200, 'body': body})
                 return 200, responses, {}
 
         snapshot = guardrail.fetch_live_snapshot(FakeMeta, 'token-not-printed', 'act_1')
-        self.assertEqual(len(FakeMeta.requests), 4)
+        self.assertEqual(len(FakeMeta.request_batches), 2)
+        self.assertEqual([len(batch) for batch in FakeMeta.request_batches], [3, 1])
         self.assertEqual(set(snapshot), {'account', 'campaigns', 'adsets', 'insights'})
+        self.assertEqual(len(snapshot['adsets']), 1)
 
     def test_live_snapshot_fails_closed_when_batch_page_is_incomplete(self):
         class FakeMeta:

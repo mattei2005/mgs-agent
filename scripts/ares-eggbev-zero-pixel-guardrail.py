@@ -141,7 +141,25 @@ def promoted_object_matches(adset: dict[str, Any], policy: dict[str, Any]) -> bo
 
 
 def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
-    """Read account, active objects and today's campaign insights in one batch."""
+    """Read account/campaign insights, then active-campaign ad sets in two batches."""
+
+    def parse_batch(responses: Any, expected: list[str]) -> dict[str, dict[str, Any]]:
+        if not isinstance(responses, list):
+            raise ZeroPixelGuardrailError('Meta batch returned invalid outer payload')
+        by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
+        result: dict[str, dict[str, Any]] = {}
+        for name in expected:
+            response = by_name.get(name) or {}
+            code = int(response.get('code') or 0)
+            body = response.get('body')
+            if code != 200 or not isinstance(body, dict):
+                detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
+                raise ZeroPixelGuardrailError(
+                    f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
+                )
+            result[name] = body
+        return result
+
     status, responses, _ = meta.graph_batch_get(token, [
         {
             'name': 'account',
@@ -158,15 +176,6 @@ def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
             },
         },
         {
-            'name': 'adsets',
-            'path': act + '/adsets',
-            'params': {
-                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
-                'effective_status': ['ACTIVE'],
-                'limit': 200,
-            },
-        },
-        {
             'name': 'insights',
             'path': act + '/insights',
             'params': {
@@ -178,30 +187,50 @@ def fetch_live_snapshot(meta, token: str, act: str) -> dict[str, Any]:
             },
         },
     ])
-    if status != 200 or not isinstance(responses, list):
+    if status != 200:
         raise ZeroPixelGuardrailError(f'Meta batch preflight failed: HTTP {status}')
-    by_name = {norm(row.get('name')): row for row in responses if isinstance(row, dict)}
-    result: dict[str, Any] = {}
-    for name in ('account', 'campaigns', 'adsets', 'insights'):
-        response = by_name.get(name) or {}
-        code = int(response.get('code') or 0)
-        body = response.get('body')
-        if code != 200 or not isinstance(body, dict):
-            detail = meta.safe_meta_error(body) if isinstance(body, dict) else {'invalid_body': True}
-            raise ZeroPixelGuardrailError(
-                f'Meta batch child {name} failed: HTTP {code}; {json.dumps(detail, ensure_ascii=False, sort_keys=True)}'
-            )
-        if name == 'account':
-            result[name] = body
-            continue
-        paging = body.get('paging') or {}
-        if paging.get('next'):
+    primary = parse_batch(responses, ['account', 'campaigns', 'insights'])
+    for name in ('campaigns', 'insights'):
+        if (primary[name].get('paging') or {}).get('next'):
             raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
-        data = body.get('data')
-        if not isinstance(data, list):
-            raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
-        result[name] = data
-    return result
+    campaigns = primary['campaigns'].get('data')
+    insights = primary['insights'].get('data')
+    if not isinstance(campaigns, list) or not isinstance(insights, list):
+        raise ZeroPixelGuardrailError('Meta campaign/insight batch returned invalid data')
+
+    active_campaign_ids = [norm(row.get('id')) for row in campaigns if norm(row.get('id'))]
+    adsets: list[dict[str, Any]] = []
+    if active_campaign_ids:
+        requests = [{
+            'name': f'adsets:{campaign_id}',
+            'path': campaign_id + '/adsets',
+            'params': {
+                'fields': 'id,name,status,effective_status,configured_status,campaign_id,optimization_goal,promoted_object,updated_time',
+                'limit': 50,
+            },
+        } for campaign_id in active_campaign_ids]
+        status, responses, _ = meta.graph_batch_get(token, requests)
+        if status != 200:
+            raise ZeroPixelGuardrailError(f'Meta ad-set batch failed: HTTP {status}')
+        adset_bodies = parse_batch(responses, [request['name'] for request in requests])
+        for name, body in adset_bodies.items():
+            if (body.get('paging') or {}).get('next'):
+                raise ZeroPixelGuardrailError(f'Meta batch child {name} requires pagination; bounded snapshot incomplete')
+            rows = body.get('data')
+            if not isinstance(rows, list):
+                raise ZeroPixelGuardrailError(f'Meta batch child {name} returned invalid data')
+            adsets.extend(
+                row for row in rows
+                if isinstance(row, dict)
+                and norm(row.get('configured_status') or row.get('status')).upper() == 'ACTIVE'
+                and norm(row.get('effective_status')).upper() == 'ACTIVE'
+            )
+    return {
+        'account': primary['account'],
+        'campaigns': campaigns,
+        'adsets': adsets,
+        'insights': insights,
+    }
 
 
 def plan_guardrail(
