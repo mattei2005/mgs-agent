@@ -1,0 +1,82 @@
+{
+  "change": "Add zero-pixel-result guardrail as serial stage 2 of existing Page safety root-cron wrapper",
+  "conclusion": "PASS: existing scheduler reused, stages serialized, shared operation lock preserved, no new exact ROAS start collision, and real scheduled tick completed both stages.",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "readback_at_et": "2026-09-01T16:06:17-04:00",
+  "schedule": {
+    "backend": "root_crontab",
+    "baseline_dense_jobs_present": true,
+    "exception_reason": "No new start minute was introduced; the added lane is serialized inside the already audited Page safety tick.",
+    "expression": "3-58/5 * * * *",
+    "internal_gate_after_hour_et": 3,
+    "new_scheduler_slot_created": false,
+    "roas_exact_start_collision": false,
+    "roas_physical_minute": 10,
+    "shared_operation_lock": "roas-cycle.lock is acquired by the root-cron command before the wrapper",
+    "stage_execution": "serial in the existing wrapper: DTR restriction transition, then zero-pixel-result guardrail",
+    "stagger_seconds": 30,
+    "timezone": "America/New_York"
+  },
+  "scheduled_tick_readback": {
+    "active_campaigns": 14,
+    "alerts_pending": 0,
+    "campaigns_paused_confirmed": 0,
+    "candidates": 0,
+    "page_meta_writes": 0,
+    "page_stage_duration_seconds": 0.027249,
+    "page_stage_ok": true,
+    "run_at_et": "2026-09-01T15:58:32-04:00",
+    "zero_pixel_stage_duration_seconds": 1.673911,
+    "zero_pixel_stage_ok": true
+  },
+  "scheduler_inventory": {
+    "generated_docs_jobs": 47,
+    "hermes_profiles": {
+      "ares": {
+        "enabled_jobs": 13,
+        "exists": true,
+        "schedules": [
+          "{'kind': 'cron', 'expr': '*/5 * * * *', 'display': '*/5 * * * *'}",
+          "{'kind': 'cron', 'expr': '1 * * * *', 'display': '1 * * * *'}",
+          "{'kind': 'cron', 'expr': '10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *', 'display': '10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *'}",
+          "{'kind': 'cron', 'expr': '11 * * * *', 'display': '11 * * * *'}",
+          "{'kind': 'cron', 'expr': '12 * * * *', 'display': '12 * * * *'}",
+          "{'kind': 'cron', 'expr': '14,29,44,59 * * * *', 'display': '14,29,44,59 * * * *'}",
+          "{'kind': 'cron', 'expr': '16 8,20 * * *', 'display': '16 8,20 * * *'}",
+          "{'kind': 'cron', 'expr': '2 * * * *', 'display': '2 * * * *'}",
+          "{'kind': 'cron', 'expr': '30 * * * *', 'display': '30 * * * *'}",
+          "{'kind': 'cron', 'expr': '4,19,34,49 * * * *', 'display': '4,19,34,49 * * * *'}",
+          "{'kind': 'cron', 'expr': '6 * * * *', 'display': '6 * * * *'}",
+          "{'kind': 'cron', 'expr': '7 * * * *', 'display': '7 * * * *'}",
+          "{'kind': 'cron', 'expr': '9,24,39,54 * * * *', 'display': '9,24,39,54 * * * *'}"
+        ]
+      },
+      "atena": {
+        "enabled_jobs": 0,
+        "exists": true,
+        "schedules": []
+      },
+      "zeus": {
+        "enabled_jobs": 8,
+        "exists": true,
+        "schedules": [
+          "{'kind': 'cron', 'expr': '*/3 0,8-23 * * *', 'display': '*/3 0,8-23 * * *'}",
+          "{'kind': 'cron', 'expr': '*/30 * * * *', 'display': '*/30 * * * *'}",
+          "{'kind': 'cron', 'expr': '15 4 * * *', 'display': '15 4 * * *'}",
+          "{'kind': 'cron', 'expr': '2-59/9 0,8-23 * * *', 'display': '2-59/9 0,8-23 * * *'}",
+          "{'kind': 'cron', 'expr': '23 * * * *', 'display': '23 * * * *'}",
+          "{'kind': 'cron', 'expr': '30 6 * * *', 'display': '30 6 * * *'}",
+          "{'kind': 'cron', 'expr': '45 5 * * 0', 'display': '45 5 * * 0'}",
+          "{'kind': 'interval', 'minutes': 360, 'display': 'every 360m'}"
+        ]
+      }
+    },
+    "root_active_lines": 50,
+    "systemd_timer_lines": 18,
+    "target_line_count": 1,
+    "target_lines": [
+      "3-58/5 * * * * sleep 30 && /usr/bin/flock -n /var/lock/ares_eggbev_page_restriction_guardrail.lock /usr/bin/flock /root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock /root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh >> /root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log 2>&1"
+    ]
+  },
+  "schema_version": 1
+}

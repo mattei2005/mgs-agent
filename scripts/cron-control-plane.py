@@ -55,6 +55,7 @@ DESCRIPTIONS = {
     'sync-sb-messenger-revenue-sheet.py': 'Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.',
     'monitor-sb-messenger-token-invalid.py': 'Espelha alertas de token Messenger inválido da API Smart Bidding para o canal dedicado, com filtro MGS, dedupe, contagem de páginas e readback Discord sem menções.',
     'ares-meta-account-activity-monitor.py': 'Monitora alterações materiais na conta Meta Creditoparaveiculo 13, cruza writes do Ares com audit local e alerta somente mudanças externas ou não auditadas.',
+    'eggbev-page-restriction-guardrail.sh': 'Executa em série os guardrails Eggbev de restrição DTR e de campanha com gasto acima de US$2 sem resultado de pixel após 03:00 ET.',
 }
 
 RISK = {
@@ -90,6 +91,7 @@ RISK = {
     'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
     'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada, republica incidentes ativos uma vez por dia e envia novos/reabertos sem repetição intradiária',
     'ares-meta-account-activity-monitor.py': 'baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração externa/não auditada',
+    'eggbev-page-restriction-guardrail.sh': 'alto controlado: pode pausar campanhas após pre-read, política e GET/readback',
 }
 
 OWNER = {
@@ -107,6 +109,7 @@ OWNER = {
     'sync-sb-messenger-revenue-sheet.py': 'Zeus/Revenue Tech',
     'monitor-sb-messenger-token-invalid.py': 'Zeus/Revenue Tech',
     'ares-meta-account-activity-monitor.py': 'Ares/Campaign Ops',
+    'eggbev-page-restriction-guardrail.sh': 'Ares/Campaign Ops',
 }
 
 
@@ -128,10 +131,13 @@ def parse_cron_line(line: str) -> dict[str, Any] | None:
         return None
     schedule = ' '.join(parts[:5])
     command = ' '.join(parts[5:])
-    if '/root/mgs-agent/scripts/' not in command:
+    mgs_match = re.search(r'(/root/mgs-agent/scripts/([^\s]+))', command)
+    profile_match = re.search(r'(/root/\.hermes/profiles/[^/]+/scripts/([^\s]+))', command)
+    match = mgs_match or profile_match
+    if not match:
         return None
-    m = re.search(r'/root/mgs-agent/scripts/([^\s]+)', command)
-    script_name = m.group(1) if m else ''
+    script_path = match.group(1)
+    script_name = match.group(2)
     log_match = re.search(r'>>\s*([^\s]+)', command)
     log_path = log_match.group(1) if log_match else ''
     retention_mode = '--cleanup-old-messages' in command
@@ -147,7 +153,7 @@ def parse_cron_line(line: str) -> dict[str, Any] | None:
         'schedule': schedule,
         'command': command,
         'script': script_name,
-        'script_path': f'/root/mgs-agent/scripts/{script_name}' if script_name else '',
+        'script_path': script_path,
         'log_path': log_path,
         'uses_flock': 'flock -n' in command,
         'owner': owner,
