@@ -73,6 +73,7 @@ $inactive = $edited;
 $inactive['active'] = 0;
 $off = MGS_Direct_Quiz::sync_static_transition( $edited, $inactive );
 if ( is_wp_error( $off ) ) { throw new RuntimeException( $off->get_error_message() ); }
+$inactive_removed_public_path = ! is_dir( dirname( $index ) ) && ! is_file( $index );
 
 $copy = $base;
 $copy['id'] = 'copy';
@@ -94,7 +95,7 @@ $result = array(
     'edit_replaced' => false === strpos( $html2, 'Original title' ) && false !== strpos( $html2, 'Edited title' ),
     'edit_path_same' => $index === $second['path'],
     'route_guard_code' => is_wp_error( $route_guard ) ? $route_guard->get_error_code() : '',
-    'inactive_removed_public_path' => ! is_dir( dirname( $index ) ) && ! is_file( $index ),
+    'inactive_removed_public_path' => $inactive_removed_public_path,
     'inactive_archived' => is_array( $off ) && is_dir( $off['archived_path'] ),
     'inactive_copy_unpublished' => true === $copy_result && ! is_file( $copy_path ),
     'reactivated' => is_array( $on ) && is_file( $on['path'] ),

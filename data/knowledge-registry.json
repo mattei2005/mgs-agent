@@ -1507,6 +1507,25 @@
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "consumers": [
         "ares",
+        "eggbev-roas-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T14:51:27-04:00",
+      "id": "ARES-EGGBEV-ROAS-CUT-CONTINUITY-V27-20260901",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev v27 preserva o layout v26 e mantém cortes ROAS ativos apesar do atraso da dashboard",
+      "updated_at": "2026-09-01T19:58:37+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
         "eggbev-us-cc-en-bot-operations",
         "meta-ads-intraday-operations"
       ],
@@ -1878,10 +1897,10 @@
       "kind": "decision",
       "owner": "Nicolas Holanda",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CUT-CONTINUITY-V27-20260901",
       "title": "Eggbev v26 garante emojis e tabela sem linhas cortadas",
-      "updated_at": "2026-08-31T22:22:20+00:00"
+      "updated_at": "2026-09-01T19:58:37+00:00"
     },
     {
       "canonical_key": "ares.campaign-ops.eggbev.discord-thread-information-architecture",
@@ -1967,6 +1986,25 @@
       "superseded_by": null,
       "title": "Eggbev US-CC-EN BOT usa canal dedicado e seis threads fixas",
       "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.zero-pixel-results",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-page-guardrails",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T14:51:27-04:00",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-V1-20260901",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev pausa campanha após 03:00 com spend acima de US$2 e zero resultado de pixel",
+      "updated_at": "2026-09-01T19:58:37+00:00"
     },
     {
       "canonical_key": "ares.failure-recovery",
@@ -3238,5 +3276,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T15:12:07+00:00"
+  "updated_at": "2026-09-01T19:58:37+00:00"
 }

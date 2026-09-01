@@ -532,6 +532,7 @@ def main() -> int:
                 'last_candidates': len(plan['candidates']),
                 'last_campaigns_paused_confirmed': run['campaigns_paused_confirmed'],
                 'last_audit_path': str(audit_path),
+                'last_error': None,
                 'last_runtime_error_key': None,
                 'last_runtime_error_alert_at_et': None,
             })

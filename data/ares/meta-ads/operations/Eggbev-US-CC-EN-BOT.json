@@ -2793,18 +2793,18 @@
       "state": "scheduled"
     },
     "page_restriction_guardrail": {
-      "activation_conclusion": "active; scheduled root-cron tick completed successfully with zero history replay and zero Meta writes.",
+      "activation_conclusion": "active; the shared scheduled root-cron tick completed both Page-protection stages successfully with zero Meta writes and zero alerts pending.",
       "cron_marker": "ARES EGGBEV PAGE RESTRICTION",
       "enabled": true,
       "last_events_seen": 0,
       "last_meta_writes": 0,
-      "last_run_at_et": "2026-08-31T19:08:01.302934-04:00",
+      "last_run_at_et": "2026-09-01T15:58:32.120682-04:00",
       "last_status": "ok",
       "lock": "/var/lock/ares_eggbev_page_restriction_guardrail.lock",
       "log": "/root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log",
       "base_maximum_detection_delay_seconds": 330,
-      "name": "Eggbev páginas restritas DTR 5min",
-      "readback_at_et": "2026-08-31T20:30:41-04:00",
+      "name": "Eggbev segurança de páginas 5min",
+      "readback_at_et": "2026-09-01T15:59:23-04:00",
       "schedule": "3-58/5 * * * *",
       "scheduler_backend": "root_crontab",
       "scheduler_tick_confirmed": true,
@@ -2812,12 +2812,19 @@
       "script": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
       "stages": [
         {
+          "last_events_seen": 0,
+          "last_run_at_et": "2026-09-01T15:58:32.028345-04:00",
+          "last_status": "ok",
           "name": "DTR restriction transition",
           "runner": "scripts/ares-eggbev-page-restriction-guardrail.py",
           "order": 1
         },
         {
+          "candidates": 0,
           "internal_gate": "03:00 ET",
+          "last_campaigns_paused_confirmed": 0,
+          "last_run_at_et": "2026-09-01T15:58:32.120682-04:00",
+          "last_status": "ok",
           "name": "zero pixel results after US$2",
           "runner": "scripts/ares-eggbev-zero-pixel-guardrail.py",
           "order": 2
