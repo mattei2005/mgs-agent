@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Direct Quiz
  * Description: Cria e duplica landing pages simples de quiz para tráfego direto, com modelos V1 e V2.
- * Version: 1.0.7
+ * Version: 1.1.0
  * Author: MGS Digital Corp
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MGS_DQ_VERSION', '1.0.7' );
+define( 'MGS_DQ_VERSION', '1.1.0' );
 define( 'MGS_DQ_FILE', __FILE__ );
 define( 'MGS_DQ_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MGS_DQ_URL', plugin_dir_url( __FILE__ ) );

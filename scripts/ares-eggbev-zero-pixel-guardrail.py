@@ -110,7 +110,7 @@ def action_value(actions: Any, action_type: str = PIXEL_ACTION_TYPE) -> float:
     return total
 
 
-def aggregate_campaign_insights(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def aggregate_campaign_insights(rows: list[dict[str, Any]], action_type: str = PIXEL_ACTION_TYPE) -> dict[str, dict[str, Any]]:
     result: dict[str, dict[str, Any]] = {}
     for row in rows:
         campaign_id = norm(row.get('campaign_id'))
@@ -124,7 +124,7 @@ def aggregate_campaign_insights(rows: list[dict[str, Any]]) -> dict[str, dict[st
             'insight_rows': 0,
         })
         item['spend'] += finite_float(row.get('spend')) or 0.0
-        item['pixel_results'] += action_value(row.get('actions'))
+        item['pixel_results'] += action_value(row.get('actions'), action_type)
         item['insight_rows'] += 1
     return result
 
@@ -209,7 +209,8 @@ def plan_guardrail(
     policy: dict[str, Any],
 ) -> dict[str, Any]:
     threshold = finite_float(policy.get('spend_threshold_usd')) or 2.0
-    insights = aggregate_campaign_insights(insight_rows)
+    action_type = norm((policy.get('pixel_event') or {}).get('insights_action_type')) or PIXEL_ACTION_TYPE
+    insights = aggregate_campaign_insights(insight_rows, action_type)
     adsets_by_campaign: dict[str, list[dict[str, Any]]] = {}
     for adset in adsets:
         campaign_id = norm(adset.get('campaign_id'))

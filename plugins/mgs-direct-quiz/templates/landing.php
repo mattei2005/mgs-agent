@@ -6,8 +6,10 @@ $item      = $mgs_dq_item;
 $layout    = in_array( (string) ( $item['layout_template'] ?? '' ), array( 'lp1', 'lp2' ), true ) ? $item['layout_template'] : 'lp1';
 $country   = strtolower( (string) ( $item['country'] ?? 'us' ) );
 $lang      = 'us' === $country ? 'en-US' : 'en';
-$dest_a    = MGS_Direct_Quiz::merge_query_params( (string) ( $item['destination_a_url'] ?? '' ) );
-$dest_b    = MGS_Direct_Quiz::merge_query_params( (string) ( $item['destination_b_url'] ?? $dest_a ) );
+$dest_a_base = (string) ( $item['destination_a_url'] ?? '' );
+$dest_b_base = (string) ( $item['destination_b_url'] ?? $dest_a_base );
+$dest_a      = ! empty( $mgs_dq_static_render ) ? $dest_a_base : MGS_Direct_Quiz::merge_query_params( $dest_a_base );
+$dest_b      = ! empty( $mgs_dq_static_render ) ? $dest_b_base : MGS_Direct_Quiz::merge_query_params( $dest_b_base );
 $legal     = array(
     'Privacy Policy'  => (string) ( $item['privacy_url'] ?? '' ),
     'Terms of Service' => (string) ( $item['terms_url'] ?? '' ),

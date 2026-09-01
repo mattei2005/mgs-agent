@@ -1806,6 +1806,7 @@
     "decision_source": {
       "period": "current America/New_York calendar day",
       "query_level": "campaign",
+      "read_strategy": "single bounded Graph batch for account + active campaigns + active ad sets + campaign insights; any child error or pagination requirement fails closed",
       "route": "Meta Ads Insights date_preset=today",
       "spend_field": "spend"
     },
@@ -1826,7 +1827,7 @@
     },
     "policy_approved": true,
     "purpose": "Fallback independente da notificação de Page restrita: depois das 03:00 ET, nenhuma campanha efetivamente ativa pode continuar gastando acima de US$2 sem qualquer resultado do evento de pixel Eggbev PV U.",
-    "recovery": "readback-first; campaign already PAUSED is idempotent; failed Discord delivery is persisted and retried before new evaluation",
+    "recovery": "readback-first; campaign already PAUSED is idempotent; failed Discord delivery is persisted and retried before new evaluation; child rate-limit/source errors produce a deduplicated four-line alert and no write",
     "runtime": {
       "runner": "/root/mgs-agent/scripts/ares-eggbev-zero-pixel-guardrail.py",
       "scheduler_backend": "existing root page-protection wrapper",

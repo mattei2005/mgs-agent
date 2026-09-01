@@ -5,9 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class MGS_Direct_Quiz {
     const OPTION = 'mgs_direct_quiz_landings';
+    const STATIC_VERSION_OPTION = 'mgs_direct_quiz_static_version';
+    const STATIC_MARKER = 'MGS Direct Quiz static';
 
     public static function boot() {
         add_action( 'init', array( __CLASS__, 'register_rewrite' ) );
+        add_action( 'init', array( __CLASS__, 'maybe_sync_static_pages' ), 20 );
         add_filter( 'query_vars', array( __CLASS__, 'query_vars' ) );
         add_action( 'template_redirect', array( __CLASS__, 'maybe_render' ), 0 );
         add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
@@ -18,10 +21,19 @@ final class MGS_Direct_Quiz {
 
     public static function activate() {
         self::register_rewrite();
+        $result = self::sync_static_pages();
+        if ( is_wp_error( $result ) ) {
+            wp_die( esc_html( $result->get_error_message() ) );
+        }
         flush_rewrite_rules();
     }
 
     public static function deactivate() {
+        $result = self::unpublish_all_static();
+        if ( is_wp_error( $result ) ) {
+            wp_die( esc_html( $result->get_error_message() ) );
+        }
+        update_option( self::STATIC_VERSION_OPTION, '', false );
         flush_rewrite_rules();
     }
 
@@ -46,6 +58,140 @@ final class MGS_Direct_Quiz {
 
     public static function save_items( $items ) {
         return update_option( self::OPTION, array_values( $items ), false );
+    }
+
+    private static function static_route( $item ) {
+        $country = strtolower( sanitize_key( (string) ( $item['country'] ?? '' ) ) );
+        $slug    = sanitize_title( (string) ( $item['slug'] ?? '' ) );
+        if ( ! preg_match( '/^[a-z]{2}$/', $country ) || ! preg_match( '/^sh[12]-g[0-9]{3,}$/', $slug ) ) {
+            return new WP_Error( 'mgs_dq_static_route', 'Rota estática inválida.' );
+        }
+        return array(
+            'country' => $country,
+            'slug'    => $slug,
+            'dir'     => trailingslashit( ABSPATH ) . 'quiz/' . $country . '/' . $slug,
+        );
+    }
+
+    public static function static_index_path( $item ) {
+        $route = self::static_route( $item );
+        return is_wp_error( $route ) ? $route : trailingslashit( $route['dir'] ) . 'index.html';
+    }
+
+    private static function render_static_html( $item ) {
+        $mgs_dq_item          = $item;
+        $mgs_dq_static_render = true;
+        ob_start();
+        include MGS_DQ_PATH . 'templates/landing.php';
+        $html = (string) ob_get_clean();
+        if ( false === stripos( $html, '<!doctype html>' ) ) {
+            return new WP_Error( 'mgs_dq_static_render', 'O template não gerou um documento HTML completo.' );
+        }
+        $config_hash = hash( 'sha256', wp_json_encode( $item, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+        $marker      = '<!-- ' . self::STATIC_MARKER . '; plugin=' . MGS_DQ_VERSION . '; config_sha256=' . $config_hash . ' -->';
+        return preg_replace( '/(<\!doctype html>)/i', '$1' . "\n" . $marker, $html, 1 );
+    }
+
+    public static function publish_static_item( $item ) {
+        if ( empty( $item['active'] ) ) {
+            return new WP_Error( 'mgs_dq_static_inactive', 'Uma landing inativa não pode ser publicada.' );
+        }
+        $index = self::static_index_path( $item );
+        if ( is_wp_error( $index ) ) {
+            return $index;
+        }
+        $html = self::render_static_html( $item );
+        if ( is_wp_error( $html ) ) {
+            return $html;
+        }
+        $dir = dirname( $index );
+        if ( ! is_dir( $dir ) && ! wp_mkdir_p( $dir ) ) {
+            return new WP_Error( 'mgs_dq_static_mkdir', 'Não foi possível criar o diretório da landing estática.' );
+        }
+        if ( ! is_writable( $dir ) ) {
+            return new WP_Error( 'mgs_dq_static_permissions', 'O diretório da landing estática não permite escrita.' );
+        }
+        $temp    = trailingslashit( $dir ) . '.index-' . wp_generate_uuid4() . '.tmp';
+        $written = file_put_contents( $temp, $html, LOCK_EX ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+        if ( false === $written || $written !== strlen( $html ) ) {
+            return new WP_Error( 'mgs_dq_static_write', 'Não foi possível gravar o HTML estático completo.' );
+        }
+        chmod( $temp, 0644 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
+        if ( ! rename( $temp, $index ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename
+            return new WP_Error( 'mgs_dq_static_publish', 'Não foi possível publicar o HTML estático de forma atômica.' );
+        }
+        clearstatcache( true, $index );
+        $readback = file_get_contents( $index ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+        if ( $readback !== $html || false === strpos( $readback, self::STATIC_MARKER ) ) {
+            return new WP_Error( 'mgs_dq_static_readback', 'O readback do HTML estático não corresponde ao conteúdo gerado.' );
+        }
+        return array(
+            'path'   => $index,
+            'bytes'  => strlen( $html ),
+            'sha256' => hash( 'sha256', $html ),
+        );
+    }
+
+    public static function unpublish_static_item( $item ) {
+        $route = self::static_route( $item );
+        if ( is_wp_error( $route ) ) {
+            return $route;
+        }
+        $dir   = $route['dir'];
+        $index = trailingslashit( $dir ) . 'index.html';
+        if ( ! is_dir( $dir ) ) {
+            return true;
+        }
+        if ( ! is_file( $index ) ) {
+            return new WP_Error( 'mgs_dq_static_foreign_dir', 'A rota física existe, mas não contém o index.html gerado pelo plugin.' );
+        }
+        $head = file_get_contents( $index, false, null, 0, 512 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+        if ( false === $head || false === strpos( $head, self::STATIC_MARKER ) ) {
+            return new WP_Error( 'mgs_dq_static_foreign_index', 'A rota física contém um index.html que não pertence ao plugin.' );
+        }
+        $disabled = dirname( $dir ) . '/.' . basename( $dir ) . '.mgs-disabled-' . gmdate( 'YmdHis' ) . '-' . substr( wp_generate_uuid4(), 0, 8 );
+        if ( ! rename( $dir, $disabled ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename
+            return new WP_Error( 'mgs_dq_static_unpublish', 'Não foi possível retirar a landing estática da rota pública.' );
+        }
+        return array( 'archived_path' => $disabled );
+    }
+
+    public static function sync_static_pages() {
+        $published = array();
+        foreach ( self::items() as $item ) {
+            if ( empty( $item['active'] ) ) {
+                continue;
+            }
+            $result = self::publish_static_item( $item );
+            if ( is_wp_error( $result ) ) {
+                return $result;
+            }
+            $published[] = $result;
+        }
+        update_option( self::STATIC_VERSION_OPTION, MGS_DQ_VERSION, false );
+        return $published;
+    }
+
+    public static function maybe_sync_static_pages() {
+        if ( get_option( self::STATIC_VERSION_OPTION, '' ) === MGS_DQ_VERSION ) {
+            return;
+        }
+        self::sync_static_pages();
+    }
+
+    public static function unpublish_all_static() {
+        $archived = array();
+        foreach ( self::items() as $item ) {
+            if ( empty( $item['active'] ) ) {
+                continue;
+            }
+            $result = self::unpublish_static_item( $item );
+            if ( is_wp_error( $result ) ) {
+                return $result;
+            }
+            $archived[] = $result;
+        }
+        return $archived;
     }
 
     public static function find_by_id( $id ) {

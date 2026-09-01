@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-17",
+  "updated_at": "2026-09-01",
   "cases": [
     {
       "id": "KR-001",
@@ -114,6 +114,34 @@
         "inbox nunca é verdade ativa"
       ],
       "forbidden_any": []
+    },
+    {
+      "id": "KR-012",
+      "question": "Atraso acima de 2h na dashboard Smart Bidding interrompe os cortes de ROAS da Eggbev?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "Meta Purchase ROAS cuts never stop",
+        "blocks only reactivations",
+        "schedule_change"
+      ],
+      "forbidden_any": [
+        "invalid source means zero write plus alert"
+      ]
+    },
+    {
+      "id": "KR-013",
+      "question": "Qual é o fallback da Eggbev para campanha gastando após 03:00 sem resultado do pixel?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "zero_pixel_result_guardrail",
+        "after_hour_et",
+        "spend_threshold_usd",
+        "offsite_conversion.fb_pixel_custom",
+        "set campaign status PAUSED immediately"
+      ],
+      "forbidden_any": [
+        "\"auto_reactivate\": true"
+      ]
     }
   ]
 }
