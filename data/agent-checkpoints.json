@@ -1829,8 +1829,18 @@
       "state": "concluído: lyzmo e zytiva corrigidos; 6 pools e 30 rotas por publisher; m0/nm nos slots 1/2 do 001; url+jbf_operation por slot preservadas; sessão independente sem erros; backups e audit gravados.",
       "thread_id": "1540454000577745076",
       "updated_at": "2026-08-21T20:39:16+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zeus-vps-maintenance-20260901",
+      "next_step": "Congelar versões APT/Corepack e criar rollback validado antes da mutação.",
+      "objective": "Atualizar todos os pacotes pendentes da VPS de forma controlada, preservando Hermes.",
+      "source": "discord:message:1544419069690904686",
+      "state": "authorized_preflight",
+      "thread_id": "1544371507491242044",
+      "updated_at": "2026-09-01T18:52:01+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T10:34:20+00:00"
+  "updated_at": "2026-09-01T18:52:01+00:00"
 }
