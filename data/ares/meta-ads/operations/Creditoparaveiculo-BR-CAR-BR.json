@@ -1359,42 +1359,43 @@
           "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
         },
         "37": {
-          "campaign_id": "120250995849860632",
-          "cycle_start_date": "2026-08-31",
-          "source": "rodolfo_manual_ui_replacement_readback",
-          "request_id": "cpv13-manual-rollover-c37-c39-20260831",
+          "campaign_id": "120251016513080632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_replacement_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
           "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1543870362360741948",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/cpv13-manual-rollover-c37-c39-20260831-final-readback.json",
-          "status": "active_d1",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "future_active_d1",
           "actions_enabled": true,
-          "replaces_campaign_id": "120250989009480632",
-          "previous_allowed_campaign_id": "120250957458400632"
+          "replaces_campaign_id": "120250995849860632",
+          "previous_allowed_campaign_id": "120250995849860632"
         },
         "38": {
-          "campaign_id": "120250995849840632",
-          "cycle_start_date": "2026-08-31",
-          "source": "rodolfo_manual_ui_replacement_readback",
-          "request_id": "cpv13-manual-rollover-c37-c39-20260831",
+          "campaign_id": "120251016513070632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_replacement_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
           "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1543870362360741948",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/cpv13-manual-rollover-c37-c39-20260831-final-readback.json",
-          "status": "active_d1",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "future_active_d1",
           "actions_enabled": true,
-          "replaces_campaign_id": "120250989125920632",
-          "previous_allowed_campaign_id": "120250957605760632"
+          "replaces_campaign_id": "120250995849840632",
+          "previous_allowed_campaign_id": "120250995849840632"
         },
         "39": {
-          "campaign_id": "120250995849850632",
-          "cycle_start_date": "2026-08-31",
-          "source": "rodolfo_manual_ui_replacement_readback",
-          "request_id": "cpv13-manual-rollover-c37-c39-20260831",
+          "campaign_id": "120251016619810632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_replacement_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
           "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1543870362360741948",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/cpv13-manual-rollover-c37-c39-20260831-final-readback.json",
-          "status": "active_d1",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "future_active_d1",
           "actions_enabled": true,
-          "replaces_campaign_id": "120250989125900632"
+          "replaces_campaign_id": "120250995849850632",
+          "previous_allowed_campaign_id": "120250995849850632"
         }
       },
       "required": [
@@ -1873,7 +1874,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-08-31T13:19:01.783513-03:00",
+  "updated_at": "2026-09-01T15:01:09.552596-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
