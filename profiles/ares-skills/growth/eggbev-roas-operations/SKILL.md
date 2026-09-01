@@ -48,7 +48,7 @@ Use para pedidos e ciclos da thread `1541578606076231750`, incluindo configuraç
 
 - O scheduler físico dispara no minuto `:10` das horas aprovadas; `scheduled_cycle_at` normaliza para a hora lógica `:00` e falha fechado acima de `:15`.
 - **Reativação fail-closed por Page:** Fases 1/2, Fase 3, recovery e qualquer ativação manual consultam `page_eligibility_policy` + denylist canônica. Page com qualquer histórico de restrição nunca recebe reativação de campanha, conjunto ou anúncio; os objetos ficam fora e o operador recebe o motivo. A regra não impede cortes/pausas.
-- Fonte indisponível, stale ou irreconciliável significa zero write e alerta.
+- **Continuidade de corte:** nas Fases 1/2, atraso, staleness, ausência ou inconsistência da dashboard Smart Bidding nunca bloqueiam o corte por Meta Purchase ROAS. O anúncio abaixo do threshold vigente é cortado imediatamente; somente reativações e indicadores/ações dependentes da Smart Bidding ficam fail-closed com alerta/N/D. Falha da própria leitura Meta continua zero write porque não há métrica segura para decidir.
 - Alteração de threshold ou automação segue os gates do contrato.
 - Criação/alteração de cron segue `context/cron-scheduling-policy.md` e exige inventário global antes do minuto ser escolhido.
 

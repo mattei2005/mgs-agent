@@ -22,16 +22,17 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 ## Fontes canônicas
 
 - Prompt exato: `data/ares/discord/thread-prompts/1543312825890381865.txt`
-- Contrato da rota: `discord.route_contracts.page_lead_guardrail`, `page_lead_guardrail` e `page_restriction_guardrail` em `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`
+- Contrato da rota: `discord.route_contracts.page_lead_guardrail`, `page_lead_guardrail`, `page_restriction_guardrail` e `zero_pixel_result_guardrail` em `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`
 - Conta: `data/ares/meta-ads/accounts/1034081997659047.json`
 - Runner LEADS: `scripts/ares-eggbev-page-lead-guardrail.py`
 - Runner restrição: `scripts/ares-eggbev-page-restriction-guardrail.py`
+- Runner fallback de pixel: `scripts/ares-eggbev-zero-pixel-guardrail.py`
 - Audit/state: somente o run e state mais recentes de cada guardrail
 - Denylist permanente de elegibilidade: `data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/restricted-page-denylist.json`; sincronizada pelo monitor a partir de `history.pages + active` e consumida antes de criar, clonar ou reativar
 
 ## Disclosure progressivo
 
-1. Leia o prompt e apenas os três nós da rota.
+1. Leia o prompt e apenas os quatro nós da rota.
 2. Para diagnóstico, abra o audit mais recente e agregue motivos; não despeje o JSON completo.
 3. Consulte Meta e Smart Bidding vivas antes de afirmar que o bloqueio persiste.
 4. Carregue `meta-ads-intraday-operations` apenas para alteração de cron ou governança transversal.
@@ -54,7 +55,8 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 
 ## Guardrails
 
-- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; restrição usa offset de cinco minutos `:03/:08/.../:58`, stagger de 30 segundos, lock próprio e o lock comum `roas-cycle.lock`, serializando ROAS, restrição e reativação one-time sem fila duplicada.
+- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; restrição e fallback de pixel usam o mesmo offset de cinco minutos `:03/:08/.../:58`, stagger de 30 segundos e o lock comum `roas-cycle.lock`, serializando os writers Eggbev sem fila duplicada.
+- **Fallback pós-03:00 independente de notificação:** em cada tick após 03:00 ET, campanha configurada/efetivamente ACTIVE com spend do dia estritamente `> US$2` e zero `offsite_conversion.fb_pixel_custom` do evento `eggbev-pv-u` é pausada no nível campanha. Exatamente US$2 não pausa; qualquer resultado do evento mantém. Exigir `promoted_object` exato (`pixel_id`, `OTHER`, `eggbev-pv-u`) em todos os ad sets ativos; mapping divergente = no write + alerta. A etapa nunca reativa.
 - Match parcial/ambíguo ou freshness não verificável = zero write.
 - Nunca substituir `LEADS` por `LEADS_TOTAL`.
 - Não reativar automaticamente.
