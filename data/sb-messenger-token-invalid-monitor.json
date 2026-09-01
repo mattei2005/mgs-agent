@@ -106,7 +106,8 @@
     679023,
     679040,
     679061,
-    679080
+    679080,
+    679130
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -682,10 +683,13 @@
     "digital-trust|helixenit|89|1686": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:02.000Z",
+        "created_at": "2026-09-01T20:08:42.000Z",
         "domain": "helixenit",
-        "notification_id": 675520,
+        "notification_id": 679130,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 13
+        },
         "pages": 13,
         "segurador_id": "1686",
         "segurador_name": "Bruna Andrade",
@@ -694,21 +698,17 @@
         "user_id": "89",
         "user_name": "Disparos Helixenit MX-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-01T16:12:15-04:00",
       "message_ids": [
-        "1542990283736879236",
-        "1543039383026802813",
-        "1543088450339741697",
-        "1543133756418826322"
+        "1544439767725244518"
       ],
       "notification_ids": [
-        675520
+        679130
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-01T16:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
@@ -1182,20 +1182,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-01T15:57:16-04:00",
+  "last_check": "2026-09-01T16:12:15-04:00",
   "last_delivery": {
-    "at": "2026-09-01T12:12:19-04:00",
+    "at": "2026-09-01T16:12:15-04:00",
     "cursor_ids": [
-      679023,
-      679040,
-      679061,
-      679080
+      679130
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1544439767725244518"
+    ],
+    "notification_ids": [
+      679130
+    ]
   },
   "last_error": null,
-  "last_seen_id": 679080,
+  "last_seen_id": 679130,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,

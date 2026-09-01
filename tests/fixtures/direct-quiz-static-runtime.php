@@ -6,8 +6,9 @@ if ( $argc < 2 ) {
 $root = rtrim( $argv[1], '/' ) . '/';
 define( 'ABSPATH', $root );
 define( 'MGS_DQ_PATH', '/root/mgs-agent/plugins/mgs-direct-quiz/' );
-define( 'MGS_DQ_URL', 'https://example.test/wp-content/plugins/mgs-direct-quiz/' );
-define( 'MGS_DQ_VERSION', '1.1.0' );
+// Simula WP-CLI atrás de proxy, onde plugin_dir_url() pode resolver http://.
+define( 'MGS_DQ_URL', 'http://example.test/wp-content/plugins/mgs-direct-quiz/' );
+define( 'MGS_DQ_VERSION', '1.1.1' );
 
 class WP_Error {
     private $code;
@@ -91,7 +92,8 @@ if ( is_wp_error( $on ) ) { throw new RuntimeException( $on->get_error_message()
 $result = array(
     'first_marker' => false !== strpos( $html1, MGS_Direct_Quiz::STATIC_MARKER ),
     'first_raw_destination' => false !== strpos( $html1, 'href="https://example.test/rec/?utm_source=fixed"' ),
-    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.1.0' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.1.0' ),
+    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.1.1' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.1.1' ),
+    'first_assets_https' => false !== strpos( $html1, 'https://example.test/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.css?v=1.1.1' ) && false === strpos( $html1, 'http://example.test/wp-content/plugins/mgs-direct-quiz/assets/' ),
     'edit_replaced' => false === strpos( $html2, 'Original title' ) && false !== strpos( $html2, 'Edited title' ),
     'edit_path_same' => $index === $second['path'],
     'route_guard_code' => is_wp_error( $route_guard ) ? $route_guard->get_error_code() : '',

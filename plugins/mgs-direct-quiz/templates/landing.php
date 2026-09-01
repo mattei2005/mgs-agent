@@ -10,6 +10,7 @@ $dest_a_base = (string) ( $item['destination_a_url'] ?? '' );
 $dest_b_base = (string) ( $item['destination_b_url'] ?? $dest_a_base );
 $dest_a      = ! empty( $mgs_dq_static_render ) ? $dest_a_base : MGS_Direct_Quiz::merge_query_params( $dest_a_base );
 $dest_b      = ! empty( $mgs_dq_static_render ) ? $dest_b_base : MGS_Direct_Quiz::merge_query_params( $dest_b_base );
+$asset_base  = ! empty( $mgs_dq_static_render ) ? preg_replace( '#^http://#i', 'https://', MGS_DQ_URL ) : MGS_DQ_URL;
 $legal     = array(
     'Privacy Policy'  => (string) ( $item['privacy_url'] ?? '' ),
     'Terms of Service' => (string) ( $item['terms_url'] ?? '' ),
@@ -23,7 +24,7 @@ $legal     = array(
 <title><?php echo esc_html( (string) ( $item['title'] ?? 'Quiz' ) ); ?></title>
 <meta name="description" content="<?php echo esc_attr( (string) ( $item['question'] ?? '' ) ); ?>">
 <?php if ( ! empty( $item['noindex'] ) ) : ?><meta name="robots" content="noindex,nofollow"><?php endif; ?>
-<link rel="stylesheet" href="<?php echo esc_url( MGS_DQ_URL . 'assets/direct-quiz.css?v=' . MGS_DQ_VERSION ); ?>">
+<link rel="stylesheet" href="<?php echo esc_url( $asset_base . 'assets/direct-quiz.css?v=' . MGS_DQ_VERSION ); ?>">
 </head>
 <body class="mgs-dq-body mgs-dq-<?php echo esc_attr( $layout ); ?>" data-model="<?php echo esc_attr( $layout ); ?>" data-manager="<?php echo esc_attr( (string) ( $item['manager_code'] ?? '' ) ); ?>">
 <main class="mgs-dq-shell">
@@ -53,6 +54,6 @@ $legal     = array(
     </footer>
   </section>
 </main>
-<script src="<?php echo esc_url( MGS_DQ_URL . 'assets/direct-quiz.js?v=' . MGS_DQ_VERSION ); ?>" defer></script>
+<script src="<?php echo esc_url( $asset_base . 'assets/direct-quiz.js?v=' . MGS_DQ_VERSION ); ?>" defer></script>
 </body>
 </html>

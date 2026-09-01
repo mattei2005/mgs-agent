@@ -2,7 +2,7 @@
   "change": "Add zero-pixel-result guardrail as serial stage 2 of existing Page safety root-cron wrapper",
   "conclusion": "PASS: existing scheduler reused, stages serialized, shared operation lock preserved, no new exact ROAS start collision, and real scheduled tick completed both stages.",
   "operation": "Eggbev-US-CC-EN-BOT",
-  "readback_at_et": "2026-09-01T16:06:17-04:00",
+  "readback_at_et": "2026-09-01T16:08:46-04:00",
   "schedule": {
     "backend": "root_crontab",
     "baseline_dense_jobs_present": true,
@@ -23,10 +23,10 @@
     "campaigns_paused_confirmed": 0,
     "candidates": 0,
     "page_meta_writes": 0,
-    "page_stage_duration_seconds": 0.027249,
+    "page_stage_duration_seconds": 0.021302,
     "page_stage_ok": true,
-    "run_at_et": "2026-09-01T15:58:32-04:00",
-    "zero_pixel_stage_duration_seconds": 1.673911,
+    "run_at_et": "2026-09-01T16:08:31-04:00",
+    "zero_pixel_stage_duration_seconds": 3.708786,
     "zero_pixel_stage_ok": true
   },
   "scheduler_inventory": {

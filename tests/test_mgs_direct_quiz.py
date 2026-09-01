@@ -38,8 +38,8 @@ class DirectQuizContractTests(unittest.TestCase):
         php = read('includes/class-mgs-direct-quiz.php')
         main = read('mgs-direct-quiz.php')
         readme = read('README.md')
-        self.assertIn("Version: 1.1.0", main)
-        self.assertIn("define( 'MGS_DQ_VERSION', '1.1.0' )", main)
+        self.assertIn("Version: 1.1.1", main)
+        self.assertIn("define( 'MGS_DQ_VERSION', '1.1.1' )", main)
         for marker in [
             'maybe_sync_static_pages',
             'publish_static_item',
@@ -64,6 +64,7 @@ class DirectQuizContractTests(unittest.TestCase):
             result['first_marker'],
             result['first_raw_destination'],
             result['first_assets_versioned'],
+            result['first_assets_https'],
             result['edit_replaced'],
             result['edit_path_same'],
             result['inactive_removed_public_path'],

@@ -22,10 +22,10 @@ async function run() {
   await send('Page.enable'); await send('Runtime.enable');
   await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
   const results=[];
-  for (const slug of ['sh2-g002','sh1-g002']) {
-    const url=`https://yolokfx.com/quiz/us/${slug}/?utm_source=facebook&utm_medium=g002-s&utm_campaign=static_canary&utm_adgroup=g002-test&fbclid=STATIC123&custom_x=abc`;
+  for (const [host,slug] of [['yolokfx.com','sh2-g002'],['yolokfx.com','sh1-g002'],['vizioid.com','sh2-g002'],['vizioid.com','sh1-g002']]) {
+    const url=`https://${host}/quiz/us/${slug}/?utm_source=facebook&utm_medium=g002-s&utm_campaign=static_rollout&utm_adgroup=g002-test&fbclid=STATIC123&custom_x=abc`;
     const loaded=once('Page.loadEventFired'); await send('Page.navigate',{url}); await loaded; await sleep(500);
-    const state=await evalv(`(() => {const c=[...document.querySelectorAll('[data-mgs-dq-cta]')];const href=c[0]?.href||'';const u=href?new URL(href):null;const counts={};if(u)for(const k of ['utm_source','utm_medium','utm_campaign','utm_adgroup','fbclid','custom_x'])counts[k]=u.searchParams.getAll(k).length;const r=c[0]?.getBoundingClientRect();return {title:document.title,marker:document.documentElement.outerHTML.includes('MGS Direct Quiz static; plugin=1.1.0'),forms:document.forms.length,inputs:document.querySelectorAll('input').length,ctas:c.length,href,counts,scrollWidth:document.documentElement.scrollWidth,innerWidth,card:document.querySelector('.mgs-dq-card')?.getBoundingClientRect().toJSON(),ctaRect:r?.toJSON()};})()`);
+    const state=await evalv(`(() => {const c=[...document.querySelectorAll('[data-mgs-dq-cta]')];const href=c[0]?.href||'';const u=href?new URL(href):null;const counts={};if(u)for(const k of ['utm_source','utm_medium','utm_campaign','utm_adgroup','fbclid','custom_x'])counts[k]=u.searchParams.getAll(k).length;const r=c[0]?.getBoundingClientRect();const marker=[...document.childNodes].some(n=>n.nodeType===8&&n.data.includes('MGS Direct Quiz static; plugin=1.1.'));return {title:document.title,marker,forms:document.forms.length,inputs:document.querySelectorAll('input').length,ctas:c.length,href,counts,scrollWidth:document.documentElement.scrollWidth,innerWidth,card:document.querySelector('.mgs-dq-card')?.getBoundingClientRect().toJSON(),ctaRect:r?.toJSON()};})()`);
     const r=state.ctaRect;
     if (!r) throw new Error(`CTA missing ${slug}`);
     const nav=once('Page.loadEventFired');
@@ -35,7 +35,7 @@ async function run() {
     await send('Input.dispatchMouseEvent',{type:'mouseReleased',x,y,button:'left',clickCount:1});
     await nav; await sleep(400);
     const finalUrl=await evalv('location.href');
-    results.push({slug,...state,final_url:finalUrl,destination_ok:finalUrl.startsWith('https://yolokfx.com/rec-us-app-shein-circle-of-style/')});
+    results.push({host,slug,...state,final_url:finalUrl,destination_ok:finalUrl.startsWith(`https://${host}/rec-us-app-shein-circle-of-style/`)});
   }
   ws.close();
   await fetch(base + '/json/close/' + target.id);
