@@ -4489,6 +4489,17 @@
         },
         "hermes_unchanged": true,
         "validated_at": "2026-08-20T21:54:07-04:00"
+      },
+      "latest_maintenance_20260901": {
+        "authorization_message_id": "1544473492148457583",
+        "source_thread_id": "1544371507491242044",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260901T190009Z-vps-full-update",
+        "packages_updated": 20,
+        "corepack": "0.36.0",
+        "kernel": "6.8.0-138-generic",
+        "state": "reboot_validator_preparing",
+        "hermes_unchanged": true,
+        "updated_at": "2026-09-01T22:43:05.907576+00:00"
       }
     },
     {
@@ -11151,6 +11162,17 @@
         "readback": "message/channel/author/content PASS"
       },
       "updated_at": "2026-09-01T12:18:20-04:00"
+    },
+    {
+      "id": "mgs-vps-post-reboot-20260901",
+      "type": "temporary-systemd-validator",
+      "status": "preparing",
+      "unit": "mgs-vps-post-reboot-20260901.service",
+      "script": "/root/.hermes/secure-backups/vps-maintenance/20260901T190009Z-vps-full-update/post-reboot-validator.py",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20260901T190009Z-vps-full-update/post-reboot-validation.json",
+      "authorization_message_id": "1544473492148457583",
+      "source_thread_id": "1544371507491242044",
+      "updated_at": "2026-09-01T22:43:05.907576+00:00"
     }
   ],
   "profile_skill_references": [
@@ -16097,5 +16119,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-01T22:43:05.907576+00:00"
 }
