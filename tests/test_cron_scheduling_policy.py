@@ -21,6 +21,14 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertEqual(restriction["stagger_seconds"], 30)
         self.assertEqual(restriction["base_maximum_detection_delay_seconds"], 330)
         self.assertTrue(restriction["shared_operation_lock"].endswith("roas-cycle.lock"))
+        self.assertEqual([stage["order"] for stage in restriction["stages"]], [1, 2])
+        self.assertEqual(restriction["stages"][1]["runner"], "scripts/ares-eggbev-zero-pixel-guardrail.py")
+        zero_pixel = operation["zero_pixel_result_guardrail"]
+        self.assertEqual(zero_pixel["after_hour_et"], 3)
+        self.assertEqual(zero_pixel["spend_operator"], ">")
+        self.assertEqual(zero_pixel["spend_threshold_usd"], 2)
+        self.assertFalse(zero_pixel["schedule"]["new_cron_created"])
+        self.assertEqual(zero_pixel["schedule"]["cron"], restriction["schedule"])
         one_time = jobs["one_time_reactivation_20260831"]
         self.assertEqual(one_time["schedule"], "once at 2026-09-01 00:16 America/New_York")
         self.assertIn("common Eggbev ROAS operation lock", one_time["lock_scope"])
@@ -31,6 +39,8 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertIn("`08:16` e `20:16`", page_prompt)
         self.assertIn("stagger determinístico de 30 segundos", page_prompt)
         self.assertIn("lock compartilhado com ROAS", page_prompt)
+        self.assertIn("spend > US$2", page_prompt)
+        self.assertIn("Eggbev PV U", page_prompt)
 
     def test_canonical_policy_covers_all_schedulers_and_minute_allocation(self):
         policy = (ROOT / "context/cron-scheduling-policy.md").read_text(encoding="utf-8")

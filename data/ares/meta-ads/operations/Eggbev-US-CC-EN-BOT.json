@@ -2809,6 +2809,19 @@
       "scheduler_tick_confirmed": true,
       "shared_operation_lock": "/root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock",
       "script": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
+      "stages": [
+        {
+          "name": "DTR restriction transition",
+          "runner": "scripts/ares-eggbev-page-restriction-guardrail.py",
+          "order": 1
+        },
+        {
+          "internal_gate": "03:00 ET",
+          "name": "zero pixel results after US$2",
+          "runner": "scripts/ares-eggbev-zero-pixel-guardrail.py",
+          "order": 2
+        }
+      ],
       "stagger_seconds": 30,
       "state": "scheduled",
       "timezone": "America/New_York"
@@ -2866,7 +2879,7 @@
       "Eggbev-US-CC-EN-01",
       "Eggbev-US-CC-EN-01-G006"
     ],
-    "freshness_policy": "a timezone-aware source data timestamp must be no older than 2 hours; missing or unverifiable timestamp is fail-closed for economic writes",
+    "freshness_policy": "a timezone-aware source data timestamp must be no older than 2 hours for Smart Bidding dependent indicators, reactivations and Phase 3; missing/stale Smart Bidding never suppresses Phase 1/2 Meta Purchase ROAS ad cuts",
     "freshness_policy_approved_by": "Nicolas Holanda",
     "freshness_policy_approved_at_et": "2026-08-29T16:57:19-04:00",
     "freshness_policy_source": "discord:thread:1543280854024060999; manager answer: Freshness maximum acceptable delay = 2h",
@@ -2876,16 +2889,16 @@
       "UTM_CAMPAIGN",
       "FB_PAGE_ID"
     ],
-    "source_absent_or_stale": "no_write_and_alert; precedence does not convert unavailable data into a disagreement",
+    "source_absent_or_stale": "Phase 1/2 Meta Purchase ROAS cut lane continues; reactivations and Smart Bidding dependent actions fail closed with alert; precedence does not convert unavailable data into a disagreement",
     "source_precedence_on_disagreement": "Meta Purchase ROAS wins over Smart Bidding ROI",
-    "source_unavailable_stale_or_unreconciled": "no_write_and_alert_data_unavailable",
-    "status": "approved_fail_closed_pending_full_metric_mapping",
+    "source_unavailable_stale_or_unreconciled": "Meta ROAS cuts continue; reactivation/economic lanes no_write_and_alert_data_unavailable",
+    "status": "approved_selective_fail_closed_pending_full_metric_mapping",
     "target_meta_account_alias": "Eggbev-US-CC-EN-01-G006",
     "target_meta_account_id": "act_1034081997659047"
   },
   "status": "operational_gated_creation_ready_for_request",
   "strategy_family": "chatpion_bot_messenger",
-  "updated_at": "2026-08-31T00:14:52-04:00",
+  "updated_at": "2026-09-01T14:51:27-04:00",
   "vertical": "CC",
   "write_enabled": false
 }
