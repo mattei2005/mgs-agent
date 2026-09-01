@@ -648,6 +648,26 @@ def incident_key(alert: dict[str, Any]) -> str:
     return '|'.join(str(value or '').strip().lower() for value in parts)
 
 
+def refresh_active_incident_alerts(state: dict[str, Any], alerts: list[dict[str, Any]]) -> int:
+    latest_by_key: dict[str, dict[str, Any]] = {}
+    for alert in alerts:
+        key = incident_key(alert)
+        current = latest_by_key.get(key)
+        if current is None or int(alert['notification_id']) > int(current['notification_id']):
+            latest_by_key[key] = alert
+    refreshed = 0
+    for key, incident in (state.get('incidents') or {}).items():
+        if not isinstance(incident, dict) or incident.get('status') != 'active':
+            continue
+        live_alert = latest_by_key.get(key)
+        if live_alert is None:
+            continue
+        if incident.get('alert') != live_alert:
+            incident['alert'] = dict(live_alert)
+            refreshed += 1
+    return refreshed
+
+
 def message_has_resolution_reaction(channel_id: str, message_id: str) -> bool:
     status, message = discord_request('GET', f'/channels/{channel_id}/messages/{message_id}', allow_404=True)
     if status == 404:
@@ -1082,6 +1102,7 @@ async def run(args: argparse.Namespace) -> int:
 
     delivered = {int(value) for value in state.get('delivered_ids') or []}
     last_seen = int(state.get('last_seen_id') or 0)
+    refreshed_incidents = refresh_active_incident_alerts(state, alerts)
     selected = [row for row in alerts if int(row['notification_id']) > last_seen and int(row['notification_id']) not in delivered]
     deliverable, classification = classify_new_alerts(state, selected, args.channel_id, args.dry_run)
     daily_stats = process_daily_incident_cycle(
@@ -1094,7 +1115,7 @@ async def run(args: argparse.Namespace) -> int:
         state.update({'last_check': now_iso(), 'consecutive_failures': 0, 'last_error': None})
         if not args.dry_run:
             save_state(state_path, state)
-        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'daily': daily_stats}, ensure_ascii=False))
+        print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'refreshed_incidents': refreshed_incidents, 'daily': daily_stats}, ensure_ascii=False))
         return 0
 
     ids = sorted({int(row['notification_id']) for row in selected})

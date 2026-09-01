@@ -87,6 +87,26 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(len(payloads), 23)
         self.assertTrue(all(len(payload['embeds']) == 1 for payload in payloads))
 
+    def test_refresh_active_incident_adds_live_status_breakdown(self):
+        live_alert = self.alerts()[0]
+        legacy_alert = dict(live_alert)
+        legacy_alert.pop('page_statuses')
+        key = mod.incident_key(live_alert)
+        state = {
+            'incidents': {
+                key: {
+                    'status': 'active',
+                    'alert': legacy_alert,
+                },
+            },
+        }
+        self.assertEqual(mod.refresh_active_incident_alerts(state, [live_alert]), 1)
+        self.assertEqual(
+            state['incidents'][key]['alert']['page_statuses'],
+            {'Broadcast': 1, 'On-hold': 1},
+        )
+        self.assertEqual(mod.refresh_active_incident_alerts(state, [live_alert]), 0)
+
     def test_atomic_state_mode_is_private(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'state.json'

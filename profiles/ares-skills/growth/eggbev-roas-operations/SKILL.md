@@ -47,7 +47,7 @@ Use para pedidos e ciclos da thread `1541578606076231750`, incluindo configuraç
 ## Guardrails
 
 - O scheduler físico dispara no minuto `:10` das horas aprovadas; `scheduled_cycle_at` normaliza para a hora lógica `:00` e falha fechado acima de `:15`.
-- **Reativação fail-closed por Page:** Fase 3, recovery e qualquer ativação manual consultam `page_eligibility_policy` + denylist canônica. Page com qualquer histórico de restrição nunca é reativada; campanha, conjunto e anúncios ficam fora, e o operador recebe o motivo. A regra não impede cortes/pausas.
+- **Reativação fail-closed por Page:** Fases 1/2, Fase 3, recovery e qualquer ativação manual consultam `page_eligibility_policy` + denylist canônica. Page com qualquer histórico de restrição nunca recebe reativação de campanha, conjunto ou anúncio; os objetos ficam fora e o operador recebe o motivo. A regra não impede cortes/pausas.
 - Fonte indisponível, stale ou irreconciliável significa zero write e alerta.
 - Alteração de threshold ou automação segue os gates do contrato.
 - Criação/alteração de cron segue `context/cron-scheduling-policy.md` e exige inventário global antes do minuto ser escolhido.
