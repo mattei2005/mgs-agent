@@ -181,6 +181,8 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "aligned_table" in inspect.getsource(module.build_daily)
     daily_source = inspect.getsource(module.build_daily)
     assert '"Lance"' in daily_source
+    assert '"Dia"' in daily_source
+    assert '"cycle_day"' in daily_source
     assert '"Budget"' in daily_source
     assert '"Custo"' in daily_source
     assert "daily_mobile_card" not in daily_source

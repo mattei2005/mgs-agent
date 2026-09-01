@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import inspect
 import json
 import unittest
 from datetime import datetime
@@ -71,6 +72,18 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(module.visible_campaign_label(campaign, 51), 'C01-29/08')
         legacy = {'name': '51 - 29-08 - Garagem Brasil - (b01fb05c51) event_Subscribe - MAXVOL'}
         self.assertEqual(module.visible_campaign_label(legacy, 51), 'C51-29/08')
+
+    def test_daily_and_intraday_include_cycle_day_column(self):
+        module = load(REPORTS, 'cpv05_reports_day_column_test')
+        self.assertEqual(module.cycle_day_value('2026-08-29', '2026-09-01'), 4)
+        self.assertEqual(module.cycle_day_label(4), 'D4')
+        self.assertEqual(module.cycle_day_label(0), 'PREP')
+        daily_source = inspect.getsource(module.render_daily)
+        intraday_source = inspect.getsource(module.render_intraday)
+        self.assertIn("'Dia'", daily_source)
+        self.assertIn("'Dia'", intraday_source)
+        self.assertIn("cycle_day_label(row['cycle_day'])", daily_source)
+        self.assertIn("cycle_day_label(row['cycle_day'])", intraday_source)
 
     def test_intraday_action_is_read_only_and_waits_for_state(self):
         module = load(REPORTS, 'cpv05_reports_action_test')
