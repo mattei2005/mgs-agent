@@ -10,6 +10,7 @@ INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas
   5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?
   6. Existe alguma exceção de público, placements, estratégia ou tracking?
 - Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma nova instrução explícita de Nicolas no próprio pedido.
+- Antes de preparar qualquer modo de clone, inclusive `pure_clone`, consultar `page_eligibility_policy` e a denylist canônica para a Page efetiva. Page com qualquer histórico de restrição não pode ser clonada nem ativada; fazer zero write e solicitar outra Page.
 - Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma que os valores são iguais sem o gestor dizer.
 - Duplicação exata preserva integralmente estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget escolhido pelo gestor, nome DUPnn e início/status.
 - Naming do Messenger JSON: sempre que o Ares rematerializar o JSON em `clone_prestaged`, substituicao revisada ou qualquer futura rota equivalente, o Template name deve ser exatamente `JSON-AGT`, com gate pre-write e GET/readback do JSON instalado. `pure_clone` nao injeta JSON novo: preserva o creative/JSON da fonte sem reescrever. Nao alterar retroativamente campanhas ja publicadas.

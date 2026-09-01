@@ -40,7 +40,8 @@ Use para pedidos na thread `1541578556037927053`, configuração da criação, i
 ## Procedimento
 
 1. Confirmar conta, Page, quantidade e budget exato sem herdar outra operação.
-2. Reconciliar e reservar apenas os assets do request; mídia deve estar pre-stageada antes do manifest.
+2. Antes de reservar sequência, assets ou pre-stage, consultar `page_eligibility_policy` e a denylist canônica por `pg_XXXXX` + FB Page ID. Se a Page já teve qualquer restrição registrada, fazer zero write, não criar a campanha e solicitar outra Page.
+3. Reconciliar e reservar apenas os assets do request; mídia deve estar pre-stageada antes do manifest.
 3. Materializar e prevalidar o manifest com o runner Eggbev.
 4. Mostrar resumo final e aguardar o OK aplicável do request.
 5. Executar exclusivamente pelo Campaign Engine v3.

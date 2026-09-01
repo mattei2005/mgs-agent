@@ -77,6 +77,7 @@ Abra o contrato operacional inteiro somente para auditoria estrutural da operaç
 
 ## Invariantes transversais
 
+- **Gate permanente de Page:** antes de criar, clonar, ativar ou reativar qualquer campanha/ad set/anúncio Eggbev, consultar `page_eligibility_policy` e a denylist canônica. Qualquer Page com histórico atual ou passado de restrição é inelegível; fazer zero write e solicitar outra Page. Fonte ausente, inválida ou identidade ambígua também falha fechada. Relatórios e pausas continuam permitidos. Esse gate é separado do critério DTR+SB do pause automático.
 - Runtime/API/dados vivos vencem para estado atual; MGS OS vence para autoridade.
 - Seção histórica não reativa regra supersedida.
 - Criar/clone usam exclusivamente Campaign Engine v3.

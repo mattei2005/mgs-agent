@@ -27,6 +27,7 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 - Runner LEADS: `scripts/ares-eggbev-page-lead-guardrail.py`
 - Runner restrição: `scripts/ares-eggbev-page-restriction-guardrail.py`
 - Audit/state: somente o run e state mais recentes de cada guardrail
+- Denylist permanente de elegibilidade: `data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/restricted-page-denylist.json`; sincronizada pelo monitor a partir de `history.pages + active` e consumida antes de criar, clonar ou reativar
 
 ## Disclosure progressivo
 

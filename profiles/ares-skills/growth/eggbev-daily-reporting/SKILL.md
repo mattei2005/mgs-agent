@@ -40,7 +40,8 @@ Use para pedidos na thread `1541578596253175858`, configuração do Diário, rel
 1. Fixar período, timezone ET e moeda USD.
 2. Buscar Meta e Smart Bidding vivas no momento do pedido.
 3. Reconciliar período, UTM, Page, campanha e freshness.
-4. Renderizar todas as linhas elegíveis sem limite silencioso.
+4. Consultar a denylist canônica apenas para sinalizar Page inelegível por histórico de restrição; Diário permanece read-only e nunca reativa.
+5. Renderizar todas as linhas elegíveis sem limite silencioso.
 5. Validar métricas, paginação e ausência de write.
 6. Publicar somente quando a rota/autorização correspondente estiver ativa.
 

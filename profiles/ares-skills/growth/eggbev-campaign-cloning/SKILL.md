@@ -39,7 +39,8 @@ Use para pedidos na thread `1543333373945053184`, intake de duplicação, config
 ## Procedimento
 
 1. Fazer preflight vivo da campanha-fonte, hierarquia, lineage e colisão de `DUPnn`.
-2. Classificar exatamente `pure_clone`, `clone_prestaged` ou modo permitido no contrato vivo.
+2. Consultar `page_eligibility_policy` e a denylist canônica para a Page efetiva do clone — inclusive `pure_clone` que preserva a Page. Se ela já teve qualquer restrição registrada, fazer zero write e solicitar outra Page; nunca clonar mantendo Page restrita.
+3. Classificar exatamente `pure_clone`, `clone_prestaged` ou modo permitido no contrato vivo.
 3. Preservar ou substituir campos somente conforme o modo escolhido.
 4. Materializar manifest, apresentar resumo e aguardar o OK do request.
 5. Executar exclusivamente pelo Engine v3.
