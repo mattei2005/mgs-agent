@@ -2024,6 +2024,20 @@
         "scale_recommendation": "🚀",
         "source_or_write_gate_blocked": "⚠️"
       },
+      "dashboard_delay_visibility": {
+        "decision": "Every Corte e ROAS report, including Phase 3, displays the live Smart Bidding dashboard delay and the approved two-hour limit in the header.",
+        "format": "Nmin below 60 minutes; Xh YYmin from 60 minutes; N/D when missing or invalid",
+        "requested_at_et": "2026-09-01T11:31:37-04:00",
+        "requested_by": "Rodolfo Mattei",
+        "source": "discord:thread:1541578606076231750",
+        "source_field": "/estimated/delay.totalMinutes",
+        "status_labels": [
+          "within_limit",
+          "above_limit",
+          "unverifiable"
+        ],
+        "visible_limit_minutes": 120
+      },
       "ad_only_and_compact_ad_roas_correction": {
         "decision": "ROAS cuts and reactivations change ad status only; campaign and ad set status are never changed by the ROAS cycle, including when zero ads remain active",
         "decision_id": "ARES-EGGBEV-ROAS-CYCLE-AD-ONLY-V19-20260830",
@@ -2776,6 +2790,9 @@
       "Eggbev-US-CC-EN-01-G006"
     ],
     "freshness_policy": "a timezone-aware source data timestamp must be no older than 2 hours; missing or unverifiable timestamp is fail-closed for economic writes",
+    "freshness_policy_approved_by": "Nicolas Holanda",
+    "freshness_policy_approved_at_et": "2026-08-29T16:57:19-04:00",
+    "freshness_policy_source": "discord:thread:1543280854024060999; manager answer: Freshness maximum acceptable delay = 2h",
     "maximum_freshness_hours": 2,
     "metric_empty_but_source_valid": "apply null metric policy; do not confuse with source outage",
     "page_join": [

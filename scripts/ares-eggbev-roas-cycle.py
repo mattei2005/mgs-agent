@@ -929,6 +929,34 @@ def render_report(run: dict[str, Any]) -> str:
     time_label = started.strftime('%H:%M') if started else 'N/D'
     mode = 'SIMULAÇÃO' if run.get('mode') == 'dry_run' else 'CONTROLLED WRITE'
     phase = common.norm(run.get('phase'))
+    sb_readback = run.get('smart_bidding_readback') or {}
+    dashboard_freshness = sb_readback.get('economic_freshness') or {}
+    if dashboard_freshness.get('age_minutes') is None:
+        for campaign in campaigns:
+            candidate = campaign.get('economic_freshness') or {}
+            if candidate.get('age_minutes') is not None:
+                dashboard_freshness = candidate
+                break
+    dashboard_delay_minutes = common.finite_float(dashboard_freshness.get('age_minutes'))
+    dashboard_limit_minutes = common.finite_float(dashboard_freshness.get('max_age_minutes')) or 120.0
+
+    def format_delay(minutes: float | None) -> str:
+        if minutes is None or minutes < 0:
+            return 'N/D'
+        total = int(round(minutes))
+        if total < 60:
+            return f'{total}min'
+        hours, remainder = divmod(total, 60)
+        return f'{hours}h {remainder:02d}min'
+
+    dashboard_delay_label = format_delay(dashboard_delay_minutes)
+    dashboard_limit_label = format_delay(dashboard_limit_minutes)
+    if dashboard_delay_minutes is None:
+        dashboard_delay_status = '⚠️ não verificável'
+    elif dashboard_delay_minutes <= dashboard_limit_minutes:
+        dashboard_delay_status = '✅ dentro do limite'
+    else:
+        dashboard_delay_status = '⚠️ acima do limite'
     if phase == 'PHASE_3':
         title_emoji = '⚠️' if reasons else '♻️'
         lines = [
@@ -938,6 +966,7 @@ def render_report(run: dict[str, Any]) -> str:
             f"♻️ `{counts.get('reactivate_ads', 0)} ads` • 🏗️ `{counts.get('reactivate_adsets', 0)} conjuntos` • "
             f"📣 `{counts.get('reactivate_campaigns', 0)} campanhas` • 💵 `{counts.get('budget_updates', 0)} budgets` • "
             f"⛔ `{counts.get('excluded_campaigns', 0)} excluídas`",
+            f"⏱️ **Atraso da dash:** `{dashboard_delay_label}` • limite `{dashboard_limit_label}` • {dashboard_delay_status}",
             '🔁 **Ação da Fase 3:** reciclagem dos vencedores do dia anterior; Fase 1 e cortes normais retornam às 05:00 ET.',
         ]
     else:
@@ -948,6 +977,7 @@ def render_report(run: dict[str, Any]) -> str:
             f"🎯 `{campaign_report.get('campaign_count', 0)} camp` • `{counts.get('ads_considered', 0)} ads` • "
             f"🛑 `{counts.get('pause_ads', 0)}` • ♻️ `{counts.get('reactivate_ads', 0)}` • "
             f"🚀 `{counts.get('budget_scale_candidates', 0)}` • ✅ `{sum(1 for row in plan.get('decisions') or [] if row.get('action') == 'KEEP')}`",
+            f"⏱️ **Atraso da dash:** `{dashboard_delay_label}` • limite `{dashboard_limit_label}` • {dashboard_delay_status}",
         ]
     if phase == 'OBSERVE':
         lines.append('👁️ Formação de dados: às 05:00/06:00 o relatório continua, mas nenhum corte ou reativação é executado; ações começam às 08:00 ET.')

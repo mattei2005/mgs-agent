@@ -1619,13 +1619,49 @@ class ContractTests(unittest.TestCase):
                 }],
             },
             'reporting': {'campaigns': [], 'campaign_count': 1},
+            'smart_bidding_readback': {
+                'economic_freshness': {
+                    'age_minutes': 132,
+                    'max_age_minutes': 120,
+                    'ready': False,
+                },
+            },
             'writes': [],
         }
         rendered = cycle.render_report(run)
         self.assertIn('alterações manuais/externas detectadas', rendered)
         self.assertIn('Smart Bidding sem atualização verificável dentro do limite de 2h', rendered)
         self.assertIn('Budget liberado para Nicolas', rendered)
+        self.assertIn('Atraso da dash:** `2h 12min`', rendered)
+        self.assertIn('limite `2h 00min`', rendered)
+        self.assertIn('acima do limite', rendered)
         self.assertNotIn('Budget write permanece bloqueado', rendered)
+
+    def test_dashboard_delay_uses_reference_thread_format_and_nd_fallback(self):
+        base_run = {
+            'started_at_et': '2026-09-01T10:00:00-04:00',
+            'phase': 'PHASE_1',
+            'threshold': .4,
+            'mode': 'dry_run',
+            'meta_status': 'ok',
+            'smart_bidding_status': 'ok',
+            'source_gate': {'write_ready': True, 'reasons': []},
+            'plan': {
+                'counts': {'ads_considered': 0, 'pause_ads': 0, 'reactivate_ads': 0, 'budget_scale_candidates': 0},
+                'decisions': [],
+                'budget_scale_candidates': [],
+            },
+            'reporting': {'campaigns': [], 'campaign_count': 0},
+            'writes': [],
+        }
+        under_hour = dict(base_run, smart_bidding_readback={
+            'economic_freshness': {'age_minutes': 42, 'max_age_minutes': 120, 'ready': True},
+        })
+        self.assertIn('Atraso da dash:** `42min`', cycle.render_report(under_hour))
+        missing = dict(base_run, smart_bidding_readback={'economic_freshness': {}})
+        missing_rendered = cycle.render_report(missing)
+        self.assertIn('Atraso da dash:** `N/D`', missing_rendered)
+        self.assertIn('não verificável', missing_rendered)
 
 
 if __name__ == '__main__':
