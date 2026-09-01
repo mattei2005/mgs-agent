@@ -1643,12 +1643,12 @@
     {
       "agent": "zeus",
       "id": "shein-static-generation-20260901",
-      "next_step": "Implementar geração estática atômica no plugin, validar localmente e fazer canário antes do rollout",
-      "objective": "Migrar o frontend das landings SHEIN para index.html estático gerado pelo painel WordPress, mantendo criação, edição, duplicação, ativação e desativação sincronizadas",
-      "source": "discord:thread:1544418911250813028#1544432896654442506",
-      "state": "preflight autorizado por rodolfo; fonte canônica e runtimes em mapeamento; nenhuma mutação de produção ainda",
+      "next_step": "Operar novas landings pelo painel; validar arquivo estático, assets HTTPS, mobile e UTMs a cada ativação",
+      "objective": "Migrar o frontend das landings SHEIN para index.html físico gerado pelo painel WordPress",
+      "source": "discord:1544418911250813028; context/acquisition.md; plugins/mgs-direct-quiz; decision-direct-shein-static-delivery-20260901",
+      "state": "completed",
       "thread_id": "1544418911250813028",
-      "updated_at": "2026-09-01T19:46:11+00:00"
+      "updated_at": "2026-09-01T20:30:15+00:00"
     },
     {
       "agent": "zeus",
@@ -1862,5 +1862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T20:12:10+00:00"
+  "updated_at": "2026-09-01T20:30:15+00:00"
 }

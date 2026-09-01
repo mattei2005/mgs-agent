@@ -10155,21 +10155,23 @@
       "webroot": "/home/runcloud/webapps/yolokfx",
       "plugin": {
         "slug": "mgs-direct-quiz",
-        "version": "1.0.7",
+        "version": "1.1.1",
         "source_path": "/root/mgs-agent/plugins/mgs-direct-quiz",
         "production_path": "/home/runcloud/webapps/yolokfx/wp-content/plugins/mgs-direct-quiz",
-        "package_sha256": "5ae36f8397c10b475b96ee7f62ff94fbbf84a7e9b9d231ebe62b407e49eab62b",
+        "package_sha256": "3bae646e1f60864db27ab2475e31a7949796c671177cb5bb249b4a34bf0af343",
         "manifest_sha256": {
-          "README.md": "b4a3024ed78dce382a16d909e5291c179ad9ca2c24765f0e6c0def7d1120a725",
+          "README.md": "84bbea4db1ef5f30c0e1e37d7d34e2cb4116a2aced545d1221bb89f4275205d3",
           "assets/admin.css": "c8a461f2f4222eb22faf97b61ea678b9bcf7f87e44d6cc476a557ab45b50ca87",
           "assets/admin.js": "ba1ee8b7d45cb8df93ecc63ad900bbb8192f4f4d533afabbea08cfb2a40404df",
           "assets/direct-quiz.css": "1c94c6cb9458a33d3cb7fd5245e91a960c0adeaaa0cd016c55db6be88e0c2090",
           "assets/direct-quiz.js": "9cba5944b02712ef89a3c145af398eb1c892a4ee1835737ec02d486e21e9dca3",
-          "includes/class-mgs-direct-quiz.php": "827994636563a26da0b62bd326d366903be236bcb301fc2f0d1bdb3adb67e779",
+          "includes/class-mgs-direct-quiz.php": "61b3b675f9c94ab871e32c98dae0e91610b57574db6a376360a917ea3a8e6f85",
           "index.php": "bd48c24ce4500e60d2524571756787283f0d3fbfa50b116331309c09773f0cd1",
-          "mgs-direct-quiz.php": "79af157a1b862e6038ba18b7ed550194ad0368eddd3bceb8e870eebf06ad0575",
-          "templates/landing.php": "79d362496910f1e3fc31946e596dadb65c602bc9118793e6ae9afff7a4252eb6"
-        }
+          "mgs-direct-quiz.php": "8280bcc04b6fa24dc447f37c29d53fd8893483e3d68e7dfbdbba853bd637a49c",
+          "templates/landing.php": "d8ef7bf069d893f88dd0408a28e663b42099a7b07e642964332c4f94aad191dc"
+        },
+        "manifest_files": 9,
+        "source_production_manifest_match": true
       },
       "canary": {
         "route": "https://yolokfx.com/quiz/us/quiz-g002/",
@@ -10231,7 +10233,7 @@
         }
       },
       "validation": {
-        "unit_tests": "10/10 passed",
+        "unit_tests": "12/12 passed",
         "plugin_active_readback": true,
         "source_production_manifest_match": true,
         "landing_http": 200,
@@ -10289,7 +10291,27 @@
         "admin_badge_v2": true,
         "admin_badge_v1": true,
         "admin_visible_lp_labels": false,
-        "public_routes_http": 200
+        "public_routes_http": 200,
+        "plugin_version": "1.1.1",
+        "static_frontend": true,
+        "static_schema_version": "1.1.1",
+        "static_routes": [
+          "/quiz/us/sh2-g002/",
+          "/quiz/us/sh1-g002/"
+        ],
+        "static_marker_readback": true,
+        "static_assets_https": true,
+        "static_assets_mixed_content": false,
+        "static_html_forms": 0,
+        "static_html_inputs": 0,
+        "static_html_cta_count_each": 2,
+        "static_html_wordpress_theme_pollution": false,
+        "unknown_route_http": 404,
+        "chromium_mobile_routes_validated": 2,
+        "chromium_real_clicks": 2,
+        "chromium_mobile_horizontal_overflow": false,
+        "performance_ttfb_median_ms_8_samples": 161.2,
+        "backup_complete_readback": true
       },
       "backups": [
         {
@@ -10343,9 +10365,19 @@
         {
           "path": "/home/runcloud/backups/yolokfx-mgs-direct-quiz-option-pre-v-labels-107-20260825T231933Z.json",
           "exists_readback": true
+        },
+        {
+          "path": "/home/runcloud/backups/yolokfx-mgs-direct-quiz-1.1.1-20260901T201737Z",
+          "contains": [
+            "plugin-live-before",
+            "landings-before.json",
+            "static-before/sh1-g002/index.html",
+            "static-before/sh2-g002/index.html"
+          ],
+          "exists_readback": true
         }
       ],
-      "updated_at": "2026-08-25T23:21:22.599635+00:00",
+      "updated_at": "2026-09-01T20:27:42+00:00",
       "admin_interface": {
         "menu": "Landing SHEIN",
         "list": [
@@ -10365,6 +10397,13 @@
         "media_library_logo_picker": true,
         "logo_preview": true,
         "responsive": true
+      },
+      "procedural_source": {
+        "skill": "landing-page-shein",
+        "version": "1.1.0",
+        "live_path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+        "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/landing-page-shein/SKILL.md",
+        "sha256": "6cf73eca7fd1b68641bbf5ac38c71480a3d5a299bafb347b6ff5349230d31963"
       }
     },
     {
@@ -10379,12 +10418,23 @@
       "webroot": "/home/runcloud/webapps/vizioid",
       "plugin": {
         "slug": "mgs-direct-quiz",
-        "version": "1.0.7",
+        "version": "1.1.1",
         "source_path": "/root/mgs-agent/plugins/mgs-direct-quiz",
         "production_path": "/home/runcloud/webapps/vizioid/wp-content/plugins/mgs-direct-quiz",
-        "package_sha256": "5ae36f8397c10b475b96ee7f62ff94fbbf84a7e9b9d231ebe62b407e49eab62b",
+        "package_sha256": "3bae646e1f60864db27ab2475e31a7949796c671177cb5bb249b4a34bf0af343",
         "manifest_files": 9,
-        "source_production_manifest_match": true
+        "source_production_manifest_match": true,
+        "manifest_sha256": {
+          "README.md": "84bbea4db1ef5f30c0e1e37d7d34e2cb4116a2aced545d1221bb89f4275205d3",
+          "assets/admin.css": "c8a461f2f4222eb22faf97b61ea678b9bcf7f87e44d6cc476a557ab45b50ca87",
+          "assets/admin.js": "ba1ee8b7d45cb8df93ecc63ad900bbb8192f4f4d533afabbea08cfb2a40404df",
+          "assets/direct-quiz.css": "1c94c6cb9458a33d3cb7fd5245e91a960c0adeaaa0cd016c55db6be88e0c2090",
+          "assets/direct-quiz.js": "9cba5944b02712ef89a3c145af398eb1c892a4ee1835737ec02d486e21e9dca3",
+          "includes/class-mgs-direct-quiz.php": "61b3b675f9c94ab871e32c98dae0e91610b57574db6a376360a917ea3a8e6f85",
+          "index.php": "bd48c24ce4500e60d2524571756787283f0d3fbfa50b116331309c09773f0cd1",
+          "mgs-direct-quiz.php": "8280bcc04b6fa24dc447f37c29d53fd8893483e3d68e7dfbdbba853bd637a49c",
+          "templates/landing.php": "d8ef7bf069d893f88dd0408a28e663b42099a7b07e642964332c4f94aad191dc"
+        }
       },
       "variants": [
         {
@@ -10433,9 +10483,9 @@
         "destination_article_owns_facebook_event": true
       },
       "validation": {
-        "unit_tests": "10/10 passed",
+        "unit_tests": "12/12 passed",
         "plugin_active_readback": true,
-        "plugin_version": "1.0.7",
+        "plugin_version": "1.1.1",
         "source_production_manifest_match": true,
         "public_routes_http": {
           "sh2-g002": 200,
@@ -10454,7 +10504,7 @@
           "utm_campaign",
           "utm_adgroup",
           "fbclid",
-          "custom"
+          "custom_x"
         ],
         "chromium": "/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
         "mobile_viewport": "390x844",
@@ -10486,7 +10536,26 @@
           "duplicate": true,
           "media_library": true,
           "v1_v2_labels": true
-        }
+        },
+        "static_frontend": true,
+        "static_schema_version": "1.1.1",
+        "static_routes": [
+          "/quiz/us/sh2-g002/",
+          "/quiz/us/sh1-g002/"
+        ],
+        "static_marker_readback": true,
+        "static_assets_https": true,
+        "static_assets_mixed_content": false,
+        "static_html_forms": 0,
+        "static_html_inputs": 0,
+        "static_html_cta_count_each": 2,
+        "static_html_wordpress_theme_pollution": false,
+        "unknown_route_http": 404,
+        "chromium_mobile_routes_validated": 2,
+        "chromium_real_clicks": 2,
+        "chromium_mobile_horizontal_overflow": false,
+        "performance_ttfb_median_ms_8_samples": 323.7,
+        "backup_complete_readback": true
       },
       "backups": [
         {
@@ -10502,21 +10571,31 @@
           "path": "/home/runcloud/backups/vizioid-mgs-direct-quiz-20260827T135436Z/mgs-direct-quiz-1.0.7.tar.gz",
           "sha256": "5ae36f8397c10b475b96ee7f62ff94fbbf84a7e9b9d231ebe62b407e49eab62b",
           "exists_readback": true
+        },
+        {
+          "path": "/home/runcloud/backups/vizioid-mgs-direct-quiz-1.1.1-20260901T201617Z",
+          "contains": [
+            "plugin-live-before",
+            "landings-before.json",
+            "static-before/sh1-g002/index.html",
+            "static-before/sh2-g002/index.html"
+          ],
+          "exists_readback": true
         }
       ],
       "procedural_source": {
         "skill": "landing-page-shein",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "live_path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
         "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/landing-page-shein/SKILL.md",
-        "sha256": "5792758d3db469ea6f587ccbda40ccb8160967d6651385fa8f878fd172658c59"
+        "sha256": "6cf73eca7fd1b68641bbf5ac38c71480a3d5a299bafb347b6ff5349230d31963"
       },
       "recovered_issues": [
         "First deploy attempt stopped before production mutation because package checksum lacked permission after runcloud ownership; pre-state was read back unchanged and retry used sudo checksum.",
         "Browser harness could not launch Chrome; final mobile and click QA ran in foreground Chromium through CDP.",
         "Initial official white logo was illegible on the white V2 card; a lossless dark-text derivative was imported and visually revalidated."
       ],
-      "updated_at": "2026-08-27T14:10:10.003893+00:00"
+      "updated_at": "2026-09-01T20:27:42+00:00"
     },
     {
       "id": "ares-cpv-initial-budget-usd25-20260827",
