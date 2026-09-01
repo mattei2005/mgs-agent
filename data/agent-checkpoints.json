@@ -512,6 +512,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ROAS-ZERO-PIXEL-20260901",
+      "next_step": "Diagnosticar o child batch adsets sem bypass de quota, corrigir, validar live em menos de cinco minutos, reativar a etapa no wrapper, repetir suíte/readbacks, registrar decisões e REPORT-INFRA.",
+      "objective": "Manter cortes ROAS ativos apesar do atraso da dashboard e adicionar fallback pós-03:00 para spend acima de US$2 sem resultado Eggbev PV U",
+      "source": "discord:thread:1544416758998376509",
+      "state": "contrato, runner roas, prompts e guardrail de pixel implementados; testes unitários iniciais passaram; leitura sequencial live encontrou 11 campanhas ativas e zero candidatas. a etapa de pixel foi temporariamente retirada do wrapper após o primeiro batch otimizado retornar erro no child adsets; zero writes e zero alertas pendentes confirmados.",
+      "thread_id": "1544416758998376509",
+      "updated_at": "2026-09-01T19:37:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
       "next_step": "Não criar substitutas. Rodar o reconciliador em checks de release. Fechar com Nicolas a referência/template e budget da criação; implementar from_zero, placements e pre-stage. Resolver timestamp Messenger; depois validar canário aprovado e somente então avaliar automação do Diário/budget.",
       "objective": "Manter as seis rotas Eggbev fixas, separadas, auditáveis e reconciliadas com o contrato/runtime real",
@@ -1842,5 +1852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T19:10:49+00:00"
+  "updated_at": "2026-09-01T19:37:22+00:00"
 }
