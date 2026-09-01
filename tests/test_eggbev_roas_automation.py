@@ -216,17 +216,25 @@ class SourceGateTests(unittest.TestCase):
     def meta(self, conflict=False):
         return {'native_rules': {'conflict': {'enabled': conflict}}}
 
-    def test_ready_requires_both_sources_and_no_rule_conflict(self):
+    def test_ready_sources_allow_cut_and_reactivation_lanes(self):
         gate = common.source_gate(self.meta(False), {'ready': True}, 'PHASE_1')
         self.assertTrue(gate['write_ready'])
+        self.assertTrue(gate['cut_write_ready'])
+        self.assertTrue(gate['reactivation_write_ready'])
 
-    def test_native_rule_blocks_write(self):
+    def test_native_rule_never_stops_meta_roas_cut_lane(self):
         gate = common.source_gate(self.meta(True), {'ready': True}, 'PHASE_1')
         self.assertIn('native_rule_ADS_ZERO_RESULTS_enabled', gate['reasons'])
+        self.assertTrue(gate['write_ready'])
+        self.assertTrue(gate['cut_write_ready'])
+        self.assertFalse(gate['reactivation_write_ready'])
 
-    def test_missing_smart_bidding_blocks_write(self):
+    def test_missing_smart_bidding_blocks_only_reactivation_not_cuts(self):
         gate = common.source_gate(self.meta(False), {'ready': False, 'reason': 'target_missing'}, 'PHASE_1')
         self.assertIn('target_missing', gate['reasons'])
+        self.assertTrue(gate['write_ready'])
+        self.assertTrue(gate['cut_write_ready'])
+        self.assertFalse(gate['reactivation_write_ready'])
 
     def test_reset_is_not_action_cycle(self):
         gate = common.source_gate(self.meta(False), {'ready': True}, 'RESET')
@@ -243,7 +251,26 @@ class SourceGateTests(unittest.TestCase):
         self.assertEqual(review[0]['action'], 'ASK_NICOLAS_FOR_ORIENTATION')
         gate = common.source_gate({'native_rules': {'conflict': {'enabled': False}}, 'manual_review': review}, {'ready': True}, 'PHASE_2')
         self.assertIn('manual_intervention_review_required', gate['reasons'])
+        self.assertTrue(gate['cut_write_ready'])
+        self.assertFalse(gate['reactivation_write_ready'])
         self.assertIn('a1', state['paused_ads'])
+
+    def test_lane_gate_keeps_cuts_and_materializes_reactivation_no_write(self):
+        plan = {
+            'decisions': [
+                {'ad_id': 'cut', 'action': 'PAUSE_AD'},
+                {'ad_id': 'reactivate', 'action': 'REACTIVATE_AD'},
+            ],
+            'counts': {'pause_ads': 1, 'reactivate_ads': 1},
+        }
+        gate = common.source_gate(self.meta(False), {'ready': False, 'reason': 'smart_bidding_data_stale_over_2h'}, 'PHASE_2')
+        gated = common.apply_action_lane_gate(plan, gate)
+        self.assertEqual(gated['decisions'][0]['action'], 'PAUSE_AD')
+        self.assertEqual(gated['decisions'][1]['action'], 'KEEP')
+        self.assertEqual(gated['decisions'][1]['planned_action'], 'REACTIVATE_AD')
+        self.assertEqual(gated['counts']['pause_ads'], 1)
+        self.assertEqual(gated['counts']['reactivate_ads'], 0)
+        self.assertEqual(gated['counts']['reactivations_blocked'], 1)
 
     def test_manual_adset_intervention_requires_full_set_review(self):
         state = common.default_state(dt.date(2026, 8, 29))

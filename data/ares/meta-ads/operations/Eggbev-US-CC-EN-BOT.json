@@ -963,7 +963,7 @@
           "08:00",
           "20:00"
         ],
-        "scope": "Proteções por página: LEADS > 5000 nos ciclos 08:00/20:00 ET e restrição DTR #2022 confirmada com pausa imediata da campanha; alertas curtos e readback obrigatório",
+        "scope": "Proteções por página: LEADS > 5000 nos ciclos 08:00/20:00 ET, restrição DTR #2022 confirmada e fallback independente pós-03:00 para campanha com spend > US$2 e zero resultado Eggbev PV U; pausas de campanha, alertas curtos e readback obrigatório",
         "thread_id": "1543312825890381865",
         "thread_name": "Página e Limites"
       },
@@ -974,7 +974,7 @@
         "runner": "scripts/ares-eggbev-roas-cycle.py",
         "runtime": "status writes and direct posts enabled fail-closed; budget write disabled",
         "scope": "scheduled and on-demand ROAS cut/reactivation cycles, report-only economics and gated budget recommendations",
-        "source_gate": "Messenger Smart Bidding freshness must be verifiable within two hours for action writes; invalid source means zero write plus alert",
+        "source_gate": "Phase 1/2 Meta Purchase ROAS cuts never stop because of Smart Bidding dashboard freshness; stale/unavailable Smart Bidding blocks only reactivations and dependent indicators. Phase 3 keeps its full freshness and Page gate.",
         "thread_id": "1541578606076231750",
         "thread_name": "Eggbev-US-CC-EN Corte e ROAS"
       },
@@ -1788,6 +1788,71 @@
       "smart_bidding_only_transition": "no_write"
     }
   },
+  "zero_pixel_result_guardrail": {
+    "after_hour_et": 3,
+    "alert_layout": {
+      "maximum_lines": 4,
+      "required_fields": [
+        "severity/title",
+        "campaign count and compact names",
+        "spend/pixel/time rule",
+        "pause readback and no-auto-reactivation"
+      ]
+    },
+    "authorization_source": "discord:thread:1544416758998376509",
+    "authorized_at_et": "2026-09-01T14:51:27-04:00",
+    "authorized_by": "Nicolas Holanda",
+    "authorized_by_discord_id": "1055570806945620030",
+    "decision_source": {
+      "period": "current America/New_York calendar day",
+      "query_level": "campaign",
+      "route": "Meta Ads Insights date_preset=today",
+      "spend_field": "spend"
+    },
+    "discord": {
+      "fallback_error_thread_id": "1543280854024060999",
+      "post_failure_fails_run": true,
+      "post_requires_get_readback": true,
+      "thread_id": "1543312825890381865",
+      "thread_name": "Página e Limites"
+    },
+    "pixel_event": {
+      "custom_event_str": "eggbev-pv-u",
+      "custom_event_type": "OTHER",
+      "display_name": "Eggbev PV U",
+      "insights_action_type": "offsite_conversion.fb_pixel_custom",
+      "pixel_id": "935354115143283",
+      "promoted_object_exact_match_required": true
+    },
+    "policy_approved": true,
+    "purpose": "Fallback independente da notificação de Page restrita: depois das 03:00 ET, nenhuma campanha efetivamente ativa pode continuar gastando acima de US$2 sem qualquer resultado do evento de pixel Eggbev PV U.",
+    "recovery": "readback-first; campaign already PAUSED is idempotent; failed Discord delivery is persisted and retried before new evaluation",
+    "runtime": {
+      "runner": "/root/mgs-agent/scripts/ares-eggbev-zero-pixel-guardrail.py",
+      "scheduler_backend": "existing root page-protection wrapper",
+      "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
+      "wrapper_stage": 2,
+      "write_enabled": true
+    },
+    "schedule": {
+      "cron": "3-58/5 * * * *",
+      "internal_time_gate": "run is no-op before 03:00 ET; evaluate on every existing protection tick from 03:03:30 onward",
+      "new_cron_created": false,
+      "shared_operation_lock": "data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock",
+      "stagger_seconds": 30,
+      "timezone": "America/New_York"
+    },
+    "scope": {
+      "action": "set campaign status PAUSED immediately",
+      "action_level": "campaign",
+      "auto_reactivate": false,
+      "budget_write": false,
+      "delete": false,
+      "eligible_campaign": "configured/effective ACTIVE, spend strictly greater than US$2 today, zero offsite_conversion.fb_pixel_custom results, and every effectively active ad set has the exact Eggbev pixel/custom event promoted_object"
+    },
+    "spend_operator": ">",
+    "spend_threshold_usd": 2
+  },
   "policy_update_20260829_170820": {
     "at_et": "2026-08-29T17:08:20-04:00",
     "authorized_by": "Nicolas",
@@ -1868,6 +1933,18 @@
   "roas_cycle_policy": {
     "after_23_until_midnight": "no_new_phase2_action; Phase 3 runs inside the existing 00:00 job against the previous closed ET day",
     "executor": "Ares",
+    "cut_continuity_when_dashboard_delayed": {
+      "approved_at_et": "2026-09-01T14:51:27-04:00",
+      "approved_by": "Nicolas Holanda",
+      "approved_by_discord_id": "1055570806945620030",
+      "decision_metric": "live Meta Purchase ROAS at ad level",
+      "phase_1_2_behavior": "execute every eligible ad cut immediately when Purchase ROAS is below the current threshold; Smart Bidding dashboard delay, stale reporting or unavailable report-only economics never stop the cut lane",
+      "reactivation_behavior": "reactivations remain fail-closed when Smart Bidding reconciliation/eligibility context is stale or unavailable",
+      "reporting_behavior": "show dashboard delay and report-only Smart Bidding fields as stale or N/D without suppressing Meta ROAS cuts",
+      "schedule_change": false,
+      "source": "discord:thread:1544416758998376509; correction references discord:thread:1544364459378737334",
+      "supersedes": "the prior two-hour Smart Bidding freshness gate as a blocker for Phase 1/2 ROAS cuts"
+    },
     "formation_window": {
       "cuts": false,
       "from": "00:00",
