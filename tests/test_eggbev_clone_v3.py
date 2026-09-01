@@ -192,7 +192,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
-            'name': 'Original Campaign DUP01',
+            'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
             'start_time': future_midnight(),
             'status': 'ACTIVE',
             'campaign_updates': {'daily_budget': '5500'},
@@ -201,7 +201,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertEqual([stage.name for stage in bundle.stages], ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback'])
         update = bundle.stages[1].operations[0]
         self.assertEqual(update.body, {
-            'name': 'Original Campaign DUP01',
+            'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
             'daily_budget': '5500',
             'start_time': campaign['start_time'],
             'status': 'ACTIVE',
@@ -230,7 +230,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
-            'name': 'Original Campaign DUP01',
+            'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
             'start_time': future_midnight(),
             'status': 'ACTIVE',
             'campaign_updates': {'daily_budget': '4500'},
@@ -245,7 +245,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
-            'name': 'Original Campaign DUP01',
+            'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
             'start_time': future_midnight(),
             'status': 'ACTIVE',
             'campaign_updates': {'daily_budget': '4500'},

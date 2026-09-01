@@ -96,6 +96,9 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             raise ManifestError(
                 f"account {campaign.account_id} requires operation {required_operation}"
             )
+        name_regex = policy.get("name_regex")
+        if name_regex and re.fullmatch(str(name_regex), campaign.name) is None:
+            raise ManifestError(f"campaign name violates account naming policy: {campaign.name}")
         if manifest.operation == "Eggbev-US-CC-EN-BOT":
             page_ids: set[str] = set()
             promoted = (campaign.adset_create or {}).get("promoted_object") or {}
@@ -111,9 +114,6 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 require_page_eligible(campaign.name, meta_page_id=next(iter(page_ids), None))
             except PageEligibilityError as exc:
                 raise ManifestError(str(exc)) from exc
-        name_regex = policy.get("name_regex")
-        if name_regex and re.fullmatch(str(name_regex), campaign.name) is None:
-            raise ManifestError(f"campaign name violates account naming policy: {campaign.name}")
 
         if policy.get("budget_update_required"):
             budget_source = str(policy.get("budget_source") or "campaign_updates")
