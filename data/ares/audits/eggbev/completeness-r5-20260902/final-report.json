@@ -1,0 +1,160 @@
+{
+  "audit_id": "ARES-EGGBEV-COMPLETENESS-R5-20260902",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "requested_by": "Rodolfo Mattei",
+  "thread_id": "1544558298769006593",
+  "completed_at_et": "2026-09-02T12:58:42-04:00",
+  "scope_start": {
+    "message_id": "1543269726518517883",
+    "timestamp_et": "2026-08-29T10:42:55.367000-04:00",
+    "definition": "first Nicolas message in a thread whose parent is the Eggbev operational channel"
+  },
+  "coverage": {
+    "eggbev_parent_threads": 27,
+    "active_parent_threads": 9,
+    "archived_parent_threads": 18,
+    "explicit_external_reference_threads": 6,
+    "threads_imported_total": 33,
+    "messages_imported_total": 3290,
+    "rodolfo_or_nicolas_messages_in_scope": 197,
+    "human_attachments_in_scope": 29,
+    "human_attachments_visually_reviewed": 29,
+    "ares_final_or_multipart_candidates": 403,
+    "ares_pending_language_candidates_reviewed": 62,
+    "discord_import_errors": 0
+  },
+  "new_findings_after_r4": [
+    {
+      "id": "page_lead_effective_hold_mismatch",
+      "severity": "high",
+      "finding": "The effective LEADS wrapper was dry-run under a persistent action hold, but operation/account sources still exposed write_enabled/runtime_enabled in a way that implied current write capability.",
+      "correction": "Policy authorization and effective state are now separate: policy_write_authorized=true, effective_write_enabled=false, write_enabled=false, explicit release gate preserved."
+    },
+    {
+      "id": "completed_one_shot_marked_scheduled",
+      "severity": "medium",
+      "finding": "The 31/08 reactivation one-shot remained enabled/scheduled in scheduler_inventory after Hermes readback showed disabled/completed.",
+      "correction": "Operation source now records enabled=false, state=completed, last run and OK readback."
+    },
+    {
+      "id": "roas_scheduler_snapshot_stale",
+      "severity": "medium",
+      "finding": "Operation/account snapshots still said ROAS firing was unproven and retained old next/last run values.",
+      "correction": "Updated from live Hermes readback: gateway true, schedule :10, latest 12:12 OK, next 13:10."
+    },
+    {
+      "id": "engine_registry_version_drift",
+      "severity": "medium",
+      "finding": "Active registry entries still named Engine v3.3.0/v3.4.0 while live skill/config and account contract use v3.4.2.",
+      "correction": "Central, Eggbev cloning, Eggbev from-zero and cloning-thread entries superseded to v3.4.2."
+    },
+    {
+      "id": "campaign_and_creative_pending_status_drift",
+      "severity": "medium",
+      "finding": "Campaign structure, creative inventory runner and intraday policy remained labeled pending implementation after live materialization.",
+      "correction": "Statuses now reflect materialized/live-validated runtime."
+    },
+    {
+      "id": "rules_r_e_semantics_missing",
+      "severity": "medium",
+      "finding": "Rules showed ROI colors but did not explicitly say R/E order is current real first, estimated future second.",
+      "correction": "Part 7 edited and read back with explicit order and bands."
+    },
+    {
+      "id": "rules_route_banner_policy_missing",
+      "severity": "low",
+      "finding": "The no-banner/no-pin route identity policy existed only in the route registry.",
+      "correction": "Part 7 now states fixed routes do not use banner/pin identity."
+    },
+    {
+      "id": "stale_checkpoint_next_steps",
+      "severity": "medium",
+      "finding": "Eighteen Eggbev checkpoints retained resolved, superseded or date-expired next steps, including zero-pixel automatic operation, LEADS :14 wording, pending one-shot and pending creation/clone recovery.",
+      "correction": "All 18 were upserted with current state and next gate while preserving history."
+    },
+    {
+      "id": "global_cron_collision_roas_10",
+      "severity": "high",
+      "finding": "Eight-day normalized audit found ROAS physical minute :10 overlapping the hourly Smart Bidding broadcast-template digest :10 on all 104 ROAS occurrences; both are operational and share the Smart Bidding read surface.",
+      "correction": "Not silently changed. Rules and operation now disclose open_requires_explicit_schedule_change_scope; schedule_changes=0."
+    }
+  ],
+  "runtime_readback": {
+    "roas": {
+      "enabled": true,
+      "state": "scheduled",
+      "schedule": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "last_status": "ok"
+    },
+    "page_leads": {
+      "enabled": true,
+      "state": "scheduled",
+      "schedule": "16 8,20 * * *",
+      "effective_mode": "dry_run_action_hold",
+      "last_status": "error_fail_closed_mapping_or_freshness",
+      "meta_writes": 0
+    },
+    "dtr_restriction": {
+      "enabled": true,
+      "schedule": "3-58/5 * * * *",
+      "stagger_seconds": 30,
+      "post_suspension_journal_ticks_confirmed": ["12:03", "12:08", "12:38", "12:43", "12:48"]
+    },
+    "zero_pixel": {
+      "enabled": false,
+      "write_enabled": false,
+      "present_in_wrapper": false
+    },
+    "one_time_reactivation_20260831": {
+      "enabled": false,
+      "state": "completed",
+      "last_status": "ok"
+    },
+    "no_recurring_cron": ["Daily", "Create campaigns", "Clone campaigns"]
+  },
+  "rules_thread_readback": {
+    "messages": 13,
+    "manual_parts": "9/9",
+    "required_coverage_checks": "20/20",
+    "stale_forbidden_phrases": 0,
+    "r5_messages_edited": 2,
+    "r5_message_readbacks": "2/2",
+    "new_disclosures": ["R/E order", "no banner/pin identity", "open ROAS :10 collision"]
+  },
+  "validation": {
+    "eggbev_unittest": "219/219 PASS",
+    "cron_policy_and_control_plane_unittest": "6/6 PASS",
+    "knowledge_validate": "PASS",
+    "knowledge_regression": "15/15 PASS",
+    "prompt_source_active_config": "2/2 exact",
+    "prompt_source_versioned_config": "2/2 exact",
+    "skill_page_guardrails": "v1.0.2 live and versioned mirror synchronized",
+    "manual_coverage": "PASS",
+    "meta_writes_during_r5": 0,
+    "cron_writes_during_r5": 0,
+    "gateway_restarts_during_r5": 0
+  },
+  "durable_artifacts": [
+    "inventory-summary.json",
+    "thread-manifest.json",
+    "human-message-review-manifest.json",
+    "attachment-review.json",
+    "ares-promise-review.json",
+    "decision-coverage-matrix.json",
+    "cron-collision-r5.json",
+    "final-report.json"
+  ],
+  "open_gates": [
+    {
+      "key": "roas_minute_10_collision",
+      "requires": "explicit Rodolfo authorization for selected schedule remediation",
+      "reason": "changing ROAS or shared root/Smart Bidding schedules changes production automation scope"
+    },
+    {
+      "key": "latest_prompt_gateway_reload",
+      "requires": "next safe external Ares gateway restart",
+      "reason": "self-restart during this active session is prohibited"
+    }
+  ],
+  "final_state": "audit_complete_with_one_material_schedule_collision_escalated_and_one_safe_restart_reload_pending"
+}
