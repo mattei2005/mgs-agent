@@ -563,12 +563,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-THREAD-CONSOLIDATION-20260901",
-      "next_step": "Manter a thread Regras por supersessão explícita em qualquer nova decisão. LEADS continua em hold de write até liberação do Nicolas; falhas históricas do scheduler permanecem auditadas, sem ocultar o estado real.",
-      "objective": "Auditar todas as threads acessíveis com Eggbev e consolidar regras duráveis da estratégia BOT no manual canônico.",
-      "source": "discord:thread:1544558298769006593;discord:thread:1541578622106865815;workspace:eggbev-all-threads-audit/thread-audit-ledger.json",
-      "state": "concluído: 68/68 threads e 2.727 mensagens importadas sem truncamento; 38 editoriais e 3 infra/chatpion excluídas do escopo ares; 25 threads campaign ops comparadas e 2 contextuais auditadas. oito lacunas comprovadas foram adicionadas à parte 8; manual regras agora 8/8 com readback, 219 testes eggbev aprovados, rotas 6/6 e regressões 12/12.",
+      "next_step": "Manter supersessão explícita para qualquer nova decisão. LEADS permanece em hold/dry-run; clone_page_switch bloqueado; Diário sem cron/post; escala automática desligada; serving exige Insights.",
+      "objective": "Auditar cronologicamente toda a conversa do Nicolas no canal Eggbev, incluindo threads externas citadas, anexos e respostas de implementação do Ares.",
+      "source": "discord:thread:1544558298769006593;discord:thread:1541578622106865815;workspace:eggbev-deep-chronology-audit/deep-audit-final.json",
+      "state": "concluído em profundidade: primeira mensagem do nicolas localizada em 29/08/2026 10:42 et; 27 threads do canal + 5 referências externas, 2.063 eventos, 176 mensagens do nicolas, 28 anexos humanos e 191 respostas finais do ares revisados. oito clarificações adicionais foram promovidas ao contrato/skill e à parte 9; manual regras agora 9/9 com readback. cpv, hermes, chatpion/sms e valores one-time não foram contaminados no contrato eggbev.",
       "thread_id": "1544558298769006593",
-      "updated_at": "2026-09-02T04:52:25+00:00"
+      "updated_at": "2026-09-02T05:49:49+00:00"
     },
     {
       "agent": "ares",
@@ -1942,5 +1942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T05:45:59+00:00"
+  "updated_at": "2026-09-02T05:49:49+00:00"
 }

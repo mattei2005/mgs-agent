@@ -58,7 +58,8 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 - LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; restrição e fallback de pixel usam o mesmo offset de cinco minutos `:03/:08/.../:58`, stagger de 30 segundos e o lock comum `roas-cycle.lock`, serializando os writers Eggbev sem fila duplicada.
 - **Fallback pós-03:00 independente de notificação:** em cada tick após 03:00 ET, campanha configurada/efetivamente ACTIVE com spend do dia estritamente `> US$2` e zero `offsite_conversion.fb_pixel_custom` do evento `eggbev-pv-u` é pausada no nível campanha. Exatamente US$2 não pausa; qualquer resultado do evento mantém. Exigir `promoted_object` exato (`pixel_id`, `OTHER`, `eggbev-pv-u`) em todos os ad sets ativos; mapping divergente = no write + alerta. A etapa nunca reativa.
 - Match parcial/ambíguo ou freshness não verificável = zero write.
-- Nunca substituir `LEADS` por `LEADS_TOTAL`.
+- `LEADS` é o saldo dinâmico de leads ativos da Page: novas entradas aumentam o valor e desinscrições podem reduzi-lo. `LEADS_TOTAL` é cumulativo/histórico e nunca substitui `LEADS` no limite, na pausa ou na elegibilidade.
+- Espaço restante até 5.000 LEADS é somente contexto para o gestor. Budget manual considera também Purchase ROAS, custo por resultado, resultados, budget, spend, CPM, CTR, CPC e padrão histórico; nunca derivar fórmula ou escala automática de LEADS isoladamente.
 - Não reativar automaticamente.
 - Criação/alteração de cron segue `context/cron-scheduling-policy.md` e exige inventário global de minutos.
 
