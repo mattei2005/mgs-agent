@@ -623,7 +623,7 @@ def build_issue_alert(
             code = ",".join(str(value) for value in row.get("issues") or [])
         codes[code or "unknown_mapping_issue"] += 1
     lines = [
-        "⚠️ **PÁGINA E LIMITES — AÇÃO BLOQUEADA**",
+        "⚠️ **PÁGINA E LIMITES — AÇÃO BLOQUEADA POR FRESHNESS/MAPPING**",
         f"Conta: **{account_alias}** · itens: **{len(issues)}**",
         "Ação Meta: **nenhuma** · modo: **fail-closed**",
         "Motivos: " + ", ".join(f"`{code}` ×{count}" for code, count in sorted(codes.items())),
@@ -649,8 +649,8 @@ def build_alert(group: dict[str, Any], actions: list[dict[str, Any]], insights: 
     lines = [
         f"{icon} **{title}**",
         f"**{group.get('page_name') or 'N/D'}** · `{group.get('utm_campaign')}` · LEADS **{fmt_number(group.get('leads'), 0)}**",
-        f"Campanhas ativas: **{len(actions)}** · pausadas: **{len(confirmed)}**" + (f" · pendentes: **{len(failed)}**" if failed else " ✅"),
-        f"Regra: `LEADS > {fmt_number(lead_limit, 0)}` · `{run_at.strftime('%H:%M ET')}` · reativação automática: **não**",
+        f"Readback: **{len(confirmed)}/{len(actions)} campanhas confirmadas como PAUSED** · pausadas: **{len(confirmed)}**" + (f" · pendentes: **{len(failed)}**" if failed else " ✅"),
+        f"Regra: `LEADS > {fmt_number(lead_limit, 0)}` · `{run_at.strftime('%H:%M ET')}` · Reativação automática: não",
     ]
     return "\n".join(lines)
 

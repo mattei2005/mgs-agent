@@ -34,6 +34,7 @@ Load this skill when Rodolfo asks:
 7. For an authorized host reboot that must outlive the active gateway turn, load `references/durable-post-reboot-validator-pattern.md`; it defines the pre-state freeze, one-shot systemd validator, fresh Discord-readiness evidence, governance closure, transport dry-runs, and binary-first completion contract.
 8. When an audit surfaces Ubuntu Pro, ESM Apps/Infra, Livepatch, a device-code attach flow, or the boundary between subscription attachment and package installation, load `references/ubuntu-pro-esm-classification-and-owner-consent.md`; it defines coverage classification, supervised PTY attachment, local readback, separate authorization gates, and post-install closure.
 9. For exact destructive target manifests followed by an exhaustive backup/orphan scan, load `references/full-vps-cleanup-inventory.md`; it defines inode-aware reclaim estimates, protected browser/Drive-backed state, tracked-file Git range closure, moving-upstream scope separation, per-filesystem coverage, post-deletion acceptance, and fail-closed housekeeping dry-runs.
+10. For post-update cleanup of UV/pip/npm/APT/test caches, especially when hardlinks inflate `du` or browser/model assets share cache roots, load `references/rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md`; it defines inode-aware savings, exact `.deb` targets, protected Playwright/Whisper/session assets, volatile-target revalidation, and the post-hash confirmation boundary.
 
 ## Audit workflow
 

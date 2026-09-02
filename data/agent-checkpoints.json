@@ -1143,12 +1143,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
-      "next_step": "Após 00:10 ET, reler campanhas, conjuntos, anúncios, issues e Insights; concluir e informar Nicolas/Rodolfo.",
+      "next_step": "Nicolas pode conferir no Ads Manager; operação segue automaticamente pelo watcher de primeiro gasto, Diário, Intraday e CREATIVE_CUT_24H.",
       "objective": "Criar C08-C10 MOTO na conta 05 com USD41 por campanha, copy/UTM aprovadas e início em 02/09 às 00:10 ET.",
       "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
-      "state": "engine v3 complete_future_active; 3 campanhas, 3 conjuntos e 9 anúncios com readback exato; 9 assets em 02_testing; first-delivery e creative_cut_24h armados; aguardando verificação pós-início.",
+      "state": "complete: engine v3 e recuperação readback-first concluídos; c08-c10 active 1x1x3, usd41 cada, start 00:10 et/01:10 sp; copies, utms, assets e lineage validados; 9 assets em 02_testing; first-delivery e creative_cut_24h armados; pós-início sem issues.",
       "thread_id": "1542892971186454719",
-      "updated_at": "2026-09-02T04:01:08+00:00"
+      "updated_at": "2026-09-02T04:11:50+00:00"
     },
     {
       "agent": "ares",
@@ -1902,6 +1902,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-vps-cache-cleanup-20260902",
+      "next_step": "Após confirmação explícita, revalidar hash/fingerprints/processos e excluir somente os 87 alvos.",
+      "objective": "Limpar caches reconstruíveis após atualização e limpeza do Hermes",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T001158-0400-rebuildable-caches/manifest.json",
+      "state": "manifesto exato congelado; zero mutação; aguardando confirmação crítica de rodolfo",
+      "thread_id": "1544536465772511303",
+      "updated_at": "2026-09-02T04:15:20+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-vps-cleanup-20260901",
       "next_step": "Burn-in 24–48h; demais itens são opcionais e listados no residual pós-limpeza.",
       "objective": "Remover runtimes/checkouts Hermes obsoletos e precheck supersedido após v0.21.0",
@@ -1922,5 +1932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T04:01:08+00:00"
+  "updated_at": "2026-09-02T04:15:20+00:00"
 }
