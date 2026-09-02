@@ -223,7 +223,13 @@ for job in parse_crons():
                     tline,
                     re.I,
                 )
-                if is_start or is_success:
+                is_json_success = False
+                try:
+                    parsed_line = json.loads(tline)
+                    is_json_success = isinstance(parsed_line, dict) and parsed_line.get('ok') is True
+                except (json.JSONDecodeError, TypeError):
+                    pass
+                if is_start or is_success or is_json_success:
                     last_boundary = idx
             if last_boundary is not None:
                 tail_lines = tail_lines[last_boundary:]

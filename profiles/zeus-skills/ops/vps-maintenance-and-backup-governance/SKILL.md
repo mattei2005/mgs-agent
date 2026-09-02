@@ -50,6 +50,17 @@ Load this skill when Rodolfo asks:
 11. **Cover every persistent filesystem explicitly.** Scan `/`, `/boot`, and `/boot/efi` separately whenever they are different devices; prune pseudo-filesystems and mount crossings, record errors per filesystem, and never infer whole-VPS coverage from the root filesystem alone.
 12. **Report conclusion first.** State whether reboot is required, what can update routinely, what requires a controlled window, exact high-confidence cleanup candidates, protected classes, and the residual governance gap.
 
+## Multi-phase maintenance closure ledger
+
+When one request combines VPS maintenance, reboot, Hermes/application update, and backup or unused-file cleanup, treat each as an independent acceptance phase even if they share one thread:
+
+1. Create one checkpoint/checklist entry per requested phase at intake: package maintenance, reboot validation, application activation, cleanup inventory, destructive confirmation/execution, and governance closure as applicable.
+2. Mark the overall request complete only when every requested phase is either `completed_validated` or explicitly deferred/cancelled by Rodolfo. A green VPS or Hermes update never implies that cleanup also ran.
+3. If cleanup must wait for successful activation or Critical Subset confirmation, keep it visibly pending with the exact next gate. Do not bury it in a generic residual or close the parent task from the currently active foreground subset.
+4. After activation, run a fresh inventory that includes artifacts created by the update itself—candidate runtime trees, verify checkouts, full profile archives, prechecks, and rollback sets—before freezing the cleanup manifest. Pre-update size estimates are not the post-update target set.
+5. On interruption, gateway recovery, handoff, or work continued in another thread, reconcile the original request and phase ledger before the final answer. State separately: `VPS updated`, `Hermes updated`, and `cleanup executed/not executed`.
+6. A status answer must use live readback plus the ledger. If no destructive audit boundary and absent-target validation exist, say plainly that cleanup was not executed, even when candidates were identified and the disk is healthy.
+
 ## Phase boundary: VPS first, application runtime later
 
 When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard operational boundary, not merely an ordering hint:
