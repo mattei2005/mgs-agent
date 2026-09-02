@@ -403,22 +403,22 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-COMPLETENESS-R5-20260902",
-      "next_step": "Rodolfo decide explicitamente a remediação do schedule :10; depois aplicar inventário→backup→write único→readback→pós-audit. Carregar prompts mais recentes no próximo restart seguro externo do Ares.",
+      "next_step": "Validate the next natural SB digest at minute :21 and load latest prompts on the next safe external Ares gateway restart; re-audit globally before any future schedule change.",
       "objective": "Provar completude das regras, crons, anexos, decisões e estados Eggbev desde a primeira mensagem do Nicolas no canal operacional",
       "source": "discord:thread:1544558298769006593;data/ares/audits/eggbev/completeness-r5-20260902/final-report.json",
-      "state": "completed_with_escalation: 27 threads eggbev + 6 referências externas, 3290 mensagens, 197 mensagens humanas e 29/29 anexos do período revisados; 403 finais/multipartes ares e 62 pendências linguísticas reconciliadas; 9 drifts r5 corrigidos; manual 9/9 e 20/20 cobertura; 219 eggbev + 6 cron + 15 knowledge pass; zero meta/cron write. colisão material aberta: roas :10 versus digest smart bidding :10 em 104/104 ocorrências de oito dias.",
+      "state": "completed: r5 audit + authorized schedule remediation. coverage 27+6 threads, 3290 messages, 197 human messages, 29/29 attachments, 403 ares final candidates. drifts corrected. roas remained :10; sb digest moved :21, control plane 08:32, friday sms residue :03 +90s. root crontab single write with exact readback; eight-day post-audit zero non-dense roas collision pairs. tests 223 eggbev, 6 cron, 16 knowledge pass; meta writes=0.",
       "thread_id": "1544558298769006593",
-      "updated_at": "2026-09-02T17:02:27+00:00"
+      "updated_at": "2026-09-02T19:37:57+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CRON-ISOLATION-20260830",
-      "next_step": "Re-run the global collision inventory before any future schedule change; preserve the common Eggbev writer lock.",
+      "next_step": "Operação normal; preservar locks/staggers e repetir auditoria global antes de qualquer schedule futuro.",
       "objective": "Adicionar 05:00 e 06:00 à Fase 1 Corte e ROAS e isolar os schedulers Eggbev e Creditoparaveiculo",
-      "source": "data/ares/audits/cron-isolation/2026-08-30-eggbev-cpv.json",
-      "state": "current schedule readback: roas physical minute :10; leads 08:16/20:16 et; dtr restriction :03/:08/.../:58 plus 30s stagger; zero-pixel suspended; recurring eggbev jobs do not share exact target minutes with the reviewed cpv routes.",
+      "source": "data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5-postwrite.json",
+      "state": "r5 postwrite: roas :10 preservado; jobs auxiliares realocados (:21 digest, 08:32 control plane, sms sexta :03 +90s); crontab live equals validated candidate; pós-audit oito dias retorna zero non-dense operational roas overlap pairs. leads somente baselines densas; dtr mantém stagger 30s.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-09-02T16:47:18+00:00"
+      "updated_at": "2026-09-02T19:35:28+00:00"
     },
     {
       "agent": "ares",
@@ -683,12 +683,12 @@
     {
       "agent": "zeus",
       "id": "ARES-META-APP-PROFILE-TOKEN-CUTOVER-20260902",
-      "next_step": "One-shot d1b94343f4af executa 20:21 ET e responde nesta thread após o tick 20:16 do Eggbev LEADS; deve validar last_status ok/failure_streak0 e zero writes, corrigindo somente falha segura sem apply se necessário.",
-      "objective": "Alinhar conta 13 Roosevelt, conta 05 Rafael e Eggbev Carla ao app novo 1299247318762949, renovar caches sem excluir itens 1Password",
-      "source": "discord:thread:1544757670412820541;operation-audit:data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json;inventory:ares-meta-app-profile-token-cutover-20260902;knowledge:ARES-META-APP-PROFILE-TOKEN-MAPPING-V1-20260902;report-infra:1544781315453362218;cron:d1b94343f4af",
-      "state": "completed_validated_with_followup: 3 perfis no app 1299247318762949, quatro caches renovados, 305 testes+37 subtestes, creative-cut tick real recuperado streak0, eggbev leads runtime corrigido mantendo apply bloqueado, zero meta/budget/status writes, zero exclusões 1password; report-infra 1544781315453362218 confirmado",
+      "next_step": "Aguardar tick real Eggbev LEADS c3d2499d8c33 às 20:16 ET e validação one-shot d1b94343f4af às 20:21 ET nesta thread; depois confirmar streak0 ou reportar/corrigir bloqueio. Badges históricos Diário/Intraday CPV13 serão substituídos nos ticks 16:01/16:06 ET.",
+      "objective": "Validar de ponta a ponta Ares, reports, crons, agentes e criação/clonagem nas rotas de campanha operadas por Rodolfo, Nicolas e Ares após cutover do app 1299247318762949",
+      "source": "discord:thread:1544757670412820541#audit-request:1544785060392206458;audit:data/ares/meta-ads/audit/health/campaign-ops-health-20260902T152024-0400.json;inventory:campaign-ops-health-audit-20260902;runtime:/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py;cron:d1b94343f4af",
+      "state": "auditoria integral executada: ares/zeus active sem restart; 20 threads operacionais cpv/eggbev; 13 jobs ares habilitados, 10 verdes; cpv13 runtime legado corrigido para item do registry+cache isolado, meta http200, diário/intraday/first-delivery rc0, diário entregue por readback, snapshot tick real ok/streak0, first-delivery tick real ok/streak0; cpv05 reports/monitors/creative-cut verdes; engine v3 e criação/clonagem comprovados; 121 testes; fax/lyzmo ainda sem workflow ativo; smart bidding ~3h atrasada",
       "thread_id": "1544757670412820541",
-      "updated_at": "2026-09-02T18:50:26+00:00"
+      "updated_at": "2026-09-02T19:22:10+00:00"
     },
     {
       "agent": "zeus",
@@ -1773,12 +1773,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-red-repair-reset-semantics-20260803",
-      "next_step": "Checker cron fará readback após 14:52 SP, publicará um único resultado por template e promoverá/pausará automaticamente conforme a evidência. Validar resultado no canal e manter templates >150 páginas fora deste rollout inicial.",
+      "next_step": "Operação normal; validar o próximo digest natural no minuto :21 e manter templates >150 páginas fora do rollout inicial.",
       "objective": "Operar reparador diário fixed-30 com vermelho em lote, reset de roxo, histórico ever-green e alertas executivos por template",
-      "source": "discord:1533874909451653342; runtime:sb:/broadcast/Messenger; runtime:discord:1522487422510694450/1533878700989485129; data:sb-broadcast-template-repair-state.json",
-      "state": "ativo em canário. executor dedicado scripts/sb-broadcast-template-repair.py criado com config/state próprios, banco utility-message-bank obrigatório, lock por template, backup/readback, eta pages*30*12s+60m, dispatcher 08:00 sp, checker 15m, digest 23:10 sp e embeds diretos no canal 1522487422510694450. alerta legado hermes 500f8f1cff5e pausado. auditoria live 2026-08-03: 108 rows, 44 templates produção exact30, 689 verdes, 51 cinzas, 354 vermelhas, 226 roxas. canário live id 6a222a84-22dc-8811-5de6-3745293fe0c1 fincgriffin us-car-en g001-d, 1 página: antes 19vd/1c/3vm/7rx; slots 22,24,26 trocados; update+save readback 30 cinzas; run approval ok; alerta discord 1533878700989485129; eta+margin 2026-08-03 14:52 sp. stage permanece canary até readback; promoção staged somente após resultado positivo; staged só promove full após 3 resultados positivos e nenhum pending.",
+      "source": "discord:1533874909451653342;data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5-postwrite.json",
+      "state": "ativo: executor dedicado, config/state próprios, utility-message-bank obrigatório, lock por template, backup/readback e embeds diretos. dispatcher 08:00 sp e checker 15min preservados. digest horário foi realocado do minuto :10 para :21 por autorização de rodolfo em 02/09/2026, mantendo o gate interno de 23:00 sp e removendo colisão com eggbev roas :10.",
       "thread_id": "1533821802525102080",
-      "updated_at": "2026-08-03T16:51:29+00:00"
+      "updated_at": "2026-09-02T19:35:28+00:00"
     },
     {
       "agent": "zeus",
@@ -2072,5 +2072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T18:50:26+00:00"
+  "updated_at": "2026-09-02T19:37:57+00:00"
 }

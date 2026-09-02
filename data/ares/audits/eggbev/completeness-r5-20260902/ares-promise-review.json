@@ -3,19 +3,14 @@
   "ares_final_or_multipart_candidates": 403,
   "pending_language_candidates_reviewed": 62,
   "classification": {
-    "resolved_or_superseded": 60,
-    "currently_open": 2
+    "resolved_or_superseded": 61,
+    "currently_open": 1
   },
   "currently_open": [
     {
       "key": "latest_prompt_gateway_reload",
       "state": "prompt sources, active config files and versioned config are exact; the already-running Ares gateway has not been restarted inside this active session",
       "next_gate": "load on the next safe external gateway restart; no self-restart"
-    },
-    {
-      "key": "roas_minute_10_global_collision",
-      "state": "ROAS :10 overlaps the hourly Smart Bidding broadcast-template digest :10 on every ROAS cycle; manual and contract now disclose the open finding",
-      "next_gate": "explicit Rodolfo approval of the selected schedule remediation because root/Smart Bidding automation is outside a silent corrective write"
     }
   ],
   "deliberate_operational_holds_not_counted_as_unfinished_promises": [
@@ -25,5 +20,12 @@
     "Daily cron/post disabled",
     "automatic budget scaling disabled"
   ],
-  "review_method": "paired each in-scope Rodolfo/Nicolas message with Ares replies before the next human message, removed tool-progress-only messages, reviewed final/multipart candidates, then reconciled pending-language claims against runtime, registry and checkpoints"
+  "review_method": "paired each in-scope Rodolfo/Nicolas message with Ares replies before the next human message, removed tool-progress-only messages, reviewed final/multipart candidates, then reconciled pending-language claims against runtime, registry and checkpoints",
+  "resolved_after_authorization": [
+    {
+      "key": "roas_minute_10_global_collision",
+      "resolved_at_et": "2026-09-02T15:33:29-04:00",
+      "result": "ROAS logical/physical schedule preserved; auxiliary root jobs reallocated; postwrite audit PASS"
+    }
+  ]
 }

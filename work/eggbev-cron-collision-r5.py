@@ -3,13 +3,14 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path('/root/mgs-agent')
-OUT = ROOT / 'data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5.json'
+OUT = Path(os.environ.get('CRON_AUDIT_OUT', str(ROOT / 'data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5.json')))
 NY = ZoneInfo('America/New_York')
 SP = ZoneInfo('America/Sao_Paulo')
 UTC = dt.timezone.utc
@@ -73,7 +74,8 @@ def dense(expr: str) -> bool:
 
 jobs=[]
 # Root crontab with CRON_TZ state.
-raw=subprocess.run(['crontab','-l'],text=True,capture_output=True,check=True).stdout
+crontab_file=os.environ.get('CRONTAB_AUDIT_FILE')
+raw=Path(crontab_file).read_text(encoding='utf-8') if crontab_file else subprocess.run(['crontab','-l'],text=True,capture_output=True,check=True).stdout
 current_tz=NY
 for raw_line in raw.splitlines():
     line=raw_line.strip()

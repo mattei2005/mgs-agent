@@ -1,0 +1,645 @@
+{
+  "audit_id": "ARES-EGGBEV-CRON-COLLISION-R5-20260902",
+  "window_et": [
+    "2026-09-02T00:00:00-04:00",
+    "2026-09-10T00:00:00-04:00"
+  ],
+  "jobs_static_total": 66,
+  "targets": [
+    {
+      "source": "root",
+      "id": "root-46",
+      "name": "root:eggbev-page-restriction-guardrail.sh",
+      "expr": "3-58/5 * * * *",
+      "timezone": "America/New_York",
+      "command": "sleep 30 && /usr/bin/flock -n /var/lock/ares_eggbev_page_restriction_guardrail.lock /usr/bin/flock /root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock /root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh >> /root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log 2>&1",
+      "dense_baseline": true,
+      "resources": [
+        "meta_api"
+      ],
+      "target": "dtr_restriction",
+      "physical_stagger_seconds": 30
+    },
+    {
+      "source": "hermes_ares",
+      "id": "c3d2499d8c33",
+      "name": "Eggbev limite de leads 08h e 20h ET",
+      "expr": "16 8,20 * * *",
+      "timezone": "America/New_York",
+      "command": "eggbev-page-lead-guardrail.sh",
+      "dense_baseline": false,
+      "resources": [
+        "local_or_other"
+      ],
+      "target": "leads"
+    },
+    {
+      "source": "hermes_ares",
+      "id": "51ae40b5a6ef",
+      "name": "Eggbev Corte e ROAS ciclos ET",
+      "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "timezone": "America/New_York",
+      "command": "eggbev-roas-cycle-controlled.sh",
+      "dense_baseline": false,
+      "resources": [
+        "meta_api"
+      ],
+      "target": "roas"
+    }
+  ],
+  "overlaps": [
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "3ff8bd8ca40d",
+      "other_source": "hermes_zeus",
+      "other_name": "MGS DR backup horário",
+      "other_expr": "23 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 192,
+      "samples_et": [
+        "2026-09-02T00:23:00-04:00",
+        "2026-09-02T01:23:00-04:00",
+        "2026-09-02T02:23:00-04:00",
+        "2026-09-02T03:23:00-04:00",
+        "2026-09-02T04:23:00-04:00",
+        "2026-09-02T05:23:00-04:00",
+        "2026-09-02T06:23:00-04:00",
+        "2026-09-02T07:23:00-04:00"
+      ],
+      "other_dense_baseline": false,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "backup_io"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "498fb0d95e10",
+      "other_source": "hermes_zeus",
+      "other_name": "b013-dtr-link-watch",
+      "other_expr": "2-59/9 0,8-23 * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 136,
+      "samples_et": [
+        "2026-09-02T00:38:00-04:00",
+        "2026-09-02T08:38:00-04:00",
+        "2026-09-02T09:38:00-04:00",
+        "2026-09-02T10:38:00-04:00",
+        "2026-09-02T11:38:00-04:00",
+        "2026-09-02T12:38:00-04:00",
+        "2026-09-02T13:38:00-04:00",
+        "2026-09-02T14:38:00-04:00"
+      ],
+      "other_dense_baseline": false,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "0cc7ed1e587e",
+      "other_source": "hermes_zeus",
+      "other_name": "meta-app-roles-watch",
+      "other_expr": "*/3 0,8-23 * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 544,
+      "samples_et": [
+        "2026-09-02T00:03:00-04:00",
+        "2026-09-02T00:18:00-04:00",
+        "2026-09-02T00:33:00-04:00",
+        "2026-09-02T00:48:00-04:00",
+        "2026-09-02T08:03:00-04:00",
+        "2026-09-02T08:18:00-04:00",
+        "2026-09-02T08:33:00-04:00",
+        "2026-09-02T08:48:00-04:00"
+      ],
+      "other_dense_baseline": false,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "meta_api"
+      ],
+      "shared_resource_tags": [
+        "meta_api"
+      ]
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-36",
+      "other_source": "root",
+      "other_name": "root:monitor-sms-funnel-balance.py",
+      "other_expr": "3-58/5 13,14 * * 5",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 24,
+      "samples_et": [
+        "2026-09-04T13:03:00-04:00",
+        "2026-09-04T13:08:00-04:00",
+        "2026-09-04T13:13:00-04:00",
+        "2026-09-04T13:18:00-04:00",
+        "2026-09-04T13:23:00-04:00",
+        "2026-09-04T13:28:00-04:00",
+        "2026-09-04T13:33:00-04:00",
+        "2026-09-04T13:38:00-04:00"
+      ],
+      "other_dense_baseline": false,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-3",
+      "other_source": "root",
+      "other_name": "root:monitor-yoast-health-eggbev.sh",
+      "other_expr": "23 10 * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 8,
+      "samples_et": [
+        "2026-09-02T10:23:00-04:00",
+        "2026-09-03T10:23:00-04:00",
+        "2026-09-04T10:23:00-04:00",
+        "2026-09-05T10:23:00-04:00",
+        "2026-09-06T10:23:00-04:00",
+        "2026-09-07T10:23:00-04:00",
+        "2026-09-08T10:23:00-04:00",
+        "2026-09-09T10:23:00-04:00"
+      ],
+      "other_dense_baseline": false,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "wordpress_ssh"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-31",
+      "other_source": "root",
+      "other_name": "root:finalize-hermes-structural-write.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 2304,
+      "samples_et": [
+        "2026-09-02T00:03:00-04:00",
+        "2026-09-02T00:08:00-04:00",
+        "2026-09-02T00:13:00-04:00",
+        "2026-09-02T00:18:00-04:00",
+        "2026-09-02T00:23:00-04:00",
+        "2026-09-02T00:28:00-04:00",
+        "2026-09-02T00:33:00-04:00",
+        "2026-09-02T00:38:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-38",
+      "other_source": "root",
+      "other_name": "root:hermes-news-explainer-watchdog.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 2304,
+      "samples_et": [
+        "2026-09-02T00:03:00-04:00",
+        "2026-09-02T00:08:00-04:00",
+        "2026-09-02T00:13:00-04:00",
+        "2026-09-02T00:18:00-04:00",
+        "2026-09-02T00:23:00-04:00",
+        "2026-09-02T00:28:00-04:00",
+        "2026-09-02T00:33:00-04:00",
+        "2026-09-02T00:38:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-7",
+      "other_source": "root",
+      "other_name": "root:monitor-tool-loops.sh",
+      "other_expr": "3-58/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 2304,
+      "samples_et": [
+        "2026-09-02T00:03:00-04:00",
+        "2026-09-02T00:08:00-04:00",
+        "2026-09-02T00:13:00-04:00",
+        "2026-09-02T00:18:00-04:00",
+        "2026-09-02T00:23:00-04:00",
+        "2026-09-02T00:28:00-04:00",
+        "2026-09-02T00:33:00-04:00",
+        "2026-09-02T00:38:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "dtr_restriction",
+      "target_id": "root-46",
+      "other_id": "root-30",
+      "other_source": "root",
+      "other_name": "root:monitor_hermes_pending_writes.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 2304,
+      "samples_et": [
+        "2026-09-02T00:03:00-04:00",
+        "2026-09-02T00:08:00-04:00",
+        "2026-09-02T00:13:00-04:00",
+        "2026-09-02T00:18:00-04:00",
+        "2026-09-02T00:23:00-04:00",
+        "2026-09-02T00:28:00-04:00",
+        "2026-09-02T00:33:00-04:00",
+        "2026-09-02T00:38:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 30,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "leads",
+      "target_id": "c3d2499d8c33",
+      "other_id": "root-31",
+      "other_source": "root",
+      "other_name": "root:finalize-hermes-structural-write.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 16,
+      "samples_et": [
+        "2026-09-02T08:16:00-04:00",
+        "2026-09-02T20:16:00-04:00",
+        "2026-09-03T08:16:00-04:00",
+        "2026-09-03T20:16:00-04:00",
+        "2026-09-04T08:16:00-04:00",
+        "2026-09-04T20:16:00-04:00",
+        "2026-09-05T08:16:00-04:00",
+        "2026-09-05T20:16:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "local_or_other"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": [
+        "local_or_other"
+      ]
+    },
+    {
+      "target": "leads",
+      "target_id": "c3d2499d8c33",
+      "other_id": "root-38",
+      "other_source": "root",
+      "other_name": "root:hermes-news-explainer-watchdog.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 16,
+      "samples_et": [
+        "2026-09-02T08:16:00-04:00",
+        "2026-09-02T20:16:00-04:00",
+        "2026-09-03T08:16:00-04:00",
+        "2026-09-03T20:16:00-04:00",
+        "2026-09-04T08:16:00-04:00",
+        "2026-09-04T20:16:00-04:00",
+        "2026-09-05T08:16:00-04:00",
+        "2026-09-05T20:16:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "local_or_other"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": [
+        "local_or_other"
+      ]
+    },
+    {
+      "target": "leads",
+      "target_id": "c3d2499d8c33",
+      "other_id": "root-5",
+      "other_source": "root",
+      "other_name": "root:monitor-service-restarts.sh",
+      "other_expr": "1-56/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 16,
+      "samples_et": [
+        "2026-09-02T08:16:00-04:00",
+        "2026-09-02T20:16:00-04:00",
+        "2026-09-03T08:16:00-04:00",
+        "2026-09-03T20:16:00-04:00",
+        "2026-09-04T08:16:00-04:00",
+        "2026-09-04T20:16:00-04:00",
+        "2026-09-05T08:16:00-04:00",
+        "2026-09-05T20:16:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "local_or_other"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": [
+        "local_or_other"
+      ]
+    },
+    {
+      "target": "leads",
+      "target_id": "c3d2499d8c33",
+      "other_id": "root-30",
+      "other_source": "root",
+      "other_name": "root:monitor_hermes_pending_writes.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 16,
+      "samples_et": [
+        "2026-09-02T08:16:00-04:00",
+        "2026-09-02T20:16:00-04:00",
+        "2026-09-03T08:16:00-04:00",
+        "2026-09-03T20:16:00-04:00",
+        "2026-09-04T08:16:00-04:00",
+        "2026-09-04T20:16:00-04:00",
+        "2026-09-05T08:16:00-04:00",
+        "2026-09-05T20:16:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "local_or_other"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": [
+        "local_or_other"
+      ]
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "cc5b8882df89",
+      "other_source": "hermes_ares",
+      "other_name": "Creditoparaveiculo 05 atividade Meta 5min",
+      "other_expr": "*/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "meta_api"
+      ],
+      "shared_resource_tags": [
+        "meta_api"
+      ]
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-31",
+      "other_source": "root",
+      "other_name": "root:finalize-hermes-structural-write.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-38",
+      "other_source": "root",
+      "other_name": "root:hermes-news-explainer-watchdog.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-17",
+      "other_source": "root",
+      "other_name": "root:hermes-news-explainer.py",
+      "other_expr": "*/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-23",
+      "other_source": "root",
+      "other_name": "root:monitor-vps-health.py",
+      "other_expr": "*/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-30",
+      "other_source": "root",
+      "other_name": "root:monitor_hermes_pending_writes.py",
+      "other_expr": "* * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    },
+    {
+      "target": "roas",
+      "target_id": "51ae40b5a6ef",
+      "other_id": "root-1",
+      "other_source": "root",
+      "other_name": "root:sync-souls.sh",
+      "other_expr": "*/5 * * * *",
+      "other_timezone": "America/New_York",
+      "occurrences_8d": 104,
+      "samples_et": [
+        "2026-09-02T00:10:00-04:00",
+        "2026-09-02T05:10:00-04:00",
+        "2026-09-02T06:10:00-04:00",
+        "2026-09-02T08:10:00-04:00",
+        "2026-09-02T10:10:00-04:00",
+        "2026-09-02T12:10:00-04:00",
+        "2026-09-02T13:10:00-04:00",
+        "2026-09-02T14:10:00-04:00"
+      ],
+      "other_dense_baseline": true,
+      "target_stagger_seconds": 0,
+      "target_resources": [
+        "meta_api"
+      ],
+      "other_resources": [
+        "local_or_other"
+      ],
+      "shared_resource_tags": []
+    }
+  ],
+  "systemd_note": "systemd timers were inventoried separately; this expansion covers static root/Hermes cron expressions. Dynamic interval jobs require duration/resource review but have no stable cron residue."
+}

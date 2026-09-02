@@ -2934,19 +2934,12 @@
       "last_status": "ok"
     },
     "global_collision_audit_r5": {
-      "checked_at_et": "2026-09-02T12:52:00-04:00",
+      "checked_at_et": "2026-09-02T15:33:29-04:00",
       "window_et": [
         "2026-09-02T00:00:00-04:00",
         "2026-09-10T00:00:00-04:00"
       ],
-      "status": "open_requires_explicit_schedule_change_scope",
-      "material_collision": {
-        "target": "Eggbev ROAS physical :10",
-        "other": "Smart Bidding broadcast-template-repair digest physical :10",
-        "occurrences_8d": 104,
-        "shared_resource": "Smart Bidding read path",
-        "reason": "same start minute on every ROAS cycle; neither job is classified as an unavoidable every-minute baseline"
-      },
+      "status": "resolved_no_nonbaseline_roas_collision",
       "other_non_dense_same_minute_observations": [
         "cron-control-plane documentation render at 08:10 ET daily; local-only resource",
         "SMS funnel Friday report at 13:10/14:10 ET on Friday; separate resource",
@@ -2954,8 +2947,28 @@
       ],
       "dense_baseline_note": "LEADS overlaps only dense baselines. DTR also overlaps dense monitors but uses a 30-second stagger and an independent operation lock; these remain documented exceptions under cron-scheduling-policy.",
       "evidence": "data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5.json",
-      "schedule_changes": 0,
-      "next_gate": "Rodolfo must explicitly authorize the selected remediation because changing ROAS or the shared Smart Bidding/root schedules changes production automation scope."
+      "schedule_changes": 3,
+      "next_gate": "normal monitoring; re-run global inventory before any future schedule change",
+      "prewrite_material_collision": {
+        "target": "Eggbev ROAS physical :10",
+        "other": "Smart Bidding broadcast-template-repair digest physical :10",
+        "occurrences_8d": 104,
+        "shared_resource": "Smart Bidding read path",
+        "reason": "same start minute on every ROAS cycle; neither job is classified as an unavoidable every-minute baseline"
+      },
+      "remediation": {
+        "roas": "unchanged at physical :10; logical cycle hours unchanged",
+        "smart_bidding_digest": "minute :10 moved to :21; hourly cadence and internal 23:00 America/Sao_Paulo gate preserved",
+        "cron_control_plane": "08:10 moved to 08:32 America/New_York",
+        "sms_friday": "five-minute cadence moved from residue :00 to :03 with 90-second stagger; DTR uses 30-second stagger"
+      },
+      "postwrite_result": {
+        "roas_non_dense_operational_overlap_pairs": 0,
+        "leads_non_dense_operational_overlap_pairs": 0,
+        "crontab_syntax": "PASS",
+        "live_equals_validated_candidate": true,
+        "evidence": "data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5-postwrite.json"
+      }
     }
   },
   "schema_version": "0.3-draft",
@@ -3033,7 +3046,7 @@
     "meta_writes": 0,
     "recovered_at_utc": "2026-09-02T18:37:16Z"
   },
-  "updated_at": "2026-09-02T14:37:16-04:00",
+  "updated_at": "2026-09-02T15:33:29-04:00",
   "vertical": "CC",
   "write_enabled": false,
   "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates"

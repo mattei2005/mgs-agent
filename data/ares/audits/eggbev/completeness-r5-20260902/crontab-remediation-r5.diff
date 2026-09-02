@@ -1,0 +1,29 @@
+--- root-crontab.before
++++ root-crontab.candidate
+@@ -22,7 +22,7 @@
+ # */15 * * * * flock -n /var/lock/sync_codex_oauth.lock /root/mgs-agent/scripts/sync-codex-oauth.sh >> /root/mgs-agent/logs/sync-codex-oauth.log 2>&1
+ 
+ # Cron Control Plane — regenera docs/CRONS.md diariamente
+-10 8 * * * flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1
++32 8 * * * flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1
+ 
+ # Cron stale log watchdog — alerta se cron MGS parar de atualizar log
+ */15 * * * * flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1
+@@ -78,7 +78,7 @@
+ # Restriction history Sheet — 08:00, 14:00, 20:00 America/New_York
+ 0 8,14,20 * * * flock -n /var/lock/sb_restricted_history_sheet.lock /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py --apply >> /root/mgs-agent/logs/refresh-sb-restricted-history-sheet.log 2>&1
+ 24 0,1,7-23 * * * flock -n /var/lock/monitor_sms_funnel_balance.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1
+-*/5 13,14 * * 5 flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1
++3-58/5 13,14 * * 5 sleep 90 && flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1
+ 
+ # Automatic USER/MEMORY compaction at >=90%; metadata-only alert to #limites-90
+ 4,14,24,34,44,54 * * * * flock -n /run/lock/mgs-hermes-memory-capacity.lock /root/mgs-agent/scripts/monitor-hermes-memory-capacity.py >> /root/mgs-agent/logs/monitor-hermes-memory-capacity.log 2>&1
+@@ -93,7 +93,7 @@
+ CRON_TZ=America/Sao_Paulo
+ 0 8 * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh dispatch >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1
+ */15 * * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh check >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1
+-10 * * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh digest --scheduled >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1
++21 * * * * /root/mgs-agent/scripts/sb-broadcast-template-repair.sh digest --scheduled >> /root/mgs-agent/logs/sb-broadcast-template-repair-cron.log 2>&1
+ CRON_TZ=America/New_York
+ # END MGS SB BROADCAST TEMPLATE REPAIR
+ 

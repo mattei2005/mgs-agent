@@ -39,10 +39,12 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertTrue(jobs["roas_cycle"]["gateway_running"])
         self.assertEqual(jobs["roas_cycle"]["last_status"], "ok")
         collision = jobs["global_collision_audit_r5"]
-        self.assertEqual(collision["status"], "open_requires_explicit_schedule_change_scope")
-        self.assertEqual(collision["schedule_changes"], 0)
-        self.assertIn("Smart Bidding", collision["material_collision"]["other"])
-        self.assertEqual(collision["material_collision"]["occurrences_8d"], 104)
+        self.assertEqual(collision["status"], "resolved_no_nonbaseline_roas_collision")
+        self.assertEqual(collision["schedule_changes"], 3)
+        self.assertIn("Smart Bidding", collision["prewrite_material_collision"]["other"])
+        self.assertEqual(collision["prewrite_material_collision"]["occurrences_8d"], 104)
+        self.assertEqual(collision["postwrite_result"]["roas_non_dense_operational_overlap_pairs"], 0)
+        self.assertIn("moved to :21", collision["remediation"]["smart_bidding_digest"])
 
         roas_prompt = (ROOT / "data/ares/discord/thread-prompts/1541578606076231750.txt").read_text()
         page_prompt = (ROOT / "data/ares/discord/thread-prompts/1543312825890381865.txt").read_text()

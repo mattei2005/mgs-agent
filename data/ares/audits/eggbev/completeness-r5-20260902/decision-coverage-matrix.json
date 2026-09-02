@@ -4,65 +4,532 @@
   "human_messages_reviewed": 197,
   "attachments_in_scope_reviewed": 29,
   "active_decisions": [
-    {"key":"operation_identity","sources":["1543269726518517883","1543280854024060999"],"canonical":"operation/account/route registry","manual":"parts 1-2","status":"covered"},
-    {"key":"bot_messenger_not_direct_traffic","sources":["1543280854024060999"],"canonical":"operation.strategy_family","manual":"parts 1,7","status":"covered"},
-    {"key":"six_fixed_routes","sources":["1543339248273457252","1543418079554445352","1544501175863222363"],"canonical":"eggbev-fixed-routes.json","manual":"parts 1-2,7","status":"covered"},
-    {"key":"fixed_routes_no_banner_or_pin_identity","sources":["1543577175515471892"],"canonical":"eggbev-fixed-routes.json preservation_policy","manual":"part 7","status":"covered_after_r5"},
-    {"key":"required_thread_members_and_autoarchive","sources":["1543418079554445352","1544494301189378129"],"canonical":"eggbev-fixed-routes.json","manual":"part 7","status":"covered"},
-    {"key":"campaign_structure_sales_cbo_highest_volume_financial_us","sources":["1543285652219633664","1543285785644630126"],"canonical":"campaign_structure","manual":"parts 2,8","status":"covered"},
-    {"key":"adset_messenger_adg1_us_18_all_expansion","sources":["1543285785644630126"],"canonical":"campaign_structure.adset","manual":"parts 2,8","status":"covered"},
-    {"key":"manual_placements_exact_no_audience_network_no_explore","sources":["1543285785644630126","1543596595130535976"],"canonical":"manual_placements_payload","manual":"parts 2,8","status":"covered"},
-    {"key":"digital_trust_payer_and_single_pixel_event","sources":["1543318608371781642","1543679476410486894","1543732127294685325"],"canonical":"conversion_assets/objective_and_optimization","manual":"part 8","status":"covered"},
-    {"key":"page_backed_instagram_identity","sources":["1543667254867263509"],"canonical":"creative_policy.instagram_identity_implementation","manual":"parts 2,9","status":"covered"},
-    {"key":"creation_naming_sequential_without_dup","sources":["1543583346473435196"],"canonical":"campaign_naming.creation_from_zero","manual":"part 2","status":"covered"},
-    {"key":"creation_defaults_1x1x3_or_1x1x5_next_midnight_active","sources":["1543286042138771486","1543286144274407485","1543418079554445352"],"canonical":"campaign_creation_policy/campaign_structure","manual":"parts 1-3","status":"covered"},
-    {"key":"immediate_start_per_request_authority","sources":["1543576749000884285","1543583346473435196","1543919975121551430","1543976056908947547"],"canonical":"permissions matrix/budget policy/Engine","manual":"parts 1,7","status":"covered"},
-    {"key":"nicolas_standing_budget_authority","sources":["1543656629478629376","1543976056908947547","1544364459378737334"],"canonical":"budget_policy/permissions matrix","manual":"parts 1,4,7","status":"covered"},
-    {"key":"final_summary_and_explicit_ok","sources":["1543286042138771486","1543286144274407485","1543679476410486894"],"canonical":"creation/cloning execution gates","manual":"parts 1-3","status":"covered"},
-    {"key":"copy_standard_and_copy_definition","sources":["1543679476410486894","1543743044401107095"],"canonical":"campaign_creation_policy.copy_source_policy","manual":"parts 2,8","status":"covered"},
-    {"key":"messenger_json_fixed_and_json_agt_prospective","sources":["1543286193599418488","1543745903595098202","1543847989976768522"],"canonical":"message_template/canonical JSON file","manual":"parts 2,7-8","status":"covered"},
-    {"key":"json_prewrite_postwrite_readback","sources":["1543583915715985602","1543745903595098202"],"canonical":"postcreation_readback/Engine","manual":"parts 2-3","status":"covered"},
-    {"key":"new_unique_creatives_and_lineage","sources":["1543285895590051923","1543418079554445352"],"canonical":"creative_policy","manual":"parts 2,6","status":"covered"},
-    {"key":"engine_v3_4_2_only_writer","sources":["1543413362375921735","1544125355437195295"],"canonical":"Engine skill/config and operation v3","manual":"parts 1,3","status":"covered_registry_corrected_r5"},
-    {"key":"failure_recovery_readback_first","sources":["1544132397300449280","1543836757529985024"],"canonical":"Engine/SOUL recovery invariant","manual":"parts 1,6","status":"covered"},
-    {"key":"pure_clone","sources":["1543338749776101386","1543413362375921735"],"canonical":"campaign_cloning_policy","manual":"part 3","status":"covered"},
-    {"key":"clone_prestaged","sources":["1543338749776101386"],"canonical":"campaign_cloning_policy","manual":"part 3","status":"covered"},
-    {"key":"clone_page_switch_target_required_naming_and_block","sources":["1543338749776101386","1543815461165334589","1543852576313966692","1543853274468450415"],"canonical":"clone_page_switch policy/Engine supported_modes","manual":"parts 3,7","status":"covered"},
-    {"key":"replacement_revision","sources":["1543679476410486894"],"canonical":"campaign_cloning_policy","manual":"part 7","status":"covered"},
-    {"key":"page_permanent_eligibility_gate","sources":["1544134797453168670"],"canonical":"page_eligibility_policy/denylist","manual":"parts 3-4,9","status":"covered"},
-    {"key":"roas_phase1_05_06_08_10_12_spend_gt_2","sources":["1543293985504764015","1543296331974578347","1543792102905745540","1543836162907447417"],"canonical":"roas_cycle_policy","manual":"part 3","status":"covered"},
-    {"key":"roas_phase2_13_14_16_18_20_22_23_no_spend_gate","sources":["1543294190815805530","1543296531032055848"],"canonical":"roas_cycle_policy","manual":"part 3","status":"covered"},
-    {"key":"future_midnight_campaign_night_exclusion","sources":["1543821000326512661"],"canonical":"roas_cycle_policy","manual":"part 4","status":"covered"},
-    {"key":"cut_and_reactivate_ads_only_same_threshold","sources":["1543294439659937914","1543294589887320234","1543797928244543488"],"canonical":"roas_cycle_policy","manual":"parts 3-4","status":"covered"},
-    {"key":"meta_purchase_roas_precedence_and_cut_continuity","sources":["1543363947933990962","1544416758998376509"],"canonical":"roas v27/source precedence","manual":"parts 3-4,8","status":"covered"},
-    {"key":"manual_intervention_review_not_provenance_loss","sources":["1543363947933990962"],"canonical":"manual_intervention_policy","manual":"part 8","status":"covered"},
-    {"key":"phase3_midnight_recycling_roas_gte_038","sources":["1543821000326512661","1543826048431562822"],"canonical":"phase_3_recycling","manual":"parts 4,9","status":"covered"},
-    {"key":"phase3_random_persisted_45_65","sources":["1543826048431562822"],"canonical":"phase_3_recycling.campaign_budget","manual":"parts 4,9","status":"covered"},
-    {"key":"automatic_scale_disabled_manual_10pct_gt_050","sources":["1543371259427950612","1543401888853008424","1544364459378737334"],"canonical":"campaign_scaling_policy","manual":"part 4","status":"covered"},
-    {"key":"roas_report_16_columns_emojis_atomic_pagination","sources":["1543481532700950568","1543815921058062396","1544107004442710206"],"canonical":"reporting v26/v27","manual":"part 7","status":"covered"},
-    {"key":"r_e_current_then_estimated_future","sources":["1543762704660045855","1543807954313158706"],"canonical":"roi_color_bands_v20/renderer v26","manual":"part 7","status":"covered_after_r5"},
-    {"key":"smart_bidding_messenger_pages_parity","sources":["1543762704660045855","1543974826891280394"],"canonical":"smart_bidding_messenger_pages_parity_v25","manual":"parts 7,9","status":"covered"},
-    {"key":"daily_d1_0800_read_only","sources":["1543824333158486097"],"canonical":"daily_reporting_policy","manual":"part 5","status":"covered"},
-    {"key":"daily_page_z_to_a_current_broadcast","sources":["1543859562178805820"],"canonical":"daily renderer v8","manual":"part 7","status":"covered"},
-    {"key":"daily_revenue_anomaly_30_40_read_only","sources":["1543824333158486097"],"canonical":"daily anomaly detector","manual":"part 7","status":"covered"},
-    {"key":"daily_no_cron_post","sources":["1543758293409988689","1543767962949914745"],"canonical":"daily runtime","manual":"parts 5-6","status":"covered"},
-    {"key":"leads_metric_gt_5000_not_leads_total","sources":["1543306573558841376","1543308066534072510","1543316467808731136"],"canonical":"page_lead_guardrail","manual":"parts 5,9","status":"covered"},
-    {"key":"leads_schedule_proximity_and_hold","sources":["1543316467808731136","1543921644660203671"],"canonical":"action hold/page lead runtime","manual":"parts 5-7","status":"covered_state_corrected_r5"},
-    {"key":"dtr_2022_restriction_pause","sources":["1544056503185580042","1544115097910386830"],"canonical":"page_restriction_guardrail","manual":"parts 7,9","status":"covered"},
-    {"key":"zero_pixel_suspended","sources":["1544416758998376509","1544616192113901638"],"canonical":"zero_pixel suspension v2","manual":"parts 1,5-6,9","status":"covered"},
-    {"key":"active_not_serving_and_no_broad_off_on","sources":["1543836757529985024","1544253298167513169","1544257299890315264"],"canonical":"serving review/continuity policy","manual":"parts 4,8-9","status":"covered"},
-    {"key":"bugged_creative_replace_first_then_invalidate","sources":["1543769929390628915"],"canonical":"creative replacement procedure","manual":"part 8","status":"covered"},
-    {"key":"global_cron_inventory_and_no_silent_collision","sources":["1544128462812483714","1544139287233040424"],"canonical":"cron-scheduling-policy.md","manual":"part 6","status":"covered_but_runtime_collision_open_r5"}
+    {
+      "key": "operation_identity",
+      "sources": [
+        "1543269726518517883",
+        "1543280854024060999"
+      ],
+      "canonical": "operation/account/route registry",
+      "manual": "parts 1-2",
+      "status": "covered"
+    },
+    {
+      "key": "bot_messenger_not_direct_traffic",
+      "sources": [
+        "1543280854024060999"
+      ],
+      "canonical": "operation.strategy_family",
+      "manual": "parts 1,7",
+      "status": "covered"
+    },
+    {
+      "key": "six_fixed_routes",
+      "sources": [
+        "1543339248273457252",
+        "1543418079554445352",
+        "1544501175863222363"
+      ],
+      "canonical": "eggbev-fixed-routes.json",
+      "manual": "parts 1-2,7",
+      "status": "covered"
+    },
+    {
+      "key": "fixed_routes_no_banner_or_pin_identity",
+      "sources": [
+        "1543577175515471892"
+      ],
+      "canonical": "eggbev-fixed-routes.json preservation_policy",
+      "manual": "part 7",
+      "status": "covered_after_r5"
+    },
+    {
+      "key": "required_thread_members_and_autoarchive",
+      "sources": [
+        "1543418079554445352",
+        "1544494301189378129"
+      ],
+      "canonical": "eggbev-fixed-routes.json",
+      "manual": "part 7",
+      "status": "covered"
+    },
+    {
+      "key": "campaign_structure_sales_cbo_highest_volume_financial_us",
+      "sources": [
+        "1543285652219633664",
+        "1543285785644630126"
+      ],
+      "canonical": "campaign_structure",
+      "manual": "parts 2,8",
+      "status": "covered"
+    },
+    {
+      "key": "adset_messenger_adg1_us_18_all_expansion",
+      "sources": [
+        "1543285785644630126"
+      ],
+      "canonical": "campaign_structure.adset",
+      "manual": "parts 2,8",
+      "status": "covered"
+    },
+    {
+      "key": "manual_placements_exact_no_audience_network_no_explore",
+      "sources": [
+        "1543285785644630126",
+        "1543596595130535976"
+      ],
+      "canonical": "manual_placements_payload",
+      "manual": "parts 2,8",
+      "status": "covered"
+    },
+    {
+      "key": "digital_trust_payer_and_single_pixel_event",
+      "sources": [
+        "1543318608371781642",
+        "1543679476410486894",
+        "1543732127294685325"
+      ],
+      "canonical": "conversion_assets/objective_and_optimization",
+      "manual": "part 8",
+      "status": "covered"
+    },
+    {
+      "key": "page_backed_instagram_identity",
+      "sources": [
+        "1543667254867263509"
+      ],
+      "canonical": "creative_policy.instagram_identity_implementation",
+      "manual": "parts 2,9",
+      "status": "covered"
+    },
+    {
+      "key": "creation_naming_sequential_without_dup",
+      "sources": [
+        "1543583346473435196"
+      ],
+      "canonical": "campaign_naming.creation_from_zero",
+      "manual": "part 2",
+      "status": "covered"
+    },
+    {
+      "key": "creation_defaults_1x1x3_or_1x1x5_next_midnight_active",
+      "sources": [
+        "1543286042138771486",
+        "1543286144274407485",
+        "1543418079554445352"
+      ],
+      "canonical": "campaign_creation_policy/campaign_structure",
+      "manual": "parts 1-3",
+      "status": "covered"
+    },
+    {
+      "key": "immediate_start_per_request_authority",
+      "sources": [
+        "1543576749000884285",
+        "1543583346473435196",
+        "1543919975121551430",
+        "1543976056908947547"
+      ],
+      "canonical": "permissions matrix/budget policy/Engine",
+      "manual": "parts 1,7",
+      "status": "covered"
+    },
+    {
+      "key": "nicolas_standing_budget_authority",
+      "sources": [
+        "1543656629478629376",
+        "1543976056908947547",
+        "1544364459378737334"
+      ],
+      "canonical": "budget_policy/permissions matrix",
+      "manual": "parts 1,4,7",
+      "status": "covered"
+    },
+    {
+      "key": "final_summary_and_explicit_ok",
+      "sources": [
+        "1543286042138771486",
+        "1543286144274407485",
+        "1543679476410486894"
+      ],
+      "canonical": "creation/cloning execution gates",
+      "manual": "parts 1-3",
+      "status": "covered"
+    },
+    {
+      "key": "copy_standard_and_copy_definition",
+      "sources": [
+        "1543679476410486894",
+        "1543743044401107095"
+      ],
+      "canonical": "campaign_creation_policy.copy_source_policy",
+      "manual": "parts 2,8",
+      "status": "covered"
+    },
+    {
+      "key": "messenger_json_fixed_and_json_agt_prospective",
+      "sources": [
+        "1543286193599418488",
+        "1543745903595098202",
+        "1543847989976768522"
+      ],
+      "canonical": "message_template/canonical JSON file",
+      "manual": "parts 2,7-8",
+      "status": "covered"
+    },
+    {
+      "key": "json_prewrite_postwrite_readback",
+      "sources": [
+        "1543583915715985602",
+        "1543745903595098202"
+      ],
+      "canonical": "postcreation_readback/Engine",
+      "manual": "parts 2-3",
+      "status": "covered"
+    },
+    {
+      "key": "new_unique_creatives_and_lineage",
+      "sources": [
+        "1543285895590051923",
+        "1543418079554445352"
+      ],
+      "canonical": "creative_policy",
+      "manual": "parts 2,6",
+      "status": "covered"
+    },
+    {
+      "key": "engine_v3_4_2_only_writer",
+      "sources": [
+        "1543413362375921735",
+        "1544125355437195295"
+      ],
+      "canonical": "Engine skill/config and operation v3",
+      "manual": "parts 1,3",
+      "status": "covered_registry_corrected_r5"
+    },
+    {
+      "key": "failure_recovery_readback_first",
+      "sources": [
+        "1544132397300449280",
+        "1543836757529985024"
+      ],
+      "canonical": "Engine/SOUL recovery invariant",
+      "manual": "parts 1,6",
+      "status": "covered"
+    },
+    {
+      "key": "pure_clone",
+      "sources": [
+        "1543338749776101386",
+        "1543413362375921735"
+      ],
+      "canonical": "campaign_cloning_policy",
+      "manual": "part 3",
+      "status": "covered"
+    },
+    {
+      "key": "clone_prestaged",
+      "sources": [
+        "1543338749776101386"
+      ],
+      "canonical": "campaign_cloning_policy",
+      "manual": "part 3",
+      "status": "covered"
+    },
+    {
+      "key": "clone_page_switch_target_required_naming_and_block",
+      "sources": [
+        "1543338749776101386",
+        "1543815461165334589",
+        "1543852576313966692",
+        "1543853274468450415"
+      ],
+      "canonical": "clone_page_switch policy/Engine supported_modes",
+      "manual": "parts 3,7",
+      "status": "covered"
+    },
+    {
+      "key": "replacement_revision",
+      "sources": [
+        "1543679476410486894"
+      ],
+      "canonical": "campaign_cloning_policy",
+      "manual": "part 7",
+      "status": "covered"
+    },
+    {
+      "key": "page_permanent_eligibility_gate",
+      "sources": [
+        "1544134797453168670"
+      ],
+      "canonical": "page_eligibility_policy/denylist",
+      "manual": "parts 3-4,9",
+      "status": "covered"
+    },
+    {
+      "key": "roas_phase1_05_06_08_10_12_spend_gt_2",
+      "sources": [
+        "1543293985504764015",
+        "1543296331974578347",
+        "1543792102905745540",
+        "1543836162907447417"
+      ],
+      "canonical": "roas_cycle_policy",
+      "manual": "part 3",
+      "status": "covered"
+    },
+    {
+      "key": "roas_phase2_13_14_16_18_20_22_23_no_spend_gate",
+      "sources": [
+        "1543294190815805530",
+        "1543296531032055848"
+      ],
+      "canonical": "roas_cycle_policy",
+      "manual": "part 3",
+      "status": "covered"
+    },
+    {
+      "key": "future_midnight_campaign_night_exclusion",
+      "sources": [
+        "1543821000326512661"
+      ],
+      "canonical": "roas_cycle_policy",
+      "manual": "part 4",
+      "status": "covered"
+    },
+    {
+      "key": "cut_and_reactivate_ads_only_same_threshold",
+      "sources": [
+        "1543294439659937914",
+        "1543294589887320234",
+        "1543797928244543488"
+      ],
+      "canonical": "roas_cycle_policy",
+      "manual": "parts 3-4",
+      "status": "covered"
+    },
+    {
+      "key": "meta_purchase_roas_precedence_and_cut_continuity",
+      "sources": [
+        "1543363947933990962",
+        "1544416758998376509"
+      ],
+      "canonical": "roas v27/source precedence",
+      "manual": "parts 3-4,8",
+      "status": "covered"
+    },
+    {
+      "key": "manual_intervention_review_not_provenance_loss",
+      "sources": [
+        "1543363947933990962"
+      ],
+      "canonical": "manual_intervention_policy",
+      "manual": "part 8",
+      "status": "covered"
+    },
+    {
+      "key": "phase3_midnight_recycling_roas_gte_038",
+      "sources": [
+        "1543821000326512661",
+        "1543826048431562822"
+      ],
+      "canonical": "phase_3_recycling",
+      "manual": "parts 4,9",
+      "status": "covered"
+    },
+    {
+      "key": "phase3_random_persisted_45_65",
+      "sources": [
+        "1543826048431562822"
+      ],
+      "canonical": "phase_3_recycling.campaign_budget",
+      "manual": "parts 4,9",
+      "status": "covered"
+    },
+    {
+      "key": "automatic_scale_disabled_manual_10pct_gt_050",
+      "sources": [
+        "1543371259427950612",
+        "1543401888853008424",
+        "1544364459378737334"
+      ],
+      "canonical": "campaign_scaling_policy",
+      "manual": "part 4",
+      "status": "covered"
+    },
+    {
+      "key": "roas_report_16_columns_emojis_atomic_pagination",
+      "sources": [
+        "1543481532700950568",
+        "1543815921058062396",
+        "1544107004442710206"
+      ],
+      "canonical": "reporting v26/v27",
+      "manual": "part 7",
+      "status": "covered"
+    },
+    {
+      "key": "r_e_current_then_estimated_future",
+      "sources": [
+        "1543762704660045855",
+        "1543807954313158706"
+      ],
+      "canonical": "roi_color_bands_v20/renderer v26",
+      "manual": "part 7",
+      "status": "covered_after_r5"
+    },
+    {
+      "key": "smart_bidding_messenger_pages_parity",
+      "sources": [
+        "1543762704660045855",
+        "1543974826891280394"
+      ],
+      "canonical": "smart_bidding_messenger_pages_parity_v25",
+      "manual": "parts 7,9",
+      "status": "covered"
+    },
+    {
+      "key": "daily_d1_0800_read_only",
+      "sources": [
+        "1543824333158486097"
+      ],
+      "canonical": "daily_reporting_policy",
+      "manual": "part 5",
+      "status": "covered"
+    },
+    {
+      "key": "daily_page_z_to_a_current_broadcast",
+      "sources": [
+        "1543859562178805820"
+      ],
+      "canonical": "daily renderer v8",
+      "manual": "part 7",
+      "status": "covered"
+    },
+    {
+      "key": "daily_revenue_anomaly_30_40_read_only",
+      "sources": [
+        "1543824333158486097"
+      ],
+      "canonical": "daily anomaly detector",
+      "manual": "part 7",
+      "status": "covered"
+    },
+    {
+      "key": "daily_no_cron_post",
+      "sources": [
+        "1543758293409988689",
+        "1543767962949914745"
+      ],
+      "canonical": "daily runtime",
+      "manual": "parts 5-6",
+      "status": "covered"
+    },
+    {
+      "key": "leads_metric_gt_5000_not_leads_total",
+      "sources": [
+        "1543306573558841376",
+        "1543308066534072510",
+        "1543316467808731136"
+      ],
+      "canonical": "page_lead_guardrail",
+      "manual": "parts 5,9",
+      "status": "covered"
+    },
+    {
+      "key": "leads_schedule_proximity_and_hold",
+      "sources": [
+        "1543316467808731136",
+        "1543921644660203671"
+      ],
+      "canonical": "action hold/page lead runtime",
+      "manual": "parts 5-7",
+      "status": "covered_state_corrected_r5"
+    },
+    {
+      "key": "dtr_2022_restriction_pause",
+      "sources": [
+        "1544056503185580042",
+        "1544115097910386830"
+      ],
+      "canonical": "page_restriction_guardrail",
+      "manual": "parts 7,9",
+      "status": "covered"
+    },
+    {
+      "key": "zero_pixel_suspended",
+      "sources": [
+        "1544416758998376509",
+        "1544616192113901638"
+      ],
+      "canonical": "zero_pixel suspension v2",
+      "manual": "parts 1,5-6,9",
+      "status": "covered"
+    },
+    {
+      "key": "active_not_serving_and_no_broad_off_on",
+      "sources": [
+        "1543836757529985024",
+        "1544253298167513169",
+        "1544257299890315264"
+      ],
+      "canonical": "serving review/continuity policy",
+      "manual": "parts 4,8-9",
+      "status": "covered"
+    },
+    {
+      "key": "bugged_creative_replace_first_then_invalidate",
+      "sources": [
+        "1543769929390628915"
+      ],
+      "canonical": "creative replacement procedure",
+      "manual": "part 8",
+      "status": "covered"
+    },
+    {
+      "key": "global_cron_inventory_and_no_silent_collision",
+      "sources": [
+        "1544128462812483714",
+        "1544139287233040424"
+      ],
+      "canonical": "cron-scheduling-policy.md",
+      "manual": "part 6",
+      "status": "covered_but_runtime_collision_open_r5"
+    }
   ],
   "superseded_or_historical_not_active": [
-    {"topic":"original creation name with para [name] - Copy","superseded_by":"sequential C0XX naming without suffix"},
-    {"topic":"initial Fase 1 start at 06:00/08:00 only","superseded_by":"05/06/08/10/12 all cut-enabled"},
-    {"topic":"Smart Bidding freshness blocks all cuts","superseded_by":"Meta Purchase ROAS cuts continue"},
-    {"topic":"30% budget increase above threshold","superseded_by":"10% recommendation above 0.50; automatic write disabled"},
-    {"topic":"pinned route banners","superseded_by":"thread+prompt+registry identity without banner/pin"},
-    {"topic":"Engine v3.3.0/v3.4.0 registry pointers","superseded_by":"v3.4.2"},
-    {"topic":"zero-pixel active stage","superseded_by":"suspended on 2026-09-02"},
-    {"topic":"one-shot 31/08 scheduled","superseded_by":"completed/disabled"}
+    {
+      "topic": "original creation name with para [name] - Copy",
+      "superseded_by": "sequential C0XX naming without suffix"
+    },
+    {
+      "topic": "initial Fase 1 start at 06:00/08:00 only",
+      "superseded_by": "05/06/08/10/12 all cut-enabled"
+    },
+    {
+      "topic": "Smart Bidding freshness blocks all cuts",
+      "superseded_by": "Meta Purchase ROAS cuts continue"
+    },
+    {
+      "topic": "30% budget increase above threshold",
+      "superseded_by": "10% recommendation above 0.50; automatic write disabled"
+    },
+    {
+      "topic": "pinned route banners",
+      "superseded_by": "thread+prompt+registry identity without banner/pin"
+    },
+    {
+      "topic": "Engine v3.3.0/v3.4.0 registry pointers",
+      "superseded_by": "v3.4.2"
+    },
+    {
+      "topic": "zero-pixel active stage",
+      "superseded_by": "suspended on 2026-09-02"
+    },
+    {
+      "topic": "one-shot 31/08 scheduled",
+      "superseded_by": "completed/disabled"
+    }
   ],
   "one_time_or_incident_not_promoted": [
     "pg_5024 immediate first-campaign exception",
@@ -83,9 +550,11 @@
     "latest prompt changes require the next safe external gateway restart to enter the running gateway process"
   ],
   "open_compliance_finding": {
-    "id":"roas_minute_10_global_collision",
-    "status":"requires_explicit_schedule_change_scope",
-    "evidence":"cron-collision-r5.json",
-    "summary":"ROAS :10 overlaps hourly Smart Bidding digest :10 on every ROAS cycle, plus local :10 jobs at bounded times. No schedule was changed during audit."
+    "id": "roas_minute_10_global_collision",
+    "status": "resolved",
+    "evidence": "cron-collision-r5.json",
+    "summary": "ROAS remained :10. Shared Smart Bidding digest moved to :21, Cron Control Plane to 08:32, and Friday SMS monitor to residue :03 with 90s stagger. Postwrite eight-day audit shows zero non-dense operational ROAS overlap pairs.",
+    "resolved_at_et": "2026-09-02T15:33:29-04:00",
+    "postwrite_evidence": "cron-collision-r5-postwrite.json"
   }
 }

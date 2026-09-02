@@ -3,7 +3,7 @@
   "operation_id": "Eggbev-US-CC-EN-BOT",
   "requested_by": "Rodolfo Mattei",
   "thread_id": "1544558298769006593",
-  "completed_at_et": "2026-09-02T12:58:42-04:00",
+  "completed_at_et": "2026-09-02T15:37:23-04:00",
   "scope_start": {
     "message_id": "1543269726518517883",
     "timestamp_et": "2026-08-29T10:42:55.367000-04:00",
@@ -76,7 +76,7 @@
       "id": "global_cron_collision_roas_10",
       "severity": "high",
       "finding": "Eight-day normalized audit found ROAS physical minute :10 overlapping the hourly Smart Bidding broadcast-template digest :10 on all 104 ROAS occurrences; both are operational and share the Smart Bidding read surface.",
-      "correction": "Not silently changed. Rules and operation now disclose open_requires_explicit_schedule_change_scope; schedule_changes=0."
+      "correction": "Resolved after explicit Rodolfo authorization: ROAS stayed :10; Smart Bidding digest moved :21, Cron Control Plane 08:32, Friday SMS monitor residue :03 +90s. Postwrite eight-day audit: zero non-dense operational ROAS collision pairs."
     }
   ],
   "runtime_readback": {
@@ -98,7 +98,13 @@
       "enabled": true,
       "schedule": "3-58/5 * * * *",
       "stagger_seconds": 30,
-      "post_suspension_journal_ticks_confirmed": ["12:03", "12:08", "12:38", "12:43", "12:48"]
+      "post_suspension_journal_ticks_confirmed": [
+        "12:03",
+        "12:08",
+        "12:38",
+        "12:43",
+        "12:48"
+      ]
     },
     "zero_pixel": {
       "enabled": false,
@@ -110,7 +116,11 @@
       "state": "completed",
       "last_status": "ok"
     },
-    "no_recurring_cron": ["Daily", "Create campaigns", "Clone campaigns"]
+    "no_recurring_cron": [
+      "Daily",
+      "Create campaigns",
+      "Clone campaigns"
+    ]
   },
   "rules_thread_readback": {
     "messages": 13,
@@ -119,20 +129,25 @@
     "stale_forbidden_phrases": 0,
     "r5_messages_edited": 2,
     "r5_message_readbacks": "2/2",
-    "new_disclosures": ["R/E order", "no banner/pin identity", "open ROAS :10 collision"]
+    "new_disclosures": [
+      "R/E order",
+      "no banner/pin identity",
+      "open ROAS :10 collision"
+    ]
   },
   "validation": {
-    "eggbev_unittest": "219/219 PASS",
+    "eggbev_unittest": "223/223 PASS",
     "cron_policy_and_control_plane_unittest": "6/6 PASS",
     "knowledge_validate": "PASS",
-    "knowledge_regression": "15/15 PASS",
+    "knowledge_regression": "16/16 PASS",
     "prompt_source_active_config": "2/2 exact",
     "prompt_source_versioned_config": "2/2 exact",
     "skill_page_guardrails": "v1.0.2 live and versioned mirror synchronized",
     "manual_coverage": "PASS",
     "meta_writes_during_r5": 0,
-    "cron_writes_during_r5": 0,
-    "gateway_restarts_during_r5": 0
+    "cron_writes_during_r5": 1,
+    "gateway_restarts_during_r5": 0,
+    "cron_schedule_entries_changed": 3
   },
   "durable_artifacts": [
     "inventory-summary.json",
@@ -146,15 +161,28 @@
   ],
   "open_gates": [
     {
-      "key": "roas_minute_10_collision",
-      "requires": "explicit Rodolfo authorization for selected schedule remediation",
-      "reason": "changing ROAS or shared root/Smart Bidding schedules changes production automation scope"
-    },
-    {
       "key": "latest_prompt_gateway_reload",
       "requires": "next safe external Ares gateway restart",
       "reason": "self-restart during this active session is prohibited"
     }
   ],
-  "final_state": "audit_complete_with_one_material_schedule_collision_escalated_and_one_safe_restart_reload_pending"
+  "final_state": "audit_and_schedule_remediation_complete; latest prompt gateway reload remains for next safe external restart",
+  "schedule_remediation": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_in_thread": "1544558298769006593",
+    "roas_schedule_changed": false,
+    "root_cron_changes": 3,
+    "syntax_check": "PASS",
+    "exact_readback": "PASS",
+    "postwrite_roas_non_dense_operational_collisions": 0,
+    "backup": "data/backups/crontab-before-eggbev-roas-collision-r5-20260902T130500-0400.txt",
+    "postwrite_audit": "cron-collision-r5-postwrite.json",
+    "probes": {
+      "smart_bidding_digest": "PASS outside_digest_hour_sp no-op",
+      "cron_control_plane": "PASS docs regenerated with schedule 08:32",
+      "sms_friday": "PASS dry-run outside_window no-op",
+      "infra_inventory": "PASS live entries 32/21/3-58 with 90s stagger"
+    },
+    "completed_at_et": "2026-09-02T15:37:23-04:00"
+  }
 }

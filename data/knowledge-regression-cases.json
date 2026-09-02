@@ -175,16 +175,18 @@
     },
     {
       "id": "KR-016",
-      "question": "A auditoria global de cron Eggbev está limpa ou há colisão aberta?",
+      "question": "A colisão ROAS :10 com jobs auxiliares foi remediada sem mudar o horário do ROAS?",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "required_all": [
         "global_collision_audit_r5",
-        "open_requires_explicit_schedule_change_scope",
+        "resolved_no_nonbaseline_roas_collision",
         "Smart Bidding broadcast-template-repair digest physical :10",
-        "\"schedule_changes\": 0"
+        "minute :10 moved to :21",
+        "\"roas_non_dense_operational_overlap_pairs\": 0",
+        "\"schedule_changes\": 3"
       ],
       "forbidden_any": [
-        "\"status\": \"clear_no_collisions\""
+        "\"status\": \"open_requires_explicit_schedule_change_scope\""
       ]
     },
     {
