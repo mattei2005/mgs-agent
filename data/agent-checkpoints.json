@@ -803,12 +803,22 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0033-CUTOVER-20260902",
-      "next_step": "Validar item 1Password B003-3, quatro checks Graph, roles/identidades e paridade da Sheet antes do cutover produtivo.",
+      "next_step": "Incorporar o cutover B005-4 recém-autorizado e aplicar ambos em um lote controlado com backup/readback.",
       "objective": "Substituir B003-2 por B003-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; message:1544707104089182278; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "state": "in_progress: pedido explícito de rodolfo recebido; b003-2 permanece contido na pausa manual enquanto o preflight b003-3 é executado.",
+      "source": "discord:thread:1544705223057211422; messages:1544707104089182278; backup:/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
+      "state": "preflight_pass: item b003-3 único, quatro checks graph http 200, token válido/app-bound, 2 roles resolvidas, sheet 13 linhas b003-3 e zero b003-2; canário isolado passou sem alertas ou writes.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T13:56:13+00:00"
+      "updated_at": "2026-09-02T14:02:55+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-B0054-CUTOVER-20260902",
+      "next_step": "Validar item 1Password B005-4, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado.",
+      "objective": "Substituir B005-3 por B005-4 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544705223057211422; OOB message after 1544707104089182278; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+      "state": "in_progress: autorização explícita recebida via mensagem oob durante o cutover b003-3; b005-3 permanece contido na pausa manual até o preflight b005-4.",
+      "thread_id": "1544705223057211422",
+      "updated_at": "2026-09-02T14:02:55+00:00"
     },
     {
       "agent": "zeus",
@@ -1962,5 +1972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T13:56:13+00:00"
+  "updated_at": "2026-09-02T14:02:55+00:00"
 }
