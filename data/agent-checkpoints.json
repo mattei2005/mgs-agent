@@ -1929,8 +1929,18 @@
       "state": "pass: 20 pacotes, corepack 0.36.0 e reboot validados",
       "thread_id": "1544371507491242044",
       "updated_at": "2026-09-01T23:04:04+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zeus-vps-snapshot-review-20260902",
+      "next_step": "Se Rodolfo quiser, congelar manifesto somente para Zeus 020150 e pedir confirmação crítica.",
+      "objective": "Reavaliar 2,58 GiB de snapshots após atualização Hermes v0.21.0",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T003917-0400-snapshot-review/snapshot-review-result.json",
+      "state": "pass: 0,49 gib duplicado exato elegível; 2,09 gib protegidos por evidência de ativação ou estado histórico intermediário; nenhum snapshot removido",
+      "thread_id": "1544536465772511303",
+      "updated_at": "2026-09-02T05:45:59+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T04:52:25+00:00"
+  "updated_at": "2026-09-02T05:45:59+00:00"
 }

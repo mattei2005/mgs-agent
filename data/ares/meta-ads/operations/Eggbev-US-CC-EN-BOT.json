@@ -1669,12 +1669,31 @@
         "UTM_CAMPAIGN exact pg_XXXXX",
         "FB_PAGE_ID exact readback against Meta creative page_id"
       ],
+      "leads_semantics": "current dynamic balance of active leads for the Page; new leads increase it and unsubscribes may decrease it",
       "leads_total_is_not_the_action_metric": true,
+      "leads_total_semantics": "cumulative/historical lead count; never use for limit, pause, Phase 3 eligibility or budget decision",
       "metric": "LEADS",
       "operator": ">",
       "publisher_name": "Eggbev",
       "system": "Smart Bidding Messenger live API",
       "threshold": 5000
+    },
+    "manager_manual_budget_decision_context": {
+      "automatic_budget_write": false,
+      "decision_inputs": [
+        "current active LEADS and remaining headroom to 5000",
+        "Meta Purchase ROAS",
+        "cost per result",
+        "results",
+        "current campaign budget",
+        "amount spent",
+        "CPM",
+        "CTR",
+        "CPC",
+        "historical page and campaign behavior"
+      ],
+      "purpose": "advisory context for the human manager; never infer a formula, threshold or automatic scale from LEADS alone",
+      "source": "Nicolas screen recording Record_2026_08_31_22_04_13_66.mp4 analyzed and read back in discord:thread:1544122069933887628"
     },
     "status": "active_scheduled_tick_confirmed",
     "status_reporting": {
