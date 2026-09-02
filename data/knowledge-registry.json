@@ -1353,10 +1353,27 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-FIXED-ROUTES-V2-20260901",
+      "title": "Seis rotas fixas Eggbev com pin, prompt e reconciliador",
+      "updated_at": "2026-09-02T00:39:01+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T20:37:52-04:00",
+      "id": "ARES-EGGBEV-FIXED-ROUTES-V2-20260901",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Seis rotas fixas Eggbev com pin, prompt e reconciliador",
-      "updated_at": "2026-08-30T01:11:06+00:00"
+      "title": "Seis rotas fixas Eggbev com Regras consolidadas na thread original",
+      "updated_at": "2026-09-02T00:39:01+00:00"
     },
     {
       "canonical_key": "ares.eggbev.campaign_creation.runtime.v3",
@@ -3294,5 +3311,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T20:27:01+00:00"
+  "updated_at": "2026-09-02T00:39:01+00:00"
 }

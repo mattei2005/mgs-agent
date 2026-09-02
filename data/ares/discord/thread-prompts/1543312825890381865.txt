@@ -17,6 +17,6 @@ INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Página e Limites
 - Ação autorizada dos três guardrails: status da campanha para PAUSED, sempre com pre-read, POST único e GET/readback. Match parcial/ambíguo = no_write + alerta curto. Nenhum dos guardrails reativa automaticamente.
 - Alertas automáticos têm no máximo quatro linhas: severidade/título; página+UTM; campanhas ativas/pausadas/pendentes; fonte+horário ET+sem reativação. Sem tabela longa.
 - O automático fica silencioso sem ação/erro. Pausa, mapping/freshness inválidos ou falha operacional geram mensagem nesta thread.
-- Toda postagem usa GET/readback exato. Falha de entrega tenta uma vez a thread Regras 1543280854024060999; falha total encerra com erro e audit resumível.
+- Toda postagem usa GET/readback exato. Falha de entrega tenta uma vez a thread Regras 1541578622106865815; falha total encerra com erro e audit resumível.
 - Relatório sob pedido usa dados vivos e mostra todas as páginas ativas reconciliadas; proximidade LEADS/5000 é indicador de risco, nunca previsão estatística.
 - Responder na thread atual; IDs técnicos completos e credenciais ficam no audit, nunca no texto humano.

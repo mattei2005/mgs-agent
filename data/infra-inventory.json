@@ -7774,11 +7774,11 @@
       "purpose": "Deterministic CPV Daily/Intraday/Snapshot reporting with D3 v2 and immediate resumable post-cut lifecycle: pause readback, creative classification/Drive movement, terminal campaign deletion and audit.",
       "validation": "69/69 targeted tests PASS; py_compile PASS; live Pricing HTTP 200 parsed with contiguous 4-slot topology; Intraday dry-run PASS with zero Meta writes; report-only Discord post/readback verified in 3 chunks.",
       "test_path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-      "test_sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36",
+      "test_sha256": "ff88db9de1087b177312b561f71d7e3e3408d6db5cdffed0d0927f463898db3d",
       "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "operation_sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d",
-      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260825T134628Z.json",
-      "last_report_sha256": "aaf8de5cf2017fa26a6a37eac126252f70717956a1055d9ad7c2576140afe845",
+      "operation_sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
+      "last_report_path": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260902T003012Z.json",
+      "last_report_sha256": "4a6b45311ea241c135f49b2d3d4ed044009ae57aaa79452d4f9eda5e70d25f24",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1541776582656663664",
@@ -7838,12 +7838,12 @@
         "meta_readback": "C13-C18/C20 status/configured_status/effective_status DELETED via HTTP 200 GET; no duplicate POST after ambiguous local post-processing error"
       },
       "git_tracked": false,
-      "updated_at": "2026-09-02T00:34:04.605725+00:00",
+      "updated_at": "2026-09-02T00:40:25.737288+00:00",
       "intraday_wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
       "guardrail_reactivation_cron_id": "5d0974e97ebd",
-      "direct_traffic_cbo_skill_sha256": "fff3d0fb976723e35a97a2bf213065a4cb382ce2e86b6d1afe392c2f2a9f2654",
+      "direct_traffic_cbo_skill_sha256": "b01e1cf4264cc75af420778c47045889f260587acb51c522e0a4c8db16e3a011",
       "vehicle_finance_skill_sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec",
       "meta_intraday_skill_sha256": "03b3a0211ac4e6511d4fe81e2e0f6ee08f23850ef56f6f9b8246f8cbe0f34798",
       "first_delivery_guardrail_20260822": {
@@ -8245,16 +8245,15 @@
         "scope": "Block all new CPV G006 campaign creation and cloning from 2026-08-25 until a new explicit release while preserving Daily, Intraday and approved lifecycle guardrails.",
         "operation": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "size_bytes": 164737,
-          "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
+          "size_bytes": 127623,
+          "sha256": "0b7ec6e98f0fe12f91e2259c5ea10759f33a6fcefb2c82af17c4907aa1d9ebe0",
           "hold_enabled": true,
           "status": "creation_hold_until_explicit_release",
           "auto_expiry": false,
           "resume_authority": [
             "Rodolfo",
             "Nicolas"
-          ],
-          "modified_at": "2026-09-02T00:26:04.296566+00:00"
+          ]
         },
         "scheduler": {
           "job_id": "2cf8115a4f8b",
@@ -8701,9 +8700,8 @@
         "artifacts": {
           "fixed_reports": {
             "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-            "size_bytes": 193236,
-            "sha256": "5b9393cfa8db24a4c67613ca096d43965c332d07721302a38a680a9f237e4c3d",
-            "modified_at": "2026-09-02T00:28:42.271965+00:00"
+            "size_bytes": 193417,
+            "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
           },
           "lifecycle_runtime": {
             "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
@@ -8712,9 +8710,8 @@
           },
           "fixed_tests": {
             "path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-            "size_bytes": 71435,
-            "sha256": "ff88db9de1087b177312b561f71d7e3e3408d6db5cdffed0d0927f463898db3d",
-            "modified_at": "2026-09-02T00:29:04.032018+00:00"
+            "size_bytes": 69619,
+            "sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36"
           },
           "lifecycle_tests": {
             "path": "/root/mgs-agent/tests/test_ares_cpv_creative_lifecycle.py",
@@ -8723,9 +8720,8 @@
           },
           "operation": {
             "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-            "size_bytes": 164737,
-            "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
-            "modified_at": "2026-09-02T00:26:04.296566+00:00"
+            "size_bytes": 127215,
+            "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
           },
           "creative_inventory": {
             "path": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
@@ -8791,6 +8787,42 @@
         },
         "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
         "knowledge_checkpoint_id": "ARES-CPV-POST-CUT-FINALIZATION-20260825"
+      },
+      "rewarded_topology_recovery_20260901": {
+        "source_thread_id": "1544501626231062580",
+        "backup": "/root/mgs-agent/backups/ares-cpv-rewarded-topology-20260901T202208-0400",
+        "root_cause": "Smart Bidding Pricing removed terminal rewarded_4 while the parser required exactly five slots.",
+        "policy": "Accept live contiguous terminal shrink/expansion; fail closed on missing base, interior gap, duplicate, target/date/currency divergence.",
+        "live_readback": {
+          "pricing_http": 200,
+          "slot_ids": [
+            "rewarded",
+            "rewarded_1",
+            "rewarded_2",
+            "rewarded_3"
+          ],
+          "slot_count": 4
+        },
+        "tests": "69 passed",
+        "intraday_dry_run": "PASS_NO_META_WRITE",
+        "discord_report_readback": {
+          "thread_id": "1539832402744975450",
+          "message_ids": [
+            "1544504729864900709",
+            "1544504731471192084",
+            "1544504732251332728"
+          ],
+          "verified": "3/3 HTTP 200"
+        },
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1544505836481544204",
+          "http_status": 200,
+          "content_empty": true,
+          "mentions": false,
+          "thread_created": false,
+          "get_readback": true
+        }
       }
     },
     {
@@ -9581,15 +9613,13 @@
         },
         "fixed_reports": {
           "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-          "size_bytes": 193236,
-          "sha256": "5b9393cfa8db24a4c67613ca096d43965c332d07721302a38a680a9f237e4c3d",
-          "modified_at": "2026-09-02T00:28:42.271965+00:00"
+          "size_bytes": 193417,
+          "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
         },
         "operation": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "size_bytes": 164737,
-          "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
-          "modified_at": "2026-09-02T00:26:04.296566+00:00"
+          "size_bytes": 127215,
+          "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
         },
         "tests": {
           "daily": "617726fb8534b8cff3e11d2caf85c914625ead5806d30d95e7390be604153ab0",
@@ -10078,9 +10108,8 @@
         "artifacts": {
           "fixed_reports": {
             "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-            "size_bytes": 193236,
-            "sha256": "5b9393cfa8db24a4c67613ca096d43965c332d07721302a38a680a9f237e4c3d",
-            "modified_at": "2026-09-02T00:28:42.271965+00:00"
+            "size_bytes": 193417,
+            "sha256": "be9d6ef60ac2e451a0417d101c8791501eb94066d37ac85810e482a7dbc5a764"
           },
           "lifecycle_runtime": {
             "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
@@ -10089,9 +10118,8 @@
           },
           "fixed_tests": {
             "path": "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-            "size_bytes": 71435,
-            "sha256": "ff88db9de1087b177312b561f71d7e3e3408d6db5cdffed0d0927f463898db3d",
-            "modified_at": "2026-09-02T00:29:04.032018+00:00"
+            "size_bytes": 69619,
+            "sha256": "cad5ff2f3b471f0cfb58027e65a59ae07d550bd707ab19aff40a764ab0b7fb36"
           },
           "lifecycle_tests": {
             "path": "/root/mgs-agent/tests/test_ares_cpv_creative_lifecycle.py",
@@ -10100,9 +10128,8 @@
           },
           "operation": {
             "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-            "size_bytes": 164737,
-            "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
-            "modified_at": "2026-09-02T00:26:04.296566+00:00"
+            "size_bytes": 127215,
+            "sha256": "f90a93f6c80e29481b8fc241da88ddd3db6b2dd2e232ab02956a7f26ac25027d"
           },
           "creative_inventory": {
             "path": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
@@ -10636,9 +10663,8 @@
       "scope": "Set USD25 as the initial budget for all new Creditoparaveiculo BR-CAR-BR G006 campaigns and explicitly align C07/C25/C26/C27/C28/C29/C30 to USD25 without status or billing changes.",
       "operation": {
         "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-        "size_bytes": 164737,
-        "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
-        "modified_at": "2026-09-02T00:26:04.296566+00:00"
+        "size_bytes": 143257,
+        "sha256": "2f8e5e4a2aeb2d6bc5849f39d6fbe57ce2d164011fce472c81c32800385f9d6b"
       },
       "account_config": {
         "path": "/root/mgs-agent/data/ares/meta-ads/accounts/1046241194533786.json",
@@ -10901,10 +10927,9 @@
         },
         "operation_main": {
           "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-          "sha256": "a35207fb357fdd3a6160b77f4fa5fe95a9414cd4f2487cb9e40968bc54279a1d",
-          "size_bytes": 164737,
-          "mode": "0o600",
-          "modified_at": "2026-09-02T00:26:04.296566+00:00"
+          "sha256": "7c5bb7e529d285ee003f982f07304edb0f75f48621fbdd0e9d80602257843aee",
+          "size_bytes": 156097,
+          "mode": "0o600"
         },
         "skill_canonical": {
           "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
@@ -11192,29 +11217,6 @@
       "authorization_message_id": "1544473492148457583",
       "source_thread_id": "1544371507491242044",
       "updated_at": "2026-09-01T19:03:54-04:00"
-    },
-    {
-      "id": "ares-cpv-rewarded-topology-20260901",
-      "agent": "ares",
-      "type": "script/test/data/skill/reporting_fix",
-      "paths": [
-        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
-        "/root/mgs-agent/tests/test_creditoparaveiculo_fixed_reports.py",
-        "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-        "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
-        "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md"
-      ],
-      "backup": "/root/mgs-agent/backups/ares-cpv-rewarded-topology-20260901T202208-0400",
-      "root_cause": "Smart Bidding Pricing removed terminal rewarded_4 while the parser required exactly five slots.",
-      "prevention": "Live contiguous terminal topology with fail-closed base/gap/duplicate/target/date/currency guards plus regression coverage for shrink, expansion and interior gap.",
-      "validation": {
-        "tests": "69 passed",
-        "live_pricing_http": 200,
-        "live_slot_count": 4,
-        "intraday_dry_run": "PASS_NO_META_WRITE",
-        "discord_readback": "PASS_3_OF_3"
-      },
-      "updated_at": "2026-09-02T00:34:04.605745+00:00"
     }
   ],
   "profile_skill_references": [
