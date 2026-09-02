@@ -1,17 +1,21 @@
 {
-  "version": 2,
+  "version": 3,
   "mode": "manual",
-  "apps": [],
+  "apps": [
+    "B001-4",
+    "B004-4",
+    "B007-2",
+    "B011-2"
+  ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-after-B008-production-validation",
-  "updated_at": "2026-09-02T10:35:03-04:00",
-  "reason": "B003-3, B005-4, B006-4, B008-3 e B010-3 reativados após preflight/canário; nenhuma substituição deste lote permanece pausada.",
-  "source_message_ids": [
-    "1544707104089182278",
-    "OOB-after-1544707104089182278",
-    "OOB-after-B003-B005-production-validation",
-    "OOB-after-B006-reconciliation",
-    "OOB-after-B008-production-validation"
-  ]
+  "source_message_id": "1544837470687076454",
+  "updated_at": "2026-09-02T18:36:34-04:00",
+  "reason": "Apps confirmados em restrição; rotas de alerta pausadas até Rodolfo concluir as substituições.",
+  "policy": {
+    "auto_pause_on_restriction": true,
+    "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
+    "resume_condition": "Somente após substituição/recuperação validada e pedido explícito de Rodolfo",
+    "policy_source_message_id": "1544837470687076454"
+  }
 }
