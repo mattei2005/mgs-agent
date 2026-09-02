@@ -456,7 +456,7 @@
       "normal_production_after_final_summary_approval": "ACTIVE with future start_time; Meta delivery begins only at the approved scheduled time",
       "technical_canary": "PAUSED until a separate explicit activation approval"
     },
-    "status": "approved_by_nicolas_pending_implementation"
+    "status": "approved_by_nicolas_materialized_and_live_validated"
   },
   "channel": "Messenger",
   "country": "US",
@@ -477,7 +477,7 @@
     "multi_advertiser_ads": false,
     "partnership_ad": false,
     "source": "01_READY after reservation and Meta x Drive reconciliation",
-    "status": "approved_by_nicolas_pending_inventory_runner"
+    "status": "approved_by_nicolas_inventory_runner_materialized"
   },
   "cut_level": {
     "page_lead_guardrail": "campaign",
@@ -1226,7 +1226,7 @@
       "next-threshold recommendation",
       "write readbacks"
     ],
-    "status": "layout_and_cycles_approved_pending_implementation",
+    "status": "layout_cycles_and_controlled_write_materialized",
     "thread_id": "1541578606076231750",
     "thread_name": "Eggbev-US-CC-EN Corte e ROAS",
     "thread_name_status": "approved_and_readback_confirmed"
@@ -1604,7 +1604,7 @@
       "label": "Smart Bidding restriction state; not independent proof of a live DTR #2022 restriction"
     },
     "runtime": {
-      "blocked_reason": null,
+      "blocked_reason": "effective campaign pause write is held until an explicit page_lead_guardrail release; scheduler and read-only evaluation remain enabled",
       "cron_id": "c3d2499d8c33",
       "cron_name": "Eggbev limite de leads 08h e 20h ET",
       "deliver": "local",
@@ -1613,7 +1613,11 @@
       "scheduled_flag": "--scheduled",
       "scheduled_wrapper_requires_internal_time_gate": true,
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh",
-      "write_enabled": true
+      "write_enabled": false,
+      "action_hold_source": "/root/.hermes/profiles/ares/state/eggbev-action-hold.json",
+      "effective_write_enabled": false,
+      "policy_write_authorized": true,
+      "resume_gate": "explicit release of page_lead_guardrail by Nicolas Holanda or Rodolfo Mattei"
     },
     "schedule": {
       "authorization_source": "discord:thread:1543312825890381865",
@@ -1695,7 +1699,7 @@
       "purpose": "advisory context for the human manager; never infer a formula, threshold or automatic scale from LEADS alone",
       "source": "Nicolas screen recording Record_2026_08_31_22_04_13_66.mp4 analyzed and read back in discord:thread:1544122069933887628"
     },
-    "status": "active_scheduled_tick_confirmed",
+    "status": "active_scheduled_dry_run_action_hold",
     "status_reporting": {
       "bands": [
         {
@@ -2803,26 +2807,27 @@
   },
   "scheduler_jobs": {
     "page_lead_guardrail": {
-      "activation_conclusion": "active; the 20:00 scheduled tick completed successfully. gateway_running=false is an observer false negative and does not override execution history.",
+      "activation_conclusion": "scheduler active in deterministic dry-run because the persistent page_lead_guardrail action hold requires explicit release; the 08:16 ET tick executed and failed closed on mapping/freshness with zero Meta writes.",
       "deliver": "local",
       "enabled": true,
-      "gateway_running_observer": false,
+      "gateway_running_observer": true,
       "job_id": "c3d2499d8c33",
-      "last_run_at_et": "2026-08-29T20:00:05.226965-04:00",
-      "last_status": "ok",
+      "last_run_at_et": "2026-09-02T08:16:20.305009-04:00",
+      "last_status": "error_fail_closed_mapping_or_freshness",
       "logical_cycle_times": [
         "08:00",
         "20:00"
       ],
       "name": "Eggbev limite de leads 08h e 20h ET",
-      "next_run_at_et": "2026-08-30T08:00:00-04:00",
+      "next_run_at_et": "2026-09-02T20:16:00-04:00",
       "no_agent": true,
       "physical_offset_minute": 16,
-      "readback_at_et": "2026-08-31T20:30:41-04:00",
+      "readback_at_et": "2026-09-02T12:40:01-04:00",
       "schedule": "16 8,20 * * *",
       "scheduler_tick_confirmed": true,
       "script": "eggbev-page-lead-guardrail.sh",
-      "state": "scheduled"
+      "state": "scheduled",
+      "effective_write_enabled": false
     },
     "page_restriction_guardrail": {
       "activation_conclusion": "active for DTR restriction only; the zero-pixel stage was suspended by Nicolas on 2026-09-02 at 03:55 ET, removed from the wrapper and has no active write or schedule.",
@@ -2868,22 +2873,24 @@
       "timezone": "America/New_York"
     },
     "one_time_reactivation_20260831": {
-      "enabled": true,
+      "enabled": false,
       "job_id": "186277a70030",
       "lock_scope": "own request lock plus the common Eggbev ROAS operation lock",
       "name": "Eggbev reativação lote 31-08 sem Pages restritas",
-      "readback_at_et": "2026-08-31T20:35:55-04:00",
+      "readback_at_et": "2026-09-02T12:40:01-04:00",
       "schedule": "once at 2026-09-01 00:16 America/New_York",
       "schedule_reason": "moved from 00:13 to avoid the 00:10 ROAS run and the 00:13:30 page-restriction tick",
       "script": "eggbev-reactivate-created-for-20260831.py",
-      "state": "scheduled",
-      "write_window": "2026-09-01 00:12-00:28 America/New_York"
+      "state": "completed",
+      "write_window": "2026-09-01 00:12-00:28 America/New_York",
+      "last_run_at_et": "2026-09-01T00:21:58.080500-04:00",
+      "last_status": "ok"
     },
     "roas_cycle": {
-      "activation_conclusion": "saved and enabled; Hermes gateway CLI reports running while the cron subsystem reports gateway_running=false, so automatic firing remains unproven until a scheduled tick is confirmed",
+      "activation_conclusion": "enabled and proven by scheduled ticks; latest 12:00 logical cycle completed OK at 12:12 ET with zero failure streak",
       "deliver": "local",
       "enabled": true,
-      "gateway_running": false,
+      "gateway_running": true,
       "job_id": "51ae40b5a6ef",
       "logical_cycle_times": [
         "00:00",
@@ -2901,14 +2908,16 @@
         "23:00"
       ],
       "name": "Eggbev Corte e ROAS ciclos ET",
-      "next_run_at_et": "2026-08-29T20:00:00-04:00",
+      "next_run_at_et": "2026-09-02T13:10:00-04:00",
       "no_agent": true,
       "physical_offset_minute": 10,
-      "readback_at_et": "2026-08-31T20:30:41-04:00",
+      "readback_at_et": "2026-09-02T12:40:01-04:00",
       "repeat": "forever",
       "schedule": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
       "script": "eggbev-roas-cycle-controlled.sh",
-      "state": "scheduled"
+      "state": "scheduled",
+      "last_run_at_et": "2026-09-02T12:12:03.020919-04:00",
+      "last_status": "ok"
     }
   },
   "schema_version": "0.3-draft",
@@ -2939,7 +2948,8 @@
   },
   "status": "operational_gated_creation_ready_for_request",
   "strategy_family": "chatpion_bot_messenger",
-  "updated_at": "2026-09-01T14:51:27-04:00",
+  "updated_at": "2026-09-02T12:40:01-04:00",
   "vertical": "CC",
-  "write_enabled": false
+  "write_enabled": false,
+  "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates"
 }

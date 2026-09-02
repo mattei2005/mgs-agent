@@ -28,10 +28,16 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertEqual(zero_pixel["spend_operator"], ">")
         self.assertEqual(zero_pixel["spend_threshold_usd"], 2)
         self.assertFalse(zero_pixel["schedule"]["new_cron_created"])
+        self.assertFalse(zero_pixel["schedule"]["enabled"])
+        self.assertFalse(zero_pixel["runtime"]["write_enabled"])
         self.assertEqual(zero_pixel["schedule"]["cron"], restriction["schedule"])
         one_time = jobs["one_time_reactivation_20260831"]
         self.assertEqual(one_time["schedule"], "once at 2026-09-01 00:16 America/New_York")
         self.assertIn("common Eggbev ROAS operation lock", one_time["lock_scope"])
+        self.assertFalse(one_time["enabled"])
+        self.assertEqual(one_time["state"], "completed")
+        self.assertTrue(jobs["roas_cycle"]["gateway_running"])
+        self.assertEqual(jobs["roas_cycle"]["last_status"], "ok")
 
         roas_prompt = (ROOT / "data/ares/discord/thread-prompts/1541578606076231750.txt").read_text()
         page_prompt = (ROOT / "data/ares/discord/thread-prompts/1543312825890381865.txt").read_text()

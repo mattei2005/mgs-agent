@@ -30,6 +30,11 @@ class EggbevPageLeadThreadRouteTests(unittest.TestCase):
         self.assertEqual(route['canonical_prompt_source'], 'data/ares/discord/thread-prompts/1543312825890381865.txt')
         self.assertTrue(route['mapping_errors_visible'])
         self.assertEqual(route['fallback_error_thread_id'], '1541578622106865815')
+        runtime = operation['page_lead_guardrail']['runtime']
+        self.assertTrue(runtime['policy_write_authorized'])
+        self.assertFalse(runtime['effective_write_enabled'])
+        self.assertFalse(runtime['write_enabled'])
+        self.assertIn('explicit release', runtime['resume_gate'])
 
     def test_parent_channel_prompt_points_to_current_rules_thread(self):
         config = yaml.safe_load(VERSIONED_CONFIG.read_text())

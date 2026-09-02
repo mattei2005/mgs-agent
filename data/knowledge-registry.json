@@ -152,10 +152,10 @@
       "kind": "decision",
       "owner": "ares",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-4-2-20260902",
       "title": "Ares Campaign Engine v3.2.0 usa tier Meta vivo, recovery missing-only sem cooldown duplicado e exclusão de readers",
-      "updated_at": "2026-08-28T05:39:00+00:00"
+      "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
       "canonical_key": "ares.campaign_engine.version",
@@ -174,6 +174,25 @@
       "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-10-20260822",
       "title": "Ares Campaign Engine v3 é a rota única para nova criação e clone Meta",
       "updated_at": "2026-08-22T07:13:20+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares Campaign Engine v3.4.2 é o executor central ativo",
+      "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
       "canonical_key": "ares.cpv.campaign_creation_modes",
@@ -1028,10 +1047,28 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V3-20260902",
+      "title": "Thread de clonagem Eggbev com prompt e Engine v3.3.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V3-20260902",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Thread de clonagem Eggbev com prompt e Engine v3.3.0",
-      "updated_at": "2026-08-30T00:41:54+00:00"
+      "title": "Thread de clonagem Eggbev usa rota dedicada e Engine v3.4.2",
+      "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
@@ -1264,10 +1301,29 @@
       "kind": "capability",
       "owner": "Nicolas",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONING-ENGINE-V3-4-2-20260902",
+      "title": "Eggbev cloning validate/plan on Campaign Engine v3.3.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CLONING-ENGINE-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev cloning validate/plan on Campaign Engine v3.3.0",
-      "updated_at": "2026-08-30T00:41:37+00:00"
+      "title": "Eggbev cloning uses Campaign Engine v3.4.2 with account mode gates",
+      "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
@@ -1407,10 +1463,29 @@
       "kind": "capability",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-FROM-ZERO-V3-4-2-20260902",
+      "title": "Eggbev from-zero gated creation on Campaign Engine v3.4.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_creation.runtime.v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-creation",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-FROM-ZERO-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Eggbev from-zero gated creation on Campaign Engine v3.4.0",
-      "updated_at": "2026-08-30T05:26:52+00:00"
+      "title": "Eggbev from-zero creation uses gated Campaign Engine v3.4.2",
+      "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
       "canonical_key": "ares.campaign-ops.eggbev.messenger-json-template-name",
@@ -3478,5 +3553,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T16:24:43+00:00"
+  "updated_at": "2026-09-02T16:44:34+00:00"
 }

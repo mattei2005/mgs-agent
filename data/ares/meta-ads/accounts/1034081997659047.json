@@ -33,7 +33,7 @@
         "budget_selection_policy": "Nicolas selects and confirms the exact daily budget per Eggbev campaign request.",
         "budget_write_authority": "Standing authority granted by Rodolfo on 2026-08-30: Nicolas may set, decrease, or increase Eggbev campaign budgets, including the USD45 baseline, without separate Rodolfo approval. Exact value, pre-read and Meta readback remain required; billing, account_spend_limit, credentials, and automatic scaling remain separately gated."
       },
-      "write_mode": "disabled_general_with_scoped_roas_ad_status_and_page_lead_campaign_guardrail_active",
+      "write_mode": "disabled_general_with_scoped_roas_active; page_lead scheduler active in dry_run action hold; creation and cloning are per-request gated",
       "runtime_routes": {
         "campaign_creation": {
           "thread_id": "1541578556037927053",
@@ -167,31 +167,40 @@
           "policy_approved": true,
           "runtime_enabled": true,
           "action": "pause campaign when live Smart Bidding LEADS > 5000 after exact UTM_CAMPAIGN + FB_PAGE_ID reconciliation",
-          "blocked_reason": null,
+          "blocked_reason": "persistent action hold forces dry_run; schedule and source evaluation remain active",
           "freshness_requirement": "timestamp verifiable and at most 2 hours old; missing or stale fails closed and posts an error",
           "discord_delivery_requirement": "GET readback required; primary failure falls back once to Rules; total delivery failure fails the run",
           "scheduled_window_gate": "08:00 and 20:00 America/New_York",
           "authorized_by": "Nicolas",
           "authorized_at_et": "2026-08-29T13:21:16-04:00",
           "last_controlled_write_at_et": "2026-08-29T17:15:53-04:00",
-          "last_result": "Lauren Tucker pg_13829 at 5239 LEADS; one campaign pause confirmed by GET; zero active ads after action; one alert delivered"
+          "last_result": "Lauren Tucker pg_13829 at 5239 LEADS; one campaign pause confirmed by GET; zero active ads after action; one alert delivered",
+          "effective_write_enabled": false,
+          "policy_write_authorized": true,
+          "action_hold_active": true,
+          "resume_gate": "explicit page_lead_guardrail release by Nicolas Holanda or Rodolfo Mattei"
         }
       },
       "scheduler_readback": {
-        "checked_at_et": "2026-08-29T20:02:14-04:00",
+        "checked_at_et": "2026-09-02T12:40:01-04:00",
         "gateway_process_running": true,
-        "cron_tool_gateway_running": false,
+        "cron_tool_gateway_running": true,
         "roas_job_enabled": true,
         "roas_job_state": "scheduled",
-        "roas_job_schedule": "0 0,6,8,10,12,13,14,16,18,20,22,23 * * *",
+        "roas_job_schedule": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
         "roas_job_no_agent": true,
         "roas_job_deliver": "local",
+        "roas_job_last_run_at_et": "2026-09-02T12:12:03.020919-04:00",
+        "roas_job_last_status": "ok",
+        "roas_job_next_run_at_et": "2026-09-02T13:10:00-04:00",
         "lead_job_enabled": true,
         "lead_job_state": "scheduled",
-        "lead_job_last_run_at_et": "2026-08-29T20:00:05.226965-04:00",
-        "lead_job_last_status": "ok",
-        "lead_job_next_run_at_et": "2026-08-30T08:00:00-04:00",
-        "conclusion": "the page-lead scheduler is active because the 20:00 tick completed successfully; cron_tool_gateway_running=false is an observer false negative. ROAS has its own independent source-gate error state."
+        "lead_job_schedule": "16 8,20 * * *",
+        "lead_job_effective_mode": "dry_run_action_hold",
+        "lead_job_last_run_at_et": "2026-09-02T08:16:20.305009-04:00",
+        "lead_job_last_status": "error_fail_closed_mapping_or_freshness",
+        "lead_job_next_run_at_et": "2026-09-02T20:16:00-04:00",
+        "conclusion": "ROAS scheduler is live and proven. LEADS scheduler is live but intentionally dry-run under its persistent action hold and fails closed on mapping/freshness with zero Meta writes."
       },
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",
