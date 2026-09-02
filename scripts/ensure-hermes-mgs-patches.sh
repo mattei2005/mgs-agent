@@ -10,7 +10,8 @@ resolve_active_hermes_repo() {
   shebang="$(head -n 1 "$launcher")"
   python_path="${shebang#\#!}"
   candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  [[ -f "$candidate/gateway/run.py" ]] || return 1
+  [[ -x "$candidate/venv/bin/python" || -x "$candidate/.venv/bin/python" ]] || return 1
   printf '%s\n' "$candidate"
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
@@ -535,8 +536,15 @@ grep -q "test_runtime_persisted_mgs_roots_are_known" "$REPO/tests/hermes_cli/tes
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
 
-PYBIN="${PYBIN:-$REPO/venv/bin/python}"
-[[ -x "$PYBIN" ]] || PYBIN="python3"
+if [[ -x "${PYBIN:-}" ]]; then
+  :
+elif [[ -x "$REPO/venv/bin/python" ]]; then
+  PYBIN="$REPO/venv/bin/python"
+elif [[ -x "$REPO/.venv/bin/python" ]]; then
+  PYBIN="$REPO/.venv/bin/python"
+else
+  PYBIN="python3"
+fi
 "$PYBIN" -m py_compile \
   "$REPO/plugins/platforms/discord/adapter.py" \
   "$REPO/gateway/run.py" \
