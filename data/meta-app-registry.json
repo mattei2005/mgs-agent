@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-09-02T10:07:59-04:00",
+  "updated_at": "2026-09-02T10:17:57-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1544707104089182278",
+  "source_message_id": "OOB-after-B003-B005-production-validation",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -61,11 +61,12 @@
       "expected_sheet_roles": 14
     },
     {
-      "app": "B006-3",
+      "app": "B006-4",
       "channel_id": "1521252068319297666",
       "channel_name": "b006-2-app-status",
-      "admin": "Gia Huy",
-      "onepassword_item_title": "BOT B006-3 Token - Isidoro Cristina Barbosa Martins"
+      "admin": "Indah",
+      "onepassword_item_title": "BOT B006-4 Token - Indah",
+      "expected_sheet_roles": 16
     },
     {
       "app": "B007-2",
@@ -479,6 +480,7 @@
   },
   "source_message_ids": [
     "1544707104089182278",
-    "OOB-after-1544707104089182278"
+    "OOB-after-1544707104089182278",
+    "OOB-after-B003-B005-production-validation"
   ]
 }
