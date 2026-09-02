@@ -38,6 +38,18 @@ Do not call a multi-gigabyte cache tree a multi-gigabyte saving when most blocks
 - Keep large fingerprint streams outside Git, preferably under `/run`; persist only the hash and compact manifest needed for audit.
 - Volatile `/tmp` targets may drift between proposal and confirmation. Revalidate every fingerprint immediately before deletion. Any added, removed, or changed target—including a reduction—invalidates the manifest and requires a new confirmation.
 
+### Coherent freeze for caches that mutate during enumeration
+
+A large cache can change while its own inventory walk is still running. A zero-reference check performed at the end does not prove that counts, sizes, mtimes, and the fingerprint came from one coherent state. Before showing the critical hash:
+
+1. wait for cache-writing package/build processes to quiesce;
+2. generate the complete target inventory twice, with a short quiet interval;
+3. require exact equality of the target list, per-target counts, logical/allocated bytes, mtimes, and fingerprint hashes across both passes;
+4. freeze and hash only the second stable pass;
+5. immediately before deletion, regenerate fingerprints and compare them to the confirmed pass.
+
+If the first execution preflight finds drift, record `blocked_no_mutation`, prove every target remains present, discard that authorization, and repeat the two-pass freeze. Never update a manifest in place and reuse the previous “sim”, even when the path list is unchanged or the byte delta is only a few KiB.
+
 A user message such as “apaga” before the target hash is shown authorizes preparation only. Critical deletion confirmation comes after the exact hash, counts, current/projected disk state, retained assets, and irreversible effect are presented.
 
 ## Consumer mapping before protecting or deleting
