@@ -144,11 +144,21 @@ async def get_sb():
             qs='&'.join('companies[]='+urllib.parse.quote(x) for x in pubs)+'&source=Messenger'
             r=await ctx.request.get('https://api.jbfdigital.com.br/campaigns/Messenger?'+qs, headers=h, timeout=120000)
             rows=await r.json()
+            if r.status!=200 or not isinstance(rows,list):
+                raise RuntimeError(f'SB bad response {r.status}')
+            if len(rows) < 2500:
+                raise RuntimeError(f'SB scope incomplete for PAGE ID audit: rows={len(rows)} publishers={len(pubs)}; expected full MGS Messenger Page baseline around current post-cleanup baseline >=2500')
+            # Auth0 may rotate the refresh token while this context obtains the
+            # API access token. Persist that updated browser state atomically;
+            # otherwise the next cron can reopen a stale refresh token and 401.
+            state_path=Path(SB_STATE)
+            tmp_state=state_path.with_name(f'{state_path.name}.tmp-{os.getpid()}')
+            await ctx.storage_state(path=str(tmp_state))
+            os.chmod(tmp_state, 0o600)
+            os.replace(tmp_state, state_path)
+            os.chmod(state_path, 0o600)
         finally:
             await browser.close()
-    if r.status!=200 or not isinstance(rows,list): raise RuntimeError(f'SB bad response {r.status}')
-    if len(rows) < 2500:
-        raise RuntimeError(f'SB scope incomplete for PAGE ID audit: rows={len(rows)} publishers={len(pubs)}; expected full MGS Messenger Page baseline around current post-cleanup baseline >=2500')
     return pubs, rows
 
 def sb_public(r):

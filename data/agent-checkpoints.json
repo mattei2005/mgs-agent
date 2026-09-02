@@ -822,6 +822,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0064-CUTOVER-20260902",
+      "next_step": "Validar item 1Password B006-4, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado antes do cutover.",
+      "objective": "Substituir B006-3 por B006-4 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544705223057211422; OOB message after B003/B005 production validation; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+      "state": "in_progress: autorização explícita recebida via mensagem oob após conclusão técnica dos cutovers b003-3 e b005-4; b006-3 segue contido na pausa manual.",
+      "thread_id": "1544705223057211422",
+      "updated_at": "2026-09-02T14:11:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -1972,5 +1982,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T14:02:55+00:00"
+  "updated_at": "2026-09-02T14:11:34+00:00"
 }
