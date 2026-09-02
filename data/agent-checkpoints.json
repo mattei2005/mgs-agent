@@ -1853,12 +1853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-update-20260901",
-      "next_step": "Congelar PIDs/hashes, validar rollback e agendar ativação detached Ares→Atena→Zeus.",
+      "next_step": "Nenhum; atualização encerrada. Manter v0.20.5 como rollback durante burn-in.",
       "objective": "Atualizar Hermes para v0.21.0 preservando customizações MGS",
-      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/stage-validation.json",
-      "state": "candidate_validated_cutover_preparation",
+      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/post-activation-validation.json",
+      "state": "pass: hermes v0.21.0 ativado e validado; fechamento retomado sem restart duplicado",
       "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-02T00:48:14+00:00"
+      "updated_at": "2026-09-02T02:51:24+00:00"
     },
     {
       "agent": "zeus",
@@ -1892,5 +1892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T00:48:14+00:00"
+  "updated_at": "2026-09-02T02:51:24+00:00"
 }
