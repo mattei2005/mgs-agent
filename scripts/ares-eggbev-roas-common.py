@@ -97,7 +97,7 @@ def open_lock():
     return os.fdopen(fd, 'r+')
 
 
-def default_state(local_date: dt.date, threshold: float = 0.40) -> dict[str, Any]:
+def default_state(local_date: dt.date, threshold: float = 0.36) -> dict[str, Any]:
     return {
         'operation_id': 'Eggbev-US-CC-EN-BOT',
         'date_et': local_date.isoformat(),
@@ -107,7 +107,7 @@ def default_state(local_date: dt.date, threshold: float = 0.40) -> dict[str, Any
     }
 
 
-def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_value: float = 0.40) -> dict[str, Any]:
+def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_value: float = 0.36) -> dict[str, Any]:
     """Reset daily decision fields without losing Ares pause provenance."""
     previous = state if isinstance(state, dict) else {}
     rolled = default_state(local_date, reset_value)
@@ -125,7 +125,7 @@ def rollover_state(state: dict[str, Any] | None, local_date: dt.date, reset_valu
     return rolled
 
 
-def load_state(local_date: dt.date, reset_value: float = 0.40) -> tuple[dict[str, Any], bool]:
+def load_state(local_date: dt.date, reset_value: float = 0.36) -> tuple[dict[str, Any], bool]:
     try:
         state = load_json(ROAS_STATE_PATH)
     except (OSError, ValueError, TypeError, json.JSONDecodeError):

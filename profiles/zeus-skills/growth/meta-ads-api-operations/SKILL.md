@@ -37,6 +37,18 @@ For a requested production token replacement:
 6. Present the critical confirmation with exact account scope, current app/user/tier, candidate app/user/tier, rollback preservation and validation plan. Do not widen the swap to another account merely because it shares the old token or app key.
 7. After confirmation, use an app-specific key/cache path, retain the old reference/cache for rollback, update every active consumer, run a read-only/dry-run smoke and read back the credential item actually resolved. Deleting/revoking the prior token is a separate critical operation.
 
+### Multi-account cutovers, Page parity and token retirement
+
+- **App role is not token identity.** Adding Rafael/another profile as app admin does not switch Ares, mutate an existing token or prove which user a 1Password field represents. After any mid-session 1Password edit, re-read the exact item and use `/debug_token` + `/me`; never infer identity from the title, prior read or the user's role assignment.
+- **Revalidate each account independently.** A token that passes one ad account cannot be propagated to another just because the app and scopes match. For every target, check exact account name/status/currency/timezone, one campaign read, expected pixel/dataset and every Page/identity dependency.
+- **Page-backed operations require Page parity, not account visibility.** Before replacing a Messenger/Eggbev-style token, paginate `/me/accounts?fields=id,name,tasks` for both old and candidate tokens. Require the candidate to cover every Page the old route may use with `ADVERTISE` (and any additional required tasks). Account HTTP 200, pixel visibility and complete OAuth scopes are insufficient if Page sets differ.
+- **Prefer catalog comparison before an all-ads crawl.** Comparing the paginated old-token and candidate-token Page inventories is faster and more decisive for credential eligibility. Scan ads only when the canonical Page set cannot be derived from the old token, operation registry or current request.
+- **Fail closed per account.** If one account passes and another lacks Page coverage, do not perform the original all-account cutover. Report the exact per-account result; a reduced cutover needs fresh authorization because its scope changed.
+- **Retire credentials only after a consumer sweep.** Inventory active config, account registries, operation sources, cron/runtime scripts, monitor allowlists, cache paths and executable rollback/recovery scripts. Historical audits/backups may retain item names as evidence, but no executable path may depend on the item being removed.
+- **Name every deletion target.** “Delete the old token” is ambiguous when accounts use different users/items. State each exact 1Password item and which account it serves. `op item delete` moves an item to Recently Deleted for 30 days; `--archive` is different. Deletion remains a separate critical confirmation even after the credential swap is approved.
+
+Session-specific proof and safe branching: `references/multi-account-token-cutover-page-parity-2026-09-02.md`.
+
 Detailed permission/tier and cutover verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
 
 ## Standard diagnostic flow

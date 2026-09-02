@@ -186,6 +186,20 @@
       "forbidden_any": [
         "\"status\": \"clear_no_collisions\""
       ]
+    },
+    {
+      "id": "KR-017",
+      "question": "Qual é o threshold vigente dos ciclos futuros de Corte e ROAS da Eggbev?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+        "\"current_value\": 0.36",
+        "\"daily_reset_value\": 0.36",
+        "\"schedule_change\": false"
+      ],
+      "forbidden_any": [
+        "\"daily_reset_value\": 0.4"
+      ]
     }
   ]
 }

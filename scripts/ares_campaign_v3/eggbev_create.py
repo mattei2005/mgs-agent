@@ -11,7 +11,7 @@ from .media_registry import MediaRegistry
 from .schema import Manifest
 
 ACCOUNT_ID = "1034081997659047"
-APP_KEY = "mgs-meta-app-current"
+APP_KEY = "mgs-meta-app-1299247318762949"
 OPERATION = "Eggbev-US-CC-EN-BOT"
 PAGE_TOKEN_RE = re.compile(r"^pg_[0-9]+$")
 BASE = Path(__file__).resolve().parents[2]

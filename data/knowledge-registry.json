@@ -1628,10 +1628,10 @@
       "kind": "policy",
       "owner": "Nicolas Holanda",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
       "title": "Eggbev v27 preserva o layout v26 e mantém cortes ROAS ativos apesar do atraso da dashboard",
-      "updated_at": "2026-09-01T19:58:37+00:00"
+      "updated_at": "2026-09-02T18:16:05+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
@@ -1997,6 +1997,25 @@
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "consumers": [
         "ares",
+        "eggbev-roas-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02T14:09:23-04:00",
+      "id": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Corte e ROAS usa threshold 0.36 em todos os ciclos futuros",
+      "updated_at": "2026-09-02T18:16:05+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
         "eggbev-us-cc-en-bot-operations",
         "meta-ads-intraday-operations",
         "scripts/ares-eggbev-roas-common.py",
@@ -2155,6 +2174,27 @@
       "superseded_by": null,
       "title": "Ares mandatory readback-first recovery until request completion",
       "updated_at": "2026-08-24T20:39:24+00:00"
+    },
+    {
+      "canonical_key": "ares.meta_ads.profile_token_app_mapping",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "Eggbev-US-CC-EN-BOT",
+        "ares",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-02",
+      "id": "ARES-META-APP-PROFILE-TOKEN-MAPPING-V1-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares mantém identidade por perfil anunciante no app minibot 1299247318762949",
+      "updated_at": "2026-09-02T18:43:57+00:00"
     },
     {
       "canonical_key": "growth.openzedfinanzas.es-cc-es-03.discord-route",
@@ -3553,5 +3593,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T16:44:34+00:00"
+  "updated_at": "2026-09-02T18:43:57+00:00"
 }

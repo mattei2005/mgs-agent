@@ -471,10 +471,19 @@
   "token_reference": {
     "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
     "type": "user_access_token",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_user_id": "122173246046667280",
+    "meta_app_id": "1299247318762949",
+    "meta_app_name": "minibot",
+    "marketing_api_access_tier": "development_access",
+    "cutover_at_utc": "2026-09-02T18:24:25Z",
+    "authorization_source": "discord:thread:1544757670412820541#1544774258578821220",
     "secret_copied_to_operation": false
   },
   "live_identity_readback": {
-    "validated_at_utc": "2026-08-29T01:45:32Z",
+    "validated_at_utc": "2026-09-02T18:24:25Z",
+    "token_identity": "Rafael Lucas Oliveira",
+    "meta_app_id": "1299247318762949",
     "page_id": "621037101089579",
     "page_name": "Garagem Brasil",
     "page_advertise_task": true,
@@ -770,10 +779,10 @@
         "application_name": "minibot rod"
       },
       {
-        "actor_id": "122171910794667280",
+        "actor_id": "122173246046667280",
         "actor_name": "Rafael Lucas Oliveira",
-        "application_id": "860397696767230",
-        "application_name": "BrightPath done"
+        "application_id": "1299247318762949",
+        "application_name": "minibot"
       }
     ]
   },
@@ -943,6 +952,21 @@
     "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
     "latest_arm_readback_sp": "2026-09-02T00:58:27.508803-03:00"
   },
+  "monitor_failure_recovery_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541; mid-turn authorization during credential cutover",
+    "root_cause": "campaigns already PAUSED outside the current creative-cut action were still stored in an active strategy stage, so strict preflight aborted the entire runner before reaching eligible ACTIVE campaigns",
+    "correction": "a PAUSED campaign with no in-flight action is an explicit NOOP; ACTIVE campaigns retain exact campaign/ad/status/cardinality validation and all existing write gates",
+    "cache_isolation": "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-account05-rafael-minibot-1299247318762949.json",
+    "live_validation": {
+      "campaigns": 10,
+      "strategy_ads": 30,
+      "paused_campaigns_noop": 5,
+      "watch_status": "NO_DUE_CAMPAIGNS",
+      "writes_attempted": 0
+    },
+    "recovered_at_utc": "2026-09-02T18:37:16Z"
+  },
   "notes": [
     "Nicolas authorized the original one-time creation and ACTIVE publication of the three account-05 campaigns at USD25 each; their Meta campaign IDs remain preserved and the later authorized lineage task reconciled them as C01-C03.",
     "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
@@ -955,6 +979,6 @@
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment.",
     "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged."
   ],
-  "updated_at": "2026-09-02T13:21:45-03:00",
-  "updated_at_utc": "2026-09-02T16:21:45Z"
+  "updated_at": "2026-09-02T15:37:16-03:00",
+  "updated_at_utc": "2026-09-02T18:37:16Z"
 }

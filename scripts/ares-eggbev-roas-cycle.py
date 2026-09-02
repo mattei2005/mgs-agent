@@ -1170,7 +1170,7 @@ def main() -> int:
         policy = operation.get('roas_cycle_policy') or {}
         runtime = policy.get('runtime') or {}
         threshold_policy = policy.get('threshold') or {}
-        reset_value = common.finite_float(threshold_policy.get('daily_reset_value')) or 0.40
+        reset_value = common.finite_float(threshold_policy.get('daily_reset_value')) or 0.36
         state, state_reset = common.load_state(started.date(), reset_value)
         phase = common.phase_for_time(started)
         if phase == 'PHASE_3':

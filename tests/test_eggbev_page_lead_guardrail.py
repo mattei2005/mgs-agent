@@ -217,6 +217,14 @@ class EggbevPageLeadGuardrailTests(unittest.TestCase):
         self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 8, 30, tzinfo=mod.NY), approved))
         self.assertFalse(mod.scheduled_window_allowed(dt.datetime(2026, 8, 29, 19, 59, tzinfo=mod.NY), approved))
 
+    def test_scheduled_dry_run_treats_only_unverifiable_freshness_as_expected_block(self):
+        freshness = [{'issue': 'smart_bidding_freshness_unverifiable'}]
+        mixed = freshness + [{'issue': 'page_id_mismatch'}]
+        self.assertTrue(mod.expected_scheduled_freshness_block(freshness, scheduled=True, apply=False))
+        self.assertFalse(mod.expected_scheduled_freshness_block(freshness, scheduled=False, apply=False))
+        self.assertFalse(mod.expected_scheduled_freshness_block(freshness, scheduled=True, apply=True))
+        self.assertFalse(mod.expected_scheduled_freshness_block(mixed, scheduled=True, apply=False))
+
     def test_auto_reactivate_is_read_from_scope(self):
         self.assertFalse(mod.policy_auto_reactivate({'scope': {'auto_reactivate': False}}))
 

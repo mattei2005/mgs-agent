@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 WATCHER = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.py')
 REPORTS = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-reports.py')
 WATCH_WRAPPER = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.sh')
+ACTIVITY_WRAPPER = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-activity-monitor.sh')
 DAILY_WRAPPER = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-daily.sh')
 INTRADAY_WRAPPER = Path('/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-intraday.sh')
 OPERATION = Path('/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json')
@@ -73,6 +74,15 @@ class Account05RuntimeTest(unittest.TestCase):
             self.assertIn(f'--mode {mode} --gate', text)
             self.assertIn('ares-cpv-meta-lane-2039876850230678.lock', text)
             self.assertIn('source /root/mgs-agent/.env', text)
+
+    def test_meta_token_cache_is_isolated_for_account05_new_app(self):
+        expected = '/root/.cache/mgs/ares-meta-token-creditoparaveiculo-account05-rafael-minibot-1299247318762949.json'
+        watcher = load(WATCHER, 'cpv05_watcher_cache_test')
+        reports = load(REPORTS, 'cpv05_reports_cache_test')
+        self.assertEqual(watcher.META_TOKEN_CACHE_PATH, expected)
+        self.assertEqual(reports.META_TOKEN_CACHE_PATH, expected)
+        activity = ACTIVITY_WRAPPER.read_text()
+        self.assertIn(f'ARES_META_TOKEN_CACHE_PATH={expected}', activity)
 
     def test_report_labels_follow_live_name_without_global_rule_change(self):
         module = load(REPORTS, 'cpv05_reports_test')

@@ -75,6 +75,10 @@ class PhaseTests(unittest.TestCase):
         self.assertNotIn('paused_campaigns', rolled)
         self.assertEqual(rolled['provenance_rolled_from_date_et'], '2026-08-28')
 
+    def test_default_state_uses_current_threshold_036(self):
+        state = common.default_state(dt.date(2026, 9, 2))
+        self.assertEqual(state['threshold'], 0.36)
+
 
 class DecisionTests(unittest.TestCase):
     def decide(self, active=None, tracked=None, insights=None, state=None, phase='PHASE_1', cycle_at=None):
@@ -129,6 +133,17 @@ class DecisionTests(unittest.TestCase):
     def test_exact_threshold_never_changes_state(self):
         result = self.decide([active_ad()], insights={'a1': metric(10.0, 0.40)}, phase='PHASE_2')
         self.assertEqual(result['decisions'][0]['action'], 'KEEP')
+
+    def test_current_threshold_036_boundary(self):
+        state = common.default_state(dt.date(2026, 9, 2))
+        below = common.decide_cycle(
+            [active_ad()], [], {'a1': metric(10.0, 0.359)}, state, 'PHASE_2', 0.36,
+        )
+        equal = common.decide_cycle(
+            [active_ad()], [], {'a1': metric(10.0, 0.36)}, state, 'PHASE_2', 0.36,
+        )
+        self.assertEqual(below['decisions'][0]['action'], 'PAUSE_AD')
+        self.assertEqual(equal['decisions'][0]['action'], 'KEEP')
 
     def test_above_threshold_active_ad_is_kept(self):
         result = self.decide([active_ad()], insights={'a1': metric(10.0, 0.41)}, phase='PHASE_2')
@@ -1421,6 +1436,14 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(runtime['budget_write_enabled'])
         self.assertTrue(runtime['phase3_budget_write_enabled'])
         self.assertTrue(runtime['phase3_parent_status_write_enabled'])
+
+    def test_roas_threshold_036_is_canonical_for_all_future_cycles(self):
+        threshold = self.operation['roas_cycle_policy']['threshold']
+        self.assertEqual(threshold['current_value'], 0.36)
+        self.assertEqual(threshold['daily_reset_value'], 0.36)
+        self.assertFalse(threshold['latest_change']['schedule_change'])
+        prompt = (BASE / 'data/ares/discord/thread-prompts/1541578606076231750.txt').read_text()
+        self.assertIn('Threshold diario de corte vigente 0,36', prompt)
 
     def test_phase3_contract_matches_nicolas_exact_recycling_policy(self):
         roas = self.operation['roas_cycle_policy']

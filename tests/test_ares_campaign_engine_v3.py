@@ -361,7 +361,7 @@ def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clon
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     account_app_keys = {
         '1046241194533786': 'mgs-meta-app-1299247318762949',
-        '2039876850230678': 'mgs-meta-app-current',
+        '2039876850230678': 'mgs-meta-app-1299247318762949',
     }
     for account_id, app_key in account_app_keys.items():
         direct = from_zero_campaign(1, account=account_id)

@@ -119,7 +119,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
     def test_clone_prestaged_accepts_five_ads(self):
         campaign = {
             'idempotency_key': 'five-ads',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'clone_prestaged',
             'source_campaign_id': 'source-campaign',
@@ -145,7 +145,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
     def test_clone_page_switch_accepts_source_ads_without_new_media(self):
         campaign = {
             'idempotency_key': 'page-switch',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'clone_page_switch',
             'source_campaign_id': 'source-campaign',
@@ -188,7 +188,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
     def test_pure_clone_has_exact_name_and_manager_selected_budget_update(self):
         campaign = {
             'idempotency_key': 'pure-clone',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
@@ -226,7 +226,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         campaign = {
             'idempotency_key': 'policy-valid',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
@@ -241,7 +241,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         base = {
             'idempotency_key': 'policy-invalid',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
@@ -269,7 +269,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         campaign = {
             'idempotency_key': 'policy-restricted-page',
-            'app_key': 'mgs-meta-app-current',
+            'app_key': 'mgs-meta-app-1299247318762949',
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',

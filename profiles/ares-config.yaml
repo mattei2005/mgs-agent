@@ -1013,7 +1013,7 @@ discord:
       rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança
       ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
 
-      - Threshold diario de corte default 0,40. Fase 1: 05, 06, 08, 10 e 12 ET; todos
+      - Threshold diario de corte vigente 0,36. Fase 1: 05, 06, 08, 10 e 12 ET; todos
       esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold.
       Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta anuncio quando Purchase ROAS <
       threshold sem gate de gasto. Exatamente no threshold mantem.
@@ -1114,8 +1114,10 @@ discord:
       retirando campos. Insights futuros nao alteram esta tabela sem nova instrucao
       explicita de Nicolas.
 
-      - Pedido de mudar threshold intraday exige OK explicito de Nicolas. Nao criar
-      ou alterar cron nesta thread sem plano e aprovacao explicita.
+      - Threshold 0,36 aprovado explicitamente por Nicolas em 02/09/2026 e aplicado
+      a todos os ciclos futuros desta rota. Qualquer nova mudança exige outro OK explícito
+      de Nicolas. Nao criar ou alterar a agenda do cron nesta thread sem plano e aprovacao
+      explicita.
 
       - Responder na thread atual; IDs tecnicos e credenciais ficam no audit.'
     '1544117442589106328': 'INSTRUCAO DE THREAD Ares FinanceAdX US-CC-EN BOT

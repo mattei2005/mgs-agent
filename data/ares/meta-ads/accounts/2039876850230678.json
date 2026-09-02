@@ -29,6 +29,16 @@
       "write_mode": "controlled_write_paused_pilot",
       "activation_enabled": false,
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "meta_app": {
+        "app_id": "1299247318762949",
+        "app_name": "minibot",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "token_identity": "Rafael Lucas Oliveira",
+        "token_user_id": "122173246046667280",
+        "marketing_api_access_tier": "development_access",
+        "cutover_at_utc": "2026-09-02T18:24:25Z",
+        "authorization_source": "discord:thread:1544757670412820541#1544774258578821220"
+      },
       "meta_detected": {
         "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
         "currency": "USD",
@@ -38,7 +48,11 @@
       },
       "technical_access": {
         "validated": true,
-        "validated_at_utc": "2026-08-29T01:45:32Z",
+        "validated_at_utc": "2026-09-02T18:24:25Z",
+        "validation_mode": "read_only_new_app_token_preflight",
+        "token_identity": "Rafael Lucas Oliveira",
+        "meta_app_id": "1299247318762949",
+        "cutover_audit": "data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json",
         "account_http_status": 200,
         "campaign_read_http_status": 200,
         "page_id": "621037101089579",

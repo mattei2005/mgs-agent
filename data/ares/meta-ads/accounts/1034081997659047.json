@@ -205,6 +205,16 @@
       "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
       "token_field": "credential",
       "credential_storage_policy": "reference_only; secret remains in 1Password and must never be copied into config, skill, audit or chat",
+      "meta_app": {
+        "app_id": "1299247318762949",
+        "app_name": "minibot",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "token_identity": "Carla Nunes",
+        "token_user_id": "964942296621431",
+        "marketing_api_access_tier": "development_access",
+        "cutover_at_utc": "2026-09-02T18:24:25Z",
+        "authorization_source": "discord:thread:1544757670412820541#1544774258578821220"
+      },
       "credential_metadata": {
         "date_shown_in_1password": "10/23/2026",
         "alert_shown_in_1password": "2026-10-16",
@@ -213,8 +223,10 @@
       "auth_readback": {
         "ok": true,
         "http_status": 200,
-        "checked_at_utc": "2026-08-24T23:21:20Z",
-        "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/auth-check-1034081997659047-20260824T232120Z.json"
+        "checked_at_utc": "2026-09-02T18:24:25Z",
+        "meta_app_id": "1299247318762949",
+        "token_identity": "Carla Nunes",
+        "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json"
       },
       "meta_detected": {
         "name": "Eggbev-US-CC-EN-01",

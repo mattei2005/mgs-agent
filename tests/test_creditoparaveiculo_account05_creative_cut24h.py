@@ -34,6 +34,7 @@ def strategy():
 
 def test_stage_a_exact_80_10_10_pauses_only_dominant_ad():
     m = load()
+    assert m.META_TOKEN_CACHE_PATH == '/root/.cache/mgs/ares-meta-token-creditoparaveiculo-account05-rafael-minibot-1299247318762949.json'
     result = m.evaluate_decision('THREE_ADS_ACTIVE', -12.5, {'a': 80, 'b': 10, 'c': 10}, ['a', 'b', 'c'], strategy())
     assert result['action'] == 'PAUSE_AD'
     assert result['dominant_ad_id'] == 'a'
@@ -81,6 +82,40 @@ def test_window_metrics_subtracts_baseline_and_fails_closed_on_divergence():
     assert result['reconciled'] is True
     cumulative['sb_by_campaign']['c1']['investment'] = 40
     assert m.window_metrics('c1', record, cumulative, 5, 1)['reconciled'] is False
+
+
+def test_live_preflight_treats_already_paused_campaign_as_noop():
+    m = load()
+
+    class Meta:
+        def graph_get(self, path, token, params):
+            if path == 'act_2039876850230678':
+                return 200, {
+                    'id': 'act_2039876850230678',
+                    'currency': 'USD',
+                    'timezone_name': 'America/Sao_Paulo',
+                    'account_status': 1,
+                    'disable_reason': 0,
+                }, {}
+            if path.endswith('/campaigns'):
+                return 200, {'data': [{'id': 'c1', 'configured_status': 'PAUSED'}]}, {}
+            if path.endswith('/ads'):
+                return 200, {'data': [
+                    {'id': 'a', 'campaign_id': 'c1', 'configured_status': 'ACTIVE'},
+                    {'id': 'b', 'campaign_id': 'c1', 'configured_status': 'ACTIVE'},
+                    {'id': 'c', 'campaign_id': 'c1', 'configured_status': 'PAUSED'},
+                ]}, {}
+            raise AssertionError(path)
+
+    state = {'campaigns': {'c1': {
+        'management_strategy': 'CREATIVE_CUT_24H',
+        'current_stage': 'TWO_ADS_ACTIVE',
+        'active_ad_ids': ['a', 'b'],
+        'paused_ad_ids': ['c'],
+        'in_flight': None,
+    }}}
+    result = m.live_preflight(Meta(), 'token', {'c1'}, state)
+    assert result['paused_campaign_ids'] == ['c1']
 
 
 def test_verified_ad_pause_opens_new_24h_window_and_baselines(tmp_path):

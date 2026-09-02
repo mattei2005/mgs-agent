@@ -224,6 +224,24 @@ def policy_auto_reactivate(policy: dict[str, Any]) -> bool:
     return bool((policy.get("scope") or {}).get("auto_reactivate", False))
 
 
+def expected_scheduled_freshness_block(
+    issues: list[dict[str, Any]],
+    *,
+    scheduled: bool,
+    apply: bool,
+) -> bool:
+    """Keep writes blocked without counting the intentional hold tick as a crash."""
+    return bool(
+        scheduled
+        and not apply
+        and issues
+        and all(
+            str(issue.get("issue") or "") == "smart_bidding_freshness_unverifiable"
+            for issue in issues
+        )
+    )
+
+
 def active_restriction(row: dict[str, Any], local_date: dt.date) -> dict[str, Any]:
     raw = norm(row.get("RESTRICTED_UNTIL"))[:10]
     if not raw:
@@ -908,6 +926,11 @@ def main() -> int:
             run["campaigns_paused_confirmed"] = paused_confirmed
             run["alerts_delivered"] = alerts_delivered
             run["ok"] = not bool(evaluated["issues"])
+            run["expected_scheduled_fail_closed"] = expected_scheduled_freshness_block(
+                evaluated["issues"],
+                scheduled=args.scheduled,
+                apply=args.apply,
+            )
             if evaluated["issues"]:
                 run["blocked_reason"] = "mapping_or_freshness_issues"
             run["finished_at_et"] = now_et().isoformat()
@@ -929,7 +952,7 @@ def main() -> int:
                 print(status_message)
             elif not args.quiet or groups or evaluated["issues"]:
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
-            return 0 if run["ok"] else 2
+            return 0 if run["ok"] or run["expected_scheduled_fail_closed"] else 2
         except Exception as exc:
             run["ok"] = False
             run["error"] = {"type": type(exc).__name__, "message": str(exc)}

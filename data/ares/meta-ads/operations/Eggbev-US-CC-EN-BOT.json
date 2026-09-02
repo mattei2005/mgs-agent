@@ -1419,7 +1419,7 @@
       },
       "page_lead_guardrail": "preserve the current independently approved schedule and runner",
       "roas_cycle": {
-        "00:00_action": "reset threshold state to 0.40; no Meta cut/reactivation",
+        "00:00_action": "reset threshold state to 0.36; no Meta cut/reactivation",
         "deliver": "local",
         "delivery": "wrapper posts directly to Eggbev-US-CC-EN Corte e ROAS",
         "no_agent": true,
@@ -2428,7 +2428,9 @@
         "confirmed_by_discord_id": "1055570806945620030",
         "decision": "ROAS below 0.40 is below the operational threshold, not negative; negative applies only when ROI is below 0 percent",
         "scope": "Corte e ROAS presentation only; Page ID remains available for technical join/audit; no change to Meta cut/reactivation logic, budget authority, cron schedule or source freshness gates",
-        "source": "discord:thread:1541578606076231750"
+        "source": "discord:thread:1541578606076231750",
+        "status": "historical_numeric_value_superseded_by_threshold_036",
+        "superseded_by": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902"
       },
       "mobile_refinement": {
         "decision": "remove the recurring explanatory legend and use a short pleasant mobile-first opening",
@@ -2790,8 +2792,20 @@
     "status": "controlled_write_and_automatic_reporting_authorized_fail_closed",
     "threshold": {
       "change_requires_nicolas_approval": true,
+      "current_value": 0.36,
       "daily_reset_at": "00:00",
-      "daily_reset_value": 0.4,
+      "daily_reset_value": 0.36,
+      "latest_change": {
+        "approved_at_et": "2026-09-02T14:09:23-04:00",
+        "approved_by": "Nicolas Holanda",
+        "approved_by_discord_id": "1055570806945620030",
+        "applies_to": "all future scheduled and on-demand Phase 1/2 cycles in thread 1541578606076231750",
+        "decision_id": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+        "new_value": 0.36,
+        "previous_value": 0.4,
+        "schedule_change": false,
+        "source": "discord:thread:1544770844381679666"
+      },
       "exactly_equal": "no_change",
       "symmetric_cut_and_reactivation": true
     },
@@ -2972,7 +2986,54 @@
   },
   "status": "operational_gated_creation_ready_for_request",
   "strategy_family": "chatpion_bot_messenger",
-  "updated_at": "2026-09-02T12:52:00-04:00",
+  "meta_app_profile_token_cutover_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541#1544774258578821220",
+    "scope": "Eggbev account 1034081997659047 keeps Carla Nunes as advertiser identity while its token is renewed in-place for app 1299247318762949",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+    "token_identity": "Carla Nunes",
+    "token_user_id": "964942296621431",
+    "meta_app_id": "1299247318762949",
+    "meta_app_name": "minibot",
+    "marketing_api_access_tier": "development_access",
+    "account_http": 200,
+    "pixel_readback": true,
+    "page_inventory_count": 25,
+    "onepassword_items_deleted": 0,
+    "cutover_at_utc": "2026-09-02T18:24:25Z",
+    "cache_refresh": {
+      "path": "/root/.cache/mgs/ares-meta-token-eggbev-us-cc-en-01-g006.json",
+      "parent_mode": "0700",
+      "file_mode": "0600",
+      "item_match": true,
+      "token_match": true
+    },
+    "post_cutover_validation": {
+      "account_status": 1,
+      "disable_reason": 0,
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "campaign_edge_http": 200,
+      "page_inventory_count": 25,
+      "pages_with_advertise": 25,
+      "pixel_readback": true,
+      "meta_writes": 0
+    }
+  },
+  "page_lead_failure_recovery_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541; mid-turn authorization during credential cutover",
+    "failure_streak_before": 6,
+    "root_cause": "the Smart Bidding Messenger rows matched UTM_CAMPAIGN and FB_PAGE_ID but exposed no accepted freshness timestamp; the action hold already forced dry-run, yet the expected fail-closed result exited as a technical cron failure",
+    "correction": "only scheduled no-apply runs whose every issue is smart_bidding_freshness_unverifiable exit clean while preserving ok=false, blocked_reason, audit and zero writes; page mismatch, stale data, token errors and every apply run remain failures",
+    "current_live_issues": 2,
+    "current_issue_type": "smart_bidding_freshness_unverifiable",
+    "scheduled_dry_run_exit_normalized": true,
+    "apply_still_blocked": true,
+    "meta_writes": 0,
+    "recovered_at_utc": "2026-09-02T18:37:16Z"
+  },
+  "updated_at": "2026-09-02T14:37:16-04:00",
   "vertical": "CC",
   "write_enabled": false,
   "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates"

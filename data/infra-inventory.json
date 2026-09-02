@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-02T14:03:04-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-09-02T14:08:14-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_updated": "2026-09-02T14:50:09.224125-04:00"
   },
   "system_packages": [
     {
@@ -11919,6 +11920,215 @@
         "thread_created": false
       },
       "status": "completed_validated"
+    },
+    {
+      "id": "ares-meta-app-profile-token-cutover-20260902",
+      "type": "meta_app_multi_profile_token_cutover_and_monitor_recovery",
+      "agent": "ares",
+      "status": "validated_with_one_shot_followup_scheduled",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544757670412820541#1544774258578821220; mid-turn corrections preserved 1Password and authorized complete repair",
+      "mapping": {
+        "meta_app_id": "1299247318762949",
+        "meta_app_name": "minibot",
+        "tier": "development_access",
+        "account13": {
+          "identity": "Roosevelt Mattei",
+          "account_id": "1046241194533786"
+        },
+        "account05": {
+          "identity": "Rafael Lucas Oliveira",
+          "account_id": "2039876850230678"
+        },
+        "eggbev": {
+          "identity": "Carla Nunes",
+          "account_id": "1034081997659047"
+        }
+      },
+      "cache_validation": {
+        "account13": "0700/0600 item+token match",
+        "account05": "0700/0600 isolated item+token match",
+        "eggbev": "0700/0600 item+token match",
+        "generic_account13_monitor": "0700/0600 item+token match"
+      },
+      "validation": {
+        "pytest": "305 passed",
+        "subtests": "37 passed",
+        "py_compile": "PASS",
+        "bash_n": "PASS",
+        "git_diff_check": "PASS",
+        "engine_offline_smoke": "PASS zero external network calls",
+        "account13": "token/account/Page/activity monitor PASS",
+        "account05": "token/account/Page/pixel/reports/first-delivery/activity/creative-cut PASS; creative-cut NO_DUE after paused NOOP",
+        "eggbev": "token/account/25 of 25 Pages ADVERTISE/pixel/ROAS/creation-config PASS",
+        "page_lead": "freshness-only scheduled no-apply result normalized; apply and real mapping/token/stale errors remain fail-closed",
+        "meta_writes": 0,
+        "onepassword_items_deleted": 0
+      },
+      "monitor_recovery": {
+        "account05_creative_cut_failure_streak_before": 18,
+        "eggbev_page_lead_failure_streak_before": 6,
+        "first_real_page_lead_tick_pending": true,
+        "account05_creative_cut_real_cron": {
+          "last_run_at": "2026-09-02T14:44:23.181463-04:00",
+          "last_status": "ok",
+          "failure_streak": 0,
+          "last_error": null
+        }
+      },
+      "audit": "data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json",
+      "backup": "/root/.hermes/secure-backups/ares-meta-app-profile-token-cutover/20260902T182425Z",
+      "knowledge_registry_id": "ARES-META-APP-PROFILE-TOKEN-MAPPING-V1-20260902",
+      "artifacts": {
+        "0": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "0f269be2f819be7dec711be104d0983654c5db5d20ffc523f8273668405ae2d6",
+          "size_bytes": 12455,
+          "mode": "0o644"
+        },
+        "1": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/accounts/2039876850230678.json",
+          "sha256": "cd4701afefbf95f897c9c0a2b5c723961deb023ffa5b110a7663c457f1307779",
+          "size_bytes": 3269,
+          "mode": "0o644"
+        },
+        "2": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json",
+          "sha256": "722cecbb1345f5970041a724082467c47351cc69af0f35415153b25894863e22",
+          "size_bytes": 13386,
+          "mode": "0o644"
+        },
+        "3": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+          "sha256": "6206733fabfb1b787acedca9d313a8432a15174e4aca77fee2ecf9080362805d",
+          "size_bytes": 40383,
+          "mode": "0o600"
+        },
+        "4": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+          "sha256": "dc93ae96fa428fbf8bdf10b8b54410524b0c94acd5b23f3cea6351a2d52a2869",
+          "size_bytes": 159692,
+          "mode": "0o644"
+        },
+        "5": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+          "sha256": "c2e2b07ff2c4a9cd02f87fd11d07b745dbb175faef6c74b71011230ef5f3c33f",
+          "size_bytes": 11949,
+          "mode": "0o644"
+        },
+        "6": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json",
+          "sha256": "afdedff839eabde7def2323f8786cc836e2640cc9eed9cfcb59ce3cf2424e698",
+          "size_bytes": 4922,
+          "mode": "0o644"
+        },
+        "7": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_create.py",
+          "sha256": "3d5160767f96e81aa74eb043d4f66ff9a2d7ae45a47e537eb4eb8a01a16f3912",
+          "size_bytes": 21730,
+          "mode": "0o644"
+        },
+        "8": {
+          "path": "/root/mgs-agent/scripts/ares-eggbev-page-lead-guardrail.py",
+          "sha256": "71036bbbe8c7cdd19a4963818b51ed81f2670facf73169108328a23ea88716aa",
+          "size_bytes": 43777,
+          "mode": "0o755"
+        },
+        "9": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-reports.py",
+          "sha256": "741c23728e0e932e65f9a9efbc5cdc7ada8d973d20cfad7a03614116a5235681",
+          "size_bytes": 28868,
+          "mode": "0o755"
+        },
+        "10": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.py",
+          "sha256": "42658fcf79b2e338e7554c994a4514eceea5813f77133d83c8e23531dc496c88",
+          "size_bytes": 37065,
+          "mode": "0o755"
+        },
+        "11": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.py",
+          "sha256": "ecdf5cc88f798e4942c131d3e3c81d920506e763e7f3b4bd669c0550b387a8a4",
+          "size_bytes": 37211,
+          "mode": "0o755"
+        },
+        "12": {
+          "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-activity-monitor.sh",
+          "sha256": "0782f521753554fb5c1e1a53527b80ec79b3b71c1c69d157f611deae0ff33ab4",
+          "size_bytes": 750,
+          "mode": "0o755"
+        },
+        "13": {
+          "path": "/root/mgs-agent/tests/test_ares_campaign_engine_v3.py",
+          "sha256": "0add56194705a0d770b4f35f662498923f7d3bd51d20bf2cf401905f84cf265d",
+          "size_bytes": 70166,
+          "mode": "0o644"
+        },
+        "14": {
+          "path": "/root/mgs-agent/tests/test_eggbev_clone_v3.py",
+          "sha256": "a075c63941264feae4a01a8fb8f468bbb733812592984d9d36771ec55d460a68",
+          "size_bytes": 12573,
+          "mode": "0o644"
+        },
+        "15": {
+          "path": "/root/mgs-agent/tests/test_creditoparaveiculo_account05_runtime.py",
+          "sha256": "fca29fffde21cc71c944a7b67d2dc3d2fa13f3883bfe0a2802a6d3e9ed1f1203",
+          "size_bytes": 8048,
+          "mode": "0o644"
+        },
+        "16": {
+          "path": "/root/mgs-agent/tests/test_creditoparaveiculo_account05_creative_cut24h.py",
+          "sha256": "b84c0e06aba3220136eefb4657e0f55fa2a2a078d15a5a6d61d117c2608ad9ca",
+          "size_bytes": 8070,
+          "mode": "0o644"
+        },
+        "17": {
+          "path": "/root/mgs-agent/tests/test_eggbev_page_lead_guardrail.py",
+          "sha256": "e6934447b5e969a7f295561142f1dc155cde82daeb20dde51ff609f3b7255b35",
+          "size_bytes": 11811,
+          "mode": "0o644"
+        },
+        "18": {
+          "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/multi-account-token-cutover-page-parity-2026-09-02.md",
+          "sha256": "130a9aee492c3bcb83e9c395ac98ea11c59e2030dcb76d9721b990b5e25fccb5",
+          "size_bytes": 3706,
+          "mode": "0o644"
+        },
+        "19": {
+          "path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/multi-account-token-cutover-page-parity-2026-09-02.md",
+          "sha256": "130a9aee492c3bcb83e9c395ac98ea11c59e2030dcb76d9721b990b5e25fccb5",
+          "size_bytes": 3706,
+          "mode": "0o644"
+        }
+      },
+      "updated_at": "2026-09-02T14:50:09.224125-04:00",
+      "post_validation_job": {
+        "job_id": "d1b94343f4af",
+        "name": "Eggbev LEADS pós-correção",
+        "schedule": "2026-09-02T20:21:00-04:00",
+        "repeat": "once",
+        "deliver": "origin",
+        "workdir": "/root/mgs-agent",
+        "readback": "enabled scheduled",
+        "collision_audit": {
+          "operational_collisions": 0,
+          "unavoidable_baseline_hits": 5,
+          "shared_meta_api": false,
+          "shared_writer_lock": false
+        }
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1544781315453362218",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "required_fields_present": true,
+        "mentions": 0,
+        "mention_roles": 0,
+        "mention_everyone": false,
+        "thread_created": false
+      }
     }
   ],
   "profile_skill_references": [
@@ -16633,9 +16843,9 @@
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 35403,
-      "md5": "2dadfd908f85df333f65b6e93758d099",
-      "modified_at": "2026-09-02T13:57:01-04:00"
+      "size_bytes": 35440,
+      "md5": "86385a70bc57049badf0b76f32d5d53d",
+      "modified_at": "2026-09-02T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -16730,8 +16940,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6395,
-      "md5": "e39a40e56ccaab3f367a2893a7b0ecfa",
-      "modified_at": "2026-09-02T13:54:02-04:00"
+      "md5": "eab7a24daf57d754116c71357bb9d8cc",
+      "modified_at": "2026-09-02T14:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -16742,20 +16952,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 51724,
-      "md5": "db445d63f2f08172bb80fb195c488bf3",
-      "modified_at": "2026-09-02T14:00:02-04:00"
+      "md5": "fe10d308cb66d9f2530af770f2370857",
+      "modified_at": "2026-09-02T14:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 57368,
-      "md5": "66648bc97567b636c6b094836aaefe00",
-      "modified_at": "2026-09-02T14:03:02-04:00"
+      "md5": "cd0443c53171861c19eed2946441aabc",
+      "modified_at": "2026-09-02T14:08:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "5a09dc4c4221bb7eb3847b3c653dafee",
-      "modified_at": "2026-09-02T14:03:01-04:00"
+      "size_bytes": 357,
+      "md5": "ed1ed5beb3438f79042556e66b83f485",
+      "modified_at": "2026-09-02T14:08:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -16789,9 +16999,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 750374,
-      "md5": "92a060c5fd6089cff7dd6c7c68063672",
-      "modified_at": "2026-09-02T13:44:02-04:00"
+      "size_bytes": 750304,
+      "md5": "155cb20cdf4b78b3e47eeb5ba0eb58da",
+      "modified_at": "2026-09-02T14:08:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -16844,8 +17054,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 90097,
-      "md5": "3759394c5b316d7397e725a0b426ef0b",
-      "modified_at": "2026-09-02T14:02:07-04:00"
+      "md5": "39b90db15d9508957475592b0a7c2a9b",
+      "modified_at": "2026-09-02T14:08:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -16887,7 +17097,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-02T13:52:03-04:00"
+      "modified_at": "2026-09-02T14:07:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -16995,7 +17205,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "a54fd3d11df2b491f541bed52a63e6ef",
-      "modified_at": "2026-09-02T14:01:01-04:00"
+      "modified_at": "2026-09-02T14:06:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -17036,14 +17246,14 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2115,
-      "md5": "57169d73b5a99c92a5eaf69af8c79f35",
-      "modified_at": "2026-09-02T14:00:03-04:00"
+      "md5": "23d400d0d8dca44e3f689b79bee15349",
+      "modified_at": "2026-09-02T14:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "1203d77525a4da045e7c4a43b954ab92",
-      "modified_at": "2026-09-02T08:07:02-04:00"
+      "md5": "43121a49dab0735da4b0014a338dec7a",
+      "modified_at": "2026-09-02T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

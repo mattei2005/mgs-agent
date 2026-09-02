@@ -512,6 +512,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ROAS-THRESHOLD-036-20260902",
+      "next_step": "Operacao normal: o proximo ciclo agendado as 16:10 ET usara 0.36; qualquer nova mudanca exige outro OK explicito de Nicolas",
+      "objective": "Reduzir para 0.36 o threshold de todos os ciclos futuros de Corte e ROAS Eggbev",
+      "source": "data/ares/meta-ads/audit/eggbev/roas-policy/threshold-036-20260902T140923-0400.json; policy:ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+      "state": "completed_verified_reported: contrato, runtime defaults, state vivo, prompt source/live/versioned e registro institucional usam 0.36; agenda permanece inalterada; 111 testes, dry-run vivo sem writes, report-infra e readback passaram",
+      "thread_id": "1544770844381679666",
+      "updated_at": "2026-09-02T18:21:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-ROAS-VISUAL-DASHBOARD-20260830",
       "next_step": "Use the current v26/v27 renderer; any format change requires a new explicit Nicolas instruction and regression update.",
       "objective": "Separar a posição do Purchase ROAS no threshold da classificação econômica de ROI negativo",
@@ -669,6 +679,16 @@
       "state": "kelly reprovou e confirmou criticamente a remoção de três linhagens: 10_límite disponible.mp4 / cc_us_en_vid_available_limit_pv_043.mp4; 13_08 - story ( ingles) .mp4 / cc_us_en_vid_available_limit_pv_046.mp4; 6_$14,760.mp4 / cc_us_es_vid_limite_disponible_pv_006.mp4. as 3 linhagens completas foram enviadas à lixeira: 6 arquivos drive (3 ready + 3 legacy), todos com trashed=true, ausentes das pastas ativas; inventário atualizado para trashed e auditoria validada. não houve exclusão permanente. restam 22 ready neste lote: 15 cc_us_en e 7 cc_us_es; 7_espanol 03.mp4 permanece em 05_rejected.",
       "thread_id": "1540085104322543726",
       "updated_at": "2026-08-20T21:08:40+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ARES-META-APP-PROFILE-TOKEN-CUTOVER-20260902",
+      "next_step": "One-shot d1b94343f4af executa 20:21 ET e responde nesta thread após o tick 20:16 do Eggbev LEADS; deve validar last_status ok/failure_streak0 e zero writes, corrigindo somente falha segura sem apply se necessário.",
+      "objective": "Alinhar conta 13 Roosevelt, conta 05 Rafael e Eggbev Carla ao app novo 1299247318762949, renovar caches sem excluir itens 1Password",
+      "source": "discord:thread:1544757670412820541;operation-audit:data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json;inventory:ares-meta-app-profile-token-cutover-20260902;knowledge:ARES-META-APP-PROFILE-TOKEN-MAPPING-V1-20260902;report-infra:1544781315453362218;cron:d1b94343f4af",
+      "state": "completed_validated_with_followup: 3 perfis no app 1299247318762949, quatro caches renovados, 305 testes+37 subtestes, creative-cut tick real recuperado streak0, eggbev leads runtime corrigido mantendo apply bloqueado, zero meta/budget/status writes, zero exclusões 1password; report-infra 1544781315453362218 confirmado",
+      "thread_id": "1544757670412820541",
+      "updated_at": "2026-09-02T18:50:26+00:00"
     },
     {
       "agent": "zeus",
@@ -2052,5 +2072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T17:44:14+00:00"
+  "updated_at": "2026-09-02T18:50:26+00:00"
 }
