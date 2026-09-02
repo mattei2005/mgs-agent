@@ -1853,12 +1853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-update-20260901",
-      "next_step": "Executar regressões amplas, builds, config/auth smokes e provenance do stage; Ares SOUL mirror será sincronizado apenas no cutover.",
-      "objective": "Atualizar Hermes de forma controlada para v0.21.0, preservando todas as customizações MGS.",
-      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled",
-      "state": "port_46_paths_reproduced_stage_validation",
+      "next_step": "Congelar PIDs/hashes, validar rollback e agendar ativação detached Ares→Atena→Zeus.",
+      "objective": "Atualizar Hermes para v0.21.0 preservando customizações MGS",
+      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/stage-validation.json",
+      "state": "candidate_validated_cutover_preparation",
       "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-02T00:22:11+00:00"
+      "updated_at": "2026-09-02T00:48:14+00:00"
     },
     {
       "agent": "zeus",
@@ -1892,5 +1892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T00:45:08+00:00"
+  "updated_at": "2026-09-02T00:48:14+00:00"
 }

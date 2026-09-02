@@ -11217,6 +11217,38 @@
       "authorization_message_id": "1544473492148457583",
       "source_thread_id": "1544371507491242044",
       "updated_at": "2026-09-01T19:03:54-04:00"
+    },
+    {
+      "id": "hermes-v0210-29112bef-20260901",
+      "agent": "zeus",
+      "type": "hermes_runtime_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1544491501520691302",
+      "source_thread_id": "1544371507491242044",
+      "status": "prepared_validated",
+      "installed_before": "3eb5b8bc8fbe45e7e51a42c69a7fa59c67bcc9fb",
+      "target_upstream_sha": "29112bef099274229cadff79cdff7bf7b99c4b77",
+      "target_version": "0.21.0",
+      "candidate_path": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef",
+      "candidate_commit": "875938622f26ce46d1db3450a3d85df32e33dd43",
+      "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-01-v0210-29112bef.patch",
+      "candidate_wrapper": "/root/.local/bin/hermes-v0210-stable-29112bef-mgs",
+      "rollback_wrapper": "/root/.local/bin/hermes-v0205-main-14201763-mgs",
+      "backup": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/archives/hermes-profiles-pre-v0210.tar.gz",
+      "stage_validation": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/stage-validation.json",
+      "validation": {
+        "path_set": "46/46",
+        "stage_guard": "475 passed + 6 subtests",
+        "stage_broad": "633 passed + 6 subtests",
+        "post_upstream": "286 passed + 4 skipped",
+        "smokes": "3/3",
+        "configs": "4/4",
+        "operational_auth": "3/3",
+        "web_build": true,
+        "tui_build": true
+      },
+      "updated_at": "2026-09-02T00:48:14.784429+00:00"
     }
   ],
   "profile_skill_references": [
@@ -16163,5 +16195,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-02T00:48:14.784429+00:00"
 }
