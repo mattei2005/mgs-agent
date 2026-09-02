@@ -120,6 +120,26 @@ class TokenMonitorTests(unittest.TestCase):
                 'one fresh delivery per active incident after ET date rollover; no intraday repeats',
             )
 
+    def test_failure_alert_is_sent_only_once_per_failure_streak(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'state.json'
+            state = mod.initial_state()
+            state['consecutive_failures'] = 2
+            deliveries = []
+
+            def fake_post(channel_id, payload):
+                deliveries.append((channel_id, payload))
+                return 'message-id'
+
+            with patch.object(mod, 'post_and_verify', side_effect=fake_post):
+                mod.record_failure(path, state, RuntimeError('upstream unavailable'), dry_run=False)
+                mod.record_failure(path, state, RuntimeError('upstream unavailable'), dry_run=False)
+
+            loaded = mod.load_state(path)
+            self.assertEqual(len(deliveries), 1)
+            self.assertEqual(loaded['consecutive_failures'], 4)
+            self.assertEqual(loaded['failure_alert_sent_for'], 3)
+
     def test_retention_cutoff_keeps_only_previous_day_and_current_day(self):
         cutoff = mod.retention_cutoff(
             datetime.fromisoformat('2026-08-29T00:05:00-04:00')

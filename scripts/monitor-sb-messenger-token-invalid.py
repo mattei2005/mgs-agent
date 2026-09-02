@@ -326,9 +326,12 @@ async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list
             page = await context.new_page()
             captured: dict[str, str] = {}
 
-            async def on_request(request):
+            def on_request(request):
                 if 'api.jbfdigital.com.br' in request.url:
-                    captured.update(await request.all_headers())
+                    # Event callbacks are not awaited by Playwright. Reading the
+                    # already available headers synchronously avoids a pending
+                    # all_headers() task racing browser shutdown.
+                    captured.update(request.headers)
 
             page.on('request', on_request)
             await page.goto(APP_URL, wait_until='domcontentloaded', timeout=60000)
@@ -970,7 +973,9 @@ def record_failure(path: Path, state: dict[str, Any] | None, error: Exception, d
     state['last_error'] = {'at': now_iso(), 'type': type(error).__name__, 'message': str(error)[:500]}
     if not dry_run:
         save_state(path, state)
-    if count >= 3 and int(state.get('failure_alert_sent_for') or 0) < count and not dry_run:
+    # Alert once per failure streak. A successful run resets this marker to 0.
+    # If delivery itself fails at count 3, a later run may still retry it.
+    if count >= 3 and int(state.get('failure_alert_sent_for') or 0) == 0 and not dry_run:
         payload = {
             'content': f'<@{RODOLFO_ID}> monitor de token Messenger falhando',
             'allowed_mentions': {'users': [RODOLFO_ID]},
