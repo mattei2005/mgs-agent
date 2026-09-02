@@ -461,6 +461,9 @@ def test_rewarded_pricing_cr_tracks_live_contiguous_waterfall_and_gray_previous_
         "rules": rules,
     }
     parsed = module.parse_rewarded_pricing(payload)
+    intraday_source = inspect.getsource(module.build_intraday)
+    assert "cascata rewarded viva" in intraday_source
+    assert "5 blocos rewarded" not in intraday_source
     assert parsed["filter"] == "rewarded"
     assert parsed["slot_count"] == 5
     assert parsed["configured_reference_slot_count"] == 5

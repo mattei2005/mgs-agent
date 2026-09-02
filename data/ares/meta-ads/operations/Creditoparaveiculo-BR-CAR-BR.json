@@ -1014,8 +1014,25 @@
       "rewarded_pricing_endpoint": "/pricing/digital-trust_creditoparaveiculo?should_update_metrics=1",
       "rewarded_operation_group": "facebook_br_car_financ-carro-s",
       "rewarded_slot_base": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
+      "rewarded_configured_reference_slot_count": 5,
+      "rewarded_topology_policy": "Use the exact operation target and sum the live contiguous waterfall beginning at the base slot. Accept a terminal shrink or expansion and audit topology_changed; fail closed when the base is absent, an interior suffix is missing, a slot is duplicated, or target/date/currency diverges.",
+      "rewarded_live_readback_20260901": {
+        "pricing_http": 200,
+        "publisher_id": "digital-trust_creditoparaveiculo",
+        "currency": "USD",
+        "slot_ids": [
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_1",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_2",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_3"
+        ],
+        "slot_count": 4,
+        "missing_terminal_reference_slot": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_4",
+        "provider_scope_check": "the _4 terminal slot was absent from all matching rewarded waterfalls in the 115-rule Pricing payload",
+        "credentials_exposed": false
+      },
       "cr_presentation": "summary_only; removed from campaign cards and desktop campaign table because the operation-wide value repeats identically",
-      "cr_formula": "sum GAM matchedRequests across rewarded base + _1 + _2 + _3 + _4 / GAM requests of rewarded base * 100",
+      "cr_formula": "sum GAM matchedRequests across the live contiguous rewarded waterfall / GAM requests of rewarded base * 100",
       "previous_gray_semantics": "consolidated previous-day reference shown in light gray by Smart Bidding Pricing",
       "scheduled_cadence": "every two hours on odd America/Sao_Paulo hours"
     }
