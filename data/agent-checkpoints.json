@@ -1893,12 +1893,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-cleanup-20260901",
-      "next_step": "Após confirmação explícita, revalidar hash/fingerprints/processos e excluir somente os 9 alvos.",
+      "next_step": "Burn-in 24–48h; demais itens são opcionais e listados no residual pós-limpeza.",
       "objective": "Remover runtimes/checkouts Hermes obsoletos e precheck supersedido após v0.21.0",
-      "source": "/root/.hermes/secure-backups/vps-cleanup/20260901T230938-0400-hermes-post-update/manifest.json",
-      "state": "manifesto exato congelado; zero mutação; aguardando confirmação crítica de rodolfo",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260901T230938-0400-hermes-post-update/post-cleanup-residual.json",
+      "state": "pass: 9/9 alvos removidos; 14,16 gib recuperados; runtime, rollback, backups e smokes validados",
       "thread_id": "1544536465772511303",
-      "updated_at": "2026-09-02T03:14:02+00:00"
+      "updated_at": "2026-09-02T03:27:33+00:00"
     },
     {
       "agent": "zeus",
@@ -1912,5 +1912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T03:22:13+00:00"
+  "updated_at": "2026-09-02T03:27:33+00:00"
 }
