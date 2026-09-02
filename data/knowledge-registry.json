@@ -2372,6 +2372,26 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "mgs.agents.global-failure-recovery",
+      "canonical_source": "AGENT.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "future-mgs-agents",
+        "zeus"
+      ],
+      "domain": "governance",
+      "effective_at": "2026-09-01T23:22:13-04:00",
+      "id": "MGS-GLOBAL-FAILURE-RECOVERY-20260901",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Global resilient failure and cooldown recovery guardrail",
+      "updated_at": "2026-09-02T03:22:13+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -3311,5 +3331,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T00:39:01+00:00"
+  "updated_at": "2026-09-02T03:22:13+00:00"
 }

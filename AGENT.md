@@ -388,6 +388,19 @@ When a command returns an error:
 - If self-correction not possible -> STOP, ask for guidance
 - NEVER fabricate success after failure
 
+### Resilient failure and cooldown recovery (all agents)
+
+For every request that is already authorized, an error, timeout, provider overload, rate limit or cooldown must not become the agent's final action or silently abandon the task.
+
+- Before any retry or corrective write, read back the real target and reconcile partial effects. Persist the minimum credential-free resumable state: operation/request identity, relevant object IDs, completed stage, exact pending stage, `retry_at`, source/thread and last verified result.
+- Respect a live `Retry-After`, official cooldown window or provider header. Otherwise use bounded exponential backoff with jitter. Never busy-loop, sleep indefinitely inside an interactive turn or promise a later retry without a durable execution/delivery mechanism.
+- Resume the same authorized request at the earliest safe opportunity and execute only the missing or invalid layer. Reuse persisted request identity and object IDs; never replay a non-idempotent POST or write blindly.
+- A non-idempotent action may be retried only when readback proves that no side effect occurred, or when a provider-supported idempotency key/request identity makes replay safe. If the outcome is ambiguous, stop that write and escalate with the exact uncertainty.
+- The original authorization covers safe recovery only inside the exact original scope. Recovery never authorizes broader scope, additional budget, billing, credential, permission, destructive action or Critical Subset operation.
+- After three consecutive failures of the same monitor or operation, investigate the root cause, apply a safe correction within existing authority, validate recovery and reduce recurrence. If the correction is unsafe or falls in the Critical Subset, escalate immediately with the exact blocker.
+- After five consecutive failures of the same tool, or earlier on any loop signal, stop retries and escalate. Preserve the checkpoint instead of continuing automatically.
+- If an external block remains, leave a durable checkpoint with cause, completed work, pending layer, `retry_at` or explicit dependency and the next authorized action. Report the blocker honestly; never treat an error notice as task completion.
+
 ### Reporting Standards
 
 Final reports must include:

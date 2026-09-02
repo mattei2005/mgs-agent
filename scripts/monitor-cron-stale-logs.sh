@@ -85,9 +85,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     # Mesma proteção para jobs mensais/restritos por dia do mês.
     if dom != '*':
         return 32 * 24 * 3600
-    if minute.startswith('*/5'):
+    if minute.startswith('*/5') or minute.endswith('/5'):
         return 20 * 60
-    if minute.startswith('*/15'):
+    if minute.startswith('*/15') or minute.endswith('/15'):
         return 60 * 60
     if minute == '0' and hour == '*':
         return 150 * 60

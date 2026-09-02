@@ -1842,6 +1842,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-global-failure-recovery-20260901",
+      "next_step": "Zeus monitora exceções e regressões; nenhuma ação do Rodolfo. Sessões novas carregam a regra automaticamente.",
+      "objective": "Aplicar guardrail global de recuperação resiliente de falhas e cooldowns a todos os agentes MGS",
+      "source": "AGENT.md#resilient-failure-and-cooldown-recovery-all-agents; registry:MGS-GLOBAL-FAILURE-RECOVERY-20260901",
+      "state": "ativo: regra canônica adicionada ao agent.md com persistência resumível, retry_at, readback-first, replay idempotente, backoff limitado e escalada 3/5; sem restart",
+      "thread_id": "1544537406613626913",
+      "updated_at": "2026-09-02T03:22:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-hermes-news-completeness-watchdog-20260718",
       "next_step": "Operação normal. Zeus só escala fallback usado, duas falhas de entrega ou perda do ciclo de um minuto; nenhum restart pendente.",
       "objective": "Eliminar falhas silenciosas no cron de explicações do Hermes News com watchdog independente, recuperação, fallback determinístico e readback",
@@ -1902,5 +1912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T03:14:02+00:00"
+  "updated_at": "2026-09-02T03:22:13+00:00"
 }
