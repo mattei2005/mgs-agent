@@ -833,12 +833,22 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0083-CUTOVER-20260902",
-      "next_step": "Validar item 1Password B008-3, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado.",
+      "next_step": "Concluir durabilidade conjunta após incorporar o cutover B010-3 recém-autorizado.",
       "objective": "Substituir B008-2 por B008-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; OOB message after B006 reconciliation; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "state": "in_progress: autorização explícita recebida via mensagem oob após o ciclo estável b006-4; b008-2 permanece contido na pausa manual.",
+      "source": "discord:thread:1544705223057211422; OOB authorization; backup:/root/mgs-agent/backups/meta-app-b0082-to-b0083-cutover-20260902-102442",
+      "state": "production_pass: quatro checks http 200, token válido/app-bound, 2 roles resolvidas; sheet 9 linhas, 2 presentes blank e 7 ausentes x; segundo ciclo sem writes, alertas ou erros.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:23:31+00:00"
+      "updated_at": "2026-09-02T14:30:54+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-B0103-CUTOVER-20260902",
+      "next_step": "Validar item 1Password B010-3, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado.",
+      "objective": "Substituir B010-2 por B010-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544705223057211422; OOB message after B008 production validation; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+      "state": "in_progress: autorização explícita recebida via mensagem oob após o ciclo estável b008-3; b010-2 é o último app restante na pausa manual.",
+      "thread_id": "1544705223057211422",
+      "updated_at": "2026-09-02T14:30:54+00:00"
     },
     {
       "agent": "zeus",
@@ -1992,5 +2002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T14:23:31+00:00"
+  "updated_at": "2026-09-02T14:30:54+00:00"
 }
