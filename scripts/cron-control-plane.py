@@ -54,8 +54,8 @@ DESCRIPTIONS = {
     'sync-sb-sms-revenue-daily.sh': 'Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert/readback e uma retentativa automática após 5 minutos para falhas transitórias.',
     'sync-sb-messenger-revenue-sheet.py': 'Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.',
     'monitor-sb-messenger-token-invalid.py': 'Espelha alertas de token Messenger inválido da API Smart Bidding para o canal dedicado, com filtro MGS, dedupe, contagem de páginas e readback Discord sem menções.',
-    'ares-meta-account-activity-monitor.py': 'Monitora alterações materiais na conta Meta Creditoparaveiculo 13, cruza writes do Ares com audit local e alerta somente mudanças externas ou não auditadas.',
-    'eggbev-page-restriction-guardrail.sh': 'Executa em série os guardrails Eggbev de restrição DTR e de campanha com gasto acima de US$2 sem resultado de pixel após 03:00 ET.',
+    'ares-meta-account-activity-monitor.py': 'Monitora alterações materiais na conta Meta Creditoparaveiculo 13 e alerta somente ações de outra pessoa ou ferramenta externa; automações da Meta e writes do Ares identificados por audit ou fonte allowlisted ficam silenciosos.',
+    'eggbev-page-restriction-guardrail.sh': 'Executa o guardrail Eggbev de restrição DTR a cada cinco minutos. A antiga etapa de campanha com gasto acima de US$2 e zero resultado de pixel está suspensa, removida do wrapper e sem write.',
 }
 
 RISK = {
@@ -90,7 +90,7 @@ RISK = {
     'sync-sb-sms-revenue-daily.sh': 'médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback',
     'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
     'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada, republica incidentes ativos uma vez por dia e envia novos/reabertos sem repetição intradiária',
-    'ares-meta-account-activity-monitor.py': 'baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração externa/não auditada',
+    'ares-meta-account-activity-monitor.py': 'baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração material de outra pessoa ou ferramenta externa',
     'eggbev-page-restriction-guardrail.sh': 'alto controlado: pode pausar campanhas após pre-read, política e GET/readback',
 }
 

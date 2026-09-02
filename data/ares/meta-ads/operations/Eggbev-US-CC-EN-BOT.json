@@ -2825,7 +2825,7 @@
       "state": "scheduled"
     },
     "page_restriction_guardrail": {
-      "activation_conclusion": "active; the shared scheduled root-cron tick completed both Page-protection stages successfully with zero Meta writes and zero alerts pending.",
+      "activation_conclusion": "active for DTR restriction only; the zero-pixel stage was suspended by Nicolas on 2026-09-02 at 03:55 ET, removed from the wrapper and has no active write or schedule.",
       "cron_marker": "ARES EGGBEV PAGE RESTRICTION",
       "enabled": true,
       "last_events_seen": 0,

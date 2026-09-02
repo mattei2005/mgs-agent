@@ -532,6 +532,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-RULES-CRONS-REAUDIT-R4-20260902",
+      "next_step": "Manter zero-pixel suspenso até nova instrução explícita; LEADS em hold/dry-run; qualquer nova decisão exige supersessão e reexecução das regressões",
+      "objective": "Reauditar regras, crons e fontes derivadas da estratégia Eggbev Champion após a suspensão do zero-pixel",
+      "source": "discord:thread:1544558298769006593;discord:thread:1541578622106865815;data/ares/audits/eggbev/2026-09-02-rules-crons-reaudit-r4.json",
+      "state": "completed: zero-pixel drift corrigido no manual, registry, prompts/config, skill, contrato e cron control plane; manual 9/9 com 4/4 readbacks; zero meta/cron writes; 219 eggbev + 2 cron-control + 12 knowledge regressions pass",
+      "thread_id": "1544558298769006593",
+      "updated_at": "2026-09-02T15:47:25+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-RULES-THREAD-CONSOLIDATION-20260901",
       "next_step": "Rodolfo pode aplicar Close manual nas seis threads históricas listadas; manter 1541578622106865815 aberta como rota canônica Regras.",
       "objective": "Consolidar regras, crons e padrões Eggbev BOT na thread Regras 1541578622106865815 e preparar o encerramento das threads históricas indicadas por Rodolfo.",
@@ -2012,5 +2022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T15:40:51+00:00"
+  "updated_at": "2026-09-02T15:47:25+00:00"
 }

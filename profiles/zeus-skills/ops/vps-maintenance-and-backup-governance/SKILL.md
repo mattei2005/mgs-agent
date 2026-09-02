@@ -63,6 +63,18 @@ When one request combines VPS maintenance, reboot, Hermes/application update, an
 5. On interruption, gateway recovery, handoff, or work continued in another thread, reconcile the original request and phase ledger before the final answer. State separately: `VPS updated`, `Hermes updated`, and `cleanup executed/not executed`.
 6. A status answer must use live readback plus the ledger. If no destructive audit boundary and absent-target validation exist, say plainly that cleanup was not executed, even when candidates were identified and the disk is healthy.
 
+### Cleanup-candidate continuity and owner closure
+
+Avoid making a phased cleanup sound like an endless stream of newly discovered deletion targets:
+
+1. Keep a stable cumulative ledger for every candidate and label its origin as **pre-existing residue**, **artifact created by the current analysis**, or **the same target re-fingerprinted after drift**. Never count analysis-created temporary storage as pre-existing reclaimable space.
+2. When a volatile target changes and requires a new manifest hash, state explicitly that it is the **same scope with a refreshed fingerprint**, not a new cleanup finding. Show the prior candidate identity and keep cumulative bytes non-additive.
+3. Before asking another Critical Subset confirmation, explain in one sentence whether the target is genuinely new, newly classified from an already-disclosed residual, or unchanged except for metadata/hash drift.
+4. Treat temporary residue caused by the audit itself as an operational incident: disclose who/what created it, contain it separately, and do not present its removal as ordinary maintenance savings.
+5. When Rodolfo chooses to retain an optional candidate or says to stop cleaning, mark it `intentionally_retained_owner_choice`, cancel any prepared-but-unconfirmed destructive manifest without attempting deletion, remove it from pending/open-item language, and close the cleanup phase. Do not surface it again as a deletion recommendation unless its state materially changes or Rodolfo opens a new cleanup request.
+6. If disk headroom is healthy and the remaining recovery is marginal, lead with the operational recommendation to stop rather than continuing to generate destructive manifests merely because a technically redundant target exists.
+7. In executive updates, summarize the cumulative story once: what was pre-existing and removed, what the analysis itself created and cleaned up, what was already disclosed and only reclassified, and what is intentionally retained. Do not narrate every intermediate hash as a separate discovery.
+
 ## Phase boundary: VPS first, application runtime later
 
 When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard operational boundary, not merely an ordering hint:

@@ -27,6 +27,9 @@ class CronControlPlaneParsingTests(unittest.TestCase):
         )
         self.assertEqual(parsed['owner'], 'Ares/Campaign Ops')
         self.assertIn('pausar campanhas', parsed['risk'])
+        self.assertIn('restrição DTR', parsed['description'])
+        self.assertIn('zero resultado de pixel está suspensa', parsed['description'])
+        self.assertNotIn('Executa em série', parsed['description'])
 
     def test_repo_script_cron_keeps_existing_path(self):
         parsed = cron.parse_cron_line(

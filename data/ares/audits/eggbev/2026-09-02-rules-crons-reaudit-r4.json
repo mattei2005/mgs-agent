@@ -1,0 +1,108 @@
+{
+  "audit_id": "ARES-EGGBEV-RULES-CRONS-REAUDIT-R4-20260902",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "account_alias": "Eggbev-US-CC-EN-01-G006",
+  "requested_by": "Rodolfo Mattei",
+  "thread_id": "1544558298769006593",
+  "completed_at_et": "2026-09-02T11:46:19-04:00",
+  "scope": [
+    "canonical rules manual",
+    "operation contract and account registry",
+    "knowledge registry and checkpoint",
+    "active and versioned channel prompts",
+    "route skill and versioned mirror",
+    "Hermes and root cron readbacks",
+    "root wrapper and Cron Control Plane documentation",
+    "Eggbev unit and institutional regression suites"
+  ],
+  "findings": [
+    {
+      "id": "zero_pixel_manual_drift",
+      "severity": "high",
+      "finding": "The Rules manual still described the zero-pixel stage as active after Nicolas suspended it at 03:55 ET.",
+      "corrected": true
+    },
+    {
+      "id": "zero_pixel_registry_drift",
+      "severity": "high",
+      "finding": "The knowledge registry still marked the prior zero-pixel policy active, while the canonical contract and wrapper had it suspended.",
+      "corrected": true
+    },
+    {
+      "id": "zero_pixel_prompt_config_drift",
+      "severity": "high",
+      "finding": "Rules and Page/Limits prompt sources, active config, versioned config and route skill still described the suspended stage as active.",
+      "corrected": true
+    },
+    {
+      "id": "zero_pixel_cron_inventory_drift",
+      "severity": "medium",
+      "finding": "Cron Control Plane metadata and docs/CRONS.md still said the five-minute wrapper executed DTR plus zero-pixel, although the live wrapper executes DTR only.",
+      "corrected": true
+    },
+    {
+      "id": "missing_prior_deep_audit_artifact",
+      "severity": "medium",
+      "finding": "The prior checkpoint referenced workspace:eggbev-deep-chronology-audit/deep-audit-final.json, but that workspace artifact is absent.",
+      "corrected": true,
+      "correction": "This durable audit artifact replaces the missing workspace-only evidence pointer."
+    }
+  ],
+  "runtime_readback": {
+    "roas_cron": {
+      "enabled": true,
+      "schedule": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "no_agent": true,
+      "deliver": "local"
+    },
+    "leads_cron": {
+      "enabled": true,
+      "schedule": "16 8,20 * * *",
+      "mode": "dry_run_hold",
+      "latest_failure_class": "mapping_or_freshness_issues",
+      "write_on_degraded_source": false
+    },
+    "page_restriction_root_cron": {
+      "enabled": true,
+      "schedule": "3-58/5 * * * *",
+      "stagger_seconds": 30,
+      "active_stage": "DTR restriction only"
+    },
+    "zero_pixel_stage": {
+      "enabled": false,
+      "stage_enabled": false,
+      "write_enabled": false,
+      "present_in_live_wrapper": false,
+      "resume_gate": "new explicit instruction from an authorized campaign manager"
+    },
+    "recurring_absent": [
+      "Eggbev Daily",
+      "Eggbev campaign creation",
+      "Eggbev campaign cloning"
+    ]
+  },
+  "external_write_readback": {
+    "rules_thread_messages_edited": 4,
+    "rules_thread_messages_readback_ok": 4,
+    "manual_parts": 9,
+    "meta_writes": 0,
+    "cron_writes": 0
+  },
+  "validation": {
+    "eggbev_unittest": "219/219 PASS",
+    "cron_control_plane_unittest": "2/2 PASS",
+    "knowledge_validate": "PASS",
+    "knowledge_regression": "12/12 PASS",
+    "prompt_source_active_config": "2/2 exact",
+    "prompt_source_versioned_config": "2/2 exact",
+    "rules_thread_import": "13 messages; 9/9 manual parts present",
+    "stale_active_phrase_scan": "0 matches in active contract, scripts, prompts, config and current skills"
+  },
+  "final_state": "corrected_and_verified",
+  "open_operational_conditions": [
+    "LEADS remains dry-run/hold and fails closed on mapping or unverifiable freshness.",
+    "Zero-pixel remains suspended until a new explicit authorization.",
+    "clone_page_switch remains write-blocked.",
+    "Eggbev Daily cron/post and automatic budget scaling remain disabled."
+  ]
+}
