@@ -143,6 +143,7 @@ critical = bool(fail) and (
     len(fail) >= total
     or any(r.get('status') == 'cold_storage' for r in fail)
     or any(r.get('action_required') == 'manual_resume_app_honcho_dev' for r in fail)
+    or any(r.get('action_required') == 'manual_billing_honcho' for r in fail)
 )
 print(len(fail) if critical else 0)
 PY
@@ -217,6 +218,12 @@ lines=[]
 for r in fail:
     lines.append(f"{r.get('agent')}: {r.get('status')} / {r.get('action_required')} / {r.get('session')}")
 detail="\n".join(lines)[:900]
+if any(r.get('action_required') == 'manual_billing_honcho' for r in fail):
+    action="Créditos insuficientes. Validar top-up/billing manualmente em app.honcho.dev/billing; não repetir até regularizar."
+elif any(r.get('action_required') == 'manual_resume_app_honcho_dev' for r in fail):
+    action="Tenant em cold storage. Retomar manualmente em app.honcho.dev e reexecutar o health check."
+else:
+    action="Investigar conectividade/API do Honcho e reexecutar o health check; fontes canônicas MGS permanecem disponíveis."
 payload={
   "content":"<@344196393512075265> alerta: Honcho MGS indisponível",
   "allowed_mentions":{"users":["344196393512075265"]},
@@ -225,7 +232,7 @@ payload={
     "color":15158332,
     "fields":[
       {"name":"Falhas", "value":str(len(fail)), "inline":True},
-      {"name":"Ação", "value":"Verificar app.honcho.dev; se status=cold_storage, resumir tenant manualmente e reexecutar health check.", "inline":False},
+      {"name":"Ação", "value":action, "inline":False},
       {"name":"Detalhe técnico", "value":"```\n"+detail+"\n```", "inline":False}
     ]
   }]

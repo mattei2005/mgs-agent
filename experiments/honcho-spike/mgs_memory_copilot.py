@@ -90,6 +90,12 @@ def classify_honcho_exception(exc: Exception) -> tuple[str, str, str]:
             "Honcho tenant is in cold storage due to inactivity. Resume it from https://app.honcho.dev, then rerun the MGS health check.",
             "manual_resume_app_honcho_dev",
         )
+    if "payment required" in msg.lower() or "insufficient credits" in msg.lower():
+        return (
+            "billing_blocked",
+            "Honcho credits are insufficient. Billing or top-up must be handled manually at https://app.honcho.dev/billing before rerunning the MGS health check.",
+            "manual_billing_honcho",
+        )
     return (
         "unavailable",
         f"Honcho copilot unavailable ({exc_type}). Proceed without Honcho and rely on canonical MGS sources.",
