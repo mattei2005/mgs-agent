@@ -1,18 +1,17 @@
 {
   "version": 2,
   "mode": "manual",
-  "apps": [
-    "B010-2"
-  ],
+  "apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-after-B006-reconciliation",
-  "updated_at": "2026-09-02T10:28:57-04:00",
-  "reason": "B003-3, B005-4, B006-4 e B008-3 reativados após preflight/canário; B010-2 permanece em pausa manual durante sua substituição.",
+  "source_message_id": "OOB-after-B008-production-validation",
+  "updated_at": "2026-09-02T10:35:03-04:00",
+  "reason": "B003-3, B005-4, B006-4, B008-3 e B010-3 reativados após preflight/canário; nenhuma substituição deste lote permanece pausada.",
   "source_message_ids": [
     "1544707104089182278",
     "OOB-after-1544707104089182278",
     "OOB-after-B003-B005-production-validation",
-    "OOB-after-B006-reconciliation"
+    "OOB-after-B006-reconciliation",
+    "OOB-after-B008-production-validation"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-09-02T10:28:57-04:00",
-  "source": "active role identity baselines; B008-2 retired after B008-3 replacement cutover",
+  "generated_at": "2026-09-02T10:35:03-04:00",
+  "source": "active role identity baselines; B010-2 retired after B010-3 replacement cutover",
   "apps": {
     "B001-2": {
       "ids_sha256": "990f48ab1e31381ae6c60d545e9199f63831cfc3f8c0412356105641ecfd3e58",
@@ -504,77 +504,6 @@
         }
       ]
     },
-    "B010-2": {
-      "ids_sha256": "fa995d06b31b1438a29094a16f3c4060412b724c7eade951f3d55402c2bce0c5",
-      "role_count": 13,
-      "roles": [
-        {
-          "id": "2977158505824452",
-          "name": "Geane Pedroso",
-          "role": "administrators"
-        },
-        {
-          "id": "1622662325943175",
-          "name": "Alexandre Jonas",
-          "role": "administrators"
-        },
-        {
-          "id": "4858646137603217",
-          "name": "Marcio Carnelós",
-          "role": "administrators"
-        },
-        {
-          "id": "1819982406081024",
-          "name": "Anh Tran",
-          "role": "administrators"
-        },
-        {
-          "id": "1090702850188994",
-          "name": "Luana Ferreira Gomes",
-          "role": "administrators"
-        },
-        {
-          "id": "1728446328425571",
-          "name": "Crislaine Carvalho",
-          "role": "administrators"
-        },
-        {
-          "id": "2238391066926516",
-          "name": "Nathasha Bessa",
-          "role": "administrators"
-        },
-        {
-          "id": "2550527428740499",
-          "name": "Huy Phạm",
-          "role": "administrators"
-        },
-        {
-          "id": "2208024750046861",
-          "name": "Pendang Novi",
-          "role": "administrators"
-        },
-        {
-          "id": "28500731202853454",
-          "name": "Dhiemas Gilang Fergusson",
-          "role": "administrators"
-        },
-        {
-          "id": "2849091068789707",
-          "name": "Daniel Gomes",
-          "role": "administrators"
-        },
-        {
-          "id": "27385351417833035",
-          "name": "Dayanne Costa",
-          "role": "administrators"
-        },
-        {
-          "id": "2844577762609399",
-          "name": "Erik Sabar",
-          "role": "administrators"
-        }
-      ]
-    },
     "B011": {
       "ids_sha256": "7fb8836e5798d08a14e45f2a7c540e9619e0f1f9fed443cdd48ed9e2bc53d104",
       "role_count": 17,
@@ -1027,6 +956,80 @@
       "retired_at": "2026-09-02T10:28:57-04:00",
       "replaced_by": "B008-3",
       "source_message_id": "OOB-after-B006-reconciliation"
+    },
+    "B010-2": {
+      "ids_sha256": "fa995d06b31b1438a29094a16f3c4060412b724c7eade951f3d55402c2bce0c5",
+      "role_count": 13,
+      "roles": [
+        {
+          "id": "2977158505824452",
+          "name": "Geane Pedroso",
+          "role": "administrators"
+        },
+        {
+          "id": "1622662325943175",
+          "name": "Alexandre Jonas",
+          "role": "administrators"
+        },
+        {
+          "id": "4858646137603217",
+          "name": "Marcio Carnelós",
+          "role": "administrators"
+        },
+        {
+          "id": "1819982406081024",
+          "name": "Anh Tran",
+          "role": "administrators"
+        },
+        {
+          "id": "1090702850188994",
+          "name": "Luana Ferreira Gomes",
+          "role": "administrators"
+        },
+        {
+          "id": "1728446328425571",
+          "name": "Crislaine Carvalho",
+          "role": "administrators"
+        },
+        {
+          "id": "2238391066926516",
+          "name": "Nathasha Bessa",
+          "role": "administrators"
+        },
+        {
+          "id": "2550527428740499",
+          "name": "Huy Phạm",
+          "role": "administrators"
+        },
+        {
+          "id": "2208024750046861",
+          "name": "Pendang Novi",
+          "role": "administrators"
+        },
+        {
+          "id": "28500731202853454",
+          "name": "Dhiemas Gilang Fergusson",
+          "role": "administrators"
+        },
+        {
+          "id": "2849091068789707",
+          "name": "Daniel Gomes",
+          "role": "administrators"
+        },
+        {
+          "id": "27385351417833035",
+          "name": "Dayanne Costa",
+          "role": "administrators"
+        },
+        {
+          "id": "2844577762609399",
+          "name": "Erik Sabar",
+          "role": "administrators"
+        }
+      ],
+      "retired_at": "2026-09-02T10:35:03-04:00",
+      "replaced_by": "B010-3",
+      "source_message_id": "OOB-after-B008-production-validation"
     }
   }
 }

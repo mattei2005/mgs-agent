@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-09-02T10:28:57-04:00",
+  "updated_at": "2026-09-02T10:35:03-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-after-B006-reconciliation",
+  "source_message_id": "OOB-after-B008-production-validation",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -93,11 +93,12 @@
       "expected_sheet_roles": 17
     },
     {
-      "app": "B010-2",
+      "app": "B010-3",
       "channel_id": "1521252369331916902",
       "channel_name": "b010-2-app-status",
-      "admin": "Erik Sabar",
-      "onepassword_item_title": "BOT B010-2 Token - Erik Sabar"
+      "admin": "Huy Phạm",
+      "onepassword_item_title": "BOT B010-3 Token - Huy Phạm",
+      "expected_sheet_roles": 13
     },
     {
       "app": "B011-2",
@@ -483,6 +484,7 @@
     "1544707104089182278",
     "OOB-after-1544707104089182278",
     "OOB-after-B003-B005-production-validation",
-    "OOB-after-B006-reconciliation"
+    "OOB-after-B006-reconciliation",
+    "OOB-after-B008-production-validation"
   ]
 }
