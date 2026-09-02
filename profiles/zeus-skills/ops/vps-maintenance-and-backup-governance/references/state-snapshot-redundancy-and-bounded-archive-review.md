@@ -13,6 +13,18 @@ Classify each snapshot against **all** retained recovery sources, not only the n
 
 Never classify from directory age, size, or label alone.
 
+### Directional proof when the retained snapshot is a superset
+
+Deletion safety is directional: the candidate may be fully subsumed even when the retained snapshot contains additional files.
+
+1. Enumerate both trees with a hidden-file-aware filesystem walk; shell globs such as `*` can omit `.env` and make counts misleading.
+2. Exclude only known candidate-local label/manifest metadata from the payload comparison.
+3. Require every substantive candidate file to exist at the same relative path in at least one retained recovery source with the same externally computed SHA-256.
+4. A retained-only file does not invalidate subsumption. In particular, extra `state.db-shm` or `state.db-wal` sidecars in the retained snapshot are acceptable when the candidate has no unmatched substantive file and the retained recovery set remains intact.
+5. Any candidate-only substantive file, hash mismatch, missing retained path, or ambiguous file role fails closed and keeps the candidate protected.
+6. Report the comparison asymmetrically: candidate payload count, byte-identical count, candidate-only count, retained-only count, and whether manifest metadata differs. Do not call two directory trees “identical” when the retained tree is actually a verified superset.
+7. Freeze the exact candidate tree fingerprint after the comparison and revalidate it immediately before deletion; do not reopen original SQLite databases during this hash-only pass.
+
 ## Meaningful SQLite comparison
 
 - Run `PRAGMA quick_check` and `PRAGMA foreign_key_check` read-only on every candidate DB.
