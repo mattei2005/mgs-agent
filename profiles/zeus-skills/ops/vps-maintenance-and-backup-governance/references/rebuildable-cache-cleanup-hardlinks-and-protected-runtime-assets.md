@@ -44,11 +44,12 @@ A large cache can change while its own inventory walk is still running. A zero-r
 
 1. wait for cache-writing package/build processes to quiesce;
 2. generate the complete target inventory twice, with a short quiet interval;
-3. require exact equality of the target list, per-target counts, logical/allocated bytes, mtimes, and fingerprint hashes across both passes;
-4. freeze and hash only the second stable pass;
-5. immediately before deletion, regenerate fingerprints and compare them to the confirmed pass.
+3. normalize every node to a relative path and sort by that path before comparing or hashing; raw `rglob`/filesystem traversal order is not stable and must never create a false drift;
+4. require exact equality of the normalized target list, per-target counts, logical/allocated bytes, mtimes, and fingerprint hashes across both passes;
+5. freeze and hash only the second stable pass;
+6. immediately before deletion, regenerate the same normalized fingerprint map and compare it to the confirmed pass.
 
-If the first execution preflight finds drift, record `blocked_no_mutation`, prove every target remains present, discard that authorization, and repeat the two-pass freeze. Never update a manifest in place and reuse the previous “sim”, even when the path list is unchanged or the byte delta is only a few KiB.
+If the first execution preflight finds real metadata drift, record `blocked_no_mutation`, prove every target remains present, discard that authorization, and repeat the two-pass freeze. If only list order differs while the relative-path keyed metadata maps are identical, fix the validator to compare normalized maps and retain the same target hash; do not enter a confirmation loop for nondeterministic enumeration. Never update a manifest in place and reuse the previous “sim” after a real target change, even when the path list is unchanged or the byte delta is only a few KiB.
 
 A user message such as “apaga” before the target hash is shown authorizes preparation only. Critical deletion confirmation comes after the exact hash, counts, current/projected disk state, retained assets, and irreversible effect are presented.
 

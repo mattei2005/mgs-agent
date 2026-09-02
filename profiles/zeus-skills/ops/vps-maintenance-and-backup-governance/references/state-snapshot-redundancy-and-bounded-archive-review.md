@@ -21,18 +21,31 @@ Never classify from directory age, size, or label alone.
 - Treat `sessions`, `messages`, routing, model usage, delivery obligations, system prompts, and cron executions as meaningful history.
 - Keep FTS shadow/index tables separate: candidate-only FTS internals do not by themselves prove unique user history.
 - For tables without primary keys, report row-count differences and fail closed rather than claiming set containment.
+- Prove union coverage directly: a candidate primary-key row is unique only when it exists in neither the validated archive nor the newest retained snapshot. Separate meaningful tables from FTS shadow/index tables before summing uniqueness.
 - If union coverage across retained sources cannot be proven, classify the snapshot as protected.
+
+### Never query the original snapshot DB in place
+
+A SQLite connection intended as read-only can still remove or recreate stale `state.db-shm`/`state.db-wal` auxiliaries when URI flags, journal state, or library behavior differ. Those auxiliaries may be named by a checksum evidence set.
+
+1. Fingerprint the original snapshot tree before inspection.
+2. Copy the exact DB and any existing `-shm`/`-wal` files into the capacity-gated staging root; run `quick_check`, FK checks, attaches, and union queries only against the staged copy.
+3. Open the staged DB with verified `mode=ro&immutable=1`, set temporary work to memory only when bounded, and confirm no new sidecars appeared in the original directory.
+4. Revalidate the original tree after analysis. Missing or changed auxiliaries are an analysis-induced mutation, not harmless noise.
+5. If recovery is required, restore only from a same-profile file whose external checksum equals the frozen expected checksum, recreate an expected empty WAL exactly, and require the full backup checksum manifest to pass before closure. Record the incident and recovery explicitly.
 
 ## Archive-member staging capacity gate
 
 Before extracting large SQLite members from a compressed archive:
 
-1. Read selected `TarInfo.size` values without extraction and sum the exact logical bytes.
-2. Read free bytes on the intended staging filesystem with `statvfs`.
-3. Require selected bytes plus a safety margin (at least 25%, and never less than 512 MiB) to fit.
-4. Prefer hash-only streaming for files that do not need SQLite queries.
-5. If DB extraction is required and `/run` is too small, use a secure disk-backed staging root outside Git. Freeze its exact cleanup manifest **before** extraction so residue removal already has an authorized, bounded path.
-6. Never begin extraction into `/run` when the capacity gate is red. A partial tar extraction can fill tmpfs, make SQLite return `disk I/O error`, and endanger unrelated services.
+1. Read selected `TarInfo.size` values without extraction, verify that every requested member name exists, and sum the exact logical bytes.
+2. Abort before extraction if even one selected member is missing. `tar` can extract the other members and still exit nonzero, leaving a large partial residue.
+3. Read free bytes on the intended staging filesystem with `statvfs`.
+4. Require selected bytes plus a safety margin (at least 25%, and never less than 512 MiB) to fit.
+5. Prefer hash-only streaming for files that do not need SQLite queries.
+6. If DB extraction is required and `/run` is too small, use a secure disk-backed staging root outside Git. Freeze its exact cleanup manifest **before** extraction so residue removal already has an authorized, bounded path.
+7. Never begin extraction into `/run` when the capacity gate is red. A partial tar extraction can fill tmpfs, make SQLite return `disk I/O error`, and endanger unrelated services.
+8. Build temporary-tree fingerprints as relative-path keyed, sorted records. Raw traversal order is nondeterministic; compare normalized metadata maps so an unchanged tree cannot trigger repeated critical-confirmation loops.
 
 If staging still fails, stop: prove original snapshots unchanged, inventory the exact temporary residue, and obtain the Critical Subset confirmation before deleting it. Do not conceal the residue or treat a reboot as cleanup.
 
