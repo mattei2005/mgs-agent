@@ -144,6 +144,48 @@
       "forbidden_any": [
         "\"stage_enabled\": true"
       ]
+    },
+    {
+      "id": "KR-014",
+      "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+      "source": "data/ares/meta-ads/engine-v3/config.json",
+      "required_all": [
+        "\"release_version\": \"3.4.2\"",
+        "\"enabled\": true",
+        "\"write_enabled\": true"
+      ],
+      "forbidden_any": [
+        "\"release_version\": \"3.3.0\"",
+        "\"release_version\": \"3.4.0\""
+      ]
+    },
+    {
+      "id": "KR-015",
+      "question": "O guardrail LEADS Eggbev pode escrever enquanto o action hold está ativo?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "\"policy_write_authorized\": true",
+        "\"effective_write_enabled\": false",
+        "active_scheduled_dry_run_action_hold",
+        "explicit release of page_lead_guardrail"
+      ],
+      "forbidden_any": [
+        "\"status\": \"active_scheduled_tick_confirmed\""
+      ]
+    },
+    {
+      "id": "KR-016",
+      "question": "A auditoria global de cron Eggbev está limpa ou há colisão aberta?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "global_collision_audit_r5",
+        "open_requires_explicit_schedule_change_scope",
+        "Smart Bidding broadcast-template-repair digest physical :10",
+        "\"schedule_changes\": 0"
+      ],
+      "forbidden_any": [
+        "\"status\": \"clear_no_collisions\""
+      ]
     }
   ]
 }

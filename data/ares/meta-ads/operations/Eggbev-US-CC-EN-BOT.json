@@ -2918,6 +2918,30 @@
       "state": "scheduled",
       "last_run_at_et": "2026-09-02T12:12:03.020919-04:00",
       "last_status": "ok"
+    },
+    "global_collision_audit_r5": {
+      "checked_at_et": "2026-09-02T12:52:00-04:00",
+      "window_et": [
+        "2026-09-02T00:00:00-04:00",
+        "2026-09-10T00:00:00-04:00"
+      ],
+      "status": "open_requires_explicit_schedule_change_scope",
+      "material_collision": {
+        "target": "Eggbev ROAS physical :10",
+        "other": "Smart Bidding broadcast-template-repair digest physical :10",
+        "occurrences_8d": 104,
+        "shared_resource": "Smart Bidding read path",
+        "reason": "same start minute on every ROAS cycle; neither job is classified as an unavoidable every-minute baseline"
+      },
+      "other_non_dense_same_minute_observations": [
+        "cron-control-plane documentation render at 08:10 ET daily; local-only resource",
+        "SMS funnel Friday report at 13:10/14:10 ET on Friday; separate resource",
+        "DTR restriction :23 plus 30-second stagger overlaps hourly backup minute but uses separate resource"
+      ],
+      "dense_baseline_note": "LEADS overlaps only dense baselines. DTR also overlaps dense monitors but uses a 30-second stagger and an independent operation lock; these remain documented exceptions under cron-scheduling-policy.",
+      "evidence": "data/ares/audits/eggbev/completeness-r5-20260902/cron-collision-r5.json",
+      "schedule_changes": 0,
+      "next_gate": "Rodolfo must explicitly authorize the selected remediation because changing ROAS or the shared Smart Bidding/root schedules changes production automation scope."
     }
   },
   "schema_version": "0.3-draft",
@@ -2948,7 +2972,7 @@
   },
   "status": "operational_gated_creation_ready_for_request",
   "strategy_family": "chatpion_bot_messenger",
-  "updated_at": "2026-09-02T12:40:01-04:00",
+  "updated_at": "2026-09-02T12:52:00-04:00",
   "vertical": "CC",
   "write_enabled": false,
   "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates"

@@ -38,6 +38,11 @@ class CronSchedulingPolicyTests(unittest.TestCase):
         self.assertEqual(one_time["state"], "completed")
         self.assertTrue(jobs["roas_cycle"]["gateway_running"])
         self.assertEqual(jobs["roas_cycle"]["last_status"], "ok")
+        collision = jobs["global_collision_audit_r5"]
+        self.assertEqual(collision["status"], "open_requires_explicit_schedule_change_scope")
+        self.assertEqual(collision["schedule_changes"], 0)
+        self.assertIn("Smart Bidding", collision["material_collision"]["other"])
+        self.assertEqual(collision["material_collision"]["occurrences_8d"], 104)
 
         roas_prompt = (ROOT / "data/ares/discord/thread-prompts/1541578606076231750.txt").read_text()
         page_prompt = (ROOT / "data/ares/discord/thread-prompts/1543312825890381865.txt").read_text()

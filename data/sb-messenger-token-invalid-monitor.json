@@ -16,7 +16,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 1,
+  "consecutive_failures": 0,
   "daily": {
     "date": "2026-09-02",
     "last_result": {
@@ -1238,7 +1238,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-02T12:44:08-04:00",
+  "last_check": "2026-09-02T12:57:13-04:00",
   "last_delivery": {
     "at": "2026-09-02T12:12:16-04:00",
     "cursor_ids": [
@@ -1251,11 +1251,7 @@
       679496
     ]
   },
-  "last_error": {
-    "at": "2026-09-02T12:44:08-04:00",
-    "message": "APIRequestContext.get: Timeout 120000ms exceeded.\nCall log:\n  - → GET https://api.jbfdigital.com.br/notification\n    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\n    - accept: application/json, text/plain, */*\n    - accept-encoding: gzip,deflate,br\n    - authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjdJa01jUFhfLXpDUEJuOC02YnA5RSJ9.eyJpc3MiOiJodHRwczovL2piZmRpZ2l0YWwudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDZ",
-    "type": "TimeoutError"
-  },
+  "last_error": null,
   "last_seen_id": 679496,
   "pending": null,
   "retention": {
