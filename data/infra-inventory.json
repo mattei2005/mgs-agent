@@ -3,7 +3,7 @@
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-09-02T13:28:16-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_updated": "2026-09-02T13:42:00.324559-04:00"
+    "last_updated": "2026-09-02T13:44:02.717619-04:00"
   },
   "system_packages": [
     {
@@ -11906,7 +11906,20 @@
           "mode": "0o600"
         }
       },
-      "updated_at": "2026-09-02T13:42:00.324559-04:00"
+      "updated_at": "2026-09-02T13:44:02.717619-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1544764685931388939",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "required_fields_present": true,
+        "mentions": 0,
+        "mention_roles": 0,
+        "mention_everyone": false,
+        "thread_created": false
+      },
+      "status": "completed_validated"
     }
   ],
   "profile_skill_references": [

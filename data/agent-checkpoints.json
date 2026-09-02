@@ -283,12 +283,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
-      "next_step": "Criar backup, atualizar somente consumidores ativos da conta 13, executar testes e dry-run, validar Graph e fechar audit/inventário/REPORT-INFRA",
+      "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
       "objective": "Trocar a conta Creditoparaveiculo BR-CAR-BR 13 G006 do app/token Rafael para o app 1299247318762949 e token Roosevelt, sem writes Meta",
-      "source": "discord:thread:1544757670412820541;1password-items:APP NOVO 02/09;account:1046241194533786",
-      "state": "preflight concluído: token novo válido, scopes completos, conta visível, tier development_access, nenhum writer ativo e confirmação crítica de rodolfo na mensagem 1544760055004397618",
+      "source": "discord:thread:1544757670412820541;operation:data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json;inventory:ares-cpv13-meta-app-cutover-20260902;report-infra:1544764685931388939;backup:/root/.hermes/secure-backups/ares-cpv13-meta-app-cutover/20260902T172929Z",
+      "state": "completed_validated: conta 13 usa token roosevelt no app minibot 1299247318762949; 26 scopes concedidos incluindo public_profile; conta/página/17 campanhas lidas; tier development_access; 125 testes e smoke offline aprovados; monitor dry-run sem entrega; conta 05/rollback rafael e creation hold preservados; zero write meta/budget/status; report-infra 1544764685931388939 confirmado",
       "thread_id": "1544757670412820541",
-      "updated_at": "2026-09-02T17:26:45+00:00"
+      "updated_at": "2026-09-02T17:44:14+00:00"
     },
     {
       "agent": "ares",
@@ -2052,5 +2052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T17:28:38+00:00"
+  "updated_at": "2026-09-02T17:44:14+00:00"
 }
