@@ -1,7 +1,7 @@
 ---
 name: eggbev-page-guardrails
 description: "Opera limites e restrições de página da Eggbev BOT."
-version: 1.0.1
+version: 1.0.2
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -55,7 +55,7 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 
 ## Guardrails
 
-- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; a restrição DTR usa `:03/:08/.../:58`, stagger de 30 segundos e o lock comum `roas-cycle.lock`, serializando os writers Eggbev sem fila duplicada.
+- LEADS usa ticks físicos `08:16/20:16` para horas lógicas `08:00/20:00`; sua política de pausa está aprovada, mas o action hold persistente mantém `effective_write_enabled=false` e o wrapper em dry-run até liberação explícita de Nicolas ou Rodolfo. A restrição DTR usa `:03/:08/.../:58`, stagger de 30 segundos e o lock comum `roas-cycle.lock`, serializando os writers Eggbev sem fila duplicada.
 - **Fallback pós-03:00 suspenso:** Nicolas suspendeu a etapa em 2026-09-02 03:55 ET. Ela foi removida do wrapper compartilhado, está com `stage_enabled=false`, `write_enabled=false` e schedule disabled; o cron de cinco minutos executa somente a restrição DTR. Não avaliar nem pausar campanha por zero pixel até nova instrução explícita de gestor autorizado.
 - Em eventual retomada, preservar a política fail-closed: campanha configurada/efetivamente ACTIVE, spend do dia estritamente `> US$2`, zero `offsite_conversion.fb_pixel_custom` de `eggbev-pv-u` e `promoted_object` exato (`pixel_id`, `OTHER`, `eggbev-pv-u`) em todos os ad sets ativos. Exatamente US$2 não pausa; qualquer resultado mantém; mapping divergente = no write + alerta.
 - Match parcial/ambíguo ou freshness não verificável = zero write.
@@ -68,5 +68,5 @@ Use para pedidos, alertas e runs da thread `1543312825890381865`, inclusive diag
 
 - contagem por motivo fecha com as campanhas avaliadas;
 - zero write em qualquer degradação de fonte;
-- pausas confirmadas por GET;
+- quando o hold LEADS estiver ativo, zero POST e modo dry-run confirmado; quando liberado, pausas confirmadas por GET;
 - alerta e fallback de entrega reconciliados.

@@ -870,6 +870,11 @@ discord:
       dispara em `08:16` e `20:16`, dentro do gate interno de até `:29`. Execução
       manual autorizada é separada.
 
+      - Estado efetivo LEADS: a politica de pausa continua aprovada, mas o action
+      hold persistente exige liberacao explicita de Nicolas ou Rodolfo. Enquanto o
+      hold estiver ativo, o wrapper chama o runner sem `--apply`/`--post-alerts`:
+      consulta e audita em dry-run, com zero pausa Meta.
+
       - Regra de restrição: somente novo evento confirmado pelo monitor canônico DTR
       #2022 e pela leitura atual Smart Bidding. Não interpretar texto do Discord como
       prova. Transição somente SB = no_write.
@@ -904,10 +909,12 @@ discord:
       de 30 segundos e lock compartilhado. A etapa zero-pixel não possui cron ativo.
       LEADS permanece em 08:16/20:16 ET.
 
-      - Ação ativa de LEADS/restrição: status da campanha para PAUSED, sempre com
-      pre-read, POST único e GET/readback. Match parcial/ambíguo = no_write + alerta
-      curto. Não existe reativação automática; a reativação das duas pausas históricas
-      do zero-pixel foi uma correção pontual explicitamente autorizada por Nicolas.
+      - Ação da politica LEADS/restrição quando o gate aplicável estiver liberado:
+      status da campanha para PAUSED, sempre com pre-read, POST único e GET/readback.
+      No estado atual, somente a restrição DTR tem write efetivo; LEADS permanece
+      dry-run. Match parcial/ambíguo = no_write + alerta curto. Não existe reativação
+      automática; a reativação das duas pausas históricas do zero-pixel foi uma correção
+      pontual explicitamente autorizada por Nicolas.
 
       - Alertas automáticos têm no máximo quatro linhas: severidade/título; página+UTM;
       campanhas ativas/pausadas/pendentes; fonte+horário ET+sem reativação. Sem tabela
@@ -1203,11 +1210,12 @@ discord:
       Page restrita ou com LEADS >5.000; budget CBO persistido US$45/US$65 conforme
       contrato; DELETED/ARCHIVED nunca volta; cada camada exige readback.
 
-      - Pagina e Limites: LEADS usa >5.000 com join UTM+FB Page e freshness maxima
-      de 2h; restricao DTR #2022 confirmada permanece ativa. A etapa pos-03:00 de
-      spend >USD2 com zero resultado `eggbev-pv-u` foi suspensa por Nicolas em 2026-09-02
-      03:55 ET e so pode voltar por nova instrucao explicita. LEADS/restricao nao
-      reativam automaticamente.
+      - Pagina e Limites: a politica LEADS usa >5.000 com join UTM+FB Page e freshness
+      maxima de 2h, mas o write efetivo permanece em hold/dry-run ate liberacao explicita
+      de Nicolas ou Rodolfo. Restricao DTR #2022 confirmada permanece ativa. A etapa
+      pos-03:00 de spend >USD2 com zero resultado `eggbev-pv-u` foi suspensa por Nicolas
+      em 2026-09-02 03:55 ET e so pode voltar por nova instrucao explicita. LEADS/restricao
+      nao reativam automaticamente.
 
       - Crons ativos: ROAS no minuto :10 das horas aprovadas; LEADS em 08:16/20:16
       ET; somente restricao DTR em :03/:08/.../:58 com stagger de 30s e lock comum.

@@ -343,12 +343,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ACTION-HOLD-20260831",
-      "next_step": "Se Nicolas pedir antes de 00:00, antecipar somente o release do ROAS. Caso contrário, o ciclo de 01/09 00:00 ET restaura automaticamente o ROAS; manter o guardrail de LEADS sem write até ordem explícita separada.",
+      "next_step": "Keep LEADS in dry-run until Nicolas or Rodolfo explicitly releases page_lead_guardrail; do not treat ROAS or zero-pixel as part of that release.",
       "objective": "Manter Corte e ROAS em visualização durante 31/08 e restaurar automaticamente apenas esse cron em 01/09 00:00 ET, salvo liberação antecipada de Nicolas",
       "source": "discord:thread:1541578606076231750; /root/.hermes/profiles/ares/state/eggbev-action-hold.json; /root/.hermes/profiles/ares/scripts/eggbev-action-hold-active.py",
-      "state": "hold report-only ativo em 31/08. auto-release restrito ao escopo roas_cycle em 2026-09-01t00:00:00-04:00. verificação determinística: roas 23:59:59 active=true; roas 00:00:00 active=false; page_lead_guardrail 00:00:01 continua active=true e exige liberação explícita; estado inválido falha fechado. cron roas permanece enabled/scheduled/no_agent/local e volta a controlled-write sob os gates canônicos no ciclo 00:00.",
+      "state": "roas action hold auto-released on 2026-09-01 00:00 et and roas controlled writes are active. only page_lead_guardrail remains under the persistent explicit-release hold; zero-pixel is a separate suspended stage.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T10:21:35+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
@@ -363,12 +363,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONFIG-20260829",
-      "next_step": "Executar o mesmo request com Nicolas como aprovador financeiro, atualizar start_time com buffer Meta, concluir readback consolidado e confirmar Page/UTM/JSON Messenger 3/3 antes do pós-processamento.",
+      "next_step": "Use the current per-request creation flow: live Page gate, exact budget, unique creatives, prevalidated manifest, final summary/OK and consolidated readback.",
       "objective": "Criar a primeira campanha Eggbev pg_5024 com naming corrigido, início imediato one-time e readback obrigatório do JSON Messenger",
       "source": "discord:thread:1541578556037927053; request:eggbev-pg-5024-20260830-nicolas-01; policy:ARES-EGGBEV-NICOLAS-BUDGET-AUTHORITY-V1-20260830",
-      "state": "rodolfo concedeu a nicolas autoridade permanente para definir, reduzir ou aumentar budget eggbev sem nova aprovação; gate usd45 do request eggbev-pg-5024-20260830-nicolas-01 está satisfeito. fontes, runner e prompts foram atualizados e testados; execução do mesmo request é o próximo passo.",
+      "state": "superseded as pending work: the pg_5024 request completed, from-zero creation and placements were materialized, json readback and recovery completed, and the validated model became the creation default.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-08-30T16:26:16+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
@@ -393,32 +393,32 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-CRON-ISOLATION-20260830",
-      "next_step": "Monitoramento rotineiro do primeiro ciclo 05:00 e 06:00; qualquer falha deve usar recovery readback-first sem alterar budget ou ampliar escopo.",
+      "next_step": "Re-run the global collision inventory before any future schedule change; preserve the common Eggbev writer lock.",
       "objective": "Adicionar 05:00 e 06:00 à Fase 1 Corte e ROAS e isolar os schedulers Eggbev e Creditoparaveiculo",
       "source": "data/ares/audits/cron-isolation/2026-08-30-eggbev-cpv.json",
-      "state": "completed: fase 1 lógica e física 05/06/08/10/12 et; corte/roas inicia em :00 e reconcilia atraso real até 15min; leads inicia em :14; cpv escalonado em minutos próprios; seis threads eggbev e três cpv disjuntas; zero colisões entre oito entradas ativas; 154 testes eggbev ok.",
+      "state": "current schedule readback: roas physical minute :10; leads 08:16/20:16 et; dtr restriction :03/:08/.../:58 plus 30s stagger; zero-pixel suspended; recurring eggbev jobs do not share exact target minutes with the reviewed cpv routes.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-31T01:42:50+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-D1-ANOMALY-DESIGN-20260831",
-      "next_step": "Usar o renderer v6 em todo relatório Diário. Cron/post continuam desabilitados até enablement separado; monitor 08:00 segue dependente de baseline comparável.",
+      "next_step": "Use v8 for on-demand Daily reports; enable cron/post only after separate approval.",
       "objective": "Manter o Diário Eggbev D-1 às 08:00 ET legível para decisão de clonagem e alertas de receita, sem tocar CPV 13/05",
       "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; registry:ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831; audit:run-20260831T020653-0400.json",
-      "state": "renderer v6 concluído após segunda correção de nicolas: visão desktop inspirada em corte e roas, grupos por página/utm ordenados sempre pelo nome completo em z→a, tabelas de até 10 campanhas com cabeçalho repetido, e bc agora lido da dash atual via /report/messenger.bd_revenue mesmo no d-1. live d-1 02:06 et confirmou dashboard atual 31/08, broadcast total usd0.00, freshness 64 min; live atual mostrou tina/celia/aria/amy em z→a e 17/17 campanhas. 52 testes pass; zero post/write/cron/baseline write.",
+      "state": "superseded by the current daily v8 contract: d-1 08:00 design, page/utm z→a, current broadcast, campaign roi only with exact fresh join, anomaly detector read-only; cron/post remain disabled.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-31T06:10:46+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-DAILY-ROUTES-DESIGN-20260830",
-      "next_step": "Quando Nicolas iniciar o desenho, coletar horários/períodos/formato, materializar plano separado do Corte e ROAS, executar dry-run real e só então solicitar/aplicar aprovação explícita de cron/post.",
+      "next_step": "No pending design intake; only a future explicit enablement decision can create Daily cron/post.",
       "objective": "Definir com Nicolas as rotas, horários, períodos e automação futura do Diário Eggbev",
       "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "correção canônica aplicada: os horários existentes pertencem ao corte e roas; diário permanece read-only sob demanda, sem horários definidos, sem cron, sem post automático e sem writes.",
+      "state": "superseded by the completed daily v8 design and live read-only validations. daily remains on-demand/read-only with the approved 08:00 et design and no automatic cron/post.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-30T23:08:08+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
@@ -443,22 +443,22 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL",
-      "next_step": "Smart Bidding/dev expor timestamp confiável; ativar prompt no próximo restart seguro externo; validar campanha ativa em dry-run.",
+      "next_step": "Await explicit page_lead_guardrail release by Nicolas or Rodolfo; load the latest prompt on the next safe external gateway restart.",
       "objective": "Baseline aceito do guardrail Eggbev LEADS > 5000.",
       "source": "discord:thread:1543312825890381865",
-      "state": "nicolas confirmou ok e solicitou salvar em 29/08/2026 20:23 et; contrato e audit registram aceite do hardening atual.",
+      "state": "policy accepted and scheduled at 08:16/20:16 et, but effective pause write is currently held by the persistent page_lead_guardrail action hold. latest scheduled evaluation ran dry-run and failed closed on mapping/freshness with zero meta writes.",
       "thread_id": "1543312825890381865",
-      "updated_at": "2026-08-30T00:24:04+00:00"
+      "updated_at": "2026-09-02T16:47:18+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-PAGE-LIMITS-ALERTS-20260831",
-      "next_step": "Operação automática: novos eventos DTR #2022 + Smart Bidding serão reconciliados por UTM+Page e campanhas ativas pausadas com readback; nenhuma ação manual pendente",
+      "next_step": "Operate DTR normally; keep LEADS and zero-pixel in their current held/suspended states until explicit releases.",
       "objective": "Renomear rota Página e Limites, padronizar alertas curtos e ativar proteção automática por restrição DTR #2022 confirmada",
       "source": "discord:thread:1544056503185580042#1544115097910386830",
-      "state": "concluído: thread renomeada por readback; alertas em 4 linhas; cron root a cada 5 min com tick confirmado; teste discord sem write confirmado; leads 08h/20h preservado",
+      "state": "dtr #2022 restriction monitor remains active every five minutes with short alerts and readback. leads remains scheduled but dry-run under action hold. zero-pixel was suspended separately on 2026-09-02 and removed from the wrapper.",
       "thread_id": "1544056503185580042",
-      "updated_at": "2026-08-31T23:13:55+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
@@ -493,12 +493,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ROAS-VISUAL-DASHBOARD-20260830",
-      "next_step": "Aguardar feedback de Nicolas; v8 validado e sem mudança na lógica decisória",
+      "next_step": "Use the current v26/v27 renderer; any format change requires a new explicit Nicolas instruction and regression update.",
       "objective": "Separar a posição do Purchase ROAS no threshold da classificação econômica de ROI negativo",
       "source": "discord:thread:1541578606076231750",
-      "state": "completed",
+      "state": "superseded by reporting contracts v20/v25/v26/v27: r/e current/estimated order, smart bidding parity, 16-column full spaced table, mandatory emojis and atomic pagination are active.",
       "thread_id": "1541578606076231750",
-      "updated_at": "2026-08-30T05:49:52+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
@@ -513,22 +513,22 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-ROAS-ZERO-PIXEL-20260901",
-      "next_step": "Operação automática segue no cron existente; acompanhar apenas alertas de pausa/erro na thread Página e Limites e os relatórios ROAS na thread Intraday.",
+      "next_step": "Do not run or restore zero-pixel until a new explicit authorized instruction; continue ROAS and DTR under their current contracts.",
       "objective": "Manter cortes ROAS ativos apesar de atraso da dashboard e proteger spend em páginas possivelmente restritas sem notificação",
       "source": "discord:thread:1544416758998376509",
-      "state": "concluído: contrato, runners, testes, prompts/skills, schedule serial, cron inventory, knowledge registry e report-infra atualizados. tick real 16:08:31 et validou ambas as etapas; 14 campanhas ativas, 0 candidatas, 0 writes e 0 alertas pendentes.",
+      "state": "roas cut continuity remains active despite smart bidding delay. the zero-pixel stage created in this initiative was superseded by nicolas suspension on 2026-09-02; it is removed from the shared wrapper and has no active write/schedule.",
       "thread_id": "1544416758998376509",
-      "updated_at": "2026-09-01T20:12:10+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-RULES-AUDIT-20260829",
-      "next_step": "Não criar substitutas. Rodar o reconciliador em checks de release. Fechar com Nicolas a referência/template e budget da criação; implementar from_zero, placements e pre-stage. Resolver timestamp Messenger; depois validar canário aprovado e somente então avaliar automação do Diário/budget.",
+      "next_step": "Use the R5 completeness matrix and current route registry; never recreate operational banners or stale pending gates.",
       "objective": "Manter as seis rotas Eggbev fixas, separadas, auditáveis e reconciliadas com o contrato/runtime real",
       "source": "discord:thread:1543280854024060999; data/ares/discord/eggbev-fixed-routes.json; data/ares/meta-ads/audit/eggbev/six-fixed-routes-final-readback-20260829.json; tests/test_eggbev_fixed_routes.py; tests/test_eggbev_creation_intake.py",
-      "state": "auditoria final concluída: seis threads existem no parent correto, abertas/desbloqueadas, autoarchive 7 dias, nicolas+zeus+rodolfo presentes, um cabeçalho canônico pinado por rota e prompts dedicados idênticos em fonte/config versionado/runtime. registry e discord_threads têm os seis ids; operation.route_contracts agora tem as seis rotas. regras preserva título manual. reconciliador idempotente recupera 429 e usa zeus apenas para pin quando ares recebe 403. 111 testes passaram. clone v3.3 validate/plan está pronto; diário read-only; roas/leads seguem fail-closed por freshness messenger; criação from-zero ainda não está pronta.",
+      "state": "superseded by fixed-routes v2 and completeness audit r5: six routes remain canonical, but route banners/pinned identity were removed; creation/clone/runtime were later completed and engine is v3.4.2.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-30T01:10:35+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
@@ -583,52 +583,52 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-THREAD-ORGANIZATION-20260830",
-      "next_step": "When Nicolas finishes the Daily design, update only the Daily route and the Rules workflow summary with approved schedule, cadence and ranking criteria",
+      "next_step": "Maintain current route ownership and explicit supersession for future changes.",
       "objective": "Deep-review all Eggbev channel threads and publish organized canonical updates by functional route",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "completed",
+      "state": "superseded by route consolidation and daily v8 completion. all six functional routes have dedicated prompts/skills; daily design is complete but cron/post remain disabled.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-31T02:12:59+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-THREAD-ORGANIZATION-V2-20260831",
-      "next_step": "Daily cron/post remains pending a separate Nicolas approval after live dry-run review; clone_page_switch copied-adset remains blocked until Nicolas explicitly approves the alternate new-AdG recovery method",
+      "next_step": "No pending Nicolas method approval remains; preserve the fail-closed Engine account gate.",
       "objective": "Reread every live/archived Eggbev thread after Nicolas updates and republish each canonical route with current approved information",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "completed",
+      "state": "current state: daily v8 is complete/read-only without cron/post; clone_page_switch remains excluded from supported_modes after live meta failures and requires rodolfo-approved deterministic architecture before re-enable.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-31T04:54:20+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-TINA-C003-ALL-CLONES-20260830",
-      "next_step": "Aguardar Nicolas aprovar explicitamente mudança de método do DUP03: criar novo AdG no shell existente com promoted_object pg_5024, pausar AdG copiado de Page antiga, copiar 3 anúncios com mídia/copy preservadas e tracking/JSON pg_5024, validar por GET; sem deletar o AdG antigo.",
+      "next_step": "No recovery write remains for this request; use the serving-review audit and keep the mode fail-closed for future requests.",
       "objective": "Executar três testes de clonagem da campanha canônica 165 - Tina Walter - ENG - US - (pg_5071) C003: pure_clone, clone_prestaged e clone_page_switch, com nomes DUP01-DUP03 e início 00:00 ET.",
       "source": "discord:thread:1543333373945053184; state:data/ares/meta-ads/state/eggbev-clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01.json; audit:data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-dup03-partial-shell.json",
-      "state": "dup01 completo por shallow exact recovery e readback direto 1x1x3 active usd45. dup02 completo com assets 054/085/113, linhagem meta por title+checksum+orientation+duration, e drive 02_testing. dup03 parcial resumível: campanha e adg active, start 01/09 00:00 et, adg ainda page pg_5071, zero ads e zero possibilidade de delivery. meta rejeitou atualização de promoted_object page no adg copiado (subcode 1885090). lease liberado.",
+      "state": "superseded by the completed scoped recovery and serving review: the persisted dup03 shell received a target adg and same-page lineage ads; insights later confirmed serving. new clone_page_switch requests remain globally blocked.",
       "thread_id": "1543333373945053184",
-      "updated_at": "2026-08-31T04:23:52+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-UNIFIED-PRICING-REPORT-20260829",
-      "next_step": "Materializar em read-only o seletor de rota vertical/Messenger Pages/domain com readback de endpoint, campo, moeda, período, freshness e identidade; depois apresentar novo dry-run a Nicolas.",
+      "next_step": "Use the current route-specific renderers and exact joins; no standalone pricing selector task remains pending.",
       "objective": "Unificar no Diário Eggbev métricas Pricing, Meta Ads e Smart Bidding por campanha, incluindo custo por conversa iniciada, RPS, CPM e EPC sem inventar dados",
       "source": "discord:thread:1541578596253175858; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/meta-ads/audit/eggbev/daily-report/smart-bidding-direct-source-policy-20260829T195629-0400.json",
-      "state": "concluído com correção de fonte por nicolas: layout v3 preservado; rps, cpm, epc, avg_price, receita, roi e demais métricas disponíveis devem preferir campos diretos smart bidding via vertical, messenger pages ou domain. fórmula local é fallback rotulado. contrato e skill atualizados; extrator multi-rota permanece pendente; zero write, postagem ou cron.",
+      "state": "superseded by smart bidding parity v25 and daily v8 implementations: current reporting resolves route/field semantics, labels formula fallback, requires period/currency/freshness/identity and uses n/d on ambiguous coverage.",
       "thread_id": "1541578596253175858",
-      "updated_at": "2026-08-29T23:57:01+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
-      "next_step": "Executar a sequência: Nicolas fecha referência/template + budget; Ares implementa from-zero e placements/pre-stage; validar um canário explicitamente aprovado; resolver freshness Messenger; apresentar dry-run do Diário multi-rota; qualquer cron ou budget write exige plano e aprovação própria.",
+      "next_step": "Use current operation/account/route contracts; only explicit release/enablement gates remain.",
       "objective": "Finalizar a arquitetura Campaign Ops Eggbev com seis rotas e gates honestos por módulo",
       "source": "discord:thread:1543280854024060999; data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json; data/ares/discord/eggbev-fixed-routes.json",
-      "state": "baseline final revisada: threads 6/6 fixas e recuperáveis; 111 testes e py_compile pass; clone v3.3 pronto para requests gated; roas e limite agendados, mas roas termina fail-closed quando freshness messenger é não verificável; diário permanece read-only sem cron; criação from-zero aplica defaults corretos no intake mas está bloqueada por referência/budget, modo v3, runner, placements, pre-stage e elegibilidade.",
+      "state": "superseded baseline: six routes are active, from-zero and clone modes are on engine v3.4.2, roas controlled writes are proven, page restrictions are active, leads is scheduled dry-run hold, zero-pixel suspended, daily read-only without cron/post.",
       "thread_id": "1543280854024060999",
-      "updated_at": "2026-08-30T01:10:36+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
@@ -1073,12 +1073,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-reactivation-created-for-20260831",
-      "next_step": "Às 00:16 ET executar pre-read, revalidar denylist, ativar somente objetos necessários, readback batch e entregar resumo curto na thread.",
+      "next_step": "No action pending; never replay this one-shot.",
       "objective": "Reativar em execução única todas as campanhas Eggbev com gasto em 31/08, excluindo Page restrita, e preservar Corte/ROAS.",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
-      "state": "dry-run vivo por insights: 18 campanhas com gasto; 13 elegíveis não arquivadas, 13 ad sets e 39 ads; 3 campanhas pg_5071 excluídas por restrição e 2 arquivadas ignoradas; job determinístico no_agent agendado para 01/09 00:16 et; corte/roas ativo.",
+      "state": "one-shot executed once on 2026-09-01, completed ok and is disabled with no next run. it is historical evidence, not recurring automation.",
       "thread_id": "1544132397300449280",
-      "updated_at": "2026-09-01T01:01:44+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
@@ -1283,22 +1283,22 @@
     {
       "agent": "ares",
       "id": "eggbev-cron-reallocation-20260831",
-      "next_step": "Observar os próximos ticks naturais; o vídeo do Nicolas será analisado separadamente para resolver a fonte de freshness",
+      "next_step": "Re-run collision and lock analysis only for a future schedule change.",
       "objective": "Reorganizar os schedules Eggbev para eliminar colisões operacionais",
       "source": "discord:thread:1544122069933887628",
-      "state": "implemented_validated_zero_exact_target_collisions",
+      "state": "completed and superseded by current readback: roas :10, leads :16, dtr :03/:08/.../:58 +30s; zero-pixel suspended. the nicolas video was analyzed and its leads semantics promoted.",
       "thread_id": "1544122069933887628",
-      "updated_at": "2026-09-01T00:59:40+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "ares",
       "id": "eggbev-skill-route-cron-governance-20260831",
-      "next_step": "Rodolfo decide se deseja uma mudança separada dos três schedules Eggbev atuais; nenhuma agenda foi alterada nesta iniciativa",
+      "next_step": "Use current cron inventory and route map; no unresolved schedule decision remains in this checkpoint.",
       "objective": "Separar rotas Eggbev em skills funcionais e institucionalizar política global de anti-colisão de cron",
       "source": "discord:thread:1544122069933887628",
-      "state": "implemented_validated_existing_collisions_report_only",
+      "state": "superseded as a pending schedule decision: eggbev schedules were subsequently reallocated and validated; route skills are dedicated and engine remains shared centrally at v3.4.2.",
       "thread_id": "1544122069933887628",
-      "updated_at": "2026-09-01T00:03:13+00:00"
+      "updated_at": "2026-09-02T16:47:19+00:00"
     },
     {
       "agent": "zeus",
@@ -2032,5 +2032,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T16:32:43+00:00"
+  "updated_at": "2026-09-02T16:47:19+00:00"
 }
