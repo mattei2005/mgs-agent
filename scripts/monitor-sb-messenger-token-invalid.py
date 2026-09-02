@@ -1035,7 +1035,7 @@ async def run(args: argparse.Namespace) -> int:
         baseline = state or initial_state()
         baseline.setdefault('incidents', {})
         baseline['_meta'] = initial_state()['_meta']
-        baseline.update({'last_check': now_iso(), 'last_seen_id': max_id, 'delivered_ids': [], 'pending': None, 'consecutive_failures': 0, 'last_error': None})
+        baseline.update({'last_check': now_iso(), 'last_seen_id': max_id, 'delivered_ids': [], 'pending': None, 'consecutive_failures': 0, 'last_error': None, 'failure_alert_sent_for': 0})
         if not args.dry_run:
             save_state(state_path, baseline)
         print(json.dumps({'ok': True, 'mode': 'baseline', 'last_seen_id': max_id, 'alerts_seen': len(alerts), 'state_written': not args.dry_run}, ensure_ascii=False))
@@ -1117,7 +1117,7 @@ async def run(args: argparse.Namespace) -> int:
         state_path=state_path,
     )
     if not selected:
-        state.update({'last_check': now_iso(), 'consecutive_failures': 0, 'last_error': None})
+        state.update({'last_check': now_iso(), 'consecutive_failures': 0, 'last_error': None, 'failure_alert_sent_for': 0})
         if not args.dry_run:
             save_state(state_path, state)
         print(json.dumps({'ok': True, 'mode': 'noop', 'last_seen_id': last_seen, 'alerts_seen': len(alerts), 'new_alerts': 0, 'refreshed_incidents': refreshed_incidents, 'daily': daily_stats}, ensure_ascii=False))

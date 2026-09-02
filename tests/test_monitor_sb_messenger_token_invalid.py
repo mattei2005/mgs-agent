@@ -498,6 +498,35 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(loaded['last_delivery']['message_ids'], [])
         self.assertEqual([method for method, _ in calls], ['GET'])
 
+    def test_noop_success_resets_failure_alert_streak_marker(self):
+        with tempfile.TemporaryDirectory() as directory:
+            state_path = Path(directory) / 'state.json'
+            state = mod.initial_state()
+            state['last_seen_id'] = 100
+            state['consecutive_failures'] = 6
+            state['failure_alert_sent_for'] = 3
+            state['last_error'] = {'type': 'RuntimeError', 'message': 'upstream unavailable'}
+            state['daily']['date'] = datetime.now(mod.NY).date().isoformat()
+            mod.save_state(state_path, state)
+            args = SimpleNamespace(
+                cleanup_old_messages=False,
+                fixture=str(FIXTURE),
+                test_alert=False,
+                baseline=False,
+                dry_run=False,
+                state_path=str(state_path),
+                channel_id='123',
+            )
+            output = io.StringIO()
+            with patch('sys.stdout', output):
+                result = asyncio.run(mod.run(args))
+            loaded = mod.load_state(state_path)
+        self.assertEqual(result, 0)
+        self.assertEqual(json.loads(output.getvalue())['mode'], 'noop')
+        self.assertEqual(loaded['consecutive_failures'], 0)
+        self.assertEqual(loaded['failure_alert_sent_for'], 0)
+        self.assertIsNone(loaded['last_error'])
+
     def test_malformed_body_fails_closed(self):
         data = self.fixture()
         data['notifications'][0]['BODY'] = '{bad json'
