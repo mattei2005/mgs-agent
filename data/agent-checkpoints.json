@@ -622,6 +622,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-SUSPENSION-20260902",
+      "next_step": "Não reativar a etapa de pixel zero até nova instrução explícita de gestor autorizado; quando houver ordem, restaurar a etapa no wrapper, reabilitar runtime e validar por readback sem alterar LEADS ou restrição DTR",
+      "objective": "Manter somente o guardrail Eggbev de pixel zero suspenso e reativar exclusivamente campanhas pausadas por ele, preservando LEADS e restrição DTR",
+      "source": "discord:thread:1543312825890381865;data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json;data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/zero-pixel-result-guardrail.json;data/ares/meta-ads/audit/guardrails/Eggbev-US-CC-EN-BOT/zero-pixel-results/manual-reactivation/run-20260902T035949-0400.json",
+      "state": "concluído: etapa zero-pixel removida do wrapper compartilhado e runtime/write_enabled=false; cron raiz segue ativo somente para restrição dtr; leads segue enabled; 2 campanhas pg_5072 com pausa comprovada pelo audit zero-pixel foram reativadas com post único e get final active; zero budget/adset/ad writes",
+      "thread_id": "1543312825890381865",
+      "updated_at": "2026-09-02T08:03:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CC-US-ES-EN-CREATIVE-REVIEW-20260820",
       "next_step": "Aguardar Kelly continuar a revisão e listar outros bons/ruins ou arquivos classificados no idioma incorreto. Manter os 22 READY restantes RESERVADO_PELO_GESTOR e ares_eligible=false; aplicar somente mudanças exatas com reconciliação de linhagem e readback.",
       "objective": "Concluir revisão humana dos criativos CC_US_ES e CC_US_EN processados em 20/08/2026",
@@ -1942,5 +1952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T05:49:49+00:00"
+  "updated_at": "2026-09-02T08:03:21+00:00"
 }

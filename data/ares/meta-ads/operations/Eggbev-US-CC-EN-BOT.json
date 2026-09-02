@@ -1854,12 +1854,21 @@
       "scheduler_backend": "existing root page-protection wrapper",
       "wrapper": "/root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh",
       "wrapper_stage": 2,
-      "write_enabled": true
+      "stage_enabled": false,
+      "suspended_at_et": "2026-09-02T03:55:45-04:00",
+      "suspended_by": "Nicolas Holanda",
+      "suspended_by_discord_id": "1055570806945620030",
+      "suspension_scope": "zero-pixel stage only; LEADS and DTR restriction guardrails remain enabled",
+      "resume_gate": "new explicit instruction from Nicolas, Rodolfo or another authorized campaign manager",
+      "write_enabled": false
     },
     "schedule": {
       "cron": "3-58/5 * * * *",
+      "enabled": false,
+      "execution_state": "disabled_stage_removed_from_shared_wrapper",
       "internal_time_gate": "run is no-op before 03:00 ET; evaluate on every existing protection tick from 03:03:30 onward",
       "new_cron_created": false,
+      "shared_wrapper_continues_for": "DTR restriction transition only",
       "shared_operation_lock": "data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock",
       "stagger_seconds": 30,
       "timezone": "America/New_York"
@@ -2844,10 +2853,11 @@
         },
         {
           "candidates": 0,
+          "enabled": false,
           "internal_gate": "03:00 ET",
           "last_campaigns_paused_confirmed": 0,
-          "last_run_at_et": "2026-09-01T16:08:31.520147-04:00",
-          "last_status": "ok",
+          "last_run_at_et": "2026-09-02T03:53:32.122779-04:00",
+          "last_status": "suspended_by_nicolas",
           "name": "zero pixel results after US$2",
           "runner": "scripts/ares-eggbev-zero-pixel-guardrail.py",
           "order": 2
