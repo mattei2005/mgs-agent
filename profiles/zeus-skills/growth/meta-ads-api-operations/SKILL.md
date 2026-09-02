@@ -23,6 +23,21 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 3. **Write tests must be controlled.** Campaigns/adsets/ads should be created `PAUSED`, with budget guardrails and a known loser/source campaign.
 4. **Cleanup partials immediately.** If any write step fails after creating a campaign/adset/adcreative, mark partial campaign `DELETED` and verify via GET before reporting.
 5. **Interpret failures by endpoint.** If campaign/adset/adcreative creation succeeds but `POST /ads` fails, do not call it a general account/IP failure.
+6. **Preflight credential cutovers before confirmation.** Inventory exact 1Password item IDs/titles, compare paired token fields in-process without printing values or hashes, then prove app/user/account/scopes and the live Marketing API tier. Do not change active references until the critical credential confirmation is received.
+
+### Meta app/token cutover preflight
+
+For a requested production token replacement:
+
+1. Inventory exact current and candidate 1Password items. Similar titles or date-prefixed duplicates are distinct candidates; never choose by partial title alone.
+2. Fetch each item once with `op item get --format json --reveal`, select the first **non-empty** approved secret field (`credential`, then `token`), and keep values only in process memory.
+3. When both a generic token item and an account-specific item were supplied, verify their secrets are equal internally. Report only item names, lengths and equality; never print the value or a secret-derived hash.
+4. Probe the candidate read-only with `/debug_token`, `/me`, paginated `/me/permissions`, the exact `act_{account_id}` identity, and a one-row campaign GET. Validate expected `app_id`, user identity, account name/status/currency/timezone and every required scope.
+5. Parse `X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` independently. Advanced Access on every scope does **not** prove Marketing API Full Access; only a live `ads_api_access_tier=standard_access` does. If the candidate still returns `development_access`, say before confirmation that the cutover will not remove the development cooldown.
+6. Present the critical confirmation with exact account scope, current app/user/tier, candidate app/user/tier, rollback preservation and validation plan. Do not widen the swap to another account merely because it shares the old token or app key.
+7. After confirmation, use an app-specific key/cache path, retain the old reference/cache for rollback, update every active consumer, run a read-only/dry-run smoke and read back the credential item actually resolved. Deleting/revoking the prior token is a separate critical operation.
+
+Detailed permission/tier and cutover verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
 
 ## Standard diagnostic flow
 
@@ -277,7 +292,9 @@ For manual reauthentication, keep the protected persistent profile under an excl
 
 For an explicitly authorized batch, checkpoint every account independently and persist unique IDs before continuing. Meta list rows are virtualized, `selected_asset_id` is not necessarily the real Ad Account ID, and an error modal can be ambiguous about whether the write committed. Never retry an ambiguous creation until a before/after asset-ID readback proves that no new account appeared. Do not randomize timing to simulate a human or evade activity controls; use a transparent fixed cadence and stop on any security/restriction gate. Direct person assignment is a separate permission change: if an account is BM-owned but shows `0 people`, report the gap and get the required confirmation before assigning anyone.
 
-Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, BM target correction, batch-safe ID reconciliation, new-portfolio limit handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md`.
+For long-running batches, keep Rodolfo informed without streaming raw logs. Default to a concise progress checkpoint after authentication/preflight, every five confirmed creations, and immediately on any pause, retry, block, or stop; if he asks for a tighter cadence, report after each confirmed account when the platform permits controlled in-thread updates. Every checkpoint must state `Criadas X/Y`, `Faltam Z`, and the current state. A partial stop must clearly separate validated creations from the unattempted remainder, and automatic background-completion notifications remain disabled.
+
+Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, BM target correction, batch-safe ID reconciliation, new-portfolio limit handling, repeated generic rejection handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md` and `references/meta-business-ad-account-batch-reconciliation.md`.
 
 ## Meta Business Manager inventory / asset access audits
 

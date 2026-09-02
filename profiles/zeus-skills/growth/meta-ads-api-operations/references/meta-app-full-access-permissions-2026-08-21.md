@@ -102,6 +102,29 @@ Rodolfo's approved architecture remains User Access Token; System User is not re
 - use server/IP allow lists where compatible;
 - never expose tokens/app secrets in logs or Discord.
 
+### Read-only cutover gate for a replacement token
+
+Before changing any production reference:
+
+```text
+1Password inventory  exact current/candidate item IDs and titles
+Pair consistency      generic token item == account-specific token item
+/debug_token          expected app_id, user_id, valid and expiry metadata
+/me                    expected human identity
+/me/permissions        every required scope granted; none silently declined
+act_{account_id}       exact account, active state, currency and timezone
+campaigns?limit=1      HTTP 200 plus both quota-header families parsed
+```
+
+Operational details:
+
+- Similar or date-prefixed 1Password titles are separate candidates. Resolve exact IDs first; never choose the newest-looking partial match.
+- Some account items contain an empty `credential` field and the real secret in `token`. Select the first non-empty approved field rather than stopping on an empty preferred label.
+- If the generic and account-specific entries disagree, stop as ambiguous. Compare only in process and report equality plus lengths—never values or hashes.
+- A token can be valid, see the target account and have every requested Advanced Access scope while the live header still says `development_access`. That candidate is functionally authorized but does not deliver Full Access throughput.
+- The critical confirmation must disclose that tier result and name the exact account being changed. Accounts sharing the current token remain untouched unless explicitly included.
+- Preserve the previous item reference and protected cache as rollback; revocation/deletion is a separate operation.
+
 ## Reviewer demonstration
 
 1. OAuth/business asset selection.

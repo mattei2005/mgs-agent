@@ -281,6 +281,16 @@
       "updated_at": "2026-08-31T04:15:03+00:00"
     },
     {
+      "agent": "zeus",
+      "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
+      "next_step": "Criar backup, atualizar somente consumidores ativos da conta 13, executar testes e dry-run, validar Graph e fechar audit/inventário/REPORT-INFRA",
+      "objective": "Trocar a conta Creditoparaveiculo BR-CAR-BR 13 G006 do app/token Rafael para o app 1299247318762949 e token Roosevelt, sem writes Meta",
+      "source": "discord:thread:1544757670412820541;1password-items:APP NOVO 02/09;account:1046241194533786",
+      "state": "preflight concluído: token novo válido, scopes completos, conta visível, tier development_access, nenhum writer ativo e confirmação crítica de rodolfo na mensagem 1544760055004397618",
+      "thread_id": "1544757670412820541",
+      "updated_at": "2026-09-02T17:26:45+00:00"
+    },
+    {
       "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-20260821",
       "next_step": "Operação normal nos checkpoints 08/12/14/16/20; observar o primeiro ciclo real e exigir readback Meta para qualquer scale, pause ou reactivation.",
@@ -1563,12 +1573,12 @@
     {
       "agent": "zeus",
       "id": "meta-digital-trust-adaccounts-30-20260902",
-      "next_step": "Aguardar nova autorização após cooldown/normalização da Meta para tentar somente as 13 restantes; reconciliar live antes de retomar.",
+      "next_step": "Nenhuma tentativa adicional até nova autorização explícita de Rodolfo e nova verificação live do limite/estado da BM.",
       "objective": "Criar 30 contas de anúncio adicionais 001 na BM Digital Trust com America/Los_Angeles, USD, My business, sem pagamento e cadência fixa de 2 minutos.",
-      "source": "discord:1544113212075548683 message:1544746486191890443",
-      "state": "blocked-partial: 17/30 criadas; 17 ids únicos; 17/17 live; owner digital trust 17/17; nome 001 17/17; rodolfo full access 17/17 no readback de criação; cadência mínima 129907ms; zero violações. conta 18 falhou duas vezes com unable to add ad account e zero side effect confirmado após cada tentativa.",
+      "source": "discord:1544113212075548683 message:1544760907522117733",
+      "state": "paused-by-user: 17/30 criadas e validadas; 13 restantes. rodolfo informou que o limite da bm caiu novamente para 100 e determinou deixar o lote como está por enquanto.",
       "thread_id": "1544113212075548683",
-      "updated_at": "2026-09-02T17:23:45+00:00"
+      "updated_at": "2026-09-02T17:28:38+00:00"
     },
     {
       "agent": "zeus",
@@ -2042,5 +2052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T17:23:45+00:00"
+  "updated_at": "2026-09-02T17:28:38+00:00"
 }
