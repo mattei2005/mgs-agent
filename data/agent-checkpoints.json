@@ -1853,12 +1853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-update-20260901",
-      "next_step": "Nenhum; atualização encerrada. Manter v0.20.5 como rollback durante burn-in.",
+      "next_step": "Burn-in de 24–48h. Tratar fallback de modelo, compression_threshold e limpeza de checkouts somente em threads separadas com nova autorização.",
       "objective": "Atualizar Hermes para v0.21.0 preservando customizações MGS",
-      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/post-activation-validation.json",
-      "state": "pass: hermes v0.21.0 ativado e validado; fechamento retomado sem restart duplicado",
-      "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-02T02:51:24+00:00"
+      "source": "discord:1544537406613626913#1544537406613626913; data/infra-inventory.json#hermes-v0210-29112bef-20260901",
+      "state": "concluído: v0.21.0 ativo por cutover manual; launcher, stage head, 3 gateways e respostas discord lidos; validador pós-ativação não executado por instrução de rodolfo",
+      "thread_id": "1544537406613626913",
+      "updated_at": "2026-09-02T02:54:13+00:00"
     },
     {
       "agent": "zeus",
@@ -1892,5 +1892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T02:51:24+00:00"
+  "updated_at": "2026-09-02T02:54:13+00:00"
 }

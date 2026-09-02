@@ -9575,7 +9575,10 @@
         "classification": "new upstream after successful frozen cutover; intentionally not ported in closure",
         "head_vs_origin": "behind=1 ahead=1 because MGS carried commit remains on frozen target"
       },
-      "superseded_by": "hermes-v0210-29112bef-20260901"
+      "superseded_by": "hermes-v0210-29112bef-20260901",
+      "superseded_at": "2026-09-01T22:53:50-04:00",
+      "current_role": "validated rollback runtime",
+      "rollback_retained": true
     },
     {
       "id": "ares-cpv-creative-performance-lifecycle-retest-20260824",
@@ -11228,7 +11231,7 @@
       "authorization_message_id": "1544491501520691302",
       "repair_authorization_message_id": "1544522908829753445",
       "source_thread_id": "1544371507491242044",
-      "status": "activated_validated",
+      "status": "activated_manual_live_verified",
       "installed_before": "3eb5b8bc8fbe45e7e51a42c69a7fa59c67bcc9fb",
       "target_upstream_sha": "29112bef099274229cadff79cdff7bf7b99c4b77",
       "target_version": "0.21.0",
@@ -11269,7 +11272,141 @@
         "reboot_marker_absent": true,
         "dpkg_audit_clean": true
       },
-      "validated_at": "2026-09-01T22:51:24.412792-04:00"
+      "validated_at": "2026-09-01T22:51:24.412792-04:00",
+      "transports": {
+        "report_message_id": "1544540399576813579",
+        "report_readback_ok": true,
+        "thread_message_id": "",
+        "thread_readback_ok": false,
+        "thread_delivery": "normal_current_response"
+      },
+      "active_runtime_path": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef",
+      "active_runtime_sha": "875938622f26ce46d1db3450a3d85df32e33dd43",
+      "active_runtime_metadata_version": "0.21.0",
+      "canonical_launcher": "/root/.local/bin/hermes",
+      "active_wrapper_target": "/root/.local/bin/hermes-v0210-stable-29112bef-mgs",
+      "activation_method": {
+        "mode": "manual_terminal_cutover",
+        "actor": "Rodolfo Mattei",
+        "reconciled_by": "zeus",
+        "source_message_id": "1544537406613626913",
+        "source_thread_id": "1544537406613626913",
+        "window_et": "2026-09-01 22:27-22:35 EDT",
+        "order": [
+          "atena",
+          "ares",
+          "zeus"
+        ],
+        "automatic_finalizer_executed": false,
+        "automatic_post_activation_validator_executed": false,
+        "restart_or_rollback_executed_by_reconciliation": false
+      },
+      "gateway_transition": {
+        "old_pids": {
+          "atena": 743,
+          "ares": 742,
+          "zeus": 776
+        },
+        "new_pids": {
+          "atena": 463550,
+          "ares": 464072,
+          "zeus": 465916
+        },
+        "started_at_et": {
+          "atena": "2026-09-01 22:28:06 EDT",
+          "ares": "2026-09-01 22:29:59 EDT",
+          "zeus": "2026-09-01 22:35:09 EDT"
+        },
+        "zeus_shutdown": {
+          "sigterm_at_et": "2026-09-01 22:31:28 EDT",
+          "sigkill_at_et": "2026-09-01 22:35:09 EDT",
+          "old_pid_absent_after": true
+        }
+      },
+      "live_readback": {
+        "launcher_literal": "/root/.local/bin/hermes-v0210-stable-29112bef-mgs",
+        "stage_branch": "mgs-port-v0210-20260901",
+        "stage_head": "875938622f26ce46d1db3450a3d85df32e33dd43",
+        "stage_worktree_clean": true,
+        "services": {
+          "atena": {
+            "active_state": "active",
+            "sub_state": "running",
+            "pid": 463550,
+            "exec_main_status": 0,
+            "nrestarts": 0
+          },
+          "ares": {
+            "active_state": "active",
+            "sub_state": "running",
+            "pid": 464072,
+            "exec_main_status": 0,
+            "nrestarts": 0
+          },
+          "zeus": {
+            "active_state": "active",
+            "sub_state": "running",
+            "pid": 465916,
+            "exec_main_status": 0,
+            "nrestarts": 0
+          }
+        },
+        "discord_responses": {
+          "atena": {
+            "source_message_id": "1544534639199256618",
+            "reply_message_id": "1544534745830924368",
+            "readback": true
+          },
+          "ares": {
+            "source_message_id": "1544534989008535582",
+            "reply_message_id": "1544535109477081140",
+            "readback": true
+          },
+          "zeus": {
+            "source_message_id": "1544537406613626913",
+            "current_turn_active": true
+          }
+        },
+        "related_transient_units_active": false
+      },
+      "profile_mirror_readback": {
+        "configs_equal": "3/3",
+        "souls_equal": "3/3",
+        "ares_live_mirror_sha256": "cdc24f47463d316be898a3f3f97170a629af8f0479aea9132243a423c1ec7614",
+        "ares_deferred_target_applied": false,
+        "ares_deferred_target_sha256": "7602b928aa3e2553d98787e850080604f904fcf1e2b64e808b3cf6e0141a314e",
+        "classification": "current live and versioned mirrors are byte-equal; deferred Ares policy target was not part of the manual launcher cutover"
+      },
+      "prior_automated_attempt": {
+        "activation_ready_at_et": "2026-09-01 21:20:32 EDT",
+        "rollback_at_et": "2026-09-01 21:24:23 EDT",
+        "rollback_gate": "immutable_snapshot",
+        "classification": "automatic validator snapshot gate; no v0.21.0 runtime failure observed"
+      },
+      "provider_incident_observed": {
+        "provider": "openai-codex",
+        "model": "gpt-5.6-sol-900k",
+        "error": "Our servers are currently overloaded. Please try again later.",
+        "zeus_last_failed_context_tokens_approx": 383677,
+        "auth_or_model_not_found_observed": false
+      },
+      "rollback": {
+        "runtime_path": "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
+        "runtime_head": "3eb5b8bc8fbe45e7e51a42c69a7fa59c67bcc9fb",
+        "wrapper": "/root/.local/bin/hermes-v0205-main-14201763-mgs",
+        "retained": true
+      },
+      "closure_scope": {
+        "post_activation_validator_run": false,
+        "activation_finalizer_run": false,
+        "rollback_run": false,
+        "gateway_restart_run": false,
+        "disk_cleanup_run": false,
+        "config_changed": false,
+        "launcher_changed_by_zeus_reconciliation": false,
+        "checkout_changed": false
+      },
+      "updated_at": "2026-09-01T22:53:50-04:00"
     }
   ],
   "profile_skill_references": [
@@ -16447,5 +16584,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-01T22:51:24.412792-04:00"
+  "updated_at": "2026-09-01T22:53:50-04:00"
 }
