@@ -14,9 +14,21 @@
     "rodolfo_messages": 144,
     "nicolas_messages": 181,
     "human_attachments": 55,
-    "import_errors": 0
+    "import_errors": 0,
+    "human_messages_in_scope_since_first_eggbev_nicolas": 197,
+    "human_attachments_in_scope_since_first_eggbev_nicolas": 29,
+    "human_attachments_before_scope": 26
   },
-  "first_nicolas_message": {
+  "external_thread_ids": [
+    "1539394253526925384",
+    "1539434208408375426",
+    "1539832402744975450",
+    "1543263056262594641",
+    "1543266576273248428",
+    "1543778490610884679"
+  ],
+  "import_errors": [],
+  "first_nicolas_message_global_reference": {
     "message_id": "1540411117904601289",
     "thread_id": "1539832402744975450",
     "thread_name": "CPV 13 G006 Intraday",
@@ -29,13 +41,12 @@
     "content": "ares, me gera um intraday completo do dia de hoje. \nGAM hoje esta com muito delay. Quero entender se consigo continuar operando as campanhas pela coluna de ROAS. Hoje a receita pela dash nao deve estar confiavel. Vamos  analisar estes padroes juntos, quem sabe encontramos algo \n\n<ate o momento tenho apenas suposicoes, mas depois de ver os dados com voce aprenderemos juntos>",
     "attachments": []
   },
-  "external_thread_ids": [
-    "1539394253526925384",
-    "1539434208408375426",
-    "1539832402744975450",
-    "1543263056262594641",
-    "1543266576273248428",
-    "1543778490610884679"
-  ],
-  "import_errors": []
+  "first_nicolas_message_in_eggbev_channel": {
+    "message_id": "1543269726518517883",
+    "thread_id": "1543269726518517883",
+    "thread_name": "Ares status operacional - Nicolas",
+    "timestamp_utc": "2026-08-29T14:42:55.367000+00:00",
+    "timestamp_et": "2026-08-29T10:42:55.367000-04:00",
+    "content": "ares, me faca um relatorio rapido de como estao as regras para este agente bot-eggbev-us-cc-en-01-g006"
+  }
 }
