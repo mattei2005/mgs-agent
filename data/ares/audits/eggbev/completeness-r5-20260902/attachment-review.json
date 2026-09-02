@@ -1,0 +1,57 @@
+{
+  "scope_start": {
+    "first_nicolas_message_in_eggbev_parent": "1543269726518517883",
+    "timestamp_utc": "2026-08-29T14:42:55.367000+00:00",
+    "timestamp_et": "2026-08-29T10:42:55-04:00"
+  },
+  "attachments_before_scope": {
+    "count": 26,
+    "status": "classified_out_of_period_by_timestamp"
+  },
+  "attachments_in_scope": {
+    "count": 29,
+    "downloaded": 29,
+    "visually_reviewed": 29,
+    "unreviewed": 0,
+    "review_notes": [
+      {"attachment_id":"1543305964181262497","class":"interface_evidence","finding":"Ads Manager campaign-level reference with Purchase ROAS sort indicator and core performance columns; visible rows are not numerically monotonic, so the image alone does not prove the actual sort order or clone threshold."},
+      {"attachment_id":"1543308066261573662","class":"interface_evidence","finding":"Smart Bidding page table exposes UTM_CAMPAIGN, FB Page, LEADS_TOTAL and LEADS; confirms LEADS—not LEADS_TOTAL—is the relevant visible balance, but the screenshot is historical state, not a durable threshold definition by itself."},
+      {"attachment_id":"1543481532042182687","class":"report_layout_reference","finding":"Compact CPV reference with 14 columns, monospaced alignment, R/E signals and abbreviated actions; used as visual inspiration, not as Eggbev metric policy."},
+      {"attachment_id":"1543481532386119840","class":"ads_manager_layout_reference","finding":"Wide Ads Manager header with Campaigns/Ad sets/Ads selections and performance columns; no final Eggbev report layout or thresholds shown."},
+      {"attachment_id":"1543577175180181504","class":"historical_ui_defect","finding":"Long canonical-route banner and duplicated pin notices created visual noise; supports the later no-banner/no-pinned-route policy."},
+      {"attachment_id":"1543595966559420596","class":"historical_ui_defect","finding":"Report headers were wrapped and horizontally split into fragments such as Cost per click/subscriber and Broadcast revenue; confirms the legibility defect Nicolas requested to fix."},
+      {"attachment_id":"1543646978947424287","class":"report_layout_reference","finding":"Ideal CPV desktop layout uses repeated monospaced headers, fixed columns, ample spacing and R/E/action icons."},
+      {"attachment_id":"1543679475529552023","class":"intermediate_creation_state","finding":"Ad set editor showed dataset Eggbev-US-CC-EN but Conversion event still unselected; evidence of an incomplete intermediate draft, not final policy."},
+      {"attachment_id":"1543679475839926282","class":"intermediate_creation_state","finding":"Copy editor showed mixed headlines, five-star description, Apply now CTA and disabled text optimization; no event or placements visible."},
+      {"attachment_id":"1543679476133535794","class":"approved_copy_reference","finding":"Three marked headlines APPLY NOW, CARD APPROVED and APPLY CARD, five-star description, Apply now CTA, empty Primary text and disabled text/translation optimization."},
+      {"attachment_id":"1543732127038709921","class":"event_reference","finding":"AdG1 editor shows dataset Eggbev-US-CC-EN and selected active event eggbev-pv-u; screenshot still represents editor/draft state, while publication requires later readback."},
+      {"attachment_id":"1543751326738030622","class":"one_time_creative_request_evidence","finding":"Discord naming map shows CC_US_EN_VID_AVAILABLE_LIMIT_PV_112 through PV_132; campaign count, USD45 and 70% usage are one-time request details, not permanent defaults."},
+      {"attachment_id":"1543753979299635220","class":"historical_report_evidence","finding":"Historical report listed three ad cuts with spend USD0 and ROAS N/D; useful for chronology of Phase 2 behavior, not proof of current state."},
+      {"attachment_id":"1543762704223699126","class":"cropped_report_reference","finding":"Partial R/E and CPM cells with N/D; insufficient alone to define ROI color thresholds."},
+      {"attachment_id":"1543762704592928788","class":"smart_bidding_reference","finding":"Messenger Pages table shows paired Revenue/Profit/ROI values and exact Page/UTM/account rows; second values are arithmetically coherent but the screenshot contains no explicit Estimated legend."},
+      {"attachment_id":"1543769928924921977","class":"bugged_creative_context","finding":"Campaign-level selection for Amy Shook pg_5024, but no creative preview; does not visually prove the asset bug."},
+      {"attachment_id":"1543769929348812950","class":"bugged_creative_target","finding":"Ad-level row identifies AD 02 / CC_US_EN_VID_AVAILABLE_LIMIT_PV_038 as the manager-designated invalid target; screenshot alone does not prove corruption, so invalidation authority comes from Nicolas's text."},
+      {"attachment_id":"1543797927988699336","class":"ad_level_action_reference","finding":"Ads Manager is clearly at Ad level with per-row toggles, metrics and 4,935 ads; confirms cuts are performed on ads even when budget comes from campaign CBO."},
+      {"attachment_id":"1543815920445558885","class":"approved_report_layout_reference","finding":"Ideal wide desktop table with 16 columns, fixed monospaced spacing, Page, Ads detail, ROI real/estimated, Leads and action signals."},
+      {"attachment_id":"1543815920818982992","class":"rejected_report_layout_reference","finding":"Compressed table leaves Ads crowded against ROI columns and wastes width after Action; concrete spacing/grid defect."},
+      {"attachment_id":"1543826918686720020","class":"human_instruction_evidence","finding":"Rodolfo explicitly wrote 'pode deixar elas pra rodar agora'; screenshot contains no technical readback and belongs to referenced CPV context."},
+      {"attachment_id":"1543847989708198008","class":"template_name_problem_evidence","finding":"Messenger JSON modal shows prior Template name 'Start conversations 08/30/26', not JSON-AGT; supports Nicolas's later prospective naming correction, but image alone does not prove the new name was saved."},
+      {"attachment_id":"1543850912118870066","class":"one_time_pacing_incident","finding":"Thirteen active campaigns at USD45 show uneven early spend, with maximum visible consumption about 80.7%; screenshot does not expose 01:10 time, timezone or cause, so no causal rule can be inferred."},
+      {"attachment_id":"1543859561780215919","class":"daily_layout_reference","finding":"Desktop consolidated table with 16 columns and Page/UTM grouping; visible pg order is descending in the example, but Broadcast revenue is not shown and remains a separate human requirement."},
+      {"attachment_id":"1543974826513797201","class":"smart_bidding_parity_evidence","finding":"Messenger Pages values for Eggbev Pages/UTMs show exact Investment, paired Revenue/Profit/ROI and operational metrics; screenshot demonstrates the reference source but not a second report for direct visual parity."},
+      {"attachment_id":"1544107003557716018","class":"report_regression_evidence","finding":"Part 2/3 table retains some emojis, but Part 3/3 content is cut and Ads markers show degraded glyphs; confirms partial—not global—emoji/layout regression."},
+      {"attachment_id":"1544107004119744622","class":"report_regression_evidence","finding":"Second regression screenshot shows per-ad stop/check markers, negative ROI columns and cropped CTR/rows; supports the fixed pagination/header requirement."},
+      {"attachment_id":"1544167131309023303","class":"one_time_file_reference","finding":"Exact filename Record_2026_08_31_22_04_13_66.mp4; no reusable rule or content visible in the screenshot."},
+      {"attachment_id":"1544364459009777724","class":"authority_drift_evidence","finding":"Old report said budget write required Rodolfo/Geizian and envelope; Rodolfo's accompanying instruction superseded that for Eggbev by stating Nicolas controls without Rodolfo approval."}
+    ]
+  },
+  "visual_new_durable_rules_missing_from_current_manual": [],
+  "visual_historical_or_one_time_items_correctly_not_promoted": [
+    "one-time 9/12-campaign request and 70% creative mix",
+    "single pacing incident",
+    "specific PV_038 invalidation",
+    "specific video filename",
+    "referenced CPV continuity incident",
+    "intermediate unpublished creation screens"
+  ]
+}
