@@ -108,7 +108,8 @@
     679061,
     679080,
     679130,
-    679359
+    679359,
+    679496
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1202,19 +1203,56 @@
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
+    },
+    "digital-trust|zytiva|17|715": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-02T16:07:14.000Z",
+        "domain": "zytiva",
+        "notification_id": 679496,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "715",
+        "segurador_name": "Gia Huy",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-09-02T12:12:16-04:00",
+      "message_ids": [
+        "1544741760671154269"
+      ],
+      "notification_ids": [
+        679496
+      ],
+      "opened_at": "2026-09-02T12:12:15-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     }
   },
-  "last_check": "2026-09-02T11:57:15-04:00",
+  "last_check": "2026-09-02T12:12:16-04:00",
   "last_delivery": {
-    "at": "2026-09-02T08:12:15-04:00",
+    "at": "2026-09-02T12:12:16-04:00",
     "cursor_ids": [
-      679359
+      679496
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1544741760671154269"
+    ],
+    "notification_ids": [
+      679496
+    ]
   },
   "last_error": null,
-  "last_seen_id": 679359,
+  "last_seen_id": 679496,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,
