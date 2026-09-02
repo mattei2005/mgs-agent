@@ -11231,7 +11231,7 @@
       "authorization_message_id": "1544491501520691302",
       "repair_authorization_message_id": "1544522908829753445",
       "source_thread_id": "1544371507491242044",
-      "status": "activated_manual_live_verified",
+      "status": "activated_validated",
       "installed_before": "3eb5b8bc8fbe45e7e51a42c69a7fa59c67bcc9fb",
       "target_upstream_sha": "29112bef099274229cadff79cdff7bf7b99c4b77",
       "target_version": "0.21.0",
@@ -11373,9 +11373,13 @@
         "configs_equal": "3/3",
         "souls_equal": "3/3",
         "ares_live_mirror_sha256": "cdc24f47463d316be898a3f3f97170a629af8f0479aea9132243a423c1ec7614",
-        "ares_deferred_target_applied": false,
         "ares_deferred_target_sha256": "7602b928aa3e2553d98787e850080604f904fcf1e2b64e808b3cf6e0141a314e",
-        "classification": "current live and versioned mirrors are byte-equal; deferred Ares policy target was not part of the manual launcher cutover"
+        "ares_deferred_target_applied_current_readback": false,
+        "validation_result_claimed_ares_soul_target": true,
+        "current_residual": "live and versioned Ares SOUL are byte-equal but remain on the pre-cutover bytes; target policy sentence is not active",
+        "runtime_blocker": false,
+        "action_taken": false,
+        "action_requires_confirmation": true
       },
       "prior_automated_attempt": {
         "activation_ready_at_et": "2026-09-01 21:20:32 EDT",
@@ -11396,18 +11400,36 @@
         "wrapper": "/root/.local/bin/hermes-v0205-main-14201763-mgs",
         "retained": true
       },
-      "closure_scope": {
-        "post_activation_validator_run": false,
-        "activation_finalizer_run": false,
-        "rollback_run": false,
-        "gateway_restart_run": false,
-        "disk_cleanup_run": false,
-        "config_changed": false,
-        "launcher_changed_by_zeus_reconciliation": false,
-        "checkout_changed": false
+      "updated_at": "2026-09-01T23:07:34-04:00",
+      "concurrent_validation_reconciliation": {
+        "classification": "authorized concurrent action reconciled; not an anomaly",
+        "validation_thread_id": "1544536465772511303",
+        "resume_authorization_message_id": "1544536929448624138",
+        "current_reconciliation_message_id": "1544537406613626913",
+        "mode": "foreground acceptance over live runtime; no duplicate restart",
+        "state": "activated_validated",
+        "overall": true,
+        "guard": "475 passed + 6 subtests",
+        "regression": "286 passed + 4 skipped",
+        "smokes": "3/3 rc=0 exact marker",
+        "configs": "4/4",
+        "operational_auth": "3/3",
+        "services_and_discord": "3/3",
+        "final_status_path": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled/final-status.json"
       },
-      "updated_at": "2026-09-01T22:58:58-04:00",
       "final_report_infra": {
+        "status": "sent_and_get_readback_confirmed",
+        "channel_id": "1498132022634483894",
+        "message_id": "1544540399576813579",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false,
+        "required_fields_readback": true,
+        "subject": "Hermes v0.21.0 activated_validated"
+      },
+      "reconciliation_report_infra": {
         "status": "sent_and_get_readback_confirmed",
         "channel_id": "1498132022634483894",
         "message_id": "1544541506801770587",
@@ -11424,7 +11446,21 @@
           "Evidência"
         ],
         "required_fields_readback": true,
-        "readback_at": "2026-09-01T22:58:58-04:00"
+        "readback_at": "2026-09-01T22:58:58-04:00",
+        "classification": "second report caused by overlapping closure sessions; retained for audit, not deleted",
+        "subject": "manual cutover record reconciliation"
+      },
+      "current_thread_reconciliation_scope": {
+        "post_activation_validator_run": false,
+        "activation_finalizer_run": false,
+        "rollback_run": false,
+        "gateway_restart_run": false,
+        "disk_cleanup_run": false,
+        "config_changed": false,
+        "launcher_changed_by_zeus_reconciliation": false,
+        "checkout_changed": false,
+        "concurrent_validator_observed_after_start": true,
+        "concurrent_validator_executed_by_this_foreground": false
       }
     }
   ],
@@ -16602,5 +16638,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-01T23:07:34-04:00"
 }
