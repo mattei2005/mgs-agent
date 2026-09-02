@@ -1023,12 +1023,12 @@
     {
       "agent": "ares",
       "id": "ares-cpv13-third-party-alert-filter-20260902",
-      "next_step": "manter monitor a cada 5 minutos; publicar somente se houver mudança material atribuível a outra pessoa ou ferramenta externa",
-      "objective": "Corrigir o monitor da conta CPV 13 para alertar somente alterações de terceiros e limpar a thread fixa 1543659546093027519 sem removê-la",
+      "next_step": "manter monitor a cada 5 minutos e alertar toda mudança material humana não atribuível ao Ares",
+      "objective": "Garantir que o monitor CPV 13 silencie somente writes do Ares e alerte qualquer humano, inclusive no mesmo perfil anunciante",
       "source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "completed: filtro third-party ativo; meta automática e fontes/writes ares silenciosos; thread limpa de mensagens visíveis; thread e título preservados; testes, live run, inventário, registry e report-infra validados",
+      "state": "completed_clarification: ator/perfil sozinho não suprime; ares api é reconhecido por actor_id+application_id allowlisted ou audit local; humano no mesmo perfil via ads manager/power editor e outra pessoa linkada alertam; meta automática permanece silenciosa",
       "thread_id": "1544731247996047492",
-      "updated_at": "2026-09-02T15:50:03+00:00"
+      "updated_at": "2026-09-02T16:17:48+00:00"
     },
     {
       "agent": "zeus",
@@ -2022,5 +2022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T15:50:03+00:00"
+  "updated_at": "2026-09-02T16:17:48+00:00"
 }

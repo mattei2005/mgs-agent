@@ -1,7 +1,7 @@
 ---
 name: meta-ads-intraday-operations
 description: "Use em governança, relatórios e crons Meta por operação."
-version: 3.0.0
+version: 3.0.1
 author: Ares
 license: internal
 metadata:
@@ -68,7 +68,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Antes de correção, reconciliar efeitos parciais e reutilizar o request/IDs persistidos; nunca repetir POST não idempotente às cegas.
 - Sucesso de write exige GET/readback do alvo completo e audit com estado anterior/posterior.
 - Para monitorar alterações externas, usar `act_<ACCOUNT_ID>/activities` com Graph `v26.0` explicitamente fixada antes de carregar o helper Meta, `since`/`until` ISO e paginação bounded. O helper legado em `v20.0` pode devolver uma fatia antiga/stale e mascarar eventos recentes. O baseline inicial apenas marca eventos já existentes; alertas futuros cruzam `actor_id` + `application_id` com o audit local do Ares. Uma fonte Ares allowlisted sem audit correspondente preserva anomalia/classificação local; a política específica da operação decide se isso chega ao Discord.
-- Quando o contrato disser **alertar somente se outra pessoa/ferramenta mexer**, eventos com `actor_id=0` são automações da própria Meta e ficam silenciosos, inclusive cobrança e regra nativa; writes com audit local do Ares ficam silenciosos independentemente do app; fontes API allowlisted como pertencentes ao Ares também ficam silenciosas no Discord mesmo sem audit correspondente, preservando a classificação local para investigação de integridade. Somente mudança material restante, atribuível a pessoa ou ferramenta externa, gera alerta.
+- Quando o contrato disser **alertar somente se outra pessoa/ferramenta mexer**, eventos com `actor_id=0` são automações da própria Meta e ficam silenciosos, inclusive cobrança e regra nativa; writes com audit local do Ares ficam silenciosos independentemente do app; fontes API allowlisted como pertencentes ao Ares também ficam silenciosas no Discord mesmo sem audit correspondente, preservando a classificação local para investigação de integridade. A identidade exibida do perfil anunciante não basta para suprimir: Ares e uma pessoa podem usar o mesmo perfil, então a distinção usa o par `actor_id+application_id` e o audit local. Humano no mesmo perfil via Ads Manager/Power Editor alerta; Ares via API allowlisted não alerta. Somente mudança material restante, atribuível a pessoa ou ferramenta externa, gera alerta.
 - Pausar, reativar, criar, clonar ou editar exige o modo autorizado no contrato da operação.
 - Budget segue o gate explícito vigente; billing, credencial, pixel/CAPI e app/permissão continuam críticos.
 - Campanha nova deve nascer PAUSED, salvo autorização operacional explícita em contrato validado.

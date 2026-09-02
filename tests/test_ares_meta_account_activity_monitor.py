@@ -54,6 +54,17 @@ class ActivityMonitorTests(unittest.TestCase):
         self.assertFalse(result['alert'])
         self.assertEqual(result['classification'], 'trusted_ares_source')
 
+    def test_same_advertiser_actor_via_power_editor_alerts(self):
+        row = event(
+            actor_id='10229590004590742',
+            actor_name='Advertiser Profile',
+            application_id='119211728144504',
+            application_name='Power Editor',
+        )
+        result = monitor.classify_event(row, CONFIG, audit_lookup=False)
+        self.assertTrue(result['alert'])
+        self.assertEqual(result['classification'], 'external_or_manual_change')
+
     def test_meta_review_lifecycle_is_ignored(self):
         row = event(
             event_type='update_ad_run_status',
