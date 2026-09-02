@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-09-01T11:08:07-04:00",
-  "source": "active role identity baselines; B012 retired into retired_apps after B012-2 cutover",
+  "generated_at": "2026-09-02T10:07:59-04:00",
+  "source": "active role identity baselines; B003-2 and B005-3 retired after replacement cutover",
   "apps": {
     "B001-2": {
       "ids_sha256": "990f48ab1e31381ae6c60d545e9199f63831cfc3f8c0412356105641ecfd3e58",
@@ -150,82 +150,6 @@
         }
       ]
     },
-    "B003-2": {
-      "ids_sha256": "a4e8f8f34f14f37592020f418d017a788bd68fcbe8af4bd232bb0dcd8899e986",
-      "role_count": 14,
-      "roles": [
-        {
-          "id": "1605415304512017",
-          "name": "Cauã Santos",
-          "role": "administrators"
-        },
-        {
-          "id": "122187958814697981",
-          "name": "Manoel Maximiano",
-          "role": "administrators"
-        },
-        {
-          "id": "1003179656109125",
-          "name": "John Cesar",
-          "role": "administrators"
-        },
-        {
-          "id": "1550050496866303",
-          "name": "Choy",
-          "role": "administrators"
-        },
-        {
-          "id": "3595938667231114",
-          "name": "Dhidin Distro",
-          "role": "administrators"
-        },
-        {
-          "id": "2107433746835503",
-          "name": "Angela Maria",
-          "role": "administrators"
-        },
-        {
-          "id": "1820004942327371",
-          "name": "Putra",
-          "role": "administrators"
-        },
-        {
-          "id": "2349868602440216",
-          "name": "Ajiwarawiri Ajiwarawiri",
-          "role": "administrators"
-        },
-        {
-          "id": "2228308221292747",
-          "name": "Kurniati Kurniati",
-          "role": "administrators"
-        },
-        {
-          "id": "1576016710567690",
-          "name": "Arief",
-          "role": "administrators"
-        },
-        {
-          "id": "3421503974676710",
-          "name": "Lisna Lumbantobing",
-          "role": "administrators"
-        },
-        {
-          "id": "994576526923331",
-          "name": "Giselle Icaro",
-          "role": "administrators"
-        },
-        {
-          "id": "984995307881018",
-          "name": "Sebastiana Francisca",
-          "role": "administrators"
-        },
-        {
-          "id": "1023715280410639",
-          "name": "Reginaldo Novaes Santiago",
-          "role": "administrators"
-        }
-      ]
-    },
     "B004-2": {
       "ids_sha256": "e2856972460c9e24a33fa7f9f8a7337f381ae01f314ab2c351225f50d8fd5125",
       "role_count": 13,
@@ -293,82 +217,6 @@
         {
           "id": "1553400706420948",
           "name": "Om Gendut",
-          "role": "administrators"
-        }
-      ]
-    },
-    "B005-3": {
-      "ids_sha256": "5126b1d309fb6f10b39baac24312efd5064ca103f5f8372f14aab9bf26913781",
-      "role_count": 14,
-      "roles": [
-        {
-          "id": "122167784864714464",
-          "name": "Taina Rocha Silveira",
-          "role": "administrators"
-        },
-        {
-          "id": "1362489135969720",
-          "name": "Muhammad Ishak",
-          "role": "administrators"
-        },
-        {
-          "id": "1715096252906704",
-          "name": "Ichfla",
-          "role": "administrators"
-        },
-        {
-          "id": "2733114397083800",
-          "name": "Vitor Melo Barbosa",
-          "role": "administrators"
-        },
-        {
-          "id": "2088655145081397",
-          "name": "Raj Aryan",
-          "role": "administrators"
-        },
-        {
-          "id": "1382526063848546",
-          "name": "Joao Italo",
-          "role": "administrators"
-        },
-        {
-          "id": "1747883832885725",
-          "name": "Alessandra Furtado",
-          "role": "administrators"
-        },
-        {
-          "id": "1738377714163223",
-          "name": "Jorge Robson",
-          "role": "administrators"
-        },
-        {
-          "id": "1728864925108139",
-          "name": "Beatriz Thomaz",
-          "role": "administrators"
-        },
-        {
-          "id": "1763468635085208",
-          "name": "Bernadete Do Socorro Rodrigues",
-          "role": "administrators"
-        },
-        {
-          "id": "1567767675075267",
-          "name": "Vanderlei Evangelista da Silva",
-          "role": "administrators"
-        },
-        {
-          "id": "1030551369959743",
-          "name": "Barbara Leticia",
-          "role": "administrators"
-        },
-        {
-          "id": "991995497227764",
-          "name": "Alice Prates",
-          "role": "administrators"
-        },
-        {
-          "id": "122170610636714477",
-          "name": "Vitoria Souza Duarte",
           "role": "administrators"
         }
       ]
@@ -1015,6 +863,164 @@
       "retired_at": "2026-09-01T11:08:07-04:00",
       "replaced_by": "B012-2",
       "source_message_id": "1544360202281816168"
+    },
+    "B003-2": {
+      "ids_sha256": "a4e8f8f34f14f37592020f418d017a788bd68fcbe8af4bd232bb0dcd8899e986",
+      "role_count": 14,
+      "roles": [
+        {
+          "id": "1605415304512017",
+          "name": "Cauã Santos",
+          "role": "administrators"
+        },
+        {
+          "id": "122187958814697981",
+          "name": "Manoel Maximiano",
+          "role": "administrators"
+        },
+        {
+          "id": "1003179656109125",
+          "name": "John Cesar",
+          "role": "administrators"
+        },
+        {
+          "id": "1550050496866303",
+          "name": "Choy",
+          "role": "administrators"
+        },
+        {
+          "id": "3595938667231114",
+          "name": "Dhidin Distro",
+          "role": "administrators"
+        },
+        {
+          "id": "2107433746835503",
+          "name": "Angela Maria",
+          "role": "administrators"
+        },
+        {
+          "id": "1820004942327371",
+          "name": "Putra",
+          "role": "administrators"
+        },
+        {
+          "id": "2349868602440216",
+          "name": "Ajiwarawiri Ajiwarawiri",
+          "role": "administrators"
+        },
+        {
+          "id": "2228308221292747",
+          "name": "Kurniati Kurniati",
+          "role": "administrators"
+        },
+        {
+          "id": "1576016710567690",
+          "name": "Arief",
+          "role": "administrators"
+        },
+        {
+          "id": "3421503974676710",
+          "name": "Lisna Lumbantobing",
+          "role": "administrators"
+        },
+        {
+          "id": "994576526923331",
+          "name": "Giselle Icaro",
+          "role": "administrators"
+        },
+        {
+          "id": "984995307881018",
+          "name": "Sebastiana Francisca",
+          "role": "administrators"
+        },
+        {
+          "id": "1023715280410639",
+          "name": "Reginaldo Novaes Santiago",
+          "role": "administrators"
+        }
+      ],
+      "retired_at": "2026-09-02T10:07:59-04:00",
+      "replaced_by": "B003-3",
+      "source_message_id": "1544707104089182278"
+    },
+    "B005-3": {
+      "ids_sha256": "5126b1d309fb6f10b39baac24312efd5064ca103f5f8372f14aab9bf26913781",
+      "role_count": 14,
+      "roles": [
+        {
+          "id": "122167784864714464",
+          "name": "Taina Rocha Silveira",
+          "role": "administrators"
+        },
+        {
+          "id": "1362489135969720",
+          "name": "Muhammad Ishak",
+          "role": "administrators"
+        },
+        {
+          "id": "1715096252906704",
+          "name": "Ichfla",
+          "role": "administrators"
+        },
+        {
+          "id": "2733114397083800",
+          "name": "Vitor Melo Barbosa",
+          "role": "administrators"
+        },
+        {
+          "id": "2088655145081397",
+          "name": "Raj Aryan",
+          "role": "administrators"
+        },
+        {
+          "id": "1382526063848546",
+          "name": "Joao Italo",
+          "role": "administrators"
+        },
+        {
+          "id": "1747883832885725",
+          "name": "Alessandra Furtado",
+          "role": "administrators"
+        },
+        {
+          "id": "1738377714163223",
+          "name": "Jorge Robson",
+          "role": "administrators"
+        },
+        {
+          "id": "1728864925108139",
+          "name": "Beatriz Thomaz",
+          "role": "administrators"
+        },
+        {
+          "id": "1763468635085208",
+          "name": "Bernadete Do Socorro Rodrigues",
+          "role": "administrators"
+        },
+        {
+          "id": "1567767675075267",
+          "name": "Vanderlei Evangelista da Silva",
+          "role": "administrators"
+        },
+        {
+          "id": "1030551369959743",
+          "name": "Barbara Leticia",
+          "role": "administrators"
+        },
+        {
+          "id": "991995497227764",
+          "name": "Alice Prates",
+          "role": "administrators"
+        },
+        {
+          "id": "122170610636714477",
+          "name": "Vitoria Souza Duarte",
+          "role": "administrators"
+        }
+      ],
+      "retired_at": "2026-09-02T10:07:59-04:00",
+      "replaced_by": "B005-4",
+      "source_message_id": "OOB-after-1544707104089182278"
     }
   }
 }

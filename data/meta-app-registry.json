@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-09-01T11:08:07-04:00",
+  "updated_at": "2026-09-02T10:07:59-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1544360202281816168",
+  "source_message_id": "1544707104089182278",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -37,11 +37,12 @@
       "expected_sheet_roles": 10
     },
     {
-      "app": "B003-2",
+      "app": "B003-3",
       "channel_id": "1521251246860931223",
       "channel_name": "b003-2-app-status",
-      "admin": "Reginaldo Novaes Santiago",
-      "onepassword_item_title": "BOT B003-2 Token - Reginaldo Novaes Santiago"
+      "admin": "Dhidin Distro",
+      "onepassword_item_title": "BOT B003-3 Token - Dhidin Distro",
+      "expected_sheet_roles": 13
     },
     {
       "app": "B004-4",
@@ -52,11 +53,12 @@
       "expected_sheet_roles": 12
     },
     {
-      "app": "B005-3",
+      "app": "B005-4",
       "channel_id": "1521251961662341160",
       "channel_name": "b005-3-app-status",
-      "admin": "Vitoria Souza Duarte",
-      "onepassword_item_title": "BOT B005-3 Token - Vitoria Souza Duarte"
+      "admin": "Taina Rocha Silveira",
+      "onepassword_item_title": "BOT B005-4 Token - Taina Rocha Silveira",
+      "expected_sheet_roles": 14
     },
     {
       "app": "B006-3",
@@ -474,5 +476,9 @@
     ],
     "reactivate_only_when": "automatic per-app gate reaches expected accepted/resolved roles",
     "current_runtime_note": "B001-4, B002-3, B004-4, B009-3 and B011-2 have exact/readable 1Password items and are active, unpaused and healthy across all four Graph checks. Sheet writes remain blocked fail-closed while expected roles are pending acceptance."
-  }
+  },
+  "source_message_ids": [
+    "1544707104089182278",
+    "OOB-after-1544707104089182278"
+  ]
 }
