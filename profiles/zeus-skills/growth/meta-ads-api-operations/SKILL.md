@@ -45,6 +45,7 @@ For a requested production token replacement:
 - **Prefer catalog comparison before an all-ads crawl.** Comparing the paginated old-token and candidate-token Page inventories is faster and more decisive for credential eligibility. Scan ads only when the canonical Page set cannot be derived from the old token, operation registry or current request.
 - **Fail closed per account.** If one account passes and another lacks Page coverage, do not perform the original all-account cutover. Report the exact per-account result; a reduced cutover needs fresh authorization because its scope changed.
 - **Retire credentials only after a consumer sweep.** Inventory active config, account registries, operation sources, cron/runtime scripts, monitor allowlists, cache paths and executable rollback/recovery scripts. Historical audits/backups may retain item names as evidence, but no executable path may depend on the item being removed.
+- **Exercise every legacy consumer after a cutover.** Engine/auth smokes do not prove reports and guardrails migrated: live profile scripts may still hardcode an old `META_ITEM` or inherit the generic token cache. Resolve the item from the account registry, force an account-specific cache path before importing the shared Meta helper, then validate the next real scheduler tick for each report/guardrail lane and require its failure streak to return to zero.
 - **Name every deletion target.** “Delete the old token” is ambiguous when accounts use different users/items. State each exact 1Password item and which account it serves. `op item delete` moves an item to Recently Deleted for 30 days; `--archive` is different. Deletion remains a separate critical confirmation even after the credential swap is approved.
 
 Session-specific proof and safe branching: `references/multi-account-token-cutover-page-parity-2026-09-02.md`.
@@ -354,6 +355,22 @@ Use this path when Rodolfo asks to enumerate Pages, domains, ads, or creatives f
 Detailed field map, safe token probe, coverage boundary, payload extraction procedure, and pitfalls: `references/meta-ad-library-api-browser-extraction-2026-07-12.md`.
 
 ## Reporting format
+
+### Executive health verdicts for Rodolfo
+
+When Rodolfo asks whether “reports, crons, agents and campaign creation are all working,” do not answer with a credential-cutover narrative or a long inventory dump. Audit the full named operation first, then lead with one plain verdict:
+
+- **Tudo operacional** — every required lane has a successful real tick/readback.
+- **Quase tudo operacional** — normal use works, but name each remaining unproven or degraded lane.
+- **Não operacional** — identify the exact blocker and affected functions.
+
+Then summarize in at most three short groups:
+
+1. **Funcionando:** agent/gateway, reports, enabled crons, creation/cloning and verified Discord/Meta readbacks.
+2. **Ressalvas:** stale historical badges, intentionally disabled jobs, external data delay, or a lane awaiting its first real post-fix tick.
+3. **Ação necessária:** say explicitly whether Rodolfo must do anything.
+
+Keep technical health separate from campaign performance: an active, correctly reporting campaign with poor ROI is **operational but performing badly**, not an automation failure. Likewise, a prepared channel with no implemented workflow is **not broken**; label it “ainda não implantado.” Do not call a repaired cron fully green until either its own scheduler records `last_status=ok` and `failure_streak=0`, or clearly label the distinction between a successful manual recovery and the pending real tick.
 
 ### Ares HOA gestor reports: no `ID REC` column
 

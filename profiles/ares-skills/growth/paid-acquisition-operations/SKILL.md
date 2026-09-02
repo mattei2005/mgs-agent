@@ -25,6 +25,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
+- **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Criar/clonar campanhas Meta, lotes e alta escala** → `meta-campaign-engine-v3/SKILL.md`
 - **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
 - **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
