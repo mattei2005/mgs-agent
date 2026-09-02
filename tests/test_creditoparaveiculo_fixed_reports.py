@@ -425,7 +425,7 @@ def test_sb_rps_and_cpm_use_net_revenue_with_revenue_share():
     assert aggregated["cpm"] == pytest.approx(100.0)
 
 
-def test_rewarded_pricing_cr_matches_five_block_waterfall_and_gray_previous_day():
+def test_rewarded_pricing_cr_tracks_live_contiguous_waterfall_and_gray_previous_day():
     module = load_reports_module()
     current_matched = [3039, 197, 153, 76, 117]
     previous_matched = [5667, 481, 248, 134, 228]
@@ -463,6 +463,8 @@ def test_rewarded_pricing_cr_matches_five_block_waterfall_and_gray_previous_day(
     parsed = module.parse_rewarded_pricing(payload)
     assert parsed["filter"] == "rewarded"
     assert parsed["slot_count"] == 5
+    assert parsed["configured_reference_slot_count"] == 5
+    assert parsed["topology_changed"] is False
     assert parsed["current"] == {
         "date": "23/08/2026",
         "requests": 4810,
@@ -476,8 +478,26 @@ def test_rewarded_pricing_cr_matches_five_block_waterfall_and_gray_previous_day(
         "coverage_pct": 78.92,
     }
 
+    terminal_shrink = module.parse_rewarded_pricing({**payload, "rules": rules[:-1]})
+    assert terminal_shrink["slot_count"] == 4
+    assert terminal_shrink["topology_changed"] is True
+    assert terminal_shrink["current"]["matched"] == 3465
+    assert terminal_shrink["current"]["coverage_pct"] == 72.04
+    assert terminal_shrink["previous_gray"]["matched"] == 6530
+    assert terminal_shrink["previous_gray"]["coverage_pct"] == 76.26
+
+    expanded_rule = json.loads(json.dumps(rules[-1]))
+    expanded_rule["targeting"]["slot_id"] = f"{module.REWARDED_SLOT_BASE}_5"
+    expanded_rule["metricsToday"]["gamMatchedRequests"] = 50
+    expanded_rule["metricsYesterday"]["gamMatchedRequests"] = 100
+    terminal_expansion = module.parse_rewarded_pricing({**payload, "rules": [*rules, expanded_rule]})
+    assert terminal_expansion["slot_count"] == 6
+    assert terminal_expansion["topology_changed"] is True
+    assert terminal_expansion["current"]["matched"] == 3632
+    assert terminal_expansion["current"]["coverage_pct"] == 75.51
+
     with pytest.raises(RuntimeError, match="waterfall incomplete"):
-        module.parse_rewarded_pricing({**payload, "rules": rules[:-1]})
+        module.parse_rewarded_pricing({**payload, "rules": [rules[0], *rules[2:]]})
 
 
 def test_roi_history_aggregates_by_campaign_date_and_marks_current_partial():

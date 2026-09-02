@@ -532,6 +532,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-RULES-THREAD-CONSOLIDATION-20260901",
+      "next_step": "Atualizar a rota canônica, publicar o consolidado na thread 1541578622106865815 com readback, validar seis rotas e reportar as threads prontas para close.",
+      "objective": "Consolidar regras, crons e padrões Eggbev BOT na thread Regras 1541578622106865815 e preparar o encerramento das threads históricas indicadas por Rodolfo.",
+      "source": "discord:thread:1544501175863222363",
+      "state": "históricos das sete threads importados em modo read-only; fontes, skills e crons vivos reconciliados; migração da rota regras e limpeza/publicação ainda pendentes.",
+      "thread_id": "1544501175863222363",
+      "updated_at": "2026-09-02T00:23:12+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-SB-REPORT-PARITY-20260831",
       "next_step": "Executar os próximos relatórios Corte e ROAS pela política v25 e manter o gate de writes fail-closed",
       "objective": "Corrigir todos os relatórios Corte e ROAS Eggbev para espelhar Smart Bidding Messenger Pages",
@@ -1843,12 +1853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-update-20260901",
-      "next_step": "Congelar refs, runtime, patches, mirrors e superfície local antes de criar stage isolado.",
-      "objective": "Atualizar Hermes de forma controlada para a última release estável, preservando todas as customizações MGS.",
-      "source": "discord:message:1544491501520691302",
-      "state": "authorized_freeze_preflight",
+      "next_step": "Executar regressões amplas, builds, config/auth smokes e provenance do stage; Ares SOUL mirror será sincronizado apenas no cutover.",
+      "objective": "Atualizar Hermes de forma controlada para v0.21.0, preservando todas as customizações MGS.",
+      "source": "/root/.hermes/secure-backups/hermes-update/20260901T234500Z-v0210-controlled",
+      "state": "port_46_paths_reproduced_stage_validation",
       "thread_id": "1544371507491242044",
-      "updated_at": "2026-09-01T23:38:56+00:00"
+      "updated_at": "2026-09-02T00:22:11+00:00"
     },
     {
       "agent": "zeus",
@@ -1882,5 +1892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-01T23:54:31+00:00"
+  "updated_at": "2026-09-02T00:23:12+00:00"
 }
