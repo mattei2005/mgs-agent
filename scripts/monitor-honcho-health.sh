@@ -248,13 +248,17 @@ PY
     ALERT_TS="$LAST_ALERT"
   fi
 
-  python3 - <<'PY' "$STATE_FILE" "$NOW_ISO" "$ALERT_TS" "$FAILURES_JSON" "$NEW_CONSECUTIVE_FAILURES" "$NEW_ALERT_ACTIVE"
+  if [[ "$DRY_RUN" != "1" ]]; then
+    python3 - <<'PY' "$STATE_FILE" "$NOW_ISO" "$ALERT_TS" "$FAILURES_JSON" "$NEW_CONSECUTIVE_FAILURES" "$NEW_ALERT_ACTIVE"
 import json, sys, pathlib
 p=pathlib.Path(sys.argv[1]); now=sys.argv[2]; alert=sys.argv[3]; failures=json.loads(sys.argv[4]); consecutive=int(sys.argv[5]); active=(sys.argv[6]=='true')
 d=json.loads(p.read_text())
 d.update({"last_check":now,"last_status":"fail","last_alert_sent":None if alert in ('null','') else alert,"last_failure_details":failures,"consecutive_failures":consecutive,"alert_active":active})
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False)+"\n")
 PY
+  else
+    log "dry-run: state unchanged"
+  fi
 else
   log "OK agents=${#AGENTS[@]} prev=${PREV_STATUS} consecutive=${CONSECUTIVE_FAILURES} alert_active=${ALERT_ACTIVE}"
   if [[ "$PREV_STATUS" == "fail" && "$ALERT_ACTIVE" == "true" ]]; then
@@ -265,13 +269,17 @@ json.dump(payload, sys.stdout, ensure_ascii=False)
 PY
     send_discord_payload "$TMP_RESULTS.payload" >/dev/null || log "WARN: Discord resolution failed"
   fi
-  python3 - <<'PY' "$STATE_FILE" "$NOW_ISO"
+  if [[ "$DRY_RUN" != "1" ]]; then
+    python3 - <<'PY' "$STATE_FILE" "$NOW_ISO"
 import json, sys, pathlib
 p=pathlib.Path(sys.argv[1]); now=sys.argv[2]
 d=json.loads(p.read_text())
 d.update({"last_check":now,"last_status":"ok","last_alert_sent":None,"last_failure_details":[],"consecutive_failures":0,"alert_active":False,"last_ok_at":now})
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False)+"\n")
 PY
+  else
+    log "dry-run: state unchanged"
+  fi
 fi
 
 log "DONE status=$(python3 - <<'PY' "$STATE_FILE"
