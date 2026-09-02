@@ -2013,15 +2013,34 @@
         "meta-ads-intraday-operations"
       ],
       "domain": "ares.campaign-ops.eggbev",
-      "effective_at": "2026-09-01T14:51:27-04:00",
-      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-V1-20260901",
+      "effective_at": "2026-09-02T03:55:45-04:00",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-SUSPENSION-V2-20260902",
       "kind": "policy",
       "owner": "Nicolas Holanda",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Guardrail Eggbev zero-pixel suspenso até nova instrução explícita",
+      "updated_at": "2026-09-02T15:37:25+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.zero-pixel-results",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-page-guardrails",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T14:51:27-04:00",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-V1-20260901",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-SUSPENSION-V2-20260902",
       "title": "Eggbev pausa campanha após 03:00 com spend acima de US$2 e zero resultado de pixel",
-      "updated_at": "2026-09-01T19:58:37+00:00"
+      "updated_at": "2026-09-02T15:37:25+00:00"
     },
     {
       "canonical_key": "ares.failure-recovery",
@@ -3421,5 +3440,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T14:38:48+00:00"
+  "updated_at": "2026-09-02T15:37:25+00:00"
 }
