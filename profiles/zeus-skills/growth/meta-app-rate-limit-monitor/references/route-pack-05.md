@@ -218,7 +218,7 @@ When Rodolfo asks to pause only selected app channels, do not pause the whole `m
 - `mode=until`: include an aware ISO `until` timestamp in `America/New_York`; the pause expires automatically when `now >= until`.
 - `mode=manual`: omit `until`; keep the selected app-channel deliveries suppressed until Rodolfo explicitly reports that the apps were replaced/recovered and asks to re-enable them.
 
-The production script keeps Graph/Sheet checks and state reconciliation running, suppresses only app-channel Discord delivery for those keys, preserves cooldown timestamps, and reports the active pause mode in `_last_run_summary.active_alert_pause`. No resume cron or gateway restart is needed. Infra/Sheets failure alerts remain independent and are not suppressed by an app-channel pause. A force-live operator run must not bypass a manual pause unless Rodolfo explicitly requests an alert for that paused app in the same current instruction; use an isolated override path only for that one foreground run and never mutate the canonical pause unintentionally.
+`apps` is the legacy alert-only pause set: the production script keeps Graph/Sheet checks and state reconciliation running, suppresses only app-channel Discord delivery for those keys, preserves cooldown timestamps, and reports the active pause mode in `_last_run_summary.active_alert_pause`. `monitor_apps` is the full app-route pause set: the shared cron remains enabled for unaffected apps, but every listed app is skipped before Graph/Sheet processing until its replacement/recovery is validated and Rodolfo explicitly asks to resume it. No resume cron or gateway restart is needed. Infra/Sheets failure alerts remain independent and are not suppressed by an alert-only pause. A force-live operator run must not bypass either pause unless Rodolfo explicitly requests an alert for that paused app in the same current instruction; use an isolated override path only for that one foreground run and never mutate the canonical pause unintentionally.
 
 Required validation: JSON parse, shell + inline-Python syntax, isolated `post_webhook` gate test proving HTTP delivery is bypassed for one paused app, production state readback showing the exact active app set and expiry, and Discord readback showing no new message in a paused channel. Inventory, audit, backup, and REPORT-INFRA remain mandatory because this touches profile script/data/skill infrastructure.
 
@@ -263,6 +263,12 @@ Rodolfo approved one human-readable production pattern for every current registr
 - Use a dedicated `app_restricted` cooldown key with the daily blocked-app cooldown. Do not change presentation or recipients for unrelated rate-limit, transient API, role-delta, recovery, or generic script-error alerts.
 - Scope is the current 12-app role registry: B001-4, B002-3, B003-3, B004-4, B005-4, B006-4, B007-2, B008-3, B009-3, B010-3, B011-2, and B012-2. B013-4 remains excluded on its dedicated DTR/ChatPion route.
 - Preview/canary must use the real embed in the current review thread with role notifications suppressed, then compare production-render helper output against Discord readback. Do not send a validation alert to an app-status channel unless Rodolfo explicitly asks.
+
+### Automatic full-route pause after restriction — effective 2026-09-02
+
+Rodolfo superseded the prior manual-only handling: when a current B001–B012 app reaches the confirmed restriction trigger (`OAuthException 190 Application has been deleted` on two consecutive cycles), the monitor must send the first canonical restriction alert and then atomically add that app to both `apps` and `monitor_apps` in `data/meta-app-role-alert-pause.json` with `mode=manual`. Starting on the next cycle, skip that app route entirely; keep the shared `meta-app-roles-watch` cron enabled for every unaffected app. Resume only after the replacement/recovery passes its preflight/canary/readback and Rodolfo explicitly requests reactivation.
+
+Current immediate pause from message `1544837470687076454`: `B001-4`, `B004-4`, `B007-2`, and `B011-2`. Live state had already confirmed the restriction trigger and delivered each app's canonical alert before this rule was applied. The pause file must retain all four in `apps` and `monitor_apps` until their replacement cutovers are validated.
 
 The production monitor cadence is:
 

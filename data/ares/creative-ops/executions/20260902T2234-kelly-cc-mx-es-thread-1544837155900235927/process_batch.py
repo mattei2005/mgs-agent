@@ -21,14 +21,14 @@ from typing import Any
 from PIL import Image
 
 ROOT_ID = "0AEwt4Ye690ocUk9PVA"
-OPERATION = "CC_US_EN"
-THREAD_ID = "1544435564688707625"
+OPERATION = "CC_MX_ES"
+THREAD_ID = "1544837155900235927"
 REQUESTED_BY = "Kelly Nice"
 SOURCE_MANAGER = "KELLY"
 EXPECTED_SA = "mgsagent@mgs-core-prod.iam.gserviceaccount.com"
-BASE = Path("/root/mgs-agent/data/ares/creative-ops/executions/20260901T195657Z-kelly-cc-us-en-thread-1544435564688707625")
-INVENTORY_CSV = BASE / "valid-inventory.csv"
-TIMELINE_MANIFEST = BASE / "valid-manifest.json"
+BASE = Path("/root/mgs-agent/data/ares/creative-ops/executions/20260902T2234-kelly-cc-mx-es-thread-1544837155900235927")
+INVENTORY_CSV = Path("/root/mgs-agent/data/ares/creative-ops/intake/stability-cc-mx-es-20260902/poll3/upload-manual-inventory-20260902T223311Z.csv")
+TIMELINE_MANIFEST = BASE / "visual-review/20260902T223333Z/video-frame-sample-manifest.json"
 PLAN_PATH = BASE / "dry-run.json"
 REPORT_PATH = BASE / "ready-execution-latest.json"
 REPORT_CSV = BASE / "ready-execution.csv"
@@ -38,13 +38,9 @@ BACKUPS = Path("/root/mgs-agent/backups/ares-creative-ops")
 SANITIZER = "/root/mgs-agent/scripts/clean-creative-metadata.sh"
 FOLDER_MIME = "application/vnd.google-apps.folder"
 
-# Visual review of all 54 multi-frame timelines. Static bonus cards have no person;
-# every other item visibly contains a presenter or human hands.
-BONUS_NO_PERSON_INDEXES: set[int] = set()
-SPECIAL_SOURCE_IDS = {
-    "1LmQ60JL8jyQ6yDieGwkzy09PJpIxO0PI",  # visual/media duplicate handled after READY target
-    "12Aiw5djmBRpi2PsclfJNHs-njuzxf6V_",  # non-creative screen recording -> 05_REJECTED
-}
+# Visual review of all 12 multi-frame timelines: every item contains a
+# presenter, Spanish CC copy, and a persistent high-limit approval claim.
+SPECIAL_SOURCE_IDS: set[str] = set()
 
 
 def now() -> str:
@@ -173,7 +169,7 @@ def write_inventory(records: list[dict[str, Any]]) -> None:
 def backup_inventory() -> str:
     BACKUPS.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
-    dst = BACKUPS / f"assets-before-kelly-cc-us-en-{stamp}.jsonl"
+    dst = BACKUPS / f"assets-before-kelly-cc-mx-es-{stamp}.jsonl"
     shutil.copy2(ASSETS, dst)
     return str(dst)
 
@@ -235,8 +231,8 @@ def max_variants(records: list[dict[str, Any]], ready_names: list[str]) -> dict[
     for rec in records:
         if not (
             rec.get("vertical") == "CC"
-            and rec.get("country") == "US"
-            and rec.get("language") == "EN"
+            and rec.get("country") == "MX"
+            and rec.get("language") == "ES"
             and rec.get("format") == "VID"
         ):
             continue
@@ -246,7 +242,7 @@ def max_variants(records: list[dict[str, Any]], ready_names: list[str]) -> dict[
         except Exception:
             n = 0
         out[key] = max(out.get(key, 0), n)
-    pat = re.compile(r"^CC_US_EN_VID_(.+)_(PV|NV)_(\d{3})\.mp4$")
+    pat = re.compile(r"^CC_MX_ES_VID_(.+)_(PV|NV)_(\d{3})\.mp4$")
     for name in ready_names:
         m = pat.match(name)
         if m:
@@ -255,19 +251,30 @@ def max_variants(records: list[dict[str, Any]], ready_names: list[str]) -> dict[
     return out
 
 
-def classification(index: int) -> dict[str, str]:
-    if index in BONUS_NO_PERSON_INDEXES:
-        return {
-            "angle": "APPROVAL_BONUS",
-            "person": "NO_PERSON",
-            "p_orient": "NV",
-            "claim": "YOU'RE APPROVED; BONUS OF $1000",
-        }
+CLAIMS = {
+    "1_34 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 19,875",
+    "2_40 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 21,785",
+    "3_39 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 21,785",
+    "4_33 US_CC_MEX_02-08 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 19,875",
+    "5_36 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 22,785",
+    "6_37 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 20,945",
+    "7_42 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 21,945",
+    "8_44 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 19,765",
+    "9_38 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 21,785",
+    "10_35 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 20,985",
+    "11_43 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 19,985",
+    "12_41 US_CC_MEX_02-09 - IA - Story (mexico) .mp4": "LÍMITE APROBADO 23,875",
+}
+
+
+def classification(name: str) -> dict[str, str]:
+    if name not in CLAIMS:
+        raise RuntimeError(f"missing multi-frame classification for {name}")
     return {
-        "angle": "AVAILABLE_LIMIT",
+        "angle": "LIMITE_ALTO",
         "person": "PERSON",
         "p_orient": "PV",
-        "claim": "AVAILABLE LIMIT",
+        "claim": CLAIMS[name],
     }
 
 
@@ -279,8 +286,8 @@ def prepare() -> dict[str, Any]:
     upload = drive.find_child_folder(creatives, "UPLOAD MANUAL")
     if not upload:
         raise RuntimeError("UPLOAD MANUAL not found")
-    ready = drive.ensure_path("MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/01_READY")
-    legacy = drive.ensure_path("MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/99_LEGACY")
+    ready = drive.ensure_path("MGS-AGENTS/CRIATIVOS/CC_MX_ES/VID/01_READY")
+    legacy = drive.ensure_path("MGS-AGENTS/CRIATIVOS/CC_MX_ES/VID/99_LEGACY")
 
     csv_rows = list(csv.DictReader(INVENTORY_CSV.open(encoding="utf-8-sig")))
     manifest = json.loads(TIMELINE_MANIFEST.read_text(encoding="utf-8"))
@@ -331,7 +338,7 @@ def prepare() -> dict[str, Any]:
         else:
             matches = checksum_map.get(raw_sha, [])
             duplicate = matches[0] if matches else None
-        cls = classification(index)
+        cls = classification(name)
         if duplicate:
             dest_id = duplicate.get("asset_drive_id")
             if not dest_id:
@@ -368,7 +375,7 @@ def prepare() -> dict[str, Any]:
             key = (cls["angle"], cls["p_orient"])
             maxima[key] = maxima.get(key, 0) + 1
             variant = f"{maxima[key]:03d}"
-            filename = f"CC_US_EN_VID_{cls['angle']}_{cls['p_orient']}_{variant}.mp4"
+            filename = f"CC_MX_ES_VID_{cls['angle']}_{cls['p_orient']}_{variant}.mp4"
             item = {
                 "index": index,
                 "source_drive_id": source_id,
@@ -452,8 +459,8 @@ def inventory_unique(item: dict[str, Any], dest: dict[str, Any]) -> dict[str, An
         "requested_by": REQUESTED_BY,
         "created_by": SOURCE_MANAGER,
         "vertical": "CC",
-        "country": "US",
-        "language": "EN",
+        "country": "MX",
+        "language": "ES",
         "strategy": None,
         "ad_account_id": None,
         "source_drive_id": item["source_drive_id"],
@@ -471,7 +478,7 @@ def inventory_unique(item: dict[str, Any], dest: dict[str, Any]) -> dict[str, An
         "reservation_status": "RESERVADO_PELO_GESTOR",
         "ares_eligible": False,
         "used_by": None,
-        "campaign_owner": "Nicolas",
+        "campaign_owner": "Kelly",
         "meta_ad_id": None,
         "meta_creative_id": None,
         "meta_image_hash": None,
@@ -490,8 +497,8 @@ def inventory_unique(item: dict[str, Any], dest: dict[str, Any]) -> dict[str, An
             f"Classificação visual multi-frame: {item['person']} / {item['p_orient']}. "
             "Original preservado em 99_LEGACY. Fail-closed até liberação/conciliação Meta × Drive."
         ),
-        "source_path": "MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/99_LEGACY",
-        "asset_path": "MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/01_READY",
+        "source_path": "MGS-AGENTS/CRIATIVOS/CC_MX_ES/VID/99_LEGACY",
+        "asset_path": "MGS-AGENTS/CRIATIVOS/CC_MX_ES/VID/01_READY",
         "webViewLink": dest.get("webViewLink"),
         "local_clean_path": None,
         "thread_id": THREAD_ID,
@@ -533,7 +540,7 @@ def execute() -> dict[str, Any]:
 
     lock_dir = Path("/root/mgs-agent/tmp/ares-intake-locks")
     lock_dir.mkdir(parents=True, exist_ok=True)
-    lock_path = lock_dir / "CC_US_EN.lock"
+    lock_path = lock_dir / "CC_MX_ES.lock"
     with lock_path.open("w") as lockfh:
         fcntl.flock(lockfh.fileno(), fcntl.LOCK_EX)
 
@@ -555,7 +562,7 @@ def execute() -> dict[str, Any]:
                 maxima[key] = maxima.get(key, 0) + 1
                 item["variant"] = f"{maxima[key]:03d}"
                 item["destination_filename"] = (
-                    f"CC_US_EN_VID_{item['angle']}_{item['p_orient']}_{item['variant']}.mp4"
+                    f"CC_MX_ES_VID_{item['angle']}_{item['p_orient']}_{item['variant']}.mp4"
                 )
             live_names.add(item["destination_filename"])
         atomic_json(PLAN_PATH, plan)

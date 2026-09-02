@@ -1,7 +1,13 @@
 {
-  "version": 3,
+  "version": 4,
   "mode": "manual",
   "apps": [
+    "B001-4",
+    "B004-4",
+    "B007-2",
+    "B011-2"
+  ],
+  "monitor_apps": [
     "B001-4",
     "B004-4",
     "B007-2",
@@ -11,7 +17,7 @@
   "requested_by": "Rodolfo Mattei",
   "source_message_id": "1544837470687076454",
   "updated_at": "2026-09-02T18:36:34-04:00",
-  "reason": "Apps confirmados em restrição; rotas de alerta pausadas até Rodolfo concluir as substituições.",
+  "reason": "Apps confirmados em restrição; rotas completas do monitor pausadas até Rodolfo concluir as substituições.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
