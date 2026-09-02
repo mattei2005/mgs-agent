@@ -1903,12 +1903,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-cache-cleanup-20260902",
-      "next_step": "Aguardar nova confirmação crítica para o hash db242c152d133435ff6449c092583d121a73c2ee77b75cbc87dbbaf7ea1ade10.",
+      "next_step": "Burn-in 24–48h; depois reavaliar somente snapshots intermediários opcionais.",
       "objective": "Limpar caches reconstruíveis após atualização e limpeza do Hermes",
-      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T001915-0400-rebuildable-caches-retry/manifest.json",
-      "state": "primeiro preflight bloqueou por drift uv sem mutação; novo manifesto estável em duas leituras congelado",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T001915-0400-rebuildable-caches-retry/post-cleanup-residual.json",
+      "state": "pass: 87/87 alvos removidos; 1,97 gib recuperados; primeiro drift bloqueado sem mutação; runtime/backups/smokes validados",
       "thread_id": "1544536465772511303",
-      "updated_at": "2026-09-02T04:21:15+00:00"
+      "updated_at": "2026-09-02T04:31:20+00:00"
     },
     {
       "agent": "zeus",
@@ -1932,5 +1932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T04:21:15+00:00"
+  "updated_at": "2026-09-02T04:31:20+00:00"
 }
