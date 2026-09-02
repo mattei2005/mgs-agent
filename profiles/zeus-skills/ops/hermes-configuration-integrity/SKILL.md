@@ -46,6 +46,8 @@ Load this skill when:
 - Never print config secrets, tokens, cookies, OAuth material, or credential-bearing diffs.
 - Read-only verification does not authorize repair, restart, or rollback.
 - If a repair is needed, route it through the normal MGS authorization and Critical Subset gates.
+- Classify every residual before asking Rodolfo for action: **runtime blocker**, **required repair**, **non-blocking drift**, or **optional hardening**. For an optional policy/behavior proposal, say plainly that it is **not a Hermes correction**, state the practical behavior in one short sentence, give the operational recommendation, and do not make it sound required for update closure. Do not ask to apply optional hardening in the update thread unless it materially blocks the validated runtime or Rodolfo explicitly reopens it.
+- When Rodolfo asks “what is this correction?”, answer the practical distinction first—what would change, whether production is affected, and whether action is needed—before file, hash, validator, or concurrency mechanics.
 - Do not rerun a large regression pack merely to explain a successful cron message when byte identity, resolved config, current guard, and service health already answer the question.
 - If the verification causes no durable change, say so explicitly; do not create an unnecessary REPORT-INFRA.
 

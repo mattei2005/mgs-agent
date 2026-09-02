@@ -68,6 +68,31 @@ A final fetch may show that an application upstream advanced after the destructi
 - Porting patches, building a new runtime, or restarting production belongs to a separate controlled-update scope and its own Critical Subset confirmation.
 - Do not classify ordinary upstream movement as a cleanup anomaly.
 
+### 3.3 Final-result checksum ordering
+
+Treat the cleanup result as mutable until transport and governance closure have finished. REPORT-INFRA message IDs/readback, `governance_errors`, final status, and closure timestamps are part of the canonical result, so hashing an earlier version creates a stale inventory receipt.
+
+Use this order:
+
+1. Complete filesystem/runtime/archive acceptance and write the result body.
+2. Send REPORT-INFRA and obtain exact Discord readback.
+3. Add transport IDs/readback, final status, governance errors, and closure timestamp to the result.
+4. Compute the canonical result checksum with the external checksum tool, write its checksum file, and verify it immediately.
+5. Persist that final checksum in inventory and append the dedicated audit receipt.
+6. Read back the result, checksum file, inventory record, and audit event before reporting closure.
+
+If anything writes the result after step 4, recompute the checksum and replace the inventory/audit receipt before closure. Never leave an intermediate checksum labeled as final.
+
+### 3.4 Residual-only open-item ledger
+
+After deletion, build a fresh residual inventory and classify what remains into three separate lists:
+
+- **required operational blockers** — prevent completion and keep the parent task open;
+- **optional housekeeping** — safe follow-ups such as stale Git metadata with negligible disk impact;
+- **intentionally retained or out-of-scope** — active runtime, minimum rollback, latest validated backups, and moving-main commits outside the selected stable release.
+
+When the owner asks what remains open, list only these current residuals. Do not repeat deleted targets, call protected recovery artifacts “unused,” or turn commits arriving after a frozen stable tag into a failed cleanup/update gate. State `none` explicitly when no required operational blocker remains.
+
 ## 4. Whole-VPS read-only scan
 
 Scan writable persistent filesystems independently. At minimum on the MGS VPS:
