@@ -1,10 +1,16 @@
 {
   "version": 2,
   "mode": "manual",
-  "apps": [],
+  "apps": [
+    "B003-2",
+    "B005-3",
+    "B006-3",
+    "B008-2",
+    "B010-2"
+  ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1543020500979163196",
-  "updated_at": "2026-08-28T18:14:54-04:00",
-  "reason": "B011-2 live credentials and isolated production baseline validated; containment pause cleared so new role acceptances can alert normally."
+  "source_message_id": "1544705223057211422",
+  "updated_at": "2026-09-02T09:49:28-04:00",
+  "reason": "Pausa manual solicitada enquanto Rodolfo substitui os apps; reativar somente após novo aviso explícito."
 }
