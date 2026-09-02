@@ -1011,6 +1011,16 @@
       "updated_at": "2026-08-31T01:56:10+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-cpv13-third-party-alert-filter-20260902",
+      "next_step": "aplicar filtro/testes/contrato, apagar mensagens internas preservando a thread, validar readbacks e REPORT-INFRA",
+      "objective": "Corrigir o monitor da conta CPV 13 para alertar somente alterações de terceiros e limpar a thread fixa 1543659546093027519 sem removê-la",
+      "source": "discord:thread:1544731247996047492",
+      "state": "reconciled_before_write: monitor ativo a cada 5 minutos; 12 mensagens importadas; título real alteracao por outra pessoa; falsos positivos meta automático e fontes ares sem audit local identificados",
+      "thread_id": "1544731247996047492",
+      "updated_at": "2026-09-02T15:40:50+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -1993,14 +2003,14 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-snapshot-review-20260902",
-      "next_step": "Se Rodolfo quiser, congelar manifesto somente para Zeus 020150 e pedir confirmação crítica.",
+      "next_step": "Nenhuma limpeza de snapshot pendente. Manter todos os snapshots revisados; nova exclusão exige novo pedido, manifesto e confirmação crítica.",
       "objective": "Reavaliar 2,58 GiB de snapshots após atualização Hermes v0.21.0",
-      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T003917-0400-snapshot-review/snapshot-review-result.json",
-      "state": "pass: 0,49 gib duplicado exato elegível; 2,09 gib protegidos por evidência de ativação ou estado histórico intermediário; nenhum snapshot removido",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260902T003917-0400-snapshot-review/snapshot-review-result.json; owner-decision:discord:1544733148334522530; prepared-but-cancelled:/root/.hermes/secure-backups/vps-cleanup/20260902T093520-0400-snapshot-duplicate-delete/manifest.json",
+      "state": "concluído sem exclusão adicional: 0,49 gib duplicado foi preservado por decisão de rodolfo; 2,09 gib permanecem protegidos; nenhum snapshot foi removido",
       "thread_id": "1544536465772511303",
-      "updated_at": "2026-09-02T05:45:59+00:00"
+      "updated_at": "2026-09-02T15:40:51+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T14:51:42+00:00"
+  "updated_at": "2026-09-02T15:40:51+00:00"
 }

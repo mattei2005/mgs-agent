@@ -11728,7 +11728,11 @@
       "safe_duplicate": {
         "path": "/root/.hermes/profiles/zeus/state-snapshots/20260902-020150-pre-v0210-retry-20260902",
         "bytes": 530911232,
-        "status": "eligible_requires_new_critical_confirmation"
+        "status": "intentionally_retained_owner_choice",
+        "decision_message_id": "1544733148334522530",
+        "prepared_manifest": "/root/.hermes/secure-backups/vps-cleanup/20260902T093520-0400-snapshot-duplicate-delete/manifest.json",
+        "target_set_sha256": "741031bc241b3d3af20034ac91d0857192015bede298a73f0e547b80f6c0a655",
+        "manifest_artifact_sha256": "250f880e69c392977948d824571222c6bd561ab62876f85e6a892547c3df20af"
       },
       "protected_activation_bytes": 1126117376,
       "protected_intermediate_bytes": 1118580736,
@@ -11745,8 +11749,22 @@
         "core_files_unchanged": "188/188"
       },
       "snapshot_dirs_deleted": 0,
-      "recommendation": "Delete only Zeus 020150 exact duplicate if separately confirmed; keep remaining 2.09 GiB.",
-      "updated_at": "2026-09-02T01:46:43-04:00",
+      "recommendation": "Retain all reviewed snapshots by owner choice; no snapshot deletion pending.",
+      "owner_decision": {
+        "message_id": "1544733148334522530",
+        "decision": "retain_safe_duplicate_and_close_cleanup",
+        "target_present": true
+      },
+      "closure_report_infra": {
+        "message_id": "1544734092405379225",
+        "channel_id": "1498132022634483894",
+        "readback_ok": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "updated_at": "2026-09-02T11:41:47-04:00",
       "report_infra": {
         "message_id": "1544584274919817288",
         "channel_id": "1498132022634483894",

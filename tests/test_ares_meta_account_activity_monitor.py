@@ -6,6 +6,7 @@ import json
 import os
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 SCRIPT = Path('/root/mgs-agent/scripts/ares-meta-account-activity-monitor.py')
@@ -47,11 +48,11 @@ class ActivityMonitorTests(unittest.TestCase):
         self.assertTrue(result['alert'])
         self.assertEqual(result['classification'], 'external_or_manual_change')
 
-    def test_trusted_app_without_audit_alerts(self):
+    def test_trusted_ares_source_without_audit_is_ignored(self):
         row = event(actor_id='10229590004590742', application_id='163163106580854')
         result = monitor.classify_event(row, CONFIG, audit_lookup=False)
-        self.assertTrue(result['alert'])
-        self.assertEqual(result['classification'], 'trusted_app_without_local_audit')
+        self.assertFalse(result['alert'])
+        self.assertEqual(result['classification'], 'trusted_ares_source')
 
     def test_meta_review_lifecycle_is_ignored(self):
         row = event(
@@ -65,7 +66,7 @@ class ActivityMonitorTests(unittest.TestCase):
         self.assertFalse(result['alert'])
         self.assertEqual(result['classification'], 'ignored_meta_lifecycle')
 
-    def test_meta_campaign_status_change_is_alerted(self):
+    def test_meta_campaign_status_change_is_ignored(self):
         row = event(
             event_type='update_campaign_run_status',
             actor_id='0',
@@ -74,8 +75,31 @@ class ActivityMonitorTests(unittest.TestCase):
             extra_data=json.dumps({'old_value': 'Active', 'new_value': 'Inactive', 'rule_info': {'id': 'r1'}}),
         )
         result = monitor.classify_event(row, CONFIG, audit_lookup=False)
-        self.assertTrue(result['alert'])
-        self.assertEqual(result['classification'], 'meta_or_native_rule_material_change')
+        self.assertFalse(result['alert'])
+        self.assertEqual(result['classification'], 'ignored_meta_automatic')
+
+    def test_meta_billing_charge_is_ignored(self):
+        row = event(
+            event_type='ad_account_billing_charge',
+            actor_id='0',
+            actor_name='Meta',
+            application_id=None,
+            extra_data=json.dumps({'old_value': None, 'new_value': 58700}),
+        )
+        result = monitor.classify_event(row, CONFIG, audit_lookup=False)
+        self.assertFalse(result['alert'])
+        self.assertEqual(result['classification'], 'ignored_meta_automatic')
+
+    def test_unlisted_source_with_local_ares_audit_is_ignored(self):
+        row = event(application_id='new-ares-app')
+        with mock.patch.object(
+            monitor,
+            'local_audit_match',
+            return_value={'path': 'audit/write.json', 'basis': 'test'},
+        ):
+            result = monitor.classify_event(row, CONFIG)
+        self.assertFalse(result['alert'])
+        self.assertEqual(result['classification'], 'trusted_ares_audited')
 
     def test_event_key_is_stable(self):
         first = monitor.event_key(event())

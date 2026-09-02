@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Account-wide Meta activity monitor for external/untracked writes.
+"""Account-wide Meta activity monitor for third-party writes.
 
-Reads the Ad Account /activities edge, suppresses Meta lifecycle noise and
-Ares writes that have matching local audit evidence, and posts only external
-or unaudited material changes to an existing Discord thread. Tokens are never
-printed or persisted.
+Reads the Ad Account /activities edge, suppresses every Meta-automatic event
+and every Ares write identified either by a local audit or an allowlisted Ares
+API source, and posts only material changes attributable to another person or
+external tool. Tokens are never printed or persisted.
 """
 from __future__ import annotations
 
@@ -276,13 +276,13 @@ def classify_event(event: dict[str, Any], config: dict[str, Any], *, audit_looku
         return {"classification": "ignored_nonmaterial", "alert": False}
     if system_lifecycle_noise(event):
         return {"classification": "ignored_meta_lifecycle", "alert": False}
-    if trusted_source(event, config):
-        match = local_audit_match(event, int(config.get("audit_match_window_seconds") or 1800)) if audit_lookup else None
-        if match:
-            return {"classification": "trusted_ares_audited", "alert": False, "audit_match": match}
-        return {"classification": "trusted_app_without_local_audit", "alert": True}
     if str(event.get("actor_id") or "") == "0":
-        return {"classification": "meta_or_native_rule_material_change", "alert": True}
+        return {"classification": "ignored_meta_automatic", "alert": False}
+    match = local_audit_match(event, int(config.get("audit_match_window_seconds") or 1800)) if audit_lookup else None
+    if match:
+        return {"classification": "trusted_ares_audited", "alert": False, "audit_match": match}
+    if trusted_source(event, config):
+        return {"classification": "trusted_ares_source", "alert": False}
     return {"classification": "external_or_manual_change", "alert": True}
 
 

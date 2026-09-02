@@ -130,17 +130,19 @@
     },
     {
       "id": "KR-013",
-      "question": "Qual é o fallback da Eggbev para campanha gastando após 03:00 sem resultado do pixel?",
+      "question": "Qual é o estado vigente do fallback Eggbev após 03:00 para campanha sem resultado do pixel?",
       "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
       "required_all": [
         "zero_pixel_result_guardrail",
-        "after_hour_et",
-        "spend_threshold_usd",
-        "offsite_conversion.fb_pixel_custom",
-        "set campaign status PAUSED immediately"
+        "\"stage_enabled\": false",
+        "\"write_enabled\": false",
+        "suspended_at_et",
+        "suspended_by",
+        "\"execution_state\": \"disabled_stage_removed_from_shared_wrapper\"",
+        "resume_gate"
       ],
       "forbidden_any": [
-        "\"auto_reactivate\": true"
+        "\"stage_enabled\": true"
       ]
     }
   ]
