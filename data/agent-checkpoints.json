@@ -803,52 +803,52 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0033-CUTOVER-20260902",
-      "next_step": "Incorporar o cutover B005-4 recém-autorizado e aplicar ambos em um lote controlado com backup/readback.",
+      "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B003-2 por B003-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; messages:1544707104089182278; backup:/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
-      "state": "preflight_pass: item b003-3 único, quatro checks graph http 200, token válido/app-bound, 2 roles resolvidas, sheet 13 linhas b003-3 e zero b003-2; canário isolado passou sem alertas ou writes.",
+      "source": "discord:thread:1544705223057211422; route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; backup:/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
+      "state": "completed: b003-3 ativo no registry/cron/canal preservado; quatro checks saudáveis, ids novos e state fresco; sheet reconciliada; alertas de novas aceitações entregues em famílias completas sem título predecessor.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:02:55+00:00"
+      "updated_at": "2026-09-02T14:51:42+00:00"
     },
     {
       "agent": "zeus",
       "id": "META-APP-B0054-CUTOVER-20260902",
-      "next_step": "Validar item 1Password B005-4, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado.",
+      "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B005-3 por B005-4 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; OOB message after 1544707104089182278; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "state": "in_progress: autorização explícita recebida via mensagem oob durante o cutover b003-3; b005-3 permanece contido na pausa manual até o preflight b005-4.",
+      "source": "discord:thread:1544705223057211422; route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; backup:/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
+      "state": "completed: b005-4 ativo no registry/cron/canal preservado; quatro checks saudáveis, state fresco, sheet 14 linhas reconciliada e ciclos sem erro/alerta indevido.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:02:55+00:00"
+      "updated_at": "2026-09-02T14:51:42+00:00"
     },
     {
       "agent": "zeus",
       "id": "META-APP-B0064-CUTOVER-20260902",
-      "next_step": "Concluir durabilidade conjunta após incorporar o cutover B008-3 recém-autorizado.",
+      "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B006-3 por B006-4 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; OOB authorization; backup:/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
-      "state": "production_pass: 1password title/app_name corrigidos para b006-4; quatro checks http 200, token válido/app-bound, 1 role resolvida, sheet live estabilizou em 15 linhas e ciclo estável marcou 14 ausentes, manteve indah blank, zero alertas/erros e zero segunda escrita.",
+      "source": "discord:thread:1544705223057211422; route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; backup:/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
+      "state": "completed: item 1password normalizado para título/app_name b006-4; registry/state/cron ativos, quatro checks saudáveis e sheet autoritativa reconciliada em 15 linhas. bruna andrade saiu da sheet durante o cutover sem atribuição em audit/inventory/report/git/session; registrada como mudança concorrente não atribuída, não anomalia.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:23:30+00:00"
+      "updated_at": "2026-09-02T14:51:42+00:00"
     },
     {
       "agent": "zeus",
       "id": "META-APP-B0083-CUTOVER-20260902",
-      "next_step": "Concluir durabilidade conjunta após incorporar o cutover B010-3 recém-autorizado.",
+      "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B008-2 por B008-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; OOB authorization; backup:/root/mgs-agent/backups/meta-app-b0082-to-b0083-cutover-20260902-102442",
-      "state": "production_pass: quatro checks http 200, token válido/app-bound, 2 roles resolvidas; sheet 9 linhas, 2 presentes blank e 7 ausentes x; segundo ciclo sem writes, alertas ou erros.",
+      "source": "discord:thread:1544705223057211422; route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; backup:/root/mgs-agent/backups/meta-app-b0082-to-b0083-cutover-20260902-102442",
+      "state": "completed: b008-3 ativo no registry/cron/canal preservado; quatro checks saudáveis, state fresco, sheet 9 linhas reconciliada e ciclos sem erro/alerta indevido.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:30:54+00:00"
+      "updated_at": "2026-09-02T14:51:42+00:00"
     },
     {
       "agent": "zeus",
       "id": "META-APP-B0103-CUTOVER-20260902",
-      "next_step": "Validar item 1Password B010-3, quatro checks Graph, roles/identidades, paridade da Sheet e canário isolado.",
+      "next_step": "Operação normal: aceitar a role restante se ainda pendente; monitorar alertas automáticos e evitar validação manual em burst.",
       "objective": "Substituir B010-2 por B010-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544705223057211422; OOB message after B008 production validation; registry:data/meta-app-registry.json; monitor:/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "state": "in_progress: autorização explícita recebida via mensagem oob após o ciclo estável b008-3; b010-2 é o último app restante na pausa manual.",
+      "source": "discord:thread:1544705223057211422; route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; backup:/root/mgs-agent/backups/meta-app-b0102-to-b0103-cutover-20260902-103211",
+      "state": "completed: b010-3 ativo no registry/cron/canal preservado; quatro checks saudáveis, state fresco e sheet 13 linhas reconciliada. adições reais alertaram normalmente. uso meta chegou a 97% e o alerta crítico foi entregue; ciclo seguinte leu 10%/ok, confirmando recuperação da janela.",
       "thread_id": "1544705223057211422",
-      "updated_at": "2026-09-02T14:30:54+00:00"
+      "updated_at": "2026-09-02T14:51:42+00:00"
     },
     {
       "agent": "zeus",
@@ -2002,5 +2002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T14:30:54+00:00"
+  "updated_at": "2026-09-02T14:51:42+00:00"
 }
