@@ -836,7 +836,7 @@
           "ACTIVE delivery at next-day 00:00 ET by default, or the exact Nicolas-approved immediate timing",
           "manifest/preflight/readback readiness"
         ],
-        "required_skill": "eggbev-campaign-cloning",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "scope": "on-demand campaign duplication only; creation from zero remains in thread 1541578556037927053",
         "thread_id": "1543333373945053184",
@@ -880,7 +880,7 @@
           "preflight, final summary, approval, creation and readback sequence",
           "explicit separation from clone, ROAS, Daily and lead guardrail routes"
         ],
-        "required_skill": "eggbev-campaign-creation",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "scope": "creation from zero only; cloning belongs to thread 1543333373945053184",
         "thread_id": "1541578556037927053",
@@ -931,7 +931,7 @@
           "runtime truth for on-demand, post and cron",
           "campaign scope, coverage/readback counts and remaining source limitations"
         ],
-        "required_skill": "eggbev-daily-reporting",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "schedule_design": {
           "cron_enabled": false,
@@ -958,7 +958,7 @@
         "freshness_required": true,
         "generic_configuration_question_means": "configuration of this page-lead route only; never global Ares/Hermes configuration",
         "mapping_errors_visible": true,
-        "required_skill": "eggbev-page-guardrails",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "scheduled_timezone": "America/New_York",
         "scheduled_window_gate": [
@@ -971,7 +971,7 @@
       },
       "roas_cycle": {
         "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578606076231750.txt",
-        "required_skill": "eggbev-roas-operations",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "runner": "scripts/ares-eggbev-roas-cycle.py",
         "runtime": "status writes and direct posts enabled fail-closed; budget write disabled",
@@ -985,7 +985,7 @@
         "canonical_route_registry": "data/ares/discord/eggbev-fixed-routes.json",
         "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578622106865815.txt",
         "manual_title_preserved": true,
-        "required_skill": "eggbev-us-cc-en-bot-operations",
+        "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "scope": "operation-level decisions, precedence, readiness and routing only; functional execution stays in the five dedicated routes",
         "thread_id": "1541578622106865815",
@@ -1507,7 +1507,7 @@
     "status": "approved_by_nicolas"
   },
   "operation_id": "Eggbev-US-CC-EN-BOT",
-  "operation_skill": "eggbev-us-cc-en-bot-operations",
+  "operation_skill": "chatpion-bot-campaign-operations",
   "page_eligibility_policy": {
     "authorization_source": "discord:thread:1544132397300449280",
     "authorized_at_et": "2026-08-31T20:12:35-04:00",
@@ -3046,8 +3046,34 @@
     "meta_writes": 0,
     "recovered_at_utc": "2026-09-02T18:37:16Z"
   },
-  "updated_at": "2026-09-02T15:33:29-04:00",
+  "updated_at": "2026-09-02T16:00:00-04:00",
   "vertical": "CC",
   "write_enabled": false,
-  "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates"
+  "activation_mode": "global default remains disabled; only explicitly registered route-scoped creation, cloning, ROAS and page-protection writes may execute under their own current gates",
+  "strategy_binding": {
+    "family_id": "chatpion_bot_messenger",
+    "family_contract": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+    "consumer_registry": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger-consumers.json",
+    "required_skill": "chatpion-bot-campaign-operations",
+    "binding_version": "1.0",
+    "status": "active",
+    "inheritance": "mechanisms_only; all identity, values, authority, runtime and state remain operation-scoped",
+    "operation_specific_parameters": [
+      "account and identity",
+      "authority and budgets",
+      "Pages, UTM, pixel/event and JSON",
+      "campaign defaults and supported modes",
+      "ROAS thresholds, phases and schedules",
+      "Daily sources/layout/runtime",
+      "Page guardrails, holds and denylist",
+      "Discord threads, prompts, runners, state and audits"
+    ],
+    "latest_operation_override": {
+      "kind": "roas_threshold",
+      "value": 0.36,
+      "scope": "Eggbev-US-CC-EN-BOT only",
+      "source": "discord:thread:1544770844381679666",
+      "decision_id": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902"
+    }
+  }
 }

@@ -101,6 +101,8 @@ Ares gerencia criativos, contas, campanhas, análises e relatórios conforme per
 
 Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode usar campanhas/estratégias resultantes desses fluxos, mas a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
 
+Campanhas Meta da família `chatpion_bot_messenger` usam `chatpion-bot-campaign-operations` como procedimento compartilhado. A skill da família não contém site, conta ou valor operacional: cada consumidor resolve identidade, authority, thresholds, budgets, Pages, horários, threads, runners, state e exceções no próprio contrato. Mudança de família projeta todas as operações ativas; override de uma operação atualiza somente sua rota funcional e sua thread Regras.
+
 ## Gestores e rastreamento por UTM_medium
 
 ```text

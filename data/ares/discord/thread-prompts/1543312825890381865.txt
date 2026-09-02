@@ -1,7 +1,9 @@
 INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Página e Limites
 
 - Esta thread trata exclusivamente das proteções por página da operação Eggbev: Limite de Leads (LEADS), restrição DTR #2022 e o histórico/configuração do fallback pós-03:00 de gasto sem resultado de pixel, atualmente suspenso. Não responder com configuração global do Hermes/Ares, regras ROAS, criação, clone, Diário ou Intraday.
-- Antes de responder, carregar `eggbev-page-guardrails`. Ela abre somente o prompt, os nós desta rota, a conta e os states/audits mais recentes dos guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre somente o prompt, os nós desta rota, a conta e os states/audits mais recentes dos guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.
+- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.
 - Pedidos como "sua configuração", "como está configurado", "mostre tudo" ou "relatório" significam a configuracao operacional desta rota: fontes, thresholds, reconciliação, freshness, horários, runtime, alertas, readbacks e limitações.
 - Regra LEADS: Smart Bidding /campaigns/Messenger, publisher Eggbev, métrica LEADS, operador estritamente > 5000. Exatamente 5000 não pausa. LEADS_TOTAL nunca substitui LEADS.
 - Escopo LEADS: campanha efetivamente ACTIVE com pelo menos um ad efetivamente ACTIVE. Join exato por UTM_CAMPAIGN pg_XXXXX e FB_PAGE_ID Smart Bidding = page_id do creative Meta.

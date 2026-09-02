@@ -195,6 +195,43 @@
       "updated_at": "2026-09-02T16:44:34+00:00"
     },
     {
+      "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
+      "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+      "consumers": [
+        "ares",
+        "chatpion-bot-campaign-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.chatpion-bot",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CHATPION-BOT-STRATEGY-FAMILY-V1-20260902",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Família compartilhada ChatPion BOT/Messenger",
+      "updated_at": "2026-09-02T20:02:54+00:00"
+    },
+    {
+      "canonical_key": "ares.strategy-family.chatpion-bot-messenger.thread-projection",
+      "canonical_source": "profiles/ares-skills/growth/chatpion-bot-campaign-operations/references/thread-projection-and-synchronization.md",
+      "consumers": [
+        "ares",
+        "discord-ops"
+      ],
+      "domain": "ares.campaign-ops.chatpion-bot",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CHATPION-BOT-THREAD-PROJECTION-V1-20260902",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sincronização de rota funcional e Regras por escopo",
+      "updated_at": "2026-09-02T20:02:54+00:00"
+    },
+    {
       "canonical_key": "ares.cpv.campaign_creation_modes",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
       "consumers": [
@@ -1205,6 +1242,24 @@
       "superseded_by": null,
       "title": "Roteamento e relatório da thread Criar Campanhas Eggbev",
       "updated_at": "2026-08-29T22:07:31+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.strategy-binding",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "chatpion-bot-campaign-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CHATPION-CONSUMER-BINDING-V1-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev consome a família ChatPion BOT/Messenger",
+      "updated_at": "2026-09-02T20:02:54+00:00"
     },
     {
       "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
@@ -3593,5 +3648,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T18:43:57+00:00"
+  "updated_at": "2026-09-02T20:02:54+00:00"
 }

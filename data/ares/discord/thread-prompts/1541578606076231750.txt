@@ -1,7 +1,9 @@
 INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 
 - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006. Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
-- Antes de responder ou executar, carregar `eggbev-roas-operations`. Ela abre somente o prompt, os nós `roas_cycle`, o state e o audit mais recentes desta rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- Antes de responder ou executar, carregar `chatpion-bot-campaign-operations`. Ela abre somente o prompt, os nós `roas_cycle`, o state e o audit mais recentes desta rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.
+- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.
 - Threshold diario de corte vigente 0,36. Fase 1: 05, 06, 08, 10 e 12 ET; todos esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold. Fase 2: 13, 14, 16, 18, 20, 22 e 23 ET; corta anuncio quando Purchase ROAS < threshold sem gate de gasto. Exatamente no threshold mantem.
 - O scheduler físico dispara no minuto `:10` de cada hora aprovada e o runner normaliza para a hora lógica `:00`; `:10` permanece dentro da janela fail-closed máxima de 15 minutos e evita o congestionamento do minuto `:00`.
 - Nos ciclos noturnos 20:00, 22:00 e 23:00, N/D/sem ROAS so entra em corte quando a campanha efetivamente rodou naquele dia ET. Campanha criada hoje com `start_time` para o dia seguinte as 00:00 e sempre excluida do corte noturno.

@@ -1,60 +1,27 @@
 ---
 name: eggbev-roas-operations
-description: "Opera ciclos Corte e ROAS da Eggbev BOT."
-version: 1.0.0
+description: "Redireciona ROAS Eggbev para a skill compartilhada."
+version: 2.0.0
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
 metadata:
   hermes:
-    tags: [eggbev, meta-ads, roas, intraday, bot]
-    related_skills: [meta-ads-intraday-operations]
+    tags: [eggbev, compatibility, roas]
+    related_skills: [chatpion-bot-campaign-operations]
 ---
 
-# Eggbev ROAS Operations
+# Eggbev ROAS Compatibility Redirect
 
-Rota funcional dos ciclos Corte e ROAS da operação `Eggbev-US-CC-EN-BOT`.
+Compatibilidade para referências históricas. O mecanismo ativo está em `chatpion-bot-campaign-operations`; thresholds, fases, horários, budgets, runners e estados permanecem no contrato Eggbev.
 
-## When to Use
+## Procedure
 
-Use para pedidos e ciclos da thread `1541578606076231750`, incluindo configuração, execução, relatório, diagnóstico e recovery.
-
-## Fontes canônicas
-
-- Prompt exato: `data/ares/discord/thread-prompts/1541578606076231750.txt`
-- Contrato da rota: `discord.route_contracts.roas_cycle` e `roas_cycle_policy` em `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json`
-- Conta: `data/ares/meta-ads/accounts/1034081997659047.json`
-- Runner: `scripts/ares-eggbev-roas-cycle.py`
-- Helper: `scripts/ares-eggbev-roas-common.py`
-- Audit/state: somente o run e state mais recentes dessa rota
-
-## Disclosure progressivo
-
-1. Leia o prompt e os dois nós de política acima; não carregue o contrato inteiro.
-2. Para estado atual, consulte runner, state e audit mais recentes, depois Meta e Smart Bidding vivas.
-3. Carregue `meta-ads-intraday-operations` somente para mudança de governança, scheduler ou contrato transversal.
-4. Nunca carregar Campaign Engine v3: esta rota não cria nem clona campanhas.
-
-## Procedimento
-
-1. Identificar ciclo/fase e período ET.
-2. Validar Meta, Smart Bidding, UTM/Page, freshness e conflitos antes de qualquer write.
-3. Produzir plano idempotente por anúncio/campanha conforme a fase ativa.
-4. Executar somente o escopo autorizado, com pre-read e GET após cada mudança.
-5. Renderizar e validar o relatório da rota.
-6. Em falha parcial, reconciliar e continuar o mesmo run sem replay cego.
-
-## Guardrails
-
-- O scheduler físico dispara no minuto `:10` das horas aprovadas; `scheduled_cycle_at` normaliza para a hora lógica `:00` e falha fechado acima de `:15`.
-- **Reativação fail-closed por Page:** Fases 1/2, Fase 3, recovery e qualquer ativação manual consultam `page_eligibility_policy` + denylist canônica. Page com qualquer histórico de restrição nunca recebe reativação de campanha, conjunto ou anúncio; os objetos ficam fora e o operador recebe o motivo. A regra não impede cortes/pausas.
-- **Continuidade de corte:** nas Fases 1/2, atraso, staleness, ausência ou inconsistência da dashboard Smart Bidding nunca bloqueiam o corte por Meta Purchase ROAS. O anúncio abaixo do threshold vigente é cortado imediatamente; somente reativações e indicadores/ações dependentes da Smart Bidding ficam fail-closed com alerta/N/D. Falha da própria leitura Meta continua zero write porque não há métrica segura para decidir.
-- Alteração de threshold ou automação segue os gates do contrato.
-- Criação/alteração de cron segue `context/cron-scheduling-policy.md` e exige inventário global antes do minuto ser escolhido.
+1. Carregue a skill compartilhada.
+2. Resolva o consumidor da operação.
+3. Use somente `roas_cycle` e o prompt exato.
+4. Nunca propague um valor Eggbev a outro consumidor.
 
 ## Verification
 
-- ciclo e período corretos;
-- ações e zero-writes explicados;
-- readbacks completos;
-- relatório entregue na thread fixa sem duplicação.
+Registry, contrato e prompt devem apontar para a skill compartilhada; o threshold vigente deve vir do contrato da operação.

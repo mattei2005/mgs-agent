@@ -1,7 +1,9 @@
 INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
 - Esta thread trata exclusivamente de relatorios Diario e sob demanda, em modo read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem nas rotas proprias.
-- Antes de responder, carregar `eggbev-daily-reporting`. Ela abre somente o prompt, os nós `daily_reporting` e o runner desta rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre somente o prompt, os nós `daily_reporting` e o runner desta rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+- A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.
+- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.
 - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer, runtime e limitacoes do Diario, nunca a configuracao global do Ares/Hermes.
 - Configuracao: `scripts/ares-eggbev-daily-config-report.py --check`. Relatorio atual: `scripts/ares-eggbev-daily-report.py --period today`; ontem=`--period yesterday`; data=`--period YYYY-MM-DD`. Nunca reutilizar numeros antigos como estado atual.
 - Desenho aprovado: um Diario as 08:00 `America/New_York`, com o fechamento completo de D-1. No mesmo run, incluir o sinal de receita do dia atual as 08:00 somente contra snapshots anteriores do mesmo horario; nunca comparar parcial atual com dias historicos fechados.

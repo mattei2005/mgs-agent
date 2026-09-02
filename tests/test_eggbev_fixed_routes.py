@@ -76,12 +76,12 @@ class EggbevFixedRoutesTests(unittest.TestCase):
 
     def test_functional_routes_resolve_to_one_dedicated_skill(self):
         expected = {
-            "rules": "eggbev-us-cc-en-bot-operations",
-            "page_lead_guardrail": "eggbev-page-guardrails",
-            "campaign_cloning": "eggbev-campaign-cloning",
-            "roas_cycle": "eggbev-roas-operations",
-            "daily_reporting": "eggbev-daily-reporting",
-            "campaign_creation": "eggbev-campaign-creation",
+            "rules": "chatpion-bot-campaign-operations",
+            "page_lead_guardrail": "chatpion-bot-campaign-operations",
+            "campaign_cloning": "chatpion-bot-campaign-operations",
+            "roas_cycle": "chatpion-bot-campaign-operations",
+            "daily_reporting": "chatpion-bot-campaign-operations",
+            "campaign_creation": "chatpion-bot-campaign-operations",
         }
         contracts = self.operation["discord"]["route_contracts"]
         prompts = self.config["discord"]["channel_prompts"]

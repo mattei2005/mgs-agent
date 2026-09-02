@@ -25,6 +25,7 @@ Creative Ops                            creative-operations-mgs/SKILL.md
 Taxonomia/linhagem/reserva              creative-taxonomy-mgs/SKILL.md
 Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
 Aquisição geral                         paid-acquisition-operations/SKILL.md
+Estratégia BOT/Messenger compartilhada  chatpion-bot-campaign-operations/SKILL.md
 Executor Campaign Ops v3                meta-campaign-engine-v3/SKILL.md
 Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md
 Redirect histórico de guardrails          meta-ads-governance-guardrails/SKILL.md
@@ -72,7 +73,8 @@ Pedido                                           Primeira fonte
 "tráfego direto/CBO"                            direct-traffic-cbo-operations
 "budget/billing"                                SOUL + guardrails + autoridade vigente
 "ROI/performance"                               API/dados reais; período/moeda/fonte
-"ChatPion/quiz/SMS"                             routes.md; Ares não configura
+"campanha BOT/Messenger baseada em ChatPion"     chatpion-bot-campaign-operations + contrato da operação
+"configurar ChatPion/quiz/SMS"                  routes.md; Ares não configura
 "WordPress/pixel crítico"                       routes.md; escalar Zeus/Rodolfo
 "erro do Ares"                                  logs Ares + journal filtrado se infra
 ```

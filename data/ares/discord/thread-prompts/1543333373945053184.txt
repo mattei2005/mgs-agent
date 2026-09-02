@@ -1,7 +1,9 @@
 INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas
 
 - Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite de Leads ficam nas threads próprias.
-- Antes de responder, carregue `eggbev-campaign-cloning`. Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3` apenas depois de fechar o intake e entrar na etapa de manifest/execução; não abra a umbrella Eggbev nem os contratos completos por padrão.
+- Antes de responder, carregue `chatpion-bot-campaign-operations`. Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3` apenas depois de fechar o intake e entrar na etapa de manifest/execução; não abra a umbrella Eggbev nem os contratos completos por padrão.
+- A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.
+- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.
 - Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam o intake. Pergunte somente os campos ainda ausentes, em texto curto e natural:
   1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?
   2. Quantas duplicações de cada campanha?

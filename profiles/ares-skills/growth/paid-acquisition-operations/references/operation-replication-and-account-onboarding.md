@@ -21,7 +21,7 @@ Mesma vertical não autoriza herdar conta, autoridade, budget, threshold, Page, 
 
 - separação de identidade, operação, execução e continuidade;
 - rotas funcionais distintas para regras, criação, clone, performance/ROAS, relatório e guardrails de Page quando a complexidade justificar;
-- uma skill e um prompt específico por rota;
+- uma skill de família com rotas internas e um prompt específico por rota; contratos por operação fornecem identidade, valores, authority, runners e state sem duplicar o procedimento;
 - contrato operacional e contrato Engine por operação;
 - manifest → validate → plan → resumo final → OK → execute → readback;
 - recovery readback-first no mesmo request;
@@ -73,7 +73,7 @@ Para operações BOT/Meta com criação, otimização e proteção de Page, cons
 5. Diário/read-only;
 6. Page e limites.
 
-A rota de Regras não executa trabalho funcional. Cada pedido carrega uma única skill principal; dependências genéricas entram somente quando a etapa exigir.
+A rota de Regras não executa trabalho funcional. Cada pedido carrega a skill da família e resolve somente o nó da rota no contrato da operação; dependências genéricas entram somente quando a etapa exigir.
 
 ## Gates antes de copiar uma operação validada
 

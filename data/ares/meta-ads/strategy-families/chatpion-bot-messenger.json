@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "family_id": "chatpion_bot_messenger",
+  "name": "ChatPion BOT/Messenger Campaign Operations",
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "agent": "ares",
+  "skill": "chatpion-bot-campaign-operations",
+  "scope": {
+    "included": [
+      "Meta Campaign Ops with Messenger destination",
+      "creative lineage and pre-stage gates",
+      "campaign creation and cloning through Campaign Engine v3",
+      "ROAS optimization and controlled reactivation",
+      "read-only reporting",
+      "Page eligibility, restrictions and limits",
+      "canonical Discord thread projections"
+    ],
+    "excluded_by_default": [
+      "ChatPion/DigitalTrChat user or flow configuration",
+      "drip or broadcast configuration",
+      "Smart Bidding template or route configuration",
+      "pixel/CAPI, WordPress, billing and credentials"
+    ]
+  },
+  "route_model": [
+    "rules",
+    "campaign_creation",
+    "campaign_cloning",
+    "roas_cycle",
+    "daily_reporting",
+    "page_guardrails"
+  ],
+  "mechanisms": {
+    "campaign_write": "manifest -> validate -> plan -> final summary -> request approval -> execute -> consolidated readback",
+    "recovery": "readback-first, same request, persisted IDs, missing-or-invalid layer only",
+    "state_isolation": "state, audit, locks, denylist, baselines and performance are consumer-scoped",
+    "parameter_resolution": "explicit authorized request -> active operation override -> family mechanism; missing operation value fails closed",
+    "serving_proof": "ACTIVE is insufficient; delivery claims require impression, spend or equivalent live insight",
+    "cron": "trigger only; operation-scoped schedule, global collision inventory and shared-resource locks required"
+  },
+  "operation_parameters_required": [
+    "identity and ownership",
+    "account alias/path, currency and timezone",
+    "authority and write flags",
+    "Pages, UTMs, pixel/event and Messenger JSON",
+    "campaign structure, copy, naming and creative policy",
+    "supported creation/clone modes",
+    "thresholds, comparators, phases, schedules and budget policy",
+    "report sources, joins, freshness and renderer",
+    "Page guardrails, holds and actions",
+    "Discord routes, prompts, runners, state and audit paths"
+  ],
+  "change_control": {
+    "family_change": "update family sources and project affected routes plus rules for every active consumer",
+    "operation_change": "update only the selected consumer contract/runtime and project affected route plus rules",
+    "reusable_extraction": "promote reusable procedure only; retain values and exceptions in the operation contract",
+    "supersession": "one active version per canonical key; prior version remains historical and points to its successor"
+  },
+  "thread_projection_policy": {
+    "same_request_authority": true,
+    "functional_route_plus_rules": true,
+    "edit_only_persisted_ares_projection": true,
+    "discord_get_readback_required": true,
+    "delete_messages": false,
+    "preserve_human_and_system_history": true,
+    "destructive_cleanup_requires_separate_authorization": true
+  },
+  "onboarding_policy": {
+    "copy_architecture_not_state": true,
+    "start_fail_closed": true,
+    "read_only_before_writes": true,
+    "controlled_write_before_automation": true,
+    "serving_proof_before_go_live": true
+  },
+  "updated_at": "2026-09-02T16:00:00-04:00"
+}

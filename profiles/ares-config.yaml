@@ -612,8 +612,8 @@ discord:
       continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao
       autoriza publicacao Meta.
 
-      - Antes de responder, carregar `eggbev-campaign-creation`. Ela abre somente
-      o prompt, o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3`
+      - Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre
+      somente o prompt, o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3`
       apenas depois de fechar o intake e entrar na etapa de manifest/execução; não
       abrir a umbrella Eggbev nem os contratos completos por padrão.
 
@@ -621,6 +621,14 @@ discord:
       ou "relatorio da configuracao" significam a configuracao operacional da criacao
       Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca,
       versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
+
+      - A skill compartilhada define somente o mecanismo. Identidade, conta, valores,
+      authority, runners e exceções vêm do contrato Eggbev e nunca são propagados
+      a outro consumidor.
+
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread
+      Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros
+      consumidores.
 
       - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py
       --check`. Para intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`.
@@ -727,10 +735,18 @@ discord:
       read-only, da conta Eggbev-US-CC-EN-01-G006. Corte, LEADS, criacao e clone permanecem
       nas rotas proprias.
 
-      - Antes de responder, carregar `eggbev-daily-reporting`. Ela abre somente o
-      prompt, os nós `daily_reporting` e o runner desta rota. Carregar `meta-ads-intraday-operations`
+      - Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre
+      somente o prompt, os nós `daily_reporting` e o runner desta rota. Carregar `meta-ads-intraday-operations`
       apenas para mudança de governança ou scheduler; não abrir a umbrella Eggbev
       nem o contrato completo por padrão.
+
+      - A skill compartilhada define somente o mecanismo. Identidade, conta, valores,
+      authority, runners e exceções vêm do contrato Eggbev e nunca são propagados
+      a outro consumidor.
+
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread
+      Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros
+      consumidores.
 
       - Pedidos como "suas regras", "suas automacoes", "como esta configurado" ou
       "mostre tudo" significam somente horario, periodos, fontes, metricas, renderer,
@@ -845,10 +861,19 @@ discord:
       com configuração global do Hermes/Ares, regras ROAS, criação, clone, Diário
       ou Intraday.
 
-      - Antes de responder, carregar `eggbev-page-guardrails`. Ela abre somente o
-      prompt, os nós desta rota, a conta e os states/audits mais recentes dos guardrails.
-      Carregar `meta-ads-intraday-operations` apenas para mudança de governança ou
-      scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+      - Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre
+      somente o prompt, os nós desta rota, a conta e os states/audits mais recentes
+      dos guardrails. Carregar `meta-ads-intraday-operations` apenas para mudança
+      de governança ou scheduler; não abrir a umbrella Eggbev nem o contrato completo
+      por padrão.
+
+      - A skill compartilhada define somente o mecanismo. Identidade, conta, valores,
+      authority, runners e exceções vêm do contrato Eggbev e nunca são propagados
+      a outro consumidor.
+
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread
+      Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros
+      consumidores.
 
       - Pedidos como "sua configuração", "como está configurado", "mostre tudo" ou
       "relatório" significam a configuracao operacional desta rota: fontes, thresholds,
@@ -934,22 +959,26 @@ discord:
     '1543333373945053184': "INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas\n\
       \n- Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN\
       \ BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite\
-      \ de Leads ficam nas threads próprias.\n- Antes de responder, carregue `eggbev-campaign-cloning`.\
+      \ de Leads ficam nas threads próprias.\n- Antes de responder, carregue `chatpion-bot-campaign-operations`.\
       \ Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3`\
       \ apenas depois de fechar o intake e entrar na etapa de manifest/execução; não\
-      \ abra a umbrella Eggbev nem os contratos completos por padrão.\n- Pedidos como\
-      \ “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam o intake.\
-      \ Pergunte somente os campos ainda ausentes, em texto curto e natural:\n  1.\
-      \ Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n\
-      \  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada\
-      \ duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5.\
-      \ Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n\
-      \  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n\
-      - Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar\
-      \ a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada.\
-      \ Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma\
-      \ nova instrução explícita de Nicolas no próprio pedido.\n- Antes de preparar\
-      \ qualquer modo de clone, inclusive `pure_clone`, consultar `page_eligibility_policy`\
+      \ abra a umbrella Eggbev nem os contratos completos por padrão.\n- A skill compartilhada\
+      \ define somente o mecanismo. Identidade, conta, valores, authority, runners\
+      \ e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.\n\
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread\
+      \ Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros\
+      \ consumidores.\n- Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz\
+      \ um dup” iniciam o intake. Pergunte somente os campos ainda ausentes, em texto\
+      \ curto e natural:\n  1. Qual tipo: duplicação exata, com criativos novos ou\
+      \ com troca de página?\n  2. Quantas duplicações de cada campanha?\n  3. Qual\
+      \ budget diário de cada duplicação?\n  4. Com criativos novos: quais assets\
+      \ e qual copy usar?\n  5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON\
+      \ Messenger completos?\n  6. Existe alguma exceção de público, placements, estratégia\
+      \ ou tracking?\n- Regra obrigatória de Page: se o pedido de `clone_page_switch`\
+      \ não informar a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata\
+      \ será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha\
+      \ após uma nova instrução explícita de Nicolas no próprio pedido.\n- Antes de\
+      \ preparar qualquer modo de clone, inclusive `pure_clone`, consultar `page_eligibility_policy`\
       \ e a denylist canônica para a Page efetiva. Page com qualquer histórico de\
       \ restrição não pode ser clonada nem ativada; fazer zero write e solicitar outra\
       \ Page.\n- Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme\
@@ -1008,10 +1037,18 @@ discord:
       - Esta thread trata exclusivamente dos ciclos de Corte e ROAS da conta Eggbev-US-CC-EN-01-G006.
       Diario, Limite de Leads, criacao e clone permanecem nas rotas proprias.
 
-      - Antes de responder ou executar, carregar `eggbev-roas-operations`. Ela abre
-      somente o prompt, os nós `roas_cycle`, o state e o audit mais recentes desta
-      rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança
+      - Antes de responder ou executar, carregar `chatpion-bot-campaign-operations`.
+      Ela abre somente o prompt, os nós `roas_cycle`, o state e o audit mais recentes
+      desta rota. Carregar `meta-ads-intraday-operations` apenas para mudança de governança
       ou scheduler; não abrir a umbrella Eggbev nem o contrato completo por padrão.
+
+      - A skill compartilhada define somente o mecanismo. Identidade, conta, valores,
+      authority, runners e exceções vêm do contrato Eggbev e nunca são propagados
+      a outro consumidor.
+
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread
+      Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros
+      consumidores.
 
       - Threshold diario de corte vigente 0,36. Fase 1: 05, 06, 08, 10 e 12 ET; todos
       esses ciclos cortam anuncio quando Spend > USD 2 e Purchase ROAS < threshold.
@@ -1161,20 +1198,27 @@ discord:
       conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar
       uma thread substituta.
 
-      - Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato
+      - Antes de responder, carregar `chatpion-bot-campaign-operations` e ler o contrato
       vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint
       canonico.
+
+      - A skill compartilhada define somente os mecanismos da família `chatpion_bot_messenger`.
+      Identidade, conta, budget, thresholds, horários, Pages, writes, crons e exceções
+      continuam exclusivos deste contrato Eggbev.
+
+      - Toda mudança durável aprovada deve ser classificada: `family` atualiza todos
+      os consumidores ativos; `operation` atualiza somente Eggbev. A projeção obrigatória
+      atualiza a rota afetada e esta thread Regras via `scripts/ares-chatpion-bot-strategy-sync.py`,
+      com GET/readback e sem apagar histórico.
 
       - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia,
       readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho
       de Pagina e Limites, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro
       de Regras.
 
-      - Mapa funcional: Criar Campanhas → `eggbev-campaign-creation`; Clonar Campanhas
-      → `eggbev-campaign-cloning`; Corte e ROAS → `eggbev-roas-operations`; Diario
-      → `eggbev-daily-reporting`; Pagina e Limites → `eggbev-page-guardrails`. Cada
-      pedido funcional carrega somente sua skill; a umbrella fica restrita a identidade,
-      autoridade e roteamento.
+      - Mapa funcional: as seis rotas carregam `chatpion-bot-campaign-operations`
+      e resolvem somente o nó correspondente do contrato Eggbev; Regras orienta e
+      roteia, sem executar a função das demais.
 
       - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`;
       Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`;

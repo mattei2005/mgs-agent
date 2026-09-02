@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "family_id": "chatpion_bot_messenger",
+  "family_contract": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+  "required_skill": "chatpion-bot-campaign-operations",
+  "consumers": {
+    "Eggbev-US-CC-EN-BOT": {
+      "status": "active",
+      "operation_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "engine_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "account_contract": "data/ares/meta-ads/accounts/1034081997659047.json",
+      "route_registry": "data/ares/discord/eggbev-fixed-routes.json",
+      "routes": {
+        "rules": "1541578622106865815",
+        "campaign_creation": "1541578556037927053",
+        "campaign_cloning": "1543333373945053184",
+        "roas_cycle": "1541578606076231750",
+        "daily_reporting": "1541578596253175858",
+        "page_guardrails": "1543312825890381865"
+      },
+      "projection_messages": {
+        "roas_cycle": "1544799168869175372",
+        "rules": "1544799173151301673"
+      }
+    }
+  },
+  "onboarding_candidates": {
+    "financeadx-us-cc-en": {
+      "status": "channel_prepared_no_workflow",
+      "channel_id": "1544117442589106328"
+    },
+    "lyzmo-us-cc-en": {
+      "status": "channel_prepared_no_workflow",
+      "channel_id": "1544117058982248448"
+    }
+  },
+  "updated_at": "2026-09-02T16:00:00-04:00"
+}

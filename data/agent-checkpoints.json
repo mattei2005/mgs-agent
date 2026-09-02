@@ -12,6 +12,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CHATPION-BOT-STRATEGY-RESTRUCTURE-20260902",
+      "next_step": "Usar onboarding fail-closed para a próxima operação; valores e authority devem ser aprovados e validados por operação",
+      "objective": "Separar a estratégia reutilizável ChatPion BOT/Messenger dos contratos específicos por site e conta, migrando Eggbev como primeiro consumidor e instituindo sincronização das threads canônicas",
+      "source": "discord:thread:1544794234584961024;data/ares/meta-ads/audit/strategy-family/chatpion-bot-messenger/change-inventory.json;report-infra:1544800086171721731",
+      "state": "completed: family skill/contract identity-free; consumer registry active; eggbev first consumer with threshold 0.36 operation-scoped; six prompts/configs and compatibility redirects reconciled; sync publisher idempotent; roas+rules projections and legacy block read back; 208 tests and 16 knowledge regressions passed; report-infra confirmed; meta writes=0; cron changes=0",
+      "thread_id": "1544794234584961024",
+      "updated_at": "2026-09-02T20:04:28+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-C07-C11-MAXVOL-REPLACEMENT-20260821",
       "next_step": "Às 00:30 São Paulo inicia D1; acompanhar aprovação dos anúncios e observar D1/D2 pelos relatórios canônicos, sem corte automático.",
       "objective": "Substituir C07 e C11 por clones estruturais das duas melhores campanhas MAXVOL, reutilizando e tratando os criativos legados, com início em 22/08/2026 00:30 São Paulo",
@@ -2072,5 +2082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-02T19:37:57+00:00"
+  "updated_at": "2026-09-02T20:04:28+00:00"
 }

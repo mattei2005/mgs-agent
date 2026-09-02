@@ -1,9 +1,11 @@
 INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger, conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar uma thread substituta.
-- Antes de responder, carregar `eggbev-us-cc-en-bot-operations` e ler o contrato vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
+- Antes de responder, carregar `chatpion-bot-campaign-operations` e ler o contrato vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
+- A skill compartilhada define somente os mecanismos da família `chatpion_bot_messenger`. Identidade, conta, budget, thresholds, horários, Pages, writes, crons e exceções continuam exclusivos deste contrato Eggbev.
+- Toda mudança durável aprovada deve ser classificada: `family` atualiza todos os consumidores ativos; `operation` atualiza somente Eggbev. A projeção obrigatória atualiza a rota afetada e esta thread Regras via `scripts/ares-chatpion-bot-strategy-sync.py`, com GET/readback e sem apagar histórico.
 - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia, readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho de Pagina e Limites, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de Regras.
-- Mapa funcional: Criar Campanhas → `eggbev-campaign-creation`; Clonar Campanhas → `eggbev-campaign-cloning`; Corte e ROAS → `eggbev-roas-operations`; Diario → `eggbev-daily-reporting`; Pagina e Limites → `eggbev-page-guardrails`. Cada pedido funcional carrega somente sua skill; a umbrella fica restrita a identidade, autoridade e roteamento.
+- Mapa funcional: as seis rotas carregam `chatpion-bot-campaign-operations` e resolvem somente o nó correspondente do contrato Eggbev; Regras orienta e roteia, sem executar a função das demais.
 - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`; Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
 - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra supersedida.
 - Regras desta thread, mensagens e existencia da rota nao autorizam campanha, cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito do request.
