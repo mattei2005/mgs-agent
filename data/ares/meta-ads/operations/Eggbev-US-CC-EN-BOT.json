@@ -772,7 +772,7 @@
       "daily": "1541578596253175858",
       "intraday": "1541578606076231750",
       "page_lead_guardrail": "1543312825890381865",
-      "rules": "1543280854024060999"
+      "rules": "1541578622106865815"
     },
     "latest_full_thread_update": {
       "at_et": "2026-08-29T15:10:07-04:00",
@@ -795,14 +795,14 @@
     "latest_route_refresh": {
       "api_update_messages_confirmed": 7,
       "at_et": "2026-08-29T15:24:29-04:00",
-      "canonical_rules_thread": "1543280854024060999",
+      "canonical_rules_thread": "1541578622106865815",
       "cron_changes": 0,
       "current_rules_thread_updated_by_response": true,
       "functional_routes_updated_via_api": 5,
       "meta_writes": 0,
       "new_clone_mode": "clone_page_switch",
-      "previous_rules_thread_superseded": "1541578622106865815",
-      "requested_by": "Nicolas",
+      "previous_rules_thread_superseded": "1543280854024060999",
+      "requested_by": "Rodolfo Mattei",
       "supersession_route_updated_via_api": 1
     },
     "route_contracts": {
@@ -951,7 +951,7 @@
         "delivery_failure_is_fatal": true,
         "discord_get_readback_required": true,
         "exact_thread_prompt_configured": true,
-        "fallback_error_thread_id": "1543280854024060999",
+        "fallback_error_thread_id": "1541578622106865815",
         "freshness_maximum_age_hours": 2,
         "freshness_required": true,
         "generic_configuration_question_means": "configuration of this page-lead route only; never global Ares/Hermes configuration",
@@ -981,13 +981,13 @@
       "rules": {
         "canonical_label": "Eggbev-US-CC-EN Regras",
         "canonical_route_registry": "data/ares/discord/eggbev-fixed-routes.json",
-        "exact_thread_prompt": "data/ares/discord/thread-prompts/1543280854024060999.txt",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578622106865815.txt",
         "manual_title_preserved": true,
         "required_skill": "eggbev-us-cc-en-bot-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
         "scope": "operation-level decisions, precedence, readiness and routing only; functional execution stays in the five dedicated routes",
-        "thread_id": "1543280854024060999",
-        "thread_name": "Vamos Uma Atualização Massiva nos - Nicolas",
+        "thread_id": "1541578622106865815",
+        "thread_name": "Eggbev-US-CC-EN Regras",
         "write_authority": "none by route existence or pinned message"
       }
     },
@@ -1552,7 +1552,7 @@
     "authorized_by": "Nicolas",
     "authorized_by_discord_id": "1055570806945620030",
     "discord": {
-      "fallback_error_thread_id": "1543280854024060999",
+      "fallback_error_thread_id": "1541578622106865815",
       "mapping_and_freshness_errors_are_posted": true,
       "post_failure_fails_run": true,
       "post_requires_get_readback": true,
@@ -1736,7 +1736,7 @@
     "authorized_by": "Nicolas Holanda",
     "authorized_by_discord_id": "1055570806945620030",
     "discord": {
-      "fallback_error_thread_id": "1543280854024060999",
+      "fallback_error_thread_id": "1541578622106865815",
       "post_failure_fails_run": true,
       "post_requires_get_readback": true,
       "thread_id": "1543312825890381865",
@@ -1811,7 +1811,7 @@
       "spend_field": "spend"
     },
     "discord": {
-      "fallback_error_thread_id": "1543280854024060999",
+      "fallback_error_thread_id": "1541578622106865815",
       "post_failure_fails_run": true,
       "post_requires_get_readback": true,
       "thread_id": "1543312825890381865",

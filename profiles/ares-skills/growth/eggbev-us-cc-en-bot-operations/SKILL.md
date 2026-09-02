@@ -48,7 +48,7 @@ Página e Limites         eggbev-page-guardrails          meta-ads-intraday-oper
 Threads fixas:
 
 ```text
-Regras            1543280854024060999
+Regras            1541578622106865815
 Corte e ROAS      1541578606076231750
 Diário             1541578596253175858
 Criar Campanhas   1541578556037927053

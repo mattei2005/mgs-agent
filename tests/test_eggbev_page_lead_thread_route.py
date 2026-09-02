@@ -29,13 +29,13 @@ class EggbevPageLeadThreadRouteTests(unittest.TestCase):
         self.assertTrue(route['activation_pending_gateway_reload'])
         self.assertEqual(route['canonical_prompt_source'], 'data/ares/discord/thread-prompts/1543312825890381865.txt')
         self.assertTrue(route['mapping_errors_visible'])
-        self.assertEqual(route['fallback_error_thread_id'], '1543280854024060999')
+        self.assertEqual(route['fallback_error_thread_id'], '1541578622106865815')
 
     def test_parent_channel_prompt_points_to_current_rules_thread(self):
         config = yaml.safe_load(VERSIONED_CONFIG.read_text())
         parent = config['discord']['channel_prompts']['1539422731727147079']
-        self.assertIn('regras 1543280854024060999', parent)
-        self.assertNotIn('regras 1541578622106865815', parent)
+        self.assertIn('regras 1541578622106865815', parent)
+        self.assertNotIn('regras 1543280854024060999', parent)
 
 
 if __name__ == '__main__':
