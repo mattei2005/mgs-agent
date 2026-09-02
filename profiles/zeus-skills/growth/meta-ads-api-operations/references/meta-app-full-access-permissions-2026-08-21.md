@@ -58,14 +58,28 @@ pages_manage_engagement     Page moderation
 
 Do not request `publish_video` for video ads; it is for live-video streaming. Do not request Page Public Content Access or Business Asset User Profile Access for normal owned-asset campaign operations.
 
-## Marketing API Access Tier Full Access
+## Marketing API Access Tier / Ads Management Standard Access
 
-Official requirements:
+O nome operacional atual documentado pela Meta é **Ads Management Standard Access**. Em alguns dashboards e no vocabulário MGS ele também aparece como **Marketing API Access Tier = Full Access**. O header live esperado continua sendo `ads_api_access_tier=standard_access`.
 
-- at least 500 Marketing API calls in the last 15 days;
-- less than 15% errors in the last 500 calls.
+Rota oficial para solicitar:
 
-Full Access is separate from Advanced Access on permissions. Validate live headers after approval; the runtime has historically exposed the production-equivalent internal label `standard_access` versus `development_access`.
+1. Abrir `App Dashboard > App Review > Permissions and Features`.
+2. Criar uma submissão para **Ads Management Standard Access**.
+3. Incluir `ads_read` para reporting e `ads_management` para leitura e gestão de anúncios.
+4. Concluir o App Review e a Business Verification exigidos pela Meta.
+5. Após aprovação, colocar o app em **Live mode**; aprovação sem Live mode não ativa Standard Access.
+
+Requisitos atuais de manutenção documentados pela Meta:
+
+- app em Live mode;
+- recurso Ads Management Standard Access aprovado no App Review;
+- pelo menos **1.500 chamadas da Marketing API nos últimos 30 dias**;
+- taxa de erro **inferior a 10% nos últimos 30 dias**.
+
+Não confundir com a referência histórica de 500 chamadas/15 dias e erro abaixo de 15%; ela não é mais o critério oficial atual.
+
+Standard Access é separado do Advanced Access das permissions. Validar sempre pelo Dashboard e pelo header live; o runtime expõe `standard_access` versus `development_access`.
 
 ## App/business prerequisites
 

@@ -348,25 +348,29 @@ def test_production_cpv_policy_rejects_legacy_deep_pure_clone_without_tracking_p
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     account_id = '1046241194533786'
     legacy = pure_campaign(36, account=account_id)
-    legacy['app_key'] = 'mgs-meta-app-current'
+    legacy['app_key'] = 'mgs-meta-app-1299247318762949'
     with pytest.raises(ManifestError, match='requires tracking-aware pure_clone'):
         validate_account_policy(manifest([legacy]), config)
 
     tracked = tracked_pure_campaign(36, account=account_id)
-    tracked['app_key'] = 'mgs-meta-app-current'
+    tracked['app_key'] = 'mgs-meta-app-1299247318762949'
     validate_account_policy(manifest([tracked]), config)
 
 
 def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clone():
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    for account_id in ('1046241194533786', '2039876850230678'):
+    account_app_keys = {
+        '1046241194533786': 'mgs-meta-app-1299247318762949',
+        '2039876850230678': 'mgs-meta-app-current',
+    }
+    for account_id, app_key in account_app_keys.items():
         direct = from_zero_campaign(1, account=account_id)
-        direct['app_key'] = 'mgs-meta-app-current'
+        direct['app_key'] = app_key
         with pytest.raises(ManifestError, match='does not support mode from_zero_prestaged'):
             validate_account_policy(manifest([direct]), config)
 
         lineage = prestaged_campaign(1, account=account_id)
-        lineage['app_key'] = 'mgs-meta-app-current'
+        lineage['app_key'] = app_key
         validate_account_policy(manifest([lineage]), config)
 
 

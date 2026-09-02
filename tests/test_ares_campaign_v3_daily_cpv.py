@@ -613,7 +613,7 @@ def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
     backend.drive_token = None
     backend._graph_pages = lambda path, params: []
     result = backend.meta_preflight()
-    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+    assert backend.common.token_calls == ["APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei"]
     assert result["token_report"]["field"] == "token"
     assert result["page"]["tasks"] == ["ADVERTISE"]
 

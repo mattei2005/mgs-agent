@@ -17,7 +17,7 @@ spec.loader.exec_module(monitor)
 
 CONFIG = {
     'trusted_api_sources': [
-        {'actor_id': '10229590004590742', 'application_id': '163163106580854'}
+        {'actor_id': '10233237854144701', 'application_id': '1299247318762949'}
     ],
     'account_alias': 'Creditoparaveiculo-BR-CAR-BR-13-G006',
 }
@@ -49,14 +49,14 @@ class ActivityMonitorTests(unittest.TestCase):
         self.assertEqual(result['classification'], 'external_or_manual_change')
 
     def test_trusted_ares_source_without_audit_is_ignored(self):
-        row = event(actor_id='10229590004590742', application_id='163163106580854')
+        row = event(actor_id='10233237854144701', application_id='1299247318762949')
         result = monitor.classify_event(row, CONFIG, audit_lookup=False)
         self.assertFalse(result['alert'])
         self.assertEqual(result['classification'], 'trusted_ares_source')
 
     def test_same_advertiser_actor_via_power_editor_alerts(self):
         row = event(
-            actor_id='10229590004590742',
+            actor_id='10233237854144701',
             actor_name='Advertiser Profile',
             application_id='119211728144504',
             application_name='Power Editor',

@@ -11,7 +11,7 @@ from .media_registry import MediaRegistry
 from .source_selection import asset_group_vehicle_types, canonical_vehicle_type
 
 CPV_ACCOUNT_ID = "1046241194533786"
-CPV_APP_KEY = "mgs-meta-app-current"
+CPV_APP_KEY = "mgs-meta-app-1299247318762949"
 CPV_PAGE_ID = "621037101089579"
 SP = ZoneInfo("America/Sao_Paulo")
 CPV_CANONICAL_VIDEO_RE = re.compile(

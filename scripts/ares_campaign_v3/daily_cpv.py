@@ -52,7 +52,8 @@ ACCOUNT_ALIAS = "Creditoparaveiculo-BR-CAR-BR-13-G006"
 PAGE_ID = CPV_PAGE_ID
 DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
 FOLDER_MIME = "application/vnd.google-apps.folder"
-TOKEN_ITEM = "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"
+TOKEN_ITEM = "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei"
+TOKEN_CACHE_PATH = "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-roosevelt-minibot-1299247318762949.json"
 SB_TOKEN_ITEM = "Ares - Smartbidding Dashboard"
 SB_PUBLISHER = "digital-trust_creditoparaveiculo"
 SB_DOMAIN = "creditoparaveiculo"
@@ -1152,6 +1153,9 @@ def post_discord(message: str) -> dict[str, Any]:
 class LiveDailyBackend:
     def __init__(self, paths: DailyPaths):
         self.paths = paths
+        os.environ["ARES_META_TOKEN_CACHE_PATH"] = TOKEN_CACHE_PATH
+        os.environ["ARES_META_TOKEN_CACHE_LOCK_PATH"] = TOKEN_CACHE_PATH + ".lock"
+        os.environ["ARES_META_GRAPH_VERSION"] = GRAPH_VERSION
         self.common = _load_module(COMMON_PATH, "ares_meta_common_cpv_v3_daily")
         self.sb_common = _load_module(SB_COMMON_PATH, "ares_sb_common_cpv_v3_daily")
         self.drive_module = _load_module(DRIVE_MODULE_PATH, "ares_drive_cpv_v3_daily")

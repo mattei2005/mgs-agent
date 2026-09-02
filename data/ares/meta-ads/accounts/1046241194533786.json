@@ -40,8 +40,17 @@
         "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR",
         "stock_report_required": true
       },
-      "token_1password_item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
-      "account_reference_1password_item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+      "token_1password_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+      "account_reference_1password_item": "APP NOVO 02/09 Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+      "meta_app": {
+        "app_id": "1299247318762949",
+        "app_name": "minibot",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "token_identity": "Roosevelt Mattei",
+        "marketing_api_access_tier": "development_access",
+        "cutover_at_utc": "2026-09-02T17:29:42Z",
+        "authorization_source": "discord:thread:1544757670412820541#1544760055004397618"
+      },
       "meta_detected": {
         "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
         "currency": "USD",
@@ -51,19 +60,34 @@
       },
       "technical_access": {
         "validated": true,
+        "validation_mode": "read_only_post_cutover",
         "http_status": 200,
+        "token_identity": "Roosevelt Mattei",
+        "meta_app_id": "1299247318762949",
         "scopes_granted": [
           "ads_management",
+          "ads_mcp_management",
           "ads_read",
           "business_management",
+          "catalog_management",
+          "email",
+          "facebook_branded_content_ads_brand",
           "instagram_basic",
+          "instagram_branded_content_ads_brand",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "leads_retrieval",
           "pages_manage_ads",
           "pages_manage_engagement",
+          "pages_manage_metadata",
           "pages_manage_posts",
           "pages_messaging",
           "pages_read_engagement",
           "pages_read_user_content",
           "pages_show_list",
+          "pages_utility_messaging",
           "public_profile",
           "read_insights"
         ],
@@ -80,11 +104,13 @@
           "adcreatives": true,
           "adspixels": true,
           "insights": true,
+          "target_page_present": true,
+          "target_page_advertise_task": true,
           "http_status_all": 200
         },
         "campaign_read_validated": true,
-        "write_not_exercised": true,
-        "validated_at": "2026-08-19T12:51:30-04:00"
+        "write_not_exercised_after_cutover": true,
+        "validated_at": "2026-09-02T14:29:42-03:00"
       },
       "daily_budget_policy": {
         "operational_account_cap_usd": 500.0,

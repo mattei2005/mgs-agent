@@ -2418,6 +2418,8 @@
     "policy_revised_by": "Rodolfo Mattei",
     "policy_revised_at_et": "2026-09-02T12:16:34-04:00",
     "policy_revision_source": "discord:thread:1544731247996047492",
+    "credential_cutover_at_utc": "2026-09-02T17:29:42Z",
+    "credential_cutover_source": "discord:thread:1544757670412820541#1544760055004397618",
     "scope": "material account, campaign, ad set, ad, budget, status, targeting, bid, schedule, audience and funding changes attributable to a person or external tool other than Ares on account 1046241194533786",
     "graph_version": "v26.0",
     "schedule": "every 5 minutes",
@@ -2445,10 +2447,10 @@
         "application_name": "minibot rod"
       },
       {
-        "actor_id": "122171858450667280",
-        "actor_name": "Rafael Lucas Oliveira",
-        "application_id": "860397696767230",
-        "application_name": "BrightPath done"
+        "actor_id": "10233237854144701",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "1299247318762949",
+        "application_name": "minibot"
       }
     ]
   },
@@ -2954,9 +2956,13 @@
     "next_step": "no campaign-creation capability blocker remains; future production creation still requires the operation-specific scope and normal preflight/readback gates"
   },
   "page_asset_permission": {
-    "status": "validated_post_auth_graph_v26_account_page_advertise_and_ad_write",
-    "token_identity": "Rafael Lucas Oliveira",
-    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "status": "validated_graph_v26_account_page_advertise_read_only_after_20260902_cutover; ads_management_scope_granted; write_not_exercised_with_new_token",
+    "token_identity": "Roosevelt Mattei",
+    "token_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+    "meta_app_id": "1299247318762949",
+    "meta_app_name": "minibot",
+    "marketing_api_access_tier": "development_access",
+    "permission_scope_note": "token grants all scopes requested by Rodolfo plus public_profile; token grant does not prove every permission has Advanced Access and does not replace Ads Management Standard Access",
     "oauth_scopes_required_present": [
       "ads_management",
       "ads_read",
@@ -2981,7 +2987,7 @@
       "title": "No permission to access this profile"
     },
     "campaign_delete_capability": "new advertiser token returned HTTP 200 success=false and left test campaign PAUSED; deterministic cleanup used the prior account credential and validated DELETED",
-    "validated_at_et": "2026-08-20T08:51:00-04:00",
+    "validated_at_et": "2026-09-02T14:29:42-03:00",
     "meta_account_security_checkpoint": {
       "code": 31,
       "error_subcode": 3858385,
@@ -3011,6 +3017,41 @@
       "resolved_at_et": "2026-08-20T13:36:00-04:00",
       "resolution": "email confirmation completed in Ads Manager; the same token passed Graph v26 validate-only and real PAUSED ad creation"
     }
+  },
+  "meta_app_cutover_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541#1544760055004397618",
+    "cutover_at_utc": "2026-09-02T17:29:42Z",
+    "scope": "account 1046241194533786 only; account 2039876850230678 remains on the Rafael token",
+    "previous": {
+      "token_identity": "Rafael Lucas Oliveira",
+      "meta_app_id": "860397696767230",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "marketing_api_access_tier": "development_access"
+    },
+    "current": {
+      "token_identity": "Roosevelt Mattei",
+      "meta_app_id": "1299247318762949",
+      "meta_app_name": "minibot",
+      "token_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+      "account_reference_item": "APP NOVO 02/09 Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+      "marketing_api_access_tier": "development_access",
+      "granted_scope_count_including_public_profile": 26
+    },
+    "preflight": {
+      "debug_token_http": 200,
+      "token_valid": true,
+      "account_http": 200,
+      "account_status": 1,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "target_page_id": "621037101089579",
+      "target_page_present": true,
+      "advertise_task_present": true,
+      "campaign_edge_http": 200,
+      "writes_applied": 0
+    },
+    "rollback": "restore the backed-up active references and prior app_key; old 1Password token is preserved and not revoked"
   },
   "token_refresh_validation_20260820": {
     "reported_by": "Rodolfo Mattei",
