@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-09-02T10:17:57-04:00",
-  "source": "active role identity baselines; B006-3 retired after B006-4 replacement cutover",
+  "generated_at": "2026-09-02T10:28:57-04:00",
+  "source": "active role identity baselines; B008-2 retired after B008-3 replacement cutover",
   "apps": {
     "B001-2": {
       "ids_sha256": "990f48ab1e31381ae6c60d545e9199f63831cfc3f8c0412356105641ecfd3e58",
@@ -409,67 +409,6 @@
         {
           "id": "122163264362967104",
           "name": "Ameenah Abdullahi",
-          "role": "administrators"
-        }
-      ]
-    },
-    "B008-2": {
-      "ids_sha256": "57c28b3601d3e35d7bd1c40067a0a46fe57dbf857923745031ecbd9efb6bc163",
-      "role_count": 11,
-      "roles": [
-        {
-          "id": "4359540774191222",
-          "name": "Arruda Arruda",
-          "role": "administrators"
-        },
-        {
-          "id": "1362207179453913",
-          "name": "Refi Aldiyansyah",
-          "role": "administrators"
-        },
-        {
-          "id": "2096275071297136",
-          "name": "Ismail Mail",
-          "role": "administrators"
-        },
-        {
-          "id": "1027904610148991",
-          "name": "André De Souza",
-          "role": "administrators"
-        },
-        {
-          "id": "3478932802274385",
-          "name": "Mïïläynïï Lëändrö",
-          "role": "administrators"
-        },
-        {
-          "id": "122232315188565948",
-          "name": "Yu Hana",
-          "role": "administrators"
-        },
-        {
-          "id": "122176416698892328",
-          "name": "Mary Pessoa Neres",
-          "role": "administrators"
-        },
-        {
-          "id": "4426044740996089",
-          "name": "Oncho Anha",
-          "role": "administrators"
-        },
-        {
-          "id": "1711308843486053",
-          "name": "Phong Huynh",
-          "role": "administrators"
-        },
-        {
-          "id": "2580256232422122",
-          "name": "Ed Michael Sena",
-          "role": "administrators"
-        },
-        {
-          "id": "1740176133697682",
-          "name": "Lance David",
           "role": "administrators"
         }
       ]
@@ -1024,6 +963,70 @@
       "retired_at": "2026-09-02T10:17:57-04:00",
       "replaced_by": "B006-4",
       "source_message_id": "OOB-after-B003-B005-production-validation"
+    },
+    "B008-2": {
+      "ids_sha256": "57c28b3601d3e35d7bd1c40067a0a46fe57dbf857923745031ecbd9efb6bc163",
+      "role_count": 11,
+      "roles": [
+        {
+          "id": "4359540774191222",
+          "name": "Arruda Arruda",
+          "role": "administrators"
+        },
+        {
+          "id": "1362207179453913",
+          "name": "Refi Aldiyansyah",
+          "role": "administrators"
+        },
+        {
+          "id": "2096275071297136",
+          "name": "Ismail Mail",
+          "role": "administrators"
+        },
+        {
+          "id": "1027904610148991",
+          "name": "André De Souza",
+          "role": "administrators"
+        },
+        {
+          "id": "3478932802274385",
+          "name": "Mïïläynïï Lëändrö",
+          "role": "administrators"
+        },
+        {
+          "id": "122232315188565948",
+          "name": "Yu Hana",
+          "role": "administrators"
+        },
+        {
+          "id": "122176416698892328",
+          "name": "Mary Pessoa Neres",
+          "role": "administrators"
+        },
+        {
+          "id": "4426044740996089",
+          "name": "Oncho Anha",
+          "role": "administrators"
+        },
+        {
+          "id": "1711308843486053",
+          "name": "Phong Huynh",
+          "role": "administrators"
+        },
+        {
+          "id": "2580256232422122",
+          "name": "Ed Michael Sena",
+          "role": "administrators"
+        },
+        {
+          "id": "1740176133697682",
+          "name": "Lance David",
+          "role": "administrators"
+        }
+      ],
+      "retired_at": "2026-09-02T10:28:57-04:00",
+      "replaced_by": "B008-3",
+      "source_message_id": "OOB-after-B006-reconciliation"
     }
   }
 }

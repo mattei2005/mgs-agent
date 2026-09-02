@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-09-02T10:17:57-04:00",
+  "updated_at": "2026-09-02T10:28:57-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-after-B003-B005-production-validation",
+  "source_message_id": "OOB-after-B006-reconciliation",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -77,11 +77,12 @@
       "expected_sheet_roles": 18
     },
     {
-      "app": "B008-2",
+      "app": "B008-3",
       "channel_id": "1521252172929564744",
       "channel_name": "b008-2-app-status",
-      "admin": "Lance David",
-      "onepassword_item_title": "BOT B008-2 Token - Lance David"
+      "admin": "Refi Aldiyansyah",
+      "onepassword_item_title": "BOT B008-3 Token - Refi Aldiyansyah",
+      "expected_sheet_roles": 9
     },
     {
       "app": "B009-3",
@@ -481,6 +482,7 @@
   "source_message_ids": [
     "1544707104089182278",
     "OOB-after-1544707104089182278",
-    "OOB-after-B003-B005-production-validation"
+    "OOB-after-B003-B005-production-validation",
+    "OOB-after-B006-reconciliation"
   ]
 }
