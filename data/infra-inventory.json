@@ -2,7 +2,8 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-09-02T13:28:16-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "last_updated": "2026-09-02T13:42:00.324559-04:00"
   },
   "system_packages": [
     {
@@ -11801,6 +11802,111 @@
         "reason": "task explicitly prohibited direct Discord/send_message; final response is delivered by the alert monitor"
       },
       "updated_at": "2026-09-02T01:46:27-04:00"
+    },
+    {
+      "id": "ares-cpv13-meta-app-cutover-20260902",
+      "type": "meta_app_credential_cutover",
+      "agent": "ares",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544757670412820541#1544760055004397618",
+      "scope": "Creditoparaveiculo-BR-CAR-BR-13-G006 account 1046241194533786 only; account 05 and rollback remain on Rafael",
+      "previous": {
+        "token_identity": "Rafael Lucas Oliveira",
+        "meta_app_id": "860397696767230",
+        "marketing_api_access_tier": "development_access"
+      },
+      "current": {
+        "token_identity": "Roosevelt Mattei",
+        "meta_app_id": "1299247318762949",
+        "meta_app_name": "minibot",
+        "token_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+        "account_reference_item": "APP NOVO 02/09 Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+        "marketing_api_access_tier": "development_access",
+        "granted_scope_count_including_public_profile": 26
+      },
+      "backup": "/root/.hermes/secure-backups/ares-cpv13-meta-app-cutover/20260902T172929Z",
+      "validation": {
+        "pytest": "125 passed",
+        "py_compile": "PASS",
+        "json_readback": "PASS",
+        "offline_smoke": "OFFLINE_SMOKE_OK; 3 campaigns; bundles 2+1; 3 unique IDs; zero external network calls",
+        "live_meta_preflight": "configured item readback; token valid; app/user exact; account active; 17 campaigns read; Page ADVERTISE; tier development_access",
+        "activity_monitor_dry_run": "ok; zero delivery",
+        "cache": "dedicated CPV13 and generic monitor cache item match; mode 0600",
+        "creation_hold_preserved": true,
+        "meta_writes": 0,
+        "budget_writes": 0,
+        "status_writes": 0
+      },
+      "artifacts": {
+        "config.json#0": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+          "sha256": "4896fa86cfb815d7a75b4ef986be8d9fdf9a131bba3c7ce55bc58f495ff0bd25",
+          "size_bytes": 12153,
+          "mode": "0o644"
+        },
+        "1046241194533786.json#1": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/accounts/1046241194533786.json",
+          "sha256": "fb6655e8e3e6085ea35b5a784a9cb21c6d58533f5520ec779a4da27ea153f533",
+          "size_bytes": 4846,
+          "mode": "0o644"
+        },
+        "Creditoparaveiculo-BR-CAR-BR.json#2": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+          "sha256": "0cdf62d2ef6dc7bfffe5f1659bb0b84beea9d7adb662eee1aab259ea112b12f8",
+          "size_bytes": 168500,
+          "mode": "0o600"
+        },
+        "Creditoparaveiculo-BR-CAR-BR-v3.json#3": {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+          "sha256": "d3bd7adee22c57b0e92394b48f296cbfc499559be963133b39322260c4a942ec",
+          "size_bytes": 10758,
+          "mode": "0o644"
+        },
+        "adapters.py#4": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/adapters.py",
+          "sha256": "ca8af2908281e06def57c2fdcba9724752090a3880c55d132076479050aeb1fd",
+          "size_bytes": 9261,
+          "mode": "0o644"
+        },
+        "daily_cpv.py#5": {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+          "sha256": "804cb735500c60ceb7ea87cb6d36677df8673fd1334649aecdcabae3e76ee0b6",
+          "size_bytes": 120948,
+          "mode": "0o644"
+        },
+        "test_ares_campaign_engine_v3.py#6": {
+          "path": "/root/mgs-agent/tests/test_ares_campaign_engine_v3.py",
+          "sha256": "6d1a41f225c08429309089a31e89d81f6b9efed05bf28c521612cabe98e7e889",
+          "size_bytes": 70157,
+          "mode": "0o644"
+        },
+        "test_ares_campaign_v3_daily_cpv.py#7": {
+          "path": "/root/mgs-agent/tests/test_ares_campaign_v3_daily_cpv.py",
+          "sha256": "25994628198fe1364986c64948aaa32eb5f396f5bcd5815a90ef14dd381b58f6",
+          "size_bytes": 42295,
+          "mode": "0o644"
+        },
+        "test_ares_meta_account_activity_monitor.py#8": {
+          "path": "/root/mgs-agent/tests/test_ares_meta_account_activity_monitor.py",
+          "sha256": "a52f6d122029c9cd51a5625473e8af69a4a1917c2ed4fc9cfc4861a293ed3937",
+          "size_bytes": 9654,
+          "mode": "0o644"
+        },
+        "meta-app-full-access-permissions-2026-08-21.md#9": {
+          "path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md",
+          "sha256": "cbc7e8dda6a65d7656d5c7e3906d88170f8a0ed75cba682733061c5f31be9a30",
+          "size_bytes": 7617,
+          "mode": "0o600"
+        },
+        "meta-app-full-access-permissions-2026-08-21.md#10": {
+          "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md",
+          "sha256": "cbc7e8dda6a65d7656d5c7e3906d88170f8a0ed75cba682733061c5f31be9a30",
+          "size_bytes": 7617,
+          "mode": "0o600"
+        }
+      },
+      "updated_at": "2026-09-02T13:42:00.324559-04:00"
     }
   ],
   "profile_skill_references": [
@@ -12971,8 +13077,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/adapters.py",
-      "size_bytes": 9252,
-      "modified_at": "2026-08-27T13:35:34-04:00"
+      "size_bytes": 9261,
+      "modified_at": "2026-09-02T13:32:11.725062-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/cli.py",
@@ -12991,8 +13097,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
-      "size_bytes": 120618,
-      "modified_at": "2026-08-30T21:26:47-04:00"
+      "size_bytes": 120948,
+      "modified_at": "2026-09-02T13:32:13.779063-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_clone.py",

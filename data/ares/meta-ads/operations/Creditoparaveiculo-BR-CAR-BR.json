@@ -3051,6 +3051,24 @@
       "campaign_edge_http": 200,
       "writes_applied": 0
     },
+    "post_cutover_validation": {
+      "configured_item_readback": true,
+      "debug_token_app_id": "1299247318762949",
+      "debug_token_user_id": "10233237854144701",
+      "token_valid": true,
+      "account_campaigns_read": 17,
+      "page_advertise_readback": true,
+      "marketing_api_access_tier": "development_access",
+      "dedicated_cache_mode": "0600",
+      "activity_monitor_dry_run": "ok; zero delivery",
+      "pytest": "125 passed",
+      "offline_smoke": "OFFLINE_SMOKE_OK; 3 campaigns; planner 2+1; 3 unique campaign IDs; zero external network calls",
+      "creation_hold_preserved": true,
+      "meta_writes": 0,
+      "budget_writes": 0,
+      "status_writes": 0
+    },
+    "backup": "/root/.hermes/secure-backups/ares-cpv13-meta-app-cutover/20260902T172929Z",
     "rollback": "restore the backed-up active references and prior app_key; old 1Password token is preserved and not revoked"
   },
   "token_refresh_validation_20260820": {
