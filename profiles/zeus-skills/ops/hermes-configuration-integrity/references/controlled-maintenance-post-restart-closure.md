@@ -29,6 +29,16 @@ If the user asks whether the update succeeded before the external validator fini
 3. Report the narrow truth: activation/reconnection passed, but final closure is still running.
 4. Wait for the existing validator's terminal result, then issue one consolidated report. Do not call the maintenance complete from READY markers alone.
 
+### Resume an activation whose validator stopped or never closed
+
+When activation is already live but the independent validator terminated, was never scheduled, or left only `activated_pending_validation`:
+
+1. Reconcile audit, finalizer log, unit history, wrapper/process provenance, and current gateway state before acting. Do not infer that the target is inactive from a missing final-status file.
+2. Inspect the validator entry point before invoking it. If its normal `main()` can roll back pointers or restart gateways on a failed gate, never run that entry point inside the active gateway turn.
+3. Use a side-effect-free acceptance function/mode, or execute the exact gates individually in foreground: immutable/target checks, live provenance, current readiness, config/auth, mirrors, patch reverse-check, guard, regression, and exact-marker one-shots.
+4. Treat readiness artifacts as PID-bound. A READY file for an earlier process proves only that earlier activation. If current healthy PIDs differ, validate fresh service start times and Discord connection markers; do not relabel stale readiness as current or call it a target failure.
+5. If every gate passes, persist the result, `final-status.json`, inventory, checkpoint, audit, and one REPORT-INFRA readback without a duplicate restart or a second thread post. If a gate fails, classify target failure versus controller defect and use only the authorized detached rollback path—never a foreground rollback from the live agent.
+
 ## 2. Revalidate gateways independently
 
 For every gateway read `ActiveState`, `SubState`, `MainPID`, `ExecMainStatus`, `NRestarts`, and start time. Require:
@@ -57,6 +67,18 @@ Treat Git as authoritative. The cutover-blocking snapshot must contain only runt
 - exact live patch path set.
 
 A version banner may identify the release correctly while update-status text is cache-shaped. If it conflicts with the graph, report release/version and Git behind count separately. An upstream commit arriving after freeze is not target drift.
+
+### Planned cutover writes need two-state validation
+
+If the finalizer intentionally replaces a managed config, SOUL, launcher, or other frozen path during cutover, a pre-cutover checksum manifest cannot be replayed blindly after activation: the expected transition will look like drift.
+
+1. Keep the preimage checksum immutable as rollback evidence; never regenerate it from the already-active bytes merely to make validation green.
+2. Name every planned transition path in the controller contract before scheduling.
+3. In post-cutover validation, exclude only those named paths from the preimage comparison and require each one to equal its separately frozen target bytes exactly, including its live/versioned mirror pair when applicable.
+4. Any other mismatch remains a hard failure. An unnamed changed path must not be excused as “probably part of cutover.”
+5. Contract-test both sides: the planned target transition passes, while drift in any non-transition path still fails.
+
+This separates a legitimate state transition from mutable closure artifacts and prevents both false rollback and post-hoc snapshot blessing.
 
 ### Path-set pitfall: tracked diff can undercount
 
