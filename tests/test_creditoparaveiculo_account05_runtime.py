@@ -38,6 +38,11 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(op['reporting']['daily_thread_id'], '1542892955315081246')
         self.assertEqual(op['reporting']['intraday_thread_id'], '1542892943352799242')
         self.assertEqual(op['reporting']['layout'], 'desktop_aligned_tables_only')
+        highlights = op['reporting']['intraday_operational_highlights']
+        self.assertIs(highlights['enabled'], True)
+        self.assertEqual(highlights['smart_bidding_delay']['endpoint'], '/estimated/delay')
+        self.assertEqual(highlights['rewarded_coverage']['filter'], 'rewarded')
+        self.assertEqual(highlights['rewarded_coverage']['scope'], 'operation/page level; never a per-campaign metric')
         self.assertEqual(op['reporting']['daily_columns'][3], 'Dia')
         self.assertEqual(op['reporting']['intraday_columns'][3], 'Dia')
         self.assertEqual(op['reporting']['cycle_day_column']['applies_to'], ['daily', 'intraday'])
@@ -95,6 +100,24 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(module.action_label({'current_stage': 'AWAITING_FIRST_SPEND'}, 'ACTIVE', now), '⏳ AGUARDAR 1º GASTO')
         self.assertEqual(module.action_label({'current_stage': 'THREE_ADS_ACTIVE', 'window_started_at_sp': '2026-08-29T01:45:00-03:00', 'next_checkpoint_at_sp': '2026-08-30T01:45:00-03:00'}, 'ACTIVE', now), '👁️ REVISAR JANELA 24H')
         self.assertEqual(module.action_label({}, 'PAUSED', now), '🛑 PAUSADA')
+
+    def test_intraday_reuses_canonical_delay_and_rewarded_highlights(self):
+        module = load(REPORTS, 'cpv05_reports_highlights_test')
+        fixed = module.fixed_runtime()
+        self.assertEqual(fixed.intraday_operational_highlights(
+            183,
+            {'coverage_pct': 89.37, 'matched': 8390, 'requests': 9388},
+            {'coverage_pct': 77.08, 'matched': 26130, 'requests': 33898},
+        ), [
+            '**⏱️ ATRASO SMART BIDDING: 3h 03min**',
+            '**🎯 COBERTURA REWARDED: 89,37%** · atual 8.390/9.388',
+            '⚪ Referência anterior/cinza: 77,08% · 26.130/33.898',
+        ])
+        source = inspect.getsource(module.render_intraday)
+        self.assertIn("build_rows(target_date, now_sp, include_delay=True)", source)
+        self.assertIn('fixed.fetch_rewarded_pricing()', source)
+        self.assertIn('fixed.intraday_operational_highlights(', source)
+        self.assertIn("'delay': delay, 'rewarded_coverage': rewarded_pricing", source)
 
 
 if __name__ == '__main__':

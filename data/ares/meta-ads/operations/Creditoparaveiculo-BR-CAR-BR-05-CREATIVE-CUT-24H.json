@@ -640,6 +640,28 @@
     "currency": "USD",
     "timezone": "America/Sao_Paulo",
     "layout": "desktop_aligned_tables_only",
+    "intraday_operational_highlights": {
+      "enabled": true,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544743174801723472",
+      "authorized_at_utc": "2026-09-02T16:21:45Z",
+      "placement": "immediately below the Intraday subtitle and before the consolidated desktop table",
+      "smart_bidding_delay": {
+        "endpoint": "/estimated/delay",
+        "payload_scope": "publisher digital-trust_creditoparaveiculo in USD",
+        "format": "separate bold line; Xh YYmin at 60 minutes or more, otherwise Nmin"
+      },
+      "rewarded_coverage": {
+        "scope": "operation/page level; never a per-campaign metric",
+        "canonical_contract_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json#smart_bidding_roi.intraday_monetization",
+        "filter": "rewarded",
+        "current_format": "separate bold line with coverage percent and matched/requests",
+        "previous_format": "separate gray-reference line with coverage percent and matched/requests",
+        "formula": "sum GAM matchedRequests across the live contiguous rewarded waterfall divided by GAM requests of the rewarded base",
+        "fail_closed": "do not publish incomplete Intraday when delay or rewarded Pricing validation fails"
+      },
+      "formatter_source": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py#intraday_operational_highlights"
+    },
     "cycle_day_column": {
       "label": "Dia",
       "position_after": "Lance",
@@ -933,6 +955,6 @@
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment.",
     "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged."
   ],
-  "updated_at": "2026-09-01T15:14:54Z",
-  "updated_at_utc": "2026-09-02T03:57:41Z"
+  "updated_at": "2026-09-02T13:21:45-03:00",
+  "updated_at_utc": "2026-09-02T16:21:45Z"
 }
