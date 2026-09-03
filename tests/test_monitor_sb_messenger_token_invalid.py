@@ -383,6 +383,68 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertEqual(posted, {})
         self.assertEqual(state['daily']['date'], '2026-08-27')
 
+    def test_legacy_daily_pending_is_discarded_without_delivery(self):
+        alert = self.alerts()[0]
+        state = mod.initial_state()
+        state['daily'] = {
+            'date': '2026-08-26',
+            'pending': {'alerts': [alert], 'message_ids': []},
+            'last_result': None,
+        }
+        with patch.object(mod, 'post_and_verify') as post:
+            stats = mod.process_daily_incident_cycle(
+                state,
+                '123',
+                False,
+                now_value=datetime.fromisoformat('2026-08-27T00:12:00-04:00'),
+            )
+        post.assert_not_called()
+        self.assertEqual(stats['discarded_cached_pending'], 1)
+        self.assertEqual(stats['daily_sent'], 0)
+        self.assertIsNone(state['daily']['pending'])
+        self.assertEqual(state['daily']['last_result']['source'], 'new-live-notification-only')
+
+    def test_pending_recovery_rebuilds_payload_from_live_fixture(self):
+        live_alert = self.alerts()[0]
+        stale_alert = dict(live_alert)
+        stale_alert['user_email'] = 'stale@example.invalid'
+        captured = []
+        with tempfile.TemporaryDirectory() as directory:
+            state_path = Path(directory) / 'state.json'
+            state = mod.initial_state()
+            state['last_seen_id'] = 99
+            state['daily']['date'] = datetime.now(mod.NY).date().isoformat()
+            stamp = mod.now_iso()
+            state['pending'] = {
+                'created_at': stamp,
+                'notification_ids': [100],
+                'cursor_ids': [100],
+                'alerts': [stale_alert],
+                'fingerprint': 'stale',
+                'delivery_specs': [{'repeat_count': 0, 'opened_at': stamp, 'rendered_at': stamp}],
+                'message_ids': [],
+            }
+            mod.save_state(state_path, state)
+            args = SimpleNamespace(
+                cleanup_old_messages=False,
+                fixture=str(FIXTURE),
+                test_alert=False,
+                baseline=False,
+                dry_run=False,
+                state_path=str(state_path),
+                channel_id='123',
+            )
+            def fake_post(channel_id, payload):
+                captured.append(payload)
+                return '555'
+            with patch.object(mod, 'post_and_verify', side_effect=fake_post):
+                result = asyncio.run(mod.run(args))
+        self.assertEqual(result, 0)
+        self.assertEqual(len(captured), 1)
+        fields = {field['name']: field['value'] for field in captured[0]['embeds'][0]['fields']}
+        self.assertEqual(fields['User'], live_alert['user_email'])
+        self.assertNotEqual(fields['User'], stale_alert['user_email'])
+
     def test_new_source_alert_for_active_incident_is_suppressed_intraday(self):
         alert = self.alerts()[0]
         state = mod.initial_state()
