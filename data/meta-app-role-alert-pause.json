@@ -2,21 +2,19 @@
   "version": 4,
   "mode": "manual",
   "apps": [
-    "B001-5",
     "B004-4",
-    "B007-2",
+    "B007-3",
     "B011-2"
   ],
   "monitor_apps": [
     "B004-4",
-    "B007-2",
     "B011-2"
   ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1545088764530008135",
-  "updated_at": "2026-09-03T11:45:20-04:00",
-  "reason": "B001-5 em baseline de produção com alerta temporariamente contido; B004-4, B007-2 e B011-2 permanecem com rota completa pausada.",
+  "source_message_id": "OOB-B0073-after-1545088764530008135",
+  "updated_at": "2026-09-03T11:55:58-04:00",
+  "reason": "B007-3 em baseline de produção com alerta temporariamente contido; B004-4 e B011-2 permanecem com rota completa pausada.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
@@ -25,6 +23,7 @@
   },
   "source_message_ids": [
     "1545088764530008135",
-    "1545095791637430415"
+    "1545095791637430415",
+    "OOB-B0073-after-1545088764530008135"
   ]
 }
