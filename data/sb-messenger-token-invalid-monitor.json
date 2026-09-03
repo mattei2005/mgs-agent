@@ -113,7 +113,8 @@
     679740,
     679759,
     679777,
-    679797
+    679797,
+    679953
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -732,10 +733,13 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:30.000Z",
+        "created_at": "2026-09-03T00:06:50.000Z",
         "domain": "infinitynexx",
-        "notification_id": 675615,
+        "notification_id": 679953,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 2
+        },
         "pages": 2,
         "segurador_id": "1690",
         "segurador_name": "Adrielly Freitas",
@@ -744,21 +748,17 @@
         "user_id": "110",
         "user_name": "Disparos Infinitynexx MX-CC-ES - G001"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-02T20:12:14-04:00",
       "message_ids": [
-        "1542990304381247621",
-        "1543039391642034360",
-        "1543088460531900618",
-        "1543133765109289022"
+        "1544862548904640604"
       ],
       "notification_ids": [
-        675615
+        679953
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-02T20:12:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|infinitynexx|26|497": {
       "alert": {
@@ -1246,20 +1246,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-02T19:57:14-04:00",
+  "last_check": "2026-09-02T20:12:14-04:00",
   "last_delivery": {
-    "at": "2026-09-02T16:12:16-04:00",
+    "at": "2026-09-02T20:12:14-04:00",
     "cursor_ids": [
-      679740,
-      679759,
-      679777,
-      679797
+      679953
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1544862548904640604"
+    ],
+    "notification_ids": [
+      679953
+    ]
   },
   "last_error": null,
-  "last_seen_id": 679797,
+  "last_seen_id": 679953,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,
