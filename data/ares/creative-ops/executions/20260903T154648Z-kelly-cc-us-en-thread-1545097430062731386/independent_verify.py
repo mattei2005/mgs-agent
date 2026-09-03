@@ -4,7 +4,7 @@ import json
 import subprocess
 from pathlib import Path
 
-BASE = Path('/root/mgs-agent/data/ares/creative-ops/executions/20260902T2234-kelly-cc-mx-es-thread-1544837155900235927')
+BASE = Path('/root/mgs-agent/data/ares/creative-ops/executions/20260903T154648Z-kelly-cc-us-en-thread-1545097430062731386')
 RUN = BASE / 'process_batch.py'
 PLAN = BASE / 'dry-run.json'
 REPORT = BASE / 'ready-execution-latest.json'
@@ -79,14 +79,14 @@ for item in plan['items']:
         and inv.get('asset_drive_id') == did
         and inv.get('canonical_filename') == item['destination_filename']
         and inv.get('vertical') == 'CC'
-        and inv.get('country') == 'MX'
-        and inv.get('language') == 'ES'
-        and inv.get('angle') == 'LIMITE_ALTO'
+        and inv.get('country') == 'US'
+        and inv.get('language') == 'EN'
+        and inv.get('angle') == 'AVAILABLE_LIMIT'
         and inv.get('p_orient') == 'PV'
         and inv.get('metadata_clean') is True
         and inv.get('reservation_status') == 'RESERVADO_PELO_GESTOR'
         and inv.get('ares_eligible') is False
-        and inv.get('thread_id') == '1544837155900235927'
+        and inv.get('thread_id') == '1545097430062731386'
     )
     if not inv_ok:
         errors.append(f"inventory mismatch: {item['source_filename']}")
@@ -103,14 +103,14 @@ for item in plan['items']:
 pending = mod.list_children(drive, plan['upload_parent_id'], folders=False)
 if pending:
     errors.append(f"UPLOAD MANUAL pending media: {len(pending)}")
-if len(set(source_ids)) != 12:
-    errors.append('source IDs are not 12 unique lineages')
-if len(set(dest_ids)) != 12:
-    errors.append('READY destination IDs are not 12 unique assets')
-if len(report.get('items', {})) != 12 or any(x.get('phase') != 'COMPLETE' for x in report.get('items', {}).values()):
-    errors.append('execution report is not 12/12 COMPLETE')
+if len(set(source_ids)) != 14:
+    errors.append('source IDs are not 14 unique lineages')
+if len(set(dest_ids)) != 14:
+    errors.append('READY destination IDs are not 14 unique assets')
+if len(report.get('items', {})) != 14 or any(x.get('phase') != 'COMPLETE' for x in report.get('items', {}).values()):
+    errors.append('execution report is not 14/14 COMPLETE')
 rows = REPORT_CSV.read_text(encoding='utf-8').splitlines()
-if len(rows) != 13:
+if len(rows) != 15:
     errors.append(f"execution CSV rows mismatch: {len(rows)-1}")
 
 result = {
@@ -118,7 +118,7 @@ result = {
     'auth_mode': 'service_account',
     'service_account_identity_verified': True,
     'shared_drive': 'MGS-AGENTS',
-    'operation': 'CC_MX_ES',
+    'operation': 'CC_US_EN',
     'source_lineages': len(set(source_ids)),
     'unique_ready_assets': len(set(dest_ids)),
     'duplicate_sources': 0,
