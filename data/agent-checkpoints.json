@@ -965,10 +965,10 @@
       "id": "SEGURADORES-TOKEN-FB-CONNECTION-AUDIT-20260903",
       "next_step": "Rodolfo decidir o cadastro/reconciliação das cinco pendências exatas; não inferir saúde por outro perfil do mesmo login.",
       "objective": "Revalidar ao vivo e por par exato LOGIN + PROFILE_NAME os 21 seguradores alertados em #seguradores-token-fb, sem cache, snapshot ou inferência por perfil substituto.",
-      "source": "discord:channel:1521350832426188961;thread:1544837470687076454;message:1545163281185120286;artifact:work/seguradores-token-fb-live-exact-audit-20260903.json;procedure:profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "source": "discord:channel:1521350832426188961;thread:1544837470687076454;message:1545163281185120286;artifact:backups/seguradores-token-fb-live-exact-audit-20260903/artifacts/seguradores-token-fb-live-exact-audit-20260903.json;procedure:profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
       "state": "completed_with_findings_corrected: auditoria 16:12 et usou apenas discord live para escopo, digitaltrchat live e smart bidding live. resultado exato: 9 ok, 7 removidos de dtr e sb, 3 presentes no dtr sem nenhuma página sb (ione, michelle, semakin) e 2 com uma página dtr ausente no sb (milena 22383, riza 22298). bruna andrade = removido, 0 dtr e 0 sb. auditoria anterior por agregado do login foi supersedida.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T20:15:00+00:00"
+      "updated_at": "2026-09-03T20:17:47+00:00"
     },
     {
       "agent": "zeus",
@@ -1403,12 +1403,12 @@
     {
       "agent": "zeus",
       "id": "dtr-openzed-links-semakin-sadar-20260903",
-      "next_step": "Executar preflight completo com backups individuais, aplicar canário, validar por readback independente e então processar as demais páginas sem alterar a topologia dos fluxos.",
+      "next_step": "Aplicar a página canário 3401, validar por sessão independente e só então processar as demais em lotes.",
       "objective": "Substituir Get Started, No Match e links existentes do Auto Principal Drip em todas as páginas do segurador Semakin Sadar usando a referência aprovada da página Gloria Rojas do segurador Danilo Santos Lima.",
-      "source": "Discord thread 1545131821245669407; referência live DTR Danilo Santos Lima page_id 22304.",
-      "state": "rodolfo aprovou o conjunto de links openzed e autorizou iniciar; nenhuma página do semakin sadar alterada nesta fase.",
+      "source": "/root/mgs-agent/backups/dtr-semakin-openzed-links-20260903T161108-0400/qualification.json; Discord thread 1545131821245669407.",
+      "state": "preflight concluído: 23/23 páginas qualificadas, 69 backups individuais presentes, topologia uniforme 82 nós/81 arestas totalmente alcançáveis; planejadas 368 alterações de campos no drip e 46 nos botões de ação. nenhuma produção alterada ainda.",
       "thread_id": "1545131821245669407",
-      "updated_at": "2026-09-03T20:06:11+00:00"
+      "updated_at": "2026-09-03T20:20:47+00:00"
     },
     {
       "agent": "ares",
@@ -2162,5 +2162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:15:01+00:00"
+  "updated_at": "2026-09-03T20:20:47+00:00"
 }
