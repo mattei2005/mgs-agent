@@ -1256,42 +1256,41 @@
             "fb_page_id": "439136075959216"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/479161/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/479162/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260193/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260194/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "121042188524431",
-                "page_table_id": "3784",
+                "page_id": "439136075959216",
+                "page_table_id": "3340",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
               "urls": [
-                "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+                "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
               ],
               "hosts": {
-                "srf.openzed.com": 1
+                "card.openzed.com": 1
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "121042188524431",
-                "page_table_id": "3784",
+                "page_id": "439136075959216",
+                "page_table_id": "3340",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
               "urls": [
-                "https://srf.openzed.com/opf-us-cc-es-drip-nm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+                "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
               ],
               "hosts": {
-                "srf.openzed.com": 1
+                "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3340/1",
@@ -1461,10 +1460,10 @@
           },
           "signature": {
             "get_started": [
-              "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
             ],
             "no_match": [
-              "https://srf.openzed.com/opf-us-cc-es-drip-nm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
             ],
             "auto_principal_drip": [
               "https://card.openzed.com/JFv2Hg4B/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m6-1",
@@ -1484,9 +1483,9 @@
               "https://card.openzed.com/zpnw4Mvf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m15-1",
               "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm"
             ],
-            "hash": "4cd4276852fa905ed0729ea0daec8361e4c80e69adbdd4d01e6b4867a7cef8c9"
+            "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -1496,16 +1495,16 @@
             "fb_page_id": "469067069632437"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260193/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260194/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260286/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260287/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "439136075959216",
-                "page_table_id": "3340",
+                "page_id": "469067069632437",
+                "page_table_id": "3318",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -1517,10 +1516,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "439136075959216",
-                "page_table_id": "3340",
+                "page_id": "469067069632437",
+                "page_table_id": "3318",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -1530,8 +1529,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3318/1",
@@ -1726,7 +1724,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -1736,16 +1734,16 @@
             "fb_page_id": "524399614084074"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260286/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260287/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260379/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260380/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "469067069632437",
-                "page_table_id": "3318",
+                "page_id": "524399614084074",
+                "page_table_id": "3308",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -1757,10 +1755,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "469067069632437",
-                "page_table_id": "3318",
+                "page_id": "524399614084074",
+                "page_table_id": "3308",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -1770,8 +1768,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3308/1",
@@ -1966,7 +1963,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -1976,16 +1973,16 @@
             "fb_page_id": "508210932374963"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260379/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260380/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260472/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260473/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "524399614084074",
-                "page_table_id": "3308",
+                "page_id": "508210932374963",
+                "page_table_id": "3307",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -1997,10 +1994,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "524399614084074",
-                "page_table_id": "3308",
+                "page_id": "508210932374963",
+                "page_table_id": "3307",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -2010,8 +2007,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3307/1",
@@ -2206,7 +2202,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -2216,16 +2212,16 @@
             "fb_page_id": "516635238202231"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260472/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260473/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260565/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260566/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "508210932374963",
-                "page_table_id": "3307",
+                "page_id": "516635238202231",
+                "page_table_id": "3295",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -2237,10 +2233,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "508210932374963",
-                "page_table_id": "3307",
+                "page_id": "516635238202231",
+                "page_table_id": "3295",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -2250,8 +2246,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3295/1",
@@ -2446,7 +2441,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -2456,16 +2451,16 @@
             "fb_page_id": "540697315782861"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260565/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260566/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260658/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260659/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "516635238202231",
-                "page_table_id": "3295",
+                "page_id": "540697315782861",
+                "page_table_id": "3285",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -2477,10 +2472,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "516635238202231",
-                "page_table_id": "3295",
+                "page_id": "540697315782861",
+                "page_table_id": "3285",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -2490,8 +2485,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3285/1",
@@ -2686,7 +2680,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -2696,16 +2690,16 @@
             "fb_page_id": "501046136426244"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260658/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260659/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260751/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260752/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "540697315782861",
-                "page_table_id": "3285",
+                "page_id": "501046136426244",
+                "page_table_id": "3265",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -2717,10 +2711,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "540697315782861",
-                "page_table_id": "3285",
+                "page_id": "501046136426244",
+                "page_table_id": "3265",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -2730,8 +2724,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3265/1",
@@ -2926,7 +2919,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -2936,16 +2929,16 @@
             "fb_page_id": "507022125826645"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260751/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260752/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260844/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260845/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "501046136426244",
-                "page_table_id": "3265",
+                "page_id": "507022125826645",
+                "page_table_id": "3250",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -2957,10 +2950,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "501046136426244",
-                "page_table_id": "3265",
+                "page_id": "507022125826645",
+                "page_table_id": "3250",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -2970,8 +2963,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3250/1",
@@ -3166,7 +3158,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -3176,16 +3168,16 @@
             "fb_page_id": "436757069530686"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260844/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260845/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260937/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260938/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "507022125826645",
-                "page_table_id": "3250",
+                "page_id": "436757069530686",
+                "page_table_id": "3242",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -3197,10 +3189,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "507022125826645",
-                "page_table_id": "3250",
+                "page_id": "436757069530686",
+                "page_table_id": "3242",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -3210,8 +3202,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3242/1",
@@ -3406,7 +3397,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -3416,16 +3407,16 @@
             "fb_page_id": "494374420425462"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260937/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/260938/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261030/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261031/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "436757069530686",
-                "page_table_id": "3242",
+                "page_id": "494374420425462",
+                "page_table_id": "3189",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -3437,10 +3428,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "436757069530686",
-                "page_table_id": "3242",
+                "page_id": "494374420425462",
+                "page_table_id": "3189",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -3450,8 +3441,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3189/1",
@@ -3646,7 +3636,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -3656,16 +3646,16 @@
             "fb_page_id": "474490729086704"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261030/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261031/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261123/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261124/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "494374420425462",
-                "page_table_id": "3189",
+                "page_id": "474490729086704",
+                "page_table_id": "3139",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -3677,10 +3667,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "494374420425462",
-                "page_table_id": "3189",
+                "page_id": "474490729086704",
+                "page_table_id": "3139",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -3690,8 +3680,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3139/1",
@@ -3886,7 +3875,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -3896,16 +3885,16 @@
             "fb_page_id": "529069036949078"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261123/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261124/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261216/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261217/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "474490729086704",
-                "page_table_id": "3139",
+                "page_id": "529069036949078",
+                "page_table_id": "3129",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -3917,10 +3906,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "474490729086704",
-                "page_table_id": "3139",
+                "page_id": "529069036949078",
+                "page_table_id": "3129",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -3930,8 +3919,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3129/1",
@@ -4126,7 +4114,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -4136,16 +4124,16 @@
             "fb_page_id": "537790749406816"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261216/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261217/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261309/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261310/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "529069036949078",
-                "page_table_id": "3129",
+                "page_id": "537790749406816",
+                "page_table_id": "3113",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -4157,10 +4145,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "529069036949078",
-                "page_table_id": "3129",
+                "page_id": "537790749406816",
+                "page_table_id": "3113",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -4170,8 +4158,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3113/1",
@@ -4366,7 +4353,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -4376,16 +4363,16 @@
             "fb_page_id": "449875441549822"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261309/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261310/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261402/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261403/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "537790749406816",
-                "page_table_id": "3113",
+                "page_id": "449875441549822",
+                "page_table_id": "3101",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -4397,10 +4384,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "537790749406816",
-                "page_table_id": "3113",
+                "page_id": "449875441549822",
+                "page_table_id": "3101",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -4410,8 +4397,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3101/1",
@@ -4606,7 +4592,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -4616,16 +4602,16 @@
             "fb_page_id": "506678799190458"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261402/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261403/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261495/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261496/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "449875441549822",
-                "page_table_id": "3101",
+                "page_id": "506678799190458",
+                "page_table_id": "3084",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -4637,10 +4623,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "449875441549822",
-                "page_table_id": "3101",
+                "page_id": "506678799190458",
+                "page_table_id": "3084",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -4650,8 +4636,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3084/1",
@@ -4846,7 +4831,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -4856,16 +4841,16 @@
             "fb_page_id": "518540837999884"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261495/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261496/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261588/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261589/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "506678799190458",
-                "page_table_id": "3084",
+                "page_id": "518540837999884",
+                "page_table_id": "3079",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -4877,10 +4862,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "506678799190458",
-                "page_table_id": "3084",
+                "page_id": "518540837999884",
+                "page_table_id": "3079",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -4890,8 +4875,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3079/1",
@@ -5086,7 +5070,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -5096,16 +5080,16 @@
             "fb_page_id": "510268455496485"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261588/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261589/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261681/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261682/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "518540837999884",
-                "page_table_id": "3079",
+                "page_id": "510268455496485",
+                "page_table_id": "3062",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -5117,10 +5101,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "518540837999884",
-                "page_table_id": "3079",
+                "page_id": "510268455496485",
+                "page_table_id": "3062",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -5130,8 +5114,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3062/1",
@@ -5326,7 +5309,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -5336,16 +5319,16 @@
             "fb_page_id": "459508457254505"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261681/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261682/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261774/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261775/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "510268455496485",
-                "page_table_id": "3062",
+                "page_id": "459508457254505",
+                "page_table_id": "3050",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -5357,10 +5340,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "510268455496485",
-                "page_table_id": "3062",
+                "page_id": "459508457254505",
+                "page_table_id": "3050",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -5370,8 +5353,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3050/1",
@@ -5566,7 +5548,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -5576,16 +5558,16 @@
             "fb_page_id": "475949838938311"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261774/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261775/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261867/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261868/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "459508457254505",
-                "page_table_id": "3050",
+                "page_id": "475949838938311",
+                "page_table_id": "3041",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -5597,10 +5579,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "459508457254505",
-                "page_table_id": "3050",
+                "page_id": "475949838938311",
+                "page_table_id": "3041",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -5610,8 +5592,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3041/1",
@@ -5806,7 +5787,7 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         },
         {
           "page": {
@@ -5816,16 +5797,16 @@
             "fb_page_id": "477795878749008"
           },
           "action_routes": {
-            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261867/1/getstart",
-            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261868/1/nomatch",
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261960/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/261961/1/nomatch",
             "attempt": 1
           },
           "action": {
             "get_started": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "475949838938311",
-                "page_table_id": "3041",
+                "page_id": "477795878749008",
+                "page_table_id": "3016",
                 "keyword_type": "get-started",
                 "bot_name": "GET STARTED"
               },
@@ -5837,10 +5818,10 @@
               }
             },
             "no_match": {
-              "identity_ok": false,
+              "identity_ok": true,
               "identity": {
-                "page_id": "475949838938311",
-                "page_table_id": "3041",
+                "page_id": "477795878749008",
+                "page_table_id": "3016",
                 "keyword_type": "no match",
                 "bot_name": "NO MATCH FOUND"
               },
@@ -5850,8 +5831,7 @@
               "hosts": {
                 "card.openzed.com": 1
               }
-            },
-            "error": "get_started_identity_mismatch"
+            }
           },
           "auto_principal_drip": {
             "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/3016/1",
@@ -6046,12 +6026,12 @@
             ],
             "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
           },
-          "status": "partial"
+          "status": "ok"
         }
       ],
       "summary": {
-        "ok": 1,
-        "partial": 20,
+        "ok": 21,
+        "partial": 0,
         "failed": 0
       }
     },
@@ -14653,8 +14633,8 @@
     "accounts_processed": 5,
     "accounts_total": 5,
     "pages": 59,
-    "ok": 6,
-    "partial": 53,
+    "ok": 26,
+    "partial": 33,
     "failed": 0,
     "account_errors": 0
   }

@@ -973,12 +973,12 @@
     {
       "agent": "zeus",
       "id": "SB-TOKEN-ALERT-LIVE-ONLY-CUTOVER-20260903",
-      "next_step": "Reauditar as 21 identidades com DTR/SB live; alterar script/testes/skill para entregar somente evento novo recuperado da API live, nunca replay de incident snapshot; reconciliar 22 incidentes resolvidos.",
+      "next_step": "Operação normal: cron consulta /notification live às 12,27,42,57; somente um novo notification ID pode gerar alerta. Não há ação humana pendente agora.",
       "objective": "Limpar alertas resolvidos, revalidar conexões ao vivo e tornar o monitor fail-closed contra republicação baseada em cache/snapshot.",
-      "source": "discord:thread:1544837470687076454;message:1545180305961386055;channel:1521350832426188961;script:/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
-      "state": "in_progress: 22 mensagens de alerta removidas com readback; 2 mensagens manuais preservadas. fonte sb live não gerou novo messenger user token invalid após o marco de resolução. falta revalidar dtr×sb pós-limpeza e cortar o resend diário baseado em incident state.",
+      "source": "discord:thread:1544837470687076454;message:1545180305961386055;report-infra:1545185530763808842;script:/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py;backup:/root/mgs-agent/backups/sb-token-alert-live-only-cutover-20260903-172311/",
+      "state": "completed: 22 alertas excluídos e 2 mensagens manuais preservadas; 21 identidades rechecadas em dtr+sb live, 0 problemas acionáveis; milena/riza normais sem campanha; api live sem novo token-invalid após resolução; monitor new-live-notification-only, state active=0/resolved=32/pending=null; cron natural e apply manual entregaram 0; report-infra 1545185530763808842 validado.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T21:21:03+00:00"
+      "updated_at": "2026-09-03T21:36:16+00:00"
     },
     {
       "agent": "zeus",
@@ -2192,5 +2192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T21:21:03+00:00"
+  "updated_at": "2026-09-03T21:36:16+00:00"
 }
