@@ -3,8 +3,8 @@
   "status": "valid",
   "operation": "Eggbev-US-CC-EN-BOT",
   "account_id": "1034081997659047",
-  "generated_at_utc": "2026-09-03T02:00:07.570508+00:00",
-  "valid_until_utc": "2026-09-03T08:00:07.570508+00:00",
+  "generated_at_utc": "2026-09-03T02:08:50.855066+00:00",
+  "valid_until_utc": "2026-09-03T08:08:50.855066+00:00",
   "read_only": true,
   "writes": {
     "meta": 0,
@@ -31,11 +31,11 @@
     "limitation": "no downloadable Meta visual fingerprint was generated; scoped manager release plus title/ID/current-inventory checks remain mandatory"
   },
   "summary": {
-    "required": 27,
+    "required": 18,
     "inventory_candidates": 84,
-    "approved_for_scoped_request": 70,
-    "conflicted": 14,
-    "manager_release_required": 70
+    "approved_for_scoped_request": 61,
+    "conflicted": 23,
+    "manager_release_required": 61
   },
   "assets": [
     {
@@ -65,7 +65,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-07-15T14:44:50.652Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "14yGEb8ncSA8mo2WMSy8KX3Lc0iSruF_k",
@@ -82,9 +82,21 @@
           "durationMillis": "0"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_c34b192bf8d0b06e6803 9ab2b8dfc89b"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_c34b192bf8d0b06e6803 9ab2b8dfc89b"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_b19088b05bd8b82ea054",
@@ -125,7 +137,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-07-15T20:21:04.269Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1-atPDPUMB7_5oLOOMDhgYwTnzJtSQzUl",
@@ -142,9 +154,21 @@
           "durationMillis": "15066"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_9fc1c71aa8d4dc63aa0c c41daecbbddc"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_9fc1c71aa8d4dc63aa0c c41daecbbddc"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_0349c07555ad1ea60183",
@@ -1189,7 +1213,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-22T20:11:16.061Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1WohWR7NVDGNtTlbEDiO8DDUSab6Cnl5D",
@@ -1206,9 +1230,21 @@
           "durationMillis": "15033"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_88d62a51c0f0edbb2e3e 15b80e1a5a92"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_88d62a51c0f0edbb2e3e 15b80e1a5a92"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_dc892479ac141e39c053",
@@ -1281,7 +1317,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-22T20:11:55.194Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1WjZGq-pNU00hbnzZwtzyMYAdNKUQlcXh",
@@ -1298,9 +1334,21 @@
           "durationMillis": "15033"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_8ac56c31e1f1e8fed791 5a62fe647bd5"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_8ac56c31e1f1e8fed791 5a62fe647bd5"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_2a1a9c525cfda0a8d2e3",
@@ -1461,7 +1509,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-26T18:07:55.599Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1TMO65OWiJ8YdykfaB96SiWinf7r95KXj",
@@ -1478,9 +1526,21 @@
           "durationMillis": "7999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_ebdd0f32e037bf190b15 064cd5f60a03"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_ebdd0f32e037bf190b15 064cd5f60a03"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_78650b7176ad1bd780dd",
@@ -1809,7 +1869,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-30T21:34:34.607Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1Jd7s6xnQxrG__jFBlJy16kfsoKZZr_sp",
@@ -1826,9 +1886,21 @@
           "durationMillis": "12033"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_f775061335fbacc99547 8b9128f1a5e2"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_f775061335fbacc99547 8b9128f1a5e2"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_f3fc05489b4be78ab523",
@@ -1869,7 +1941,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-30T21:31:06.842Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1vyGWTvoPwZ38nA8ODHZVusiSq5D-bLIn",
@@ -1886,9 +1958,21 @@
           "durationMillis": "9099"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_c96c6f865e02dfa8c85f c45418f08b8b"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_c96c6f865e02dfa8c85f c45418f08b8b"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_ade9ac23089a9c31e6ca",
@@ -2463,7 +2547,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-09-01T19:54:00.937Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1w6R5bQuNR8YckWn_UOR7sSOu2_UuzvoS",
@@ -2480,9 +2564,21 @@
           "durationMillis": "9999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_788b104691bc106954f3 4a1dad6cdcdd"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_788b104691bc106954f3 4a1dad6cdcdd"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_e526f7da452d6c608e84",
@@ -2493,7 +2589,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-09-01T19:54:03.868Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1VhLMmY21yH0Yr12hqlZ4QJT17AM7gQoB",
@@ -2510,9 +2606,21 @@
           "durationMillis": "9999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_e526f7da452d6c608e84 ea015972a731"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_e526f7da452d6c608e84 ea015972a731"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_82d0d82999dbd936dfdb",
@@ -2609,9 +2717,7 @@
     "asset_f4722dfb16c4359dad5e",
     "asset_ade9ac23089a9c31e6ca",
     "asset_0e5e62c6ab71648df820",
-    "asset_c34b192bf8d0b06e6803",
     "asset_b19088b05bd8b82ea054",
-    "asset_9fc1c71aa8d4dc63aa0c",
     "asset_0349c07555ad1ea60183",
     "asset_7bb4c99af1ff14995c37",
     "asset_132bd2f3a45a725940f3",
@@ -2642,11 +2748,9 @@
     "asset_3559648d61a11e66f1ec",
     "asset_18ae969ef0fb3b40e712",
     "asset_adfb92d0517895e63dbe",
-    "asset_88d62a51c0f0edbb2e3e",
     "asset_2a1a9c525cfda0a8d2e3",
     "asset_644d6fc6235b32570f38",
     "asset_99d53807e165d2a0e7a0",
-    "asset_8ac56c31e1f1e8fed791",
     "asset_e0c2ed5af9037e49854d",
     "asset_78650b7176ad1bd780dd",
     "asset_e291fda30b80765c3c06",
@@ -2654,15 +2758,12 @@
     "asset_b58ebf2338cfabddd0a1",
     "asset_459e99b4ae5b40e2864d",
     "asset_863575174c1c46bd7d79",
-    "asset_ebdd0f32e037bf190b15",
-    "asset_c96c6f865e02dfa8c85f",
     "asset_9caa9bc1e89a1c85695b",
     "asset_5ada4202a92847fcba28",
     "asset_20f56c5ec3a48997f8e8",
     "asset_b861c68c8d62825d625b",
     "asset_f3c84ed23008ee2a04a7",
     "asset_055f68692af11cf4415e",
-    "asset_f775061335fbacc99547",
     "asset_f3fc05489b4be78ab523",
     "asset_6711e3755591442d7078",
     "asset_8a019913c88da79f23a2",
@@ -2670,8 +2771,6 @@
     "asset_4d623b9b196784d22072",
     "asset_7b4843359d2fc0d824e5",
     "asset_82d0d82999dbd936dfdb",
-    "asset_788b104691bc106954f3",
-    "asset_e526f7da452d6c608e84",
     "asset_3ac29d13001025aec534",
     "asset_365f83c8443585cdeeba",
     "asset_2ed7407e75b129d9d8bd",
