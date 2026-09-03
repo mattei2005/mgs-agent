@@ -10,17 +10,19 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 - The body provides `user_id`, `user_name`, `user_email`, `segurador_id`, `segurador_name` and `source` (`page_token` or `canary`).
 - Never read, persist, print or validate the underlying Facebook tokens.
 
-## Post-remediation connection audit — live exact-pair rule
+## Post-remediation connection audit — live Page-ID rule
 
 When Rodolfo says he removed, replaced, reconnected or deduplicated the alerted profiles and asks for a fresh status, the Discord alert/state is only the audit population. It is not current connection proof.
 
 - Do not use the monitor state, prior report JSON, cached page counts, Discord embed, replacement account under the same login, or a saved snapshot to classify the alerted segurador.
-- Fetch all three surfaces fresh in the same run: current channel alerts for scope, DigitalTRChat live account/page selectors, and Smart Bidding live `/users/Messenger` plus `/campaigns/Messenger`.
-- Match the exact pair `LOGIN/USER_LOGIN + PROFILE_NAME`. Never infer that an old profile is healthy because another profile under the same bot user is connected. Example: zero live SB rows for `Bruna Andrade` means Bruna has zero SB pages even when `Vivian Silva` now has 13 pages under the same login.
-- In DigitalTRChat, match the exact account name after Unicode normalization, deduplicate `.account_switch` by immutable `data-id`, switch that ID, prove the active context, and read its current page selector. A visible and hidden responsive entry with the same ID is one account, not a duplicate. Only the same normalized name on distinct account IDs is a real DTR duplicate.
-- In Smart Bidding, count only rows whose exact current `PROFILE_NAME` matches the alerted segurador under the exact login. Report the matched Messenger User row's current `ACTIVE` state and compare exact DTR `Page ID` sets with SB `PAGE_ID` sets.
-- Classify exact-pair results as: `OK` (present and page-ID parity on both), `REMOVIDO` (absent from both), `PENDENTE_SEM_SB` (present in DTR, zero exact SB rows), `PENDENTE_SB_RESIDUAL` (absent from DTR, still in SB), `PENDENTE_DIVERGENCIA_PAGINAS`, or a distinct-ID duplicate/error state.
-- A ✅ reaction remains the human lifecycle signal, but it is not live health proof. Do not declare the remediation complete while an exact-pair live audit still has a pending state.
+- Fetch all three surfaces fresh in the same run: current channel alerts for scope, DigitalTRChat live account/Page inventory, and Smart Bidding live `/users/Messenger` plus `/campaigns/Messenger`.
+- In Smart Bidding, explicitly select/query **both** company scopes `digital-trust` and `digital-trust-2`, expand all of their publisher IDs, and fail closed unless both are present. Do not accept whatever company checkboxes happened to remain selected in a saved UI session.
+- In DigitalTRChat, match the exact `LOGIN + segurador/account name` after Unicode normalization, deduplicate `.account_switch` by immutable `data-id`, switch that ID, and prove the active context. A visible and hidden responsive entry with the same ID is one account, not a duplicate. Only the same normalized name on distinct account IDs is a real DTR duplicate.
+- Enumerate every live DTR Page with both identifiers. The Bot List exposes `.page_list_item .fb_page_id` as `#<PAGE_ID pequeno> - <FB_PAGE_ID grande>` and remains usable when a Page has no Completed campaign report.
+- For each DTR Page, search the complete live SB Page scope globally by exact `PAGE_ID` **or** exact `FB_PAGE_ID`. Either identifier is sufficient for presence; when both exist they must resolve to the same unique SB row. `LOGIN`, `USER_LOGIN`, `PROFILE_NAME`, Messenger User linkage and `ACTIVE` remain diagnostics, not the presence gate. A null/wrong `PROFILE_NAME` must not turn an existing Page into `PENDENTE_SEM_SB`.
+- Classify results as: `OK` when every live DTR Page is found uniquely by small or large ID; `REMOVIDO` when the exact DTR account is absent and no exact residual SB profile row exists; `PENDENTE_SEM_SB` when none of the live DTR Page IDs exists in SB; `PENDENTE_SB_RESIDUAL`; `PENDENTE_DIVERGENCIA_PAGINAS`; or a distinct-ID/duplicate/error state. Report association/User problems separately from Page presence.
+- Correction validated 2026-09-03: with both companies selected and both IDs read live, Ione Silva is `23/23`, Michelle Ferreira `4/4`, and Semakin Sadar `23/23`; the earlier `0` counts came from treating `PROFILE_NAME` as the Page-presence gate.
+- A ✅ reaction remains the human lifecycle signal, but it is not live health proof. Do not declare the remediation complete while the live Page-ID audit still has a pending state.
 - Persist only sanitized IDs/counts/statuses and provenance. Never persist credentials or token values.
 
 ## Page-count enrichment

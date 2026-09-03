@@ -973,12 +973,12 @@
     {
       "agent": "zeus",
       "id": "SEGURADORES-TOKEN-FB-CONNECTION-AUDIT-20260903",
-      "next_step": "Coletar DTR live com ambos os IDs por página, coletar SB live das duas empresas, reconciliar por qualquer ID e validar cada um dos 21 seguradores.",
+      "next_step": "Aguardar decisão de Rodolfo sobre cadastrar somente as duas páginas efetivamente ausentes; qualquer escrita deve ter canário, payload completo e readback por ambos IDs.",
       "objective": "Reauditar 21 seguradores ao vivo em DTR e SB, com escopo Smart Bidding explicitamente composto por digital-trust + digital-trust-2 e match global por PAGE_ID pequeno OU FB_PAGE_ID grande.",
-      "source": "discord:thread:1544837470687076454;message:1545173129352183879;live:DigitalTRChat+SmartBidding",
-      "state": "in_progress: rodolfo corrigiu a metodologia; relatório anterior por login+profile_name será refeito e não é autoridade para presença de page na sb.",
+      "source": "discord:thread:1544837470687076454;message:1545173129352183879;artifact:/root/mgs-agent/backups/seguradores-token-fb-id-recheck-20260903/artifacts/result-live-both-companies-by-page-id.json;skill:profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "state": "completed_live_id_recheck: 21 seguradores; 138 páginas dtr com ambos ids; 136 presentes na sb; 12 ok, 7 removidos, 2 divergentes. ione 23/23, michelle 4/4 e semakin 23/23 corrigidos para ok. milena falta 22383/1310207535499669; riza falta 22298/1274590525727926. auditoria e readback independente fizeram zero writes.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T20:47:40+00:00"
+      "updated_at": "2026-09-03T21:02:15+00:00"
     },
     {
       "agent": "zeus",
@@ -2172,5 +2172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:47:40+00:00"
+  "updated_at": "2026-09-03T21:02:15+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T16:55:55-04:00",
+    "updated_at": "2026-09-03T21:02:30.359000+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -4046,9 +4046,9 @@
       "description": "Production route pack for current B001-B012 generic Meta role lineage and B013-4 dedicated DTR route, including separation of profile removal from app-restriction evidence.",
       "validation": "Runtime/versioned SHA-256 match; B013 account absence becomes normal removal after two verified cycles; possible restriction requires three independent persistent debug-token failures; scheduled production readback passed.",
       "updated_at": "2026-09-03T16:56:53-04:00",
-      "source_report": "discord:#alerts-infra/1545109599110037507",
+      "source_report": "discord:#alerts-infra/1545176228393259111",
       "last_change": "2026-09-03: documented profile-absence classification, silent retirement of Sheet-reassigned scope, three-login restriction floor and stale snapshot replacement.",
-      "report_readback": "HTTP 200; message 1545109599110037507 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
+      "report_readback": "HTTP 200; message 1545176228393259111 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
       "backup": "/root/mgs-agent/backups/b013-profile-removal-alert-fix-20260903-162834/route-pack-05.md.before",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
@@ -5376,7 +5376,8 @@
       "description": "Dedicated B013-4 DTR/ChatPion monitor with separate account-removal and app-restriction classifiers, exact Sheet reconciliation and app-wide evidence floor.",
       "validation": "Shell and embedded-Python PASS; 8 focused regression tests PASS; live target canary classified Lodovitus Alem as profile_removed_from_dtr with zero restriction candidates; scheduled cycle ended ok, unknown=0, capability healthy, Sheet row 164 read back X and no possible-restriction alert was emitted.",
       "updated_at": "2026-09-03T16:56:53-04:00",
-      "source_report": "discord:#alerts-infra/1543430260727619746",
+      "source_report": "discord:#alerts-infra/1545176228393259111",
+      "report_readback": "HTTP 200; message 1545176228393259111 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
       "last_change": "2026-09-03: profile missing from authenticated DTR inventory requires two cycles and becomes normal removal; possible restriction requires three independent persistent debug-token failures; planned Sheet scope changes retire silently; stale account fields no longer merge.",
       "backup": "/root/mgs-agent/backups/b013-profile-removal-alert-fix-20260903-162834/b013-dtr-link-watch.sh.before",
       "backup_validation": "Current SHA256SUMS manifest verified before mutation.",
@@ -12219,18 +12220,18 @@
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
       "runtime_versioned_sha_match": true,
-      "size_bytes": 9323,
-      "modified_at": "2026-09-03T16:13:35-04:00",
-      "sha256": "70738ccbe80fa0f79c331a6affd829fbfd60ae6373687e10849fd199fe08e6aa",
+      "size_bytes": 10039,
+      "modified_at": "2026-09-03T17:00:48-04:00",
+      "sha256": "de2be891adbe7637cc8262ec99ad3a8a7a6ae71de8a702f0c9058b3b0e6e5f7c",
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Canonical Messenger invalid-token procedure with live exact LOGIN + PROFILE_NAME post-remediation audit; cached/login-aggregate inference prohibited.",
-      "validation": "Fresh 2026-09-03 16:12 ET audit: 22 live alerts / 21 exact pairs; DTR and SB fetched live; Bruna Andrade 0 DTR + 0 SB; 9 OK, 7 removed, 5 pending; zero DTR/SB writes; mirror hash match.",
-      "last_change": "Persisted Rodolfo correction: no cache/snapshot and no replacement-profile inference; exact current DTR account plus SB PROFILE_NAME/Page ID matching required.",
-      "backup": "/root/mgs-agent/backups/seguradores-token-fb-live-exact-audit-20260903/sb-messenger-token-invalid-monitor.md.before",
-      "updated_at": "2026-09-03T16:16:28-04:00",
-      "source_report": "discord:#alerts-infra/1545165522264395929",
-      "report_readback": "HTTP 200; message 1545165522264395929 in channel 1498132022634483894; content empty; one embed; required fields PASS; zero mentions; no thread."
+      "description": "Canonical Messenger invalid-token procedure with live no-cache post-remediation audit across digital-trust + digital-trust-2; Page presence matched globally by PAGE_ID or FB_PAGE_ID.",
+      "validation": "Fresh 2026-09-03 16:58 ET audit + independent SB session: 21 seguradores, 138 live DTR Pages with 138/138 dual-ID coverage; 136 present, 2 missing; 12 OK, 7 removed, 2 divergent; Ione 23/23, Michelle 4/4, Semakin 23/23; 0 duplicate SB IDs; zero DTR/SB writes; runtime/mirror hash match.",
+      "last_change": "Superseded PROFILE_NAME presence gate with Rodolfo correction: explicitly query both companies and match each DTR Page globally by small PAGE_ID or large FB_PAGE_ID; association fields are diagnostic only.",
+      "backup": "/root/mgs-agent/backups/seguradores-token-fb-id-recheck-20260903/artifacts/sb-messenger-token-invalid-monitor.md.before",
+      "updated_at": "2026-09-03T21:02:30.359000+00:00",
+      "source_report": "discord:#alerts-infra/1545177191086690457",
+      "report_readback": "HTTP 200; message 1545177191086690457; content empty; one embed; required fields PASS; zero mentions; no thread."
     },
     {
       "id": "zeus-sb-page-precreate-full-id-gate-20260903",
@@ -12251,6 +12252,24 @@
       "updated_at": "2026-09-03T16:38:10-04:00",
       "source_report": "discord:#alerts-infra/1545170985894940744",
       "report_readback": "HTTP 200; message 1545170985894940744; content empty; one embed; required fields PASS; zero mentions; no thread."
+    },
+    {
+      "id": "zeus-seguradores-token-fb-id-recheck-20260903",
+      "agent": "zeus",
+      "type": "audit_artifact",
+      "path": "/root/mgs-agent/backups/seguradores-token-fb-id-recheck-20260903/artifacts/result-live-both-companies-by-page-id.json",
+      "script_path": "/root/mgs-agent/backups/seguradores-token-fb-id-recheck-20260903/artifacts/audit-live-both-companies-by-page-id.py",
+      "size_bytes": 104801,
+      "script_size_bytes": 21855,
+      "sha256": "a3587999dd3615d51b27175070a56c2dea75ae3fe00121edc6c102ed77735906",
+      "script_sha256": "1aff5ed4ea28be3f39613d387f9a3a9617b743aed2493b9a2ea2785e6eacb7da",
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Sanitized live DTR×SB re-audit for 21 token-alert seguradores using both Smart Bidding companies and global small/large Page-ID matching.",
+      "validation": "Primary 16:58 ET run plus fresh independent SB readback: 2853 SB rows, 138 DTR pages checked, 136 found by PAGE_ID or FB_PAGE_ID, only Milena/22383/1310207535499669 and Riza/22298/1274590525727926 absent; zero writes.",
+      "updated_at": "2026-09-03T21:02:30.359000+00:00",
+      "source_report": "discord:#alerts-infra/1545177191086690457",
+      "report_readback": "HTTP 200; message 1545177191086690457; content empty; one embed; required fields PASS; zero mentions; no thread."
     }
   ],
   "profile_skill_references": [
