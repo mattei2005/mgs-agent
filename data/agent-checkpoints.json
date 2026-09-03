@@ -943,12 +943,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0113-CUTOVER-20260903",
-      "next_step": "Validar metadados do item 1Password, executar canário isolado, aplicar cutover com backup e validar produção.",
+      "next_step": "Operação normal: aceitar as 13 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B011-2 por B011-3 no monitor Meta, validar 1Password, Graph, Sheet e reativar toda a rota sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544837470687076454;message:OOB-B0113-after-B0073;registry:data/meta-app-registry.json",
-      "state": "in_progress: pedido explícito recebido; b011-2 está pausado por restrição; item, sheet e preflight ainda em validação.",
+      "source": "discord:thread:1544837470687076454;message:OOB-B0113-after-B0073;backup:/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "completed_validated: b011-3 ativo no registry e no cron; item/app_name exatos; quatro checks http 200; token válido e app-bound; 2/15 roles resolvidas; sheet em paridade 2 presentes/13 x; predecessor state aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T16:06:51+00:00"
+      "updated_at": "2026-09-03T16:13:33+00:00"
     },
     {
       "agent": "zeus",
@@ -2132,5 +2132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T16:06:51+00:00"
+  "updated_at": "2026-09-03T16:13:33+00:00"
 }
