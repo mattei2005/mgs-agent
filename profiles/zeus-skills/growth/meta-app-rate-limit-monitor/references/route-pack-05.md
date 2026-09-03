@@ -1,18 +1,19 @@
 ## Production Cron Implementation
 
-### Current B001-5, B007-3 and B011-3 cutovers — 2026-09-03
+### Current B001-5, B004-5, B007-3 and B011-3 cutovers — 2026-09-03
 
-Rodolfo explicitly replaced restricted `B001-4` with `B001-5`, restricted `B007-2` with `B007-3`, and restricted `B011-2` with `B011-3`, then asked Zeus to update and reactivate each complete monitor route.
+Rodolfo explicitly replaced restricted `B001-4` with `B001-5`, restricted `B004-4` with `B004-5`, restricted `B007-2` with `B007-3`, and restricted `B011-2` with `B011-3`, then asked Zeus to update and reactivate each complete monitor route.
 
 - `B001-5` uses `BOT B001-5 Token - Debora Monteiro Lima`, channel `1521251196294135858` (`b001-2-app-status`) and `expected_sheet_roles=14`.
+- `B004-5` uses `BOT B004-5 Token - Heloisa Barbosa Almeida`, channel `1521251334496456815` (`b004-3-app-status`) and `expected_sheet_roles=11`.
 - `B007-3` uses `BOT B007-3 Token - Max Tin Masela`, channel `1520510823426949313` (`b007-app-status`) and `expected_sheet_roles=20`.
 - `B011-3` uses `BOT B011-3 Token - ISrael Saucedo`, channel `1537256907373289575` (`b011-app-status`) and `expected_sheet_roles=15`.
-- Fresh isolated preflight/canary proved app metadata, paginated `/roles`, `/me` and `debug_token` HTTP 200 for all three apps; every token is valid, app-bound and uses a new app ID; every returned role identity resolved with zero unresolved IDs.
-- Production started from fresh app-scoped state: B001-4, B007-2 and B011-2 were moved to retired metadata and no predecessor role ID, restriction error or cooldown was reused.
-- The Service Account Sheet has zero predecessor rows and exact current assignments: 14 rows for B001-5, 20 for B007-3 and 15 for B011-3, with no blank or duplicate segurador identity. Validated production parity was B001-5 9 present/5 X, B007-3 3 present/17 X and B011-3 2 present/13 X; role acceptance remains live and later cycles may increase these counts.
-- Each route was baselined under temporary alert-only containment, completed a second clean scoped cycle with zero errors and zero duplicate delivery, then was removed from both pause sets. The shared cron remains enabled; only B004-4 remains fully paused pending a validated replacement.
+- Fresh isolated preflight/canary proved app metadata, paginated `/roles`, `/me` and `debug_token` HTTP 200 for all four apps; every token is valid, app-bound and uses a new app ID; every returned role identity resolved with zero unresolved IDs.
+- Production started from fresh app-scoped state: B001-4, B004-4, B007-2 and B011-2 were moved to retired metadata and no predecessor role ID, restriction error or cooldown was reused.
+- The Service Account Sheet has zero predecessor rows and exact current assignments: 14 rows for B001-5, 11 for B004-5, 20 for B007-3 and 15 for B011-3, with no blank or duplicate segurador identity. Validated production parity was B001-5 9 present/5 X, B004-5 3 present/8 X, B007-3 3 present/17 X and B011-3 2 present/13 X; role acceptance remains live and later cycles may increase these counts.
+- Each route was baselined under temporary alert-only containment, completed a second clean scoped cycle with zero errors and zero duplicate delivery, then was removed from both pause sets. The shared cron remains enabled and the pause sets are empty.
 - After an isolated canary, every production command must set `MGS_META_APP_ROLES_STATE=/root/mgs-agent/data/meta-app-role-monitor-state.json` and `MGS_META_APP_ROLE_ALERT_PAUSE_PATH=/root/mgs-agent/data/meta-app-role-alert-pause.json` explicitly. Hermes terminal environment persists across calls, so relying on an implicit default can accidentally continue writing to the canary state/pause paths. A nonzero post-run assertion requires readback of both paths before any retry.
-- Backups: `/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204/`, `/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111/` and `/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732/`.
+- Backups: `/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204/`, `/root/mgs-agent/backups/meta-app-b0044-to-b0045-cutover-20260903-122500/`, `/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111/` and `/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732/`.
 
 ### Current B003-3, B005-4, B006-4, B008-3 and B010-3 cutovers — 2026-09-02
 
@@ -114,7 +115,7 @@ Rodolfo explicitly replaced retired `B001-3` with `B001-4` and retired `B002-2` 
 
 Historical note: the B001-3 cutover from 2026-08-21 closed its own predecessor migration but is now superseded by B001-4. Do not treat its 17-role expectation or app-scoped IDs as current.
 
-### Current B004-4 cutover — 2026-08-28
+### Historical B004-4 cutover — 2026-08-28
 
 Rodolfo explicitly replaced retired `B004-3` with `B004-4`. Current canonical runtime:
 
@@ -198,7 +199,7 @@ Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
 Scope          Registry-driven current B001-B012 replacement lineage. Every B013 generation is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
-Channels       B001-5 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-3 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-4 1521251961662341160; B006-4 1521252068319297666; B007-3 1520510823426949313; B008-3 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-3 1521252369331916902; B011-3 1537256907373289575; B012-2 1537256951879172136
+Channels       B001-5 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-3 1521251246860931223; B004-5 1521251334496456815 (live channel name still b004-3-app-status); B005-4 1521251961662341160; B006-4 1521252068319297666; B007-3 1520510823426949313; B008-3 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-3 1521252369331916902; B011-3 1537256907373289575; B012-2 1537256951879172136
 ```
 
 Use the Meta roles cron for the current registry-driven B001–B012 app lineage. B013-4 remains on the separate DTR/ChatPion route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`. Future B013 replacement suffixes remain on that same dedicated route by lineage.
@@ -260,7 +261,7 @@ If the same B013 run detects material link changes and `FORCE_LIVE_ALERT=1`, the
 
 B013 summary cards must visually follow the accepted B010 native embed: title `Meta APP - B013`, one concise live-data description, yellow `ATENÇÃO` only when pending profiles exist, and compact inline fields in this order: `ESTADO`, `CONTAGEM`, `PENDENTES`, `PÁGINAS`, `DTR`, `META`. Keep DTR/Graph diagnostics out of the prose. The three-message layout remains: native summary embed, complete current-user table, then movements/confirmed removals. A force-live snapshot must not replay cached additions; show `ADICIONADOS AGORA` as `Nenhum.` unless that same fresh run proves a real addition. Omit the entire inconclusive section when there are no inconclusive profiles.
 
-For “todos os 11 canais”, validate the registry-driven current set: `B001-5`, `B002-3`, `B003-3`, `B004-4`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. B013-4 routes to the dedicated DTR/ChatPion monitor at channel ID `1522830283240505385`; there must be no stale alternate runtime state, script, Sheet label, or alert title.
+For “todos os 11 canais”, validate the registry-driven current set: `B001-5`, `B002-3`, `B003-3`, `B004-5`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. B013-4 routes to the dedicated DTR/ChatPion monitor at channel ID `1522830283240505385`; there must be no stale alternate runtime state, script, Sheet label, or alert title.
 
 On 2026-08-06 Rodolfo retired B012 after the Meta app became inactive and activated B013 as the DTR/ChatPion replacement. The existing Discord channel retained ID `1522830283240505385` and was renamed to `#b013-app-status`. The current `BOT B013 Token` item reuses the immutable production item ID previously pinned by the B012 monitor; the old B012 runtime therefore had to be paused before cutover to prevent it from evaluating B012 rows with B013 credentials. The separate `BOT B013` reserve item remains non-operational. Production pins the unique current `BOT B013 Token` item by immutable ID and fails closed on title/identity drift. B013 is one of the 11 operational channels, not a reserve or a `/roles` app.
 
@@ -275,14 +276,14 @@ Rodolfo approved one human-readable production pattern for every current registr
 - The embed uses plain manager-facing sections: `O que pode acontecer`, `O que fazer agora`, and `Confirmação do monitor`. Keep the raw Meta phrase only in the final confirmation section; do not expose the generic technical monitor error as the main explanation.
 - Discord cannot render regular message content below an embed in the same message. Send the lower `🚨🚨🚨🚨🚨.` as the immediately following message; the final period prevents Discord jumbo-emoji sizing.
 - Use a dedicated `app_restricted` cooldown key with the daily blocked-app cooldown. Do not change presentation or recipients for unrelated rate-limit, transient API, role-delta, recovery, or generic script-error alerts.
-- Scope is the current 12-app role registry: B001-5, B002-3, B003-3, B004-4, B005-4, B006-4, B007-3, B008-3, B009-3, B010-3, B011-3, and B012-2. B013-4 remains excluded on its dedicated DTR/ChatPion route.
+- Scope is the current 12-app role registry: B001-5, B002-3, B003-3, B004-5, B005-4, B006-4, B007-3, B008-3, B009-3, B010-3, B011-3, and B012-2. B013-4 remains excluded on its dedicated DTR/ChatPion route.
 - Preview/canary must use the real embed in the current review thread with role notifications suppressed, then compare production-render helper output against Discord readback. Do not send a validation alert to an app-status channel unless Rodolfo explicitly asks.
 
 ### Automatic full-route pause after restriction — effective 2026-09-02
 
 Rodolfo superseded the prior manual-only handling: when a current B001–B012 app reaches the confirmed restriction trigger (`OAuthException 190 Application has been deleted` on two consecutive cycles), the monitor must send the first canonical restriction alert and, in the same run, atomically add that app to both `apps` and `monitor_apps` in `data/meta-app-role-alert-pause.json` with `mode=manual`. Starting on the next cycle, skip that app route entirely; keep the shared `meta-app-roles-watch` cron enabled for every unaffected app. Resume only after the replacement/recovery passes its preflight/canary/readback and Rodolfo explicitly requests reactivation.
 
-The immediate pause from message `1544837470687076454` originally covered `B001-4`, `B004-4`, `B007-2`, and `B011-2`. B001-5, B007-3 and B011-3 passed replacement cutover and were reactivated on 2026-09-03. Current pause scope is only `B004-4` in both `apps` and `monitor_apps` until its replacement is validated.
+The immediate pause from message `1544837470687076454` originally covered `B001-4`, `B004-4`, `B007-2`, and `B011-2`. B001-5, B004-5, B007-3 and B011-3 passed replacement cutover and were reactivated on 2026-09-03. Both pause sets are now empty.
 
 The production monitor cadence is:
 
@@ -330,7 +331,7 @@ Write policy Read the tab once through Sheets API, update A2:A{last_row} only wh
 Alerting     Sheet read/write failure is CRITICAL: send Discord alert with Rodolfo mention, sheet ID, GID, auth mode, sanitized error, and cooldown. Do not only store `_sheet_removed_sync.error` in state.
 ```
 
-Positive-evidence and Sheet-parity rule: an exact current Meta role match by app-scoped ID or normalized `Segurador` name must always clear that row's stale `X`. When app metadata, paginated `/roles` and `debug_token` are healthy and every returned role identity resolves, a count below `expected_sheet_roles` is also a trustworthy present/absent snapshot: current rows stay blank and Sheet-assigned identities absent from Meta receive `X`. The expected-count gate may continue to report pending acceptance, but it must not leave the Sheet stale. Preserve fail-closed markers only for genuine identity ambiguity, partial pagination/lookup, unresolved names or baseline drift. This makes `Removidos acumulado` mirror live app membership and ensures a recovered segurador loses `X` on the next cycle. B011-2 and B012-2 are part of the generic role reconciliation; the registry-selected B013 generation is excluded on the dedicated DTR/page-token route.
+Positive-evidence and Sheet-parity rule: an exact current Meta role match by app-scoped ID or normalized `Segurador` name must always clear that row's stale `X`. When app metadata, paginated `/roles` and `debug_token` are healthy and every returned role identity resolves, a count below `expected_sheet_roles` is also a trustworthy present/absent snapshot: current rows stay blank and Sheet-assigned identities absent from Meta receive `X`. The expected-count gate may continue to report pending acceptance, but it must not leave the Sheet stale. Preserve fail-closed markers only for genuine identity ambiguity, partial pagination/lookup, unresolved names or baseline drift. This makes `Removidos acumulado` mirror live app membership and ensures a recovered segurador loses `X` on the next cycle. B011-3 and B012-2 are part of the generic role reconciliation; the registry-selected B013 generation is excluded on the dedicated DTR/page-token route.
 
 If Google auth fails for this cron, validate the canonical Service Account item, `roles/serviceusage.serviceUsageConsumer`, Sheets metadata, sentinel write/readback/restore and `_sheet_removed_sync`. Do not recreate the retired Ares OAuth files.
 
@@ -342,8 +343,8 @@ Implementation rules:
 - Auto-discover 1Password items matching BOT Bxxx Token when MGS_META_APP_ROLE_ITEMS is unset.
 - Use the 1Password item code (B001/B002/etc.) as the state key; do not trust copied/stale app_name fields. Replacement apps may be named with a suffix like `BOT B005-2 Token`; keep the replacement label visible in alert titles/`App` field/state (`B005-2`), while mapping it to the same operational Discord channel (`#b005-app-rate-limit`). Do not silently display it as `B005`.
 - B013-4 is the current canonical dedicated DTR app name. Use the exact registry-pinned 1Password item `BOT B013-4 Token - Dayanna Regis`, current `NO APP = B013-4`, `b013-dtr-link-watch.sh`, and state `/root/mgs-agent/data/b013-dtr-link-monitor-state.json`. The script must fail closed unless credential metadata and channel routing match the registry. Retired B013/B013-2/B013-3 labels are historical only; B013-4 remains excluded on its dedicated route.
-- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope is registry-driven: the current B001–B010 replacement lineage plus B013-4. As of 2026-09-03 this is exactly `B001-5`, `B002-3`, `B003-3`, `B004-4`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. B013-4 must route through the dedicated DTR monitor, never the Meta `/roles` monitor.
-- Current Sheet assignment parsing must preserve alpha and hyphen suffixes such as `B001-5`, `B002-3`, `B003-3`, `B004-4`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. The live assignment header is `NO APP` after the 2026-08-13 rebuild; do not normalize replacement labels to predecessor app keys, and do not fall back to blank `APP PROVISORIO` rows.
+- For Rodolfo requests like “manda alerta real em todos os 11 canais”, scope is registry-driven: the current B001–B010 replacement lineage plus B013-4. As of 2026-09-03 this is exactly `B001-5`, `B002-3`, `B003-3`, `B004-5`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. B013-4 must route through the dedicated DTR monitor, never the Meta `/roles` monitor.
+- Current Sheet assignment parsing must preserve alpha and hyphen suffixes such as `B001-5`, `B002-3`, `B003-3`, `B004-5`, `B005-4`, `B006-4`, `B007-3`, `B008-3`, `B009-3`, `B010-3`, and `B013-4`. The live assignment header is `NO APP` after the 2026-08-13 rebuild; do not normalize replacement labels to predecessor app keys, and do not fall back to blank `APP PROVISORIO` rows.
 - B013 is an Advanced Access + ChatPion connection lineage: seguradores are not expected to be app roles/admins. Do not mark its Sheet rows as removed based on `/roles`; derive `ROLE_RECONCILIATION_EXCLUDED_APPS` from every registry app whose key starts with `B013`. The separate DTR page-token monitor owns B013 reconciliation.
 - The default B013 source set is every Sheet row assigned to the exact current registry B013 key, currently `NO APP = B013-4`, including rows already marked `X`; each row remains monitored so a valid reconnection clears `X` automatically. `Migracao` is informational unless Rodolfo explicitly requests a filtered audit.
 - B013 target-set changes are material events: in an initialized state, a new identity assigned to the current registry B013 key with no prior account state must alert immediately as `kind=added`, even when its first validation is unknown. An identity that disappears from that exact target set must alert as `kind=removed`; remove that stale baseline entry so a future reassignment alerts again as a new addition. Never silently absorb a new B013 target into the baseline. Validate both branches with an isolated state fixture; replay a confirmed missed event from a temporary state path so the canonical production state remains untouched.
@@ -382,7 +383,7 @@ B001-5  #b001-2-app-status  1521251196294135858
 B013-4  #b013-2-app-status  1522830283240505385
 B002-3  #b002-2-app-status  1521251220130496723
 B003-3  #b003-2-app-status  1521251246860931223
-B004-4  #b004-3-app-status  1521251334496456815
+B004-5  #b004-3-app-status  1521251334496456815
 B005-4  #b005-3-app-status  1521251961662341160
 B006-4  #b006-2-app-status  1521252068319297666
 B007-3  #b007-app-rate-limit  1520510823426949313

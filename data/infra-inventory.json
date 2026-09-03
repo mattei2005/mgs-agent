@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T12:16:21-04:00",
+    "updated_at": "2026-09-03T12:31:30-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1560,25 +1560,23 @@
       "agent": "zeus",
       "type": "operational_pause_state",
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 854,
-      "modified_at": "2026-09-03T12:10:51-04:00",
-      "sha256": "e8c5cb32905a8a420c6aa8f7811d6b5bdcbbe6646976ec73f4a8e1c184e88b12",
+      "size_bytes": 835,
+      "modified_at": "2026-09-03T12:28:17-04:00",
+      "sha256": "83534f7a9820aa07363d1265aa57835f8eadfe918c6fc16dfd23580a2eee09d9",
       "mode": "manual",
-      "scope": [
-        "B004-4"
-      ],
+      "scope": [],
       "timezone": "America/New_York",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1545088764530008135 + OOB B007-3 + OOB B011-3",
-      "validation": "JSON PASS; B001-5, B007-3 and B011-3 absent from both pause sets after clean reactivation cycles; only B004-4 remains fully paused.",
-      "updated_at": "2026-09-03T12:16:21-04:00",
-      "source_report": "discord:#alerts-infra/1545105093379100683",
+      "authorization_message_id": "1545088764530008135 + 1545107187972440064 + OOB B007-3 + OOB B011-3",
+      "validation": "JSON PASS; B001-5, B004-5, B007-3 and B011-3 absent from both pause sets after clean reactivation cycles; no route remains paused.",
+      "updated_at": "2026-09-03T12:31:30-04:00",
+      "source_report": "pending:#alerts-infra",
       "backup": "/root/mgs-agent/backups/meta-app-auto-restriction-pause-20260902-183634/meta-app-role-alert-pause.json.before",
       "backup_sha256": "206cd43e77f1f36f4a250d33a81583eaa8e7118c41c81e2e7398d2632650c1a9",
-      "resume_condition": "B004-4 requires validated replacement plus explicit Rodolfo reactivation request.",
-      "description": "Canonical app pause state; only the unresolved B004-4 predecessor route remains fully skipped while unaffected apps continue.",
-      "last_change": "Reactivated B001-5, B007-3 and B011-3 after preflight, isolated canary, fresh production baseline, Sheet parity and second clean scoped cycle.",
-      "report_readback": "HTTP 200; message 1545105093379100683 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
+      "resume_condition": "None; all confirmed replacement routes are active.",
+      "description": "Canonical app pause state; both app-alert and full-route pause sets are empty after all four validated replacements.",
+      "last_change": "Reactivated B001-5, B004-5, B007-3 and B011-3 after preflight, isolated canary, fresh production baseline, Sheet parity and second clean scoped cycle.",
+      "report_readback": "pending",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -1586,11 +1584,10 @@
         "/root/mgs-agent/backups/meta-app-b0102-to-b0103-cutover-20260902-103211",
         "/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204",
         "/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111",
-        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732"
+        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732",
+        "/root/mgs-agent/backups/meta-app-b0044-to-b0045-cutover-20260903-122500"
       ],
-      "monitor_scope": [
-        "B004-4"
-      ]
+      "monitor_scope": []
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -4040,18 +4037,18 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 63513,
-      "modified_at": "2026-09-03T12:12:21-04:00",
-      "sha256": "5b73112237dce8b80954c347ba47f235f035092874c70a85a9ddde84b7d345fe",
+      "size_bytes": 63719,
+      "modified_at": "2026-09-03T12:30:31-04:00",
+      "sha256": "f25274fec864b803c013fb033a5b02399baeacef4f66bd069d92abab2e6e558a",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Production route pack for current B001-B012 generic Meta role lineage, including B001-5/B007-3/B011-3 cutovers, and current B013-4 dedicated DTR route.",
+      "description": "Production route pack for current B001-B012 generic Meta role lineage, including B001-5/B004-5/B007-3/B011-3 cutovers, and current B013-4 dedicated DTR route.",
       "validation": "Runtime/versioned SHA-256 match; records exact item/channel labels, healthy preflights, fresh predecessor-free state, Service Account Sheet parity and persistent-env canary safeguard.",
-      "updated_at": "2026-09-03T12:16:21-04:00",
-      "source_report": "discord:#alerts-infra/1545105093379100683",
-      "last_change": "Added current B001-5/B007-3/B011-3 procedures and scope; demoted predecessor sections; persisted explicit production state/pause path requirement after canaries.",
-      "report_readback": "HTTP 200; message 1545105093379100683 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
+      "updated_at": "2026-09-03T12:31:30-04:00",
+      "source_report": "pending:#alerts-infra",
+      "last_change": "Added current B001-5/B004-5/B007-3/B011-3 procedures and scope; demoted predecessor sections; persisted explicit production state/pause path requirement after canaries.",
+      "report_readback": "pending",
       "backup": "/root/mgs-agent/backups/meta-app-auto-restriction-pause-20260902-183634",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
@@ -4060,7 +4057,8 @@
         "/root/mgs-agent/backups/meta-app-b0102-to-b0103-cutover-20260902-103211",
         "/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204",
         "/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111",
-        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732"
+        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732",
+        "/root/mgs-agent/backups/meta-app-b0044-to-b0045-cutover-20260903-122500"
       ]
     },
     {
@@ -6305,18 +6303,18 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 16552,
-      "modified_at": "2026-09-03T12:09:43-04:00",
-      "sha256": "af6a9c7a14f185f3a87b86dac46ad647a2b861b556408f9319039639f278958b",
+      "size_bytes": 16599,
+      "modified_at": "2026-09-03T12:27:15-04:00",
+      "sha256": "b8efab366fa047fd8aa1032ac1f40e18b2941b1c475c5ca8f6acfffe40d991c3",
       "mode": "manual-authorized",
-      "source_report": "discord:#alerts-infra/1545105093379100683",
+      "source_report": "pending:#alerts-infra",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1543419014657605735",
       "scope": [
         "B001-5",
         "B002-3",
         "B003-3",
-        "B004-4",
+        "B004-5",
         "B005-4",
         "B006-4",
         "B007-3",
@@ -6328,11 +6326,11 @@
         "B013-4"
       ],
       "validation": "Exact 1Password metadata; four Graph checks HTTP 200 per replacement; token valid/app-bound; all returned role identities resolved; scoped production cycles zero errors; B013-4 remains dedicated DTR.",
-      "updated_at": "2026-09-03T12:16:21-04:00",
-      "last_change": "Replaced B001-4→B001-5, B007-2→B007-3 and B011-2→B011-3; expected Sheet roles are 14, 20 and 15.",
+      "updated_at": "2026-09-03T12:31:30-04:00",
+      "last_change": "Replaced B001-4→B001-5, B004-4→B004-5, B007-2→B007-3 and B011-2→B011-3; expected Sheet roles are 14, 11, 20 and 15.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/meta-app-registry.json.before",
-      "report_readback": "HTTP 200; message 1545105093379100683 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
-      "description": "Canonical current Meta app routing registry; B001-5, B007-3 and B011-3 replace their restricted predecessors while preserving existing app-status channels.",
+      "report_readback": "pending",
+      "description": "Canonical current Meta app routing registry; B001-5, B004-5, B007-3 and B011-3 replace their restricted predecessors while preserving existing app-status channels.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -6340,7 +6338,8 @@
         "/root/mgs-agent/backups/meta-app-b0102-to-b0103-cutover-20260902-103211",
         "/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204",
         "/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111",
-        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732"
+        "/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732",
+        "/root/mgs-agent/backups/meta-app-b0044-to-b0045-cutover-20260903-122500"
       ]
     },
     {
@@ -16930,9 +16929,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 188690,
-      "md5": "5e0da125b8c5f468dae1e7157ce9a187",
-      "modified_at": "2026-09-03T12:13:33-04:00"
+      "size_bytes": 188727,
+      "md5": "b271b363074678912eaa4720e0c78fe1",
+      "modified_at": "2026-09-03T12:31:30-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -17098,9 +17097,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 142455,
-      "md5": "46b78918f5ea20781ccb929942a73d73",
-      "modified_at": "2026-09-03T12:13:33-04:00"
+      "size_bytes": 143114,
+      "md5": "92ddaab065723da969d09c4d0d0fa0f7",
+      "modified_at": "2026-09-03T12:31:30-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -17122,21 +17121,21 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 16552,
-      "md5": "16b6463f272996bb792b322bf3a49f77",
-      "modified_at": "2026-09-03T12:09:43-04:00"
+      "size_bytes": 16599,
+      "md5": "cc6dfd287ffdb0c7d93453174600a936",
+      "modified_at": "2026-09-03T12:27:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 854,
-      "md5": "25410646c7779b4af641a0173c1d525c",
-      "modified_at": "2026-09-03T12:10:51-04:00"
+      "size_bytes": 835,
+      "md5": "9f199b900db2f5087526393870462509",
+      "modified_at": "2026-09-03T12:28:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
       "size_bytes": 27021,
-      "md5": "31328f0659b9d070a58350fa59203be4",
-      "modified_at": "2026-09-03T12:09:43-04:00"
+      "md5": "c160f14299b21a919cf0e5c5cece6b12",
+      "modified_at": "2026-09-03T12:27:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-b011-clean-20260704-071749.json",
@@ -17146,9 +17145,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 83229,
-      "md5": "af2d148750e85b9194285af2c06369c2",
-      "modified_at": "2026-09-03T12:10:57-04:00"
+      "size_bytes": 81819,
+      "md5": "5ed5238cd15aa6b0596ca2be7c945b4e",
+      "modified_at": "2026-09-03T12:28:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",

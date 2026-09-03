@@ -3210,6 +3210,24 @@
       "updated_at": "2026-09-02T14:38:48+00:00"
     },
     {
+      "canonical_key": "meta-app.roles.b004.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T12:28:22-04:00",
+      "id": "decision-meta-roles-b0045-20260903",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B004-5 substitui B004-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-03T16:31:30+00:00"
+    },
+    {
       "canonical_key": "meta-app.roles.b005.current-generation",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -3702,5 +3720,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T16:13:33+00:00"
+  "updated_at": "2026-09-03T16:31:30+00:00"
 }
