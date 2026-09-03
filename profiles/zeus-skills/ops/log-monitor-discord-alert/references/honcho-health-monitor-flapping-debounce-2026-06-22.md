@@ -41,6 +41,16 @@ In `/root/mgs-agent/scripts/monitor-honcho-health.sh`:
 - Recovery embed only when previous state had `alert_active=true`.
 - If Rodolfo reports ongoing alert fatigue, keep debounced Discord alerting rather than log-only by default: `HONCHO_DISCORD_ALERTS=${HONCHO_DISCORD_ALERTS:-1}` with `HONCHO_ALERT_THRESHOLD=2`. First critical failure only updates state/log; push is sent only if the next 15-min cron still sees Honcho critically unavailable. If the CEO explicitly wants silence, set `HONCHO_DISCORD_ALERTS=0` as a temporary mute.
 
+## Persistent billing block circuit breaker
+
+When every monitored agent is classified as `billing_blocked / manual_billing_honcho` and the alert is active, repeated health calls cannot repair the dependency and only create noise. The monitor must fail closed before reading 1Password or calling Honcho:
+
+- scheduled runs log `BILLING_BLOCKED` and exit zero without external calls;
+- billing/top-up remains manual and is never attempted by the monitor;
+- after manual regularization, an operator runs exactly one probe with `HONCHO_BILLING_RECHECK=1`;
+- only a healthy override probe clears `alert_active`, resets `consecutive_failures`, and restores ordinary scheduled checks;
+- validate with a fixture that the blocked branch makes zero external calls and that the override branch can recover state.
+
 ## Validation checklist
 
 After patching:
