@@ -942,6 +942,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0113-CUTOVER-20260903",
+      "next_step": "Validar metadados do item 1Password, executar canário isolado, aplicar cutover com backup e validar produção.",
+      "objective": "Substituir B011-2 por B011-3 no monitor Meta, validar 1Password, Graph, Sheet e reativar toda a rota sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544837470687076454;message:OOB-B0113-after-B0073;registry:data/meta-app-registry.json",
+      "state": "in_progress: pedido explícito recebido; b011-2 está pausado por restrição; item, sheet e preflight ainda em validação.",
+      "thread_id": "1544837470687076454",
+      "updated_at": "2026-09-03T16:06:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -2122,5 +2132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T16:00:48+00:00"
+  "updated_at": "2026-09-03T16:06:51+00:00"
 }

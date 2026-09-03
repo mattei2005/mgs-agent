@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T12:02:41-04:00",
+    "updated_at": "2026-09-03T12:06:21-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1572,14 +1572,14 @@
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1545088764530008135 + OOB B007-3",
       "validation": "JSON PASS; B001-5 and B007-3 absent from both pause sets after clean reactivation cycles; only B004-4 and B011-2 remain fully paused.",
-      "updated_at": "2026-09-03T12:02:41-04:00",
-      "source_report": "pending:#alerts-infra",
+      "updated_at": "2026-09-03T12:06:21-04:00",
+      "source_report": "discord:#alerts-infra/1545102280582238309",
       "backup": "/root/mgs-agent/backups/meta-app-auto-restriction-pause-20260902-183634/meta-app-role-alert-pause.json.before",
       "backup_sha256": "206cd43e77f1f36f4a250d33a81583eaa8e7118c41c81e2e7398d2632650c1a9",
       "resume_condition": "B004-4/B011-2 require validated replacement plus explicit Rodolfo reactivation request.",
       "description": "Canonical app pause state; only two unresolved restricted predecessor routes remain fully skipped while unaffected apps continue.",
       "last_change": "Reactivated B001-5 and B007-3 after preflight, isolated canary, fresh production baseline, Sheet parity and second clean scoped cycle.",
-      "report_readback": "pending",
+      "report_readback": "HTTP 200; message 1545102280582238309 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -4049,10 +4049,10 @@
       "risk": "low",
       "description": "Production route pack for current B001-B012 generic Meta role lineage, including B001-5/B007-3 cutovers, and current B013-4 dedicated DTR route.",
       "validation": "Runtime/versioned SHA-256 match; records exact item/channel labels, healthy preflights, fresh predecessor-free state, Service Account Sheet parity and persistent-env canary safeguard.",
-      "updated_at": "2026-09-03T12:02:41-04:00",
-      "source_report": "pending:#alerts-infra",
+      "updated_at": "2026-09-03T12:06:21-04:00",
+      "source_report": "discord:#alerts-infra/1545102280582238309",
       "last_change": "Added current B001-5/B007-3 procedures and scope; demoted predecessor sections; persisted explicit production state/pause path requirement after canaries.",
-      "report_readback": "pending",
+      "report_readback": "HTTP 200; message 1545102280582238309 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
       "backup": "/root/mgs-agent/backups/meta-app-auto-restriction-pause-20260902-183634",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
@@ -6309,7 +6309,7 @@
       "modified_at": "2026-09-03T11:55:58-04:00",
       "sha256": "61e790c4f09a614ce328456eff859949bb9df4d72839389d17df297d46b94d43",
       "mode": "manual-authorized",
-      "source_report": "pending:#alerts-infra",
+      "source_report": "discord:#alerts-infra/1545102280582238309",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1543419014657605735",
       "scope": [
@@ -6328,10 +6328,10 @@
         "B013-4"
       ],
       "validation": "Exact 1Password metadata; four Graph checks HTTP 200 per replacement; token valid/app-bound; all returned role identities resolved; scoped production cycles zero errors; B013-4 remains dedicated DTR.",
-      "updated_at": "2026-09-03T12:02:41-04:00",
+      "updated_at": "2026-09-03T12:06:21-04:00",
       "last_change": "Replaced B001-4→B001-5 and B007-2→B007-3; expected Sheet roles are 14 and 20.",
       "backup": "/root/mgs-agent/backups/meta-app-b0133-to-b0134-cutover-20260829-204023/meta-app-registry.json.before",
-      "report_readback": "pending",
+      "report_readback": "HTTP 200; message 1545102280582238309 in channel 1498132022634483894; Zeus author; content empty; one embed; required fields PASS; zero user/role mentions; no thread.",
       "description": "Canonical current Meta app routing registry; B001-5 and B007-3 replace their restricted predecessors while preserving existing app-status channels.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
