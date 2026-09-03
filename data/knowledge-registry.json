@@ -3683,6 +3683,24 @@
       "updated_at": "2026-08-30T01:06:23+00:00"
     },
     {
+      "canonical_key": "sb-messenger-token.post-remediation-live-exact-pair",
+      "canonical_source": "profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "consumers": [
+        "monitor-sb-messenger-token-invalid",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T16:12:49-04:00",
+      "id": "procedure-sb-messenger-live-exact-pair-20260903",
+      "kind": "procedure",
+      "owner": "Zeus / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Auditoria pós-correção de token Messenger usa DTR e SB live por LOGIN mais PROFILE_NAME exatos",
+      "updated_at": "2026-09-03T20:15:01+00:00"
+    },
+    {
       "canonical_key": "sb.utility-template-repair.self-healing",
       "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-utility-template-approval/references/production-red-gray-repair-purple-page-audit.md",
       "consumers": [
@@ -3720,5 +3738,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T16:31:30+00:00"
+  "updated_at": "2026-09-03T20:15:01+00:00"
 }

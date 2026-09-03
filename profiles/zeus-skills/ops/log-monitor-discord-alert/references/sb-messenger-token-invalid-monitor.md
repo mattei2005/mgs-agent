@@ -10,6 +10,19 @@ Use this procedure when MGS needs to mirror Smart Bidding alerts titled `Messeng
 - The body provides `user_id`, `user_name`, `user_email`, `segurador_id`, `segurador_name` and `source` (`page_token` or `canary`).
 - Never read, persist, print or validate the underlying Facebook tokens.
 
+## Post-remediation connection audit — live exact-pair rule
+
+When Rodolfo says he removed, replaced, reconnected or deduplicated the alerted profiles and asks for a fresh status, the Discord alert/state is only the audit population. It is not current connection proof.
+
+- Do not use the monitor state, prior report JSON, cached page counts, Discord embed, replacement account under the same login, or a saved snapshot to classify the alerted segurador.
+- Fetch all three surfaces fresh in the same run: current channel alerts for scope, DigitalTRChat live account/page selectors, and Smart Bidding live `/users/Messenger` plus `/campaigns/Messenger`.
+- Match the exact pair `LOGIN/USER_LOGIN + PROFILE_NAME`. Never infer that an old profile is healthy because another profile under the same bot user is connected. Example: zero live SB rows for `Bruna Andrade` means Bruna has zero SB pages even when `Vivian Silva` now has 13 pages under the same login.
+- In DigitalTRChat, match the exact account name after Unicode normalization, deduplicate `.account_switch` by immutable `data-id`, switch that ID, prove the active context, and read its current page selector. A visible and hidden responsive entry with the same ID is one account, not a duplicate. Only the same normalized name on distinct account IDs is a real DTR duplicate.
+- In Smart Bidding, count only rows whose exact current `PROFILE_NAME` matches the alerted segurador under the exact login. Report the matched Messenger User row's current `ACTIVE` state and compare exact DTR `Page ID` sets with SB `PAGE_ID` sets.
+- Classify exact-pair results as: `OK` (present and page-ID parity on both), `REMOVIDO` (absent from both), `PENDENTE_SEM_SB` (present in DTR, zero exact SB rows), `PENDENTE_SB_RESIDUAL` (absent from DTR, still in SB), `PENDENTE_DIVERGENCIA_PAGINAS`, or a distinct-ID duplicate/error state.
+- A ✅ reaction remains the human lifecycle signal, but it is not live health proof. Do not declare the remediation complete while an exact-pair live audit still has a pending state.
+- Persist only sanitized IDs/counts/statuses and provenance. Never persist credentials or token values.
+
 ## Page-count enrichment
 
 1. Open the canonical headed/Xvfb Smart Bidding session and capture only the dashboard authorization header in memory.

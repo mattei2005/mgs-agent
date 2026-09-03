@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T12:34:18-04:00",
+    "updated_at": "2026-09-03T16:16:28-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -12211,6 +12211,26 @@
       "updated_at": "2026-09-02T18:44:20-04:00",
       "source_report": "discord:#alerts-infra/1544840243805552701",
       "report_readback": "HTTP 200; message 1544840243805552701 in #alerts-infra; content empty; one embed; required fields PASS; zero user/role mentions; no thread."
+    },
+    {
+      "id": "zeus-sb-messenger-token-invalid-monitor-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "runtime_versioned_sha_match": true,
+      "size_bytes": 9323,
+      "modified_at": "2026-09-03T16:13:35-04:00",
+      "sha256": "70738ccbe80fa0f79c331a6affd829fbfd60ae6373687e10849fd199fe08e6aa",
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Canonical Messenger invalid-token procedure with live exact LOGIN + PROFILE_NAME post-remediation audit; cached/login-aggregate inference prohibited.",
+      "validation": "Fresh 2026-09-03 16:12 ET audit: 22 live alerts / 21 exact pairs; DTR and SB fetched live; Bruna Andrade 0 DTR + 0 SB; 9 OK, 7 removed, 5 pending; zero DTR/SB writes; mirror hash match.",
+      "last_change": "Persisted Rodolfo correction: no cache/snapshot and no replacement-profile inference; exact current DTR account plus SB PROFILE_NAME/Page ID matching required.",
+      "backup": "/root/mgs-agent/backups/seguradores-token-fb-live-exact-audit-20260903/sb-messenger-token-invalid-monitor.md.before",
+      "updated_at": "2026-09-03T16:16:28-04:00",
+      "source_report": "discord:#alerts-infra/1545165522264395929",
+      "report_readback": "HTTP 200; message 1545165522264395929 in channel 1498132022634483894; content empty; one embed; required fields PASS; zero mentions; no thread."
     }
   ],
   "profile_skill_references": [
