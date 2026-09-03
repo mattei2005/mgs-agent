@@ -13,6 +13,7 @@ HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
 # Debounced Discord alerts: first critical failure only updates state/log;
 # a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
 HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
+HONCHO_BILLING_RECHECK="${HONCHO_BILLING_RECHECK:-0}"
 DRY_RUN="${DRY_RUN:-0}"
 AGENTS=(zeus atena ares)
 
@@ -43,6 +44,31 @@ if [[ ! -f "$STATE_FILE" ]]; then
   "last_ok_at": null
 }
 JSON
+fi
+
+# A billing/top-up block cannot be repaired by retries. Once every recorded
+# failure is explicitly billing-blocked and the alert is active, cron stays
+# fail-closed without reading 1Password or calling Honcho. After a manual
+# top-up, an operator must run once with HONCHO_BILLING_RECHECK=1; a healthy
+# result clears the state and restores normal scheduled checks.
+BILLING_BLOCK_ACTIVE="$(python3 - <<'PY' "$STATE_FILE"
+import json, sys
+try:
+    d = json.load(open(sys.argv[1]))
+    failures = d.get("last_failure_details") or []
+    blocked = (
+        d.get("alert_active") is True
+        and bool(failures)
+        and all(r.get("action_required") == "manual_billing_honcho" for r in failures)
+    )
+    print("true" if blocked else "false")
+except Exception:
+    print("false")
+PY
+)"
+if [[ "$BILLING_BLOCK_ACTIVE" == "true" && "$HONCHO_BILLING_RECHECK" != "1" ]]; then
+  log "BILLING_BLOCKED: external checks suppressed; manual top-up required; recheck with HONCHO_BILLING_RECHECK=1"
+  exit 0
 fi
 
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
