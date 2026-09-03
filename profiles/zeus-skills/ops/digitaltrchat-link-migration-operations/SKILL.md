@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.5
+version: 1.3.6
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -26,6 +26,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/batch-manifest-identity-and-readback.md` — reusable batch manifest, Unicode/long-ID identity reconciliation, variable image-click coverage, rollback, and independent readback procedure.
 - `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, blocker rechecks, exact ignore-list identity matching, disconnected-Page handling, resumable backups, login-safe concurrency, canary/readback, Openzed 21/07 EN/ES signatures, and column-I completion rules.
 - `references/utm-medium-only-migration-and-exact-login-resolution.md` — validated narrow migration for changing only `utm_medium` across Get Started and existing Drip URLs, including exact-login discovery when a newly added generic-title 1Password item is absent from the resolver map, dynamic occurrence counts, normalized graph hashing, rollback, and fresh-session readback.
+- `references/live-reference-page-catalog-and-idempotent-recovery.md` — live source-Page approval gate, resumable qualification, action-editor normalization, and safe recovery when a Flow Builder Save is a no-op or a Page ends in a known partial state.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
 ## Non-negotiable model
@@ -38,14 +39,32 @@ Never use `utm_term` as classification authority. Rodolfo confirmed that it may 
 
 If the spreadsheet row is absent, duplicated, ID-mismatched, or internally ambiguous, stop and reconcile instead of guessing. The new canonical Openzed URLs intentionally omit `utm_term`, so the pre-write manifest must preserve the spreadsheet row identity and the legacy before-state separately.
 
+## Live DTR reference-Page approval gate
+
+When Rodolfo explicitly names a source segurador and asks Zeus to use its newest Page as the destination reference, use a two-stage gate instead of treating the first instruction as write authorization:
+
+1. resolve and activate the exact source login/imported account;
+2. identify the newest Page as the first Page in the live DTR list and corroborate it with the greatest internal DTR Page ID when possible; stop on disagreement rather than guessing;
+3. read Get Started, No Match and every existing Auto Principal Drip URL without saving;
+4. verify source Page identity, full graph reachability, semantic labels, URL occurrences and literal placeholders;
+5. send the exact observed catalog to Rodolfo and explicitly state that no target Page has been changed;
+6. wait for Rodolfo to approve that catalog; only that later approval authorizes the named target batch;
+7. freeze source account/Page IDs, observation time, catalog and hashes in the batch manifest.
+
+A Rodolfo-approved live reference Page is destination authority only for the exact named migration scope. Record it as an explicit override when it conflicts with legacy login labels, current target URLs or spreadsheet classification; do not silently promote it to a global catalog.
+
 ## Migration surfaces
 
-Treat these as one consistency unit while preserving their distinct semantic destinations:
+The default complete consistency unit is:
 
 - `Auto Principal Drip`: replace every existing URL according to its current semantic label.
 - `Get-started Template`: use canonical M0.
 - `No Match Template`: use canonical NM.
 - `Persistent Menu`: locale `default`, first-level Web URL item, use canonical M0.
+
+If Rodolfo explicitly enumerates and confirms a narrower surface subset, that exact subset is authoritative. Do not expand it to Persistent Menu or another omitted surface. Record every omitted surface as `out_of_scope_unchanged`, and never imply it was backed up, migrated or validated when it was not.
+
+Within whichever surface set is authorized, preserve each destination's distinct semantic role.
 
 Map canonical `utm_content` labels directly:
 
@@ -89,7 +108,7 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
 10. If no flow exists, mark the Page ineligible. A URL-replacement request does **not** authorize installing a saved template or creating a flow.
-11. Back up the graph, Get Started, No Match, and Persistent Menu values.
+11. Back up every authorized surface. The default full unit includes the graph, Get Started, No Match and Persistent Menu; for an explicitly narrower subset, record omitted surfaces as `out_of_scope_unchanged` without claiming a backup or validation.
 12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
 ### Conditional full-flow qualification
@@ -124,16 +143,17 @@ When Rodolfo provides a Google Sheet as the destination catalog rather than as a
 ## Safe execution sequence
 
 1. For Openzed catalog migrations, run `python3 scripts/openzed_link_catalog.py --validate`. For a Rodolfo-supplied direct catalog Sheet, use the zero-diff/direct-catalog protocol above instead of forcing the Openzed generator.
-2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, spreadsheet tab/row and `vertical + pais + lingua`, operational status, legacy URL discrepancies, existing semantic labels, chosen catalog, and all four surface routes.
+2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, classification authority, legacy URL discrepancies, existing semantic labels, chosen catalog, and every authorized surface route. Under the default full unit this includes all four routes; under an explicit narrower subset, record omitted routes as out of scope.
 3. Create timestamped backups and hashes before opening a writable state.
 4. Re-read live values immediately before mutation; abort on drift.
 5. Execute one Page as canary.
-6. Update one surface at a time, preserving all non-URL fields:
+6. Update only the authorized surfaces, one at a time, preserving all non-URL fields. The default full unit order is:
    - Flow Builder URLs, then one global Save;
    - Get Started URL, then Update;
    - No Match URL, then Update;
    - Persistent Menu first-level default Web URL, then Submit.
-7. After each save, reload that surface and read back the exact destination.
+   Skip and record any explicitly omitted surface rather than touching it.
+7. After each save, reload that surface and read back the exact destination. Do not treat a click, toast, or missing network event as persistence. If the UI Save is a proven no-op, use the guarded recovery in `references/live-reference-page-catalog-and-idempotent-recovery.md`; never blindly submit a second write.
 8. Open a fresh independent browser session and validate the complete Page.
 9. Compare against backup: only scoped URL strings may differ.
 10. If a governed tracking sheet has a completion/status field, write `feito` only for Pages whose independent readback passed. Read the exact target cell immediately before the write, update only that Page's range, and read back the entire authorized target set so skipped Pages are proven unchanged.

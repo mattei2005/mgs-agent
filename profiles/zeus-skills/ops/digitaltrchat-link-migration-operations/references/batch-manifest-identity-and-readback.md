@@ -39,6 +39,8 @@ Bot Manager action links are hydrated asynchronously and may be hidden inside co
 
 For large batches, preserve the exact authorized Page list as an ordered, deduplicated target artifact before discovery. Reuse one authenticated browser context per DTR login/imported account for **read-only** account mapping and qualification, but preserve Page-level manifests and independent post-write contexts. Read-only session reuse reduces login/UI overhead; it must not weaken Page identity checks, pre-write drift checks, rollback isolation, or readback independence.
 
+Persist each fully qualified Page manifest immediately, before moving to the next Page. If the foreground qualification is interrupted or times out, resume only from manifests whose Page identity, status and hashes read back exactly; re-enumerate the live target inventory and process only the missing Pages. Do not open production writes until the resumed qualification again yields a complete, disjoint partition of the requested set.
+
 Before any production write, build a disjoint disposition partition whose union equals the exact requested set. Typical buckets are `qualified`, `incomplete N/28`, `flow absent`, `ignore-list`, `blocked/on-hold`, `disconnected/not listed live`, and `identity conflict`. Fail closed if a Page appears in more than one bucket or the bucket totals do not exhaust the requested list.
 
 ## 4. Qualify the flow from structure
@@ -77,6 +79,10 @@ Validate the generated catalog before the first write. Confirm the approved host
 5. Reload every surface before continuing.
 6. Stop the batch on an unrolled-back mismatch; do not stack repairs across Pages.
 
+A Flow Builder Save can occasionally be a no-op even though the editor accepted the in-memory change. After Save, reload and classify the graph as exactly one of: `before`, `target`, or `mixed/unknown`. If it is `target`, accept only after normal independent readback. If it is exactly `before`, no partial side effect occurred: revalidate `xitFlowBuilderData.page_table_id`, the prepared graph hash and the allowed field diff, then a single canonical `flowbuilder_submit` fallback may be used. If it is mixed/unknown, stop and restore or escalate; never replay blindly. Preserve failed attempts and recovery evidence instead of overwriting them.
+
+For a known partial Page, recovery must be idempotent: accept each surface only when it equals either the frozen before value or the approved target, write only the missing surfaces, and reject any third value as live drift. A rollback response failure is not proof of rollback failure or success; read back every surface and reconcile the actual state before the next action.
+
 ## 7. Independent verification
 
 Open a fresh browser context and collect new after-state files. Verification must prove:
@@ -89,7 +95,7 @@ Open a fresh browser context and collect new after-state files. Verification mus
 - host/path, medium, content labels, and placeholders are correct;
 - total verified URLs equal the manifest count.
 
-When comparing HTML control inventories across independent browser sessions, normalize away runtime-only UI artifacts: generated `ajax-upload-id-*` fields, anonymous modal/search controls, selector option-text ordering, visibility, and hydrated display text. Compare stable business fields (`tag`, stable `id`/`name`, `type`, `value`, `checked`, `disabled`) and the authorized URL fields separately. In particular, classic action editors can hydrate hidden inactive controls whose `name` contains `post_id_` with the first dynamically ordered option; after proving the active button type is still `web_url`, exclude those inactive selector values from equality checks. Do not generalize that exclusion to visible/active selectors or other business fields. Do not treat browser-generated IDs or hydration order as production drift.
+When comparing HTML control inventories across independent browser sessions, normalize away runtime-only UI artifacts: generated `ajax-upload-id-*` fields, anonymous modal/search controls, selector option-text ordering, visibility, and hydrated display text. Compare stable business fields (`tag`, stable `id`/`name`, `type`, `value`, `checked`, `disabled`) and the authorized URL fields separately. Key controls by stable `id`/`name`, never by DOM/list position: a business textarea can remain present with the same value while toggling from visible to hidden, shifting every later field index and creating a false mismatch. Require the baseline business IDs and values to remain present; ignore visibility/order only after that keyed comparison succeeds. In particular, classic action editors can hydrate hidden inactive controls whose `name` contains `post_id_` with the first dynamically ordered option; after proving the active button type is still `web_url`, exclude those inactive selector values from equality checks. Do not generalize that exclusion to active selectors or other business fields. Do not treat browser-generated IDs or hydration order as production drift.
 
 For URL parsing, temporarily replace the complete `#PAGE_ID#` token with a sentinel before parsing because `#` starts a fragment. Verify the original production string still contains the literal token.
 
