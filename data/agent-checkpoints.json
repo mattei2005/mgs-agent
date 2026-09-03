@@ -1283,12 +1283,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
-      "next_step": "Concluir pre-stage/readback dos 12 assets, materializar e selar manifest v3, executar dois bundles sem replay cego e finalizar Drive/inventário/guardrails.",
+      "next_step": "Após cooldown de 300s, retomar o mesmo request pelo Engine v3 para readback-first e criação missing-only; depois executar o bundle C13-C14 e concluir pós-processamento.",
       "objective": "Criar C11-C14 na conta 05: 2 MOTO e 2 CARRO, USD35/dia cada, início 03/09/2026 00:00 ET (01:00 São Paulo), 1x1x3 MAXVOL.",
-      "source": "discord:thread:1542892971186454719;request:cpv05-c11-c14-mixed-20260903-nicolas-r1",
-      "state": "preflight live concluído; c11-c14 são próximos objetos novos apesar das campanhas históricas paused; 12 assets selecionados, qa técnico/visual e reserva do request concluídos; pre-stage meta em andamento.",
+      "source": "discord:thread:1542892971186454719;request:cpv05-c11-c14-mixed-20260903-nicolas-r1;engine-state:DEFERRED_QUOTA",
+      "state": "request resumível em deferred_quota: bundle c11-c12 criou as duas campanhas e dois adsets; 3 de 6 anúncios foram confirmados. três anúncios faltaram por erro meta transitório code 2. nenhum objeto será repetido; lease account-scoped permanece ativa.",
       "thread_id": "1542892971186454719",
-      "updated_at": "2026-09-03T02:24:52+00:00"
+      "updated_at": "2026-09-03T02:34:24+00:00"
     },
     {
       "agent": "ares",
@@ -2092,5 +2092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T02:24:52+00:00"
+  "updated_at": "2026-09-03T02:34:24+00:00"
 }
