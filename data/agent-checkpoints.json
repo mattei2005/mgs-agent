@@ -862,6 +862,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0015-CUTOVER-20260903",
+      "next_step": "Ler a Sheet por Service Account, executar canário isolado, aplicar cutover com backup e validar ciclo agendado.",
+      "objective": "Substituir B001-4 por B001-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544837470687076454;messages:1545088764530008135,1545095791637430415;registry:data/meta-app-registry.json",
+      "state": "in_progress: pedido explícito confirmado; b001-4 pausado por restrição; item b001-5 existe com app_name exato e campos obrigatórios presentes; preflight/canário/produção ainda pendentes.",
+      "thread_id": "1544837470687076454",
+      "updated_at": "2026-09-03T15:40:43+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0033-CUTOVER-20260902",
       "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B003-2 por B003-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
@@ -2092,5 +2102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T03:56:32+00:00"
+  "updated_at": "2026-09-03T15:40:43+00:00"
 }
