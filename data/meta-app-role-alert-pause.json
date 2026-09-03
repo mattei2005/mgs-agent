@@ -1,17 +1,13 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [
-    "B004-4"
-  ],
-  "monitor_apps": [
-    "B004-4"
-  ],
+  "apps": [],
+  "monitor_apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-B0113-after-B0073",
-  "updated_at": "2026-09-03T12:10:51-04:00",
-  "reason": "B001-5, B007-3 e B011-3 validados e reativados; somente B004-4 permanece com rota completa pausada.",
+  "source_message_id": "1545107187972440064",
+  "updated_at": "2026-09-03T12:28:17-04:00",
+  "reason": "B001-5, B004-5, B007-3 e B011-3 validados e reativados; nenhuma rota permanece pausada.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
@@ -22,6 +18,7 @@
     "1545088764530008135",
     "1545095791637430415",
     "OOB-B0073-after-1545088764530008135",
-    "OOB-B0113-after-B0073"
+    "OOB-B0113-after-B0073",
+    "1545107187972440064"
   ]
 }
