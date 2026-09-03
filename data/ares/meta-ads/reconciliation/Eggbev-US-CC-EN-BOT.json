@@ -3,8 +3,8 @@
   "status": "valid",
   "operation": "Eggbev-US-CC-EN-BOT",
   "account_id": "1034081997659047",
-  "generated_at_utc": "2026-09-03T02:08:50.855066+00:00",
-  "valid_until_utc": "2026-09-03T08:08:50.855066+00:00",
+  "generated_at_utc": "2026-09-03T02:16:08.095910+00:00",
+  "valid_until_utc": "2026-09-03T08:16:08.095910+00:00",
   "read_only": true,
   "writes": {
     "meta": 0,
@@ -31,11 +31,11 @@
     "limitation": "no downloadable Meta visual fingerprint was generated; scoped manager release plus title/ID/current-inventory checks remain mandatory"
   },
   "summary": {
-    "required": 18,
+    "required": 9,
     "inventory_candidates": 84,
-    "approved_for_scoped_request": 61,
-    "conflicted": 23,
-    "manager_release_required": 61
+    "approved_for_scoped_request": 52,
+    "conflicted": 32,
+    "manager_release_required": 52
   },
   "assets": [
     {
@@ -329,7 +329,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-07-15T20:22:49.036Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1ZwSllJTDbXnQhKmQHznMyx9rPJeTvjg2",
@@ -346,9 +346,21 @@
           "durationMillis": "0"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_527b796f14556dec03bd 01c81ea75400"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_527b796f14556dec03bd 01c81ea75400"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_44f4e466c13aef119b35",
@@ -421,7 +433,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-07-15T20:23:59.782Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1qVxO1RqVQoOIcDbpJ4ZmDYOG_eRIlvb_",
@@ -438,9 +450,21 @@
           "durationMillis": "0"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_b7f8891971834f1a5436 3072aaff0158"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_b7f8891971834f1a5436 3072aaff0158"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_733d9ce98ae311666fa5",
@@ -925,7 +949,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-20T19:43:59.075Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "14zTPVhUUJReHGXNyLGULUc3swBvZQmEG",
@@ -942,9 +966,21 @@
           "durationMillis": "7999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_c3a6b18d28a7def5ce57 c3be0ecf81e7"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_c3a6b18d28a7def5ce57 c3be0ecf81e7"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_fd3f3c714a407e9d7c57",
@@ -985,7 +1021,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-20T19:44:20.743Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1d15n_KCd-0qy1tQ9NcmDjug5ZzESjF7h",
@@ -1002,9 +1038,21 @@
           "durationMillis": "7999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_e42057ba01eb6cd5b401 5d12c54d7465"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_e42057ba01eb6cd5b401 5d12c54d7465"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_a1246e8a09c85e0ed4f2",
@@ -1063,7 +1111,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-20T19:43:35.445Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1VSftcyv34WE4iiWmo5rDpC7gKm3GjJ29",
@@ -1080,9 +1128,21 @@
           "durationMillis": "7999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_8764bad8a782e3213e97 c58212f721bd"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_8764bad8a782e3213e97 c58212f721bd"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_39e55d699d451582335b",
@@ -1449,7 +1509,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-26T18:07:43.180Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1ceSDIefYol9TT6jBeYAiTdAGczzT6KfM",
@@ -1466,9 +1526,21 @@
           "durationMillis": "7999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_7fdc51ee5042252f4c86 19eb44ca2d0d"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_7fdc51ee5042252f4c86 19eb44ca2d0d"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_459e99b4ae5b40e2864d",
@@ -1911,7 +1983,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-08-30T21:36:04.290Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1Rbyn686frVAvftro28tTdhAv4NpuqVpo",
@@ -1928,9 +2000,21 @@
           "durationMillis": "10033"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_f3fc05489b4be78ab523 5d65af082b54"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_f3fc05489b4be78ab523 5d65af082b54"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_c96c6f865e02dfa8c85f",
@@ -2397,7 +2481,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-09-01T19:54:09.650Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1XJwxxoLc7A6Y3vtG_loWPWgCqsbzbQX_",
@@ -2414,9 +2498,21 @@
           "durationMillis": "9999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_365f83c8443585cdeeba fcf2ef5090f4"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_365f83c8443585cdeeba fcf2ef5090f4"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_2ed7407e75b129d9d8bd",
@@ -2631,7 +2727,7 @@
       "angle": "AVAILABLE_LIMIT",
       "orientation": "PV",
       "first_seen_at": "2026-09-01T19:53:58.165Z",
-      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "reservation_status": "RESERVADO_PELO_ARES_REQUEST",
       "requires_scoped_manager_release": true,
       "drive_readback": {
         "id": "1cvwIAlT9pDYlmQNNxinwekH7YbHsl19s",
@@ -2648,9 +2744,21 @@
           "durationMillis": "9999"
         }
       },
-      "meta_title_matches": [],
-      "conflicts": [],
-      "approved_for_scoped_request": true
+      "meta_title_matches": [
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 SQUARE asset_82d0d82999dbd936dfdb 4fdf0b19ddcf"
+        },
+        {
+          "account_name": "Eggbev-US-CC-EN-01",
+          "title": "V3 VERTICAL asset_82d0d82999dbd936dfdb 4fdf0b19ddcf"
+        }
+      ],
+      "conflicts": [
+        "inventory_already_used",
+        "meta_video_title_lineage_match"
+      ],
+      "approved_for_scoped_request": false
     },
     {
       "asset_id": "asset_6711e3755591442d7078",
@@ -2723,9 +2831,7 @@
     "asset_132bd2f3a45a725940f3",
     "asset_de86fe5b13766b271c25",
     "asset_1a0b5725e3cfe50e12c7",
-    "asset_527b796f14556dec03bd",
     "asset_fdb4b8652e70cafadf2c",
-    "asset_b7f8891971834f1a5436",
     "asset_733d9ce98ae311666fa5",
     "asset_ad00fbfc870c745fa4ee",
     "asset_4668de4068bea40dee9d",
@@ -2738,13 +2844,10 @@
     "asset_aa672b71b93da2cf6520",
     "asset_0c9d600b0ae25424872c",
     "asset_3f65cc4a223149f70d69",
-    "asset_8764bad8a782e3213e97",
     "asset_2326653bc0a2783f2c1c",
-    "asset_c3a6b18d28a7def5ce57",
     "asset_39e55d699d451582335b",
     "asset_62fb35aa3ba846ad19ea",
     "asset_fd3f3c714a407e9d7c57",
-    "asset_e42057ba01eb6cd5b401",
     "asset_3559648d61a11e66f1ec",
     "asset_18ae969ef0fb3b40e712",
     "asset_adfb92d0517895e63dbe",
@@ -2754,7 +2857,6 @@
     "asset_e0c2ed5af9037e49854d",
     "asset_78650b7176ad1bd780dd",
     "asset_e291fda30b80765c3c06",
-    "asset_7fdc51ee5042252f4c86",
     "asset_b58ebf2338cfabddd0a1",
     "asset_459e99b4ae5b40e2864d",
     "asset_863575174c1c46bd7d79",
@@ -2764,15 +2866,12 @@
     "asset_b861c68c8d62825d625b",
     "asset_f3c84ed23008ee2a04a7",
     "asset_055f68692af11cf4415e",
-    "asset_f3fc05489b4be78ab523",
     "asset_6711e3755591442d7078",
     "asset_8a019913c88da79f23a2",
     "asset_4fe82f238d736c0ca85a",
     "asset_4d623b9b196784d22072",
     "asset_7b4843359d2fc0d824e5",
-    "asset_82d0d82999dbd936dfdb",
     "asset_3ac29d13001025aec534",
-    "asset_365f83c8443585cdeeba",
     "asset_2ed7407e75b129d9d8bd",
     "asset_c68f7ab27dbfc7dbd43c"
   ]
