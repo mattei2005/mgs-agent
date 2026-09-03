@@ -1403,12 +1403,12 @@
     {
       "agent": "zeus",
       "id": "dtr-openzed-links-semakin-sadar-20260903",
-      "next_step": "Aplicar a página canário 3401, validar por sessão independente e só então processar as demais em lotes.",
+      "next_step": "Aplicar as mesmas alterações qualificadas às 22 páginas restantes em lotes limitados, parando na primeira divergência, e executar readback independente integral.",
       "objective": "Substituir Get Started, No Match e links existentes do Auto Principal Drip em todas as páginas do segurador Semakin Sadar usando a referência aprovada da página Gloria Rojas do segurador Danilo Santos Lima.",
-      "source": "/root/mgs-agent/backups/dtr-semakin-openzed-links-20260903T161108-0400/qualification.json; Discord thread 1545131821245669407.",
-      "state": "preflight concluído: 23/23 páginas qualificadas, 69 backups individuais presentes, topologia uniforme 82 nós/81 arestas totalmente alcançáveis; planejadas 368 alterações de campos no drip e 46 nos botões de ação. nenhuma produção alterada ainda.",
+      "source": "/root/mgs-agent/backups/dtr-semakin-openzed-links-20260903T161108-0400/3401/apply-result.json; Discord thread 1545131821245669407.",
+      "state": "canário concluído na página scarlett hayes (page_id 3401): 16 campos do autodrip, get started e no match alterados; readback independente confirmou 82/82 nós alcançáveis, topologia preservada e 18/18 destinos corretos.",
       "thread_id": "1545131821245669407",
-      "updated_at": "2026-09-03T20:20:47+00:00"
+      "updated_at": "2026-09-03T20:23:24+00:00"
     },
     {
       "agent": "ares",
@@ -2162,5 +2162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:20:47+00:00"
+  "updated_at": "2026-09-03T20:23:24+00:00"
 }
