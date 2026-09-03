@@ -83,6 +83,7 @@ def initial_state() -> dict[str, Any]:
             'mentions': {'roles': TEAM_ROLE_IDS},
             'resolution': 'reaction ✅ or explicit Rodolfo cleanup after fresh live verification',
             'daily_cycle': 'no state-only resend; deliver only newly observed live /notification IDs',
+            'delivery_gate': 'production payloads must be rebuilt from the current live /notification response; local state is cursor/dedupe only',
         },
         'last_check': None,
         'last_seen_id': 0,
@@ -991,17 +992,20 @@ async def run(args: argparse.Namespace) -> int:
         pending_ids = {int(value) for value in pending.get('notification_ids') or []}
         stored_alerts = pending.get('alerts')
         if isinstance(stored_alerts, list) and stored_alerts:
-            pending_alerts = [dict(row) for row in stored_alerts]
-            live_rows = {
+            expected_order = [
                 (int(row['notification_id']), incident_key(row))
+                for row in stored_alerts
+            ]
+            live_by_identity = {
+                (int(row['notification_id']), incident_key(row)): row
                 for row in alerts
             }
-            expected_rows = {
-                (int(row['notification_id']), incident_key(row))
-                for row in pending_alerts
-            }
-            if not expected_rows.issubset(live_rows):
+            missing_live = [identity for identity in expected_order if identity not in live_by_identity]
+            if missing_live:
                 raise RuntimeError('pending SB incident rows are no longer available; refusing cursor advance')
+            # Never render/retry from the stored snapshot. Rebuild every pending
+            # payload from the current live /notification response.
+            pending_alerts = [dict(live_by_identity[identity]) for identity in expected_order]
         else:
             pending_alerts = [row for row in alerts if int(row['notification_id']) in pending_ids]
         present_ids = {int(row['notification_id']) for row in pending_alerts}

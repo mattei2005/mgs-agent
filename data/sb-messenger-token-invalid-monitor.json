@@ -4,7 +4,8 @@
       "digital-trust",
       "digital-trust-2"
     ],
-    "daily_cycle": "one fresh delivery per active incident after ET date rollover; no intraday repeats",
+    "daily_cycle": "no state-only resend; deliver only newly observed live /notification IDs",
+    "delivery_gate": "production payloads must be rebuilt from the current live /notification response; local state is cursor/dedupe only",
     "description": "Mirror de alertas SB Messenger user token invalid; sem tokens brutos.",
     "mentions": {
       "roles": [
@@ -12,7 +13,7 @@
         "1496260941787168848"
       ]
     },
-    "resolution": "reaction ✅ on the incident message",
+    "resolution": "reaction ✅ or explicit Rodolfo cleanup after fresh live verification",
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
@@ -1289,7 +1290,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-03T17:12:13-04:00",
+  "last_check": "2026-09-03T17:27:13-04:00",
   "last_delivery": {
     "at": "2026-09-03T12:12:14-04:00",
     "cursor_ids": [

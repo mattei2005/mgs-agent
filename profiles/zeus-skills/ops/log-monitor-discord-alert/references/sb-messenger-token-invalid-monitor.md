@@ -20,8 +20,9 @@ When Rodolfo says he removed, replaced, reconnected or deduplicated the alerted 
 - In DigitalTRChat, match the exact `LOGIN + segurador/account name` after Unicode normalization, deduplicate `.account_switch` by immutable `data-id`, switch that ID, and prove the active context. A visible and hidden responsive entry with the same ID is one account, not a duplicate. Only the same normalized name on distinct account IDs is a real DTR duplicate.
 - Enumerate every live DTR Page with both identifiers. The Bot List exposes `.page_list_item .fb_page_id` as `#<PAGE_ID pequeno> - <FB_PAGE_ID grande>` and remains usable when a Page has no Completed campaign report.
 - For each DTR Page, search the complete live SB Page scope globally by exact `PAGE_ID` **or** exact `FB_PAGE_ID`. Either identifier is sufficient for presence; when both exist they must resolve to the same unique SB row. `LOGIN`, `USER_LOGIN`, `PROFILE_NAME`, Messenger User linkage and `ACTIVE` remain diagnostics, not the presence gate. A null/wrong `PROFILE_NAME` must not turn an existing Page into `PENDENTE_SEM_SB`.
-- Classify results as: `OK` when every live DTR Page is found uniquely by small or large ID; `REMOVIDO` when the exact DTR account is absent and no exact residual SB profile row exists; `PENDENTE_SEM_SB` when none of the live DTR Page IDs exists in SB; `PENDENTE_SB_RESIDUAL`; `PENDENTE_DIVERGENCIA_PAGINAS`; or a distinct-ID/duplicate/error state. Report association/User problems separately from Page presence.
+- Classify results as: `OK` when every live DTR Page is found uniquely by small or large ID; `REMOVIDO` when the exact DTR account is absent and no exact residual SB profile row exists; `NORMAL_SEM_CAMPANHA_SB` when a Page is connected in DTR but the gestor has not yet uploaded its campaign and therefore no SB row is expected; `PENDENTE_SB_RESIDUAL`; `PENDENTE_DIVERGENCIA_PAGINAS` only when an SB row is operationally expected; or a distinct-ID/duplicate/error state. Report association/User problems separately from Page presence.
 - Correction validated 2026-09-03: with both companies selected and both IDs read live, Ione Silva is `23/23`, Michelle Ferreira `4/4`, and Semakin Sadar `23/23`; the earlier `0` counts came from treating `PROFILE_NAME` as the Page-presence gate.
+- Rodolfo correction 2026-09-03: Milena Macedo Page `22383` / FB `1310207535499669` and Riza Gabiola Page `22298` / FB `1274590525727926` are normal DTR-only Pages because the gestores have not uploaded campaigns yet. Their absence from SB is not a connection incident; they should appear automatically after campaign onboarding.
 - A ✅ reaction remains the human lifecycle signal, but it is not live health proof. Do not declare the remediation complete while the live Page-ID audit still has a pending state.
 - Persist only sanitized IDs/counts/statuses and provenance. Never persist credentials or token values.
 
@@ -38,7 +39,7 @@ When Rodolfo says he removed, replaced, reconnected or deduplicated the alerted 
 
 - Dedicated channel: `#seguradores-token-fb` (`1521350832426188961`).
 - Zeus bot transport; exactly one Discord message and one embed per affected Messenger user so a ✅ reaction resolves one incident only.
-- Every initial/new-incident and ET-date-rollover delivery mentions both team roles once: Gestor de Trafego (`1496256346994249912`) and Admin (`1496260941787168848`). Set `allowed_mentions.parse=[]` and explicitly list only those two role IDs.
+- Every newly observed live-source incident delivery mentions both team roles once: Gestor de Trafego (`1496256346994249912`) and Admin (`1496260941787168848`). Set `allowed_mentions.parse=[]` and explicitly list only those two role IDs.
 - Keep the embed compact: put the uppercased site/domain first in the title (`SITE — Token Messenger inválido`).
 - Show only three fields: `User`, `Segurador` and `Páginas`. Keep `Páginas` full-width with exactly two compact lines: `Total N`, then `N Broadcast + N On-hold + N Blocked + N Ready + N Campaign`, omitting zero statuses and placing unknown statuses after the known operational order. Do not add explanatory description, company, visible source or a separate detection-time field.
 - Keep the short content line `<roles> · Reaja ✅ quando resolver.` and compact footer/timestamp metadata for audit and dedupe.
@@ -49,20 +50,20 @@ When Rodolfo says he removed, replaced, reconnected or deduplicated the alerted 
 ## State, resolution and idempotency
 
 - Deduplicate source processing by numeric SB notification ID and delivery by stable incident key `company + domain + user_id + segurador_id`.
-- A ✅ reaction on the latest Discord message is the explicit resolution signal. At ET rollover and when a newer source notification arrives, read the latest message before deciding whether the lifecycle remains active.
-- On the first monitor run after an ET date rollover, send exactly one fresh, unbadged message for every still-active incident. Store the ET date and a resumable daily outbox before delivery so a crash cannot create an uncontrolled duplicate batch.
+- A ✅ reaction on the latest Discord message is the normal resolution signal. When a newer live source notification arrives, read the latest message before deciding whether that new event reopens the lifecycle; an explicit Rodolfo cleanup after fresh live verification may also close the incident state.
+- Never originate a delivery from local incident state, a prior Discord alert, cache, or snapshot. The state is cursor/dedupe/audit metadata only. A production delivery requires a notification ID newly observed in the current live `/notification` response.
 - During the same ET day, a newer SB notification for an already-active stable key is suppressed from Discord but updates the incident's latest sanitized snapshot and notification-ID history. A genuinely new key is delivered once.
 - After ✅, a later SB notification with the same stable key opens a new lifecycle with `repeat_count=0`; the prior acknowledgement never becomes a permanent ignore.
-- Keep `opened_at`, `last_sent_at`, `resolved_at`, notification IDs, recent message IDs and the latest sanitized alert snapshot per incident. `repeat_count` remains zero under the daily-only policy.
+- Keep `opened_at`, `last_sent_at`, `resolved_at`, notification IDs, recent message IDs and the latest sanitized alert snapshot per incident. `repeat_count` remains zero under the no-state-replay policy.
 - On first production run, seed a baseline at the maximum current ID and do not replay historical alerts or create incidents from history.
 - Persist an outbox/pending intent before delivery. After every delivered message, persist its Discord message ID.
-- On restart, GET and verify already delivered messages, then resume only missing messages.
+- On restart, GET and verify already delivered messages, then resume only missing messages, but rebuild the pending payload from the current live `/notification` response. Never render or retry from the stored alert snapshot; discard legacy daily-pending replay intents.
 - Advance `last_seen_id` and clear pending only after every message passes readback.
 - State file mode must be `0600`; do not chmod the shared `data/` directory.
 
 ## Schedule and validation
 
-- Canonical monitor cadence: `12,27,42,57 * * * *` with `flock -n` and durable `/root/.local/share/mgs/sb-venv/bin/python` under `xvfb-run -a`. The `00:12 ET` run is the normal first daily sweep: it resends each still-active incident once; later runs that day emit only genuinely new/reopened incident keys.
+- Canonical monitor cadence: `12,27,42,57 * * * *` with `flock -n` and durable `/root/.local/share/mgs/sb-venv/bin/python` under `xvfb-run -a`. Every run queries SB live; it sends only notification IDs newly observed from that live response. ET rollover never republishes active incidents from local state.
 - Daily channel retention runs at `5 0 * * *` in the host timezone `America/New_York` with a separate `flock` and `--cleanup-old-messages --apply`.
 - Retention keeps the current ET calendar day plus the complete previous ET calendar day. It deletes only messages whose embed title normalizes to `Token Messenger inválido` and whose Discord timestamp is before yesterday at `00:00 ET`; unrelated/manual messages are preserved. Example: messages from day 29 remain through day 30 and are deleted at `00:05 ET` on day 31.
 - Retention must paginate the full channel, preflight exact IDs, delete sequentially with about 0.45 seconds between requests, honor numeric `retry_after + 0.25s` for up to eight attempts, and repaginate after deletion. Success requires zero eligible messages remaining.

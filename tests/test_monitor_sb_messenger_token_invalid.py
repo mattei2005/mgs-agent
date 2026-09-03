@@ -117,8 +117,9 @@ class TokenMonitorTests(unittest.TestCase):
             self.assertEqual(loaded['last_seen_id'], 0)
             self.assertEqual(
                 loaded['_meta']['daily_cycle'],
-                'one fresh delivery per active incident after ET date rollover; no intraday repeats',
+                'no state-only resend; deliver only newly observed live /notification IDs',
             )
+            self.assertIn('current live /notification response', loaded['_meta']['delivery_gate'])
 
     def test_failure_alert_is_sent_only_once_per_failure_streak(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -269,15 +270,15 @@ class TokenMonitorTests(unittest.TestCase):
         self.assertIn('retenção diária', job['description'])
         self.assertIn('exclusão', job['risk'])
 
-    def test_cron_inventory_labels_daily_only_monitor_policy(self):
+    def test_cron_inventory_labels_live_only_monitor_policy(self):
         job = cron_mod.parse_cron_line(
             '12,27,42,57 * * * * flock -n /var/lock/monitor.lock '
             'xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python '
             '/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --apply'
         )
-        self.assertIn('virada ET', job['description'])
-        self.assertIn('sem repetição intradiária', job['description'])
-        self.assertIn('uma vez por dia', job['risk'])
+        self.assertIn('API SB ao vivo', job['description'])
+        self.assertIn('nunca origina republicação', job['description'])
+        self.assertIn('sem replay', job['risk'])
 
     def test_discord_request_retries_seven_rate_limits_before_success(self):
         attempts = []
@@ -334,32 +335,17 @@ class TokenMonitorTests(unittest.TestCase):
             setattr(mod, 'discord_request', original)
         self.assertEqual([method for method, _ in calls], ['POST', 'GET'])
 
-    def test_active_incident_is_sent_once_on_next_day_and_not_repeated_intraday(self):
+    def test_active_incident_is_never_replayed_from_state_on_next_day(self):
         alert = self.alerts()[0]
         state = mod.initial_state()
         mod.register_incidents(state, [alert], ['111'], at='2026-08-26T10:00:00-04:00')
         state['daily']['date'] = '2026-08-26'
         posted = {}
-        post_order = []
         def fake_request(method, path, body=None, allow_404=False):
-            if method == 'POST':
-                message_id = str(222 + len(post_order))
-                posted[message_id] = body
-                post_order.append(message_id)
-                return 200, {'id': message_id}
             message_id = path.rsplit('/', 1)[-1]
             if message_id == '111':
                 return 200, {'id': '111', 'channel_id': '123', 'reactions': []}
-            payload = posted[message_id]
-            return 200, {
-                'id': message_id,
-                'channel_id': '123',
-                'content': payload['content'],
-                'mentions': [],
-                'mention_roles': mod.TEAM_ROLE_IDS,
-                'embeds': payload['embeds'],
-                'reactions': [],
-            }
+            raise AssertionError(f'unexpected Discord request {method} {path}')
         original = mod.discord_request
         setattr(mod, 'discord_request', fake_request)
         try:
@@ -387,12 +373,14 @@ class TokenMonitorTests(unittest.TestCase):
         finally:
             setattr(mod, 'discord_request', original)
         self.assertEqual(same_day['daily_sent'], 0)
-        self.assertEqual(next_day['daily_sent'], 1)
+        self.assertEqual(next_day['daily_sent'], 0)
         self.assertEqual(again_next_day['daily_sent'], 0)
+        self.assertFalse(next_day['state_only_resend'])
+        self.assertEqual(next_day['would_send'], 0)
         incident = next(iter(state['incidents'].values()))
-        self.assertEqual(incident['message_ids'], ['111', '222'])
+        self.assertEqual(incident['message_ids'], ['111'])
         self.assertEqual(incident['repeat_count'], 0)
-        self.assertEqual(posted['222']['embeds'][0]['title'], 'FINANCEADX — Token Messenger inválido')
+        self.assertEqual(posted, {})
         self.assertEqual(state['daily']['date'], '2026-08-27')
 
     def test_new_source_alert_for_active_incident_is_suppressed_intraday(self):
