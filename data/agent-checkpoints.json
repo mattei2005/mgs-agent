@@ -973,12 +973,12 @@
     {
       "agent": "zeus",
       "id": "SEGURADORES-TOKEN-FB-CONNECTION-AUDIT-20260903",
-      "next_step": "Rodolfo decidir o cadastro/reconciliação das cinco pendências exatas; não inferir saúde por outro perfil do mesmo login.",
-      "objective": "Revalidar ao vivo e por par exato LOGIN + PROFILE_NAME os 21 seguradores alertados em #seguradores-token-fb, sem cache, snapshot ou inferência por perfil substituto.",
-      "source": "discord:channel:1521350832426188961;thread:1544837470687076454;message:1545163281185120286;artifact:backups/seguradores-token-fb-live-exact-audit-20260903/artifacts/seguradores-token-fb-live-exact-audit-20260903.json;procedure:profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
-      "state": "completed_with_findings_corrected: auditoria 16:12 et usou apenas discord live para escopo, digitaltrchat live e smart bidding live. resultado exato: 9 ok, 7 removidos de dtr e sb, 3 presentes no dtr sem nenhuma página sb (ione, michelle, semakin) e 2 com uma página dtr ausente no sb (milena 22383, riza 22298). bruna andrade = removido, 0 dtr e 0 sb. auditoria anterior por agregado do login foi supersedida.",
+      "next_step": "Coletar DTR live com ambos os IDs por página, coletar SB live das duas empresas, reconciliar por qualquer ID e validar cada um dos 21 seguradores.",
+      "objective": "Reauditar 21 seguradores ao vivo em DTR e SB, com escopo Smart Bidding explicitamente composto por digital-trust + digital-trust-2 e match global por PAGE_ID pequeno OU FB_PAGE_ID grande.",
+      "source": "discord:thread:1544837470687076454;message:1545173129352183879;live:DigitalTRChat+SmartBidding",
+      "state": "in_progress: rodolfo corrigiu a metodologia; relatório anterior por login+profile_name será refeito e não é autoridade para presença de page na sb.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T20:17:47+00:00"
+      "updated_at": "2026-09-03T20:47:40+00:00"
     },
     {
       "agent": "zeus",
@@ -2172,5 +2172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:37:02+00:00"
+  "updated_at": "2026-09-03T20:47:40+00:00"
 }

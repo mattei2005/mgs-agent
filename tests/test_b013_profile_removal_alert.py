@@ -96,10 +96,15 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         self.assertEqual([row['user'] for row in retired], ['planned@example.com'])
         self.assertEqual(set(accounts), {'kept'})
 
-    def test_source_replaces_account_snapshot_instead_of_merging_stale_fields(self):
+    def test_source_replaces_account_snapshot_and_classifies_downstream(self):
         source = SCRIPT.read_text(encoding='utf-8')
         self.assertNotIn('prev.update(r)', source)
         self.assertIn("accounts_state[key] = {**r, 'last_seen_at': now_iso()}", source)
+        append_at = source.index('classified_results.append(r)')
+        replace_at = source.index('results = classified_results')
+        summarize_at = source.index('summary = summarize(results)')
+        self.assertLess(append_at, replace_at)
+        self.assertLess(replace_at, summarize_at)
 
 
 if __name__ == '__main__':
