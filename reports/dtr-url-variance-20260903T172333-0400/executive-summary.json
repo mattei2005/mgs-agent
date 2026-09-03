@@ -1,0 +1,1799 @@
+{
+  "scope": {
+    "logins": [
+      "disparosvizioidmxcces@gmail.com",
+      "disparosvizioid@gmail.com",
+      "disparosvizioides@gmail.com",
+      "disparoswavesbeeen@gmail.com",
+      "disparoswavesbeees@gmail.com"
+    ],
+    "surfaces": [
+      "Get Started",
+      "No Match",
+      "Auto Principal Drip existing URLs"
+    ],
+    "mode": "read-only"
+  },
+  "totals": {
+    "logins": 5,
+    "accounts": 17,
+    "pages": 174,
+    "ok": 139,
+    "partial": 35,
+    "failed": 0,
+    "accounts_with_pages": 14,
+    "accounts_with_url_variance": 9,
+    "accounts_without_url_variance": 5,
+    "zero_page_accounts": 3
+  },
+  "full_page_signature_breakdown": {
+    "card.openzed.com + fineasier.com legacy M00-M15": 65,
+    "tarjeta.openzed.com + fineasier.com legacy M00-M15": 45,
+    "srf.openzed.com opf-es-cc-es M00-M15": 23,
+    "srf.openzed.com opf-us-cc-es M00-M28": 6
+  },
+  "no_flow_breakdown": {
+    "no_action_settings": 24,
+    "sr.openzed.com_actions_only": 2,
+    "vizioid.com_actions_only": 3,
+    "card.wavesbee.com_actions_only": 2,
+    "tarjeta.wavesbee.com_actions_only": 4
+  },
+  "variance_accounts": [
+    {
+      "login": "disparosvizioid@gmail.com",
+      "account_id": "83",
+      "account_name": "Wong Awam",
+      "pages": 2,
+      "status_counts": {
+        "ok": 2
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "2988"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "4a878be2af9742168375f1148702a518730fc801a202fbc935205607ccf96bca"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "1736"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "1736"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "2988"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "954631de4fea5695a211023843a5c1fb84629b7b94ba3336bd174351a9c6f5e0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "1736"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "2988"
+              ],
+              "hosts": [
+                "card.openzed.com",
+                "fineasier.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    },
+    {
+      "login": "disparosvizioid@gmail.com",
+      "account_id": "216",
+      "account_name": "Aan Supri Adi",
+      "pages": 21,
+      "status_counts": {
+        "ok": 21
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 21,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 20,
+              "page_ids": [
+                "3340",
+                "3318",
+                "3308",
+                "3307",
+                "3295",
+                "3285",
+                "3265",
+                "3250",
+                "3242",
+                "3189",
+                "3139",
+                "3129",
+                "3113",
+                "3101",
+                "3084",
+                "3079",
+                "3062",
+                "3050",
+                "3041",
+                "3016"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "4a878be2af9742168375f1148702a518730fc801a202fbc935205607ccf96bca"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "3784"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 21,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 20,
+              "page_ids": [
+                "3340",
+                "3318",
+                "3308",
+                "3307",
+                "3295",
+                "3285",
+                "3265",
+                "3250",
+                "3242",
+                "3189",
+                "3139",
+                "3129",
+                "3113",
+                "3101",
+                "3084",
+                "3079",
+                "3062",
+                "3050",
+                "3041",
+                "3016"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "954631de4fea5695a211023843a5c1fb84629b7b94ba3336bd174351a9c6f5e0"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "3784"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 21,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 20,
+              "page_ids": [
+                "3340",
+                "3318",
+                "3308",
+                "3307",
+                "3295",
+                "3285",
+                "3265",
+                "3250",
+                "3242",
+                "3189",
+                "3139",
+                "3129",
+                "3113",
+                "3101",
+                "3084",
+                "3079",
+                "3062",
+                "3050",
+                "3041",
+                "3016"
+              ],
+              "hosts": [
+                "card.openzed.com",
+                "fineasier.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "3784"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    },
+    {
+      "login": "disparosvizioid@gmail.com",
+      "account_id": "221",
+      "account_name": "Yunita Melvianus",
+      "pages": 20,
+      "status_counts": {
+        "ok": 18,
+        "partial": 2
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 20,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 18,
+              "page_ids": [
+                "3993",
+                "3992",
+                "3991",
+                "3787",
+                "3786",
+                "3707",
+                "3703",
+                "3654",
+                "3616",
+                "3581",
+                "3560",
+                "3543",
+                "3494",
+                "3470",
+                "3457",
+                "3440",
+                "3439",
+                "3376"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "4a878be2af9742168375f1148702a518730fc801a202fbc935205607ccf96bca"
+            },
+            {
+              "count": 2,
+              "page_ids": [
+                "3400",
+                "3399"
+              ],
+              "hosts": [
+                "sr.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "746f86dbce48e10f0517dea2ccd6457618e0e303ebc9e2598ad9ccba8b60f188"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 20,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 18,
+              "page_ids": [
+                "3993",
+                "3992",
+                "3991",
+                "3787",
+                "3786",
+                "3707",
+                "3703",
+                "3654",
+                "3616",
+                "3581",
+                "3560",
+                "3543",
+                "3494",
+                "3470",
+                "3457",
+                "3440",
+                "3439",
+                "3376"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "954631de4fea5695a211023843a5c1fb84629b7b94ba3336bd174351a9c6f5e0"
+            },
+            {
+              "count": 2,
+              "page_ids": [
+                "3400",
+                "3399"
+              ],
+              "hosts": [
+                "sr.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "b5dced264aa9884c06c0b736598573ba5448571f1360f9ad15baf90444cc6c9d"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 18,
+          "missing": 2,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 18,
+              "page_ids": [
+                "3993",
+                "3992",
+                "3991",
+                "3787",
+                "3786",
+                "3707",
+                "3703",
+                "3654",
+                "3616",
+                "3581",
+                "3560",
+                "3543",
+                "3494",
+                "3470",
+                "3457",
+                "3440",
+                "3439",
+                "3376"
+              ],
+              "hosts": [
+                "card.openzed.com",
+                "fineasier.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+            }
+          ],
+          "missing_page_ids": [
+            "3400",
+            "3399"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparosvizioid@gmail.com",
+      "account_id": "338",
+      "account_name": "Fabio Aleksander",
+      "pages": 2,
+      "status_counts": {
+        "ok": 2
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "5591"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5592"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "d6deb2c2947a1c86b9973d6c08f91a7728c9690b9c1f2cc5815d9c546b9d3be5"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "5591"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5592"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a1c1918e11ea9a88604a45f1ba620b668a432d2a97706dec08b019ee7f6c6561"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 2,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 1,
+              "page_ids": [
+                "5591"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5592"
+              ],
+              "hosts": [
+                "fineasier.com",
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    },
+    {
+      "login": "disparosvizioides@gmail.com",
+      "account_id": "217",
+      "account_name": "Beatriz Silva",
+      "pages": 11,
+      "status_counts": {
+        "ok": 6,
+        "partial": 5
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 6,
+          "missing": 5,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 5,
+              "page_ids": [
+                "4285",
+                "4284",
+                "4283",
+                "4268",
+                "4267"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "d6deb2c2947a1c86b9973d6c08f91a7728c9690b9c1f2cc5815d9c546b9d3be5"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5160"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            }
+          ],
+          "missing_page_ids": [
+            "3794",
+            "3793",
+            "3792",
+            "3791",
+            "3790"
+          ]
+        },
+        "no_match": {
+          "available": 6,
+          "missing": 5,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 5,
+              "page_ids": [
+                "4285",
+                "4284",
+                "4283",
+                "4268",
+                "4267"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a1c1918e11ea9a88604a45f1ba620b668a432d2a97706dec08b019ee7f6c6561"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5160"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            }
+          ],
+          "missing_page_ids": [
+            "3794",
+            "3793",
+            "3792",
+            "3791",
+            "3790"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 6,
+          "missing": 5,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 5,
+              "page_ids": [
+                "4285",
+                "4284",
+                "4283",
+                "4268",
+                "4267"
+              ],
+              "hosts": [
+                "fineasier.com",
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "5160"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            }
+          ],
+          "missing_page_ids": [
+            "3794",
+            "3793",
+            "3792",
+            "3791",
+            "3790"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparosvizioides@gmail.com",
+      "account_id": "1118",
+      "account_name": "Iris Rubio",
+      "pages": 5,
+      "status_counts": {
+        "partial": 5
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 3,
+          "missing": 2,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 2,
+              "page_ids": [
+                "8345",
+                "5497"
+              ],
+              "hosts": [
+                "vizioid.com"
+              ],
+              "url_count": 2,
+              "unique_url_count": 2,
+              "signature_hash": "8b7f8e89d82ab6e0cdecfbdfda9056c3c491e5bd7dd98e214adffe64e1ea971d"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "11033"
+              ],
+              "hosts": [
+                "vizioid.com"
+              ],
+              "url_count": 2,
+              "unique_url_count": 2,
+              "signature_hash": "ac1ce5a4b1d2e173199cd41dc7a9379ad9078dc9d750c98fedb98e9f0499cedb"
+            }
+          ],
+          "missing_page_ids": [
+            "13723",
+            "5506"
+          ]
+        },
+        "no_match": {
+          "available": 3,
+          "missing": 2,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 2,
+              "page_ids": [
+                "8345",
+                "5497"
+              ],
+              "hosts": [
+                "vizioid.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "88009fb558b2d9814d779130e795bb005fe77ad738f4b710cd874496c1c83d1f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "11033"
+              ],
+              "hosts": [
+                "vizioid.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "9576c53da29bdcea3f7838b65db034e02ee1492a347cbfaf70c29d4b2a53dedd"
+            }
+          ],
+          "missing_page_ids": [
+            "13723",
+            "5506"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 0,
+          "missing": 5,
+          "distinct": 0,
+          "groups": [],
+          "missing_page_ids": [
+            "13723",
+            "11033",
+            "8345",
+            "5506",
+            "5497"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "9",
+      "account_name": "Jorge Robson",
+      "pages": 11,
+      "status_counts": {
+        "ok": 11
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 11,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 10,
+              "page_ids": [
+                "705",
+                "672",
+                "512",
+                "177",
+                "173",
+                "172",
+                "169",
+                "168",
+                "164",
+                "163"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "d6deb2c2947a1c86b9973d6c08f91a7728c9690b9c1f2cc5815d9c546b9d3be5"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "175"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 11,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 10,
+              "page_ids": [
+                "705",
+                "672",
+                "512",
+                "177",
+                "173",
+                "172",
+                "169",
+                "168",
+                "164",
+                "163"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a1c1918e11ea9a88604a45f1ba620b668a432d2a97706dec08b019ee7f6c6561"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "175"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 11,
+          "missing": 0,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 10,
+              "page_ids": [
+                "705",
+                "672",
+                "512",
+                "177",
+                "173",
+                "172",
+                "169",
+                "168",
+                "164",
+                "163"
+              ],
+              "hosts": [
+                "fineasier.com",
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "175"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "22",
+      "account_name": "Alessandra Furtado",
+      "pages": 15,
+      "status_counts": {
+        "partial": 2,
+        "ok": 13
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 13,
+          "missing": 2,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "412",
+                "410",
+                "409",
+                "407",
+                "406",
+                "404",
+                "403",
+                "402",
+                "401",
+                "400",
+                "397",
+                "394"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "d6deb2c2947a1c86b9973d6c08f91a7728c9690b9c1f2cc5815d9c546b9d3be5"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "408"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "887e6ee8ed04a5e0f94561a7c5cf57d633310bd8912cb955a65e1742657d3fd0"
+            }
+          ],
+          "missing_page_ids": [
+            "414",
+            "413"
+          ]
+        },
+        "no_match": {
+          "available": 13,
+          "missing": 2,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "412",
+                "410",
+                "409",
+                "407",
+                "406",
+                "404",
+                "403",
+                "402",
+                "401",
+                "400",
+                "397",
+                "394"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a1c1918e11ea9a88604a45f1ba620b668a432d2a97706dec08b019ee7f6c6561"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "408"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "39e01f82fc6535c8150412c8465bddb0a3b3a1e6fb8a31b0c5c30e81c96db75f"
+            }
+          ],
+          "missing_page_ids": [
+            "414",
+            "413"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 13,
+          "missing": 2,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "412",
+                "410",
+                "409",
+                "407",
+                "406",
+                "404",
+                "403",
+                "402",
+                "401",
+                "400",
+                "397",
+                "394"
+              ],
+              "hosts": [
+                "fineasier.com",
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+            },
+            {
+              "count": 1,
+              "page_ids": [
+                "408"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 43,
+              "unique_url_count": 29,
+              "signature_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+            }
+          ],
+          "missing_page_ids": [
+            "414",
+            "413"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "193",
+      "account_name": "Raj Aryan",
+      "pages": 18,
+      "status_counts": {
+        "partial": 6,
+        "ok": 12
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 14,
+          "missing": 4,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "4440",
+                "4439",
+                "4438",
+                "4215",
+                "4214",
+                "3741",
+                "3582",
+                "3544",
+                "3503",
+                "3481",
+                "3453",
+                "3452"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "4a878be2af9742168375f1148702a518730fc801a202fbc935205607ccf96bca"
+            },
+            {
+              "count": 2,
+              "page_ids": [
+                "13859",
+                "4629"
+              ],
+              "hosts": [
+                "card.wavesbee.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a730db2e5e1e628b062f831ec3f9b484b89e45f4b76d6a9615c96b6f94f29385"
+            }
+          ],
+          "missing_page_ids": [
+            "21303",
+            "6707",
+            "4631",
+            "4630"
+          ]
+        },
+        "no_match": {
+          "available": 14,
+          "missing": 4,
+          "distinct": 2,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "4440",
+                "4439",
+                "4438",
+                "4215",
+                "4214",
+                "3741",
+                "3582",
+                "3544",
+                "3503",
+                "3481",
+                "3453",
+                "3452"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "954631de4fea5695a211023843a5c1fb84629b7b94ba3336bd174351a9c6f5e0"
+            },
+            {
+              "count": 2,
+              "page_ids": [
+                "13859",
+                "4629"
+              ],
+              "hosts": [
+                "card.wavesbee.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "46f059c5b28ff4ac38d92f5d3b3d7cf41970c2c9620b2e418d1f7ad665be5909"
+            }
+          ],
+          "missing_page_ids": [
+            "21303",
+            "6707",
+            "4631",
+            "4630"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 12,
+          "missing": 6,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 12,
+              "page_ids": [
+                "4440",
+                "4439",
+                "4438",
+                "4215",
+                "4214",
+                "3741",
+                "3582",
+                "3544",
+                "3503",
+                "3481",
+                "3453",
+                "3452"
+              ],
+              "hosts": [
+                "card.openzed.com",
+                "fineasier.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+            }
+          ],
+          "missing_page_ids": [
+            "21303",
+            "13859",
+            "6707",
+            "4631",
+            "4630",
+            "4629"
+          ]
+        }
+      }
+    }
+  ],
+  "uniform_accounts": [
+    {
+      "login": "disparosvizioid@gmail.com",
+      "account_id": "247",
+      "account_name": "Emen",
+      "pages": 14,
+      "status_counts": {
+        "ok": 14
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 14,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 14,
+              "page_ids": [
+                "4853",
+                "4852",
+                "4851",
+                "4734",
+                "4733",
+                "4732",
+                "4557",
+                "4556",
+                "4555",
+                "4425",
+                "4424",
+                "4423",
+                "4303",
+                "4302"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "4a878be2af9742168375f1148702a518730fc801a202fbc935205607ccf96bca"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 14,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 14,
+              "page_ids": [
+                "4853",
+                "4852",
+                "4851",
+                "4734",
+                "4733",
+                "4732",
+                "4557",
+                "4556",
+                "4555",
+                "4425",
+                "4424",
+                "4423",
+                "4303",
+                "4302"
+              ],
+              "hosts": [
+                "card.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "954631de4fea5695a211023843a5c1fb84629b7b94ba3336bd174351a9c6f5e0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 14,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 14,
+              "page_ids": [
+                "4853",
+                "4852",
+                "4851",
+                "4734",
+                "4733",
+                "4732",
+                "4557",
+                "4556",
+                "4555",
+                "4425",
+                "4424",
+                "4423",
+                "4303",
+                "4302"
+              ],
+              "hosts": [
+                "card.openzed.com",
+                "fineasier.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "241",
+      "account_name": "Joao Italo",
+      "pages": 18,
+      "status_counts": {
+        "partial": 1,
+        "ok": 17
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 17,
+          "missing": 1,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 17,
+              "page_ids": [
+                "350",
+                "349",
+                "348",
+                "347",
+                "346",
+                "345",
+                "344",
+                "343",
+                "342",
+                "340",
+                "339",
+                "338",
+                "336",
+                "335",
+                "334",
+                "332",
+                "331"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "d6deb2c2947a1c86b9973d6c08f91a7728c9690b9c1f2cc5815d9c546b9d3be5"
+            }
+          ],
+          "missing_page_ids": [
+            "21883"
+          ]
+        },
+        "no_match": {
+          "available": 17,
+          "missing": 1,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 17,
+              "page_ids": [
+                "350",
+                "349",
+                "348",
+                "347",
+                "346",
+                "345",
+                "344",
+                "343",
+                "342",
+                "340",
+                "339",
+                "338",
+                "336",
+                "335",
+                "334",
+                "332",
+                "331"
+              ],
+              "hosts": [
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "a1c1918e11ea9a88604a45f1ba620b668a432d2a97706dec08b019ee7f6c6561"
+            }
+          ],
+          "missing_page_ids": [
+            "21883"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 17,
+          "missing": 1,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 17,
+              "page_ids": [
+                "350",
+                "349",
+                "348",
+                "347",
+                "346",
+                "345",
+                "344",
+                "343",
+                "342",
+                "340",
+                "339",
+                "338",
+                "336",
+                "335",
+                "334",
+                "332",
+                "331"
+              ],
+              "hosts": [
+                "fineasier.com",
+                "tarjeta.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+            }
+          ],
+          "missing_page_ids": [
+            "21883"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "902",
+      "account_name": "Bernadete Do Socorro Rodrigues",
+      "pages": 10,
+      "status_counts": {
+        "partial": 10
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 0,
+          "missing": 10,
+          "distinct": 0,
+          "groups": [],
+          "missing_page_ids": [
+            "13687",
+            "13686",
+            "13685",
+            "13684",
+            "13683",
+            "13681",
+            "13680",
+            "13679",
+            "13678",
+            "13677"
+          ]
+        },
+        "no_match": {
+          "available": 0,
+          "missing": 10,
+          "distinct": 0,
+          "groups": [],
+          "missing_page_ids": [
+            "13687",
+            "13686",
+            "13685",
+            "13684",
+            "13683",
+            "13681",
+            "13680",
+            "13679",
+            "13678",
+            "13677"
+          ]
+        },
+        "auto_principal_drip": {
+          "available": 0,
+          "missing": 10,
+          "distinct": 0,
+          "groups": [],
+          "missing_page_ids": [
+            "13687",
+            "13686",
+            "13685",
+            "13684",
+            "13683",
+            "13681",
+            "13680",
+            "13679",
+            "13678",
+            "13677"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "916",
+      "account_name": "Vanderlei Evangelista da Silva",
+      "pages": 4,
+      "status_counts": {
+        "partial": 4
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 4,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 4,
+              "page_ids": [
+                "1541",
+                "1538",
+                "1321",
+                "1085"
+              ],
+              "hosts": [
+                "tarjeta.wavesbee.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "ec82af23a69bdf808f706c276abb9adf8657b5db62d5e0e59091ae090acf1cb0"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 4,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 4,
+              "page_ids": [
+                "1541",
+                "1538",
+                "1321",
+                "1085"
+              ],
+              "hosts": [
+                "tarjeta.wavesbee.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "7d817b7ce09e34894939ac0dcabaeafefc4980b26f46a4b3260db57b7a5ae839"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 0,
+          "missing": 4,
+          "distinct": 0,
+          "groups": [],
+          "missing_page_ids": [
+            "1541",
+            "1538",
+            "1321",
+            "1085"
+          ]
+        }
+      }
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "1621",
+      "account_name": "Semakin Sadar",
+      "pages": 23,
+      "status_counts": {
+        "ok": 23
+      },
+      "surfaces": {
+        "get_started": {
+          "available": 23,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 23,
+              "page_ids": [
+                "3401",
+                "3391",
+                "3370",
+                "3369",
+                "3353",
+                "3352",
+                "3316",
+                "3315",
+                "3304",
+                "3294",
+                "3283",
+                "3263",
+                "3247",
+                "3187",
+                "3141",
+                "3126",
+                "3111",
+                "3098",
+                "3081",
+                "3077",
+                "3072",
+                "3063",
+                "3051"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "9e01af2940fbec37fd32d969716d4f8882531baa864b345078ab4fbb85a4c409"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "no_match": {
+          "available": 23,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 23,
+              "page_ids": [
+                "3401",
+                "3391",
+                "3370",
+                "3369",
+                "3353",
+                "3352",
+                "3316",
+                "3315",
+                "3304",
+                "3294",
+                "3283",
+                "3263",
+                "3247",
+                "3187",
+                "3141",
+                "3126",
+                "3111",
+                "3098",
+                "3081",
+                "3077",
+                "3072",
+                "3063",
+                "3051"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 1,
+              "unique_url_count": 1,
+              "signature_hash": "c2547163a4a989626d6bbdb8638eb2e136d44a1294b2d5cb9f7aad8972b49388"
+            }
+          ],
+          "missing_page_ids": []
+        },
+        "auto_principal_drip": {
+          "available": 23,
+          "missing": 0,
+          "distinct": 1,
+          "groups": [
+            {
+              "count": 23,
+              "page_ids": [
+                "3401",
+                "3391",
+                "3370",
+                "3369",
+                "3353",
+                "3352",
+                "3316",
+                "3315",
+                "3304",
+                "3294",
+                "3283",
+                "3263",
+                "3247",
+                "3187",
+                "3141",
+                "3126",
+                "3111",
+                "3098",
+                "3081",
+                "3077",
+                "3072",
+                "3063",
+                "3051"
+              ],
+              "hosts": [
+                "srf.openzed.com"
+              ],
+              "url_count": 16,
+              "unique_url_count": 16,
+              "signature_hash": "f3d1ec7340b4a6d4dc40c00412d1f057266e2790113aa973ecdd3e62b1ad6b6c"
+            }
+          ],
+          "missing_page_ids": []
+        }
+      }
+    }
+  ],
+  "zero_inventory": [
+    {
+      "login": "disparoswavesbeees@gmail.com",
+      "type": "zero_accounts"
+    },
+    {
+      "login": "disparosvizioidmxcces@gmail.com",
+      "account_id": "1705",
+      "account_name": "Debora Monteiro Lima",
+      "pages": 0,
+      "status_counts": {},
+      "type": "zero_pages"
+    },
+    {
+      "login": "disparosvizioidmxcces@gmail.com",
+      "account_id": "1707",
+      "account_name": "Debora Monteiro Lima",
+      "pages": 0,
+      "status_counts": {},
+      "type": "zero_pages"
+    },
+    {
+      "login": "disparoswavesbeeen@gmail.com",
+      "account_id": "1695",
+      "account_name": "Adriano Alves",
+      "pages": 0,
+      "status_counts": {},
+      "type": "zero_pages"
+    }
+  ],
+  "integrity": {
+    "requested_login_count": 5,
+    "collected_login_count": 5,
+    "account_partition": 17,
+    "page_partition": 174,
+    "identity_mismatches": 0,
+    "partial_pages_all_flow_absent": true,
+    "production_writes": 0,
+    "persistent_menu": "not in requested scope"
+  }
+}
