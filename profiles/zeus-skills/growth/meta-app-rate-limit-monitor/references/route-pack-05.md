@@ -1,17 +1,18 @@
 ## Production Cron Implementation
 
-### Current B001-5 and B007-3 cutovers — 2026-09-03
+### Current B001-5, B007-3 and B011-3 cutovers — 2026-09-03
 
-Rodolfo explicitly replaced restricted `B001-4` with `B001-5` and restricted `B007-2` with `B007-3`, then asked Zeus to update and reactivate both complete monitor routes.
+Rodolfo explicitly replaced restricted `B001-4` with `B001-5`, restricted `B007-2` with `B007-3`, and restricted `B011-2` with `B011-3`, then asked Zeus to update and reactivate each complete monitor route.
 
 - `B001-5` uses `BOT B001-5 Token - Debora Monteiro Lima`, channel `1521251196294135858` (`b001-2-app-status`) and `expected_sheet_roles=14`.
 - `B007-3` uses `BOT B007-3 Token - Max Tin Masela`, channel `1520510823426949313` (`b007-app-status`) and `expected_sheet_roles=20`.
-- Fresh isolated preflight/canary proved app metadata, paginated `/roles`, `/me` and `debug_token` HTTP 200 for both apps; both tokens are valid, app-bound and use new app IDs; every returned role identity resolved with zero unresolved IDs.
-- Production started from fresh app-scoped state: B001-4 and B007-2 were moved to retired metadata and neither predecessor role IDs, restriction errors nor cooldowns were reused.
-- The Service Account Sheet has zero predecessor rows and exact current assignments: 14 rows for B001-5 and 20 for B007-3, with no blank or duplicate segurador identity. Validated production parity was B001-5 9 present/5 X and B007-3 3 present/17 X; role acceptance remains live and later cycles may increase these counts.
-- Each route was baselined under temporary alert-only containment, completed a second clean scoped cycle with zero errors and zero duplicate delivery, then was removed from both pause sets. The shared cron remains enabled; only B004-4 and B011-2 remain fully paused pending validated replacements.
+- `B011-3` uses `BOT B011-3 Token - ISrael Saucedo`, channel `1537256907373289575` (`b011-app-status`) and `expected_sheet_roles=15`.
+- Fresh isolated preflight/canary proved app metadata, paginated `/roles`, `/me` and `debug_token` HTTP 200 for all three apps; every token is valid, app-bound and uses a new app ID; every returned role identity resolved with zero unresolved IDs.
+- Production started from fresh app-scoped state: B001-4, B007-2 and B011-2 were moved to retired metadata and no predecessor role ID, restriction error or cooldown was reused.
+- The Service Account Sheet has zero predecessor rows and exact current assignments: 14 rows for B001-5, 20 for B007-3 and 15 for B011-3, with no blank or duplicate segurador identity. Validated production parity was B001-5 9 present/5 X, B007-3 3 present/17 X and B011-3 2 present/13 X; role acceptance remains live and later cycles may increase these counts.
+- Each route was baselined under temporary alert-only containment, completed a second clean scoped cycle with zero errors and zero duplicate delivery, then was removed from both pause sets. The shared cron remains enabled; only B004-4 remains fully paused pending a validated replacement.
 - After an isolated canary, every production command must set `MGS_META_APP_ROLES_STATE=/root/mgs-agent/data/meta-app-role-monitor-state.json` and `MGS_META_APP_ROLE_ALERT_PAUSE_PATH=/root/mgs-agent/data/meta-app-role-alert-pause.json` explicitly. Hermes terminal environment persists across calls, so relying on an implicit default can accidentally continue writing to the canary state/pause paths. A nonzero post-run assertion requires readback of both paths before any retry.
-- Backups: `/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204/` and `/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111/`.
+- Backups: `/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204/`, `/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111/` and `/root/mgs-agent/backups/meta-app-b0112-to-b0113-cutover-20260903-120732/`.
 
 ### Current B003-3, B005-4, B006-4, B008-3 and B010-3 cutovers — 2026-09-02
 
@@ -148,7 +149,7 @@ Rodolfo explicitly replaced retired `B009-2` with `B009-3`. Current canonical ru
 
 Historical note: B009-2 had entered Meta restriction/deletion and accumulated 29 errors before replacement. It is retired and must not remain in the active registry.
 
-### Current B011-2 cutover — 2026-08-28
+### Historical B011-2 cutover — 2026-08-28
 
 Rodolfo explicitly replaced deleted/restricted `B011` with `B011-2` and required all replacement-app credentials plus the recurring real-alert cron to be revalidated. Current canonical runtime:
 
@@ -197,7 +198,7 @@ Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
 Stagger        4 segundos adicionais entre B001-B010, configurável por MGS_META_APP_ROLE_STAGGER_SECONDS
 Scope          Registry-driven current B001-B012 replacement lineage. Every B013 generation is excluded from this script’s /roles alert path and handled by b013-dtr-link-watch.
-Channels       B001-5 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-3 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-4 1521251961662341160; B006-4 1521252068319297666; B007-3 1520510823426949313; B008-3 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-3 1521252369331916902; B011-2 1537256907373289575; B012-2 1537256951879172136
+Channels       B001-5 1521251196294135858 (live channel name still b001-2-app-status); B002-3 1521251220130496723 (live channel name still b002-2-app-status); B003-3 1521251246860931223; B004-4 1521251334496456815 (live channel name still b004-3-app-status); B005-4 1521251961662341160; B006-4 1521252068319297666; B007-3 1520510823426949313; B008-3 1521252172929564744; B009-3 1521252284623884288 (live channel name still b009-2-app-status); B010-3 1521252369331916902; B011-3 1537256907373289575; B012-2 1537256951879172136
 ```
 
 Use the Meta roles cron for the current registry-driven B001–B012 app lineage. B013-4 remains on the separate DTR/ChatPion route because its users are fetched through DTR/ChatPion + Meta `debug_token`, not `/app/roles`. Future B013 replacement suffixes remain on that same dedicated route by lineage.
@@ -274,14 +275,14 @@ Rodolfo approved one human-readable production pattern for every current registr
 - The embed uses plain manager-facing sections: `O que pode acontecer`, `O que fazer agora`, and `Confirmação do monitor`. Keep the raw Meta phrase only in the final confirmation section; do not expose the generic technical monitor error as the main explanation.
 - Discord cannot render regular message content below an embed in the same message. Send the lower `🚨🚨🚨🚨🚨.` as the immediately following message; the final period prevents Discord jumbo-emoji sizing.
 - Use a dedicated `app_restricted` cooldown key with the daily blocked-app cooldown. Do not change presentation or recipients for unrelated rate-limit, transient API, role-delta, recovery, or generic script-error alerts.
-- Scope is the current 12-app role registry: B001-5, B002-3, B003-3, B004-4, B005-4, B006-4, B007-3, B008-3, B009-3, B010-3, B011-2, and B012-2. B013-4 remains excluded on its dedicated DTR/ChatPion route.
+- Scope is the current 12-app role registry: B001-5, B002-3, B003-3, B004-4, B005-4, B006-4, B007-3, B008-3, B009-3, B010-3, B011-3, and B012-2. B013-4 remains excluded on its dedicated DTR/ChatPion route.
 - Preview/canary must use the real embed in the current review thread with role notifications suppressed, then compare production-render helper output against Discord readback. Do not send a validation alert to an app-status channel unless Rodolfo explicitly asks.
 
 ### Automatic full-route pause after restriction — effective 2026-09-02
 
 Rodolfo superseded the prior manual-only handling: when a current B001–B012 app reaches the confirmed restriction trigger (`OAuthException 190 Application has been deleted` on two consecutive cycles), the monitor must send the first canonical restriction alert and, in the same run, atomically add that app to both `apps` and `monitor_apps` in `data/meta-app-role-alert-pause.json` with `mode=manual`. Starting on the next cycle, skip that app route entirely; keep the shared `meta-app-roles-watch` cron enabled for every unaffected app. Resume only after the replacement/recovery passes its preflight/canary/readback and Rodolfo explicitly requests reactivation.
 
-The immediate pause from message `1544837470687076454` originally covered `B001-4`, `B004-4`, `B007-2`, and `B011-2`. B001-5 and B007-3 passed replacement cutover and were reactivated on 2026-09-03. Current pause scope is only `B004-4` and `B011-2` in both `apps` and `monitor_apps` until their replacements are validated.
+The immediate pause from message `1544837470687076454` originally covered `B001-4`, `B004-4`, `B007-2`, and `B011-2`. B001-5, B007-3 and B011-3 passed replacement cutover and were reactivated on 2026-09-03. Current pause scope is only `B004-4` in both `apps` and `monitor_apps` until its replacement is validated.
 
 The production monitor cadence is:
 

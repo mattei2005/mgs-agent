@@ -114,7 +114,8 @@
     679759,
     679777,
     679797,
-    679953
+    679953,
+    680130
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -775,9 +776,9 @@
     "digital-trust|infinitynexx|26|497": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-02T12:09:14.000Z",
+        "created_at": "2026-09-03T16:06:51.000Z",
         "domain": "infinitynexx",
-        "notification_id": 679359,
+        "notification_id": 680130,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -806,7 +807,8 @@
         676798,
         677908,
         678670,
-        679359
+        679359,
+        680130
       ],
       "opened_at": "2026-08-29T16:12:14-04:00",
       "repeat_count": 0,
@@ -1268,21 +1270,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-03T11:57:14-04:00",
+  "last_check": "2026-09-03T12:12:14-04:00",
   "last_delivery": {
-    "at": "2026-09-02T20:12:14-04:00",
+    "at": "2026-09-03T12:12:14-04:00",
     "cursor_ids": [
-      679953
+      680130
     ],
-    "message_ids": [
-      "1544862548904640604"
-    ],
-    "notification_ids": [
-      679953
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 679953,
+  "last_seen_id": 680130,
   "pending": null,
   "retention": {
     "consecutive_failures": 0,
