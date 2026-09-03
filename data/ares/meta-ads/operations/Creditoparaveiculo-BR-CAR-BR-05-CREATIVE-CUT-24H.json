@@ -27,10 +27,10 @@
     "timezone_offset_hours_utc": -3,
     "account_status": 1,
     "identity_status": "confirmed_live_meta_readback",
-    "next_sequential_campaign_number": 8,
+    "next_sequential_campaign_number": 13,
     "active_campaign_budget_usd_at_preflight": 150.0,
-    "active_campaign_budget_readback_usd": 175.0,
-    "active_campaign_budget_readback_at_utc": "2026-08-31T07:10:23Z"
+    "active_campaign_budget_readback_usd": 193.0,
+    "active_campaign_budget_readback_at_utc": "2026-09-03T02:57:28.782244+00:00"
   },
   "strategy": {
     "management_strategy": "CREATIVE_CUT_24H",
@@ -164,6 +164,28 @@
           "authorized_by": "Rodolfo Mattei",
           "scope": "one_time_request"
         }
+      },
+      "120248557516840046": {
+        "campaign_number": 11,
+        "original_campaign_number": 11,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T02:57:28.782244+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "MOTO"
+      },
+      "120248557516850046": {
+        "campaign_number": 12,
+        "original_campaign_number": 12,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T02:57:28.782244+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "MOTO"
       }
     }
   },
@@ -572,6 +594,22 @@
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
           "vehicle_type": "MOTO"
+        },
+        "11": {
+          "campaign_id": "120248557516840046",
+          "original_campaign_number": 11,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "12": {
+          "campaign_id": "120248557516850046",
+          "original_campaign_number": 12,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+          "vehicle_type": "MOTO"
         }
       },
       "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
@@ -590,7 +628,9 @@
           "120248503317050046",
           "120248535536910046",
           "120248535536940046",
-          "120248535656330046"
+          "120248535656330046",
+          "120248557516840046",
+          "120248557516850046"
         ],
         "allowed_actions": [
           "pause_dominant_ad_stage_a",
@@ -977,8 +1017,9 @@
     "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
     "ChatPion is historical inspiration only and is outside this operation.",
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment.",
-    "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged."
+    "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged.",
+    "C11-C12 MOTO created and Meta-readback verified by cpv05-c11-c14-mixed-20260903-nicolas-r1 at USD35 each; start 2026-09-03 01:00 SP; six assets in 02_TESTING. C13-C14 remain pending corrected QA bundle."
   ],
-  "updated_at": "2026-09-02T15:37:16-03:00",
-  "updated_at_utc": "2026-09-02T18:37:16Z"
+  "updated_at": "2026-09-02T23:57:28.782244-03:00",
+  "updated_at_utc": "2026-09-03T02:57:28.782244+00:00"
 }
