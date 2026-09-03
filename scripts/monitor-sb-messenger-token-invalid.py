@@ -81,8 +81,8 @@ def initial_state() -> dict[str, Any]:
             'source': API_BASE + '/notification',
             'companies': sorted(MGS_COMPANIES),
             'mentions': {'roles': TEAM_ROLE_IDS},
-            'resolution': 'reaction ✅ on the incident message',
-            'daily_cycle': 'one fresh delivery per active incident after ET date rollover; no intraday repeats',
+            'resolution': 'reaction ✅ or explicit Rodolfo cleanup after fresh live verification',
+            'daily_cycle': 'no state-only resend; deliver only newly observed live /notification IDs',
         },
         'last_check': None,
         'last_seen_id': 0,
@@ -360,14 +360,28 @@ async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list
             if company_response.status != 200 or not isinstance(companies, list):
                 raise RuntimeError(f'bad company response status={company_response.status}')
             publishers: list[str] = []
+            companies_seen: set[str] = set()
             for company in companies:
+                company_name = str(
+                    company.get('name')
+                    or company.get('companyId')
+                    or company.get('id')
+                    or company.get('slug')
+                    or ''
+                ).strip().lower().replace(' ', '-')
+                if company_name not in MGS_COMPANIES:
+                    continue
+                companies_seen.add(company_name)
                 for publisher in company.get('publishers') or []:
                     publisher_id = str(publisher.get('publisherId') or '')
-                    if publisher.get('active') and publisher_id:
+                    if publisher_id:
                         publishers.append(publisher_id)
             publishers = sorted(set(publishers))
-            if not publishers:
-                raise RuntimeError('Smart Bidding active publisher scope is empty')
+            if companies_seen != MGS_COMPANIES or not publishers:
+                raise RuntimeError(
+                    'Smart Bidding company scope incomplete: '
+                    f'found={sorted(companies_seen)} expected={sorted(MGS_COMPANIES)} publishers={len(publishers)}'
+                )
             query = '&'.join('companies[]=' + urllib.parse.quote(value) for value in publishers) + '&source=Messenger'
             pages_response = await context.request.get(API_BASE + '/campaigns/Messenger?' + query, headers=headers, timeout=120000)
             pages = await pages_response.json()
@@ -819,6 +833,8 @@ def process_daily_incident_cycle(
         'resolved': 0,
         'daily_sent': 0,
         'would_send': 0,
+        'state_only_resend': False,
+        'discarded_cached_pending': 0,
     }
     if not stats['rollover'] and not daily.get('pending'):
         return stats
@@ -828,46 +844,9 @@ def process_daily_incident_cycle(
             save_state(state_path, state)
 
     pending = daily.get('pending')
-    if isinstance(pending, dict) and pending.get('alerts'):
-        pending_alerts = [dict(row) for row in pending.get('alerts') or []]
-        payloads = build_payloads(pending_alerts, repeat_counts=[0] * len(pending_alerts), now_value=now_value)
-        existing_ids = [str(value) for value in pending.get('message_ids') or []]
-        if len(existing_ids) > len(payloads):
-            raise RuntimeError('daily pending has more Discord messages than payloads')
-        for index, message_id in enumerate(existing_ids):
-            verify_message(channel_id, message_id, payloads[index])
-        if dry_run:
-            stats['would_send'] = len(payloads) - len(existing_ids)
-            return stats
-        for index, payload in enumerate(payloads[len(existing_ids):], start=len(existing_ids)):
-            existing_ids.append(post_and_verify(channel_id, payload))
-            daily['pending']['message_ids'] = existing_ids
-            persist()
-            if index + 1 < len(payloads):
-                sleep_func(0.45)
-        register_incidents(
-            state,
-            pending_alerts,
-            existing_ids,
-            at=now_value.isoformat(timespec='seconds'),
-            repeat_counts=[0] * len(pending_alerts),
-        )
-        daily.update({
-            'date': str(pending.get('date') or today),
-            'pending': None,
-            'last_result': {
-                'at': now_value.isoformat(timespec='seconds'),
-                'sent': len(existing_ids),
-                'resolved': 0,
-            },
-        })
-        stats['daily_sent'] += len(existing_ids)
-        persist()
-        if daily['date'] == today:
-            return stats
-        stats['rollover'] = True
+    if isinstance(pending, dict):
+        stats['discarded_cached_pending'] = len(pending.get('alerts') or [])
 
-    active_alerts: list[dict[str, Any]] = []
     for incident in (state.get('incidents') or {}).values():
         if not isinstance(incident, dict) or incident.get('status') != 'active':
             continue
@@ -877,60 +856,22 @@ def process_daily_incident_cycle(
             incident['status'] = 'resolved'
             incident['resolved_at'] = now_value.isoformat(timespec='seconds')
             stats['resolved'] += 1
-            continue
-        alert = incident.get('alert')
-        if isinstance(alert, dict):
-            active_alerts.append(dict(alert))
-
-    active_alerts.sort(key=incident_key)
+    # Rodolfo correction 2026-09-03: local incident state is dedupe/audit
+    # metadata only. It must never originate a Discord delivery. A future
+    # alert requires a newly observed row from the live SB /notification API.
     if dry_run:
-        stats['would_send'] = len(active_alerts)
         return stats
-    if not active_alerts:
-        daily.update({
-            'date': today,
-            'pending': None,
-            'last_result': {
-                'at': now_value.isoformat(timespec='seconds'),
-                'sent': 0,
-                'resolved': stats['resolved'],
-            },
-        })
-        persist()
-        return stats
-
-    daily['pending'] = {
-        'date': today,
-        'created_at': now_value.isoformat(timespec='seconds'),
-        'alerts': active_alerts,
-        'message_ids': [],
-    }
-    persist()
-    payloads = build_payloads(active_alerts, repeat_counts=[0] * len(active_alerts), now_value=now_value)
-    message_ids: list[str] = []
-    for index, payload in enumerate(payloads):
-        message_ids.append(post_and_verify(channel_id, payload))
-        daily['pending']['message_ids'] = message_ids
-        persist()
-        if index + 1 < len(payloads):
-            sleep_func(0.45)
-    register_incidents(
-        state,
-        active_alerts,
-        message_ids,
-        at=now_value.isoformat(timespec='seconds'),
-        repeat_counts=[0] * len(active_alerts),
-    )
     daily.update({
         'date': today,
         'pending': None,
         'last_result': {
             'at': now_value.isoformat(timespec='seconds'),
-            'sent': len(message_ids),
+            'sent': 0,
             'resolved': stats['resolved'],
+            'source': 'new-live-notification-only',
+            'discarded_cached_pending': stats['discarded_cached_pending'],
         },
     })
-    stats['daily_sent'] = len(message_ids)
     persist()
     return stats
 

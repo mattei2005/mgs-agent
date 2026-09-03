@@ -1,0 +1,786 @@
+{
+  "mode": "read-only",
+  "observed_at_et": "2026-09-03T17:24:07-04:00",
+  "login": "disparosvizioid@gmail.com",
+  "credential_item_title": "Digitaltrchat - Disparos Vizioid US-CC-EN",
+  "accounts": [
+    {
+      "account_id": "83",
+      "account_name": "Wong Awam",
+      "page_count": 2,
+      "pages": [
+        {
+          "page": {
+            "ui_order": 1,
+            "page_name": "Berenice Aguayo",
+            "page_id": "2988",
+            "fb_page_id": "430881186783333"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/259170/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/259171/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "430881186783333",
+                "page_table_id": "2988",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "card.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "430881186783333",
+                "page_table_id": "2988",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "card.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/2988/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115186/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/dJR1nxHP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/p1GsGhn3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/QGdHhyj2/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/P3dp8r8n/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/pkM3ctgk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/JFv2Hg4B/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/Q4CJzvpk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/PK7KRhR9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/Y33KQpTG/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/KtShNZCn/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/Kb82MfcB/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/pYtTsrFB/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/zcdMTt5b/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/qBVnhWsM/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "card.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://card.openzed.com/zpnw4Mvf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "card.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "card.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "bd213f33338c88046cd9a201423c3d9b94dd12ad33d7859b4b0c8fdec9915556"
+          },
+          "signature": {
+            "get_started": [
+              "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://card.openzed.com/JFv2Hg4B/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m6-1",
+              "https://card.openzed.com/Kb82MfcB/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m11-1",
+              "https://card.openzed.com/KtShNZCn/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m10-1",
+              "https://card.openzed.com/P3dp8r8n/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m4-1",
+              "https://card.openzed.com/PK7KRhR9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m8-1",
+              "https://card.openzed.com/Q4CJzvpk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m7-1",
+              "https://card.openzed.com/QGdHhyj2/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m3-1",
+              "https://card.openzed.com/Y33KQpTG/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m9-1",
+              "https://card.openzed.com/dJR1nxHP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m1-1",
+              "https://card.openzed.com/p1GsGhn3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m2-1",
+              "https://card.openzed.com/pYtTsrFB/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m12-1",
+              "https://card.openzed.com/pkM3ctgk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m5-1",
+              "https://card.openzed.com/qBVnhWsM/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m14-1",
+              "https://card.openzed.com/zcdMTt5b/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m13-1",
+              "https://card.openzed.com/zpnw4Mvf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m15-1",
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm"
+            ],
+            "hash": "301eb013628c5621d11034893028d2c3a20a395d31dc057d94bb3d5a30d59d3e"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 2,
+            "page_name": "Eden Bennett",
+            "page_id": "1736",
+            "fb_page_id": "484719888054367"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/259170/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/259171/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": false,
+              "identity": {
+                "page_id": "430881186783333",
+                "page_table_id": "2988",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "card.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": false,
+              "identity": {
+                "page_id": "430881186783333",
+                "page_table_id": "2988",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "card.openzed.com": 1
+              }
+            },
+            "error": "get_started_identity_mismatch"
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/1736/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/176883/1/fb",
+            "topology": {
+              "nodes": 147,
+              "edges": 146,
+              "starts": 1,
+              "reachable": 147,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1",
+                "label": "M00",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "342",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "346",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "348",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "350",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "352",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "354",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "356",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "358",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "360",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+                "label": "M17",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "362",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+                "label": "M19",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "364",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+                "label": "M21",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "366",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+                "label": "M23",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "368",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+                "label": "M25",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "370",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+                "label": "M27",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "372",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m28-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m28-1",
+                "label": "M28",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "377",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m2-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "384",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m4-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "391",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m6-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "396",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m8-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "401",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m10-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "406",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m12-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "413",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m14-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "419",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m16-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m16-1",
+                "label": "M16",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "425",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m18-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m18-1",
+                "label": "M18",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "431",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m20-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m20-1",
+                "label": "M20",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "436",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m22-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m22-1",
+                "label": "M22",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "441",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m24-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m24-1",
+                "label": "M24",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "455",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m26-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m26-1",
+                "label": "M26",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "481",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "484",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "487",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "490",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "493",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "496",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "499",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "503",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "505",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+                "label": "M17",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "508",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+                "label": "M19",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "511",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+                "label": "M21",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "513",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+                "label": "M23",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "516",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+                "label": "M25",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "518",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+                "label": "M27",
+                "host": "srf.openzed.com"
+              }
+            ],
+            "link_count": 43,
+            "unique_url_count": 29,
+            "hosts": {
+              "srf.openzed.com": 43
+            },
+            "labels": {
+              "M00": 1,
+              "M01": 2,
+              "M03": 2,
+              "M05": 2,
+              "M07": 2,
+              "M09": 2,
+              "M11": 2,
+              "M13": 2,
+              "M15": 2,
+              "M17": 2,
+              "M19": 2,
+              "M21": 2,
+              "M23": 2,
+              "M25": 2,
+              "M27": 2,
+              "M28": 1,
+              "M02": 1,
+              "M04": 1,
+              "M06": 1,
+              "M08": 1,
+              "M10": 1,
+              "M12": 1,
+              "M14": 1,
+              "M16": 1,
+              "M18": 1,
+              "M20": 1,
+              "M22": 1,
+              "M24": 1,
+              "M26": 1
+            },
+            "url_multiset_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+          },
+          "signature": {
+            "get_started": [
+              "https://card.openzed.com/D2j489RP/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://card.openzed.com/sCFffdw9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-card-us-cc-en-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m10-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m10-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m12-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m12-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m14-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m14-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m16-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m16-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m18-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m18-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m2-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m2-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m20-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m20-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m22-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m22-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m24-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m24-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m26-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m26-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m28-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m28-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m4-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m4-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m6-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m6-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m8-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m8-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "becbc64e8bce97d9ac36748f0773531784f2323123953c82d686163c817bef62"
+          },
+          "status": "partial"
+        }
+      ],
+      "summary": {
+        "ok": 1,
+        "partial": 1,
+        "failed": 0
+      }
+    }
+  ],
+  "account_count": 5,
+  "account_inventory": [
+    {
+      "account_id": "83",
+      "account_name": "Wong Awam"
+    },
+    {
+      "account_id": "216",
+      "account_name": "Aan Supri Adi"
+    },
+    {
+      "account_id": "221",
+      "account_name": "Yunita Melvianus"
+    },
+    {
+      "account_id": "247",
+      "account_name": "Emen"
+    },
+    {
+      "account_id": "338",
+      "account_name": "Fabio Aleksander"
+    }
+  ],
+  "summary": {
+    "accounts_processed": 1,
+    "accounts_total": 5,
+    "pages": 2,
+    "ok": 1,
+    "partial": 1,
+    "failed": 0,
+    "account_errors": 0
+  }
+}

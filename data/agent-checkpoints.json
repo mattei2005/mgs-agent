@@ -972,6 +972,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SB-TOKEN-ALERT-LIVE-ONLY-CUTOVER-20260903",
+      "next_step": "Reauditar as 21 identidades com DTR/SB live; alterar script/testes/skill para entregar somente evento novo recuperado da API live, nunca replay de incident snapshot; reconciliar 22 incidentes resolvidos.",
+      "objective": "Limpar alertas resolvidos, revalidar conexões ao vivo e tornar o monitor fail-closed contra republicação baseada em cache/snapshot.",
+      "source": "discord:thread:1544837470687076454;message:1545180305961386055;channel:1521350832426188961;script:/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
+      "state": "in_progress: 22 mensagens de alerta removidas com readback; 2 mensagens manuais preservadas. fonte sb live não gerou novo messenger user token invalid após o marco de resolução. falta revalidar dtr×sb pós-limpeza e cortar o resend diário baseado em incident state.",
+      "thread_id": "1544837470687076454",
+      "updated_at": "2026-09-03T21:21:03+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SEGURADORES-TOKEN-FB-CONNECTION-AUDIT-20260903",
       "next_step": "Aguardar decisão de Rodolfo sobre cadastrar somente as duas páginas efetivamente ausentes; qualquer escrita deve ter canário, payload completo e readback por ambos IDs.",
       "objective": "Reauditar 21 seguradores ao vivo em DTR e SB, com escopo Smart Bidding explicitamente composto por digital-trust + digital-trust-2 e match global por PAGE_ID pequeno OU FB_PAGE_ID grande.",
@@ -1419,6 +1429,16 @@
       "state": "concluído: 23/23 páginas do segurador semakin sadar alteradas e verificadas em sessão independente. cada página preserva 82 nós/81 arestas, 16 posições existentes m00–m15, get started e no match; total final 414 campos url validados. persistent menu não integrou o escopo autorizado e não foi alterado.",
       "thread_id": "1545131821245669407",
       "updated_at": "2026-09-03T21:05:51+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "dtr-url-variance-audit-five-users-20260903",
+      "next_step": "Enumerar contas e páginas por login, coletar as três superfícies com identidade exata, persistir resultados por login e agregar divergências.",
+      "objective": "Auditar Get Started, No Match e todos os links existentes do Auto Principal Drip em todas as páginas de todos os seguradores dentro de cinco usuários DTR informados por Rodolfo, identificando assinaturas diferentes sem alterar produção.",
+      "source": "Discord message 1545181613502242980 in thread 1545131821245669407.",
+      "state": "autorização read-only recebida; cinco logins exatos congelados; coleta live ainda não iniciada.",
+      "thread_id": "1545131821245669407",
+      "updated_at": "2026-09-03T21:21:00+00:00"
     },
     {
       "agent": "ares",
@@ -2172,5 +2192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T21:05:51+00:00"
+  "updated_at": "2026-09-03T21:21:03+00:00"
 }
