@@ -27,10 +27,10 @@
     "timezone_offset_hours_utc": -3,
     "account_status": 1,
     "identity_status": "confirmed_live_meta_readback",
-    "next_sequential_campaign_number": 13,
+    "next_sequential_campaign_number": 15,
     "active_campaign_budget_usd_at_preflight": 150.0,
-    "active_campaign_budget_readback_usd": 193.0,
-    "active_campaign_budget_readback_at_utc": "2026-09-03T02:57:28.782244+00:00"
+    "active_campaign_budget_readback_usd": 263.0,
+    "active_campaign_budget_readback_at_utc": "2026-09-03T03:55:38.588463+00:00"
   },
   "strategy": {
     "management_strategy": "CREATIVE_CUT_24H",
@@ -186,6 +186,28 @@
         "strategy": "CREATIVE_CUT_24H",
         "operational_date_sp": "2026-09-03",
         "vehicle_type": "MOTO"
+      },
+      "120248558361500046": {
+        "campaign_number": 13,
+        "original_campaign_number": 13,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T03:53:37.473574+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "CARRO"
+      },
+      "120248558361460046": {
+        "campaign_number": 14,
+        "original_campaign_number": 14,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T03:53:37.473574+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "CARRO"
       }
     }
   },
@@ -610,6 +632,22 @@
           "management_strategy": "CREATIVE_CUT_24H",
           "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
           "vehicle_type": "MOTO"
+        },
+        "13": {
+          "campaign_id": "120248558361500046",
+          "original_campaign_number": 13,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+          "vehicle_type": "CARRO"
+        },
+        "14": {
+          "campaign_id": "120248558361460046",
+          "original_campaign_number": 14,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+          "vehicle_type": "CARRO"
         }
       },
       "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
@@ -630,7 +668,9 @@
           "120248535536940046",
           "120248535656330046",
           "120248557516840046",
-          "120248557516850046"
+          "120248557516850046",
+          "120248558361500046",
+          "120248558361460046"
         ],
         "allowed_actions": [
           "pause_dominant_ad_stage_a",
@@ -881,7 +921,7 @@
   ],
   "meta_writes_performed": 1,
   "first_delivery_enrollment": {
-    "status": "ARMED_ACCOUNT05_RUNTIME_C01_C10",
+    "status": "ARMED_ACCOUNT05_RUNTIME_C01_C14",
     "runtime": "creditoparaveiculo-account05-first-delivery.py",
     "cron_job_id": "23edda4c310c",
     "schedule": "9,24,39,54 * * * *",
@@ -951,6 +991,66 @@
         ],
         "armed_at_sp": "2026-09-02T00:58:27.508803-03:00",
         "meta_writes": 0
+      },
+      "C11": {
+        "campaign_id": "120248557516840046",
+        "campaign_number": 11,
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248557604430046",
+          "120248557605020046",
+          "120248557523210046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C12": {
+        "campaign_id": "120248557516850046",
+        "campaign_number": 12,
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248557605090046",
+          "120248557526080046",
+          "120248557524630046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C13": {
+        "campaign_id": "120248558361500046",
+        "campaign_number": 13,
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248558401430046",
+          "120248558401070046",
+          "120248558363830046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C14": {
+        "campaign_id": "120248558361460046",
+        "campaign_number": 14,
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248558364460046",
+          "120248558401470046",
+          "120248558364120046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
       }
     },
     "spend_usd_by_campaign_at_arm": {
@@ -979,18 +1079,19 @@
     "latest_dry_run_sp": "2026-09-02T00:58:27.508803-03:00",
     "latest_dry_run_result": {
       "status": "OK",
-      "armed_count": 3,
+      "armed_count": 4,
       "meta_writes": 0,
       "campaigns_verified": [
-        "C08",
-        "C09",
-        "C10"
+        "C11",
+        "C12",
+        "C13",
+        "C14"
       ],
       "observed_spend_usd": 0.0
     },
     "policy": "first spend 00:30-02:00 SP starts the first strategy window; later first spend pauses once and queues one next healthy-window reactivation",
-    "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
-    "latest_arm_readback_sp": "2026-09-02T00:58:27.508803-03:00"
+    "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+    "latest_arm_readback_sp": "2026-09-03T00:54:29.099367-03:00"
   },
   "monitor_failure_recovery_20260902": {
     "authorized_by": "Rodolfo Mattei",
@@ -1018,8 +1119,10 @@
     "ChatPion is historical inspiration only and is outside this operation.",
     "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment.",
     "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged.",
-    "C11-C12 MOTO created and Meta-readback verified by cpv05-c11-c14-mixed-20260903-nicolas-r1 at USD35 each; start 2026-09-03 01:00 SP; six assets in 02_TESTING. C13-C14 remain pending corrected QA bundle."
+    "C11-C12 MOTO created and Meta-readback verified by cpv05-c11-c14-mixed-20260903-nicolas-r1 at USD35 each; start 2026-09-03 01:00 SP; six assets in 02_TESTING. C13-C14 remain pending corrected QA bundle.",
+    "C13-C14 CARRO r3 complete by Engine v3 readback: USD35 each, start 2026-09-03 01:00 SP, 1x1x3; postprocess and guardrail enrollment in progress.",
+    "C11-C14 final complete: 2 MOTO + 2 CARRO, USD35, 01:00 SP / 00:00 ET, 1x1x3, 12 assets 02_TESTING, first-delivery and CREATIVE_CUT_24H armed; active account budget USD263."
   ],
-  "updated_at": "2026-09-02T23:57:28.782244-03:00",
-  "updated_at_utc": "2026-09-03T02:57:28.782244+00:00"
+  "updated_at": "2026-09-03T00:56:03.968456-03:00",
+  "updated_at_utc": "2026-09-03T03:56:03.968456+00:00"
 }
