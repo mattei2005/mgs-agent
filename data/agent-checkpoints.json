@@ -883,12 +883,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0045-CUTOVER-20260903",
-      "next_step": "Rodolfo confirmar se o alvo literal correto é B004-5; preflight B004-5 já passou quatro checks HTTP 200, token válido/app-bound, novo app ID, 3 roles e 11 linhas na Sheet.",
-      "objective": "Confirmar e executar a substituição correta do B004-4 sem normalizar silenciosamente um identificador conflitante.",
-      "source": "discord:thread:1544837470687076454;message:1545095733584076942;onepassword:BOT B004-5 Token - Heloisa Barbosa Almeida;sheet:Migracao 22/06 NO APP;registry:data/meta-app-registry.json",
-      "state": "blocked_pending_exact_target: rodolfo escreveu b004-4 para b005-5, mas 1password, sheet e graph apontam unicamente b004-5; b005-5 não existe e tem zero linhas. b004-4 permanece integralmente pausado e nenhuma mutação de cutover b004 foi feita.",
+      "next_step": "Executar canário isolado, aplicar cutover com backup, validar paridade Sheet, reativar rota e confirmar ciclo agendado completo.",
+      "objective": "Substituir B004-4 por B004-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar toda a rota sem reutilizar IDs app-scoped.",
+      "source": "discord:thread:1544837470687076454;messages:1545095733584076942,1545107187972440064;onepassword:BOT B004-5 Token - Heloisa Barbosa Almeida;registry:data/meta-app-registry.json",
+      "state": "in_progress: rodolfo corrigiu o identificador e confirmou b004-4→b004-5; b004-4 segue pausado; item b004-5/app_name/campos obrigatórios validados; canário e produção pendentes.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T16:00:48+00:00"
+      "updated_at": "2026-09-03T16:25:00+00:00"
     },
     {
       "agent": "zeus",
@@ -2132,5 +2132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T16:13:33+00:00"
+  "updated_at": "2026-09-03T16:25:00+00:00"
 }
