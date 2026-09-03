@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.6
+version: 1.3.7
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -27,6 +27,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, blocker rechecks, exact ignore-list identity matching, disconnected-Page handling, resumable backups, login-safe concurrency, canary/readback, Openzed 21/07 EN/ES signatures, and column-I completion rules.
 - `references/utm-medium-only-migration-and-exact-login-resolution.md` — validated narrow migration for changing only `utm_medium` across Get Started and existing Drip URLs, including exact-login discovery when a newly added generic-title 1Password item is absent from the resolver map, dynamic occurrence counts, normalized graph hashing, rollback, and fresh-session readback.
 - `references/live-reference-page-catalog-and-idempotent-recovery.md` — live source-Page approval gate, resumable qualification, action-editor normalization, and safe recovery when a Flow Builder Save is a no-op or a Page ends in a known partial state.
+- `references/all-account-url-variance-audit.md` — read-only enumeration of every imported account/Page across exact logins, identity-safe action-route hydration, resumable collection, exact URL signatures, and disjoint missing/variance reporting.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
 ## Non-negotiable model
@@ -77,6 +78,12 @@ Legacy copied flows may omit the `m` in numbered query labels (`..._1-1`…`..._
 Do not force an existing M0 flow button to NM because an older baseline expected an initial block to equal No Match. The canonical migration model has separate M0 and NM destinations.
 
 For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLACE#` from a legacy URL into the target catalog string; Rodolfo confirmed that preserving it is not a requirement. Enter the exact approved catalog destination. The normal DigitalTRChat Get Started and No Match editors may append `&subscriber_id=#SUBSCRIBER_ID_REPLACE#` automatically on save; accept that platform-enforced suffix when the canonical base matches exactly, but do not add it to Flow Builder or Persistent Menu URLs and do not use a lower-level bypass to fight normal UI behavior. Preserve the literal `#PAGE_ID#` from the canonical catalog and never add any other tracking parameter.
+
+## Read-only all-account URL variance audits
+
+When Rodolfo gives exact DTR logins and asks whether URLs differ, enumerate every imported account and Page before comparing. Build exact per-surface and combined URL signatures, but keep `flow absent`, `action settings absent`, identity conflict, zero-Page account and zero-account login outside the variance bucket. Do not call a minority signature wrong without an approved destination authority.
+
+Action links are asynchronously hydrated and can remain stale from the previous Page even after a successful click. Every collected Get Started/No Match route must pass direct-editor DTR Page ID and Facebook Page ID readback. Persist results per completed account so long foreground scans can resume safely. Follow `references/all-account-url-variance-audit.md` for the full collection, signature and reporting contract.
 
 ## SB-template-driven cross-login scope
 
