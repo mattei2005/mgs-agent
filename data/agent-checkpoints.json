@@ -863,12 +863,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
-      "next_step": "Ler a Sheet por Service Account, executar canário isolado, aplicar cutover com backup e validar ciclo agendado.",
+      "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B001-4 por B001-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544837470687076454;messages:1545088764530008135,1545095791637430415;registry:data/meta-app-registry.json",
-      "state": "in_progress: pedido explícito confirmado; b001-4 pausado por restrição; item b001-5 existe com app_name exato e campos obrigatórios presentes; preflight/canário/produção ainda pendentes.",
+      "source": "discord:thread:1544837470687076454;messages:1545088764530008135,1545095791637430415;backup:/root/mgs-agent/backups/meta-app-b0014-to-b0015-cutover-20260903-114204;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "completed_validated: b001-5 ativo no registry e no cron; item/app_name exatos; quatro checks http 200; token válido e app-bound; 9/14 roles resolvidas; sheet em paridade 9 presentes/5 x; predecessor state aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T15:40:43+00:00"
+      "updated_at": "2026-09-03T16:00:48+00:00"
     },
     {
       "agent": "zeus",
@@ -879,6 +879,16 @@
       "state": "completed: b003-3 ativo no registry/cron/canal preservado; quatro checks saudáveis, ids novos e state fresco; sheet reconciliada; alertas de novas aceitações entregues em famílias completas sem título predecessor.",
       "thread_id": "1544705223057211422",
       "updated_at": "2026-09-02T14:51:42+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-B0045-CUTOVER-20260903",
+      "next_step": "Rodolfo confirmar se o alvo literal correto é B004-5; preflight B004-5 já passou quatro checks HTTP 200, token válido/app-bound, novo app ID, 3 roles e 11 linhas na Sheet.",
+      "objective": "Confirmar e executar a substituição correta do B004-4 sem normalizar silenciosamente um identificador conflitante.",
+      "source": "discord:thread:1544837470687076454;message:1545095733584076942;onepassword:BOT B004-5 Token - Heloisa Barbosa Almeida;sheet:Migracao 22/06 NO APP;registry:data/meta-app-registry.json",
+      "state": "blocked_pending_exact_target: rodolfo escreveu b004-4 para b005-5, mas 1password, sheet e graph apontam unicamente b004-5; b005-5 não existe e tem zero linhas. b004-4 permanece integralmente pausado e nenhuma mutação de cutover b004 foi feita.",
+      "thread_id": "1544837470687076454",
+      "updated_at": "2026-09-03T16:00:48+00:00"
     },
     {
       "agent": "zeus",
@@ -903,12 +913,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0073-CUTOVER-20260903",
-      "next_step": "Validar metadados do item 1Password, executar canário isolado, aplicar cutover com backup e validar produção.",
+      "next_step": "Operação normal: aceitar as 17 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B007-2 por B007-3 no monitor Meta, validar 1Password, Graph, Sheet e reativar toda a rota sem reutilizar IDs app-scoped.",
-      "source": "discord:thread:1544837470687076454;message:OOB-B0073-after-1545088764530008135;registry:data/meta-app-registry.json",
-      "state": "in_progress: pedido explícito recebido; b007-2 está pausado por restrição; sheet já aponta 20 linhas b007-3; item/metadata e preflight ainda em validação.",
+      "source": "discord:thread:1544837470687076454;message:OOB-B0073-after-1545088764530008135;backup:/root/mgs-agent/backups/meta-app-b0072-to-b0073-cutover-20260903-115111;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "completed_validated: b007-3 ativo no registry e no cron; item/app_name exatos; quatro checks http 200; token válido e app-bound; 3/20 roles resolvidas; sheet em paridade 3 presentes/17 x; predecessor state aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
       "thread_id": "1544837470687076454",
-      "updated_at": "2026-09-03T15:48:09+00:00"
+      "updated_at": "2026-09-03T16:00:48+00:00"
     },
     {
       "agent": "zeus",
@@ -2112,5 +2122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T15:48:09+00:00"
+  "updated_at": "2026-09-03T16:00:48+00:00"
 }
