@@ -2899,6 +2899,3430 @@
         "partial": 0,
         "failed": 0
       }
+    },
+    {
+      "account_id": "22",
+      "account_name": "Alessandra Furtado",
+      "page_count": 15,
+      "pages": [
+        {
+          "page": {
+            "ui_order": 1,
+            "page_name": "Tais Sousa",
+            "page_id": "414",
+            "fb_page_id": "115158046556881"
+          },
+          "action_routes": {
+            "error": "action_links gs=0 nm=0"
+          },
+          "action": {
+            "error": "action_links gs=0 nm=0"
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/414/1",
+            "error": "flow_count=0"
+          },
+          "signature": {
+            "get_started": [],
+            "no_match": [],
+            "auto_principal_drip": [],
+            "hash": "1c30925e1a5d4d2b27560046d53598d75689db4aa228152aa011812103527fdc"
+          },
+          "status": "partial"
+        },
+        {
+          "page": {
+            "ui_order": 2,
+            "page_name": "Yara Soares",
+            "page_id": "413",
+            "fb_page_id": "115124180036602"
+          },
+          "action_routes": {
+            "error": "action_links gs=0 nm=0"
+          },
+          "action": {
+            "error": "action_links gs=0 nm=0"
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/413/1",
+            "error": "flow_count=0"
+          },
+          "signature": {
+            "get_started": [],
+            "no_match": [],
+            "auto_principal_drip": [],
+            "hash": "1c30925e1a5d4d2b27560046d53598d75689db4aa228152aa011812103527fdc"
+          },
+          "status": "partial"
+        },
+        {
+          "page": {
+            "ui_order": 3,
+            "page_name": "Daniela Lopez",
+            "page_id": "412",
+            "fb_page_id": "259542987238769"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262053/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262054/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "259542987238769",
+                "page_table_id": "412",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "259542987238769",
+                "page_table_id": "412",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/412/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115310/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 4,
+            "page_name": "Martina Hernandez",
+            "page_id": "410",
+            "fb_page_id": "254486084416189"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262146/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262147/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "254486084416189",
+                "page_table_id": "410",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "254486084416189",
+                "page_table_id": "410",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/410/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115314/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 5,
+            "page_name": "Julia Romero",
+            "page_id": "409",
+            "fb_page_id": "267232933136099"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262239/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262240/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "267232933136099",
+                "page_table_id": "409",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "267232933136099",
+                "page_table_id": "409",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/409/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115318/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 6,
+            "page_name": "Adália Diaz",
+            "page_id": "408",
+            "fb_page_id": "262383343622634"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/479585/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/479586/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "262383343622634",
+                "page_table_id": "408",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "srf.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "262383343622634",
+                "page_table_id": "408",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://srf.openzed.com/opf-us-cc-es-drip-nm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "srf.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/408/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/176891/1/fb",
+            "topology": {
+              "nodes": 147,
+              "edges": 146,
+              "starts": 1,
+              "reachable": 147,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1",
+                "label": "M00",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "342",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "346",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "348",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "350",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "352",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "354",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "356",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "358",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "360",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+                "label": "M17",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "362",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+                "label": "M19",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "364",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+                "label": "M21",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "366",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+                "label": "M23",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "368",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+                "label": "M25",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "370",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+                "label": "M27",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "372",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m28-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m28-1",
+                "label": "M28",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "377",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m2-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "384",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m4-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "391",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m6-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "396",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m8-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "401",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m10-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "406",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m12-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "413",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m14-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "419",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m16-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m16-1",
+                "label": "M16",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "425",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m18-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m18-1",
+                "label": "M18",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "431",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m20-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m20-1",
+                "label": "M20",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "436",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m22-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m22-1",
+                "label": "M22",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "441",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m24-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m24-1",
+                "label": "M24",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "455",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m26-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m26-1",
+                "label": "M26",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "481",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "484",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "487",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "490",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "493",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "496",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "499",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "503",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "505",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+                "label": "M17",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "508",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+                "label": "M19",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "511",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+                "label": "M21",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "513",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+                "label": "M23",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "516",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+                "label": "M25",
+                "host": "srf.openzed.com"
+              },
+              {
+                "node_id": "518",
+                "node_type": "Generic Template",
+                "field": "imageClickDestinationLink",
+                "url": "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+                "label": "M27",
+                "host": "srf.openzed.com"
+              }
+            ],
+            "link_count": 43,
+            "unique_url_count": 29,
+            "hosts": {
+              "srf.openzed.com": 43
+            },
+            "labels": {
+              "M00": 1,
+              "M01": 2,
+              "M03": 2,
+              "M05": 2,
+              "M07": 2,
+              "M09": 2,
+              "M11": 2,
+              "M13": 2,
+              "M15": 2,
+              "M17": 2,
+              "M19": 2,
+              "M21": 2,
+              "M23": 2,
+              "M25": 2,
+              "M27": 2,
+              "M28": 1,
+              "M02": 1,
+              "M04": 1,
+              "M06": 1,
+              "M08": 1,
+              "M10": 1,
+              "M12": 1,
+              "M14": 1,
+              "M16": 1,
+              "M18": 1,
+              "M20": 1,
+              "M22": 1,
+              "M24": 1,
+              "M26": 1
+            },
+            "url_multiset_hash": "5f56c913511bb200523c1b54baa22311fef4406fda6252f52f040f32750b1b5c"
+          },
+          "signature": {
+            "get_started": [
+              "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://srf.openzed.com/opf-us-cc-es-drip-nm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://srf.openzed.com/opf-us-cc-es-drip-m0-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m0-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m1-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m1-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m10-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m10-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m11-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m12-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m12-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m13-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m13-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m14-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m14-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m15-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m15-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m16-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m16-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m17-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m17-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m18-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m18-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m19-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m19-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m2-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m2-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m20-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m20-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m21-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m21-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m22-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m22-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m23-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m23-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m24-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m24-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m25-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m25-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m26-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m26-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m27-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m27-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m28-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m28-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m3-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m3-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m4-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m4-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m5-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m5-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m6-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m6-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m7-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m7-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m8-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m8-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1",
+              "https://srf.openzed.com/opf-us-cc-es-drip-m9-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "97079925ca8bb6714432ab277694e780ab0341ab942929a94cc25e79b2ee6b76"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 7,
+            "page_name": "Isabella Torres",
+            "page_id": "407",
+            "fb_page_id": "256930714169883"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262425/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262426/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "256930714169883",
+                "page_table_id": "407",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "256930714169883",
+                "page_table_id": "407",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/407/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115326/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 8,
+            "page_name": "Paula Ortega",
+            "page_id": "406",
+            "fb_page_id": "278466535341705"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262704/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262705/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "278466535341705",
+                "page_table_id": "406",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "278466535341705",
+                "page_table_id": "406",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/406/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115342/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 9,
+            "page_name": "Sofia Vargas",
+            "page_id": "404",
+            "fb_page_id": "241083532428722"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262797/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262798/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "241083532428722",
+                "page_table_id": "404",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "241083532428722",
+                "page_table_id": "404",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/404/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115346/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 10,
+            "page_name": "Laura Peralta",
+            "page_id": "403",
+            "fb_page_id": "247538348449041"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262890/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262891/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "247538348449041",
+                "page_table_id": "403",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "247538348449041",
+                "page_table_id": "403",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/403/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115350/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 11,
+            "page_name": "Fernanda Mendoza",
+            "page_id": "402",
+            "fb_page_id": "276535422203604"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262983/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/262984/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "276535422203604",
+                "page_table_id": "402",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "276535422203604",
+                "page_table_id": "402",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/402/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115354/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 12,
+            "page_name": "Bianca Perez",
+            "page_id": "401",
+            "fb_page_id": "229451503593816"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263076/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263077/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "229451503593816",
+                "page_table_id": "401",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "229451503593816",
+                "page_table_id": "401",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/401/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115358/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 13,
+            "page_name": "Noelia Castro",
+            "page_id": "400",
+            "fb_page_id": "223375494203311"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263169/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263170/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "223375494203311",
+                "page_table_id": "400",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "223375494203311",
+                "page_table_id": "400",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/400/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115362/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 14,
+            "page_name": "Alma Solís",
+            "page_id": "397",
+            "fb_page_id": "305319645992500"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263262/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263263/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "305319645992500",
+                "page_table_id": "397",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "305319645992500",
+                "page_table_id": "397",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/397/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115366/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        },
+        {
+          "page": {
+            "ui_order": 15,
+            "page_name": "Renata Montero",
+            "page_id": "394",
+            "fb_page_id": "328668353653089"
+          },
+          "action_routes": {
+            "get_started_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263355/1/getstart",
+            "no_match_href": "https://digitaltrchat.com/messenger_bot/edit_bot/263356/1/nomatch",
+            "attempt": 1
+          },
+          "action": {
+            "get_started": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "328668353653089",
+                "page_table_id": "394",
+                "keyword_type": "get-started",
+                "bot_name": "GET STARTED"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            },
+            "no_match": {
+              "identity_ok": true,
+              "identity": {
+                "page_id": "328668353653089",
+                "page_table_id": "394",
+                "keyword_type": "no match",
+                "bot_name": "NO MATCH FOUND"
+              },
+              "urls": [
+                "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+              ],
+              "hosts": {
+                "tarjeta.openzed.com": 1
+              }
+            }
+          },
+          "auto_principal_drip": {
+            "manager": "https://digitaltrchat.com/visual_flow_builder/flowbuilder_manager/394/1",
+            "edit_href": "https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115370/1/fb",
+            "topology": {
+              "nodes": 82,
+              "edges": 81,
+              "starts": 1,
+              "reachable": 82,
+              "disconnected": 0
+            },
+            "links": [
+              {
+                "node_id": "13",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+                "label": "NM",
+                "host": "fineasier.com"
+              },
+              {
+                "node_id": "235",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+                "label": "M01",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "237",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+                "label": "M02",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "240",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+                "label": "M03",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "243",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+                "label": "M04",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "245",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+                "label": "M05",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "248",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+                "label": "M06",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "250",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+                "label": "M07",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "252",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+                "label": "M08",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "254",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1",
+                "label": "M09",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "256",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+                "label": "M10",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "258",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+                "label": "M11",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "260",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+                "label": "M12",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "262",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+                "label": "M13",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "264",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+                "label": "M14",
+                "host": "tarjeta.openzed.com"
+              },
+              {
+                "node_id": "266",
+                "node_type": "Button",
+                "field": "value",
+                "url": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+                "label": "M15",
+                "host": "tarjeta.openzed.com"
+              }
+            ],
+            "link_count": 16,
+            "unique_url_count": 16,
+            "hosts": {
+              "fineasier.com": 1,
+              "tarjeta.openzed.com": 15
+            },
+            "labels": {
+              "NM": 1,
+              "M01": 1,
+              "M02": 1,
+              "M03": 1,
+              "M04": 1,
+              "M05": 1,
+              "M06": 1,
+              "M07": 1,
+              "M08": 1,
+              "M09": 1,
+              "M10": 1,
+              "M11": 1,
+              "M12": 1,
+              "M13": 1,
+              "M14": 1,
+              "M15": 1
+            },
+            "url_multiset_hash": "b12cb996270ac02422117bb1245d36202ba434d8bf0d4241f0b27e8ab29f1f7f"
+          },
+          "signature": {
+            "get_started": [
+              "https://tarjeta.openzed.com/28BXhFXf/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m0-1&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "no_match": [
+              "https://tarjeta.openzed.com/78MdzQ46/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_nm&subscriber_id=#SUBSCRIBER_ID_REPLACE#"
+            ],
+            "auto_principal_drip": [
+              "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+              "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1",
+              "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1",
+              "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1",
+              "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1",
+              "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1",
+              "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1",
+              "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1",
+              "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1",
+              "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1",
+              "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1",
+              "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1",
+              "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1",
+              "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1",
+              "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1",
+              "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+            ],
+            "hash": "10813b3e00bf78a04b91a0434fc33344a41c59ae5ebadb5e9c952e10fa322414"
+          },
+          "status": "ok"
+        }
+      ],
+      "summary": {
+        "ok": 13,
+        "partial": 2,
+        "failed": 0
+      }
     }
   ],
   "account_count": 8,
@@ -2937,11 +6361,11 @@
     }
   ],
   "summary": {
-    "accounts_processed": 1,
+    "accounts_processed": 2,
     "accounts_total": 8,
-    "pages": 11,
-    "ok": 11,
-    "partial": 0,
+    "pages": 26,
+    "ok": 24,
+    "partial": 2,
     "failed": 0,
     "account_errors": 0
   }
