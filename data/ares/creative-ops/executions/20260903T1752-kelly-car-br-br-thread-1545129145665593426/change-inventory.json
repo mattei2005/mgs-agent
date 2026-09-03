@@ -1,0 +1,75 @@
+{
+  "change_id": "ares-kelly-car-br-br-intake-20260903-1545129145665593426",
+  "scope": "Creative Ops / Drive intake / inventory / checkpoint",
+  "requested_by": "Kelly Nice",
+  "thread_id": "1545129145665593426",
+  "operation": "CAR_BR_BR",
+  "changes": [
+    {
+      "type": "external_drive_write",
+      "target": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
+      "summary": "23 unique sanitized video assets uploaded and read back"
+    },
+    {
+      "type": "external_drive_move",
+      "target": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
+      "summary": "24 source video lineages moved from UPLOAD MANUAL without deletion"
+    },
+    {
+      "type": "operational_data",
+      "target": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+      "sha256": "9c003b24b96fb7663f7f56d607785efc88a81f960dd1f922d3c811e0ded0dfc8",
+      "summary": "23 primary inventory rows plus 1 exact duplicate source link; fail-closed reservation"
+    },
+    {
+      "type": "checkpoint",
+      "target": "/root/mgs-agent/data/agent-checkpoints.json",
+      "sha256": "b0e8745abc2b9bb342dffb51f944d3e97bbf24a8c3c64ae885cec494d0bf697e",
+      "summary": "Initiative checkpoint created and finalized"
+    },
+    {
+      "type": "execution_artifacts",
+      "target": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426",
+      "summary": "Dry-run, resumable state, final manifest, CSV mapping and independent verification retained"
+    }
+  ],
+  "artifacts": {
+    "final_manifest": {
+      "path": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426/ready-execution-latest.json",
+      "sha256": "9de9a6370b7082973770e6bc63ef38d86d2e3b2d4faf8ee1a7b239be391c558e"
+    },
+    "independent_verification": {
+      "path": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426/independent-verification-readback.json",
+      "sha256": "253a8a90505d6edc431ebd88d62e16fca9c88f041374e3ec0c03e110fb42bb5e"
+    },
+    "process_runner": {
+      "path": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426/process_batch.py",
+      "sha256": "83c78fa782633c7ab5ddb101ab1d36f027ce8934edb38b0b0f3f4635e5e6e303"
+    },
+    "review_runner": {
+      "path": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426/prepare_review.py",
+      "sha256": "939ab66f70ca31a3927ae3109975655ed636116f085338aa5395948001e47e70"
+    },
+    "verification_runner": {
+      "path": "/root/mgs-agent/data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426/independent_verify.py",
+      "sha256": "85931b0a3ec4e4b6351843268b8f401451a94cfe91eb4d24cc834094d0ad85ac"
+    }
+  },
+  "verification": {
+    "all_pass": true,
+    "auth_mode": "service_account",
+    "service_account_validated": true,
+    "project_validated": true,
+    "shared_drive": "MGS-AGENTS",
+    "source_lineages": 24,
+    "unique_ready_assets": 23,
+    "exact_duplicate_sources": 1,
+    "metadata_clean_verified": 23,
+    "legacy_sources_verified": 24,
+    "inventory_links_verified": 24,
+    "reservation_fail_closed_verified": 24,
+    "upload_manual_remaining_files_recursive": 0,
+    "local_transient_media_removed": true,
+    "knowledge_validation_errors": []
+  }
+}

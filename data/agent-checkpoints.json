@@ -683,12 +683,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260903-1545129145665593426",
-      "next_step": "Baixar e revisar frames reais, classificar MOTO/ângulo/pessoa, executar dry-run, sanitizar, enviar versões limpas para VID/01_READY, mover originais para VID/99_LEGACY, registrar inventário e validar readback independente.",
+      "next_step": "Aguardar revisão/liberação expressa da Kelly ou conciliação Meta × Drive antes de qualquer elegibilidade ou uso em campanha.",
       "objective": "Tratar e organizar o lote de criativos BR/CAR/PT-BR enviado por Kelly em UPLOAD MANUAL",
-      "source": "discord:thread:1545129145665593426; intake:data/ares/creative-ops/intake/current-kelly-car-br-br-1545129145665593426",
-      "state": "em andamento: inventário live validou 24 vídeos mp4 car_br_br, todos 1080x1920, sem duplicata md5 na fila; nenhuma movimentação drive executada ainda.",
+      "source": "discord:thread:1545129145665593426; execution:data/ares/creative-ops/executions/20260903T1752-kelly-car-br-br-thread-1545129145665593426; manifest:ready-execution-latest.json; verification:independent-verification-readback.json",
+      "state": "concluído e validado: 24 vídeos moto 1080x1920 classificados por 72 frames; 23 versões únicas clean=true em car_br_br/vid/01_ready; 1 duplicata exata conciliada; 24 originais preservados em car_br_br/vid/99_legacy; inventário 24/24 com reservado_pelo_gestor e ares_eligible=false; upload manual com zero arquivos pendentes.",
       "thread_id": "1545129145665593426",
-      "updated_at": "2026-09-03T17:53:18+00:00"
+      "updated_at": "2026-09-03T18:07:22+00:00"
     },
     {
       "agent": "ares",
@@ -2142,5 +2142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T17:53:18+00:00"
+  "updated_at": "2026-09-03T18:07:22+00:00"
 }
