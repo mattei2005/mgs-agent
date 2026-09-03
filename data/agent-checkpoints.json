@@ -872,6 +872,16 @@
     },
     {
       "agent": "zeus",
+      "id": "IONE-SB-PAGE-CANARY-20260903",
+      "next_step": "Rodolfo autorizar separadamente a investigação/reparo da associação Messenger User/perfil; não reativar o User inteiro sob autorização de uma única Page porque isso impactaria todas as páginas do login.",
+      "objective": "Executar um canário seguro para disponibilizar uma página de Ione Silva na aba Messenger Page da Smart Bidding.",
+      "source": "discord:thread:1544837470687076454;message:1545167389480456194;live:DTR Ione account 1609 + SB full campaigns/Messenger and users/Messenger;procedure:profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-03.md",
+      "state": "blocked_before_write: preflight full live confirmou 23/23 page ids dtr já existentes na sb; todas as rows têm profile_name nulo e estão sob o login disparoszuout@gmail.com. messenger user exato está active=false. new page seria duplicidade/409; nenhum canário foi escrito.",
+      "thread_id": "1544837470687076454",
+      "updated_at": "2026-09-03T20:37:02+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B001-4 por B001-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
@@ -2162,5 +2172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:23:24+00:00"
+  "updated_at": "2026-09-03T20:37:02+00:00"
 }

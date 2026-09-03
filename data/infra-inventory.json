@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T16:16:28-04:00",
+    "updated_at": "2026-09-03T16:38:10-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -12231,6 +12231,26 @@
       "updated_at": "2026-09-03T16:16:28-04:00",
       "source_report": "discord:#alerts-infra/1545165522264395929",
       "report_readback": "HTTP 200; message 1545165522264395929 in channel 1498132022634483894; content empty; one embed; required fields PASS; zero mentions; no thread."
+    },
+    {
+      "id": "zeus-sb-page-precreate-full-id-gate-20260903",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-03.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-03.md",
+      "runtime_versioned_sha_match": true,
+      "size_bytes": 7937,
+      "modified_at": "2026-09-03T16:36:21-04:00",
+      "sha256": "61767eb7676315d24ba58ca17444c18e7eaf3141c2f421e9ac593ffd38dbfc09",
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Smart Bidding Messenger Page pre-create gate: PROFILE_NAME filter zero is not absence proof; full live FB_PAGE_ID/PAGE_ID lookup and Messenger User state required.",
+      "validation": "Ione live preflight: 23 DTR pages, 23/23 global SB rows, zero missing, all PROFILE_NAME null, Messenger User ACTIVE=false; no Page POST executed.",
+      "last_change": "Added fail-closed gate against duplicate/409 Page creation when existing rows are hidden by null PROFILE_NAME.",
+      "backup": "/root/mgs-agent/backups/ione-sb-page-canary-preflight-20260903/route-pack-03.md.before",
+      "updated_at": "2026-09-03T16:38:10-04:00",
+      "source_report": "discord:#alerts-infra/1545170985894940744",
+      "report_readback": "HTTP 200; message 1545170985894940744; content empty; one embed; required fields PASS; zero mentions; no thread."
     }
   ],
   "profile_skill_references": [
