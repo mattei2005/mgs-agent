@@ -1283,12 +1283,12 @@
     {
       "agent": "ares",
       "id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
-      "next_step": "Após a janela de quota, executar apenas readback consolidado do bundle C11-C12; em seguida executar C13-C14 e concluir Drive/inventário/assignments/guardrails.",
+      "next_step": "Após cooldown Meta, reconciliar o terceiro alternate no advideos/registry; pre-stagear somente se ausente, selar request substituto C13-C14, executar/readback e finalizar Drive/inventário/guardrails.",
       "objective": "Criar C11-C14 na conta 05: 2 MOTO e 2 CARRO, USD35/dia cada, início 03/09/2026 00:00 ET (01:00 São Paulo), 1x1x3 MAXVOL.",
-      "source": "discord:thread:1542892971186454719;request:cpv05-c11-c14-mixed-20260903-nicolas-r1;engine-state:READBACK_DEFERRED",
-      "state": "bundle c11-c12 possui 2 campanhas, 2 adsets e 6 anúncios com ids persistidos. os 3 anúncios inicialmente ausentes foram criados missing-only e normalizados; o readback de campanha/ads passou, mas o readback de adsets recebeu rate limit meta code17/subcode2446079. state corrigido para readback_deferred/children_created_readback_pending; write replay bloqueado.",
+      "source": "discord:thread:1542892971186454719;request:cpv05-c11-c14-mixed-20260903-nicolas-r1;replacement:cpv05-c13-c14-car-qa-r2-20260903-nicolas-r1",
+      "state": "c11-c12 completas por readback: active, usd35, 01:00 sp, 1x1x3, lineage/urls válidas. bundle c13-c14 original teve zero writes e foi supersedido antes de execução porque qa square reprovou 3 assets. bundle carro corrigido usa 6 assets pass; 2 de 3 alternates já estão pre-stageados. o terceiro está aguardando cooldown business usage meta; nenhum upload será repetido sem readback.",
       "thread_id": "1542892971186454719",
-      "updated_at": "2026-09-03T02:40:00+00:00"
+      "updated_at": "2026-09-03T02:56:10+00:00"
     },
     {
       "agent": "ares",
@@ -2092,5 +2092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T02:40:00+00:00"
+  "updated_at": "2026-09-03T02:56:10+00:00"
 }
