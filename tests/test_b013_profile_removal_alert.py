@@ -106,6 +106,46 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         self.assertLess(append_at, replace_at)
         self.assertLess(replace_at, summarize_at)
 
+    def test_confirmed_removal_is_new_only_on_first_confirmed_cycle(self):
+        current = {
+            'user': 'one@example.com',
+            'segurador': 'One',
+            'verdict': 'unlinked_confirmed',
+            'link_status': 'token_app_mismatch',
+        }
+        self.assertTrue(self.mod.is_newly_confirmed_failure({'verdict': 'linked'}, current))
+        self.assertTrue(self.mod.is_newly_confirmed_failure({}, current))
+        self.assertFalse(
+            self.mod.is_newly_confirmed_failure({'verdict': 'unlinked_confirmed'}, current)
+        )
+
+    def test_automatic_alert_omits_persistent_confirmed_removals(self):
+        changes = [{
+            'user': 'new@example.com',
+            'segurador': 'New',
+            'old': 'not_monitored',
+            'new': 'linked',
+            'kind': 'added',
+        }]
+        stale_failure = {
+            'user': 'old@example.com',
+            'segurador': 'Old',
+            'profile_id': 'old.profile',
+            'pages': '2',
+            'verdict': 'unlinked_confirmed',
+        }
+        without_new_removal = '\n'.join(
+            self.mod.automatic_movement_sections(changes, [], [])
+        )
+        self.assertNotIn('REMOVIDOS CONFIRMADOS', without_new_removal)
+        self.assertNotIn('Old', without_new_removal)
+
+        with_new_removal = '\n'.join(
+            self.mod.automatic_movement_sections(changes, [stale_failure], [])
+        )
+        self.assertIn('REMOVIDOS CONFIRMADOS', with_new_removal)
+        self.assertEqual(with_new_removal.count('Old'), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
