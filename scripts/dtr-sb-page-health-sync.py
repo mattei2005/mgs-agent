@@ -121,9 +121,11 @@ async def fetch_messenger_revenue_7d(ctx, headers, publishers, now=None):
     }
 
 def enrich_revenue_7d(rows, report_rows):
-    """Attach exact seven-day revenue by bot+UTM, with bot+FB fallback."""
+    """Attach exact seven-day investment/revenue by bot+UTM, with bot+FB fallback."""
     by_user_utm=defaultdict(Decimal)
     by_user_fb=defaultdict(Decimal)
+    investment_by_user_utm=defaultdict(Decimal)
+    investment_by_user_fb=defaultdict(Decimal)
     seen_user_utm=set(); seen_user_fb=set()
     for report in report_rows:
         if not isinstance(report,dict):
@@ -132,22 +134,31 @@ def enrich_revenue_7d(rows, report_rows):
         utm=norm(report.get('UTM_CAMPAIGN'))
         fb=norm(report.get('FB_PAGE_ID') or report.get('PAGE_ID'))
         revenue=decimal_money(report.get('REVENUE'))
+        investment=decimal_money(report.get('INVESTIMENT'))
         if user and utm:
             by_user_utm[(user,utm)]+=revenue
+            investment_by_user_utm[(user,utm)]+=investment
             seen_user_utm.add((user,utm))
         if user and fb:
             by_user_fb[(user,fb)]+=revenue
+            investment_by_user_fb[(user,fb)]+=investment
             seen_user_fb.add((user,fb))
     matched=0
     for row in rows:
         user=norm_email(row.get('bot_user') or row.get('bot user') or row.get('USER_LOGIN'))
         utm=norm(row.get('utm_campaign') or row.get('utm') or row.get('UTM_CAMPAIGN'))
         fb=norm(row.get('fb_page_id') or row.get('fb page id') or row.get('FB_PAGE_ID'))
-        revenue=None; basis='unmatched'
+        revenue=None; investment=None; basis='unmatched'
         if user and utm and (user,utm) in seen_user_utm:
-            revenue=by_user_utm[(user,utm)]; basis='bot+utm'
+            revenue=by_user_utm[(user,utm)]
+            investment=investment_by_user_utm[(user,utm)]
+            basis='bot+utm'
         elif user and fb and (user,fb) in seen_user_fb:
-            revenue=by_user_fb[(user,fb)]; basis='bot+fb'
+            revenue=by_user_fb[(user,fb)]
+            investment=investment_by_user_fb[(user,fb)]
+            basis='bot+fb'
+        row['investment_7d']=investment
+        row['investment_7d_brl']=format_brl(investment)
         row['revenue_7d']=revenue
         row['revenue_7d_brl']=format_brl(revenue)
         row['revenue_7d_match_basis']=basis
@@ -759,6 +770,10 @@ def restriction_alert_row(row, include_revenue=False):
     codes=row.get('codes') or row.get('codigos') or ''
     if isinstance(codes,list):
         codes=','.join(codes)
+    investment=(
+        f"{truncate_text(row.get('investment_7d_brl') or format_brl(row.get('investment_7d')),13):<13} "
+        if include_revenue else ''
+    )
     revenue=(
         f"{truncate_text(row.get('revenue_7d_brl') or format_brl(row.get('revenue_7d')),13):<13} "
         if include_revenue else ''
@@ -769,6 +784,7 @@ def restriction_alert_row(row, include_revenue=False):
         f"{truncate_text(row.get('page_id') or row.get('page id'),8):<8} "
         f"{truncate_text((row.get('bot_user') or row.get('bot user') or '').replace('@gmail.com',''),18):<18} "
         f"{truncate_text(row.get('segurador'),20):<20} "
+        f"{investment}"
         f"{revenue}"
         f"{truncate_text(row.get('status_sb') or row.get('status sb') or '?',11):<11} "
         f"{truncate_text(codes,13):<13} "
@@ -785,16 +801,16 @@ def build_new_restrictions_alerts(rows, summary, limit=1900):
         'Fonte: último Completed da DigitalTRChat → Smart Bidding',
         f'Novas nesta execução: {total}',
         '',
-        'Página               FB Page ID          Page ID   Bot user           Segurador            Receita 7d    Status SB   Códigos       Data saída',
-        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ----------- ------------- ----------------',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Invest 7d     Rev. 7d       Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ------------- ----------- ------------- ----------------',
     ]
     continuation_prefix=[
         '🆕 PÁGINAS RESTRITAS — NOVAS APLICADAS (CONTINUAÇÃO)',
         f'Atualizado em: {timestamp}',
         f'Novas nesta execução: {total}',
         '',
-        'Página               FB Page ID          Page ID   Bot user           Segurador            Receita 7d    Status SB   Códigos       Data saída',
-        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ----------- ------------- ----------------',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Invest 7d     Rev. 7d       Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ------------- ------------- ----------- ------------- ----------------',
     ]
     suffix=[
         '',
@@ -1633,6 +1649,8 @@ async def main():
                         revenue_meta['status']='ok'
                     except Exception as revenue_exc:
                         for alert_row in alert_rows:
+                            alert_row['investment_7d']=None
+                            alert_row['investment_7d_brl']='—'
                             alert_row['revenue_7d']=None
                             alert_row['revenue_7d_brl']='—'
                             alert_row['revenue_7d_match_basis']='unavailable'

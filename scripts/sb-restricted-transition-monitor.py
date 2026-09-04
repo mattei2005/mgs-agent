@@ -418,17 +418,17 @@ def truncate(value, limit):
 
 
 def transition_lines(transitions):
-    header = 'Tipo            Página             FB Page ID        Page ID  Bot user           Receita 7d    Status    Saída'
-    divider = '--------------- ------------------ ----------------- -------- ------------------ ------------- --------- ----------'
+    header = 'Página             FB Page ID        Page ID  Bot user           Invest 7d     Rev. 7d       Status    Saída'
+    divider = '------------------ ----------------- -------- ------------------ ------------- ------------- --------- ----------'
     lines = [header, divider]
     for item in transitions:
         row = item['after']
         lines.append(
-            f"{truncate(item['kind'],15):<15} "
             f"{truncate(row.get('page_name'),18):<18} "
             f"{truncate(row.get('fb_page_id'),17):<17} "
             f"{truncate(row.get('page_id'),8):<8} "
             f"{truncate(str(row.get('bot_user') or '').replace('@gmail.com',''),18):<18} "
+            f"{truncate(row.get('investment_7d_brl') or '—',13):<13} "
             f"{truncate(row.get('revenue_7d_brl') or '—',13):<13} "
             f"{truncate(row.get('status'),9):<9} "
             f"{truncate(row.get('restricted_until'),10)}"
@@ -541,6 +541,8 @@ def main():
             revenue_meta.update(sync.enrich_revenue_7d(revenue_targets, report_rows))
         except Exception as revenue_exc:
             for target in revenue_targets:
+                target['investment_7d'] = None
+                target['investment_7d_brl'] = '—'
                 target['revenue_7d'] = None
                 target['revenue_7d_brl'] = '—'
                 target['revenue_7d_match_basis'] = 'unavailable'

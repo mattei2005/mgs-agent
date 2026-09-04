@@ -83,14 +83,15 @@ Delivery rules:
 The restricted-pages delta report should include:
 
 ```text
-Página | FB Page ID | Page ID | Bot user | Segurador | Sites | Receita 7d | Status SB | Códigos | Data saída
+Página | FB Page ID | Page ID | Bot user | Segurador | Sites | Invest 7d | Rev. 7d | Status SB | Códigos | Data saída
 ```
 
 Rules:
 
 ```text
 - Include `Sites` column; list multiple sites comma-separated when derivable from SB row/template/domain/publisher.
-- Include `Receita 7d` from the live Smart Bidding Messenger rolling seven-day report. Aggregate `REVENUE` by exact `bot user + UTM_CAMPAIGN`, with exact `bot user + FB Page ID` only as fallback. Format in BRL; if the financial lookup is unavailable or unmatched, show `—` and still deliver the restriction alert.
+- Include `Invest 7d` immediately before `Rev. 7d`, both from the same live Smart Bidding Messenger rolling seven-day report. Aggregate API field `INVESTIMENT` and `REVENUE` by exact `bot user + UTM_CAMPAIGN`, with exact `bot user + FB Page ID` only as fallback. Format both in BRL; if the financial lookup is unavailable or unmatched, show `—` and still deliver the restriction alert.
+- Omit the `Tipo` column from transition-alert rows; keep the transition aggregate in the summary text.
 - Include `Status SB` even though normal channel scope is Broadcast, because it makes the operational status explicit.
 - `Data saída` must be the last column.
 - Sort rows by `Data saída` ascending.

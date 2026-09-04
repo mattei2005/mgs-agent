@@ -87,9 +87,10 @@ class TransitionComparisonTest(unittest.TestCase):
 
         lines = monitor.transition_lines(transitions)
         rendered = '\n'.join(lines)
-        self.assertIn('renovada', rendered)
-        self.assertIn('status alterado', rendered)
-        self.assertNotIn('renovada/…', rendered)
+        self.assertNotIn('Tipo', lines[0])
+        self.assertNotIn('renovada', rendered)
+        self.assertNotIn('status alterado', rendered)
+        self.assertNotIn('nova', rendered)
 
     def test_renderer_chunks_without_omission_or_duplicate_link(self):
         transitions = []
@@ -117,13 +118,13 @@ class TransitionComparisonTest(unittest.TestCase):
             self.assertEqual(joined.count(fb_page_id), 1)
         self.assertEqual(joined.count(monitor.SHEET_URL), 1)
 
-    def test_revenue_7d_is_aggregated_and_rendered_in_brl(self):
+    def test_investment_and_revenue_7d_are_aggregated_and_rendered_in_brl(self):
         daily = monitor.load_module('dtr_sb_daily_match_audit_revenue_test', monitor.DAILY_PATH)
         sync = daily.load_audit_mod().sync
         current = row(7, '2026-08-12')
         report_rows = [
-            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'REVENUE': '1.25'},
-            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'REVENUE': '2.75'},
+            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'INVESTIMENT': '5.25', 'REVENUE': '1.25'},
+            {'USER_LOGIN': 'bot@example.com', 'UTM_CAMPAIGN': 'pg_7', 'PAGE_ID': current['fb_page_id'], 'INVESTIMENT': '5.75', 'REVENUE': '2.75'},
         ]
         stats = sync.enrich_revenue_7d([current], report_rows)
         transition = {'kind': 'nova', 'key': monitor.stable_key(current), 'before': None, 'after': current}
@@ -131,12 +132,18 @@ class TransitionComparisonTest(unittest.TestCase):
         rendered = '\n'.join(monitor.transition_lines([transition]))
 
         self.assertEqual(stats, {'rows': 1, 'matched': 1, 'unmatched': 0})
+        self.assertEqual(current['investment_7d_brl'], 'R$ 11,00')
         self.assertEqual(current['revenue_7d_brl'], 'R$ 4,00')
-        self.assertIn('Receita 7d', rendered)
+        self.assertNotIn('Tipo', rendered.splitlines()[0])
+        self.assertIn('Invest 7d', rendered)
+        self.assertIn('Rev. 7d', rendered)
+        self.assertLess(rendered.index('Invest 7d'), rendered.index('Rev. 7d'))
+        self.assertIn('R$ 11,00', rendered)
         self.assertIn('R$ 4,00', rendered)
 
     def test_state_serializes_decimal_revenue_without_corruption(self):
         current: dict[str, Any] = row(7, '2026-08-12')
+        current['investment_7d'] = Decimal('11.00')
         current['revenue_7d'] = Decimal('4.00')
         transition = {'kind': 'nova', 'key': monitor.stable_key(current), 'before': None, 'after': current}
         original_state_path = monitor.STATE_PATH
@@ -155,6 +162,7 @@ class TransitionComparisonTest(unittest.TestCase):
             finally:
                 setattr(monitor, 'STATE_PATH', original_state_path)
 
+        self.assertEqual(saved['active'][monitor.stable_key(current)]['investment_7d'], '11.00')
         self.assertEqual(saved['active'][monitor.stable_key(current)]['revenue_7d'], '4.00')
         self.assertEqual(saved['last_transitions'][0]['after']['revenue_7d'], '4.00')
         self.assertEqual(saved['history']['coverage_start'], '2026-07-15')

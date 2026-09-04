@@ -82,13 +82,14 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertEqual(payload['allowed_mentions'], {'parse': [], 'roles': sync.TEAM_ROLE_IDS})
         sleep.assert_called_once_with(0.25)
 
-    def test_new_restriction_alert_renders_revenue_7d(self):
+    def test_new_restriction_alert_renders_investment_before_abbreviated_revenue_7d(self):
         row = {
             'page_name': 'Page 7',
             'fb_page_id': '9000000000007',
             'page_id': '7',
             'bot_user': 'bot@example.com',
             'segurador': 'Segurador Teste',
+            'investment_7d': '3.50',
             'revenue_7d': '4.00',
             'status_sb': 'Broadcast',
             'codes': ['#2022'],
@@ -100,7 +101,10 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
             {'started_at': '2026-08-23T10:00:00-04:00'},
         )
 
-        self.assertIn('Receita 7d', rendered)
+        self.assertIn('Invest 7d', rendered)
+        self.assertIn('Rev. 7d', rendered)
+        self.assertLess(rendered.index('Invest 7d'), rendered.index('Rev. 7d'))
+        self.assertIn('R$ 3,50', rendered)
         self.assertIn('R$ 4,00', rendered)
 
     def test_sheets_api_retries_transient_503(self):
