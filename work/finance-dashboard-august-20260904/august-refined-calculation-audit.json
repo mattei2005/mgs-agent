@@ -1,0 +1,1989 @@
+{
+  "checks": {
+    "invalid_formulas_checked": 2263,
+    "total_component_checks": 2739,
+    "total_profit_checks": 903,
+    "net_checks": 1300,
+    "tax_checks": 1300,
+    "country_profit_checks": 1300
+  },
+  "structural_issues": [
+    {
+      "site": "TopFeed Finanzas",
+      "country": "US",
+      "cell": "CR23",
+      "type": "invalid_formula_shape",
+      "formula": "=IF(CQ23=\"\",\"\",CQ23/$H$1)"
+    }
+  ],
+  "numeric_failures": [
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 5,
+      "cell": "EW5",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 46.255747,
+      "actual": 63.675262399999994
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 6,
+      "cell": "EW6",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 16.5456902,
+      "actual": 20.4494093
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 7,
+      "cell": "EW7",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 105.1724613,
+      "actual": 131.6056736
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 8,
+      "cell": "EW8",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 107.81293310000001,
+      "actual": 133.4673012
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 9,
+      "cell": "EW9",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 176.2752379,
+      "actual": 194.94850250000002
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 10,
+      "cell": "EW10",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 128.5947759,
+      "actual": 142.9274088
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 11,
+      "cell": "EW11",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 155.64536470000002,
+      "actual": 172.7134504
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 12,
+      "cell": "EW12",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 178.8587211,
+      "actual": 191.6431637
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 13,
+      "cell": "EW13",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 99.85352529999999,
+      "actual": 107.19555659999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 14,
+      "cell": "EW14",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 127.30303430000001,
+      "actual": 140.7428458
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 15,
+      "cell": "EW15",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 160.35642229999996,
+      "actual": 182.66745919999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 16,
+      "cell": "EW16",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 203.924207,
+      "actual": 221.60017109999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 17,
+      "cell": "EW17",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 171.47869739999996,
+      "actual": 183.73124639999995
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 18,
+      "cell": "EW18",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 204.6555607,
+      "actual": 218.37081709999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 19,
+      "cell": "EW19",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 172.4190093,
+      "actual": 184.5100906
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 20,
+      "cell": "EW20",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 154.05918199999996,
+      "actual": 175.63886519999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 21,
+      "cell": "EW21",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 168.23984529999998,
+      "actual": 181.1762575
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 22,
+      "cell": "EW22",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 175.98079679999998,
+      "actual": 190.81682899999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 23,
+      "cell": "EW23",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 171.59267459999998,
+      "actual": 190.74084419999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 24,
+      "cell": "EW24",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 115.9338086,
+      "actual": 127.37901910000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 25,
+      "cell": "EW25",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 100.73684859999999,
+      "actual": 116.14276679999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 26,
+      "cell": "EW26",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 88.8832198,
+      "actual": 101.29723650000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 27,
+      "cell": "EW27",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 86.41371379999998,
+      "actual": 105.84682639999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 28,
+      "cell": "EW28",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 145.87181979999997,
+      "actual": 163.67125919999995
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 29,
+      "cell": "EW29",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 176.60767140000002,
+      "actual": 193.2958331
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 30,
+      "cell": "EW30",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 187.3500225,
+      "actual": 207.80892989999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 31,
+      "cell": "EW31",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 198.7477425,
+      "actual": 220.85931929999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 32,
+      "cell": "EW32",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 160.4514033,
+      "actual": 180.6158696
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 33,
+      "cell": "EW33",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 147.0780785,
+      "actual": 164.8490236
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 34,
+      "cell": "EW34",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 193.08687489999997,
+      "actual": 209.11016959999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "row": 36,
+      "cell": "EW36",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 4398.475129,
+      "actual": 4891.787446799999
+    },
+    {
+      "site": "Yolokfx",
+      "row": 29,
+      "cell": "AGT29",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 0.10350593389461682,
+      "actual": 0.11548052529203943
+    },
+    {
+      "site": "Yolokfx",
+      "row": 30,
+      "cell": "AGT30",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 52.0311391446502,
+      "actual": 58.05061655774208
+    },
+    {
+      "site": "Yolokfx",
+      "row": 31,
+      "cell": "AGT31",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 59.761738582404384,
+      "actual": 66.67556829049127
+    },
+    {
+      "site": "Yolokfx",
+      "row": 32,
+      "cell": "AGT32",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 54.72229342591023,
+      "actual": 61.0531102153351
+    },
+    {
+      "site": "Yolokfx",
+      "row": 33,
+      "cell": "AGT33",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 57.74337287145935,
+      "actual": 64.4236980472965
+    },
+    {
+      "site": "Yolokfx",
+      "row": 34,
+      "cell": "AGT34",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 134.7129729638438,
+      "actual": 150.29790366758934
+    },
+    {
+      "site": "Yolokfx",
+      "row": 35,
+      "cell": "AGT35",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 137.4235346077091,
+      "actual": 153.32204992367463
+    },
+    {
+      "site": "Yolokfx",
+      "row": 36,
+      "cell": "AGT36",
+      "type": "RECEITA_NET_TOTAL",
+      "expected": 496.4985575298717,
+      "actual": 553.9384272274209
+    }
+  ],
+  "reference_completeness_issues": [
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "cell": "M36",
+      "type": "net_refs",
+      "missing": [
+        "G36"
+      ],
+      "formula": "=SUM(M5:M35)"
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "cell": "N36",
+      "type": "tax_refs",
+      "missing": [
+        "H36"
+      ],
+      "formula": "=SUM(N5:N35)"
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "cell": "P36",
+      "type": "invalid_refs",
+      "missing": [
+        "F36"
+      ],
+      "formula": "=SUM(P5:P35)"
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "cell": "AE36",
+      "type": "net_refs",
+      "missing": [
+        "Y36"
+      ],
+      "formula": "=SUM(AE5:AE35)"
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "cell": "AF36",
+      "type": "tax_refs",
+      "missing": [
+        "Z36"
+      ],
+      "formula": "=SUM(AF5:AF35)"
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "cell": "AH36",
+      "type": "invalid_refs",
+      "missing": [
+        "X36"
+      ],
+      "formula": "=SUM(AH5:AH35)"
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "cell": "AW36",
+      "type": "net_refs",
+      "missing": [
+        "AQ36"
+      ],
+      "formula": "=SUM(AW5:AW35)"
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "cell": "AX36",
+      "type": "tax_refs",
+      "missing": [
+        "AR36"
+      ],
+      "formula": "=SUM(AX5:AX35)"
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "cell": "AZ36",
+      "type": "invalid_refs",
+      "missing": [
+        "AP36"
+      ],
+      "formula": "=SUM(AZ5:AZ35)"
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "cell": "CG36",
+      "type": "net_refs",
+      "missing": [
+        "BI36",
+        "BR36",
+        "CA36"
+      ],
+      "formula": "=SUM(CG5:CG35)"
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "cell": "CH36",
+      "type": "tax_refs",
+      "missing": [
+        "BJ36",
+        "BS36",
+        "CB36"
+      ],
+      "formula": "=SUM(CH5:CH35)"
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "cell": "CJ36",
+      "type": "invalid_refs",
+      "missing": [
+        "BH36",
+        "BQ36",
+        "BZ36"
+      ],
+      "formula": "=SUM(CJ5:CJ35)"
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "cell": "CM36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "BP36"
+      ],
+      "formula": "=IF(ABS(CK36)=0,\"\",IF(OR(SUM(BG36,BY36)=0,AND(BG36=\"\",BY36=\"\")),-1,((BG36+BY36)/ABS(CK36))-1))\n"
+    },
+    {
+      "site": "TopFeed Finanzas",
+      "status": "ATIVO",
+      "cell": "CY36",
+      "type": "net_refs",
+      "missing": [
+        "CS36"
+      ],
+      "formula": "=SUM(CY5:CY35)"
+    },
+    {
+      "site": "TopFeed Finanzas",
+      "status": "ATIVO",
+      "cell": "CZ36",
+      "type": "tax_refs",
+      "missing": [
+        "CT36"
+      ],
+      "formula": "=SUM(CZ5:CZ35)"
+    },
+    {
+      "site": "TopFeed Finanzas",
+      "status": "ATIVO",
+      "cell": "DB36",
+      "type": "invalid_refs",
+      "missing": [
+        "CR36"
+      ],
+      "formula": "=SUM(DB5:DB35)"
+    },
+    {
+      "site": "Wantabrand Finance",
+      "status": "INATIVO",
+      "cell": "DX36",
+      "type": "net_refs",
+      "missing": [
+        "DJ36",
+        "DR36"
+      ],
+      "formula": "=SUM(DX5:DX35)"
+    },
+    {
+      "site": "Wantabrand Finance",
+      "status": "INATIVO",
+      "cell": "DY36",
+      "type": "tax_refs",
+      "missing": [
+        "DK36",
+        "DS36"
+      ],
+      "formula": "=SUM(DY5:DY35)"
+    },
+    {
+      "site": "Wantabrand Finance",
+      "status": "INATIVO",
+      "cell": "EA36",
+      "type": "invalid_refs",
+      "missing": [
+        "DI36",
+        "DQ36"
+      ],
+      "formula": "=SUM(EA5:EA35)"
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "cell": "EW36",
+      "type": "net_refs",
+      "missing": [
+        "EI36"
+      ],
+      "formula": "=SUM(EW5:EW35)"
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "cell": "EX36",
+      "type": "tax_refs",
+      "missing": [
+        "EJ36",
+        "ER36"
+      ],
+      "formula": "=SUM(EX5:EX35)"
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "cell": "EZ36",
+      "type": "invalid_refs",
+      "missing": [
+        "EH36",
+        "EP36"
+      ],
+      "formula": "=SUM(EZ5:EZ35)"
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "cell": "FO36",
+      "type": "net_refs",
+      "missing": [
+        "FI36"
+      ],
+      "formula": "=SUM(FO5:FO35)"
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "cell": "FP36",
+      "type": "tax_refs",
+      "missing": [
+        "FJ36"
+      ],
+      "formula": "=SUM(FP5:FP35)"
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "cell": "FR36",
+      "type": "invalid_refs",
+      "missing": [
+        "FH36"
+      ],
+      "formula": "=SUM(FR5:FR35)"
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "cell": "GG36",
+      "type": "net_refs",
+      "missing": [
+        "GA36"
+      ],
+      "formula": "=SUM(GG5:GG35)"
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "cell": "GH36",
+      "type": "tax_refs",
+      "missing": [
+        "GB36"
+      ],
+      "formula": "=SUM(GH5:GH35)"
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "cell": "GJ36",
+      "type": "invalid_refs",
+      "missing": [
+        "FZ36"
+      ],
+      "formula": "=SUM(GJ5:GJ35)"
+    },
+    {
+      "site": "WavesBee",
+      "status": "INATIVO",
+      "cell": "GY36",
+      "type": "net_refs",
+      "missing": [
+        "GS36"
+      ],
+      "formula": "=SUM(GY5:GY35)"
+    },
+    {
+      "site": "WavesBee",
+      "status": "INATIVO",
+      "cell": "GZ36",
+      "type": "tax_refs",
+      "missing": [
+        "GT36"
+      ],
+      "formula": "=SUM(GZ5:GZ35)"
+    },
+    {
+      "site": "WavesBee",
+      "status": "INATIVO",
+      "cell": "HB36",
+      "type": "invalid_refs",
+      "missing": [
+        "GR36"
+      ],
+      "formula": "=SUM(HB5:HB35)"
+    },
+    {
+      "site": "Zuout",
+      "status": "ATIVO",
+      "cell": "HZ36",
+      "type": "net_refs",
+      "missing": [
+        "HK36",
+        "HT36"
+      ],
+      "formula": "=SUM(HZ5:HZ35)"
+    },
+    {
+      "site": "Zuout",
+      "status": "ATIVO",
+      "cell": "IA36",
+      "type": "tax_refs",
+      "missing": [
+        "HL36",
+        "HU36"
+      ],
+      "formula": "=SUM(IA5:IA35)"
+    },
+    {
+      "site": "Zuout",
+      "status": "ATIVO",
+      "cell": "IC36",
+      "type": "invalid_refs",
+      "missing": [
+        "HJ36",
+        "HS36"
+      ],
+      "formula": "=SUM(IC5:IC35)"
+    },
+    {
+      "site": "Zuout Finanzas",
+      "status": "ATIVO",
+      "cell": "IR36",
+      "type": "net_refs",
+      "missing": [
+        "IL36"
+      ],
+      "formula": "=SUM(IR5:IR35)"
+    },
+    {
+      "site": "Zuout Finanzas",
+      "status": "ATIVO",
+      "cell": "IS36",
+      "type": "tax_refs",
+      "missing": [
+        "IM36"
+      ],
+      "formula": "=SUM(IS5:IS35)"
+    },
+    {
+      "site": "Zuout Finanzas",
+      "status": "ATIVO",
+      "cell": "IU36",
+      "type": "invalid_refs",
+      "missing": [
+        "IK36"
+      ],
+      "formula": "=SUM(IU5:IU35)"
+    },
+    {
+      "site": "Lyzmo",
+      "status": "ATIVO",
+      "cell": "JS36",
+      "type": "net_refs",
+      "missing": [
+        "JD36",
+        "JM36"
+      ],
+      "formula": "=SUM(JS5:JS35)"
+    },
+    {
+      "site": "Lyzmo",
+      "status": "ATIVO",
+      "cell": "JT36",
+      "type": "tax_refs",
+      "missing": [
+        "JE36",
+        "JN36"
+      ],
+      "formula": "=SUM(JT5:JT35)"
+    },
+    {
+      "site": "Lyzmo",
+      "status": "ATIVO",
+      "cell": "JV36",
+      "type": "invalid_refs",
+      "missing": [
+        "JC36",
+        "JL36"
+      ],
+      "formula": "=SUM(JV5:JV35)"
+    },
+    {
+      "site": "Lyzmo Finanzas",
+      "status": "ATIVO",
+      "cell": "KK36",
+      "type": "net_refs",
+      "missing": [
+        "KE36"
+      ],
+      "formula": "=SUM(KK5:KK35)"
+    },
+    {
+      "site": "Lyzmo Finanzas",
+      "status": "ATIVO",
+      "cell": "KL36",
+      "type": "tax_refs",
+      "missing": [
+        "KF36"
+      ],
+      "formula": "=SUM(KL5:KL35)"
+    },
+    {
+      "site": "Lyzmo Finanzas",
+      "status": "ATIVO",
+      "cell": "KN36",
+      "type": "invalid_refs",
+      "missing": [
+        "KD36"
+      ],
+      "formula": "=SUM(KN5:KN35)"
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "cell": "LU36",
+      "type": "net_refs",
+      "missing": [
+        "KW36",
+        "LF36",
+        "LO36"
+      ],
+      "formula": "=SUM(LU5:LU35)"
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "cell": "LV36",
+      "type": "tax_refs",
+      "missing": [
+        "KX36",
+        "LG36",
+        "LP36"
+      ],
+      "formula": "=SUM(LV5:LV35)"
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "cell": "LX36",
+      "type": "invalid_refs",
+      "missing": [
+        "KV36",
+        "LE36",
+        "LN36"
+      ],
+      "formula": "=SUM(LX5:LX35)"
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "cell": "MA36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "LD36"
+      ],
+      "formula": "=IF(ABS(LY36)=0,\"\",IF(OR(SUM(KU36,LM36)=0,AND(KU36=\"\",LM36=\"\")),-1,((KU36+LM36)/ABS(LY36))-1))\n"
+    },
+    {
+      "site": "Eggbev Finanzas",
+      "status": "ATIVO",
+      "cell": "MM36",
+      "type": "net_refs",
+      "missing": [
+        "MG36"
+      ],
+      "formula": "=SUM(MM5:MM35)"
+    },
+    {
+      "site": "Eggbev Finanzas",
+      "status": "ATIVO",
+      "cell": "MN36",
+      "type": "tax_refs",
+      "missing": [
+        "MH36"
+      ],
+      "formula": "=SUM(MN5:MN35)"
+    },
+    {
+      "site": "Eggbev Finanzas",
+      "status": "ATIVO",
+      "cell": "MP36",
+      "type": "invalid_refs",
+      "missing": [
+        "MF36"
+      ],
+      "formula": "=SUM(MP5:MP35)"
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "cell": "NW36",
+      "type": "net_refs",
+      "missing": [
+        "MY36",
+        "NH36",
+        "NQ36"
+      ],
+      "formula": "=SUM(NW5:NW35)"
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "cell": "NX36",
+      "type": "tax_refs",
+      "missing": [
+        "MZ36",
+        "NI36",
+        "NR36"
+      ],
+      "formula": "=SUM(NX5:NX35)"
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "cell": "NZ36",
+      "type": "invalid_refs",
+      "missing": [
+        "MX36",
+        "NG36",
+        "NP36"
+      ],
+      "formula": "=SUM(NZ5:NZ35)"
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "cell": "OC36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "NF36"
+      ],
+      "formula": "=IF(ABS(OA36)=0,\"\",IF(OR(SUM(MW36,NO36)=0,AND(MW36=\"\",NO36=\"\")),-1,((MW36+NO36)/ABS(OA36))-1))\n"
+    },
+    {
+      "site": "Cliquet Finanzas",
+      "status": "ATIVO",
+      "cell": "OO36",
+      "type": "net_refs",
+      "missing": [
+        "OI36"
+      ],
+      "formula": "=SUM(OO5:OO35)"
+    },
+    {
+      "site": "Cliquet Finanzas",
+      "status": "ATIVO",
+      "cell": "OP36",
+      "type": "tax_refs",
+      "missing": [
+        "OJ36"
+      ],
+      "formula": "=SUM(OP5:OP35)"
+    },
+    {
+      "site": "Cliquet Finanzas",
+      "status": "ATIVO",
+      "cell": "OR36",
+      "type": "invalid_refs",
+      "missing": [
+        "OH36"
+      ],
+      "formula": "=SUM(OR5:OR35)"
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "cell": "PY36",
+      "type": "net_refs",
+      "missing": [
+        "PA36",
+        "PJ36",
+        "PS36"
+      ],
+      "formula": "=SUM(PY5:PY35)"
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "cell": "PZ36",
+      "type": "tax_refs",
+      "missing": [
+        "PB36",
+        "PK36",
+        "PT36"
+      ],
+      "formula": "=SUM(PZ5:PZ35)"
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "cell": "QB36",
+      "type": "invalid_refs",
+      "missing": [
+        "OZ36",
+        "PI36",
+        "PR36"
+      ],
+      "formula": "=SUM(QB5:QB35)"
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "cell": "QE36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "PH36"
+      ],
+      "formula": "=IF(ABS(QC36)=0,\"\",IF(OR(SUM(OY36,PQ36)=0,AND(OY36=\"\",PQ36=\"\")),-1,((OY36+PQ36)/ABS(QC36))-1))\n"
+    },
+    {
+      "site": "Newsoun Finanzas",
+      "status": "ATIVO",
+      "cell": "QQ36",
+      "type": "net_refs",
+      "missing": [
+        "QK36"
+      ],
+      "formula": "=SUM(QQ5:QQ35)"
+    },
+    {
+      "site": "Newsoun Finanzas",
+      "status": "ATIVO",
+      "cell": "QR36",
+      "type": "tax_refs",
+      "missing": [
+        "QL36"
+      ],
+      "formula": "=SUM(QR5:QR35)"
+    },
+    {
+      "site": "Newsoun Finanzas",
+      "status": "ATIVO",
+      "cell": "QT36",
+      "type": "invalid_refs",
+      "missing": [
+        "QJ36"
+      ],
+      "formula": "=SUM(QT5:QT35)"
+    },
+    {
+      "site": "Newsoun DE",
+      "status": "ATIVO",
+      "cell": "RI36",
+      "type": "net_refs",
+      "missing": [
+        "RC36"
+      ],
+      "formula": "=SUM(RI5:RI35)"
+    },
+    {
+      "site": "Newsoun DE",
+      "status": "ATIVO",
+      "cell": "RJ36",
+      "type": "tax_refs",
+      "missing": [
+        "RD36"
+      ],
+      "formula": "=SUM(RJ5:RJ35)"
+    },
+    {
+      "site": "Newsoun DE",
+      "status": "ATIVO",
+      "cell": "RL36",
+      "type": "invalid_refs",
+      "missing": [
+        "RB36"
+      ],
+      "formula": "=SUM(RL5:RL35)"
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "cell": "SS36",
+      "type": "net_refs",
+      "missing": [
+        "RU36",
+        "SD36",
+        "SM36"
+      ],
+      "formula": "=SUM(SS5:SS35)"
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "cell": "ST36",
+      "type": "tax_refs",
+      "missing": [
+        "RV36",
+        "SE36",
+        "SN36"
+      ],
+      "formula": "=SUM(ST5:ST35)"
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "cell": "SV36",
+      "type": "invalid_refs",
+      "missing": [
+        "RT36",
+        "SC36",
+        "SL36"
+      ],
+      "formula": "=SUM(SV5:SV35)"
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "cell": "SY36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "SB36"
+      ],
+      "formula": "=IF(ABS(SW36)=0,\"\",IF(OR(SUM(RS36,SK36)=0,AND(RS36=\"\",SK36=\"\")),-1,((RS36+SK36)/ABS(SW36))-1))\n"
+    },
+    {
+      "site": "Openzed Finanzas",
+      "status": "ATIVO",
+      "cell": "TT36",
+      "type": "net_refs",
+      "missing": [
+        "TE36",
+        "TN36"
+      ],
+      "formula": "=SUM(TT5:TT35)"
+    },
+    {
+      "site": "Openzed Finanzas",
+      "status": "ATIVO",
+      "cell": "TU36",
+      "type": "tax_refs",
+      "missing": [
+        "TF36",
+        "TO36"
+      ],
+      "formula": "=SUM(TU5:TU35)"
+    },
+    {
+      "site": "Openzed Finanzas",
+      "status": "ATIVO",
+      "cell": "TW36",
+      "type": "invalid_refs",
+      "missing": [
+        "TD36",
+        "TM36"
+      ],
+      "formula": "=SUM(TW5:TW35)"
+    },
+    {
+      "site": "Zytiva",
+      "status": "ATIVO",
+      "cell": "UU36",
+      "type": "net_refs",
+      "missing": [
+        "UF36",
+        "UO36"
+      ],
+      "formula": "=SUM(UU5:UU35)"
+    },
+    {
+      "site": "Zytiva",
+      "status": "ATIVO",
+      "cell": "UV36",
+      "type": "tax_refs",
+      "missing": [
+        "UG36",
+        "UP36"
+      ],
+      "formula": "=SUM(UV5:UV35)"
+    },
+    {
+      "site": "Zytiva",
+      "status": "ATIVO",
+      "cell": "UX36",
+      "type": "invalid_refs",
+      "missing": [
+        "UE36",
+        "UN36"
+      ],
+      "formula": "=SUM(UX5:UX35)"
+    },
+    {
+      "site": "Zytiva Finanzas",
+      "status": "ATIVO",
+      "cell": "VV36",
+      "type": "net_refs",
+      "missing": [
+        "VG36",
+        "VP36"
+      ],
+      "formula": "=SUM(VV5:VV35)"
+    },
+    {
+      "site": "Zytiva Finanzas",
+      "status": "ATIVO",
+      "cell": "VW36",
+      "type": "tax_refs",
+      "missing": [
+        "VH36",
+        "VQ36"
+      ],
+      "formula": "=SUM(VW5:VW35)"
+    },
+    {
+      "site": "Zytiva Finanzas",
+      "status": "ATIVO",
+      "cell": "VY36",
+      "type": "invalid_refs",
+      "missing": [
+        "VF36",
+        "VO36"
+      ],
+      "formula": "=SUM(VY5:VY35)"
+    },
+    {
+      "site": "FinanceAdx",
+      "status": "ATIVO",
+      "cell": "XX36",
+      "type": "net_refs",
+      "missing": [
+        "WH36",
+        "WQ36",
+        "WZ36",
+        "XI36",
+        "XR36"
+      ],
+      "formula": "=SUM(XX5:XX35)"
+    },
+    {
+      "site": "FinanceAdx",
+      "status": "ATIVO",
+      "cell": "XY36",
+      "type": "tax_refs",
+      "missing": [
+        "WI36",
+        "WR36",
+        "XA36",
+        "XJ36",
+        "XS36"
+      ],
+      "formula": "=SUM(XY5:XY35)"
+    },
+    {
+      "site": "FinanceAdx",
+      "status": "ATIVO",
+      "cell": "YA36",
+      "type": "invalid_refs",
+      "missing": [
+        "WG36",
+        "WP36",
+        "WY36",
+        "XH36",
+        "XQ36"
+      ],
+      "formula": "=SUM(YA5:YA35)"
+    },
+    {
+      "site": "Ducapes",
+      "status": "INATIVO",
+      "cell": "YP36",
+      "type": "net_refs",
+      "missing": [
+        "YJ36"
+      ],
+      "formula": "=SUM(YP5:YP35)"
+    },
+    {
+      "site": "Ducapes",
+      "status": "INATIVO",
+      "cell": "YQ36",
+      "type": "tax_refs",
+      "missing": [
+        "YK36"
+      ],
+      "formula": "=SUM(YQ5:YQ35)"
+    },
+    {
+      "site": "Ducapes",
+      "status": "INATIVO",
+      "cell": "YS36",
+      "type": "invalid_refs",
+      "missing": [
+        "YI36"
+      ],
+      "formula": "=SUM(YS5:YS35)"
+    },
+    {
+      "site": "Ducapes Finance",
+      "status": "INATIVO",
+      "cell": "ZH36",
+      "type": "net_refs",
+      "missing": [
+        "ZB36"
+      ],
+      "formula": "=SUM(ZH5:ZH35)"
+    },
+    {
+      "site": "Ducapes Finance",
+      "status": "INATIVO",
+      "cell": "ZI36",
+      "type": "tax_refs",
+      "missing": [
+        "ZC36"
+      ],
+      "formula": "=SUM(ZI5:ZI35)"
+    },
+    {
+      "site": "Ducapes Finance",
+      "status": "INATIVO",
+      "cell": "ZK36",
+      "type": "invalid_refs",
+      "missing": [
+        "ZA36"
+      ],
+      "formula": "=SUM(ZK5:ZK35)"
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "cell": "AAW36",
+      "type": "net_refs",
+      "missing": [
+        "ZS36",
+        "AAA36",
+        "AAI36",
+        "AAQ36"
+      ],
+      "formula": "=SUM(AAW5:AAW35)"
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "cell": "AAX36",
+      "type": "tax_refs",
+      "missing": [
+        "ZT36",
+        "AAB36",
+        "AAJ36",
+        "AAR36"
+      ],
+      "formula": "=SUM(AAX5:AAX35)"
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "cell": "AAZ36",
+      "type": "invalid_refs",
+      "missing": [
+        "ZR36",
+        "ZZ36",
+        "AAH36",
+        "AAP36"
+      ],
+      "formula": "=SUM(AAZ5:AAZ35)"
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "cell": "ABC36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "AAG36"
+      ],
+      "formula": "=IF(ABS(ABA36)=0,\"\",IF(OR(SUM(ZQ36,ZY36,AAO36)=0,AND(ZQ36=\"\",ZY36=\"\",AAO36=\"\")),-1,((ZQ36+ZY36+AAO36)/ABS(ABA36))-1))\n"
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "cell": "ACG36",
+      "type": "net_refs",
+      "missing": [
+        "ABI36",
+        "ABR36",
+        "ACA36"
+      ],
+      "formula": "=SUM(ACG5:ACG35)"
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "cell": "ACH36",
+      "type": "tax_refs",
+      "missing": [
+        "ABJ36",
+        "ABS36",
+        "ACB36"
+      ],
+      "formula": "=SUM(ACH5:ACH35)"
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "cell": "ACJ36",
+      "type": "invalid_refs",
+      "missing": [
+        "ABH36",
+        "ABQ36",
+        "ABZ36"
+      ],
+      "formula": "=SUM(ACJ5:ACJ35)"
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "cell": "ACM36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "ABG36",
+        "ABP36"
+      ],
+      "formula": "=IF(ABS(ACK36)=0,\"\",IF(OR(SUM(ABJ36,ABR36,ABY36)=0,AND(ABJ36=\"\",ABR36=\"\",ABY36=\"\")),-1,((ABJ36+ABR36+ABY36)/ABS(ACK36))-1))\n"
+    },
+    {
+      "site": "Marevelx",
+      "status": "ATIVO",
+      "cell": "ADQ36",
+      "type": "net_refs",
+      "missing": [
+        "ACS36",
+        "ADB36",
+        "ADK36"
+      ],
+      "formula": "=SUM(ADQ5:ADQ35)"
+    },
+    {
+      "site": "Marevelx",
+      "status": "ATIVO",
+      "cell": "ADR36",
+      "type": "tax_refs",
+      "missing": [
+        "ACT36",
+        "ADC36",
+        "ADL36"
+      ],
+      "formula": "=SUM(ADR5:ADR35)"
+    },
+    {
+      "site": "Marevelx",
+      "status": "ATIVO",
+      "cell": "ADT36",
+      "type": "invalid_refs",
+      "missing": [
+        "ACR36",
+        "ADA36",
+        "ADJ36"
+      ],
+      "formula": "=SUM(ADT5:ADT35)"
+    },
+    {
+      "site": "Xyvlov",
+      "status": "ATIVO",
+      "cell": "AFA36",
+      "type": "net_refs",
+      "missing": [
+        "AEC36",
+        "AEL36",
+        "AEU36"
+      ],
+      "formula": "=SUM(AFA5:AFA35)"
+    },
+    {
+      "site": "Xyvlov",
+      "status": "ATIVO",
+      "cell": "AFB36",
+      "type": "tax_refs",
+      "missing": [
+        "AED36",
+        "AEM36",
+        "AEV36"
+      ],
+      "formula": "=SUM(AFB5:AFB35)"
+    },
+    {
+      "site": "Xyvlov",
+      "status": "ATIVO",
+      "cell": "AFD36",
+      "type": "invalid_refs",
+      "missing": [
+        "AEB36",
+        "AEK36",
+        "AET36"
+      ],
+      "formula": "=SUM(AFD5:AFD35)"
+    },
+    {
+      "site": "Infinitynexx",
+      "status": "ATIVO",
+      "cell": "AGB36",
+      "type": "net_refs",
+      "missing": [
+        "AFM36",
+        "AFV36"
+      ],
+      "formula": "=SUM(AGB5:AGB35)"
+    },
+    {
+      "site": "Infinitynexx",
+      "status": "ATIVO",
+      "cell": "AGC36",
+      "type": "tax_refs",
+      "missing": [
+        "AFN36",
+        "AFW36"
+      ],
+      "formula": "=SUM(AGC5:AGC35)"
+    },
+    {
+      "site": "Infinitynexx",
+      "status": "ATIVO",
+      "cell": "AGE36",
+      "type": "invalid_refs",
+      "missing": [
+        "AFL36",
+        "AFU36"
+      ],
+      "formula": "=SUM(AGE5:AGE35)"
+    },
+    {
+      "site": "Yolokfx",
+      "status": "ATIVO",
+      "cell": "AGT36",
+      "type": "net_refs",
+      "missing": [
+        "AGN36"
+      ],
+      "formula": "=SUM(AGT5:AGT35)"
+    },
+    {
+      "site": "Yolokfx",
+      "status": "ATIVO",
+      "cell": "AGU36",
+      "type": "tax_refs",
+      "missing": [
+        "AGO36"
+      ],
+      "formula": "=SUM(AGU5:AGU35)"
+    },
+    {
+      "site": "Yolokfx",
+      "status": "ATIVO",
+      "cell": "AGW36",
+      "type": "invalid_refs",
+      "missing": [
+        "AGM36"
+      ],
+      "formula": "=SUM(AGW5:AGW35)"
+    },
+    {
+      "site": "Vizioid",
+      "status": "INATIVO",
+      "cell": "AHU36",
+      "type": "net_refs",
+      "missing": [
+        "AHF36",
+        "AHO36"
+      ],
+      "formula": "=SUM(AHU5:AHU35)"
+    },
+    {
+      "site": "Vizioid",
+      "status": "INATIVO",
+      "cell": "AHV36",
+      "type": "tax_refs",
+      "missing": [
+        "AHG36",
+        "AHP36"
+      ],
+      "formula": "=SUM(AHV5:AHV35)"
+    },
+    {
+      "site": "Vizioid",
+      "status": "INATIVO",
+      "cell": "AHX36",
+      "type": "invalid_refs",
+      "missing": [
+        "AHE36",
+        "AHN36"
+      ],
+      "formula": "=SUM(AHX5:AHX35)"
+    },
+    {
+      "site": "GamingAdx",
+      "status": "ATIVO",
+      "cell": "AIM36",
+      "type": "net_refs",
+      "missing": [
+        "AIG36"
+      ],
+      "formula": "=SUM(AIM5:AIM35)"
+    },
+    {
+      "site": "GamingAdx",
+      "status": "ATIVO",
+      "cell": "AIN36",
+      "type": "tax_refs",
+      "missing": [
+        "AIH36"
+      ],
+      "formula": "=SUM(AIN5:AIN35)"
+    },
+    {
+      "site": "GamingAdx",
+      "status": "ATIVO",
+      "cell": "AIP36",
+      "type": "invalid_refs",
+      "missing": [
+        "AIF36"
+      ],
+      "formula": "=SUM(AIP5:AIP35)"
+    },
+    {
+      "site": "GameZoneAd",
+      "status": "ATIVO",
+      "cell": "AJD36",
+      "type": "net_refs",
+      "missing": [
+        "AIX36"
+      ],
+      "formula": "=SUM(AJD5:AJD35)"
+    },
+    {
+      "site": "GameZoneAd",
+      "status": "ATIVO",
+      "cell": "AJE36",
+      "type": "tax_refs",
+      "missing": [
+        "AIY36"
+      ],
+      "formula": "=SUM(AJE5:AJE35)"
+    },
+    {
+      "site": "GameZoneAd",
+      "status": "ATIVO",
+      "cell": "AJG36",
+      "type": "invalid_refs",
+      "missing": [
+        "AIW36"
+      ],
+      "formula": "=SUM(AJG5:AJG35)"
+    },
+    {
+      "site": "CreditoParaVeiculo",
+      "status": "ATIVO",
+      "cell": "AJU36",
+      "type": "net_refs",
+      "missing": [
+        "AJO36"
+      ],
+      "formula": "=SUM(AJU5:AJU35)"
+    },
+    {
+      "site": "CreditoParaVeiculo",
+      "status": "ATIVO",
+      "cell": "AJV36",
+      "type": "tax_refs",
+      "missing": [
+        "AJP36"
+      ],
+      "formula": "=SUM(AJV5:AJV35)"
+    },
+    {
+      "site": "CreditoParaVeiculo",
+      "status": "ATIVO",
+      "cell": "AJX36",
+      "type": "invalid_refs",
+      "missing": [
+        "AJN36"
+      ],
+      "formula": "=SUM(AJX5:AJX35)"
+    },
+    {
+      "site": "FinanciamentoAutoAdx",
+      "status": "INATIVO",
+      "cell": "AKL36",
+      "type": "net_refs",
+      "missing": [
+        "AKF36"
+      ],
+      "formula": "=SUM(AKL5:AKL35)"
+    },
+    {
+      "site": "FinanciamentoAutoAdx",
+      "status": "INATIVO",
+      "cell": "AKM36",
+      "type": "tax_refs",
+      "missing": [
+        "AKG36"
+      ],
+      "formula": "=SUM(AKM5:AKM35)"
+    },
+    {
+      "site": "FinanciamentoAutoAdx",
+      "status": "INATIVO",
+      "cell": "AKO36",
+      "type": "invalid_refs",
+      "missing": [
+        "AKE36"
+      ],
+      "formula": "=SUM(AKO5:AKO35)"
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "cell": "ALC36",
+      "type": "net_refs",
+      "missing": [
+        "AKW36"
+      ],
+      "formula": "=SUM(ALC5:ALC35)"
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "cell": "ALD36",
+      "type": "tax_refs",
+      "missing": [
+        "AKX36"
+      ],
+      "formula": "=SUM(ALD5:ALD35)"
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "cell": "ALF36",
+      "type": "invalid_refs",
+      "missing": [
+        "AKV36"
+      ],
+      "formula": "=SUM(ALF5:ALF35)"
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "cell": "ALI36",
+      "type": "roi_gross_missing_gross",
+      "missing": [
+        "AKU36"
+      ],
+      "formula": "=IF(ABS(ALG36)=0,\"\",IF((ABS(ALG36)+ABS(ALD36)+ABS(ALE36))=0,\"\",IF(OR(ALC36=\"\",ALC36=0),-1,(ALC36/(ABS(ALG36)+ABS(ALD36)+ABS(ALE36)))-1)))"
+    },
+    {
+      "site": "CarCreditAd",
+      "status": "INATIVO",
+      "cell": "ALT36",
+      "type": "net_refs",
+      "missing": [
+        "ALN36"
+      ],
+      "formula": "=SUM(ALT5:ALT35)"
+    },
+    {
+      "site": "CarCreditAd",
+      "status": "INATIVO",
+      "cell": "ALU36",
+      "type": "tax_refs",
+      "missing": [
+        "ALO36"
+      ],
+      "formula": "=SUM(ALU5:ALU35)"
+    },
+    {
+      "site": "CarCreditAd",
+      "status": "INATIVO",
+      "cell": "ALW36",
+      "type": "invalid_refs",
+      "missing": [
+        "ALM36"
+      ],
+      "formula": "=SUM(ALW5:ALW35)"
+    }
+  ],
+  "groups": [
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "start": "D",
+      "end": "T"
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "start": "V",
+      "end": "AL"
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "start": "AN",
+      "end": "BD"
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "start": "BF",
+      "end": "CN"
+    },
+    {
+      "site": "TopFeed Finanzas",
+      "status": "ATIVO",
+      "start": "CP",
+      "end": "DF"
+    },
+    {
+      "site": "Wantabrand Finance",
+      "status": "INATIVO",
+      "start": "DH",
+      "end": "EE"
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "start": "EG",
+      "end": "FD"
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "start": "FF",
+      "end": "FV"
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "start": "FX",
+      "end": "GN"
+    },
+    {
+      "site": "WavesBee",
+      "status": "INATIVO",
+      "start": "GP",
+      "end": "HF"
+    },
+    {
+      "site": "Zuout",
+      "status": "ATIVO",
+      "start": "HH",
+      "end": "IG"
+    },
+    {
+      "site": "Zuout Finanzas",
+      "status": "ATIVO",
+      "start": "II",
+      "end": "IY"
+    },
+    {
+      "site": "Lyzmo",
+      "status": "ATIVO",
+      "start": "JA",
+      "end": "JZ"
+    },
+    {
+      "site": "Lyzmo Finanzas",
+      "status": "ATIVO",
+      "start": "KB",
+      "end": "KR"
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "start": "KT",
+      "end": "MB"
+    },
+    {
+      "site": "Eggbev Finanzas",
+      "status": "ATIVO",
+      "start": "MD",
+      "end": "MT"
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "start": "MV",
+      "end": "OD"
+    },
+    {
+      "site": "Cliquet Finanzas",
+      "status": "ATIVO",
+      "start": "OF",
+      "end": "OV"
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "start": "OX",
+      "end": "QF"
+    },
+    {
+      "site": "Newsoun Finanzas",
+      "status": "ATIVO",
+      "start": "QH",
+      "end": "QX"
+    },
+    {
+      "site": "Newsoun DE",
+      "status": "ATIVO",
+      "start": "QZ",
+      "end": "RP"
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "start": "RR",
+      "end": "SZ"
+    },
+    {
+      "site": "Openzed Finanzas",
+      "status": "ATIVO",
+      "start": "TB",
+      "end": "UA"
+    },
+    {
+      "site": "Zytiva",
+      "status": "ATIVO",
+      "start": "UC",
+      "end": "VB"
+    },
+    {
+      "site": "Zytiva Finanzas",
+      "status": "ATIVO",
+      "start": "VD",
+      "end": "WC"
+    },
+    {
+      "site": "FinanceAdx",
+      "status": "ATIVO",
+      "start": "WE",
+      "end": "YE"
+    },
+    {
+      "site": "Ducapes",
+      "status": "INATIVO",
+      "start": "YG",
+      "end": "YW"
+    },
+    {
+      "site": "Ducapes Finance",
+      "status": "INATIVO",
+      "start": "YY",
+      "end": "ZO"
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "start": "ZQ",
+      "end": "ABD"
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "start": "ABF",
+      "end": "ACN"
+    },
+    {
+      "site": "Marevelx",
+      "status": "ATIVO",
+      "start": "ACP",
+      "end": "ADX"
+    },
+    {
+      "site": "Xyvlov",
+      "status": "ATIVO",
+      "start": "ADZ",
+      "end": "AFH"
+    },
+    {
+      "site": "Infinitynexx",
+      "status": "ATIVO",
+      "start": "AFJ",
+      "end": "AGI"
+    },
+    {
+      "site": "Yolokfx",
+      "status": "ATIVO",
+      "start": "AGK",
+      "end": "AHA"
+    },
+    {
+      "site": "Vizioid",
+      "status": "INATIVO",
+      "start": "AHC",
+      "end": "AIB"
+    },
+    {
+      "site": "GamingAdx",
+      "status": "ATIVO",
+      "start": "AID",
+      "end": "AIT"
+    },
+    {
+      "site": "GameZoneAd",
+      "status": "ATIVO",
+      "start": "AIV",
+      "end": "AJK"
+    },
+    {
+      "site": "CreditoParaVeiculo",
+      "status": "ATIVO",
+      "start": "AJM",
+      "end": "AKB"
+    },
+    {
+      "site": "FinanciamentoAutoAdx",
+      "status": "INATIVO",
+      "start": "AKD",
+      "end": "AKS"
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "start": "AKU",
+      "end": "ALJ"
+    },
+    {
+      "site": "CarCreditAd",
+      "status": "INATIVO",
+      "start": "ALL",
+      "end": "AMA"
+    }
+  ]
+}
