@@ -93,6 +93,8 @@ Duplicado sheet  Same normalized segurador name appears more than once for the a
 
 Rodolfo clarified the intended reconciliation loop: the sheet maintained by Ially is the operational intent layer. If an old segurador/profile is deleted from the sheet because pages were migrated to a new developer/profile, remove that old identity from `Removidos acumulados` instead of keeping it as an active incident. If a new row is added but `NO APP` is blank, leave the mismatch visible so Ially can correct the app assignment; after she fills `NO APP`, the next cron should match by normalized `Segurador × NO APP` and clear the accumulated removal when runtime is consistent. Observation/name-change notes are informational only.
 
+For the dedicated B013 DTR-link monitor, every automatic change report must list all currently confirmed removals whose canonical Sheet row is still assigned to the current B013 app (for example `NO APP=B013-4`). This is a Sheet-scoped persistent inventory, not a one-cycle delta. If Ially reassigns that same `Segurador × User` row to another app, the next B013 cycle must retire it from B013 scope without treating the planned reassignment as a fresh removal; it must not appear in any later B013 report unless assigned back to B013.
+
 Rodolfo clarified that each Meta app can also contain an owner/creator profile used to create/isolate the app. These are not seguradores and should not count as `Sobra na API` / cleanup candidates unless Rodolfo changes the policy:
 
 ```text

@@ -106,20 +106,7 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         self.assertLess(append_at, replace_at)
         self.assertLess(replace_at, summarize_at)
 
-    def test_confirmed_removal_is_new_only_on_first_confirmed_cycle(self):
-        current = {
-            'user': 'one@example.com',
-            'segurador': 'One',
-            'verdict': 'unlinked_confirmed',
-            'link_status': 'token_app_mismatch',
-        }
-        self.assertTrue(self.mod.is_newly_confirmed_failure({'verdict': 'linked'}, current))
-        self.assertTrue(self.mod.is_newly_confirmed_failure({}, current))
-        self.assertFalse(
-            self.mod.is_newly_confirmed_failure({'verdict': 'unlinked_confirmed'}, current)
-        )
-
-    def test_automatic_alert_omits_persistent_confirmed_removals(self):
+    def test_automatic_alert_keeps_current_sheet_scoped_confirmed_removals(self):
         changes = [{
             'user': 'new@example.com',
             'segurador': 'New',
@@ -127,24 +114,35 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
             'new': 'linked',
             'kind': 'added',
         }]
-        stale_failure = {
+        current_failure = {
             'user': 'old@example.com',
             'segurador': 'Old',
             'profile_id': 'old.profile',
             'pages': '2',
             'verdict': 'unlinked_confirmed',
         }
-        without_new_removal = '\n'.join(
+        without_current_removal = '\n'.join(
             self.mod.automatic_movement_sections(changes, [], [])
         )
-        self.assertNotIn('REMOVIDOS CONFIRMADOS', without_new_removal)
-        self.assertNotIn('Old', without_new_removal)
+        self.assertNotIn('REMOVIDOS CONFIRMADOS', without_current_removal)
+        self.assertNotIn('Old', without_current_removal)
 
-        with_new_removal = '\n'.join(
-            self.mod.automatic_movement_sections(changes, [stale_failure], [])
+        with_current_removal = '\n'.join(
+            self.mod.automatic_movement_sections(changes, [current_failure], [])
         )
-        self.assertIn('REMOVIDOS CONFIRMADOS', with_new_removal)
-        self.assertEqual(with_new_removal.count('Old'), 1)
+        self.assertIn('REMOVIDOS CONFIRMADOS', with_current_removal)
+        self.assertEqual(with_current_removal.count('Old'), 1)
+
+    def test_reassigned_removal_is_absent_from_later_report(self):
+        accounts = {
+            'kept': {'user': 'kept@example.com', 'verdict': 'unlinked_confirmed'},
+            'reassigned': {'user': 'moved@example.com', 'verdict': 'unlinked_confirmed'},
+        }
+        self.mod.retire_out_of_scope_accounts(accounts, {'kept'})
+        current_failures = [row for row in accounts.values() if row.get('verdict') == 'unlinked_confirmed']
+        rendered = '\n'.join(self.mod.automatic_movement_sections([], current_failures, []))
+        self.assertIn('kept', rendered)
+        self.assertNotIn('moved', rendered)
 
 
 if __name__ == '__main__':
