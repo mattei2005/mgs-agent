@@ -1,0 +1,91 @@
+{
+  "generated_at_utc": "2026-09-04T15:23:40.318918+00:00",
+  "mode": "apply",
+  "auth_mode": "service_account",
+  "shared_drive": "MGS-AGENTS",
+  "operation": "SHEIN_US_EN",
+  "old_lineages_to_trash": [
+    {
+      "label": "14",
+      "asset_id": "asset_6ff7666ea5b5accd6f84",
+      "source_id": "1HsTEpRnC9XndovoMk6BmtVoFilSDejUm",
+      "source_name": "20_14 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_id": "1jMQlMmrZvoxRnzMKiEmQABu7iFgyy5je",
+      "destination_name": "SHEIN_US_EN_VID_FREE_CLOTHES_PRESSER_PV_009.mp4"
+    },
+    {
+      "label": "15",
+      "asset_id": "asset_1ce6dba99cec5bee0873",
+      "source_id": "1Yf-4TDB4fN8NdlJvYHATItv1e2tCEBMJ",
+      "source_name": "6_15 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_id": "1WF2lnab2O3SGIvAxhfyy7Vg7KMvpLGaS",
+      "destination_name": "SHEIN_US_EN_VID_FREE_CLOTHES_PRESSER_PV_003.mp4"
+    },
+    {
+      "label": "16",
+      "asset_id": "asset_6369d0b16fa61bc001e4",
+      "source_id": "1lxmMrCUJq5pfMB61XG3lqD_4wzGWD8EZ",
+      "source_name": "5_16 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_id": "1GvEu2Qz9XCGVkec6WHl1shjin4TcnnHU",
+      "destination_name": "SHEIN_US_EN_VID_FREE_CLOTHES_PRESSER_PV_002.mp4"
+    }
+  ],
+  "replacement_plan": [
+    {
+      "label": "14",
+      "source_id": "1PU7aHTNl9x4f8n398zDBqRoAQ6v99oAf",
+      "source_name": "2_14 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_name": "SHEIN_US_EN_VID_FREE_HAIRBRUSH_PV_001.mp4",
+      "variant": "001",
+      "old_asset_id": "asset_6ff7666ea5b5accd6f84",
+      "source_sha256": "a3ebdcfb755f0bc5221afc99b9c2e0faa82e7bd5c1ccc002ce6cbab494a7fd60",
+      "clean_sha256": "bde4682de480054ad273f9dcdb230e3a3e61c1619012a93c5bd1ae2938bbe8eb",
+      "fingerprint": "dhash64:8388c6868ebad08c/60ccd6d4a336b053/69c98c9cc88ec813",
+      "width": 1080,
+      "height": 1920,
+      "duration_seconds": 12.037,
+      "source_created_time": "2026-09-04T15:13:13.087Z",
+      "existing_destination_id": null
+    },
+    {
+      "label": "15",
+      "source_id": "1xC9wy5EEAC003RslKuwyd6rs92NXQTpn",
+      "source_name": "3_15 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_name": "SHEIN_US_EN_VID_FREE_HAIRBRUSH_PV_002.mp4",
+      "variant": "002",
+      "old_asset_id": "asset_1ce6dba99cec5bee0873",
+      "source_sha256": "4dc51933a5e6a4a011985d612615394718a65929432e6d31850b1601f0741860",
+      "clean_sha256": "9b3da079b6cac261a4119e1250a5b055ed91e12636d1a28994478f69db478a8e",
+      "fingerprint": "dhash64:1381898baba3e693/0fcacc8c2e0fcb67/333a6a6447076188",
+      "width": 1080,
+      "height": 1920,
+      "duration_seconds": 12.037,
+      "source_created_time": "2026-09-04T15:13:16.133Z",
+      "existing_destination_id": null
+    },
+    {
+      "label": "16",
+      "source_id": "1dlQuRVxNcd2iZKOIdd3IgP-TF4VKFJI6",
+      "source_name": "1_16 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "destination_name": "SHEIN_US_EN_VID_FREE_HAIRBRUSH_PV_003.mp4",
+      "variant": "003",
+      "old_asset_id": "asset_6369d0b16fa61bc001e4",
+      "source_sha256": "1ac23140ed1e9fa05a86294da22327f4d631d18d7ec4e536211d9c33ea684354",
+      "clean_sha256": "29df237d0df8e69cbba78663b6f718f8e96e02868751752e2d7e6096977fcb10",
+      "fingerprint": "dhash64:73392d3c3c0ec593/8a9d47e1f83e7c3c/80c2c2c2e2a6f078",
+      "width": 1080,
+      "height": 1920,
+      "duration_seconds": 15.016,
+      "source_created_time": "2026-09-04T15:13:09.891Z",
+      "existing_destination_id": null
+    }
+  ],
+  "visual_classification": {
+    "product_type": "HAIR_STYLER",
+    "claim": "FREE FOR YOU; HAIRBRUSH",
+    "angle": "FREE_HAIRBRUSH",
+    "person": "PERSON",
+    "p_orient": "PV",
+    "placement": "STORY"
+  }
+}

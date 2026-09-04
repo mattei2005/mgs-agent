@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.5
+version: 1.0.6
 author: Hermes Agent
 license: MIT
 metadata:
@@ -232,6 +232,9 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 4. After he says the edit is complete, read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
 5. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required.
 6. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
+7. For a fill-down repair, prove the whole target range shares one semantic formula family before instructing it. On readback, verify every row (`N/N`) contains the expected row-matched references; checking only the first and last cells is insufficient.
+8. Read KPI driver cells as exact individual ranges in one `batchGet` before calculating impact. Do not infer positions from a wide sparse response, and do not quote a cached impact when `GOOGLEFINANCE` or another volatile dependency can change it.
+9. Even when several sites share the same defect class, preserve the one-problem cadence. Validate the completed site, report its final KPI, and then present exactly one next site/range.
 
 ## Verification checklist
 
