@@ -1,34 +1,62 @@
 {
-  "artifact_id": "ares-minibot-full-access-smoke-20260904",
-  "change_type": "operational_checkpoint_updated",
-  "scope": "Meta app Full Access baseline confirmed by Rodolfo",
+  "artifact_id": "ares-minibot-full-access-documentation-and-nicolas-handoff-20260904",
+  "change_type": "canonical_documentation_created_and_discord_handoff_delivered",
+  "scope": "Meta app minibot Full Access baseline, throughput interpretation and operational gates",
   "files": [
     {
+      "path": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
+      "sha256": "0c9882593c52b28de86b6c4754997fd66ac70a2500ed6023e6212ad83656659e",
+      "role": "machine-readable canonical operational state"
+    },
+    {
+      "path": "docs/ARES-MINIBOT-FULL-ACCESS.md",
+      "sha256": "c48643cb1f11b7c866a922b54a7e0ecfcf23d15b33e871e41c61a5dc151b2745",
+      "role": "human-readable documentation"
+    },
+    {
+      "path": "data/knowledge-registry.json",
+      "sha256": "b245d6bd9f46318d95d60a59f23fa880524ceed3fe18c240b56043f08ad19577",
+      "role": "active canonical pointer ARES-META-APP-MINIBOT-FULL-ACCESS-V1-20260904"
+    },
+    {
       "path": "data/agent-checkpoints.json",
-      "sha256": "ab41d270eecec33d3c98a24135b9020e0fdec2c86f716c12c29b2ada959927b0",
-      "change": "Updated checkpoint ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904 with Tech Provider, Advanced Access and maintenance baseline"
+      "sha256": "dc01206338dac53e92708385e7876fb8ff723cfc5040397eecb65d2404eaa8ef",
+      "role": "completed continuity checkpoint"
+    },
+    {
+      "path": "work/minibot-full-access-smoke-20260904/nicolas-thread-publication.json",
+      "sha256": "8296e6af397e3e2f19714ccf7ff071f739d00eb1923fab90d8b03cbd109645cc",
+      "role": "five-part Discord publication and exact GET readbacks"
     }
   ],
-  "validated_facts": {
-    "tech_provider": "approved",
-    "marketing_api_tier": "Full Access / standard_access",
-    "core_permissions_advanced": [
-      "ads_management",
-      "ads_read",
-      "business_management",
-      "pages_show_list",
-      "pages_read_engagement",
-      "pages_manage_ads",
-      "pages_manage_metadata",
-      "pages_messaging"
+  "discord_delivery": {
+    "thread_id": "1545558483812884581",
+    "thread_name": "Atualização do aplicativo para Nicolas - Rodolfo",
+    "parts": 5,
+    "message_ids": [
+      "1545572369492615200",
+      "1545572371908264019",
+      "1545572374655533159",
+      "1545572377281306655",
+      "1545572380301197312"
     ],
-    "instagram_basic": "submitted_pending_review",
-    "full_access_call_volume": "covered by Smart Bidding wrapper daily account investment reads"
+    "required_members_present": [
+      "Rodolfo",
+      "Nicolas",
+      "Zeus",
+      "Ares"
+    ],
+    "all_readbacks_ok": true
   },
   "validation": {
-    "knowledge_control_status": "ok",
-    "checkpoint_readback": true,
+    "knowledge_control": "ok",
+    "knowledge_regressions": "16/16 pass",
+    "json_lint": "ok",
+    "discord_message_lengths": [964, 955, 983, 1007, 1128],
+    "discord_limit_safe": true,
     "meta_writes": 0,
+    "budget_changes": 0,
+    "active_campaign_changes": 0,
     "secrets_exposed": false
   }
 }
