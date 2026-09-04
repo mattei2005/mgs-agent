@@ -1,0 +1,9 @@
+# Permissions Reference
+
+Permissions are a form of granular, app user-granted Graph API authorization.
+Only select permissions that your app needs to function as intended. Selecting unneeded permissions is a common reason for rejection during app review.
+
+ads_management allows your app to both read and manage the Ads account it owns, or has been granted access to, by the Ad account owner. Allowed usage includes programmatically creating campaigns, managing ads, and fetching metrics.
+ads_read allows your app to access the Ads Insights API to pull Ads report information for Ad accounts you own or have been granted access to.
+business_management allows your app to read and write with the Business Manager API and manage business assets such as an ad account.
+ads_mcp_management allows your app to access the Meta ads Model Context Protocol (MCP) server and enable AI agents to interact with Meta Ads on behalf of advertisers.

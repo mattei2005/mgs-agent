@@ -1,0 +1,4 @@
+# Secure Requests
+
+Calls from a server can be better secured by adding a parameter called appsecret_proof. The app secret proof is a sha256 hash of your access token, using your app secret as the key.
+If Require App Secret is enabled, all client-initiated calls must be proxied through your backend where the appsecret_proof parameter can be added to the request before sending it to the Graph API, or the call will fail.
