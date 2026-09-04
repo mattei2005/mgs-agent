@@ -13087,6 +13087,26 @@
       "validation": "Plugin active v1.7.10; database readback shows 15/15 unique quiz configs using the requested redirect, empty variants and weight 100; WP Fastest Cache 1.5.1 was cleared after critical confirmation; all 15 bare public routes return HTTP 200, expose plugin asset v1.7.10 and the requested redirect, and contain no previous redirect; destination returns HTTP 200; Cloudflare status DYNAMIC on 15/15 routes.",
       "source_authorization": "Discord messages 1542544673145364601, 1542609072606674986 and 1542894381374382101",
       "updated_at": "2026-08-28T09:53:31-04:00"
+    },
+    {
+      "id": "zeus-meta-api-full-access-threshold-reference-20260904",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "skill": "meta-ads-api-operations",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-app-full-access-permissions-2026-08-21.md",
+      "runtime_versioned_sha_match": true,
+      "size_bytes": 8070,
+      "sha256": "140c65555dd7f31b3a8ddbb1569a0d6058d4e2908cb334a17d44aa0c216e735e",
+      "owner": "Zeus/Growth Ops",
+      "risk": "low",
+      "description": "Current Meta Marketing API Access Tier nomenclature and Full access qualification gates: Business Verification, App Review, 500 successful calls in 15 days and error rate below 15% across the last 500 calls.",
+      "validation": "Live App Dashboard screenshot shows Business Verification and the combined 500-call/error gate green; current Meta Marketing API Rate Limiting documentation confirms Limited/Full naming and the revised 500-call threshold; runtime and versioned reference hashes match.",
+      "source_thread_id": "1545436898233679943",
+      "report_infra": {
+        "status": "pending"
+      },
+      "updated_at": "2026-09-04T10:34:20-04:00"
     }
   ],
   "systemd_services": [
