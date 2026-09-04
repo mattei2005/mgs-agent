@@ -3768,15 +3768,33 @@
         "zeus"
       ],
       "domain": "growth.meta-app-monitor",
-      "effective_at": "2026-08-29T20:40:50-04:00",
-      "id": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "effective_at": "2026-09-04T17:53:58+00:00",
+      "id": "procedure-meta-b0134-confirmed-not-false-positive-20260904",
       "kind": "procedure",
       "owner": "Rodolfo Mattei / Zeus",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "B013-4 confirma automaticamente quando possível restrição não é falso positivo",
+      "updated_at": "2026-09-04T17:53:58+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-29T20:40:50-04:00",
+      "id": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0134-confirmed-not-false-positive-20260904",
       "title": "Padrão humano B013-4 para possível restrição em validação persistente",
-      "updated_at": "2026-08-30T01:06:23+00:00"
+      "updated_at": "2026-09-04T17:53:58+00:00"
     },
     {
       "canonical_key": "sb-messenger-token.post-remediation-live-exact-pair",
@@ -3834,5 +3852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T15:40:32+00:00"
+  "updated_at": "2026-09-04T17:53:58+00:00"
 }

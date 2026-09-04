@@ -1,3 +1,4 @@
+import json
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -38,6 +39,15 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
             'error': {'code': 190, 'message': 'Invalid OAuth access token'},
             'consecutive_unknown': consecutive,
         }
+
+    def technical_deleted(self, user, consecutive=2):
+        row = self.technical(user, consecutive=consecutive)
+        row['error'] = {
+            'code': 190,
+            'type': 'OAuthException',
+            'message': 'Error validating application. Application has been deleted.',
+        }
+        return row
 
     def test_first_verified_absence_stays_inconclusive_without_restriction(self):
         current = self.missing(consecutive=0)
@@ -143,6 +153,69 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         rendered = '\n'.join(self.mod.automatic_movement_sections([], current_failures, []))
         self.assertIn('kept', rendered)
         self.assertNotIn('moved', rendered)
+
+    def test_confirmation_probe_requires_two_fresh_app_deleted_responses(self):
+        rows = [self.technical_deleted(f'{i}@example.com') for i in range(3)]
+        calls = []
+
+        def fake_graph(path, params, token):
+            calls.append((path, params, token))
+            return 400, {}, {
+                'error': {
+                    'code': 190,
+                    'type': 'OAuthException',
+                    'message': 'Error validating application. Application has been deleted.',
+                }
+            }
+
+        result = self.mod.restriction_confirmation_probe(
+            {'app_id': '123', 'app_secret': 'test-secret'}, rows, graph_call=fake_graph
+        )
+        self.assertEqual(result['status'], 'confirmed_not_false_positive')
+        self.assertEqual(result['independent_bot_logins'], 3)
+        self.assertEqual([c[0] for c in calls], ['/123', '/123/roles'])
+        self.assertTrue(all(c['application_deleted'] for c in result['checks']))
+
+    def test_confirmation_probe_stays_inconclusive_if_one_route_recovers(self):
+        rows = [self.technical_deleted(f'{i}@example.com') for i in range(3)]
+
+        def fake_graph(path, params, token):
+            if path.endswith('/roles'):
+                return 200, {}, {'data': []}
+            return 400, {}, {
+                'error': {
+                    'code': 190,
+                    'message': 'Error validating application. Application has been deleted.',
+                }
+            }
+
+        result = self.mod.restriction_confirmation_probe(
+            {'app_id': '123', 'app_secret': 'test-secret'}, rows, graph_call=fake_graph
+        )
+        self.assertEqual(result['status'], 'inconclusive')
+
+    def test_confirmation_probe_requires_independent_bot_logins(self):
+        rows = [self.technical_deleted('same@example.com') for _ in range(3)]
+        result = self.mod.restriction_confirmation_probe(
+            {'app_id': '123', 'app_secret': 'test-secret'}, rows,
+            graph_call=lambda *args: self.fail('Graph must not run below the evidence floor'),
+        )
+        self.assertEqual(result['status'], 'inconclusive')
+        self.assertEqual(result['independent_bot_logins'], 1)
+
+    def test_confirmation_embed_states_not_false_positive(self):
+        embed = self.mod.confirmed_restriction_embed(
+            'B013-4', {'independent_bot_logins': 20}
+        )
+        rendered = json.dumps(embed, ensure_ascii=False)
+        self.assertIn('Não é falso positivo', rendered)
+        self.assertIn('ALERTA CONFIRMADO', embed['title'])
+
+    def test_possible_alert_precedes_automatic_confirmation_in_source(self):
+        source = SCRIPT.read_text(encoding='utf-8')
+        possible_post = source.index("embed = possible_restriction_embed(config['app_name']")
+        confirmation_probe = source.index('confirmation = restriction_confirmation_probe(config, restriction_unknowns)')
+        self.assertLess(possible_post, confirmation_probe)
 
 
 if __name__ == '__main__':
