@@ -743,12 +743,12 @@
     {
       "agent": "ares",
       "id": "ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904",
-      "next_step": "Não solicitar permissões adicionais para throughput. Aguardar instagram_basic. Manter monitoramento do tier e da taxa de erro; tratar appsecret_proof somente em migração de segurança separada e não ativar Require App Secret antes de todos os consumidores suportarem o parâmetro. Canário Meta PAUSED e encerramento de pg_8348 continuam separados e sujeitos a autorização explícita.",
-      "objective": "Validar e manter o baseline operacional do app minibot 1299247318762949 após Marketing API Full Access, sem misturar recovery antigo ou canário não autorizado",
-      "source": "discord:thread:1545543199781683291;rodolfo-message:tech-provider-approved-core-advanced-instagram-basic-pending-sb-wrapper-volume",
-      "state": "full_access_baseline_confirmed_by_rodolfo: tech provider aprovado; marketing api full access confirmado por standard_access nas três contas; ads_management, ads_read, business_management, pages_show_list, pages_read_engagement, pages_manage_ads, pages_manage_metadata e pages_messaging estão em advanced access; instagram_basic foi submetida e aguarda aprovação, sem impacto na quota discutida; o token do minibot está conectado ao wrapper smart bidding que consulta investimento das contas e gera volume diário suficiente, portanto o requisito de 500 chamadas em 15 dias não é preocupação operacional. zero writes meta nesta atualização.",
+      "next_step": "Nenhuma ação pendente nesta solicitação. Aguardar instagram_basic; manter tier/error monitoring. Canário PAUSED e pg_8348 continuam pedidos separados e exigem autorização explícita de Rodolfo.",
+      "objective": "Manter o baseline canônico e comunicar a atualização Full Access do app minibot 1299247318762949",
+      "source": "discord:thread:1545543199781683291;discord:thread:1545558483812884581#1545572369492615200-1545572380301197312;canonical:data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json;doc:docs/ARES-MINIBOT-FULL-ACCESS.md",
+      "state": "completed_documented_and_delivered: baseline machine-readable e documentação humana salvos; registry ares-meta-app-minibot-full-access-v1-20260904 ativo; knowledge-control validado e 16/16 regressões aprovadas. resumo consolidado publicado pelo ares em cinco partes na thread 1545558483812884581; nicolas, zeus, rodolfo e ares confirmados como membros; cinco gets confirmaram autor, canal e conteúdo exatos. zero meta writes, zero budget e zero campanhas ativas alteradas.",
       "thread_id": "1545543199781683291",
-      "updated_at": "2026-09-04T22:37:57+00:00"
+      "updated_at": "2026-09-04T23:13:13+00:00"
     },
     {
       "agent": "ares",
@@ -2252,5 +2252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T22:37:57+00:00"
+  "updated_at": "2026-09-04T23:13:13+00:00"
 }
