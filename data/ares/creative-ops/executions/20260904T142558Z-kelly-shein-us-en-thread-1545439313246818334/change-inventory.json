@@ -1,0 +1,49 @@
+{
+  "change_id": "ARES-SHEIN-US-EN-INTAKE-20260904T144114Z",
+  "requested_by": "Kelly Nice",
+  "thread_id": "1545439313246818334",
+  "scope": "Creative Ops intake SHEIN_US_EN",
+  "changes": [
+    {
+      "target": "Google Shared Drive MGS-AGENTS/CRIATIVOS/SHEIN_US_EN/VID",
+      "action": "created canonical status paths and processed manager upload",
+      "details": {
+        "ready_created_or_reused": "01_READY",
+        "legacy_created_or_reused": "99_LEGACY",
+        "source_lineages": 25,
+        "ready_assets": 25,
+        "legacy_originals": 25,
+        "deleted_originals": 0
+      }
+    },
+    {
+      "target": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+      "action": "appended verified creative lineage records",
+      "details": {
+        "rows_added": 25,
+        "reservation_status": "RESERVADO_PELO_GESTOR",
+        "ares_eligible": false,
+        "metadata_clean": true
+      }
+    },
+    {
+      "target": "run-local execution artifacts",
+      "action": "created audited intake manifests and verifier",
+      "details": {
+        "canonical_scripts_changed": false,
+        "skill_changed": false,
+        "config_changed": false
+      }
+    }
+  ],
+  "readback": {
+    "shared_drive": "MGS-AGENTS",
+    "operation": "SHEIN_US_EN",
+    "operation_folder_id_verified": true,
+    "ready_download_sha_clean_verified": 25,
+    "legacy_sources_verified": 25,
+    "inventory_rows_verified": 25,
+    "upload_manual_recursive_remaining_files": 0,
+    "independent_verification_all_pass": true
+  }
+}

@@ -134,6 +134,19 @@ python3 /root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py \
 
 ## Interpretation rules
 
+### Marketing API Full access: interpret Dashboard screenshots precisely
+
+When Rodolfo asks whether an app can already apply for the higher Marketing API tier, separate **eligibility**, **submission**, **approval**, and **live activation**:
+
+1. Use the current labels **Marketing API Access Tier: Limited access / Full access**. Older pages may still say Ads Management Standard Access or show superseded thresholds.
+2. Treat a green combined requirement such as **“at least 500 Marketing API calls with error rate below 15%”** as proof that this eligibility gate is satisfied. Do not derive the error rate from a large activity count alone.
+3. A green Business Verification gate plus a green call/error gate means the app is eligible to request Full access. A gray **App Review** gate means review is still pending/not approved; it does not negate eligibility to submit.
+4. Answer “yes, eligible to apply” separately from “approved.” The app remains Limited/development tier until Meta approves the review and the live header reads `ads_api_access_tier=standard_access`.
+5. The normal submission route is `App Review > Permissions and Features > Marketing API Access Tier > +Upgrade`. If a screenshot cuts the Action column (for example, only `No A…` is visible), never reconstruct the hidden label or claim the button is present. State that eligibility is proven, but request a full-width/live view only if the action control itself must be diagnosed.
+6. Prefer the live App Dashboard requirement indicators and Meta’s current Marketing API Rate Limiting documentation over stale cached authorization text during a nomenclature/threshold transition.
+
+Detailed requirements and post-approval verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
+
 ### Rodolfo scope: no System User unless explicitly reopened
 
 Rodolfo explicitly removed Meta System User from scope for Ares/MGS. Do not present System User as a requirement or default recommendation in Meta/Ares guidance unless he explicitly reopens that path. Use the valid user/admin token path within the permissions/assets available to that user.
