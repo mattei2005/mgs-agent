@@ -1,0 +1,217 @@
+[
+  {
+    "site": "Portal Relevante",
+    "status": "INATIVO",
+    "cell": "AH5",
+    "type": "invalid_total_sources",
+    "missing": [
+      "X5:INVALIDO_US"
+    ],
+    "unexpected": [],
+    "formula": "=SUM($Z$84)/DAY(EOMONTH(DATE($B$4,$A$3,1),0))"
+  },
+  {
+    "site": "TopFeed",
+    "status": "INATIVO",
+    "cell": "AZ5",
+    "type": "invalid_total_sources",
+    "missing": [
+      "AP5:INVALIDO_US"
+    ],
+    "unexpected": [],
+    "formula": "=SUM($AR$84)/DAY(EOMONTH(DATE($B$4,$A$3,1),0))"
+  },
+  {
+    "site": "FinanceTopFeed",
+    "status": "ATIVO",
+    "cell": "CM5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "BP5:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(CK5)=0,\"\",IF(OR(SUM(BG5,BY5)=0,AND(BG5=\"\",BY5=\"\")),-1,((BG5+BY5)/ABS(CK5))-1))\n"
+  },
+  {
+    "site": "FinanceTopFeed",
+    "status": "ATIVO",
+    "cell": "CM36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "BP36:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(CK36)=0,\"\",IF(OR(SUM(BG36,BY36)=0,AND(BG36=\"\",BY36=\"\")),-1,((BG36+BY36)/ABS(CK36))-1))\n"
+  },
+  {
+    "site": "Wantabrand US-CC-ES + Wantabrand BR-CAR-BR",
+    "status": "ATIVO",
+    "cell": "FC5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "EO5:GROSS_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(FA5)=0,\"\",IF(OR(EG5=\"\",EG5=0),-1,(EG5/ABS(FA5))-1))"
+  },
+  {
+    "site": "Wantabrand US-CC-ES + Wantabrand BR-CAR-BR",
+    "status": "ATIVO",
+    "cell": "FC36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "EO36:GROSS_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(FA36)=0,\"\",IF(OR(EG36=\"\",EG36=0),-1,(EG36/ABS(FA36))-1))"
+  },
+  {
+    "site": "Eggbev",
+    "status": "ATIVO",
+    "cell": "MA5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "LD5:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(LY5)=0,\"\",IF(OR(SUM(KU5,LM5)=0,AND(KU5=\"\",LM5=\"\")),-1,((KU5+LM5)/ABS(LY5))-1))\n"
+  },
+  {
+    "site": "Eggbev",
+    "status": "ATIVO",
+    "cell": "MA36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "LD36:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(LY36)=0,\"\",IF(OR(SUM(KU36,LM36)=0,AND(KU36=\"\",LM36=\"\")),-1,((KU36+LM36)/ABS(LY36))-1))\n"
+  },
+  {
+    "site": "Cliquet",
+    "status": "ATIVO",
+    "cell": "OC5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "NF5:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(OA5)=0,\"\",IF(OR(SUM(MW5,NO5)=0,AND(MW5=\"\",NO5=\"\")),-1,((MW5+NO5)/ABS(OA5))-1))\n"
+  },
+  {
+    "site": "Cliquet",
+    "status": "ATIVO",
+    "cell": "OC36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "NF36:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(OA36)=0,\"\",IF(OR(SUM(MW36,NO36)=0,AND(MW36=\"\",NO36=\"\")),-1,((MW36+NO36)/ABS(OA36))-1))\n"
+  },
+  {
+    "site": "Newsoun",
+    "status": "ATIVO",
+    "cell": "QE5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "PH5:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(QC5)=0,\"\",IF(OR(SUM(OY5,PQ5)=0,AND(OY5=\"\",PQ5=\"\")),-1,((OY5+PQ5)/ABS(QC5))-1))\n"
+  },
+  {
+    "site": "Newsoun",
+    "status": "ATIVO",
+    "cell": "QE36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "PH36:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(QC36)=0,\"\",IF(OR(SUM(OY36,PQ36)=0,AND(OY36=\"\",PQ36=\"\")),-1,((OY36+PQ36)/ABS(QC36))-1))\n"
+  },
+  {
+    "site": "Openzed",
+    "status": "ATIVO",
+    "cell": "SY5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "SB5:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(SW5)=0,\"\",IF(OR(SUM(RS5,SK5)=0,AND(RS5=\"\",SK5=\"\")),-1,((RS5+SK5)/ABS(SW5))-1))\n"
+  },
+  {
+    "site": "Openzed",
+    "status": "ATIVO",
+    "cell": "SY36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "SB36:GROSS_USD_BR"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(SW36)=0,\"\",IF(OR(SUM(RS36,SK36)=0,AND(RS36=\"\",SK36=\"\")),-1,((RS36+SK36)/ABS(SW36))-1))\n"
+  },
+  {
+    "site": "Fincgriffin",
+    "status": "ATIVO",
+    "cell": "ABC5",
+    "type": "roi_gross_sources",
+    "missing": [
+      "AAG5:GROSS_USD_US"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(ABA5)=0,\"\",IF(OR(SUM(ZQ5,ZY5,AAO5)=0,AND(ZQ5=\"\",ZY5=\"\",AAO5=\"\")),-1,((ZQ5+ZY5+AAO5)/ABS(ABA5))-1))\n"
+  },
+  {
+    "site": "Fincgriffin",
+    "status": "ATIVO",
+    "cell": "ABC36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "AAG36:GROSS_USD_US"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(ABA36)=0,\"\",IF(OR(SUM(ZQ36,ZY36,AAO36)=0,AND(ZQ36=\"\",ZY36=\"\",AAO36=\"\")),-1,((ZQ36+ZY36+AAO36)/ABS(ABA36))-1))\n"
+  },
+  {
+    "site": "Helixenit",
+    "status": "ATIVO",
+    "cell": "ACM36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "ABG36:GROSS_USD_DE",
+      "ABP36:GROSS_USD_US"
+    ],
+    "unexpected": [
+      "ABJ36:IMPOSTO_DE",
+      "ABR36:NET_USD_US"
+    ],
+    "formula": "=IF(ABS(ACK36)=0,\"\",IF(OR(SUM(ABJ36,ABR36,ABY36)=0,AND(ABJ36=\"\",ABR36=\"\",ABY36=\"\")),-1,((ABJ36+ABR36+ABY36)/ABS(ACK36))-1))\n"
+  },
+  {
+    "site": "Yolokfx",
+    "status": "ATIVO",
+    "cell": "AGT5",
+    "type": "net_total_sources",
+    "missing": [
+      "AGN5:NET_USD_US"
+    ],
+    "unexpected": [
+      "AGL5:GROSS_USD_US"
+    ],
+    "formula": "=SUM(AGL5)"
+  },
+  {
+    "site": "AutoCreditAdx",
+    "status": "INATIVO",
+    "cell": "ALI36",
+    "type": "roi_gross_sources",
+    "missing": [
+      "AKU36:GROSS_USD_US"
+    ],
+    "unexpected": [],
+    "formula": "=IF(ABS(ALG36)=0,\"\",IF((ABS(ALG36)+ABS(ALD36)+ABS(ALE36))=0,\"\",IF(OR(ALC36=\"\",ALC36=0),-1,(ALC36/(ABS(ALG36)+ABS(ALD36)+ABS(ALE36)))-1)))"
+  }
+]

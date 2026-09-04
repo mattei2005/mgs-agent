@@ -1,0 +1,3622 @@
+{
+  "runs_scanned": 1646,
+  "interior_singletons": [
+    {
+      "cell": "O154",
+      "run": "O153:O159",
+      "header": "DESPESA_TOTAL",
+      "formula": "=IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Agosto 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Agosto 2026!H1\")),IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Agosto 2026!D16\")<100000,-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Agosto 2026!E14\"),-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Agosto 2026!F14\")))",
+      "majority_count": 5
+    },
+    {
+      "cell": "P106",
+      "run": "P102:P112",
+      "header": "INVALIDO_TOTAL",
+      "formula": "=SUM(R106*G1)*-1",
+      "majority_count": 10
+    },
+    {
+      "cell": "CR23",
+      "run": "CR5:CR36",
+      "header": "INVALIDO_US",
+      "formula": "=IF(CQ23=\"\",\"\",CQ23/$H$1)",
+      "majority_count": 30
+    }
+  ],
+  "bracketed_formula_holes": [
+    {
+      "cell": "D37",
+      "above": "=SUM(D5:D35)",
+      "below": "=SUM(G37:G38)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "E77",
+      "above": "=SUM(D76*$F$1)",
+      "below": "=SUM(E46:E76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "F96",
+      "above": "=SUM(O36)",
+      "below": "=SUM(F83:F96)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "G77",
+      "above": "=SUM(F76*$F$1)",
+      "below": "=SUM(G46:G76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "G96",
+      "above": "=SUM(F95*$F$1)",
+      "below": "=SUM(G83:G96)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "I77",
+      "above": "=SUM(H76*$F$1)",
+      "below": "=SUM(I46:I76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "I138",
+      "above": "=SUM(I136/2)",
+      "below": "=SUM(J139/F1)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "J138",
+      "above": "=SUM(J136/2)",
+      "below": "=SUM(J137/31*31)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "K77",
+      "above": "=SUM(J76*$F$1)",
+      "below": "=SUM(K46:K76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "M77",
+      "above": "=SUM(L76*$F$1)",
+      "below": "=SUM(M46:M76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "O144",
+      "above": "=SUM(R143/$H$1)*-1",
+      "below": "=SUM(O100:O144)",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "O150",
+      "above": "=IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Agosto 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Agosto 2026!H1\")),IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Agosto 2026!D16\")<100000,-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Agosto 2026!E14\"),-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Agosto 2026!F14\")))",
+      "below": "=IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!H1\")),IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!D16\")<100000,-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!E14\"),-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!F14\")))",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "O152",
+      "above": "=IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!H1\")),IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!D16\")<100000,-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!E14\"),-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Agosto 2026!F14\")))",
+      "below": "=IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Agosto 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Agosto 2026!H1\")),IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Agosto 2026!D16\")<100000,-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Agosto 2026!E14\"),-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Agosto 2026!F14\")))",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "O160",
+      "above": "=SUM(P159/$F$1)",
+      "below": "=SUM(O148:O160)",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "P101",
+      "above": "=SUM(O100*$F$1)",
+      "below": "=SUM(O102*$F$1)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "P113",
+      "above": "=SUM(O112*$F$1)",
+      "below": "=SUM(O114*$F$1)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "P118",
+      "above": "=SUM(O117*$F$1)",
+      "below": "=SUM(O119*$F$1)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "P144",
+      "above": "=SUM(O143*$F$1)",
+      "below": "=SUM(P100:P144)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "P150",
+      "above": "=SUM(O149*$F$1)",
+      "below": "=SUM(O151*$F$1)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "P174",
+      "above": "=SUM(APB36)",
+      "below": "=SUM($F$84,$Z$84,$AR$84,$BJ$84,$CT$84,$FJ$84,$HR$84,$IM$84,$JE$84,$KF$84,$KX$84,$MH$84,$MZ$84,$OJ$84,$PB$84,$QL$84,$RD$84,$RV$84,$RV$185,$TF$84,$UG$84,$VJ$84,$YK$84,$ZC$84)",
+      "header": "INVALIDO_TOTAL"
+    },
+    {
+      "cell": "S77",
+      "above": "=SUM(D76,F76,H76,J76,L76)\n",
+      "below": "=SUM(S46:S76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "T77",
+      "above": "=SUM(S76*$F$1)",
+      "below": "=SUM(T46:T76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "V37",
+      "above": "=SUM(V5:V35)",
+      "below": "=SUM(Y37:Y38)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "W77",
+      "above": "=SUM(V76*$F$1)",
+      "below": "=SUM(W46:W76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "Z96",
+      "above": "=SUM(AG36)",
+      "below": "=SUM(Z83:Z96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AA96",
+      "above": "=SUM(Z95*$F$1)",
+      "below": "=SUM(AA83:AA96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AK77",
+      "above": "=SUM(V76,X76,Z76,AB76,AD76)\n",
+      "below": "=SUM(AK46:AK76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AL77",
+      "above": "=SUM(AK76*$F$1)",
+      "below": "=SUM(AL46:AL76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AN37",
+      "above": "=SUM(AN5:AN35)",
+      "below": "=SUM(AQ37:AQ38)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AO77",
+      "above": "=SUM(AN76*$F$1)",
+      "below": "=SUM(AO46:AO76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AQ77",
+      "above": "=SUM(AP76*$F$1)",
+      "below": "=SUM(AQ46:AQ76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AR96",
+      "above": "=SUM(AY36)",
+      "below": "=SUM(AR83:AR96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AS77",
+      "above": "=SUM(AR76*$F$1)",
+      "below": "=SUM(AS46:AS76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AS96",
+      "above": "=SUM(AR95*$F$1)",
+      "below": "=SUM(AS83:AS96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AU77",
+      "above": "=SUM(AT76*$F$1)",
+      "below": "=SUM(AU46:AU76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AW77",
+      "above": "=SUM(AV76*$F$1)",
+      "below": "=SUM(AW46:AW76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "BC77",
+      "above": "=SUM(AN76,AP76,AR76,AT76,AV76)\n",
+      "below": "=SUM(BC46:BC76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "BD77",
+      "above": "=SUM(BC76*$F$1)",
+      "below": "=SUM(BD46:BD76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "BF37",
+      "above": "=SUM(BF5:BF35)",
+      "below": "=SUM(BG36,BY36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "BG77",
+      "above": "=SUM(BF76*$F$1)",
+      "below": "=SUM(BG46:BG76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "BI77",
+      "above": "=SUM(BH76*$F$1)",
+      "below": "=SUM(BI46:BI76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "BJ96",
+      "above": "=SUM(CI36)",
+      "below": "=SUM(BJ83:BJ96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "BK77",
+      "above": "=SUM(BJ76*$F$1)",
+      "below": "=SUM(BK46:BK76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "BK96",
+      "above": "=SUM(BJ95*$F$1)",
+      "below": "=SUM(BK83:BK96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "BM77",
+      "above": "=SUM(BL76*$F$1)",
+      "below": "=SUM(BM46:BM76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "BO77",
+      "above": "=SUM(BN76*$F$1)",
+      "below": "=SUM(BO46:BO76)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "BQ77",
+      "above": "=SUM(BP76*$F$1)",
+      "below": "=SUM(BQ46:BQ76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "BS77",
+      "above": "=SUM(BR76*$F$1)",
+      "below": "=SUM(BS46:BS76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "BU77",
+      "above": "=SUM(BT76*$F$1)",
+      "below": "=SUM(BU46:BU76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "BW77",
+      "above": "=SUM(BV76*$F$1)",
+      "below": "=SUM(BW46:BW76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "BY77",
+      "above": "=SUM(BX76*$F$1)",
+      "below": "=SUM(BY46:BY76)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "CA77",
+      "above": "=SUM(BZ76*$F$1)",
+      "below": "=SUM(CA46:CA76)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "CC77",
+      "above": "=SUM(CB76*$F$1)",
+      "below": "=SUM(CC46:CC76)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "CE77",
+      "above": "=SUM(CD76*$F$1)",
+      "below": "=SUM(CE46:CE76)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "CM77",
+      "above": "=SUM(BF76,BH76,BJ76,BL76,BN76,BP76,BR76,BT76,BV76,BX76,BZ76,CB76,CD76)",
+      "below": "=SUM(CM46:CM76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "CN77",
+      "above": "=SUM(CM76*$F$1)",
+      "below": "=SUM(CN46:CN76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "CP37",
+      "above": "=SUM(CP5:CP35)",
+      "below": "=SUM(CQ36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "CQ77",
+      "above": "=SUM(CP76*$F$1)",
+      "below": "=SUM(CQ46:CQ76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "CS77",
+      "above": "=SUM(CR76*$F$1)",
+      "below": "=SUM(CS46:CS76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "CT96",
+      "above": "=SUM(DA36)",
+      "below": "=SUM(CT83:CT96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "CU77",
+      "above": "=SUM(CT76*$F$1)",
+      "below": "=SUM(CU46:CU76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "CU96",
+      "above": "=SUM(CT95*$F$1)",
+      "below": "=SUM(CU83:CU96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "CW77",
+      "above": "=SUM(CV76*$F$1)",
+      "below": "=SUM(CW46:CW76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "CY77",
+      "above": "=SUM(CX76*$F$1)",
+      "below": "=SUM(CY46:CY76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "DE77",
+      "above": "=SUM(CP76,CR76,CT76,CV76,CX76)\n",
+      "below": "=SUM(DE46:DE76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "DF77",
+      "above": "=SUM(DE76*$F$1)",
+      "below": "=SUM(DF46:DF76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "DH37",
+      "above": "=SUM(DH5:DH35)",
+      "below": "=SUM(DH36,DP36)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "DI77",
+      "above": "=SUM(DH76*$F$1)",
+      "below": "=SUM(DI46:DI76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "DK77",
+      "above": "=SUM(DJ76*$F$1)",
+      "below": "=SUM(DK46:DK76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "DK96",
+      "above": "=SUM(DZ36)",
+      "below": "=SUM(DK83:DK96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "DL96",
+      "above": "=SUM(DK95*$F$1)",
+      "below": "=SUM(DL83:DL96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "DM77",
+      "above": "=SUM(DL76*$F$1)",
+      "below": "=SUM(DM46:DM76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "DO77",
+      "above": "=SUM(DN76*$F$1)",
+      "below": "=SUM(DO46:DO76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "DQ77",
+      "above": "=SUM(DP76*$F$1)",
+      "below": "=SUM(DQ46:DQ76)",
+      "header": "INVALIDO_GB"
+    },
+    {
+      "cell": "DS77",
+      "above": "=SUM(DR76*$F$1)",
+      "below": "=SUM(DS46:DS76)",
+      "header": "IMPOSTO_GB"
+    },
+    {
+      "cell": "DU77",
+      "above": "=SUM(DT76*$F$1)",
+      "below": "=SUM(DU46:DU76)",
+      "header": "LUCRO_LIQUIDO_GB"
+    },
+    {
+      "cell": "DW77",
+      "above": "=SUM(DV76*$F$1)",
+      "below": "=SUM(DW46:DW76)",
+      "header": "ROI_NET_GB"
+    },
+    {
+      "cell": "DY77",
+      "above": "=SUM(DX76*$F$1)",
+      "below": "=SUM(DY46:DY76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "ED77",
+      "above": "=SUM(DH76,DJ76,DL76,DN76,DP76,DR76,DT76,DV76,DX76)",
+      "below": "=SUM(ED46:ED76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "EE77",
+      "above": "=SUM(ED76*$F$1)",
+      "below": "=SUM(EE46:EE76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "EG37",
+      "above": "=SUM(EG5:EG35)",
+      "below": "=SUM(EG36,EO36)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "EH77",
+      "above": "=SUM(EG76*$F$1)",
+      "below": "=SUM(EH46:EH76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "EJ77",
+      "above": "=SUM(EI76*$F$1)",
+      "below": "=SUM(EJ46:EJ76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "EJ96",
+      "above": "=SUM(EY36)",
+      "below": "=SUM(EJ83:EJ96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "EK96",
+      "above": "=SUM(EJ95*$F$1)",
+      "below": "=SUM(EK83:EK96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "EL77",
+      "above": "=SUM(EK76*$F$1)",
+      "below": "=SUM(EL46:EL76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "EN77",
+      "above": "=SUM(EM76*$F$1)",
+      "below": "=SUM(EN46:EN76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "EP77",
+      "above": "=SUM(EO76*$F$1)",
+      "below": "=SUM(EP46:EP76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "ER77",
+      "above": "=SUM(EQ76*$F$1)",
+      "below": "=SUM(ER46:ER76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "ET77",
+      "above": "=SUM(ES76*$F$1)",
+      "below": "=SUM(ET46:ET76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "EV77",
+      "above": "=SUM(EU76*$F$1)",
+      "below": "=SUM(EV46:EV76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "EX77",
+      "above": "=SUM(EW76*$F$1)",
+      "below": "=SUM(EX46:EX76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "FC77",
+      "above": "=SUM(EG76,EI76,EK76,EM76,EO76,EQ76,ES76,EU76,EW76)",
+      "below": "=SUM(FC46:FC76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "FD77",
+      "above": "=SUM(FC76*$F$1)",
+      "below": "=SUM(FD46:FD76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "FF37",
+      "above": "=SUM(FF5:FF35)",
+      "below": "=SUM(FG36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "FG77",
+      "above": "=SUM(FF76*$F$1)",
+      "below": "=SUM(FG46:FG76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "FI77",
+      "above": "=SUM(FH76*$F$1)",
+      "below": "=SUM(FI46:FI76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "FJ96",
+      "above": "=SUM(FQ36)",
+      "below": "=SUM(FJ83:FJ96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "FK77",
+      "above": "=SUM(FJ76*$F$1)",
+      "below": "=SUM(FK46:FK76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "FK96",
+      "above": "=SUM(FJ95*$F$1)",
+      "below": "=SUM(FK83:FK96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "FM77",
+      "above": "=SUM(FL76*$F$1)",
+      "below": "=SUM(FM46:FM76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "FO77",
+      "above": "=SUM(FN76*$F$1)",
+      "below": "=SUM(FO46:FO76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "FU77",
+      "above": "=SUM(FF76,FH76,FJ76,FL76,FN76)\n",
+      "below": "=SUM(FU46:FU76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "FV77",
+      "above": "=SUM(FU76*$F$1)",
+      "below": "=SUM(FV46:FV76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "FY37",
+      "above": "=SUM(FY5:FY35)",
+      "below": "=SUM(GA37:GA38)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "FY77",
+      "above": "=SUM(FX76*$F$1)",
+      "below": "=SUM(FY46:FY76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "GA77",
+      "above": "=SUM(FZ76*$F$1)",
+      "below": "=SUM(GA46:GA76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "GB96",
+      "above": "=SUM(GI36)",
+      "below": "=SUM(GB83:GB96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "GC77",
+      "above": "=SUM(GB76*$F$1)",
+      "below": "=SUM(GC46:GC76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "GC96",
+      "above": "=SUM(GB95*$F$1)",
+      "below": "=SUM(GC83:GC96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "GE77",
+      "above": "=SUM(GD76*$F$1)",
+      "below": "=SUM(GE46:GE76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "GG77",
+      "above": "=SUM(GF76*$F$1)",
+      "below": "=SUM(GG46:GG76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "GI77",
+      "above": "=SUM(GH76*$F$1)",
+      "below": "=SUM(GI46:GI76)",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "GM77",
+      "above": "=SUM(FX76,FZ76,GB76,GD76,GF76,GH76)",
+      "below": "=SUM(GM46:GM76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "GN77",
+      "above": "=SUM(GM76*$F$1)",
+      "below": "=SUM(GN46:GN76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "GQ37",
+      "above": "=SUM(GQ5:GQ35)",
+      "below": "=SUM(GS37:GS38)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "GQ77",
+      "above": "=SUM(GP76*$F$1)",
+      "below": "=SUM(GQ46:GQ76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "GS77",
+      "above": "=SUM(GR76*$F$1)",
+      "below": "=SUM(GS46:GS76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "GT96",
+      "above": "=SUM(HA36)",
+      "below": "=SUM(GT83:GT96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "GU77",
+      "above": "=SUM(GT76*$F$1)",
+      "below": "=SUM(GU46:GU76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "GU96",
+      "above": "=SUM(GT95*$F$1)",
+      "below": "=SUM(GU83:GU96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "GW77",
+      "above": "=SUM(GV76*$F$1)",
+      "below": "=SUM(GW46:GW76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "GY77",
+      "above": "=SUM(GX76*$F$1)",
+      "below": "=SUM(GY46:GY76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "HA77",
+      "above": "=SUM(GZ76*$F$1)",
+      "below": "=SUM(HA46:HA76)",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "HE77",
+      "above": "=SUM(GP76,GR76,GT76,GV76,GX76,GZ76)",
+      "below": "=SUM(HE46:HE76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "HF77",
+      "above": "=SUM(HE76*$F$1)",
+      "below": "=SUM(HF46:HF76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "HH37",
+      "above": "=SUM(HH5:HH35)",
+      "below": "=SUM(HI36,HR36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "HI25",
+      "above": "=IF(HH24=\"\",\"\",HH24/$H$1)",
+      "below": "=IF(HH26=\"\",\"\",HH26/$H$1)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "HI77",
+      "above": "=SUM(HH76*$F$1)",
+      "below": "=SUM(HI46:HI76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "HK77",
+      "above": "=SUM(HJ76*$F$1)",
+      "below": "=SUM(HK46:HK76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "HM77",
+      "above": "=SUM(HL76*$F$1)",
+      "below": "=SUM(HM46:HM76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "HO77",
+      "above": "=SUM(HN76*$F$1)",
+      "below": "=SUM(HO46:HO76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "HQ77",
+      "above": "=SUM(HP76*$F$1)",
+      "below": "=SUM(HQ46:HQ76)",
+      "header": "GROSS_CAD_GB"
+    },
+    {
+      "cell": "HR96",
+      "above": "=SUM(IB36)",
+      "below": "=SUM(HR83:HR96)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "HS77",
+      "above": "=SUM(HR76*$F$1)",
+      "below": "=SUM(HS46:HS76)",
+      "header": "INVALIDO_GB"
+    },
+    {
+      "cell": "HS96",
+      "above": "=SUM(HR95*$F$1)",
+      "below": "=SUM(HS83:HS96)",
+      "header": "INVALIDO_GB"
+    },
+    {
+      "cell": "HU77",
+      "above": "=SUM(HT76*$F$1)",
+      "below": "=SUM(HU46:HU76)",
+      "header": "IMPOSTO_GB"
+    },
+    {
+      "cell": "HW77",
+      "above": "=SUM(HV76*$F$1)",
+      "below": "=SUM(HW46:HW76)",
+      "header": "LUCRO_LIQUIDO_GB"
+    },
+    {
+      "cell": "HY77",
+      "above": "=SUM(HX76*$F$1)",
+      "below": "=SUM(HY46:HY76)",
+      "header": "ROI_NET_GB"
+    },
+    {
+      "cell": "IF77",
+      "above": "=SUM(HH76,HJ76,HL76,HN76,HP76,HR76,HT76,HV76,HX76)",
+      "below": "=SUM(IF46:IF76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "IG77",
+      "above": "=SUM(IF76*$F$1)",
+      "below": "=SUM(IG46:IG76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "II37",
+      "above": "=SUM(II5:II35)",
+      "below": "=SUM(IJ36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "IJ77",
+      "above": "=SUM(II76*$F$1)",
+      "below": "=SUM(IJ46:IJ76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "IL77",
+      "above": "=SUM(IK76*$F$1)",
+      "below": "=SUM(IL46:IL76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "IM96",
+      "above": "=SUM(IT36)",
+      "below": "=SUM(IM83:IM96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "IN77",
+      "above": "=SUM(IM76*$F$1)",
+      "below": "=SUM(IN46:IN76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "IN96",
+      "above": "=SUM(IM95*$F$1)",
+      "below": "=SUM(IN83:IN96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "IP77",
+      "above": "=SUM(IO76*$F$1)",
+      "below": "=SUM(IP46:IP76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "IR77",
+      "above": "=SUM(IQ76*$F$1)",
+      "below": "=SUM(IR46:IR76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "IX77",
+      "above": "=SUM(II76,IK76,IM76,IO76,IQ76)\n",
+      "below": "=SUM(IX46:IX76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "IY77",
+      "above": "=SUM(IX76*$F$1)",
+      "below": "=SUM(IY46:IY76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "JA37",
+      "above": "=SUM(JA5:JA35)",
+      "below": "=SUM(JB36,JK36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "JB77",
+      "above": "=SUM(JA76*$F$1)",
+      "below": "=SUM(JB46:JB76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "JD77",
+      "above": "=SUM(JC76*$F$1)",
+      "below": "=SUM(JD46:JD76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "JE96",
+      "above": "=SUM(JU36)",
+      "below": "=SUM(JE83:JE96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "JF77",
+      "above": "=SUM(JE76*$F$1)",
+      "below": "=SUM(JF46:JF76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "JF96",
+      "above": "=SUM(JE95*$F$1)",
+      "below": "=SUM(JF83:JF96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "JH77",
+      "above": "=SUM(JG76*$F$1)",
+      "below": "=SUM(JH46:JH76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "JJ77",
+      "above": "=SUM(JI76*$F$1)",
+      "below": "=SUM(JJ46:JJ76)",
+      "header": "GROSS_CAD_GB"
+    },
+    {
+      "cell": "JL77",
+      "above": "=SUM(JK76*$F$1)",
+      "below": "=SUM(JL46:JL76)",
+      "header": "INVALIDO_GB"
+    },
+    {
+      "cell": "JN77",
+      "above": "=SUM(JM76*$F$1)",
+      "below": "=SUM(JN46:JN76)",
+      "header": "IMPOSTO_GB"
+    },
+    {
+      "cell": "JP77",
+      "above": "=SUM(JO76*$F$1)",
+      "below": "=SUM(JP46:JP76)",
+      "header": "LUCRO_LIQUIDO_GB"
+    },
+    {
+      "cell": "JY77",
+      "above": "=SUM(JA76,JC76,JE76,JG76,JI76,JK76,JM76,JO76)",
+      "below": "=SUM(JY46:JY76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "JZ77",
+      "above": "=SUM(JY76*$F$1)",
+      "below": "=SUM(JZ46:JZ76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "KB37",
+      "above": "=SUM(KB5:KB35)",
+      "below": "=SUM(KC36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "KC77",
+      "above": "=SUM(KB76*$F$1)",
+      "below": "=SUM(KC46:KC76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "KE77",
+      "above": "=SUM(KD76*$F$1)",
+      "below": "=SUM(KE46:KE76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "KF96",
+      "above": "=SUM(KM36)",
+      "below": "=SUM(KF83:KF96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "KG77",
+      "above": "=SUM(KF76*$F$1)",
+      "below": "=SUM(KG46:KG76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "KG96",
+      "above": "=SUM(KF95*$F$1)",
+      "below": "=SUM(KG83:KG96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "KI77",
+      "above": "=SUM(KH76*$F$1)",
+      "below": "=SUM(KI46:KI76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "KK77",
+      "above": "=SUM(KJ76*$F$1)",
+      "below": "=SUM(KK46:KK76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "KQ77",
+      "above": "=SUM(KB76,KD76,KF76,KH76,KJ76)\n",
+      "below": "=SUM(KQ46:KQ76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "KR77",
+      "above": "=SUM(KQ76*$F$1)",
+      "below": "=SUM(KR46:KR76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "KT37",
+      "above": "=SUM(KT5:KT35)",
+      "below": "=SUM(KU36,LD36,LM36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "KU77",
+      "above": "=SUM(KT76*$F$1)",
+      "below": "=SUM(KU46:KU76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "KW77",
+      "above": "=SUM(KV76*$F$1)",
+      "below": "=SUM(KW46:KW76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "KX96",
+      "above": "=SUM(LW36)",
+      "below": "=SUM(KX83:KX96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "KY77",
+      "above": "=SUM(KX76*$F$1)",
+      "below": "=SUM(KY46:KY76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "KY96",
+      "above": "=SUM(KX95*$F$1)",
+      "below": "=SUM(KY83:KY96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "LA77",
+      "above": "=SUM(KZ76*$F$1)",
+      "below": "=SUM(LA46:LA76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "LC77",
+      "above": "=SUM(LB76*$F$1)",
+      "below": "=SUM(LC46:LC76)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "LE77",
+      "above": "=SUM(LD76*$F$1)",
+      "below": "=SUM(LE46:LE76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "LG77",
+      "above": "=SUM(LF76*$F$1)",
+      "below": "=SUM(LG46:LG76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "LI77",
+      "above": "=SUM(LH76*$F$1)",
+      "below": "=SUM(LI46:LI76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "LK77",
+      "above": "=SUM(LJ76*$F$1)",
+      "below": "=SUM(LK46:LK76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "LM77",
+      "above": "=SUM(LL76*$F$1)",
+      "below": "=SUM(LM46:LM76)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "LO77",
+      "above": "=SUM(LN76*$F$1)",
+      "below": "=SUM(LO46:LO76)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "LQ77",
+      "above": "=SUM(LP76*$F$1)",
+      "below": "=SUM(LQ46:LQ76)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "LS77",
+      "above": "=SUM(LR76*$F$1)",
+      "below": "=SUM(LS46:LS76)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "MA77",
+      "above": "=SUM(KT76,KV76,KX76,KZ76,LB76,LD76,LF76,LH76,LJ76,LL76,LN76,LP76,LR76)",
+      "below": "=SUM(MA46:MA76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "MB77",
+      "above": "=SUM(MA76*$F$1)",
+      "below": "=SUM(MB46:MB76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "MD37",
+      "above": "=SUM(MD5:MD35)",
+      "below": "=SUM(ME36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "ME77",
+      "above": "=SUM(MD76*$F$1)",
+      "below": "=SUM(ME46:ME76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "MG77",
+      "above": "=SUM(MF76*$F$1)",
+      "below": "=SUM(MG46:MG76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "MH96",
+      "above": "=SUM(MO36)",
+      "below": "=SUM(MH83:MH96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "MI77",
+      "above": "=SUM(MH76*$F$1)",
+      "below": "=SUM(MI46:MI76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "MI96",
+      "above": "=SUM(MH95*$F$1)",
+      "below": "=SUM(MI83:MI96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "MK77",
+      "above": "=SUM(MJ76*$F$1)",
+      "below": "=SUM(MK46:MK76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "MM77",
+      "above": "=SUM(ML76*$F$1)",
+      "below": "=SUM(MM46:MM76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "MS77",
+      "above": "=SUM(MD76,MF76,MH76,MJ76,ML76)\n",
+      "below": "=SUM(MS46:MS76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "MT77",
+      "above": "=SUM(MS76*$F$1)",
+      "below": "=SUM(MT46:MT76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "MV37",
+      "above": "=SUM(MV5:MV35)",
+      "below": "=SUM(MW36,NF36,NO36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "MW77",
+      "above": "=SUM(MV76*$F$1)",
+      "below": "=SUM(MW46:MW76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "MY77",
+      "above": "=SUM(MX76*$F$1)",
+      "below": "=SUM(MY46:MY76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "MZ96",
+      "above": "=SUM(NY36)",
+      "below": "=SUM(MZ83:MZ96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "NA77",
+      "above": "=SUM(MZ76*$F$1)",
+      "below": "=SUM(NA46:NA76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "NA96",
+      "above": "=SUM(MZ95*$F$1)",
+      "below": "=SUM(NA83:NA96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "NC77",
+      "above": "=SUM(NB76*$F$1)",
+      "below": "=SUM(NC46:NC76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "NE77",
+      "above": "=SUM(ND76*$F$1)",
+      "below": "=SUM(NE46:NE76)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "NG77",
+      "above": "=SUM(NF76*$F$1)",
+      "below": "=SUM(NG46:NG76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "NI77",
+      "above": "=SUM(NH76*$F$1)",
+      "below": "=SUM(NI46:NI76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "NK77",
+      "above": "=SUM(NJ76*$F$1)",
+      "below": "=SUM(NK46:NK76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "NM77",
+      "above": "=SUM(NL76*$F$1)",
+      "below": "=SUM(NM46:NM76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "NO77",
+      "above": "=SUM(NN76*$F$1)",
+      "below": "=SUM(NO46:NO76)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "NQ77",
+      "above": "=SUM(NP76*$F$1)",
+      "below": "=SUM(NQ46:NQ76)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "NS77",
+      "above": "=SUM(NR76*$F$1)",
+      "below": "=SUM(NS46:NS76)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "NU77",
+      "above": "=SUM(NT76*$F$1)",
+      "below": "=SUM(NU46:NU76)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "OC77",
+      "above": "=SUM(MV76,MX76,MZ76,NB76,ND76,NF76,NH76,NJ76,NL76,NN76,NP76,NR76,NT76)",
+      "below": "=SUM(OC46:OC76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "OD77",
+      "above": "=SUM(OC76*$F$1)",
+      "below": "=SUM(OD46:OD76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "OF37",
+      "above": "=SUM(OF5:OF35)",
+      "below": "=SUM(OG36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "OG77",
+      "above": "=SUM(OF76*$F$1)",
+      "below": "=SUM(OG46:OG76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "OI77",
+      "above": "=SUM(OH76*$F$1)",
+      "below": "=SUM(OI46:OI76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "OJ96",
+      "above": "=SUM(OQ36)",
+      "below": "=SUM(OJ83:OJ96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "OK77",
+      "above": "=SUM(OJ76*$F$1)",
+      "below": "=SUM(OK46:OK76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "OK96",
+      "above": "=SUM(OJ95*$F$1)",
+      "below": "=SUM(OK83:OK96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "OM77",
+      "above": "=SUM(OL76*$F$1)",
+      "below": "=SUM(OM46:OM76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "OO77",
+      "above": "=SUM(ON76*$F$1)",
+      "below": "=SUM(OO46:OO76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "OU77",
+      "above": "=SUM(OF76,OH76,OJ76,OL76,ON76)\n",
+      "below": "=SUM(OU46:OU76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "OV77",
+      "above": "=SUM(OG76,OI76,OK76,OM76,OO76)\n",
+      "below": "=SUM(OV46:OV76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "OX37",
+      "above": "=SUM(OX5:OX35)",
+      "below": "=SUM(OY36,PQ36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "OY77",
+      "above": "=SUM(OX76*$F$1)",
+      "below": "=SUM(OY46:OY76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "PA77",
+      "above": "=SUM(OZ76*$F$1)",
+      "below": "=SUM(PA46:PA76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "PB96",
+      "above": "=SUM(QA36)",
+      "below": "=SUM(PB83:PB96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "PC77",
+      "above": "=SUM(PB76*$F$1)",
+      "below": "=SUM(PC46:PC76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "PC96",
+      "above": "=SUM(PB95*$F$1)",
+      "below": "=SUM(PC83:PC96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "PE77",
+      "above": "=SUM(PD76*$F$1)",
+      "below": "=SUM(PE46:PE76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "PG77",
+      "above": "=SUM(PF76*$F$1)",
+      "below": "=SUM(PG46:PG76)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "PI77",
+      "above": "=SUM(PH76*$F$1)",
+      "below": "=SUM(PI46:PI76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "PK77",
+      "above": "=SUM(PJ76*$F$1)",
+      "below": "=SUM(PK46:PK76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "PM77",
+      "above": "=SUM(PL76*$F$1)",
+      "below": "=SUM(PM46:PM76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "PO77",
+      "above": "=SUM(PN76*$F$1)",
+      "below": "=SUM(PO46:PO76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "PQ77",
+      "above": "=SUM(PP76*$F$1)",
+      "below": "=SUM(PQ46:PQ76)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "PS77",
+      "above": "=SUM(PR76*$F$1)",
+      "below": "=SUM(PS46:PS76)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "PU77",
+      "above": "=SUM(PT76*$F$1)",
+      "below": "=SUM(PU46:PU76)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "PW77",
+      "above": "=SUM(PV76*$F$1)",
+      "below": "=SUM(PW46:PW76)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "QE77",
+      "above": "=SUM(OX76,OZ76,PB76,PD76,PF76,PH76,PJ76,PL76,PN76,PP76,PR76,PT76,PV76)",
+      "below": "=SUM(QE46:QE76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "QF77",
+      "above": "=SUM(QE76*$F$1)",
+      "below": "=SUM(QF46:QF76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "QH37",
+      "above": "=SUM(QH5:QH35)",
+      "below": "=SUM(QI36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "QI77",
+      "above": "=SUM(QH76*$F$1)",
+      "below": "=SUM(QI46:QI76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "QK77",
+      "above": "=SUM(QJ76*$F$1)",
+      "below": "=SUM(QK46:QK76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "QL96",
+      "above": "=SUM(QS36)",
+      "below": "=SUM(QL83:QL96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "QM77",
+      "above": "=SUM(QL76*$F$1)",
+      "below": "=SUM(QM46:QM76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "QM96",
+      "above": "=SUM(QL95*$F$1)",
+      "below": "=SUM(QM83:QM96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "QO77",
+      "above": "=SUM(QN76*$F$1)",
+      "below": "=SUM(QO46:QO76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "QQ77",
+      "above": "=SUM(QP76*$F$1)",
+      "below": "=SUM(QQ46:QQ76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "QW77",
+      "above": "=SUM(QH76,QJ76,QL76,QN76,QP76)\n",
+      "below": "=SUM(QW46:QW76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "QX77",
+      "above": "=SUM(QI76,QK76,QM76,QO76,QQ76)\n",
+      "below": "=SUM(QX46:QX76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "QZ37",
+      "above": "=SUM(QZ5:QZ35)",
+      "below": "=SUM(RA36)",
+      "header": "GROSS_CAD_DE"
+    },
+    {
+      "cell": "RA77",
+      "above": "=SUM(QZ76*$F$1)",
+      "below": "=SUM(RA46:RA76)",
+      "header": "GROSS_USD_DE"
+    },
+    {
+      "cell": "RC77",
+      "above": "=SUM(RB76*$F$1)",
+      "below": "=SUM(RC46:RC76)",
+      "header": "NET_USD_DE"
+    },
+    {
+      "cell": "RD96",
+      "above": "=SUM(RK36)",
+      "below": "=SUM(RD83:RD96)",
+      "header": "IMPOSTO_DE"
+    },
+    {
+      "cell": "RE77",
+      "above": "=SUM(RD76*$F$1)",
+      "below": "=SUM(RE46:RE76)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "RE96",
+      "above": "=SUM(RD95*$F$1)",
+      "below": "=SUM(RE83:RE96)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "RG77",
+      "above": "=SUM(RF76*$F$1)",
+      "below": "=SUM(RG46:RG76)",
+      "header": "ROI_GROSS_DE"
+    },
+    {
+      "cell": "RI77",
+      "above": "=SUM(RH76*$F$1)",
+      "below": "=SUM(RI46:RI76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "RO77",
+      "above": "=SUM(QZ76,RB76,RD76,RF76,RH76)\n",
+      "below": "=SUM(RO46:RO76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "RP77",
+      "above": "=SUM(RA76,RC76,RE76,RG76,RI76)\n",
+      "below": "=SUM(RP46:RP76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "RR37",
+      "above": "=SUM(RR5:RR35)",
+      "below": "=SUM(RS36,SK36,RS136)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "RS77",
+      "above": "=SUM(RR76*$F$1)",
+      "below": "=SUM(RS46:RS76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "RS137",
+      "above": "=SUM(RS105:RS135)",
+      "below": "=SUM(RS136,SB136,SK136)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "RS177",
+      "above": "=SUM(RR176*$F$1)",
+      "below": "=SUM(RS146:RS176)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "RU77",
+      "above": "=SUM(RT76*$F$1)",
+      "below": "=SUM(RU46:RU76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "RU177",
+      "above": "=SUM(RT176*$F$1)",
+      "below": "=SUM(RU146:RU176)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "RV96",
+      "above": "=SUM(SU36)",
+      "below": "=SUM(RV83:RV95)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "RV197",
+      "above": "=SUM(SU136)",
+      "below": "=SUM(RV184:RV196)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "RW77",
+      "above": "=SUM(RV76*$F$1)",
+      "below": "=SUM(RW46:RW76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "RW96",
+      "above": "=SUM(RV95*$F$1)",
+      "below": "=SUM(RW83:RW95)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "RW177",
+      "above": "=SUM(RV176*$F$1)",
+      "below": "=SUM(RW146:RW176)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "RW197",
+      "above": "=SUM(RV196*$F$1)",
+      "below": "=SUM(RW184:RW196)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "RY77",
+      "above": "=SUM(RX76*$F$1)",
+      "below": "=SUM(RY46:RY76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "RY177",
+      "above": "=SUM(RX176*$F$1)",
+      "below": "=SUM(RY146:RY176)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "SA77",
+      "above": "=SUM(RZ76*$F$1)",
+      "below": "=SUM(SA46:SA76)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "SA177",
+      "above": "=SUM(RZ176*$F$1)",
+      "below": "=SUM(SA146:SA176)",
+      "header": "GROSS_CAD_BR"
+    },
+    {
+      "cell": "SC77",
+      "above": "=SUM(SB76*$F$1)",
+      "below": "=SUM(SC46:SC76)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "SC177",
+      "above": "=SUM(SB176*$F$1)",
+      "below": "=SUM(SC146:SC176)",
+      "header": "INVALIDO_BR"
+    },
+    {
+      "cell": "SE77",
+      "above": "=SUM(SD76*$F$1)",
+      "below": "=SUM(SE46:SE76)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "SE177",
+      "above": "=SUM(SD176*$F$1)",
+      "below": "=SUM(SE146:SE176)",
+      "header": "IMPOSTO_BR"
+    },
+    {
+      "cell": "SG77",
+      "above": "=SUM(SF76*$F$1)",
+      "below": "=SUM(SG46:SG76)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "SG177",
+      "above": "=SUM(SF176*$F$1)",
+      "below": "=SUM(SG146:SG176)",
+      "header": "LUCRO_LIQUIDO_BR"
+    },
+    {
+      "cell": "SI77",
+      "above": "=SUM(SH76*$F$1)",
+      "below": "=SUM(SI46:SI76)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "SI177",
+      "above": "=SUM(SH176*$F$1)",
+      "below": "=SUM(SI146:SI176)",
+      "header": "ROI_NET_BR"
+    },
+    {
+      "cell": "SK77",
+      "above": "=SUM(SJ76*$F$1)",
+      "below": "=SUM(SK46:SK76)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "SK177",
+      "above": "=SUM(SJ176*$F$1)",
+      "below": "=SUM(SK146:SK176)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "SM77",
+      "above": "=SUM(SL76*$F$1)",
+      "below": "=SUM(SM46:SM76)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "SM177",
+      "above": "=SUM(SL176*$F$1)",
+      "below": "=SUM(SM146:SM176)",
+      "header": "NET_USD_GB"
+    },
+    {
+      "cell": "SO77",
+      "above": "=SUM(SN76*$F$1)",
+      "below": "=SUM(SO46:SO76)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "SO177",
+      "above": "=SUM(SN176*$F$1)",
+      "below": "=SUM(SO146:SO176)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "SQ77",
+      "above": "=SUM(SP76*$F$1)",
+      "below": "=SUM(SQ46:SQ76)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "SQ177",
+      "above": "=SUM(SP176*$F$1)",
+      "below": "=SUM(SQ146:SQ176)",
+      "header": "ROI_GROSS_GB"
+    },
+    {
+      "cell": "SY77",
+      "above": "=SUM(RR76,RT76,RV76,RX76,RZ76,SB76,SD76,SF76,SH76,SJ76,SL76,SN76,SP76)",
+      "below": "=SUM(SY46:SY76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "SY177",
+      "above": "=SUM(RR176,RT176,RV176,RX176,RZ176,SB176,SD176,SF176,SH176,SJ176,SL176,SN176,SP176)",
+      "below": "=SUM(SY146:SY176)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "SZ77",
+      "above": "=SUM(SY76*$F$1)",
+      "below": "=SUM(SZ46:SZ76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "SZ177",
+      "above": "=SUM(SY176*$F$1)",
+      "below": "=SUM(SZ146:SZ176)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "TB37",
+      "above": "=SUM(TB5:TB35)",
+      "below": "=SUM(TC36,TL36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "TC77",
+      "above": "=SUM(TB76*$F$1)",
+      "below": "=SUM(TC46:TC76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "TE77",
+      "above": "=SUM(TD76*$F$1)",
+      "below": "=SUM(TE46:TE76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "TF96",
+      "above": "=SUM(TV36)",
+      "below": "=SUM(TF83:TF95)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "TG77",
+      "above": "=SUM(TF76*$F$1)",
+      "below": "=SUM(TG46:TG76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "TG96",
+      "above": "=SUM(TF95*$F$1)",
+      "below": "=SUM(TG83:TG95)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "TI77",
+      "above": "=SUM(TH76*$F$1)",
+      "below": "=SUM(TI46:TI76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "TK77",
+      "above": "=SUM(TJ76*$F$1)",
+      "below": "=SUM(TK46:TK76)",
+      "header": "GROSS_CAD_ES"
+    },
+    {
+      "cell": "TM77",
+      "above": "=SUM(TL76*$F$1)",
+      "below": "=SUM(TM46:TM76)",
+      "header": "INVALIDO_ES"
+    },
+    {
+      "cell": "TO77",
+      "above": "=SUM(TN76*$F$1)",
+      "below": "=SUM(TO46:TO76)",
+      "header": "IMPOSTO_ES"
+    },
+    {
+      "cell": "TQ77",
+      "above": "=SUM(TP76*$F$1)",
+      "below": "=SUM(TQ46:TQ76)",
+      "header": "LUCRO_LIQUIDO_ES"
+    },
+    {
+      "cell": "TS77",
+      "above": "=SUM(TR76*$F$1)",
+      "below": "=SUM(TS46:TS76)",
+      "header": "ROI_NET_ES"
+    },
+    {
+      "cell": "TZ77",
+      "above": "=SUM(TB76,TD76,TF76,TH76,TJ76,TL76,TN76,TP76,TR76)",
+      "below": "=SUM(TZ46:TZ76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "UA77",
+      "above": "=SUM(TZ76*$F$1)",
+      "below": "=SUM(UA46:UA76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "UC37",
+      "above": "=SUM(UC5:UC35)",
+      "below": "=SUM(UD36,UM36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "UD77",
+      "above": "=SUM(UC76*$F$1)",
+      "below": "=SUM(UD46:UD76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "UF77",
+      "above": "=SUM(UE76*$F$1)",
+      "below": "=SUM(UF46:UF76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "UG96",
+      "above": "=SUM(UW36)",
+      "below": "=SUM(UG83:UG96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "UH77",
+      "above": "=SUM(UG76*$F$1)",
+      "below": "=SUM(UH46:UH76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "UH96",
+      "above": "=SUM(UG95*$F$1)",
+      "below": "=SUM(UH83:UH96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "UJ77",
+      "above": "=SUM(UI76*$F$1)",
+      "below": "=SUM(UJ46:UJ76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "UL77",
+      "above": "=SUM(UK76*$F$1)",
+      "below": "=SUM(UL46:UL76)",
+      "header": "GROSS_CAD_GB"
+    },
+    {
+      "cell": "UN77",
+      "above": "=SUM(UM76*$F$1)",
+      "below": "=SUM(UN46:UN76)",
+      "header": "INVALIDO_GB"
+    },
+    {
+      "cell": "UP77",
+      "above": "=SUM(UO76*$F$1)",
+      "below": "=SUM(UP46:UP76)",
+      "header": "IMPOSTO_GB"
+    },
+    {
+      "cell": "UR77",
+      "above": "=SUM(UQ76*$F$1)",
+      "below": "=SUM(UR46:UR76)",
+      "header": "LUCRO_LIQUIDO_GB"
+    },
+    {
+      "cell": "UT77",
+      "above": "=SUM(US76*$F$1)",
+      "below": "=SUM(UT46:UT76)",
+      "header": "ROI_NET_GB"
+    },
+    {
+      "cell": "VA77",
+      "above": "=SUM(UC76,UE76,UG76,UI76,UK76,UM76,UO76,UQ76,US76)",
+      "below": "=SUM(VA46:VA76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "VB77",
+      "above": "=SUM(VA76*$F$1)",
+      "below": "=SUM(VB46:VB76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "VD37",
+      "above": "=SUM(VD5:VD35)",
+      "below": "=SUM(VE36,VN36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "VE77",
+      "above": "=SUM(VD76*$F$1)",
+      "below": "=SUM(VE46:VE76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "VG77",
+      "above": "=SUM(VF76*$F$1)",
+      "below": "=SUM(VG46:VG76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "VI77",
+      "above": "=SUM(VH76*$F$1)",
+      "below": "=SUM(VI46:VI76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "VJ96",
+      "above": "=SUM(VX36)",
+      "below": "=SUM(VJ83:VJ96)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "VK77",
+      "above": "=SUM(VJ76*$F$1)",
+      "below": "=SUM(VK46:VK76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "VK96",
+      "above": "=SUM(VJ95*$F$1)",
+      "below": "=SUM(VK83:VK96)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "VM77",
+      "above": "=SUM(VL76*$F$1)",
+      "below": "=SUM(VM46:VM76)",
+      "header": "GROSS_CAD_ES"
+    },
+    {
+      "cell": "VO77",
+      "above": "=SUM(VN76*$F$1)",
+      "below": "=SUM(VO46:VO76)",
+      "header": "INVALIDO_ES"
+    },
+    {
+      "cell": "VQ77",
+      "above": "=SUM(VP76*$F$1)",
+      "below": "=SUM(VQ46:VQ76)",
+      "header": "IMPOSTO_ES"
+    },
+    {
+      "cell": "VS77",
+      "above": "=SUM(VR76*$F$1)",
+      "below": "=SUM(VS46:VS76)",
+      "header": "LUCRO_LIQUIDO_ES"
+    },
+    {
+      "cell": "VU77",
+      "above": "=SUM(VT76*$F$1)",
+      "below": "=SUM(VU46:VU76)",
+      "header": "ROI_NET_ES"
+    },
+    {
+      "cell": "WB77",
+      "above": "=SUM(VD76,VF76,VH76,VJ76,VL76,VN76,VP76,VR76,VT76)",
+      "below": "=SUM(WB46:WB76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "WC77",
+      "above": "=SUM(WB76*$F$1)",
+      "below": "=SUM(WC46:WC76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "WE37",
+      "above": "=SUM(WE5:WE35)",
+      "below": "=SUM(WF36,WO36,WX36,XG36,XP36)\n",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "WF77",
+      "above": "=SUM(WE76*$F$1)",
+      "below": "=SUM(WF46:WF76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "WH77",
+      "above": "=SUM(WG76*$F$1)",
+      "below": "=SUM(WH46:WH76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "WJ77",
+      "above": "=SUM(WI76*$F$1)",
+      "below": "=SUM(WJ46:WJ76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "WL77",
+      "above": "=SUM(WK76*$F$1)",
+      "below": "=SUM(WL46:WL76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "WN77",
+      "above": "=SUM(WM76*$F$1)",
+      "below": "=SUM(WN46:WN76)",
+      "header": "GROSS_CAD_CA"
+    },
+    {
+      "cell": "WP77",
+      "above": "=SUM(WO76*$F$1)",
+      "below": "=SUM(WP46:WP76)",
+      "header": "INVALIDO_CA"
+    },
+    {
+      "cell": "WR77",
+      "above": "=SUM(WQ76*$F$1)",
+      "below": "=SUM(WR46:WR76)",
+      "header": "IMPOSTO_CA"
+    },
+    {
+      "cell": "WR96",
+      "above": "=SUM(XZ36)",
+      "below": "=SUM(WR83:WR96)",
+      "header": "IMPOSTO_CA"
+    },
+    {
+      "cell": "WS96",
+      "above": "=SUM(WR95*$F$1)",
+      "below": "=SUM(WS83:WS96)",
+      "header": "GASTOS_CA"
+    },
+    {
+      "cell": "WT77",
+      "above": "=SUM(WS76*$F$1)",
+      "below": "=SUM(WT46:WT76)",
+      "header": "LUCRO_LIQUIDO_CA"
+    },
+    {
+      "cell": "WV77",
+      "above": "=SUM(WU76*$F$1)",
+      "below": "=SUM(WV46:WV76)",
+      "header": "ROI_NET_CA"
+    },
+    {
+      "cell": "WX77",
+      "above": "=SUM(WW76*$F$1)",
+      "below": "=SUM(WX46:WX76)",
+      "header": "GROSS_USD_MX"
+    },
+    {
+      "cell": "WZ77",
+      "above": "=SUM(WY76*$F$1)",
+      "below": "=SUM(WZ46:WZ76)",
+      "header": "NET_USD_MX"
+    },
+    {
+      "cell": "XB77",
+      "above": "=SUM(XA76*$F$1)",
+      "below": "=SUM(XB46:XB76)",
+      "header": "GASTOS_MX"
+    },
+    {
+      "cell": "XD77",
+      "above": "=SUM(XC76*$F$1)",
+      "below": "=SUM(XD46:XD76)",
+      "header": "ROI_GROSS_MX"
+    },
+    {
+      "cell": "XF77",
+      "above": "=SUM(XE76*$F$1)",
+      "below": "=SUM(XF46:XF76)",
+      "header": "GROSS_CAD_AR"
+    },
+    {
+      "cell": "XH77",
+      "above": "=SUM(XG76*$F$1)",
+      "below": "=SUM(XH46:XH76)",
+      "header": "INVALIDO_AR"
+    },
+    {
+      "cell": "XJ77",
+      "above": "=SUM(XI76*$F$1)",
+      "below": "=SUM(XJ46:XJ76)",
+      "header": "IMPOSTO_AR"
+    },
+    {
+      "cell": "XL77",
+      "above": "=SUM(XK76*$F$1)",
+      "below": "=SUM(XL46:XL76)",
+      "header": "LUCRO_LIQUIDO_AR"
+    },
+    {
+      "cell": "XN77",
+      "above": "=SUM(XM76*$F$1)",
+      "below": "=SUM(XN46:XN76)",
+      "header": "ROI_NET_AR"
+    },
+    {
+      "cell": "XP77",
+      "above": "=SUM(XO76*$F$1)",
+      "below": "=SUM(XP46:XP76)",
+      "header": "GROSS_USD_ZA"
+    },
+    {
+      "cell": "XR77",
+      "above": "=SUM(XQ76*$F$1)",
+      "below": "=SUM(XR46:XR76)",
+      "header": "NET_USD_ZA"
+    },
+    {
+      "cell": "XT77",
+      "above": "=SUM(XS76*$F$1)",
+      "below": "=SUM(XT46:XT76)",
+      "header": "GASTOS_ZA"
+    },
+    {
+      "cell": "XV77",
+      "above": "=SUM(XU76*$F$1)",
+      "below": "=SUM(XV46:XV76)",
+      "header": "ROI_GROSS_ZA"
+    },
+    {
+      "cell": "YD77",
+      "above": "=SUM(WE76,WG76,WI76,WK76,WM76,WO76,WQ76,WS76,WU76,WW76,WY76,XA76,XC76,XE76,XG76,XI76,XK76,XM76,XO76,XQ76,XS76,XU76)",
+      "below": "=SUM(YD46:YD76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "YE77",
+      "above": "=SUM(YD76*$F$1)",
+      "below": "=SUM(YE46:YE76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "YG37",
+      "above": "=SUM(YG5:YG35)",
+      "below": "=SUM(YH36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "YH77",
+      "above": "=SUM(YG76*$F$1)",
+      "below": "=SUM(YH46:YH76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "YJ77",
+      "above": "=SUM(YI76*$F$1)",
+      "below": "=SUM(YJ46:YJ76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "YK96",
+      "above": "=SUM(YR36)",
+      "below": "=SUM(YK83:YK96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "YL77",
+      "above": "=SUM(YK76*$F$1)",
+      "below": "=SUM(YL46:YL76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "YL96",
+      "above": "=SUM(YK95*$F$1)",
+      "below": "=SUM(YL83:YL96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "YN77",
+      "above": "=SUM(YM76*$F$1)",
+      "below": "=SUM(YN46:YN76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "YP77",
+      "above": "=SUM(YO76*$F$1)",
+      "below": "=SUM(YP46:YP76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "YV77",
+      "above": "=SUM(YG76,YI76,YK76,YM76,YO76)\n",
+      "below": "=SUM(YV46:YV76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "YW77",
+      "above": "=SUM(YV76*$F$1)",
+      "below": "=SUM(YW46:YW76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "YY37",
+      "above": "=SUM(YY5:YY35)",
+      "below": "=SUM(YZ36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "YZ77",
+      "above": "=SUM(YY76*$F$1)",
+      "below": "=SUM(YZ46:YZ76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "ZB77",
+      "above": "=SUM(ZA76*$F$1)",
+      "below": "=SUM(ZB46:ZB76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "ZC96",
+      "above": "=SUM(ZJ36)",
+      "below": "=SUM(ZC83:ZC96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "ZD77",
+      "above": "=SUM(ZC76*$F$1)",
+      "below": "=SUM(ZD46:ZD76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "ZD96",
+      "above": "=SUM(ZC95*$F$1)",
+      "below": "=SUM(ZD83:ZD96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "ZF77",
+      "above": "=SUM(ZE76*$F$1)",
+      "below": "=SUM(ZF46:ZF76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "ZH77",
+      "above": "=SUM(ZG76*$F$1)",
+      "below": "=SUM(ZH46:ZH76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "ZN77",
+      "above": "=SUM(YY76,ZA76,ZC76,ZE76,ZG76)\n",
+      "below": "=SUM(ZN46:ZN76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ZO77",
+      "above": "=SUM(ZN76*$F$1)",
+      "below": "=SUM(ZO46:ZO76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ZQ37",
+      "above": "=SUM(ZQ5:ZQ35)",
+      "below": "=SUM(ZQ36,ZY36,AAG36,AAO36)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ137",
+      "above": "=SUM(ZQ105:ZQ135)",
+      "below": "=SUM(ZS137:ZS138)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ177",
+      "above": "=SUM(ZQ145:ZQ175)",
+      "below": "=SUM(ZS177:ZS178)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ217",
+      "above": "=SUM(ZQ185:ZQ215)",
+      "below": "=SUM(ZS217:ZS218)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ257",
+      "above": "=SUM(ZQ225:ZQ255)",
+      "below": "=SUM(ZS257:ZS258)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ297",
+      "above": "=SUM(ZQ265:ZQ295)",
+      "below": "=SUM(ZS297:ZS298)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZQ337",
+      "above": "=SUM(ZQ305:ZQ335)",
+      "below": "=SUM(ZS337:ZS338)",
+      "header": "GROSS_USD_GB"
+    },
+    {
+      "cell": "ZT96",
+      "above": "=SUM(AAY36)",
+      "below": "=SUM(ZT83:ZT96)",
+      "header": "IMPOSTO_GB"
+    },
+    {
+      "cell": "ZU96",
+      "above": "=SUM(ZT95*$F$1)",
+      "below": "=SUM(ZU83:ZU96)",
+      "header": "GASTOS_GB"
+    },
+    {
+      "cell": "AAB77",
+      "above": "=SUM(AAA76*$F$1)",
+      "below": "=SUM(AAB46:AAB76)",
+      "header": "IMPOSTO_TR"
+    },
+    {
+      "cell": "AAD77",
+      "above": "=SUM(AAC76*$F$1)",
+      "below": "=SUM(AAD46:AAD76)",
+      "header": "LUCRO_LIQUIDO_TR"
+    },
+    {
+      "cell": "AAF77",
+      "above": "=SUM(AAE76*$F$1)",
+      "below": "=SUM(AAF46:AAF76)",
+      "header": "ROI_NET_TR"
+    },
+    {
+      "cell": "AAN77",
+      "above": "=SUM(AAM76*$F$1)",
+      "below": "=SUM(AAN46:AAN76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "AAP77",
+      "above": "=SUM(AAO76*$F$1)",
+      "below": "=SUM(AAP46:AAP76)",
+      "header": "INVALIDO_ES"
+    },
+    {
+      "cell": "AAR77",
+      "above": "=SUM(AAQ76*$F$1)",
+      "below": "=SUM(AAR46:AAR76)",
+      "header": "IMPOSTO_ES"
+    },
+    {
+      "cell": "AAT77",
+      "above": "=SUM(AAS76*$F$1)",
+      "below": "=SUM(AAT46:AAT76)",
+      "header": "LUCRO_LIQUIDO_ES"
+    },
+    {
+      "cell": "AAV77",
+      "above": "=SUM(AAU76*$F$1)",
+      "below": "=SUM(AAV46:AAV76)",
+      "header": "ROI_NET_ES"
+    },
+    {
+      "cell": "ABC77",
+      "above": "=SUM(ZQ76,ZR76,ZS76,ZT76,ZU76,ZV76,AAA76,AAC76,AAE76,AAG76,AAI76,AAK76,AAM76,AAO76,AAQ76,AAS76,AAU76,AAW76)",
+      "below": "=SUM(ABC46:ABC76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ABD77",
+      "above": "=SUM(ABC76*$F$1)",
+      "below": "=SUM(ABD46:ABD76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ABF37",
+      "above": "=SUM(ABF5:ABF35)",
+      "below": "=SUM(ABG36,ABP36,ABY36)",
+      "header": "GROSS_CAD_DE"
+    },
+    {
+      "cell": "ABG77",
+      "above": "=SUM(ABF76*$F$1)",
+      "below": "=SUM(ABG46:ABG76)",
+      "header": "GROSS_USD_DE"
+    },
+    {
+      "cell": "ABI77",
+      "above": "=SUM(ABH76*$F$1)",
+      "below": "=SUM(ABI46:ABI76)",
+      "header": "NET_USD_DE"
+    },
+    {
+      "cell": "ABJ96",
+      "above": "=SUM(ACI36)",
+      "below": "=SUM(ABJ83:ABJ96)",
+      "header": "IMPOSTO_DE"
+    },
+    {
+      "cell": "ABK77",
+      "above": "=SUM(ABJ76*$F$1)",
+      "below": "=SUM(ABK46:ABK76)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "ABK96",
+      "above": "=SUM(ABJ95*$F$1)",
+      "below": "=SUM(ABK83:ABK96)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "ABM77",
+      "above": "=SUM(ABL76*$F$1)",
+      "below": "=SUM(ABM46:ABM76)",
+      "header": "ROI_GROSS_DE"
+    },
+    {
+      "cell": "ABO77",
+      "above": "=SUM(ABN76*$F$1)",
+      "below": "=SUM(ABO46:ABO76)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "ABQ77",
+      "above": "=SUM(ABP76*$F$1)",
+      "below": "=SUM(ABQ46:ABQ76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "ABS77",
+      "above": "=SUM(ABR76*$F$1)",
+      "below": "=SUM(ABS46:ABS76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "ABU77",
+      "above": "=SUM(ABT76*$F$1)",
+      "below": "=SUM(ABU46:ABU76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "ABW77",
+      "above": "=SUM(ABV76*$F$1)",
+      "below": "=SUM(ABW46:ABW76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "ABY77",
+      "above": "=SUM(ABX76*$F$1)",
+      "below": "=SUM(ABY46:ABY76)",
+      "header": "GROSS_USD_MX"
+    },
+    {
+      "cell": "ACA77",
+      "above": "=SUM(ABZ76*$F$1)",
+      "below": "=SUM(ACA46:ACA76)",
+      "header": "NET_USD_MX"
+    },
+    {
+      "cell": "ACC77",
+      "above": "=SUM(ACB76*$F$1)",
+      "below": "=SUM(ACC46:ACC76)",
+      "header": "GASTOS_MX"
+    },
+    {
+      "cell": "ACE77",
+      "above": "=SUM(ACD76*$F$1)",
+      "below": "=SUM(ACE46:ACE76)",
+      "header": "ROI_GROSS_MX"
+    },
+    {
+      "cell": "ACG77",
+      "above": "=SUM(ACF76*$F$1)",
+      "below": "=SUM(ACG46:ACG76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "ACM77",
+      "above": "=SUM(ABF76,ABH76,ABJ76,ABL76,ABN76,ABP76,ABR76,ABT76,ABV76,ABX76,ABZ76,ACB76,ACD76,ACF76)",
+      "below": "=SUM(ACM46:ACM76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ACN77",
+      "above": "=SUM(ACM76*$F$1)",
+      "below": "=SUM(ACN46:ACN76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ACP37",
+      "above": "=SUM(ACP5:ACP35)",
+      "below": "=SUM(ACQ36,ACZ36,ADI36)",
+      "header": "GROSS_CAD_DE"
+    },
+    {
+      "cell": "ACQ77",
+      "above": "=SUM(ACP76*$F$1)",
+      "below": "=SUM(ACQ46:ACQ76)",
+      "header": "GROSS_USD_DE"
+    },
+    {
+      "cell": "ACS77",
+      "above": "=SUM(ACR76*$F$1)",
+      "below": "=SUM(ACS46:ACS76)",
+      "header": "NET_USD_DE"
+    },
+    {
+      "cell": "ACT96",
+      "above": "=SUM(ADS36)",
+      "below": "=SUM(ACT83:ACT96)",
+      "header": "IMPOSTO_DE"
+    },
+    {
+      "cell": "ACU77",
+      "above": "=SUM(ACT76*$F$1)",
+      "below": "=SUM(ACU46:ACU76)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "ACU96",
+      "above": "=SUM(ACT95*$F$1)",
+      "below": "=SUM(ACU83:ACU96)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "ACW77",
+      "above": "=SUM(ACV76*$F$1)",
+      "below": "=SUM(ACW46:ACW76)",
+      "header": "ROI_GROSS_DE"
+    },
+    {
+      "cell": "ACY77",
+      "above": "=SUM(ACX76*$F$1)",
+      "below": "=SUM(ACY46:ACY76)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "ADA77",
+      "above": "=SUM(ACZ76*$F$1)",
+      "below": "=SUM(ADA46:ADA76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "ADC77",
+      "above": "=SUM(ADB76*$F$1)",
+      "below": "=SUM(ADC46:ADC76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "ADE77",
+      "above": "=SUM(ADD76*$F$1)",
+      "below": "=SUM(ADE46:ADE76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "ADG77",
+      "above": "=SUM(ADF76*$F$1)",
+      "below": "=SUM(ADG46:ADG76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "ADI77",
+      "above": "=SUM(ADH76*$F$1)",
+      "below": "=SUM(ADI46:ADI76)",
+      "header": "GROSS_USD_MX"
+    },
+    {
+      "cell": "ADK77",
+      "above": "=SUM(ADJ76*$F$1)",
+      "below": "=SUM(ADK46:ADK76)",
+      "header": "NET_USD_MX"
+    },
+    {
+      "cell": "ADM77",
+      "above": "=SUM(ADL76*$F$1)",
+      "below": "=SUM(ADM46:ADM76)",
+      "header": "GASTOS_MX"
+    },
+    {
+      "cell": "ADO77",
+      "above": "=SUM(ADN76*$F$1)",
+      "below": "=SUM(ADO46:ADO76)",
+      "header": "ROI_GROSS_MX"
+    },
+    {
+      "cell": "ADQ77",
+      "above": "=SUM(ADP76*$F$1)",
+      "below": "=SUM(ADQ46:ADQ76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "ADW35",
+      "above": "=IF(ABS(ADU34)=0,\"\",IF(OR(SUM(ACQ34,ACZ34,ADI34)=0,AND(ACQ34=\"\",ACZ34=\"\",ADI34=\"\")),-1,((ACQ34+ACZ34+ADI34)/ABS(ADU34))-1))\n",
+      "below": "=IF(ABS(ADU36)=0,\"\",IF(OR(SUM(ACQ36,ACZ36,ADI36)=0,AND(ACQ36=\"\",ACZ36=\"\",ADI36=\"\")),-1,((ACQ36+ACZ36+ADI36)/ABS(ADU36))-1))\n",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ADW77",
+      "above": "=SUM(ACP76,ACR76,ACT76,ACV76,ACX76,ACZ76,ADB76,ADD76,ADF76,ADH76,ADJ76,ADL76,ADN76,ADP76)",
+      "below": "=SUM(ADW46:ADW76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ADX35",
+      "above": "=IF(ABS(ADU34)=0,\"\",IF((ABS(ADU34)+ABS(ADR34)+ABS(ADS34))=0,\"\",IF(OR(ADQ34=\"\",ADQ34=0),-1,(ADQ34/(ABS(ADU34)+ABS(ADR34)+ABS(ADS34)))-1)))",
+      "below": "=IF(ABS(ADU36)=0,\"\",IF((ABS(ADU36)+ABS(ADR36)+ABS(ADS36))=0,\"\",IF(OR(ADQ36=\"\",ADQ36=0),-1,(ADQ36/(ABS(ADU36)+ABS(ADR36)+ABS(ADS36)))-1)))",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ADX77",
+      "above": "=SUM(ADW76*$F$1)",
+      "below": "=SUM(ADX46:ADX76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ADZ37",
+      "above": "=SUM(ADZ5:ADZ35)",
+      "below": "=SUM(AEA36,AEJ36,AES36)",
+      "header": "GROSS_CAD_DE"
+    },
+    {
+      "cell": "AEA77",
+      "above": "=SUM(ADZ76*$F$1)",
+      "below": "=SUM(AEA46:AEA76)",
+      "header": "GROSS_USD_DE"
+    },
+    {
+      "cell": "AEC77",
+      "above": "=SUM(AEB76*$F$1)",
+      "below": "=SUM(AEC46:AEC76)",
+      "header": "NET_USD_DE"
+    },
+    {
+      "cell": "AED96",
+      "above": "=SUM(AFC36)",
+      "below": "=SUM(AED83:AED96)",
+      "header": "IMPOSTO_DE"
+    },
+    {
+      "cell": "AEE77",
+      "above": "=SUM(AED76*$F$1)",
+      "below": "=SUM(AEE46:AEE76)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "AEE96",
+      "above": "=SUM(AED95*$F$1)",
+      "below": "=SUM(AEE83:AEE96)",
+      "header": "GASTOS_DE"
+    },
+    {
+      "cell": "AEG77",
+      "above": "=SUM(AEF76*$F$1)",
+      "below": "=SUM(AEG46:AEG76)",
+      "header": "ROI_GROSS_DE"
+    },
+    {
+      "cell": "AEI77",
+      "above": "=SUM(AEH76*$F$1)",
+      "below": "=SUM(AEI46:AEI76)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AEK77",
+      "above": "=SUM(AEJ76*$F$1)",
+      "below": "=SUM(AEK46:AEK76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "AEM77",
+      "above": "=SUM(AEL76*$F$1)",
+      "below": "=SUM(AEM46:AEM76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AEO77",
+      "above": "=SUM(AEN76*$F$1)",
+      "below": "=SUM(AEO46:AEO76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "AEQ77",
+      "above": "=SUM(AEP76*$F$1)",
+      "below": "=SUM(AEQ46:AEQ76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "AES77",
+      "above": "=SUM(AER76*$F$1)",
+      "below": "=SUM(AES46:AES76)",
+      "header": "GROSS_USD_MX"
+    },
+    {
+      "cell": "AEU77",
+      "above": "=SUM(AET76*$F$1)",
+      "below": "=SUM(AEU46:AEU76)",
+      "header": "NET_USD_MX"
+    },
+    {
+      "cell": "AEW77",
+      "above": "=SUM(AEV76*$F$1)",
+      "below": "=SUM(AEW46:AEW76)",
+      "header": "GASTOS_MX"
+    },
+    {
+      "cell": "AEY77",
+      "above": "=SUM(AEX76*$F$1)",
+      "below": "=SUM(AEY46:AEY76)",
+      "header": "ROI_GROSS_MX"
+    },
+    {
+      "cell": "AFA77",
+      "above": "=SUM(AEZ76*$F$1)",
+      "below": "=SUM(AFA46:AFA76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "AFG77",
+      "above": "=SUM(ADZ76,AEB76,AED76,AEF76,AEH76,AEJ76,AEL76,AEN76,AEP76,AER76,AET76,AEV76,AEX76,AEZ76)",
+      "below": "=SUM(AFG46:AFG76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AFH77",
+      "above": "=SUM(AFG76*$F$1)",
+      "below": "=SUM(AFH46:AFH76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AFJ37",
+      "above": "=SUM(AFJ5:AFJ35)",
+      "below": "=SUM(AFK36,AFT36,AFK136,AFT136)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AFJ137",
+      "above": "=SUM(AFJ105:AFJ135)",
+      "below": "=SUM(AFK136,AFT136)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AFK77",
+      "above": "=SUM(AFJ76*$F$1)",
+      "below": "=SUM(AFK46:AFK76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AFK177",
+      "above": "=SUM(AFJ176*$F$1)",
+      "below": "=SUM(AFK146:AFK176)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AFM77",
+      "above": "=SUM(AFL76*$F$1)",
+      "below": "=SUM(AFM46:AFM76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AFM177",
+      "above": "=SUM(AFL176*$F$1)",
+      "below": "=SUM(AFM146:AFM176)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AFN96",
+      "above": "=SUM(AGD36)",
+      "below": "=SUM(AFN83:AFN96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AFN197",
+      "above": "=SUM(AGD136)",
+      "below": "=SUM(AFN184:AFN197)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AFO77",
+      "above": "=SUM(AFN76*$F$1)",
+      "below": "=SUM(AFO46:AFO76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AFO96",
+      "above": "=SUM(AFN95*$F$1)",
+      "below": "=SUM(AFO83:AFO96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AFO177",
+      "above": "=SUM(AFN176*$F$1)",
+      "below": "=SUM(AFO146:AFO176)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AFO197",
+      "above": "=SUM(AFN196*$F$1)",
+      "below": "=SUM(AFO184:AFO197)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AFQ77",
+      "above": "=SUM(AFP76*$F$1)",
+      "below": "=SUM(AFQ46:AFQ76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AFQ177",
+      "above": "=SUM(AFP176*$F$1)",
+      "below": "=SUM(AFQ146:AFQ176)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AFS77",
+      "above": "=SUM(AFR76*$F$1)",
+      "below": "=SUM(AFS46:AFS76)",
+      "header": "GROSS_CAD_MX"
+    },
+    {
+      "cell": "AFS177",
+      "above": "=SUM(AFR176*$F$1)",
+      "below": "=SUM(AFS146:AFS176)",
+      "header": "GROSS_CAD_MX"
+    },
+    {
+      "cell": "AFU77",
+      "above": "=SUM(AFT76*$F$1)",
+      "below": "=SUM(AFU46:AFU76)",
+      "header": "INVALIDO_MX"
+    },
+    {
+      "cell": "AFU177",
+      "above": "=SUM(AFT176*$F$1)",
+      "below": "=SUM(AFU146:AFU176)",
+      "header": "INVALIDO_MX"
+    },
+    {
+      "cell": "AFW77",
+      "above": "=SUM(AFV76*$F$1)",
+      "below": "=SUM(AFW46:AFW76)",
+      "header": "IMPOSTO_MX"
+    },
+    {
+      "cell": "AFW177",
+      "above": "=SUM(AFV176*$F$1)",
+      "below": "=SUM(AFW146:AFW176)",
+      "header": "IMPOSTO_MX"
+    },
+    {
+      "cell": "AFY77",
+      "above": "=SUM(AFX76*$F$1)",
+      "below": "=SUM(AFY46:AFY76)",
+      "header": "LUCRO_LIQUIDO_MX"
+    },
+    {
+      "cell": "AFY177",
+      "above": "=SUM(AFX176*$F$1)",
+      "below": "=SUM(AFY146:AFY176)",
+      "header": "LUCRO_LIQUIDO_MX"
+    },
+    {
+      "cell": "AGA77",
+      "above": "=SUM(AFZ76*$F$1)",
+      "below": "=SUM(AGA46:AGA76)",
+      "header": "ROI_NET_MX"
+    },
+    {
+      "cell": "AGA177",
+      "above": "=SUM(AFZ176*$F$1)",
+      "below": "=SUM(AGA146:AGA176)",
+      "header": "ROI_NET_MX"
+    },
+    {
+      "cell": "AGC77",
+      "above": "=SUM(AGB76*$F$1)",
+      "below": "=SUM(AGC46:AGC76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "AGC177",
+      "above": "=SUM(AGB176*$F$1)",
+      "below": "=SUM(AGC146:AGC176)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "AGH77",
+      "above": "=SUM(AFJ76,AFL76,AFN76,AFP76,AFR76,AFT76,AFV76,AFX76,AFZ76,AGB76)",
+      "below": "=SUM(AGH46:AGH76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AGH135",
+      "above": "=IF(ABS(AGF134)=0,\"\",IF(OR(SUM(AFK134,AFT134)=0,AND(AFK134=\"\",AFT134=\"\")),-1,((AFK134+AFT134)/ABS(AGF134))-1))\n",
+      "below": "=IF(ABS(AGF136)=0,\"\",IF(OR(SUM(AFK136,AFT136)=0,AND(AFK136=\"\",AFT136=\"\")),-1,((AFK136+AFT136)/ABS(AGF136))-1))\n",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AGH177",
+      "above": "=SUM(AFJ176,AFL176,AFN176,AFP176,AFR176,AFT176,AFV176,AFX176,AFZ176,AGB176)",
+      "below": "=SUM(AGH146:AGH176)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AGI77",
+      "above": "=SUM(AGH76*$F$1)",
+      "below": "=SUM(AGI46:AGI76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AGI135",
+      "above": "=IF(ABS(AGF134)=0,\"\",IF((ABS(AGF134)+ABS(AGC134)+ABS(AGD134))=0,\"\",IF(OR(AGB134=\"\",AGB134=0),-1,(AGB134/(ABS(AGF134)+ABS(AGC134)+ABS(AGD134)))-1)))",
+      "below": "=IF(ABS(AGF136)=0,\"\",IF((ABS(AGF136)+ABS(AGC136)+ABS(AGD136))=0,\"\",IF(OR(AGB136=\"\",AGB136=0),-1,(AGB136/(ABS(AGF136)+ABS(AGC136)+ABS(AGD136)))-1)))",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AGI177",
+      "above": "=SUM(AGH176*$F$1)",
+      "below": "=SUM(AGI146:AGI176)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AGK37",
+      "above": "=SUM(AGK5:AGK35)",
+      "below": "=SUM(AGL36,AHA36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AGL77",
+      "above": "=SUM(AGK76*$F$1)",
+      "below": "=SUM(AGL46:AGL76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AGN77",
+      "above": "=SUM(AGM76*$F$1)",
+      "below": "=SUM(AGN46:AGN76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AGP77",
+      "above": "=SUM(AGO76*$F$1)",
+      "below": "=SUM(AGP46:AGP76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AGQ96",
+      "above": "=SUM(AGV36)",
+      "below": "=SUM(AGQ83:AGQ96)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "AGR77",
+      "above": "=SUM(AGQ76*$F$1)",
+      "below": "=SUM(AGR46:AGR76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AGR96",
+      "above": "=SUM(AGQ95*$F$1)",
+      "below": "=SUM(AGR83:AGR96)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AGT77",
+      "above": "=SUM(AGS76*$F$1)",
+      "below": "=SUM(AGT46:AGT76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "AGV77",
+      "above": "=SUM(AGU76*$F$1)",
+      "below": "=SUM(AGV46:AGV76)",
+      "header": "DESPESA_TOTAL"
+    },
+    {
+      "cell": "AGX77",
+      "above": "=SUM(AGW76*$F$1)",
+      "below": "=SUM(AGX46:AGX76)",
+      "header": "GASTOS_TOTAL"
+    },
+    {
+      "cell": "AGZ77",
+      "above": "=SUM(AGK76,AGM76,AGO76,AGQ76,AGS76,AGU76,AGW76)",
+      "below": "=SUM(AGZ46:AGZ76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AHA77",
+      "above": "=SUM(AGZ76*$F$1)",
+      "below": "=SUM(AHA46:AHA76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AHC37",
+      "above": "=SUM(AHC5:AHC35)",
+      "below": "=SUM(AHD36,AHM36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AHD77",
+      "above": "=SUM(AHC76*$F$1)",
+      "below": "=SUM(AHD46:AHD76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AHF77",
+      "above": "=SUM(AHE76*$F$1)",
+      "below": "=SUM(AHF46:AHF76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AHG96",
+      "above": "=SUM(AHW36)",
+      "below": "=SUM(AHG83:AHG96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AHH77",
+      "above": "=SUM(AHG76*$F$1)",
+      "below": "=SUM(AHH46:AHH76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AHH96",
+      "above": "=SUM(AHG95*$F$1)",
+      "below": "=SUM(AHH83:AHH96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AHJ77",
+      "above": "=SUM(AHI76*$F$1)",
+      "below": "=SUM(AHJ46:AHJ76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AHL77",
+      "above": "=SUM(AHK76*$F$1)",
+      "below": "=SUM(AHL46:AHL76)",
+      "header": "GROSS_CAD_MX"
+    },
+    {
+      "cell": "AHN77",
+      "above": "=SUM(AHM76*$F$1)",
+      "below": "=SUM(AHN46:AHN76)",
+      "header": "INVALIDO_MX"
+    },
+    {
+      "cell": "AHP77",
+      "above": "=SUM(AHO76*$F$1)",
+      "below": "=SUM(AHP46:AHP76)",
+      "header": "IMPOSTO_MX"
+    },
+    {
+      "cell": "AHR77",
+      "above": "=SUM(AHQ76*$F$1)",
+      "below": "=SUM(AHR46:AHR76)",
+      "header": "LUCRO_LIQUIDO_MX"
+    },
+    {
+      "cell": "AHT77",
+      "above": "=SUM(AHS76*$F$1)",
+      "below": "=SUM(AHT46:AHT76)",
+      "header": "ROI_NET_MX"
+    },
+    {
+      "cell": "AHV77",
+      "above": "=SUM(AHU76*$F$1)",
+      "below": "=SUM(AHV46:AHV76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "AIA77",
+      "above": "=SUM(AHC76,AHE76,AHG76,AHI76,AHK76,AHM76,AHO76,AHQ76,AHS76,AHU76)",
+      "below": "=SUM(AIA46:AIA76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AIB77",
+      "above": "=SUM(AIA76*$F$1)",
+      "below": "=SUM(AIB46:AIB76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AID37",
+      "above": "=SUM(AID5:AID35)",
+      "below": "=SUM(AIE36)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AID77",
+      "above": "=SUM(AIE76/$F$1)",
+      "below": "=SUM(AID46:AID76)",
+      "header": "GROSS_CAD_US"
+    },
+    {
+      "cell": "AIG77",
+      "above": "=SUM(AIF76*$F$1)",
+      "below": "=SUM(AIG46:AIG76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AIH96",
+      "above": "=SUM(AIO36)",
+      "below": "=SUM(AIH83:AIH96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AII77",
+      "above": "=SUM(AIH76*$F$1)",
+      "below": "=SUM(AII46:AII76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AII96",
+      "above": "=SUM(AIH95*$F$1)",
+      "below": "=SUM(AII83:AII96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AIK77",
+      "above": "=SUM(AIJ76*$F$1)",
+      "below": "=SUM(AIK46:AIK76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AIM77",
+      "above": "=SUM(AIL76*$F$1)",
+      "below": "=SUM(AIM46:AIM76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "AIS77",
+      "above": "=SUM(AIT76/$F$1)",
+      "below": "=SUM(AIS46:AIS76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AIT77",
+      "above": "=SUM(AIE76,AIG76,AII76,AIK76,AIM76)\n",
+      "below": "=SUM(AIT46:AIT76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AIV37",
+      "above": "=SUM(AIV5:AIV35)",
+      "below": "=SUM(AIV36)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AIV77",
+      "above": "=SUM(AIW76/$F$1)",
+      "below": "=SUM(AIV46:AIV76)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AIX77",
+      "above": "=SUM(AIY76/$F$1)",
+      "below": "=SUM(AIX46:AIX76)",
+      "header": "NET_USD_US"
+    },
+    {
+      "cell": "AIY96",
+      "above": "=SUM(AJF36)",
+      "below": "=SUM(AIY83:AIY96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AIZ77",
+      "above": "=SUM(AJA76/$F$1)",
+      "below": "=SUM(AIZ46:AIZ76)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AIZ96",
+      "above": "=SUM(AIY95*$F$1)",
+      "below": "=SUM(AIZ83:AIZ96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AJB77",
+      "above": "=SUM(AJC76/$F$1)",
+      "below": "=SUM(AJB46:AJB76)",
+      "header": "ROI_GROSS_US"
+    },
+    {
+      "cell": "AJD77",
+      "above": "=SUM(AJE76/$F$1)",
+      "below": "=SUM(AJD46:AJD76)",
+      "header": "RECEITA_NET_TOTAL"
+    },
+    {
+      "cell": "AJJ77",
+      "above": "=SUM(AJK76/$F$1)",
+      "below": "=SUM(AJJ46:AJJ76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AJK77",
+      "above": "=SUM(AIW76,AIY76,AJA76,AJC76,AJE76)\n",
+      "below": "=SUM(AJK46:AJK76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AJM37",
+      "above": "=SUM(AJM5:AJM35)",
+      "below": "=SUM(AJM36)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM137",
+      "above": "=SUM(AJM105:AJM135)",
+      "below": "=SUM(AJO137:AJO138)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM177",
+      "above": "=SUM(AJM145:AJM175)",
+      "below": "=SUM(AJO177:AJO178)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM217",
+      "above": "=SUM(AJM185:AJM215)",
+      "below": "=SUM(AJO217:AJO218)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM257",
+      "above": "=SUM(AJM225:AJM255)",
+      "below": "=SUM(AJO257:AJO258)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM297",
+      "above": "=SUM(AJM265:AJM295)",
+      "below": "=SUM(AJO297:AJO298)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJM337",
+      "above": "=SUM(AJM305:AJM335)",
+      "below": "=SUM(AJO337:AJO338)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AJP96",
+      "above": "=SUM(AJW36)",
+      "below": "=SUM(AJP83:AJP96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AJQ96",
+      "above": "=SUM(AJP95*$F$1)",
+      "below": "=SUM(AJQ83:AJQ96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AKA77",
+      "above": "=SUM(AJM76:AJX76)",
+      "below": "=SUM(AKA46:AKA76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AKB77",
+      "above": "=SUM(AKA76*$F$1)",
+      "below": "=SUM(AKB46:AKB76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AKD37",
+      "above": "=SUM(AKD5:AKD35)",
+      "below": "=SUM(AKF37:AKF38)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AKE77",
+      "above": "=SUM(AKD76*$F$1)",
+      "below": "=SUM(AKE46:AKE76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "AKG77",
+      "above": "=SUM(AKF76*$F$1)",
+      "below": "=SUM(AKG46:AKG76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AKG96",
+      "above": "=SUM(AKN36)",
+      "below": "=SUM(AKG83:AKG96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AKH96",
+      "above": "=SUM(AKG95*$F$1)",
+      "below": "=SUM(AKH83:AKH96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AKI77",
+      "above": "=SUM(AKH76*$F$1)",
+      "below": "=SUM(AKI46:AKI76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "AKK77",
+      "above": "=SUM(AKJ76*$F$1)",
+      "below": "=SUM(AKK46:AKK76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "AKM77",
+      "above": "=SUM(AKL76*$F$1)",
+      "below": "=SUM(AKM46:AKM76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "AKR35",
+      "above": "=IF(ABS(AKP34)=0,\"\",IF(OR(AKD34=\"\",AKD34=0),-1,(AKD34/ABS(AKP34))-1))",
+      "below": "=IF(ABS(AKP36)=0,\"\",IF(OR(AKD36=\"\",AKD36=0),-1,(AKD36/ABS(AKP36))-1))",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AKR77",
+      "above": "=SUM(AKD76,AKF76,AKH76,AKJ76,AKL76)\n",
+      "below": "=SUM(AKR46:AKR76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AKS35",
+      "above": "=IF(ABS(AKP34)=0,\"\",IF((ABS(AKP34)+ABS(AKM34)+ABS(AKN34))=0,\"\",IF(OR(AKL34=\"\",AKL34=0),-1,(AKL34/(ABS(AKP34)+ABS(AKM34)+ABS(AKN34)))-1)))",
+      "below": "=IF(ABS(AKP36)=0,\"\",IF((ABS(AKP36)+ABS(AKM36)+ABS(AKN36))=0,\"\",IF(OR(AKL36=\"\",AKL36=0),-1,(AKL36/(ABS(AKP36)+ABS(AKM36)+ABS(AKN36)))-1)))",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AKS77",
+      "above": "=SUM(AKR76*$F$1)",
+      "below": "=SUM(AKS46:AKS76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AKU37",
+      "above": "=SUM(AKU5:AKU35)",
+      "below": "=SUM(AKW37:AKW38)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "AKV77",
+      "above": "=SUM(AKU76*$F$1)",
+      "below": "=SUM(AKV46:AKV76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "AKX77",
+      "above": "=SUM(AKW76*$F$1)",
+      "below": "=SUM(AKX46:AKX76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AKX96",
+      "above": "=SUM(ALE36)",
+      "below": "=SUM(AKX83:AKX96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "AKY96",
+      "above": "=SUM(AKX95*$F$1)",
+      "below": "=SUM(AKY83:AKY96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "AKZ77",
+      "above": "=SUM(AKY76*$F$1)",
+      "below": "=SUM(AKZ46:AKZ76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "ALB77",
+      "above": "=SUM(ALA76*$F$1)",
+      "below": "=SUM(ALB46:ALB76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "ALD77",
+      "above": "=SUM(ALC76*$F$1)",
+      "below": "=SUM(ALD46:ALD76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "ALI35",
+      "above": "=IF(ABS(ALG34)=0,\"\",IF(OR(AKU34=\"\",AKU34=0),-1,(AKU34/ABS(ALG34))-1))",
+      "below": "=IF(ABS(ALG36)=0,\"\",IF((ABS(ALG36)+ABS(ALD36)+ABS(ALE36))=0,\"\",IF(OR(ALC36=\"\",ALC36=0),-1,(ALC36/(ABS(ALG36)+ABS(ALD36)+ABS(ALE36)))-1)))",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ALI77",
+      "above": "=SUM(AKU76,AKW76,AKY76,ALA76,ALC76)\n",
+      "below": "=SUM(ALI46:ALI76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ALJ35",
+      "above": "=IF(ABS(ALG34)=0,\"\",IF((ABS(ALG34)+ABS(ALD34)+ABS(ALE34))=0,\"\",IF(OR(ALC34=\"\",ALC34=0),-1,(ALC34/(ABS(ALG34)+ABS(ALD34)+ABS(ALE34)))-1)))",
+      "below": "=IF(ABS(ALG36)=0,\"\",IF((ABS(ALG36)+ABS(ALD36)+ABS(ALE36))=0,\"\",IF(OR(ALC36=\"\",ALC36=0),-1,(ALC36/(ABS(ALG36)+ABS(ALD36)+ABS(ALE36)))-1)))",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ALJ77",
+      "above": "=SUM(ALI76*$F$1)",
+      "below": "=SUM(ALJ46:ALJ76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "ALL37",
+      "above": "=SUM(ALL5:ALL35)",
+      "below": "=SUM(ALN37:ALN38)",
+      "header": "GROSS_USD_US"
+    },
+    {
+      "cell": "ALM77",
+      "above": "=SUM(ALL76*$F$1)",
+      "below": "=SUM(ALM46:ALM76)",
+      "header": "INVALIDO_US"
+    },
+    {
+      "cell": "ALO77",
+      "above": "=SUM(ALN76*$F$1)",
+      "below": "=SUM(ALO46:ALO76)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "ALO96",
+      "above": "=SUM(ALV36)",
+      "below": "=SUM(ALO83:ALO96)",
+      "header": "IMPOSTO_US"
+    },
+    {
+      "cell": "ALP96",
+      "above": "=SUM(ALO95*$F$1)",
+      "below": "=SUM(ALP83:ALP96)",
+      "header": "GASTOS_US"
+    },
+    {
+      "cell": "ALQ77",
+      "above": "=SUM(ALP76*$F$1)",
+      "below": "=SUM(ALQ46:ALQ76)",
+      "header": "LUCRO_LIQUIDO_US"
+    },
+    {
+      "cell": "ALS77",
+      "above": "=SUM(ALR76*$F$1)",
+      "below": "=SUM(ALS46:ALS76)",
+      "header": "ROI_NET_US"
+    },
+    {
+      "cell": "ALU77",
+      "above": "=SUM(ALT76*$F$1)",
+      "below": "=SUM(ALU46:ALU76)",
+      "header": "IMPOSTO_TOTAL"
+    },
+    {
+      "cell": "ALZ35",
+      "above": "=IF(ABS(ALX34)=0,\"\",IF(OR(ALL34=\"\",ALL34=0),-1,(ALL34/ABS(ALX34))-1))",
+      "below": "=IF(ABS(ALX36)=0,\"\",IF(OR(ALL36=\"\",ALL36=0),-1,(ALL36/ABS(ALX36))-1))",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "ALZ77",
+      "above": "=SUM(ALL76,ALN76,ALP76,ALR76,ALT76)\n",
+      "below": "=SUM(ALZ46:ALZ76)",
+      "header": "ROI_GROSS_TOTAL"
+    },
+    {
+      "cell": "AMA35",
+      "above": "=IF(ABS(ALX34)=0,\"\",IF((ABS(ALX34)+ABS(ALU34)+ABS(ALV34))=0,\"\",IF(OR(ALT34=\"\",ALT34=0),-1,(ALT34/(ABS(ALX34)+ABS(ALU34)+ABS(ALV34)))-1)))",
+      "below": "=IF(ABS(ALX36)=0,\"\",IF((ABS(ALX36)+ABS(ALU36)+ABS(ALV36))=0,\"\",IF(OR(ALT36=\"\",ALT36=0),-1,(ALT36/(ABS(ALX36)+ABS(ALU36)+ABS(ALV36)))-1)))",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AMA77",
+      "above": "=SUM(ALZ76*$F$1)",
+      "below": "=SUM(AMA46:AMA76)",
+      "header": "ROI_NET_TOTAL"
+    },
+    {
+      "cell": "AOT35",
+      "above": "=IF(OR(ABS(AOR34)=0,AOO34=0),\"\",(AOO34/ABS(AOR34))-1)\n",
+      "below": "=IF(ABS(AOR36)=0,\"\",(AOO36/ABS(AOR36))-1)\n",
+      "header": ""
+    },
+    {
+      "cell": "AOU35",
+      "above": "=IF(OR(ABS(AOR34)=0,AOP34=0),\"\",(AOP34/(ABS(AOR34)+ABS(AOQ34)))-1)",
+      "below": "=IF(ABS(AOR36)=0,\"\",(AOP36/(ABS(AOR36)+ABS(AOQ36)))-1)",
+      "header": ""
+    }
+  ]
+}
