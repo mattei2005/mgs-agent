@@ -73,9 +73,20 @@ Decision message: `1545455315447976047`, refined by `1545457431889317889`.
 - Existing `ROI GERAL AGOSTO`: never use as source; 653/749 hard-coded references were semantically misaligned after coordinate expansion.
 - Manager cosmetic headers: four August manager tabs still displayed `Julho` in `A1` at the initial audit; formulas and imported data were correct. Handle only after the principal August phase if still relevant.
 
+## Post-correction re-audit
+
+Full semantic audit artifact:
+
+- Path: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-semantic-audit.json`.
+- SHA-256: `543862ca1221d4c28811dce42398c6e724328898d66c49cd4b6b541dfe32b4cb`.
+- Formula cells: 50,546.
+- Displayed formula errors: zero.
+- Dates, derived formula coverage, invalid-formula shapes, 2,739 component-total checks, 903 profit-total checks, Conecta future guard, and YMonetize zero blocks: PASS.
+- One remaining semantic failure: `ACM5` currently references row 36 (`ABG36`, `ABP36`, `ABY36`, `ACK36`) instead of row 5, likely collateral from the manual `ACM36` correction. It must be restored before closing the August phase.
+
 ## Current next step
 
-1. Accept `F1`, `H1`, and fixed `I1` as intentional current state under the clarified lifecycle.
-2. Rerun the complete `Agosto 2026` semantic audit after all manual corrections.
+1. Correct and read back `Agosto 2026!ACM5` with row-5 references only.
+2. Rerun the complete `Agosto 2026` semantic audit.
 3. If the tab passes, mark the August-formula phase complete but financially provisional.
 4. Move to `CAIXA SINTETICO` only then.

@@ -1,0 +1,35 @@
+{
+  "formula_cells": 50546,
+  "displayed_errors": [],
+  "direct_self_refs": [],
+  "date_ok": true,
+  "derived_coverage_issues": [],
+  "invalid_formula_shape_issues": [],
+  "semantic_source_issues": [
+    {
+      "site": "Helixenit",
+      "cell": "ACM5",
+      "type": "roi_gross",
+      "missing": [
+        "ABG5",
+        "ABP5",
+        "ABY5"
+      ],
+      "wrong": []
+    }
+  ],
+  "numeric_identity_failures": [],
+  "numeric_checks": {
+    "component_totals": 2739,
+    "profit_totals": 903
+  },
+  "conecta_future_guard_ok": true,
+  "intentional_state": {
+    "F1_formula": "=SUM('CAIXA SINTETICO'!J2)",
+    "H1_formula": "=GOOGLEFINANCE(\"USDCAD\")",
+    "I1_value": 1.3395,
+    "AmazingXJobs_nonzero": 0,
+    "WavesBee_nonzero": 0
+  },
+  "status": "fail"
+}

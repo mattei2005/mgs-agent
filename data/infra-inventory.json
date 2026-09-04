@@ -13124,13 +13124,13 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
       "runtime_versioned_sha_match": true,
       "skill_sha256": "5a2bc4069461ebf8267e179ca80f2a88ce7f705eed07906b34ba0711005dbe09",
-      "reference_sha256": "4b60e267083cc2180bc58dda5145adaaffe3473deb5a5c2e2b22654ddf9a0f09",
-      "reference_size_bytes": 14666,
+      "reference_sha256": "fd165eb3ccd58bca8561a58b72db967bef7c96e0a34546245c9a252bd2159965",
+      "reference_size_bytes": 15841,
       "owner": "Zeus/Growth Ops",
       "risk": "low",
       "description": "Reusable Meta Marketing API Full access App Review workflow covering eligibility, Allowed usage, Requests versus Renewal, Data handling, Reviewer instructions and post-approval proof.",
       "validation": "Reference loaded successfully through skill_view; runtime and versioned SKILL/reference hashes match; official Meta documentation and the live 2026 App Review screens were reconciled.",
-      "last_change": "Added the evidence-backed Hostinger processor entry for the current MGS VPS, with legal entity, service category, processing-country basis, contract/invoice override and source re-check requirement.",
+      "last_change": "Clarified that controller country follows the responsible legal entity rather than the human reviewer, prefill reflects only the prior submission, and current minibot evidence supports Growth Network INC / United States when that verified business is the actual controller.",
       "source_thread_id": "1545436898233679943",
       "source_message_id": "1545450512588218439",
       "report_infra": {
@@ -13163,7 +13163,17 @@
         "mentions": 0,
         "thread_created": false
       },
-      "updated_at": "2026-09-04T11:30:17-04:00"
+      "controller_identity_report_infra": {
+        "status": "sent_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1545459110953357364",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "updated_at": "2026-09-04T11:41:08-04:00"
     }
   ],
   "systemd_services": [

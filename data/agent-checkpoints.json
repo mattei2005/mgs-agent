@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Confirmar se Agosto 2026!I1=1,3395 já é a taxa real de pagamento YMonetize ou se está apenas como estimativa fixa; depois encerrar auditoria da aba Agosto",
-      "objective": "Auditar e corrigir passo a passo Agosto 2026; corrigir CAIXA SINTETICO por último; depois criar a dashboard executiva de agosto",
-      "source": "discord:thread:1545426987756298340;decision-message:1545455315447976047;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;procedure:/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md;registry:MGS-FINANCE-EXCHANGE-RATE-LIFECYCLE-V1-20260904",
-      "state": "august_formula_structure_corrected: problemas 1-14 validados e zero erros; f1/h1/i1 reclassificados como ciclo cambial provisório intencional até pagamento 21-25 do mês seguinte e substituição manual pela taxa real com spread; h1 não é defeito; caixa permanece para o fim",
+      "next_step": "Rodolfo corrigir apenas ACM5 para referências da linha 5; Zeus validar e rerodar auditoria integral; somente depois fechar Agosto e iniciar CAIXA SINTETICO",
+      "objective": "Auditar e corrigir Agosto 2026; corrigir CAIXA SINTETICO por último; construir dashboard executivo auditado e manter continuidade na skill mgs-finance-dashboard",
+      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;audit:/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-semantic-audit.json;sha256:543862ca1221d4c28811dce42398c6e724328898d66c49cd4b6b541dfe32b4cb",
+      "state": "august_reaudit_one_issue: ciclo f1/h1/i1 compreendido e canonizado; ymonetize encerrada e blocos amazingxjobs/wavesbee zerados; reauditoria integral pós-correções passou em erros, datas, cobertura, totais e guardas, mas detectou acm5 referenciando por engano a linha 36 após a correção de acm36; caixa segue intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T15:29:28+00:00"
+      "updated_at": "2026-09-04T15:42:34+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T15:29:28+00:00"
+  "updated_at": "2026-09-04T15:42:34+00:00"
 }

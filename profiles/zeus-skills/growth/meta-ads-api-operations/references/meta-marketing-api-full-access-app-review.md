@@ -154,6 +154,15 @@ Communicate the result in two parts: the exact field that is safe to change now,
 
 The controller field must contain the exact natural person or legal entity that determines the purposes and means of processing the Meta data. Use the exact legal name tied to the verified business/privacy documentation. Do not enter an unexplained acronym, app name, Page name, Business Manager label, or brand unless that is the entity's full legal name.
 
+Controller identity and country rules:
+
+- the country follows the controller entity's registered location, not the physical location of the human profile submitting the review;
+- when the app is claimed by a verified Business Portfolio and that legal entity actually controls the app's Meta data, copy the verified legal entity name and its registered country;
+- the App Review banner says pre-filled answers come from the app's **most recently submitted responses**. A pre-filled value proves only what was entered previously; it does not prove Meta derived or revalidated that value from Business Verification;
+- prior permission approval does not validate an ambiguous controller name in a new Data Handling review.
+
+For the current `minibot` evidence, the app is linked to verified Business Portfolio `Growth Network INC`, while App Settings shows `United States of America`. If that company is the actual controller, the consistent form values are `Growth Network INC` and `United States of America`; the reviewer's personal location in Brazil is irrelevant. Keep `WMD`/Brazil only if WMD is a separate real controller and its complete legal identity can be supported.
+
 If the pre-filled value is ambiguous, stop and obtain the exact legal entity shown in Business Verification or corporate records before continuing.
 
 ### Government/public-authority questions
