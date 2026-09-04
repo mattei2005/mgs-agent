@@ -973,12 +973,12 @@
     {
       "agent": "zeus",
       "id": "META-MINIBOT-FULL-ACCESS-APP-REVIEW-20260904",
-      "next_step": "Aguardar decisão ou solicitação de informação da Meta. Após aprovação, validar Dashboard Full access e uma chamada real com ads_api_access_tier=standard_access antes de declarar o tier ativo.",
+      "next_step": "Ares executa validação independente e smokes dos consumidores ativos; acompanhar o relatório dele na thread 1545543199781683291. Sem bloqueio operacional do tier. Evidência visual opcional restante: linha Marketing API Access Tier: Full access no Dashboard.",
       "objective": "Obter Marketing API Access Tier Full access para o app minibot 1299247318762949 preservando as permissões Advanced existentes e validando o tier live",
-      "source": "discord:thread:1545436898233679943#1545465143549239387; app:minibot:1299247318762949; business:Growth Network INC:233700017617047; skill:meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
-      "state": "submitted_review_in_progress: cinco etapas concluídas; confirmação final aceita; meta mostra review in progress; maioria das submissões revisada em até 20 dias, podendo levar mais se houver pedido de informação; nenhum request id/data visível; full access ainda não aprovado",
+      "source": "discord:thread:1545436898233679943#1545542910441816095; discord:thread:1545543199781683291#1545543982753521694; app:minibot:1299247318762949; graph:act_1046241194533786:HTTP200:standard_access; skill:meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
+      "state": "approved_active_live_handoff_in_progress: tela meta mostra previous submission aprovada em 2026-09-04 15:09 brt e novo draft vazio/not submitted; token válido pertence ao app 1299247318762949; ads_read e ads_management concedidas; get read-only da conta act_1046241194533786 retornou http 200 e header ads_api_access_tier=standard_access; rodolfo mandou ares testar e o handoff foi publicado com mention direta na thread 1545543199781683291, mensagem 1545543982753521694; atividade do ares confirmou que acordou.",
       "thread_id": "1545436898233679943",
-      "updated_at": "2026-09-04T16:08:02+00:00"
+      "updated_at": "2026-09-04T21:20:37+00:00"
     },
     {
       "agent": "zeus",
@@ -2242,5 +2242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T16:31:17+00:00"
+  "updated_at": "2026-09-04T21:20:37+00:00"
 }
